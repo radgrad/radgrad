@@ -126,6 +126,8 @@ export const Slugs = new SlugCollection();
 Slugs.publish();
 Slugs.subscribe();
 
+/* eslint object-shorthand: "off" */
+
 Meteor.methods({
   'SlugCollection.remove'(slug) {
     check(slug, String);

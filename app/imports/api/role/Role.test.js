@@ -15,8 +15,8 @@ if (Meteor.isServer) {
     });
 
     it('assertRole', function test() {
-      expect(function foo() { assertRole(ROLE.STUDENT);}).to.not.throw(Error);
-      expect(function foo() { assertRole('foo');}).to.throw(Error);
+      expect(function foo() { assertRole(ROLE.STUDENT); }).to.not.throw(Error);
+      expect(function foo() { assertRole('foo'); }).to.throw(Error);
     });
   });
 }

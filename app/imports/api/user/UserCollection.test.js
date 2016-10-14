@@ -44,8 +44,8 @@ if (Meteor.isServer) {
 
     it('#assertInRole', function test() {
       const docID = Users.define({ firstName, lastName, slug, email, role, password });
-      expect(function foo() { Users.assertInRole(docID, role);}).to.not.throw(Error);
-      expect(function foo() { Users.assertInRole(docID, ROLE.STUDENT);}).to.throw(Error);
+      expect(function foo() { Users.assertInRole(docID, role); }).to.not.throw(Error);
+      expect(function foo() { Users.assertInRole(docID, ROLE.STUDENT); }).to.throw(Error);
       Users.removeIt(docID);
     });
 

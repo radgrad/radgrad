@@ -15,8 +15,8 @@ if (Meteor.isServer) {
     });
 
     it('assertFeedbackType', function test() {
-      expect(function foo() { assertFeedbackType(FeedbackType.WARNING);}).to.not.throw(Error);
-      expect(function foo() { assertFeedbackType('foo');}).to.throw(Error);
+      expect(function foo() { assertFeedbackType(FeedbackType.WARNING); }).to.not.throw(Error);
+      expect(function foo() { assertFeedbackType('foo'); }).to.throw(Error);
     });
   });
 }

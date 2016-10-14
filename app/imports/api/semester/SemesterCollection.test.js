@@ -33,9 +33,9 @@ if (Meteor.isServer) {
 
     it('#assertSemester', function test() {
       const semester = Semesters.define({ term: Semesters.SUMMER, year: 2015 });
-      expect(function foo() { Semesters.assertSemester(semester);}).to.not.throw(Error);
+      expect(function foo() { Semesters.assertSemester(semester); }).to.not.throw(Error);
       Semesters.removeIt(semester);
-      expect(function foo() { Semesters.assertSemester(semester);}).to.throw(Error);
+      expect(function foo() { Semesters.assertSemester(semester); }).to.throw(Error);
     });
 
     it('#toString', function test() {

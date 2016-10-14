@@ -1,5 +1,5 @@
 {
-  "name": "datamodel",
+  "name": "radgrad",
   "private": true,
   "scripts": {
     "start": "meteor run",

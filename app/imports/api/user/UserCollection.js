@@ -106,7 +106,7 @@ class UserCollection extends BaseInstanceCollection {
    */
   removeAllWithRole(role) {
     assertRole(role);
-    this.find().forEach(user => { if (Roles.userIsInRole(user._id, [role])) { this.removeIt(user._id); }});
+    this.find().forEach(user => { if (Roles.userIsInRole(user._id, [role])) { this.removeIt(user._id); } });
   }
 
   /**
@@ -225,6 +225,8 @@ class UserCollection extends BaseInstanceCollection {
     const oppDocs = OpportunityInstances.find({ studentID }).fetch();
     return getTotalICE(courseDocs.concat(oppDocs));
   }
+
+  /* eslint class-methods-use-this: "off" */
 
   /**
    * Returns an array of courseIDs that this user has taken (or plans to take) based on their courseInstances.

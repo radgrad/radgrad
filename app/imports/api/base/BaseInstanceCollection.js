@@ -21,7 +21,7 @@ class BaseInstanceCollection extends BaseCollection {
    * @throws { Meteor.Error } If instance is not a docID or a slug.
    */
   getID(instance) {
-    return (!!this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
+    return (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
   }
 
   /**
