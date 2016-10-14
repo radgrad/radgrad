@@ -1,0 +1,28 @@
+{
+  "name": "datamodel",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "lint": "eslint .",
+    "pretest": "npm run lint --silent",
+    "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
+    "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
+    "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -R ../doc/jsdoc-home.md -r ."
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "meteor-node-stubs": "~0.2.0"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "docdash": "^0.3.0",
+    "es6-enum": "^1.0.3",
+    "eslint": "^3.7.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-meteor": "*",
+    "eslint-plugin-react": "^6.4.1",
+    "jsdoc": "^3.4.0"
+  }
+}

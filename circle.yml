@@ -1,0 +1,19 @@
+general:
+  build_dir: app
+  branches:
+    only:
+      - master
+    ignore:
+      - gh-pages
+machine:
+  node:
+    version: 0.10.43
+dependencies:
+  override:
+    - curl https://install.meteor.com | /bin/sh
+    - npm install
+    - meteor update
+    - meteor remove practicalmeteor:mocha
+checkout:
+  post:
+    - git submodule update --init

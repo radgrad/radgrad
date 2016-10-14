@@ -1,0 +1,10 @@
+# .gitignore
+
+*.iml
+.idea/
+realdata/
+.DS_Store
+node_modules
+npm-debug.log
+
+settings.production.json
