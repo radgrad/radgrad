@@ -7,4 +7,6 @@ realdata/
 node_modules
 npm-debug.log
 
+_book
+
 settings.production.json
