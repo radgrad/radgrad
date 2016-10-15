@@ -7,7 +7,8 @@
     "pretest": "npm run lint --silent",
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
-    "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -R ../doc/jsdoc-home.md -r ."
+    "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -R ../doc/jsdoc-home.md -r .",
+    "mddocs": "jsdoc2md imports/**/*.js > ../gitbook/api/jsdocs.md"
   },
   "dependencies": {
     "bcrypt": "^0.8.7",
@@ -23,6 +24,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-meteor": "*",
     "eslint-plugin-react": "^6.4.1",
-    "jsdoc": "^3.4.0"
+    "jsdoc": "^3.4.0",
+    "jsdoc-to-markdown": "^2.0.0"
   }
 }
