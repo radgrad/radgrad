@@ -8,6 +8,6 @@ To generate the documentation locally, invoke:
 app$ meteor npm run jsdoc
 ```
 
-Note that running this command will generate the HTML version of the documentation into a "sibling" directory of this repo specified as `../../datamodel-gh-pages`.  That directory should contain the gh-pages branch of this repo. 
+This command places the JSDoc output into the gitbook/api/jsdocs subdirectory.  The table of contents includes a link to the online GitBook's subdirectory where the JSDocs are located.
 
-To make the documentation globally available, commit the gh-pages branch, after which it will be accessable at [http://radgrad.org/datamodel/](http://radgrad.org/datamodel/).
+In future, we might want to explore the use of jsdoc-to-markdown to create API documentation that is better integrated with GitBook. 

@@ -16,8 +16,8 @@
 * [IDE Setup](developerguide/ide.md)
 * [Coding Standards](developerguide/codingstandards.md)
 * [Testing](developerguide/testing.md)
-* [JSDoc](developerguide/jsdoc.md)
 * [GitBook](developerguide/gitbook.md)
+* [JSDocs](developerguide/jsdoc.md)
 * [Directory Structure](developerguide/directorystructure.md)
 
 ### Data Model
@@ -32,7 +32,7 @@
 
 ### API
 
-* [JSDocs](http://cnn.com)
+* [JSDocs](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/)
 
 ### User Guide
 
