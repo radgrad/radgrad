@@ -19,6 +19,7 @@
 * [GitBook](developerguide/gitbook.md)
 * [JSDocs](developerguide/jsdoc.md)
 * [Directory Structure](developerguide/directorystructure.md)
+* [Issue management](developerguide/issue-management.md)
 
 ### Data Model
 
