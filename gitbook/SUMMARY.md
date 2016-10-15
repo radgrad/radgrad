@@ -24,11 +24,25 @@
 
 * [Introduction](datamodel/README.md)
 * [User](datamodel/user.md)
+* [Interest](datamodel/interest.md)
+* [Opportunity](datamodel/opportunity.md)
+* [Desired Degree](datamodel/desired-degree.md)
+* [Career Goal](datamodel/career-goal.md)
 * [Degree Plan](datamodel/degreeplan.md)
 * [Course](datamodel/course.md)
-* [Opportunity](datamodel/opportunity.md)
 * [Work](datamodel/work.md)
+* [Recommendations & Warnings](datamodel/recommendation.md)
+* [ICE (Innovation, Competency, Experience)](datamodel/ice.md)
 * [Javascript Class Hierarchy](datamodel/class-hierarchy.md)
+* [Future enhancements](datamodel/future-enhancements.md)
+  * [Vignettes](datamodel/future-enhancements.md#vignettes)
+  * [Stoplight](datamodel/future-enhancements.md#stoplight)
+  * [Mentorship](datamodel/future-enhancements.md#mentorship)
+  * [Leaderboard](datamodel/future-enhancements.md#leaderboard)
+  * [Petitions](datamodel/future-enhancements.md#petitions)
+  * [Course Feedback](datamodel/future-enhancements.md#course-feedback)
+  * [Degree Feedback](datamodel/future-enhancements.md#degree-feedback)
+  * [Predictions](datamodel/future-enhancements.md#predictions)
 
 ### API
 

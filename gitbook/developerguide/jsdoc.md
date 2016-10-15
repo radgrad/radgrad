@@ -11,3 +11,5 @@ app$ meteor npm run jsdoc
 This command places the JSDoc output into the gitbook/api/jsdocs subdirectory.  The table of contents includes a link to the online GitBook's subdirectory where the JSDocs are located.
 
 In future, we might want to explore the use of jsdoc-to-markdown to create API documentation that is better integrated with GitBook. 
+
+Note that the generation of the JSDocs and their incorporation into the GitBook subdirectory is currently manual. At some point in the future, it would be good to automatically run jsdoc to ensure that the JSDocs are up to date. 

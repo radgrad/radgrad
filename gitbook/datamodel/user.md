@@ -18,13 +18,35 @@ The image illustrates both the relevant Mongo collection schemas as well as the 
   
   * Their professional *interests*, such as "security" or "software engineering".
   
-  * System-generated *recommendations*, such as courses or opportunities of particular relevance based upon their interests and career goals. 
+  * System-generated *recommendations and warnings*, such as courses or opportunities of particular relevance based upon their interests and career goals, or potential problems with their degree plan. 
+  
+The home page for a student enables them to see the status of their degree plan, goals, interests, ICS points, and so forth.
  
 
 ## Alumni
 
-An alumni is a a user who has obtained their undergraduate degree in ICS.  Alumni can still access the system and are able to act in the role mentors. 
+An alumni is a former student who has obtained their undergraduate degree in ICS.  Alumni can act as mentors and reply to student questions.  
+
+The home page for an alumni provides an interface to mentorship questions and answers.  
 
 ## Faculty
 
-Faculty are able to edit and define courses, opportunities, 
+Faculty are able to edit and define courses, opportunities, and so forth. 
+
+They can also verify participation in opportunities, resulting in the award of ICE points. 
+
+The home page for faculty enables them to perform editing and verification.
+
+## Advisor
+
+An advisor has all the capabilities of a Faculty member, plus the ability to upload data from STAR, and override or supplement STAR-supplied data. 
+
+Access to RadGrad is restricted to those with a UH account who are explicitly allowed to login.  Advisors can manage the list of UH accounts authorized to login to RadGrad.
+
+The home page for an advisors helps them to locate students, upload STAR data, and otherwise assist in the degree planning process.
+
+## Admin
+
+The admin role is restricted to developers. They can assign roles to users and otherwise manage the system.
+
+The home page for admins enables them to carry out their admin duties more effectively. (How's that for vagueness.)
