@@ -2,7 +2,7 @@
 
 ## Improve course scheduling {#scheduling}
 
-This requirement implies that ICS advisors will find RadGrad a superior mechanism for communicating with students about schedule planning. 
+This requirement implies that Information and Computer Sciences (ICS) advisors will find RadGrad a superior mechanism for communicating with students about schedule planning. 
 
 In addition to ICS advisors, ICS students must also find RadGrad helpful for planning their class schedules.
 
