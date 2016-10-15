@@ -1,3 +1,5 @@
-Welcome to the RadGrad Data Model API.
+Welcome to RadGrad!
 
-Please see [http://radgrad.org/datamodel](http://radgrad.org/datamodel) for all documentation related to this package.
+The [RadGrad Manual](https://philipmjohnson.gitbooks.io/radgrad-manual/content/) provides documentation for this system. 
+
+You can also check us out on the web at [RadGrad.org](http://radgrad.org).
