@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>startup/server/icsdata/CourseDefinitions.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-BaseInstance-BaseInstanceCollection.html">BaseInstanceCollection</a><ul class='methods'><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#count">count</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#find">find</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#getID">getID</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-BaseInstance-BaseInstanceCollection.html#toString">toString</a></li></ul></li><li><a href="module-BaseType-BaseTypeCollection.html">BaseTypeCollection</a><ul class='methods'><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#count">count</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#define">define</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#find">find</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#getID">getID</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#getType">getType</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#publish">publish</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-BaseType-BaseTypeCollection.html#toString">toString</a></li></ul></li><li><a href="module-Base-BaseCollection.html">BaseCollection</a><ul class='methods'><li data-type='method'><a href="module-Base-BaseCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#count">count</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#find">find</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#getType">getType</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#publish">publish</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-Base-BaseCollection.html#toString">toString</a></li></ul></li><li><a href="module-CareerGoal-CareerGoalCollection.html">CareerGoalCollection</a><ul class='methods'><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#count">count</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#define">define</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#find">find</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#getID">getID</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#getType">getType</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#publish">publish</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-CareerGoal-CareerGoalCollection.html#toString">toString</a></li></ul></li><li><a href="module-CourseInstance-CourseInstanceCollection.html">CourseInstanceCollection</a><ul class='methods'><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#count">count</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#define">define</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#find">find</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#findCourseName">findCourseName</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-CourseInstance-CourseInstanceCollection.html#toString">toString</a></li></ul></li><li><a href="module-Course-CourseCollection.html">CourseCollection</a><ul class='methods'><li data-type='method'><a href="module-Course-CourseCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#count">count</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#define">define</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#find">find</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#getID">getID</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#getType">getType</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#publish">publish</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-Course-CourseCollection.html#toString">toString</a></li></ul></li><li><a href="module-DesiredDegree-DesiredDegreeCollection.html">DesiredDegreeCollection</a><ul class='methods'><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#count">count</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#define">define</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#find">find</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#getID">getID</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#getType">getType</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#publish">publish</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-DesiredDegree-DesiredDegreeCollection.html#toString">toString</a></li></ul></li><li><a href="module-FeedbackFunctions.FeedbackFunctions.html">FeedbackFunctions</a></li><li><a href="module-FeedbackInstance-FeedbackInstanceCollection.html">FeedbackInstanceCollection</a><ul class='methods'><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#count">count</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#define">define</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#find">find</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-FeedbackInstance-FeedbackInstanceCollection.html#toString">toString</a></li></ul></li><li><a href="module-Feedback-FeedbackCollection.html">FeedbackCollection</a><ul class='methods'><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#count">count</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#define">define</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#find">find</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#getID">getID</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#getType">getType</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#publish">publish</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-Feedback-FeedbackCollection.html#toString">toString</a></li></ul></li><li><a href="module-InterestType-InterestTypeCollection.html">InterestTypeCollection</a><ul class='methods'><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#count">count</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#define">define</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#find">find</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#getID">getID</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#getType">getType</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#publish">publish</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-InterestType-InterestTypeCollection.html#toString">toString</a></li></ul></li><li><a href="module-Interest-InterestCollection.html">InterestCollection</a><ul class='methods'><li data-type='method'><a href="module-Interest-InterestCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#count">count</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#define">define</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#find">find</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#findNames">findNames</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#getID">getID</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#getType">getType</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#publish">publish</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-Interest-InterestCollection.html#toString">toString</a></li></ul></li><li><a href="module-OpportunityInstance-OpportunityInstanceCollection.html">OpportunityInstanceCollection</a><ul class='methods'><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#count">count</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#define">define</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#find">find</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-OpportunityInstance-OpportunityInstanceCollection.html#toString">toString</a></li></ul></li><li><a href="module-OpportunityType-OpportunityTypeCollection.html">OpportunityTypeCollection</a><ul class='methods'><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#count">count</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#define">define</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#find">find</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#getID">getID</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#getType">getType</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#publish">publish</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-OpportunityType-OpportunityTypeCollection.html#toString">toString</a></li></ul></li><li><a href="module-Opportunity-OpportunityCollection.html">OpportunityCollection</a><ul class='methods'><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#count">count</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#define">define</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#find">find</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#getID">getID</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#getType">getType</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#publish">publish</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-Opportunity-OpportunityCollection.html#toString">toString</a></li></ul></li><li><a href="module-Semester-SemesterCollection.html">SemesterCollection</a><ul class='methods'><li data-type='method'><a href="module-Semester-SemesterCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#assertSemester">assertSemester</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#count">count</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#define">define</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#find">find</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#getID">getID</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#getType">getType</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#publish">publish</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-Semester-SemesterCollection.html#toString">toString</a></li></ul></li><li><a href="module-Slug-SlugCollection.html">SlugCollection</a><ul class='methods'><li data-type='method'><a href="module-Slug-SlugCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#assertSlug">assertSlug</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#count">count</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#define">define</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#find">find</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#getEntityID">getEntityID</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#getType">getType</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#isSlugForEntity">isSlugForEntity</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#publish">publish</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#toString">toString</a></li><li data-type='method'><a href="module-Slug-SlugCollection.html#updateEntityID">updateEntityID</a></li></ul></li><li><a href="module-User-UserCollection.html">UserCollection</a><ul class='methods'><li data-type='method'><a href="module-User-UserCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-User-UserCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-User-UserCollection.html#assertInRole">assertInRole</a></li><li data-type='method'><a href="module-User-UserCollection.html#count">count</a></li><li data-type='method'><a href="module-User-UserCollection.html#define">define</a></li><li data-type='method'><a href="module-User-UserCollection.html#find">find</a></li><li data-type='method'><a href="module-User-UserCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-User-UserCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="module-User-UserCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="module-User-UserCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="module-User-UserCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="module-User-UserCollection.html#getCourseIDs">getCourseIDs</a></li><li data-type='method'><a href="module-User-UserCollection.html#getEmail">getEmail</a></li><li data-type='method'><a href="module-User-UserCollection.html#getID">getID</a></li><li data-type='method'><a href="module-User-UserCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="module-User-UserCollection.html#getTotalICE">getTotalICE</a></li><li data-type='method'><a href="module-User-UserCollection.html#getType">getType</a></li><li data-type='method'><a href="module-User-UserCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="module-User-UserCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-User-UserCollection.html#publish">publish</a></li><li data-type='method'><a href="module-User-UserCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-User-UserCollection.html#removeAllWithRole">removeAllWithRole</a></li><li data-type='method'><a href="module-User-UserCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-User-UserCollection.html#setAboutMe">setAboutMe</a></li><li data-type='method'><a href="module-User-UserCollection.html#setDesiredDegree">setDesiredDegree</a></li><li data-type='method'><a href="module-User-UserCollection.html#setInterestIds">setInterestIds</a></li><li data-type='method'><a href="module-User-UserCollection.html#setPicture">setPicture</a></li><li data-type='method'><a href="module-User-UserCollection.html#setSemesterId">setSemesterId</a></li><li data-type='method'><a href="module-User-UserCollection.html#setUhId">setUhId</a></li><li data-type='method'><a href="module-User-UserCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-User-UserCollection.html#toString">toString</a></li></ul></li><li><a href="module-WorkInstance-WorkInstanceCollection.html">WorkInstanceCollection</a><ul class='methods'><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#count">count</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#define">define</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#find">find</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="module-WorkInstance-WorkInstanceCollection.html#toString">toString</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-Base.html">Base</a></li><li><a href="module-BaseInstance.html">BaseInstance</a></li><li><a href="module-BaseType.html">BaseType</a></li><li><a href="module-BaseUtilities.html">BaseUtilities</a><ul class='methods'><li data-type='method'><a href="module-BaseUtilities.html#.removeAllEntities">removeAllEntities</a></li></ul></li><li><a href="module-CareerGoal.html">CareerGoal</a></li><li><a href="module-CareerGoalDefinitions.html">CareerGoalDefinitions</a></li><li><a href="module-Course.html">Course</a></li><li><a href="module-CourseDefinitions.html">CourseDefinitions</a></li><li><a href="module-CourseInstance.html">CourseInstance</a></li><li><a href="module-DesiredDegree.html">DesiredDegree</a></li><li><a href="module-Feedback.html">Feedback</a></li><li><a href="module-FeedbackFunctions.html">FeedbackFunctions</a></li><li><a href="module-FeedbackInstance.html">FeedbackInstance</a></li><li><a href="module-FeedbackType.html">FeedbackType</a><ul class='methods'><li data-type='method'><a href="module-FeedbackType.html#.assertFeedbackType">assertFeedbackType</a></li><li data-type='method'><a href="module-FeedbackType.html#.isFeedbackType">isFeedbackType</a></li></ul></li><li><a href="module-IceProcessor.html">IceProcessor</a><ul class='methods'><li data-type='method'><a href="module-IceProcessor.html#.assertICE">assertICE</a></li><li data-type='method'><a href="module-IceProcessor.html#.getTotalICE">getTotalICE</a></li><li data-type='method'><a href="module-IceProcessor.html#.isICE">isICE</a></li><li data-type='method'><a href="module-IceProcessor.html#.makeCourseICE">makeCourseICE</a></li></ul></li><li><a href="module-Interest.html">Interest</a></li><li><a href="module-InterestDefinitions.html">InterestDefinitions</a></li><li><a href="module-InterestType.html">InterestType</a></li><li><a href="module-LoadDefinitions.html">LoadDefinitions</a><ul class='methods'><li data-type='method'><a href="module-LoadDefinitions.html#.loadDefinitions">loadDefinitions</a></li></ul></li><li><a href="module-Opportunity.html">Opportunity</a></li><li><a href="module-OpportunityDefinitions.html">OpportunityDefinitions</a></li><li><a href="module-OpportunityInstance.html">OpportunityInstance</a></li><li><a href="module-OpportunityType.html">OpportunityType</a></li><li><a href="module-Role.html">Role</a><ul class='methods'><li data-type='method'><a href="module-Role.html#.assertRole">assertRole</a></li><li data-type='method'><a href="module-Role.html#.isRole">isRole</a></li></ul></li><li><a href="module-SampleCourses.html">SampleCourses</a><ul class='methods'><li data-type='method'><a href="module-SampleCourses.html#.makeSampleCourse">makeSampleCourse</a></li><li data-type='method'><a href="module-SampleCourses.html#.makeSampleCourseInstance">makeSampleCourseInstance</a></li></ul></li><li><a href="module-SampleFeedbacks.html">SampleFeedbacks</a><ul class='methods'><li data-type='method'><a href="module-SampleFeedbacks.html#.makeSampleFeedback">makeSampleFeedback</a></li></ul></li><li><a href="module-SampleInterests.html">SampleInterests</a><ul class='methods'><li data-type='method'><a href="module-SampleInterests.html#.makeSampleInterest">makeSampleInterest</a></li><li data-type='method'><a href="module-SampleInterests.html#.makeSampleInterestType">makeSampleInterestType</a></li></ul></li><li><a href="module-SampleOpportunities.html">SampleOpportunities</a><ul class='methods'><li data-type='method'><a href="module-SampleOpportunities.html#.makeSampleOpportunity">makeSampleOpportunity</a></li><li data-type='method'><a href="module-SampleOpportunities.html#.makeSampleOpportunityInstance">makeSampleOpportunityInstance</a></li><li data-type='method'><a href="module-SampleOpportunities.html#.makeSampleOpportunityType">makeSampleOpportunityType</a></li></ul></li><li><a href="module-SampleUsers.html">SampleUsers</a><ul class='methods'><li data-type='method'><a href="module-SampleUsers.html#.makeSampleUser">makeSampleUser</a></li></ul></li><li><a href="module-Semester.html">Semester</a></li><li><a href="module-Slug.html">Slug</a></li><li><a href="module-StarProcessor.html">StarProcessor</a><ul class='methods'><li data-type='method'><a href="module-StarProcessor.html#.processStarCsvData">processStarCsvData</a></li><li data-type='method'><a href="module-StarProcessor.html#~filterParsedData">filterParsedData</a></li><li data-type='method'><a href="module-StarProcessor.html#~findCourseSlug">findCourseSlug</a></li><li data-type='method'><a href="module-StarProcessor.html#~findSemesterSlug">findSemesterSlug</a></li><li data-type='method'><a href="module-StarProcessor.html#~makeCourseInstanceObject">makeCourseInstanceObject</a></li></ul></li><li><a href="module-User.html">User</a></li><li><a href="module-UserDefinitions.html">UserDefinitions</a></li><li><a href="module-WorkInstance.html">WorkInstance</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">startup/server/icsdata/CourseDefinitions.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* eslint max-len: "off" */
+
+/** @module CourseDefinitions */
+
+/**
+ * Provides an array containing standard ICS course definitions: name, slug, number, description, interests, syllabus,
+ * and moreInformation (if defined).
+ * Interests must be previously defined.
+ */
+export const courseDefinitions = [
+  {
+    name: 'Non Computer Science Course',
+    slug: 'other',
+    number: 'other',
+    creditHrs: 3,
+    description: 'The course used to represent all non-CS courses.',
+    interests: [],
+    syllabus: '',
+    moreInformation: '',
+    prerequisites: [],
+  },
+  {
+    name: 'Introduction to Computer Science I',
+    slug: 'ics111',
+    number: 'ICS 111',
+    creditHrs: 4,
+    description: 'Overview of computer science, including Java programming, control structures, subroutines, objects and classes, GUI programming, arrays, and recursion.',
+    interests: ['java'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS111.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS111/',
+    prerequisites: [],
+  },
+  {
+    name: 'Discrete Mathematics for Computer Science I',
+    slug: 'ics141',
+    number: 'ICS 141',
+    description: 'Introduction to propositional and predicate logic, sets, functions, linear algebra, algorithms, mathematical reasoning, recursion, counting techniques, and probability theory.',
+    interests: ['algorithms'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS141.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS141/',
+    prerequisites: [],
+  },
+  {
+    name: 'Introduction to Computer Science II',
+    slug: 'ics211',
+    number: 'ICS 211',
+    creditHrs: 4,
+    description: 'Object-oriented programming, algorithms and their complexity, introduction to software engineering, lists, stacks, queues, trees hash tables, and searching and sorting algorithms.',
+    interests: ['algorithms', 'software-engineering', 'java'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS211.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS211/',
+    prerequisites: ['ics111'],
+  },
+  {
+    name: 'Program Structure',
+    slug: 'ics212',
+    number: 'ICS 212',
+    description: 'Program organization paradigms, programming environments, implementation of a module from specifications, the C and C++ programming languages.',
+    interests: ['c', 'cplusplus', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS212.html',
+    prerequisites: ['ics211'],
+  },
+  {
+    name: 'Introduction to Scripting',
+    slug: 'ics215',
+    number: 'ICS 215',
+    description: 'Introduction to scripting languages for the integration of applications and systems. Scripting in operating systems, web pages, server-side application integration, regular expressions, event handling, input validation, selection, repetition, parameter passing, Perl, JavaScript, and PHP.',
+    interests: ['perl', 'javascript', 'ruby', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS215.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS215/',
+    prerequisites: ['ics211'],
+  },
+  {
+    name: 'Basic Concepts of Computer Science',
+    slug: 'ics222',
+    number: 'ICS 222',
+    description: 'What is computer science about? What is the difference between computers and other machines? What are the limits of computation? Are there computers that are not machines? Understand the basic issues of computability, complexity, and network effects, and learn to apply them in the practice of computation.',
+    interests: ['theory-of-computation'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS222.html',
+    prerequisites: [],
+  },
+  {
+    name: 'Discrete Mathematics for Computer Science II',
+    slug: 'ics241',
+    number: 'ICS 241',
+    description: 'Program correctness, recurrence relations and their solutions, divide and conquer relations, relations and their properties, graph theory, trees and their applications, Boolean algebra, introduction to formal languages and automata theory.',
+    interests: ['algorithms'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS241.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS241/',
+    prerequisites: ['ics141'],
+  },
+  {
+    name: 'Algorithms',
+    slug: 'ics311',
+    number: 'ICS 311',
+    creditHrs: 4,
+    description: 'Design and correctness of algorithms, including divide-and-conquer, greedy and dynamic programming methods. Complexity analyses using recurrence relations, probabilistic methods, and NP-completeness. Applications to order statistics, disjoint sets, B-trees and balanced trees, graphs, network flows, and string matching.',
+    interests: ['algorithms', 'data-science'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS311.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS311/',
+    prerequisites: ['ics141', 'ics211'],
+  },
+  {
+    name: 'Machine-Level and Systems Programming',
+    slug: 'ics312',
+    number: 'ICS 312',
+    description: 'Machine organization, machine instructions, addressing modes, assembler language, subroutine linkage, linking to higher-level languages, interface to operating systems, introduction to assemblers, loaders and compilers.',
+    interests: ['assembler', 'computer-architecture', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS311.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS311/',
+    prerequisites: ['ics212'],
+  },
+  {
+    name: 'Programming Language Theory',
+    slug: 'ics313',
+    number: 'ICS 313',
+    description: 'Syntax, semantics, control structures, variable binding and scopes, data and control abstractions. Programming in functional (LISP) and logic (Prolog) programming styles.',
+    interests: ['lisp', 'prolog'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS313.html',
+    prerequisites: ['ics212', 'ics241'],
+  },
+  {
+    name: 'Software Engineering I',
+    slug: 'ics314',
+    number: 'ICS 314',
+    description: 'Problem analysis and design, team-oriented development, quality assurance, configuration management, project planning.',
+    interests: ['software-engineering', 'javascript', 'application-development', 'it-management'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS314.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS314/',
+    prerequisites: ['ics211', 'ics241'],
+  },
+  {
+    name: 'Data Storage and Retrieval',
+    slug: 'ics321',
+    number: 'ICS 321',
+    description: 'Data storage devices, timing and capacity, programming for files, hashed and indexed files, introduction to relational database systems.',
+    interests: ['databases', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS321.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS321/',
+    prerequisites: ['ics211'],
+  },
+  {
+    name: 'Logic Design and Microprocessors',
+    slug: 'ics331',
+    number: 'ICS 331',
+    creditHrs: 4,
+    description: 'Basic machine architecture, microprocessors, bus organization, circuit elements, logic circuit analysis and design, microcomputer system design.',
+    interests: ['computer-architecture', 'hardware', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS331.html',
+    prerequisites: ['ics212', 'ics241'],
+  },
+  {
+    name: 'Operating Systems',
+    slug: 'ics332',
+    number: 'ICS 332',
+    description: 'Operating system concepts and structure, processes and threads, CPU scheduling, memory management, scheduling, file systems, inter-process communication, virtualization, popular operating systems.',
+    interests: ['operating-systems', 'computer-architecture', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS332.html',
+    prerequisites: ['ics211'],
+  },
+  {
+    name: 'Network Design and Management',
+    slug: 'ics351',
+    number: 'ICS 351',
+    description: 'Overview of the internet and its capabilities; introduction to HTTP, TCP/IP, ethernet, and wireless 802.11; routers, switches, and NAT; network and wireless security; practical experience in designing and implementing networks.',
+    interests: ['networks', 'security', 'hardware', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS331.html',
+    prerequisites: ['ics141', 'ics211'],
+  },
+  {
+    name: 'Security and Trust I: Resource Protections',
+    slug: 'ics355',
+    number: 'ICS 355',
+    description: 'Security and trust in computers, networks, and society. Security models. Access and authorization. Availability and Denial-of-Service. Trust processes and network interactions. ',
+    interests: ['security'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS355.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS355/',
+    prerequisites: ['ics241'],
+  },
+  {
+    name: 'Introduction to Artificial Intelligence Programming',
+    slug: 'ics361',
+    number: 'ICS 361',
+    description: 'Introduction to the theory of Artificial Intelligence and the practical application of AI techniques in Functional (Common LISP and/or Scheme) and Logic (Prolog) programming languages. Students gain practical experience through programming assignments and projects.',
+    interests: ['artificial-intelligence', 'lisp', 'prolog'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS361.html',
+    prerequisites: ['ics241'],
+  },
+  {
+    name: 'Computing Ethics for Lab Assistants',
+    slug: 'ics390',
+    number: 'ICS 390',
+    description: 'A lecture/discussion/internship on ethical issues and instructional techniques for students assisting a laboratory section of ICS 101. The class uses multiple significant writing and oral presentation activities to help students learn course content.',
+    interests: ['teaching', 'computer-ethics'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS390.html',
+    prerequisites: [],
+  },
+  {
+    name: 'Software Engineering II',
+    slug: 'ics414',
+    number: 'ICS 414',
+    description: 'Continuation of 314. Project management, quality, and productivity control, testing and validation, team management. Team-oriented software-implementation project.',
+    interests: ['software-engineering', 'application-development', 'it-management'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS414.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Introduction to Programming for the Web',
+    slug: 'ics415',
+    number: 'ICS 415',
+    description: 'Introduction to emerging technologies for construction of World Wide Web (WWW)-based software. Covers programming and scripting languages used for the creation of WWW sites and client-server programming. Students will complete a medium-sized software project that uses languages and concepts discussed in class.',
+    interests: ['application-development', 'software-engineering'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS415.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'The Science, Psychology and Philosophy of Systems Design',
+    slug: 'ics419',
+    number: 'ICS 419',
+    description: 'Scientific, psychological and philosophical bases of systems design, including a survey of human-factors and ergonomic standards; the nature of innovation and creativity as it relates to systems design.',
+    interests: ['software-engineering', 'hci'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS419.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Database Systems',
+    slug: 'ics421',
+    number: 'ICS 421',
+    description: 'Principles of database systems, data modeling, relational models, database design, query languages, query optimization, concurrency control data security.',
+    interests: ['databases'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS421.html',
+    prerequisites: ['ics311', 'ics314', 'ics321'],
+  },
+  {
+    name: 'Data Processing',
+    slug: 'ics422',
+    number: 'ICS 422',
+    description: 'Role of data processing in organizations, programming practices, ethics, sequential and indexed file processing, report writing, online transaction processing.',
+    interests: ['databases'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS422.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Data Security and Cryptography I',
+    slug: 'ics423',
+    number: 'ICS 423',
+    description: 'History of secret communication and confidential data storage. Elements of cryptography and cryptanalysis. Classical ciphers. Symmetric key cryptography. Public key cryptography. Data security in cyberspace.',
+    interests: ['cryptography', 'security'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS423.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  // {
+  //   name: 'Application Frameworks',
+  //   slug: 'ics424',
+  //   number: 'ICS 424',
+  //   description: 'Experience producing applications with at least two different applications frameworks.',
+  //   interests: ['application-development'],
+  //   syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS424.html',
+  //   prerequisites: ['ics311', 'ics314'],
+  // },
+  {
+    name: 'Computer Security and Ethics',
+    slug: 'ics425',
+    number: 'ICS 425',
+    description: 'Theoretical results, security policy, encryption, key management, digital signatures, certificates, passwords. Ethics: privacy, computer crime, professional ethics. Effects of the computer revolution on society.',
+    interests: ['security', 'computer-ethics', 'it-management'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS415.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Computer System Security',
+    slug: 'ics426',
+    number: 'ICS 426',
+    description: ' Information flow, confinement, information assurance, malicious programs, vulnerability analysis, network security, writing secure programs.',
+    interests: ['security', 'it-management'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS426.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Computer Architecture',
+    slug: 'ics431',
+    number: 'ICS 431',
+    description: 'Memory management, control flow, interrupt mechanisms, multiprocessor systems, special-purpose devices.',
+    interests: ['computer-architecture', 'hardware'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS431.html',
+    prerequisites: ['ics311', 'ics314', 'ics331'],
+  },
+  {
+    name: 'Concurrent and High-Performance Programming',
+    slug: 'ics432',
+    number: 'ICS 432',
+    description: 'Principles of concurrent and high performance programming. Multi-threading in C and Java for shared-memory programming. Distributed memory programming with Java. Introduction to cluster computing.',
+    interests: ['parallel-programming', 'hpc', 'c', 'java', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS432.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Machine Learning Fundamentals',
+    slug: 'ics435',
+    number: 'ICS 435',
+    description: 'Introduction to machine learning concepts with a focus on relevant ideas from computational neuroscience. Information processing and learning in the nervous system. Neural networks. Supervised and unsupervised learning. Basics of statistical learning theory.',
+    interests: ['machine-learning', 'data-science'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS435.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Theory of Computation',
+    slug: 'ics441',
+    number: 'ICS 441',
+    description: 'Grammars, sequential machines, equivalence, minimalization, analysis and synthesis, regular expressions, computability, unsolvability, Godel\'s theorem, Turing machines.',
+    interests: ['theory-of-computation', 'algorithms'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS441.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Analytical Models and Methods',
+    slug: 'ics442',
+    number: 'ICS 442',
+    description: 'Applications of mathematical methods in computer science with emphasis on discrete mathematics, numerical computation, algebraic models, operations research.',
+    interests: ['algorithms'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS442.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Parallel Algorithms',
+    slug: 'ics443',
+    number: 'ICS 443',
+    description: 'Introduction to parallel models of computation and design and analysis of parallel algorithms.',
+    interests: ['parallel-programming', 'algorithms', 'computer-architecture', 'data-science', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS443.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+
+  {
+    name: 'Data Networks',
+    slug: 'ics451',
+    number: 'ICS 451',
+    description: ' Network analysis, architecture, digital signal analysis and design; circuit switching, packet switching, packet broadcasting; protocols and standards; local area networks; satellite networks; ALOHA channels; examples.',
+    interests: ['networks', 'c'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS451.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Software Design for Robotics',
+    slug: 'ics452',
+    number: 'ICS 452',
+    description: 'Sensors, actuators, signal processing, paradigms of robotic software design, introduction to machine learning, introduction to computer vision, and robot-to-human interaction.',
+    interests: ['robotics', 'machine-learning', 'hardware', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS452.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Security and Trust II: Information Assurance',
+    slug: 'ics455',
+    number: 'ICS 455',
+    description: 'Channel security. Trojan and noninterference. Basic concepts of cryptology. Cryptographic primitives. Protocols for authentication and key establishment.',
+    interests: ['security', 'cryptography'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS455.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Artificial Intelligence',
+    slug: 'ics461',
+    number: 'ICS 461',
+    description: 'Survey of artificial intelligence: natural language processing, vision and robotics, expert systems. Emphasis on fundamental concepts: search, planning, and problem solving, logic, knowledge representation.',
+    interests: ['artificial-intelligence', 'algorithms', 'data-science', 'robotics'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS461.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Artificial Intelligence for Games',
+    slug: 'ics462',
+    number: 'ICS 462',
+    description: 'Techniques to stimulate intelligence in video games: movement, pathfinding with A* search, decision/behavior trees, state machines, machine learning, tactics. Extend games with your own AI implementations; experience shootout contests for the best AI algorithm/implementation.',
+    interests: ['algorithms', 'game-design', 'artificial-intelligence', 'machine-learning', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS462.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Human Computer Interaction I',
+    slug: 'ics464',
+    number: 'ICS 464',
+    description: 'Application of concepts and methodologies of human factors, psychology and software engineering to address ergonomic, cognitive, and social factors in the design and evaluation of human-computer systems.',
+    interests: ['software-engineering', 'hci'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS464.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Introduction to Hypermedia',
+    slug: 'ics465',
+    number: 'ICS 465',
+    description: 'Basic issues of interactive access to information in various formats on computers. Available hardware and software: editing, integration, programming. Implementation of a sample information system.',
+    interests: ['software-engineering', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS465.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+
+  {
+    name: 'Design for Mobile Devices',
+    slug: 'ics466',
+    number: 'ICS 466',
+    description: 'Design issues, programming languages, operating systems and mark-up languages for internet-enabled mobile devices, such as cell phones and PDAs.',
+    interests: ['mobile', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS424.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Cognitive Science',
+    slug: 'ics469',
+    number: 'ICS 469',
+    description: 'Introduces basic concepts, central problems, and methods from cognitive science. Identifies contributions from disciplines such as cognitive psychology, linguistics, artificial intelligence, philosophy, and neuroscience.',
+    interests: ['psychology', 'artificial-intelligence', 'cognitive-science', 'hci'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS469.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Probability, Statistics, and Queuing',
+    slug: 'ics471',
+    number: 'ICS 471',
+    description: 'Introduction to probability, statistical inference, regression, Markov chains, queuing theory. Use of an interactive statistical graphics environment such as R.',
+    interests: ['r', 'data-science', 'algorithms'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS471.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Introduction to Bioinformatics Sequences and Genomes Analysis',
+    slug: 'ics475',
+    number: 'ICS 475',
+    description: 'Introduction to bioinformatics to computer sciences students by focusing on how computer science techniques can be used for the storage, analysis, prediction and simulation of biological sequences (DNA, RNA and proteins).',
+    interests: ['bioinformatics', 'biology', 'algorithms', 'data-science'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS475.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Bioinformatics Algorithms and Tool Development',
+    slug: 'ics476',
+    number: 'ICS 476',
+    description: 'Study of commonly used bioinformatic algorithms, with an emphasis on string, tree, and graph algorithms. Presentation of probabilistic and clustering methods. Implementation of the studied algorithms and design of applications.',
+    interests: ['bioinformatics', 'biology', 'algorithms', 'data-science'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS476.html',
+    prerequisites: ['ics475'],
+  },
+
+
+  {
+    name: 'Introduction to Computer Graphics',
+    slug: 'ics481',
+    number: 'ICS 481',
+    description: 'Fundamentals of computer graphics including graphics hardware, representation, manipulation, and display of two- and three-dimensional objects, use of commercial software.',
+    interests: ['art', 'computer-graphics'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS481.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Computer Vision',
+    slug: 'ics483',
+    number: 'ICS 483',
+    description: 'Introductory course in computer vision. Topics include image formation, image processing and filtering, edge detection, texture analysis and synthesis, binocular stereo, segmentation, tracking, object recognition and applications.',
+    interests: ['computer-vision', 'algorithms'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS483.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Data Visualization',
+    slug: 'ics484',
+    number: 'ICS 484',
+    description: 'Introduction to data visualization through practical techniques for turning data into images to produce insight. Topics include: information visualization, geospatial visualization, scientific visualization, social network visualization, and medical visualization.',
+    interests: ['data-visualization', 'computer-graphics', 'data-science'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS484.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Video Game Design and Development',
+    slug: 'ics485',
+    number: 'ICS 485',
+    description: 'Students will team design, build, and demonstrate video games or related interactive entertainment environments and applications. Topics will include emerging computer science techniques relevant to the development of these types of environments. ',
+    interests: ['computer-graphics', 'art', 'game-design', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS485.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+
+  {
+    name: 'Special Topics',
+    slug: 'ics491',
+    number: 'ICS 491',
+    description: 'Reflects special interests of faculty. Oriented toward juniors and seniors. Repeatable one time for BS/CS students.',
+    interests: [],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS485.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+
+];
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Sat Oct 15 2016 07:43:18 GMT-1000 (HST) using the docdash theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

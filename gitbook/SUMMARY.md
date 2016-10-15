@@ -23,7 +23,7 @@
 ### Data Model
 
 * [Introduction](datamodel/README.md)
-* [Student](datamodel/student.md)
+* [User](datamodel/user.md)
 * [Degree Plan](datamodel/degreeplan.md)
 * [Course](datamodel/course.md)
 * [Opportunity](datamodel/opportunity.md)
@@ -32,7 +32,7 @@
 
 ### API
 
-* [JSDocs](api/jsdocs.md)
+* [JSDocs](http://cnn.com)
 
 ### User Guide
 
