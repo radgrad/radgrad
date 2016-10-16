@@ -100,6 +100,8 @@ A goal of RadGrad is to empower students, because empowered students are more li
 
 RadGrad includes a petition mechanism in order to provide students with a collective voice.  If students have an efficient and effective way to lobby for their interests within the department, they will be more likely to do so.  Active participation by students in the department will almost certainly lead to a better department.
 
+Petitions provide department-level feedback. RadGrad also supports course-level feedback and degree-level feedback.
+
 From the faculty perspective, it is often difficult to identify "widespread" student sentiment.  Petitions provide a means to prioritize student desires, and can also provide supporting evidence to argue to the administration for resources if they are needed to satisfy the petition. 
 
 The petition mechanism works as follows:

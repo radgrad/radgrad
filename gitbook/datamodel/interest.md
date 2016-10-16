@@ -33,4 +33,8 @@ Interests have the following structure:
 Note the difference between interests and opportunities.  An opportunity is an activity that the user can engage with, such as an event or a project.   Interests are used to classify behaviors.  So, for example, the opportunity "Hawaii Annual Code Challenge 2016" might have the interest "Software Engineering" associated with it. 
 
 It will be interesting to explore the appropriate user interface to Interests.  For example, it may be useful to display a tag with a number indicating the number of students who have listed it in their home page as a professional interest or career goal. It may be useful to provide the description as a popup when the user clicks on (or mouses over) an interest.
+
+## Implementation
+
+See [InterestCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-Interest-InterestCollection.html) and [InterestTypeCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-InterestType-InterestTypeCollection.html).
   

@@ -50,3 +50,7 @@ While this career goal is relatively demanding, it is intended to make our gradu
 Note that career goals are not mutually exclusive: if a student wants to go to graduate school in cybersecurity, they could satisfy both the Ph.D. Prep and Security career goals. 
 
 The directory can be filtered by students specifying an interest in a particular degree goal, which can aid in forming communities of interest. 
+
+## Implementation
+
+See [CareerGoalCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-CareerGoal-CareerGoalCollection.html).

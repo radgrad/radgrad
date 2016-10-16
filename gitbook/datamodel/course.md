@@ -13,3 +13,7 @@ The [ICS Syllabus Page](http://courses.ics.hawaii.edu/syllabuses/) provides the 
 The set of Courses are defined and managed by RadGrad admins. 
 
 Historical CourseInstance data is provided by uploading data from STAR. Current and future CourseInstance data is provided by the student user.
+
+## Implementation
+
+See [CourseCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-Course-CourseCollection.html), [CourseInstanceCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-CourseInstance-CourseInstanceCollection.html), and [SemesterCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-Semester-SemesterCollection.html).

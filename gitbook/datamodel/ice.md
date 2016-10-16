@@ -60,4 +60,8 @@ In ICE, the peer group is determined by the number of semesters since your first
 ### ICE stops at 100
 
 Although it is possible for students to accumulate more than 100 points in a category, the maximum displayed value of ICE is 100.  This is because the goal of the measure is to help as many students as possible cross the "finish line" of 100 points for each category.  It is not clear that striving for, say, 200 Experience points is really a good goal.
+
+## Implementation
+
+See [IceProcessor](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-IceProcessor.html).
  

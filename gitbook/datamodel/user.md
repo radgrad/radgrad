@@ -50,3 +50,7 @@ The home page for an advisors helps them to locate students, upload STAR data, a
 The admin role is restricted to developers. They can assign roles to users and otherwise manage the system.
 
 The home page for admins enables them to carry out their admin duties more effectively. (How's that for vagueness.)
+
+## Implementation
+
+See [UserCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-User-UserCollection.html)

@@ -45,3 +45,7 @@ The opportunity workflow is as follows:
 2. Students can "declare" their participation in one or more opportunities for one or more semesters in which it is available.
 
 3. After a student declares their participation, the faculty sponsor is notified.  They then go to a "verification" page that lists all declared participation by students for which this faculty member is the sponsor. After doing whatever is needed to verify student participation for the indicated semester, the faculty member can click a verify button, at which point it will "count" for the student with respect to prediction and recommendation.
+
+## Implementation
+
+See [OpportunityCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-Opportunity-OpportunityCollection.html), [OpportunityTypeCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-OpportunityType-OpportunityTypeCollection.html), and [OpportunityInstanceCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-OpportunityInstance-OpportunityInstanceCollection.html).

@@ -12,3 +12,7 @@ Based upon their current degree plan, career goals, and interests, recommendatio
 
 * predicted impact of their GPA (if low).
 
+## Implementation
+
+See [FeedbackCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-Feedback-FeedbackCollection.html), [FeedbackInstanceCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-FeedbackInstance-FeedbackInstanceCollection.html) and [FeedbackFunctions](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-FeedbackFunctions.FeedbackFunctions.html).
+

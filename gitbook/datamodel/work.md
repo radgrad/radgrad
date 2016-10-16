@@ -47,6 +47,10 @@ If you drop 1 ICS course and reduce your work hours to 10 per week, the average 
 Over 80% of employers surveyed for RadGrad would hire a student with a 3.4 ICS GPA.
 ```
 
+## Implementation
+
+See [WorkInstanceCollection](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-WorkInstance-WorkInstanceCollection.html).
+
 
   
 

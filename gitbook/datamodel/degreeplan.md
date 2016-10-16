@@ -36,3 +36,7 @@ Here are some important issues for the degree plan designer:
 * Specifying a historical Opportunity that has not yet been verified by an advisor.
 * Not having up-to-date STAR data.
 
+## Implementation
+
+Degree Plans are not yet implemented.
+
