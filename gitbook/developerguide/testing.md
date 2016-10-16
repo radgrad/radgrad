@@ -14,7 +14,7 @@ To start up the interactive test process, invoke:
 app$ meteor npm run test-watch
 ```
 
-Interactive testing uses the [practicalmeteor:mocha](https://atmospherejs.com/practicalmeteor/mocha) test driver to start up a parallel Meteor process running at [http://localhost:3100](http://localhost:3100). Here is a screenshot from early in development with only a few tests:
+Interactive testing uses the [practicalmeteor:mocha](https://atmospherejs.com/practicalmeteor/mocha) test driver to start up a parallel Meteor process running at [http://localhost:3100](http://localhost:3100). Here is a screenshot illustrating test execution with test-watch:
  
 <img src="images/tests-page.png" width="100%">
  
