@@ -1,4 +1,4 @@
 {
   "root": "./gitbook",
-  "plugins": ["-sharing", "anchors"]
+  "plugins": ["-sharing", "anchors", "comment"]
 }
