@@ -1,0 +1,2 @@
+import './InterestCollection';
+import './InterestTypeCollection';
