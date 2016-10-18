@@ -9,6 +9,7 @@
   * [Improve student engagement](requirements.md#engagement)
   * [Improve student diversity](requirements.md#diversity)
   * [Improve graduate success](requirements.md#graduate)
+* [Use Cases](use-cases.md)
 
 ### Developer Guide
 
@@ -19,7 +20,7 @@
 * [GitBook](developerguide/gitbook.md)
 * [JSDocs](developerguide/jsdoc.md)
 * [Directory Structure](developerguide/directorystructure.md)
-* [Issue management](developerguide/issue-management.md)
+* [Project management](developerguide/project-management.md)
 
 ### Data Model
 
