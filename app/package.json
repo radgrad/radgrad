@@ -2,7 +2,7 @@
   "name": "radgrad",
   "private": true,
   "scripts": {
-    "start": "meteor run",
+    "start": "meteor --settings ../config/settings.development.json",
     "lint": "eslint .",
     "pretest": "npm run lint --silent",
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",

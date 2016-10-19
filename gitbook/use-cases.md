@@ -2,7 +2,7 @@
 
 The goal of this section is to provide guidance for initial development by describing how the system will be used in common contexts.
 
-### Advisor meeting: first contact, no ICS background
+### Advisor meeting: first contact, no ICS background {#first-meeting}
 
 *Context:* An ICS advisor is meeting with a student for the first time. The student has not yet taken any ICS courses and wants to learn about the major.
  
@@ -18,7 +18,7 @@ The goal of this section is to provide guidance for initial development by descr
 5. Advisor makes notes about the meeting in RadGrad, which is saved and available to the student by logging into the system.
 6. Advisor suggests that student explore the ICS degree further using RadGrad on their own time, and to come back for more consultation if they have questions.
 
-### Student login, first time
+### Student login, first time {#first-student-login}
 
 *Context:* A student has met with an ICS advisor who has set up their RadGrad account. The student has received an email with login instructions. They now want to learn more about the ICS major.
 
@@ -38,7 +38,7 @@ The goal of this section is to provide guidance for initial development by descr
 
 From this session, the student acquires a better understanding of the ICS degree program and the discipline and makes a decision as to whether or not to enroll in ICS 111 and ICS 141.  They might also decide to pursue a different discipline.
  
-### Advisor meeting: during or after ICS 111.
+### Advisor meeting: during or after ICS 111. {#post111-radgrad}
 
 *Context:* A student has made an initial commitment to an ICS degree by enrolling in ICS 111, and meets with an ICS Advisor to discuss next steps.
 
@@ -56,7 +56,7 @@ From this session, the student acquires a better understanding of the ICS degree
 
 The student now has a better understanding of how to proceed through the ICS degree program, not only by taking courses, but also by taking on extracurricular activities (opportunities).
 
-### Student login, mid-program
+### RadGrad support for Juniors and Seniors {#advanced-radgrad}
 
 *Context:* The student is well into their ICS Degree program. 
 
@@ -69,7 +69,7 @@ The student now has a better understanding of how to proceed through the ICS deg
 3. Student logs into RadGrad to follow up on the notification.
 4. Student takes action based upon the notification.
 
-### Opportunity verification, asynchronous
+### Opportunity verification, asynchronous {#opportunity-verification}
 
 *Context:* A student has completed an opportunity (such as an internship or project) and wants to obtain ICE Points by having it verified.
 
@@ -84,7 +84,7 @@ The student now has a better understanding of how to proceed through the ICS deg
 5. The owner/admin/advisor brings up that request and presses a button to approve or decline it. An optional message can be included with the decision to provide additional information.
 6. The student is notified that the opportunity instance verification request has been processed. 
 
-### Opportunity verification, immediate
+### Opportunity verification, immediate {#opportunity-attendance}
 
 *Context:* A student is attending an event and wants to obtain ICE Points by having it verified by a faculty member or admin who is physically in attendance. 
 
@@ -98,7 +98,7 @@ The student now has a better understanding of how to proceed through the ICS deg
 4. The student gives the faculty member their UH account name and the faculty member types it in.
 5. RadGrad records that the student has attended the event. 
 
-### Student achieves next level
+### Student achieves next level {#leveling-up}
 
 *Context:* A student obtains enough ICE points and/or other things to achieve the next Level.
 
@@ -110,7 +110,7 @@ The student now has a better understanding of how to proceed through the ICS deg
 2. RadGrad notifies the student that they have achieved Level X and that they can receive a new laptop sticker from an ICS advisor.
 3. The student goes to the ICS advisor. The ICS advisor checks off their name on a list (so that students can't get multiple stickers for a single level) and gives them a sticker.
 
-### New mentor enrollment
+### New mentor enrollment {#new-mentor}
 
 *Context:* An ICS alumni or community member wants to (or has agreed to) serve as a mentor. The mentor has obtained a UH account.
 
@@ -122,7 +122,7 @@ The student now has a better understanding of how to proceed through the ICS deg
 2. The mentor logs in, fills out their profile information.
 3. The mentor reviews the current set of questions, and answers any they find of interest.
 
-### New mentor question
+### New mentorspace question {#new-mentorspace-question}
 
 *Context:* A RadGrad user has an idea for a question for the mentor community.
 
@@ -136,7 +136,7 @@ The student now has a better understanding of how to proceed through the ICS deg
 4. They select the question to process.  They can edit it and post it or else decline it. They can provide a note back to the requesting user about what they decided to do.
 5. If the question is accepted, then it appears on the MentorSpace page and all mentors are notified that there is a new question available for answering.
 
-### MentorSpace notifications
+### MentorSpace notifications {#mentorspace-notifications}
 
 *Context:* Students want to keep in touch with what Mentors are posting in MentorSpace.
 

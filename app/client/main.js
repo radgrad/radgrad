@@ -14,4 +14,8 @@ import '/imports/api/user';
 import '/imports/api/work';
 
 import '/imports/startup/client';
-import './main.html';
+
+import '/imports/ui/layouts';
+import '/imports/ui/pages';
+import '/imports/ui/stylesheets/style.css';
+
