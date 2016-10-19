@@ -9,6 +9,17 @@
   * [Improve student engagement](requirements.md#engagement)
   * [Improve student diversity](requirements.md#diversity)
   * [Improve graduate success](requirements.md#graduate)
+* [Use Cases](use-cases.md)
+  * [First advisor meeting](use-cases.md#first-meeting)
+  * [First student login](use-cases.md#first-student-login)
+  * [After ICS 111](use-cases.md#post111-radgrad)
+  * [Juniors and seniors](use-cases.md#advanced-radgrad)
+  * [Opportunity verification](use-cases.md#opportunity-verification)
+  * [Opportunity attendance](use-cases.md#opportunity-attendance)
+  * [Leveling up](use-cases.md#leveling-up)
+  * [New mentor](use-cases.md#new-mentor)
+  * [New mentorspace question](use-cases.md#new-mentorspace-question)
+  * [Mentorspace notifications](use-cases.md#mentorspace-notifications)
 
 ### Developer Guide
 
@@ -19,7 +30,13 @@
 * [GitBook](developerguide/gitbook.md)
 * [JSDocs](developerguide/jsdoc.md)
 * [Directory Structure](developerguide/directorystructure.md)
-* [Issue management](developerguide/issue-management.md)
+* [Project management](developerguide/project-management.md)
+* [Meteor guidelines](developerguide/meteor-guidelines.md)
+  * [Avoid downloads](developerguide/meteor-guidelines.md#avoid-downloads)
+  * [Update in branch](developerguide/meteor-guidelines.md#update-in-branch)
+  * [meteor npm run start](developerguide/meteor-guidelines.md#meteor-npm-run-start)
+  * [meteor npm run lint](developerguide/meteor-guidelines.md#meteor-npm-run-lint)
+  * [meteor npm run test-watch](developerguide/meteor-guidelines.md#meteor-npm-run-test-watch)
 
 ### Data Model
 

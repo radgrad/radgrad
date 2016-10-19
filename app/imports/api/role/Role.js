@@ -33,5 +33,8 @@ export function assertRole(role) {
 }
 
 // Initialize Roles to ROLENAMES by deleting all existing roles, then defining just those in ROLENAMES.
-Roles.getAllRoles().fetch().map(role => Roles.deleteRole(role.name));
-_.values(ROLE).map(role => Roles.createRole(role));
+
+if (Meteor.isServer) {
+  Roles.getAllRoles().fetch().map(role => Roles.deleteRole(role.name));
+  _.values(ROLE).map(role => Roles.createRole(role));
+}

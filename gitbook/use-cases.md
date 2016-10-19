@@ -1,0 +1,154 @@
+# Use Cases
+
+The goal of this section is to provide guidance for initial development by describing how the system will be used in common contexts.
+
+### Advisor meeting: first contact, no ICS background {#first-meeting}
+
+*Context:* An ICS advisor is meeting with a student for the first time. The student has not yet taken any ICS courses and wants to learn about the major.
+ 
+*Goal:* RadGrad helps the advisor learn about the student's background and interests in order to help them assess their suitability for an ICS degree.  RadGrad also helps the student learn more about ICS.
+
+*Steps:*
+
+1. Advisor logs into RadGrad using their UH account and password, authorizes login for student by providing student ID, UH username, first and last name. 
+2. RadGrad sends an email to the student welcoming them to the system and providing them with the URL to the system and brief instructions.
+2. Advisor gets Student ID number, downloads STAR data as CSV, uploads it into student's RadGrad account.
+3. Advisor looks at student's course history in RadGrad, asks about the student's interests in computer science and possible career goals, and adds those to the system. 
+4. Advisor picks a degree plan template from a selection offered by RadGrad based upon student interests and current courses.  RadGrad fills out the student's degree plan to show how (and when) they might graduate with an ICS degree.
+5. Advisor makes notes about the meeting in RadGrad, which is saved and available to the student by logging into the system.
+6. Advisor suggests that student explore the ICS degree further using RadGrad on their own time, and to come back for more consultation if they have questions.
+
+### Student login, first time {#first-student-login}
+
+*Context:* A student has met with an ICS advisor who has set up their RadGrad account. The student has received an email with login instructions. They now want to learn more about the ICS major.
+
+*Goal:* RadGrad helps the student learn more about computer science in general and the ICS degree program in particular, in order to decide whether or not to pursue the degree program.
+
+*Steps:* 
+
+1. Student clicks on URL in email message from RadGrad to get to system.
+2. Student logs in using their UH account and password.
+3. Student goes to home page.  From the home page, the student can:
+   * Browse Interests and learn more about them.
+   * Browse Career Goals and learn more about them.
+   * Browse Courses and learn more about them (review site, student reviews).
+   * Watch short videos by ICS community members discussing the program and discipline.
+   * Learn about alternatives to ICS degree programs (ITM, Computer Engineering, Communications, Graphic Arts, ACM). Also community college programs in security, networking, etc.?
+4. RadGrad recommends that the student become engaged with the UH student community by attending the next meeting of ACM Manoa.
+
+From this session, the student acquires a better understanding of the ICS degree program and the discipline and makes a decision as to whether or not to enroll in ICS 111 and ICS 141.  They might also decide to pursue a different discipline.
+ 
+### Advisor meeting: during or after ICS 111. {#post111-radgrad}
+
+*Context:* A student has made an initial commitment to an ICS degree by enrolling in ICS 111, and meets with an ICS Advisor to discuss next steps.
+
+*Goal:* The student learns about how to use RadGrad to integrate extracurricular activities and measure progress through ICE Points and Levels.
+
+*Steps:*
+
+1. The advisor logs into RadGrad using their UH account and password and brings up the student's account.
+2. If the student's STAR data is out of date, the advisor uploads current STAR data.
+3. Advisor checks with student that RadGrad notifications are specified correctly.
+2. The advisor introduces the student to RadGrad's recommendations, warnings, opportunities, ICE points, and Levels. 
+3. The advisor gives the student a Level 1 laptop sticker because they enrolled in ICS 111.
+4. The advisor and student discuss what the student needs to do to get to Level 2.
+5. The advisor and student review and make adjustments to interests and career goals.
+
+The student now has a better understanding of how to proceed through the ICS degree program, not only by taking courses, but also by taking on extracurricular activities (opportunities).
+
+### RadGrad support for Juniors and Seniors {#advanced-radgrad}
+
+*Context:* The student is well into their ICS Degree program. 
+
+*Goal:* RadGrad provides useful, just-in-time guidance to the student.
+
+*Steps:* 
+
+1. RadGrad notices an "important" warning, recommendation, or opportunity.
+2. RadGrad notifies the student (via text message or email) about the important warning, recommendation, or opportunity.
+3. Student logs into RadGrad to follow up on the notification.
+4. Student takes action based upon the notification.
+
+### Opportunity verification, asynchronous {#opportunity-verification}
+
+*Context:* A student has completed an opportunity (such as an internship or project) and wants to obtain ICE Points by having it verified.
+
+*Goal:* The student gets verification with minimal overhead to student and faculty.
+
+*Steps:*
+
+1. The student logs in to RadGrad (on their mobile phone?) and browses to the opportunity instance.
+2. The student clicks "Request verification" for that opportunity.
+3. RadGrad generates a notification to the associated owner of that activity, as well as admins and advisors. 
+4. The owner or admin or advisor logs on to RadGrad and navigates to the Process Verification Requests page.
+5. The owner/admin/advisor brings up that request and presses a button to approve or decline it. An optional message can be included with the decision to provide additional information.
+6. The student is notified that the opportunity instance verification request has been processed. 
+
+### Opportunity verification, immediate {#opportunity-attendance}
+
+*Context:* A student is attending an event and wants to obtain ICE Points by having it verified by a faculty member or admin who is physically in attendance. 
+
+*Goal:*  The student gets verification with minimal overhead to student and faculty.
+
+*Steps:* 
+
+1. The student approaches the faculty member at the event to request verification.
+2. The faculty member logs into RadGrad on their phone and brings up the "Verify Opportunity Attendance" page. 
+3. The faculty member selects the opportunity they are currently attending, which brings up a page where the faculty member can enter UH account names of attendees.
+4. The student gives the faculty member their UH account name and the faculty member types it in.
+5. RadGrad records that the student has attended the event. 
+
+### Student achieves next level {#leveling-up}
+
+*Context:* A student obtains enough ICE points and/or other things to achieve the next Level.
+
+*Goal:* The student is notified that they can get a new Level laptop sticker from an ICS advisor.
+
+*Steps:*
+
+1. The student performs an action that leads to a new level. For example, they have an opportunity approved which puts them over the top.
+2. RadGrad notifies the student that they have achieved Level X and that they can receive a new laptop sticker from an ICS advisor.
+3. The student goes to the ICS advisor. The ICS advisor checks off their name on a list (so that students can't get multiple stickers for a single level) and gives them a sticker.
+
+### New mentor enrollment {#new-mentor}
+
+*Context:* An ICS alumni or community member wants to (or has agreed to) serve as a mentor. The mentor has obtained a UH account.
+
+*Goal:* The mentor status can be established easily.
+
+*Steps:*
+
+1. An admin logs into RadGrad and defines the user with role mentor. RadGrad generates an email to the user to welcome them to the system and explain how things work.
+2. The mentor logs in, fills out their profile information.
+3. The mentor reviews the current set of questions, and answers any they find of interest.
+
+### New mentorspace question {#new-mentorspace-question}
+
+*Context:* A RadGrad user has an idea for a question for the mentor community.
+
+*Goal:* New questions of an appropriate nature can be posted quickly.
+
+*Steps:*
+
+1. The RadGrad user posts their question to the "Submit new question" field on the MentorSpace page.
+2. The admins and advisors are notified that there is a new mentor question request.
+3. The admin/advisor logs into to RadGrad and goes to the "Process Mentor Questions" page.
+4. They select the question to process.  They can edit it and post it or else decline it. They can provide a note back to the requesting user about what they decided to do.
+5. If the question is accepted, then it appears on the MentorSpace page and all mentors are notified that there is a new question available for answering.
+
+### MentorSpace notifications {#mentorspace-notifications}
+
+*Context:* Students want to keep in touch with what Mentors are posting in MentorSpace.
+
+*Goal:* Students are easily notified of changes to this page. 
+
+*Steps:* 
+
+1. Students can check a box to be notified of new questions or answers in the MentorSpace page.
+2. When new postings occur, they are notified. 
+
+
+
+
+
+

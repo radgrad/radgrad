@@ -1,12 +1,21 @@
 # .gitignore
 
+# IntelliJ
 *.iml
 .idea/
-realdata/
+
+# Mac
 .DS_Store
+
+# Private information
+realdata/
+
+# NPM
 node_modules
 npm-debug.log
 
+# GitBook
 _book
 
+# Production settings
 settings.production.json
