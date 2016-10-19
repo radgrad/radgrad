@@ -35,7 +35,7 @@
   * [Avoid downloads](developerguide/meteor-guidelines.md#avoid-downloads)
   * [Update in branch](developerguide/meteor-guidelines.md#update-in-branch)
   * [meteor npm run start](developerguide/meteor-guidelines.md#meteor-npm-run-start)
-  * [meteor npm run lint](developerguide/meteor-guidelines.md#meteor-npm-run-lint)
+  * [meteor npm run lint](developerguide/meteor-guidelines.md#meteor-npm-run-lint) 
   * [meteor npm run test-watch](developerguide/meteor-guidelines.md#meteor-npm-run-test-watch)
 
 ### Data Model
