@@ -11,3 +11,4 @@ import './landing-body.html';
 import './landing-body.js';
 import './landing-header.html';
 import './landing-header.js';
+import './landing-footer.html';

@@ -237,48 +237,6 @@
     </div>
   </div>
 
-  <div class="landing-green-background">
-    <div class="ui grid" style="margin: 0px 20px 0px 20px">
-      <div class="row">
-        <div class="ui center aligned column">
-          <h1 style="font-weight: bold; padding-top: 20px; margin-bottom: 0px; text-align: center">What do students
-            want?</h1>
-        </div>
-      </div>
-      <div class="row left">
-        <p>RadGrad provides new opportunities to understand what students are interested in during their degree program,
-          as well as what happens to them after they graduate. The following charts illustrate two simple but useful
-          analyses. The analyses below are based upon hypothetical RadGrad student data and do not necessarily reflect
-          our current population of students. </p>
-      </div>
-      <div class="row">
-        <div class="ui eight wide column">
-          <p>Student interests and career goals, as word cloud</p>
-          <div class="ui card ">
-            {% include card-header.html title="Student Interests and Career Goals" %}
-            <div class="row">
-              <div class="ui column">
-                <div class="ui top attached tabular menu">
-                  <a class="item active" data-tab="first" id="interests-tab" href="#interests">Interests</a>
-                  <a class="item" data-tab="second" id="degreegoals-tab" href="#degreegoals">Career Goals</a>
-                </div>
-              </div>
-              <div id="interests" class="ui bottom attached tab segment active" data-tab="first">
-                <div style="height: 300px" id="interests-cloud"></div>
-              </div>
-              <div id="degreegoals" class="ui bottom attached tab segment active" data-tab="second">
-                <div style="height: 300px" id="degreegoals-cloud"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="ui eight wide column">
-          <p>Percentage of ICS grads taking job on mainland, organized by GPA </p>
-          <canvas id="grad-location-chart" width="500" height="400"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 </template>
