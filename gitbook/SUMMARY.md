@@ -8,6 +8,7 @@
   * [Provide recommendations](requirements.md#recommendations)
   * [Improve student engagement](requirements.md#engagement)
   * [Improve student diversity](requirements.md#diversity)
+  * [Improve degree program](requirements.md#degree-program)
   * [Improve graduate success](requirements.md#graduate)
 * [Use Cases](use-cases.md)
   * [First advisor meeting, ICS Newbie](use-cases.md#first-meeting)
