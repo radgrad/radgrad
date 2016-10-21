@@ -91,8 +91,6 @@ reload@1.1.10
 retry@1.0.8
 routepolicy@1.0.11
 sacha:spin@2.3.1
-semantic:ui@2.2.1
-semantic:ui-data@2.2.4
 service-configuration@1.0.10
 session@1.1.6
 sha@1.0.8

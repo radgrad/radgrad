@@ -17,5 +17,8 @@ import '/imports/startup/client';
 
 import '/imports/ui/layouts';
 import '/imports/ui/pages';
+
+import './lib/semantic-ui/semantic.min.css';
+import './lib/semantic-ui/semantic.min.js';
 import '/imports/ui/stylesheets/style.css';
 
