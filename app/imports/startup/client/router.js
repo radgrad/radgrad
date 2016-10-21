@@ -4,7 +4,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 FlowRouter.route('/', {
   name: 'Landing_Page',
   action() {
-    BlazeLayout.render('App_Body', { main: 'Landing_Page' });
+    BlazeLayout.render('Landing_Body', { main: 'Landing_Page' });
   },
 });
 
