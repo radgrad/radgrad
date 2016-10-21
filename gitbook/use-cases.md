@@ -126,7 +126,7 @@ The student now has a better understanding of how to proceed through the ICS deg
 
 1. The student performs an action that leads to a new level. For example, they have an opportunity approved which puts them over the top.
 2. RadGrad notifies the student that they have achieved Level X and that they can receive a new laptop sticker from an ICS advisor.
-3. The student goes to the ICS advisor. The ICS advisor checks off their name on a list (so that students can't get multiple stickers for a single level) and gives them a sticker.
+3. The student goes to the ICS advisor. The ICS advisor gives them a sticker and indicates in RadGrad that they have received it. 
 
 ### New mentor enrollment {#new-mentor}
 
