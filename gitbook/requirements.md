@@ -32,6 +32,12 @@ Student diversity can be measured by an increased percentage of women graduates,
 
 STAR data can be used to assess improvements in diversity.
 
+## Improve degree program {#degree-program}
+
+We hypothesize that satisfying the above requirements will create changes resulting in a better overall computer science degree program: better courses, better opportunities, and better instruction. 
+
+We must devise instruments to assess the degree program and monitor it over time. 
+
 ## Improve graduate success {#graduation}
 
 RadGrad must lead to students who graduate with better preparation and who are more successful in their professional life after their undergraduate degree program experience.
