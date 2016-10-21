@@ -86,3 +86,6 @@ body {
   width: 1.0em;
 }
 
+.bordered {
+  border: solid;
+}
