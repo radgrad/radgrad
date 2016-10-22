@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { makeCourseICE } from '../../api/ice/IceProcessor.js';
+import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
 
 function getRandomIntInclusive(min, max) {
   const minimum = Math.ceil(min);

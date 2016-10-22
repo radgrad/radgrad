@@ -1,0 +1,13 @@
+<template name="Warnings">
+  <div class="ui segment">
+    <div class="content">
+      <h2>Warnings</h2>
+      <div class="ui divider"></div>
+      <div style="height: 200px;overflow: scroll">
+        {{#each warning in warnings}}
+          {{> warning_Item (warningArgs warning)}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

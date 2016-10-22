@@ -1,9 +1,15 @@
 import { Template } from 'meteor/templating';
 import { Courses } from '../../api/course/CourseCollection.js';
+import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
+import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 
 Template.Student_Degree_Planner_Page.onCreated(function appBodyOnCreated() {
   this.autorun(() => {
     this.subscribe(Courses.getPublicationName());
+    this.subscribe(CourseInstances.getPublicationName());
+    this.subscribe(Opportunities.getPublicationName());
+    this.subscribe(OpportunityInstances.getPublicationName());
   });
 });
 
