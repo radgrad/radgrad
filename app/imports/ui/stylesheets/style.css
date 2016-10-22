@@ -10,6 +10,7 @@ body {
 
 .header-body {
   padding-top: 61px; /* Move body of page below navbar. */
+  color: #388E3C !important;
 }
 
 .landing-section-1 {

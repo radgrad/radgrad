@@ -1,17 +1,21 @@
 <template name="Student_Degree_Planner_Page">
-  <div class="ui grid container">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui grid container">
 
-    <div class="row">
-      <div class="ui column"></div>
-      <div class="ui center aligned five wide column">{{> Add_Course}}</div>
-      <div class="ui center aligned five wide column ">Add opportunity</div>
-      <div class="ui center aligned five wide column ">AY</div>
+      <div class="row">
+        <div class="ui column"></div>
+        <div class="ui center aligned five wide column">{{> Add_Course}}</div>
+        <div class="ui center aligned five wide column ">{{> Add_Opportunity}}</div>
+        <div class="ui center aligned five wide column ">AY</div>
+      </div>
+      <div class="row">
+        <div class="two wide column"></div>
+        <div class="ui center aligned five wide column ">Recommendations</div>
+        <div class="two wide column"></div>
+        <div class="ui center aligned five wide column ">Warnings</div>
+      </div>
     </div>
-    <div class="row">
-      <div class="two wide column"></div>
-      <div class="ui center aligned five wide column ">Recommendations</div>
-      <div class="two wide column"></div>
-      <div class="ui center aligned five wide column ">Warnings</div>
-    </div>
-  </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
 </template>

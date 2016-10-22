@@ -1,7 +1,10 @@
 import { Template } from 'meteor/templating';
+import { Courses } from '../../api/course/CourseCollection.js';
 
 Template.Student_Degree_Planner_Page.onCreated(function appBodyOnCreated() {
-  // placeholder: typically you will put global subscriptions here if you remove the autopublish package.
+  this.autorun(() => {
+    this.subscribe(Courses.getPublicationName());
+  });
 });
 
 Template.Student_Degree_Planner_Page.helpers({
