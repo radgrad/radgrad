@@ -2,7 +2,7 @@
 
 ## Improve course scheduling {#scheduling}
 
-This requirement implies that ICS advisors will find RadGrad a superior mechanism for communicating with students about schedule planning. 
+This requirement implies that Information and Computer Sciences (ICS) advisors will find RadGrad a superior mechanism for communicating with students about schedule planning. 
 
 In addition to ICS advisors, ICS students must also find RadGrad helpful for planning their class schedules.
 
@@ -31,6 +31,12 @@ If students limit their degree program activities to coursework performed in iso
 Student diversity can be measured by an increased percentage of women graduates, an increase in ethnic diversity, and/or an increase in the diversity of disciplines that our students combine with a computer science degree.
 
 STAR data can be used to assess improvements in diversity.
+
+## Improve degree program {#degree-program}
+
+We hypothesize that satisfying the above requirements will create changes resulting in a better overall computer science degree program: better courses, better opportunities, and better instruction. 
+
+We must devise instruments to assess the degree program and monitor it over time. 
 
 ## Improve graduate success {#graduation}
 

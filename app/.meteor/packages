@@ -47,7 +47,6 @@ kadira:blaze-layout
 arillo:flow-router-helpers
 
 # Semantic UI (and packages to integrate with accounts and autoform)
-semantic:ui
 juliancwirko:postcss
 less@2.7.5_1
 useraccounts:semantic-ui
