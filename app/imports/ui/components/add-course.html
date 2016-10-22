@@ -1,0 +1,13 @@
+<template name="Add_Course">
+  <div class="ui card">
+    <div class="content">
+      <h2>Add course</h2>
+      <div class="ui divider"></div>
+      <div id="courses" style="height: 500px;overflow: scroll">
+        {{#each course in courses}}
+          {{> Add_Course_Item (courseArgs course)}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

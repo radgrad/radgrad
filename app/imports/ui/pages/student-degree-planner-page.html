@@ -1,15 +1,17 @@
 <template name="Student_Degree_Planner_Page">
-  <div class="ui text container">
+  <div class="ui grid container">
 
-    <h2>Welcome to the Student Degree Planner Page.</h2>
-    <div class="ui three column grid">
-      <div class="ui center aligned column bordered">Add course</div>
-      <div class="column bordered">Add opportunity</div>
-      <div class="column bordered">AY</div>
+    <div class="row">
+      <div class="ui column"></div>
+      <div class="ui center aligned five wide column">{{> Add_Course}}</div>
+      <div class="ui center aligned five wide column ">Add opportunity</div>
+      <div class="ui center aligned five wide column ">AY</div>
     </div>
-    <div class="ui two column grid">
-      <div class="column bordered">Recommendations</div>
-      <div class="column bordered">Warnings</div>
+    <div class="row">
+      <div class="two wide column"></div>
+      <div class="ui center aligned five wide column ">Recommendations</div>
+      <div class="two wide column"></div>
+      <div class="ui center aligned five wide column ">Warnings</div>
     </div>
   </div>
 </template>
