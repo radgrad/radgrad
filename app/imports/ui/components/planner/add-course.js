@@ -1,9 +1,11 @@
 import { Template } from 'meteor/templating';
+import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
 
 Template.Add_Course.helpers({
   courseArgs(course) {
     return {
       course,
+      ice: makeCourseICE(course, ''),
     };
   },
   courses() {

@@ -2,9 +2,7 @@
   <div class="ui left aligned segment">
     <b>{{course.number}}</b><br>
     {{course.name}}<br>
-    <span style="font-size: 10px" class="ice-header ice-innovation-background">{{iceI course}}</span>
-    <span style="font-size: 10px" class="ice-header ice-competency-background">{{iceC course}}</span>
-    <span style="font-size: 10px" class="ice-header ice-experience-background">{{iceE course}}</span>
+    {{> ICE_Badge ice=ice }}
     {{#each recommendationStars}}
       <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em" class="yellow star icon"></i>
     {{/each}}
@@ -18,7 +16,8 @@
           <b>Catalog Descrption:</b> {{course.description}}
         </p>
         <p><b>When scheduled:</b> {{whenScheduled (course)}}</p>
-        <p><b>ICE Value:</b> ???</p>
+        <p><b>ICE Value:</b> {{ice.i}} points for innovation, {{ice.c}} points for competency,
+          {{ice.e}} points for experience.</p>
         <p><b>Recommendations:</b> TBD</p>
         <p><b>Warnings:</b> None</p>
       </div>

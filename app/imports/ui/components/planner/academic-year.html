@@ -66,19 +66,13 @@
           </tr>
           <tr>
             <td>
-              <span style="font-size: 10px" class="ice-header ice-innovation-background">{{fallSemesterIceI fallYear}}</span>
-              <span style="font-size: 10px" class="ice-header ice-competency-background">{{fallSemesterIceC fallYear}}</span>
-              <span style="font-size: 10px" class="ice-header ice-experience-background">{{fallSemesterIceE fallYear}}</span>
+              {{> ICE_Badge ice=fallSemesterICE}}
             </td>
             <td>
-              <span style="font-size: 10px" class="ice-header ice-innovation-background">{{springSemesterIceI springYear}}</span>
-              <span style="font-size: 10px" class="ice-header ice-competency-background">{{springSemesterIceC springYear}}</span>
-              <span style="font-size: 10px" class="ice-header ice-experience-background">{{springSemesterIceE springYear}}</span>
+              {{> ICE_Badge ice=springSemesterICE}}
             </td>
             <td>
-              <span style="font-size: 10px" class="ice-header ice-innovation-background">{{summerSemesterIceI springYear}}</span>
-              <span style="font-size: 10px" class="ice-header ice-competency-background">{{summerSemesterIceC springYear}}</span>
-              <span style="font-size: 10px" class="ice-header ice-experience-background">{{summerSemesterIceE springYear}}</span>
+              {{> ICE_Badge ice=summerSemesterICE}}
             </td>
           </tr>
           </tbody>

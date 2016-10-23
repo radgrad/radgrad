@@ -14,32 +14,14 @@ Template.Academic_Year.helpers({
     const sem = Semesters.find({ term: Semesters.SUMMER, year }).fetch();
     return Semesters.toString(sem[0]._id);
   },
-  fallSemesterIceI(year) {
-    return { i: 20, c: 18, e: 20 }.i;
+  fallSemesterICE() {
+    return { i: 20, c: 18, e: 20 };
   },
-  fallSemesterIceC(year) {
-    return { i: 20, c: 18, e: 20 }.c;
+  springSemesterICE() {
+    return { i: 0, c: 9, e: 50 };
   },
-  fallSemesterIceE(year) {
-    return { i: 20, c: 18, e: 20 }.e;
-  },
-  springSemesterIceI(year) {
-    return { i: 0, c: 9, e: 50 }.i;
-  },
-  springSemesterIceC(year) {
-    return { i: 0, c: 9, e: 50 }.c;
-  },
-  springSemesterIceE(year) {
-    return { i: 0, c: 9, e: 50 }.e;
-  },
-  summerSemesterIceI(year) {
-    return { i: 25, c: 18, e: 0 }.i;
-  },
-  summerSemesterIceC(year) {
-    return { i: 25, c: 18, e: 0 }.c;
-  },
-  summerSemesterIceE(year) {
-    return { i: 25, c: 18, e: 0 }.e;
+  summerSemesterICE() {
+    return { i: 25, c: 18, e: 0 };
   },
 });
 
