@@ -3,6 +3,7 @@ import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
+import { Semesters } from '../../api/semester/SemesterCollection.js';
 
 Template.Student_Degree_Planner_Page.onCreated(function appBodyOnCreated() {
   this.autorun(() => {
@@ -10,11 +11,17 @@ Template.Student_Degree_Planner_Page.onCreated(function appBodyOnCreated() {
     this.subscribe(CourseInstances.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
+    this.subscribe(Semesters.getPublicationName());
   });
 });
 
 Template.Student_Degree_Planner_Page.helpers({
-  // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
+  academicYearArgs(year) {
+    return {
+      fallYear: year,
+      springYear: year + 1,
+    };
+  },
 });
 
 Template.Student_Degree_Planner_Page.events({

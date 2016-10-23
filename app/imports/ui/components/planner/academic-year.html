@@ -1,9 +1,88 @@
 <template name="Academic_Year">
   <div class="ui segment">
     <div class="content">
-      <h2>Year</h2>
+      <h2>AY 2016 - 2017</h2>
       <div class="ui divider"></div>
-      <div id="courses" style="height: 500px;overflow: scroll">
+      <div style="height: 500px;">
+        <table class="ui structured table" style="color: #388E3C !important;">
+          <thead>
+          <tr>
+            <th style="color: #388E3C !important;">{{fallSemester fallYear}}</th>
+            <th style="color: #388E3C !important;">{{springSemester springYear}}</th>
+            <th class="disabled" style="color: #388E3C !important;">{{summerSemester springYear}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="top aligned">
+            <td>
+              ICS 313<br>
+              ICS 321
+            </td>
+            <td>
+              ICS 355<i class="ui red remove circle outline icon"></i><br>
+              ICS 361<i class="ui red remove circle outline icon"></i>
+            </td>
+            <td class="disabled">
+              ICS 499<i class="ui red remove circle outline icon"></i>
+            </td>
+          </tr>
+          <tr class="top aligned">
+            <td>
+              ANTH 152<br>
+              PHIL 213<br>
+              ENG 273
+            </td>
+            <td>
+              ANTH 252<i class="ui red remove circle outline icon"></i><br>
+              REL 250<i class="ui red remove circle outline icon"></i><br>
+              LING 150<i class="ui red remove circle outline icon"></i>
+            </td>
+            <td class="disabled"></td>
+          </tr>
+          <tr class="top aligned">
+            <td>
+              Job(10)<i class="ui red pencil icon"></i>
+            </td>
+            <td>
+              Job(25)<i class="ui red pencil icon"></i>
+            </td>
+            <td class="disabled">
+              Job(0)<i class="ui red pencil icon"></i>
+            </td>
+          </tr>
+          <tr class="top aligned">
+            <td>
+              Club<i class="ui red remove circle outline icon"></i><br>
+              Event<i class="ui red remove circle outline icon"></i><br>
+              Event<i class="ui red remove circle outline icon"></i><br>
+            </td>
+            <td>
+              Research<i class="ui red remove circle outline icon"></i><br>
+              Award<i class="ui red remove circle outline icon"></i><br>
+            </td>
+            <td class="disabled">
+              Internship<i class="ui red remove circle outline icon"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="font-size: 10px" class="ice-header ice-innovation-background">{{fallSemesterIceI fallYear}}</span>
+              <span style="font-size: 10px" class="ice-header ice-competency-background">{{fallSemesterIceC fallYear}}</span>
+              <span style="font-size: 10px" class="ice-header ice-experience-background">{{fallSemesterIceE fallYear}}</span>
+            </td>
+            <td>
+              <span style="font-size: 10px" class="ice-header ice-innovation-background">{{springSemesterIceI springYear}}</span>
+              <span style="font-size: 10px" class="ice-header ice-competency-background">{{springSemesterIceC springYear}}</span>
+              <span style="font-size: 10px" class="ice-header ice-experience-background">{{springSemesterIceE springYear}}</span>
+            </td>
+            <td>
+              <span style="font-size: 10px" class="ice-header ice-innovation-background">{{summerSemesterIceI springYear}}</span>
+              <span style="font-size: 10px" class="ice-header ice-competency-background">{{summerSemesterIceC springYear}}</span>
+              <span style="font-size: 10px" class="ice-header ice-experience-background">{{summerSemesterIceE springYear}}</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

@@ -96,3 +96,7 @@ body {
 .bordered {
   border: solid;
 }
+
+.ui.table {
+  color: #388E3C !important;
+}

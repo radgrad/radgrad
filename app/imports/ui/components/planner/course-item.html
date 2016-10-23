@@ -1,27 +1,27 @@
 <template name="Add_Course_Item">
-  <div class="ui left aligned text">
+  <div class="ui left aligned segment">
     <b>{{course.number}}</b><br>
     {{course.name}}<br>
-    <span style="font-size: 10px" class="ice-header ice-innovation-background ui right">{{iceI course}} </span>
+    <span style="font-size: 10px" class="ice-header ice-innovation-background">{{iceI course}}</span>
     <span style="font-size: 10px" class="ice-header ice-competency-background">{{iceC course}}</span>
     <span style="font-size: 10px" class="ice-header ice-experience-background">{{iceE course}}</span>
     {{#each recommendationStars}}
       <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em" class="yellow star icon"></i>
     {{/each}}
-  </div>
-  <div class="ui accordion left aligned text">
-    <div class="title">
-      <i class="dropdown icon"></i>
+
+    <div class="ui accordion">
+      <div class="title">
+        <i class="dropdown icon"></i>
+      </div>
+      <div class="content">
+        <p>
+          <b>Catalog Descrption:</b> {{course.description}}
+        </p>
+        <p><b>When scheduled:</b> {{whenScheduled (course)}}</p>
+        <p><b>ICE Value:</b> ???</p>
+        <p><b>Recommendations:</b> TBD</p>
+        <p><b>Warnings:</b> None</p>
+      </div>
     </div>
-    <div class="content">
-      <p>
-        <b>Catalog Descrption:</b> {{course.description}}
-      </p>
-      <p><b>When scheduled:</b> {{whenScheduled (course)}}</p>
-      <p><b>ICE Value:</b> ???</p>
-      <p><b>Recommendations:</b> TBD</p>
-      <p><b>Warnings:</b> None</p>
-    </div>
   </div>
-  <div class="ui divider"></div>
 </template>

@@ -1,11 +1,12 @@
 <template name="Recommendations">
-  <div class="ui segment">
+  <div class="ui left aligned segment">
     <div class="content">
       <h2>Recommendations</h2>
       <div class="ui divider"></div>
-      <div style="height: 200px;overflow: scroll">
+      <div style="height: 175px;">
         {{#each recommendation in recommendations}}
           {{> Recommendation_Item (recommendationArgs recommendation)}}
+          <p></p>
         {{/each}}
       </div>
     </div>

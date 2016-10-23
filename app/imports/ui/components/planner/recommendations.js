@@ -7,6 +7,13 @@ Template.Recommendations.helpers({
       recommendation,
     };
   },
+  recommendations() {
+    return [
+      { text: 'You need 22 more Innovation points in your plan to get to 100.' },
+      { text: 'You need 7 more Competency points in your plan to get to 100.' },
+      { text: 'See your ICS advisor to upload STAR data from Fall 2015.' },
+    ];
+  },
 });
 
 Template.Recommendations.events({
