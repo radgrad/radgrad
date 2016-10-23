@@ -1,7 +1,11 @@
 <template name="Academic_Year">
   <div class="ui segment">
     <div class="content">
-      <h2>AY 2016 - 2017</h2>
+      <span class="center aligned">
+        <h2><a id="prevYear" href="#"><i class="ui green arrow left icon"></i></a>
+        AY {{fallYear}} - {{springYear}}
+          <a id="nextYear" href="#"><i class="ui green arrow right icon"></i></a></h2>
+      </span>
       <div class="ui divider"></div>
       <div style="height: 500px;">
         <table class="ui structured table" style="color: #388E3C !important;">
@@ -15,53 +19,64 @@
           <tbody>
           <tr class="top aligned">
             <td>
-              ICS 313<br>
-              ICS 321
+              {{#each class in icsCoursesFallSemester}}
+                {{class}}<br>
+              {{/each}}
             </td>
             <td>
-              ICS 355<i class="ui red remove circle outline icon"></i><br>
-              ICS 361<i class="ui red remove circle outline icon"></i>
+              {{#each class in icsCoursesSpringSemester}}
+                {{class}}<i class="ui red remove circle outline icon"></i><br>
+              {{/each}}
             </td>
             <td class="disabled">
-              ICS 499<i class="ui red remove circle outline icon"></i>
+              {{#each class in icsCoursesSummerSemester}}
+                {{class}}<i class="ui red remove circle outline icon"></i><br>
+              {{/each}}
             </td>
           </tr>
           <tr class="top aligned">
             <td>
-              ANTH 152<br>
-              PHIL 213<br>
-              ENG 273
+              {{#each class in nonIcsCoursesFallSemester}}
+                {{class}}<br>
+              {{/each}}
             </td>
             <td>
-              ANTH 252<i class="ui red remove circle outline icon"></i><br>
-              REL 250<i class="ui red remove circle outline icon"></i><br>
-              LING 150<i class="ui red remove circle outline icon"></i>
-            </td>
-            <td class="disabled"></td>
-          </tr>
-          <tr class="top aligned">
-            <td>
-              Job(10)<i class="ui red pencil icon"></i>
-            </td>
-            <td>
-              Job(25)<i class="ui red pencil icon"></i>
+              {{#each class in nonIcsCoursesSpringSemester}}
+                {{class}}<i class="ui red remove circle outline icon"></i><br>
+              {{/each}}
             </td>
             <td class="disabled">
-              Job(0)<i class="ui red pencil icon"></i>
+              {{#each class in nonIcsCoursesSummerSemester}}
+                {{class}}<i class="ui red remove circle outline icon"></i><br>
+              {{/each}}
             </td>
           </tr>
           <tr class="top aligned">
             <td>
-              Club<i class="ui red remove circle outline icon"></i><br>
-              Event<i class="ui red remove circle outline icon"></i><br>
-              Event<i class="ui red remove circle outline icon"></i><br>
+              {{jobFallSemester}}<i class="ui red pencil icon"></i>
             </td>
             <td>
-              Research<i class="ui red remove circle outline icon"></i><br>
-              Award<i class="ui red remove circle outline icon"></i><br>
+              {{jobSpringSemester}}<i class="ui red pencil icon"></i>
             </td>
             <td class="disabled">
-              Internship<i class="ui red remove circle outline icon"></i>
+              {{jobSummerSemester}}<i class="ui red pencil icon"></i>
+            </td>
+          </tr>
+          <tr class="top aligned">
+            <td>
+              {{#each opp in oppFallSemester}}
+                {{opp}}<i class="ui red remove circle outline icon"></i><br>
+              {{/each}}
+            </td>
+            <td>
+              {{#each opp in oppSpringSemester}}
+                {{opp}}<i class="ui red remove circle outline icon"></i><br>
+              {{/each}}
+            </td>
+            <td class="disabled">
+              {{#each opp in oppSummerSemester}}
+                {{opp}}<i class="ui red remove circle outline icon"></i><br>
+              {{/each}}
             </td>
           </tr>
           <tr>
