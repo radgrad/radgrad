@@ -47,7 +47,7 @@ FlowRouter.route('/student-degree-planner-page', {
 FlowRouter.route('/student-mentorspace-page', {
   name: 'Student_MentorSpace_Page',
   action() {
-    BlazeLayout.render('App_Body', { main: 'Student_MentorSpace_Page' });
+    BlazeLayout.render('Mentor_Body', { main: 'Student_MentorSpace_Page' });
   },
 });
 
