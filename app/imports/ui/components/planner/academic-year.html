@@ -2,9 +2,10 @@
   <div class="ui segment">
     <div class="content">
       <span class="center aligned">
-        <h2><a id="prevYear" href="#"><i class="ui green arrow left icon"></i></a>
+        <h2>
+          {{#if hasPrevYear}}<a id="prevYear" href="#"><i class="ui green arrow left icon"></i></a>{{/if}}
         AY {{fallYear}} - {{springYear}}
-          <a id="nextYear" href="#"><i class="ui green arrow right icon"></i></a></h2>
+         {{#if hasNextYear}}<a id="nextYear" href="#"><i class="ui green arrow right icon"></i></a>{{/if}}</h2>
         ICS Classes and Opportunities
       </span>
       <div class="ui divider"></div>

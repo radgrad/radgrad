@@ -26,16 +26,6 @@ Template.Academic_Year.helpers({
     }
     return ret;
   },
-  nonIcsCoursesFallSemester() {
-    return [
-      'ANTH 152',
-      'PHIL 213',
-      'ENG 273',
-    ];
-  },
-  jobFallSemester() {
-    return 'Job(10)';
-  },
   oppFallSemester() {
     return [
       'Club',
@@ -59,16 +49,6 @@ Template.Academic_Year.helpers({
     }
     return ret;
   },
-  nonIcsCoursesSpringSemester() {
-    return [
-      'ANTH 252',
-      'REL 250',
-      'LING 150',
-    ];
-  },
-  jobSpringSemester() {
-    return 'Job(25)';
-  },
   oppSpringSemester() {
     return [
       'Research',
@@ -90,13 +70,6 @@ Template.Academic_Year.helpers({
       });
     }
     return ret;
-  },
-  nonIcsCoursesSummerSemester() {
-    return [
-    ];
-  },
-  jobSummerSemester() {
-    return 'Job(0)';
   },
   oppSummerSemester() {
     return [
@@ -144,6 +117,30 @@ Template.Academic_Year.helpers({
   },
   summerSemesterICE() {
     return { i: 25, c: 18, e: 0 };
+  },
+  hasPrevYear() {
+    const sem = Semesters.find({ term: Semesters.FALL, year: Template.instance().state.get('fallYear') - 1 }).fetch();
+    if (sem.length > 0) {
+      const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
+      const courses = CourseInstances.find({
+        semesterID: sem[0]._id,
+        studentID: user[0]._id,
+      }).fetch();
+      return courses.length > 0;
+    }
+    return false;
+  },
+  hasNextYear() {
+    const sem = Semesters.find({ term: Semesters.FALL, year: Template.instance().state.get('springYear') }).fetch();
+    if (sem.length > 0) {
+      const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
+      const courses = CourseInstances.find({
+        semesterID: sem[0]._id,
+        studentID: user[0]._id,
+      }).fetch();
+      return courses.length > 0;
+    }
+    return false;
   },
 });
 
