@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 
 Template.Academic_Year.helpers({
   fallYear() {
@@ -10,10 +11,18 @@ Template.Academic_Year.helpers({
     return Template.instance().state.get('springYear');
   },
   icsCoursesFallSemester() {
-    return [
-      'ICS 313',
-      'ICS 321',
-    ];
+    const sem = Semesters.find({ term: Semesters.FALL, year: Template.instance().state.get('fallYear') }).fetch();
+    const ret = [];
+    if (sem.length > 0) {
+      const courses = CourseInstances.find({ semesterID: sem[0]._id,
+        studentID: Template.instance().state.get('studentID') }).fetch();
+      courses.forEach((c) => {
+        if (CourseInstances.isICS(c._id)) {
+          ret.push(c.note);
+        }
+      });
+    }
+    return ret;
   },
   nonIcsCoursesFallSemester() {
     return [
@@ -33,10 +42,18 @@ Template.Academic_Year.helpers({
     ];
   },
   icsCoursesSpringSemester() {
-    return [
-      'ICS 355',
-      'ICS 361',
-    ];
+    const sem = Semesters.find({ term: Semesters.SPRING, year: Template.instance().state.get('springYear') }).fetch();
+    const ret = [];
+    if (sem.length > 0) {
+      const courses = CourseInstances.find({ semesterID: sem[0]._id,
+        studentID: Template.instance().state.get('studentID') }).fetch();
+      courses.forEach((c) => {
+        if (CourseInstances.isICS(c._id)) {
+          ret.push(c.note);
+        }
+      });
+    }
+    return ret;
   },
   nonIcsCoursesSpringSemester() {
     return [
@@ -55,9 +72,18 @@ Template.Academic_Year.helpers({
     ];
   },
   icsCoursesSummerSemester() {
-    return [
-      'ICS 499',
-    ];
+    const sem = Semesters.find({ term: Semesters.SUMMER, year: Template.instance().state.get('springYear') }).fetch();
+    const ret = [];
+    if (sem.length > 0) {
+      const courses = CourseInstances.find({ semesterID: sem[0]._id,
+        studentID: Template.instance().state.get('studentID') }).fetch();
+      courses.forEach((c) => {
+        if (CourseInstances.isICS(c._id)) {
+          ret.push(c.note);
+        }
+      });
+    }
+    return ret;
   },
   nonIcsCoursesSummerSemester() {
     return [
@@ -72,16 +98,37 @@ Template.Academic_Year.helpers({
     ];
   },
   fallSemester(year) {
-    const sem = Semesters.find({ term: Semesters.FALL, year }).fetch();
-    return sem[0] && Semesters.toString(sem[0]._id);
+    if (year) {
+      const sem = Semesters.find({ term: Semesters.FALL, year }).fetch();
+      if (sem.length === 0) {
+        const semId = Semesters.define({ term: Semesters.FALL, year });
+        sem.push(Semesters.findDoc(semId));
+      }
+      return sem[0] && Semesters.toString(sem[0]._id);
+    }
+    return year;
   },
   springSemester(year) {
-    const sem = Semesters.find({ term: Semesters.SPRING, year }).fetch();
-    return sem[0] && Semesters.toString(sem[0]._id);
+    if (year) {
+      const sem = Semesters.find({ term: Semesters.SPRING, year }).fetch();
+      if (sem.length === 0) {
+        const semId = Semesters.define({ term: Semesters.SPRING, year });
+        sem.push(Semesters.findDoc(semId));
+      }
+      return sem[0] && Semesters.toString(sem[0]._id);
+    }
+    return year;
   },
   summerSemester(year) {
-    const sem = Semesters.find({ term: Semesters.SUMMER, year }).fetch();
-    return sem[0] && Semesters.toString(sem[0]._id);
+    if (year) {
+      const sem = Semesters.find({ term: Semesters.SUMMER, year }).fetch();
+      if (sem.length === 0) {
+        const semId = Semesters.define({ term: Semesters.SUMMER, year });
+        sem.push(Semesters.findDoc(semId));
+      }
+      return sem[0] && Semesters.toString(sem[0]._id);
+    }
+    return year;
   },
   fallSemesterICE() {
     return { i: 20, c: 18, e: 20 };
@@ -120,6 +167,7 @@ Template.Academic_Year.onCreated(function academicYearCreated() {
 Template.Academic_Year.onRendered(function () {
   this.state.set('fallYear', this.data.fallYear);
   this.state.set('springYear', this.data.springYear);
+  this.state.set('studentID', this.data.studentID);
 });
 
 Template.Academic_Year.onDestroyed(function () {

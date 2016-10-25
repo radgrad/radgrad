@@ -1,15 +1,20 @@
+/* global Assets */
+
 import { Meteor } from 'meteor/meteor';
 
 import { Courses } from '../../api/course/CourseCollection.js';
+import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
+import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
 
 import { courseDefinitions } from './icsdata/CourseDefinitions.js';
+import { processStarCsvData } from '/imports/api/star/StarProcessor';
 import { interestTypeDefinitions, interestDefinitions } from '/imports/startup/server/icsdata/InterestDefinitions';
 import { opportunityDefinitions, opportunityTypeDefinitions }
     from '/imports/startup/server/icsdata/OpportunityDefinitions';
@@ -56,5 +61,20 @@ Meteor.startup(() => {
   if (Courses.find().count() === 0) {
     console.log('Defining Courses');
     courseDefinitions.map((definition) => Courses.define(definition));
+  }
+  // load Alfred example student.
+  if (Users.find({ username: 'alfredpersona' }).count() === 0) {
+    const starDataPath = 'testdata/StarPersonaAlfred.csv';
+    const studentID = Users.define({
+      firstName: 'Alfred',
+      lastName: 'Persona',
+      slug: 'alfredpersona',
+      email: 'alfred@hawaii.edu',
+      role: ROLE.STUDENT,
+      password: 'foo' });
+    const studentSlug = Users.findSlugByID(studentID);
+    const csvData = Assets.getText(starDataPath);
+    const courseInstanceDefinitions = processStarCsvData(studentSlug, csvData);
+    courseInstanceDefinitions.map((definition) => CourseInstances.define(definition));
   }
 });

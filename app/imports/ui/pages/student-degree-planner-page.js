@@ -20,6 +20,7 @@ Template.Student_Degree_Planner_Page.helpers({
     return {
       fallYear: year,
       springYear: year + 1,
+      studentID: '5ujicDhonAjSnnPf8',
     };
   },
 });
