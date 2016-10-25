@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Academic_Year.helpers({
   fallYear() {
@@ -14,8 +15,9 @@ Template.Academic_Year.helpers({
     const sem = Semesters.find({ term: Semesters.FALL, year: Template.instance().state.get('fallYear') }).fetch();
     const ret = [];
     if (sem.length > 0) {
+      const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
       const courses = CourseInstances.find({ semesterID: sem[0]._id,
-        studentID: Template.instance().state.get('studentID') }).fetch();
+        studentID: user[0]._id }).fetch();
       courses.forEach((c) => {
         if (CourseInstances.isICS(c._id)) {
           ret.push(c.note);
@@ -45,8 +47,10 @@ Template.Academic_Year.helpers({
     const sem = Semesters.find({ term: Semesters.SPRING, year: Template.instance().state.get('springYear') }).fetch();
     const ret = [];
     if (sem.length > 0) {
-      const courses = CourseInstances.find({ semesterID: sem[0]._id,
-        studentID: Template.instance().state.get('studentID') }).fetch();
+      const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
+      const courses = CourseInstances.find({
+        semesterID: sem[0]._id,
+        studentID: user[0]._id }).fetch();
       courses.forEach((c) => {
         if (CourseInstances.isICS(c._id)) {
           ret.push(c.note);
@@ -75,8 +79,10 @@ Template.Academic_Year.helpers({
     const sem = Semesters.find({ term: Semesters.SUMMER, year: Template.instance().state.get('springYear') }).fetch();
     const ret = [];
     if (sem.length > 0) {
-      const courses = CourseInstances.find({ semesterID: sem[0]._id,
-        studentID: Template.instance().state.get('studentID') }).fetch();
+      const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
+      const courses = CourseInstances.find({
+        semesterID: sem[0]._id,
+        studentID: user[0]._id }).fetch();
       courses.forEach((c) => {
         if (CourseInstances.isICS(c._id)) {
           ret.push(c.note);
@@ -167,7 +173,7 @@ Template.Academic_Year.onCreated(function academicYearCreated() {
 Template.Academic_Year.onRendered(function () {
   this.state.set('fallYear', this.data.fallYear);
   this.state.set('springYear', this.data.springYear);
-  this.state.set('studentID', this.data.studentID);
+  this.state.set('studentUsername', this.data.studentUsername);
 });
 
 Template.Academic_Year.onDestroyed(function () {

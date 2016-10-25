@@ -4,6 +4,7 @@ import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
+import { Users } from '../../api/user/UserCollection.js';
 
 Template.Student_Degree_Planner_Page.onCreated(function appBodyOnCreated() {
   this.autorun(() => {
@@ -12,6 +13,7 @@ Template.Student_Degree_Planner_Page.onCreated(function appBodyOnCreated() {
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
+    this.subscribe(Users.getPublicationName());
   });
 });
 
@@ -20,7 +22,7 @@ Template.Student_Degree_Planner_Page.helpers({
     return {
       fallYear: year,
       springYear: year + 1,
-      studentID: '5ujicDhonAjSnnPf8',
+      studentUsername: 'alfredpersona',
     };
   },
 });

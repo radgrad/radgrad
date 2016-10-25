@@ -7,6 +7,7 @@ import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
+import { Users } from '../../api/user/UserCollection.js';
 
 
 Semesters.publish();
@@ -18,3 +19,4 @@ Opportunities.publish();
 OpportunityInstances.publish();
 OpportunityTypes.publish();
 CareerGoals.publish();
+Users.publish();
