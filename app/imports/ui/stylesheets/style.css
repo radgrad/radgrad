@@ -13,7 +13,7 @@
 .hind{
     font-family: 'Hind', sans-serif;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 3.4vw;
     color: white;
 }
 
@@ -22,10 +22,6 @@
     padding: 20px;
     margin-bottom: 20px;
 
-}
-
-.mentorspace-shift-down{
-    margin-top: 22px;
 }
 
 .mentorspace-item-padding{

@@ -10,4 +10,9 @@ Template.Student_MentorSpace_Page.helpers({
 
 Template.Student_MentorSpace_Page.events({
  // placeholder: if you add a form to this top-level layout, handle the associated events here.
+
+});
+
+Template.Student_MentorSpace_Page.onRendered(function(){
+  $('.ui.accordion').accordion('close', 0, {exclusive: false, collapsible: true, active: false});
 });
