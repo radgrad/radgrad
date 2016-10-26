@@ -1,17 +1,33 @@
 <template name="Add_Course_Item">
-  <div class="ui left aligned segment">
-    <b>{{course.number}}</b><br>
-    {{course.name}}<br>
-    {{> ICE_Badge ice=ice }}
-    {{#each recommendationStars}}
-      <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em" class="yellow star icon"></i>
-    {{/each}}
-
+  <div class="ui left aligned segment" style="padding-top: 5px; padding-bottom: 5px;">
+    <b>{{course.number}}</b> <div class="ui icon mini green right floated button" data-position="left center"><i class="add icon"></i></div>
+    <div class="ui popup left transition hidden">
+      <div class="ui three column divided center aligned grid">
+        <div class="column">
+          Fall
+          <div id="fallAdd" class="ui tiny green button">Add</div>
+        </div>
+        <div class="column">
+          Spring
+          <div id="springAdd" class="ui tiny green button">Add</div>
+        </div>
+        <div class="column">
+          Summer
+          <div id="summerAdd" class="ui tiny green button">Add</div>
+        </div>
+      </div>
+    </div>
+    <br>
+    {{course.name}}
     <div class="ui accordion">
-      <div class="title">
+      <div class="ui center aligned title">
         <i class="dropdown icon"></i>
       </div>
       <div class="content">
+        {{> ICE_Badge ice=ice }}
+        {{#each recommendationStars}}
+          <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em" class="yellow star icon"></i>
+        {{/each}}
         <p>
           <b>Catalog Descrption:</b> {{course.description}}
         </p>

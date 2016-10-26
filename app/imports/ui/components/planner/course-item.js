@@ -1,5 +1,7 @@
 import { Template } from 'meteor/templating';
 import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 
 function getRandomIntInclusive(min, max) {
   const minimum = Math.ceil(min);
@@ -34,7 +36,42 @@ Template.Add_Course_Item.helpers({
 });
 
 Template.Add_Course_Item.events({
-  // add your events here
+  'click #fallAdd' (event) {
+    event.preventDefault();
+    const course = Template.instance().data.course;
+    const slug = Slugs.findDoc(course.slugID);
+    const ci = {};
+    ci.semester = `Fall-${Template.instance().data.fallYear}`;
+    ci.course = slug.name;
+    ci.student = Template.instance().data.studentUsername;
+    ci.creditHrs = course.creditHrs;
+    ci.note = course.number;
+    CourseInstances.define(ci);
+  },
+  'click #springAdd' (event) {
+    event.preventDefault();
+    const course = Template.instance().data.course;
+    const slug = Slugs.findDoc(course.slugID);
+    const ci = {};
+    ci.semester = `Spring-${Template.instance().data.springYear}`;
+    ci.course = slug.name;
+    ci.student = Template.instance().data.studentUsername;
+    ci.creditHrs = course.creditHrs;
+    ci.note = course.number;
+    CourseInstances.define(ci);
+  },
+  'click #summerAdd' (event) {
+    event.preventDefault();
+    const course = Template.instance().data.course;
+    const slug = Slugs.findDoc(course.slugID);
+    const ci = {};
+    ci.semester = `Summer-${Template.instance().data.springYear}`;
+    ci.course = slug.name;
+    ci.student = Template.instance().data.studentUsername;
+    ci.creditHrs = course.creditHrs;
+    ci.note = course.number;
+    CourseInstances.define(ci);
+  },
 });
 
 Template.Add_Course_Item.onCreated(function () {
@@ -45,6 +82,7 @@ Template.Add_Course_Item.onRendered(function () {
   this.$('.ui.accordion')
       .accordion()
   ;
+  this.$('.ui.icon.button').popup({ on: 'click', target: '.ui.icon.button' });
 });
 
 Template.Add_Course_Item.onDestroyed(function () {

@@ -158,6 +158,10 @@ Template.Academic_Year.events({
     const nextFall = instance.state.get('fallYear') + 1;
     instance.state.set('fallYear', nextFall);
     instance.state.set('springYear', nextFall + 1);
+    const dict = instance.state.get('dict');
+    console.log(dict);
+    // instance.state.get('dict').set('fallYear', nextFall);
+    // instance.state.get('dict').set('springYear', nextFall + 1);
     this.springYear = nextFall + 1;
     this.fallYear = nextFall;
   },
@@ -171,6 +175,7 @@ Template.Academic_Year.onRendered(function () {
   this.state.set('fallYear', this.data.fallYear);
   this.state.set('springYear', this.data.springYear);
   this.state.set('studentUsername', this.data.studentUsername);
+  this.state.set('dict', this.data.dict);
 });
 
 Template.Academic_Year.onDestroyed(function () {
