@@ -20,16 +20,6 @@ Template.Student_Degree_Planner_Page.onCreated(function appBodyOnCreated() {
 });
 
 Template.Student_Degree_Planner_Page.helpers({
-  academicYearArgs(year) {
-    Template.instance().state.set('fallYear', year);
-    Template.instance().state.set('springYear', year + 1);
-    return {
-      fallYear: year,
-      springYear: year + 1,
-      studentUsername: 'alfredpersona',
-      dict: Template.instance().state,
-    };
-  },
 });
 
 Template.Student_Degree_Planner_Page.events({
