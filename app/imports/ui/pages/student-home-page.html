@@ -4,12 +4,17 @@
       <h3 style="padding-top: 8px">Hello Amy!</h3>
 
       <a class="fitted right item">
-        <div class="ui search">
-          <div class="ui icon input">
-            <input class="prompt" type="text" placeholder="Search RadGrad...">
-            <i class="search icon"></i>
+        <div class="ui right labeled input">
+          <input type="text" placeholder="Search...">
+          <div class="ui dropdown label">
+            <div class="text">Courses</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item">Users</div>
+              <div class="item">Opportunities</div>
+              <div class="item">Interests</div>
+            </div>
           </div>
-          <div class="results"></div>
         </div>
       </a>
     </div>
@@ -52,28 +57,28 @@
           <td class="disabled">ICS 331</td>
           <td class="disabled">ICS 400+</td>
           <td class="disabled">ICS 400+</td>
-          <td></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
         </tr>
 
         <tr>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
           <td class="disabled">ICS 400+</td>
-          <td></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
         </tr>
 
 
         <tr>
           <td>Extra Curricular</td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ICS 111</a></td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ICS 111</a></td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ICS 111</a></td>
-          <td class="selectable"><a href="#">ICS 111</a></td>
+          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ACM</a></td>
+          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ACM</a></td>
+          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ACM</a></td>
+          <td class="selectable"><a href="#">ACM</a></td>
           <td class="disabled">ACM</td>
           <td class="disabled">ACM</td>
           <td class="disabled">ACM</td>
@@ -82,8 +87,8 @@
 
         <tr>
           <td></td>
-          <td></td>
-          <td></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
           <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>Hackathon</a></td>
           <td class="selectable"><a href="#">Hackathon</a></td>
           <td class="disabled">Hackathon</td>
@@ -94,16 +99,17 @@
 
         <tr>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
+          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
           <td class="disabled">Project</td>
           <td class="disabled">Internship</td>
         </tr>
         </tbody></table>
+      <a href="#">View Adviser Notes</a>
     </div>
 
 
@@ -139,6 +145,51 @@
         </div>
         <a href="#">What is ICE?</a>
       </div>
+
+        <h2 style="margin-top:20px">Warnings</h2>
+        <div class="ui list">
+          <a class="item">
+            <i class="warning sign icon"></i>
+            <div class="content">
+              <div class="header">ICS 331 will no longer be offered in Spring 2017.</div>
+            </div>
+          </a>
+          <a class="item">
+            <i class="warning sign icon"></i>
+            <div class="content">
+              <div class="header">You must receive a passing grade in ICS 311 to get credit for the course.</div>
+            </div>
+          </a>
+          <a class="item">
+            <i class="warning sign icon"></i>
+            <div class="content">
+              <div class="header"> Your Spring 2018 workload exceeds recommended workload amounts.</div>
+            </div>
+          </a>
+        </div>
+
+        <h2 style="margin-top:20px">Recommendations</h2>
+        <div class="ui list">
+          <a class="item">
+            <i class="asterisk icon"></i>
+            <div class="content">
+              <div class="header">Participate in the AT&T Hackathon on March 11 to earn more Innovation points.</div>
+            </div>
+          </a>
+          <a class="item">
+            <i class="asterisk icon"></i>
+            <div class="content">
+              <div class="header">You need to receive at least a 3.0 this semester to earn more Competency points.</div>
+            </div>
+          </a>
+          <a class="item">
+            <i class="asterisk icon"></i>
+            <div class="content">
+              <div class="header"> See your ICS adviser to upload STAR data from Fall 2015.</div>
+            </div>
+          </a>
+        </div>
+
     </div>
   </div>
 </template>
