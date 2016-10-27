@@ -15,4 +15,9 @@ Template.Student_MentorSpace_Page.events({
 
 Template.Student_MentorSpace_Page.onRendered(function mentorSpaceOnRendered(){
   $('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
+
+  $('.ui.dropdown')
+      .dropdown()
+  ;
+
 });

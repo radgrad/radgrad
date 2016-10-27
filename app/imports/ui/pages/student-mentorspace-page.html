@@ -4,11 +4,12 @@
     <div class="row" style="padding-bottom: 0">
 
       <div id="mentorspace-main-block" class="five wide column">
+
         <div id="mentorspace-heading" class="hind">
 
-          <div class="hind">
+          <h1>
             Mentor Directory
-          </div>
+          </h1>
         </div>
 
         <div id="mentorspace-main-inside-block">
@@ -231,10 +232,68 @@
 
 
       <div id="mentorspace-question-block" class="eleven wide column" style="padding-right: 30px">
+        <div class="ui text menu" style="padding-top: 0; margin-top: 0">
+          <div class="item">
+          </div>
+          <h1 class="ui header"><img src="/images/radgrad_logo.png">
+            <div class="content">
+              Mentor Space
+              <div class="sub header">Ask Anything!</div>
+            </div>
+          </h1>
+          <div class="ui right dropdown item">
+            <div style="font-size: 3.4vh">Menu</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item"><a class="{{ isActiveRoute 'Landing_Page'}} item" href="{{ pathFor 'Landing_Page' }}">Landing Page</a></div>
+              <div class="item"><a class="{{ isActiveRoute 'Student_Home_Page'}} item" href="{{ pathFor 'Student_Home_Page' }}">Student Home Page</a></div>
+              <div class="item"><a class="{{ isActiveRoute 'Admin_Home_Page'}} item" href="{{ pathFor 'Admin_Home_Page' }}">Admin Home Page</a></div>
+              <div class="item"><a class="{{ isActiveRoute 'Advisor_Home_Page'}} item" href="{{ pathFor 'Advisor_Home_Page' }}">Advisor Home Page</a></div>
+              <div class="item"><a class="{{ isActiveRoute 'Mentor_Home_Page'}} item" href="{{ pathFor 'Mentor_Home_Page' }}">Mentor Home Page</a></div>
+              <div class="item"><a class="{{ isActiveRoute 'Student_Degree_Planner_Page'}} item" href="{{ pathFor 'Student_Degree_Planner_Page' }}">Student Degree Planner Page</a></div>
+              <div class="item"><a class="{{ isActiveRoute 'Student_MentorSpace_Page'}} item" href="{{ pathFor 'Student_MentorSpace_Page' }}">Student MentorSpace Page</a></div>
 
-        <div style="">
-          <h2>Welcome to the Student MentorSpace Page.</h2>
-          <a href="">Submit a new Question</a> <a href="">Receive Notifications</a>
+            </div>
+          </div>
+        </div>
+        <div class="ui flowing basic admission popup">
+          <div class="ui three column relaxed divided grid">
+            <div class="column">
+              <h4 class="ui header">Business</h4>
+              <div class="ui link list">
+                <a class="item">Design &amp; Urban Ecologies</a>
+                <a class="item">Fashion Design</a>
+                <a class="item">Fine Art</a>
+                <a class="item">Strategic Design</a>
+              </div>
+            </div>
+            <div class="column">
+              <h4 class="ui header">Liberal Arts</h4>
+              <div class="ui link list">
+                <a class="item">Anthropology</a>
+                <a class="item">Economics</a>
+                <a class="item">Media Studies</a>
+                <a class="item">Philosophy</a>
+              </div>
+            </div>
+            <div class="column">
+              <h4 class="ui header">Social Sciences</h4>
+              <div class="ui link list">
+                <a class="item">Food Studies</a>
+                <a class="item">Journalism</a>
+                <a class="item">Non Profit Management</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding-top: 12px">
+
+          <div style="text-align: center; padding: 12px">
+            <a href="" style="color:#479A7A">Submit a New Question <i class="write icon"></i></a>
+            <a href="" style>Receive Notifications <i class="alarm outline icon"></i></a>
+
+          </div>
           <div class="ui big fluid icon input">
             <input type="text" placeholder="Search questions...">
             <i class="search icon"></i>
@@ -244,7 +303,9 @@
         <div id="mentorspace-question-inside-block">
           <div class="ui segments">
             <div class="ui segment">
-              <p>Top</p>
+              <div class="author">
+                <img class="ui avatar image" src="images/students/shimoda.jpg"> Michele Shimoda asked: What do you look for when hiring a new graduate?
+              </div>
             </div>
             <div class="ui secondary segment">
               <p>Secondary Content</p>

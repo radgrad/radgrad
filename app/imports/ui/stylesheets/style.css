@@ -3,19 +3,6 @@
    If your page has a menubar, you will have to shift the body contents down 60 pixels or so.
    But you cannot globally alter the <body> element style here; you use a <div> and do it on a page-specific basis.
 */
-@import url('https://fonts.googleapis.com/css?family=Dosis');
-@import url('https://fonts.googleapis.com/css?family=Hind');
-
-.dosis{
-    font-family: 'Dosis', sans-serif !important;
-}
-
-.hind{
-    font-family: 'Hind', sans-serif;
-    font-weight: bold;
-    font-size: 3.4vw;
-    color: white;
-}
 
 #mentorspace-heading{
     alignment: center;
@@ -62,6 +49,6 @@
     background-color: white;
     margin: 0 12px 0 12px;
     border-radius: 5px;
-    max-height: 95%;
+    max-height: 90%;
     overflow: scroll;
 }
