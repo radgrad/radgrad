@@ -1,7 +1,54 @@
 <template name="Student_Home_Page">
-  <div class="ui text container">
+  <div style="color: white; border-radius: 0px" class="ui grey borderless inverted menu">
+    <div class="ui container">
+      <h3 style="padding-top: 8px">Hello Amy!</h3>
 
-    <h2>Welcome to the Student Home Page.</h2>
+      <a class="fitted right item">
+        <div class="ui search">
+          <div class="ui icon input">
+            <input class="prompt" type="text" placeholder="Search RadGrad...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+      </a>
+    </div>
+  </div>
 
+  <div class="ui equal width center aligned grid">
+    <div class="twelve wide black column">
+    </div>
+    <div class="four wide olive column">
+      <div class="ui container">
+        <h2>Current ICE points</h2>
+        <div style="margin-bottom:20px;" class="ui container">
+          <div style="background: lightblue" class="iceCircle"><h2>I</h2></div>
+          <div class="icePercent">10% (10/100)</div>
+          <div class="smallIceBattery"></div>
+          <div class="iceBattery">
+            <div style="width: 10px;" class="iceBatteryFill"></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;" class="ui container">
+          <div style="background: lightgreen" class="iceCircle"><h2>C</h2></div>
+          <div class="icePercent">77% (77/100)</div>
+          <div class="smallIceBattery"></div>
+          <div class="iceBattery">
+            <div style="width: 77px;" class="iceBatteryFill"></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;" class="ui container">
+          <div style="background: orange" class="iceCircle"><h2>E</h2></div>
+          <div class="icePercent">40% (40/100)</div>
+          <div class="smallIceBattery"></div>
+          <div class="iceBattery">
+            <div style="width: 40px;" class="iceBatteryFill"></div>
+          </div>
+        </div>
+        <a href="#">What is ICE?</a>
+      </div>
+    </div>
   </div>
 </template>

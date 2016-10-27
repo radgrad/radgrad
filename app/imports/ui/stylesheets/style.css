@@ -3,3 +3,51 @@
    If your page has a menubar, you will have to shift the body contents down 60 pixels or so.
    But you cannot globally alter the <body> element style here; you use a <div> and do it on a page-specific basis.
 */
+
+body {
+  padding-top: 47px; /* Move body of page below navbar*/
+}
+
+.iceCircle {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding-top: 5px;
+  display: inline-block;
+}
+
+.iceBattery {
+  width: 110px;
+  height:40px;
+  border:3px solid #000;
+  float: right;
+  border-radius: 10%;
+  display: inline-block;
+}
+
+.smallIceBattery {
+  width: 5px;
+  height:20px;
+  background-color: black;
+  float: right;
+  margin-right:5px;
+  margin-top: 10px;
+  display:inline-block;
+}
+
+.iceBatteryFill {
+  height:25px;
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+  display: inline-block;
+  background-color: black;
+}
+
+.icePercent {
+  float:right;
+  margin-right: 15px;
+  display: inline-block;
+  margin-top: 10px;
+}
