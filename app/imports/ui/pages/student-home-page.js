@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 
+
 Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
   // placeholder: typically you will put global subscriptions here if you remove the autopublish package.
 });
