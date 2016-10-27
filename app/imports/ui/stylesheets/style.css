@@ -21,12 +21,12 @@
     alignment: center;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #2F8260;
+    background-color: #C7C8CA;
     width: 100%;
 }
 
 #mentorspace-main-block{
-    background-color: #70BC2A;
+    background-color: #E1E2E4;
     padding-right: 0 !important;
     padding-bottom: 40px !important;
     max-height:100vh !important;
@@ -40,7 +40,7 @@
     overflow: scroll;
 }
 
-#mentorspace-list{
+#mentorspace-mentor-list{
     background-color: white;
     margin: 0 0 0 12px;
     border-radius: 5px;
@@ -51,3 +51,17 @@
     padding-bottom: 12px !important;
 }
 
+#mentorspace-question-block{
+    background-color: #FFFFFF;
+    padding-bottom: 40px !important;
+    max-height:100vh !important;
+    overflow:hidden;
+}
+
+#mentorspace-question-inside-block{
+    background-color: white;
+    margin: 0 12px 0 12px;
+    border-radius: 5px;
+    max-height: 95%;
+    overflow: scroll;
+}
