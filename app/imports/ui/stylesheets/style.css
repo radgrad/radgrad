@@ -10,7 +10,6 @@ body {
 
 .header-body {
   padding-top: 61px; /* Move body of page below navbar. */
-  color: #388E3C !important;
 }
 
 .landing-section-1 {
@@ -91,12 +90,4 @@ body {
 .ice-landing {
   line-height: 1.0em;
   width: 1.0em;
-}
-
-.bordered {
-  border: solid;
-}
-
-.ui.table {
-  color: #388E3C !important;
 }

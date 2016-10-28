@@ -7,7 +7,7 @@ import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { Users } from '../../api/user/UserCollection.js';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
-Template.Student_Degree_Planner_Page.onCreated(function appBodyOnCreated() {
+Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
   this.state = new ReactiveDict();
   this.autorun(() => {
     this.subscribe(Courses.getPublicationName());
@@ -19,7 +19,17 @@ Template.Student_Degree_Planner_Page.onCreated(function appBodyOnCreated() {
   });
 });
 
+Template.Student_Degree_Planner_Page.onRendered(function plannerOnRendered() {
+  // find the current semester
+});
+
 Template.Student_Degree_Planner_Page.helpers({
+  args() {
+    return {
+      currentSemesterID: Semesters.getCurrentSemester(),
+      studentUserName: 'alfredpersona',
+    };
+  },
 });
 
 Template.Student_Degree_Planner_Page.events({

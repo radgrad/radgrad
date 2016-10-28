@@ -89,13 +89,23 @@ class SemesterCollection extends BaseInstanceCollection {
     return (nospace) ? `${semesterDoc.term}${semesterDoc.year}` : `${semesterDoc.term} ${semesterDoc.year}`;
   }
 
-  // /**
-  //  * Returns the semesterID associated with the current semester based upon the current timestamp.
-  //  * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
-  //  */
-  // getThisSemester() {
-  //
-  // }
+  /**
+   * Returns the semesterID associated with the current semester based upon the current timestamp.
+   * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
+   */
+  getCurrentSemester() {
+    const year = moment().year();
+    const day = moment().dayOfYear();
+    let term = '';
+    if (day >= this.fallStart) {
+      term = this.FALL;
+    } else if (day >= this.summerStart) {
+      term = this.SUMMER;
+    } else {
+      term = this.SPRING;
+    }
+    return this.define({ term, year });
+  }
 }
 
 /**

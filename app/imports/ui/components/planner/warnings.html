@@ -1,9 +1,8 @@
 <template name="Warnings">
-  <div class="ui left aligned segment">
+  <div class="ui left aligned card">
+    <div class="ui top left attached label">Warnings</div>
     <div class="content">
-      <h2>Warnings</h2>
-      <div class="ui divider"></div>
-      <div style="height: 175px;">
+      <div>
         {{#each warning in warnings}}
           {{> Warning_Item (warningArgs warning)}}
           <p></p>
