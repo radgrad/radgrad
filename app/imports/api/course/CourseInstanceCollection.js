@@ -89,6 +89,16 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * @returns { boolean } If the course is an ICS course associated with courseInstanceID.
+   * @param courseInstanceID The course instance ID.
+   * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
+   */
+  isICS(courseInstanceID) {
+    this.assertDefined(courseInstanceID);
+    const courseID = this.findDoc(courseInstanceID).courseID;
+    return Courses.findDoc(courseID).number.substring(0, 3) === 'ICS';
+  }
+  /**
    * @returns {String} A formatted string representing the course instance.
    * @param courseInstanceID The course instance ID.
    * @throws {Meteor.Error} If not a valid ID.

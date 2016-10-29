@@ -1,0 +1,63 @@
+<template name="Future_Semester_Card">
+  <div class="ui center aligned segment">
+    <div class="ui top left attached label">{{title}}</div>
+    <div class="content">
+      <table class="ui structured table">
+        <tbody>
+        {{#each class in icsCourses}}
+          <tr class="courseInstance" data-position="right center">
+            <td>
+              {{class.note}}
+            </td>
+            <td>***</td>
+          </tr>
+          <div class="ui fluid popup bottom left transition hidden">
+            <h4 class="ui header">{{class.note}}</h4>
+            <div class="ui link list">
+              <a class="item inspect">Inspect</a>
+              <a class="item del">Delete</a>
+              <a class="item mov">Move</a>
+            </div>
+          </div>
+        {{/each}}
+        {{#each class in nonIcsCourses}}
+          <tr class="courseInstance">
+            <td>
+              {{class.note}}
+            </td>
+            <td>***</td>
+          </tr>
+          <div class="ui fluid popup bottom left transition hidden">
+            <h4 class="ui header">{{class.note}}</h4>
+            <div class="ui link list">
+              <a class="item inspect">Inspect</a>
+              <a class="item del">Delete</a>
+              <a class="item mov">Move</a>
+            </div>
+          </div>
+        {{/each}}
+        {{#each opp in opportunities}}
+          <tr class="courseInstance">
+            <td>
+              {{opp}}
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <p></p>
+    <div class="ui icon mini center floated circular button" data-position="top center"><i class="add icon"></i>
+    </div>
+    <div class="ui popup left transition hidden">
+      <div class="ui two column divided center aligned grid">
+        <div class="column">
+          <a href="#" id="courseAdd">Add Course</a>
+        </div>
+        <div class="column">
+          <a href="#" id="courseAdd">Add Opportunity</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

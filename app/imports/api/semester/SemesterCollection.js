@@ -19,6 +19,7 @@ class SemesterCollection extends BaseInstanceCollection {
     super('Semester', new SimpleSchema({
       term: { type: String },
       year: { type: Number },
+      sortBy: { type: Number },
       slugID: { type: SimpleSchema.RegEx.Id },
     }));
     this.SPRING = 'Spring';
@@ -55,13 +56,21 @@ class SemesterCollection extends BaseInstanceCollection {
     if (doc) {
       return doc._id;
     }
+    let sortBy = 0;
+    if (term === this.FALL) {
+      sortBy = year * 10 + 2;
+    } else if (term === this.SPRING) {
+      sortBy = year * 10;
+    } else {
+      sortBy = year * 10 + 1;
+    }
     // Otherwise define a new semester and add it to the collection if successful.
     const slug = `${term}-${year}`;
     if (Slugs.isDefined(slug)) {
       throw new Meteor.Error(`Slug is already defined for undefined semester: ${slug}`);
     }
     const slugID = Slugs.define({ name: slug, entityName: 'Semester' });
-    const semesterID = this._collection.insert({ term, year, slugID });
+    const semesterID = this._collection.insert({ term, year, sortBy, slugID });
     Slugs.updateEntityID(slugID, semesterID);
     return semesterID;
   }
@@ -89,13 +98,23 @@ class SemesterCollection extends BaseInstanceCollection {
     return (nospace) ? `${semesterDoc.term}${semesterDoc.year}` : `${semesterDoc.term} ${semesterDoc.year}`;
   }
 
-  // /**
-  //  * Returns the semesterID associated with the current semester based upon the current timestamp.
-  //  * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
-  //  */
-  // getThisSemester() {
-  //
-  // }
+  /**
+   * Returns the semesterID associated with the current semester based upon the current timestamp.
+   * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
+   */
+  getCurrentSemester() {
+    const year = moment().year();
+    const day = moment().dayOfYear();
+    let term = '';
+    if (day >= this.fallStart) {
+      term = this.FALL;
+    } else if (day >= this.summerStart) {
+      term = this.SUMMER;
+    } else {
+      term = this.SPRING;
+    }
+    return this.define({ term, year });
+  }
 }
 
 /**
