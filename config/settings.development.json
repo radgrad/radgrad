@@ -1,3 +1,29 @@
 {
-  "defaultAccount": {"username": "John", "password": "changeme"}
+  "defaultAccount": {
+    "username": "John",
+    "password": "changeme"
+  },
+  "exampleStudents": [
+    {
+      "firstName": "Alfred",
+      "lastName": "Persona",
+      "slug": "alfredpersona",
+      "email": "alfred@hawaii.edu",
+      "password": "changeAlfred"
+    },
+    {
+      "firstName": "Betty",
+      "lastName": "Keanu",
+      "slug": "bettykeanu",
+      "email": "betty@hawaii.edu",
+      "password": "changeBetty"
+    },
+    {
+      "firstName": "Charley",
+      "lastName": "Sherry",
+      "slug": "charleysherry",
+      "email": "charley@hawaii.edu",
+      "password": "changeCharley"
+    }
+  ]
 }
