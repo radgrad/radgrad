@@ -5,101 +5,134 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
+const fallIcsCourses = () => {
+  const ret = [];
+  if (Template.instance().state.get('year').semesters[Semesters.FALL]) {
+    const user = Users.find({ username: Meteor.user().username }).fetch();
+    const courses = CourseInstances.find({
+      semesterID: Template.instance().state.get('year').semesters[Semesters.FALL]._id,
+      studentID: user[0]._id,
+    }).fetch();
+    courses.forEach((c) => {
+      if (CourseInstances.isICS(c._id)) {
+        ret.push(c);
+      }
+    });
+  }
+  return ret;
+};
+
+const fallNonIcsCourses = () => {
+  const ret = [];
+  if (Template.instance().state.get('year').semesters[Semesters.FALL]) {
+    const user = Users.find({ username: Meteor.user().username }).fetch();
+    const courses = CourseInstances.find({
+      semesterID: Template.instance().state.get('year').semesters[Semesters.FALL]._id,
+      studentID: user[0]._id,
+    }).fetch();
+    courses.forEach((c) => {
+      if (!CourseInstances.isICS(c._id)) {
+        ret.push(c);
+      }
+    });
+  }
+  return ret;
+};
+
+const springIcsCourses = () => {
+  const ret = [];
+  if (Template.instance().state.get('year').semesters[Semesters.SPRING]) {
+    const user = Users.find({ username: Meteor.user().username }).fetch();
+    const courses = CourseInstances.find({
+      semesterID: Template.instance().state.get('year').semesters[Semesters.SPRING]._id,
+      studentID: user[0]._id,
+    }).fetch();
+    courses.forEach((c) => {
+      if (CourseInstances.isICS(c._id)) {
+        ret.push(c);
+      }
+    });
+  }
+  return ret;
+};
+
+const springNonIcsCourses = () => {
+  const ret = [];
+  if (Template.instance().state.get('year').semesters[Semesters.SPRING]) {
+    const user = Users.find({ username: Meteor.user().username }).fetch();
+    const courses = CourseInstances.find({
+      semesterID: Template.instance().state.get('year').semesters[Semesters.SPRING]._id,
+      studentID: user[0]._id,
+    }).fetch();
+    courses.forEach((c) => {
+      if (!CourseInstances.isICS(c._id)) {
+        ret.push(c);
+      }
+    });
+  }
+  return ret;
+};
+
+const summerIcsCourses = () => {
+  const ret = [];
+  if (Template.instance().state.get('year').semesters[Semesters.SUMMER]) {
+    const user = Users.find({ username: Meteor.user().username }).fetch();
+    const courses = CourseInstances.find({
+      semesterID: Template.instance().state.get('year').semesters[Semesters.SUMMER]._id,
+      studentID: user[0]._id,
+    }).fetch();
+    courses.forEach((c) => {
+      if (CourseInstances.isICS(c._id)) {
+        ret.push(c);
+      }
+    });
+  }
+  return ret;
+};
+
+const summerNonIcsCourses = () => {
+  const ret = [];
+  if (Template.instance().state.get('year').semesters[Semesters.SUMMER]) {
+    const user = Users.find({ username: Meteor.user().username }).fetch();
+    const courses = CourseInstances.find({
+      semesterID: Template.instance().state.get('year').semesters[Semesters.SUMMER]._id,
+      studentID: user[0]._id,
+    }).fetch();
+    courses.forEach((c) => {
+      if (!CourseInstances.isICS(c._id)) {
+        ret.push(c);
+      }
+    });
+  }
+  return ret;
+};
+
 Template.Academic_Year.helpers({
   fallIcsCourses() {
-    const ret = [];
-    if (Template.instance().state.get('year').semesters[Semesters.FALL]) {
-      const user = Users.find({ username: Meteor.user().username }).fetch();
-      const courses = CourseInstances.find({
-        semesterID: Template.instance().state.get('year').semesters[Semesters.FALL]._id,
-        studentID: user[0]._id,
-      }).fetch();
-      courses.forEach((c) => {
-        if (CourseInstances.isICS(c._id)) {
-          ret.push(c);
-        }
-      });
-    }
-    return ret;
+    return fallIcsCourses();
   },
   springIcsCourses() {
-    const ret = [];
-    if (Template.instance().state.get('year').semesters[Semesters.SPRING]) {
-      const user = Users.find({ username: Meteor.user().username }).fetch();
-      const courses = CourseInstances.find({
-        semesterID: Template.instance().state.get('year').semesters[Semesters.SPRING]._id,
-        studentID: user[0]._id,
-      }).fetch();
-      courses.forEach((c) => {
-        if (CourseInstances.isICS(c._id)) {
-          ret.push(c);
-        }
-      });
-    }
-    return ret;
+    return springIcsCourses();
   },
   summerIcsCourses() {
-    const ret = [];
-    if (Template.instance().state.get('year').semesters[Semesters.SUMMER]) {
-      const user = Users.find({ username: Meteor.user().username }).fetch();
-      const courses = CourseInstances.find({
-        semesterID: Template.instance().state.get('year').semesters[Semesters.SUMMER]._id,
-        studentID: user[0]._id,
-      }).fetch();
-      courses.forEach((c) => {
-        if (CourseInstances.isICS(c._id)) {
-          ret.push(c);
-        }
-      });
-    }
-    return ret;
+    return summerIcsCourses();
   },
   fallNonIcsCourses() {
-    const ret = [];
-    if (Template.instance().state.get('year').semesters[Semesters.FALL]) {
-      const user = Users.find({ username: Meteor.user().username }).fetch();
-      const courses = CourseInstances.find({
-        semesterID: Template.instance().state.get('year').semesters[Semesters.FALL]._id,
-        studentID: user[0]._id,
-      }).fetch();
-      courses.forEach((c) => {
-        if (!CourseInstances.isICS(c._id)) {
-          ret.push(c);
-        }
-      });
-    }
-    return ret;
+    return fallNonIcsCourses();
   },
   springNonIcsCourses() {
-    const ret = [];
-    if (Template.instance().state.get('year').semesters[Semesters.SPRING]) {
-      const user = Users.find({ username: Meteor.user().username }).fetch();
-      const courses = CourseInstances.find({
-        semesterID: Template.instance().state.get('year').semesters[Semesters.SPRING]._id,
-        studentID: user[0]._id,
-      }).fetch();
-      courses.forEach((c) => {
-        if (!CourseInstances.isICS(c._id)) {
-          ret.push(c);
-        }
-      });
-    }
-    return ret;
+    return springNonIcsCourses();
   },
   summerNonIcsCourses() {
-    const ret = [];
-    if (Template.instance().state.get('year').semesters[Semesters.SUMMER]) {
-      const user = Users.find({ username: Meteor.user().username }).fetch();
-      const courses = CourseInstances.find({
-        semesterID: Template.instance().state.get('year').semesters[Semesters.SUMMER]._id,
-        studentID: user[0]._id,
-      }).fetch();
-      courses.forEach((c) => {
-        if (!CourseInstances.isICS(c._id)) {
-          ret.push(c);
-        }
-      });
+    return summerNonIcsCourses();
+  },
+  fallPaddingRows() {
+    const len = 7 - fallIcsCourses().length - fallNonIcsCourses().length;
+    const ret = new Array(len);
+    for (let i = 0; i < len; i++) {
+      ret[i] = ' ';
     }
+    console.log(ret);
     return ret;
   },
 });
