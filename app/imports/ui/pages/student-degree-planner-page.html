@@ -1,16 +1,8 @@
 <template name="Student_Degree_Planner_Page">
   {{#if Template.subscriptionsReady}}
-    <div class="ui grid container">
-
-      <div class="row">
-          {{> Future_Semesters args}}
-      </div>
-      <div class="row">
-        {{> Inspector_Panel args}}
-      </div>
-      <div class="row">
-        {{> Past_Semesters args}}
-      </div>
+    <div class="ui segment container">
+      <div class="ui top left attached label">Degree Planner</div>
+        {{> Academic_Plan args}}
     </div>
   {{else}}
     {{> Loading}}
