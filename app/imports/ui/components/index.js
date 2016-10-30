@@ -1,3 +1,8 @@
+import './planner/';
+
+import './ice-badge.html';
+import './ice-badge.js';
+
 import './advisor-tab-student.html';
 import './advisor-tab-student.js';
 

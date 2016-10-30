@@ -1,1 +1,1 @@
-import './SemesterCollection';
+import './SemesterCollection.js';

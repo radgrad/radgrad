@@ -1,0 +1,13 @@
+<template name="Warnings">
+  <div class="ui left aligned card">
+    <div class="ui top left attached label">Warnings</div>
+    <div class="content">
+      <div>
+        {{#each warning in warnings}}
+          {{> Warning_Item (warningArgs warning)}}
+          <p></p>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>
