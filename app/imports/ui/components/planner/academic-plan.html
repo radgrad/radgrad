@@ -1,7 +1,7 @@
 <template name="Academic_Plan">
   <div class="ui cards">
     {{#each year in years}}
-      {{> Academic_Year year=year}}
+      {{> Academic_Year (args year)}}
     {{/each}}
   </div>
 

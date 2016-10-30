@@ -7,21 +7,21 @@
     {
       "firstName": "Alfred",
       "lastName": "Persona",
-      "slug": "alfredpersona",
+      "slug": "alfred",
       "email": "alfred@hawaii.edu",
       "password": "changeAlfred"
     },
     {
       "firstName": "Betty",
       "lastName": "Keanu",
-      "slug": "bettykeanu",
+      "slug": "betty",
       "email": "betty@hawaii.edu",
       "password": "changeBetty"
     },
     {
       "firstName": "Charley",
       "lastName": "Sherry",
-      "slug": "charleysherry",
+      "slug": "charley",
       "email": "charley@hawaii.edu",
       "password": "changeCharley"
     }

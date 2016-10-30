@@ -43,6 +43,12 @@ const academicYears = () => {
 };
 
 Template.Academic_Plan.helpers({
+  args(ay) {
+    return {
+      year: ay,
+      currentSemester: Semesters.findDoc(Semesters.getCurrentSemester()),
+    };
+  },
   years() {
     const years = academicYears();
     const ret = [];

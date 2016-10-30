@@ -126,6 +126,47 @@ Template.Academic_Year.helpers({
   summerNonIcsCourses() {
     return summerNonIcsCourses();
   },
+  fallArgs() {
+    if (Template.instance().state.get('currentSemester') && Template.instance().state.get('year')) {
+      const currentSemester = Template.instance().state.get('currentSemester');
+      const semesterID = Semesters.define({
+        year: Template.instance().state.get('year').year,
+        term: Semesters.FALL,
+      });
+      const semester = Semesters.findDoc(semesterID);
+      return { currentSemester, semester };
+    }
+    return null;
+  },
+  springArgs() {
+    if (Template.instance().state.get('currentSemester') && Template.instance().state.get('year')) {
+      const currentSemester = Template.instance().state.get('currentSemester');
+      const semesterID = Semesters.define({
+        year: Template.instance().state.get('year').year + 1,
+        term: Semesters.SPRING,
+      });
+      const semester = Semesters.findDoc(semesterID);
+      return { currentSemester, semester };
+    }
+    return null;
+  },
+  summerArgs() {
+    try {
+      if (Template.instance().state.get('currentSemester') && Template.instance().state.get('year')) {
+        const currentSemester = Template.instance().state.get('currentSemester');
+        const semesterID = Semesters.define({
+          year: Template.instance().state.get('year').year + 1,
+          term: Semesters.SUMMER,
+        });
+        const semester = Semesters.findDoc(semesterID);
+        return { currentSemester, semester };
+      }
+    } catch (e) {
+      console.log(e);
+      console.log(`${Template.instance().state.get('year').year} SUMMER`);
+    }
+    return null;
+  },
   fallPaddingRows() {
     const len = 7 - fallIcsCourses().length - fallNonIcsCourses().length;
     const ret = new Array(len);
@@ -137,15 +178,18 @@ Template.Academic_Year.helpers({
   },
 });
 
-Template.Academic_Year.events({
-});
+Template.Academic_Year.events({});
 
 Template.Academic_Year.onCreated(function academicYearOnCreated() {
   this.state = new ReactiveDict();
   this.state.set('year', this.data.year);
+  this.state.set('currentSemester', this.data.currentSemester);
 });
 
 Template.Academic_Year.onRendered(function academicYearOnRendered() {
+  // console.log(this.data);
+  this.state.set('year', this.data.year);
+  this.state.set('currentSemester', this.data.currentSemester);
 });
 
 Template.Academic_Year.onDestroyed(function academicYearOnDestroyed() {

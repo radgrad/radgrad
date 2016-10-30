@@ -1,74 +1,8 @@
 <template name="Academic_Year">
   <div class="ui card">
     <div class="ui top left attached label">Year {{year.year}}</div>
-    <table class="ui structured table">
-      <thead>
-      <tr>
-        <th colspan="3">Fall</th>
-      </tr>
-      </thead>
-      <tbody>
-      {{#each course in fallIcsCourses}}
-      <tr class="top aligned">
-        <td><strong>{{course.note}}</strong></td>
-        <td><strong>{{course.creditHrs}}</strong></td>
-        <td><strong>{{course.grade}}</strong></td>
-      </tr>
-      {{/each}}
-      {{#each course in fallNonIcsCourses}}
-        <tr class="top aligned">
-          <td>{{course.note}}</td>
-          <td>{{course.creditHrs}}</td>
-          <td>{{course.grade}}</td>
-        </tr>
-      {{/each}}
-      </tbody>
-    </table>
-    <table class="ui structured table">
-      <thead>
-      <tr>
-        <th colspan="3">Spring</th>
-      </tr>
-      </thead>
-      <tbody>
-      {{#each course in springIcsCourses}}
-        <tr class="top aligned">
-          <td><strong>{{course.note}}</strong></td>
-          <td><strong>{{course.creditHrs}}</strong></td>
-          <td><strong>{{course.grade}}</strong></td>
-        </tr>
-      {{/each}}
-      {{#each course in springNonIcsCourses}}
-        <tr class="top aligned">
-          <td>{{course.note}}</td>
-          <td>{{course.creditHrs}}</td>
-          <td>{{course.grade}}</td>
-        </tr>
-      {{/each}}
-      </tbody>
-    </table>
-    <table class="ui structured table">
-      <thead>
-      <tr>
-        <th colspan="3">Summer</th>
-      </tr>
-      </thead>
-      <tbody>
-      {{#each course in summerIcsCourses}}
-        <tr class="top aligned">
-          <td><strong>{{course.note}}</strong></td>
-          <td><strong>{{course.creditHrs}}</strong></td>
-          <td><strong>{{course.grade}}</strong></td>
-        </tr>
-      {{/each}}
-      {{#each course in summerNonIcsCourses}}
-        <tr class="top aligned">
-          <td>{{course.note}}</td>
-          <td>{{course.creditHrs}}</td>
-          <td>{{course.grade}}</td>
-        </tr>
-      {{/each}}
-      </tbody>
-    </table>
+    {{> Academic_Semester fallArgs}}
+    {{> Academic_Semester springArgs}}
+    {{> Academic_Semester summerArgs}}
   </div>
 </template>

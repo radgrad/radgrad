@@ -22,3 +22,6 @@ import './academic-plan.html';
 import './academic-plan.js';
 import './academic-year.html';
 import './academic-year.js';
+import './academic-semester.html';
+import './academic-semester.js';
+
