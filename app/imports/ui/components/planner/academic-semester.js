@@ -61,18 +61,17 @@ Template.Academic_Semester.helpers({
 ;
 
 Template.Academic_Semester.events({
-  'drop .bodyDrop'(event, target) {
+  'drop .bodyDrop'(event) {
     event.preventDefault();
-    console.log(event.originalEvent.dataTransfer.getData('text'));
+    // console.log(event.originalEvent.dataTransfer.getData('text'));
     if (Template.instance().state.get('semester')) {
       const courses = CourseInstances.find({
         note: event.originalEvent.dataTransfer.getData('text'),
         studentID: Meteor.userId(),
       }).fetch();
       if (courses.length > 0) {
-        console.log(courses[0]);
-        // CourseInstances.update({ _id: courses[0]._id },
-        //     { $set: { semesterID: Template.instance().state.get('semester')._id } });
+        // console.log(courses[0]);
+        CourseInstances.updateSemester(courses[0]._id, Template.instance().state.get('semester')._id);
       }
     }
   },
