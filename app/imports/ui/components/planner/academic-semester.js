@@ -12,6 +12,13 @@ Template.Academic_Semester.helpers({
     }
     return null;
   },
+  year() {
+    const semester = Template.instance().state.get('semester');
+    if (semester) {
+      return semester.year;
+    }
+    return null;
+  },
   isFuture() {
     const semester = Template.instance().state.get('semester');
     const currentSemester = Template.instance().state.get('currentSemester');
@@ -54,7 +61,21 @@ Template.Academic_Semester.helpers({
 ;
 
 Template.Academic_Semester.events({
-  // add your events here
+  'drop .bodyDrop'(event, target) {
+    event.preventDefault();
+    console.log(event.originalEvent.dataTransfer.getData('text'));
+    if (Template.instance().state.get('semester')) {
+      const courses = CourseInstances.find({
+        note: event.originalEvent.dataTransfer.getData('text'),
+        studentID: Meteor.userId(),
+      }).fetch();
+      if (courses.length > 0) {
+        console.log(courses[0]);
+        // CourseInstances.update({ _id: courses[0]._id },
+        //     { $set: { semesterID: Template.instance().state.get('semester')._id } });
+      }
+    }
+  },
 });
 
 Template.Academic_Semester.onCreated(function academicSemesterOnCreate() {

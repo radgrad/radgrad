@@ -5,13 +5,21 @@
       <th colspan="3">{{semesterName}}</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="bodyDrop" ondrop="drop(event)" ondragover="allowDrop(event)">
     {{#each course in icsCourses}}
-      <tr class="top aligned">
-        <td><strong>{{course.note}}</strong></td>
-        <td><strong>{{course.creditHrs}}</strong></td>
-        <td><strong>{{course.grade}}</strong></td>
-      </tr>
+      {{#if isFuture}}
+        <tr id="{{course.note}}" draggable="true" ondragstart="drag(event)">
+          <td><strong>{{course.note}}</strong></td>
+          <td><strong>{{course.creditHrs}}</strong></td>
+          <td><strong>{{course.grade}}</strong></td>
+        </tr>
+      {{else}}
+        <tr>
+          <td><strong>{{course.note}}</strong></td>
+          <td><strong>{{course.creditHrs}}</strong></td>
+          <td><strong>{{course.grade}}</strong></td>
+        </tr>
+      {{/if}}
     {{/each}}
     {{#each course in nonIcsCourses}}
       <tr class="top aligned">
@@ -20,6 +28,7 @@
         <td>{{course.grade}}</td>
       </tr>
     {{/each}}
+    <tr><td colspan="3"></td></tr>
     </tbody>
   </table>
 </template>

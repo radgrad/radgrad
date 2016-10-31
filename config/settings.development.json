@@ -24,6 +24,13 @@
       "slug": "charley",
       "email": "charley@hawaii.edu",
       "password": "changeCharley"
+    },
+    {
+      "firstName": "Dani",
+      "lastName": "Choo",
+      "slug": "dani",
+      "email": "dani@hawaii.edu",
+      "password": "changeDani"
     }
   ]
 }
