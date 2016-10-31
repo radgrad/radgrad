@@ -5,7 +5,51 @@
 */
 
 body {
-  /*padding-top: 61px;  !* Move body of page below navbar. *!*/
+  padding-top: 47px; /* Move body of page below navbar*/
+}
+
+.iceCircle {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding-top: 5px;
+  display: inline-block;
+}
+
+.iceBattery {
+  width: 110px;
+  height:40px;
+  border:3px solid #000;
+  float: right;
+  border-radius: 10%;
+  display: inline-block;
+}
+
+.smallIceBattery {
+  width: 5px;
+  height:20px;
+  background-color: black;
+  float: right;
+  margin-right:5px;
+  margin-top: 10px;
+  display:inline-block;
+}
+
+.iceBatteryFill {
+  height:25px;
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+  display: inline-block;
+  background-color: black;
+}
+
+.icePercent {
+  float:right;
+  margin-right: 15px;
+  display: inline-block;
+  margin-top: 10px;
 }
 
 .header-body {
@@ -90,4 +134,54 @@ body {
 .ice-landing {
   line-height: 1.0em;
   width: 1.0em;
+}
+
+
+#mentorspace-heading{
+    alignment: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #C7C8CA;
+    width: 100%;
+}
+
+#mentorspace-main-block{
+    background-color: #E1E2E4;
+    padding-right: 0 !important;
+    padding-bottom: 40px !important;
+    max-height:100vh !important;
+}
+
+#mentorspace-main-inside-block{
+    background-color: white;
+    margin: 0 12px 0 12px;
+    border-radius: 5px;
+    max-height: 90%;
+    overflow: scroll;
+}
+
+#mentorspace-mentor-list{
+    background-color: white;
+    margin: 0 0 0 12px;
+    border-radius: 5px;
+}
+
+.mentorspace-item-padding{
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+}
+
+#mentorspace-question-block{
+    background-color: #FFFFFF;
+    padding-bottom: 40px !important;
+    max-height:100vh !important;
+    overflow:hidden;
+}
+
+#mentorspace-question-inside-block{
+    background-color: white;
+    margin: 0 12px 0 12px;
+    border-radius: 5px;
+    max-height: 90%;
+    overflow: scroll;
 }
