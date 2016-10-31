@@ -1,28 +1,17 @@
 <template name="Student_Home">
 
-  <div class="ui top fixed borderless menu">
-    <div class="ui container">
-      <a style="float: left;" class="item"><img src="/images/radgrad_logo.png"></a>
+  <div class="ui top fixed menu">
+      <a class="item"><img src="/images/radgrad_logo.png"></a>
       <a class="item" href="{{pathFor 'Home_Page'}}"><h1>RadGrad</h1></a>
-      <div class="ui right dropdown item">
-        <div class="text">Site Map</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          <a class="{{ isActiveRoute 'Landing_Page'}} item" href="{{ pathFor 'Landing_Page' }}">Landing Page</a>
-          <a class="{{ isActiveRoute 'Student_Home_Page'}} item" href="{{ pathFor 'Student_Home_Page' }}">Student Home Page</a>
-          <a class="{{ isActiveRoute 'Admin_Home_Page'}} item" href="{{ pathFor 'Admin_Home_Page' }}">Admin Home Page</a>
-          <a class="{{ isActiveRoute 'Advisor_Home_Page'}} item" href="{{ pathFor 'Advisor_Home_Page' }}">Advisor Home Page</a>
-          <a class="{{ isActiveRoute 'Mentor_Home_Page'}} item" href="{{ pathFor 'Mentor_Home_Page' }}">Mentor Home Page</a>
-          <a class="{{ isActiveRoute 'Student_Degree_Planner_Page'}} item" href="{{ pathFor 'Student_Degree_Planner_Page' }}">Student Degree Planner Page</a>
-          <a class="{{ isActiveRoute 'Student_MentorSpace_Page'}} item" href="{{ pathFor 'Student_MentorSpace_Page' }}">Student MentorSpace Page</a>
-
-        </div>
+      <div class="right menu">
+        <a class="item"><img style="border-radius:50px;" src="/images/landing/shimoda.jpg"></a>
+        <a class="item"><i style="color:darkgrey" class="big alarm outline icon"></i></a>
+        <a class="item"><i style="color:darkgrey" class="big setting icon"></i></a>
       </div>
-    </div>
   </div>
 
 
-  <div class="ui inverted menu">
+  <div style="border-radius:0px; margin-top:61px; background-color: #484848;" class="ui top fixed inverted six item fitted menu">
     <div class="ui container">
       <div class="header item">
         Home
@@ -41,9 +30,6 @@
       </a>
       <a class="item">
         MentorSpace
-      </a>
-      <a class="item">
-        Account Settings
       </a>
     </div>
   </div>

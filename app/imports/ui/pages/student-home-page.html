@@ -1,38 +1,41 @@
 <template name="Student_Home_Page">
 
-    <div class="ui container">
-
-      <div style="margin-top: 120px; margin-left: 200px;" class="ui vertical left fixed text menu">
+  <div style="margin-top: 20px;" class="ui  container">
+  <div class="ui grid">
+    <div class="four wide column">
+      <div class="ui vertical text menu">
         <a class="active item" data-tab="tab-name">
-          Home
+          Current ICE Points
         </a>
         <a class="item" data-tab="tab-name2">
-          Schedule Planner
+          Recommendations
         </a>
         <a class="item" data-tab="tab-name3">
-          Course Explorer
+          Warnings
         </a>
         <a class="item" data-tab="tab-name3">
-          Interest Explorer
+          Schedule
         </a>
         <a class="item" data-tab="tab-name3">
-          Career Goal Explorer
+          Interests
         </a>
         <a class="item" data-tab="tab-name3">
-          MentorSpace
-        </a>
-        <a class="item" data-tab="tab-name3">
-          Account Settings
+          Career Goals
         </a>
       </div>
-
-      <div style="margin-left: 250px;" data-tab="tab-name">
-        <div class="ui cards">
-        {{> Ice }}
-        {{> Warn_Recommend }}
-        {{> Interests }}
-        {{> Career_Goals }}
+    </div>
+    <div class="twelve wide stretched column">
+      <div data-tab="tab-name">
+        <div class="ui container">
+          <div class="ui cards">
+            {{> Ice }}
+            {{> Warn_Recommend }}
+            {{> Interests }}
+            {{> Career_Goals }}
+          </div>
         </div>
       </div>
+    </div>
+  </div>
     </div>
 </template>
