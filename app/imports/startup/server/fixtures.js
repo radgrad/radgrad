@@ -16,7 +16,9 @@ import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { courseDefinitions } from './icsdata/CourseDefinitions.js';
 import { processStarCsvData } from '/imports/api/star/StarProcessor';
 import { interestTypeDefinitions, interestDefinitions } from '/imports/startup/server/icsdata/InterestDefinitions';
-import { opportunityDefinitions, opportunityTypeDefinitions }
+import {
+    opportunityDefinitions, opportunityTypeDefinitions
+}
     from '/imports/startup/server/icsdata/OpportunityDefinitions';
 import { careerGoalDefinitions } from '/imports/startup/server/icsdata/CareerGoalDefinitions';
 import { userDefinitions } from '/imports/startup/server/icsdata/UserDefinitions';
@@ -62,19 +64,18 @@ Meteor.startup(() => {
     console.log('Defining Courses');
     courseDefinitions.map((definition) => Courses.define(definition));
   }
-  // load Alfred example student.
-  if (Users.find({ username: 'alfredpersona' }).count() === 0) {
-    const starDataPath = 'testdata/StarPersonaAlfred.csv';
-    const studentID = Users.define({
-      firstName: 'Alfred',
-      lastName: 'Persona',
-      slug: 'alfredpersona',
-      email: 'alfred@hawaii.edu',
-      role: ROLE.STUDENT,
-      password: 'foo' });
-    const studentSlug = Users.findSlugByID(studentID);
-    const csvData = Assets.getText(starDataPath);
-    const courseInstanceDefinitions = processStarCsvData(studentSlug, csvData);
-    courseInstanceDefinitions.map((definition) => CourseInstances.define(definition));
+  if (!!Meteor.settings.exampleStudents) {
+    Meteor.settings.exampleStudents.forEach((student) => {
+      if (Users.find({ username: student.slug }).count() === 0) {
+        console.log(`defining ${student.slug}`);
+        student.role = ROLE.STUDENT;
+        const studentID = Users.define(student);
+        const starDataPath = `testdata/Star${student.firstName}.csv`;
+        const studentSlug = Users.findSlugByID(studentID);
+        const csvData = Assets.getText(starDataPath);
+        const courseInstanceDefinitions = processStarCsvData(studentSlug, csvData);
+        courseInstanceDefinitions.map((definition) => CourseInstances.define(definition));
+      }
+    });
   }
 });

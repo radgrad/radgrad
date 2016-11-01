@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
@@ -27,7 +28,7 @@ Template.Student_Degree_Planner_Page.helpers({
   args() {
     return {
       currentSemesterID: Semesters.getCurrentSemester(),
-      studentUserName: 'alfredpersona',
+      studentUserName: Meteor.user().username,
     };
   },
 });
