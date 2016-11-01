@@ -98,6 +98,18 @@ class CourseInstanceCollection extends BaseCollection {
     const courseID = this.findDoc(courseInstanceID).courseID;
     return Courses.findDoc(courseID).number.substring(0, 3) === 'ICS';
   }
+
+  /**
+   * Updates the CourseInstance's Semester.
+   * @param courseInstanceID The course instance ID.
+   * @param semesterID The semester id.
+   */
+  updateSemester(courseInstanceID, semesterID) {
+    this.assertDefined(courseInstanceID);
+    Semesters.assertSemester(semesterID);
+    this._collection.update({ _id: courseInstanceID }, { $set: { semesterID } });
+  }
+
   /**
    * @returns {String} A formatted string representing the course instance.
    * @param courseInstanceID The course instance ID.
