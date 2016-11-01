@@ -1,263 +1,41 @@
 <template name="Student_Home_Page">
-  <div style="color: white; border-radius: 0px" class="ui grey borderless inverted menu">
-    <div class="ui container">
-      <h3 style="padding-top: 8px">Hello Amy!</h3>
 
-      <a class="fitted right item">
-        <div class="ui right labeled input">
-          <input type="text" placeholder="Search...">
-          <div class="ui dropdown label">
-            <div class="text">Courses</div>
-            <i class="dropdown icon"></i>
-            <div class="menu">
-              <div class="item">Users</div>
-              <div class="item">Opportunities</div>
-              <div class="item">Interests</div>
-            </div>
-          </div>
-        </div>
-      </a>
+  <div style="margin-top: 20px;" class="ui  container">
+  <div class="ui grid">
+    <div class="four wide column">
+      <div class="ui vertical text menu">
+        <a class="active item" data-tab="tab-name">
+          Current ICE Points
+        </a>
+        <a class="item" data-tab="tab-name2">
+          Recommendations
+        </a>
+        <a class="item" data-tab="tab-name3">
+          Warnings
+        </a>
+        <a class="item" data-tab="tab-name3">
+          Schedule
+        </a>
+        <a class="item" data-tab="tab-name3">
+          Interests
+        </a>
+        <a class="item" data-tab="tab-name3">
+          Career Goals
+        </a>
+      </div>
     </div>
-  </div>
-
-  <div class="ui equal width center aligned grid">
-    <div class="twelve wide column">
-      <h2>Degree Plan Summary</h2>
-      <table style="margin-left:40px" class="ui fixed small celled green collapsing definition table">
-        <thead>
-        <tr><th></th>
-          <th>Spring 2015</th>
-          <th>Fall 2015</th>
-          <th>Spring 2016</th>
-          <th>Fall 2016</th>
-          <th>Spring 2017</th>
-          <th>Fall 2017</th>
-          <th>Spring 2018</th>
-          <th>Fall 2018</th>
-        </tr></thead>
-        <tbody>
-        <tr>
-          <td>Courses</td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ICS 111</a></td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ICS 211</a></td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ICS 212</a></td>
-          <td class="selectable"><a href="#">ICS 332</a></td>
-          <td class="disabled">ICS 414</td>
-          <td class="disabled">ICS 321+</td>
-          <td class="disabled">ICS 400+</td>
-          <td class="disabled">ICS 400+</td>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ICS 141</a></td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ICS 241</a></td>
-          <td class="selectable negative"><a href="#"><i class="attention icon"></i>ICS 311</a></td>
-          <td class="selectable"><a href="#">ICS 314</a></td>
-          <td class="disabled">ICS 331</td>
-          <td class="disabled">ICS 400+</td>
-          <td class="disabled">ICS 400+</td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td class="disabled">ICS 400+</td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-        </tr>
-
-
-        <tr>
-          <td>Extra Curricular</td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ACM</a></td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ACM</a></td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>ACM</a></td>
-          <td class="selectable"><a href="#">ACM</a></td>
-          <td class="disabled">ACM</td>
-          <td class="disabled">ACM</td>
-          <td class="disabled">ACM</td>
-          <td class="disabled">ACM</td>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td class="selectable positive"><a href="#"><i class="icon checkmark"></i>Hackathon</a></td>
-          <td class="selectable"><a href="#">Hackathon</a></td>
-          <td class="disabled">Hackathon</td>
-          <td class="disabled">Hackathon</td>
-          <td class="disabled">Hackathon</td>
-          <td class="disabled">Hackathon</td>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td><a href="#"><i style="float:right" class="add green square icon"></i></a></td>
-          <td class="disabled">Project</td>
-          <td class="disabled">Internship</td>
-        </tr>
-        </tbody></table>
-      <a href="#">View Adviser Notes</a>
-
-      <div style="margin-top:20px" class="ui center aligned grid">
-        <div class="six wide column">
-          <h2>Interests</h2>
-          <div class="ui list">
-              <div class="item">
-                <i class="thumbs up icon"></i>
-                <div class="content">
-                  Software Engineering
-                </div>
-              </div>
-              <div class="item">
-                <i class="thumbs up icon"></i>
-                <div class="content">
-                  Big Data
-                </div>
-              </div>
-              <div class="item">
-                <i class="thumbs up icon"></i>
-                <div class="content">
-                  Machine Learning
-                </div>
-              </div>
-              <div class="item">
-                <i class="thumbs up icon"></i>
-                <div class="content">
-                  Artificial Intelligence
-                </div>
-              </div>
-            </div>
-          <div class="ui input">
-            <input type="text" placeholder="Add Interest">
-          </div>
-        </div>
-        <div class="six wide column">
-          <h2>Career Goals</h2>
-          <div class="ui list">
-            <div class="item">
-              <i class="thumbs up icon"></i>
-              <div class="content">
-                Silicon Valley
-              </div>
-            </div>
-            <div class="item">
-              <i class="thumbs up icon"></i>
-              <div class="content">
-                Graduate School
-              </div>
-            </div>
-            <div class="item">
-              <i class="thumbs up icon"></i>
-              <div class="content">
-                Data Scientist
-              </div>
-            </div>
-            <div class="item">
-              <i class="thumbs up icon"></i>
-              <div class="content">
-                Software Engineer
-              </div>
-            </div>
-          </div>
-          <div class="ui input">
-            <input type="text" placeholder="Add career goal">
+    <div class="twelve wide stretched column">
+      <div data-tab="tab-name">
+        <div class="ui container">
+          <div class="ui cards">
+            {{> Ice }}
+            {{> Warn_Recommend }}
+            {{> Interests }}
+            {{> Career_Goals }}
           </div>
         </div>
       </div>
-
-    </div>
-
-
-
-    <div class="four wide olive column">
-      <div class="ui container">
-        <h2>Current ICE points</h2>
-        <div style="margin-bottom:20px;" class="ui container">
-          <div style="background: lightblue" class="iceCircle"><h2>I</h2></div>
-          <div class="icePercent">10% (10/100)</div>
-          <div class="smallIceBattery"></div>
-          <div class="iceBattery">
-            <div style="width: 10px;" class="iceBatteryFill"></div>
-          </div>
-        </div>
-
-        <div style="margin-bottom:20px;" class="ui container">
-          <div style="background: lightgreen" class="iceCircle"><h2>C</h2></div>
-          <div class="icePercent">77% (77/100)</div>
-          <div class="smallIceBattery"></div>
-          <div class="iceBattery">
-            <div style="width: 77px;" class="iceBatteryFill"></div>
-          </div>
-        </div>
-
-        <div style="margin-bottom:20px;" class="ui container">
-          <div style="background: orange" class="iceCircle"><h2>E</h2></div>
-          <div class="icePercent">40% (40/100)</div>
-          <div class="smallIceBattery"></div>
-          <div class="iceBattery">
-            <div style="width: 40px;" class="iceBatteryFill"></div>
-          </div>
-        </div>
-        <a href="#">What is ICE?</a>
-      </div>
-
-        <h2 style="margin-top:20px">Warnings</h2>
-        <div class="ui list">
-          <a class="item">
-            <i class="warning sign icon"></i>
-            <div class="content">
-              <div class="header">ICS 331 will no longer be offered in Spring 2017.</div>
-            </div>
-          </a>
-          <a class="item">
-            <i class="warning sign icon"></i>
-            <div class="content">
-              <div class="header">You must receive a passing grade in ICS 311 to get credit for the course.</div>
-            </div>
-          </a>
-          <a class="item">
-            <i class="warning sign icon"></i>
-            <div class="content">
-              <div class="header"> Your Spring 2018 workload exceeds recommended workload amounts.</div>
-            </div>
-          </a>
-        </div>
-
-        <h2 style="margin-top:20px">Recommendations</h2>
-        <div class="ui list">
-          <a class="item">
-            <i class="asterisk icon"></i>
-            <div class="content">
-              <div class="header">Participate in the AT&T Hackathon on March 11 to earn more Innovation points.</div>
-            </div>
-          </a>
-          <a class="item">
-            <i class="asterisk icon"></i>
-            <div class="content">
-              <div class="header">You need to receive at least a 3.0 this semester to earn more Competency points.</div>
-            </div>
-          </a>
-          <a class="item">
-            <i class="asterisk icon"></i>
-            <div class="content">
-              <div class="header"> See your ICS adviser to upload STAR data from Fall 2015.</div>
-            </div>
-          </a>
-        </div>
-
     </div>
   </div>
+    </div>
 </template>

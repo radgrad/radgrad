@@ -33,7 +33,7 @@ FlowRouter.route('/mentor-home-page', {
 FlowRouter.route('/student-home-page', {
   name: 'Student_Home_Page',
   action() {
-    BlazeLayout.render('App_Body', { main: 'Student_Home_Page' });
+    BlazeLayout.render('Student_Home', { main: 'Student_Home_Page' });
   },
 });
 
