@@ -8,11 +8,18 @@
     <tbody class="bodyDrop" ondrop="drop(event)" ondragover="allowDrop(event)">
     {{#each course in icsCourses}}
       {{#if isFuture}}
-        <tr id="{{course.note}}" draggable="true" ondragstart="drag(event)">
+        <tr id="{{course.note}}" class="courseInstance" data-position="right center" draggable="true" ondragstart="drag(event)">
           <td><strong>{{course.note}}</strong></td>
           <td><strong>{{course.creditHrs}}</strong></td>
           <td><strong>{{course.grade}}</strong></td>
         </tr>
+        <div class="ui fluid popup transition hidden">
+          <h4 class="ui header">{{course.note}}</h4>
+          <div class="ui link list">
+            <a class="item inspect">Inspect</a>
+            <a class="item del">Delete</a>
+          </div>
+        </div>
       {{else}}
         <tr>
           <td><strong>{{course.note}}</strong></td>

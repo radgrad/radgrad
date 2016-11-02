@@ -87,6 +87,9 @@ Template.Academic_Semester.onRendered(function academicSemesterOnRendered() {
     this.state.set('semester', this.data.semester);
     this.state.set('currentSemester', this.data.currentSemester);
   }
+  this.$('.courseInstance').popup({
+    inline: true, hoverable: true, position: 'right center',
+  });
 });
 
 Template.Academic_Semester.onDestroyed(function acdemicSemesterOnDestroyed() {
