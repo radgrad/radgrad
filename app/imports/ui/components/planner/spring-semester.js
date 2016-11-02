@@ -66,7 +66,7 @@ $(window).resize(function (e) {
   resizePopup();
 });
 
-Template.Fall_Semester.helpers({
+Template.Spring_Semester.helpers({
   semesterName() {
     const semester = Template.instance().state.get('semester');
     if (semester) {
@@ -173,7 +173,7 @@ Template.Fall_Semester.helpers({
   },
 });
 
-Template.Fall_Semester.events({
+Template.Spring_Semester.events({
   'drop .bodyDrop'(event) {
     event.preventDefault();
     // console.log(event.originalEvent.dataTransfer.getData('text'));
@@ -195,11 +195,11 @@ Template.Fall_Semester.events({
   },
 });
 
-Template.Fall_Semester.onCreated(function fallSemesterOnCreate() {
+Template.Spring_Semester.onCreated(function springSemesterOnCreate() {
   this.state = new ReactiveDict();
 });
 
-Template.Fall_Semester.onRendered(function fallSemesterOnRendered() {
+Template.Spring_Semester.onRendered(function springSemesterOnRendered() {
   // console.log(this.data);
   if (this.data) {
     this.state.set('semester', this.data.semester);
@@ -246,7 +246,7 @@ Template.Fall_Semester.onRendered(function fallSemesterOnRendered() {
   })
 });
 
-Template.Fall_Semester.onDestroyed(function fallSemesterOnDestroyed() {
+Template.Spring_Semester.onDestroyed(function springSemesterOnDestroyed() {
   // add your statement here
 });
 

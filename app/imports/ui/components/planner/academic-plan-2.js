@@ -70,11 +70,12 @@ Template.Academic_Plan_2.helpers({
     }
     return null;
   },
-  springArgs() {
-    if (Template.instance().state.get('currentSemester') && Template.instance().state.get('year')) {
-      const currentSemester = Template.instance().state.get('currentSemester');
+  springArgs(year) {
+    if (Template.instance().state.get('currentSemesterID')) {
+      const currentSemesterID = Template.instance().state.get('currentSemesterID');
+      const currentSemester = Semesters.findDoc(currentSemesterID);
       const semesterID = Semesters.define({
-        year: Template.instance().state.get('year').year + 1,
+        year: year.year + 1,
         term: Semesters.SPRING,
       });
       const semester = Semesters.findDoc(semesterID);
@@ -82,20 +83,16 @@ Template.Academic_Plan_2.helpers({
     }
     return null;
   },
-  summerArgs() {
-    try {
-      if (Template.instance().state.get('currentSemester') && Template.instance().state.get('year')) {
-        const currentSemester = Template.instance().state.get('currentSemester');
-        const semesterID = Semesters.define({
-          year: Template.instance().state.get('year').year + 1,
-          term: Semesters.SUMMER,
-        });
-        const semester = Semesters.findDoc(semesterID);
-        return { currentSemester, semester };
-      }
-    } catch (e) {
-      console.log(e);
-      console.log(`${Template.instance().state.get('year').year} SUMMER`);
+  summerArgs(year) {
+    if (Template.instance().state.get('currentSemesterID')) {
+      const currentSemesterID = Template.instance().state.get('currentSemesterID');
+      const currentSemester = Semesters.findDoc(currentSemesterID);
+      const semesterID = Semesters.define({
+        year: year.year + 1,
+        term: Semesters.SUMMER,
+      });
+      const semester = Semesters.findDoc(semesterID);
+      return { currentSemester, semester };
     }
     return null;
   },

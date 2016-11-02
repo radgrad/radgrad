@@ -1,5 +1,5 @@
 <template name="Academic_Plan_2">
-  <div class="ui equal width grid">
+  <div class="ui equal width divided grid">
     <div class="stretched row">
       {{#each year in years}}
         <div class="column">
@@ -10,12 +10,16 @@
     </div>
     <div class="stretched row">
       {{#each year in years}}
-
+        <div class="column">
+          {{> Spring_Semester (springArgs year)}}
+        </div>
       {{/each}}
     </div>
     <div class="stretched row">
       {{#each year in years}}
-
+          <div class="column">
+            {{> Summer_Semester (summerArgs year)}}
+          </div>
       {{/each}}
     </div>
   </div>
