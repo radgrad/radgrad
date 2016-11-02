@@ -15,6 +15,13 @@
             <td><strong>{{course.creditHrs}}</strong></td>
             <td><strong>{{course.grade}}</strong></td>
           </tr>
+          <div class="ui fluid popup transition hidden">
+            <h4 class="ui header">{{course.note}}</h4>
+            <div class="ui link list">
+              <a id="inspect-{{course.note}}" class="item inspect">Inspect</a>
+              <a id="delete-{{course.note}}" class="item del">Delete</a>
+            </div>
+          </div>
         {{else}}
           <tr data-position="right center">
             <td><strong>{{course.note}}</strong></td>
@@ -30,14 +37,6 @@
           <td>{{course.grade}}</td>
         </tr>
       {{/each}}
-      <div class="ui fluid popup transition hidden">
-        <h4 class="ui header">{{course.note}}</h4>
-        <div class="ui link list">
-          <a class="item inspect">Inspect</a>
-          <a class="item del">Delete</a>
-        </div>
-      </div>
-
       <tr>
         <td colspan="3"></td>
       </tr>
@@ -45,6 +44,9 @@
     </table>
   </div>
   <div style="height: auto"></div>
+  {{#if working}}
+    Working...
+  {{/if}}
   <div class="ui icon mini bottom attached button" data-position="top center"><i class="add icon"></i></div>
   <div class="ui fluid popup transition hidden">
     <div class="ui vertical menu">

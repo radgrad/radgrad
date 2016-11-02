@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { Tracker } from 'meteor/tracker';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
@@ -99,7 +100,23 @@ Template.Academic_Plan_2.helpers({
 });
 
 Template.Academic_Plan_2.events({
-  // add your events here
+  'click .item.del'(event) {
+    event.preventDefault();
+    const template = Template.instance();
+    template.$('a.item.400').popup('hide all');
+    const id = event.target.id;
+    const split = id.split('-');
+    if (split.length === 2) {
+      const ci = CourseInstances.find({ note: split[1], studentID: Meteor.userId() }).fetch();
+      if (ci.length === 1) {
+        template.state.set('working', true);
+        CourseInstances.removeIt(ci[0]);
+      }
+      Tracker.afterFlush(() => {
+        template.state.set('working', false);
+      });
+    }
+  },
 });
 
 Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {

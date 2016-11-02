@@ -74,6 +74,7 @@ Meteor.startup(() => {
         const studentSlug = Users.findSlugByID(studentID);
         const csvData = Assets.getText(starDataPath);
         const courseInstanceDefinitions = processStarCsvData(studentSlug, csvData);
+        console.log(courseInstanceDefinitions);
         courseInstanceDefinitions.map((definition) => CourseInstances.define(definition));
       }
     });
