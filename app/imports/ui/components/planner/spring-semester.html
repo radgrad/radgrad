@@ -1,54 +1,53 @@
-<template name="Academic_Semester">
-  <table class="ui structured {{#if isFuture}}orange{{/if}} table">
-    <thead>
-    <tr>
-      <th colspan="3">{{semesterName}}</th>
-    </tr>
-    </thead>
-    <tbody class="bodyDrop" ondrop="drop(event)" ondragover="allowDrop(event)">
-    {{#each course in icsCourses}}
-      {{#if isFuture}}
-        <tr id="{{course.note}}" class="courseInstance" data-position="right center" draggable="true" ondragstart="drag(event)">
-          <td><strong>{{course.note}}</strong></td>
-          <td><strong>{{course.creditHrs}}</strong></td>
-          <td><strong>{{course.grade}}</strong></td>
-        </tr>
-        <div class="ui fluid popup transition hidden">
-          <h4 class="ui header">{{course.note}}</h4>
-          <div class="ui link list">
-            <a class="item inspect">Inspect</a>
-            <a class="item del">Delete</a>
-          </div>
-        </div>
-      {{else}}
-        <tr data-position="right center">
-          <td><strong>{{course.note}}</strong></td>
-          <td><strong>{{course.creditHrs}}</strong></td>
-          <td><strong>{{course.grade}}</strong></td>
-        </tr>
-      {{/if}}
-    {{/each}}
-    {{#each course in nonIcsCourses}}
-      <tr class="top aligned">
-        <td>{{course.note}}</td>
-        <td>{{course.creditHrs}}</td>
-        <td>{{course.grade}}</td>
+<template name="Spring_Semester">
+  <div class="ui segment">
+    <table class="ui top attached structured {{#if isFuture}}orange{{/if}} table">
+      <thead>
+      <tr>
+        <th colspan="3">{{semesterName}}</th>
       </tr>
-    {{/each}}
-    <div class="ui fluid popup transition hidden">
-      <h4 class="ui header">{{course.note}}</h4>
-      <div class="ui link list">
-        <a class="item inspect">Inspect</a>
-        <a class="item del">Delete</a>
-      </div>
-    </div>
-
-    <tr>
-      <td colspan="3"></td>
-    </tr>
-    </tbody>
-  </table>
-  <div class="ui icon mini button" data-position="top center"><i class="add icon"></i></div>
+      </thead>
+      <tbody class="bodyDrop" ondrop="drop(event)" ondragover="allowDrop(event)">
+      {{#each course in icsCourses}}
+        {{#if isFuture}}
+          <tr id="{{course.note}}" class="courseInstance" draggable="true" ondragstart="drag(event)"
+              data-position="right center">
+            <td><strong>{{course.note}}</strong></td>
+            <td><strong>{{course.creditHrs}}</strong></td>
+            <td><strong>{{course.grade}}</strong></td>
+          </tr>
+          <div class="ui fluid popup transition hidden">
+            <h4 class="ui header">{{course.note}}</h4>
+            <div class="ui link list">
+              <a id="inspect-{{course.note}}" class="item inspect">Inspect</a>
+              <a id="delete-{{course.note}}" class="item del">Delete</a>
+            </div>
+          </div>
+        {{else}}
+          <tr data-position="right center">
+            <td><strong>{{course.note}}</strong></td>
+            <td><strong>{{course.creditHrs}}</strong></td>
+            <td><strong>{{course.grade}}</strong></td>
+          </tr>
+        {{/if}}
+      {{/each}}
+      {{#each course in nonIcsCourses}}
+        <tr class="top aligned">
+          <td>{{course.note}}</td>
+          <td>{{course.creditHrs}}</td>
+          <td>{{course.grade}}</td>
+        </tr>
+      {{/each}}
+      <tr>
+        <td colspan="3"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="height: auto"></div>
+  {{#if working}}
+    Working...
+  {{/if}}
+  <div class="ui icon mini bottom attached button" data-position="top center"><i class="add icon"></i></div>
   <div class="ui fluid popup transition hidden">
     <div class="ui vertical menu">
       <a class="item course" data-position="right center">Add Course</a>
@@ -101,4 +100,5 @@
       <a class="item opportunity">Add Opportunity</a>
     </div>
   </div>
+
 </template>

@@ -66,7 +66,7 @@ $(window).resize(function (e) {
   resizePopup();
 });
 
-Template.Academic_Semester.helpers({
+Template.Fall_Semester.helpers({
   semesterName() {
     const semester = Template.instance().state.get('semester');
     if (semester) {
@@ -171,9 +171,15 @@ Template.Academic_Semester.helpers({
     }
     return ret;
   },
+  working() {
+    if (Template.instance().state) {
+      return Template.instance().state.get('working');
+    }
+    return false;
+  },
 });
 
-Template.Academic_Semester.events({
+Template.Fall_Semester.events({
   'drop .bodyDrop'(event) {
     event.preventDefault();
     // console.log(event.originalEvent.dataTransfer.getData('text'));
@@ -190,21 +196,78 @@ Template.Academic_Semester.events({
   },
   'click .item.addClass'(event) {
     event.preventDefault();
-    console.log(event.target.text);
-    Template.instance().$('a.item.100').popup('hide all');
+    const template = Template.instance();
+    template.$('a.item.400').popup('hide all');
+    const courseSplit = event.target.text.split(' ');
+    const courseSlug = `${courseSplit[0].toLowerCase()}${courseSplit[1]}`;
+    const semester = template.state.get('semester');
+    const semStr = Semesters.toString(semester._id, false);
+    const semSplit = semStr.split(' ');
+    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
+    const username = Meteor.user().username;
+    const ci = {
+      semester: semSlug,
+      course: courseSlug,
+      verified: false,
+      note: event.target.text,
+      grade: '***',
+      student: username,
+    };
+    template.state.set('working', true);
+    CourseInstances.define(ci);
+    Tracker.afterFlush(() => {
+      template.$('.ui.icon.mini.button')
+          .popup({
+            on: 'click',
+          });
+      template.$('.item.course')
+          .popup({
+            inline: true,
+            hoverable: true,
+          });
+      template.$('.courseInstance').popup({
+        inline: true, hoverable: true, position: 'right center',
+      });
+      template.$('a.100.item')
+          .popup({
+            inline: true,
+            hoverable: true,
+          });
+      template.$('a.200.item')
+          .popup({
+            inline: true,
+            hoverable: true,
+          });
+      template.$('a.300.item')
+          .popup({
+            inline: true,
+            hoverable: true,
+          });
+      template.$('a.400.item')
+          .popup({
+            inline: true,
+            hoverable: true,
+            lastResort: 'right center',
+            onShow: function () {
+              resizePopup();
+            },
+          });
+      template.state.set('working', false);
+    });
   },
 });
 
-Template.Academic_Semester.onCreated(function academicSemesterOnCreate() {
+Template.Fall_Semester.onCreated(function fallSemesterOnCreate() {
   this.state = new ReactiveDict();
 });
 
-Template.Academic_Semester.onRendered(function academicSemesterOnRendered() {
+Template.Fall_Semester.onRendered(function fallSemesterOnRendered() {
   // console.log(this.data);
   if (this.data) {
     this.state.set('semester', this.data.semester);
     this.state.set('currentSemester', this.data.currentSemester);
   }
+  this.state.set('working', false);
   const template = this;
   Tracker.afterFlush(() => {
     template.$('.ui.icon.mini.button')
@@ -239,14 +302,14 @@ Template.Academic_Semester.onRendered(function academicSemesterOnRendered() {
           inline: true,
           hoverable: true,
           lastResort: 'right center',
-          onShow: function () {
+          onShow: function resize() {
             resizePopup();
           },
         });
   });
 });
 
-Template.Academic_Semester.onDestroyed(function acdemicSemesterOnDestroyed() {
+Template.Fall_Semester.onDestroyed(function fallSemesterOnDestroyed() {
   // add your statement here
 });
 

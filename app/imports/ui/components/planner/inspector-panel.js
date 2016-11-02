@@ -31,12 +31,13 @@ Template.Inspector_Panel.helpers({
   },
   detailCourseNumber() {
     const course = Courses.find({ _id: Template.instance().state.get('detailCourseID') }).fetch();
+    console.log(`detailCourseNumber ${course[0]}`);
     return course[0];
   },
 });
 
 Template.Inspector_Panel.events({
-  'click .item'(event, instance) {
+  'click .item'(event) {
     event.preventDefault();
     const courseArr = Courses.find({ number: event.target.id }).fetch();
     if (courseArr.length > 0) {
