@@ -1,0 +1,39 @@
+<template name="Academic_Plan_2">
+  <div class="ui equal width grid">
+    <div class="stretched row">
+      {{#each year in years}}
+        <div class="column">
+          <div class="ui top left attached label">Year {{year.year}}</div>
+          {{> Fall_Semester (fallArgs year)}}
+        </div>
+      {{/each}}
+    </div>
+    <div class="stretched row">
+      {{#each year in years}}
+
+      {{/each}}
+    </div>
+    <div class="stretched row">
+      {{#each year in years}}
+
+      {{/each}}
+    </div>
+  </div>
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+//      ev.preventDefault();
+      const data = ev.dataTransfer.getData("text");
+      const tBody = ev.target.parentElement.parentElement;
+      console.log(tBody.id);
+      tBody.insertBefore(document.getElementById(data), ev.target.parentElement);
+    }
+  </script>
+</template>
