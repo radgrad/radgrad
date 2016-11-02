@@ -24,4 +24,12 @@ import './academic-year.html';
 import './academic-year.js';
 import './academic-semester.html';
 import './academic-semester.js';
+import './academic-plan-2.html';
+import './academic-plan-2.js';
+import './fall-semester.html';
+import './fall-semester.js';
+import './spring-semester.html';
+import './spring-semester.js';
+import './summer-semester.html';
+import './summer-semester.js';
 
