@@ -18,6 +18,7 @@ import './information-panel.html';
 import './inspector-panel.html';
 import './inspector-panel.js';
 import './detail-card.html';
+import './detail-card.js';
 import './academic-plan.html';
 import './academic-plan.js';
 import './academic-year.html';

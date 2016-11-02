@@ -22,6 +22,19 @@
           </div>
       {{/each}}
     </div>
+    <div class="stretched row">
+      <div class="column">
+        {{> Inspector_Panel}}
+      </div>
+    </div>
+    <div class="stretched row">
+      <div class="column">
+        {{> Recommendations}}
+      </div>
+      <div class="column">
+        {{> Warnings}}
+      </div>
+    </div>
   </div>
   <script>
     function allowDrop(ev) {

@@ -3,6 +3,7 @@
     "username": "John",
     "password": "changeme"
   },
+  "mockup": true,
   "exampleStudents": [
     {
       "firstName": "Alfred",

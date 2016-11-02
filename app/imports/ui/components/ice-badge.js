@@ -2,13 +2,22 @@ import { Template } from 'meteor/templating';
 
 Template.ICE_Badge.helpers({
   i(ice) {
-    return ice.i;
+    if (ice) {
+      return ice.i;
+    }
+    return null;
   },
   c(ice) {
-    return ice.c;
+    if (ice) {
+      return ice.c;
+    }
+    return null;
   },
   e(ice) {
-    return ice.e;
+    if (ice) {
+      return ice.e;
+    }
+    return null;
   },
 });
 
