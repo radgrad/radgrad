@@ -3,7 +3,14 @@
     "username": "John",
     "password": "changeme"
   },
-  "mockup": true,
+  "defaultAdminAccount": {
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "admin",
+    "slug": "admin",
+    "password": "changemeAdmin"
+  },
+  "mockup": false,
   "exampleStudents": [
     {
       "firstName": "Alfred",

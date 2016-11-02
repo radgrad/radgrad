@@ -74,9 +74,16 @@ Meteor.startup(() => {
         const studentSlug = Users.findSlugByID(studentID);
         const csvData = Assets.getText(starDataPath);
         const courseInstanceDefinitions = processStarCsvData(studentSlug, csvData);
-        console.log(courseInstanceDefinitions);
         courseInstanceDefinitions.map((definition) => CourseInstances.define(definition));
       }
     });
+  }
+  if (!!Meteor.settings.defaultAdminAccount) {
+    const admin = Meteor.settings.defaultAdminAccount;
+    if (Users.find({ username: admin.slug }).count() === 0) {
+      console.log(`defining ${admin.slug}`);
+      admin.role = ROLE.ADMIN;
+      Users.define(admin);
+    }
   }
 });
