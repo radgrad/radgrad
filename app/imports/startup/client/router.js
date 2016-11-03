@@ -4,7 +4,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 FlowRouter.route('/', {
   name: 'Landing_Page',
   action() {
-    BlazeLayout.render('App_Body', { main: 'Landing_Page' });
+    BlazeLayout.render('Landing_Body', { main: 'Landing_Page' });
   },
 });
 
@@ -33,7 +33,7 @@ FlowRouter.route('/mentor-home-page', {
 FlowRouter.route('/student-home-page', {
   name: 'Student_Home_Page',
   action() {
-    BlazeLayout.render('App_Body', { main: 'Student_Home_Page' });
+    BlazeLayout.render('Student_Home', { main: 'Student_Home_Page' });
   },
 });
 
@@ -47,7 +47,7 @@ FlowRouter.route('/student-degree-planner-page', {
 FlowRouter.route('/student-mentorspace-page', {
   name: 'Student_MentorSpace_Page',
   action() {
-    BlazeLayout.render('App_Body', { main: 'Student_MentorSpace_Page' });
+    BlazeLayout.render('Mentor_Body', { main: 'Student_MentorSpace_Page' });
   },
 });
 

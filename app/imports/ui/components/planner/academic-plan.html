@@ -1,0 +1,24 @@
+<template name="Academic_Plan">
+  <div class="ui cards">
+    {{#each year in years}}
+      {{> Academic_Year (args year)}}
+    {{/each}}
+  </div>
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+//      ev.preventDefault();
+      const data = ev.dataTransfer.getData("text");
+      const tBody = ev.target.parentElement.parentElement;
+      console.log(tBody.id);
+      tBody.insertBefore(document.getElementById(data), ev.target.parentElement);
+    }
+  </script>
+</template>

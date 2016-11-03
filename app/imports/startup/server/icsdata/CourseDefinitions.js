@@ -489,4 +489,22 @@ export const courseDefinitions = [
     prerequisites: ['ics311', 'ics314'],
   },
 
+  {
+    name: 'Special Topics in Security',
+    slug: 'ics495',
+    number: 'ICS 495',
+    description: 'Special topics in security oriented toward juniors and seniors. Repeatable unlimited times.',
+    interests: [],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS485.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
+  {
+    name: 'Computer Project',
+    slug: 'ics499',
+    number: 'ICS 499',
+    description: 'Individual or small-group projects in system design or application under faculty supervision.',
+    interests: [],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS485.html',
+    prerequisites: ['ics311', 'ics314'],
+  },
 ];

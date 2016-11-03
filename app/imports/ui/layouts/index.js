@@ -7,3 +7,13 @@ import './header.js';
 import './if-logged-in.html';
 import './if-logged-in.js';
 import './loading.html';
+import './mentorspace/mentor-body.html';
+import './mentorspace/mentor-body.js';
+import './landing-body.html';
+import './landing-body.js';
+import './landing-header.html';
+import './landing-header.js';
+import './landing-footer.html';
+import './student-home.html';
+import './student-home.js';
+

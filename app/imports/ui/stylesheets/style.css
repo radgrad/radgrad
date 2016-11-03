@@ -3,3 +3,185 @@
    If your page has a menubar, you will have to shift the body contents down 60 pixels or so.
    But you cannot globally alter the <body> element style here; you use a <div> and do it on a page-specific basis.
 */
+
+body {
+  padding-top: 47px; /* Move body of page below navbar*/
+}
+
+.iceCircle {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding-top: 5px;
+  display: inline-block;
+}
+
+.iceBattery {
+  width: 110px;
+  height:40px;
+  border:3px solid #000;
+  float: right;
+  border-radius: 10%;
+  display: inline-block;
+}
+
+.smallIceBattery {
+  width: 5px;
+  height:20px;
+  background-color: black;
+  float: right;
+  margin-right:5px;
+  margin-top: 10px;
+  display:inline-block;
+}
+
+.iceBatteryFill {
+  height:25px;
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+  display: inline-block;
+  background-color: black;
+}
+
+.icePercent {
+  float:right;
+  margin-right: 15px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.header-body {
+  padding-top: 61px; /* Move body of page below navbar. */
+}
+
+.landing-section-1 {
+  background: url('/images/landing/gradbackground.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*height: 750px;*/
+  color: white;
+  padding-bottom: 20px;
+}
+
+.landing-section-1 h1 {
+  margin-top: 16px;
+  margin-left: 12px;
+  display: inline-block;
+}
+
+.landing-section-1 #logo {
+  float: left;
+}
+
+.landing-gray-background {
+  background-color: #eeeeee !important;
+  color: #388E3C !important;
+  /*height: 750px;*/
+  padding: 20px;
+}
+
+.landing-green-background {
+  background: url('/images/landing/gradbackground.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*background-color: #2E7D32 !important;*/
+  color: #FFFFFF !important;
+  padding: 20px;
+  /*height: 750px;*/
+}
+
+.ice-header {
+  border-radius: 0.9em;
+  -moz-border-radius: 0.9em;
+  -webkit-border-radius: 0.9em;
+  color: #ffffff;
+  display: inline-block;
+  line-height: 1.8em;
+  text-align: center;
+  width: 1.8em;
+}
+
+.ice-competency-background {
+  background: #e91e63; /* pink R: 233 G: 30 B: 99*/
+}
+
+.ice-innovation-background {
+  background: #3f51b5; /* indigo R: 63 G: 81 B: 181 */
+}
+
+.ice-experience-background{
+  background: #ef6c00; /* orange darken-3 R: 239 G: 108 B: 0 */
+}
+
+.ice-competency-color {
+  color: #e91e63; /* pink */
+}
+
+.ice-innovation-color {
+  color: #3f51b5; /* indigo */
+}
+
+.ice-experience-color {
+  color: #ef6c00; /* orange darken-3 */
+}
+
+.ice-landing {
+  line-height: 1.0em;
+  width: 1.0em;
+}
+
+
+#mentorspace-heading{
+    alignment: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #C7C8CA;
+    width: 100%;
+}
+
+#mentorspace-main-block{
+    background-color: #E1E2E4;
+    padding-right: 0 !important;
+    padding-bottom: 40px !important;
+    max-height:100vh !important;
+}
+
+#mentorspace-main-inside-block{
+    background-color: white;
+    margin: 0 12px 0 12px;
+    border-radius: 5px;
+    max-height: 90%;
+    overflow: scroll;
+}
+
+#mentorspace-mentor-list{
+    background-color: white;
+    margin: 0 0 0 12px;
+    border-radius: 5px;
+}
+
+.mentorspace-item-padding{
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+}
+
+#mentorspace-question-block{
+    background-color: #FFFFFF;
+    padding-bottom: 40px !important;
+    max-height:100vh !important;
+    overflow:hidden;
+}
+
+#mentorspace-question-inside-block{
+    background-color: white;
+    margin: 0 12px 0 12px;
+    border-radius: 5px;
+    max-height: 90%;
+    overflow: scroll;
+}

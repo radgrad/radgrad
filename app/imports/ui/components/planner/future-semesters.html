@@ -1,0 +1,23 @@
+<template name="Future_Semesters">
+  <div class="ui segment">
+    <div class="ui top left attached label">Future</div>
+    <p></p>
+    <div class="content">
+      <div class="ui cards">
+        {{#each semester in futureSemesters}}
+          <div class="card">
+            {{> Future_Semester_Card (semesterArg semester._id)}}
+          </div>
+        {{/each}}
+        <div class="ui card">
+          <div class="ui top left attached label">Add Semester</div>
+          <div class="ui center aligned content">
+            <div class="ui icon mini bottom floated circular button" data-position="top center">
+              <i class="add icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

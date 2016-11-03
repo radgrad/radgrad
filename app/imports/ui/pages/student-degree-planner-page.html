@@ -1,7 +1,17 @@
 <template name="Student_Degree_Planner_Page">
-  <div class="ui text container">
-
-    <h2>Welcome to the Student Degree Planner Page.</h2>
-
-  </div>
+  {{#if currentUser}}
+    {{#if Template.subscriptionsReady}}
+      <div class="ui segment container">
+        <div class="ui top left attached label">Degree Planner</div>
+        {{> Academic_Plan_2 args}}
+      </div>
+    {{else}}
+      {{> Loading}}
+    {{/if}}
+  {{else}}
+    <div style="padding-top: 40px" class="ui text container">
+      <p>You are not authorized to view this page.</p>
+      <p>Please login.</p>
+    </div>
+  {{/if}}
 </template>

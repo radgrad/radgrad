@@ -123,6 +123,14 @@ class BaseCollection {
   }
 
   /**
+   * Return the publication name.
+   * @returns { String } The publication name, as a string.
+   */
+  getPublicationName() {
+    return this._collectionName;
+  }
+
+  /**
    * Returns a string representing all of the documents in this collection.
    * @returns {String}
    */

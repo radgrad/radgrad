@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
@@ -89,6 +90,34 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * @returns { boolean } If the course is an ICS course associated with courseInstanceID.
+   * @param courseInstanceID The course instance ID.
+   * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
+   */
+  isICS(courseInstanceID) {
+    this.assertDefined(courseInstanceID);
+    const courseID = this.findDoc(courseInstanceID).courseID;
+    return Courses.findDoc(courseID).number.substring(0, 3) === 'ICS';
+  }
+
+  /**
+   * Depending on the logged in user publish only their CourseInstances. If
+   * the user is in the Role.ADMIN then publish all CourseInstances. If the
+   * system is in mockup mode publish all CourseInstances.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      const instance = this;
+      Meteor.publish(this._collectionName, function publish() {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, 'ADMIN')) {
+          return instance._collection.find();
+        }
+        return instance._collection.find({ studentID: this.userId });
+      });
+    }
+  }
+
+  /**
    * @returns {String} A formatted string representing the course instance.
    * @param courseInstanceID The course instance ID.
    * @throws {Meteor.Error} If not a valid ID.
@@ -100,6 +129,17 @@ class CourseInstanceCollection extends BaseCollection {
     const semester = Semesters.toString(courseInstanceDoc.semesterID);
     const grade = courseInstanceDoc.grade;
     return `[CI ${semester} ${courseName} ${grade}]`;
+  }
+
+  /**
+   * Updates the CourseInstance's Semester.
+   * @param courseInstanceID The course instance ID.
+   * @param semesterID The semester id.
+   */
+  updateSemester(courseInstanceID, semesterID) {
+    this.assertDefined(courseInstanceID);
+    Semesters.assertSemester(semesterID);
+    this._collection.update({ _id: courseInstanceID }, { $set: { semesterID } });
   }
 }
 

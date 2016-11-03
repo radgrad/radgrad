@@ -1,0 +1,14 @@
+<template name="Recommendations">
+  <div class="ui left aligned segment">
+    <div class="ui top left attached label">Recommendations</div>
+    <div class="content">
+      <div>
+        {{#each recommendation in recommendations}}
+          {{> Recommendation_Item (recommendationArgs recommendation)}}
+          <p></p>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+</template>
