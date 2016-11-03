@@ -9,6 +9,7 @@ import './if-logged-in.js';
 import './loading.html';
 import './mentorspace/mentor-body.html';
 import './mentorspace/mentor-body.js';
+import './mentorspace/mentor-header.html'
 import './landing-body.html';
 import './landing-body.js';
 import './landing-header.html';
