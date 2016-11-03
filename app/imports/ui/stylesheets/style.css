@@ -137,14 +137,6 @@ body {
 }
 
 
-#mentorspace-heading{
-    alignment: center;
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #C7C8CA;
-    width: 100%;
-}
-
 #mentorspace-main-block{
     background-color: #E1E2E4;
     padding-right: 0 !important;
@@ -164,11 +156,18 @@ body {
     background-color: white;
     margin: 0 0 0 12px;
     border-radius: 5px;
+    padding-top: 20px;
 }
 
 .mentorspace-item-padding{
     padding-top: 12px !important;
     padding-bottom: 12px !important;
+}
+
+.mentorspace-label{
+    top: 20px !important;
+    left: 20px !important;
+    z-index: 100;
 }
 
 #mentorspace-question-block{
