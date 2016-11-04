@@ -4,6 +4,7 @@ import { Tracker } from 'meteor/tracker';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 
 const studentSemesters = () => {
@@ -33,7 +34,7 @@ const academicYears = () => {
       year = semester.year - 1;
     }
     if (!ret[year]) {
-      ret[year] = { year };
+      ret[year] = { year, springYear: year + 1 };
     }
     if (!ret[year].semesters) {
       ret[year].semesters = {};
@@ -51,12 +52,8 @@ Template.Academic_Plan_2.helpers({
     };
   },
   years() {
-    const years = academicYears();
-    const ret = [];
-    for (const key in years) {  /* eslint no-restricted-syntax: "off" */
-      ret.push(years[key]);
-    }
-    return ret;
+    const ay = AcademicYearInstances.find({}, { sort: { year: 1 } }).fetch();
+    return ay;
   },
   fallArgs(year) {
     if (Template.instance().state.get('currentSemesterID')) {

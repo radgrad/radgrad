@@ -31,8 +31,42 @@ Template.Inspector_Panel.helpers({
   },
   detailCourseNumber() {
     const course = Courses.find({ _id: Template.instance().state.get('detailCourseID') }).fetch();
-    console.log(`detailCourseNumber ${course[0]}`);
     return course[0];
+  },
+  hasCourse() {
+    return Template.instance().state.get('detailCourseID');
+  },
+  courseNumber() {
+    if (Template.instance().state.get('detailCourseID')) {
+      const courseId = Template.instance().state.get('detailCourseID');
+      const course = Courses.findDoc({ _id: courseId });
+      return course.number;
+    }
+    return null;
+  },
+  courseName() {
+    if (Template.instance().state.get('detailCourseID')) {
+      const courseId = Template.instance().state.get('detailCourseID');
+      const course = Courses.findDoc({ _id: courseId });
+      return course.name;
+    }
+    return null;
+  },
+  courseIce() {
+    if (Template.instance().state.get('detailCourseID')) {
+      const courseId = Template.instance().state.get('detailCourseID');
+      const course = Courses.findDoc({ _id: courseId });
+      return course.ice;
+    }
+    return null;
+  },
+  courseDescription() {
+    if (Template.instance().state.get('detailCourseID')) {
+      const courseId = Template.instance().state.get('detailCourseID');
+      const course = Courses.findDoc({ _id: courseId });
+      return course.description;
+    }
+    return null;
   },
 });
 

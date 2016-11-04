@@ -12,7 +12,26 @@
         </div>
       </div>
       <div class="thirteen wide column segment">
-          {{> Detail_Card course=detailCourseNumber}}
+        <div class="ui left aligned segment">
+          {{#if hasCourse}}
+            <b>{{courseNumber}}</b>
+            {{courseName}}
+            <div class="content">
+              {{> ICE_Badge ice=courseIce }}
+              {{#each recommendationStars}}
+                <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em" class="yellow star icon"></i>
+              {{/each}}
+              <p>
+                <b>Catalog Descrption:</b> {{courseDescription}}
+              </p>
+              <p><b>When scheduled:</b></p>
+              <p><b>ICE Value:</b> points for innovation, points for competency,
+                points for experience.</p>
+              <p><b>Recommendations:</b> TBD</p>
+              <p><b>Warnings:</b> None</p>
+            </div>
+          {{/if}}
+        </div>
       </div>
     </div>
   </div>

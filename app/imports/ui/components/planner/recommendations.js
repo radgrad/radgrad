@@ -1,5 +1,9 @@
-
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
+import { FeedbackType } from '../../../api/feedback/FeedbackType.js';
+
 
 Template.Recommendations.helpers({
   recommendationArgs(recommendation) {
@@ -8,11 +12,16 @@ Template.Recommendations.helpers({
     };
   },
   recommendations() {
-    return [
-      { text: 'You need 22 more Innovation points in your plan to get to 100.' },
-      { text: 'You need 7 more Competency points in your plan to get to 100.' },
-      { text: 'See your ICS advisor to upload STAR data from Fall 2015.' },
-    ];
+    const userId = Meteor.userId();
+    const feedback = FeedbackInstances.find({ userID: userId }).fetch();
+    const ret = [];
+    feedback.forEach((f) => {
+      const feed = Feedbacks.find({ _id: f.feedbackID }).fetch();
+      if (feed[0].feedbackType === FeedbackType.RECOMMENDATION) {
+        ret.push(f);
+      }
+    });
+    return ret;
   },
 });
 

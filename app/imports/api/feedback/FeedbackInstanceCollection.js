@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
 import { Users } from '/imports/api/user/UserCollection';
@@ -43,6 +45,24 @@ class FeedbackInstanceCollection extends BaseCollection {
     const feedbackInstanceID = this._collection.insert({ feedbackID, userID, description });
     return feedbackInstanceID;
   }
+
+  /**
+   * Depending on the logged in user publish only their WorkInstances. If
+   * the user is in the Role.ADMIN then publish all WorkInstances. If the
+   * system is in mockup mode publish all WorkInstances.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      const instance = this;
+      Meteor.publish(this._collectionName, function publish() {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, 'ADMIN')) {
+          return instance._collection.find();
+        }
+        return instance._collection.find({ userID: this.userId });
+      });
+    }
+  }
+
 }
 
 /**
