@@ -167,7 +167,9 @@ body {
 .mentorspace-label{
     top: 20px !important;
     left: 20px !important;
+    padding-top: 20px;
     z-index: 100;
+    width: 95% !important;
 }
 
 #mentorspace-question-block{
