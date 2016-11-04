@@ -15,12 +15,22 @@ import '/imports/api/warning';
 import '/imports/api/work';
 
 import '/imports/startup/client';
+import '/imports/startup/both';
 
-import '/imports/ui/layouts';
+import '/imports/ui/components/advisor';
+import '/imports/ui/components/landing';
+import '/imports/ui/components/planner';
+import '/imports/ui/components/shared';
+import '/imports/ui/components/student';
+
+import '/imports/ui/layouts/landing';
+import '/imports/ui/layouts/mentor';
+import '/imports/ui/layouts/shared';
+import '/imports/ui/layouts/student';
+
 import '/imports/ui/pages';
-import '/imports/ui/components';
 
 import './lib/semantic-ui/semantic.min.css';
 import './lib/semantic-ui/semantic.min.js';
-import '/imports/ui/stylesheets/style.css';
 
+import '/imports/ui/stylesheets/style.css';

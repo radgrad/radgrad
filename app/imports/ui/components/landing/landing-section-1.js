@@ -1,7 +1,6 @@
-
 import { Template } from 'meteor/templating';
 
-Template.Landing_Header.helpers({
+Template.Landing_Section_1.helpers({
   josephineICE() {
     return { i: 100, c: 100, e: 100 };
   },
@@ -22,19 +21,19 @@ Template.Landing_Header.helpers({
   },
 });
 
-Template.Landing_Header.events({
+Template.Landing_Section_1.events({
   // add your events here
 });
 
-Template.Landing_Header.onCreated(function landingBodyOnCreated() {
+Template.Landing_Section_1.onCreated(function landingBodyOnCreated() {
   // add your statement here
 });
 
-Template.Landing_Header.onRendered(function landingBodyOnRendered() {
+Template.Landing_Section_1.onRendered(function landingBodyOnRendered() {
   this.$('.dropdown').dropdown();
 });
 
-Template.Landing_Header.onDestroyed(function landingBodyOnDestroyed() {
+Template.Landing_Section_1.onDestroyed(function landingBodyOnDestroyed() {
   // add your statement here
 });
 
