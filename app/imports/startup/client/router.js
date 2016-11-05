@@ -1,5 +1,6 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { $ } from 'meteor/jquery';
 
 FlowRouter.route('/', {
   name: 'Landing_Page',
@@ -17,11 +18,9 @@ FlowRouter.route('/admin-home-page', {
 });
 */
 
-FlowRouter.route('/advisor-home-page', {
-  name: 'Advisor_Home_Page',
-  action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Home_Page' });
-  },
+const advisorRoutes = FlowRouter.group({
+  prefix: '/advisor',
+  name: 'advisor',
   triggersEnter: [function addBodyClass() {
     $('body').addClass('radgrad-background-color');
     $('body').addClass('layout-body');
@@ -29,7 +28,35 @@ FlowRouter.route('/advisor-home-page', {
   triggersExit: [function removeBodyClass() {
     $('body').removeClass('radgrad-background-color');
     $('body').removeClass('layout-body');
-  }],
+  }]
+});
+
+advisorRoutes.route('/student-configuration', {
+  name: 'Advisor_Student_Configuration_Page',
+  action() {
+    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Student_Configuration_Page' });
+  },
+});
+
+advisorRoutes.route('/verification-requests', {
+  name: 'Advisor_Verification_Requests_Pending_Page',
+  action() {
+    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Verification_Requests_Pending_Page' });
+  },
+});
+
+advisorRoutes.route('/event-verification', {
+  name: 'Advisor_Event_Verification_Page',
+  action() {
+    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Event_Verification_Page' });
+  },
+});
+
+advisorRoutes.route('/completed-verifications', {
+  name: 'Advisor_Completed_Verifications_Page',
+  action() {
+    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Completed_Verifications_Page' });
+  },
 });
 
 FlowRouter.route('/mentor-home-page', {

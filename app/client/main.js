@@ -29,7 +29,11 @@ import '/imports/ui/layouts/mentor';
 import '/imports/ui/layouts/shared';
 import '/imports/ui/layouts/student';
 
-import '/imports/ui/pages';
+import '/imports/ui/pages/admin';
+import '/imports/ui/pages/advisor';
+import '/imports/ui/pages/landing';
+import '/imports/ui/pages/mentor';
+import '/imports/ui/pages/student';
 
 import './lib/semantic-ui/semantic.min.css';
 import './lib/semantic-ui/semantic.min.js';

@@ -1,3 +1,4 @@
+import './ice-badge.css';
 import './ice-badge.html';
 import './ice-badge.js';
 

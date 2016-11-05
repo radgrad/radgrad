@@ -1,11 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Courses } from '../../api/course/CourseCollection.js';
-import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
-import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
-import { Semesters } from '../../api/semester/SemesterCollection.js';
-import { Users } from '../../api/user/UserCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { Courses } from '../../../api/course/CourseCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
 Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {

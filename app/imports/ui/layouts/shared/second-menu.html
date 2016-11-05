@@ -1,0 +1,13 @@
+<template name="Second_Menu">
+  <div style="border-radius:0px; margin-top:61px;" class="ui top fixed inverted four item fitted menu">
+    <div class="ui container">
+
+      {{#each menuItem in menuItems}}
+        <div class="header item">
+          <a href="{{pathFor menuItem.route}}">{{ menuItem.label }}</a>
+        </div>
+      {{/each}}
+
+    </div>
+  </div>
+</template>

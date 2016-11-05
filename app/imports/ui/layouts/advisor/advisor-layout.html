@@ -1,37 +1,8 @@
 <template name="Advisor_Layout">
 
-
-  <div class="ui top fixed menu">
-      <a class="item"><img src="/images/radgrad_logo.png"></a>
-      <a class="item" href="{{pathFor 'Advisor_Home_Page'}}"><h1 class="radgrad-brand-font green text">RadGrad</h1></a>
-      <div class="item"><h3 class="green text">Advisor Mode</h3></div>
-      <div class="right menu">
-        <a class="item"><img style="border-radius:50px; margin-right: 5px;" src="/images/landing/shimoda.jpg"><p class="green text">Michelle Shimoda</p></a>
-        <a class="item"><i style="color:darkgrey" class="big green alarm outline icon"></i></a>
-        <a class="item"><i style="color:darkgrey" class="big green setting icon"></i></a>
-      </div>
-  </div>
-
-  <div style="border-radius:0px; margin-top:61px;" class="ui top fixed inverted four item fitted menu">
-    <div class="ui container">
-      <div class="header item">
-        Student Configuration
-      </div>
-      <a class="item">
-        Verification Requests
-      </a>
-      <a class="item">
-        Event Verification
-      </a>
-      <a class="item">
-        Completed Verifications
-      </a>
-    </div>
-  </div>
-
-
-  <div class="header-body">
-    {{>Template.dynamic template=main}}
-  </div>
+  {{> First_Menu role="Advisor"}}
+  {{> Second_Menu menuItems=secondMenuItems }}
+  {{> Template.dynamic template=main}}
   {{> Footer}}
+
 </template>
