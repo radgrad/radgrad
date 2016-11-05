@@ -30,7 +30,6 @@ Template.Landing_Section_1.onCreated(function landingBodyOnCreated() {
 });
 
 Template.Landing_Section_1.onRendered(function landingBodyOnRendered() {
-  this.$('.dropdown').dropdown();
 });
 
 Template.Landing_Section_1.onDestroyed(function landingBodyOnDestroyed() {

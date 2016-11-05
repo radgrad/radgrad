@@ -23,6 +23,7 @@ import '/imports/ui/components/planner';
 import '/imports/ui/components/shared';
 import '/imports/ui/components/student';
 
+import '/imports/ui/layouts/advisor';
 import '/imports/ui/layouts/landing';
 import '/imports/ui/layouts/mentor';
 import '/imports/ui/layouts/shared';

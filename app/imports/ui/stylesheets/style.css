@@ -19,24 +19,7 @@ body {
 
 
 
-.landing-gray-background {
-  background-color: #eeeeee !important;
-  color: #388E3C !important;
-  /*height: 750px;*/
-  padding: 20px;
-}
 
-.landing-green-background {
-  background: url('/images/landing/gradbackground.png') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  /*background-color: #2E7D32 !important;*/
-  color: #FFFFFF !important;
-  padding: 20px;
-  /*height: 750px;*/
-}
 
 .ice-header {
   border-radius: 0.9em;

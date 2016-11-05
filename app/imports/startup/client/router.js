@@ -22,6 +22,14 @@ FlowRouter.route('/advisor-home-page', {
   action() {
     BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Home_Page' });
   },
+  triggersEnter: [function addBodyClass() {
+    $('body').addClass('radgrad-background-color');
+    $('body').addClass('layout-body');
+  }],
+  triggersExit: [function removeBodyClass() {
+    $('body').removeClass('radgrad-background-color');
+    $('body').removeClass('layout-body');
+  }],
 });
 
 FlowRouter.route('/mentor-home-page', {
