@@ -1,41 +1,8 @@
 <template name="Student_Layout">
 
-  <div class="ui top fixed menu">
-      <a class="item"><img src="/images/radgrad_logo.png"></a>
-      <a class="item" href="{{pathFor 'Home_Page'}}"><h1>RadGrad</h1></a>
-      <div class="right menu">
-        <a class="item"><img style="border-radius:50px;" src="/images/landing/shimoda.jpg"></a>
-        <a class="item"><i style="color:darkgrey" class="big alarm outline icon"></i></a>
-        <a class="item"><i style="color:darkgrey" class="big setting icon"></i></a>
-      </div>
-  </div>
-
-
-  <div style="border-radius:0px; margin-top:61px; background-color: #484848;" class="ui top fixed inverted six item fitted menu">
-    <div class="ui container">
-      <div class="header item">
-        Home
-      </div>
-      <a class="item">
-        Schedule Planner
-      </a>
-      <a class="item">
-        Course Explorer
-      </a>
-      <a class="item">
-        Interest Explorer
-      </a>
-      <a class="item">
-        Career Goal Explorer
-      </a>
-      <a class="item">
-        MentorSpace
-      </a>
-    </div>
-  </div>
-
-  <div class="header-body">
-    {{>Template.dynamic template=main}}
-  </div>
+  {{> First_Menu role="Student"}}
+  {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
+  {{> Template.dynamic template=main}}
   {{> Footer}}
+
 </template>

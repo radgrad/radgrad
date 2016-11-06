@@ -1,11 +1,22 @@
 import { Template } from 'meteor/templating';
+import * as RouteNames from '../../../startup/client/router.js';
 
 Template.Student_Layout.onCreated(function appBodyOnCreated() {
   // placeholder: typically you will put global subscriptions here if you remove the autopublish package.
 });
 
 Template.Student_Layout.helpers({
-  // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
+  secondMenuItems() {
+    return [
+      { label: 'Home', route: RouteNames.studentHomePageRouteName },
+      { label: 'Degree Planner', route: RouteNames.studentDegreePlannerPageRouteName },
+      { label: 'Explorer', route: RouteNames.studentExplorerPageRouteName },
+      { label: 'Mentor Space', route: RouteNames.studentMentorSpacePageRouteName },
+    ];
+  },
+  secondMenuLength() {
+    return 'four';
+  },
 });
 
 Template.Student_Layout.events({

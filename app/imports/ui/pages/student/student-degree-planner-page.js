@@ -7,6 +7,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { Accounts } from 'meteor/accounts-base';
 
 Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
   this.state = new ReactiveDict();
@@ -21,7 +22,7 @@ Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
 });
 
 Template.Student_Degree_Planner_Page.onRendered(function plannerOnRendered() {
-  // find the current semester
+  Accounts._loginButtonsSession.set('dropdownVisible', true);
 });
 
 Template.Student_Degree_Planner_Page.helpers({
@@ -32,6 +33,7 @@ Template.Student_Degree_Planner_Page.helpers({
     };
   },
 });
+
 
 Template.Student_Degree_Planner_Page.events({
  // placeholder: if you add a form to this top-level layout, handle the associated events here.
