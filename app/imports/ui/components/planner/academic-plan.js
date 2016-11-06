@@ -265,7 +265,6 @@ Template.Academic_Plan_2.events({
     const id = event.target.id;
     const split = id.split('-');
     const courseArr = Courses.find({ number: split[1] }).fetch();
-    console.log(courseArr);
     if (courseArr.length > 0) {
       template.state.set('detailCourseID', courseArr[0]._id);
       template.state.set('detailOpportunityID', null);
@@ -277,7 +276,6 @@ Template.Academic_Plan_2.events({
     template.$('a.item.400').popup('hide all');
     const id = event.target.id;
     const split = id.split('-');
-    console.log(split);
     const courseArr = OpportunityInstances.find({ _id: split[1] }).fetch();
     if (courseArr.length > 0) {
       template.state.set('detailCourseID', null);

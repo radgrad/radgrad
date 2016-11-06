@@ -350,12 +350,12 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
         .popup({
           on: 'click',
         });
-    template.$('.item.course')
+    template.$('.item.addCourseMenu')
         .popup({
           inline: true,
           hoverable: true,
         });
-    template.$('.item.opportunity')
+    template.$('.item.addOpportunityMenu')
         .popup({
           inline: true,
           hoverable: true,
