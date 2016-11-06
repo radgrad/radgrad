@@ -55,8 +55,17 @@ Template.Academic_Plan_2.helpers({
     };
   },
   years() {
-    const ay = AcademicYearInstances.find({}, { sort: { year: 1 } }).fetch();
+    const ay = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
     return ay;
+  },
+  hasMoreYears() {
+    return AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).count() >= 5;
+  },
+  hasPrevYear() {
+    return false;
+  },
+  hasNextYear() {
+    return true;
   },
   fallArgs(year) {
     if (Template.instance().state.get('currentSemesterID')) {
@@ -300,7 +309,6 @@ Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {
 });
 
 Template.Academic_Plan_2.onRendered(function academicPlan2OnRendered() {
-  console.log(this.data);
   this.state.set('currentSemesterID', this.data.currentSemesterID);
   this.state.set('studentUsername', this.data.studentUserName);
 });

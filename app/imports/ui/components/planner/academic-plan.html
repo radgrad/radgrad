@@ -1,6 +1,20 @@
 <template name="Academic_Plan_2">
   <div class="ui equal width divided grid">
+    {{#if hasMoreYears}}
+      <div class="column">
+        {{#if hasPrevYear}}
+          <button class="ui left floated icon button"><i
+              class="ui arrow left icon"></i></button>{{/if}}
+      </div>
+      <div class="column">
+        {{#if hasNextYear}}
+          <button class="ui right floated icon button"><i
+              class="ui arrow right icon"></i></button>
+        {{/if}}
+      </div>
+    {{/if}}
     <div class="stretched row">
+
       {{#each year in years}}
         <div class="column">
           <div class="ui top left attached label">Academic Year {{year.year}} - {{year.springYear}}</div>
@@ -17,9 +31,9 @@
     </div>
     <div class="stretched row">
       {{#each year in years}}
-          <div class="column">
-            {{> Semester_List (summerArgs year)}}
-          </div>
+        <div class="column">
+          {{> Semester_List (summerArgs year)}}
+        </div>
       {{/each}}
     </div>
     <div class="stretched row">
