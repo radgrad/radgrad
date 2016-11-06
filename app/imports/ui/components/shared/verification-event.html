@@ -1,0 +1,24 @@
+<template name="Verification_Event">
+
+  <div class="ui raised padded container segment">
+    <div class="ui top left attached green label">Event Verification</div>
+
+    <form class="ui form">
+      <div class="ui inline field">
+        <label>Select recent event:</label>
+        <div class="ui action input">
+          <select class="ui dropdown" name="event">
+            <option value="">(Select One)</option>
+            <option value="4">IBM Hackathon (10/10/16)</option>
+            <option value="3">LiveAction demo day (10/8/16)</option>
+            <option value="2">WetWare Wednesday (10/6/16)</option>
+            <option value="1" selected="selected">UH Career Fair (10/4/16)</option>
+          </select>
+          <input type="text" name="uhId" placeholder="UH account name">
+          <button class="ui green button" type="submit">Verify attendance</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</template>

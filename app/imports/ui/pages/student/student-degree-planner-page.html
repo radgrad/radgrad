@@ -1,0 +1,20 @@
+<template name="Student_Degree_Planner_Page">
+  <div class="layout-page">
+    {{#if currentUser}}
+      {{#if Template.subscriptionsReady}}
+        <div class="ui segment container">
+          <div class="ui top left attached label">Degree Planner</div>
+          {{> Academic_Plan_2 args}}
+        </div>
+      {{else}}
+        {{> Loading}}
+      {{/if}}
+    {{else}}
+      <div class="ui text container">
+        <p>You are not authorized to view this page.</p>
+        <p>Please login.</p>
+        {{> loginButtons }}
+      </div>
+    {{/if}}
+  </div>
+</template>

@@ -49,8 +49,6 @@ arillo:flow-router-helpers
 # Semantic UI (and packages to integrate with accounts and autoform)
 juliancwirko:postcss
 less@2.7.5_1
-useraccounts:semantic-ui
-fabienb4:autoform-semantic-ui
 
 # Prototyping
 insecure@1.0.7
