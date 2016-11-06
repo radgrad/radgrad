@@ -1,11 +1,8 @@
-import './academic-plan-2.html';
-import './academic-plan-2.js';
+import './academic-plan.html';
+import './academic-plan.js';
 
 import './academic-year.html';
 import './academic-year.js';
-
-import './inspector-panel.html';
-import './inspector-panel.js';
 
 import './recommendation-item.html';
 import './recommendation-item.js';

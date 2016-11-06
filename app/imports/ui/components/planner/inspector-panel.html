@@ -3,23 +3,28 @@
     <div class="ui top left attached label">Inspector</div>
     <div class="ui grid container">
       <div class="three wide column">
-        <div class="card" style="overflow:scroll; height: 150px;">
-        <div class="ui list" >
+        <div class="ui list" style="overflow:scroll; height: 100px;">
           {{#each course in courses}}
-            <a id="{{course.number}}" class="item">{{course.number}}</a>
+            <a id="{{course._id}}" class="course item">{{course.number}}</a>
           {{/each}}
         </div>
+        <div class="ui divider"></div>
+        <div class="ui list" style="overflow:scroll; height: 100px;">
+          {{#each opportunity in opportunities}}
+            <a id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</a>
+          {{/each}}
         </div>
       </div>
       <div class="thirteen wide column segment">
         <div class="ui left aligned segment">
           {{#if hasCourse}}
-            <b>{{courseNumber}}</b>
-            {{courseName}}
+            <p><b>{{courseNumber}}</b>
+            {{courseName}}</p>
             <div class="content">
               {{> ICE_Badge ice=courseIce }}
               {{#each recommendationStars}}
-                <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em" class="yellow star icon"></i>
+                <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
+                   class="yellow star icon"></i>
               {{/each}}
               <p>
                 <b>Catalog Descrption:</b> {{courseDescription}}
@@ -30,6 +35,16 @@
               <p><b>Recommendations:</b> TBD</p>
               <p><b>Warnings:</b> None</p>
             </div>
+          {{else}}
+            {{#if hasOpportunity}}
+              <p><b>Name: </b> {{opportunityName}}</p>
+              <div class="content">
+                <p><b>Description: </b> {{opportunityDescription}}</p>
+                <p><b>When: </b> {{opportunityStart}} - {{opportunityEnd}}</p>
+                <p><b>ICE Value: </b>{{> ICE_Badge ice=opportunityIce }}</p>
+                <p><b>More: </b><a href="{{opportunityMore}}">{{opportunityMore}}</a></p>
+              </div>
+            {{/if}}
           {{/if}}
         </div>
       </div>
