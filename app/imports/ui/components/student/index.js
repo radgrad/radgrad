@@ -11,4 +11,5 @@ import './interests.js';
 import './warn-recommend.html';
 import './warn-recommend.js';
 
-
+import './explorer-dropdown.html';
+import './explorer-dropdown.js';
