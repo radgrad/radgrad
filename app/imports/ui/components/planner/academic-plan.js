@@ -56,16 +56,33 @@ Template.Academic_Plan_2.helpers({
   },
   years() {
     const ay = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ay;
+    const instance = Template.instance();
+    if (ay.length > 0 && !instance.state.get('startYear')) {
+      instance.state.set('startYear', ay[0].year);
+    }
+    const ret = lodash.filter(ay, function filter(academicYear) {
+      const year = academicYear.year;
+      if (year >= instance.state.get('startYear') && year <= instance.state.get('startYear') + 4) {
+        return true;
+      }
+      return false;
+    });
+    return ret;
   },
   hasMoreYears() {
-    return AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).count() >= 5;
+    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
+    return ays.length > 4;
+
   },
   hasPrevYear() {
-    return false;
+    const instance = Template.instance();
+    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
+    return ays[0].year < instance.state.get('startYear');
   },
   hasNextYear() {
-    return true;
+    const instance = Template.instance();
+    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
+    return ays[ays.length - 1].year > instance.state.get('startYear') + 4;
   },
   fallArgs(year) {
     if (Template.instance().state.get('currentSemesterID')) {
@@ -297,6 +314,16 @@ Template.Academic_Plan_2.events({
       Template.instance().state.set('detailCourseID', null);
       Template.instance().state.set('detailOpportunityID', event.target.id);
     }
+  },
+  'click #nextYear'(event) {
+    event.preventDefault();
+    const year = Template.instance().state.get('startYear');
+    Template.instance().state.set('startYear', year + 1);
+  },
+  'click #prevYear'(event) {
+    event.preventDefault();
+    const year = Template.instance().state.get('startYear');
+    Template.instance().state.set('startYear', year - 1);
   },
 });
 
