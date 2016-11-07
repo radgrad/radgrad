@@ -72,7 +72,6 @@ Template.Academic_Plan_2.helpers({
   hasMoreYears() {
     const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
     return ays.length > 4;
-
   },
   hasPrevYear() {
     const instance = Template.instance();
