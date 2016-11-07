@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
@@ -51,6 +52,23 @@ class OpportunityInstanceCollection extends BaseCollection {
     // Define and return the new OpportunityInstance
     const opportunityInstanceID = this._collection.insert({ semesterID, opportunityID, verified, studentID, ice });
     return opportunityInstanceID;
+  }
+
+  /**
+   * Depending on the logged in user publish only their OpportunityInstances. If
+   * the user is in the Role.ADMIN then publish all OpportunityInstances. If the
+   * system is in mockup mode publish all OpportunityInstances.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      const instance = this;
+      Meteor.publish(this._collectionName, function publish() {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, 'ADMIN')) {
+          return instance._collection.find();
+        }
+        return instance._collection.find({ studentID: this.userId });
+      });
+    }
   }
 
   /**

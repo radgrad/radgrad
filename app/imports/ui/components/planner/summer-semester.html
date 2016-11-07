@@ -1,0 +1,101 @@
+<template name="Summer_Semester">
+  <div class="ui segment">
+    <table class="ui structured {{#if isFuture}}orange{{/if}} table">
+      <thead>
+      <tr>
+        <th colspan="3">{{semesterName}}</th>
+      </tr>
+      </thead>
+      <tbody class="bodyDrop" ondrop="drop(event)" ondragover="allowDrop(event)">
+      {{#each course in icsCourses}}
+        {{#if isFuture}}
+          <tr id="{{course.note}}" class="courseInstance" draggable="true" ondragstart="drag(event)"
+              data-position="right center">
+            <td><strong>{{course.note}}</strong></td>
+            <td><strong>{{course.creditHrs}}</strong></td>
+            <td><strong>{{course.grade}}</strong></td>
+          </tr>
+        {{else}}
+          <tr data-position="right center">
+            <td><strong>{{course.note}}</strong></td>
+            <td><strong>{{course.creditHrs}}</strong></td>
+            <td><strong>{{course.grade}}</strong></td>
+          </tr>
+        {{/if}}
+      {{/each}}
+      {{#each course in nonIcsCourses}}
+        <tr class="top aligned">
+          <td>{{course.note}}</td>
+          <td>{{course.creditHrs}}</td>
+          <td>{{course.grade}}</td>
+        </tr>
+      {{/each}}
+      <div class="ui fluid popup transition hidden">
+        <h4 class="ui header">{{course.note}}</h4>
+        <div class="ui link list">
+          <a class="item inspect">Inspect</a>
+          <a class="item del">Delete</a>
+        </div>
+      </div>
+
+      <tr>
+        <td colspan="3"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ui icon mini bottom attached button" data-position="top center"><i class="add icon"></i></div>
+  <div class="ui fluid popup transition hidden">
+    <div class="ui vertical menu">
+      <a class="item course" data-position="right center">Add Course</a>
+      <div class="ui fluid popup transition hidden">
+        <div class="ui vertical menu">
+          {{#if hasCourses 100}}
+            <a class="item 100" data-position="right center">1xx</a>
+            <div class="ui fluid popup transition hidden">
+              <div class="ui vertical menu">
+                <div class="ui link list">
+                  {{#each course in (courses 100)}}
+                    <a class="item addClass">{{course}}</a>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if hasCourses 200}}
+            <a class="item 200" data-position="right center">2xx</a>
+            <div class="ui fluid popup transition hidden">
+              <div class="ui vertical menu">
+                {{#each course in (courses 200)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+          {{#if hasCourses 300}}
+            <a class="item 300" data-position="right center">3xx</a>
+            <div class="ui fluid popup transition hidden">
+              <div class="ui vertical menu">
+                {{#each course in (courses 300)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+          {{#if hasCourses 400}}
+            <a class="item 400" data-position="right center">4xx</a>
+            <div class="ui fluid popup transition hidden" style="overflow: auto">
+              <div class="ui vertical menu">
+                {{#each course in (courses 400)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+      <a class="item opportunity">Add Opportunity</a>
+    </div>
+  </div>
+
+</template>

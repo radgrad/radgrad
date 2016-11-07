@@ -1,0 +1,24 @@
+.landing-section-1 {
+  background: url('/images/landing/gradbackground.png') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  padding-bottom: 20px;
+}
+
+a#login-sign-in-link.login-link-text {
+  color: white;
+}
+
+.landing-section-1-welcome {
+  font-family: 'Roboto';
+  font-weight: 800;
+  font-size: 72px;
+  color: white;
+}
+
+.landing-section-1-tagline {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 36px;
+  color: white;
+}
