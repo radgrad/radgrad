@@ -1,9 +1,16 @@
 <template name="Student_Explorer_Page">
+
   <div class="layout-page">
-    <div class="ui text container">
-
-      <h2>Welcome to the Student Explorer Page.</h2>
-
+    <div class="ui grid container">
+      <div class="three wide column">
+        {{> Explorer_Dropdown}}
+      </div>
+      <div class="thirteen wide stretched column">
+          <div class="ui segment">
+            <p>Start exploring!</p>
+          </div>
+      </div>
     </div>
   </div>
+
 </template>
