@@ -1,4 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
+import { FeedbackType } from '../../../api/feedback/FeedbackType.js';
 
 Template.Warnings.helpers({
   warningArgs(warning) {
@@ -7,11 +11,16 @@ Template.Warnings.helpers({
     };
   },
   warnings() {
-    return [
-      { text: 'Required course ICS 212 does not appear in your degree plan.' },
-      { text: 'Fall 2017 appears overloaded with coursework and job responsibilities.' },
-      { text: 'Your plan includes ICS 451 in Fall 2017, but it is unlikely to occur then.' },
-    ];
+    const userId = Meteor.userId();
+    const feedback = FeedbackInstances.find({ userID: userId }).fetch();
+    const ret = [];
+    feedback.forEach((f) => {
+      const feed = Feedbacks.find({ _id: f.feedbackID }).fetch();
+      if (feed[0].feedbackType === FeedbackType.WARNING) {
+        ret.push(f);
+      }
+    });
+    return ret;
   },
 });
 
