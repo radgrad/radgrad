@@ -44,9 +44,9 @@ class FeedbackCollection extends BaseInstanceCollection {
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     assertFeedbackType(feedbackType);
     // Make sure there's a defined FeedbackFunction with the same name as this slug.
-    if (!((typeof FeedbackFunctions[slug]) === 'function')) {
-      throw new Meteor.Error(`No FeedbackFunction defined with name ${slug}`);
-    }
+    // if (!((typeof FeedbackFunctions[slug]) === 'function')) {
+    //   throw new Meteor.Error(`No FeedbackFunction defined with name ${slug}`);
+    // }
     const docID = this._collection.insert({ name, slugID, description, feedbackType });
 
     // Connect the Slug to this Interest

@@ -11,8 +11,8 @@ import '/imports/api/semester';
 import '/imports/api/slug';
 import '/imports/api/star';
 import '/imports/api/user';
-import '/imports/api/warning';
 import '/imports/api/work';
+import '/imports/api/year';
 
 import '/imports/startup/client';
 import '/imports/startup/both';

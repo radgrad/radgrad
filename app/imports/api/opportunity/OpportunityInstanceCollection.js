@@ -83,6 +83,17 @@ class OpportunityInstanceCollection extends BaseCollection {
     const opportunityName = Opportunities.findDoc(opportunityInstanceDoc.opportunityID).name;
     return `[OI ${semester} ${opportunityName}]`;
   }
+
+  /**
+   * Updates the OpportunityInstance's Semester.
+   * @param opportunityInstanceID The course instance ID.
+   * @param semesterID The semester id.
+   */
+  updateSemester(opportunityInstanceID, semesterID) {
+    this.assertDefined(opportunityInstanceID);
+    Semesters.assertSemester(semesterID);
+    this._collection.update({ _id: opportunityInstanceID }, { $set: { semesterID } });
+  }
 }
 
 /**
