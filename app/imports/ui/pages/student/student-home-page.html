@@ -1,0 +1,41 @@
+<template name="Student_Home_Page">
+
+  <div class="layout-page">
+    <div class="ui grid container">
+      <div class="four wide column">
+        <div class="ui vertical text menu">
+          <a class="active item" data-tab="tab-name">
+            Current ICE Points
+          </a>
+          <a class="item" data-tab="tab-name2">
+            Recommendations
+          </a>
+          <a class="item" data-tab="tab-name3">
+            Warnings
+          </a>
+          <a class="item" data-tab="tab-name3">
+            Schedule
+          </a>
+          <a class="item" data-tab="tab-name3">
+            Interests
+          </a>
+          <a class="item" data-tab="tab-name3">
+            Career Goals
+          </a>
+        </div>
+      </div>
+      <div class="twelve wide stretched column">
+        <div data-tab="tab-name">
+          <div class="ui container">
+            <div class="ui cards">
+              {{> Ice }}
+              {{> Warn_Recommend }}
+              {{> Interests }}
+              {{> Career_Goals }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

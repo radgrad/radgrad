@@ -1,0 +1,8 @@
+<template name="Admin_Layout">
+
+  {{> First_Menu role="Admin"}}
+  {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
+  {{> Template.dynamic template=main}}
+  {{> Footer}}
+
+</template>

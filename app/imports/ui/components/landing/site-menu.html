@@ -1,0 +1,15 @@
+<template name="Site_Menu">
+  <div style="border-radius:0px;" class="ui bottom fixed inverted {{ menuLength }} item fitted menu">
+
+    <div class="ui container">
+
+      {{#each menuItem in menuItems}}
+        <div class="header item">
+          <a href="{{pathFor menuItem.route}}">{{ menuItem.label }}</a>
+        </div>
+      {{/each}}
+
+    </div>
+  </div>
+
+</template>
