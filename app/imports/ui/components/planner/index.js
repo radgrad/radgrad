@@ -1,9 +1,6 @@
 import './academic-plan.html';
 import './academic-plan.js';
 
-import './academic-year.html';
-import './academic-year.js';
-
 import './recommendation-item.html';
 import './recommendation-item.js';
 

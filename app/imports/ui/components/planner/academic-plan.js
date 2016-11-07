@@ -58,11 +58,11 @@ Template.Academic_Plan_2.helpers({
     const ay = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
     const instance = Template.instance();
     if (ay.length > 0 && !instance.state.get('startYear')) {
-      instance.state.set('startYear', ay[0].year);
+      instance.state.set('startYear', ay[ay.length - 1].year);
     }
     const ret = lodash.filter(ay, function filter(academicYear) {
       const year = academicYear.year;
-      if (year >= instance.state.get('startYear') && year <= instance.state.get('startYear') + 4) {
+      if (year >= instance.state.get('startYear') - 4 && year <= instance.state.get('startYear')) {
         return true;
       }
       return false;
