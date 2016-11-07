@@ -4,9 +4,12 @@ import { Tracker } from 'meteor/tracker';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
-import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
@@ -58,6 +61,21 @@ const available4xxCourses = () => {
   return filtered;
 };
 
+const availableOpportunities = () => {
+  const opportunities = Opportunities.find({}).fetch();
+  if (opportunities.length > 0 && Template.instance().state.get('semester')) {
+    const filtered = lodash.filter(opportunities, function (opportunity) {
+      const oi = OpportunityInstances.find({
+        studentID: Meteor.userId(),
+        courseID: opportunity._id,
+      }).fetch();
+      return oi.length === 0;
+    });
+    return filtered;
+  }
+  return [];
+};
+
 const resizePopup = () => {
   $('.ui.popup').css('max-height', '350px');
 };
@@ -66,7 +84,7 @@ $(window).resize(function (e) {
   resizePopup();
 });
 
-Template.Spring_Semester.helpers({
+Template.Semester_List.helpers({
   semesterName() {
     const semester = Template.instance().state.get('semester');
     if (semester) {
@@ -95,7 +113,7 @@ Template.Spring_Semester.helpers({
       const courses = CourseInstances.find({
         semesterID: Template.instance().state.get('semester')._id,
         studentID: Meteor.userId(),
-      }).fetch();
+      }, { sort: { note: 1 } }).fetch();
       courses.forEach((c) => {
         if (CourseInstances.isICS(c._id)) {
           ret.push(c);
@@ -171,26 +189,54 @@ Template.Spring_Semester.helpers({
     }
     return ret;
   },
-  working() {
-    if (Template.instance().state) {
-      return Template.instance().state.get('working');
+  opportunities() {
+    let ret = [];
+    const opportunities = availableOpportunities();
+    const now = new Date();
+    // console.log(opportunities[0]);
+    ret = lodash.filter(opportunities, function filter(o) {
+      return (now >= o.startActive && now <= o.endActive);
+    });
+    return ret;
+  },
+  semesterOpportunities() {
+    const ret = [];
+    if (Template.instance().state.get('semester')) {
+      const opps = OpportunityInstances.find({
+        semesterID: Template.instance().state.get('semester')._id,
+        studentID: Meteor.userId(),
+      }).fetch();
+      opps.forEach((opp) => {
+        const opportunity = Opportunities.findDoc(opp.opportunityID);
+        opportunity.instanceID = opp._id;
+        ret.push(opportunity);
+      });
     }
-    return false;
+    return ret;
   },
 });
 
-Template.Spring_Semester.events({
+Template.Semester_List.events({
   'drop .bodyDrop'(event) {
     event.preventDefault();
     // console.log(event.originalEvent.dataTransfer.getData('text'));
     if (Template.instance().state.get('semester')) {
+      const id = event.originalEvent.dataTransfer.getData('text');
+      const semesterId = Template.instance().state.get('semester')._id;
       const courses = CourseInstances.find({
-        note: event.originalEvent.dataTransfer.getData('text'),
+        note: id,
         studentID: Meteor.userId(),
       }).fetch();
       if (courses.length > 0) {
-        // console.log(courses[0]);
-        CourseInstances.updateSemester(courses[0]._id, Template.instance().state.get('semester')._id);
+        CourseInstances.updateSemester(courses[0]._id, semesterId);
+      } else {
+        const opportunities = OpportunityInstances.find({
+          studentID: Meteor.userId(),
+          _id: id,
+        }).fetch();
+        if (opportunities.length > 0) {
+          OpportunityInstances.updateSemester(opportunities[0]._id, semesterId)
+        }
       }
     }
   },
@@ -213,7 +259,6 @@ Template.Spring_Semester.events({
       grade: '***',
       student: username,
     };
-    template.state.set('working', true);
     CourseInstances.define(ci);
     Tracker.afterFlush(() => {
       template.$('.ui.icon.mini.button')
@@ -225,7 +270,19 @@ Template.Spring_Semester.events({
             inline: true,
             hoverable: true,
           });
+      template.$('.item.opportunity')
+          .popup({
+            inline: true,
+            hoverable: true,
+            lastResort: 'right center',
+            onShow: function resize() {
+              resizePopup();
+            },
+          });
       template.$('.courseInstance').popup({
+        inline: true, hoverable: true, position: 'right center',
+      });
+      template.$('.opportunityInstance').popup({
         inline: true, hoverable: true, position: 'right center',
       });
       template.$('a.100.item')
@@ -248,38 +305,70 @@ Template.Spring_Semester.events({
             inline: true,
             hoverable: true,
             lastResort: 'right center',
-            onShow: function () {
+            onShow: function resize() {
               resizePopup();
             },
           });
-      template.state.set('working', false);
     });
   },
+  'click .item.addOpportunity'(event) {
+    event.preventDefault();
+    const template = Template.instance();
+    template.$('a.item.400').popup('hide all');
+    const name = event.target.text;
+    const opportunity = Opportunities.find({ name }).fetch()[0];
+    const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
+    const semester = template.state.get('semester');
+    const semStr = Semesters.toString(semester._id, false);
+    const semSplit = semStr.split(' ');
+    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
+    const username = Meteor.user().username;
+    const oi = {
+      semester: semSlug,
+      opportunity: oppSlug.name,
+      verified: false,
+      student: username,
+    };
+    OpportunityInstances.define(oi);
+  },
+
 });
 
-Template.Spring_Semester.onCreated(function springSemesterOnCreate() {
+Template.Semester_List.onCreated(function semesterListOnCreate() {
   this.state = new ReactiveDict();
 });
 
-Template.Spring_Semester.onRendered(function springSemesterOnRendered() {
+Template.Semester_List.onRendered(function semesterListOnRendered() {
   // console.log(this.data);
   if (this.data) {
     this.state.set('semester', this.data.semester);
     this.state.set('currentSemester', this.data.currentSemester);
   }
-  this.state.set('working', false);
   const template = this;
   Tracker.afterFlush(() => {
-    template.$('.ui.icon.mini.button')
+    template.$('.ui.icon.button')
         .popup({
           on: 'click',
         });
-    template.$('.item.course')
+    template.$('.item.addCourseMenu')
         .popup({
           inline: true,
           hoverable: true,
         });
+    template.$('.item.addOpportunityMenu')
+        .popup({
+          inline: true,
+          hoverable: true,
+          position: 'right center',
+          lastResort: 'right center',
+          onShow: function resize() {
+            resizePopup();
+          },
+        });
     template.$('.courseInstance').popup({
+      inline: true, hoverable: true, position: 'right center',
+    });
+    template.$('.opportunityInstance').popup({
       inline: true, hoverable: true, position: 'right center',
     });
     template.$('a.100.item')
@@ -309,7 +398,7 @@ Template.Spring_Semester.onRendered(function springSemesterOnRendered() {
   });
 });
 
-Template.Spring_Semester.onDestroyed(function springSemesterOnDestroyed() {
+Template.Semester_List.onDestroyed(function semesterListOnDestroyed() {
   // add your statement here
 });
 
