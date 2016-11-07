@@ -76,12 +76,12 @@ Template.Academic_Plan_2.helpers({
   hasPrevYear() {
     const instance = Template.instance();
     const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays[0].year < instance.state.get('startYear');
+    return ays[0].year < instance.state.get('startYear') - 4;
   },
   hasNextYear() {
     const instance = Template.instance();
     const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays[ays.length - 1].year > instance.state.get('startYear') + 4;
+    return ays[ays.length - 1].year > instance.state.get('startYear');
   },
   fallArgs(year) {
     if (Template.instance().state.get('currentSemesterID')) {
