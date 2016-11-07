@@ -3,13 +3,13 @@
     {{#if hasMoreYears}}
       <div class="column">
         {{#if hasPrevYear}}
-          <button id="prevYear" class="ui left floated icon button"><i
+          <button id="prevYear" class="ui left floated icon green button" data-content="View previous academic year"><i
               class="ui arrow left icon"></i></button>{{/if}}
       </div>
       <div class="column">
         {{#if hasNextYear}}
-          <button id="nextYear" class="ui right floated icon button"><i
-              class="ui arrow right icon"></i></button>
+          <button id="nextYear" class="ui right floated icon green button"><i
+              class="ui arrow right icon" data-content="View next academic year"></i></button>
         {{/if}}
       </div>
     {{/if}}
@@ -17,7 +17,7 @@
 
       {{#each year in years}}
         <div class="column">
-          <div class="ui top left attached label">Academic Year {{year.year}} - {{year.springYear}}</div>
+          <div class="ui top left attached green label">Academic Year {{year.year}} - {{year.springYear}}</div>
           {{> Semester_List (fallArgs year)}}
         </div>
       {{/each}}
@@ -40,7 +40,7 @@
       <div class="column">
         <!--{{> Inspector_Panel (inspectArgs year)}}-->
         <div class="ui segment">
-          <div class="ui top left attached label">Inspector</div>
+          <div class="ui top left attached green label">Inspector</div>
           <div class="ui grid container">
             <div class="three wide column">
               <div class="ui list" style="overflow:scroll; height: 100px;">
