@@ -1,14 +1,18 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
+
+import { lodash } from 'meteor/erasaur:meteor-lodash';
+import { moment } from 'meteor/momentjs:moment';
+
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { checkPrerequisites } from '../../../api/course/CourseFunctions';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { lodash } from 'meteor/erasaur:meteor-lodash';
 
 const studentSemesters = () => {
   const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
@@ -265,6 +269,7 @@ Template.Academic_Plan_2.events({
       const ci = CourseInstances.find({ note: split[1], studentID: Meteor.userId() }).fetch();
       if (ci.length === 1) {
         CourseInstances.removeIt(ci[0]);
+        checkPrerequisites();
       } else {
         const oi = OpportunityInstances.find({ _id: split[1], studentID: Meteor.userId() }).fetch();
         if (oi.length === 1) {
@@ -323,6 +328,17 @@ Template.Academic_Plan_2.events({
     event.preventDefault();
     const year = Template.instance().state.get('startYear');
     Template.instance().state.set('startYear', year - 1);
+  },
+  'click #addAY'(event) {
+    event.preventDefault();
+    const student = Meteor.userId();
+    const ays = AcademicYearInstances.find({ studentID: student }, { sort: { year: 1 } }).fetch();
+    let year = moment().year();
+    if (ays.length > 0) {
+      const ay = ays[ays.length - 1];
+      year = ay.year + 1;
+    }
+    AcademicYearInstances.define({ year, student });
   },
 });
 

@@ -5,6 +5,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { checkPrerequisites } from '../../../api/course/CourseFunctions';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
@@ -229,6 +230,7 @@ Template.Semester_List.events({
       }).fetch();
       if (courses.length > 0) {
         CourseInstances.updateSemester(courses[0]._id, semesterId);
+        checkPrerequisites();
       } else {
         const opportunities = OpportunityInstances.find({
           studentID: Meteor.userId(),
@@ -260,6 +262,7 @@ Template.Semester_List.events({
       student: username,
     };
     CourseInstances.define(ci);
+    checkPrerequisites();
     Tracker.afterFlush(() => {
       template.$('.ui.icon.mini.button')
           .popup({

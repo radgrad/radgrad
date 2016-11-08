@@ -1,18 +1,28 @@
 <template name="Academic_Plan_2">
   <div class="ui equal width divided grid">
-    {{#if hasMoreYears}}
-      <div class="column">
-        {{#if hasPrevYear}}
-          <button id="prevYear" class="ui left floated icon green button" data-content="View previous academic year"><i
-              class="ui arrow left icon"></i></button>{{/if}}
+    <div class="column">
+      {{#if hasPrevYear}}
+        <div class="ui left aligned segment">
+          <button id="prevYear" class="ui icon green button" data-content="View previous academic year">
+            <i class="ui arrow left icon"></i></button>
+          Previous Year
+        </div>
+      {{/if}}
+    </div>
+    <div class="column">
+      <div class="ui center aligned segment">
+        <button id="addAY" class="positive ui icon button"><i class="ui plus icon"></i> Add Academic Year</button>
       </div>
-      <div class="column">
-        {{#if hasNextYear}}
-          <button id="nextYear" class="ui right floated icon green button"><i
+    </div>
+    <div class="column">
+      {{#if hasNextYear}}
+        <div class="ui right aligned segment">
+          Next Year&nbsp;
+          <button id="nextYear" class="ui icon green button"><i
               class="ui arrow right icon" data-content="View next academic year"></i></button>
-        {{/if}}
-      </div>
-    {{/if}}
+        </div>
+      {{/if}}
+    </div>
     <div class="stretched row">
 
       {{#each year in years}}
