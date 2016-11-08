@@ -1,4 +1,5 @@
 import './first-menu.html';
+import './first-menu.js';
 
 import './footer.html';
 
