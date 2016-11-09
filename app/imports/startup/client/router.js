@@ -135,6 +135,30 @@ studentRoutes.route('/', {
   },
 });
 
+export const studentHomePageAboutMeRouteName = 'Student_AboutMe';
+studentRoutes.route('/aboutme', {
+  name: studentHomePageAboutMeRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_AboutMe' });
+  },
+});
+
+export const studentHomePageLevelsRouteName = 'Student_Levels';
+studentRoutes.route('/levels', {
+  name: studentHomePageLevelsRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_Levels' });
+  },
+});
+
+export const studentHomePageIceRouteName = 'Student_Ice';
+studentRoutes.route('/ice', {
+  name: studentHomePageIceRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_Ice' });
+  },
+});
+
 export const studentDegreePlannerPageRouteName = 'Student_Degree_Planner_Page';
 studentRoutes.route('/degree-planner', {
   name: studentDegreePlannerPageRouteName,
