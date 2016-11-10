@@ -13,6 +13,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { getTotalICE } from '../../../api/ice/IceProcessor.js';
 
 const studentSemesters = () => {
   const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
@@ -52,12 +53,6 @@ const academicYears = () => {
 };
 
 Template.Academic_Plan_2.helpers({
-  args(ay) {
-    return {
-      year: ay,
-      currentSemester: Semesters.findDoc(Semesters.getCurrentSemester()),
-    };
-  },
   years() {
     const ay = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
     const instance = Template.instance();
@@ -66,7 +61,7 @@ Template.Academic_Plan_2.helpers({
     }
     const ret = lodash.filter(ay, function filter(academicYear) {
       const year = academicYear.year;
-      if (year >= instance.state.get('startYear') - 4 && year <= instance.state.get('startYear')) {
+      if (year >= instance.state.get('startYear') - 3 && year <= instance.state.get('startYear')) {
         return true;
       }
       return false;
@@ -75,12 +70,12 @@ Template.Academic_Plan_2.helpers({
   },
   hasMoreYears() {
     const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays.length > 4;
+    return ays.length > 3;
   },
   hasPrevYear() {
     const instance = Template.instance();
     const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays[0].year < instance.state.get('startYear') - 4;
+    return ays[0].year < instance.state.get('startYear') - 3;
   },
   hasNextYear() {
     const instance = Template.instance();
@@ -256,12 +251,24 @@ Template.Academic_Plan_2.helpers({
     }
     return null;
   },
+  yearICE(year) {
+    let cis = [];
+    const semesterIDs = year.semesterIDs;
+    semesterIDs.forEach((sem) => {
+      const ci = CourseInstances.find({ studentID: Meteor.userId(), semesterID: sem }).fetch();
+      cis = cis.concat(ci);
+      const oi = OpportunityInstances.find({ studentID: Meteor.userId(), semesterID: sem }).fetch();
+      cis = cis.concat(oi);
+    });
+    return getTotalICE(cis);
+  },
 });
 
 Template.Academic_Plan_2.events({
   'click .item.del'(event) {
     event.preventDefault();
     const template = Template.instance();
+    console.log(event.target);
     template.$('a.item.400').popup('hide all');
     const id = event.target.id;
     const split = id.split('-');
@@ -271,7 +278,7 @@ Template.Academic_Plan_2.events({
         CourseInstances.removeIt(ci[0]);
         checkPrerequisites();
       } else {
-        const oi = OpportunityInstances.find({ _id: split[1], studentID: Meteor.userId() }).fetch();
+        const oi = OpportunityInstances.find({ opportunityID: split[1], studentID: Meteor.userId() }).fetch();
         if (oi.length === 1) {
           OpportunityInstances.removeIt(oi[0]);
         }
@@ -290,6 +297,23 @@ Template.Academic_Plan_2.events({
       template.state.set('detailCourseID', courseArr[0]._id);
       template.state.set('detailOpportunityID', null);
     }
+  },
+  'click tr.clickEnabled'(event) {
+    event.preventDefault();
+    let target = event.target;
+    while (target && target.nodeName !== 'TR') {
+      target = target.parentNode;
+    }
+    const firstClass = target.getAttribute('class').split(' ')[0];
+    const template = Template.instance();
+    if (firstClass === 'courseInstance') {
+      template.state.set('detailCourseID', target.id);
+      template.state.set('detailOpportunityID', null);
+    } else
+      if (firstClass === 'opportunityInstance') {
+        template.state.set('detailCourseID', null);
+        template.state.set('detailOpportunityID', target.id);
+      }
   },
   'click .item.inspect.opportunity'(event) {
     event.preventDefault();
