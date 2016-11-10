@@ -4,5 +4,17 @@
 
 .layout-page {
   padding-top: 80px;
-  background-color: #e9ebee;
+  padding-bottom: 5px;
+  background-color: #f7f7f7;
+}
+
+.ui.label.transition.visible {
+  background-color: #53A78E;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.radgrad-background-color {
+  background-color: #38840F;
 }

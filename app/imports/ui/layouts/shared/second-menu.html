@@ -1,10 +1,14 @@
 <template name="Second_Menu">
-  <div style="margin-top:61px; background-color: white;" class="ui top fitted fixed {{ menuLength }} item secondary pointing menu">
+  <div style="margin-top:61px; background-color: white; padding: 0;" class="ui top fixed six item secondary pointing menu">
+
+      <div class="active item" style="border-color: #6FBE44; border-bottom-width: 4px;">
+        <a href="#" style="color: #86CAB5; text-transform: uppercase; font-size: 0.9rem">Active Test</a>
+      </div>
 
       {{#each menuItem in menuItems}}
-        <a class="item">
-          <a href="{{pathFor menuItem.route}}">{{ menuItem.label }}</a>
-        </a>
+      <div class="item">
+          <a href="{{pathFor menuItem.route}}" style="color: #86CAB5; font-weight: 600 !important; text-transform: uppercase; font-size: 0.9rem">{{ menuItem.label }}</a>
+      </div>
       {{/each}}
 
   </div>

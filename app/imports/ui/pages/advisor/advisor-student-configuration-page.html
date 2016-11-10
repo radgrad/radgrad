@@ -4,103 +4,189 @@
     <div class="ui container">
       <form class="ui form">
         <div class="ui inline field">
-          <label style="font-size: 1.5rem">Abigail Kealoha (1234-5678)</label>
+          <label style="font-size: 1.5rem; color: #0C6449">Abigail Kealoha (1234-5678)</label>
           <div class="ui action input">
             <input type="text" name="uhId" placeholder="8 digit ID (1234-5678)">
-            <button class="ui green button" type="submit" style="background-color: #6FBE44; color: white;">Retrieve</button>
-            <button class="ui button" type="submit" style="background-color: #DA7F4E; color: white;">Student View</button>
+            <button class="ui compact button" type="submit" style="background-color: #6FBE44; color: white;">Retrieve</button>
+            <button class=" ui compact button" style="background-color: #52A724; color: white;"><i class="icon large student" style="padding-left: 0.4rem"></i></button>
           </div>
         </div>
       </form>
-    </div>
 
-    <div class="ui padded container segment" style="margin-bottom: 0 !important;">
-      <div class="ui dividing header"><h4 style="color: #52A724; text-transform: uppercase">Basic Profile</h4></div>
+      <div class="ui stackable grid" style="padding-top: 1em">
 
-      <div class="ui equal width form">
+        <!-- Form -->
+        <div class="eight wide column">
 
-        <div class="fields">
+          <div class="ui padded container segment" style="margin-bottom: 0 !important;">
+            <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.8); text-transform: uppercase">Basic Profile</h4></div>
 
-          <div class="field">
-            <label>Role</label>
-            <div class="ui action input">
-              <div class="ui selection dropdown">
-                <input type="hidden" name="role">
-                <i class="dropdown icon"></i>
-                <div class="default text">Select Role</div>
-                <div class="menu">
-                  <div class="item" data-value="0">Student</div>
-                  <div class="item" data-value="1">Faculty</div>
-                  <div class="item" data-value="2">Advisor</div>
-                  <div class="item" data-value="3">Admin</div>
+            <div class="ui equal width form">
+
+              <div class="fields">
+
+                <!-- Role -->
+                <div class="field">
+                  <label style="color: dimgrey">Role</label>
+                  <div class="ui action input">
+                    <div class="ui selection dropdown">
+                      <input type="hidden" name="role">
+                      <i class="dropdown icon"></i>
+                      <div class="default text">Select Role</div>
+                      <div class="menu">
+                        <div class="item" data-value="0">Student</div>
+                        <div class="item" data-value="1">Faculty</div>
+                        <div class="item" data-value="2">Advisor</div>
+                        <div class="item" data-value="3">Admin</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Degree -->
+                <div class="field">
+                  <label style="color: dimgrey">Degree</label>
+                  <div class="ui action input">
+                    <div class="ui selection dropdown">
+                      <input type="hidden" name="role">
+                      <i class="dropdown icon"></i>
+                      <div class="default text">Select Degree</div>
+                      <div class="menu">
+                        <div class="item" data-value="0">B.S. CS</div>
+                        <div class="item" data-value="1">B.A. ICS</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="fields">
+
+                <!-- Career Goals -->
+                <div class="field">
+                  <label style="color: dimgrey">Career Goals</label>
+                  <div class="ui action input">
+                    <select multiple="" class="ui dropdown">
+                      <option value="">Select Career Goals</option>
+                      <option value="0">Full-Stack application development</option>
+                      <option value="1">Graduate School</option>
+                      <option value="2">Network Engineer</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Interests -->
+                <div class="field">
+                  <label style="color: dimgrey">Interests</label>
+                  <div class="ui action input">
+                    <select multiple="" class="ui dropdown">
+                      <option value="">Select Interests</option>
+                      <option value="0">Artificial Intelligence</option>
+                      <option value="1">Software Engineering</option>
+                      <option value="2">Networking</option>
+                    </select>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <!-- Star CSV -->
+              <div class="field left align">
+                <label style="color: dimgrey">STAR CSV</label>
+                <div class="ui action input">
+                  <input id="fileInput" type="file"/>
+                  <button class="ui compact button" type="submit">Update</button>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <!-- Degree -->
-          <div class="field">
-            <label>Degree</label>
-            <div class="ui action input">
-              <div class="ui selection dropdown">
-                <input type="hidden" name="role">
-                <i class="dropdown icon"></i>
-                <div class="default text">Select Degree</div>
-                <div class="menu">
-                  <div class="item" data-value="0">B.S. CS</div>
-                  <div class="item" data-value="1">B.A. ICS</div>
-                </div>
-              </div>
             </div>
           </div>
+          <div class="ui bottom attached button container" tabindex="0" style="background-color: #52A724; color: white">Update</div>
 
-          <!-- Interests -->
-          <div class="field">
-            <label>Interests</label>
-            <div class="ui action input">
-              <select multiple="" class="ui dropdown">
-                <option value="">Select Interests</option>
-                <option value="0">Artificial Intelligence</option>
-                <option value="1">Software Engineering</option>
-                <option value="2">Networking</option>
-              </select>
-            </div>
-          </div>
 
         </div>
 
-        <div class="fields">
 
-          <!-- Career Goals -->
-          <div class="field">
-            <label>Career Goals</label>
-            <div class="ui action input">
-              <select multiple="" class="ui dropdown">
-                <option value="">Select Career Goals</option>
-                <option value="0">Full-Stack application development</option>
-                <option value="1">Graduate School</option>
-                <option value="2">Network Engineer</option>
-              </select>
+        <!-- Level Sticker Log -->
+        <div class="eight wide column">
+
+          <div class="ui padded container segment">
+            <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.8);  text-transform: uppercase">Level Sticker Log</h4></div>
+            <div class="ui padded grid">
+
+
+              <div class="row">
+
+                <div class="ui statistics">
+                  <div class="statistic">
+                    <div class="value" style="color: #349074">
+                      20
+                    </div>
+                    <div class="label">
+                      Innovation
+                    </div>
+                  </div>
+                  <div class="statistic">
+                    <div class="value" style="color: #C94964">
+                      35
+                    </div>
+                    <div class="label">
+                      Competency
+                    </div>
+                  </div>
+                  <div class="statistic">
+                    <div class="value" style="color: #D97F4F">
+                      60
+                    </div>
+                    <div class="label">
+                      Experience
+                    </div>
+                  </div>
+                  <div class="statistic">
+                    <div class="value">
+                      3
+                    </div>
+                    <div class="label">
+                      Level
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row" style="padding-top: 0;">
+                <form class="ui form">
+                  <div class="field">
+                    <label style="color: dimgrey">Received</label>
+                    <div class="ui action input">
+                      <select multiple="" class="ui dropdown">
+                        <option value="">Stickers received</option>
+                        <option value="0">Level 1 (White)</option>
+                        <option value="1">Level 2 (Yellow)</option>
+                        <option value="2">Level 3 (Blue)</option>
+                        <option value="2">Level 4 (Red)</option>
+                        <option value="2">Level 5 (Brown)</option>
+                        <option value="2">Level 6 (Black)</option>
+                      </select>
+                      <button class="ui button" type="submit">Update</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
 
-          <!-- Star CSV -->
-          <div class="field left align">
-            <label>STAR CSV</label>
-            <div class="ui action input">
-              <input id="fileInput" type="file"/>
-              <button class="ui button" type="submit">Update</button>
-            </div>
-          </div>
 
         </div>
       </div>
+
     </div>
-    <div class="ui bottom attached button container" tabindex="0" style="background-color: #349074; color: white">Update</div>
 
 
-    <div class="ui padded container segment">
-      <div class="ui top left attached green label">Template degree plan generator</div>
+    <div class="ui padded container segment" style="margin-bottom: 20px;">
+      <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.8); text-transform: uppercase">Template Degree Plan Generator</h4></div>
 
 
       <div class="ui grid">
@@ -136,67 +222,7 @@
       </div>
     </div>
 
-    <div class="ui padded container segment">
-      <div class="ui top left attached green label">Level Sticker Log</div>
-      <div class="ui grid">
-        <div class="row">
-          <div class="ui statistics">
-            <div class="blue statistic">
-              <div class="value">
-                20
-              </div>
-              <div class="label">
-                Innovation
-              </div>
-            </div>
-            <div class="red statistic">
-              <div class="value">
-                35
-              </div>
-              <div class="label">
-                Competency
-              </div>
-            </div>
-            <div class="orange statistic">
-              <div class="value">
-                60
-              </div>
-              <div class="label">
-                Experience
-              </div>
-            </div>
-            <div class="statistic">
-              <div class="value">
-                3
-              </div>
-              <div class="label">
-                Level
-              </div>
-            </div>
 
-          </div>
-        </div>
-        <div class="row">
-          <form class="ui form">
-            <div class="inline field">
-              <label>Received:</label>
-              <div class="ui action input">
-                <select multiple="" class="ui dropdown">
-                  <option value="">Stickers received</option>
-                  <option value="0">Level 1 (White)</option>
-                  <option value="1">Level 2 (Yellow)</option>
-                  <option value="2">Level 3 (Blue)</option>
-                  <option value="2">Level 4 (Red)</option>
-                  <option value="2">Level 5 (Brown)</option>
-                  <option value="2">Level 6 (Black)</option>
-                </select>
-                <button class="ui green button" type="submit">Update</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
 
   </div>
 </template>
