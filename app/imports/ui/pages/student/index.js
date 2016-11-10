@@ -37,4 +37,5 @@ import './student-levels.js';
 
 import './student-ice.html';
 import './student-ice.js';
+import './student-ice.css';
 
