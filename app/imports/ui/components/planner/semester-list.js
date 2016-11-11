@@ -5,6 +5,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { checkPrerequisites } from '../../../api/course/CourseFunctions';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
@@ -77,7 +78,7 @@ const availableOpportunities = () => {
 };
 
 const resizePopup = () => {
-  $('.ui.popup').css('max-height', '350px');
+  // $('.ui.popup').css('max-height', '350px');
 };
 
 $(window).resize(function (e) {
@@ -208,27 +209,45 @@ Template.Semester_List.helpers({
       }).fetch();
       opps.forEach((opp) => {
         const opportunity = Opportunities.findDoc(opp.opportunityID);
-        opportunity.instanceID = opp._id;
+        opportunity.instanceID = opp.opportunityID;
         ret.push(opportunity);
       });
     }
     return ret;
+  },
+  opportunityICE(opportunityID) {
+    const opp = OpportunityInstances.find({ opportunityID }).fetch();
+    return opp[0].ice;
+  },
+  opportunityDescription(opportunityID) {
+    const opp = OpportunityInstances.find({ opportunityID }).fetch();
+    const opportunity = Opportunities.find({ _id: opp[0].opportunityID }).fetch();
+    return opportunity[0].description;
+  },
+  courseICE(courseID) {
+    const opp = CourseInstances.find({ courseID }).fetch();
+    return opp[0].ice;
+  },
+  courseDescription(courseID) {
+    const ci = CourseInstances.find({ courseID }).fetch();
+    const course = Courses.find({ _id: ci[0].courseID }).fetch();
+    return course[0].description;
   },
 });
 
 Template.Semester_List.events({
   'drop .bodyDrop'(event) {
     event.preventDefault();
-    // console.log(event.originalEvent.dataTransfer.getData('text'));
     if (Template.instance().state.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
       const semesterId = Template.instance().state.get('semester')._id;
       const courses = CourseInstances.find({
-        note: id,
+        courseID: id,
         studentID: Meteor.userId(),
       }).fetch();
       if (courses.length > 0) {
         CourseInstances.updateSemester(courses[0]._id, semesterId);
+        checkPrerequisites();
       } else {
         const opportunities = OpportunityInstances.find({
           studentID: Meteor.userId(),
@@ -260,6 +279,7 @@ Template.Semester_List.events({
       student: username,
     };
     CourseInstances.define(ci);
+    checkPrerequisites();
     Tracker.afterFlush(() => {
       template.$('.ui.icon.mini.button')
           .popup({
@@ -272,7 +292,7 @@ Template.Semester_List.events({
           });
       template.$('.item.opportunity')
           .popup({
-            inline: true,
+            inline: false,
             hoverable: true,
             lastResort: 'right center',
             onShow: function resize() {
@@ -280,10 +300,18 @@ Template.Semester_List.events({
             },
           });
       template.$('.courseInstance').popup({
-        inline: true, hoverable: true, position: 'right center',
+        inline: true, hoverable: true, position: 'top center',
+        lastResort: 'right center',
+        onShow: function resize() {
+          resizePopup();
+        },
       });
       template.$('.opportunityInstance').popup({
-        inline: true, hoverable: true, position: 'right center',
+        inline: true, hoverable: true, position: 'top center',
+        lastResort: 'right center',
+        onShow: function resize() {
+          resizePopup();
+        },
       });
       template.$('a.100.item')
           .popup({
@@ -349,15 +377,18 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
     template.$('.ui.icon.button')
         .popup({
           on: 'click',
+          onShow: function resize() {
+            resizePopup();
+          },
         });
     template.$('.item.addCourseMenu')
         .popup({
-          inline: true,
+          inline: false,
           hoverable: true,
         });
     template.$('.item.addOpportunityMenu')
         .popup({
-          inline: true,
+          inline: false,
           hoverable: true,
           position: 'right center',
           lastResort: 'right center',
@@ -366,10 +397,18 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
           },
         });
     template.$('.courseInstance').popup({
-      inline: true, hoverable: true, position: 'right center',
+      inline: true, hoverable: true, position: 'top center',
+      lastResort: 'right center',
+      onShow: function resize() {
+        resizePopup();
+      },
     });
     template.$('.opportunityInstance').popup({
-      inline: true, hoverable: true, position: 'right center',
+      inline: true, hoverable: true, position: 'top center',
+      lastResort: 'right center',
+      onShow: function resize() {
+        resizePopup();
+      },
     });
     template.$('a.100.item')
         .popup({

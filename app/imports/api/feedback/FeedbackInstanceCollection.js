@@ -22,6 +22,7 @@ class FeedbackInstanceCollection extends BaseCollection {
       feedbackID: { type: SimpleSchema.RegEx.Id },
       userID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
+      area: { type: String },
     }));
   }
 
@@ -30,19 +31,20 @@ class FeedbackInstanceCollection extends BaseCollection {
    * @example
    * FeedbackInstances.define({ feedback: 'CourseRecommendationsBasedOnInterests',
    *                            user: 'joesmith',
-    *                           description: 'We recommend ICS 314 based on your interest in software engineering' });
+    *                           description: 'We recommend ICS 314 based on your interest in software engineering',
+     *                          area: 'Interests' });
    * @param { Object }  object Requires feedback, the user slug or ID, and the feedback string returned from the
    * feedback function.
    * @throws {Meteor.Error} If the slugs or IDs cannot be resolved correctly.
    * @returns The newly created docID.
    */
 
-  define({ feedback, user, description }) {
+  define({ feedback, user, description, area }) {
     // Validate Feedback and user.
     const feedbackID = Feedbacks.getID(feedback);
     const userID = Users.getID(user);
     // Define and return the new FeedbackInstance
-    const feedbackInstanceID = this._collection.insert({ feedbackID, userID, description });
+    const feedbackInstanceID = this._collection.insert({ feedbackID, userID, description, area });
     return feedbackInstanceID;
   }
 
