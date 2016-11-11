@@ -13,3 +13,7 @@ import './warn-recommend.js';
 
 import './explorer-dropdown.html';
 import './explorer-dropdown.js';
+
+import './home-menu.html';
+import './home-menu.js';
+
