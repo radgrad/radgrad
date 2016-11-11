@@ -359,7 +359,12 @@ Template.Semester_List.events({
     };
     OpportunityInstances.define(oi);
   },
-
+  'click .item.grade'(event) {
+    event.preventDefault();
+    const div = event.target.parentElement.parentElement;
+    const grade = div.childNodes[1].value;
+    CourseInstances.updateGrade(div.id, grade);
+  },
 });
 
 Template.Semester_List.onCreated(function semesterListOnCreate() {

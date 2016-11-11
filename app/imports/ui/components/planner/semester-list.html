@@ -77,11 +77,24 @@
             data-position="top center">
           <td><strong>{{course.note}}</strong></td>
           <td><strong>{{course.creditHrs}}</strong></td>
-          <td><strong>{{course.grade}}</strong></td>
+          <!--<td><strong>{{course.grade}}</strong></td>-->
+          <td><div id="{{course._id}}" class="ui selection dropdown">
+            <input type="hidden" name="grade">
+            <i class="dropdown icon"></i>
+            <div class="default text">Grade</div>
+            <div class="menu">
+              <div class="item grade" data-value="A+">A+</div>
+              <div class="item grade" data-value="A">A</div>
+              <div class="item grade" data-value="A-">A-</div>
+              <div class="item grade" data-value="B+">B+</div>
+              <div class="item grade" data-value="B">B</div>
+              <div class="item grade" data-value="B-">B-</div>
+            </div>
+          </div></td>
           <td> <i id="delete-{{course.note}}" class="ui floated right red remove circle outline icon item del"></i></td>
         </tr>
         <div class="ui fluid popup transition hidden">
-          <p>{{courseDescription course.courseID}}</p>
+          <!--<p>{{courseDescription course.courseID}}</p>-->
           {{> ICE_Badge ice=(courseICE course.courseID)}}
         </div>
       {{else}}
@@ -91,7 +104,7 @@
           <td><strong>{{course.grade}}</strong></td>
         </tr>
         <div class="ui fluid popup transition hidden" style="overflow: auto">
-          <p>{{courseDescription course.courseID}}</p>
+          <!--<p>{{courseDescription course.courseID}}</p>-->
           {{> ICE_Badge ice=(courseICE course.courseID)}}
         </div>
       {{/if}}

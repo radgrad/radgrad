@@ -15,7 +15,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getTotalICE, makeCourseICE } from '../../../api/ice/IceProcessor.js';
+import { getTotalICE, makeCourseICE, getPlanningICE } from '../../../api/ice/IceProcessor.js';
 
 const studentSemesters = () => {
   const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
@@ -409,6 +409,20 @@ Template.Academic_Plan_2.helpers({
       cis = cis.concat(oi);
     });
     return getTotalICE(cis);
+  },
+  yearPlanningICE(year) {
+    let cis = [];
+    const semesterIDs = year.semesterIDs;
+    semesterIDs.forEach((sem) => {
+      const ci = CourseInstances.find({ studentID: Meteor.userId(), semesterID: sem }).fetch();
+      cis = cis.concat(ci);
+      const oi = OpportunityInstances.find({ studentID: Meteor.userId(), semesterID: sem }).fetch();
+      cis = cis.concat(oi);
+    });
+    return getPlanningICE(cis);
+  },
+  isFuture(year) {
+    return year.year >= moment().year();
   },
 });
 
