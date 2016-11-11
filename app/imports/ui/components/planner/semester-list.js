@@ -108,6 +108,14 @@ Template.Semester_List.helpers({
     }
     return null;
   },
+  isGrade(courseInstanceID, grade) {
+    const ci = CourseInstances.findDoc(courseInstanceID);
+    return ci.grade === grade;
+  },
+  hasGrade(courseInstanceID) {
+    const ci = CourseInstances.findDoc(courseInstanceID);
+    return ci.grade !== '***';
+  },
   icsCourses() {
     const ret = [];
     if (Template.instance().state.get('semester')) {
@@ -299,13 +307,6 @@ Template.Semester_List.events({
               resizePopup();
             },
           });
-      template.$('.courseInstance').popup({
-        inline: true, hoverable: true, position: 'top center',
-        lastResort: 'right center',
-        onShow: function resize() {
-          resizePopup();
-        },
-      });
       template.$('.opportunityInstance').popup({
         inline: true, hoverable: true, position: 'top center',
         lastResort: 'right center',
@@ -401,13 +402,6 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
             resizePopup();
           },
         });
-    template.$('.courseInstance').popup({
-      inline: true, hoverable: true, position: 'top center',
-      lastResort: 'right center',
-      onShow: function resize() {
-        resizePopup();
-      },
-    });
     template.$('.opportunityInstance').popup({
       inline: true, hoverable: true, position: 'top center',
       lastResort: 'right center',

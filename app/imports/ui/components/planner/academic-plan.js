@@ -240,9 +240,10 @@ Template.Academic_Plan_2.helpers({
       }
       if (!c.number.startsWith('ICS 4')) {
         return false;
-      } else if (!c.number.startsWith('ICS 41') && !c.number.startsWith('ICS 42') && !c.number.startsWith('ICS 43')) {
-        return false;
-      }
+      } else
+        if (!c.number.startsWith('ICS 41') && !c.number.startsWith('ICS 42') && !c.number.startsWith('ICS 43')) {
+          return false;
+        }
       return lodash.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
@@ -265,9 +266,10 @@ Template.Academic_Plan_2.helpers({
       }
       if (!c.number.startsWith('ICS 4')) {
         return false;
-      } else if (!c.number.startsWith('ICS 44') && !c.number.startsWith('ICS 45') && !c.number.startsWith('ICS 46')) {
-        return false;
-      }
+      } else
+        if (!c.number.startsWith('ICS 44') && !c.number.startsWith('ICS 45') && !c.number.startsWith('ICS 46')) {
+          return false;
+        }
       return lodash.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
@@ -290,40 +292,63 @@ Template.Academic_Plan_2.helpers({
       }
       if (!c.number.startsWith('ICS 4')) {
         return false;
-      } else if (!c.number.startsWith('ICS 47') && !c.number.startsWith('ICS 48') && !c.number.startsWith('ICS 49')) {
-        return false;
-      }
+      } else
+        if (!c.number.startsWith('ICS 47') && !c.number.startsWith('ICS 48') && !c.number.startsWith('ICS 49')) {
+          return false;
+        }
       return lodash.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
   detailCourseNumber() {
-    const course = Courses.find({ _id: Template.instance().state.get('detailCourseID') }).fetch();
-    return course[0];
+    if (Template.instance().state.get('detailCourseID')) {
+      const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
+      const course = Courses.findDoc(ci.courseID);
+      return course;
+    }
+    return null;
   },
   hasCourse() {
     return Template.instance().state.get('detailCourseID');
   },
   courseNumber() {
     if (Template.instance().state.get('detailCourseID')) {
-      const courseId = Template.instance().state.get('detailCourseID');
-      const course = Courses.findDoc({ _id: courseId });
+      const id = Template.instance().state.get('detailCourseID');
+      if (CourseInstances.isDefined(id)) {
+        const ci = CourseInstances.findDoc(id);
+        const course = Courses.findDoc(ci.courseID);
+        return course.number;
+      }
+      const course = Courses.findDoc(id);
       return course.number;
     }
     return null;
   },
   courseName() {
     if (Template.instance().state.get('detailCourseID')) {
-      const courseId = Template.instance().state.get('detailCourseID');
-      const course = Courses.findDoc({ _id: courseId });
+      const id = Template.instance().state.get('detailCourseID');
+      if (CourseInstances.isDefined(id)) {
+        const ci = CourseInstances.findDoc(id);
+        const course = Courses.findDoc(ci.courseID);
+        return course.name;
+      }
+      const course = Courses.findDoc(id);
       return course.name;
     }
     return null;
   },
   courseIce() {
     if (Template.instance().state.get('detailCourseID')) {
-      const courseId = Template.instance().state.get('detailCourseID');
-      const course = Courses.findDoc({ _id: courseId });
+      const id = Template.instance().state.get('detailCourseID');
+      if (CourseInstances.isDefined(id)) {
+        const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
+        const course = Courses.findDoc(ci.courseID);
+        const slug = Slugs.findDoc(course.slugID);
+        const ice = makeCourseICE(slug.name, ci.grade);
+        // console.log(ice);
+        return ice;
+      }
+      const course = Courses.findDoc(id);
       const slug = Slugs.findDoc(course.slugID);
       const ice = makeCourseICE(slug.name, '***');
       return ice;
@@ -332,8 +357,13 @@ Template.Academic_Plan_2.helpers({
   },
   courseDescription() {
     if (Template.instance().state.get('detailCourseID')) {
-      const courseId = Template.instance().state.get('detailCourseID');
-      const course = Courses.findDoc({ _id: courseId });
+      const id = Template.instance().state.get('detailCourseID');
+      if (CourseInstances.isDefined(id)) {
+        const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
+        const course = Courses.findDoc(ci.courseID);
+        return course.description;
+      }
+      const course = Courses.findDoc(id);
       return course.description;
     }
     return null;
@@ -430,7 +460,6 @@ Template.Academic_Plan_2.events({
   'click .item.del'(event) {
     event.preventDefault();
     const template = Template.instance();
-    console.log(event.target);
     template.$('a.item.400').popup('hide all');
     const id = event.target.id;
     const split = id.split('-');
