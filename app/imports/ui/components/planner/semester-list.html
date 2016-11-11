@@ -1,120 +1,120 @@
 <template name="Semester_List">
-  <div class="ui segment bodyDrop" ondragover="allowDrop(event)">
-    <table class="ui top attached structured {{#if isFuture}}orange{{/if}} table">
-      <thead>
-      <tr>
-        <th colspan="3">{{semesterName}}</th>
-      </tr>
-      </thead>
-      <tbody>
-      {{#each course in icsCourses}}
-        {{#if isFuture}}
-          <tr id="{{course.note}}" class="courseInstance" draggable="true" ondragstart="drag(event)"
-              data-position="right center">
-            <td><strong>{{course.note}}</strong></td>
-            <td><strong>{{course.creditHrs}}</strong></td>
-            <td><strong>{{course.grade}}</strong></td>
-          </tr>
-          <div class="ui fluid popup transition hidden">
-            <h4 class="ui header">{{course.note}}</h4>
-            <div class="ui link list">
-              <a id="inspect-{{course.note}}" class="item inspect course">Inspect</a>
-              <a id="delete-{{course.note}}" class="item del course">Delete</a>
-            </div>
-          </div>
-        {{else}}
-          <tr data-position="right center">
-            <td><strong>{{course.note}}</strong></td>
-            <td><strong>{{course.creditHrs}}</strong></td>
-            <td><strong>{{course.grade}}</strong></td>
-          </tr>
-        {{/if}}
-      {{/each}}
-      {{#each course in nonIcsCourses}}
-        <tr class="top aligned">
-          <td>{{course.note}}</td>
-          <td>{{course.creditHrs}}</td>
-          <td>{{course.grade}}</td>
-        </tr>
-      {{/each}}
-      {{#each opportunity in semesterOpportunities}}
-        <tr id="{{opportunity.instanceID}}" class="opportunityInstance" draggable="true" ondragstart="drag(event)"
-            data-position="right center">
-          <td colspan="3"><a href="{{opportunity.moreInformation}}"> <strong>{{opportunity.name}}</strong></a></td>
-        </tr>
-        <div class="ui fluid popup transition hidden">
-          <h4 class="ui header">{{opportunity.name}}</h4>
-          <div class="ui link list">
-            <a id="inspect-{{opportunity.instanceID}}" class="item inspect opportunity">Inspect</a>
-            <a id="delete-{{opportunity.instanceID}}" class="item del opportunity">Delete</a>
-          </div>
-        </div>
-      {{/each}}
-      </tbody>
-    </table>
-  </div>
-  <div class="ui mini green icon button" data-position="top center" style="flex-grow: 0"><i
-      class="add icon"></i></div>
-  <div class="ui fluid popup transition hidden">
-    <div class="ui vertical menu">
-      {{#if isFuture}}
-        <a class="item addCourseMenu" data-position="right center">Add Course</a>
+  <table class="ui structured {{#if isFuture}}orange{{/if}} table bodyDrop" ondragover="allowDrop(event)">
+    <thead>
+    <tr>
+      <th colspan="2">{{semesterName}}</th>
+      <th colspan="2">
+        <div class="ui right floated mini green icon button" data-position="top center" style="flex-grow: 0"><i
+            class="add icon"></i></div>
         <div class="ui fluid popup transition hidden">
           <div class="ui vertical menu">
-            {{#if hasCourses 100}}
-              <a class="item 100" data-position="right center">1xx</a>
+            {{#if isFuture}}
+              <a class="item addCourseMenu" data-position="right center">Add Course</a>
               <div class="ui fluid popup transition hidden">
                 <div class="ui vertical menu">
-                  <div class="ui link list">
-                    {{#each course in (courses 100)}}
-                      <a class="item addClass">{{course}}</a>
-                    {{/each}}
-                  </div>
+                  {{#if hasCourses 100}}
+                    <a class="item 100" data-position="right center">1xx</a>
+                    <div class="ui fluid popup transition hidden">
+                      <div class="ui vertical menu">
+                        <div class="ui link list">
+                          {{#each course in (courses 100)}}
+                            <a class="item addClass">{{course}}</a>
+                          {{/each}}
+                        </div>
+                      </div>
+                    </div>
+                  {{/if}}
+                  {{#if hasCourses 200}}
+                    <a class="item 200" data-position="right center">2xx</a>
+                    <div class="ui fluid popup transition hidden">
+                      <div class="ui vertical menu">
+                        {{#each course in (courses 200)}}
+                          <a class="item addClass">{{course}}</a>
+                        {{/each}}
+                      </div>
+                    </div>
+                  {{/if}}
+                  {{#if hasCourses 300}}
+                    <a class="item 300" data-position="right center">3xx</a>
+                    <div class="ui fluid popup transition hidden">
+                      <div class="ui vertical menu">
+                        {{#each course in (courses 300)}}
+                          <a class="item addClass">{{course}}</a>
+                        {{/each}}
+                      </div>
+                    </div>
+                  {{/if}}
+                  {{#if hasCourses 400}}
+                    <a class="item 400" data-position="right center">4xx</a>
+                    <div class="ui fluid popup transition hidden" style="overflow: auto">
+                      <div class="ui vertical menu">
+                        {{#each course in (courses 400)}}
+                          <a class="item addClass">{{course}}</a>
+                        {{/each}}
+                      </div>
+                    </div>
+                  {{/if}}
                 </div>
               </div>
             {{/if}}
-            {{#if hasCourses 200}}
-              <a class="item 200" data-position="right center">2xx</a>
-              <div class="ui fluid popup transition hidden">
-                <div class="ui vertical menu">
-                  {{#each course in (courses 200)}}
-                    <a class="item addClass">{{course}}</a>
-                  {{/each}}
-                </div>
+            <a class="item addOpportunityMenu">Add Opportunity</a>
+            <div class="ui fluid popup transition hidden" style="overflow: auto">
+              <div class="ui vertical menu">
+                {{#each opportunity in opportunities}}
+                  <a class="item addOpportunity">{{opportunity.name}}</a>
+                {{/each}}
               </div>
-            {{/if}}
-            {{#if hasCourses 300}}
-              <a class="item 300" data-position="right center">3xx</a>
-              <div class="ui fluid popup transition hidden">
-                <div class="ui vertical menu">
-                  {{#each course in (courses 300)}}
-                    <a class="item addClass">{{course}}</a>
-                  {{/each}}
-                </div>
-              </div>
-            {{/if}}
-            {{#if hasCourses 400}}
-              <a class="item 400" data-position="right center">4xx</a>
-              <div class="ui fluid popup transition hidden" style="overflow: auto">
-                <div class="ui vertical menu">
-                  {{#each course in (courses 400)}}
-                    <a class="item addClass">{{course}}</a>
-                  {{/each}}
-                </div>
-              </div>
-            {{/if}}
+            </div>
           </div>
         </div>
-      {{/if}}
-      <a class="item addOpportunityMenu">Add Opportunity</a>
-      <div class="ui fluid popup transition hidden" style="overflow: auto">
-        <div class="ui vertical menu">
-          {{#each opportunity in opportunities}}
-            <a class="item addOpportunity">{{opportunity.name}}</a>
-          {{/each}}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each course in icsCourses}}
+      {{#if isFuture}}
+        <tr id="{{course.courseID}}" class="courseInstance clickEnabled" draggable="true" ondragstart="drag(event)"
+            data-position="top center">
+          <td><strong>{{course.note}}</strong></td>
+          <td><strong>{{course.creditHrs}}</strong></td>
+          <td><strong>{{course.grade}}</strong></td>
+          <td> <i id="delete-{{course.note}}" class="ui floated right red remove circle outline icon item del"></i></td>
+        </tr>
+        <div class="ui fluid popup transition hidden">
+          <p>{{courseDescription course.courseID}}</p>
+          {{> ICE_Badge ice=(courseICE course.courseID)}}
         </div>
+      {{else}}
+        <tr id="{{course.courseID}}" data-position="top center" class="courseInstance clickEnabled">
+          <td><strong>{{course.note}}</strong></td>
+          <td><strong>{{course.creditHrs}}</strong></td>
+          <td><strong>{{course.grade}}</strong></td>
+        </tr>
+        <div class="ui fluid popup transition hidden" style="overflow: auto">
+          <p>{{courseDescription course.courseID}}</p>
+          {{> ICE_Badge ice=(courseICE course.courseID)}}
+        </div>
+      {{/if}}
+    {{/each}}
+    {{#each course in nonIcsCourses}}
+      <tr class="top aligned">
+        <td>{{course.note}}</td>
+        <td>{{course.creditHrs}}</td>
+        <td>{{course.grade}}</td>
+      </tr>
+    {{/each}}
+    {{#each opportunity in semesterOpportunities}}
+      <tr id="{{opportunity.instanceID}}" class="opportunityInstance clickEnabled" draggable="true"
+          ondragstart="drag(event)" data-position="top center">
+        <td colspan="3"><a href="{{opportunity.moreInformation}}"> <strong>{{opportunity.name}}</strong></a></td>
+        <td> <i id="delete-{{opportunity.instanceID}}" class="ui floated right red remove circle outline icon item del"></i></td>
+      </tr>
+      <div class="ui fluid popup transition hidden" style="overflow: auto">
+        <p>{{opportunityDescription opportunity.instanceID}}</p>
+        {{> ICE_Badge ice=(opportunityICE opportunity.instanceID)}}
       </div>
-    </div>
-  </div>
+    {{/each}}
+    </tbody>
+  </table>
 
 </template>
