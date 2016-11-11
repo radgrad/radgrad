@@ -78,7 +78,7 @@ const availableOpportunities = () => {
 };
 
 const resizePopup = () => {
-  $('.ui.popup').css('max-height', '350px');
+  // $('.ui.popup').css('max-height', '350px');
 };
 
 $(window).resize(function (e) {

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
@@ -12,8 +13,9 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getTotalICE } from '../../../api/ice/IceProcessor.js';
+import { getTotalICE, makeCourseICE } from '../../../api/ice/IceProcessor.js';
 
 const studentSemesters = () => {
   const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
@@ -151,6 +153,150 @@ Template.Academic_Plan_2.helpers({
     });
     return ret;
   },
+  courses100() {
+    let ret = [];
+    const courses = Courses.find().fetch();
+    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const courseTakenIDs = [];
+    instances.forEach((courseInstance) => {
+      if (CourseInstances.isICS(courseInstance._id)) {
+        if (courseInstance.note !== 'ICS 499') {
+          courseTakenIDs.push(courseInstance.courseID);
+        }
+      }
+    });
+    ret = lodash.filter(courses, function filter(c) {
+      if (c.number === 'other') {
+        return false;
+      }
+      if (!c.number.startsWith('ICS 1')) {
+        return false;
+      }
+      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+    });
+    return ret;
+  },
+  courses200() {
+    let ret = [];
+    const courses = Courses.find().fetch();
+    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const courseTakenIDs = [];
+    instances.forEach((courseInstance) => {
+      if (CourseInstances.isICS(courseInstance._id)) {
+        if (courseInstance.note !== 'ICS 499') {
+          courseTakenIDs.push(courseInstance.courseID);
+        }
+      }
+    });
+    ret = lodash.filter(courses, function filter(c) {
+      if (c.number === 'other') {
+        return false;
+      }
+      if (!c.number.startsWith('ICS 2')) {
+        return false;
+      }
+      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+    });
+    return ret;
+  },
+  courses300() {
+    let ret = [];
+    const courses = Courses.find().fetch();
+    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const courseTakenIDs = [];
+    instances.forEach((courseInstance) => {
+      if (CourseInstances.isICS(courseInstance._id)) {
+        if (courseInstance.note !== 'ICS 499') {
+          courseTakenIDs.push(courseInstance.courseID);
+        }
+      }
+    });
+    ret = lodash.filter(courses, function filter(c) {
+      if (c.number === 'other') {
+        return false;
+      }
+      if (!c.number.startsWith('ICS 3')) {
+        return false;
+      }
+      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+    });
+    return ret;
+  },
+  courses410() {
+    let ret = [];
+    const courses = Courses.find().fetch();
+    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const courseTakenIDs = [];
+    instances.forEach((courseInstance) => {
+      if (CourseInstances.isICS(courseInstance._id)) {
+        if (courseInstance.note !== 'ICS 499') {
+          courseTakenIDs.push(courseInstance.courseID);
+        }
+      }
+    });
+    ret = lodash.filter(courses, function filter(c) {
+      if (c.number === 'other') {
+        return false;
+      }
+      if (!c.number.startsWith('ICS 4')) {
+        return false;
+      } else if (!c.number.startsWith('ICS 41') && !c.number.startsWith('ICS 42') && !c.number.startsWith('ICS 43')) {
+        return false;
+      }
+      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+    });
+    return ret;
+  },
+  courses440() {
+    let ret = [];
+    const courses = Courses.find().fetch();
+    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const courseTakenIDs = [];
+    instances.forEach((courseInstance) => {
+      if (CourseInstances.isICS(courseInstance._id)) {
+        if (courseInstance.note !== 'ICS 499') {
+          courseTakenIDs.push(courseInstance.courseID);
+        }
+      }
+    });
+    ret = lodash.filter(courses, function filter(c) {
+      if (c.number === 'other') {
+        return false;
+      }
+      if (!c.number.startsWith('ICS 4')) {
+        return false;
+      } else if (!c.number.startsWith('ICS 44') && !c.number.startsWith('ICS 45') && !c.number.startsWith('ICS 46')) {
+        return false;
+      }
+      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+    });
+    return ret;
+  },
+  courses470() {
+    let ret = [];
+    const courses = Courses.find().fetch();
+    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const courseTakenIDs = [];
+    instances.forEach((courseInstance) => {
+      if (CourseInstances.isICS(courseInstance._id)) {
+        if (courseInstance.note !== 'ICS 499') {
+          courseTakenIDs.push(courseInstance.courseID);
+        }
+      }
+    });
+    ret = lodash.filter(courses, function filter(c) {
+      if (c.number === 'other') {
+        return false;
+      }
+      if (!c.number.startsWith('ICS 4')) {
+        return false;
+      } else if (!c.number.startsWith('ICS 47') && !c.number.startsWith('ICS 48') && !c.number.startsWith('ICS 49')) {
+        return false;
+      }
+      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+    });
+    return ret;
+  },
   detailCourseNumber() {
     const course = Courses.find({ _id: Template.instance().state.get('detailCourseID') }).fetch();
     return course[0];
@@ -178,7 +324,9 @@ Template.Academic_Plan_2.helpers({
     if (Template.instance().state.get('detailCourseID')) {
       const courseId = Template.instance().state.get('detailCourseID');
       const course = Courses.findDoc({ _id: courseId });
-      return course.ice;
+      const slug = Slugs.findDoc(course.slugID);
+      const ice = makeCourseICE(slug.name, '***');
+      return ice;
     }
     return null;
   },
@@ -375,6 +523,10 @@ Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {
 Template.Academic_Plan_2.onRendered(function academicPlan2OnRendered() {
   this.state.set('currentSemesterID', this.data.currentSemesterID);
   this.state.set('studentUsername', this.data.studentUserName);
+  const template = this;
+  Tracker.afterFlush(() => {
+    template.$('.ui.dropdown').dropdown({ transition: 'drop' });
+  });
 });
 
 Template.Academic_Plan_2.onDestroyed(function academicPlan2OnDestroyed() {

@@ -2,25 +2,6 @@
   <div class="ui grid">
     <div class="ui ten wide column">
       <div class="ui top left attached green label">Degree Planner</div>
-      <div class="ui equal width grid">
-        <div class="column">
-          {{#if hasPrevYear}}
-            <button id="prevYear" class="ui icon green button" data-content="View previous academic year">
-              <i class="ui arrow left icon"></i></button>
-            Previous Year
-          {{/if}}
-        </div>
-        <div class="center aligned column">
-          <button id="addAY" class="positive ui icon button"><i class="ui plus icon"></i> Add Academic Year</button>
-        </div>
-        <div class="right aligned column">
-          {{#if hasNextYear}}
-            Next Year&nbsp;
-            <button id="nextYear" class="ui icon green button"><i
-                class="ui arrow right icon" data-content="View next academic year"></i></button>
-          {{/if}}
-        </div>
-      </div>
     </div>
   </div>
   <div class="ui divided grid">
@@ -40,25 +21,81 @@
           {{/each}}
         </div>
       </div>
-      <div class="ui six wide column" >
+      <div class="ui six wide column">
         <div class="ui segment">
-          <div class="ui top left attached green label">Inspector</div>
-          <div class="ui grid container">
-            <div class="row">
-              <div class="three wide column" >
-                <div class="ui divided list" style="overflow:scroll; height: 175px;">
-                  {{#each course in courses}}
-                    <a id="{{course._id}}" class="course item">{{course.number}}</a>
-                  {{/each}}
+          <div class="ui top attached green buttons">
+            <div class="ui floating dropdown icon button">Courses
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  <span class="text">1xx</span>
+                  <div class="menu">
+                    {{#each course in courses100}}
+                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                    {{/each}}
+                  </div>
                 </div>
-                <div class="ui divider"></div>
-                <div class="ui list" style="overflow:scroll; height: 175px;">
-                  {{#each opportunity in opportunities}}
-                    <a id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</a>
-                  {{/each}}
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  <span class="text">2xx</span>
+                  <div class="menu">
+                    {{#each course in courses200}}
+                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                    {{/each}}
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  <span class="text">3xx</span>
+                  <div class="menu">
+                    {{#each course in courses300}}
+                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                    {{/each}}
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  <span class="text">41x - 43x</span>
+                  <div class="menu" style="overflow: auto; height: 300px">
+                    {{#each course in courses410}}
+                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                    {{/each}}
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  <span class="text">44x - 46x</span>
+                  <div class="menu" style="overflow: auto; height: 300px">
+                    {{#each course in courses440}}
+                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                    {{/each}}
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  <span class="text">47x - 499</span>
+                  <div class="menu" style="overflow: auto; height: 300px">
+                    {{#each course in courses470}}
+                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                    {{/each}}
+                  </div>
                 </div>
               </div>
-              <div class="thirteen wide column segment">
+            </div>
+            <div class="or"></div>
+            <div class="ui floating dropdown icon button">&nbsp;&nbsp;Opportunities
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                {{#each opportunity in opportunities}}
+                  <div id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+          <div class="ui grid container">
+            <div class="row">
+              <div class="column">
                 <div class="ui left aligned segment">
                   {{#if hasCourse}}
                     <p><b>{{courseNumber}}</b>
@@ -75,8 +112,6 @@
                       <p><b>When scheduled:</b></p>
                       <p><b>ICE Value:</b> points for innovation, points for competency,
                         points for experience.</p>
-                      <p><b>Recommendations:</b> TBD</p>
-                      <p><b>Warnings:</b> None</p>
                     </div>
                   {{else}}
                     {{#if hasOpportunity}}
@@ -88,7 +123,7 @@
                         <p><b>More: </b><a href="{{opportunityMore}}">{{opportunityMore}}</a></p>
                       </div>
                     {{else}}
-                      <p>Please select an ICS course or opportunity from the lists to the left or click on a course or
+                      <p>Please select an ICS course or opportunity menus above or click on a course or
                         opportunity in you plan.</p>
                     {{/if}}
                   {{/if}}
@@ -96,6 +131,29 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui grid">
+    <div class="ui ten wide column">
+      <div class="ui equal width grid">
+        <div class="column">
+          {{#if hasPrevYear}}
+            <button id="prevYear" class="ui icon green button" data-content="View previous academic year">
+              <i class="ui arrow left icon"></i></button>
+            Previous Year
+          {{/if}}
+        </div>
+        <div class="center aligned column">
+          <button id="addAY" class="positive ui icon button"><i class="ui plus icon"></i> Add Academic Year</button>
+        </div>
+        <div class="right aligned column">
+          {{#if hasNextYear}}
+            Next Year&nbsp;
+            <button id="nextYear" class="ui icon green button"><i
+                class="ui arrow right icon" data-content="View next academic year"></i></button>
+          {{/if}}
         </div>
       </div>
     </div>
