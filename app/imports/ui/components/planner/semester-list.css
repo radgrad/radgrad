@@ -1,0 +1,15 @@
+.degreePlanner .ui.segment {
+  padding: 4px;
+}
+
+.degreePlanner .ui.grid {
+  margin: 4px 10px;
+}
+
+.degreePlanner .ui.grid>.column:not(.row) {
+  padding: 4px 4px;
+}
+
+.degreePlanner .ui.table tr td {
+  padding: 2px 4px;
+}
