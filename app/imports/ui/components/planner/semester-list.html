@@ -80,20 +80,20 @@
           <td><strong>{{course.grade}}</strong></td>
           <td> <i id="delete-{{course.note}}" class="ui floated right red remove circle outline icon item del"></i></td>
         </tr>
-        <div class="ui fluid popup transition hidden">
-          <p>{{courseDescription course.courseID}}</p>
-          {{> ICE_Badge ice=(courseICE course.courseID)}}
-        </div>
+        <!--<div class="ui fluid popup transition hidden">-->
+          <!--<p>{{courseDescription course.courseID}}</p>-->
+          <!--{{> ICE_Badge ice=(courseICE course.courseID)}}-->
+        <!--</div>-->
       {{else}}
         <tr id="{{course.courseID}}" data-position="top center" class="courseInstance clickEnabled">
           <td><strong>{{course.note}}</strong></td>
           <td><strong>{{course.creditHrs}}</strong></td>
           <td><strong>{{course.grade}}</strong></td>
         </tr>
-        <div class="ui fluid popup transition hidden" style="overflow: auto">
-          <p>{{courseDescription course.courseID}}</p>
-          {{> ICE_Badge ice=(courseICE course.courseID)}}
-        </div>
+        <!--<div class="ui fluid popup transition hidden" style="overflow: auto">-->
+          <!--<p>{{courseDescription course.courseID}}</p>-->
+          <!--{{> ICE_Badge ice=(courseICE course.courseID)}}-->
+        <!--</div>-->
       {{/if}}
     {{/each}}
     {{#each course in nonIcsCourses}}
@@ -109,10 +109,10 @@
         <td colspan="3"><a href="{{opportunity.moreInformation}}"> <strong>{{opportunity.name}}</strong></a></td>
         <td> <i id="delete-{{opportunity.instanceID}}" class="ui floated right red remove circle outline icon item del"></i></td>
       </tr>
-      <div class="ui fluid popup transition hidden" style="overflow: auto">
-        <p>{{opportunityDescription opportunity.instanceID}}</p>
-        {{> ICE_Badge ice=(opportunityICE opportunity.instanceID)}}
-      </div>
+      <!--<div class="ui fluid popup transition hidden" style="overflow: auto">-->
+        <!--<p>{{opportunityDescription opportunity.instanceID}}</p>-->
+        <!--{{> ICE_Badge ice=(opportunityICE opportunity.instanceID)}}-->
+      <!--</div>-->
     {{/each}}
     </tbody>
   </table>
