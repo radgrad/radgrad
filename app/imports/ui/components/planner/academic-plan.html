@@ -1,9 +1,4 @@
 <template name="Academic_Plan_2">
-  <div class="ui grid">
-    <div class="ui ten wide column">
-      <div class="ui top left attached green label">Degree Planner</div>
-    </div>
-  </div>
   <div class="ui divided grid">
     <div class="stretched row">
       <div class="ui ten wide column">
@@ -15,7 +10,11 @@
                 {{> Semester_List (fallArgs year)}}
                 {{> Semester_List (springArgs year)}}
                 {{> Semester_List (summerArgs year)}}
-                {{> ICE_Badge ice=(yearICE year)}}
+                {{#if isFuture year}}
+                  {{> ICE_Badge ice=(yearPlanningICE year)}}
+                {{else}}
+                  {{> ICE_Badge ice=(yearICE year)}}
+                {{/if}}
               </div>
             </div>
           {{/each}}
