@@ -29,3 +29,13 @@ import './student-explorer-career-page.js';
 import './explorer-interest-pages/algorithms.html';
 import './explorer-interest-pages/algorithms.js';
 
+import './student-aboutme.html';
+import './student-aboutme';
+
+import './student-levels.html';
+import './student-levels.js';
+
+import './student-ice.html';
+import './student-ice.js';
+import './student-ice.css';
+

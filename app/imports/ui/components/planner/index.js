@@ -7,6 +7,7 @@ import './recommendation-item.js';
 import './recommendations.html';
 import './recommendations.js';
 
+import './semester-list.css';
 import './semester-list.html';
 import './semester-list.js';
 

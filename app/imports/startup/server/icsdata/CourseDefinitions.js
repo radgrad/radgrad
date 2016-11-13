@@ -20,6 +20,28 @@ export const courseDefinitions = [
     prerequisites: [],
   },
   {
+    name: 'Digital Tools for the Information World',
+    slug: 'ics101',
+    number: 'ICS 101',
+    creditHrs: 4,
+    description: 'Fundamental information technology concepts and computing terminology, productivity software for problem solving, computer technology trends and impact on individuals and society. Emphasizes the utilization of operating systems and the production of professional documents, spreadsheets, etc.',
+    interests: [],
+    syllabus: ' ',
+    moreInformation: ' ',
+    prerequisites: [],
+  },
+  {
+    name: 'Introduction to Computer Programming',
+    slug: 'ics110',
+    number: 'ICS 110',
+    creditHrs: 3,
+    description: 'Basic concepts needed to write computer programs. Simple program design and implementation using a specific programming language; (C) C; (D) through animations; (P) Python. Each alpha repeatable unlimited times, but credit earned one time only.',
+    interests: [],
+    syllabus: ' ',
+    moreInformation: ' ',
+    prerequisites: [],
+  },
+  {
     name: 'Introduction to Computer Science I',
     slug: 'ics111',
     number: 'ICS 111',
@@ -77,7 +99,7 @@ export const courseDefinitions = [
     description: 'What is computer science about? What is the difference between computers and other machines? What are the limits of computation? Are there computers that are not machines? Understand the basic issues of computability, complexity, and network effects, and learn to apply them in the practice of computation.',
     interests: ['theory-of-computation'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS222.html',
-    prerequisites: [],
+    prerequisites: ['ics141'],
   },
   {
     name: 'Discrete Mathematics for Computer Science II',
@@ -98,26 +120,7 @@ export const courseDefinitions = [
     interests: ['algorithms', 'data-science'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS311.html',
     moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS311/',
-    prerequisites: ['ics141', 'ics211'],
-  },
-  {
-    name: 'Machine-Level and Systems Programming',
-    slug: 'ics312',
-    number: 'ICS 312',
-    description: 'Machine organization, machine instructions, addressing modes, assembler language, subroutine linkage, linking to higher-level languages, interface to operating systems, introduction to assemblers, loaders and compilers.',
-    interests: ['assembler', 'computer-architecture', 'application-development'],
-    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS311.html',
-    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS311/',
-    prerequisites: ['ics212'],
-  },
-  {
-    name: 'Programming Language Theory',
-    slug: 'ics313',
-    number: 'ICS 313',
-    description: 'Syntax, semantics, control structures, variable binding and scopes, data and control abstractions. Programming in functional (LISP) and logic (Prolog) programming styles.',
-    interests: ['lisp', 'prolog'],
-    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS313.html',
-    prerequisites: ['ics212', 'ics241'],
+    prerequisites: ['ics241', 'ics211'],
   },
   {
     name: 'Software Engineering I',
@@ -130,6 +133,25 @@ export const courseDefinitions = [
     prerequisites: ['ics211', 'ics241'],
   },
   {
+    name: 'Machine-Level and Systems Programming',
+    slug: 'ics312',
+    number: 'ICS 312',
+    description: 'Machine organization, machine instructions, addressing modes, assembler language, subroutine linkage, linking to higher-level languages, interface to operating systems, introduction to assemblers, loaders and compilers.',
+    interests: ['assembler', 'computer-architecture', 'application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS311.html',
+    moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS311/',
+    prerequisites: ['ics212', 'ics314'],
+  },
+  {
+    name: 'Programming Language Theory',
+    slug: 'ics313',
+    number: 'ICS 313',
+    description: 'Syntax, semantics, control structures, variable binding and scopes, data and control abstractions. Programming in functional (LISP) and logic (Prolog) programming styles.',
+    interests: ['lisp', 'prolog'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS313.html',
+    prerequisites: ['ics212', 'ics311', 'ics314'],
+  },
+  {
     name: 'Data Storage and Retrieval',
     slug: 'ics321',
     number: 'ICS 321',
@@ -137,7 +159,7 @@ export const courseDefinitions = [
     interests: ['databases', 'application-development'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS321.html',
     moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS321/',
-    prerequisites: ['ics211'],
+    prerequisites: ['ics311', 'ics314'],
   },
   {
     name: 'Logic Design and Microprocessors',
@@ -147,7 +169,7 @@ export const courseDefinitions = [
     description: 'Basic machine architecture, microprocessors, bus organization, circuit elements, logic circuit analysis and design, microcomputer system design.',
     interests: ['computer-architecture', 'hardware', 'application-development'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS331.html',
-    prerequisites: ['ics212', 'ics241'],
+    prerequisites: ['ics212', 'ics311', 'ics314'],
   },
   {
     name: 'Operating Systems',
@@ -156,7 +178,7 @@ export const courseDefinitions = [
     description: 'Operating system concepts and structure, processes and threads, CPU scheduling, memory management, scheduling, file systems, inter-process communication, virtualization, popular operating systems.',
     interests: ['operating-systems', 'computer-architecture', 'application-development'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS332.html',
-    prerequisites: ['ics211'],
+    prerequisites: ['ics311', 'ics314'],
   },
   {
     name: 'Network Design and Management',
@@ -165,7 +187,7 @@ export const courseDefinitions = [
     description: 'Overview of the internet and its capabilities; introduction to HTTP, TCP/IP, ethernet, and wireless 802.11; routers, switches, and NAT; network and wireless security; practical experience in designing and implementing networks.',
     interests: ['networks', 'security', 'hardware', 'application-development'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS331.html',
-    prerequisites: ['ics141', 'ics211'],
+    prerequisites: ['ics311', 'ics314'],
   },
   {
     name: 'Security and Trust I: Resource Protections',
@@ -175,7 +197,7 @@ export const courseDefinitions = [
     interests: ['security'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS355.html',
     moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS355/',
-    prerequisites: ['ics241'],
+    prerequisites: ['ics222', 'ics311', 'ics314'],
   },
   {
     name: 'Introduction to Artificial Intelligence Programming',
@@ -184,7 +206,7 @@ export const courseDefinitions = [
     description: 'Introduction to the theory of Artificial Intelligence and the practical application of AI techniques in Functional (Common LISP and/or Scheme) and Logic (Prolog) programming languages. Students gain practical experience through programming assignments and projects.',
     interests: ['artificial-intelligence', 'lisp', 'prolog'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS361.html',
-    prerequisites: ['ics241'],
+    prerequisites: ['ics212', 'ics311', 'ics314'],
   },
   {
     name: 'Computing Ethics for Lab Assistants',
@@ -193,7 +215,7 @@ export const courseDefinitions = [
     description: 'A lecture/discussion/internship on ethical issues and instructional techniques for students assisting a laboratory section of ICS 101. The class uses multiple significant writing and oral presentation activities to help students learn course content.',
     interests: ['teaching', 'computer-ethics'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS390.html',
-    prerequisites: [],
+    prerequisites: ['ics101'],
   },
   {
     name: 'Software Engineering II',
@@ -229,7 +251,7 @@ export const courseDefinitions = [
     description: 'Principles of database systems, data modeling, relational models, database design, query languages, query optimization, concurrency control data security.',
     interests: ['databases'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS421.html',
-    prerequisites: ['ics311', 'ics314', 'ics321'],
+    prerequisites: ['ics321'],
   },
   {
     name: 'Data Processing',
@@ -238,7 +260,7 @@ export const courseDefinitions = [
     description: 'Role of data processing in organizations, programming practices, ethics, sequential and indexed file processing, report writing, online transaction processing.',
     interests: ['databases'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS422.html',
-    prerequisites: ['ics311', 'ics314'],
+    prerequisites: ['ics321'],
   },
   {
     name: 'Data Security and Cryptography I',
@@ -247,17 +269,17 @@ export const courseDefinitions = [
     description: 'History of secret communication and confidential data storage. Elements of cryptography and cryptanalysis. Classical ciphers. Symmetric key cryptography. Public key cryptography. Data security in cyberspace.',
     interests: ['cryptography', 'security'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS423.html',
+    prerequisites: ['ics355'],
+  },
+  {
+    name: 'Application Frameworks',
+    slug: 'ics424',
+    number: 'ICS 424',
+    description: 'Experience producing applications with at least two different applications frameworks.',
+    interests: ['application-development'],
+    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS424.html',
     prerequisites: ['ics311', 'ics314'],
   },
-  // {
-  //   name: 'Application Frameworks',
-  //   slug: 'ics424',
-  //   number: 'ICS 424',
-  //   description: 'Experience producing applications with at least two different applications frameworks.',
-  //   interests: ['application-development'],
-  //   syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS424.html',
-  //   prerequisites: ['ics311', 'ics314'],
-  // },
   {
     name: 'Computer Security and Ethics',
     slug: 'ics425',
@@ -265,7 +287,7 @@ export const courseDefinitions = [
     description: 'Theoretical results, security policy, encryption, key management, digital signatures, certificates, passwords. Ethics: privacy, computer crime, professional ethics. Effects of the computer revolution on society.',
     interests: ['security', 'computer-ethics', 'it-management'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS415.html',
-    prerequisites: ['ics311', 'ics314'],
+    prerequisites: ['ics355'],
   },
   {
     name: 'Computer System Security',
@@ -274,7 +296,7 @@ export const courseDefinitions = [
     description: ' Information flow, confinement, information assurance, malicious programs, vulnerability analysis, network security, writing secure programs.',
     interests: ['security', 'it-management'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS426.html',
-    prerequisites: ['ics311', 'ics314'],
+    prerequisites: ['ics355'],
   },
   {
     name: 'Computer Architecture',
@@ -283,7 +305,7 @@ export const courseDefinitions = [
     description: 'Memory management, control flow, interrupt mechanisms, multiprocessor systems, special-purpose devices.',
     interests: ['computer-architecture', 'hardware'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS431.html',
-    prerequisites: ['ics311', 'ics314', 'ics331'],
+    prerequisites: ['ics331'],
   },
   {
     name: 'Concurrent and High-Performance Programming',
@@ -292,7 +314,7 @@ export const courseDefinitions = [
     description: 'Principles of concurrent and high performance programming. Multi-threading in C and Java for shared-memory programming. Distributed memory programming with Java. Introduction to cluster computing.',
     interests: ['parallel-programming', 'hpc', 'c', 'java', 'application-development'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS432.html',
-    prerequisites: ['ics311', 'ics314'],
+    prerequisites: ['ics311', 'ics314', 'ics212'],
   },
   {
     name: 'Machine Learning Fundamentals',
@@ -338,7 +360,7 @@ export const courseDefinitions = [
     description: ' Network analysis, architecture, digital signal analysis and design; circuit switching, packet switching, packet broadcasting; protocols and standards; local area networks; satellite networks; ALOHA channels; examples.',
     interests: ['networks', 'c'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS451.html',
-    prerequisites: ['ics311', 'ics314'],
+    prerequisites: ['ics311', 'ics314', 'ics212'],
   },
   {
     name: 'Software Design for Robotics',
@@ -347,7 +369,7 @@ export const courseDefinitions = [
     description: 'Sensors, actuators, signal processing, paradigms of robotic software design, introduction to machine learning, introduction to computer vision, and robot-to-human interaction.',
     interests: ['robotics', 'machine-learning', 'hardware', 'application-development'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS452.html',
-    prerequisites: ['ics311', 'ics314'],
+    prerequisites: ['ics312', 'ics313'],
   },
   {
     name: 'Security and Trust II: Information Assurance',
@@ -356,7 +378,7 @@ export const courseDefinitions = [
     description: 'Channel security. Trojan and noninterference. Basic concepts of cryptology. Cryptographic primitives. Protocols for authentication and key establishment.',
     interests: ['security', 'cryptography'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS455.html',
-    prerequisites: ['ics311', 'ics314'],
+    prerequisites: ['ics355'],
   },
   {
     name: 'Artificial Intelligence',
@@ -374,7 +396,7 @@ export const courseDefinitions = [
     description: 'Techniques to stimulate intelligence in video games: movement, pathfinding with A* search, decision/behavior trees, state machines, machine learning, tactics. Extend games with your own AI implementations; experience shootout contests for the best AI algorithm/implementation.',
     interests: ['algorithms', 'game-design', 'artificial-intelligence', 'machine-learning', 'application-development'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS462.html',
-    prerequisites: ['ics311', 'ics314'],
+    prerequisites: ['ics311', 'ics314', 'ics212'],
   },
   {
     name: 'Human Computer Interaction I',
@@ -440,8 +462,6 @@ export const courseDefinitions = [
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS476.html',
     prerequisites: ['ics475'],
   },
-
-
   {
     name: 'Introduction to Computer Graphics',
     slug: 'ics481',
@@ -458,7 +478,7 @@ export const courseDefinitions = [
     description: 'Introductory course in computer vision. Topics include image formation, image processing and filtering, edge detection, texture analysis and synthesis, binocular stereo, segmentation, tracking, object recognition and applications.',
     interests: ['computer-vision', 'algorithms'],
     syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS483.html',
-    prerequisites: ['ics311', 'ics314'],
+    prerequisites: ['ics311', 'ics314', 'ics212'],
   },
   {
     name: 'Data Visualization',

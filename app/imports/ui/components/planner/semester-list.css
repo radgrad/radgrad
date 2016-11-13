@@ -1,0 +1,30 @@
+.layout-page.degreePlanner {
+  padding-top: 70px;
+}
+
+.degreePlanner div.stretched.row {
+  padding: 4px 4px;
+}
+
+.degreePlanner .ui.segment {
+  padding: 4px;
+}
+
+.degreePlanner .ui.selection.dropdown {
+  min-width: auto;
+  min-height: auto;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.degreePlanner .ui.grid {
+  margin: 4px 10px;
+}
+
+.degreePlanner .ui.grid>.column:not(.row) {
+  padding: 4px 4px;
+}
+
+.degreePlanner .ui.table tr td {
+  padding: 2px 4px;
+}
