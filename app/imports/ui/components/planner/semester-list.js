@@ -86,70 +86,14 @@ $(window).resize(function (e) {
 });
 
 Template.Semester_List.helpers({
-  semesterName() {
-    const semester = Template.instance().state.get('semester');
-    if (semester) {
-      return semester.term;
-    }
-    return null;
+  courseDescription(courseID) {
+    const ci = CourseInstances.find({ courseID }).fetch();
+    const course = Courses.find({ _id: ci[0].courseID }).fetch();
+    return course[0].description;
   },
-  year() {
-    const semester = Template.instance().state.get('semester');
-    if (semester) {
-      return semester.year;
-    }
-    return null;
-  },
-  isFuture() {
-    const semester = Template.instance().state.get('semester');
-    const currentSemester = Template.instance().state.get('currentSemester');
-    if (semester && currentSemester) {
-      return semester.sortBy >= currentSemester.sortBy;
-    }
-    return null;
-  },
-  isGrade(courseInstanceID, grade) {
-    const ci = CourseInstances.findDoc(courseInstanceID);
-    return ci.grade === grade;
-  },
-  hasGrade(courseInstanceID) {
-    const ci = CourseInstances.findDoc(courseInstanceID);
-    return ci.grade !== '***';
-  },
-  icsCourses() {
-    const ret = [];
-    if (Template.instance().state.get('semester')) {
-      const courses = CourseInstances.find({
-        semesterID: Template.instance().state.get('semester')._id,
-        studentID: Meteor.userId(),
-      }, { sort: { note: 1 } }).fetch();
-      courses.forEach((c) => {
-        if (CourseInstances.isICS(c._id)) {
-          ret.push(c);
-        }
-      });
-    }
-    return ret;
-  },
-  hasCourses(level) {
-    let ret = false;
-    switch (level) {
-      case 100:
-        ret = available1xxCourses().length !== 0;
-        break;
-      case 200:
-        ret = available2xxCourses().length !== 0;
-        break;
-      case 300:
-        ret = available3xxCourses().length !== 0;
-        break;
-      case 400:
-        ret = available4xxCourses().length !== 0;
-        break;
-      default:
-        ret = false;
-    }
-    return ret;
+  courseICE(courseID) {
+    const opp = CourseInstances.find({ courseID }).fetch();
+    return opp[0].ice;
   },
   courses(level) {
     const ret = [];
@@ -183,6 +127,61 @@ Template.Semester_List.helpers({
     });
     return ret;
   },
+  hasCourses(level) {
+    let ret = false;
+    switch (level) {
+      case 100:
+        ret = available1xxCourses().length !== 0;
+        break;
+      case 200:
+        ret = available2xxCourses().length !== 0;
+        break;
+      case 300:
+        ret = available3xxCourses().length !== 0;
+        break;
+      case 400:
+        ret = available4xxCourses().length !== 0;
+        break;
+      default:
+        ret = false;
+    }
+    return ret;
+  },
+  hasGrade(courseInstanceID) {
+    const ci = CourseInstances.findDoc(courseInstanceID);
+    return ci.grade !== '***';
+  },
+  icsCourses() {
+    const ret = [];
+    if (Template.instance().state.get('semester')) {
+      const courses = CourseInstances.find({
+        semesterID: Template.instance().state.get('semester')._id,
+        studentID: Meteor.userId(),
+      }, { sort: { note: 1 } }).fetch();
+      courses.forEach((c) => {
+        if (CourseInstances.isICS(c._id)) {
+          ret.push(c);
+        }
+      });
+    }
+    return ret;
+  },
+  isFuture() {
+    const semester = Template.instance().state.get('semester');
+    const currentSemester = Template.instance().state.get('currentSemester');
+    if (semester && currentSemester) {
+      return semester.sortBy >= currentSemester.sortBy;
+    }
+    return null;
+  },
+  isGrade(courseInstanceID, grade) {
+    try {
+      const ci = CourseInstances.findDoc(courseInstanceID);
+      return ci.grade === grade;
+    } catch (e) {
+      return null;
+    }
+  },
   nonIcsCourses() {
     const ret = [];
     if (Template.instance().state.get('semester')) {
@@ -208,6 +207,41 @@ Template.Semester_List.helpers({
     });
     return ret;
   },
+  opportunityDescription(opportunityID) {
+    const opp = OpportunityInstances.find({ _id: opportunityID }).fetch();
+    if (opp.length > 0) {
+      const opportunity = Opportunities.find({ _id: opp[0].opportunityID }).fetch();
+      return opportunity[0].description;
+    }
+    return null;
+  },
+  opportunityMoreInformation(opportunityID) {
+    const opp = OpportunityInstances.find({ _id: opportunityID }).fetch();
+    if (opp.length > 0) {
+      const opportunity = Opportunities.find({ _id: opp[0].opportunityID }).fetch();
+      return opportunity[0].moreInformation;
+    }
+    return null;
+  },
+  opportunityName(opportunityID) {
+    const opp = OpportunityInstances.find({ _id: opportunityID }).fetch();
+    if (opp.length > 0) {
+      const opportunity = Opportunities.find({ _id: opp[0].opportunityID }).fetch();
+      return opportunity[0].name;
+    }
+    return null;
+  },
+  opportunityICE(opportunityID) {
+    const opp = OpportunityInstances.find({ opportunityID }).fetch();
+    return opp[0].ice;
+  },
+  semesterName() {
+    const semester = Template.instance().state.get('semester');
+    if (semester) {
+      return semester.term;
+    }
+    return null;
+  },
   semesterOpportunities() {
     const ret = [];
     if (Template.instance().state.get('semester')) {
@@ -215,31 +249,16 @@ Template.Semester_List.helpers({
         semesterID: Template.instance().state.get('semester')._id,
         studentID: Meteor.userId(),
       }).fetch();
-      opps.forEach((opp) => {
-        const opportunity = Opportunities.findDoc(opp.opportunityID);
-        opportunity.instanceID = opp.opportunityID;
-        ret.push(opportunity);
-      });
+      return opps;
     }
     return ret;
   },
-  opportunityICE(opportunityID) {
-    const opp = OpportunityInstances.find({ opportunityID }).fetch();
-    return opp[0].ice;
-  },
-  opportunityDescription(opportunityID) {
-    const opp = OpportunityInstances.find({ opportunityID }).fetch();
-    const opportunity = Opportunities.find({ _id: opp[0].opportunityID }).fetch();
-    return opportunity[0].description;
-  },
-  courseICE(courseID) {
-    const opp = CourseInstances.find({ courseID }).fetch();
-    return opp[0].ice;
-  },
-  courseDescription(courseID) {
-    const ci = CourseInstances.find({ courseID }).fetch();
-    const course = Courses.find({ _id: ci[0].courseID }).fetch();
-    return course[0].description;
+  year() {
+    const semester = Template.instance().state.get('semester');
+    if (semester) {
+      return semester.year;
+    }
+    return null;
   },
 });
 
@@ -293,27 +312,6 @@ Template.Semester_List.events({
           .popup({
             on: 'click',
           });
-      template.$('.item.course')
-          .popup({
-            inline: true,
-            hoverable: true,
-          });
-      template.$('.item.opportunity')
-          .popup({
-            inline: false,
-            hoverable: true,
-            lastResort: 'right center',
-            onShow: function resize() {
-              resizePopup();
-            },
-          });
-      template.$('.opportunityInstance').popup({
-        inline: true, hoverable: true, position: 'top center',
-        lastResort: 'right center',
-        onShow: function resize() {
-          resizePopup();
-        },
-      });
       template.$('a.100.item')
           .popup({
             inline: true,
@@ -402,13 +400,6 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
             resizePopup();
           },
         });
-    template.$('.opportunityInstance').popup({
-      inline: true, hoverable: true, position: 'top center',
-      lastResort: 'right center',
-      onShow: function resize() {
-        resizePopup();
-      },
-    });
     template.$('a.100.item')
         .popup({
           inline: true,

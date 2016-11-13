@@ -55,84 +55,6 @@ const academicYears = () => {
 };
 
 Template.Academic_Plan_2.helpers({
-  years() {
-    const ay = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    const instance = Template.instance();
-    if (ay.length > 0 && !instance.state.get('startYear')) {
-      instance.state.set('startYear', ay[ay.length - 1].year);
-    }
-    const ret = lodash.filter(ay, function filter(academicYear) {
-      const year = academicYear.year;
-      if (year >= instance.state.get('startYear') - 3 && year <= instance.state.get('startYear')) {
-        return true;
-      }
-      return false;
-    });
-    return ret;
-  },
-  hasMoreYears() {
-    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays.length > 3;
-  },
-  hasPrevYear() {
-    const instance = Template.instance();
-    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays[0].year < instance.state.get('startYear') - 3;
-  },
-  hasNextYear() {
-    const instance = Template.instance();
-    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays[ays.length - 1].year > instance.state.get('startYear');
-  },
-  fallArgs(year) {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
-      const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year,
-        term: Semesters.FALL,
-      });
-      const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester };
-    }
-    return null;
-  },
-  springArgs(year) {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
-      const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SPRING,
-      });
-      const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester };
-    }
-    return null;
-  },
-  summerArgs(year) {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
-      const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SUMMER,
-      });
-      const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester };
-    }
-    return null;
-  },
-  inspectArgs() {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const inspectID = Template.instance().state.get('inspectID');
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
-      const currentSemester = Semesters.findDoc(currentSemesterID);
-      const studentUsername = Template.instance().state.get('studentUsername');
-      return { inspectID, currentSemester, studentUsername };
-    }
-    return null;
-  },
   courses() {
     let ret = [];
     const courses = Courses.find().fetch();
@@ -300,40 +222,16 @@ Template.Academic_Plan_2.helpers({
     });
     return ret;
   },
-  detailCourseNumber() {
-    if (Template.instance().state.get('detailCourseID')) {
-      const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
-      const course = Courses.findDoc(ci.courseID);
-      return course;
-    }
-    return null;
-  },
-  hasCourse() {
-    return Template.instance().state.get('detailCourseID');
-  },
-  courseNumber() {
+  courseDescription() {
     if (Template.instance().state.get('detailCourseID')) {
       const id = Template.instance().state.get('detailCourseID');
       if (CourseInstances.isDefined(id)) {
-        const ci = CourseInstances.findDoc(id);
+        const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
         const course = Courses.findDoc(ci.courseID);
-        return course.number;
+        return course.description;
       }
       const course = Courses.findDoc(id);
-      return course.number;
-    }
-    return null;
-  },
-  courseName() {
-    if (Template.instance().state.get('detailCourseID')) {
-      const id = Template.instance().state.get('detailCourseID');
-      if (CourseInstances.isDefined(id)) {
-        const ci = CourseInstances.findDoc(id);
-        const course = Courses.findDoc(ci.courseID);
-        return course.name;
-      }
-      const course = Courses.findDoc(id);
-      return course.name;
+      return course.description;
     }
     return null;
   },
@@ -355,18 +253,111 @@ Template.Academic_Plan_2.helpers({
     }
     return null;
   },
-  courseDescription() {
+  courseName() {
     if (Template.instance().state.get('detailCourseID')) {
       const id = Template.instance().state.get('detailCourseID');
       if (CourseInstances.isDefined(id)) {
-        const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
+        const ci = CourseInstances.findDoc(id);
         const course = Courses.findDoc(ci.courseID);
-        return course.description;
+        return course.name;
       }
       const course = Courses.findDoc(id);
-      return course.description;
+      return course.name;
     }
     return null;
+  },
+  courseNumber() {
+    if (Template.instance().state.get('detailCourseID')) {
+      const id = Template.instance().state.get('detailCourseID');
+      if (CourseInstances.isDefined(id)) {
+        const ci = CourseInstances.findDoc(id);
+        const course = Courses.findDoc(ci.courseID);
+        return course.number;
+      }
+      const course = Courses.findDoc(id);
+      return course.number;
+    }
+    return null;
+  },
+  detailCourseNumber() {
+    if (Template.instance().state.get('detailCourseID')) {
+      const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
+      const course = Courses.findDoc(ci.courseID);
+      return course;
+    }
+    return null;
+  },
+  fallArgs(year) {
+    if (Template.instance().state.get('currentSemesterID')) {
+      const currentSemesterID = Template.instance().state.get('currentSemesterID');
+      const currentSemester = Semesters.findDoc(currentSemesterID);
+      const semesterID = Semesters.define({
+        year: year.year,
+        term: Semesters.FALL,
+      });
+      const semester = Semesters.findDoc(semesterID);
+      return { currentSemester, semester };
+    }
+    return null;
+  },
+  hasCourse() {
+    return Template.instance().state.get('detailCourseID');
+  },
+  hasMoreYears() {
+    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
+    return ays.length > 3;
+  },
+  hasNextYear() {
+    const instance = Template.instance();
+    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
+    return ays[ays.length - 1].year > instance.state.get('startYear');
+  },
+  hasOpportunity() {
+    return Template.instance().state.get('detailOpportunityID');
+  },
+  hasPrevYear() {
+    const instance = Template.instance();
+    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
+    return ays[0].year < instance.state.get('startYear') - 3;
+  },
+  instanceID() {
+    if (Template.instance().state.get('detailCourseID')) {
+      return Template.instance().state.get('detailCourseID');
+    } else if (Template.instance().state.get('detailOpportunityID')) {
+      return Template.instance().state.get('detailOpportunityID');
+    }
+    return null;
+  },
+  instanceSemester() {
+    if (Template.instance().state.get('detailCourseID')) {
+      const id = Template.instance().state.get('detailCourseID');
+      const ci = CourseInstances.findDoc(id);
+      const semester = Semesters.findDoc(ci.semesterID);
+      return Semesters.toString(semester._id, false);
+    } else if (Template.instance().state.get('detailOpportunityID')) {
+      const id = Template.instance().state.get('detailOpportunityID');
+      const opp = Opportunities.findDoc(id);
+      return opp.semesterID;
+    }
+    return null;
+  },
+  isInstance() {
+    return Template.instance().state.get('detailCourseID') || Template.instance().state.get('detailOpportunityID');
+  },
+  isDeletableInstance() {
+    if (Template.instance().state.get('detailCourseID')) {
+      const id = Template.instance().state.get('detailCourseID');
+      const ci = CourseInstances.findDoc(id);
+      return !ci.verified;
+    } else if (Template.instance().state.get('detailOpportunityID')) {
+      const id = Template.instance().state.get('detailOpportunityID');
+      const opportunity = OpportunityInstances.findDoc(id);
+      return !opportunity.verified;
+    }
+    return false;
+  },
+  isFuture(year) {
+    return year.year >= moment().year();
   },
   opportunities() {
     let ret = [];
@@ -378,28 +369,53 @@ Template.Academic_Plan_2.helpers({
     });
     return ret;
   },
-  hasOpportunity() {
-    return Template.instance().state.get('detailOpportunityID');
+  opportunityDescription() {
+    if (Template.instance().state.get('detailOpportunityID')) {
+      const id = Template.instance().state.get('detailOpportunityID');
+      if (OpportunityInstances.isDefined(id)) {
+        const op = OpportunityInstances.findDoc(id);
+        const opp = Opportunities.findDoc(op.opportunityID);
+        return opp.description;
+      }
+      const opportunity = Opportunities.findDoc({ _id: id });
+      return opportunity.description;
+    }
+    return null;
+  },
+  opportunityEnd() {
+    if (Template.instance().state.get('detailOpportunityID')) {
+      const id = Template.instance().state.get('detailOpportunityID');
+      if (OpportunityInstances.isDefined(id)) {
+        const op = OpportunityInstances.findDoc(id);
+        const opp = Opportunities.findDoc(op.opportunityID);
+        return opp.endActive.toDateString();
+      }
+      const opportunity = Opportunities.findDoc({ _id: id });
+      return opportunity.endActive.toDateString();
+    }
+    return null;
   },
   opportunityName() {
     if (Template.instance().state.get('detailOpportunityID')) {
       const id = Template.instance().state.get('detailOpportunityID');
+      if (OpportunityInstances.isDefined(id)) {
+        const op = OpportunityInstances.findDoc(id);
+        const opp = Opportunities.findDoc(op.opportunityID);
+        return opp.name;
+      }
       const opportunity = Opportunities.findDoc({ _id: id });
       return opportunity.name;
-    }
-    return null;
-  },
-  opportunityDescription() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      const opportunity = Opportunities.findDoc({ _id: id });
-      return opportunity.description;
     }
     return null;
   },
   opportunityIce() {
     if (Template.instance().state.get('detailOpportunityID')) {
       const id = Template.instance().state.get('detailOpportunityID');
+      if (OpportunityInstances.isDefined(id)) {
+        const op = OpportunityInstances.findDoc(id);
+        const opp = Opportunities.findDoc(op.opportunityID);
+        return opp.ice;
+      }
       const opportunity = Opportunities.findDoc({ _id: id });
       return opportunity.ice;
     }
@@ -408,24 +424,52 @@ Template.Academic_Plan_2.helpers({
   opportunityStart() {
     if (Template.instance().state.get('detailOpportunityID')) {
       const id = Template.instance().state.get('detailOpportunityID');
+      if (OpportunityInstances.isDefined(id)) {
+        const op = OpportunityInstances.findDoc(id);
+        const opp = Opportunities.findDoc(op.opportunityID);
+        return opp.startActive.toDateString();
+      }
       const opportunity = Opportunities.findDoc({ _id: id });
       return opportunity.startActive.toDateString();
-    }
-    return null;
-  },
-  opportunityEnd() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      const opportunity = Opportunities.findDoc({ _id: id });
-      return opportunity.endActive.toDateString();
     }
     return null;
   },
   opportunityMore() {
     if (Template.instance().state.get('detailOpportunityID')) {
       const id = Template.instance().state.get('detailOpportunityID');
+      if (OpportunityInstances.isDefined(id)) {
+        const op = OpportunityInstances.findDoc(id);
+        const opp = Opportunities.findDoc(op.opportunityID);
+        return opp.moreInformation;
+      }
       const opportunity = Opportunities.findDoc({ _id: id });
       return opportunity.moreInformation;
+    }
+    return null;
+  },
+  springArgs(year) {
+    if (Template.instance().state.get('currentSemesterID')) {
+      const currentSemesterID = Template.instance().state.get('currentSemesterID');
+      const currentSemester = Semesters.findDoc(currentSemesterID);
+      const semesterID = Semesters.define({
+        year: year.year + 1,
+        term: Semesters.SPRING,
+      });
+      const semester = Semesters.findDoc(semesterID);
+      return { currentSemester, semester };
+    }
+    return null;
+  },
+  summerArgs(year) {
+    if (Template.instance().state.get('currentSemesterID')) {
+      const currentSemesterID = Template.instance().state.get('currentSemesterID');
+      const currentSemester = Semesters.findDoc(currentSemesterID);
+      const semesterID = Semesters.define({
+        year: year.year + 1,
+        term: Semesters.SUMMER,
+      });
+      const semester = Semesters.findDoc(semesterID);
+      return { currentSemester, semester };
     }
     return null;
   },
@@ -451,30 +495,40 @@ Template.Academic_Plan_2.helpers({
     });
     return getPlanningICE(cis);
   },
-  isFuture(year) {
-    return year.year >= moment().year();
+  years() {
+    const ay = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
+    const instance = Template.instance();
+    if (ay.length > 0 && !instance.state.get('startYear')) {
+      instance.state.set('startYear', ay[ay.length - 1].year);
+    }
+    const ret = lodash.filter(ay, function filter(academicYear) {
+      const year = academicYear.year;
+      if (year >= instance.state.get('startYear') - 3 && year <= instance.state.get('startYear')) {
+        return true;
+      }
+      return false;
+    });
+    return ret;
   },
 });
 
 Template.Academic_Plan_2.events({
-  'click .item.del'(event) {
+  'click button.delInstance'(event) {
     event.preventDefault();
-    const template = Template.instance();
-    template.$('a.item.400').popup('hide all');
     const id = event.target.id;
-    const split = id.split('-');
-    if (split.length === 2) {
-      const ci = CourseInstances.find({ note: split[1], studentID: Meteor.userId() }).fetch();
-      if (ci.length === 1) {
-        CourseInstances.removeIt(ci[0]);
-        checkPrerequisites();
-      } else {
-        const oi = OpportunityInstances.find({ opportunityID: split[1], studentID: Meteor.userId() }).fetch();
-        if (oi.length === 1) {
-          OpportunityInstances.removeIt(oi[0]);
-        }
+    try {
+      const ci = CourseInstances.findDoc(id);
+      CourseInstances.removeIt(ci._id);
+    } catch (e) {
+      try {
+        const op = OpportunityInstances.findDoc(id);
+        OpportunityInstances.removeIt(op._id);
+      } catch (e1) {
+        console.log("wasn't an opportunity instance");
       }
     }
+    Template.instance().state.set('detailCourseID', null);
+    Template.instance().state.set('detailOpportunityID', null);
   },
   'click .item.inspect.course'(event) {
     event.preventDefault();

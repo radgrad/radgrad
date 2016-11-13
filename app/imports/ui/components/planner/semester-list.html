@@ -3,7 +3,7 @@
     <thead>
     <tr>
       <th colspan="2">{{semesterName}}</th>
-      <th colspan="2">
+      <th colspan="1">
         <div class="ui right floated mini green icon button" data-position="top center" style="flex-grow: 0"><i
             class="add icon"></i></div>
         <div class="ui fluid popup transition hidden">
@@ -77,7 +77,6 @@
             data-position="top center">
           <td><strong>{{course.note}}</strong></td>
           <td><strong>{{course.creditHrs}}</strong></td>
-          <!--<td><strong>{{course.grade}}</strong></td>-->
           <td>
             <div id="{{course._id}}" class="ui selection dropdown">
               <input type="hidden" name="grade">
@@ -91,7 +90,6 @@
               </div>
             </div>
           </td>
-          <td><i id="delete-{{course.note}}" class="ui floated right red remove circle outline icon item del"></i></td>
         </tr>
       {{else}}
         <tr id="{{course._id}}" data-position="top center" class="courseInstance clickEnabled">
@@ -109,16 +107,14 @@
       </tr>
     {{/each}}
     {{#each opportunity in semesterOpportunities}}
-      <tr id="{{opportunity.instanceID}}" class="opportunityInstance clickEnabled" draggable="true"
+      <tr id="{{opportunity._id}}" class="opportunityInstance clickEnabled" draggable="true"
           ondragstart="drag(event)" data-position="top center">
-        <td colspan="3"><a href="{{opportunity.moreInformation}}"> <strong>{{opportunity.name}}</strong></a></td>
-        <td><i id="delete-{{opportunity.instanceID}}"
-               class="ui floated right red remove circle outline icon item del"></i></td>
+        <td colspan="3">
+          <a href="{{opportunityMoreInformation opportunity._id}}">
+            <strong>{{opportunityName opportunity._id}}</strong>
+          </a>
+        </td>
       </tr>
-      <!--<div class="ui fluid popup transition hidden" style="overflow: auto">-->
-      <!--<p>{{opportunityDescription opportunity.instanceID}}</p>-->
-      <!--{{> ICE_Badge ice=(opportunityICE opportunity.instanceID)}}-->
-      <!--</div>-->
     {{/each}}
     </tbody>
   </table>

@@ -87,7 +87,16 @@ Meteor.startup(() => {
         const studentSlug = Users.findSlugByID(studentID);
         const csvData = Assets.getText(starDataPath);
         const courseInstanceDefinitions = processStarCsvData(studentSlug, csvData);
+        const currentSemester = Semesters.findDoc(Semesters.getCurrentSemester());
+        console.log(currentSemester);
         courseInstanceDefinitions.map((definition) => {
+          const semesterID = Semesters.getID(definition.semester);
+          const ciSemester = Semesters.findDoc(semesterID);
+          console.log(currentSemester.sortBy);
+          console.log(ciSemester.sortBy);
+          if (currentSemester.sortBy <= ciSemester.sortBy) {
+            definition.verified = false;
+          }
           CourseInstances.define(definition);
           const split = definition.semester.split('-');
           let yearVal = parseInt(split[1], 10)
