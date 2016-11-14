@@ -1,0 +1,22 @@
+Semester,Course Name,Course Number,Course Description,Credits,Grade
+Fall 2015,ICS,111,Introduction to Computer Science I,4,A
+Fall 2015,ICS,141,Discrete Mathematics for Computer Science I,3,B+
+Fall 2015,MATH,241,Calculus I,4,B+
+Fall 2015,ENG,100,Composition I,3,A-
+Fall 2015,SOC,100,Introduction to Sociology,3,B-
+Spring 2016,ICS,211,Introduction to Computer Science II,4,A
+Spring 2016,ICS,241,Discrete Mathematics for Computer Science II,3,A-
+Spring 2016,ICS,222,Basic Concepts of Computer Science,3,B+
+Spring 2016,MATH,242,Calculus II,4,B+
+Spring 2016,HIST,151,World History to 1500,3,A-
+Fall 2016,ICS,311,Algorithms,3,***
+Fall 2016,ICS,314,Software Engineering,4,***
+Spring 2017,ICS,212,Program Structure,3,***
+Spring 2017,ICS,355,Security and Trust I: Resource Protections,3,***
+Fall 2017,ICS,455,Security and Trust II: Information Assurance,3,***
+Spring 2018,ICS,332,Operating Systems,3,***
+Spring 2018,ICS,414,Software Engineering II,3,***
+Fall 2018,ICS,321,Data Storage and Retrieval,3,***
+Fall 2018,ICS,423,Data Security and Cryptography I,3,***
+Spring 2019,ICS,425,Computer Security and Ethics,3,***
+Spring 2019,ICS,495,Special Topics in Security,3,***

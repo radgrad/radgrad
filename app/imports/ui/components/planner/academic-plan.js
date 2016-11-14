@@ -546,9 +546,11 @@ Template.Academic_Plan_2.events({
   'click tr.clickEnabled'(event) {
     event.preventDefault();
     let target = event.target;
+    console.log(target);
     while (target && target.nodeName !== 'TR') {
       target = target.parentNode;
     }
+    console.log(target);
     const firstClass = target.getAttribute('class').split(' ')[0];
     const template = Template.instance();
     if (firstClass === 'courseInstance') {

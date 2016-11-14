@@ -39,6 +39,13 @@
       "slug": "dani",
       "email": "dani@hawaii.edu",
       "password": "changeDani"
+    },
+    {
+      "firstName": "Ella",
+      "lastName": "Zwick",
+      "slug": "ella",
+      "email": "ella@hawaii.edu",
+      "password": "changeElla"
     }
   ]
 }

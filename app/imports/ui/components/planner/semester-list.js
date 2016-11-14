@@ -264,16 +264,14 @@ Template.Semester_List.helpers({
 
 Template.Semester_List.events({
   'drop .bodyDrop'(event) {
+    console.log('drop .bodyDrop');
     event.preventDefault();
     if (Template.instance().state.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
+      console.log(id);
       const semesterId = Template.instance().state.get('semester')._id;
-      const courses = CourseInstances.find({
-        courseID: id,
-        studentID: Meteor.userId(),
-      }).fetch();
-      if (courses.length > 0) {
-        CourseInstances.updateSemester(courses[0]._id, semesterId);
+      if (CourseInstances.isDefined(id)) {
+        CourseInstances.updateSemester(id, semesterId);
         checkPrerequisites();
       } else {
         const opportunities = OpportunityInstances.find({
