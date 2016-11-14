@@ -39,3 +39,9 @@ import './student-ice.html';
 import './student-ice.js';
 import './student-ice.css';
 
+import './student-about-levels.html';
+import './student-about-levels.js';
+
+import './student-about-ice.html';
+import './student-about-ice.js';
+

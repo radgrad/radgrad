@@ -159,6 +159,22 @@ studentRoutes.route('/ice', {
   },
 });
 
+export const studentHomePageAboutIceRouteName = 'Student_About_Ice';
+studentRoutes.route('/about-ice', {
+  name: studentHomePageAboutIceRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_About_Ice' });
+  },
+});
+
+export const studentHomePageAboutLevelsRouteName = 'Student_About_Levels';
+studentRoutes.route('/about-levels', {
+  name: studentHomePageAboutLevelsRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_About_Levels' });
+  },
+});
+
 export const studentDegreePlannerPageRouteName = 'Student_Degree_Planner_Page';
 studentRoutes.route('/degree-planner', {
   name: studentDegreePlannerPageRouteName,

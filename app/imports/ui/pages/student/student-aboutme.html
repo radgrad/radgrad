@@ -1,31 +1,45 @@
 <template name="Student_AboutMe">
   <div class="layout-page">
     <div class="ui grid container">
-      <div class="three wide column">
+      <div class="one wide column">
         {{> Home_Menu}}
       </div>
-      <div class="thirteen wide stretched column">
+      <div class="fifteen wide stretched column">
 
         <div class="ui raised padded container segment">
-          <div class="ui top green attached label">About Me</div>
+          <div class="ui top green attached label">Basics</div>
 
           <div class="ui grid">
 
             <div class="row">
-              <div class="three wide column">
+              <div class="two wide column">
                 <p><b>Name</b></p>
               </div>
-              <div class="eight wide column">
+              <div class="five wide column">
                 <p>Michele Shimoda</p>
               </div>
-              <div class="four wide column"></div>
+              <div class="two wide column">
+                <p><b>Degree Goal</b></p>
+              </div>
+              <div class="six wide column">
+                <div class="ui equal width grid">
+                  <div class="column">
+                    <div class="ui list">
+                      <div class="item">BS Computer Science</div>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <a href="{{pathFor 'Student_Explorer_Degree_Page'}}">Edit in degree explorer</a>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="row">
-              <div class="three wide column">
+              <div class="two wide column">
                 <p><b>Email</b></p>
               </div>
-              <div class="eight wide column">
+              <div class="five wide column">
                 <div class="ui form">
                   <div class="inline field">
                     <div class="ui action input">
@@ -40,15 +54,10 @@
                 </div>
 
               </div>
-              <div class="four wide column"></div>
-            </div>
-
-
-            <div class="row">
-              <div class="three wide column">
+              <div class="two wide column">
                 <p><b>Professional Website</b></p>
               </div>
-              <div class="eight wide column">
+              <div class="six wide column">
                 <div class="ui form">
                   <div class="inline field">
                     <div class="ui action input">
@@ -57,65 +66,49 @@
                     </div>
                   </div>
                 </div>
-                  <div style="margin-top:5px;" class="ui checkbox">
-                    <input type="checkbox">
-                    <label>Do not allow members of RadGrad to view my website address.</label>
-                  </div>
-
-                </div>
-              <div class="four wide column"></div>
-            </div>
-
-            <div class="row">
-              <div class="three wide column">
-                <p><b>Degree Goal</b></p>
-              </div>
-              <div class="eight wide column">
-                <div class="ui list">
-                  <div class="item">BS Computer Science</div>
+                <div style="margin-top:5px;" class="ui checkbox">
+                  <input type="checkbox">
+                  <label>Do not allow members of RadGrad to view my website address.</label>
                 </div>
               </div>
-              <div class="four wide column"><a href="{{pathFor 'Student_Explorer_Degree_Page'}}">Edit in degree explorer</a>
-              </div>
             </div>
+          </div>
+        </div>
 
+        <div class="ui raised padded container segment">
+          <div class="ui top green attached label">Details</div>
+          <div class="ui grid">
             <div class="row">
-              <div class="three wide column">
+              <div class="two wide column">
                 <p><b>Interests</b></p>
               </div>
-              <div class="eight wide column">
-                <div class="ui list">
-                  <div class="item">Artificial Intelligence</div>
-                  <div class="item">Web Development</div>
-                  <div class="item">Natural Language Processing</div>
-                  <div class="item">Machine Learning</div>
-                  <div class="item">Mobile Design</div>
-                </div>
+              <div class="five wide column">
+                  <a class="ui grey label">Artificial Intelligence</a>
+                  <a class="ui grey label">Web Development</a>
+                  <a class="ui grey label">Natural Language Processing</a>
+                  <a class="ui grey label">Machine Learning</a>
+                  <a class="ui grey label">Mobile Design</a>
+                <br><br><a href="{{pathFor 'Student_Explorer_Interest_Page'}}">Edit in interest
+                  explorer</a>
               </div>
-              <div class="four wide column"><a href="{{pathFor 'Student_Explorer_Interest_Page'}}">Edit in interest explorer</a></div>
-            </div>
-
-            <div class="row">
-              <div class="three wide column">
+              <div class="two wide column">
                 <p><b>Career Goals</b></p>
               </div>
-              <div class="eight wide column">
-                <div class="ui list">
-                  <div class="item">Software Engineer</div>
-                  <div class="item">Data Scientist</div>
-                  <div class="item">Web Developer</div>
-                  <div class="item">Network Operator</div>
-                  <div class="item">Entrepreneur</div>
-                </div>
+              <div class="six wide column">
+                  <a class="ui grey label">Software Engineer</a>
+                  <a class="ui grey label">Data Scientist</a>
+                  <a class="ui grey label">Web Developer</a>
+                  <a class="ui grey label">Network Operator</a>
+                  <a class="ui grey label">Entrepreneur</a>
+                <br><br><a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in career
+                  explorer</a>
               </div>
-              <div class="four wide column"><a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in career explorer</a></div>
             </div>
-
             <div class="row">
-              <div class="three wide column">
+              <div class="two wide column">
                 <p><b>Completed Courses</b></p>
               </div>
-              <div class="eight wide column">
+              <div class="five wide column">
                 <div class="ui list">
                   <div class="item">Introduction to Computer Science I (ICS111)</div>
                   <div class="item">Introduction to Computer Science II (ICS211)</div>
@@ -123,33 +116,28 @@
                   <div class="item">Discrete Math for Computer Science II (ICS241)</div>
                   <div class="item">Program Structure(ICS212)</div>
                   <div class="item">Algorithms (ICS311)</div>
-
                 </div>
-              </div>
-              <div class="four wide column">
-                <a href="{{pathFor 'Student_Degree_Planner_Page'}}">View schedule details in degree planner</a><br><br>
+                <a href="{{pathFor 'Student_Degree_Planner_Page'}}">View schedule details in degree
+                  planner</a><br>
                 <a href="{{pathFor 'Student_Explorer_Course_Page'}}">View course details in course explorer</a>
               </div>
-            </div>
 
-
-            <div class="row">
-              <div class="three wide column">
+              <div class="two wide column">
                 <p><b>Completed Opportunities</b></p>
               </div>
-              <div class="eight wide column">
+              <div class="five wide column">
                 <div class="ui list">
                   <div class="item">Internship at DataHouse (Spring 2014)</div>
                   <div class="item">IT Position at UH ITS (Spring 2015-Fall 2016)</div>
                   <div class="item">AT&T Hackathon (Spring 2016)</div>
                 </div>
-              </div>
-              <div class="four wide column"><a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in opportunity explorer</a></div>
+                <a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in opportunity
+                  explorer</a></div>
+
             </div>
-
           </div>
-
         </div>
+
       </div>
     </div>
   </div>
