@@ -1,15 +1,12 @@
 <template name="Second_Menu">
-  <div style="border-radius:0px; margin-top:61px;" class="ui top fixed inverted {{ menuLength }} item fitted menu">
-
-    <div class="ui container">
+  <div class="ui top fixed {{ menuLength }} item inverted secondary pointing menu " style="border-radius:0; margin-top:61px; background-color: #38840F">
 
       {{#each menuItem in menuItems}}
-        <div class="header item">
+        <div class="{{#if isCurrentPage menuItem.route}} active {{/if}} item" style="border-bottom-width: medium;">
           <a href="{{pathFor menuItem.route}}">{{ menuItem.label }}</a>
         </div>
       {{/each}}
 
-    </div>
   </div>
 
 </template>
