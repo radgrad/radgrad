@@ -1,121 +1,134 @@
 <template name="Student_Ice">
   <div class="layout-page">
     <div class="ui grid container">
-      <div class="one wide column">
+      <div class="two wide column">
         {{> Home_Menu}}
       </div>
-      <div class="fifteen wide stretched column">
+
+      <div class="fourteen wide stretched column">
         <div class="ui segment">
           <div class="ui green large top left attached label">Current ICE Points</div>
-          <div style="padding-top: 10px" class="ui grid">
-            <div class="row">
-              <div class="three wide column">
-                <div class="c100 p25 blue">
-                  <span>25/100</span>
-                  <div class="slice">
-                    <div class="bar"></div>
-                    <div class="fill"></div>
+        <div class="ui equal width grid container">
+          <div class="row">
+            <div class="column">
+              <div class="ui equal width grid container">
+                <div class="row">
+                  <div style="margin-left:auto; margin-right:auto" class="c100 p25 blue">
+                    <span>25/100</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="centered row">
+                  <h3 class="ui header">Innovation</h3>
+                  </div>
+                <div class="row">
+                  <p>You have achieved 25 Innovation points for the following:</p>
+                  </div>
+                <div class="row">
+                  <div class="ui list">
+                    <a class="item">
+                      <i class="checkmark icon"></i>
+                      <div class="content">
+                        <div class="header">Participation in a public competitive computer science event</div>
+                        <div class="description">AT&T Hackathon (Spring 2016)</div>
+                      </div>
+                    </a>
+                  </div>
                   </div>
                 </div>
               </div>
-              <div class="ten wide column">
-                <h3 class="ui header">Innovation</h3>
-                <p>You have achieved 25 innovation points for the following:</p>
 
-                <div class="ui list">
-                  <a class="item">
-                    <i class="checkmark icon"></i>
-                    <div class="content">
-                      <div class="header">Participation in a public competitive computer science event</div>
-                      <div class="description">AT&T Hackathon (Spring 2016)</div>
+            <div class="column">
+              <div class="ui equal width grid container">
+                <div class="row">
+                  <div style="margin-left:auto; margin-right:auto" class="c100 p55 green">
+                    <span>55/100</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
                     </div>
-                  </a>
-
-                </div>
-
-              </div>
-            </div>
-            <div class="ui section divider"></div>
-
-            <div class="row">
-              <div class="three wide column">
-                <div class="c100 p55 green">
-                  <span>55/100</span>
-                  <div class="slice">
-                    <div class="bar"></div>
-                    <div class="fill"></div>
                   </div>
                 </div>
-              </div>
-              <div class="ten wide column">
-                <h3 class="ui header">Competency</h3>
-                <p>You have achieved 55 competency points for the following:</p>
-
-                <div class="ui list">
-                  <a class="item">
-                    <i class="checkmark icon"></i>
-                    <div class="content">
-                      <div class="header">Achieved a grade of B or better</div>
-                      <div class="description">Introduction to Computer Science I (ICS111)</div>
-                      <div class="description">Introduction to Computer Science II (ICS211)</div>
-                      <div class="description">Discrete Math for Computer Science I (ICS141)</div>
-                      <div class="description">Discrete Math for Computer Science II (ICS241)</div>
-                      <div class="description">Program Structure(ICS212)</div>
-                      <div class="description">Algorithms (ICS311)</div>
-
-                    </div>
-                  </a>
-                  <a class="item">
-                    <i class="checkmark icon"></i>
-                    <div class="content">
-                      <div class="header">Achieved an overall GPA of 3.0+</div>
-                      <div class="description">Spring 2015</div>
-                      <div class="description">Fall 2015</div>
-                      <div class="description">Spring 2016</div>
-                    </div>
-                  </a>
+                <div class="centered row">
+                  <h3 class="ui header">Competency</h3>
                 </div>
-              </div>
-            </div>
-            <div class="ui section divider"></div>
+                <div class="row">
+                  <p>You have achieved 55 Competency points for the following:</p>
+                </div>
+                <div class="row">
+                  <div class="ui list">
+                    <a class="item">
+                      <i class="checkmark icon"></i>
+                      <div class="content">
+                        <div class="header">Achieved a grade of B or better</div>
+                        <div class="description">Introduction to Computer Science I (ICS111)</div>
+                        <div class="description">Introduction to Computer Science II (ICS211)</div>
+                        <div class="description">Discrete Math for Computer Science I (ICS141)</div>
+                        <div class="description">Discrete Math for Computer Science II (ICS241)</div>
+                        <div class="description">Program Structure(ICS212)</div>
+                        <div class="description">Algorithms (ICS311)</div>
 
-
-            <div class="row">
-              <div class="three wide column">
-                <div class="c100 p75 orange">
-                  <span>75/100</span>
-                  <div class="slice">
-                    <div class="bar"></div>
-                    <div class="fill"></div>
+                      </div>
+                    </a>
+                    <a class="item">
+                      <i class="checkmark icon"></i>
+                      <div class="content">
+                        <div class="header">Achieved an overall GPA of 3.0+</div>
+                        <div class="description">Spring 2015</div>
+                        <div class="description">Fall 2015</div>
+                        <div class="description">Spring 2016</div>
+                      </div>
+                    </a>
                   </div>
-                </div>
-              </div>
-              <div class="ten wide column">
-                <h3 class="ui header">Experience</h3>
-                <p>You have achieved 75 experience points for the following:</p>
-                <div class="ui list">
-                  <a class="item">
-                    <i class="checkmark icon"></i>
-                    <div class="content">
-                      <div class="header">Completion of Internship</div>
-                      <div class="description">Internship at Datahouse (Spring 2014)</div>
-                    </div>
-                  </a>
-                  <a class="item">
-                    <i class="checkmark icon"></i>
-                    <div class="content">
-                      <div class="header">Worked in an ICS related job for one semester</div>
-                      <div class="description">IT position and UH ITS (Spring 2015)</div>
-                      <div class="description">IT position and UH ITS (Fall 2015)</div>
-                      <div class="description">IT position and UH ITS (Spring 2016)</div>
-                    </div>
-                  </a>
                 </div>
               </div>
             </div>
 
+            <div class="column">
+              <div class="ui equal width grid container">
+                <div class="row">
+                  <div style="margin-left:auto; margin-right:auto" class="c100 p75 orange">
+                    <span>75/100</span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="centered row">
+                  <h3 class="ui header">Experience</h3>
+                </div>
+                <div class="row">
+                  <p>You have achieved 75 Experience points for the following:</p>
+                </div>
+                <div class="row">
+                  <div class="ui list">
+                    <a class="item">
+                      <i class="checkmark icon"></i>
+                      <div class="content">
+                        <div class="header">Completion of Internship</div>
+                        <div class="description">Internship at Datahouse (Spring 2014)</div>
+                      </div>
+                    </a>
+                    <a class="item">
+                      <i class="checkmark icon"></i>
+                      <div class="content">
+                        <div class="header">Worked in an ICS related job for one semester</div>
+                        <div class="description">IT position and UH ITS (Spring 2015)</div>
+                        <div class="description">IT position and UH ITS (Fall 2015)</div>
+                        <div class="description">IT position and UH ITS (Spring 2016)</div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+          </div>
 
         <div class="ui segment">
           <div class="ui green large top left attached label">Level Recommendations</div>
