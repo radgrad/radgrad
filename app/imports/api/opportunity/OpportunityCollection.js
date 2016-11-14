@@ -6,6 +6,7 @@ import { Users } from '/imports/api/user/UserCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertICE } from '/imports/api/ice/IceProcessor';
+import { moment } from 'meteor/momentjs:moment';
 
 /** @module Opportunity */
 
@@ -78,10 +79,12 @@ class OpportunityCollection extends BaseInstanceCollection {
 
     // Validate startActive and endActive dates.
     if (!(startActive instanceof Date)) {
-      startActive = new Date();
+      const start = moment().subtract(1, 'month');  // TODO: Change these dates
+      startActive = start.toDate();
     }
     if (!(endActive instanceof Date)) {
-      endActive = new Date();
+      const end = moment().add(2, 'month');  // TODO: Change these dates
+      endActive = end.toDate();
     }
     // Guarantee that independentStudy is a boolean.
     /* eslint no-param-reassign: "off" */

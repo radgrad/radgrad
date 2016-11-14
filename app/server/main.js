@@ -12,5 +12,6 @@ import '/imports/api/slug';
 import '/imports/api/star';
 import '/imports/api/user';
 import '/imports/api/work';
+import '/imports/api/year';
 
 import '/imports/startup/server';

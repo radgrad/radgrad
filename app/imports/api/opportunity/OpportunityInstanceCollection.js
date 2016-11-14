@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
@@ -54,6 +55,23 @@ class OpportunityInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Depending on the logged in user publish only their OpportunityInstances. If
+   * the user is in the Role.ADMIN then publish all OpportunityInstances. If the
+   * system is in mockup mode publish all OpportunityInstances.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      const instance = this;
+      Meteor.publish(this._collectionName, function publish() {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, 'ADMIN')) {
+          return instance._collection.find();
+        }
+        return instance._collection.find({ studentID: this.userId });
+      });
+    }
+  }
+
+  /**
    * @returns {String} This opportunity instance, formatted as a string.
    * @param opportunityInstanceID The opportunity instance ID.
    * @throws {Meteor.Error} If not a valid ID.
@@ -64,6 +82,17 @@ class OpportunityInstanceCollection extends BaseCollection {
     const semester = Semesters.toString(opportunityInstanceDoc.semesterID);
     const opportunityName = Opportunities.findDoc(opportunityInstanceDoc.opportunityID).name;
     return `[OI ${semester} ${opportunityName}]`;
+  }
+
+  /**
+   * Updates the OpportunityInstance's Semester.
+   * @param opportunityInstanceID The course instance ID.
+   * @param semesterID The semester id.
+   */
+  updateSemester(opportunityInstanceID, semesterID) {
+    this.assertDefined(opportunityInstanceID);
+    Semesters.assertSemester(semesterID);
+    this._collection.update({ _id: opportunityInstanceID }, { $set: { semesterID } });
   }
 }
 

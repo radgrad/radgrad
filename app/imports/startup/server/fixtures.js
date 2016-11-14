@@ -2,8 +2,12 @@
 
 import { Meteor } from 'meteor/meteor';
 
+import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
+import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
+import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
+// import { FeedbackType } from '../../api/feedback/FeedbackType.js';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
@@ -16,10 +20,15 @@ import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { courseDefinitions } from './icsdata/CourseDefinitions.js';
 import { processStarCsvData } from '/imports/api/star/StarProcessor';
 import { interestTypeDefinitions, interestDefinitions } from '/imports/startup/server/icsdata/InterestDefinitions';
-import { opportunityDefinitions, opportunityTypeDefinitions }
+import {
+    opportunityDefinitions, opportunityTypeDefinitions
+}
     from '/imports/startup/server/icsdata/OpportunityDefinitions';
 import { careerGoalDefinitions } from '/imports/startup/server/icsdata/CareerGoalDefinitions';
 import { userDefinitions } from '/imports/startup/server/icsdata/UserDefinitions';
+import { recommendationFeedbackDefinitions, warningFeedbackDefinitions,
+    feedbackInstances }
+    from '/imports/startup/server/icsdata/FeedbackDefinitions.js';
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -62,19 +71,44 @@ Meteor.startup(() => {
     console.log('Defining Courses');
     courseDefinitions.map((definition) => Courses.define(definition));
   }
-  // load Alfred example student.
-  if (Users.find({ username: 'alfredpersona' }).count() === 0) {
-    const starDataPath = 'testdata/StarPersonaAlfred.csv';
-    const studentID = Users.define({
-      firstName: 'Alfred',
-      lastName: 'Persona',
-      slug: 'alfredpersona',
-      email: 'alfred@hawaii.edu',
-      role: ROLE.STUDENT,
-      password: 'foo' });
-    const studentSlug = Users.findSlugByID(studentID);
-    const csvData = Assets.getText(starDataPath);
-    const courseInstanceDefinitions = processStarCsvData(studentSlug, csvData);
-    courseInstanceDefinitions.map((definition) => CourseInstances.define(definition));
+  if (Feedbacks.find().count() === 0) {
+    console.log('Defining Feedback');
+    recommendationFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
+    warningFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
+  }
+  if (!!Meteor.settings.exampleStudents) {
+    Meteor.settings.exampleStudents.forEach((student) => {
+      if (Users.find({ username: student.slug }).count() === 0) {
+        console.log(`defining ${student.slug}`);
+        /* eslint no-param-reassign: "off" */
+        student.role = ROLE.STUDENT;
+        const studentID = Users.define(student);
+        const starDataPath = `testdata/Star${student.firstName}.csv`;
+        const studentSlug = Users.findSlugByID(studentID);
+        const csvData = Assets.getText(starDataPath);
+        const courseInstanceDefinitions = processStarCsvData(studentSlug, csvData);
+        courseInstanceDefinitions.map((definition) => {
+          CourseInstances.define(definition);
+          const split = definition.semester.split('-');
+          let yearVal = parseInt(split[1], 10)
+          if (split[0] !== 'Fall') {
+            yearVal -= 1;
+          }
+          return AcademicYearInstances.define({ student: studentSlug, year: yearVal });
+        });
+      }
+    });
+  }
+  if (FeedbackInstances.find().count() === 0) {
+    console.log('Defining FeedbackInstances');
+    feedbackInstances.map((definition) => FeedbackInstances.define(definition));
+  }
+  if (!!Meteor.settings.defaultAdminAccount) {
+    const admin = Meteor.settings.defaultAdminAccount;
+    if (Users.find({ username: admin.slug }).count() === 0) {
+      console.log(`defining ${admin.slug}`);
+      admin.role = ROLE.ADMIN;
+      Users.define(admin);
+    }
   }
 });

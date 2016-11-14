@@ -1,3 +1,44 @@
 {
-  "defaultAccount": {"username": "John", "password": "changeme"}
+  "defaultAccount": {
+    "username": "John",
+    "password": "changeme"
+  },
+  "defaultAdminAccount": {
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "admin",
+    "slug": "admin",
+    "password": "changemeAdmin"
+  },
+  "mockup": false,
+  "exampleStudents": [
+    {
+      "firstName": "Alfred",
+      "lastName": "Persona",
+      "slug": "alfred",
+      "email": "alfred@hawaii.edu",
+      "password": "changeAlfred"
+    },
+    {
+      "firstName": "Betty",
+      "lastName": "Keanu",
+      "slug": "betty",
+      "email": "betty@hawaii.edu",
+      "password": "changeBetty"
+    },
+    {
+      "firstName": "Charley",
+      "lastName": "Sherry",
+      "slug": "charley",
+      "email": "charley@hawaii.edu",
+      "password": "changeCharley"
+    },
+    {
+      "firstName": "Dani",
+      "lastName": "Choo",
+      "slug": "dani",
+      "email": "dani@hawaii.edu",
+      "password": "changeDani"
+    }
+  ]
 }
