@@ -77,14 +77,6 @@ const availableOpportunities = () => {
   return [];
 };
 
-const resizePopup = () => {
-  // $('.ui.popup').css('max-height', '350px');
-};
-
-$(window).resize(function (e) {
-  resizePopup();
-});
-
 Template.Semester_List.helpers({
   courseDescription(courseID) {
     const ci = CourseInstances.find({ courseID }).fetch();
@@ -178,6 +170,7 @@ Template.Semester_List.helpers({
     try {
       const ci = CourseInstances.findDoc(courseInstanceID);
       return ci.grade === grade;
+      /* eslint no-unused-vars: "off" */
     } catch (e) {
       return null;
     }
@@ -268,7 +261,6 @@ Template.Semester_List.events({
     event.preventDefault();
     if (Template.instance().state.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
-      console.log(id);
       const semesterId = Template.instance().state.get('semester')._id;
       if (CourseInstances.isDefined(id)) {
         CourseInstances.updateSemester(id, semesterId);
@@ -279,7 +271,7 @@ Template.Semester_List.events({
           _id: id,
         }).fetch();
         if (opportunities.length > 0) {
-          OpportunityInstances.updateSemester(opportunities[0]._id, semesterId)
+          OpportunityInstances.updateSemester(opportunities[0]._id, semesterId);
         }
       }
     }
@@ -330,9 +322,6 @@ Template.Semester_List.events({
             inline: true,
             hoverable: true,
             lastResort: 'right center',
-            onShow: function resize() {
-              resizePopup();
-            },
           });
     });
   },
@@ -379,9 +368,6 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
     template.$('.ui.icon.button')
         .popup({
           on: 'click',
-          onShow: function resize() {
-            resizePopup();
-          },
         });
     template.$('.item.addCourseMenu')
         .popup({
@@ -394,9 +380,6 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
           hoverable: true,
           position: 'right center',
           lastResort: 'right center',
-          onShow: function resize() {
-            resizePopup();
-          },
         });
     template.$('a.100.item')
         .popup({
@@ -418,9 +401,6 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
           inline: true,
           hoverable: true,
           lastResort: 'right center',
-          onShow: function resize() {
-            resizePopup();
-          },
         });
   });
 });

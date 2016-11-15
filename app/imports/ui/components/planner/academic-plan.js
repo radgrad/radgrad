@@ -33,27 +33,6 @@ const studentSemesters = () => {
   return lodash.orderBy(ret, ['sortBy'], ['asc']);
 };
 
-const academicYears = () => {
-  const ret = {};
-  const semesters = studentSemesters();
-  semesters.forEach((semester) => {
-    let year = 0;
-    if (semester.term === Semesters.FALL) {
-      year = semester.year;
-    } else {
-      year = semester.year - 1;
-    }
-    if (!ret[year]) {
-      ret[year] = { year, springYear: year + 1 };
-    }
-    if (!ret[year].semesters) {
-      ret[year].semesters = {};
-    }
-    ret[year].semesters[semester.term] = semester;
-  });
-  return ret;
-};
-
 Template.Academic_Plan_2.helpers({
   courses() {
     let ret = [];

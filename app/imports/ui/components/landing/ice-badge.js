@@ -25,15 +25,15 @@ Template.ICE_Badge.events({
   // add your events here
 });
 
-Template.ICE_Badge.onCreated(function () {
+Template.ICE_Badge.onCreated(function iceBadgeOnCreated() {
   // add your statement here
 });
 
-Template.ICE_Badge.onRendered(function () {
+Template.ICE_Badge.onRendered(function iceBadgeOnRendered() {
   // add your statement here
 });
 
-Template.ICE_Badge.onDestroyed(function () {
+Template.ICE_Badge.onDestroyed(function iceBadgeOnDestroyed() {
   // add your statement here
 });
 

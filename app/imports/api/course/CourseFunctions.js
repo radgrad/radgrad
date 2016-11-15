@@ -45,14 +45,14 @@ export const checkPrerequisites = () => {
           if (preSemester) {
             if (preSemester.sortBy >= semester.sortBy) {
               const semesterName2 = Semesters.toString(preSemester._id, false);
-              const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is after or in ${semesterName2}.`;
+              const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is after or` +
+              ` in ${semesterName2}.`;
               FeedbackInstances.define({ feedback, user: Meteor.user().username, description, area });
             }
-          } else {
-            console.log(`Couldn't find the semester for ${preCi.semesterID}`);
           }
         } else {
-          const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number} not found.`;
+          const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
+              'not found.';
           FeedbackInstances.define({ feedback, user: Meteor.user().username, description, area });
         }
       });

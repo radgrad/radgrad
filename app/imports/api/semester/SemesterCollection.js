@@ -58,11 +58,11 @@ class SemesterCollection extends BaseInstanceCollection {
     }
     let sortBy = 0;
     if (term === this.FALL) {
-      sortBy = year * 10 + 2;
+      sortBy = (year * 10) + 2;
     } else if (term === this.SPRING) {
       sortBy = year * 10;
     } else {
-      sortBy = year * 10 + 1;
+      sortBy = (year * 10) + 1;
     }
     // Otherwise define a new semester and add it to the collection if successful.
     const slug = `${term}-${year}`;
