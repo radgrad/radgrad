@@ -257,7 +257,6 @@ Template.Semester_List.helpers({
 
 Template.Semester_List.events({
   'drop .bodyDrop'(event) {
-    console.log('drop .bodyDrop');
     event.preventDefault();
     if (Template.instance().state.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
