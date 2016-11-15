@@ -44,42 +44,42 @@ Meteor.startup(() => {
     Semesters.define({ term: Semesters.SUMMER, year: 2018 });
   }
   if (InterestTypes.find().count() === 0) {
-    // console.log('Defining InterestTypes');
+    console.log('Defining InterestTypes');  // eslint-disable-line no-console
     interestTypeDefinitions.map((definition) => InterestTypes.define(definition));
   }
   if (Interests.find().count() === 0) {
-    // console.log('Defining Interests');
+    console.log('Defining Interests');  // eslint-disable-line no-console
     interestDefinitions.map((definition) => Interests.define(definition));
   }
   if (Users.find().count() === 1) {
-    // console.log('Defining Users');
+    console.log('Defining Users');  // eslint-disable-line no-console
     userDefinitions.map((definition) => Users.define(definition));
   }
   if (CareerGoals.find().count() === 0) {
-    // console.log('Defining CareerGoals');
+    console.log('Defining CareerGoals');  // eslint-disable-line no-console
     careerGoalDefinitions.map((definition) => CareerGoals.define(definition));
   }
   if (OpportunityTypes.find().count() === 0) {
-    // console.log('Defining OpportunityTypes');
+    console.log('Defining OpportunityTypes');  // eslint-disable-line no-console
     opportunityTypeDefinitions.map((definition) => OpportunityTypes.define(definition));
   }
   if (Opportunities.find().count() === 0) {
-    // console.log('Defining Opportunities');
+    console.log('Defining Opportunities');  // eslint-disable-line no-console
     opportunityDefinitions.map((definition) => Opportunities.define(definition));
   }
   if (Courses.find().count() === 0) {
-    // console.log('Defining Courses');
+    console.log('Defining Courses');  // eslint-disable-line no-console
     courseDefinitions.map((definition) => Courses.define(definition));
   }
   if (Feedbacks.find().count() === 0) {
-    // console.log('Defining Feedback');
+    console.log('Defining Feedback');  // eslint-disable-line no-console
     recommendationFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
     warningFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
   }
   if (Meteor.settings.exampleStudents) {
     Meteor.settings.exampleStudents.forEach((student) => {
       if (Users.find({ username: student.slug }).count() === 0) {
-        // console.log(`defining ${student.slug}`);
+        console.log(`defining ${student.slug}`);  // eslint-disable-line no-console
         /* eslint no-param-reassign: "off" */
         student.role = ROLE.STUDENT;
         const studentID = Users.define(student);
@@ -106,12 +106,13 @@ Meteor.startup(() => {
     });
   }
   if (FeedbackInstances.find().count() === 0) {
-    // console.log('Defining FeedbackInstances');
+    console.log('Defining FeedbackInstances');  // eslint-disable-line no-console
     feedbackInstances.map((definition) => FeedbackInstances.define(definition));
   }
   if (Meteor.settings.defaultAdminAccount) {
     const admin = Meteor.settings.defaultAdminAccount;
     if (Users.find({ username: admin.slug }).count() === 0) {
+      console.log('Defining admin');  // eslint-disable-line no-console
       admin.role = ROLE.ADMIN;
       Users.define(admin);
     }

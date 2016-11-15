@@ -110,8 +110,9 @@
                       <p><b>When scheduled:</b> {{instanceSemester}}</p>
                       <p><b>ICE Value:</b> {{> ICE_Badge ice=courseIce }}</p>
                       {{#if isDeletableInstance}}
-                        <p><button id="{{instanceID}}" class="ui red icon button delInstance">Delete
-                          <i class="remove icon"></i></button>
+                        <p>
+                          <button id="{{instanceID}}" class="ui red icon button delInstance">Delete
+                            <i class="remove icon"></i></button>
                         </p>
                       {{/if}}
                     </div>
@@ -123,11 +124,21 @@
                         <p><b>When: </b> {{opportunityStart}} - {{opportunityEnd}}</p>
                         <p><b>ICE Value: </b>{{> ICE_Badge ice=opportunityIce }}</p>
                         <p><b>More: </b><a href="{{opportunityMore}}">{{opportunityMore}}</a></p>
-                        {{#if isDeletableInstance}}
-                          <p><button id="{{instanceID}}" class="ui red icon button delInstance">Delete
-                            <i class="remove icon"></i></button>
-                          </p>
-                        {{/if}}
+                        <div>
+                          {{#if isDeletableInstance}}
+                            <p>
+                              <button id="{{instanceID}}" class="ui red left floated icon button delInstance">Delete
+                                <i class="remove icon"></i></button>
+                            </p>
+                          {{/if}}
+                          {{#if isPastInstance}}
+                            <p>
+                              <button id="{{instanceID}}" class="ui blue right floated button verifyInstance">Request
+                                Verification
+                              </button>
+                            </p>
+                          {{/if}}
+                        </div>
                       </div>
                     {{else}}
                       <p>Please select an ICS course or opportunity menus above or click on a course or

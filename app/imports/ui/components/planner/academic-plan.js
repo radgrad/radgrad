@@ -17,22 +17,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 // import { Users } from '../../../api/user/UserCollection.js';
 import { getTotalICE, makeCourseICE, getPlanningICE } from '../../../api/ice/IceProcessor.js';
 
-// const studentSemesters = () => {
-//   const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
-//   const courseInstances = CourseInstances.find({ studentID: user[0]._id }).fetch();
-//   const ids = [];
-//   courseInstances.forEach((ci) => {
-//     if (lodash.indexOf(ids, ci.semesterID) === -1) {
-//       ids.push(ci.semesterID);
-//     }
-//   });
-//   const ret = [];
-//   ids.forEach((id) => {
-//     ret.push(Semesters.findDoc(id));
-//   });
-//   return lodash.orderBy(ret, ['sortBy'], ['asc']);
-// };
-
 Template.Academic_Plan_2.helpers({
   courses() {
     let ret = [];
@@ -335,6 +319,22 @@ Template.Academic_Plan_2.helpers({
     }
     return false;
   },
+  isPastInstance() {
+    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSemester = Semesters.findDoc(currentSemesterID);
+    if (Template.instance().state.get('detailCourseID')) {
+      const id = Template.instance().state.get('detailCourseID');
+      const ci = CourseInstances.findDoc(id);
+      const ciSemester = Semesters.findDoc(ci.semesterID);
+      return ciSemester.sortBy <= currentSemester.sortBy;
+    } else if (Template.instance().state.get('detailOpportunityID')) {
+      const id = Template.instance().state.get('detailOpportunityID');
+      const opportunity = OpportunityInstances.findDoc(id);
+      const oppSemester = Semesters.findDoc(opportunity.semesterID);
+      return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy;
+    }
+    return false;
+  },
   isFuture(year) {
     return year.year >= moment().year();
   },
@@ -492,8 +492,7 @@ Template.Academic_Plan_2.helpers({
 });
 
 Template.Academic_Plan_2.events({
-  /* eslint object-shorthand: "off" */
-  'click button.delInstance'(event) {
+  'click button.delInstance': function (event) {
     event.preventDefault();
     const id = event.target.id;
     try {
@@ -510,7 +509,7 @@ Template.Academic_Plan_2.events({
     Template.instance().state.set('detailCourseID', null);
     Template.instance().state.set('detailOpportunityID', null);
   },
-  'click .item.inspect.course'(event) {
+  'click .item.inspect.course': function (event) {
     event.preventDefault();
     // console.log(event);
     const template = Template.instance();
@@ -523,7 +522,7 @@ Template.Academic_Plan_2.events({
       template.state.set('detailOpportunityID', null);
     }
   },
-  'click tr.clickEnabled'(event) {
+  'click tr.clickEnabled': function (event) {
     event.preventDefault();
     let target = event.target;
     while (target && target.nodeName !== 'TR') {
@@ -540,7 +539,7 @@ Template.Academic_Plan_2.events({
         template.state.set('detailOpportunityID', target.id);
       }
   },
-  'click .item.inspect.opportunity'(event) {
+  'click .item.inspect.opportunity': function (event) {
     event.preventDefault();
     const template = Template.instance();
     template.$('a.item.400').popup('hide all');
@@ -552,7 +551,7 @@ Template.Academic_Plan_2.events({
       template.state.set('detailOpportunityID', courseArr[0].opportunityID);
     }
   },
-  'click .course.item'(event) {
+  'click .course.item': function (event) {
     event.preventDefault();
     const courseArr = Courses.find({ _id: event.target.id }).fetch();
     if (courseArr.length > 0) {
@@ -560,7 +559,7 @@ Template.Academic_Plan_2.events({
       Template.instance().state.set('detailOpportunityID', null);
     }
   },
-  'click .opportunity.item'(event) {
+  'click .opportunity.item': function (event) {
     event.preventDefault();
     const opportunityArr = Opportunities.find({ _id: event.target.id }).fetch();
     if (opportunityArr.length > 0) {
@@ -568,17 +567,17 @@ Template.Academic_Plan_2.events({
       Template.instance().state.set('detailOpportunityID', event.target.id);
     }
   },
-  'click #nextYear'(event) {
+  'click #nextYear': function (event) {
     event.preventDefault();
     const year = Template.instance().state.get('startYear');
     Template.instance().state.set('startYear', year + 1);
   },
-  'click #prevYear'(event) {
+  'click #prevYear': function (event) {
     event.preventDefault();
     const year = Template.instance().state.get('startYear');
     Template.instance().state.set('startYear', year - 1);
   },
-  'click #addAY'(event) {
+  'click #addAY': function (event) {
     event.preventDefault();
     const student = Meteor.userId();
     const ays = AcademicYearInstances.find({ studentID: student }, { sort: { year: 1 } }).fetch();
