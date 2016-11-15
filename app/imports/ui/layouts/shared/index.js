@@ -12,5 +12,3 @@ import './loading.html';
 import './page-not-found.html';
 
 import './second-menu.html';
-
-

@@ -15,7 +15,7 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
   if (courses.length > 0 && Template.instance().state.get('semester')) {
-    const filtered = lodash.filter(courses, function (course) {
+    const filtered = lodash.filter(courses, function filter(course) {
       if (course.number === 'ICS 499') {
         return true;
       }
@@ -32,7 +32,7 @@ const availableCourses = () => {
 
 const available1xxCourses = () => {
   const courses = availableCourses();
-  const filtered = lodash.filter(courses, function (course) {
+  const filtered = lodash.filter(courses, function filter(course) {
     return course.number.substring(0, 5) === 'ICS 1';
   });
   return filtered;
@@ -40,7 +40,7 @@ const available1xxCourses = () => {
 
 const available2xxCourses = () => {
   const courses = availableCourses();
-  const filtered = lodash.filter(courses, function (course) {
+  const filtered = lodash.filter(courses, function filter(course) {
     return course.number.substring(0, 5) === 'ICS 2';
   });
   return filtered;
@@ -48,7 +48,7 @@ const available2xxCourses = () => {
 
 const available3xxCourses = () => {
   const courses = availableCourses();
-  const filtered = lodash.filter(courses, function (course) {
+  const filtered = lodash.filter(courses, function filter(course) {
     return course.number.substring(0, 5) === 'ICS 3';
   });
   return filtered;
@@ -56,7 +56,7 @@ const available3xxCourses = () => {
 
 const available4xxCourses = () => {
   const courses = availableCourses();
-  const filtered = lodash.filter(courses, function (course) {
+  const filtered = lodash.filter(courses, function filter(course) {
     return course.number.substring(0, 5) === 'ICS 4';
   });
   return filtered;
@@ -65,7 +65,7 @@ const available4xxCourses = () => {
 const availableOpportunities = () => {
   const opportunities = Opportunities.find({}).fetch();
   if (opportunities.length > 0 && Template.instance().state.get('semester')) {
-    const filtered = lodash.filter(opportunities, function (opportunity) {
+    const filtered = lodash.filter(opportunities, function filter(opportunity) {
       const oi = OpportunityInstances.find({
         studentID: Meteor.userId(),
         courseID: opportunity._id,
@@ -76,14 +76,6 @@ const availableOpportunities = () => {
   }
   return [];
 };
-
-const resizePopup = () => {
-  // $('.ui.popup').css('max-height', '350px');
-};
-
-$(window).resize(function (e) {
-  resizePopup();
-});
 
 Template.Semester_List.helpers({
   courseDescription(courseID) {
@@ -178,6 +170,7 @@ Template.Semester_List.helpers({
     try {
       const ci = CourseInstances.findDoc(courseInstanceID);
       return ci.grade === grade;
+      /* eslint no-unused-vars: "off" */
     } catch (e) {
       return null;
     }
@@ -263,12 +256,11 @@ Template.Semester_List.helpers({
 });
 
 Template.Semester_List.events({
+  /* eslint object-shorthand: "off" */
   'drop .bodyDrop'(event) {
-    console.log('drop .bodyDrop');
     event.preventDefault();
     if (Template.instance().state.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
-      console.log(id);
       const semesterId = Template.instance().state.get('semester')._id;
       if (CourseInstances.isDefined(id)) {
         CourseInstances.updateSemester(id, semesterId);
@@ -279,7 +271,7 @@ Template.Semester_List.events({
           _id: id,
         }).fetch();
         if (opportunities.length > 0) {
-          OpportunityInstances.updateSemester(opportunities[0]._id, semesterId)
+          OpportunityInstances.updateSemester(opportunities[0]._id, semesterId);
         }
       }
     }
@@ -330,9 +322,6 @@ Template.Semester_List.events({
             inline: true,
             hoverable: true,
             lastResort: 'right center',
-            onShow: function resize() {
-              resizePopup();
-            },
           });
     });
   },
@@ -379,9 +368,6 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
     template.$('.ui.icon.button')
         .popup({
           on: 'click',
-          onShow: function resize() {
-            resizePopup();
-          },
         });
     template.$('.item.addCourseMenu')
         .popup({
@@ -394,9 +380,6 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
           hoverable: true,
           position: 'right center',
           lastResort: 'right center',
-          onShow: function resize() {
-            resizePopup();
-          },
         });
     template.$('a.100.item')
         .popup({
@@ -418,9 +401,6 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
           inline: true,
           hoverable: true,
           lastResort: 'right center',
-          onShow: function resize() {
-            resizePopup();
-          },
         });
   });
 });

@@ -7,7 +7,7 @@ export const BS_CS = {
   electiveReqts: '5 x 4?? upto 3 499 credits and 6 ics491',
 };
 
-export const BS_CS_Template = {
+export const BS_CS_TEMPLATE = {
   ay1: {
     fallSem: ['ics111', 'ics141'],
     springSem: ['ics211', 'ics241'],
@@ -33,7 +33,7 @@ export const BS_CS_SECSCI = {
   electiveReqts: '5 x 4??',
 };
 
-export const BS_CS_SECSCI_Template = {
+export const BS_CS_SECSCI_TEMPLATE = {
   ay1: {
     fallSem: ['ics111', 'ics141'],
     springSem: ['ics211', 'ics241', 'ics222'],
@@ -81,7 +81,7 @@ export const BA_ICS_IT = {
   electiveReqts: 'two ICS courses at the 300-level or above',
 };
 
-export const BA_ICS_IT_Template = {
+export const BA_ICS_IT_TEMPLATE = {
   ay1: {
     fallSem: ['ics111', 'ics141'],
     springSem: ['ics211', 'ics241', 'ics222'],

@@ -13,17 +13,17 @@ Template.First_Menu.helpers({
 //   },
 // });
 
-Template.First_Menu.onCreated(function () {
+Template.First_Menu.onCreated(function firstMenuOnCreated() {
   // add your statement here
 });
 
-Template.First_Menu.onRendered(function () {
+Template.First_Menu.onRendered(function firstMenuOnRendered() {
   // this.$('a.ui.right.dropdown.item').dropdown({
   //   on: 'hover',
   // });
 });
 
-Template.First_Menu.onDestroyed(function () {
+Template.First_Menu.onDestroyed(function firstMenuOnDestroyed() {
   // add your statement here
 });
 

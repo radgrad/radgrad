@@ -8,51 +8,30 @@ import { moment } from 'meteor/momentjs:moment';
 
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { checkPrerequisites } from '../../../api/course/CourseFunctions';
+// import { checkPrerequisites } from '../../../api/course/CourseFunctions';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { Users } from '../../../api/user/UserCollection.js';
+// import { Users } from '../../../api/user/UserCollection.js';
 import { getTotalICE, makeCourseICE, getPlanningICE } from '../../../api/ice/IceProcessor.js';
 
-const studentSemesters = () => {
-  const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
-  const courseInstances = CourseInstances.find({ studentID: user[0]._id }).fetch();
-  const ids = [];
-  courseInstances.forEach((ci) => {
-    if (lodash.indexOf(ids, ci.semesterID) === -1) {
-      ids.push(ci.semesterID);
-    }
-  });
-  const ret = [];
-  ids.forEach((id) => {
-    ret.push(Semesters.findDoc(id));
-  });
-  return lodash.orderBy(ret, ['sortBy'], ['asc']);
-};
-
-const academicYears = () => {
-  const ret = {};
-  const semesters = studentSemesters();
-  semesters.forEach((semester) => {
-    let year = 0;
-    if (semester.term === Semesters.FALL) {
-      year = semester.year;
-    } else {
-      year = semester.year - 1;
-    }
-    if (!ret[year]) {
-      ret[year] = { year, springYear: year + 1 };
-    }
-    if (!ret[year].semesters) {
-      ret[year].semesters = {};
-    }
-    ret[year].semesters[semester.term] = semester;
-  });
-  return ret;
-};
+// const studentSemesters = () => {
+//   const user = Users.find({ username: Template.instance().state.get('studentUsername') }).fetch();
+//   const courseInstances = CourseInstances.find({ studentID: user[0]._id }).fetch();
+//   const ids = [];
+//   courseInstances.forEach((ci) => {
+//     if (lodash.indexOf(ids, ci.semesterID) === -1) {
+//       ids.push(ci.semesterID);
+//     }
+//   });
+//   const ret = [];
+//   ids.forEach((id) => {
+//     ret.push(Semesters.findDoc(id));
+//   });
+//   return lodash.orderBy(ret, ['sortBy'], ['asc']);
+// };
 
 Template.Academic_Plan_2.helpers({
   courses() {
@@ -513,6 +492,7 @@ Template.Academic_Plan_2.helpers({
 });
 
 Template.Academic_Plan_2.events({
+  /* eslint object-shorthand: "off" */
   'click button.delInstance'(event) {
     event.preventDefault();
     const id = event.target.id;
@@ -524,7 +504,7 @@ Template.Academic_Plan_2.events({
         const op = OpportunityInstances.findDoc(id);
         OpportunityInstances.removeIt(op._id);
       } catch (e1) {
-        console.log("wasn't an opportunity instance");
+        // What do we do here?
       }
     }
     Template.instance().state.set('detailCourseID', null);
@@ -546,11 +526,9 @@ Template.Academic_Plan_2.events({
   'click tr.clickEnabled'(event) {
     event.preventDefault();
     let target = event.target;
-    console.log(target);
     while (target && target.nodeName !== 'TR') {
       target = target.parentNode;
     }
-    console.log(target);
     const firstClass = target.getAttribute('class').split(' ')[0];
     const template = Template.instance();
     if (firstClass === 'courseInstance') {
