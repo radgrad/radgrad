@@ -1,11 +1,11 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
+// import { Slugs } from '/imports/api/slug/SlugCollection';
+// import { Interests } from '/imports/api/interest/InterestCollection';
 import { Users } from '/imports/api/user/UserCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { Opportunities } from '/imports/api/opportunity/OppoturnityCollection.js';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection.js';
-import { assertICE } from '/imports/api/ice/IceProcessor';
+import BaseCollection from '/imports/api/base/BaseCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
+// import { assertICE } from '/imports/api/ice/IceProcessor';
 import { moment } from 'meteor/momentjs:moment';
 
 /** @module Verification */
@@ -19,9 +19,9 @@ const ProcessedSchema = new SimpleSchema({
  * Represents a Verification Request, such as "LiveWire Internship".
  * A student has completed an opportunity (such as an internship or project) and wants to obtain ICE Points by
  * having it verified.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:BaseInstance~BaseCollection
  */
-class VerificationRequestCollection extends BaseInstanceCollection {
+class VerificationRequestCollection extends BaseCollection {
 
   /**
    * Creates the VerificationRequest collection.
@@ -42,15 +42,15 @@ class VerificationRequestCollection extends BaseInstanceCollection {
   /**
    * Defines a verification request.
    * @example
-   * VerificationRequests.define({ student: 'joesmith', opportunity: 'hack2015' });
+   * VerificationRequests.define({ student: 'joesmith', opportunityInstance: 'EiQYeRP4jyyre28Zw' });
    * @param { Object } student and opportunity must be slugs or IDs. SubmittedOn defaults to now.
    * @throws {Meteor.Error} If semester, opportunity, or student cannot be resolved, or if verified is not a boolean.
    * @returns The newly created docID.
    */
-  define({ student, opportunity, submittedOn = moment() }) {
+  define({ student, opportunityInstance, submittedOn = moment().toDate() }) {
     const studentID = Users.getID(student);
-    const opportunityInstanceID = OpportunityInstances.getID(opportunity);
-    const oppInstance = OpportunityInstances.findDoc(opportunityInstanceID);
+    const oppInstance = OpportunityInstances.findDoc(opportunityInstance);
+    const opportunityInstanceID = oppInstance._id;
     const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;
     const processed = [];
     // Define and return the new OpportunityInstance

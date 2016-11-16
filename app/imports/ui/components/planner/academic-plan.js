@@ -492,7 +492,18 @@ Template.Academic_Plan_2.helpers({
 });
 
 Template.Academic_Plan_2.events({
-  'click button.delInstance': function (event) {
+  'click #addAY': function clickAddAY(event) {
+    event.preventDefault();
+    const student = Meteor.userId();
+    const ays = AcademicYearInstances.find({ studentID: student }, { sort: { year: 1 } }).fetch();
+    let year = moment().year();
+    if (ays.length > 0) {
+      const ay = ays[ays.length - 1];
+      year = ay.year + 1;
+    }
+    AcademicYearInstances.define({ year, student });
+  },
+  'click button.delInstance': function clickButtonDelInstance(event) {
     event.preventDefault();
     const id = event.target.id;
     try {
@@ -509,7 +520,15 @@ Template.Academic_Plan_2.events({
     Template.instance().state.set('detailCourseID', null);
     Template.instance().state.set('detailOpportunityID', null);
   },
-  'click .item.inspect.course': function (event) {
+  'click .course.item': function clickCourseItem(event) {
+    event.preventDefault();
+    const courseArr = Courses.find({ _id: event.target.id }).fetch();
+    if (courseArr.length > 0) {
+      Template.instance().state.set('detailCourseID', event.target.id);
+      Template.instance().state.set('detailOpportunityID', null);
+    }
+  },
+  'click .item.inspect.course': function clickItemInspectCourse(event) {
     event.preventDefault();
     // console.log(event);
     const template = Template.instance();
@@ -522,7 +541,37 @@ Template.Academic_Plan_2.events({
       template.state.set('detailOpportunityID', null);
     }
   },
-  'click tr.clickEnabled': function (event) {
+  'click .item.inspect.opportunity': function clickItemInspectOpportunity(event) {
+    event.preventDefault();
+    const template = Template.instance();
+    template.$('a.item.400').popup('hide all');
+    const id = event.target.id;
+    const split = id.split('-');
+    const courseArr = OpportunityInstances.find({ _id: split[1] }).fetch();
+    if (courseArr.length > 0) {
+      template.state.set('detailCourseID', null);
+      template.state.set('detailOpportunityID', courseArr[0].opportunityID);
+    }
+  },
+  'click #nextYear': function clickNextYear(event) {
+    event.preventDefault();
+    const year = Template.instance().state.get('startYear');
+    Template.instance().state.set('startYear', year + 1);
+  },
+  'click .opportunity.item': function clickOpportunityItem(event) {
+    event.preventDefault();
+    const opportunityArr = Opportunities.find({ _id: event.target.id }).fetch();
+    if (opportunityArr.length > 0) {
+      Template.instance().state.set('detailCourseID', null);
+      Template.instance().state.set('detailOpportunityID', event.target.id);
+    }
+  },
+  'click #prevYear': function clickPrevYear(event) {
+    event.preventDefault();
+    const year = Template.instance().state.get('startYear');
+    Template.instance().state.set('startYear', year - 1);
+  },
+  'click tr.clickEnabled': function clickTrClickEnabled(event) {
     event.preventDefault();
     let target = event.target;
     while (target && target.nodeName !== 'TR') {
@@ -538,55 +587,6 @@ Template.Academic_Plan_2.events({
         template.state.set('detailCourseID', null);
         template.state.set('detailOpportunityID', target.id);
       }
-  },
-  'click .item.inspect.opportunity': function (event) {
-    event.preventDefault();
-    const template = Template.instance();
-    template.$('a.item.400').popup('hide all');
-    const id = event.target.id;
-    const split = id.split('-');
-    const courseArr = OpportunityInstances.find({ _id: split[1] }).fetch();
-    if (courseArr.length > 0) {
-      template.state.set('detailCourseID', null);
-      template.state.set('detailOpportunityID', courseArr[0].opportunityID);
-    }
-  },
-  'click .course.item': function (event) {
-    event.preventDefault();
-    const courseArr = Courses.find({ _id: event.target.id }).fetch();
-    if (courseArr.length > 0) {
-      Template.instance().state.set('detailCourseID', event.target.id);
-      Template.instance().state.set('detailOpportunityID', null);
-    }
-  },
-  'click .opportunity.item': function (event) {
-    event.preventDefault();
-    const opportunityArr = Opportunities.find({ _id: event.target.id }).fetch();
-    if (opportunityArr.length > 0) {
-      Template.instance().state.set('detailCourseID', null);
-      Template.instance().state.set('detailOpportunityID', event.target.id);
-    }
-  },
-  'click #nextYear': function (event) {
-    event.preventDefault();
-    const year = Template.instance().state.get('startYear');
-    Template.instance().state.set('startYear', year + 1);
-  },
-  'click #prevYear': function (event) {
-    event.preventDefault();
-    const year = Template.instance().state.get('startYear');
-    Template.instance().state.set('startYear', year - 1);
-  },
-  'click #addAY': function (event) {
-    event.preventDefault();
-    const student = Meteor.userId();
-    const ays = AcademicYearInstances.find({ studentID: student }, { sort: { year: 1 } }).fetch();
-    let year = moment().year();
-    if (ays.length > 0) {
-      const ay = ays[ays.length - 1];
-      year = ay.year + 1;
-    }
-    AcademicYearInstances.define({ year, student });
   },
 });
 

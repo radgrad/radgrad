@@ -256,7 +256,7 @@ Template.Semester_List.helpers({
 });
 
 Template.Semester_List.events({
-  'drop .bodyDrop': function (event) {
+  'drop .bodyDrop': function dropBodyDrop(event) {
     event.preventDefault();
     if (Template.instance().state.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
@@ -275,7 +275,7 @@ Template.Semester_List.events({
       }
     }
   },
-  'click .item.addClass': function (event) {
+  'click .item.addClass': function clickItemAddClass(event) {
     event.preventDefault();
     const template = Template.instance();
     template.$('a.item.400').popup('hide all');
@@ -324,7 +324,7 @@ Template.Semester_List.events({
           });
     });
   },
-  'click .item.addOpportunity': function (event) {
+  'click .item.addOpportunity': function clickItemAddOpportunity(event) {
     event.preventDefault();
     const template = Template.instance();
     template.$('a.item.400').popup('hide all');
@@ -344,7 +344,7 @@ Template.Semester_List.events({
     };
     OpportunityInstances.define(oi);
   },
-  'click .item.grade': function (event) {
+  'click .item.grade': function clickItemGrade(event) {
     event.preventDefault();
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;

@@ -22,7 +22,8 @@ if (Meteor.isServer) {
       const user = makeSampleUser();
       const feedback = makeSampleFeedback();
       const description = 'foo';
-      const docID = FeedbackInstances.define({ feedback, user, description });
+      const area = 'Interests';
+      const docID = FeedbackInstances.define({ feedback, user, description, area });
       expect(FeedbackInstances.isDefined(docID)).to.be.true;
       FeedbackInstances.removeIt(docID);
       expect(FeedbackInstances.isDefined(docID)).to.be.false;
