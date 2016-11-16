@@ -100,7 +100,6 @@
                     <p><b>{{courseNumber}}</b>
                       {{courseName}}</p>
                     <div class="content">
-                      {{> ICE_Badge ice=courseIce }}
                       {{#each recommendationStars}}
                         <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
                            class="yellow star icon"></i>
@@ -108,9 +107,13 @@
                       <p>
                         <b>Catalog Descrption:</b> {{courseDescription}}
                       </p>
-                      <p><b>When scheduled:</b></p>
-                      <p><b>ICE Value:</b> points for innovation, points for competency,
-                        points for experience.</p>
+                      <p><b>When scheduled:</b> {{instanceSemester}}</p>
+                      <p><b>ICE Value:</b> {{> ICE_Badge ice=courseIce }}</p>
+                      {{#if isDeletableInstance}}
+                        <p><button id="{{instanceID}}" class="ui red icon button delInstance">Delete
+                          <i class="remove icon"></i></button>
+                        </p>
+                      {{/if}}
                     </div>
                   {{else}}
                     {{#if hasOpportunity}}
@@ -120,6 +123,11 @@
                         <p><b>When: </b> {{opportunityStart}} - {{opportunityEnd}}</p>
                         <p><b>ICE Value: </b>{{> ICE_Badge ice=opportunityIce }}</p>
                         <p><b>More: </b><a href="{{opportunityMore}}">{{opportunityMore}}</a></p>
+                        {{#if isDeletableInstance}}
+                          <p><button id="{{instanceID}}" class="ui red icon button delInstance">Delete
+                            <i class="remove icon"></i></button>
+                          </p>
+                        {{/if}}
                       </div>
                     {{else}}
                       <p>Please select an ICS course or opportunity menus above or click on a course or
@@ -173,7 +181,7 @@
     }
 
     function drag(ev) {
-//      console.log(ev.target);
+      console.log(ev.target);
       ev.dataTransfer.setData("text", ev.target.id);
     }
   </script>
