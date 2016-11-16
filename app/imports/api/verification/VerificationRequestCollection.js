@@ -3,8 +3,8 @@ import { Slugs } from '/imports/api/slug/SlugCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { Opportunities } from '/imports/api/opportunity/OppoturnityCollection.js';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection.js';
+import { Opportunities } from '../opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
 import { assertICE } from '/imports/api/ice/IceProcessor';
 import { moment } from 'meteor/momentjs:moment';
 

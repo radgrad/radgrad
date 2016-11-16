@@ -45,7 +45,7 @@ export const advisorStudentConfigurationPageRouteName = 'Advisor_Student_Configu
 advisorRoutes.route('/', {
   name: advisorStudentConfigurationPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Student_Configuration_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorStudentConfigurationPageRouteName });
   },
 });
 
@@ -53,7 +53,7 @@ export const advisorVerificationRequestsPendingPageRouteName = 'Advisor_Verifica
 advisorRoutes.route('/verification-requests', {
   name: advisorVerificationRequestsPendingPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Verification_Requests_Pending_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorVerificationRequestsPendingPageRouteName });
   },
 });
 
@@ -61,7 +61,7 @@ export const advisorEventVerificationPageRouteName = 'Advisor_Event_Verification
 advisorRoutes.route('/event-verification', {
   name: advisorEventVerificationPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Event_Verification_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorEventVerificationPageRouteName });
   },
 });
 
@@ -69,7 +69,7 @@ export const advisorCompletedVerificationsPageRouteName = 'Advisor_Completed_Ver
 advisorRoutes.route('/completed-verifications', {
   name: advisorCompletedVerificationsPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Completed_Verifications_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorCompletedVerificationsPageRouteName });
   },
 });
 
