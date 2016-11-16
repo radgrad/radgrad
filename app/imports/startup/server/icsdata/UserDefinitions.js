@@ -47,4 +47,12 @@ export const userDefinitions = [
     role: ROLE.FACULTY,
     password: 'foo',
   },
+  {
+    firstName: 'Gerald',
+    lastName: 'Lau',
+    slug: 'geraldlau',
+    email: 'glau@hawaii.edu',
+    role: ROLE.ADVISOR,
+    password: 'foo',
+  },
 ];
