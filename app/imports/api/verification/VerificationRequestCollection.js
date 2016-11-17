@@ -5,6 +5,7 @@ import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
+import { Semesters } from '../semester/SemesterCollection.js';
 // import { assertICE } from '/imports/api/ice/IceProcessor';
 import { moment } from 'meteor/momentjs:moment';
 
@@ -13,6 +14,8 @@ import { moment } from 'meteor/momentjs:moment';
 const ProcessedSchema = new SimpleSchema({
   date: { type: Date },
   status: { type: String },
+  verifier: { type: String },
+  feedback: { type: String, optional: true },
 });
 
 /**
@@ -31,6 +34,7 @@ class VerificationRequestCollection extends BaseCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
       submittedOn: { type: Date },
+      status: { type: String },
       processed: { type: [ProcessedSchema] },
       ice: { type: Object, optional: true, blackbox: true },
     }));
@@ -52,10 +56,86 @@ class VerificationRequestCollection extends BaseCollection {
     const oppInstance = OpportunityInstances.findDoc(opportunityInstance);
     const opportunityInstanceID = oppInstance._id;
     const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;
+    const status = this.OPEN;
     const processed = [];
-    // Define and return the new OpportunityInstance
-    const requestID = this._collection.insert({ studentID, opportunityInstanceID, submittedOn, processed, ice });
+    // Define and return the new VerificationRequest
+    const requestID = this._collection.insert({ studentID, opportunityInstanceID, submittedOn, status,
+      processed, ice });
     return requestID;
+  }
+
+  /**
+   * Returns the Opportunity associated with the VerificationRequest with the given instanceID.
+   * @param instanceID The id of the VerificationRequest.
+   * @returns {Object} The associated Opportunity.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getOpportunityDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    const opportunity = OpportunityInstances.getOpportunityDoc(instance.opportunityInstanceID);
+    return opportunity;
+  }
+
+  /**
+   * Returns the Opportunity associated with the VerificationRequest with the given instanceID.
+   * @param instanceID The id of the VerificationRequest.
+   * @returns {Object} The associated Opportunity.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getOpportunityInstanceDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    return OpportunityInstances.findDoc(instance.opportunityInstanceID);
+  }
+
+  /**
+   * Returns the Semester associated with the VerificationRequest with the given instanceID.
+   * @param instanceID The id of the VerificationRequest.
+   * @returns {Object} The associated Semester.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getSemesterDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    const oppInstance = OpportunityInstances.findDoc(instance.opportunityInstanceID);
+    return Semesters.findDoc(oppInstance.semesterID);
+  }
+
+  /**
+   * Returns the Sponsor associated with the VerificationRequest with the given instanceID.
+   * @param instanceID The id of the VerificationRequest.
+   * @returns {Object} The associated Sponsor.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getSponsorDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    const opportunity = OpportunityInstances.getOpportunityDoc(instance.opportunityInstanceID);
+    return Users.findDoc(opportunity.sponsorID);
+  }
+
+  /**
+   * Returns the Student associated with the VerificationRequest with the given instanceID.
+   * @param instanceID The id of the VerificationRequest.
+   * @returns {Object} The associated Student.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getStudentDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    return Users.findDoc(instance.studentID);
+  }
+
+  /**
+   * Updates the VerificationRequest's status and processed array.
+   * @param requestID The VerificationRequest ID.
+   * @param status The new Status.
+   * @param processed The new array of process records.
+   */
+  updateStatus(requestID, status, processed) {
+    this.assertDefined(requestID);
+    this._collection.update({ _id: requestID }, { $set: { status, processed } });
   }
 }
 

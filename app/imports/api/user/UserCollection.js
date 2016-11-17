@@ -89,6 +89,18 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Returns the full name for the given userID.
+   * @param userID the id of the user.
+   * @returns {string} The user's full name.
+   * @throws {Meteor.Error} If userID is not a valid ID.
+   */
+  getFullName(userID) {
+    this.assertDefined(userID);
+    const user = this._collection.findOne({ _id: userID });
+    return `${user.firstName} ${user.lastName}`;
+  }
+
+  /**
    * Removes the user and their associated DegreePlan (if present) and their Slug.
    * @param user The object or docID representing this user.
    * @throws { Meteor.Error } if the user or their slug is not defined, or if they are referenced in Opportunities.

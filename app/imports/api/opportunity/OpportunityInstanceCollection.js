@@ -55,6 +55,42 @@ class OpportunityInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Returns the Opportunity associated with the OpportunityInstance with the given instanceID.
+   * @param instanceID The id of the OpportunityInstance.
+   * @returns {Object} The associated Opportunity.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getOpportunityDoc(instanceID) {
+    // this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    return Opportunities.findDoc(instance.opportunityID);
+  }
+
+  /**
+   * Returns the Semester associated with the OpportunityInstance with the given instanceID.
+   * @param instanceID The id of the OpportunityInstance.
+   * @returns {Object} The associated Semester.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getSemesterDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    return Semesters.findDoc(instance.semesterID);
+  }
+
+  /**
+   * Returns the Student associated with the OpportunityInstance with the given instanceID.
+   * @param instanceID The id of the OpportunityInstance.
+   * @returns {Object} The associated Student.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getStudentDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    return Users.findDoc(instance.studentID);
+  }
+
+  /**
    * Depending on the logged in user publish only their OpportunityInstances. If
    * the user is in the Role.ADMIN then publish all OpportunityInstances. If the
    * system is in mockup mode publish all OpportunityInstances.

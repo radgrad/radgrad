@@ -110,19 +110,19 @@ export const feedbackInstances = [
   },
   {
     feedback: 'iceInnovationPoints',
-    user: 'dani',
+    user: 'abi',
     description: 'You need 22 more Innovation points in your plan to get to 100.',
     area: 'ICE',
   },
   {
     feedback: 'iceCompetencyPoints',
-    user: 'dani',
+    user: 'abi',
     description: 'You need 7 more Innovation points in your plan to get to 100.',
     area: 'ICE',
   },
   {
     feedback: 'updateStarData',
-    user: 'dani',
+    user: 'abi',
     description: 'See your ICS advisor to upload STAR data from Spring 2016.',
     area: 'STAR',
   },

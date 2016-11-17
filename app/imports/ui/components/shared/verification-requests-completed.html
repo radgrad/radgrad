@@ -1,39 +1,43 @@
 <template name="Verification_Requests_Completed">
-  <div class="ui raised padded container segment">
-    <div class="ui top left attached green label">Completed Verification Requests</div>
-    <div class="ui divided items">
-      {{#each verification in completedVerifications}}
-        <div class="item">
-          <div class="content">
-            <a class="header">{{verification.opportunityName}}, {{verification.semesterString}}</a>
-            <div class="ui equal width grid">
-              <div class="column">
-                <div class="description">
-                  <span>Student: {{verification.studentName}}</span>
+  {{#if Template.subscriptionsReady}}
+    <div class="ui raised padded container segment">
+      <div class="ui top left attached green label">Completed Verification Requests</div>
+      <div class="ui divided items">
+        {{#each verification in completedVerifications}}
+          <div class="item">
+            <div class="content">
+              <a class="header">{{opportunityName verification}}, {{semesterString verification}}</a>
+              <div class="ui equal width grid">
+                <div class="column">
+                  <div class="description">
+                    <span>Student: {{studentName verification}}</span>
+                  </div>
+                  <div class="description">
+                    <span>Owner: {{ownerName verification}}</span>
+                  </div>
                 </div>
-                <div class="description">
-                  <span>Owner: {{verification.ownerName}}</span>
+                <div class="column">
+                  <div class="description">
+                    <span>Submitted: {{whenSubmitted verification}}</span>
+                  </div>
+                  <div class="description">
+                    {{#each processed in verification.processed}}
+                      <span>Processed: {{processedDate processed.date}} by {{processed.verifier}} ({{processed.status}})</span><br>
+                    {{/each}}
+                  </div>
                 </div>
               </div>
-              <div class="column">
-                <div class="description">
-                  <span>Submitted: {{verification.submittedOn}} (2 weeks ago)</span>
-                </div>
-                <div class="description">
-                  {{#each processed in verification.processed}}
-                    <span>Processed: {{processed.date}} (1 week ago) by {{processed.by}} ({{processed.status}})</span><br>
-                  {{/each}}
-                </div>
+              <div class="description">
+                <form class="ui form">
+                  <button id="{{verification._id}}" class="ui green button" type="submit">Reopen</button>
+                </form>
               </div>
-            </div>
-            <div class="description">
-              <form class="ui form">
-                <button id="{{verification.id}}" class="ui green button" type="submit">Reopen</button>
-              </form>
             </div>
           </div>
-        </div>
-      {{/each}}
+        {{/each}}
+      </div>
     </div>
-  </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
 </template>

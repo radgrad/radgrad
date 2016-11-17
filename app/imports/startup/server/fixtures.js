@@ -11,17 +11,19 @@ import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
+import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 
 import { courseDefinitions } from './icsdata/CourseDefinitions.js';
 import { processStarCsvData } from '/imports/api/star/StarProcessor';
 import { interestTypeDefinitions, interestDefinitions } from '/imports/startup/server/icsdata/InterestDefinitions';
 import {
-    opportunityDefinitions, opportunityTypeDefinitions,
+    opportunityDefinitions, opportunityTypeDefinitions, opportunityInstances,
 }
     from '/imports/startup/server/icsdata/OpportunityDefinitions';
 import { careerGoalDefinitions } from '/imports/startup/server/icsdata/CareerGoalDefinitions';
@@ -42,6 +44,12 @@ Meteor.startup(() => {
     Semesters.define({ term: Semesters.FALL, year: 2017 });
     Semesters.define({ term: Semesters.SPRING, year: 2018 });
     Semesters.define({ term: Semesters.SUMMER, year: 2018 });
+    Semesters.define({ term: Semesters.FALL, year: 2018 });
+    Semesters.define({ term: Semesters.SPRING, year: 2019 });
+    Semesters.define({ term: Semesters.SUMMER, year: 2019 });
+    Semesters.define({ term: Semesters.FALL, year: 2019 });
+    Semesters.define({ term: Semesters.SPRING, year: 2020 });
+    Semesters.define({ term: Semesters.SUMMER, year: 2020 });
   }
   if (InterestTypes.find().count() === 0) {
     console.log('Defining InterestTypes');  // eslint-disable-line no-console
@@ -108,6 +116,21 @@ Meteor.startup(() => {
   if (FeedbackInstances.find().count() === 0) {
     console.log('Defining FeedbackInstances');  // eslint-disable-line no-console
     feedbackInstances.map((definition) => FeedbackInstances.define(definition));
+  }
+  if (OpportunityInstances.find().count() === 0) {
+    const opportunityInstanceIDs = [];
+    console.log('Defining OpportunityInstances');  // eslint-disable-line no-console
+    opportunityInstances.map((definition) => opportunityInstanceIDs.push(OpportunityInstances.define(definition)));
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    opportunityInstanceIDs.forEach((id) => {
+      const oppInstance = OpportunityInstances.findDoc(id);
+      if (currentSemester.sortBy > OpportunityInstances.getSemesterDoc(oppInstance._id).sortBy) {
+        const student = OpportunityInstances.getStudentDoc(oppInstance._id);
+        console.log(`Defining VerificationRequest for ${student.username}`);  // eslint-disable-line no-console
+        VerificationRequests.define({ student: student.username, opportunityInstance: oppInstance._id });
+      }
+      return false;
+    });
   }
   if (Meteor.settings.defaultAdminAccount) {
     const admin = Meteor.settings.defaultAdminAccount;

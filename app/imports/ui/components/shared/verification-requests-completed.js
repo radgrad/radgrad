@@ -1,60 +1,69 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { VerificationRequests } from '/imports/api/verification/VerificationRequestCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import { Courses } from '../../../api/course/CourseCollection';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { Semesters } from '../../../api/semester/SemesterCollection';
+import { Users } from '../../../api/user/UserCollection';
+import { moment } from 'meteor/momentjs:moment';
 
 Template.Verification_Requests_Completed.helpers({
   completedVerifications() {
-    return [
-      {
-        id: 'id1',
-        opportunityName: 'OPQ Research Project',
-        semesterString: 'Summer 2016',
-        studentName: 'Abigail Kealoha',
-        ownerName: 'Philip Johnson',
-        submittedOn: 'October 1',
-        processed: [
-          {
-            date: 'October 8',
-            by: 'Gerald Lau',
-            status: VerificationRequests.ACCEPTED,
-          },
-        ],
-      },
-      {
-        id: 'id2',
-        opportunityName: 'Live Action Internship',
-        semesterString: 'Summer 2016',
-        studentName: 'Fenton Maluhia',
-        ownerName: 'Gerald Lau',
-        submittedOn: 'October 1',
-        processed: [
-          {
-            date: 'October 11',
-            by: 'Philip Johnson',
-            status: VerificationRequests.REJECTED,
-          },
-          {
-            date: 'October 12',
-            by: 'Philip Johnson',
-            status: VerificationRequests.ACCEPTED,
-          },
-        ],
-      },
-    ];
+    return VerificationRequests.find({ status: { $ne: VerificationRequests.OPEN } });
   },
   opportunityName(verification) {
-    return verification.opportunityName;
+    return VerificationRequests.getOpportunityDoc(verification._id).name;
   },
-  opportunitySemester(verification) {
-    return verification.semesterString;
+  ownerName(verification) {
+    const sponsor = VerificationRequests.getSponsorDoc(verification._id);
+    return Users.getFullName(sponsor._id);
+  },
+  processedDate(date) {
+    const processed = moment(date);
+    return processed.calendar();
+  },
+  semesterString(verification) {
+    const semester = VerificationRequests.getSemesterDoc(verification._id);
+    return Semesters.toString(semester._id, false);
+  },
+  studentName(verification) {
+    const student = VerificationRequests.getStudentDoc(verification._id);
+    return Users.getFullName(student._id);
+  },
+  whenSubmitted(verification) {
+    const submitted = moment(verification.submittedOn);
+    return submitted.calendar();
   },
 });
 
 Template.Verification_Requests_Completed.events({
- // placeholder: if you add a form to this top-level layout, handle the associated events here.
+  'click button': function clickButton(event) {
+    event.preventDefault();
+    const id = event.target.id;
+    const request = VerificationRequests.findDoc(id);
+    const status = VerificationRequests.OPEN;
+    const processRecord = {};
+    processRecord.date = new Date();
+    processRecord.status = VerificationRequests.OPEN;
+    processRecord.verifier = Users.getFullName(Meteor.userId());
+    const processed = request.processed;
+    processed.push(processRecord);
+    VerificationRequests.updateStatus(id, status, processed);
+  },
 });
 
 Template.Verification_Requests_Completed.onCreated(function completedVerificationRequestsOnCreated() {
-  // placeholder: typically you will put global subscriptions here if you remove the autopublish package.
+  this.autorun(() => {
+    this.subscribe(VerificationRequests.getPublicationName());
+    this.subscribe(Courses.getPublicationName());
+    this.subscribe(CourseInstances.getPublicationName());
+    this.subscribe(Opportunities.getPublicationName());
+    this.subscribe(OpportunityInstances.getPublicationName());
+    this.subscribe(Semesters.getPublicationName());
+    this.subscribe(Users.getPublicationName());
+  });
 });
 
 Template.Verification_Requests_Completed.onRendered(function completedVerificationRequestsOnRendered() {
