@@ -51,9 +51,11 @@ Template.Verification_Requests_Pending.events({
     if (split[1] === 'accept') {
       request.status = VerificationRequests.ACCEPTED;
       processRecord.status = VerificationRequests.ACCEPTED;
+      OpportunityInstances.updateVerified(request.opportunityInstanceID, true);
     } else {
       request.status = VerificationRequests.REJECTED;
       processRecord.status = VerificationRequests.REJECTED;
+      OpportunityInstances.updateVerified(request.opportunityInstanceID, false);
     }
     processRecord.verifier = Users.getFullName(Meteor.userId());
     processRecord.feedback = event.target.parentElement.querySelectorAll('input')[0].value;

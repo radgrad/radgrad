@@ -542,8 +542,7 @@ Template.Academic_Plan_2.events({
     const id = event.target.id;
     const opportunityInstance = id;
     const student = Users.findDoc(Meteor.userId()).username;
-    const docId = VerificationRequests.define({ student, opportunityInstance });
-    console.log(opportunityInstance, student, docId); // eslint-disable-line no-console
+    VerificationRequests.define({ student, opportunityInstance });
   },
   'click .course.item': function clickCourseItem(event) {
     event.preventDefault();
