@@ -337,14 +337,22 @@ Template.Academic_Plan_2.helpers({
     const currentSemester = Semesters.findDoc(currentSemesterID);
     if (Template.instance().state.get('detailCourseID')) {
       const id = Template.instance().state.get('detailCourseID');
-      const ci = CourseInstances.findDoc(id);
-      const ciSemester = Semesters.findDoc(ci.semesterID);
-      return ciSemester.sortBy <= currentSemester.sortBy;
+      try {
+        const ci = CourseInstances.findDoc(id);
+        const ciSemester = Semesters.findDoc(ci.semesterID);
+        return ciSemester.sortBy <= currentSemester.sortBy;
+      } catch (e) {
+        return false;
+      }
     } else if (Template.instance().state.get('detailOpportunityID')) {
       const id = Template.instance().state.get('detailOpportunityID');
-      const opportunity = OpportunityInstances.findDoc(id);
-      const oppSemester = Semesters.findDoc(opportunity.semesterID);
-      return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy;
+      try {
+        const opportunity = OpportunityInstances.findDoc(id);
+        const oppSemester = Semesters.findDoc(opportunity.semesterID);
+        return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy;
+      } catch (e) {
+        return false;
+      }
     }
     return false;
   },
@@ -354,10 +362,9 @@ Template.Academic_Plan_2.helpers({
   opportunities() {
     let ret = [];
     const opportunities = Opportunities.find().fetch();
-    const now = new Date();
-    // console.log(opportunities[0]);
+    const currentSemesterID = Semesters.getCurrentSemester();
     ret = lodash.filter(opportunities, function filter(o) {
-      return (now >= o.startActive && now <= o.endActive);
+      return lodash.indexOf(o.semesterIDs, currentSemesterID) !== -1;
     });
     return ret;
   },
@@ -383,7 +390,7 @@ Template.Academic_Plan_2.helpers({
       }
       const opportunity = Opportunities.findDoc({ _id: id });
       let semesterStr = '';
-      opportunity.semesters.forEach((sem) => {
+      opportunity.semesterIDs.forEach((sem) => {
         semesterStr += Semesters.toString(sem, false);
         semesterStr += ', ';
       });
