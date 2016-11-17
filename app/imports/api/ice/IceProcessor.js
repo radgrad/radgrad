@@ -11,7 +11,8 @@ Number.isInteger = Number.isInteger ||
     function test(value) {
       return typeof value === 'number' &&
           isFinite(value) &&
-          Math.floor(value) === value; };
+          Math.floor(value) === value;
+    };
 
 /**
  * Returns true if the object passed conforms to the ICE object specifications.
@@ -55,9 +56,10 @@ export function makeCourseICE(course, grade) {
   // ICS courses get competency points if you get an A or a B.
   if (grade.includes('B')) {
     c = 5;
-  } else if (grade.includes('A')) {
-    c = 9;
-  }
+  } else
+    if (grade.includes('A')) {
+      c = 9;
+    }
   return { i, c, e };
 }
 
@@ -83,3 +85,22 @@ export function getTotalICE(docs) {
   return total;
 }
 
+/**
+ * Returns an ICE object that represents the total ICE points from the passed Course\Opportunity Instance Documents.
+ * ICE values are counted.
+ * @param docs An array of CourseInstance or OpportunityInstance documents.
+ * @returns {{i: number, c: number, e: number}} The ICE object.
+ */
+export function getPlanningICE(docs) {
+  const total = { i: 0, c: 0, e: 0 };
+  docs.map((instance) => {
+    if (!(isICE(instance.ice))) {
+      throw new Meteor.Error(`getTotalICE passed ${instance} without a valid .ice field.`);
+    }
+    total.i += instance.ice.i;
+    total.c += instance.ice.c;
+    total.e += instance.ice.e;
+    return null;
+  });
+  return total;
+}

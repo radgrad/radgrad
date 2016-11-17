@@ -45,7 +45,7 @@ export const advisorStudentConfigurationPageRouteName = 'Advisor_Student_Configu
 advisorRoutes.route('/', {
   name: advisorStudentConfigurationPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Student_Configuration_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorStudentConfigurationPageRouteName });
   },
 });
 
@@ -53,7 +53,7 @@ export const advisorVerificationRequestsPendingPageRouteName = 'Advisor_Verifica
 advisorRoutes.route('/verification-requests', {
   name: advisorVerificationRequestsPendingPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Verification_Requests_Pending_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorVerificationRequestsPendingPageRouteName });
   },
 });
 
@@ -61,7 +61,7 @@ export const advisorEventVerificationPageRouteName = 'Advisor_Event_Verification
 advisorRoutes.route('/event-verification', {
   name: advisorEventVerificationPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Event_Verification_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorEventVerificationPageRouteName });
   },
 });
 
@@ -69,7 +69,7 @@ export const advisorCompletedVerificationsPageRouteName = 'Advisor_Completed_Ver
 advisorRoutes.route('/completed-verifications', {
   name: advisorCompletedVerificationsPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Completed_Verifications_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorCompletedVerificationsPageRouteName });
   },
 });
 
@@ -132,6 +132,30 @@ studentRoutes.route('/', {
   name: studentHomePageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_Home_Page' });
+  },
+});
+
+export const studentHomePageAboutMeRouteName = 'Student_AboutMe';
+studentRoutes.route('/aboutme', {
+  name: studentHomePageAboutMeRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_AboutMe' });
+  },
+});
+
+export const studentHomePageLevelsRouteName = 'Student_Levels';
+studentRoutes.route('/levels', {
+  name: studentHomePageLevelsRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_Levels' });
+  },
+});
+
+export const studentHomePageIceRouteName = 'Student_Ice';
+studentRoutes.route('/ice', {
+  name: studentHomePageIceRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_Ice' });
   },
 });
 

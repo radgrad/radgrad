@@ -79,6 +79,42 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Returns the Course associated with the CourseInstance with the given instanceID.
+   * @param instanceID The id of the CourseInstance.
+   * @returns {Object} The associated Course.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getCourseDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.find({ _id: instanceID });
+    return Courses.findDoc(instance.courseID);
+  }
+
+  /**
+   * Returns the Semester associated with the CourseInstance with the given instanceID.
+   * @param instanceID The id of the CourseInstance.
+   * @returns {Object} The associated Semester.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getSemesterDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.find({ _id: instanceID });
+    return Semesters.findDoc(instance.semesterID);
+  }
+
+  /**
+   * Returns the Student associated with the CourseInstance with the given instanceID.
+   * @param instanceID The id of the CourseInstance.
+   * @returns {Object} The associated Student.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getStudentDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.find({ _id: instanceID });
+    return Users.findDoc(instance.studentID);
+  }
+
+  /**
    * @returns { String } The course name associated with courseInstanceID.
    * @param courseInstanceID The course instance ID.
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
@@ -132,9 +168,22 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Updates the CourseInstance's grade. This should be used for planning purposes.
+   * @param courseInstanceID The course instance ID.
+   * @param grade The new grade.
+   * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
+   */
+  updateGrade(courseInstanceID, grade) {
+    this.assertDefined(courseInstanceID);
+    const ice = makeCourseICE(courseInstanceID, grade);
+    this._collection.update({ _id: courseInstanceID }, { $set: { grade, ice, verified: false } });
+  }
+
+  /**
    * Updates the CourseInstance's Semester.
    * @param courseInstanceID The course instance ID.
    * @param semesterID The semester id.
+   * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
    */
   updateSemester(courseInstanceID, semesterID) {
     this.assertDefined(courseInstanceID);

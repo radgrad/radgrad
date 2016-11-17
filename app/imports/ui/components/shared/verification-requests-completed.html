@@ -1,70 +1,43 @@
 <template name="Verification_Requests_Completed">
-
-  <div class="ui raised padded container segment">
-    <div class="ui top left attached green label">Completed Verification Requests</div>
-    <div class="ui divided items">
-
-      <div class="item">
-        <div class="content">
-          <a class="header">OPQ Research Project, Summer 2016</a>
-          <div class="ui equal width grid">
-            <div class="column">
-              <div class="description">
-                <span>Student: Abigail Kealoha</span>
+  {{#if Template.subscriptionsReady}}
+    <div class="ui raised padded container segment">
+      <div class="ui top left attached green label">Completed Verification Requests</div>
+      <div class="ui divided items">
+        {{#each verification in completedVerifications}}
+          <div class="item">
+            <div class="content">
+              <a class="header">{{opportunityName verification}}, {{semesterString verification}}</a>
+              <div class="ui equal width grid">
+                <div class="column">
+                  <div class="description">
+                    <span>Student: {{studentName verification}}</span>
+                  </div>
+                  <div class="description">
+                    <span>Owner: {{ownerName verification}}</span>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="description">
+                    <span>Submitted: {{whenSubmitted verification}}</span>
+                  </div>
+                  <div class="description">
+                    {{#each processed in verification.processed}}
+                      <span>Processed: {{processedDate processed.date}} by {{processed.verifier}} ({{processed.status}})</span><br>
+                    {{/each}}
+                  </div>
+                </div>
               </div>
               <div class="description">
-                <span>Owner: Philip Johnson</span>
-              </div>
-            </div>
-            <div class="column">
-              <div class="description">
-                <span>Submitted: October 1 (2 weeks ago)</span>
-              </div>
-              <div class="description">
-                <span>Processed: October 8 (1 week ago) by Gerald Lau (accepted)</span>
+                <form class="ui form">
+                  <button id="{{verification._id}}" class="ui green button" type="submit">Reopen</button>
+                </form>
               </div>
             </div>
           </div>
-          <div class="description">
-            <form class="ui form">
-              <button class="ui green button" type="submit">Reopen</button>
-            </form>
-          </div>
-        </div>
+        {{/each}}
       </div>
-
-      <div class="item">
-        <div class="content">
-          <a class="header">Live Action Internship, Summer 2016</a>
-          <div class="ui equal width grid">
-            <div class="column">
-              <div class="description">
-                <span>Student: Fenton Maluhia</span>
-              </div>
-              <div class="description">
-                <span>Owner: Gerald Lau</span>
-              </div>
-            </div>
-            <div class="column">
-              <div class="description">
-                <span>Submitted: October 1 (2 weeks ago)</span>
-              </div>
-              <div class="description">
-                <span>Processed: October 11 (2 days ago) by Philip Johnson (declined)</span>
-              </div>
-              <div class="description">
-                <span>Processed: October 12 (1 day ago) by Philip Johnson (accepted)</span>
-              </div>
-            </div>
-          </div>
-          <div class="description">
-            <form class="ui form">
-              <button class="ui green button" type="submit">Reopen</button>
-            </form>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
 </template>
