@@ -2,8 +2,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertFeedbackType } from '/imports/api/feedback/FeedbackType';
-import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
-import { Meteor } from 'meteor/meteor';
+// import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
+// import { Meteor } from 'meteor/meteor';
 
 /** @module Feedback */
 
