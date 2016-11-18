@@ -132,6 +132,17 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Updates the CourseInstance's grade. This should be used for planning purposes.
+   * @param courseInstanceID The course instance ID.
+   * @param grade The new grade.
+   */
+  updateGrade(courseInstanceID, grade) {
+    this.assertDefined(courseInstanceID);
+    const ice = makeCourseICE(courseInstanceID, grade);
+    this._collection.update({ _id: courseInstanceID }, { $set: { grade, ice, verified: false } });
+  }
+
+  /**
    * Updates the CourseInstance's Semester.
    * @param courseInstanceID The course instance ID.
    * @param semesterID The semester id.

@@ -28,15 +28,15 @@ Template.Warnings.events({
   // add your events here
 });
 
-Template.Warnings.onCreated(function () {
+Template.Warnings.onCreated(function warningsOnCreated() {
   // add your statement here
 });
 
-Template.Warnings.onRendered(function () {
+Template.Warnings.onRendered(function warningsOnRendered() {
   // add your statement here
 });
 
-Template.Warnings.onDestroyed(function () {
+Template.Warnings.onDestroyed(function warningsOnDestroyed() {
   // add your statement here
 });
 
