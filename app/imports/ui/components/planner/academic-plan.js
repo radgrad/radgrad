@@ -348,8 +348,11 @@ Template.Academic_Plan_2.helpers({
       const id = Template.instance().state.get('detailOpportunityID');
       try {
         const opportunity = OpportunityInstances.findDoc(id);
+        const requests = VerificationRequests.find({ opportunityInstanceID: id,
+          studentID: Meteor.userId() }).fetch();
+        console.log(requests);
         const oppSemester = Semesters.findDoc(opportunity.semesterID);
-        return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy;
+        return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
       } catch (e) {
         return false;
       }

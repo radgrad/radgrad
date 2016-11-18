@@ -7,19 +7,15 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 
-Template.advisor_Verification_Requests_Pending.helpers({
+Template.Advisor_Verification_Requests_Pending_Page.helpers({
   // add you helpers here
 });
 
-Template.advisor_Verification_Requests_Pending.events({
+Template.Advisor_Verification_Requests_Pending_Page.events({
   // add your events here
 });
 
-Template.advisor_Verification_Requests_Pending.onCreated(function advisorVerificationRequestsPendingOnCreated() {
-  // add your statement here
-});
-
-Template.advisor_Verification_Requests_Pending.onRendered(function advisorVerificationRequestsPendingOnRendered() {
+Template.Advisor_Verification_Requests_Pending_Page.onCreated(function advisorVerificationRequestsPendingOnCreated() {
   this.autorun(() => {
     this.subscribe(VerificationRequests.getPublicationName());
     this.subscribe(Courses.getPublicationName());
@@ -31,7 +27,10 @@ Template.advisor_Verification_Requests_Pending.onRendered(function advisorVerifi
   });
 });
 
-Template.advisor_Verification_Requests_Pending.onDestroyed(function advisorVerificationRequestsPendingOnDestroyed() {
+Template.Advisor_Verification_Requests_Pending_Page.onRendered(function advisorVerificationRequestsPendingOnRendered() {
+});
+
+Template.Advisor_Verification_Requests_Pending_Page.onDestroyed(function advisorVerificationRequestsPendingOnDestroyed() {
   // add your statement here
 });
 

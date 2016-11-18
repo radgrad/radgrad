@@ -55,15 +55,15 @@ Template.Verification_Requests_Completed.events({
 });
 
 Template.Verification_Requests_Completed.onCreated(function completedVerificationRequestsOnCreated() {
-  this.autorun(() => {
-    this.subscribe(VerificationRequests.getPublicationName());
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-  });
+  // this.autorun(() => {
+  //   this.subscribe(VerificationRequests.getPublicationName());
+  //   this.subscribe(Courses.getPublicationName());
+  //   this.subscribe(CourseInstances.getPublicationName());
+  //   this.subscribe(Opportunities.getPublicationName());
+  //   this.subscribe(OpportunityInstances.getPublicationName());
+  //   this.subscribe(Semesters.getPublicationName());
+  //   this.subscribe(Users.getPublicationName());
+  // });
 });
 
 Template.Verification_Requests_Completed.onRendered(function completedVerificationRequestsOnRendered() {

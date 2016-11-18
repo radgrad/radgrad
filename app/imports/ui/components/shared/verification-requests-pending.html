@@ -1,5 +1,4 @@
 <template name="Verification_Requests_Pending">
-  {{#if Template.subscriptionsReady}}
     <div class="ui raised padded container segment">
       <div class="ui top left attached green label">Pending Verification Requests</div>
       <div class="ui divided items">
@@ -45,7 +44,4 @@
         {{/each}}
       </div>
     </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}}
 </template>

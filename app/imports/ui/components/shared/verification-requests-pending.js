@@ -67,15 +67,7 @@ Template.Verification_Requests_Pending.events({
 });
 
 Template.Verification_Requests_Pending.onCreated(function pendingVerificationRequestsOnCreated() {
-  this.autorun(() => {
-    this.subscribe(VerificationRequests.getPublicationName());
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-  });
+
 });
 
 Template.Verification_Requests_Pending.onRendered(function pendingVerificationRequestsOnRendered() {
