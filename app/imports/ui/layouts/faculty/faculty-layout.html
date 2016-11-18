@@ -1,15 +1,15 @@
 <template name="Faculty_Layout">
 
   {{> First_Menu role="Faculty"}}
-  {{#if isInRole 'FACULTY,ADMIN'}}
+  <!--{{#if isInRole 'FACULTY,ADMIN'}}-->
     {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
     {{> Template.dynamic template=main}}
-  {{else}}
-    <div style="padding-top: 40px" class="ui text container">
-      <p>You are not authorized to view this page.</p>
-      <p>Please login as a faculty member.</p>
-    </div>
-  {{/if}}
+  <!--{{else}}-->
+    <!--<div style="padding-top: 40px" class="ui text container">-->
+      <!--<p>You are not authorized to view this page.</p>-->
+      <!--<p>Please login as a faculty member.</p>-->
+    <!--</div>-->
+  <!--{{/if}}-->
   {{> Footer}}
 
 </template>
