@@ -99,7 +99,7 @@ class OpportunityInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, 'ADMIN')) {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR', 'FACULTY'])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });

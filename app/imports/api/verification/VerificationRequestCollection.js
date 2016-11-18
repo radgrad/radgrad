@@ -1,13 +1,13 @@
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-// import { Slugs } from '/imports/api/slug/SlugCollection';
-// import { Interests } from '/imports/api/interest/InterestCollection';
-import { Users } from '/imports/api/user/UserCollection';
+import { moment } from 'meteor/momentjs:moment';
+
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../semester/SemesterCollection.js';
-// import { assertICE } from '/imports/api/ice/IceProcessor';
-import { moment } from 'meteor/momentjs:moment';
+import { Users } from '/imports/api/user/UserCollection';
 
 /** @module Verification */
 
@@ -125,6 +125,23 @@ class VerificationRequestCollection extends BaseCollection {
     this.assertDefined(instanceID);
     const instance = this._collection.findOne({ _id: instanceID });
     return Users.findDoc(instance.studentID);
+  }
+
+  /**
+   * Depending on the logged in user publish only their VerificationRequests. If
+   * the user is in the Role.ADMIN, ADVISOR or FACULTY then publish all OpportunityInstances. If the
+   * system is in mockup mode publish all OpportunityInstances.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      const instance = this;
+      Meteor.publish(this._collectionName, function publish() {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR', 'FACULTY'])) {
+          return instance._collection.find();
+        }
+        return instance._collection.find({ studentID: this.userId });
+      });
+    }
   }
 
   /**
