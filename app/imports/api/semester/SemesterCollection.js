@@ -58,11 +58,11 @@ class SemesterCollection extends BaseInstanceCollection {
     }
     let sortBy = 0;
     if (term === this.FALL) {
-      sortBy = year * 10 + 2;
+      sortBy = (year * 10) + 2;
     } else if (term === this.SPRING) {
       sortBy = year * 10;
     } else {
-      sortBy = year * 10 + 1;
+      sortBy = (year * 10) + 1;
     }
     // Otherwise define a new semester and add it to the collection if successful.
     const slug = `${term}-${year}`;
@@ -87,18 +87,6 @@ class SemesterCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Returns the passed semester, formatted as a string.
-   * @param semesterID The semester.
-   * @param nospace If true, then term and year are concatenated without a space in between.
-   * @returns { String } The semester as a string.
-   */
-  toString(semesterID, nospace) {
-    this.assertSemester(semesterID);
-    const semesterDoc = this.findDoc(semesterID);
-    return (nospace) ? `${semesterDoc.term}${semesterDoc.year}` : `${semesterDoc.term} ${semesterDoc.year}`;
-  }
-
-  /**
    * Returns the semesterID associated with the current semester based upon the current timestamp.
    * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
    */
@@ -115,6 +103,19 @@ class SemesterCollection extends BaseInstanceCollection {
     }
     return this.define({ term, year });
   }
+
+  /**
+   * Returns the passed semester, formatted as a string.
+   * @param semesterID The semester.
+   * @param nospace If true, then term and year are concatenated without a space in between.
+   * @returns { String } The semester as a string.
+   */
+  toString(semesterID, nospace) {
+    this.assertSemester(semesterID);
+    const semesterDoc = this.findDoc(semesterID);
+    return (nospace) ? `${semesterDoc.term}${semesterDoc.year}` : `${semesterDoc.term} ${semesterDoc.year}`;
+  }
+
 }
 
 /**

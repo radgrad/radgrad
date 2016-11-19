@@ -29,15 +29,15 @@ Template.Recommendations.events({
   // add your events here
 });
 
-Template.Recommendations.onCreated(function () {
+Template.Recommendations.onCreated(function recommendationsOnCreated() {
   // add your statement here
 });
 
-Template.Recommendations.onRendered(function () {
+Template.Recommendations.onRendered(function recommendationsOnRendered() {
   // add your statement here
 });
 
-Template.Recommendations.onDestroyed(function () {
+Template.Recommendations.onDestroyed(function recommendationsOnDestroyed() {
   // add your statement here
 });
 
