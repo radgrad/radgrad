@@ -3,9 +3,10 @@
     <div class="stretched row">
       <div class="ui ten wide column">
         <div class="ui equal width grid">
+          <div class=" row">
           {{#each year in years}}
-            <div class="column">
-              <div class="ui center aligned segment">
+            <!--<div class="column">-->
+              <div class="ui column center aligned segment">
                 <div class="ui top left attached green label">AY {{year.year}} - {{year.springYear}}</div>
                 {{> Semester_List (fallArgs year)}}
                 {{> Semester_List (springArgs year)}}
@@ -16,140 +17,13 @@
                   {{> ICE_Badge ice=(yearICE year)}}
                 {{/if}}
               </div>
-            </div>
+            <!--</div>-->
           {{/each}}
+          </div>
         </div>
       </div>
       <div class="ui six wide column">
-        <div class="ui segment">
-          <div class="ui top attached green buttons">
-            <div class="ui floating dropdown icon button">Courses
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                <div class="item">
-                  <i class="dropdown icon"></i>
-                  <span class="text">1xx</span>
-                  <div class="menu">
-                    {{#each course in courses100}}
-                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
-                    {{/each}}
-                  </div>
-                </div>
-                <div class="item">
-                  <i class="dropdown icon"></i>
-                  <span class="text">2xx</span>
-                  <div class="menu">
-                    {{#each course in courses200}}
-                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
-                    {{/each}}
-                  </div>
-                </div>
-                <div class="item">
-                  <i class="dropdown icon"></i>
-                  <span class="text">3xx</span>
-                  <div class="menu">
-                    {{#each course in courses300}}
-                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
-                    {{/each}}
-                  </div>
-                </div>
-                <div class="item">
-                  <i class="dropdown icon"></i>
-                  <span class="text">41x - 43x</span>
-                  <div class="menu" style="overflow: auto; height: 300px">
-                    {{#each course in courses410}}
-                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
-                    {{/each}}
-                  </div>
-                </div>
-                <div class="item">
-                  <i class="dropdown icon"></i>
-                  <span class="text">44x - 46x</span>
-                  <div class="menu" style="overflow: auto; height: 300px">
-                    {{#each course in courses440}}
-                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
-                    {{/each}}
-                  </div>
-                </div>
-                <div class="item">
-                  <i class="dropdown icon"></i>
-                  <span class="text">47x - 499</span>
-                  <div class="menu" style="overflow: auto; height: 300px">
-                    {{#each course in courses470}}
-                      <div id="{{course._id}}" class="course item">{{course.number}}</div>
-                    {{/each}}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="or"></div>
-            <div class="ui floating dropdown icon button">&nbsp;&nbsp;Opportunities
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                {{#each opportunity in opportunities}}
-                  <div id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</div>
-                {{/each}}
-              </div>
-            </div>
-          </div>
-          <div class="ui grid container">
-            <div class="row">
-              <div class="column">
-                <div class="ui left aligned segment">
-                  {{#if hasCourse}}
-                    <p><b>{{courseNumber}}</b>
-                      {{courseName}}</p>
-                    <div class="content">
-                      {{#each recommendationStars}}
-                        <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
-                           class="yellow star icon"></i>
-                      {{/each}}
-                      <p>
-                        <b>Catalog Descrption:</b> {{courseDescription}}
-                      </p>
-                      <p><b>When scheduled:</b> {{instanceSemester}}</p>
-                      <p><b>ICE Value:</b> {{> ICE_Badge ice=courseIce }}</p>
-                      {{#if isDeletableInstance}}
-                        <p>
-                          <button id="{{instanceID}}" class="ui red icon button delInstance">Delete
-                            <i class="remove icon"></i></button>
-                        </p>
-                      {{/if}}
-                    </div>
-                  {{else}}
-                    {{#if hasOpportunity}}
-                      <p><b>Name: </b> {{opportunityName}}</p>
-                      <div class="content">
-                        <p><b>Description: </b> {{opportunityDescription}}</p>
-                        <p><b>When: </b> {{opportunitySemester}}</p>
-                        <p><b>ICE Value: </b>{{> ICE_Badge ice=opportunityIce }}</p>
-                        <p><b>More: </b><a href="{{opportunityMore}}">{{opportunityMore}}</a></p>
-                        <div>
-                          {{#if isDeletableInstance}}
-                            <p>
-                              <button id="{{instanceID}}" class="ui red left floated icon button delInstance">Delete
-                                <i class="remove icon"></i></button>
-                            </p>
-                          {{/if}}
-                          {{#if isPastInstance}}
-                            <p>
-                              <button id="{{instanceID}}" class="ui blue right floated button verifyInstance">Request
-                                Verification
-                              </button>
-                            </p>
-                          {{/if}}
-                        </div>
-                      </div>
-                    {{else}}
-                      <p>Please select an ICS course or opportunity menus above or click on a course or
-                        opportunity in you plan.</p>
-                    {{/if}}
-                  {{/if}}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {{> Inspector dictionary=getDictionary}}
       </div>
     </div>
   </div>

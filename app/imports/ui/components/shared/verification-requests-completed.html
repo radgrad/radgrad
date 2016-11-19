@@ -21,7 +21,7 @@
                   </div>
                   <div class="description">
                     {{#each processed in verification.processed}}
-                      <span>Processed: {{processedDate processed.date}} by {{processed.verifier}} ({{processed.status}})</span><br>
+                      <span>Processed: {{processedDate processed.date}} by {{processed.verifier}} ({{processed.status}}) {{processed.feedback}}</span><br>
                     {{/each}}
                   </div>
                 </div>

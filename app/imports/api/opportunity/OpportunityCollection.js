@@ -30,6 +30,7 @@ class OpportunityCollection extends BaseInstanceCollection {
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
       iconURL: { type: SimpleSchema.RegEx.Url, optional: true },
       semesterIDs: { type: [SimpleSchema.RegEx.Id] },
+      eventDate: { type: Date, optional: true },
       independentStudy: { type: Boolean },
       // Optional data
       moreInformation: { type: String, optional: true },
@@ -64,7 +65,7 @@ class OpportunityCollection extends BaseInstanceCollection {
    * @returns The newly created docID.
    */
   define({ name, slug, description, opportunityType, sponsor, interests, semesters, moreInformation,
-  independentStudy = false, ice }) {
+  independentStudy = false, ice, eventDate = null }) {
     // Get instances, or throw error
 
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);
@@ -81,10 +82,17 @@ class OpportunityCollection extends BaseInstanceCollection {
     // Guarantee that independentStudy is a boolean.
     /* eslint no-param-reassign: "off" */
     independentStudy = !!independentStudy;
-    // TODO: ensure startActive is prior to endActive.
-    // Define the new Opportunity and its Slug.
-    const opportunityID = this._collection.insert({ name, slugID, description, opportunityTypeID, sponsorID,
-      interestIDs, semesterIDs, moreInformation, independentStudy, ice });
+    let opportunityID;
+    if (eventDate !== null) {
+      // Define the new Opportunity and its Slug.
+      opportunityID = this._collection.insert({
+        name, slugID, description, opportunityTypeID, sponsorID,
+        interestIDs, semesterIDs, moreInformation, independentStudy, ice, eventDate });
+    } else {
+      opportunityID = this._collection.insert({
+        name, slugID, description, opportunityTypeID, sponsorID,
+        interestIDs, semesterIDs, moreInformation, independentStudy, ice });
+    }
     Slugs.updateEntityID(slugID, opportunityID);
 
     // Return the id to the newly created Opportunity.
