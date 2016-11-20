@@ -61,7 +61,11 @@ Meteor.startup(() => {
   }
   if (Users.find().count() === 1) {
     console.log('Defining Users');  // eslint-disable-line no-console
-    userDefinitions.map((definition) => Users.define(definition));
+    userDefinitions.map((definition) => {
+      const id = Users.define(definition);
+      Users.setUhId(id, definition.uhID);
+      return false;
+    });
   }
   if (CareerGoals.find().count() === 0) {
     console.log('Defining CareerGoals');  // eslint-disable-line no-console
@@ -91,6 +95,7 @@ Meteor.startup(() => {
         /* eslint no-param-reassign: "off" */
         student.role = ROLE.STUDENT;
         const studentID = Users.define(student);
+        Users.setUhId(studentID, student.uhID);
         const starDataPath = `testdata/Star${student.firstName}.csv`;
         const studentSlug = Users.findSlugByID(studentID);
         const csvData = Assets.getText(starDataPath);

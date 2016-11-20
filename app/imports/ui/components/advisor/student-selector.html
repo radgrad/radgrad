@@ -1,0 +1,110 @@
+<template name="Student_Selector">
+  <div class="ui container">
+    <form class="ui form">
+      <div class="ui inline field">
+        {{#if isUserSelected}}
+          <label class="header"><h2>{{userFullName}} ({{userID}})</h2></label>
+        {{else}}
+          <label class="header"><h2>Select a student</h2></label>
+        {{/if}}
+        <div class="ui action input">
+          <input type="text" name="uhId" placeholder="8 digit ID (1234-5678)">
+          <button class="ui green button" type="submit">Retrieve</button>
+          <button class="ui blue button" type="submit">Student View</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="ui raised padded container segment">
+    <div class="ui top left attached green label">Basic Profile</div>
+    <div class="ui grid">
+      <div class="row">
+        <form class="ui form">
+          <div class="inline field">
+            <label>Role</label>
+            <div class="ui action input">
+              <div class="ui selection dropdown">
+                <input type="hidden" name="role">
+                <i class="dropdown icon"></i>
+                <div class="text">{{userRole}}</div>
+                <div class="menu">
+                  {{#each role in roles}}
+                    <div class="item{{#if inRole role}} active selected{{/if}}" data-value="{{role.key}}">{{role.value}}</div>
+                  {{/each}}
+                </div>
+              </div>
+              <button class="ui green button" type="submit">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <form class="ui form">
+          <div class="inline field">
+            <label>Degree</label>
+            <div class="ui action input">
+              <div class="ui selection dropdown">
+                <input type="hidden" name="role">
+                <i class="dropdown icon"></i>
+                <div class="default text">Select Degree</div>
+                <div class="menu">
+                  <div class="item" data-value="0">B.S. CS</div>
+                  <div class="item" data-value="1">B.A. ICS</div>
+                </div>
+              </div>
+              <button class="ui green button" type="submit">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <form class="ui form">
+          <div class="inline field">
+            <label>STAR CSV</label>
+            <div class="ui action input">
+              <input id="fileInput" type="file"/>
+              <button class="ui green button" type="submit">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <form class="ui form">
+          <div class="inline field">
+            <label>Interests</label>
+            <div class="ui action input">
+              <select multiple="" class="ui dropdown">
+                <option value="">Select Interests</option>
+                <option value="0">Artificial Intelligence</option>
+                <option value="1">Software Engineering</option>
+                <option value="2">Networking</option>
+              </select>
+              <button class="ui green button" type="submit">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <form class="ui form">
+          <div class="inline field">
+            <label>Career Goals</label>
+            <div class="ui action input">
+              <select multiple="" class="ui dropdown">
+                <option value="">Select Career Goals</option>
+                <option value="0">Full-Stack application development</option>
+                <option value="1">Graduate School</option>
+                <option value="2">Network Engineer</option>
+              </select>
+              <button class="ui green button" type="submit">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

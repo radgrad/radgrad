@@ -101,6 +101,17 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Returns the user's roles.
+   * @param userID the user's ID.
+   * @returns {number|roles|{$in}|update.$addToSet.roles|{$each}|Array|String|*}
+   */
+  getRoles(userID) {
+    this.assertDefined(userID);
+    const user = this._collection.findOne({ _id: userID });
+    return user.roles;
+  }
+
+  /**
    * Removes the user and their associated DegreePlan (if present) and their Slug.
    * @param user The object or docID representing this user.
    * @throws { Meteor.Error } if the user or their slug is not defined, or if they are referenced in Opportunities.

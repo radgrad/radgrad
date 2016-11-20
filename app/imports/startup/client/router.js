@@ -86,7 +86,7 @@ export const facultyHomePageRouteName = 'Faculty_Home_Page';
 facultyRoutes.route('/', {
   name: facultyHomePageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: 'Faculty_Home_Page' });
+    BlazeLayout.render('Faculty_Layout', { main: facultyHomePageRouteName });
   },
 });
 

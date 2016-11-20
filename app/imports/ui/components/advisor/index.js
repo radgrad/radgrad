@@ -1,2 +1,5 @@
-import './advisor-tab-student.html';
-import './advisor-tab-student.js';
+import './student-profile.html';
+import './student-profile.js';
+
+import './student-selector.html';
+import './student-selector.js';
