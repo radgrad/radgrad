@@ -70,7 +70,7 @@ class OpportunityCollection extends BaseInstanceCollection {
 
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);
     const sponsorID = Users.getID(sponsor);
-    Users.assertInRole(sponsorID, ROLE.FACULTY);
+    Users.assertInRole(sponsorID, [ROLE.FACULTY, ROLE.ADVISOR]);
     assertICE(ice);
     const interestIDs = Interests.getIDs(interests);
     // Define the slug

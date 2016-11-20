@@ -1,3 +1,4 @@
+import './academic-plan.css';
 import './academic-plan.html';
 import './academic-plan.js';
 

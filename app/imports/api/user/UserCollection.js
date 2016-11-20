@@ -129,8 +129,14 @@ class UserCollection extends BaseInstanceCollection {
    */
   assertInRole(userID, role) {
     this.assertDefined(userID);
-    assertRole(role);
-    if (!Roles.userIsInRole(userID, [role])) {
+    if (Array.isArray(role)) {
+      role.forEach((r) => {
+        assertRole(r);
+      });
+    } else {
+      assertRole(role);
+    }
+    if (!Roles.userIsInRole(userID, role)) {
       throw new Meteor.Error(`${userID} (${this.findDoc(userID).firstName}) is not in role ${role}.`);
     }
   }
