@@ -275,6 +275,7 @@
   -o-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
+
 .c100:after {
   position: absolute;
   top: 0.08em;
@@ -298,12 +299,14 @@
   -o-transition-timing-function: ease-in;
   transition-timing-function: ease-in;
 }
+
 .c100 .slice {
   position: absolute;
   width: 1em;
   height: 1em;
   clip: rect(0em, 1em, 1em, 0.5em);
 }
+
 .c100.p1 .bar {
   -webkit-transform: rotate(3.6deg);
   -moz-transform: rotate(3.6deg);
@@ -1004,47 +1007,81 @@
   -o-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-.c100:hover {
-  cursor: default;
+
+.c100.lightblue .bar,
+.c100.lightblue .fill {
+  border-color: lightsteelblue !important;
 }
 
-
-.c100.dark {
-  background-color: #777777;
-}
-.c100.dark .bar,
-.c100.dark .fill {
-  border-color: #c6ff00 !important;
+.c100.lightblue.dark .bar,
+.c100.lightblue.dark .fill {
+  border-color: lightsteelblue !important;
 }
 
-.c100.dark:after {
-  background-color: #666666;
+.c100.lightblue > span {
+  color: steelblue !important;
+}
+
+.c100.blue .bar,
+.c100.blue .fill {
+  border-color: steelblue !important;
+}
+
+.c100.blue.dark .bar,
+.c100.blue.dark .fill {
+  border-color: steelblue !important;
 }
 
 .c100.blue > span {
   color: steelblue !important;
 }
 
+.c100.lightgreen .bar,
+.c100.lightgreen .fill {
+  border-color: darkseagreen !important;
+}
+
+.c100.lightgreen.dark .bar,
+.c100.lightgreen.dark .fill {
+  border-color: darkseagreen !important;
+}
+
+.c100.lightgreen > span {
+  color:  green !important;
+}
+
 .c100.green .bar,
 .c100.green .fill {
-  border-color: #4db53c !important;
+  border-color: green !important;
 }
 
 .c100.green.dark .bar,
 .c100.green.dark .fill {
-  border-color: #5fd400 !important;
-}
-.c100.green.dark:hover > span {
-  color: #5fd400;
+  border-color: green !important;
 }
 
 .c100.green > span {
-  color: #4db53c !important;
+  color: green !important;
+}
+
+
+.c100.lightorange .bar,
+.c100.lightorange .fill {
+  border-color: tan !important;
+}
+
+.c100.lightorange.dark .bar,
+.c100.lightorange.dark .fill {
+  border-color: lightsalmon !important;
+}
+
+.c100.lightorange > span {
+  color: darkorange !important;
 }
 
 .c100.orange .bar,
 .c100.orange .fill {
-  border-color: #dd9d22 !important;
+  border-color: goldenrod !important;
 }
 
 .c100.orange.dark .bar,
@@ -1054,31 +1091,4 @@
 
 .c100.orange > span {
   color: #dd9d22 !important;
-}
-
-.c100.text > span {
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 5em;
-  line-height: 5em;
-  font-size: 36px;
-  color: #cccccc;
-  display: block;
-  text-align: center;
-  white-space: nowrap;
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -o-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  -webkit-transition-timing-function: ease-out;
-  -moz-transition-timing-function: ease-out;
-  -o-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
 }
