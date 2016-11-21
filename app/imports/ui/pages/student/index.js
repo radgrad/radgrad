@@ -6,6 +6,7 @@ import './student-explorer-page.js';
 
 import './student-home-page.html';
 import './student-home-page.js';
+import './student-home-page.css';
 
 import './student-mentorspace-page.css';
 import './student-mentorspace-page.html';
