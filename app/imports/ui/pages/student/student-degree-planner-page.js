@@ -3,15 +3,16 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
-import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection.js';
-import { CourseInstances } from '/imports/api/course/CourseInstanceCollection.js';
-import { Courses } from '/imports/api/course/CourseCollection.js';
-import { Feedbacks } from '/imports/api/feedback/FeedbackCollection.js';
-import { FeedbackInstances } from '/imports/api/feedback/FeedbackInstanceCollection.js';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection.js';
-import { Semesters } from '/imports/api/semester/SemesterCollection.js';
-import { Users } from '/imports/api/user/UserCollection.js';
+import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { Courses } from '../../../api/course/CourseCollection.js';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
   this.state = new ReactiveDict();
@@ -25,6 +26,7 @@ Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
     this.subscribe(Semesters.getPublicationName());
     this.subscribe(Users.getPublicationName());
     this.subscribe(AcademicYearInstances.getPublicationName());
+    this.subscribe(VerificationRequests.getPublicationName());
   });
 });
 

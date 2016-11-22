@@ -1,0 +1,18 @@
+<template name="Student_Selector">
+  <div class="ui container">
+    <form class="ui form">
+      <div class="ui inline field">
+        {{#if isUserSelected}}
+          <label class="header"><h2>{{userFullName}} ({{userID}})</h2></label>
+        {{else}}
+          <label class="header"><h2>Select a student</h2></label>
+        {{/if}}
+        <div class="ui action input">
+          <input type="text" name="uhId" placeholder="8 digit ID (1234-5678)">
+          <button class="ui green button jsRetrieve" type="submit">Retrieve</button>
+          <button class="ui blue button" type="submit">Student View</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>

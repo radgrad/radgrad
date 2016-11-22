@@ -192,12 +192,15 @@ Template.Semester_List.helpers({
   },
   opportunities() {
     let ret = [];
-    const opportunities = availableOpportunities();
-    const now = new Date();
-    // console.log(opportunities[0]);
-    ret = lodash.filter(opportunities, function filter(o) {
-      return (now >= o.startActive && now <= o.endActive);
-    });
+    const semester = Template.instance().state.get('semester');
+    if (semester) {
+      const opportunities = availableOpportunities();
+      const now = new Date();
+      console.log(); // eslint-disable-line no-console
+      ret = lodash.filter(opportunities, function filter(o) {
+        return lodash.indexOf(o.semesterIDs, semester._id) !== -1;
+      });
+    }
     return ret;
   },
   opportunityDescription(opportunityID) {
@@ -256,8 +259,7 @@ Template.Semester_List.helpers({
 });
 
 Template.Semester_List.events({
-  /* eslint object-shorthand: "off" */
-  'drop .bodyDrop'(event) {
+  'drop .bodyDrop': function dropBodyDrop(event) {
     event.preventDefault();
     if (Template.instance().state.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
@@ -276,7 +278,7 @@ Template.Semester_List.events({
       }
     }
   },
-  'click .item.addClass'(event) {
+  'click .item.addClass': function clickItemAddClass(event) {
     event.preventDefault();
     const template = Template.instance();
     template.$('a.item.400').popup('hide all');
@@ -325,7 +327,7 @@ Template.Semester_List.events({
           });
     });
   },
-  'click .item.addOpportunity'(event) {
+  'click .item.addOpportunity': function clickItemAddOpportunity(event) {
     event.preventDefault();
     const template = Template.instance();
     template.$('a.item.400').popup('hide all');
@@ -345,7 +347,7 @@ Template.Semester_List.events({
     };
     OpportunityInstances.define(oi);
   },
-  'click .item.grade'(event) {
+  'click .item.grade': function clickItemGrade(event) {
     event.preventDefault();
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;

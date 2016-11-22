@@ -10,7 +10,7 @@ import { Meteor } from 'meteor/meteor';
  * ROLE Provides ROLE.FACULTY, ROLE.STUDENT, ROLE.ADMIN, ROLE.ALUMNI.
  * @type { Object }
  */
-export const ROLE = { FACULTY: 'FACULTY', STUDENT: 'STUDENT', ADMIN: 'ADMIN', ALUMNI: 'ALUMNI' };
+export const ROLE = { FACULTY: 'FACULTY', STUDENT: 'STUDENT', ADMIN: 'ADMIN', ALUMNI: 'ALUMNI', ADVISOR: 'ADVISOR' };
 
 /**
  * Predicate for determining if a string is a defined ROLE.
@@ -35,7 +35,7 @@ export function assertRole(role) {
 // Initialize Roles to ROLENAMES by deleting all existing roles, then defining just those in ROLENAMES.
 
 if (Meteor.isServer) {
-  if (Roles.getAllRoles().count() !== 4) {
+  if (Roles.getAllRoles().count() !== 5) {
     Roles.getAllRoles().fetch().map(role => Roles.deleteRole(role.name));
     _.values(ROLE).map(role => Roles.createRole(role));
   }
