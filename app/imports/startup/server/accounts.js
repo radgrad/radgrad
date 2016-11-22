@@ -14,3 +14,19 @@ if (Meteor.users.find().count() === 0) {
     console.log('No default user!  Please invoke meteor with a settings file.');
   }
 }
+
+Meteor.users.allow({
+  insert: function insert(userId, doc) {  // eslint-disable-line no-unused-vars
+    // Normally I would check if (this.userId) to see if the method is called by logged in user or guest
+    // you can also add some checks here like user role based check etc.,
+    return true;
+  },
+  update: function update(userId, doc, fieldNames, modifier) {  // eslint-disable-line no-unused-vars
+  // similar checks like insert
+    return true;
+  },
+  remove: function remove(userId, doc) {  // eslint-disable-line no-unused-vars
+    // similar checks like insert
+    return true;
+  },
+});

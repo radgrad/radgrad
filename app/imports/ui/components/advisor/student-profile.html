@@ -1,2 +1,104 @@
 <template name="Student_Profile">
+  <div class="ui raised padded container segment">
+    <div class="ui top left attached green label">Basic Profile</div>
+    <div class="ui equal width grid">
+      <div class="row">
+        <div class="column">
+          <form class="ui form">
+            <div class="inline field">
+              <label>Role</label>
+              <div class="ui action input">
+                <div class="ui selection dropdown">
+                  <input type="hidden" name="role">
+                  <i class="dropdown icon"></i>
+                  <div class="text">{{userRole}}</div>
+                  <div class="menu">
+                    {{#each role in roles}}
+                      <div class="item{{#if inRole role}} active selected{{/if}}"
+                           data-value="{{role.key}}">{{role.value}}</div>
+                    {{/each}}
+                  </div>
+                </div>
+                <button class="ui green button" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <form class="ui form">
+            <div class="inline field">
+              <label>Degree</label>
+              <div class="ui action input">
+                <div class="ui selection dropdown">
+                  <input type="hidden" name="role">
+                  <i class="dropdown icon"></i>
+                  <div class="default text">Select Degree</div>
+                  <div class="menu">
+                    <div class="item{{#if desireBS}} active selected{{/if}}" data-value="B.S. CS">B.S. CS</div>
+                    <div class="item{{#if desireBA}} active selected{{/if}}" data-value="B.A. ICS">B.A. ICS</div>
+                  </div>
+                </div>
+                <button class="ui green button jsDegree" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <form class="ui form">
+            <div class="inline field">
+              <label>STAR CSV</label>
+              <div class="ui action input">
+                <input id="fileInput" type="file"/>
+                <button class="ui green button" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <form class="ui form">
+            <div class="inline field">
+              <label>Interests</label>
+              <div class="ui action input">
+                <select multiple="" class="ui dropdown">
+                  <option value="">Select Interests</option>
+                  {{#each interest in interests}}
+                    <option value="{{interest._id}}">{{interest.name}}</option>
+                  {{/each}}
+                </select>
+                <button class="ui green button jsInterests" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <form class="ui form">
+            <div class="inline field">
+              <label>Career Goals</label>
+              <div class="ui action input">
+                <select multiple="" class="ui dropdown">
+                  <option value="">Select Career Goals</option>
+                  {{#each goal in careerGoals}}
+                    <option value="{{goal._id}}">{{goal.name}}</option>
+                  {{/each}}
+                </select>
+                <button class="ui green button jsCareers" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

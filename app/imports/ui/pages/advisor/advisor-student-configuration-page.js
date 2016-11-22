@@ -2,13 +2,15 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 Template.Advisor_Student_Configuration_Page.helpers({
   getDictionary() {
@@ -22,27 +24,32 @@ Template.Advisor_Student_Configuration_Page.events({
 
 Template.Advisor_Student_Configuration_Page.onCreated(function aadvisorStudentConfirgurationPageOnCreated() {
   this.state = new ReactiveDict();
-  let uhId = FlowRouter.getQueryParam('uhId');
-  if (uhId.indexOf('-') === -1) {
-    uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
+  if (FlowRouter.getQueryParam('uhId')) {
+    let uhId = FlowRouter.getQueryParam('uhId');
+    if (uhId.indexOf('-') === -1) {
+      uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
+    }
+    this.state.set('uhId', uhId);
   }
-  this.state.set('uhId', uhId);
-
   this.autorun(() => {
-    this.subscribe(VerificationRequests.getPublicationName());
+    this.subscribe(CareerGoals.getPublicationName());
     this.subscribe(Courses.getPublicationName());
     this.subscribe(CourseInstances.getPublicationName());
+    this.subscribe(Interests.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
     this.subscribe(Users.getPublicationName());
+    this.subscribe(VerificationRequests.getPublicationName());
   });
 });
 
 Template.Advisor_Student_Configuration_Page.onRendered(function advisorStudentConfirgurationPageOnRendered() {
   let uhId = FlowRouter.getQueryParam('uhId');
-  if (uhId.indexOf('-') === -1) {
-    uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
+  if (uhId) {
+    if (uhId.indexOf('-') === -1) {
+      uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
+    }
+    this.state.set('uhId', uhId);
   }
-  this.state.set('uhId', uhId);
 });
