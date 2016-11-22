@@ -507,7 +507,6 @@ Template.Inspector.helpers({
     }
     return '';
   },
-
   springArgs(year) {
     if (Template.instance().state.get('currentSemesterID')) {
       const currentSemesterID = Template.instance().state.get('currentSemesterID');
