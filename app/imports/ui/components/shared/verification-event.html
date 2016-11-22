@@ -9,10 +9,9 @@
         <div class="ui action input">
           <select class="ui dropdown" name="event">
             <option value="">(Select One)</option>
-            <option value="4">IBM Hackathon (10/10/16)</option>
-            <option value="3">LiveAction demo day (10/8/16)</option>
-            <option value="2">WetWare Wednesday (10/6/16)</option>
-            <option value="1" selected="selected">UH Career Fair (10/4/16)</option>
+            {{#each event in events}}
+              <option value="{{event._id}}">{{event.name}} ({{eventDate event}})</option>
+            {{/each}}
           </select>
           <input type="text" name="uhId" placeholder="UH account name">
           <button class="ui green button" type="submit">Verify attendance</button>

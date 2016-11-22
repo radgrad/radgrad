@@ -1,94 +1,47 @@
 <template name="Verification_Requests_Pending">
-
-  <div class="ui raised padded container segment">
-    <div class="ui top left attached green label">Pending Verification Requests</div>
-    <div class="ui divided items">
-
-      <div class="item">
-        <div class="content">
-          <a class="header">OPQ Research Project, Summer 2016</a>
-          <div class="meta">
-            <span>Student: Abigail Kealoha</span>
-          </div>
-          <div class="meta">
-            <span>Owner: Philip Johnson</span>
-          </div>
-          <div class="meta">
-            <span>Submitted: October 12 (37 minutes ago)</span>
-          </div>
-          <div class="description">
-            <form class="ui form">
-              <div class="ui inline field">
-                <label>Feedback:</label>
-                <div class="ui action input">
-                  <input type="text" name="uhId" placeholder="Optional feedback">
-                  <button class="ui green button" type="submit">Accept</button>
-                  <button class="ui red button" type="submit">Decline</button>
+    <div class="ui raised padded container segment">
+      <div class="ui top left attached green label">Pending Verification Requests</div>
+      <div class="ui divided items">
+        {{#each request in pendingRequests}}
+          <div class="item">
+            <div class="content">
+              <a class="header">{{opportunityName request}}, {{semesterString request}}</a>
+              <div class="ui equal width grid">
+                <div class="column">
+                  <div class="meta">
+                    <span><strong>Student:</strong> {{studentName request}}</span>
+                  </div>
+                  <div class="meta">
+                    <span><strong>Owner:</strong> {{ownerName request}}</span>
+                  </div>
+                  <div class="description">
+                    <form class="ui form">
+                      <div class="ui inline field">
+                        <label>Feedback:</label>
+                        <div class="ui action input">
+                          <input id="{{request._id}}-feedback" type="text" name="feedback"
+                                 placeholder="Optional feedback">
+                          <button id="{{request._id}}-accept" class="ui green button" type="submit">Accept</button>
+                          <button id="{{request._id}}-decline" class="ui red button" type="submit">Decline</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="meta">
+                    <span><strong>Submitted:</strong> {{whenSubmitted request}}</span>
+                  </div>
+                  <div class="description">
+                    {{#each processed in request.processed}}
+                      <span>Processed: {{processedDate processed.date}} by {{processed.verifier}} ({{processed.status}})</span><br>
+                    {{/each}}
+                  </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+        {{/each}}
       </div>
-
-      <div class="item">
-        <div class="content">
-          <a class="header">Live Action Internship, Summer 2016</a>
-          <div class="meta">
-            <span>Student: Fenton Maluhia</span>
-          </div>
-          <div class="meta">
-            <span>Owner: Gerald Lau</span>
-          </div>
-          <div class="meta">
-            <span>Submitted: October 10 (2 days ago)</span>
-          </div>
-          <div class="description">
-            <form class="ui form">
-              <div class="ui inline field">
-                <label>Feedback:</label>
-                <div class="ui action input">
-                  <input type="text" name="uhId" placeholder="Optional feedback">
-                  <button class="ui green button" type="submit">Accept</button>
-                  <button class="ui red button" type="submit">Decline</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="content">
-          <a class="header">2016 Hawaii Annual Code Challenge</a>
-          <div class="meta">
-            <span>Student: Amy Takayesu</span>
-          </div>
-          <div class="meta">
-            <span>Owner: Cam Moore</span>
-          </div>
-          <div class="meta">
-            <span>Submitted: October 1 (2 weeks ago)</span>
-          </div>
-          <div class="description">
-            <form class="ui form">
-              <div class="ui inline field">
-                <label>Feedback:</label>
-                <div class="ui action input">
-                  <input type="text" name="uhId" placeholder="Optional feedback">
-                  <button class="ui green button" type="submit">Accept</button>
-                  <button class="ui red button" type="submit">Decline</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
     </div>
-  </div>
 </template>

@@ -2,7 +2,17 @@
   <div style="padding-top: 80px">
 
     <div class="ui container">
-      {{> Verification_Requests_Pending }}
+      {{#if currentUser}}
+        {{#if Template.subscriptionsReady}}
+          {{> Verification_Requests_Pending }}
+        {{else}}
+          {{> Loading}}
+        {{/if}}
+      {{else}}
+        <p>You are not authorized to view this page.</p>
+        <p>Please login.</p>
+        {{> loginButtons }}
+      {{/if}}
     </div>
   </div>
 </template>

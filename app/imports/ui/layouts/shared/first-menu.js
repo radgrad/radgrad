@@ -5,7 +5,7 @@ Template.First_Menu.helpers({
 });
 
 // Template.First_Menu.events({
-//   'click a.item'(event) {
+//   'click a.item': function (event) {
 //     event.preventDefault();
 //     if (Meteor.userId()) {
 //       Meteor.logout();

@@ -1,16 +1,18 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { isRole, assertRole } from '/imports/api/role/Role';
-import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+
+import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
+import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
+import { Interests } from '/imports/api/interest/InterestCollection';
+import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
+import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { isRole, assertRole } from '/imports/api/role/Role';
 import { getTotalICE } from '/imports/api/ice/IceProcessor';
+import { Slugs } from '/imports/api/slug/SlugCollection';
 
 /** @module User */
 
@@ -89,6 +91,29 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Returns the full name for the given userID.
+   * @param userID the id of the user.
+   * @returns {string} The user's full name.
+   * @throws {Meteor.Error} If userID is not a valid ID.
+   */
+  getFullName(userID) {
+    this.assertDefined(userID);
+    const user = this._collection.findOne({ _id: userID });
+    return `${user.firstName} ${user.lastName}`;
+  }
+
+  /**
+   * Returns the user's roles.
+   * @param userID the user's ID.
+   * @returns {number|roles|{$in}|update.$addToSet.roles|{$each}|Array|String|*}
+   */
+  getRoles(userID) {
+    this.assertDefined(userID);
+    const user = this._collection.findOne({ _id: userID });
+    return user.roles;
+  }
+
+  /**
    * Removes the user and their associated DegreePlan (if present) and their Slug.
    * @param user The object or docID representing this user.
    * @throws { Meteor.Error } if the user or their slug is not defined, or if they are referenced in Opportunities.
@@ -117,8 +142,14 @@ class UserCollection extends BaseInstanceCollection {
    */
   assertInRole(userID, role) {
     this.assertDefined(userID);
-    assertRole(role);
-    if (!Roles.userIsInRole(userID, [role])) {
+    if (Array.isArray(role)) {
+      role.forEach((r) => {
+        assertRole(r);
+      });
+    } else {
+      assertRole(role);
+    }
+    if (!Roles.userIsInRole(userID, role)) {
       throw new Meteor.Error(`${userID} (${this.findDoc(userID).firstName}) is not in role ${role}.`);
     }
   }
@@ -146,6 +177,31 @@ class UserCollection extends BaseInstanceCollection {
       throw new Meteor.Error(`${uhID} is not a string.`);
     }
     this._collection.update(userID, { $set: { uhID } });
+  }
+
+  /**
+   * Returns the user doc associated with the given uhID.
+   * @param uhID the user's UH ID.
+   * @returns Object the user doc associated with the given uhID.
+   */
+  getUserFromUhId(uhID) {
+    const users = this._collection.find({ uhID }).fetch();
+    if (users.length > 0) {
+      return users[0];
+    }
+    return null;
+  }
+
+  /**
+   * Updates userID with an array of careerGoalIDs.
+   * @param userID The userID.
+   * @param careerGoalIDs A list of careerGoalIDs.
+   * @throws {Meteor.Error} If userID is not a userID, or if careerGoalIDs is not a list of careerGoalID.
+   */
+  setCareerGoalIds(userID, careerGoalIDs) {
+    this.assertDefined(userID);
+    CareerGoals.assertAllDefined(careerGoalIDs);
+    this._collection.update(userID, { $set: { careerGoalIDs } });
   }
 
   /**
