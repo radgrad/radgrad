@@ -1,5 +1,6 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -30,6 +31,7 @@ Template.Advisor_Student_Configuration_Page.onCreated(function aadvisorStudentCo
       uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
     }
     this.state.set('uhId', uhId);
+    Session.set('uhId', uhId); // eslint-disable-line meteor/no-session
   }
   this.autorun(() => {
     this.subscribe(CareerGoals.getPublicationName());
