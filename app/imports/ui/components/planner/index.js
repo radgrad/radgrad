@@ -1,5 +1,9 @@
+import './academic-plan.css';
 import './academic-plan.html';
 import './academic-plan.js';
+
+import './inspector.html';
+import './inspector.js';
 
 import './recommendation-item.html';
 import './recommendation-item.js';

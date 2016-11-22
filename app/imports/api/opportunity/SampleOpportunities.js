@@ -31,11 +31,9 @@ export function makeSampleOpportunity(sponsor) {
   const description = 'Sample Opportunity Description';
   const opportunityType = makeSampleOpportunityType();
   const interests = [makeSampleInterest()];
-  const startActive = moment('2015-01-12').toDate();
-  const endActive = moment('2015-02-12').toDate();
+  const semesters = ['Summer-2015', 'Fall-2015'];
   const ice = { i: 10, c: 0, e: 10 };
-  return Opportunities.define({ name, slug, description, opportunityType, sponsor, interests, startActive,
-    endActive, ice });
+  return Opportunities.define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice });
 }
 
 /**

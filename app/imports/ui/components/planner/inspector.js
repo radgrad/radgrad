@@ -1,7 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
-import { Tracker } from 'meteor/tracker';
 
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
@@ -18,7 +16,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { getTotalICE, makeCourseICE, getPlanningICE } from '../../../api/ice/IceProcessor.js';
 
-Template.Academic_Plan_2.helpers({
+Template.Inspector.helpers({
   courses() {
     let ret = [];
     const courses = Courses.find().fetch();
@@ -575,18 +573,7 @@ Template.Academic_Plan_2.helpers({
   },
 });
 
-Template.Academic_Plan_2.events({
-  'click #addAY': function clickAddAY(event) {
-    event.preventDefault();
-    const student = Meteor.userId();
-    const ays = AcademicYearInstances.find({ studentID: student }, { sort: { year: 1 } }).fetch();
-    let year = moment().year();
-    if (ays.length > 0) {
-      const ay = ays[ays.length - 1];
-      year = ay.year + 1;
-    }
-    AcademicYearInstances.define({ year, student });
-  },
+Template.Inspector.events({
   'click button.delInstance': function clickButtonDelInstance(event) {
     event.preventDefault();
     const id = event.target.id;
@@ -611,92 +598,17 @@ Template.Academic_Plan_2.events({
     const student = Users.findDoc(Meteor.userId()).username;
     VerificationRequests.define({ student, opportunityInstance });
   },
-  'click .course.item': function clickCourseItem(event) {
-    event.preventDefault();
-    const courseArr = Courses.find({ _id: event.target.id }).fetch();
-    if (courseArr.length > 0) {
-      Template.instance().state.set('detailCourseID', event.target.id);
-      Template.instance().state.set('detailOpportunityID', null);
-    }
-  },
-  'click .item.inspect.course': function clickItemInspectCourse(event) {
-    event.preventDefault();
-    // console.log(event);
-    const template = Template.instance();
-    template.$('a.item.400').popup('hide all');
-    const id = event.target.id;
-    const split = id.split('-');
-    const courseArr = Courses.find({ number: split[1] }).fetch();
-    if (courseArr.length > 0) {
-      template.state.set('detailCourseID', courseArr[0]._id);
-      template.state.set('detailOpportunityID', null);
-    }
-  },
-  'click .item.inspect.opportunity': function clickItemInspectOpportunity(event) {
-    event.preventDefault();
-    const template = Template.instance();
-    template.$('a.item.400').popup('hide all');
-    const id = event.target.id;
-    const split = id.split('-');
-    const courseArr = OpportunityInstances.find({ _id: split[1] }).fetch();
-    if (courseArr.length > 0) {
-      template.state.set('detailCourseID', null);
-      template.state.set('detailOpportunityID', courseArr[0].opportunityID);
-    }
-  },
-  'click #nextYear': function clickNextYear(event) {
-    event.preventDefault();
-    const year = Template.instance().state.get('startYear');
-    Template.instance().state.set('startYear', year + 1);
-  },
-  'click .opportunity.item': function clickOpportunityItem(event) {
-    event.preventDefault();
-    const opportunityArr = Opportunities.find({ _id: event.target.id }).fetch();
-    if (opportunityArr.length > 0) {
-      Template.instance().state.set('detailCourseID', null);
-      Template.instance().state.set('detailOpportunityID', event.target.id);
-    }
-  },
-  'click #prevYear': function clickPrevYear(event) {
-    event.preventDefault();
-    const year = Template.instance().state.get('startYear');
-    Template.instance().state.set('startYear', year - 1);
-  },
-  'click tr.clickEnabled': function clickTrClickEnabled(event) {
-    event.preventDefault();
-    let target = event.target;
-    while (target && target.nodeName !== 'TR') {
-      target = target.parentNode;
-    }
-    const firstClass = target.getAttribute('class').split(' ')[0];
-    const template = Template.instance();
-    if (firstClass === 'courseInstance') {
-      template.state.set('detailCourseID', target.id);
-      template.state.set('detailOpportunityID', null);
-    } else
-      if (firstClass === 'opportunityInstance') {
-        template.state.set('detailCourseID', null);
-        template.state.set('detailOpportunityID', target.id);
-      }
-  },
 });
 
-Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {
-  this.state = new ReactiveDict();
-  this.state.set('currentSemesterID', this.data.currentSemesterID);
-  this.state.set('studentUsername', this.data.studentUserName);
+Template.Inspector.onCreated(function inspectorOnCreated() {
+  this.state = this.data.dictionary;
 });
 
-Template.Academic_Plan_2.onRendered(function academicPlan2OnRendered() {
-  this.state.set('currentSemesterID', this.data.currentSemesterID);
-  this.state.set('studentUsername', this.data.studentUserName);
-  const template = this;
-  Tracker.afterFlush(() => {
-    template.$('.ui.dropdown').dropdown({ transition: 'drop' });
-  });
+Template.Inspector.onRendered(function inspectorOnRendered() {
+  // add your statement here
 });
 
-Template.Academic_Plan_2.onDestroyed(function academicPlan2OnDestroyed() {
+Template.Inspector.onDestroyed(function inspectorOnDestroyed() {
   // add your statement here
 });
 
