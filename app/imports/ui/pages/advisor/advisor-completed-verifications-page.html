@@ -2,7 +2,11 @@
   <div class="layout-page">
 
     <div class="ui container">
-      {{> Verification_Requests_Completed }}
+      {{#if Template.subscriptionsReady}}
+        {{> Verification_Requests_Completed }}
+      {{else}}
+        {{> Loading }}
+      {{/if}}
     </div>
 
   </div>
