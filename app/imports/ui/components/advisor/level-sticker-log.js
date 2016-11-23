@@ -20,6 +20,16 @@ Template.Level_Sticker_Log.helpers({
     }
     return null;
   },
+  stickerEarned(level) {
+    const state = Template.instance().state;
+    if (state && state.get('uhId')) {
+      const uhID = state.get('uhId');
+      const user = Users.getUserFromUhId(uhID);
+      return lodash.indexOf(user.stickers, level) !== -1;
+    }
+    return false;
+  },
+
   projectedICE() {
     const state = Template.instance().state;
     if (state && state.get('uhId')) {
@@ -43,18 +53,65 @@ Template.Level_Sticker_Log.helpers({
     return null;
   },
   studentLevelImageName() {
-    return 'level3';
+    const state = Template.instance().state;
+    if (state && state.get('uhId')) {
+      const uhID = state.get('uhId');
+      const user = Users.getUserFromUhId(uhID);
+      if (user.level) {
+        return `level${user.level}`;
+      }
+    }
+    return 'level1';
   },
   studentLevelName() {
-    return 'Level 3';
+    const state = Template.instance().state;
+    if (state && state.get('uhId')) {
+      const uhID = state.get('uhId');
+      const user = Users.getUserFromUhId(uhID);
+      if (user.level) {
+        return `Level ${user.level}`;
+      }
+    }
+    return 'Level 1';
   },
   studentLevelColor() {
-    return 'blue';
+    const state = Template.instance().state;
+    if (state && state.get('uhId')) {
+      const uhID = state.get('uhId');
+      const user = Users.getUserFromUhId(uhID);
+      switch (user.level) {
+        case 1:
+          return 'white';
+        case 2:
+          return 'yellow';
+        case 3:
+          return 'blue';
+        case 4:
+          return 'red';
+        case 5:
+          return 'brown';
+        case 6:
+          return 'black';
+        default:
+          return 'white';
+      }
+    }
+    return 'white';
   },
 });
 
 Template.Level_Sticker_Log.events({
-  // add your events here
+  'click .jsLevelSticker': function clickJsLevelSticker(event, instance) {
+    event.preventDefault();
+    const uhId = instance.state.get('uhId');
+    const student = Users.getUserFromUhId(uhId);
+    const levelDivs = event.target.parentElement.getElementsByTagName('a');
+    const stickers = [];
+    lodash.map(levelDivs, (div) => {
+      stickers.push(parseInt(div.attributes[1].nodeValue, 10));
+    });
+    Users.setStickers(student._id, stickers);
+  },
 });
 
 Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
@@ -62,7 +119,9 @@ Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
 });
 
 Template.Level_Sticker_Log.onRendered(function levelStickerLogOnRendered() {
-  // add your statement here
+  this.$('.dropdown').dropdown({
+    // action: 'select',
+  });
 });
 
 Template.Level_Sticker_Log.onDestroyed(function levelStickerLogOnDestroyed() {
