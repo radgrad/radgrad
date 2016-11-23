@@ -11,6 +11,15 @@ Template.Student_Profile.helpers({
   careerGoals() {
     return CareerGoals.find().fetch();
   },
+  careerGoalSelected(goal) {
+    const state = Template.instance().state;
+    if (state && state.get('uhId')) {
+      const uhID = state.get('uhId');
+      const user = Users.getUserFromUhId(uhID);
+      return lodash.indexOf(user.careerGoalIDs, goal._id) !== -1;
+    }
+    return false;
+  },
   desireBA() {
     const state = Template.instance().state;
     if (state && state.get('uhId')) {
@@ -29,6 +38,15 @@ Template.Student_Profile.helpers({
     }
     return false;
   },
+  desiredDegree() {
+    const state = Template.instance().state;
+    if (state && state.get('uhId')) {
+      const uhID = state.get('uhId');
+      const user = Users.getUserFromUhId(uhID);
+      return user.desiredDegree;
+    }
+    return 'Select Degree';
+  },
   inRole(role) {
     const state = Template.instance().state;
     if (state && state.get('uhId')) {
@@ -40,6 +58,15 @@ Template.Student_Profile.helpers({
   },
   interests() {
     return Interests.find().fetch();
+  },
+  interestSelected(interest) {
+    const state = Template.instance().state;
+    if (state && state.get('uhId')) {
+      const uhID = state.get('uhId');
+      const user = Users.getUserFromUhId(uhID);
+      return lodash.indexOf(user.interestIDs, interest._id) !== -1;
+    }
+    return false;
   },
   roles() {
     const ret = [];

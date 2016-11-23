@@ -35,7 +35,7 @@
                 <div class="ui selection dropdown">
                   <input type="hidden" name="role">
                   <i class="dropdown icon"></i>
-                  <div class="default text">Select Degree</div>
+                  <div class="default text">{{desiredDegree}}</div>
                   <div class="menu">
                     <div class="item{{#if desireBS}} active selected{{/if}}" data-value="B.S. CS">B.S. CS</div>
                     <div class="item{{#if desireBA}} active selected{{/if}}" data-value="B.A. ICS">B.A. ICS</div>
@@ -71,7 +71,7 @@
                 <select multiple="" class="ui dropdown">
                   <option value="">Select Interests</option>
                   {{#each interest in interests}}
-                    <option value="{{interest._id}}">{{interest.name}}</option>
+                    <option value="{{interest._id}}" selected="{{interestSelected interest}}">{{interest.name}}</option>
                   {{/each}}
                 </select>
                 <button class="ui green button jsInterests" type="submit">Update</button>
@@ -90,7 +90,7 @@
                 <select multiple="" class="ui dropdown">
                   <option value="">Select Career Goals</option>
                   {{#each goal in careerGoals}}
-                    <option value="{{goal._id}}">{{goal.name}}</option>
+                    <option value="{{goal._id}}" selected="{{careerGoalSelected goal}}">{{goal.name}}</option>
                   {{/each}}
                 </select>
                 <button class="ui green button jsCareers" type="submit">Update</button>

@@ -20,4 +20,8 @@ Template.Student_MentorSpace_Page.onRendered(function mentorSpaceOnRendered(){
       .dropdown()
   ;
 
+  $('.ui.rating')
+      .rating()
+  ;
+
 });
