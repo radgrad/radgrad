@@ -24,14 +24,14 @@ Template.Degree_Plan_Generator.helpers({
     }
     return '';
   },
-  interestes() {
+  interests() {
     const ret = [];
     const state = Template.instance().state;
     if (state && state.get('uhId')) {
       const uhID = state.get('uhId');
       const user = Users.getUserFromUhId(uhID);
       lodash.map(user.interestIDs, (id) => {
-        ret.push(Interests.findDoc(id).name);
+        ret.push(Interests.findDoc(id));
       });
     }
     return ret;
@@ -42,10 +42,9 @@ Template.Degree_Plan_Generator.helpers({
     if (state && state.get('uhId')) {
       const uhID = state.get('uhId');
       const user = Users.getUserFromUhId(uhID);
-      lodash.map(user.careerIDs, (id) => {
-        ret.push(CareerGoals.findDoc(id).name);
+      lodash.map(user.careerGoalIDs, (id) => {
+        ret.push(CareerGoals.findDoc(id));
       });
-      return user.desiredDegree;
     }
     return ret;
   },
