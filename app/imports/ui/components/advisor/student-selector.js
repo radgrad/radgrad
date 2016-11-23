@@ -1,4 +1,3 @@
-import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 
 import { Users } from '../../../api/user/UserCollection.js';
@@ -6,7 +5,6 @@ import { Users } from '../../../api/user/UserCollection.js';
 Template.Student_Selector.helpers({
   userFullName() {
     const state = Template.instance().state;
-    console.log(Session.get('uhId')); // eslint-disable-line meteor/no-session
     if (state && state.get('uhId')) {
       const uhID = state.get('uhId');
       const user = Users.getUserFromUhId(uhID);
@@ -28,12 +26,13 @@ Template.Student_Selector.helpers({
 
 Template.Student_Selector.events({
   'click .jsRetrieve': function clickJSRetrieve(event, instance) {
-    event.preventDefault();  // TODO: Cam, what is the right behavior? go to a new url or not.
+    event.preventDefault();
     const parent = event.target.parentElement;
     let uhId = parent.childNodes[1].value;
     if (uhId.indexOf('-') === -1) {
       uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
     }
+    localStorage.setItem('uhId', uhId);  // eslint-disable-line no-undef
     instance.state.set('uhId', uhId);
   },
 });

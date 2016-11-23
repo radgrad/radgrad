@@ -7,67 +7,7 @@
 
       {{> Degree_Plan_Generator dictionary=getDictionary}}
 
-      <div class="ui raised padded container segment">
-        <div class="ui top left attached green label">Level Sticker Log</div>
-        <div class="ui grid">
-          <div class="row">
-            <div class="ui statistics">
-              <div class="blue statistic">
-                <div class="value">
-                  20
-                </div>
-                <div class="label">
-                  Innovation
-                </div>
-              </div>
-              <div class="red statistic">
-                <div class="value">
-                  35
-                </div>
-                <div class="label">
-                  Competency
-                </div>
-              </div>
-              <div class="orange statistic">
-                <div class="value">
-                  60
-                </div>
-                <div class="label">
-                  Experience
-                </div>
-              </div>
-              <div class="statistic">
-                <div class="value">
-                  3
-                </div>
-                <div class="label">
-                  Level
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="row">
-            <form class="ui form">
-              <div class="inline field">
-                <label>Received:</label>
-                <div class="ui action input">
-                  <select multiple="" class="ui dropdown">
-                    <option value="">Stickers received</option>
-                    <option value="0">Level 1 (White)</option>
-                    <option value="1">Level 2 (Yellow)</option>
-                    <option value="2">Level 3 (Blue)</option>
-                    <option value="2">Level 4 (Red)</option>
-                    <option value="2">Level 5 (Brown)</option>
-                    <option value="2">Level 6 (Black)</option>
-                  </select>
-                  <button class="ui green button" type="submit">Update</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      {{> Level_Sticker_Log dictionary=getDictionary}}
     {{else}}
       {{> Loading}}
     {{/if}}

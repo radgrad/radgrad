@@ -1,0 +1,91 @@
+<template name="Level_Sticker_Log">
+  <div class="ui raised padded container segment">
+    <div class="ui top left attached green label">Level Sticker Log</div>
+    <div class="ui equal width grid container">
+      <div class="row">
+        <div class="column">
+          <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.i}} lightblue">
+            <span>{{earnedICE.i}}/{{projectedICE.i}}</span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+          <div
+              style="position: relative; background-color:transparent; left: -120px; margin-left:auto; margin-right:auto"
+              class="c100 p{{earnedICE.i}} blue">
+            <span></span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+          <h3 class="ui blue header">Innovation</h3>
+        </div>
+
+        <div class="column">
+          <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.c}} lightgreen">
+            <span>{{earnedICE.c}}/{{projectedICE.c}}</span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+          <div
+              style="position: relative; background-color:transparent; left:-120px; margin-left:auto; margin-right:auto"
+              class="c100 p{{earnedICE.c}} green">
+            <span></span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+          <h3 class="ui green header">Competency</h3>
+        </div>
+
+        <div class="column">
+          <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.e}} lightorange">
+            <span>{{earnedICE.e}}/{{projectedICE.e}}</span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+          <div
+              style="position: relative; background-color:transparent; left:-120px; margin-left:auto; margin-right:auto"
+              class="c100 p{{earnedICE.e}} orange">
+            <span></span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+          <h3 class="ui orange header">Experience</h3>
+        </div>
+        <div class="column">
+          <img class="ui centered image" src="/images/levels/{{studentLevelImageName}}.png" width="120px">
+          <h3 class="ui {{studentLevelColor}} centered header noTopMargin">{{studentLevelName}}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <form class="ui form">
+          <div class="inline field">
+            <label>Received:</label>
+            <div class="ui action input">
+              <select multiple="" class="ui dropdown">
+                <option value="">Stickers received</option>
+                <option value="0">Level 1 (White)</option>
+                <option value="1">Level 2 (Yellow)</option>
+                <option value="2">Level 3 (Blue)</option>
+                <option value="2">Level 4 (Red)</option>
+                <option value="2">Level 5 (Brown)</option>
+                <option value="2">Level 6 (Black)</option>
+              </select>
+              <button class="ui green button" type="submit">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

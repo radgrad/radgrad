@@ -25,13 +25,8 @@ Template.Advisor_Student_Configuration_Page.events({
 
 Template.Advisor_Student_Configuration_Page.onCreated(function aadvisorStudentConfirgurationPageOnCreated() {
   this.state = new ReactiveDict();
-  if (FlowRouter.getQueryParam('uhId')) {
-    let uhId = FlowRouter.getQueryParam('uhId');
-    if (uhId.indexOf('-') === -1) {
-      uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
-    }
-    this.state.set('uhId', uhId);
-    Session.set('uhId', uhId); // eslint-disable-line meteor/no-session
+  if (localStorage.getItem('uhId')) {  // eslint-disable-line no-undef
+    this.state.set('uhId', localStorage.getItem('uhId'));  // eslint-disable-line no-undef
   }
   this.autorun(() => {
     this.subscribe(CareerGoals.getPublicationName());
