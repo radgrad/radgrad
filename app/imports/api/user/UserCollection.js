@@ -43,6 +43,8 @@ class UserCollection extends BaseInstanceCollection {
       picture: { type: String, optional: true },
       aboutMe: { type: String, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
+      level: { type: Number, optional: true },
+      stickers: { type: [Number], optional: true },
       // username, email, and password are managed in accounts package.
     }));
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
@@ -268,6 +270,47 @@ class UserCollection extends BaseInstanceCollection {
     this.assertDefined(userID);
     Semesters.assertSemester(semesterID);
     this._collection.update(userID, { $set: { semesterID } });
+  }
+
+  /**
+   * Updates userID's level.
+   * @param userID The userID.
+   * @param level The new level.
+   */
+  setLevel(userID, level) {
+    this.assertDefined(userID);
+    if (!_.isNumber(level)) {
+      throw new Meteor.Error(`${level} is not a number.`);
+    } else if (level < 0 || level > 6) {
+      throw new Meteor.Error(`${level} is out of bounds.`);
+    }
+    this._collection.update(userID, { $set: { level } });
+  }
+
+  /**
+   * Updates userID with an array of level stickers.
+   * @param userID The userID.
+   * @param stickers A list of levels.
+   * @throws {Meteor.Error} If userID is not a userID, or if stickers is not a list of numbers.
+   */
+  setStickers(userID, stickers) {
+    this.assertDefined(userID);
+    let max = 0;
+    if (!_.isArray(stickers)) {
+      throw new Meteor.Error(`${stickers} is not an array.`);
+    } else {
+      stickers.forEach((s) => {
+        if (!_.isNumber(s)) {
+          throw new Meteor.Error(`${s} is not a number.`);
+        } else {
+          if (s > max) {
+            max = s;
+          }
+        }
+      });
+    }
+    this._collection.update(userID, { $set: { stickers } });
+    this.setLevel(userID, max);
   }
 
   /**

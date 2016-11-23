@@ -1,11 +1,11 @@
-// import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
-// import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { moment } from 'meteor/momentjs:moment';
 
 Template.Verification_Event.helpers({
@@ -29,13 +29,32 @@ Template.Verification_Event.events({
     const semesterSlug = Slugs.findDoc(semester.slugID).name;
     try {
       const studentID = Users.getID(student);
+      console.log(studentID); // eslint-disable-line no-console
+      const studentDoc = Users.findDoc(studentID);
+      console.log(studentDoc); // eslint-disable-line no-console
       const opportunityInstances = OpportunityInstances.find({ opportunityID, studentID }).fetch();
+      let opportunityInstance = null;
       if (opportunityInstances.length === 0) { // student didn't plan on attending in degree plan
-        OpportunityInstances.define({ student, semester: semesterSlug, verified: true, opportunity: opportunitySlug });
+        opportunityInstance = OpportunityInstances.define({ student, semester: semesterSlug,
+          verified: true, opportunity: opportunitySlug });
       } else {
-        const oppInstance = opportunityInstances[0];
-        OpportunityInstances.updateVerified(oppInstance._id, true);
+        opportunityInstance = opportunityInstances[0];
+        OpportunityInstances.updateVerified(opportunityInstance._id, true);
       }
+      const requestID = VerificationRequests.define({ student: studentDoc.username, opportunityInstance });
+      const request = VerificationRequests.findDoc(requestID);
+      request.status = VerificationRequests.ACCEPTED;
+      const processRecord = {};
+      processRecord.date = new Date();
+      processRecord.status = VerificationRequests.ACCEPTED;
+      processRecord.verifier = Users.getFullName(Meteor.userId());
+      const studentFullName = Users.getFullName(studentDoc._id);
+      processRecord.feedback = `${studentFullName} attended ${opportunity.name}`;
+      request.processed.push(processRecord);
+      console.log(request.processed);
+      const status = VerificationRequests.ACCEPTED;
+      const processed = request.processed;
+      VerificationRequests.updateStatus(requestID, status, processed);
     } catch (e) {
       alert(`${student} is not a valid student. ${e}`); // eslint-disable-line no-undef, no-alert
     }

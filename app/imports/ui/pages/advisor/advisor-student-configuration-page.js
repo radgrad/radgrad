@@ -1,5 +1,6 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -24,12 +25,8 @@ Template.Advisor_Student_Configuration_Page.events({
 
 Template.Advisor_Student_Configuration_Page.onCreated(function aadvisorStudentConfirgurationPageOnCreated() {
   this.state = new ReactiveDict();
-  if (FlowRouter.getQueryParam('uhId')) {
-    let uhId = FlowRouter.getQueryParam('uhId');
-    if (uhId.indexOf('-') === -1) {
-      uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
-    }
-    this.state.set('uhId', uhId);
+  if (localStorage.getItem('uhId')) {  // eslint-disable-line no-undef
+    this.state.set('uhId', localStorage.getItem('uhId'));  // eslint-disable-line no-undef
   }
   this.autorun(() => {
     this.subscribe(CareerGoals.getPublicationName());
