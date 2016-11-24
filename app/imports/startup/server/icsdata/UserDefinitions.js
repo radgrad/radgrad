@@ -14,6 +14,7 @@ export const userDefinitions = [
     email: 'johnson@hawaii.edu',
     role: ROLE.FACULTY,
     password: 'foo',
+    uhID: '8765-4321',
   },
   {
     firstName: 'Kim',
@@ -22,6 +23,7 @@ export const userDefinitions = [
     email: 'binsted@hawaii.edu',
     role: ROLE.FACULTY,
     password: 'foo',
+    uhID: '8765-4320',
   },
   {
     firstName: 'Lipyeow',
@@ -30,6 +32,7 @@ export const userDefinitions = [
     email: 'lipyeow@hawaii.edu',
     role: ROLE.FACULTY,
     password: 'foo',
+    uhID: '8765-4319',
   },
   {
     firstName: 'Depeng',
@@ -38,6 +41,7 @@ export const userDefinitions = [
     email: 'depeng@hawaii.edu',
     role: ROLE.FACULTY,
     password: 'foo',
+    uhID: '8765-4318',
   },
   {
     firstName: 'Edo',
@@ -46,5 +50,23 @@ export const userDefinitions = [
     email: 'esb@hawaii.edu',
     role: ROLE.FACULTY,
     password: 'foo',
+    uhID: '8765-4317',
+  },
+  {
+    firstName: 'Cam',
+    lastName: 'Moore',
+    slug: 'cammoore',
+    email: 'cmoore@hawaii.edu',
+    role: ROLE.FACULTY,
+    password: 'test1',
+    uhID: '8765-4316',
+  },  {
+    firstName: 'Gerald',
+    lastName: 'Lau',
+    slug: 'geraldlau',
+    email: 'glau@hawaii.edu',
+    role: ROLE.ADVISOR,
+    password: 'foo',
+    uhID: '8765-4315',
   },
 ];
