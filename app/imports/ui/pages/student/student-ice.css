@@ -1,3 +1,8 @@
+.green.description {
+  color: darkseagreen;
+}
+
+
 .rect-auto,
 .c100.p51 .slice,
 .c100.p52 .slice,
@@ -1092,3 +1097,5 @@
 .c100.orange > span {
   color: #dd9d22 !important;
 }
+
+
