@@ -1,7 +1,18 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
+import { Users } from '../../../api/user/UserCollection';
+
 Template.First_Menu.helpers({
-  // add you helpers here
+  firstMenuFullName() {
+    if (Meteor.userId()) {
+      return Users.getFullName(Meteor.userId());
+    }
+    return '';
+  },
+  id() {
+    return Meteor.userId();
+  },
 });
 
 // Template.First_Menu.events({

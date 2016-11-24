@@ -1,19 +1,29 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 
 /* eslint-disable no-console */
 
-/* When running app for first time, pass a settings file to set up a default user account. */
-if (Meteor.users.find().count() === 0) {
-  if (Meteor.settings.defaultAccount) {
-    Accounts.createUser({
-      username: Meteor.settings.defaultAccount.username,
-      password: Meteor.settings.defaultAccount.password,
-    });
-  } else {
-    console.log('No default user!  Please invoke meteor with a settings file.');
+/* Validate username, sending a specific error message on failure. */
+Accounts.validateNewUser(function (user) {
+  if (user) {
+    if (user.services.cas) {
+      const username = user.services.cas.id;
+      if (username && ValidUserAccounts.find({ username }).count() > 0) {
+        return true;
+      }
+      throw new Meteor.Error(403, 'User not in the allowed list');
+    } else if (user.services.password) {
+      const username = user.username;
+      if (username && ValidUserAccounts.find({ username }).count() > 0) {
+        return true;
+      }
+      throw new Meteor.Error(403, 'User not in the allowed list');
+    }
   }
-}
+  throw new Meteor.Error(403, 'User not in the allowed list');
+});
+
 
 Meteor.users.allow({
   insert: function insert(userId, doc) {  // eslint-disable-line no-unused-vars

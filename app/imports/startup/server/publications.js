@@ -11,6 +11,7 @@ import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceC
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { Users } from '../../api/user/UserCollection.js';
+import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 
 AcademicYearInstances.publish();
@@ -26,4 +27,5 @@ OpportunityInstances.publish();
 OpportunityTypes.publish();
 Semesters.publish();
 Users.publish();
+ValidUserAccounts.publish();
 VerificationRequests.publish();

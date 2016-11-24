@@ -7,7 +7,6 @@ import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
-// import { FeedbackType } from '../../api/feedback/FeedbackType.js';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
@@ -17,6 +16,7 @@ import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
+import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 
 import { courseDefinitions } from './icsdata/CourseDefinitions.js';
@@ -59,9 +59,10 @@ Meteor.startup(() => {
     console.log('Defining Interests');  // eslint-disable-line no-console
     interestDefinitions.map((definition) => Interests.define(definition));
   }
-  if (Users.find().count() === 1) {
+  if (Users.find().count() === 0) {
     console.log('Defining Users');  // eslint-disable-line no-console
     userDefinitions.map((definition) => {
+      ValidUserAccounts.define({ username: definition.slug });
       const id = Users.define(definition);
       Users.setUhId(id, definition.uhID);
       return false;
@@ -92,6 +93,7 @@ Meteor.startup(() => {
     Meteor.settings.exampleStudents.forEach((student) => {
       if (Users.find({ username: student.slug }).count() === 0) {
         console.log(`defining ${student.slug}`);  // eslint-disable-line no-console
+        ValidUserAccounts.define({ username: student.slug });
         /* eslint no-param-reassign: "off" */
         student.role = ROLE.STUDENT;
         const studentID = Users.define(student);
@@ -140,6 +142,7 @@ Meteor.startup(() => {
   if (Meteor.settings.defaultAdminAccount) {
     const admin = Meteor.settings.defaultAdminAccount;
     if (Users.find({ username: admin.slug }).count() === 0) {
+      ValidUserAccounts.define({ username: admin.slug });
       console.log('Defining admin');  // eslint-disable-line no-console
       admin.role = ROLE.ADMIN;
       Users.define(admin);

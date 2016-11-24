@@ -277,7 +277,10 @@ Template.Academic_Plan_2.helpers({
   hasNextYear() {
     const instance = Template.instance();
     const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays[ays.length - 1].year > instance.state.get('startYear');
+    if (ays.length > 0) {
+      return ays[ays.length - 1].year > instance.state.get('startYear');
+    }
+    return false;
   },
   hasOpportunity() {
     return Template.instance().state.get('detailOpportunityID');
@@ -285,7 +288,10 @@ Template.Academic_Plan_2.helpers({
   hasPrevYear() {
     const instance = Template.instance();
     const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays[0].year < instance.state.get('startYear') - 3;
+    if (ays.length > 0) {
+      return ays[0].year < instance.state.get('startYear') - 3;
+    }
+    return false;
   },
   hasRequest() {
     if (Template.instance().state.get('detailOpportunityID')) {

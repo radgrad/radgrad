@@ -1,3 +1,6 @@
+import './cas-login.html';
+import './cas-login.js';
+
 import './first-menu.html';
 import './first-menu.js';
 
