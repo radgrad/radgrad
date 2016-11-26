@@ -34,10 +34,12 @@ Template.Student_Selector.events({
     if (uhId.indexOf('-') === -1) {
       uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
     }
+    sessionStorage.CURRENT_UH_ID = uhId;  // eslint-disable-line no-undef
     SessionState.set(sessionKeys.CURRENT_UH_ID, uhId);
     instance.state.set('uhId', uhId);
     const user = Users.getUserFromUhId(uhId);
     if (user) {
+      sessionStorage.CURRENT_STUDENT_ID = user._id;  // eslint-disable-line no-undef
       SessionState.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
     } else {
       // do error handling for bad student id.
@@ -50,6 +52,14 @@ Template.Student_Selector.onCreated(function studentSelectorOnCreated() {
     this.state = this.data.dictionary;
   } else {
     this.state = new ReactiveDict();
+    if (sessionStorage.CURRENT_UH_ID) {  // eslint-disable-line no-undef
+      // eslint-disable-next-line no-undef
+      this.state.set(sessionKeys.CURRENT_UH_ID, sessionStorage.CURRENT_UH_ID);
+    }
+    if (sessionStorage.CURRENT_STUDENT_ID) {  // eslint-disable-line no-undef
+      // eslint-disable-next-line no-undef
+      this.state.set(sessionKeys.CURRENT_STUDENT_ID, sessionStorage.CURRENT_STUDENT_ID);
+    }
   }
 });
 
