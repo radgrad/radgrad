@@ -17,6 +17,15 @@ Template.Student_Layout.helpers({
   secondMenuLength() {
     return 'four';
   },
+  adminSecondMenuItems() {
+    return [
+      { label: 'Home', route: RouteNames.adminHomePageRouteName },
+      { label: 'View as Student', route: RouteNames.studentHomePageRouteName },
+    ];
+  },
+  adminSecondMenuLength() {
+    return 'two';
+  },
 });
 
 Template.Student_Layout.events({

@@ -308,10 +308,8 @@ class UserCollection extends BaseInstanceCollection {
       stickers.forEach((s) => {
         if (!_.isNumber(s)) {
           throw new Meteor.Error(`${s} is not a number.`);
-        } else {
-          if (s > max) {
-            max = s;
-          }
+        } else if (s > max) {
+          max = s;
         }
       });
     }

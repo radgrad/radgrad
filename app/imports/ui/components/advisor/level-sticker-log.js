@@ -3,7 +3,6 @@ import { lodash } from 'meteor/erasaur:meteor-lodash';
 
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 
@@ -35,7 +34,7 @@ Template.Level_Sticker_Log.helpers({
     if (state && state.get('uhId')) {
       const uhID = state.get('uhId');
       const user = Users.getUserFromUhId(uhID);
-      const courseInstances = CourseInstances.find({ studentID: user._id  }).fetch();
+      const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();
       const oppInstances = OpportunityInstances.find({ studentID: user._id }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
       const ice = getPlanningICE(earnedInstances);
@@ -115,7 +114,9 @@ Template.Level_Sticker_Log.events({
 });
 
 Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
-  this.state = this.data.dictionary;
+  if (this.data.dictionary) {
+    this.state = this.data.dictionary;
+  }
 });
 
 Template.Level_Sticker_Log.onRendered(function levelStickerLogOnRendered() {

@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
+import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -36,10 +37,17 @@ Template.Student_Degree_Planner_Page.onRendered(function plannerOnRendered() {
 
 Template.Student_Degree_Planner_Page.helpers({
   args() {
-    return {
-      currentSemesterID: Semesters.getCurrentSemester(),
-      studentUserName: Meteor.user().username,
-    };
+    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    console.log(studentID);
+    if (studentID) {
+      const user = Users.findDoc(studentID);
+      return {
+        currentSemesterID: Semesters.getCurrentSemester(),
+        studentUserName: user.username,
+      };
+    }
+    console.log('There is a problem. CURRENT_STUDENT_ID should be set.');
+    return null;
   },
 });
 

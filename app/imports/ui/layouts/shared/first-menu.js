@@ -6,23 +6,19 @@ import { Users } from '../../../api/user/UserCollection';
 Template.First_Menu.helpers({
   firstMenuFullName() {
     if (Meteor.userId()) {
-      return Users.getFullName(Meteor.userId());
+      try {
+        return Users.getFullName(Meteor.userId());
+      } catch (e) {
+        console.log(e, Meteor.userId()); // eslint-disable-line no-console
+      }
     }
     return '';
   },
-  id() {
-    return Meteor.userId();
-  },
 });
 
-// Template.First_Menu.events({
-//   'click a.item': function (event) {
-//     event.preventDefault();
-//     if (Meteor.userId()) {
-//       Meteor.logout();
-//     }
-//   },
-// });
+Template.First_Menu.events({
+  // add events.
+});
 
 Template.First_Menu.onCreated(function firstMenuOnCreated() {
   // add your statement here

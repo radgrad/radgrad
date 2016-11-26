@@ -1,6 +1,8 @@
+import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
 import { Users } from '../../../api/user/UserCollection.js';
+import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 
 Template.Student_Selector.helpers({
   userFullName() {
@@ -32,13 +34,23 @@ Template.Student_Selector.events({
     if (uhId.indexOf('-') === -1) {
       uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
     }
-    localStorage.setItem('uhId', uhId);  // eslint-disable-line no-undef
+    SessionState.set(sessionKeys.CURRENT_UH_ID, uhId);
     instance.state.set('uhId', uhId);
+    const user = Users.getUserFromUhId(uhId);
+    if (user) {
+      SessionState.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
+    } else {
+      // do error handling for bad student id.
+    }
   },
 });
 
 Template.Student_Selector.onCreated(function studentSelectorOnCreated() {
-  this.state = this.data.dictionary;
+  if (this.data.dictionary) {
+    this.state = this.data.dictionary;
+  } else {
+    this.state = new ReactiveDict();
+  }
 });
 
 Template.Student_Selector.onRendered(function studentSelectorOnRendered() {

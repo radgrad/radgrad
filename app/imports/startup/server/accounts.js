@@ -5,7 +5,7 @@ import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 /* eslint-disable no-console */
 
 /* Validate username, sending a specific error message on failure. */
-Accounts.validateNewUser(function (user) {
+Accounts.validateNewUser(function validate(user) {
   if (user) {
     if (user.services.cas) {
       const username = user.services.cas.id;

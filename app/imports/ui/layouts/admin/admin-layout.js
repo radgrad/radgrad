@@ -10,10 +10,11 @@ Template.Admin_Layout.helpers({
   secondMenuItems() {
     return [
       { label: 'Home', route: RouteNames.adminHomePageRouteName },
+      { label: 'View as Student', route: RouteNames.studentHomePageRouteName },
     ];
   },
   secondMenuLength() {
-    return 'one';
+    return 'two';
   },
 });
 

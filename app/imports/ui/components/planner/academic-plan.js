@@ -688,6 +688,7 @@ Template.Academic_Plan_2.events({
 });
 
 Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {
+  console.log(this.data); // eslint-disable-line no-console
   this.state = new ReactiveDict();
   this.state.set('currentSemesterID', this.data.currentSemesterID);
   this.state.set('studentUsername', this.data.studentUserName);
