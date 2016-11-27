@@ -33,7 +33,7 @@ Template.Student_MentorSpace_Page.helpers({
         title: 'Software Engineer, Bonobos',
         location: 'New York City, NY',
         email: 'austen.ito@gmail.com',
-        linkedlin: 'austen-ito-9a561a9',
+        linkedin: 'austen-ito-9a561a9',
         mentor_reason: 'I graduated from ICS, helped start the first Honolulu Makerspace, have worked for Code Camps, and have held software jobs in DC, NYC, and HI. I can try to help you whether you intend to stay local or move to the mainland.',
         image: 'ito.png'
       },
@@ -43,7 +43,7 @@ Template.Student_MentorSpace_Page.helpers({
         title: 'Software Engineer, LiveAction',
         location: 'Honolulu, HI',
         email: 'akagawa@liveaction.com',
-        linkedlin: 'aaronkagawa',
+        linkedin: 'aaronkagawa',
         mentor_reason: 'As an ICS undergrad and graduate student, I know how important mentoring can be to your career, and I hope I can help future ICS grads get off to a great start.',
         image: 'kagawa.jpg'
       },
@@ -52,7 +52,7 @@ Template.Student_MentorSpace_Page.helpers({
         title: 'CEO, Slickage Studios',
         location: 'Honolulu, HI',
         email: 'pkarjala@hawaii.edu',
-        linkedlin: 'patrickakarjala',
+        linkedin: 'patrickakarjala',
         mentor_reason: 'I completed my undergraduate CS degree in 2004, and am now enrolled in the UH ICS MS program. I currently work for the Distance Course Design and Consulting group at UH Manoa, doing full stack web application development. I am glad to answer questions regarding any topic of computer science, especially those geared toward collaborative development and networking (both computer and interpersonal).',
         image: 'karjala.jpg'
       },
@@ -61,7 +61,7 @@ Template.Student_MentorSpace_Page.helpers({
         title: 'Developer, Hobnob Invites',
         location: 'Honolulu, HI',
         email: 'gelee@hawaii.edu',
-        linkedlin: 'keokilee',
+        linkedin: 'keokilee',
         mentor_reason: 'I founded a startup in Hawaii and now work in Silicon Valley. I am happy to share my experiences with new grads.',
         image: 'lee.jpg'
       },
@@ -70,7 +70,7 @@ Template.Student_MentorSpace_Page.helpers({
         title: 'CEO, Ikayzo',
         location: 'Honolulu, HI',
         email: 'dan@ikayzo',
-        linkedlin: 'dleuck',
+        linkedin: 'dleuck',
         mentor_reason: 'The UH ICS Department is an engine for the high tech industry in Hawaii. The better prepared we can make ICS graduates, the more success our industry will have and the more opportunities there will be for all.',
         image: 'leuck.jpg'
       }];
