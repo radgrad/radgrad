@@ -5,7 +5,17 @@
 
       <div class="five wide column">
 
-
+        <div class="ui segment">
+          <div class="ui dividing header">
+            <h4>Ask Us A Question!</h4>
+          </div>
+          <div class="ui form">
+            <div class="field">
+              <textarea rows="2" style="height: 75px;"></textarea>
+            </div>
+            <button class="fluid ui button" type="submit">Submit</button>
+          </div>
+        </div>
 
 
         <div class="ui segment">
@@ -13,162 +23,29 @@
             <h4>Mentor Directory</h4>
           </div>
 
+          {{#each listMentors}}
+
             <div class="item mentorspace-item-padding">
               <div class="ui vertical accordion">
 
                 <div class="active title">
                   <i class="dropdown icon"></i>
-                  <img class="ui circular bordered avatar image" src="../images/mentors/brewer.jpg">
-                  Robert Brewer<br>
-                  Software Engineer, Tableau
+                  <img class="ui circular bordered avatar image" src="../images/mentors/{{image}}">
+                  {{name}}<br>
+                  {{title}}
                 </div>
 
                 <div class="active content">
-                  <p>Palo Alto, CA<br>
-                    Email: rbrewer@excitedcuriosity.org<br>
-                    LinkedIn: robertsbrewer<br>
-                    Why I mentor: I founded a startup in Hawaii and now work in Silicon Valley.
-                    I am happy to share my experiences with new grads.</p>
+                  <p>{{location}}<br>
+                    Email: {{email}}<br>
+                    LinkedIn: {{linkedin}}<br>
+                    Why I mentor: {{mentor_reason}}</p>
                 </div>
               </div>
             </div>
 
-            <div class="item mentorspace-item-padding">
-              <div class="ui accordion">
-                <div class="active title">
-                  <i class="dropdown icon"></i>
-                  <img class="ui circular bordered avatar image" src="../images/mentors/geis.jpg">
-                  Jennifer Geis<br>
-                  IT Specialist, UH
-                </div>
-
-                <div class="active content">
-                  <p>Honolulu, HI<br>
-                    Email: jgeis@hawaii.edu<br>
-                    LinkedIn: jgeis<br>
-                    Why I mentor: I received both a B.S. and M.S. in Computer Science from UH. I've worked in the
-                    private
-                    sector and done the start-up thing and now work at UH Information and Technology Services.
-                    Being from
-                    Hawaii my goal was to orient my career so I could stay here and I've learned some lessons
-                    along the way.
-                    My experiences could prove useful to you if: (a) you want to talk about getting the most out
-                    of your UH
-                    ICS experience, or (b) you are interested in one day working for UH, or (c) staying in Hawaii
-                    is one of
-                    your goals.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="item mentorspace-item-padding">
-              <div class="ui accordion">
-                <div class="active title">
-                  <i class="dropdown icon"></i>
-                  <img class="ui circular bordered avatar image" src="../images/mentors/ito.png">
-                  Austen Ito<br>
-                  Software Engineer, Bonobos<br>
-                </div>
-
-                <div class="active content">
-                  <p>New York City, NY
-                    Email: austen.ito@gmail.com<br>
-                    LinkedIn: austen-ito-9a561a9<br>
-                    Why I mentor: I graduated from ICS, helped start the first Honolulu Makerspace, have worked
-                    for Code Camps,
-                    and have held software jobs in DC, NYC, and HI. I can try to help you whether you intend to
-                    stay local or
-                    move to the mainland.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="item mentorspace-item-padding">
-              <div class="ui accordion">
-                <div class="active title">
-                  <i class="dropdown icon"></i>
-                  <img class="ui circular bordered avatar image" src="../images/mentors/kagawa.jpg">
-                  Aaron Kagawa<br>
-                  Software Engineer, LiveAction<br>
-                </div>
-
-                <div class="active content">
-                  <p>Honolulu, HI
-                    Email: akagawa@liveaction.com<br>
-                    LinkedIn: aaronkagawa<br>
-                    Why I mentor: As an ICS undergrad and graduate student, I know how important mentoring can be
-                    to your
-                    career, and I hope I can help future ICS grads get off to a great start.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="item mentorspace-item-padding">
-              <div class="ui accordion">
-                <div class="active title">
-                  <i class="dropdown icon"></i>
-                  <img class="ui circular bordered avatar image" src="../images/mentors/karjala.jpg">
-                  Patrick Karjala<br>
-                  CEO, Slickage Studios<br>
-                </div>
-
-                <div class="active content">
-                  <p>Email: pkarjala@hawaii.edu<br>
-                    LinkedIn: patrickakarjala<br>
-                    Why I mentor: I completed my undergraduate CS degree in 2004, and am now enrolled in the UH
-                    ICS MS program.
-                    I currently work for the Distance Course Design and Consulting group at UH Manoa, doing full
-                    stack web
-                    application development. I am glad to answer questions regarding any topic of computer
-                    science, especially
-                    those geared toward collaborative development and networking (both computer and
-                    interpersonal).</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="item mentorspace-item-padding">
-              <div class="ui accordion">
-                <div class="active title">
-                  <i class="dropdown icon"></i>
-                  <img class="ui circular bordered avatar image" src="../images/mentors/lee.jpg">
-                  George Lee<br>
-                  Developer, Hobnob Invites<br>
-                </div>
-
-                <div class="active content">
-                  <p>Honolulu, HI
-                    Email: gelee@hawaii.edu<br>
-                    LinkedIn: keokilee<br>
-                    Why I mentor: I founded a startup in Hawaii and now work in Silicon Valley.
-                    I am happy to share my experiences with new grads.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="item mentorspace-item-padding">
-              <div class="ui accordion">
-                <div class="active title">
-                  <i class="dropdown icon"></i>
-                  <img class="ui circular bordered avatar image" src="../images/mentors/leuck.jpg">
-                  Daniel Leuck<br>
-                  CEO, Ikayzo<br>
-                </div>
-
-                <div class="active content">
-                  <p>Email: dan@ikayzo<br>
-                    LinkedIn: dleuck<br>
-                    Why I mentor: The UH ICS Department is an engine for the high tech industry in Hawaii. The
-                    better prepared
-                    we can make ICS graduates, the more success our industry will have and the more opportunities
-                    there will be
-                    for all.</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
+          {{/each}}
+        </div>
       </div>
 
 
