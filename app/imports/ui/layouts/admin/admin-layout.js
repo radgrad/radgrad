@@ -10,11 +10,15 @@ Template.Admin_Layout.helpers({
   secondMenuItems() {
     return [
       { label: 'Home', route: RouteNames.adminHomePageRouteName },
+      { label: 'CRUD', route: RouteNames.adminCrudPageRouteName },
+      { label: 'View as Advisor', route: RouteNames.advisorStudentConfigurationPageRouteName },
+      { label: 'View as Faculty', route: RouteNames.facultyHomePageRouteName },
       { label: 'View as Student', route: RouteNames.studentHomePageRouteName },
+      { label: 'View as Mentor', route: RouteNames.mentorHomePageRouteName },
     ];
   },
   secondMenuLength() {
-    return 'two';
+    return 'six';
   },
 });
 

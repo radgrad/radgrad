@@ -14,6 +14,9 @@ Template.Session_State_Segment.helpers({
   facultyID() {
     return SessionState.get(sessionKeys.CURRENT_FACULTY_ID);
   },
+  mentorID() {
+    return SessionState.get(sessionKeys.CURRENT_MENTOR_ID);
+  },
   studentID() {
     return SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
   },
@@ -51,6 +54,11 @@ Template.Session_State_Segment.onCreated(function sessionStateSegmentOnCreated()
   if (sessionStorage.CURRENT_STUDENT_ID && !SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
     // eslint-disable-next-line no-undef
     SessionState.set(sessionKeys.CURRENT_STUDENT_ID, sessionStorage.CURRENT_STUDENT_ID);
+  }
+  // eslint-disable-next-line no-undef
+  if (sessionStorage.CURRENT_MENTOR_ID && !SessionState.get(sessionKeys.CURRENT_MENTOR_ID)) {
+    // eslint-disable-next-line no-undef
+    SessionState.set(sessionKeys.CURRENT_MENTOR_ID, sessionStorage.CURRENT_MENTOR_ID);
   }
 });
 

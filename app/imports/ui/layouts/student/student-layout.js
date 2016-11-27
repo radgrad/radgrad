@@ -20,12 +20,16 @@ Template.Student_Layout.helpers({
   adminSecondMenuItems() {
     return [
       { label: 'Home', route: RouteNames.adminHomePageRouteName },
+      { label: 'CRUD', route: RouteNames.adminCrudPageRouteName },
+      { label: 'View as Advisor', route: RouteNames.advisorStudentConfigurationPageRouteName },
+      { label: 'View as Faculty', route: RouteNames.facultyHomePageRouteName },
+      { label: 'View as Student', route: RouteNames.studentHomePageRouteName },
+      { label: 'View as Mentor', route: RouteNames.mentorHomePageRouteName },
     ];
   },
   adminSecondMenuLength() {
-    return 'one';
+    return 'six';
   },
-
 });
 
 Template.Student_Layout.events({

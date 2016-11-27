@@ -9,7 +9,7 @@ Template.First_Menu.helpers({
       try {
         return Users.getFullName(Meteor.userId());
       } catch (e) {
-        console.log(e, Meteor.userId()); // eslint-disable-line no-console
+        // console.log(e, Meteor.userId()); // eslint-disable-line no-console
       }
     }
     return '';

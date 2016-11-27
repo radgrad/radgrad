@@ -15,6 +15,19 @@ Template.Faculty_Layout.helpers({
   secondMenuLength() {
     return 'one';
   },
+  adminSecondMenuItems() {
+    return [
+      { label: 'Home', route: RouteNames.adminHomePageRouteName },
+      { label: 'CRUD', route: RouteNames.adminCrudPageRouteName },
+      { label: 'View as Advisor', route: RouteNames.advisorStudentConfigurationPageRouteName },
+      { label: 'View as Faculty', route: RouteNames.facultyHomePageRouteName },
+      { label: 'View as Student', route: RouteNames.studentHomePageRouteName },
+      { label: 'View as Mentor', route: RouteNames.mentorHomePageRouteName },
+    ];
+  },
+  adminSecondMenuLength() {
+    return 'six';
+  },
 });
 
 Template.Faculty_Layout.events({
