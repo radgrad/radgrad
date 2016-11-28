@@ -1,0 +1,12 @@
+<template name="Fourth_Menu">
+  <div class="ui top fixed {{ menuLength }} item secondary pointing menu white-background" style="border-radius:0; margin-top:163px;">
+
+      {{#each menuItem in menuItems}}
+        <div class="{{#if isCurrentPage menuItem.route}} active {{/if}} item" style="border-bottom-width: medium;">
+          <a class="seaGreen-text" style="font-weight: 600 !important; text-transform: uppercase; font-size: 0.9rem" href="{{pathFor menuItem.route}}">{{ menuItem.label }}</a>
+        </div>
+      {{/each}}
+
+  </div>
+
+</template>

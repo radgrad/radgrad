@@ -1,7 +1,13 @@
 import { Template } from 'meteor/templating';
 
+import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
+import { Users } from '../../../api/user/UserCollection';
+
 Template.Admin_Home_Page.onCreated(function appBodyOnCreated() {
-  // placeholder: typically you will put global subscriptions here if you remove the autopublish package.
+  this.autorun(() => {
+    this.subscribe(AdminChoices.getPublicationName());
+    this.subscribe(Users.getPublicationName());
+  });
 });
 
 Template.Admin_Home_Page.helpers({
@@ -9,5 +15,5 @@ Template.Admin_Home_Page.helpers({
 });
 
 Template.Admin_Home_Page.events({
- // placeholder: if you add a form to this top-level layout, handle the associated events here.
+  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });

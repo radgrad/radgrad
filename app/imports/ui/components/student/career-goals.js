@@ -8,15 +8,15 @@ Template.Career_Goals.events({
   // add your events here
 });
 
-Template.Career_Goals.onCreated(function () {
+Template.Career_Goals.onCreated(function careerGoalsOnCreated() {
   // add your statement here
 });
 
-Template.Career_Goals.onRendered(function () {
+Template.Career_Goals.onRendered(function careerGoalsOnRendered() {
   // add your statement here
 });
 
-Template.Career_Goals.onDestroyed(function () {
+Template.Career_Goals.onDestroyed(function careerGoalsOnDestroyed() {
   // add your statement here
 });
 
