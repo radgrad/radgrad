@@ -51,7 +51,7 @@ Template.Admin_Crud_Page.onRendered(function adminCrudPageOnRendered() {
   // add your statement here
 });
 
-Template.Admin_Crud_Page.onDestroyed(function adminCrudPageOnDestroyed(){
+Template.Admin_Crud_Page.onDestroyed(function adminCrudPageOnDestroyed() {
   // add your statement here
 });
 

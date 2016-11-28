@@ -1,4 +1,5 @@
 import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
+import { AdminChoices } from '../../api/admin/AdminChoiceCollection';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
@@ -15,6 +16,7 @@ import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 
 AcademicYearInstances.publish();
+AdminChoices.publish();
 CareerGoals.publish();
 CourseInstances.publish();
 Courses.publish();
