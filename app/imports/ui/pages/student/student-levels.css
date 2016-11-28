@@ -2,15 +2,8 @@
   margin-top:10px;
 }
 
-.ui.bordered.image{
-  height:30px;
-  width: auto;
-  border-width: 3px;
-  border-color: green;
-}
-
-.ui.image {
-  height:30px;
+.ui.mini.circular.images img.ui.image {
+  height: 30px;
   width: auto;
 }
 
