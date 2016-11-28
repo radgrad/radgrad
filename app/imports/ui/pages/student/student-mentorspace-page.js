@@ -93,5 +93,4 @@ Template.Student_MentorSpace_Page.onRendered(function mentorSpaceOnRendered(){
   this.$('.ui.rating')
       .rating()
   ;
-
 });
