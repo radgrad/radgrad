@@ -27,10 +27,10 @@ Template.Advisor_Verification_Requests_Pending_Page.onCreated(function advisorVe
   });
 });
 
-Template.Advisor_Verification_Requests_Pending_Page.onRendered(function advisorVerificationRequestsPendingOnRendered() {
+Template.Advisor_Verification_Requests_Pending_Page.onRendered(function advisorVerificationRequestsPendOnRendered() {
 });
 
-Template.Advisor_Verification_Requests_Pending_Page.onDestroyed(function advisorVerificationRequestsPendingOnDestroyed() {
+Template.Advisor_Verification_Requests_Pending_Page.onDestroyed(function advisorVerificationRequestsPendOnDestroyed() {
   // add your statement here
 });
 

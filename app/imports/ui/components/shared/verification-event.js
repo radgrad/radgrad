@@ -29,9 +29,7 @@ Template.Verification_Event.events({
     const semesterSlug = Slugs.findDoc(semester.slugID).name;
     try {
       const studentID = Users.getID(student);
-      console.log(studentID); // eslint-disable-line no-console
       const studentDoc = Users.findDoc(studentID);
-      console.log(studentDoc); // eslint-disable-line no-console
       const opportunityInstances = OpportunityInstances.find({ opportunityID, studentID }).fetch();
       let opportunityInstance = null;
       if (opportunityInstances.length === 0) { // student didn't plan on attending in degree plan
@@ -51,7 +49,6 @@ Template.Verification_Event.events({
       const studentFullName = Users.getFullName(studentDoc._id);
       processRecord.feedback = `${studentFullName} attended ${opportunity.name}`;
       request.processed.push(processRecord);
-      console.log(request.processed);
       const status = VerificationRequests.ACCEPTED;
       const processed = request.processed;
       VerificationRequests.updateStatus(requestID, status, processed);

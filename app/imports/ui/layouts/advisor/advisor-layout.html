@@ -1,15 +1,25 @@
 <template name="Advisor_Layout">
 
-  {{> First_Menu role="Advisor"}}
-  <!--{{#if isInRole 'ADVISOR,ADMIN'}}-->
+  {{#if isInRole 'ADMIN'}}
+    {{> First_Menu role="Admin"}}
+    {{> Second_Menu menuItems=adminSecondMenuItems menuLength=adminSecondMenuLength}}
+    {{> Third_Menu role="Advisor"}}
+    {{> Fourth_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
+    <div class="adminViewer">
+      {{> Template.dynamic template=main}}
+    </div>
+  {{else}}
+    {{> First_Menu role="Advisor"}}
+      <!--{{#if isInRole 'ADVISOR,ADMIN'}}-->
     {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
     {{> Template.dynamic template=main}}
-  <!--{{else}}-->
+      <!--{{else}}-->
     <!--<div style="padding-top: 40px" class="ui text container">-->
-      <!--<p>You are not authorized to view this page.</p>-->
-      <!--<p>Please login as an advisor.</p>-->
+    <!--<p>You are not authorized to view this page.</p>-->
+    <!--<p>Please login as an advisor.</p>-->
     <!--</div>-->
-  <!--{{/if}}-->
+      <!--{{/if}}-->
+  {{/if}}
   {{> Footer}}
 
 

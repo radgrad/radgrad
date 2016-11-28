@@ -5,3 +5,7 @@
 .layout-page {
   padding-top: 80px;
 }
+
+div.adminViewer div.layout-page {
+  padding-top: 180px;
+}
