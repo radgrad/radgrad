@@ -1,0 +1,16 @@
+.ui.header .sub.header{
+  margin-top:10px;
+}
+
+.ui.bordered.image{
+  height:30px;
+  width: auto;
+  border-width: 3px;
+  border-color: green;
+}
+
+.ui.image {
+  height:30px;
+  width: auto;
+}
+

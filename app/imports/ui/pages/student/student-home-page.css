@@ -3,3 +3,32 @@
   margin-right: 0px;
   margin-bottom:3px;
 }
+
+.ui.cards .ui.card .content .header{
+  font-size:16px;
+}
+
+.ui.mini.compact.pagination.menu.bottom {
+  margin-top:10px;
+}
+
+.ui.mini.compact.pagination.menu.top {
+  margin-bottom:10px;
+}
+
+.ui.circular.mini.images{
+  margin-top:5px;
+}
+
+.ui.circular.mini.images img{
+  width: 20px;
+  height: auto;
+}
+
+.ui.cards .ui.card .content.bottom{
+  text-align: center;
+}
+
+.ui.feed{
+  padding-top:10px;
+}
