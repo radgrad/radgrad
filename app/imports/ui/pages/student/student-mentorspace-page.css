@@ -20,3 +20,7 @@
 .ui.accordion:not(.styled) .title~.content:not(.ui) {
     padding: 0 !important;
 }
+
+.ui.list{
+    margin-bottom: 0 !important;
+}
