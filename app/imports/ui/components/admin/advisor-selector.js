@@ -1,6 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
+import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
 import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { Users } from '../../../api/user/UserCollection';
 
@@ -41,8 +43,10 @@ Template.Advisor_Selector.events({
     const advisorDivs = event.target.parentElement.getElementsByTagName('a');
     const advisorID = advisorDivs[0].attributes[1].nodeValue;
     const user = Users.findDoc(advisorID);
+    const adminID = Meteor.userId();
+    const adminChoice = AdminChoices.find({ adminID }).fetch()[0];
     if (user) {
-      sessionStorage.CURRENT_ADVISOR_ID = user._id;  // eslint-disable-line no-undef
+      AdminChoices.updateAdvisorID(adminChoice._id, user._id);
       SessionState.set(sessionKeys.CURRENT_ADVISOR_ID, user._id);
     } else {
       // do error handling for bad student id.

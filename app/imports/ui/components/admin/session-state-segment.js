@@ -1,4 +1,7 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
+import { ROLE } from '../../../api/role/Role';
 import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 
 Template.Session_State_Segment.helpers({
@@ -30,35 +33,28 @@ Template.Session_State_Segment.events({
 });
 
 Template.Session_State_Segment.onCreated(function sessionStateSegmentOnCreated() {
-  // eslint-disable-next-line no-undef
-  if (sessionStorage.CURRENT_ROLE && !SessionState.get(sessionKeys.CURRENT_ROLE)) {
-    // eslint-disable-next-line no-undef
-    SessionState.set(sessionKeys.CURRENT_ROLE, sessionStorage.CURRENT_ROLE);
+  const adminID = Meteor.userId();
+  if (AdminChoices.find().count() === 0) {
+    AdminChoices.define({ adminID });
   }
-  // eslint-disable-next-line no-undef
-  if (sessionStorage.CURRENT_ADMIN_ID && !SessionState.get(sessionKeys.CURRENT_ADMIN_ID)) {
-    // eslint-disable-next-line no-undef
-    SessionState.set(sessionKeys.CURRENT_ADMIN_ID, sessionStorage.CURRENT_ADMIN_ID);
+  const adminChoice = AdminChoices.find({ adminID }).fetch()[0];
+  if (!SessionState.get(sessionKeys.CURRENT_ROLE)) {
+    SessionState.set(sessionKeys.CURRENT_ROLE, ROLE.ADMIN);
   }
-  // eslint-disable-next-line no-undef
-  if (sessionStorage.CURRENT_ADVISOR_ID && !SessionState.get(sessionKeys.CURRENT_ADVISOR_ID)) {
-    // eslint-disable-next-line no-undef
-    SessionState.set(sessionKeys.CURRENT_ADVISOR_ID, sessionStorage.CURRENT_ADVISOR_ID);
+  if (!SessionState.get(sessionKeys.CURRENT_ADMIN_ID)) {
+    SessionState.set(sessionKeys.CURRENT_ADMIN_ID, adminID);
   }
-  // eslint-disable-next-line no-undef
-  if (sessionStorage.CURRENT_FACULTY_ID && !SessionState.get(sessionKeys.CURRENT_FACULTY_ID)) {
-    // eslint-disable-next-line no-undef
-    SessionState.set(sessionKeys.CURRENT_FACULTY_ID, sessionStorage.CURRENT_FACULTY_ID);
+  if (!SessionState.get(sessionKeys.CURRENT_ADVISOR_ID)) {
+    SessionState.set(sessionKeys.CURRENT_ADVISOR_ID, adminChoice.advisorID);
   }
-  // eslint-disable-next-line no-undef
-  if (sessionStorage.CURRENT_STUDENT_ID && !SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-    // eslint-disable-next-line no-undef
-    SessionState.set(sessionKeys.CURRENT_STUDENT_ID, sessionStorage.CURRENT_STUDENT_ID);
+  if (!SessionState.get(sessionKeys.CURRENT_FACULTY_ID)) {
+    SessionState.set(sessionKeys.CURRENT_FACULTY_ID, adminChoice.facultyID);
   }
-  // eslint-disable-next-line no-undef
-  if (sessionStorage.CURRENT_MENTOR_ID && !SessionState.get(sessionKeys.CURRENT_MENTOR_ID)) {
-    // eslint-disable-next-line no-undef
-    SessionState.set(sessionKeys.CURRENT_MENTOR_ID, sessionStorage.CURRENT_MENTOR_ID);
+  if (!SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+    SessionState.set(sessionKeys.CURRENT_STUDENT_ID, adminChoice.studentID);
+  }
+  if (!SessionState.get(sessionKeys.CURRENT_MENTOR_ID)) {
+    SessionState.set(sessionKeys.CURRENT_MENTOR_ID, adminChoice.mentorID);
   }
 });
 

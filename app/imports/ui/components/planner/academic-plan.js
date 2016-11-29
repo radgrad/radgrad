@@ -710,7 +710,7 @@ Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {
     this.state.set('currentSemesterID', this.data.currentSemesterID);
     this.state.set('studentUsername', this.data.studentUserName);
   } else {
-    alert('problem no template data.');
+    // alert('problem no template data.');
   }
 });
 

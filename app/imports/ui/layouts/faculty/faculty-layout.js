@@ -1,9 +1,15 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
+import { advisorTitle, facultyTitle, studentTitle, mentorTitle } from '../../../api/admin/AdminUtilities';
+import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
+import { Users } from '../../../api/user/UserCollection';
 
 
 Template.Faculty_Layout.onCreated(function appBodyOnCreated() {
-  // placeholder: typically you will put global subscriptions here if you remove the autopublish package.
+  this.autorun(() => {
+    this.subscribe(AdminChoices.getPublicationName());
+    this.subscribe(Users.getPublicationName());
+  });
 });
 
 Template.Faculty_Layout.helpers({
@@ -19,10 +25,10 @@ Template.Faculty_Layout.helpers({
     return [
       { label: 'Home', route: RouteNames.adminHomePageRouteName },
       { label: 'CRUD', route: RouteNames.adminCrudPageRouteName },
-      { label: 'View as Advisor', route: RouteNames.advisorStudentConfigurationPageRouteName },
-      { label: 'View as Faculty', route: RouteNames.facultyHomePageRouteName },
-      { label: 'View as Student', route: RouteNames.studentHomePageRouteName },
-      { label: 'View as Mentor', route: RouteNames.mentorHomePageRouteName },
+      { label: advisorTitle(), route: RouteNames.advisorStudentConfigurationPageRouteName },
+      { label: facultyTitle(), route: RouteNames.facultyHomePageRouteName },
+      { label: studentTitle(), route: RouteNames.studentHomePageRouteName },
+      { label: mentorTitle(), route: RouteNames.mentorHomePageRouteName },
     ];
   },
   adminSecondMenuLength() {
