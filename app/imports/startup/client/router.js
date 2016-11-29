@@ -31,6 +31,13 @@ adminRoutes.route('/', {
   },
 });
 
+export const adminCrudPageRouteName = 'Admin_Crud_Page';
+adminRoutes.route('/crud', {
+  name: adminCrudPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: 'Admin_Crud_Page' });
+  },
+});
 
 /*                        ADVISOR ROUTES                       */
 
@@ -45,7 +52,7 @@ export const advisorStudentConfigurationPageRouteName = 'Advisor_Student_Configu
 advisorRoutes.route('/', {
   name: advisorStudentConfigurationPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Student_Configuration_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorStudentConfigurationPageRouteName });
   },
 });
 
@@ -53,7 +60,7 @@ export const advisorVerificationRequestsPendingPageRouteName = 'Advisor_Verifica
 advisorRoutes.route('/verification-requests', {
   name: advisorVerificationRequestsPendingPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Verification_Requests_Pending_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorVerificationRequestsPendingPageRouteName });
   },
 });
 
@@ -61,7 +68,7 @@ export const advisorEventVerificationPageRouteName = 'Advisor_Event_Verification
 advisorRoutes.route('/event-verification', {
   name: advisorEventVerificationPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Event_Verification_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorEventVerificationPageRouteName });
   },
 });
 
@@ -69,7 +76,7 @@ export const advisorCompletedVerificationsPageRouteName = 'Advisor_Completed_Ver
 advisorRoutes.route('/completed-verifications', {
   name: advisorCompletedVerificationsPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: 'Advisor_Completed_Verifications_Page' });
+    BlazeLayout.render('Advisor_Layout', { main: advisorCompletedVerificationsPageRouteName });
   },
 });
 
@@ -86,7 +93,7 @@ export const facultyHomePageRouteName = 'Faculty_Home_Page';
 facultyRoutes.route('/', {
   name: facultyHomePageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: 'Faculty_Home_Page' });
+    BlazeLayout.render('Faculty_Layout', { main: facultyHomePageRouteName });
   },
 });
 
@@ -156,6 +163,22 @@ studentRoutes.route('/ice', {
   name: studentHomePageIceRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_Ice' });
+  },
+});
+
+export const studentHomePageAboutIceRouteName = 'Student_About_Ice';
+studentRoutes.route('/about-ice', {
+  name: studentHomePageAboutIceRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_About_Ice' });
+  },
+});
+
+export const studentHomePageAboutLevelsRouteName = 'Student_About_Levels';
+studentRoutes.route('/about-levels', {
+  name: studentHomePageAboutLevelsRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Student_About_Levels' });
   },
 });
 

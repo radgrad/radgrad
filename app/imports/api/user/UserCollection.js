@@ -1,16 +1,18 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { isRole, assertRole } from '/imports/api/role/Role';
-import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+
+import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
+import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
+import { Interests } from '/imports/api/interest/InterestCollection';
+import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
+import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { isRole, assertRole } from '/imports/api/role/Role';
 import { getTotalICE } from '/imports/api/ice/IceProcessor';
+import { Slugs } from '/imports/api/slug/SlugCollection';
 
 /** @module User */
 
@@ -41,6 +43,8 @@ class UserCollection extends BaseInstanceCollection {
       picture: { type: String, optional: true },
       aboutMe: { type: String, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
+      level: { type: Number, optional: true },
+      stickers: { type: [Number], optional: true },
       // username, email, and password are managed in accounts package.
     }));
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
@@ -70,11 +74,17 @@ class UserCollection extends BaseInstanceCollection {
   define({ firstName, lastName, slug, email, role, password }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-
+    let userID;
     // Define the user in accounts package.
-    const userID = Accounts.createUser({ username: slug, email, password });
-    // Meteor.users === this._collection
-    Meteor.users.update(userID, { $set: { firstName, lastName, slugID } });
+    if (password) {
+      userID = Accounts.createUser({ username: slug, email, password });
+    } else {
+      const result = { id: slug };
+      const options = { profile: { name: slug } };
+      const casReturn = Accounts.updateOrCreateUserFromExternalService('cas', result, options);
+      userID = casReturn.userId;
+    }
+    Meteor.users.update(userID, { $set: { username: slug, firstName, lastName, slugID, email } });
 
     // Define the role if valid.
     if (!isRole(role)) {
@@ -86,6 +96,29 @@ class UserCollection extends BaseInstanceCollection {
     Slugs.updateEntityID(slugID, userID);
 
     return userID;
+  }
+
+  /**
+   * Returns the full name for the given userID.
+   * @param userID the id of the user.
+   * @returns {string} The user's full name.
+   * @throws {Meteor.Error} If userID is not a valid ID.
+   */
+  getFullName(userID) {
+    this.assertDefined(userID);
+    const user = this._collection.findOne({ _id: userID });
+    return `${user.firstName} ${user.lastName}`;
+  }
+
+  /**
+   * Returns the user's roles.
+   * @param userID the user's ID.
+   * @returns {number|roles|{$in}|update.$addToSet.roles|{$each}|Array|String|*}
+   */
+  getRoles(userID) {
+    this.assertDefined(userID);
+    const user = this._collection.findOne({ _id: userID });
+    return user.roles;
   }
 
   /**
@@ -117,8 +150,14 @@ class UserCollection extends BaseInstanceCollection {
    */
   assertInRole(userID, role) {
     this.assertDefined(userID);
-    assertRole(role);
-    if (!Roles.userIsInRole(userID, [role])) {
+    if (Array.isArray(role)) {
+      role.forEach((r) => {
+        assertRole(r);
+      });
+    } else {
+      assertRole(role);
+    }
+    if (!Roles.userIsInRole(userID, role)) {
       throw new Meteor.Error(`${userID} (${this.findDoc(userID).firstName}) is not in role ${role}.`);
     }
   }
@@ -146,6 +185,31 @@ class UserCollection extends BaseInstanceCollection {
       throw new Meteor.Error(`${uhID} is not a string.`);
     }
     this._collection.update(userID, { $set: { uhID } });
+  }
+
+  /**
+   * Returns the user doc associated with the given uhID.
+   * @param uhID the user's UH ID.
+   * @returns Object the user doc associated with the given uhID.
+   */
+  getUserFromUhId(uhID) {
+    const users = this._collection.find({ uhID }).fetch();
+    if (users.length > 0) {
+      return users[0];
+    }
+    return null;
+  }
+
+  /**
+   * Updates userID with an array of careerGoalIDs.
+   * @param userID The userID.
+   * @param careerGoalIDs A list of careerGoalIDs.
+   * @throws {Meteor.Error} If userID is not a userID, or if careerGoalIDs is not a list of careerGoalID.
+   */
+  setCareerGoalIds(userID, careerGoalIDs) {
+    this.assertDefined(userID);
+    CareerGoals.assertAllDefined(careerGoalIDs);
+    this._collection.update(userID, { $set: { careerGoalIDs } });
   }
 
   /**
@@ -212,6 +276,45 @@ class UserCollection extends BaseInstanceCollection {
     this.assertDefined(userID);
     Semesters.assertSemester(semesterID);
     this._collection.update(userID, { $set: { semesterID } });
+  }
+
+  /**
+   * Updates userID's level.
+   * @param userID The userID.
+   * @param level The new level.
+   */
+  setLevel(userID, level) {
+    this.assertDefined(userID);
+    if (!_.isNumber(level)) {
+      throw new Meteor.Error(`${level} is not a number.`);
+    } else if (level < 0 || level > 6) {
+      throw new Meteor.Error(`${level} is out of bounds.`);
+    }
+    this._collection.update(userID, { $set: { level } });
+  }
+
+  /**
+   * Updates userID with an array of level stickers.
+   * @param userID The userID.
+   * @param stickers A list of levels.
+   * @throws {Meteor.Error} If userID is not a userID, or if stickers is not a list of numbers.
+   */
+  setStickers(userID, stickers) {
+    this.assertDefined(userID);
+    let max = 0;
+    if (!_.isArray(stickers)) {
+      throw new Meteor.Error(`${stickers} is not an array.`);
+    } else {
+      stickers.forEach((s) => {
+        if (!_.isNumber(s)) {
+          throw new Meteor.Error(`${s} is not a number.`);
+        } else if (s > max) {
+          max = s;
+        }
+      });
+    }
+    this._collection.update(userID, { $set: { stickers } });
+    this.setLevel(userID, max);
   }
 
   /**

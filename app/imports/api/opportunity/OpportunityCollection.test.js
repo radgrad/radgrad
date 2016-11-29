@@ -3,11 +3,11 @@
 
 import { ROLE } from '/imports/api/role/Role';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
+import { defineSemesters } from '/imports/api/semester/SemesterUtilities';
 import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { makeSampleOpportunityType } from '/imports/api/opportunity/SampleOpportunities';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
 import { Meteor } from 'meteor/meteor';
-import { moment } from 'meteor/momentjs:moment';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 
@@ -22,6 +22,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
+      defineSemesters();
       const name = 'ATT Hackathon';
       const slug = 'att-hackathon-2016';
       const ice = { i: 10, c: 0, e: 10 };
@@ -29,10 +30,10 @@ if (Meteor.isServer) {
       const opportunityType = makeSampleOpportunityType();
       const sponsor = makeSampleUser(ROLE.FACULTY);
       const interests = [makeSampleInterest()];
-      const startActive = moment('2015-01-12').toDate();
-      const endActive = moment('2015-02-12').toDate();
-      const docID = Opportunities.define({ name, slug, description, opportunityType, sponsor, interests, startActive,
-        endActive, ice });
+      const semesters = ['Fall-2015'];
+      const docID = Opportunities.define({
+        name, slug, description, opportunityType, sponsor, interests, semesters, ice,
+      });
       expect(Opportunities.isDefined(docID)).to.be.true;
       Opportunities.removeIt(docID);
       expect(Opportunities.isDefined(docID)).to.be.false;

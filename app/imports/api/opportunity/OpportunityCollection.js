@@ -1,12 +1,12 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
+import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertICE } from '/imports/api/ice/IceProcessor';
-import { moment } from 'meteor/momentjs:moment';
 
 /** @module Opportunity */
 
@@ -29,8 +29,8 @@ class OpportunityCollection extends BaseInstanceCollection {
       sponsorID: { type: SimpleSchema.RegEx.Id },
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
       iconURL: { type: SimpleSchema.RegEx.Url, optional: true },
-      startActive: { type: Date },
-      endActive: { type: Date },
+      semesterIDs: { type: [SimpleSchema.RegEx.Id] },
+      eventDate: { type: Date, optional: true },
       independentStudy: { type: Boolean },
       // Optional data
       moreInformation: { type: String, optional: true },
@@ -48,8 +48,7 @@ class OpportunityCollection extends BaseInstanceCollection {
    *                       sponsor: 'philipjohnson',
    *                       ice: { i: 10, c: 0, e: 10},
    *                       interests: ['software-engineering'],
-   *                       startActive: moment('2015-01-12').toDate(),
-   *                       endActive: moment('2015-02-12').toDate(),
+   *                       semesters: ['Fall-2016', 'Spring-2016', 'Summer-2106'],
     *                      moreInformation: 'http://atthackathon.com',
      *                     independentStudy: true});
    * @param { Object } description Object with keys name, slug, description, opportunityType, sponsor, interests,
@@ -65,38 +64,51 @@ class OpportunityCollection extends BaseInstanceCollection {
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, opportunityType, sponsor, interests, startActive, endActive, moreInformation,
-  independentStudy = false, ice }) {
+  define({ name, slug, description, opportunityType, sponsor, interests, semesters, moreInformation,
+  independentStudy = false, ice, eventDate = null }) {
     // Get instances, or throw error
 
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);
     const sponsorID = Users.getID(sponsor);
-    Users.assertInRole(sponsorID, ROLE.FACULTY);
+    Users.assertInRole(sponsorID, [ROLE.FACULTY, ROLE.ADVISOR]);
     assertICE(ice);
     const interestIDs = Interests.getIDs(interests);
     // Define the slug
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-
-    // Validate startActive and endActive dates.
-    if (!(startActive instanceof Date)) {
-      const start = moment().subtract(1, 'month');  // TODO: Change these dates
-      startActive = start.toDate();
-    }
-    if (!(endActive instanceof Date)) {
-      const end = moment().add(2, 'month');  // TODO: Change these dates
-      endActive = end.toDate();
-    }
+    const semesterIDs = [];
+    semesters.forEach((semSlug) => {
+      semesterIDs.push(Semesters.findIdBySlug(semSlug));
+    });
     // Guarantee that independentStudy is a boolean.
     /* eslint no-param-reassign: "off" */
     independentStudy = !!independentStudy;
-    // TODO: ensure startActive is prior to endActive.
-    // Define the new Opportunity and its Slug.
-    const opportunityID = this._collection.insert({ name, slugID, description, opportunityTypeID, sponsorID,
-      interestIDs, startActive, endActive, moreInformation, independentStudy, ice });
+    let opportunityID;
+    if (eventDate !== null) {
+      // Define the new Opportunity and its Slug.
+      opportunityID = this._collection.insert({
+        name, slugID, description, opportunityTypeID, sponsorID,
+        interestIDs, semesterIDs, moreInformation, independentStudy, ice, eventDate });
+    } else {
+      opportunityID = this._collection.insert({
+        name, slugID, description, opportunityTypeID, sponsorID,
+        interestIDs, semesterIDs, moreInformation, independentStudy, ice });
+    }
     Slugs.updateEntityID(slugID, opportunityID);
 
     // Return the id to the newly created Opportunity.
     return opportunityID;
+  }
+
+  /**
+   * Returns the Opportunity associated with the Opportunity with the given instanceID.
+   * @param instanceID The id of the Opportunity.
+   * @returns {Object} The associated Opportunity.
+   * @throws {Meteor.Error} If instanceID is not a valid ID.
+   */
+  getOpportunityInstanceDoc(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.find({ _id: instanceID });
+    return OpportunityTypes.findDoc(instance.opportunityTypeID);
   }
 
   /**

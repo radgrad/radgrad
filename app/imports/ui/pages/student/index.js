@@ -6,6 +6,7 @@ import './student-explorer-page.js';
 
 import './student-home-page.html';
 import './student-home-page.js';
+import './student-home-page.css';
 
 import './student-mentorspace-page.css';
 import './student-mentorspace-page.html';
@@ -38,4 +39,10 @@ import './student-levels.js';
 import './student-ice.html';
 import './student-ice.js';
 import './student-ice.css';
+
+import './student-about-levels.html';
+import './student-about-levels.js';
+
+import './student-about-ice.html';
+import './student-about-ice.js';
 
