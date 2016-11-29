@@ -3,6 +3,7 @@
 
 import { ROLE } from '/imports/api/role/Role';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
+import { defineSemesters } from '/imports/api/semester/SemesterUtilities';
 import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { makeSampleOpportunityType } from '/imports/api/opportunity/SampleOpportunities';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
@@ -21,6 +22,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
+      defineSemesters();
       const name = 'ATT Hackathon';
       const slug = 'att-hackathon-2016';
       const ice = { i: 10, c: 0, e: 10 };

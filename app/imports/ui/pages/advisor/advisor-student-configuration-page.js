@@ -1,8 +1,8 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 
+import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -23,9 +23,9 @@ Template.Advisor_Student_Configuration_Page.events({
  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
 
-Template.Advisor_Student_Configuration_Page.onCreated(function aadvisorStudentConfirgurationPageOnCreated() {
+Template.Advisor_Student_Configuration_Page.onCreated(function advisorStudentConfirgurationPageOnCreated() {
   this.state = new ReactiveDict();
-  if (localStorage.getItem('uhId')) {  // eslint-disable-line no-undef
+  if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {  // eslint-disable-line no-undef
     this.state.set('uhId', localStorage.getItem('uhId'));  // eslint-disable-line no-undef
   }
   this.autorun(() => {

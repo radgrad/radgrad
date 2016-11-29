@@ -23,6 +23,7 @@
   * [New mentorspace question](use-cases.md#new-mentorspace-question)
   * [Mentorspace notifications](use-cases.md#mentorspace-notifications)
 
+
 ### Developer Guide
 
 * [Installation](developerguide/installation.md)
@@ -39,6 +40,9 @@
   * [meteor npm run start](developerguide/meteor-guidelines.md#meteor-npm-run-start)
   * [meteor npm run lint](developerguide/meteor-guidelines.md#meteor-npm-run-lint)
   * [meteor npm run test-watch](developerguide/meteor-guidelines.md#meteor-npm-run-test-watch)
+* [Mockup Design Evaluation](mockup-design-evaluation.md)
+  * [Advisor role evaluation](mockup-design-evaluation.md#advisor-role-evaluation)
+  * [Student role evaluation](mockup-design-evaluation.md#student-role-evaluation)
 
 ### Data Model
 

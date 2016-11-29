@@ -1,9 +1,19 @@
 <template name="Admin_Home_Page">
   <div class="layout-page">
-    <div class="ui text container">
+    {{#if Template.subscriptionsReady}}
+      <div class="ui text container">
 
-      <h2>Welcome to the Admin Home Page.</h2>
+        <h2>Welcome to the Admin Home Page.</h2>
 
-    </div>
+        {{> Session_State_Segment}}
+
+        <p>{{> Student_Selector}}</p>
+        <p>{{> Advisor_Selector}}</p>
+        <p>{{> Faculty_Selector}}</p>
+        {{> Mentor_Selector}}
+      </div>
+    {{else}}
+      {{> Loading}}
+    {{/if}}
   </div>
 </template>
