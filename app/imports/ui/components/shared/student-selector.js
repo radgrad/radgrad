@@ -103,7 +103,7 @@ Template.Student_Selector.events({
       };
       const studentID = Meteor.call('Users.define', userDefinition, (error) => {
         if (error) {
-          console.log(error);
+          // console.log(error);
         }
       });
       SessionState.set(sessionKeys.CURRENT_STUDENT_USERNAME, username);
