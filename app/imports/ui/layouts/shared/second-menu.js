@@ -1,5 +1,8 @@
+import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 Template.Second_Menu.helpers({
-  isCurrentPage: function(routeName) {
-    return FlowRouter.getRouteName() == routeName;
-  }
+  isCurrentPage: function currentPage(routeName) {
+    return FlowRouter.getRouteName() === routeName;
+  },
 });

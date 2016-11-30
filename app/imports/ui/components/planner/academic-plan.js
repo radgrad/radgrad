@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
@@ -13,6 +13,7 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
@@ -22,7 +23,7 @@ Template.Academic_Plan_2.helpers({
   courses() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const instances = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
       if (CourseInstances.isICS(courseInstance._id)) {
@@ -42,7 +43,7 @@ Template.Academic_Plan_2.helpers({
   courses100() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const instances = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
       if (CourseInstances.isICS(courseInstance._id)) {
@@ -65,7 +66,7 @@ Template.Academic_Plan_2.helpers({
   courses200() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const instances = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
       if (CourseInstances.isICS(courseInstance._id)) {
@@ -88,7 +89,7 @@ Template.Academic_Plan_2.helpers({
   courses300() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const instances = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
       if (CourseInstances.isICS(courseInstance._id)) {
@@ -111,7 +112,7 @@ Template.Academic_Plan_2.helpers({
   courses410() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const instances = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
       if (CourseInstances.isICS(courseInstance._id)) {
@@ -137,7 +138,7 @@ Template.Academic_Plan_2.helpers({
   courses440() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const instances = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
       if (CourseInstances.isICS(courseInstance._id)) {
@@ -163,7 +164,7 @@ Template.Academic_Plan_2.helpers({
   courses470() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const instances = CourseInstances.find({ studentID: Meteor.userId() }).fetch();
+    const instances = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
       if (CourseInstances.isICS(courseInstance._id)) {
@@ -271,21 +272,33 @@ Template.Academic_Plan_2.helpers({
     return Template.instance().state.get('detailCourseID');
   },
   hasMoreYears() {
-    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
+    const ays = AcademicYearInstances.find({
+      studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+    }, { sort: { year: 1 } }).fetch();
     return ays.length > 3;
   },
   hasNextYear() {
     const instance = Template.instance();
-    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays[ays.length - 1].year > instance.state.get('startYear');
+    const ays = AcademicYearInstances.find({
+      studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+    }, { sort: { year: 1 } }).fetch();
+    if (ays.length > 0) {
+      return ays[ays.length - 1].year > instance.state.get('startYear');
+    }
+    return false;
   },
   hasOpportunity() {
     return Template.instance().state.get('detailOpportunityID');
   },
   hasPrevYear() {
     const instance = Template.instance();
-    const ays = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
-    return ays[0].year < instance.state.get('startYear') - 3;
+    const ays = AcademicYearInstances.find({
+      studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+    }, { sort: { year: 1 } }).fetch();
+    if (ays.length > 0) {
+      return ays[0].year < instance.state.get('startYear') - 3;
+    }
+    return false;
   },
   hasRequest() {
     if (Template.instance().state.get('detailOpportunityID')) {
@@ -362,7 +375,7 @@ Template.Academic_Plan_2.helpers({
       try {
         const opportunity = OpportunityInstances.findDoc(id);
         const requests = VerificationRequests.find({ opportunityInstanceID: id,
-          studentID: Meteor.userId() }).fetch();
+          studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
         const oppSemester = Semesters.findDoc(opportunity.semesterID);
         return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
       } catch (e) {
@@ -540,9 +553,13 @@ Template.Academic_Plan_2.helpers({
     let cis = [];
     const semesterIDs = year.semesterIDs;
     semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({ studentID: Meteor.userId(), semesterID: sem }).fetch();
+      const ci = CourseInstances.find({
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID), semesterID: sem,
+      }).fetch();
       cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({ studentID: Meteor.userId(), semesterID: sem }).fetch();
+      const oi = OpportunityInstances.find({
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID), semesterID: sem,
+      }).fetch();
       cis = cis.concat(oi);
     });
     return getTotalICE(cis);
@@ -551,15 +568,21 @@ Template.Academic_Plan_2.helpers({
     let cis = [];
     const semesterIDs = year.semesterIDs;
     semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({ studentID: Meteor.userId(), semesterID: sem }).fetch();
+      const ci = CourseInstances.find({
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID), semesterID: sem,
+      }).fetch();
       cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({ studentID: Meteor.userId(), semesterID: sem }).fetch();
+      const oi = OpportunityInstances.find({
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID), semesterID: sem,
+      }).fetch();
       cis = cis.concat(oi);
     });
     return getPlanningICE(cis);
   },
   years() {
-    const ay = AcademicYearInstances.find({ studentID: Meteor.userId() }, { sort: { year: 1 } }).fetch();
+    const ay = AcademicYearInstances.find({
+      studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+    }, { sort: { year: 1 } }).fetch();
     const instance = Template.instance();
     if (ay.length > 0 && !instance.state.get('startYear')) {
       instance.state.set('startYear', ay[ay.length - 1].year);
@@ -578,7 +601,7 @@ Template.Academic_Plan_2.helpers({
 Template.Academic_Plan_2.events({
   'click #addAY': function clickAddAY(event) {
     event.preventDefault();
-    const student = Meteor.userId();
+    const student = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
     const ays = AcademicYearInstances.find({ studentID: student }, { sort: { year: 1 } }).fetch();
     let year = moment().year();
     if (ays.length > 0) {
@@ -608,7 +631,7 @@ Template.Academic_Plan_2.events({
     event.preventDefault();
     const id = event.target.id;
     const opportunityInstance = id;
-    const student = Users.findDoc(Meteor.userId()).username;
+    const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
     VerificationRequests.define({ student, opportunityInstance });
   },
   'click .course.item': function clickCourseItem(event) {
@@ -683,8 +706,12 @@ Template.Academic_Plan_2.events({
 
 Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {
   this.state = new ReactiveDict();
-  this.state.set('currentSemesterID', this.data.currentSemesterID);
-  this.state.set('studentUsername', this.data.studentUserName);
+  if (this.data) {
+    this.state.set('currentSemesterID', this.data.currentSemesterID);
+    this.state.set('studentUsername', this.data.studentUserName);
+  } else {
+    // alert('problem no template data.');
+  }
 });
 
 Template.Academic_Plan_2.onRendered(function academicPlan2OnRendered() {

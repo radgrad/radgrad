@@ -1,6 +1,10 @@
+import { Meteor } from 'meteor/meteor';
+import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
+import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
 import { Users } from '../../../api/user/UserCollection.js';
+import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 
 Template.Student_Selector.helpers({
   userFullName() {
@@ -32,13 +36,35 @@ Template.Student_Selector.events({
     if (uhId.indexOf('-') === -1) {
       uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
     }
-    localStorage.setItem('uhId', uhId);  // eslint-disable-line no-undef
-    instance.state.set('uhId', uhId);
+    const user = Users.getUserFromUhId(uhId);
+    if (user) {
+      const adminID = Meteor.userId();
+      if (AdminChoices.find({ adminID: Meteor.userId() }).count() === 1) {
+        const adminChoice = AdminChoices.find({ adminID }).fetch()[0];
+        AdminChoices.updateUHID(adminChoice._id, uhId);
+        AdminChoices.updateStudentID(adminChoice._id, user._id);
+      }
+      SessionState.set(sessionKeys.CURRENT_UH_ID, uhId);
+      instance.state.set('uhId', uhId);
+      SessionState.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
+    } else {
+      // do error handling for bad student id.
+    }
   },
 });
 
 Template.Student_Selector.onCreated(function studentSelectorOnCreated() {
-  this.state = this.data.dictionary;
+  if (this.data.dictionary) {
+    this.state = this.data.dictionary;
+  } else {
+    this.state = new ReactiveDict();
+    const adminID = Meteor.userId();
+    if (AdminChoices.find({ adminID }).count() === 1) {
+      const adminChoice = AdminChoices.find({ adminID }).fetch()[0];
+      this.state.set(sessionKeys.CURRENT_UH_ID, adminChoice.uhID);
+      this.state.set(sessionKeys.CURRENT_STUDENT_ID, adminChoice.studentID);
+    }
+  }
 });
 
 Template.Student_Selector.onRendered(function studentSelectorOnRendered() {

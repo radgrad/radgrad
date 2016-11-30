@@ -1,14 +1,23 @@
 {
-  "defaultAccount": {
-    "username": "John",
-    "password": "changeme"
+  "cas": {
+    "baseUrl": "https://cas-test.its.hawaii.edu/cas/",
+    "autoClose": true
+  },
+  "public": {
+    "cas": {
+      "loginUrl": "https://cas-test.its.hawaii.edu/cas/login",
+      "serviceParam": "service",
+      "popupWidth": 810,
+      "popupHeight": 610
+    }
   },
   "defaultAdminAccount": {
-    "firstName": "admin",
-    "lastName": "admin",
-    "email": "admin",
-    "slug": "admin",
-    "password": "changemeAdmin"
+    "firstName": "Admin",
+    "lastName": "RadGrad",
+    "email": "radgrad@hawaii.edu",
+    "slug": "radgrad",
+    "role": "ADMIN",
+    "uhID": "1111-1111"
   },
   "mockup": false,
   "exampleStudents": [

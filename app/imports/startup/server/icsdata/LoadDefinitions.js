@@ -11,6 +11,7 @@ import { courseDefinitions } from '/imports/startup/server/icsdata/CourseDefinit
 import { interestTypeDefinitions, interestDefinitions } from '/imports/startup/server/icsdata/InterestDefinitions';
 import { opportunityDefinitions, opportunityTypeDefinitions }
     from '/imports/startup/server/icsdata/OpportunityDefinitions';
+import { defineSemesters } from '/imports/api/semester/SemesterUtilities';
 import { userDefinitions } from '/imports/startup/server/icsdata/UserDefinitions';
 
 /** @module LoadDefinitions */
@@ -19,6 +20,7 @@ import { userDefinitions } from '/imports/startup/server/icsdata/UserDefinitions
  * Loads all of the entity definitions in /imports/startup/server/icsdata.
  */
 export function loadDefinitions() {
+  defineSemesters();
   interestTypeDefinitions.map((definition) => InterestTypes.define(definition));
   interestDefinitions.map((definition) => Interests.define(definition));
   userDefinitions.map((definition) => Users.define(definition));

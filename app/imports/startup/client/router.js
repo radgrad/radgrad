@@ -31,6 +31,13 @@ adminRoutes.route('/', {
   },
 });
 
+export const adminCrudPageRouteName = 'Admin_Crud_Page';
+adminRoutes.route('/crud', {
+  name: adminCrudPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: 'Admin_Crud_Page' });
+  },
+});
 
 /*                        ADVISOR ROUTES                       */
 
