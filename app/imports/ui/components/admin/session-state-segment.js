@@ -23,8 +23,8 @@ Template.Session_State_Segment.helpers({
   studentID() {
     return SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
   },
-  uhID() {
-    return SessionState.get(sessionKeys.CURRENT_UH_ID);
+  username() {
+    return SessionState.get(sessionKeys.CURRENT_STUDENT_USERNAME);
   },
 });
 
@@ -50,11 +50,14 @@ Template.Session_State_Segment.onCreated(function sessionStateSegmentOnCreated()
   if (!SessionState.get(sessionKeys.CURRENT_FACULTY_ID)) {
     SessionState.set(sessionKeys.CURRENT_FACULTY_ID, adminChoice.facultyID);
   }
+  if (!SessionState.get(sessionKeys.CURRENT_MENTOR_ID)) {
+    SessionState.set(sessionKeys.CURRENT_MENTOR_ID, adminChoice.mentorID);
+  }
   if (!SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
     SessionState.set(sessionKeys.CURRENT_STUDENT_ID, adminChoice.studentID);
   }
-  if (!SessionState.get(sessionKeys.CURRENT_MENTOR_ID)) {
-    SessionState.set(sessionKeys.CURRENT_MENTOR_ID, adminChoice.mentorID);
+  if (!SessionState.get(sessionKeys.CURRENT_STUDENT_USERNAME)) {
+    SessionState.set(sessionKeys.CURRENT_STUDENT_USERNAME, adminChoice.username);
   }
 });
 
