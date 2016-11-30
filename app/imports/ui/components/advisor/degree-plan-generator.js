@@ -1,35 +1,30 @@
 import { Template } from 'meteor/templating';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 
+import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Degree_Plan_Generator.helpers({
   userFullName() {
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       return Users.getFullName(user._id);
     }
     return 'Select a student';
   },
   desiredDegree() {
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       return user.desiredDegree;
     }
     return '';
   },
   interests() {
     const ret = [];
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       lodash.map(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
       });
@@ -38,10 +33,8 @@ Template.Degree_Plan_Generator.helpers({
   },
   careerGoals() {
     const ret = [];
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       lodash.map(user.careerGoalIDs, (id) => {
         ret.push(CareerGoals.findDoc(id));
       });
@@ -55,7 +48,7 @@ Template.Degree_Plan_Generator.events({
 });
 
 Template.Degree_Plan_Generator.onCreated(function degreePlanGeneratorOnCreated() {
-  this.state = this.data.dictionary;
+  updateSessionState(SessionState);
 });
 
 Template.Degree_Plan_Generator.onRendered(function degreePlanGeneratorOnRendered() {

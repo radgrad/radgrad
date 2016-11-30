@@ -1,3 +1,87 @@
+.ui.equal.width.grid.container.innovation .ui.header {
+  color: steelblue;
+}
+
+.ui.equal.width.grid.container.competency .ui.header {
+  color: green;
+}
+
+.ui.equal.width.grid.container.experience .ui.header {
+  color: goldenrod;
+}
+
+.ui.equal.width.grid.container.competency .row.competencyp p{
+  color: darkseagreen;
+}
+
+.ui.equal.width.grid.container.competency .row.competencyp .ui.list .item .content .header{
+  color: darkseagreen;
+}
+
+.ui.equal.width.grid.container.competency .row.competencyp .ui.list .item .content .description{
+  color: darkseagreen;
+}
+
+.ui.equal.width.grid.container.experience .row.experiencep p{
+  color: tan;
+}
+
+.ui.equal.width.grid.container.experience .row.experiencep .ui.list .item .content .header{
+  color: tan;
+}
+
+.ui.equal.width.grid.container.experience .row.experiencep .ui.list .item .content .description{
+  color: tan;
+}
+
+.innovationr p {
+  color:steelblue;
+}
+
+.innovationr .ui.list .item .content .header {
+  color:steelblue;
+}
+
+.innovationr .ui.list .item .content .description {
+  color:steelblue;
+}
+
+.competencyr p {
+  color:green;
+}
+
+.competencyr .ui.list .item .content .header {
+  color:green;
+}
+
+.competencyr .ui.list .item .content .description {
+  color:green;
+}
+
+.experiencer p {
+  color:goldenrod;
+}
+
+.experiencer .ui.list .item .content .header {
+  color:goldenrod;
+}
+
+.experiencer .ui.list .item .content .description {
+  color:goldenrod;
+}
+
+.innovation{
+  color:steelblue;
+}
+
+.competency{
+  color:green;
+}
+
+.experience{
+  color:goldenrod;
+}
+
 .rect-auto,
 .c100.p51 .slice,
 .c100.p52 .slice,
@@ -1092,3 +1176,5 @@
 .c100.orange > span {
   color: #dd9d22 !important;
 }
+
+

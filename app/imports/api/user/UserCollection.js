@@ -201,6 +201,19 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Returns the user doc associated with the given username.
+   * @param username the username.
+   * @returns Object the user doc associated with the given username.
+   */
+  getUserFromUsername(username) {
+    const users = this._collection.find({ username }).fetch();
+    if (users.length > 0) {
+      return users[0];
+    }
+    return null;
+  }
+
+  /**
    * Updates userID with an array of careerGoalIDs.
    * @param userID The userID.
    * @param careerGoalIDs A list of careerGoalIDs.

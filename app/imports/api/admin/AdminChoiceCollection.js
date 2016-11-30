@@ -17,7 +17,7 @@ class AdminChoiceCollection extends BaseCollection {
       adminID: { type: SimpleSchema.RegEx.Id },
       advisorID: { type: SimpleSchema.RegEx.Id, optional: true },
       studentID: { type: SimpleSchema.RegEx.Id, optional: true },
-      uhID: { type: String, optional: true },
+      username: { type: String, optional: true },
       facultyID: { type: SimpleSchema.RegEx.Id, optional: true },
       mentorID: { type: SimpleSchema.RegEx.Id, optional: true },
     }));
@@ -148,11 +148,11 @@ class AdminChoiceCollection extends BaseCollection {
   /**
    * Updates the students UH ID.
    * @param instanceID the instance ID.
-   * @param uhID the student's UH ID.
+   * @param username the student's username.
    */
-  updateUHID(instanceID, uhID) {
+  updateUsername(instanceID, username) {
     this.assertDefined(instanceID);
-    this._collection.update({ _id: instanceID }, { $set: { uhID } });
+    this._collection.update({ _id: instanceID }, { $set: { username } });
   }
 }
 
