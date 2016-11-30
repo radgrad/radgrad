@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 
+import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
@@ -12,46 +13,36 @@ Template.Student_Profile.helpers({
     return CareerGoals.find().fetch();
   },
   careerGoalSelected(goal) {
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       return lodash.indexOf(user.careerGoalIDs, goal._id) !== -1;
     }
     return false;
   },
   desireBA() {
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       return user.desiredDegree === 'B.A. ICS';
     }
     return false;
   },
   desireBS() {
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       return user.desiredDegree === 'B.S. CS';
     }
     return false;
   },
   desiredDegree() {
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       return user.desiredDegree;
     }
     return 'Select Degree';
   },
   inRole(role) {
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       return Roles.userIsInRole(user._id, role.key);
     }
     return false;
@@ -60,10 +51,8 @@ Template.Student_Profile.helpers({
     return Interests.find().fetch();
   },
   interestSelected(interest) {
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const user = Users.getUserFromUhId(uhID);
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       return lodash.indexOf(user.interestIDs, interest._id) !== -1;
     }
     return false;
@@ -82,30 +71,24 @@ Template.Student_Profile.helpers({
     return ret;
   },
   userRole() {
-    const state = Template.instance().state;
-    if (state && state.get('uhId')) {
-      const uhID = state.get('uhId');
-      const users = Users.find({ uhID }).fetch();
-      if (users.length > 0) {
-        return lodash.capitalize(Users.getRoles(users[0]._id)[0]);
-      }
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+      return lodash.capitalize(Users.getRoles(user._id)[0]);
     }
     return 'Select Role';
   },
 });
 
 Template.Student_Profile.events({
-  'click .jsDegree': function clickJsInterests(event, instance) {
+  'click .jsDegree': function clickJsInterests(event) {
     event.preventDefault();
-    const uhId = instance.state.get('uhId');
-    const student = Users.getUserFromUhId(uhId);
+    const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
     const choice = event.target.parentElement.getElementsByTagName('input')[0].value;
     Users.setDesiredDegree(student._id, choice);
   },
-  'click .jsInterests': function clickJsInterests(event, instance) {
+  'click .jsInterests': function clickJsInterests(event) {
     event.preventDefault();
-    const uhId = instance.state.get('uhId');
-    const student = Users.getUserFromUhId(uhId);
+    const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
     const interestIDs = [];
     const interestDivs = event.target.parentElement.getElementsByTagName('a');
     lodash.map(interestDivs, (div) => {
@@ -117,10 +100,9 @@ Template.Student_Profile.events({
       // don't do anything.
     }
   },
-  'click .jsCareers': function clickJsCareers(event, instance) {
+  'click .jsCareers': function clickJsCareers(event) {
     event.preventDefault();
-    const uhId = instance.state.get('uhId');
-    const student = Users.getUserFromUhId(uhId);
+    const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
     const careerIDs = [];
     const interestDivs = event.target.parentElement.getElementsByTagName('a');
     lodash.map(interestDivs, (div) => {
@@ -135,7 +117,7 @@ Template.Student_Profile.events({
 });
 
 Template.Student_Profile.onCreated(function studentProfileOnCreated() {
-  this.state = this.data.dictionary;
+  updateSessionState(SessionState);
 });
 
 Template.Student_Profile.onRendered(function studentProfileOnRendered() {
