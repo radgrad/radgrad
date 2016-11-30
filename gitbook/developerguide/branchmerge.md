@@ -22,3 +22,5 @@ This sequence of merges continues through the list of developers: Amy, Cam, Phil
 Once Josephine has completed her merge, the master branch now contains the latest version of the system.
 
 At that point, everyone (except Josephine) can do a final merge from master into their development branch to make sure they continue work off the lastest version of the system. 
+
+Please do not "hold" the baton for more than a half a day.  It's fine if you're not ready to commit your changes; just pass the baton to the next person and wait until the next go round.
