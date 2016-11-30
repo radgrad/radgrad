@@ -2,7 +2,7 @@
 
 In RadGrad, most development occurs in branches off the master branch.  We have evolved the following process to synchronize our personal branches with each others and bring the master branch up to date.  It's called, for lack of a better name, the "Master Branch Baton Pass" process, and it goes like this:
 
-The developers arrange themselves in alphabetical order by first name:  Aljon, Amy, Cam, Philip, Josephine. 
+The developers arrange themselves in alphabetical order by first name:  Aljon, Amy, Cam, Josephine, Philip. 
 
 Someone (usually Philip) sends a message to the #development channel initiating a Master Branch Baton Pass.  
 
