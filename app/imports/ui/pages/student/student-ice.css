@@ -70,6 +70,10 @@
 
 /**Recommended ICE**/
 
+.innovationr .ui.header {
+  color:steelblue;
+}
+
 .innovationr .ui.list .item .content .header {
   color:steelblue;
 }
@@ -78,12 +82,20 @@
   color:steelblue;
 }
 
+.competencyr .ui.header {
+  color:green;
+}
+
 .competencyr .ui.list .item .content .header {
   color:green;
 }
 
 .competencyr .ui.list .item .content .description b{
   color:green;
+}
+
+.experiencer .ui.header {
+  color:goldenrod;
 }
 
 .experiencer .ui.list .item .content .header {
