@@ -74,11 +74,17 @@ class UserCollection extends BaseInstanceCollection {
   define({ firstName, lastName, slug, email, role, password }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-
+    let userID;
     // Define the user in accounts package.
-    const userID = Accounts.createUser({ username: slug, email, password });
-    // Meteor.users === this._collection
-    Meteor.users.update(userID, { $set: { firstName, lastName, slugID } });
+    if (password) {
+      userID = Accounts.createUser({ username: slug, email, password });
+    } else {
+      const result = { id: slug };
+      const options = { profile: { name: slug } };
+      const casReturn = Accounts.updateOrCreateUserFromExternalService('cas', result, options);
+      userID = casReturn.userId;
+    }
+    Meteor.users.update(userID, { $set: { username: slug, firstName, lastName, slugID, email } });
 
     // Define the role if valid.
     if (!isRole(role)) {
@@ -195,6 +201,19 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Returns the user doc associated with the given username.
+   * @param username the username.
+   * @returns Object the user doc associated with the given username.
+   */
+  getUserFromUsername(username) {
+    const users = this._collection.find({ username }).fetch();
+    if (users.length > 0) {
+      return users[0];
+    }
+    return null;
+  }
+
+  /**
    * Updates userID with an array of careerGoalIDs.
    * @param userID The userID.
    * @param careerGoalIDs A list of careerGoalIDs.
@@ -302,10 +321,8 @@ class UserCollection extends BaseInstanceCollection {
       stickers.forEach((s) => {
         if (!_.isNumber(s)) {
           throw new Meteor.Error(`${s} is not a number.`);
-        } else {
-          if (s > max) {
-            max = s;
-          }
+        } else if (s > max) {
+          max = s;
         }
       });
     }

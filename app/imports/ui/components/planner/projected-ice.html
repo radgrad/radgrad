@@ -1,0 +1,69 @@
+<template name="Projected_ICE">
+  <div class="ui container segment">
+    <div class="ui top left attached green label">Projected ICE</div>
+    <div class="ui equal width grid">
+      <div class="column"></div>
+      <div class="column">
+        <h3 class="ui blue header">Innovation</h3>
+        <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.i}} center lightblue small">
+          <span>{{earnedICE.i}}/{{projectedICE.i}}</span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+        <div
+            style="position: relative; background-color:transparent; top: -80px; margin-left:auto; margin-right:auto"
+            class="c100 p{{earnedICE.i}} center blue small">
+          <span></span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column"></div>
+
+      <div class="centered column">
+        <h3 class="ui green header">Competency</h3>
+        <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.c}} center lightgreen small">
+          <span>{{earnedICE.c}}/{{projectedICE.c}}</span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+        <div
+            style="background-color:transparent; top: -80px;"
+            class="c100 p{{earnedICE.c}} center green small">
+          <span></span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column"></div>
+      <div class="centered column">
+        <h3 class="ui orange header">Experience</h3>
+        <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.e}} center lightorange small">
+          <span>{{earnedICE.e}}/{{projectedICE.e}}</span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+        <div
+            style="position: relative; background-color:transparent; top: -80px; margin-left:auto; margin-right:auto"
+            class="c100 p{{earnedICE.e}} center orange small">
+          <span></span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column"></div>
+    </div>
+  </div>
+</template>

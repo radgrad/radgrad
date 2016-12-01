@@ -1,172 +1,323 @@
 <template name="Student_MentorSpace_Page">
   <div class="layout-page">
-    <div class="ui grid container">
+    <div class="ui grid container computer only">
+
+      <div class="five wide column">
+
+        <div class="ui segment">
+          <div class="ui dividing header">
+            <h4>Ask a New Question</h4>
+          </div>
+          <div class="ui form">
+            <div class="field">
+              <textarea rows="2" style="height: 75px;"></textarea>
+            </div>
+            <button class="fluid ui button" type="submit">Submit</button>
+          </div>
+        </div>
 
 
-      <div id="mentorspace-main-block" class="five wide column">
+        <div class="ui segment">
+          <div class="ui dividing header">
+            <h4>Mentor Directory</h4>
+          </div>
 
+          {{#each listMentors}}
 
-        <div class="ui card">
-          <div class="ui top big attached label">Mentor Directory</div>
-          <div class="content" style="padding: 0">
+            <div class="item mentorspace-item-padding">
+              <div class="ui vertical accordion">
 
-            <div id="mentorspace-main-inside-block">
-
-              <div id="mentorspace-mentor-list" class="ui celled list">
-
-                <div class="item mentorspace-item-padding">
-                  <div class="ui vertical accordion">
-
-                    <div class="active title">
-                      <i class="dropdown icon"></i>
-                      <img class="ui circular bordered avatar image" src="../images/mentors/brewer.jpg">
-                      Robert Brewer<br>
-                      Software Engineer, Tableau
-                    </div>
-
-                    <div class="active content">
-                      <p>Palo Alto, CA<br>
-                        Email: rbrewer@excitedcuriosity.org<br>
-                        LinkedIn: robertsbrewer<br>
-                        Why I mentor: I founded a startup in Hawaii and now work in Silicon Valley.
-                        I am happy to share my experiences with new grads.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="item mentorspace-item-padding">
-                  <div class="ui accordion">
-                    <div class="active title">
-                      <i class="dropdown icon"></i>
-                      <img class="ui circular bordered avatar image" src="../images/mentors/geis.jpg">
-                      Jennifer Geis<br>
-                      IT Specialist, UH
-                    </div>
-
-                    <div class="active content">
-                      <p>Honolulu, HI<br>
-                        Email: jgeis@hawaii.edu<br>
-                        LinkedIn: jgeis<br>
-                        Why I mentor: I received both a B.S. and M.S. in Computer Science from UH. I've worked in the
-                        private
-                        sector and done the start-up thing and now work at UH Information and Technology Services.
-                        Being from
-                        Hawaii my goal was to orient my career so I could stay here and I've learned some lessons
-                        along the way.
-                        My experiences could prove useful to you if: (a) you want to talk about getting the most out
-                        of your UH
-                        ICS experience, or (b) you are interested in one day working for UH, or (c) staying in Hawaii
-                        is one of
-                        your goals.</p>
+                <div class="ui active selection list title">
+                  <div class="item">
+                    <i class="dropdown icon"></i>
+                    <img class="ui circular avatar image" src="../images/mentors/{{image}}">
+                    <div class="content">
+                      <a class="header">{{name}}</a>
+                      <div class="description mentorspace-title-size">{{title}}</div>
                     </div>
                   </div>
                 </div>
 
-                <div class="item mentorspace-item-padding">
-                  <div class="ui accordion">
-                    <div class="active title">
-                      <i class="dropdown icon"></i>
-                      <img class="ui circular bordered avatar image" src="../images/mentors/ito.png">
-                      Austen Ito<br>
-                      Software Engineer, Bonobos<br>
-                    </div>
+                <div class="active content">
+                  <div class="ui divider"></div>
+                  {{name}} is based in {{location}}<br>
+                  <i class="mail outline icon"></i>: <a href="mailto:{{email}}">{{email}}</a><br>
+                  <i class="linkedin icon"></i>: <a href="https://www.linkedin.com/in/{{linkedin}}">{{linkedin}}</a><br>
+                  <h6 class="ui horizontal divider header">
+                    Why I Mentor
+                  </h6>
+                  <div class="description mentorspace-description">{{mentor_reason}}</div>
 
-                    <div class="active content">
-                      <p>New York City, NY
-                        Email: austen.ito@gmail.com<br>
-                        LinkedIn: austen-ito-9a561a9<br>
-                        Why I mentor: I graduated from ICS, helped start the first Honolulu Makerspace, have worked
-                        for Code Camps,
-                        and have held software jobs in DC, NYC, and HI. I can try to help you whether you intend to
-                        stay local or
-                        move to the mainland.</p>
-                    </div>
-                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ui divider"></div>
+
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="eleven wide column">
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What do you
+              look for when hiring a new graduate?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There are 2 answers!
+                </div>
+              </div>
+
+              <div class="active content">
+                <div class="ui divider"></div>
+
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/brewer.jpg"> Robert Brewer answered: Candidates interviewing at Tableau are expected to have broad experience in CS and software engineering. Expect to answer questions on topics like object-oriented design, algorithms, databases, and more by writing code on a whiteboard with no computer in sight. Strong technical skills must be balanced by evidence that you can work well on a team and communicate well with your peers.
                 </div>
 
-                <div class="item mentorspace-item-padding">
-                  <div class="ui accordion">
-                    <div class="active title">
-                      <i class="dropdown icon"></i>
-                      <img class="ui circular bordered avatar image" src="../images/mentors/kagawa.jpg">
-                      Aaron Kagawa<br>
-                      Software Engineer, LiveAction<br>
-                    </div>
+                <div class="ui divider"></div>
 
-                    <div class="active content">
-                      <p>Honolulu, HI
-                        Email: akagawa@liveaction.com<br>
-                        LinkedIn: aaronkagawa<br>
-                        Why I mentor: As an ICS undergrad and graduate student, I know how important mentoring can be
-                        to your
-                        career, and I hope I can help future ICS grads get off to a great start.</p>
-                    </div>
-                  </div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/karjala.jpg"> Patrick Karjala answered: Grades and classes count; especially classes geared toward the position you're reaching for. It is important in the Computer Science field to be able to work collaboratively. Students who have group projects on their GitHub account show me that they are ready for a team development environment. In addition, extracurricular work and internships will make your application stand out among others. Those who have already done programming in a professional internship will be a step ahead!
                 </div>
 
-                <div class="item mentorspace-item-padding">
-                  <div class="ui accordion">
-                    <div class="active title">
-                      <i class="dropdown icon"></i>
-                      <img class="ui circular bordered avatar image" src="../images/mentors/karjala.jpg">
-                      Patrick Karjala<br>
-                      CEO, Slickage Studios<br>
-                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                    <div class="active content">
-                      <p>Email: pkarjala@hawaii.edu<br>
-                        LinkedIn: patrickakarjala<br>
-                        Why I mentor: I completed my undergraduate CS degree in 2004, and am now enrolled in the UH
-                        ICS MS program.
-                        I currently work for the Distance Course Design and Consulting group at UH Manoa, doing full
-                        stack web
-                        application development. I am glad to answer questions regarding any topic of computer
-                        science, especially
-                        those geared toward collaborative development and networking (both computer and
-                        interpersonal).</p>
-                    </div>
-                  </div>
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What mistakes do CS students make during interviews?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There is 1 answer!
+                </div>
+              </div>
+
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/nagashima.jpg"> Yuka Nagashima answered: What I see most often is a lack of preparation. Before the interview, take some time to learn about the organization from their webpage. When students don't have a clue about my organization, it reflects very negatively on them. Also, learn to listen well. Really understand what the interviewer is saying and asking, then respond accordingly rather than reciting a canned answer you prepared. Try using similar phrasing and terms they use to show them that you are in tune with there they are coming from.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What aspects of your undergraduate degree experience has proven most useful to you?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There is 1 answer!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/geis.jpg"> Jennifer Geis answered: After the obvious part of learning how to program, it's the relationships I formed with instructors and other students that have stood out as having lasting effects on my life and career. Hawaii is a small place where who you know can mean a lot. Almost every employment or contract opportunity I've had has been a result of one of the many relationships I made while getting my degrees.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What do CS students need to know about tech careers in your region?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <p>This question hasn't been answered yet!</p>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              I'm interested in a career in data science. What should I be doing as an undergrad to prepare?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There are 2 answers!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/brewer.jpg"> Robert Brewer answered: Understanding the incredible amount of data that humankind is constantly producing is one of the fundamental challenges facing society. The best way to learn is to pick a topic that interests you, find a public source of data in that area, and start actually looking at the data. What patterns can you see? Start asking questions, and figure out how to answer them from the data. Quick plug: Tableau is great for exploring data graphically, and answering questions about data. It's free for students (http://www.tableau.com/academic/students), and Tableau Public (https://public.tableau.com/s/) is a great place to find interesting public data sets and visual analytics based on the data.
                 </div>
 
-                <div class="item mentorspace-item-padding">
-                  <div class="ui accordion">
-                    <div class="active title">
-                      <i class="dropdown icon"></i>
-                      <img class="ui circular bordered avatar image" src="../images/mentors/lee.jpg">
-                      George Lee<br>
-                      Developer, Hobnob Invites<br>
-                    </div>
+                <div class="ui divider"></div>
 
-                    <div class="active content">
-                      <p>Honolulu, HI
-                        Email: gelee@hawaii.edu<br>
-                        LinkedIn: keokilee<br>
-                        Why I mentor: I founded a startup in Hawaii and now work in Silicon Valley.
-                        I am happy to share my experiences with new grads.</p>
-                    </div>
-                  </div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/leuck.jpg"> Dan Leuckanswered: The most obvious thing to do is to actually take data science courses: machine learning, databases, etc. Augment your ICS classes with one of the Coursera or Udacity online courses. But beyond that, it's important to learn about one domain in detail so you can apply the algorithms and tweak them to make sure their answers are relevent to the domain. You can't just crunch the numbers without some insight into where they are coming from.
                 </div>
 
-                <div class="item mentorspace-item-padding">
-                  <div class="ui accordion">
-                    <div class="active title">
-                      <i class="dropdown icon"></i>
-                      <img class="ui circular bordered avatar image" src="../images/mentors/leuck.jpg">
-                      Daniel Leuck<br>
-                      CEO, Ikayzo<br>
-                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                    <div class="active content">
-                      <p>Email: dan@ikayzo<br>
-                        LinkedIn: dleuck<br>
-                        Why I mentor: The UH ICS Department is an engine for the high tech industry in Hawaii. The
-                        better prepared
-                        we can make ICS graduates, the more success our industry will have and the more opportunities
-                        there will be
-                        for all.</p>
-                    </div>
-                  </div>
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What aspects of your undergraduate degree experience has proven most useful to you?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
 
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There is 1 answer!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/geis.jpg"> Jennifer Geis answered: After the obvious part of learning how to program, it's the relationships I formed with instructors and other students that have stood out as having lasting effects on my life and career. Hawaii is a small place where who you know can mean a lot. Almost every employment or contract opportunity I've had has been a result of one of the many relationships I made while getting my degrees.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What do CS students need to know about tech careers in your region?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <p>This question hasn't been answered yet!</p>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              I'm interested in a career in data science. What should I be doing as an undergrad to prepare?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There are 2 answers!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/brewer.jpg"> Robert Brewer answered: Understanding the incredible amount of data that humankind is constantly producing is one of the fundamental challenges facing society. The best way to learn is to pick a topic that interests you, find a public source of data in that area, and start actually looking at the data. What patterns can you see? Start asking questions, and figure out how to answer them from the data. Quick plug: Tableau is great for exploring data graphically, and answering questions about data. It's free for students (http://www.tableau.com/academic/students), and Tableau Public (https://public.tableau.com/s/) is a great place to find interesting public data sets and visual analytics based on the data.
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/leuck.jpg"> Dan Leuckanswered: The most obvious thing to do is to actually take data science courses: machine learning, databases, etc. Augment your ICS classes with one of the Coursera or Udacity online courses. But beyond that, it's important to learn about one domain in detail so you can apply the algorithms and tweak them to make sure their answers are relevent to the domain. You can't just crunch the numbers without some insight into where they are coming from.
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What aspects of your undergraduate degree experience has proven most useful to you?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There is 1 answer!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/geis.jpg"> Jennifer Geis answered: After the obvious part of learning how to program, it's the relationships I formed with instructors and other students that have stood out as having lasting effects on my life and career. Hawaii is a small place where who you know can mean a lot. Almost every employment or contract opportunity I've had has been a result of one of the many relationships I made while getting my degrees.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What do CS students need to know about tech careers in your region?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <p>This question hasn't been answered yet!</p>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              I'm interested in a career in data science. What should I be doing as an undergrad to prepare?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There are 2 answers!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/brewer.jpg"> Robert Brewer answered: Understanding the incredible amount of data that humankind is constantly producing is one of the fundamental challenges facing society. The best way to learn is to pick a topic that interests you, find a public source of data in that area, and start actually looking at the data. What patterns can you see? Start asking questions, and figure out how to answer them from the data. Quick plug: Tableau is great for exploring data graphically, and answering questions about data. It's free for students (http://www.tableau.com/academic/students), and Tableau Public (https://public.tableau.com/s/) is a great place to find interesting public data sets and visual analytics based on the data.
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/leuck.jpg"> Dan Leuckanswered: The most obvious thing to do is to actually take data science courses: machine learning, databases, etc. Augment your ICS classes with one of the Coursera or Udacity online courses. But beyond that, it's important to learn about one domain in detail so you can apply the algorithms and tweak them to make sure their answers are relevent to the domain. You can't just crunch the numbers without some insight into where they are coming from.
                 </div>
 
               </div>
@@ -175,74 +326,334 @@
         </div>
 
       </div>
+    </div>
 
+    <div class="ui grid container mobile tablet only">
 
-      <div class="eleven wide column" style="padding-right: 30px">
+      <div class="five wide column">
 
-        <div style="padding-top: 0">
+        <div class="ui segment">
+          <div class="ui dividing header">
+            <h4>Mentor Directory</h4>
+          </div>
 
-          <div style="text-align: center; padding: 0">
-            <a href="" style="color:#479A7A; font-size: 3.8vw">Submit a New Question <i class="write icon"></i></a>
-          </div>
-        </div>
+          {{#each listMentors}}
 
-        <div id="mentorspace-question-inside-block">
-          <div class="ui segments">
-            <div class="ui segment">
-              <div class="author">
- What do you
-                look for when hiring a new graduate?
+            <div class="item mentorspace-item-padding">
+              <div class="ui vertical accordion">
+
+                <div class="ui active selection list title">
+                  <div class="item">
+                    <i class="dropdown icon"></i>
+                    <img class="ui circular avatar image" src="../images/mentors/{{image}}">
+                    <div class="content">
+                      <a class="header">{{name}}</a>
+                      <div class="description mentorspace-title-size">{{title}}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="active content">
+                  <div class="ui divider"></div>
+                  {{name}} is based in {{location}}<br>
+                  <i class="mail outline icon"></i>: <a href="mailto:{{email}}">{{email}}</a><br>
+                  <i class="linkedin icon"></i>: <a href="https://www.linkedin.com/in/{{linkedin}}">{{linkedin}}</a><br>
+                  <h6 class="ui horizontal divider header">
+                    Why I Mentor
+                  </h6>
+                  <div class="description mentorspace-description">{{mentor_reason}}</div>
+
+                </div>
               </div>
             </div>
-            <div class="ui secondary segment">
-              <div class="author">
-                <img class="ui avatar image" src="../images/mentors/brewer.jpg"> Robert Brewer answered: Candidates interviewing at Tableau are expected to have broad experience in CS and software engineering. Expect to answer questions on topics like object-oriented design, algorithms, databases, and more by writing code on a whiteboard with no computer in sight. Strong technical skills must be balanced by evidence that you can work well on a team and communicate well with your peers.
-              </div>
-            </div>
-            <div class="ui secondary segment">
-              <div class="author">
-                <img class="ui avatar image" src="../images/mentors/karjala.jpg"> Patrick Karjala answered: Grades and classes count; especially classes geared toward the position you're reaching for. It is important in the Computer Science field to be able to work collaboratively. Students who have group projects on their GitHub account show me that they are ready for a team development environment. In addition, extracurricular work and internships will make your application stand out among others. Those who have already done programming in a professional internship will be a step ahead!
-              </div>
-            </div>
-          </div>
-          <div class="ui segments">
-            <div class="ui segment">
-              <div class="author">
- What mistakes do CS students make during interviews?
-              </div>
-            </div>
-            <div class="ui secondary segment">
-              <div class="author">
-                <img class="ui avatar image" src="../images/mentors/nagashima.jpg"> Yuka Nagashima answered: What I see most often is a lack of preparation. Before the interview, take some time to learn about the organization from their webpage. When students don't have a clue about my organization, it reflects very negatively on them. Also, learn to listen well. Really understand what the interviewer is saying and asking, then respond accordingly rather than reciting a canned answer you prepared. Try using similar phrasing and terms they use to show them that you are in tune with there they are coming from.
-              </div>
-            </div>
-          </div>
-          <div class="ui segments">
-            <div class="ui segment">
-              <div class="author">
- What aspects of your undergraduate degree experience has proven most useful to you?
-              </div>
-            </div>
-            <div class="ui secondary segment">
-              <div class="author">
-                <img class="ui avatar image" src="../images/mentors/geis.jpg"> Jennifer Geis answered: After the obvious part of learning how to program, it's the relationships I formed with instructors and other students that have stood out as having lasting effects on my life and career. Hawaii is a small place where who you know can mean a lot. Almost every employment or contract opportunity I've had has been a result of one of the many relationships I made while getting my degrees.
-              </div>
-            </div>
-          </div>
-          <div class="ui segments">
-            <div class="ui segment">
-              <div class="author">
- What do CS students need to know about tech careers in your region?
-              </div>
-            </div>
-            <div class="ui secondary segment">
-              <p>This question hasn't been answered yet!</p>
-            </div>
-          </div>
+            <div class="ui divider"></div>
+
+          {{/each}}
         </div>
       </div>
 
-    </div>
+      <div class="eleven wide column">
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What do you
+              look for when hiring a new graduate?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There are 2 answers!
+                </div>
+              </div>
+
+              <div class="active content">
+                <div class="ui divider"></div>
+
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/brewer.jpg"> Robert Brewer answered: Candidates interviewing at Tableau are expected to have broad experience in CS and software engineering. Expect to answer questions on topics like object-oriented design, algorithms, databases, and more by writing code on a whiteboard with no computer in sight. Strong technical skills must be balanced by evidence that you can work well on a team and communicate well with your peers.
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/karjala.jpg"> Patrick Karjala answered: Grades and classes count; especially classes geared toward the position you're reaching for. It is important in the Computer Science field to be able to work collaboratively. Students who have group projects on their GitHub account show me that they are ready for a team development environment. In addition, extracurricular work and internships will make your application stand out among others. Those who have already done programming in a professional internship will be a step ahead!
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What mistakes do CS students make during interviews?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There is 1 answer!
+                </div>
+              </div>
+
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/nagashima.jpg"> Yuka Nagashima answered: What I see most often is a lack of preparation. Before the interview, take some time to learn about the organization from their webpage. When students don't have a clue about my organization, it reflects very negatively on them. Also, learn to listen well. Really understand what the interviewer is saying and asking, then respond accordingly rather than reciting a canned answer you prepared. Try using similar phrasing and terms they use to show them that you are in tune with there they are coming from.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What aspects of your undergraduate degree experience has proven most useful to you?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There is 1 answer!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/geis.jpg"> Jennifer Geis answered: After the obvious part of learning how to program, it's the relationships I formed with instructors and other students that have stood out as having lasting effects on my life and career. Hawaii is a small place where who you know can mean a lot. Almost every employment or contract opportunity I've had has been a result of one of the many relationships I made while getting my degrees.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What do CS students need to know about tech careers in your region?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <p>This question hasn't been answered yet!</p>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              I'm interested in a career in data science. What should I be doing as an undergrad to prepare?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There are 2 answers!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/brewer.jpg"> Robert Brewer answered: Understanding the incredible amount of data that humankind is constantly producing is one of the fundamental challenges facing society. The best way to learn is to pick a topic that interests you, find a public source of data in that area, and start actually looking at the data. What patterns can you see? Start asking questions, and figure out how to answer them from the data. Quick plug: Tableau is great for exploring data graphically, and answering questions about data. It's free for students (http://www.tableau.com/academic/students), and Tableau Public (https://public.tableau.com/s/) is a great place to find interesting public data sets and visual analytics based on the data.
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/leuck.jpg"> Dan Leuckanswered: The most obvious thing to do is to actually take data science courses: machine learning, databases, etc. Augment your ICS classes with one of the Coursera or Udacity online courses. But beyond that, it's important to learn about one domain in detail so you can apply the algorithms and tweak them to make sure their answers are relevent to the domain. You can't just crunch the numbers without some insight into where they are coming from.
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What aspects of your undergraduate degree experience has proven most useful to you?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There is 1 answer!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/geis.jpg"> Jennifer Geis answered: After the obvious part of learning how to program, it's the relationships I formed with instructors and other students that have stood out as having lasting effects on my life and career. Hawaii is a small place where who you know can mean a lot. Almost every employment or contract opportunity I've had has been a result of one of the many relationships I made while getting my degrees.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What do CS students need to know about tech careers in your region?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <p>This question hasn't been answered yet!</p>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              I'm interested in a career in data science. What should I be doing as an undergrad to prepare?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There are 2 answers!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/brewer.jpg"> Robert Brewer answered: Understanding the incredible amount of data that humankind is constantly producing is one of the fundamental challenges facing society. The best way to learn is to pick a topic that interests you, find a public source of data in that area, and start actually looking at the data. What patterns can you see? Start asking questions, and figure out how to answer them from the data. Quick plug: Tableau is great for exploring data graphically, and answering questions about data. It's free for students (http://www.tableau.com/academic/students), and Tableau Public (https://public.tableau.com/s/) is a great place to find interesting public data sets and visual analytics based on the data.
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/leuck.jpg"> Dan Leuckanswered: The most obvious thing to do is to actually take data science courses: machine learning, databases, etc. Augment your ICS classes with one of the Coursera or Udacity online courses. But beyond that, it's important to learn about one domain in detail so you can apply the algorithms and tweak them to make sure their answers are relevent to the domain. You can't just crunch the numbers without some insight into where they are coming from.
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What aspects of your undergraduate degree experience has proven most useful to you?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There is 1 answer!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/geis.jpg"> Jennifer Geis answered: After the obvious part of learning how to program, it's the relationships I formed with instructors and other students that have stood out as having lasting effects on my life and career. Hawaii is a small place where who you know can mean a lot. Almost every employment or contract opportunity I've had has been a result of one of the many relationships I made while getting my degrees.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              What do CS students need to know about tech careers in your region?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <p>This question hasn't been answered yet!</p>
+          </div>
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <div class="author">
+              I'm interested in a career in data science. What should I be doing as an undergrad to prepare?
+            </div>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui vertical accordion">
+
+              <div class="ui active list title">
+                <div class="item">
+                  <i class="dropdown icon"></i>
+                  There are 2 answers!
+                </div>
+              </div>
+              <div class="active content">
+                <div class="ui divider"></div>
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/brewer.jpg"> Robert Brewer answered: Understanding the incredible amount of data that humankind is constantly producing is one of the fundamental challenges facing society. The best way to learn is to pick a topic that interests you, find a public source of data in that area, and start actually looking at the data. What patterns can you see? Start asking questions, and figure out how to answer them from the data. Quick plug: Tableau is great for exploring data graphically, and answering questions about data. It's free for students (http://www.tableau.com/academic/students), and Tableau Public (https://public.tableau.com/s/) is a great place to find interesting public data sets and visual analytics based on the data.
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="author">
+                  <img class="ui avatar image" src="../images/mentors/leuck.jpg"> Dan Leuckanswered: The most obvious thing to do is to actually take data science courses: machine learning, databases, etc. Augment your ICS classes with one of the Coursera or Udacity online courses. But beyond that, it's important to learn about one domain in detail so you can apply the algorithms and tweak them to make sure their answers are relevent to the domain. You can't just crunch the numbers without some insight into where they are coming from.
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui segment">
+          <div class="ui dividing header">
+            <h4>Ask a New Question</h4>
+          </div>
+          <div class="ui form">
+            <div class="field">
+              <textarea rows="2" style="height: 75px;"></textarea>
+            </div>
+            <button class="fluid ui button" type="submit">Submit</button>
+          </div>
+        </div>
+
+      </div>
     </div>
 
+  </div>
 </template>

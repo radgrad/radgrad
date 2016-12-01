@@ -1,0 +1,15 @@
+<template name="Cas_Login">
+  <div class="ui simple dropdown item">
+    <div class="text">Account</div>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      {{#if currentUser}}
+        <div class="item cas-logout">Logout</div>
+      {{else}}
+        <div class="item cas-login">Login</div>
+      {{/if}}
+    </div>
+    <div class="ui error message hidden"></div>
+  </div>
+
+</template>

@@ -1,0 +1,54 @@
+<template name="Student_Selector">
+  <div class="ui container">
+    <form class="ui form jsRetrieve  {{ successClass }} {{ errorClass }}">
+      <div class="ui inline field">
+        {{#if isUserSelected}}
+          <label class="header"><h3>{{userFullName}} ({{userID}})</h3></label>
+        {{else}}
+          <label class="header"><h3>Select a student</h3></label>
+        {{/if}}
+        <div class="ui action input">
+          <input type="text" name="username" placeholder="username">
+          <button class="ui green button jsRetrieve" type="submit">Retrieve</button>
+          <button class="ui blue button jsAddNewStudent" type="submit">Add New Student</button>
+        </div>
+      </div>
+      {{#if notDefined }}
+        <div class="ui error message">
+          <p>User {{username}} is not a RadGrad student.</p>
+        </div>
+      {{/if}}
+    </form>
+    {{#if addNewUser}}
+      <form class="ui form jsNewStudent {{ successClass }} {{ errorClass }}">
+        <div class="field">
+          <label>First Name</label>
+          <input id="firstName" type="text" name="firstName" placeholder="First Name">
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" name="lastName" placeholder="Last Name">
+        </div>
+        <div class="field">
+          <label>Userame</label>
+          <input type="text" name="username" placeholder="Username">
+        </div>
+        <div class="field">
+          <label>UH ID</label>
+          <input type="text" name="uhID" placeholder="1234-5678">
+        </div>
+        <button class="ui blue button jsNewStudent" type="submit">Submit</button>
+        {{#if alreadyDefined }}
+          <div class="ui error message">
+            <p>User {{username}} is already defined.</p>
+          </div>
+        {{/if}}
+      </form>
+    {{/if}}
+    {{#if displaySuccessMessage}}
+      <div class="ui success message">
+        <p>Student {{username}} successfully added.</p>
+      </div>
+    {{/if}}
+  </div>
+</template>

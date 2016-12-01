@@ -1,3 +1,4 @@
+import '/imports/api/admin';
 import '/imports/api/base';
 import '/imports/api/career';
 import '/imports/api/course';
@@ -18,6 +19,7 @@ import '/imports/api/year';
 import '/imports/startup/client';
 import '/imports/startup/both';
 
+import '/imports/ui/components/admin';
 import '/imports/ui/components/advisor';
 import '/imports/ui/components/landing';
 import '/imports/ui/components/planner';

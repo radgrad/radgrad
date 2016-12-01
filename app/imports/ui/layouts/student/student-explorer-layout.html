@@ -1,8 +1,18 @@
 <template name="Student_Explorer_Layout">
 
-  {{> First_Menu role="Student"}}
-  {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
-  {{> Template.dynamic template=main}}
+  {{#if isInRole 'ADMIN'}}
+    {{> First_Menu role="Admin"}}
+    {{> Second_Menu menuItems=adminSecondMenuItems menuLength=adminSecondMenuLength}}
+    {{> Third_Menu role="Student"}}
+    {{> Fourth_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
+    <div class="adminViewer">
+      {{> Template.dynamic template=main}}
+    </div>
+  {{else}}
+    {{> First_Menu role="Student"}}
+    {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
+    {{> Template.dynamic template=main}}
+  {{/if}}
   {{> Footer}}
 
 </template>

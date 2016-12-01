@@ -1,8 +1,8 @@
 import { Accounts } from 'meteor/accounts-base';
-import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
+import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -16,6 +16,7 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 
 Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
   this.state = new ReactiveDict();
+  updateSessionState(SessionState);
   this.autorun(() => {
     this.subscribe(Courses.getPublicationName());
     this.subscribe(CourseInstances.getPublicationName());
@@ -36,10 +37,17 @@ Template.Student_Degree_Planner_Page.onRendered(function plannerOnRendered() {
 
 Template.Student_Degree_Planner_Page.helpers({
   args() {
-    return {
-      currentSemesterID: Semesters.getCurrentSemester(),
-      studentUserName: Meteor.user().username,
-    };
+    updateSessionState(SessionState);
+    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    if (studentID) {
+      const user = Users.findDoc(studentID);
+      return {
+        currentSemesterID: Semesters.getCurrentSemester(),
+        studentUserName: user.username,
+      };
+    }
+    console.log('There is a problem. CURRENT_STUDENT_ID should be set.');
+    return null;
   },
 });
 

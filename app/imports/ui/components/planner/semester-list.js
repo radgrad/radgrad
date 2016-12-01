@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { ReactiveDict } from 'meteor/reactive-dict';
@@ -10,7 +9,9 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { Users } from '../../../api/user/UserCollection';
 
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
@@ -20,7 +21,7 @@ const availableCourses = () => {
         return true;
       }
       const ci = CourseInstances.find({
-        studentID: Meteor.userId(),
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
         courseID: course._id,
       }).fetch();
       return ci.length === 0;
@@ -67,7 +68,7 @@ const availableOpportunities = () => {
   if (opportunities.length > 0 && Template.instance().state.get('semester')) {
     const filtered = lodash.filter(opportunities, function filter(opportunity) {
       const oi = OpportunityInstances.find({
-        studentID: Meteor.userId(),
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
         courseID: opportunity._id,
       }).fetch();
       return oi.length === 0;
@@ -148,7 +149,7 @@ Template.Semester_List.helpers({
     if (Template.instance().state.get('semester')) {
       const courses = CourseInstances.find({
         semesterID: Template.instance().state.get('semester')._id,
-        studentID: Meteor.userId(),
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
       }, { sort: { note: 1 } }).fetch();
       courses.forEach((c) => {
         if (CourseInstances.isICS(c._id)) {
@@ -180,7 +181,7 @@ Template.Semester_List.helpers({
     if (Template.instance().state.get('semester')) {
       const courses = CourseInstances.find({
         semesterID: Template.instance().state.get('semester')._id,
-        studentID: Meteor.userId(),
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
       }).fetch();
       courses.forEach((c) => {
         if (!CourseInstances.isICS(c._id)) {
@@ -196,7 +197,6 @@ Template.Semester_List.helpers({
     if (semester) {
       const opportunities = availableOpportunities();
       const now = new Date();
-      console.log(); // eslint-disable-line no-console
       ret = lodash.filter(opportunities, function filter(o) {
         return lodash.indexOf(o.semesterIDs, semester._id) !== -1;
       });
@@ -243,7 +243,7 @@ Template.Semester_List.helpers({
     if (Template.instance().state.get('semester')) {
       const opps = OpportunityInstances.find({
         semesterID: Template.instance().state.get('semester')._id,
-        studentID: Meteor.userId(),
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
       }).fetch();
       return opps;
     }
@@ -269,7 +269,7 @@ Template.Semester_List.events({
         checkPrerequisites();
       } else {
         const opportunities = OpportunityInstances.find({
-          studentID: Meteor.userId(),
+          studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
           _id: id,
         }).fetch();
         if (opportunities.length > 0) {
@@ -288,7 +288,7 @@ Template.Semester_List.events({
     const semStr = Semesters.toString(semester._id, false);
     const semSplit = semStr.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = Meteor.user().username;
+    const username = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
     const ci = {
       semester: semSlug,
       course: courseSlug,
@@ -338,7 +338,7 @@ Template.Semester_List.events({
     const semStr = Semesters.toString(semester._id, false);
     const semSplit = semStr.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = Meteor.user().username;
+    const username = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
     const oi = {
       semester: semSlug,
       opportunity: oppSlug.name,

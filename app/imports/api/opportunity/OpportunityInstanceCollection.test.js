@@ -2,6 +2,7 @@
 /* eslint-env mocha */
 
 import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { defineSemesters } from '/imports/api/semester/SemesterUtilities';
 import { ROLE } from '/imports/api/role/Role';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { makeSampleOpportunity } from '/imports/api/opportunity/SampleOpportunities';
@@ -21,6 +22,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #toString', function test() {
+      defineSemesters();
       const semester = Semesters.define({ term: Semesters.FALL, year: 2015 });
       const faculty = makeSampleUser(ROLE.FACULTY);
       const student = makeSampleUser();

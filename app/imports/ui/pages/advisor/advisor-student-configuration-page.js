@@ -1,8 +1,8 @@
-import { FlowRouter } from 'meteor/kadira:flow-router';
+// import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 
+import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -23,10 +23,11 @@ Template.Advisor_Student_Configuration_Page.events({
  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
 
-Template.Advisor_Student_Configuration_Page.onCreated(function aadvisorStudentConfirgurationPageOnCreated() {
+Template.Advisor_Student_Configuration_Page.onCreated(function advisorStudentConfirgurationPageOnCreated() {
   this.state = new ReactiveDict();
-  if (localStorage.getItem('uhId')) {  // eslint-disable-line no-undef
-    this.state.set('uhId', localStorage.getItem('uhId'));  // eslint-disable-line no-undef
+  updateSessionState(SessionState);
+  if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+    this.state.set(sessionKeys.CURRENT_STUDENT_ID, SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
   }
   this.autorun(() => {
     this.subscribe(CareerGoals.getPublicationName());
@@ -42,11 +43,5 @@ Template.Advisor_Student_Configuration_Page.onCreated(function aadvisorStudentCo
 });
 
 Template.Advisor_Student_Configuration_Page.onRendered(function advisorStudentConfirgurationPageOnRendered() {
-  let uhId = FlowRouter.getQueryParam('uhId');
-  if (uhId) {
-    if (uhId.indexOf('-') === -1) {
-      uhId = `${uhId.substring(0, 4)}-${uhId.substring(4, 8)}`;
-    }
-    this.state.set('uhId', uhId);
-  }
+
 });
