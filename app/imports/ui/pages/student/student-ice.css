@@ -1,3 +1,4 @@
+/**Headers**/
 .ui.equal.width.grid.container.innovation .ui.header {
   color: steelblue;
 }
@@ -10,30 +11,64 @@
   color: goldenrod;
 }
 
-.ui.equal.width.grid.container.competency .row.competencyp p{
-  color: darkseagreen;
+
+/**Actual ICE**/
+.ui.equal.width.grid.container.innovation .row .ui.list .item .content .header{
+  color: steelblue;
 }
+
+.ui.equal.width.grid.container.innovation .row .ui.list .item .content .description b{
+  color: steelblue;
+}
+
+
+.ui.equal.width.grid.container.competency .row .ui.list .item .content .header{
+  color: green;
+}
+
+.ui.equal.width.grid.container.competency .row .ui.list .item .content .description b{
+  color: green;
+}
+
+
+.ui.equal.width.grid.container.experience .row .ui.list .item .content .header{
+  color: goldenrod;
+}
+
+.ui.equal.width.grid.container.experience .row .ui.list .item .content .description b{
+  color: goldenrod;
+}
+
+
+/**Projected ICE**/
+.ui.equal.width.grid.container.innovation .row.innovationp .ui.list .item .content .header{
+  color: lightsteelblue;
+}
+
+.ui.equal.width.grid.container.innovation .row.innovationp .ui.list .item .content .description b{
+  color: lightsteelblue;
+}
+
 
 .ui.equal.width.grid.container.competency .row.competencyp .ui.list .item .content .header{
   color: darkseagreen;
 }
 
-.ui.equal.width.grid.container.competency .row.competencyp .ui.list .item .content .description{
+.ui.equal.width.grid.container.competency .row.competencyp .ui.list .item .content .description b{
   color: darkseagreen;
 }
 
-.ui.equal.width.grid.container.experience .row.experiencep p{
-  color: tan;
-}
 
 .ui.equal.width.grid.container.experience .row.experiencep .ui.list .item .content .header{
   color: tan;
 }
 
-.ui.equal.width.grid.container.experience .row.experiencep .ui.list .item .content .description{
+.ui.equal.width.grid.container.experience .row.experiencep .ui.list .item .content .description b{
   color: tan;
 }
 
+
+/**Recommended ICE**/
 .innovationr p {
   color:steelblue;
 }
@@ -70,15 +105,16 @@
   color:goldenrod;
 }
 
-.innovation{
+/**Basic ICE Info**/
+.i{
   color:steelblue;
 }
 
-.competency{
+.c{
   color:green;
 }
 
-.experience{
+.e{
   color:goldenrod;
 }
 
