@@ -1,29 +1,26 @@
-#mentorspace-main-block{
-  padding-right: 0 !important;
-  padding-bottom: 40px !important;
-  padding-top: 0 !important;
-}
-
-#mentorspace-main-inside-block{
-  background-color: white;
-  margin: 0 12px 0 12px;
-  border-radius: 5px;
-}
-
-#mentorspace-mentor-list{
-  background-color: white;
-  margin: 0 0 0 12px;
-  border-radius: 5px;
-}
-
 .mentorspace-item-padding{
-  padding-top: 12px !important;
-  padding-bottom: 12px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
+.mentorspace-description{
+    font-size: 12px !important;
+}
 
 #mentorspace-question-inside-block{
-  padding-top: 24px;
-  margin: 0 12px 0 12px;
-  border-radius: 5px;
+    padding-top: 24px;
+    margin: 0 12px 0 12px;
+    border-radius: 5px;
+}
+
+.mentorspace-title-size{
+    font-size: 12px !important;
+}
+
+.ui.accordion:not(.styled) .title~.content:not(.ui) {
+    padding: 0 !important;
+}
+
+.ui.list{
+    margin-bottom: 0 !important;
 }
