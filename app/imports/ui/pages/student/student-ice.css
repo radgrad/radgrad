@@ -69,39 +69,28 @@
 
 
 /**Recommended ICE**/
-.innovationr p {
-  color:steelblue;
-}
 
 .innovationr .ui.list .item .content .header {
   color:steelblue;
 }
 
-.innovationr .ui.list .item .content .description {
+.innovationr .ui.list .item .content .description b{
   color:steelblue;
-}
-
-.competencyr p {
-  color:green;
 }
 
 .competencyr .ui.list .item .content .header {
   color:green;
 }
 
-.competencyr .ui.list .item .content .description {
+.competencyr .ui.list .item .content .description b{
   color:green;
-}
-
-.experiencer p {
-  color:goldenrod;
 }
 
 .experiencer .ui.list .item .content .header {
   color:goldenrod;
 }
 
-.experiencer .ui.list .item .content .description {
+.experiencer .ui.list .item .content .description b{
   color:goldenrod;
 }
 

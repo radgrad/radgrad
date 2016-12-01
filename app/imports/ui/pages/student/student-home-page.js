@@ -41,5 +41,6 @@ Template.Student_Home_Page.onRendered(function enablePopUp() {
   this.$('.mini.label').popup({
     on: 'click',
   });
+  this.$('.ui.embed').embed();
 
 });
