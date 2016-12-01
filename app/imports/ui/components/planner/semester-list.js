@@ -197,7 +197,6 @@ Template.Semester_List.helpers({
     if (semester) {
       const opportunities = availableOpportunities();
       const now = new Date();
-      console.log(); // eslint-disable-line no-console
       ret = lodash.filter(opportunities, function filter(o) {
         return lodash.indexOf(o.semesterIDs, semester._id) !== -1;
       });

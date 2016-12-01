@@ -5,6 +5,9 @@ import './academic-plan.js';
 import './inspector.html';
 import './inspector.js';
 
+import './projected-ice.html';
+import './projected-ice.js';
+
 import './recommendation-item.html';
 import './recommendation-item.js';
 
