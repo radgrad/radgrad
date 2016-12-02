@@ -1,5 +1,4 @@
 <template name="Advisor_Layout">
-
   {{#if Template.subscriptionsReady}}
     {{#if isInRole 'ADMIN'}}
       {{> First_Menu role="Admin"}}
@@ -11,20 +10,18 @@
       </div>
     {{else}}
       {{> First_Menu role="Advisor"}}
-        <!--{{#if isInRole 'ADVISOR,ADMIN'}}-->
-      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
-      {{> Template.dynamic template=main}}
-        <!--{{else}}-->
-      <!--<div style="padding-top: 40px" class="ui text container">-->
-      <!--<p>You are not authorized to view this page.</p>-->
-      <!--<p>Please login as an advisor.</p>-->
-      <!--</div>-->
-        <!--{{/if}}-->
+      {{#if isInRole 'ADVISOR,ADMIN'}}
+        {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
+        {{> Template.dynamic template=main}}
+      {{else}}
+        <div style="padding-top: 40px" class="ui text container">
+          <p>You are not authorized to view this page.</p>
+          <p>Please login as an advisor.</p>
+        </div>
+      {{/if}}
     {{/if}}
+    {{> Footer}}
   {{else}}
     {{> Loading}}
   {{/if}}
-  {{> Footer}}
-
-
 </template>

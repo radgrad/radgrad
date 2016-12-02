@@ -1,6 +1,9 @@
 import { Template } from 'meteor/templating';
 
 Template.Landing_Section_1.helpers({
+  useCAS() {
+    return false;
+  },
   josephineICE() {
     return { i: 100, c: 100, e: 100 };
   },
