@@ -7,7 +7,7 @@ import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
 import { AdvisorChoices } from '../../../api/advisor/AdvisorChoiceCollection';
 import { ROLE } from '../../../api/role/Role';
 import {
-  SessionState, sessionKeys, updateSessionState, updateAdvisorSessionState
+  SessionState, sessionKeys, updateSessionState,
 }
   from '../../../startup/client/session-state';
 import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
@@ -172,13 +172,13 @@ Template.Student_Selector.onCreated(function studentSelectorOnCreated() {
     this.state = new ReactiveDict();
     const adminID = Meteor.userId();
     if (AdminChoices.find({ adminID }).count() === 1) {
-      updateSessionState(SessionState);
+      updateSessionState();
       const adminChoice = AdminChoices.find({ adminID }).fetch()[0];
       this.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, adminChoice.username);
       this.state.set(sessionKeys.CURRENT_STUDENT_ID, adminChoice.studentID);
     }
     if (AdvisorChoices.find({ advisorID: adminID }).count() === 1) {
-      updateAdvisorSessionState(SessionState);
+      updateSessionState();
       const adminChoice = AdvisorChoices.find({ advisorID: adminID }).fetch()[0];
       this.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, adminChoice.username);
       this.state.set(sessionKeys.CURRENT_STUDENT_ID, adminChoice.studentID);
