@@ -1,3 +1,5 @@
+import './advisor-utilities';
+
 import './cas-login.html';
 import './cas-login.js';
 

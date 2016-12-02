@@ -1,8 +1,8 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackType } from '../../../api/feedback/FeedbackType.js';
+import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 
 
 Template.Recommendations.helpers({
@@ -12,8 +12,8 @@ Template.Recommendations.helpers({
     };
   },
   recommendations() {
-    const userId = Meteor.userId();
-    const feedback = FeedbackInstances.find({ userID: userId }).fetch();
+    const userID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const feedback = FeedbackInstances.find({ userID }).fetch();
     const ret = [];
     feedback.forEach((f) => {
       const feed = Feedbacks.find({ _id: f.feedbackID }).fetch();

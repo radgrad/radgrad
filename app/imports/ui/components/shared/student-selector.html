@@ -25,19 +25,40 @@
           <label>First Name</label>
           <input id="firstName" type="text" name="firstName" placeholder="First Name">
         </div>
+        {{#if displayFieldError 'firstName' }}
+          <div class="ui error message">
+            <p>{{fieldErrorMessage 'firstName'}}.</p>
+          </div>
+        {{/if}}
         <div class="field">
           <label>Last Name</label>
           <input type="text" name="lastName" placeholder="Last Name">
         </div>
+        {{#if displayFieldError 'lastName' }}
+          <div class="ui error message">
+            <p>{{fieldErrorMessage 'lastName'}}.</p>
+          </div>
+        {{/if}}
         <div class="field">
           <label>Userame</label>
           <input type="text" name="username" placeholder="Username">
         </div>
+        {{#if displayFieldError 'userName' }}
+          <div class="ui error message">
+            <p>{{fieldErrorMessage 'userName'}}.</p>
+          </div>
+        {{/if}}
         <div class="field">
           <label>UH ID</label>
           <input type="text" name="uhID" placeholder="1234-5678">
         </div>
+        {{#if displayFieldError 'uhID' }}
+          <div class="ui error message">
+            <p>{{fieldErrorMessage 'uhID'}} ####-####.</p>
+          </div>
+        {{/if}}
         <button class="ui blue button jsNewStudent" type="submit">Submit</button>
+        <button class="ui red button jsCancelAdd"><i class="remove icon"></i>Cancel</button>
         {{#if alreadyDefined }}
           <div class="ui error message">
             <p>User {{username}} is already defined.</p>
