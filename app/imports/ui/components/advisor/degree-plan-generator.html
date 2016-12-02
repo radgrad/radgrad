@@ -1,46 +1,35 @@
 <template name="Degree_Plan_Generator">
-  <div class="ui raised padded container segment">
-    <div class="ui top left attached green label">Template degree plan generator</div>
+  <div class="ui padded container segment" style="margin-bottom: 0 !important;">
+    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Template degree plan generator</h4></div>
 
-    <div class="ui grid">
-
-      <div class="row">
-        <div class="ui segment">
           <p>Generate template degree plan given:</p>
-          <ul class="ui list">
-            <li><b>Student:</b> {{userFullName}}</li>
-            <li><b>Desired degree:</b> {{desiredDegree}}</li>
-            <li><b>Interests:</b><span class="left floated">
-              {{#each interest in interests}}
-                <label class="ui mini label"><i class="fitted star icon"></i>{{interest.name}}</label>
-              {{/each}}
-            </span></li>
-            <li><b>Career goals:</b><span class="left floated">
-              {{#each goal in careerGoals}}
-                <label class="ui mini label"><i class="fitted suitcase icon"></i>{{goal.name}}</label>
-              {{/each}}
-            </span></li>
-          </ul>
-        </div>
-      </div>
+            <b class="radgrad-dimGrey-text">Student:</b> {{userFullName}} <br>
+            <b class="radgrad-dimGrey-text">Desired Degree:</b> {{desiredDegree}} <br>
+            <div class="ui grid">
+              <div class="eight wide column">
+                <b class="radgrad-dimGrey-text">Interests:</b><span class="left floated"> <br>
+                  {{#each interest in interests}}
+                    <label class="ui mini label"><i class="fitted star icon"></i>{{interest.name}}</label>
+                  {{/each}}
+                </span>
+              </div>
+              <div class="eight wide column">
+                <b class="radgrad-dimGrey-text">Career Goals:</b><span class="left floated"> <br>
+                  {{#each goal in careerGoals}}
+                    <label class="ui mini label"><i class="fitted suitcase icon"></i>{{goal.name}}</label>
+                  {{/each}}
+                </span>
+              </div>
+            </div>
 
-      <div class="row">
         <div class="ui warning message">
           <div class="header">
             Warning!
           </div>
           This will delete any courses and opportunities currently planned for future semesters!
         </div>
-      </div>
 
-      <div class="row">
-        <form class="ui form">
-          <div class="ui inline field">
-            <button class="ui green button" type="submit">Generate degree plan</button>
-          </div>
-        </form>
-      </div>
-    </div>
   </div>
+  <div class="ui bottom attached olive button container" tabindex="0">Generate Degree Plan</div>
 
 </template>
