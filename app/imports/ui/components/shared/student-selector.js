@@ -81,13 +81,13 @@ Template.Student_Selector.events({
     if (user) {
       const userID = Meteor.userId();
       if (AdminChoices.find({ adminID: userID }).count() === 1) {
-        console.log('updating Admin choice');
         const adminChoice = AdminChoices.find({ adminID: userID }).fetch()[0];
         AdminChoices.updateUsername(adminChoice._id, username);
         AdminChoices.updateStudentID(adminChoice._id, user._id);
       }
-      if (AdvisorChoices.find({ advisorID: userID }).count() === 1) {
-        console.log('updating Advisor choice');
+      if (AdvisorChoices.find({ advisorID: userID }).count() === 0) {
+        AdvisorChoices.define({ advisorID: userID, studentID: user._id });
+      } else if (AdvisorChoices.find({ advisorID: userID }).count() === 1) {
         const advisorChoice = AdvisorChoices.find({ advisorID: userID }).fetch()[0];
         AdvisorChoices.updateUsername(advisorChoice._id, username);
         AdvisorChoices.updateStudentID(advisorChoice._id, user._id);

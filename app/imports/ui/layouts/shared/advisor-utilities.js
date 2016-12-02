@@ -4,6 +4,7 @@ import { Users } from '../../../api/user/UserCollection';
 
 export const advisorStudentTitle = () => {
   const advisorID = SessionState.get(sessionKeys.CURRENT_ADVISOR_ID);
+  console.log(SessionState);
   if (AdvisorChoices.find({ advisorID }).count() === 1) {
     const choices = AdvisorChoices.find({ advisorID }).fetch()[0];
     if (choices.studentID) {

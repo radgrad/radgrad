@@ -32,7 +32,7 @@ Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
 });
 
 Template.Student_Degree_Planner_Page.onRendered(function plannerOnRendered() {
-  Accounts._loginButtonsSession.set('dropdownVisible', true);
+  // Accounts._loginButtonsSession.set('dropdownVisible', true);
   updateSessionState();
 });
 
