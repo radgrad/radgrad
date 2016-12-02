@@ -1,5 +1,5 @@
 <template name="Second_Menu">
-  <div class="ui top fixed {{ menuLength }} item secondary pointing menu radgrad-second-menu" style="border-radius:0; margin-top:61px;">
+  <div class="ui top fixed {{ menuLength }} item secondary pointing menu radgrad-second-menu" style="border-radius:0; margin-top:61px; z-index: 0">
     {{#each menuItem in menuItems}}
         <a class="{{#if isCurrentPage menuItem.route}} active {{/if}} item" href="{{pathFor menuItem.route}}">{{ menuItem.label }}</a>
     {{/each}}
