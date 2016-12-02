@@ -4,6 +4,9 @@ import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection';
 
 Template.First_Menu.helpers({
+  useCAS() {
+    return false;
+  },
   firstMenuFullName() {
     if (Meteor.userId()) {
       try {
