@@ -10,6 +10,7 @@
 export const courseDefinitions = [
   {
     name: 'Non Computer Science Course',
+    shortName: 'Non-CS Course',
     slug: 'other',
     number: 'other',
     creditHrs: 3,
@@ -21,6 +22,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Digital Tools for the Information World',
+    shortName: 'Digital Tools',
     slug: 'ics101',
     number: 'ICS 101',
     creditHrs: 4,
@@ -32,6 +34,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Introduction to Computer Programming',
+    shortName: 'Intro to CS',
     slug: 'ics110',
     number: 'ICS 110',
     creditHrs: 3,
@@ -43,6 +46,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Introduction to Computer Science I',
+    shortName: 'Comp Sci I',
     slug: 'ics111',
     number: 'ICS 111',
     creditHrs: 4,
@@ -54,6 +58,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Discrete Mathematics for Computer Science I',
+    shortName: 'Discrete Math I',
     slug: 'ics141',
     number: 'ICS 141',
     description: 'Introduction to propositional and predicate logic, sets, functions, linear algebra, algorithms, mathematical reasoning, recursion, counting techniques, and probability theory.',
@@ -64,6 +69,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Introduction to Computer Science II',
+    shortName: 'Comp Sci II',
     slug: 'ics211',
     number: 'ICS 211',
     creditHrs: 4,
@@ -84,6 +90,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Introduction to Scripting',
+    shortName: 'Scripting',
     slug: 'ics215',
     number: 'ICS 215',
     description: 'Introduction to scripting languages for the integration of applications and systems. Scripting in operating systems, web pages, server-side application integration, regular expressions, event handling, input validation, selection, repetition, parameter passing, Perl, JavaScript, and PHP.',
@@ -94,6 +101,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Basic Concepts of Computer Science',
+    shortName: 'Comp Sci Concepts',
     slug: 'ics222',
     number: 'ICS 222',
     description: 'What is computer science about? What is the difference between computers and other machines? What are the limits of computation? Are there computers that are not machines? Understand the basic issues of computability, complexity, and network effects, and learn to apply them in the practice of computation.',
@@ -103,6 +111,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Discrete Mathematics for Computer Science II',
+    shortName: 'Discrete Math II',
     slug: 'ics241',
     number: 'ICS 241',
     description: 'Program correctness, recurrence relations and their solutions, divide and conquer relations, relations and their properties, graph theory, trees and their applications, Boolean algebra, introduction to formal languages and automata theory.',
@@ -124,6 +133,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Software Engineering I',
+    shortName: 'Software Eng I',
     slug: 'ics314',
     number: 'ICS 314',
     description: 'Problem analysis and design, team-oriented development, quality assurance, configuration management, project planning.',
@@ -134,6 +144,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Machine-Level and Systems Programming',
+    shortName: 'Systems Programming',
     slug: 'ics312',
     number: 'ICS 312',
     description: 'Machine organization, machine instructions, addressing modes, assembler language, subroutine linkage, linking to higher-level languages, interface to operating systems, introduction to assemblers, loaders and compilers.',
@@ -144,6 +155,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Programming Language Theory',
+    shortName: 'Programming Languages',
     slug: 'ics313',
     number: 'ICS 313',
     description: 'Syntax, semantics, control structures, variable binding and scopes, data and control abstractions. Programming in functional (LISP) and logic (Prolog) programming styles.',
@@ -153,6 +165,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Data Storage and Retrieval',
+    shortName: 'Databases I',
     slug: 'ics321',
     number: 'ICS 321',
     description: 'Data storage devices, timing and capacity, programming for files, hashed and indexed files, introduction to relational database systems.',
@@ -163,6 +176,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Logic Design and Microprocessors',
+    shortName: 'Microprocessors',
     slug: 'ics331',
     number: 'ICS 331',
     creditHrs: 4,
@@ -182,6 +196,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Network Design and Management',
+    shortName: 'Networks',
     slug: 'ics351',
     number: 'ICS 351',
     description: 'Overview of the internet and its capabilities; introduction to HTTP, TCP/IP, ethernet, and wireless 802.11; routers, switches, and NAT; network and wireless security; practical experience in designing and implementing networks.',
@@ -191,6 +206,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Security and Trust I: Resource Protections',
+    shortName: 'Security & Trust I',
     slug: 'ics355',
     number: 'ICS 355',
     description: 'Security and trust in computers, networks, and society. Security models. Access and authorization. Availability and Denial-of-Service. Trust processes and network interactions. ',
@@ -201,6 +217,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Introduction to Artificial Intelligence Programming',
+    shortName: 'AI Programming',
     slug: 'ics361',
     number: 'ICS 361',
     description: 'Introduction to the theory of Artificial Intelligence and the practical application of AI techniques in Functional (Common LISP and/or Scheme) and Logic (Prolog) programming languages. Students gain practical experience through programming assignments and projects.',
@@ -210,6 +227,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Computing Ethics for Lab Assistants',
+    shortName: 'Ethics for LAs',
     slug: 'ics390',
     number: 'ICS 390',
     description: 'A lecture/discussion/internship on ethical issues and instructional techniques for students assisting a laboratory section of ICS 101. The class uses multiple significant writing and oral presentation activities to help students learn course content.',
@@ -219,6 +237,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Software Engineering II',
+    shortName: 'Software Eng II',
     slug: 'ics414',
     number: 'ICS 414',
     description: 'Continuation of 314. Project management, quality, and productivity control, testing and validation, team management. Team-oriented software-implementation project.',
@@ -228,6 +247,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Introduction to Programming for the Web',
+    shortName: 'Intro to Web Programming',
     slug: 'ics415',
     number: 'ICS 415',
     description: 'Introduction to emerging technologies for construction of World Wide Web (WWW)-based software. Covers programming and scripting languages used for the creation of WWW sites and client-server programming. Students will complete a medium-sized software project that uses languages and concepts discussed in class.',
@@ -237,6 +257,7 @@ export const courseDefinitions = [
   },
   {
     name: 'The Science, Psychology and Philosophy of Systems Design',
+    shortName: 'Science of Systems Design',
     slug: 'ics419',
     number: 'ICS 419',
     description: 'Scientific, psychological and philosophical bases of systems design, including a survey of human-factors and ergonomic standards; the nature of innovation and creativity as it relates to systems design.',
@@ -246,6 +267,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Database Systems',
+    shortName: 'Databases II',
     slug: 'ics421',
     number: 'ICS 421',
     description: 'Principles of database systems, data modeling, relational models, database design, query languages, query optimization, concurrency control data security.',
@@ -264,6 +286,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Data Security and Cryptography I',
+    shortName: 'Cryptography I',
     slug: 'ics423',
     number: 'ICS 423',
     description: 'History of secret communication and confidential data storage. Elements of cryptography and cryptanalysis. Classical ciphers. Symmetric key cryptography. Public key cryptography. Data security in cyberspace.',
@@ -282,6 +305,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Computer Security and Ethics',
+    shortName: 'Security & Ethics',
     slug: 'ics425',
     number: 'ICS 425',
     description: 'Theoretical results, security policy, encryption, key management, digital signatures, certificates, passwords. Ethics: privacy, computer crime, professional ethics. Effects of the computer revolution on society.',
@@ -309,6 +333,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Concurrent and High-Performance Programming',
+    shortName: 'Concurrent Programming',
     slug: 'ics432',
     number: 'ICS 432',
     description: 'Principles of concurrent and high performance programming. Multi-threading in C and Java for shared-memory programming. Distributed memory programming with Java. Introduction to cluster computing.',
@@ -318,6 +343,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Machine Learning Fundamentals',
+    shortName: 'Machine Learning',
     slug: 'ics435',
     number: 'ICS 435',
     description: 'Introduction to machine learning concepts with a focus on relevant ideas from computational neuroscience. Information processing and learning in the nervous system. Neural networks. Supervised and unsupervised learning. Basics of statistical learning theory.',
@@ -336,6 +362,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Analytical Models and Methods',
+    shortName: 'Analytics Models',
     slug: 'ics442',
     number: 'ICS 442',
     description: 'Applications of mathematical methods in computer science with emphasis on discrete mathematics, numerical computation, algebraic models, operations research.',
@@ -364,6 +391,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Software Design for Robotics',
+    shortName: 'Robotics',
     slug: 'ics452',
     number: 'ICS 452',
     description: 'Sensors, actuators, signal processing, paradigms of robotic software design, introduction to machine learning, introduction to computer vision, and robot-to-human interaction.',
@@ -373,6 +401,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Security and Trust II: Information Assurance',
+    shortName: 'Security & Trust II',
     slug: 'ics455',
     number: 'ICS 455',
     description: 'Channel security. Trojan and noninterference. Basic concepts of cryptology. Cryptographic primitives. Protocols for authentication and key establishment.',
@@ -391,6 +420,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Artificial Intelligence for Games',
+    shortName: 'AI for Games',
     slug: 'ics462',
     number: 'ICS 462',
     description: 'Techniques to stimulate intelligence in video games: movement, pathfinding with A* search, decision/behavior trees, state machines, machine learning, tactics. Extend games with your own AI implementations; experience shootout contests for the best AI algorithm/implementation.',
@@ -400,6 +430,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Human Computer Interaction I',
+    shortName: 'HCI I',
     slug: 'ics464',
     number: 'ICS 464',
     description: 'Application of concepts and methodologies of human factors, psychology and software engineering to address ergonomic, cognitive, and social factors in the design and evaluation of human-computer systems.',
@@ -409,6 +440,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Introduction to Hypermedia',
+    shortName: 'Hypermedia',
     slug: 'ics465',
     number: 'ICS 465',
     description: 'Basic issues of interactive access to information in various formats on computers. Available hardware and software: editing, integration, programming. Implementation of a sample information system.',
@@ -437,6 +469,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Probability, Statistics, and Queuing',
+    shortName: 'Probability & Statistics',
     slug: 'ics471',
     number: 'ICS 471',
     description: 'Introduction to probability, statistical inference, regression, Markov chains, queuing theory. Use of an interactive statistical graphics environment such as R.',
@@ -446,6 +479,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Introduction to Bioinformatics Sequences and Genomes Analysis',
+    shortName: 'Bioinformatics I',
     slug: 'ics475',
     number: 'ICS 475',
     description: 'Introduction to bioinformatics to computer sciences students by focusing on how computer science techniques can be used for the storage, analysis, prediction and simulation of biological sequences (DNA, RNA and proteins).',
@@ -455,6 +489,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Bioinformatics Algorithms and Tool Development',
+    shortName: 'Bioinformatics II',
     slug: 'ics476',
     number: 'ICS 476',
     description: 'Study of commonly used bioinformatic algorithms, with an emphasis on string, tree, and graph algorithms. Presentation of probabilistic and clustering methods. Implementation of the studied algorithms and design of applications.',
@@ -464,6 +499,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Introduction to Computer Graphics',
+    shortName: 'Computer Graphics',
     slug: 'ics481',
     number: 'ICS 481',
     description: 'Fundamentals of computer graphics including graphics hardware, representation, manipulation, and display of two- and three-dimensional objects, use of commercial software.',
@@ -491,6 +527,7 @@ export const courseDefinitions = [
   },
   {
     name: 'Video Game Design and Development',
+    shortName: 'Game Design',
     slug: 'ics485',
     number: 'ICS 485',
     description: 'Students will team design, build, and demonstrate video games or related interactive entertainment environments and applications. Topics will include emerging computer science techniques relevant to the development of these types of environments. ',
@@ -511,6 +548,7 @@ export const courseDefinitions = [
 
   {
     name: 'Special Topics in Security',
+    shortName: 'Special Topics: Security',
     slug: 'ics495',
     number: 'ICS 495',
     description: 'Special topics in security oriented toward juniors and seniors. Repeatable unlimited times.',
@@ -520,11 +558,11 @@ export const courseDefinitions = [
   },
   {
     name: 'Computer Project',
+    shortName: 'Independent Study',
     slug: 'ics499',
     number: 'ICS 499',
     description: 'Individual or small-group projects in system design or application under faculty supervision.',
     interests: [],
-    syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS485.html',
     prerequisites: ['ics311', 'ics314'],
   },
 ];

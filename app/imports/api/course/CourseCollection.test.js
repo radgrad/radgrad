@@ -24,8 +24,24 @@ if (Meteor.isServer) {
       const description = 'Study algorithms';
       const creditHrs = 3;
       const interests = [makeSampleInterest()];
-      Courses.define({ name, slug, number, description, creditHrs, interests });
+      const docID = Courses.define({ name, slug, number, description, creditHrs, interests });
       expect(Courses.isDefined(slug)).to.be.true;
+      expect(Courses.findDoc(docID).shortName).to.equal(name);
+      Courses.removeIt(slug);
+      expect(Courses.isDefined(slug)).to.be.false;
+    });
+
+    it('course shortname', function test() {
+      const name = 'Algorithms';
+      const shortName = 'Algo';
+      const slug = 'ics311';
+      const number = 'ICS 311';
+      const description = 'Study algorithms';
+      const creditHrs = 3;
+      const interests = [makeSampleInterest()];
+      const docID = Courses.define({ name, shortName, slug, number, description, creditHrs, interests });
+      expect(Courses.isDefined(slug)).to.be.true;
+      expect(Courses.findDoc(docID).shortName).to.equal(shortName);
       Courses.removeIt(slug);
       expect(Courses.isDefined(slug)).to.be.false;
     });
