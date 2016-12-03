@@ -6,6 +6,7 @@ import { moment } from 'meteor/momentjs:moment';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
+import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '../semester/SemesterCollection.js';
 import { Users } from '/imports/api/user/UserCollection';
 
@@ -136,7 +137,7 @@ class VerificationRequestCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR', 'FACULTY'])) {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, 'FACULTY'])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });

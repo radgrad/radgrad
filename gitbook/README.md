@@ -8,7 +8,7 @@ Even the teaching of computer science is subject to frequent disruption. The fir
  
 Virtually no intellectual discipline is untouched by computer science. Indeed, many departments of computer science have renamed themselves as departments (or Colleges) of "Information", recognizing the more fundamental nature of the field. 
 
-The rate of change and pervasiveness of computer science creates issues for today's students.  One issue is that the discipline of computer science can evolve significantly from the time a student enters university to the time they graduate. For example, seniors in Computer Science in 2016 might be questioned during interviews about their knowledge of deep learning techniques and their application; a question that could not have existed four years earlier when they started taking classes. 
+The rate of change and pervasiveness of computer science creates issues for today's students.  One issue is that the discipline of computer science can evolve significantly from the time a student enters university to the time they graduate. For example, seniors in Computer Science in 2016 might be questioned during interviews about "deep learning", a term that did not exist four years earlier when they started taking classes. 
 
 A second issue is the complementary nature of computer science with other disciplines: there is no "natural" second area of study with computer science because *every* other area goes well with computer science. This limitless choice creates its own set of issues: how can the student maximize the combination of disciplines, find peers with similar interests, and find faculty who can help them integrate two (or even more) disciplines effectively? 
 
