@@ -20,7 +20,7 @@ class CourseCollection extends BaseInstanceCollection {
   constructor() {
     super('Course', new SimpleSchema({
       name: { type: String },
-      shortName: { type: String},
+      shortName: { type: String },
       slugID: { type: SimpleSchema.RegEx.Id },
       number: { type: String },
       description: { type: String },
