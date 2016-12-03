@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { lodash } from 'meteor/erasaur:meteor-lodash';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import * as CF from '../../../api/course/CourseFunctions';
 
 import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -30,7 +31,7 @@ Template.Degree_Plan_Generator.helpers({
     const ret = [];
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-      lodash.map(user.interestIDs, (id) => {
+      _.map(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
       });
     }
@@ -40,7 +41,7 @@ Template.Degree_Plan_Generator.helpers({
     const ret = [];
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-      lodash.map(user.careerGoalIDs, (id) => {
+      _.map(user.careerGoalIDs, (id) => {
         ret.push(CareerGoals.findDoc(id));
       });
     }
@@ -60,7 +61,13 @@ Template.Degree_Plan_Generator.events({
     if (student.desiredDegree === 'BA_ICS') {
       template = BA_ICS_IT_TEMPLATE;
     }
-    console.log(template);
+    const interesting = [];
+    _.map(student.interestIDs, (interestID) => {
+      _.map(CF.getCourseDocsWithInterest(interestID), (c) => {
+        interesting.push(c);
+      });
+    });
+    console.log(template, interesting);
   },
 });
 

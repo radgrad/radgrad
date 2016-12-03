@@ -1,4 +1,3 @@
-import { Accounts } from 'meteor/accounts-base';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
