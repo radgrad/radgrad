@@ -22,23 +22,27 @@ Template.Student_Profile.helpers({
   desireBA() {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-      return user.desiredDegree === 'B.A. ICS';
+      return user.desiredDegree === 'BA_ICS';
     }
     return false;
   },
   desireBS() {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-      return user.desiredDegree === 'B.S. CS';
+      return user.desiredDegree === 'BS_CS';
     }
     return false;
   },
   desiredDegree() {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-      return user.desiredDegree;
+      if (user.desiredDegree === 'BS_CS') {
+        return 'B.S. CS';
+      } else if (user.desiredDegree === 'BA_ICS') {
+        return 'B.A. ICS';
+      }
     }
-    return 'Select Degree';
+    return 'Select Desired Degree';
   },
   inRole(role) {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {

@@ -3,6 +3,7 @@ import { lodash } from 'meteor/erasaur:meteor-lodash';
 
 import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { BS_CS_TEMPLATE, BA_ICS_IT_TEMPLATE } from '../../../api/degree-program/degree-program';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
@@ -17,7 +18,11 @@ Template.Degree_Plan_Generator.helpers({
   desiredDegree() {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-      return user.desiredDegree;
+      if (user.desiredDegree === 'BS_CS') {
+        return 'B.S. CS';
+      } else if (user.desiredDegree === 'BA_ICS') {
+        return 'B.A. ICS';
+      }
     }
     return '';
   },
@@ -44,7 +49,19 @@ Template.Degree_Plan_Generator.helpers({
 });
 
 Template.Degree_Plan_Generator.events({
-  // add your events here
+  'click .jsGeneratePlan': function clickGeneratePlan(event, instance) {
+    event.preventDefault();
+    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const student = Users.findDoc(studentID);
+    let template;
+    if (student.desiredDegree === 'BS_CS') {
+      template = BS_CS_TEMPLATE;
+    }
+    if (student.desiredDegree === 'BA_ICS') {
+      template = BA_ICS_IT_TEMPLATE;
+    }
+    console.log(template);
+  },
 });
 
 Template.Degree_Plan_Generator.onCreated(function degreePlanGeneratorOnCreated() {
