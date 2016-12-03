@@ -121,13 +121,14 @@ Template.Student_Profile.events({
 });
 
 Template.Student_Profile.onCreated(function studentProfileOnCreated() {
-  updateSessionState(SessionState);
 });
 
 Template.Student_Profile.onRendered(function studentProfileOnRendered() {
   this.$('.dropdown').dropdown({
     // action: 'select',
   });
+  updateSessionState();
+  console.log(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
 });
 
 Template.Student_Profile.onDestroyed(function studentProfileOnDestroyed() {

@@ -1,11 +1,12 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import * as CF from '../../../api/course/CourseFunctions';
 
 import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { BS_CS_TEMPLATE, BA_ICS_IT_TEMPLATE } from '../../../api/degree-program/degree-program';
 import { Interests } from '../../../api/interest/InterestCollection';
+import { Semesters } from '../../../api/semester/SemesterCollection';
+import * as semUtils from '../../../api/semester/SemesterUtilities';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Degree_Plan_Generator.helpers({
@@ -61,13 +62,9 @@ Template.Degree_Plan_Generator.events({
     if (student.desiredDegree === 'BA_ICS') {
       template = BA_ICS_IT_TEMPLATE;
     }
-    const interesting = [];
-    _.map(student.interestIDs, (interestID) => {
-      _.map(CF.getCourseDocsWithInterest(interestID), (c) => {
-        interesting.push(c);
-      });
-    });
-    console.log(template, interesting);
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    const startSemester = semUtils.nextFallSpringSemester(currentSemester);
+    console.log(template, startSemester, student);
   },
 });
 

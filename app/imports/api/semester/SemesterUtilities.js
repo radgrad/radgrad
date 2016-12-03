@@ -22,3 +22,39 @@ export function defineSemesters() {
     Semesters.define({ term: Semesters.SUMMER, year: 2020 });
   }
 }
+
+export function nextSemester(semester) {
+  let sortBy = semester.sortBy;
+  const year = Math.trunc(sortBy / 10);
+  const semNum = sortBy % 10;
+  if (semNum < 2) {
+    sortBy += 1;
+  } else {
+    sortBy = ((year + 1) * 10);
+  }
+  const next = Semesters.find({ sortBy }).fetch();
+  if (next.length > 0) {
+    return next[0];
+  }
+  return undefined;
+}
+
+export function nextFallSpringSemester(semester) {
+  let sortBy = semester.sortBy;
+  const year = Math.trunc(sortBy / 10);
+  const semNum = sortBy % 10;
+  if (semNum < 2) {
+    sortBy += 1;
+  } else {
+    sortBy = ((year + 1) * 10);
+  }
+  const next = Semesters.find({ sortBy }).fetch();
+  if (next.length > 0) {
+    let sem = next[0];
+    if (sem.term === Semesters.SUMMER) {
+      sem = nextSemester(sem);
+    }
+    return sem;
+  }
+  return undefined;
+}
