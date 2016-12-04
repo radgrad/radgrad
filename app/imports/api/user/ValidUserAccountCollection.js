@@ -3,6 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { ROLE } from '/imports/api/role/Role';
 
 /** @module User */
 
@@ -29,8 +30,7 @@ class ValidUserAccountCollection extends BaseInstanceCollection {
     if (!lodash.isString(username)) {
       throw new Meteor.Error(`${username} is not a string.`);
     }
-    const id = this._collection.insert({ username });
-    return id;
+    return this._collection.insert({ username });
   }
 
   /**
@@ -42,7 +42,7 @@ class ValidUserAccountCollection extends BaseInstanceCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, 'ADMIN')) {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return null;
