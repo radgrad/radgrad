@@ -37,10 +37,7 @@ Template.Student_Home_Page.events({
   // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
 
-Template.Student_Home_Page.onRendered(function enablePopUp() {
-  this.$('.mini.label').popup({
-    on: 'click',
-  });
+Template.Student_Home_Page.onRendered(function enableVideo() {
   this.$('.ui.embed').embed();
 
 });
