@@ -4,6 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { BS_CS_TEMPLATE, BA_ICS_IT_TEMPLATE } from '../../../api/degree-program/degree-program';
+import { generateCoursePlan } from '../../../api/degree-program/plan-generator';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as semUtils from '../../../api/semester/SemesterUtilities';
@@ -64,7 +65,7 @@ Template.Degree_Plan_Generator.events({
     }
     const currentSemester = Semesters.getCurrentSemesterDoc();
     const startSemester = semUtils.nextFallSpringSemester(currentSemester);
-    console.log(template, startSemester, student);
+    console.log(generateCoursePlan(template, startSemester, student));
   },
 });
 

@@ -25,8 +25,8 @@ export function defineSemesters() {
 
 export function nextSemester(semester) {
   let sortBy = semester.sortBy;
-  const year = Math.trunc(sortBy / 10);
-  const semNum = sortBy % 10;
+  let year = Math.trunc(sortBy / 10);
+  let semNum = sortBy % 10;
   if (semNum < 2) {
     sortBy += 1;
   } else {
@@ -36,6 +36,17 @@ export function nextSemester(semester) {
   if (next.length > 0) {
     return next[0];
   }
+  year = Math.trunc(sortBy / 10);
+  semNum = sortBy % 10;
+  if (semNum === 0) {
+    return Semesters.findDoc(Semesters.define({ term: Semesters.SPRING, year }));
+  } else
+    if (semNum === 1) {
+      return Semesters.findDoc(Semesters.define({ term: Semesters.SUMMER, year }));
+    } else
+      if (semNum === 2) {
+        return Semesters.findDoc(Semesters.define({ term: Semesters.FALL, year }));
+      }
   return undefined;
 }
 

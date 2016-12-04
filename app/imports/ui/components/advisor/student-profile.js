@@ -128,7 +128,6 @@ Template.Student_Profile.onRendered(function studentProfileOnRendered() {
     // action: 'select',
   });
   updateSessionState();
-  console.log(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
 });
 
 Template.Student_Profile.onDestroyed(function studentProfileOnDestroyed() {
