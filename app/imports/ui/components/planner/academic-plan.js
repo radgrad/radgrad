@@ -522,7 +522,6 @@ Template.Academic_Plan_2.helpers({
     }
     return '';
   },
-
   springArgs(year) {
     if (Template.instance().state.get('currentSemesterID')) {
       const currentSemesterID = Template.instance().state.get('currentSemesterID');
@@ -580,9 +579,8 @@ Template.Academic_Plan_2.helpers({
     return getPlanningICE(cis);
   },
   years() {
-    const ay = AcademicYearInstances.find({
-      studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
-    }, { sort: { year: 1 } }).fetch();
+    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     const instance = Template.instance();
     if (ay.length > 0 && !instance.state.get('startYear')) {
       instance.state.set('startYear', ay[ay.length - 1].year);
@@ -710,8 +708,18 @@ Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {
     this.state.set('currentSemesterID', this.data.currentSemesterID);
     this.state.set('studentUsername', this.data.studentUserName);
   } else {
-    // alert('problem no template data.');
+    console.log('there is a problem no data.'); // eslint-disable-line no-console
   }
+  this.autorun(() => {
+    this.subscribe(AcademicYearInstances.getPublicationName());
+    this.subscribe(Courses.getPublicationName());
+    this.subscribe(CourseInstances.getPublicationName());
+    this.subscribe(Opportunities.getPublicationName());
+    this.subscribe(OpportunityInstances.getPublicationName());
+    this.subscribe(Semesters.getPublicationName());
+    this.subscribe(Users.getPublicationName());
+    this.subscribe(VerificationRequests.getPublicationName());
+  });
 });
 
 Template.Academic_Plan_2.onRendered(function academicPlan2OnRendered() {

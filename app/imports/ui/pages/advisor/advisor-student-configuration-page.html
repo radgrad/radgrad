@@ -1,13 +1,22 @@
 <template name="Advisor_Student_Configuration_Page">
   <div class="layout-page">
     {{#if Template.subscriptionsReady}}
+    <div class="ui container">
       {{> Student_Selector dictionary=getDictionary}}
 
-      {{> Student_Profile dictionary=getDictionary}}
+      <div class="ui stackable grid" style="padding-top: 1rem;">
+        <div class="ten wide column">
+          {{> Student_Profile dictionary=getDictionary}}
+        </div>
 
-      {{> Degree_Plan_Generator dictionary=getDictionary}}
+        <div class="six wide column">
+          {{> Degree_Plan_Generator dictionary=getDictionary}}
+        </div>
+      </div>
 
       {{> Level_Sticker_Log dictionary=getDictionary}}
+
+    </div>
     {{else}}
       {{> Loading}}
     {{/if}}

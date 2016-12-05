@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 
-import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
+import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -89,7 +89,7 @@ Template.Level_Sticker_Log.helpers({
 });
 
 Template.Level_Sticker_Log.events({
-  'click .jsLevelSticker': function clickJsLevelSticker(event, instance) {
+  'click .jsLevelSticker': function clickJsLevelSticker(event) {
     event.preventDefault();
     const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
     const levelDivs = event.target.parentElement.getElementsByTagName('a');

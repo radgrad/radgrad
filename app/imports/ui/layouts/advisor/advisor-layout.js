@@ -1,14 +1,22 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
 import { advisorTitle, facultyTitle, studentTitle, mentorTitle } from '../../../api/admin/AdminUtilities';
+import { advisorStudentTitle } from '../shared/advisor-utilities';
+import { updateSessionState } from '../../../startup/client/session-state';
 import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
+import { AdvisorChoices } from '../../../api/advisor/AdvisorChoiceCollection';
 import { Users } from '../../../api/user/UserCollection';
 
 Template.Advisor_Layout.onCreated(function appBodyOnCreated() {
   this.autorun(() => {
     this.subscribe(AdminChoices.getPublicationName());
+    this.subscribe(AdvisorChoices.getPublicationName());
     this.subscribe(Users.getPublicationName());
   });
+});
+
+Template.Advisor_Layout.onRendered(function advisorLayoutOnRendered() {
+  updateSessionState();
 });
 
 Template.Advisor_Layout.helpers({
@@ -18,10 +26,11 @@ Template.Advisor_Layout.helpers({
       { label: 'Verification Requests', route: RouteNames.advisorVerificationRequestsPendingPageRouteName },
       { label: 'Event Verification', route: RouteNames.advisorEventVerificationPageRouteName },
       { label: 'Completed Verifications', route: RouteNames.advisorCompletedVerificationsPageRouteName },
+      { label: advisorStudentTitle(), route: RouteNames.studentHomePageRouteName },
     ];
   },
   secondMenuLength() {
-    return 'four';
+    return 'five';
   },
   adminSecondMenuItems() {
     return [

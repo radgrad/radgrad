@@ -31,6 +31,8 @@ import { userDefinitions } from '/imports/startup/server/icsdata/UserDefinitions
 import { recommendationFeedbackDefinitions, warningFeedbackDefinitions,
     feedbackInstances }
     from '/imports/startup/server/icsdata/FeedbackDefinitions.js';
+import { defaultAdminAccount } from '/imports/startup/server/icsdata/AdminUser';
+import { exampleStudents } from '/imports/startup/server/icsdata/ExampleStudents';
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -92,8 +94,8 @@ Meteor.startup(() => {
     recommendationFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
     warningFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
   }
-  if (Meteor.settings.exampleStudents) {
-    Meteor.settings.exampleStudents.forEach((student) => {
+  if (exampleStudents) {
+    exampleStudents.forEach((student) => {
       if (Users.find({ username: student.slug }).count() === 0) {
         console.log(`defining ${student.slug}`);  // eslint-disable-line no-console
         ValidUserAccounts.define({ username: student.slug });
@@ -142,8 +144,8 @@ Meteor.startup(() => {
       return false;
     });
   }
-  if (Meteor.settings.defaultAdminAccount) {
-    const admin = Meteor.settings.defaultAdminAccount;
+  if (defaultAdminAccount) {
+    const admin = defaultAdminAccount;
     if (Users.find({ username: admin.slug }).count() === 0) {
       ValidUserAccounts.define({ username: admin.slug });
       console.log('Defining admin');  // eslint-disable-line no-console
