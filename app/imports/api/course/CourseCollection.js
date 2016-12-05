@@ -20,6 +20,7 @@ class CourseCollection extends BaseInstanceCollection {
   constructor() {
     super('Course', new SimpleSchema({
       name: { type: String },
+      shortName: { type: String },
       slugID: { type: SimpleSchema.RegEx.Id },
       number: { type: String },
       description: { type: String },
@@ -35,7 +36,8 @@ class CourseCollection extends BaseInstanceCollection {
   /**
    * Defines a new Course.
    * @example
-   * Courses.define({ name: 'Introduction to Scripting',
+   * Courses.define({ name: 'Introduction to the theory and practice of scripting',
+   *                  shortName: 'Intro to Scripting',
    *                  slug: 'ics215',
    *                  number: 'ICS 215',
    *                  description: 'Introduction to scripting languages for the integration of applications.',
@@ -44,7 +46,9 @@ class CourseCollection extends BaseInstanceCollection {
    *                  syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS215.html',
    *                  moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS215/',
    *                  prerequisites: ['ics211'] });
-   * @param { Object } description Object with keys name, slug, number, description, creditHrs, interests.
+   * @param { Object } description Object with keys name, shortName, slug, number, description, creditHrs, interests.
+   * Name is the official course name.
+   * ShortName is an optional abbreviation. Defaults to name.
    * Slug must not be previously defined.
    * CreditHrs is optional and defaults to 3. If supplied, must be a number between 1 and 15.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
@@ -54,7 +58,8 @@ class CourseCollection extends BaseInstanceCollection {
    * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest or invalid creditHrs.
    * @returns The newly created docID.
    */
-  define({ name, slug, number, description, creditHrs = 3, interests, syllabus, moreInformation, prerequisites = [] }) {
+  define({ name, shortName = name, slug, number, description, creditHrs = 3,
+      interests, syllabus, moreInformation, prerequisites = [] }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
@@ -68,7 +73,8 @@ class CourseCollection extends BaseInstanceCollection {
     }
     // Ensure each prereq is either a slug or a courseID.
     _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
-    const courseID = this._collection.insert({ name, slugID, number, description, creditHrs, interestIDs, syllabus,
+    const courseID =
+        this._collection.insert({ name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus,
     moreInformation, prerequisites });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);

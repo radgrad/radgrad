@@ -4,7 +4,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { checkPrerequisites } from '../../../api/course/CourseFunctions';
+import { checkPrerequisites } from './course-functions';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
