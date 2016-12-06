@@ -11,6 +11,7 @@
     "mddocs": "jsdoc2md imports/**/*.js > ../gitbook/api/jsdocs.md"
   },
   "dependencies": {
+    "babel-runtime": "^6.18.0",
     "bcrypt": "^0.8.7",
     "meteor-node-stubs": "~0.2.0"
   },
