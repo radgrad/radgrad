@@ -2,7 +2,7 @@
   <div class="layout-page">
     <div class="ui grid container stackable">
 
-      <div class="five wide column">
+      <div class="eleven wide column">
 
         <div class="ui segment">
           <div class="ui dividing header">
@@ -15,49 +15,6 @@
             <button class="fluid ui button" type="submit">Submit</button>
           </div>
         </div>
-
-
-        <div class="ui segment">
-          <div class="ui dividing header">
-            <h4>Mentor Directory</h4>
-          </div>
-
-          {{#each listMentors}}
-
-            <div class="item mentorspace-item-padding">
-              <div class="ui vertical accordion">
-
-                <div class="ui active selection list title">
-                  <div class="item">
-                    <i class="dropdown icon"></i>
-                    <img class="ui circular avatar image" src="../images/mentors/{{image}}">
-                    <div class="content">
-                      <a class="header">{{name}}</a>
-                      <div class="description mentorspace-title-size">{{title}}</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="active content">
-                  <div class="ui divider"></div>
-                  {{name}} is based in {{location}}<br>
-                  <i class="mail outline icon"></i>: <a href="mailto:{{email}}">{{email}}</a><br>
-                  <i class="linkedin icon"></i>: <a href="https://www.linkedin.com/in/{{linkedin}}">{{linkedin}}</a><br>
-                  <h6 class="ui horizontal divider header">
-                    Why I Mentor
-                  </h6>
-                  <div class="description mentorspace-description">{{mentor_reason}}</div>
-
-                </div>
-              </div>
-            </div>
-            <div class="ui divider"></div>
-
-          {{/each}}
-        </div>
-      </div>
-
-      <div class="eleven wide column">
 
         <div class="ui segments">
           <div class="ui segment">
@@ -365,6 +322,50 @@
         </div>
 
       </div>
+
+      <div class="five wide column">
+
+
+        <div class="ui segment">
+          <div class="ui dividing header">
+            <h4>Mentor Directory</h4>
+          </div>
+
+          {{#each listMentors}}
+
+            <div class="item mentorspace-item-padding">
+              <div class="ui vertical accordion">
+
+                <div class="ui active selection list title">
+                  <div class="item">
+                    <i class="dropdown icon"></i>
+                    <img class="ui circular avatar image" src="../images/mentors/{{image}}">
+                    <div class="content">
+                      <a class="header">{{name}}</a>
+                      <div class="description mentorspace-title-size">{{title}}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="active content">
+                  <div class="ui divider"></div>
+                  {{name}} is based in {{location}}<br>
+                  <i class="mail outline icon"></i>: <a href="mailto:{{email}}">{{email}}</a><br>
+                  <i class="linkedin icon"></i>: <a href="https://www.linkedin.com/in/{{linkedin}}">{{linkedin}}</a><br>
+                  <h6 class="ui horizontal divider header">
+                    Why I Mentor
+                  </h6>
+                  <div class="description mentorspace-description">{{mentor_reason}}</div>
+
+                </div>
+              </div>
+            </div>
+            <div class="ui divider"></div>
+
+          {{/each}}
+        </div>
+      </div>
+
     </div>
 
 
