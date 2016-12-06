@@ -1,15 +1,10 @@
 <template name="Student_Ice">
   <div class="layout-page">
     <div class="ui grid container">
+      {{> Student_Ice_Help}}
       <div class="two wide column">
         {{> Home_Menu}}
-        <div style="margin-top: 350px; margin-left: 20px; width: 180px" class="ui left fixed vertical text menu">
-          <div class="ui green segment container">
-            <div style="width: 160px; height: 250px; overflow:scroll;">
-            <p style="padding-top:10px">There are three graphs that display your ICE score: <span class="innovation">Innovation (blue)</span>, <span class="competency">Competence (green)</span>, and <span class="experience">Experience (orange)</span>. The total amount of possible points for each graph is 100. Each graph has a dark fill, and a light fill. The dark fill represents the actual amount of points you have. These are points gathered from completing and getting approval from various events. The light fill represents the projected amount of points you have. These are the amount of points that you will have after completing and getting approval from all events on your schedule plan. This includes future events that have yet to occur. The fraction on the inside of the graph is a numerical representation of the same data. The first number is the amount of actual points you have, and the second number is the amount of projected points you have.</p>
-              </div>
-          </div>
-        </div>
+
       </div>
 
       <div class="ten wide stretched column">
