@@ -1,3 +1,8 @@
-/**
- * Created by ataka on 11/7/16.
- */
+import { Template } from 'meteor/templating';
+import { adminDataModelCareerGoalsPageRouteName } from '/imports/startup/client/router.js';
+
+Template.Admin_DataModel_Menu.helpers({
+  careerGoalsRouteName() {
+    return adminDataModelCareerGoalsPageRouteName;
+  },
+});
