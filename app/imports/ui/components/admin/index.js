@@ -1,3 +1,6 @@
+import './admin-datamodel-menu.html';
+import './admin-datamodel-menu.js';
+
 import './advisor-selector.html';
 import './advisor-selector.js';
 
