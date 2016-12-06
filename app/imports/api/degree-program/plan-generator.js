@@ -16,6 +16,7 @@ export function generateCoursePlan(template, startSemester, student) {
   const plan = {};
   const studentID = student._id;
   const instances = CourseInstances.find({ studentID }).fetch();
+  const grade = 'A';
   const courseTakenIDs = [];
   instances.forEach((courseInstance) => {
     if (CourseInstances.isICS(courseInstance._id)) {
@@ -42,6 +43,7 @@ export function generateCoursePlan(template, startSemester, student) {
         semester: Semesters.getSlug(semester._id),
         course: slug,
         note,
+        grade,
         student: student.username,
       });
       plan[semStr].push(course.shortName);
@@ -62,6 +64,7 @@ export function generateCoursePlan(template, startSemester, student) {
         semester: Semesters.getSlug(semester._id),
         course: slug,
         note,
+        grade,
         student: student.username,
       });
       plan[semStr].push(course.shortName);
@@ -81,6 +84,7 @@ export function generateCoursePlan(template, startSemester, student) {
         semester: Semesters.getSlug(semester._id),
         course: Courses.getSlug(bestChoice._id),
         note: bestChoice.number,
+        grade,
         student: student.username,
       });
       plan[semStr].push(bestChoice.shortName);
@@ -94,6 +98,7 @@ export function generateCoursePlan(template, startSemester, student) {
           semester: Semesters.getSlug(semester._id),
           course: slug,
           note,
+          grade,
           student: student.username,
         });
         plan[semStr].push(course.shortName);
@@ -112,6 +117,7 @@ export function generateCoursePlan(template, startSemester, student) {
         semester: Semesters.getSlug(semester._id),
         course: Courses.getSlug(bestChoice._id),
         note: bestChoice.number,
+        grade,
         student: student.username,
       });
       plan[semStr].push(bestChoice.shortName);
@@ -125,6 +131,7 @@ export function generateCoursePlan(template, startSemester, student) {
           semester: Semesters.getSlug(semester._id),
           course: slug,
           note,
+          grade,
           student: student.username,
         });
         plan[semStr].push(course.shortName);
@@ -145,6 +152,7 @@ export function generateCoursePlan(template, startSemester, student) {
         semester: Semesters.getSlug(semester._id),
         course: Courses.getSlug(bestChoice._id),
         note: bestChoice.number,
+        grade,
         student: student.username,
       });
       plan[semStr].push(bestChoice.shortName);
@@ -156,6 +164,7 @@ export function generateCoursePlan(template, startSemester, student) {
           semester: Semesters.getSlug(semester._id),
           course: Courses.getSlug(bestChoice._id),
           note: bestChoice.number,
+          grade,
           student: student.username,
         });
       } else
@@ -165,6 +174,7 @@ export function generateCoursePlan(template, startSemester, student) {
             semester: Semesters.getSlug(semester._id),
             course: Courses.getSlug(bestChoice._id),
             note: bestChoice.number,
+            grade,
             student: student.username,
           });
         } else {
@@ -177,6 +187,7 @@ export function generateCoursePlan(template, startSemester, student) {
               semester: Semesters.getSlug(semester._id),
               course: slug,
               note,
+              grade,
               student: student.username,
             });
             plan[semStr].push(course.shortName);
@@ -195,6 +206,7 @@ export function generateCoursePlan(template, startSemester, student) {
         semester: Semesters.getSlug(semester._id),
         course: Courses.getSlug(bestChoice._id),
         note: bestChoice.number,
+        grade,
         student: student.username,
       });
       plan[semStr].push(bestChoice.shortName);
@@ -206,6 +218,7 @@ export function generateCoursePlan(template, startSemester, student) {
           semester: Semesters.getSlug(semester._id),
           course: Courses.getSlug(bestChoice._id),
           note: bestChoice.number,
+          grade,
           student: student.username,
         });
       } else
@@ -215,6 +228,7 @@ export function generateCoursePlan(template, startSemester, student) {
             semester: Semesters.getSlug(semester._id),
             course: Courses.getSlug(bestChoice._id),
             note: bestChoice.number,
+            grade,
             student: student.username,
           });
         } else {
@@ -227,6 +241,7 @@ export function generateCoursePlan(template, startSemester, student) {
               semester: Semesters.getSlug(semester._id),
               course: slug,
               note,
+              grade,
               student: student.username,
             });
             plan[semStr].push(course.shortName);
@@ -247,6 +262,7 @@ export function generateCoursePlan(template, startSemester, student) {
         semester: Semesters.getSlug(semester._id),
         course: Courses.getSlug(bestChoice._id),
         note: bestChoice.number,
+        grade,
         student: student.username,
       });
       plan[semStr].push(bestChoice.shortName);
@@ -258,6 +274,7 @@ export function generateCoursePlan(template, startSemester, student) {
           semester: Semesters.getSlug(semester._id),
           course: Courses.getSlug(bestChoice._id),
           note: bestChoice.number,
+          grade,
           student: student.username,
         });
       } else
@@ -267,6 +284,7 @@ export function generateCoursePlan(template, startSemester, student) {
             semester: Semesters.getSlug(semester._id),
             course: Courses.getSlug(bestChoice._id),
             note: bestChoice.number,
+            grade,
             student: student.username,
           });
         } else {
@@ -279,6 +297,7 @@ export function generateCoursePlan(template, startSemester, student) {
               semester: Semesters.getSlug(semester._id),
               course: slug,
               note,
+              grade,
               student: student.username,
             });
             plan[semStr].push(course.shortName);
@@ -297,6 +316,7 @@ export function generateCoursePlan(template, startSemester, student) {
         semester: Semesters.getSlug(semester._id),
         course: Courses.getSlug(bestChoice._id),
         note: bestChoice.number,
+        grade,
         student: student.username,
       });
       plan[semStr].push(bestChoice.shortName);
@@ -308,6 +328,7 @@ export function generateCoursePlan(template, startSemester, student) {
           semester: Semesters.getSlug(semester._id),
           course: Courses.getSlug(bestChoice._id),
           note: bestChoice.number,
+          grade,
           student: student.username,
         });
       } else
@@ -317,6 +338,7 @@ export function generateCoursePlan(template, startSemester, student) {
             semester: Semesters.getSlug(semester._id),
             course: Courses.getSlug(bestChoice._id),
             note: bestChoice.number,
+            grade,
             student: student.username,
           });
         } else {
@@ -329,6 +351,7 @@ export function generateCoursePlan(template, startSemester, student) {
               semester: Semesters.getSlug(semester._id),
               course: slug,
               note,
+              grade,
               student: student.username,
             });
             plan[semStr].push(course.shortName);
