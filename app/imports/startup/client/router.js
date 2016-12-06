@@ -31,11 +31,11 @@ adminRoutes.route('/', {
   },
 });
 
-export const adminCrudPageRouteName = 'Admin_Crud_Page';
-adminRoutes.route('/crud', {
-  name: adminCrudPageRouteName,
+export const adminDataModelPageRouteName = 'Admin_DataModel_Page';
+adminRoutes.route('/datamodel', {
+  name: adminDataModelPageRouteName,
   action() {
-    BlazeLayout.render('Admin_Layout', { main: 'Admin_Crud_Page' });
+    BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_Page' });
   },
 });
 

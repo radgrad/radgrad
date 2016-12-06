@@ -17,15 +17,15 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 // import { WorkInstances } from '../../../api/work/WorkInstanceCollection';
 
 
-Template.Admin_Crud_Page.helpers({
+Template.Admin_DataModel_Page.helpers({
   // add you helpers here
 });
 
-Template.Admin_Crud_Page.events({
+Template.Admin_DataModel_Page.events({
   // add your events here
 });
 
-Template.Admin_Crud_Page.onCreated(function adminCrudPageOnCreated() {
+Template.Admin_DataModel_Page.onCreated(function adminCrudPageOnCreated() {
   // Need to subscribe to everything.
   this.autorun(() => {
     this.subscribe(AcademicYearInstances.getPublicationName());
@@ -47,11 +47,11 @@ Template.Admin_Crud_Page.onCreated(function adminCrudPageOnCreated() {
   });
 });
 
-Template.Admin_Crud_Page.onRendered(function adminCrudPageOnRendered() {
+Template.Admin_DataModel_Page.onRendered(function adminCrudPageOnRendered() {
   // add your statement here
 });
 
-Template.Admin_Crud_Page.onDestroyed(function adminCrudPageOnDestroyed() {
+Template.Admin_DataModel_Page.onDestroyed(function adminCrudPageOnDestroyed() {
   // add your statement here
 });
 
