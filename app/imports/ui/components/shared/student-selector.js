@@ -86,7 +86,9 @@ Template.Student_Selector.events({
         AdminChoices.updateStudentID(adminChoice._id, user._id);
       }
       if (AdvisorChoices.find({ advisorID: userID }).count() === 0) {
-        AdvisorChoices.define({ advisorID: userID, studentID: user._id });
+        const id = AdvisorChoices.define({ advisorID: userID, studentID: user._id });
+        AdvisorChoices.updateUsername(id, username);
+        AdvisorChoices.updateStudentID(id, user._id);
       } else if (AdvisorChoices.find({ advisorID: userID }).count() === 1) {
         const advisorChoice = AdvisorChoices.find({ advisorID: userID }).fetch()[0];
         AdvisorChoices.updateUsername(advisorChoice._id, username);

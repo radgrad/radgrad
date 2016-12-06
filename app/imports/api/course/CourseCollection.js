@@ -58,8 +58,10 @@ class CourseCollection extends BaseInstanceCollection {
    * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest or invalid creditHrs.
    * @returns The newly created docID.
    */
-  define({ name, shortName = name, slug, number, description, creditHrs = 3,
-      interests, syllabus, moreInformation, prerequisites = [] }) {
+  define({
+      name, shortName = name, slug, number, description, creditHrs = 3,
+      interests, syllabus, moreInformation, prerequisites = []
+  }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
@@ -74,11 +76,19 @@ class CourseCollection extends BaseInstanceCollection {
     // Ensure each prereq is either a slug or a courseID.
     _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
     const courseID =
-        this._collection.insert({ name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus,
-    moreInformation, prerequisites });
+        this._collection.insert({
+          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus,
+          moreInformation, prerequisites
+        });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
     return courseID;
+  }
+
+  getSlug(courseID) {
+    this.assertDefined(courseID);
+    const courseDoc = this.findDoc(courseID);
+    return Slugs.findDoc(courseDoc.slugID).name;
   }
 }
 
