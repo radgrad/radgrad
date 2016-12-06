@@ -60,7 +60,7 @@ class CourseCollection extends BaseInstanceCollection {
    */
   define({
       name, shortName = name, slug, number, description, creditHrs = 3,
-      interests, syllabus, moreInformation, prerequisites = []
+      interests, syllabus, moreInformation, prerequisites = [],
   }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
@@ -78,7 +78,7 @@ class CourseCollection extends BaseInstanceCollection {
     const courseID =
         this._collection.insert({
           name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus,
-          moreInformation, prerequisites
+          moreInformation, prerequisites,
         });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
