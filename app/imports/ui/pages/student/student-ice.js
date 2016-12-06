@@ -6,7 +6,8 @@ Template.Student_Ice.onRendered(function enableAccordian() {
   this.$('.accordion').accordion({
     selector: {
       trigger: '.title .icon'
-    }
+    },
+    exclusive: false
   })
 
 });
