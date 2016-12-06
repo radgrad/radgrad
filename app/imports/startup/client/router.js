@@ -31,11 +31,24 @@ adminRoutes.route('/', {
   },
 });
 
+const adminDataModelRoutes = adminRoutes.group({
+  prefix: '/datamodel',
+  name: 'admin_datamodel',
+});
+
 export const adminDataModelPageRouteName = 'Admin_DataModel_Page';
-adminRoutes.route('/datamodel', {
+adminDataModelRoutes.route('/', {
   name: adminDataModelPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_Page' });
+  },
+});
+
+export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoals_Page';
+adminDataModelRoutes.route('/career-goals', {
+  name: adminDataModelCareerGoalsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_CareerGoals_Page' });
   },
 });
 
