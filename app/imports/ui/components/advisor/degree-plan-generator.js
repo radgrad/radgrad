@@ -100,7 +100,6 @@ Template.Degree_Plan_Generator.events({
     if (currentSemester.sortBy === startSemester.sortBy) {
       startSemester = semUtils.nextFallSpringSemester(startSemester);
     }
-    console.log(startSemester);
     // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
     courseUtils.clearPlannedCourseInstances(studentID);
     const cis = CourseInstances.find({ studentID }).fetch();
@@ -113,8 +112,7 @@ Template.Degree_Plan_Generator.events({
       // TODO: CAM figure out which AYs to remove.
     }
 
-    const plan = generateCoursePlan(template, startSemester, student);
-    // console.log(plan);
+    generateCoursePlan(template, startSemester, student);
     FlowRouter.go(studentDegreePlannerPageRouteName);
   },
 });
