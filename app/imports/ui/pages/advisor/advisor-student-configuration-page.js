@@ -3,9 +3,12 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
 import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
+import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
@@ -30,9 +33,12 @@ Template.Advisor_Student_Configuration_Page.onCreated(function advisorStudentCon
     this.state.set(sessionKeys.CURRENT_STUDENT_ID, SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
   }
   this.autorun(() => {
+    this.subscribe(AcademicYearInstances.getPublicationName());
     this.subscribe(CareerGoals.getPublicationName());
     this.subscribe(Courses.getPublicationName());
     this.subscribe(CourseInstances.getPublicationName());
+    this.subscribe(FeedbackInstances.getPublicationName());
+    this.subscribe(Feedbacks.getPublicationName());
     this.subscribe(Interests.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());

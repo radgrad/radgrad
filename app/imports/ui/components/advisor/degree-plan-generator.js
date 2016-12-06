@@ -8,6 +8,7 @@ import { generateCoursePlan } from '../../../api/degree-program/plan-generator';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as semUtils from '../../../api/semester/SemesterUtilities';
+import * as courseUtils from '../../../api/course/CourseFunctions';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Degree_Plan_Generator.helpers({
@@ -65,7 +66,11 @@ Template.Degree_Plan_Generator.events({
     }
     const currentSemester = Semesters.getCurrentSemesterDoc();
     const startSemester = semUtils.nextFallSpringSemester(currentSemester);
-    console.log(generateCoursePlan(template, startSemester, student));
+    // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
+    courseUtils.clearPlannedCourseInstances(studentID);
+
+    const plan = generateCoursePlan(template, startSemester, student);
+    console.log(plan);
   },
 });
 

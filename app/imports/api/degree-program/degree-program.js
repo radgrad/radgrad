@@ -14,7 +14,7 @@ export const BS_CS_TEMPLATE = {
   },
   ay2: {
     fallSem: ['ics311', 'ics314'],
-    springSem: ['ics222', 'ics321'],
+    springSem: ['ics212', 'ics321'],
   },
   ay3: {
     fallSem: [['ics313', 'ics361'], ['ics312', 'ics331']],
