@@ -154,6 +154,16 @@ class SemesterCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Returns the slug associated with the semesterID.
+   * @param semesterID the semester ID.
+   */
+  getSlug(semesterID) {
+    this.assertSemester(semesterID);
+    const semesterDoc = this.findDoc(semesterID);
+    return Slugs.findDoc(semesterDoc.slugID).name;
+  }
+
+  /**
    * Returns the passed semester, formatted as a string.
    * @param semesterID The semester.
    * @param nospace If true, then term and year are concatenated without a space in between.
