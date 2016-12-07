@@ -6,6 +6,7 @@
     <p>Generate template degree plan given:</p>
     <b class="radgrad-dimGrey-text">Student:</b> {{userFullName}} <br>
     <b class="radgrad-dimGrey-text">Desired Degree:</b> {{desiredDegree}} <br>
+    <b class="radgrad-dimGrey-text">Start Semester:</b> {{startSemester}} <br>
     <div class="ui grid">
       <div class="eight wide column">
         <b class="radgrad-dimGrey-text">Interests:</b><span class="left floated"> <br>
@@ -38,7 +39,8 @@
           <div class="default text">{{currentSemesterName}}</div>
           <div class="menu">
             {{#each semester in futureSemesters}}
-              <div class="item{{#if selectedSemester semester}} active selected{{/if}}" data-value="{{semesterSlug semester}}">{{semesterName semester}}</div>
+              <div class="item{{#if selectedSemester semester}} active selected{{/if}}"
+                   data-value="{{semesterSlug semester}}">{{semesterName semester}}</div>
             {{/each}}
           </div>
         </div>

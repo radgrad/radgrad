@@ -68,6 +68,13 @@ Template.Degree_Plan_Generator.helpers({
   semesterSlug(semester) {
     return Semesters.getSlug(semester._id);
   },
+  startSemester() {
+    const startSemester = Template.instance().state.get('selectedSemester');
+    if (startSemester) {
+      return Semesters.toString(startSemester._id, false);
+    }
+    return '';
+  },
   userFullName() {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
@@ -119,7 +126,7 @@ Template.Degree_Plan_Generator.events({
 
 Template.Degree_Plan_Generator.onCreated(function degreePlanGeneratorOnCreated() {
   this.state = new ReactiveDict();
-  updateSessionState(SessionState);
+  updateSessionState();
 });
 
 Template.Degree_Plan_Generator.onRendered(function degreePlanGeneratorOnRendered() {

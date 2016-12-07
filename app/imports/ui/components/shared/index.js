@@ -1,3 +1,6 @@
+import './advisor-log-viewer.html';
+import './advisor-log-viewer.js';
+
 import './student-selector.html';
 import './student-selector.js';
 
