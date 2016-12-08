@@ -7,6 +7,7 @@ import '/imports/api/degree';
 import '/imports/api/feedback';
 import '/imports/api/ice';
 import '/imports/api/interest';
+import '/imports/api/log';
 import '/imports/api/opportunity';
 import '/imports/api/role';
 import '/imports/api/semester';
