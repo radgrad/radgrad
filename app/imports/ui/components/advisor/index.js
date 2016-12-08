@@ -1,3 +1,6 @@
+import './advisor-log-entry.html';
+import './advisor-log-entry.js';
+
 import './degree-plan-generator.html';
 import './degree-plan-generator.js';
 

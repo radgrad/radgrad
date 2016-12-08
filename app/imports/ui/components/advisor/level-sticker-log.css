@@ -1,3 +1,7 @@
 h3.ui.centered.header.noTopMargin {
   margin-top: 12px;
 }
+
+.ui.selection.dropdown {
+  min-width: 5em;
+}
