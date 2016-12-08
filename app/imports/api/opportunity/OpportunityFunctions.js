@@ -31,7 +31,7 @@ export const semesterOpportunities = (semester) => {
   const id = semester._id;
   const opps = Opportunities.find().fetch();
   return _.filter(opps, function filter(opportunity) {
-    return _.indexOf(opportunity.interestIDs, id) !== -1;
+    return _.indexOf(opportunity.semesterIDs, id) !== -1;
   });
 };
 
@@ -51,4 +51,13 @@ export const getStudentSemesterOpportunityChoices = (semester, studentID) => {
   });
   arr.max = max;
   return arr;
-}
+};
+
+export const chooseStudentSemesterOpportunity = (semester, studentID) => {
+  const choices = getStudentSemesterOpportunityChoices(semester, studentID);
+  const best = choices[choices.max];
+  if (best) {
+    return best[getRandomInt(0, best.length)];
+  }
+  return undefined;
+};

@@ -120,6 +120,16 @@ class OpportunityCollection extends BaseInstanceCollection {
     // TODO: check for defined OpportunityInstances before deletion.
     super.removeIt(opportunity);
   }
+
+  /**
+   * Returns the slug for the given opportunity ID.
+   * @param opportunityID the opportunity ID.
+   */
+  getSlug(opportunityID) {
+    this.assertDefined(opportunityID);
+    const courseDoc = this.findDoc(opportunityID);
+    return Slugs.findDoc(courseDoc.slugID).name;
+  }
 }
 
 /**

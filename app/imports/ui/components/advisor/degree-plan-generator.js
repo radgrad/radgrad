@@ -106,7 +106,7 @@ Template.Degree_Plan_Generator.events({
     const currentSemester = Semesters.getCurrentSemesterDoc();
     let startSemester = instance.state.get('selectedSemester');
     if (!startSemester) {
-      startSemester = Semesters.getCurrentSemesterDoc();
+      startSemester = currentSemester;
     }
     if (currentSemester.sortBy === startSemester.sortBy) {
       startSemester = semUtils.nextFallSpringSemester(startSemester);
@@ -123,7 +123,6 @@ Template.Degree_Plan_Generator.events({
     } else {
       // TODO: CAM figure out which AYs to remove.
     }
-
     generateDegreePlan(template, startSemester, student);
     FlowRouter.go(studentDegreePlannerPageRouteName);
   },
