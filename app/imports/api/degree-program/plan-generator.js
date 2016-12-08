@@ -5,6 +5,7 @@ import { Courses } from '../course/CourseCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import * as semUtils from '../semester/SemesterUtilities';
 import * as courseUtils from '../course/CourseFunctions';
+import * as opportunityUtils from '../opportunity/OpportunityFunctions';
 
 const area = 'PlanGeneratorPrerequisites';
 
@@ -12,7 +13,7 @@ function createNote(slug) {
   return `${slug.substring(0, 3).toUpperCase()} ${slug.substr(3, 7)}`;
 }
 
-export function generateCoursePlan(template, startSemester, student) {
+export function generateDegreePlan(template, startSemester, student) {
   const plan = {};
   const studentID = student._id;
   const instances = CourseInstances.find({ studentID }).fetch();
@@ -27,10 +28,12 @@ export function generateCoursePlan(template, startSemester, student) {
   });
   // year 1
   let semester = startSemester;
+  // Define the Academic Year(s)
   if (semester.term === Semesters.SPRING) {
     AcademicYearInstances.define({ year: semester.year - 1, student: student.username });
   }
   AcademicYearInstances.define({ year: semester.year, student: student.username });
+  // Define the CourseInstances
   let semesterCourses = template.ay1.fallSem;
   let semStr = Semesters.toString(semester._id, true);
   plan[semStr] = [];
@@ -50,7 +53,13 @@ export function generateCoursePlan(template, startSemester, student) {
       courseTakenIDs.push(course._id);
     }
   });
+  // Choose an opportunity.
+  let semesterOpportunities = opportunityUtils.getStudentSemesterOpportunityChoices(semester, student._id);
+  console.log(semesterOpportunities);
+  // TODO: CAM we want to choose an opportunity for the summer semesters so we don't want to do the next step.
   semester = semUtils.nextFallSpringSemester(semester);
+  semesterOpportunities = opportunityUtils.getStudentSemesterOpportunityChoices(semester, student._id);
+  console.log(semesterOpportunities);
   semStr = Semesters.toString(semester._id, true);
   plan[semStr] = [];
   semesterCourses = template.ay1.springSem;
@@ -73,6 +82,8 @@ export function generateCoursePlan(template, startSemester, student) {
   });
   // year 2
   semester = semUtils.nextFallSpringSemester(semester);
+  semesterOpportunities = opportunityUtils.getStudentSemesterOpportunityChoices(semester, student._id);
+  console.log(semesterOpportunities);
   AcademicYearInstances.define({ year: semester.year, student: student.username });
   semStr = Semesters.toString(semester._id, true);
   plan[semStr] = [];
@@ -107,6 +118,8 @@ export function generateCoursePlan(template, startSemester, student) {
     }
   });
   semester = semUtils.nextFallSpringSemester(semester);
+  semesterOpportunities = opportunityUtils.getStudentSemesterOpportunityChoices(semester, student._id);
+  console.log(semesterOpportunities);
   semStr = Semesters.toString(semester._id, true);
   plan[semStr] = [];
   semesterCourses = template.ay2.springSem;
@@ -141,6 +154,8 @@ export function generateCoursePlan(template, startSemester, student) {
   });
   // year 3
   semester = semUtils.nextFallSpringSemester(semester);
+  semesterOpportunities = opportunityUtils.getStudentSemesterOpportunityChoices(semester, student._id);
+  console.log(semesterOpportunities);
   AcademicYearInstances.define({ year: semester.year, student: student.username });
   semStr = Semesters.toString(semester._id, true);
   plan[semStr] = [];
@@ -196,6 +211,8 @@ export function generateCoursePlan(template, startSemester, student) {
         }
   });
   semester = semUtils.nextFallSpringSemester(semester);
+  semesterOpportunities = opportunityUtils.getStudentSemesterOpportunityChoices(semester, student._id);
+  console.log(semesterOpportunities);
   semStr = Semesters.toString(semester._id, true);
   plan[semStr] = [];
   semesterCourses = template.ay3.springSem;
