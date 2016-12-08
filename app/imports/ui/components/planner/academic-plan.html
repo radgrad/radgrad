@@ -5,7 +5,7 @@
         <div class="ui equal width grid">
           <div class=" row">
             {{#each year in years}}
-              <div class="stretched column">
+              <div class="stretched column academicYear" style="padding-left: 2px; padding-right: 2px;">
                 <div class="ui center aligned segment">
                   <div class="ui top left attached green label">AY {{year.year}} - {{year.springYear}}</div>
                   {{> Semester_List (fallArgs year)}}
@@ -17,7 +17,7 @@
           </div>
           <div class="row noTopPadding">
             {{#each year in years}}
-              <div class="center aligned column">
+              <div class="center aligned column" style="padding-left: 2px; padding-right: 2px;">
                 {{#if isFuture year}}
                   Planned ICE: {{> ICE_Badge ice=(yearPlanningICE year)}}
                 {{else}}
