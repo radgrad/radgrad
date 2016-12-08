@@ -403,14 +403,17 @@
 
 .c100:after {
   position: absolute;
-  top: 0.08em;
-  left: 0.08em;
+  top: 0em;
+  left: 0em;
   display: block;
   content: " ";
   border-radius: 50%;
-  background-color: white;
-  width: 0.84em;
-  height: 0.84em;
+  background-color: transparent; /*Center background color*/
+  width: 1em;
+  height: 1em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cccccc;
   -webkit-transition-property: all;
   -moz-transition-property: all;
   -o-transition-property: all;
