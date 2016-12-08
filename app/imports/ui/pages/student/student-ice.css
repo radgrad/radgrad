@@ -345,13 +345,13 @@
 }
 .c100 {
   position: relative;
-  font-size: 120px;
+  font-size: 120px; /*controls entire graph size*/
   width: 1em;
   height: 1em;
   border-radius: 50%;
   float: left;
   margin: 0 0.1em 0.1em 0;
-  background-color: white; /*Remainder graph color*/
+  background-color: white; /*Remainder bar graph color*/
 }
 .c100 *,
 .c100 *:before,
@@ -375,10 +375,14 @@
   width: 100%;
   z-index: 1;
   left: 0;
-  top: 0;
+  right: 0;
+  bottom: 0;
+  top: 12px;
+  margin-left: auto;
+  margin-right: auto;
   width: 5em;
   line-height: 5em;
-  font-size: 0.2em;
+  font-size: 0.15em; /*Controls span font size*/
   color: #cccccc;
   display: block;
   text-align: center;
