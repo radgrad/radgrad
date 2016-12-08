@@ -2,6 +2,8 @@
   <div class="layout-page">
     {{#if Template.subscriptionsReady}}
       <div class="ui container">
+        <p>{{> Help_Panel}}</p>
+
         {{> Student_Selector dictionary=getDictionary}}
 
         <div class="ui stackable grid" style="padding-top: 1rem;">

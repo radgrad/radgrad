@@ -2,10 +2,13 @@
  * Created by ataka on 10/30/16.
  */
 import { Template } from 'meteor/templating';
-
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.Student_Home_Help.events({
-  // add your events here
+  routeName() {
+    console.log(FlowRouter.getRouteName());
+    return FlowRouter.getRouteName();
+  },
 });
 
 Template.Student_Home_Help.onCreated(function () {

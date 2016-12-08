@@ -22,10 +22,3 @@ import './student-ice-help.js';
 
 import './warn-recommend.html';
 import './warn-recommend.js';
-
-
-
-
-
-
-
