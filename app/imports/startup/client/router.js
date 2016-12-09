@@ -31,13 +31,8 @@ adminRoutes.route('/', {
   },
 });
 
-const adminDataModelRoutes = adminRoutes.group({
-  prefix: '/datamodel',
-  name: 'admin_datamodel',
-});
-
 export const adminDataModelPageRouteName = 'Admin_DataModel_Page';
-adminDataModelRoutes.route('/', {
+adminRoutes.route('/datamodel', {
   name: adminDataModelPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_Page' });
@@ -45,12 +40,47 @@ adminDataModelRoutes.route('/', {
 });
 
 export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoals_Page';
-adminDataModelRoutes.route('/career-goals', {
+adminRoutes.route('/datamodel/career-goals', {
   name: adminDataModelCareerGoalsPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_CareerGoals_Page' });
   },
 });
+
+
+
+// const adminDataModelRoutes = adminRoutes.group({
+//   prefix: '/datamodel',
+//   name: 'admin_datamodel',
+// });
+//
+// export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoals_Page';
+// adminDataModelRoutes.route('/career-goals', {
+//   name: adminDataModelCareerGoalsPageRouteName,
+//   action(params) {
+//     console.log('Career goals', params, FlowRouter.getRouteName());
+//     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_CareerGoals_Page' });
+//   },
+// });
+//
+// export const adminHomePageRouteName = 'Admin_Home_Page';
+// adminRoutes.route('/', {
+//   name: adminHomePageRouteName,
+//   action(params) {
+//     console.log('Home', params, FlowRouter.getRouteName());
+//     BlazeLayout.render('Admin_Layout', { main: 'Admin_Home_Page' });
+//   },
+// });
+//
+//
+// export const adminDataModelPageRouteName = 'Admin_DataModel_Page';
+// adminDataModelRoutes.route('/', {
+//   name: adminDataModelPageRouteName,
+//   action(params) {
+//     console.log('Datamodel', params, FlowRouter.getRouteName());
+//     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_Page' });
+//   },
+// });
 
 /*                        ADVISOR ROUTES                       */
 

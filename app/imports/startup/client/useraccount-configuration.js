@@ -16,7 +16,10 @@ Tracker.autorun(function loggedIn() {
     if (Roles.userIsInRole(id, ROLE.ADMIN)) {
       SessionState.set(sessionKeys.CURRENT_ROLE, ROLE.ADMIN);
       SessionState.set(sessionKeys.CURRENT_ADMIN_ID, id);
-      FlowRouter.go('/admin');
+      const currPath = FlowRouter.current().path;
+      if (currPath && currPath === '/') {
+        FlowRouter.go('/admin');
+      }
     } else if (Roles.userIsInRole(id, ROLE.ADVISOR)) {
       SessionState.set(sessionKeys.CURRENT_ROLE, ROLE.ADVISOR);
       SessionState.set(sessionKeys.CURRENT_ADVISOR_ID, id);

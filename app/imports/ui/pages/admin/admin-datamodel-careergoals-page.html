@@ -8,19 +8,43 @@
         <div class="twelve wide column">
 
           <div class="ui container">
-            <form class="ui form">
-              <div class="ui inline field">
-                <label style="font-size: 1.5rem; color: #0C6449">Abigail Kealoha (1234-5678)</label>
-                <div class="ui action input">
-                  <input type="text" name="uhId" placeholder="8 digit ID (1234-5678)">
-                  <button class="ui compact button" type="submit" style="background-color: #6FBE44; color: white;">
-                    Retrieve
-                  </button>
-                  <button class=" ui compact button" style="background-color: #52A724; color: white;"><i
-                      class="icon large student" style="padding-left: 0.4rem"></i></button>
+            <div class="ui padded container segment" style="margin-bottom: 0 !important;">
+              <div class="ui dividing header"><h4>ADD CAREER GOAL</h4></div>
+
+              <div class="ui equal width form">
+                <div class="fields">
+                  <!-- Role -->
+                  <div class="field">
+                    <label>Name</label>
+                    <input type="text" name="career-goal-name" placeholder="Career Goal">
+                  </div>
+                  <!-- Degree -->
+                  <div class="field">
+                    <label>Slug</label>
+                    <input type="text" name="career-goal-slug" placeholder="career-goal">
+                  </div>
+                </div>
+
+                <div class="fields">
+                  <!-- Role -->
+                  <div class="field">
+                    <label>Interests</label>
+                    <input type="text" name="career-goal-name" placeholder="Career Goal">
+                  </div>
+                  <!-- Degree -->
+                  <div class="field">
+                    <label>More Information</label>
+                    <input type="text" name="career-goal-slug" placeholder="http://careergoal.com/">
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label>Description</label>
+                  <textarea rows="10" name="career-goal-description" placeholder="Describe the Career Goal here"></textarea>
                 </div>
               </div>
-            </form>
+
+            </div>
           </div>
         </div>
 
