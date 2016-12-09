@@ -377,7 +377,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  top: 12px;
+  top: 3px;
   margin-left: auto;
   margin-right: auto;
   width: 5em;
@@ -387,18 +387,6 @@
   display: block;
   text-align: center;
   white-space: nowrap;
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -o-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  -webkit-transition-timing-function: ease-out;
-  -moz-transition-timing-function: ease-out;
-  -o-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
 }
 
 .c100:after {
@@ -412,20 +400,8 @@
   width: 1em;
   height: 1em;
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   border-color: #cccccc;
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -o-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  -webkit-transition-timing-function: ease-in;
-  -moz-transition-timing-function: ease-in;
-  -o-transition-timing-function: ease-in;
-  transition-timing-function: ease-in;
 }
 
 .c100 .slice {
@@ -1147,7 +1123,7 @@
 }
 
 .c100.lightblue > span {
-  color: steelblue !important;
+  color: steelblue;
 }
 
 .c100.blue .bar,
@@ -1161,7 +1137,7 @@
 }
 
 .c100.blue > span {
-  color: steelblue !important;
+  color: steelblue;
 }
 
 .c100.lightgreen .bar,
@@ -1175,7 +1151,7 @@
 }
 
 .c100.lightgreen > span {
-  color:  green !important;
+  color:  green;
 }
 
 .c100.green .bar,
@@ -1189,7 +1165,7 @@
 }
 
 .c100.green > span {
-  color: green !important;
+  color: green;
 }
 
 
@@ -1200,11 +1176,11 @@
 
 .c100.lightorange.dark .bar,
 .c100.lightorange.dark .fill {
-  border-color: lightsalmon !important;
+  border-color: tan !important;
 }
 
 .c100.lightorange > span {
-  color: darkorange !important;
+  color: goldenrod;
 }
 
 .c100.orange .bar,
@@ -1214,11 +1190,11 @@
 
 .c100.orange.dark .bar,
 .c100.orange.dark .fill {
-  border-color: #e08833 !important;
+  border-color: goldenrod !important;
 }
 
 .c100.orange > span {
-  color: #dd9d22 !important;
+  color: goldenrod;
 }
 
 
