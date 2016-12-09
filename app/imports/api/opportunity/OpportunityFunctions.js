@@ -27,18 +27,25 @@ export const calculateOpportunityCompatibility = (opportunityID, studentID) => {
   return intersection.length;
 };
 
-export const semesterOpportunities = (semester) => {
+export const semesterOpportunities = (semester, semesterNumber) => {
   const id = semester._id;
   const opps = Opportunities.find().fetch();
-  return _.filter(opps, function filter(opportunity) {
+  const semesterOpps = _.filter(opps, function filter(opportunity) {
     return _.indexOf(opportunity.semesterIDs, id) !== -1;
   });
+  if (semesterNumber < 3) { // AY 1.
+    return _.filter(semesterOpps, function onlyEvents(opportunity) {
+      const type = Opportunities.getOpportunityTypeDoc(opportunity._id);
+      return type.name === 'Event' || type.name === 'Club';
+    });
+  }
+  return semesterOpps;
 };
 
-export const getStudentSemesterOpportunityChoices = (semester, studentID) => {
+export const getStudentSemesterOpportunityChoices = (semester, semesterNumber, studentID) => {
   const arr = {};
   let max = 0;
-  const opportunities = semesterOpportunities(semester);
+  const opportunities = semesterOpportunities(semester, semesterNumber);
   _.map(opportunities, (opportunity) => {
     const score = calculateOpportunityCompatibility(opportunity._id, studentID);
     if (score > max) {
@@ -53,8 +60,8 @@ export const getStudentSemesterOpportunityChoices = (semester, studentID) => {
   return arr;
 };
 
-export const chooseStudentSemesterOpportunity = (semester, studentID) => {
-  const choices = getStudentSemesterOpportunityChoices(semester, studentID);
+export const chooseStudentSemesterOpportunity = (semester, semesterNumber, studentID) => {
+  const choices = getStudentSemesterOpportunityChoices(semester, semesterNumber, studentID);
   const best = choices[choices.max];
   if (best) {
     return best[getRandomInt(0, best.length)];
