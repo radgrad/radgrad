@@ -1,3 +1,4 @@
 import './OpportunityCollection';
-import './OpportunityTypeCollection';
+import './OpportunityFunctions';
 import './OpportunityInstanceCollection';
+import './OpportunityTypeCollection';

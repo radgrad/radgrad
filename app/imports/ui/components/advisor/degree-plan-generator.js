@@ -8,11 +8,12 @@ import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCol
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { BS_CS_TEMPLATE, BA_ICS_TEMPLATE } from '../../../api/degree-program/degree-program';
-import { generateCoursePlan } from '../../../api/degree-program/plan-generator';
+import { generateDegreePlan } from '../../../api/degree-program/plan-generator';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as semUtils from '../../../api/semester/SemesterUtilities';
 import * as courseUtils from '../../../api/course/CourseFunctions';
+import * as opportunityUtils from '../../../api/opportunity/OpportunityFunctions';
 import { Users } from '../../../api/user/UserCollection.js';
 import { studentDegreePlannerPageRouteName } from '../../../startup/client/router';
 
@@ -104,11 +105,15 @@ Template.Degree_Plan_Generator.events({
     }
     const currentSemester = Semesters.getCurrentSemesterDoc();
     let startSemester = instance.state.get('selectedSemester');
+    if (!startSemester) {
+      startSemester = currentSemester;
+    }
     if (currentSemester.sortBy === startSemester.sortBy) {
       startSemester = semUtils.nextFallSpringSemester(startSemester);
     }
     // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
     courseUtils.clearPlannedCourseInstances(studentID);
+    opportunityUtils.clearPlannedOpportunityInstances(studentID);
     const cis = CourseInstances.find({ studentID }).fetch();
     const ays = AcademicYearInstances.find({ studentID }).fetch();
     if (cis.length === 0) {
@@ -118,8 +123,7 @@ Template.Degree_Plan_Generator.events({
     } else {
       // TODO: CAM figure out which AYs to remove.
     }
-
-    generateCoursePlan(template, startSemester, student);
+    generateDegreePlan(template, startSemester, student);
     FlowRouter.go(studentDegreePlannerPageRouteName);
   },
 });
