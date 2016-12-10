@@ -3,8 +3,6 @@
  */
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { Users } from '../user/UserCollection';
 
 /** @module Help */
 

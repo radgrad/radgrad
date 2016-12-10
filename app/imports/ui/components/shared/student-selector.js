@@ -16,7 +16,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 const userDefineSchema = new SimpleSchema({
   firstName: { type: String },
   lastName: { type: String },
-  userName: { type: String },
+  username: { type: String },
   uhID: {
     type: String,
     regEx: /\d{4}-\d{4}/,
@@ -123,6 +123,7 @@ Template.Student_Selector.events({
       uhID = `${uhID.substring(0, 4)}-${uhID.substring(4, 8)}`;
     }
     const newStudentData = { firstName, lastName, username, uhID };
+    console.log(newStudentData, event.target.username); // eslint-disable-line no-console
     // Clear out any old validation errors.
     instance.context.resetValidation();
     // Invoke clean so that newStudentData reflects what will be defined

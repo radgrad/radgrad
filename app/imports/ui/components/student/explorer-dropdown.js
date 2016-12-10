@@ -11,15 +11,15 @@ Template.Explorer_Dropdown.events({
   // add your events here
 });
 
-Template.Explorer_Dropdown.onCreated(function () {
+Template.Explorer_Dropdown.onCreated(function explorerDropdownOnCreated() {
   // add your statement here
 });
 
-Template.Explorer_Dropdown.onRendered(function () {
+Template.Explorer_Dropdown.onRendered(function explorerDropdownOnRendered() {
   // add your statement here
 });
 
-Template.Explorer_Dropdown.onDestroyed(function () {
+Template.Explorer_Dropdown.onDestroyed(function explorerDropdownOnDestroyed() {
   // add your statement here
 });
 
