@@ -1,11 +1,13 @@
 import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { AdminChoices } from '../../api/admin/AdminChoiceCollection';
 import { AdvisorChoices } from '../../api/advisor/AdvisorChoiceCollection';
+import { AdvisorLogs } from '../../api/log/AdvisorLogCollection';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
+import { HelpMessages } from '../../api/help/HelpMessageCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
@@ -19,11 +21,13 @@ import { VerificationRequests } from '../../api/verification/VerificationRequest
 AcademicYearInstances.publish();
 AdminChoices.publish();
 AdvisorChoices.publish();
+AdvisorLogs.publish();
 CareerGoals.publish();
 CourseInstances.publish();
 Courses.publish();
 FeedbackInstances.publish();
 Feedbacks.publish();
+HelpMessages.publish();
 Interests.publish();
 InterestTypes.publish();
 Opportunities.publish();

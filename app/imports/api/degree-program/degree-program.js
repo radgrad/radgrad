@@ -14,7 +14,7 @@ export const BS_CS_TEMPLATE = {
   },
   ay2: {
     fallSem: ['ics311', 'ics314'],
-    springSem: ['ics222', 'ics321'],
+    springSem: ['ics212', 'ics321'],
   },
   ay3: {
     fallSem: [['ics313', 'ics361'], ['ics312', 'ics331']],
@@ -44,11 +44,11 @@ export const BS_CS_SECSCI_TEMPLATE = {
   },
   ay3: {
     fallSem: ['ics455'],
-    springSem: [['ics321', 'ics332', 'ics415', 'ics351'], ['ics414', 'ics464']],
+    springSem: [['ics321', 'ics332', 'ics351'], ['ics414', 'ics415', 'ics464']],
   },
   ay4: {
-    fallSem: [['ics321', 'ics332', 'ics415', 'ics351'], 'ics423'],
-    springSem: [['ics425', 'ics426'], ['ics491', 'ics495']],
+    fallSem: [['ics321', 'ics332', 'ics351'], 'ics423'],
+    springSem: [['ics425', 'ics426', 'ics491', 'ics495'], ['ics441', 'ics451']],
   },
 };
 
@@ -63,6 +63,25 @@ export const BA_ICS = {
     'ics432', 'ics435', 'ics441', 'ics442', 'ics443', 'ics451', 'ics452', 'ics455', 'ics461', 'ics462', 'ics464',
     'ics465', 'ics466', 'ics469', 'ics471', 'ics475', 'ics476', 'ics481', 'ics483', 'ics484', 'ics484', 'ics491'],
   electiveReqts: '3 x 4?? upto 3 499 credits and 3 ics491',
+};
+
+export const BA_ICS_TEMPLATE = {
+  ay1: {
+    fallSem: ['ics111', 'ics141'],
+    springSem: ['ics211', 'ics241'],
+  },
+  ay2: {
+    fallSem: ['ics311', 'ics314'],
+    springSem: ['ics212', 'ics321'],
+  },
+  ay3: {
+    fallSem: [['ics312', 'ics331']],
+    springSem: ['ics332'],
+  },
+  ay4: {
+    fallSem: [['ics313', 'ics361']],
+    springSem: ['ics4xx'],
+  },
 };
 
 export const BA_ICS_SECSCI = {
