@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-Template.Student_AboutMe.onCreated(function appBodyOnCreated() {
+Template.Student_AboutMe.onCreated(function studentAboutMeOnCreated() {
   // placeholder: typically you will put global subscriptions here if you remove the autopublish package.
 });
 
@@ -12,6 +12,6 @@ Template.Student_AboutMe.events({
   // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
 
-Template.Student_AboutMe.onRendered( {
+Template.Student_AboutMe.onRendered(function studentAboutMeOnRendered() {
 
 });

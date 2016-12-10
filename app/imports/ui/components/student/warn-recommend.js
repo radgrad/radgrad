@@ -9,15 +9,15 @@ Template.Warn_Recommend.events({
   // add your events here
 });
 
-Template.Warn_Recommend.onCreated(function () {
+Template.Warn_Recommend.onCreated(function warnRecommendOnCreated() {
   // add your statement here
 });
 
-Template.Warn_Recommend.onRendered(function () {
+Template.Warn_Recommend.onRendered(function warnRecommendOnRendered() {
   // add your statement here
 });
 
-Template.Warn_Recommend.onDestroyed(function () {
+Template.Warn_Recommend.onDestroyed(function warnRecommendOnDestroyed() {
   // add your statement here
 });
 

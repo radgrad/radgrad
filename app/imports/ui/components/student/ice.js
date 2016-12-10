@@ -8,15 +8,15 @@ Template.Ice.events({
   // add your events here
 });
 
-Template.Ice.onCreated(function () {
+Template.Ice.onCreated(function iceOnCreated() {
   // add your statement here
 });
 
-Template.Ice.onRendered(function () {
+Template.Ice.onRendered(function iceOnRendered() {
   // add your statement here
 });
 
-Template.Ice.onDestroyed(function () {
+Template.Ice.onDestroyed(function iceOnDestroyed() {
   // add your statement here
 });
 
