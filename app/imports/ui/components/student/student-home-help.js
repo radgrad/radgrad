@@ -5,10 +5,7 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.Student_Home_Help.events({
-  routeName() {
-    console.log(FlowRouter.getRouteName());
-    return FlowRouter.getRouteName();
-  },
+  // add your events here.
 });
 
 Template.Student_Home_Help.onCreated(function () {

@@ -14,7 +14,6 @@ Template.Advisor_Log_Entry.events({
       const text = textAreas[0].value;
       const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
       const advisorID = SessionState.get(sessionKeys.CURRENT_ADVISOR_ID);
-      console.log(studentID, advisorID, text);
       AdvisorLogs.define({ advisorID, studentID, text });
     }
   },
