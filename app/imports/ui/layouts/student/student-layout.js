@@ -5,12 +5,14 @@ import { advisorStudentTitle } from '../shared/advisor-utilities';
 import { updateSessionState } from '../../../startup/client/session-state';
 import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
 import { AdvisorChoices } from '../../../api/advisor/AdvisorChoiceCollection';
+import { HelpInstances } from '../../../api/help/HelpInstanceCollection';
 import { Users } from '../../../api/user/UserCollection';
 
 Template.Student_Layout.onCreated(function studentLayoutOnCreated() {
   this.autorun(() => {
     this.subscribe(AdminChoices.getPublicationName());
     this.subscribe(AdvisorChoices.getPublicationName());
+    this.subscribe(HelpInstances.getPublicationName());
     this.subscribe(Users.getPublicationName());
   });
 });

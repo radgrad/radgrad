@@ -4,12 +4,14 @@ import { advisorTitle, facultyTitle, studentTitle, mentorTitle } from '../../../
 import { updateSessionState } from '../../../startup/client/session-state';
 import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
 import { AdvisorChoices } from '../../../api/advisor/AdvisorChoiceCollection';
+import { HelpInstances } from '../../../api/help/HelpInstanceCollection';
 import { Users } from '../../../api/user/UserCollection';
 
 Template.Admin_Layout.onCreated(function adminLayoutOnCreated() {
   this.autorun(() => {
     this.subscribe(AdminChoices.getPublicationName());
     this.subscribe(AdvisorChoices.getPublicationName());
+    this.subscribe(HelpInstances.getPublicationName());
     this.subscribe(Users.getPublicationName());
   });
 });

@@ -1,8 +1,6 @@
 /**
  * Created by Cam on 12/7/2016.
  */
-import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { ROLE } from '/imports/api/role/Role';

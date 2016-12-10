@@ -4,6 +4,8 @@ import './advisor-log-viewer.js';
 import './help-panel.html';
 import './help-panel.js';
 
+import './reset-help-choice.html';
+
 import './student-selector.html';
 import './student-selector.js';
 
