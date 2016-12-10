@@ -4,6 +4,7 @@
     <div class="ui container">
       {{#if currentUser}}
         {{#if Template.subscriptionsReady}}
+          <p>{{> Help_Panel}}</p>
           {{> Verification_Requests_Pending }}
         {{else}}
           {{> Loading}}

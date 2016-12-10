@@ -1,6 +1,9 @@
 <template name="Student_AboutMe">
   <div class="layout-page">
     <div class="ui grid container">
+      <div class="sixteen wide column">
+        <p>{{> Help_Panel}}</p>
+      </div>
       <div class="two wide column">
         {{> Home_Menu}}
       </div>
@@ -23,9 +26,10 @@
               </div>
               <div class="five wide column">
 
-                      <div class="item">BS Computer Science</div><br>
+                <div class="item">BS Computer Science</div>
+                <br>
 
-                    <a href="{{pathFor 'Student_Explorer_Degree_Page'}}">Edit in degree explorer</a>
+                <a href="{{pathFor 'Student_Explorer_Degree_Page'}}">Edit in degree explorer</a>
 
               </div>
             </div>
@@ -70,25 +74,25 @@
                 <p><b>Interests</b></p>
               </div>
               <div class="five wide column">
-                  <a class="ui label"><i class="fitted star icon"></i>Artificial Intelligence</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Web Development</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Natural Language Processing</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Machine Learning</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Mobile Design</a>
+                <a class="ui label"><i class="fitted star icon"></i>Artificial Intelligence</a>
+                <a class="ui label"><i class="fitted star icon"></i>Web Development</a>
+                <a class="ui label"><i class="fitted star icon"></i>Natural Language Processing</a>
+                <a class="ui label"><i class="fitted star icon"></i>Machine Learning</a>
+                <a class="ui label"><i class="fitted star icon"></i>Mobile Design</a>
                 <br><br><a href="{{pathFor 'Student_Explorer_Interest_Page'}}">Edit in interest
-                  explorer</a>
+                explorer</a>
               </div>
               <div class="two wide column">
                 <p><b>Career Goals</b></p>
               </div>
               <div class="six wide column">
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Software Engineer</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Data Scientist</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Web Developer</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Network Operator</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Entrepreneur</a>
+                <a class="ui label"><i class="fitted suitcase icon"></i>Software Engineer</a>
+                <a class="ui label"><i class="fitted suitcase icon"></i>Data Scientist</a>
+                <a class="ui label"><i class="fitted suitcase icon"></i>Web Developer</a>
+                <a class="ui label"><i class="fitted suitcase icon"></i>Network Operator</a>
+                <a class="ui label"><i class="fitted suitcase icon"></i>Entrepreneur</a>
                 <br><br><a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in career
-                  explorer</a>
+                explorer</a>
               </div>
             </div>
             <div class="row">

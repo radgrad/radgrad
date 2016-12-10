@@ -3,6 +3,7 @@
 
     <div class="ui container">
       {{#if Template.subscriptionsReady}}
+        <p>{{> Help_Panel}}</p>
         {{> Verification_Event }}
       {{else}}
         {{> Loading }}

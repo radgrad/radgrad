@@ -10,14 +10,59 @@
  */
 export const helpMessageDefinitions = [
   {
+    routeName: 'Admin_Home_Page',
+    title: 'Admin Home Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Admin_Crud_Page',
+    title: 'Admin CRUD Page Help',
+    text: 'Help text.',
+  },
+  {
     routeName: 'Advisor_Student_Configuration_Page',
     title: 'Setting up a new Student.',
     text: 'You can update a student\'s degree plan, or view the student\'s current degree plan.',
   },
   {
+    routeName: 'Advisor_Verification_Requests_Pending_Page',
+    title: 'Advisor Verification Requests Pending Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Advisor_Event_Verification_Page',
+    title: 'Advisor Event Verification Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Advisor_Completed_Verifications_Page',
+    title: 'Advisor Completed Verifications Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Faculty_Home_Page',
+    title: 'Faculty Home Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Mentor_Home_Page',
+    title: 'Mentor Home Page Help',
+    text: 'Help text.',
+  },
+  {
     routeName: 'Student_Home_Page',
     title: 'Learn about your home page',
     text: '<p>Your home page provides the latest information on your degree plan.</p>\n\n<p>The Content of Interest pane provides information on selected opportunities and courses that we hope will be of interest to you based on your selected interests and career goals. Click "View More" to go to a page with details, "Add to plan" to add it to your Degree Plan, and "Hide" if you\'re not interested in this content and don\'t want to see it in your feed.</p>\n\n<p>The ICS Teaser pane provides very short videos by ICS community members. When you have a spare moment, take a look at a video or two! </p>\n\n<p>Finally, the Recent Community Activity pane gives you a sense of what other ICS students are doing.</p>\n\n<p>(If you want to remove this help pane from this page, click on the "X" in the upper right corner to hide it. You can always bring it back from your profile page.)</p>',
+  },
+  {
+    routeName: 'Student_AboutMe',
+    title: 'Student About Me Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Student_Levels',
+    title: 'Student Levels Help',
+    text: 'Help text.',
   },
   {
     routeName: 'Student_Ice',
@@ -28,5 +73,40 @@ export const helpMessageDefinitions = [
     routeName: 'Student_Degree_Planner_Page',
     title: 'Modify Your Degree Plan',
     text: 'Stuff',
+  },
+  {
+    routeName: 'Student_MentorSpace_Page',
+    title: 'Student MentorSpace Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Student_Explorer_Page',
+    title: 'Student Explorer Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Student_Explorer_Degree_Page',
+    title: 'Student Explorer Degree Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Student_Explorer_Course_Page',
+    title: 'Student Explorer Course Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Student_Explorer_Interest_Page',
+    title: 'Student Explorer Interest Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Student_Explorer_Opportunity_Page',
+    title: 'Student Explorer Opportunity Page Help',
+    text: 'Help text.',
+  },
+  {
+    routeName: 'Student_Explorer_Career_Page',
+    title: 'Student Explorer Career Page Help',
+    text: 'Help text.',
   },
 ];

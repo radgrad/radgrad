@@ -190,7 +190,7 @@ studentRoutes.route('/degree-planner', {
   },
 });
 
-export const studentMentorSpacePageRouteName = 'Student_MentorSpace_Page';
+export const studentMentorSpacePageRouteName = 'Student_MentorSpace_PageStudent_MentorSpace_Page';
 studentRoutes.route('/mentorspace', {
   name: studentMentorSpacePageRouteName,
   action() {
