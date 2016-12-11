@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Tracker } from 'meteor/tracker';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -10,7 +9,8 @@ Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY',
 });
 
-Tracker.autorun(function loggedIn() {
+Accounts.onLogin(function loggedIn() {
+  console.log('loggedIn');
   if (Meteor.userId()) {
     const id = Meteor.userId();
     if (Roles.userIsInRole(id, ROLE.ADMIN)) {
