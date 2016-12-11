@@ -29,6 +29,14 @@ class CourseInstanceCollection extends BaseCollection {
       note: { type: String, optional: true },
       studentID: { type: SimpleSchema.RegEx.Id },
       ice: { type: Object, optional: true, blackbox: true },
+    }), new SimpleSchema({
+      semester: { type: String },
+      course: { type: String },
+      verified: { type: Boolean },
+      grade: { type: String, optional: true },
+      note: { type: String, optional: true },
+      student: { type: String },
+      creditHrs: { type: Number },
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
       'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W'];

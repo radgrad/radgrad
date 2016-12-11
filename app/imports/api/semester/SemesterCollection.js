@@ -21,6 +21,9 @@ class SemesterCollection extends BaseInstanceCollection {
       year: { type: Number },
       sortBy: { type: Number },
       slugID: { type: SimpleSchema.RegEx.Id },
+    }), new SimpleSchema({
+      term: { type: String },
+      year: { type: Number },
     }));
     this.SPRING = 'Spring';
     this.SUMMER = 'Summer';

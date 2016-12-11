@@ -23,6 +23,10 @@ class HelpMessageCollection extends BaseCollection {
       routeName: { type: String },
       title: { type: String },
       text: { type: String },
+    }), new SimpleSchema({
+      routeName: { type: String },
+      title: { type: String },
+      text: { type: String },
     }));
   }
 

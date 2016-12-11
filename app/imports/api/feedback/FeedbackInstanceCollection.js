@@ -24,6 +24,11 @@ class FeedbackInstanceCollection extends BaseCollection {
       userID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
       area: { type: String },
+    }), new SimpleSchema({
+      feedback: { type: String },
+      user: { type: String },
+      description: { type: String },
+      area: { type: String },
     }));
   }
 

@@ -23,6 +23,13 @@ class InterestCollection extends BaseInstanceCollection {
       interestTypeID: { type: SimpleSchema.RegEx.Id },
       // Optional data
       moreInformation: { type: String, optional: true },
+    }), new SimpleSchema({
+      name: { type: String },
+      slug: { type: String },
+      description: { type: String },
+      interestType: { type: String },
+      // Optional data
+      moreInformation: { type: String, optional: true },
     }));
   }
 

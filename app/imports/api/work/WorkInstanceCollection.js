@@ -23,6 +23,10 @@ class WorkInstanceCollection extends BaseCollection {
       semesterID: { type: SimpleSchema.RegEx.Id },
       hrsWk: { type: Number },
       studentID: { type: SimpleSchema.RegEx.Id },
+    }), new SimpleSchema({
+      semester: { type: String },
+      hrsWk: { type: Number },
+      student: { type: String },
     }));
   }
 

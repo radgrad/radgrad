@@ -26,6 +26,11 @@ class OpportunityInstanceCollection extends BaseCollection {
       verified: { type: Boolean },
       studentID: { type: SimpleSchema.RegEx.Id },
       ice: { type: Object, optional: true, blackbox: true },
+    }), new SimpleSchema({
+      semester: { type: String },
+      opportunity: { type: String },
+      verified: { type: Boolean, optional: true },
+      student: { type: String },
     }));
   }
 

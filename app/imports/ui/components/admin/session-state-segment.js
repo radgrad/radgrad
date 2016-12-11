@@ -35,7 +35,7 @@ Template.Session_State_Segment.events({
 Template.Session_State_Segment.onCreated(function sessionStateSegmentOnCreated() {
   const adminID = Meteor.userId();
   if (AdminChoices.find().count() === 0) {
-    AdminChoices.define({ adminID });
+    Meteor.call('Collection.define', { collectionName: 'AdminChoices', doc: { adminID } });
   }
   const adminChoice = AdminChoices.find({ adminID }).fetch()[0];
   if (!SessionState.get(sessionKeys.CURRENT_ROLE)) {

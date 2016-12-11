@@ -35,6 +35,19 @@ class OpportunityCollection extends BaseInstanceCollection {
       // Optional data
       moreInformation: { type: String, optional: true },
       ice: { type: Object, optional: true, blackbox: true },
+    }), new SimpleSchema({
+      name: { type: String },
+      slug: { type: String },
+      description: { type: String },
+      opportunityType: { type: String },
+      sponsor: { type: String },
+      interests: { type: [String] },
+      semesters: { type: [String] },
+      // Optional data
+      eventDate: { type: Date, optional: true },
+      independentStudy: { type: Boolean, optional: true },
+      moreInformation: { type: String, optional: true },
+      ice: { type: Object, optional: true, blackbox: true },
     }));
   }
 

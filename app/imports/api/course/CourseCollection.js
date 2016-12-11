@@ -30,6 +30,18 @@ class CourseCollection extends BaseInstanceCollection {
       syllabus: { type: String, optional: true },
       moreInformation: { type: String, optional: true },
       prerequisites: { type: [String], optional: true }, // stored as a slug for some reason.
+    }), new SimpleSchema({
+      name: { type: String },
+      shortName: { type: String },
+      slug: { type: String },
+      number: { type: String },
+      description: { type: String },
+      creditHrs: { type: Number },
+      interests: { type: [String] },
+      // Optional data
+      syllabus: { type: String, optional: true },
+      moreInformation: { type: String, optional: true },
+      prerequisites: { type: [String], optional: true }, // stored as a slug for some reason.
     }));
   }
 

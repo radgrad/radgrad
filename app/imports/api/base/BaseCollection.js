@@ -18,13 +18,15 @@ class BaseCollection {
    * Defines internal fields needed by all entities: _type, _collectionName, _collection, and _schema.
    * @param {String} type The name of the entity defined by the subclass.
    * @param {SimpleSchema} schema The schema for validating fields on insertion to the DB.
+   * @param {SimpleSchema} defineSchema the schema for validating the define parameters.
    */
-  constructor(type, schema) {
+  constructor(type, schema, defineSchema) {
     this._type = type;
     this._collectionName = `${type}Collection`;
     this._collection = new Mongo.Collection(`${type}Collection`);
     this._schema = schema;
     this._collection.attachSchema(this._schema);
+    this._defineSchema = defineSchema;
   }
 
   /**

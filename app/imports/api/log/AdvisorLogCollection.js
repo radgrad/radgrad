@@ -22,6 +22,10 @@ class AdvisorLogCollection extends BaseCollection {
       advisorID: { type: SimpleSchema.RegEx.Id },
       text: { type: String },
       createdOn: { type: Date },
+    }), new SimpleSchema({
+      student: { type: String },
+      advisor: { type: String },
+      text: { type: String },
     }));
   }
 

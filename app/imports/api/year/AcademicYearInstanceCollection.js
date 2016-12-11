@@ -22,6 +22,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
       springYear: { type: Number },
       studentID: { type: SimpleSchema.RegEx.Id },
       semesterIDs: { type: [SimpleSchema.RegEx.Id] },
+    }), new SimpleSchema({
+      year: { type: Number },
+      student: { type: String },
     }));
   }
 

@@ -20,15 +20,22 @@ class AdminChoiceCollection extends BaseCollection {
       username: { type: String, optional: true },
       facultyID: { type: SimpleSchema.RegEx.Id, optional: true },
       mentorID: { type: SimpleSchema.RegEx.Id, optional: true },
+    }), new SimpleSchema({
+      adminID: { type: SimpleSchema.RegEx.Id },
+      advisorID: { type: SimpleSchema.RegEx.Id, optional: true },
+      studentID: { type: SimpleSchema.RegEx.Id, optional: true },
+      facultyID: { type: SimpleSchema.RegEx.Id, optional: true },
+      mentorID: { type: SimpleSchema.RegEx.Id, optional: true },
     }));
   }
 
   /**
    * Defines a new AdminChoice.
-   * @param advisorID The optional advisorID.
-   * @param studentID The optional studentID.
-   * @param facultyID The optional facultyID.
-   * @param mentorID The optional mentorID.
+   * @param {SimpleSchema.RegEx.Id} adminID the admin ID.
+   * @param {SimpleSchema.RegEx.Id} advisorID The optional advisorID.
+   * @param {SimpleSchema.RegEx.Id} studentID The optional studentID.
+   * @param {SimpleSchema.RegEx.Id} facultyID The optional facultyID.
+   * @param {SimpleSchema.RegEx.Id} mentorID The optional mentorID.
    * @returns {any}
    */
   define({ adminID, advisorID = null, studentID = null, facultyID = null, mentorID = null }) {

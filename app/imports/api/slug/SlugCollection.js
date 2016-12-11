@@ -19,6 +19,9 @@ class SlugCollection extends BaseCollection {
       name: { type: String },
       entityName: { type: String },
       entityID: { type: SimpleSchema.RegEx.Id, optional: true },
+    }), new SimpleSchema({
+      name: { type: String },
+      entityName: { type: String },
     }));
   }
 

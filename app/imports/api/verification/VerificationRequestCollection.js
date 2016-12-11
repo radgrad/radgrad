@@ -38,6 +38,10 @@ class VerificationRequestCollection extends BaseCollection {
       status: { type: String },
       processed: { type: [ProcessedSchema] },
       ice: { type: Object, optional: true, blackbox: true },
+    }), new SimpleSchema({
+      student: { type: String },
+      opportunityInstance: { type: SimpleSchema.RegEx.Id },
+      submittedOn: { type: Date, optional: true },
     }));
     this.ACCEPTED = 'Accepted';
     this.REJECTED = 'Rejected';

@@ -24,6 +24,13 @@ class CareerGoalCollection extends BaseInstanceCollection {
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
       // Optional data
       moreInformation: { type: String, optional: true },
+    }), new SimpleSchema({
+      name: { type: String },
+      slug: { type: String },
+      description: { type: String },
+      interests: { type: [String] },
+      // Optional data
+      moreInformation: { type: String, optional: true },
     }));
   }
 
