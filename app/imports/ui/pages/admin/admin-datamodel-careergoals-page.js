@@ -13,8 +13,11 @@ Template.Admin_DataModel_CareerGoals_Page.onCreated(function adminCrudPageOnCrea
   this.subscribe(CareerGoals.getPublicationName());
 });
 
-Template.Admin_DataModel_CareerGoals_Page.onRendered(function adminCrudPageOnRendered() {
-  // add your statement here
+Template.Admin_DataModel_CareerGoals_Page.onRendered(function adminDataModelPageOnRendered() {
+  console.log('onRendered');
+  this.$('.dropdown').dropdown({
+    // action: 'select',
+  });
 });
 
 Template.Admin_DataModel_CareerGoals_Page.onDestroyed(function adminCrudPageOnDestroyed() {

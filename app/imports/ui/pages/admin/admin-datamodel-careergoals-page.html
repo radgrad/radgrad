@@ -1,53 +1,15 @@
 <template name="Admin_DataModel_CareerGoals_Page">
+
   <div class="layout-page">
     {{#if Template.subscriptionsReady}}
-      <div class="ui centered grid container">
-        <div class="four wide column">
+      <div style="margin-left: 10px; margin-right: 10px;" class="ui centered grid ">
+        <div class="three wide column">
           {{> Admin_DataModel_Menu}}
         </div>
-        <div class="twelve wide column">
-
-          <div class="ui container">
-            <div class="ui padded container segment" style="margin-bottom: 0 !important;">
-              <div class="ui dividing header"><h4>ADD CAREER GOAL</h4></div>
-
-              <div class="ui equal width form">
-                <div class="fields">
-                  <!-- Role -->
-                  <div class="field">
-                    <label>Name</label>
-                    <input type="text" name="career-goal-name" placeholder="Career Goal">
-                  </div>
-                  <!-- Degree -->
-                  <div class="field">
-                    <label>Slug</label>
-                    <input type="text" name="career-goal-slug" placeholder="career-goal">
-                  </div>
-                </div>
-
-                <div class="fields">
-                  <!-- Role -->
-                  <div class="field">
-                    <label>Interests</label>
-                    <input type="text" name="career-goal-name" placeholder="Career Goal">
-                  </div>
-                  <!-- Degree -->
-                  <div class="field">
-                    <label>More Information</label>
-                    <input type="text" name="career-goal-slug" placeholder="http://careergoal.com/">
-                  </div>
-                </div>
-
-                <div class="field">
-                  <label>Description</label>
-                  <textarea rows="10" name="career-goal-description" placeholder="Describe the Career Goal here"></textarea>
-                </div>
-              </div>
-
-            </div>
-          </div>
+        <div class="thirteen wide column">
+          {{> Add_Career_Goal_Widget }}
+          {{> List_Career_Goals_Widget }}
         </div>
-
       </div>
     {{else}}
       {{> Loading}}
