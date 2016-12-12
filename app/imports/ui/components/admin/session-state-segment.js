@@ -37,7 +37,7 @@ Template.Session_State_Segment.onCreated(function sessionStateSegmentOnCreated()
   if (AdminChoices.find().count() === 0) {
     Meteor.call('Collection.define', { collectionName: 'AdminChoices', doc: { adminID } });
   }
-  const adminChoice = AdminChoices.find({ adminID }).fetch()[0];
+  const adminChoice = AdminChoices.findDoc({ adminID });
   if (!SessionState.get(sessionKeys.CURRENT_ROLE)) {
     SessionState.set(sessionKeys.CURRENT_ROLE, ROLE.ADMIN);
   }

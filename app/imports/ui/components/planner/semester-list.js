@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { ReactiveDict } from 'meteor/reactive-dict';
@@ -263,9 +264,13 @@ Template.Semester_List.events({
     event.preventDefault();
     if (Template.instance().state.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
-      const semesterId = Template.instance().state.get('semester')._id;
+      const semesterID = Template.instance().state.get('semester')._id;
       if (CourseInstances.isDefined(id)) {
-        CourseInstances.updateSemester(id, semesterId);
+        Meteor.call('Collection.update', {
+          collectionName: 'CourseInstances',
+          id,
+          modifier: { semesterID },
+        });
         checkPrerequisites();
       } else {
         const opportunities = OpportunityInstances.find({
@@ -273,7 +278,11 @@ Template.Semester_List.events({
           _id: id,
         }).fetch();
         if (opportunities.length > 0) {
-          OpportunityInstances.updateSemester(opportunities[0]._id, semesterId);
+          Meteor.call('Collection.update', {
+            collectionName: 'OpportunityInstances',
+            id: opportunities[0]._id,
+            modifier: { semesterID },
+          });
         }
       }
     }
@@ -297,7 +306,10 @@ Template.Semester_List.events({
       grade: '***',
       student: username,
     };
-    CourseInstances.define(ci);
+    Meteor.call('Collection.define', {
+      collectionName: 'CourseInstances',
+      doc: ci,
+    });
     checkPrerequisites();
     Tracker.afterFlush(() => {
       template.$('.ui.icon.mini.button')
@@ -345,13 +357,19 @@ Template.Semester_List.events({
       verified: false,
       student: username,
     };
-    OpportunityInstances.define(oi);
+    Meteor.call('Collection.define', {
+      collectionName: 'OpportunityInstances',
+      doc: oi,
+    });
   },
   'click .item.grade': function clickItemGrade(event) {
     event.preventDefault();
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;
-    CourseInstances.updateGrade(div.id, grade);
+    Meteor.call('CourseInstance.updateGrade', {
+      courseInstanceID: div.id,
+      grade,
+    });
   },
 });
 

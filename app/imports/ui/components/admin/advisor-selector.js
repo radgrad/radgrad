@@ -46,7 +46,11 @@ Template.Advisor_Selector.events({
     const adminID = Meteor.userId();
     const adminChoice = AdminChoices.find({ adminID }).fetch()[0];
     if (user) {
-      AdminChoices.updateAdvisorID(adminChoice._id, user._id);
+      Meteor.call('Collection.update', {
+        collectionName: 'AdminChoices',
+        id: adminChoice._id,
+        modifier: { advisorID },
+      });
       SessionState.set(sessionKeys.CURRENT_ADVISOR_ID, user._id);
     } else {
       // do error handling for bad student id.

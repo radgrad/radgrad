@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
@@ -118,7 +119,10 @@ Template.Degree_Plan_Generator.events({
     const ays = AcademicYearInstances.find({ studentID }).fetch();
     if (cis.length === 0) {
       _.map(ays, (year) => {
-        AcademicYearInstances.removeIt(year._id);
+        Meteor.call('Collection.remove', {
+          collectionName: 'AcademicYearInstances',
+          id: year._id,
+        });
       });
     } else {
       // TODO: CAM figure out which AYs to remove.

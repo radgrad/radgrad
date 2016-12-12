@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 import { lodash } from 'meteor/erasaur:meteor-lodash';
@@ -260,9 +261,9 @@ Template.Inspector.helpers({
     if (Template.instance().state.get('currentSemesterID')) {
       const currentSemesterID = Template.instance().state.get('currentSemesterID');
       const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year,
-        term: Semesters.FALL,
+      const semesterID = Meteor.call('Collection.define', {
+        collectionName: 'Semesters',
+        doc: { year: year.year, term: Semesters.FALL },
       });
       const semester = Semesters.findDoc(semesterID);
       return { currentSemester, semester };
@@ -521,9 +522,9 @@ Template.Inspector.helpers({
     if (Template.instance().state.get('currentSemesterID')) {
       const currentSemesterID = Template.instance().state.get('currentSemesterID');
       const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SPRING,
+      const semesterID = Meteor.call('Collection.define', {
+        collectionName: 'Semesters',
+        doc: { year: year.year + 1, term: Semesters.SPRING },
       });
       const semester = Semesters.findDoc(semesterID);
       return { currentSemester, semester };
@@ -534,9 +535,9 @@ Template.Inspector.helpers({
     if (Template.instance().state.get('currentSemesterID')) {
       const currentSemesterID = Template.instance().state.get('currentSemesterID');
       const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SUMMER,
+      const semesterID = Meteor.call('Collection.define', {
+        collectionName: 'Semesters',
+        doc: { year: year.year + 1, term: Semesters.SUMMER },
       });
       const semester = Semesters.findDoc(semesterID);
       return { currentSemester, semester };
@@ -591,11 +592,17 @@ Template.Inspector.events({
     const id = event.target.id;
     try {
       const ci = CourseInstances.findDoc(id);
-      CourseInstances.removeIt(ci._id);
+      Meteor.call('Collection.remove', {
+        collectionName: 'CourseInstances',
+        id: ci._id,
+      });
     } catch (e) {
       try {
         const op = OpportunityInstances.findDoc(id);
-        OpportunityInstances.removeIt(op._id);
+        Meteor.call('Collection.remove', {
+          collectionName: 'OpportunityInstances',
+          id: op._id,
+        });
       } catch (e1) {
         // What do we do here?
       }
@@ -609,7 +616,10 @@ Template.Inspector.events({
     const opportunityInstance = id;
     const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
     const student = Users.findDoc(studentID).username;
-    VerificationRequests.define({ student, opportunityInstance });
+    Meteor.call('Collection.define', {
+      collectionName: 'VerificationRequests',
+      doc: { student, opportunityInstance },
+    });
   },
 });
 

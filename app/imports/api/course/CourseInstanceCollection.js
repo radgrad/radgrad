@@ -36,7 +36,7 @@ class CourseInstanceCollection extends BaseCollection {
       grade: { type: String, optional: true },
       note: { type: String, optional: true },
       student: { type: String },
-      creditHrs: { type: Number },
+      creditHrs: { type: Number, optional: true },
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
       'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W'];

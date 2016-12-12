@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
@@ -7,6 +8,7 @@ import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { Slugs } from '../../../api/slug/SlugCollection';
+import { Users } from '../../../api/user/UserCollection';
 
 const area = 'DegreePlanPrerequisites';
 
@@ -14,7 +16,10 @@ const clearFeedbackInstances = () => {
   const userID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
   const instances = FeedbackInstances.find({ userID, area }).fetch();
   instances.forEach((i) => {
-    FeedbackInstances.removeIt(i._id);
+    Meteor.call('Collection.remove', {
+      collectionName: 'FeedbackInstances',
+      id: i._id,
+    });
   });
 };
 
@@ -24,6 +29,7 @@ const clearFeedbackInstances = () => {
 export const checkPrerequisites = () => {
   const f = Feedbacks.find({ name: 'Prerequisite missing' }).fetch()[0];
   const feedback = Slugs.getEntityID(f.slugID, 'Feedback');
+  const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
   clearFeedbackInstances();
   const cis = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
   cis.forEach((ci) => {
@@ -47,22 +53,28 @@ export const checkPrerequisites = () => {
               const semesterName2 = Semesters.toString(preSemester._id, false);
               const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is after or` +
               ` in ${semesterName2}.`;
-              FeedbackInstances.define({
-                feedback,
-                user: SessionState.get(sessionKeys.CURRENT_STUDENT_USERNAME),
-                description,
-                area,
+              Meteor.call('Collection.define', {
+                collectionName: 'FeedbackInstances',
+                doc: {
+                  feedback,
+                  user: student.username,
+                  description,
+                  area,
+                },
               });
             }
           }
         } else {
           const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
-              'not found.';
-          FeedbackInstances.define({
-            feedback,
-            user: SessionState.get(sessionKeys.CURRENT_STUDENT_USERNAME),
-            description,
-            area,
+              ' not found.';
+          Meteor.call('Collection.define', {
+            collectionName: 'FeedbackInstances',
+            doc: {
+              feedback,
+              user: student.username,
+              description,
+              area,
+            },
           });
         }
       });

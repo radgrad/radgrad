@@ -14,7 +14,11 @@ class AdvisorChoiceCollection extends BaseCollection {
    */
   constructor() {
     super('AdvisorChoice', new SimpleSchema({
-      advisorID: { type: SimpleSchema.RegEx.Id, optional: true },
+      advisorID: { type: SimpleSchema.RegEx.Id },
+      studentID: { type: SimpleSchema.RegEx.Id, optional: true },
+      username: { type: String, optional: true },
+    }), new SimpleSchema({
+      advisorID: { type: SimpleSchema.RegEx.Id },
       studentID: { type: SimpleSchema.RegEx.Id, optional: true },
       username: { type: String, optional: true },
     }));
@@ -26,13 +30,13 @@ class AdvisorChoiceCollection extends BaseCollection {
    * @param studentID The optional studentID.
    * @returns {any}
    */
-  define({ advisorID, studentID = null }) {
+  define({ advisorID, studentID = null, username = null }) {
     Users.assertDefined(advisorID);
     if (studentID) {
       Users.assertDefined(studentID);
     }
     // Define and return the AdminChoice
-    return this._collection.insert({ advisorID, studentID });
+    return this._collection.insert({ advisorID, studentID, username });
   }
 
   /**

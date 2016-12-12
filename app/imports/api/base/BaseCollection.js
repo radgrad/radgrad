@@ -162,6 +162,11 @@ class BaseCollection {
     }
     names.map(name => this.assertDefined(name));
   }
+
+  update(selector, modifier) {
+    console.log('BaseCollection.update', selector, modifier);
+    this._collection.update(selector, { $set: modifier });
+  }
 }
 
 /**

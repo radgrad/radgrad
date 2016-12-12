@@ -1,9 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { AcademicYearInstances } from '../year/AcademicYearInstanceCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
-import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import * as semUtils from '../semester/SemesterUtilities';
 import * as courseUtils from '../course/CourseFunctions';
@@ -34,14 +33,21 @@ export function generateDegreePlan(template, startSemester, student) {
   let semester = startSemester;
   // Define the Academic Year(s)
   if (semester.term === Semesters.SPRING) {
-    AcademicYearInstances.define({ year: semester.year - 1, student: student.username });
+    Meteor.call('Collection.define', {
+      collectionName: 'AcademicYearInstances',
+      doc: { year: semester.year - 1, student: student.username },
+    });
   }
   let semesterCourses;
   let semesterOpportunity;
   let oppDefn;
   for (let i = 0; i < 12; i += 1) {
     if (i % 3 === 0) {
-      AcademicYearInstances.define({ year: semester.year, student: student.username });
+      Meteor.call('Collection.define', {
+        collectionName: 'AcademicYearInstances',
+        doc: { year: semester.year, student: student.username },
+      });
+      // AcademicYearInstances.define({ year: semester.year, student: student.username });
     }
     if (startSemester.term === Semesters.FALL) {
       // Define the course instances for the semester
@@ -106,33 +112,45 @@ export function generateDegreePlan(template, startSemester, student) {
     _.map(semesterCourses, (slug) => { // eslint-disable-line no-loop-func
       if (typeof slug === 'object') {
         const bestChoice = courseUtils.chooseBetween(slug, studentID);
-        CourseInstances.define({
-          semester: Semesters.getSlug(semester._id),
-          course: Courses.getSlug(bestChoice._id),
-          note: bestChoice.number,
-          grade,
-          student: student.username,
+        Meteor.call('Collection.define', {
+          collectionName: 'CourseInstances',
+          doc: {
+            semester: Semesters.getSlug(semester._id),
+            course: Courses.getSlug(bestChoice._id),
+            note: bestChoice.number,
+            verified: false,
+            grade,
+            student: student.username,
+          },
         });
         courseTakenIDs.push(bestChoice._id);
       } else
         if (slug.endsWith('3xx')) {
           const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID);
-          CourseInstances.define({
-            semester: Semesters.getSlug(semester._id),
-            course: Courses.getSlug(bestChoice._id),
-            note: bestChoice.number,
-            grade,
-            student: student.username,
+          Meteor.call('Collection.define', {
+            collectionName: 'CourseInstances',
+            doc: {
+              semester: Semesters.getSlug(semester._id),
+              course: Courses.getSlug(bestChoice._id),
+              note: bestChoice.number,
+              verified: false,
+              grade,
+              student: student.username,
+            },
           });
         } else
           if (slug.endsWith('4xx')) {
             const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID);
-            CourseInstances.define({
-              semester: Semesters.getSlug(semester._id),
-              course: Courses.getSlug(bestChoice._id),
-              note: bestChoice.number,
-              grade,
-              student: student.username,
+            Meteor.call('Collection.define', {
+              collectionName: 'CourseInstances',
+              doc: {
+                semester: Semesters.getSlug(semester._id),
+                course: Courses.getSlug(bestChoice._id),
+                note: bestChoice.number,
+                verified: false,
+                grade,
+                student: student.username,
+              },
             });
           } else {
             // console.log(typeof slug);
@@ -140,12 +158,16 @@ export function generateDegreePlan(template, startSemester, student) {
             const course = Courses.findDoc(courseID);
             if (_.indexOf(courseTakenIDs, course._id) === -1) {
               const note = createNote(slug);
-              CourseInstances.define({
-                semester: Semesters.getSlug(semester._id),
-                course: slug,
-                note,
-                grade,
-                student: student.username,
+              Meteor.call('Collection.define', {
+                collectionName: 'CourseInstances',
+                doc: {
+                  semester: Semesters.getSlug(semester._id),
+                  course: slug,
+                  note,
+                  verified: false,
+                  grade,
+                  student: student.username,
+                },
               });
               courseTakenIDs.push(course._id);
             }
@@ -164,7 +186,10 @@ export function generateDegreePlan(template, startSemester, student) {
           verified: false,
           student: student.username,
         };
-        OpportunityInstances.define(oppDefn);
+        Meteor.call('Collection.define', {
+          collectionName: 'OpportunityInstances',
+          doc: oppDefn,
+        });
       }
     }
     // update the semester

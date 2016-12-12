@@ -41,12 +41,16 @@ Template.Faculty_Selector.events({
   'click .jsFacultyRetrieve': function clickJSRetrieve(event) {
     event.preventDefault();
     const advisorDivs = event.target.parentElement.getElementsByTagName('a');
-    const advisorID = advisorDivs[0].attributes[1].nodeValue;
-    const user = Users.findDoc(advisorID);
+    const facultyID = advisorDivs[0].attributes[1].nodeValue;
+    const user = Users.findDoc(facultyID);
     const adminID = Meteor.userId();
-    const adminChoice = AdminChoices.find({ adminID }).fetch()[0];
+    const adminChoice = AdminChoices.findDoc({ adminID });
     if (user) {
-      AdminChoices.updateFacultyID(adminChoice._id, user._id);
+      Meteor.call('Collection.update', {
+        collectionName: 'AdminChoices',
+        id: adminChoice._id,
+        modifier: { facultyID },
+      });
       SessionState.set(sessionKeys.CURRENT_FACULTY_ID, user._id);
     } else {
       // do error handling for bad student id.

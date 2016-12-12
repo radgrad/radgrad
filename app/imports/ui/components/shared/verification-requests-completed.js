@@ -46,7 +46,11 @@ Template.Verification_Requests_Completed.events({
     processRecord.verifier = Users.getFullName(Meteor.userId());
     const processed = request.processed;
     processed.push(processRecord);
-    VerificationRequests.updateStatus(id, status, processed);
+    Meteor.call('Collection.update', {
+      collectionName: 'VerificationRequests',
+      id,
+      modifier: { status, processed },
+    });
   },
 });
 

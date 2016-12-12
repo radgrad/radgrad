@@ -33,13 +33,22 @@ Template.Verification_Event.events({
       const opportunityInstances = OpportunityInstances.find({ opportunityID, studentID }).fetch();
       let opportunityInstance = null;
       if (opportunityInstances.length === 0) { // student didn't plan on attending in degree plan
-        opportunityInstance = OpportunityInstances.define({ student, semester: semesterSlug,
-          verified: true, opportunity: opportunitySlug });
+        opportunityInstance = Meteor.call('Collection.define', {
+          collectionName: 'OpportunityInstances',
+          doc: { student, semester: semesterSlug, verified: true, opportunity: opportunitySlug },
+        });
       } else {
         opportunityInstance = opportunityInstances[0];
-        OpportunityInstances.updateVerified(opportunityInstance._id, true);
+        Meteor.call('Collection.update', {
+          collectionName: 'OpportunityInstances',
+          id: opportunityInstance._id,
+          modifier: { verified: true },
+        });
       }
-      const requestID = VerificationRequests.define({ student: studentDoc.username, opportunityInstance });
+      const requestID = Meteor.call('Collection.define', {
+        collectionName: 'VerificationRequests',
+        doc: { student: studentDoc.username, opportunityInstance },
+      });
       const request = VerificationRequests.findDoc(requestID);
       request.status = VerificationRequests.ACCEPTED;
       const processRecord = {};
@@ -51,7 +60,11 @@ Template.Verification_Event.events({
       request.processed.push(processRecord);
       const status = VerificationRequests.ACCEPTED;
       const processed = request.processed;
-      VerificationRequests.updateStatus(requestID, status, processed);
+      Meteor.call('Collection.update', {
+        collectionName: 'VerificationRequests',
+        id: requestID,
+        modifier: { status, processed },
+      });
     } catch (e) {
       alert(`${student} is not a valid student. ${e}`); // eslint-disable-line no-undef, no-alert
     }

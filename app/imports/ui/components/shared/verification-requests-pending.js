@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
@@ -48,18 +47,30 @@ Template.Verification_Requests_Pending.events({
     if (split[1] === 'accept') {
       request.status = VerificationRequests.ACCEPTED;
       processRecord.status = VerificationRequests.ACCEPTED;
-      OpportunityInstances.updateVerified(request.opportunityInstanceID, true);
+      Meteor.call('Collection.update', {
+        collectionName: 'OpportunityInstances',
+        id: request.opportunityInstanceID,
+        modifier: { verified: true },
+      });
     } else {
       request.status = VerificationRequests.REJECTED;
       processRecord.status = VerificationRequests.REJECTED;
-      OpportunityInstances.updateVerified(request.opportunityInstanceID, false);
+      Meteor.call('Collection.update', {
+        collectionName: 'OpportunityInstances',
+        id: request.opportunityInstanceID,
+        modifier: { verified: false },
+      });
     }
     processRecord.verifier = Users.getFullName(Meteor.userId());
     processRecord.feedback = event.target.parentElement.querySelectorAll('input')[0].value;
     request.processed.push(processRecord);
     const status = request.status;
     const processed = request.processed;
-    VerificationRequests.updateStatus(requestID, status, processed);
+    Meteor.call('Collection.update', {
+      collectionName: 'VerificationRequests',
+      id: requestID,
+      modifier: { status, processed },
+    });
   },
 });
 

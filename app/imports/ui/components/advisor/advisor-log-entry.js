@@ -1,5 +1,5 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { AdvisorLogs } from '/imports/api/log/AdvisorLogCollection';
 import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 
 Template.Advisor_Log_Entry.helpers({
@@ -14,8 +14,10 @@ Template.Advisor_Log_Entry.events({
       const text = textAreas[0].value;
       const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
       const advisorID = SessionState.get(sessionKeys.CURRENT_ADVISOR_ID);
-      console.log(studentID, advisorID, text);
-      AdvisorLogs.define({ advisorID, studentID, text });
+      Meteor.call('Collection.define', {
+        collectionName: 'AdvisorLogs',
+        doc: { advisorID, studentID, text },
+      });
     }
   },
 });

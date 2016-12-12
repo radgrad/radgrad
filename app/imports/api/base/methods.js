@@ -2,7 +2,8 @@
  * Created by Cam on 12/11/2016.
  */
 import { Meteor } from 'meteor/meteor';
-import { ValidatedMethod, ValidationError } from 'meteor/mdg:validated-method';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import { ValidationError } from 'meteor/mdg:validation-error';
 import { CollectionDictionary } from '../../startup/both/collection-dictionary';
 
 export const define = new ValidatedMethod({
@@ -12,7 +13,7 @@ export const define = new ValidatedMethod({
     const collection = CollectionDictionary[args.collectionName];
     if (collection == null) {
       errors.push({
-        name: 'Collection.update',
+        name: 'Collection.define',
         type: 'define-validation-fail',
         details: {
           collection: `Unknown Collection ${args.collectionName}`,
@@ -25,6 +26,7 @@ export const define = new ValidatedMethod({
         name: 'Collection.define',
         type: 'define-validation-fail',
         details: {
+          collectionName: args.collectionName,
           doc: args.doc,
         },
       });
@@ -84,7 +86,7 @@ export const update = new ValidatedMethod({
       throw new Meteor.Error(`Unknown Collection ${args.collectionName}`);
     }
     const modifier = args.modifier;
-    return collection.update({ _id: args.id }, { $set: modifier });
+    return collection.update({ _id: args.id }, modifier);
   },
 });
 
@@ -120,6 +122,6 @@ export const remove = new ValidatedMethod({
     if (collection == null) {
       throw new Meteor.Error(`Unknown Collection ${args.collectionName}`);
     }
-    return collection.remove({ _id: args.id });
+    return collection.removeIt({ _id: args.id });
   },
 });

@@ -10,7 +10,6 @@ import {
   SessionState, sessionKeys, updateSessionState,
 }
   from '../../../startup/client/session-state';
-import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
 const userDefineSchema = new SimpleSchema({
@@ -81,19 +80,27 @@ Template.Student_Selector.events({
     if (user) {
       const userID = Meteor.userId();
       if (AdminChoices.find({ adminID: userID }).count() === 1) {
-        const adminChoice = AdminChoices.find({ adminID: userID }).fetch()[0];
-        AdminChoices.updateUsername(adminChoice._id, username);
-        AdminChoices.updateStudentID(adminChoice._id, user._id);
+        const adminChoice = AdminChoices.findDoc({ adminID: userID });
+        Meteor.call('Collection.update', {
+          collectionName: 'AdminChoices',
+          id: adminChoice._id,
+          modifier: { username, studentID: user._id },
+        });
       }
       if (AdvisorChoices.find({ advisorID: userID }).count() === 0) {
-        const id = AdvisorChoices.define({ advisorID: userID, studentID: user._id });
-        AdvisorChoices.updateUsername(id, username);
-        AdvisorChoices.updateStudentID(id, user._id);
-      } else if (AdvisorChoices.find({ advisorID: userID }).count() === 1) {
-        const advisorChoice = AdvisorChoices.find({ advisorID: userID }).fetch()[0];
-        AdvisorChoices.updateUsername(advisorChoice._id, username);
-        AdvisorChoices.updateStudentID(advisorChoice._id, user._id);
-      }
+        Meteor.call('Collection.define', {
+          collectionName: 'AdvisorChoices',
+          doc: { advisorID: userID, studentID: user._id, username },
+        });
+      } else
+        if (AdvisorChoices.find({ advisorID: userID }).count() === 1) {
+          const advisorChoice = AdvisorChoices.findDoc({ advisorID: userID });
+          Meteor.call('Collection.update', {
+            collectionName: 'AdvisorChoices',
+            id: advisorChoice._id,
+            modifier: { username, studentID: user._id },
+          });
+        }
       SessionState.set(sessionKeys.CURRENT_STUDENT_USERNAME, username);
       instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, username);
       SessionState.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
@@ -132,7 +139,10 @@ Template.Student_Selector.events({
     if (instance.context.isValid()) {
       const notDefined = Users.find({ username }).count() === 0;
       if (notDefined) {
-        ValidUserAccounts.define({ username });
+        Meteor.call('Collection.define', {
+          collectionName: 'ValidUserAccounts',
+          doc: { username },
+        });
         const userDefinition = {
           firstName,
           lastName,

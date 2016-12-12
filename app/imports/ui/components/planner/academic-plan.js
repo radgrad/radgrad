@@ -1,4 +1,4 @@
-// import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
@@ -247,8 +247,7 @@ Template.Academic_Plan_2.helpers({
   detailCourseNumber() {
     if (Template.instance().state.get('detailCourseID')) {
       const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
-      const course = Courses.findDoc(ci.courseID);
-      return course;
+      return Courses.findDoc(ci.courseID);
     }
     return null;
   },
@@ -256,11 +255,11 @@ Template.Academic_Plan_2.helpers({
     if (Template.instance().state.get('currentSemesterID')) {
       const currentSemesterID = Template.instance().state.get('currentSemesterID');
       const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year,
-        term: Semesters.FALL,
-      });
-      const semester = Semesters.findDoc(semesterID);
+      // const semesterID = Meteor.call('Collection.define', {
+      //   collectionName: 'Semesters',
+      //   doc: { year: year.year, term: Semesters.FALL },
+      // });
+      const semester = Semesters.findDoc({ year: year.year, term: Semesters.FALL });
       return { currentSemester, semester };
     }
     return null;
@@ -526,11 +525,11 @@ Template.Academic_Plan_2.helpers({
     if (Template.instance().state.get('currentSemesterID')) {
       const currentSemesterID = Template.instance().state.get('currentSemesterID');
       const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SPRING,
-      });
-      const semester = Semesters.findDoc(semesterID);
+      // const semesterID = Meteor.call('Collection.define', {
+      //   collectionName: 'Semesters',
+      //   doc: { year: year.year + 1, term: Semesters.SPRING },
+      // });
+      const semester = Semesters.findDoc({ year: year.year + 1, term: Semesters.SPRING });
       return { currentSemester, semester };
     }
     return null;
@@ -539,11 +538,11 @@ Template.Academic_Plan_2.helpers({
     if (Template.instance().state.get('currentSemesterID')) {
       const currentSemesterID = Template.instance().state.get('currentSemesterID');
       const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SUMMER,
-      });
-      const semester = Semesters.findDoc(semesterID);
+      // const semesterID = Meteor.call('Collection.define', {
+      //   collectionName: 'Semesters',
+      //   doc: { year: year.year + 1, term: Semesters.SUMMER },
+      // });
+      const semester = Semesters.findDoc({ year: year.year + 1, term: Semesters.SUMMER });
       return { currentSemester, semester };
     }
     return null;
@@ -606,18 +605,27 @@ Template.Academic_Plan_2.events({
       const ay = ays[ays.length - 1];
       year = ay.year + 1;
     }
-    AcademicYearInstances.define({ year, student });
+    Meteor.call('Collection.define', {
+      collectionName: 'AcademicYearInstances',
+      doc: { year, student },
+    });
   },
   'click button.delInstance': function clickButtonDelInstance(event) {
     event.preventDefault();
     const id = event.target.id;
     try {
       const ci = CourseInstances.findDoc(id);
-      CourseInstances.removeIt(ci._id);
+      Meteor.call('Collection.remove', {
+        collectionName: 'CourseInstances',
+        id: ci._id,
+      });
     } catch (e) {
       try {
         const op = OpportunityInstances.findDoc(id);
-        OpportunityInstances.removeIt(op._id);
+        Meteor.call('Collection.remove', {
+          collectionName: 'OpportunityInstances',
+          id: op._id,
+        });
       } catch (e1) {
         // What do we do here?
       }
@@ -630,7 +638,10 @@ Template.Academic_Plan_2.events({
     const id = event.target.id;
     const opportunityInstance = id;
     const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
-    VerificationRequests.define({ student, opportunityInstance });
+    Meteor.call('Collection.define', {
+      collectionName: 'VerificationRequests',
+      doc: { student, opportunityInstance },
+    });
   },
   'click .course.item': function clickCourseItem(event) {
     event.preventDefault();

@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from './CourseInstanceCollection';
 import { Courses } from './CourseCollection';
@@ -10,7 +11,10 @@ import { Users } from '../user/UserCollection';
 const clearFeedbackInstances = (userID, area) => {
   const instances = FeedbackInstances.find({ userID, area }).fetch();
   instances.forEach((i) => {
-    FeedbackInstances.removeIt(i._id);
+    Meteor.call('Collection.remove', {
+      collectionName: 'FeedbackInstances',
+      id: i._id,
+    });
   });
 };
 
@@ -18,9 +22,10 @@ const clearFeedbackInstances = (userID, area) => {
  * Checks all the CourseInstances to ensure that the prerequisites are fulfilled.
  */
 export const checkPrerequisites = (studentID, area) => {
-  const f = Feedbacks.find({ name: 'Prerequisite missing' }).fetch()[0];
+  const f = Feedbacks.findDoc({ name: 'Prerequisite missing' });
   const feedback = Slugs.getEntityID(f.slugID, 'Feedback');
   clearFeedbackInstances(studentID, area);
+  const student = Users.findDoc(studentID);
   const cis = CourseInstances.find({ studentID }).fetch();
   cis.forEach((ci) => {
     const semester = Semesters.findDoc(ci.semesterID);
@@ -43,22 +48,28 @@ export const checkPrerequisites = (studentID, area) => {
               const semesterName2 = Semesters.toString(preSemester._id, false);
               const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is after or` +
                   ` in ${semesterName2}.`;
-              FeedbackInstances.define({
-                feedback,
-                user: studentID,
-                description,
-                area,
+              Meteor.call('Collection.define', {
+                collectionName: 'FeedbackInstances',
+                doc: {
+                  feedback,
+                  user: student.username,
+                  description,
+                  area,
+                },
               });
             }
           }
         } else {
           const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
-              'not found.';
-          FeedbackInstances.define({
-            feedback,
-            user: studentID,
-            description,
-            area,
+              ' not found.';
+          Meteor.call('Collection.define', {
+            collectionName: 'FeedbackInstances',
+            doc: {
+              feedback,
+              user: student.username,
+              description,
+              area,
+            },
           });
         }
       });
@@ -75,7 +86,10 @@ function getRandomInt(min, max) {
 export const clearPlannedCourseInstances = (studentID) => {
   const courses = CourseInstances.find({ studentID, verified: false }).fetch();
   _.map(courses, (ci) => {
-    CourseInstances.removeIt(ci);
+    Meteor.call('Collection.remove', {
+      collectionName: 'CourseInstances',
+      id: ci._id,
+    });
   });
 };
 
