@@ -10,6 +10,10 @@ div.adminViewer div.layout-page {
   padding-top: 180px;
 }
 
+div.adminViewer div.layout-page-no-container {
+  padding-top: 180px;
+}
+
 .layout-page-no-container {
   padding-top: 80px;
   padding-left: 10px;
