@@ -1,10 +1,24 @@
 import { Template } from 'meteor/templating';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
+import { ReactiveDict } from 'meteor/reactive-dict';
 
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
+import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
+import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
+import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
+import { BS_CS_TEMPLATE, BA_ICS_TEMPLATE } from '../../../api/degree-program/degree-program';
+import { Interests } from '../../../api/interest/InterestCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection';
+import * as semUtils from '../../../api/semester/SemesterUtilities';
+import * as courseUtils from '../../../api/course/CourseFunctions';
 import { Users } from '../../../api/user/UserCollection.js';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 
 Template.Student_Ice.helpers({
@@ -56,9 +70,25 @@ Template.Student_Ice.events({
 });
 
 Template.Student_Ice.onCreated(function studentIceOnCreated() {
-  if (this.data.dictionary) {
-    this.state = this.data.dictionary;
+  this.state = new ReactiveDict();
+  updateSessionState(SessionState);
+  if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+    this.state.set(sessionKeys.CURRENT_STUDENT_ID, SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
   }
+  this.autorun(() => {
+    this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
+});
 });
 
 Template.Student_Ice.onDestroyed(function studentIceOnDestroyed() {
