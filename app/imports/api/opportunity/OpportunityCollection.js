@@ -100,12 +100,12 @@ class OpportunityCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Returns the Opportunity associated with the Opportunity with the given instanceID.
+   * Returns the OpportunityType associated with the Opportunity with the given instanceID.
    * @param instanceID The id of the Opportunity.
    * @returns {Object} The associated Opportunity.
    * @throws {Meteor.Error} If instanceID is not a valid ID.
    */
-  getOpportunityInstanceDoc(instanceID) {
+  getOpportunityTypeDoc(instanceID) {
     this.assertDefined(instanceID);
     const instance = this._collection.find({ _id: instanceID });
     return OpportunityTypes.findDoc(instance.opportunityTypeID);
