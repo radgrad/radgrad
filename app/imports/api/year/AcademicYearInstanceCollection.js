@@ -28,7 +28,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
   /**
    * Defines a new AcademicYearInstance.
    * @example
-   * // To define the 2016 - 217 academic year for Joe Smith.
+   * To define the 2016 - 2017 academic year for Joe Smith.
    * AcademicYearInstances.define({ year: 2016, student: 'joesmith' });
    * @param { Object } Object with keys year and student.
    * @throws {Meteor.Error} If the definition includes an undefined student or a year that is out of bounds.
@@ -36,9 +36,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
    */
   define({ year, student }) {
     const studentID = Users.getID(student);
-    const doc = this._collection.findOne({ year, studentID });
-    if (doc) {
-      return doc._id;
+    const doc = this._collection.find({ year, studentID }).fetch();
+    if (doc.length > 0) {
+      return doc[0]._id;
     }
     const semesterIDs = [];
     try {

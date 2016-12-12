@@ -1,0 +1,17 @@
+<template name="Help_Panel">
+  <div class="sixteen wide column">
+    <div class="ui info floating message">
+      <i class="close icon"></i>
+      <div class="ui accordion">
+        <div class="active title">
+          <i class="green dropdown icon"></i>
+          <i class="big green help circle icon"></i>
+          {{helpTitle}}
+        </div>
+        <div class="active content">
+          {{#markdown}}{{helpText}}{{/markdown}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
