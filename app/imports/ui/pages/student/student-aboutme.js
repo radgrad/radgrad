@@ -6,17 +6,25 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
 import { BS_CS_TEMPLATE, BA_ICS_TEMPLATE } from '../../../api/degree-program/degree-program';
-import { generateCoursePlan } from '../../../api/degree-program/plan-generator';
 import { Interests } from '../../../api/interest/InterestCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as semUtils from '../../../api/semester/SemesterUtilities';
 import * as courseUtils from '../../../api/course/CourseFunctions';
 import { Users } from '../../../api/user/UserCollection.js';
-import { studentDegreePlannerPageRouteName } from '../../../startup/client/router';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+
 
 Template.Student_AboutMe.helpers({
+  getDictionary() {
+    return Template.instance().state;
+  },
   careerGoals() {
     const ret = [];
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
@@ -52,6 +60,7 @@ Template.Student_AboutMe.helpers({
   interests() {
     const ret = [];
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      console.log("inside the if");
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       _.map(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
@@ -78,48 +87,29 @@ Template.Student_AboutMe.helpers({
 });
 
 Template.Student_AboutMe.events({
-  'click .jsSemester': function clickJsInterests(event, instance) {
-    event.preventDefault();
-    const choice = event.target.parentElement.getElementsByTagName('input')[0].value;
-    const id = Semesters.getID(choice);
-    instance.state.set('selectedSemester', Semesters.findDoc(id));
-  },
-  'click .jsGeneratePlan': function clickGeneratePlan(event, instance) {
-    event.preventDefault();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
-    const student = Users.findDoc(studentID);
-    let template;
-    if (student.desiredDegree === 'BS_CS') {
-      template = BS_CS_TEMPLATE;
-    }
-    if (student.desiredDegree === 'BA_ICS') {
-      template = BA_ICS_TEMPLATE;
-    }
-    const currentSemester = Semesters.getCurrentSemesterDoc();
-    let startSemester = instance.state.get('selectedSemester');
-    if (currentSemester.sortBy === startSemester.sortBy) {
-      startSemester = semUtils.nextFallSpringSemester(startSemester);
-    }
-    // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
-    courseUtils.clearPlannedCourseInstances(studentID);
-    const cis = CourseInstances.find({ studentID }).fetch();
-    const ays = AcademicYearInstances.find({ studentID }).fetch();
-    if (cis.length === 0) {
-      _.map(ays, (year) => {
-        AcademicYearInstances.removeIt(year._id);
-    });
-    } else {
-      // TODO: CAM figure out which AYs to remove.
-    }
 
-    generateCoursePlan(template, startSemester, student);
-    FlowRouter.go(studentDegreePlannerPageRouteName);
-  },
 });
 
 Template.Student_AboutMe.onCreated(function studentAboutMeOnCreated() {
   this.state = new ReactiveDict();
   updateSessionState(SessionState);
+  if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+    this.state.set(sessionKeys.CURRENT_STUDENT_ID, SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+  }
+  this.autorun(() => {
+    this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
+});
 });
 
 Template.Student_AboutMe.onRendered(function studentAboutMeOnRendered() {

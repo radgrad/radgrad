@@ -16,9 +16,9 @@
               <div class="ui segment">
                   <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
                     <div style="text-align: center; display: block; margin-left:auto; margin-right:auto;"
-                         class="c100 p75 lightblue">
-                    <span style="color:steelblue;">15%</span>
-                      <span style="color:lightsteelblue; margin-top:30px;">75%</span>
+                         class="c100 p{{projectedICE.i}} lightblue">
+                    <span style="color:steelblue;">{{earnedICE.i}}%</span>
+                      <span style="color:lightsteelblue; margin-top:30px;">{{projectedICE.i}}%</span>
                       <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -26,7 +26,7 @@
                     </div>
                     <div
                         style="position:absolute; margin-right:auto; margin-left:auto; background-color:transparent;"
-                        class="c100 p15 blue">
+                        class="c100 p{{earnedICE.i}} blue">
                       <span></span>
                       <div class="slice">
                         <div class="bar"></div>
