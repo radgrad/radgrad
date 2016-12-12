@@ -16,14 +16,14 @@
                 <p><b>Name</b></p>
               </div>
               <div class="six wide column">
-                <p>Michele Shimoda</p>
+                <p>{{userFullName}}</p>
               </div>
               <div class="two wide column">
                 <p><b>Desired Degree</b></p>
               </div>
               <div class="five wide column">
 
-                      <div class="item">BS Computer Science</div><br>
+                      <div class="item">{{desiredDegree}}</div><br>
 
                     <a href="{{pathFor 'Student_Explorer_Degree_Page'}}">Edit in degree explorer</a>
 
@@ -70,11 +70,13 @@
                 <p><b>Interests</b></p>
               </div>
               <div class="five wide column">
-                  <a class="ui label"><i class="fitted star icon"></i>Artificial Intelligence</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Web Development</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Natural Language Processing</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Machine Learning</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Mobile Design</a>
+                {{#if interests}}
+                {{#each interest in interests}}
+                  <a class="ui label"><i class="fitted star icon"></i>{{interest.name}}</a>
+                  {{/each}}
+                {{else}}
+                <p>None</p>
+                {{/if}}
                 <br><br><a href="{{pathFor 'Student_Explorer_Interest_Page'}}">Edit in interest
                   explorer</a>
               </div>
@@ -82,11 +84,13 @@
                 <p><b>Career Goals</b></p>
               </div>
               <div class="six wide column">
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Software Engineer</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Data Scientist</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Web Developer</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Network Operator</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Entrepreneur</a>
+                {{#if careerGoals}}
+                {{#each goal in careerGoals}}
+                  <a class="ui label"><i class="fitted suitcase icon"></i>{{goal.name}}</a>
+                {{/each}}
+                {{else}}
+                <p>None</p>
+                {{/if}}
                 <br><br><a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in career
                   explorer</a>
               </div>
@@ -118,13 +122,11 @@
                   <div class="item">IT Position at UH ITS (Spring 2015-Fall 2016)</div>
                   <div class="item">AT&T Hackathon (Spring 2016)</div>
                 </div>
-                <a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in opportunity
+                <a href="{{pathFor 'Student_Explorer_Opportunity_Page'}}">Edit in opportunity
                   explorer</a></div>
-
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
