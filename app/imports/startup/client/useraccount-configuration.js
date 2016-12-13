@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Tracker } from 'meteor/tracker';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -45,4 +44,8 @@ Accounts.onLogin(function onLogin() {
   } else {
     FlowRouter.go('/');
   }
+});
+
+Accounts.onLogout(function logout() {
+  FlowRouter.go('/');
 });
