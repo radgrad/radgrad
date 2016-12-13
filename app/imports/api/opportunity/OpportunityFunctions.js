@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Opportunities } from './OpportunityCollection';
 import { OpportunityInstances } from './OpportunityInstanceCollection';
@@ -15,7 +16,10 @@ export const clearPlannedOpportunityInstances = (studentID) => {
   _.map(courses, (oi) => {
     const requests = VerificationRequests.find({ studentID, opportunityInstanceID: oi._id }).fetch();
     if (requests.length === 0) {
-      OpportunityInstances.removeIt(oi);
+      Meteor.call('Collection.remove', {
+        collectionName: 'OpportunityInstances',
+        id: oi._id,
+      });
     }
   });
 };
