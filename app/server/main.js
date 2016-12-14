@@ -20,3 +20,5 @@ import '/imports/api/verification';
 import '/imports/api/year';
 
 import '/imports/startup/server';
+
+import '/imports/startup/both';

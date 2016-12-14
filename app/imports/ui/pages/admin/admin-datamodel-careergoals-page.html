@@ -1,0 +1,12 @@
+<template name="Admin_DataModel_CareerGoals_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      {{> Add_Career_Goal_Widget }}
+      {{> List_Career_Goals_Widget }}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+
+</template>
