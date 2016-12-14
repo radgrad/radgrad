@@ -21,10 +21,12 @@ export function generateDegreePlan(template, startSemester, student) {
   const instances = CourseInstances.find({ studentID }).fetch();
   const grade = 'A';
   const courseTakenIDs = [];
+  const coursesTakenSlugs = [];
   instances.forEach((courseInstance) => {
     if (CourseInstances.isICS(courseInstance._id)) {
       if (courseInstance.note !== 'ICS 499') {
         courseTakenIDs.push(courseInstance.courseID);
+        coursesTakenSlugs.push(Courses.getSlug(courseInstance.courseID));
       }
     }
   });
@@ -105,7 +107,7 @@ export function generateDegreePlan(template, startSemester, student) {
     }
     _.map(semesterCourses, (slug) => { // eslint-disable-line no-loop-func
       if (typeof slug === 'object') {
-        const bestChoice = courseUtils.chooseBetween(slug, studentID);
+        const bestChoice = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
         CourseInstances.define({
           semester: Semesters.getSlug(semester._id),
           course: Courses.getSlug(bestChoice._id),
@@ -114,9 +116,10 @@ export function generateDegreePlan(template, startSemester, student) {
           student: student.username,
         });
         courseTakenIDs.push(bestChoice._id);
+        coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
       } else
         if (slug.endsWith('3xx')) {
-          const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID);
+          const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID, coursesTakenSlugs);
           CourseInstances.define({
             semester: Semesters.getSlug(semester._id),
             course: Courses.getSlug(bestChoice._id),
@@ -124,9 +127,11 @@ export function generateDegreePlan(template, startSemester, student) {
             grade,
             student: student.username,
           });
+          courseTakenIDs.push(bestChoice._id);
+          coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
         } else
           if (slug.endsWith('4xx')) {
-            const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID);
+            const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
             CourseInstances.define({
               semester: Semesters.getSlug(semester._id),
               course: Courses.getSlug(bestChoice._id),
@@ -134,6 +139,8 @@ export function generateDegreePlan(template, startSemester, student) {
               grade,
               student: student.username,
             });
+            courseTakenIDs.push(bestChoice._id);
+            coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
           } else {
             // console.log(typeof slug);
             const courseID = Courses.getID(slug);
@@ -148,6 +155,7 @@ export function generateDegreePlan(template, startSemester, student) {
                 student: student.username,
               });
               courseTakenIDs.push(course._id);
+              coursesTakenSlugs.push(Courses.getSlug(course._id));
             }
           }
     });
