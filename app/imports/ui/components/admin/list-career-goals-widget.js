@@ -24,5 +24,14 @@ Template.List_Career_Goals_Widget.helpers({
   },
   getSlugName(slugID) {
     return Slugs.findDoc(slugID).name;
-  }
+  },
+  getReferences(careerGoalID) {
+    let references = 0;
+    Users.find().forEach(function (userDoc) {
+      if (_.includes(userDoc.careerGoalIDs, careerGoalID)) {
+        references += 1;
+      }
+    });
+    return `Users: ${references}`;
+  },
 });
