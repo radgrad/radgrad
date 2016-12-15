@@ -1,1 +1,1 @@
-import './teaserCollection';
+import './TeaserCollection.js';

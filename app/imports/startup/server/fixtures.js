@@ -14,6 +14,7 @@ import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
 import { ROLE } from '/imports/api/role/Role';
+import { Teasers } from '/imports/api/teaser/TeaserCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
