@@ -7,9 +7,6 @@ import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCol
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
-import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
-import { BS_CS_TEMPLATE, BA_ICS_TEMPLATE } from '../../../api/degree-program/degree-program';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
@@ -20,6 +17,24 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
+
+const availableCourses = () => {
+  const courses = Courses.find({}).fetch();
+  if (courses.length > 0) {
+    const filtered = lodash.filter(courses, function filter(course) {
+      if (course.number === 'ICS 499') {
+        return true;
+      }
+      const ci = CourseInstances.find({
+        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+        courseID: course._id,
+      }).fetch();
+      return ci.length === 0;
+    });
+    return filtered;
+  }
+  return [];
+};
 
 Template.Student_Ice.helpers({
   earnedICE() {
@@ -175,6 +190,21 @@ Template.Student_Ice.helpers({
     }
     return null;
   },
+
+  recommendedEventsI() {
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const allEvents = [];
+      const allCourses = CourseInstances.find().fetch();
+
+      allCourses.forEach((courseInstance) => {
+        if (CourseInstances.isICS(courseInstance._id)){
+        allEvents.push(courseInstance);
+      }
+    });
+      return allEvents;
+    }
+    return null;
+  },
   courseName(c) {
     const course = Courses.findDoc(c.courseID);
     const courseName = course.shortName;
@@ -192,11 +222,11 @@ Template.Student_Ice.helpers({
     return oppTerm + ' ' + oppYear;
   },
   isCourse(c) {
-    if(c.courseID == null) {
-      return false;
+    if(c.opportunityID == null && c.sponsorID == null) {
+      return true;
     }
     else {
-      return true;
+      return false;
     }
   }
 });
@@ -216,8 +246,6 @@ Template.Student_Ice.onCreated(function studentIceOnCreated() {
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(Feedbacks.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
