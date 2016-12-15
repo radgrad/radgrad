@@ -10,6 +10,7 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
@@ -23,6 +24,7 @@ Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
+    this.subscribe(Teasers.getPublicationName());
     this.subscribe(Users.getPublicationName());
     this.subscribe(AcademicYearInstances.getPublicationName());
     this.subscribe(VerificationRequests.getPublicationName());
@@ -30,7 +32,18 @@ Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
 });
 
 Template.Student_Home_Page.helpers({
-  // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
+  getDictionary() {
+    return Template.instance().state;
+  },
+  getTeasers() {
+    const ret = [];
+    const allTeasers = Teasers.find().fetch();
+    console.log(allTeasers);
+    return allTeasers;
+  },
+  getTeaserInterests(teaser) {
+    return Interests.findNames(teaser.interestIDs);
+  },
 });
 
 Template.Student_Home_Page.events({

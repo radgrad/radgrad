@@ -36,6 +36,8 @@ import { recommendationFeedbackDefinitions, warningFeedbackDefinitions,
 import { defaultAdminAccount } from './icsdata/AdminUser';
 import { exampleStudents } from './icsdata/ExampleStudents';
 import { helpMessageDefinitions } from './icsdata/HelpMessages';
+import { teaserDefinitions } from './icsdata/TeaserDefinitions';
+
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -100,6 +102,10 @@ Meteor.startup(() => {
     console.log('Defining Feedback');  // eslint-disable-line no-console
     recommendationFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
     warningFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
+  }
+  if (Teasers.find().count() === 0) {
+    console.log('Defining Teasers');  // eslint-disable-line no-console
+    teaserDefinitions.map((definition) => Teasers.define(definition));
   }
   if (exampleStudents) {
     exampleStudents.forEach((student) => {
