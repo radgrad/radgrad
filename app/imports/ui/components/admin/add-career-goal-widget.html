@@ -1,0 +1,41 @@
+<template name="Add_Career_Goal_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD CAREER GOAL</h4></div>
+    <form class="ui equal width form">
+
+      <div class="fields">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" name="career-goal-name" placeholder="Software Engineer">
+        </div>
+        <div class="field">
+          <label>Slug</label>
+          <input type="text" name="career-goal-slug" placeholder="software-engineer">
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <label>Interest(s)</label>
+          <select multiple="" class="ui dropdown" name="interests">
+            <option value="">Select Interest(s)</option>
+            <option value="physics">Software Engineering</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>More Information</label>
+          <input type="text" name="career-goal-slug" placeholder="http://careergoal.com/software-engineering">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Description</label>
+        <textarea rows="5" name="career-goal-description" placeholder="Describe the Career Goal here"></textarea>
+      </div>
+      <button class="ui green basic button" type="submit">Add</button>
+
+    </form>
+  </div>
+
+</template>
