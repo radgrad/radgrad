@@ -4,8 +4,6 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Tracker } from 'meteor/tracker';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
-import { moment } from 'meteor/momentjs:moment';
-
 
 import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';

@@ -22,16 +22,6 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 
 Template.Student_Ice.helpers({
-  firstMenuFullName() {
-    if (Meteor.userId()) {
-      try {
-        return Users.getFullName(Meteor.userId());
-      } catch (e) {
-        // console.log(e, Meteor.userId()); // eslint-disable-line no-console
-      }
-    }
-    return '';
-  },
   earnedICE() {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
@@ -42,7 +32,6 @@ Template.Student_Ice.helpers({
     }
     return null;
   },
-
   projectedICE() {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
@@ -63,6 +52,153 @@ Template.Student_Ice.helpers({
     }
     return null;
   },
+  remainingICE(earned, projected) {
+    return projected - earned;
+  },
+  earnedEventsI() {
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+      const earnedInstances = [];
+      const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
+      courseInstances.forEach((courseInstance) => {
+        if (courseInstance.ice.i > 0) {
+          earnedInstances.push(courseInstance);
+        }
+    });
+      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
+      oppInstances.forEach((oppInstance) => {
+        if (oppInstance.ice.i > 0) {
+        earnedInstances.push(oppInstance);
+      }
+    });
+
+      return earnedInstances;
+    }
+    return null;
+  },
+  earnedEventsC() {
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+      const earnedInstances = [];
+      const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
+      courseInstances.forEach((courseInstance) => {
+        if (courseInstance.ice.c > 0) {
+        earnedInstances.push(courseInstance);
+      }
+    });
+      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
+      oppInstances.forEach((oppInstance) => {
+        if (oppInstance.ice.c > 0) {
+        earnedInstances.push(oppInstance);
+      }
+    });
+
+      return earnedInstances;
+    }
+    return null;
+  },
+  earnedEventsE() {
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+      const earnedInstances = [];
+      const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
+      courseInstances.forEach((courseInstance) => {
+        if (courseInstance.ice.e > 0) {
+        earnedInstances.push(courseInstance);
+      }
+    });
+      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
+      oppInstances.forEach((oppInstance) => {
+        if (oppInstance.ice.e > 0) {
+        earnedInstances.push(oppInstance);
+      }
+    });
+
+      return earnedInstances;
+    }
+    return null;
+  },
+  projectedEventsI() {
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+      const plannedInstances = [];
+      const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
+      courseInstances.forEach((courseInstance) => {
+        if (courseInstance.ice.i > 0){
+        plannedInstances.push(courseInstance);
+      }});
+      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: false }).fetch();
+      oppInstances.forEach((oppInstance) => {
+        if (oppInstance.ice.i > 0){
+        plannedInstances.push(oppInstance);
+      }
+    });
+      return plannedInstances;
+    }
+    return null;
+  },
+  projectedEventsC() {
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+      const plannedInstances = [];
+      const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
+      courseInstances.forEach((courseInstance) => {
+        if (courseInstance.ice.c > 0){
+        plannedInstances.push(courseInstance);
+      }});
+      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: false }).fetch();
+      oppInstances.forEach((oppInstance) => {
+        if (oppInstance.ice.c > 0){
+        plannedInstances.push(oppInstance);
+      }
+    });
+      return plannedInstances;
+    }
+    return null;
+  },
+  projectedEventsE() {
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+      const plannedInstances = [];
+      const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
+      courseInstances.forEach((courseInstance) => {
+        if (courseInstance.ice.e > 0){
+        plannedInstances.push(courseInstance);
+      }});
+      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: false }).fetch();
+      oppInstances.forEach((oppInstance) => {
+        if (oppInstance.ice.e > 0){
+        plannedInstances.push(oppInstance);
+      }
+      });
+      return plannedInstances;
+    }
+    return null;
+  },
+  courseName(c) {
+    const course = Courses.findDoc(c.courseID);
+    const courseName = course.shortName;
+    return courseName;
+  },
+  opportunityName(opp) {
+    const opportunity = Opportunities.findDoc(opp.opportunityID);
+    const oppName = opportunity.name;
+    return oppName;
+  },
+  opportunitySem(opp) {
+    const sem = Semesters.findDoc(opp.semesterID);
+    const oppTerm = sem.term;
+    const oppYear = sem.year;
+    return oppTerm + ' ' + oppYear;
+  },
+  isCourse(c) {
+    if(c.courseID == null) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
 });
 
 Template.Student_Ice.events({
@@ -95,7 +231,7 @@ Template.Student_Ice.onDestroyed(function studentIceOnDestroyed() {
   // add your statement here
 });
 
-Template.Student_Ice.onRendered(function enableAccordian() {
+Template.Student_Ice.onRendered(function enableAccordion() {
   this.$('.accordion').accordion({
     selector: {
       trigger: '.title .icon'

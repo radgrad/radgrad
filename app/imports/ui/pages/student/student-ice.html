@@ -45,45 +45,28 @@
                 <div class="ui styled fluid accordion">
                   <div class="active title">
                       <i class="dropdown icon"></i>
-                      Achieved (15 points)
+                      Achieved ({{earnedICE.i}} points)
                   </div>
 
                   <div class="active content">
-                    <p>You have achieved 15 Innovation points for the following:</p>
+                    <p>You have achieved {{earnedICE.i}} Innovation points for the following:</p>
                     <div class="ui list">
-                      <a class="item">
-                        <div class="content">
-                          <div class="header">Participation in a public competitive computer science event</div>
-                          <div class="description"><b>+15</b> AT&T Hackathon (Spring
-                            2016)
-                          </div>
-                        </div>
-                      </a>
-                    </div>
+                          {{#each event in earnedEventsI}}
+                      <div class="item"><b>+{{event.ice.i}}</b>{{#if (isCourse event)}} {{ event.note }}  ({{ courseName event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}</div>
+                            {{/each}}
+                      </div>
                   </div>
                   <div class="title">
                       <i class="dropdown icon"></i>
-                      Projected (80 points)
+                      Projected ({{projectedICE.i}} points)
                   </div>
                   <div class="content">
-                    <p>You have a total of 80 projected Innovation points. The remaining 65 points are for the
+                    <p>You have a total of {{projectedICE.i}} projected Innovation points. The remaining {{remainingICE (earnedICE.i) (projectedICE.i) }} points are for the
                       following:</p>
                     <div class="ui list">
-                      <a class="item">
-                        <div class="content">
-                          <div class="header">Participation in a public competitive computer science event</div>
-                          <div class="description"><b>+15</b> ACM Hackathon (Spring 2017)
-                          </div>
-                        </div>
-
-                        <div class="content">
-                          <div class="header">Completion of a personal project.</div>
-                          <div class="description"><b>+20</b> Build a semi autonomous robot (Summer 2017)
-                          </div>
-                          <div class="description"><b>+20</b> Build a automatic pet feeder using Arduino (Summer 2018)
-                          </div>
-                        </div>
-                      </a>
+                      {{#each event in projectedEventsI}}
+                      <div class="item"><b>+{{event.ice.i}}</b> {{#if (isCourse event)}} {{ event.note }} ({{ courseName event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}</div>
+                      {{/each}}
                     </div>
                   </div>
                   <div class="title">
@@ -143,59 +126,26 @@
                 <div class="ui styled fluid accordion">
                   <div class="active title">
                       <i class="dropdown icon"></i>
-                      Achieved (69 points)
+                      Achieved ({{earnedICE.c}} points)
                   </div>
                   <div class="active content">
-                    <p>You have achieved 69 Competency points for the following:</p>
+                    <p>You have achieved {{earnedICE.c}} Competency points for the following:</p>
                     <div class="ui list">
-                      <a class="item">
-                        <div class="content">
-                          <div class="header">Achieved a grade of B or better</div>
-                          <div class="description"><b>+9</b> Introduction to Computer
-                            Science I (ICS111)
-                          </div>
-                          <div class="description"><b>+9</b> Introduction to Computer
-                            Science II (ICS211)
-                          </div>
-                          <div class="description"><b>+9</b> Discrete Math for
-                            Computer Science I (ICS141)
-                          </div>
-                          <div class="description"><b>+9</b> Discrete Math for
-                            Computer Science II (ICS241)
-                          </div>
-                          <div class="description"><b>+9</b> Program Structure(ICS212)
-                          </div>
-                          <div class="description"><b>+9</b> Algorithms (ICS311)</div>
-
-                        </div>
-                      </a>
-                      <a class="item">
-                        <div class="content">
-                          <div class="header">Achieved an overall GPA of 3.0+</div>
-                          <div class="description"><b>+5</b> Spring 2015</div>
-                          <div class="description"><b>+5</b> Fall 2015</div>
-                          <div class="description"><b>+5</b> Spring 2016</div>
-                        </div>
-                      </a>
+                      {{#each event in earnedEventsC}}
+                      <div class="item"><b>+{{event.ice.c}}</b>{{#if (isCourse event)}} {{ event.note }} ({{ courseName event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}</div>
+                      {{/each}}
                     </div>
                   </div>
                   <div class="title">
                       <i class="dropdown icon"></i>
-                      Projected (87 points)
+                      Projected ({{projectedICE.c}} points)
                   </div>
                   <div class="content">
-                    <p>You have a total of 87 projected Competency points. The remaining 18 points are for the
-                      following:</p>
+                    <p>You have a total of {{projectedICE.c}} projected Competency points. The remaining {{remainingICE (earnedICE.c) (projectedICE.c) }} points are for the following:</p>
                     <div class="ui list">
-                      <a class="item">
-                        <div class="content">
-                          <div class="header">Achieve a grade of B or better</div>
-                          <div class="description"><b>+9</b> Software Engineering I (ICS314) (Spring 2017)
-                          </div>
-                          <div class="description"><b>+9</b> Programming Language Theory (ICS313) (Spring 2017)
-                          </div>
-                        </div>
-                      </a>
+                      {{#each event in projectedEventsC}}
+                      <div class="item"><b>+{{event.ice.c}}</b> {{#if (isCourse event)}} {{ event.note }} ({{ courseName event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}</div>
+                      {{/each}}
                     </div>
                   </div>
                   <div class="title">
@@ -249,54 +199,26 @@
                 <div class="ui styled fluid accordion">
                   <div class="active title">
                       <i class="dropdown icon"></i>
-                      Achieved (55 points)
+                      Achieved ({{earnedICE.e}} points)
                   </div>
                   <div class="active content">
-                    <p>You have achieved 55 Experience points for the following:</p>
+                    <p>You have achieved {{earnedICE.e}} Experience points for the following:</p>
                     <div class="ui list">
-                      <a class="item">
-                        <div class="content">
-                          <div class="header">Completion of Internship</div>
-                          <div class="description"><b>+25</b> Internship at Datahouse
-                            (Spring 2014)
-                          </div>
-                        </div>
-                      </a>
-                      <a class="item">
-                        <div class="content">
-                          <div class="header">Worked in an ICS related job for one semester</div>
-                          <div class="description"><b>+10</b> IT position at UH ITS
-                            (Spring 2015)
-                          </div>
-                          <div class="description"><b>+10</b> IT position at UH ITS
-                            (Fall 2015)
-                          </div>
-                          <div class="description"><b>+10</b> IT position at UH ITS
-                            (Spring 2016)
-                          </div>
-                        </div>
-                      </a>
+                      {{#each event in earnedEventsE}}
+                      <div class="item"><b>+{{event.ice.e}}</b>{{#if (isCourse event)}} {{ event.note }} ({{ courseName event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}</div>
+                      {{/each}}
                     </div>
                   </div>
                   <div class="title">
                       <i class="dropdown icon"></i>
-                      Projected (75 points)
+                      Projected ({{projectedICE.e}} points)
                   </div>
                   <div class="content">
-                    <p>You have a total of 75 projected Experience points. The remaining 20 points are for the
-                      following:</p>
+                    <p>You have a total of {{projectedICE.e}} projected Experience points. The remaining {{remainingICE (earnedICE.e) (projectedICE.e) }} points are for the following:</p>
                     <div class="ui list">
-                      <a class="item">
-                        <div class="content">
-                          <div class="header">Work in an ICS related job for one semester</div>
-                          <div class="description"><b>+10</b> IT position at UH ITS
-                            (Fall 2016)
-                          </div>
-                          <div class="description"><b>+10</b> IT position at UH ITS
-                            (Spring 2017)
-                          </div>
-                        </div>
-                      </a>
+                      {{#each event in projectedEventsE}}
+                      <div class="item"><b>+{{event.ice.e}}</b> {{#if (isCourse event)}} {{ event.note }} ({{ courseName event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}</div>
+                      {{/each}}
                     </div>
                   </div>
                   <div class="title">
