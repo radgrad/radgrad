@@ -20,7 +20,7 @@ export const define = new ValidatedMethod({
         },
       });
     }
-    const defineSchemaContext = collection._defineSchema.namedContext('validateDefine');
+    const defineSchemaContext = collection.getDefineSchema().namedContext('validateDefine');
     if (!defineSchemaContext.validate(args.doc)) {
       errors.push({
         name: 'Collection.define',

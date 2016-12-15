@@ -38,6 +38,14 @@ class BaseCollection {
   }
 
   /**
+   * Returns the schema for defining documents in this collection.
+   * @returns {SimpleSchema|*}
+   */
+  getDefineSchema() {
+    return this._defineSchema;
+  }
+
+  /**
    * Default publication method for entities.
    * It publishes the entire collection.
    */
