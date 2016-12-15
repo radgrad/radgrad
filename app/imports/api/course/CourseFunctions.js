@@ -45,7 +45,7 @@ export const checkPrerequisites = (studentID, area) => {
                   ` in ${semesterName2}.`;
               FeedbackInstances.define({
                 feedback,
-                user: studentID``,
+                user: studentID,
                 description,
                 area,
               });

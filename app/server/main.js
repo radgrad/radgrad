@@ -5,8 +5,10 @@ import '/imports/api/career';
 import '/imports/api/course';
 import '/imports/api/degree';
 import '/imports/api/feedback';
+import '/imports/api/help';
 import '/imports/api/ice';
 import '/imports/api/interest';
+import '/imports/api/log';
 import '/imports/api/opportunity';
 import '/imports/api/role';
 import '/imports/api/semester';
@@ -18,3 +20,5 @@ import '/imports/api/verification';
 import '/imports/api/year';
 
 import '/imports/startup/server';
+
+import '/imports/startup/both';

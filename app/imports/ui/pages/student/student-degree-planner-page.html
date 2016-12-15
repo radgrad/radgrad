@@ -2,6 +2,11 @@
   <div class="layout-page degreePlanner">
     {{#if currentUser}}
       {{#if Template.subscriptionsReady}}
+        <div class="ui grid">
+          <div class="sixteen wide column">
+            <p>{{> Help_Panel}}</p>
+          </div>
+        </div>
         {{> Academic_Plan_2 args}}
       {{else}}
         {{> Loading}}

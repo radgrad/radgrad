@@ -35,7 +35,7 @@ Template.Advisor_Layout.helpers({
   adminSecondMenuItems() {
     return [
       { label: 'Home', route: RouteNames.adminHomePageRouteName },
-      { label: 'CRUD', route: RouteNames.adminCrudPageRouteName },
+      { label: 'Data Model', route: RouteNames.adminDataModelPageRouteName },
       { label: advisorTitle(), route: RouteNames.advisorStudentConfigurationPageRouteName },
       { label: facultyTitle(), route: RouteNames.facultyHomePageRouteName },
       { label: studentTitle(), route: RouteNames.studentHomePageRouteName },

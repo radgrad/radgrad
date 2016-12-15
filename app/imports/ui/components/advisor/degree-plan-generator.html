@@ -2,10 +2,28 @@
   <div class="ui padded container segment" style="margin-bottom: 0 !important;">
     <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Template degree plan
       generator</h4></div>
+    <div class="field">
+      <label>Starting Semester</label>
+      <div class="ui action input">
+        <div class="ui selection dropdown">
+          <input type="hidden" name="role">
+          <i class="dropdown icon"></i>
+          <div class="default text">{{currentSemesterName}}</div>
+          <div class="menu">
+            {{#each semester in futureSemesters}}
+              <div class="item{{#if selectedSemester semester}} active selected{{/if}}"
+                   data-value="{{semesterSlug semester}}">{{semesterName semester}}</div>
+            {{/each}}
+          </div>
+        </div>
+        <button class="ui basic green button jsSemester" type="submit">Update</button>
+      </div>
+    </div>
 
     <p>Generate template degree plan given:</p>
     <b class="radgrad-dimGrey-text">Student:</b> {{userFullName}} <br>
     <b class="radgrad-dimGrey-text">Desired Degree:</b> {{desiredDegree}} <br>
+    <b class="radgrad-dimGrey-text">Start Semester:</b> {{startSemester}} <br>
     <div class="ui grid">
       <div class="eight wide column">
         <b class="radgrad-dimGrey-text">Interests:</b><span class="left floated"> <br>
@@ -28,22 +46,6 @@
         Warning!
       </div>
       This will delete any courses and opportunities currently planned for future semesters!
-    </div>
-    <div class="field">
-      <label>Starting Semester</label>
-      <div class="ui action input">
-        <div class="ui selection dropdown">
-          <input type="hidden" name="role">
-          <i class="dropdown icon"></i>
-          <div class="default text">{{currentSemesterName}}</div>
-          <div class="menu">
-            {{#each semester in futureSemesters}}
-              <div class="item{{#if selectedSemester semester}} active selected{{/if}}" data-value="{{semesterSlug semester}}">{{semesterName semester}}</div>
-            {{/each}}
-          </div>
-        </div>
-        <button class="ui basic green button jsSemester" type="submit">Update</button>
-      </div>
     </div>
 
 

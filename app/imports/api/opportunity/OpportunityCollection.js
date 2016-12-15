@@ -100,12 +100,12 @@ class OpportunityCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Returns the Opportunity associated with the Opportunity with the given instanceID.
+   * Returns the OpportunityType associated with the Opportunity with the given instanceID.
    * @param instanceID The id of the Opportunity.
    * @returns {Object} The associated Opportunity.
    * @throws {Meteor.Error} If instanceID is not a valid ID.
    */
-  getOpportunityInstanceDoc(instanceID) {
+  getOpportunityTypeDoc(instanceID) {
     this.assertDefined(instanceID);
     const instance = this._collection.find({ _id: instanceID });
     return OpportunityTypes.findDoc(instance.opportunityTypeID);
@@ -119,6 +119,16 @@ class OpportunityCollection extends BaseInstanceCollection {
   removeIt(opportunity) {
     // TODO: check for defined OpportunityInstances before deletion.
     super.removeIt(opportunity);
+  }
+
+  /**
+   * Returns the slug for the given opportunity ID.
+   * @param opportunityID the opportunity ID.
+   */
+  getSlug(opportunityID) {
+    this.assertDefined(opportunityID);
+    const courseDoc = this.findDoc(opportunityID);
+    return Slugs.findDoc(courseDoc.slugID).name;
   }
 }
 

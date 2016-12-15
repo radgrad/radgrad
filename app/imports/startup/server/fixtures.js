@@ -7,6 +7,7 @@ import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
+import { HelpMessages } from '../../api/help/HelpMessageCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
@@ -21,18 +22,19 @@ import { VerificationRequests } from '../../api/verification/VerificationRequest
 
 import { courseDefinitions } from './icsdata/CourseDefinitions.js';
 import { processStarCsvData } from '/imports/api/star/StarProcessor';
-import { interestTypeDefinitions, interestDefinitions } from '/imports/startup/server/icsdata/InterestDefinitions';
+import { interestTypeDefinitions, interestDefinitions } from './icsdata/InterestDefinitions';
 import {
     opportunityDefinitions, opportunityTypeDefinitions, opportunityInstances,
 }
-    from '/imports/startup/server/icsdata/OpportunityDefinitions';
-import { careerGoalDefinitions } from '/imports/startup/server/icsdata/CareerGoalDefinitions';
-import { userDefinitions } from '/imports/startup/server/icsdata/UserDefinitions';
+    from './icsdata/OpportunityDefinitions';
+import { careerGoalDefinitions } from './icsdata/CareerGoalDefinitions';
+import { userDefinitions } from './icsdata/UserDefinitions';
 import { recommendationFeedbackDefinitions, warningFeedbackDefinitions,
     feedbackInstances }
-    from '/imports/startup/server/icsdata/FeedbackDefinitions.js';
-import { defaultAdminAccount } from '/imports/startup/server/icsdata/AdminUser';
-import { exampleStudents } from '/imports/startup/server/icsdata/ExampleStudents';
+    from './icsdata/FeedbackDefinitions.js';
+import { defaultAdminAccount } from './icsdata/AdminUser';
+import { exampleStudents } from './icsdata/ExampleStudents';
+import { helpMessageDefinitions } from './icsdata/HelpMessages';
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -55,6 +57,10 @@ Meteor.startup(() => {
     Semesters.define({ term: Semesters.FALL, year: 2019 });
     Semesters.define({ term: Semesters.SPRING, year: 2020 });
     Semesters.define({ term: Semesters.SUMMER, year: 2020 });
+  }
+  if (HelpMessages.find().count() === 0) {
+    console.log('Defining Help Messages');  // eslint-disable-line no-console
+    helpMessageDefinitions.map((definition) => HelpMessages.define(definition));
   }
   if (InterestTypes.find().count() === 0) {
     console.log('Defining InterestTypes');  // eslint-disable-line no-console
