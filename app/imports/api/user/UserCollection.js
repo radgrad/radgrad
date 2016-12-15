@@ -226,6 +226,21 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Updates email with new email address.
+   * @param userID The userID.
+   * @param email The user's email as a string.
+   * @throws {Meteor.Error} If userID is not a userID, or if email is not valid.
+   */
+  setEmail(userID, email) {
+    console.log('i see you');
+    this.assertDefined(userID);
+    if (!_.isString(email)) {
+      throw new Meteor.Error(`${email} is not a string.`);
+    }
+    this._collection.update(userID, { $set: { email } });
+  }
+
+  /**
    * Updates userID with an array of interestIDs.
    * @param userID The userID.
    * @param interestIDs A list of interestIDs.

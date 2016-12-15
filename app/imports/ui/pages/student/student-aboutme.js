@@ -55,6 +55,13 @@ Template.Student_AboutMe.helpers({
     }
     return '';
   },
+  getEmail() {
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+      return user.email;
+    }
+    return '';
+  },
   futureSemesters() {
     const currentSemester = Semesters.getCurrentSemesterDoc();
     return _.filter(Semesters.find({ sortBy: { $gte: currentSemester.sortBy } }, { sort: { sortBy: 1 } }).fetch(),
@@ -213,7 +220,13 @@ Template.Student_AboutMe.helpers({
 });
 
 Template.Student_AboutMe.events({
-
+  'submit .email' (event) {
+    event.preventDefault();
+    const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    const choice = event.target.emailAddress.value;
+    console.log(choice);
+    Users.setEmail(student._id, choice);
+  },
 });
 
 Template.Student_AboutMe.onCreated(function studentAboutMeOnCreated() {
