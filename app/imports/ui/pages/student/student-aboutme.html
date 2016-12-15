@@ -103,11 +103,11 @@
                 <div class="ui list">
                   {{#each course in courses}}
                   {{#if isPast course}}
-                  <div class="item">{{course.note}}</div>
+                  <div class="item">{{course.note}} ({{courseName course}})</div>
                   {{/if}}
                   {{/each}}
                 </div>
-                <a href="{{pathFor 'Student_Degree_Planner_Page'}}">View schedule details in degree
+                <a href="{{pathFor 'Student_Degree_Planner_Page'}}"><br>View schedule details in degree
                   planner</a><br>
                 <a href="{{pathFor 'Student_Explorer_Course_Page'}}">View course details in course explorer</a>
               </div>
@@ -117,11 +117,15 @@
               </div>
               <div class="five wide column">
                 <div class="ui list">
-                  <div class="item">Internship at DataHouse (Spring 2014)</div>
-                  <div class="item">IT Position at UH ITS (Spring 2015-Fall 2016)</div>
-                  <div class="item">AT&T Hackathon (Spring 2016)</div>
+                  {{#each opportunity in opportunities}}
+                  {{#if isPast opportunity}}
+                  {{#if opportunity.verified}}
+                  <div class="item">{{opportunityName opportunity.opportunityID}} ({{opportunitySem opportunity.semesterID}})</div>
+                  {{/if}}
+                  {{/if}}
+                  {{/each}}
                 </div>
-                <a href="{{pathFor 'Student_Explorer_Opportunity_Page'}}">Edit in opportunity
+                <a href="{{pathFor 'Student_Explorer_Opportunity_Page'}}"><br>Edit in opportunity
                   explorer</a></div>
             </div>
           </div>
