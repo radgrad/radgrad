@@ -101,12 +101,11 @@
               </div>
               <div class="five wide column">
                 <div class="ui list">
-                  <div class="item">Introduction to Computer Science I (ICS111)</div>
-                  <div class="item">Introduction to Computer Science II (ICS211)</div>
-                  <div class="item">Discrete Math for Computer Science I (ICS141)</div>
-                  <div class="item">Discrete Math for Computer Science II (ICS241)</div>
-                  <div class="item">Program Structure(ICS212)</div>
-                  <div class="item">Algorithms (ICS311)</div>
+                  {{#each course in courses}}
+                  {{#if isPast course}}
+                  <div class="item">{{course.note}}</div>
+                  {{/if}}
+                  {{/each}}
                 </div>
                 <a href="{{pathFor 'Student_Degree_Planner_Page'}}">View schedule details in degree
                   planner</a><br>
