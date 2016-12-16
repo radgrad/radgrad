@@ -38,7 +38,6 @@ Template.Student_Home_Page.helpers({
   getTeasers() {
     const ret = [];
     const allTeasers = Teasers.find().fetch();
-    console.log(allTeasers);
     return allTeasers;
   },
   getTeaserInterests(teaser) {

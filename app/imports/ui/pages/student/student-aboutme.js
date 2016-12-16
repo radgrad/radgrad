@@ -69,7 +69,6 @@ Template.Student_AboutMe.helpers({
   interests() {
     const ret = [];
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      console.log("inside the if");
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       _.map(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
