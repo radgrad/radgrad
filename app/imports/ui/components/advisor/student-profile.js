@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Roles } from 'meteor/alanning:roles';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 
@@ -18,6 +19,9 @@ Template.Student_Profile.helpers({
       return lodash.indexOf(user.careerGoalIDs, goal._id) !== -1;
     }
     return false;
+  },
+  currentUpload() {
+    return Template.instance().currentUpload.get();
   },
   desireBA() {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
@@ -118,9 +122,16 @@ Template.Student_Profile.events({
       // don't do anything.
     }
   },
+  'click .jsStarData': function clickJsStarData(event) {
+    event.preventDefault();
+    const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    const fileName = event.target.parentElement.getElementsByTagName('input')[0];
+    console.log(fileName.files, student);
+  },
 });
 
 Template.Student_Profile.onCreated(function studentProfileOnCreated() {
+  this.currentUpload = new ReactiveVar(false);
 });
 
 Template.Student_Profile.onRendered(function studentProfileOnRendered() {

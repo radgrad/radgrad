@@ -75,8 +75,14 @@
               <!-- CSV -->
               <label>STAR CSV</label>
               <div class="ui action input">
-                <input id="fileInput" type="file"/>
-                <button class="ui basic green button" type="submit">Update</button>
+                {{#with currentUpload}}
+                  Uploading <b>{{file.name}}</b>:
+                  <span id="progress">{{progress.get}}%</span>
+                {{else}}
+                  <input id="fileInput" type="file" />
+                {{/with}}
+                <!--<input id="fileInput" type="file"/>-->
+                <button class="ui basic green button jsStarData" type="submit">Update</button>
               </div>
             </div>
 
