@@ -1,12 +1,13 @@
 import { Template } from 'meteor/templating';
 
-import { lodash } from 'meteor/erasaur:meteor-lodash';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 // import { checkPrerequisites } from '../../../api/course/CourseFunctions';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -30,11 +31,11 @@ Template.Inspector.helpers({
         }
       }
     });
-    ret = lodash.filter(courses, function filter(c) {
+    ret = _.filter(courses, function filter(c) {
       if (c.number === 'other') {
         return false;
       }
-      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
@@ -51,14 +52,14 @@ Template.Inspector.helpers({
         }
       }
     });
-    ret = lodash.filter(courses, function filter(c) {
+    ret = _.filter(courses, function filter(c) {
       if (c.number === 'other') {
         return false;
       }
       if (!c.number.startsWith('ICS 1')) {
         return false;
       }
-      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
@@ -75,14 +76,14 @@ Template.Inspector.helpers({
         }
       }
     });
-    ret = lodash.filter(courses, function filter(c) {
+    ret = _.filter(courses, function filter(c) {
       if (c.number === 'other') {
         return false;
       }
       if (!c.number.startsWith('ICS 2')) {
         return false;
       }
-      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
@@ -99,14 +100,14 @@ Template.Inspector.helpers({
         }
       }
     });
-    ret = lodash.filter(courses, function filter(c) {
+    ret = _.filter(courses, function filter(c) {
       if (c.number === 'other') {
         return false;
       }
       if (!c.number.startsWith('ICS 3')) {
         return false;
       }
-      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
@@ -123,7 +124,7 @@ Template.Inspector.helpers({
         }
       }
     });
-    ret = lodash.filter(courses, function filter(c) {
+    ret = _.filter(courses, function filter(c) {
       if (c.number === 'other') {
         return false;
       }
@@ -133,7 +134,7 @@ Template.Inspector.helpers({
         if (!c.number.startsWith('ICS 41') && !c.number.startsWith('ICS 42') && !c.number.startsWith('ICS 43')) {
           return false;
         }
-      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
@@ -150,7 +151,7 @@ Template.Inspector.helpers({
         }
       }
     });
-    ret = lodash.filter(courses, function filter(c) {
+    ret = _.filter(courses, function filter(c) {
       if (c.number === 'other') {
         return false;
       }
@@ -160,7 +161,7 @@ Template.Inspector.helpers({
         if (!c.number.startsWith('ICS 44') && !c.number.startsWith('ICS 45') && !c.number.startsWith('ICS 46')) {
           return false;
         }
-      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
@@ -177,7 +178,7 @@ Template.Inspector.helpers({
         }
       }
     });
-    ret = lodash.filter(courses, function filter(c) {
+    ret = _.filter(courses, function filter(c) {
       if (c.number === 'other') {
         return false;
       }
@@ -187,7 +188,7 @@ Template.Inspector.helpers({
         if (!c.number.startsWith('ICS 47') && !c.number.startsWith('ICS 48') && !c.number.startsWith('ICS 49')) {
           return false;
         }
-      return lodash.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
@@ -289,6 +290,18 @@ Template.Inspector.helpers({
   hasOpportunity() {
     return Template.instance().state.get('detailOpportunityID');
   },
+  missingPrerequisite(prereqSlug) {
+    const prereqID = Courses.findIdBySlug(prereqSlug);
+    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const courseInstances = CourseInstances.find({ studentID }).fetch();
+    let ret = true;
+    _.map(courseInstances, (ci) => {
+      if (prereqID === ci.courseID) {
+        ret = false;
+      }
+    });
+    return ret;
+  },
   hasPrevYear() {
     const instance = Template.instance();
     const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
@@ -308,9 +321,10 @@ Template.Inspector.helpers({
   instanceID() {
     if (Template.instance().state.get('detailCourseID')) {
       return Template.instance().state.get('detailCourseID');
-    } else if (Template.instance().state.get('detailOpportunityID')) {
-      return Template.instance().state.get('detailOpportunityID');
-    }
+    } else
+      if (Template.instance().state.get('detailOpportunityID')) {
+        return Template.instance().state.get('detailOpportunityID');
+      }
     return null;
   },
   instanceSemester() {
@@ -323,12 +337,48 @@ Template.Inspector.helpers({
       } catch (e) {
         return '';
       }
-    } else if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      const opp = Opportunities.findDoc(id);
-      return opp.semesterID;
-    }
+    } else
+      if (Template.instance().state.get('detailOpportunityID')) {
+        const id = Template.instance().state.get('detailOpportunityID');
+        const opp = Opportunities.findDoc(id);
+        return opp.semesterID;
+      }
     return null;
+  },
+  interests() {
+    const ret = [];
+    if (Template.instance().state.get('detailCourseID')) {
+      const id = Template.instance().state.get('detailCourseID');
+      if (CourseInstances.isDefined(id)) {
+        const ci = CourseInstances.findDoc(id);
+        const course = Courses.findDoc(ci.courseID);
+        _.map(course.interestIDs, (iid) => {
+          ret.push(Interests.findDoc(iid));
+        });
+      } else {
+        const course = Courses.findDoc(id);
+        _.map(course.interestIDs, (iid) => {
+          ret.push(Interests.findDoc(iid));
+        });
+      }
+    } else
+      if (Template.instance().state.get('detailOpportunityID')) {
+        const id = Template.instance().state.get('detailOpportunityID');
+        if (OpportunityInstances.isDefined(id)) {
+          const oppInstance = OpportunityInstances.findDoc(id);
+          const opp = Opportunities.findDoc(oppInstance.opportunityID);
+          _.map(opp.interestIDs, (iid) => {
+            ret.push(Interests.findDoc(iid));
+          });
+        } else
+          if (Opportunities.isDefined(id)) {
+            const opp = Opportunities.findDoc(id);
+            _.map(opp.interestIDs, (iid) => {
+              ret.push(Interests.findDoc(iid));
+            });
+          }
+      }
+    return ret;
   },
   isInstance() {
     return Template.instance().state.get('detailCourseID') || Template.instance().state.get('detailOpportunityID');
@@ -342,15 +392,16 @@ Template.Inspector.helpers({
       } catch (e) {
         return false;
       }
-    } else if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      try {
-        const opportunity = OpportunityInstances.findDoc(id);
-        return !opportunity.verified;
-      } catch (e) {
-        return false;
+    } else
+      if (Template.instance().state.get('detailOpportunityID')) {
+        const id = Template.instance().state.get('detailOpportunityID');
+        try {
+          const opportunity = OpportunityInstances.findDoc(id);
+          return !opportunity.verified;
+        } catch (e) {
+          return false;
+        }
       }
-    }
     return false;
   },
   isPastInstance() {
@@ -365,18 +416,19 @@ Template.Inspector.helpers({
       } catch (e) {
         return false;
       }
-    } else if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      try {
-        const opportunity = OpportunityInstances.findDoc(id);
-        const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
-        const requests = VerificationRequests.find({ opportunityInstanceID: id, studentID }).fetch();
-        const oppSemester = Semesters.findDoc(opportunity.semesterID);
-        return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
-      } catch (e) {
-        return false;
+    } else
+      if (Template.instance().state.get('detailOpportunityID')) {
+        const id = Template.instance().state.get('detailOpportunityID');
+        try {
+          const opportunity = OpportunityInstances.findDoc(id);
+          const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+          const requests = VerificationRequests.find({ opportunityInstanceID: id, studentID }).fetch();
+          const oppSemester = Semesters.findDoc(opportunity.semesterID);
+          return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
+        } catch (e) {
+          return false;
+        }
       }
-    }
     return false;
   },
   isFuture(year) {
@@ -386,8 +438,8 @@ Template.Inspector.helpers({
     let ret = [];
     const opportunities = Opportunities.find().fetch();
     const currentSemesterID = Semesters.getCurrentSemester();
-    ret = lodash.filter(opportunities, function filter(o) {
-      return lodash.indexOf(o.semesterIDs, currentSemesterID) !== -1;
+    ret = _.filter(opportunities, function filter(o) {
+      return _.indexOf(o.semesterIDs, currentSemesterID) !== -1;
     });
     return ret;
   },
@@ -472,6 +524,25 @@ Template.Inspector.helpers({
       return opportunity.moreInformation;
     }
     return null;
+  },
+  prerequisites() {
+    const ret = [];
+    if (Template.instance().state.get('detailCourseID')) {
+      const id = Template.instance().state.get('detailCourseID');
+      if (CourseInstances.isDefined(id)) {
+        const ci = CourseInstances.findDoc(id);
+        const course = Courses.findDoc(ci.courseID);
+        _.map(course.prerequisites, (pre) => {
+          ret.push(pre);
+        });
+      } else {
+        const course = Courses.findDoc(id);
+        _.map(course.prerequisites, (pre) => {
+          ret.push(pre);
+        });
+      }
+    }
+    return ret;
   },
   processedDate(date) {
     const processed = moment(date);
@@ -574,7 +645,7 @@ Template.Inspector.helpers({
     if (ay.length > 0 && !instance.state.get('startYear')) {
       instance.state.set('startYear', ay[ay.length - 1].year);
     }
-    const ret = lodash.filter(ay, function filter(academicYear) {
+    const ret = _.filter(ay, function filter(academicYear) {
       const year = academicYear.year;
       if (year >= instance.state.get('startYear') - 3 && year <= instance.state.get('startYear')) {
         return true;
