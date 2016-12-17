@@ -45,3 +45,7 @@ Accounts.onLogin(function loggedIn() {
     FlowRouter.go('/');
   }
 });
+
+Accounts.onLogout(function logout() {
+  FlowRouter.go('/');
+});
