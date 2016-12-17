@@ -28,6 +28,7 @@ Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
     this.subscribe(Users.getPublicationName());
     this.subscribe(AcademicYearInstances.getPublicationName());
     this.subscribe(VerificationRequests.getPublicationName());
+
   });
 });
 
@@ -43,6 +44,9 @@ Template.Student_Home_Page.helpers({
   getTeaserInterests(teaser) {
     return Interests.findNames(teaser.interestIDs);
   },
+  activateSemanticUiJavascript() {
+    $('.ui .embed').embed();
+  },
 });
 
 Template.Student_Home_Page.events({
@@ -50,6 +54,5 @@ Template.Student_Home_Page.events({
 });
 
 Template.Student_Home_Page.onRendered(function enableVideo() {
-  this.$('.ui.embed').embed();
-
+  this.$('.ui .embed').embed();
 });
