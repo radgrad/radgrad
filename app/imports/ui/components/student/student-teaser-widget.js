@@ -17,9 +17,6 @@ Template.Student_Teaser_Widget.helpers({
   getTeaserInterests(teaser) {
     return Interests.findNames(teaser.interestIDs);
   },
-  activateSemanticUiJavascript() {
-    $('.ui .embed').embed();
-  },
 });
 
 Template.Student_Teaser_Widget.events({
@@ -27,5 +24,7 @@ Template.Student_Teaser_Widget.events({
 });
 
 Template.Student_Teaser_Widget.onRendered(function enableVideo() {
-  this.$('.ui .embed').embed();
+  setTimeout(() => {
+    this.$('.ui.embed').embed();
+  }, 200);
 });

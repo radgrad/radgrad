@@ -1,24 +1,22 @@
 <template name="Student_Teaser_Widget">
-
+  {{#if Template.subscriptionsReady}}
   <div class="ui padded segment container">
     <div class="ui dividing header">
       <h4>ICS TEASER VIDEOS</h4>
     </div>
 
     <div class="ui cards">
-
       {{#each teaser in getTeasers}}
-
         <div class="ui card">
           <div class="content">
             <div class="header">{{teaser.title}}</div>
             <div class="meta">By {{teaser.author}}</div>
-
           </div>
           <div style="padding:0px;" class="content">
             <div class="ui embed active" width="290" height="auto"
                  data-url="https://youtube.com/embed/PAuOggtDYi0">
             </div>
+
           </div>
           <div class="content">
                 <span class="left floated">
@@ -55,4 +53,7 @@
       </div>
     </div>
   </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
 </template>
