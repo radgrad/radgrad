@@ -136,28 +136,9 @@ Template.Student_Profile.events({
       const fr = new FileReader();
       fr.onload = (e) => {
         const csvData = e.target.result;
-        try {
-          Meteor.call('StarProcessor.loadStarCsvData', student.username, csvData);
-        } catch (e) {
-          // expecting an error when client tries to simulate the method call.
-        }
-
-        // const courseInstanceDefinitions = processStarCsvData(student.username, csvData);
-        // const currentSemester = Semesters.findDoc(Semesters.getCurrentSemester());
-        // courseInstanceDefinitions.map((definition) => {
-        //   console.log(definition);
-          // const semesterID = Semesters.getID(definition.semester);
-          // const ciSemester = Semesters.findDoc(semesterID);
-          // if (currentSemester.sortBy <= ciSemester.sortBy) {
-          //   definition.verified = false;
-          // }
-          // CourseInstances.define(definition);
-          // return false;
-        // });
+        Meteor.call('StarProcessor.loadStarCsvData', student.username, csvData);
       };
       fr.readAsText(starData);
-      // we only upload one file at a time.
-      // StarUploads.uploadStarData(fileName.files[0], student._id);
     }
   },
 });
