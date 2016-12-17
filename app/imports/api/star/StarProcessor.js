@@ -4,6 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
+import { check } from 'meteor/check';
 
 /** @module StarProcessor */
 
@@ -133,3 +134,11 @@ export function processStarCsvData(student, csvData) {
   return _.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject));
 }
 
+Meteor.methods({
+  'StarProcessor.loadStarCsvData': function process(student, csvData) {
+    check(student, String);
+    check(csvData, String);
+    const definitions = processStarCsvData(student, csvData);
+    console.log(definitions);
+  },
+});

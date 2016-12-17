@@ -1,1 +1,2 @@
 import './StarProcessor';
+import './StarUploadCollection';
