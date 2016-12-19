@@ -1,6 +1,7 @@
 <template name="Student_Layout">
   {{#if Template.subscriptionsReady}}
-    {{isAuthorized}}
+    {{#If_Authorized}}
+    {{/If_Authorized}}
     {{#if isInRole 'ADMIN'}}
       {{> First_Menu role="Admin"}}
       {{> Second_Menu menuItems=adminSecondMenuItems menuLength=adminSecondMenuLength}}

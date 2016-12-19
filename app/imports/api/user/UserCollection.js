@@ -52,8 +52,12 @@ class UserCollection extends BaseInstanceCollection {
     // TODO: SimpleSchema validation is disabled for now.
     // this._collection.attachSchema(this._schema);
     // The following fields facilitate subscriptions.
-    this.publicdata = { fields: { firstName: 1, middleName: 1, lastName: 1, slugID: 1, aboutMe: 1, interestIDs: 1,
-      careerGoalIDs: 1, picture: 1, roles: 1, degreePlanID: 0 } };
+    this.publicdata = {
+      fields: {
+        firstName: 1, middleName: 1, lastName: 1, slugID: 1, aboutMe: 1, interestIDs: 1,
+        careerGoalIDs: 1, picture: 1, roles: 1
+      }
+    };
     this.privatedata = { fields: { emails: 1, degreePlanID: 1, desiredDegree: 1, semesterID: 1 } };
   }
 
@@ -139,7 +143,11 @@ class UserCollection extends BaseInstanceCollection {
    */
   removeAllWithRole(role) {
     assertRole(role);
-    this.find().forEach(user => { if (Roles.userIsInRole(user._id, [role])) { this.removeIt(user._id); } });
+    this.find().forEach(user => {
+      if (Roles.userIsInRole(user._id, [role])) {
+        this.removeIt(user._id);
+      }
+    });
   }
 
   /**
@@ -300,9 +308,10 @@ class UserCollection extends BaseInstanceCollection {
     this.assertDefined(userID);
     if (!_.isNumber(level)) {
       throw new Meteor.Error(`${level} is not a number.`);
-    } else if (level < 0 || level > 6) {
-      throw new Meteor.Error(`${level} is out of bounds.`);
-    }
+    } else
+      if (level < 0 || level > 6) {
+        throw new Meteor.Error(`${level} is out of bounds.`);
+      }
     this._collection.update(userID, { $set: { level } });
   }
 
@@ -321,9 +330,10 @@ class UserCollection extends BaseInstanceCollection {
       stickers.forEach((s) => {
         if (!_.isNumber(s)) {
           throw new Meteor.Error(`${s} is not a number.`);
-        } else if (s > max) {
-          max = s;
-        }
+        } else
+          if (s > max) {
+            max = s;
+          }
       });
     }
     this._collection.update(userID, { $set: { stickers } });
@@ -353,10 +363,19 @@ class UserCollection extends BaseInstanceCollection {
     const courseIDs = courseInstanceDocs.map((doc) => doc.courseID);
     return _.uniq(courseIDs);
   }
+
+  publish() {
+    if (Meteor.isServer) {
+      //Meteor.publish(this._collectionName, () => this._collection.find());
+      console.log('publishing user');
+      Meteor.publish(this._collectionName, () => Meteor.users.find({}, this.publicdata));
+    }
+  }
 }
 
 /**
  * Provides the singleton instance of this class to other entities.
  */
-export const Users = new UserCollection();
+export const
+    Users = new UserCollection();
 

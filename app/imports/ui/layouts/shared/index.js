@@ -11,10 +11,11 @@ import './fourth-menu.js';
 
 import './footer.html';
 
+import './if-authorized.html';
+import './if-authorized.js';
+
 import './if-logged-in.html';
 import './if-logged-in.js';
-
-import './isAuthorized.js';
 
 import './layout-body.css';
 import './loading.html';
