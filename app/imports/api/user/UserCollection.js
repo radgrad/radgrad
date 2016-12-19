@@ -53,8 +53,8 @@ class UserCollection extends BaseInstanceCollection {
     // this._collection.attachSchema(this._schema);
     // The following fields facilitate subscriptions.
     this.publicdata = { fields: { firstName: 1, middleName: 1, lastName: 1, slugID: 1, aboutMe: 1, interestIDs: 1,
-      careerGoalIDs: 1, picture: 1, degreePlanID: 0 } };
-    this.privatedata = { fields: { roles: 1, emails: 1, degreePlanID: 1, desiredDegree: 1, semesterID: 1 } };
+      careerGoalIDs: 1, picture: 1, roles: 1, degreePlanID: 0 } };
+    this.privatedata = { fields: { emails: 1, degreePlanID: 1, desiredDegree: 1, semesterID: 1 } };
   }
 
   /**

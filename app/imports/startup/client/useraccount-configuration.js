@@ -24,11 +24,12 @@ Accounts.onLogin(function onLogin() {
     const currPath = FlowRouter.current().path;
     const username = Meteor.user().username;
     const role = (Roles.getRolesForUser(id).length === 1) ? Roles.getRolesForUser(id)[0] : undefined;
+    const lowerRole = role.toLowerCase();
     // console.log(id, username, Roles.getRolesForUser(id), role);
     SessionState.set(sessionKeys.CURRENT_ROLE, role);
     SessionState.set(sessionKeys[`CURRENT_${role}_ID`], id);
     if (currPath && currPath === '/') {
-      FlowRouter.go(`/${role.toLowerCase()}`);
+      FlowRouter.go(`/${lowerRole}/${username}`);
     } else {
       FlowRouter.go('/');
     }

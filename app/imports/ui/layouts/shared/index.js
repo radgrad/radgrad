@@ -14,6 +14,8 @@ import './footer.html';
 import './if-logged-in.html';
 import './if-logged-in.js';
 
+import './isAuthorized.js';
+
 import './layout-body.css';
 import './loading.html';
 

@@ -17,7 +17,7 @@ function removeBodyClass() {
 /*                        ADMIN ROUTES                       */
 
 const adminRoutes = FlowRouter.group({
-  prefix: '/admin',
+  prefix: '/admin/:username',
   name: 'admin',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
@@ -55,7 +55,7 @@ adminDataModelRoutes.route('/career-goals', {
 /*                        ADVISOR ROUTES                       */
 
 const advisorRoutes = FlowRouter.group({
-  prefix: '/advisor',
+  prefix: '/advisor/:username',
   name: 'advisor',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
@@ -96,7 +96,7 @@ advisorRoutes.route('/completed-verifications', {
 /*                        FACULTY ROUTES                       */
 
 const facultyRoutes = FlowRouter.group({
-  prefix: '/faculty',
+  prefix: '/faculty/:username',
   name: 'faculty',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
@@ -124,7 +124,7 @@ FlowRouter.route('/', {
 /*                        MENTOR ROUTES                       */
 
 const mentorRoutes = FlowRouter.group({
-  prefix: '/mentor',
+  prefix: '/mentor/:username',
   name: 'mentor',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
@@ -141,7 +141,7 @@ mentorRoutes.route('/', {
 /*                        STUDENT ROUTES                       */
 
 const studentRoutes = FlowRouter.group({
-  prefix: '/student',
+  prefix: '/student/:username',
   name: 'student',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
