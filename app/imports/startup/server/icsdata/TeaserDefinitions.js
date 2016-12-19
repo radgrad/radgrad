@@ -47,7 +47,7 @@ export const teaserDefinitions = [
     title: 'Algorithm Visualization',
     slug: 'algorithm-visualization',
     author: 'Jan Stelovsky',
-    url: 'https://https://www.youtube.com/embed/bMYRh1RQFF8',
+    url: 'https://www.youtube.com/embed/bMYRh1RQFF8',
     description: 'Opportunity to help develop interactive algorithm teaching software.',
     duration: '1:12',
     interests: ['algorithms', 'teaching'],
