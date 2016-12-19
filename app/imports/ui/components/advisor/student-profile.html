@@ -1,92 +1,103 @@
 <template name="Student_Profile">
-      <!-- Form -->
-        <div class="ui padded container segment" style="margin-bottom: 0 !important;">
-          <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Basic Profile</h4></div>
+  <!-- Form -->
+  <div class="ui padded container segment" style="margin-bottom: 0 !important;">
+    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Basic Profile</h4>
+    </div>
 
-          <div class="ui equal width form">
-            <div class="fields">
-              <!-- Role -->
-              <div class="field">
-                <label>Role</label>
-                <div class="ui action input">
-                  <div class="ui selection dropdown">
-                    <input type="hidden" name="role">
-                    <i class="dropdown icon"></i>
-                    <div class="text">{{userRole}}</div>
-                    <div class="menu">
-                      {{#each role in roles}}
-                        <div class="item{{#if inRole role}} active selected{{/if}}"
-                             data-value="{{role.key}}">{{role.value}}</div>
-                      {{/each}}
-                    </div>
-                  </div>
-                  <button class="ui basic green attached button" type="submit">Update</button>
-                </div>
-              </div>
-              <!-- Degree -->
-              <div class="field">
-                <label>Degree</label>
-                <div class="ui action input">
-                  <div class="ui selection dropdown">
-                    <input type="hidden" name="role">
-                    <i class="dropdown icon"></i>
-                    <div class="default text">{{desiredDegree}}</div>
-                    <div class="menu">
-                      <div class="item{{#if desireBS}} active selected{{/if}}" data-value="BS_CS">B.S. CS</div>
-                      <div class="item{{#if desireBA}} active selected{{/if}}" data-value="BA_ICS">B.A. ICS</div>
-                    </div>
-                  </div>
-                  <button class="ui basic green button jsDegree" type="submit">Update</button>
-                </div>
+    <div class="ui equal width form">
+      <div class="fields">
+        <!-- Role -->
+        <div class="field">
+          <label>Role</label>
+          <div class="ui action input">
+            <div class="ui selection dropdown">
+              <input type="hidden" name="role">
+              <i class="dropdown icon"></i>
+              <div class="text">{{userRole}}</div>
+              <div class="menu">
+                {{#each role in roles}}
+                  <div class="item{{#if inRole role}} active selected{{/if}}"
+                       data-value="{{role.key}}">{{role.value}}</div>
+                {{/each}}
               </div>
             </div>
-
-            <div class="fields">
-              <!-- Interest -->
-              <div class="field">
-                <label>Interests</label>
-                <div class="ui action input">
-                  <select multiple="" class="ui dropdown">
-                    <option value="">Select Interests</option>
-                    {{#each interest in interests}}
-                      <option value="{{interest._id}}" selected="{{interestSelected interest}}">{{interest.name}}</option>
-                    {{/each}}
-                  </select>
-                  <button class="ui basic green button jsInterests" type="submit">Add</button>
-                </div>
-              </div>
-              <!-- Degree -->
-              <div class="field">
-                <label>Career Goals</label>
-                <div class="ui action input">
-                  <select multiple="" class="ui dropdown">
-                    <option value="">Select Career Goals</option>
-                    {{#each goal in careerGoals}}
-                      <option value="{{goal._id}}" selected="{{careerGoalSelected goal}}">{{goal.name}}</option>
-                    {{/each}}
-                  </select>
-                  <button class="ui green basic button jsCareers" type="submit">Add</button>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="field">
-              <!-- CSV -->
-              <label>STAR CSV</label>
-              <div class="ui action input">
-                {{#with currentUpload}}
-                  Uploading <b>{{file.name}}</b>:
-                  <span id="progress">{{progress.get}}%</span>
-                {{else}}
-                  <input id="fileInput" type="file" />
-                {{/with}}
-                <!--<input id="fileInput" type="file"/>-->
-                <button class="ui basic green button jsStarData" type="submit">Load Star Data</button>
-              </div>
-            </div>
-
+            <button class="ui basic green attached button" type="submit">Update</button>
           </div>
         </div>
+        <!-- Degree -->
+        <div class="field">
+          <label>Degree</label>
+          <div class="ui action input">
+            <div class="ui selection dropdown">
+              <input type="hidden" name="role">
+              <i class="dropdown icon"></i>
+              <div class="default text">{{desiredDegree}}</div>
+              <div class="menu">
+                <div class="item{{#if desireBS}} active selected{{/if}}" data-value="BS_CS">B.S. CS</div>
+                <div class="item{{#if desireBA}} active selected{{/if}}" data-value="BA_ICS">B.A. ICS</div>
+              </div>
+            </div>
+            <button class="ui basic green button jsDegree" type="submit">Update</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fields">
+        <!-- Interest -->
+        <div class="field">
+          <label>Interests</label>
+          <div class="ui action input">
+            <select multiple="" class="ui dropdown">
+              <option value="">Select Interests</option>
+              {{#each interest in interests}}
+                <option value="{{interest._id}}" selected="{{interestSelected interest}}">{{interest.name}}</option>
+              {{/each}}
+            </select>
+            <button class="ui basic green button jsInterests" type="submit">Add</button>
+          </div>
+        </div>
+        <!-- Degree -->
+        <div class="field">
+          <label>Career Goals</label>
+          <div class="ui action input">
+            <select multiple="" class="ui dropdown">
+              <option value="">Select Career Goals</option>
+              {{#each goal in careerGoals}}
+                <option value="{{goal._id}}" selected="{{careerGoalSelected goal}}">{{goal.name}}</option>
+              {{/each}}
+            </select>
+            <button class="ui green basic button jsCareers" type="submit">Add</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="field">
+        <!-- CSV -->
+        <label>STAR CSV</label>
+        <div class="ui action input">
+          {{#with currentUpload}}
+            Uploading <b>{{file.name}}</b>:
+            <span id="progress">{{progress.get}}%</span>
+          {{else}}
+            <input id="fileInput" type="file"/>
+          {{/with}}
+          <!--<input id="fileInput" type="file"/>-->
+          <button class="ui basic green button jsStarData" type="submit">Load Star Data</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <!-- Star Data Log -->
+        <label>STAR Data Upload Log</label>
+        {{#each log in starLogs}}
+          <div class="ui segment">
+            <p><strong>{{log.uploadedOn}}:</strong> {{log.note}}</p>
+          </div>
+        {{/each}}
+      </div>
+
+    </div>
+  </div>
 
 </template>

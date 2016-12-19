@@ -4,13 +4,12 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Papa } from 'meteor/harrison:papa-parse';
 
 import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
-import { processStarCsvData } from '/imports/api/star/StarProcessor';
+import { StarDataLogs } from '../../../api/star/StarDataLogCollection';
 // import { StarUploads } from '../../../api/star/StarUploadCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
@@ -83,6 +82,13 @@ Template.Student_Profile.helpers({
     });
     return ret;
   },
+  starLogs() {
+    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+      return StarDataLogs.find({ studentID });
+    }
+    return null;
+  },
   userRole() {
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
@@ -145,6 +151,7 @@ Template.Student_Profile.events({
 
 Template.Student_Profile.onCreated(function studentProfileOnCreated() {
   this.currentUpload = new ReactiveVar(false);
+
 });
 
 Template.Student_Profile.onRendered(function studentProfileOnRendered() {
