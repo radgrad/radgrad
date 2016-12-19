@@ -41,7 +41,7 @@ Meteor.methods({
       if (split[0] !== 'Fall') {
         yearVal -= 1;
       }
-      console.log('Defining AcademicYear');
+      console.log(`Defining AcademicYear ${yearVal}`);
       return AcademicYearInstances.define({ student, year: yearVal });
     });
   },
