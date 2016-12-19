@@ -20,5 +20,8 @@ import './student-home-help.js';
 import './student-ice-help.html';
 import './student-ice-help.js';
 
+import './student-teaser-widget.html';
+import './student-teaser-widget.js';
+
 import './warn-recommend.html';
 import './warn-recommend.js';
