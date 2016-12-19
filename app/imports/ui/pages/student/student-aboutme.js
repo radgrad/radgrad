@@ -133,14 +133,12 @@ Template.Student_AboutMe.events({
     event.preventDefault();
     const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
     const choice = event.target.emailAddress.value;
-    console.log(choice);
     Users.setEmail(student._id, choice);
   },
   'submit .website' (event) {
     event.preventDefault();
     const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
     const choice = event.target.website.value;
-    console.log(choice);
     Users.setWebsite(student._id, choice);
   },
 });

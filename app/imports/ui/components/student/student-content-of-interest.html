@@ -1,0 +1,83 @@
+<template name="Student_Content_Of_Interest">
+  {{#if Template.subscriptionsReady}}
+  <div class="ui padded segment container">
+    <div class="ui dividing header">
+      <h4>CONTENT OF INTEREST</h4>
+    </div>
+
+    <div class="ui two cards">
+      {{#each opportunity in opportunities}}
+      <div class="ui card">
+        <div class="content">
+          <div class="header">{{opportunity.name}}</div>
+          <div class="meta">
+          {{#each semester in opportunity.semesterIDs}}
+          {{opportunitySemesters semester}}&nbsp;
+          {{/each}}
+          </div>
+        </div>
+        <div class="content">
+          {{opportunity.description}}
+          </div>
+          <div class="content">
+            23 students plan to participate
+            <div class="ui circular mini images">
+              <img class="ui image" src="/images/landing/boado.jpg">
+              <img class="ui image" src="/images/landing/garces.jpg">
+              <img class="ui image" src="/images/landing/khongnawang.jpg">
+              <img class="ui image" src="/images/landing/boado.jpg">
+              <img class="ui image" src="/images/landing/garces.jpg">
+              <img class="ui image" src="/images/landing/khongnawang.jpg">
+              <img class="ui image" src="/images/landing/boado.jpg">
+              <img class="ui image" src="/images/landing/garces.jpg">
+              <a><img class="ui bordered image" src="/images/elipsis.png"></a>
+            </div>
+          </div>
+          <div class="content">
+                <span class="left floated">
+                  {{#each interest in opportunityInterests opportunity}}
+                  <a class="ui mini label"><i style="color:white !important"
+                                              class="fitted star icon"></i>{{interest}}</a>
+                  {{/each}}
+                </span>
+          </div>
+          <div class="content bottom">
+                <span class="left floated">
+                <a>View more</a>
+                </span>
+            <span class="right floated">
+                <a>Hide</a>
+                </span>
+            <span>
+                  <a>Add to plan</a>
+                </span>
+
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+    <div class="ui center aligned container">
+      <div class="ui mini compact pagination menu bottom">
+        <a class="active item">
+          1
+        </a>
+        <div class="disabled item">
+          ...
+        </div>
+        <a class="item">
+          6
+        </a>
+        <a class="item">
+          7
+        </a>
+        <a class="item">
+          8
+        </a>
+      </div>
+    </div>
+  </div>
+  {{else}}
+  {{> Loading}}
+  {{/if}}
+</template>
