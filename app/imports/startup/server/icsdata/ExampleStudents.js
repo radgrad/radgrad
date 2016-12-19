@@ -8,7 +8,7 @@ export const exampleStudents = [
     lastName: 'Kealoha',
     slug: 'abi',
     email: 'abi@hawaii.edu',
-    password: 'changeAbi',
+    password: 'foo',
     uhID: '1234-5678',
   },
   {
@@ -16,7 +16,7 @@ export const exampleStudents = [
     lastName: 'Persona',
     slug: 'alfred',
     email: 'alfred@hawaii.edu',
-    password: 'changeAlfred',
+    password: 'foo',
     uhID: '1234-5679',
   },
   {
@@ -24,7 +24,7 @@ export const exampleStudents = [
     lastName: 'Keanu',
     slug: 'betty',
     email: 'betty@hawaii.edu',
-    password: 'changeBetty',
+    password: 'foo',
     uhID: '1234-5680',
   },
   {
@@ -32,7 +32,7 @@ export const exampleStudents = [
     lastName: 'Sherry',
     slug: 'charley',
     email: 'charley@hawaii.edu',
-    password: 'changeCharley',
+    password: 'foo',
     uhID: '1234-5681',
   },
   {
@@ -40,7 +40,7 @@ export const exampleStudents = [
     lastName: 'Zwick',
     slug: 'ella',
     email: 'ella@hawaii.edu',
-    password: 'changeElla',
+    password: 'foo',
     uhID: '1234-5682',
   },
 ];
