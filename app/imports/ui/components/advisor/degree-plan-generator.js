@@ -8,9 +8,9 @@ import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCol
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { BS_CS_TEMPLATE, BA_ICS_TEMPLATE } from '../../../api/degree-program/degree-program';
-import { generateDegreePlan } from '../../../api/degree-program/plan-generator';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+import * as planUtils from '../../../api/degree-program/plan-generator';
 import * as semUtils from '../../../api/semester/SemesterUtilities';
 import * as courseUtils from '../../../api/course/CourseFunctions';
 import * as opportunityUtils from '../../../api/opportunity/OpportunityFunctions';
@@ -96,13 +96,6 @@ Template.Degree_Plan_Generator.events({
     event.preventDefault();
     const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
     const student = Users.findDoc(studentID);
-    let template;
-    if (student.desiredDegree === 'BS_CS') {
-      template = BS_CS_TEMPLATE;
-    }
-    if (student.desiredDegree === 'BA_ICS') {
-      template = BA_ICS_TEMPLATE;
-    }
     const currentSemester = Semesters.getCurrentSemesterDoc();
     let startSemester = instance.state.get('selectedSemester');
     if (!startSemester) {
@@ -110,6 +103,9 @@ Template.Degree_Plan_Generator.events({
     }
     if (currentSemester.sortBy === startSemester.sortBy) {
       startSemester = semUtils.nextFallSpringSemester(startSemester);
+    }
+    if (planUtils.getStartingSemester(student)) {  // student has taken some courses in the past.
+      startSemester = planUtils.getStartingSemester(student);
     }
     // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
     courseUtils.clearPlannedCourseInstances(studentID);
@@ -123,7 +119,13 @@ Template.Degree_Plan_Generator.events({
     } else {
       // TODO: CAM figure out which AYs to remove.
     }
-    generateDegreePlan(template, startSemester, student);
+    if (student.desiredDegree === 'BS_CS') {
+      planUtils.generateBSDegreePlan(student, startSemester);
+    }
+    if (student.desiredDegree === 'BA_ICS') {
+      planUtils.generateBADegreePlan(student, startSemester);
+    }
+    // planUtils.generateDegreePlan(template, startSemester, student);
     FlowRouter.go(studentDegreePlannerPageRouteName);
   },
 });

@@ -36,6 +36,11 @@ export const semesterOpportunities = (semester, semesterNumber) => {
   if (semesterNumber < 3) { // AY 1.
     return _.filter(semesterOpps, function onlyEvents(opportunity) {
       const type = Opportunities.getOpportunityTypeDoc(opportunity._id);
+      return type.name === 'Club';
+    });
+  } else if (semesterNumber < 6) {
+    return _.filter(semesterOpps, function onlyEvents(opportunity) {
+      const type = Opportunities.getOpportunityTypeDoc(opportunity._id);
       return type.name === 'Event' || type.name === 'Club';
     });
   }
