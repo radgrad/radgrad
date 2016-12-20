@@ -55,6 +55,7 @@ Template.Degree_Plan_Generator.helpers({
     if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
       _.map(user.interestIDs, (id) => {
+        console.log("id is : " + id);
         ret.push(Interests.findDoc(id));
       });
     }

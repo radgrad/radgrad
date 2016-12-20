@@ -31,7 +31,7 @@ import './explorer-interest-pages/algorithms.html';
 import './explorer-interest-pages/algorithms.js';
 
 import './student-aboutme.html';
-import './student-aboutme';
+import './student-aboutme.js';
 
 import './student-levels.html';
 import './student-levels.js';

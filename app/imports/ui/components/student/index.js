@@ -14,11 +14,17 @@ import './ice.js';
 import './interests.html';
 import './interests.js';
 
+import './student-content-of-interest.html';
+import './student-content-of-interest.js';
+
 import './student-home-help.html';
 import './student-home-help.js';
 
 import './student-ice-help.html';
 import './student-ice-help.js';
+
+import './student-teaser-widget.html';
+import './student-teaser-widget.js';
 
 import './warn-recommend.html';
 import './warn-recommend.js';
