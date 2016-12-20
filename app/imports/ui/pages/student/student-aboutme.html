@@ -6,8 +6,8 @@
       </div>
       <div class="fourteen wide stretched column">
 
-        <div class="ui raised padded container segment">
-          <div class="ui top green attached label">Basics</div>
+        <div class="ui padded container segment">
+          <div class="ui dividing header"><h4>PROFILE</h4></div>
 
           <div class="ui grid">
 
@@ -16,115 +16,78 @@
                 <p><b>Name</b></p>
               </div>
               <div class="six wide column">
-                <p>Michele Shimoda</p>
+                <p>{{getName}}</p>
               </div>
               <div class="two wide column">
-                <p><b>Desired Degree</b></p>
+                <p><b>Email</b></p>
               </div>
               <div class="five wide column">
-
-                      <div class="item">BS Computer Science</div><br>
-
-                    <a href="{{pathFor 'Student_Explorer_Degree_Page'}}">Edit in degree explorer</a>
-
+                <p>{{getEmail}}</p>
               </div>
             </div>
 
             <div class="row">
               <div class="two wide column">
-                <p><b>Email</b></p>
+                <p><b>Desired Degree</b></p>
               </div>
               <div class="six wide column">
-                <div class="ui form">
-                  <div class="inline field">
-                    <div class="ui action input">
-                      <input type="text" placeholder="shimoda@hawaii.edu">
-                      <button class="ui green button" type="submit">Update</button>
-                    </div>
-                  </div>
-                </div>
-
+                {{#if desiredDegree}}
+                <p>{{desiredDegree}}</p>
+                {{else}}
+                <p>None</p>
+                {{/if}}
+                <a href="{{pathFor 'Student_Explorer_Degree_Page'}}">Edit in degree explorer</a>
               </div>
               <div class="two wide column">
                 <p><b>Professional Website</b></p>
               </div>
               <div class="five wide column">
-                <div class="ui form">
+                <p>{{getWebsite}}</p>
+                <form class="ui form website">
                   <div class="inline field">
                     <div class="ui action input">
-                      <input type="text" placeholder="">
-                      <button class="ui green button" type="submit">Update</button>
+                      <input id="website" type="text" name="website" placeholder="Enter new website url">
+                      <button class="ui green button website" type="submit">Update</button>
                     </div>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="ui raised padded container segment">
-          <div class="ui top green attached label">Details</div>
-          <div class="ui grid">
             <div class="row">
               <div class="two wide column">
                 <p><b>Interests</b></p>
               </div>
-              <div class="five wide column">
-                  <a class="ui label"><i class="fitted star icon"></i>Artificial Intelligence</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Web Development</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Natural Language Processing</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Machine Learning</a>
-                  <a class="ui label"><i class="fitted star icon"></i>Mobile Design</a>
-                <br><br><a href="{{pathFor 'Student_Explorer_Interest_Page'}}">Edit in interest
-                  explorer</a>
+              <div class="six wide column">
+                {{#if interests}}
+                {{#each interest in interests}}
+                <a class="ui label"><i style="color:white !important" class="fitted star icon"></i>{{interest.name}}</a>
+                {{/each}}
+                <br>
+                {{else}}
+                <p>None</p>
+                {{/if}}
+                <br><a href="{{pathFor 'Student_Explorer_Interest_Page'}}">Edit in interest
+                explorer</a>
               </div>
               <div class="two wide column">
                 <p><b>Career Goals</b></p>
               </div>
-              <div class="six wide column">
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Software Engineer</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Data Scientist</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Web Developer</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Network Operator</a>
-                  <a class="ui label"><i class="fitted suitcase icon"></i>Entrepreneur</a>
-                <br><br><a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in career
-                  explorer</a>
-              </div>
-            </div>
-            <div class="row">
-              <div class="two wide column">
-                <p><b>Completed Courses</b></p>
-              </div>
               <div class="five wide column">
-                <div class="ui list">
-                  <div class="item">Introduction to Computer Science I (ICS111)</div>
-                  <div class="item">Introduction to Computer Science II (ICS211)</div>
-                  <div class="item">Discrete Math for Computer Science I (ICS141)</div>
-                  <div class="item">Discrete Math for Computer Science II (ICS241)</div>
-                  <div class="item">Program Structure(ICS212)</div>
-                  <div class="item">Algorithms (ICS311)</div>
-                </div>
-                <a href="{{pathFor 'Student_Degree_Planner_Page'}}">View schedule details in degree
-                  planner</a><br>
-                <a href="{{pathFor 'Student_Explorer_Course_Page'}}">View course details in course explorer</a>
+                {{#if careerGoals}}
+                {{#each goal in careerGoals}}
+                <a class="ui label"><i style="color:white !important" class="fitted suitcase icon"></i>{{goal.name}}</a>
+                {{/each}}
+                <br>
+                {{else}}
+                <p>None</p>
+                {{/if}}
+                <br><a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in career
+                explorer</a>
               </div>
-
-              <div class="two wide column">
-                <p><b>Completed Opportunities</b></p>
-              </div>
-              <div class="five wide column">
-                <div class="ui list">
-                  <div class="item">Internship at DataHouse (Spring 2014)</div>
-                  <div class="item">IT Position at UH ITS (Spring 2015-Fall 2016)</div>
-                  <div class="item">AT&T Hackathon (Spring 2016)</div>
-                </div>
-                <a href="{{pathFor 'Student_Explorer_Career_Page'}}">Edit in opportunity
-                  explorer</a></div>
-
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

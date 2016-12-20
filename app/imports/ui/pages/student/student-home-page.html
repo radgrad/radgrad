@@ -1,5 +1,5 @@
 <template name="Student_Home_Page">
-
+  {{#if Template.subscriptionsReady}}
   <div class="layout-page">
     <div class="ui centered grid container">
       {{> Help_Panel}}
@@ -7,396 +7,15 @@
         {{> Home_Menu}}
       </div>
       <div class="nine wide column">
-        <div class="ui segment container">
-          <div class="ui large green top left attached label">Content of Interest</div>
-
-          <div class="ui center aligned container">
-            <div class="ui mini compact pagination menu top">
-              <a class="active item">
-                1
-              </a>
-              <div class="disabled item">
-                ...
-              </div>
-              <a class="item">
-                10
-              </a>
-              <a class="item">
-                11
-              </a>
-              <a class="item">
-                12
-              </a>
-            </div>
+        <div class="ui padded segment container">
+          <div class="ui dividing header">
+            <h4>CONTENT OF INTEREST</h4>
           </div>
 
           <div class="ui two cards">
-
-            <div class="ui card">
-              <div class="content">
-                <div class="header">ACM Hackathon</div>
-                <div class="meta">Spring 2017 (January 24-26)</div>
-              </div>
-              <div class="content">
-                Are you ready for another Hackathon? All coders of all levels are welcome. It will take place at our own
-                ICSpace, so you will feel right at home! It is going to be...
-              </div>
-              <div class="content">
-                23 students plan to participate
-                <div class="ui circular mini images">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <a><img class="ui bordered image" src="/images/elipsis.png"></a>
-                </div>
-              </div>
-              <div class="content">
-                <span class="left floated">
-                  <a class="ui mini label"><i class="fitted star icon"></i>Web Development</a>
-                  <a class="ui mini label"><i class="fitted star icon"></i>Mobile Design</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Software Engineer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Web Developer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Entrepreneur</a>
-                </span>
-              </div>
-              <div class="content bottom">
-                <span class="left floated">
-                <a>View more</a>
-                </span>
-                <span class="right floated">
-                <a>Hide</a>
-                </span>
-                <span>
-                  <a>Add to plan</a>
-                </span>
-
-              </div>
-            </div>
-
-            <div class="ui card">
-              <div class="content">
-                <div class="header">Techfolio Workshop</div>
-                <div class="meta">Fall 2016 (November 16)</div>
-              </div>
-              <div class="content">
-                Do you have the professional career that you've always dreamed of? No? Perhaps an easier question is, do
-                you have a professional portfolio to help kickstart your...<a>Read more</a>
-              </div>
-              <div class="content">
-                17 students plan to participate
-                <div class="ui circular mini images">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <a><img class="ui bordered image" src="/images/elipsis.png"></a>
-                </div>
-              </div>
-              <div class="content">
-                <span class="left floated">
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Software Engineer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Web Developer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Entrepreneur</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Network Operator</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Data Scientist</a>
-
-                </span>
-              </div>
-              <div class="content bottom">
-                <span class="left floated">
-                <a>View more</a>
-                </span>
-                <span class="right floated">
-                <a>Hide</a>
-                </span>
-                <span>
-                  <a>Add to plan</a>
-                </span>
-
-              </div>
-            </div>
-
-
-            <div class="ui card">
-              <div class="content">
-                <div class="header">ICS314 Software Engineering I</div>
-                <div class="meta">Spring 2017</div>
-              </div>
-              <div class="content">
-                Course name: ICS314 (Software Engineering I)<br>
-                Professor: Philip Johnson<br>
-                Fulfillments: Writing Intensive (WI)...<a>Read More</a>
-              </div>
-              <div class="content">
-                31 students plan to participate
-                <div class="ui circular mini images">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <a><img class="ui bordered image" src="/images/elipsis.png"></a>
-                </div>
-              </div>
-              <div class="content">
-                <span class="left floated">
-                   <a class="ui mini label"><i class="fitted star icon"></i>Web Development</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Software Engineer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Web Developer</a>
-                  <a class="ui mini label"><i class="fitted student icon"></i>BS Computer Science</a>
-
-                </span>
-              </div>
-              <div class="content bottom">
-                <span class="left floated">
-                <a>View more</a>
-                </span>
-                <span class="right floated">
-                <a>Hide</a>
-                </span>
-                <span>
-                  <a>Add to plan</a>
-                </span>
-
-              </div>
-            </div>
-
-            <div class="ui card">
-              <div class="content">
-                <div class="header">Mobile Monk Seal Tracker Development</div>
-                <div class="meta">Spring 2017</div>
-              </div>
-              <div class="content">
-                Professor Cam Moore is currently looking for students to intern under him and receive ICS499 credit. His
-                project will involve creating a fully functioning mobile...<a>Read more</a>
-              </div>
-              <div class="content">
-                25 students plan to participate
-                <div class="ui circular mini images">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <a><img class="ui bordered image" src="/images/elipsis.png"></a>
-                </div>
-              </div>
-              <div class="content">
-                <span class="left floated">
-                  <a class="ui mini label"><i class="fitted star icon"></i>Mobile Design</a>
-                </span>
-              </div>
-              <div class="content bottom">
-                <span class="left floated">
-                <a>View more</a>
-                </span>
-                <span class="right floated">
-                <a>Hide</a>
-                </span>
-                <span>
-                  <a>Add to plan</a>
-                </span>
-
-              </div>
-            </div>
-
-            <div class="ui card">
-              <div class="content">
-                <div class="header">ACM Hackathon</div>
-                <div class="meta">Spring 2017 (January 24-26)</div>
-              </div>
-              <div class="content">
-                Are you ready for another Hackathon? All coders of all levels are welcome. It will take place at our own
-                ICSpace, so you will feel right at home! It is going to be...
-              </div>
-              <div class="content">
-                23 students plan to participate
-                <div class="ui circular mini images">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <a><img class="ui bordered image" src="/images/elipsis.png"></a>
-                </div>
-              </div>
-              <div class="content">
-                <span class="left floated">
-                  <a class="ui mini label"><i class="fitted star icon"></i>Web Development</a>
-                  <a class="ui mini label"><i class="fitted star icon"></i>Mobile Design</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Software Engineer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Web Developer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Entrepreneur</a>
-                </span>
-              </div>
-              <div class="content bottom">
-                <span class="left floated">
-                <a>View more</a>
-                </span>
-                <span class="right floated">
-                <a>Hide</a>
-                </span>
-                <span>
-                  <a>Add to plan</a>
-                </span>
-
-              </div>
-            </div>
-
-            <div class="ui card">
-              <div class="content">
-                <div class="header">Techfolio Workshop</div>
-                <div class="meta">Fall 2016 (November 16)</div>
-              </div>
-              <div class="content">
-                Do you have the professional career that you've always dreamed of? No? Perhaps an easier question is, do
-                you have a professional portfolio to help kickstart your...<a>Read more</a>
-              </div>
-              <div class="content">
-                17 students plan to participate
-                <div class="ui circular mini images">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <a><img class="ui bordered image" src="/images/elipsis.png"></a>
-                </div>
-              </div>
-              <div class="content">
-                <span class="left floated">
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Software Engineer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Web Developer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Entrepreneur</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Network Operator</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Data Scientist</a>
-
-                </span>
-              </div>
-              <div class="content bottom">
-                <span class="left floated">
-                <a>View more</a>
-                </span>
-                <span class="right floated">
-                <a>Hide</a>
-                </span>
-                <span>
-                  <a>Add to plan</a>
-                </span>
-
-              </div>
-            </div>
-
-
-            <div class="ui card">
-              <div class="content">
-                <div class="header">ICS314 Software Engineering I</div>
-                <div class="meta">Spring 2017</div>
-              </div>
-              <div class="content">
-                Course name: ICS314 (Software Engineering I)<br>
-                Professor: Philip Johnson<br>
-                Fulfillments: Writing Intensive (WI)...<a>Read More</a>
-              </div>
-              <div class="content">
-                31 students plan to participate
-                <div class="ui circular mini images">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <a><img class="ui bordered image" src="/images/elipsis.png"></a>
-                </div>
-              </div>
-              <div class="content">
-                <span class="left floated">
-                   <a class="ui mini label"><i class="fitted star icon"></i>Web Development</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Software Engineer</a>
-                  <a class="ui mini label"><i class="fitted suitcase icon"></i>Web Developer</a>
-                  <a class="ui mini label"><i class="fitted student icon"></i>BS Computer Science</a>
-
-                </span>
-              </div>
-              <div class="content bottom">
-                <span class="left floated">
-                <a>View more</a>
-                </span>
-                <span class="right floated">
-                <a>Hide</a>
-                </span>
-                <span>
-                  <a>Add to plan</a>
-                </span>
-
-              </div>
-            </div>
-
-            <div class="ui card">
-              <div class="content">
-                <div class="header">Mobile Monk Seal Tracker Development</div>
-                <div class="meta">Spring 2017</div>
-              </div>
-              <div class="content">
-                Professor Cam Moore is currently looking for students to intern under him and receive ICS499 credit. His
-                project will involve creating a fully functioning mobile...<a>Read more</a>
-              </div>
-              <div class="content">
-                25 students plan to participate
-                <div class="ui circular mini images">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <img class="ui image" src="/images/landing/khongnawang.jpg">
-                  <img class="ui image" src="/images/landing/boado.jpg">
-                  <img class="ui image" src="/images/landing/garces.jpg">
-                  <a><img class="ui bordered image" src="/images/elipsis.png"></a>
-                </div>
-              </div>
-              <div class="content">
-                <span class="left floated">
-                  <a class="ui mini label"><i class="fitted star icon"></i>Mobile Design</a>
-                </span>
-              </div>
-              <div class="content bottom">
-                <span class="left floated">
-                <a>View more</a>
-                </span>
-                <span class="right floated">
-                <a>Hide</a>
-                </span>
-                <span>
-                  <a>Add to plan</a>
-                </span>
-
-              </div>
-            </div>
+            {{#each opp in opportunities}}
+            {{> Student_Content_Of_Interest opportunity = opp}}
+            {{/each}}
           </div>
           <div class="ui center aligned container">
             <div class="ui mini compact pagination menu bottom">
@@ -407,102 +26,25 @@
                 ...
               </div>
               <a class="item">
-                10
+                6
               </a>
               <a class="item">
-                11
+                7
               </a>
               <a class="item">
-                12
+                8
               </a>
             </div>
           </div>
         </div>
       </div>
 
+
       <div class="five wide column">
-        <div class="ui segment container">
-          <div class="ui large green top left attached label">Learn more about ICS</div>
+        {{> Student_Teaser_Widget}}
 
-
-          <div class="ui items">
-            <div class="item">
-              <div class="ui tiny image">
-                <img src="/images/generic_vid.png">
-              </div>
-              <div class="content">
-                <h4 class="ui header">Career Focus: Software Engineer</h4>
-                <div class="meta">
-                  <span>By Austin Ito</span>
-                </div>
-                <div class="description">
-                  <p></p>
-                </div>
-                <a class="ui mini label"><i class="suitcase fitted icon"></i>Software Engineer</a>
-              </div>
-            </div>
-            <div class="ui divider"></div>
-            <div class="item">
-              <div class="ui tiny image">
-                <img src="/images/generic_vid.png">
-              </div>
-              <div class="content">
-                <h4 class="ui header">What to Expect in ICS314</h4>
-                <div class="meta">
-                  <span>By Philip Johnson</span>
-                </div>
-                <div class="description">
-                  <p></p>
-                </div>
-                <a class="ui mini label"><i class="fitted book icon"></i>ICS314</a>
-                <a class="ui mini label"><i class="star fitted icon"></i>Web Development</a>
-                <a class="ui mini label"><i class="suitcase fitted icon"></i>Software Engineer</a>
-                <a class="ui mini label"><i class="suitcase fitted icon"></i>Web Developer</a>
-                <a class="ui mini label"><i class="student fitted icon"></i>BS Computer Science</a>
-              </div>
-            </div>
-            <div class="ui divider"></div>
-            <div class="item">
-              <div class="ui tiny image">
-                <img src="/images/generic_vid.png">
-              </div>
-              <div class="content">
-                <h4 class="ui header">What to Expect in ICS313</h4>
-                <div class="meta">
-                  <span>By Nancy Reed</span>
-                </div>
-                <div class="description">
-                  <p></p>
-                </div>
-                <a class="ui mini label"><i class="fitted book icon"></i>ICS313</a>
-                <a class="ui mini label"><i class="fitted star icon"></i>Artificial Intelligence</a>
-              </div>
-            </div>
-            <div class="ui divider"></div>
-            <div class="item">
-              <div class="ui tiny image">
-                <img src="/images/generic_vid.png">
-              </div>
-              <div class="content">
-                <h4 class="ui header">What to Expect at the AT&T Hackathon</h4>
-                <div class="meta">
-                  <span>By Philip Johnson</span>
-                </div>
-                <div class="description">
-                  <p></p>
-                </div>
-                <a class="ui mini label"><i class="fitted star icon"></i>Web Development</a>
-                <a class="ui mini label"><i class="fitted star icon"></i>Mobile Design</a>
-                <a class="ui mini label"><i class="suitcase fitted icon"></i>Software Engineer</a>
-                <a class="ui mini label"><i class="suitcase fitted icon"></i>Web Developer</a>
-                <a class="ui mini label"><i class="suitcase fitted icon"></i>Entrepreneur</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ui segment container">
-          <div class="ui large green top left attached label">Recent Community Activity</div>
+        <div class="ui padded segment container">
+          <div class="ui dividing header"><h4>RADGRAD COMMUNITY ACTIVITY</h4></div>
 
           <div class="ui feed">
             <div class="event">
@@ -683,4 +225,7 @@
       </div>
     </div>
   </div>
+  {{else}}
+  {{> Loading}}
+  {{/if}}
 </template>

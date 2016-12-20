@@ -3,7 +3,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
+import { sessionKeys } from '../../../startup/client/session-state';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -20,8 +20,8 @@ import { studentDegreePlannerPageRouteName } from '../../../startup/client/route
 Template.Degree_Plan_Generator.helpers({
   careerGoals() {
     const ret = [];
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
       _.map(user.careerGoalIDs, (id) => {
         ret.push(CareerGoals.findDoc(id));
       });
@@ -33,8 +33,8 @@ Template.Degree_Plan_Generator.helpers({
     return Semesters.toString(currentSemesterID, false);
   },
   desiredDegree() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
       if (user.desiredDegree === 'BS_CS') {
         return 'B.S. CS';
       } else if (user.desiredDegree === 'BA_ICS') {
@@ -52,8 +52,8 @@ Template.Degree_Plan_Generator.helpers({
   },
   interests() {
     const ret = [];
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
       _.map(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
       });
@@ -77,8 +77,8 @@ Template.Degree_Plan_Generator.helpers({
     return '';
   },
   userFullName() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
       return Users.getFullName(user._id);
     }
     return 'Select a student';
@@ -94,7 +94,7 @@ Template.Degree_Plan_Generator.events({
   },
   'click .jsGeneratePlan': function clickGeneratePlan(event, instance) {
     event.preventDefault();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = instance.state.get(sessionKeys.CURRENT_STUDENT_ID);
     const student = Users.findDoc(studentID);
     const currentSemester = Semesters.getCurrentSemesterDoc();
     let startSemester = instance.state.get('selectedSemester');
@@ -131,8 +131,11 @@ Template.Degree_Plan_Generator.events({
 });
 
 Template.Degree_Plan_Generator.onCreated(function degreePlanGeneratorOnCreated() {
-  this.state = new ReactiveDict();
-  updateSessionState();
+  if (this.data.dictionary) {
+    this.state = this.data.dictionary;
+  } else {
+    this.state = new ReactiveDict();
+  }
 });
 
 Template.Degree_Plan_Generator.onRendered(function degreePlanGeneratorOnRendered() {

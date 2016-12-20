@@ -11,17 +11,17 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { getTotalICE, makeCourseICE, getPlanningICE } from '../../../api/ice/IceProcessor.js';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Inspector.helpers({
   courses() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const instances = CourseInstances.find({ studentID }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
@@ -42,7 +42,7 @@ Template.Inspector.helpers({
   courses100() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const instances = CourseInstances.find({ studentID }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
@@ -66,7 +66,7 @@ Template.Inspector.helpers({
   courses200() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const instances = CourseInstances.find({ studentID }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
@@ -90,7 +90,7 @@ Template.Inspector.helpers({
   courses300() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const instances = CourseInstances.find({ studentID }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
@@ -114,7 +114,7 @@ Template.Inspector.helpers({
   courses410() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const instances = CourseInstances.find({ studentID }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
@@ -141,7 +141,7 @@ Template.Inspector.helpers({
   courses440() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const instances = CourseInstances.find({ studentID }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
@@ -168,7 +168,7 @@ Template.Inspector.helpers({
   courses470() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const instances = CourseInstances.find({ studentID }).fetch();
     const courseTakenIDs = [];
     instances.forEach((courseInstance) => {
@@ -277,13 +277,13 @@ Template.Inspector.helpers({
     return Template.instance().state.get('detailCourseID');
   },
   hasMoreYears() {
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const ays = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     return ays.length > 3;
   },
   hasNextYear() {
     const instance = Template.instance();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const ays = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     return ays[ays.length - 1].year > instance.state.get('startYear');
   },
@@ -304,7 +304,7 @@ Template.Inspector.helpers({
   },
   hasPrevYear() {
     const instance = Template.instance();
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const ays = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     return ays[0].year < instance.state.get('startYear') - 3;
   },
@@ -421,7 +421,7 @@ Template.Inspector.helpers({
         const id = Template.instance().state.get('detailOpportunityID');
         try {
           const opportunity = OpportunityInstances.findDoc(id);
-          const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+          const studentID = getUserIdFromRoute();
           const requests = VerificationRequests.find({ opportunityInstanceID: id, studentID }).fetch();
           const oppSemester = Semesters.findDoc(opportunity.semesterID);
           return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
@@ -617,7 +617,7 @@ Template.Inspector.helpers({
   yearICE(year) {
     let cis = [];
     const semesterIDs = year.semesterIDs;
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     semesterIDs.forEach((sem) => {
       const ci = CourseInstances.find({ studentID, semesterID: sem }).fetch();
       cis = cis.concat(ci);
@@ -629,7 +629,7 @@ Template.Inspector.helpers({
   yearPlanningICE(year) {
     let cis = [];
     const semesterIDs = year.semesterIDs;
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     semesterIDs.forEach((sem) => {
       const ci = CourseInstances.find({ studentID, semesterID: sem }).fetch();
       cis = cis.concat(ci);
@@ -639,7 +639,7 @@ Template.Inspector.helpers({
     return getPlanningICE(cis);
   },
   years() {
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     const instance = Template.instance();
     if (ay.length > 0 && !instance.state.get('startYear')) {
@@ -678,7 +678,7 @@ Template.Inspector.events({
     event.preventDefault();
     const id = event.target.id;
     const opportunityInstance = id;
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const student = Users.findDoc(studentID).username;
     VerificationRequests.define({ student, opportunityInstance });
   },

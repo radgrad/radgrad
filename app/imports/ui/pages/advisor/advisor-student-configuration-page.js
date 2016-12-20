@@ -2,7 +2,6 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
-import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
@@ -30,10 +29,6 @@ Template.Advisor_Student_Configuration_Page.events({
 
 Template.Advisor_Student_Configuration_Page.onCreated(function advisorStudentConfirgurationPageOnCreated() {
   this.state = new ReactiveDict();
-  updateSessionState(SessionState);
-  if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-    this.state.set(sessionKeys.CURRENT_STUDENT_ID, SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-  }
   this.autorun(() => {
     this.subscribe(AcademicYearInstances.getPublicationName());
     this.subscribe(CareerGoals.getPublicationName());

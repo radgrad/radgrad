@@ -8,5 +8,3 @@ import './landing-section-1.js';
 
 import './landing-section-2.css';
 import './landing-section-2.html';
-
-import './site-menu.html';
