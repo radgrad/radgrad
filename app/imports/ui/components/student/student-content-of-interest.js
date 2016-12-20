@@ -5,8 +5,7 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
-
+import { getRouteUserName } from '../shared/route-user-name';
 
 Template.Student_Content_Of_Interest.onCreated(function appBodyOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
@@ -50,7 +49,7 @@ Template.Student_Content_Of_Interest.events({
     const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
+    const username = getRouteUserName();
     const oi = {
       semester: semSlug,
       opportunity: oppSlug.name,

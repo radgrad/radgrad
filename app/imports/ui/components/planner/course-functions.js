@@ -5,13 +5,14 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { Slugs } from '../../../api/slug/SlugCollection';
+import { getRouteUserName } from '../shared/route-user-name';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 const area = 'DegreePlanPrerequisites';
 
 const clearFeedbackInstances = () => {
-  const userID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+  const userID = getUserIdFromRoute();
   const instances = FeedbackInstances.find({ userID, area }).fetch();
   instances.forEach((i) => {
     FeedbackInstances.removeIt(i._id);
@@ -25,7 +26,7 @@ export const checkPrerequisites = () => {
   const f = Feedbacks.find({ name: 'Prerequisite missing' }).fetch()[0];
   const feedback = Slugs.getEntityID(f.slugID, 'Feedback');
   clearFeedbackInstances();
-  const cis = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
+  const cis = CourseInstances.find({ studentID: getUserIdFromRoute() }).fetch();
   cis.forEach((ci) => {
     const semester = Semesters.findDoc(ci.semesterID);
     const semesterName = Semesters.toString(ci.semesterID, false);
@@ -49,7 +50,7 @@ export const checkPrerequisites = () => {
               ` in ${semesterName2}.`;
               FeedbackInstances.define({
                 feedback,
-                user: SessionState.get(sessionKeys.CURRENT_STUDENT_USERNAME),
+                user: getRouteUserName(),
                 description,
                 area,
               });
@@ -60,7 +61,7 @@ export const checkPrerequisites = () => {
               'not found.';
           FeedbackInstances.define({
             feedback,
-            user: SessionState.get(sessionKeys.CURRENT_STUDENT_USERNAME),
+            user: getRouteUserName(),
             description,
             area,
           });

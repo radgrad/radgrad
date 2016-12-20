@@ -1,41 +1,32 @@
 import { Template } from 'meteor/templating';
-import { lodash } from 'meteor/erasaur:meteor-lodash';
 
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Users } from '../../../api/user/UserCollection.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_Levels.helpers({
   pastLevelsStyle(level) {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-      if(level < user.level){
+    if (getUserIdFromRoute()) {
+      const user = Users.findDoc(getUserIdFromRoute());
+      if (level < user.level) {
         return 'height:30px; width: auto; border-width: 3px; border-color: green';
-        console.log('Less than 4');
       }
-      else{
-        return 'height:30px; width: auto" class="ui image';
-        console.log('More than or equal to 4');
-      }
+      return 'height:30px; width: auto" class="ui image';
     }
     return '';
   },
   pastLevelsClass(level) {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-      if(level < user.level){
+    if (getUserIdFromRoute()) {
+      const user = Users.findDoc(getUserIdFromRoute());
+      if (level < user.level) {
         return '"ui bordered image"';
       }
-      else{
-        return '"ui image"';
-      }
+      return '"ui image"';
     }
     return '';
   },
   studentLevelImageName() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (getUserIdFromRoute()) {
+      const user = Users.findDoc(getUserIdFromRoute());
       if (user.level) {
         return `level${user.level}`;
       }
@@ -43,8 +34,8 @@ Template.Student_Levels.helpers({
     return 'level1';
   },
   studentLevelName() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (getUserIdFromRoute()) {
+      const user = Users.findDoc(getUserIdFromRoute());
       if (user.level) {
         return `Level ${user.level}`;
       }
@@ -52,8 +43,8 @@ Template.Student_Levels.helpers({
     return 'Level 1';
   },
   studentLevelNumber() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (getUserIdFromRoute()) {
+      const user = Users.findDoc(getUserIdFromRoute());
       if (user.level) {
         return `${user.level}`;
       }
@@ -61,8 +52,8 @@ Template.Student_Levels.helpers({
     return '1';
   },
   studentLevelColor() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (getUserIdFromRoute()) {
+      const user = Users.findDoc(getUserIdFromRoute());
       switch (user.level) {
         case 1:
           return 'white';
@@ -84,9 +75,7 @@ Template.Student_Levels.helpers({
   },
 });
 
-Template.Level_Sticker_Log.events({
-
-});
+Template.Level_Sticker_Log.events({});
 
 Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
   if (this.data.dictionary) {
