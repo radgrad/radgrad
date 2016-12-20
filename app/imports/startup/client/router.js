@@ -16,8 +16,9 @@ function removeBodyClass() {
 
 /*                        ADMIN ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const adminRoutes = FlowRouter.group({
-  prefix: '/admin',
+  prefix: '/admin/:username',
   name: 'admin',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
@@ -31,13 +32,8 @@ adminRoutes.route('/', {
   },
 });
 
-const adminDataModelRoutes = adminRoutes.group({
-  prefix: '/datamodel',
-  name: 'adminDataModel',
-});
-
 export const adminDataModelPageRouteName = 'Admin_DataModel_Page';
-adminDataModelRoutes.route('/', {
+adminRoutes.route('/datamodel', {
   name: adminDataModelPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_Page' });
@@ -45,7 +41,7 @@ adminDataModelRoutes.route('/', {
 });
 
 export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoals_Page';
-adminDataModelRoutes.route('/career-goals', {
+adminRoutes.route('/datamodel/career-goals', {
   name: adminDataModelCareerGoalsPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_CareerGoals_Page' });
@@ -54,8 +50,9 @@ adminDataModelRoutes.route('/career-goals', {
 
 /*                        ADVISOR ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const advisorRoutes = FlowRouter.group({
-  prefix: '/advisor',
+  prefix: '/advisor/:username',
   name: 'advisor',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
@@ -95,8 +92,9 @@ advisorRoutes.route('/completed-verifications', {
 
 /*                        FACULTY ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const facultyRoutes = FlowRouter.group({
-  prefix: '/faculty',
+  prefix: '/faculty/:username',
   name: 'faculty',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
@@ -123,8 +121,9 @@ FlowRouter.route('/', {
 
 /*                        MENTOR ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const mentorRoutes = FlowRouter.group({
-  prefix: '/mentor',
+  prefix: '/mentor/:username',
   name: 'mentor',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
@@ -140,8 +139,9 @@ mentorRoutes.route('/', {
 
 /*                        STUDENT ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const studentRoutes = FlowRouter.group({
-  prefix: '/student',
+  prefix: '/student/:username',
   name: 'student',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],

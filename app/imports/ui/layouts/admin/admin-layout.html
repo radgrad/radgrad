@@ -1,17 +1,11 @@
 <template name="Admin_Layout">
-  {{#if Template.subscriptionsReady}}
-    {{> First_Menu role="Admin"}}
-    {{#if isInRole 'ADMIN'}}
-      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
+  {{#If_Authorized}}
+    {{#if Template.subscriptionsReady}}
+      {{> First_Menu role="Admin"}}
+      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength username=routeUserName}}
       {{> Template.dynamic template=main}}
     {{else}}
-      <div style="padding-top: 40px" class="ui text container">
-        <p>You are not authorized to view this page.</p>
-        <p>Please login as admin.</p>
-      </div>
+      {{> Loading}}
     {{/if}}
-    {{> Footer}}
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+  {{/If_Authorized}}
 </template>
