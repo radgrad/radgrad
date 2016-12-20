@@ -31,13 +31,8 @@ adminRoutes.route('/', {
   },
 });
 
-const adminDataModelRoutes = adminRoutes.group({
-  prefix: '/datamodel',
-  name: 'adminDataModel',
-});
-
 export const adminDataModelPageRouteName = 'Admin_DataModel_Page';
-adminDataModelRoutes.route('/', {
+adminRoutes.route('/datamodel', {
   name: adminDataModelPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_Page' });
@@ -45,7 +40,7 @@ adminDataModelRoutes.route('/', {
 });
 
 export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoals_Page';
-adminDataModelRoutes.route('/career-goals', {
+adminRoutes.route('/datamodel/career-goals', {
   name: adminDataModelCareerGoalsPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_CareerGoals_Page' });
