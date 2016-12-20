@@ -44,6 +44,9 @@ Template.Student_Home_Page.helpers({
   getTeaserInterests(teaser) {
     return Interests.findNames(teaser.interestIDs);
   },
+  opportunities() {
+    return Opportunities.find().fetch();
+  },
   activateSemanticUiJavascript() {
     $('.ui .embed').embed();
   },

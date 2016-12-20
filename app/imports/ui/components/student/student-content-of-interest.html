@@ -1,12 +1,4 @@
 <template name="Student_Content_Of_Interest">
-  {{#if Template.subscriptionsReady}}
-  <div class="ui padded segment container">
-    <div class="ui dividing header">
-      <h4>CONTENT OF INTEREST</h4>
-    </div>
-
-    <div class="ui two cards">
-      {{#each opportunity in opportunities}}
       <div class="ui card">
         <div class="content">
           <div class="header">{{opportunity.name}}</div>
@@ -17,7 +9,7 @@
           </div>
         </div>
         <div class="content">
-          {{opportunity.description}}
+          {{opportunityShortDescription opportunity.description}}
           </div>
           <div class="content">
             23 students plan to participate
@@ -49,35 +41,18 @@
                 <a>Hide</a>
                 </span>
             <span>
-                  <a>Add to plan</a>
+                  <a class="chooseSemester">Add to plan</a>
+              <div class="ui fluid popup transition hidden">
+              <div class="ui vertical menu">
+                {{#each semester in opportunity.semesterIDs}}
+                <a class="item addToPlan" data-position="right center">{{opportunitySemesters semester}}</a>
+                {{/each}}
+
+              </div>
+            </div>
                 </span>
+
 
           </div>
         </div>
-      {{/each}}
-    </div>
-
-    <div class="ui center aligned container">
-      <div class="ui mini compact pagination menu bottom">
-        <a class="active item">
-          1
-        </a>
-        <div class="disabled item">
-          ...
-        </div>
-        <a class="item">
-          6
-        </a>
-        <a class="item">
-          7
-        </a>
-        <a class="item">
-          8
-        </a>
-      </div>
-    </div>
-  </div>
-  {{else}}
-  {{> Loading}}
-  {{/if}}
 </template>

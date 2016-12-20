@@ -1,5 +1,5 @@
 <template name="Student_Home_Page">
-
+  {{#if Template.subscriptionsReady}}
   <div class="layout-page">
     <div class="ui centered grid container">
       {{> Help_Panel}}
@@ -7,13 +7,41 @@
         {{> Home_Menu}}
       </div>
       <div class="nine wide column">
-        {{> Student_Content_Of_Interest}}
-        </div>
+        <div class="ui padded segment container">
+          <div class="ui dividing header">
+            <h4>CONTENT OF INTEREST</h4>
+          </div>
 
+          <div class="ui two cards">
+            {{#each opp in opportunities}}
+            {{> Student_Content_Of_Interest opportunity = opp}}
+            {{/each}}
+          </div>
+          <div class="ui center aligned container">
+            <div class="ui mini compact pagination menu bottom">
+              <a class="active item">
+                1
+              </a>
+              <div class="disabled item">
+                ...
+              </div>
+              <a class="item">
+                6
+              </a>
+              <a class="item">
+                7
+              </a>
+              <a class="item">
+                8
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
       <div class="five wide column">
-       {{> Student_Teaser_Widget}}
+        {{> Student_Teaser_Widget}}
 
         <div class="ui padded segment container">
           <div class="ui dividing header"><h4>RADGRAD COMMUNITY ACTIVITY</h4></div>
@@ -197,4 +225,7 @@
       </div>
     </div>
   </div>
+  {{else}}
+  {{> Loading}}
+  {{/if}}
 </template>

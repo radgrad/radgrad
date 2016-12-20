@@ -1,13 +1,21 @@
 import { Template } from 'meteor/templating';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
+import { SessionState, sessionKeys } from '../../../startup/client/session-state';
+
 
 Template.Student_Content_Of_Interest.onCreated(function appBodyOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
+  this.subscribe(Users.getPublicationName());
 });
+
 
 Template.Student_Content_Of_Interest.helpers({
   getDictionary() {
@@ -25,12 +33,38 @@ Template.Student_Content_Of_Interest.helpers({
     const oppYear = sem.year;
     return oppTerm + ' ' + oppYear;
   },
+  opportunityShortDescription(description){
+    if(description.length > 200) {
+      description = description.substring(0,200)+"...";
+    }
+    return description;
+  }
 });
 
 Template.Student_Content_Of_Interest.events({
-  // placeholder: if you add a form to this top-level layout, handle the associated events here.
+  'click .addToPlan': function clickItemAddToPlan(event, template) {
+    event.preventDefault();
+    const opportunity = this.opportunity;
+    const name = opportunity.name;
+    const semester = event.target.text;
+    const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
+    const semSplit = semester.split(' ');
+    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
+    const username = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
+    const oi = {
+      semester: semSlug,
+      opportunity: oppSlug.name,
+      verified: false,
+      student: username,
+    };
+    OpportunityInstances.define(oi);
+  },
 });
 
-Template.Student_Content_Of_Interest.onRendered({
-
+Template.Student_Content_Of_Interest.onRendered(function studentContentOfInterestOnRendered(){
+  const template = this;
+  template.$('.chooseSemester')
+    .popup({
+      on: 'click',
+    });
 });
