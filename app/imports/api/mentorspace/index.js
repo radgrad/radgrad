@@ -1,2 +1,2 @@
-import './QuestionsCollection';
+import './MentorQuestionsCollection';
 import './MentorAnswersCollection';

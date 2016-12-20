@@ -5,18 +5,18 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '../user/UserCollection';
 
-/** @module MentorAnswers */
+/** @module MentorQuestions */
 
 /**
  * Represents a mentor answer.
  * @extends module:Base~BaseCollection
  */
-class MentorAnswersCollection extends BaseCollection {
+class MentorQuestionsCollection extends BaseCollection {
   /**
    * Creates the Mentor Answer collection.
    */
   constructor() {
-    super('MentorAnswers', new SimpleSchema({
+    super('MentorQuestions', new SimpleSchema({
       questionID: { type: String },
       mentor: { type: String },
       text: { type: String }
@@ -51,4 +51,4 @@ class MentorAnswersCollection extends BaseCollection {
   }
 }
 
-export const MentorAnswers = new MentorAnswersCollection();
+export const MentorQuestions = new MentorQuestionsCollection();
