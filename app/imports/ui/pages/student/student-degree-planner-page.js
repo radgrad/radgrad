@@ -13,6 +13,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
   this.state = new ReactiveDict();
@@ -37,12 +38,11 @@ Template.Student_Degree_Planner_Page.onRendered(function plannerOnRendered() {
 
 Template.Student_Degree_Planner_Page.helpers({
   args() {
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
-    if (studentID) {
-      const user = Users.findDoc(studentID);
+    const studentDoc = Users.findDoc({ username: FlowRouter.getParam('username') });
+    if (studentDoc) {
       return {
         currentSemesterID: Semesters.getCurrentSemester(),
-        studentUserName: user.username,
+        studentUserName: studentDoc.username,
       };
     }
     return null;

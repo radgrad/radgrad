@@ -1,20 +1,6 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '../../../startup/client/router.js';
-
 
 Template.Landing_Layout.helpers({
-  secondMenuItems() {
-    return [
-      { label: 'Admin', route: RouteNames.adminHomePageRouteName },
-      { label: 'Advisor', route: RouteNames.advisorStudentConfigurationPageRouteName },
-      { label: 'Faculty', route: RouteNames.facultyHomePageRouteName },
-      { label: 'Mentor', route: RouteNames.mentorHomePageRouteName },
-      { label: 'Student', route: RouteNames.studentHomePageRouteName },
-    ];
-  },
-  secondMenuLength() {
-    return 'five';
-  },
 });
 
 Template.Landing_Layout.events({
