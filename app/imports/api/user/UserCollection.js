@@ -45,6 +45,7 @@ class UserCollection extends BaseInstanceCollection {
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
       level: { type: Number, optional: true },
       stickers: { type: [Number], optional: true },
+      website: { type: String, optional: true},
       // username, email, and password are managed in accounts package.
     }));
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
@@ -231,6 +232,34 @@ class UserCollection extends BaseInstanceCollection {
     this.assertDefined(userID);
     CareerGoals.assertAllDefined(careerGoalIDs);
     this._collection.update(userID, { $set: { careerGoalIDs } });
+  }
+
+  /**
+   * Updates email with new email address.
+   * @param userID The userID.
+   * @param email The user's email as a string.
+   * @throws {Meteor.Error} If userID is not a userID
+   */
+  setEmail(userID, email) {
+    this.assertDefined(userID);
+    if (!_.isString(email)) {
+      throw new Meteor.Error(`${email} is not a string.`);
+    }
+    this._collection.update(userID, { $set: { email } });
+  }
+
+  /**
+   * Updates website with new website address.
+   * @param userID The userID.
+   * @param email The user's website as a string.
+   * @throws {Meteor.Error} If userID is not a userID
+   */
+  setWebsite(userID, website) {
+    this.assertDefined(userID);
+    if (!_.isString(website)) {
+      throw new Meteor.Error(`${website} is not a string.`);
+    }
+    this._collection.update(userID, { $set: { website } });
   }
 
   /**
