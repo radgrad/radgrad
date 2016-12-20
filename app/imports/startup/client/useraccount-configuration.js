@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { SessionState, sessionKeys } from '/imports/startup/client/session-state';
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY',
@@ -28,8 +27,6 @@ Accounts.onLogin(function onLogin() {
     console.log('processing initial login');
     const username = Meteor.user().username;
     const role = Roles.getRolesForUser(id)[0];
-    SessionState.set(sessionKeys.CURRENT_ROLE, role);
-    SessionState.set(sessionKeys[`CURRENT_${role}_ID`], id);
     FlowRouter.go(`/${role.toLowerCase()}/${username}`);
   }
 });

@@ -1,11 +1,9 @@
 import { Template } from 'meteor/templating';
 
-import { AdminChoices } from '../../../api/admin/AdminChoiceCollection';
 import { Users } from '../../../api/user/UserCollection';
 
 Template.Admin_Home_Page.onCreated(function appBodyOnCreated() {
   this.autorun(() => {
-    this.subscribe(AdminChoices.getPublicationName());
     this.subscribe(Users.getPublicationName());
   });
 });
