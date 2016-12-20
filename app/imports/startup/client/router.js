@@ -16,6 +16,7 @@ function removeBodyClass() {
 
 /*                        ADMIN ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const adminRoutes = FlowRouter.group({
   prefix: '/admin/:username',
   name: 'admin',
@@ -49,6 +50,7 @@ adminRoutes.route('/datamodel/career-goals', {
 
 /*                        ADVISOR ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const advisorRoutes = FlowRouter.group({
   prefix: '/advisor/:username',
   name: 'advisor',
@@ -90,6 +92,7 @@ advisorRoutes.route('/completed-verifications', {
 
 /*                        FACULTY ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const facultyRoutes = FlowRouter.group({
   prefix: '/faculty/:username',
   name: 'faculty',
@@ -118,6 +121,7 @@ FlowRouter.route('/', {
 
 /*                        MENTOR ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const mentorRoutes = FlowRouter.group({
   prefix: '/mentor/:username',
   name: 'mentor',
@@ -135,6 +139,7 @@ mentorRoutes.route('/', {
 
 /*                        STUDENT ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const studentRoutes = FlowRouter.group({
   prefix: '/student/:username',
   name: 'student',

@@ -17,15 +17,17 @@ Accounts.ui.config({
  *
  */
 Accounts.onLogin(function onLogin() {
-  // here's our big assumption: that Meteor.userId() and the roles field are only defined on initial login.
+  // Our big assumption: that Meteor.userId() and the roles field are only defined on initial login.
+  // We also check that the user is currently on the landing page.
   const id = Meteor.userId();
-  const initialLogin = (id && Roles.getRolesForUser(id).length === 1);
+  const rolesAvailable = id && Roles.getRolesForUser(id).length === 1;
+  const onLandingPage = FlowRouter.current().path && (FlowRouter.current().path === '/');
+  const initialLogin = (id && rolesAvailable && onLandingPage);
 
   if (initialLogin) {
-    console.log('initial login');
+    console.log('processing initial login');
     const username = Meteor.user().username;
     const role = Roles.getRolesForUser(id)[0];
-    console.log('onLogin', id, Meteor.user(), username, role);
     SessionState.set(sessionKeys.CURRENT_ROLE, role);
     SessionState.set(sessionKeys[`CURRENT_${role}_ID`], id);
     FlowRouter.go(`/${role.toLowerCase()}/${username}`);

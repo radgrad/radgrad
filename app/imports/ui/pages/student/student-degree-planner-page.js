@@ -38,13 +38,11 @@ Template.Student_Degree_Planner_Page.onRendered(function plannerOnRendered() {
 
 Template.Student_Degree_Planner_Page.helpers({
   args() {
-    const studentID = Users.findDoc({ username: FlowRouter.getParam('username') })._id;
-    console.log('degree planner', studentID);
-    if (studentID) {
-      const user = Users.findDoc(studentID);
+    const studentDoc = Users.findDoc({ username: FlowRouter.getParam('username') });
+    if (studentDoc) {
       return {
         currentSemesterID: Semesters.getCurrentSemester(),
-        studentUserName: user.username,
+        studentUserName: studentDoc.username,
       };
     }
     return null;
