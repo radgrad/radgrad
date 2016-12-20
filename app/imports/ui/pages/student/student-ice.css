@@ -1,3 +1,4 @@
+/**Headers**/
 .ui.equal.width.grid.container.innovation .ui.header {
   color: steelblue;
 }
@@ -10,31 +11,66 @@
   color: goldenrod;
 }
 
-.ui.equal.width.grid.container.competency .row.competencyp p{
-  color: darkseagreen;
+
+/**Actual ICE**/
+.ui.equal.width.grid.container.innovation .row .ui.list .item .content .header{
+  color: steelblue;
 }
+
+.ui.equal.width.grid.container.innovation .row .ui.list .item .content .description b{
+  color: steelblue;
+}
+
+
+.ui.equal.width.grid.container.competency .row .ui.list .item .content .header{
+  color: green;
+}
+
+.ui.equal.width.grid.container.competency .row .ui.list .item .content .description b{
+  color: green;
+}
+
+
+.ui.equal.width.grid.container.experience .row .ui.list .item .content .header{
+  color: goldenrod;
+}
+
+.ui.equal.width.grid.container.experience .row .ui.list .item .content .description b{
+  color: goldenrod;
+}
+
+
+/**Projected ICE**/
+.ui.equal.width.grid.container.innovation .row.innovationp .ui.list .item .content .header{
+  color: lightsteelblue;
+}
+
+.ui.equal.width.grid.container.innovation .row.innovationp .ui.list .item .content .description b{
+  color: lightsteelblue;
+}
+
 
 .ui.equal.width.grid.container.competency .row.competencyp .ui.list .item .content .header{
   color: darkseagreen;
 }
 
-.ui.equal.width.grid.container.competency .row.competencyp .ui.list .item .content .description{
+.ui.equal.width.grid.container.competency .row.competencyp .ui.list .item .content .description b{
   color: darkseagreen;
 }
 
-.ui.equal.width.grid.container.experience .row.experiencep p{
-  color: tan;
-}
 
 .ui.equal.width.grid.container.experience .row.experiencep .ui.list .item .content .header{
   color: tan;
 }
 
-.ui.equal.width.grid.container.experience .row.experiencep .ui.list .item .content .description{
+.ui.equal.width.grid.container.experience .row.experiencep .ui.list .item .content .description b{
   color: tan;
 }
 
-.innovationr p {
+
+/**Recommended ICE**/
+
+.innovationr .ui.header {
   color:steelblue;
 }
 
@@ -42,11 +78,11 @@
   color:steelblue;
 }
 
-.innovationr .ui.list .item .content .description {
+.innovationr .ui.list .item .content .description b{
   color:steelblue;
 }
 
-.competencyr p {
+.competencyr .ui.header {
   color:green;
 }
 
@@ -54,11 +90,11 @@
   color:green;
 }
 
-.competencyr .ui.list .item .content .description {
+.competencyr .ui.list .item .content .description b{
   color:green;
 }
 
-.experiencer p {
+.experiencer .ui.header {
   color:goldenrod;
 }
 
@@ -66,19 +102,20 @@
   color:goldenrod;
 }
 
-.experiencer .ui.list .item .content .description {
+.experiencer .ui.list .item .content .description b{
   color:goldenrod;
 }
 
-.innovation{
+/**Basic ICE Info**/
+.i{
   color:steelblue;
 }
 
-.competency{
+.c{
   color:green;
 }
 
-.experience{
+.e{
   color:goldenrod;
 }
 
@@ -308,13 +345,13 @@
 }
 .c100 {
   position: relative;
-  font-size: 120px;
+  font-size: 120px; /*controls entire graph size*/
   width: 1em;
   height: 1em;
   border-radius: 50%;
   float: left;
   margin: 0 0.1em 0.1em 0;
-  background-color: #cccccc;
+  background-color: white; /*Remainder bar graph color*/
 }
 .c100 *,
 .c100 *:before,
@@ -337,51 +374,34 @@
   position: absolute;
   width: 100%;
   z-index: 1;
-  left: 0;
-  top: 0;
+  left: -16px;
+  right: 0px;
+  bottom: 0;
+  top: -30px;
+  margin-left: auto;
+  margin-right: auto;
   width: 5em;
   line-height: 5em;
-  font-size: 0.2em;
+  font-size: 0.25em; /*Controls span font size*/
   color: #cccccc;
   display: block;
   text-align: center;
   white-space: nowrap;
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -o-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  -webkit-transition-timing-function: ease-out;
-  -moz-transition-timing-function: ease-out;
-  -o-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
 }
 
 .c100:after {
   position: absolute;
-  top: 0.08em;
-  left: 0.08em;
+  top: 0em;
+  left: 0em;
   display: block;
   content: " ";
   border-radius: 50%;
-  background-color: #f5f5f5;
-  width: 0.84em;
-  height: 0.84em;
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -o-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  -webkit-transition-timing-function: ease-in;
-  -moz-transition-timing-function: ease-in;
-  -o-transition-timing-function: ease-in;
-  transition-timing-function: ease-in;
+  background-color: transparent; /*Center background color*/
+  width: 1em;
+  height: 1em;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #cccccc;
 }
 
 .c100 .slice {
@@ -1103,7 +1123,7 @@
 }
 
 .c100.lightblue > span {
-  color: steelblue !important;
+  color: steelblue;
 }
 
 .c100.blue .bar,
@@ -1117,7 +1137,7 @@
 }
 
 .c100.blue > span {
-  color: steelblue !important;
+  color: steelblue;
 }
 
 .c100.lightgreen .bar,
@@ -1131,7 +1151,7 @@
 }
 
 .c100.lightgreen > span {
-  color:  green !important;
+  color:  green;
 }
 
 .c100.green .bar,
@@ -1145,7 +1165,7 @@
 }
 
 .c100.green > span {
-  color: green !important;
+  color: green;
 }
 
 
@@ -1156,11 +1176,11 @@
 
 .c100.lightorange.dark .bar,
 .c100.lightorange.dark .fill {
-  border-color: lightsalmon !important;
+  border-color: tan !important;
 }
 
 .c100.lightorange > span {
-  color: darkorange !important;
+  color: goldenrod;
 }
 
 .c100.orange .bar,
@@ -1170,11 +1190,11 @@
 
 .c100.orange.dark .bar,
 .c100.orange.dark .fill {
-  border-color: #e08833 !important;
+  border-color: goldenrod !important;
 }
 
 .c100.orange > span {
-  color: #dd9d22 !important;
+  color: goldenrod;
 }
 
 
