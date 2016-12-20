@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.Admin_Layout.onCreated(function adminLayoutOnCreated() {
 });
@@ -17,9 +16,6 @@ Template.Admin_Layout.helpers({
   },
   secondMenuLength() {
     return 'two';
-  },
-  username() {
-    return FlowRouter.getParam('username');
   },
 });
 

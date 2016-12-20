@@ -2,7 +2,7 @@
   {{#If_Authorized}}
     {{#if Template.subscriptionsReady}}
       {{> First_Menu role="Admin"}}
-      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength username=username}}
+      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength username=routeUserName}}
       {{> Template.dynamic template=main}}
     {{else}}
       {{> Loading}}
