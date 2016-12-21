@@ -3,15 +3,20 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 
 Template.Retrieve_Student_Widget.helpers({
-  students() {
-    return Users.find({ roles: [ROLE.STUDENT] }, { sort: { lastName: 1 } });
-    // return Users.find();
+  users(role) {
+    return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
   },
-  url(student) {
-    return `/student/${student.username}/home`;
+  url(user) {
+    return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
   },
-  label(student) {
-    return `${student.lastName}, ${student.firstName} (${student.username})`;
+  label(user) {
+    return `${user.lastName}, ${user.firstName} (${user.username})`;
+  },
+  studentRole() {
+    return ROLE.STUDENT;
+  },
+  alumniRole() {
+    return ROLE.ALUMNI;
   },
 });
 
@@ -24,7 +29,7 @@ Template.Retrieve_Student_Widget.onCreated(function advisorLogViewerOnCreated() 
 });
 
 Template.Retrieve_Student_Widget.onRendered(function advisorLogViewerOnRendered() {
-  // add your statement here
+  this.$('.menu .item').tab();
 });
 
 Template.Retrieve_Student_Widget.onDestroyed(function advisorLogViewerOnDestroyed() {
