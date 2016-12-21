@@ -2,11 +2,11 @@
   {{#if Template.subscriptionsReady}}
   <div class="ui padded segment container">
     <div class="ui dividing header">
-      <h4>ICS TEASER VIDEOS</h4>
+      <h4>ICS TEASER VIDEOS ({{teaserCount}})</h4>
     </div>
 
     <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui cards">
-      {{#each teaser in getTeasers}}
+      {{#each teaser in teasers}}
         <div class="ui card">
           <div class="content">
             <div class="header">{{teaser.title}}</div>
@@ -20,7 +20,7 @@
           </div>
           <div class="content">
                 <span class="left floated">
-                  {{#each interest in getTeaserInterests teaser}}
+                  {{#each interest in teaserInterests teaser}}
                     <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
                   {{/each}}
                 </span>

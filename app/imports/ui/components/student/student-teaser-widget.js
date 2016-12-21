@@ -11,10 +11,13 @@ Template.Student_Teaser_Widget.helpers({
   getDictionary() {
     return Template.instance().state;
   },
-  getTeasers() {
+  teasers() {
     return Teasers.find().fetch();
   },
-  getTeaserInterests(teaser) {
+  teaserCount() {
+    return Teasers.find().count();
+  },
+  teaserInterests(teaser) {
     return Interests.findNames(teaser.interestIDs);
   },
 });

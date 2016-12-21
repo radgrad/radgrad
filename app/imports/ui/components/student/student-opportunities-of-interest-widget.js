@@ -7,7 +7,7 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 
 Template.Student_Opportunities_Of_Interest_Widget.onCreated(function appBodyOnCreated() {
   this.autorun(() => {
-    this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(VerificationRequests.getPublicationName());
@@ -21,6 +21,9 @@ Template.Student_Opportunities_Of_Interest_Widget.helpers({
   },
   opportunities() {
     return Opportunities.find().fetch();
+  },
+  opportunityCount() {
+    return Opportunities.find().count();
   },
 });
 
