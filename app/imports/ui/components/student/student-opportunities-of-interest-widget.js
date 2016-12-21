@@ -44,29 +44,9 @@ Template.Student_Opportunities_Of_Interest_Widget.helpers({
 });
 
 Template.Student_Opportunities_Of_Interest_Widget.events({
-  'click .addToPlan': function clickItemAddToPlan(event, template) {
-    event.preventDefault();
-    const opportunity = this.opportunity;
-    const name = opportunity.name;
-    const semester = event.target.text;
-    const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = getRouteUserName();
-    const oi = {
-      semester: semSlug,
-      opportunity: oppSlug.name,
-      verified: false,
-      student: username,
-    };
-    OpportunityInstances.define(oi);
-  },
+
 });
 
 Template.Student_Opportunities_Of_Interest_Widget.onRendered(function studentOpportunitiesOfInterestWidgetOnRendered(){
-  const template = this;
-  template.$('.chooseSemester')
-    .popup({
-      on: 'click',
-    });
+
 });
