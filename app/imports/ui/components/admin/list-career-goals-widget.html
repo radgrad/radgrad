@@ -1,40 +1,43 @@
 <template name="List_Career_Goals_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>CAREER GOALS ({{ careerGoalsCount }})</h4></div>
+      <table class="ui compact table">
+        <thead>
+        <tr class="top aligned">
+          <th>Name<br/>Slug<br/>Info</th>
+          <th>Interests</th>
+          <th>References</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each careerGoal in careerGoals}}
+          <tr class="top aligned">
+            <td>
+              <b>{{careerGoal.name}}</b><br/>
+              <i>{{getSlugName careerGoal.slugID}}</i><br/>
+              <a href="{{careerGoal.moreInformation}}">More Info</a>
+            </td>
+            <td>{{getInterestNames careerGoal.interestIDs}}</td>
 
-  <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>CAREER GOALS</h4></div>
-    <table class="ui compact table">
-      <thead>
-      <tr class="top aligned">
-        <th>Name</th>
-        <th>Slug</th>
-        <th>Interests</th>
-        <th>More Information</th>
-        <th>Description</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="top aligned">
-        <td>Software Engineer</td>
-        <td>software-engineer</td>
-        <td>Web application development, systems programming</td>
-        <td>http://software-engineering.com/career</td>
-        <td>Computer software engineers apply the principles and techniques of computer science, engineering, and mathematical analysis to the design, development, testing, and evaluation of the software and the systems that enable computers to perform their many applications.</td>
-        <td><button style="margin-bottom: 5px" class="ui green basic fluid button" type="submit">Edit</button>
-          <button class="ui green basic fluid button" type="submit">Delete</button></td>
-      </tr>
-      <tr class="top aligned">
-        <td>Network Engineer</td>
-        <td>network-engineer</td>
-        <td>Networking, systems programming</td>
-        <td>http://networking.com/career</td>
-        <td>A network engineer is a technology professional who has the necessary skills to plan, implement and support the computer networks that support in-house voice, data, video and wireless network services.</td>
-        <td><button style="margin-bottom: 5px" class="ui green basic fluid button" type="submit">Edit</button>
-          <button class="ui green basic fluid button" type="submit">Delete</button></td>
-      </tr>
+            <td>{{getReferences careerGoal._id}}</td>
+          </tr>
+        <tr>
+          <td style='border-style: none' colspan="4">Description: {{careerGoal.description}}</td>
+        </tr>
+          <tr>
+            <td style='border-style: none' colspan="4">
+              <button style="" class="ui green basic button" type="submit">Edit</button>
+              <button class="ui green basic button" type="submit">Delete</button>
+            </td>
+          </tr>
+        {{/each}}
 
-      </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
 
 </template>

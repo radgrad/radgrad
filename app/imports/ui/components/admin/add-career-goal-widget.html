@@ -7,11 +7,21 @@
       <div class="fields">
         <div class="field">
           <label>Name</label>
-          <input type="text" name="career-goal-name" placeholder="Software Engineer">
+          <input type="text" name="name" placeholder="Software Engineer">
+          {{#if displayFieldError 'name' }}
+            <div class="ui error message">
+              <p>Career goal name is empty or previously used.</p>
+            </div>
+          {{/if}}
         </div>
         <div class="field">
           <label>Slug</label>
-          <input type="text" name="career-goal-slug" placeholder="software-engineer">
+          <input type="text" name="slug" placeholder="software-engineer">
+          {{#if displayFieldError 'slug' }}
+            <div class="ui error message">
+              <p>Slug is empty or previously used.</p>
+            </div>
+          {{/if}}
         </div>
       </div>
 
@@ -22,16 +32,31 @@
             <option value="">Select Interest(s)</option>
             <option value="physics">Software Engineering</option>
           </select>
+          {{#if displayFieldError 'interests'}}
+            <div class="ui error message">
+              <p>You must supply at least one interest.</p>
+            </div>
+          {{/if}}
         </div>
         <div class="field">
           <label>More Information</label>
-          <input type="text" name="career-goal-slug" placeholder="http://careergoal.com/software-engineering">
+          <input type="text" name="more-info" placeholder="http://careergoal.com/software-engineering">
+          {{#if displayFieldError 'more-info' }}
+            <div class="ui error message">
+              <p>You must supply a URL to a page providing more information about this career goal.</p>
+            </div>
+          {{/if}}
         </div>
       </div>
 
       <div class="field">
         <label>Description</label>
-        <textarea rows="5" name="career-goal-description" placeholder="Describe the Career Goal here"></textarea>
+        <textarea rows="5" name="description" placeholder="Describe the Career Goal here"></textarea>
+        {{#if displayFieldError 'description' }}
+          <div class="ui error message">
+            <p>Description must not be empty.</p>
+          </div>
+        {{/if}}
       </div>
       <button class="ui green basic button" type="submit">Add</button>
 
