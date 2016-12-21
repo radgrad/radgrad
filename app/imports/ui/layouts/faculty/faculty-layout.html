@@ -1,27 +1,11 @@
 <template name="Faculty_Layout">
-  {{#if Template.subscriptionsReady}}
-    {{#if isInRole 'ADMIN'}}
-      {{> First_Menu role="Admin"}}
-      {{> Second_Menu menuItems=adminSecondMenuItems menuLength=adminSecondMenuLength}}
-      {{> Third_Menu role="Faculty"}}
-      {{> Fourth_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
-      <div class="adminViewer">
-        {{> Template.dynamic template=main}}
-      </div>
-    {{else}}
+  {{#If_Authorized}}
+    {{#if Template.subscriptionsReady}}
       {{> First_Menu role="Faculty"}}
-      {{#if isInRole 'FACULTY,ADMIN'}}
-        {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
-        {{> Template.dynamic template=main}}
-      {{else}}
-        <div style="padding-top: 40px" class="ui text container">
-          <p>You are not authorized to view this page.</p>
-          <p>Please login as a faculty member.</p>
-        </div>
-      {{/if}}
+      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
+      {{> Template.dynamic template=main}}
+    {{else}}
+      {{> Loading}}
     {{/if}}
-    {{> Footer}}
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+  {{/If_Authorized}}
 </template>

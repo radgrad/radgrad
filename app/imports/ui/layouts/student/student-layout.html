@@ -1,30 +1,14 @@
 <template name="Student_Layout">
-  {{#if Template.subscriptionsReady}}
-    {{#if isInRole 'ADMIN'}}
-      {{> First_Menu role="Admin"}}
-      {{> Second_Menu menuItems=adminSecondMenuItems menuLength=adminSecondMenuLength}}
-      {{> Third_Menu role="Student"}}
-      {{> Fourth_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
-      <div class="adminViewer">
-        {{> Template.dynamic template=main}}
-      </div>
+  {{#If_Authorized}}
+    {{#if Template.subscriptionsReady}}
+      {{> First_Menu role="Student"}}
+      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength username=routeUserName}}
+      {{> Template.dynamic template=main}}
     {{else}}
-      {{#if isInRole 'ADVISOR'}}
-        {{> First_Menu role="Advisor"}}
-        {{> Second_Menu menuItems=advisorSecondMenuItems menuLength=advisorSecondMenuLength}}
-        {{> Third_Menu role="Student"}}
-        {{> Fourth_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
-        <div class="adminViewer">
-          {{> Template.dynamic template=main}}
-        </div>
-      {{else}}
-        {{> First_Menu role="Student"}}
-        {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
-        {{> Template.dynamic template=main}}
-      {{/if}}
+      {{> Loading}}
     {{/if}}
-    {{> Footer}}
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+  {{/If_Authorized}}
 </template>
+
+
+

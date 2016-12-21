@@ -2,6 +2,11 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { $ } from 'meteor/jquery';
 
+/** Design notes:
+ * Only one group per role. (Used to extract role from path.)
+ * Every group has a home page called 'home'.  (Used for redirect from landing.)
+ */
+
 /*               HELPER FUNCTIONS                             */
 
 function addBodyClass() {
@@ -16,28 +21,24 @@ function removeBodyClass() {
 
 /*                        ADMIN ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const adminRoutes = FlowRouter.group({
-  prefix: '/admin',
+  prefix: '/admin/:username',
   name: 'admin',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
 });
 
 export const adminHomePageRouteName = 'Admin_Home_Page';
-adminRoutes.route('/', {
+adminRoutes.route('/home', {
   name: adminHomePageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_Home_Page' });
   },
 });
 
-const adminDataModelRoutes = adminRoutes.group({
-  prefix: '/datamodel',
-  name: 'adminDataModel',
-});
-
 export const adminDataModelPageRouteName = 'Admin_DataModel_Page';
-adminDataModelRoutes.route('/', {
+adminRoutes.route('/datamodel', {
   name: adminDataModelPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_Page' });
@@ -45,7 +46,7 @@ adminDataModelRoutes.route('/', {
 });
 
 export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoals_Page';
-adminDataModelRoutes.route('/career-goals', {
+adminRoutes.route('/datamodel/career-goals', {
   name: adminDataModelCareerGoalsPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_CareerGoals_Page' });
@@ -54,15 +55,16 @@ adminDataModelRoutes.route('/career-goals', {
 
 /*                        ADVISOR ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const advisorRoutes = FlowRouter.group({
-  prefix: '/advisor',
+  prefix: '/advisor/:username',
   name: 'advisor',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
 });
 
 export const advisorStudentConfigurationPageRouteName = 'Advisor_Student_Configuration_Page';
-advisorRoutes.route('/', {
+advisorRoutes.route('/home', {
   name: advisorStudentConfigurationPageRouteName,
   action() {
     BlazeLayout.render('Advisor_Layout', { main: advisorStudentConfigurationPageRouteName });
@@ -95,15 +97,16 @@ advisorRoutes.route('/completed-verifications', {
 
 /*                        FACULTY ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const facultyRoutes = FlowRouter.group({
-  prefix: '/faculty',
+  prefix: '/faculty/:username',
   name: 'faculty',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
 });
 
 export const facultyHomePageRouteName = 'Faculty_Home_Page';
-facultyRoutes.route('/', {
+facultyRoutes.route('/home', {
   name: facultyHomePageRouteName,
   action() {
     BlazeLayout.render('Faculty_Layout', { main: facultyHomePageRouteName });
@@ -123,15 +126,16 @@ FlowRouter.route('/', {
 
 /*                        MENTOR ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const mentorRoutes = FlowRouter.group({
-  prefix: '/mentor',
+  prefix: '/mentor/:username',
   name: 'mentor',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
 });
 
 export const mentorHomePageRouteName = 'Mentor_Home_Page';
-mentorRoutes.route('/', {
+mentorRoutes.route('/home', {
   name: mentorHomePageRouteName,
   action() {
     BlazeLayout.render('Mentor_Layout', { main: 'Mentor_Home_Page' });
@@ -140,15 +144,16 @@ mentorRoutes.route('/', {
 
 /*                        STUDENT ROUTES                       */
 
+// Please don't make subgroups of this group. I use the group name to help with authorization.
 const studentRoutes = FlowRouter.group({
-  prefix: '/student',
+  prefix: '/student/:username',
   name: 'student',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
 });
 
 export const studentHomePageRouteName = 'Student_Home_Page';
-studentRoutes.route('/', {
+studentRoutes.route('/home', {
   name: studentHomePageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_Home_Page' });
@@ -156,7 +161,7 @@ studentRoutes.route('/', {
 });
 
 export const studentHomePageAboutMeRouteName = 'Student_AboutMe';
-studentRoutes.route('/aboutme', {
+studentRoutes.route('/home/aboutme', {
   name: studentHomePageAboutMeRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_AboutMe' });
@@ -164,7 +169,7 @@ studentRoutes.route('/aboutme', {
 });
 
 export const studentHomePageLevelsRouteName = 'Student_Levels';
-studentRoutes.route('/levels', {
+studentRoutes.route('/home/levels', {
   name: studentHomePageLevelsRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_Levels' });
@@ -172,7 +177,7 @@ studentRoutes.route('/levels', {
 });
 
 export const studentHomePageIceRouteName = 'Student_Ice';
-studentRoutes.route('/ice', {
+studentRoutes.route('/home/ice', {
   name: studentHomePageIceRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_Ice' });
@@ -180,7 +185,7 @@ studentRoutes.route('/ice', {
 });
 
 export const studentHomePageAboutIceRouteName = 'Student_About_Ice';
-studentRoutes.route('/about-ice', {
+studentRoutes.route('/home/about-ice', {
   name: studentHomePageAboutIceRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_About_Ice' });
@@ -188,7 +193,7 @@ studentRoutes.route('/about-ice', {
 });
 
 export const studentHomePageAboutLevelsRouteName = 'Student_About_Levels';
-studentRoutes.route('/about-levels', {
+studentRoutes.route('/home/about-levels', {
   name: studentHomePageAboutLevelsRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_About_Levels' });
@@ -204,7 +209,7 @@ studentRoutes.route('/degree-planner', {
 });
 
 export const studentMentorSpacePageRouteName = 'Student_MentorSpace_Page';
-studentRoutes.route('/mentorspace', {
+studentRoutes.route('/mentor-space', {
   name: studentMentorSpacePageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_MentorSpace_Page' });

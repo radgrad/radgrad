@@ -2,13 +2,13 @@ import { Template } from 'meteor/templating';
 
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Projected_ICE.helpers({
   earnedICE() {
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     if (studentID) {
       const user = Users.findDoc(studentID);
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
@@ -19,7 +19,7 @@ Template.Projected_ICE.helpers({
     return null;
   },
   projectedICE() {
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     if (studentID) {
       const user = Users.findDoc(studentID);
       const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();

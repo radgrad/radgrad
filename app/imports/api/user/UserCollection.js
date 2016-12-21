@@ -45,6 +45,7 @@ class UserCollection extends BaseInstanceCollection {
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
       level: { type: Number, optional: true },
       stickers: { type: [Number], optional: true },
+      website: { type: String, optional: true},
       // username, email, and password are managed in accounts package.
     }));
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
@@ -52,9 +53,13 @@ class UserCollection extends BaseInstanceCollection {
     // TODO: SimpleSchema validation is disabled for now.
     // this._collection.attachSchema(this._schema);
     // The following fields facilitate subscriptions.
-    this.publicdata = { fields: { firstName: 1, middleName: 1, lastName: 1, slugID: 1, aboutMe: 1, interestIDs: 1,
-      careerGoalIDs: 1, picture: 1, degreePlanID: 0 } };
-    this.privatedata = { fields: { roles: 1, emails: 1, degreePlanID: 1, desiredDegree: 1, semesterID: 1 } };
+    this.publicdata = {
+      fields: {
+        firstName: 1, middleName: 1, lastName: 1, slugID: 1, aboutMe: 1, interestIDs: 1,
+        careerGoalIDs: 1, picture: 1, roles: 1, username: 1, desiredDegree: 1,
+      },
+    };
+    this.privatedata = { fields: { emails: 1, degreePlanID: 1, desiredDegree: 1, semesterID: 1 } };
   }
 
   /**
@@ -139,7 +144,11 @@ class UserCollection extends BaseInstanceCollection {
    */
   removeAllWithRole(role) {
     assertRole(role);
-    this.find().forEach(user => { if (Roles.userIsInRole(user._id, [role])) { this.removeIt(user._id); } });
+    this.find().forEach(user => {
+      if (Roles.userIsInRole(user._id, [role])) {
+        this.removeIt(user._id);
+      }
+    });
   }
 
   /**
@@ -226,6 +235,34 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Updates email with new email address.
+   * @param userID The userID.
+   * @param email The user's email as a string.
+   * @throws {Meteor.Error} If userID is not a userID
+   */
+  setEmail(userID, email) {
+    this.assertDefined(userID);
+    if (!_.isString(email)) {
+      throw new Meteor.Error(`${email} is not a string.`);
+    }
+    this._collection.update(userID, { $set: { email } });
+  }
+
+  /**
+   * Updates website with new website address.
+   * @param userID The userID.
+   * @param email The user's website as a string.
+   * @throws {Meteor.Error} If userID is not a userID
+   */
+  setWebsite(userID, website) {
+    this.assertDefined(userID);
+    if (!_.isString(website)) {
+      throw new Meteor.Error(`${website} is not a string.`);
+    }
+    this._collection.update(userID, { $set: { website } });
+  }
+
+  /**
    * Updates userID with an array of interestIDs.
    * @param userID The userID.
    * @param interestIDs A list of interestIDs.
@@ -300,9 +337,10 @@ class UserCollection extends BaseInstanceCollection {
     this.assertDefined(userID);
     if (!_.isNumber(level)) {
       throw new Meteor.Error(`${level} is not a number.`);
-    } else if (level < 0 || level > 6) {
-      throw new Meteor.Error(`${level} is out of bounds.`);
-    }
+    } else
+      if (level < 0 || level > 6) {
+        throw new Meteor.Error(`${level} is out of bounds.`);
+      }
     this._collection.update(userID, { $set: { level } });
   }
 
@@ -321,9 +359,10 @@ class UserCollection extends BaseInstanceCollection {
       stickers.forEach((s) => {
         if (!_.isNumber(s)) {
           throw new Meteor.Error(`${s} is not a number.`);
-        } else if (s > max) {
-          max = s;
-        }
+        } else
+          if (s > max) {
+            max = s;
+          }
       });
     }
     this._collection.update(userID, { $set: { stickers } });
@@ -353,10 +392,17 @@ class UserCollection extends BaseInstanceCollection {
     const courseIDs = courseInstanceDocs.map((doc) => doc.courseID);
     return _.uniq(courseIDs);
   }
+
+  publish() {
+    if (Meteor.isServer) {
+      Meteor.publish(this._collectionName, () => Meteor.users.find({}, this.publicdata));
+    }
+  }
 }
 
 /**
  * Provides the singleton instance of this class to other entities.
  */
-export const Users = new UserCollection();
+export const
+    Users = new UserCollection();
 
