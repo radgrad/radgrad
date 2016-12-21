@@ -8,7 +8,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 
 
-Template.Student_Content_Of_Interest.onCreated(function appBodyOnCreated() {
+Template.Student_Content_Of_Interest_Card.onCreated(function appBodyOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
@@ -17,7 +17,7 @@ Template.Student_Content_Of_Interest.onCreated(function appBodyOnCreated() {
 });
 
 
-Template.Student_Content_Of_Interest.helpers({
+Template.Student_Content_Of_Interest_Card.helpers({
   getDictionary() {
     return Template.instance().state;
   },
@@ -41,7 +41,7 @@ Template.Student_Content_Of_Interest.helpers({
   }
 });
 
-Template.Student_Content_Of_Interest.events({
+Template.Student_Content_Of_Interest_Card.events({
   'click .addToPlan': function clickItemAddToPlan(event, template) {
     event.preventDefault();
     const opportunity = this.opportunity;
@@ -61,10 +61,10 @@ Template.Student_Content_Of_Interest.events({
   },
 });
 
-Template.Student_Content_Of_Interest.onRendered(function studentContentOfInterestOnRendered(){
+Template.Student_Content_Of_Interest_Card.onRendered(function studentContentOfInterestCardOnRendered(){
   const template = this;
   template.$('.chooseSemester')
-    .popup({
-      on: 'click',
-    });
+      .popup({
+        on: 'click',
+      });
 });

@@ -14,8 +14,11 @@ import './ice.js';
 import './interests.html';
 import './interests.js';
 
-import './student-content-of-interest.html';
-import './student-content-of-interest.js';
+import './student-opportunities-of-interest-widget.html';
+import './student-opportunities-of-interest-widget.js';
+
+import './student-content-of-interest-card.html';
+import './student-content-of-interest-card.js';
 
 import './student-home-help.html';
 import './student-home-help.js';
