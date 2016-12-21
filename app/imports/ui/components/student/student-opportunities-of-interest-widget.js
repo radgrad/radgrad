@@ -23,6 +23,9 @@ Template.Student_Opportunities_Of_Interest_Widget.helpers({
   opportunities() {
     return Opportunities.find().fetch();
   },
+  opportunityCount() {
+    return Opportunities.find().count();
+  },
   opportunityInterests(opportunity) {
     return Interests.findNames(opportunity.interestIDs);
   },
