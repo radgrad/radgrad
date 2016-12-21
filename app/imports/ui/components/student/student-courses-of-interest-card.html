@@ -1,5 +1,4 @@
 <template name="Student_Courses_Of_Interest_Card">
-  {{#if Template.subscriptionsReady}}
   <div class="ui card">
     <div class="content">
       <div class="header">{{course.name}}</div>
@@ -56,7 +55,4 @@
 
     </div>
   </div>
-  {{else}}
-  {{> Loading}}
-  {{/if}}
 </template>

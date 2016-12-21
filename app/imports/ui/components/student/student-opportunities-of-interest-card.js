@@ -5,10 +5,9 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
+import { getRouteUserName } from '../shared/route-user-name';
 
-
-Template.Student_Content_Of_Interest_Card.onCreated(function appBodyOnCreated() {
+Template.Student_Opportunities_Of_Interest_Card.onCreated(function appBodyOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
@@ -17,7 +16,7 @@ Template.Student_Content_Of_Interest_Card.onCreated(function appBodyOnCreated() 
 });
 
 
-Template.Student_Content_Of_Interest_Card.helpers({
+Template.Student_Opportunities_Of_Interest_Card.helpers({
   getDictionary() {
     return Template.instance().state;
   },
@@ -41,7 +40,7 @@ Template.Student_Content_Of_Interest_Card.helpers({
   }
 });
 
-Template.Student_Content_Of_Interest_Card.events({
+Template.Student_Opportunities_Of_Interest_Card.events({
   'click .addToPlan': function clickItemAddToPlan(event, template) {
     event.preventDefault();
     const opportunity = this.opportunity;
@@ -50,7 +49,7 @@ Template.Student_Content_Of_Interest_Card.events({
     const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
+    const username = getRouteUserName();
     const oi = {
       semester: semSlug,
       opportunity: oppSlug.name,
@@ -61,7 +60,7 @@ Template.Student_Content_Of_Interest_Card.events({
   },
 });
 
-Template.Student_Content_Of_Interest_Card.onRendered(function studentContentOfInterestCardOnRendered(){
+Template.Student_Opportunities_Of_Interest_Card.onRendered(function studentOpportunitiesOfInterestCardOnRendered(){
   const template = this;
   template.$('.chooseSemester')
       .popup({

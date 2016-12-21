@@ -14,8 +14,8 @@ import './ice.js';
 import './interests.html';
 import './interests.js';
 
-import './student-content-of-interest-card.html';
-import './student-content-of-interest-card.js';
+import './student-opportunities-of-interest-card.html';
+import './student-opportunities-of-interest-card.js';
 
 import './student-courses-of-interest-card.html';
 import './student-courses-of-interest-card.js';

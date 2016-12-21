@@ -1,20 +1,19 @@
 import { Template } from 'meteor/templating';
+
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getRouteUserName } from '../shared/route-user-name';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 Template.Student_Opportunities_Of_Interest_Widget.onCreated(function appBodyOnCreated() {
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
+  this.autorun(() => {
+    this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Users.getPublicationName());
-});
+  this.subscribe(VerificationRequests.getPublicationName());
 
+});
+});
 
 Template.Student_Opportunities_Of_Interest_Widget.helpers({
   getDictionary() {
@@ -23,30 +22,10 @@ Template.Student_Opportunities_Of_Interest_Widget.helpers({
   opportunities() {
     return Opportunities.find().fetch();
   },
-  opportunityCount() {
-    return Opportunities.find().count();
-  },
-  opportunityInterests(opportunity) {
-    return Interests.findNames(opportunity.interestIDs);
-  },
-  opportunitySemesters(semesterID) {
-    const sem = Semesters.findDoc(semesterID);
-    const oppTerm = sem.term;
-    const oppYear = sem.year;
-    return oppTerm + ' ' + oppYear;
-  },
-  opportunityShortDescription(description){
-    if(description.length > 200) {
-      description = description.substring(0,200)+"...";
-    }
-    return description;
-  }
 });
 
 Template.Student_Opportunities_Of_Interest_Widget.events({
-
+  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
 
-Template.Student_Opportunities_Of_Interest_Widget.onRendered(function studentOpportunitiesOfInterestWidgetOnRendered(){
-
-});
+Template.Student_Opportunities_Of_Interest_Widget.onRendered({});
