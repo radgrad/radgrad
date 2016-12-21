@@ -5,4 +5,8 @@ import './admin-datamodel-menu.html';
 import './admin-datamodel-menu.js';
 
 import './list-career-goals-widget.html';
-import './list-career-goals-widget';
+import './list-career-goals-widget.js';
+
+import './retrieve-user-widget.html';
+import './retrieve-user-widget.js';
+
