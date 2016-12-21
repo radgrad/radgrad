@@ -1,0 +1,12 @@
+<template name="Retrieve_Student_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>RETRIEVE STUDENT</h4></div>
+    <div class="ui small horizontal list">
+      {{#each student in students}}
+        <div class="item">
+          <a  class="ui basic grey label" target="_blank" href="{{url student}}">{{label student}}</a>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>

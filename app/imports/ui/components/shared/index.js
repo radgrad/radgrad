@@ -6,6 +6,9 @@ import './get-user-id-from-route';
 import './help-panel.html';
 import './help-panel.js';
 
+import './retrieve-student-widget.html';
+import './retrieve-student-widget.js';
+
 import './route-user-name.js';
 
 import './student-selector.html';
