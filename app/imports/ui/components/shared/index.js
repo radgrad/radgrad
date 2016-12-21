@@ -3,8 +3,8 @@ import './advisor-log-viewer.js';
 
 import './get-user-id-from-route';
 
-import './help-panel.html';
-import './help-panel.js';
+import './help-panel-widget.html';
+import './help-panel-widget.js';
 
 import './route-user-name.js';
 

@@ -292,7 +292,7 @@ Template.Inspector.helpers({
   },
   missingPrerequisite(prereqSlug) {
     const prereqID = Courses.findIdBySlug(prereqSlug);
-    const studentID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const studentID = getUserIdFromRoute();
     const courseInstances = CourseInstances.find({ studentID }).fetch();
     let ret = true;
     _.map(courseInstances, (ci) => {

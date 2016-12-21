@@ -1,4 +1,3 @@
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -7,7 +6,6 @@ import { sessionKeys } from '../../../startup/client/session-state';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { BS_CS_TEMPLATE, BA_ICS_TEMPLATE } from '../../../api/degree-program/degree-program';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as planUtils from '../../../api/degree-program/plan-generator';
@@ -15,9 +13,8 @@ import * as semUtils from '../../../api/semester/SemesterUtilities';
 import * as courseUtils from '../../../api/course/CourseFunctions';
 import * as opportunityUtils from '../../../api/opportunity/OpportunityFunctions';
 import { Users } from '../../../api/user/UserCollection.js';
-import { studentDegreePlannerPageRouteName } from '../../../startup/client/router';
 
-Template.Degree_Plan_Generator.helpers({
+Template.Degree_Plan_Generator_Widget.helpers({
   careerGoals() {
     const ret = [];
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
@@ -85,7 +82,7 @@ Template.Degree_Plan_Generator.helpers({
   },
 });
 
-Template.Degree_Plan_Generator.events({
+Template.Degree_Plan_Generator_Widget.events({
   'click .jsSemester': function clickJsInterests(event, instance) {
     event.preventDefault();
     const choice = event.target.parentElement.getElementsByTagName('input')[0].value;
@@ -103,9 +100,6 @@ Template.Degree_Plan_Generator.events({
     }
     if (currentSemester.sortBy === startSemester.sortBy) {
       startSemester = semUtils.nextFallSpringSemester(startSemester);
-    }
-    if (planUtils.getStartingSemester(student)) {  // student has taken some courses in the past.
-      startSemester = planUtils.getStartingSemester(student);
     }
     // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
     courseUtils.clearPlannedCourseInstances(studentID);
@@ -126,11 +120,11 @@ Template.Degree_Plan_Generator.events({
       planUtils.generateBADegreePlan(student, startSemester);
     }
     // planUtils.generateDegreePlan(template, startSemester, student);
-    FlowRouter.go(studentDegreePlannerPageRouteName);
+    // FlowRouter.go(studentDegreePlannerPageRouteName);
   },
 });
 
-Template.Degree_Plan_Generator.onCreated(function degreePlanGeneratorOnCreated() {
+Template.Degree_Plan_Generator_Widget.onCreated(function degreePlanGeneratorOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   } else {
@@ -138,13 +132,13 @@ Template.Degree_Plan_Generator.onCreated(function degreePlanGeneratorOnCreated()
   }
 });
 
-Template.Degree_Plan_Generator.onRendered(function degreePlanGeneratorOnRendered() {
+Template.Degree_Plan_Generator_Widget.onRendered(function degreePlanGeneratorOnRendered() {
   this.$('.dropdown').dropdown({
     // action: 'select',
   });
 });
 
-Template.Degree_Plan_Generator.onDestroyed(function degreePlanGeneratorOnDestroyed() {
+Template.Degree_Plan_Generator_Widget.onDestroyed(function degreePlanGeneratorOnDestroyed() {
   // add your statement here
 });
 

@@ -14,7 +14,7 @@ import { StarDataLogs } from '../../../api/star/StarDataLogCollection';
 // import { StarUploads } from '../../../api/star/StarUploadCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
-Template.Student_Profile.helpers({
+Template.Student_Profile_Widget.helpers({
   careerGoals() {
     return CareerGoals.find().fetch();
   },
@@ -99,10 +99,9 @@ Template.Student_Profile.helpers({
   },
 });
 
-Template.Student_Profile.events({
+Template.Student_Profile_Widget.events({
   'click .jsDegree': function clickJsInterests(event, instance) {
     event.preventDefault();
-    console.log(instance.state.get(sessionKeys.CURRENT_STUDENT_ID));
     const student = Users.findDoc(instance.state.get(sessionKeys.CURRENT_STUDENT_ID));
     const choice = event.target.parentElement.getElementsByTagName('input')[0].value;
     Users.setDesiredDegree(student._id, choice);
@@ -151,7 +150,7 @@ Template.Student_Profile.events({
   },
 });
 
-Template.Student_Profile.onCreated(function studentProfileOnCreated() {
+Template.Student_Profile_Widget.onCreated(function studentProfileOnCreated() {
   this.currentUpload = new ReactiveVar(false);
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
@@ -160,13 +159,13 @@ Template.Student_Profile.onCreated(function studentProfileOnCreated() {
   }
 });
 
-Template.Student_Profile.onRendered(function studentProfileOnRendered() {
+Template.Student_Profile_Widget.onRendered(function studentProfileOnRendered() {
   this.$('.dropdown').dropdown({
     // action: 'select',
   });
 });
 
-Template.Student_Profile.onDestroyed(function studentProfileOnDestroyed() {
+Template.Student_Profile_Widget.onDestroyed(function studentProfileOnDestroyed() {
   // add your statement here
 });
 
