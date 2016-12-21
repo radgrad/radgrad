@@ -11,7 +11,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getUserIdFromRoute } from '../../components/shared/';
+import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 Template.Student_AboutMe.helpers({
   getDictionary() {
@@ -19,8 +19,8 @@ Template.Student_AboutMe.helpers({
   },
   careerGoals() {
     const ret = [];
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       _.map(user.careerGoalIDs, (id) => {
         ret.push(CareerGoals.findDoc(id));
       });
@@ -32,8 +32,8 @@ Template.Student_AboutMe.helpers({
     return Semesters.toString(currentSemesterID, false);
   },
   desiredDegree() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       if (user.desiredDegree === 'BS_CS') {
         return 'B.S. CS';
       } else
@@ -44,30 +44,30 @@ Template.Student_AboutMe.helpers({
     return '';
   },
   getName() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       return `${user.firstName} ${user.lastName}`;
     }
     return '';
   },
   getEmail() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       return user.email;
     }
     return '';
   },
   getWebsite() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       return user.website;
     }
     return '';
   },
   interests() {
     const ret = [];
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       _.map(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
       });
@@ -75,11 +75,12 @@ Template.Student_AboutMe.helpers({
     return ret;
   },
 
-  /*Returns all course instances in student's plan*/
+  /* Returns all course instances in student's plan */
   courses() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const instances = CourseInstances.find({ studentID: getUserIdFromRoute() }).fetch();
+    const studentID = Users.findDoc({ username: getRouteUserName() })._id;
+    const instances = CourseInstances.find({ studentID }).fetch();
     instances.forEach((courseInstance) => {
       if (CourseInstances.isICS(courseInstance._id)) {
         ret.push(courseInstance);
@@ -102,11 +103,12 @@ Template.Student_AboutMe.helpers({
     }
     return null;
   },
-  /*Returns all opportunities in student's plan*/
+  /* Returns all opportunities in student's plan */
   opportunities() {
     let ret = [];
     const opportunities = Opportunities.find().fetch();
-    const instances = OpportunityInstances.find({ studentID: getUserIdFromRoute() }).fetch();
+    const studentID = Users.findDoc({ username: getRouteUserName() })._id;
+    const instances = OpportunityInstances.find({ studentID }).fetch();
     const currentSemesterID = Semesters.getCurrentSemester();
     ret = lodash.filter(instances, function filter(o) {
       return lodash.indexOf(o.semesterIDs, currentSemesterID) !== -1;
@@ -129,13 +131,13 @@ Template.Student_AboutMe.helpers({
 Template.Student_AboutMe.events({
   'submit .email' (event) {
     event.preventDefault();
-    const student = Users.findDoc(getUserIdFromRoute());
+    const student = Users.findDoc(getRouteUserName());
     const choice = event.target.emailAddress.value;
     Users.setEmail(student._id, choice);
   },
   'submit .website' (event) {
     event.preventDefault();
-    const student = Users.findDoc(getUserIdFromRoute());
+    const student = Users.findDoc(getRouteUserName());
     const choice = event.target.website.value;
     Users.setWebsite(student._id, choice);
   },
@@ -143,25 +145,25 @@ Template.Student_AboutMe.events({
 
 Template.Student_AboutMe.onCreated(function studentAboutMeOnCreated() {
   this.state = new ReactiveDict();
-  if (getUserIdFromRoute()) {
-    this.state.set(sessionKeys.CURRENT_STUDENT_ID, getUserIdFromRoute());
+  if (getRouteUserName()) {
+    const studentID = Users.findDoc({ username: getRouteUserName() })._id;
+    this.state.set(sessionKeys.CURRENT_STUDENT_ID, studentID);
   }
   if (this.data) {
     this.state.set('currentSemesterID', this.data.currentSemesterID);
-    this.state.set('studentUsername', this.data.studentUserName);
+    this.state.set('studentUsername', getRouteUserName());
   } else {
     console.log('there is a problem no data.'); // eslint-disable-line no-console
   }
-  this.autorun(() => {
-    this.subscribe(CareerGoals.getPublicationName());
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Interests.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-  });
+
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
 });
 
 Template.Student_AboutMe.onRendered(function studentAboutMeOnRendered() {

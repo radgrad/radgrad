@@ -12,10 +12,26 @@ Template.Advisor_Layout.onRendered(function advisorLayoutOnRendered() {
 Template.Advisor_Layout.helpers({
   secondMenuItems() {
     return [
-      { label: 'Student Configuration', route: RouteNames.advisorStudentConfigurationPageRouteName },
-      { label: 'Verification Requests', route: RouteNames.advisorVerificationRequestsPendingPageRouteName },
-      { label: 'Event Verification', route: RouteNames.advisorEventVerificationPageRouteName },
-      { label: 'Completed Verifications', route: RouteNames.advisorCompletedVerificationsPageRouteName },
+      {
+        label: 'Student Configuration',
+        route: RouteNames.advisorStudentConfigurationPageRouteName,
+        regex: 'home',
+      },
+      {
+        label: 'Verification Requests',
+        route: RouteNames.advisorVerificationRequestsPendingPageRouteName,
+        regex: 'verification-requests',
+      },
+      {
+        label: 'Event Verification',
+        route: RouteNames.advisorEventVerificationPageRouteName,
+        regex: 'event-verification',
+      },
+      {
+        label: 'Completed Verifications',
+        route: RouteNames.advisorCompletedVerificationsPageRouteName,
+        regex: 'completed-verifications',
+      },
     ];
   },
   secondMenuLength() {
