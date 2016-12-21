@@ -1,9 +1,4 @@
 import { Template } from 'meteor/templating';
-// import { SessionState, sessionKeys } from '../../../startup/client/session-state';
-// import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-// import { Courses } from '../../../api/course/CourseCollection';
-// import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-// import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -12,10 +7,6 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 
 Template.Faculty_Home_Page.onCreated(function appBodyOnCreated() {
   this.autorun(() => {
-    // this.subscribe(CareerGoals.getPublicationName());
-    // this.subscribe(Courses.getPublicationName());
-    // this.subscribe(CourseInstances.getPublicationName());
-    // this.subscribe(Interests.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
