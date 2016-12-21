@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackType } from '../../../api/feedback/FeedbackType.js';
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 
 Template.Recommendations.helpers({
@@ -12,7 +12,7 @@ Template.Recommendations.helpers({
     };
   },
   recommendations() {
-    const userID = SessionState.get(sessionKeys.CURRENT_STUDENT_ID);
+    const userID = getUserIdFromRoute();
     const feedback = FeedbackInstances.find({ userID }).fetch();
     const ret = [];
     feedback.forEach((f) => {

@@ -9,7 +9,7 @@
 export const teaserDefinitions = [
   {
     title: 'Solar Energy',
-    slug: 'solar-energy',
+    slug: 'solar-energy-teaser',
     author: 'Lipyeow Lim',
     url: 'https://youtube.com/embed/PAuOggtDYi0',
     description: 'Opportunity to gather and anaylze weather data for a solar energy project.',
@@ -27,7 +27,7 @@ export const teaserDefinitions = [
   },
   {
     title: 'ACManoa Webmaster',
-    slug: 'acmanoa-webmaster',
+    slug: 'acmanoa-webmaster-teaser',
     author: 'Torlief Nielson',
     url: 'https://youtube.com/embed/OI4CXULK3tw',
     description: 'Opportunity to learn about web development while developing the ACManoa website.',
@@ -36,7 +36,7 @@ export const teaserDefinitions = [
   },
   {
     title: 'Flip Flop',
-    slug: 'flip-flop',
+    slug: 'flip-flop-teaser',
     author: 'Jan Stelovsky',
     url: 'https://www.youtube.com/embed/V9gWxXOwilI',
     description: 'Opportunity to develop a new visual and interactive programming environment.',
@@ -45,7 +45,7 @@ export const teaserDefinitions = [
   },
   {
     title: 'Algorithm Visualization',
-    slug: 'algorithm-visualization',
+    slug: 'algorithm-visualization-teaser',
     author: 'Jan Stelovsky',
     url: 'https://www.youtube.com/embed/bMYRh1RQFF8',
     description: 'Opportunity to help develop interactive algorithm teaching software.',
@@ -54,7 +54,7 @@ export const teaserDefinitions = [
   },
   {
     title: 'Grey Hats',
-    slug: 'grey-hats',
+    slug: 'grey-hats-teaser',
     author: 'Grey Hats',
     url: 'https://www.youtube.com/embed/oxFaOmsRIWQ',
     description: 'Join a club with other ICS students to learn about security.',
@@ -63,7 +63,7 @@ export const teaserDefinitions = [
   },
   {
     title: 'Open Power Quality',
-    slug: 'open-power-quality',
+    slug: 'open-power-quality-teaser',
     author: 'Sergey Negrashov',
     url: 'https://www.youtube.com/embed/ouq6Hsy7sDo',
     description: 'Help ease Oahus transition to a fully renewable power grid.',
@@ -72,7 +72,7 @@ export const teaserDefinitions = [
   },
   {
     title: 'Scientific Workflows',
-    slug: 'scientific-workflows',
+    slug: 'scientific-workflows-teaser',
     author: 'Henri Casanova',
     url: 'https://www.youtube.com/embed/cRvLtv1_zGI',
     description: 'How to make scientific workflows compute fast on modern computer architectures using current HPC systems.',
