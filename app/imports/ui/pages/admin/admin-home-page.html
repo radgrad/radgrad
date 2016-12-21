@@ -1,10 +1,8 @@
 <template name="Admin_Home_Page">
   <div class="layout-page">
     {{#if Template.subscriptionsReady}}
-      <div class="ui text container">
-
-        <h2>Welcome to the Admin Home Page.</h2>
-
+      <div class="ui container">
+        {{> Retrieve_Student_Widget}}
       </div>
     {{else}}
       {{> Loading}}
