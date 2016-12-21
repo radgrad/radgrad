@@ -22,23 +22,24 @@ Template.If_Authorized.helpers({
    * Determine if the user is authorized to view the current page.
    * If current page is the landing page, they are authorized.
    * If current user is an admin, they can see any page.
-   * If current user is an advisor, they can see any student, mentor, and advisor pages.
+   * If current user is an advisor, they can see any student, alumni, or advisor page.
    * If current user is a student, they can see only their own page (student/<username>/).
    * If current user is a mentor, they can see only their own page (mentor/<username>).
+   * If current user is an alumni, they can see only their own page (alumni/<username>).
    * @returns {boolean} True if there is a logged in user and they are authorized to visit the page.
    */
   isAuthorized: function isAuthorized() {
-    console.log('running isAuthorized');
+    // console.log('running isAuthorized');
 
     // 1. If landing page, then everyone is authorized.
     const currPath = FlowRouter.current().path;
     if (currPath && currPath === '/') {
-      console.log('isAuthorized', 'landing');
+      // console.log('isAuthorized', 'landing');
       return true;
     }
     // 2. If not landing page, then prohibit non-logged in clients.
     if (!Meteor.user()) {
-      console.log('isAuthorized', 'not logged in');
+      // console.log('isAuthorized', 'not logged in');
       return false;
     }
     // 3. Determine the user and role specified in the URL.
@@ -53,30 +54,31 @@ Template.If_Authorized.helpers({
     // the role specified in pageRole. i.e. no http://radgrad.ics.hawaii.edu/student/johnson
     const urlUserNameData = Meteor.users.findOne({ username: pathUserName });
     if (!urlUserNameData || urlUserNameData.roles[0].toLowerCase() !== pathRole) {
-      console.log('isAuthorized', `${pathRole}/${pathUserName} not valid.`);
+      // console.log('isAuthorized', `${pathRole}/${pathUserName} not valid.`);
       return false;
     }
 
     // 5. Allow admins to go to any page.
     if (userRole === ROLE.ADMIN) {
-      console.log('isAuthorized', 'admin');
+      // console.log('isAuthorized', 'admin');
       return true;
     }
 
-    // 6. Allow advisors to see any student, mentor, or advisor page.
-    if (userRole === ROLE.ADVISOR && (pathRole !== 'admin')) {
-      console.log('isAuthorized', 'advisor');
+    // 6. Allow advisors to see any student, alumni, or advisor page.
+    if (userRole === ROLE.ADVISOR && (pathRole === 'student' || pathRole === 'alumni' || pathRole === 'advisor')) {
+      // console.log('isAuthorized', 'advisor');
       return true;
     }
 
-    // 7. Allow mentors and students to only see their own page.
-    if (((pathRole === 'student') || (pathRole === 'mentor')) && (pathUserName === userName)) {
-      console.log('isAuthorized', 'student or mentor');
+    // 7. Allow alumni, faculty, mentors, students to only see their own page.
+    if ((pathRole === 'alumni' || pathRole === 'faculty' || pathRole === 'mentor' || pathRole === 'student')
+        && (pathUserName === userName) && (pathRole === userRole.toLowerCase())) {
+      // console.log('isAuthorized', 'alumni, faculty, mentor, student');
       return true;
     }
 
     // 8. Otherwise don't allow access.
-    console.log('isAuthorized', 'default deny');
+    // console.log('isAuthorized', 'default deny');
     return false;
   },
 });

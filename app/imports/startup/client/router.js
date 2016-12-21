@@ -2,6 +2,11 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { $ } from 'meteor/jquery';
 
+/** Design notes:
+ * Only one group per role. (Used to extract role from path.)
+ * Every group has a home page called 'home'.  (Used for redirect from landing.)
+ */
+
 /*               HELPER FUNCTIONS                             */
 
 function addBodyClass() {
@@ -25,7 +30,7 @@ const adminRoutes = FlowRouter.group({
 });
 
 export const adminHomePageRouteName = 'Admin_Home_Page';
-adminRoutes.route('/', {
+adminRoutes.route('/home', {
   name: adminHomePageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: 'Admin_Home_Page' });
@@ -59,7 +64,7 @@ const advisorRoutes = FlowRouter.group({
 });
 
 export const advisorStudentConfigurationPageRouteName = 'Advisor_Student_Configuration_Page';
-advisorRoutes.route('/', {
+advisorRoutes.route('/home', {
   name: advisorStudentConfigurationPageRouteName,
   action() {
     BlazeLayout.render('Advisor_Layout', { main: advisorStudentConfigurationPageRouteName });
@@ -101,7 +106,7 @@ const facultyRoutes = FlowRouter.group({
 });
 
 export const facultyHomePageRouteName = 'Faculty_Home_Page';
-facultyRoutes.route('/', {
+facultyRoutes.route('/home', {
   name: facultyHomePageRouteName,
   action() {
     BlazeLayout.render('Faculty_Layout', { main: facultyHomePageRouteName });
@@ -130,7 +135,7 @@ const mentorRoutes = FlowRouter.group({
 });
 
 export const mentorHomePageRouteName = 'Mentor_Home_Page';
-mentorRoutes.route('/', {
+mentorRoutes.route('/home', {
   name: mentorHomePageRouteName,
   action() {
     BlazeLayout.render('Mentor_Layout', { main: 'Mentor_Home_Page' });
@@ -148,7 +153,7 @@ const studentRoutes = FlowRouter.group({
 });
 
 export const studentHomePageRouteName = 'Student_Home_Page';
-studentRoutes.route('/', {
+studentRoutes.route('/home', {
   name: studentHomePageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_Home_Page' });
@@ -156,7 +161,7 @@ studentRoutes.route('/', {
 });
 
 export const studentHomePageAboutMeRouteName = 'Student_AboutMe';
-studentRoutes.route('/aboutme', {
+studentRoutes.route('/home/aboutme', {
   name: studentHomePageAboutMeRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_AboutMe' });
@@ -164,7 +169,7 @@ studentRoutes.route('/aboutme', {
 });
 
 export const studentHomePageLevelsRouteName = 'Student_Levels';
-studentRoutes.route('/levels', {
+studentRoutes.route('/home/levels', {
   name: studentHomePageLevelsRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_Levels' });
@@ -172,7 +177,7 @@ studentRoutes.route('/levels', {
 });
 
 export const studentHomePageIceRouteName = 'Student_Ice';
-studentRoutes.route('/ice', {
+studentRoutes.route('/home/ice', {
   name: studentHomePageIceRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_Ice' });
@@ -180,7 +185,7 @@ studentRoutes.route('/ice', {
 });
 
 export const studentHomePageAboutIceRouteName = 'Student_About_Ice';
-studentRoutes.route('/about-ice', {
+studentRoutes.route('/home/about-ice', {
   name: studentHomePageAboutIceRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_About_Ice' });
@@ -188,7 +193,7 @@ studentRoutes.route('/about-ice', {
 });
 
 export const studentHomePageAboutLevelsRouteName = 'Student_About_Levels';
-studentRoutes.route('/about-levels', {
+studentRoutes.route('/home/about-levels', {
   name: studentHomePageAboutLevelsRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_About_Levels' });
@@ -204,7 +209,7 @@ studentRoutes.route('/degree-planner', {
 });
 
 export const studentMentorSpacePageRouteName = 'Student_MentorSpace_Page';
-studentRoutes.route('/mentorspace', {
+studentRoutes.route('/mentor-space', {
   name: studentMentorSpacePageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: 'Student_MentorSpace_Page' });

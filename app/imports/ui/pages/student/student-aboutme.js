@@ -1,11 +1,8 @@
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Tracker } from 'meteor/tracker';
-import { lodash } from 'meteor/erasaur:meteor-lodash';
 
-import { SessionState, sessionKeys, updateSessionState } from '../../../startup/client/session-state';
+import { sessionKeys } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -14,7 +11,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection.js';
-
+import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 Template.Student_AboutMe.helpers({
   getDictionary() {
@@ -22,11 +19,11 @@ Template.Student_AboutMe.helpers({
   },
   careerGoals() {
     const ret = [];
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       _.map(user.careerGoalIDs, (id) => {
         ret.push(CareerGoals.findDoc(id));
-    });
+      });
     }
     return ret;
   },
@@ -35,58 +32,60 @@ Template.Student_AboutMe.helpers({
     return Semesters.toString(currentSemesterID, false);
   },
   desiredDegree() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       if (user.desiredDegree === 'BS_CS') {
         return 'B.S. CS';
-      } else if (user.desiredDegree === 'BA_ICS') {
-        return 'B.A. ICS';
-      }
+      } else
+        if (user.desiredDegree === 'BA_ICS') {
+          return 'B.A. ICS';
+        }
     }
     return '';
   },
   getName() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
-      return user.firstName + ' ' + user.lastName;
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      return `${user.firstName} ${user.lastName}`;
     }
     return '';
   },
   getEmail() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       return user.email;
     }
     return '';
   },
   getWebsite() {
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       return user.website;
     }
     return '';
   },
   interests() {
     const ret = [];
-    if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const user = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
       _.map(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
-    });
+      });
     }
     return ret;
   },
 
-  /*Returns all course instances in student's plan*/
+  /* Returns all course instances in student's plan */
   courses() {
     let ret = [];
     const courses = Courses.find().fetch();
-    const instances = CourseInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
+    const studentID = Users.findDoc({ username: getRouteUserName() })._id;
+    const instances = CourseInstances.find({ studentID }).fetch();
     instances.forEach((courseInstance) => {
       if (CourseInstances.isICS(courseInstance._id)) {
         ret.push(courseInstance);
-    }
-  });
+      }
+    });
     return ret;
   },
   courseName(c) {
@@ -104,11 +103,12 @@ Template.Student_AboutMe.helpers({
     }
     return null;
   },
-  /*Returns all opportunities in student's plan*/
+  /* Returns all opportunities in student's plan */
   opportunities() {
     let ret = [];
     const opportunities = Opportunities.find().fetch();
-    const instances = OpportunityInstances.find({ studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID) }).fetch();
+    const studentID = Users.findDoc({ username: getRouteUserName() })._id;
+    const instances = OpportunityInstances.find({ studentID }).fetch();
     const currentSemesterID = Semesters.getCurrentSemester();
     ret = lodash.filter(instances, function filter(o) {
       return lodash.indexOf(o.semesterIDs, currentSemesterID) !== -1;
@@ -131,13 +131,13 @@ Template.Student_AboutMe.helpers({
 Template.Student_AboutMe.events({
   'submit .email' (event) {
     event.preventDefault();
-    const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    const student = Users.findDoc(getRouteUserName());
     const choice = event.target.emailAddress.value;
     Users.setEmail(student._id, choice);
   },
   'submit .website' (event) {
     event.preventDefault();
-    const student = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+    const student = Users.findDoc(getRouteUserName());
     const choice = event.target.website.value;
     Users.setWebsite(student._id, choice);
   },
@@ -145,17 +145,17 @@ Template.Student_AboutMe.events({
 
 Template.Student_AboutMe.onCreated(function studentAboutMeOnCreated() {
   this.state = new ReactiveDict();
-  updateSessionState(SessionState);
-  if (SessionState.get(sessionKeys.CURRENT_STUDENT_ID)) {
-    this.state.set(sessionKeys.CURRENT_STUDENT_ID, SessionState.get(sessionKeys.CURRENT_STUDENT_ID));
+  if (getRouteUserName()) {
+    const studentID = Users.findDoc({ username: getRouteUserName() })._id;
+    this.state.set(sessionKeys.CURRENT_STUDENT_ID, studentID);
   }
   if (this.data) {
     this.state.set('currentSemesterID', this.data.currentSemesterID);
-    this.state.set('studentUsername', this.data.studentUserName);
+    this.state.set('studentUsername', getRouteUserName());
   } else {
     console.log('there is a problem no data.'); // eslint-disable-line no-console
   }
-  this.autorun(() => {
+
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
@@ -164,7 +164,6 @@ Template.Student_AboutMe.onCreated(function studentAboutMeOnCreated() {
   this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Users.getPublicationName());
-});
 });
 
 Template.Student_AboutMe.onRendered(function studentAboutMeOnRendered() {

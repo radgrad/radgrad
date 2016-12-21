@@ -1,8 +1,6 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 
-import { SessionState, sessionKeys, updateSessionState }
-from '../../../startup/client/session-state';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -33,7 +31,6 @@ Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
 
 Template.Student_Degree_Planner_Page.onRendered(function plannerOnRendered() {
   // Accounts._loginButtonsSession.set('dropdownVisible', true);
-  updateSessionState();
 });
 
 Template.Student_Degree_Planner_Page.helpers({
