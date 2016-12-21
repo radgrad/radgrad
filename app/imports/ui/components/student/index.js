@@ -7,9 +7,9 @@ import './explorer-dropdown.js';
 import './home-menu.html';
 import './home-menu.js';
 
-import './ice.css';
-import './ice.html';
-import './ice.js';
+import './student-ice-widget.css';
+import './student-ice-widget.html';
+import './student-ice-widget.js';
 
 import './interests.html';
 import './interests.js';
