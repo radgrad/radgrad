@@ -12,7 +12,7 @@ Template.Faculty_Layout.onRendered(function facultyLayoutOnRendered() {
 Template.Faculty_Layout.helpers({
   secondMenuItems() {
     return [
-      { label: 'Home', route: RouteNames.facultyHomePageRouteName },
+      { label: 'Home', route: RouteNames.facultyHomePageRouteName, regex: 'home' },
     ];
   },
   secondMenuLength() {
