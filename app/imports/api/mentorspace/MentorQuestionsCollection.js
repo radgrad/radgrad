@@ -13,41 +13,31 @@ import { Users } from '../user/UserCollection';
  */
 class MentorQuestionsCollection extends BaseCollection {
   /**
-   * Creates the Mentor Answer collection.
+   * Creates the Mentor Question collection.
    */
   constructor() {
     super('MentorQuestions', new SimpleSchema({
       questionID: { type: String },
-      mentor: { type: String },
       text: { type: String }
     }));
   }
 
   /**
-   * Defines the help for a given routeName.
-   * @param questionID the route name.
-   * @param mentor the title of the help.
-   * @param text the help text.
-   * @return {any} the ID of the help.
+   * Defines the question for a given question ID.
+   * @param questionID the question ID.
+   * @param text the question text.
+   * @return {any} the ID of the question.
    */
-  define({ questionID, mentor, text }) {
-    return this._collection.insert({ questionID, mentor, text });
+  define({ questionID, text }) {
+    return this._collection.insert({ questionID, text });
   }
 
   /**
    * Returns the text for the given routeName.
    * @param questionID
    */
-  getMentorAnswerText(questionID) {
+  getQuestionText(questionID) {
     return this._collection.findOne({ questionID }).text;
-  }
-
-  /**
-   * Returns the title for the given routeName.
-   * @param questionID
-   */
-  getMentor(questionID) {
-    return this._collection.findOne({ questionID }).mentor;
   }
 }
 

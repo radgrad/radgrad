@@ -24,18 +24,18 @@ class MentorAnswersCollection extends BaseCollection {
   }
 
   /**
-   * Defines the help for a given routeName.
-   * @param questionID the route name.
-   * @param mentor the title of the help.
-   * @param text the help text.
-   * @return {any} the ID of the help.
+   * Defines the help for a given questionID.
+   * @param questionID the question ID.
+   * @param mentor the mentor who answered the question.
+   * @param text the answer text.
+   * @return {any} the ID of the answer.
    */
   define({ questionID, mentor, text }) {
     return this._collection.insert({ questionID, mentor, text });
   }
 
   /**
-   * Returns the text for the given routeName.
+   * Returns the text for the given questionID.
    * @param questionID
    */
   getMentorAnswerText(questionID) {
@@ -43,7 +43,7 @@ class MentorAnswersCollection extends BaseCollection {
   }
 
   /**
-   * Returns the title for the given routeName.
+   * Returns the title for the given questionID.
    * @param questionID
    */
   getMentor(questionID) {
