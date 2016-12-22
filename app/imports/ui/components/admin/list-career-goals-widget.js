@@ -12,6 +12,16 @@ Template.List_Career_Goals_Widget.onCreated(function listCareerGoalsWidgetOnCrea
   this.subscribe(Slugs.getPublicationName());
 });
 
+function getReferences(careerGoalID) {
+  let references = 0;
+  Users.find().forEach(function (userDoc) {
+    if (_.includes(userDoc.careerGoalIDs, careerGoalID)) {
+      references += 1;
+    }
+  });
+  return `Users: ${references}`;
+}
+
 Template.List_Career_Goals_Widget.helpers({
   careerGoals() {
     return CareerGoals.find();
@@ -19,20 +29,16 @@ Template.List_Career_Goals_Widget.helpers({
   careerGoalsCount() {
     return CareerGoals.count();
   },
-  getInterestNames(interestIDs) {
-    return Interests.findNames(interestIDs);
-  },
   getSlugName(slugID) {
     return Slugs.findDoc(slugID).name;
   },
-  getReferences(careerGoalID) {
-    let references = 0;
-    Users.find().forEach(function (userDoc) {
-      if (_.includes(userDoc.careerGoalIDs, careerGoalID)) {
-        references += 1;
-      }
-    });
-    return `Users: ${references}`;
+  descriptionPairs(careerGoal) {
+    return [
+      { label: 'Description', value: careerGoal.description },
+      { label: 'Interests', value: Interests.findNames(careerGoal.interestIDs) },
+      { label: 'More Information', value: `<a href="${careerGoal.moreInformation}">${careerGoal.moreInformation}</a>` },
+      { label: 'References', value: getReferences(careerGoal._id) },
+    ];
   },
 });
 

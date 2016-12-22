@@ -11,11 +11,11 @@
             ({{getSlugName careerGoal.slugID}})
           </div>
           <div class="content">
-            <p><b>Description:</b> {{careerGoal.description}}</p>
-            <p><b>Interests:</b> {{getInterestNames careerGoal.interestIDs}}</p>
-            <p><b>More information:</b> <a href="{{careerGoal.moreInformation}}">{{careerGoal.moreInformation}}</a></p>
-            <p><b>References:</b> {{getReferences careerGoal._id}}</p>
-            <p><button class="ui green basic mini button" type="submit">Edit</button>
+            {{#each descriptionPair in descriptionPairs careerGoal}}
+              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+            {{/each}}
+            <p>
+              <button class="ui green basic mini button" type="submit">Edit</button>
               <button class="ui green basic mini button" type="submit">Delete</button>
             </p>
           </div>
