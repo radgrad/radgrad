@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { moment } from 'meteor/momentjs:moment';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
 
-Template.Advisor_Log_Viewer.helpers({
+Template.Advisor_Log_Viewer_Widget.helpers({
   logs() {
     return AdvisorLogs.find();
   },
@@ -16,21 +16,21 @@ Template.Advisor_Log_Viewer.helpers({
   },
 });
 
-Template.Advisor_Log_Viewer.events({
+Template.Advisor_Log_Viewer_Widget.events({
   // add your events here
 });
 
-Template.Advisor_Log_Viewer.onCreated(function advisorLogViewerOnCreated() {
+Template.Advisor_Log_Viewer_Widget.onCreated(function advisorLogViewerOnCreated() {
   this.autorun(() => {
     this.subscribe(AdvisorLogs.getPublicationName());
   });
 });
 
-Template.Advisor_Log_Viewer.onRendered(function advisorLogViewerOnRendered() {
+Template.Advisor_Log_Viewer_Widget.onRendered(function advisorLogViewerOnRendered() {
   // add your statement here
 });
 
-Template.Advisor_Log_Viewer.onDestroyed(function advisorLogViewerOnDestroyed() {
+Template.Advisor_Log_Viewer_Widget.onDestroyed(function advisorLogViewerOnDestroyed() {
   // add your statement here
 });
 

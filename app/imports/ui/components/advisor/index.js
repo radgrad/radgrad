@@ -1,3 +1,6 @@
+import './add-student-widget.html';
+import './add-student-widget.js';
+
 import './advisor-log-entry-widget.html';
 import './advisor-log-entry-widget.js';
 

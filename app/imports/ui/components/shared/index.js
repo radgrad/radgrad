@@ -1,5 +1,5 @@
-import './advisor-log-viewer.html';
-import './advisor-log-viewer.js';
+import './advisor-log-viewer-widget.html';
+import './advisor-log-viewer-widget.js';
 
 import './get-user-id-from-route';
 
