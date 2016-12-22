@@ -28,8 +28,13 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
   opportunityName(opportunity) {
     return opportunity.name;
   },
-  opportunitySemesters(opportunity) {
-    return opportunity.semesterIDs;
+  opportunitySemesters(opp) {
+    const semesters = opp.semesterIDs;
+    let semesterNames = [];
+    _.map(semesters, (sem) => {
+      semesterNames.push(Semesters.toString(sem));
+  });
+    return semesterNames;
   },
   interestName(interest) {
     return interest.name;

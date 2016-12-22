@@ -1,10 +1,13 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { getRouteUserName } from '../shared/route-user-name';
 import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 
 
@@ -27,11 +30,13 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   courseInterests(course) {
     return Interests.findNames(course.interestIDs);
   },
-  courseSemesters(semesterID) {
-    const sem = Semesters.findDoc(semesterID);
-    const oppTerm = sem.term;
-    const oppYear = sem.year;
-    return `${oppTerm} ${oppYear}`;
+  courseSemesters(course) {
+    const semesters = course.semesterIDs;
+    let semesterNames = [];
+    _.map(semesters, (sem) => {
+      semesterNames.push(Semesters.toString(sem));
+    });
+    return semesterNames;
   },
   courseShortDescription(descript) {
     let description = descript;
@@ -39,6 +44,29 @@ Template.Student_Courses_Of_Interest_Card.helpers({
       description = `${description.substring(0, 200)}...`;
     }
     return description;
+  },
+  matchingInterests(course) {
+    const matchingInterests = [];
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const userInterests = [];
+    const courseInterests = [];
+    _.map(course.interestIDs, (id) => {
+      courseInterests.push(Interests.findDoc(id));
+  });
+    _.map(user.interestIDs, (id) => {
+      userInterests.push(Interests.findDoc(id));
+  });
+    _.map(courseInterests, (courseInterest) => {
+      _.map(userInterests, (userInterest) => {
+      if (_.isEqual(courseInterest, userInterest)) {
+      matchingInterests.push(userInterest);
+    }
+  });
+  });
+    return matchingInterests;
+  },
+  interestName(interest) {
+    return interest.name;
   },
 });
 

@@ -3,8 +3,8 @@
     <div class="content">
       <div class="header">{{course.name}}</div>
       <div class="meta">
-        {{#each semester in course.semesterIDs}}
-        {{courseSemesters semester}}&nbsp;
+        {{#each semester in courseSemesters course}}
+        {{semester}}&nbsp;
         {{/each}}
       </div>
     </div>
@@ -27,9 +27,9 @@
     </div>
     <div class="content">
                 <span class="left floated">
-                  {{#each interest in courseInterests course}}
+                  {{#each interest in matchingInterests course}}
                   <a class="ui mini label"><i style="color:white !important"
-                                              class="fitted star icon"></i>{{interest}}</a>
+                                              class="fitted star icon"></i>{{interestName interest}}</a>
                   {{/each}}
                 </span>
     </div>
@@ -44,8 +44,8 @@
                   <a class="chooseSemester">Add to plan</a>
               <div class="ui fluid popup transition hidden">
               <div class="ui vertical menu">
-                {{#each semester in course.semesterIDs}}
-                <a class="item addToPlan" data-position="right center">{{courseSemesters semester}}</a>
+                {{#each semester in courseSemesters}}
+                <a class="item addToPlan" data-position="right center">{{semester}}</a>
                 {{/each}}
 
               </div>

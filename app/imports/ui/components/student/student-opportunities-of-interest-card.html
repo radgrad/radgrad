@@ -4,7 +4,7 @@
           <div class="header">{{opportunityName opportunity}}</div>
           <div class="meta">
           {{#each semester in opportunitySemesters opportunity}}
-          {{opportunitySemesterNames semester}}&nbsp;
+          {{semester}}&nbsp;
           {{/each}}
           </div>
         </div>
@@ -44,8 +44,8 @@
                   <a class="chooseSemester">Add to plan</a>
               <div class="ui fluid popup transition hidden">
               <div class="ui vertical menu">
-                {{#each semester in opportunity.semesterIDs}}
-                <a class="item addToPlan" data-position="right center">{{opportunitySemesters semester}}</a>
+                {{#each semester in opportunitySemesters opportunity}}
+                <a class="item addToPlan" data-position="right center">{{semester}}</a>
                 {{/each}}
 
               </div>
