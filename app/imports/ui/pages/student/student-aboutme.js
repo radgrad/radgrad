@@ -27,10 +27,6 @@ Template.Student_AboutMe.helpers({
     }
     return ret;
   },
-  currentSemesterName() {
-    const currentSemesterID = Semesters.getCurrentSemester();
-    return Semesters.toString(currentSemesterID, false);
-  },
   desiredDegree() {
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
@@ -73,58 +69,6 @@ Template.Student_AboutMe.helpers({
       });
     }
     return ret;
-  },
-
-  /* Returns all course instances in student's plan */
-  courses() {
-    let ret = [];
-    const courses = Courses.find().fetch();
-    const studentID = Users.findDoc({ username: getRouteUserName() })._id;
-    const instances = CourseInstances.find({ studentID }).fetch();
-    instances.forEach((courseInstance) => {
-      if (CourseInstances.isICS(courseInstance._id)) {
-        ret.push(courseInstance);
-      }
-    });
-    return ret;
-  },
-  courseName(c) {
-    const course = Courses.findDoc(c.courseID);
-    const courseName = course.shortName;
-    return courseName;
-  },
-  isPast(event) {
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSemester = Semesters.findDoc(currentSemesterID);
-    const semesterID = event.semesterID;
-    const semester = Semesters.findDoc(semesterID);
-    if (semester && currentSemester) {
-      return semester.sortBy < currentSemester.sortBy;
-    }
-    return null;
-  },
-  /* Returns all opportunities in student's plan */
-  opportunities() {
-    let ret = [];
-    const opportunities = Opportunities.find().fetch();
-    const studentID = Users.findDoc({ username: getRouteUserName() })._id;
-    const instances = OpportunityInstances.find({ studentID }).fetch();
-    const currentSemesterID = Semesters.getCurrentSemester();
-    ret = lodash.filter(instances, function filter(o) {
-      return lodash.indexOf(o.semesterIDs, currentSemesterID) !== -1;
-    });
-    return instances;
-  },
-  opportunityName(opp) {
-    const opportunity = Opportunities.findDoc(opp);
-    const oppName = opportunity.name;
-    return oppName;
-  },
-  opportunitySem(opp) {
-    const sem = Semesters.findDoc(opp);
-    const oppTerm = sem.term;
-    const oppYear = sem.year;
-    return oppTerm + ' ' + oppYear;
   },
 });
 
