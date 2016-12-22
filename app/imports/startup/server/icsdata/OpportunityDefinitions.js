@@ -155,7 +155,7 @@ const eventOpportunityDefinitions = [
     opportunityType: 'event',
     sponsor: 'glau',
     semesters: ['Summer-2016', 'Fall-2016', 'Spring-2017', 'Summer-2017', 'Fall-2017', 'Spring-2018', 'Summer-2018',
-    'Fall-2018', 'Spring-2019', 'Summer-2019', 'Fall-2019', 'Spring-2020'],
+      'Fall-2018', 'Spring-2019', 'Summer-2019', 'Fall-2019', 'Spring-2020'],
     interests: ['artificial-intelligence', 'application-development'],
     moreInformation: 'http://developer.ibm.com/event/ibm-watson-ai-xprize/',
     ice: { i: 20, c: 0, e: 20 },

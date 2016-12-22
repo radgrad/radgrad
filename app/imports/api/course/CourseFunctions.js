@@ -14,6 +14,19 @@ const clearFeedbackInstances = (userID, area) => {
   });
 };
 
+export const prereqsMet = (coursesTakenSlugs, courseID) => {
+  const course = Courses.findDoc(courseID);
+  let ret = true;
+  _.map(course.prerequisites, (prereq) => {
+    if (_.indexOf(coursesTakenSlugs, prereq) === -1) {
+      ret = false;
+      return false;
+    }
+    return true;
+  });
+  return ret;
+};
+
 /**
  * Checks all the CourseInstances to ensure that the prerequisites are fulfilled.
  */
@@ -147,7 +160,7 @@ export const get300LevelDocs = () => {
   return ret;
 };
 
-export const getStudent300LevelDocs = (studentID) => {
+export const getStudent300LevelDocs = (studentID, coursesTakenSlugs) => {
   let ret = [];
   const courses = get300LevelDocs();
   const instances = CourseInstances.find({ studentID }).fetch();
@@ -162,13 +175,16 @@ export const getStudent300LevelDocs = (studentID) => {
   ret = _.filter(courses, function filter(c) {
     return _.indexOf(courseTakenIDs, c._id) === -1;
   });
+  ret = _.filter(ret, function filter(c) {
+    return prereqsMet(coursesTakenSlugs, c._id);  // remove courses that don't have the prerequisites
+  });
   return ret;
 };
 
-export const getStudent300LevelChoices = (studentID) => {
+export const getStudent300LevelChoices = (studentID, coursesTakenSlugs) => {
   const arr = {};
   let max = 0;
-  const available = getStudent300LevelDocs(studentID);
+  const available = getStudent300LevelDocs(studentID, coursesTakenSlugs);
   _.map(available, (course) => {
     const score = calculateCompatibility(course._id, studentID);
     if (score > max) {
@@ -183,8 +199,8 @@ export const getStudent300LevelChoices = (studentID) => {
   return arr;
 };
 
-export const chooseStudent300LevelCourse = (studentID) => {
-  const choices = getStudent300LevelChoices(studentID);
+export const chooseStudent300LevelCourse = (studentID, coursesTakenSlugs) => {
+  const choices = getStudent300LevelChoices(studentID, coursesTakenSlugs);
   const best = choices[choices.max];
   return best[getRandomInt(0, best.length)];
 };
@@ -207,7 +223,7 @@ export const get400LevelDocsWithInterest = (interestID) => {
     return _.indexOf(c.interestIDs, interestID) !== -1;
   });
 };
-export const getStudent400LevelDocs = (studentID) => {
+export const getStudent400LevelDocs = (studentID, coursesTakenSlugs) => {
   let ret = [];
   const courses = get400LevelDocs();
   const instances = CourseInstances.find({ studentID }).fetch();
@@ -222,13 +238,16 @@ export const getStudent400LevelDocs = (studentID) => {
   ret = _.filter(courses, function filter(c) {
     return _.indexOf(courseTakenIDs, c._id) === -1;
   });
+  ret = _.filter(ret, function filter(c) {
+    return prereqsMet(coursesTakenSlugs, c._id);  // remove courses that don't have the prerequisites
+  });
   return ret;
 };
 
-export const getStudent400LevelChoices = (studentID) => {
+export const getStudent400LevelChoices = (studentID, coursesTakenSlugs) => {
   const arr = {};
   let max = 0;
-  const available = getStudent400LevelDocs(studentID);
+  const available = getStudent400LevelDocs(studentID, coursesTakenSlugs);
   _.map(available, (course) => {
     const score = calculateCompatibility(course._id, studentID);
     if (score > max) {
@@ -243,8 +262,8 @@ export const getStudent400LevelChoices = (studentID) => {
   return arr;
 };
 
-export const chooseStudent400LevelCourse = (studentID) => {
-  const choices = getStudent400LevelChoices(studentID);
+export const chooseStudent400LevelCourse = (studentID, coursesTakenSlugs) => {
+  const choices = getStudent400LevelChoices(studentID, coursesTakenSlugs);
   const best = choices[choices.max];
   return best[getRandomInt(0, best.length)];
 };
@@ -256,11 +275,13 @@ export const getCourseDocsWithInterest = (interestID) => {
   });
 };
 
-export const chooseBetween = (slugs, studentID) => {
+export const chooseBetween = (slugs, studentID, coursesTakenSlugs) => {
   const courses = [];
   _.map(slugs, (slug) => {
     const courseID = Courses.getID(slug);
-    courses.push(Courses.findDoc(courseID));
+    if (prereqsMet(coursesTakenSlugs, courseID)) {
+      courses.push(Courses.findDoc(courseID));
+    }
   });
   const arr = {};
   let max = 0;

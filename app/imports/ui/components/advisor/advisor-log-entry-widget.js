@@ -3,11 +3,11 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { AdvisorLogs } from '/imports/api/log/AdvisorLogCollection';
 import { sessionKeys } from '../../../startup/client/session-state';
 
-Template.Advisor_Log_Entry.helpers({
+Template.Advisor_Log_Entry_Widget.helpers({
   // add you helpers here
 });
 
-Template.Advisor_Log_Entry.events({
+Template.Advisor_Log_Entry_Widget.events({
   'click .jsComment': function submit(event, instance) {
     event.preventDefault();
     const textAreas = event.target.parentElement.getElementsByTagName('textarea');
@@ -15,13 +15,12 @@ Template.Advisor_Log_Entry.events({
       const text = textAreas[0].value;
       const studentID = instance.state.get(sessionKeys.CURRENT_STUDENT_ID);
       const advisorID = instance.state.get(sessionKeys.CURRENT_ADVISOR_ID);
-      console.log(studentID, advisorID, text);
       AdvisorLogs.define({ advisorID, studentID, text });
     }
   },
 });
 
-Template.Advisor_Log_Entry.onCreated(function advisorLogEntryOnCreated() {
+Template.Advisor_Log_Entry_Widget.onCreated(function advisorLogEntryOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   } else {
@@ -29,11 +28,11 @@ Template.Advisor_Log_Entry.onCreated(function advisorLogEntryOnCreated() {
   }
 });
 
-Template.Advisor_Log_Entry.onRendered(function advisorLogEntryOnRendered() {
+Template.Advisor_Log_Entry_Widget.onRendered(function advisorLogEntryOnRendered() {
   // add your statement here
 });
 
-Template.Advisor_Log_Entry.onDestroyed(function advisorLogEntryOnDestroyed() {
+Template.Advisor_Log_Entry_Widget.onDestroyed(function advisorLogEntryOnDestroyed() {
   // add your statement here
 });
 
