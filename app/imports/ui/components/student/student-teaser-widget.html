@@ -9,19 +9,19 @@
       {{#each teaser in teasers}}
         <div class="ui card">
           <div class="content">
-            <div class="header">{{teaser.title}}</div>
-            <div class="meta">By {{teaser.author}}</div>
+            <div class="header">{{teaserTitle teaser}}</div>
+            <div class="meta">By {{teaserAuthor teaser}}</div>
           </div>
           <div style="padding:0;" class="content">
             <div class="ui embed active" style= "width:290px; height:auto"
-                 data-url="{{teaser.url}}">
+                 data-url="{{teaserUrl teaser}}">
             </div>
 
           </div>
           <div class="content">
                 <span class="left floated">
-                  {{#each interest in teaserInterests teaser}}
-                    <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
+                  {{#each interest in matchingInterests teaser}}
+                    <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
                   {{/each}}
                 </span>
           </div>

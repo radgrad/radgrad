@@ -1,7 +1,7 @@
 <template name="Student_Courses_Of_Interest_Card">
   <div class="ui card">
     <div class="content">
-      <div class="header">{{course.name}}</div>
+      <div class="header">{{courseName course}}</div>
       <div class="meta">
         {{#each semester in courseSemesters course}}
         {{semester}}&nbsp;
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="content">
-      {{courseShortDescription course.description}}
+      {{courseShortDescription course}}
     </div>
     <div class="content">
       23 students plan to participate

@@ -30,16 +30,14 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   courseInterests(course) {
     return Interests.findNames(course.interestIDs);
   },
-  courseSemesters(course) {
-    const semesters = course.semesterIDs;
-    let semesterNames = [];
-    _.map(semesters, (sem) => {
-      semesterNames.push(Semesters.toString(sem));
-    });
-    return semesterNames;
+  courseName(course) {
+    return course.name;
   },
-  courseShortDescription(descript) {
-    let description = descript;
+  courseSemesters() {
+    // no semesters associated with courses
+  },
+  courseShortDescription(course) {
+    let description = course.description;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}...`;
     }
@@ -52,17 +50,17 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     const courseInterests = [];
     _.map(course.interestIDs, (id) => {
       courseInterests.push(Interests.findDoc(id));
-  });
+    });
     _.map(user.interestIDs, (id) => {
       userInterests.push(Interests.findDoc(id));
-  });
+    });
     _.map(courseInterests, (courseInterest) => {
       _.map(userInterests, (userInterest) => {
-      if (_.isEqual(courseInterest, userInterest)) {
-      matchingInterests.push(userInterest);
-    }
-  });
-  });
+        if (_.isEqual(courseInterest, userInterest)) {
+          matchingInterests.push(userInterest);
+        }
+      });
+    });
     return matchingInterests;
   },
   interestName(interest) {
@@ -71,29 +69,11 @@ Template.Student_Courses_Of_Interest_Card.helpers({
 });
 
 Template.Student_Courses_Of_Interest_Card.events({
-  'click .addToPlan': function clickItemAddToPlan(event, instance) {
-    event.preventDefault();
-    const course = this.course;
-    const name = course.name;
-    const semester = event.target.text;
-    const courseSlug = Slugs.findDoc({ _id: course.slugID });
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
-    const ci = {
-      semester: semSlug,
-      opportunity: courseSlug.name,
-      verified: false,
-      student: username,
-    };
-    CourseInstances.define(ci);
+  'click .addToPlan': function clickItemAddToPlan(event) {
+    //to be implemented when semesters are associated with courses
   },
 });
 
 Template.Student_Courses_Of_Interest_Card.onRendered(function studentCoursesOfInterestCardOnRendered() {
-  const template = this;
-  template.$('.chooseSemester')
-      .popup({
-        on: 'click',
-      });
+
 });

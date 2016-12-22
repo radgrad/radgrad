@@ -30,10 +30,10 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
   },
   opportunitySemesters(opp) {
     const semesters = opp.semesterIDs;
-    let semesterNames = [];
+    const semesterNames = [];
     _.map(semesters, (sem) => {
       semesterNames.push(Semesters.toString(sem));
-  });
+    });
     return semesterNames;
   },
   interestName(interest) {
@@ -45,19 +45,14 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
       const opportunity = opp;
       _.map(opportunity.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
-    });
+      });
     }
     return ret;
   },
-  opportunitySemesterNames(semesterID) {
-    const sem = Semesters.findDoc(semesterID);
-    const oppTerm = sem.term;
-    const oppYear = sem.year;
-    return oppTerm + ' ' + oppYear;
-  },
-  opportunityShortDescription(description){
-    if(description.length > 200) {
-      description = description.substring(0,200)+"...";
+  opportunityShortDescription(opp) {
+    let description = opp.description;
+    if (description.length > 200) {
+      description = `${description.substring(0, 200)} ...`;
     }
     return description;
   },
@@ -67,7 +62,7 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
       const user = Users.findDoc({ username: getRouteUserName() });
       _.map(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
-    });
+      });
     }
     return ret;
   },
@@ -84,20 +79,19 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
     });
     _.map(opportunityInterests, (oppInterest) => {
       _.map(userInterests, (userInterest) => {
-      if (_.isEqual(oppInterest, userInterest)) {
-        matchingInterests.push(userInterest);
-      }
+        if (_.isEqual(oppInterest, userInterest)) {
+          matchingInterests.push(userInterest);
+        }
+      });
     });
-  });
     return matchingInterests;
   },
 });
 
 Template.Student_Opportunities_Of_Interest_Card.events({
-  'click .addToPlan': function clickItemAddToPlan(event, template) {
+  'click .addToPlan': function clickItemAddToPlan(event) {
     event.preventDefault();
     const opportunity = this.opportunity;
-    const name = opportunity.name;
     const semester = event.target.text;
     const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
     const semSplit = semester.split(' ');
@@ -113,7 +107,7 @@ Template.Student_Opportunities_Of_Interest_Card.events({
   },
 });
 
-Template.Student_Opportunities_Of_Interest_Card.onRendered(function studentOpportunitiesOfInterestCardOnRendered(){
+Template.Student_Opportunities_Of_Interest_Card.onRendered(function studentOpportunitiesOfInterestCardOnRendered() {
   const template = this;
   template.$('.chooseSemester')
       .popup({
