@@ -17,7 +17,6 @@ class MentorQuestionsCollection extends BaseCollection {
    */
   constructor() {
     super('MentorQuestions', new SimpleSchema({
-      questionID: { type: String },
       text: { type: String }
     }));
   }
@@ -28,16 +27,12 @@ class MentorQuestionsCollection extends BaseCollection {
    * @param text the question text.
    * @return {any} the ID of the question.
    */
-  define({ questionID, text }) {
-    return this._collection.insert({ questionID, text });
+  define({ text }) {
+    return this._collection.insert({ text });
   }
 
-  /**
-   * Returns the text for the given routeName.
-   * @param questionID
-   */
-  getQuestionText(questionID) {
-    return this._collection.findOne({ questionID }).text;
+  getMentorQuestion(){
+    return this._collection.find({});
   }
 }
 

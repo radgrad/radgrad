@@ -49,6 +49,8 @@ class MentorAnswersCollection extends BaseCollection {
   getMentor(questionID) {
     return this._collection.findOne({ questionID }).mentor;
   }
+
+
 }
 
 export const MentorAnswers = new MentorAnswersCollection();
