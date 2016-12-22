@@ -24,10 +24,10 @@ Accounts.onLogin(function onLogin() {
   const initialLogin = (id && rolesAvailable && onLandingPage);
 
   if (initialLogin) {
-    console.log('processing initial login');  // eslint-disable-line no-console
+    // console.log('processing initial login');
     const username = Meteor.user().username;
     const role = Roles.getRolesForUser(id)[0];
-    FlowRouter.go(`/${role.toLowerCase()}/${username}`);
+    FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
   }
 });
 

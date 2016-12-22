@@ -14,7 +14,6 @@ Template.Admin_DataModel_CareerGoals_Page.onCreated(function adminCrudPageOnCrea
 });
 
 Template.Admin_DataModel_CareerGoals_Page.onRendered(function adminDataModelPageOnRendered() {
-  console.log('onRendered');
   this.$('.dropdown').dropdown({
     // action: 'select',
   });

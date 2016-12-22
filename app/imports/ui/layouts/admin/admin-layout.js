@@ -10,8 +10,8 @@ Template.Admin_Layout.onRendered(function adminLayoutOnRendered() {
 Template.Admin_Layout.helpers({
   secondMenuItems() {
     return [
-      { label: 'Home', route: RouteNames.adminHomePageRouteName },
-      { label: 'Data Model', route: RouteNames.adminDataModelPageRouteName },
+      { label: 'Home', route: RouteNames.adminHomePageRouteName, regex: 'home' },
+      { label: 'Data Model', route: RouteNames.adminDataModelPageRouteName, regex: 'datamodel' },
     ];
   },
   secondMenuLength() {
