@@ -23,8 +23,24 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
   opportunities() {
     return Opportunities.find().fetch();
   },
-  opportunityInterests(opportunity) {
+  opportunityName(opportunity) {
+    return opportunity.name;
+  },
+  opportunitySemesters(opportunity) {
+    return opportunity.semesterIDs;
+  },
+  opportunityInterestNames(opportunity) {
     return Interests.findNames(opportunity.interestIDs);
+  },
+  opportunityInterests(opp) {
+    const ret = [];
+    if (getRouteUserName()) {
+      const opportunity = opp;
+      _.map(opportunity.interestIDs, (id) => {
+        ret.push(Interests.findDoc(id));
+    });
+    }
+    return ret;
   },
   opportunitySemesters(semesterID) {
     const sem = Semesters.findDoc(semesterID);
@@ -37,7 +53,17 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
       description = description.substring(0,200)+"...";
     }
     return description;
-  }
+  },
+  userInterests() {
+    const ret = [];
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      _.map(user.interestIDs, (id) => {
+        ret.push(Interests.findDoc(id));
+    });
+    }
+    return ret;
+  },
 });
 
 Template.Student_Opportunities_Of_Interest_Card.events({

@@ -1,9 +1,9 @@
 <template name="Student_Opportunities_Of_Interest_Card">
       <div class="ui card">
         <div class="content">
-          <div class="header">{{opportunity.name}}</div>
+          <div class="header">{{opportunityName opportunity}}</div>
           <div class="meta">
-          {{#each semester in opportunity.semesterIDs}}
+          {{#each semester in opportunitySemesters opportunity}}
           {{opportunitySemesters semester}}&nbsp;
           {{/each}}
           </div>
@@ -27,7 +27,7 @@
           </div>
           <div class="content">
                 <span class="left floated">
-                  {{#each interest in opportunityInterests opportunity}}
+                  {{#each interest in opportunityInterestNames opportunity}}
                   <a class="ui mini label"><i style="color:white !important"
                                               class="fitted star icon"></i>{{interest}}</a>
                   {{/each}}

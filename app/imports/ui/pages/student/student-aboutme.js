@@ -39,21 +39,21 @@ Template.Student_AboutMe.helpers({
     }
     return '';
   },
-  getName() {
+  name() {
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
       return `${user.firstName} ${user.lastName}`;
     }
     return '';
   },
-  getEmail() {
+  email() {
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
       return user.email;
     }
     return '';
   },
-  getWebsite() {
+  website() {
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
       return user.website;
@@ -69,6 +69,12 @@ Template.Student_AboutMe.helpers({
       });
     }
     return ret;
+  },
+  interestName(interest) {
+    return interest.name;
+  },
+  goalName(goal) {
+    return goal.name;
   },
 });
 
