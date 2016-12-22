@@ -31,8 +31,12 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
   opportunitySemesters(opp) {
     const semesters = opp.semesterIDs;
     const semesterNames = [];
+    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSemester = Semesters.findDoc(currentSemesterID);
     _.map(semesters, (sem) => {
-      semesterNames.push(Semesters.toString(sem));
+      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
+        semesterNames.push(Semesters.toString(sem));
+      }
     });
     return semesterNames;
   },
