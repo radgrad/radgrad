@@ -11,7 +11,9 @@ import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollect
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+import { StarDataLogs } from '../../../api/star/StarDataLogCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
@@ -37,7 +39,9 @@ Template.Advisor_Student_Configuration_Page.onCreated(function advisorStudentCon
     this.subscribe(Interests.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
+    this.subscribe(OpportunityTypes.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
+    this.subscribe(StarDataLogs.getPublicationName());
     this.subscribe(Users.getPublicationName());
     this.subscribe(VerificationRequests.getPublicationName());
   });

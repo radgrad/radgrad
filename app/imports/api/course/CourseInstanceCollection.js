@@ -87,8 +87,19 @@ class CourseInstanceCollection extends BaseCollection {
    */
   getCourseDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this._collection.findOne({ _id: instanceID });
     return Courses.findDoc(instance.courseID);
+  }
+
+  /**
+   * Returns the Course slug for the instance's corresponding Course.
+   * @param instanceID The CourseInstanceID.
+   * @return {string} The course slug.
+   */
+  getCourseSlug(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    return Courses.getSlug(instance.courseID);
   }
 
   /**
@@ -99,7 +110,7 @@ class CourseInstanceCollection extends BaseCollection {
    */
   getSemesterDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this._collection.findOne({ _id: instanceID });
     return Semesters.findDoc(instance.semesterID);
   }
 
@@ -111,7 +122,7 @@ class CourseInstanceCollection extends BaseCollection {
    */
   getStudentDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this._collection.findOne({ _id: instanceID });
     return Users.findDoc(instance.studentID);
   }
 

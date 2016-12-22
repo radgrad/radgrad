@@ -8,7 +8,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
  */
 export function getRouteUserName() {
   return FlowRouter.getParam('username');
-};
+}
 
 /**
  * Provide getRouteUserName as a global helper called routeUserName.
