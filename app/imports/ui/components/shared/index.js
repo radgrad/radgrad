@@ -1,6 +1,8 @@
 import './advisor-log-viewer-widget.html';
 import './advisor-log-viewer-widget.js';
 
+import './form-error-message.html';
+
 import './get-user-id-from-route';
 
 import './help-panel-widget.html';
