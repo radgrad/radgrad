@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -29,8 +31,8 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
   opportunitySemesters(opportunity) {
     return opportunity.semesterIDs;
   },
-  opportunityInterestNames(opportunity) {
-    return Interests.findNames(opportunity.interestIDs);
+  interestName(interest) {
+    return interest.name;
   },
   opportunityInterests(opp) {
     const ret = [];
@@ -42,7 +44,7 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
     }
     return ret;
   },
-  opportunitySemesters(semesterID) {
+  opportunitySemesterNames(semesterID) {
     const sem = Semesters.findDoc(semesterID);
     const oppTerm = sem.term;
     const oppYear = sem.year;
@@ -63,6 +65,26 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
     });
     }
     return ret;
+  },
+  matchingInterests(opp) {
+    const matchingInterests = [];
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const userInterests = [];
+    const opportunityInterests = [];
+    _.map(opp.interestIDs, (id) => {
+      opportunityInterests.push(Interests.findDoc(id));
+    });
+    _.map(user.interestIDs, (id) => {
+      userInterests.push(Interests.findDoc(id));
+    });
+    _.map(opportunityInterests, (oppInterest) => {
+      _.map(userInterests, (userInterest) => {
+      if (_.isEqual(oppInterest, userInterest)) {
+        matchingInterests.push(userInterest);
+      }
+    });
+  });
+    return matchingInterests;
   },
 });
 

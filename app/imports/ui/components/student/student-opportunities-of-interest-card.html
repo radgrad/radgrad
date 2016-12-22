@@ -4,7 +4,7 @@
           <div class="header">{{opportunityName opportunity}}</div>
           <div class="meta">
           {{#each semester in opportunitySemesters opportunity}}
-          {{opportunitySemesters semester}}&nbsp;
+          {{opportunitySemesterNames semester}}&nbsp;
           {{/each}}
           </div>
         </div>
@@ -27,9 +27,9 @@
           </div>
           <div class="content">
                 <span class="left floated">
-                  {{#each interest in opportunityInterestNames opportunity}}
+                  {{#each interest in matchingInterests opportunity}}
                   <a class="ui mini label"><i style="color:white !important"
-                                              class="fitted star icon"></i>{{interest}}</a>
+                                              class="fitted star icon"></i>{{interestName interest}}</a>
                   {{/each}}
                 </span>
           </div>
