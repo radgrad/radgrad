@@ -35,3 +35,8 @@ Template.List_Career_Goals_Widget.helpers({
     return `Users: ${references}`;
   },
 });
+
+Template.List_Career_Goals_Widget.onRendered(function listCareerGoalsWidgetOnRendered() {
+  // use setTimeout since accordion is in a subtemplate (#each).
+  setTimeout(() => { this.$('.ui.accordion').accordion(); }, 300);
+});
