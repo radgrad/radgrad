@@ -17,17 +17,14 @@ Template.Advisor_Completed_Verifications_Page.events({
 
 Template.Advisor_Completed_Verifications_Page.onCreated(
     function advisorVerificationRequestsCompletedOnCreated() {
-      this.autorun(() => {
-        this.subscribe(VerificationRequests.getPublicationName());
-        this.subscribe(Courses.getPublicationName());
-        this.subscribe(CourseInstances.getPublicationName());
-        this.subscribe(Opportunities.getPublicationName());
-        this.subscribe(OpportunityInstances.getPublicationName());
-        this.subscribe(Semesters.getPublicationName());
-        this.subscribe(Users.getPublicationName());
-      });
-    }
-);
+      this.subscribe(VerificationRequests.getPublicationName());
+      this.subscribe(Courses.getPublicationName());
+      this.subscribe(CourseInstances.getPublicationName());
+      this.subscribe(Opportunities.getPublicationName());
+      this.subscribe(OpportunityInstances.getPublicationName());
+      this.subscribe(Semesters.getPublicationName());
+      this.subscribe(Users.getPublicationName());
+    });
 
 Template.Advisor_Completed_Verifications_Page.onRendered(
     function advisorVerificationRequestsCompletedOnRendered() {

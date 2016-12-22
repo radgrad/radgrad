@@ -16,7 +16,6 @@ Template.Advisor_Event_Verification_Page.events({
 });
 
 Template.Advisor_Event_Verification_Page.onCreated(function advisorEventVerificationPageOnCreated() {
-  this.autorun(() => {
     this.subscribe(CourseInstances.getPublicationName());
     this.subscribe(Courses.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
@@ -24,7 +23,6 @@ Template.Advisor_Event_Verification_Page.onCreated(function advisorEventVerifica
     this.subscribe(Semesters.getPublicationName());
     this.subscribe(Users.getPublicationName());
     this.subscribe(VerificationRequests.getPublicationName());
-  });
 });
 
 Template.Advisor_Event_Verification_Page.onRendered(function advisorEventVerificationPageOnRendered() {

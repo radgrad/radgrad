@@ -16,15 +16,13 @@ Template.Advisor_Verification_Requests_Pending_Page.events({
 });
 
 Template.Advisor_Verification_Requests_Pending_Page.onCreated(function advisorVerificationRequestsPendingOnCreated() {
-  this.autorun(() => {
-    this.subscribe(VerificationRequests.getPublicationName());
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-  });
+  this.subscribe(VerificationRequests.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
 });
 
 Template.Advisor_Verification_Requests_Pending_Page.onRendered(function advisorVerificationRequestsPendOnRendered() {
