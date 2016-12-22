@@ -31,23 +31,24 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     const sem = Semesters.findDoc(semesterID);
     const oppTerm = sem.term;
     const oppYear = sem.year;
-    return oppTerm + ' ' + oppYear;
+    return `${oppTerm} ${oppYear}`;
   },
-  courseShortDescription(description){
-    if(description.length > 200) {
-      description = description.substring(0,200)+"...";
+  courseShortDescription(descript) {
+    let description = descript;
+    if (description.length > 200) {
+      description = `${description.substring(0, 200)}...`;
     }
     return description;
-  }
+  },
 });
 
 Template.Student_Courses_Of_Interest_Card.events({
-  'click .addToPlan': function clickItemAddToPlan(event, template) {
+  'click .addToPlan': function clickItemAddToPlan(event, instance) {
     event.preventDefault();
     const course = this.course;
     const name = course.name;
     const semester = event.target.text;
-    const courseSlug = Slugs.findDoc({ _id: opportunity.slugID });
+    const courseSlug = Slugs.findDoc({ _id: course.slugID });
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
     const username = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
@@ -61,7 +62,7 @@ Template.Student_Courses_Of_Interest_Card.events({
   },
 });
 
-Template.Student_Courses_Of_Interest_Card.onRendered(function studentCoursesOfInterestCardOnRendered(){
+Template.Student_Courses_Of_Interest_Card.onRendered(function studentCoursesOfInterestCardOnRendered() {
   const template = this;
   template.$('.chooseSemester')
       .popup({

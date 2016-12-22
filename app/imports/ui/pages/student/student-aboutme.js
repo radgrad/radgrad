@@ -73,13 +73,13 @@ Template.Student_AboutMe.helpers({
 });
 
 Template.Student_AboutMe.events({
-  'submit .email' (event) {
+  'submit .email': function submitEmail(event) {
     event.preventDefault();
     const student = Users.findDoc(getRouteUserName());
     const choice = event.target.emailAddress.value;
     Users.setEmail(student._id, choice);
   },
-  'submit .website' (event) {
+  'submit .website': function submitWebsite(event) {
     event.preventDefault();
     const student = Users.findDoc(getRouteUserName());
     const choice = event.target.website.value;

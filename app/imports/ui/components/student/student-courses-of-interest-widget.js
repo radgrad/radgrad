@@ -1,11 +1,9 @@
 import { Template } from 'meteor/templating';
 import { Courses } from '../../../api/course/CourseCollection.js';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getRouteUserName } from '../shared/route-user-name';
 
 Template.Student_Courses_Of_Interest_Widget.onCreated(function appBodyOnCreated() {
   this.subscribe(Courses.getPublicationName());
@@ -33,20 +31,21 @@ Template.Student_Courses_Of_Interest_Widget.helpers({
     const sem = Semesters.findDoc(semesterID);
     const oppTerm = sem.term;
     const oppYear = sem.year;
-    return oppTerm + ' ' + oppYear;
+    return `${oppTerm} ${oppYear}`;
   },
-  courseShortDescription(description){
-    if(description.length > 200) {
-      description = description.substring(0,200)+"...";
+  courseShortDescription(descript) {
+    let description = descript;
+    if (description.length > 200) {
+      description = `${description.substring(0, 200)}...`;
     }
     return description;
-  }
+  },
 });
 
 Template.Student_Courses_Of_Interest_Widget.events({
 
 });
 
-Template.Student_Courses_Of_Interest_Widget.onRendered(function studentCoursesOfInterestWidgetOnRendered(){
+Template.Student_Courses_Of_Interest_Widget.onRendered(function studentCoursesOfInterestWidgetOnRendered() {
 
 });

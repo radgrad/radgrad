@@ -27,7 +27,6 @@ Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
     this.subscribe(Users.getPublicationName());
     this.subscribe(AcademicYearInstances.getPublicationName());
     this.subscribe(VerificationRequests.getPublicationName());
-
   });
 });
 
@@ -36,7 +35,6 @@ Template.Student_Home_Page.helpers({
     return Template.instance().state;
   },
   getTeasers() {
-    const ret = [];
     const allTeasers = Teasers.find().fetch();
     return allTeasers;
   },

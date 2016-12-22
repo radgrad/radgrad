@@ -242,4 +242,3 @@ Template.Student_Ice.onRendered(function enableAccordion() {
     exclusive: false,
   });
 });
-
