@@ -19,6 +19,33 @@ Template.Student_Opportunities_Of_Interest_Widget.onCreated(function appBodyOnCr
 });
 });
 
+function matchingOpportunities(){
+  const allOpportunities = Opportunities.find().fetch();
+  const matching = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterests = [];
+  let opportunityInterests = [];
+  _.map(user.interestIDs, (id) => {
+    userInterests.push(Interests.findDoc(id));
+});
+  _.map(allOpportunities, (opp) => {
+    opportunityInterests = [];
+  _.map(opp.interestIDs, (id) => {
+    opportunityInterests.push(Interests.findDoc(id));
+  _.map(opportunityInterests, (oppInterest) => {
+    _.map(userInterests, (userInterest) => {
+    if (_.isEqual(oppInterest, userInterest)) {
+    if (!_.includes(matching, opp)) {
+      matching.push(opp);
+    }
+  }
+});
+});
+});
+});
+  return matching;
+}
+
 Template.Student_Opportunities_Of_Interest_Widget.helpers({
   getDictionary() {
     return Template.instance().state;
@@ -44,33 +71,10 @@ Template.Student_Opportunities_Of_Interest_Widget.helpers({
     return ret;
   },
   opportunities() {
-    const allOpportunities = Opportunities.find().fetch();
-    const matchingOpportunities = [];
-    const user = Users.findDoc({ username: getRouteUserName() });
-    const userInterests = [];
-    let opportunityInterests = [];
-    _.map(user.interestIDs, (id) => {
-      userInterests.push(Interests.findDoc(id));
-    });
-    _.map(allOpportunities, (opp) => {
-      opportunityInterests = [];
-      _.map(opp.interestIDs, (id) => {
-        opportunityInterests.push(Interests.findDoc(id));
-        _.map(opportunityInterests, (oppInterest) => {
-          _.map(userInterests, (userInterest) => {
-            if (_.isEqual(oppInterest, userInterest)) {
-              if (!_.includes(matchingOpportunities, opp)) {
-                matchingOpportunities.push(opp);
-              }
-            }
-          });
-        });
-      });
-    });
-    return matchingOpportunities;
+    return matchingOpportunities();
   },
   opportunityCount() {
-    return Opportunities.find().count();
+    return matchingOpportunities().length;
   },
 });
 

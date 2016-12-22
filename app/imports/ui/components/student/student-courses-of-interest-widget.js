@@ -16,38 +16,39 @@ Template.Student_Courses_Of_Interest_Widget.onCreated(function appBodyOnCreated(
 });
 
 
+function matchingCourses() {
+  const allCourses = Courses.find().fetch();
+  const matching = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterests = [];
+  let courseInterests = [];
+  _.map(user.interestIDs, (id) => {
+    userInterests.push(Interests.findDoc(id));
+});
+  _.map(allCourses, (course) => {
+    courseInterests = [];
+  _.map(course.interestIDs, (id) => {
+    courseInterests.push(Interests.findDoc(id));
+  _.map(courseInterests, (courseInterest) => {
+    _.map(userInterests, (userInterest) => {
+    if (_.isEqual(courseInterest, userInterest)) {
+    if (!_.includes(matching, course)) {
+      matching.push(course);
+    }
+  }
+});
+});
+});
+});
+  return matching;
+}
+
 Template.Student_Courses_Of_Interest_Widget.helpers({
   getDictionary() {
     return Template.instance().state;
   },
-  courses() {
-    const allCourses = Courses.find().fetch();
-    const matchingCourses = [];
-    const user = Users.findDoc({ username: getRouteUserName() });
-    const userInterests = [];
-    let courseInterests = [];
-    _.map(user.interestIDs, (id) => {
-      userInterests.push(Interests.findDoc(id));
-  });
-    _.map(allCourses, (course) => {
-      courseInterests = [];
-    _.map(course.interestIDs, (id) => {
-      courseInterests.push(Interests.findDoc(id));
-    _.map(courseInterests, (courseInterest) => {
-      _.map(userInterests, (userInterest) => {
-      if (_.isEqual(courseInterest, userInterest)) {
-      if (!_.includes(matchingCourses, course)) {
-        matchingCourses.push(course);
-      }
-    }
-  });
-  });
-  });
-  });
-    return matchingCourses;
-  },
   coursesCount() {
-    return Courses.find().count();
+    return matchingCourses().length;
   },
   courseInterests(course) {
     return Interests.findNames(course.interestIDs);
@@ -65,6 +66,10 @@ Template.Student_Courses_Of_Interest_Widget.helpers({
     }
     return description;
   },
+  courses() {
+    return matchingCourses();
+  },
+
 });
 
 Template.Student_Courses_Of_Interest_Widget.events({
