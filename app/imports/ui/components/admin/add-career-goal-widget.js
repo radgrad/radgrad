@@ -18,7 +18,7 @@ function slugFieldValidator() {
   return (Slugs.isDefined(this.value)) ? 'duplicateSlug' : true;
 }
 
-const addCareerGoalSchema = new SimpleSchema({
+const addSchema = new SimpleSchema({
   name: { type: String, optional: false },
   slug: { type: String, optional: false, custom: slugFieldValidator },
   description: { type: String, optional: false },
@@ -26,12 +26,12 @@ const addCareerGoalSchema = new SimpleSchema({
   moreInformation: { type: String, optional: false },
 });
 
-addCareerGoalSchema.messages({ duplicateSlug: 'The slug [value] is already defined.' });
+addSchema.messages({ duplicateSlug: 'The slug [value] is already defined.' });
 
 Template.Add_Career_Goal_Widget.onCreated(function onCreated() {
   this.successClass = new ReactiveVar('');
   this.errorClass = new ReactiveVar('');
-  this.context = addCareerGoalSchema.namedContext('Add_Career_Goal_Widget');
+  this.context = addSchema.namedContext('Add_Widget');
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
@@ -64,17 +64,18 @@ Template.Add_Career_Goal_Widget.events({
     // Get Interests (multiple selection)
     const selectedInterests = _.filter(event.target.interests.selectedOptions, (option) => option.selected);
     const interests = _.map(selectedInterests, (option) => option.value);
-    const newCareerGoalData = { name, slug, moreInformation, description, interests };
+    const newData = { name, slug, moreInformation, description, interests };
     // Clear out any old validation errors.
     instance.context.resetValidation();
     // Invoke clean so that newStudentData reflects what will be inserted.
-    addCareerGoalSchema.clean(newCareerGoalData);
+    addSchema.clean(newData);
     // Determine validity.
-    instance.context.validate(newCareerGoalData);
+    instance.context.validate(newData);
     if (instance.context.isValid()) {
-      CareerGoals.define(newCareerGoalData);
+      CareerGoals.define(newData);
       instance.successClass.set('success');
       instance.errorClass.set('');
+      event.target.reset();
     } else {
       instance.successClass.set('');
       instance.errorClass.set('error');

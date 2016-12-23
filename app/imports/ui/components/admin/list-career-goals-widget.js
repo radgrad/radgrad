@@ -4,6 +4,7 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Tracker } from 'meteor/tracker';
 
 Template.List_Career_Goals_Widget.onCreated(function listCareerGoalsWidgetOnCreated() {
   this.subscribe(CareerGoals.getPublicationName());
@@ -34,7 +35,7 @@ function hasReferences(careerGoalID) {
 
 Template.List_Career_Goals_Widget.helpers({
   careerGoals() {
-    return CareerGoals.find({}, { sort: { name: 1 }});
+    return CareerGoals.find({}, { sort: { name: 1 } });
   },
   count() {
     return CareerGoals.count();
@@ -53,10 +54,7 @@ Template.List_Career_Goals_Widget.helpers({
 });
 
 Template.List_Career_Goals_Widget.onRendered(function listCareerGoalsWidgetOnRendered() {
-  // need setTimeout since accordion is within a subtemplate (#each).
-  setTimeout(() => { this.$('.ui.accordion').accordion(); }, 300);
 });
-
 
 Template.List_Career_Goals_Widget.events({
   'click .jsUpdate': function (event, instance) {
