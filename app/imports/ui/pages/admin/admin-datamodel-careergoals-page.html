@@ -2,8 +2,12 @@
 
   {{#if Template.subscriptionsReady}}
     {{#Admin_DataModel_Layout}}
-      {{> Add_Career_Goal_Widget }}
-      {{> List_Career_Goals_Widget }}
+      {{#if displayUpdateWidget}}
+        {{> Update_Career_Goal_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Career_Goal_Widget }}
+      {{/if}}
+      {{> List_Career_Goals_Widget updateID=updateID}}
     {{/Admin_DataModel_Layout}}
   {{else}}
     {{> Loading}}
