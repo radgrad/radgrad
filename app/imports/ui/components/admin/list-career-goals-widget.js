@@ -45,7 +45,7 @@ Template.List_Career_Goals_Widget.helpers({
   descriptionPairs(careerGoal) {
     return [
       { label: 'Description', value: careerGoal.description },
-      { label: 'Interests', value: Interests.findNames(careerGoal.interestIDs) },
+      { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
       { label: 'More Information', value: `<a href="${careerGoal.moreInformation}">${careerGoal.moreInformation}</a>` },
       { label: 'References', value: getReferences(careerGoal._id) },
     ];
