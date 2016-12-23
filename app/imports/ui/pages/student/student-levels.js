@@ -75,19 +75,19 @@ Template.Student_Levels.helpers({
   },
 });
 
-Template.Level_Sticker_Log.events({});
+Template.Level_Sticker_Log_Widget.events({});
 
-Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
+Template.Level_Sticker_Log_Widget.onCreated(function levelStickerLogOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   }
 });
 
-Template.Level_Sticker_Log.onRendered(function levelStickerLogOnRendered() {
+Template.Level_Sticker_Log_Widget.onRendered(function levelStickerLogOnRendered() {
 
 });
 
-Template.Level_Sticker_Log.onDestroyed(function levelStickerLogOnDestroyed() {
+Template.Level_Sticker_Log_Widget.onDestroyed(function levelStickerLogOnDestroyed() {
   // add your statement here
 });
 

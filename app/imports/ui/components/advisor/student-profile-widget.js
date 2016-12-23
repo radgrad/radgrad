@@ -53,6 +53,16 @@ Template.Student_Profile_Widget.helpers({
     }
     return 'Select Desired Degree';
   },
+  firstName() {
+    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
+      return user.firstName;
+    }
+    return 'First Name';
+  },
+  getDictionary() {
+    return Template.instance().state;
+  },
   inRole(role) {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
@@ -69,6 +79,13 @@ Template.Student_Profile_Widget.helpers({
       return _.indexOf(user.interestIDs, interest._id) !== -1;
     }
     return false;
+  },
+  lastName() {
+    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
+      return user.lastName;
+    }
+    return 'Last Name';
   },
   roles() {
     const ret = [];
@@ -89,6 +106,20 @@ Template.Student_Profile_Widget.helpers({
       return StarDataLogs.find({ studentID });
     }
     return null;
+  },
+  uhID() {
+    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
+      return user.uhID;
+    }
+    return '1234-5678';
+  },
+  username() {
+    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
+      return user.username;
+    }
+    return 'Username';
   },
   userRole() {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {

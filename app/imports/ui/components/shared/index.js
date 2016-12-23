@@ -13,9 +13,6 @@ import './retrieve-student-widget.js';
 
 import './route-user-name.js';
 
-import './student-selector.html';
-import './student-selector.js';
-
 import './verification-event.html';
 import './verification-event.js';
 

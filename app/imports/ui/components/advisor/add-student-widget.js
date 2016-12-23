@@ -25,9 +25,6 @@ const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
 Template.Add_Student_Widget.helpers({
-  alreadyDefined() {
-    return Template.instance().state.get('alreadyDefined');
-  },
   displayFieldError(fieldName) {
     const errorKeys = Template.instance().context.invalidKeys();
     return lodash.find(errorKeys, (keyObj) => keyObj.name === fieldName);
@@ -50,6 +47,12 @@ Template.Add_Student_Widget.helpers({
   successClass() {
     return Template.instance().state.get(displaySuccessMessage) ? 'success' : '';
   },
+  uhIdAlreadyDefined() {
+    return Template.instance().state.get('uhIdAlreadyDefined');
+  },
+  uhID() {
+    return Template.instance().state.get('uhID');
+  },
   userFullName() {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const userID = Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID);
@@ -68,6 +71,9 @@ Template.Add_Student_Widget.helpers({
   username() {
     return Template.instance().state.get('username');
   },
+  usernameAlreadyDefined() {
+    return Template.instance().state.get('usernameAlreadyDefined');
+  },
 });
 
 Template.Add_Student_Widget.events({
@@ -75,7 +81,7 @@ Template.Add_Student_Widget.events({
     event.preventDefault();
     const firstName = event.target.firstName.value;
     const lastName = event.target.lastName.value;
-    const username = event.target.userName.value;
+    const username = event.target.username.value;
     let uhID = event.target.uhID.value;
     if (uhID.length > 0 && uhID.indexOf('-') === -1) {
       uhID = `${uhID.substring(0, 4)}-${uhID.substring(4, 8)}`;
@@ -92,6 +98,7 @@ Template.Add_Student_Widget.events({
       const uhIdNotDefined = Users.find({ uhID }).count() === 0;
       if (usernameNotDefined && uhIdNotDefined) {
         ValidUserAccounts.define({ username });
+        // TODO: CAM remove the password when we go to CAS.
         const userDefinition = {
           firstName,
           lastName,
@@ -99,6 +106,7 @@ Template.Add_Student_Widget.events({
           email: `${username}@hawaii.edu`,
           role: ROLE.STUDENT,
           uhID,
+          password: 'foo',
         };
         const studentID = Meteor.call('Users.define', userDefinition, (error) => {
           if (error) {
@@ -112,10 +120,18 @@ Template.Add_Student_Widget.events({
         instance.state.set(displayErrorMessages, false);
         instance.state.set('addNewUser', false);
       } else {
-        instance.state.set(displaySuccessMessage, false);
-        instance.state.set(displayErrorMessages, true);
-        instance.state.set('alreadyDefined', true);
-        instance.state.set('username', username);
+        if (!usernameNotDefined) {
+          instance.state.set(displaySuccessMessage, false);
+          instance.state.set(displayErrorMessages, true);
+          instance.state.set('usernameAlreadyDefined', true);
+          instance.state.set('username', username);
+        }
+        if (!uhIdNotDefined) {
+          instance.state.set(displaySuccessMessage, false);
+          instance.state.set(displayErrorMessages, true);
+          instance.state.set('uhIdAlreadyDefined', true);
+          instance.state.set('uhID', uhID);
+        }
       }
     } else {
       instance.state.set(displaySuccessMessage, false);

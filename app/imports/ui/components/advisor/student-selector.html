@@ -1,0 +1,21 @@
+<template name="Student_Selector">
+  <div class="ui segment">
+    <label><strong>Select Student:</strong></label>
+    <div class="ui dropdown field">
+      <input id="foo" type="hidden" name="student">
+      <div class="default text">Select Student</div>
+      <i class="dropdown icon"></i>
+      <div class="ui vertical menu">
+        {{#if justUseStudents}}
+          {{#each student in students}}
+            <div class="item" data-value="{{student._id}}">{{student.lastName}}, {{student.firstName}}</div>
+          {{/each}}
+        {{else}}
+          {{#each number in numbers}}
+            {{> Student_Selector_Submenu (submenuArgs number)}}
+          {{/each}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</template>

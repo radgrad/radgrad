@@ -1,0 +1,10 @@
+<template name="Student_Selector_Submenu">
+  {{#if haveMenu}}
+    <div class="item" data-value="{{topMenuLabel}}" data-position="right center">{{topMenuLabel}}</div>
+    <div class="ui fluid popup transition hidden">
+      {{#each student in students}}
+        <a class="item student" data-value="{{student._id}}">{{studentName student}}</a>
+      {{/each}}
+    </div>
+  {{/if}}
+</template>

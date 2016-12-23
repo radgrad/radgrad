@@ -3,9 +3,9 @@
     <div class="ui dividing header"><h4>ADD STUDENT</h4></div>
     <form class="ui form jsNewStudent {{ successClass }} {{ errorClass }}">
       <div class="field">
-        <label>Name</label>
         <div class="two fields">
           <div class="field">
+            <label>First Name</label>
             <input id="firstName" type="text" name="firstName" placeholder="First Name">
             {{#if displayFieldError 'firstName' }}
               <div class="ui error message">
@@ -14,6 +14,7 @@
             {{/if}}
           </div>
           <div class="field">
+            <label>Last Name</label>
             <input type="text" name="lastName" placeholder="Last Name">
             {{#if displayFieldError 'lastName' }}
               <div class="ui error message">
@@ -26,10 +27,10 @@
       <div class="two fields">
         <div class="field">
           <label>Username</label>
-          <input type="text" name="userName" placeholder="Username">
-          {{#if displayFieldError 'userName' }}
+          <input type="text" name="username" placeholder="Username">
+          {{#if displayFieldError 'username' }}
             <div class="ui error message">
-              <p>{{fieldErrorMessage 'userName'}}.</p>
+              <p>{{fieldErrorMessage 'username'}}.</p>
             </div>
           {{/if}}
         </div>
@@ -43,18 +44,22 @@
           {{/if}}
         </div>
       </div>
-      <button class="ui blue button jsNewStudent" type="submit">Submit</button>
-      <button class="ui red button jsCancelAdd"><i class="remove icon"></i>Cancel</button>
-      {{#if alreadyDefined }}
+      {{#if usernameAlreadyDefined }}
         <div class="ui error message">
           <p>User {{username}} is already defined.</p>
         </div>
       {{/if}}
+      {{#if uhIdAlreadyDefined }}
+        <div class="ui error message">
+          <p>UH ID {{uhID}} is already defined.</p>
+        </div>
+      {{/if}}
+      {{#if displaySuccessMessage}}
+        <div class="ui success message">
+          <p>Student {{username}} successfully added.</p>
+        </div>
+      {{/if}}
+      <button class="ui bottom attached basic green button container jsNewStudent" type="submit" tabindex="0">Add</button>
     </form>
-    {{#if displaySuccessMessage}}
-      <div class="ui success message">
-        <p>Student {{username}} successfully added.</p>
-      </div>
-    {{/if}}
   </div>
 </template>

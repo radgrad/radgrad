@@ -21,9 +21,7 @@ Template.Advisor_Log_Viewer_Widget.events({
 });
 
 Template.Advisor_Log_Viewer_Widget.onCreated(function advisorLogViewerOnCreated() {
-  this.autorun(() => {
-    this.subscribe(AdvisorLogs.getPublicationName());
-  });
+  this.subscribe(AdvisorLogs.getPublicationName());
 });
 
 Template.Advisor_Log_Viewer_Widget.onRendered(function advisorLogViewerOnRendered() {

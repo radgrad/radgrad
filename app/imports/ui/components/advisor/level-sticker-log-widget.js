@@ -8,7 +8,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Users } from '../../../api/user/UserCollection.js';
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 
-Template.Level_Sticker_Log.helpers({
+Template.Level_Sticker_Log_Widget.helpers({
   earnedICE() {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
@@ -89,7 +89,7 @@ Template.Level_Sticker_Log.helpers({
   },
 });
 
-Template.Level_Sticker_Log.events({
+Template.Level_Sticker_Log_Widget.events({
   'click .jsLevelSticker': function clickJsLevelSticker(event, instance) {
     event.preventDefault();
     const student = Users.findDoc(instance.state.get(sessionKeys.CURRENT_STUDENT_ID));
@@ -102,7 +102,7 @@ Template.Level_Sticker_Log.events({
   },
 });
 
-Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
+Template.Level_Sticker_Log_Widget.onCreated(function levelStickerLogOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   } else {
@@ -110,13 +110,13 @@ Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
   }
 });
 
-Template.Level_Sticker_Log.onRendered(function levelStickerLogOnRendered() {
+Template.Level_Sticker_Log_Widget.onRendered(function levelStickerLogOnRendered() {
   this.$('.dropdown').dropdown({
     // action: 'select',
   });
 });
 
-Template.Level_Sticker_Log.onDestroyed(function levelStickerLogOnDestroyed() {
+Template.Level_Sticker_Log_Widget.onDestroyed(function levelStickerLogOnDestroyed() {
   // add your statement here
 });
 

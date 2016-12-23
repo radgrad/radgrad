@@ -2,9 +2,21 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { AdvisorLogs } from '/imports/api/log/AdvisorLogCollection';
 import { sessionKeys } from '../../../startup/client/session-state';
+import { moment } from 'meteor/momentjs:moment';
 
 Template.Advisor_Log_Entry_Widget.helpers({
-  // add you helpers here
+  logs() {
+    const studentID = Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID);
+    return AdvisorLogs.find({ studentID });
+  },
+  logDate(log) {
+    const m = moment(log.createdOn);
+    return m.format('MM/DD/YY');
+  },
+  logAdvisorName(log) {
+    const advisor = AdvisorLogs.getAdvisorDoc(log.advisorID);
+    return `${advisor.firstName} ${advisor.lastName}`;
+  },
 });
 
 Template.Advisor_Log_Entry_Widget.events({
@@ -26,6 +38,7 @@ Template.Advisor_Log_Entry_Widget.onCreated(function advisorLogEntryOnCreated() 
   } else {
     this.state = new ReactiveDict();
   }
+  this.subscribe(AdvisorLogs.getPublicationName());
 });
 
 Template.Advisor_Log_Entry_Widget.onRendered(function advisorLogEntryOnRendered() {

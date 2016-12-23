@@ -1,0 +1,25 @@
+<template name="Update_Star_Data_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE STUDENT STAR DATA</h4></div>
+    <div class="ui form">
+      <div class="field">
+        <!-- CSV -->
+        <label>STAR CSV</label>
+        <div class="ui action input">
+          <input id="fileInput" type="file"/>
+        </div>
+      </div>
+      <button class="ui bottom attached basic green button container jsStarData" type="submit">Load Star Data</button>
+      <div class="ui horizontal divider"></div>
+      <div class="field">
+        <!-- Star Data Log -->
+        <label>STAR Data Upload Log</label>
+        {{#each log in starLogs}}
+          <div class="ui segment">
+            <p><strong>{{log.uploadedOn}}:</strong> {{log.note}}</p>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

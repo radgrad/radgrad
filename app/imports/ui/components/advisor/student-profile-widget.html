@@ -1,10 +1,29 @@
 <template name="Student_Profile_Widget">
   <!-- Form -->
-  <div class="ui padded container segment" style="margin-bottom: 0 !important;">
-    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Basic Profile</h4>
-    </div>
-
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE STUDENT PROFILE</h4></div>
+    {{> Student_Selector dictionary=getDictionary}}
     <div class="ui equal width form">
+      <div class="fields">
+        <div class="field">
+          <label>First Name</label>
+          <input id="firstName" type="text" name="firstName" placeholder="{{firstName}}">
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input id="lastName" type="text" name="lastName" placeholder="{{lastName}}">
+        </div>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <label>UH Account</label>
+          <input type="text" name="username" placeholder="{{username}}">
+        </div>
+        <div class="field">
+          <label>UH ID</label>
+          <input type="text" name="uhID" placeholder="{{uhID}}">
+        </div>
+      </div>
       <div class="fields">
         <!-- Role -->
         <div class="field">
@@ -21,7 +40,7 @@
                 {{/each}}
               </div>
             </div>
-            <button class="ui basic green attached button" type="submit">Update</button>
+            <!--<button class="ui basic green attached button" type="submit">Update</button>-->
           </div>
         </div>
         <!-- Degree -->
@@ -37,11 +56,10 @@
                 <div class="item{{#if desireBA}} active selected{{/if}}" data-value="BA_ICS">B.A. ICS</div>
               </div>
             </div>
-            <button class="ui basic green button jsDegree" type="submit">Update</button>
+            <!--<button class="ui basic green button jsDegree" type="submit">Update</button>-->
           </div>
         </div>
       </div>
-
       <div class="fields">
         <!-- Interest -->
         <div class="field">
@@ -53,7 +71,7 @@
                 <option value="{{interest._id}}" selected="{{interestSelected interest}}">{{interest.name}}</option>
               {{/each}}
             </select>
-            <button class="ui basic green button jsInterests" type="submit">Add</button>
+            <!--<button class="ui basic green button jsInterests" type="submit">Add</button>-->
           </div>
         </div>
         <!-- Degree -->
@@ -66,36 +84,11 @@
                 <option value="{{goal._id}}" selected="{{careerGoalSelected goal}}">{{goal.name}}</option>
               {{/each}}
             </select>
-            <button class="ui green basic button jsCareers" type="submit">Add</button>
+            <!--<button class="ui green basic button jsCareers" type="submit">Add</button>-->
           </div>
         </div>
-
       </div>
-
-      <div class="field">
-        <!-- CSV -->
-        <label>STAR CSV</label>
-        <div class="ui action input">
-          {{#with currentUpload}}
-            Uploading <b>{{file.name}}</b>:
-            <span id="progress">{{progress.get}}%</span>
-          {{else}}
-            <input id="fileInput" type="file"/>
-          {{/with}}
-          <!--<input id="fileInput" type="file"/>-->
-          <button class="ui basic green button jsStarData" type="submit">Load Star Data</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <!-- Star Data Log -->
-        <label>STAR Data Upload Log</label>
-        {{#each log in starLogs}}
-          <div class="ui segment">
-            <p><strong>{{log.uploadedOn}}:</strong> {{log.note}}</p>
-          </div>
-        {{/each}}
-      </div>
+      <button class="ui bottom attached basic green button container jsNewStudent" type="submit">Update</button>
 
     </div>
   </div>

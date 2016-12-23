@@ -1,12 +1,29 @@
 <template name="Advisor_Log_Entry_Widget">
-  <div class="ui padded container segment" style="margin-bottom: 0 !important;">
-    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Advisor Log</h4></div>
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADVISOR LOG</h4></div>
     <div class="ui equal width form">
       <div class="field">
-        <label>Comments</label>
+        <label>Add Entry</label>
         <textarea></textarea>
       </div>
-      <div class="ui basic green submit button jsComment">Add Comments</div>
+      <div class="ui bottom attached basic green button container jsComment">Add</div>
+      <div class="ui horizontal divider"></div>
+      <div class="field">
+        <label>History</label>
+        {{#each log in logs}}
+          <div class="content">
+            <div class="header">
+              {{logDate log}}
+            </div>
+            <div class="meta">
+              {{logAdvisorName log}}
+            </div>
+            <div class="description">
+              {{log.text}}
+            </div>
+          </div>
+        {{/each}}
+      </div>
     </div>
   </div>
 </template>
