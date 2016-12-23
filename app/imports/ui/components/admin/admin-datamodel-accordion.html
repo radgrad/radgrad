@@ -1,0 +1,20 @@
+<template name="Admin_DataModel_Accordion">
+
+  <div class="ui styled fluid accordion">
+    <div class="title">
+      <i class="dropdown icon"></i>
+      {{name}}
+      ({{slug}})
+    </div>
+    <div class="content">
+      {{#each descriptionPair in descriptionPairs}}
+        <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+      {{/each}}
+      <p>
+        <button value="{{id}}" class="ui green basic mini button jsUpdate">Update</button>
+        <button value="{{id}}" class="ui green basic mini button jsDelete">Delete</button>
+      </p>
+    </div>
+  </div>
+
+</template>

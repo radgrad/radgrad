@@ -1,7 +1,7 @@
 <template name="Update_Career_Goal_Widget">
 
   <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>UPDATE CAREER GOAL ({{careerGoal.name}}, {{slug}})</h4></div>
+    <div class="ui dividing header"><h4>UPDATE CAREER GOAL ({{careerGoal.name}})</h4></div>
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
@@ -9,6 +9,13 @@
           <label>Name</label>
           <input type="text" name="name" value="{{careerGoal.name}}">
           {{> Form_Error_Message errorMessage=(fieldError 'name')}}
+        </div>
+        <div class="field">
+          <label>Slug</label>
+          <div class="ui disabled input">
+            <input type="text" name="slug" value="{{slug}}">
+          </div>
+          {{> Form_Error_Message errorMessage=(fieldError 'slug')}}
         </div>
       </div>
 

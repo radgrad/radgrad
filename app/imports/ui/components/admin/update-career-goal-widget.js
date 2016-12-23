@@ -6,7 +6,7 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-const updateCareerGoalSchema = new SimpleSchema({
+const updateSchema = new SimpleSchema({
   name: { type: String, optional: false },
   description: { type: String, optional: false },
   interestIDs: { type: [String], optional: false, minCount: 1 },
@@ -16,7 +16,7 @@ const updateCareerGoalSchema = new SimpleSchema({
 Template.Update_Career_Goal_Widget.onCreated(function onCreated() {
   this.successClass = new ReactiveVar('');
   this.errorClass = new ReactiveVar('');
-  this.context = updateCareerGoalSchema.namedContext('update_Career_Goal_Widget');
+  this.context = updateSchema.namedContext('update_Widget');
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
@@ -63,18 +63,18 @@ Template.Update_Career_Goal_Widget.events({
     // Get Interests (multiple selection)
     const selectedInterests = _.filter(event.target.interests.selectedOptions, (option) => option.selected);
     const interestIDs = _.map(selectedInterests, (option) => option.value);
-    const updatedCareerGoalData = { name, moreInformation, description, interestIDs };
+    const updatedData = { name, moreInformation, description, interestIDs };
     // Clear out any old validation errors.
     instance.context.resetValidation();
     // Invoke clean so that data reflects what will be inserted.
-    updateCareerGoalSchema.clean(updatedCareerGoalData);
+    updateSchema.clean(updatedData);
     // Determine validity.
-    instance.context.validate(updatedCareerGoalData);
-    console.log('updatedData', updatedCareerGoalData, updatedCareerGoalData.interestIDs);
+    instance.context.validate(updatedData);
     if (instance.context.isValid()) {
-      CareerGoals.update(instance.data.updateID.get(), { $set: updatedCareerGoalData });
+      CareerGoals.update(instance.data.updateID.get(), { $set: updatedData });
       instance.successClass.set('success');
       instance.errorClass.set('');
+      event.target.reset();
     } else {
       instance.successClass.set('');
       instance.errorClass.set('error');

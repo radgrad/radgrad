@@ -4,22 +4,7 @@
       <div class="ui dividing header"><h4>CAREER GOALS ({{ count }})</h4></div>
 
       {{#each careerGoal in careerGoals}}
-        <div class="ui styled fluid accordion">
-          <div class="title">
-            <i class="dropdown icon"></i>
-            {{careerGoal.name}}
-            ({{slugName careerGoal.slugID}})
-          </div>
-          <div class="content">
-            {{#each descriptionPair in descriptionPairs careerGoal}}
-              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
-            {{/each}}
-            <p>
-              <button value="{{careerGoal._id}}" class="ui green basic mini button jsUpdate" >Update</button>
-              <button value="{{careerGoal._id}}" class="ui green basic mini button jsDelete" >Delete</button>
-            </p>
-          </div>
-        </div>
+        {{> Admin_DataModel_Accordion name=careerGoal.name slug=(slugName careerGoal.slugID) descriptionPairs=(descriptionPairs careerGoal) id=careerGoal._id updateID=updateID}}
       {{/each}}
     </div>
   {{else}}
