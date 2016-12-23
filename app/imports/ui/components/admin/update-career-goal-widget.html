@@ -1,0 +1,46 @@
+<template name="Update_Career_Goal_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE CAREER GOAL ({{careerGoal.name}}, {{slug}})</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        <div class="required field">
+          <label>Name</label>
+          <input type="text" name="name" value="{{careerGoal.name}}">
+          {{> Form_Error_Message errorMessage=(fieldError 'name')}}
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="required field">
+          <label>Interest(s)</label>
+          <select multiple="" class="ui dropdown" name="interests">
+            <option value="">Select Interest(s)</option>
+            {{#each interest in interests}}
+              <option value="{{interest._id}}" selected="{{interestSelected interest}}">{{interest.name}}</option>
+            {{/each}}
+          </select>
+          {{> Form_Error_Message errorMessage=(fieldError 'interests')}}
+        </div>
+        <div class="required field">
+          <label>More Information</label>
+          <input type="text" name="moreInformation" value="{{careerGoal.moreInformation}}">
+          {{> Form_Error_Message errorMessage=(fieldError 'moreInformation')}}
+        </div>
+      </div>
+
+      <div class="required field">
+        <label>Description</label>
+        <textarea rows="5" name="description" value="{{careerGoal.description}}"></textarea>
+        {{> Form_Error_Message errorMessage=(fieldError 'description')}}
+      </div>
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      <div class="ui success message">
+        The career goal was updated.
+      </div>
+    </form>
+  </div>
+
+</template>

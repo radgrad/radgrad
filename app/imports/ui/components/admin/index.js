@@ -10,3 +10,5 @@ import './list-career-goals-widget.js';
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
 
+import './update-career-goal-widget.html';
+import './update-career-goal-widget.js';
