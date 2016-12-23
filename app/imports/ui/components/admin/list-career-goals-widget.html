@@ -1,22 +1,22 @@
 <template name="List_Career_Goals_Widget">
   {{#if Template.subscriptionsReady}}
     <div class="ui padded container segment">
-      <div class="ui dividing header"><h4>CAREER GOALS ({{ careerGoalsCount }})</h4></div>
+      <div class="ui dividing header"><h4>CAREER GOALS ({{ count }})</h4></div>
 
       {{#each careerGoal in careerGoals}}
         <div class="ui styled fluid accordion">
           <div class="title">
             <i class="dropdown icon"></i>
             {{careerGoal.name}}
-            ({{getSlugName careerGoal.slugID}})
+            ({{slugName careerGoal.slugID}})
           </div>
           <div class="content">
             {{#each descriptionPair in descriptionPairs careerGoal}}
               <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
             {{/each}}
             <p>
-              <button class="ui green basic mini button" type="submit">Edit</button>
-              <button class="ui green basic mini button" type="submit">Delete</button>
+              <button value="{{careerGoal._id}}" class="ui green basic mini button jsUpdate" >Update</button>
+              <button value="{{careerGoal._id}}" class="ui green basic mini button jsDelete" >Delete</button>
             </p>
           </div>
         </div>

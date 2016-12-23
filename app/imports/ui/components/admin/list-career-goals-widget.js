@@ -22,14 +22,24 @@ function getReferences(careerGoalID) {
   return `Users: ${references}`;
 }
 
+function hasReferences(careerGoalID) {
+  let references = 0;
+  Users.find().forEach(function (userDoc) {
+    if (_.includes(userDoc.careerGoalIDs, careerGoalID)) {
+      references += 1;
+    }
+  });
+  return references > 0;
+}
+
 Template.List_Career_Goals_Widget.helpers({
   careerGoals() {
-    return CareerGoals.find();
+    return CareerGoals.find({}, { sort: { name: 1 }});
   },
-  careerGoalsCount() {
+  count() {
     return CareerGoals.count();
   },
-  getSlugName(slugID) {
+  slugName(slugID) {
     return Slugs.findDoc(slugID).name;
   },
   descriptionPairs(careerGoal) {
@@ -43,6 +53,24 @@ Template.List_Career_Goals_Widget.helpers({
 });
 
 Template.List_Career_Goals_Widget.onRendered(function listCareerGoalsWidgetOnRendered() {
-  // use setTimeout since accordion is in a subtemplate (#each).
+  // need setTimeout since accordion is within a subtemplate (#each).
   setTimeout(() => { this.$('.ui.accordion').accordion(); }, 300);
+});
+
+
+Template.List_Career_Goals_Widget.events({
+  'click .jsUpdate': function (event, instance) {
+    event.preventDefault();
+    const careerGoalID = event.target.value;
+    instance.data.updateID.set(careerGoalID);
+  },
+  'click .jsDelete': function (event, instance) {
+    event.preventDefault();
+    const careerGoalID = event.target.value;
+    if (hasReferences(careerGoalID)) {
+      alert('Cannot delete an entity that is referred to by another entity.');
+    } else {
+      CareerGoals.removeIt(careerGoalID);
+    }
+  },
 });
