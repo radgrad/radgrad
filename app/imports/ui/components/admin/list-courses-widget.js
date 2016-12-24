@@ -1,9 +1,8 @@
 import { Template } from 'meteor/templating';
-import { Courses } from '../../../api/career/courseCollection';
+import { Courses } from '../../../api/course/CourseCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 
 Template.List_Courses_Widget.onCreated(function listCoursesWidgetOnCreated() {
   this.subscribe(Courses.getPublicationName());
@@ -12,32 +11,25 @@ Template.List_Courses_Widget.onCreated(function listCoursesWidgetOnCreated() {
   this.subscribe(Slugs.getPublicationName());
 });
 
-function getReferences(courseID) {
-  let references = 0;
-  Users.find().forEach(function (userDoc) {
-    if (_.includes(userDoc.courseIDs, courseID)) {
-      references += 1;
-    }
-  });
-  return `Users: ${references}`;
-}
-
+// function getReferences(courseID) {
+//   const references = 0;
+//   return `Users: ${references}`;
+// }
+//
 function hasReferences(courseID) {
-  let references = 0;
-  Users.find().forEach(function (userDoc) {
-    if (_.includes(userDoc.courseIDs, courseID)) {
-      references += 1;
-    }
-  });
+  const references = courseID;
   return references > 0;
 }
 
 Template.List_Courses_Widget.helpers({
-  Courses() {
-    return Courses.find({}, { sort: { name: 1 } });
+  courses() {
+    return Courses.find({}, { sort: { number: 1 } });
   },
   count() {
     return Courses.count();
+  },
+  courseTitle(course) {
+    return `${course.number}: ${course.shortName}`;
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
@@ -45,9 +37,6 @@ Template.List_Courses_Widget.helpers({
   descriptionPairs(course) {
     return [
       { label: 'Description', value: course.description },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
-      { label: 'More Information', value: `<a href="${course.moreInformation}">${course.moreInformation}</a>` },
-      { label: 'References', value: getReferences(course._id) },
     ];
   },
 });

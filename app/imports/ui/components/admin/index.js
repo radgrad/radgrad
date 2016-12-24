@@ -10,6 +10,9 @@ import './admin-datamodel-menu.js';
 import './list-career-goals-widget.html';
 import './list-career-goals-widget.js';
 
+import './list-courses-widget.html';
+import './list-courses-widget.js';
+
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
 

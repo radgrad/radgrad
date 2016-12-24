@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Courses } from '../../../api/career/CareerGoalCollection';
+import { Courses } from '../../../api/course/CourseCollection';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 Template.Admin_DataModel_Courses_Page.helpers({
