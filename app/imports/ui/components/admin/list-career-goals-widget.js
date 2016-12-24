@@ -34,7 +34,7 @@ function hasReferences(careerGoalID) {
 
 Template.List_Career_Goals_Widget.helpers({
   careerGoals() {
-    return CareerGoals.find({}, { sort: { name: 1 }});
+    return CareerGoals.find({}, { sort: { name: 1 } });
   },
   count() {
     return CareerGoals.count();
@@ -53,10 +53,7 @@ Template.List_Career_Goals_Widget.helpers({
 });
 
 Template.List_Career_Goals_Widget.onRendered(function listCareerGoalsWidgetOnRendered() {
-  // need setTimeout since accordion is within a subtemplate (#each).
-  setTimeout(() => { this.$('.ui.accordion').accordion(); }, 300);
 });
-
 
 Template.List_Career_Goals_Widget.events({
   'click .jsUpdate': function (event, instance) {
@@ -64,10 +61,11 @@ Template.List_Career_Goals_Widget.events({
     const careerGoalID = event.target.value;
     instance.data.updateID.set(careerGoalID);
   },
-  'click .jsDelete': function (event, instance) {
+  'click .jsDelete': function (event) {
     event.preventDefault();
     const careerGoalID = event.target.value;
     if (hasReferences(careerGoalID)) {
+      /* global alert */
       alert('Cannot delete an entity that is referred to by another entity.');
     } else {
       CareerGoals.removeIt(careerGoalID);
