@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Logger } from 'meteor/jag:pince';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '/imports/api/course/CourseCollection';
@@ -186,9 +187,16 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
    */
   updateGrade(courseInstanceID, grade) {
+    const logger = new Logger('CourseInstance.updateGrade');
+    logger.info(`${grade}`);
+    console.log(`${grade}`);
     this.assertDefined(courseInstanceID);
+    logger.info('after assert');
     const ice = makeCourseICE(courseInstanceID, grade);
+    logger.info('after ice');
     this._collection.update({ _id: courseInstanceID }, { $set: { grade, ice, verified: false } });
+    logger.info('after _collection update');
+    console.log('after _collection update');
   }
 
   /**
