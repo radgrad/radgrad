@@ -4,7 +4,6 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Tracker } from 'meteor/tracker';
 
 Template.List_Career_Goals_Widget.onCreated(function listCareerGoalsWidgetOnCreated() {
   this.subscribe(CareerGoals.getPublicationName());
@@ -62,10 +61,11 @@ Template.List_Career_Goals_Widget.events({
     const careerGoalID = event.target.value;
     instance.data.updateID.set(careerGoalID);
   },
-  'click .jsDelete': function (event, instance) {
+  'click .jsDelete': function (event) {
     event.preventDefault();
     const careerGoalID = event.target.value;
     if (hasReferences(careerGoalID)) {
+      /* global alert */
       alert('Cannot delete an entity that is referred to by another entity.');
     } else {
       CareerGoals.removeIt(careerGoalID);
