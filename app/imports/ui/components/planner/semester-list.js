@@ -351,7 +351,7 @@ Template.Semester_List.events({
     event.preventDefault();
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;
-    CourseInstances.updateGrade(div.id, grade);
+    CourseInstances.clientUpdateGrade(div.id, grade);
   },
 });
 

@@ -33,6 +33,9 @@ class CourseInstanceCollection extends BaseCollection {
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
       'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W'];
+    if (Meteor.server) {
+      this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
+    }
   }
 
   /**
@@ -181,6 +184,18 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Updates the CourseInstance's grade. This should be used for planning purposes on the client side.
+   * @param courseInstanceID The course instance ID.
+   * @param grade The new grade.
+   * @param grade The new grade.
+   */
+  clientUpdateGrade(courseInstanceID, grade) {
+    Meteor.call('CourseInstance.updateGrade', {
+      courseInstanceID,
+      grade,
+    });
+  }
+  /**
    * Updates the CourseInstance's grade. This should be used for planning purposes.
    * @param courseInstanceID The course instance ID.
    * @param grade The new grade.
@@ -216,4 +231,3 @@ class CourseInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const CourseInstances = new CourseInstanceCollection();
-
