@@ -1,6 +1,5 @@
 /**
  * Some example students.
- * @type {[*]}
  */
 export const exampleStudents = [
   {
