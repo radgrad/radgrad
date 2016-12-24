@@ -4,6 +4,7 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { makeLink } from './datamodel-utilities';
 
 Template.List_Career_Goals_Widget.onCreated(function listCareerGoalsWidgetOnCreated() {
   this.subscribe(CareerGoals.getPublicationName());
@@ -12,24 +13,14 @@ Template.List_Career_Goals_Widget.onCreated(function listCareerGoalsWidgetOnCrea
   this.subscribe(Slugs.getPublicationName());
 });
 
-function getReferences(careerGoalID) {
+function numReferences(careerGoal) {
   let references = 0;
   Users.find().forEach(function (userDoc) {
-    if (_.includes(userDoc.careerGoalIDs, careerGoalID)) {
+    if (_.includes(userDoc.careerGoalIDs, careerGoal._id)) {
       references += 1;
     }
   });
-  return `Users: ${references}`;
-}
-
-function hasReferences(careerGoalID) {
-  let references = 0;
-  Users.find().forEach(function (userDoc) {
-    if (_.includes(userDoc.careerGoalIDs, careerGoalID)) {
-      references += 1;
-    }
-  });
-  return references > 0;
+  return references;
 }
 
 Template.List_Career_Goals_Widget.helpers({
@@ -39,6 +30,9 @@ Template.List_Career_Goals_Widget.helpers({
   count() {
     return CareerGoals.count();
   },
+  deleteDisabled(careerGoal) {
+    return (numReferences(careerGoal) > 0) ? 'disabled' : '';
+  },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
   },
@@ -46,8 +40,8 @@ Template.List_Career_Goals_Widget.helpers({
     return [
       { label: 'Description', value: careerGoal.description },
       { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
-      { label: 'More Information', value: `<a href="${careerGoal.moreInformation}">${careerGoal.moreInformation}</a>` },
-      { label: 'References', value: getReferences(careerGoal._id) },
+      { label: 'More Information', value: makeLink(careerGoal.moreInformation) },
+      { label: 'References', value: `Users: ${numReferences(careerGoal)}` },
     ];
   },
 });
@@ -64,11 +58,6 @@ Template.List_Career_Goals_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const careerGoalID = event.target.value;
-    if (hasReferences(careerGoalID)) {
-      /* global alert */
-      alert('Cannot delete an entity that is referred to by another entity.');
-    } else {
-      CareerGoals.removeIt(careerGoalID);
-    }
+    CareerGoals.removeIt(careerGoalID);
   },
 });

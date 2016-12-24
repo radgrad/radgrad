@@ -7,6 +7,8 @@ import './admin-datamodel-accordion.js';
 import './admin-datamodel-menu.html';
 import './admin-datamodel-menu.js';
 
+import './datamodel-utilities.js';
+
 import './list-career-goals-widget.html';
 import './list-career-goals-widget.js';
 
