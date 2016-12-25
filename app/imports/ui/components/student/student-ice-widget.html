@@ -1,245 +1,262 @@
 <template name="Student_Ice_Widget">
-<div class="ui padded segment">
-  <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
-  <div class="ui equal width grid container">
-    <div class="column">
+  <div class="ui padded segment">
+    <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
+    <div class="ui equal width grid container">
+      <div class="column">
 
 
-      <div class="ui segment">
-        <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
-          <div style="text-align: center; display: block; margin-left:auto; margin-right:auto;"
-               class="c100 p{{projectedICE.i}} lightblue">
-            <span style="color:steelblue;"><b>{{earnedICE.i}}</b></span>
-            <span style="color:lightsteelblue; margin-top:30px;">{{projectedICE.i}}</span>
-            <div class="slice">
-              <div class="bar"></div>
-              <div class="fill"></div>
-            </div>
-          </div>
-          <div
-              style="position:absolute; margin-right:auto; margin-left:auto; background-color:transparent;"
-              class="c100 p{{earnedICE.i}} blue">
-            <span></span>
-            <div class="slice">
-              <div class="bar"></div>
-              <div class="fill"></div>
-            </div>
-
-          </div>
-        </div>
-
-        <h3 style="color: steelblue" class="ui centered header">
-          Innovation
-        </h3>
-
-
-        <div class="ui styled fluid accordion">
-          <div class="active title">
-            <i class="dropdown icon"></i>
-            Achieved ({{earnedICE.i}} points)
-          </div>
-
-          <div class="active content">
-            <p>You have achieved {{earnedICE.i}} Innovation points for the following:</p>
-            <div class="ui list">
-              {{#each event in earnedEventsI}}
-              <div class="item"><b>+{{event.ice.i}}</b>{{#if (isCourse event)}} {{ event.note }} ({{ courseName
-                event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
+        <div class="ui segment">
+          <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
+            <div style="text-align: center; display: block; margin-left:auto; margin-right:auto;"
+                 class="c100 p{{innovationPoints projectedICE}} lightblue">
+              <span style="color:steelblue;"><b>{{innovationPoints earnedICE}}</b></span>
+              <span style="color:lightsteelblue; margin-top:30px;">{{innovationPoints projectedICE}}</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
               </div>
-              {{/each}}
             </div>
-          </div>
-          <div class="title">
-            <i class="dropdown icon"></i>
-            Projected ({{projectedICE.i}} points)
-          </div>
-          <div class="content">
-            <p>You have a total of {{projectedICE.i}} projected Innovation points. The remaining {{remainingICE
-              (earnedICE.i) (projectedICE.i) }} points are for the following:</p>
-            <div class="ui list">
-              {{#each event in projectedEventsI}}
-              <div class="item"><b>+{{event.ice.i}}</b> {{#if (isCourse event)}} {{ event.note }} ({{ courseName
-                event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
+            <div
+                style="position:absolute; margin-right:auto; margin-left:auto; background-color:transparent;"
+                class="c100 p{{innovationPoints earnedICE}} blue">
+              <span></span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
               </div>
-              {{/each}}
+
             </div>
           </div>
-          <div class="title">
-            <i class="dropdown icon"></i>
-            Get to 100
-          </div>
-          <div class="content">
-            <p>Consider the following to complete the full 100 Innovation points.</p>
-            <div class="ui list">
-              {{#each event in recommendedEventsI}}
-              <div class="item"><b>+{{event.ice.i}}</b> {{#if (isCourse event)}} {{ event.note }} ({{ courseName
-                event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
-              </div>
-              {{/each}}
+
+          <h3 style="color: steelblue" class="ui centered header">
+            Innovation
+          </h3>
+
+
+          <div class="ui styled fluid accordion">
+            <div class="active title">
+              <i class="dropdown icon"></i>
+              Achieved ({{innovationPoints earnedICE}} points)
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-
-    <div class="column">
-      <div class="ui segment">
-
-        <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
-          <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.c}} lightgreen">
-            <span style="color:green;"><b>{{earnedICE.c}}</b></span>
-            <span style="color:darkseagreen; margin-top:30px;">{{projectedICE.c}}</span>
-            <div class="slice">
-              <div class="bar"></div>
-              <div class="fill"></div>
-            </div>
-          </div>
-          <div
-              style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto"
-              class="c100 p{{earnedICE.c}} green">
-            <span></span>
-            <div class="slice">
-              <div class="bar"></div>
-              <div class="fill"></div>
-            </div>
-          </div>
-        </div>
-
-        <h3 style="color: green" class="ui centered  header">
-          Competency
-        </h3>
-
-
-        <div class="ui styled fluid accordion">
-          <div class="active title">
-            <i class="dropdown icon"></i>
-            Achieved ({{earnedICE.c}} points)
-          </div>
-          <div class="active content">
-            <p>You have achieved {{earnedICE.c}} Competency points for the following:</p>
-            <div class="ui list">
-              {{#each event in earnedEventsC}}
-              <div class="item"><b>+{{event.ice.c}}</b>{{#if (isCourse event)}} {{ event.note }} ({{ courseName
-                event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
-              </div>
-              {{/each}}
-            </div>
-          </div>
-          <div class="title">
-            <i class="dropdown icon"></i>
-            Projected ({{projectedICE.c}} points)
-          </div>
-          <div class="content">
-            <p>You have a total of {{projectedICE.c}} projected Competency points. The remaining {{remainingICE
-              (earnedICE.c) (projectedICE.c) }} points are for the following:</p>
-            <div class="ui list">
-              {{#each event in projectedEventsC}}
-              <div class="item"><b>+{{event.ice.c}}</b> {{#if (isCourse event)}} {{ event.note }} ({{ courseName
-                event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
-              </div>
-              {{/each}}
-            </div>
-          </div>
-          <div class="title">
-            <i class="dropdown icon"></i>
-            Get to 100
-          </div>
-          <div class="content">
-            <p>Consider the following to complete the full 100 Competency points.</p>
-            <div class="ui list">
-              <a class="item">
-                <div class="content">
-                  <div class="header">Achieve an overall GPA of 3.0+. (Fall 2016)</div>
-                  <div class="description"><b>+5</b> Competency points</div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="column">
-
-      <div class="ui segment">
-
-        <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
-          <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.e}} lightorange">
-            <span style="color:goldenrod"><b>{{earnedICE.e}}</b></span>
-            <span style="color:tan; margin-top:30px;">{{projectedICE.e}}</span>
-            <div class="slice">
-              <div class="bar"></div>
-              <div class="fill"></div>
-            </div>
-          </div>
-          <div
-              style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto"
-              class="c100 p{{earnedICE.e}} orange">
-            <span></span>
-            <div class="slice">
-              <div class="bar"></div>
-              <div class="fill"></div>
-            </div>
-          </div>
-        </div>
-
-        <h3 style="color:goldenrod" class="ui centered header">
-          Experience
-        </h3>
-
-
-        <div class="ui styled fluid accordion">
-          <div class="active title">
-            <i class="dropdown icon"></i>
-            Achieved ({{earnedICE.e}} points)
-          </div>
-          <div class="active content">
-            <p>You have achieved {{earnedICE.e}} Experience points for the following:</p>
-            <div class="ui list">
-              {{#each event in earnedEventsE}}
-              <div class="item"><b>+{{event.ice.e}}</b>{{#if (isCourse event)}} {{ event.note }} ({{ courseName
-                event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
-              </div>
-              {{/each}}
-            </div>
-          </div>
-          <div class="title">
-            <i class="dropdown icon"></i>
-            Projected ({{projectedICE.e}} points)
-          </div>
-          <div class="content">
-            <p>You have a total of {{projectedICE.e}} projected Experience points. The remaining {{remainingICE
-              (earnedICE.e) (projectedICE.e) }} points are for the following:</p>
-            <div class="ui list">
-              {{#each event in projectedEventsE}}
-              <div class="item"><b>+{{event.ice.e}}</b> {{#if (isCourse event)}} {{ event.note }} ({{ courseName
-                event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
-              </div>
-              {{/each}}
-            </div>
-          </div>
-          <div class="title">
-            <i class="dropdown icon"></i>
-            Get to 100
-          </div>
-          <div class="content">
-            <p>Consider the following to complete the full 100 Experience points.</p>
-            <div class="ui list">
-              <a class="item">
-                <div class="content">
-                  <div class="header">Participate in the monk seal tracker app development internship with Cam
-                    Moore. (Spring 2017)
+            <div class="active content">
+              <p>You have achieved {{innovationPoints earnedICE}} Innovation points for the following:</p>
+              <div class="ui list">
+                {{#each event in earnedEventsI}}
+                  <div class="item"><b>+{{event.ice.i}}</b>{{#if (isCourse event)}} {{ courseName event }}
+                    ({{ courseName
+                    event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
                   </div>
-                  <div class="description"><b>+25</b> Experience points</div>
-                </div>
-              </a>
+                {{/each}}
+              </div>
+            </div>
+            <div class="title">
+              <i class="dropdown icon"></i>
+              Projected ({{innovationPoints projectedICE}} points)
+            </div>
+            <div class="content">
+              <p>You have a total of {{innovationPoints projectedICE}} projected Innovation points. The
+                remaining {{remainingICE
+                (innovationPoints earnedICE) (innovationPoints projectedICE) }} points are for the following:</p>
+              <div class="ui list">
+                {{#each event in projectedEventsI}}
+                  <div class="item">
+                    <b>+{{innovationPoints (eventIce event)}}</b> {{#if (isCourse event)}} {{ courseName event }}
+                    ({{ courseName
+                    event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+            <div class="title">
+              <i class="dropdown icon"></i>
+              Get to 100
+            </div>
+            <div class="content">
+              <p>Consider the following to complete the full 100 Innovation points.</p>
+              <div class="ui list">
+                {{#each event in recommendedEventsI}}
+                  <div class="item">
+                    <b>+{{innovationPoints (eventIce event)}}</b>
+                    {{#if (isCourse event)}} {{ courseName event }}
+                      ({{ courseName event }})
+                    {{ else }}
+                      {{ opportunityName event }} ({{opportunitySem event}})
+                    {{/if}}
+                  </div>
+                {{/each}}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
+
+      <div class="column">
+        <div class="ui segment">
+
+          <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
+            <div style="margin-left:auto; margin-right:auto" class="c100 p{{competencyPoints projectedICE}} lightgreen">
+              <span style="color:green;"><b>{{competencyPoints earnedICE}}</b></span>
+              <span style="color:darkseagreen; margin-top:30px;">{{competencyPoints projectedICE}}</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div
+                style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto"
+                class="c100 p{{competencyPoints earnedICE}} green">
+              <span></span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="color: green" class="ui centered  header">
+            Competency
+          </h3>
+
+
+          <div class="ui styled fluid accordion">
+            <div class="active title">
+              <i class="dropdown icon"></i>
+              Achieved ({{competencyPoints earnedICE}} points)
+            </div>
+            <div class="active content">
+              <p>You have achieved {{competencyPoints earnedICE}} Competency points for the following:</p>
+              <div class="ui list">
+                {{#each event in earnedEventsC}}
+                  <div class="item">
+                    <b>+{{competencyPoints (eventIce event)}}</b>
+                      {{ courseName event }}
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+            <div class="title">
+              <i class="dropdown icon"></i>
+              Projected ({{competencyPoints projectedICE}} points)
+            </div>
+            <div class="content">
+              <p>You have a total of {{competencyPoints projectedICE}} projected Competency points. The
+                remaining {{remainingICE
+                (competencyPoints earnedICE) (competencyPoints projectedICE) }} points are for the following:</p>
+              <div class="ui list">
+                {{#each event in projectedEventsC}}
+                  <div class="item">
+                    <b>+{{competencyPoints (eventIce event)}}</b>
+                    {{ courseName event }}
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+            <div class="title">
+              <i class="dropdown icon"></i>
+              Get to 100
+            </div>
+            <div class="content">
+              <p>Consider the following to complete the full 100 Competency points.</p>
+              <div class="ui list">
+                <a class="item">
+                  <div class="content">
+                    <div class="header">Achieve an overall GPA of 3.0+. (Fall 2016)</div>
+                    <div class="description"><b>+5</b> Competency points</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+
+        <div class="ui segment">
+
+          <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
+            <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.e}} lightorange">
+              <span style="color:goldenrod"><b>{{experiencePoints earnedICE}}</b></span>
+              <span style="color:tan; margin-top:30px;">{{experiencePoints projectedICE}}</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div
+                style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto"
+                class="c100 p{{experiencePoints earnedICE}} orange">
+              <span></span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="color:goldenrod" class="ui centered header">
+            Experience
+          </h3>
+
+
+          <div class="ui styled fluid accordion">
+            <div class="active title">
+              <i class="dropdown icon"></i>
+              Achieved ({{experiencePoints earnedICE}} points)
+            </div>
+            <div class="active content">
+              <p>You have achieved {{experiencePoints earnedICE}} Experience points for the following:</p>
+              <div class="ui list">
+                {{#each event in earnedEventsE}}
+                  <div class="item">
+                    <b>+{{experiencePoints (eventIce event)}}</b>{{#if (isCourse event)}} {{ courseName event }}
+                    ({{ courseName
+                    event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+            <div class="title">
+              <i class="dropdown icon"></i>
+              Projected ({{experiencePoints projectedICE}} points)
+            </div>
+            <div class="content">
+              <p>You have a total of {{experiencePoints projectedICE}} projected Experience points. The
+                remaining {{remainingICE
+                (experiencePoints earnedICE) (experiencePoints projectedICE) }} points are for the following:</p>
+              <div class="ui list">
+                {{#each event in projectedEventsE}}
+                  <div class="item">
+                    <b>+{{experiencePoints (eventIce event)}}</b> {{#if (isCourse event)}} {{ courseName event }}
+                    ({{ courseName
+                    event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+            <div class="title">
+              <i class="dropdown icon"></i>
+              Get to 100
+            </div>
+            <div class="content">
+              <p>Consider the following to complete the full 100 Experience points.</p>
+              <div class="ui list">
+                <a class="item">
+                  <div class="content">
+                    <div class="header">Participate in the monk seal tracker app development internship with Cam
+                      Moore. (Spring 2017)
+                    </div>
+                    <div class="description"><b>+25</b> Experience points</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
-  </template>
+</template>

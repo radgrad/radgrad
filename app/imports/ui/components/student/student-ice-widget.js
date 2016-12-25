@@ -50,6 +50,15 @@ Template.Student_Ice_Widget.helpers({
   remainingICE(earned, projected) {
     return projected - earned;
   },
+  innovationPoints(ice) {
+    return ice.i;
+  },
+  competencyPoints(ice) {
+    return ice.c;
+  },
+  experiencePoints(ice) {
+    return ice.e;
+  },
   earnedEventsI() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -57,15 +66,15 @@ Template.Student_Ice_Widget.helpers({
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
       courseInstances.forEach((courseInstance) => {
         if (courseInstance.ice.i > 0) {
-        earnedInstances.push(courseInstance);
-      }
-    });
+          earnedInstances.push(courseInstance);
+        }
+      });
       const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
       oppInstances.forEach((oppInstance) => {
         if (oppInstance.ice.i > 0) {
-        earnedInstances.push(oppInstance);
-      }
-    });
+          earnedInstances.push(oppInstance);
+        }
+      });
 
       return earnedInstances;
     }
@@ -78,15 +87,15 @@ Template.Student_Ice_Widget.helpers({
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
       courseInstances.forEach((courseInstance) => {
         if (courseInstance.ice.c > 0) {
-        earnedInstances.push(courseInstance);
-      }
-    });
+          earnedInstances.push(courseInstance);
+        }
+      });
       const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
       oppInstances.forEach((oppInstance) => {
         if (oppInstance.ice.c > 0) {
-        earnedInstances.push(oppInstance);
-      }
-    });
+          earnedInstances.push(oppInstance);
+        }
+      });
 
       return earnedInstances;
     }
@@ -99,15 +108,15 @@ Template.Student_Ice_Widget.helpers({
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
       courseInstances.forEach((courseInstance) => {
         if (courseInstance.ice.e > 0) {
-        earnedInstances.push(courseInstance);
-      }
-    });
+          earnedInstances.push(courseInstance);
+        }
+      });
       const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
       oppInstances.forEach((oppInstance) => {
         if (oppInstance.ice.e > 0) {
-        earnedInstances.push(oppInstance);
-      }
-    });
+          earnedInstances.push(oppInstance);
+        }
+      });
 
       return earnedInstances;
     }
@@ -120,15 +129,15 @@ Template.Student_Ice_Widget.helpers({
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
       courseInstances.forEach((courseInstance) => {
         if (courseInstance.ice.i > 0) {
-        plannedInstances.push(courseInstance);
-      }
-    });
+          plannedInstances.push(courseInstance);
+        }
+      });
       const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: false }).fetch();
       oppInstances.forEach((oppInstance) => {
         if (oppInstance.ice.i > 0) {
-        plannedInstances.push(oppInstance);
-      }
-    });
+          plannedInstances.push(oppInstance);
+        }
+      });
       return plannedInstances;
     }
     return null;
@@ -140,15 +149,15 @@ Template.Student_Ice_Widget.helpers({
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
       courseInstances.forEach((courseInstance) => {
         if (courseInstance.ice.c > 0) {
-        plannedInstances.push(courseInstance);
-      }
-    });
+          plannedInstances.push(courseInstance);
+        }
+      });
       const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: false }).fetch();
       oppInstances.forEach((oppInstance) => {
         if (oppInstance.ice.c > 0) {
-        plannedInstances.push(oppInstance);
-      }
-    });
+          plannedInstances.push(oppInstance);
+        }
+      });
       return plannedInstances;
     }
     return null;
@@ -160,15 +169,15 @@ Template.Student_Ice_Widget.helpers({
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
       courseInstances.forEach((courseInstance) => {
         if (courseInstance.ice.e > 0) {
-        plannedInstances.push(courseInstance);
-      }
-    });
+          plannedInstances.push(courseInstance);
+        }
+      });
       const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: false }).fetch();
       oppInstances.forEach((oppInstance) => {
         if (oppInstance.ice.e > 0) {
-        plannedInstances.push(oppInstance);
-      }
-    });
+          plannedInstances.push(oppInstance);
+        }
+      });
       return plannedInstances;
     }
     return null;
@@ -181,9 +190,9 @@ Template.Student_Ice_Widget.helpers({
 
       allCourses.forEach((courseInstance) => {
         if (CourseInstances.isICS(courseInstance._id)) {
-        allEvents.push(courseInstance);
-      }
-    });
+          allEvents.push(courseInstance);
+        }
+      });
       return allEvents;
     }
     return null;
@@ -203,7 +212,10 @@ Template.Student_Ice_Widget.helpers({
     return `${oppTerm} ${oppYear}`;
   },
   isCourse(c) {
-    return (c.opportunityID === null && c.sponsorID === null);
+    return (c.opportunityID === null);
+  },
+  eventIce(event) {
+    return event.ice;
   },
 });
 
@@ -218,16 +230,16 @@ Template.Student_Ice_Widget.onCreated(function studentIceOnCreated() {
   }
   this.autorun(() => {
     this.subscribe(AcademicYearInstances.getPublicationName());
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(VerificationRequests.getPublicationName());
-});
+    this.subscribe(CareerGoals.getPublicationName());
+    this.subscribe(Courses.getPublicationName());
+    this.subscribe(CourseInstances.getPublicationName());
+    this.subscribe(Interests.getPublicationName());
+    this.subscribe(Opportunities.getPublicationName());
+    this.subscribe(OpportunityInstances.getPublicationName());
+    this.subscribe(Semesters.getPublicationName());
+    this.subscribe(Users.getPublicationName());
+    this.subscribe(VerificationRequests.getPublicationName());
+  });
 });
 
 Template.Student_Ice_Widget.onDestroyed(function studentIceOnDestroyed() {
