@@ -22,9 +22,10 @@ Template.If_Authorized.helpers({
    * Determine if the user is authorized to view the current page.
    * If current page is the landing page, they are authorized.
    * If current user is an admin, they can see any page.
-   * If current user is an advisor, they can see any student, mentor, and advisor pages.
+   * If current user is an advisor, they can see any student, alumni, or advisor page.
    * If current user is a student, they can see only their own page (student/<username>/).
    * If current user is a mentor, they can see only their own page (mentor/<username>).
+   * If current user is an alumni, they can see only their own page (alumni/<username>).
    * @returns {boolean} True if there is a logged in user and they are authorized to visit the page.
    */
   isAuthorized: function isAuthorized() {
@@ -63,15 +64,16 @@ Template.If_Authorized.helpers({
       return true;
     }
 
-    // 6. Allow advisors to see any student, mentor, or advisor page.
-    if (userRole === ROLE.ADVISOR && (pathRole !== 'admin')) {
+    // 6. Allow advisors to see any student, alumni, or advisor page.
+    if (userRole === ROLE.ADVISOR && (pathRole === 'student' || pathRole === 'alumni' || pathRole === 'advisor')) {
       // console.log('isAuthorized', 'advisor');
       return true;
     }
 
-    // 7. Allow mentors and students to only see their own page.
-    if (((pathRole === 'student') || (pathRole === 'mentor' || pathRole === 'faculty')) && (pathUserName === userName)) {
-      // console.log('isAuthorized', 'student or mentor or faculty');
+    // 7. Allow alumni, faculty, mentors, students to only see their own page.
+    if ((pathRole === 'alumni' || pathRole === 'faculty' || pathRole === 'mentor' || pathRole === 'student')
+        && (pathUserName === userName) && (pathRole === userRole.toLowerCase())) {
+      // console.log('isAuthorized', 'alumni, faculty, mentor, student');
       return true;
     }
 

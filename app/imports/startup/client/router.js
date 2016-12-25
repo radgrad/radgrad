@@ -33,7 +33,7 @@ export const adminHomePageRouteName = 'Admin_Home_Page';
 adminRoutes.route('/home', {
   name: adminHomePageRouteName,
   action() {
-    BlazeLayout.render('Admin_Layout', { main: 'Admin_Home_Page' });
+    BlazeLayout.render('Admin_Layout', { main: adminHomePageRouteName });
   },
 });
 
@@ -41,7 +41,7 @@ export const adminDataModelPageRouteName = 'Admin_DataModel_Page';
 adminRoutes.route('/datamodel', {
   name: adminDataModelPageRouteName,
   action() {
-    BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_Page' });
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelPageRouteName });
   },
 });
 
@@ -49,7 +49,15 @@ export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoa
 adminRoutes.route('/datamodel/career-goals', {
   name: adminDataModelCareerGoalsPageRouteName,
   action() {
-    BlazeLayout.render('Admin_Layout', { main: 'Admin_DataModel_CareerGoals_Page' });
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelCareerGoalsPageRouteName });
+  },
+});
+
+export const adminDataModelCoursesPageRouteName = 'Admin_DataModel_Courses_Page';
+adminRoutes.route('/datamodel/courses', {
+  name: adminDataModelCoursesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelCoursesPageRouteName });
   },
 });
 
@@ -138,7 +146,7 @@ export const mentorHomePageRouteName = 'Mentor_Home_Page';
 mentorRoutes.route('/home', {
   name: mentorHomePageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: 'Mentor_Home_Page' });
+    BlazeLayout.render('Mentor_Layout', { main: mentorHomePageRouteName });
   },
 });
 
@@ -156,7 +164,7 @@ export const studentHomePageRouteName = 'Student_Home_Page';
 studentRoutes.route('/home', {
   name: studentHomePageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Home_Page' });
+    BlazeLayout.render('Student_Layout', { main: studentHomePageRouteName });
   },
 });
 
@@ -164,7 +172,7 @@ export const studentHomePageAboutMeRouteName = 'Student_AboutMe';
 studentRoutes.route('/home/aboutme', {
   name: studentHomePageAboutMeRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_AboutMe' });
+    BlazeLayout.render('Student_Layout', { main: studentHomePageAboutMeRouteName });
   },
 });
 
@@ -172,7 +180,7 @@ export const studentHomePageLevelsRouteName = 'Student_Levels';
 studentRoutes.route('/home/levels', {
   name: studentHomePageLevelsRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Levels' });
+    BlazeLayout.render('Student_Layout', { main: studentHomePageLevelsRouteName });
   },
 });
 
@@ -180,7 +188,7 @@ export const studentHomePageIceRouteName = 'Student_Ice';
 studentRoutes.route('/home/ice', {
   name: studentHomePageIceRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Ice' });
+    BlazeLayout.render('Student_Layout', { main: studentHomePageIceRouteName });
   },
 });
 
@@ -188,7 +196,7 @@ export const studentHomePageAboutIceRouteName = 'Student_About_Ice';
 studentRoutes.route('/home/about-ice', {
   name: studentHomePageAboutIceRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_About_Ice' });
+    BlazeLayout.render('Student_Layout', { main: studentHomePageAboutIceRouteName });
   },
 });
 
@@ -196,7 +204,7 @@ export const studentHomePageAboutLevelsRouteName = 'Student_About_Levels';
 studentRoutes.route('/home/about-levels', {
   name: studentHomePageAboutLevelsRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_About_Levels' });
+    BlazeLayout.render('Student_Layout', { main: studentHomePageAboutLevelsRouteName });
   },
 });
 
@@ -204,7 +212,7 @@ export const studentDegreePlannerPageRouteName = 'Student_Degree_Planner_Page';
 studentRoutes.route('/degree-planner', {
   name: studentDegreePlannerPageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Degree_Planner_Page' });
+    BlazeLayout.render('Student_Layout', { main: studentDegreePlannerPageRouteName });
   },
 });
 
@@ -212,7 +220,7 @@ export const studentMentorSpacePageRouteName = 'Student_MentorSpace_Page';
 studentRoutes.route('/mentor-space', {
   name: studentMentorSpacePageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_MentorSpace_Page' });
+    BlazeLayout.render('Student_Layout', { main: studentMentorSpacePageRouteName });
   },
 });
 
@@ -220,7 +228,7 @@ export const studentExplorerPageRouteName = 'Student_Explorer_Page';
 studentRoutes.route('/explorer', {
   name: studentExplorerPageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Explorer_Page' });
+    BlazeLayout.render('Student_Layout', { main: studentExplorerPageRouteName });
   },
 });
 
@@ -228,7 +236,7 @@ export const studentExplorerDegreePageRouteName = 'Student_Explorer_Degree_Page'
 studentRoutes.route('/explorer/degree', {
   name: studentExplorerDegreePageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Explorer_Degree_Page' });
+    BlazeLayout.render('Student_Layout', { main: studentExplorerDegreePageRouteName });
   },
 });
 
@@ -236,7 +244,7 @@ export const studentExplorerCoursePageRouteName = 'Student_Explorer_Course_Page'
 studentRoutes.route('/explorer/course', {
   name: studentExplorerCoursePageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Explorer_Course_Page' });
+    BlazeLayout.render('Student_Layout', { main: studentExplorerCoursePageRouteName });
   },
 });
 
@@ -244,7 +252,7 @@ export const studentExplorerInterestPageRouteName = 'Student_Explorer_Interest_P
 studentRoutes.route('/explorer/interest', {
   name: studentExplorerInterestPageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Explorer_Interest_Page' });
+    BlazeLayout.render('Student_Layout', { main: studentExplorerInterestPageRouteName });
   },
 });
 
@@ -252,7 +260,7 @@ export const studentExplorerOpportunityPageRouteName = 'Student_Explorer_Opportu
 studentRoutes.route('/explorer/opportunity', {
   name: studentExplorerOpportunityPageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Explorer_Opportunity_Page' });
+    BlazeLayout.render('Student_Layout', { main: studentExplorerOpportunityPageRouteName });
   },
 });
 
@@ -260,7 +268,7 @@ export const studentExplorerCareerPageRouteName = 'Student_Explorer_Career_Page'
 studentRoutes.route('/explorer/career', {
   name: studentExplorerCareerPageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Student_Explorer_Career_Page' });
+    BlazeLayout.render('Student_Layout', { main: studentExplorerCareerPageRouteName });
   },
 });
 
@@ -268,7 +276,7 @@ export const studentExplorerInterestAlgorithmsPageRouteName = 'Algorithms';
 studentRoutes.route('/explorer/interest/algorithms', {
   name: studentExplorerInterestAlgorithmsPageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Algorithms' });
+    BlazeLayout.render('Student_Layout', { main: studentExplorerInterestAlgorithmsPageRouteName });
   },
 });
 

@@ -107,7 +107,7 @@ class OpportunityCollection extends BaseInstanceCollection {
    */
   getOpportunityTypeDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this._collection.findOne({ _id: instanceID });
     return OpportunityTypes.findDoc(instance.opportunityTypeID);
   }
 

@@ -1,10 +1,15 @@
 import './advisor-log-viewer.html';
 import './advisor-log-viewer.js';
 
+import './form-error-message.html';
+
 import './get-user-id-from-route';
 
-import './help-panel.html';
-import './help-panel.js';
+import './help-panel-widget.html';
+import './help-panel-widget.js';
+
+import './retrieve-student-widget.html';
+import './retrieve-student-widget.js';
 
 import './route-user-name.js';
 
