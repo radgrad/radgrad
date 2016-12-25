@@ -352,6 +352,8 @@ Template.Semester_List.events({
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;
     CourseInstances.clientUpdateGrade(div.id, grade);
+    // console.log(CourseInstances.findDoc(div.id).grade);
+    // Tracker.flush();
   },
 });
 
