@@ -9,17 +9,14 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 import { getRouteUserName } from '../shared/route-user-name';
 
 Template.Student_Opportunities_Of_Interest_Widget.onCreated(function appBodyOnCreated() {
-  this.autorun(() => {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(VerificationRequests.getPublicationName());
-
-});
 });
 
-function matchingOpportunities(){
+function matchingOpportunities() {
   const allOpportunities = Opportunities.find().fetch();
   const matching = [];
   const user = Users.findDoc({ username: getRouteUserName() });
@@ -27,22 +24,22 @@ function matchingOpportunities(){
   let opportunityInterests = [];
   _.map(user.interestIDs, (id) => {
     userInterests.push(Interests.findDoc(id));
-});
+  });
   _.map(allOpportunities, (opp) => {
     opportunityInterests = [];
-  _.map(opp.interestIDs, (id) => {
-    opportunityInterests.push(Interests.findDoc(id));
-  _.map(opportunityInterests, (oppInterest) => {
-    _.map(userInterests, (userInterest) => {
-    if (_.isEqual(oppInterest, userInterest)) {
-    if (!_.includes(matching, opp)) {
-      matching.push(opp);
-    }
-  }
-});
-});
-});
-});
+    _.map(opp.interestIDs, (id) => {
+      opportunityInterests.push(Interests.findDoc(id));
+      _.map(opportunityInterests, (oppInterest) => {
+        _.map(userInterests, (userInterest) => {
+          if (_.isEqual(oppInterest, userInterest)) {
+            if (!_.includes(matching, opp)) {
+              matching.push(opp);
+            }
+          }
+        });
+      });
+    });
+  });
   return matching;
 }
 
@@ -56,7 +53,7 @@ Template.Student_Opportunities_Of_Interest_Widget.helpers({
       const opportunity = opp;
       _.map(opportunity.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
-    });
+      });
     }
     return ret;
   },
@@ -66,7 +63,7 @@ Template.Student_Opportunities_Of_Interest_Widget.helpers({
       const user = Users.findDoc({ username: getRouteUserName() });
       _.map(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
-    });
+      });
     }
     return ret;
   },

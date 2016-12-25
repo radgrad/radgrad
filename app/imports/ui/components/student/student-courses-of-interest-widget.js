@@ -24,22 +24,22 @@ function matchingCourses() {
   let courseInterests = [];
   _.map(user.interestIDs, (id) => {
     userInterests.push(Interests.findDoc(id));
-});
+  });
   _.map(allCourses, (course) => {
     courseInterests = [];
-  _.map(course.interestIDs, (id) => {
-    courseInterests.push(Interests.findDoc(id));
-  _.map(courseInterests, (courseInterest) => {
-    _.map(userInterests, (userInterest) => {
-    if (_.isEqual(courseInterest, userInterest)) {
-    if (!_.includes(matching, course)) {
-      matching.push(course);
-    }
-  }
-});
-});
-});
-});
+    _.map(course.interestIDs, (id) => {
+      courseInterests.push(Interests.findDoc(id));
+      _.map(courseInterests, (courseInterest) => {
+        _.map(userInterests, (userInterest) => {
+          if (_.isEqual(courseInterest, userInterest)) {
+            if (!_.includes(matching, course)) {
+              matching.push(course);
+            }
+          }
+        });
+      });
+    });
+  });
   return matching;
 }
 

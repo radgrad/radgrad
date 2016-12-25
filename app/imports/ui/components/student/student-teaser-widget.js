@@ -10,7 +10,7 @@ Template.Student_Teaser_Widget.onCreated(function appBodyOnCreated() {
   this.subscribe(Interests.getPublicationName());
 });
 
-function matchingTeasers(){
+function matchingTeasers() {
   const allTeasers = Teasers.find().fetch();
   const matching = [];
   const user = Users.findDoc({ username: getRouteUserName() });
@@ -18,22 +18,22 @@ function matchingTeasers(){
   let teaserInterests = [];
   _.map(user.interestIDs, (id) => {
     userInterests.push(Interests.findDoc(id));
-});
+  });
   _.map(allTeasers, (teaser) => {
     teaserInterests = [];
-  _.map(teaser.interestIDs, (id) => {
-    teaserInterests.push(Interests.findDoc(id));
-  _.map(teaserInterests, (teaserInterest) => {
-    _.map(userInterests, (userInterest) => {
-    if (_.isEqual(teaserInterest, userInterest)) {
-    if (!_.includes(matching, teaser)) {
-      matching.push(teaser);
-    }
-  }
-});
-});
-});
-});
+    _.map(teaser.interestIDs, (id) => {
+      teaserInterests.push(Interests.findDoc(id));
+      _.map(teaserInterests, (teaserInterest) => {
+        _.map(userInterests, (userInterest) => {
+          if (_.isEqual(teaserInterest, userInterest)) {
+            if (!_.includes(matching, teaser)) {
+              matching.push(teaser);
+            }
+          }
+        });
+      });
+    });
+  });
   return matching;
 }
 
@@ -66,10 +66,10 @@ Template.Student_Teaser_Widget.helpers({
     const teaserInterests = [];
     _.map(teaser.interestIDs, (id) => {
       teaserInterests.push(Interests.findDoc(id));
-  });
+    });
     _.map(user.interestIDs, (id) => {
       userInterests.push(Interests.findDoc(id));
-  });
+    });
     _.map(teaserInterests, (teaserInterest) => {
       _.map(userInterests, (userInterest) => {
         if (_.isEqual(teaserInterest, userInterest)) {

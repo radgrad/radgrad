@@ -45,7 +45,7 @@ Template.Student_Home_Page.helpers({
     return Opportunities.find().fetch();
   },
   activateSemanticUiJavascript() {
-    $('.ui .embed').embed();
+    this.$('.ui .embed').embed();
   },
 });
 

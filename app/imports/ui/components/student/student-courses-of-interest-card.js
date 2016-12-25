@@ -2,13 +2,11 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Courses } from '../../../api/course/CourseCollection.js';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 
 
 Template.Student_Courses_Of_Interest_Card.onCreated(function appBodyOnCreated() {
@@ -69,8 +67,8 @@ Template.Student_Courses_Of_Interest_Card.helpers({
 });
 
 Template.Student_Courses_Of_Interest_Card.events({
-  'click .addToPlan': function clickItemAddToPlan(event) {
-    //to be implemented when semesters are associated with courses
+  'click .addToPlan': function clickItemAddToPlan() {
+    // to be implemented when semesters are associated with courses
   },
 });
 
