@@ -211,7 +211,7 @@ class CourseInstanceCollection extends BaseCollection {
     logger.info('after ice');
     this._collection.update({ _id: courseInstanceID }, { $set: { grade, ice, verified: false } });
     logger.info('after _collection update');
-    console.log('after _collection update');
+    console.log(new Date(), 'after _collection update');
   }
 
   /**

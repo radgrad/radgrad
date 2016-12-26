@@ -206,7 +206,8 @@ Template.Inspector.helpers({
     return null;
   },
   courseIce() {
-    if (Template.instance().state.get('detailCourseID')) {
+    if (Template.instance().state.get('detailCourseID') || Template.instance().state.get('grade')) {
+      console.log(new Date(), 'courseIce');
       const id = Template.instance().state.get('detailCourseID');
       if (CourseInstances.isDefined(id)) {
         const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
@@ -219,6 +220,9 @@ Template.Inspector.helpers({
       const course = Courses.findDoc(id);
       const slug = Slugs.findDoc(course.slugID);
       const ice = makeCourseICE(slug.name, '***');
+      if (Template.instance().state.get('grade')) {
+        Template.instance().state.set('grade', false);
+      }
       return ice;
     }
     return null;
