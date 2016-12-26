@@ -1,0 +1,76 @@
+<template name="Add_Course_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD COURSE</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        <div class="required field">
+          <label>Name</label>
+          <input type="text" name="name" placeholder="Introduction to the art of computer programming">
+          {{> Form_Error_Message errorMessage=(fieldError 'name')}}
+        </div>
+        <div class="required field">
+          <label>Slug</label>
+          <input type="text" name="slug" placeholder="ics234">
+          {{> Form_Error_Message errorMessage=(fieldError 'slug')}}
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <label>Short Name</label>
+          <input type="text" name="shortName" placeholder="Optional (defaults to Name)">
+          {{> Form_Error_Message errorMessage=(fieldError 'shortName')}}
+        </div>
+        <div class="required field">
+          <label>Number</label>
+          <input type="text" name="number" placeholder="ICS 234">
+          {{> Form_Error_Message errorMessage=(fieldError 'number')}}
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <label>Credit Hours</label>
+          <input type="text" name="creditHrs" placeholder="Optional (defaults to 3, must be between 1-15)">
+          {{> Form_Error_Message errorMessage=(fieldError 'creditHrs')}}
+        </div>
+        <div class="field">
+          <label>Syllabus</label>
+          <input type="text" name="syllabus" placeholder="Optional (http://courses.ics.hawaii.edu/syllabuses/ICS234.html)">
+          {{> Form_Error_Message errorMessage=(fieldError 'syllabus')}}
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="required field">
+          <label>Interest(s)</label>
+          <select multiple="" class="ui dropdown" name="interests">
+            <option value="">Select Interest(s)</option>
+            {{#each interest in interests}}
+              <option value="{{interest._id}}">{{interest.name}}</option>
+            {{/each}}
+          </select>
+          {{> Form_Error_Message errorMessage=(fieldError 'interests')}}
+        </div>
+        <div class="field">
+          <label>More Information</label>
+          <input type="text" name="moreInformation" placeholder="Optional (http://courses.ics.hawaii.edu/ReviewICS234/)">
+          {{> Form_Error_Message errorMessage=(fieldError 'moreInformation')}}
+        </div>
+      </div>
+
+      <div class="required field">
+        <label>Description</label>
+        <textarea rows="5" name="description" placeholder="Describe the course here"></textarea>
+        {{> Form_Error_Message errorMessage=(fieldError 'description')}}
+      </div>
+      <button class="ui green basic button" type="submit">Add</button>
+      <div class="ui success message">
+        The course was added.
+      </div>
+    </form>
+  </div>
+
+</template>

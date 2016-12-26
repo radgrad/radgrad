@@ -1,6 +1,9 @@
 import './add-career-goal-widget.html';
 import './add-career-goal-widget.js';
 
+import './add-course-widget.html';
+import './add-course-widget.js';
+
 import './admin-datamodel-accordion.html';
 import './admin-datamodel-accordion.js';
 
