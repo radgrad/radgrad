@@ -23,3 +23,6 @@ import './retrieve-user-widget.js';
 
 import './update-career-goal-widget.html';
 import './update-career-goal-widget.js';
+
+import './update-course-widget.html';
+import './update-course-widget.js';

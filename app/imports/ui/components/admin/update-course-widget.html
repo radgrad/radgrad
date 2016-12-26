@@ -1,37 +1,39 @@
-<template name="Add_Course_Widget">
+<template name="Update_Course_Widget">
 
   <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>ADD COURSE</h4></div>
+    <div class="ui dividing header"><h4>UPDATE COURSE ({{course.name}})</h4></div>
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
         <div class="required field">
           <label>Name</label>
-          <input type="text" name="name" placeholder="Introduction to the art of computer programming">
+          <input type="text" name="name" value="{{course.name}}">
           {{> Form_Error_Message errorMessage=(fieldError 'name')}}
         </div>
         <div class="field">
           <label>Short Name</label>
-          <input type="text" name="shortName" placeholder="Optional (defaults to Name)">
+          <input type="text" name="shortName" value="{{course.shortName}}">
           {{> Form_Error_Message errorMessage=(fieldError 'shortName')}}
         </div>
 
       </div>
 
       <div class="fields">
-        <div class="required field">
+        <div class="field">
           <label>Slug</label>
-          <input type="text" name="slug" placeholder="ics234">
+          <div class="ui disabled input">
+            <input type="text" name="slug" value="{{slug}}">
+          </div>
           {{> Form_Error_Message errorMessage=(fieldError 'slug')}}
         </div>
         <div class="required field">
           <label>Number</label>
-          <input type="text" name="number" placeholder="ICS 234">
+          <input type="text" name="number" value="{{course.number}}">
           {{> Form_Error_Message errorMessage=(fieldError 'number')}}
         </div>
         <div class="field">
           <label>Credit Hours</label>
-          <input type="text" name="creditHrs" placeholder="Optional (defaults to 3, must be between 1-15)">
+          <input type="text" name="creditHrs" value="{{course.creditHrs}}">
           {{> Form_Error_Message errorMessage=(fieldError 'creditHrs')}}
         </div>
       </div>
@@ -39,12 +41,12 @@
       <div class="fields">
         <div class="field">
           <label>Syllabus</label>
-          <input type="text" name="syllabus" placeholder="Optional (http://courses.ics.hawaii.edu/syllabuses/ICS234.html)">
+          <input type="text" name="syllabus" value="{{course.syllabus}}">
           {{> Form_Error_Message errorMessage=(fieldError 'syllabus')}}
         </div>
         <div class="field">
           <label>More Information</label>
-          <input type="text" name="moreInformation" placeholder="Optional (http://courses.ics.hawaii.edu/ReviewICS234/)">
+          <input type="text" name="moreInformation" value="{{course.moreInformation}}">
           {{> Form_Error_Message errorMessage=(fieldError 'moreInformation')}}
         </div>
       </div>
@@ -55,7 +57,7 @@
           <select multiple="" class="ui dropdown" name="interests">
             <option value="">Select Interest(s)</option>
             {{#each interest in interests}}
-              <option value="{{interest._id}}">{{interest.name}}</option>
+              <option value="{{interest._id}}" selected="{{interestSelected interest}}">{{interest.name}}</option>
             {{/each}}
           </select>
           {{> Form_Error_Message errorMessage=(fieldError 'interests')}}
@@ -64,9 +66,9 @@
         <div class="field">
           <label>Prerequisite(s)</label>
           <select multiple="" class="ui dropdown" name="prerequisites">
-            <option value="">Select Course(s)</option>
-            {{#each course in courses}}
-              <option value="{{course._id}}">{{course.number}}</option>
+            <option value="">Select Prerequisite(s)</option>
+            {{#each prereq in prerequisites}}
+              <option value="{{prereq._id}}" selected="{{prerequisiteSelected prereq}}">{{prereq.number}}</option>
             {{/each}}
           </select>
           {{> Form_Error_Message errorMessage=(fieldError 'prerequisites')}}
@@ -76,12 +78,13 @@
 
       <div class="required field">
         <label>Description</label>
-        <textarea rows="5" name="description" placeholder="Describe the course here"></textarea>
+        <textarea rows="5" name="description" value="{{course.description}}"></textarea>
         {{> Form_Error_Message errorMessage=(fieldError 'description')}}
       </div>
-      <button class="ui green basic button" type="submit">Add</button>
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
       <div class="ui success message">
-        The course was added.
+        The course was updated.
       </div>
     </form>
   </div>

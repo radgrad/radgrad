@@ -6,43 +6,39 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-Template.Add_Course_Widget.onRendered(function addCareerGoalWidgetOnRendered() {
-  this.$('.dropdown').dropdown({});
-});
-
-/**
- * Custom validator for the slug field.
- * @returns True if the slug value is not previously defined, otherwise errorType 'duplicateSlug'.
- */
-function slugFieldValidator() {
-  return (Slugs.isDefined(this.value)) ? 'duplicateSlug' : true;
-}
-
-const addSchema = new SimpleSchema({
+const updateSchema = new SimpleSchema({
   name: { type: String, optional: false },
-  slug: { type: String, optional: false, custom: slugFieldValidator },
   shortName: { type: String, optional: true },
   number: { type: String, optional: false },
   creditHrs: { type: Number, optional: true, defaultValue: '3' },
   syllabus: { type: String, optional: true },
   moreInformation: { type: String, optional: true },
   description: { type: String, optional: false },
-  interests: { type: [String], optional: false, minCount: 1 },
+  interestIDs: { type: [String], optional: false, minCount: 1 },
   prerequisites: { type: [String], optional: true },
 });
 
-addSchema.messages({ duplicateSlug: 'The slug [value] is already defined.' });
-
-Template.Add_Course_Widget.onCreated(function onCreated() {
+Template.Update_Course_Widget.onCreated(function onCreated() {
   this.successClass = new ReactiveVar('');
   this.errorClass = new ReactiveVar('');
-  this.context = addSchema.namedContext('Add_Widget');
+  this.context = updateSchema.namedContext('update_Widget');
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
 });
 
-Template.Add_Course_Widget.helpers({
+Template.Update_Course_Widget.onRendered(function addCareerGoalWidgetOnRendered() {
+  this.$('.dropdown').dropdown({});
+});
+
+Template.Update_Course_Widget.helpers({
+  course() {
+    return Courses.findDoc(Template.currentData().updateID.get());
+  },
+  slug() {
+    const course = Courses.findDoc(Template.currentData().updateID.get());
+    return Slugs.findDoc(course.slugID).name;
+  },
   successClass() {
     return Template.instance().successClass.get();
   },
@@ -57,16 +53,23 @@ Template.Add_Course_Widget.helpers({
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },
-  courses() {
+  interestSelected(interest) {
+    const course = Courses.findDoc(Template.currentData().updateID.get());
+    return _.indexOf(course.interestIDs, interest._id) !== -1;
+  },
+  prerequisiteSelected(prerequisite) {
+    const course = Courses.findDoc(Template.currentData().updateID.get());
+    return _.indexOf(course.prerequisites, Courses.findSlugByID(prerequisite._id)) !== -1;
+  },
+  prerequisites() {
     return Courses.find({}, { sort: { number: 1 } });
   },
 });
 
-Template.Add_Course_Widget.events({
+Template.Update_Course_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const name = event.target.name.value;
-    const slug = event.target.slug.value;
     const shortName = event.target.shortName.value;
     const number = event.target.number.value;
     const creditHrs = event.target.creditHrs.value || '3';
@@ -75,22 +78,21 @@ Template.Add_Course_Widget.events({
     const description = event.target.description.value;
     // Get Interests (multiple selection)
     const selectedInterests = _.filter(event.target.interests.selectedOptions, (option) => option.selected);
-    const interests = _.map(selectedInterests, (option) => option.value);
+    const interestIDs = _.map(selectedInterests, (option) => option.value);
     // Get Prerequisites (multiple selection)
     const selectedPrerequisites = _.filter(event.target.prerequisites.selectedOptions, (option) => option.selected);
     const prerequisiteIDs = _.map(selectedPrerequisites, (option) => option.value);
     const prerequisites = _.map(prerequisiteIDs, (id) => Courses.findSlugByID(id));
-    const newData = { name, slug, shortName, number, creditHrs, syllabus,
-      moreInformation, description, interests, prerequisites };
+    const updatedData = { interestIDs, name, shortName, number, creditHrs, syllabus,
+      moreInformation, description, prerequisites };
     // Clear out any old validation errors.
     instance.context.resetValidation();
-    // Invoke clean so that newData reflects what will be inserted.
-    addSchema.clean(newData);
+    // Invoke clean so that data reflects what will be inserted.
+    updateSchema.clean(updatedData);
     // Determine validity.
-    instance.context.validate(newData);
+    instance.context.validate(updatedData);
     if (instance.context.isValid()) {
-      console.log('newData', newData);
-      Courses.define(newData);
+      Courses.update(instance.data.updateID.get(), { $set: updatedData });
       instance.successClass.set('success');
       instance.errorClass.set('');
       event.target.reset();
@@ -98,5 +100,9 @@ Template.Add_Course_Widget.events({
       instance.successClass.set('');
       instance.errorClass.set('error');
     }
+  },
+  'click .jsCancel': function (event, instance) {
+    event.preventDefault();
+    instance.data.updateID.set('');
   },
 });

@@ -2,7 +2,11 @@
 
   {{#if Template.subscriptionsReady}}
     {{#Admin_DataModel_Layout}}
-      {{> Add_Course_Widget }}
+      {{#if displayUpdateWidget}}
+        {{> Update_Course_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Course_Widget }}
+      {{/if}}
       {{> List_Courses_Widget updateID=updateID}}
     {{/Admin_DataModel_Layout}}
   {{else}}
