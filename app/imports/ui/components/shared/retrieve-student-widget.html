@@ -1,0 +1,40 @@
+<template name="Retrieve_Student_Widget_old">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>RETRIEVE STUDENT</h4></div>
+    <div class="ui small horizontal list">
+      {{#each student in students}}
+        <div class="item">
+          <a  class="ui basic grey label" target="_blank" href="{{url student}}">{{label student}}</a>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="Retrieve_Student_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>RETRIEVE STUDENT</h4></div>
+    <div class="ui top attached tabular stackable menu">
+      <a class="active item" data-tab="students">Current</a>
+      <a class="item" data-tab="alumni">Alumni</a>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="students">
+      <div class="ui small horizontal list">
+        {{#each user in users studentRole}}
+          <div class="item">
+            <a class="ui basic grey label" target="_blank" href="{{url user}}">{{label user}}</a>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="alumni">
+      <div class="ui small horizontal list">
+        {{#each user in users alumniRole}}
+          <div class="item">
+            <a class="ui basic grey label" target="_blank" href="{{url user}}">{{label user}}</a>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

@@ -26,6 +26,9 @@ export const BS_CS_TEMPLATE = {
   },
 };
 
+export const BS_CS_LIST = ['ics111', 'ics141', 'ics211', 'ics241', 'ics311', 'ics314', 'ics212', 'ics321',
+  ['ics313', 'ics361'], ['ics312', 'ics331'], 'ics332', 'ics4xx', 'ics4xx', 'ics4xx', 'ics4xx', 'ics4xx'];
+
 export const BS_CS_SECSCI = {
   requiredCourses: ['ics111', 'ics141', 'ics211', 'ics212', 'ics241', 'ics311',
     'ics314', 'ics321', 'ics332', 'ics355', ['ics315', 'ics351']],
@@ -83,6 +86,9 @@ export const BA_ICS_TEMPLATE = {
     springSem: ['ics4xx'],
   },
 };
+
+export const BA_ICS_LIST = ['ics111', 'ics141', 'ics211', 'ics241', 'ics311', 'ics314', 'ics212', 'ics321',
+  ['ics312', 'ics331'], 'ics332', ['ics313', 'ics361'], 'ics4xx'];
 
 export const BA_ICS_SECSCI = {
   requiredCourses: ['ics111', 'ics141', 'ics211', ['ics212', 'ics215'], 'ics222', 'ics241', 'ics311',

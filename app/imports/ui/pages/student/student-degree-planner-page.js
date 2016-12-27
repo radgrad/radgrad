@@ -6,6 +6,7 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
+import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -21,6 +22,7 @@ Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
     this.subscribe(CourseInstances.getPublicationName());
     this.subscribe(Feedbacks.getPublicationName());
     this.subscribe(FeedbackInstances.getPublicationName());
+    this.subscribe(Interests.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());

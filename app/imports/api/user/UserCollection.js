@@ -45,7 +45,7 @@ class UserCollection extends BaseInstanceCollection {
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
       level: { type: Number, optional: true },
       stickers: { type: [Number], optional: true },
-      website: { type: String, optional: true},
+      website: { type: String, optional: true },
       // username, email, and password are managed in accounts package.
     }));
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
