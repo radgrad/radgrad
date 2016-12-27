@@ -46,9 +46,6 @@ Template.List_Career_Goals_Widget.helpers({
   },
 });
 
-Template.List_Career_Goals_Widget.onRendered(function listCareerGoalsWidgetOnRendered() {
-});
-
 Template.List_Career_Goals_Widget.events({
   'click .jsUpdate': function (event, instance) {
     event.preventDefault();

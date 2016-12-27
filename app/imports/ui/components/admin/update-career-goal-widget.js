@@ -48,9 +48,9 @@ Template.Update_Career_Goal_Widget.helpers({
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },
-  interestSelected(interest) {
+  selectedInterestIDs() {
     const careerGoal = CareerGoals.findDoc(Template.currentData().updateID.get());
-    return _.indexOf(careerGoal.interestIDs, interest._id) !== -1;
+    return careerGoal.interestIDs;
   },
 });
 
@@ -75,6 +75,8 @@ Template.Update_Career_Goal_Widget.events({
       instance.successClass.set('success');
       instance.errorClass.set('');
       event.target.reset();
+      // instance.$('.dropdown').dropdown('clear');
+      instance.$('form').form('clear');
     } else {
       instance.successClass.set('');
       instance.errorClass.set('error');

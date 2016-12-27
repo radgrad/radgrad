@@ -48,9 +48,6 @@ Template.List_Courses_Widget.helpers({
   },
 });
 
-Template.List_Courses_Widget.onRendered(function listCoursesWidgetOnRendered() {
-});
-
 Template.List_Courses_Widget.events({
   'click .jsUpdate': function (event, instance) {
     event.preventDefault();

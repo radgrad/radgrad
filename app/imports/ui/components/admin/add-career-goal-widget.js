@@ -6,10 +6,6 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-Template.Add_Career_Goal_Widget.onRendered(function addCareerGoalWidgetOnRendered() {
-  this.$('.dropdown').dropdown({});
-});
-
 /**
  * Custom validator for the slug field.
  * @returns True if the slug value is not previously defined, otherwise errorType 'duplicateSlug'.
@@ -76,6 +72,7 @@ Template.Add_Career_Goal_Widget.events({
       instance.successClass.set('success');
       instance.errorClass.set('');
       event.target.reset();
+      instance.$('.dropdown').dropdown('clear');
     } else {
       instance.successClass.set('');
       instance.errorClass.set('error');

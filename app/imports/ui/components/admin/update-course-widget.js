@@ -53,13 +53,14 @@ Template.Update_Course_Widget.helpers({
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },
-  interestSelected(interest) {
+  selectedInterestIDs() {
     const course = Courses.findDoc(Template.currentData().updateID.get());
-    return _.indexOf(course.interestIDs, interest._id) !== -1;
+    return course.interestIDs;
   },
-  prerequisiteSelected(prerequisite) {
+  selectedCourseIDs() {
     const course = Courses.findDoc(Template.currentData().updateID.get());
-    return _.indexOf(course.prerequisites, Courses.findSlugByID(prerequisite._id)) !== -1;
+    console.log('selectedCourseId', course.prerequisites);
+    return _.map(course.prerequisites, prerequisite => Courses.findIdBySlug(prerequisite));
   },
   prerequisites() {
     return Courses.find({}, { sort: { number: 1 } });
@@ -96,6 +97,7 @@ Template.Update_Course_Widget.events({
       instance.successClass.set('success');
       instance.errorClass.set('');
       event.target.reset();
+      instance.$('.dropdown').dropdown('clear');
     } else {
       instance.successClass.set('');
       instance.errorClass.set('error');
