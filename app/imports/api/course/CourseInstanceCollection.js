@@ -202,16 +202,14 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
    */
   updateGrade(courseInstanceID, grade) {
-    const logger = new Logger('CourseInstance.updateGrade');
-    logger.info(`${grade}`);
-    console.log(`${grade}`);
+    // const logger = new Logger('CourseInstance.updateGrade');
+    // logger.info(`${grade}`);
     this.assertDefined(courseInstanceID);
-    logger.info('after assert');
+    // logger.info('after assert');
     const ice = makeCourseICE(courseInstanceID, grade);
-    logger.info('after ice');
+    // logger.info('after ice');
     this._collection.update({ _id: courseInstanceID }, { $set: { grade, ice, verified: false } });
-    logger.info('after _collection update');
-    console.log(new Date(), 'after _collection update');
+    // logger.info('after _collection update');
   }
 
   /**

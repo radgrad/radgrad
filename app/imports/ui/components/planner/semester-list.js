@@ -3,6 +3,7 @@ import { Tracker } from 'meteor/tracker';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
+import { moment } from 'meteor/momentjs:moment';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { checkPrerequisites } from './course-functions';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -12,6 +13,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { plannerKeys } from './academic-plan';
 
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
@@ -352,9 +354,10 @@ Template.Semester_List.events({
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;
     CourseInstances.clientUpdateGrade(div.id, grade);
-    instance.state.set('updateGrade', grade);
-    // console.log(CourseInstances.findDoc(div.id).grade);
-    // Tracker.flush();
+    const ci = CourseInstances.findDoc(div.id);
+    instance.state.set(plannerKeys.detailCourseInstance, ci);
+    Tracker.flush();
+    console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'clickItemGrade', ci.ice, ci.grade);
   },
 });
 

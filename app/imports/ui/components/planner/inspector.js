@@ -5,7 +5,6 @@ import { moment } from 'meteor/momentjs:moment';
 
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-// import { checkPrerequisites } from '../../../api/course/CourseFunctions';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -16,6 +15,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { getTotalICE, makeCourseICE, getPlanningICE } from '../../../api/ice/IceProcessor.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { plannerKeys } from './academic-plan';
 
 Template.Inspector.helpers({
   courses() {
@@ -193,72 +193,50 @@ Template.Inspector.helpers({
     return ret;
   },
   courseDescription() {
-    if (Template.instance().state.get('detailCourseID')) {
-      const id = Template.instance().state.get('detailCourseID');
-      if (CourseInstances.isDefined(id)) {
-        const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
-        const course = Courses.findDoc(ci.courseID);
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      return Template.instance().state.get(plannerKeys.detailCourse).description;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
         return course.description;
       }
-      const course = Courses.findDoc(id);
-      return course.description;
-    }
     return null;
   },
   courseIce() {
-    if (Template.instance().state.get('detailCourseID') || Template.instance().state.get('grade')) {
-      console.log(new Date(), 'courseIce');
-      const id = Template.instance().state.get('detailCourseID');
-      if (CourseInstances.isDefined(id)) {
-        const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      const course = Template.instance().state.get(plannerKeys.detailCourse);
+      const slug = Slugs.findDoc(course.slugID);
+      const ice = makeCourseICE(slug.name, '***');
+      return ice;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
         const course = Courses.findDoc(ci.courseID);
         const slug = Slugs.findDoc(course.slugID);
         const ice = makeCourseICE(slug.name, ci.grade);
-        // console.log(ice);
+        console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'courseIce', ice, ci.grade);
         return ice;
       }
-      const course = Courses.findDoc(id);
-      const slug = Slugs.findDoc(course.slugID);
-      const ice = makeCourseICE(slug.name, '***');
-      if (Template.instance().state.get('grade')) {
-        Template.instance().state.set('grade', false);
-      }
-      return ice;
-    }
     return null;
   },
   courseName() {
-    if (Template.instance().state.get('detailCourseID')) {
-      const id = Template.instance().state.get('detailCourseID');
-      if (CourseInstances.isDefined(id)) {
-        const ci = CourseInstances.findDoc(id);
-        const course = Courses.findDoc(ci.courseID);
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      return Template.instance().state.get(plannerKeys.detailCourse).name;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
         return course.name;
       }
-      const course = Courses.findDoc(id);
-      return course.name;
-    }
     return null;
   },
   courseNumber() {
-    if (Template.instance().state.get('detailCourseID')) {
-      const id = Template.instance().state.get('detailCourseID');
-      if (CourseInstances.isDefined(id)) {
-        const ci = CourseInstances.findDoc(id);
-        const course = Courses.findDoc(ci.courseID);
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      return Template.instance().state.get(plannerKeys.detailCourse).number;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
         return course.number;
       }
-      const course = Courses.findDoc(id);
-      return course.number;
-    }
-    return null;
-  },
-  detailCourseNumber() {
-    if (Template.instance().state.get('detailCourseID')) {
-      const ci = CourseInstances.findDoc(Template.instance().state.get('detailCourseID'));
-      const course = Courses.findDoc(ci.courseID);
-      return course;
-    }
     return null;
   },
   fallArgs(year) {
@@ -278,7 +256,8 @@ Template.Inspector.helpers({
     return Template.instance().state;
   },
   hasCourse() {
-    return Template.instance().state.get('detailCourseID');
+    return Template.instance().state.get(plannerKeys.detailCourse) ||
+        Template.instance().state.get(plannerKeys.detailCourseInstance);
   },
   hasMoreYears() {
     const studentID = getUserIdFromRoute();
@@ -292,7 +271,8 @@ Template.Inspector.helpers({
     return ays[ays.length - 1].year > instance.state.get('startYear');
   },
   hasOpportunity() {
-    return Template.instance().state.get('detailOpportunityID');
+    return Template.instance().state.get(plannerKeys.detailOpportunity) ||
+        Template.instance().state.get(plannerKeys.detailOpportunityInstance);
   },
   missingPrerequisite(prereqSlug) {
     const prereqID = Courses.findIdBySlug(prereqSlug);
@@ -313,125 +293,86 @@ Template.Inspector.helpers({
     return ays[0].year < instance.state.get('startYear') - 3;
   },
   hasRequest() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const instance = OpportunityInstances.findDoc(id);
-        return VerificationRequests.find({ opportunityInstanceID: instance._id }).count() > 0;
-      }
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const instance = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      return VerificationRequests.find({ opportunityInstanceID: instance._id }).count() > 0;
     }
     return false;
   },
   instanceID() {
-    if (Template.instance().state.get('detailCourseID')) {
-      return Template.instance().state.get('detailCourseID');
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      return Template.instance().state.get(plannerKeys.detailCourse)._id;
     } else
-      if (Template.instance().state.get('detailOpportunityID')) {
-        return Template.instance().state.get('detailOpportunityID');
-      }
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        return Template.instance().state.get(plannerKeys.detailCourseInstance)._id;
+      } else
+        if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+          return Template.instance().state.get(plannerKeys.detailOpportunity)._id;
+        } else
+          if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+            return Template.instance().state.get(plannerKeys.detailOpportunityInstance)._id;
+          }
     return null;
   },
   instanceSemester() {
-    if (Template.instance().state.get('detailCourseID')) {
-      const id = Template.instance().state.get('detailCourseID');
-      try {
-        const ci = CourseInstances.findDoc(id);
-        const semester = Semesters.findDoc(ci.semesterID);
-        return Semesters.toString(semester._id, false);
-      } catch (e) {
-        return '';
-      }
-    } else
-      if (Template.instance().state.get('detailOpportunityID')) {
-        const id = Template.instance().state.get('detailOpportunityID');
-        const opp = Opportunities.findDoc(id);
-        return opp.semesterID;
-      }
-    return null;
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const semester = Semesters.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).semesterID);
+      return Semesters.toString(semester._id, false);
+    }
+    return '';
   },
   interests() {
     const ret = [];
-    if (Template.instance().state.get('detailCourseID')) {
-      const id = Template.instance().state.get('detailCourseID');
-      if (CourseInstances.isDefined(id)) {
-        const ci = CourseInstances.findDoc(id);
-        const course = Courses.findDoc(ci.courseID);
-        _.map(course.interestIDs, (iid) => {
-          ret.push(Interests.findDoc(iid));
-        });
-      } else {
-        const course = Courses.findDoc(id);
-        _.map(course.interestIDs, (iid) => {
-          ret.push(Interests.findDoc(iid));
-        });
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      const course = Template.instance().state.get(plannerKeys.detailCourse);
+      _.map(course.interestIDs, (iid) => {
+        ret.push(Interests.findDoc(iid));
+      });
     } else
-      if (Template.instance().state.get('detailOpportunityID')) {
-        const id = Template.instance().state.get('detailOpportunityID');
-        if (OpportunityInstances.isDefined(id)) {
-          const oppInstance = OpportunityInstances.findDoc(id);
-          const opp = Opportunities.findDoc(oppInstance.opportunityID);
-          _.map(opp.interestIDs, (iid) => {
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+        _.map(course.interestIDs, (iid) => {
+          ret.push(Interests.findDoc(iid));
+        });
+      } else
+        if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+          _.map(Template.instance().state.get(plannerKeys.detailOpportunity).interestIDs, (iid) => {
             ret.push(Interests.findDoc(iid));
           });
         } else
-          if (Opportunities.isDefined(id)) {
-            const opp = Opportunities.findDoc(id);
+          if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+            const opp = Opportunities.findDoc(Template.instance().state.get(
+                plannerKeys.detailOpportunityInstance).opportunityID);
             _.map(opp.interestIDs, (iid) => {
               ret.push(Interests.findDoc(iid));
             });
           }
-      }
     return ret;
   },
-  isInstance() {
-    return Template.instance().state.get('detailCourseID') || Template.instance().state.get('detailOpportunityID');
-  },
   isDeletableInstance() {
-    if (Template.instance().state.get('detailCourseID')) {
-      const id = Template.instance().state.get('detailCourseID');
-      try {
-        const ci = CourseInstances.findDoc(id);
-        return !ci.verified;
-      } catch (e) {
-        return false;
-      }
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      return !ci.verified;
     } else
-      if (Template.instance().state.get('detailOpportunityID')) {
-        const id = Template.instance().state.get('detailOpportunityID');
-        try {
-          const opportunity = OpportunityInstances.findDoc(id);
-          return !opportunity.verified;
-        } catch (e) {
-          return false;
-        }
+      if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+        const opportunity = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+        return !opportunity.verified;
       }
     return false;
   },
   isPastInstance() {
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSemester = Semesters.findDoc(currentSemesterID);
-    if (Template.instance().state.get('detailCourseID')) {
-      const id = Template.instance().state.get('detailCourseID');
-      try {
-        const ci = CourseInstances.findDoc(id);
-        const ciSemester = Semesters.findDoc(ci.semesterID);
-        return ciSemester.sortBy <= currentSemester.sortBy;
-      } catch (e) {
-        return false;
-      }
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      const ciSemester = Semesters.findDoc(ci.semesterID);
+      return ciSemester.sortBy <= currentSemester.sortBy;
     } else
-      if (Template.instance().state.get('detailOpportunityID')) {
-        const id = Template.instance().state.get('detailOpportunityID');
-        try {
-          const opportunity = OpportunityInstances.findDoc(id);
-          const studentID = getUserIdFromRoute();
-          const requests = VerificationRequests.find({ opportunityInstanceID: id, studentID }).fetch();
-          const oppSemester = Semesters.findDoc(opportunity.semesterID);
-          return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
-        } catch (e) {
-          return false;
-        }
+      if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+        const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+        const studentID = getUserIdFromRoute();
+        const requests = VerificationRequests.find({ opportunityInstanceID: oi._id, studentID }).fetch();
+        const oppSemester = Semesters.findDoc(oi.semesterID);
+        return !oi.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
       }
     return false;
   },
@@ -448,146 +389,116 @@ Template.Inspector.helpers({
     return ret;
   },
   opportunityDescription() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const op = OpportunityInstances.findDoc(id);
-        const opp = Opportunities.findDoc(op.opportunityID);
-        return opp.description;
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      return Template.instance().state.get(plannerKeys.detailOpportunityInstance).description;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+        return Template.instance().state.get(plannerKeys.detailOpportunityInstance).description;
       }
-      const opportunity = Opportunities.findDoc({ _id: id });
-      return opportunity.description;
-    }
     return null;
   },
   opportunitySemester() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const semester = OpportunityInstances.getSemesterDoc(id);
-        return Semesters.toString(semester.id, false);
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const semester = OpportunityInstances.getSemesterDoc(
+          Template.instance().state.get(plannerKeys.detailOpportunityInstance)._id);
+      return Semesters.toString(semester.id, false);
+    } else
+      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+        const opportunity = Template.instance().state.get(plannerKeys.detailOpportunity);
+        let semesterStr = '';
+        opportunity.semesterIDs.forEach((sem) => {
+          semesterStr += Semesters.toString(sem, false);
+          semesterStr += ', ';
+        });
+        return semesterStr.substring(0, semesterStr.length - 2);
       }
-      const opportunity = Opportunities.findDoc({ _id: id });
-      let semesterStr = '';
-      opportunity.semesterIDs.forEach((sem) => {
-        semesterStr += Semesters.toString(sem, false);
-        semesterStr += ', ';
-      });
-      return semesterStr.substring(0, semesterStr.length - 2);
-    }
     return null;
   },
   opportunityName() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const op = OpportunityInstances.findDoc(id);
-        const opp = Opportunities.findDoc(op.opportunityID);
-        return opp.name;
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      return Template.instance().state.get(plannerKeys.detailOpportunityInstance).name;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+        return Template.instance().state.get(plannerKeys.detailOpportunityInstance).name;
       }
-      const opportunity = Opportunities.findDoc({ _id: id });
-      return opportunity.name;
-    }
     return null;
   },
   opportunityIce() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const op = OpportunityInstances.findDoc(id);
-        const opp = Opportunities.findDoc(op.opportunityID);
-        return opp.ice;
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      return Opportunities.findDoc(oi.opportunityID).ice;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+        return Template.instance().state.get(plannerKeys.detailOpportunityInstance).ice;
       }
-      const opportunity = Opportunities.findDoc({ _id: id });
-      return opportunity.ice;
-    }
     return null;
   },
   opportunityStart() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const op = OpportunityInstances.findDoc(id);
-        const opp = Opportunities.findDoc(op.opportunityID);
-        return opp.startActive.toDateString();
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      return Opportunities.findDoc(oi.opportunityID).startActive.toDateString();
+    } else
+      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+        return Template.instance().state.get(plannerKeys.detailOpportunityInstance).startActive.toDateString();
       }
-      const opportunity = Opportunities.findDoc({ _id: id });
-      return opportunity.startActive.toDateString();
-    }
     return null;
   },
   opportunityMore() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const op = OpportunityInstances.findDoc(id);
-        const opp = Opportunities.findDoc(op.opportunityID);
-        return opp.moreInformation;
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      return Opportunities.findDoc(oi.opportunityID).moreInformation;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+        return Template.instance().state.get(plannerKeys.detailOpportunity).moreInformation;
       }
-      const opportunity = Opportunities.findDoc({ _id: id });
-      return opportunity.moreInformation;
-    }
     return null;
   },
   prerequisites() {
     const ret = [];
-    if (Template.instance().state.get('detailCourseID')) {
-      const id = Template.instance().state.get('detailCourseID');
-      if (CourseInstances.isDefined(id)) {
-        const ci = CourseInstances.findDoc(id);
-        const course = Courses.findDoc(ci.courseID);
-        _.map(course.prerequisites, (pre) => {
-          ret.push(pre);
-        });
-      } else {
-        const course = Courses.findDoc(id);
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      _.map(Template.instance().state.get(plannerKeys.detailCourse).prerequisites, (pre) => {
+        ret.push(pre);
+      });
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
         _.map(course.prerequisites, (pre) => {
           ret.push(pre);
         });
       }
-    }
-    return ret;
+    return null;
   },
   processedDate(date) {
     const processed = moment(date);
     return processed.calendar();
   },
   requestHistory() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const oppInstance = OpportunityInstances.findDoc(id);
-        const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id }).fetch();
-        if (request.length > 0) {
-          return request[0].processed;
-        }
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oppInstance = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id }).fetch();
+      if (request.length > 0) {
+        return request[0].processed;
       }
     }
     return '';
   },
   requestStatus() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const oppInstance = OpportunityInstances.findDoc(id);
-        const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id }).fetch();
-        if (request.length > 0) {
-          return request[0].status;
-        }
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oppInstance = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id }).fetch();
+      if (request.length > 0) {
+        return request[0].status;
       }
     }
     return '';
   },
   requestWhenSubmitted() {
-    if (Template.instance().state.get('detailOpportunityID')) {
-      const id = Template.instance().state.get('detailOpportunityID');
-      if (OpportunityInstances.isDefined(id)) {
-        const oppInstance = OpportunityInstances.findDoc(id);
-        const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id }).fetch();
-        if (request.length > 0) {
-          const submitted = moment(request[0].submittedOn);
-          return submitted.calendar();
-        }
+    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oppInstance = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id }).fetch();
+      if (request.length > 0) {
+        const submitted = moment(request[0].submittedOn);
+        return submitted.calendar();
       }
     }
     return '';
