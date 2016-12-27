@@ -1,6 +1,6 @@
 <template name="Student_Ice">
   <div class="layout-page">
-    <div class="ui grid container">
+    <div class="ui stackable grid container">
       {{> Help_Panel_Widget}}
       <div class="two wide column">
         {{> Home_Menu}}
@@ -9,30 +9,29 @@
       <div class="fourteen wide stretched column">
         <div class="ui padded segment">
           <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
-          <div class="ui equal width grid container">
+          <div class="ui equal width stackable grid container">
             <div class="column">
 
 
               <div class="ui segment">
-                <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
-                  <div style="text-align: center; display: block; margin-left:auto; margin-right:auto;"
-                       class="c100 p{{projectedICE.i}} lightblue">
-                    <span style="color:steelblue;"><b>{{earnedICE.i}}</b></span>
-                    <span style="color:lightsteelblue; margin-top:30px;">{{projectedICE.i}}</span>
+                <div class="radgrad-ice">
+                  <div class="radgrad-ice-circle p{{projectedICE.i}} radgrad-proj-innov">
+                    <div class="radgrad-ice-stat">
+                      <span>{{earnedICE.i}}</span>
+                      <hr>
+                      <span>{{projectedICE.i}}</span>
+                    </div>
                     <div class="slice">
                       <div class="bar"></div>
                       <div class="fill"></div>
                     </div>
                   </div>
-                  <div
-                      style="position:absolute; margin-right:auto; margin-left:auto; background-color:transparent;"
-                      class="c100 p{{earnedICE.i}} blue">
+                  <div class="radgrad-ice-circle p{{earnedICE.i}} radgrad-earn-innov">
                     <span></span>
                     <div class="slice">
                       <div class="bar"></div>
                       <div class="fill"></div>
                     </div>
-
                   </div>
                 </div>
 
@@ -94,18 +93,19 @@
             <div class="column">
               <div class="ui segment">
 
-                <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
-                  <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.c}} lightgreen">
-                    <span style="color:green;"><b>{{earnedICE.c}}</b></span>
-                    <span style="color:darkseagreen; margin-top:30px;">{{projectedICE.c}}</span>
+                <div class="radgrad-ice">
+                  <div class="radgrad-ice-circle p{{projectedICE.c}} radgrad-proj-comp">
+                    <div class="radgrad-ice-stat">
+                      <span>{{earnedICE.c}}</span>
+                      <hr>
+                      <span>{{projectedICE.c}}</span>
+                    </div>
                     <div class="slice">
                       <div class="bar"></div>
                       <div class="fill"></div>
                     </div>
                   </div>
-                  <div
-                      style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto"
-                      class="c100 p{{earnedICE.c}} green">
+                  <div class="radgrad-ice-circle p{{earnedICE.c}} radgrad-earn-comp">
                     <span></span>
                     <div class="slice">
                       <div class="bar"></div>
@@ -114,7 +114,7 @@
                   </div>
                 </div>
 
-                <h3 style="color: green" class="ui centered  header">
+                <h3 style="color: green" class="ui centered header">
                   Competency
                 </h3>
 
@@ -172,18 +172,19 @@
 
               <div class="ui segment">
 
-                <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
-                  <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.e}} lightorange">
-                    <span style="color:goldenrod"><b>{{earnedICE.e}}</b></span>
-                    <span style="color:tan; margin-top:30px;">{{projectedICE.e}}</span>
+                <div class="radgrad-ice">
+                  <div class="radgrad-ice-circle p{{projectedICE.e}} radgrad-proj-exp">
+                    <div class="radgrad-ice-stat">
+                      <span>{{earnedICE.e}}</span>
+                      <hr>
+                      <span>{{projectedICE.e}}</span>
+                    </div>
                     <div class="slice">
                       <div class="bar"></div>
                       <div class="fill"></div>
                     </div>
                   </div>
-                  <div
-                      style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto"
-                      class="c100 p{{earnedICE.e}} orange">
+                  <div class="radgrad-ice-circle p{{earnedICE.e}} orange">
                     <span></span>
                     <div class="slice">
                       <div class="bar"></div>
