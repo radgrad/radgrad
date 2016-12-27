@@ -14,6 +14,9 @@ import './student-ice-widget.js';
 import './interests.html';
 import './interests.js';
 
+import './student-about-me-widget.html';
+import './student-about-me-widget.js';
+
 import './student-opportunities-of-interest-card.html';
 import './student-opportunities-of-interest-card.js';
 

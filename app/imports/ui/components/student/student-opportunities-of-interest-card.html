@@ -1,58 +1,54 @@
 <template name="Student_Opportunities_Of_Interest_Card">
-      <div class="ui card">
-        <div class="content">
-          <div class="header">{{opportunityName opportunity}}</div>
-          <div class="meta">
-          {{#each semester in opportunitySemesters opportunity}}
+  <div class="ui card">
+    <div class="content">
+      <div class="header">{{opportunityName opportunity}}</div>
+      <div class="meta">
+        {{#each semester in opportunitySemesters opportunity}}
           {{semester}}&nbsp;
-          {{/each}}
+        {{/each}}
+      </div>
+    </div>
+    <div class="content">
+      {{opportunityShortDescription opportunity}}
+    </div>
+    <div class="content">
+      23 students plan to participate
+      <div class="ui circular mini images">
+        <img class="ui image" src="/images/landing/boado.jpg">
+        <img class="ui image" src="/images/landing/garces.jpg">
+        <img class="ui image" src="/images/landing/khongnawang.jpg">
+        <img class="ui image" src="/images/landing/boado.jpg">
+        <img class="ui image" src="/images/landing/garces.jpg">
+        <img class="ui image" src="/images/landing/khongnawang.jpg">
+        <img class="ui image" src="/images/landing/boado.jpg">
+        <img class="ui image" src="/images/landing/garces.jpg">
+        <a><img class="ui bordered image" src="/images/elipsis.png"></a>
+      </div>
+    </div>
+    <div class="content">
+      <span class="left floated">
+        {{#each interest in matchingInterests opportunity}}
+          <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
+        {{/each}}
+      </span>
+    </div>
+    <div class="content bottom">
+      <span class="left floated">
+        <a>View more</a>
+      </span>
+      <span class="right floated">
+        <a>Hide</a>
+      </span>
+      <span>
+        <a class="chooseSemester">Add to plan</a>
+        <div class="ui fluid popup transition hidden">
+          <div class="ui vertical menu">
+            {{#each semester in opportunitySemesters opportunity}}
+              <a class="item addToPlan" data-position="right center">{{semester}}</a>
+            {{/each}}
           </div>
         </div>
-        <div class="content">
-          {{opportunityShortDescription opportunity}}
-          </div>
-          <div class="content">
-            23 students plan to participate
-            <div class="ui circular mini images">
-              <img class="ui image" src="/images/landing/boado.jpg">
-              <img class="ui image" src="/images/landing/garces.jpg">
-              <img class="ui image" src="/images/landing/khongnawang.jpg">
-              <img class="ui image" src="/images/landing/boado.jpg">
-              <img class="ui image" src="/images/landing/garces.jpg">
-              <img class="ui image" src="/images/landing/khongnawang.jpg">
-              <img class="ui image" src="/images/landing/boado.jpg">
-              <img class="ui image" src="/images/landing/garces.jpg">
-              <a><img class="ui bordered image" src="/images/elipsis.png"></a>
-            </div>
-          </div>
-          <div class="content">
-                <span class="left floated">
-                  {{#each interest in matchingInterests opportunity}}
-                  <a class="ui mini label"><i style="color:white !important"
-                                              class="fitted star icon"></i>{{interestName interest}}</a>
-                  {{/each}}
-                </span>
-          </div>
-          <div class="content bottom">
-                <span class="left floated">
-                <a>View more</a>
-                </span>
-            <span class="right floated">
-                <a>Hide</a>
-                </span>
-            <span>
-                  <a class="chooseSemester">Add to plan</a>
-              <div class="ui fluid popup transition hidden">
-              <div class="ui vertical menu">
-                {{#each semester in opportunitySemesters opportunity}}
-                <a class="item addToPlan" data-position="right center">{{semester}}</a>
-                {{/each}}
-
-              </div>
-            </div>
-                </span>
-
-
-          </div>
-        </div>
+      </span>
+    </div>
+  </div>
 </template>

@@ -4,11 +4,9 @@
     <div class="ui equal width grid container">
       <div class="column">
 
-
         <div class="ui segment">
           <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
-            <div style="text-align: center; display: block; margin-left:auto; margin-right:auto;"
-                 class="c100 p{{innovationPoints projectedICE}} lightblue">
+            <div style="text-align: center; display: block; margin-left:auto; margin-right:auto;" class="c100 p{{innovationPoints projectedICE}} lightblue">
               <span style="color:steelblue;"><b>{{innovationPoints earnedICE}}</b></span>
               <span style="color:lightsteelblue; margin-top:30px;">{{innovationPoints projectedICE}}</span>
               <div class="slice">
@@ -16,22 +14,17 @@
                 <div class="fill"></div>
               </div>
             </div>
-            <div
-                style="position:absolute; margin-right:auto; margin-left:auto; background-color:transparent;"
-                class="c100 p{{innovationPoints earnedICE}} blue">
-              <span></span>
+            <div style="position:absolute; margin-right:auto; margin-left:auto; background-color:transparent;" class="c100 p{{innovationPoints earnedICE}} blue">
               <div class="slice">
                 <div class="bar"></div>
                 <div class="fill"></div>
               </div>
-
             </div>
           </div>
 
           <h3 style="color: steelblue" class="ui centered header">
             Innovation
           </h3>
-
 
           <div class="ui styled fluid accordion">
             <div class="active title">
@@ -43,9 +36,13 @@
               <p>You have achieved {{innovationPoints earnedICE}} Innovation points for the following:</p>
               <div class="ui list">
                 {{#each event in earnedEventsI}}
-                  <div class="item"><b>+{{event.ice.i}}</b>{{#if (isCourse event)}} {{ courseName event }}
-                    ({{ courseName
-                    event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
+                  <div class="item">
+                    <b>+{{event.ice.i}}</b>
+                    {{#if (isCourse event)}}
+                      {{ courseName event }} ({{ courseName event }})
+                    {{ else }}
+                      {{ opportunityName event }} ({{opportunitySem event}})
+                    {{/if}}
                   </div>
                 {{/each}}
               </div>
@@ -56,14 +53,16 @@
             </div>
             <div class="content">
               <p>You have a total of {{innovationPoints projectedICE}} projected Innovation points. The
-                remaining {{remainingICE
-                (innovationPoints earnedICE) (innovationPoints projectedICE) }} points are for the following:</p>
+                remaining {{remainingICE (innovationPoints earnedICE) (innovationPoints projectedICE) }} points are for the following:</p>
               <div class="ui list">
                 {{#each event in projectedEventsI}}
                   <div class="item">
-                    <b>+{{innovationPoints (eventIce event)}}</b> {{#if (isCourse event)}} {{ courseName event }}
-                    ({{ courseName
-                    event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
+                    <b>+{{innovationPoints (eventIce event)}}</b>
+                    {{#if (isCourse event)}}
+                      {{ courseName event }} ({{ courseName event }})
+                    {{ else }}
+                      {{ opportunityName event }} ({{opportunitySem event}})
+                    {{/if}}
                   </div>
                 {{/each}}
               </div>
@@ -78,8 +77,8 @@
                 {{#each event in recommendedEventsI}}
                   <div class="item">
                     <b>+{{innovationPoints (eventIce event)}}</b>
-                    {{#if (isCourse event)}} {{ courseName event }}
-                      ({{ courseName event }})
+                    {{#if (isCourse event)}}
+                      {{ courseName event }} ({{ courseName event }})
                     {{ else }}
                       {{ opportunityName event }} ({{opportunitySem event}})
                     {{/if}}
@@ -94,7 +93,6 @@
 
       <div class="column">
         <div class="ui segment">
-
           <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
             <div style="margin-left:auto; margin-right:auto" class="c100 p{{competencyPoints projectedICE}} lightgreen">
               <span style="color:green;"><b>{{competencyPoints earnedICE}}</b></span>
@@ -104,10 +102,7 @@
                 <div class="fill"></div>
               </div>
             </div>
-            <div
-                style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto"
-                class="c100 p{{competencyPoints earnedICE}} green">
-              <span></span>
+            <div style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto" class="c100 p{{competencyPoints earnedICE}} green">
               <div class="slice">
                 <div class="bar"></div>
                 <div class="fill"></div>
@@ -119,7 +114,6 @@
             Competency
           </h3>
 
-
           <div class="ui styled fluid accordion">
             <div class="active title">
               <i class="dropdown icon"></i>
@@ -130,8 +124,7 @@
               <div class="ui list">
                 {{#each event in earnedEventsC}}
                   <div class="item">
-                    <b>+{{competencyPoints (eventIce event)}}</b>
-                      {{ courseName event }}
+                    <b>+{{competencyPoints (eventIce event)}}</b> {{ courseName event }}
                   </div>
                 {{/each}}
               </div>
@@ -142,13 +135,11 @@
             </div>
             <div class="content">
               <p>You have a total of {{competencyPoints projectedICE}} projected Competency points. The
-                remaining {{remainingICE
-                (competencyPoints earnedICE) (competencyPoints projectedICE) }} points are for the following:</p>
+                remaining {{remainingICE (competencyPoints earnedICE) (competencyPoints projectedICE) }} points are for the following:</p>
               <div class="ui list">
                 {{#each event in projectedEventsC}}
                   <div class="item">
-                    <b>+{{competencyPoints (eventIce event)}}</b>
-                    {{ courseName event }}
+                    <b>+{{competencyPoints (eventIce event)}}</b> {{ courseName event }}
                   </div>
                 {{/each}}
               </div>
@@ -175,7 +166,6 @@
       <div class="column">
 
         <div class="ui segment">
-
           <div style="width:120px; height:120px; margin-left:auto; margin-right:auto;">
             <div style="margin-left:auto; margin-right:auto" class="c100 p{{projectedICE.e}} lightorange">
               <span style="color:goldenrod"><b>{{experiencePoints earnedICE}}</b></span>
@@ -185,10 +175,7 @@
                 <div class="fill"></div>
               </div>
             </div>
-            <div
-                style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto"
-                class="c100 p{{experiencePoints earnedICE}} orange">
-              <span></span>
+            <div style="position: absolute; background-color:transparent; margin-left:auto; margin-right:auto" class="c100 p{{experiencePoints earnedICE}} orange">
               <div class="slice">
                 <div class="bar"></div>
                 <div class="fill"></div>
@@ -200,7 +187,6 @@
             Experience
           </h3>
 
-
           <div class="ui styled fluid accordion">
             <div class="active title">
               <i class="dropdown icon"></i>
@@ -211,9 +197,12 @@
               <div class="ui list">
                 {{#each event in earnedEventsE}}
                   <div class="item">
-                    <b>+{{experiencePoints (eventIce event)}}</b>{{#if (isCourse event)}} {{ courseName event }}
-                    ({{ courseName
-                    event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
+                    <b>+{{experiencePoints (eventIce event)}}</b>
+                    {{#if (isCourse event)}}
+                      {{ courseName event }} ({{ courseName event }})
+                    {{ else }}
+                      {{ opportunityName event }} ({{opportunitySem event}})
+                    {{/if}}
                   </div>
                 {{/each}}
               </div>
@@ -224,14 +213,16 @@
             </div>
             <div class="content">
               <p>You have a total of {{experiencePoints projectedICE}} projected Experience points. The
-                remaining {{remainingICE
-                (experiencePoints earnedICE) (experiencePoints projectedICE) }} points are for the following:</p>
+                remaining {{remainingICE (experiencePoints earnedICE) (experiencePoints projectedICE) }} points are for the following:</p>
               <div class="ui list">
                 {{#each event in projectedEventsE}}
                   <div class="item">
-                    <b>+{{experiencePoints (eventIce event)}}</b> {{#if (isCourse event)}} {{ courseName event }}
-                    ({{ courseName
-                    event }}) {{ else }} {{ opportunityName event }} ({{opportunitySem event}}) {{/if}}
+                    <b>+{{experiencePoints (eventIce event)}}</b>
+                    {{#if (isCourse event)}}
+                      {{ courseName event }} ({{ courseName event }})
+                    {{ else }}
+                      {{ opportunityName event }} ({{opportunitySem event}})
+                    {{/if}}
                   </div>
                 {{/each}}
               </div>
@@ -256,7 +247,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>

@@ -1,0 +1,84 @@
+<template name="Student_About_Me_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>PROFILE</h4></div>
+
+    <div class="ui grid">
+
+      <div class="row">
+        <div class="two wide column">
+          <p><b>Name</b></p>
+        </div>
+        <div class="six wide column">
+          <p>{{name}}</p>
+        </div>
+        <div class="two wide column">
+          <p><b>Email</b></p>
+        </div>
+        <div class="five wide column">
+          <p>{{email}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column">
+          <p><b>Desired Degree</b></p>
+        </div>
+        <div class="six wide column">
+          {{#if desiredDegree}}
+            <p>{{desiredDegree}}</p>
+          {{else}}
+            <p>None</p>
+          {{/if}}
+          <a href="{{pathFor 'Student_Explorer_Degree_Page' username=routeUserName}}">Edit in degree explorer</a>
+        </div>
+        <div class="two wide column">
+          <p><b>Professional Website</b></p>
+        </div>
+        <div class="five wide column">
+          <p>{{website}}</p>
+          <form class="ui form website">
+            <div class="inline field">
+              <div class="ui action input">
+                <input id="website" type="text" name="website" placeholder="Enter new website url">
+                <button class="ui green button website" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column">
+          <p><b>Interests</b></p>
+        </div>
+        <div class="six wide column">
+          {{#if interests}}
+            {{#each interest in interests}}
+              <a class="ui label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
+            {{/each}}
+            <br>
+          {{else}}
+            <p>None</p>
+          {{/if}}
+          <br><a href="{{pathFor 'Student_Explorer_Interest_Page' username=routeUserName}}">Edit in interest
+          explorer</a>
+        </div>
+        <div class="two wide column">
+          <p><b>Career Goals</b></p>
+        </div>
+        <div class="five wide column">
+          {{#if careerGoals}}
+            {{#each goal in careerGoals}}
+              <a class="ui label"><i style="color:white !important" class="fitted suitcase icon"></i>{{goalName goal}}</a>
+            {{/each}}
+            <br>
+          {{else}}
+            <p>None</p>
+          {{/if}}
+          <br><a href="{{pathFor 'Student_Explorer_Career_Page' username=routeUserName}}">Edit in career
+          explorer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
