@@ -14,21 +14,18 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
-  this.autorun(() => {
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Feedbacks.getPublicationName());
-    this.subscribe(FeedbackInstances.getPublicationName());
-    this.subscribe(Interests.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Teasers.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-    this.subscribe(AcademicYearInstances.getPublicationName());
-    this.subscribe(VerificationRequests.getPublicationName());
-
-  });
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Teasers.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Student_Home_Page.helpers({
@@ -36,7 +33,6 @@ Template.Student_Home_Page.helpers({
     return Template.instance().state;
   },
   getTeasers() {
-    const ret = [];
     const allTeasers = Teasers.find().fetch();
     return allTeasers;
   },
@@ -47,7 +43,7 @@ Template.Student_Home_Page.helpers({
     return Opportunities.find().fetch();
   },
   activateSemanticUiJavascript() {
-    $('.ui .embed').embed();
+    this.$('.ui .embed').embed();
   },
 });
 

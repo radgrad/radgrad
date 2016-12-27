@@ -1,58 +1,36 @@
 <template name="Student_Teaser_Widget">
   {{#if Template.subscriptionsReady}}
-  <div class="ui padded segment container">
-    <div class="ui dividing header">
-      <h4>ICS TEASER VIDEOS</h4>
-    </div>
+    <div class="ui padded segment container">
+      <div class="ui dividing header">
+        <h4>ICS TEASER VIDEOS ({{teaserCount}})</h4>
+      </div>
 
-    <div class="ui cards">
-      {{#each teaser in getTeasers}}
-        <div class="ui card">
-          <div class="content">
-            <div class="header">{{teaser.title}}</div>
-            <div class="meta">By {{teaser.author}}</div>
-          </div>
-          <div style="padding:0px;" class="content">
-            <div class="ui embed active" width="290" height="auto"
-                 data-url="{{teaser.url}}">
+      <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui cards">
+        {{#each teaser in teasers}}
+          <div class="ui card">
+            <div class="content">
+              <div class="header">{{teaserTitle teaser}}</div>
+              <div class="meta">By {{teaserAuthor teaser}}</div>
             </div>
-
-          </div>
-          <div class="content">
+            <div style="padding:0;" class="content">
+              <div class="ui embed active" style="width:290px; height:auto" data-url="{{teaserUrl teaser}}">
+              </div>
+            </div>
+            <div class="content">
                 <span class="left floated">
-                  {{#each interest in getTeaserInterests teaser}}
-                    <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
+                  {{#each interest in matchingInterests teaser}}
+                    <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
                   {{/each}}
                 </span>
+            </div>
+            <div class="content bottom">
+              <a>View more details</a>
+            </div>
           </div>
-          <div class="content bottom">
-            <a>View more details</a>
-          </div>
-        </div>
-
-      {{/each}}
-    </div>
-
-    <div class="ui center aligned container">
-      <div class="ui mini compact pagination menu bottom">
-        <a class="active item">
-          1
-        </a>
-        <div class="disabled item">
-          ...
-        </div>
-        <a class="item">
-          6
-        </a>
-        <a class="item">
-          7
-        </a>
-        <a class="item">
-          8
-        </a>
+        {{/each}}
       </div>
     </div>
-  </div>
+
   {{else}}
     {{> Loading}}
   {{/if}}
