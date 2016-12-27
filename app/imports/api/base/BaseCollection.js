@@ -85,6 +85,19 @@ class BaseCollection {
   }
 
   /**
+   * Runs a simplified version of update on this collection.
+   * @see {@link http://docs.meteor.com/api/collections.html#Mongo-Collection-update}
+   * @param { Object } selector A MongoDB selector.
+   * @param { Object } modifier A MongoDB modifier
+   * @returns true
+   */
+  update(selector, modifier) {
+    const theSelector = (typeof selector === 'undefined') ? {} : selector;
+    this._collection.update(theSelector, modifier);
+    return true;
+  }
+
+  /**
    * Returns true if the passed entity is in this collection.
    * @param { String | Object } name The docID, or an object specifying a documennt.
    * @returns {boolean} True if name exists in this collection.
