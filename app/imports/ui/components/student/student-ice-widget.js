@@ -145,20 +145,8 @@ Template.Student_Ice_Widget.helpers({
   projectedEventsC() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
-      const plannedInstances = [];
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
-      courseInstances.forEach((courseInstance) => {
-        if (courseInstance.ice.c > 0) {
-          plannedInstances.push(courseInstance);
-        }
-      });
-      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: false }).fetch();
-      oppInstances.forEach((oppInstance) => {
-        if (oppInstance.ice.c > 0) {
-          plannedInstances.push(oppInstance);
-        }
-      });
-      return plannedInstances;
+      return courseInstances;
     }
     return null;
   },
