@@ -59,7 +59,6 @@ Template.Update_Course_Widget.helpers({
   },
   selectedCourseIDs() {
     const course = Courses.findDoc(Template.currentData().updateID.get());
-    console.log('selectedCourseId', course.prerequisites);
     return _.map(course.prerequisites, prerequisite => Courses.findIdBySlug(prerequisite));
   },
   prerequisites() {
@@ -82,8 +81,7 @@ Template.Update_Course_Widget.events({
     const interestIDs = _.map(selectedInterests, (option) => option.value);
     // Get Prerequisites (multiple selection)
     const selectedPrerequisites = _.filter(event.target.prerequisites.selectedOptions, (option) => option.selected);
-    const prerequisiteIDs = _.map(selectedPrerequisites, (option) => option.value);
-    const prerequisites = _.map(prerequisiteIDs, (id) => Courses.findSlugByID(id));
+    const prerequisites = _.map(selectedPrerequisites, (option) => option.value);
     const updatedData = { interestIDs, name, shortName, number, creditHrs, syllabus,
       moreInformation, description, prerequisites };
     // Clear out any old validation errors.

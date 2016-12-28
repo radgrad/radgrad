@@ -74,8 +74,7 @@ Template.Add_Course_Widget.events({
     const interests = _.map(selectedInterests, (option) => option.value);
     // Get Prerequisites (multiple selection)
     const selectedPrerequisites = _.filter(event.target.prerequisites.selectedOptions, (option) => option.selected);
-    const prerequisiteIDs = _.map(selectedPrerequisites, (option) => option.value);
-    const prerequisites = _.map(prerequisiteIDs, (id) => Courses.findSlugByID(id));
+    const prerequisites = _.map(selectedPrerequisites, (option) => option.value);
     const newData = { name, slug, shortName, number, creditHrs, syllabus,
       moreInformation, description, interests, prerequisites };
     // Clear out any old validation errors.

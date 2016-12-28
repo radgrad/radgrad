@@ -4,7 +4,7 @@
     <select multiple="" class="ui dropdown" name="prerequisites">
       <option value="">Select Course(s)</option>
       {{#each course in courses}}
-        <option value="{{course._id}}" selected="{{isSelected course._id selectedCourseIDs}}">{{course.number}}</option>
+        <option value="{{courseSlug course._id}}" selected="{{isSelected course._id selectedCourseIDs}}">{{course.number}}</option>
       {{/each}}
     </select>
     {{> Form_Error_Message errorMessage=errorMessage}}

@@ -1,5 +1,7 @@
 import './form-error-message.html';
 
+import './form-field-utilities.js';
+
 import './input-form-field.html';
 
 import './interests-form-field.html';
