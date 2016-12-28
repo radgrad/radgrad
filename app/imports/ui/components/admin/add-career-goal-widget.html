@@ -5,16 +5,16 @@
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> Input_Form_Field required=true label='Name' name='name' placeholder='Software Engineer' errorMessage=(fieldError 'name')}}
-        {{> Input_Form_Field required=true label='Slug' name='slug' placeholder='software-engineer' errorMessage=(fieldError 'slug')}}
+        {{> Input_Form_Field label="Name" name="name" placeholder="Software Engineer" errorMessage=(fieldError "name") required=true}}
+        {{> Input_Form_Field label="Slug" name="slug" placeholder="software-engineer" errorMessage=(fieldError "slug") required=true}}
       </div>
 
       <div class="fields">
-        {{> Interests_Form_Field interests=interests errorMessage=(fieldError 'interests')}}
-        {{> Input_Form_Field required=true label='More Information' name='moreInformation' placeholder='http://careergoal.com/software-engineering' errorMessage=(fieldError 'moreInformation')}}
+        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests")}}
+        {{> Input_Form_Field label="More Information" name="moreInformation" placeholder="http://careergoal.com/software-engineering" errorMessage=(fieldError "moreInformation") required=true}}
       </div>
 
-      {{> TextArea_Form_Field required=true label='Description' rows=5 name='description' placeholder='Describe the Career Goal here' errorMessage=(fieldError 'description')}}
+      {{> TextArea_Form_Field label="Description" rows=5 name="description" placeholder="Describe the Career Goal here" errorMessage=(fieldError "description") required=true}}
 
       <button class="ui green basic button" type="submit">Add</button>
 
