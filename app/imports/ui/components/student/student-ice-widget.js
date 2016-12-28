@@ -16,7 +16,7 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-Template.Student_Ice.helpers({
+Template.Student_Ice_Widget.helpers({
   earnedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -49,6 +49,15 @@ Template.Student_Ice.helpers({
   },
   remainingICE(earned, projected) {
     return projected - earned;
+  },
+  innovationPoints(ice) {
+    return ice.i;
+  },
+  competencyPoints(ice) {
+    return ice.c;
+  },
+  experiencePoints(ice) {
+    return ice.e;
   },
   earnedEventsI() {
     if (getUserIdFromRoute()) {
@@ -203,15 +212,18 @@ Template.Student_Ice.helpers({
     return `${oppTerm} ${oppYear}`;
   },
   isCourse(c) {
-    return (c.opportunityID === null && c.sponsorID === null);
+    return (c.opportunityID === null);
+  },
+  eventIce(event) {
+    return event.ice;
   },
 });
 
-Template.Student_Ice.events({
+Template.Student_Ice_Widget.events({
   // add events here
 });
 
-Template.Student_Ice.onCreated(function studentIceOnCreated() {
+Template.Student_Ice_Widget.onCreated(function studentIceOnCreated() {
   this.state = new ReactiveDict();
   if (getUserIdFromRoute()) {
     this.state.set(sessionKeys.CURRENT_STUDENT_ID, getUserIdFromRoute());
@@ -230,11 +242,11 @@ Template.Student_Ice.onCreated(function studentIceOnCreated() {
   });
 });
 
-Template.Student_Ice.onDestroyed(function studentIceOnDestroyed() {
+Template.Student_Ice_Widget.onDestroyed(function studentIceOnDestroyed() {
   // add your statement here
 });
 
-Template.Student_Ice.onRendered(function enableAccordion() {
+Template.Student_Ice_Widget.onRendered(function enableAccordion() {
   this.$('.accordion').accordion({
     selector: {
       trigger: '.title .icon',
@@ -242,3 +254,4 @@ Template.Student_Ice.onRendered(function enableAccordion() {
     exclusive: false,
   });
 });
+
