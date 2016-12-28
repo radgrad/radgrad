@@ -59,13 +59,13 @@
               <div class="ui list">
                 {{#each event in getEvents 'i' 'opportunity' false}}
                   <div class="item">
-                    <b>+{{experiencePoints (eventIce event)}}</b>
+                    <b>+{{innovationPoints (eventIce event)}}</b>
                       {{ opportunityName event }} ({{eventSem event}})
                   </div>
                 {{/each}}
                 {{#each event in getEvents 'i' 'course' false}}
                   <div class="item">
-                    <b>+{{experiencePoints (eventIce event)}}</b>
+                    <b>+{{innovationPoints (eventIce event)}}</b>
                     {{ courseName event }} ({{courseNumber event}}, {{eventSem event}})
                   </div>
                 {{/each}}
@@ -78,14 +78,10 @@
             <div class="content">
               <p>Consider the following to complete the full 100 Innovation points.</p>
               <div class="ui list">
-                {{#each event in recommendedEventsI}}
+                {{#each event in recommendedEvents 'i' 'opportunities' (innovationPoints projectedICE)}}
                   <div class="item">
                     <b>+{{innovationPoints (eventIce event)}}</b>
-                    {{#if (isCourse event)}}
-                      {{ courseName event }} ({{ eventSem event }})
-                    {{ else }}
-                      {{ opportunityName event }} ({{eventSem event}})
-                    {{/if}}
+                      {{ event.name }}
                   </div>
                 {{/each}}
               </div>
@@ -157,12 +153,12 @@
             <div class="content">
               <p>Consider the following to complete the full 100 Competency points.</p>
               <div class="ui list">
-                <a class="item">
-                  <div class="content">
-                    <div class="header">Achieve an overall GPA of 3.0+. (Fall 2016)</div>
-                    <div class="description"><b>+5</b> Competency points</div>
+                {{#each event in recommendedEvents 'c' 'course' (competencyPoints projectedICE)}}
+                  <div class="item">
+                    <b>+9</b>
+                    {{ event.shortName }}
                   </div>
-                </a>
+                {{/each}}
               </div>
             </div>
           </div>
@@ -244,14 +240,12 @@
             <div class="content">
               <p>Consider the following to complete the full 100 Experience points.</p>
               <div class="ui list">
-                <a class="item">
-                  <div class="content">
-                    <div class="header">Participate in the monk seal tracker app development internship with Cam
-                      Moore. (Spring 2017)
-                    </div>
-                    <div class="description"><b>+25</b> Experience points</div>
+                {{#each event in recommendedEvents 'e' 'opportunities' (experiencePoints projectedICE)}}
+                  <div class="item">
+                    <b>+{{experiencePoints (eventIce event)}}</b>
+                    {{ event.name }}
                   </div>
-                </a>
+                {{/each}}
               </div>
             </div>
           </div>
