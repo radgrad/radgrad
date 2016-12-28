@@ -5,6 +5,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { makeLink } from './datamodel-utilities';
+import * as FormUtils from './form-fields/form-field-utilities.js';
 
 Template.List_Career_Goals_Widget.onCreated(function listCareerGoalsWidgetOnCreated() {
   this.subscribe(CareerGoals.getPublicationName());
@@ -47,11 +48,7 @@ Template.List_Career_Goals_Widget.helpers({
 });
 
 Template.List_Career_Goals_Widget.events({
-  'click .jsUpdate': function (event, instance) {
-    event.preventDefault();
-    const careerGoalID = event.target.value;
-    instance.data.updateID.set(careerGoalID);
-  },
+  'click .jsUpdate': FormUtils.processUpdateButtonClick,
   'click .jsDelete': function (event) {
     event.preventDefault();
     const careerGoalID = event.target.value;

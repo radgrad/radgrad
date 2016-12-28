@@ -84,6 +84,12 @@ export function processCancelButtonClick(event, instance) {
   instance.data.updateID.set('');
 }
 
+export function processUpdateButtonClick(event, instance) {
+  event.preventDefault();
+  const id = event.target.value;
+  instance.data.updateID.set(id);
+}
+
 /*
  * Register common helper classes for form processing.
  */

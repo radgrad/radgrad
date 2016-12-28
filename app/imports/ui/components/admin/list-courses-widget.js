@@ -5,6 +5,8 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { makeLink } from './datamodel-utilities';
+import * as FormUtils from './form-fields/form-field-utilities.js';
+
 
 Template.List_Courses_Widget.onCreated(function listCoursesWidgetOnCreated() {
   this.subscribe(Courses.getPublicationName());
@@ -49,11 +51,7 @@ Template.List_Courses_Widget.helpers({
 });
 
 Template.List_Courses_Widget.events({
-  'click .jsUpdate': function (event, instance) {
-    event.preventDefault();
-    const courseID = event.target.value;
-    instance.data.updateID.set(courseID);
-  },
+  'click .jsUpdate': FormUtils.processUpdateButtonClick,
   'click .jsDelete': function (event) {
     event.preventDefault();
     const courseID = event.target.value;
