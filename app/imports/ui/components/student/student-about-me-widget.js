@@ -70,6 +70,13 @@ Template.Student_About_Me_Widget.helpers({
     }
     return '';
   },
+  picture() {
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      return user.picture;
+    }
+    return '';
+  },
   interests() {
     const ret = [];
     if (getRouteUserName()) {
@@ -86,6 +93,13 @@ Template.Student_About_Me_Widget.helpers({
   goalName(goal) {
     return goal.name;
   },
+  studentPicture() {
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      return `/images/landing/${user.picture}`;
+    }
+    return '';
+  },
 });
 
 Template.Student_About_Me_Widget.events({
@@ -94,6 +108,12 @@ Template.Student_About_Me_Widget.events({
     const user = Users.findDoc({ username: getRouteUserName() });
     const choice = event.target.website.value;
     Users.setWebsite(user._id, choice);
+  },
+  'submit .picture': function submitPicture(event) {
+    event.preventDefault();
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const choice = event.target.picture.value;
+    Users.setPicture(user._id, choice);
   },
 });
 

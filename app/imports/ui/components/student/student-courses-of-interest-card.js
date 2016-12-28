@@ -10,7 +10,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 
 
-Template.Student_Courses_Of_Interest_Card.onCreated(function appBodyOnCreated() {
+Template.Student_Courses_Of_Interest_Card.onCreated(function studentCoursesOfInterestCardOnCreated() {
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
@@ -19,7 +19,9 @@ Template.Student_Courses_Of_Interest_Card.onCreated(function appBodyOnCreated() 
 });
 
 function interestedStudentsHelper(course) {
-  let ret = [];
+  const ret = [];
+  const temp = CourseInstances.find().fetch();
+  console.log(temp);
   const ci = CourseInstances.find({
     courseID: course._id,
   }).fetch();

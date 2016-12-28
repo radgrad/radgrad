@@ -49,24 +49,9 @@
 
       <div class="row">
         <div class="two wide column">
-          <p><b>Interests</b></p>
-        </div>
-        <div class="six wide column">
-          {{#if interests}}
-            {{#each interest in interests}}
-              <a class="ui label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
-            {{/each}}
-            <br>
-          {{else}}
-            <p>None</p>
-          {{/if}}
-          <br><a href="{{pathFor 'Student_Explorer_Interest_Page' username=routeUserName}}">Edit in interest
-          explorer</a>
-        </div>
-        <div class="two wide column">
           <p><b>Career Goals</b></p>
         </div>
-        <div class="five wide column">
+        <div class="six wide column">
           {{#if careerGoals}}
             {{#each goal in careerGoals}}
               <a class="ui label"><i style="color:white !important" class="fitted suitcase icon"></i>{{goalName goal}}</a>
@@ -78,7 +63,39 @@
           <br><a href="{{pathFor 'Student_Explorer_Career_Page' username=routeUserName}}">Edit in career
           explorer</a>
         </div>
+        <div class="two wide column">
+          <p><b>Interests</b></p>
+        </div>
+        <div class="five wide column">
+          {{#if interests}}
+            {{#each interest in interests}}
+              <a class="ui label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
+            {{/each}}
+            <br>
+          {{else}}
+            <p>None</p>
+          {{/if}}
+          <br><a href="{{pathFor 'Student_Explorer_Interest_Page' username=routeUserName}}">Edit in interest
+          explorer</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column">
+        <p><b>Profile Image</b></p>
+      </div>
+      <div class="six wide column">
+        <img class="ui tiny circular image" src={{studentPicture student}}><br>
+        <form class="ui form picture">
+          <div class="inline field">
+            <div class="ui action input">
+              <input id="picture" type="text" name="picture" placeholder="Enter new picture url">
+              <button class="ui green button picture" type="submit">Update</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 </template>
