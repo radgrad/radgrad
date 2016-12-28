@@ -59,129 +59,80 @@ Template.Student_Ice_Widget.helpers({
   experiencePoints(ice) {
     return ice.e;
   },
-  earnedEventsI() {
+  getEvents(iceType, type, earned) {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
-      const earnedInstances = [];
-      const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
-      courseInstances.forEach((courseInstance) => {
-        if (courseInstance.ice.i > 0) {
-          earnedInstances.push(courseInstance);
+      let allInstances = [];
+      const iceInstances = [];
+      if (type === 'course') {
+        const courseInstances = CourseInstances.find({ studentID: user._id, verified: earned }).fetch();
+        courseInstances.forEach((courseInstance) => {
+          if (CourseInstances.isICS(courseInstance._id)) {
+            allInstances.push(courseInstance);
+          }
+        });
+      }
+      else {
+        allInstances = OpportunityInstances.find({ studentID: user._id, verified: earned }).fetch();
+      }
+      allInstances.forEach((instance) => {
+        if (iceType === 'i') {
+          if (instance.ice.i > 0) {
+            iceInstances.push(instance);
+          }
+        }
+        else if (iceType === 'c') {
+          iceInstances.push(instance);
+        }
+        else if (iceType === 'e') {
+          if (instance.ice.e > 0) {
+            iceInstances.push(instance);
+          }
+        }
+        else {
+          return null;
         }
       });
-      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
-      oppInstances.forEach((oppInstance) => {
-        if (oppInstance.ice.i > 0) {
-          earnedInstances.push(oppInstance);
-        }
-      });
-
-      return earnedInstances;
-    }
-    return null;
-  },
-  earnedEventsC() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const earnedInstances = [];
-      const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
-      courseInstances.forEach((courseInstance) => {
-        if (courseInstance.ice.c > 0) {
-          earnedInstances.push(courseInstance);
-        }
-      });
-      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
-      oppInstances.forEach((oppInstance) => {
-        if (oppInstance.ice.c > 0) {
-          earnedInstances.push(oppInstance);
-        }
-      });
-
-      return earnedInstances;
-    }
-    return null;
-  },
-  earnedEventsE() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const earnedInstances = [];
-      const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
-      courseInstances.forEach((courseInstance) => {
-        if (courseInstance.ice.e > 0) {
-          earnedInstances.push(courseInstance);
-        }
-      });
-      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
-      oppInstances.forEach((oppInstance) => {
-        if (oppInstance.ice.e > 0) {
-          earnedInstances.push(oppInstance);
-        }
-      });
-
-      return earnedInstances;
-    }
-    return null;
-  },
-  projectedEventsI() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const plannedInstances = [];
-      const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
-      courseInstances.forEach((courseInstance) => {
-        if (courseInstance.ice.i > 0) {
-          plannedInstances.push(courseInstance);
-        }
-      });
-      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: false }).fetch();
-      oppInstances.forEach((oppInstance) => {
-        if (oppInstance.ice.i > 0) {
-          plannedInstances.push(oppInstance);
-        }
-      });
-      return plannedInstances;
-    }
-    return null;
-  },
-  projectedEventsC() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
-      return courseInstances;
-    }
-    return null;
-  },
-  projectedEventsE() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const plannedInstances = [];
-      const courseInstances = CourseInstances.find({ studentID: user._id, verified: false }).fetch();
-      courseInstances.forEach((courseInstance) => {
-        if (courseInstance.ice.e > 0) {
-          plannedInstances.push(courseInstance);
-        }
-      });
-      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: false }).fetch();
-      oppInstances.forEach((oppInstance) => {
-        if (oppInstance.ice.e > 0) {
-          plannedInstances.push(oppInstance);
-        }
-      });
-      return plannedInstances;
+      return iceInstances;
     }
     return null;
   },
 
-  recommendedEventsI() {
+  recommendedEvents(iceType, type, earned) {
     if (getUserIdFromRoute()) {
-      const allEvents = [];
-      const allCourses = CourseInstances.find().fetch();
-
-      allCourses.forEach((courseInstance) => {
-        if (CourseInstances.isICS(courseInstance._id)) {
-          allEvents.push(courseInstance);
+      const user = Users.findDoc(getUserIdFromRoute());
+      let allInstances = [];
+      const recommendedInstances = [];
+      if (type === 'course') {
+        const courseInstances = CourseInstances.find({ studentID: user._id, verified: earned }).fetch();
+        courseInstances.forEach((courseInstance) => {
+          if (CourseInstances.isICS(courseInstance._id)) {
+          allInstances.push(courseInstance);
         }
       });
-      return allEvents;
+      }
+      else {
+        allInstances = OpportunityInstances.find({ studentID: user._id, verified: earned }).fetch();
+      }
+      allInstances.forEach((instance) => {
+        if (iceType === 'i') {
+        if (instance.ice.i > 0) {
+          iceInstances.push(instance);
+        }
+      }
+    else if (iceType === 'c') {
+        iceInstances.push(instance);
+      }
+      else if (iceType === 'e') {
+          if (instance.ice.e > 0) {
+            iceInstances.push(instance);
+          }
+        }
+        else {
+          return null;
+        }
+    });
+      return iceInstances;
     }
     return null;
   },
@@ -189,18 +140,19 @@ Template.Student_Ice_Widget.helpers({
     const course = Courses.findDoc(c.courseID);
     return course.shortName;
   },
+  courseNumber(c) {
+    const course = Courses.findDoc(c.courseID);
+    return course.number;
+  },
   opportunityName(opp) {
     const opportunity = Opportunities.findDoc(opp.opportunityID);
     return opportunity.name;
   },
-  opportunitySem(opp) {
-    const sem = Semesters.findDoc(opp.semesterID);
+  eventSem(event) {
+    const sem = Semesters.findDoc(event.semesterID);
     const oppTerm = sem.term;
     const oppYear = sem.year;
     return `${oppTerm} ${oppYear}`;
-  },
-  isCourse(c) {
-    return (c.opportunityID === null);
   },
   eventIce(event) {
     return event.ice;
@@ -212,22 +164,16 @@ Template.Student_Ice_Widget.events({
 });
 
 Template.Student_Ice_Widget.onCreated(function studentIceOnCreated() {
-  this.state = new ReactiveDict();
-  if (getUserIdFromRoute()) {
-    this.state.set(sessionKeys.CURRENT_STUDENT_ID, getUserIdFromRoute());
-  }
-  this.autorun(() => {
-    this.subscribe(AcademicYearInstances.getPublicationName());
-    this.subscribe(CareerGoals.getPublicationName());
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Interests.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-    this.subscribe(VerificationRequests.getPublicationName());
-  });
+  this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Student_Ice_Widget.onDestroyed(function studentIceOnDestroyed() {
