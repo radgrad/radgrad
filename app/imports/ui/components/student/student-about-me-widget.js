@@ -93,7 +93,6 @@ Template.Student_About_Me_Widget.events({
     event.preventDefault();
     const user = Users.findDoc({ username: getRouteUserName() });
     const choice = event.target.website.value;
-    console.log("hello");
     Users.setWebsite(user._id, choice);
   },
 });
