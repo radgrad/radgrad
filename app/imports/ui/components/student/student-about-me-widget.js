@@ -11,6 +11,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
+
 Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreated() {
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
@@ -58,7 +59,7 @@ Template.Student_About_Me_Widget.helpers({
   email() {
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      return user.email;
+      return Users.getEmail(user._id);
     }
     return '';
   },
@@ -88,17 +89,12 @@ Template.Student_About_Me_Widget.helpers({
 });
 
 Template.Student_About_Me_Widget.events({
-  'submit .email': function submitEmail(event) {
-    event.preventDefault();
-    const student = Users.findDoc(getRouteUserName());
-    const choice = event.target.emailAddress.value;
-    Users.setEmail(student._id, choice);
-  },
   'submit .website': function submitWebsite(event) {
     event.preventDefault();
-    const student = Users.findDoc(getRouteUserName());
+    const user = Users.findDoc({ username: getRouteUserName() });
     const choice = event.target.website.value;
-    Users.setWebsite(student._id, choice);
+    console.log("hello");
+    Users.setWebsite(user._id, choice);
   },
 });
 
