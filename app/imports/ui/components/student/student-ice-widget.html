@@ -81,7 +81,7 @@
                 {{#each event in recommendedEvents 'i' 'opportunities' (innovationPoints projectedICE)}}
                   <div class="item">
                     <b>+{{innovationPoints (eventIce event)}}</b>
-                      {{ event.name }}
+                      {{ event.name }} ({{ opportunitySemesters event}})
                   </div>
                 {{/each}}
               </div>
@@ -156,7 +156,7 @@
                 {{#each event in recommendedEvents 'c' 'course' (competencyPoints projectedICE)}}
                   <div class="item">
                     <b>+9</b>
-                    {{ event.shortName }}
+                    {{ event.shortName }} ({{event.number}})
                   </div>
                 {{/each}}
               </div>
@@ -243,7 +243,7 @@
                 {{#each event in recommendedEvents 'e' 'opportunities' (experiencePoints projectedICE)}}
                   <div class="item">
                     <b>+{{experiencePoints (eventIce event)}}</b>
-                    {{ event.name }}
+                    {{ event.name }} ({{ opportunitySemesters event}})
                   </div>
                 {{/each}}
               </div>

@@ -221,19 +221,31 @@ Template.Student_Ice_Widget.helpers({
         });
       }
       else if (iceType === 'e') {
-          allInstances.forEach((instance) => {
-            if (totalIce < remainder) {
-              totalIce += instance.ice.e;
-              recommendedInstances.push(instance);
-            }
-          });
-        }
-        else {
-          return null;
-        }
+        allInstances.forEach((instance) => {
+          if (totalIce < remainder) {
+            totalIce += instance.ice.e;
+            recommendedInstances.push(instance);
+          }
+        });
+      }
+      else {
+        return null;
+      }
       return recommendedInstances;
     };
     return null;
+  },
+  opportunitySemesters(opp) {
+    const semesters = opp.semesterIDs;
+    let semesterNames = "";
+    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSemester = Semesters.findDoc(currentSemesterID);
+    _.map(semesters, (sem) => {
+      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
+        semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
+    }
+  });
+    return semesterNames.slice(0, -2); // removes unnecessary comma and space
   },
   courseName(c) {
     const course = Courses.findDoc(c.courseID);
