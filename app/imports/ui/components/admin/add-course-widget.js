@@ -6,6 +6,7 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
+
 /**
  * Custom validator for the slug field.
  * @returns True if the slug value is not previously defined, otherwise errorType 'duplicateSlug'.

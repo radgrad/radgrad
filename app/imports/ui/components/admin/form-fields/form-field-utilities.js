@@ -35,6 +35,17 @@ export function slugFieldValidator() {
 /* eslint-disable no-param-reassign */
 
 /**
+ * Rename oldKey in obj to newKey.
+ * @param obj The object containing oldKey
+ * @param oldKey The oldKey (a string).
+ * @param newKey The newKey (a string).
+ */
+export function renameKey(obj, oldKey, newKey) {
+  obj[newKey] = obj[oldKey];
+  delete obj[oldKey];
+}
+
+/**
  * Add successClass, errorClass, and context to the template.
  * @param instance The template instance.
  * @param schema The schema associated with the form in this instance.
@@ -66,6 +77,11 @@ export function indicateSuccess(instance, event) {
 export function indicateError(instance) {
   instance.successClass.set('');
   instance.errorClass.set('error');
+}
+
+export function processCancelButtonClick(event, instance) {
+  event.preventDefault();
+  instance.data.updateID.set('');
 }
 
 /*
