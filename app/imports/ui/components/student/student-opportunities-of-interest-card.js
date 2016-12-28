@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
+import { _, lodash } from 'meteor/erasaur:meteor-lodash';
 
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
@@ -52,6 +52,25 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
       });
     }
     return ret;
+  },
+  interestedStudents(opp) {
+    const interested = [];
+    let x;
+    const temp = OpportunityInstances.find().fetch();
+    for (x in temp) {
+      console.log("!!!" + temp);
+    }
+    const oi = OpportunityInstances.find({
+      opportunityID: opp._id,
+    }).fetch();
+    console.log(oi);
+    _.map(oi, (instance) => {
+      console.log("Hello3");
+    interested.push(instance);
+        console.log("Hello");
+
+    });
+    return interested;
   },
   opportunityShortDescription(opp) {
     let description = opp.description;

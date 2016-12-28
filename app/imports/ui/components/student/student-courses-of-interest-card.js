@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -17,6 +18,18 @@ Template.Student_Courses_Of_Interest_Card.onCreated(function appBodyOnCreated() 
   this.subscribe(Users.getPublicationName());
 });
 
+function interestedStudentsHelper(course) {
+  let ret = [];
+  const ci = CourseInstances.find({
+    courseID: course._id,
+  }).fetch();
+  _.map(ci, (c) => {
+    if (!_.includes(ret, c)) {
+    ret.push(Users.findDoc(c.studentID));
+  }
+});
+  return ret;
+}
 
 Template.Student_Courses_Of_Interest_Card.helpers({
   getDictionary() {
@@ -41,6 +54,7 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     }
     return description;
   },
+
   matchingInterests(course) {
     const matchingInterests = [];
     const user = Users.findDoc({ username: getRouteUserName() });
@@ -63,6 +77,15 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   },
   interestName(interest) {
     return interest.name;
+  },
+  interestedStudents(course) {
+    return interestedStudentsHelper(course);
+  },
+  numberStudents(course) {
+    return interestedStudentsHelper(course).length;
+  },
+  studentPicture(student) {
+    return `/images/landing/${student.picture}`;
   },
 });
 

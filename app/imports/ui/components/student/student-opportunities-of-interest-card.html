@@ -14,14 +14,9 @@
     <div class="content">
       23 students plan to participate
       <div class="ui circular mini images">
-        <img class="ui image" src="/images/landing/boado.jpg">
-        <img class="ui image" src="/images/landing/garces.jpg">
-        <img class="ui image" src="/images/landing/khongnawang.jpg">
-        <img class="ui image" src="/images/landing/boado.jpg">
-        <img class="ui image" src="/images/landing/garces.jpg">
-        <img class="ui image" src="/images/landing/khongnawang.jpg">
-        <img class="ui image" src="/images/landing/boado.jpg">
-        <img class="ui image" src="/images/landing/garces.jpg">
+        {{#each student in interestedStudents opportunity}}
+        <img class="ui image" src="/images/landing/" {{student.picture}}>
+        {{/each}}
         <a><img class="ui bordered image" src="/images/elipsis.png"></a>
       </div>
     </div>

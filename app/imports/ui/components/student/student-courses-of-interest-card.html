@@ -12,16 +12,11 @@
       {{courseShortDescription course}}
     </div>
     <div class="content">
-      23 students plan to participate
+      {{numberStudents course}} students plan to participate
       <div class="ui circular mini images">
-        <img class="ui image" src="/images/landing/boado.jpg">
-        <img class="ui image" src="/images/landing/garces.jpg">
-        <img class="ui image" src="/images/landing/khongnawang.jpg">
-        <img class="ui image" src="/images/landing/boado.jpg">
-        <img class="ui image" src="/images/landing/garces.jpg">
-        <img class="ui image" src="/images/landing/khongnawang.jpg">
-        <img class="ui image" src="/images/landing/boado.jpg">
-        <img class="ui image" src="/images/landing/garces.jpg">
+        {{#each student in interestedStudents course}}
+        <img class="ui image" src={{studentPicture student}}>
+        {{/each}}
         <a><img class="ui bordered image" src="/images/elipsis.png"></a>
       </div>
     </div>
