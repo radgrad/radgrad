@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
-import { lodash } from 'meteor/erasaur:meteor-lodash';
+import { _, lodash } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -19,14 +18,13 @@ Template.Student_Courses_Of_Interest_Widget.onCreated(function appBodyOnCreated(
 });
 
 function passedCourse(course) {
+  let ret = false;
   if (course.grade === 'A+' || course.grade === 'A' || course.grade === 'A-' ||
       course.grade === 'B+' || course.grade === 'B' || course.grade === 'B-' ||
       course.grade === 'CR') {
-    return true;
+    ret = true;
   }
-  else {
-    return false;
-  }
+  return ret;
 }
 
 const availableCourses = () => {

@@ -55,7 +55,7 @@ export function makeCourseICE(course, grade) {
   }
   // ICS499 gets experience and innovation points.
   if (course === 'ics499') {
-    if (grade.includes('A') || grade.includes('B')){
+    if (grade.includes('A') || grade.includes('B')) {
       i = 25;
     }
   }
