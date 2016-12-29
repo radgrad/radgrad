@@ -11,9 +11,11 @@ Template.Student_Levels_Others.helpers({
       const students =[];
       _.map(Users.find().fetch(), (user) => {
         if (user.level === userLevel) {
-        students.push(user);
-      }
-    });
+          if (user._id !== getUserIdFromRoute()) {
+            students.push(user);
+          }
+        }
+      });
       return students;
     }
     return '';
@@ -51,10 +53,10 @@ Template.Student_Levels_Others.helpers({
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
       if (user.level) {
-        return `Level ${user.level}`;
+        return `LEVEL ${user.level}`;
       }
     }
-    return 'Level 1';
+    return 'LEVEL 1';
   },
   studentLevelNumber() {
     if (getUserIdFromRoute()) {
