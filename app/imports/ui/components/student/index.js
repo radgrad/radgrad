@@ -20,6 +20,15 @@ import './interests.js';
 import './student-about-me-widget.html';
 import './student-about-me-widget.js';
 
+import './student-level-hints.html';
+import './student-level-hints.js';
+
+import './student-levels-others.html';
+import './student-levels-others.js';
+
+import './student-levels-widget.html';
+import './student-levels-widget.js';
+
 import './student-opportunities-of-interest-card.html';
 import './student-opportunities-of-interest-card.js';
 
