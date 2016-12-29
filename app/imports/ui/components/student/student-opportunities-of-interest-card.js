@@ -25,8 +25,8 @@ function interestedStudentsHelper(opp) {
   }).fetch();
   _.map(oi, (o) => {
     const oppStudent = Users.findDoc(o.studentID);
-    if (!_.includes(interested, oppStudent)) {
-      interested.push(oppStudent);
+    if (!(_.includes(interested, o.studentID))) {
+      interested.push(o.studentID);
     }
   });
   return interested;
@@ -110,7 +110,8 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
     });
     return matchingInterests;
   },
-  studentPicture(student) {
+  studentPicture(studentID) {
+    const student = Users.findDoc(studentID);
     return `/images/landing/${student.picture}`;
   },
 });

@@ -25,8 +25,8 @@ function interestedStudentsHelper(course) {
     courseID: course._id,
   }).fetch();
   _.map(ci, (c) => {
-    if (!_.includes(interested, c)) {
-      interested.push(Users.findDoc(c.studentID));
+    if (!_.includes(interested, c.studentID)) {
+      interested.push(c.studentID);
   }
 });
   return interested;
@@ -85,7 +85,8 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   numberStudents(course) {
     return interestedStudentsHelper(course).length;
   },
-  studentPicture(student) {
+  studentPicture(studentID) {
+    const student = Users.findDoc(studentID);
     return `/images/landing/${student.picture}`;
   },
 });
