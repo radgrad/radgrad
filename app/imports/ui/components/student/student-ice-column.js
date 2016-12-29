@@ -41,9 +41,9 @@ const availableCourses = () => {
       }).fetch();
       _.map(ci, (c) => {
         if (passedCourse(c)) {
-        passedCourses.push(c);
-      }
-    });
+          passedCourses.push(c);
+        }
+      });
       return passedCourses.length === 0;
     });
     return filtered;
@@ -59,22 +59,22 @@ function matchingCourses() {
   let courseInterests = [];
   _.map(user.interestIDs, (id) => {
     userInterests.push(Interests.findDoc(id));
-});
+  });
   _.map(allCourses, (course) => {
     courseInterests = [];
-  _.map(course.interestIDs, (id) => {
-    courseInterests.push(Interests.findDoc(id));
-  _.map(courseInterests, (courseInterest) => {
-    _.map(userInterests, (userInterest) => {
-    if (_.isEqual(courseInterest, userInterest)) {
-    if (!_.includes(matching, course)) {
-      matching.push(course);
-    }
-  }
-});
-});
-});
-});
+    _.map(course.interestIDs, (id) => {
+      courseInterests.push(Interests.findDoc(id));
+      _.map(courseInterests, (courseInterest) => {
+        _.map(userInterests, (userInterest) => {
+          if (_.isEqual(courseInterest, userInterest)) {
+            if (!_.includes(matching, course)) {
+              matching.push(course);
+            }
+          }
+        });
+      });
+    });
+  });
   return matching;
 }
 
@@ -86,22 +86,22 @@ function matchingOpportunities() {
   let opportunityInterests = [];
   _.map(user.interestIDs, (id) => {
     userInterests.push(Interests.findDoc(id));
-});
+  });
   _.map(allOpportunities, (opp) => {
     opportunityInterests = [];
-  _.map(opp.interestIDs, (id) => {
-    opportunityInterests.push(Interests.findDoc(id));
-  _.map(opportunityInterests, (oppInterest) => {
-    _.map(userInterests, (userInterest) => {
-    if (_.isEqual(oppInterest, userInterest)) {
-    if (!_.includes(matching, opp)) {
-      matching.push(opp);
-    }
-  }
-});
-});
-});
-});
+    _.map(opp.interestIDs, (id) => {
+      opportunityInterests.push(Interests.findDoc(id));
+      _.map(opportunityInterests, (oppInterest) => {
+        _.map(userInterests, (userInterest) => {
+          if (_.isEqual(oppInterest, userInterest)) {
+            if (!_.includes(matching, opp)) {
+              matching.push(opp);
+            }
+          }
+        });
+      });
+    });
+  });
   return matching;
 }
 
@@ -157,25 +157,25 @@ Template.Student_Ice_Column.helpers({
         const courseInstances = CourseInstances.find({ studentID: user._id, verified: earned }).fetch();
         courseInstances.forEach((courseInstance) => {
           if (CourseInstances.isICS(courseInstance._id)) {
-          allInstances.push(courseInstance);
-        }
-      });
+            allInstances.push(courseInstance);
+          }
+        });
       } else {
         allInstances = OpportunityInstances.find({ studentID: user._id, verified: earned }).fetch();
       }
       allInstances.forEach((instance) => {
         if (iceType === 'i') {
-        if (instance.ice.i > 0) {
+          if (instance.ice.i > 0) {
+            iceInstances.push(instance);
+          }
+        } else if (iceType === 'c') {
           iceInstances.push(instance);
+        } else if (iceType === 'e') {
+          if (instance.ice.e > 0) {
+            iceInstances.push(instance);
+          }
         }
-      } else if (iceType === 'c') {
-        iceInstances.push(instance);
-      } else if (iceType === 'e') {
-        if (instance.ice.e > 0) {
-          iceInstances.push(instance);
-        }
-      }
-    });
+      });
       return iceInstances;
     }
     return null;
@@ -196,24 +196,24 @@ Template.Student_Ice_Column.helpers({
       if (iceType === 'i') {
         allInstances.forEach((instance) => {
           if (totalIce < remainder) {
-          totalIce += instance.ice.i;
-          recommendedInstances.push(instance);
-        }
-      });
+            totalIce += instance.ice.i;
+            recommendedInstances.push(instance);
+          }
+        });
       } else if (iceType === 'c') {
         allInstances.forEach((instance) => {
           if (totalIce < remainder) {
-          totalIce += 9; // assume A grade
-          recommendedInstances.push(instance);
-        }
-      });
+            totalIce += 9; // assume A grade
+            recommendedInstances.push(instance);
+          }
+        });
       } else if (iceType === 'e') {
         allInstances.forEach((instance) => {
           if (totalIce < remainder) {
-          totalIce += instance.ice.e;
-          recommendedInstances.push(instance);
-        }
-      });
+            totalIce += instance.ice.e;
+            recommendedInstances.push(instance);
+          }
+        });
       } else {
         return null;
       }
@@ -228,9 +228,9 @@ Template.Student_Ice_Column.helpers({
     const currentSemester = Semesters.findDoc(currentSemesterID);
     _.map(semesters, (sem) => {
       if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
-      semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
-    }
-  });
+        semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
+      }
+    });
     return semesterNames.slice(0, -2); // removes unnecessary comma and space
   },
   courseName(c) {

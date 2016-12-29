@@ -27,15 +27,15 @@ function interestedStudentsHelper(course) {
   _.map(ci, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
-  }
-});
+    }
+  });
   return interested;
 }
 
 function currentSemester() {
   const currentSemesterID = Semesters.getCurrentSemester();
-  const currentSemester = Semesters.findDoc(currentSemesterID);
-  return currentSemester;
+  const currentSem = Semesters.findDoc(currentSemesterID);
+  return currentSem;
 }
 
 function nextSem(sem) {
@@ -51,7 +51,6 @@ function nextSem(sem) {
     nextTerm = 'Spring';
     slug = `${nextTerm}-${sem.year + 1}`;
   }
-  console.log(slug);
   return Semesters.findDoc(Slugs.getEntityID(slug, 'Semester'));
 }
 
@@ -115,12 +114,12 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   nextYears(amount) {
     const twoYears = [];
     let currentSem = currentSemester();
-    for (i = 0; i < amount * 3; i++) {
+    for (let i = 0; i < amount * 3; i += 1) {
       twoYears.push(Semesters.toString(currentSem));
       currentSem = nextSem(currentSem);
     }
     return twoYears;
-  }
+  },
 });
 
 Template.Student_Courses_Of_Interest_Card.events({

@@ -3,15 +3,14 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import { ROLE } from '../../../api/role/Role.js';
 
 Template.Student_Levels.helpers({
   students(userLevel) {
     if (getUserIdFromRoute()) {
-      const students =[];
+      const students = [];
       _.map(Users.find().fetch(), (user) => {
-      if (user.level === userLevel) {
-        students.push(user);
+        if (user.level === userLevel) {
+          students.push(user);
         }
       });
       return students;

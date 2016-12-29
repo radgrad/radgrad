@@ -27,9 +27,3 @@ export const defineUser = new ValidatedMethod({
   },
 });
 
-Meteor.methods({
-  'file-upload': function (fileInfo, fileData) {
-    console.log("received file " + fileInfo.name + " data: " + fileData);
-    fs.writeFile(fileInfo.name, fileData);
-  },
-});

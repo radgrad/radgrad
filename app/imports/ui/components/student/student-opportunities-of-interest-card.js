@@ -24,7 +24,6 @@ function interestedStudentsHelper(opp) {
     opportunityID: opp._id,
   }).fetch();
   _.map(oi, (o) => {
-    const oppStudent = Users.findDoc(o.studentID);
     if (!(_.includes(interested, o.studentID))) {
       interested.push(o.studentID);
     }
