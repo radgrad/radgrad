@@ -18,6 +18,7 @@ Template.Add_Help_Message_Widget.onCreated(function onCreated() {
 
 Template.Add_Help_Message_Widget.helpers({
   routeNames() {
+    // When defining a new help message, only provide routeNames that are not already used in a help message.
     const routesWithHelp = HelpMessages.find().map(doc => doc.routeName);
     return _.without(routeNames, ...routesWithHelp);
   },

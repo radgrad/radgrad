@@ -24,6 +24,9 @@ import './list-courses-widget.js';
 import './list-help-messages-widget.html';
 import './list-help-messages-widget.js';
 
+import './list-interests-widget.html';
+import './list-interests-widget.js';
+
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
 

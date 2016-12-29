@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-Template.Admin_DataModel_Courses_Page.helpers({
+Template.Admin_DataModel_Interests_Page.helpers({
   updateID() {
     return Template.instance().updateID;
   },
@@ -10,6 +10,7 @@ Template.Admin_DataModel_Courses_Page.helpers({
   },
 });
 
-Template.Admin_DataModel_Courses_Page.onCreated(function onCreated() {
+Template.Admin_DataModel_Interests_Page.onCreated(function onCreated() {
   this.updateID = new ReactiveVar('');
 });
+

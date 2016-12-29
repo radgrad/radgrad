@@ -7,6 +7,9 @@ import './admin-datamodel-courses-page.js';
 import './admin-datamodel-helpmessages-page.html';
 import './admin-datamodel-helpmessages-page.js';
 
+import './admin-datamodel-interests-page.html';
+import './admin-datamodel-interests-page.js';
+
 import './admin-datamodel-page.html';
 import './admin-datamodel-page.js';
 

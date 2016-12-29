@@ -11,4 +11,7 @@ Template.Admin_DataModel_Menu.helpers({
   helpMessagesRouteName() {
     return RouteNames.adminDataModelHelpMessagesPageRouteName;
   },
+  interestsRouteName() {
+    return RouteNames.adminDataModelInterestsPageRouteName;
+  },
 });

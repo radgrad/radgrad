@@ -72,6 +72,14 @@ adminRoutes.route('/datamodel/help-messages', {
   },
 });
 
+export const adminDataModelInterestsPageRouteName = 'Admin_DataModel_Interests_Page';
+adminRoutes.route('/datamodel/interests', {
+  name: adminDataModelInterestsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelInterestsPageRouteName });
+  },
+});
+
 /*                        ADVISOR ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.

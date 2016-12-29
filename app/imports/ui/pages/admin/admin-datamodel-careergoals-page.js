@@ -10,7 +10,7 @@ Template.Admin_DataModel_CareerGoals_Page.helpers({
   },
 });
 
-Template.Admin_DataModel_CareerGoals_Page.onCreated(function adminCrudPageOnCreated() {
+Template.Admin_DataModel_CareerGoals_Page.onCreated(function onCreated() {
   this.updateID = new ReactiveVar('');
 });
 
