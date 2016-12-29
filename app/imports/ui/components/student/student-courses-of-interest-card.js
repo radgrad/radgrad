@@ -32,6 +32,29 @@ function interestedStudentsHelper(course) {
   return interested;
 }
 
+function currentSemester() {
+  const currentSemesterID = Semesters.getCurrentSemester();
+  const currentSemester = Semesters.findDoc(currentSemesterID);
+  return currentSemester;
+}
+
+function nextSem(sem) {
+  let nextTerm = '';
+  let slug = '';
+  if (sem.term === Semesters.SPRING) {
+    nextTerm = 'Summer';
+    slug = `${nextTerm}-${sem.year}`;
+  } else if (sem.term === Semesters.SUMMER) {
+    nextTerm = 'Fall';
+    slug = `${nextTerm}-${sem.year}`;
+  } else if (sem.term === Semesters.FALL) {
+    nextTerm = 'Spring';
+    slug = `${nextTerm}-${sem.year + 1}`;
+  }
+  console.log(slug);
+  return Semesters.findDoc(Slugs.getEntityID(slug, 'Semester'));
+}
+
 Template.Student_Courses_Of_Interest_Card.helpers({
   getDictionary() {
     return Template.instance().state;
@@ -89,14 +112,42 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     const student = Users.findDoc(studentID);
     return `/images/landing/${student.picture}`;
   },
+  nextYears(amount) {
+    const twoYears = [];
+    let currentSem = currentSemester();
+    for (i = 0; i < amount * 3; i++) {
+      twoYears.push(Semesters.toString(currentSem));
+      currentSem = nextSem(currentSem);
+    }
+    return twoYears;
+  }
 });
 
 Template.Student_Courses_Of_Interest_Card.events({
-  'click .addToPlan': function clickItemAddToPlan() {
-    // to be implemented when semesters are associated with courses
+  'click .addToPlan': function clickItemAddToPlan(event) {
+    event.preventDefault();
+    const course = this.course;
+    const semester = event.target.text;
+    const courseSlug = Slugs.findDoc({ _id: course.slugID });
+    const semSplit = semester.split(' ');
+    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
+    const username = getRouteUserName();
+    const ci = {
+      semester: semSlug,
+      course: courseSlug,
+      verified: false,
+      note: course.number,
+      grade: '***',
+      student: username,
+    };
+    CourseInstances.define(ci);
   },
 });
 
 Template.Student_Courses_Of_Interest_Card.onRendered(function studentCoursesOfInterestCardOnRendered() {
-
+  const template = this;
+  template.$('.chooseSemester')
+      .popup({
+        on: 'click',
+      });
 });

@@ -32,7 +32,7 @@
       <div class="ui button chooseSemester"><div class="chooseSemester">Add to plan</div>
         <div class="ui fluid popup transition hidden">
           <div class="ui vertical menu">
-            {{#each semester in courseSemesters}}
+            {{#each semester in nextYears 2}}
               <a class="item addToPlan" data-position="right center">{{semester}}</a>
             {{/each}}
           </div>
