@@ -21,15 +21,14 @@ Template.Student_Opportunities_Of_Interest_Card.onCreated(function studentOpport
 function interestedStudentsHelper(opp) {
   const interested = [];
   const temp = OpportunityInstances.find().fetch();
-  console.log(temp.length);
   const oi = OpportunityInstances.find({
     opportunityID: opp._id,
   }).fetch();
   _.map(oi, (o) => {
     if (!_.includes(interested, o)) {
-    interested.push(Users.findDoc(o.studentID));
-  }
-});
+      interested.push(Users.findDoc(o.studentID));
+    }
+  });
   return interested;
 }
 

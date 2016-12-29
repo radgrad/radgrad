@@ -27,15 +27,9 @@
         {{/each}}
       </span>
     </div>
-    <div class="content bottom">
-      <span class="left floated">
-        <a>View more</a>
-      </span>
-      <span class="right floated">
-        <a>Hide</a>
-      </span>
-      <span>
-        <a class="chooseSemester">Add to plan</a>
+    <div class="ui three bottom attached buttons">
+      <div class="ui button">View more</div>
+      <div class="ui button chooseSemester"><div class="chooseSemester">Add to plan</div>
         <div class="ui fluid popup transition hidden">
           <div class="ui vertical menu">
             {{#each semester in courseSemesters}}
@@ -43,7 +37,8 @@
             {{/each}}
           </div>
         </div>
-      </span>
+      </div>
+      <div class="ui button">Hide</div>
     </div>
   </div>
 </template>
