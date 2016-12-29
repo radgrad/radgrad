@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../../../../api/slug/SlugCollection.js';
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -27,8 +28,12 @@ export function getSchemaDataFromEvent(schema, event) {
 /**
  * Custom validator for the slug field.
  * @returns True if the slug value is not previously defined, otherwise errorType 'duplicateSlug'.
+ * @throws Error if there are no Slugs in the SlugCollection.
  */
 export function slugFieldValidator() {
+  if (Slugs.count() === 0) {
+    throw Meteor.Error('slugFieldValidator called but SlugCollection is empty. Probably not subscribed to.');
+  }
   return (Slugs.isDefined(this.value)) ? 'duplicateSlug' : true;
 }
 

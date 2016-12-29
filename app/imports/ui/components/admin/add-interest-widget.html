@@ -1,0 +1,25 @@
+<template name="Add_Interest_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD INTEREST</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label="Name" name="name" placeholder="Software Engineering" errorMessage=(fieldError "name") required=true}}
+        {{> Input_Form_Field label="Slug" name="slug" placeholder="software-engineering" errorMessage=(fieldError "slug") required=true}}
+      </div>
+
+      <div class="fields">
+        {{> Interest_Types_Form_Field interestTypes=interestTypes errorMessage=(fieldError "interestTypes")}}
+        {{> Input_Form_Field label="More Information" name="moreInformation" placeholder="http://interest.com/software-engineering" errorMessage=(fieldError "moreInformation") required=true}}
+      </div>
+
+      {{> TextArea_Form_Field label="Description" rows=5 name="description" placeholder="Describe the Interest here" errorMessage=(fieldError "description") required=true}}
+
+      <button class="ui green basic button" type="submit">Add</button>
+
+      {{> Success_Message_Form_Field message="The Interest was successfully added."}}
+    </form>
+  </div>
+
+</template>

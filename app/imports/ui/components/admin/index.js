@@ -7,6 +7,9 @@ import './add-course-widget.js';
 import './add-help-message-widget.html';
 import './add-help-message-widget.js';
 
+import './add-interest-widget.html';
+import './add-interest-widget.js';
+
 import './admin-datamodel-accordion.html';
 import './admin-datamodel-accordion.js';
 
@@ -38,3 +41,6 @@ import './update-course-widget.js';
 
 import './update-help-message-widget.html';
 import './update-help-message-widget.js';
+
+import './update-interest-widget.html';
+import './update-interest-widget.js';
