@@ -1,52 +1,24 @@
 <template name="Update_Career_Goal_Widget">
 
   <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>UPDATE CAREER GOAL ({{careerGoal.name}})</h4></div>
+    <div class="ui dividing header"><h4>UPDATE CAREER GOAL</h4></div>
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        <div class="required field">
-          <label>Name</label>
-          <input type="text" name="name" value="{{careerGoal.name}}">
-          {{> Form_Error_Message errorMessage=(fieldError 'name')}}
-        </div>
-        <div class="field">
-          <label>Slug</label>
-          <div class="ui disabled input">
-            <input type="text" name="slug" value="{{slug}}">
-          </div>
-          {{> Form_Error_Message errorMessage=(fieldError 'slug')}}
-        </div>
+        {{> Input_Form_Field label='Name' name='name' value=careerGoal.name errorMessage=(fieldError 'name') required=true}}
+        {{> Input_Form_Field label='Slug' name='slug' value=slug errorMessage=(fieldError 'slug') disabled=true}}
       </div>
 
       <div class="fields">
-        <div class="required field">
-          <label>Interest(s)</label>
-          <select multiple="" class="ui dropdown" name="interests">
-            <option value="">Select Interest(s)</option>
-            {{#each interest in interests}}
-              <option value="{{interest._id}}" selected="{{interestSelected interest}}">{{interest.name}}</option>
-            {{/each}}
-          </select>
-          {{> Form_Error_Message errorMessage=(fieldError 'interests')}}
-        </div>
-        <div class="required field">
-          <label>More Information</label>
-          <input type="text" name="moreInformation" value="{{careerGoal.moreInformation}}">
-          {{> Form_Error_Message errorMessage=(fieldError 'moreInformation')}}
-        </div>
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests')}}
+        {{> Input_Form_Field label='More Information' name='moreInformation' value=careerGoal.moreInformation errorMessage=(fieldError 'moreInformation') required=true}}
       </div>
 
-      <div class="required field">
-        <label>Description</label>
-        <textarea rows="5" name="description" value="{{careerGoal.description}}"></textarea>
-        {{> Form_Error_Message errorMessage=(fieldError 'description')}}
-      </div>
+      {{> TextArea_Form_Field label='Description' rows=5 name='description' value=careerGoal.description errorMessage=(fieldError 'description') required=true}}
+
       <button class="ui green basic button" type="submit">Update</button>
       <button class="ui green basic button jsCancel" type="submit">Cancel</button>
-      <div class="ui success message">
-        The career goal was updated.
-      </div>
+      {{> Success_Message_Form_Field message="The Career Goal was successfully updated."}}
     </form>
   </div>
 
