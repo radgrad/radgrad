@@ -4,6 +4,13 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_Levels.helpers({
+  students(level) {
+    if (getUserIdFromRoute()) {
+      const allUsers = Users.find().fetch();
+      return allUsers;
+    }
+    return '';
+  },
   pastLevelsStyle(level) {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());

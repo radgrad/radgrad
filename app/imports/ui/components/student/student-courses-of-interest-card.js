@@ -16,21 +16,21 @@ Template.Student_Courses_Of_Interest_Card.onCreated(function studentCoursesOfInt
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
 });
 
 function interestedStudentsHelper(course) {
-  const ret = [];
+  const interested = [];
   const temp = CourseInstances.find().fetch();
-  console.log(temp);
   const ci = CourseInstances.find({
     courseID: course._id,
   }).fetch();
   _.map(ci, (c) => {
-    if (!_.includes(ret, c)) {
-    ret.push(Users.findDoc(c.studentID));
+    if (!_.includes(interested, c)) {
+      interested.push(Users.findDoc(c.studentID));
   }
 });
-  return ret;
+  return interested;
 }
 
 Template.Student_Courses_Of_Interest_Card.helpers({

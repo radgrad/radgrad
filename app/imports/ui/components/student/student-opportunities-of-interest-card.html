@@ -12,10 +12,10 @@
       {{opportunityShortDescription opportunity}}
     </div>
     <div class="content">
-      23 students plan to participate
+      {{numberStudents opportunity}} students plan to participate
       <div class="ui circular mini images">
         {{#each student in interestedStudents opportunity}}
-        <img class="ui image" src="/images/landing/" {{student.picture}}>
+        <img class="ui image" src={{studentPicture student}}>
         {{/each}}
         <a><img class="ui bordered image" src="/images/elipsis.png"></a>
       </div>

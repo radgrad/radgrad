@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { _, lodash } from 'meteor/erasaur:meteor-lodash';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
@@ -9,14 +9,29 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 
-Template.Student_Opportunities_Of_Interest_Card.onCreated(function appBodyOnCreated() {
+Template.Student_Opportunities_Of_Interest_Card.onCreated(function studentOpportunitiesOfInterestCardOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
 });
 
+function interestedStudentsHelper(opp) {
+  const interested = [];
+  const temp = OpportunityInstances.find().fetch();
+  console.log(temp.length);
+  const oi = OpportunityInstances.find({
+    opportunityID: opp._id,
+  }).fetch();
+  _.map(oi, (o) => {
+    if (!_.includes(interested, o)) {
+    interested.push(Users.findDoc(o.studentID));
+  }
+});
+  return interested;
+}
 
 Template.Student_Opportunities_Of_Interest_Card.helpers({
   getDictionary() {
@@ -53,25 +68,6 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
     }
     return ret;
   },
-  interestedStudents(opp) {
-    const interested = [];
-    let x;
-    const temp = OpportunityInstances.find().fetch();
-    for (x in temp) {
-      console.log("!!!" + temp);
-    }
-    const oi = OpportunityInstances.find({
-      opportunityID: opp._id,
-    }).fetch();
-    console.log(oi);
-    _.map(oi, (instance) => {
-      console.log("Hello3");
-    interested.push(instance);
-        console.log("Hello");
-
-    });
-    return interested;
-  },
   opportunityShortDescription(opp) {
     let description = opp.description;
     if (description.length > 200) {
@@ -88,6 +84,12 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
       });
     }
     return ret;
+  },
+  interestedStudents(opp) {
+    return interestedStudentsHelper(opp);
+  },
+  numberStudents(opp) {
+    return interestedStudentsHelper(opp).length;
   },
   matchingInterests(opp) {
     const matchingInterests = [];
@@ -108,6 +110,9 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
       });
     });
     return matchingInterests;
+  },
+  studentPicture(student) {
+    return `/images/landing/${student.picture}`;
   },
 });
 
