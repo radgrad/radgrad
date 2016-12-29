@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-Template.Admin_DataModel_CareerGoals_Page.helpers({
+Template.Admin_DataModel_HelpMessages_Page.helpers({
   updateID() {
     return Template.instance().updateID;
   },
@@ -10,7 +10,7 @@ Template.Admin_DataModel_CareerGoals_Page.helpers({
   },
 });
 
-Template.Admin_DataModel_CareerGoals_Page.onCreated(function adminCrudPageOnCreated() {
+Template.Admin_DataModel_HelpMessages_Page.onCreated(function adminCrudPageOnCreated() {
   this.updateID = new ReactiveVar('');
 });
 

@@ -1,10 +1,13 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { $ } from 'meteor/jquery';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** Design notes:
+
+/**
+ * Design notes:
  * Only one group per role. (Used to extract role from path.)
- * Every group has a home page called 'home'.  (Used for redirect from landing.)
+ * Every group must have a home page called 'home'.  (Used for redirect from landing.)
  */
 
 /*               HELPER FUNCTIONS                             */
@@ -58,6 +61,14 @@ adminRoutes.route('/datamodel/courses', {
   name: adminDataModelCoursesPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: adminDataModelCoursesPageRouteName });
+  },
+});
+
+export const adminDataModelHelpMessagesPageRouteName = 'Admin_DataModel_HelpMessages_Page';
+adminRoutes.route('/datamodel/help-messages', {
+  name: adminDataModelHelpMessagesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelHelpMessagesPageRouteName });
   },
 });
 
@@ -286,3 +297,7 @@ FlowRouter.notFound = {
     BlazeLayout.render('Page_Not_Found');
   },
 };
+
+
+/*                     LIST OF ALL DEFINED ROUTE NAMES     */
+export const routeNames = _.sortBy(_.map(adminRoutes._router._routes, route => route.name));

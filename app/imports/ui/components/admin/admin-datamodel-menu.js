@@ -8,4 +8,7 @@ Template.Admin_DataModel_Menu.helpers({
   coursesRouteName() {
     return RouteNames.adminDataModelCoursesPageRouteName;
   },
+  helpMessagesRouteName() {
+    return RouteNames.adminDataModelHelpMessagesPageRouteName;
+  },
 });

@@ -4,7 +4,7 @@
     <div class="title">
       <i class="dropdown icon"></i>
       {{name}}
-      ({{slug}})
+      {{#if slug}}({{slug}}){{/if}}
     </div>
     <div class="content">
       {{#each descriptionPair in descriptionPairs}}
