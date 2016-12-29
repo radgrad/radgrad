@@ -40,7 +40,7 @@
             <div class="inline field">
               <div class="ui action input">
                 <input id="website" type="text" name="website" placeholder="Enter new website url" value="http://www.">
-                <button class="ui green button website" type="submit">Update</button>
+                <button class="ui basic green button website" type="submit">Update</button>
               </div>
             </div>
           </form>
@@ -86,14 +86,16 @@
       </div>
       <div class="six wide column">
         <img class="ui tiny circular image" src={{studentPicture student}}><br>
-        <form class="ui form picture">
-          <div class="inline field">
-            <div class="ui action input">
-              <input id="picture" type="text" name="picture" placeholder="Enter new picture url">
-              <button class="ui green button picture" type="submit">Update</button>
-            </div>
-          </div>
-        </form>
+        <div class="ui action input">
+          {{#with currentUpload}}
+            Uploading <b>{{file.name}}</b>:
+            <span id="progress">{{progress.get}}%</span>
+          {{else}}
+            <input id="fileInput" type="file"/>
+          {{/with}}
+          <!--<input id="fileInput" type="file"/>-->
+          <button class="ui basic green button picture" type="submit">Upload Image</button>
+        </div>
       </div>
     </div>
   </div>

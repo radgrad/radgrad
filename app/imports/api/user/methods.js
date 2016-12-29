@@ -26,3 +26,10 @@ export const defineUser = new ValidatedMethod({
     return studentID;
   },
 });
+
+Meteor.methods({
+  'file-upload': function (fileInfo, fileData) {
+    console.log("received file " + fileInfo.name + " data: " + fileData);
+    fs.writeFile(fileInfo.name, fileData);
+  },
+});

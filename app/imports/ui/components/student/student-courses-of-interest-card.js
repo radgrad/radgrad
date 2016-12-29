@@ -21,7 +21,6 @@ Template.Student_Courses_Of_Interest_Card.onCreated(function studentCoursesOfInt
 
 function interestedStudentsHelper(course) {
   const interested = [];
-  const temp = CourseInstances.find().fetch();
   const ci = CourseInstances.find({
     courseID: course._id,
   }).fetch();

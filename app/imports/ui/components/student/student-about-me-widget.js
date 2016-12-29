@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Meteor } from 'meteor/meteor';
 
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
@@ -114,6 +115,19 @@ Template.Student_About_Me_Widget.events({
     const user = Users.findDoc({ username: getRouteUserName() });
     const choice = event.target.picture.value;
     Users.setPicture(user._id, choice);
+  },
+  'click .picture': function clickPicture(event, instance) {
+    event.preventDefault();
+    const student = Users.findDoc({ username: getRouteUserName() });
+    const fileName = event.target.parentElement.getElementsByTagName('input')[0];
+    if (fileName.files && fileName.files[0]) {
+      const picture = fileName.files[0];
+      const fr = new FileReader();
+      fr.onload = function(fileLoadEvent) {
+        Meteor.call('file-upload', fileName, fr.result);
+      };
+      fr.readAsDataURL(picture);
+    }
   },
 });
 

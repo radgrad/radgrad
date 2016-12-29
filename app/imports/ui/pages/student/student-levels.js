@@ -1,13 +1,20 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { ROLE } from '../../../api/role/Role.js';
 
 Template.Student_Levels.helpers({
-  students(level) {
+  students(userLevel) {
     if (getUserIdFromRoute()) {
-      const allUsers = Users.find().fetch();
-      return allUsers;
+      const students =[];
+      _.map(Users.find().fetch(), (user) => {
+      if (user.level === userLevel) {
+        students.push(user);
+        }
+      });
+      return students;
     }
     return '';
   },
@@ -53,10 +60,10 @@ Template.Student_Levels.helpers({
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
       if (user.level) {
-        return `${user.level}`;
+        return user.level;
       }
     }
-    return '1';
+    return 1;
   },
   studentLevelColor() {
     if (getUserIdFromRoute()) {
@@ -80,6 +87,9 @@ Template.Student_Levels.helpers({
     }
     return 'white';
   },
+  studentPicture(student) {
+    return `/images/landing/${student.picture}`;
+  },
 });
 
 Template.Level_Sticker_Log.events({});
@@ -88,6 +98,7 @@ Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   }
+  this.subscribe(Users.getPublicationName());
 });
 
 Template.Level_Sticker_Log.onRendered(function levelStickerLogOnRendered() {
