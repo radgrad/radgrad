@@ -10,6 +10,9 @@ import './admin-datamodel-helpmessages-page.js';
 import './admin-datamodel-interests-page.html';
 import './admin-datamodel-interests-page.js';
 
+import './admin-datamodel-opportunities-page.html';
+import './admin-datamodel-opportunities-page.js';
+
 import './admin-datamodel-page.html';
 import './admin-datamodel-page.js';
 

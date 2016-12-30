@@ -10,6 +10,9 @@ import './add-help-message-widget.js';
 import './add-interest-widget.html';
 import './add-interest-widget.js';
 
+import './add-opportunity-widget.html';
+import './add-opportunity-widget.js';
+
 import './admin-datamodel-accordion.html';
 import './admin-datamodel-accordion.js';
 
@@ -29,6 +32,9 @@ import './list-help-messages-widget.js';
 
 import './list-interests-widget.html';
 import './list-interests-widget.js';
+
+import './list-opportunities-widget.html';
+import './list-opportunities-widget.js';
 
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
