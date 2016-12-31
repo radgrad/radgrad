@@ -11,7 +11,7 @@ import { Interests } from '/imports/api/interest/InterestCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { isRole, assertRole } from '/imports/api/role/Role';
-import { getTotalICE } from '/imports/api/ice/IceProcessor';
+import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 
 /** @module User */
@@ -379,6 +379,30 @@ class UserCollection extends BaseInstanceCollection {
     const courseDocs = CourseInstances.find({ studentID }).fetch();
     const oppDocs = OpportunityInstances.find({ studentID }).fetch();
     return getTotalICE(courseDocs.concat(oppDocs));
+  }
+
+  /**
+   * Returns an ICE object with the total earned course and opportunity ICE values.
+   * @param studentID The userID.
+   * @throws {Meteor.Error} If userID is not a userID.
+   */
+  getEarnedICE(studentID) {
+    this.assertDefined(studentID);
+    const courseDocs = CourseInstances.find({ studentID }).fetch();
+    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
+    return getEarnedICE(courseDocs.concat(oppDocs));
+  }
+
+  /**
+   * Returns an ICE object with the total projected course and opportunity ICE values.
+   * @param studentID The userID.
+   * @throws {Meteor.Error} If userID is not a userID.
+   */
+  getProjectedICE(studentID) {
+    this.assertDefined(studentID);
+    const courseDocs = CourseInstances.find({ studentID }).fetch();
+    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
+    return getProjectedICE(courseDocs.concat(oppDocs));
   }
 
   /* eslint class-methods-use-this: "off" */

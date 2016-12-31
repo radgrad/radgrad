@@ -1,11 +1,20 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
+import { getRouteUserName } from '../../components/shared/route-user-name';
+import { Users } from '../../../api/user/UserCollection';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 
 Template.Student_Layout.onCreated(function studentLayoutOnCreated() {
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
 });
 
-Template.Student_Layout.onRendered(function studentLayoutOnRendered() {
-});
+function getStudentDoc() {
+  const username = getRouteUserName();
+  return Users.getUserFromUsername(username);
+}
 
 Template.Student_Layout.helpers({
   secondMenuItems() {
@@ -19,9 +28,13 @@ Template.Student_Layout.helpers({
   secondMenuLength() {
     return 'four';
   },
-
-});
-
-Template.Student_Layout.events({
-  // placeholder: if you add a form to this top-level layout, handle the associated events here.
+  earnedICE() {
+    return Users.getEarnedICE(getStudentDoc()._id);
+  },
+  projectedICE() {
+    return Users.getProjectedICE(getStudentDoc()._id);
+  },
+  level() {
+    return getStudentDoc().level ? getStudentDoc().level : '0';
+  },
 });

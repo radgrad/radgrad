@@ -1,39 +1,29 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-
+import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
+
+Template.First_Menu.onCreated(function onCreated() {
+  this.subscribe(Users.getPublicationName());
+});
 
 Template.First_Menu.helpers({
   useCAS() {
     return false;
   },
   firstMenuFullName() {
-    if (Meteor.userId()) {
-      try {
-        return Users.getFullName(Meteor.userId());
-      } catch (e) {
-        // console.log(e, Meteor.userId()); // eslint-disable-line no-console
-      }
+    const username = getRouteUserName();
+    if (username) {
+      const user = Users.getUserFromUsername(username);
+      return `${user.firstName} ${user.lastName}`;
     }
-    return '';
+    return 'Unknown user';
+  },
+  firstMenuPictureSrc() {
+    const username = getRouteUserName();
+    if (username) {
+      const user = Users.getUserFromUsername(username);
+      return (user.picture) ? user.picture : '/images/default-profile-picture.png';
+    }
+    return '/images/default-profile-picture.png';
   },
 });
-
-Template.First_Menu.events({
-  // add events.
-});
-
-Template.First_Menu.onCreated(function firstMenuOnCreated() {
-  // add your statement here
-});
-
-Template.First_Menu.onRendered(function firstMenuOnRendered() {
-  // this.$('a.ui.right.dropdown.item').dropdown({
-  //   on: 'hover',
-  // });
-});
-
-Template.First_Menu.onDestroyed(function firstMenuOnDestroyed() {
-  // add your statement here
-});
-
