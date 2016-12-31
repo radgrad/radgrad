@@ -11,7 +11,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
-Template.Student_MentorSpace_Page.onCreated(function appBodyOnCreated(){
+Template.Student_MentorSpace_Page.onCreated(function appBodyOnCreated() {
   this.autorun(() => {
     this.subscribe(Courses.getPublicationName());
     this.subscribe(CourseInstances.getPublicationName());
@@ -110,10 +110,10 @@ Template.Student_MentorSpace_Page.onRendered(function mentorSpaceOnRendered(){
   this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
 
   this.$('.ui.dropdown')
-      .dropdown()
+    .dropdown()
   ;
 
   this.$('.ui.rating')
-      .rating()
+    .rating()
   ;
 });
