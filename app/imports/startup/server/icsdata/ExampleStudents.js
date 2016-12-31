@@ -8,6 +8,7 @@ export const exampleStudents = [
     slug: 'abi',
     email: 'abi@hawaii.edu',
     password: 'foo',
+    picture: '/images/mockup/abi.jpg',
     uhID: '1234-5678',
   },
   {
@@ -16,6 +17,7 @@ export const exampleStudents = [
     slug: 'alfred',
     email: 'alfred@hawaii.edu',
     password: 'foo',
+    picture: '/images/mockup/alfred.png',
     uhID: '1234-5679',
   },
   {
@@ -24,6 +26,7 @@ export const exampleStudents = [
     slug: 'betty',
     email: 'betty@hawaii.edu',
     password: 'foo',
+    picture: '/images/mockup/betty.jpg',
     uhID: '1234-5680',
   },
   {
@@ -32,6 +35,7 @@ export const exampleStudents = [
     slug: 'charley',
     email: 'charley@hawaii.edu',
     password: 'foo',
+    picture: '/images/mockup/charley.jpg',
     uhID: '1234-5681',
   },
   {
@@ -40,6 +44,7 @@ export const exampleStudents = [
     slug: 'ella',
     email: 'ella@hawaii.edu',
     password: 'foo',
+    picture: '/images/mockup/ella.jpg',
     uhID: '1234-5682',
   },
 ];
