@@ -149,3 +149,15 @@ class OpportunityInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const OpportunityInstances = new OpportunityInstanceCollection();
+
+if (Meteor.isServer) {
+  const instance = this;
+  Meteor.publish(`${OpportunityInstances._collectionName}.Public`, function publicPublish(opportunityID) {
+    // check the opportunityID.
+    new SimpleSchema({
+      opportunityID: { type: String },
+    }).validate(opportunityID);
+
+    return instance._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
+  });
+}
