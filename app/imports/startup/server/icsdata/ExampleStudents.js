@@ -8,6 +8,7 @@ export const exampleStudents = [
     slug: 'abi',
     email: 'abi@hawaii.edu',
     password: 'foo',
+    picture: 'https://github.com/radgrad/radgrad/raw/master/app/public/images/landing/yamakawa.jpg',
     uhID: '1234-5678',
   },
   {

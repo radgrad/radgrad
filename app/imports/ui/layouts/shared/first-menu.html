@@ -6,12 +6,14 @@
     </div>
     <div class="right menu radgrad-menu-profile">
 
-      <div class="item">
-        <!--{{> First_Menu_Level_Icon level=level}}-->
-        {{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov"}}
-        {{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp"}}
-        {{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e  iceType="exp"}}
-      </div>
+      {{#if displayLevelAndIce}}
+        <div class="item">
+          {{> First_Menu_Level_Icon level=level}}
+          {{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov"}}
+          {{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp"}}
+          {{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp"}}
+        </div>
+      {{/if}}
 
       <div class="item" style="border-left: 1px solid rgba(34,36,38,.07)">
         <img class="ui mini image" src="{{firstMenuPictureSrc}}"
