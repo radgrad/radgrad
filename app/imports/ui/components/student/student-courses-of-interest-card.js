@@ -109,7 +109,7 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   },
   studentPicture(studentID) {
     const student = Users.findDoc(studentID);
-    return `/images/landing/${student.picture}`;
+    return student.picture;
   },
   nextYears(amount) {
     const twoYears = [];

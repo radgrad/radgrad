@@ -111,7 +111,7 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
   },
   studentPicture(studentID) {
     const student = Users.findDoc(studentID);
-    return `/images/landing/${student.picture}`;
+    return student.picture;
   },
 });
 
