@@ -1,0 +1,7 @@
+<template name="TextArea_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>{{label}}</label>
+    <textarea rows="{{rows}}" name="{{name}}" placeholder="{{placeholder}}" value="{{value}}"></textarea>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>
