@@ -4,6 +4,7 @@
   <div class="ui dividing header"><h4>RADGRAD COMMUNITY ACTIVITY</h4></div>
 
   <div style="max-height: 488px; overflow:scroll; margin-top: 10px;" class="ui feed">
+    {{#each feed in feeds}}
     <div class="event">
       <div class="label">
         <img src="/images/landing/boado.jpg">
@@ -11,132 +12,18 @@
       <div class="content">
         <div class="summary">
           <a class="user">
-            Brian Boado
-          </a> joined RadGrad as a Student
+            {{feedStudent feed}}
+          </a> {{feedDescription feed}}
           <div class="date">
-            1 Hour Ago
+            {{feedTimestamp feed}}
           </div>
         </div>
       </div>
     </div>
     <div class="ui divider"></div>
-
-
-    <div class="event">
-      <div class="label">
-        <img src="/images/landing/garces.jpg">
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a>Josephine Garces</a> added <a>Web Development</a> to her interests
-          <div class="date">
-            4 days ago
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui divider"></div>
-
-    <div class="event">
-      <div class="label">
-        <img src="/images/landing/preza.png">
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a class="user">
-            Aljon Preza
-          </a> leveled up to <a>Programming Prodigy</a>!
-          <div class="date">
-            2 Days Ago
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui divider"></div>
-
-    <div class="event">
-      <div class="label">
-        <img src="/images/landing/spencer.jpg">
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a>Michael Spencer</a> posted a review on <a>ICS314</a>
-          <div class="date">
-            3 days ago
-          </div>
-        </div>
-        <div class="extra text">
-          I loved Software Engineering! The professor and TA were the best ever. I would take this class again
-          if I could.
-        </div>
-      </div>
-    </div>
-    <div class="ui divider"></div>
-
-    <div class="event">
-      <div class="label">
-        <img src="/images/landing/yamakawa.jpg">
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a>Kelsie Yamakawa</a> and <a>13 others</a> completed the <a>ACM Hackathon</a> opportunity.
-          <div class="date">
-            4 days ago
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui divider"></div>
-
-
-    <div class="event">
-      <div class="label">
-        <img src="/images/ICS-logo.png">
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a>Internship with Professor Cam Moore</a> has been added to <a>Opportunities</a>
-          <div class="date">
-            4 days ago
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui divider"></div>
-
-
-    <div class="event">
-      <div class="label">
-        <img src="/images/ICS-logo.png">
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a>Mobile Application Design</a> has been added to <a>Interests</a>
-          <div class="date">
-            4 days ago
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui divider"></div>
-
-
-    <div class="event">
-      <div class="label">
-        <img src="/images/ICS-logo.png">
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a>ICS321</a> will no longer be offered in Fall 2017
-          <div class="date">
-            A few seconds ago
-          </div>
-        </div>
-      </div>
-    </div>
-
-
+    {{/each}}
   </div>
+
 </div>
 
   {{else}}
