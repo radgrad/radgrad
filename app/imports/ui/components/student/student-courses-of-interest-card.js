@@ -111,14 +111,19 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     const student = Users.findDoc(studentID);
     return student.picture;
   },
+  yearSemesters(year) {
+    const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
+    return semesters;
+  },
   nextYears(amount) {
-    const twoYears = [];
-    let currentSem = currentSemester();
-    for (let i = 0; i < amount * 3; i += 1) {
-      twoYears.push(Semesters.toString(currentSem));
-      currentSem = nextSem(currentSem);
+    const nextYears = [];
+    const currentSem = currentSemester();
+    let currentYear = currentSem.year;
+    for (let i = 0; i < amount; i += 1) {
+      nextYears.push(currentYear);
+      currentYear += 1;
     }
-    return twoYears;
+    return nextYears;
   },
 });
 
@@ -146,6 +151,10 @@ Template.Student_Courses_Of_Interest_Card.events({
 Template.Student_Courses_Of_Interest_Card.onRendered(function studentCoursesOfInterestCardOnRendered() {
   const template = this;
   template.$('.chooseSemester')
+      .popup({
+        on: 'click',
+      });
+  template.$('.chooseYear')
       .popup({
         on: 'click',
       });
