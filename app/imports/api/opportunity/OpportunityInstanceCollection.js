@@ -152,6 +152,7 @@ export const OpportunityInstances = new OpportunityInstanceCollection();
 
 if (Meteor.isServer) {
   const instance = this;
+  // eslint-disable-next-line meteor/audit-argument-checks
   Meteor.publish(`${OpportunityInstances._collectionName}.Public`, function publicPublish(opportunityID) {
     // check the opportunityID.
     new SimpleSchema({
