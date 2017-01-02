@@ -156,7 +156,7 @@ if (Meteor.isServer) {
     // check the opportunityID.
     new SimpleSchema({
       opportunityID: { type: String },
-    }).validate(opportunityID);
+    }).validate({ opportunityID });
 
     return instance._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
   });
