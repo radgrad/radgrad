@@ -237,7 +237,7 @@ Template.Student_Ice.onDestroyed(function studentIceOnDestroyed() {
 Template.Student_Ice.onRendered(function enableAccordion() {
   this.$('.accordion').accordion({
     selector: {
-      trigger: '.title .icon',
+      trigger: '.title',
     },
     exclusive: false,
   });
