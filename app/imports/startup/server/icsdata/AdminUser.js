@@ -10,5 +10,6 @@ export const defaultAdminAccount = {
   slug: 'radgrad',
   role: 'ADMIN',
   password: 'foo',
+  picture: '/images/mockup/radgrad.png',
   uhID: '1111-1111',
 };
