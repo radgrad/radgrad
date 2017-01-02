@@ -71,7 +71,7 @@ Template.Update_Opportunity_Widget.events({
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
-      updatedData.ice = { i: updatedData.innovation, c: updatedData.competency, e: updatedData.experience };
+      FormUtils.convertICE(updatedData);
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       FormUtils.renameKey(updatedData, 'semesters', 'semesterIDs');
       Interests.update(instance.data.updateID.get(), { $set: updatedData });

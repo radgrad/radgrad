@@ -14,12 +14,11 @@ import { Template } from 'meteor/templating';
 export function getSchemaDataFromEvent(schema, event) {
   const eventData = {};
   _.map(schema._firstLevelSchemaKeys, function (key) {
-    if (schema._schema[key].type.name === 'String') {
-      eventData[key] = event.target[key].value;
-    }
     if (schema._schema[key].type.name === 'Array') {
       const selectedValues = _.filter(event.target[key].selectedOptions, (option) => option.selected);
       eventData[key] = _.map(selectedValues, (option) => option.value);
+    } else {
+      eventData[key] = event.target[key].value;
     }
   });
   return eventData;
@@ -48,6 +47,17 @@ export function slugFieldValidator() {
 export function renameKey(obj, oldKey, newKey) {
   obj[newKey] = obj[oldKey];
   delete obj[oldKey];
+}
+
+/**
+ * Convert ICE values from three fields to a single 'ice' field with an object value.
+ * @param obj The data object holding ICE values as three separate fields.
+ */
+export function convertICE(obj) {
+  obj.ice = { i: obj.innovation, c: obj.competency, e: obj.experience };
+  delete obj.innovation;
+  delete obj.competency;
+  delete obj.experience;
 }
 
 /**

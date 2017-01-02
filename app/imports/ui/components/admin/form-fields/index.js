@@ -4,6 +4,9 @@ import './form-field-utilities.js';
 
 import './input-form-field.html';
 
+import './input-date-form-field.html';
+import './input-date-form-field.js';
+
 import './interest-types-form-field.html';
 import './interest-types-form-field.js';
 

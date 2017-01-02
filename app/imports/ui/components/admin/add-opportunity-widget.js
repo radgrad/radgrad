@@ -12,7 +12,7 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 const addSchema = new SimpleSchema({
   name: { type: String, optional: false },
   slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
-  eventDate: { type: Date, optional: true},
+  eventDate: { type: Date, optional: true },
   description: { type: String, optional: false },
   opportunityType: { type: String, optional: false },
   sponsor: { type: String, optional: false },
@@ -53,11 +53,13 @@ Template.Add_Opportunity_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
+    console.log('event date', newData.eventDate);
     instance.context.resetValidation();
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      // add ice field, remove innovation, competency, experience fields.
+      FormUtils.convertICE(newData);
+      console.log('newData', newData);
       Opportunities.define(newData);
       FormUtils.indicateSuccess(instance, event);
     } else {

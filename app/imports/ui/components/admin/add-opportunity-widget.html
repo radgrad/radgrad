@@ -7,7 +7,7 @@
       <div class="fields">
         {{> Input_Form_Field label="Name" name="name" placeholder="Software Engineering" errorMessage=(fieldError "name") required=true}}
         {{> Input_Form_Field label="Slug" name="slug" placeholder="software-engineering" errorMessage=(fieldError "slug") required=true}}
-        {{> Input_Form_Field label="Event Date" name="eventDate" placeholder="software-engineering" errorMessage=(fieldError "eventDate")}}
+        {{> Input_Date_Form_Field label="Event Date" name="eventDate" placeholder="11/27/2016" errorMessage=(fieldError "eventDate")}}
       </div>
 
       <div class="fields">
@@ -27,6 +27,7 @@
         {{> Semesters_Form_Field semesters=semesters errorMessage=(fieldError "semesters")}}
         {{> Input_Form_Field label="More Information" name="moreInformation" placeholder="http://interest.com/software-engineering" errorMessage=(fieldError "moreInformation") required=true}}
       </div>
+
 
       {{> TextArea_Form_Field label="Description" rows=5 name="description" placeholder="Describe the Opportunity here" errorMessage=(fieldError "description") required=true}}
 
