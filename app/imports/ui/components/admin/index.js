@@ -50,3 +50,6 @@ import './update-help-message-widget.js';
 
 import './update-interest-widget.html';
 import './update-interest-widget.js';
+
+import './update-opportunity-widget.html';
+import './update-opportunity-widget.js';

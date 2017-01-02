@@ -6,6 +6,7 @@ Template.Sponsor_Form_Field.onRendered(function onRendered() {
 
 Template.Sponsor_Form_Field.helpers({
   isSelected(sponsor, selectedSponsor) {
+    console.log('isSelected sponsor', sponsor, selectedSponsor);
     return sponsor === selectedSponsor;
   },
   sponsorName(sponsor) {

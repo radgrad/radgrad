@@ -41,8 +41,8 @@ class OpportunityCollection extends BaseInstanceCollection {
   /**
    * Defines a new Opportunity.
    * @example
-   * Opportunitys.define({ name: 'ATT Hackathon 2015',
-   *                       slug: 'hack15',
+   * Opportunitys.define({ name: 'ATT Hackathon',
+   *                       slug: 'att-hackathon',
    *                       description: 'Programming challenge at Sacred Hearts Academy, $10,000 prize',
    *                       opportunityType: 'event',
    *                       sponsor: 'philipjohnson',
