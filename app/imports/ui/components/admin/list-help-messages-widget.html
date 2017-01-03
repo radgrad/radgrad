@@ -1,0 +1,13 @@
+<template name="List_Help_Messages_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>HELP MESSAGES ({{ count }})</h4></div>
+
+      {{#each helpMessage in helpMessages}}
+        {{> Admin_DataModel_Accordion name=helpMessage.routeName descriptionPairs=(descriptionPairs helpMessage) id=helpMessage._id updateID=updateID deleteDisabled=(deleteDisabled helpMessage)}}
+      {{/each}}
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

@@ -1,0 +1,12 @@
+<template name="List_Teasers_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>TEASERS ({{ count }})</h4></div>
+      {{#each teaser in teasers}}
+        {{> Admin_DataModel_Accordion name=teaser.title slug=(slugName teaser.slugID) descriptionPairs=(descriptionPairs teaser) id=teaser._id updateID=updateID deleteDisabled=(deleteDisabled teaser)}}
+      {{/each}}
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>
