@@ -148,7 +148,7 @@ Template.Student_Ice_Widget.helpers({
   experiencePoints(ice) {
     return ice.e;
   },
-  getEvents(iceType, type, earned) {
+  getEvents(iceType, type, earned, semester) {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
       let allInstances = [];
