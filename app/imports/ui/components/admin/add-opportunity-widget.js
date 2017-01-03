@@ -53,13 +53,11 @@ Template.Add_Opportunity_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    console.log('event date', newData.eventDate);
     instance.context.resetValidation();
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(newData);
-      console.log('newData', newData);
       Opportunities.define(newData);
       FormUtils.indicateSuccess(instance, event);
     } else {
