@@ -17,16 +17,6 @@ Template.Student_Courses_Of_Interest_Widget.onCreated(function appBodyOnCreated(
   this.subscribe(Users.getPublicationName());
 });
 
-function passedCourse(course) {
-  let ret = false;
-  if (course.grade === 'A+' || course.grade === 'A' || course.grade === 'A-' ||
-      course.grade === 'B+' || course.grade === 'B' || course.grade === 'B-' ||
-      course.grade === 'CR') {
-    ret = true;
-  }
-  return ret;
-}
-
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
   if (courses.length > 0) {

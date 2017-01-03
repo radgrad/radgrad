@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
+import { _, lodash } from 'meteor/erasaur:meteor-lodash';
 
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -7,6 +7,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_Opportunities_Of_Interest_Widget.onCreated(function appBodyOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
@@ -16,8 +17,23 @@ Template.Student_Opportunities_Of_Interest_Widget.onCreated(function appBodyOnCr
   this.subscribe(VerificationRequests.getPublicationName());
 });
 
+const availableOpps = () => {
+  const opps = Opportunities.find({}).fetch();
+  if (opps.length > 0) {
+    const filtered = lodash.filter(opps, function filter(opp) {
+      const oi = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opp._id,
+      }).fetch();
+      return oi.length === 0;
+    });
+    return filtered;
+  }
+  return [];
+};
+
 function matchingOpportunities() {
-  const allOpportunities = Opportunities.find().fetch();
+  const allOpportunities = availableOpps();
   const matching = [];
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
