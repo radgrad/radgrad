@@ -1,5 +1,5 @@
 <template name="Semester_List">
-  <div class="ui center aligned padded segment">
+  <div class="ui center aligned padded {{#if isCurrentSemester}}tertiary inverted green{{/if}} segment">
     <div class="ui dividing header">{{semesterName}} {{year}}</div>
     <table class="ui structured table bodyDrop" ondragover="allowDrop(event)">
       <tbody>

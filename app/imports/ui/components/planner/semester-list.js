@@ -159,13 +159,22 @@ Template.Semester_List.helpers({
     }
     return ret;
   },
+  isCurrentSemester() {
+    const semester = Template.instance().state.get('semester');
+    const currentSemester = Template.instance().state.get('currentSemester');
+    console.log(semester, 'currentSemester', currentSemester)
+    if (semester && currentSemester) {
+      return semester.sortBy === currentSemester.sortBy;
+    }
+    return false;
+  },
   isFuture() {
     const semester = Template.instance().state.get('semester');
     const currentSemester = Template.instance().state.get('currentSemester');
     if (semester && currentSemester) {
       return semester.sortBy >= currentSemester.sortBy;
     }
-    return null;
+    return false;
   },
   isGrade(courseInstanceID, grade) {
     try {
