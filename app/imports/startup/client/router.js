@@ -88,6 +88,14 @@ adminRoutes.route('/datamodel/opportunities', {
   },
 });
 
+export const adminDataModelTeasersPageRouteName = 'Admin_DataModel_Teasers_Page';
+adminRoutes.route('/datamodel/teasers', {
+  name: adminDataModelTeasersPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelTeasersPageRouteName });
+  },
+});
+
 /*                        ADVISOR ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.

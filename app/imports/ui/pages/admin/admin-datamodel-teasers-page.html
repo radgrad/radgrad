@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_Teasers_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      {{#if displayUpdateWidget}}
+        {{> Update_Career_Goal_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Teaser_Widget }}
+      {{/if}}
+      {{> List_Teasers_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+
+</template>

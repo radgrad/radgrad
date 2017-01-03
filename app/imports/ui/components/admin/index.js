@@ -13,6 +13,9 @@ import './add-interest-widget.js';
 import './add-opportunity-widget.html';
 import './add-opportunity-widget.js';
 
+import './add-teaser-widget.html';
+import './add-teaser-widget.js';
+
 import './admin-datamodel-accordion.html';
 import './admin-datamodel-accordion.js';
 
@@ -35,6 +38,9 @@ import './list-interests-widget.js';
 
 import './list-opportunities-widget.html';
 import './list-opportunities-widget.js';
+
+import './list-teasers-widget.html';
+import './list-teasers-widget.js';
 
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';

@@ -17,4 +17,7 @@ Template.Admin_DataModel_Menu.helpers({
   opportunitiesRouteName() {
     return RouteNames.adminDataModelOpportunitiesPageRouteName;
   },
+  teasersRouteName() {
+    return RouteNames.adminDataModelTeasersPageRouteName;
+  },
 });
