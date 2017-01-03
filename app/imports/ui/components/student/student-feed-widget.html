@@ -7,13 +7,13 @@
     {{#each feed in feeds}}
     <div class="event">
       <div class="label">
-        <img src="/images/landing/boado.jpg">
+        <img src={{studentPicture feed}}>
       </div>
       <div class="content">
         <div class="summary">
-          <a class="user">
+          <div class="user">
             {{feedStudent feed}}
-          </a> {{feedDescription feed}}
+          </div> {{feedDescription feed}}
           <div class="date">
             {{feedTimestamp feed}}
           </div>

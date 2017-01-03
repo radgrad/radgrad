@@ -18,9 +18,8 @@ class FeedCollection extends BaseInstanceCollection {
   constructor() {
     super('Feed', new SimpleSchema({
       studentID: { type: SimpleSchema.RegEx.Id },
-      slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
-      timestamp: { type: Date },
+      timestamp: { type: Number },
     }));
   }
 
@@ -37,13 +36,11 @@ class FeedCollection extends BaseInstanceCollection {
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestID.
    * @returns The newly created docID.
    */
-  define({ student, slug, description, timestamp }) {
+  define({ student, description, timestamp }) {
     // Get SlugID, throw error if found.
-    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     const studentID = Users.getID(student);
-    const feedID = this._collection.insert({ studentID, slugID, description, timestamp });
+    const feedID = this._collection.insert({ studentID, description, timestamp });
     // Connect the Slug to this teaser
-    Slugs.updateEntityID(slugID, feedID);
     return feedID;
   }
 
