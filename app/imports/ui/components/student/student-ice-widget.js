@@ -27,6 +27,39 @@ function passedCourse(course) {
   return ret;
 }
 
+function getEventsHelper(iceType, type, earned, semester) {
+  if (getUserIdFromRoute()) {
+    const user = Users.findDoc(getUserIdFromRoute());
+    let allInstances = [];
+    const iceInstances = [];
+    if (type === 'course') {
+      const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: user._id, verified: earned }).fetch();
+      courseInstances.forEach((courseInstance) => {
+        if (CourseInstances.isICS(courseInstance._id)) {
+        allInstances.push(courseInstance);
+      }
+    });
+    } else {
+      allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: user._id, verified: earned }).fetch();
+    }
+    allInstances.forEach((instance) => {
+      if (iceType === 'i') {
+      if (instance.ice.i > 0) {
+        iceInstances.push(instance);
+      }
+    } else if (iceType === 'c') {
+      iceInstances.push(instance);
+    } else if (iceType === 'e') {
+      if (instance.ice.e > 0) {
+        iceInstances.push(instance);
+      }
+    }
+  });
+    return iceInstances;
+  }
+  return null;
+}
+
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
   if (courses.length > 0) {
@@ -148,39 +181,30 @@ Template.Student_Ice_Widget.helpers({
   experiencePoints(ice) {
     return ice.e;
   },
-  getEvents(iceType, type, earned, semester) {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      let allInstances = [];
-      const iceInstances = [];
-      if (type === 'course') {
-        const courseInstances = CourseInstances.find({ studentID: user._id, verified: earned }).fetch();
-        courseInstances.forEach((courseInstance) => {
-          if (CourseInstances.isICS(courseInstance._id)) {
-            allInstances.push(courseInstance);
-          }
-        });
-      } else {
-        allInstances = OpportunityInstances.find({ studentID: user._id, verified: earned }).fetch();
-      }
-      allInstances.forEach((instance) => {
-        if (iceType === 'i') {
-          if (instance.ice.i > 0) {
-            iceInstances.push(instance);
-          }
-        } else if (iceType === 'c') {
-          iceInstances.push(instance);
-        } else if (iceType === 'e') {
-          if (instance.ice.e > 0) {
-            iceInstances.push(instance);
-          }
-        }
-      });
-      return iceInstances;
-    }
-    return null;
+  years() {
+    const studentID = getUserIdFromRoute();
+    const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
+    return ay;
   },
-
+  semesters(year) {
+    const yearSemesters = [];
+    const semIDs = year.semesterIDs;
+    _.map(semIDs, (semID) => {
+      yearSemesters.push(Semesters.findDoc(semID));
+    });
+    return yearSemesters;
+  },
+  hasEvents(iceType, earned, semester) {
+    let ret = false;
+    if ((getEventsHelper(iceType, 'course', earned, semester).length > 0) ||
+        (getEventsHelper(iceType, 'opportunity', earned, semester).length > 0)) {
+      ret = true;
+    }
+    return ret;
+  },
+  getEvents(iceType, type, earned, semester) {
+    return getEventsHelper(iceType, type, earned, semester);
+  },
   recommendedEvents(iceType, type, projected) {
     if (getUserIdFromRoute()) {
       let allInstances = [];
@@ -253,6 +277,9 @@ Template.Student_Ice_Widget.helpers({
   },
   eventIce(event) {
     return event.ice;
+  },
+  printSemester(semester) {
+    return Semesters.toString(semester._id, false);
   },
 });
 

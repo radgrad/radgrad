@@ -38,18 +38,23 @@
 
             <div class="active content">
               <p>You have achieved {{innovationPoints earnedICE}} Innovation points for the following:</p>
-              <div class="ui list">
-                {{#each event in getEvents 'i' 'opportunity' true}}
-                  <div class="item">
-                    <b>+{{innovationPoints (eventIce event)}}</b>
-                      {{ opportunityName event }} ({{eventSem event}})
-                  </div>
-                {{/each}}
-                {{#each event in getEvents 'i' 'course' true}}
-                  <div class="item">
-                    <b>+{{innovationPoints (eventIce event)}}</b>
-                    {{ courseName event }} ({{courseNumber event}}, {{eventSem event}})
-                  </div>
+              <div class="ui very relaxed list">
+                {{#each year in years}}
+                  {{#each semester in semesters year}}
+                    {{#if hasEvents 'i' true semester}}
+                      <div class="item">
+                        <div class="header">{{printSemester semester}}</div>
+                        {{#each event in getEvents 'i' 'opportunity' true semester}}
+                          <b>+{{innovationPoints (eventIce event)}}</b>
+                          {{ opportunityName event }} <br>
+                        {{/each}}
+                        {{#each event in getEvents 'i' 'course' true semester}}
+                          <b>+{{innovationPoints (eventIce event)}}</b>
+                          {{ courseName event }} ({{courseNumber event}}) <br>
+                        {{/each}}
+                      </div>
+                    {{/if}}
+                  {{/each}}
                 {{/each}}
               </div>
             </div>
@@ -60,18 +65,23 @@
             <div class="content">
               <p>You have a total of {{innovationPoints projectedICE}} projected Innovation points. The
                 remaining {{remainingICE (innovationPoints earnedICE) (innovationPoints projectedICE) }} points are for the following:</p>
-              <div class="ui list">
-                {{#each event in getEvents 'i' 'opportunity' false}}
-                  <div class="item">
-                    <b>+{{innovationPoints (eventIce event)}}</b>
-                      {{ opportunityName event }} ({{eventSem event}})
-                  </div>
-                {{/each}}
-                {{#each event in getEvents 'i' 'course' false}}
-                  <div class="item">
-                    <b>+{{innovationPoints (eventIce event)}}</b>
-                    {{ courseName event }} ({{courseNumber event}}, {{eventSem event}})
-                  </div>
+              <div class="ui very relaxed list">
+                {{#each year in years}}
+                  {{#each semester in semesters year}}
+                    {{#if hasEvents 'i' false semester}}
+                      <div class="item">
+                        <div class="header">{{printSemester semester}}</div>
+                        {{#each event in getEvents 'i' 'opportunity' false semester}}
+                          <b>+{{innovationPoints (eventIce event)}}</b>
+                          {{ opportunityName event }} <br>
+                        {{/each}}
+                        {{#each event in getEvents 'i' 'course' false semester}}
+                          <b>+{{innovationPoints (eventIce event)}}</b>
+                          {{ courseName event }} ({{courseNumber event}}) <br>
+                        {{/each}}
+                      </div>
+                    {{/if}}
+                  {{/each}}
                 {{/each}}
               </div>
             </div>
@@ -130,12 +140,19 @@
             </div>
             <div class="active content">
               <p>You have achieved {{competencyPoints earnedICE}} Competency points for the following:</p>
-              <div class="ui list">
-                {{#each event in getEvents 'c' 'course' true}}
-                  <div class="item">
-                    <b>+{{competencyPoints (eventIce event)}}</b>
-                    {{ courseName event }} ({{courseNumber event}}, {{eventSem event}})
-                  </div>
+              <div class="ui very relaxed list">
+                {{#each year in years}}
+                  {{#each semester in semesters year}}
+                    {{#if hasEvents 'c' true semester}}
+                      <div class="item">
+                        <div class="header">{{printSemester semester}}</div>
+                        {{#each event in getEvents 'c' 'course' true semester}}
+                          <b>+{{competencyPoints (eventIce event)}}</b>
+                          {{ courseName event }} ({{courseNumber event}}) <br>
+                        {{/each}}
+                      </div>
+                    {{/if}}
+                  {{/each}}
                 {{/each}}
               </div>
             </div>
@@ -146,12 +163,19 @@
             <div class="content">
               <p>You have a total of {{competencyPoints projectedICE}} projected Competency points. The
                 remaining {{remainingICE (competencyPoints earnedICE) (competencyPoints projectedICE) }} points are for the following:</p>
-              <div class="ui list">
-                {{#each event in getEvents 'c' 'course' false}}
-                  <div class="item">
-                    <b>+{{competencyPoints (eventIce event)}}</b>
-                    {{ courseName event }} ({{courseNumber event}}, {{eventSem event}})
-                  </div>
+              <div class="ui very relaxed list">
+                {{#each year in years}}
+                  {{#each semester in semesters year}}
+                    {{#if hasEvents 'c' false semester}}
+                      <div class="item">
+                        <div class="header">{{printSemester semester}}</div>
+                        {{#each event in getEvents 'c' 'course' false semester}}
+                          <b>+{{competencyPoints (eventIce event)}}</b>
+                          {{ courseName event }} ({{courseNumber event}}) <br>
+                        {{/each}}
+                      </div>
+                    {{/if}}
+                  {{/each}}
                 {{/each}}
               </div>
             </div>
@@ -189,7 +213,7 @@
                 <div class="fill"></div>
               </div>
             </div>
-            <div class="radgrad-ice-circle p{{earnedICE.e}} orange">
+            <div class="radgrad-ice-circle p{{earnedICE.e}} radgrad-earn-exp">
               <span></span>
               <div class="slice">
                 <div class="bar"></div>
@@ -209,18 +233,23 @@
             </div>
             <div class="active content">
               <p>You have achieved {{experiencePoints earnedICE}} Experience points for the following:</p>
-              <div class="ui list">
-                {{#each event in getEvents 'e' 'opportunity' true}}
-                  <div class="item">
-                    <b>+{{experiencePoints (eventIce event)}}</b>
-                    {{ opportunityName event }} ({{eventSem event}})
-                  </div>
-                {{/each}}
-                {{#each event in getEvents 'e' 'course' true}}
-                  <div class="item">
-                    <b>+{{experiencePoints (eventIce event)}}</b>
-                    {{ courseName event }} ({{courseNumber event}}, {{eventSem event}})
-                  </div>
+              <div class="ui very relaxed list">
+                {{#each year in years}}
+                  {{#each semester in semesters year}}
+                    {{#if hasEvents 'e' true semester}}
+                      <div class="item">
+                        <div class="header">{{printSemester semester}}</div>
+                        {{#each event in getEvents 'e' 'opportunity' true semester}}
+                          <b>+{{experiencePoints (eventIce event)}}</b>
+                          {{ opportunityName event }} <br>
+                        {{/each}}
+                        {{#each event in getEvents 'e' 'course' true semester}}
+                          <b>+{{experiencePoints (eventIce event)}}</b>
+                          {{ courseName event }} ({{courseNumber event}}) <br>
+                        {{/each}}
+                      </div>
+                    {{/if}}
+                  {{/each}}
                 {{/each}}
               </div>
             </div>
@@ -231,18 +260,23 @@
             <div class="content">
               <p>You have a total of {{experiencePoints projectedICE}} projected Experience points. The
                 remaining {{remainingICE (experiencePoints earnedICE) (experiencePoints projectedICE) }} points are for the following:</p>
-              <div class="ui list">
-                {{#each event in getEvents 'e' 'opportunity' false}}
-                  <div class="item">
-                    <b>+{{experiencePoints (eventIce event)}}</b>
-                    {{ opportunityName event }} ({{eventSem event}})
-                  </div>
-                {{/each}}
-                {{#each event in getEvents 'e' 'course' false}}
-                  <div class="item">
-                    <b>+{{experiencePoints (eventIce event)}}</b>
-                    {{ courseName event }} ({{courseNumber event}}, {{eventSem event}})
-                  </div>
+              <div class="ui very relaxed list">
+                {{#each year in years}}
+                  {{#each semester in semesters year}}
+                    {{#if hasEvents 'e' false semester}}
+                      <div class="item">
+                        <div class="header">{{printSemester semester}}</div>
+                        {{#each event in getEvents 'e' 'opportunity' false semester}}
+                          <b>+{{experiencePoints (eventIce event)}}</b>
+                          {{ opportunityName event }} <br>
+                        {{/each}}
+                        {{#each event in getEvents 'e' 'course' false semester}}
+                          <b>+{{experiencePoints (eventIce event)}}</b>
+                          {{ courseName event }} ({{courseNumber event}}) <br>
+                        {{/each}}
+                      </div>
+                    {{/if}}
+                  {{/each}}
                 {{/each}}
               </div>
             </div>
