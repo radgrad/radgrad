@@ -59,3 +59,6 @@ import './update-interest-widget.js';
 
 import './update-opportunity-widget.html';
 import './update-opportunity-widget.js';
+
+import './update-teaser-widget.html';
+import './update-teaser-widget.js';
