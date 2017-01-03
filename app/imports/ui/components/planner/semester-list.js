@@ -162,7 +162,6 @@ Template.Semester_List.helpers({
   isCurrentSemester() {
     const semester = Template.instance().state.get('semester');
     const currentSemester = Template.instance().state.get('currentSemester');
-    console.log(semester, 'currentSemester', currentSemester)
     if (semester && currentSemester) {
       return semester.sortBy === currentSemester.sortBy;
     }
