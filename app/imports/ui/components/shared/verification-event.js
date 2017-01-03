@@ -55,10 +55,9 @@ Template.Verification_Event.events({
       VerificationRequests.updateStatus(requestID, status, processed);
 
       const feedDefinition = {
-        studentID,
-        slug: `${studentID}-new-user`,
+        student: studentID,
         description: `has completed ${opportunity.name}`,
-        timestamp: new Date(),
+        timestamp: Date.now(),
       };
       Feed.define(feedDefinition);
     } catch (e) {

@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { _, lodash } from 'meteor/erasaur:meteor-lodash';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -58,7 +58,7 @@ function getEventsHelper(iceType, type, earned, semester) {
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
   if (courses.length > 0) {
-    const filtered = lodash.filter(courses, function filter(course) {
+    const filtered = _.filter(courses, function filter(course) {
       if (course.number === 'ICS 499') {
         return true;
       }
