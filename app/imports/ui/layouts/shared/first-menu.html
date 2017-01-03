@@ -1,4 +1,4 @@
-<template name="First_Menu">
+<template name="First_Menu_backup">
   <div class="ui top fixed borderless menu radgrad-first-menu">
     <div class="item"><img class="ui mini image" src="/images/radgrad_logo.png" style="width: 45px;"></div>
     <div class="item" style="padding-left: 0;">
@@ -16,10 +16,11 @@
       {{/if}}
 
       <div class="item" style="border-left: 1px solid rgba(34,36,38,.07)">
-        <img class="ui mini image" src="{{firstMenuPictureSrc}}"
+        <img class="ui mini image" src="{{pictureSrc}}"
              style="margin-right: 10px; width: 40px; border-radius: 2px;">
         <div class="content">
-          <div class="header"><span style="font-size: 0.9rem; margin-right: 5px;">{{firstMenuFullName}}</span>
+          <div style="padding-top: 10px" class="header"><span style="font-size: 0.9rem; margin-right: 5px">{{firstName}}
+            <br/>{{lastName}}</span>
             <button class="ui mini grey button">
               {{#if useCAS}}
                 {{> Cas_Login}}
@@ -29,6 +30,43 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="First_Menu">
+  <div class="ui top fixed borderless menu radgrad-first-menu">
+    <div class="item"><img class="ui image" src="/images/radgrad_logo.png" style="width: 50px;"></div>
+    <div class="item" style="padding-left: 0;">
+      <h1>{{> RadGrad_Logo_Text}}</h1>
+    </div>
+    <div class="right menu radgrad-menu-profile">
+
+      {{#if displayLevelAndIce}}
+        <div class="item">
+          {{> First_Menu_Level_Icon level=level}}
+          {{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov"}}
+          {{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp"}}
+          {{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp"}}
+        </div>
+      {{/if}}
+
+      <div class="item" style="border-left: 1px solid rgba(34,36,38,.07)">
+        <img class="ui image" src="{{pictureSrc}}" style="width: 50px; border-radius: 2px;">
+      </div>
+      <div class="item">
+        <div style="" class="header"><span style="">{{firstName}}<br/>{{lastName}}</span>
+        </div>
+      </div>
+      <div class="item">
+        <button class="ui grey button">
+          {{#if useCAS}}
+            {{> Cas_Login}}
+          {{else}}
+            {{> loginButtons align="right"}}
+          {{/if}}
+        </button>
       </div>
     </div>
   </div>
