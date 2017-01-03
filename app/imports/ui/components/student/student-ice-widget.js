@@ -17,15 +17,6 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 import { getRouteUserName } from '../shared/route-user-name';
 
 
-function passedCourse(course) {
-  let ret = false;
-  if (course.grade === 'A+' || course.grade === 'A' || course.grade === 'A-' ||
-      course.grade === 'B+' || course.grade === 'B' || course.grade === 'B-' ||
-      course.grade === 'CR') {
-    ret = true;
-  }
-  return ret;
-}
 
 function getEventsHelper(iceType, type, earned, semester) {
   if (getUserIdFromRoute()) {
@@ -33,28 +24,32 @@ function getEventsHelper(iceType, type, earned, semester) {
     let allInstances = [];
     const iceInstances = [];
     if (type === 'course') {
-      const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: user._id, verified: earned }).fetch();
+      const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: user._id,
+        verified: earned }).fetch();
       courseInstances.forEach((courseInstance) => {
         if (CourseInstances.isICS(courseInstance._id)) {
-        allInstances.push(courseInstance);
+          allInstances.push(courseInstance);
       }
     });
     } else {
-      allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: user._id, verified: earned }).fetch();
+      allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: user._id,
+        verified: earned }).fetch();
     }
     allInstances.forEach((instance) => {
       if (iceType === 'i') {
-      if (instance.ice.i > 0) {
-        iceInstances.push(instance);
+        if (instance.ice.i > 0) {
+          iceInstances.push(instance);
+        }
+      } else if (iceType === 'c') {
+        if (instance.ice.c > 0) {
+          iceInstances.push(instance);
+        }
+      } else if (iceType === 'e') {
+        if (instance.ice.e > 0) {
+          iceInstances.push(instance);
+        }
       }
-    } else if (iceType === 'c') {
-      iceInstances.push(instance);
-    } else if (iceType === 'e') {
-      if (instance.ice.e > 0) {
-        iceInstances.push(instance);
-      }
-    }
-  });
+    });
     return iceInstances;
   }
   return null;
@@ -67,17 +62,11 @@ const availableCourses = () => {
       if (course.number === 'ICS 499') {
         return true;
       }
-      const passedCourses = [];
       const ci = CourseInstances.find({
         studentID: getUserIdFromRoute(),
         courseID: course._id,
       }).fetch();
-      _.map(ci, (c) => {
-        if (passedCourse(c)) {
-          passedCourses.push(c);
-        }
-      });
-      return passedCourses.length === 0;
+      return ci.length === 0;
     });
     return filtered;
   }
@@ -280,6 +269,13 @@ Template.Student_Ice_Widget.helpers({
   },
   printSemester(semester) {
     return Semesters.toString(semester._id, false);
+  },
+  matchingPoints(a, b) {
+    return a === b;
+  },
+  hasNoInterests() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    return user.interestIDs === undefined;
   },
 });
 

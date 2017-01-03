@@ -6,7 +6,6 @@ import { Users } from '../../../api/user/UserCollection.js';
 // a and b are javascript Date objects
 function dateDiffInDays(a, b) {
   const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-  console.log(`dates are ${a} - ${b}`);
   return Math.floor((a - b) / _MS_PER_DAY);
 }
 

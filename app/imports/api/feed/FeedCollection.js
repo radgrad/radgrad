@@ -1,5 +1,4 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
 import { Users } from '/imports/api/user/UserCollection';
 
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
@@ -7,7 +6,7 @@ import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 /** @module Feed */
 
 /**
- * Represents a feed instance, such as "abi-level1".
+ * Represents a feed instance.
  * @extends module:BaseInstance~BaseInstanceCollection
  */
 class FeedCollection extends BaseInstanceCollection {
@@ -24,23 +23,20 @@ class FeedCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Defines a new Feed and its associated Slug.
+   * Defines a new Feed.
    * @example
    * Teaser.define({ student: 'abigailkealoha',
-   *                    slugID: 'abi-level1',
    *                    description: 'has leveled up to Level 1!',
-   *                    timestamp: 'https://www.youtube.com/watch?v=OI4CXULK3tw',
-   * @param { Object } description Object with keys title, slug, URL, description, duration. interestIDs.
+   *                    timestamp: '12345465465',
+   * @param { Object } description Object with keys student, description, and timestamp.
    * Slug must be previously undefined.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestID.
    * @returns The newly created docID.
    */
   define({ student, description, timestamp }) {
-    // Get SlugID, throw error if found.
     const studentID = Users.getID(student);
     const feedID = this._collection.insert({ studentID, description, timestamp });
-    // Connect the Slug to this teaser
     return feedID;
   }
 
