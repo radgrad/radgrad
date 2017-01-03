@@ -97,12 +97,6 @@
                     <label class="ui mini {{#if missingPrerequisite prerequisite}}red{{/if}} label">{{prerequisite}}</label>
                   {{/each}}
                 </p>
-                {{#if isDeletableInstance}}
-                  <p>
-                    <button id="{{instanceID}}" class="ui red icon button delInstance">Delete
-                      <i class="remove icon"></i></button>
-                  </p>
-                {{/if}}
               </div>
             {{else}}
               {{#if hasOpportunity}}
@@ -130,16 +124,8 @@
                     </p>
                   {{/if}}
                   <div class="ui equal width grid">
-                    {{#if isDeletableInstance}}
-                      <div class="left aligned column">
-                        <p>
-                          <button id="{{instanceID}}" class="ui red icon button delInstance">Delete
-                            <i class="remove icon"></i></button>
-                        </p>
-                      </div>
-                    {{/if}}
                     {{#if isPastInstance}}
-                      <div class="right aligned column">
+                      <div class="left aligned column">
                         <p>
                           <button id="{{instanceID}}" class="ui blue button verifyInstance">Request
                             Verification
