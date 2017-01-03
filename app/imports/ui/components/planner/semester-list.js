@@ -294,7 +294,7 @@ Template.Semester_List.events({
       course: courseSlug,
       verified: false,
       note: event.target.text,
-      grade: '***',
+      grade: 'B',
       student: username,
     };
     CourseInstances.define(ci);
@@ -325,6 +325,7 @@ Template.Semester_List.events({
             hoverable: true,
             lastResort: 'right center',
           });
+      template.$('.ui.selection.dropdown').dropdown();
     });
   },
   'click .item.addOpportunity': function clickItemAddOpportunity(event) {
@@ -353,6 +354,18 @@ Template.Semester_List.events({
     const grade = div.childNodes[1].value;
     CourseInstances.updateGrade(div.id, grade);
   },
+  'click .jsDelCourse': function clickJsDelCourse(event) {
+    // event.preventDefault();
+    // console.log(event.target);
+    const id = event.target.id;
+    CourseInstances.removeIt(id);
+  },
+  'click .jsDelOpp': function clickJsDelOpp(event) {
+    event.preventDefault();
+    // console.log(event.target);
+    const id = event.target.id;
+    OpportunityInstances.removeIt(id);
+  },
 });
 
 Template.Semester_List.onCreated(function semesterListOnCreate() {
@@ -367,7 +380,7 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
   }
   const template = this;
   Tracker.afterFlush(() => {
-    template.$('.ui.icon.button')
+    template.$('.ui.basic.button')
         .popup({
           on: 'click',
         });
@@ -404,6 +417,7 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
           hoverable: true,
           lastResort: 'right center',
         });
+    template.$('.ui.selection.dropdown').dropdown();
   });
 });
 

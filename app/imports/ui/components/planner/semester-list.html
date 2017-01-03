@@ -21,7 +21,7 @@
             </div>
           </div>
         </td>
-        <td><i class="red remove circle icon"></i></td>
+        <td><i id="{{course._id}}" class="red remove circle icon jsDelCourse"></i></td>
       </tr>
       {{else}}
       <tr id="{{course._id}}" data-position="top center" class="courseInstance clickEnabled">
@@ -44,7 +44,7 @@
         <td colspan="2">
           <strong>{{opportunityName opportunity._id}}</strong>
         </td>
-        <td><i class="red remove circle icon"></i></td>
+        <td><i id="{{opportunity._id}}" class="red remove circle icon jsDelOpp"></i></td>
       </tr>
       {{/each}}
       </tbody>
