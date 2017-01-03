@@ -96,7 +96,7 @@ Template.Student_About_Me_Widget.helpers({
   studentPicture() {
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      return `/images/landing/${user.picture}`;
+      return user.picture;
     }
     return '';
   },

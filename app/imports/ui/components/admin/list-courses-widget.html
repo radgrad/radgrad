@@ -4,7 +4,7 @@
       <div class="ui dividing header"><h4>COURSES ({{ count }})</h4></div>
 
       {{#each course in courses}}
-        {{> Admin_DataModel_Accordion name=(courseTitle course) slug=(slugName course.slugID) descriptionPairs=(descriptionPairs course) id=course._id updateID=updateID}}
+        {{> Admin_DataModel_Accordion name=(courseTitle course) slug=(slugName course.slugID) descriptionPairs=(descriptionPairs course) id=course._id updateID=updateID deleteDisabled=(deleteDisabled course)}}
       {{/each}}
     </div>
   {{else}}

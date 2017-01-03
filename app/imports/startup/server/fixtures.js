@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
+import { Feed } from '../../api/feed/FeedCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
 import { HelpMessages } from '../../api/help/HelpMessageCollection';
@@ -37,6 +38,7 @@ import { defaultAdminAccount } from './icsdata/AdminUser';
 import { exampleStudents } from './icsdata/ExampleStudents';
 import { helpMessageDefinitions } from './icsdata/HelpMessages';
 import { teaserDefinitions } from './icsdata/TeaserDefinitions';
+import { feedDefinitions } from './icsdata/FeedDefinitions';
 
 
 // if the database is empty on server start, create some sample data.
@@ -156,6 +158,10 @@ Meteor.startup(() => {
       }
       return false;
     });
+  }
+  if (Feed.find().count() === 0) {
+    console.log('Defining Feed');  // eslint-disable-line no-console
+    feedDefinitions.map((definition) => Feed.define(definition));
   }
   if (defaultAdminAccount) {
     const admin = defaultAdminAccount;

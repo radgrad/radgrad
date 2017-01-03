@@ -2,6 +2,7 @@ import '/imports/api/base';
 import '/imports/api/career';
 import '/imports/api/course';
 import '/imports/api/degree';
+import '/imports/api/feed';
 import '/imports/api/feedback';
 import '/imports/api/help';
 import '/imports/api/ice';
@@ -22,6 +23,7 @@ import '/imports/startup/client';
 import '/imports/startup/both';
 
 import '/imports/ui/components/admin';
+import '/imports/ui/components/admin/form-fields';
 import '/imports/ui/components/advisor';
 import '/imports/ui/components/landing';
 import '/imports/ui/components/planner';

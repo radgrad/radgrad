@@ -11,7 +11,7 @@ import { Interests } from '/imports/api/interest/InterestCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { isRole, assertRole } from '/imports/api/role/Role';
-import { getTotalICE } from '/imports/api/ice/IceProcessor';
+import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 
 /** @module User */
@@ -56,27 +56,30 @@ class UserCollection extends BaseInstanceCollection {
     this.publicdata = {
       fields: {
         firstName: 1, middleName: 1, lastName: 1, slugID: 1, aboutMe: 1, interestIDs: 1,
-        careerGoalIDs: 1, picture: 1, roles: 1, username: 1, desiredDegree: 1, website: 1, level: 1,
+        careerGoalIDs: 1, picture: 1, roles: 1, username: 1, desiredDegree: 1, website: 1,
       },
     };
     this.privatedata = { fields: { emails: 1, degreePlanID: 1, desiredDegree: 1, semesterID: 1 } };
   }
 
   /**
-   * Defines a new User and their required data.
+   * Defines a new User.
    * @example
    * Users.define({ firstName: 'Joe',
    *                lastName: 'Smith',
    *                slug: 'joesmith',
    *                email: 'smith@hawaii.edu',
    *                role: ROLE.STUDENT,
-   *                password: 'foo' });
+   *                password: 'foo',
+   *                // optional
+    *               picture: 'http://johnson.github.io/images/profile.jpg',
+    *               website: 'http://johnson.github.io/'});
    * @param { Object } description Object with keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
-  define({ firstName, lastName, slug, email, role, password }) {
+  define({ firstName, lastName, slug, email, role, password, website, picture }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     let userID;
@@ -89,7 +92,7 @@ class UserCollection extends BaseInstanceCollection {
       const casReturn = Accounts.updateOrCreateUserFromExternalService('cas', result, options);
       userID = casReturn.userId;
     }
-    Meteor.users.update(userID, { $set: { username: slug, firstName, lastName, slugID, email } });
+    Meteor.users.update(userID, { $set: { username: slug, firstName, lastName, slugID, email, picture, website } });
 
     // Define the role if valid.
     if (!isRole(role)) {
@@ -381,6 +384,30 @@ class UserCollection extends BaseInstanceCollection {
     return getTotalICE(courseDocs.concat(oppDocs));
   }
 
+  /**
+   * Returns an ICE object with the total earned course and opportunity ICE values.
+   * @param studentID The userID.
+   * @throws {Meteor.Error} If userID is not a userID.
+   */
+  getEarnedICE(studentID) {
+    this.assertDefined(studentID);
+    const courseDocs = CourseInstances.find({ studentID }).fetch();
+    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
+    return getEarnedICE(courseDocs.concat(oppDocs));
+  }
+
+  /**
+   * Returns an ICE object with the total projected course and opportunity ICE values.
+   * @param studentID The userID.
+   * @throws {Meteor.Error} If userID is not a userID.
+   */
+  getProjectedICE(studentID) {
+    this.assertDefined(studentID);
+    const courseDocs = CourseInstances.find({ studentID }).fetch();
+    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
+    return getProjectedICE(courseDocs.concat(oppDocs));
+  }
+
   /* eslint class-methods-use-this: "off" */
 
   /**
@@ -403,6 +430,5 @@ class UserCollection extends BaseInstanceCollection {
 /**
  * Provides the singleton instance of this class to other entities.
  */
-export const
-    Users = new UserCollection();
+export const Users = new UserCollection();
 

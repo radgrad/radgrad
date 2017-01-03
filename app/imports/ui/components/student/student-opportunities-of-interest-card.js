@@ -20,14 +20,20 @@ Template.Student_Opportunities_Of_Interest_Card.onCreated(function studentOpport
 
 function interestedStudentsHelper(opp) {
   const interested = [];
+  let count = 0;
   const oi = OpportunityInstances.find({
     opportunityID: opp._id,
   }).fetch();
-  _.map(oi, (o) => {
-    if (!(_.includes(interested, o.studentID))) {
-      interested.push(o.studentID);
-    }
-  });
+    _.map(oi, (o) => {
+      if (count < 17){
+        if (!(_.includes(interested, o.studentID))) {
+          interested.push(o.studentID);
+          count += 1;
+        }
+      } else if (count === 17) {
+        interested.push('elipsis');
+      }
+    });
   return interested;
 }
 
@@ -110,8 +116,11 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
     return matchingInterests;
   },
   studentPicture(studentID) {
+    if (studentID === 'elipsis') {
+      return '/images/elipsis.png';
+    }
     const student = Users.findDoc(studentID);
-    return `/images/landing/${student.picture}`;
+    return student.picture;
   },
 });
 
