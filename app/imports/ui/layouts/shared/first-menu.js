@@ -10,7 +10,7 @@ Template.First_Menu.helpers({
   useCAS() {
     return false;
   },
-  firstMenuFullName() {
+  fullName() {
     const username = getRouteUserName();
     if (username) {
       const user = Users.getUserFromUsername(username);
@@ -18,7 +18,23 @@ Template.First_Menu.helpers({
     }
     return 'Unknown user';
   },
-  firstMenuPictureSrc() {
+  firstName() {
+    const username = getRouteUserName();
+    if (username) {
+      const user = Users.getUserFromUsername(username);
+      return user.firstName;
+    }
+    return 'Unknown';
+  },
+  lastName() {
+    const username = getRouteUserName();
+    if (username) {
+      const user = Users.getUserFromUsername(username);
+      return user.lastName;
+    }
+    return 'Unknown';
+  },
+  pictureSrc() {
     const username = getRouteUserName();
     if (username) {
       const user = Users.getUserFromUsername(username);
