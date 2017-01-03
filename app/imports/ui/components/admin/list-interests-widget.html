@@ -1,0 +1,12 @@
+<template name="List_Interests_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>INTERESTS ({{ count }})</h4></div>
+      {{#each interest in interests}}
+        {{> Admin_DataModel_Accordion name=interest.name slug=(slugName interest.slugID) descriptionPairs=(descriptionPairs interest) id=interest._id updateID=updateID deleteDisabled=(deleteDisabled interest)}}
+      {{/each}}
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

@@ -2,7 +2,7 @@
   <div class="{{#if required}}required{{/if}} field">
     <label>{{label}}</label>
     <div class="ui {{#if disabled}}disabled{{/if}} input">
-      <input type="text" name="{{name}}" placeholder="{{placeholder}}" value="{{value}}">
+      <input type="{{#if type}}{{type}}{{else}}text{{/if}}" name="{{name}}" placeholder="{{placeholder}}" value="{{value}}">
     </div>
     {{> Form_Error_Message errorMessage=errorMessage}}
   </div>

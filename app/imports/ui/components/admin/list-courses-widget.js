@@ -8,7 +8,7 @@ import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 
-Template.List_Courses_Widget.onCreated(function listCoursesWidgetOnCreated() {
+Template.List_Courses_Widget.onCreated(function onCreated() {
   this.subscribe(Courses.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
   this.subscribe(Interests.getPublicationName());
@@ -54,7 +54,7 @@ Template.List_Courses_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
   'click .jsDelete': function (event) {
     event.preventDefault();
-    const courseID = event.target.value;
-    Courses.removeIt(courseID);
+    const id = event.target.value;
+    Courses.removeIt(id);
   },
 });
