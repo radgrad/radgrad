@@ -17,11 +17,11 @@
           </div>
           <div class="row noTopPadding">
             {{#each year in years}}
-              <div class="center aligned column" style="padding-left: 2px; padding-right: 2px;">
+              <div class="column">
                 {{#if isFuture year}}
-                  Planned ICE: {{> ICE_Badge ice=(yearPlanningICE year)}}
+                  {{> ICE_Badge_Proj ice=(yearPlanningICE year)}}
                 {{else}}
-                  Earned: ICE {{> ICE_Badge ice=(yearICE year)}}
+                  {{> ICE_Badge ice=(yearICE year)}}
                 {{/if}}
               </div>
             {{/each}}
