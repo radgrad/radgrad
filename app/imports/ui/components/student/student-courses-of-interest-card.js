@@ -21,12 +21,18 @@ Template.Student_Courses_Of_Interest_Card.onCreated(function studentCoursesOfInt
 
 function interestedStudentsHelper(course) {
   const interested = [];
+  let count = 0;
   const ci = CourseInstances.find({
     courseID: course._id,
   }).fetch();
   _.map(ci, (c) => {
-    if (!_.includes(interested, c.studentID)) {
-      interested.push(c.studentID);
+    if (count < 17) {
+      if (!_.includes(interested, c.studentID)) {
+        interested.push(c.studentID);
+        count += 1;
+      }
+    } else if (count === 17) {
+      interested.push('elipsis');
     }
   });
   return interested;
@@ -36,22 +42,6 @@ function currentSemester() {
   const currentSemesterID = Semesters.getCurrentSemester();
   const currentSem = Semesters.findDoc(currentSemesterID);
   return currentSem;
-}
-
-function nextSem(sem) {
-  let nextTerm = '';
-  let slug = '';
-  if (sem.term === Semesters.SPRING) {
-    nextTerm = 'Summer';
-    slug = `${nextTerm}-${sem.year}`;
-  } else if (sem.term === Semesters.SUMMER) {
-    nextTerm = 'Fall';
-    slug = `${nextTerm}-${sem.year}`;
-  } else if (sem.term === Semesters.FALL) {
-    nextTerm = 'Spring';
-    slug = `${nextTerm}-${sem.year + 1}`;
-  }
-  return Semesters.findDoc(Slugs.getEntityID(slug, 'Semester'));
 }
 
 Template.Student_Courses_Of_Interest_Card.helpers({
@@ -108,6 +98,9 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     return interestedStudentsHelper(course).length;
   },
   studentPicture(studentID) {
+    if (studentID === 'elipsis') {
+      return '/images/elipsis.png';
+    }
     const student = Users.findDoc(studentID);
     return student.picture;
   },

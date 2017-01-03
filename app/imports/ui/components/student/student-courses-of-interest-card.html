@@ -13,11 +13,10 @@
     </div>
     <div class="content">
       {{numberStudents course}} students plan to participate
-      <div class="ui circular mini images">
+      <div class="ui circular mini bordered images">
         {{#each student in interestedStudents course}}
         <img class="ui image" src={{studentPicture student}}>
         {{/each}}
-        <a><img class="ui bordered image" src="/images/elipsis.png"></a>
       </div>
     </div>
     <div class="content">
