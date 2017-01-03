@@ -56,7 +56,8 @@ Template.Verification_Event.events({
 
       const feedDefinition = {
         student: studentID,
-        description: `has completed ${opportunity.name}`,
+        opportunity: opportunityID,
+        feedType: 'verified',
         timestamp: Date.now(),
       };
       Feed.define(feedDefinition);

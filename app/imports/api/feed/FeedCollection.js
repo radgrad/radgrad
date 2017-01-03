@@ -1,5 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Users } from '/imports/api/user/UserCollection';
+import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
+import { Courses } from '/imports/api/course/CourseCollection';
+
 
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 
@@ -16,7 +19,9 @@ class FeedCollection extends BaseInstanceCollection {
    */
   constructor() {
     super('Feed', new SimpleSchema({
-      studentID: { type: SimpleSchema.RegEx.Id },
+      studentID: { type: SimpleSchema.RegEx.Id, optional: true },
+      opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
+      courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       description: { type: String },
       timestamp: { type: Number },
     }));
@@ -34,9 +39,33 @@ class FeedCollection extends BaseInstanceCollection {
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestID.
    * @returns The newly created docID.
    */
-  define({ student, description, timestamp }) {
-    const studentID = Users.getID(student);
-    const feedID = this._collection.insert({ studentID, description, timestamp });
+  define({ student, opportunity, course, feedType, timestamp }) {
+    let studentID;
+    let opportunityID;
+    let courseID;
+    if (student) {
+      studentID = Users.getID(student);
+    }
+    if (opportunity) {
+      opportunityID = Opportunities.getID(opportunity);
+    }
+    if (course) {
+      courseID = Courses.getID(course);
+    }
+    let description = '';
+    if (feedType === 'new') {
+      if (student !== undefined) {
+        description = `${Users.getFullName(studentID)} has joined RadGrad.`;
+      } else if (opportunity !== undefined) {
+        description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities.`;
+      } else if (course !== undefined) {
+        description = `${Courses.findDoc(courseID).name} has been added to Courses.`;
+      }
+    } else if (feedType === 'verified') {
+      description = `${Users.getFullName(studentID)} has been verified for 
+        ${Opportunities.findDoc(opportunityID).name}.`;
+    }
+    const feedID = this._collection.insert({ studentID, opportunityID, courseID, description, timestamp });
     return feedID;
   }
 
