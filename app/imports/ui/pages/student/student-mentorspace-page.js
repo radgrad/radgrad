@@ -30,7 +30,7 @@ Template.Student_MentorSpace_Page.onCreated(function appBodyOnCreated() {
 Template.Student_MentorSpace_Page.helpers({
   // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
 
-  listMentors () {
+  listMentors() {
     return [{
       name: 'Robert Brewer',
       title: 'Software Engineer, Tableau',
