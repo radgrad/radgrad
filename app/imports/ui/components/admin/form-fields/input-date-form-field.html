@@ -1,0 +1,12 @@
+<template name="Input_Date_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>{{label}}</label>
+    <div class="ui calendar" id="{{name}}">
+      <div class="ui {{#if disabled}}disabled{{/if}} input left icon">
+        <i class="calendar icon"></i>
+        <input type="text" name="{{name}}" placeholder="{{placeholder}}" value="{{value}}">
+      </div>
+    </div>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>
