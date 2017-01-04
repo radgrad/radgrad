@@ -27,12 +27,13 @@ class BaseInstanceCollection extends BaseCollection {
   /**
    * Returns the docIDs associated with instances, or throws an error if any cannot be found.
    * If an instance is a docID, then it is returned unchanged. If a slug, its corresponding docID is returned.
+   * If nothing is passed, then an empty array is returned.
    * @param { String[] } instances An array of valid docIDs, slugs, or a combination.
    * @returns { String[] } The docIDs associated with instances.
    * @throws { Meteor.Error } If any instance is not a docID or a slug.
    */
   getIDs(instances) {
-    return instances.map((instance) => this.getID(instance));
+    return (instances) ? instances.map((instance) => this.getID(instance)): [];
   }
 
 

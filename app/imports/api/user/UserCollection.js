@@ -6,6 +6,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseInstanceCollection  from '/imports/api/base/BaseInstanceCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
+import { DesiredDegree } from '/imports/api/degree/DesiredDegreeCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { isRole, assertRole } from '/imports/api/role/Role';
@@ -74,24 +75,35 @@ class UserCollection extends BaseInstanceCollection {
    *                email: 'smith@hawaii.edu',
    *                role: ROLE.STUDENT,
    *                password: 'foo',
-   *                // optional
+   *                // following fields are optional.
     *               picture: 'http://johnson.github.io/images/profile.jpg',
-    *               website: 'http://johnson.github.io/'});
-   * @param { Object } description Object with keys firstName, lastName, slug, email, role, and password.
+    *               website: 'http://johnson.github.io/',
+    *               interests: ['software-engineering'],
+    *               careerGoals: ['application-developer'],
+    *               desiredDegree: 'bs-cs',
+    *               });
+   * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
+   * picture, website, interests, careerGoals, and desiredDegree are optional.
+   * desiredDegree must be the desired degree slug.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
-  define({ firstName, lastName, slug, email, role, password, website, picture }) {
+  define({ firstName, lastName, slug, email, role, password, picture, interests, careerGoals, desiredDegree,
+      website }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Make sure role is supplied and is valid.
     if (!isRole(role)) {
       throw new Meteor.Error(`Role ${role} is not a valid role name.`);
     }
+    const interestIDs = Interests.getIDs(interests)
+    const careerGoalIDs = CareerGoals.getIDs(careerGoals);
+    if (desiredDegree && !DesiredDegree.isDefined(desiredDegree)) {
+      throw new Meteor.Error(`Desired degree slug ${desiredDegree} is not defined.`);
+    }
     // Now define the user.
     let userID;
-    // Define the user in accounts package.
     if (password) {
       userID = Accounts.createUser({ username: slug, email, password });
     } else {
@@ -100,8 +112,10 @@ class UserCollection extends BaseInstanceCollection {
       const casReturn = Accounts.updateOrCreateUserFromExternalService('cas', result, options);
       userID = casReturn.userId;
     }
-    Meteor.users.update(userID, { $set: { username: slug, firstName, lastName, slugID, email, picture, website } });
 
+    // Now that we have a user, update fields.
+    Meteor.users.update(userID, { $set: { username: slug, firstName, lastName, slugID, email, picture, website,
+    desiredDegree, interestIDs, careerGoalIDs } });
 
     Roles.addUsersToRoles(userID, [role]);
 
