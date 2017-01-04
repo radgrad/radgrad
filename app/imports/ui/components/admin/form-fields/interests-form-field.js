@@ -6,7 +6,7 @@ Template.Interests_Form_Field.onRendered(function onRendered() {
 });
 
 Template.Interests_Form_Field.helpers({
-  isSelected(interest, selectedInterestIDs) {
-    return _.includes(selectedInterestIDs, interest);
+  isSelected(interestID, selectedInterestIDs) {
+    return _.includes(selectedInterestIDs, interestID);
   },
 });
