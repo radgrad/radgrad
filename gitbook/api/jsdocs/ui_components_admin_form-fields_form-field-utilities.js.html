@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SampleCourses - Documentation</title>
+    <title>ui/components/admin/form-fields/form-field-utilities.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -28,373 +28,136 @@
 
 <div id="main">
     
-    <h1 class="page-title">SampleCourses</h1>
+    <h1 class="page-title">ui/components/admin/form-fields/form-field-utilities.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id=".makeSampleCourse"><span class="type-signature">(static) </span>makeSampleCourse<span class="signature">(args)</span><span class="type-signature"> &rarr; {String}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_course_SampleCourses.js.html">api/course/SampleCourses.js</a>, <a href="api_course_SampleCourses.js.html#line17">line 17</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Creates a Course with a unique slug and returns its docID.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>args</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>An optional object containing arguments to the courses.define function.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>The docID of the newly generated Course.</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".makeSampleCourseInstance"><span class="type-signature">(static) </span>makeSampleCourseInstance<span class="signature">(student, args)</span><span class="type-signature"> &rarr; {String}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_course_SampleCourses.js.html">api/course/SampleCourses.js</a>, <a href="api_course_SampleCourses.js.html#line36">line 36</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>Creates a CourseInstance with a unique slug and returns its docID.<br>Also creates a new Course.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>student</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The student slug associated with this course.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>args</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Optional object providing arguments to the CourseInstance definition.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>The docID for the newly generated Interest.</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Slugs } from '../../../../api/slug/SlugCollection.js';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Template } from 'meteor/templating';
+
+/**
+ * Return the data from the submitted form corresponding to the fields in the passed schema.
+ * @param schema The simple schema.
+ * @param event The event holding the form data.
+ * @returns {Object} An object whose keys are the schema keys and whose values are the corresponding form values.
+ */
+
+export function getSchemaDataFromEvent(schema, event) {
+  const eventData = {};
+  _.map(schema._firstLevelSchemaKeys, function (key) {
+    if (schema._schema[key].type.name === 'Array') {
+      const selectedValues = _.filter(event.target[key].selectedOptions, (option) => option.selected);
+      eventData[key] = _.map(selectedValues, (option) => option.value);
+    } else {
+      eventData[key] = event.target[key].value;
+    }
+  });
+  return eventData;
+}
+
+/**
+ * Custom validator for the slug field.
+ * @returns True if the slug value is not previously defined, otherwise errorType 'duplicateSlug'.
+ * @throws Error if there are no Slugs in the SlugCollection.
+ */
+export function slugFieldValidator() {
+  if (Slugs.count() === 0) {
+    throw Meteor.Error('slugFieldValidator called but SlugCollection is empty. Probably not subscribed to.');
+  }
+  return (Slugs.isDefined(this.value)) ? 'duplicateSlug' : true;
+}
+
+/* eslint-disable no-param-reassign */
+
+/**
+ * Rename oldKey in obj to newKey.
+ * @param obj The object containing oldKey
+ * @param oldKey The oldKey (a string).
+ * @param newKey The newKey (a string).
+ */
+export function renameKey(obj, oldKey, newKey) {
+  obj[newKey] = obj[oldKey];
+  delete obj[oldKey];
+}
+
+/**
+ * Convert ICE values from three fields to a single 'ice' field with an object value.
+ * @param obj The data object holding ICE values as three separate fields.
+ */
+export function convertICE(obj) {
+  obj.ice = { i: obj.innovation, c: obj.competency, e: obj.experience };
+  delete obj.innovation;
+  delete obj.competency;
+  delete obj.experience;
+}
+
+/**
+ * Add successClass, errorClass, and context to the template.
+ * @param instance The template instance.
+ * @param schema The schema associated with the form in this instance.
+ */
+export function setupFormWidget(instance, schema) {
+  instance.successClass = new ReactiveVar('');
+  instance.errorClass = new ReactiveVar('');
+  instance.context = schema.namedContext('widget');
+  // do this just in case the schema has a slug. Not always needed but does no harm.
+  schema.messages({ duplicateSlug: 'The slug [value] is already defined.' });
+}
+
+/**
+ * After a form submission has completed successfully, update template state to indicate success.
+ * @param instance The template instance.
+ * @param event The event holding the form data.
+ */
+export function indicateSuccess(instance, event) {
+  instance.successClass.set('success');
+  instance.errorClass.set('');
+  event.target.reset();
+  instance.$('.dropdown').dropdown('clear');
+}
+
+/**
+ * If a form submission was not validated, update template state to indicate error.
+ * @param instance The template instance.
+ */
+export function indicateError(instance) {
+  instance.successClass.set('');
+  instance.errorClass.set('error');
+}
+
+export function processCancelButtonClick(event, instance) {
+  event.preventDefault();
+  instance.data.updateID.set('');
+}
+
+export function processUpdateButtonClick(event, instance) {
+  event.preventDefault();
+  const id = event.target.value;
+  instance.data.updateID.set(id);
+}
+
+/*
+ * Register common helper classes for form processing.
+ */
+Template.registerHelper('successClass', () => Template.instance().successClass.get());
+Template.registerHelper('errorClass', () => Template.instance().errorClass.get());
+Template.registerHelper('fieldError', (fieldName) => {
+  const invalidKeys = Template.instance().context.invalidKeys();
+  const errorObject = _.find(invalidKeys, (keyObj) => keyObj.name === fieldName);
+  return errorObject &amp;&amp; Template.instance().context.keyErrorMessage(errorObject.name);
+});
+</code></pre>
+        </article>
+    </section>
 
 
 
@@ -404,7 +167,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Tue Jan 03 2017 09:06:01 GMT-1000 (HST) using the docdash theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Tue Jan 03 2017 09:06:00 GMT-1000 (HST) using the docdash theme.
 </footer>
 
 <script>prettyPrint();</script>

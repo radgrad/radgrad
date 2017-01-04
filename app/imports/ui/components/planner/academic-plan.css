@@ -6,3 +6,8 @@ div.stretched.column.academicYear {
   padding-left: 2px;
   padding-right: 2px;
 }
+
+div.item.radgrad-planner-ice {
+  display: flex;
+  margin-left: 16px;
+}
