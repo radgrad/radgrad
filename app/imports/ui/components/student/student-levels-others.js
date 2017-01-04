@@ -89,7 +89,7 @@ Template.Student_Levels_Others.helpers({
     return 'white';
   },
   studentPicture(student) {
-    return `/images/landing/${student.picture}`;
+    return student.picture;
   },
 });
 

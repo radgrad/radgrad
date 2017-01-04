@@ -69,7 +69,7 @@ Template.Student_About_Me_Widget.helpers({
     let ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      ret = user.interestIDs
+      ret = user.interestIDs;
     }
     return ret;
   },

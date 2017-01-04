@@ -56,7 +56,7 @@ class UserCollection extends BaseInstanceCollection {
     this.publicdata = {
       fields: {
         firstName: 1, middleName: 1, lastName: 1, slugID: 1, aboutMe: 1, interestIDs: 1,
-        careerGoalIDs: 1, picture: 1, roles: 1, username: 1, desiredDegree: 1, website: 1,
+        careerGoalIDs: 1, picture: 1, roles: 1, username: 1, desiredDegree: 1, website: 1, level: 1,
       },
     };
     this.privatedata = { fields: { emails: 1, degreePlanID: 1, desiredDegree: 1, semesterID: 1 } };
