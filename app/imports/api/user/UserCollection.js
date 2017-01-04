@@ -1,15 +1,16 @@
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import BaseInstanceCollection  from '/imports/api/base/BaseInstanceCollection';
+import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { DesiredDegree } from '/imports/api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { isRole, assertRole } from '/imports/api/role/Role';
+import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
 import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 
@@ -37,6 +38,7 @@ class UserCollection extends BaseInstanceCollection {
       uhID: { type: String, optional: true },
       careerGoalIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
       interestIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
+      // TODO: Store desiredDegree as its docID, not the slug.
       desiredDegree: { type: String, optional: true },
       picture: { type: String, optional: true },
       level: { type: Number, optional: true },
@@ -45,10 +47,10 @@ class UserCollection extends BaseInstanceCollection {
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
     this._collection = Meteor.users;
 
-    // TODO: SimpleSchema validation is disabled for now.
+    // TODO: Enable simpleschema validation.
     // this._collection.attachSchema(this._schema);
 
-    this.publicdata = {
+    this._publicData = {
       fields: {
         firstName: 1,
         lastName: 1,
@@ -63,10 +65,10 @@ class UserCollection extends BaseInstanceCollection {
         emails: 1,
       },
     };
-    this.privatedata = { fields: { uhID: 1 } };
-    // Define alldata as the union of public and private data.
-    this.alldata = { fields: {} };
-    _.defaultsDeep(this.alldata, this.publicdata, this.privatedata);
+    this._privateData = { fields: { uhID: 1 } };
+    // Define _allData as the union of public and private data.
+    this._allData = { fields: {} };
+    _.defaultsDeep(this._allData, this._publicData, this._privateData);
   }
 
   /**
@@ -93,17 +95,19 @@ class UserCollection extends BaseInstanceCollection {
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
-  define({ firstName, lastName, slug, email, role, password, picture, interests, careerGoals, desiredDegree,
-      website, uhID }) {
+  define({
+      firstName, lastName, slug, email, role, password, picture, interests, careerGoals, desiredDegree,
+      website, uhID,
+  }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Make sure role is supplied and is valid.
     if (!isRole(role)) {
       throw new Meteor.Error(`Role ${role} is not a valid role name.`);
     }
-    const interestIDs = Interests.getIDs(interests)
+    const interestIDs = Interests.getIDs(interests);
     const careerGoalIDs = CareerGoals.getIDs(careerGoals);
-    if (desiredDegree && !DesiredDegree.isDefined(desiredDegree)) {
+    if (desiredDegree && !DesiredDegrees.isDefined(desiredDegree)) {
       throw new Meteor.Error(`Desired degree slug ${desiredDegree} is not defined.`);
     }
     // Now define the user.
@@ -118,8 +122,12 @@ class UserCollection extends BaseInstanceCollection {
     }
 
     // Now that we have a user, update fields.
-    Meteor.users.update(userID, { $set: { username: slug, firstName, lastName, slugID, email, picture, website,
-    desiredDegree, interestIDs, careerGoalIDs, uhID } });
+    Meteor.users.update(userID, {
+      $set: {
+        username: slug, firstName, lastName, slugID, email, picture, website,
+        desiredDegree, interestIDs, careerGoalIDs, uhID,
+      },
+    });
 
     Roles.addUsersToRoles(userID, [role]);
 
@@ -155,12 +163,18 @@ class UserCollection extends BaseInstanceCollection {
   /**
    * Removes the user and their associated DegreePlan (if present) and their Slug.
    * @param user The object or docID representing this user.
-   * @throws { Meteor.Error } if the user or their slug is not defined, or if they are referenced in Opportunities.
+   * @throws { Meteor.Error } if the user or their slug is not defined, or if the user has remaining
+   * opportunity or course instances.
    */
   removeIt(user) {
-    // TODO: check to see user is not defined in any opportunities.
-    // TODO: delete degreeplan if present.
-    super.removeIt(user);
+    const docID = this.findDoc(user)._id;
+    const courseInstanceCount = CourseInstances.find({ studentID: docID }).count();
+    const opportunityInstanceCount = OpportunityInstances.find({ studentID: docID }).count();
+    if ((courseInstanceCount + opportunityInstanceCount) === 0) {
+      super.removeIt(user);
+    } else {
+      throw new Meteor.Error(`Attempt to remove ${user} while course or opportunity instances remain.`);
+    }
   }
 
   /**
@@ -178,20 +192,14 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Asserts that the passed user has the given role.
+   * Asserts that the passed user has one of the given roles.
    * @param userID The user.
-   * @param role The role.
+   * @param role The role or an array of roles.
    * @throws { Meteor.Error } If the user does not have the role, or if user or role is not valid.
    */
   assertInRole(userID, role) {
     this.assertDefined(userID);
-    if (Array.isArray(role)) {
-      role.forEach((r) => {
-        assertRole(r);
-      });
-    } else {
-      assertRole(role);
-    }
+    assertRole(role);
     if (!Roles.userIsInRole(userID, role)) {
       throw new Meteor.Error(`${userID} (${this.findDoc(userID).firstName}) is not in role ${role}.`);
     }
@@ -216,36 +224,28 @@ class UserCollection extends BaseInstanceCollection {
    */
   setUhId(userID, uhID) {
     this.assertDefined(userID);
-    if (!_.isString(uhID)) {
-      throw new Meteor.Error(`${uhID} is not a string.`);
-    }
+    check(uhID, String);
     this._collection.update(userID, { $set: { uhID } });
   }
 
   /**
    * Returns the user doc associated with the given uhID.
    * @param uhID the user's UH ID.
-   * @returns Object the user doc associated with the given uhID.
+   * @returns Object the user doc associated with the given uhID or null if not found.
    */
   getUserFromUhId(uhID) {
-    const users = this._collection.find({ uhID }).fetch();
-    if (users.length > 0) {
-      return users[0];
-    }
-    return null;
+    check(uhID, String);
+    return this._collection.findOne({ uhID });
   }
 
   /**
    * Returns the user doc associated with the given username.
    * @param username the username.
-   * @returns Object the user doc associated with the given username.
+   * @returns Object the user doc associated with the given username or null if not found.
    */
   getUserFromUsername(username) {
-    const users = this._collection.find({ username }).fetch();
-    if (users.length > 0) {
-      return users[0];
-    }
-    return null;
+    check(username, String);
+    return this._collection.findOne({ username });
   }
 
   /**
@@ -268,9 +268,7 @@ class UserCollection extends BaseInstanceCollection {
    */
   setEmail(userID, email) {
     this.assertDefined(userID);
-    if (!_.isString(email)) {
-      throw new Meteor.Error(`${email} is not a string.`);
-    }
+    check(email, String);
     this._collection.update(userID, { $set: { email } });
   }
 
@@ -282,9 +280,7 @@ class UserCollection extends BaseInstanceCollection {
    */
   setWebsite(userID, website) {
     this.assertDefined(userID);
-    if (!_.isString(website)) {
-      throw new Meteor.Error(`${website} is not a string.`);
-    }
+    check(website, String);
     this._collection.update(userID, { $set: { website } });
   }
 
@@ -308,22 +304,21 @@ class UserCollection extends BaseInstanceCollection {
    */
   setPicture(userID, picture) {
     this.assertDefined(userID);
-    if (!_.isString(picture)) {
-      throw new Meteor.Error(`${picture} is not a string.`);
-    }
+    check(picture, String);
     this._collection.update(userID, { $set: { picture } });
   }
 
   /**
    * Updates userID with desiredDegree string.
    * @param userID The userID.
-   * @param desiredDegree The desired degree string.
-   * @throws {Meteor.Error} If userID is not a userID, or if desiredDegree is not a string.
+   * @param desiredDegree The desired degree.
+   * @throws {Meteor.Error} If userID is not a userID, or if desiredDegree is not defined.
    */
   setDesiredDegree(userID, desiredDegree) {
     this.assertDefined(userID);
-    if (!_.isString(desiredDegree)) {
-      throw new Meteor.Error(`${desiredDegree} is not a string.`);
+    check(desiredDegree, String);
+    if (!DesiredDegrees.isDefined(desiredDegree)) {
+      throw new Meteor.Error(`Desired degree ${desiredDegree} is not defined.`);
     }
     this._collection.update(userID, { $set: { desiredDegree } });
   }
@@ -335,12 +330,7 @@ class UserCollection extends BaseInstanceCollection {
    */
   setLevel(userID, level) {
     this.assertDefined(userID);
-    if (!_.isNumber(level)) {
-      throw new Meteor.Error(`${level} is not a number.`);
-    } else
-      if (level < 0 || level > 6) {
-        throw new Meteor.Error(`${level} is out of bounds.`);
-      }
+    check(level, Number);
     this._collection.update(userID, { $set: { level } });
   }
 
@@ -394,7 +384,10 @@ class UserCollection extends BaseInstanceCollection {
 
   publish() {
     if (Meteor.isServer) {
-      Meteor.publish(this._collectionName, () => Meteor.users.find({}, this.publicdata));
+      Meteor.publish(this._collectionName, function () {
+        const fields = (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) ? this._allData : this._publicData;
+        return Meteor.users.find({}, fields);
+      });
     }
   }
 }
