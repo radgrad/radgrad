@@ -48,7 +48,6 @@ class UserCollection extends BaseInstanceCollection {
     // TODO: SimpleSchema validation is disabled for now.
     // this._collection.attachSchema(this._schema);
 
-    // Right now it looks like all fields can be public!
     this.publicdata = {
       fields: {
         firstName: 1,
@@ -64,6 +63,10 @@ class UserCollection extends BaseInstanceCollection {
         emails: 1,
       },
     };
+    this.privatedata = { fields: { uhID: 1 } };
+    // Define alldata as the union of public and private data.
+    this.alldata = { fields: {} };
+    _.defaultsDeep(this.alldata, this.publicdata, this.privatedata);
   }
 
   /**
@@ -76,12 +79,13 @@ class UserCollection extends BaseInstanceCollection {
    *                role: ROLE.STUDENT,
    *                password: 'foo',
    *                // following fields are optional.
-    *               picture: 'http://johnson.github.io/images/profile.jpg',
-    *               website: 'http://johnson.github.io/',
-    *               interests: ['software-engineering'],
-    *               careerGoals: ['application-developer'],
-    *               desiredDegree: 'bs-cs',
-    *               });
+   *                uhID: '12345678',
+   *                picture: 'http://johnson.github.io/images/profile.jpg',
+   *                website: 'http://johnson.github.io/',
+   *                interests: ['software-engineering'],
+   *                careerGoals: ['application-developer'],
+   *                desiredDegree: 'bs-cs',
+   *               });
    * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
    * picture, website, interests, careerGoals, and desiredDegree are optional.
@@ -90,7 +94,7 @@ class UserCollection extends BaseInstanceCollection {
    * @returns The newly created docID.
    */
   define({ firstName, lastName, slug, email, role, password, picture, interests, careerGoals, desiredDegree,
-      website }) {
+      website, uhID }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Make sure role is supplied and is valid.
@@ -115,7 +119,7 @@ class UserCollection extends BaseInstanceCollection {
 
     // Now that we have a user, update fields.
     Meteor.users.update(userID, { $set: { username: slug, firstName, lastName, slugID, email, picture, website,
-    desiredDegree, interestIDs, careerGoalIDs } });
+    desiredDegree, interestIDs, careerGoalIDs, uhID } });
 
     Roles.addUsersToRoles(userID, [role]);
 
