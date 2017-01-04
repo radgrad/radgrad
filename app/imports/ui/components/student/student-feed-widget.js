@@ -36,12 +36,13 @@ Template.Student_Feed_Widget.helpers({
     } else if (timeDiff === 1) {
       ret = 'Yesterday';
     } else {
-      ret =  `${dateDiffInDays(currentTime, feedTime)} days ago`;
+      ret = `${dateDiffInDays(currentTime, feedTime)} days ago`;
     }
     return ret;
   },
-  studentPicture(feed) {
-    return Users.findDoc(feed.studentID).picture;
+  feedPicture(feed) {
+    console.log(feed.picture);
+    return feed.picture;
   },
 });
 
