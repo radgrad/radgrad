@@ -37,6 +37,27 @@ function interestedStudentsHelper(opp) {
   return interested;
 }
 
+function matchingInterestsHelper(opp) {
+  const matchingInterests = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterests = [];
+  const opportunityInterests = [];
+  _.map(opp.interestIDs, (id) => {
+    opportunityInterests.push(Interests.findDoc(id));
+  });
+  _.map(user.interestIDs, (id) => {
+    userInterests.push(Interests.findDoc(id));
+  });
+  _.map(opportunityInterests, (oppInterest) => {
+    _.map(userInterests, (userInterest) => {
+      if (_.isEqual(oppInterest, userInterest)) {
+        matchingInterests.push(userInterest);
+      }
+    });
+  });
+  return matchingInterests;
+}
+
 Template.Student_Opportunities_Of_Interest_Card.helpers({
   getDictionary() {
     return Template.instance().state;
@@ -96,24 +117,24 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
     return interestedStudentsHelper(opp).length;
   },
   matchingInterests(opp) {
-    const matchingInterests = [];
-    const user = Users.findDoc({ username: getRouteUserName() });
-    const userInterests = [];
-    const opportunityInterests = [];
+    return matchingInterestsHelper(opp);
+  },
+  otherInterests(opp) {
+    const matchingInterests = matchingInterestsHelper(opp);
+    const oppInterests = [];
     _.map(opp.interestIDs, (id) => {
-      opportunityInterests.push(Interests.findDoc(id));
+      oppInterests.push(Interests.findDoc(id));
+  });
+    const filtered = _.filter(oppInterests, function(oppInterest) {
+      let ret = true;
+      _.map(matchingInterests, (matchingInterest) => {
+        if (_.isEqual(oppInterest, matchingInterest)) {
+        ret = false;
+      }
     });
-    _.map(user.interestIDs, (id) => {
-      userInterests.push(Interests.findDoc(id));
+      return ret;
     });
-    _.map(opportunityInterests, (oppInterest) => {
-      _.map(userInterests, (userInterest) => {
-        if (_.isEqual(oppInterest, userInterest)) {
-          matchingInterests.push(userInterest);
-        }
-      });
-    });
-    return matchingInterests;
+    return filtered;
   },
   studentPicture(studentID) {
     if (studentID === 'elipsis') {

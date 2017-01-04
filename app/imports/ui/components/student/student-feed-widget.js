@@ -41,7 +41,6 @@ Template.Student_Feed_Widget.helpers({
     return ret;
   },
   feedPicture(feed) {
-    console.log(feed.picture);
     return feed.picture;
   },
 });

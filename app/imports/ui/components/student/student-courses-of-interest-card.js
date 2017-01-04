@@ -38,6 +38,27 @@ function interestedStudentsHelper(course) {
   return interested;
 }
 
+function matchingInterestsHelper(course) {
+  const matchingInterests = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterests = [];
+  const courseInterests = [];
+  _.map(course.interestIDs, (id) => {
+    courseInterests.push(Interests.findDoc(id));
+});
+  _.map(user.interestIDs, (id) => {
+    userInterests.push(Interests.findDoc(id));
+});
+  _.map(courseInterests, (courseInterest) => {
+    _.map(userInterests, (userInterest) => {
+    if (_.isEqual(courseInterest, userInterest)) {
+      matchingInterests.push(userInterest);
+  }
+});
+});
+  return matchingInterests;
+}
+
 function currentSemester() {
   const currentSemesterID = Semesters.getCurrentSemester();
   const currentSem = Semesters.findDoc(currentSemesterID);
@@ -69,24 +90,24 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   },
 
   matchingInterests(course) {
-    const matchingInterests = [];
-    const user = Users.findDoc({ username: getRouteUserName() });
-    const userInterests = [];
+    return matchingInterestsHelper(course);
+  },
+  otherInterests(course) {
+    const matchingInterests = matchingInterestsHelper(course);
     const courseInterests = [];
     _.map(course.interestIDs, (id) => {
       courseInterests.push(Interests.findDoc(id));
     });
-    _.map(user.interestIDs, (id) => {
-      userInterests.push(Interests.findDoc(id));
-    });
-    _.map(courseInterests, (courseInterest) => {
-      _.map(userInterests, (userInterest) => {
-        if (_.isEqual(courseInterest, userInterest)) {
-          matchingInterests.push(userInterest);
+    const filtered = _.filter(courseInterests, function(courseInterest) {
+      let ret = true;
+      _.map(matchingInterests, (matchingInterest) => {
+        if (_.isEqual(courseInterest, matchingInterest)) {
+        ret = false;
         }
       });
+      return ret;
     });
-    return matchingInterests;
+    return filtered;
   },
   interestName(interest) {
     return interest.name;

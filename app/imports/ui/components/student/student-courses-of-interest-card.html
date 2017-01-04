@@ -24,6 +24,9 @@
         {{#each interest in matchingInterests course}}
           <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
         {{/each}}
+        {{#each interest in otherInterests course}}
+          <a class="ui mini grey label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
+        {{/each}}
       </span>
     </div>
     <div class="ui three bottom attached buttons">

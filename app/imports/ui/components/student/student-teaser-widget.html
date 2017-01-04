@@ -21,6 +21,9 @@
                   {{#each interest in matchingInterests teaser}}
                     <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
                   {{/each}}
+                  {{#each interest in otherInterests teaser}}
+                    <a class="ui mini grey label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
+                  {{/each}}
                 </span>
             </div>
             <div class="content bottom">

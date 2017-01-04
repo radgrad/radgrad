@@ -37,6 +37,27 @@ function matchingTeasers() {
   return matching;
 }
 
+function matchingInterestsHelper(teaser) {
+  const matchingInterests = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterests = [];
+  const teaserInterests = [];
+  _.map(teaser.interestIDs, (id) => {
+    teaserInterests.push(Interests.findDoc(id));
+  });
+  _.map(user.interestIDs, (id) => {
+    userInterests.push(Interests.findDoc(id));
+  });
+  _.map(teaserInterests, (teaserInterest) => {
+    _.map(userInterests, (userInterest) => {
+      if (_.isEqual(teaserInterest, userInterest)) {
+        matchingInterests.push(userInterest);
+      }
+    });
+  });
+  return matchingInterests;
+}
+
 Template.Student_Teaser_Widget.helpers({
   getDictionary() {
     return Template.instance().state;
@@ -60,24 +81,24 @@ Template.Student_Teaser_Widget.helpers({
     return teaser.url;
   },
   matchingInterests(teaser) {
-    const matchingInterests = [];
-    const user = Users.findDoc({ username: getRouteUserName() });
-    const userInterests = [];
+    return matchingInterestsHelper(teaser);
+  },
+  otherInterests(teaser) {
+    const matchingInterests = matchingInterestsHelper(teaser);
     const teaserInterests = [];
     _.map(teaser.interestIDs, (id) => {
       teaserInterests.push(Interests.findDoc(id));
+  });
+    const filtered = _.filter(teaserInterests, function(teaserInterest) {
+      let ret = true;
+      _.map(matchingInterests, (matchingInterest) => {
+        if (_.isEqual(teaserInterest, matchingInterest)) {
+        ret = false;
+      }
     });
-    _.map(user.interestIDs, (id) => {
-      userInterests.push(Interests.findDoc(id));
+      return ret;
     });
-    _.map(teaserInterests, (teaserInterest) => {
-      _.map(userInterests, (userInterest) => {
-        if (_.isEqual(teaserInterest, userInterest)) {
-          matchingInterests.push(userInterest);
-        }
-      });
-    });
-    return matchingInterests;
+    return filtered;
   },
   interestName(interest) {
     return interest.name;
