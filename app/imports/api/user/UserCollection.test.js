@@ -55,25 +55,19 @@ if (Meteor.isServer) {
       Users.removeIt(docID);
     });
 
-    it('#setAboutMe, #setDesiredDegree, #setInterestIds, #setPicture, #setSemesterId, #setUhId', function test() {
-      const aboutMe = 'About me string.';
+    it('#setDesiredDegree, #setInterestIds, #setPicture, #setUhId', function test() {
       const desiredDegree = 'B.S. Computer Science';
       InterestTypes.define({ name: 'Discipline', slug: 'discipline', description: 'foo' });
       const interestId = Interests.define({ name: 'AI', slug: 'AI', description: 'AI', interestType: 'discipline' });
       const picture = 'http://foo.com/picture.jpg';
-      const semesterID = Semesters.define({ term: Semesters.FALL, year: 2015 });
       const uhID = '123456789';
       const docID = Users.define({ firstName, lastName, slug, email, role, password });
-      Users.setAboutMe(docID, aboutMe);
-      expect(Users.findDoc(docID).aboutMe).to.equal(aboutMe);
       Users.setDesiredDegree(docID, desiredDegree);
       expect(Users.findDoc(docID).desiredDegree).to.equal(desiredDegree);
       Users.setInterestIds(docID, [interestId]);
       expect(Users.findDoc(docID).interestIDs[0]).to.equal(interestId);
       Users.setPicture(docID, picture);
       expect(Users.findDoc(docID).picture).to.equal(picture);
-      Users.setSemesterId(docID, semesterID);
-      expect(Users.findDoc(docID).semesterID).to.equal(semesterID);
       Users.setUhId(docID, uhID);
       expect(Users.findDoc(docID).uhID).to.equal(uhID);
       Users.removeIt(docID);

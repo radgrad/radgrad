@@ -42,6 +42,9 @@ import './list-opportunities-widget.js';
 import './list-teasers-widget.html';
 import './list-teasers-widget.js';
 
+import './list-users-widget.html';
+import './list-users-widget.js';
+
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
 

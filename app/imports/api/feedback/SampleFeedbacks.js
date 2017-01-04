@@ -8,7 +8,7 @@ import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
  * @returns { String } The docID of the newly generated Feedback.
  */
 export function makeSampleFeedback() {
-  const slug = 'sampleFeedback';
+  const slug = 'sample-feedback';
   const name = 'Sample Feedback';
   const description = 'A feedback used solely for testing purposes.';
   const feedbackType = FeedbackType.RECOMMENDATION;

@@ -148,5 +148,3 @@ export function getProjectedICE(docs) {
   });
   return total;
 }
-
-

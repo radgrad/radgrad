@@ -3,13 +3,11 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import BaseInstanceCollection  from '/imports/api/base/BaseInstanceCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { isRole, assertRole } from '/imports/api/role/Role';
 import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
@@ -17,7 +15,7 @@ import { Slugs } from '/imports/api/slug/SlugCollection';
 /** @module User */
 
 /**
- * Represent a user. Users are students, admins, faculty, and alumni.
+ * Represent a user. Users have roles: admin, advisor, alumni, faculty, student, mentor.
  * @extends module:BaseInstance~BaseInstanceCollection
  */
 class UserCollection extends BaseInstanceCollection {
@@ -27,39 +25,44 @@ class UserCollection extends BaseInstanceCollection {
    */
   constructor() {
     super('User', new SimpleSchema({
-      // Required fields
+      // Required field
+      username: { type: String },
+      // Everything else is optional, schema-wise.
       firstName: { type: String, optional: true },
       lastName: { type: String, optional: true },
       slugID: { type: SimpleSchema.RegEx.Id, optional: true },
-      username: { type: String },
       email: { type: String, optional: true },
       password: { type: String, optional: true },
-      // Optional fields.
       uhID: { type: String, optional: true },
-      degreePlanID: { type: SimpleSchema.RegEx.Id, optional: true },
       careerGoalIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
       interestIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
       desiredDegree: { type: String, optional: true },
       picture: { type: String, optional: true },
-      aboutMe: { type: String, optional: true },
-      semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
       level: { type: Number, optional: true },
-      stickers: { type: [Number], optional: true },
       website: { type: String, optional: true },
-      // username, email, and password are managed in accounts package.
     }));
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
     this._collection = Meteor.users;
+
     // TODO: SimpleSchema validation is disabled for now.
     // this._collection.attachSchema(this._schema);
-    // The following fields facilitate subscriptions.
+
+    // Right now it looks like all fields can be public!
     this.publicdata = {
       fields: {
-        firstName: 1, middleName: 1, lastName: 1, slugID: 1, aboutMe: 1, interestIDs: 1,
-        careerGoalIDs: 1, picture: 1, roles: 1, username: 1, desiredDegree: 1, website: 1,
+        firstName: 1,
+        lastName: 1,
+        slugID: 1,
+        interestIDs: 1,
+        careerGoalIDs: 1,
+        picture: 1,
+        roles: 1,
+        username: 1,
+        desiredDegree: 1,
+        website: 1,
+        emails: 1,
       },
     };
-    this.privatedata = { fields: { emails: 1, degreePlanID: 1, desiredDegree: 1, semesterID: 1 } };
   }
 
   /**
@@ -82,6 +85,11 @@ class UserCollection extends BaseInstanceCollection {
   define({ firstName, lastName, slug, email, role, password, website, picture }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
+    // Make sure role is supplied and is valid.
+    if (!isRole(role)) {
+      throw new Meteor.Error(`Role ${role} is not a valid role name.`);
+    }
+    // Now define the user.
     let userID;
     // Define the user in accounts package.
     if (password) {
@@ -94,10 +102,7 @@ class UserCollection extends BaseInstanceCollection {
     }
     Meteor.users.update(userID, { $set: { username: slug, firstName, lastName, slugID, email, picture, website } });
 
-    // Define the role if valid.
-    if (!isRole(role)) {
-      throw new Meteor.Error(`Role ${role} is not a valid role name.`);
-    }
+
     Roles.addUsersToRoles(userID, [role]);
 
     // Update the Slug with the userID.
@@ -292,20 +297,6 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Updates userID with AboutMe string.
-   * @param userID The userID.
-   * @param aboutMe The aboutMe string in markdown format.
-   * @throws {Meteor.Error} If userID is not a userID, or if aboutMe is not a string.
-   */
-  setAboutMe(userID, aboutMe) {
-    this.assertDefined(userID);
-    if (!_.isString(aboutMe)) {
-      throw new Meteor.Error(`${aboutMe} is not a string.`);
-    }
-    this._collection.update(userID, { $set: { aboutMe } });
-  }
-
-  /**
    * Updates userID with desiredDegree string.
    * @param userID The userID.
    * @param desiredDegree The desired degree string.
@@ -317,18 +308,6 @@ class UserCollection extends BaseInstanceCollection {
       throw new Meteor.Error(`${desiredDegree} is not a string.`);
     }
     this._collection.update(userID, { $set: { desiredDegree } });
-  }
-
-  /**
-   * Updates userID with a graduation SemesterID.
-   * @param userID The userID.
-   * @param semesterID The semesterID.
-   * @throws {Meteor.Error} If userID is not a userID, or if semesterID is not a semesterID.
-   */
-  setSemesterId(userID, semesterID) {
-    this.assertDefined(userID);
-    Semesters.assertSemester(semesterID);
-    this._collection.update(userID, { $set: { semesterID } });
   }
 
   /**
@@ -345,31 +324,6 @@ class UserCollection extends BaseInstanceCollection {
         throw new Meteor.Error(`${level} is out of bounds.`);
       }
     this._collection.update(userID, { $set: { level } });
-  }
-
-  /**
-   * Updates userID with an array of level stickers.
-   * @param userID The userID.
-   * @param stickers A list of levels.
-   * @throws {Meteor.Error} If userID is not a userID, or if stickers is not a list of numbers.
-   */
-  setStickers(userID, stickers) {
-    this.assertDefined(userID);
-    let max = 0;
-    if (!_.isArray(stickers)) {
-      throw new Meteor.Error(`${stickers} is not an array.`);
-    } else {
-      stickers.forEach((s) => {
-        if (!_.isNumber(s)) {
-          throw new Meteor.Error(`${s} is not a number.`);
-        } else
-          if (s > max) {
-            max = s;
-          }
-      });
-    }
-    this._collection.update(userID, { $set: { stickers } });
-    this.setLevel(userID, max);
   }
 
   /**
