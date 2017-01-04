@@ -386,7 +386,7 @@ Template.Academic_Plan_2.helpers({
           const opportunity = OpportunityInstances.findDoc(id);
           const requests = VerificationRequests.find({
             opportunityInstanceID: id,
-            studentID: getUserIdFromRoute()
+            studentID: getUserIdFromRoute(),
           }).fetch();
           const oppSemester = Semesters.findDoc(opportunity.semesterID);
           return !opportunity.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
@@ -734,6 +734,11 @@ Template.Academic_Plan_2.events({
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
       }
+  },
+  'click .jsDelCourse': function clickJsDelCourse(event) {
+    event.preventDefault();
+    Template.instance().state.set('detailCourseID', null);
+    Template.instance().state.set('detailOpportunityID', null);
   },
 });
 

@@ -229,3 +229,16 @@ class CourseInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const CourseInstances = new CourseInstanceCollection();
+
+if (Meteor.isServer) {
+  const instance = this;
+  // eslint-disable-next-line meteor/audit-argument-checks
+  Meteor.publish(`${CourseInstances._collectionName}.Public`, function publicPublish(courseID) {
+    // check the opportunityID.
+    new SimpleSchema({
+      opportunityID: { type: String },
+    }).validate({ courseID });
+
+    return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
+  });
+}

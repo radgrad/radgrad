@@ -4,6 +4,7 @@
   "scripts": {
     "start": "meteor --settings ../config/settings.development.json --no-release-check",
     "lint": "eslint --quiet ./imports",
+    "lint-loud": "eslint ./imports",
     "pretest": "npm run lint --silent",
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
