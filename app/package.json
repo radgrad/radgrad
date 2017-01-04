@@ -9,7 +9,6 @@
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
-    "jsdocTest": "./node_modules/.bin/jsdoc -T",
     "mddocs": "jsdoc2md imports/**/*.js > ../gitbook/api/jsdocs.md"
   },
   "dependencies": {
