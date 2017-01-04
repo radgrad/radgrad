@@ -4,7 +4,6 @@ import { Courses } from '../../../api/course/CourseCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Feed } from '../../../api/feed/FeedCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({

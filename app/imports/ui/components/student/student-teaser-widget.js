@@ -88,14 +88,14 @@ Template.Student_Teaser_Widget.helpers({
     const teaserInterests = [];
     _.map(teaser.interestIDs, (id) => {
       teaserInterests.push(Interests.findDoc(id));
-  });
-    const filtered = _.filter(teaserInterests, function(teaserInterest) {
+    });
+    const filtered = _.filter(teaserInterests, function (teaserInterest) {
       let ret = true;
       _.map(matchingInterests, (matchingInterest) => {
         if (_.isEqual(teaserInterest, matchingInterest)) {
-        ret = false;
-      }
-    });
+          ret = false;
+        }
+      });
       return ret;
     });
     return filtered;

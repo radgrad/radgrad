@@ -24,16 +24,16 @@ function interestedStudentsHelper(opp) {
   const oi = OpportunityInstances.find({
     opportunityID: opp._id,
   }).fetch();
-    _.map(oi, (o) => {
-      if (count < 17){
-        if (!(_.includes(interested, o.studentID))) {
-          interested.push(o.studentID);
-          count += 1;
-        }
-      } else if (count === 17) {
-        interested.push('elipsis');
+  _.map(oi, (o) => {
+    if (count < 17) {
+      if (!(_.includes(interested, o.studentID))) {
+        interested.push(o.studentID);
+        count += 1;
       }
-    });
+    } else if (count === 17) {
+      interested.push('elipsis');
+    }
+  });
   return interested;
 }
 
@@ -124,14 +124,14 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
     const oppInterests = [];
     _.map(opp.interestIDs, (id) => {
       oppInterests.push(Interests.findDoc(id));
-  });
-    const filtered = _.filter(oppInterests, function(oppInterest) {
+    });
+    const filtered = _.filter(oppInterests, function (oppInterest) {
       let ret = true;
       _.map(matchingInterests, (matchingInterest) => {
         if (_.isEqual(oppInterest, matchingInterest)) {
-        ret = false;
-      }
-    });
+          ret = false;
+        }
+      });
       return ret;
     });
     return filtered;

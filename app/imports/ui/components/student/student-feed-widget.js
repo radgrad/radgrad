@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Feed } from '../../../api/feed/FeedCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 

@@ -45,17 +45,17 @@ function matchingInterestsHelper(course) {
   const courseInterests = [];
   _.map(course.interestIDs, (id) => {
     courseInterests.push(Interests.findDoc(id));
-});
+  });
   _.map(user.interestIDs, (id) => {
     userInterests.push(Interests.findDoc(id));
-});
+  });
   _.map(courseInterests, (courseInterest) => {
     _.map(userInterests, (userInterest) => {
-    if (_.isEqual(courseInterest, userInterest)) {
-      matchingInterests.push(userInterest);
-  }
-});
-});
+      if (_.isEqual(courseInterest, userInterest)) {
+        matchingInterests.push(userInterest);
+      }
+    });
+  });
   return matchingInterests;
 }
 
@@ -98,11 +98,11 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     _.map(course.interestIDs, (id) => {
       courseInterests.push(Interests.findDoc(id));
     });
-    const filtered = _.filter(courseInterests, function(courseInterest) {
+    const filtered = _.filter(courseInterests, function (courseInterest) {
       let ret = true;
       _.map(matchingInterests, (matchingInterest) => {
         if (_.isEqual(courseInterest, matchingInterest)) {
-        ret = false;
+          ret = false;
         }
       });
       return ret;

@@ -117,7 +117,6 @@ Template.Student_About_Me_Widget.events({
   },
   'click .picture': function clickPicture(event) {
     event.preventDefault();
-    const file = event.target.files[0];
   },
 });
 

@@ -16,8 +16,6 @@ import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 
-
-
 function getEventsHelper(iceType, type, earned, semester) {
   if (getUserIdFromRoute()) {
     const user = Users.findDoc(getUserIdFromRoute());
@@ -29,8 +27,8 @@ function getEventsHelper(iceType, type, earned, semester) {
       courseInstances.forEach((courseInstance) => {
         if (CourseInstances.isICS(courseInstance._id)) {
           allInstances.push(courseInstance);
-      }
-    });
+        }
+      });
     } else {
       allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: user._id,
         verified: earned }).fetch();
