@@ -11,18 +11,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
-
-Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});
-
 Template.Student_About_Me_Widget.helpers({
   getDictionary() {
     return Template.instance().state;
@@ -78,17 +66,15 @@ Template.Student_About_Me_Widget.helpers({
     return '';
   },
   interests() {
-    const ret = [];
+    let ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      _.map(user.interestIDs, (id) => {
-        ret.push(Interests.findDoc(id));
-      });
+      ret = user.interestIDs
     }
     return ret;
   },
   interestName(interest) {
-    return interest.name;
+    return Interests.findDoc(interest).name;
   },
   goalName(goal) {
     return goal.name;
@@ -119,6 +105,18 @@ Template.Student_About_Me_Widget.events({
     event.preventDefault();
   },
 });
+
+Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreated() {
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+});
+
 
 Template.Student_About_Me_Widget.onRendered(function studentAboutMeOnRendered() {
   // add your statement here

@@ -27,7 +27,7 @@
           {{#if desiredDegree}}
             <p>{{desiredDegree}}</p>
           {{else}}
-            <p>None</p>
+            <p>No desired degree specified yet.</p>
           {{/if}}
           <a href="{{pathFor 'Student_Explorer_Degree_Page' username=routeUserName}}">Edit in degree explorer</a>
         </div>
@@ -35,7 +35,11 @@
           <p><b>Professional Website</b></p>
         </div>
         <div class="five wide column">
+          {{#if website}}
           <a href={{website}}>{{website}}</a><br><br>
+          {{else}}
+            <p>No website specified yet.</p>
+          {{/if}}
           <form class="ui form website">
             <div class="inline field">
               <div class="ui action input">
@@ -58,7 +62,7 @@
             {{/each}}
             <br>
           {{else}}
-            <p>None</p>
+            <p>No career goals added yet.</p>
           {{/if}}
           <br><a href="{{pathFor 'Student_Explorer_Career_Page' username=routeUserName}}">Edit in career
           explorer</a>
@@ -73,7 +77,7 @@
             {{/each}}
             <br>
           {{else}}
-            <p>None</p>
+            <p>No interests added yet.</p>
           {{/if}}
           <br><a href="{{pathFor 'Student_Explorer_Interest_Page' username=routeUserName}}">Edit in interest
           explorer</a>

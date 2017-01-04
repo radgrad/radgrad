@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { _, lodash } from 'meteor/erasaur:meteor-lodash';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -23,14 +23,14 @@ const availableOpps = () => {
   const currentSemesterID = Semesters.getCurrentSemester();
   const currentSemester = Semesters.findDoc(currentSemesterID);
   if (opps.length > 0) {
-    const filteredBySem = lodash.filter(opps, function filter(opp) {
+    const filteredBySem = _.filter(opps, function filter(opp) {
       const oi = OpportunityInstances.find({
         studentID: getUserIdFromRoute(),
         opportunityID: opp._id,
       }).fetch();
       return oi.length === 0;
     });
-    const filteredByInstance = lodash.filter(filteredBySem, function filter(opp) {
+    const filteredByInstance = _.filter(filteredBySem, function filter(opp) {
       let inFuture = false;
       _.map(opp.semesterIDs, (semID) => {
         const sem = Semesters.findDoc(semID);
