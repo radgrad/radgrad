@@ -91,7 +91,7 @@ class UserCollection extends BaseInstanceCollection {
    * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
    * picture, website, interests, careerGoals, and desiredDegree are optional.
-   * desiredDegree must be the desired degree slug.
+   * desiredDegree must be a DesiredDegree slug.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
@@ -125,7 +125,7 @@ class UserCollection extends BaseInstanceCollection {
     Meteor.users.update(userID, {
       $set: {
         username: slug, firstName, lastName, slugID, email, picture, website,
-        desiredDegree, interestIDs, careerGoalIDs, uhID,
+        desiredDegree, interestIDs, careerGoalIDs, uhID, level: 1,
       },
     });
 

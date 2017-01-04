@@ -33,7 +33,7 @@ class BaseInstanceCollection extends BaseCollection {
    * @throws { Meteor.Error } If any instance is not a docID or a slug.
    */
   getIDs(instances) {
-    return (instances) ? instances.map((instance) => this.getID(instance)): [];
+    return (instances) ? instances.map((instance) => this.getID(instance)) : [];
   }
 
 
