@@ -31,13 +31,12 @@ class FeedCollection extends BaseInstanceCollection {
   /**
    * Defines a new Feed.
    * @example
-   * Teaser.define({ student: 'abigailkealoha',
-   *                    description: 'has leveled up to Level 1!',
-   *                    timestamp: '12345465465',
-   * @param { Object } description Object with keys student, description, and timestamp.
-   * Slug must be previously undefined.
-   * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
-   * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestID.
+   * Feed.define({ student: 'abigailkealoha',
+   *                 opportunity: 'att-hackathon
+   *                 course: undefined
+   *                 feedType: 'verified'
+   *                 timestamp: '12345465465',
+   * @param { Object } description Object with keys student, opportunity, course, feedType, and timestamp.
    * @returns The newly created docID.
    */
   define({ student, opportunity, course, feedType, timestamp }) {
