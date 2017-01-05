@@ -46,6 +46,3 @@ Template.Student_Feed_Widget.helpers({
 Template.Student_Feed_Widget.events({
   // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
-
-Template.Student_Feed_Widget.onRendered({
-});

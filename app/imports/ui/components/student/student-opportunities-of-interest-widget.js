@@ -108,5 +108,3 @@ Template.Student_Opportunities_Of_Interest_Widget.helpers({
 Template.Student_Opportunities_Of_Interest_Widget.events({
   // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
-
-Template.Student_Opportunities_Of_Interest_Widget.onRendered({});
