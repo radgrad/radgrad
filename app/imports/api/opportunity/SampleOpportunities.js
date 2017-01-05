@@ -14,7 +14,7 @@ import { moment } from 'meteor/momentjs:moment';
  */
 export function makeSampleOpportunityType() {
   const name = 'Sample Opportunity Type';
-  const slug = `OpportunityType-${moment().format('YYYY-MM-DD-HH:mm:ss.SSSSS')}`;
+  const slug = `opportunity-type-${moment().format('YYYY-MM-DD-HH-mm-ss-SSSSS')}`;
   const description = 'Sample Opportunity Type Description';
   return OpportunityTypes.define({ name, slug, description });
 }
@@ -27,7 +27,7 @@ export function makeSampleOpportunityType() {
  */
 export function makeSampleOpportunity(sponsor) {
   const name = 'Sample Opportunity';
-  const slug = `Opportunity-${moment().format('YYYY-MM-DD-HH:mm:ss.SSSSS')}`;
+  const slug = `opportunity-${moment().format('YYYY-MM-DD-HH-mm-ss-SSSSS')}`;
   const description = 'Sample Opportunity Description';
   const opportunityType = makeSampleOpportunityType();
   const interests = [makeSampleInterest()];

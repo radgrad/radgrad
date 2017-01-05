@@ -7,6 +7,7 @@ import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
 import { Users } from '../../../api/user/UserCollection.js';
+import { Feed } from '../../../api/feed/FeedCollection.js';
 
 const userDefineSchema = new SimpleSchema({
   firstName: { type: String },
@@ -14,7 +15,7 @@ const userDefineSchema = new SimpleSchema({
   userName: { type: String },
   uhID: {
     type: String,
-    regEx: /\d{4}-\d{4}/,
+    regEx: /\d{4}-\d{4}/, // TODO: Do we care whether there is a dash?
   },
 });
 
@@ -124,6 +125,14 @@ Template.Student_Selector.events({
             // console.log(error);
           }
         });
+        const feedDefinition = {
+          userDefinition,
+          slug: `${username}-new-user`,
+          description: 'has joined RadGrad',
+          timestamp: new Date(),
+        };
+        Feed.define(feedDefinition);
+
         instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, username);
         instance.state.set(sessionKeys.CURRENT_STUDENT_ID, studentID);
         instance.state.set('notDefined', false);

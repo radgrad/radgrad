@@ -2,6 +2,7 @@ import '/imports/api/base';
 import '/imports/api/career';
 import '/imports/api/course';
 import '/imports/api/degree';
+import '/imports/api/feed';
 import '/imports/api/feedback';
 import '/imports/api/help';
 import '/imports/api/ice';
