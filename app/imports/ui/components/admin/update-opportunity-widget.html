@@ -6,7 +6,7 @@
 
       <div class="fields">
         {{> Input_Form_Field label="Name" name="name" value=opportunity.name errorMessage=(fieldError "name") required=true}}
-        {{> Input_Form_Field label="Slug" name="slug" value=slug errorMessage=(fieldError "slug") required=true}}
+        {{> Input_Form_Field label="Slug" name="slug" value=slug errorMessage=(fieldError "slug") disabled=true}}
         {{> Input_Date_Form_Field label="Event Date" name="eventDate" value=opportunity.eventDate errorMessage=(fieldError "eventDate")}}
       </div>
 
@@ -23,8 +23,8 @@
       </div>
 
       <div class="fields">
-        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests')}}
-        {{> Semesters_Form_Field semesters=semesters selectedSemesterIDs=selectedSemesterIDs errorMessage=(fieldError "semesters")}}
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
+        {{> Semesters_Form_Field semesters=semesters selectedSemesterIDs=selectedSemesterIDs errorMessage=(fieldError "semesters") required="true" }}
         {{> Input_Form_Field label="More Information" name="moreInformation" value=opportunity.moreInformation errorMessage=(fieldError "moreInformation") required=true}}
       </div>
 

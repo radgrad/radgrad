@@ -19,6 +19,8 @@ export const ROLE = {
   MENTOR: 'MENTOR',
 };
 
+export const ROLES = _.values(ROLE);
+
 /**
  * Predicate for determining if a string is a defined ROLE.
  * @param { String } role The role.
@@ -29,14 +31,17 @@ export function isRole(role) {
 }
 
 /**
- * Ensures that role is a valid role.
- * @param role The role.
- * @throws { Meteor.Error } If role is not a valid role.
+ * Ensures that role(s) are valid roles.
+ * @param role The role or an array of roles.
+ * @throws { Meteor.Error } If any of role(s) are not valid.
  */
 export function assertRole(role) {
-  if (!isRole(role)) {
-    throw new Meteor.Error(`${role} is not a defined role.`);
-  }
+  const roleArray = (Array.isArray(role)) ? role : [role];
+  roleArray.forEach((theRole) => {
+    if (!isRole(theRole)) {
+      throw new Meteor.Error(`${role} is not defined, or includes at least one undefined role.`);
+    }
+  });
 }
 
 // Initialize Roles to ROLENAMES by deleting all existing roles, then defining just those in ROLENAMES.

@@ -90,21 +90,3 @@ Template.Student_Levels.helpers({
     return `/images/landing/${student.picture}`;
   },
 });
-
-Template.Level_Sticker_Log.events({});
-
-Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
-  if (this.data.dictionary) {
-    this.state = this.data.dictionary;
-  }
-  this.subscribe(Users.getPublicationName());
-});
-
-Template.Level_Sticker_Log.onRendered(function levelStickerLogOnRendered() {
-
-});
-
-Template.Level_Sticker_Log.onDestroyed(function levelStickerLogOnDestroyed() {
-  // add your statement here
-});
-

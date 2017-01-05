@@ -1,5 +1,5 @@
 <template name="Opportunity_Types_Form_Field">
-  <div class="required field">
+  <div class="{{#if required}}required{{/if}} field">
     <label>Opportunity Type</label>
     <select class="ui dropdown" name="opportunityType">
       <option value="">Select Opportunity Type</option>
