@@ -1,9 +1,9 @@
 /* eslint max-len: "off" */
 
-/** @module TeaserDefinitions */
+/** @module MentorSpaceQuestionsDefinitions */
 
 /**
- * Provides an array containing MentorSpace questions definitions: text.
+ * Provides an array containing MentorSpace questions definitions: questionID, text.
  *
  */
 export const mentorspaceQuestionsDefinitions = [
