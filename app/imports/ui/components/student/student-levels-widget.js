@@ -4,7 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-Template.Student_Levels.helpers({
+Template.Student_Levels_Widget.helpers({
   students(userLevel) {
     if (getUserIdFromRoute()) {
       const students = [];
@@ -90,3 +90,21 @@ Template.Student_Levels.helpers({
     return `/images/landing/${student.picture}`;
   },
 });
+
+Template.Student_Levels_Widget.events({});
+
+Template.Student_Levels_Widget.onCreated(function levelStickerLogOnCreated() {
+  if (this.data.dictionary) {
+    this.state = this.data.dictionary;
+  }
+  this.subscribe(Users.getPublicationName());
+});
+
+Template.Student_Levels_Widget.onRendered(function levelStickerLogOnRendered() {
+
+});
+
+Template.Student_Levels_Widget.onDestroyed(function levelStickerLogOnDestroyed() {
+  // add your statement here
+});
+

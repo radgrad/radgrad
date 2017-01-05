@@ -5,6 +5,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
+import { Feed } from '../../../api/feed/FeedCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { moment } from 'meteor/momentjs:moment';
 
@@ -52,6 +53,14 @@ Template.Verification_Event.events({
       const status = VerificationRequests.ACCEPTED;
       const processed = request.processed;
       VerificationRequests.updateStatus(requestID, status, processed);
+
+      const feedDefinition = {
+        student: studentID,
+        opportunity: opportunityID,
+        feedType: 'verified',
+        timestamp: Date.now(),
+      };
+      Feed.define(feedDefinition);
     } catch (e) {
       alert(`${student} is not a valid student. ${e}`); // eslint-disable-line no-undef, no-alert
     }
