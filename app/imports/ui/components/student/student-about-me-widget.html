@@ -27,7 +27,7 @@
           {{#if desiredDegree}}
             <p>{{desiredDegree}}</p>
           {{else}}
-            <p>None</p>
+            <p>No desired degree specified yet.</p>
           {{/if}}
           <a href="{{pathFor 'Student_Explorer_Degree_Page' username=routeUserName}}">Edit in degree explorer</a>
         </div>
@@ -35,12 +35,16 @@
           <p><b>Professional Website</b></p>
         </div>
         <div class="five wide column">
-          <p>{{website}}</p>
+          {{#if website}}
+          <a href={{website}}>{{website}}</a><br><br>
+          {{else}}
+            <p>No website specified yet.</p>
+          {{/if}}
           <form class="ui form website">
             <div class="inline field">
               <div class="ui action input">
-                <input id="website" type="text" name="website" placeholder="Enter new website url">
-                <button class="ui green button website" type="submit">Update</button>
+                <input id="website" type="text" name="website" placeholder="Enter new website url" value="http://www.">
+                <button class="ui basic green button website" type="submit">Update</button>
               </div>
             </div>
           </form>
@@ -49,36 +53,55 @@
 
       <div class="row">
         <div class="two wide column">
-          <p><b>Interests</b></p>
-        </div>
-        <div class="six wide column">
-          {{#if interests}}
-            {{#each interest in interests}}
-              <a class="ui label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
-            {{/each}}
-            <br>
-          {{else}}
-            <p>None</p>
-          {{/if}}
-          <br><a href="{{pathFor 'Student_Explorer_Interest_Page' username=routeUserName}}">Edit in interest
-          explorer</a>
-        </div>
-        <div class="two wide column">
           <p><b>Career Goals</b></p>
         </div>
-        <div class="five wide column">
+        <div class="six wide column">
           {{#if careerGoals}}
             {{#each goal in careerGoals}}
               <a class="ui label"><i style="color:white !important" class="fitted suitcase icon"></i>{{goalName goal}}</a>
             {{/each}}
             <br>
           {{else}}
-            <p>None</p>
+            <p>No career goals added yet.</p>
           {{/if}}
           <br><a href="{{pathFor 'Student_Explorer_Career_Page' username=routeUserName}}">Edit in career
           explorer</a>
         </div>
+        <div class="two wide column">
+          <p><b>Interests</b></p>
+        </div>
+        <div class="five wide column">
+          {{#if interests}}
+            {{#each interest in interests}}
+              <a class="ui label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
+            {{/each}}
+            <br>
+          {{else}}
+            <p>No interests added yet.</p>
+          {{/if}}
+          <br><a href="{{pathFor 'Student_Explorer_Interest_Page' username=routeUserName}}">Edit in interest
+          explorer</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="two wide column">
+        <p><b>Profile Image</b></p>
+      </div>
+      <div class="six wide column">
+        <img class="ui tiny circular image" src={{studentPicture student}}><br>
+        <div class="ui action input">
+          {{#with currentUpload}}
+            Uploading <b>{{file.name}}</b>:
+            <span id="progress">{{progress.get}}%</span>
+          {{else}}
+            <input id="fileInput" type="file"/>
+          {{/with}}
+          <!--<input id="fileInput" type="file"/>-->
+          <button class="ui basic green button picture" type="submit">Upload Image</button>
+        </div>
       </div>
     </div>
   </div>
+</div>
 </template>

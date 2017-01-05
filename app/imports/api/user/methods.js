@@ -35,3 +35,4 @@ export const defineUser = new ValidatedMethod({
     return studentID;
   },
 });
+
