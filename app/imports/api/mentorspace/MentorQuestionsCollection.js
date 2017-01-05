@@ -1,9 +1,5 @@
-import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { Users } from '../user/UserCollection';
 
 /** @module MentorQuestions */
 
@@ -17,8 +13,8 @@ class MentorQuestionsCollection extends BaseCollection {
    */
   constructor() {
     super('MentorQuestions', new SimpleSchema({
-      questionID: {type: String},
-      text: { type: String }
+      questionID: { type: String },
+      text: { type: String },
     }));
   }
 
@@ -31,7 +27,7 @@ class MentorQuestionsCollection extends BaseCollection {
     return this._collection.insert({ questionID, text });
   }
 
-  getMentorQuestion(){
+  getMentorQuestion() {
     return this._collection.find({});
   }
 }
