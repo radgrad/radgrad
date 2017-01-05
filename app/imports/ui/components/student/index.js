@@ -7,6 +7,9 @@ import './explorer-dropdown.js';
 import './home-menu.html';
 import './home-menu.js';
 
+import './student-explorer-menu.html';
+import './student-explorer-menu.js';
+
 import './student-ice-column.html';
 import './student-ice-column.js';
 
