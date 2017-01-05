@@ -1,0 +1,73 @@
+<template name="Student_Explorer_Student_Info">
+  <div class="ui padded segment row">
+    <div class="stretched column">
+      <div class="ui padded segment">
+        <div class="ui dividing header"><h4>YOUR CAREER GOALS</h4></div>
+        {{#if careerGoals}}
+          {{#each careerGoal in careerGoals}}
+            <a class="ui label"><i style="color:white !important" class="fitted suitcase icon"></i>{{name careerGoal}}</a>
+          {{/each}}
+          <br>
+        {{else}}
+          <p>No career goals added yet.</p>
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="stretched column">
+      <div class="ui padded segment">
+        <div class="ui dividing header"><h4>YOUR COURSES</h4></div>
+          {{#if hasCourses}}
+            <div class="ui very relaxed list">
+              {{#each year in years}}
+                {{#each semester in semesters year}}
+                  {{#if hasCourses semester}}
+                    <div class="item">
+                      <div class="header">{{printSemester semester}}</div>
+                      {{#each event in getCourses semester}}
+                        {{ courseName event }} ({{courseNumber event}}) <br>
+                      {{/each}}
+                    </div>
+                  {{/if}}
+                {{/each}}
+              {{/each}}
+            </div>
+          {{else}}
+            <p>No courses added yet.</p>
+          {{/if}}
+      </div>
+    </div>
+
+    <div class="stretched column">
+      <div class="ui padded segment">
+        <div class="ui dividing header"><h4>YOUR INTERESTS</h4></div>
+        <div class="ui circular mini images">
+          {{#if interests}}
+            {{#each interest in interests}}
+              <a class="ui label"><i style="color:white !important" class="fitted suitcase icon"></i>{{name interest}}</a>
+            {{/each}}
+            <br>
+          {{else}}
+            <p>No interests added yet.</p>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+    <div class="stretched column">
+      <div class="ui padded segment">
+        <div class="ui dividing header"><h4>YOUR OPPORTUNITIES</h4></div>
+        <div class="ui circular mini images">
+          {{#if careerGoals}}
+            {{#each careerGoal in careerGoals}}
+              <a class="ui label"><i style="color:white !important" class="fitted suitcase icon"></i>{{name careerGoal}}</a>
+            {{/each}}
+            <br>
+          {{else}}
+            <p>No opportunities added yet.</p>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+</div>
+</template>

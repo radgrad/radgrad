@@ -94,8 +94,6 @@ class FeedCollection extends BaseInstanceCollection {
   }
 }
 
-
-
 /**
  * Provides the singleton instance of this class to all other entities.
  */
