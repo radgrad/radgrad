@@ -14,7 +14,7 @@ const userDefineSchema = new SimpleSchema({
   userName: { type: String },
   uhID: {
     type: String,
-    regEx: /\d{4}-\d{4}/,
+    regEx: /\d{4}-\d{4}/, // TODO: Do we care whether there is a dash?
   },
 });
 

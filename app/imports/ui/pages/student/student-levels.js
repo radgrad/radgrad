@@ -74,20 +74,3 @@ Template.Student_Levels.helpers({
     return 'white';
   },
 });
-
-Template.Level_Sticker_Log.events({});
-
-Template.Level_Sticker_Log.onCreated(function levelStickerLogOnCreated() {
-  if (this.data.dictionary) {
-    this.state = this.data.dictionary;
-  }
-});
-
-Template.Level_Sticker_Log.onRendered(function levelStickerLogOnRendered() {
-
-});
-
-Template.Level_Sticker_Log.onDestroyed(function levelStickerLogOnDestroyed() {
-  // add your statement here
-});
-

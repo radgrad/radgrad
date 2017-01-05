@@ -8,6 +8,7 @@ import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
 import { HelpMessages } from '../../api/help/HelpMessageCollection';
+import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
@@ -20,24 +21,20 @@ import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
-
+import { desiredDegreeDefinitions } from '/imports/startup/server/icsdata/DesiredDegreeDefinitions';
 import { courseDefinitions } from './icsdata/CourseDefinitions.js';
 import { processStarCsvData } from '/imports/api/star/StarProcessor';
 import { interestTypeDefinitions, interestDefinitions } from './icsdata/InterestDefinitions';
-import {
-    opportunityDefinitions, opportunityTypeDefinitions, opportunityInstances,
-}
-    from './icsdata/OpportunityDefinitions';
+import { opportunityDefinitions, opportunityTypeDefinitions, opportunityInstances }
+  from './icsdata/OpportunityDefinitions';
 import { careerGoalDefinitions } from './icsdata/CareerGoalDefinitions';
 import { userDefinitions } from './icsdata/UserDefinitions';
-import { recommendationFeedbackDefinitions, warningFeedbackDefinitions,
-    feedbackInstances }
-    from './icsdata/FeedbackDefinitions.js';
+import { recommendationFeedbackDefinitions, warningFeedbackDefinitions, feedbackInstances }
+  from './icsdata/FeedbackDefinitions.js';
 import { defaultAdminAccount } from './icsdata/AdminUser';
 import { exampleStudents } from './icsdata/ExampleStudents';
 import { helpMessageDefinitions } from './icsdata/HelpMessages';
 import { teaserDefinitions } from './icsdata/TeaserDefinitions';
-
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -81,6 +78,10 @@ Meteor.startup(() => {
       Users.setUhId(id, definition.uhID);
       return false;
     });
+  }
+  if (DesiredDegrees.find().count() === 0) {
+    console.log('Defining DesiredDegrees');  // eslint-disable-line no-console
+    desiredDegreeDefinitions.map((definition) => DesiredDegrees.define(definition));
   }
   if (CareerGoals.find().count() === 0) {
     console.log('Defining CareerGoals');  // eslint-disable-line no-console

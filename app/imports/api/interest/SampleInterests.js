@@ -11,7 +11,7 @@ import { moment } from 'meteor/momentjs:moment';
  */
 export function makeSampleInterestType() {
   const name = 'Sample Interest Type';
-  const slug = `InterestType-${moment().format('YYYY-MM-DD-HH:mm:ss.SSSSS')}`;
+  const slug = `interest-type-${moment().format('YYYY-MM-DD-HH-mm-ss-SSSSS')}`;
   const description = 'Sample Interest Type Description';
   return InterestTypes.define({ name, slug, description });
 }
@@ -24,7 +24,7 @@ export function makeSampleInterestType() {
 export function makeSampleInterest() {
   const interestType = makeSampleInterestType();
   const name = 'Sample Interest';
-  const slug = `Interest-${moment().format('YYYY-MM-DD-HH:mm:ss.SSSSS')}`;
+  const slug = `interest-${moment().format('YYYY-MM-DD-HH-mm-ss-SSSSS')}`;
   const description = 'Sample Interest Description';
   return Interests.define({ name, slug, description, interestType });
 }

@@ -11,7 +11,7 @@
       </div>
 
       <div class="fields">
-        {{> Opportunity_Types_Form_Field opportunityTypes=opportunityTypes errorMessage=(fieldError "opportunityTypes")}}
+        {{> Opportunity_Types_Form_Field opportunityTypes=opportunityTypes errorMessage=(fieldError "opportunityTypes") required="true" }}
         {{> Sponsor_Form_Field sponsors=sponsors errorMessage=(fieldError "sponsor") required=true}}
         {{> Input_Form_Field label="Icon" name="icon" placeholder="http://interest.com/se.jpg" errorMessage=(fieldError "icon")}}
       </div>
@@ -23,8 +23,8 @@
       </div>
 
       <div class="fields">
-        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests")}}
-        {{> Semesters_Form_Field semesters=semesters errorMessage=(fieldError "semesters")}}
+        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests") required="true" }}
+        {{> Semesters_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
         {{> Input_Form_Field label="More Information" name="moreInformation" placeholder="http://interest.com/software-engineering" errorMessage=(fieldError "moreInformation") required=true}}
       </div>
 

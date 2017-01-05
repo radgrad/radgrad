@@ -9,7 +9,7 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 if (Meteor.isServer) {
   describe('OpportunityTypeCollection', function testSuite() {
     const name = 'InternshipOpportunity';
-    const slug = 'InternshipSlug';
+    const slug = 'internship-slug';
     const description = 'Work in a real-world setting for a semester or summer.';
 
     before(function setup() {

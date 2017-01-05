@@ -17,7 +17,7 @@ export const sampleCourseName = 'Sample Course';
 export function makeSampleCourse(args) {
   const name = sampleCourseName;
   const uniqueString = moment().format('YYYYMMDDHHmmssSSSSS');
-  const slug = `Course-${uniqueString}`;
+  const slug = `course-${uniqueString}`;
   const number = (args && args.number) ? args.number : `Course ${uniqueString}`;
   const description = 'Sample course description';
   const creditHrs = 3;
