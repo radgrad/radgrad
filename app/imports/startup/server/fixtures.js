@@ -12,6 +12,7 @@ import { HelpMessages } from '../../api/help/HelpMessageCollection';
 import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
+import { MentorQuestions} from '../../api/mentorspace/MentorQuestionsCollection.js'
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
@@ -37,6 +38,7 @@ import { exampleStudents } from './icsdata/ExampleStudents';
 import { helpMessageDefinitions } from './icsdata/HelpMessages';
 import { teaserDefinitions } from './icsdata/TeaserDefinitions';
 import { feedDefinitions } from './icsdata/FeedDefinitions';
+import { mentorspaceQuestionsDefinitions} from './icsdata/MentorSpaceQuestionsDefinitions';
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -105,6 +107,10 @@ Meteor.startup(() => {
     console.log('Defining Feedback');  // eslint-disable-line no-console
     recommendationFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
     warningFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
+  }
+  if (MentorQuestions.find().count() === 0){
+    console.log('Defining MentorQuestions'); // eslint-disable-line no-console
+    mentorspaceQuestionsDefinitions.map((definition) => MentorQuestions.define(definition));
   }
   if (Teasers.find().count() === 0) {
     console.log('Defining Teasers');  // eslint-disable-line no-console
