@@ -5,7 +5,7 @@
         <div class="ui equal width grid">
           <div class=" row">
             {{#each year in years}}
-            <div class="stretched column academicYear" style="padding-left: 2px; padding-right: 2px;">
+            <div class="column academicYear" style="padding-left: 2px; padding-right: 2px;">
               <!--<div class="ui center aligned padded segment">-->
               <!--<div class="ui dividing header"><h4>AY {{year.year}} - {{year.springYear}}</h4></div>-->
               {{> Semester_List (fallArgs year)}}
@@ -23,26 +23,9 @@
                 {{else}}
                   {{> ICE_Badge ice=(yearICE year)}}
                 {{/if}}
-            <!--<div class="center aligned column" style="padding-left: 2px; padding-right: 2px;">-->
-              <!--{{#if isFuture year}}-->
-              <!--<div class="item radgrad-planner-ice">-->
-                <!--{{> Projected_Ice_Component earned=0 projected=(yearPlanningI year) iceType="innov"}}-->
-                <!--{{> Projected_Ice_Component earned=0 projected=(yearPlanningC year) iceType="comp"}}-->
-                <!--{{> Projected_Ice_Component earned=0 projected=(yearPlanningE year) iceType="exp"}}-->
-              <!--</div>-->
-              <!--{{else}}-->
-              <!--<div class="item radgrad-planner-ice">-->
-                <!--{{> Earned_Ice earned=(yearI year) projected=0 iceType="innov"}}-->
-                <!--{{> Earned_Ice earned=(yearC year) projected=0 iceType="comp"}}-->
-                <!--{{> Earned_Ice earned=(yearE year) projected=0 iceType="exp"}}-->
-              <!--</div>-->
-              <!--{{/if}}-->
             </div>
             {{/each}}
           </div>
-          <!--<div class="row">-->
-            <!--{{> Projected_ICE}}-->
-          <!--</div>-->
         </div>
       </div>
       <div class="ui six wide column">

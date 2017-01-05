@@ -1,7 +1,7 @@
 <template name="Semester_List">
   <div class="ui center aligned padded {{#if isCurrentSemester}}tertiary inverted green{{/if}} segment">
     <div class="ui dividing header">{{semesterName}} {{year}}</div>
-    <table class="ui structured table bodyDrop" ondragover="allowDrop(event)">
+    <table class="ui structured table bodyDrop" ondragover="allowDrop(event)" style="flex-grow: 3">
       <tbody>
       {{#each course in icsCourses}}
       {{#if isFuture}}
@@ -49,7 +49,7 @@
       {{/each}}
       </tbody>
     </table>
-    <div class="ui bottom attached basic green button" data-position="top center" style="flex-grow: 0">Add</div>
+    <div class="ui bottom attached basic green button" data-position="top center" style="flex-grow: 1">Add</div>
     <div class="ui fluid popup transition hidden">
       <div class="ui vertical menu">
         {{#if isFuture}}
