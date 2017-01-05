@@ -58,14 +58,14 @@ if (Meteor.isServer) {
 
     it('#setDesiredDegree, #setInterestIds, #setPicture, #setUhId', function test() {
       const desiredDegreeSlug = 'bs-cs';
-      DesiredDegrees.define({ name: 'BS CS', slug: desiredDegreeSlug, description: 'bs in cs' });
+      const degreeID = DesiredDegrees.define({ name: 'BS CS', slug: desiredDegreeSlug, description: 'bs in cs' });
       InterestTypes.define({ name: 'Discipline', slug: 'discipline', description: 'foo' });
       const interestId = Interests.define({ name: 'AI', slug: 'AI', description: 'AI', interestType: 'discipline' });
       const picture = 'http://foo.com/picture.jpg';
       const uhID = '123456789';
       const docID = Users.define({ firstName, lastName, slug, email, role, password });
       Users.setDesiredDegree(docID, desiredDegreeSlug);
-      expect(Users.findDoc(docID).desiredDegree).to.equal(desiredDegreeSlug);
+      expect(Users.findDoc(docID).desiredDegreeID).to.equal(degreeID);
       Users.setInterestIds(docID, [interestId]);
       expect(Users.findDoc(docID).interestIDs[0]).to.equal(interestId);
       Users.setPicture(docID, picture);

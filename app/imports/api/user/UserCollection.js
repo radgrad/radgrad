@@ -38,8 +38,7 @@ class UserCollection extends BaseInstanceCollection {
       uhID: { type: String, optional: true },
       careerGoalIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
       interestIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
-      // TODO: Store desiredDegree as its docID, not the slug.
-      desiredDegree: { type: String, optional: true },
+      desiredDegreeID: { type: String, optional: true },
       picture: { type: String, optional: true },
       level: { type: Number, optional: true },
       website: { type: String, optional: true },
@@ -60,7 +59,7 @@ class UserCollection extends BaseInstanceCollection {
         picture: 1,
         roles: 1,
         username: 1,
-        desiredDegree: 1,
+        desiredDegreeID: 1,
         website: 1,
         emails: 1,
       },
@@ -91,7 +90,7 @@ class UserCollection extends BaseInstanceCollection {
    * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
    * picture, website, interests, careerGoals, and desiredDegree are optional.
-   * desiredDegree must be a DesiredDegree slug or docID.
+   * desiredDegree, if supplied, must be a DesiredDegree slug or docID.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
@@ -109,13 +108,11 @@ class UserCollection extends BaseInstanceCollection {
       }
       const interestIDs = Interests.getIDs(interests);
       const careerGoalIDs = CareerGoals.getIDs(careerGoals);
-      // if (desiredDegree && !DesiredDegrees.isDefined(desiredDegree)) {
-      //   throw new Meteor.Error(`Desired degree slug ${desiredDegree} is not defined.`);
-      // }
-      desiredDegree = null; // eslint-disable-line
+      // desiredDegree is optional.
+      const desiredDegreeID = (desiredDegree) ? DesiredDegrees.getID(desiredDegree) : undefined;
       // Now define the user.
       let userID;
-      if (password) {
+      if (password) {  // TODO: not sure this is the best way to distinguish the two cases.
         userID = Accounts.createUser({ username: slug, email, password });
       } else {
         const result = { id: slug };
@@ -128,7 +125,7 @@ class UserCollection extends BaseInstanceCollection {
       Meteor.users.update(userID, {
         $set: {
           username: slug, firstName, lastName, slugID, email, picture, website,
-          desiredDegree, interestIDs, careerGoalIDs, uhID, level: 1,
+          desiredDegreeID, interestIDs, careerGoalIDs, uhID, level: 1,
         },
       });
 
@@ -316,16 +313,14 @@ class UserCollection extends BaseInstanceCollection {
   /**
    * Updates userID with desiredDegree string.
    * @param userID The userID.
-   * @param desiredDegree The desired degree.
+   * @param desiredDegree The desired degree, either a slug or a docID.
    * @throws {Meteor.Error} If userID is not a userID, or if desiredDegree is not defined.
    */
   setDesiredDegree(userID, desiredDegree) {
     this.assertDefined(userID);
     check(desiredDegree, String);
-    if (!DesiredDegrees.isDefined(desiredDegree)) {
-      throw new Meteor.Error(`Desired degree ${desiredDegree} is not defined.`);
-    }
-    this._collection.update(userID, { $set: { desiredDegree } });
+    const desiredDegreeID = DesiredDegrees.getID(desiredDegree);
+    this._collection.update(userID, { $set: { desiredDegreeID } });
   }
 
   /**
