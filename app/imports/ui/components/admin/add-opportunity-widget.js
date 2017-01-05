@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
+import { Feed } from '../../../api/feed/FeedCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -63,5 +64,12 @@ Template.Add_Opportunity_Widget.events({
     } else {
       FormUtils.indicateError(instance);
     }
+
+    const feedDefinition = {
+      opportunity: newData.slug,
+      feedType: 'new',
+      timestamp: Date.now(),
+    };
+    Feed.define(feedDefinition);
   },
 });
