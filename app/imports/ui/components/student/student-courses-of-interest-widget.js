@@ -6,8 +6,10 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
-Template.Student_Courses_Of_Interest_Widget.onCreated(function appBodyOnCreated() {
+Template.Student_Courses_Of_Interest_Widget.onCreated(function studentCoursesOfInterestWidgetOnCreated() {
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
@@ -15,9 +17,26 @@ Template.Student_Courses_Of_Interest_Widget.onCreated(function appBodyOnCreated(
   this.subscribe(Users.getPublicationName());
 });
 
+const availableCourses = () => {
+  const courses = Courses.find({}).fetch();
+  if (courses.length > 0) {
+    const filtered = _.filter(courses, function filter(course) {
+      if (course.number === 'ICS 499') {
+        return true;
+      }
+      const ci = CourseInstances.find({
+        studentID: getUserIdFromRoute(),
+        courseID: course._id,
+      }).fetch();
+      return ci.length === 0;
+    });
+    return filtered;
+  }
+  return [];
+};
 
 function matchingCourses() {
-  const allCourses = Courses.find().fetch();
+  const allCourses = availableCourses();
   const matching = [];
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];

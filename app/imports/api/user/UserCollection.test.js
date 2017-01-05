@@ -3,8 +3,9 @@
 
 import { Users } from '/imports/api/user/UserCollection';
 import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
+import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
@@ -55,27 +56,24 @@ if (Meteor.isServer) {
       Users.removeIt(docID);
     });
 
-    it('#setAboutMe, #setDesiredDegree, #setInterestIds, #setPicture, #setSemesterId, #setUhId', function test() {
-      const aboutMe = 'About me string.';
-      const desiredDegree = 'B.S. Computer Science';
+    it('#setDesiredDegree, #setInterestIds, #setPicture, #setUhId', function test() {
+      const desiredDegreeSlug = 'bs-cs';
+      DesiredDegrees.define({ name: 'BS CS', slug: desiredDegreeSlug, description: 'bs in cs' });
       InterestTypes.define({ name: 'Discipline', slug: 'discipline', description: 'foo' });
       const interestId = Interests.define({ name: 'AI', slug: 'AI', description: 'AI', interestType: 'discipline' });
       const picture = 'http://foo.com/picture.jpg';
-      const semesterID = Semesters.define({ term: Semesters.FALL, year: 2015 });
       const uhID = '123456789';
       const docID = Users.define({ firstName, lastName, slug, email, role, password });
-      Users.setAboutMe(docID, aboutMe);
-      expect(Users.findDoc(docID).aboutMe).to.equal(aboutMe);
-      Users.setDesiredDegree(docID, desiredDegree);
-      expect(Users.findDoc(docID).desiredDegree).to.equal(desiredDegree);
+      Users.setDesiredDegree(docID, desiredDegreeSlug);
+      expect(Users.findDoc(docID).desiredDegree).to.equal(desiredDegreeSlug);
       Users.setInterestIds(docID, [interestId]);
       expect(Users.findDoc(docID).interestIDs[0]).to.equal(interestId);
       Users.setPicture(docID, picture);
       expect(Users.findDoc(docID).picture).to.equal(picture);
-      Users.setSemesterId(docID, semesterID);
-      expect(Users.findDoc(docID).semesterID).to.equal(semesterID);
       Users.setUhId(docID, uhID);
       expect(Users.findDoc(docID).uhID).to.equal(uhID);
+      expect(Users.getUserFromUhId(uhID)._id).to.equal(docID);
+      expect(Users.getUserFromUsername(slug)._id).to.equal(docID);
       Users.removeIt(docID);
       Interests.removeIt(interestId);
       InterestTypes.removeIt('discipline');
@@ -83,9 +81,10 @@ if (Meteor.isServer) {
 
     it('#getCourseIDs', function test() {
       const userID = Users.define({ firstName, lastName, slug, email, role, password });
-      makeSampleCourseInstance(Users.findSlugByID(userID));
+      const courseInstanceID = makeSampleCourseInstance(Users.findSlugByID(userID));
       expect(Users.getCourseIDs(userID)).to.have.lengthOf(1);
-      Users.removeIt(userID);
+      expect(function foo() { Users.removeIt(userID); }).to.throw(Error);
+      CourseInstances.removeIt(courseInstanceID);
     });
   });
 }

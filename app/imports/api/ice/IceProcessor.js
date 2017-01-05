@@ -46,12 +46,18 @@ export function assertICE(obj) {
  */
 export function makeCourseICE(course, grade) {
   // TODO: Hardcoding 'other' is a bad idea.
-  const i = 0;
+  let i = 0;
   let c = 0;
   const e = 0;
   // NonICS courses get no ICE points.
   if (course === 'other') {
     return { i, c, e };
+  }
+  // ICS499 gets experience and innovation points.
+  if (course === 'ics499') {
+    if (grade.includes('A') || grade.includes('B')) {
+      i = 25;
+    }
   }
   // ICS courses get competency points if you get an A or a B.
   if (grade.includes('B')) {
@@ -148,5 +154,3 @@ export function getProjectedICE(docs) {
   });
   return total;
 }
-
-

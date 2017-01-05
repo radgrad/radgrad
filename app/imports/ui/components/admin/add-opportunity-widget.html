@@ -1,0 +1,40 @@
+<template name="Add_Opportunity_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD OPPORTUNITY</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label="Name" name="name" placeholder="Software Engineering" errorMessage=(fieldError "name") required=true}}
+        {{> Input_Form_Field label="Slug" name="slug" placeholder="software-engineering" errorMessage=(fieldError "slug") required=true}}
+        {{> Input_Date_Form_Field label="Event Date" name="eventDate" placeholder="11/27/2016" errorMessage=(fieldError "eventDate")}}
+      </div>
+
+      <div class="fields">
+        {{> Opportunity_Types_Form_Field opportunityTypes=opportunityTypes errorMessage=(fieldError "opportunityTypes") required="true" }}
+        {{> Sponsor_Form_Field sponsors=sponsors errorMessage=(fieldError "sponsor") required=true}}
+        {{> Input_Form_Field label="Icon" name="icon" placeholder="http://interest.com/se.jpg" errorMessage=(fieldError "icon")}}
+      </div>
+
+      <div class="fields">
+        {{> Input_Form_Field label="Innovation" name="innovation" placeholder="5" errorMessage=(fieldError "innovation") required=true type="number"}}
+        {{> Input_Form_Field label="Competency" name="competency" placeholder="5" errorMessage=(fieldError "competency") required=true type="number"}}
+        {{> Input_Form_Field label="Experience" name="experience" placeholder="5" errorMessage=(fieldError "experience") required=true type="number"}}
+      </div>
+
+      <div class="fields">
+        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests") required="true" }}
+        {{> Semesters_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
+        {{> Input_Form_Field label="More Information" name="moreInformation" placeholder="http://interest.com/software-engineering" errorMessage=(fieldError "moreInformation") required=true}}
+      </div>
+
+
+      {{> TextArea_Form_Field label="Description" rows=5 name="description" placeholder="Describe the Opportunity here" errorMessage=(fieldError "description") required=true}}
+
+      <button class="ui green basic button" type="submit">Add</button>
+
+      {{> Success_Message_Form_Field message="The Opportunity was successfully added."}}
+    </form>
+  </div>
+
+</template>

@@ -7,6 +7,8 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
 
 Template.Student_Opportunities_Of_Interest_Widget.onCreated(function appBodyOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
@@ -16,8 +18,35 @@ Template.Student_Opportunities_Of_Interest_Widget.onCreated(function appBodyOnCr
   this.subscribe(VerificationRequests.getPublicationName());
 });
 
+const availableOpps = () => {
+  const opps = Opportunities.find({}).fetch();
+  const currentSemesterID = Semesters.getCurrentSemester();
+  const currentSemester = Semesters.findDoc(currentSemesterID);
+  if (opps.length > 0) {
+    const filteredBySem = _.filter(opps, function filter(opp) {
+      const oi = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opp._id,
+      }).fetch();
+      return oi.length === 0;
+    });
+    const filteredByInstance = _.filter(filteredBySem, function filter(opp) {
+      let inFuture = false;
+      _.map(opp.semesterIDs, (semID) => {
+        const sem = Semesters.findDoc(semID);
+        if (sem.sortBy >= currentSemester.sortBy) {
+          inFuture = true;
+        }
+      });
+      return inFuture;
+    });
+    return filteredByInstance;
+  }
+  return [];
+};
+
 function matchingOpportunities() {
-  const allOpportunities = Opportunities.find().fetch();
+  const allOpportunities = availableOpps();
   const matching = [];
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
@@ -79,5 +108,3 @@ Template.Student_Opportunities_Of_Interest_Widget.helpers({
 Template.Student_Opportunities_Of_Interest_Widget.events({
   // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
-
-Template.Student_Opportunities_Of_Interest_Widget.onRendered({});
