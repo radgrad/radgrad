@@ -6,7 +6,7 @@ import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { ROLES } from '../../../api/role/Role.js';
+import { ROLE, ROLES } from '../../../api/role/Role.js';
 import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -48,7 +48,7 @@ Template.Add_User_Widget.helpers({
     return DesiredDegrees.find({}, { sort: { name: 1 } });
   },
   roles() {
-    return _.sortBy(ROLES);
+    return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
   },
 });
 
@@ -65,8 +65,8 @@ Template.Add_User_Widget.events({
         if (error) {
           console.log('Error during new user creation: ', error);
         }
+        FormUtils.indicateSuccess(instance, event);
       });
-      FormUtils.indicateSuccess(instance, event);
     } else {
       FormUtils.indicateError(instance);
     }
