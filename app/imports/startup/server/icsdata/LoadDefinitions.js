@@ -4,6 +4,7 @@ import { Users } from '/imports/api/user/UserCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
+import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
 
 import { careerGoalDefinitions } from '/imports/startup/server/icsdata/CareerGoalDefinitions';
@@ -13,6 +14,7 @@ import { opportunityDefinitions, opportunityTypeDefinitions }
     from '/imports/startup/server/icsdata/OpportunityDefinitions';
 import { defineSemesters } from '/imports/api/semester/SemesterUtilities';
 import { userDefinitions } from '/imports/startup/server/icsdata/UserDefinitions';
+import { desiredDegreeDefinitions } from '/imports/startup/server/icsdata/DesiredDegreeDefinitions';
 
 /** @module LoadDefinitions */
 
@@ -21,6 +23,7 @@ import { userDefinitions } from '/imports/startup/server/icsdata/UserDefinitions
  */
 export function loadDefinitions() {
   defineSemesters();
+  desiredDegreeDefinitions.map((definition) => DesiredDegrees.define(definition));
   interestTypeDefinitions.map((definition) => InterestTypes.define(definition));
   interestDefinitions.map((definition) => Interests.define(definition));
   userDefinitions.map((definition) => Users.define(definition));

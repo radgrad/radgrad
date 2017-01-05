@@ -1,0 +1,12 @@
+<template name="Role_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Role</label>
+    <select class="ui dropdown" name="role">
+      <option value="">Select Role</option>
+      {{#each role in roles}}
+        <option value="{{role}}" selected="{{isSelected role selectedRole}}">{{role}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

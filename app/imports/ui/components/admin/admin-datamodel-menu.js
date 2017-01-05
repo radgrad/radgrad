@@ -20,4 +20,7 @@ Template.Admin_DataModel_Menu.helpers({
   teasersRouteName() {
     return RouteNames.adminDataModelTeasersPageRouteName;
   },
+  usersRouteName() {
+    return RouteNames.adminDataModelUsersPageRouteName;
+  },
 });

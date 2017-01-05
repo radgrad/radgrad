@@ -10,7 +10,7 @@
       </div>
 
       <div class="fields">
-        {{> Interest_Types_Form_Field interestTypes=interestTypes errorMessage=(fieldError "interestTypes")}}
+        {{> Interest_Types_Form_Field interestTypes=interestTypes errorMessage=(fieldError "interestTypes") required="true" }}
         {{> Input_Form_Field label="More Information" name="moreInformation" placeholder="http://interest.com/software-engineering" errorMessage=(fieldError "moreInformation") required=true}}
       </div>
 

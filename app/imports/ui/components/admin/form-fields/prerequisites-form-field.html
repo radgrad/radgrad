@@ -1,5 +1,5 @@
 <template name="Prerequisites_Form_Field">
-  <div class="field">
+  <div class="{{#if required}}required{{/if}} field">
     <label>Prerequisite(s)</label>
     <select multiple="" class="ui dropdown" name="prerequisites">
       <option value="">Select Course(s)</option>

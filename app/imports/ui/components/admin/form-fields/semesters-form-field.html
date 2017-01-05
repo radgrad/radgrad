@@ -1,5 +1,5 @@
 <template name="Semesters_Form_Field">
-  <div class="required field">
+  <div class="{{#if required}}required{{/if}} field">
     <label>Semester(s)</label>
     <select multiple="" class="ui dropdown" name="semesters">
       <option value="">Select Semester(s)</option>
