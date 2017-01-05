@@ -9,14 +9,54 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 
-Template.Student_Opportunities_Of_Interest_Card.onCreated(function appBodyOnCreated() {
+Template.Student_Opportunities_Of_Interest_Card.onCreated(function studentOpportunitiesOfInterestCardOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
 });
 
+function interestedStudentsHelper(opp) {
+  const interested = [];
+  let count = 0;
+  const oi = OpportunityInstances.find({
+    opportunityID: opp._id,
+  }).fetch();
+  _.map(oi, (o) => {
+    if (count < 17) {
+      if (!(_.includes(interested, o.studentID))) {
+        interested.push(o.studentID);
+        count += 1;
+      }
+    } else if (count === 17) {
+      interested.push('elipsis');
+    }
+  });
+  return interested;
+}
+
+function matchingInterestsHelper(opp) {
+  const matchingInterests = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterests = [];
+  const opportunityInterests = [];
+  _.map(opp.interestIDs, (id) => {
+    opportunityInterests.push(Interests.findDoc(id));
+  });
+  _.map(user.interestIDs, (id) => {
+    userInterests.push(Interests.findDoc(id));
+  });
+  _.map(opportunityInterests, (oppInterest) => {
+    _.map(userInterests, (userInterest) => {
+      if (_.isEqual(oppInterest, userInterest)) {
+        matchingInterests.push(userInterest);
+      }
+    });
+  });
+  return matchingInterests;
+}
 
 Template.Student_Opportunities_Of_Interest_Card.helpers({
   getDictionary() {
@@ -70,25 +110,38 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
     }
     return ret;
   },
+  interestedStudents(opp) {
+    return interestedStudentsHelper(opp);
+  },
+  numberStudents(opp) {
+    return interestedStudentsHelper(opp).length;
+  },
   matchingInterests(opp) {
-    const matchingInterests = [];
-    const user = Users.findDoc({ username: getRouteUserName() });
-    const userInterests = [];
-    const opportunityInterests = [];
+    return matchingInterestsHelper(opp);
+  },
+  otherInterests(opp) {
+    const matchingInterests = matchingInterestsHelper(opp);
+    const oppInterests = [];
     _.map(opp.interestIDs, (id) => {
-      opportunityInterests.push(Interests.findDoc(id));
+      oppInterests.push(Interests.findDoc(id));
     });
-    _.map(user.interestIDs, (id) => {
-      userInterests.push(Interests.findDoc(id));
-    });
-    _.map(opportunityInterests, (oppInterest) => {
-      _.map(userInterests, (userInterest) => {
-        if (_.isEqual(oppInterest, userInterest)) {
-          matchingInterests.push(userInterest);
+    const filtered = _.filter(oppInterests, function (oppInterest) {
+      let ret = true;
+      _.map(matchingInterests, (matchingInterest) => {
+        if (_.isEqual(oppInterest, matchingInterest)) {
+          ret = false;
         }
       });
+      return ret;
     });
-    return matchingInterests;
+    return filtered;
+  },
+  studentPicture(studentID) {
+    if (studentID === 'elipsis') {
+      return '/images/elipsis.png';
+    }
+    const student = Users.findDoc(studentID);
+    return student.picture;
   },
 });
 
