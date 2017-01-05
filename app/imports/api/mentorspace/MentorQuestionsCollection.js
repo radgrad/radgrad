@@ -17,18 +17,18 @@ class MentorQuestionsCollection extends BaseCollection {
    */
   constructor() {
     super('MentorQuestions', new SimpleSchema({
+      questionID: {type: String},
       text: { type: String }
     }));
   }
 
   /**
    * Defines the question for a given question ID.
-   * @param questionID the question ID.
    * @param text the question text.
    * @return {any} the ID of the question.
    */
-  define({ text }) {
-    return this._collection.insert({ text });
+  define({ questionID, text }) {
+    return this._collection.insert({ questionID, text });
   }
 
   getMentorQuestion(){
