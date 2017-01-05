@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
@@ -34,7 +36,6 @@ function getCoursesHelper(semester) {
         courses.push(courseInstance);
       }
     });
-    console.log("hello" + courses);
     return courses;
   }
   return null;
@@ -96,8 +97,8 @@ Template.Student_Explorer_Student_Info.helpers({
     _.map(semesters, (sem) => {
       if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
         semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
-    }
-  });
+      }
+    });
     return semesterNames.slice(0, -2); // removes unnecessary comma and space
   },
   courseName(c) {

@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection.js';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 
 Template.Student_Explorer_Accordion.onRendered(function studentExplorerAccordionWidgetOnRendered() {
@@ -27,7 +26,6 @@ Template.Student_Explorer_Accordion.events({
       console.log(item);
       Users.setCareerGoalIds(student._id, studentItems);
     } catch (e) {
-      console.log("caught");
       // don't do anything.
     }
   },
