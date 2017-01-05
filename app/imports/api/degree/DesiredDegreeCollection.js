@@ -1,18 +1,25 @@
-import BaseTypeCollection from '/imports/api/base/BaseTypeCollection';
+import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { Meteor } from 'meteor/meteor';
+import { Slugs } from '/imports/api/slug/SlugCollection';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 /** @module DesiredDegree */
 
 /**
  * DesiredDegrees specifies the set of degrees possible in this department.
- * @extends module:BaseType~BaseTypeCollection
+ * @extends module:BaseInstance~BaseInstanceCollection
  */
-class DesiredDegreeCollection extends BaseTypeCollection {
+class DesiredDegreeCollection extends BaseInstanceCollection {
 
   /**
    * Creates the DesiredDegree collection.
    */
   constructor() {
-    super('DesiredDegree');
+    super('DesiredDegree', new SimpleSchema({
+      name: { type: String },
+      slugID: { type: SimpleSchema.RegEx.Id },
+      description: { type: String },
+    }));
   }
 
   /**
@@ -27,7 +34,12 @@ class DesiredDegreeCollection extends BaseTypeCollection {
    * @returns The newly created docID.
    */
   define({ name, slug, description }) {
-    return super.define({ name, slug, description });
+    // Get SlugID, throw error if found.
+    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
+    const desiredDegreeID = this._collection.insert({ name, slugID, description });
+    // Connect the Slug to this Interest
+    Slugs.updateEntityID(slugID, desiredDegreeID);
+    return desiredDegreeID;
   }
 }
 

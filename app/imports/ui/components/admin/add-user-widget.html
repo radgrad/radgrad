@@ -1,0 +1,38 @@
+<template name="Add_User_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD USER</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label="First" name="firstName" placeholder="John" errorMessage=(fieldError "firstName") required=true}}
+        {{> Input_Form_Field label="Last" name="lastName" placeholder="Doe" errorMessage=(fieldError "lastName") required=true}}
+        {{> Input_Form_Field label="Slug (Username)" name="slug" placeholder="johndoe" errorMessage=(fieldError "slug") required=true}}
+        {{> Input_Form_Field label="UH ID" name="uhID" placeholder="1234-5678" errorMessage=(fieldError "uhID") required=true}}
+      </div>
+
+      <div class="fields">
+        {{> Input_Form_Field label="Email" name="email" placeholder="jdoe@hawaii.edu" errorMessage=(fieldError "email") required=true}}
+        {{> Input_Form_Field label="Picture" name="picture" placeholder="http://keanu.github.io/images/keanu.jpg" errorMessage=(fieldError "picture") }}
+        {{> Input_Form_Field label="Website" name="website" placeholder="http://keanu.github.io/" errorMessage=(fieldError "website") }}
+      </div>
+
+      <div class="fields">
+        {{> Role_Form_Field roles=roles selectedRole="STUDENT" errorMessage=(fieldError "role") required="true" }}
+        {{> Desired_Degree_Form_Field desiredDegrees=desiredDegrees errorMessage=(fieldError "desiredDegree")}}
+        {{> Input_Form_Field label="Level" name="level" value="1" errorMessage=(fieldError "level") required=true type="Number"}}
+        {{> Input_Form_Field label="Password" name="password" value="foo" errorMessage=(fieldError "password") required=true }}
+      </div>
+
+      <div class="fields">
+        {{> Career_Goals_Form_Field careerGoals=careerGoals errorMessage=(fieldError "careerGoals")}}
+        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests")}}
+      </div>
+
+      <button class="ui green basic button" type="submit">Add</button>
+
+      {{> Success_Message_Form_Field message="The User was successfully added."}}
+    </form>
+  </div>
+
+</template>

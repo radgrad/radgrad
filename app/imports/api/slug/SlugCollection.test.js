@@ -19,6 +19,17 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
+    it('#isValidSlugName', function test() {
+      expect(Slugs.isValidSlugName('slug123')).to.be.true;
+      expect(Slugs.isValidSlugName('slug-123')).to.be.true;
+      expect(Slugs.isValidSlugName('Slug-123')).to.be.true;
+      expect(Slugs.isValidSlugName('slug-123#')).to.be.false;
+      expect(Slugs.isValidSlugName('slug 123')).to.be.false;
+      expect(Slugs.isValidSlugName('slug 123')).to.be.false;
+      expect(Slugs.isValidSlugName('')).to.be.false;
+      expect(Slugs.isValidSlugName(12)).to.be.false;
+    });
+
     it('#define, #removeIt, #isDefined', function test() {
       Slugs.define({ name, entityName });
       expect(Slugs.isDefined(name)).to.be.true;
