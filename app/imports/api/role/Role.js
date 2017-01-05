@@ -19,6 +19,8 @@ export const ROLE = {
   MENTOR: 'MENTOR',
 };
 
+export const ROLES = _.values(ROLE);
+
 /**
  * Predicate for determining if a string is a defined ROLE.
  * @param { String } role The role.

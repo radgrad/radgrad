@@ -91,7 +91,7 @@ class UserCollection extends BaseInstanceCollection {
    * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
    * picture, website, interests, careerGoals, and desiredDegree are optional.
-   * desiredDegree must be a DesiredDegree slug.
+   * desiredDegree must be a DesiredDegree slug or docID.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
@@ -99,42 +99,47 @@ class UserCollection extends BaseInstanceCollection {
       firstName, lastName, slug, email, role, password, picture, interests, careerGoals, desiredDegree,
       website, uhID,
   }) {
-    // Get SlugID, throw error if found.
-    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    // Make sure role is supplied and is valid.
-    if (!isRole(role)) {
-      throw new Meteor.Error(`Role ${role} is not a valid role name.`);
+    // Users can only be defined on the server side.
+    if (Meteor.isServer) {
+      // Get SlugID, throw error if found.
+      const slugID = Slugs.define({ name: slug, entityName: this.getType() });
+      // Make sure role is supplied and is valid.
+      if (!isRole(role)) {
+        throw new Meteor.Error(`Role ${role} is not a valid role name.`);
+      }
+      const interestIDs = Interests.getIDs(interests);
+      const careerGoalIDs = CareerGoals.getIDs(careerGoals);
+      // if (desiredDegree && !DesiredDegrees.isDefined(desiredDegree)) {
+      //   throw new Meteor.Error(`Desired degree slug ${desiredDegree} is not defined.`);
+      // }
+      desiredDegree = null; // eslint-disable-line
+      // Now define the user.
+      let userID;
+      if (password) {
+        userID = Accounts.createUser({ username: slug, email, password });
+      } else {
+        const result = { id: slug };
+        const options = { profile: { name: slug } };
+        const casReturn = Accounts.updateOrCreateUserFromExternalService('cas', result, options);
+        userID = casReturn.userId;
+      }
+
+      // Now that we have a user, update fields.
+      Meteor.users.update(userID, {
+        $set: {
+          username: slug, firstName, lastName, slugID, email, picture, website,
+          desiredDegree, interestIDs, careerGoalIDs, uhID, level: 1,
+        },
+      });
+
+      Roles.addUsersToRoles(userID, [role]);
+
+      // Update the Slug with the userID.
+      Slugs.updateEntityID(slugID, userID);
+
+      return userID;
     }
-    const interestIDs = Interests.getIDs(interests);
-    const careerGoalIDs = CareerGoals.getIDs(careerGoals);
-    if (desiredDegree && !DesiredDegrees.isDefined(desiredDegree)) {
-      throw new Meteor.Error(`Desired degree slug ${desiredDegree} is not defined.`);
-    }
-    // Now define the user.
-    let userID;
-    if (password) {
-      userID = Accounts.createUser({ username: slug, email, password });
-    } else {
-      const result = { id: slug };
-      const options = { profile: { name: slug } };
-      const casReturn = Accounts.updateOrCreateUserFromExternalService('cas', result, options);
-      userID = casReturn.userId;
-    }
-
-    // Now that we have a user, update fields.
-    Meteor.users.update(userID, {
-      $set: {
-        username: slug, firstName, lastName, slugID, email, picture, website,
-        desiredDegree, interestIDs, careerGoalIDs, uhID, level: 1,
-      },
-    });
-
-    Roles.addUsersToRoles(userID, [role]);
-
-    // Update the Slug with the userID.
-    Slugs.updateEntityID(slugID, userID);
-
-    return userID;
+    return null;
   }
 
   /**

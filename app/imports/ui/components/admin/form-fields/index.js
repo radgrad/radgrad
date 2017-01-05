@@ -1,3 +1,9 @@
+import './career-goals-form-field.html';
+import './career-goals-form-field.js';
+
+import './desired-degree-form-field.html';
+import './desired-degree-form-field.js';
+
 import './form-error-message.html';
 
 import './form-field-utilities.js';
@@ -18,6 +24,9 @@ import './opportunity-types-form-field.js';
 
 import './prerequisites-form-field.html';
 import './prerequisites-form-field.js';
+
+import './role-form-field.html';
+import './role-form-field.js';
 
 import './routename-form-field.html';
 import './routename-form-field.js';

@@ -1,4 +1,5 @@
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { Meteor } from 'meteor/meteor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
@@ -6,7 +7,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 /**
  * DesiredDegrees specifies the set of degrees possible in this department.
- * @extends module:BaseType~BaseTypeCollection
+ * @extends module:BaseInstance~BaseInstanceCollection
  */
 class DesiredDegreeCollection extends BaseInstanceCollection {
 

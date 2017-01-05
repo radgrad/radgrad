@@ -21,7 +21,7 @@
       </div>
 
       <div class="fields">
-        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests')}}
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
         {{> Prerequisites_Form_Field courses=courses selectedCourseIDs=selectedCourseIDs errorMessage=(fieldError 'prerequisites')}}
       </div>
 
