@@ -140,6 +140,15 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Updates the User document with the fields specified in userInfo.
+   * This is intended to be called by the Users.update method.
+   * @param userInfo An object containing user fields.
+   */
+  update(userInfo) {
+    const userID = this.findIdBySlug(userInfo.username);
+    this._collection.update(userID, { $set: userInfo });
+  }
+  /**
    * Returns the full name for the given userID.
    * @param userID the id of the user.
    * @returns {string} The user's full name.

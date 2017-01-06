@@ -35,6 +35,7 @@ Template.Add_User_Widget.onCreated(function onCreated() {
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.subscribe(ValidUserAccounts.getPublicationName());
 });
 
 Template.Add_User_Widget.helpers({
