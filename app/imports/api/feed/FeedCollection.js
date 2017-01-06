@@ -78,8 +78,7 @@ class FeedCollection extends BaseInstanceCollection {
     } else if (feedType === 'verified') {
       description = `${Users.getFullName(studentID)} has been verified for 
         ${Opportunities.findDoc(opportunityID).name}.`;
-      slugID = Slugs.define({ name: `feed-${Users.findDoc(studentID).username}-
-        ${Slugs.getDoc(Opportunities.findDoc(opportunityID).slugID).name}-new`, entityName: this.getType() });
+      slugID = Slugs.define({ name: `feed-${Users.findDoc(studentID).username}-${Slugs.findDoc(Opportunities.findDoc(opportunityID).slugID).name}-new`, entityName: this.getType() });
       picture = Users.findDoc(studentID).picture;
     }
     const feedID = this._collection.insert({ slugID, studentID, opportunityID, courseID,
