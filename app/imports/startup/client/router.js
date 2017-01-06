@@ -104,6 +104,30 @@ adminRoutes.route('/datamodel/users', {
   },
 });
 
+export const adminDataBasePageRouteName = 'Admin_DataBase_Page';
+adminRoutes.route('/database', {
+  name: adminDataBasePageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataBasePageRouteName });
+  },
+});
+
+export const adminDataBaseIntegrityCheckPageRouteName = 'Admin_DataBase_Integrity_Check_Page';
+adminRoutes.route('/database/integrity-check', {
+  name: adminDataBaseIntegrityCheckPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataBaseIntegrityCheckPageRouteName });
+  },
+});
+
+export const adminDataBaseDumpPageRouteName = 'Admin_DataBase_Dump_Page';
+adminRoutes.route('/database/dump', {
+  name: adminDataBaseDumpPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataBaseDumpPageRouteName });
+  },
+});
+
 /*                        ADVISOR ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.

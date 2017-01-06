@@ -63,7 +63,7 @@ Template.List_Users_Widget.helpers({
   },
 });
 
-Template.List_Career_Goals_Widget.events({
+Template.List_Users_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
   'click .jsDelete': function (event) {
     event.preventDefault();
