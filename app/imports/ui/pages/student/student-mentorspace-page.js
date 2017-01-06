@@ -19,6 +19,7 @@ Template.Student_MentorSpace_Page.onCreated(function appBodyOnCreated() {
     this.subscribe(Feedbacks.getPublicationName());
     this.subscribe(FeedbackInstances.getPublicationName());
     this.subscribe(Interests.getPublicationName());
+    this.subscribe(MentorQuestions.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
