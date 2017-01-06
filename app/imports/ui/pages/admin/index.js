@@ -1,3 +1,7 @@
+import './admin-database-dump-page.html';
+import './admin-database-integrity-check-page.html';
+import './admin-database-page.html';
+
 import './admin-datamodel-careergoals-page.html';
 import './admin-datamodel-careergoals-page.js';
 
@@ -14,7 +18,6 @@ import './admin-datamodel-opportunities-page.html';
 import './admin-datamodel-opportunities-page.js';
 
 import './admin-datamodel-page.html';
-import './admin-datamodel-page.js';
 
 import './admin-datamodel-teasers-page.html';
 import './admin-datamodel-teasers-page.js';
