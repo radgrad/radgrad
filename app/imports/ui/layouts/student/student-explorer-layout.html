@@ -1,0 +1,19 @@
+<template name="Student_Explorer_Layout">
+
+  <div class="layout-page">
+    <div class="ui container stackable grid ">
+      <div class="three wide column">
+        {{> Student_Explorer_Menu}}
+      </div>
+      <div class="thirteen wide column">
+        <div class="ui padded four column grid">
+          {{> Student_Explorer_Student_Info}}
+          <div class="row">
+            {{> Template.contentBlock}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>

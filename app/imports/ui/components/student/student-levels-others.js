@@ -21,16 +21,7 @@ Template.Student_Levels_Others.helpers({
     }
     return '';
   },
-  pastLevelsStyle(level) {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      if (level < user.level) {
-        return 'height:30px; width: auto; border-width: 3px; border-color: green';
-      }
-      return 'height:30px; width: auto" class="ui image';
-    }
-    return '';
-  },
+
   pastLevelsClass(level) {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
