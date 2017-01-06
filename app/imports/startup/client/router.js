@@ -104,6 +104,30 @@ adminRoutes.route('/datamodel/users', {
   },
 });
 
+export const adminDataBasePageRouteName = 'Admin_DataBase_Page';
+adminRoutes.route('/database', {
+  name: adminDataBasePageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataBasePageRouteName });
+  },
+});
+
+export const adminDataBaseIntegrityCheckPageRouteName = 'Admin_DataBase_Integrity_Check_Page';
+adminRoutes.route('/database/integrity-check', {
+  name: adminDataBaseIntegrityCheckPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataBaseIntegrityCheckPageRouteName });
+  },
+});
+
+export const adminDataBaseDumpPageRouteName = 'Admin_DataBase_Dump_Page';
+adminRoutes.route('/database/dump', {
+  name: adminDataBaseDumpPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataBaseDumpPageRouteName });
+  },
+});
+
 /*                        ADVISOR ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.
@@ -201,6 +225,46 @@ const studentRoutes = FlowRouter.group({
   name: 'student',
   triggersEnter: [addBodyClass],
   triggersExit: [removeBodyClass],
+});
+
+export const studentExplorerCareerGoalsPageRouteName = 'Student_Explorer_CareerGoals_Page';
+studentRoutes.route('/explorer/career-goals', {
+  name: studentExplorerCareerGoalsPageRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentExplorerCareerGoalsPageRouteName });
+  },
+});
+
+export const studentExplorerCoursesPageRouteName = 'Student_Explorer_Courses_Page';
+studentRoutes.route('/explorer/courses', {
+  name: studentExplorerCoursesPageRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentExplorerCoursesPageRouteName });
+  },
+});
+
+export const studentExplorerDegreesPageRouteName = 'Student_Explorer_Degrees_Page';
+studentRoutes.route('/explorer/degrees', {
+  name: studentExplorerDegreesPageRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentExplorerDegreesPageRouteName });
+  },
+});
+
+export const studentExplorerInterestsPageRouteName = 'Student_Explorer_Interests_Page';
+studentRoutes.route('/explorer/interests', {
+  name: studentExplorerInterestsPageRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentExplorerInterestsPageRouteName });
+  },
+});
+
+export const studentExplorerOpportunitiesPageRouteName = 'Student_Explorer_Opportunities_Page';
+studentRoutes.route('/explorer/opportunities', {
+  name: studentExplorerOpportunitiesPageRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentExplorerOpportunitiesPageRouteName });
+  },
 });
 
 export const studentHomePageRouteName = 'Student_Home_Page';

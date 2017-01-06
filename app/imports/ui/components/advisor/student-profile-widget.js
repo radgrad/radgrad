@@ -107,7 +107,12 @@ Template.Student_Profile_Widget.events({
     event.preventDefault();
     const student = Users.findDoc(instance.state.get(sessionKeys.CURRENT_STUDENT_ID));
     const choice = event.target.parentElement.getElementsByTagName('input')[0].value;
-    Users.setDesiredDegree(student._id, choice);
+    console.log(choice);
+    if (choice === 'BS_CS') {
+      Users.setDesiredDegree(student._id, 'bs-cs');
+    } else {
+      Users.setDesiredDegree(student._id, 'ba-ics');
+    }
   },
   'click .jsInterests': function clickJsInterests(event, instance) {
     event.preventDefault();

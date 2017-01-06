@@ -4,7 +4,7 @@
       <div class="ui dividing header">
         <h4>TEASER VIDEOS ({{teaserCount}})</h4>
       </div>
-
+      {{#if teasers}}
       <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui cards">
         {{#each teaser in teasers}}
           <div class="ui card">
@@ -32,6 +32,9 @@
           </div>
         {{/each}}
       </div>
+      {{else}}
+        <p>Add interests to see recommendations here.</p>
+      {{/if}}
     </div>
 
   {{else}}
