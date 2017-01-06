@@ -5,29 +5,26 @@
         <div class="ui equal width grid">
           <div class=" row">
             {{#each year in years}}
-              <div class="stretched column">
-                <div class="ui center aligned segment">
-                  <div class="ui top left attached green label">AY {{year.year}} - {{year.springYear}}</div>
-                  {{> Semester_List (fallArgs year)}}
-                  {{> Semester_List (springArgs year)}}
-                  {{> Semester_List (summerArgs year)}}
-                </div>
-              </div>
+            <div class="column academicYear" style="padding-left: 2px; padding-right: 2px;">
+              <!--<div class="ui center aligned padded segment">-->
+              <!--<div class="ui dividing header"><h4>AY {{year.year}} - {{year.springYear}}</h4></div>-->
+              {{> Semester_List (fallArgs year)}}
+              {{> Semester_List (springArgs year)}}
+              {{> Semester_List (summerArgs year)}}
+              <!--</div>-->
+            </div>
             {{/each}}
           </div>
           <div class="row noTopPadding">
             {{#each year in years}}
-              <div class="center aligned column">
+              <div class="column">
                 {{#if isFuture year}}
-                  Planned ICE: {{> ICE_Badge ice=(yearPlanningICE year)}}
+                  {{> ICE_Badge_Proj ice=(yearPlanningICE year)}}
                 {{else}}
-                  Earned: ICE {{> ICE_Badge ice=(yearICE year)}}
+                  {{> ICE_Badge ice=(yearICE year)}}
                 {{/if}}
-              </div>
+            </div>
             {{/each}}
-          </div>
-          <div class="row">
-            {{> Projected_ICE}}
           </div>
         </div>
       </div>
@@ -41,9 +38,9 @@
       <div class="ui equal width grid">
         <div class="column">
           {{#if hasPrevYear}}
-            <button id="prevYear" class="ui icon green button" data-content="View previous academic year">
-              <i class="ui arrow left icon"></i></button>
-            Previous Year
+          <button id="prevYear" class="ui icon green button" data-content="View previous academic year">
+            <i class="ui arrow left icon"></i></button>
+          Previous Year
           {{/if}}
         </div>
         <div class="center aligned column">
@@ -51,9 +48,9 @@
         </div>
         <div class="right aligned column">
           {{#if hasNextYear}}
-            Next Year&nbsp;
-            <button id="nextYear" class="ui icon green button"><i
-                class="ui arrow right icon" data-content="View next academic year"></i></button>
+          Next Year&nbsp;
+          <button id="nextYear" class="ui icon green button"><i
+              class="ui arrow right icon" data-content="View next academic year"></i></button>
           {{/if}}
         </div>
       </div>

@@ -87,8 +87,19 @@ class CourseInstanceCollection extends BaseCollection {
    */
   getCourseDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this._collection.findOne({ _id: instanceID });
     return Courses.findDoc(instance.courseID);
+  }
+
+  /**
+   * Returns the Course slug for the instance's corresponding Course.
+   * @param instanceID The CourseInstanceID.
+   * @return {string} The course slug.
+   */
+  getCourseSlug(instanceID) {
+    this.assertDefined(instanceID);
+    const instance = this._collection.findOne({ _id: instanceID });
+    return Courses.getSlug(instance.courseID);
   }
 
   /**
@@ -99,7 +110,7 @@ class CourseInstanceCollection extends BaseCollection {
    */
   getSemesterDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this._collection.findOne({ _id: instanceID });
     return Semesters.findDoc(instance.semesterID);
   }
 
@@ -111,7 +122,7 @@ class CourseInstanceCollection extends BaseCollection {
    */
   getStudentDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this._collection.findOne({ _id: instanceID });
     return Users.findDoc(instance.studentID);
   }
 
@@ -146,7 +157,7 @@ class CourseInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
@@ -198,3 +209,15 @@ class CourseInstanceCollection extends BaseCollection {
  */
 export const CourseInstances = new CourseInstanceCollection();
 
+if (Meteor.isServer) {
+  const instance = this;
+  // eslint-disable-next-line meteor/audit-argument-checks
+  Meteor.publish(`${CourseInstances._collectionName}.Public`, function publicPublish(courseID) {
+    // check the opportunityID.
+    new SimpleSchema({
+      opportunityID: { type: String },
+    }).validate({ courseID });
+
+    return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
+  });
+}

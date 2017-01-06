@@ -1,0 +1,12 @@
+<template name="Career_Goals_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Career Goal(s)</label>
+    <select multiple="" class="ui dropdown" name="careerGoals">
+      <option value="">Select Career Goal(s)</option>
+      {{#each careerGoal in careerGoals}}
+        <option value="{{careerGoal._id}}" selected="{{isSelected careerGoal._id selectedcareerGoalIDs}}">{{careerGoal.name}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

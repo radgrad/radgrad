@@ -1,17 +1,24 @@
 import { Template } from 'meteor/templating';
 
-Template.Student_AboutMe.onCreated(function appBodyOnCreated() {
-  // placeholder: typically you will put global subscriptions here if you remove the autopublish package.
-});
-
 Template.Student_AboutMe.helpers({
-  // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
+  getDictionary() {
+    return Template.instance().state;
+  },
 });
 
 Template.Student_AboutMe.events({
-  // placeholder: if you add a form to this top-level layout, handle the associated events here.
+  // add your statement here
 });
 
-Template.Student_AboutMe.onRendered( {
-
+Template.Student_AboutMe.onCreated(function studentAboutMeOnCreated() {
+  // add your statement here
 });
+
+Template.Student_AboutMe.onRendered(function studentAboutMeOnRendered() {
+  // add your statement here
+});
+
+Template.Student_AboutMe.onDestroyed(function studentAboutMeOnDestroyed() {
+  // add your statement here
+});
+

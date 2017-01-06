@@ -9,7 +9,7 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 if (Meteor.isServer) {
   describe('InterestTypeCollection', function testSuite() {
     const name = 'Interest Name';
-    const slug = 'InterestSlug';
+    const slug = 'interest-slug';
     const description = 'Interest Description';
 
     before(function setup() {

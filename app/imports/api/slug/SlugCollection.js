@@ -37,8 +37,21 @@ class SlugCollection extends BaseCollection {
     if (super.isDefined(name)) {
       throw new Meteor.Error(`Attempt to redefine slug: ${name}`);
     }
+    if (!this.isValidSlugName(name)) {
+      throw new Meteor.Error(`Slug is not a-zA-Z0-9 or dash: ${name}`);
+    }
     const docID = this._collection.insert({ name, entityName });
     return docID;
+  }
+
+  /**
+   * Returns true if slugName is syntactically valid (i.e. consists of a-zA-Z0-9 or dash.)
+   * @param slugName The slug name.
+   * @returns {boolean} True if it's OK.
+   */
+  isValidSlugName(slugName) {  // eslint-disable-line
+    const slugRegEx = new RegExp('^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$');
+    return (typeof slugName === 'string') && slugName.length > 0 && slugRegEx.test(slugName);
   }
 
   /**

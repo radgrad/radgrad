@@ -1,0 +1,12 @@
+<template name="Prerequisites_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Prerequisite(s)</label>
+    <select multiple="" class="ui dropdown" name="prerequisites">
+      <option value="">Select Course(s)</option>
+      {{#each course in courses}}
+        <option value="{{courseSlug course._id}}" selected="{{isSelected course._id selectedCourseIDs}}">{{course.number}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

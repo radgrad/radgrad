@@ -5,34 +5,42 @@ import { Meteor } from 'meteor/meteor';
 import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
+import { Feed } from '../../api/feed/FeedCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
+import { HelpMessages } from '../../api/help/HelpMessageCollection';
+import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
+import { MentorAnswers } from '../../api/mentorspace/MentorAnswersCollection.js';
+import { MentorQuestions } from '../../api/mentorspace/MentorQuestionsCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
 import { ROLE } from '/imports/api/role/Role';
+import { Teasers } from '/imports/api/teaser/TeaserCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
-
+import { desiredDegreeDefinitions } from '/imports/startup/server/icsdata/DesiredDegreeDefinitions';
 import { courseDefinitions } from './icsdata/CourseDefinitions.js';
 import { processStarCsvData } from '/imports/api/star/StarProcessor';
-import { interestTypeDefinitions, interestDefinitions } from '/imports/startup/server/icsdata/InterestDefinitions';
-import {
-    opportunityDefinitions, opportunityTypeDefinitions, opportunityInstances,
-}
-    from '/imports/startup/server/icsdata/OpportunityDefinitions';
-import { careerGoalDefinitions } from '/imports/startup/server/icsdata/CareerGoalDefinitions';
-import { userDefinitions } from '/imports/startup/server/icsdata/UserDefinitions';
-import { recommendationFeedbackDefinitions, warningFeedbackDefinitions,
-    feedbackInstances }
-    from '/imports/startup/server/icsdata/FeedbackDefinitions.js';
-import { defaultAdminAccount } from '/imports/startup/server/icsdata/AdminUser';
-import { exampleStudents } from '/imports/startup/server/icsdata/ExampleStudents';
+import { interestTypeDefinitions, interestDefinitions } from './icsdata/InterestDefinitions';
+import { opportunityDefinitions, opportunityTypeDefinitions, opportunityInstances }
+  from './icsdata/OpportunityDefinitions';
+import { careerGoalDefinitions } from './icsdata/CareerGoalDefinitions';
+import { userDefinitions } from './icsdata/UserDefinitions';
+import { recommendationFeedbackDefinitions, warningFeedbackDefinitions, feedbackInstances }
+  from './icsdata/FeedbackDefinitions.js';
+import { defaultAdminAccount } from './icsdata/AdminUser';
+import { exampleStudents } from './icsdata/ExampleStudents';
+import { helpMessageDefinitions } from './icsdata/HelpMessages';
+import { teaserDefinitions } from './icsdata/TeaserDefinitions';
+import { feedDefinitions } from './icsdata/FeedDefinitions';
+import { mentorspaceQuestionsDefinitions } from './icsdata/MentorSpaceQuestionsDefinitions';
+import { mentorspaceAnswersDefinitions } from './icsdata/MentorSpaceAnswersDefinitions';
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -56,6 +64,10 @@ Meteor.startup(() => {
     Semesters.define({ term: Semesters.SPRING, year: 2020 });
     Semesters.define({ term: Semesters.SUMMER, year: 2020 });
   }
+  if (HelpMessages.find().count() === 0) {
+    console.log('Defining Help Messages');  // eslint-disable-line no-console
+    helpMessageDefinitions.map((definition) => HelpMessages.define(definition));
+  }
   if (InterestTypes.find().count() === 0) {
     console.log('Defining InterestTypes');  // eslint-disable-line no-console
     interestTypeDefinitions.map((definition) => InterestTypes.define(definition));
@@ -72,6 +84,10 @@ Meteor.startup(() => {
       Users.setUhId(id, definition.uhID);
       return false;
     });
+  }
+  if (DesiredDegrees.find().count() === 0) {
+    console.log('Defining DesiredDegrees');  // eslint-disable-line no-console
+    desiredDegreeDefinitions.map((definition) => DesiredDegrees.define(definition));
   }
   if (CareerGoals.find().count() === 0) {
     console.log('Defining CareerGoals');  // eslint-disable-line no-console
@@ -93,6 +109,18 @@ Meteor.startup(() => {
     console.log('Defining Feedback');  // eslint-disable-line no-console
     recommendationFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
     warningFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
+  }
+  if (MentorAnswers.find().count() === 0) {
+    console.log('Defining MentorAnswers'); // eslint-disable-line no-console
+    mentorspaceAnswersDefinitions.map((definition) => MentorAnswers.define(definition));
+  }
+  if (MentorQuestions.find().count() === 0) {
+    console.log('Defining MentorQuestions'); // eslint-disable-line no-console
+    mentorspaceQuestionsDefinitions.map((definition) => MentorQuestions.define(definition));
+  }
+  if (Teasers.find().count() === 0) {
+    console.log('Defining Teasers');  // eslint-disable-line no-console
+    teaserDefinitions.map((definition) => Teasers.define(definition));
   }
   if (exampleStudents) {
     exampleStudents.forEach((student) => {
@@ -143,6 +171,10 @@ Meteor.startup(() => {
       }
       return false;
     });
+  }
+  if (Feed.find().count() === 0) {
+    console.log('Defining Feed');  // eslint-disable-line no-console
+    feedDefinitions.map((definition) => Feed.define(definition));
   }
   if (defaultAdminAccount) {
     const admin = defaultAdminAccount;

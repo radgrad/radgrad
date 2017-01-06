@@ -1,0 +1,18 @@
+<template name="Advisor_Log_Viewer">
+  <div class="ui padded container segment" style="margin-bottom: 0 !important;">
+    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">ADVISOR LOG</h4></div>
+    {{#each log in logs}}
+      <div class="content">
+        <div class="header">
+          {{logDate log}}
+        </div>
+        <div class="meta">
+          {{logAdvisorName log}}
+        </div>
+        <div class="description">
+          {{log.text}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</template>

@@ -13,7 +13,7 @@ export function makeSampleUser(role = ROLE.STUDENT) {
   const firstName = 'Joe';
   const lastName = 'User';
   const uniqueString = moment().format('YYYYMMDDHHmmssSSSSS');
-  const slug = `User-${uniqueString}`;
+  const slug = `user-${uniqueString}`;
   const email = `joeuser${uniqueString}@hawaii.edu`;
   const password = 'foo';
   return Users.define({ firstName, lastName, slug, email, role, password });

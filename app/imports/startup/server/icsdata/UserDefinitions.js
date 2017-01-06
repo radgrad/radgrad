@@ -13,6 +13,7 @@ export const userDefinitions = [
     slug: 'johnson',
     email: 'johnson@hawaii.edu',
     password: 'foo',
+    picture: '/images/mockup/johnson.jpg',
     role: ROLE.FACULTY,
     uhID: '8765-4321',
   },
@@ -59,6 +60,7 @@ export const userDefinitions = [
     email: 'cmoore@hawaii.edu',
     role: ROLE.ADVISOR,
     password: 'foo',
+    picture: '/images/mockup/cmoore.jpg',
     uhID: '1017-6869',
   },
   {
@@ -67,6 +69,7 @@ export const userDefinitions = [
     slug: 'glau',
     email: 'glau@hawaii.edu',
     role: ROLE.ADVISOR,
+    picture: '/images/mockup/glau.jpg',
     password: 'foo',
     uhID: '8765-4315',
   },

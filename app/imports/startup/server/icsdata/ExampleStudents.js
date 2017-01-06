@@ -1,6 +1,5 @@
 /**
  * Some example students.
- * @type {[*]}
  */
 export const exampleStudents = [
   {
@@ -8,7 +7,8 @@ export const exampleStudents = [
     lastName: 'Kealoha',
     slug: 'abi',
     email: 'abi@hawaii.edu',
-    password: 'changeAbi',
+    password: 'foo',
+    picture: '/images/mockup/abi.jpg',
     uhID: '1234-5678',
   },
   {
@@ -16,7 +16,8 @@ export const exampleStudents = [
     lastName: 'Persona',
     slug: 'alfred',
     email: 'alfred@hawaii.edu',
-    password: 'changeAlfred',
+    password: 'foo',
+    picture: '/images/mockup/alfred.png',
     uhID: '1234-5679',
   },
   {
@@ -24,7 +25,12 @@ export const exampleStudents = [
     lastName: 'Keanu',
     slug: 'betty',
     email: 'betty@hawaii.edu',
-    password: 'changeBetty',
+    password: 'foo',
+    picture: '/images/mockup/betty.jpg',
+    interests: ['algorithms', 'android'],
+    careerGoals: ['data-scientist'],
+    website: 'http://keanu.github.io/',
+    desiredDegree: 'bs-cs',
     uhID: '1234-5680',
   },
   {
@@ -32,7 +38,8 @@ export const exampleStudents = [
     lastName: 'Sherry',
     slug: 'charley',
     email: 'charley@hawaii.edu',
-    password: 'changeCharley',
+    password: 'foo',
+    picture: '/images/mockup/charley.jpg',
     uhID: '1234-5681',
   },
   {
@@ -40,7 +47,8 @@ export const exampleStudents = [
     lastName: 'Zwick',
     slug: 'ella',
     email: 'ella@hawaii.edu',
-    password: 'changeElla',
+    password: 'foo',
+    picture: '/images/mockup/ella.jpg',
     uhID: '1234-5682',
   },
 ];

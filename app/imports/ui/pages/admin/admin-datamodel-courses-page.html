@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_Courses_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      {{#if displayUpdateWidget}}
+        {{> Update_Course_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Course_Widget }}
+      {{/if}}
+      {{> List_Courses_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+
+</template>

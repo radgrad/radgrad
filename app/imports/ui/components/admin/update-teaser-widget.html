@@ -1,0 +1,27 @@
+<template name="Update_Teaser_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE TEASER</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label="Title" name="title" value=teaser.title errorMessage=(fieldError "title") required=true }}
+        {{> Input_Form_Field label="Slug" name="slug" value=slug errorMessage=(fieldError "slug") disabled=true }}
+        {{> Input_Form_Field label="Author" name="author" value=teaser.author errorMessage=(fieldError "author") required=true}}
+      </div>
+
+      <div class="fields">
+        {{> Input_Form_Field label="Duration" name="duration" value=teaser.duration errorMessage=(fieldError "duration")}}
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
+        {{> Input_Form_Field label="URL" name="url" value=teaser.url errorMessage=(fieldError "url") required="true" }}
+      </div>
+
+      {{> Input_Form_Field label="Description" name="description" value=teaser.description errorMessage=(fieldError "description") required=true}}
+
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The Teaser was successfully updated.  Press cancel to continue."}}
+    </form>
+  </div>
+
+</template>

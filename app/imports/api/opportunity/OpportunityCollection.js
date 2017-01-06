@@ -41,8 +41,8 @@ class OpportunityCollection extends BaseInstanceCollection {
   /**
    * Defines a new Opportunity.
    * @example
-   * Opportunitys.define({ name: 'ATT Hackathon 2015',
-   *                       slug: 'hack15',
+   * Opportunitys.define({ name: 'ATT Hackathon',
+   *                       slug: 'att-hackathon',
    *                       description: 'Programming challenge at Sacred Hearts Academy, $10,000 prize',
    *                       opportunityType: 'event',
    *                       sponsor: 'philipjohnson',
@@ -55,8 +55,9 @@ class OpportunityCollection extends BaseInstanceCollection {
    * startActive, and endActive.
    * Slug must not be previously defined.
    * OpportunityType and sponsor must be defined slugs.
-   * Interests must be a (possibly empty) array of interest slugs.
-   * Sponsor must be a User with role 'FACULTY'.
+   * Interests must be a (possibly empty) array of interest slugs or IDs.
+   * Semesters must be a (possibly empty) array of semester slugs or IDs.
+   * Sponsor must be a User with role 'FACULTY', 'ADVISOR', or 'ADMIN'.
    * ICE must be a valid ICE object.
    * MoreInformation is optional, but if supplied should be a URL.
    * IndependentStudy is optional and defaults to false.
@@ -70,15 +71,12 @@ class OpportunityCollection extends BaseInstanceCollection {
 
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);
     const sponsorID = Users.getID(sponsor);
-    Users.assertInRole(sponsorID, [ROLE.FACULTY, ROLE.ADVISOR]);
+    Users.assertInRole(sponsorID, [ROLE.FACULTY, ROLE.ADVISOR, ROLE.ADMIN]);
     assertICE(ice);
     const interestIDs = Interests.getIDs(interests);
     // Define the slug
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const semesterIDs = [];
-    semesters.forEach((semSlug) => {
-      semesterIDs.push(Semesters.findIdBySlug(semSlug));
-    });
+    const semesterIDs = Semesters.getIDs(semesters);
     // Guarantee that independentStudy is a boolean.
     /* eslint no-param-reassign: "off" */
     independentStudy = !!independentStudy;
@@ -100,14 +98,14 @@ class OpportunityCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Returns the Opportunity associated with the Opportunity with the given instanceID.
+   * Returns the OpportunityType associated with the Opportunity with the given instanceID.
    * @param instanceID The id of the Opportunity.
    * @returns {Object} The associated Opportunity.
    * @throws {Meteor.Error} If instanceID is not a valid ID.
    */
-  getOpportunityInstanceDoc(instanceID) {
+  getOpportunityTypeDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this._collection.findOne({ _id: instanceID });
     return OpportunityTypes.findDoc(instance.opportunityTypeID);
   }
 
@@ -119,6 +117,16 @@ class OpportunityCollection extends BaseInstanceCollection {
   removeIt(opportunity) {
     // TODO: check for defined OpportunityInstances before deletion.
     super.removeIt(opportunity);
+  }
+
+  /**
+   * Returns the slug for the given opportunity ID.
+   * @param opportunityID the opportunity ID.
+   */
+  getSlug(opportunityID) {
+    this.assertDefined(opportunityID);
+    const courseDoc = this.findDoc(opportunityID);
+    return Slugs.findDoc(courseDoc.slugID).name;
   }
 }
 

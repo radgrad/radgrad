@@ -1,0 +1,12 @@
+<template name="Interest_Types_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Interest Type</label>
+    <select class="ui dropdown" name="interestType">
+      <option value="">Select Interest Type</option>
+      {{#each interestType in interestTypes}}
+        <option value="{{interestType._id}}" selected="{{isSelected interestType._id selectedInterestTypeID}}">{{interestType.name}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

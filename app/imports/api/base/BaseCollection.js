@@ -63,9 +63,9 @@ class BaseCollection {
    */
   findDoc(name) {
     const doc = (
-            this._collection.findOne(name)) ||
+            this._collection.findOne(name) ||
             this._collection.findOne({ name }) ||
-            this._collection.findOne({ _id: name });
+            this._collection.findOne({ _id: name }));
     if (!doc) {
       throw new Meteor.Error(`${name} is not a defined ${this._type}`);
     }
@@ -82,6 +82,19 @@ class BaseCollection {
   find(selector, options) {
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
     return this._collection.find(theSelector, options);
+  }
+
+  /**
+   * Runs a simplified version of update on this collection.
+   * @see {@link http://docs.meteor.com/api/collections.html#Mongo-Collection-update}
+   * @param { Object } selector A MongoDB selector.
+   * @param { Object } modifier A MongoDB modifier
+   * @returns true
+   */
+  update(selector, modifier) {
+    const theSelector = (typeof selector === 'undefined') ? {} : selector;
+    this._collection.update(theSelector, modifier);
+    return true;
   }
 
   /**

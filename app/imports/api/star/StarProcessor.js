@@ -5,6 +5,7 @@ import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 
+
 /** @module StarProcessor */
 
 /**
@@ -99,37 +100,40 @@ function filterParsedData(parsedData) {
  * @returns { Array } A list of objects with fields: semester, course, note, verified, grade, and creditHrs.
  */
 export function processStarCsvData(student, csvData) {
-  const parsedData = Papa.parse(csvData);
-  if (parsedData.errors.length !== 0) {
-    throw new Meteor.Error(`Error found when parsing STAR data for ${student}: ${parsedData.errors}`);
-  }
-  const headers = parsedData.data[0];
-  // console.log('parsed data', parsedData);
-  const semesterIndex = _.findIndex(headers, (str) => str === 'Semester');
-  const nameIndex = _.findIndex(headers, (str) => str === 'Course Name');
-  const numberIndex = _.findIndex(headers, (str) => str === 'Course Number');
-  const creditsIndex = _.findIndex(headers, (str) => str === 'Credits');
-  const gradeIndex = _.findIndex(headers, (str) => str === 'Grade');
-  if (_.every([semesterIndex, nameIndex, numberIndex, creditsIndex, gradeIndex], (num) => num === -1)) {
-    throw new Meteor.Error(`Required CSV header field was not found in ${headers}`);
-  }
-  const filteredData = filterParsedData(parsedData);
+  if (Papa) {
+    const parsedData = Papa.parse(csvData);
+    if (parsedData.errors.length !== 0) {
+      throw new Meteor.Error(`Error found when parsing STAR data for ${student}: ${parsedData.errors}`);
+    }
+    const headers = parsedData.data[0];
+    // console.log('parsed data', parsedData);
+    const semesterIndex = _.findIndex(headers, (str) => str === 'Semester');
+    const nameIndex = _.findIndex(headers, (str) => str === 'Course Name');
+    const numberIndex = _.findIndex(headers, (str) => str === 'Course Number');
+    const creditsIndex = _.findIndex(headers, (str) => str === 'Credits');
+    const gradeIndex = _.findIndex(headers, (str) => str === 'Grade');
+    if (_.every([semesterIndex, nameIndex, numberIndex, creditsIndex, gradeIndex], (num) => num === -1)) {
+      throw new Meteor.Error(`Required CSV header field was not found in ${headers}`);
+    }
+    const filteredData = filterParsedData(parsedData);
 
-  // filteredData.map((data) => console.log('\n*** START ***\n', data, '\n*** END ***\n'));
+    // filteredData.map((data) => console.log('\n*** START ***\n', data, '\n*** END ***\n'));
 
-  // Create array of objects containing raw data to facilitate error message during processing.
-  const dataObjects = _.map(filteredData, (data) => {
-    const obj = {
-      semester: data[semesterIndex],
-      name: data[nameIndex],
-      number: data[numberIndex],
-      credits: data[creditsIndex],
-      grade: data[gradeIndex],
-      student,
-    };
-    return obj;
-  });
-  // Now we take that array of objects and transform them into CourseInstance data objects.
-  return _.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject));
+    // Create array of objects containing raw data to facilitate error message during processing.
+    const dataObjects = _.map(filteredData, (data) => {
+      const obj = {
+        semester: data[semesterIndex],
+        name: data[nameIndex],
+        number: data[numberIndex],
+        credits: data[creditsIndex],
+        grade: data[gradeIndex],
+        student,
+      };
+      return obj;
+    });
+    // Now we take that array of objects and transform them into CourseInstance data objects.
+    return _.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject));
+  }
+  // must be on the client.
+  return null;
 }
-

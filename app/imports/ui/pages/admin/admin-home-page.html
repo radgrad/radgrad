@@ -1,16 +1,8 @@
 <template name="Admin_Home_Page">
   <div class="layout-page">
     {{#if Template.subscriptionsReady}}
-      <div class="ui text container">
-
-        <h2>Welcome to the Admin Home Page.</h2>
-
-        {{> Session_State_Segment}}
-
-        <p>{{> Student_Selector}}</p>
-        <p>{{> Advisor_Selector}}</p>
-        <p>{{> Faculty_Selector}}</p>
-        {{> Mentor_Selector}}
+      <div class="ui container">
+        {{> Retrieve_User_Widget}}
       </div>
     {{else}}
       {{> Loading}}

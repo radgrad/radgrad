@@ -9,9 +9,9 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { SessionState, sessionKeys } from '../../../startup/client/session-state';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
@@ -21,7 +21,7 @@ const availableCourses = () => {
         return true;
       }
       const ci = CourseInstances.find({
-        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+        studentID: getUserIdFromRoute(),
         courseID: course._id,
       }).fetch();
       return ci.length === 0;
@@ -68,7 +68,7 @@ const availableOpportunities = () => {
   if (opportunities.length > 0 && Template.instance().state.get('semester')) {
     const filtered = lodash.filter(opportunities, function filter(opportunity) {
       const oi = OpportunityInstances.find({
-        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+        studentID: getUserIdFromRoute(),
         courseID: opportunity._id,
       }).fetch();
       return oi.length === 0;
@@ -149,7 +149,7 @@ Template.Semester_List.helpers({
     if (Template.instance().state.get('semester')) {
       const courses = CourseInstances.find({
         semesterID: Template.instance().state.get('semester')._id,
-        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+        studentID: getUserIdFromRoute(),
       }, { sort: { note: 1 } }).fetch();
       courses.forEach((c) => {
         if (CourseInstances.isICS(c._id)) {
@@ -159,13 +159,21 @@ Template.Semester_List.helpers({
     }
     return ret;
   },
+  isCurrentSemester() {
+    const semester = Template.instance().state.get('semester');
+    const currentSemester = Template.instance().state.get('currentSemester');
+    if (semester && currentSemester) {
+      return semester.sortBy === currentSemester.sortBy;
+    }
+    return false;
+  },
   isFuture() {
     const semester = Template.instance().state.get('semester');
     const currentSemester = Template.instance().state.get('currentSemester');
     if (semester && currentSemester) {
       return semester.sortBy >= currentSemester.sortBy;
     }
-    return null;
+    return false;
   },
   isGrade(courseInstanceID, grade) {
     try {
@@ -181,7 +189,7 @@ Template.Semester_List.helpers({
     if (Template.instance().state.get('semester')) {
       const courses = CourseInstances.find({
         semesterID: Template.instance().state.get('semester')._id,
-        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+        studentID: getUserIdFromRoute(),
       }).fetch();
       courses.forEach((c) => {
         if (!CourseInstances.isICS(c._id)) {
@@ -243,7 +251,7 @@ Template.Semester_List.helpers({
     if (Template.instance().state.get('semester')) {
       const opps = OpportunityInstances.find({
         semesterID: Template.instance().state.get('semester')._id,
-        studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+        studentID: getUserIdFromRoute(),
       }).fetch();
       return opps;
     }
@@ -269,7 +277,7 @@ Template.Semester_List.events({
         checkPrerequisites();
       } else {
         const opportunities = OpportunityInstances.find({
-          studentID: SessionState.get(sessionKeys.CURRENT_STUDENT_ID),
+          studentID: getUserIdFromRoute(),
           _id: id,
         }).fetch();
         if (opportunities.length > 0) {
@@ -288,13 +296,13 @@ Template.Semester_List.events({
     const semStr = Semesters.toString(semester._id, false);
     const semSplit = semStr.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
+    const username = Users.findDoc(getUserIdFromRoute()).username;
     const ci = {
       semester: semSlug,
       course: courseSlug,
       verified: false,
       note: event.target.text,
-      grade: '***',
+      grade: 'B',
       student: username,
     };
     CourseInstances.define(ci);
@@ -325,6 +333,7 @@ Template.Semester_List.events({
             hoverable: true,
             lastResort: 'right center',
           });
+      template.$('.ui.selection.dropdown').dropdown();
     });
   },
   'click .item.addOpportunity': function clickItemAddOpportunity(event) {
@@ -338,7 +347,7 @@ Template.Semester_List.events({
     const semStr = Semesters.toString(semester._id, false);
     const semSplit = semStr.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = Users.findDoc(SessionState.get(sessionKeys.CURRENT_STUDENT_ID)).username;
+    const username = Users.findDoc(getUserIdFromRoute()).username;
     const oi = {
       semester: semSlug,
       opportunity: oppSlug.name,
@@ -352,6 +361,18 @@ Template.Semester_List.events({
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;
     CourseInstances.updateGrade(div.id, grade);
+  },
+  'click .jsDelCourse': function clickJsDelCourse(event) {
+    // event.preventDefault();
+    // console.log(event.target);
+    const id = event.target.id;
+    CourseInstances.removeIt(id);
+  },
+  'click .jsDelOpp': function clickJsDelOpp(event) {
+    event.preventDefault();
+    // console.log(event.target);
+    const id = event.target.id;
+    OpportunityInstances.removeIt(id);
   },
 });
 
@@ -367,7 +388,7 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
   }
   const template = this;
   Tracker.afterFlush(() => {
-    template.$('.ui.icon.button')
+    template.$('.ui.basic.button')
         .popup({
           on: 'click',
         });
@@ -404,6 +425,7 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
           hoverable: true,
           lastResort: 'right center',
         });
+    template.$('.ui.selection.dropdown').dropdown();
   });
 });
 

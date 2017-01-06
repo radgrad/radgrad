@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "meteor --settings ../config/settings.development.json --no-release-check",
-    "lint": "eslint ./imports",
+    "lint": "eslint --quiet ./imports",
+    "lint-loud": "eslint ./imports",
     "pretest": "npm run lint --silent",
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
@@ -11,7 +12,9 @@
     "mddocs": "jsdoc2md imports/**/*.js > ../gitbook/api/jsdocs.md"
   },
   "dependencies": {
+    "babel-runtime": "^6.20.0",
     "bcrypt": "^0.8.7",
+    "chai": "^3.5.0",
     "meteor-node-stubs": "~0.2.0"
   },
   "devDependencies": {
@@ -22,7 +25,7 @@
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-meteor": "*",
+    "eslint-plugin-meteor": "^4.0.1",
     "eslint-plugin-react": "^6.4.1",
     "jsdoc": "^3.4.0",
     "jsdoc-to-markdown": "^2.0.0"

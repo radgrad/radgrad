@@ -21,7 +21,7 @@ export const opportunityTypeDefinitions = [
  */
 const researchOpportunityDefinitions = [
   {
-    name: 'Apps for high latency communication',
+    name: 'HI-SEAS',
     slug: 'apps-for-high-latency-communication',
     description: 'HI-SEAS (Hawaii Space Exploration Analog and Simulation) simulates the conditions of long-duration human space exploration. Due to the distance between Earth and Mars, it takes 4-24 minutes for a signal to get from one to the other. However, most communication software is designed for much lower latency. For this project, you will design and implement a communications/social-media app that can handle high latency gracefully.',
     opportunityType: 'research',
@@ -33,7 +33,7 @@ const researchOpportunityDefinitions = [
     ice: { i: 25, c: 0, e: 25 },
   },
   {
-    name: 'Data analytics for solar energy',
+    name: 'Solar Energy Analytics',
     slug: 'data-analytics-for-solar-energy',
     description: 'Integrating renewable energy to the power grid requires grid operators to balance energy generation with consumption. This project investigates the use of various data mining techniques to forecast solar irradiance using a variety of time-series data sources. We are looking for motivated students interested in data integration, fusion, mining and visualization.',
     opportunityType: 'research',
@@ -57,7 +57,7 @@ const researchOpportunityDefinitions = [
     ice: { i: 25, c: 0, e: 25 },
   },
   {
-    name: 'Security Enhancement of Commercial Airliner through Privileging Air Trafﬁc Controllers in Emergency',
+    name: 'Airline Security',
     slug: 'security-enhancement-of-commercial-airliner',
     description: 'Malicious controllers can possibly manipulate a flight control system e.g. aircraft or drones. from various channels, e.g. autonomic control devices, remote cyber controller, or human operators. Thus, pilots could suicide the aircraft, the auto-pilot might be infected by malware, and air traffic controllers can mishandle the drone. To better mitigate the potential risks, we hope to propose theoretical framework model in physical, human and cyber triad, a more secure air traffic control system, and a more safe task allocation mechanism. Students who are interested in aviation, risk control, and human-machine interface are highly encouraged to apply. ',
     opportunityType: 'research',
@@ -69,7 +69,7 @@ const researchOpportunityDefinitions = [
     ice: { i: 25, c: 0, e: 25 },
   },
   {
-    name: 'AllNet: networking among mobile devices',
+    name: 'AllNet',
     slug: 'allnet',
     description: 'My cellphone has a radio that could easily communicate with the radio in your cellphone. However, currently they do not, even when they are smartphones with wifi (802.11) capability. The AllNet project aims to allow personal devices to communicate directly with each other. We are looking for students who want to learn how to get different devices, both computers and cellphones/mobiles, to talk directly with each other. We are also interested in students who think they can adapt the current code to run as an app on their favorite mobile device. ',
     opportunityType: 'research',
@@ -115,7 +115,7 @@ const clubOpportunityDefinitions = [
  */
 const eventOpportunityDefinitions = [
   {
-    name: 'Shidler Business Plan Competition',
+    name: 'Business Plan Competition',
     slug: 'shidler-bpc',
     description: 'The annual Shidler Business Plan competition is an intense and unique semester-long learning opportunity for UH students who aspire to pursue a business venture. The competition provides mentorship, training and resources. Winners walk away with a wealth of business savvy and substantial cash prizes. ',
     opportunityType: 'event',
@@ -137,7 +137,7 @@ const eventOpportunityDefinitions = [
     ice: { i: 10, c: 0, e: 10 },
   },
   {
-    name: 'UH Career Fair',
+    name: 'Career Fair',
     slug: 'uh-career-fair',
     description: 'The purpose of this career fair is to provide students with the “tools” and resources to make important and valuable career decisions. During the Career Fair, you will take your “first steps” toward meaningful employment by meeting with employers face to face to exchange information.',
     opportunityType: 'event',
@@ -149,19 +149,19 @@ const eventOpportunityDefinitions = [
     ice: { i: 0, c: 0, e: 10 },
   },
   {
-    name: 'IBM Watson AI XPRIZE',
+    name: 'AI XPRIZE',
     slug: 'ibm-watson-ai-xprize',
     description: 'The IBM Watson AI XPRIZE is a $5 million competition, challenging teams globally, to develop and demonstrate how humans can collaborate with powerful AI technologies to tackle the world’s grand challenges. The prize aims to accelerate adoption of AI technologies, and spark creative, innovative and audacious demonstrations of the technology that are truly scalable and solve societal grand challenges. To encourage innovation in any form, the competition is an open challenge in AI. Rather than set a single, universal goal for all teams, this competition will invite teams to each declare their own goal and solution to a grand challenge.\n\nThe IBM Watson AI XPRIZE is a four-year competition with annual milestone competitions in 2017, 2018, and 2019. The top three finalists will compete for the Grand Prize at TED 2020.',
     opportunityType: 'event',
     sponsor: 'glau',
     semesters: ['Summer-2016', 'Fall-2016', 'Spring-2017', 'Summer-2017', 'Fall-2017', 'Spring-2018', 'Summer-2018',
-    'Fall-2018', 'Spring-2019', 'Summer-2019', 'Fall-2019', 'Spring-2020'],
+      'Fall-2018', 'Spring-2019', 'Summer-2019', 'Fall-2019', 'Spring-2020'],
     interests: ['artificial-intelligence', 'application-development'],
     moreInformation: 'http://developer.ibm.com/event/ibm-watson-ai-xprize/',
     ice: { i: 20, c: 0, e: 20 },
   },
   {
-    name: 'AT&T IoT Hackathon',
+    name: 'AT&T Hackathon',
     slug: 'att-iot-hackathon',
     description: 'Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\n    If so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.',
     opportunityType: 'event',

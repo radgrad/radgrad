@@ -46,12 +46,18 @@ export function assertICE(obj) {
  */
 export function makeCourseICE(course, grade) {
   // TODO: Hardcoding 'other' is a bad idea.
-  const i = 0;
+  let i = 0;
   let c = 0;
   const e = 0;
   // NonICS courses get no ICE points.
   if (course === 'other') {
     return { i, c, e };
+  }
+  // ICS499 gets experience and innovation points.
+  if (course === 'ics499') {
+    if (grade.includes('A') || grade.includes('B')) {
+      i = 25;
+    }
   }
   // ICS courses get competency points if you get an A or a B.
   if (grade.includes('B')) {
@@ -95,7 +101,51 @@ export function getPlanningICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
   docs.map((instance) => {
     if (!(isICE(instance.ice))) {
-      throw new Meteor.Error(`getTotalICE passed ${instance} without a valid .ice field.`);
+      throw new Meteor.Error(`getPlanningICE passed ${instance} without a valid .ice field.`);
+    }
+    total.i += instance.ice.i;
+    total.c += instance.ice.c;
+    total.e += instance.ice.e;
+    return null;
+  });
+  return total;
+}
+
+/**
+ * Returns an ICE object that represents the earned ICE points from the passed Course\Opportunity Instance Documents.
+ * ICE values are counted only if verified is true.
+ * REPLACES getTotalICE!!!
+ * @param docs An array of CourseInstance or OpportunityInstance documents.
+ * @returns {{i: number, c: number, e: number}} The ICE object.
+ */
+export function getEarnedICE(docs) {
+  const total = { i: 0, c: 0, e: 0 };
+  docs.map((instance) => {
+    if (!(isICE(instance.ice))) {
+      throw new Meteor.Error(`getEarnedICE passed ${instance} without a valid .ice field.`);
+    }
+    if (instance.verified === true) {
+      total.i += instance.ice.i;
+      total.c += instance.ice.c;
+      total.e += instance.ice.e;
+    }
+    return null;
+  });
+  return total;
+}
+
+/**
+ * Returns an ICE object that represents the total ICE points from the passed Course\Opportunity Instance Documents.
+ * ICE values are counted whether or not they are verified.
+ * REPLACES getPlanningICE!
+ * @param docs An array of CourseInstance or OpportunityInstance documents.
+ * @returns {{i: number, c: number, e: number}} The ICE object.
+ */
+export function getProjectedICE(docs) {
+  const total = { i: 0, c: 0, e: 0 };
+  docs.map((instance) => {
+    if (!(isICE(instance.ice))) {
+      throw new Meteor.Error(`getProjectedICE passed ${instance} without a valid .ice field.`);
     }
     total.i += instance.ice.i;
     total.c += instance.ice.c;
