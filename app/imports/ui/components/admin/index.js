@@ -68,3 +68,6 @@ import './update-opportunity-widget.js';
 
 import './update-teaser-widget.html';
 import './update-teaser-widget.js';
+
+import './update-user-widget.html';
+import './update-user-widget.js';
