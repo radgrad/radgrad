@@ -41,7 +41,6 @@
     <div class="stretched column">
       <div class="ui padded segment">
         <div class="ui dividing header"><h4>YOUR INTERESTS</h4></div>
-        <div class="ui circular mini images">
           {{#if interests}}
             {{#each interest in interests}}
               <a class="ui label"><i style="color:white !important" class="fitted suitcase icon"></i>{{name interest}}</a>
@@ -50,14 +49,12 @@
           {{else}}
             <p>No interests added yet.</p>
           {{/if}}
-        </div>
       </div>
     </div>
 
     <div class="stretched column">
       <div class="ui padded segment">
         <div class="ui dividing header"><h4>YOUR OPPORTUNITIES</h4></div>
-        <div class="ui circular mini images">
           {{#if careerGoals}}
             {{#each careerGoal in careerGoals}}
               <a class="ui label"><i style="color:white !important" class="fitted suitcase icon"></i>{{name careerGoal}}</a>
@@ -66,7 +63,6 @@
           {{else}}
             <p>No opportunities added yet.</p>
           {{/if}}
-        </div>
       </div>
     </div>
 </div>

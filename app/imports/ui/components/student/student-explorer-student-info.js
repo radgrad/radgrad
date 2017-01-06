@@ -80,7 +80,6 @@ Template.Student_Explorer_Student_Info.helpers({
   },
   hasCourses(semester) {
     let ret = false;
-    console.log(semester);
     if ((getCoursesHelper(semester).length > 0)) {
       ret = true;
     }
