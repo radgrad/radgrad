@@ -19,6 +19,9 @@ import './add-teaser-widget.js';
 import './add-user-widget.html';
 import './add-user-widget.js';
 
+import './admin-database-menu.html';
+import './admin-database-menu.js';
+
 import './admin-datamodel-accordion.html';
 import './admin-datamodel-accordion.js';
 
@@ -68,3 +71,6 @@ import './update-opportunity-widget.js';
 
 import './update-teaser-widget.html';
 import './update-teaser-widget.js';
+
+import './update-user-widget.html';
+import './update-user-widget.js';

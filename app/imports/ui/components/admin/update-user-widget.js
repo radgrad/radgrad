@@ -11,15 +11,14 @@ import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection'
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-const addSchema = new SimpleSchema({
+const updateSchema = new SimpleSchema({
   firstName: { type: String, optional: false },
   lastName: { type: String, optional: false },
+  slug: { type: String, optional: false }, // will rename this to username
   role: { type: String, optional: false },
-  slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
   email: { type: String, optional: false },
   uhID: { type: String, optional: false },
   // remaining are optional.
-  password: { type: String, optional: true },
   desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
@@ -28,8 +27,8 @@ const addSchema = new SimpleSchema({
   website: { type: String, optional: true },
 });
 
-Template.Add_User_Widget.onCreated(function onCreated() {
-  FormUtils.setupFormWidget(this, addSchema);
+Template.Update_User_Widget.onCreated(function onCreated() {
+  FormUtils.setupFormWidget(this, updateSchema);
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
@@ -38,7 +37,10 @@ Template.Add_User_Widget.onCreated(function onCreated() {
   this.subscribe(ValidUserAccounts.getPublicationName());
 });
 
-Template.Add_User_Widget.helpers({
+Template.Update_User_Widget.helpers({
+  user() {
+    return Users.findDoc(Template.currentData().updateID.get());
+  },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },
@@ -51,20 +53,43 @@ Template.Add_User_Widget.helpers({
   roles() {
     return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
   },
+  slug() {
+    const user = Users.findDoc(Template.currentData().updateID.get());
+    return Slugs.findDoc(user.slugID).name;
+  },
+  selectedInterestIDs() {
+    const user = Users.findDoc(Template.currentData().updateID.get());
+    return user.interestIDs;
+  },
+  selectedCareerGoalIDs() {
+    const user = Users.findDoc(Template.currentData().updateID.get());
+    return user.careerGoalIDs;
+  },
+  selectedDesiredDegreeID() {
+    const user = Users.findDoc(Template.currentData().updateID.get());
+    return user.desiredDegreeID;
+  },
+  selectedRole() {
+    const user = Users.findDoc(Template.currentData().updateID.get());
+    return user.roles[0];
+  },
 });
 
-Template.Add_User_Widget.events({
+Template.Update_User_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
+    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.resetValidation();
-    addSchema.clean(newData);
-    instance.context.validate(newData);
+    updateSchema.clean(updatedData);
+    instance.context.validate(updatedData);
     if (instance.context.isValid()) {
-      ValidUserAccounts.define({ username: newData.slug });
-      Meteor.call('Users.define', newData, (error) => {
+      FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
+      FormUtils.renameKey(updatedData, 'careerGoals', 'careerGoalIDs');
+      FormUtils.renameKey(updatedData, 'desiredDegree', 'desiredDegreeID');
+      FormUtils.renameKey(updatedData, 'slug', 'username');
+      Meteor.call('Users.update', updatedData, (error) => {
         if (error) {
-          console.log('Error during new user creation: ', error);
+          console.log('Error during user update: ', error);
         }
         FormUtils.indicateSuccess(instance, event);
       });
@@ -72,4 +97,5 @@ Template.Add_User_Widget.events({
       FormUtils.indicateError(instance);
     }
   },
+  'click .jsCancel': FormUtils.processCancelButtonClick,
 });
