@@ -57,6 +57,7 @@ export function makeCourseICE(course, grade) {
   if (course === 'ics499') {
     if (grade.includes('A') || grade.includes('B')) {
       i = 25;
+      // TODO: Add experience points.
     }
   }
   // ICS courses get competency points if you get an A or a B.
