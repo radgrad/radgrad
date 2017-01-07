@@ -83,7 +83,6 @@ class FeedCollection extends BaseInstanceCollection {
       const oppDate = Semesters.toString(opportunity.semesterID, true);
       const oppName = Slugs.findDoc((Opportunities.findDoc(opportunityID).slugID)).name;
       slugID = Slugs.define({ name: `feed-${username}-${oppName}-${oppDate}-new`, entityName: this.getType() });
-      console.log(`feed-${username}-${oppName}-${oppDate}-new`);
       picture = Users.findDoc(studentID).picture;
     }
     const feedID = this._collection.insert({ slugID, studentID, opportunityID, courseID,
