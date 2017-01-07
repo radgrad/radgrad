@@ -210,7 +210,6 @@ class CourseInstanceCollection extends BaseCollection {
 export const CourseInstances = new CourseInstanceCollection();
 
 if (Meteor.isServer) {
-  const instance = this;
   // eslint-disable-next-line meteor/audit-argument-checks
   Meteor.publish(`${CourseInstances._collectionName}.Public`, function publicPublish(courseID) {
     // check the opportunityID.
@@ -218,6 +217,6 @@ if (Meteor.isServer) {
       opportunityID: { type: String },
     }).validate({ courseID });
 
-    return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
+    return CourseInstances._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
   });
 }
