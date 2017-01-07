@@ -5,7 +5,7 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';
-import { MentorQuestions } from '../../../api/mentorspace/MentorQuestionsCollection.js'
+import { MentorQuestions } from '../../../api/mentorspace/MentorQuestionsCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -32,7 +32,7 @@ Template.Student_MentorSpace_Page.helpers({
   // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
 
   listQuestions() {
-    return MentorQuestions.find()
+    return MentorQuestions.find({});
   },
 
   listMentors() {
