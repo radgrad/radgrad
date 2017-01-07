@@ -53,6 +53,16 @@ class CareerGoalCollection extends BaseInstanceCollection {
     Slugs.updateEntityID(slugID, docID);
     return docID;
   }
+
+  /**
+   * Returns a list of Career Goal names corresponding to the passed list of CareerGoal docIDs.
+   * @param instanceIDs A list of Career Goal docIDs.
+   * @returns { Array }
+   * @throws { Meteor.Error} If any of the instanceIDs cannot be found.
+   */
+  findNames(instanceIDs) {
+    return instanceIDs.map(instanceID => this.findDoc(instanceID).name);
+  }
 }
 
 /**

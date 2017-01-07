@@ -1,5 +1,5 @@
 <template name="Interests_Form_Field">
-  <div class="required field">
+  <div class="{{#if required}}required{{/if}} field">
     <label>Interest(s)</label>
     <select multiple="" class="ui dropdown" name="interests">
       <option value="">Select Interest(s)</option>

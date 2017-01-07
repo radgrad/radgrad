@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_Interests_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      {{#if displayUpdateWidget}}
+        {{> Update_Interest_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Interest_Widget }}
+      {{/if}}
+      {{> List_Interests_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+
+</template>

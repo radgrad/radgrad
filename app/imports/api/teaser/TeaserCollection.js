@@ -30,12 +30,12 @@ class TeaserCollection extends BaseInstanceCollection {
    * Defines a new Teaser and its associated Slug.
    * @example
    * Teaser.define({ title: 'ACM Webmasters',
-   *                    slugID: 'acm-webmasters',
-   *                    author: 'Torlief Nielson'
-   *                    url: 'https://www.youtube.com/watch?v=OI4CXULK3tw'
-   *                    description: 'Learn web development by helping to develop and maintain the ACM Manoa website.',
-   *                    duration: '0:39'
-   *                    interests: ['html', 'javascript', 'css', 'web-development'],
+   *                 slug: 'acm-webmasters',
+   *                 author: 'Torlief Nielson'
+   *                 url: 'https://www.youtube.com/watch?v=OI4CXULK3tw'
+   *                 description: 'Learn web development by helping to develop and maintain the ACM Manoa website.',
+   *                 duration: '0:39'
+   *                 interests: ['html', 'javascript', 'css', 'web-development'],
    * @param { Object } description Object with keys title, slug, URL, description, duration. interestIDs.
    * Slug must be previously undefined.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
@@ -47,13 +47,11 @@ class TeaserCollection extends BaseInstanceCollection {
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-
     const teaserID = this._collection.insert({ title, slugID, author, url, description, duration, interestIDs });
     // Connect the Slug to this teaser
     Slugs.updateEntityID(slugID, teaserID);
     return teaserID;
   }
-
 }
 
 /**

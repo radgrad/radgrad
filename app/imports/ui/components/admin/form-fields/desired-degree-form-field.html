@@ -1,0 +1,12 @@
+<template name="Desired_Degree_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Desired Degree</label>
+    <select class="ui dropdown" name="desiredDegree">
+      <option value="">Select Desired Degree</option>
+      {{#each desiredDegree in desiredDegrees}}
+        <option value="{{desiredDegree._id}}" selected="{{isSelected desiredDegree._id selectedDesiredDegreeID}}">{{desiredDegree.name}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

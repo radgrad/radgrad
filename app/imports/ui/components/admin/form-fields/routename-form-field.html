@@ -1,0 +1,12 @@
+<template name="RouteName_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Route Name</label>
+    <select class="ui dropdown" name="routeName">
+      <option value="">Select Route Name</option>
+      {{#each routeName in routeNames}}
+        <option value="{{routeName}}" selected="{{isSelected routeName selectedRouteName}}">{{routeName}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

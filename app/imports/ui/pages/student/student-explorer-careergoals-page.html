@@ -1,0 +1,11 @@
+<template name="Student_Explorer_CareerGoals_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Student_Explorer_Layout}}
+      {{> Student_Explorer_List_Career_Goals_Widget updateID=updateID}}
+    {{/Student_Explorer_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+
+</template>

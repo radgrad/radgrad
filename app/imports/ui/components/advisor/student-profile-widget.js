@@ -14,6 +14,8 @@ import { StarDataLogs } from '../../../api/star/StarDataLogCollection';
 // import { StarUploads } from '../../../api/star/StarUploadCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
+// TODO: Remove the sessionKeys stuff.
+
 Template.Student_Profile_Widget.helpers({
   careerGoals() {
     return CareerGoals.find().fetch();
@@ -43,6 +45,7 @@ Template.Student_Profile_Widget.helpers({
     return false;
   },
   desiredDegree() {
+    // TODO: Need to use DesiredDegrees collection, not hard-wire the strings. This won't work now.
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
       if (user.desiredDegree === 'BS_CS') {
@@ -104,7 +107,12 @@ Template.Student_Profile_Widget.events({
     event.preventDefault();
     const student = Users.findDoc(instance.state.get(sessionKeys.CURRENT_STUDENT_ID));
     const choice = event.target.parentElement.getElementsByTagName('input')[0].value;
-    Users.setDesiredDegree(student._id, choice);
+    console.log(choice);
+    if (choice === 'BS_CS') {
+      Users.setDesiredDegree(student._id, 'bs-cs');
+    } else {
+      Users.setDesiredDegree(student._id, 'ba-ics');
+    }
   },
   'click .jsInterests': function clickJsInterests(event, instance) {
     event.preventDefault();
