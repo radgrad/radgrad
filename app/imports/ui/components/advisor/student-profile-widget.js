@@ -8,10 +8,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { sessionKeys } from '../../../startup/client/session-state';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { StarDataLogs } from '../../../api/star/StarDataLogCollection';
-// import { StarUploads } from '../../../api/star/StarUploadCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
 // TODO: Remove the sessionKeys stuff.
@@ -33,14 +33,20 @@ Template.Student_Profile_Widget.helpers({
   desireBA() {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
-      return user.desiredDegree === 'BA_ICS';
+      if (user.desiredDegreeID) {
+        const degree = DesiredDegrees.findDoc({ _id: user.desiredDegreeID });
+        return degree.shortName.startsWith('B.A.');
+      }
     }
     return false;
   },
   desireBS() {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
-      return user.desiredDegree === 'BS_CS';
+      if (user.desiredDegreeID) {
+        const degree = DesiredDegrees.findDoc({ _id: user.desiredDegreeID });
+        return degree.shortName.startsWith('B.S.');
+      }
     }
     return false;
   },
@@ -48,10 +54,11 @@ Template.Student_Profile_Widget.helpers({
     // TODO: Need to use DesiredDegrees collection, not hard-wire the strings. This won't work now.
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
-      if (user.desiredDegree === 'BS_CS') {
-        return 'B.S. CS';
-      } else if (user.desiredDegree === 'BA_ICS') {
-        return 'B.A. ICS';
+      if (user.desiredDegreeID) {
+        const degree = DesiredDegrees.findDoc({ _id: user.desiredDegreeID });
+        if (degree) {
+          return degree.shortName;
+        }
       }
     }
     return 'Select Desired Degree';
@@ -107,7 +114,6 @@ Template.Student_Profile_Widget.events({
     event.preventDefault();
     const student = Users.findDoc(instance.state.get(sessionKeys.CURRENT_STUDENT_ID));
     const choice = event.target.parentElement.getElementsByTagName('input')[0].value;
-    console.log(choice);
     if (choice === 'BS_CS') {
       Users.setDesiredDegree(student._id, 'bs-cs');
     } else {
@@ -165,6 +171,7 @@ Template.Student_Profile_Widget.onCreated(function studentProfileOnCreated() {
   } else {
     this.state = new ReactiveDict();
   }
+  this.subscribe(DesiredDegrees.getPublicationName());
 });
 
 Template.Student_Profile_Widget.onRendered(function studentProfileOnRendered() {

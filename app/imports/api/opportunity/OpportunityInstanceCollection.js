@@ -152,7 +152,6 @@ class OpportunityInstanceCollection extends BaseCollection {
 export const OpportunityInstances = new OpportunityInstanceCollection();
 
 if (Meteor.isServer) {
-  const instance = this;
   // eslint-disable-next-line meteor/audit-argument-checks
   Meteor.publish(`${OpportunityInstances._collectionName}.Public`, function publicPublish(opportunityID) {
     // check the opportunityID.
@@ -160,6 +159,6 @@ if (Meteor.isServer) {
       opportunityID: { type: String },
     }).validate({ opportunityID });
 
-    return instance._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
+    return OpportunityInstances._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
   });
 }

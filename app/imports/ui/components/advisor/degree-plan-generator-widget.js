@@ -6,6 +6,7 @@ import { sessionKeys } from '../../../startup/client/session-state';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as planUtils from '../../../api/degree-program/plan-generator';
@@ -32,10 +33,9 @@ Template.Degree_Plan_Generator_Widget.helpers({
   desiredDegree() {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
-      if (user.desiredDegree === 'BS_CS') {
-        return 'B.S. CS';
-      } else if (user.desiredDegree === 'BA_ICS') {
-        return 'B.A. ICS';
+      if (user.desiredDegreeID) {
+        const degree = DesiredDegrees.findDoc({ _id: user.desiredDegreeID });
+        return degree.shortName;
       }
     }
     return '';
@@ -113,11 +113,14 @@ Template.Degree_Plan_Generator_Widget.events({
     } else {
       // TODO: CAM figure out which AYs to remove.
     }
-    if (student.desiredDegree === 'BS_CS') {
-      planUtils.generateBSDegreePlan(student, startSemester);
-    }
-    if (student.desiredDegree === 'BA_ICS') {
-      planUtils.generateBADegreePlan(student, startSemester);
+    if (student.desiredDegreeID) {
+      const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
+      if (degree.shortName.startsWith('B.S.')) {
+        planUtils.generateBSDegreePlan(student, startSemester);
+      }
+      if (degree.shortName.startsWith('B.A.')) {
+        planUtils.generateBADegreePlan(student, startSemester);
+      }
     }
     // planUtils.generateDegreePlan(template, startSemester, student);
     // FlowRouter.go(studentDegreePlannerPageRouteName);
@@ -130,6 +133,7 @@ Template.Degree_Plan_Generator_Widget.onCreated(function degreePlanGeneratorOnCr
   } else {
     this.state = new ReactiveDict();
   }
+  this.subscribe(DesiredDegrees.getPublicationName());
 });
 
 Template.Degree_Plan_Generator_Widget.onRendered(function degreePlanGeneratorOnRendered() {
