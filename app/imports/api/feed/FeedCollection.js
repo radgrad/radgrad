@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Users } from '/imports/api/user/UserCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
+import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
@@ -77,8 +78,12 @@ class FeedCollection extends BaseInstanceCollection {
       }
     } else if (feedType === 'verified') {
       description = `${Users.getFullName(studentID)} has been verified for 
-        ${Opportunities.findDoc(opportunityID).name}.`;
-      slugID = Slugs.define({ name: `feed-${Users.findDoc(studentID).username}-${Slugs.findDoc(Opportunities.findDoc(opportunityID).slugID).name}-new`, entityName: this.getType() });
+        ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(opportunity.semesterID, false)}).`;
+      const username = Users.findDoc(studentID).username;
+      const oppDate = Semesters.toString(opportunity.semesterID, true);
+      const oppName = Slugs.findDoc((Opportunities.findDoc(opportunityID).slugID)).name;
+      slugID = Slugs.define({ name: `feed-${username}-${oppName}-${oppDate}-new`, entityName: this.getType() });
+      console.log(`feed-${username}-${oppName}-${oppDate}-new`);
       picture = Users.findDoc(studentID).picture;
     }
     const feedID = this._collection.insert({ slugID, studentID, opportunityID, courseID,
