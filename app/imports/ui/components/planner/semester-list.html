@@ -41,10 +41,18 @@
       {{#each opportunity in semesterOpportunities}}
       <tr id="{{opportunity._id}}" class="opportunityInstance clickEnabled" draggable="true"
           ondragstart="drag(event)" data-position="top center">
+        {{#if isFuture}}
         <td colspan="2">
           <strong>{{opportunityName opportunity._id}}</strong>
         </td>
-        <td><i id="{{opportunity._id}}" class="red remove circle icon jsDelOpp"></i></td>
+        <td>
+          <i id="{{opportunity._id}}" class="red remove circle icon jsDelOpp"></i>
+        </td>
+        {{else}}
+        <td colspan="2">
+          <strong>{{opportunityName opportunity._id}}</strong>
+        </td>
+        {{/if}}
       </tr>
       {{/each}}
       </tbody>
