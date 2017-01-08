@@ -25,6 +25,7 @@ import { Feed } from '../../../api/feed/FeedCollection.js';
 import { MentorAnswers } from '../../../api/mentorspace/MentorAnswersCollection.js';
 import { MentorQuestions } from '../../../api/mentorspace/MentorQuestionsCollection.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
+import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection.js';
 
 const clientDataKey = 'client';
 const serverDataKey = 'server';
@@ -72,6 +73,7 @@ Template.Admin_DataBase_Integrity_Check_Page.onCreated(function onCreated() {
   this.subscribe(MentorAnswers.getPublicationName());
   this.subscribe(MentorQuestions.getPublicationName());
   this.subscribe(Teasers.getPublicationName());
+  this.subscribe(ValidUserAccounts.getPublicationName());
 });
 
 Template.Admin_DataBase_Integrity_Check_Page.events({

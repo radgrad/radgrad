@@ -4,6 +4,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { ROLE } from '/imports/api/role/Role';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module User */
 
@@ -47,9 +48,18 @@ class ValidUserAccountCollection extends BaseInstanceCollection {
       });
     }
   }
+
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    return [];
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const ValidUserAccounts = new ValidUserAccountCollection();
+radgradCollections.push(ValidUserAccounts);
