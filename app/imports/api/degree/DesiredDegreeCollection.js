@@ -1,6 +1,8 @@
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+
 
 /** @module DesiredDegree */
 
@@ -31,10 +33,11 @@ class DesiredDegreeCollection extends BaseInstanceCollection {
    *                         description: 'Focuses on software technology and provides a foundation in math.' });
    * @param { Object } description Object with keys name, slug, and description.
    * Slug must be globally unique and previously undefined.
+   * ShortName defaults to name if not supplied.
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, shortName, slug, description }) {
+  define({ name, shortName = name, slug, description }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description });
@@ -42,9 +45,27 @@ class DesiredDegreeCollection extends BaseInstanceCollection {
     Slugs.updateEntityID(slugID, desiredDegreeID);
     return desiredDegreeID;
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const DesiredDegrees = new DesiredDegreeCollection();
+radgradCollections.push(DesiredDegrees);
+

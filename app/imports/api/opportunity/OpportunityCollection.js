@@ -7,6 +7,9 @@ import { Users } from '/imports/api/user/UserCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertICE } from '/imports/api/ice/IceProcessor';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 
 /** @module Opportunity */
 
@@ -128,10 +131,42 @@ class OpportunityCollection extends BaseInstanceCollection {
     const courseDoc = this.findDoc(opportunityID);
     return Slugs.findDoc(courseDoc.slugID).name;
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID, opportunityTypeID, sponsorID, interestIDs, semesterIDs
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+      if (!OpportunityTypes.isDefined(doc.opportunityTypeID)) {
+        problems.push(`Bad opportunityTypeID: ${doc.opportunityTypeID}`);
+      }
+      if (!Users.isDefined(doc.sponsorID)) {
+        problems.push(`Bad sponsorID: ${doc.sponsorID}`);
+      }
+      _.forEach(doc.interestIDs, interestID => {
+        if (!Interests.isDefined(interestID)) {
+          problems.push(`Bad interestID: ${interestID}`);
+        }
+      });
+      _.forEach(doc.semesterIDs, semesterID => {
+        if (!Semesters.isDefined(semesterID)) {
+          problems.push(`Bad semesterID: ${semesterID}`);
+        }
+      });
+    });
+    return problems;
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const Opportunities = new OpportunityCollection();
-
+radgradCollections.push(Opportunities);

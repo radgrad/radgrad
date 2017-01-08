@@ -8,7 +8,8 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('DesiredDegreeCollection', function testSuite() {
-    const name = 'B.S. CS';
+    const name = 'Bachelors in Computer Science';
+    const shortName = 'B.S. CS';
     const slug = 'bs-cs';
     const description = 'B.S. in CS.';
 
@@ -21,7 +22,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
-      DesiredDegrees.define({ name, slug, description });
+      DesiredDegrees.define({ name, shortName, slug, description });
       expect(DesiredDegrees.isDefined(slug)).to.be.true;
       DesiredDegrees.removeIt(slug);
       expect(DesiredDegrees.isDefined(slug)).to.be.false;

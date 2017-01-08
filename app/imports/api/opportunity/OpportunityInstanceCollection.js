@@ -6,7 +6,7 @@ import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module OpportunityInstance */
 
@@ -144,12 +144,36 @@ class OpportunityInstanceCollection extends BaseCollection {
     this.assertDefined(opportunityInstanceID);
     this._collection.update({ _id: opportunityInstanceID }, { $set: { verified } });
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks semesterID, opportunityID, studentID
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Semesters.isDefined(doc.semesterID)) {
+        problems.push(`Bad semesterID: ${doc.semesterID}`);
+      }
+      if (!Opportunities.isDefined(doc.opportunityID)) {
+        problems.push(`Bad opportunityID: ${doc.opportunityID}`);
+      }
+      if (!Users.isDefined(doc.studentID)) {
+        problems.push(`Bad studentID: ${doc.studentID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const OpportunityInstances = new OpportunityInstanceCollection();
+radgradCollections.push(OpportunityInstances);
+
 
 if (Meteor.isServer) {
   // eslint-disable-next-line meteor/audit-argument-checks
