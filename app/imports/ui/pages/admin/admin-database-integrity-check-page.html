@@ -2,8 +2,16 @@
 
   {{#if Template.subscriptionsReady}}
     {{#Admin_DataBase_Layout}}
-      <div style="margin-top: 10px" class="ui floating message">
-        Implement <a href="https://github.com/radgrad/radgrad/issues/62">Issue 62: Integrity Check</a> here.
+      <form style="padding-top: 10px" class="ui form">
+        <div class="ui action input">
+          <button class="ui green basic button jsIntegrityCheck" type="submit">Check Integrity</button>
+        </div>
+      </form>
+      <div style="margin-top: 10px" class="ui {{ clientHidden }} {{ clientSuccessOrError }} message">
+        <div class="header">
+          Client-side Database Integrity
+        </div>
+        <pre>{{ clientResults }}</pre>
       </div>
     {{/Admin_DataBase_Layout}}
   {{else}}

@@ -1,0 +1,77 @@
+import { Template } from 'meteor/templating';
+import { ReactiveDict } from 'meteor/reactive-dict';
+import { checkIntegrity } from '/imports/api/integritychecker/IntegrityChecker';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
+import { Interests } from '../../../api/interest/InterestCollection.js';
+import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { Courses } from '../../../api/course/CourseCollection';
+import { Semesters } from '../../../api/semester/SemesterCollection';
+import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { Users } from '../../../api/user/UserCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
+import { WorkInstances } from '../../../api/work/WorkInstanceCollection.js';
+import { HelpMessages } from '../../../api/help/HelpMessageCollection.js';
+import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
+import { Feed } from '../../../api/feed/FeedCollection.js';
+import { MentorAnswers } from '../../../api/mentorspace/MentorAnswersCollection.js';
+import { MentorQuestions } from '../../../api/mentorspace/MentorQuestionsCollection.js';
+import { Teasers } from '../../../api/teaser/TeaserCollection.js';
+
+const clientDataKey = 'clientData';
+
+Template.Admin_DataBase_Integrity_Check_Page.helpers({
+  clientResults() {
+    const clientData = Template.instance().results.get(clientDataKey);
+    return (clientData) ? clientData.message : '';
+  },
+  clientHidden() {
+    const clientData = Template.instance().results.get(clientDataKey);
+    return (clientData) ? '' : 'hidden';
+  },
+  clientSuccessOrError() {
+    const clientData = Template.instance().results.get(clientDataKey);
+    return (clientData && clientData.count === 0) ? 'success' : 'error';
+  },
+});
+
+Template.Admin_DataBase_Integrity_Check_Page.onCreated(function onCreated() {
+  this.results = new ReactiveDict('integritycheck');
+  this.subscribe(Slugs.getPublicationName());
+  this.subscribe(InterestTypes.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(DesiredDegrees.getPublicationName());
+  this.subscribe(OpportunityTypes.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(WorkInstances.getPublicationName());
+  this.subscribe(HelpMessages.getPublicationName());
+  this.subscribe(AdvisorLogs.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
+  this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(Feed.getPublicationName());
+  this.subscribe(MentorAnswers.getPublicationName());
+  this.subscribe(MentorQuestions.getPublicationName());
+  this.subscribe(Teasers.getPublicationName());
+});
+
+Template.Admin_DataBase_Integrity_Check_Page.events({
+  'click .jsIntegrityCheck': function clickJSIntegrityCheck(event, instance) {
+    event.preventDefault();
+    instance.results.set(clientDataKey, checkIntegrity());
+  },
+});
