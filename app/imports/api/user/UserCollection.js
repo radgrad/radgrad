@@ -436,5 +436,3 @@ class UserCollection extends BaseInstanceCollection {
  */
 export const Users = new UserCollection();
 radgradCollections.push(Users);
-
-

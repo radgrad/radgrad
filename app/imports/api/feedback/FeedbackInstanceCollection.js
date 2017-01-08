@@ -92,5 +92,3 @@ class FeedbackInstanceCollection extends BaseCollection {
  */
 export const FeedbackInstances = new FeedbackInstanceCollection();
 radgradCollections.push(FeedbackInstances);
-
-

@@ -120,5 +120,3 @@ class CourseCollection extends BaseInstanceCollection {
  */
 export const Courses = new CourseCollection();
 radgradCollections.push(Courses);
-
-

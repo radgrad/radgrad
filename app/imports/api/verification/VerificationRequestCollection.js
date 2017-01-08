@@ -181,5 +181,3 @@ class VerificationRequestCollection extends BaseCollection {
  */
 export const VerificationRequests = new VerificationRequestCollection();
 radgradCollections.push(VerificationRequests);
-
-

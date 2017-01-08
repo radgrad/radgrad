@@ -6,6 +6,7 @@ import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module AcademicYearInstance */
 

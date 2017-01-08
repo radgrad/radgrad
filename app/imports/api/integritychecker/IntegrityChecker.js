@@ -9,10 +9,10 @@ import { moment } from 'meteor/momentjs:moment';
 export const radgradCollections = [];
 
 export function checkIntegrity() {
-  let message = `\nIntegrity check results (${moment().format('LLL')})`;
+  let message = `\nIntegrity check results (${moment().format('MMM Do YYYY, H:mm:ss a')})`;
   const startTime = moment();
   let count = 0;
-  _.forEach(radgradCollections, function checkCollection(collection) {
+  _.forEach(_.sortBy(radgradCollections, (c) => c._collectionName), function checkCollection(collection) {
     message += `\n  ${collection._collectionName} (${collection.count()})`;
     const collectionStrings = collection.checkIntegrity();
     _.forEach(collectionStrings, function addString(collectionString) {

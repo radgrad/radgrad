@@ -7,11 +7,25 @@
           <button class="ui green basic button jsIntegrityCheck" type="submit">Check Integrity</button>
         </div>
       </form>
-      <div style="margin-top: 10px" class="ui {{ clientHidden }} {{ clientSuccessOrError }} message">
-        <div class="header">
-          Client-side Database Integrity
+
+      <div class="ui equal width stackable grid">
+        <div class="column">
+          <div style="margin-top: 10px" class="ui {{ hidden "client" }} {{ successOrError "client" }} message">
+            <div class="header">
+              Integrity Check (Client-side DB)
+            </div>
+            <pre>{{ results "client" }}</pre>
+          </div>
         </div>
-        <pre>{{ clientResults }}</pre>
+
+        <div class="column">
+          <div style="margin-top: 10px" class="ui {{ hidden "server" }} {{ successOrError "server" }} message">
+            <div class="header">
+              Integrity Check (Server-side DB)
+            </div>
+            <pre>{{ results "server" }}</pre>
+          </div>
+        </div>
       </div>
     {{/Admin_DataBase_Layout}}
   {{else}}
