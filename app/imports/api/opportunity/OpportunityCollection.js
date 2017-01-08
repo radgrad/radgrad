@@ -7,6 +7,7 @@ import { Users } from '/imports/api/user/UserCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertICE } from '/imports/api/ice/IceProcessor';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module Opportunity */
 
@@ -134,4 +135,6 @@ class OpportunityCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Opportunities = new OpportunityCollection();
+radgradCollections.push(Opportunities);
+
 

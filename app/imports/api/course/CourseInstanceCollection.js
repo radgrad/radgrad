@@ -8,6 +8,8 @@ import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { makeCourseICE } from '/imports/api/ice/IceProcessor';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+
 
 /** @module CourseInstance */
 
@@ -208,6 +210,8 @@ class CourseInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const CourseInstances = new CourseInstanceCollection();
+radgradCollections.push(CourseInstances);
+
 
 if (Meteor.isServer) {
   // eslint-disable-next-line meteor/audit-argument-checks

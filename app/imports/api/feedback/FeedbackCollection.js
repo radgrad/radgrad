@@ -2,6 +2,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertFeedbackType } from '/imports/api/feedback/FeedbackType';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+
 // import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
 // import { Meteor } from 'meteor/meteor';
 
@@ -59,3 +61,5 @@ class FeedbackCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Feedbacks = new FeedbackCollection();
+radgradCollections.push(Feedbacks);
+

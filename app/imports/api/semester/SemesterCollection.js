@@ -3,6 +3,7 @@ import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Meteor } from 'meteor/meteor';
 import { moment } from 'meteor/momentjs:moment';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module Semester */
 
@@ -181,4 +182,6 @@ class SemesterCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Semesters = new SemesterCollection();
+radgradCollections.push(Semesters);
+
 

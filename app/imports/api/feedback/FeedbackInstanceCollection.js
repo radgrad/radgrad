@@ -5,7 +5,7 @@ import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module FeedbackInstance */
 
@@ -72,4 +72,6 @@ class FeedbackInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const FeedbackInstances = new FeedbackInstanceCollection();
+radgradCollections.push(FeedbackInstances);
+
 

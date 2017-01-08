@@ -4,8 +4,8 @@ import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
-
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module Feed */
 
@@ -101,4 +101,6 @@ class FeedCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Feed = new FeedCollection();
+radgradCollections.push(Feed);
+
 

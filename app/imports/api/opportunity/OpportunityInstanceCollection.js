@@ -6,7 +6,7 @@ import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module OpportunityInstance */
 
@@ -150,6 +150,8 @@ class OpportunityInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const OpportunityInstances = new OpportunityInstanceCollection();
+radgradCollections.push(OpportunityInstances);
+
 
 if (Meteor.isServer) {
   // eslint-disable-next-line meteor/audit-argument-checks

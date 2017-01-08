@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module Teaser */
 
@@ -58,4 +59,6 @@ class TeaserCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Teasers = new TeaserCollection();
+radgradCollections.push(Teasers);
+
 

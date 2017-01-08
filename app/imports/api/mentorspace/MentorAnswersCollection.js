@@ -1,5 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module MentorAnswers */
 
@@ -14,7 +15,7 @@ class MentorAnswersCollection extends BaseCollection {
   constructor() {
     super('MentorAnswers', new SimpleSchema({
       questionID: { type: String },
-      mentor: { type: String },
+      mentor: { type: String },  // TODO: Mentor should be a userID, not a string.
       text: { type: String },
     }));
   }
@@ -50,3 +51,5 @@ class MentorAnswersCollection extends BaseCollection {
 }
 
 export const MentorAnswers = new MentorAnswersCollection();
+radgradCollections.push(MentorAnswers);
+

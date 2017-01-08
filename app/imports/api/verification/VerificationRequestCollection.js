@@ -2,13 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { moment } from 'meteor/momentjs:moment';
-
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
 import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '../semester/SemesterCollection.js';
 import { Users } from '/imports/api/user/UserCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module Verification */
 
@@ -161,4 +161,6 @@ class VerificationRequestCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const VerificationRequests = new VerificationRequestCollection();
+radgradCollections.push(VerificationRequests);
+
 

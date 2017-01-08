@@ -1,6 +1,8 @@
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+
 
 /** @module DesiredDegree */
 
@@ -48,3 +50,5 @@ class DesiredDegreeCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const DesiredDegrees = new DesiredDegreeCollection();
+radgradCollections.push(DesiredDegrees);
+

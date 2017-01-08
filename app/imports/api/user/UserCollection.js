@@ -13,6 +13,7 @@ import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstan
 import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
 import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module User */
 
@@ -405,4 +406,6 @@ class UserCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to other entities.
  */
 export const Users = new UserCollection();
+radgradCollections.push(Users);
+
 

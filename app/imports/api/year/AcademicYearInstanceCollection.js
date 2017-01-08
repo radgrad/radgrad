@@ -5,6 +5,7 @@ import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module AcademicYearInstance */
 
@@ -94,3 +95,5 @@ class AcademicYearInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const AcademicYearInstances = new AcademicYearInstanceCollection();
+radgradCollections.push(AcademicYearInstances);
+

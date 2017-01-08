@@ -4,6 +4,8 @@ import { Interests } from '/imports/api/interest/InterestCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+
 
 /** @module Course */
 
@@ -96,4 +98,6 @@ class CourseCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Courses = new CourseCollection();
+radgradCollections.push(Courses);
+
 

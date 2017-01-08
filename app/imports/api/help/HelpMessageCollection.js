@@ -1,8 +1,6 @@
-/**
- * Created by Cam on 12/7/2016.
- */
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module Help */
 
@@ -51,3 +49,5 @@ class HelpMessageCollection extends BaseCollection {
 }
 
 export const HelpMessages = new HelpMessageCollection();
+radgradCollections.push(HelpMessages);
+
