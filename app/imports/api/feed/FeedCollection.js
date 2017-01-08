@@ -65,35 +65,70 @@ class FeedCollection extends BaseInstanceCollection {
         if (!picture) {
           picture = '/images/ICS-logo.png';
         }
-      } else if (opportunity !== undefined) {
-        description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities.`;
-        slugID = Slugs.define({ name: `feed-${Slugs.getDoc(Opportunities.findDoc(opportunityID).slugID).name}-new`,
-          entityName: this.getType() });
-        picture = '/images/radgrad_logo.png';
-      } else if (course !== undefined) {
-        description = `${Courses.findDoc(courseID).name} has been added to Courses.`;
-        slugID = Slugs.define({ name: `${Slugs.getDoc(Courses.findDoc(courseID).slugID).name}-new`,
-          entityName: this.getType() });
-        picture = '/images/radgrad_logo.png';
-      }
-    } else if (feedType === 'verified') {
-      description = `${Users.getFullName(studentID)} has been verified for 
+      } else
+        if (opportunity !== undefined) {
+          description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities.`;
+          slugID = Slugs.define({
+            name: `feed-${Slugs.getDoc(Opportunities.findDoc(opportunityID).slugID).name}-new`,
+            entityName: this.getType()
+          });
+          picture = '/images/radgrad_logo.png';
+        } else
+          if (course !== undefined) {
+            description = `${Courses.findDoc(courseID).name} has been added to Courses.`;
+            slugID = Slugs.define({
+              name: `${Slugs.getDoc(Courses.findDoc(courseID).slugID).name}-new`,
+              entityName: this.getType()
+            });
+            picture = '/images/radgrad_logo.png';
+          }
+    } else
+      if (feedType === 'verified') {
+        description = `${Users.getFullName(studentID)} has been verified for 
         ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(opportunity.semesterID, false)}).`;
-      const username = Users.findDoc(studentID).username;
-      const oppDate = Semesters.toString(opportunity.semesterID, true);
-      const oppName = Slugs.findDoc((Opportunities.findDoc(opportunityID).slugID)).name;
-      slugID = Slugs.define({ name: `feed-${username}-${oppName}-${oppDate}-new`, entityName: this.getType() });
-      picture = Users.findDoc(studentID).picture;
-    }
-    const feedID = this._collection.insert({ slugID, studentID, opportunityID, courseID,
-      description, timestamp, picture });
+        const username = Users.findDoc(studentID).username;
+        const oppDate = Semesters.toString(opportunity.semesterID, true);
+        const oppName = Slugs.findDoc((Opportunities.findDoc(opportunityID).slugID)).name;
+        slugID = Slugs.define({ name: `feed-${username}-${oppName}-${oppDate}-new`, entityName: this.getType() });
+        picture = Users.findDoc(studentID).picture;
+      }
+    const feedID = this._collection.insert({
+      slugID, studentID, opportunityID, courseID,
+      description, timestamp, picture
+    });
     Slugs.updateEntityID(slugID, feedID);
     return feedID;
   }
+
   getSlug(feedID) {
     this.assertDefined(feedID);
     const feedDoc = this.findDoc(feedID);
     return Slugs.findDoc(feedDoc.slugID).name;
+  }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID, studentID, opportunityID, and courseID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+      if (!Users.isDefined(doc.studentID)) {
+        problems.push(`Bad studentID: ${doc.studentID}`);
+      }
+      if (!Opportunities.isDefined(doc.opportunityID)) {
+        problems.push(`Bad opportunityID: ${doc.opportunityID}`);
+      }
+      if (!Courses.isDefined(doc.courseID)) {
+        problems.push(`Bad courseID: ${doc.courseID}`);
+      }
+    });
+    return problems;
   }
 }
 
@@ -102,5 +137,3 @@ class FeedCollection extends BaseInstanceCollection {
  */
 export const Feed = new FeedCollection();
 radgradCollections.push(Feed);
-
-

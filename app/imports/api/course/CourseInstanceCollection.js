@@ -204,6 +204,28 @@ class CourseInstanceCollection extends BaseCollection {
     Semesters.assertSemester(semesterID);
     this._collection.update({ _id: courseInstanceID }, { $set: { semesterID } });
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks semesterID, courseID, and studentID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Semesters.isDefined(doc.semesterID)) {
+        problems.push(`Bad semesterID: ${doc.semesterID}`);
+      }
+      if (!Courses.isDefined(doc.courseID)) {
+        problems.push(`Bad courseID: ${doc.courseID}`);
+      }
+      if (!Users.isDefined(doc.studentID)) {
+        problems.push(`Bad studentID: ${doc.studentID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**

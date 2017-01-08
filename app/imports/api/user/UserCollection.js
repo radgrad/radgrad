@@ -400,6 +400,35 @@ class UserCollection extends BaseInstanceCollection {
       });
     }
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID, careerGoalIDs, interestIDs, desiredDegreeID
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+      if (!DesiredDegrees.isDefined(doc.desiredDegreeID)) {
+        problems.push(`Bad desiredDegreeID: ${doc.desiredDegreeID}`);
+      }
+      _.forEach(doc.careerGoalIDs, careerGoalID => {
+        if (!CareerGoals.isDefined(careerGoalID)) {
+          problems.push(`Bad careerGoalID: ${careerGoalID}`);
+        }
+      });
+      _.forEach(doc.interestIDs, interestID => {
+        if (!Interests.isDefined(interestID)) {
+          problems.push(`Bad interestID: ${interestID}`);
+        }
+      });
+    });
+    return problems;
+  }
 }
 
 /**

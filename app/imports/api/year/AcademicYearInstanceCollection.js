@@ -89,6 +89,27 @@ class AcademicYearInstanceCollection extends BaseCollection {
     return `[AY ${doc.year}-${doc.year + 1} ${student.username}]`;
   }
 
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks studentID, semesterIDs
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Users.isDefined(doc.studentID)) {
+        problems.push(`Bad studentID: ${doc.studentID}`);
+      }
+      _.forEach(doc.semesterIDs, semesterID => {
+        if (!Semesters.isDefined(semesterID)) {
+          problems.push(`Bad semesterID: ${semesterID}`);
+        }
+      });
+    });
+    return problems;
+  }
+
 }
 
 /**

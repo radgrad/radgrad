@@ -46,6 +46,14 @@ class HelpMessageCollection extends BaseCollection {
   getHelpTitle(routeName) {
     return this._collection.findOne({ routeName }).title;
   }
+
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    return [];
+  }
 }
 
 export const HelpMessages = new HelpMessageCollection();

@@ -28,6 +28,7 @@ class InterestTypeCollection extends BaseTypeCollection {
   define({ name, slug, description }) {
     return super.define({ name, slug, description });
   }
+
 }
 
 /**

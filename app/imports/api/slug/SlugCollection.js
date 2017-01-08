@@ -127,6 +127,14 @@ class SlugCollection extends BaseCollection {
       throw new Meteor.Error(`Undefined slug ${slugName}.`);
     }
   }
+
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    return [];
+  }
 }
 
 /**

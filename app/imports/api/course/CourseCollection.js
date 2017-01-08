@@ -92,6 +92,27 @@ class CourseCollection extends BaseInstanceCollection {
     const courseDoc = this.findDoc(courseID);
     return Slugs.findDoc(courseDoc.slugID).name;
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID and interestIDs.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+      _.forEach(doc.interestIDs, interestID => {
+        if (!Interests.isDefined(interestID)) {
+          problems.push(`Bad interestID: ${interestID}`);
+        }
+      });
+    });
+    return problems;
+  }
 }
 
 /**

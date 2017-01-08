@@ -77,6 +77,14 @@ class WorkInstanceCollection extends BaseCollection {
     const hrsWk = workInstanceDoc.hrsWk;
     return `[WI ${semester} ${hrsWk}]`;
   }
+
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    return [];
+  }
 }
 
 /**

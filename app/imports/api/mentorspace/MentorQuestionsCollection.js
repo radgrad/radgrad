@@ -31,6 +31,14 @@ class MentorQuestionsCollection extends BaseCollection {
   getMentorQuestion() {
     return this._collection.find({});
   }
+
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    return [];
+  }
 }
 
 export const MentorQuestions = new MentorQuestionsCollection();

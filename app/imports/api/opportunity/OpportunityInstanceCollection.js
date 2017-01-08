@@ -144,6 +144,28 @@ class OpportunityInstanceCollection extends BaseCollection {
     this.assertDefined(opportunityInstanceID);
     this._collection.update({ _id: opportunityInstanceID }, { $set: { verified } });
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks semesterID, opportunityID, studentID
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Semesters.isDefined(doc.semesterID)) {
+        problems.push(`Bad semesterID: ${doc.semesterID}`);
+      }
+      if (!Opportunities.isDefined(doc.opportunityID)) {
+        problems.push(`Bad opportunityID: ${doc.opportunityID}`);
+      }
+      if (!Users.isDefined(doc.studentID)) {
+        problems.push(`Bad studentID: ${doc.studentID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**

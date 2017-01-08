@@ -55,6 +55,22 @@ class FeedbackCollection extends BaseInstanceCollection {
     Slugs.updateEntityID(slugID, docID);
     return docID;
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**

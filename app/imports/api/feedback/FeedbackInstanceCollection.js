@@ -66,6 +66,25 @@ class FeedbackInstanceCollection extends BaseCollection {
     }
   }
 
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks feedbackID and userID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Feedbacks.isDefined(doc.feedbackID)) {
+        problems.push(`Bad feedbackID: ${doc.feedbackID}`);
+      }
+      if (!Users.isDefined(doc.userID)) {
+        problems.push(`Bad userID: ${doc.userID}`);
+      }
+    });
+    return problems;
+  }
+
 }
 
 /**

@@ -64,6 +64,24 @@ class InterestCollection extends BaseInstanceCollection {
     return instanceIDs.map(instanceID => this.findDoc(instanceID).name);
   }
 
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID and interestTypeID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+      if (!InterestTypes.isDefined(doc.interestTypeID)) {
+        problems.push(`Bad interestTypeID: ${doc.interestTypeID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**
@@ -71,5 +89,3 @@ class InterestCollection extends BaseInstanceCollection {
  */
 export const Interests = new InterestCollection();
 radgradCollections.push(Interests);
-
-

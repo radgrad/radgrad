@@ -47,6 +47,14 @@ class MentorAnswersCollection extends BaseCollection {
     return this._collection.findOne({ questionID }).mentor;
   }
 
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    return [];
+  }
+
 
 }
 

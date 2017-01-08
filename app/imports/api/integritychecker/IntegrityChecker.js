@@ -9,16 +9,19 @@ import { moment } from 'meteor/momentjs:moment';
 export const radgradCollections = [];
 
 export function checkIntegrity() {
-  let integrityResults = `\nStarting integrity check at ${moment().format('LLL')}`;
-  let numProblems = 0;
+  let message = `\nIntegrity check results (${moment().format('LLL')})`;
+  const startTime = moment();
+  let count = 0;
   _.forEach(radgradCollections, function checkCollection(collection) {
-    integrityResults += `\n  ${collection._collectionName} (${collection.count()})`;
+    message += `\n  ${collection._collectionName} (${collection.count()})`;
     const collectionStrings = collection.checkIntegrity();
     _.forEach(collectionStrings, function addString(collectionString) {
-      numProblems += 1;
-      integrityResults += `\n    ${collectionString}`;
+      count += 1;
+      message += `\n    ${collectionString}`;
     });
   });
-  integrityResults += `\nTotal problems: ${numProblems}`;
-  console.log(integrityResults);
+  message += `\nTotal problems: ${count}`;
+  const endTime = moment();
+  message += `\nElapsed time: ${endTime.diff(startTime, 'seconds', true)} seconds`;
+  return { count, message };
 }
