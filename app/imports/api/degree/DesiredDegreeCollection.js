@@ -33,10 +33,11 @@ class DesiredDegreeCollection extends BaseInstanceCollection {
    *                         description: 'Focuses on software technology and provides a foundation in math.' });
    * @param { Object } description Object with keys name, slug, and description.
    * Slug must be globally unique and previously undefined.
+   * ShortName defaults to name if not supplied.
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, shortName, slug, description }) {
+  define({ name, shortName = name, slug, description }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description });
