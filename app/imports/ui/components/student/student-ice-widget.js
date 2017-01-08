@@ -136,7 +136,7 @@ Template.Student_Ice_Widget.helpers({
     }
     return null;
   },
-  projectedICE() {
+  plannedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
       const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();
@@ -156,8 +156,8 @@ Template.Student_Ice_Widget.helpers({
     }
     return null;
   },
-  remainingICE(earned, projected) {
-    return projected - earned;
+  remainingICE(earned, planned) {
+    return planned - earned;
   },
   innovationPoints(ice) {
     return ice.i;

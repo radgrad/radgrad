@@ -6,11 +6,11 @@
 
         <div class="ui segment">
           <div class="radgrad-ice">
-            <div class="radgrad-ice-circle p{{projectedICE.i}} radgrad-proj-innov">
+            <div class="radgrad-ice-circle p{{plannedICE.i}} radgrad-proj-innov">
               <div class="radgrad-ice-stat">
                 <span>{{earnedICE.i}}</span>
                 <hr>
-                <span>{{projectedICE.i}}</span>
+                <span>{{plannedICE.i}}</span>
               </div>
               <div class="slice">
                 <div class="bar"></div>
@@ -33,14 +33,14 @@
           <div class="ui styled fluid accordion">
             <div class="active title">
               <i class="dropdown icon"></i>
-              Achieved ({{innovationPoints earnedICE}} points)
+              Earned ({{innovationPoints earnedICE}} points)
             </div>
 
             <div class="active content">
               {{#if matchingPoints (innovationPoints earnedICE) 0}}
-                  <p>You have not yet achieved any Innovation points.</p>
+                  <p>You have not yet earned any Innovation points.</p>
               {{else}}
-                <p>You have achieved {{innovationPoints earnedICE}} Innovation points for the following:</p>
+                <p>You have earned {{innovationPoints earnedICE}} Innovation points for the following:</p>
                 <div class="ui very relaxed list">
                   {{#each year in years}}
                     {{#each semester in semesters year}}
@@ -64,14 +64,13 @@
             </div>
             <div class="title">
               <i class="dropdown icon"></i>
-              Projected ({{innovationPoints projectedICE}} points)
+              Planned ({{innovationPoints plannedICE}} points)
             </div>
             <div class="content">
-              {{#if matchingPoints (innovationPoints projectedICE) (innovationPoints earnedICE)}}
-                  <p>You have achieved all of your {{innovationPoints projectedICE}} projected points.</p>
+              {{#if matchingPoints (innovationPoints plannedICE) (innovationPoints earnedICE)}}
+                  <p>You have earned all of your {{innovationPoints plannedICE}} planned points.</p>
               {{else}}
-                <p>You have a total of {{innovationPoints projectedICE}} projected Innovation points. The
-                  remaining {{remainingICE (innovationPoints earnedICE) (innovationPoints projectedICE) }} points are for the following:</p>
+                <p>You have a total of {{innovationPoints plannedICE}} planned Innovation points, with {{remainingICE (innovationPoints earnedICE) (innovationPoints plannedICE) }} unearned points for the following:</p>
                 <div class="ui very relaxed list">
                   {{#each year in years}}
                     {{#each semester in semesters year}}
@@ -99,17 +98,17 @@
             </div>
             <div class="content">
               {{#if matchingPoints (innovationPoints earnedICE) 100}}
-                  <p>Congratulations! You have achieved 100 Innovation points!</p>
+                  <p>Congratulations! You have earned 100 Innovation points!</p>
               {{else}}
-                {{#if matchingPoints (innovationPoints projectedICE) 100}}
-                  <p>You already have 100 projected Innovation points.</p>
+                {{#if matchingPoints (innovationPoints plannedICE) 100}}
+                  <p>You already have 100 planned Innovation points.</p>
                 {{else}}
                   {{#if hasNoInterests}}
                     <p>Consider adding interests to see recommendations here.</p>
                   {{else}}
                     <p>Consider the following to complete the full 100 Innovation points.</p>
                     <div class="ui list">
-                      {{#each event in recommendedEvents 'i' 'opportunities' (innovationPoints projectedICE)}}
+                      {{#each event in recommendedEvents 'i' 'opportunities' (innovationPoints plannedICE)}}
                         <div class="item">
                           <b>+{{innovationPoints (eventIce event)}}</b>
                             {{ event.name }} ({{ opportunitySemesters event}})
@@ -128,11 +127,11 @@
       <div class="column">
         <div class="ui segment">
           <div class="radgrad-ice">
-            <div class="radgrad-ice-circle p{{projectedICE.c}} radgrad-proj-comp">
+            <div class="radgrad-ice-circle p{{plannedICE.c}} radgrad-proj-comp">
               <div class="radgrad-ice-stat">
                 <span>{{earnedICE.c}}</span>
                 <hr>
-                <span>{{projectedICE.c}}</span>
+                <span>{{plannedICE.c}}</span>
               </div>
               <div class="slice">
                 <div class="bar"></div>
@@ -156,13 +155,13 @@
           <div class="ui styled fluid accordion">
             <div class="active title">
               <i class="dropdown icon"></i>
-              Achieved ({{competencyPoints earnedICE}} points)
+              Earned ({{competencyPoints earnedICE}} points)
             </div>
             <div class="active content">
               {{#if matchingPoints (competencyPoints earnedICE) 0}}
-                <p>You have not yet acheived any Competency Points</p>
+                <p>You have not yet earned any Competency Points</p>
               {{else}}
-                <p>You have achieved {{competencyPoints earnedICE}} Competency points for the following:</p>
+                <p>You have earned {{competencyPoints earnedICE}} Competency points for the following:</p>
                 <div class="ui very relaxed list">
                   {{#each year in years}}
                     {{#each semester in semesters year}}
@@ -182,14 +181,13 @@
             </div>
             <div class="title">
               <i class="dropdown icon"></i>
-              Projected ({{competencyPoints projectedICE}} points)
+              Planned ({{competencyPoints plannedICE}} points)
             </div>
             <div class="content">
-              {{#if matchingPoints (competencyPoints projectedICE) (competencyPoints earnedICE)}}
-                  <p>You have achieved all of your {{competencyPoints projectedICE}} projected points.</p>
+              {{#if matchingPoints (competencyPoints plannedICE) (competencyPoints earnedICE)}}
+                  <p>You have earned all of your {{competencyPoints plannedICE}} projected points.</p>
               {{else}}
-                <p>You have a total of {{competencyPoints projectedICE}} projected Competency points. The
-                  remaining {{remainingICE (competencyPoints earnedICE) (competencyPoints projectedICE) }} points are for the following:</p>
+                <p>You have a total of {{competencyPoints plannedICE}} planned Competency points, with {{remainingICE (competencyPoints earnedICE) (competencyPoints plannedICE) }} unearned points for the following:</p>
                 <div class="ui very relaxed list">
                   {{#each year in years}}
                     {{#each semester in semesters year}}
@@ -213,17 +211,17 @@
             </div>
             <div class="content">
               {{#if matchingPoints (competencyPoints earnedICE) 100}}
-                <p>Congratulations! You have achieved 100 Competency points!</p>
+                <p>Congratulations! You have earned 100 Competency points!</p>
               {{else}}
-                {{#if matchingPoints (competencyPoints projectedICE) 100}}
-                  <p>You already have 100 projected Competency points.</p>
+                {{#if matchingPoints (competencyPoints plannedICE) 100}}
+                  <p>You already have 100 planned Competency points.</p>
                 {{else}}
                   {{#if hasNoInterests}}
                     <p>Consider adding interests to see recommendations here.</p>
                   {{else}}
                     <p>Consider the following to complete the full 100 Competency points.</p>
                     <div class="ui list">
-                      {{#each event in recommendedEvents 'c' 'course' (competencyPoints projectedICE)}}
+                      {{#each event in recommendedEvents 'c' 'course' (competencyPoints plannedICE)}}
                         <div class="item">
                           <b>+9</b>
                           {{ event.name }}
@@ -242,11 +240,11 @@
 
         <div class="ui segment">
           <div class="radgrad-ice">
-            <div class="radgrad-ice-circle p{{projectedICE.e}} radgrad-proj-exp">
+            <div class="radgrad-ice-circle p{{plannedICE.e}} radgrad-proj-exp">
               <div class="radgrad-ice-stat">
                 <span>{{earnedICE.e}}</span>
                 <hr>
-                <span>{{projectedICE.e}}</span>
+                <span>{{plannedICE.e}}</span>
               </div>
               <div class="slice">
                 <div class="bar"></div>
@@ -269,13 +267,13 @@
           <div class="ui styled fluid accordion">
             <div class="active title">
               <i class="dropdown icon"></i>
-              Achieved ({{experiencePoints earnedICE}} points)
+              Earned ({{experiencePoints earnedICE}} points)
             </div>
             <div class="active content">
               {{#if matchingPoints (experiencePoints earnedICE) 0}}
-                  <p>You have not yet achieved any Experience points.</p>
+                  <p>You have not yet earned any Experience points.</p>
               {{else}}
-                <p>You have achieved {{experiencePoints earnedICE}} Experience points for the following:</p>
+                <p>You have earned {{experiencePoints earnedICE}} Experience points for the following:</p>
                 <div class="ui very relaxed list">
                   {{#each year in years}}
                     {{#each semester in semesters year}}
@@ -299,14 +297,13 @@
             </div>
             <div class="title">
               <i class="dropdown icon"></i>
-              Projected ({{experiencePoints projectedICE}} points)
+              Planned ({{experiencePoints plannedICE}} points)
             </div>
             <div class="content">
-              {{#if matchingPoints (experiencePoints projectedICE) (experiencePoints earnedICE)}}
-                  <p>You have achieved all of your {{experiencePoints projectedICE}} projected points.</p>
+              {{#if matchingPoints (experiencePoints plannedICE) (experiencePoints earnedICE)}}
+                  <p>You have earned all of your {{experiencePoints plannedICE}} planned points.</p>
               {{else}}
-                <p>You have a total of {{experiencePoints projectedICE}} projected Experience points. The
-                  remaining {{remainingICE (experiencePoints earnedICE) (experiencePoints projectedICE) }} points are for the following:</p>
+                <p>You have a total of {{experiencePoints plannedICE}} planned Experience points, with {{remainingICE (experiencePoints earnedICE) (experiencePoints plannedICE) }} unearned points for the following:</p>
                 <div class="ui very relaxed list">
                   {{#each year in years}}
                     {{#each semester in semesters year}}
@@ -334,17 +331,17 @@
             </div>
             <div class="content">
               {{#if matchingPoints (experiencePoints earnedICE) 100}}
-                <p>Congratulations! You have achieved 100 Experience points!</p>
+                <p>Congratulations! You have earned 100 Experience points!</p>
               {{else}}
-                {{#if matchingPoints (experiencePoints projectedICE) 100}}
-                  <p>You already have 100 projected Experience points.</p>
+                {{#if matchingPoints (experiencePoints plannedICE) 100}}
+                  <p>You already have 100 planned Experience points.</p>
                 {{else}}
                   {{#if hasNoInterests}}
                     <p>Consider adding interests to see recommendations here.</p>
                   {{else}}
                     <p>Consider the following to complete the full 100 Experience points.</p>
                     <div class="ui list">
-                      {{#each event in recommendedEvents 'e' 'opportunities' (experiencePoints projectedICE)}}
+                      {{#each event in recommendedEvents 'e' 'opportunities' (experiencePoints plannedICE)}}
                         <div class="item">
                           <b>+{{experiencePoints (eventIce event)}}</b>
                           {{ event.name }} ({{ opportunitySemesters event}})
