@@ -17,38 +17,8 @@
           </div>
         </div>
 
-        <div class="ui segments">
-          <div class="ui segment">
-            <div class="ui vertical accordion">
-
-              <div class="ui active list title">
-                <div class="item">
-                  <i class="dropdown icon"></i>
-                  What do you look for when hiring a new graduate? (2 answers)
-                </div>
-              </div>
-
-              <div class="active content">
-                <div class="ui divider"></div>
-
-                <div class="author">
-                  <img class="ui avatar image" src="../../images/mentors/brewer.jpg"> Robert Brewer answered: Candidates interviewing at Tableau are expected to have broad experience in CS and software engineering. Expect to answer questions on topics like object-oriented design, algorithms, databases, and more by writing code on a whiteboard with no computer in sight. Strong technical skills must be balanced by evidence that you can work well on a team and communicate well with your peers.
-                </div>
-
-                <div class="ui divider"></div>
-
-                <div class="author">
-                  <img class="ui avatar image" src="../../images/mentors/karjala.jpg"> Patrick Karjala answered: Grades and classes count; especially classes geared toward the position you're reaching for. It is important in the Computer Science field to be able to work collaboratively. Students who have group projects on their GitHub account show me that they are ready for a team development environment. In addition, extracurricular work and internships will make your application stand out among others. Those who have already done programming in a professional internship will be a step ahead!
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-
         {{#each question in listQuestions}}
-        {{> Student_MentorSpace_Page_Accordion text=question.text}}
+        {{> Student_MentorSpace_Page_Accordion text=question.text questionID=question.questionID}}
         {{/each}}
 
       </div>
