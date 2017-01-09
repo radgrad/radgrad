@@ -1,0 +1,80 @@
+<template name="Student_Explorer_Interests_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded segment container">
+      <div class="ui dividing header">
+        <h4>{{name}}</h4>
+      </div>
+      {{#each descriptionPair in descriptionPairs}}
+        {{#if isLabel descriptionPair.label 'Related Career Goals'}}
+          <p>
+            {{#each careerGoal in descriptionPair.value}}
+              <a class="ui mini label"><i style="color:white !important" class="fitted suitcase icon"></i>{{careerGoalName careerGoal}}</a>
+            {{/each}}
+          </p>
+        {{else}}
+          {{#if isLabel descriptionPair.type 'amount'}}
+            <p>{{descriptionPair.value}} {{descriptionPair.label}} are interested in {{name}}.</p>
+          {{else}}
+            {{#if isLabel descriptionPair.type 'list'}}
+              <p>
+              <div class="ui circular mini bordered images">
+                {{#each user in descriptionPair.value}}
+                  <img style="height:30px; width: auto;"  class="ui image" src={{userPicture user}}>
+                {{/each}}
+              </div>
+              </p>
+            {{else}}
+              {{#if isLabel descriptionPair.label 'Related Courses'}}
+                {{#if descriptionPair.value}}
+                  <b>{{descriptionPair.label}}:</b>
+                  <table class="ui collapsing compact small table">
+                    <tbody>
+                    {{#each course in descriptionPair.value}}
+                      <tr class="{{rowColorCourse course}}">
+                        <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = course}}">{{courseNameFromSlug course}} </a></td>
+                        <td><i class="{{iconCourse course}}"></i>{{passedCourse course}}</td>
+                      </tr>
+                    {{/each}}
+                    </tbody>
+                  </table>
+                {{else}}
+                  <p><b>{{descriptionPair.label}}:</b> None</p>
+                {{/if}}
+              {{else}}
+                {{#if isLabel descriptionPair.label 'Related Opportunities'}}
+                  {{#if descriptionPair.value}}
+                    <b>{{descriptionPair.label}}:</b>
+                    <table class="ui collapsing compact small table">
+                      <tbody>
+                      {{#each opportunity in descriptionPair.value}}
+                        <tr class="{{rowColorOpportunity opportunity}}">
+                          <td><a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = opportunity}}">{{opportunityNameFromSlug opportunity}} </a></td>
+                          <td><i class="{{iconOpportunity opportunity}}"></i>{{verifiedOpportunity opportunity}}</td>
+                        </tr>
+                      {{/each}}
+                      </tbody>
+                    </table>
+                  {{else}}
+                    <p><b>{{descriptionPair.label}}:</b> None</p>
+                  {{/if}}
+                {{else}}
+                  {{#if descriptionPair.value }}
+                      <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+                  {{else}}
+                      <p><b>{{descriptionPair.label}}:</b> N/A</p>
+                  {{/if}}
+                {{/if}}
+              {{/if}}
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      {{/each}}
+      <p>
+        <button value="{{item}}" class="ui green basic mini button addItem">Add</button>
+        <button value="{{id}}" class="ui green basic mini button {{deleteDisabled}} jsDelete">Remove</button>
+      </p>
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

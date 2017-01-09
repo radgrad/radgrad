@@ -49,8 +49,8 @@ class TeaserCollection extends BaseInstanceCollection {
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const opportunityID = Opportunities.getEntityID(opportunity, 'Opportunity');
-    console.log(opportunityID);
+    console.log(opportunity);
+    const opportunityID = Opportunities.getID(opportunity);
     const teaserID = this._collection.insert({ title, slugID, author, url,
       description, duration, interestIDs, opportunityID });
     // Connect the Slug to this teaser

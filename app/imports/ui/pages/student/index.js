@@ -18,8 +18,8 @@ import './student-explorer-degrees-page.js';
 import './student-explorer-courses-page.html';
 import './student-explorer-courses-page.js';
 
-import './student-explorer-interest-page.html';
-import './student-explorer-interest-page.js';
+import './student-explorer-interests-page.html';
+import './student-explorer-interests-page.js';
 
 import './student-explorer-opportunities-page.html';
 import './student-explorer-opportunities-page.js';

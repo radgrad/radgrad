@@ -30,7 +30,7 @@ Template.Student_Explorer_Degrees_Page.helpers({
     return degree[0];
   },
   degrees() {
-    return DesiredDegrees.find().fetch();
+    return DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
   },
   degreeName(degree) {
     return degree.name;

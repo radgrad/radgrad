@@ -16,11 +16,14 @@ import './student-explorer-careergoals-widget.js';
 import './student-explorer-degrees-widget.html';
 import './student-explorer-degrees-widget.js';
 
+import './student-explorer-interests-widget.html';
+import './student-explorer-interests-widget.js';
+
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';
 
 import './student-explorer-opportunities-widget.html';
-import './student-explorer-opportunities-widget.html';
+import './student-explorer-opportunities-widget.js';
 
 import './student-explorer-student-info.html';
 import './student-explorer-student-info.js';

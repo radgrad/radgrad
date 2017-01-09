@@ -32,7 +32,7 @@ Template.Student_Explorer_CareerGoals_Page.helpers({
     return careerGoal[0];
   },
   careerGoals() {
-    return CareerGoals.find().fetch();
+    return CareerGoals.find({}, { sort: { name: 1 } }).fetch();
   },
   courseName(careerGoal) {
     return careerGoal.name;

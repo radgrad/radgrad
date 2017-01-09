@@ -34,7 +34,7 @@ Template.Student_Explorer_Courses_Page.helpers({
     return course[0];
   },
   courses() {
-    const allCourses = Courses.find().fetch();
+    const allCourses = Courses.find({}, { sort: { name: 1 } }).fetch();
     const courses = [];
     _.map(allCourses, (course) => {
       if (course.shortName !== 'Non-CS Course') {

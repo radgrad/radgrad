@@ -55,7 +55,7 @@ Template.Student_Explorer_Opportunities_Page.helpers({
     return opportunity[0];
   },
   opportunities() {
-    return Opportunities.find().fetch();
+    return Opportunities.find({}, { sort: { name: 1 } }).fetch();
   },
   opportunityName(opportunity) {
     return opportunity.name;

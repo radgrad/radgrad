@@ -10,6 +10,7 @@ import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { Teasers } from './TeaserCollection';
 import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
+import { makeSampleOpportunity } from '/imports/api/opportunity/SampleOpportunities.js';
 
 if (Meteor.isServer) {
   describe('TeaserCollection', function testSuite() {
@@ -21,6 +22,7 @@ if (Meteor.isServer) {
     let description;
     let duration;
     let interests;
+    let opportunity;
 
     before(function setup() {
       removeAllEntities();
@@ -31,6 +33,7 @@ if (Meteor.isServer) {
       description = 'This is a test teaser';
       duration = '1:32:14';
       interests = [makeSampleInterest()];
+      opportunity = makeSampleOpportunity('johnson');
     });
 
     after(function tearDown() {
@@ -38,7 +41,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = Teasers.define({ title, slug, author, url, description, duration, interests });
+      const instanceID = Teasers.define({ title, slug, author, url, description, duration, interests, opportunity });
       expect(Teasers.isDefined(instanceID)).to.be.true;
       Teasers.removeIt(instanceID);
       expect(Teasers.isDefined(instanceID)).to.be.false;
