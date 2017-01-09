@@ -62,5 +62,3 @@ export const updateUser = new ValidatedMethod({
     return Users.update(userDefn);
   },
 });
-
-

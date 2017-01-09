@@ -125,7 +125,7 @@ Meteor.startup(() => {
   if (exampleStudents) {
     exampleStudents.forEach((student) => {
       if (Users.find({ username: student.slug }).count() === 0) {
-        console.log(`defining ${student.slug}`);  // eslint-disable-line no-console
+        console.log(`Defining ${student.slug}`);  // eslint-disable-line no-console
         ValidUserAccounts.define({ username: student.slug });
         /* eslint no-param-reassign: "off" */
         student.role = ROLE.STUDENT;

@@ -11,6 +11,8 @@ import './student-home-page.css';
 import './student-mentorspace-page.css';
 import './student-mentorspace-page.html';
 import './student-mentorspace-page.js';
+import './student-mentorspace-page-accordion.html';
+import './student-mentorspace-page-accordion.js';
 
 import './student-explorer-degrees-page.html';
 import './student-explorer-degrees-page.js';

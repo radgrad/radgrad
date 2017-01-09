@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module Interest */
 
@@ -63,10 +64,28 @@ class InterestCollection extends BaseInstanceCollection {
     return instanceIDs.map(instanceID => this.findDoc(instanceID).name);
   }
 
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID and interestTypeID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+      if (!InterestTypes.isDefined(doc.interestTypeID)) {
+        problems.push(`Bad interestTypeID: ${doc.interestTypeID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const Interests = new InterestCollection();
-
+radgradCollections.push(Interests);

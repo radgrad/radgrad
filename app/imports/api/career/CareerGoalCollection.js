@@ -2,6 +2,9 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 
 /** @module CareerGoal */
 
@@ -63,9 +66,31 @@ class CareerGoalCollection extends BaseInstanceCollection {
   findNames(instanceIDs) {
     return instanceIDs.map(instanceID => this.findDoc(instanceID).name);
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID and interestIDs.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+      _.forEach(doc.interestIDs, interestID => {
+        if (!Interests.isDefined(interestID)) {
+          problems.push(`Bad interestID: ${interestID}`);
+        }
+      });
+    });
+    return problems;
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const CareerGoals = new CareerGoalCollection();
+radgradCollections.push(CareerGoals);

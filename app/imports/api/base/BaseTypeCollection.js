@@ -127,6 +127,23 @@ class BaseTypeCollection extends BaseCollection {
   findIdBySlug(slug) {
     return Slugs.getEntityID(slug, this._type);
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID.
+   * This is the default integrity checker for all BaseTypeCollection subclasses.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**

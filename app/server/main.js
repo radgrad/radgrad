@@ -5,6 +5,7 @@ import '/imports/api/degree';
 import '/imports/api/feedback';
 import '/imports/api/help';
 import '/imports/api/ice';
+import '/imports/api/integritychecker';
 import '/imports/api/interest';
 import '/imports/api/log';
 import '/imports/api/opportunity';
