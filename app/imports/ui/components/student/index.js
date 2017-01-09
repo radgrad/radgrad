@@ -7,8 +7,8 @@ import './explorer-dropdown.js';
 import './home-menu.html';
 import './home-menu.js';
 
-import './student-explorer-accordion.html';
-import './student-explorer-accordion.js';
+import './student-explorer-courses-widget.html';
+import './student-explorer-courses-widget.js';
 
 import './student-explorer-list-career-goals-widget.html';
 import './student-explorer-list-career-goals-widget.js';

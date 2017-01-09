@@ -1,0 +1,11 @@
+<template name="Student_Explorer_Courses_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Student_Explorer_Layout list = courses}}
+      {{> Student_Explorer_Courses_Widget name=course.name slug=(slugName course.slugID) descriptionPairs=(descriptionPairs course) id=course._id updateID=updateID item=course}}
+    {{/Student_Explorer_Layout}}
+
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

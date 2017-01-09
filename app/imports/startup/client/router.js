@@ -236,7 +236,7 @@ studentRoutes.route('/explorer/career-goals', {
 });
 
 export const studentExplorerCoursesPageRouteName = 'Student_Explorer_Courses_Page';
-studentRoutes.route('/explorer/courses', {
+studentRoutes.route('/explorer/courses/:course', {
   name: studentExplorerCoursesPageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerCoursesPageRouteName });
@@ -336,54 +336,6 @@ studentRoutes.route('/explorer', {
   name: studentExplorerPageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerPageRouteName });
-  },
-});
-
-export const studentExplorerDegreePageRouteName = 'Student_Explorer_Degree_Page';
-studentRoutes.route('/explorer/degree', {
-  name: studentExplorerDegreePageRouteName,
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerDegreePageRouteName });
-  },
-});
-
-export const studentExplorerCoursePageRouteName = 'Student_Explorer_Course_Page';
-studentRoutes.route('/explorer/course', {
-  name: studentExplorerCoursePageRouteName,
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerCoursePageRouteName });
-  },
-});
-
-export const studentExplorerInterestPageRouteName = 'Student_Explorer_Interest_Page';
-studentRoutes.route('/explorer/interest', {
-  name: studentExplorerInterestPageRouteName,
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerInterestPageRouteName });
-  },
-});
-
-export const studentExplorerOpportunityPageRouteName = 'Student_Explorer_Opportunity_Page';
-studentRoutes.route('/explorer/opportunity', {
-  name: studentExplorerOpportunityPageRouteName,
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerOpportunityPageRouteName });
-  },
-});
-
-export const studentExplorerCareerPageRouteName = 'Student_Explorer_Career_Page';
-studentRoutes.route('/explorer/career', {
-  name: studentExplorerCareerPageRouteName,
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerCareerPageRouteName });
-  },
-});
-
-export const studentExplorerInterestAlgorithmsPageRouteName = 'Algorithms';
-studentRoutes.route('/explorer/interest/algorithms', {
-  name: studentExplorerInterestAlgorithmsPageRouteName,
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerInterestAlgorithmsPageRouteName });
   },
 });
 

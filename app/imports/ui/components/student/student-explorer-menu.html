@@ -1,9 +1,22 @@
 <template name="Student_Explorer_Menu">
-  <div  class="ui left vertical text menu">
-    <a class="{{isActiveRoute careerGoalsRouteName}} item" href="{{pathFor careerGoalsRouteName username=routeUserName}}">Career Goals</a>
-    <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName}}">Courses</a>
-    <a class="{{isActiveRoute degreesRouteName}} item" href="{{pathFor degreesRouteName username=routeUserName}}">Degrees</a>
-    <a class="{{isActiveRoute interestsRouteName}} item" href="{{pathFor interestsRouteName username=routeUserName}}">Interests</a>
-    <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName}}">Opportunities</a>
+  <div class="ui compact menu">
+    <div class="ui simple dropdown item">
+      Select Explorer
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="{{isActiveRoute careerGoalsRouteName}} item" href="{{pathFor careerGoalsRouteName username=routeUserName}}">Career Goals</a>
+        <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course=firstCourse}}">Courses</a>
+        <a class="{{isActiveRoute degreesRouteName}} item" href="{{pathFor degreesRouteName username=routeUserName}}">Degrees</a>
+        <a class="{{isActiveRoute interestsRouteName}} item" href="{{pathFor interestsRouteName username=routeUserName}}">Interests</a>
+        <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName}}">Opportunities</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical text menu">
+    {{#each listItem in menuList}}
+    <a class="active item" data-tab="tab-name" href="{{pathFor coursesRouteName username=routeUserName course=(courseSlugName listItem)}}">{{courseName listItem}}</a>
+    {{/each}}
   </div>
 </template>
+

@@ -15,8 +15,8 @@ import './student-mentorspace-page.js';
 import './student-explorer-degree-page.html';
 import './student-explorer-degree-page.js';
 
-import './student-explorer-course-page.html';
-import './student-explorer-course-page.js';
+import './student-explorer-courses-page.html';
+import './student-explorer-courses-page.js';
 
 import './student-explorer-interest-page.html';
 import './student-explorer-interest-page.js';
@@ -26,9 +26,6 @@ import './student-explorer-opportunity-page.js';
 
 import './student-explorer-careergoals-page.html';
 import './student-explorer-careergoals-page.js';
-
-import './explorer-interest-pages/algorithms.html';
-import './explorer-interest-pages/algorithms.js';
 
 import './student-aboutme.html';
 import './student-aboutme.js';
