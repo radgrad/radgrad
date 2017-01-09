@@ -228,7 +228,7 @@ const studentRoutes = FlowRouter.group({
 });
 
 export const studentExplorerCareerGoalsPageRouteName = 'Student_Explorer_CareerGoals_Page';
-studentRoutes.route('/explorer/career-goals', {
+studentRoutes.route('/explorer/career-goals/:careerGoal', {
   name: studentExplorerCareerGoalsPageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerCareerGoalsPageRouteName });
@@ -244,7 +244,7 @@ studentRoutes.route('/explorer/courses/:course', {
 });
 
 export const studentExplorerDegreesPageRouteName = 'Student_Explorer_Degrees_Page';
-studentRoutes.route('/explorer/degrees', {
+studentRoutes.route('/explorer/degrees/:degree', {
   name: studentExplorerDegreesPageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerDegreesPageRouteName });
@@ -252,7 +252,7 @@ studentRoutes.route('/explorer/degrees', {
 });
 
 export const studentExplorerInterestsPageRouteName = 'Student_Explorer_Interests_Page';
-studentRoutes.route('/explorer/interests', {
+studentRoutes.route('/explorer/interests/:interest', {
   name: studentExplorerInterestsPageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerInterestsPageRouteName });
@@ -260,7 +260,7 @@ studentRoutes.route('/explorer/interests', {
 });
 
 export const studentExplorerOpportunitiesPageRouteName = 'Student_Explorer_Opportunities_Page';
-studentRoutes.route('/explorer/opportunities', {
+studentRoutes.route('/explorer/opportunities/:opportunity', {
   name: studentExplorerOpportunitiesPageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerOpportunitiesPageRouteName });

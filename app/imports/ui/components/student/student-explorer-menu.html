@@ -4,7 +4,7 @@
       Select Explorer
       <i class="dropdown icon"></i>
       <div class="menu">
-        <a class="{{isActiveRoute careerGoalsRouteName}} item" href="{{pathFor careerGoalsRouteName username=routeUserName}}">Career Goals</a>
+        <a class="{{isActiveRoute careerGoalsRouteName}} item" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Career Goals</a>
         <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course=firstCourse}}">Courses</a>
         <a class="{{isActiveRoute degreesRouteName}} item" href="{{pathFor degreesRouteName username=routeUserName}}">Degrees</a>
         <a class="{{isActiveRoute interestsRouteName}} item" href="{{pathFor interestsRouteName username=routeUserName}}">Interests</a>
@@ -14,9 +14,17 @@
   </div>
 
   <div class="ui vertical text menu">
-    {{#each listItem in menuList}}
-    <a class="active item" data-tab="tab-name" href="{{pathFor coursesRouteName username=routeUserName course=(courseSlugName listItem)}}">{{courseName listItem}}</a>
-    {{/each}}
+      {{#if isType type 'courses'}}
+        {{#each listItem in menuList}}
+        <a class="active item" data-tab="tab-name" href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}">{{courseName listItem}}</a>
+        {{/each}}
+      {{else}}
+        {{#if isType type 'careerGoals'}}
+          {{#each listItem in menuList}}
+            <a class="active item" data-tab="tab-name" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}">{{careerGoalName listItem}}</a>
+          {{/each}}
+        {{/if}}
+      {{/if}}
   </div>
 </template>
 

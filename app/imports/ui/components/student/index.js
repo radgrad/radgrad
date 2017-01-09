@@ -10,8 +10,8 @@ import './home-menu.js';
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
 
-import './student-explorer-list-career-goals-widget.html';
-import './student-explorer-list-career-goals-widget.js';
+import './student-explorer-careergoals-widget.html';
+import './student-explorer-careergoals-widget.js';
 
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';

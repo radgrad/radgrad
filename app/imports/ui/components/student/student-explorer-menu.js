@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 
 
@@ -23,16 +24,35 @@ Template.Student_Explorer_Menu.helpers({
   courseName(course) {
     return course.shortName;
   },
-  courseSlugName(course) {
-    return Slugs.findDoc(course.slugID).name;
+  slugName(item) {
+    return Slugs.findDoc(item.slugID).name;
+  },
+  careerGoalName(careerGoal) {
+    return careerGoal.name;
   },
   firstCourse() {
+    let ret = '';
     const course = Courses.find({ number: 'ICS 101' }).fetch();
-    return Slugs.findDoc(course[0].slugID).name;
+    if (course.length > 0) {
+      ret = Slugs.findDoc(course[0].slugID).name;
+    }
+    return ret;
+  },
+  firstCareerGoal() {
+    let ret = '';
+    const careerGoal = CareerGoals.find({ name: 'Database Administrator' }).fetch();
+    if (careerGoal.length > 0) {
+      ret = Slugs.findDoc(careerGoal[0].slugID).name;
+    }
+    return ret;
+  },
+  isType(type, value) {
+    return type === value;
   },
 });
 
 
 Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated() {
   this.subscribe(Courses.getPublicationName());
+  this.subscribe(CareerGoals.getPublicationName());
 });

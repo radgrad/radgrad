@@ -48,7 +48,7 @@ Template.Student_Explorer_Courses_Page.helpers({
     return course.shortName;
   },
   count() {
-    return Courses.count();
+    return Courses.count() - 1;
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
