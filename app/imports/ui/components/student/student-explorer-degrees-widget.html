@@ -1,0 +1,36 @@
+<template name="Student_Explorer_Degrees_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded segment container">
+      <div class="ui dividing header">
+        <h4>{{name}}</h4>
+      </div>
+      {{#each descriptionPair in descriptionPairs}}
+        {{#if isLabel descriptionPair.type 'amount'}}
+          <p>{{descriptionPair.value}} {{descriptionPair.label}} have {{name}} listed as their desired degree.</p>
+        {{else}}
+          {{#if isLabel descriptionPair.type 'list'}}
+            <p>
+            <div class="ui circular mini bordered images">
+            {{#each user in descriptionPair.value}}
+              <img style="height:30px; width: auto;"  class="ui image" src={{userPicture user}}>
+            {{/each}}
+            </div>
+            </p>
+          {{else}}
+            {{#if descriptionPair.value }}
+              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+            {{else}}
+              <p><b>{{descriptionPair.label}}:</b> N/A</p>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      {{/each}}
+      <p>
+        <button value="{{item}}" class="ui green basic mini button addItem">Add</button>
+        <button value="{{id}}" class="ui green basic mini button {{deleteDisabled}} jsDelete">Remove</button>
+      </p>
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

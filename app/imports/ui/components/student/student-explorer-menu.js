@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 
@@ -27,8 +28,8 @@ Template.Student_Explorer_Menu.helpers({
   slugName(item) {
     return Slugs.findDoc(item.slugID).name;
   },
-  careerGoalName(careerGoal) {
-    return careerGoal.name;
+  itemName(item) {
+    return item.name;
   },
   firstCourse() {
     let ret = '';
@@ -46,6 +47,14 @@ Template.Student_Explorer_Menu.helpers({
     }
     return ret;
   },
+  firstDegree() {
+    let ret = '';
+    const degree = DesiredDegrees.find({ name: 'B.S. in Computer Science' }).fetch();
+    if (degree.length > 0) {
+      ret = Slugs.findDoc(degree[0].slugID).name;
+    }
+    return ret;
+  },
   isType(type, value) {
     return type === value;
   },
@@ -55,4 +64,5 @@ Template.Student_Explorer_Menu.helpers({
 Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated() {
   this.subscribe(Courses.getPublicationName());
   this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(DesiredDegrees.getPublicationName());
 });

@@ -13,6 +13,9 @@ import './student-explorer-courses-widget.js';
 import './student-explorer-careergoals-widget.html';
 import './student-explorer-careergoals-widget.js';
 
+import './student-explorer-degrees-widget.html';
+import './student-explorer-degrees-widget.js';
+
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';
 

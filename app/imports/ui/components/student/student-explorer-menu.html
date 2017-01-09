@@ -6,7 +6,7 @@
       <div class="menu">
         <a class="{{isActiveRoute careerGoalsRouteName}} item" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Career Goals</a>
         <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course=firstCourse}}">Courses</a>
-        <a class="{{isActiveRoute degreesRouteName}} item" href="{{pathFor degreesRouteName username=routeUserName}}">Degrees</a>
+        <a class="{{isActiveRoute degreesRouteName}} item" href="{{pathFor degreesRouteName username=routeUserName degree=firstDegree}}">Degrees</a>
         <a class="{{isActiveRoute interestsRouteName}} item" href="{{pathFor interestsRouteName username=routeUserName}}">Interests</a>
         <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName}}">Opportunities</a>
       </div>
@@ -21,8 +21,14 @@
       {{else}}
         {{#if isType type 'careerGoals'}}
           {{#each listItem in menuList}}
-            <a class="active item" data-tab="tab-name" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}">{{careerGoalName listItem}}</a>
+            <a class="active item" data-tab="tab-name" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}">{{itemName listItem}}</a>
           {{/each}}
+          {{else}}
+            {{#if isType type 'degrees'}}
+              {{#each listItem in menuList}}
+                <a class="active item" data-tab="tab-name" href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}">{{itemName listItem}}</a>
+              {{/each}}
+            {{/if}}
         {{/if}}
       {{/if}}
   </div>
