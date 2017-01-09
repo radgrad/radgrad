@@ -54,10 +54,13 @@ Template.Student_Explorer_Courses_Page.helpers({
     return Slugs.findDoc(slugID).name;
   },
   descriptionPairs(course) {
-    console.log(course.description);
     return [
+      { label: 'Course Number', value: course.number },
+      { label: 'Credit Hours', value: course.creditHrs },
+      { label: 'Prerequisites', value: course.prerequisites },
       { label: 'Description', value: course.description },
       { label: 'Syllabus', value: makeLink(course.syllabus) },
+      { label: 'More Information', value: makeLink(course.moreInformation) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
       { label: 'student(s)', value: numUsers(course), type: 'amount' },
       { label: 'Students', value: interestedUsers(course), type: 'list' },

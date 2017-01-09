@@ -13,7 +13,7 @@
           </p>
         {{else}}
           {{#if isLabel descriptionPair.type 'amount'}}
-            <p>{{descriptionPair.value}} {{descriptionPair.label}} have added {{name}}.</p>
+            <p>{{descriptionPair.value}} {{descriptionPair.label}} have {{name}} in their degree plan.</p>
           {{else}}
             {{#if isLabel descriptionPair.type 'list'}}
               <p>
@@ -24,7 +24,29 @@
               </div>
               </p>
             {{else}}
-              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+              {{#if isLabel descriptionPair.label 'Prerequisites'}}
+                {{#if descriptionPair.value}}
+                  <b>{{descriptionPair.label}}:</b>
+                  <table class="ui collapsing compact small table">
+                <tbody>
+                {{#each prerequisite in descriptionPair.value}}
+                    <tr class="{{rowColor prerequisite}}">
+                    <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite}}">{{courseName prerequisite}} </a></td>
+                      <td><i class="{{icon prerequisite}}"></i>{{passedCourse prerequisite}}</td>
+                  </tr>
+                {{/each}}
+                  </tbody>
+                </table>
+                  {{else}}
+                  <p><b>{{descriptionPair.label}}:</b> None</p>
+                  {{/if}}
+              {{else}}
+                {{#if descriptionPair.value }}
+                  <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+                {{else}}
+                  <p><b>{{descriptionPair.label}}:</b> N/A</p>
+                {{/if}}
+              {{/if}}
             {{/if}}
           {{/if}}
         {{/if}}
