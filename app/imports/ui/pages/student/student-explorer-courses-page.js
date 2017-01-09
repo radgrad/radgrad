@@ -11,7 +11,6 @@ import { Users } from '../../../api/user/UserCollection.js';
 
 function interestedUsers(course) {
   const interested = [];
-  let count = 0;
   const ci = CourseInstances.find({
     courseID: course._id,
   }).fetch();

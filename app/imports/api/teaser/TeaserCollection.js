@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
+import { Opportunities } from '/imports/api/opportunity/OpportunityCollection.js';
 
 /** @module Teaser */
 
@@ -23,6 +24,7 @@ class TeaserCollection extends BaseInstanceCollection {
       description: { type: String },
       duration: { type: String },
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
+      opportunityID: { type: SimpleSchema.RegEx.Id },
     }));
   }
 
@@ -42,12 +44,15 @@ class TeaserCollection extends BaseInstanceCollection {
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestID.
    * @returns The newly created docID.
    */
-  define({ title, slug, author, url, description, duration, interests }) {
+  define({ title, slug, author, url, description, duration, interests, opportunity }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const teaserID = this._collection.insert({ title, slugID, author, url, description, duration, interestIDs });
+    const opportunityID = Opportunities.getEntityID(opportunity, 'Opportunity');
+    console.log(opportunityID);
+    const teaserID = this._collection.insert({ title, slugID, author, url,
+      description, duration, interestIDs, opportunityID });
     // Connect the Slug to this teaser
     Slugs.updateEntityID(slugID, teaserID);
     return teaserID;

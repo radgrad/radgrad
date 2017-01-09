@@ -8,7 +8,7 @@
         <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course=firstCourse}}">Courses</a>
         <a class="{{isActiveRoute degreesRouteName}} item" href="{{pathFor degreesRouteName username=routeUserName degree=firstDegree}}">Degrees</a>
         <a class="{{isActiveRoute interestsRouteName}} item" href="{{pathFor interestsRouteName username=routeUserName}}">Interests</a>
-        <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName}}">Opportunities</a>
+        <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=firstOpportunity}}">Opportunities</a>
       </div>
     </div>
   </div>
@@ -28,7 +28,13 @@
               {{#each listItem in menuList}}
                 <a class="active item" data-tab="tab-name" href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}">{{itemName listItem}}</a>
               {{/each}}
+            {{else}}
+              {{#if isType type 'opportunities'}}
+                {{#each listItem in menuList}}
+                  <a class="active item" data-tab="tab-name" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}">{{itemName listItem}}</a>
+                {{/each}}
             {{/if}}
+          {{/if}}
         {{/if}}
       {{/if}}
   </div>

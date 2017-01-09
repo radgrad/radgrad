@@ -21,8 +21,8 @@ import './student-explorer-courses-page.js';
 import './student-explorer-interest-page.html';
 import './student-explorer-interest-page.js';
 
-import './student-explorer-opportunity-page.html';
-import './student-explorer-opportunity-page.js';
+import './student-explorer-opportunities-page.html';
+import './student-explorer-opportunities-page.js';
 
 import './student-explorer-careergoals-page.html';
 import './student-explorer-careergoals-page.js';
