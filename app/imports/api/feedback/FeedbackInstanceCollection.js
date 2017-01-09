@@ -5,7 +5,7 @@ import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module FeedbackInstance */
 
@@ -66,10 +66,29 @@ class FeedbackInstanceCollection extends BaseCollection {
     }
   }
 
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks feedbackID and userID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Feedbacks.isDefined(doc.feedbackID)) {
+        problems.push(`Bad feedbackID: ${doc.feedbackID}`);
+      }
+      if (!Users.isDefined(doc.userID)) {
+        problems.push(`Bad userID: ${doc.userID}`);
+      }
+    });
+    return problems;
+  }
+
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const FeedbackInstances = new FeedbackInstanceCollection();
-
+radgradCollections.push(FeedbackInstances);

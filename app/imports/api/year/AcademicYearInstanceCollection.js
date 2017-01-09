@@ -5,6 +5,8 @@ import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module AcademicYearInstance */
 
@@ -88,9 +90,32 @@ class AcademicYearInstanceCollection extends BaseCollection {
     return `[AY ${doc.year}-${doc.year + 1} ${student.username}]`;
   }
 
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks studentID, semesterIDs
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Users.isDefined(doc.studentID)) {
+        problems.push(`Bad studentID: ${doc.studentID}`);
+      }
+      _.forEach(doc.semesterIDs, semesterID => {
+        if (!Semesters.isDefined(semesterID)) {
+          problems.push(`Bad semesterID: ${semesterID}`);
+        }
+      });
+    });
+    return problems;
+  }
+
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const AcademicYearInstances = new AcademicYearInstanceCollection();
+radgradCollections.push(AcademicYearInstances);
+

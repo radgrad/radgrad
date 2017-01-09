@@ -9,6 +9,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection.js';
+import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 Template.Student_About_Me_Widget.helpers({
@@ -28,12 +29,8 @@ Template.Student_About_Me_Widget.helpers({
   desiredDegree() {
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      if (user.desiredDegree === 'BS_CS') {
-        return 'B.S. CS';
-      } else
-        if (user.desiredDegree === 'BA_ICS') {
-          return 'B.A. ICS';
-        }
+      const degreeID = user.desiredDegreeID;
+      return DesiredDegrees.findDoc(degreeID).name;
     }
     return '';
   },
@@ -115,6 +112,7 @@ Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreate
   this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.subscribe(DesiredDegrees.getPublicationName());
 });
 
 

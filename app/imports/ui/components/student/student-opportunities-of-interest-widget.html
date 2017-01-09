@@ -4,12 +4,15 @@
     <div class="ui dividing header">
       <h4>RECOMMENDED OPPORTUNITIES ({{opportunityCount}})</h4>
     </div>
-
-    <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui two cards">
-      {{#each opp in opportunities}}
-      {{> Student_Opportunities_Of_Interest_Card opportunity = opp}}
-      {{/each}}
-    </div>
+    {{#if opportunities}}
+      <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui two cards">
+        {{#each opp in opportunities}}
+        {{> Student_Opportunities_Of_Interest_Card opportunity = opp}}
+        {{/each}}
+      </div>
+    {{else}}
+      <p>Add interests to see recommendations here.</p>
+    {{/if}}
   </div>
   {{else}}
   {{> Loading}}

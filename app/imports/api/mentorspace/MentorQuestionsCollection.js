@@ -1,5 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module MentorQuestions */
 
@@ -30,6 +31,16 @@ class MentorQuestionsCollection extends BaseCollection {
   getMentorQuestion() {
     return this._collection.find({});
   }
+
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    return [];
+  }
 }
 
 export const MentorQuestions = new MentorQuestionsCollection();
+radgradCollections.push(MentorQuestions);
+

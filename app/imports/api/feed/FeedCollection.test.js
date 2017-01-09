@@ -15,16 +15,14 @@ if (Meteor.isServer) {
   describe('FeedCollection', function testSuite() {
     // Define course data.
     let student;
-    let slug;
-    let description;
+    let feedType;
     let timestamp;
 
     before(function setup() {
       removeAllEntities();
       student = makeSampleUser();
-      slug = 'feed-test-slug';
-      description = 'This is a test slug';
-      timestamp = new Date();
+      feedType = 'new';
+      timestamp = Date.now();
     });
 
     after(function tearDown() {
@@ -32,7 +30,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = Feed.define({ student, slug, description, timestamp });
+      const instanceID = Feed.define({ student, feedType, timestamp });
       expect(Feed.isDefined(instanceID)).to.be.true;
       Feed.removeIt(instanceID);
       expect(Feed.isDefined(instanceID)).to.be.false;
