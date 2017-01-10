@@ -1,6 +1,6 @@
 <template name="Semester_List">
-  <div class="ui center aligned padded segment" style="margin-bottom: 0 !important;">
-    <div class="ui dividing {{#if isCurrentSemester}}green{{/if}} header">{{semesterName}} {{year}}</div>
+  <div class="ui center aligned padded segment" style="margin-bottom: 0 !important; {{#if isCurrentSemester}}border-color: #6FBE44;{{/if}}">
+    <div class="ui dividing {{#if isCurrentSemester}}green{{/if}} header" style="{{#if isCurrentSemester}}text-transform: uppercase;{{/if}}">{{semesterName}} {{year}}</div>
     <table class="ui very basic table bodyDrop" ondragover="allowDrop(event)" style="flex-grow: 3">
       <tbody>
       {{#each course in icsCourses}}
