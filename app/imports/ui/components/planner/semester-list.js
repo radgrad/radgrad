@@ -389,7 +389,7 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
   }
   const template = this;
   Tracker.afterFlush(() => {
-    template.$('.ui.basic.button')
+    template.$('.ui.button')
         .popup({
           on: 'click',
         });
