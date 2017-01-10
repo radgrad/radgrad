@@ -16,6 +16,7 @@ class MentorAnswersCollection extends BaseCollection {
     super('MentorAnswers', new SimpleSchema({
       questionID: { type: String },
       mentor: { type: String },  // TODO: Mentor should be a userID, not a string.
+      slug: { type: String },
       text: { type: String },
     }));
   }
@@ -24,11 +25,12 @@ class MentorAnswersCollection extends BaseCollection {
    * Defines the help for a given questionID.
    * @param questionID the question ID.
    * @param mentor the mentor who answered the question.
+   * @param slug
    * @param text the answer text.
    * @return {any} the ID of the answer.
    */
-  define({ questionID, mentor, text }) {
-    return this._collection.insert({ questionID, mentor, text });
+  define({ questionID, mentor, slug, text }) {
+    return this._collection.insert({ questionID, mentor, slug, text });
   }
 
   /**

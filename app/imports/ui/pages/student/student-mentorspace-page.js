@@ -6,6 +6,7 @@ import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { MentorQuestions } from '../../../api/mentorspace/MentorQuestionsCollection.js';
+import { MentorAnswers } from '../../../api/mentorspace/MentorAnswersCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -19,6 +20,8 @@ Template.Student_MentorSpace_Page.onCreated(function appBodyOnCreated() {
     this.subscribe(Feedbacks.getPublicationName());
     this.subscribe(FeedbackInstances.getPublicationName());
     this.subscribe(Interests.getPublicationName());
+    this.subscribe(MentorQuestions.getPublicationName());
+    this.subscribe(MentorAnswers.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
