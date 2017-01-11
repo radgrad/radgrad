@@ -214,7 +214,7 @@ Template.Inspector.helpers({
         const course = Courses.findDoc(ci.courseID);
         const slug = Slugs.findDoc(course.slugID);
         const ice = makeCourseICE(slug.name, ci.grade);
-        console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'courseIce', ice, ci.grade);
+        // console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'courseIce', ice, ci.grade);
         return ice;
       }
     return null;

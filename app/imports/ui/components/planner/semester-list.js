@@ -366,8 +366,9 @@ Template.Semester_List.events({
     CourseInstances.clientUpdateGrade(div.id, grade);
     const ci = CourseInstances.findDoc(div.id);
     instance.state.set(plannerKeys.detailCourseInstance, ci);
-    Tracker.flush();
     console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'clickItemGrade', ci.ice, ci.grade);
+    // Tracker.flush();
+    // console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'clickItemGrade', ci.ice, ci.grade);
   },
   'click .jsDelCourse': function clickJsDelCourse(event) {
     // event.preventDefault();

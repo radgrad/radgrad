@@ -3,6 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Logger } from 'meteor/jag:pince';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { moment } from 'meteor/momentjs:moment';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
@@ -185,17 +186,20 @@ class CourseInstanceCollection extends BaseCollection {
     return `[CI ${semester} ${courseName} ${grade}]`;
   }
 
+  /* eslint-disable class-methods-use-this */
   /**
    * Updates the CourseInstance's grade. This should be used for planning purposes on the client side.
    * @param courseInstanceID The course instance ID.
    * @param grade The new grade.
-   * @param grade The new grade.
    */
   clientUpdateGrade(courseInstanceID, grade) {
+    const logger = new Logger('CourseInstance.clientUpdateGrade');
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${grade}`);
     Meteor.call('CourseInstance.updateGrade', {
       courseInstanceID,
       grade,
     });
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} after Meteor.call`);
   }
   /**
    * Updates the CourseInstance's grade. This should be used for planning purposes.
@@ -204,14 +208,14 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
    */
   updateGrade(courseInstanceID, grade) {
-    // const logger = new Logger('CourseInstance.updateGrade');
-    // logger.info(`${grade}`);
+    const logger = new Logger('CourseInstance.updateGrade');
+    logger.info(`${grade}`);
     this.assertDefined(courseInstanceID);
-    // logger.info('after assert');
+    logger.info('after assert');
     const ice = makeCourseICE(courseInstanceID, grade);
-    // logger.info('after ice');
+    logger.info('after ice');
     this._collection.update({ _id: courseInstanceID }, { $set: { grade, ice, verified: false } });
-    // logger.info('after _collection update');
+    logger.info('after _collection update');
   }
 
   /**
