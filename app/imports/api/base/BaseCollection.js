@@ -182,6 +182,43 @@ class BaseCollection {
   checkIntegrity() {  // eslint-disable-line class-methods-use-this
     return ['There is no integrity checker defined for this collection.'];
   }
+
+  /**
+   * Returns an array of objects representing the contents of this collection in a format
+   * suitable for passing to the restore() method.
+   * Calls dumpOne() on each docID.
+   * @returns {Array} An array of objects representing the contents of this collection.
+   */
+  dumpAll() {
+    return this.find().map(docID => this.dumpOne(docID));
+  }
+
+  /**
+   * Returns an object representing the definition of docID in a format appropriate to the restoreOne function.
+   * Must be overridden by each collection.
+   * @param docID A docID from this collection.
+   * @returns { Object } An object representing this document.
+   */
+  dumpOne(docID) { // eslint-disable-line
+    return null;
+  }
+
+  /**
+   * Defines the entity represented by dumpObject.
+   * Must be overridden by each collection.
+   * @param dumpObject An object representing one document in this collection.
+   */
+  restoreOne(dumpObject) { // eslint-disable-line class-methods-use-this, no-unused-vars
+    return null;
+  }
+
+  /**
+   * Defines all the entities in the passed array of objects.
+   * @param dumpObjects The array of objects representing the definition of a document in this collection.
+   */
+  restoreAll(dumpObjects) {
+    _.each(dumpObjects, dumpObject => this.restoreOne(dumpObject));
+  }
 }
 
 /**

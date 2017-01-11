@@ -60,7 +60,7 @@ class CareerGoalCollection extends BaseInstanceCollection {
   /**
    * Returns a list of Career Goal names corresponding to the passed list of CareerGoal docIDs.
    * @param instanceIDs A list of Career Goal docIDs.
-   * @returns { Array }
+   * @returns { Array } An array of name strings.
    * @throws { Meteor.Error} If any of the instanceIDs cannot be found.
    */
   findNames(instanceIDs) {
@@ -86,6 +86,20 @@ class CareerGoalCollection extends BaseInstanceCollection {
       });
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing docID in a format acceptable to define().
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const description = doc.description;
+    const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
+    const moreInformation = doc.moreInformation;
+    return { name, slug, interests, description, moreInformation };
   }
 }
 

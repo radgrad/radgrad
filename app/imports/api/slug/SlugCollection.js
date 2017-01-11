@@ -110,6 +110,17 @@ class SlugCollection extends BaseCollection {
   }
 
   /**
+   * Returns the slug name associated with this ID.
+   * @param slugID The slug ID.
+   * @returns The slug name.
+   * @throws { Meteor.Error } If the passed slugID is not valid.
+   */
+  getNameFromID(slugID) {
+    this.assertDefined(slugID);
+    return this.findDoc(slugID).name;
+  }
+
+  /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
    * @param { String | Object } docOrID A document or docID in this collection.
    */
@@ -152,10 +163,11 @@ Slugs.subscribe();
 
 /* eslint object-shorthand: "off" */
 
+// TODO: Should methods be in their own file or at bottom of this one? I don't think we're consistent.
 Meteor.methods({
   'SlugCollection.remove'(slug) {
     check(slug, String);
-    Slugs.remove(slug);
+    Slugs.remove(slug); // TODO: 'remove(slug)' does not even exist. Why is this method defined?
   },
   'SlugCollection._removeAll'() {
     Slugs._removeAll();
