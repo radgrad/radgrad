@@ -1,15 +1,11 @@
-/**
- * Created by ataka on 12/15/16.
- */
-
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { Teasers } from './TeaserCollection';
 import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('TeaserCollection', function testSuite() {

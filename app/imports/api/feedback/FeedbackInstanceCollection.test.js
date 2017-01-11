@@ -18,7 +18,7 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #removeIt', function test() {
+    it('#define, #removeIt, #dumpOne, #restoreOne', function test() {
       const user = makeSampleUser();
       const feedback = makeSampleFeedback();
       const description = 'foo';
