@@ -37,6 +37,23 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Returns an object representing the CourseInstance docID in a format acceptable to define().
+   * @param docID The docID of a CourseInstance.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const semester = Semesters.findSlugByID(doc.semesterID);
+    const course = Courses.findSlugByID(doc.courseID);
+    const note = doc.note;
+    const verified = doc.verified;
+    const creditHrs = doc.creditHrs;
+    const grade = doc.grade;
+    const student = Users.findSlugByID(doc.studentID);
+    return { semester, course, note, verified, creditHrs, grade, student };
+  }
+
+  /**
    * Defines a new CourseInstance.
    * @example
    * // To define an instance of a CS course:

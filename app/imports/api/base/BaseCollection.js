@@ -205,10 +205,14 @@ class BaseCollection {
 
   /**
    * Defines the entity represented by dumpObject.
-   * Must be overridden by each collection.
+   * Defaults to calling the define() method if it exists.
    * @param dumpObject An object representing one document in this collection.
+   * @returns { String } The docID of the newly created document.
    */
-  restoreOne(dumpObject) { // eslint-disable-line class-methods-use-this, no-unused-vars
+  restoreOne(dumpObject) {
+    if (typeof this.define === 'function') {
+      return this.define(dumpObject);
+    }
     return null;
   }
 

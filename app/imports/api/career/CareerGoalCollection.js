@@ -89,7 +89,8 @@ class CareerGoalCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Returns an object representing docID in a format acceptable to define().
+   * Returns an object representing the CareerGoal docID in a format acceptable to define().
+   * @param docID The docID of a CareerGoal.
    * @returns { Object } An object representing the definition of docID.
    */
   dumpOne(docID) {
