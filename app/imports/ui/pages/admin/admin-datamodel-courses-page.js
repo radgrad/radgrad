@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { Courses } from '../../../api/course/CourseCollection';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 Template.Admin_DataModel_Courses_Page.helpers({
@@ -11,7 +10,6 @@ Template.Admin_DataModel_Courses_Page.helpers({
   },
 });
 
-Template.Admin_DataModel_Courses_Page.onCreated(function adminCrudPageOnCreated() {
-  this.subscribe(Courses.getPublicationName());
+Template.Admin_DataModel_Courses_Page.onCreated(function onCreated() {
   this.updateID = new ReactiveVar('');
 });

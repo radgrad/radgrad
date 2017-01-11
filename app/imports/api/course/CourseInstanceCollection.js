@@ -9,6 +9,8 @@ import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { makeCourseICE } from '/imports/api/ice/IceProcessor';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+
 
 /** @module CourseInstance */
 
@@ -161,7 +163,7 @@ class CourseInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
@@ -223,15 +225,38 @@ class CourseInstanceCollection extends BaseCollection {
     Semesters.assertSemester(semesterID);
     this._collection.update({ _id: courseInstanceID }, { $set: { semesterID } });
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks semesterID, courseID, and studentID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Semesters.isDefined(doc.semesterID)) {
+        problems.push(`Bad semesterID: ${doc.semesterID}`);
+      }
+      if (!Courses.isDefined(doc.courseID)) {
+        problems.push(`Bad courseID: ${doc.courseID}`);
+      }
+      if (!Users.isDefined(doc.studentID)) {
+        problems.push(`Bad studentID: ${doc.studentID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const CourseInstances = new CourseInstanceCollection();
+radgradCollections.push(CourseInstances);
+
 
 if (Meteor.isServer) {
-  const instance = this;
   // eslint-disable-next-line meteor/audit-argument-checks
   Meteor.publish(`${CourseInstances._collectionName}.Public`, function publicPublish(courseID) {
     // check the opportunityID.
@@ -239,6 +264,6 @@ if (Meteor.isServer) {
       opportunityID: { type: String },
     }).validate({ courseID });
 
-    return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
+    return CourseInstances._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
   });
 }

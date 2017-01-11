@@ -95,25 +95,26 @@ Template.Semester_List.helpers({
     const courses = availableCourses();
     courses.forEach((course) => {
       const cNumber = course.number;
+      const cLabel = `${course.number} ${course.shortName}`;
       switch (level) {
         case 100:
           if (cNumber.substring(0, 5) === 'ICS 1') {
-            ret.push(cNumber);
+            ret.push(cLabel);
           }
           break;
         case 200:
           if (cNumber.substring(0, 5) === 'ICS 2') {
-            ret.push(cNumber);
+            ret.push(cLabel);
           }
           break;
         case 300:
           if (cNumber.substring(0, 5) === 'ICS 3') {
-            ret.push(cNumber);
+            ret.push(cLabel);
           }
           break;
         case 400:
           if (cNumber.substring(0, 5) === 'ICS 4') {
-            ret.push(cNumber);
+            ret.push(cLabel);
           }
           break;
         default:
@@ -394,7 +395,7 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
   }
   const template = this;
   Tracker.afterFlush(() => {
-    template.$('.ui.basic.button')
+    template.$('.ui.button')
         .popup({
           on: 'click',
         });

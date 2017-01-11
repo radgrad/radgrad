@@ -9,7 +9,6 @@
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
-    "jsdocTest": "./node_modules/.bin/jsdoc -T",
     "mddocs": "jsdoc2md imports/**/*.js > ../gitbook/api/jsdocs.md"
   },
   "dependencies": {
@@ -26,7 +25,7 @@
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-meteor": "*",
+    "eslint-plugin-meteor": "^4.0.1",
     "eslint-plugin-react": "^6.4.1",
     "jsdoc": "^3.4.0",
     "jsdoc-to-markdown": "^2.0.0"

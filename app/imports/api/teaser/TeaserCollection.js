@@ -2,6 +2,9 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 
 /** @module Teaser */
 
@@ -30,12 +33,12 @@ class TeaserCollection extends BaseInstanceCollection {
    * Defines a new Teaser and its associated Slug.
    * @example
    * Teaser.define({ title: 'ACM Webmasters',
-   *                    slugID: 'acm-webmasters',
-   *                    author: 'Torlief Nielson'
-   *                    url: 'https://www.youtube.com/watch?v=OI4CXULK3tw'
-   *                    description: 'Learn web development by helping to develop and maintain the ACM Manoa website.',
-   *                    duration: '0:39'
-   *                    interests: ['html', 'javascript', 'css', 'web-development'],
+   *                 slug: 'acm-webmasters',
+   *                 author: 'Torlief Nielson'
+   *                 url: 'https://www.youtube.com/watch?v=OI4CXULK3tw'
+   *                 description: 'Learn web development by helping to develop and maintain the ACM Manoa website.',
+   *                 duration: '0:39'
+   *                 interests: ['html', 'javascript', 'css', 'web-development'],
    * @param { Object } description Object with keys title, slug, URL, description, duration. interestIDs.
    * Slug must be previously undefined.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
@@ -47,17 +50,36 @@ class TeaserCollection extends BaseInstanceCollection {
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-
     const teaserID = this._collection.insert({ title, slugID, author, url, description, duration, interestIDs });
     // Connect the Slug to this teaser
     Slugs.updateEntityID(slugID, teaserID);
     return teaserID;
   }
 
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID, interestIDs
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+      _.forEach(doc.interestIDs, interestID => {
+        if (!Interests.isDefined(interestID)) {
+          problems.push(`Bad interestID: ${interestID}`);
+        }
+      });
+    });
+    return problems;
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const Teasers = new TeaserCollection();
-
+radgradCollections.push(Teasers);

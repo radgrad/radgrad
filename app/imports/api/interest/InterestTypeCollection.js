@@ -1,4 +1,5 @@
 import BaseTypeCollection from '/imports/api/base/BaseTypeCollection';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module InterestType */
 
@@ -27,9 +28,12 @@ class InterestTypeCollection extends BaseTypeCollection {
   define({ name, slug, description }) {
     return super.define({ name, slug, description });
   }
+
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const InterestTypes = new InterestTypeCollection();
+radgradCollections.push(InterestTypes);
+

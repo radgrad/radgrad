@@ -2,9 +2,9 @@
   {{#if Template.subscriptionsReady}}
     <div class="ui padded segment container">
       <div class="ui dividing header">
-        <h4>ICS TEASER VIDEOS ({{teaserCount}})</h4>
+        <h4>TEASER VIDEOS ({{teaserCount}})</h4>
       </div>
-
+      {{#if teasers}}
       <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui cards">
         {{#each teaser in teasers}}
           <div class="ui card">
@@ -21,6 +21,9 @@
                   {{#each interest in matchingInterests teaser}}
                     <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
                   {{/each}}
+                  {{#each interest in otherInterests teaser}}
+                    <a class="ui mini grey label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
+                  {{/each}}
                 </span>
             </div>
             <div class="content bottom">
@@ -29,6 +32,9 @@
           </div>
         {{/each}}
       </div>
+      {{else}}
+        <p>Add interests to see recommendations here.</p>
+      {{/if}}
     </div>
 
   {{else}}

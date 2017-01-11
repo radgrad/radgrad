@@ -1,14 +1,17 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
-import { lodash } from 'meteor/erasaur:meteor-lodash';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { ROLE } from '/imports/api/role/Role';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module User */
 
+// TODO: Is there a way we can avoid the need for this collection? Can't we just check onLogin that the account exists?
+
 /**
- * Represent a valid user. Users must be apporoved befor they can be created.
+ * Represent a valid user. Users must be approved before they can be created.
  * @extends module:BaseInstance~BaseInstanceCollection
  */
 class ValidUserAccountCollection extends BaseInstanceCollection {
@@ -27,22 +30,18 @@ class ValidUserAccountCollection extends BaseInstanceCollection {
    * @returns {any} The id of the valid user account.
    */
   define({ username }) {
-    if (!lodash.isString(username)) {
-      throw new Meteor.Error(`${username} is not a string.`);
-    }
+    check(username, String);
     return this._collection.insert({ username });
   }
 
   /**
-   * Depending on the logged in user publish only their CourseInstances. If
-   * the user is in the Role.ADMIN then publish all CourseInstances. If the
-   * system is in mockup mode publish all CourseInstances.
+   * Publish the set of valid users only if the current logged in user is an Admin or Advisor.
    */
   publish() {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return null;
@@ -50,10 +49,17 @@ class ValidUserAccountCollection extends BaseInstanceCollection {
     }
   }
 
-
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    return [];
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const ValidUserAccounts = new ValidUserAccountCollection();
+radgradCollections.push(ValidUserAccounts);

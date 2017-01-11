@@ -1,0 +1,2 @@
+import './IntegrityChecker';
+import './methods';

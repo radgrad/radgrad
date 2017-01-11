@@ -27,6 +27,10 @@ export const exampleStudents = [
     email: 'betty@hawaii.edu',
     password: 'foo',
     picture: '/images/mockup/betty.jpg',
+    interests: ['algorithms', 'android'],
+    careerGoals: ['data-scientist'],
+    website: 'http://keanu.github.io/',
+    desiredDegree: 'bs-cs',
     uhID: '1234-5680',
   },
   {

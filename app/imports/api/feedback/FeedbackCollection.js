@@ -2,6 +2,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertFeedbackType } from '/imports/api/feedback/FeedbackType';
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+
 // import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
 // import { Meteor } from 'meteor/meteor';
 
@@ -53,9 +55,27 @@ class FeedbackCollection extends BaseInstanceCollection {
     Slugs.updateEntityID(slugID, docID);
     return docID;
   }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * Checks slugID.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() {
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+    });
+    return problems;
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const Feedbacks = new FeedbackCollection();
+radgradCollections.push(Feedbacks);
+

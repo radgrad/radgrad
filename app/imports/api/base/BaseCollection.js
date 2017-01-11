@@ -173,6 +173,15 @@ class BaseCollection {
     }
     names.map(name => this.assertDefined(name));
   }
+
+  /**
+   * Define the default integrity checker for all applications.
+   * Returns an array with a string indicating that this method is not overridden.
+   * @returns { array } An array containing a string indicating the use of the default integrity checker.
+   */
+  checkIntegrity() {  // eslint-disable-line class-methods-use-this
+    return ['There is no integrity checker defined for this collection.'];
+  }
 }
 
 /**

@@ -1,0 +1,39 @@
+<template name="Update_User_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE USER</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label="First" name="firstName" value=user.firstName errorMessage=(fieldError "firstName") required=true}}
+        {{> Input_Form_Field label="Last" name="lastName" value=user.lastName errorMessage=(fieldError "lastName") required=true}}
+        {{> Input_Form_Field label="Slug (Username)" name="slug" value=slug errorMessage=(fieldError "slug") disabled=true}}
+      </div>
+
+      <div class="fields">
+        {{> Input_Form_Field label="UH ID" name="uhID" value=user.uhID errorMessage=(fieldError "uhID") required=true}}
+        {{> Input_Form_Field label="Email" name="email" value=user.email errorMessage=(fieldError "email") required=true}}
+        {{> Input_Form_Field label="Picture" name="picture" value=user.picture errorMessage=(fieldError "picture") }}
+      </div>
+
+      <div class="fields">
+        {{> Input_Form_Field label="Website" name="website" value=user.website errorMessage=(fieldError "website") }}
+        {{> Role_Form_Field roles=roles selectedRole=selectedRole errorMessage=(fieldError "role") required="true" }}
+      </div>
+
+      <div class="fields">
+        {{> Desired_Degree_Form_Field desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "desiredDegree")}}
+        {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") required=true type="Number"}}
+      </div>
+      <div class="fields">
+        {{> Career_Goals_Form_Field careerGoals=careerGoals selectedCareerGoalIDs=selectedCareerGoalIDs errorMessage=(fieldError "careerGoals")}}
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError "interests")}}
+      </div>
+
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The User was successfully updated.  Press cancel to continue."}}
+    </form>
+  </div>
+
+</template>

@@ -5,7 +5,7 @@ import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-
+import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module WorkInstance */
 
@@ -77,9 +77,19 @@ class WorkInstanceCollection extends BaseCollection {
     const hrsWk = workInstanceDoc.hrsWk;
     return `[WI ${semester} ${hrsWk}]`;
   }
+
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    return [];
+  }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const WorkInstances = new WorkInstanceCollection();
+radgradCollections.push(WorkInstances);
+

@@ -7,7 +7,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-Template.List_Career_Goals_Widget.onCreated(function listCareerGoalsWidgetOnCreated() {
+Template.List_Career_Goals_Widget.onCreated(function onCreated() {
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
@@ -42,8 +42,7 @@ Template.List_Career_Goals_Widget.helpers({
       { label: 'Description', value: careerGoal.description },
       { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
       { label: 'More Information', value: makeLink(careerGoal.moreInformation) },
-      { label: 'References', value: `Users: ${numReferences(careerGoal)}` },
-    ];
+      { label: 'References', value: `Users: ${numReferences(careerGoal)}` }];
   },
 });
 
@@ -51,7 +50,7 @@ Template.List_Career_Goals_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
   'click .jsDelete': function (event) {
     event.preventDefault();
-    const careerGoalID = event.target.value;
-    CareerGoals.removeIt(careerGoalID);
+    const id = event.target.value;
+    CareerGoals.removeIt(id);
   },
 });

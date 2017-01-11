@@ -4,6 +4,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
+import { Feed } from '../../../api/feed/FeedCollection';
 import { moment } from 'meteor/momentjs:moment';
 
 
@@ -49,6 +50,13 @@ Template.Verification_Requests_Pending.events({
       request.status = VerificationRequests.ACCEPTED;
       processRecord.status = VerificationRequests.ACCEPTED;
       OpportunityInstances.updateVerified(request.opportunityInstanceID, true);
+      const feedDefinition = {
+        student: VerificationRequests.getStudentDoc(request._id)._id,
+        opportunity: VerificationRequests.getOpportunityDoc(request._id)._id,
+        feedType: 'verified',
+        timestamp: Date.now(),
+      };
+      Feed.define(feedDefinition);
     } else {
       request.status = VerificationRequests.REJECTED;
       processRecord.status = VerificationRequests.REJECTED;

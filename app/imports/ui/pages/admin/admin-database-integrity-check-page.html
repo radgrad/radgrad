@@ -1,0 +1,35 @@
+<template name="Admin_DataBase_Integrity_Check_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataBase_Layout}}
+      <form style="padding-top: 10px" class="ui form">
+        <div class="ui action input">
+          <button class="ui green basic button jsIntegrityCheck" type="submit">Check Integrity</button>
+        </div>
+      </form>
+
+      <div class="ui equal width stackable grid">
+        <div class="column">
+          <div style="margin-top: 10px" class="ui {{ hidden "client" }} {{ successOrError "client" }} message">
+            <div class="header">
+              Integrity Check (Client-side DB)
+            </div>
+            <pre>{{ results "client" }}</pre>
+          </div>
+        </div>
+
+        <div class="column">
+          <div style="margin-top: 10px" class="ui {{ hidden "server" }} {{ successOrError "server" }} message">
+            <div class="header">
+              Integrity Check (Server-side DB)
+            </div>
+            <pre>{{ results "server" }}</pre>
+          </div>
+        </div>
+      </div>
+    {{/Admin_DataBase_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+
+</template>

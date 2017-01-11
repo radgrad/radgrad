@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_Users_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      {{#if displayUpdateWidget}}
+        {{> Update_User_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_User_Widget }}
+      {{/if}}
+      {{> List_Users_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+
+</template>

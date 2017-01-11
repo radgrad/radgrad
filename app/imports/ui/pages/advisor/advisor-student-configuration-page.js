@@ -24,27 +24,25 @@ Template.Advisor_Student_Configuration_Page.helpers({
 });
 
 Template.Advisor_Student_Configuration_Page.events({
- // placeholder: if you add a form to this top-level layout, handle the associated events here.
+  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
 
 Template.Advisor_Student_Configuration_Page.onCreated(function advisorStudentConfirgurationPageOnCreated() {
   this.state = new ReactiveDict();
-  this.autorun(() => {
-    this.subscribe(AcademicYearInstances.getPublicationName());
-    this.subscribe(CareerGoals.getPublicationName());
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(FeedbackInstances.getPublicationName());
-    this.subscribe(Feedbacks.getPublicationName());
-    this.subscribe(Interests.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(OpportunityTypes.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(StarDataLogs.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-    this.subscribe(VerificationRequests.getPublicationName());
-  });
+  this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityTypes.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(StarDataLogs.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Advisor_Student_Configuration_Page.onRendered(function advisorStudentConfirgurationPageOnRendered() {

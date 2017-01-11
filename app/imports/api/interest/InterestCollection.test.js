@@ -11,10 +11,10 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 if (Meteor.isServer) {
   describe('InterestCollection', function testSuite() {
     const name = 'Interest';
-    const slug = 'InterestSlug';
+    const slug = 'interest-slug';
     const description = 'InterestDescription';
     const name2 = 'Interest2';
-    const slug2 = 'InterestSlug2';
+    const slug2 = 'interest-slug-2';
     const description2 = 'InterestDescription2';
     let interestType;
     let interest1;
