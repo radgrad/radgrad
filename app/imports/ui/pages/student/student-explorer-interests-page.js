@@ -64,7 +64,6 @@ function courses(interest) {
     incomplete.push({ course: item, status: itemStatus });
   }
 });
-  console.log(incomplete);
   return [complete, incomplete, notInPlan];
 }
 

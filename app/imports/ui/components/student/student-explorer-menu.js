@@ -1,14 +1,19 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-
+import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_Explorer_Menu.helpers({
   careerGoalsRouteName() {
@@ -137,13 +142,62 @@ Template.Student_Explorer_Menu.helpers({
     }
     return ret;
   },
+  userCareerGoals(careerGoal) {
+    let ret = '';
+    const user = Users.findDoc({ username: getRouteUserName() });
+    if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+      ret = 'yellow star icon';
+    }
+    return ret;
+  },
+  userDegrees(degree) {
+    let ret = '';
+    const user = Users.findDoc({ username: getRouteUserName() });
+    if (_.includes(user.desiredDegreeID, degree._id)) {
+      ret = 'yellow star icon';
+    }
+    return ret;
+  },
+  userInterests(interest) {
+    let ret = '';
+    const user = Users.findDoc({ username: getRouteUserName() });
+    if (_.includes(user.interestIDs, interest._id)) {
+      ret = 'yellow star icon';
+    }
+    return ret;
+  },
+  userCourses(course) {
+    let ret = '';
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    if (ci.length > 0) {
+      ret = 'yellow star icon';
+    }
+    return ret;
+  },
+  userOpportunities(opportunity) {
+    let ret = '';
+    const oi = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: opportunity._id,
+    }).fetch();
+    if (oi.length > 0) {
+      ret = 'yellow star icon';
+    }
+    return ret;
+  },
 });
 
 
 Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated() {
   this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Interests.getPublicationName());
+  this.subscribe(Users.getPublicationName());
 });
