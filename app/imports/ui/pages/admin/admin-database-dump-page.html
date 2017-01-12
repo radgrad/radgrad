@@ -12,7 +12,9 @@
         <div class="header">
           Database Dump
         </div>
-        <pre>{{ results }}</pre>
+      {{#each result in results}}
+        {{> Admin_DataBase_Accordion name=result.name contents=result.contents }}
+      {{/each}}
       </div>
 
     {{/Admin_DataBase_Layout}}

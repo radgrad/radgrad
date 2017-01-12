@@ -18,6 +18,6 @@ export const dumpDatabaseMethod = new ValidatedMethod({
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to check integrity.');
       }
     // Don't run dumpAll() except on server side (disable client-side simulation).
-    return Meteor.isServer && JSON.stringify(radgradCollections.map(collection => collection.dumpAll()), null, 2);
+    return Meteor.isServer && radgradCollections.map(collection => collection.dumpAll());
   },
 });
