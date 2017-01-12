@@ -121,7 +121,6 @@ class BaseCollection {
 
   /**
    * Removes all elements of this collection.
-   * Available for testing purposes only.
    */
   removeAll() {
     this._collection.remove({});

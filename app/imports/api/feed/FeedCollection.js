@@ -98,7 +98,7 @@ class FeedCollection extends BaseInstanceCollection {
         picture = Users.findDoc(studentID).picture;
       }
     const feedID = this._collection.insert({
-      slugID, studentID, opportunityID, courseID, description, timestamp, picture, feedType
+      slugID, studentID, opportunityID, courseID, description, timestamp, picture, feedType,
     });
     Slugs.updateEntityID(slugID, feedID);
     return feedID;
