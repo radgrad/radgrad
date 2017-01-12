@@ -19,6 +19,14 @@ Template.Student_Explorer_Degrees_Widget.helpers({
     const degree = DesiredDegrees.find({ slugID: slug[0]._id }).fetch();
     return degree[0].name;
   },
+  userStatus(degree) {
+    let ret = false;
+    const user = Users.findDoc({ username: getRouteUserName() });
+    if (_.includes(user.desiredDegreeID, degree._id)) {
+      ret = true;
+    }
+    return ret;
+  },
 });
 
 Template.Student_Explorer_Degrees_Widget.events({

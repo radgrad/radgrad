@@ -3,10 +3,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
-import * as RouteNames from '/imports/startup/client/router.js';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+
 
 Template.Student_Explorer_CareerGoals_Widget.helpers({
   isLabel(label, value) {
@@ -19,6 +17,14 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
     const slug = Slugs.find({ name: careerGoalSlugName }).fetch();
     const course = CareerGoals.find({ slugID: slug[0]._id }).fetch();
     return course[0].name;
+  },
+  userStatus(careerGoal) {
+    let ret = false;
+    const user = Users.findDoc({ username: getRouteUserName() });
+    if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+      ret = true;
+    }
+    return ret;
   },
 });
 

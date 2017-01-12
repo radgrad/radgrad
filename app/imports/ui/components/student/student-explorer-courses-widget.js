@@ -73,6 +73,17 @@ Template.Student_Explorer_Courses_Widget.helpers({
     }
     return ret;
   },
+  userStatus(course) {
+    let ret = false;
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    if (ci.length > 0) {
+      ret = true;
+    }
+    return ret;
+  },
 });
 
 Template.Student_Explorer_Courses_Widget.events({

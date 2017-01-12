@@ -143,6 +143,14 @@ Template.Student_Explorer_Interests_Widget.helpers({
     }
     return ret;
   },
+  userStatus(interest) {
+    let ret = false;
+    const user = Users.findDoc({ username: getRouteUserName() });
+    if (_.includes(user.interestIDs, interest._id)) {
+      ret = true;
+    }
+    return ret;
+  },
 });
 
 Template.Student_Explorer_Interests_Widget.events({

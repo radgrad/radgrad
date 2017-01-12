@@ -71,6 +71,17 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     }
     return ret;
   },
+  userStatus(opportunity) {
+    let ret = false;
+    const oi = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: opportunity._id,
+    }).fetch();
+    if (oi.length > 0) {
+      ret = true;
+    }
+    return ret;
+  },
 });
 
 Template.Student_Explorer_Opportunities_Widget.events({

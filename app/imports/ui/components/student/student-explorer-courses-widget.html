@@ -12,39 +12,41 @@
             {{/each}}
           </p>
         {{else}}
-              {{#if isLabel descriptionPair.label 'Prerequisites'}}
-                {{#if descriptionPair.value}}
-                  <b>{{descriptionPair.label}}:</b>
-                <div class="ui padded equal width grid">
-                  {{#each table in descriptionPair.value}}
-                    {{#if table}}
+          {{#if isLabel descriptionPair.label 'Prerequisites'}}
+            {{#if descriptionPair.value}}
+              <b>{{descriptionPair.label}}:</b>
+              <div class="ui padded equal width grid">
+                {{#each table in descriptionPair.value}}
+                  {{#if table}}
                     <div class="column">
-                <table class="ui collapsing compact small table">
-                <tbody>
-                {{#each prerequisite in table}}
-                    <tr class="{{rowColor prerequisite.course}}">
-                    <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseName prerequisite.course}} </a></td>
-                      <td><i class="{{icon prerequisite.course}}"></i>{{passedCourse prerequisite.course}}</td>
-                  </tr>
-                {{/each}}
-                  </tbody>
-                </table>
+                      <table class="ui collapsing compact small table">
+                        <tbody>
+                        {{#each prerequisite in table}}
+                          <tr class="{{rowColor prerequisite.course}}">
+                            <td><a class="{{isActiveRoute coursesRouteName}} item"
+                                   href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseName prerequisite.course}} </a>
+                            </td>
+                            <td><i class="{{icon prerequisite.course}}"></i>{{passedCourse prerequisite.course}}</td>
+                          </tr>
+                        {{/each}}
+                        </tbody>
+                      </table>
                     </div>
-                    {{/if}}
-                {{/each}}
-                  </div>
-                  <br>
-                {{else}}
-                  <p><b>{{descriptionPair.label}}:</b> None</p>
                   {{/if}}
-              {{else}}
-                {{#if descriptionPair.value }}
-                  <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
-                {{else}}
-                  <p><b>{{descriptionPair.label}}:</b> N/A</p>
-                {{/if}}
-              {{/if}}
+                {{/each}}
+              </div>
+              <br>
+            {{else}}
+              <p><b>{{descriptionPair.label}}:</b> None</p>
             {{/if}}
+          {{else}}
+            {{#if descriptionPair.value }}
+              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+            {{else}}
+              <p><b>{{descriptionPair.label}}:</b> N/A</p>
+            {{/if}}
+          {{/if}}
+        {{/if}}
       {{/each}}
 
       <div class="ui three column grid">
@@ -73,8 +75,11 @@
       </div>
       <br>
       <p>
-        <button value="{{item}}" class="ui green basic mini button addItem">Add</button>
-        <button value="{{id}}" class="ui green basic mini button {{deleteDisabled}} jsDelete">Remove</button>
+        {{#if userStatus item}}
+          <button value="{{id}}" class="ui green basic mini button {{deleteDisabled}} jsDelete">Remove</button>
+        {{else}}
+          <button value="{{item}}" class="ui green basic mini button addItem">Add</button>
+        {{/if}}
       </p>
     </div>
   {{else}}
