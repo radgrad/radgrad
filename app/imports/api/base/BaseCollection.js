@@ -183,13 +183,14 @@ class BaseCollection {
   }
 
   /**
-   * Returns an array of objects representing the contents of this collection in a format
-   * suitable for passing to the restore() method.
-   * Calls dumpOne() on each docID.
-   * @returns {Array} An array of objects representing the contents of this collection.
+   * Returns an object with two fields: name and contents.
+   * Name is the name of this collection.
+   * Contents is an array of objects suitable for passing to the restore() method.
+   * @returns {Object} An object representing the contents of this collection.
    */
   dumpAll() {
-    return this.find().map(docID => this.dumpOne(docID));
+    console.log('Dumping collection ', this._collectionName);
+    return { name: this._collectionName, contents: this.find().map(docID => this.dumpOne(docID)) };
   }
 
   /**

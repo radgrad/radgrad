@@ -23,10 +23,14 @@ if (Meteor.isServer) {
       const feedback = makeSampleFeedback();
       const description = 'foo';
       const area = 'Interests';
-      const docID = FeedbackInstances.define({ feedback, user, description, area });
+      let docID = FeedbackInstances.define({ feedback, user, description, area });
       expect(FeedbackInstances.isDefined(docID)).to.be.true;
+      const dumpObject = FeedbackInstances.dumpOne(docID);
       FeedbackInstances.removeIt(docID);
       expect(FeedbackInstances.isDefined(docID)).to.be.false;
+      docID = FeedbackInstances.restoreOne(dumpObject);
+      expect(FeedbackInstances.isDefined(docID)).to.be.true;
+      FeedbackInstances.removeIt(docID);
     });
   });
 }

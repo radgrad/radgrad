@@ -92,8 +92,8 @@ class FeedbackInstanceCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const feedback = Feedbacks.getNameFromID(doc.feedbackID);
-    const user = Users.getNameFromID(doc.userID);
+    const feedback = Feedbacks.findSlugByID(doc.feedbackID);
+    const user = Users.findSlugByID(doc.userID);
     const description = doc.description;
     const area = doc.area;
     return { feedback, user, description, area };
