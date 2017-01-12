@@ -30,13 +30,33 @@ class StarDataLogCollection extends BaseCollection {
   }
 
   /**
-   * Defines a new StarDataLog instance for the given student and note.
-   * @param student The student's username/slug.
-   * @param note The result of the upload or similar information.
+   * Returns an object representing the StarDataLog docID in a format acceptable to define().
+   * @param docID The docID of a StarDataLog document.
+   * @returns { Object } An object representing the definition of docID.
    */
-  define({ student, note }) {
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const student = Users.findSlugByID(doc.studentID);
+    const note = doc.note;
+    const uploadedOn = doc.uploadedOn;
+    return { student, note, uploadedOn };
+  }
+
+  /**
+   * Defines a new StarDataLog instance for the given student and note.
+   * @example
+   * StarDataLog.define({ student: 'joedane',
+   *                      note: 'Uploaded all files successfully.' });
+   * @param { Object } description Object with keys student, note and uploadedOn (optional).
+   * Student must the slug or docID for a student.
+   * Note is a string.
+   * uploadedOn is optional. Defaults to the current date and time.
+   * @throws { Meteor.Error } If the user does not exist.
+   * @returns The newly created docID.
+   */
+  define({ student, note, uploadedOn = new Date() }) {
     const studentID = Users.getID(student);
-    this._collection.insert({ studentID, note, uploadedOn: new Date() });
+    return this._collection.insert({ studentID, note, uploadedOn });
   }
 
   /**

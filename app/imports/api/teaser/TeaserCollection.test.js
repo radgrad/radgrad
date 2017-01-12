@@ -33,11 +33,14 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = Teasers.define({ title, slug, author, url, description, duration, interests });
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+      let instanceID = Teasers.define({ title, slug, author, url, description, duration, interests });
       expect(Teasers.isDefined(instanceID)).to.be.true;
+      const dumpObject = Teasers.dumpOne(instanceID);
       Teasers.removeIt(instanceID);
       expect(Teasers.isDefined(instanceID)).to.be.false;
+      instanceID = Teasers.restoreOne(dumpObject);
+      expect(Teasers.isDefined(slug)).to.be.true;
     });
   });
 }

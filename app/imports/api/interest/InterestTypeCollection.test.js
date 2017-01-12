@@ -20,11 +20,15 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
-      InterestTypes.define({ name, slug, description });
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+      const docID = InterestTypes.define({ name, slug, description });
       expect(InterestTypes.isDefined(slug)).to.be.true;
+      const dumpObject = InterestTypes.dumpOne(docID);
       InterestTypes.removeIt(slug);
       expect(InterestTypes.isDefined(slug)).to.be.false;
+      InterestTypes.restoreOne(dumpObject);
+      expect(InterestTypes.isDefined(slug)).to.be.true;
+      InterestTypes.removeIt(slug);
     });
 
     it('#define (multiple definition)', function test() {

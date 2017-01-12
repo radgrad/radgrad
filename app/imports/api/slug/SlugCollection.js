@@ -140,11 +140,23 @@ class SlugCollection extends BaseCollection {
   }
 
   /**
-   * Returns an empty array (no integrity checking done on this collection.)
+   * Returns an empty array (no integrity checking done on Slugs.)
    * @returns {Array} An empty array.
    */
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     return [];
+  }
+
+  /**
+   * Returns an object representing the passed slug docID in a format acceptable to define().
+   * @param docID The docID of a Slug.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const entityName = doc.entityName;
+    return { name, entityName };
   }
 }
 

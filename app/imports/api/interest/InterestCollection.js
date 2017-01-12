@@ -82,6 +82,21 @@ class InterestCollection extends BaseInstanceCollection {
     });
     return problems;
   }
+
+  /**
+   * Returns an object representing the Interest docID in a format acceptable to define().
+   * @param docID The docID of an Interest.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const description = doc.description;
+    const interestType = InterestTypes.findSlugByID(doc.interestTypeID);
+    const moreInformation = doc.moreInformation;
+    return { name, slug, description, interestType, moreInformation };
+  }
 }
 
 /**

@@ -1,17 +1,13 @@
-/**
- * Created by Cam on 12/7/2016.
- */
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { HelpMessages } from './HelpMessageCollection';
 
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
+
 if (Meteor.isServer) {
   describe('HelpMessageCollection', function testSuite() {
-    // Define course data.
     let routeName;
     let title;
     let text;
@@ -27,11 +23,15 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = HelpMessages.define({ routeName, title, text });
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+      let instanceID = HelpMessages.define({ routeName, title, text });
       expect(HelpMessages.isDefined(instanceID)).to.be.true;
+      const dumpObject = HelpMessages.dumpOne(instanceID);
       HelpMessages.removeIt(instanceID);
       expect(HelpMessages.isDefined(instanceID)).to.be.false;
+      instanceID = HelpMessages.restoreOne(dumpObject);
+      expect(HelpMessages.isDefined(instanceID)).to.be.true;
+      HelpMessages.removeIt(instanceID);
     });
   });
 }
