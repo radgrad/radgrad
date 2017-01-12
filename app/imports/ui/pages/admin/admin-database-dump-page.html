@@ -9,12 +9,14 @@
       </form>
 
       <div style="margin-top: 10px" class="ui {{ hidden }} {{ successOrError }} message">
-        <div class="header">
-          Database Dump
+        <div style="margin-bottom: 10px" class="header">
+          Database contents as of {{timestamp}}
         </div>
-      {{#each result in results}}
-        {{> Admin_DataBase_Accordion name=result.name contents=result.contents }}
-      {{/each}}
+        {{#each result in results}}
+          {{> Admin_DataBase_Accordion name=result.name contents=result.contents }}
+        {{/each}}
+
+        {{ errorMessage }}
       </div>
 
     {{/Admin_DataBase_Layout}}

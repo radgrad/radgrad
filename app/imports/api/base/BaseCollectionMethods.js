@@ -2,13 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
-// TODO: should methods.js be Methods.js?  Should the name be exported to avoid a magic string?
-// What should the naming convention for methods be to guarantee uniqueness? Use the dir as prefix for namespace?
-// Example: base.DumpDatabase?
+
+export const dumpDatabaseMethodName = 'base.dumpDatabase';
 
 export const dumpDatabaseMethod = new ValidatedMethod({
-  name: 'DumpDatabase',
+  name: dumpDatabaseMethodName,
   validate: null,
   run() {
     if (!this.userId) {
@@ -18,6 +18,6 @@ export const dumpDatabaseMethod = new ValidatedMethod({
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to check integrity.');
       }
     // Don't run dumpAll() except on server side (disable client-side simulation).
-    return Meteor.isServer && radgradCollections.map(collection => collection.dumpAll());
+    return Meteor.isServer && _.sortBy(radgradCollections.map(collection => collection.dumpAll()), entry => entry.name);
   },
 });

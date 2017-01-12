@@ -199,7 +199,7 @@ class BaseCollection {
    * @returns { Object } An object representing this document.
    */
   dumpOne(docID) { // eslint-disable-line
-    return null;
+    throw new Meteor.Error(`Default dumpOne method invoked by collection ${this._collectionName}`);
   }
 
   /**
