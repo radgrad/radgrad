@@ -5,11 +5,116 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+
+function coursesHelper(interest) {
+  const allCourses = Courses.find().fetch();
+  const matching = [];
+  _.map(allCourses, (course) => {
+    if (_.includes(course.interestIDs, interest._id)) {
+      matching.push(Slugs.findDoc(course.slugID).name);
+    }
+  });
+  return matching;
+}
+
+function passedCourseHelper(courseSlugName) {
+  let ret = 'Not in plan';
+  const slug = Slugs.find({ name: courseSlugName }).fetch();
+  const course = Courses.find({ slugID: slug[0]._id }).fetch();
+  const ci = CourseInstances.find({
+    studentID: getUserIdFromRoute(),
+    courseID: course[0]._id,
+  }).fetch();
+  _.map(ci, (c) => {
+    if (c.verified === true) {
+    if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
+        c.grade === 'B' || c.grade === 'B-') {
+      ret = 'Completed';
+    } else {
+      ret = 'In plan, but not yet complete';
+    }
+  } else {
+    ret = 'In plan, but not yet complete';
+  }
+});
+  return ret;
+}
+
+function courses(interest) {
+  const list = coursesHelper(interest);
+  const complete = [];
+  const incomplete = [];
+  const notInPlan = [];
+  let itemStatus = '';
+  _.map(list, (item) => {
+    itemStatus = passedCourseHelper(item);
+  if (itemStatus === 'Not in plan') {
+    notInPlan.push({ course: item, status: itemStatus });
+  } else if (itemStatus === 'Completed') {
+    complete.push({ course: item, status: itemStatus });
+  } else {
+    incomplete.push({ course: item, status: itemStatus });
+  }
+});
+  console.log(incomplete);
+  return [complete, incomplete, notInPlan];
+}
+
+function verifiedOpportunityHelper(opportunitySlugName) {
+  let ret = 'Not in plan';
+  const slug = Slugs.find({ name: opportunitySlugName }).fetch();
+  const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
+  const oi = OpportunityInstances.find({
+    studentID: getUserIdFromRoute(),
+    opportunityID: opportunity[0]._id,
+  }).fetch();
+  _.map(oi, (o) => {
+    if (o.verified === true) {
+      ret = 'Completed and verified';
+    } else {
+      ret = 'In plan, but not yet verified';
+    }
+  });
+  return ret;
+}
+
+function opportunitiesHelper(interest) {
+  const allOpportunities = Opportunities.find().fetch();
+  const matching = [];
+  _.map(allOpportunities, (opportunity) => {
+    if (_.includes(opportunity.interestIDs, interest._id)) {
+    matching.push(Slugs.findDoc(opportunity.slugID).name);
+  }
+});
+  return matching;
+}
+
+function opportunities(interest) {
+  const list = opportunitiesHelper(interest);
+  const complete = [];
+  const incomplete = [];
+  const notInPlan = [];
+  let itemStatus = '';
+  _.map(list, (item) => {
+    itemStatus = verifiedOpportunityHelper(item);
+  if (itemStatus === 'Not in plan') {
+    notInPlan.push({ opportunity: item, status: itemStatus });
+  } else if (itemStatus === 'Completed and verified') {
+    complete.push({ opportunity: item, status: itemStatus });
+  } else {
+    incomplete.push({ opportunity: item, status: itemStatus });
+  }
+});
+  return [complete, incomplete, notInPlan];
+}
 
 function interestedUsers(interest, role) {
   const interested = [];
@@ -36,26 +141,6 @@ function careerGoals(interest) {
 });
   return matching;
 }
-function courses(interest) {
-  const allCourses = Courses.find().fetch();
-  const matching = [];
-  _.map(allCourses, (course) => {
-    if (_.includes(course.interestIDs, interest._id)) {
-      matching.push(Slugs.findDoc(course.slugID).name);
-  }
-});
-  return matching;
-}
-function opportunities(interest) {
-  const allOpportunities = Opportunities.find().fetch();
-  const matching = [];
-  _.map(allOpportunities, (opportunity) => {
-    if (_.includes(opportunity.interestIDs, interest._id)) {
-      matching.push(Slugs.findDoc(opportunity.slugID).name);
-    }
-  });
-  return matching;
-}
 
 Template.Student_Explorer_Interests_Page.helpers({
   interest() {
@@ -80,15 +165,18 @@ Template.Student_Explorer_Interests_Page.helpers({
     return [
       { label: 'Description', value: interest.description },
       { label: 'More Information', value: makeLink(interest.moreInformation) },
+      { label: 'Related Career Goals', value: careerGoals(interest) },
       { label: 'Related Courses', value: courses(interest) },
       { label: 'Related Opportunities', value: opportunities(interest) },
-      { label: 'Related Career Goals', value: careerGoals(interest) },
-      { label: 'student(s)', value: numUsers(interest, ROLE.STUDENT), type: 'amount' },
-      { label: 'Students', value: interestedUsers(interest, ROLE.STUDENT), type: 'list' },
-      { label: 'faculty member(s)', value: numUsers(interest, ROLE.FACULTY), type: 'amount' },
-      { label: 'Faculty Members', value: interestedUsers(interest, ROLE.FACULTY), type: 'list' },
-      { label: 'alumni', value: numUsers(interest, ROLE.ALUMNI), type: 'amount' },
-      { label: 'Alumni', value: interestedUsers(interest, ROLE.ALUMNI), type: 'list' },
+    ];
+  },
+  socialPairs(interest) {
+    return [
+      { label: 'students', amount: numUsers(interest, ROLE.STUDENT),
+        value: interestedUsers(interest, ROLE.STUDENT) },
+      { label: 'faculty members', amount: numUsers(interest, ROLE.FACULTY),
+        value: interestedUsers(interest, ROLE.FACULTY) },
+      { label: 'alumni', amount: numUsers(interest, ROLE.ALUMNI), value: interestedUsers(interest, ROLE.ALUMNI) },
     ];
   },
 });

@@ -1,7 +1,7 @@
 <template name="Student_Explorer_Interests_Page">
   {{#if Template.subscriptionsReady}}
     {{#Student_Explorer_Layout list = interests type = 'interests'}}
-      {{> Student_Explorer_Interests_Widget name=interest.name slug=(slugName interest.slugID) descriptionPairs=(descriptionPairs interest) id=interest._id updateID=updateID item=interest}}
+      {{> Student_Explorer_Interests_Widget name=interest.name slug=(slugName interest.slugID) descriptionPairs=(descriptionPairs interest) socialPairs=(socialPairs interest) id=interest._id updateID=updateID item=interest}}
     {{/Student_Explorer_Layout}}
 
   {{else}}

@@ -44,8 +44,12 @@ Template.Student_Explorer_Degrees_Page.helpers({
   descriptionPairs(degree) {
     return [
       { label: 'Description', value: degree.description },
-      { label: 'student(s)', value: numUsers(degree), type: 'amount' },
-      { label: 'Students', value: interestedUsers(degree), type: 'list' },
+    ];
+  },
+  socialPairs(degree) {
+    return [
+      { label: 'students', amount: numUsers(degree),
+        value: interestedUsers(degree) },
     ];
   },
 });

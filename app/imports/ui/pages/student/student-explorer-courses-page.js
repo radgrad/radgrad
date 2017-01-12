@@ -8,6 +8,31 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+
+
+function passedCourseHelper(courseSlugName) {
+  let ret = 'Not in plan';
+  const slug = Slugs.find({ name: courseSlugName }).fetch();
+  const course = Courses.find({ slugID: slug[0]._id }).fetch();
+  const ci = CourseInstances.find({
+    studentID: getUserIdFromRoute(),
+    courseID: course[0]._id,
+  }).fetch();
+  _.map(ci, (c) => {
+    if (c.verified === true) {
+      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
+          c.grade === 'B' || c.grade === 'B-') {
+        ret = 'Completed';
+      } else {
+        ret = 'In plan, but not yet complete';
+      }
+    } else {
+      ret = 'In plan, but not yet complete';
+    }
+  });
+  return ret;
+}
 
 function interestedUsers(course) {
   const interested = [];
@@ -24,6 +49,26 @@ function interestedUsers(course) {
 
 function numUsers(course) {
   return interestedUsers(course).length;
+}
+
+function prerequisites(course) {
+  const list = course.prerequisites;
+  const complete = [];
+  const incomplete = [];
+  const notInPlan = [];
+  let itemStatus = '';
+  _.map(list, (item) => {
+    itemStatus = passedCourseHelper(item);
+    if (itemStatus === 'Not in plan') {
+      notInPlan.push({ course: item, status: itemStatus });
+    } else if (itemStatus === 'Completed') {
+      complete.push({ course: item, status: itemStatus });
+    } else {
+      incomplete.push({ course: item, status: itemStatus });
+    }
+  });
+  console.log(incomplete);
+  return [complete, incomplete, notInPlan];
 }
 
 Template.Student_Explorer_Courses_Page.helpers({
@@ -56,19 +101,24 @@ Template.Student_Explorer_Courses_Page.helpers({
     return [
       { label: 'Course Number', value: course.number },
       { label: 'Credit Hours', value: course.creditHrs },
-      { label: 'Prerequisites', value: course.prerequisites },
+      { label: 'Prerequisites', value: prerequisites(course) },
       { label: 'Description', value: course.description },
       { label: 'Syllabus', value: makeLink(course.syllabus) },
       { label: 'More Information', value: makeLink(course.moreInformation) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
-      { label: 'student(s)', value: numUsers(course), type: 'amount' },
-      { label: 'Students', value: interestedUsers(course), type: 'list' },
+    ];
+  },
+  socialPairs(course) {
+    return [
+      { label: 'students', amount: numUsers(course),
+        value: interestedUsers(course) },
     ];
   },
 });
 
 Template.Student_Explorer_Courses_Page.onCreated(function studentExplorerCoursesPageOnCreated() {
   this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(Interests.getPublicationName());

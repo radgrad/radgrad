@@ -75,8 +75,12 @@ Template.Student_Explorer_Opportunities_Page.helpers({
       { label: 'Description', value: opportunity.description },
       { label: 'More Information', value: makeLink(opportunity.moreInformation) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
-      { label: 'student(s)', value: numUsers(opportunity), type: 'amount' },
-      { label: 'Students', value: interestedUsers(opportunity), type: 'list' },
+    ];
+  },
+  socialPairs(opportunity) {
+    return [
+      { label: 'students', amount: numUsers(opportunity),
+        value: interestedUsers(opportunity) },
     ];
   },
 });

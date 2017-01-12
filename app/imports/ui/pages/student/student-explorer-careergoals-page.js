@@ -48,12 +48,15 @@ Template.Student_Explorer_CareerGoals_Page.helpers({
       { label: 'Description', value: careerGoal.description },
       { label: 'More Information', value: makeLink(careerGoal.moreInformation) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
-      { label: 'student(s)', value: numUsers(careerGoal, ROLE.STUDENT), type: 'amount' },
-      { label: 'Students', value: interestedUsers(careerGoal, ROLE.STUDENT), type: 'list' },
-      { label: 'faculty member(s)', value: numUsers(careerGoal, ROLE.FACULTY), type: 'amount' },
-      { label: 'Faculty Members', value: interestedUsers(careerGoal, ROLE.FACULTY), type: 'list' },
-      { label: 'alumni', value: numUsers(careerGoal, ROLE.ALUMNI), type: 'amount' },
-      { label: 'Alumni', value: interestedUsers(careerGoal, ROLE.ALUMNI), type: 'list' },
+    ];
+  },
+  socialPairs(careerGoal) {
+    return [
+      { label: 'students', amount: numUsers(careerGoal, ROLE.STUDENT),
+        value: interestedUsers(careerGoal, ROLE.STUDENT) },
+      { label: 'faculty members', amount: numUsers(careerGoal, ROLE.FACULTY),
+        value: interestedUsers(careerGoal, ROLE.FACULTY) },
+      { label: 'alumni', amount: numUsers(careerGoal, ROLE.ALUMNI), value: interestedUsers(careerGoal, ROLE.ALUMNI) },
     ];
   },
 });

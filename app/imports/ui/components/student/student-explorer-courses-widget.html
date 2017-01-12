@@ -12,32 +12,29 @@
             {{/each}}
           </p>
         {{else}}
-          {{#if isLabel descriptionPair.type 'amount'}}
-            <p>{{descriptionPair.value}} {{descriptionPair.label}} have {{name}} in their degree plan.</p>
-          {{else}}
-            {{#if isLabel descriptionPair.type 'list'}}
-              <p>
-              <div class="ui circular mini bordered images">
-                {{#each user in descriptionPair.value}}
-                  <img style="height:30px; width: auto;"  class="ui image" src={{userPicture user}}>
-                {{/each}}
-              </div>
-              </p>
-            {{else}}
               {{#if isLabel descriptionPair.label 'Prerequisites'}}
                 {{#if descriptionPair.value}}
                   <b>{{descriptionPair.label}}:</b>
-                  <table class="ui collapsing compact small table">
+                <div class="ui padded equal width grid">
+                  {{#each table in descriptionPair.value}}
+                    {{#if table}}
+                    <div class="column">
+                <table class="ui collapsing compact small table">
                 <tbody>
-                {{#each prerequisite in descriptionPair.value}}
-                    <tr class="{{rowColor prerequisite}}">
-                    <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite}}">{{courseName prerequisite}} </a></td>
-                      <td><i class="{{icon prerequisite}}"></i>{{passedCourse prerequisite}}</td>
+                {{#each prerequisite in table}}
+                    <tr class="{{rowColor prerequisite.course}}">
+                    <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseName prerequisite.course}} </a></td>
+                      <td><i class="{{icon prerequisite.course}}"></i>{{passedCourse prerequisite.course}}</td>
                   </tr>
                 {{/each}}
                   </tbody>
                 </table>
-                  {{else}}
+                    </div>
+                    {{/if}}
+                {{/each}}
+                  </div>
+                  <br>
+                {{else}}
                   <p><b>{{descriptionPair.label}}:</b> None</p>
                   {{/if}}
               {{else}}
@@ -48,9 +45,33 @@
                 {{/if}}
               {{/if}}
             {{/if}}
-          {{/if}}
-        {{/if}}
       {{/each}}
+
+      <div class="ui three column grid">
+        {{#each socialPair in socialPairs}}
+          <div class="stretched column">
+            <table class="ui small table">
+              <thead>
+              <tr>
+                <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <div class="ui circular mini bordered images">
+                    {{#each user in socialPair.value}}
+                      <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
+                    {{/each}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        {{/each}}
+      </div>
+      <br>
       <p>
         <button value="{{item}}" class="ui green basic mini button addItem">Add</button>
         <button value="{{id}}" class="ui green basic mini button {{deleteDisabled}} jsDelete">Remove</button>

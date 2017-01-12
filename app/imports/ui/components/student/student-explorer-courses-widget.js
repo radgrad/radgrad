@@ -21,6 +21,8 @@ function passedCourseHelper(courseSlugName) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
         c.grade === 'B' || c.grade === 'B-') {
         ret = 'Completed';
+      } else {
+        ret = 'In plan, but not yet complete';
       }
     } else {
       ret = 'In plan, but not yet complete';

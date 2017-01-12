@@ -16,27 +16,27 @@
   <div class="ui vertical text menu">
       {{#if isType type 'courses'}}
         {{#each listItem in menuList}}
-        <a class="active item" data-tab="tab-name" href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}">{{courseName listItem}}</a>
+        <a class="{{classType (slugName listItem) 'course'}}" data-tab="tab-name" href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}">{{courseName listItem}}</a>
         {{/each}}
       {{else}}
         {{#if isType type 'careerGoals'}}
           {{#each listItem in menuList}}
-            <a class="active item" data-tab="tab-name" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}">{{itemName listItem}}</a>
+            <a class="{{classType (slugName listItem) 'careerGoal'}}" data-tab="tab-name" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}">{{itemName listItem}}</a>
           {{/each}}
           {{else}}
             {{#if isType type 'degrees'}}
               {{#each listItem in menuList}}
-                <a class="active item" data-tab="tab-name" href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}">{{itemName listItem}}</a>
+                <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name" href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}">{{itemName listItem}}</a>
               {{/each}}
             {{else}}
               {{#if isType type 'opportunities'}}
                 {{#each listItem in menuList}}
-                  <a class="active item" data-tab="tab-name" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}">{{itemName listItem}}</a>
+                  <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}">{{itemName listItem}}</a>
                 {{/each}}
               {{else}}
                 {{#if isType type 'interests'}}
                   {{#each listItem in menuList}}
-                    <a class="active item" data-tab="tab-name" href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}">{{itemName listItem}}</a>
+                    <a class="{{classType (slugName listItem) 'interest'}}" data-tab="tab-name" href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}">{{itemName listItem}}</a>
                   {{/each}}
                 {{/if}}
             {{/if}}

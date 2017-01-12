@@ -12,27 +12,39 @@
             {{/each}}
           </p>
         {{else}}
-          {{#if isLabel descriptionPair.type 'amount'}}
-            <p>{{descriptionPair.value}} {{descriptionPair.label}} have {{name}} in their degree plan.</p>
+          {{#if descriptionPair.value }}
+            <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
           {{else}}
-            {{#if isLabel descriptionPair.type 'list'}}
-              <p>
-              <div class="ui circular mini bordered images">
-                {{#each user in descriptionPair.value}}
-                  <img style="height:30px; width: auto;"  class="ui image" src={{userPicture user}}>
-                {{/each}}
-              </div>
-              </p>
-            {{else}}
-              {{#if descriptionPair.value }}
-                <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
-              {{else}}
-                <p><b>{{descriptionPair.label}}:</b> N/A</p>
-              {{/if}}
-            {{/if}}
+            <p><b>{{descriptionPair.label}}:</b> N/A</p>
           {{/if}}
         {{/if}}
       {{/each}}
+
+      <div class="ui three column grid">
+        {{#each socialPair in socialPairs}}
+          <div class="stretched column">
+            <table class="ui small table">
+              <thead>
+              <tr>
+                <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <div class="ui circular mini bordered images">
+                    {{#each user in socialPair.value}}
+                      <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
+                    {{/each}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        {{/each}}
+      </div>
+      <br>
       <p>
         <button value="{{item}}" class="ui green basic mini button addItem">Add</button>
         <button value="{{id}}" class="ui green basic mini button {{deleteDisabled}} jsDelete">Remove</button>

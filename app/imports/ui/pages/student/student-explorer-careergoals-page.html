@@ -1,7 +1,7 @@
 <template name="Student_Explorer_CareerGoals_Page">
   {{#if Template.subscriptionsReady}}
     {{#Student_Explorer_Layout list = careerGoals type = 'careerGoals'}}
-      {{> Student_Explorer_CareerGoals_Widget name=careerGoal.name slug=(slugName careerGoal.slugID) descriptionPairs=(descriptionPairs careerGoal) id=careerGoal._id updateID=updateID item=careerGoal}}
+      {{> Student_Explorer_CareerGoals_Widget name=careerGoal.name slug=(slugName careerGoal.slugID) descriptionPairs=(descriptionPairs careerGoal) socialPairs=(socialPairs careerGoal) id=careerGoal._id updateID=updateID item=careerGoal}}
     {{/Student_Explorer_Layout}}
 
   {{else}}

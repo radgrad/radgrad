@@ -11,6 +11,9 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { Teasers } from './TeaserCollection';
 import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { makeSampleOpportunity } from '/imports/api/opportunity/SampleOpportunities.js';
+import { makeSampleUser } from '/imports/api/user/SampleUsers.js';
+import { ROLE } from '/imports/api/role/Role';
+
 
 if (Meteor.isServer) {
   describe('TeaserCollection', function testSuite() {
@@ -33,7 +36,7 @@ if (Meteor.isServer) {
       description = 'This is a test teaser';
       duration = '1:32:14';
       interests = [makeSampleInterest()];
-      opportunity = makeSampleOpportunity('johnson');
+      opportunity = makeSampleOpportunity(makeSampleUser(ROLE.FACULTY));
     });
 
     after(function tearDown() {

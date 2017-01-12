@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
@@ -75,6 +77,65 @@ Template.Student_Explorer_Menu.helpers({
   },
   isType(type, value) {
     return type === value;
+  },
+  opportunity(opportunity) {
+    let ret = 'item';
+    const current = FlowRouter.getParam('opportunity');
+    if (opportunity === current) {
+      ret = 'active item';
+    }
+    return ret;
+  },
+  classType(item, type) {
+    let ret = 'item';
+    let current;
+    if (type === 'course') {
+      current = FlowRouter.getParam('course');
+    } else if (type === 'careerGoal') {
+      current = FlowRouter.getParam('careerGoal');
+    } else if (type === 'degree') {
+      current = FlowRouter.getParam('degree');
+    } else if (type === 'interest') {
+      current = FlowRouter.getParam('interest');
+    } else if (type === 'opportunity') {
+      current = FlowRouter.getParam('opportunity');
+    }
+    if (item === current) {
+      ret = 'active item';
+    }
+    return ret;
+  },
+  courseClass(course) {
+    let ret = 'item';
+    const current = FlowRouter.getParam('course');
+    if (course === current) {
+      ret = 'active item';
+    }
+    return ret;
+  },
+  degreeClass(degree) {
+    let ret = 'item';
+    const current = FlowRouter.getParam('degree');
+    if (degree === current) {
+      ret = 'active item';
+    }
+    return ret;
+  },
+  careerGoalClass(careerGoal) {
+    let ret = 'item';
+    const current = FlowRouter.getParam('careerGoal');
+    if (careerGoal === current) {
+      ret = 'active item';
+    }
+    return ret;
+  },
+  interestClass(interest) {
+    let ret = 'item';
+    const current = FlowRouter.getParam('interest');
+    if (interest === current) {
+      ret = 'active item';
+    }
+    return ret;
   },
 });
 

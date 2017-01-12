@@ -4,6 +4,7 @@ import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection.js';
 import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module Teaser */
@@ -52,7 +53,7 @@ class TeaserCollection extends BaseInstanceCollection {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     console.log(opportunity);
-    const opportunityID = Opportunities.getID(opportunity);
+    const opportunityID = opportunity;
     const teaserID = this._collection.insert({ title, slugID, author, url,
       description, duration, interestIDs, opportunityID });
     // Connect the Slug to this teaser
