@@ -189,7 +189,6 @@ class BaseCollection {
    * @returns {Object} An object representing the contents of this collection.
    */
   dumpAll() {
-    console.log('Dumping collection ', this._collectionName);
     return { name: this._collectionName, contents: this.find().map(docID => this.dumpOne(docID)) };
   }
 
