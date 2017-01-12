@@ -49,19 +49,19 @@ class VerificationRequestCollection extends BaseCollection {
    * @example
    * VerificationRequests.define({ student: 'joesmith', opportunityInstance: 'EiQYeRP4jyyre28Zw' });
    * @param { Object } student and opportunity must be slugs or IDs. SubmittedOn defaults to now.
+   * status defaults to OPEN, and processed defaults to an empty array.
    * @throws {Meteor.Error} If semester, opportunity, or student cannot be resolved, or if verified is not a boolean.
    * @returns The newly created docID.
    */
-  define({ student, opportunityInstance, submittedOn = moment().toDate() }) {
+  define({ student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [] }) {
     const studentID = Users.getID(student);
     const oppInstance = OpportunityInstances.findDoc(opportunityInstance);
     const opportunityInstanceID = oppInstance._id;
     const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;
-    const status = this.OPEN;
-    const processed = [];
     // Define and return the new VerificationRequest
-    const requestID = this._collection.insert({ studentID, opportunityInstanceID, submittedOn, status,
-      processed, ice });
+    const requestID = this._collection.insert({
+      studentID, opportunityInstanceID, submittedOn, status, processed, ice,
+    });
     return requestID;
   }
 
@@ -173,6 +173,21 @@ class VerificationRequestCollection extends BaseCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the VerificationRequest docID in a format acceptable to define().
+   * @param docID The docID of an VerificationRequest.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const student = Users.findSlugByID(doc.studentID);
+    const opportunityInstance = OpportunityInstances.findDoc(doc.opportunityInstanceID)._id;
+    const submittedOn = doc.submittedOn;
+    const status = doc.status;
+    const processed = doc.processed;
+    return { student, opportunityInstance, submittedOn, status, processed };
   }
 }
 
