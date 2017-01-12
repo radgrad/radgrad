@@ -166,6 +166,20 @@ class OpportunityInstanceCollection extends BaseCollection {
     });
     return problems;
   }
+
+  /**
+   * Returns an object representing the OpportunityInstance docID in a format acceptable to define().
+   * @param docID The docID of an OpportunityInstance.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const semester = Semesters.findSlugByID(doc.semesterID);
+    const opportunity = Opportunities.findSlugByID(doc.opportunityID);
+    const verified = doc.verified;
+    const student = Users.findSlugByID(doc.studentID);
+    return { semester, opportunity, verified, student };
+  }
 }
 
 /**

@@ -56,6 +56,17 @@ class ValidUserAccountCollection extends BaseInstanceCollection {
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     return [];
   }
+
+  /**
+   * Returns an object representing the ValidUserAccount docID in a format acceptable to define().
+   * @param docID The docID of an ValidUserAccount.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const username = doc.username;
+    return { username };
+  }
 }
 
 /**

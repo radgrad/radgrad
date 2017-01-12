@@ -17,7 +17,7 @@ Template.Admin_DataBase_Dump_Page.helpers({
     return Template.instance().successOrError.get();
   },
   timestamp() {
-    return moment().format('MMMM Do YY, H:mm:ss a');
+    return moment().format('MMMM Do YYYY, H:mm:ss a');
   },
   errorMessage() {
     return Template.instance().successOrError.get() === 'error' ? Template.instance().results.get() : '';
