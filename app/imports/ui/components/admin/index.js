@@ -19,6 +19,9 @@ import './add-teaser-widget.js';
 import './add-user-widget.html';
 import './add-user-widget.js';
 
+import './admin-database-accordion.html';
+import './admin-database-accordion.js';
+
 import './admin-database-menu.html';
 import './admin-database-menu.js';
 

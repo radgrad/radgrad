@@ -21,18 +21,23 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt, #toString', function test() {
+    it('#define, #isDefined, #removeIt, #toString, #dumpOne, #restoreOne', function test() {
       defineSemesters();
       const semester = Semesters.define({ term: Semesters.FALL, year: 2015 });
       const faculty = makeSampleUser(ROLE.FACULTY);
       const student = makeSampleUser();
       const opportunity = makeSampleOpportunity(faculty);
       const verified = true;
-      const docID = OpportunityInstances.define({ semester, opportunity, verified, student });
+      let docID = OpportunityInstances.define({ semester, opportunity, verified, student });
+      const dumpObject = OpportunityInstances.dumpOne(docID);
       expect(OpportunityInstances.isDefined(docID)).to.be.true;
       OpportunityInstances.toString(docID);
       OpportunityInstances.removeIt(docID);
       expect(OpportunityInstances.isDefined(docID)).to.be.false;
+      docID = OpportunityInstances.restoreOne(dumpObject);
+      expect(OpportunityInstances.isDefined(docID)).to.be.true;
+      OpportunityInstances.removeIt(docID);
+
     });
   });
 }

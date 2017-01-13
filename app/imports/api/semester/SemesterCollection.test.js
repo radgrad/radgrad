@@ -16,11 +16,15 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#get, #isDefined, #removeIt', function test() {
-      const semester = Semesters.define({ term: Semesters.FALL, year: 2010 });
-      expect(Semesters.isDefined(semester)).to.be.true;
-      Semesters.removeIt(semester);
-      expect(Semesters.isDefined(semester)).to.be.false;
+    it('#get, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+      let docID = Semesters.define({ term: Semesters.FALL, year: 2010 });
+      expect(Semesters.isDefined(docID)).to.be.true;
+      const dumpObject = Semesters.dumpOne(docID);
+      Semesters.removeIt(docID);
+      expect(Semesters.isDefined(docID)).to.be.false;
+      docID = Semesters.restoreOne(dumpObject);
+      expect(Semesters.isDefined(docID)).to.be.true;
+      Semesters.removeIt(docID);
     });
 
     it('#get (multiple definition)', function test() {

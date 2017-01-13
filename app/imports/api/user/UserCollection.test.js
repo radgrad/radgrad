@@ -29,11 +29,15 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
-      const docID = Users.define({ firstName, lastName, slug, email, role, password });
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+      let docID = Users.define({ firstName, lastName, slug, email, role, password });
       expect(Users.isDefined(docID)).to.be.true;
+      const dumpObject = Users.dumpOne(docID);
       Users.removeIt(docID);
       expect(Users.isDefined(docID)).to.be.false;
+      docID = Users.restoreOne(dumpObject);
+      expect(Users.isDefined(docID)).to.be.true;
+      Users.removeIt(docID);
     });
 
     it('#removeAllWithRole', function test() {

@@ -1,15 +1,11 @@
-/**
- * Created by ataka on 12/15/16.
- */
-
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { Feed } from './FeedCollection';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('FeedCollection', function testSuite() {
@@ -29,11 +25,15 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = Feed.define({ student, feedType, timestamp });
-      expect(Feed.isDefined(instanceID)).to.be.true;
-      Feed.removeIt(instanceID);
-      expect(Feed.isDefined(instanceID)).to.be.false;
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+      let docID = Feed.define({ student, feedType, timestamp });
+      expect(Feed.isDefined(docID)).to.be.true;
+      const dumpObject = Feed.dumpOne(docID);
+      Feed.removeIt(docID);
+      expect(Feed.isDefined(docID)).to.be.false;
+      docID = Feed.restoreOne(dumpObject);
+      expect(Feed.isDefined(docID)).to.be.true;
+      Feed.removeIt(docID);
     });
   });
 }
