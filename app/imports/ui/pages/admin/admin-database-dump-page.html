@@ -4,13 +4,13 @@
     {{#Admin_DataBase_Layout}}
       <form style="padding-top: 10px" class="ui form">
         <div class="ui action input">
-          <button class="ui green basic button jsDumpDB" type="submit">Dump DB</button>
+          <button class="ui green basic button jsDumpDB" type="submit">Dump Database</button>
         </div>
       </form>
 
       <div style="margin-top: 10px" class="ui {{ hidden }} {{ successOrError }} message">
         <div style="margin-bottom: 10px" class="header">
-          Database contents as of {{timestamp}}
+          Database contents as of {{timestamp}} ({{ totalEntries }} entries)
         </div>
         {{#each result in results}}
           {{> Admin_DataBase_Accordion name=result.name contents=result.contents }}

@@ -17,7 +17,13 @@ export const dumpDatabaseMethod = new ValidatedMethod({
       if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to check integrity.');
       }
-    // Don't run dumpAll() except on server side (disable client-side simulation).
-    return Meteor.isServer && _.sortBy(radgradCollections.map(collection => collection.dumpAll()), entry => entry.name);
+    // Don't do the dump except on server side (disable client-side simulation).
+    // Return an object with fields timestamp and collections.
+    if (Meteor.isServer) {
+      const collections = _.sortBy(radgradCollections.map(collection => collection.dumpAll()), entry => entry.name);
+      const timestamp = new Date();
+      return { timestamp, collections };
+    }
+    return null;
   },
 });
