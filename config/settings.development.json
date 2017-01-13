@@ -9,7 +9,8 @@
       "serviceParam": "service",
       "popupWidth": 810,
       "popupHeight": 610
-    }
+    },
+    "databaseRestoreFileName": "private/database/mockup/2017-01-12-02-59-12.json"
   },
   "mockup": false
 }

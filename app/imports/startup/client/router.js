@@ -128,6 +128,14 @@ adminRoutes.route('/database/dump', {
   },
 });
 
+export const adminDataBaseRestorePageRouteName = 'Admin_DataBase_Restore_Page';
+adminRoutes.route('/database/restore', {
+  name: adminDataBaseRestorePageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataBaseRestorePageRouteName });
+  },
+});
+
 /*                        ADVISOR ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.

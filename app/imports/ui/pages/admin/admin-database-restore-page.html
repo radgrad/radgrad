@@ -1,0 +1,25 @@
+<template name="Admin_DataBase_Restore_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataBase_Layout}}
+
+      <div class="ui message">
+        Clicking "Restore Database" will delete the current contents of the database and restore it from the file in
+        {{ restoreFile }}.
+      </div>
+      <form  class="ui form">
+        <div class="ui action input">
+          <button class="ui green basic button jsRestoreDB" type="submit">Restore Database</button>
+        </div>
+      </form>
+
+      <div style="margin-top: 10px" class="ui {{ hidden }} {{ successOrError }} message">
+        {{ results }}
+      </div>
+
+    {{/Admin_DataBase_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+
+</template>
