@@ -4,6 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
@@ -47,6 +48,11 @@ function semesters(opportunity) {
   return semesterNames;
 }
 
+function teaser(opp) {
+  const oppTeaser = Teasers.find({ opportunityID: opp._id }).fetch();
+  return oppTeaser[0];
+}
+
 Template.Student_Explorer_Opportunities_Page.helpers({
   opportunity() {
     const opportunitySlugName = FlowRouter.getParam('opportunity');
@@ -75,6 +81,7 @@ Template.Student_Explorer_Opportunities_Page.helpers({
       { label: 'Description', value: opportunity.description },
       { label: 'More Information', value: makeLink(opportunity.moreInformation) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
+      { label: 'Teaser', value: teaser(opportunity) },
     ];
   },
   socialPairs(opportunity) {
@@ -91,5 +98,6 @@ Template.Student_Explorer_Opportunities_Page.onCreated(function studentExplorerO
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(Interests.getPublicationName());
+  this.subscribe(Teasers.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
 });

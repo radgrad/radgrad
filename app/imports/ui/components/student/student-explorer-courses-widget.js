@@ -3,6 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
@@ -84,21 +85,43 @@ Template.Student_Explorer_Courses_Widget.helpers({
     }
     return ret;
   },
+  yearSemesters(year) {
+    const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
+    return semesters;
+  },
+  nextYears(amount) {
+    const nextYears = [];
+    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSem = Semesters.findDoc(currentSemesterID);
+    let currentYear = currentSem.year;
+    for (let i = 0; i < amount; i += 1) {
+      nextYears.push(currentYear);
+      currentYear += 1;
+    }
+    return nextYears;
+  },
 });
 
 Template.Student_Explorer_Courses_Widget.events({
   'click .addItem': function clickAddItem(event) {
     event.preventDefault();
     const student = Users.findDoc({ username: getRouteUserName() });
-    const item = event.target.value;
-    const studentItems = student.careerGoalIDs;
-    try {
-      studentItems.push(item);
-      console.log(item);
-      Users.setCareerGoalIds(student._id, studentItems);
-    } catch (e) {
-      // don't do anything.
-    }
+    const id = event.target.value;
+    const course = this.course;
+    const semester = event.target.text;
+    const courseSlug = Slugs.findDoc({ _id: course.slugID });
+    const semSplit = semester.split(' ');
+    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
+    const username = getRouteUserName();
+    const ci = {
+      semester: semSlug,
+      course: courseSlug,
+      verified: false,
+      note: course.number,
+      grade: '***',
+      student: username,
+    };
+    CourseInstances.define(ci);
   },
 });
 
@@ -106,4 +129,18 @@ Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCours
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
 });
+
+Template.Student_Explorer_Courses_Widget.onRendered(function studentExplorerCoursesWidgetOnRendered() {
+  const template = this;
+  template.$('.chooseSemester')
+      .popup({
+        on: 'click',
+      });
+  template.$('.chooseYear')
+      .popup({
+        on: 'click',
+      });
+});
+

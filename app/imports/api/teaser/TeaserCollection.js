@@ -27,7 +27,7 @@ class TeaserCollection extends BaseInstanceCollection {
       description: { type: String },
       duration: { type: String },
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
-      opportunityID: { type: SimpleSchema.RegEx.Id },
+      opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
     }));
   }
 
@@ -52,7 +52,12 @@ class TeaserCollection extends BaseInstanceCollection {
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const opportunityID = opportunity;
+    let opportunityID;
+    if (opportunity) {
+      const opportunitySlug = Slugs.find({ name: opportunity }).fetch();
+      const opp = Opportunities.find({ slugID: opportunitySlug[0]._id }).fetch();
+      opportunityID = opp[0]._id;
+    }
     const teaserID = this._collection.insert({ title, slugID, author, url,
       description, duration, interestIDs, opportunityID });
     // Connect the Slug to this teaser

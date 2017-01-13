@@ -5,6 +5,7 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
@@ -82,6 +83,9 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     }
     return ret;
   },
+  teaserUrl(teaser) {
+    return teaser.url;
+  },
 });
 
 Template.Student_Explorer_Opportunities_Widget.events({
@@ -104,4 +108,11 @@ Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplore
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+});
+
+Template.Student_Explorer_Opportunities_Widget.onRendered(function enableVideo() {
+  setTimeout(() => {
+    this.$('.ui.embed').embed();
+  }, 300);
 });

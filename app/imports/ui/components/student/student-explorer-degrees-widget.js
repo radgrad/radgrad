@@ -33,12 +33,18 @@ Template.Student_Explorer_Degrees_Widget.events({
   'click .addItem': function clickAddItem(event) {
     event.preventDefault();
     const student = Users.findDoc({ username: getRouteUserName() });
-    const item = event.target.value;
-    const studentItems = student.careerGoalIDs;
+    const id = event.target.value;
     try {
-      studentItems.push(item);
-      console.log(item);
-      Users.setCareerGoalIds(student._id, studentItems);
+      Users.setDesiredDegree(student._id, id);
+    } catch (e) {
+      // don't do anything.
+    }
+  },
+  'click .deleteItem': function clickRemoveItem(event) {
+    event.preventDefault();
+    const student = Users.findDoc({ username: getRouteUserName() });
+    try {
+      Users.setDesiredDegree(student._id, '');
     } catch (e) {
       // don't do anything.
     }

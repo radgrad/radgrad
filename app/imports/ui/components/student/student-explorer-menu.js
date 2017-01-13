@@ -181,7 +181,7 @@ Template.Student_Explorer_Menu.helpers({
     let ret = '';
     const oi = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
-      courseID: opportunity._id,
+      opportunityID: opportunity._id,
     }).fetch();
     if (oi.length > 0) {
       ret = 'yellow star icon';

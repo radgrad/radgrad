@@ -15,7 +15,7 @@ export const teaserDefinitions = [
     description: 'Opportunity to gather and anaylze weather data for a solar energy project.',
     duration: '0:17',
     interests: ['data-science'],
-    opportunity: 'data-analytics-for-solar-energy'
+    opportunity: 'data-analytics-for-solar-energy',
   },
   {
     title: 'RadGrad',
@@ -70,6 +70,7 @@ export const teaserDefinitions = [
     description: 'Help ease Oahus transition to a fully renewable power grid.',
     duration: '0:21',
     interests: ['software-engineering'],
+    opportunity: 'open-power-quality',
   },
   {
     title: 'Scientific Workflows',

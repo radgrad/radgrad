@@ -157,12 +157,23 @@ Template.Student_Explorer_Interests_Widget.events({
   'click .addItem': function clickAddItem(event) {
     event.preventDefault();
     const student = Users.findDoc({ username: getRouteUserName() });
-    const item = event.target.value;
-    const studentItems = student.careerGoalIDs;
+    const id = event.target.value;
+    const studentItems = student.interestIDs;
     try {
-      studentItems.push(item);
-      console.log(item);
-      Users.setCareerGoalIds(student._id, studentItems);
+      studentItems.push(id);
+      Users.setInterestIds(student._id, studentItems);
+    } catch (e) {
+      // don't do anything.
+    }
+  },
+  'click .deleteItem': function clickRemoveItem(event) {
+    event.preventDefault();
+    const student = Users.findDoc({ username: getRouteUserName() });
+    const id = event.target.value;
+    let studentItems = student.interestIDs;
+    try {
+      studentItems = _.without(studentItems, id);
+      Users.setInterestIds(student._id, studentItems);
     } catch (e) {
       // don't do anything.
     }

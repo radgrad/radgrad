@@ -39,9 +39,9 @@
       <br>
       <p>
         {{#if userStatus item}}
-          <button value="{{id}}" class="ui green basic mini button {{deleteDisabled}} jsDelete">Remove</button>
+          <button value="{{id}}" class="ui green basic mini button deleteItem">Remove</button>
         {{else}}
-          <button value="{{item}}" class="ui green basic mini button addItem">Add</button>
+          <button value="{{id}}" class="ui green basic mini button addItem">Add</button>
         {{/if}}
       </p>
     </div>

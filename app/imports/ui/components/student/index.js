@@ -25,6 +25,9 @@ import './student-explorer-menu.js';
 import './student-explorer-opportunities-widget.html';
 import './student-explorer-opportunities-widget.js';
 
+import './student-explorer-opportunities-widget-teaser.html';
+import './student-explorer-opportunities-widget-teaser.js';
+
 import './student-explorer-student-info.html';
 import './student-explorer-student-info.js';
 
