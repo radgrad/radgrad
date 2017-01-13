@@ -35,6 +35,18 @@ class SemesterCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Returns an object representing the Semester docID in a format acceptable to define().
+   * @param docID The docID of a Semester.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const term = doc.term;
+    const year = doc.year;
+    return { term, year };
+  }
+
+  /**
    * Retrieves the docID for the specified Semester, or defines it if not yet present.
    * Implicitly defines the corresponding slug: Spring, 2016 semester is "Spring-2016".
    * @example

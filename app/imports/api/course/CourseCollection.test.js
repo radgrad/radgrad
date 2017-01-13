@@ -17,7 +17,7 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
       const name = 'Algorithms';
       const slug = 'ics311';
       const number = 'ICS 311';
@@ -27,8 +27,12 @@ if (Meteor.isServer) {
       const docID = Courses.define({ name, slug, number, description, creditHrs, interests });
       expect(Courses.isDefined(slug)).to.be.true;
       expect(Courses.findDoc(docID).shortName).to.equal(name);
+      const dumpObject = Courses.dumpOne(docID);
       Courses.removeIt(slug);
       expect(Courses.isDefined(slug)).to.be.false;
+      Courses.restoreOne(dumpObject);
+      expect(Courses.isDefined(slug)).to.be.true;
+      Courses.removeIt(slug);
     });
 
     it('course shortname', function test() {

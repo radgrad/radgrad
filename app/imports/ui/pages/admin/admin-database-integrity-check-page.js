@@ -49,7 +49,7 @@ Template.Admin_DataBase_Integrity_Check_Page.helpers({
 });
 
 Template.Admin_DataBase_Integrity_Check_Page.onCreated(function onCreated() {
-  this.results = new ReactiveDict('integritycheck');
+  this.results = new ReactiveDict();
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(InterestTypes.getPublicationName());
   this.subscribe(Interests.getPublicationName());

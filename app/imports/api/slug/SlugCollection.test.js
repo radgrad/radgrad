@@ -30,11 +30,15 @@ if (Meteor.isServer) {
       expect(Slugs.isValidSlugName(12)).to.be.false;
     });
 
-    it('#define, #removeIt, #isDefined', function test() {
-      Slugs.define({ name, entityName });
+    it('#define, #removeIt, #isDefined, #dumpOne, #restoreOne', function test() {
+      const docID = Slugs.define({ name, entityName });
       expect(Slugs.isDefined(name)).to.be.true;
+      const dumpObject = Slugs.dumpOne(docID);
       Slugs.removeIt(name);
       expect(Slugs.isDefined(name)).to.be.false;
+      Slugs.restoreOne(dumpObject);
+      expect(Slugs.isDefined(name)).to.be.true;
+      Slugs.removeIt(name);
     });
 
     it('#define (multiple definition)', function test() {

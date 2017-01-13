@@ -76,6 +76,24 @@ class TeaserCollection extends BaseInstanceCollection {
     });
     return problems;
   }
+
+  /**
+   * Returns an object representing the Teaser docID in a format acceptable to define().
+   * @param docID The docID of a Teaser.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const title = doc.title;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const author = doc.author;
+    const url = doc.url;
+    const description = doc.description;
+    const duration = doc.duration;
+    const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
+    return { title, slug, author, url, description, duration, interests };
+  }
+
 }
 
 /**

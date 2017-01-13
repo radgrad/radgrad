@@ -22,11 +22,15 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
-      Feedbacks.define({ name, slug, description, feedbackType });
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+      const docID = Feedbacks.define({ name, slug, description, feedbackType });
       expect(Feedbacks.isDefined(slug)).to.be.true;
+      const dumpObject = Feedbacks.dumpOne(docID);
       Feedbacks.removeIt(slug);
       expect(Feedbacks.isDefined(slug)).to.be.false;
+      Feedbacks.restoreOne(dumpObject);
+      expect(Feedbacks.isDefined(slug)).to.be.true;
+      Feedbacks.removeIt(slug);
     });
   });
 }

@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+// import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module MentorQuestions */
 
@@ -42,5 +42,5 @@ class MentorQuestionsCollection extends BaseCollection {
 }
 
 export const MentorQuestions = new MentorQuestionsCollection();
-radgradCollections.push(MentorQuestions);
+// radgradCollections.push(MentorQuestions);
 
