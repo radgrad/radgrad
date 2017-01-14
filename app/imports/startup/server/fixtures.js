@@ -14,6 +14,7 @@ import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { MentorQuestions } from '../../api/mentor/MentorQuestionsCollection.js';
 import { MentorAnswers } from '../../api/mentor/MentorAnswersCollection.js';
+import { MentorProfiles } from '../../api/mentor/MentorProfilesCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
@@ -41,6 +42,8 @@ import { teaserDefinitions } from './icsdata/TeaserDefinitions';
 import { feedDefinitions } from './icsdata/FeedDefinitions';
 import { mentorspaceQuestionsDefinitions } from './icsdata/MentorSpaceQuestionsDefinitions';
 import { mentorspaceAnswersDefinitions } from './icsdata/MentorSpaceAnswersDefinitions';
+import { mentorProfilesDefinitions } from './icsdata/MentorProfilesDefinitions';
+import { mentorUserDefinitions } from './icsdata/MentorUserDefinitions';
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -117,6 +120,20 @@ Meteor.startup(() => {
   if (MentorAnswers.find().count() === 0) {
     console.log('Defining MentorAnswers'); // eslint-disable-line no-console
     mentorspaceAnswersDefinitions.map((definition) => MentorAnswers.define(definition));
+  }
+  if (mentorUserDefinitions) {
+    console.log('Defining MentorUsers'); // eslint-disable-line no-console
+    mentorUserDefinitions.forEach((mentor) => {
+      if (Users.find({ username: mentor.slug }).count() === 0) {
+        ValidUserAccounts.define({ username: mentor.slug });
+        Users.define(mentor);
+      }
+    });
+
+    if (MentorProfiles.find().count() === 0) {
+      console.log('Defining MentorProfiles'); // eslint-disable-line no-console
+      mentorProfilesDefinitions.map((definition) => MentorProfiles.define(definition));
+    }
   }
   if (Teasers.find().count() === 0) {
     console.log('Defining Teasers');  // eslint-disable-line no-console

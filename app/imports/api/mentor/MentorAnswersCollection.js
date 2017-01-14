@@ -42,14 +42,6 @@ class MentorAnswersCollection extends BaseCollection {
   }
 
   /**
-   * Returns the title for the given questionID.
-   * @param question
-   */
-  getMentor(question) {
-    return this._collection.findOne({ question }).mentor;
-  }
-
-  /**
    * Returns an empty array (no integrity checking done on this collection.)
    * @returns {Array} An empty array.
    */
