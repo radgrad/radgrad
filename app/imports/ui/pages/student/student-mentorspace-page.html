@@ -17,8 +17,8 @@
           </div>
         </div>
 
-        {{#each question in listQuestions}}
-        {{> Student_MentorSpace_Page_Accordion text=question.text questionID=question.questionID}}
+        {{#each question in questionsList}}
+        {{> Student_MentorSpace_Page_Accordion title=question.title questionID=question.slugID}}
         {{/each}}
 
       </div>
