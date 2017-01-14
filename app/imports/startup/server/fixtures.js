@@ -79,7 +79,7 @@ function restoreCollection(collection, restoreJSON) {
 }
 
 Meteor.startup(() => {
-  if (totalDocuments() > 0) {
+  if (totalDocuments() === 0) {
     const restoreFileName = Meteor.settings.public.databaseRestoreFileName;
     const restoreFileAge = getRestoreFileAge(restoreFileName);
     console.log(`Restoring database from file ${restoreFileName}, dumped ${restoreFileAge}.`);
@@ -103,7 +103,9 @@ Meteor.startup(() => {
       console.log(`Error: Expected collections are missing from restore JSON file: ${extraCollectionNames}`);
     }
 
-
+    if (!extraRestoreNames.length && !extraCollectionNames.length) {
+      _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
+    }
   }
 });
 

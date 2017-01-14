@@ -2369,98 +2369,98 @@
           "name": "Android",
           "slug": "android",
           "description": "Android is a mobile operating system (OS) currently developed by Google, based on the Linux kernel and designed primarily for touchscreen mobile devices such as smartphones and tablets. In addition to touchscreen devices, Google has further developed Android TV for televisions, Android Auto for cars, and Android Wear for wrist watches, each with a specialized user interface. Variants of Android are also used on notebooks, game consoles, digital cameras, and other electronics. Android has the largest installed base of all operating systems of any kind. Android has been the best selling OS on tablets since 2013, and on smartphones it is dominant by any metric.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://www.android.com/"
         },
         {
           "name": "Assembler",
           "slug": "assembler",
           "description": "An assembler (or assembly) language is a low-level programming language for a computer in which there is a direct correspondence between the language and the architecture's machine code instructions. Each assembly language is specific to a particular computer architecture, in contrast to most high-level programming languages, which are generally portable across multiple architectures, but require interpreting or compiling. Assembly language may also be called symbolic machine code. Assembly language is converted into executable machine code by a utility program referred to as an assembler. The conversion process is referred to as assembly, or assembling the source code.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/Assembly_language"
         },
         {
           "name": "C",
           "slug": "c",
           "description": "C is a general-purpose, imperative computer programming language, supporting structured programming, lexical variable scope and recursion, and includes a static type system that prevents many unintended operations. By design, C provides constructs that map efficiently to typical machine instructions, and therefore it has found lasting use in applications that had formerly been coded in assembly language. Despite its low-level capabilities, the language was designed to encourage cross-platform programming. A standards-compliant and portably written C program can be compiled for a very wide variety of computer platforms and operating systems with few changes to its source code. The language has become available on a very wide range of platforms, from embedded microcontrollers to supercomputers.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/C_(programming_language)"
         },
         {
           "name": "C++",
           "slug": "cplusplus",
           "description": "C++ is a general-purpose programming language. It has imperative, object-oriented and generic programming features, while also providing facilities for low-level memory manipulation. It was designed with a bias toward system programming and embedded, resource-constrained and large systems, with performance, efficiency and flexibility of use as its design highlights. Many other programming languages have been influenced by C++, including C#, Java, and newer versions of C (after 1998).",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/C_(programming_language)"
         },
         {
           "name": "Java",
           "slug": "java",
           "description": "Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers \"write once, run anywhere\", meaning that compiled Java code can run on all platforms that support Java without the need for recompilation. Java applications are typically compiled to bytecode that can run on any Java virtual machine regardless of computer architecture. As of 2016, Java is one of the most popular programming languages in use, particularly for client-server web applications, with a reported 9 million developers.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/Java_(programming_language)"
         },
         {
           "name": "Javascript",
           "slug": "javascript",
           "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. Despite some syntactic similarities, JavaScript and Java are otherwise unrelated and have very different semantics. Alongside HTML and CSS, Javascript is one of the three core technologies of World Wide Web content production; the majority of websites employ it and it is supported by all modern Web browsers without plug-ins. JavaScript is prototype-based with first-class functions, making it a multi-paradigm language, supporting object-oriented, imperative, and functional programming styles. It has an API for working with text, arrays, dates and regular expressions, but does not include any I/O, such as networking, storage, or graphics facilities, relying for these upon the host environment in which it is embedded.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/JavaScript"
         },
         {
           "name": "Lisp",
           "slug": "lisp",
           "description": "Lisp is a family of computer programming languages with a long history and a distinctive, fully parenthesized prefix notation. Originally specified in 1958, Lisp is the second-oldest high-level programming language in widespread use today; only Fortran is older (by one year). Lisp was originally created as a practical mathematical notation for computer programs, influenced by the notation of Alonzo Church's lambda calculus. It quickly became the favored programming language for artificial intelligence (AI) research. As one of the earliest programming languages, Lisp pioneered many ideas in computer science, including tree data structures, automatic storage management, dynamic typing, conditionals, higher-order functions, recursion, and the self-hosting compiler.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/Lisp_(programming_language)"
         },
         {
           "name": "Linux",
           "slug": "linux",
           "description": "A Unix-like and mostly POSIX-compliant computer operating system (OS) assembled under the model of free and open-source software development and distribution. Linux was originally developed as a free operating system for personal computers based on the Intel x86 architecture, but has since been ported to more computer hardware platforms than any other operating system. Because of the dominance of Android on smartphones, Linux has the largest installed base of all general-purpose operating systems.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/Linux"
         },
         {
           "name": "Perl",
           "slug": "perl",
           "description": "Perl is a family of high-level, general-purpose, interpreted, dynamic programming languages. Perl 5 is used for graphics programming, system administration, network programming, finance, bioinformatics, and other applications. It has been nicknamed \"the Swiss Army chainsaw of scripting languages\" because of its flexibility and power, and possibly also because of its \"ugliness\". In 1998, it was also referred to as the \"duct tape that holds the Internet together\", in reference to both its ubiquitous use as a glue language and its perceived inelegance.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://www.perl.org/"
         },
         {
           "name": "Prolog",
           "slug": "prolog",
           "description": "Prolog is a general-purpose logic programming language associated with artificial intelligence and computational linguistics. Prolog has its roots in first-order logic, a formal logic, and unlike many other programming languages, Prolog is declarative: the program logic is expressed in terms of relations, represented as facts and rules. The language has been used for theorem proving, expert systems, as well as its original intended field of use, natural language processing.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/Prolog"
         },
         {
           "name": "Python",
           "slug": "python",
           "description": "Python is a widely used high-level, general-purpose, interpreted, dynamic programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C++ or Java. Python supports multiple programming paradigms, including object-oriented, imperative and functional programming or procedural styles. It features a dynamic type system and automatic memory management and has a large and comprehensive standard library.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://www.python.org/"
         },
         {
           "name": "R",
           "slug": "r",
           "description": "R is a programming language and software environment that is widely used among statisticians and data miners for developing statistical software and data analysis. R and its libraries implement a wide variety of statistical and graphical techniques, including linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, and others.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/R_(programming_language)"
         },
         {
           "name": "Ruby",
           "slug": "ruby",
           "description": "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. Ruby was influenced by Perl, Smalltalk, Eiffel, Ada, and Lisp. It supports multiple programming paradigms, including functional, object-oriented, and imperative. It also has a dynamic type system and automatic memory management. Ruby's creator, Yukihiro Matsumoto, has stated, \"I hope to see Ruby help every programmer in the world to be productive, and to enjoy programming, and to be happy. That is the primary purpose of Ruby language.\"",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "http://www.ruby-lang.org/en/"
         },
         {
           "name": "SQL",
           "slug": "sql",
           "description": "SQL (Structured Query Language) is a special-purpose programming language designed for managing data held in a relational database management system , or for stream processing in a relational data stream management system. Originally based upon relational algebra and tuple relational calculus, SQL consists of a data definition language, data manipulation language, and a data control language. The scope of SQL includes data insert, query, update and delete, schema creation and modification, and data access control.",
-          "interestType": "394trBCfrYj8hqZ6h",
+          "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/SQL"
         }
       ]
