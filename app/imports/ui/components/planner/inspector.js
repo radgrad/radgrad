@@ -1,8 +1,7 @@
 import { Template } from 'meteor/templating';
-
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-
+import { $ } from 'meteor/jquery';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -203,6 +202,7 @@ Template.Inspector.helpers({
     return null;
   },
   courseIce() {
+    // $('body').removeClass('waiting');
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       const course = Template.instance().state.get(plannerKeys.detailCourse);
       const slug = Slugs.findDoc(course.slugID);
@@ -210,6 +210,7 @@ Template.Inspector.helpers({
       return ice;
     } else
       if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        // Template.instance().$('body').removeClass('waiting');
         const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
         const course = Courses.findDoc(ci.courseID);
         const slug = Slugs.findDoc(course.slugID);

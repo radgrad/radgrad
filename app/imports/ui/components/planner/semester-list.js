@@ -363,6 +363,8 @@ Template.Semester_List.events({
     event.preventDefault();
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;
+    // const body = $('body');
+    // body.addClass('waiting');
     CourseInstances.clientUpdateGrade(div.id, grade);
     const ci = CourseInstances.findDoc(div.id);
     instance.state.set(plannerKeys.detailCourseInstance, ci);
