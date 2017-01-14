@@ -34,8 +34,8 @@ Template.Student_MentorSpace_Page.onCreated(function appBodyOnCreated() {
 Template.Student_MentorSpace_Page.helpers({
   // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
 
-  listQuestions() {
-    return MentorQuestions.find({});
+  questionsList() {
+    return MentorQuestions.getQuestions();
   },
 
   listMentors() {

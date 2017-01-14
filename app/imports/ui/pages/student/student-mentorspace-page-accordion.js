@@ -37,10 +37,10 @@ Template.Student_MentorSpace_Page_Accordion.onRendered(function listMentorSpaceQ
 
 Template.Student_MentorSpace_Page_Accordion.helpers({
   listAnswers(questionID) {
-    return MentorAnswers.find({ questionID });
+    return MentorAnswers.getAnswers(questionID);
   },
   answerCount(questionID) {
-    return MentorAnswers.find({ questionID }).count();
+    return MentorAnswers.getAnswers(questionID).count();
   },
 
 });
