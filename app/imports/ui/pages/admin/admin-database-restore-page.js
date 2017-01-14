@@ -2,6 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { restoreDatabaseMethodName } from '../../../api/base/BaseCollectionMethods.js';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { restoreFileDateFormat } from '/imports/ui/pages/admin/admin-database-dump-page.js';
+import { moment } from 'meteor/momentjs:moment';
 
 Template.Admin_DataBase_Restore_Page.helpers({
   results() {
@@ -16,6 +19,14 @@ Template.Admin_DataBase_Restore_Page.helpers({
   },
   restoreFile() {
     return Meteor.settings.public.databaseRestoreFileName;
+  },
+  restoreDate() {
+    // Assumes file name is like: private/database/mockup/2017-01-12-02-59-12.json
+    // Split the file name into terms separated by / or ., then pick the second to last term as the date.
+    const fileName = Meteor.settings.public.databaseRestoreFileName;
+    const terms = _.words(fileName, /[^/. ]+/g);
+    const dateString = terms[terms.length - 2];
+    return moment(dateString, restoreFileDateFormat).fromNow();
   },
 });
 

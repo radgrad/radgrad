@@ -3,9 +3,13 @@
   {{#if Template.subscriptionsReady}}
     {{#Admin_DataBase_Layout}}
 
-      <div class="ui message">
-        Clicking "Restore Database" will delete the current contents of the database and restore it from the file in
-        {{ restoreFile }}.
+      <div style="margin-top: 10px" class="ui floating primary message">
+        <p>Clicking "Restore Database" will delete the current contents of the database and restore it from the file in
+          {{ restoreFile }}.</p>
+
+        <p>This file was created {{ restoreDate }}.</p>
+
+        <p>We recommend that you 'dump' the database prior to doing this restore. Clicking the button below will immediately delete the contents of all collections in RadGrad.</p>
       </div>
       <form  class="ui form">
         <div class="ui action input">

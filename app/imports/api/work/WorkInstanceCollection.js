@@ -91,5 +91,6 @@ class WorkInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const WorkInstances = new WorkInstanceCollection();
-radgradCollections.push(WorkInstances);
+// Don't dump/restore WorkInstances until we actually use them.
+// radgradCollections.push(WorkInstances);
 

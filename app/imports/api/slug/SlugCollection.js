@@ -164,7 +164,8 @@ class SlugCollection extends BaseCollection {
  * Provides the singleton instance of a SlugCollection to all other entities.
  */
 export const Slugs = new SlugCollection();
-radgradCollections.push(Slugs);
+// Slugs are implicitly defined by other collections, so don't explicitly dump/restore them.
+// radgradCollections.push(Slugs);
 
 
 /**

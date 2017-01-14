@@ -43,7 +43,8 @@ export const restoreDatabaseMethod = new ValidatedMethod({
     // Don't do the restore except on server side (disable client-side simulation).
     // Return a string indicating success or throw an error.
     if (Meteor.isServer) {
-      throw new Meteor.Error('An error occurred during database restore');
+      // Delete all collections.
+      radgradCollections.map(collection => collection.dumpAll());
     }
     return 'The database was successfully restored.';
   },
