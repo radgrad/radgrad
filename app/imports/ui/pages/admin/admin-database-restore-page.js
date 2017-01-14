@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { RestoreDatabaseMethodName } from '../../../api/base/BaseCollectionMethods.js';
+import { restoreDatabaseMethodName } from '../../../api/base/BaseCollectionMethods.js';
 
 Template.Admin_DataBase_Restore_Page.helpers({
   results() {
@@ -27,7 +27,7 @@ Template.Admin_DataBase_Restore_Page.onCreated(function onCreated() {
 Template.Admin_DataBase_Restore_Page.events({
   'click .jsRestoreDB': function clickEvent(event, instance) {
     event.preventDefault();
-    Meteor.call(RestoreDatabaseMethodName, null, (error, result) => {
+    Meteor.call(restoreDatabaseMethodName, null, (error, result) => {
       if (error) {
         console.log('Error during Database Restore: ', error);
         instance.results.set(error);
