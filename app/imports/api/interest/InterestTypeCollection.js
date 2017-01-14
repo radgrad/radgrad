@@ -1,5 +1,5 @@
 import BaseTypeCollection from '/imports/api/base/BaseTypeCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module InterestType */
 

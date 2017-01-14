@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { checkIntegrity } from '/imports/api/integritychecker/IntegrityChecker';
+import { checkIntegrity } from '/imports/api/integrity/IntegrityChecker';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
