@@ -11,7 +11,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 /** @module AcademicYearInstance */
 
 /**
- * Each AcademicYearInstance represents one recommendation or warning for a user.
+ * Each AcademicYearInstance represents a sequence of three semesters for a given student.
+ * It is used to control the display of semesters for a given student in the Degree Planner.
  * @extends module:Base~BaseCollection
  */
 class AcademicYearInstanceCollection extends BaseCollection {
@@ -31,7 +32,8 @@ class AcademicYearInstanceCollection extends BaseCollection {
    * Defines a new AcademicYearInstance.
    * @example
    * To define the 2016 - 2017 academic year for Joe Smith.
-   * AcademicYearInstances.define({ year: 2016, student: 'joesmith' });
+   * AcademicYearInstances.define({ year: 2016,
+   *                                student: 'joesmith' });
    * @param { Object } Object with keys year and student.
    * @throws {Meteor.Error} If the definition includes an undefined student or a year that is out of bounds.
    * @returns The newly created docID.
@@ -62,9 +64,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
     return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs });
   }
   /**
-   * Depending on the logged in user publish only their CourseInstances. If
-   * the user is in the Role.ADMIN then publish all CourseInstances. If the
-   * system is in mockup mode publish all CourseInstances.
+   * Depending on the logged in user publish only their AcademicYears. If
+   * the user is in the Role.ADMIN then publish all AcademicYears. If the
+   * system is in mockup mode publish all AcademicYears.
    */
   publish() {
     if (Meteor.isServer) {
@@ -111,6 +113,17 @@ class AcademicYearInstanceCollection extends BaseCollection {
     return problems;
   }
 
+  /**
+   * Returns an object representing the AcademicYearInstance docID in a format acceptable to define().
+   * @param docID The docID of an AcademicYearInstance.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const student = Users.findSlugByID(doc.studentID);
+    const year = doc.year;
+    return { student, year };
+  }
 }
 
 /**

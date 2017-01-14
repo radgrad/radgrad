@@ -54,6 +54,19 @@ class HelpMessageCollection extends BaseCollection {
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     return [];
   }
+
+  /**
+   * Returns an object representing the HelpMessage docID in a format acceptable to define().
+   * @param docID The docID of a HelpMessage.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const routeName = doc.routeName;
+    const title = doc.title;
+    const text = doc.text;
+    return { routeName, title, text };
+  }
 }
 
 export const HelpMessages = new HelpMessageCollection();

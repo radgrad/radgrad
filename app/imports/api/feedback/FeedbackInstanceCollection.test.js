@@ -18,15 +18,19 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #removeIt', function test() {
+    it('#define, #removeIt, #dumpOne, #restoreOne', function test() {
       const user = makeSampleUser();
       const feedback = makeSampleFeedback();
       const description = 'foo';
       const area = 'Interests';
-      const docID = FeedbackInstances.define({ feedback, user, description, area });
+      let docID = FeedbackInstances.define({ feedback, user, description, area });
       expect(FeedbackInstances.isDefined(docID)).to.be.true;
+      const dumpObject = FeedbackInstances.dumpOne(docID);
       FeedbackInstances.removeIt(docID);
       expect(FeedbackInstances.isDefined(docID)).to.be.false;
+      docID = FeedbackInstances.restoreOne(dumpObject);
+      expect(FeedbackInstances.isDefined(docID)).to.be.true;
+      FeedbackInstances.removeIt(docID);
     });
   });
 }

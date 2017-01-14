@@ -129,6 +129,17 @@ class BaseTypeCollection extends BaseCollection {
   }
 
   /**
+   * Returns the name associated with this docID.
+   * @param docID The docID for this "type".
+   * @returns The name of this "type" instance.
+   * @throws { Meteor.Error } If the passed docID is not valid.
+   */
+  getNameFromID(docID) {
+    this.assertDefined(docID);
+    return this.findDoc(docID).name;
+  }
+
+  /**
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.
    * Checks slugID.
@@ -143,6 +154,19 @@ class BaseTypeCollection extends BaseCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the "Type" docID in a format acceptable to define().
+   * @param docID The docID of a "Type".
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const description = doc.description;
+    return { name, slug, description };
   }
 }
 

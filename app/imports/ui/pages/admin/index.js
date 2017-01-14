@@ -1,4 +1,5 @@
 import './admin-database-dump-page.html';
+import './admin-database-dump-page.js';
 
 import './admin-database-integrity-check-page.html';
 import './admin-database-integrity-check-page.js';

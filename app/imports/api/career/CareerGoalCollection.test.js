@@ -21,12 +21,15 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
       const interests = [makeSampleInterest()];
-      CareerGoals.define({ name, slug, description, interests });
+      const docID = CareerGoals.define({ name, slug, description, interests });
       expect(CareerGoals.isDefined(slug)).to.be.true;
+      const dumpObject = CareerGoals.dumpOne(docID);
       CareerGoals.removeIt(slug);
       expect(CareerGoals.isDefined(slug)).to.be.false;
+      CareerGoals.restoreOne(dumpObject);
+      expect(CareerGoals.isDefined(slug)).to.be.true;
     });
   });
 }
