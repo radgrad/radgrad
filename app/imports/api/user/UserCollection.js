@@ -13,7 +13,7 @@ import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstan
 import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
 import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module User */
 
@@ -127,7 +127,7 @@ class UserCollection extends BaseInstanceCollection {
       // Now that we have a user, update fields.
       Meteor.users.update(userID, {
         $set: {
-          username: slug, firstName, lastName, slugID, email, picture, website,
+          username: slug, firstName, lastName, slugID, email, picture, website, password,
           desiredDegreeID, interestIDs, careerGoalIDs, uhID, level,
         },
       });

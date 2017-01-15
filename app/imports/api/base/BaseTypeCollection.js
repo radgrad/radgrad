@@ -108,14 +108,14 @@ class BaseTypeCollection extends BaseCollection {
   }
 
   /**
-   * Returns the slugID associated with this docID.
+   * Returns the slug name associated with this docID.
    * @param docID The docID
-   * @returns { String } The slug
+   * @returns { String } The slug name
    * @throws { Meteor.Error } If docID is not associated with this entity.
    */
   findSlugByID(docID) {
     this.assertDefined(docID);
-    return this.findDoc(docID).slugID;
+    return Slugs.findDoc(this.findDoc(docID).slugID).name;
   }
 
   /**

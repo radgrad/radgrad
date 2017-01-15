@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module Slug */
 
@@ -164,7 +164,8 @@ class SlugCollection extends BaseCollection {
  * Provides the singleton instance of a SlugCollection to all other entities.
  */
 export const Slugs = new SlugCollection();
-radgradCollections.push(Slugs);
+// Slugs are implicitly defined by other collections, so don't explicitly dump/restore them.
+// radgradCollections.push(Slugs);
 
 
 /**

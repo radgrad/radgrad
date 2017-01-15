@@ -1,3 +1,3 @@
-import './MentorQuestionsCollection';
-import './MentorAnswersCollection';
-import './MentorProfilesCollection';
+import './MentorQuestionCollection';
+import './MentorAnswerCollection';
+import './MentorProfileCollection';

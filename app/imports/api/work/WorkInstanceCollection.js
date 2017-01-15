@@ -5,7 +5,7 @@ import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module WorkInstance */
 
@@ -91,5 +91,6 @@ class WorkInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const WorkInstances = new WorkInstanceCollection();
-radgradCollections.push(WorkInstances);
+// Don't dump/restore WorkInstances until we actually use them.
+// radgradCollections.push(WorkInstances);
 

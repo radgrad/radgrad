@@ -9,9 +9,9 @@ import { FeedbackInstances } from '/imports/api/feedback/FeedbackInstanceCollect
 import { HelpMessages } from '/imports/api/help/HelpMessageCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
-import { MentorAnswers } from '/imports/api/mentor/MentorAnswersCollection';
-import { MentorQuestions } from '/imports/api/mentor/MentorQuestionsCollection';
-import { MentorProfiles } from '/imports/api/mentor/MentorProfilesCollection';
+import { MentorAnswers } from '/imports/api/mentor/MentorAnswerCollection';
+import { MentorQuestions } from '/imports/api/mentor/MentorQuestionCollection';
+import { MentorProfiles } from '/imports/api/mentor/MentorProfileCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';

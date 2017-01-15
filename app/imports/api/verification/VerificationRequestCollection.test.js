@@ -3,8 +3,9 @@ import { ROLE } from '/imports/api/role/Role';
 import { expect } from 'chai';
 import { VerificationRequests } from './VerificationRequestCollection.js';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
-import { makeSampleOpportunityInstance } from '/imports/api/opportunity/SampleOpportunities';
+import { makeSampleOpportunityInstance, makeSampleOpportunity } from '/imports/api/opportunity/SampleOpportunities';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -33,6 +34,16 @@ if (Meteor.isServer) {
       VerificationRequests.removeIt(docID);
       expect(VerificationRequests.isDefined(docID)).to.be.false;
       docID = VerificationRequests.restoreOne(dumpObject);
+      expect(VerificationRequests.isDefined(docID)).to.be.true;
+      VerificationRequests.removeIt(docID);
+    });
+
+    it('#define using semester and opportunity', function test() {
+      const semester = Semesters.define({ term: Semesters.SUMMER, year: 2015 });
+      const opportunity = makeSampleOpportunity(makeSampleUser(ROLE.FACULTY));
+      const student = makeSampleUser();
+      OpportunityInstances.define({ semester, opportunity, student });
+      const docID = VerificationRequests.define({ student, semester, opportunity });
       expect(VerificationRequests.isDefined(docID)).to.be.true;
       VerificationRequests.removeIt(docID);
     });
