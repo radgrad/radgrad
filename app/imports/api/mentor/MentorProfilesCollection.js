@@ -1,8 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
 /** @module MentorAnswers */
@@ -40,24 +37,17 @@ class MentorProfilesCollection extends BaseCollection {
     return this._collection.insert({ mentorID, company, career, location, linkedin, motivation });
   }
 
+  getMentorProfile(mentorID) {
+    return this._collection.find({ mentorID });
+  }
+
 
   /**
    * Returns an empty array (no integrity checking done on this collection.)
    * @returns {Array} An empty array.
    */
   checkIntegrity() { // eslint-disable-line class-methods-use-this
-    const problems = [];
-    this.find().forEach(doc => {
-      if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`Bad slugID: ${doc.slugID}`);
-      }
-      _.forEach(doc.interestIDs, interestID => {
-        if (!Interests.isDefined(interestID)) {
-          problems.push(`Bad interestID: ${interestID}`);
-        }
-      });
-    });
-    return problems;
+
   }
 
 

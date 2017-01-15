@@ -121,7 +121,7 @@ Meteor.startup(() => {
     console.log('Defining MentorAnswers'); // eslint-disable-line no-console
     mentorspaceAnswersDefinitions.map((definition) => MentorAnswers.define(definition));
   }
-  if (mentorUserDefinitions) {
+  if (mentorUserDefinitions && MentorProfiles.find().count() === 0) {
     console.log('Defining MentorUsers'); // eslint-disable-line no-console
     mentorUserDefinitions.forEach((mentor) => {
       if (Users.find({ username: mentor.slug }).count() === 0) {
@@ -129,11 +129,8 @@ Meteor.startup(() => {
         Users.define(mentor);
       }
     });
-
-    if (MentorProfiles.find().count() === 0) {
-      console.log('Defining MentorProfiles'); // eslint-disable-line no-console
-      mentorProfilesDefinitions.map((definition) => MentorProfiles.define(definition));
-    }
+    console.log('Defining MentorProfiles'); // eslint-disable-line no-console
+    mentorProfilesDefinitions.map((definition) => MentorProfiles.define(definition));
   }
   if (Teasers.find().count() === 0) {
     console.log('Defining Teasers');  // eslint-disable-line no-console
