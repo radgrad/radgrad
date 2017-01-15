@@ -41,6 +41,15 @@ import './student-levels-others.js';
 import './student-levels-widget.html';
 import './student-levels-widget.js';
 
+import './student-mentorspace-questions-accordion.html';
+import './student-mentorspace-questions-accordion.js';
+
+import './student-mentorspace-question-form.html';
+import './student-mentorspace-question-form.js';
+
+import './student-mentorspace-mentor-directory.html';
+import './student-mentorspace-mentor-directory.js';
+
 import './student-opportunities-of-interest-card.html';
 import './student-opportunities-of-interest-card.js';
 

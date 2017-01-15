@@ -1,0 +1,19 @@
+<template name="Student_MentorSpace_Question_Form">
+
+  <form class="ui form mentorspace-question-form {{ successClass }} {{ errorClass }}">
+
+    <div class="field">
+      <textarea rows="5" name="msquestion" id="msquestion"></textarea>
+    </div>
+
+    <button class="fluid ui button" type="submit">Submit</button>
+
+    {{#if displaySuccessMessage}}
+    <div class="ui success message">
+      <p>Your question has been posted!</p>
+    </div>
+    {{/if}}
+
+  </form>
+
+</template>

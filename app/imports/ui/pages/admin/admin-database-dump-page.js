@@ -4,7 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { dumpDatabaseMethodName } from '../../../api/base/BaseCollectionMethods.js';
 import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
-
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 Template.Admin_DataBase_Dump_Page.helpers({
   results() {
