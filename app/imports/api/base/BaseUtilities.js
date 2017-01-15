@@ -9,8 +9,9 @@ import { FeedbackInstances } from '/imports/api/feedback/FeedbackInstanceCollect
 import { HelpMessages } from '/imports/api/help/HelpMessageCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
-import { MentorAnswers } from '/imports/api/mentorspace/MentorAnswersCollection';
-import { MentorQuestions } from '/imports/api/mentorspace/MentorQuestionsCollection';
+import { MentorAnswers } from '/imports/api/mentor/MentorAnswersCollection';
+import { MentorQuestions } from '/imports/api/mentor/MentorQuestionsCollection';
+import { MentorProfiles } from '/imports/api/mentor/MentorProfilesCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
@@ -42,6 +43,7 @@ export function removeAllEntities() {
   AdvisorLogs.removeAll();
   MentorAnswers.removeAll();
   MentorQuestions.removeAll();
+  MentorProfiles.removeAll();
   Opportunities.removeAll();
   OpportunityInstances.removeAll();
   OpportunityTypes.removeAll();
