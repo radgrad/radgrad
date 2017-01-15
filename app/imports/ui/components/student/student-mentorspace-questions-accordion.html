@@ -15,7 +15,8 @@
           {{#each listAnswers (questionID)}}
           <div class="ui divider"></div>
           <div class="author">
-            <img class="ui left floated mini image" src="../../images/mentors/{{slug}}.jpg"> {{text}}
+            <img class="ui left floated mini image" src="{{picture (mentorID)}}">
+            {{text}}
           </div>
           {{/each}}
 
