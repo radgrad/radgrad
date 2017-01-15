@@ -18,49 +18,20 @@
         </div>
 
         {{#each question in questionsList}}
-        {{> Student_MentorSpace_Page_Accordion title=question.title questionID=question.slugID}}
+        {{> Student_MentorSpace_Questions_Accordion title=question.title questionID=question.slugID}}
         {{/each}}
 
       </div>
 
       <div class="five wide column">
 
-
         <div class="ui segment">
           <div class="ui dividing header">
             <h4>MENTOR DIRECTORY</h4>
           </div>
+          {{#each mentor in mentorsList}}
 
-          {{#each listMentors}}
-
-          <div class="item mentorspace-item-padding">
-            <div class="ui vertical accordion">
-
-              <div class="ui active selection list title">
-                <div class="item">
-                  <i class="dropdown icon"></i>
-                  <img class="ui mini image" src="../../images/mentors/{{image}}">
-                  <div class="content">
-                    <a class="header">{{name}}</a>
-                    <div class="description mentorspace-title-size">{{title}}</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="active content">
-                <div class="ui divider"></div>
-                {{name}} is based in {{location}}<br>
-                <i class="mail outline icon"></i>: <a href="mailto:{{email}}">{{email}}</a><br>
-                <i class="linkedin icon"></i>: <a href="https://www.linkedin.com/in/{{linkedin}}">{{linkedin}}</a><br>
-                <h6 class="ui horizontal divider header">
-                  WHY I MENTOR
-                </h6>
-                <div class="description mentorspace-description">{{mentor_reason}}</div>
-
-              </div>
-            </div>
-          </div>
-          <div class="ui divider"></div>
+          {{> Student_MentorSpace_Mentor_Directory profile=(mentorProfile mentor.username) mentorID=mentor.username firstName=mentor.firstName lastName=mentor.lastName email=mentor.email picture=mentor.picture}}
 
           {{/each}}
         </div>

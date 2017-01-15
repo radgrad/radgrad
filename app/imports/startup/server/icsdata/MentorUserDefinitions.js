@@ -14,7 +14,7 @@ export const mentorUserDefinitions = [
   {
     firstName: 'Jennifer',
     lastName: 'Geis',
-    slug: 'jgeis',
+    slug: 'geis',
     email: 'jgeis@hawaii.edu',
     password: 'foo',
     picture: '/images/mentors/geis.jpg',

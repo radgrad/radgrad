@@ -1,0 +1,38 @@
+<template name="Student_MentorSpace_Mentor_Directory">
+
+
+  <div class="item mentorspace-item-padding">
+    <div class="ui vertical accordion">
+
+      <div class="ui active selection list title">
+        <div class="item">
+          <i class="dropdown icon"></i>
+          <img class="ui mini image" src="{{picture}}">
+          <div class="content">
+            <a class="header">{{firstName}} {{lastName}}</a>
+            <div class="description mentorspace-title-size">{{profile.career}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="active content">
+        <div class="ui divider"></div>
+        {{firstName}} {{lastName}} is based in
+
+        {{profile.location}}<br>
+
+        <i class="mail outline icon"></i>: <a href="mailto:{{email}}">{{email}}</a><br>
+        <i class="linkedin icon"></i>: <a href="https://www.linkedin.com/in/{{profile.linkedin}}">{{profile.linkedin}}</a><br>
+        <h6 class="ui horizontal divider header">
+          WHY I MENTOR
+        </h6>
+        <div class="description mentorspace-description">
+          {{profile.motivation}}
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+
+</template>
