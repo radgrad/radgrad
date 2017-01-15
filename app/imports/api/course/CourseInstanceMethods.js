@@ -1,6 +1,3 @@
-/**
- * Created by Cam on 12/23/2016.
- */
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';

@@ -1,7 +1,3 @@
-/**
- * Created by Cam Moore on 12/19/16.
- */
-
 // TODO: Remove this collection, just add an entry to the Advisor Log when Star Data uploaded.
 
 import { Meteor } from 'meteor/meteor';

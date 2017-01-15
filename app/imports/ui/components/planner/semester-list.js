@@ -369,7 +369,7 @@ Template.Semester_List.events({
     const ci = CourseInstances.findDoc(div.id);
     instance.state.set(plannerKeys.detailCourseInstance, ci);
     console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'clickItemGrade', ci.ice, ci.grade);
-    // Tracker.flush();
+    Tracker.flush();
     // console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'clickItemGrade', ci.ice, ci.grade);
   },
   'click .jsDelCourse': function clickJsDelCourse(event) {

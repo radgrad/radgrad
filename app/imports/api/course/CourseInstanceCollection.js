@@ -12,7 +12,6 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 import { makeCourseICE } from '/imports/api/ice/IceProcessor';
 import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
 
-
 /** @module CourseInstance */
 
 /**
@@ -195,12 +194,20 @@ class CourseInstanceCollection extends BaseCollection {
   clientUpdateGrade(courseInstanceID, grade) {
     const logger = new Logger('CourseInstance.clientUpdateGrade');
     logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${grade}`);
-    Meteor.call('CourseInstance.updateGrade', {
-      courseInstanceID,
-      grade,
-    });
+    Meteor.call('CourseInstance.updateGrade',
+        courseInstanceID,
+        grade,
+        function callback(error, result) {
+          if (error) {
+            console.log('error', error);
+          }
+          if (result) {
+            console.log('result', result);
+          }
+        });
     logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} after Meteor.call`);
   }
+
   /**
    * Updates the CourseInstance's grade. This should be used for planning purposes.
    * @param courseInstanceID The course instance ID.
@@ -275,7 +282,6 @@ class CourseInstanceCollection extends BaseCollection {
  */
 export const CourseInstances = new CourseInstanceCollection();
 radgradCollections.push(CourseInstances);
-
 
 if (Meteor.isServer) {
   // eslint-disable-next-line meteor/audit-argument-checks

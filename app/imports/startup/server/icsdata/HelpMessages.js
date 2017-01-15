@@ -1,6 +1,3 @@
-/**
- * Created by Cam on 12/7/2016.
- */
 /* eslint max-len: "off" */
 
 /** @module FeedbackDefinitions */
