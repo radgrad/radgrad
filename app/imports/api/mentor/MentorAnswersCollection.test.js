@@ -1,4 +1,3 @@
-/*
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
@@ -7,10 +6,9 @@ import { MentorAnswers } from './MentorAnswersCollection';
 if (Meteor.isServer) {
   describe('MentorAnswersCollection', function testSuite() {
     // Define course data.
-    const questionID = ;
-    const mentor = ;
-    const slug = ;
-    const text = ;
+    let question = 'hiring-expectations';
+    let mentorID = 'nagashima' ;
+    let text = 'Test answer.' ;
 
     before(function setup() {
       removeAllEntities();
@@ -22,11 +20,11 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = Teasers.define({ title, slug, author, url, description, duration, interests });
-      expect(Teasers.isDefined(instanceID)).to.be.true;
-      Teasers.removeIt(instanceID);
-      expect(Teasers.isDefined(instanceID)).to.be.false;
+      let instanceID = MentorAnswers.define({ question, mentorID, text });
+      expect(MentorAnswers.isDefined(instanceID)).to.be.true;
+      MentorAnswers.removeIt(instanceID);
+      expect(MentorAnswers.isDefined(instanceID)).to.be.false;
+
     });
   });
 }
-*/

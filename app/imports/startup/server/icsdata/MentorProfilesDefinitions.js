@@ -35,7 +35,6 @@ export const mentorProfilesDefinitions = [
     company: 'LiveAction',
     career: 'Software Engineer',
     location: 'Honolulu, HI',
-    email: 'akagawa@liveaction.com',
     linkedin: 'aaronkagawa',
     motivation: 'As an ICS undergrad and graduate student, I know how important mentoring can be to your ' +
     'career, and I hope I can help future ICS grads get off to a great start.',
@@ -44,7 +43,6 @@ export const mentorProfilesDefinitions = [
     company: 'Slickage Studios',
     career: 'CEO',
     location: 'Honolulu, HI',
-    email: 'pkarjala@hawaii.edu',
     linkedin: 'patrickakarjala',
     motivation: 'I completed my undergraduate CS degree in 2004, and am now enrolled in the UH ICS MS program.' +
     ' I currently work for the Distance Course Design and Consulting group at UH Manoa, doing full stack web ' +
@@ -55,7 +53,6 @@ export const mentorProfilesDefinitions = [
     company: 'Hobnob Invites',
     career: 'Developer',
     location: 'Honolulu, HI',
-    email: 'gelee@hawaii.edu',
     linkedin: 'keokilee',
     motivation: 'I founded a startup in Hawaii and now work in Silicon Valley. I am happy to share my ' +
     'experiences with new grads.',
