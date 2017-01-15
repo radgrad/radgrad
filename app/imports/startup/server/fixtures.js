@@ -78,36 +78,38 @@ function restoreCollection(collection, restoreJSON) {
   _.each(definitions, definition => collection.define(definition));
 }
 
-Meteor.startup(() => {
-  if (totalDocuments() === 0) {
-    const restoreFileName = Meteor.settings.public.databaseRestoreFileName;
-    const restoreFileAge = getRestoreFileAge(restoreFileName);
-    console.log(`Restoring database from file ${restoreFileName}, dumped ${restoreFileAge}.`);
-    const restoreJSON = JSON.parse(Assets.getText(restoreFileName));
-    // The list of collections, ordered so that they can be sequentially restored.
-    const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, Users, ValidUserAccounts,
-    DesiredDegrees, CareerGoals, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
-    CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
-    VerificationRequests, Feed, AdvisorLogs];
-    console.log('Warning: Mentor collections are not currently being restored.');
+function newStartupProcess() {
+  Meteor.startup(() => {
+    if (totalDocuments() === 0) {
+      const restoreFileName = Meteor.settings.public.databaseRestoreFileName;
+      const restoreFileAge = getRestoreFileAge(restoreFileName);
+      console.log(`Restoring database from file ${restoreFileName}, dumped ${restoreFileAge}.`);
+      const restoreJSON = JSON.parse(Assets.getText(restoreFileName));
+      // The list of collections, ordered so that they can be sequentially restored.
+      const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, Users, ValidUserAccounts,
+        DesiredDegrees, CareerGoals, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
+        CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
+        VerificationRequests, Feed, AdvisorLogs];
+      console.log('Warning: Mentor collections are not currently being restored.');
 
-    const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
-    const collectionNames = _.map(collectionList, collection => collection._collectionName);
-    const extraRestoreNames = _.difference(restoreNames, collectionNames);
-    const extraCollectionNames = _.difference(collectionNames, restoreNames);
+      const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
+      const collectionNames = _.map(collectionList, collection => collection._collectionName);
+      const extraRestoreNames = _.difference(restoreNames, collectionNames);
+      const extraCollectionNames = _.difference(collectionNames, restoreNames);
 
-    if (extraRestoreNames.length) {
-      console.log(`Error: Expected collections are missing from collection list: ${extraRestoreNames}`);
-    }
-    if (extraCollectionNames.length) {
-      console.log(`Error: Expected collections are missing from restore JSON file: ${extraCollectionNames}`);
-    }
+      if (extraRestoreNames.length) {
+        console.log(`Error: Expected collections are missing from collection list: ${extraRestoreNames}`);
+      }
+      if (extraCollectionNames.length) {
+        console.log(`Error: Expected collections are missing from restore JSON file: ${extraCollectionNames}`);
+      }
 
-    if (!extraRestoreNames.length && !extraCollectionNames.length) {
-      _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
+      if (!extraRestoreNames.length && !extraCollectionNames.length) {
+        _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
+      }
     }
-  }
-});
+  });
+}
 
 // if the database is empty on server start, create some sample data.
 function oldStartupProcess() { // eslint-disable-line
@@ -255,3 +257,5 @@ function oldStartupProcess() { // eslint-disable-line
     }
   });
 }
+
+oldStartupProcess();

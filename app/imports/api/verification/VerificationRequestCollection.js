@@ -47,15 +47,27 @@ class VerificationRequestCollection extends BaseCollection {
   /**
    * Defines a verification request.
    * @example
-   * VerificationRequests.define({ student: 'joesmith', opportunityInstance: 'EiQYeRP4jyyre28Zw' });
+   * VerificationRequests.define({ student: 'joesmith',
+   *                               opportunityInstance: 'EiQYeRP4jyyre28Zw' });
+   * or
+   * VerificationRequests.define({ student: 'joesmith',
+   *                               opportunity: 'TechHui',
+    *                              semester: 'Fall-2015'});
    * @param { Object } student and opportunity must be slugs or IDs. SubmittedOn defaults to now.
    * status defaults to OPEN, and processed defaults to an empty array.
+   * You can either pass the opportunityInstanceID or pass the opportunity and semester slugs. If opportunityInstance
+   * is not defined, then the student, opportunity, and semester arguments are used to look it up.
    * @throws {Meteor.Error} If semester, opportunity, or student cannot be resolved, or if verified is not a boolean.
    * @returns The newly created docID.
    */
-  define({ student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [] }) {
+  define({ student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [],
+           semester, opportunity }) {
     const studentID = Users.getID(student);
-    const oppInstance = OpportunityInstances.findDoc(opportunityInstance);
+    const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance) :
+        OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
+    if (!oppInstance) {
+      throw new Meteor.Error('Could not find the opportunity instance to associate with this verification request');
+    }
     const opportunityInstanceID = oppInstance._id;
     const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;
     // Define and return the new VerificationRequest
@@ -183,11 +195,13 @@ class VerificationRequestCollection extends BaseCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const student = Users.findSlugByID(doc.studentID);
-    const opportunityInstance = OpportunityInstances.findDoc(doc.opportunityInstanceID)._id;
+    const opportunityInstance = OpportunityInstances.findDoc(doc.opportunityInstanceID);
+    const semester = Semesters.findSlugByID(opportunityInstance.semesterID);
+    const opportunity = Opportunities.findSlugByID(opportunityInstance.opportunityID);
     const submittedOn = doc.submittedOn;
     const status = doc.status;
     const processed = doc.processed;
-    return { student, opportunityInstance, submittedOn, status, processed };
+    return { student, semester, opportunity, submittedOn, status, processed };
   }
 }
 

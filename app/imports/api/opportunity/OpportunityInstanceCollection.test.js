@@ -21,7 +21,7 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt, #toString, #dumpOne, #restoreOne', function test() {
+    it('#define, #isDefined, #removeIt, #toString, #dumpOne, #restoreOne, findOpportunityInstance', function test() {
       defineSemesters();
       const semester = Semesters.define({ term: Semesters.FALL, year: 2015 });
       const faculty = makeSampleUser(ROLE.FACULTY);
@@ -29,6 +29,8 @@ if (Meteor.isServer) {
       const opportunity = makeSampleOpportunity(faculty);
       const verified = true;
       let docID = OpportunityInstances.define({ semester, opportunity, verified, student });
+      expect(OpportunityInstances.isOpportunityInstance(semester, opportunity, student)).to.be.true;
+      expect(OpportunityInstances.isOpportunityInstance(semester, opportunity, faculty)).to.be.false;
       const dumpObject = OpportunityInstances.dumpOne(docID);
       expect(OpportunityInstances.isDefined(docID)).to.be.true;
       OpportunityInstances.toString(docID);
