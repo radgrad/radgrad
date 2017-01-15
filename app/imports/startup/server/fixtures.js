@@ -89,10 +89,10 @@ function newStartupProcess() { // eslint-disable-line
       console.log(`Restoring database from file ${restoreFileName}, dumped ${restoreFileAge}.`);
       const restoreJSON = JSON.parse(Assets.getText(restoreFileName));
       // The list of collections, ordered so that they can be sequentially restored.
-      const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, Users, ValidUserAccounts,
-        DesiredDegrees, CareerGoals, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
+      const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, CareerGoals, DesiredDegrees,
+        ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
         CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
-        VerificationRequests, Feed, AdvisorLogs, MentorProfiles, MentorAnswers, MentorQuestions];
+        VerificationRequests, Feed, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers];
 
       const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
       const collectionNames = _.map(collectionList, collection => collection._collectionName);
