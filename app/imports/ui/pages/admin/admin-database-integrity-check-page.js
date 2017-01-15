@@ -22,8 +22,8 @@ import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { Feed } from '../../../api/feed/FeedCollection.js';
-import { MentorAnswers } from '../../../api/mentorspace/MentorAnswersCollection.js';
-import { MentorQuestions } from '../../../api/mentorspace/MentorQuestionsCollection.js';
+import { MentorAnswers } from '../../../api/mentor/MentorAnswersCollection.js';
+import { MentorQuestions } from '../../../api/mentor/MentorQuestionsCollection.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection.js';
 

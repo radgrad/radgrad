@@ -5,15 +5,16 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';
-import { MentorQuestions } from '../../../api/mentorspace/MentorQuestionsCollection.js';
-import { MentorAnswers } from '../../../api/mentorspace/MentorAnswersCollection.js';
+import { MentorQuestions } from '../../../api/mentor/MentorQuestionsCollection.js';
+import { MentorAnswers } from '../../../api/mentor/MentorAnswersCollection.js';
+import { MentorProfiles } from '../../../api/mentor/MentorProfilesCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
-Template.Student_MentorSpace_Page.onCreated(function appBodyOnCreated() {
+Template.Student_MentorSpace_Mentor_Directory.onCreated(function studentMentorSpaceMentorDirectoryOnCreated() {
   this.autorun(() => {
     this.subscribe(Courses.getPublicationName());
     this.subscribe(CourseInstances.getPublicationName());
@@ -22,6 +23,7 @@ Template.Student_MentorSpace_Page.onCreated(function appBodyOnCreated() {
     this.subscribe(Interests.getPublicationName());
     this.subscribe(MentorQuestions.getPublicationName());
     this.subscribe(MentorAnswers.getPublicationName());
+    this.subscribe(MentorProfiles.getPublicationName());
     this.subscribe(Opportunities.getPublicationName());
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
@@ -31,16 +33,24 @@ Template.Student_MentorSpace_Page.onCreated(function appBodyOnCreated() {
   });
 });
 
-Template.Student_MentorSpace_Page_Accordion.onRendered(function listMentorSpaceQuestionsOnRendered() {
-  this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
+Template.Student_MentorSpace_Mentor_Directory.helpers({
+  // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
+
 });
 
-Template.Student_MentorSpace_Page_Accordion.helpers({
-  listAnswers(questionID) {
-    return MentorAnswers.find({ questionID });
-  },
-  answerCount(questionID) {
-    return MentorAnswers.find({ questionID }).count();
-  },
+Template.Student_MentorSpace_Mentor_Directory.events({
+  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 
+});
+
+Template.Student_MentorSpace_Mentor_Directory.onRendered(function mentorSpaceOnRendered() {
+  this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
+
+  this.$('.ui.dropdown')
+    .dropdown()
+  ;
+
+  this.$('.ui.rating')
+    .rating()
+  ;
 });

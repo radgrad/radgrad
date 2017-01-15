@@ -39,8 +39,6 @@ if (Meteor.isServer) {
       docID = OpportunityInstances.restoreOne(dumpObject);
       expect(OpportunityInstances.isDefined(docID)).to.be.true;
       OpportunityInstances.removeIt(docID);
-
     });
   });
 }
-

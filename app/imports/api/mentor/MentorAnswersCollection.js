@@ -1,6 +1,7 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
-// import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { Slugs } from '/imports/api/slug/SlugCollection';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module MentorAnswers */
 
@@ -14,39 +15,30 @@ class MentorAnswersCollection extends BaseCollection {
    */
   constructor() {
     super('MentorAnswers', new SimpleSchema({
-      questionID: { type: String },
-      mentor: { type: String },  // TODO: Mentor should be a userID, not a string.
-      slug: { type: String },
+      questionID: { type: SimpleSchema.RegEx.Id },
+      mentorID: { type: SimpleSchema.RegEx.Id },
       text: { type: String },
     }));
   }
 
   /**
    * Defines the help for a given questionID.
-   * @param questionID the question ID.
-   * @param mentor the mentor who answered the question.
-   * @param slug
+   * @param question the question ID.
+   * @param mentorID ID of the mentor who answered the question.
    * @param text the answer text.
    * @return {any} the ID of the answer.
    */
-  define({ questionID, mentor, slug, text }) {
-    return this._collection.insert({ questionID, mentor, slug, text });
+  define({ question, mentorID, text }) {
+    return this._collection.insert({ questionID: question, mentorID, text });
   }
 
   /**
    * Returns the text for the given questionID.
-   * @param questionID
+   * @param question
    */
-  getMentorAnswerText(questionID) {
-    return this._collection.findOne({ questionID }).text;
-  }
-
-  /**
-   * Returns the title for the given questionID.
-   * @param questionID
-   */
-  getMentor(questionID) {
-    return this._collection.findOne({ questionID }).mentor;
+  getAnswers(question) {
+    const slug = Slugs.findDoc(question);
+    return this._collection.find({ questionID: slug.name });
   }
 
   /**
@@ -61,5 +53,5 @@ class MentorAnswersCollection extends BaseCollection {
 }
 
 export const MentorAnswers = new MentorAnswersCollection();
-// radgradCollections.push(MentorAnswers);
+radgradCollections.push(MentorAnswers);
 
