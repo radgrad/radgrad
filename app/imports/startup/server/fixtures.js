@@ -266,4 +266,4 @@ function oldStartupProcess() { // eslint-disable-line
   });
 }
 
-oldStartupProcess();
+newStartupProcess();

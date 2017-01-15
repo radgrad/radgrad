@@ -127,7 +127,7 @@ class UserCollection extends BaseInstanceCollection {
       // Now that we have a user, update fields.
       Meteor.users.update(userID, {
         $set: {
-          username: slug, firstName, lastName, slugID, email, picture, website,
+          username: slug, firstName, lastName, slugID, email, picture, website, password,
           desiredDegreeID, interestIDs, careerGoalIDs, uhID, level,
         },
       });
