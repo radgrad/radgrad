@@ -55,6 +55,14 @@ Template.Student_MentorSpace_Page.helpers({
   mentorProfile(mentorID) {
     return MentorProfiles.getMentorProfile(mentorID).fetch()[0];
   },
+
+  mentorsList() {
+    return Users.find({ roles: ['MENTOR'] });
+  },
+
+  mentorProfile(mentorID) {
+    return MentorProfiles.getMentorProfile(mentorID).fetch()[0];
+  },
 });
 
 Template.Student_MentorSpace_Page.events({
