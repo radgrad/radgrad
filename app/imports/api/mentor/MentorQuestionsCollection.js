@@ -19,6 +19,7 @@ class MentorQuestionsCollection extends BaseCollection {
     super('MentorQuestions', new SimpleSchema({
       title: { type: String },
       slugID: { type: SimpleSchema.RegEx.Id },
+      approved: { type: Boolean },
     }));
   }
 
@@ -26,12 +27,13 @@ class MentorQuestionsCollection extends BaseCollection {
    * Defines the question for a given question ID.
    * @param title the question.
    * @param slug
+   * @param approved if the question is approved
    * @return {any} the ID of the question.
    */
-  define({ title, slug }) {
+  define({ title, slug, approved }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const docID = this._collection.insert({ title, slugID });
+    const docID = this._collection.insert({ title, slugID, approved });
     Slugs.updateEntityID(slugID, docID);
     return docID;
   }
