@@ -1,7 +1,8 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-import { $ } from 'meteor/jquery';
+// import { $ } from 'meteor/jquery';
+import { Logger } from 'meteor/jag:pince';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -202,6 +203,7 @@ Template.Inspector.helpers({
     return null;
   },
   courseIce() {
+    const logger = new Logger('inspector.courseIce');
     // $('body').removeClass('waiting');
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       const course = Template.instance().state.get(plannerKeys.detailCourse);
@@ -210,12 +212,11 @@ Template.Inspector.helpers({
       return ice;
     } else
       if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        // Template.instance().$('body').removeClass('waiting');
         const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
         const course = Courses.findDoc(ci.courseID);
         const slug = Slugs.findDoc(course.slugID);
         const ice = makeCourseICE(slug.name, ci.grade);
-        // console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'courseIce', ice, ci.grade);
+        logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ice.i}, ${ice.c}, ${ice.e}}`);
         return ice;
       }
     return null;

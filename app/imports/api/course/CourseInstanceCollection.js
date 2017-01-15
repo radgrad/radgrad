@@ -194,9 +194,7 @@ class CourseInstanceCollection extends BaseCollection {
   clientUpdateGrade(courseInstanceID, grade) {
     const logger = new Logger('CourseInstance.clientUpdateGrade');
     logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${grade}`);
-    Meteor.call('CourseInstance.updateGrade',
-        courseInstanceID,
-        grade,
+    Meteor.call('CourseInstance.updateGrade', { courseInstanceID, grade },
         function callback(error, result) {
           if (error) {
             console.log('error', error);
@@ -205,7 +203,7 @@ class CourseInstanceCollection extends BaseCollection {
             console.log('result', result);
           }
         });
-    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} after Meteor.call`);
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} after Meteor.call(CourseInstance.updateGrade)`);
   }
 
   /**

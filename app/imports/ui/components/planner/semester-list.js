@@ -3,6 +3,7 @@ import { Tracker } from 'meteor/tracker';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
+import { Logger } from 'meteor/jag:pince';
 import { moment } from 'meteor/momentjs:moment';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { checkPrerequisites } from './course-functions';
@@ -366,11 +367,14 @@ Template.Semester_List.events({
     // const body = $('body');
     // body.addClass('waiting');
     CourseInstances.clientUpdateGrade(div.id, grade);
+    const logger = new Logger('semester-list.clickItemGrade');
     const ci = CourseInstances.findDoc(div.id);
+    instance.state.set(plannerKeys.detailCourseInstance, null);
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} set ci to null`);
     instance.state.set(plannerKeys.detailCourseInstance, ci);
-    console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'clickItemGrade', ci.ice, ci.grade);
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade} \
+      ${instance.state.get(plannerKeys.detailCourseInstance).grade}`);
     Tracker.flush();
-    // console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'clickItemGrade', ci.ice, ci.grade);
   },
   'click .jsDelCourse': function clickJsDelCourse(event) {
     // event.preventDefault();
