@@ -9,14 +9,7 @@
           <div class="ui dividing header">
             <h4>ASK A NEW QUESTION</h4>
           </div>
-          <form class="ui form mentorspace-question-form">
-
-            <div class="field">
-              <textarea rows="2" style="height: 75px;" name="ms-question" id="ms-question"></textarea>
-            </div>
-
-            <button class="fluid ui button" type="submit">Submit</button>
-          </form>
+          {{> Student_MentorSpace_Question_Form}}
         </div>
 
         {{#each question in questionsList}}

@@ -39,7 +39,7 @@ class MentorQuestionsCollection extends BaseCollection {
   }
 
   getQuestions() {
-    return this._collection.find({});
+    return this._collection.find({}).fetch().reverse();
   }
 
   /**

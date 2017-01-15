@@ -44,6 +44,9 @@ import './student-levels-widget.js';
 import './student-mentorspace-questions-accordion.html';
 import './student-mentorspace-questions-accordion.js';
 
+import './student-mentorspace-question-form.html';
+import './student-mentorspace-question-form.js';
+
 import './student-mentorspace-mentor-directory.html';
 import './student-mentorspace-mentor-directory.js';
 
