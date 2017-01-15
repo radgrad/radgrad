@@ -14,7 +14,7 @@ class MentorAnswersCollection extends BaseCollection {
    * Creates the Mentor Answer collection.
    */
   constructor() {
-    super('MentorAnswers', new SimpleSchema({
+    super('MentorAnswer', new SimpleSchema({
       questionID: { type: SimpleSchema.RegEx.Id },
       mentorID: { type: SimpleSchema.RegEx.Id },
       text: { type: String },
