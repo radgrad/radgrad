@@ -37,7 +37,7 @@ Template.Student_MentorSpace_Page.helpers({
   // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
 
   questionsList() {
-    return MentorQuestions.getQuestions( {approved: true} );
+    return MentorQuestions.getQuestions({ approved: true });
   },
 
   mentorsList() {
@@ -50,13 +50,13 @@ Template.Student_MentorSpace_Page.helpers({
 });
 
 Template.Student_MentorSpace_Page.events({
-  /*'form .mentorspace-question-form' (event, instance) {
+  'form .mentorspace-question-form': function (event, instance) {
     event.preventDefault();
     const question = event.target.question.value;
     console.log(question);
     instance.context.resetValidation();
-    MentorQuestions.define(question, 'uncategorized', false);
-  },*/
+    MentorQuestions.define(question, 'un-categorized', false);
+  },
 
 });
 
