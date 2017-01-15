@@ -9,29 +9,6 @@ import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
-function passedCourseHelper(courseSlugName) {
-  let ret = 'Not in plan';
-  const slug = Slugs.find({ name: courseSlugName }).fetch();
-  const course = Courses.find({ slugID: slug[0]._id }).fetch();
-  const ci = CourseInstances.find({
-    studentID: getUserIdFromRoute(),
-    courseID: course[0]._id,
-  }).fetch();
-  _.map(ci, (c) => {
-    if (c.verified === true) {
-      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
-        c.grade === 'B' || c.grade === 'B-') {
-        ret = 'Completed';
-      } else {
-        ret = 'In plan, but not yet complete';
-      }
-    } else {
-      ret = 'In plan, but not yet complete';
-    }
-  });
-  return ret;
-}
-
 Template.Student_Explorer_Courses_Widget.helpers({
   isLabel(label, value) {
     return label === value;
@@ -42,37 +19,10 @@ Template.Student_Explorer_Courses_Widget.helpers({
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
   },
-  courseName(courseSlugName) {
+  courseNameFromSlug(courseSlugName) {
     const slug = Slugs.find({ name: courseSlugName }).fetch();
     const course = Courses.find({ slugID: slug[0]._id }).fetch();
     return course[0].shortName;
-  },
-  passedCourse(courseSlugName) {
-    return passedCourseHelper(courseSlugName);
-  },
-  rowColor(courseSlugName) {
-    let ret = '';
-    const passed = passedCourseHelper(courseSlugName);
-    if (passed === 'Completed') {
-      ret = 'positive';
-    } else if (passed === 'In plan, but not yet complete') {
-      ret = 'warning';
-    } else {
-      ret = 'negative';
-    }
-    return ret;
-  },
-  icon(courseSlugName) {
-    let ret = '';
-    const passed = passedCourseHelper(courseSlugName);
-    if (passed === 'Completed') {
-      ret = 'icon checkmark';
-    } else if (passed === 'In plan, but not yet complete') {
-      ret = 'warning sign icon';
-    } else {
-      ret = 'warning circle icon';
-    }
-    return ret;
   },
   userStatus(course) {
     let ret = false;
@@ -99,6 +49,32 @@ Template.Student_Explorer_Courses_Widget.helpers({
       currentYear += 1;
     }
     return nextYears;
+  },
+  notEmpty(list) {
+    let ret = false;
+    if (list[0].length + list[1].length + list[2].length > 0) {
+      ret = true;
+    }
+    return ret;
+  },
+  tableStyle(table) {
+    let tableColor;
+    let tableIcon;
+    let tableTitle;
+    if (table[0].status === 'Completed') {
+      tableColor = 'positive';
+      tableIcon = 'icon checkmark';
+      tableTitle = 'Completed';
+    } else if (table[0].status === 'Not in plan') {
+      tableColor = 'negative';
+      tableIcon = 'warning circle icon';
+      tableTitle = 'Not in plan';
+    } else if (table[0].status === 'In plan, but not yet complete') {
+      tableColor = 'warning';
+      tableIcon = 'warning sign icon';
+      tableTitle = 'In plan, but not yet complete';
+    }
+    return { color: tableColor, icon: tableIcon, title: tableTitle };
   },
 });
 
@@ -133,14 +109,6 @@ Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCours
 });
 
 Template.Student_Explorer_Courses_Widget.onRendered(function studentExplorerCoursesWidgetOnRendered() {
-  const template = this;
-  template.$('.chooseSemester')
-      .popup({
-        on: 'click',
-      });
-  template.$('.chooseYear')
-      .popup({
-        on: 'click',
-      });
+
 });
 

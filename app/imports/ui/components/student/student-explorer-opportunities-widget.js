@@ -2,33 +2,10 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { Courses } from '../../../api/course/CourseCollection.js';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-
-function passedCourseHelper(courseSlugName) {
-  let ret = 'Not in plan';
-  const slug = Slugs.find({ name: courseSlugName }).fetch();
-  const course = Courses.find({ slugID: slug[0]._id }).fetch();
-  const ci = CourseInstances.find({
-    studentID: getUserIdFromRoute(),
-    courseID: course[0]._id,
-  }).fetch();
-  _.map(ci, (c) => {
-    if (c.verified === true) {
-    if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
-        c.grade === 'B' || c.grade === 'B-') {
-      ret = 'Completed';
-    }
-  } else {
-    ret = 'In plan, but not yet complete';
-  }
-});
-  return ret;
-}
 
 Template.Student_Explorer_Opportunities_Widget.helpers({
   isLabel(label, value) {
@@ -37,46 +14,11 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
   userPicture(user) {
     return Users.findDoc(user).picture;
   },
-  coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
-  },
-  courseName(courseSlugName) {
-    const slug = Slugs.find({ name: courseSlugName }).fetch();
-    const course = Courses.find({ slugID: slug[0]._id }).fetch();
-    return course[0].shortName;
-  },
-  passedCourse(courseSlugName) {
-    return passedCourseHelper(courseSlugName);
-  },
-  rowColor(courseSlugName) {
-    let ret = '';
-    const passed = passedCourseHelper(courseSlugName);
-    if (passed === 'Completed') {
-      ret = 'positive';
-    } else if (passed === 'In plan, but not yet complete') {
-      ret = 'warning';
-    } else {
-      ret = 'negative';
-    }
-    return ret;
-  },
-  icon(courseSlugName) {
-    let ret = '';
-    const passed = passedCourseHelper(courseSlugName);
-    if (passed === 'Completed') {
-      ret = 'icon checkmark';
-    } else if (passed === 'In plan, but not yet complete') {
-      ret = 'warning sign icon';
-    } else {
-      ret = 'warning circle icon';
-    }
-    return ret;
-  },
   userStatus(opportunity) {
     let ret = false;
     const oi = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
-      courseID: opportunity._id,
+      opportunityID: opportunity._id,
     }).fetch();
     if (oi.length > 0) {
       ret = true;
@@ -86,33 +28,48 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
   teaserUrl(teaser) {
     return teaser.url;
   },
-});
-
-Template.Student_Explorer_Opportunities_Widget.events({
-  'click .addItem': function clickAddItem(event) {
-    event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
-    const item = event.target.value;
-    const studentItems = student.careerGoalIDs;
-    try {
-      studentItems.push(item);
-      console.log(item);
-      Users.setCareerGoalIds(student._id, studentItems);
-    } catch (e) {
-      // don't do anything.
+  opportunitySemesters(opp) {
+    const semesters = opp.semesterIDs;
+    const semesterNames = [];
+    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSemester = Semesters.findDoc(currentSemesterID);
+    _.map(semesters, (sem) => {
+      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
+        semesterNames.push(Semesters.toString(sem));
     }
+  });
+    return semesterNames;
   },
 });
 
-Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+Template.Student_Explorer_Opportunities_Widget.events({
+  'click .addToPlan': function clickItemAddToPlan(event) {
+    event.preventDefault();
+    const opportunity = this.item;
+    const semester = event.target.text;
+    const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
+    const semSplit = semester.split(' ');
+    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
+    const username = getRouteUserName();
+    const oi = {
+      semester: semSlug,
+      opportunity: oppSlug.name,
+      verified: false,
+      student: username,
+    };
+    OpportunityInstances.define(oi);
+  },
 });
+
 
 Template.Student_Explorer_Opportunities_Widget.onRendered(function enableVideo() {
   setTimeout(() => {
     this.$('.ui.embed').embed();
   }, 300);
+  const template = this;
+  template.$('.chooseSemester')
+      .popup({
+        on: 'click',
+      });
 });
+

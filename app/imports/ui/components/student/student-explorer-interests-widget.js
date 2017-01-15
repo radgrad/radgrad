@@ -151,6 +151,32 @@ Template.Student_Explorer_Interests_Widget.helpers({
     }
     return ret;
   },
+  tableStyle(table) {
+    let tableColor;
+    let tableIcon;
+    let tableTitle;
+    if (table[0].status === 'Completed') {
+      tableColor = 'positive';
+      tableIcon = 'icon checkmark';
+      tableTitle = 'Completed';
+    } else if (table[0].status === 'Not in plan') {
+      tableColor = 'negative';
+      tableIcon = 'warning circle icon';
+      tableTitle = 'Not in plan';
+    } else if (table[0].status === 'In plan, but not yet complete') {
+      tableColor = 'warning';
+      tableIcon = 'warning sign icon';
+      tableTitle = 'In plan, but not yet complete';
+    }
+    return { color: tableColor, icon: tableIcon, title: tableTitle };
+  },
+  notEmpty(list) {
+    let ret = false;
+    if (list[0].length + list[1].length + list[2].length > 0) {
+      ret = true;
+    }
+    return ret;
+  },
 });
 
 Template.Student_Explorer_Interests_Widget.events({

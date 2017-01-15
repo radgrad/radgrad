@@ -14,50 +14,53 @@
           </p>
         {{else}}
           {{#if isLabel descriptionPair.label 'Related Courses'}}
-            {{#if descriptionPair.value}}
+            {{#if notEmpty descriptionPair.value}}
               <b>{{descriptionPair.label}}:</b>
               <div class="ui padded equal width grid">
                 {{#each table in descriptionPair.value}}
                   {{#if table}}
+                    {{#with tableStyle table}}
                     <div class="column">
                       <table class="ui collapsing compact small table">
                         <tbody>
+                        <tr class="{{color}}"><td><i class="{{icon}}"></i><b>{{title}}</b></td></tr>
                         {{#each relatedCourse in table}}
-                          <tr class="{{rowColorCourse relatedCourse.course}}">
+                          <tr class="{{color}}">
                             <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = relatedCourse.course}}">{{courseNameFromSlug relatedCourse.course}} </a></td>
-                            <td><i class="{{iconCourse relatedCourse.course}}"></i>{{passedCourse relatedCourse.course}}</td>
                           </tr>
                         {{/each}}
                         </tbody>
                       </table>
                     </div>
+                    {{/with}}
                   {{/if}}
                 {{/each}}
               </div>
               <br>
-
             {{else}}
               <p><b>{{descriptionPair.label}}:</b> None</p>
             {{/if}}
           {{else}}
             {{#if isLabel descriptionPair.label 'Related Opportunities'}}
-              {{#if descriptionPair.value}}
+              {{#if notEmpty descriptionPair.value}}
                 <b>{{descriptionPair.label}}:</b>
                 <div class="ui padded equal width grid">
                   {{#each table in descriptionPair.value}}
                     {{#if table}}
-                      <div class="column">
-                        <table class="ui collapsing compact small table">
-                          <tbody>
-                          {{#each relatedOpp in table}}
-                            <tr class="{{rowColorOpportunity relatedOpp.opportunity}}">
-                              <td><a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = relatedOpp.opportunity}}">{{opportunityNameFromSlug relatedOpp.opportunity}} </a></td>
-                              <td><i class="{{iconOpportunity relatedOpp.opportunity}}"></i>{{verifiedOpportunity relatedOpp.opportunity}}</td>
-                            </tr>
-                          {{/each}}
-                          </tbody>
-                        </table>
-                      </div>
+                      {{#with tableStyle table}}
+                        <div class="column">
+                          <table class="ui collapsing compact small table">
+                            <tbody>
+                            <tr class="{{color}}"><td><i class="{{icon}}"></i><b>{{title}}</b></td></tr>
+                            {{#each relatedOpportunity in table}}
+                              <tr class="{{color}}">
+                                <td><a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug relatedOpportunity.opportunity}} </a></td>
+                              </tr>
+                            {{/each}}
+                            </tbody>
+                          </table>
+                        </div>
+                      {{/with}}
                     {{/if}}
                   {{/each}}
                 </div>
@@ -83,11 +86,7 @@
             <table class="ui small table">
               <thead>
               <tr>
-                {{#if isLabel socialPair.label 'students'}}
-                  <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
-                {{else}}
-                  <th>Experienced {{socialPair.label}} ({{socialPair.amount}})</th>
-                {{/if}}
+                <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
               </tr>
               </thead>
               <tbody>
@@ -108,9 +107,9 @@
       <br>
       <p>
         {{#if userStatus item}}
-          <button value="{{id}}" class="ui green basic mini button deleteItem">Remove</button>
+          <button value="{{id}}" class="ui green basic mini button deleteItem">Remove from my interests</button>
         {{else}}
-          <button value="{{id}}" class="ui green basic mini button addItem">Add</button>
+          <button value="{{id}}" class="ui green basic mini button addItem">Add to my interests</button>
         {{/if}}
       </p>
     </div>

@@ -10,6 +10,9 @@ import './home-menu.js';
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
 
+import './student-explorer-courses-widget-button.html';
+import './student-explorer-courses-widget-button.js';
+
 import './student-explorer-careergoals-widget.html';
 import './student-explorer-careergoals-widget.js';
 
@@ -24,6 +27,9 @@ import './student-explorer-menu.js';
 
 import './student-explorer-opportunities-widget.html';
 import './student-explorer-opportunities-widget.js';
+
+import './student-explorer-opportunities-widget-button.html';
+import './student-explorer-opportunities-widget-button.js';
 
 import './student-explorer-opportunities-widget-teaser.html';
 import './student-explorer-opportunities-widget-teaser.js';

@@ -20,10 +20,10 @@ Template.Student_Explorer_Degrees_Widget.helpers({
     return degree[0].name;
   },
   userStatus(degree) {
-    let ret = false;
+    let ret = true;
     const user = Users.findDoc({ username: getRouteUserName() });
     if (_.includes(user.desiredDegreeID, degree._id)) {
-      ret = true;
+      ret = false;
     }
     return ret;
   },

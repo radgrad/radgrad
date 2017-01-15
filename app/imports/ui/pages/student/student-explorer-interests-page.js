@@ -35,16 +35,16 @@ function passedCourseHelper(courseSlugName) {
   }).fetch();
   _.map(ci, (c) => {
     if (c.verified === true) {
-    if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
-        c.grade === 'B' || c.grade === 'B-') {
-      ret = 'Completed';
+      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
+          c.grade === 'B' || c.grade === 'B-') {
+        ret = 'Completed';
+      } else {
+        ret = 'In plan, but not yet complete';
+      }
     } else {
       ret = 'In plan, but not yet complete';
     }
-  } else {
-    ret = 'In plan, but not yet complete';
-  }
-});
+  });
   return ret;
 }
 
@@ -56,14 +56,16 @@ function courses(interest) {
   let itemStatus = '';
   _.map(list, (item) => {
     itemStatus = passedCourseHelper(item);
-  if (itemStatus === 'Not in plan') {
-    notInPlan.push({ course: item, status: itemStatus });
-  } else if (itemStatus === 'Completed') {
-    complete.push({ course: item, status: itemStatus });
-  } else {
-    incomplete.push({ course: item, status: itemStatus });
-  }
-});
+    if (itemStatus === 'Not in plan') {
+      notInPlan.push({ course: item, status: itemStatus });
+    } else if (itemStatus === 'Completed') {
+      complete.push({ course: item, status: itemStatus });
+    } else if (itemStatus === 'In plan, but not yet complete') {
+      incomplete.push({ course: item, status: itemStatus });
+    } else {
+      console.log('Invalid course status');
+    }
+  });
   return [complete, incomplete, notInPlan];
 }
 
@@ -77,9 +79,9 @@ function verifiedOpportunityHelper(opportunitySlugName) {
   }).fetch();
   _.map(oi, (o) => {
     if (o.verified === true) {
-      ret = 'Completed and verified';
+      ret = 'Completed';
     } else {
-      ret = 'In plan, but not yet verified';
+      ret = 'In plan, but not yet complete';
     }
   });
   return ret;
@@ -90,9 +92,9 @@ function opportunitiesHelper(interest) {
   const matching = [];
   _.map(allOpportunities, (opportunity) => {
     if (_.includes(opportunity.interestIDs, interest._id)) {
-    matching.push(Slugs.findDoc(opportunity.slugID).name);
-  }
-});
+      matching.push(Slugs.findDoc(opportunity.slugID).name);
+    }
+  });
   return matching;
 }
 
@@ -104,14 +106,16 @@ function opportunities(interest) {
   let itemStatus = '';
   _.map(list, (item) => {
     itemStatus = verifiedOpportunityHelper(item);
-  if (itemStatus === 'Not in plan') {
-    notInPlan.push({ opportunity: item, status: itemStatus });
-  } else if (itemStatus === 'Completed and verified') {
-    complete.push({ opportunity: item, status: itemStatus });
-  } else {
-    incomplete.push({ opportunity: item, status: itemStatus });
-  }
-});
+    if (itemStatus === 'Not in plan') {
+      notInPlan.push({ opportunity: item, status: itemStatus });
+    } else if (itemStatus === 'Completed') {
+      complete.push({ opportunity: item, status: itemStatus });
+    } else if (itemStatus === 'In plan, but not yet complete') {
+      incomplete.push({ opportunity: item, status: itemStatus });
+    } else {
+      console.log('Invalid opportunity status');
+    }
+  });
   return [complete, incomplete, notInPlan];
 }
 

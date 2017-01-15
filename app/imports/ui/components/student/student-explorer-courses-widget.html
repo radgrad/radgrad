@@ -13,25 +13,25 @@
           </p>
         {{else}}
           {{#if isLabel descriptionPair.label 'Prerequisites'}}
-            {{#if descriptionPair.value}}
+            {{#if notEmpty descriptionPair.value}}
               <b>{{descriptionPair.label}}:</b>
               <div class="ui padded equal width grid">
                 {{#each table in descriptionPair.value}}
                   {{#if table}}
-                    <div class="column">
-                      <table class="ui collapsing compact small table">
-                        <tbody>
-                        {{#each prerequisite in table}}
-                          <tr class="{{rowColor prerequisite.course}}">
-                            <td><a class="{{isActiveRoute coursesRouteName}} item"
-                                   href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseName prerequisite.course}} </a>
-                            </td>
-                            <td><i class="{{icon prerequisite.course}}"></i>{{passedCourse prerequisite.course}}</td>
-                          </tr>
-                        {{/each}}
-                        </tbody>
-                      </table>
-                    </div>
+                    {{#with tableStyle table}}
+                      <div class="column">
+                        <table class="ui collapsing compact small table">
+                          <tbody>
+                          <tr class="{{color}}"><td><i class="{{icon}}"></i><b>{{title}}</b></td></tr>
+                          {{#each prerequisite in table}}
+                            <tr class="{{color}}">
+                              <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a></td>
+                            </tr>
+                          {{/each}}
+                          </tbody>
+                        </table>
+                      </div>
+                    {{/with}}
                   {{/if}}
                 {{/each}}
               </div>
@@ -76,26 +76,9 @@
       <br>
       <p>
         {{#if userStatus item}}
-          <button value="{{id}}" class="ui green basic mini button deleteItem">Remove</button>
+          {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
         {{else}}
-
-          <div class="ui green basic mini button chooseYear"><div class="chooseYear">Add to plan</div>
-            <div class="ui fluid popup transition hidden">
-              <div class="ui vertical menu">
-                {{#each year in nextYears 4}}
-                  <a class="item chooseSemester" data-position="right center">{{year}}</a>
-                  <div class="ui fluid popup transition hidden">
-                    <div class="ui vertical menu">
-                      {{#each semester in yearSemesters year}}
-                        <a class="item addItem" data-position="right center">{{semester}}</a>
-                      {{/each}}
-                    </div>
-                  </div>
-                {{/each}}
-              </div>
-            </div>
-          </div>
-
+          {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
         {{/if}}
       </p>
     </div>
