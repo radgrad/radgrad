@@ -1,15 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
-import { MentorQuestions } from './MentorQuestionsCollection';
+import { MentorQuestions } from './MentorQuestionCollection';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
 if (Meteor.isServer) {
-  describe('MentorQuestionsCollection', function testSuite() {
+  describe('MentorQuestionCollection', function testSuite() {
     const title = 'Test question.';
-    const slug = 'test-question';
+    const slug = 'test-mentor-question';
 
     before(function setup() {
       removeAllEntities();

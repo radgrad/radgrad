@@ -13,8 +13,9 @@ import { HelpMessages } from '../../api/help/HelpMessageCollection';
 import { DesiredDegrees } from '../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
-import { MentorAnswers } from '../../api/mentor/MentorAnswersCollection.js';
-import { MentorQuestions } from '../../api/mentor/MentorQuestionsCollection.js';
+import { MentorAnswers } from '../../api/mentor/MentorAnswerCollection.js';
+import { MentorQuestions } from '../../api/mentor/MentorQuestionCollection.js';
+import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
@@ -30,13 +31,13 @@ import { courseDefinitions } from './icsdata/CourseDefinitions.js';
 import { processStarCsvData } from '../../api/star/StarProcessor';
 import { interestTypeDefinitions, interestDefinitions } from './icsdata/InterestDefinitions';
 import {
-  opportunityDefinitions, opportunityTypeDefinitions, opportunityInstances
+  opportunityDefinitions, opportunityTypeDefinitions, opportunityInstances,
 }
   from './icsdata/OpportunityDefinitions';
 import { careerGoalDefinitions } from './icsdata/CareerGoalDefinitions';
 import { userDefinitions } from './icsdata/UserDefinitions';
 import {
-  recommendationFeedbackDefinitions, warningFeedbackDefinitions, feedbackInstances
+  recommendationFeedbackDefinitions, warningFeedbackDefinitions, feedbackInstances,
 }
   from './icsdata/FeedbackDefinitions.js';
 import { defaultAdminAccount } from './icsdata/AdminUser';
@@ -46,6 +47,8 @@ import { teaserDefinitions } from './icsdata/TeaserDefinitions';
 import { feedDefinitions } from './icsdata/FeedDefinitions';
 import { mentorspaceQuestionsDefinitions } from './icsdata/MentorSpaceQuestionsDefinitions';
 import { mentorspaceAnswersDefinitions } from './icsdata/MentorSpaceAnswersDefinitions';
+import { mentorProfilesDefinitions } from './icsdata/MentorProfilesDefinitions';
+import { mentorUserDefinitions } from './icsdata/MentorUserDefinitions';
 import { radgradCollections } from '../../api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
@@ -78,7 +81,7 @@ function restoreCollection(collection, restoreJSON) {
   _.each(definitions, definition => collection.define(definition));
 }
 
-function newStartupProcess() {
+function newStartupProcess() { // eslint-disable-line
   Meteor.startup(() => {
     if (totalDocuments() === 0) {
       const restoreFileName = Meteor.settings.public.databaseRestoreFileName;
@@ -89,8 +92,7 @@ function newStartupProcess() {
       const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, Users, ValidUserAccounts,
         DesiredDegrees, CareerGoals, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
         CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
-        VerificationRequests, Feed, AdvisorLogs];
-      console.log('Warning: Mentor collections are not currently being restored.');
+        VerificationRequests, Feed, AdvisorLogs, MentorProfiles, MentorAnswers, MentorQuestions];
 
       const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
       const collectionNames = _.map(collectionList, collection => collection._collectionName);
@@ -148,11 +150,13 @@ function oldStartupProcess() { // eslint-disable-line
     }
     if (Users.find().count() === 0) {
       console.log('Defining Users');  // eslint-disable-line no-console
-      userDefinitions.map((definition) => {
+      userDefinitions.forEach((definition) => {
         ValidUserAccounts.define({ username: definition.slug });
-        const id = Users.define(definition);
-        Users.setUhId(id, definition.uhID);
-        return false;
+        Users.define(definition);
+      });
+      mentorUserDefinitions.forEach((definition) => {
+        ValidUserAccounts.define({ username: definition.slug });
+        Users.define(definition);
       });
     }
     if (DesiredDegrees.find().count() === 0) {
@@ -180,13 +184,17 @@ function oldStartupProcess() { // eslint-disable-line
       recommendationFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
       warningFeedbackDefinitions.map((definition) => Feedbacks.define(definition));
     }
-    if (MentorAnswers.find().count() === 0) {
-      console.log('Defining MentorAnswers'); // eslint-disable-line no-console
-      mentorspaceAnswersDefinitions.map((definition) => MentorAnswers.define(definition));
+    if (MentorProfiles.find().count() === 0) {
+      console.log('Defining MentorProfiles'); // eslint-disable-line no-console
+      mentorProfilesDefinitions.map((definition) => MentorProfiles.define(definition));
     }
     if (MentorQuestions.find().count() === 0) {
       console.log('Defining MentorQuestions'); // eslint-disable-line no-console
       mentorspaceQuestionsDefinitions.map((definition) => MentorQuestions.define(definition));
+    }
+    if (MentorAnswers.find().count() === 0) {
+      console.log('Defining MentorAnswers'); // eslint-disable-line no-console
+      mentorspaceAnswersDefinitions.map((definition) => MentorAnswers.define(definition));
     }
     if (Teasers.find().count() === 0) {
       console.log('Defining Teasers');  // eslint-disable-line no-console

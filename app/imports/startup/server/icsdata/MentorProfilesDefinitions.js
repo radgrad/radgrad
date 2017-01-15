@@ -3,7 +3,7 @@
 export const mentorProfilesDefinitions = [
 
   {
-    mentorID: 'brewer',
+    mentor: 'brewer',
     company: 'Tableau',
     career: 'Software Engineer',
     location: 'Palo Alto, CA',
@@ -11,7 +11,7 @@ export const mentorProfilesDefinitions = [
     motivation: 'I founded a startup in Hawaii and now work in Silicon Valley. I am happy to share my ' +
     'experiences with new grads.',
   }, {
-    mentorID: 'geis',
+    mentor: 'geis',
     company: 'UH',
     career: 'IT Specialist',
     location: 'Honolulu, HI',
@@ -22,7 +22,7 @@ export const mentorProfilesDefinitions = [
     'My experiences could prove useful to you if: (a) you want to talk about getting the most out of your UH ICS ' +
     'experience, or (b) you are interested in one day working for UH, or (c) staying in Hawaii is one of your goals.',
   }, {
-    mentorID: 'ito',
+    mentor: 'ito',
     company: 'Bonobos',
     career: 'Software Engineer',
     location: 'New York City, NY',
@@ -31,7 +31,7 @@ export const mentorProfilesDefinitions = [
     'and have held software jobs in DC, NYC, and HI. I can try to help you whether you intend to stay local or ' +
     'move to the mainland.',
   }, {
-    mentorID: 'kagawa',
+    mentor: 'kagawa',
     company: 'LiveAction',
     career: 'Software Engineer',
     location: 'Honolulu, HI',
@@ -39,7 +39,7 @@ export const mentorProfilesDefinitions = [
     motivation: 'As an ICS undergrad and graduate student, I know how important mentoring can be to your ' +
     'career, and I hope I can help future ICS grads get off to a great start.',
   }, {
-    mentorID: 'karjala',
+    mentor: 'karjala',
     company: 'Slickage Studios',
     career: 'CEO',
     location: 'Honolulu, HI',
@@ -49,7 +49,7 @@ export const mentorProfilesDefinitions = [
     'application development. I am glad to answer questions regarding any topic of computer science, especially ' +
     'those geared toward collaborative development and networking (both computer and interpersonal).',
   }, {
-    mentorID: 'lee',
+    mentor: 'lee',
     company: 'Hobnob Invites',
     career: 'Developer',
     location: 'Honolulu, HI',
@@ -57,7 +57,7 @@ export const mentorProfilesDefinitions = [
     motivation: 'I founded a startup in Hawaii and now work in Silicon Valley. I am happy to share my ' +
     'experiences with new grads.',
   }, {
-    mentorID: 'leuck',
+    mentor: 'leuck',
     company: 'Ikayzo',
     career: 'CEO',
     location: 'Honolulu, HI',
@@ -67,7 +67,7 @@ export const mentorProfilesDefinitions = [
     'for all.',
   },
   {
-    mentorID: 'nagashima',
+    mentor: 'nagashima',
     company: 'Paideia Enterprises',
     career: 'Owner',
     location: 'San Francisco, CA',
