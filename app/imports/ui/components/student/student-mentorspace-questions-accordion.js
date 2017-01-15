@@ -42,5 +42,7 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
   answerCount(questionID) {
     return MentorAnswers.getAnswers(questionID).count();
   },
-
+  picture(mentorID){
+    return Users.find({ username: mentorID }).fetch()[0].picture;
+  },
 });

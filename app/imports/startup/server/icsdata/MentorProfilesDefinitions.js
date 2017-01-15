@@ -69,4 +69,12 @@ export const mentorProfilesDefinitions = [
     'we can make ICS graduates, the more success our industry will have and the more opportunities there will be ' +
     'for all.',
   },
+  {
+    mentorID: 'nagashima',
+    company: 'Paideia Enterprises',
+    career: 'Owner',
+    location: 'San Francisco, CA',
+    linkedin: 'yukanagashima',
+    motivation: 'I was the Executive Director of the High Technology Development Corporation for the State of Hawaii from 2006 to 2013, co-founded startups, and have a continuing interest in supporting the growth of the Hawaii high tech industry. I can also provide advice to those interested in moving to Silicon Valley after graduation.',
+  },
 ];

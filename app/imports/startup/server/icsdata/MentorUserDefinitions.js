@@ -71,4 +71,14 @@ export const mentorUserDefinitions = [
     role: ROLE.MENTOR,
     uhID: '8289-0007',
   },
+  {
+    firstName: 'Yuka',
+    lastName: 'Nagashima',
+    slug: 'nagashima',
+    email: 'yuka@excitedcuriosity.org',
+    password: 'foo',
+    picture: '/images/mentors/nagashima.jpg',
+    role: ROLE.MENTOR,
+    uhID: '8289-0008',
+  },
 ];
