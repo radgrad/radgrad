@@ -1,7 +1,3 @@
-/**
- * Created by ataka on 12/15/16.
- */
-
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
@@ -36,7 +32,7 @@ if (Meteor.isServer) {
       description = 'This is a test teaser';
       duration = '1:32:14';
       interests = [makeSampleInterest()];
-      opportunity = makeSampleOpportunity(makeSampleUser(ROLE.FACULTY));
+      //opportunity = makeSampleOpportunity(makeSampleUser(ROLE.FACULTY));
     });
 
     after(function tearDown() {
@@ -44,7 +40,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = Teasers.define({ title, slug, author, url, description, duration, interests, opportunity });
+      const instanceID = Teasers.define({ title, slug, author, url, description, duration, interests });
       expect(Teasers.isDefined(instanceID)).to.be.true;
       Teasers.removeIt(instanceID);
       expect(Teasers.isDefined(instanceID)).to.be.false;
