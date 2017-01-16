@@ -42,8 +42,7 @@ class MentorAnswerCollection extends BaseCollection {
    * @param question
    */
   getAnswers(question) {
-    const slug = Slugs.findDoc(question);
-    return this._collection.find({ questionID: slug.name });
+    return this._collection.find({ questionID: question });
   }
 
   /**

@@ -43,6 +43,11 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
     return MentorAnswers.getAnswers(questionID).count();
   },
   picture(mentorID) {
-    return Users.find({ username: mentorID }).fetch()[0].picture;
+    return Users.find({ _id: mentorID }).fetch()[0].picture;
   },
+  mentorName(mentorID) {
+    const firstName = Users.find({ _id: mentorID }).fetch()[0].firstName;
+    const lastName = Users.find({ _id: mentorID }).fetch()[0].lastName;
+    return firstName + ' ' + lastName;
+  }
 });
