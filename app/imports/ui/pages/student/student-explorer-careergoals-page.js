@@ -8,6 +8,8 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
+import { getRouteUserName } from '../../components/shared/route-user-name.js';
+
 
 function interestedUsers(careerGoal, role) {
   const interested = [];
@@ -31,8 +33,27 @@ Template.Student_Explorer_CareerGoals_Page.helpers({
     const careerGoal = CareerGoals.find({ slugID: slug[0]._id }).fetch();
     return careerGoal[0];
   },
-  careerGoals() {
-    return CareerGoals.find({}, { sort: { name: 1 } }).fetch();
+  addedCareerGoals() {
+    const addedCareerGoals = [];
+    const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
+    const user = Users.findDoc({ username: getRouteUserName() });
+    _.map(allCareerGoals, (careerGoal) => {
+      if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+        addedCareerGoals.push(careerGoal);
+      }
+    });
+    return addedCareerGoals;
+  },
+  nonAddedCareerGoals() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
+    const nonAddedCareerGoals = _.filter(allCareerGoals, function (careerGoal) {
+      if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+        return false;
+      }
+      return true;
+    });
+    return nonAddedCareerGoals;
   },
   courseName(careerGoal) {
     return careerGoal.name;

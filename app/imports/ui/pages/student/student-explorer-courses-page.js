@@ -10,7 +10,6 @@ import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-
 function passedCourseHelper(courseSlugName) {
   let ret = 'Not in plan';
   const slug = Slugs.find({ name: courseSlugName }).fetch();
@@ -77,15 +76,40 @@ Template.Student_Explorer_Courses_Page.helpers({
     const course = Courses.find( {slugID: slug[0]._id } ).fetch();
     return course[0];
   },
-  courses() {
-    const allCourses = Courses.find({}, { sort: { name: 1 } }).fetch();
-    const courses = [];
+  nonAddedCourses() {
+    const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    const userID = getUserIdFromRoute();
+    const nonAddedCourses = _.filter(allCourses, function (course) {
+      const ci = CourseInstances.find({
+        studentID: userID,
+        courseID: course._id,
+      }).fetch();
+      if (ci.length > 0) {
+        return false;
+      }
+      if (course.shortName === 'Non-CS Course') {
+        return false;
+      }
+      return true;
+  });
+    return nonAddedCourses;
+  },
+  addedCourses() {
+    const addedCourses = [];
+    const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    const userID = getUserIdFromRoute();
     _.map(allCourses, (course) => {
-      if (course.shortName !== 'Non-CS Course') {
-        courses.push(course);
+      const ci = CourseInstances.find({
+        studentID: userID,
+        courseID: course._id,
+      }).fetch();
+      if (ci.length > 0) {
+        if (course.shortName !== 'Non-CS Course') {
+          addedCourses.push(course);
+        }
       }
     });
-    return courses;
+    return addedCourses;
   },
   courseName(course) {
     return course.shortName;

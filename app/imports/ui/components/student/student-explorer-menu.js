@@ -201,3 +201,10 @@ Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated()
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
+
+
+Template.Student_Explorer_Menu.onRendered(function studentExplorerMenuOnRendered() {
+  const template = this;
+  template.$('.ui.dropdown')
+      .dropdown();
+});

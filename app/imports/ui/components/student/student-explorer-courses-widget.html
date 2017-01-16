@@ -2,7 +2,7 @@
   {{#if Template.subscriptionsReady}}
     <div class="ui padded segment container">
       <div class="ui dividing header">
-        <h4>{{name}}</h4>
+        <h4>{{shortName}} ({{name}})</h4>
       </div>
       {{#each descriptionPair in descriptionPairs}}
         {{#if isLabel descriptionPair.label 'Interests'}}

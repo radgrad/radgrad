@@ -13,6 +13,7 @@ import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 function coursesHelper(interest) {
   const allCourses = Courses.find().fetch();
@@ -152,8 +153,27 @@ Template.Student_Explorer_Interests_Page.helpers({
     const interest = Interests.find({ slugID: slug[0]._id }).fetch();
     return interest[0];
   },
-  interests() {
-    return Interests.find({}, { sort: { name: 1 } }).fetch();
+  addedInterests() {
+    const addedInterests = [];
+    const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
+    const user = Users.findDoc({ username: getRouteUserName() });
+    _.map(allInterests, (interest) => {
+      if (_.includes(user.interestIDs, interest._id)) {
+        addedInterests.push(interest);
+      }
+    });
+    return addedInterests;
+  },
+  nonAddedInterests() {
+    const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const nonAddedInterests = _.filter(allInterests, function (interest) {
+      if (_.includes(user.interestIDs, interest._id)) {
+        return false;
+      }
+      return true;
+    });
+    return nonAddedInterests;
   },
   interestName(interest) {
     return interest.name;

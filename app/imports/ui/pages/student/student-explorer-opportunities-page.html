@@ -1,7 +1,7 @@
 <template name="Student_Explorer_Opportunities_Page">
 
   {{#if Template.subscriptionsReady}}
-    {{#Student_Explorer_Layout list = opportunities type = 'opportunities'}}
+    {{#Student_Explorer_Layout addedList = addedOpportunities nonAddedList = nonAddedOpportunities type = 'opportunities'}}
       {{> Student_Explorer_Opportunities_Widget name=opportunity.name slug=(slugName opportunity.slugID) descriptionPairs=(descriptionPairs opportunity) socialPairs=(socialPairs opportunity) id=opportunity._id updateID=updateID item=opportunity}}
     {{/Student_Explorer_Layout}}
 

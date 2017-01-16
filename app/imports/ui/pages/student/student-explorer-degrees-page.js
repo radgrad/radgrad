@@ -6,6 +6,7 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 function interestedUsers(degree) {
   const interested = [];
@@ -29,8 +30,20 @@ Template.Student_Explorer_Degrees_Page.helpers({
     const degree = DesiredDegrees.find( {slugID: slug[0]._id } ).fetch();
     return degree[0];
   },
-  degrees() {
-    return DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+  addedDegrees() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    return [DesiredDegrees.findDoc(user.desiredDegreeID)];
+  },
+  nonAddedDegrees() {
+    const allDegrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const nonAddedDegrees = _.filter(allDegrees, function (degree) {
+      if (_.includes(user.desiredDegreeID, degree._id)) {
+        return false;
+      }
+      return true;
+    });
+    return nonAddedDegrees;
   },
   degreeName(degree) {
     return degree.name;

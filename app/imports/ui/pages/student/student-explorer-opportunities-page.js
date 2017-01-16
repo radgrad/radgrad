@@ -11,6 +11,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 function interestedUsers(opportunity) {
   const interested = [];
@@ -60,8 +61,35 @@ Template.Student_Explorer_Opportunities_Page.helpers({
     const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
     return opportunity[0];
   },
-  opportunities() {
-    return Opportunities.find({}, { sort: { name: 1 } }).fetch();
+  nonAddedOpportunities() {
+    const allOpportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const userID = getUserIdFromRoute();
+    const nonAddedOpportunities = _.filter(allOpportunities, function (opportunity) {
+      const oi = OpportunityInstances.find({
+        studentID: userID,
+        opportunityID: opportunity._id,
+      }).fetch();
+      if (oi.length > 0) {
+        return false;
+      }
+      return true;
+    });
+    return nonAddedOpportunities;
+  },
+  addedOpportunities() {
+    const addedOpportunities = [];
+    const allOpportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const userID = getUserIdFromRoute();
+    _.map(allOpportunities, (opportunity) => {
+      const oi = OpportunityInstances.find({
+        studentID: userID,
+        opportunityID: opportunity._id,
+      }).fetch();
+    if (oi.length > 0) {
+      addedOpportunities.push(opportunity);
+    }
+  });
+    return addedOpportunities;
   },
   opportunityName(opportunity) {
     return opportunity.name;
