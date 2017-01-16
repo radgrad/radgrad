@@ -48,6 +48,6 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
   mentorName(mentorID) {
     const firstName = Users.find({ _id: mentorID }).fetch()[0].firstName;
     const lastName = Users.find({ _id: mentorID }).fetch()[0].lastName;
-    return firstName + ' ' + lastName;
-  }
+    return `${firstName}  ${lastName}`;
+  },
 });
