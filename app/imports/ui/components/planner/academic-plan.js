@@ -2,10 +2,9 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
-
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-
+import { Logger } from 'meteor/jag:pince';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -23,6 +22,7 @@ export const plannerKeys = {
   detailCourseInstance: 'detailCourseInstance',
   detailOpportunity: 'detailOpportunity',
   detailOpportunityInstance: 'detailOpportunityInstance',
+  detailICE: 'detailICE',
 };
 
 Template.Academic_Plan_2.helpers({
@@ -267,7 +267,7 @@ Template.Academic_Plan_2.helpers({
         term: Semesters.FALL,
       });
       const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester };
+      return { currentSemester, semester, dictionary: Template.instance().state };
     }
     return null;
   },
@@ -543,7 +543,7 @@ Template.Academic_Plan_2.helpers({
         term: Semesters.SPRING,
       });
       const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester };
+      return { currentSemester, semester, dictionary: Template.instance().state };
     }
     return null;
   },
@@ -556,7 +556,7 @@ Template.Academic_Plan_2.helpers({
         term: Semesters.SUMMER,
       });
       const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester };
+      return { currentSemester, semester, dictionary: Template.instance().state };
     }
     return null;
   },
@@ -791,6 +791,7 @@ Template.Academic_Plan_2.events({
   },
   'click tr.clickEnabled': function clickTrClickEnabled(event) {
     event.preventDefault();
+    const logger = new Logger('academic-plan.clickTrClickEnabled');
     let target = event.target;
     while (target && target.nodeName !== 'TR') {
       target = target.parentNode;
@@ -800,9 +801,11 @@ Template.Academic_Plan_2.events({
     if (firstClass === 'courseInstance') {
       if (CourseInstances.isDefined(target.id)) {
         const ci = CourseInstances.findDoc(target.id);
+        logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade}`);
         // console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'clickTrClickEnabled', ci.ice, ci.grade);
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, ci);
+        template.state.set(plannerKeys.detailICE, ci.ice);
       } else {
         const course = Courses.findDoc(target.id);
         template.state.set(plannerKeys.detailCourse, course);
@@ -813,9 +816,10 @@ Template.Academic_Plan_2.events({
     } else
       if (firstClass === 'opportunityInstance') {
         if (OpportunityInstances.isDefined(target.id)) {
-          const oi = OpportunityInstances.finDoc(target.id);
+          const oi = OpportunityInstances.findDoc(target.id);
           template.state.set(plannerKeys.detailOpportunity, null);
           template.state.set(plannerKeys.detailOpportunityInstance, oi);
+          template.state.set(plannerKeys.detailICE, oi.ice);
         } else {
           const opportunity = Opportunities.findDoc(target.id);
           template.state.set(plannerKeys.detailOpportunity, opportunity);

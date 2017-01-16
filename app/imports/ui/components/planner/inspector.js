@@ -205,18 +205,22 @@ Template.Inspector.helpers({
   courseIce() {
     const logger = new Logger('inspector.courseIce');
     // $('body').removeClass('waiting');
+    if (Template.instance().state.get(plannerKeys.detailICE)) {
+      const ice = Template.instance().state.get(plannerKeys.detailICE);
+      logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using detailICE {${ice.i}, ${ice.c}, ${ice.e}}`);
+      return ice;
+    }
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       const course = Template.instance().state.get(plannerKeys.detailCourse);
       const slug = Slugs.findDoc(course.slugID);
       const ice = makeCourseICE(slug.name, '***');
+      logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using generic ice {${ice.i}, ${ice.c}, ${ice.e}}`);
       return ice;
     } else
       if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
         const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
-        const course = Courses.findDoc(ci.courseID);
-        const slug = Slugs.findDoc(course.slugID);
-        const ice = makeCourseICE(slug.name, ci.grade);
-        logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ice.i}, ${ice.c}, ${ice.e}}`);
+        const ice = ci.ice;
+        logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using ci ice {${ice.i}, ${ice.c}, ${ice.e}}`);
         return ice;
       }
     return null;

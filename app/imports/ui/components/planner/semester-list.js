@@ -18,7 +18,7 @@ import { plannerKeys } from './academic-plan';
 
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
-  if (courses.length > 0 && Template.instance().state.get('semester')) {
+  if (courses.length > 0 && Template.instance().localState.get('semester')) {
     const filtered = lodash.filter(courses, function filter(course) {
       if (course.number === 'ICS 499') {
         return true;
@@ -68,7 +68,7 @@ const available4xxCourses = () => {
 
 const availableOpportunities = () => {
   const opportunities = Opportunities.find({}).fetch();
-  if (opportunities.length > 0 && Template.instance().state.get('semester')) {
+  if (opportunities.length > 0 && Template.instance().localState.get('semester')) {
     const filtered = lodash.filter(opportunities, function filter(opportunity) {
       const oi = OpportunityInstances.find({
         studentID: getUserIdFromRoute(),
@@ -150,9 +150,9 @@ Template.Semester_List.helpers({
   },
   icsCourses() {
     const ret = [];
-    if (Template.instance().state.get('semester')) {
+    if (Template.instance().localState.get('semester')) {
       const courses = CourseInstances.find({
-        semesterID: Template.instance().state.get('semester')._id,
+        semesterID: Template.instance().localState.get('semester')._id,
         studentID: getUserIdFromRoute(),
       }, { sort: { note: 1 } }).fetch();
       courses.forEach((c) => {
@@ -164,16 +164,16 @@ Template.Semester_List.helpers({
     return ret;
   },
   isCurrentSemester() {
-    const semester = Template.instance().state.get('semester');
-    const currentSemester = Template.instance().state.get('currentSemester');
+    const semester = Template.instance().localState.get('semester');
+    const currentSemester = Template.instance().localState.get('currentSemester');
     if (semester && currentSemester) {
       return semester.sortBy === currentSemester.sortBy;
     }
     return false;
   },
   isFuture() {
-    const semester = Template.instance().state.get('semester');
-    const currentSemester = Template.instance().state.get('currentSemester');
+    const semester = Template.instance().localState.get('semester');
+    const currentSemester = Template.instance().localState.get('currentSemester');
     if (semester && currentSemester) {
       return semester.sortBy >= currentSemester.sortBy;
     }
@@ -190,9 +190,9 @@ Template.Semester_List.helpers({
   },
   nonIcsCourses() {
     const ret = [];
-    if (Template.instance().state.get('semester')) {
+    if (Template.instance().localState.get('semester')) {
       const courses = CourseInstances.find({
-        semesterID: Template.instance().state.get('semester')._id,
+        semesterID: Template.instance().localState.get('semester')._id,
         studentID: getUserIdFromRoute(),
       }).fetch();
       courses.forEach((c) => {
@@ -205,7 +205,7 @@ Template.Semester_List.helpers({
   },
   opportunities() {
     let ret = [];
-    const semester = Template.instance().state.get('semester');
+    const semester = Template.instance().localState.get('semester');
     if (semester) {
       const opportunities = availableOpportunities();
       const now = new Date();
@@ -244,7 +244,7 @@ Template.Semester_List.helpers({
     return opp[0].ice;
   },
   semesterName() {
-    const semester = Template.instance().state.get('semester');
+    const semester = Template.instance().localState.get('semester');
     if (semester) {
       return semester.term;
     }
@@ -252,9 +252,9 @@ Template.Semester_List.helpers({
   },
   semesterOpportunities() {
     const ret = [];
-    if (Template.instance().state.get('semester')) {
+    if (Template.instance().localState.get('semester')) {
       const opps = OpportunityInstances.find({
-        semesterID: Template.instance().state.get('semester')._id,
+        semesterID: Template.instance().localState.get('semester')._id,
         studentID: getUserIdFromRoute(),
       }).fetch();
       return opps;
@@ -262,7 +262,7 @@ Template.Semester_List.helpers({
     return ret;
   },
   year() {
-    const semester = Template.instance().state.get('semester');
+    const semester = Template.instance().localState.get('semester');
     if (semester) {
       return semester.year;
     }
@@ -273,9 +273,9 @@ Template.Semester_List.helpers({
 Template.Semester_List.events({
   'drop .bodyDrop': function dropBodyDrop(event) {
     event.preventDefault();
-    if (Template.instance().state.get('semester')) {
+    if (Template.instance().localState.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
-      const semesterId = Template.instance().state.get('semester')._id;
+      const semesterId = Template.instance().localState.get('semester')._id;
       if (CourseInstances.isDefined(id)) {
         CourseInstances.updateSemester(id, semesterId);
         checkPrerequisites();
@@ -296,7 +296,7 @@ Template.Semester_List.events({
     template.$('a.item.400').popup('hide all');
     const courseSplit = event.target.text.split(' ');
     const courseSlug = `${courseSplit[0].toLowerCase()}${courseSplit[1]}`;
-    const semester = template.state.get('semester');
+    const semester = template.localState.get('semester');
     const semStr = Semesters.toString(semester._id, false);
     const semSplit = semStr.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
@@ -347,7 +347,7 @@ Template.Semester_List.events({
     const name = event.target.text;
     const opportunity = Opportunities.find({ name }).fetch()[0];
     const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
-    const semester = template.state.get('semester');
+    const semester = template.localState.get('semester');
     const semStr = Semesters.toString(semester._id, false);
     const semSplit = semStr.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
@@ -360,8 +360,9 @@ Template.Semester_List.events({
     };
     OpportunityInstances.define(oi);
   },
-  'click .item.grade': function clickItemGrade(event, instance) {
+  'click .item.grade': function clickItemGrade(event) {
     event.preventDefault();
+    const template = Template.instance();
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;
     // const body = $('body');
@@ -369,11 +370,11 @@ Template.Semester_List.events({
     CourseInstances.clientUpdateGrade(div.id, grade);
     const logger = new Logger('semester-list.clickItemGrade');
     const ci = CourseInstances.findDoc(div.id);
-    instance.state.set(plannerKeys.detailCourseInstance, null);
-    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} set ci to null`);
-    instance.state.set(plannerKeys.detailCourseInstance, ci);
+    template.state.set(plannerKeys.detailICE, ci.ice);
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} set ICE to {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}}`);
+    template.state.set(plannerKeys.detailCourseInstance, ci);
     logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade} \
-      ${instance.state.get(plannerKeys.detailCourseInstance).grade}`);
+      ${template.state.get(plannerKeys.detailCourseInstance).grade}`);
     Tracker.flush();
   },
   'click .jsDelCourse': function clickJsDelCourse(event) {
@@ -391,14 +392,18 @@ Template.Semester_List.events({
 });
 
 Template.Semester_List.onCreated(function semesterListOnCreate() {
-  this.state = new ReactiveDict();
+  if (this.data) {
+    this.state = this.data.dictionary;
+  } else {
+  }
+  this.localState = new ReactiveDict();
 });
 
 Template.Semester_List.onRendered(function semesterListOnRendered() {
   // console.log(this.data);
   if (this.data) {
-    this.state.set('semester', this.data.semester);
-    this.state.set('currentSemester', this.data.currentSemester);
+    this.localState.set('semester', this.data.semester);
+    this.localState.set('currentSemester', this.data.currentSemester);
   }
   const template = this;
   Tracker.afterFlush(() => {
