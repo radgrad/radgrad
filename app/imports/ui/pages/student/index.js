@@ -12,33 +12,29 @@ import './student-mentorspace-page.css';
 import './student-mentorspace-page.html';
 import './student-mentorspace-page.js';
 
-import './student-explorer-degree-page.html';
-import './student-explorer-degree-page.js';
+import './student-explorer-degrees-page.html';
+import './student-explorer-degrees-page.js';
 
-import './student-explorer-course-page.html';
-import './student-explorer-course-page.js';
+import './student-explorer-courses-page.html';
+import './student-explorer-courses-page.js';
 
-import './student-explorer-interest-page.html';
-import './student-explorer-interest-page.js';
+import './student-explorer-interests-page.html';
+import './student-explorer-interests-page.js';
 
-import './student-explorer-opportunity-page.html';
-import './student-explorer-opportunity-page.js';
+import './student-explorer-opportunities-page.html';
+import './student-explorer-opportunities-page.js';
 
 import './student-explorer-careergoals-page.html';
 import './student-explorer-careergoals-page.js';
 
-import './explorer-interest-pages/algorithms.html';
-import './explorer-interest-pages/algorithms.js';
+import './student-home-aboutme-page.html';
+import './student-home-aboutme-page.js';
 
-import './student-aboutme.html';
-import './student-aboutme.js';
+import './student-home-levels-page.html';
+import './student-home-levels-page.js';
 
-import './student-levels.html';
-import './student-levels.js';
-
-import './student-ice.html';
-import './student-ice.js';
-import './student-ice.css';
+import './student-home-ice-page.html';
+import './student-home-ice-page.js';
 
 import './student-about-levels.html';
 import './student-about-levels.js';

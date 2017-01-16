@@ -31,7 +31,8 @@ export function makeSampleOpportunity(sponsor) {
   const description = 'Sample Opportunity Description';
   const opportunityType = makeSampleOpportunityType();
   const interests = [makeSampleInterest()];
-  const semesters = ['Summer-2015', 'Fall-2015'];
+  const semester = Semesters.define({ term: Semesters.SPRING, year: 2015 });
+  const semesters = [semester];
   const ice = { i: 10, c: 0, e: 10 };
   return Opportunities.define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice });
 }

@@ -173,3 +173,4 @@ Template.Student_Courses_Of_Interest_Card.onRendered(function studentCoursesOfIn
         on: 'click',
       });
 });
+
