@@ -141,8 +141,8 @@ function careerGoals(interest) {
   _.map(allCareerGoals, (careerGoal) => {
     if (_.includes(careerGoal.interestIDs, interest._id)) {
       matching.push(careerGoal);
-  }
-});
+    }
+  });
   return matching;
 }
 

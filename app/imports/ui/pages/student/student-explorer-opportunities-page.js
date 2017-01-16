@@ -85,10 +85,10 @@ Template.Student_Explorer_Opportunities_Page.helpers({
         studentID: userID,
         opportunityID: opportunity._id,
       }).fetch();
-    if (oi.length > 0) {
-      addedOpportunities.push(opportunity);
-    }
-  });
+      if (oi.length > 0) {
+        addedOpportunities.push(opportunity);
+      }
+    });
     return addedOpportunities;
   },
   opportunityName(opportunity) {

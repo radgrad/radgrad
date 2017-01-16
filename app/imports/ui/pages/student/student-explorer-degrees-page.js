@@ -27,7 +27,7 @@ Template.Student_Explorer_Degrees_Page.helpers({
   degree() {
     const degreeSlugName = FlowRouter.getParam('degree');
     const slug = Slugs.find({ name: degreeSlugName }).fetch();
-    const degree = DesiredDegrees.find( {slugID: slug[0]._id } ).fetch();
+    const degree = DesiredDegrees.find({ slugID: slug[0]._id }).fetch();
     return degree[0];
   },
   addedDegrees() {

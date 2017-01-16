@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -81,8 +80,6 @@ Template.Student_Explorer_Courses_Widget.helpers({
 Template.Student_Explorer_Courses_Widget.events({
   'click .addItem': function clickAddItem(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
-    const id = event.target.value;
     const course = this.course;
     const semester = event.target.text;
     const courseSlug = Slugs.findDoc({ _id: course.slugID });

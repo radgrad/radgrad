@@ -36,8 +36,8 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     _.map(semesters, (sem) => {
       if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
         semesterNames.push(Semesters.toString(sem));
-    }
-  });
+      }
+    });
     return semesterNames;
   },
 });

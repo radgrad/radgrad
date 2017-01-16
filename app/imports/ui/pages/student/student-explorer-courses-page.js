@@ -39,7 +39,7 @@ function interestedUsers(course) {
     courseID: course._id,
   }).fetch();
   _.map(ci, (c) => {
-    if (!_.includes(interested, c.studentID)){
+    if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
     }
   });
@@ -73,7 +73,7 @@ Template.Student_Explorer_Courses_Page.helpers({
   course() {
     const courseSlugName = FlowRouter.getParam('course');
     const slug = Slugs.find({ name: courseSlugName }).fetch();
-    const course = Courses.find( {slugID: slug[0]._id } ).fetch();
+    const course = Courses.find({ slugID: slug[0]._id }).fetch();
     return course[0];
   },
   nonAddedCourses() {
@@ -91,7 +91,7 @@ Template.Student_Explorer_Courses_Page.helpers({
         return false;
       }
       return true;
-  });
+    });
     return nonAddedCourses;
   },
   addedCourses() {
