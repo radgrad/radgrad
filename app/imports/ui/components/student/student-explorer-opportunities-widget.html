@@ -1,0 +1,69 @@
+<template name="Student_Explorer_Opportunities_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded segment container">
+      <div class="ui dividing header">
+        <h4>{{name}}</h4>
+      </div>
+      {{#each descriptionPair in descriptionPairs}}
+        {{#if isLabel descriptionPair.label 'Interests'}}
+          <p>
+            {{#each interest in descriptionPair.value}}
+              <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
+            {{/each}}
+          </p>
+        {{else}}
+          {{#if isLabel descriptionPair.label 'Teaser'}}
+            {{#if descriptionPair.value}}
+              <p><b>{{descriptionPair.label}}:</b>
+              {{> Student_Explorer_Opportunities_Widget_Teaser teaser = (descriptionPair.value)}}
+             </p>
+            {{else}}
+            <p><b>{{descriptionPair.label}}:</b> None</p>
+            {{/if}}
+          {{else}}
+              {{#if descriptionPair.value }}
+              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+            {{else}}
+              <p><b>{{descriptionPair.label}}:</b> N/A</p>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      {{/each}}
+
+      <div class="ui three column grid">
+        {{#each socialPair in socialPairs}}
+          <div class="stretched column">
+            <table class="ui small table">
+              <thead>
+              <tr>
+                <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <div class="ui circular mini bordered images">
+                    {{#each user in socialPair.value}}
+                      <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
+                    {{/each}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        {{/each}}
+      </div>
+      <br>
+      <p>
+        {{#if userStatus item}}
+          {{> Student_Explorer_Opportunities_Widget_Button buttonType='remove' opportunity=item}}
+        {{else}}
+          {{> Student_Explorer_Opportunities_Widget_Button buttonType='add' opportunity=item}}
+        {{/if}}
+      </p>
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

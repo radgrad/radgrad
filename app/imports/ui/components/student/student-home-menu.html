@@ -1,0 +1,8 @@
+<template name="Student_Home_Menu">
+  <div  class="ui left vertical text menu">
+    <a class="{{isActiveRoute studentHomePageRouteName}} item" href="{{pathFor studentHomePageRouteName username=routeUserName}}">Home</a>
+    <a class="{{isActiveRoute studentHomeAboutMePageRouteName}} item" href="{{pathFor studentHomeAboutMePageRouteName username=routeUserName}}">About Me</a>
+    <a class="{{isActiveRoute studentHomeIcePageRouteName}} item" href="{{pathFor studentHomeIcePageRouteName username=routeUserName}}">ICE Points</a>
+    <a class="{{isActiveRoute studentHomeLevelsPageRouteName}} item" href="{{pathFor studentHomeLevelsPageRouteName username=routeUserName}}">Level</a>
+  </div>
+</template>

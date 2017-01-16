@@ -5,8 +5,8 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';
-import { MentorQuestions } from '../../../api/mentor/MentorQuestionsCollection.js';
-import { MentorAnswers } from '../../../api/mentor/MentorAnswersCollection.js';
+import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
+import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -43,6 +43,11 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
     return MentorAnswers.getAnswers(questionID).count();
   },
   picture(mentorID) {
-    return Users.find({ username: mentorID }).fetch()[0].picture;
+    return Users.find({ _id: mentorID }).fetch()[0].picture;
+  },
+  mentorName(mentorID) {
+    const firstName = Users.find({ _id: mentorID }).fetch()[0].firstName;
+    const lastName = Users.find({ _id: mentorID }).fetch()[0].lastName;
+    return `${firstName}  ${lastName}`;
   },
 });

@@ -13,7 +13,7 @@
         </div>
 
         {{#each question in questionsList}}
-        {{> Student_MentorSpace_Questions_Accordion title=question.title questionID=question.slugID}}
+        {{> Student_MentorSpace_Questions_Accordion title=question.title questionID=question._id}}
         {{/each}}
 
       </div>
@@ -26,7 +26,7 @@
           </div>
           {{#each mentor in mentorsList}}
 
-          {{> Student_MentorSpace_Mentor_Directory profile=(mentorProfile mentor.username) mentorID=mentor.username firstName=mentor.firstName lastName=mentor.lastName email=mentor.email picture=mentor.picture}}
+          {{> Student_MentorSpace_Mentor_Directory profile=(mentorProfile mentor._id) mentorID=mentor.username firstName=mentor.firstName lastName=mentor.lastName email=mentor.email picture=mentor.picture}}
 
           {{/each}}
         </div>

@@ -2,7 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertFeedbackType } from '/imports/api/feedback/FeedbackType';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 // import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
 // import { Meteor } from 'meteor/meteor';

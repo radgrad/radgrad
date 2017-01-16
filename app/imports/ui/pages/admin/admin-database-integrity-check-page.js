@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { checkIntegrity } from '/imports/api/integritychecker/IntegrityChecker';
+import { checkIntegrity } from '/imports/api/integrity/IntegrityChecker';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -22,8 +22,8 @@ import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { Feed } from '../../../api/feed/FeedCollection.js';
-import { MentorAnswers } from '../../../api/mentor/MentorAnswersCollection.js';
-import { MentorQuestions } from '../../../api/mentor/MentorQuestionsCollection.js';
+import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
+import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection.js';
 

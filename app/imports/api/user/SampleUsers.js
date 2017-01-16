@@ -18,3 +18,4 @@ export function makeSampleUser(role = ROLE.STUDENT) {
   const password = 'foo';
   return Users.define({ firstName, lastName, slug, email, role, password });
 }
+
