@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>api/base/BaseUtilities.js - Documentation</title>
+    <title>api/mentor/MentorQuestionCollection.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -28,7 +28,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">api/base/BaseUtilities.js</h1>
+    <h1 class="page-title">api/mentor/MentorQuestionCollection.js</h1>
     
 
     
@@ -38,64 +38,78 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { AdvisorLogs } from '/imports/api/log/AdvisorLogCollection';
-import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
-import { Courses } from '/imports/api/course/CourseCollection';
-import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
-import { Feed } from '/imports/api/feed/FeedCollection';
-import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
-import { FeedbackInstances } from '/imports/api/feedback/FeedbackInstanceCollection';
-import { HelpMessages } from '/imports/api/help/HelpMessageCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
-import { MentorAnswers } from '/imports/api/mentor/MentorAnswerCollection';
-import { MentorQuestions } from '/imports/api/mentor/MentorQuestionCollection';
-import { MentorProfiles } from '/imports/api/mentor/MentorProfileCollection';
-import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
+            <pre class="prettyprint source linenums"><code>import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
-import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
-import { Teasers } from '/imports/api/teaser/TeaserCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import { VerificationRequests } from '/imports/api/verification/VerificationRequestCollection';
-import { WorkInstances } from '/imports/api/work/WorkInstanceCollection';
-import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection';
+import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 
-/** @module BaseUtilities */
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+
+/** @module MentorQuestions */
 
 /**
- * Deletes all RadGrad data model entities. (Hopefully).
+ * Represents a mentor answer.
+ * @extends module:Base~BaseInstanceCollection
  */
-export function removeAllEntities() {
-  CareerGoals.removeAll();
-  Courses.removeAll();
-  CourseInstances.removeAll();
-  DesiredDegrees.removeAll();
-  Feed.removeAll();
-  Feedbacks.removeAll();
-  FeedbackInstances.removeAll();
-  HelpMessages.removeAll();
-  Interests.removeAll();
-  InterestTypes.removeAll();
-  AdvisorLogs.removeAll();
-  MentorAnswers.removeAll();
-  MentorQuestions.removeAll();
-  MentorProfiles.removeAll();
-  Opportunities.removeAll();
-  OpportunityInstances.removeAll();
-  OpportunityTypes.removeAll();
-  Semesters.removeAll();
-  Slugs.removeAll();
-  StarDataLogs.removeAll();
-  Teasers.removeAll();
-  Users.removeAll();
-  VerificationRequests.removeAll();
-  WorkInstances.removeAll();
-  AcademicYearInstances.removeAll();
+class MentorQuestionCollection extends BaseInstanceCollection {
+  /**
+   * Creates the Mentor Question collection.
+   */
+  constructor() {
+    super('MentorQuestion', new SimpleSchema({
+      title: { type: String },
+      slugID: { type: SimpleSchema.RegEx.Id },
+      approved: { type: Boolean },
+    }));
+  }
+
+  /**
+   * Defines a new MentorSpace question.
+   * @param title the question.
+   * @param slug A unique identifier for this question.
+   * @param approved If the question is approved. Defaults to false.
+   * @return { String } the docID of this question.
+   */
+  define({ title, slug, approved = false }) {
+    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
+    const docID = this._collection.insert({ title, slugID, approved });
+    Slugs.updateEntityID(slugID, docID);
+    return docID;
+  }
+
+  getQuestions() {
+    return this._collection.find({}).fetch().reverse();
+  }
+
+  /**
+   * Returns an empty array (no integrity checking done on this collection.)
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    const problems = [];
+    this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
+    });
+    return problems;
+  }
+
+  /**
+   * Returns an object representing the MentorQuestion docID in a format acceptable to define().
+   * @param docID The docID of a MentorQuestion.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const title = doc.title;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const approved = doc.approved;
+    return { title, slug, approved };
+  }
 }
+
+export const MentorQuestions = new MentorQuestionCollection();
+radgradCollections.push(MentorQuestions);
 
 </code></pre>
         </article>
