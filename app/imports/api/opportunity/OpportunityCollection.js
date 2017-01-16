@@ -7,7 +7,7 @@ import { Users } from '/imports/api/user/UserCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertICE } from '/imports/api/ice/IceProcessor';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 
@@ -44,16 +44,16 @@ class OpportunityCollection extends BaseInstanceCollection {
   /**
    * Defines a new Opportunity.
    * @example
-   * Opportunitys.define({ name: 'ATT Hackathon',
-   *                       slug: 'att-hackathon',
-   *                       description: 'Programming challenge at Sacred Hearts Academy, $10,000 prize',
-   *                       opportunityType: 'event',
-   *                       sponsor: 'philipjohnson',
-   *                       ice: { i: 10, c: 0, e: 10},
-   *                       interests: ['software-engineering'],
-   *                       semesters: ['Fall-2016', 'Spring-2016', 'Summer-2106'],
-    *                      moreInformation: 'http://atthackathon.com',
-     *                     independentStudy: true});
+   * Opportunities.define({ name: 'ATT Hackathon',
+   *                        slug: 'att-hackathon',
+   *                        description: 'Programming challenge at Sacred Hearts Academy, $10,000 prize',
+   *                        opportunityType: 'event',
+   *                        sponsor: 'philipjohnson',
+   *                        ice: { i: 10, c: 0, e: 10},
+   *                        interests: ['software-engineering'],
+   *                        semesters: ['Fall-2016', 'Spring-2016', 'Summer-2106'],
+    *                       moreInformation: 'http://atthackathon.com',
+     *                      independentStudy: true});
    * @param { Object } description Object with keys name, slug, description, opportunityType, sponsor, interests,
    * startActive, and endActive.
    * Slug must not be previously defined.
@@ -162,6 +162,28 @@ class OpportunityCollection extends BaseInstanceCollection {
       });
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the Opportunity docID in a format acceptable to define().
+   * @param docID The docID of an Opportunity.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const opportunityType = OpportunityTypes.findSlugByID(doc.opportunityTypeID);
+    const sponsor = Users.findSlugByID(doc.sponsorID);
+    const description = doc.description;
+    const ice = doc.ice;
+    const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
+    const semesters = _.map(doc.semesterIDs, semesterID => Semesters.findSlugByID(semesterID));
+    const moreInformation = doc.moreInformation;
+    const independentStudy = doc.independentStudy;
+    const eventDate = doc.eventDate;
+    return { name, slug, description, opportunityType, sponsor, ice, interests, semesters, moreInformation,
+      independentStudy, eventDate };
   }
 }
 

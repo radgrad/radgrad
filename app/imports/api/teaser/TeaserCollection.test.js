@@ -1,6 +1,3 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
@@ -10,6 +7,9 @@ import { makeSampleOpportunity } from '/imports/api/opportunity/SampleOpportunit
 import { makeSampleUser } from '/imports/api/user/SampleUsers.js';
 import { ROLE } from '/imports/api/role/Role';
 
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('TeaserCollection', function testSuite() {
@@ -39,11 +39,14 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = Teasers.define({ title, slug, author, url, description, duration, interests });
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+      let instanceID = Teasers.define({ title, slug, author, url, description, duration, interests });
       expect(Teasers.isDefined(instanceID)).to.be.true;
+      const dumpObject = Teasers.dumpOne(instanceID);
       Teasers.removeIt(instanceID);
       expect(Teasers.isDefined(instanceID)).to.be.false;
+      instanceID = Teasers.restoreOne(dumpObject);
+      expect(Teasers.isDefined(slug)).to.be.true;
     });
   });
 }

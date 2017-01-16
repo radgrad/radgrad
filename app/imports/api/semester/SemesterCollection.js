@@ -3,7 +3,7 @@ import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Meteor } from 'meteor/meteor';
 import { moment } from 'meteor/momentjs:moment';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module Semester */
 
@@ -32,6 +32,18 @@ class SemesterCollection extends BaseInstanceCollection {
     this.fallStart = parseInt(moment('08-15-2015', 'MM-DD-YYYY').format('DDD'), 10);
     this.springStart = parseInt(moment('01-01-2015', 'MM-DD-YYYY').format('DDD'), 10);
     this.summerStart = parseInt(moment('05-15-2015', 'MM-DD-YYYY').format('DDD'), 10);
+  }
+
+  /**
+   * Returns an object representing the Semester docID in a format acceptable to define().
+   * @param docID The docID of a Semester.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const term = doc.term;
+    const year = doc.year;
+    return { term, year };
   }
 
   /**

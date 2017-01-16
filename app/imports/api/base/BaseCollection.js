@@ -121,7 +121,6 @@ class BaseCollection {
 
   /**
    * Removes all elements of this collection.
-   * Available for testing purposes only.
    */
   removeAll() {
     this._collection.remove({});
@@ -181,6 +180,47 @@ class BaseCollection {
    */
   checkIntegrity() {  // eslint-disable-line class-methods-use-this
     return ['There is no integrity checker defined for this collection.'];
+  }
+
+  /**
+   * Returns an object with two fields: name and contents.
+   * Name is the name of this collection.
+   * Contents is an array of objects suitable for passing to the restore() method.
+   * @returns {Object} An object representing the contents of this collection.
+   */
+  dumpAll() {
+    return { name: this._collectionName, contents: this.find().map(docID => this.dumpOne(docID)) };
+  }
+
+  /**
+   * Returns an object representing the definition of docID in a format appropriate to the restoreOne function.
+   * Must be overridden by each collection.
+   * @param docID A docID from this collection.
+   * @returns { Object } An object representing this document.
+   */
+  dumpOne(docID) { // eslint-disable-line
+    throw new Meteor.Error(`Default dumpOne method invoked by collection ${this._collectionName}`);
+  }
+
+  /**
+   * Defines the entity represented by dumpObject.
+   * Defaults to calling the define() method if it exists.
+   * @param dumpObject An object representing one document in this collection.
+   * @returns { String } The docID of the newly created document.
+   */
+  restoreOne(dumpObject) {
+    if (typeof this.define === 'function') {
+      return this.define(dumpObject);
+    }
+    return null;
+  }
+
+  /**
+   * Defines all the entities in the passed array of objects.
+   * @param dumpObjects The array of objects representing the definition of a document in this collection.
+   */
+  restoreAll(dumpObjects) {
+    _.each(dumpObjects, dumpObject => this.restoreOne(dumpObject));
   }
 }
 

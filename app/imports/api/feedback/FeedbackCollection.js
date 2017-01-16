@@ -2,7 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertFeedbackType } from '/imports/api/feedback/FeedbackType';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 // import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
 // import { Meteor } from 'meteor/meteor';
@@ -70,6 +70,20 @@ class FeedbackCollection extends BaseInstanceCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the Feedback docID in a format acceptable to define().
+   * @param docID The docID of a Feedback.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const description = doc.description;
+    const feedbackType = doc.feedbackType;
+    return { name, slug, description, feedbackType };
   }
 }
 

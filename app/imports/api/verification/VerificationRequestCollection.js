@@ -8,7 +8,7 @@ import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollecti
 import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '../semester/SemesterCollection.js';
 import { Users } from '/imports/api/user/UserCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module Verification */
 
@@ -47,21 +47,33 @@ class VerificationRequestCollection extends BaseCollection {
   /**
    * Defines a verification request.
    * @example
-   * VerificationRequests.define({ student: 'joesmith', opportunityInstance: 'EiQYeRP4jyyre28Zw' });
+   * VerificationRequests.define({ student: 'joesmith',
+   *                               opportunityInstance: 'EiQYeRP4jyyre28Zw' });
+   * or
+   * VerificationRequests.define({ student: 'joesmith',
+   *                               opportunity: 'TechHui',
+    *                              semester: 'Fall-2015'});
    * @param { Object } student and opportunity must be slugs or IDs. SubmittedOn defaults to now.
+   * status defaults to OPEN, and processed defaults to an empty array.
+   * You can either pass the opportunityInstanceID or pass the opportunity and semester slugs. If opportunityInstance
+   * is not defined, then the student, opportunity, and semester arguments are used to look it up.
    * @throws {Meteor.Error} If semester, opportunity, or student cannot be resolved, or if verified is not a boolean.
    * @returns The newly created docID.
    */
-  define({ student, opportunityInstance, submittedOn = moment().toDate() }) {
+  define({ student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [],
+           semester, opportunity }) {
     const studentID = Users.getID(student);
-    const oppInstance = OpportunityInstances.findDoc(opportunityInstance);
+    const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance) :
+        OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
+    if (!oppInstance) {
+      throw new Meteor.Error('Could not find the opportunity instance to associate with this verification request');
+    }
     const opportunityInstanceID = oppInstance._id;
     const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;
-    const status = this.OPEN;
-    const processed = [];
     // Define and return the new VerificationRequest
-    const requestID = this._collection.insert({ studentID, opportunityInstanceID, submittedOn, status,
-      processed, ice });
+    const requestID = this._collection.insert({
+      studentID, opportunityInstanceID, submittedOn, status, processed, ice,
+    });
     return requestID;
   }
 
@@ -173,6 +185,23 @@ class VerificationRequestCollection extends BaseCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the VerificationRequest docID in a format acceptable to define().
+   * @param docID The docID of an VerificationRequest.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const student = Users.findSlugByID(doc.studentID);
+    const opportunityInstance = OpportunityInstances.findDoc(doc.opportunityInstanceID);
+    const semester = Semesters.findSlugByID(opportunityInstance.semesterID);
+    const opportunity = Opportunities.findSlugByID(opportunityInstance.opportunityID);
+    const submittedOn = doc.submittedOn;
+    const status = doc.status;
+    const processed = doc.processed;
+    return { student, semester, opportunity, submittedOn, status, processed };
   }
 }
 

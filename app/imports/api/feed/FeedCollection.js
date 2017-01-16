@@ -5,7 +5,7 @@ import { Courses } from '/imports/api/course/CourseCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module Feed */
 
@@ -25,19 +25,23 @@ class FeedCollection extends BaseInstanceCollection {
       opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       description: { type: String },
-      timestamp: { type: Number },
+      timestamp: { type: Number },   // TODO: shouldn't timestamp be a date object?
       picture: { type: String },
+      feedType: { type: String, optional: true },
     }));
   }
+
+  // TODO: The define method needs more documentation. What are valid values for each parameter?
+  // Consider multiple define methods, one for each feed type, with appropriate required params for each.
 
   /**
    * Defines a new Feed.
    * @example
    * Feed.define({ student: 'abigailkealoha',
-   *                 opportunity: 'att-hackathon
-   *                 course: undefined
-   *                 feedType: 'verified'
-   *                 timestamp: '12345465465',
+   *               opportunity: 'att-hackathon
+   *               course: undefined
+   *               feedType: 'verified'
+   *               timestamp: '12345465465',
    * @param { Object } description Object with keys student, opportunity, course, feedType, and timestamp.
    * @returns The newly created docID.
    */
@@ -47,6 +51,7 @@ class FeedCollection extends BaseInstanceCollection {
     let courseID;
     let picture;
     let slugID;
+    // TODO: The following logic is crazy hard to follow. What are allowable combinations of values?
     if (student) {
       studentID = Users.getID(student);
     }
@@ -93,8 +98,7 @@ class FeedCollection extends BaseInstanceCollection {
         picture = Users.findDoc(studentID).picture;
       }
     const feedID = this._collection.insert({
-      slugID, studentID, opportunityID, courseID,
-      description, timestamp, picture,
+      slugID, studentID, opportunityID, courseID, description, timestamp, picture, feedType,
     });
     Slugs.updateEntityID(slugID, feedID);
     return feedID;
@@ -110,6 +114,7 @@ class FeedCollection extends BaseInstanceCollection {
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.
    * Checks slugID, studentID, opportunityID, and courseID.
+   * Note that studentID, opportunityID, and courseID are all optional.
    * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
    */
   checkIntegrity() {
@@ -118,17 +123,32 @@ class FeedCollection extends BaseInstanceCollection {
       if (!Slugs.isDefined(doc.slugID)) {
         problems.push(`Bad slugID: ${doc.slugID}`);
       }
-      if (!Users.isDefined(doc.studentID)) {
+      if (doc.studentID && !Users.isDefined(doc.studentID)) {
         problems.push(`Bad studentID: ${doc.studentID}`);
       }
-      if (!Opportunities.isDefined(doc.opportunityID)) {
+      if (doc.opportunityID && !Opportunities.isDefined(doc.opportunityID)) {
         problems.push(`Bad opportunityID: ${doc.opportunityID}`);
       }
-      if (!Courses.isDefined(doc.courseID)) {
+      if (doc.courseID && !Courses.isDefined(doc.courseID)) {
         problems.push(`Bad courseID: ${doc.courseID}`);
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the Feed docID in a format acceptable to define().
+   * @param docID The docID of a Feed.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const student = Users.findSlugByID(doc.studentID);
+    const opportunity = doc.opportunityID && Opportunities.findSlugByID(doc.opportunityID);
+    const course = doc.courseID && Courses.findSlugByID(doc.courseID);
+    const feedType = doc.feedType;
+    const timestamp = doc.timestamp;
+    return { student, opportunity, course, feedType, timestamp };
   }
 }
 

@@ -13,7 +13,7 @@ import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstan
 import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
 import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module User */
 
@@ -87,17 +87,19 @@ class UserCollection extends BaseInstanceCollection {
    *                interests: ['software-engineering'],
    *                careerGoals: ['application-developer'],
    *                desiredDegree: 'bs-cs',
+   *                level: 1
    *               });
    * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
    * picture, website, interests, careerGoals, and desiredDegree are optional.
    * desiredDegree, if supplied, must be a DesiredDegree slug or docID.
+   * Level defaults to 1.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
   define({
       firstName, lastName, slug, email, role, password, picture, interests, careerGoals, desiredDegree,
-      website, uhID,
+      website, uhID, level = 1,
   }) {
     // Users can only be defined on the server side.
     if (Meteor.isServer) {
@@ -125,8 +127,8 @@ class UserCollection extends BaseInstanceCollection {
       // Now that we have a user, update fields.
       Meteor.users.update(userID, {
         $set: {
-          username: slug, firstName, lastName, slugID, email, picture, website,
-          desiredDegreeID, interestIDs, careerGoalIDs, uhID, level: 1,
+          username: slug, firstName, lastName, slugID, email, picture, website, password,
+          desiredDegreeID, interestIDs, careerGoalIDs, uhID, level,
         },
       });
 
@@ -429,6 +431,31 @@ class UserCollection extends BaseInstanceCollection {
     });
     return problems;
   }
+
+  /**
+   * Returns an object representing the User docID in a format acceptable to define().
+   * @param docID The docID of an User.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const firstName = doc.firstName;
+    const lastName = doc.lastName;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const email = doc.email;
+    const password = doc.password;
+    const role = Roles.getRolesForUser(docID)[0];
+    const uhID = doc.uhID;
+    const picture = doc.picture;
+    const website = doc.website;
+    const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
+    const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
+    const desiredDegree = doc.desiredDegreeID && DesiredDegrees.findSlugByID(doc.desiredDegreeID);
+    const level = doc.level;
+    return { firstName, lastName, slug, email, password, role, uhID, picture, website, interests, careerGoals,
+      desiredDegree, level };
+  }
+
 }
 
 /**

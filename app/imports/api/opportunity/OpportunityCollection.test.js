@@ -21,7 +21,7 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
       defineSemesters();
       const name = 'ATT Hackathon';
       const slug = 'att-hackathon-2016';
@@ -31,12 +31,16 @@ if (Meteor.isServer) {
       const sponsor = makeSampleUser(ROLE.FACULTY);
       const interests = [makeSampleInterest()];
       const semesters = ['Fall-2015'];
-      const docID = Opportunities.define({
+      let docID = Opportunities.define({
         name, slug, description, opportunityType, sponsor, interests, semesters, ice,
       });
       expect(Opportunities.isDefined(docID)).to.be.true;
+      const dumpObject = Opportunities.dumpOne(docID);
       Opportunities.removeIt(docID);
-      expect(Opportunities.isDefined(docID)).to.be.false;
+      expect(Opportunities.isDefined(slug)).to.be.false;
+      docID = Opportunities.restoreOne(dumpObject);
+      expect(Opportunities.isDefined(docID)).to.be.true;
+      Opportunities.removeIt(docID);
     });
   });
 }

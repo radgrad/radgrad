@@ -5,7 +5,7 @@ import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module FeedbackInstance */
 
@@ -50,9 +50,9 @@ class FeedbackInstanceCollection extends BaseCollection {
   }
 
   /**
-   * Depending on the logged in user publish only their WorkInstances. If
-   * the user is in the Role.ADMIN then publish all WorkInstances. If the
-   * system is in mockup mode publish all WorkInstances.
+   * Depending on the logged in user publish only their FeedbackInstances. If
+   * the user is in the Role.ADMIN then publish all FeedbackInstances. If the
+   * system is in mockup mode publish all FeedbackInstances.
    */
   publish() {
     if (Meteor.isServer) {
@@ -83,6 +83,20 @@ class FeedbackInstanceCollection extends BaseCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the FeedbackInstance docID in a format acceptable to define().
+   * @param docID The docID of a FeedbackInstance.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const feedback = Feedbacks.findSlugByID(doc.feedbackID);
+    const user = Users.findSlugByID(doc.userID);
+    const description = doc.description;
+    const area = doc.area;
+    return { feedback, user, description, area };
   }
 
 }

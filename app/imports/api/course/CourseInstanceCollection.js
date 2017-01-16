@@ -8,7 +8,7 @@ import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { makeCourseICE } from '/imports/api/ice/IceProcessor';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 
 /** @module CourseInstance */
@@ -225,6 +225,23 @@ class CourseInstanceCollection extends BaseCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the CourseInstance docID in a format acceptable to define().
+   * @param docID The docID of a CourseInstance.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const semester = Semesters.findSlugByID(doc.semesterID);
+    const course = Courses.findSlugByID(doc.courseID);
+    const note = doc.note;
+    const verified = doc.verified;
+    const creditHrs = doc.creditHrs;
+    const grade = doc.grade;
+    const student = Users.findSlugByID(doc.studentID);
+    return { semester, course, note, verified, creditHrs, grade, student };
   }
 }
 

@@ -1,2 +1,0 @@
-import './MentorQuestionsCollection';
-import './MentorAnswersCollection';

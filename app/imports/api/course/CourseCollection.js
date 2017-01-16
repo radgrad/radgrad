@@ -4,7 +4,7 @@ import { Interests } from '/imports/api/interest/InterestCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 
 /** @module Course */
@@ -112,6 +112,27 @@ class CourseCollection extends BaseInstanceCollection {
       });
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the Course docID in a format acceptable to define().
+   * @param docID The docID of a Course.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const shortName = doc.shortName;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const number = doc.number;
+    const description = doc.description;
+    const creditHrs = doc.creditHrs;
+    const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
+    const syllabus = doc.syllabus;
+    const moreInformation = doc.moreInformation;
+    const prerequisites = doc.prerequisites;
+    return { name, shortName, slug, number, description, creditHrs, interests, syllabus, moreInformation,
+      prerequisites };
   }
 }
 

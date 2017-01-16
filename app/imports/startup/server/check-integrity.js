@@ -1,4 +1,4 @@
-import { checkIntegrity } from '/imports/api/integritychecker/IntegrityChecker';
+import { checkIntegrity } from '/imports/api/integrity/IntegrityChecker';
 
 // Invoke checkIntegrity on startup, print out message if integrity issues were found.
 const integrity = checkIntegrity();

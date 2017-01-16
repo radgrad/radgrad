@@ -1,7 +1,7 @@
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 
 /** @module DesiredDegree */
@@ -60,6 +60,20 @@ class DesiredDegreeCollection extends BaseInstanceCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the DesiredDegree docID in a format acceptable to define().
+   * @param docID The docID of a DesiredDegree.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const shortName = doc.shortName;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const description = doc.description;
+    return { name, shortName, slug, description };
   }
 }
 

@@ -1,4 +1,4 @@
-<template name="Student_MentorSpace_Page_Accordion">
+<template name="Student_MentorSpace_Questions_Accordion">
   <div class="ui segments">
     <div class="ui segment">
       <div class="ui vertical accordion">
@@ -6,7 +6,7 @@
         <div class="ui active list title">
           <div class="item">
             <i class="dropdown icon"></i>
-            {{text}} ({{answerCount (questionID)}} answers)
+            {{title}} ({{answerCount (questionID)}} answers)
           </div>
         </div>
 
@@ -15,7 +15,8 @@
           {{#each listAnswers (questionID)}}
           <div class="ui divider"></div>
           <div class="author">
-            <img class="ui left floated mini image" src="../../images/mentors/{{slug}}.jpg"> {{text}}
+            <img class="ui left floated mini image" src="{{picture (mentorID)}}">
+            {{mentorName (mentorID)}} answered: {{text}}
           </div>
           {{/each}}
 

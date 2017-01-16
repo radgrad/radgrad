@@ -1,12 +1,7 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
+import { radgradCollections } from './RadGradCollections.js';
 
-/**
- * Each RadGrad collection class instance must add itself to this array so that its checkIntegrity mechanism
- * will be called.
- * @type {Array} An array of RadGrad collection class instances.
- */
-export const radgradCollections = [];
 
 export function checkIntegrity() {
   let message = `Integrity check results (${moment().format('MMM Do YYYY, H:mm:ss a')})`;

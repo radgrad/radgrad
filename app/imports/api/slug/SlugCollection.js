@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module Slug */
 
@@ -110,6 +110,17 @@ class SlugCollection extends BaseCollection {
   }
 
   /**
+   * Returns the slug name associated with this ID.
+   * @param slugID The slug ID.
+   * @returns The slug name.
+   * @throws { Meteor.Error } If the passed slugID is not valid.
+   */
+  getNameFromID(slugID) {
+    this.assertDefined(slugID);
+    return this.findDoc(slugID).name;
+  }
+
+  /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
    * @param { String | Object } docOrID A document or docID in this collection.
    */
@@ -129,11 +140,23 @@ class SlugCollection extends BaseCollection {
   }
 
   /**
-   * Returns an empty array (no integrity checking done on this collection.)
+   * Returns an empty array (no integrity checking done on Slugs.)
    * @returns {Array} An empty array.
    */
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     return [];
+  }
+
+  /**
+   * Returns an object representing the passed slug docID in a format acceptable to define().
+   * @param docID The docID of a Slug.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const entityName = doc.entityName;
+    return { name, entityName };
   }
 }
 
@@ -141,7 +164,8 @@ class SlugCollection extends BaseCollection {
  * Provides the singleton instance of a SlugCollection to all other entities.
  */
 export const Slugs = new SlugCollection();
-radgradCollections.push(Slugs);
+// Slugs are implicitly defined by other collections, so don't explicitly dump/restore them.
+// radgradCollections.push(Slugs);
 
 
 /**
@@ -152,10 +176,11 @@ Slugs.subscribe();
 
 /* eslint object-shorthand: "off" */
 
+// TODO: Should methods be in their own file or at bottom of this one? I don't think we're consistent.
 Meteor.methods({
   'SlugCollection.remove'(slug) {
     check(slug, String);
-    Slugs.remove(slug);
+    Slugs.remove(slug); // TODO: 'remove(slug)' does not even exist. Why is this method defined?
   },
   'SlugCollection._removeAll'() {
     Slugs._removeAll();

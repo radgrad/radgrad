@@ -3,8 +3,7 @@ import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection.js';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
-
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module Teaser */
@@ -85,6 +84,24 @@ class TeaserCollection extends BaseInstanceCollection {
     });
     return problems;
   }
+
+  /**
+   * Returns an object representing the Teaser docID in a format acceptable to define().
+   * @param docID The docID of a Teaser.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const title = doc.title;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const author = doc.author;
+    const url = doc.url;
+    const description = doc.description;
+    const duration = doc.duration;
+    const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
+    return { title, slug, author, url, description, duration, interests };
+  }
+
 }
 
 /**

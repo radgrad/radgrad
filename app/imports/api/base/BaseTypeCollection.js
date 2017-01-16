@@ -108,14 +108,14 @@ class BaseTypeCollection extends BaseCollection {
   }
 
   /**
-   * Returns the slugID associated with this docID.
+   * Returns the slug name associated with this docID.
    * @param docID The docID
-   * @returns { String } The slug
+   * @returns { String } The slug name
    * @throws { Meteor.Error } If docID is not associated with this entity.
    */
   findSlugByID(docID) {
     this.assertDefined(docID);
-    return this.findDoc(docID).slugID;
+    return Slugs.findDoc(this.findDoc(docID).slugID).name;
   }
 
   /**
@@ -126,6 +126,17 @@ class BaseTypeCollection extends BaseCollection {
    */
   findIdBySlug(slug) {
     return Slugs.getEntityID(slug, this._type);
+  }
+
+  /**
+   * Returns the name associated with this docID.
+   * @param docID The docID for this "type".
+   * @returns The name of this "type" instance.
+   * @throws { Meteor.Error } If the passed docID is not valid.
+   */
+  getNameFromID(docID) {
+    this.assertDefined(docID);
+    return this.findDoc(docID).name;
   }
 
   /**
@@ -143,6 +154,19 @@ class BaseTypeCollection extends BaseCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the "Type" docID in a format acceptable to define().
+   * @param docID The docID of a "Type".
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const description = doc.description;
+    return { name, slug, description };
   }
 }
 

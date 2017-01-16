@@ -11,8 +11,6 @@ import './student-home-page.css';
 import './student-mentorspace-page.css';
 import './student-mentorspace-page.html';
 import './student-mentorspace-page.js';
-import './student-mentorspace-page-accordion.html';
-import './student-mentorspace-page-accordion.js';
 
 import './student-explorer-degrees-page.html';
 import './student-explorer-degrees-page.js';
@@ -37,7 +35,6 @@ import './student-home-levels-page.js';
 
 import './student-home-ice-page.html';
 import './student-home-ice-page.js';
-import './student-home-ice-page.css';
 
 import './student-about-levels.html';
 import './student-about-levels.js';

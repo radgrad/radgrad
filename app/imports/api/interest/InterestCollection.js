@@ -2,7 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module Interest */
 
@@ -81,6 +81,21 @@ class InterestCollection extends BaseInstanceCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the Interest docID in a format acceptable to define().
+   * @param docID The docID of an Interest.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const name = doc.name;
+    const slug = Slugs.getNameFromID(doc.slugID);
+    const description = doc.description;
+    const interestType = InterestTypes.findSlugByID(doc.interestTypeID);
+    const moreInformation = doc.moreInformation;
+    return { name, slug, description, interestType, moreInformation };
   }
 }
 

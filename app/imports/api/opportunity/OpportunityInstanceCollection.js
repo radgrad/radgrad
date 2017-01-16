@@ -6,7 +6,7 @@ import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module OpportunityInstance */
 
@@ -37,6 +37,7 @@ class OpportunityInstanceCollection extends BaseCollection {
    *                               verified: false,
    *                               student: 'joesmith' });
    * @param { Object } description Semester, opportunity, and student must be slugs or IDs. Verified defaults to false.
+   * Note that only one opportunity instance can be defined for a given semester, opportunity, and student.
    * @throws {Meteor.Error} If semester, opportunity, or student cannot be resolved, or if verified is not a boolean.
    * @returns The newly created docID.
    */
@@ -49,10 +50,40 @@ class OpportunityInstanceCollection extends BaseCollection {
     if ((typeof verified) !== 'boolean') {
       throw new Meteor.Error(`${verified} is not a boolean.`);
     }
+    if (this.isOpportunityInstance(semester, opportunity, student)) {
+      throw new Meteor.Error(`An opportunity instance exists for ${semester}, ${student}, and ${opportunity}`);
+    }
     const ice = Opportunities.findDoc(opportunityID).ice;
     // Define and return the new OpportunityInstance
     const opportunityInstanceID = this._collection.insert({ semesterID, opportunityID, verified, studentID, ice });
     return opportunityInstanceID;
+  }
+
+  /**
+   * Returns the opportunityInstance document associated with semester, opportunity, and student.
+   * @param semester The semester (slug or ID).
+   * @param opportunity The opportunity (slug or ID).
+   * @param student The student (slug or ID)
+   * @returns { Object } Returns the document or null if not found.
+   * @throws { Meteor.Error } If semester, opportunity, or student does not exist.
+   */
+  findOpportunityInstanceDoc(semester, opportunity, student) {
+    const semesterID = Semesters.getID(semester);
+    const studentID = Users.getID(student);
+    const opportunityID = Opportunities.getID(opportunity);
+    return this._collection.findOne({ semesterID, studentID, opportunityID });
+  }
+
+  /**
+   * Returns true if there exists an OpportunityInstance for the given semester, opportunity, and student.
+   * @param semester The semester (slug or ID).
+   * @param opportunity The opportunity (slug or ID).
+   * @param student The student (slug or ID).
+   * @returns True if the opportunity instance exists.
+   * @throws { Meteor.Error } If semester, opportunity, or student does not exist.
+   */
+  isOpportunityInstance(semester, opportunity, student) {
+    return !!this.findOpportunityInstanceDoc(semester, opportunity, student);
   }
 
   /**
@@ -165,6 +196,20 @@ class OpportunityInstanceCollection extends BaseCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns an object representing the OpportunityInstance docID in a format acceptable to define().
+   * @param docID The docID of an OpportunityInstance.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const semester = Semesters.findSlugByID(doc.semesterID);
+    const opportunity = Opportunities.findSlugByID(doc.opportunityID);
+    const verified = doc.verified;
+    const student = Users.findSlugByID(doc.studentID);
+    return { semester, opportunity, verified, student };
   }
 }
 
