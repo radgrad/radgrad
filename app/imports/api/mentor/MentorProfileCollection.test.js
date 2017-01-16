@@ -10,7 +10,6 @@ import { ROLE } from '/imports/api/role/Role';
 
 if (Meteor.isServer) {
   describe('MentorProfileCollection', function testSuite() {
-
     before(function setup() {
       removeAllEntities();
     });

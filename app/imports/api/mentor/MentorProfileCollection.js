@@ -7,7 +7,6 @@ import { ROLE } from '/imports/api/role/Role';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module MentorAnswers */
-
 /**
  * Represents a mentor answer.
  * @extends module:Base~BaseCollection
