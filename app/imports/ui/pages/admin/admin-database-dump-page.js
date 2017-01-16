@@ -4,7 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { dumpDatabaseMethodName } from '../../../api/base/BaseCollectionMethods.js';
 import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
-
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 Template.Admin_DataBase_Dump_Page.helpers({
   results() {
@@ -36,6 +36,9 @@ Template.Admin_DataBase_Dump_Page.onCreated(function onCreated() {
   this.timestamp = new ReactiveVar();
 });
 
+// Must match the format in the server-side startup/server/fixtures.js
+export const restoreFileDateFormat = 'YYYY-MM-DD-hh-mm-ss';
+
 Template.Admin_DataBase_Dump_Page.events({
   'click .jsDumpDB': function clickEvent(event, instance) {
     event.preventDefault();
@@ -50,7 +53,7 @@ Template.Admin_DataBase_Dump_Page.events({
         instance.successOrError.set('success');
         const zip = new ZipZap();
         const dir = 'radgrad-db';
-        const fileName = `${dir}/${moment(result.timestamp).format('YYYY-MM-DD-hh-mm-ss')}.json`;
+        const fileName = `${dir}/${moment(result.timestamp).format(restoreFileDateFormat)}.json`;
         zip.file(fileName, JSON.stringify(result, null, 2));
         zip.saveAs(`${dir}.zip`);
       }

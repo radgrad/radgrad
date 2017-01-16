@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 
@@ -27,3 +27,26 @@ export const dumpDatabaseMethod = new ValidatedMethod({
     return null;
   },
 });
+
+export const restoreDatabaseMethodName = 'base.restoreDatabase';
+
+export const restoreDatabaseMethod = new ValidatedMethod({
+  name: restoreDatabaseMethodName,
+  validate: null,
+  run() {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to restore databases.');
+    } else
+      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to restore databases.');
+      }
+    // Don't do the restore except on server side (disable client-side simulation).
+    // Return a string indicating success or throw an error.
+    if (Meteor.isServer) {
+      // Delete all collections.
+      radgradCollections.map(collection => collection.dumpAll());
+    }
+    return 'The database was successfully restored.';
+  },
+});
+

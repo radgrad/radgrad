@@ -7,7 +7,7 @@ import { Users } from '/imports/api/user/UserCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { assertICE } from '/imports/api/ice/IceProcessor';
-import { radgradCollections } from '/imports/api/integritychecker/IntegrityChecker';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 

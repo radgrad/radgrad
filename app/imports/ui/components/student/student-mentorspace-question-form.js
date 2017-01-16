@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveDict } from 'meteor/reactive-dict';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -14,7 +15,11 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
-Template.Student_MentorSpace_Page.onCreated(function studentMentorSpacePageOnCreated() {
+
+const displaySuccessMessage = 'displaySuccessMessage';
+const displayErrorMessages = 'displayErrorMessages';
+
+Template.Student_MentorSpace_Question_Form.onCreated(function studentMentorSpaceMentorQuestionFormOnCreated() {
   this.autorun(() => {
     this.subscribe(Courses.getPublicationName());
     this.subscribe(CourseInstances.getPublicationName());
@@ -31,30 +36,39 @@ Template.Student_MentorSpace_Page.onCreated(function studentMentorSpacePageOnCre
     this.subscribe(AcademicYearInstances.getPublicationName());
     this.subscribe(VerificationRequests.getPublicationName());
   });
+
+  this.messageFlags = new ReactiveDict();
+  this.messageFlags.set(displaySuccessMessage, false);
+  this.messageFlags.set(displayErrorMessages, false);
 });
 
-Template.Student_MentorSpace_Page.helpers({
-  // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
-
-  questionsList() {
-    return MentorQuestions.getQuestions({ approved: true });
+Template.Student_MentorSpace_Question_Form.helpers({
+  successClass() {
+    return Template.instance().messageFlags.get(displaySuccessMessage) ? 'success' : '';
   },
-
-  mentorsList() {
-    return Users.find({ roles: ['MENTOR'] });
+  displaySuccessMessage() {
+    return Template.instance().messageFlags.get(displaySuccessMessage);
   },
-
-  mentorProfile(mentorID) {
-    return MentorProfiles.getMentorProfile(mentorID).fetch()[0];
+  errorClass() {
+    return Template.instance().messageFlags.get(displayErrorMessages) ? 'error' : '';
   },
 });
 
-Template.Student_MentorSpace_Page.events({
-  // placeholder: if you add a form to this top-level layout, handle the associated events here.
+Template.Student_MentorSpace_Question_Form.events({
+  'submit .mentorspace-question-form': function (event, instance) {
+    event.preventDefault();
+    const question = event.target.msquestion.value;
+    const slugTemp = (new Date().getTime()).toString(12); //  TODO: slug shouldn't have to be defined by the user?
+    const mentorQuestion = { title: question, slug: slugTemp, approved: true };
+    MentorQuestions.define(mentorQuestion);
+    instance.messageFlags.set(displaySuccessMessage, true);
+    instance.messageFlags.set(displayErrorMessages, false);
+    event.target.reset();
+  },
 
 });
 
-Template.Student_MentorSpace_Page.onRendered(function mentorSpaceOnRendered() {
+Template.Student_MentorSpace_Question_Form.onRendered(function mentorSpaceOnRendered() {
   this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
 
   this.$('.ui.dropdown')

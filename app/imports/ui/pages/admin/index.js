@@ -6,6 +6,9 @@ import './admin-database-integrity-check-page.js';
 
 import './admin-database-page.html';
 
+import './admin-database-restore-page.html';
+import './admin-database-restore-page.js';
+
 import './admin-datamodel-careergoals-page.html';
 import './admin-datamodel-careergoals-page.js';
 
