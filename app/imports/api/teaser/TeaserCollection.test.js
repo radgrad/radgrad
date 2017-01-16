@@ -3,10 +3,6 @@ import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { Teasers } from './TeaserCollection';
 import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
-import { makeSampleOpportunity } from '/imports/api/opportunity/SampleOpportunities.js';
-import { makeSampleUser } from '/imports/api/user/SampleUsers.js';
-import { ROLE } from '/imports/api/role/Role';
-
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
@@ -21,7 +17,6 @@ if (Meteor.isServer) {
     let description;
     let duration;
     let interests;
-    let opportunity;
 
     before(function setup() {
       removeAllEntities();
@@ -32,7 +27,6 @@ if (Meteor.isServer) {
       description = 'This is a test teaser';
       duration = '1:32:14';
       interests = [makeSampleInterest()];
-      //opportunity = makeSampleOpportunity(makeSampleUser(ROLE.FACULTY));
     });
 
     after(function tearDown() {
