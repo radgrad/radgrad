@@ -4,6 +4,9 @@ import './student-home-menu.js';
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
 
+import './student-explorer-courses-add-review-widget.html';
+import './student-explorer-courses-add-review-widget.js';
+
 import './student-explorer-courses-widget-button.html';
 import './student-explorer-courses-widget-button.js';
 

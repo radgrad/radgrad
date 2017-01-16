@@ -80,6 +80,10 @@
         {{else}}
           {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
         {{/if}}
+
+      {{#if completed}}
+        {{> Student_Explorer_Courses_Add_Review_Widget course = item}}
+        {{/if}}
       </p>
     </div>
   {{else}}

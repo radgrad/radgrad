@@ -1,0 +1,20 @@
+<template name="Student_Explorer_Courses_Add_Review_Widget">
+
+  <div class="ui padded container">
+    <div class="ui dividing header"><h4>ADD COURSE REVIEW</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Semesters_Form_Field semesters=semesters name="semester" errorMessage=(fieldError "semesters") required="true" }}
+
+        {{> Input_Form_Field label="Rating" name="rating" placeholder="Defaults to 3, between 1-15" errorMessage=(fieldError "rating") required=false}}
+      </div>
+
+      {{> TextArea_Form_Field label="Comments" rows=5 name="comments" placeholder="Explain the reasoning behind your rating here." errorMessage=(fieldError "comments") required=true}}
+
+      <button class="ui green basic mini button" type="submit">Add review for this course</button>
+      {{> Success_Message_Form_Field message="Your review was successfully added."}}
+    </form>
+  </div>
+
+</template>

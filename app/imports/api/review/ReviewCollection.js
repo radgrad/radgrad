@@ -9,8 +9,6 @@ import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 
-
-
 /** @module Review */
 
 /**
@@ -27,9 +25,9 @@ class ReviewCollection extends BaseInstanceCollection {
     super('Review', new SimpleSchema({
       slugID: { type: SimpleSchema.RegEx.Id },
       studentID: { type: SimpleSchema.RegEx.Id },
-      revieweeID: { type: SimpleSchema.RegEx.Id },
-      semesterID: { type: SimpleSchema.RegEx.Id },
       reviewType: { type: String },
+      revieweeID: { type: SimpleSchema.RegEx.Id },
+      semesterIDs: { type: [SimpleSchema.RegEx.Id] },
       rating: { type: Number },
       comments: { type: String },
       moderated: { type: Boolean },
@@ -65,10 +63,8 @@ class ReviewCollection extends BaseInstanceCollection {
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ slug, student, reviewType, reviewee, semester, rating, comments,
+  define({ slug, student, reviewType, reviewee, semesters, rating, comments,
       moderated = false, visible = true, moderatorComments }) {
-    // Get SlugID, throw error if found.
-    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Get instances, or throw error
     const studentID = Users.getID(student);
     // Get instances, or throw error if not found or not a valid reviewType
@@ -80,7 +76,7 @@ class ReviewCollection extends BaseInstanceCollection {
     } else {
       throw new Meteor.Error(`reviewType ${reviewType} is not a valid reviewType.`);
     }
-    const semesterID = Semesters.getID(semester);
+    const semesterIDs = Semesters.getIDs(semesters);
     // Make sure rating is a number between 1 and 5.
     if (!(typeof rating) === 'number' || (rating < 1) || (rating > 5)) {
       throw new Meteor.Error(`Rating ${rating} is not a number between 1 and 5.`);
@@ -89,10 +85,11 @@ class ReviewCollection extends BaseInstanceCollection {
     /* eslint no-param-reassign: "off" */
     moderated = !!moderated;
     visible = !!visible;
-
+    // Get SlugID, throw error if found.
+    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the new Review and its Slug.
-    const reviewID = this._collection.insert({
-      slugID, studentID, reviewType, revieweeID, semesterID, rating, comments, moderated, visible, moderatorComments });
+    const reviewID = this._collection.insert({ slugID, studentID, reviewType, revieweeID, semesterIDs,
+      rating, comments, moderated, visible, moderatorComments });
     Slugs.updateEntityID(slugID, reviewID);
 
     // Return the id to the newly created Opportunity.
@@ -137,9 +134,11 @@ class ReviewCollection extends BaseInstanceCollection {
       if (!Opportunities.isDefined(doc.revieweeID) && !Courses.isDefined(doc.revieweeID)) {
         problems.push(`Bad reviewee: ${doc.revieweeID}`);
       }
-      if (!Semesters.isDefined(doc.semesterID)) {
-        problems.push(`Bad semesterID: ${doc.semesterID}`);
+    _.forEach(doc.semesterIDs, semesterID => {
+      if (!Semesters.isDefined(semesterID)) {
+        problems.push(`Bad semesterID: ${semesterID}`);
       }
+    });
   });
     return problems;
   }

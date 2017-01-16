@@ -111,6 +111,15 @@ Template.Student_Explorer_Courses_Page.helpers({
     });
     return addedCourses;
   },
+  completed() {
+    let ret = false;
+    const courseSlugName = FlowRouter.getParam('course');
+    const courseStatus = passedCourseHelper(courseSlugName);
+    if (courseStatus === 'Completed') {
+      ret = true;
+    }
+    return ret;
+  },
   courseName(course) {
     return course.shortName;
   },
