@@ -275,27 +275,27 @@ studentRoutes.route('/home', {
   },
 });
 
-export const studentHomePageAboutMeRouteName = 'Student_AboutMe';
+export const studentHomeAboutMePageRouteName = 'Student_Home_AboutMe_Page';
 studentRoutes.route('/home/aboutme', {
-  name: studentHomePageAboutMeRouteName,
+  name: studentHomeAboutMePageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentHomePageAboutMeRouteName });
+    BlazeLayout.render('Student_Layout', { main: studentHomeAboutMePageRouteName });
   },
 });
 
-export const studentHomePageLevelsRouteName = 'Student_Levels';
+export const studentHomeLevelsPageRouteName = 'Student_Home_Levels_Page';
 studentRoutes.route('/home/levels', {
-  name: studentHomePageLevelsRouteName,
+  name: studentHomeLevelsPageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentHomePageLevelsRouteName });
+    BlazeLayout.render('Student_Layout', { main: studentHomeLevelsPageRouteName });
   },
 });
 
-export const studentHomePageIceRouteName = 'Student_Ice';
+export const studentHomeIcePageRouteName = 'Student_Home_Ice_Page';
 studentRoutes.route('/home/ice', {
-  name: studentHomePageIceRouteName,
+  name: studentHomeIcePageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentHomePageIceRouteName });
+    BlazeLayout.render('Student_Layout', { main: studentHomeIcePageRouteName });
   },
 });
 

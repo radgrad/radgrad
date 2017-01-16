@@ -16,7 +16,7 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-Template.Student_Ice.helpers({
+Template.Student_Home_Ice_Page.helpers({
   earnedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -207,11 +207,11 @@ Template.Student_Ice.helpers({
   },
 });
 
-Template.Student_Ice.events({
+Template.Student_Home_Ice_Page.events({
   // add events here
 });
 
-Template.Student_Ice.onCreated(function studentIceOnCreated() {
+Template.Student_Home_Ice_Page.onCreated(function studentHomeIcePageOnCreated() {
   this.state = new ReactiveDict();
   if (getUserIdFromRoute()) {
     this.state.set(sessionKeys.CURRENT_STUDENT_ID, getUserIdFromRoute());
@@ -230,11 +230,11 @@ Template.Student_Ice.onCreated(function studentIceOnCreated() {
   });
 });
 
-Template.Student_Ice.onDestroyed(function studentIceOnDestroyed() {
+Template.Student_Home_Ice_Page.onDestroyed(function studentHomeIcePageOnDestroyed() {
   // add your statement here
 });
 
-Template.Student_Ice.onRendered(function enableAccordion() {
+Template.Student_Home_Ice_Page.onRendered(function enableAccordion() {
   this.$('.accordion').accordion({
     selector: {
       trigger: '.title',

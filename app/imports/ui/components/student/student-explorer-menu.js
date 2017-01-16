@@ -40,6 +40,7 @@ Template.Student_Explorer_Menu.helpers({
   itemName(item) {
     return item.name;
   },
+  // TODO: Don't hardcode the first list item
   firstCourse() {
     let ret = '';
     const course = Courses.find({ number: 'ICS 101' }).fetch();

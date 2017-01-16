@@ -29,15 +29,15 @@ import './student-explorer-opportunities-page.js';
 import './student-explorer-careergoals-page.html';
 import './student-explorer-careergoals-page.js';
 
-import './student-aboutme.html';
-import './student-aboutme.js';
+import './student-home-aboutme-page.html';
+import './student-home-aboutme-page.js';
 
-import './student-levels.html';
-import './student-levels.js';
+import './student-home-levels-page.html';
+import './student-home-levels-page.js';
 
-import './student-ice.html';
-import './student-ice.js';
-import './student-ice.css';
+import './student-home-ice-page.html';
+import './student-home-ice-page.js';
+import './student-home-ice-page.css';
 
 import './student-about-levels.html';
 import './student-about-levels.js';

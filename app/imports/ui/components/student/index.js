@@ -1,11 +1,5 @@
-import './career-goals.html';
-import './career-goals.js';
-
-import './explorer-dropdown.html';
-import './explorer-dropdown.js';
-
-import './home-menu.html';
-import './home-menu.js';
+import './student-home-menu.html';
+import './student-home-menu.js';
 
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
@@ -44,9 +38,6 @@ import './student-ice-widget.css';
 import './student-ice-widget.html';
 import './student-ice-widget.js';
 
-import './interests.html';
-import './interests.js';
-
 import './student-about-me-widget.html';
 import './student-about-me-widget.js';
 
@@ -82,6 +73,3 @@ import './student-opportunities-of-interest-widget.js';
 
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';
-
-import './warn-recommend.html';
-import './warn-recommend.js';

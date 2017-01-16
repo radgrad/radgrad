@@ -12,6 +12,9 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
   equals(a, b) {
     return a === b;
   },
+  empty(list) {
+    return list.length === 0;
+  },
   opportunitySemesters() {
     const opp = this.opportunity;
     const semesters = opp.semesterIDs;

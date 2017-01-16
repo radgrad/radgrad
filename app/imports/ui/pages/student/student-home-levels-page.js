@@ -4,7 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-Template.Student_Levels.helpers({
+Template.Student_Home_Levels_Page.helpers({
   students(userLevel) {
     if (getUserIdFromRoute()) {
       const students = [];
