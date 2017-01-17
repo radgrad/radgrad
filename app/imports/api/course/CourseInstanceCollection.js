@@ -193,7 +193,7 @@ class CourseInstanceCollection extends BaseCollection {
    */
   clientUpdateGrade(courseInstanceID, grade) {
     const logger = new Logger('CourseInstance.clientUpdateGrade');
-    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${grade}`);
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${courseInstanceID}, ${grade}`);
     Meteor.call('CourseInstance.updateGrade', { courseInstanceID, grade },
         function callback(error, result) {
           if (error) {
@@ -214,7 +214,7 @@ class CourseInstanceCollection extends BaseCollection {
    */
   updateGrade(courseInstanceID, grade) {
     const logger = new Logger('CourseInstance.updateGrade');
-    logger.info(`${grade}`);
+    logger.info(`${courseInstanceID}, ${grade}`);
     this.assertDefined(courseInstanceID);
     logger.info('after assert');
     const ice = makeCourseICE(courseInstanceID, grade);

@@ -180,7 +180,9 @@ Template.Semester_List.helpers({
     return false;
   },
   isGrade(courseInstanceID, grade) {
+    const logger = new Logger('semester-list.isGrade');
     try {
+      logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${courseInstanceID}, ${grade}`);
       const ci = CourseInstances.findDoc(courseInstanceID);
       return ci.grade === grade;
       /* eslint no-unused-vars: "off" */
@@ -365,17 +367,20 @@ Template.Semester_List.events({
     const template = Template.instance();
     const div = event.target.parentElement.parentElement;
     const grade = div.childNodes[1].value;
+    const logger = new Logger('semester-list.clickItemGrade');
     // const body = $('body');
     // body.addClass('waiting');
+    // eslint-disable-next-line max-len
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} about to call CourseInstances.clientUpdateGrade(${div.id}, ${grade})`);
     CourseInstances.clientUpdateGrade(div.id, grade);
-    const logger = new Logger('semester-list.clickItemGrade');
     const ci = CourseInstances.findDoc(div.id);
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} find returned id: ${ci._id} with grade ${ci.grade}`);
     template.state.set(plannerKeys.detailICE, ci.ice);
     logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} set ICE to {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}}`);
     template.state.set(plannerKeys.detailCourseInstance, ci);
-    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade} \
-      ${template.state.get(plannerKeys.detailCourseInstance).grade}`);
-    Tracker.flush();
+    // Tracker.flush();
+    // eslint-disable-next-line max-len
+    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade} ${template.state.get(plannerKeys.detailCourseInstance).grade}`);
   },
   'click .jsDelCourse': function clickJsDelCourse(event) {
     // event.preventDefault();

@@ -607,6 +607,7 @@ Template.Inspector.events({
 
 Template.Inspector.onCreated(function inspectorOnCreated() {
   this.state = this.data.dictionary;
+  this.subscribe(CourseInstances.getPublicationName());
 });
 
 Template.Inspector.onRendered(function inspectorOnRendered() {
