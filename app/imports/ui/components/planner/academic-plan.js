@@ -679,7 +679,7 @@ Template.Academic_Plan_2.helpers({
     const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     const instance = Template.instance();
     if (ay.length > 0 && !instance.state.get('startYear')) {
-      instance.state.set('startYear', ay[ay.length - 1].year);
+      instance.state.set('startYear', ay[ay.length - 1].year);  // TODO: Do we want to show the future or the past?
     }
     const ret = lodash.filter(ay, function filter(academicYear) {
       const year = academicYear.year;
