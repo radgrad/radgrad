@@ -1,0 +1,13 @@
+<template name="Cumulative_Ice_Component">
+  <div class="ui three column stackable grid" style="margin: 0;">
+    <div class="column">
+      {{> First_Menu_Ice earned=(earnedI year) projected=(projectedI year) iceType="innov"}}
+    </div>
+    <div class="column">
+      {{> First_Menu_Ice earned=(earnedC year) projected=(projectedC year) iceType="comp"}}
+    </div>
+    <div class="column">
+      {{> First_Menu_Ice earned=(earnedE year) projected=(projectedE year) iceType="exp"}}
+    </div>
+  </div>
+</template>
