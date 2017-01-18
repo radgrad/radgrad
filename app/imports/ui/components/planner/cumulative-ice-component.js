@@ -11,7 +11,7 @@ function getCumulativeIceInstances(year) {
   const ays = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
   const years = _.filter(ays, function filter(academicYear) {
     const ayYear = academicYear.year;
-    return ayYear <= year;
+    return ayYear <= year.year;
   });
   let instances = [];
   _.map(years, function findInstances(ay) {
