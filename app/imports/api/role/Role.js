@@ -48,7 +48,7 @@ export function assertRole(role) {
 
 if (Meteor.isServer) {
   if (Roles.getAllRoles().count() !== 6) {
-    Roles.getAllRoles().fetch().map(role => Roles.deleteRole(role.name));
+    // Roles.getAllRoles().fetch().map(role => Roles.deleteRole(role.name));
     _.values(ROLE).map(role => Roles.createRole(role));
   }
 }
