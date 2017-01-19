@@ -1,0 +1,18 @@
+.landing-green-background {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: green;
+  color: white;
+}
+
+.landing-green-background-header {
+  font-family: 'Roboto';
+  font-weight: 800;
+  font-size: 72px;
+}
+
+.landing-green-background h3 {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 36px;
+}

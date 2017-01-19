@@ -41,7 +41,6 @@ import '/imports/ui/layouts/student';
 import '/imports/ui/pages/admin';
 import '/imports/ui/pages/advisor';
 import '/imports/ui/pages/faculty';
-import '/imports/ui/pages/landing';
 import '/imports/ui/pages/mentor';
 import '/imports/ui/pages/student';
 

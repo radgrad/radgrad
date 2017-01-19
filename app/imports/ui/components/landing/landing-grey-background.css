@@ -1,16 +1,16 @@
-.landing-section-2 {
+.landing-grey-background {
   padding-top: 30px;
   padding-bottom: 30px;
   color: green;
 }
 
-.landing-section-2-header {
+.landing-grey-background-header {
   font-family: 'Roboto';
   font-weight: 800;
   font-size: 72px;
 }
 
-.landing-section-2 h3 {
+.landing-grey-background h3 {
   font-family: 'Roboto';
   font-weight: 400;
   font-size: 36px;

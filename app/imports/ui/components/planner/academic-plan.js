@@ -554,51 +554,6 @@ Template.Academic_Plan_2.helpers({
     }
     return null;
   },
-  yearC(year) {
-    let cis = [];
-    const semesterIDs = year.semesterIDs;
-    semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(oi);
-    });
-    return getTotalICE(cis).c;
-  },
-  yearE(year) {
-    let cis = [];
-    const semesterIDs = year.semesterIDs;
-    semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(oi);
-    });
-    return getTotalICE(cis).e;
-  },
-  yearI(year) {
-    let cis = [];
-    const semesterIDs = year.semesterIDs;
-    semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(oi);
-    });
-    return getTotalICE(cis).i;
-  },
   yearICE(year) {
     let cis = [];
     const semesterIDs = year.semesterIDs;
@@ -613,51 +568,6 @@ Template.Academic_Plan_2.helpers({
       cis = cis.concat(oi);
     });
     return getTotalICE(cis);
-  },
-  yearPlanningC(year) {
-    let cis = [];
-    const semesterIDs = year.semesterIDs;
-    semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(oi);
-    });
-    return getPlanningICE(cis).c;
-  },
-  yearPlanningE(year) {
-    let cis = [];
-    const semesterIDs = year.semesterIDs;
-    semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(oi);
-    });
-    return getPlanningICE(cis).e;
-  },
-  yearPlanningI(year) {
-    let cis = [];
-    const semesterIDs = year.semesterIDs;
-    semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({
-        studentID: getUserIdFromRoute(), semesterID: sem,
-      }).fetch();
-      cis = cis.concat(oi);
-    });
-    return getPlanningICE(cis).i;
   },
   yearPlanningICE(year) {
     let cis = [];
@@ -679,7 +589,7 @@ Template.Academic_Plan_2.helpers({
     const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     const instance = Template.instance();
     if (ay.length > 0 && !instance.state.get('startYear')) {
-      instance.state.set('startYear', ay[ay.length - 1].year);
+      instance.state.set('startYear', ay[ay.length - 1].year);  // TODO: Do we want to show the future or the past?
     }
     const ret = lodash.filter(ay, function filter(academicYear) {
       const year = academicYear.year;

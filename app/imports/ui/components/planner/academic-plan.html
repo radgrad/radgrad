@@ -18,11 +18,12 @@
           <div class="row noTopPadding">
             {{#each year in years}}
               <div class="column">
-                {{#if isFuture year}}
-                  {{> ICE_Badge_Proj ice=(yearPlanningICE year)}}
-                {{else}}
-                  {{> ICE_Badge ice=(yearICE year)}}
-                {{/if}}
+                {{> Cumulative_Ice_Component year=year}}
+                <!--{{#if isFuture year}}-->
+                  <!--{{> ICE_Badge_Proj ice=(yearPlanningICE year)}}-->
+                <!--{{else}}-->
+                  <!--{{> ICE_Badge ice=(yearICE year)}}-->
+                <!--{{/if}}-->
             </div>
             {{/each}}
           </div>
@@ -64,7 +65,6 @@
     }
 
     function drag(ev) {
-      console.log(ev.target);
       ev.dataTransfer.setData("text", ev.target.id);
     }
   </script>
