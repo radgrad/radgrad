@@ -40,7 +40,6 @@ Template.Student_Explorer_Menu.helpers({
   itemName(item) {
     return item.name;
   },
-  // TODO: Don't hardcode the first list item
   firstCourse() {
     let ret;
     const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
