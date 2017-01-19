@@ -14,14 +14,17 @@
       {{#each review in reviews}}
         {{#with reviewData review}}
           <div class="item">
-            <div class="header">
-              {{#each star in stars}}
-                <i class="{{star}}"></i>
-              {{/each}}
-              <div style="float: right">{{semester}}</div>
+            <div class="ui grid">
+              <div class="four wide column">
+                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><b>{{name}}</b><br>{{semester}}
+              </div>
+              <div class="twelve wide column">
+                {{#each star in stars}}
+                  <i class="{{star}}"></i>
+                {{/each}}
+                <br><div style="padding-top: 5px">{{comments}}</div>
+              </div>
             </div>
-            {{comments}}
-            <div style="float: right; padding-top:10px;"><img class="ui avatar image" src="{{picture}}">{{name}}</div>
           </div>
         {{/with}}
       {{/each}}

@@ -147,7 +147,7 @@ Template.Student_Explorer_Menu.helpers({
     let ret = '';
     const user = Users.findDoc({ username: getRouteUserName() });
     if (_.includes(user.careerGoalIDs, careerGoal._id)) {
-      ret = 'yellow star icon';
+      ret = 'check green circle outline icon';
     }
     return ret;
   },
@@ -155,7 +155,7 @@ Template.Student_Explorer_Menu.helpers({
     let ret = '';
     const user = Users.findDoc({ username: getRouteUserName() });
     if (_.includes(user.desiredDegreeID, degree._id)) {
-      ret = 'yellow star icon';
+      ret = 'check green circle outline icon';
     }
     return ret;
   },
@@ -163,7 +163,7 @@ Template.Student_Explorer_Menu.helpers({
     let ret = '';
     const user = Users.findDoc({ username: getRouteUserName() });
     if (_.includes(user.interestIDs, interest._id)) {
-      ret = 'yellow star icon';
+      ret = 'check green circle outline icon';
     }
     return ret;
   },
@@ -174,7 +174,7 @@ Template.Student_Explorer_Menu.helpers({
       courseID: course._id,
     }).fetch();
     if (ci.length > 0) {
-      ret = 'yellow star icon';
+      ret = 'check green circle outline icon';
     }
     return ret;
   },
@@ -185,7 +185,7 @@ Template.Student_Explorer_Menu.helpers({
       opportunityID: opportunity._id,
     }).fetch();
     if (oi.length > 0) {
-      ret = 'yellow star icon';
+      ret = 'check green circle outline icon';
     }
     return ret;
   },
