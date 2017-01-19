@@ -7,6 +7,12 @@ import './student-explorer-courses-widget.js';
 import './student-explorer-courses-add-review-widget.html';
 import './student-explorer-courses-add-review-widget.js';
 
+import './student-explorer-courses-edit-review-widget.html';
+import './student-explorer-courses-edit-review-widget.js';
+
+import './student-explorer-courses-review-widget.html';
+import './student-explorer-courses-review-widget.js';
+
 import './student-explorer-courses-widget-button.html';
 import './student-explorer-courses-widget-button.js';
 

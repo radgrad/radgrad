@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -56,6 +57,14 @@ Template.Student_Explorer_Courses_Widget.helpers({
     }
     return ret;
   },
+  review() {
+    let review = '';
+    review = Reviews.find({
+      studentID: getUserIdFromRoute(),
+      revieweeID: this.item._id,
+    }).fetch();
+    return review[0];
+  },
   tableStyle(table) {
     let tableColor;
     let tableIcon;
@@ -103,6 +112,7 @@ Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCours
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Reviews.getPublicationName());
 });
 
 Template.Student_Explorer_Courses_Widget.onRendered(function studentExplorerCoursesWidgetOnRendered() {

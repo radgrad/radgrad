@@ -1,0 +1,26 @@
+<template name="Student_Explorer_Courses_Edit_Review_Widget">
+
+  <div style="padding-top:30px;" class="ui padded container">
+  <div class="ui dividing header"><h4>EDIT COURSE REVIEW</h4>
+    </div>
+    {{#if review.visible}}
+      <p><i class="green checkmark icon"></i>Your post has been approved by moderators and is visible to the RadGrad community.</p>
+    {{else}}
+      <p><i class="warning red circle icon"></i>Your post has been hidden by moderators for the following reasons:
+      {{course.moderatorComments}}</p>
+    {{/if}}
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+      <div class="fields">
+        {{> Semesters_Single_Form_Field semesters=semesters name="semester" errorMessage=(fieldError "semesters") selectedSemesterID=review.semesterID required="true" }}
+
+        {{> Input_Form_Field label="Rating" name="rating" value=review.rating placeholder="Defaults to 3, between 1-15" errorMessage=(fieldError "rating") required=false}}
+      </div>
+
+      {{> TextArea_Form_Field label="Comments" rows=5 name="comments" value=review.comments placeholder="Explain the reasoning behind your rating here." errorMessage=(fieldError "comments") required=true}}
+
+      <button class="ui green basic mini button" type="submit">Submit edited review</button>
+      {{> Success_Message_Form_Field message="Your review was successfully updated."}}
+    </form>
+  </div>
+
+</template>

@@ -81,9 +81,14 @@
           {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
         {{/if}}
 
+        {{> Student_Explorer_Courses_Review_Widget course = item}}
       {{#if completed}}
-        {{> Student_Explorer_Courses_Add_Review_Widget course = item}}
+        {{#if reviewed}}
+          {{> Student_Explorer_Courses_Edit_Review_Widget review = review course = item}}
+        {{else}}
+          {{> Student_Explorer_Courses_Add_Review_Widget course = item}}
         {{/if}}
+      {{/if}}
       </p>
     </div>
   {{else}}

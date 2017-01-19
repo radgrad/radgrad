@@ -34,6 +34,9 @@ import './routename-form-field.js';
 import './semesters-form-field.html';
 import './semesters-form-field.js';
 
+import './semesters-single-form-field.html';
+import './semesters-single-form-field.js';
+
 import './sponsor-form-field.html';
 import './sponsor-form-field.js';
 

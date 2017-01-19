@@ -1,0 +1,31 @@
+<template name="Student_Explorer_Courses_Review_Widget">
+
+  <div style="padding-top: 30px;" class="ui padded container">
+    <div class="ui dividing header"><h4>COURSE REVIEWS
+      <div style="float: right">
+        <i>Average review: </i>
+        {{#each star in averageStars}}
+        <i class="{{star}}"></i>
+        {{/each}}
+      </div>
+      </h4>
+    </div>
+    <div class="ui middle aligned very relaxed divided list">
+      {{#each review in reviews}}
+        {{#with reviewData review}}
+          <div class="item">
+            <div class="header">
+              {{#each star in stars}}
+                <i class="{{star}}"></i>
+              {{/each}}
+              <i>Semester: {{semester}}</i>
+            </div>
+            {{comments}}
+            <div style="float: right; padding-top:5px;"><i>Reviewed by: </i><img class="ui avatar image" src="{{picture}}">{{name}}</div>
+          </div>
+        {{/with}}
+      {{/each}}
+    </div>
+  </div>
+
+</template>

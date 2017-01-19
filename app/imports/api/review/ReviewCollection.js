@@ -27,7 +27,7 @@ class ReviewCollection extends BaseInstanceCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       reviewType: { type: String },
       revieweeID: { type: SimpleSchema.RegEx.Id },
-      semesterIDs: { type: [SimpleSchema.RegEx.Id] },
+      semesterID: { type: SimpleSchema.RegEx.Id },
       rating: { type: Number },
       comments: { type: String },
       moderated: { type: Boolean },
@@ -63,7 +63,7 @@ class ReviewCollection extends BaseInstanceCollection {
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ slug, student, reviewType, reviewee, semesters, rating, comments,
+  define({ slug, student, reviewType, reviewee, semester, rating, comments,
       moderated = false, visible = true, moderatorComments }) {
     // Get instances, or throw error
     const studentID = Users.getID(student);
@@ -76,7 +76,8 @@ class ReviewCollection extends BaseInstanceCollection {
     } else {
       throw new Meteor.Error(`reviewType ${reviewType} is not a valid reviewType.`);
     }
-    const semesterIDs = Semesters.getIDs(semesters);
+    console.log(semester);
+    const semesterID = Semesters.getID(semester);
     // Make sure rating is a number between 1 and 5.
     if (!(typeof rating) === 'number' || (rating < 1) || (rating > 5)) {
       throw new Meteor.Error(`Rating ${rating} is not a number between 1 and 5.`);
@@ -88,7 +89,7 @@ class ReviewCollection extends BaseInstanceCollection {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the new Review and its Slug.
-    const reviewID = this._collection.insert({ slugID, studentID, reviewType, revieweeID, semesterIDs,
+    const reviewID = this._collection.insert({ slugID, studentID, reviewType, revieweeID, semesterID,
       rating, comments, moderated, visible, moderatorComments });
     Slugs.updateEntityID(slugID, reviewID);
 
@@ -134,11 +135,9 @@ class ReviewCollection extends BaseInstanceCollection {
       if (!Opportunities.isDefined(doc.revieweeID) && !Courses.isDefined(doc.revieweeID)) {
         problems.push(`Bad reviewee: ${doc.revieweeID}`);
       }
-    _.forEach(doc.semesterIDs, semesterID => {
-      if (!Semesters.isDefined(semesterID)) {
-        problems.push(`Bad semesterID: ${semesterID}`);
+      if (!Semesters.isDefined(doc.semesterID)) {
+        problems.push(`Bad studentID: ${doc.semesterID}`);
       }
-    });
   });
     return problems;
   }

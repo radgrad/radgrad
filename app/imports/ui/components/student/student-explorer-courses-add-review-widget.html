@@ -1,11 +1,11 @@
 <template name="Student_Explorer_Courses_Add_Review_Widget">
 
-  <div class="ui padded container">
+  <div style="padding-top:30px;" class="ui padded container">
     <div class="ui dividing header"><h4>ADD COURSE REVIEW</h4></div>
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> Semesters_Form_Field semesters=semesters name="semester" errorMessage=(fieldError "semesters") required="true" }}
+        {{> Semesters_Single_Form_Field semesters=semesters name="semester" errorMessage=(fieldError "semester") required="true" }}
 
         {{> Input_Form_Field label="Rating" name="rating" placeholder="Defaults to 3, between 1-15" errorMessage=(fieldError "rating") required=false}}
       </div>

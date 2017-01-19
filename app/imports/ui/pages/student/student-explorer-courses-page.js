@@ -7,6 +7,7 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { makeLink } from '../../components/admin/datamodel-utilities';
+import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
@@ -125,6 +126,17 @@ Template.Student_Explorer_Courses_Page.helpers({
   },
   count() {
     return Courses.count() - 1;
+  },
+  reviewed(course) {
+    let ret = false;
+    const review = Reviews.find({
+      studentID: getUserIdFromRoute(),
+      revieweeID: course._id,
+    }).fetch();
+    if (review.length > 0) {
+      ret = true;
+    }
+    return ret;
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
