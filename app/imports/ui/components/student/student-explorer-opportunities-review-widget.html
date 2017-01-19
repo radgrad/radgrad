@@ -1,14 +1,14 @@
-<template name="Student_Explorer_Courses_Review_Widget">
+<template name="Student_Explorer_Opportunities_Review_Widget">
 
   <div style="padding-top: 30px;" class="ui padded container">
-    <div class="ui dividing header"><h4>COURSE REVIEWS
+    <div class="ui dividing header"><h4>OPPORTUNITY REVIEWS
       <div style="float: right">
         <i>Average review: </i>
         {{#each star in averageStars}}
-        <i class="{{star}}"></i>
+          <i class="{{star}}"></i>
         {{/each}}
       </div>
-      </h4>
+    </h4>
     </div>
     <div class="ui middle aligned very relaxed divided list">
       {{#each review in reviews}}

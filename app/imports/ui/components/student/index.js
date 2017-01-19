@@ -28,6 +28,15 @@ import './student-explorer-interests-widget.js';
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';
 
+import './student-explorer-opportunities-add-review-widget.html';
+import './student-explorer-opportunities-add-review-widget.js';
+
+import './student-explorer-opportunities-edit-review-widget.html';
+import './student-explorer-opportunities-edit-review-widget.js';
+
+import './student-explorer-opportunities-review-widget.html';
+import './student-explorer-opportunities-review-widget.js';
+
 import './student-explorer-opportunities-widget.html';
 import './student-explorer-opportunities-widget.js';
 

@@ -5,18 +5,18 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
-Template.Student_Explorer_Courses_Review_Widget.onCreated(function onCreated() {
+Template.Student_Explorer_Opportunities_Review_Widget.onCreated(function onCreated() {
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Reviews.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
 
-function averageRatingHelper(course) {
+function averageRatingHelper(opportunity) {
   let averageRating = 0;
   let numReviews = 0;
   const matchingReviews = Reviews.find({
-    revieweeID: course._id,
+    revieweeID: opportunity._id,
   }).fetch();
   numReviews = matchingReviews.length;
   _.map(matchingReviews, (review) => {
@@ -26,20 +26,20 @@ function averageRatingHelper(course) {
   return Math.floor(averageRating);
 }
 
-Template.Student_Explorer_Courses_Review_Widget.helpers({
+Template.Student_Explorer_Opportunities_Review_Widget.helpers({
   reviews() {
-    const course = this.course;
+    const opportunity = this.opportunity;
     const matchingReviews = Reviews.find({
-      revieweeID: course._id,
+      revieweeID: opportunity._id,
     }).fetch();
     return matchingReviews;
   },
   averageRating() {
-    return averageRatingHelper(this.course);
+    return averageRatingHelper(this.opportunity);
   },
   averageStars() {
-    const reviewRating = averageRatingHelper(this.course);
-    const reviewStars = []
+    const reviewRating = averageRatingHelper(this.opportunity);
+    const reviewStars = [];
     for (let i = 0; i < reviewRating; i += 1) {
       reviewStars.push('yellow fitted large star icon');
     };
@@ -67,6 +67,6 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
   },
 });
 
-Template.Student_Explorer_Courses_Review_Widget.events({
+Template.Student_Explorer_Opportunities_Review_Widget.events({
 
 });

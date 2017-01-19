@@ -18,7 +18,6 @@ export function getSchemaDataFromEvent(schema, event) {
       const selectedValues = _.filter(event.target[key].selectedOptions, (option) => option.selected);
       eventData[key] = _.map(selectedValues, (option) => option.value);
     } else {
-      console.log(key);
       eventData[key] = event.target[key].value;
     }
   });

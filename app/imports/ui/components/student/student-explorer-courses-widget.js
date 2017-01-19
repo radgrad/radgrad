@@ -65,6 +65,17 @@ Template.Student_Explorer_Courses_Widget.helpers({
     }).fetch();
     return review[0];
   },
+  reviews() {
+    let ret = false;
+    let reviews = '';
+    reviews = Reviews.find({
+      revieweeID: this.item._id,
+    }).fetch();
+    if (reviews.length > 0) {
+      ret = true;
+    }
+    return ret;
+  },
   tableStyle(table) {
     let tableColor;
     let tableIcon;
