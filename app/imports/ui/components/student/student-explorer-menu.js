@@ -42,42 +42,42 @@ Template.Student_Explorer_Menu.helpers({
   },
   // TODO: Don't hardcode the first list item
   firstCourse() {
-    let ret = '';
-    const course = Courses.find({ number: 'ICS 101' }).fetch();
-    if (course.length > 0) {
-      ret = Slugs.findDoc(course[0].slugID).name;
+    let ret;
+    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    if (courses.length > 0) {
+      ret = Slugs.findDoc(courses[0].slugID).name;
     }
     return ret;
   },
   firstCareerGoal() {
-    let ret = '';
-    const careerGoal = CareerGoals.find({ name: 'Database Administrator' }).fetch();
-    if (careerGoal.length > 0) {
-      ret = Slugs.findDoc(careerGoal[0].slugID).name;
+    let ret;
+    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
+    if (careerGoals.length > 0) {
+      ret = Slugs.findDoc(careerGoals[0].slugID).name;
     }
     return ret;
   },
   firstDegree() {
-    let ret = '';
-    const degree = DesiredDegrees.find({ name: 'B.S. in Computer Science' }).fetch();
-    if (degree.length > 0) {
-      ret = Slugs.findDoc(degree[0].slugID).name;
+    let ret;
+    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    if (degrees.length > 0) {
+      ret = Slugs.findDoc(degrees[0].slugID).name;
     }
     return ret;
   },
   firstOpportunity() {
-    let ret = '';
-    const opportunity = Opportunities.find({ name: 'HI-SEAS' }).fetch();
-    if (opportunity.length > 0) {
-      ret = Slugs.findDoc(opportunity[0].slugID).name;
+    let ret;
+    const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    if (opportunities.length > 0) {
+      ret = Slugs.findDoc(opportunities[0].slugID).name;
     }
     return ret;
   },
   firstInterest() {
-    let ret = '';
-    const interest = Interests.find({ name: 'Algorithms' }).fetch();
-    if (interest.length > 0) {
-      ret = Slugs.findDoc(interest[0].slugID).name;
+    let ret;
+    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
+    if (interests.length > 0) {
+      ret = Slugs.findDoc(interests[0].slugID).name;
     }
     return ret;
   },
