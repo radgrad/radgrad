@@ -307,7 +307,7 @@ Template.Semester_List.events({
       semester: semSlug,
       course: courseSlug,
       verified: false,
-      note: event.target.text,
+      note: event.target.text.substring(0, 7),
       grade: 'B',
       student: username,
     };
