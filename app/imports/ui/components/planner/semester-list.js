@@ -180,9 +180,9 @@ Template.Semester_List.helpers({
     return false;
   },
   isGrade(courseInstanceID, grade) {
-    const logger = new Logger('semester-list.isGrade');
+    // const logger = new Logger('semester-list.isGrade');
     try {
-      logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${courseInstanceID}, ${grade}`);
+      // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${courseInstanceID}, ${grade}`);
       const ci = CourseInstances.findDoc(courseInstanceID);
       return ci.grade === grade;
       /* eslint no-unused-vars: "off" */
@@ -399,7 +399,6 @@ Template.Semester_List.events({
 Template.Semester_List.onCreated(function semesterListOnCreate() {
   if (this.data) {
     this.state = this.data.dictionary;
-  } else {
   }
   this.localState = new ReactiveDict();
 });

@@ -801,6 +801,7 @@ Template.Academic_Plan_2.events({
     if (firstClass === 'courseInstance') {
       if (CourseInstances.isDefined(target.id)) {
         const ci = CourseInstances.findDoc(target.id);
+        // eslint-disable-next-line max-len
         logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade}`);
         // console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS'), 'clickTrClickEnabled', ci.ice, ci.grade);
         template.state.set(plannerKeys.detailCourse, null);
