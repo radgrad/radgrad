@@ -179,7 +179,7 @@ class CourseInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this.publicationNames[0], function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT])) {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
@@ -190,7 +190,7 @@ class CourseInstanceCollection extends BaseCollection {
           opportunityID: { type: String },
         }).validate({ courseID });
 
-        return this._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
+        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
       });
       Meteor.publish(this.publicationNames[2],
           function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
@@ -198,7 +198,7 @@ class CourseInstanceCollection extends BaseCollection {
               studentID: { type: String },
               semesterID: { type: String },
             }).validate({ studentID, semesterID });
-            return this._collection.find({ studentID, semesterID });
+            return instance._collection.find({ studentID, semesterID });
           });
     }
   }
@@ -224,10 +224,10 @@ class CourseInstanceCollection extends BaseCollection {
    * @param grade The new grade.
    */
   clientUpdateGrade(courseInstanceID, grade) {
-    const logger = new Logger('CourseInstance.clientUpdateGrade');
-    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${courseInstanceID}, ${grade}`);
+    // const logger = new Logger('CourseInstance.clientUpdateGrade');
+    // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${courseInstanceID}, ${grade}`);
     Meteor.call('CourseInstance.updateGrade', { courseInstanceID, grade });
-    logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} after Meteor.call(CourseInstance.updateGrade)`);
+    // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} after Meteor.call(CourseInstance.updateGrade)`);
   }
 
   /**
@@ -237,14 +237,14 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
    */
   updateGrade(courseInstanceID, grade) {
-    const logger = new Logger('CourseInstance.updateGrade');
-    logger.info(`${courseInstanceID}, ${grade}`);
+    // const logger = new Logger('CourseInstance.updateGrade');
+    // logger.info(`${courseInstanceID}, ${grade}`);
     this.assertDefined(courseInstanceID);
-    logger.info('after assert');
+    // logger.info('after assert');
     const ice = makeCourseICE(courseInstanceID, grade);
-    logger.info('after ice');
+    // logger.info('after ice');
     this._collection.update({ _id: courseInstanceID }, { $set: { grade, ice, verified: false } });
-    logger.info('after _collection update');
+    // logger.info('after _collection update');
   }
 
   /**

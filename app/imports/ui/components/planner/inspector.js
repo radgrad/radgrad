@@ -1,9 +1,8 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-// import { $ } from 'meteor/jquery';
 import { Logger } from 'meteor/jag:pince';
-import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';
@@ -13,181 +12,87 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
-import { getTotalICE, makeCourseICE, getPlanningICE } from '../../../api/ice/IceProcessor.js';
+import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { plannerKeys } from './academic-plan';
 
 Template.Inspector.helpers({
-  courses() {
-    let ret = [];
-    const courses = Courses.find().fetch();
-    const studentID = getUserIdFromRoute();
-    const instances = CourseInstances.find({ studentID }).fetch();
-    const courseTakenIDs = [];
-    instances.forEach((courseInstance) => {
-      if (CourseInstances.isICS(courseInstance._id)) {
-        if (courseInstance.note !== 'ICS 499') {
-          courseTakenIDs.push(courseInstance.courseID);
-        }
-      }
-    });
-    ret = _.filter(courses, function filter(c) {
-      if (c.number === 'other') {
-        return false;
-      }
-      return _.indexOf(courseTakenIDs, c._id) === -1;
-    });
-    return ret;
-  },
   courses100() {
     let ret = [];
-    const courses = Courses.find().fetch();
-    const studentID = getUserIdFromRoute();
-    const instances = CourseInstances.find({ studentID }).fetch();
+    const courses = Courses.find({ number: /ICS 1/ }).fetch();
+    const instances = CourseInstances.find({ note: /ICS 1/ }).fetch();
     const courseTakenIDs = [];
-    instances.forEach((courseInstance) => {
-      if (CourseInstances.isICS(courseInstance._id)) {
-        if (courseInstance.note !== 'ICS 499') {
-          courseTakenIDs.push(courseInstance.courseID);
-        }
-      }
+    _.map(instances, (ci) => {
+      courseTakenIDs.push(ci.courseID);
     });
     ret = _.filter(courses, function filter(c) {
-      if (c.number === 'other') {
-        return false;
-      }
-      if (!c.number.startsWith('ICS 1')) {
-        return false;
-      }
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
   courses200() {
     let ret = [];
-    const courses = Courses.find().fetch();
-    const studentID = getUserIdFromRoute();
-    const instances = CourseInstances.find({ studentID }).fetch();
+    const courses = Courses.find({ number: /ICS 2/ }).fetch();
+    const instances = CourseInstances.find({ note: /ICS 2/ }).fetch();
     const courseTakenIDs = [];
-    instances.forEach((courseInstance) => {
-      if (CourseInstances.isICS(courseInstance._id)) {
-        if (courseInstance.note !== 'ICS 499') {
-          courseTakenIDs.push(courseInstance.courseID);
-        }
-      }
+    _.map(instances, (ci) => {
+      courseTakenIDs.push(ci.courseID);
     });
     ret = _.filter(courses, function filter(c) {
-      if (c.number === 'other') {
-        return false;
-      }
-      if (!c.number.startsWith('ICS 2')) {
-        return false;
-      }
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
   courses300() {
     let ret = [];
-    const courses = Courses.find().fetch();
-    const studentID = getUserIdFromRoute();
-    const instances = CourseInstances.find({ studentID }).fetch();
+    const courses = Courses.find({ number: /ICS 3/ }).fetch();
+    const instances = CourseInstances.find({ note: /ICS 3/ }).fetch();
     const courseTakenIDs = [];
-    instances.forEach((courseInstance) => {
-      if (CourseInstances.isICS(courseInstance._id)) {
-        if (courseInstance.note !== 'ICS 499') {
-          courseTakenIDs.push(courseInstance.courseID);
-        }
-      }
+    _.map(instances, (ci) => {
+      courseTakenIDs.push(ci.courseID);
     });
     ret = _.filter(courses, function filter(c) {
-      if (c.number === 'other') {
-        return false;
-      }
-      if (!c.number.startsWith('ICS 3')) {
-        return false;
-      }
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
   courses410() {
     let ret = [];
-    const courses = Courses.find().fetch();
-    const studentID = getUserIdFromRoute();
-    const instances = CourseInstances.find({ studentID }).fetch();
+    const courses = Courses.find({ number: /ICS 4[0123]/ }).fetch();
+    const instances = CourseInstances.find({ note: /ICS 4[0123]/ }).fetch();
     const courseTakenIDs = [];
-    instances.forEach((courseInstance) => {
-      if (CourseInstances.isICS(courseInstance._id)) {
-        if (courseInstance.note !== 'ICS 499') {
-          courseTakenIDs.push(courseInstance.courseID);
-        }
-      }
+    _.map(instances, (ci) => {
+      courseTakenIDs.push(ci.courseID);
     });
     ret = _.filter(courses, function filter(c) {
-      if (c.number === 'other') {
-        return false;
-      }
-      if (!c.number.startsWith('ICS 4')) {
-        return false;
-      } else
-        if (!c.number.startsWith('ICS 41') && !c.number.startsWith('ICS 42') && !c.number.startsWith('ICS 43')) {
-          return false;
-        }
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
   courses440() {
     let ret = [];
-    const courses = Courses.find().fetch();
-    const studentID = getUserIdFromRoute();
-    const instances = CourseInstances.find({ studentID }).fetch();
+    const courses = Courses.find({ number: /ICS 4[456]/ }).fetch();
+    const instances = CourseInstances.find({ note: /ICS 4[456]/ }).fetch();
     const courseTakenIDs = [];
-    instances.forEach((courseInstance) => {
-      if (CourseInstances.isICS(courseInstance._id)) {
-        if (courseInstance.note !== 'ICS 499') {
-          courseTakenIDs.push(courseInstance.courseID);
-        }
-      }
+    _.map(instances, (ci) => {
+      courseTakenIDs.push(ci.courseID);
     });
     ret = _.filter(courses, function filter(c) {
-      if (c.number === 'other') {
-        return false;
-      }
-      if (!c.number.startsWith('ICS 4')) {
-        return false;
-      } else
-        if (!c.number.startsWith('ICS 44') && !c.number.startsWith('ICS 45') && !c.number.startsWith('ICS 46')) {
-          return false;
-        }
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
   },
   courses470() {
     let ret = [];
-    const courses = Courses.find().fetch();
-    const studentID = getUserIdFromRoute();
-    const instances = CourseInstances.find({ studentID }).fetch();
+    const courses = Courses.find({ number: /ICS 4[789]/ }).fetch();
+    const instances = CourseInstances.find({ note: /ICS 4[789]/ }).fetch();
     const courseTakenIDs = [];
-    instances.forEach((courseInstance) => {
-      if (CourseInstances.isICS(courseInstance._id)) {
-        if (courseInstance.note !== 'ICS 499') {
-          courseTakenIDs.push(courseInstance.courseID);
-        }
+    _.map(instances, (ci) => {
+      if (ci.note !== 'ICS 499') {
+        courseTakenIDs.push(ci.courseID);
       }
     });
     ret = _.filter(courses, function filter(c) {
-      if (c.number === 'other') {
-        return false;
-      }
-      if (!c.number.startsWith('ICS 4')) {
-        return false;
-      } else
-        if (!c.number.startsWith('ICS 47') && !c.number.startsWith('ICS 48') && !c.number.startsWith('ICS 49')) {
-          return false;
-        }
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
@@ -203,24 +108,24 @@ Template.Inspector.helpers({
     return null;
   },
   courseIce() {
-    const logger = new Logger('inspector.courseIce');
+    // const logger = new Logger('inspector.courseIce');
     // $('body').removeClass('waiting');
     if (Template.instance().state.get(plannerKeys.detailICE)) {
       const ice = Template.instance().state.get(plannerKeys.detailICE);
-      logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using detailICE {${ice.i}, ${ice.c}, ${ice.e}}`);
+      // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using detailICE {${ice.i}, ${ice.c}, ${ice.e}}`);
       return ice;
     }
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       const course = Template.instance().state.get(plannerKeys.detailCourse);
       const slug = Slugs.findDoc(course.slugID);
-      const ice = makeCourseICE(slug.name, '***');
-      logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using generic ice {${ice.i}, ${ice.c}, ${ice.e}}`);
+      const ice = makeCourseICE(slug.name, 'C');
+      // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using generic ice {${ice.i}, ${ice.c}, ${ice.e}}`);
       return ice;
     } else
       if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
         const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
         const ice = ci.ice;
-        logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using ci ice {${ice.i}, ${ice.c}, ${ice.e}}`);
+        // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using ci ice {${ice.i}, ${ice.c}, ${ice.e}}`);
         return ice;
       }
     return null;
@@ -245,58 +150,13 @@ Template.Inspector.helpers({
       }
     return null;
   },
-  fallArgs(year) {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
-      const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year,
-        term: Semesters.FALL,
-      });
-      const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester };
-    }
-    return null;
-  },
-  getDictionary() {
-    return Template.instance().state;
-  },
   hasCourse() {
     return Template.instance().state.get(plannerKeys.detailCourse) ||
         Template.instance().state.get(plannerKeys.detailCourseInstance);
   },
-  hasMoreYears() {
-    const studentID = getUserIdFromRoute();
-    const ays = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
-    return ays.length > 3;
-  },
-  hasNextYear() {
-    const instance = Template.instance();
-    const studentID = getUserIdFromRoute();
-    const ays = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
-    return ays[ays.length - 1].year > instance.state.get('startYear');
-  },
   hasOpportunity() {
     return Template.instance().state.get(plannerKeys.detailOpportunity) ||
         Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-  },
-  missingPrerequisite(prereqSlug) {
-    const prereqID = Courses.findIdBySlug(prereqSlug);
-    const studentID = getUserIdFromRoute();
-    const courseInstances = CourseInstances.find({ studentID }).fetch();
-    let ret = true;
-    _.map(courseInstances, (ci) => {
-      if (prereqID === ci.courseID) {
-        ret = false;
-      }
-    });
-    return ret;
-  },
-  hasPrevYear() {
-    const instance = Template.instance();
-    const studentID = getUserIdFromRoute();
-    const ays = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
-    return ays[0].year < instance.state.get('startYear') - 3;
   },
   hasRequest() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
@@ -305,27 +165,13 @@ Template.Inspector.helpers({
     }
     return false;
   },
-  instanceID() {
-    if (Template.instance().state.get(plannerKeys.detailCourse)) {
-      return Template.instance().state.get(plannerKeys.detailCourse)._id;
-    } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        return Template.instance().state.get(plannerKeys.detailCourseInstance)._id;
-      } else
-        if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-          return Template.instance().state.get(plannerKeys.detailOpportunity)._id;
-        } else
-          if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-            return Template.instance().state.get(plannerKeys.detailOpportunityInstance)._id;
-          }
-    return null;
-  },
   instanceSemester() {
     if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-      const semester = Semesters.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).semesterID);
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      const semester = Semesters.findDoc(ci.semesterID);
       return Semesters.toString(semester._id, false);
     }
-    return '';
+    return null;
   },
   interests() {
     const ret = [];
@@ -355,17 +201,6 @@ Template.Inspector.helpers({
           }
     return ret;
   },
-  isDeletableInstance() {
-    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
-      return !ci.verified;
-    } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-        const opportunity = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-        return !opportunity.verified;
-      }
-    return false;
-  },
   isPastInstance() {
     const currentSemester = Semesters.getCurrentSemesterDoc();
     if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
@@ -382,8 +217,17 @@ Template.Inspector.helpers({
       }
     return false;
   },
-  isFuture(year) {
-    return year.year >= moment().year();
+  missingPrerequisite(prereqSlug) {
+    const prereqID = Courses.findIdBySlug(prereqSlug);
+    const studentID = getUserIdFromRoute();
+    const courseInstances = CourseInstances.find({ studentID }).fetch();
+    let ret = true;
+    _.map(courseInstances, (ci) => {
+      if (prereqID === ci.courseID) {
+        ret = false;
+      }
+    });
+    return ret;
   },
   opportunities() {
     let ret = [];
@@ -396,18 +240,20 @@ Template.Inspector.helpers({
   },
   opportunityDescription() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-      return Template.instance().state.get(plannerKeys.detailOpportunityInstance).description;
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      const opp = Opportunities.findDoc({ _id: oi.opportunityID });
+      return opp.description;
     } else
       if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunityInstance).description;
+        return Template.instance().state.get(plannerKeys.detailOpportunity).description;
       }
     return null;
   },
   opportunitySemester() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-      const semester = OpportunityInstances.getSemesterDoc(
-          Template.instance().state.get(plannerKeys.detailOpportunityInstance)._id);
-      return Semesters.toString(semester.id, false);
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      const semester = OpportunityInstances.getSemesterDoc(oi._id);
+      return `${semester.term} ${semester.year}`;
     } else
       if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
         const opportunity = Template.instance().state.get(plannerKeys.detailOpportunity);
@@ -422,10 +268,12 @@ Template.Inspector.helpers({
   },
   opportunityName() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-      return Template.instance().state.get(plannerKeys.detailOpportunityInstance).name;
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      const opp = Opportunities.findDoc({ _id: oi.opportunityID });
+      return opp.name;
     } else
       if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunityInstance).name;
+        return Template.instance().state.get(plannerKeys.detailOpportunity).name;
       }
     return null;
   },
@@ -435,17 +283,7 @@ Template.Inspector.helpers({
       return Opportunities.findDoc(oi.opportunityID).ice;
     } else
       if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunityInstance).ice;
-      }
-    return null;
-  },
-  opportunityStart() {
-    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-      return Opportunities.findDoc(oi.opportunityID).startActive.toDateString();
-    } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunityInstance).startActive.toDateString();
+        return Template.instance().state.get(plannerKeys.detailOpportunity).ice;
       }
     return null;
   },
@@ -472,11 +310,7 @@ Template.Inspector.helpers({
           ret.push(pre);
         });
       }
-    return null;
-  },
-  processedDate(date) {
-    const processed = moment(date);
-    return processed.calendar();
+    return ret;
   },
   requestHistory() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
@@ -509,91 +343,29 @@ Template.Inspector.helpers({
     }
     return '';
   },
-  springArgs(year) {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
-      const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SPRING,
-      });
-      const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester };
-    }
-    return null;
-  },
-  summerArgs(year) {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
-      const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SUMMER,
-      });
-      const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester };
-    }
-    return null;
-  },
-  yearICE(year) {
-    let cis = [];
-    const semesterIDs = year.semesterIDs;
-    const studentID = getUserIdFromRoute();
-    semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({ studentID, semesterID: sem }).fetch();
-      cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({ studentID, semesterID: sem }).fetch();
-      cis = cis.concat(oi);
-    });
-    return getTotalICE(cis);
-  },
-  yearPlanningICE(year) {
-    let cis = [];
-    const semesterIDs = year.semesterIDs;
-    const studentID = getUserIdFromRoute();
-    semesterIDs.forEach((sem) => {
-      const ci = CourseInstances.find({ studentID, semesterID: sem }).fetch();
-      cis = cis.concat(ci);
-      const oi = OpportunityInstances.find({ studentID, semesterID: sem }).fetch();
-      cis = cis.concat(oi);
-    });
-    return getPlanningICE(cis);
-  },
-  years() {
-    const studentID = getUserIdFromRoute();
-    const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
-    const instance = Template.instance();
-    if (ay.length > 0 && !instance.state.get('startYear')) {
-      instance.state.set('startYear', ay[ay.length - 1].year);
-    }
-    const ret = _.filter(ay, function filter(academicYear) {
-      const year = academicYear.year;
-      if (year >= instance.state.get('startYear') - 3 && year <= instance.state.get('startYear')) {
-        return true;
-      }
-      return false;
-    });
-    return ret;
-  },
 });
 
 Template.Inspector.events({
-  'click button.delInstance': function clickButtonDelInstance(event) {
+  'click .course.item': function clickCourseItem(event) {
     event.preventDefault();
-    const id = event.target.id;
-    try {
-      const ci = CourseInstances.findDoc(id);
-      CourseInstances.removeIt(ci._id);
-    } catch (e) {
-      try {
-        const op = OpportunityInstances.findDoc(id);
-        OpportunityInstances.removeIt(op._id);
-      } catch (e1) {
-        // What do we do here?
-      }
+    const courseArr = Courses.find({ _id: event.target.id }).fetch();
+    if (courseArr.length > 0) {
+      Template.instance().state.set(plannerKeys.detailCourse, courseArr[0]);
+      Template.instance().state.set(plannerKeys.detailCourseInstance, null);
+      Template.instance().state.set(plannerKeys.detailOpportunity, null);
+      Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
     }
-    Template.instance().state.set('detailCourseID', null);
-    Template.instance().state.set('detailOpportunityID', null);
+  },
+  'click .opportunity.item': function clickOpportunityItem(event) {
+    event.preventDefault();
+    const template = Template.instance();
+    const opportunityArr = Opportunities.find({ _id: event.target.id }).fetch();
+    if (opportunityArr.length > 0) {
+      template.state.set(plannerKeys.detailCourse, null);
+      template.state.set(plannerKeys.detailCourseInstance, null);
+      template.state.set(plannerKeys.detailOpportunity, opportunityArr[0]);
+      template.state.set(plannerKeys.detailOpportunityInstance, null);
+    }
   },
   'click button.verifyInstance': function clickButtonVerifyInstance(event) {
     event.preventDefault();
@@ -608,10 +380,21 @@ Template.Inspector.events({
 Template.Inspector.onCreated(function inspectorOnCreated() {
   this.state = this.data.dictionary;
   this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Inspector.onRendered(function inspectorOnRendered() {
-  // add your statement here
+  const template = this;
+  Tracker.afterFlush(() => {
+    template.$('.ui.dropdown').dropdown({ transition: 'drop' });
+  });
 });
 
 Template.Inspector.onDestroyed(function inspectorOnDestroyed() {

@@ -25,7 +25,6 @@
       {{else}}
       <tr id="{{course._id}}" data-position="top center" class="courseInstance clickEnabled">
         <td style="border-top: none;"><strong>{{course.note}}</strong></td>
-        <!--<td><strong>{{course.creditHrs}}</strong></td>-->
         <td style="border-top: none;"><strong>{{course.grade}}</strong></td>
       </tr>
       {{/if}}
@@ -33,7 +32,6 @@
       {{#each course in nonIcsCourses}}
       <tr class="top aligned">
         <td style="border-top: none;">{{course.note}}</td>
-        <!--<td>{{course.creditHrs}}</td>-->
         <td style="border-top: none;">{{course.grade}}</td>
       </tr>
       {{/each}}
