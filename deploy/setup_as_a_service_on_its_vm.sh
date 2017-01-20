@@ -1,12 +1,14 @@
 #!/bin/bash
 set -e
 
+
 ###############################
 ####   EDIT THIS SECTION   ####
 ###############################
 
 SERVER_NAME=radgrad.ics.hawaii.edu
 PORT=5003
+MONGO_PORT=6003
 URL_SUFFIX=/            # Starts with a '/', and does not end with a '/'!
 SETTINGS_FILE=../../settings.production.json
 SERVICE_NAME=meteor_radgrad
@@ -40,14 +42,16 @@ then
 	./create_and_install_bundle.sh 
 fi
 
-echo -e "\e[32m\e[1mGenerating the init.d script...\e[0m"
-./generate_init.d_script.sh $PORT $URL_SUFFIX $SETTINGS_FILE $SERVICE_NAME
+echo -e "\e[32m\e[1mCreating Mongo configuration...\e[0m"
+./generate_mongo_config.sh $SERVICE_NAME $MONGO_PORT
 
-echo -e "\e[32m\e[1mCopying the init.d script in /etc/init.d...\e[0m"
+echo -e "\e[32m\e[1mGenerating /etc/init.d/$SERVICE_NAME...\e[0m"
+./generate_init.d_script.sh $PORT $URL_SUFFIX $SETTINGS_FILE $SERVICE_NAME $MONGO_PORT
 sudo cp ./$SERVICE_NAME /etc/init.d/$SERVICE_NAME
-echo -e "\e[32m\e[1mMaking it executable...\e[0m"
+echo -e "\e[32m\e[1mMaking /etc/init.d/$SERVICE_NAME...\e[0m"
 sudo chmod +x /etc/init.d/$SERVICE_NAME
 /bin/rm -f ./$SERVICE_NAME
+
 
 echo ""
 echo -e "\e[32m\e[1mNext steps:\e[0m"
@@ -63,9 +67,15 @@ echo -e "\e[1m  within the <VirtualHost *:80> clause that contains \"ServerName 
 
 
 echo ""
-echo -e "\e[1m* To start the services:\e[0m\e[33m"
+echo -e "\e[1m* To (re)start the services:\e[0m\e[33m"
+echo "  sudo service mongod_$SERVICE_NAME restart"
 echo "  sudo service $SERVICE_NAME restart"
 echo "  sudo service httpd restart"
+echo ""
+echo -e "\e[1m* To make the services persistent (if needed):\e[0m\e[33m"
+echo "  sudo chkconfig $SERVICE_NAME on"
+echo "  sudo chkconfig mongod_$SERVICE_NAME on"
+echo "  sudo chkconfig httpd on"
 echo ""
 echo -e "\e[0m"
 

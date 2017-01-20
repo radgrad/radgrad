@@ -20,7 +20,7 @@ export METEOR_GROUP=@SERVICE_NAME@
 
 ## Useful variables for the Meteor app
 ###################################################
-MONGO_URL=mongodb://localhost:27017
+MONGO_URL=mongodb://localhost:@MONGO_PORT@
 PORT=@PORT@
 ROOT_URL=http://localhost:@PORT@@URL_SUFFIX@
 
