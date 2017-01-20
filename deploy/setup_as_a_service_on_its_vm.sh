@@ -22,6 +22,7 @@ echo "  2) Have sudo access"
 echo "  3) Have edited the variables at the top of this script so as to"
 echo "     configure your setup parameters"
 echo "  4) Likely have done a git pull to get your latest app software"
+echo "  5) Have completed all steps at https://github.com/uhm-ics/meteor_deploy_on_rhel6/blob/master/README.md"
 echo ""
 echo -ne "\e[32m\e[1mDo you want to continue?\e[0m "
 read -p "" -n 1 -r
