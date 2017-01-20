@@ -277,9 +277,10 @@ Template.Semester_List.events({
     event.preventDefault();
     if (Template.instance().localState.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
-      const semesterId = Template.instance().localState.get('semester')._id;
+      const semesterID = Template.instance().localState.get('semester')._id;
       if (CourseInstances.isDefined(id)) {
-        CourseInstances.updateSemester(id, semesterId);
+        CourseInstances.update({ _id: id }, { $set: { semesterID } });
+        // CourseInstances.updateSemester(id, semesterID);
         checkPrerequisites();
       } else {
         const opportunities = OpportunityInstances.find({
@@ -287,7 +288,7 @@ Template.Semester_List.events({
           _id: id,
         }).fetch();
         if (opportunities.length > 0) {
-          OpportunityInstances.updateSemester(opportunities[0]._id, semesterId);
+          OpportunityInstances.updateSemester(opportunities[0]._id, semesterID);
         }
       }
     }
@@ -401,6 +402,8 @@ Template.Semester_List.onCreated(function semesterListOnCreate() {
     this.state = this.data.dictionary;
   }
   this.localState = new ReactiveDict();
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
 });
 
 Template.Semester_List.onRendered(function semesterListOnRendered() {
