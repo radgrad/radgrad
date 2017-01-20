@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-import { Logger } from 'meteor/jag:pince';
+// import { Logger } from 'meteor/jag:pince';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';

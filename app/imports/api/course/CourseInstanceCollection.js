@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Logger } from 'meteor/jag:pince';
+// import { Logger } from 'meteor/jag:pince';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { moment } from 'meteor/momentjs:moment';
+// import { moment } from 'meteor/momentjs:moment';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';

@@ -4,17 +4,9 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-import { Logger } from 'meteor/jag:pince';
+// import { Logger } from 'meteor/jag:pince';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { Courses } from '../../../api/course/CourseCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { Users } from '../../../api/user/UserCollection.js';
-import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
-import { getTotalICE, makeCourseICE, getPlanningICE } from '../../../api/ice/IceProcessor.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 export const plannerKeys = {
