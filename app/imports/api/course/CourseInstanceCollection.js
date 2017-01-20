@@ -35,6 +35,10 @@ class CourseInstanceCollection extends BaseCollection {
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
       'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W'];
+    this.publicationNames = [];
+    this.publicationNames.push(this._collectionName);
+    this.publicationNames.push(`${this._collectionName}.Public`);
+    this.publicationNames.push(`${this._collectionName}.PerStudentAndSemester`);
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
     }
@@ -109,6 +113,18 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Return the publication name.
+   * @param index The optional index for the publication name.
+   * @returns { String } The publication name, as a string.
+   */
+  getPublicationName(index) {
+    if (index) {
+      return this.publicationNames[index];
+    }
+    return this._collectionName;
+  }
+
+  /**
    * Returns the Semester associated with the CourseInstance with the given instanceID.
    * @param instanceID The id of the CourseInstance.
    * @returns {Object} The associated Semester.
@@ -162,12 +178,28 @@ class CourseInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this._collectionName, function publish() {
+      Meteor.publish(this.publicationNames[0], function publish() {
         if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
       });
+      Meteor.publish(this.publicationNames[1], function publicPublish(courseID) {  // eslint-disable-line
+        // check the opportunityID.
+        new SimpleSchema({
+          opportunityID: { type: String },
+        }).validate({ courseID });
+
+        return this._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
+      });
+      Meteor.publish(this.publicationNames[2],
+          function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
+            new SimpleSchema({
+              studentID: { type: String },
+              semesterID: { type: String },
+            }).validate({ studentID, semesterID });
+            return this._collection.find({ studentID, semesterID });
+          });
     }
   }
 
@@ -272,15 +304,3 @@ class CourseInstanceCollection extends BaseCollection {
  */
 export const CourseInstances = new CourseInstanceCollection();
 radgradCollections.push(CourseInstances);
-
-if (Meteor.isServer) {
-  // eslint-disable-next-line meteor/audit-argument-checks
-  Meteor.publish(`${CourseInstances._collectionName}.Public`, function publicPublish(courseID) {
-    // check the opportunityID.
-    new SimpleSchema({
-      opportunityID: { type: String },
-    }).validate({ courseID });
-
-    return CourseInstances._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
-  });
-}

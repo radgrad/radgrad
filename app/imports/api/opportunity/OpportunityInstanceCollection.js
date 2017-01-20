@@ -27,6 +27,10 @@ class OpportunityInstanceCollection extends BaseCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       ice: { type: Object, optional: true, blackbox: true },
     }));
+    this.publicationNames = [];
+    this.publicationNames.push(this._collectionName);
+    this.publicationNames.push(`${this._collectionName}.Public`);
+    this.publicationNames.push(`${this._collectionName}.PerStudentAndSemester`);
   }
 
   /**
@@ -99,6 +103,18 @@ class OpportunityInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Return the publication name.
+   * @param index The optional index for the publication name.
+   * @returns { String } The publication name, as a string.
+   */
+  getPublicationName(index) {
+    if (index) {
+      return this.publicationNames[index];
+    }
+    return this._collectionName;
+  }
+
+  /**
    * Returns the Semester associated with the OpportunityInstance with the given instanceID.
    * @param instanceID The id of the OpportunityInstance.
    * @returns {Object} The associated Semester.
@@ -130,13 +146,28 @@ class OpportunityInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this._collectionName, function publish() {
+      Meteor.publish(this.publicationNames[0], function publish() {
         if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR,
           ROLE.FACULTY, ROLE.STUDENT])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
       });
+      Meteor.publish(this.publicationNames[1], function publicPublish(opportunityID) {  // eslint-disable-line
+        // check the opportunityID.
+        new SimpleSchema({
+          opportunityID: { type: String },
+        }).validate({ opportunityID });
+        return this._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
+      });
+      Meteor.publish(this.publicationNames[2],
+          function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
+            new SimpleSchema({
+              studentID: { type: String },
+              semesterID: { type: String },
+            }).validate({ studentID, semesterID });
+            return this._collection.find({ studentID, semesterID });
+          });
     }
   }
 
@@ -218,16 +249,3 @@ class OpportunityInstanceCollection extends BaseCollection {
  */
 export const OpportunityInstances = new OpportunityInstanceCollection();
 radgradCollections.push(OpportunityInstances);
-
-
-if (Meteor.isServer) {
-  // eslint-disable-next-line meteor/audit-argument-checks
-  Meteor.publish(`${OpportunityInstances._collectionName}.Public`, function publicPublish(opportunityID) {
-    // check the opportunityID.
-    new SimpleSchema({
-      opportunityID: { type: String },
-    }).validate({ opportunityID });
-
-    return OpportunityInstances._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
-  });
-}

@@ -92,7 +92,6 @@ class BaseCollection {
    * @returns true
    */
   update(selector, modifier) {
-    console.log('selector', selector, 'modifier', modifier);
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
     this._collection.update(theSelector, modifier);
     return true;
