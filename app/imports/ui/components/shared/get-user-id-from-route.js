@@ -1,6 +1,3 @@
-/**
- * Created by Cam Moore on 12/20/16.
- */
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from './route-user-name';
 

@@ -28,3 +28,7 @@
 .degreePlanner .ui.table tr td {
   padding: 2px 4px;
 }
+
+body.waiting * {
+  cursor: progress;
+}

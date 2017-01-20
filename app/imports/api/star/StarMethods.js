@@ -1,6 +1,3 @@
-/**
- * Created by Cam on 12/16/2016.
- */
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { _ } from 'meteor/erasaur:meteor-lodash';

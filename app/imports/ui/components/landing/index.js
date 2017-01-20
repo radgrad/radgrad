@@ -20,5 +20,3 @@ import './landing-section-6.html';
 import './landing-section-7.html';
 import './landing-section-8.html';
 import './landing-section-9.html';
-
-

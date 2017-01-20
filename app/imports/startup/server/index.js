@@ -1,6 +1,7 @@
 import './accounts.js';
-import './publications.js';
-import './fixtures.js';
 import './check-integrity';
+import './fixtures.js';
+// import './kadira';
+import './publications.js';
 
 // icsdata/ directory is not imported here intentionally.

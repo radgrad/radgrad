@@ -55,7 +55,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
       course: courseSlug,
       verified: false,
       note: course.number,
-      grade: '***',
+      grade: 'B',
       student: username,
     };
     CourseInstances.define(ci);
