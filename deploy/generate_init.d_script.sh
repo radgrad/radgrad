@@ -15,12 +15,12 @@ URL_SUFFIX=$2
 SETTINGS_FILE=$3
 SERVICE_NAME=$4
 
-if [ ! -e $SETTING_FILE ]; then
+if [ ! -e $SETTINGS_FILE ]; then
 	echo "Can't find file '$SETTINGS_FILE'"
 	exit 1
 fi
 
-if [ ! -r $SETTING_FILE ]; then
+if [ ! -r $SETTINGS_FILE ]; then
 	echo "File '$SETTINGS_FILE' is not readable"
 	exit 1
 fi
