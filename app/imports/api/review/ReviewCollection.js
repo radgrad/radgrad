@@ -12,8 +12,7 @@ import { Meteor } from 'meteor/meteor';
 /** @module Review */
 
 /**
- * Represents an Opportunity, such as "LiveWire Internship".
- * To represent an Opportunity taken by a specific student in a specific semester, use OpportunityInstance.
+ * Represents a course or opportunity student Review
  * @extends module:BaseInstance~BaseInstanceCollection
  */
 class ReviewCollection extends BaseInstanceCollection {
@@ -37,29 +36,28 @@ class ReviewCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Defines a new Opportunity.
+   * Defines a new Review.
    * @example
-   * Opportunities.define({ name: 'ATT Hackathon',
-   *                        slug: 'att-hackathon',
-   *                        description: 'Programming challenge at Sacred Hearts Academy, $10,000 prize',
-   *                        opportunityType: 'event',
-   *                        sponsor: 'philipjohnson',
-   *                        ice: { i: 10, c: 0, e: 10},
-   *                        interests: ['software-engineering'],
-   *                        semesters: ['Fall-2016', 'Spring-2016', 'Summer-2106'],
-    *                       moreInformation: 'http://atthackathon.com',
-     *                      independentStudy: true});
-   * @param { Object } description Object with keys student, reviewee, semester, rating, comments, moderated,
-   * public, and moderatorComments.
+   * Review.define({ slug: 'review-course-ics111-abi',
+   *                 student: 'abi',
+   *                 reviewType: 'course',
+   *                 reviewee: 'ics111,
+   *                 semester: 'Fall-2016',
+   *                 rating: 3,
+   *                 comments: 'sample comments here',
+   *                 moderated: false,
+   *                 visible: true,
+   *                 moderatedComments: 'sample comments here'});
+   * @param { Object } description Object with keys slug, student, reviewee,
+   * reviewType,semester, rating, comments, moderated, public, and moderatorComments.
    * Slug must not be previously defined.
-   * OpportunityType and sponsor must be defined slugs.
-   * Interests must be a (possibly empty) array of interest slugs or IDs.
-   * Semesters must be a (possibly empty) array of semester slugs or IDs.
-   * Sponsor must be a User with role 'FACULTY', 'ADVISOR', or 'ADMIN'.
-   * ICE must be a valid ICE object.
-   * MoreInformation is optional, but if supplied should be a URL.
-   * IndependentStudy is optional and defaults to false.
-   * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest, sponsor, opportunityType,
+   * Reviewee must be a defined course or opportunity slug.
+   * Semester must be a defined slug.
+   * Student must be a user with role 'STUDENT.'
+   * Moderated is optional and defaults to false.
+   * Visible is optional and defaults to true.
+   * ModeratorComments is optional.
+   * @throws {Meteor.Error} If the definition includes a defined slug, undefined student or undefined reviewee
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
@@ -76,7 +74,6 @@ class ReviewCollection extends BaseInstanceCollection {
     } else {
       throw new Meteor.Error(`reviewType ${reviewType} is not a valid reviewType.`);
     }
-    console.log(semester);
     const semesterID = Semesters.getID(semester);
     // Make sure rating is a number between 1 and 5.
     if (!(typeof rating) === 'number' || (rating < 1) || (rating > 5)) {
@@ -93,17 +90,16 @@ class ReviewCollection extends BaseInstanceCollection {
       rating, comments, moderated, visible, moderatorComments });
     Slugs.updateEntityID(slugID, reviewID);
 
-    // Return the id to the newly created Opportunity.
+    // Return the id to the newly created Review.
     return reviewID;
   }
 
   /**
-   * Removes the passed Opportunity and its associated Slug.
-   * @param opportunity The document or _id associated with this Opportunity.
-   * @throws {Meteor.Error} If opportunity is not defined or there are any OpportunityInstances associated with it.
+   * Removes the passed Review and its associated Slug.
+   * @param opportunity The document or _id associated with this Reivew.
+   * @throws {Meteor.Error} If review is not defined.
    */
   removeIt(review) {
-    // TODO: check for defined OpportunityInstances before deletion.
     super.removeIt(review);
   }
 
@@ -143,8 +139,8 @@ class ReviewCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Returns an object representing the Opportunity docID in a format acceptable to define().
-   * @param docID The docID of an Opportunity.
+   * Returns an object representing the Review docID in a format acceptable to define().
+   * @param docID The docID of an Review.
    * @returns { Object } An object representing the definition of docID.
    */
   dumpOne(docID) {
