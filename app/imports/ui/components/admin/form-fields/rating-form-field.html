@@ -1,0 +1,12 @@
+<template name="Rating_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Rating</label>
+    <select class="ui dropdown" name="rating">
+      <option value="">Select Rating</option>
+      {{#each rating in ratings}}
+        <option value="{{rating}}" selected="{{isSelected rating selectedRating}}">{{rating}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

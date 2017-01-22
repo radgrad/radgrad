@@ -1,0 +1,34 @@
+<template name="Student_Explorer_Opportunities_Review_Widget">
+
+  <div style="padding-top: 30px;" class="ui padded container">
+    <div class="ui dividing header"><h4>OPPORTUNITY REVIEWS
+      <div style="float: right">
+        <i>Average review: </i>
+        {{#each star in averageStars}}
+          <i class="{{star}}"></i>
+        {{/each}}
+      </div>
+    </h4>
+    </div>
+    <div class="ui middle aligned very relaxed divided list">
+      {{#each review in reviews}}
+        {{#with reviewData review}}
+          <div class="item">
+            <div class="ui grid">
+              <div class="four wide column">
+                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><b>{{name}}</b><br>{{semester}}
+              </div>
+              <div class="twelve wide column">
+                {{#each star in stars}}
+                  <i class="{{star}}"></i>
+                {{/each}}
+                <br><div style="padding-top: 5px">{{comments}}</div>
+              </div>
+            </div>
+          </div>
+        {{/with}}
+      {{/each}}
+    </div>
+  </div>
+
+</template>

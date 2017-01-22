@@ -7,6 +7,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { makeLink } from '../../components/admin/datamodel-utilities';
@@ -52,6 +53,23 @@ function semesters(opportunity) {
 function teaser(opp) {
   const oppTeaser = Teasers.find({ opportunityID: opp._id }).fetch();
   return oppTeaser[0];
+}
+
+function completedOpportunityHelper(opportunitySlugName) {
+  let ret = false;
+  const slug = Slugs.find({ name: opportunitySlugName }).fetch();
+  const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
+  console.log(opportunity);
+  const oi = OpportunityInstances.find({
+    studentID: getUserIdFromRoute(),
+    opportunityID: opportunity._id,
+    verified: true,
+  }).fetch();
+  if (oi.length > 0) {
+    ret = true;
+  }
+  console.log(oi);
+  return ret;
 }
 
 Template.Student_Explorer_Opportunities_Page.helpers({
@@ -118,11 +136,38 @@ Template.Student_Explorer_Opportunities_Page.helpers({
         value: interestedUsers(opportunity) },
     ];
   },
+  completed() {
+    const opportunitySlugName = FlowRouter.getParam('opportunity');
+    let ret = false;
+    const slug = Slugs.find({ name: opportunitySlugName }).fetch();
+    const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
+    const oi = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      opportunityID: opportunity[0]._id,
+      verified: true,
+    }).fetch();
+    if (oi.length > 0) {
+      ret = true;
+    }
+    return ret;
+  },
+  reviewed(opportunity) {
+    let ret = false;
+    const review = Reviews.find({
+      studentID: getUserIdFromRoute(),
+      revieweeID: opportunity._id,
+    }).fetch();
+    if (review.length > 0) {
+      ret = true;
+    }
+    return ret;
+  },
 });
 
 Template.Student_Explorer_Opportunities_Page.onCreated(function studentExplorerOpportunitiesPageOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityTypes.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(Interests.getPublicationName());

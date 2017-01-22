@@ -3,6 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -40,6 +41,25 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     });
     return semesterNames;
   },
+  review() {
+    let review = '';
+    review = Reviews.find({
+      studentID: getUserIdFromRoute(),
+      revieweeID: this.item._id,
+    }).fetch();
+    return review[0];
+  },
+  reviews() {
+    let ret = false;
+    let reviews = '';
+    reviews = Reviews.find({
+      revieweeID: this.item._id,
+    }).fetch();
+    if (reviews.length > 0) {
+      ret = true;
+    }
+    return ret;
+  },
 });
 
 Template.Student_Explorer_Opportunities_Widget.events({
@@ -73,3 +93,10 @@ Template.Student_Explorer_Opportunities_Widget.onRendered(function enableVideo()
       });
 });
 
+
+Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
+  this.subscribe(Slugs.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Reviews.getPublicationName());
+});
