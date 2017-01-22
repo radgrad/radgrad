@@ -76,7 +76,10 @@ class CourseCollection extends BaseInstanceCollection {
       throw new Meteor.Error(`Prerequisites ${prerequisites} is not an array.`);
     }
     // Ensure each prereq is either a slug or a courseID.
-    _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
+    // Currently we don't dump the DB is a way that prevents forward referencing of prereqs, so we
+    // can't enforce this during the define.
+    // TODO: check that prerequisite strings are valid after all courses are defined.
+    // _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
     const courseID =
         this._collection.insert({
           name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus,

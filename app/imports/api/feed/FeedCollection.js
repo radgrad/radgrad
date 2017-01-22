@@ -34,6 +34,8 @@ class FeedCollection extends BaseInstanceCollection {
   // TODO: The define method needs more documentation. What are valid values for each parameter?
   // Consider multiple define methods, one for each feed type, with appropriate required params for each.
 
+  // TODO: Why do feeds have a slugID? I don't think slugs are appropriate for this collection. Do you use them?
+
   /**
    * Defines a new Feed.
    * @example
@@ -65,7 +67,8 @@ class FeedCollection extends BaseInstanceCollection {
     if (feedType === 'new') {
       if (student !== undefined) {
         description = `${Users.getFullName(studentID)} has joined RadGrad.`;
-        slugID = Slugs.define({ name: `feed-${Users.findDoc(studentID).username}-new`, entityName: this.getType() });
+        slugID = Slugs.define({ name: `feed-${Users.findDoc(studentID).username}-new-${timestamp}`,
+          entityName: this.getType() });
         picture = Users.findDoc(studentID).picture;
         if (!picture) {
           picture = '/images/ICS-logo.png';
@@ -74,7 +77,7 @@ class FeedCollection extends BaseInstanceCollection {
         if (opportunity !== undefined) {
           description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities.`;
           slugID = Slugs.define({
-            name: `feed-${Slugs.findDoc(Opportunities.findDoc(opportunityID).slugID).name}-new`,
+            name: `feed-${Slugs.findDoc(Opportunities.findDoc(opportunityID).slugID).name}-new-${timestamp}`,
             entityName: this.getType(),
           });
           picture = '/images/radgrad_logo.png';
@@ -82,7 +85,7 @@ class FeedCollection extends BaseInstanceCollection {
           if (course !== undefined) {
             description = `${Courses.findDoc(courseID).name} has been added to Courses.`;
             slugID = Slugs.define({
-              name: `${Slugs.findDoc(Courses.findDoc(courseID).slugID).name}-new`,
+              name: `${Slugs.findDoc(Courses.findDoc(courseID).slugID).name}-new-${timestamp}`,
               entityName: this.getType(),
             });
             picture = '/images/radgrad_logo.png';
@@ -94,7 +97,8 @@ class FeedCollection extends BaseInstanceCollection {
         const username = student.username;
         const oppDate = Semesters.toString(opportunity.semesterID, true);
         const oppName = Slugs.findDoc((Opportunities.findDoc(opportunityID).slugID)).name;
-        slugID = Slugs.define({ name: `feed-${username}-${oppName}-${oppDate}-new`, entityName: this.getType() });
+        slugID = Slugs.define({ name: `feed-${username}-${oppName}-${oppDate}-new-${timestamp}`,
+          entityName: this.getType() });
         picture = Users.findDoc(studentID).picture;
       }
     const feedID = this._collection.insert({
