@@ -1,0 +1,88 @@
+<template name="Student_Explorer_Courses_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded segment container">
+      <div class="ui dividing header">
+        <h4>{{shortName}} ({{name}})</h4>
+      </div>
+      {{#each descriptionPair in descriptionPairs}}
+        {{#if isLabel descriptionPair.label 'Interests'}}
+          <p>
+            {{#each interest in descriptionPair.value}}
+              <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
+            {{/each}}
+          </p>
+        {{else}}
+          {{#if isLabel descriptionPair.label 'Prerequisites'}}
+            {{#if notEmpty descriptionPair.value}}
+              <b>{{descriptionPair.label}}:</b>
+              <div class="ui padded equal width grid">
+                {{#each table in descriptionPair.value}}
+                  {{#if table}}
+                    {{#with tableStyle table}}
+                      <div class="column">
+                        <table class="ui collapsing compact small table">
+                          <tbody>
+                          <tr class="{{color}}"><td><i class="{{icon}}"></i><b>{{title}}</b></td></tr>
+                          {{#each prerequisite in table}}
+                            <tr class="{{color}}">
+                              <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a></td>
+                            </tr>
+                          {{/each}}
+                          </tbody>
+                        </table>
+                      </div>
+                    {{/with}}
+                  {{/if}}
+                {{/each}}
+              </div>
+              <br>
+            {{else}}
+              <p><b>{{descriptionPair.label}}:</b> None</p>
+            {{/if}}
+          {{else}}
+            {{#if descriptionPair.value }}
+              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+            {{else}}
+              <p><b>{{descriptionPair.label}}:</b> N/A</p>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      {{/each}}
+
+      <div class="ui three column grid">
+        {{#each socialPair in socialPairs}}
+          <div class="stretched column">
+            <table class="ui small table">
+              <thead>
+              <tr>
+                <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <div class="ui circular mini bordered images">
+                    {{#each user in socialPair.value}}
+                      <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
+                    {{/each}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        {{/each}}
+      </div>
+      <br>
+      <p>
+        {{#if userStatus item}}
+          {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
+        {{else}}
+          {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+        {{/if}}
+      </p>
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

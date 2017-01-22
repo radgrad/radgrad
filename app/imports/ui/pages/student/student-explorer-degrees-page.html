@@ -1,0 +1,11 @@
+<template name="Student_Explorer_Degrees_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Student_Explorer_Layout addedList = addedDegrees nonAddedList = nonAddedDegrees type = 'degrees'}}
+      {{> Student_Explorer_Degrees_Widget name=degree.name slug=(slugName degree.slugID) descriptionPairs=(descriptionPairs degree) socialPairs=(socialPairs degree) id=degree._id updateID=updateID item=degree}}
+    {{/Student_Explorer_Layout}}
+
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

@@ -1,7 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+// import { Logger } from 'meteor/jag:pince';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+// import { moment } from 'meteor/momentjs:moment';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
@@ -9,7 +11,6 @@ import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { makeCourseICE } from '/imports/api/ice/IceProcessor';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
-
 
 /** @module CourseInstance */
 
@@ -34,6 +35,13 @@ class CourseInstanceCollection extends BaseCollection {
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
       'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W'];
+    this.publicationNames = [];
+    this.publicationNames.push(this._collectionName);
+    this.publicationNames.push(`${this._collectionName}.Public`);
+    this.publicationNames.push(`${this._collectionName}.PerStudentAndSemester`);
+    if (Meteor.server) {
+      this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
+    }
   }
 
   /**
@@ -105,6 +113,18 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Return the publication name.
+   * @param index The optional index for the publication name.
+   * @returns { String } The publication name, as a string.
+   */
+  getPublicationName(index) {
+    if (index) {
+      return this.publicationNames[index];
+    }
+    return this._collectionName;
+  }
+
+  /**
    * Returns the Semester associated with the CourseInstance with the given instanceID.
    * @param instanceID The id of the CourseInstance.
    * @returns {Object} The associated Semester.
@@ -158,12 +178,28 @@ class CourseInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT])) {
+      Meteor.publish(this.publicationNames[0], function publish() {
+        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
       });
+      Meteor.publish(this.publicationNames[1], function publicPublish(courseID) {  // eslint-disable-line
+        // check the opportunityID.
+        new SimpleSchema({
+          opportunityID: { type: String },
+        }).validate({ courseID });
+
+        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
+      });
+      Meteor.publish(this.publicationNames[2],
+          function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
+            new SimpleSchema({
+              studentID: { type: String },
+              semesterID: { type: String },
+            }).validate({ studentID, semesterID });
+            return instance._collection.find({ studentID, semesterID });
+          });
     }
   }
 
@@ -181,6 +217,19 @@ class CourseInstanceCollection extends BaseCollection {
     return `[CI ${semester} ${courseName} ${grade}]`;
   }
 
+  /* eslint-disable class-methods-use-this */
+  /**
+   * Updates the CourseInstance's grade. This should be used for planning purposes on the client side.
+   * @param courseInstanceID The course instance ID.
+   * @param grade The new grade.
+   */
+  clientUpdateGrade(courseInstanceID, grade) {
+    // const logger = new Logger('CourseInstance.clientUpdateGrade');
+    // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${courseInstanceID}, ${grade}`);
+    Meteor.call('CourseInstance.updateGrade', { courseInstanceID, grade });
+    // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} after Meteor.call(CourseInstance.updateGrade)`);
+  }
+
   /**
    * Updates the CourseInstance's grade. This should be used for planning purposes.
    * @param courseInstanceID The course instance ID.
@@ -188,9 +237,14 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
    */
   updateGrade(courseInstanceID, grade) {
+    // const logger = new Logger('CourseInstance.updateGrade');
+    // logger.info(`${courseInstanceID}, ${grade}`);
     this.assertDefined(courseInstanceID);
+    // logger.info('after assert');
     const ice = makeCourseICE(courseInstanceID, grade);
+    // logger.info('after ice');
     this._collection.update({ _id: courseInstanceID }, { $set: { grade, ice, verified: false } });
+    // logger.info('after _collection update');
   }
 
   /**
@@ -250,16 +304,3 @@ class CourseInstanceCollection extends BaseCollection {
  */
 export const CourseInstances = new CourseInstanceCollection();
 radgradCollections.push(CourseInstances);
-
-
-if (Meteor.isServer) {
-  // eslint-disable-next-line meteor/audit-argument-checks
-  Meteor.publish(`${CourseInstances._collectionName}.Public`, function publicPublish(courseID) {
-    // check the opportunityID.
-    new SimpleSchema({
-      opportunityID: { type: String },
-    }).validate({ courseID });
-
-    return CourseInstances._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
-  });
-}

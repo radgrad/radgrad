@@ -1,0 +1,33 @@
+<template name="Student_Explorer_Opportunities_Widget_Button">
+  {{#if Template.subscriptionsReady}}
+    {{#if equals buttonType 'add'}}
+      <div class="ui green basic mini button"><div class="chooseSemester">Add to my plan</div>
+        <div class="ui fluid popup transition hidden">
+          <div class="ui vertical menu">
+            {{#if empty (opportunitySemesters item)}}
+              <a class = "item"  data-position="right center">No available future semesters</a>
+            {{else}}
+              {{#each semester in opportunitySemesters item}}
+                <a class="item addToPlan" data-position="right center">{{semester}}</a>
+              {{/each}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{else}}
+      {{#if equals buttonType 'remove'}}
+        <div class="ui green basic mini button"><div class="chooseSemester">Remove from my plan</div>
+          <div class="ui fluid popup transition hidden">
+            <div class="ui vertical menu">
+              {{#each semester in existingSemesters}}
+                <a class="item removeFromPlan" data-position="right center">{{semester}}</a>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    {{/if}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

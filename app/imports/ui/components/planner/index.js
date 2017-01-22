@@ -2,11 +2,11 @@ import './academic-plan.css';
 import './academic-plan.html';
 import './academic-plan.js';
 
+import './cumulative-ice-component.html';
+import './cumulative-ice-component.js';
+
 import './inspector.html';
 import './inspector.js';
-
-import './projected-ice.html';
-import './projected-ice.js';
 
 import './recommendation-item.html';
 import './recommendation-item.js';

@@ -1,5 +1,5 @@
 <template name="Semester_List">
-  <div class="ui center aligned padded segment" style="margin-bottom: 0 !important; position: relative; {{#if isCurrentSemester}}border-color: #6FBE44;{{/if}}">
+  <div class="ui center aligned padded segment bodyDrop" ondragover="allowDrop(event)" style="margin-bottom: 0 !important; position: relative; {{#if isCurrentSemester}}border-color: #6FBE44;{{/if}}">
     <div class="ui dividing {{#if isCurrentSemester}}green{{/if}} header" style="{{#if isCurrentSemester}}text-transform: uppercase;{{/if}}">{{semesterName}} {{year}}</div>
     <table class="ui very basic table bodyDrop" ondragover="allowDrop(event)" style="flex-grow: 3; font-size: 0.85em;">
       <tbody>
@@ -16,8 +16,7 @@
             <div class="menu">
               <div class="item grade{{#if isGrade course._id 'A'}} active selected{{/if}}" data-value="A">A</div>
               <div class="item grade{{#if isGrade course._id 'B'}} active selected{{/if}}" data-value="B">B</div>
-              <div class="item grade{{#if isGrade course._id 'C'}} active selected{{/if}}" data-value="C">C
-              </div>
+              <div class="item grade{{#if isGrade course._id 'C'}} active selected{{/if}}" data-value="C">C</div>
             </div>
           </div>
         </td>
@@ -26,7 +25,6 @@
       {{else}}
       <tr id="{{course._id}}" data-position="top center" class="courseInstance clickEnabled">
         <td style="border-top: none;"><strong>{{course.note}}</strong></td>
-        <!--<td><strong>{{course.creditHrs}}</strong></td>-->
         <td style="border-top: none;"><strong>{{course.grade}}</strong></td>
       </tr>
       {{/if}}
@@ -34,7 +32,6 @@
       {{#each course in nonIcsCourses}}
       <tr class="top aligned">
         <td style="border-top: none;">{{course.note}}</td>
-        <!--<td>{{course.creditHrs}}</td>-->
         <td style="border-top: none;">{{course.grade}}</td>
       </tr>
       {{/each}}

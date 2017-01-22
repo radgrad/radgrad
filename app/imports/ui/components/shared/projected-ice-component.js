@@ -1,6 +1,3 @@
-/**
- * Created by Cam Moore on 1/4/17.
- */
 import { Template } from 'meteor/templating';
 
 Template.Projected_Ice_Component.helpers({
