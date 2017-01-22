@@ -9,7 +9,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
-  semester: { type: String, optional: false, minCount: 1 },
+  semester: { type: String, optional: false },
   rating: { type: Number, optional: true },
   comments: { type: String, optional: false },
 });

@@ -1,3 +1,6 @@
+import './boolean-form-field.html';
+import './boolean-form-field.js';
+
 import './career-goals-form-field.html';
 import './career-goals-form-field.js';
 
@@ -24,6 +27,12 @@ import './opportunity-types-form-field.js';
 
 import './prerequisites-form-field.html';
 import './prerequisites-form-field.js';
+
+import './rating-form-field.html';
+import './rating-form-field.js';
+
+import './reviewType-form-field.html';
+import './reviewType-form-field.js';
 
 import './role-form-field.html';
 import './role-form-field.js';

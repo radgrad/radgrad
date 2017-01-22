@@ -20,9 +20,10 @@ function passedCourseHelper(courseSlugName) {
     courseID: course[0]._id,
   }).fetch();
   _.map(ci, (c) => {
+    console.log(c);
     if (c.verified === true) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
-          c.grade === 'B' || c.grade === 'B-') {
+          c.grade === 'B' || c.grade === 'B-' || c.grade === 'CR') {
         ret = 'Completed';
       } else {
         ret = 'In plan, but not yet complete';
