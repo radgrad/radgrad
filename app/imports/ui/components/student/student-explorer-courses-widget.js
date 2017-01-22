@@ -111,7 +111,7 @@ Template.Student_Explorer_Courses_Widget.events({
       course: courseSlug,
       verified: false,
       note: course.number,
-      grade: '***',
+      grade: 'B',
       student: username,
     };
     CourseInstances.define(ci);

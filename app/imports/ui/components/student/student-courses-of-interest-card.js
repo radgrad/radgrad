@@ -155,7 +155,7 @@ Template.Student_Courses_Of_Interest_Card.events({
       course: courseSlug,
       verified: false,
       note: course.number,
-      grade: '***',
+      grade: 'B',
       student: username,
     };
     CourseInstances.define(ci);

@@ -74,7 +74,7 @@ class FeedCollection extends BaseInstanceCollection {
         if (opportunity !== undefined) {
           description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities.`;
           slugID = Slugs.define({
-            name: `feed-${Slugs.getDoc(Opportunities.findDoc(opportunityID).slugID).name}-new`,
+            name: `feed-${Slugs.findDoc(Opportunities.findDoc(opportunityID).slugID).name}-new`,
             entityName: this.getType(),
           });
           picture = '/images/radgrad_logo.png';
@@ -82,7 +82,7 @@ class FeedCollection extends BaseInstanceCollection {
           if (course !== undefined) {
             description = `${Courses.findDoc(courseID).name} has been added to Courses.`;
             slugID = Slugs.define({
-              name: `${Slugs.getDoc(Courses.findDoc(courseID).slugID).name}-new`,
+              name: `${Slugs.findDoc(Courses.findDoc(courseID).slugID).name}-new`,
               entityName: this.getType(),
             });
             picture = '/images/radgrad_logo.png';
