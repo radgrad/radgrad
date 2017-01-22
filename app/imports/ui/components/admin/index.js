@@ -13,6 +13,9 @@ import './add-interest-widget.js';
 import './add-opportunity-widget.html';
 import './add-opportunity-widget.js';
 
+import './add-review-widget.html';
+import './add-review-widget.js';
+
 import './add-teaser-widget.html';
 import './add-teaser-widget.js';
 
@@ -47,6 +50,9 @@ import './list-interests-widget.js';
 
 import './list-opportunities-widget.html';
 import './list-opportunities-widget.js';
+
+import './list-reviews-widget.html';
+import './list-reviews-widget.js';
 
 import './list-teasers-widget.html';
 import './list-teasers-widget.js';

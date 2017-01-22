@@ -53,10 +53,10 @@ class FeedCollection extends BaseInstanceCollection {
     let slugID;
     // TODO: The following logic is crazy hard to follow. What are allowable combinations of values?
     if (student) {
-      studentID = Users.getID(student);
+      studentID = student._id;
     }
     if (opportunity) {
-      opportunityID = Opportunities.getID(opportunity);
+      opportunityID = opportunity.opportunityID;
     }
     if (course) {
       courseID = Courses.getID(course);
@@ -91,7 +91,7 @@ class FeedCollection extends BaseInstanceCollection {
       if (feedType === 'verified') {
         description = `${Users.getFullName(studentID)} has been verified for 
         ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(opportunity.semesterID, false)}).`;
-        const username = Users.findDoc(studentID).username;
+        const username = student.username;
         const oppDate = Semesters.toString(opportunity.semesterID, true);
         const oppName = Slugs.findDoc((Opportunities.findDoc(opportunityID).slugID)).name;
         slugID = Slugs.define({ name: `feed-${username}-${oppName}-${oppDate}-new`, entityName: this.getType() });

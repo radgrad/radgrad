@@ -26,6 +26,9 @@ import './admin-datamodel-opportunities-page.js';
 
 import './admin-datamodel-page.html';
 
+import './admin-datamodel-reviews-page.html';
+import './admin-datamodel-reviews-page.js';
+
 import './admin-datamodel-teasers-page.html';
 import './admin-datamodel-teasers-page.js';
 
