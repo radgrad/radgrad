@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
@@ -25,11 +26,11 @@ Template.Student_Explorer_Courses_Add_Review_Widget.onCreated(function onCreated
 Template.Student_Explorer_Courses_Add_Review_Widget.helpers({
   ratings() {
     return [{ score: 1, description: '1 (In general, this is one of the worst ICS ' +
-    'courses/opportunities I have ever taken)'},
-      { score: 2, description: '2 (In general, this is below average for an ICS course/opportunity)'},
-      { score: 3, description: '3 (In general, this is an average ICS course/opportunity)'},
-      { score: 4, description: '4 (In general, this is above average for an ICS course/opportunity)'},
-      { score: 5, description: '5 (In general, this is one of the best ICS courses/opportunities I have ever taken)'}];
+    'courses/opportunities I have ever taken)' },
+      { score: 2, description: '2 (In general, this is below average for an ICS course/opportunity)' },
+      { score: 3, description: '3 (In general, this is an average ICS course/opportunity)' },
+      { score: 4, description: '4 (In general, this is above average for an ICS course/opportunity)' },
+      { score: 5, description: '5 (In general, this is one of the best ICS courses/opportunities I have ever taken)' }];
   },
   semesters() {
     const semesters = [];
@@ -40,7 +41,7 @@ Template.Student_Explorer_Courses_Add_Review_Widget.helpers({
     }).fetch();
     _.map(ci, (c) => {
       semesters.push(Semesters.findDoc(c.semesterID));
-  });
+    });
     return semesters;
   },
 });

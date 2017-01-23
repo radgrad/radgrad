@@ -55,23 +55,6 @@ function teaser(opp) {
   return oppTeaser[0];
 }
 
-function completedOpportunityHelper(opportunitySlugName) {
-  let ret = false;
-  const slug = Slugs.find({ name: opportunitySlugName }).fetch();
-  const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
-  console.log(opportunity);
-  const oi = OpportunityInstances.find({
-    studentID: getUserIdFromRoute(),
-    opportunityID: opportunity._id,
-    verified: true,
-  }).fetch();
-  if (oi.length > 0) {
-    ret = true;
-  }
-  console.log(oi);
-  return ret;
-}
-
 Template.Student_Explorer_Opportunities_Page.helpers({
   opportunity() {
     const opportunitySlugName = FlowRouter.getParam('opportunity');

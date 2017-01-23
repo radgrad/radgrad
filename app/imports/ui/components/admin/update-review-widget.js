@@ -37,15 +37,15 @@ Template.Update_Review_Widget.helpers({
     return Users.find({});
   },
   reviewTypes() {
-    return ['course','opportunity'];
+    return ['course', 'opportunity'];
   },
   ratings() {
     return [{ score: 1, description: '1 (In general, this is one of the worst ICS ' +
-    'courses/opportunities I have ever taken)'},
-      { score: 2, description: '2 (In general, this is below average for an ICS course/opportunity)'},
-      { score: 3, description: '3 (In general, this is an average ICS course/opportunity)'},
-      { score: 4, description: '4 (In general, this is above average for an ICS course/opportunity)'},
-      { score: 5, description: '5 (In general, this is one of the best ICS courses/opportunities I have ever taken)'}];
+    'courses/opportunities I have ever taken)' },
+      { score: 2, description: '2 (In general, this is below average for an ICS course/opportunity)' },
+      { score: 3, description: '3 (In general, this is an average ICS course/opportunity)' },
+      { score: 4, description: '4 (In general, this is above average for an ICS course/opportunity)' },
+      { score: 5, description: '5 (In general, this is one of the best ICS courses/opportunities I have ever taken)' }];
   },
   slug() {
     const review = Reviews.findDoc(Template.currentData().updateID.get());

@@ -22,10 +22,10 @@ Template.Student_Feed_Widget.helpers({
     return Users.getFullName(feed.studentID);
   },
   feedDescription(feed) {
-    var studentFullName = Users.getFullName(feed.studentID);
-    var studentAction = feed.description;
+    const studentFullName = Users.getFullName(feed.studentID);
+    let studentAction = feed.description;
     console.log(studentAction);
-    var studentAction = studentAction.split(studentFullName)[1];
+    studentAction = studentAction.split(studentFullName)[1];
     console.log(studentAction);
     return studentAction;
   },

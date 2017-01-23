@@ -39,7 +39,7 @@ Template.List_Reviews_Widget.helpers({
       }
       return '';
     });
-    return _.sortBy(sortByReviewee, function (review){
+    return _.sortBy(sortByReviewee, function (review) {
       return Users.getFullName(review.studentID);
     });
   },
