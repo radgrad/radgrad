@@ -19,8 +19,8 @@
       {{> TextArea_Form_Field label="Comments" rows=5 name="comments" placeholder="Add comments to your review here." value=review.comments errorMessage=(fieldError "comments") required=true}}
 
       <div class="fields">
-        {{> Boolean_Form_Field label="Moderated" checked=review.moderated name="moderated" errorMessage=(fieldError "moderated")}}
-        {{> Boolean_Form_Field label="Visible" checked=review.moderated name="visible" errorMessage=(fieldError "visible")}}
+        {{> Boolean_Form_Field label="Moderated" trueValue=(trueValue 'moderated') falseValue=(falseValue 'moderated') name="moderated" errorMessage=(fieldError "moderated")}}
+        {{> Boolean_Form_Field label="Visible" trueValue=(trueValue 'visible') falseValue=(falseValue 'visible') name="visible" errorMessage=(fieldError "visible")}}
       </div>
 
       {{> TextArea_Form_Field label="Moderator Comments" rows=5 value=review.moderatorComments name="moderatorComments" placeholder="Add moderator comments here." errorMessage=(fieldError "moderatorComments") }}

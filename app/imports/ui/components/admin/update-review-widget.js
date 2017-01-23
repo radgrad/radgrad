@@ -67,6 +67,26 @@ Template.Update_Review_Widget.helpers({
     const review = Reviews.findDoc(Template.currentData().updateID.get());
     return Semesters.findDoc(review.semesterID);
   },
+  trueValue(type) {
+    const review = Reviews.findDoc(Template.currentData().updateID.get());
+    let trueValue;
+    if (type === 'moderated') {
+      trueValue = review.moderated;
+    } else if (type === 'visible') {
+      trueValue = review.visible;
+    }
+    return trueValue;
+  },
+  falseValue(type) {
+    const review = Reviews.findDoc(Template.currentData().updateID.get());
+    let falseValue;
+    if (type === 'moderated') {
+      falseValue = !(review.moderated);
+    } else if (type === 'visible') {
+      falseValue = !(review.visible);
+    }
+    return falseValue;
+  },
 });
 
 Template.Update_Review_Widget.events({
@@ -76,6 +96,8 @@ Template.Update_Review_Widget.events({
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
+    updatedData.moderated = (updatedData.moderated === 'true');
+    updatedData.visible = (updatedData.visible === 'true');
     if (instance.context.isValid()) {
       Reviews.update(instance.data.updateID.get(), { $set: updatedData });
       FormUtils.indicateSuccess(instance, event);

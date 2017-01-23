@@ -48,6 +48,8 @@ Template.Add_Review_Widget.events({
     instance.context.resetValidation();
     addSchema.clean(newData);
     instance.context.validate(newData);
+    newData.moderated = (newData.moderated === 'true');
+    newData.visible = (newData.visible === 'true');
     if (instance.context.isValid()) {
       Reviews.define(newData);
       FormUtils.indicateSuccess(instance, event);

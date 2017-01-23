@@ -64,7 +64,6 @@ class ReviewCollection extends BaseInstanceCollection {
   define({ slug, student, reviewType, reviewee, semester, rating, comments,
       moderated = false, visible = true, moderatorComments }) {
     // Get instances, or throw error
-    console.log('HELLO 1');
     const studentID = Users.getID(student);
     // Get instances, or throw error if not found or not a valid reviewType
     let revieweeID;
@@ -82,23 +81,13 @@ class ReviewCollection extends BaseInstanceCollection {
     }
     // Guarantee that moderated and public are booleans.
     /* eslint no-param-reassign: "off" */
-    console.log("HELLO 1");
-    if (moderated === 'true') {
-      moderated = true;
-    } else if (moderated === 'false') {
-      moderated = false;
-    }
-    if (visible === 'true') {
-      visible = true;
-    } else if (visible === 'false') {
-      visible = false;
-    }
-    console.log('HELLO 2');
+    moderated = !!moderated;
+    visible = !!visible;
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the new Review and its Slug.
-    const reviewID = this._collection.insert({ slugID, studentID, reviewType,
-      revieweeID, semesterID, rating, comments, moderated, visible, moderatorComments });
+    const reviewID = this._collection.insert({ slugID, studentID,
+      reviewType, revieweeID, semesterID, rating, comments, moderated, visible, moderatorComments });
     Slugs.updateEntityID(slugID, reviewID);
 
     // Return the id to the newly created Review.
