@@ -30,7 +30,10 @@ function numReferences() {
 
 Template.List_Reviews_Widget.helpers({
   reviews() {
-    return Reviews.find().fetch();
+    const allReviews = Reviews.find().fetch();
+    return _.sortBy(allReviews, function(review){
+      return Users.getFullName(review.studentID);
+    });
   },
   count() {
     return Reviews.count();
