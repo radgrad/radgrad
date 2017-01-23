@@ -3,10 +3,10 @@
     <div class="ui info floating message">
       <i class="close icon"></i>
       <div class="ui accordion">
-        <div class="active title">
-          <i class="green dropdown icon"></i>
-          <i class="big green help circle icon"></i>
-          {{helpTitle}}
+        <div class="radgrad-help-title active title header">
+          <i class="dropdown icon"></i>
+          <span>{{helpTitle}}</span>
+          <i class="large help circle outline icon"></i>
         </div>
         <div class="active content">
           {{#markdown}}{{helpText}}{{/markdown}}
