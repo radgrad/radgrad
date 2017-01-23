@@ -24,9 +24,7 @@ Template.Student_Feed_Widget.helpers({
   feedDescription(feed) {
     const studentFullName = Users.getFullName(feed.studentID);
     let studentAction = feed.description;
-    console.log(studentAction);
     studentAction = studentAction.split(studentFullName)[1];
-    console.log(studentAction);
     return studentAction;
   },
   feedTimestamp(feed) {
