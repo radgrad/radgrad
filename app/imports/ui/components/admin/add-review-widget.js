@@ -14,8 +14,8 @@ const addSchema = new SimpleSchema({
   semester: { type: String, optional: false },
   rating: { type: Number, optional: false, min: 0, max: 5 },
   comments: { type: String, optional: false },
-  moderated: { type: Boolean, optional: true },
-  visible: { type: Boolean, optional: true },
+  moderated: { type: String, optional: true },
+  visible: { type: String, optional: true },
   moderatorComments: { type: String, optional: true },
 });
 

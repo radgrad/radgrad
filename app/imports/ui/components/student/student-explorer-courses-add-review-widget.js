@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
@@ -44,11 +45,11 @@ Template.Student_Explorer_Courses_Add_Review_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      newData['student'] = getRouteUserName();
+      newData.student = getRouteUserName();
       console.log(newData.slug);
-      newData['reviewType'] = 'course';
-      newData['reviewee'] = this.course._id;
-      newData['slug'] = `review-course-${newData.reviewee}-${newData.student}`;
+      newData.reviewType = 'course';
+      newData.reviewee = this.course._id;
+      newData.slug = `review-course-${Courses.getSlug(newData.reviewee)}-${newData.student}`;
       Reviews.define(newData);
       FormUtils.indicateSuccess(instance, event);
     } else {

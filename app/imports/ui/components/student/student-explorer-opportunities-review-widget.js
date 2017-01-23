@@ -31,6 +31,7 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
     const opportunity = this.opportunity;
     const matchingReviews = Reviews.find({
       revieweeID: opportunity._id,
+      visible: true,
     }).fetch();
     return matchingReviews;
   },

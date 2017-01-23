@@ -3,7 +3,7 @@
     <div class="ui padded container segment">
       <div class="ui dividing header"><h4>REVIEWS ({{ count }})</h4></div>
       {{#each review in reviews}}
-        {{> Admin_DataModel_Accordion name=opportunity.name slug=(slugName opportunity.slugID) descriptionPairs=(descriptionPairs opportunity) id=opportunity._id updateID=updateID deleteDisabled=(deleteDisabled opportunity)}}
+        {{> Admin_DataModel_Accordion name = '' slug=(slugName review.slugID) descriptionPairs=(descriptionPairs review) id=review._id updateID=updateID deleteDisabled=(deleteDisabled review)}}
       {{/each}}
     </div>
   {{else}}

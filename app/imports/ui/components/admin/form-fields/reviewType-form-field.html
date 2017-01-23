@@ -1,7 +1,7 @@
 <template name="ReviewType_Form_Field">
   <div class="{{#if required}}required{{/if}} field">
     <label>Review Type</label>
-    <select class="ui dropdown" name="role">
+    <select class="ui dropdown" name="reviewType">
       <option value="">Select Review Type</option>
       {{#each reviewType in reviewTypes}}
         <option value="{{reviewType}}" selected="{{isSelected reviewType selectedReviewType}}">{{reviewType}}</option>

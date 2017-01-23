@@ -69,6 +69,9 @@ import './update-career-goal-widget.js';
 import './update-course-widget.html';
 import './update-course-widget.js';
 
+import './update-review-widget.html';
+import './update-review-widget.js';
+
 import './update-help-message-widget.html';
 import './update-help-message-widget.js';
 

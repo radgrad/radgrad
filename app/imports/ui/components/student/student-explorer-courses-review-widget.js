@@ -31,6 +31,7 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
     const course = this.course;
     const matchingReviews = Reviews.find({
       revieweeID: course._id,
+      visible: true,
     }).fetch();
     return matchingReviews;
   },
