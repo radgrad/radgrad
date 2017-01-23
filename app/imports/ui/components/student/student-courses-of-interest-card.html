@@ -1,7 +1,7 @@
 <template name="Student_Courses_Of_Interest_Card">
   <div class="ui card">
     <div class="content">
-      <div class="header">{{courseName course}}</div>
+      <div class="header"><a>{{courseName course}}</a></div>
       <div class="meta">
         {{#each semester in courseSemesters course}}
           {{semester}}&nbsp;
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="content">
-      {{courseShortDescription course}}
+      {{courseShortDescription course}}<a>...</a>
     </div>
     <div class="content">
       {{numberStudents course}} students plan to participate
@@ -30,8 +30,7 @@
       </span>
     </div>
     <div class="ui three bottom attached buttons">
-      <div class="ui button">View more</div>
-      <div class="ui button chooseYear"><div class="chooseYear">Add to plan</div>
+      <div class="ui button chooseYear"><div class="chooseYear"><i class="plus icon"></i>Add to Plan</div>
         <div class="ui fluid popup transition hidden">
           <div class="ui vertical menu">
             {{#each year in nextYears 4}}
@@ -47,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div class="ui button">Hide</div>
+      <div class="ui button"><i class="hide icon"></i>Hide</div>
     </div>
   </div>
 </template>

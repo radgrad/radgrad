@@ -96,7 +96,7 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
   opportunityShortDescription(opp) {
     let description = opp.description;
     if (description.length > 200) {
-      description = `${description.substring(0, 200)} ...`;
+      description = `${description.substring(0, 200)}`;
     }
     return description;
   },
