@@ -37,7 +37,7 @@ Template.Admin_DataBase_Dump_Page.onCreated(function onCreated() {
 });
 
 // Must match the format in the server-side startup/server/fixtures.js
-export const restoreFileDateFormat = 'YYYY-MM-DD-hh-mm-ss';
+export const restoreFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
 
 Template.Admin_DataBase_Dump_Page.events({
   'click .jsDumpDB': function clickEvent(event, instance) {

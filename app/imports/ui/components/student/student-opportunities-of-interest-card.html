@@ -1,7 +1,7 @@
 <template name="Student_Opportunities_Of_Interest_Card">
   <div class="ui card">
     <div class="content">
-      <div class="header">{{opportunityName opportunity}}</div>
+      <div class="header"><a>{{opportunityName opportunity}}</a></div>
       <div class="meta">
         {{#each semester in opportunitySemesters opportunity}}
           {{semester}}&nbsp;
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="content">
-      {{opportunityShortDescription opportunity}}
+      {{opportunityShortDescription opportunity}}<a>...</a>
     </div>
     <div class="content">
       {{numberStudents opportunity}} students plan to participate
@@ -22,16 +22,15 @@
     <div class="content">
       <span class="left floated">
         {{#each interest in matchingInterests opportunity}}
-          <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
+          <a class="ui mini label"><i class="fitted star icon"></i>{{interestName interest}}</a>
         {{/each}}
         {{#each interest in otherInterests opportunity}}
-          <a class="ui grey mini label"><i style="color:white !important" class="fitted star icon"></i>{{interestName interest}}</a>
+          <a class="ui grey mini label"><i class="fitted star icon"></i>{{interestName interest}}</a>
         {{/each}}
       </span>
     </div>
     <div class="ui three bottom attached buttons">
-      <div class="ui button">View more</div>
-      <div class="ui button"><div class="chooseSemester">Add to plan</div>
+      <div class="ui button"><div class="chooseSemester"><i class="plus icon"></i>Add to plan</div>
         <div class="ui fluid popup transition hidden">
           <div class="ui vertical menu">
             {{#each semester in opportunitySemesters opportunity}}
@@ -40,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="ui button">Hide</div>
+      <div class="ui button"><i class="hide icon"></i>Hide</div>
     </div>
   </div>
 </template>

@@ -3,7 +3,6 @@
     <div class="ui segment">
       <div class="ui top attached green buttons">
         <div class="ui floating dropdown icon button">Courses
-          <i class="dropdown icon"></i>
           <div class="menu">
             <div class="item">
               <i class="dropdown icon"></i>
@@ -63,7 +62,6 @@
         </div>
         <div class="or"></div>
         <div class="ui floating dropdown icon button">&nbsp;&nbsp;Opportunities
-          <i class="dropdown icon"></i>
           <div class="menu">
             {{#each opportunity in opportunities}}
               <div id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</div>
@@ -96,7 +94,7 @@
               </span></p>
                   <p><b>Prerequisites:</b>
                     {{#each prerequisite in prerequisites}}
-                      <label class="ui mini {{#if missingPrerequisite
+                      <label style="text-transform: uppercase" class="ui mini {{#if missingPrerequisite
                                                   prerequisite}}red{{/if}} label">{{prerequisite}}</label>
                     {{/each}}
                   </p>
