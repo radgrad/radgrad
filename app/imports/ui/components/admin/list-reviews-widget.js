@@ -1,44 +1,50 @@
 import { Template } from 'meteor/templating';
+import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Users } from '../../../api/user/UserCollection';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { makeLink } from './datamodel-utilities';
-import { moment } from 'meteor/momentjs:moment';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 Template.List_Reviews_Widget.onCreated(function onCreated() {
   this.subscribe(Interests.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
   this.subscribe(OpportunityTypes.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Reviews.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
 
-function numReferences(opportunity) {
-  let references = 0;
-  [OpportunityInstances].forEach(function (entity) {
-    entity.find().forEach(function (doc) {
-      if (doc.opportunityID === opportunity._id) {
-        references += 1;
-      }
-    });
-  });
-  return references;
+function numReferences() {
+  // currently nothing refers to a Teaser, but maybe in future something will.
+  return 0;
 }
 
 Template.List_Reviews_Widget.helpers({
-  opportunities() {
-    return Opportunities.find({}, { sort: { name: 1 } });
+  reviews() {
+    const allReviews = Reviews.find().fetch();
+    const sortByReviewee = _.sortBy(allReviews, function (review) {
+      if (review.reviewType === 'course') {
+        return Courses.getSlug(review.revieweeID);
+      } else if (review.reviewType === 'opportunity') {
+        return Opportunities.getSlug(review.revieweeID);
+      }
+      return '';
+    });
+    return _.sortBy(sortByReviewee, function (review){
+      return Users.getFullName(review.studentID);
+    });
   },
   count() {
-    return Opportunities.count();
+    return Reviews.count();
   },
   deleteDisabled(opportunity) {
     return (numReferences(opportunity) > 0) ? 'disabled' : '';
@@ -46,19 +52,24 @@ Template.List_Reviews_Widget.helpers({
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
   },
-  descriptionPairs(opportunity) {
+  descriptionPairs(review) {
+    let reviewee;
+    if (review.reviewType === 'course') {
+      reviewee = Courses.findDoc(review.revieweeID);
+    } else if (review.reviewType === 'opportunity') {
+      reviewee = Opportunities.findDoc(review.revieweeID);
+    }
     return [
-      { label: 'Description', value: opportunity.description },
-      { label: 'Opportunity Type', value: OpportunityTypes.findDoc(opportunity.opportunityTypeID).name },
-      { label: 'Sponsor', value: Slugs.findDoc(Users.findDoc(opportunity.sponsorID).slugID).name },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
-      { label: 'Semesters', value: _.map(opportunity.semesterIDs, id => Semesters.toString(id)) },
-    { label: 'Icon', value: makeLink(opportunity.iconURL) },
-    { label: 'Event Date', value: moment(opportunity.eventDate).format('lll') },
-    { label: 'More Information', value: makeLink(opportunity.moreInformation) },
-    { label: 'ICE', value: `${opportunity.ice.i}, ${opportunity.ice.c}, ${opportunity.ice.e}` },
-    { label: 'References', value: `${numReferences(opportunity)}` },
-  ];
+      { label: 'Student', value: Users.getFullName(review.studentID) },
+      { label: 'Review Type', value: review.reviewType },
+      { label: 'Reviewee', value: reviewee.name },
+      { label: 'Semester', value: Semesters.toString(review.semesterID) },
+      { label: 'Rating', value: review.rating },
+      { label: 'Comments', value: review.comments },
+      { label: 'Moderated', value: review.moderated.toString() },
+      { label: 'Visible', value: review.visible.toString() },
+      { label: 'Moderator Comments', value: review.moderatorComments },
+    ];
   },
 });
 
@@ -67,6 +78,6 @@ Template.List_Reviews_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Opportunities.removeIt(id);
+    Reviews.removeIt(id);
   },
 });

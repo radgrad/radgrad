@@ -86,8 +86,8 @@ class ReviewCollection extends BaseInstanceCollection {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the new Review and its Slug.
-    const reviewID = this._collection.insert({ slugID, studentID, reviewType, revieweeID, semesterID,
-      rating, comments, moderated, visible, moderatorComments });
+    const reviewID = this._collection.insert({ slugID, studentID,
+      reviewType, revieweeID, semesterID, rating, comments, moderated, visible, moderatorComments });
     Slugs.updateEntityID(slugID, reviewID);
 
     // Return the id to the newly created Review.

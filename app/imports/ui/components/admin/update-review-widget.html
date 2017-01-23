@@ -1,0 +1,35 @@
+<template name="Update_Review_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE REVIEW</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label="Slug" name="slug" value=slug placeholder="review-course-ics141-abi" errorMessage=(fieldError "slug") required=true disabled=true}}
+        {{> Input_Form_Field label="Student" name="student" value=student placeholder="abi" errorMessage=(fieldError "student") required=true}}
+        {{> ReviewType_Form_Field reviewTypes=reviewTypes label="ReviewType" selectedReviewType=review.reviewType name="reviewType" placeholder="course" errorMessage=(fieldError "reviewType") required=true}}
+      </div>
+
+      <div class="fields">
+        {{> Input_Form_Field label="Reviewee" name="reviewee" value=reviewee placeholder="reviewee" errorMessage=(fieldError "reviewee") required=true}}
+        {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=review.semesterID errorMessage=(fieldError "semesters") required="true" }}
+        {{> Rating_Form_Field label="Rating" ratings=ratings name="rating" placeholder="3" selectedRating=review.rating errorMessage=(fieldError "rating") required=true type="number"}}
+      </div>
+
+      {{> TextArea_Form_Field label="Comments" rows=5 name="comments" placeholder="Add comments to your review here." value=review.comments errorMessage=(fieldError "comments") required=true}}
+
+      <div class="fields">
+        {{> Boolean_Form_Field label="Moderated" trueValue=(trueValue 'moderated') falseValue=(falseValue 'moderated') name="moderated" errorMessage=(fieldError "moderated")}}
+        {{> Boolean_Form_Field label="Visible" trueValue=(trueValue 'visible') falseValue=(falseValue 'visible') name="visible" errorMessage=(fieldError "visible")}}
+      </div>
+
+      {{> TextArea_Form_Field label="Moderator Comments" rows=5 value=review.moderatorComments name="moderatorComments" placeholder="Add moderator comments here." errorMessage=(fieldError "moderatorComments") }}
+
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+
+      {{> Success_Message_Form_Field message="The Review was successfully updated. Press cancel to continue."}}
+    </form>
+  </div>
+
+</template>
