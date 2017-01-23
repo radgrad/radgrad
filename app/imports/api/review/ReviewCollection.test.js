@@ -3,7 +3,6 @@
 
 import { ROLE } from '/imports/api/role/Role';
 import { Reviews } from '/imports/api/review/ReviewCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { defineSemesters } from '/imports/api/semester/SemesterUtilities';
 import { makeSampleOpportunity } from '/imports/api/opportunity/SampleOpportunities';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';

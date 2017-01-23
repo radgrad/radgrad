@@ -7,7 +7,7 @@
       <div class="fields">
         {{> Semesters_Single_Form_Field semesters=semesters name="semester" errorMessage=(fieldError "semester") required="true" }}
 
-        {{> Input_Form_Field label="Rating" name="rating" placeholder="Defaults to 3, between 1-15" errorMessage=(fieldError "rating") required=false}}
+        {{> Rating_Form_Field label="Rating" name="rating" ratings=ratings errorMessage=(fieldError "rating") required=false}}
       </div>
 
       {{> TextArea_Form_Field label="Comments" rows=5 name="comments" placeholder="Explain the reasoning behind your rating here." errorMessage=(fieldError "comments") required=true}}
