@@ -55,10 +55,10 @@ class FeedCollection extends BaseInstanceCollection {
     let slugID;
     // TODO: The following logic is crazy hard to follow. What are allowable combinations of values?
     if (student) {
-      studentID = student._id;
+      studentID = Users.getID(student);
     }
     if (opportunity) {
-      opportunityID = opportunity.opportunityID;
+      opportunityID = Opportunities.getID(opportunity);
     }
     if (course) {
       courseID = Courses.getID(course);
