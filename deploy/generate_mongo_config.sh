@@ -18,8 +18,8 @@ cat $ORIGINAL_CONFIG_FILE | \
 	sed "s|dbPath: /var/lib/mongo|dbPath: /var/lib/mongo_$SERVICE_NAME|" | \
 	sed "s|pidFilePath: /var/run/mongodb/mongod.pid|pidFilePath: /var/run/mongodb/mongod_$SERVICE_NAME.pid|" | \
 	sed "s|port:.*|port: $PORT|" \
-	> /tmp/mongod.conf
-sudo mv -f /tmp/mongod.conf $CONFIG_FILE
+	> /tmp/mongod_$SERVICE_NAME.conf
+sudo mv -f /tmp/mongod_$SERVICE_NAME.conf $CONFIG_FILE
 
 #echo "  Creating /var/lib/mongo_$SERVICE_NAME directory..."
 sudo mkdir -p /var/lib/mongo_$SERVICE_NAME
