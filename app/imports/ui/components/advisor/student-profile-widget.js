@@ -76,6 +76,7 @@ Template.Student_Profile_Widget.helpers({
   interestSelected(interest) {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
+      console.log('interestSelected', interest._id, _.indexOf(user.interestIDs, interest._id) !== -1);
       return _.indexOf(user.interestIDs, interest._id) !== -1;
     }
     return false;
@@ -106,6 +107,13 @@ Template.Student_Profile_Widget.helpers({
       return _.capitalize(Users.getRoles(user._id)[0]);
     }
     return 'Select Role';
+  },
+  userFullName() {
+    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
+      const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
+      return Users.getFullName(user._id);
+    }
+    return 'Select a student';
   },
 });
 

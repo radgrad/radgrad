@@ -24,6 +24,18 @@ const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
 Template.Student_Selector.helpers({
+  users(role) {
+    return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
+  },
+  url(user) {
+    return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
+  },
+  label(user) {
+    return `${user.lastName}, ${user.firstName} (${user.username})`;
+  },
+  studentRole() {
+    return ROLE.STUDENT;
+  },
   userFullName() {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const userID = Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID);
@@ -70,9 +82,10 @@ Template.Student_Selector.helpers({
 });
 
 Template.Student_Selector.events({
-  'submit .jsRetrieve': function clickJSRetrieve(event, instance) {
+  'click .jsRetrieve': function clickJSRetrieve(event, instance) {
     event.preventDefault();
-    const username = event.target.username.value;
+    const username = event.target.id;
+    console.log(username);
     instance.state.set('username', username);
     const user = Users.getUserFromUsername(username);
     if (user) {
@@ -98,12 +111,12 @@ Template.Student_Selector.events({
     event.preventDefault();
     const firstName = event.target.firstName.value;
     const lastName = event.target.lastName.value;
-    const username = event.target.username.value;
+    const userName = event.target.username.value;
     let uhID = event.target.uhID.value;
     if (uhID.length > 0 && uhID.indexOf('-') === -1) {
       uhID = `${uhID.substring(0, 4)}-${uhID.substring(4, 8)}`;
     }
-    const newStudentData = { firstName, lastName, username, uhID };
+    const newStudentData = { firstName, lastName, userName, uhID };
     // Clear out any old validation errors.
     instance.context.resetValidation();
     // Invoke clean so that newStudentData reflects what will be defined
@@ -111,14 +124,14 @@ Template.Student_Selector.events({
     // Determine validity
     instance.context.validate(newStudentData);
     if (instance.context.isValid()) {
-      const notDefined = Users.find({ username }).count() === 0;
+      const notDefined = Users.find({ username: userName }).count() === 0;
       if (notDefined) {
-        ValidUserAccounts.define({ username });
+        ValidUserAccounts.define({ username: userName });
         const userDefinition = {
           firstName,
           lastName,
-          slug: username,
-          email: `${username}@hawaii.edu`,
+          slug: userName,
+          email: `${userName}@hawaii.edu`,
           role: ROLE.STUDENT,
           uhID,
         };
@@ -129,23 +142,23 @@ Template.Student_Selector.events({
         });
         const feedDefinition = {
           userDefinition,
-          slug: `${username}-new-user`,
+          slug: `${userName}-new-user`,
           description: 'has joined RadGrad',
           timestamp: new Date(),
         };
         Feed.define(feedDefinition);
 
-        instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, username);
+        instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
         instance.state.set(sessionKeys.CURRENT_STUDENT_ID, studentID);
         instance.state.set('notDefined', false);
-        instance.state.set(displaySuccessMessage, username);
+        instance.state.set(displaySuccessMessage, userName);
         instance.state.set(displayErrorMessages, false);
         instance.state.set('addNewUser', false);
       } else {
         instance.state.set(displaySuccessMessage, false);
         instance.state.set(displayErrorMessages, true);
         instance.state.set('alreadyDefined', true);
-        instance.state.set('username', username);
+        instance.state.set('username', userName);
       }
     } else {
       instance.state.set(displaySuccessMessage, false);
@@ -169,6 +182,7 @@ Template.Student_Selector.onCreated(function studentSelectorOnCreated() {
 });
 
 Template.Student_Selector.onRendered(function studentSelectorOnRendered() {
+  this.$('.menu .item').tab();
   this.$('.dropdown').dropdown({
     // action: 'select',
   });
