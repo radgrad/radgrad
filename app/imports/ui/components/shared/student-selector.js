@@ -78,6 +78,7 @@ Template.Student_Selector.events({
       instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, username);
       instance.state.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
       instance.state.set('notDefined', false);
+      instance.studentID.set(user._id);
     } else {
       instance.state.set(displaySuccessMessage, false);
       instance.state.set(displayErrorMessages, true);
@@ -153,10 +154,14 @@ Template.Student_Selector.events({
 });
 
 Template.Student_Selector.onCreated(function studentSelectorOnCreated() {
+  console.log(this.data);
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   } else {
     this.state = new ReactiveDict();
+  }
+  if (this.data.studentID) {
+    this.studentID = this.data.studentID;
   }
   this.state.set(displaySuccessMessage, false);
   this.state.set(displayErrorMessages, false);

@@ -6,3 +6,6 @@ import './degree-plan-generator-widget.js';
 
 import './student-profile-widget.html';
 import './student-profile-widget.js';
+
+import './update-degree-plan-widget.html';
+import './update-degree-plan-widget.js';

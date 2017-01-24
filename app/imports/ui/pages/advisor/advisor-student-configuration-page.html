@@ -4,16 +4,17 @@
       <div class="ui stackable grid container">
         {{> Help_Panel_Widget}}
 
-        {{> Student_Selector dictionary=getDictionary}}
+        {{> Student_Selector dictionary=getDictionary studentID=studentID}}
 
         <div class="ten wide column">
-          {{> Student_Profile_Widget dictionary=getDictionary}}
+          <!--{{> Student_Profile_Widget dictionary=getDictionary}}-->
+          {{> Update_Degree_Plan_Widget studentID=studentID}}
         </div>
         <div class="six wide column">
-          {{> Degree_Plan_Generator_Widget dictionary=getDictionary}}
+          <!--{{> Degree_Plan_Generator_Widget dictionary=getDictionary}}-->
+          {{> Advisor_Log_Entry_Widget dictionary=getDictionary}}
         </div>
         <div class="six wide stretched column">
-          {{> Advisor_Log_Entry_Widget dictionary=getDictionary}}
         </div>
       </div>
     {{else}}
