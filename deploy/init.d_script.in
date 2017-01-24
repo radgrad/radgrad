@@ -22,7 +22,7 @@ export METEOR_GROUP=@SERVICE_NAME@
 ###################################################
 MONGO_URL=mongodb://localhost:@MONGO_PORT@
 PORT=@PORT@
-ROOT_URL=http://localhost:@PORT@@URL_SUFFIX@
+ROOT_URL=http://@SERVER_NAME@@URL_SUFFIX@
 
 
 # Assign useful paths to variables
