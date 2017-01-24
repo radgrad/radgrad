@@ -6,7 +6,6 @@ import { Users } from '/imports/api/user/UserCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 
 /** @module Review */
@@ -31,7 +30,7 @@ class ReviewCollection extends BaseInstanceCollection {
       comments: { type: String },
       moderated: { type: Boolean },
       visible: { type: Boolean },
-      moderatorComments: { type: String, optional: true},
+      moderatorComments: { type: String, optional: true },
     }));
   }
 
@@ -134,7 +133,7 @@ class ReviewCollection extends BaseInstanceCollection {
       if (!Semesters.isDefined(doc.semesterID)) {
         problems.push(`Bad studentID: ${doc.semesterID}`);
       }
-  });
+    });
     return problems;
   }
 
@@ -161,7 +160,7 @@ class ReviewCollection extends BaseInstanceCollection {
     const visible = doc.visible;
     const moderatorComments = doc.moderatorComments;
 
-    return { slug, student, reviewType, reviewee, semester, rating, comments, moderated, visible, moderatorComments  };
+    return { slug, student, reviewType, reviewee, semester, rating, comments, moderated, visible, moderatorComments };
   }
 }
 
