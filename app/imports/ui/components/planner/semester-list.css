@@ -1,5 +1,5 @@
 .layout-page.degreePlanner {
-  padding-top: 70px;
+  padding-top: 82px;
 }
 
 .degreePlanner div.stretched.row {
@@ -27,4 +27,8 @@
 
 .degreePlanner .ui.table tr td {
   padding: 2px 4px;
+}
+
+body.waiting * {
+  cursor: progress;
 }

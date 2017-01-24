@@ -50,9 +50,13 @@ Template.Verification_Requests_Pending.events({
       request.status = VerificationRequests.ACCEPTED;
       processRecord.status = VerificationRequests.ACCEPTED;
       OpportunityInstances.updateVerified(request.opportunityInstanceID, true);
+      const opportunities = OpportunityInstances.find({
+        studentID: VerificationRequests.getStudentDoc(request._id)._id,
+        opportunityID: VerificationRequests.getOpportunityDoc(request._id)._id,
+      }).fetch();
       const feedDefinition = {
-        student: VerificationRequests.getStudentDoc(request._id)._id,
-        opportunity: VerificationRequests.getOpportunityDoc(request._id)._id,
+        student: VerificationRequests.getStudentDoc(request._id),
+        opportunity: opportunities[0],
         feedType: 'verified',
         timestamp: Date.now(),
       };

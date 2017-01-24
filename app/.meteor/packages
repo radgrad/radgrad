@@ -57,5 +57,8 @@ less@2.7.8
 insecure@1.0.7
 markdown
 ostrio:files
+# meteorhacks:kadira
+# meteorhacks:kadira-profiler
+jag:pince
 johanbrook:publication-collector
 udondan:zipzap

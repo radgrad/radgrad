@@ -22,7 +22,10 @@ Template.Student_Feed_Widget.helpers({
     return Users.getFullName(feed.studentID);
   },
   feedDescription(feed) {
-    return feed.description;
+    const studentFullName = Users.getFullName(feed.studentID);
+    let studentAction = feed.description;
+    studentAction = studentAction.split(studentFullName)[1];
+    return studentAction;
   },
   feedTimestamp(feed) {
     let ret = '';

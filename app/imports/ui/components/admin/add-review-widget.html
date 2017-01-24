@@ -1,0 +1,34 @@
+<template name="Add_Review_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD REVIEW</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Form_Field label="Slug" name="slug" placeholder="review-course-ics141-abi" errorMessage=(fieldError "slug") required=true}}
+        {{> Input_Form_Field label="Student" name="student" placeholder="abi" errorMessage=(fieldError "student") required=true}}
+        {{> ReviewType_Form_Field reviewTypes=reviewTypes label="ReviewType" name="reviewType" placeholder="course" errorMessage=(fieldError "reviewType") required=true}}
+      </div>
+
+      <div class="fields">
+        {{> Input_Form_Field label="Reviewee" name="reviewee" placeholder="ics141" errorMessage=(fieldError "reviewee") required=true}}
+        {{> Semesters_Single_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
+        {{> Rating_Form_Field label="Rating" ratings=ratings name="rating" placeholder="3" errorMessage=(fieldError "rating") required=true type="number"}}
+      </div>
+
+      {{> TextArea_Form_Field label="Comments" rows=5 name="comments" placeholder="Add comments to your review here." errorMessage=(fieldError "comments") required=true}}
+
+      <div class="fields">
+        {{> Boolean_Form_Field label="Moderated" name="moderated" errorMessage=(fieldError "moderated")}}
+        {{> Boolean_Form_Field label="Visible" name="visible" errorMessage=(fieldError "visible")}}
+      </div>
+
+      {{> TextArea_Form_Field label="Moderator Comments" rows=5 name="moderatorComments" placeholder="Add moderator comments here." value = '' errorMessage=(fieldError "moderatorComments") }}
+
+      <button class="ui green basic button" type="submit">Add</button>
+
+      {{> Success_Message_Form_Field message="The Review was successfully added."}}
+    </form>
+  </div>
+
+</template>

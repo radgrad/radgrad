@@ -84,7 +84,7 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   courseShortDescription(course) {
     let description = course.description;
     if (description.length > 200) {
-      description = `${description.substring(0, 200)}...`;
+      description = `${description.substring(0, 200)}`;
     }
     return description;
   },
@@ -155,7 +155,7 @@ Template.Student_Courses_Of_Interest_Card.events({
       course: courseSlug,
       verified: false,
       note: course.number,
-      grade: '***',
+      grade: 'B',
       student: username,
     };
     CourseInstances.define(ci);

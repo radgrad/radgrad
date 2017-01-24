@@ -1,64 +1,63 @@
 <template name="Academic_Plan_2">
-  <div class="ui divided stackable grid">
-    <div class="stretched row">
+  <!--{{#if Template.subscriptionsReady}}-->
+    <div class="ui divided stackable grid">
+      <div class="stretched row">
+        <div class="ui ten wide column">
+          <div class="ui equal width stackable grid">
+            <div class=" row">
+              {{#each year in years}}
+                <div class="stretched column academicYear" style="padding-left: 2px; padding-right: 2px;">
+                  <!--<div class="ui center aligned padded segment">-->
+                  <!--<div class="ui dividing header"><h4>AY {{year.year}} - {{year.springYear}}</h4></div>-->
+                  {{> Semester_List (fallArgs year)}}
+                  {{> Semester_List (springArgs year)}}
+                  {{> Semester_List (summerArgs year)}}
+                  <!--</div>-->
+                </div>
+              {{/each}}
+            </div>
+            <div class="row noTopPadding">
+              {{#each year in years}}
+                <div class="column">
+                  {{> Cumulative_Ice_Component year=year}}
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        <div class="ui six wide column">
+          {{> Inspector dictionary=getDictionary}}
+          {{> Recommendations}}
+          {{> Warnings}}
+        </div>
+      </div>
+    </div>
+    <div class="ui grid">
       <div class="ui ten wide column">
-        <div class="ui equal width stackable grid">
-          <div class=" row">
-            {{#each year in years}}
-            <div class="stretched column academicYear" style="padding-left: 2px; padding-right: 2px;">
-              <!--<div class="ui center aligned padded segment">-->
-              <!--<div class="ui dividing header"><h4>AY {{year.year}} - {{year.springYear}}</h4></div>-->
-              {{> Semester_List (fallArgs year)}}
-              {{> Semester_List (springArgs year)}}
-              {{> Semester_List (summerArgs year)}}
-              <!--</div>-->
-            </div>
-            {{/each}}
+        <div class="ui equal width grid">
+          <div class="column">
+            {{#if hasPrevYear}}
+              <button id="prevYear" class="ui icon green button" data-content="View previous academic year">
+                <i class="ui arrow left icon"></i></button>
+              Previous Year
+            {{/if}}
           </div>
-          <div class="row noTopPadding">
-            {{#each year in years}}
-              <div class="column">
-                {{> Cumulative_Ice_Component year=year}}
-                <!--{{#if isFuture year}}-->
-                  <!--{{> ICE_Badge_Proj ice=(yearPlanningICE year)}}-->
-                <!--{{else}}-->
-                  <!--{{> ICE_Badge ice=(yearICE year)}}-->
-                <!--{{/if}}-->
-            </div>
-            {{/each}}
+          <div class="center aligned column">
+            <button id="addAY" class="positive ui icon button"><i class="ui plus icon"></i> Add Academic Year</button>
+          </div>
+          <div class="right aligned column">
+            {{#if hasNextYear}}
+              Next Year&nbsp;
+              <button id="nextYear" class="ui icon green button"><i
+                  class="ui arrow right icon" data-content="View next academic year"></i></button>
+            {{/if}}
           </div>
         </div>
       </div>
-      <div class="ui six wide column">
-        {{> Inspector dictionary=getDictionary}}
-        {{> Recommendations}}
-        {{> Warnings}}
-      </div>
     </div>
-  </div>
-  <div class="ui grid">
-    <div class="ui ten wide column">
-      <div class="ui equal width grid">
-        <div class="column">
-          {{#if hasPrevYear}}
-          <button id="prevYear" class="ui icon green button" data-content="View previous academic year">
-            <i class="ui arrow left icon"></i></button>
-          Previous Year
-          {{/if}}
-        </div>
-        <div class="center aligned column">
-          <button id="addAY" class="positive ui icon button"><i class="ui plus icon"></i> Add Academic Year</button>
-        </div>
-        <div class="right aligned column">
-          {{#if hasNextYear}}
-          Next Year&nbsp;
-          <button id="nextYear" class="ui icon green button"><i
-              class="ui arrow right icon" data-content="View next academic year"></i></button>
-          {{/if}}
-        </div>
-      </div>
-    </div>
-  </div>
+  <!--{{else}}-->
+    <!--{{> Loading}}-->
+  <!--{{/if}}-->
   <script>
     function allowDrop(ev) {
       ev.preventDefault();

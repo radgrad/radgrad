@@ -7,6 +7,7 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { makeLink } from '../../components/admin/datamodel-utilities';
+import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
@@ -19,9 +20,10 @@ function passedCourseHelper(courseSlugName) {
     courseID: course[0]._id,
   }).fetch();
   _.map(ci, (c) => {
+    console.log(c);
     if (c.verified === true) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
-          c.grade === 'B' || c.grade === 'B-') {
+          c.grade === 'B' || c.grade === 'B-' || c.grade === 'CR') {
         ret = 'Completed';
       } else {
         ret = 'In plan, but not yet complete';
@@ -111,11 +113,31 @@ Template.Student_Explorer_Courses_Page.helpers({
     });
     return addedCourses;
   },
+  completed() {
+    let ret = false;
+    const courseSlugName = FlowRouter.getParam('course');
+    const courseStatus = passedCourseHelper(courseSlugName);
+    if (courseStatus === 'Completed') {
+      ret = true;
+    }
+    return ret;
+  },
   courseName(course) {
     return course.shortName;
   },
   count() {
     return Courses.count() - 1;
+  },
+  reviewed(course) {
+    let ret = false;
+    const review = Reviews.find({
+      studentID: getUserIdFromRoute(),
+      revieweeID: course._id,
+    }).fetch();
+    if (review.length > 0) {
+      ret = true;
+    }
+    return ret;
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;

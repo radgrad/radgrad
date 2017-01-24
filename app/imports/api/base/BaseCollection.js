@@ -189,7 +189,12 @@ class BaseCollection {
    * @returns {Object} An object representing the contents of this collection.
    */
   dumpAll() {
-    return { name: this._collectionName, contents: this.find().map(docID => this.dumpOne(docID)) };
+    const dumpObject = { name: this._collectionName, contents: this.find().map(docID => this.dumpOne(docID)) };
+    // sort the contents array by slug (if present)
+    if (dumpObject.contents[0] && dumpObject.contents[0].slug) {
+      dumpObject.contents = _.sortBy(dumpObject.contents, obj => obj.slug);
+    }
+    return dumpObject;
   }
 
   /**
