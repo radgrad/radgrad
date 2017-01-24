@@ -25,6 +25,30 @@
         {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError "interests")}}
       </div>
       {{> Desired_Degree_Form_Field desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "desiredDegree")}}
+      <div class="field">
+        <!-- CSV -->
+        <label>STAR CSV</label>
+        <div class="ui action input">
+          {{#with currentUpload}}
+            Uploading <b>{{file.name}}</b>:
+            <span id="progress">{{progress.get}}%</span>
+          {{else}}
+            <input id="fileInput" type="file"/>
+          {{/with}}
+          <!--<input id="fileInput" type="file"/>-->
+          <button class="ui basic green button jsStarData" type="submit">Load Star Data</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <!-- Star Data Log -->
+        <label>STAR Data Upload Log</label>
+        {{#each log in starLogs}}
+          <div class="ui segment">
+            <p><strong>{{log.uploadedOn}}:</strong> {{log.note}}</p>
+          </div>
+        {{/each}}
+      </div>
 
     </form>
   </div>

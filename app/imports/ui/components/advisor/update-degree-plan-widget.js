@@ -1,3 +1,5 @@
+/* global FileReader */
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -84,6 +86,22 @@ Template.Update_Degree_Plan_Widget.helpers({
 });
 
 Template.Update_Degree_Plan_Widget.events({
+  'click .jsStarData': function clickJsStarData(event, instance) {
+    event.preventDefault();
+    if (instance.studentID.get()) {
+      const student = Users.findDoc(instance.studentID.get());
+      const fileName = event.target.parentElement.getElementsByTagName('input')[0];
+      if (fileName.files && fileName.files[0]) {
+        const starData = fileName.files[0];
+        const fr = new FileReader();
+        fr.onload = (e) => {
+          const csvData = e.target.result;
+          Meteor.call('StarProcessor.loadStarCsvData', student.username, csvData);
+        };
+        fr.readAsText(starData);
+      }
+    }
+  },
   // add your events here
 });
 

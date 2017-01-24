@@ -7,8 +7,11 @@
         {{> Student_Selector dictionary=getDictionary studentID=studentID}}
 
         <div class="ten wide column">
-          <!--{{> Student_Profile_Widget dictionary=getDictionary}}-->
-          {{> Update_Degree_Plan_Widget studentID=studentID}}
+          {{#if displayUpdateWidget}}
+            {{> Update_Degree_Plan_Widget studentID=studentID}}
+          {{else}}
+            {{> Update_Degree_Plan_Widget studentID=studentID}}
+          {{/if}}
         </div>
         <div class="six wide column">
           <!--{{> Degree_Plan_Generator_Widget dictionary=getDictionary}}-->
