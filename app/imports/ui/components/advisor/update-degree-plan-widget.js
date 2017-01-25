@@ -8,7 +8,6 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
-import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -102,7 +101,6 @@ Template.Update_Degree_Plan_Widget.events({
       }
     }
   },
-  // add your events here
 });
 
 Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
@@ -112,7 +110,6 @@ Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCr
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
-  this.subscribe(ValidUserAccounts.getPublicationName());
 });
 
 Template.Update_Degree_Plan_Widget.onRendered(function updateDegreePlanWidgetOnRendered() {
