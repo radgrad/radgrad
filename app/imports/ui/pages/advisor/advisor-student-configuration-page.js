@@ -15,7 +15,7 @@ Template.Advisor_Student_Configuration_Page.helpers({
     const currID = Template.instance().studentID.get();
     let ret = false;
     if (!prevID && currID) {
-      ret = true;
+      // ret = true;
       Template.instance().prevID.set(currID);
     } else if (prevID === currID) {
       ret = true;
