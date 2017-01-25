@@ -4,8 +4,12 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -90,7 +94,6 @@ Template.Update_Degree_Plan_Widget.helpers({
   selectedRole() {
     if (Template.currentData().studentID.get()) {
       const user = Users.findDoc(Template.currentData().studentID.get());
-      console.log('selectedRole', user.roles[0]);
       return user.roles[0];
     }
     return '';
@@ -101,46 +104,41 @@ Template.Update_Degree_Plan_Widget.events({
   'click .jsGeneratePlan': function clickGeneratePlan(event, instance) {
     event.preventDefault();
     instance.$('.ui.modal').modal({
-      onDeny: function () {
-        console.log(instance);
-      },
-      onApprove: function () {
+      onApprove() {
         const studentID = instance.data.studentID.get();
         const student = Users.findDoc(studentID);
         const currentSemester = Semesters.getCurrentSemesterDoc();
         const selectedSemesterID = instance.$('#planningSemester').val();
-        console.log('selectedSemesterID', selectedSemesterID);
-        // let startSemester;
-        // if () {
-        //   startSemester = Semesters.findDoc()
-        // }
-        // if (!startSemester) {
-        //   startSemester = currentSemester;
-        // }
-        // if (currentSemester.sortBy === startSemester.sortBy) {
-        //   startSemester = semUtils.nextFallSpringSemester(startSemester);
-        // }
-        // // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
-        // courseUtils.clearPlannedCourseInstances(studentID);
-        // opportunityUtils.clearPlannedOpportunityInstances(studentID);
-        // const cis = CourseInstances.find({ studentID }).fetch();
-        // const ays = AcademicYearInstances.find({ studentID }).fetch();
-        // if (cis.length === 0) {
-        //   _.map(ays, (year) => {
-        //     AcademicYearInstances.removeIt(year._id);
-        //   });
-        // } else {
-        //   // TODO: CAM figure out which AYs to remove.
-        // }
-        // if (student.desiredDegreeID) {
-        //   const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
-        //   if (degree.shortName.startsWith('B.S.')) {
-        //     planUtils.generateBSDegreePlan(student, startSemester);
-        //   }
-        //   if (degree.shortName.startsWith('B.A.')) {
-        //     planUtils.generateBADegreePlan(student, startSemester);
-        //   }
-        // }
+        let startSemester;
+        if (selectedSemesterID) {
+          startSemester = Semesters.findDoc(selectedSemesterID);
+        } else {
+          startSemester = currentSemester;
+        }
+        if (currentSemester.sortBy === startSemester.sortBy) {
+          startSemester = semUtils.nextFallSpringSemester(startSemester);
+        }
+        // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
+        courseUtils.clearPlannedCourseInstances(studentID);
+        opportunityUtils.clearPlannedOpportunityInstances(studentID);
+        const cis = CourseInstances.find({ studentID }).fetch();
+        const ays = AcademicYearInstances.find({ studentID }).fetch();
+        if (cis.length === 0) {
+          _.map(ays, (year) => {
+            AcademicYearInstances.removeIt(year._id);
+          });
+        } else {
+          // TODO: CAM figure out which AYs to remove.
+        }
+        if (student.desiredDegreeID) {
+          const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
+          if (degree.shortName.startsWith('B.S.')) {
+            planUtils.generateBSDegreePlan(student, startSemester);
+          }
+          if (degree.shortName.startsWith('B.A.')) {
+            planUtils.generateBADegreePlan(student, startSemester);
+          }
+        }
       },
     }).modal('show');
   },
@@ -151,7 +149,11 @@ Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCr
   this.subscribe(AcademicYearInstances.getPublicationName());
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityTypes.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
