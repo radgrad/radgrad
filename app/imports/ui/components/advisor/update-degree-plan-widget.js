@@ -5,6 +5,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
@@ -52,6 +53,13 @@ Template.Update_Degree_Plan_Widget.helpers({
       return Slugs.findDoc(user.slugID).name;
     }
     return '';
+  },
+  semesters() {
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    return _.filter(Semesters.find({ sortBy: { $gte: currentSemester.sortBy } }, { sort: { sortBy: 1 } }).fetch(),
+        function notSummer(s) {
+          return s.term !== Semesters.SUMMER;
+        });
   },
   selectedInterestIDs() {
     if (Template.currentData().studentID.get()) {
@@ -107,6 +115,7 @@ Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCr
   FormUtils.setupFormWidget(this, updateSchema);
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
