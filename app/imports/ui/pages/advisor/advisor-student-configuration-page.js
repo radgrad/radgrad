@@ -10,7 +10,7 @@ Template.Advisor_Student_Configuration_Page.helpers({
   studentID() {
     return Template.instance().studentID;
   },
-  displayUpdateWidget() {
+  displayWidget() {
     const prevID = Template.instance().prevID.get();
     const currID = Template.instance().studentID.get();
     let ret = false;

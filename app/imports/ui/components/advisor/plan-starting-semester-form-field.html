@@ -1,7 +1,7 @@
 <template name="Plan_Starting_Semester_Form_Field">
   <div class="{{#if required}}required{{/if}} field">
     <label>Starting Semester</label>
-    <select class="ui dropdown" name="semester">
+    <select id="planningSemester" class="ui dropdown" name="semester">
       <option value="">Select Semester</option>
       {{#each semester in semesters}}
         <option value="{{semester._id}}" selected="{{isSelected semester._id selectedSemesterID}}">{{semester.term}} {{semester.year}}</option>

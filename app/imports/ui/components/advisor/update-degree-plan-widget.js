@@ -1,8 +1,9 @@
 /* global FileReader */
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -10,6 +11,10 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as planUtils from '../../../api/degree-program/plan-generator';
+import * as semUtils from '../../../api/semester/SemesterUtilities';
+import * as courseUtils from '../../../api/course/CourseFunctions';
+import * as opportunityUtils from '../../../api/opportunity/OpportunityFunctions';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 const updateSchema = new SimpleSchema({
@@ -93,27 +98,59 @@ Template.Update_Degree_Plan_Widget.helpers({
 });
 
 Template.Update_Degree_Plan_Widget.events({
-  'click .jsStarData': function clickJsStarData(event, instance) {
+  'click .jsGeneratePlan': function clickGeneratePlan(event, instance) {
     event.preventDefault();
-    if (instance.studentID.get()) {
-      const student = Users.findDoc(instance.studentID.get());
-      const fileName = event.target.parentElement.getElementsByTagName('input')[0];
-      if (fileName.files && fileName.files[0]) {
-        const starData = fileName.files[0];
-        const fr = new FileReader();
-        fr.onload = (e) => {
-          const csvData = e.target.result;
-          Meteor.call('StarProcessor.loadStarCsvData', student.username, csvData);
-        };
-        fr.readAsText(starData);
-      }
-    }
+    instance.$('.ui.modal').modal({
+      onDeny: function () {
+        console.log(instance);
+      },
+      onApprove: function () {
+        const studentID = instance.data.studentID.get();
+        const student = Users.findDoc(studentID);
+        const currentSemester = Semesters.getCurrentSemesterDoc();
+        const selectedSemesterID = instance.$('#planningSemester').val();
+        console.log('selectedSemesterID', selectedSemesterID);
+        // let startSemester;
+        // if () {
+        //   startSemester = Semesters.findDoc()
+        // }
+        // if (!startSemester) {
+        //   startSemester = currentSemester;
+        // }
+        // if (currentSemester.sortBy === startSemester.sortBy) {
+        //   startSemester = semUtils.nextFallSpringSemester(startSemester);
+        // }
+        // // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
+        // courseUtils.clearPlannedCourseInstances(studentID);
+        // opportunityUtils.clearPlannedOpportunityInstances(studentID);
+        // const cis = CourseInstances.find({ studentID }).fetch();
+        // const ays = AcademicYearInstances.find({ studentID }).fetch();
+        // if (cis.length === 0) {
+        //   _.map(ays, (year) => {
+        //     AcademicYearInstances.removeIt(year._id);
+        //   });
+        // } else {
+        //   // TODO: CAM figure out which AYs to remove.
+        // }
+        // if (student.desiredDegreeID) {
+        //   const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
+        //   if (degree.shortName.startsWith('B.S.')) {
+        //     planUtils.generateBSDegreePlan(student, startSemester);
+        //   }
+        //   if (degree.shortName.startsWith('B.A.')) {
+        //     planUtils.generateBADegreePlan(student, startSemester);
+        //   }
+        // }
+      },
+    }).modal('show');
   },
 });
 
 Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
+  this.subscribe(AcademicYearInstances.getPublicationName());
   this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());

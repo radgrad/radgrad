@@ -155,7 +155,6 @@ Template.Student_Selector.events({
 });
 
 Template.Student_Selector.onCreated(function studentSelectorOnCreated() {
-  console.log(this.data);
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   } else {

@@ -28,7 +28,36 @@
 
         {{> Plan_Starting_Semester_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
 
+
       </form>
+
+      <div class="ui bottom attached basic green button jsGeneratePlan" tabindex="0">Generate Degree Plan</div>
+      {{#if slug}}
+      <p>View {{slug}}'s degree plan <a target="_blank" href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a> </p>
+      {{/if}}
+
+    </div>
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+        Generate Degree Plan
+      </div>
+      <div class="ui error message">
+        <div class="header">
+          Warning!
+        </div>
+        <p>This will delete any courses and opportunities currently planned for future semesters!</p>
+        <p>Continue?</p>
+      </div>
+      <div class="actions">
+        <div class="ui positive right labeled icon button">
+          Yes
+          <i class="checkmark icon"></i>
+        </div>
+        <div class="ui black deny button">
+          No
+        </div>
+      </div>
     </div>
   {{else}}
     {{> Loading}}
