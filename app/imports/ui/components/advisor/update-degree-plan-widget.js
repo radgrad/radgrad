@@ -1,4 +1,5 @@
 /* global FileReader */
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
@@ -142,6 +143,30 @@ Template.Update_Degree_Plan_Widget.events({
       },
     }).modal('show');
   },
+  submit(event, instance) {
+    event.preventDefault();
+    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    instance.context.resetValidation();
+    updateSchema.clean(updatedData);
+    instance.context.validate(updatedData);
+    if (instance.context.isValid()) {
+      FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
+      FormUtils.renameKey(updatedData, 'careerGoals', 'careerGoalIDs');
+      FormUtils.renameKey(updatedData, 'desiredDegree', 'desiredDegreeID');
+      FormUtils.renameKey(updatedData, 'slug', 'username');
+      Meteor.call('Users.update', updatedData, (error) => {
+        if (error) {
+          console.log('Error during user update: ', error);
+        }
+        // FormUtils.indicateSuccess(instance, event);
+        instance.successClass.set('success');
+        instance.errorClass.set('');
+      });
+    } else {
+      FormUtils.indicateError(instance);
+    }
+  },
+  // 'click .jsCancel': FormUtils.processCancelButtonClick,
 });
 
 Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
