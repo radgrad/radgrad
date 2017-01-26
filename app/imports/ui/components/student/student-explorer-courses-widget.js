@@ -76,22 +76,32 @@ Template.Student_Explorer_Courses_Widget.helpers({
     }
     return ret;
   },
+  getTableTitle(tableIndex) {
+    switch (tableIndex) {
+      case 0:
+        return '<h4><i class="green checkmark icon"></i>Completed</h4>';
+      case 1:
+        return '<h4><i class="yellow warning sign icon"></i>In Plan (Not Yet Completed)</h4>';
+      case 2:
+        return '<h4><i class="red warning circle icon"></i>Not in Plan';
+    }
+  },
   tableStyle(table) {
     let tableColor;
     let tableIcon;
     let tableTitle;
     if (table[0].status === 'Completed') {
-      tableColor = 'positive';
+      tableColor = 'green';
       tableIcon = 'icon checkmark';
       tableTitle = 'Completed';
     } else if (table[0].status === 'Not in plan') {
-      tableColor = 'negative';
+      tableColor = 'red';
       tableIcon = 'warning circle icon';
-      tableTitle = 'Not in plan';
+      tableTitle = 'Not in Plan';
     } else if (table[0].status === 'In plan, but not yet complete') {
-      tableColor = 'warning';
+      tableColor = 'yellow';
       tableIcon = 'warning sign icon';
-      tableTitle = 'In plan, but not yet complete';
+      tableTitle = 'In Plan (Not Yet Completed)';
     }
     return { color: tableColor, icon: tableIcon, title: tableTitle };
   },

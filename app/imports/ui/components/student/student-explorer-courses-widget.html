@@ -1,5 +1,112 @@
 <template name="Student_Explorer_Courses_Widget">
   {{#if Template.subscriptionsReady}}
+    <div class="ui segments">
+      <div class="ui padded segment container">
+
+        <!-- Header -->
+        <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+          <h4 class="ui left floated header">{{shortName}} ({{name}})</h4>
+          {{#if userStatus item}}
+            {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
+          {{else}}
+            {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+          {{/if}}
+        </div>
+        <div class="ui divider" style="margin-top: 0;"></div>
+
+        <div class="ui stackable two column grid">
+          <!-- Course Description -->
+          <div class="column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Course Number'}}
+                <b>{{descriptionPair.label}}:</b> 
+                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Description'}}
+              <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Credit Hours'}}
+              <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+            {{/each}}
+          </div>
+
+          <div class="column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Syllabus'}}
+              <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{descriptionPair.value}}} <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'More Information'}}
+              <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{descriptionPair.value}}} <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      {{#each descriptionPair in descriptionPairs}}
+        <!-- Prerequisites -->
+        {{#if isLabel descriptionPair.label 'Prerequisites'}}
+          <div class="ui horizontal segments" style="background-color: white;">
+            {{#each table in descriptionPair.value}}
+              <div class="ui center aligned segment">
+                {{{getTableTitle @index}}}
+                <!-- Course List -->
+                {{#with tableStyle table}}
+                  {{#each prerequisite in table}}
+                    <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a> <br>
+                  {{/each}}
+                {{/with}}
+              </div>
+            {{/each}}
+          </div>
+        {{/if}}
+      {{/each}}
+
+      {{#each descriptionPair in descriptionPairs}}
+        <!-- Labels -->
+        {{#if isLabel descriptionPair.label 'Interests'}}
+          <div class="ui segment">
+            {{#each interest in descriptionPair.value}}
+              <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
+            {{/each}}
+          </div>
+        {{/if}}
+      {{/each}}
+
+
+    </div>
+  {{/if}}
+
+
+<!--
+  {{#if Template.subscriptionsReady}}
     <div class="ui padded segment container">
       <div class="ui dividing header">
         <h4>{{shortName}} ({{name}})</h4>
@@ -41,7 +148,7 @@
             {{/if}}
           {{else}}
             {{#if descriptionPair.value }}
-              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}} </p>
             {{else}}
               <p><b>{{descriptionPair.label}}:</b> N/A</p>
             {{/if}}
@@ -100,5 +207,5 @@
     </div>
   {{else}}
     {{> Loading}}
-  {{/if}}
+  {{/if}} -->
 </template>
