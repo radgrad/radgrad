@@ -170,7 +170,7 @@ Template.Update_Degree_Plan_Widget.events({
     instance.successClass.set('');
     instance.errorClass.set('');
   },
-  blur(event, instance) {
+  keypress(event, instance) {
     instance.successClass.set('');
     instance.errorClass.set('');
   },
