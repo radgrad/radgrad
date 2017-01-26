@@ -98,7 +98,8 @@ class UserCollection extends BaseInstanceCollection {
    * @returns The newly created docID.
    */
   define({
-      firstName, lastName, slug, email, role, password, picture, interests, careerGoals, desiredDegree,
+      firstName, lastName, slug, email, role, password,
+      picture = '/images/default-profile-picture.png', interests, careerGoals, desiredDegree,
       website, uhID, level = 1,
   }) {
     // Users can only be defined on the server side.

@@ -144,6 +144,7 @@ Template.Semester_List.helpers({
     const ret = [];
     if (Template.instance().localState.get('semester')) {
       const courses = CourseInstances.find({
+        studentID: getUserIdFromRoute(),
         note: /ICS/,
         semesterID: Template.instance().localState.get('semester')._id,
       }, { sort: { note: 1 } }).fetch();
@@ -182,6 +183,7 @@ Template.Semester_List.helpers({
     const ret = [];
     if (Template.instance().localState.get('semester')) {
       const courses = CourseInstances.find({
+        studentID: getUserIdFromRoute(),
         number: /[^ICS]/,
         semesterID: Template.instance().localState.get('semester')._id,
       }).fetch();
