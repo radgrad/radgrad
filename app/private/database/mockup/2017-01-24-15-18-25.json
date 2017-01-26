@@ -3842,15 +3842,63 @@
           "student": "abi"
         },
         {
-          "semester": "Spring-2017",
-          "opportunity": "allnet",
+          "semester": "Summer-2015",
+          "opportunity": "coursera-introduction-to-big-data",
+          "verified": true,
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "lava-lab",
+          "verified": true,
+          "student": "betty"
+        },
+        {
+          "semester": "Summer-2016",
+          "opportunity": "coursera-r-programming",
+          "verified": true,
+          "student": "betty"
+        },
+        {
+          "semester": "Summer-2016",
+          "opportunity": "lava-lab",
+          "verified": true,
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2016",
+          "opportunity": "lava-lab",
+          "verified": true,
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2016",
+          "opportunity": "lava-lab",
           "verified": true,
           "student": "betty"
         },
         {
           "semester": "Spring-2017",
+          "opportunity": "lava-lab",
+          "verified": false,
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2017",
           "opportunity": "wetware-wednesday",
-          "verified": true,
+          "verified": false,
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2017",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "betty"
+        },
+        {
+          "semester": "Summer-2017",
+          "opportunity": "sarp-internship",
+          "verified": false,
           "student": "betty"
         },
         {
@@ -5092,7 +5140,7 @@
         {
           "student": "betty",
           "semester": "Spring-2017",
-          "opportunity": "allnet",
+          "opportunity": "lava-lab",
           "submittedOn": "2017-01-19T00:36:55.639Z",
           "status": "Open",
           "processed": []
@@ -5122,7 +5170,7 @@
         {
           "student": "betty",
           "semester": "Spring-2017",
-          "opportunity": "allnet",
+          "opportunity": "lava-lab",
           "submittedOn": "2017-01-19T00:36:55.659Z",
           "status": "Accepted",
           "processed": [
