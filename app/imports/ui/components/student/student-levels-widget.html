@@ -3,15 +3,41 @@
       <div class="ui dividing header"><h4>CURRENT LEVEL</h4></div>
       <div class="ui center aligned container">
         <img class="ui centered small image" src="/images/level-icons/radgrad-level-{{studentLevelNumber}}-icon.png">
-        <h3 class="ui {{studentLevelColor}} header">{{studentLevelName}}
+        <h3 class="ui header">{{studentLevelName}}
         </h3>
         <div class="ui mini circular images">
           <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-1-icon.png">
+
+          {{#if achievedLevel studentLevelNumber "2"}}
           <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-2-icon.png">
+          {{else}}
+          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-2-inactive-icon.png">
+          {{/if}}
+
+          {{#if achievedLevel studentLevelNumber "3"}}
           <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-3-icon.png">
+          {{else}}
+          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-3-inactive-icon.png">
+          {{/if}}
+
+          {{#if achievedLevel studentLevelNumber "4"}}
           <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-4-icon.png">
+          {{else}}
+          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-4-inactive-icon.png">
+          {{/if}}
+
+          {{#if achievedLevel studentLevelNumber "5"}}
           <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-5-icon.png">
+          {{else}}
+          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-5-inactive-icon.png">
+          {{/if}}
+
+          {{#if achievedLevel studentLevelNumber "6"}}
           <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-6-icon.png">
+          {{else}}
+          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-6-inactive-icon.png">
+          {{/if}}
+
         </div>
       </div>
     </div>
