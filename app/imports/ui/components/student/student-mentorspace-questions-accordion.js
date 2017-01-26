@@ -50,4 +50,7 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
     const lastName = Users.find({ _id: mentorID }).fetch()[0].lastName;
     return `${firstName}  ${lastName}`;
   },
+  isOneAnswer(questionID) {
+    return MentorAnswers.getAnswers(questionID).count() === 1;
+  }
 });

@@ -50,10 +50,10 @@ Template.Student_Levels_Widget.helpers({
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
       if (user.level) {
-        return `Level ${user.level}`;
+        return `LEVEL ${user.level}`;
       }
     }
-    return 'Level 1';
+    return 'LEVEL 1';
   },
   studentLevelNumber() {
     if (getUserIdFromRoute()) {
@@ -85,6 +85,10 @@ Template.Student_Levels_Widget.helpers({
       }
     }
     return 'white';
+  },
+  achievedLevel(userLevel, level) {
+    return userLevel >= level;
+    
   },
   studentPicture(student) {
     return `/images/landing/${student.picture}`;
