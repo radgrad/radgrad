@@ -3902,6 +3902,114 @@
           "student": "betty"
         },
         {
+          "semester": "Fall-2013",
+          "opportunity": "acm-manoa-hardware",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2013",
+          "opportunity": "hawaii-virtual-reality",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2014",
+          "opportunity": "acm-manoa-hardware",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2014",
+          "opportunity": "hawaii-virtual-reality",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Summer-2014",
+          "opportunity": "udacity-learn-unity",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2014",
+          "opportunity": "acm-manoa-hardware",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2014",
+          "opportunity": "hawaii-virtual-reality",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2015",
+          "opportunity": "acm-manoa-hardware",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2015",
+          "opportunity": "hawaii-virtual-reality",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Summer-2015",
+          "opportunity": "virtual-art-meetup",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "acm-manoa-hardware",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "hawaii-virtual-reality",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "att-iot-hackathon",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2016",
+          "opportunity": "shidler-bpc",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2016",
+          "opportunity": "acm-manoa-vr",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2016",
+          "opportunity": "hacc",
+          "verified": true,
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2017",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2017",
+          "opportunity": "uh-career-fair",
+          "verified": false,
+          "student": "alfred"
+        },
+        {
           "semester": "Spring-2017",
           "opportunity": "acm-manoa",
           "verified": true,
@@ -3954,6 +4062,10 @@
         },
         {
           "term": "Fall",
+          "year": 2014
+        },
+        {
+          "term": "Summer",
           "year": 2014
         },
         {
