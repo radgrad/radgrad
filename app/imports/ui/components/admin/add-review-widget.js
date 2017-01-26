@@ -14,8 +14,8 @@ const addSchema = new SimpleSchema({
   semester: { type: String, optional: false },
   rating: { type: Number, optional: false, min: 0, max: 5 },
   comments: { type: String, optional: false },
-  moderated: { type: Boolean, optional: true },
-  visible: { type: Boolean, optional: true },
+  moderated: { type: String, optional: true },
+  visible: { type: String, optional: true },
   moderatorComments: { type: String, optional: true },
 });
 
@@ -34,10 +34,15 @@ Template.Add_Review_Widget.helpers({
     return Users.find({});
   },
   reviewTypes() {
-    return ['course','opportunity'];
+    return ['course', 'opportunity'];
   },
   ratings() {
-    return [1, 2, 3, 4, 5];
+    return [{ score: 1, description: '1 (In general, this is one of the worst ICS ' +
+    'courses/opportunities I have ever taken)' },
+      { score: 2, description: '2 (In general, this is below average for an ICS course/opportunity)' },
+      { score: 3, description: '3 (In general, this is an average ICS course/opportunity)' },
+      { score: 4, description: '4 (In general, this is above average for an ICS course/opportunity)' },
+      { score: 5, description: '5 (In general, this is one of the best ICS courses/opportunities I have ever taken)' }];
   },
 });
 
@@ -48,6 +53,8 @@ Template.Add_Review_Widget.events({
     instance.context.resetValidation();
     addSchema.clean(newData);
     instance.context.validate(newData);
+    newData.moderated = (newData.moderated === 'true');
+    newData.visible = (newData.visible === 'true');
     if (instance.context.isValid()) {
       Reviews.define(newData);
       FormUtils.indicateSuccess(instance, event);

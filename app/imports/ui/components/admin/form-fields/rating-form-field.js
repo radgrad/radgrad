@@ -6,6 +6,6 @@ Template.Rating_Form_Field.onRendered(function onRendered() {
 
 Template.Rating_Form_Field.helpers({
   isSelected(rating, selectedRating) {
-    return rating === selectedRating;
+    return rating.score === selectedRating;
   },
 });

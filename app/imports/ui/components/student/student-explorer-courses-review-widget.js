@@ -31,6 +31,7 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
     const course = this.course;
     const matchingReviews = Reviews.find({
       revieweeID: course._id,
+      visible: true,
     }).fetch();
     return matchingReviews;
   },
@@ -39,13 +40,13 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
   },
   averageStars() {
     const reviewRating = averageRatingHelper(this.course);
-    const reviewStars = []
+    const reviewStars = [];
     for (let i = 0; i < reviewRating; i += 1) {
       reviewStars.push('yellow fitted large star icon');
-    };
+    }
     for (let i = reviewRating; i < 5; i += 1) {
       reviewStars.push('yellow fitted large empty star icon');
-    };
+    }
     return reviewStars;
   },
   reviewData(review) {
@@ -57,10 +58,10 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
     const reviewStars = [];
     for (let i = 0; i < reviewRating; i += 1) {
       reviewStars.push('yellow fitted large star icon');
-    };
+    }
     for (let i = reviewRating; i < 5; i += 1) {
       reviewStars.push('yellow fitted large empty star icon');
-    };
+    }
     const reviewComments = review.comments;
     return { name: userName, picture: userPicture, semester: reviewSemester,
       rating: review, stars: reviewStars, comments: reviewComments };

@@ -6,7 +6,6 @@ import { Users } from '/imports/api/user/UserCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 
 /** @module Review */
@@ -31,7 +30,7 @@ class ReviewCollection extends BaseInstanceCollection {
       comments: { type: String },
       moderated: { type: Boolean },
       visible: { type: Boolean },
-      moderatorComments: { type: String, optional: true},
+      moderatorComments: { type: String, optional: true },
     }));
   }
 
@@ -86,8 +85,8 @@ class ReviewCollection extends BaseInstanceCollection {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the new Review and its Slug.
-    const reviewID = this._collection.insert({ slugID, studentID, reviewType, revieweeID, semesterID,
-      rating, comments, moderated, visible, moderatorComments });
+    const reviewID = this._collection.insert({ slugID, studentID,
+      reviewType, revieweeID, semesterID, rating, comments, moderated, visible, moderatorComments });
     Slugs.updateEntityID(slugID, reviewID);
 
     // Return the id to the newly created Review.
@@ -134,7 +133,7 @@ class ReviewCollection extends BaseInstanceCollection {
       if (!Semesters.isDefined(doc.semesterID)) {
         problems.push(`Bad studentID: ${doc.semesterID}`);
       }
-  });
+    });
     return problems;
   }
 
@@ -161,7 +160,7 @@ class ReviewCollection extends BaseInstanceCollection {
     const visible = doc.visible;
     const moderatorComments = doc.moderatorComments;
 
-    return { slug, student, reviewType, reviewee, semester, rating, comments, moderated, visible, moderatorComments  };
+    return { slug, student, reviewType, reviewee, semester, rating, comments, moderated, visible, moderatorComments };
   }
 }
 
