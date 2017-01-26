@@ -85,7 +85,6 @@ Template.Student_Selector.events({
   'click .jsRetrieve': function clickJSRetrieve(event, instance) {
     event.preventDefault();
     const username = event.target.id;
-    console.log(username);
     instance.state.set('username', username);
     const user = Users.getUserFromUsername(username);
     if (user) {

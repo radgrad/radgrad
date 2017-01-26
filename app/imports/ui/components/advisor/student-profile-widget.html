@@ -50,7 +50,7 @@
         <div class="field">
           <label>Interests</label>
           <div class="ui action input">
-            <select multiple="" class="ui dropdown">
+            <select multiple="" class="ui dropdown" name="interests">
               <option value="">Select Interests</option>
               {{#each interest in interests}}
                 <option value="{{interest._id}}" selected="{{interestSelected interest}}">{{interest.name}}</option>

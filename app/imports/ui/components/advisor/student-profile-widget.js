@@ -76,8 +76,9 @@ Template.Student_Profile_Widget.helpers({
   interestSelected(interest) {
     if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
       const user = Users.findDoc(Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID));
-      console.log('interestSelected', interest._id, _.indexOf(user.interestIDs, interest._id) !== -1);
-      return _.indexOf(user.interestIDs, interest._id) !== -1;
+      const interested = _.indexOf(user.interestIDs, interest._id) !== -1;
+      console.log('interested', interested);
+      return `${interested}`;
     }
     return false;
   },
