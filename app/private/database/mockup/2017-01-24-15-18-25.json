@@ -21,52 +21,60 @@
           "year": 2017
         },
         {
-          "student": "abi",
+          "student": "alfred",
+          "year": 2013
+        },
+        {
+          "student": "alfred",
+          "year": 2014
+        },
+        {
+          "student": "alfred",
+          "year": 2015
+        },
+        {
+          "student": "alfred",
+          "year": 2016
+        },
+        {
+          "student": "betty",
+          "year": 2014
+        },
+        {
+          "student": "betty",
+          "year": 2015
+        },
+        {
+          "student": "betty",
+          "year": 2016
+        },
+        {
+          "student": "betty",
+          "year": 2017
+        },
+        {
+          "student": "betty",
           "year": 2018
         },
         {
-          "student": "alfred",
-          "year": 2013
-        },
-        {
-          "student": "alfred",
-          "year": 2014
-        },
-        {
-          "student": "alfred",
-          "year": 2015
-        },
-        {
-          "student": "alfred",
+          "student": "charley",
           "year": 2016
-        },
-        {
-          "student": "alfred",
-          "year": 2017
-        },
-        {
-          "student": "betty",
-          "year": 2013
-        },
-        {
-          "student": "betty",
-          "year": 2014
-        },
-        {
-          "student": "betty",
-          "year": 2015
-        },
-        {
-          "student": "betty",
-          "year": 2016
-        },
-        {
-          "student": "betty",
-          "year": 2017
         },
         {
           "student": "charley",
           "year": 2017
+        },
+        {
+          "student": "charley",
+          "year": 2018
+        },
+        {
+          "student": "charley",
+          "year": 2019
+        },
+        {
+          "student": "charley",
+          "year": 2020
         }
       ]
     },
@@ -1198,7 +1206,7 @@
           "note": "ICS 313",
           "verified": true,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "A",
           "student": "abi"
         },
         {
@@ -1265,657 +1273,225 @@
           "student": "abi"
         },
         {
-          "semester": "Fall-2016",
-          "course": "other",
-          "note": "JPN 201",
+          "semester": "Fall-2013",
+          "course": "ics111",
+          "note": "ICS 111",
           "verified": true,
           "creditHrs": 4,
-          "grade": "***",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "other",
-          "note": "GG 101",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "***",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics241",
-          "note": "ICS 241",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "***",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "other",
-          "note": "GG 101L",
-          "verified": true,
-          "creditHrs": 1,
-          "grade": "***",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics212",
-          "note": "ICS 212",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "***",
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2016",
-          "course": "other",
-          "note": "PSY 100",
-          "verified": true,
-          "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Fall-2013",
           "course": "ics141",
           "note": "ICS 141",
           "verified": true,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B+",
           "student": "alfred"
         },
         {
-          "semester": "Spring-2016",
-          "course": "other",
-          "note": "JPN 102",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "B",
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2016",
-          "course": "other",
-          "note": "HAW 100",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A+",
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2016",
+          "semester": "Spring-2014",
           "course": "ics211",
           "note": "ICS 211",
           "verified": true,
           "creditHrs": 4,
-          "grade": "B+",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "other",
-          "note": "ART 175",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "C+",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "ics141",
-          "note": "ICS 141",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "D-",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "other",
-          "note": "MUS 106",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "CR",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "other",
-          "note": "JPN 101",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "CR",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "ics111",
-          "note": "ICS 111",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "CR",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics491",
-          "note": "ICS 491",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "other",
-          "note": "CHEM 162",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics499",
-          "note": "ICS 499",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "B",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "other",
-          "note": "CHEM 162L",
-          "verified": true,
-          "creditHrs": 1,
-          "grade": "B",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2016",
-          "course": "other",
-          "note": "CHEM 161",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2016",
-          "course": "other",
-          "note": "CHEM 161L",
-          "verified": true,
-          "creditHrs": 1,
-          "grade": "B",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2016",
-          "course": "ics332",
-          "note": "ICS 332",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2016",
-          "course": "ics425",
-          "note": "ICS 425",
-          "verified": true,
-          "creditHrs": 3,
           "grade": "A",
-          "student": "betty"
+          "student": "alfred"
         },
         {
-          "semester": "Spring-2016",
-          "course": "other",
-          "note": "MATH 242",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "C",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "other",
-          "note": "CHEM 131",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A-",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "other",
-          "note": "MATH 241",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "B+",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "ics361",
-          "note": "ICS 361",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "ics311",
-          "note": "ICS 311",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "B+",
-          "student": "betty"
-        },
-        {
-          "semester": "Summer-2015",
-          "course": "other",
-          "note": "MATH 140",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "CR",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2015",
-          "course": "ics212",
-          "note": "ICS 212",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2015",
+          "semester": "Spring-2014",
           "course": "ics241",
           "note": "ICS 241",
           "verified": true,
           "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
+          "grade": "A-",
+          "student": "alfred"
         },
         {
           "semester": "Fall-2014",
-          "course": "ics141",
-          "note": "ICS 141",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A-",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2012",
-          "course": "other",
-          "note": "LTEC 448",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2012",
-          "course": "other",
-          "note": "PACS 108",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2012",
-          "course": "other",
-          "note": "JPN 211",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A-",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2012",
-          "course": "other",
-          "note": "ACC 201",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "CR",
-          "student": "betty"
-        },
-        {
-          "semester": "Summer-2012",
-          "course": "other",
-          "note": "ES 370",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Summer-2012",
-          "course": "other",
-          "note": "FR 259",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2012",
-          "course": "other",
-          "note": "ART 123",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2012",
-          "course": "other",
-          "note": "ENG 414",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2012",
-          "course": "other",
-          "note": "FR 102",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A-",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2012",
-          "course": "other",
-          "note": "ENG 352",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A-",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2012",
-          "course": "other",
-          "note": "POLS 110",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2011",
-          "course": "other",
-          "note": "ENG 313",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2011",
-          "course": "other",
-          "note": "ENG 413",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2011",
-          "course": "other",
-          "note": "FR 101",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2011",
-          "course": "ics211",
-          "note": "ICS 211",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2011",
-          "course": "other",
-          "note": "HIST 151",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "CR",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2011",
-          "course": "other",
-          "note": "BOT 101",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A-",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2011",
-          "course": "other",
-          "note": "BOT 101L",
-          "verified": true,
-          "creditHrs": 1,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2011",
-          "course": "other",
-          "note": "ENG 320",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2011",
-          "course": "other",
-          "note": "ENG 321",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B+",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2011",
-          "course": "other",
-          "note": "PSY 100",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "C",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2011",
-          "course": "ics111",
-          "note": "ICS 111",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Summer-2010",
-          "course": "other",
-          "note": "JOUR 150",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics111",
-          "note": "ICS 111",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "B",
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics141",
-          "note": "ICS 141",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics211",
-          "note": "ICS 211",
-          "verified": false,
-          "creditHrs": 4,
-          "grade": "B",
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2017",
-          "course": "ics241",
-          "note": "ICS 241",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2017",
           "course": "ics311",
           "note": "ICS 311",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "B",
-          "student": "charley"
+          "student": "alfred"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Fall-2014",
           "course": "ics314",
           "note": "ICS 314",
-          "verified": false,
+          "verified": true,
           "creditHrs": 4,
           "grade": "B",
-          "student": "charley"
+          "student": "alfred"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Spring-2015",
           "course": "ics212",
           "note": "ICS 212",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "B",
-          "student": "charley"
+          "student": "alfred"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Spring-2015",
           "course": "ics321",
           "note": "ICS 321",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "B",
-          "student": "charley"
+          "student": "alfred"
         },
         {
-          "semester": "Fall-2018",
-          "course": "ics361",
-          "note": "ICS 361",
-          "verified": false,
+          "semester": "Fall-2015",
+          "course": "ics313",
+          "note": "ICS 313",
+          "verified": true,
           "creditHrs": 3,
           "grade": "B",
-          "student": "charley"
+          "student": "alfred"
         },
         {
-          "semester": "Fall-2018",
-          "course": "ics312",
-          "note": "ICS 312",
-          "verified": false,
+          "semester": "Fall-2015",
+          "course": "ics331",
+          "note": "ICS 331",
+          "verified": true,
           "creditHrs": 3,
-          "grade": "B",
-          "student": "charley"
+          "grade": "A",
+          "student": "alfred"
         },
         {
-          "semester": "Spring-2019",
+          "semester": "Spring-2016",
           "course": "ics332",
           "note": "ICS 332",
           "verified": false,
           "creditHrs": 3,
           "grade": "B",
-          "student": "charley"
+          "student": "alfred"
         },
         {
-          "semester": "Spring-2019",
+          "semester": "Spring-2016",
+          "course": "ics464",
+          "note": "ICS 464",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2016",
           "course": "ics414",
           "note": "ICS 414",
           "verified": false,
           "creditHrs": 3,
-          "grade": "B",
-          "student": "charley"
+          "grade": "A",
+          "student": "alfred"
         },
         {
-          "semester": "Fall-2019",
-          "course": "ics499",
-          "note": "ICS 499",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2019",
-          "course": "ics461",
-          "note": "ICS 461",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2020",
+          "semester": "Fall-2016",
           "course": "ics415",
           "note": "ICS 415",
           "verified": false,
           "creditHrs": 3,
-          "grade": "B",
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2020",
-          "course": "ics499",
-          "note": "ICS 499",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "charley"
+          "grade": "A",
+          "student": "alfred"
         },
         {
           "semester": "Spring-2017",
-          "course": "ics321",
-          "note": "ICS 321 Databases I",
+          "course": "ics466",
+          "note": "ICS 466",
           "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics432",
+          "note": "ICS 432",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics314",
+          "note": "ICS 314",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics212",
+          "note": "ICS 212",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty"
         },
         {
           "semester": "Spring-2017",
-          "course": "ics314",
-          "note": "ICS 314 Software Eng I",
+          "course": "ics313",
+          "note": "ICS 313",
           "verified": false,
           "creditHrs": 3,
           "grade": "A",
@@ -1924,11 +1500,209 @@
         {
           "semester": "Spring-2017",
           "course": "ics331",
-          "note": "ICS 331 Microprocessors",
+          "note": "ICS 331",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics332",
+          "note": "ICS 332",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics422",
+          "note": "ICS 422",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics414",
+          "note": "ICS 414",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics471",
+          "note": "ICS 471",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2018",
+          "course": "ics475",
+          "note": "ICS 475",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2018",
+          "course": "ics484",
+          "note": "ICS 484",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics111",
+          "note": "ICS 111",
           "verified": false,
           "creditHrs": 4,
           "grade": "A",
-          "student": "betty"
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": false,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics314",
+          "note": "ICS 314",
+          "verified": false,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2018",
+          "course": "ics212",
+          "note": "ICS 212",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2018",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2019",
+          "course": "ics313",
+          "note": "ICS 313",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2019",
+          "course": "ics331",
+          "note": "ICS 331",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics332",
+          "note": "ICS 332",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics422",
+          "note": "ICS 422",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics414",
+          "note": "ICS 414",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics471",
+          "note": "ICS 471",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2020",
+          "course": "ics475",
+          "note": "ICS 475",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2020",
+          "course": "ics484",
+          "note": "ICS 484",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
         }
       ]
     },
@@ -2213,120 +1987,7 @@
     {
       "name": "FeedbackInstanceCollection",
       "contents": [
-        {
-          "feedback": "CourseRecommendationsBasedOnInterests",
-          "user": "alfred",
-          "description": "We recommend ICS 314 based on your interest in software engineering",
-          "area": "Interests"
-        },
-        {
-          "feedback": "iceInnovationPoints",
-          "user": "alfred",
-          "description": "You need 22 more Innovation points in your plan to get to 100.",
-          "area": "ICE"
-        },
-        {
-          "feedback": "updateStarData",
-          "user": "alfred",
-          "description": "See your ICS advisor to upload STAR data from Spring 2016.",
-          "area": "STAR"
-        },
-        {
-          "feedback": "requiredCourseMissing",
-          "user": "alfred",
-          "description": "Required course ICS 212 does not appear in your degree plan.",
-          "area": "DegreePlan"
-        },
-        {
-          "feedback": "semesterOverloaded",
-          "user": "alfred",
-          "description": "Fall 2017 appears overloaded with course work.",
-          "area": "Overload"
-        },
-        {
-          "feedback": "courseNotOffered",
-          "user": "alfred",
-          "description": "Your plan includes ICS 451 in Fall 2017, but it is unlikely to occur then.",
-          "area": "DegreePlan"
-        },
-        {
-          "feedback": "iceInnovationPoints",
-          "user": "abi",
-          "description": "You need 22 more Innovation points in your plan to get to 100.",
-          "area": "ICE"
-        },
-        {
-          "feedback": "iceCompetencyPoints",
-          "user": "abi",
-          "description": "You need 7 more Innovation points in your plan to get to 100.",
-          "area": "ICE"
-        },
-        {
-          "feedback": "updateStarData",
-          "user": "abi",
-          "description": "See your ICS advisor to upload STAR data from Spring 2016.",
-          "area": "STAR"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "abi",
-          "description": "Summer 2018: Prerequisite ICS 222 for ICS 355not found.",
-          "area": "DegreePlanPrerequisites"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "charley",
-          "description": "Fall 2016: ICS 211's prerequisite ICS 111 is after or in Fall 2016.",
-          "area": "DegreePlanPrerequisites"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "betty",
-          "description": "Fall 2016: ICS 491's prerequisite ICS 314 is after or in Spring 2017.",
-          "area": "DegreePlanPrerequisites"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "betty",
-          "description": "Fall 2016: ICS 499's prerequisite ICS 314 is after or in Spring 2017.",
-          "area": "DegreePlanPrerequisites"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "betty",
-          "description": "Spring 2016: ICS 332's prerequisite ICS 314 is after or in Spring 2017.",
-          "area": "DegreePlanPrerequisites"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "betty",
-          "description": "Spring 2016: Prerequisite ICS 355 for ICS 425not found.",
-          "area": "DegreePlanPrerequisites"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "betty",
-          "description": "Fall 2015: ICS 361's prerequisite ICS 311 is after or in Fall 2015.",
-          "area": "DegreePlanPrerequisites"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "betty",
-          "description": "Fall 2015: ICS 361's prerequisite ICS 314 is after or in Spring 2017.",
-          "area": "DegreePlanPrerequisites"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "betty",
-          "description": "Spring 2017: ICS 321's prerequisite ICS 314 is after or in Spring 2017.",
-          "area": "DegreePlanPrerequisites"
-        },
-        {
-          "feedback": "prerequisiteMissing",
-          "user": "betty",
-          "description": "Spring 2017: ICS 331's prerequisite ICS 314 is after or in Spring 2017.",
-          "area": "DegreePlanPrerequisites"
-        }
+
       ]
     },
     {
@@ -4168,6 +3829,10 @@
       "name": "SemesterCollection",
       "contents": [
         {
+          "term": "Spring",
+          "year": 2014
+        },
+        {
           "term": "Fall",
           "year": 2014
         },
@@ -4236,6 +3901,10 @@
           "year": 2020
         },
         {
+          "term": "Fall",
+          "year": 2020
+        },
+        {
           "term": "Summer",
           "year": 2020
         },
@@ -4263,8 +3932,13 @@
           "term": "Summer",
           "year": 2010
         },
+
         {
           "term": "Spring",
+          "year": 2013
+        },
+        {
+          "term": "Fall",
           "year": 2013
         },
         {
@@ -4422,15 +4096,14 @@
           "picture": "/images/mockup/abi.jpg",
           "website": "http://abi.github.io",
           "interests": [
-            "application-development",
-            "research"
+            "security",
+            "software-engineering"
           ],
           "careerGoals": [
-            "data-scientist",
-            "software-developer"
+            "web-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 3
+          "level": 4
         },
         {
           "firstName": "Ah Lim",
@@ -4462,14 +4135,15 @@
           "picture": "/images/mockup/alfred.png",
           "website": null,
           "interests": [
+            "game-design",
             "hardware",
-            "it-management"
+            "virtual-reality"
           ],
           "careerGoals": [
-            "system-administrator"
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 6
         },
         {
           "firstName": "Betty",
@@ -4482,15 +4156,16 @@
           "picture": "/images/mockup/betty.jpg",
           "website": "http://keanu.github.io/",
           "interests": [
-            "algorithms",
-            "artificial-intelligence",
-            "game-design"
+            "data-science",
+            "data-visualization",
+            "research"
           ],
           "careerGoals": [
-            "data-scientist"
+            "data-scientist",
+            "graduate-school"
           ],
           "desiredDegree": "bs-cs",
-          "level": 5
+          "level": 3
         },
         {
           "firstName": "Kim",
@@ -4552,15 +4227,12 @@
           "picture": "/images/mockup/charley.jpg",
           "website": null,
           "interests": [
-            "art",
-            "computer-graphics",
-            "hci",
-            "javascript"
+            "bioinformatics"
           ],
           "careerGoals": [
-            "web-developer"
+            "data-scientist"
           ],
-          "desiredDegree": "ba-ics",
+          "desiredDegree": "bs-cs",
           "level": 1
         },
         {
@@ -4679,9 +4351,14 @@
           "uhID": "1234-5682",
           "picture": "/images/mockup/ella.jpg",
           "website": null,
-          "interests": [],
-          "careerGoals": [],
-          "desiredDegree": "bs-ce",
+          "interests": [
+            "civic-engagement",
+            "web-development"
+          ],
+          "careerGoals": [
+            "web-developer"
+          ],
+          "desiredDegree": "ba-ics",
           "level": 1
         },
         {
