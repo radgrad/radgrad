@@ -1256,6 +1256,15 @@
           "student": "abi"
         },
         {
+          "semester": "Spring-2018",
+          "course": "ics432",
+          "note": "ICS 432",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
           "semester": "Fall-2016",
           "course": "other",
           "note": "JPN 201",
@@ -1344,15 +1353,6 @@
           "creditHrs": 4,
           "grade": "B+",
           "student": "alfred"
-        },
-        {
-          "semester": "Summer-2018",
-          "course": "ics355",
-          "note": "ICS 355 Security & Trust I",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
         },
         {
           "semester": "Fall-2015",
