@@ -166,6 +166,14 @@ Template.Update_Degree_Plan_Widget.events({
       FormUtils.indicateError(instance);
     }
   },
+  change(event, instance) {
+    instance.successClass.set('');
+    instance.errorClass.set('');
+  },
+  blur(event, instance) {
+    instance.successClass.set('');
+    instance.errorClass.set('');
+  },
   // 'click .jsCancel': FormUtils.processCancelButtonClick,
 });
 
