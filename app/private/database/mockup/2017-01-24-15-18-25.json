@@ -6,6 +6,10 @@
       "contents": [
         {
           "student": "abi",
+          "year": 2014
+        },
+        {
+          "student": "abi",
           "year": 2015
         },
         {
@@ -22,19 +26,27 @@
         },
         {
           "student": "alfred",
-          "year": 2016
+          "year": 2013
+        },
+        {
+          "student": "alfred",
+          "year": 2014
         },
         {
           "student": "alfred",
           "year": 2015
         },
         {
-          "student": "betty",
+          "student": "alfred",
           "year": 2016
         },
         {
+          "student": "alfred",
+          "year": 2017
+        },
+        {
           "student": "betty",
-          "year": 2015
+          "year": 2013
         },
         {
           "student": "betty",
@@ -42,35 +54,19 @@
         },
         {
           "student": "betty",
-          "year": 2012
+          "year": 2015
         },
         {
           "student": "betty",
-          "year": 2011
-        },
-        {
-          "student": "betty",
-          "year": 2010
-        },
-        {
-          "student": "betty",
-          "year": 2009
-        },
-        {
-          "student": "charley",
           "year": 2016
         },
         {
-          "student": "charley",
+          "student": "betty",
           "year": 2017
         },
         {
           "student": "charley",
-          "year": 2018
-        },
-        {
-          "student": "charley",
-          "year": 2019
+          "year": 2017
         }
       ]
     },
@@ -1125,7 +1121,7 @@
       "name": "CourseInstanceCollection",
       "contents": [
         {
-          "semester": "Fall-2015",
+          "semester": "Fall-2014",
           "course": "ics111",
           "note": "ICS 111",
           "verified": true,
@@ -1134,7 +1130,7 @@
           "student": "abi"
         },
         {
-          "semester": "Fall-2015",
+          "semester": "Fall-2014",
           "course": "ics141",
           "note": "ICS 141",
           "verified": true,
@@ -1143,34 +1139,7 @@
           "student": "abi"
         },
         {
-          "semester": "Fall-2015",
-          "course": "other",
-          "note": "MATH 241",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "B+",
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "other",
-          "note": "ENG 100",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A-",
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "other",
-          "note": "SOC 100",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B-",
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2016",
+          "semester": "Spring-2015",
           "course": "ics211",
           "note": "ICS 211",
           "verified": true,
@@ -1179,7 +1148,7 @@
           "student": "abi"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Spring-2015",
           "course": "ics241",
           "note": "ICS 241",
           "verified": true,
@@ -1188,25 +1157,7 @@
           "student": "abi"
         },
         {
-          "semester": "Spring-2016",
-          "course": "other",
-          "note": "MATH 242",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "B+",
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2016",
-          "course": "other",
-          "note": "HIST 151",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A-",
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2016",
+          "semester": "Fall-2015",
           "course": "ics311",
           "note": "ICS 311",
           "verified": true,
@@ -1215,7 +1166,7 @@
           "student": "abi"
         },
         {
-          "semester": "Fall-2016",
+          "semester": "Fall-2015",
           "course": "ics314",
           "note": "ICS 314",
           "verified": true,
@@ -1224,43 +1175,43 @@
           "student": "abi"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Spring-2016",
           "course": "ics212",
           "note": "ICS 212",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "abi"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Spring-2016",
           "course": "ics321",
           "note": "ICS 321",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "abi"
         },
         {
-          "semester": "Fall-2017",
-          "course": "ics361",
-          "note": "ICS 361",
-          "verified": false,
+          "semester": "Fall-2016",
+          "course": "ics313",
+          "note": "ICS 313",
+          "verified": true,
           "creditHrs": 3,
           "grade": "B",
           "student": "abi"
         },
         {
-          "semester": "Fall-2017",
-          "course": "ics312",
-          "note": "ICS 312",
-          "verified": false,
+          "semester": "Fall-2016",
+          "course": "ics331",
+          "note": "ICS 331",
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "abi"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Spring-2017",
           "course": "ics332",
           "note": "ICS 332",
           "verified": false,
@@ -1269,7 +1220,16 @@
           "student": "abi"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Spring-2017",
+          "course": "ics464",
+          "note": "ICS 464",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2017",
           "course": "ics414",
           "note": "ICS 414",
           "verified": false,
@@ -1278,16 +1238,7 @@
           "student": "abi"
         },
         {
-          "semester": "Fall-2018",
-          "course": "ics461",
-          "note": "ICS 461",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2019",
+          "semester": "Fall-2017",
           "course": "ics415",
           "note": "ICS 415",
           "verified": false,
@@ -1296,9 +1247,9 @@
           "student": "abi"
         },
         {
-          "semester": "Spring-2019",
-          "course": "ics499",
-          "note": "ICS 499",
+          "semester": "Spring-2018",
+          "course": "ics466",
+          "note": "ICS 466",
           "verified": false,
           "creditHrs": 3,
           "grade": "B",
