@@ -136,15 +136,19 @@ Template.Student_Selector.events({
         const studentID = Meteor.call('Users.define', userDefinition, (error) => {
           if (error) {
             // console.log(error);
+          } else {
+            const feedDefinition = {
+              student: userName,
+              feedType: 'new',
+              timestamp: new Date().getTime(),
+            };
+            Feed.define(feedDefinition);
+            const user = Users.getUserFromUsername(userName);
+            instance.studentID.set(user._id);
+            instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
+            instance.state.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
           }
         });
-        const feedDefinition = {
-          userDefinition,
-          slug: `${userName}-new-user`,
-          description: 'has joined RadGrad',
-          timestamp: new Date(),
-        };
-        Feed.define(feedDefinition);
 
         instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
         instance.state.set(sessionKeys.CURRENT_STUDENT_ID, studentID);
