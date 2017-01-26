@@ -3740,32 +3740,104 @@
       "name": "OpportunityInstanceCollection",
       "contents": [
         {
+          "semester": "Fall-2014",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2015",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2015",
+          "opportunity": "hawaii-hacker-hours",
+          "verified": true,
+          "student": "abi"
+        },
+        {
           "semester": "Fall-2015",
-          "opportunity": "wetware-wednesday",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "hawaii-hacker-hours",
           "verified": true,
           "student": "abi"
         },
         {
           "semester": "Spring-2016",
-          "opportunity": "wetware-wednesday",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2016",
+          "opportunity": "hawaii-hacker-hours",
           "verified": true,
           "student": "abi"
         },
         {
           "semester": "Fall-2016",
-          "opportunity": "open-power-quality",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2016",
+          "opportunity": "hawaii-hacker-hours",
           "verified": true,
           "student": "abi"
         },
         {
           "semester": "Spring-2017",
-          "opportunity": "open-power-quality",
+          "opportunity": "greyhats",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2017",
+          "opportunity": "hawaii-hacker-hours",
+          "verified": true,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2017",
+          "opportunity": "ccdc",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2017",
+          "opportunity": "asecolab",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2017",
+          "opportunity": "greyhats",
           "verified": false,
           "student": "abi"
         },
         {
           "semester": "Spring-2018",
-          "opportunity": "open-power-quality",
+          "opportunity": "asecolab",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2018",
+          "opportunity": "greyhats",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Summer-2017",
+          "opportunity": "gen-cyber-internship",
           "verified": false,
           "student": "abi"
         },
@@ -5010,14 +5082,6 @@
       "name": "VerificationRequestCollection",
       "contents": [
         {
-          "student": "abi",
-          "semester": "Spring-2016",
-          "opportunity": "wetware-wednesday",
-          "submittedOn": "2017-01-15T21:43:21.632Z",
-          "status": "Open",
-          "processed": []
-        },
-        {
           "student": "charley",
           "semester": "Spring-2017",
           "opportunity": "acm-manoa",
@@ -5040,34 +5104,6 @@
           "submittedOn": "2017-01-19T00:36:58.741Z",
           "status": "Open",
           "processed": []
-        },
-        {
-          "student": "abi",
-          "semester": "Fall-2015",
-          "opportunity": "wetware-wednesday",
-          "submittedOn": "2017-01-15T21:43:21.530Z",
-          "status": "Accepted",
-          "processed": [
-            {
-              "date": "2017-01-19T00:37:16.912Z",
-              "status": "Accepted",
-              "verifier": "Admin RadGrad"
-            }
-          ]
-        },
-        {
-          "student": "abi",
-          "semester": "Fall-2016",
-          "opportunity": "open-power-quality",
-          "submittedOn": "2017-01-15T21:43:21.640Z",
-          "status": "Accepted",
-          "processed": [
-            {
-              "date": "2017-01-19T00:37:19.127Z",
-              "status": "Accepted",
-              "verifier": "Admin RadGrad"
-            }
-          ]
         },
         {
           "student": "charley",
