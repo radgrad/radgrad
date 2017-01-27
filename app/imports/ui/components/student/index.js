@@ -1,3 +1,9 @@
+import './explore-user-widget.html';
+import './explore-user-widget.js';
+
+import './explorer-choose-user-widget.html';
+import './explorer-choose-user-widget.js';
+
 import './student-home-menu.html';
 import './student-home-menu.js';
 

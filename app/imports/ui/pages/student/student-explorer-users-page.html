@@ -1,0 +1,14 @@
+<template name="Student_Explorer_Users_Page">
+  {{#if Template.subscriptionsReady}}
+    <div class="layout-page">
+      <!--<div class="ui container">-->
+        {{> Explorer_Choose_User_Widget userID=userID}}
+        {{#if displayUser}}
+          {{> Explore_User_Widget userID=userID}}
+        {{/if}}
+      <!--</div>-->
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>
