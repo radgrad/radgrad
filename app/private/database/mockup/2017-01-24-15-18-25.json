@@ -3862,6 +3862,12 @@
           "student": "abi"
         },
         {
+          "semester": "Summer-2016",
+          "opportunity": "coursera-graphic-design",
+          "verified": true,
+          "student": "abi"
+        },
+        {
           "semester": "Summer-2017",
           "opportunity": "gen-cyber-internship",
           "verified": false,
