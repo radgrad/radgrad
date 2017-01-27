@@ -2978,6 +2978,32 @@
           "independentStudy": false
         },
         {
+          "name": "Graphic Design",
+          "slug": "coursera-graphic-design",
+          "description": "This Coursera online course is for those new to graphic design and interested in the process, historical context, and communication through image-making and typography. For those who want to have a starting point for further work in interface design, motion graphics, and editorial design, this course, will provide the core skill set and conceptual tools for “making and communicating” in the field of graphic design!",
+          "opportunityType": "online-learning",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 0,
+            "c": 0,
+            "e": 5
+          },
+          "interests": [
+            "art",
+            "computer-graphics"
+          ],
+          "semesters": [
+            "Summer-2014",
+            "Summer-2015",
+            "Summer-2016",
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019"
+          ],
+          "moreInformation": "https://www.coursera.org/specializations/graphic-design",
+          "independentStudy": false
+        },
+        {
           "name": "R Programming",
           "slug": "coursera-r-programming",
           "description": "In this course you will learn how to program in R and how to use R for effective data analysis. You will learn how to install and configure software necessary for a statistical programming environment and describe generic programming language concepts as they are implemented in a high-level statistical language. The course covers practical issues in statistical computing which includes programming in R, reading data into R, accessing R packages, writing R functions, debugging, profiling R code, and organizing and commenting R code. Topics in statistical data analysis will provide working examples.",
