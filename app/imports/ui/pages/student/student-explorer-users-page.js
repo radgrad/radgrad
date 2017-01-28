@@ -7,7 +7,6 @@ Template.Student_Explorer_Users_Page.helpers({
     return Template.instance().userID;
   },
   displayUser() {
-    console.log(Template.instance().userID);
     return Template.instance().userID.get();
   },
 });

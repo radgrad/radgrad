@@ -1,15 +1,8 @@
 import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection';
+import { ROLE } from '../../../api/role/Role.js';
 
 Template.Explore_User_Widget.helpers({
-  name() {
-    if (Template.instance().userID && Template.instance().userID.get()) {
-      const id = Template.instance().data.userID.get();
-      const user = Users.findDoc(id);
-      return `${user.firstName} ${user.lastName}`;
-    }
-    return '';
-  },
   email() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
@@ -17,11 +10,19 @@ Template.Explore_User_Widget.helpers({
     }
     return '';
   },
-  role() {
+  isStudent() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
       const user = Users.findDoc(id);
-      return user.roles[0];
+      return user.roles[0] === ROLE.STUDENT;
+    }
+    return false;
+  },
+  name() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      const user = Users.findDoc(id);
+      return `${user.firstName} ${user.lastName}`;
     }
     return '';
   },
@@ -36,7 +37,17 @@ Template.Explore_User_Widget.helpers({
     }
     return '';
   },
-
+  role() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      const user = Users.findDoc(id);
+      return user.roles[0];
+    }
+    return '';
+  },
+  userID() {
+    return Template.instance().userID;
+  },
 });
 
 Template.Explore_User_Widget.events({

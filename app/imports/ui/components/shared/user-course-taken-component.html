@@ -1,0 +1,12 @@
+<template name="User_Course_Taken_Component">
+  {{#if Template.subscriptionsReady}}
+    <div class="segment">
+      <strong>Courses Taken:</strong><br>
+      {{#each ci in coursesTaken}}
+        <div class="ui basic green label">{{courseName ci}} ({{courseNumber ci}})</div>
+      {{/each}}
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

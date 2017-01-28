@@ -2,16 +2,21 @@
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>{{role}} PROFILE</h4></div>
     <div class="ui card">
-      <div class="image">
-        <img src="{{picture}}">
-      </div>
+      <img class="ui small circular image" src="{{picture}}">
       <div class="content">
         <a class="header">{{name}}</a>
         <div class="meta">
           <span class="date">{{email}}</span>
         </div>
         <div class="description">
-
+          {{#if isStudent}}
+            {{> User_Career_Goals_Component labelSize='Tiny' userID=userID}}
+            <!--<div class="ui divider"></div>-->
+          {{/if}}
+          {{> User_Interests_Component labelSize='Tiny' userID=userID}}
+          {{#if isStudent}}
+            {{> User_Course_Taken_Component userID=userID}}
+          {{/if}}
         </div>
       </div>
       <div class="extra content">

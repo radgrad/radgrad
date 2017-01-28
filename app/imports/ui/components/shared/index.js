@@ -20,6 +20,15 @@ import './route-user-name.js';
 import './student-selector-widget.html';
 import './student-selector-widget.js';
 
+import './user-career-goals-component.html';
+import './user-career-goals-component.js';
+
+import './user-course-taken-component.html';
+import './user-course-taken-component.js';
+
+import './user-interests-component.html';
+import './user-interests-component.js';
+
 import './verification-event.html';
 import './verification-event.js';
 
