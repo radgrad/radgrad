@@ -4,6 +4,8 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+
 
 Template.Student_Explorer_Opportunities_Review_Widget.onCreated(function onCreated() {
   this.subscribe(Slugs.getPublicationName());
@@ -11,20 +13,6 @@ Template.Student_Explorer_Opportunities_Review_Widget.onCreated(function onCreat
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
-
-function averageRatingHelper(opportunity) {
-  let averageRating = 0;
-  let numReviews = 0;
-  const matchingReviews = Reviews.find({
-    revieweeID: opportunity._id,
-  }).fetch();
-  numReviews = matchingReviews.length;
-  _.map(matchingReviews, (review) => {
-    averageRating += review.rating;
-  });
-  averageRating /= numReviews;
-  return Math.floor(averageRating);
-}
 
 Template.Student_Explorer_Opportunities_Review_Widget.helpers({
   reviews() {
@@ -35,19 +23,19 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
     }).fetch();
     return matchingReviews;
   },
-  averageRating() {
-    return averageRatingHelper(this.opportunity);
-  },
-  averageStars() {
-    const reviewRating = averageRatingHelper(this.opportunity);
-    const reviewStars = [];
-    for (let i = 0; i < reviewRating; i += 1) {
-      reviewStars.push('yellow fitted large star icon');
-    }
-    for (let i = reviewRating; i < 5; i += 1) {
-      reviewStars.push('yellow fitted large empty star icon');
-    }
-    return reviewStars;
+  averageRating(opportunity) {
+    let averageRating = 0;
+    let numReviews = 0;
+    const matchingReviews = Reviews.find({
+      revieweeID: opportunity._id,
+    }).fetch();
+    numReviews = matchingReviews.length;
+    _.map(matchingReviews, (review) => {
+      averageRating += review.rating;
+    })
+    ;
+    averageRating /= numReviews;
+    return Math.floor(averageRating);
   },
   reviewData(review) {
     const user = Users.findDoc(review.studentID);
@@ -55,19 +43,25 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
     const userPicture = user.picture;
     const reviewSemester = Semesters.toString(review.semesterID);
     const reviewRating = review.rating;
-    const reviewStars = [];
-    for (let i = 0; i < reviewRating; i += 1) {
-      reviewStars.push('yellow fitted large star icon');
-    }
-    for (let i = reviewRating; i < 5; i += 1) {
-      reviewStars.push('yellow fitted large empty star icon');
-    }
     const reviewComments = review.comments;
     return { name: userName, picture: userPicture, semester: reviewSemester,
-      rating: review, stars: reviewStars, comments: reviewComments };
+      rating: reviewRating, comments: reviewComments };
+  },
+  reviewUser(review) {
+    let ret = false;
+    if (review.studentID === getUserIdFromRoute()) {
+      ret = true;
+    }
+    return ret;
   },
 });
 
 Template.Student_Explorer_Opportunities_Review_Widget.events({
 
 });
+
+Template.Student_Explorer_Opportunities_Review_Widget.onRendered(function studentExplorerOpportunitiesReviewWidget() {
+  this.$('.ui.accordion').accordion();
+  this.$('.ui.rating').rating('disable');
+});
+
