@@ -42,10 +42,10 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
     const reviewRating = averageRatingHelper(this.course);
     const reviewStars = [];
     for (let i = 0; i < reviewRating; i += 1) {
-      reviewStars.push('yellow fitted large star icon');
+      reviewStars.push('yellow fitted star icon');
     }
     for (let i = reviewRating; i < 5; i += 1) {
-      reviewStars.push('yellow fitted large empty star icon');
+      reviewStars.push('yellow fitted empty star icon');
     }
     return reviewStars;
   },
@@ -57,10 +57,10 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
     const reviewRating = review.rating;
     const reviewStars = [];
     for (let i = 0; i < reviewRating; i += 1) {
-      reviewStars.push('yellow fitted large star icon');
+      reviewStars.push('yellow fitted star icon');
     }
     for (let i = reviewRating; i < 5; i += 1) {
-      reviewStars.push('yellow fitted large empty star icon');
+      reviewStars.push('yellow fitted empty star icon');
     }
     const reviewComments = review.comments;
     return { name: userName, picture: userPicture, semester: reviewSemester,

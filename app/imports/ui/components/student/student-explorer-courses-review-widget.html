@@ -1,13 +1,15 @@
 <template name="Student_Explorer_Courses_Review_Widget">
 
-  <div style="padding-top: 30px;" class="ui padded container">
+  <div class="ui padded container">
     <div class="ui dividing header">
       <h4>COURSE REVIEWS
         <div style="float: right">
-          Average review:
+          <h5>
+          AVERAGE REVIEW:
           {{#each star in averageStars}}
-            <i class="{{star}}"></i>
+            <i style="font-size: 1.4em" class="{{star}}"></i>
           {{/each}}
+          </h5>
         </div>
       </h4>
     </div>
@@ -21,7 +23,7 @@
               </div>
               <div class="twelve wide column">
                   {{#each star in stars}}
-                    <i class="{{star}}"></i>
+                    <i style="font-size: 1.2em;" class="{{star}}"></i>
                   {{/each}}
                 <br><div style="padding-top: 5px">{{comments}}</div>
               </div>

@@ -24,6 +24,9 @@ Template.Student_Explorer_Courses_Widget.helpers({
     const course = Courses.find({ slugID: slug[0]._id }).fetch();
     return course[0].shortName;
   },
+  toUpper(string) {
+    return string.toUpperCase();
+  },
   userStatus(course) {
     let ret = false;
     const ci = CourseInstances.find({

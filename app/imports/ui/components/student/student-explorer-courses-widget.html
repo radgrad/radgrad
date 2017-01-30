@@ -5,7 +5,7 @@
 
         <!-- Header -->
         <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
-          <h4 class="ui left floated header">{{shortName}} ({{name}})</h4>
+          <h4 class="ui left floated header">{{toUpper shortName}} ({{name}})</h4>
           {{#if userStatus item}}
             {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
           {{else}}
@@ -51,7 +51,7 @@
 
               {{#if isLabel descriptionPair.label 'Syllabus'}}
               <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} {{{descriptionPair.value}}} <br>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
                   {{else}}
                     N/A <br>
                 {{/if}}
@@ -59,7 +59,7 @@
 
               {{#if isLabel descriptionPair.label 'More Information'}}
               <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} {{{descriptionPair.value}}} <br>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
                   {{else}}
                     N/A <br>
                 {{/if}}
@@ -92,7 +92,7 @@
       {{#each descriptionPair in descriptionPairs}}
         <!-- Labels -->
         {{#if isLabel descriptionPair.label 'Interests'}}
-          <div class="ui segment">
+          <div class="ui right aligned secondary segment">
             {{#each interest in descriptionPair.value}}
               <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
             {{/each}}
@@ -100,12 +100,58 @@
         {{/if}}
       {{/each}}
 
-
     </div>
+
+    <div class="ui stackable two column grid">
+
+      <div class="ten wide column">
+        <div class="ui padded segment">
+          {{#if reviews}}
+            {{> Student_Explorer_Courses_Review_Widget course = item}}
+          {{else}}
+            <div class="ui dividing header">
+              <h4>COURSE REVIEWS</h4>
+            </div>
+            <p style="text-align: center;">There are no reviews yet.</p>
+          {{/if}}
+
+          {{#if completed}}
+            {{#if reviewed}}
+              {{> Student_Explorer_Courses_Edit_Review_Widget review = review course = item}}
+            {{else}}
+              {{> Student_Explorer_Courses_Add_Review_Widget course = item}}
+            {{/if}}
+          {{else}}
+            <p style="text-align: center;"><i>You must complete this class first before posting a review.</i></p>
+          {{/if}}
+        </div>
+
+      </div>
+
+      <div class="six wide column">
+        {{#each socialPair in socialPairs}}
+          <div class="ui padded segment">
+            <div class="ui dividing header">
+              <h4>INTERESTED {{toUpper socialPair.label}} ({{socialPair.amount}})</h4>
+            </div>
+
+            <div class="ui circular mini bordered images">
+              {{#each user in socialPair.value}}
+                <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
+              {{/each}}
+            </div>
+
+          </div>
+        {{/each}}
+      </div>
+      
+    </div>
+
+  {{else}}
+    {{> Loading}}
   {{/if}}
 
-
-<!--
+  <!--
   {{#if Template.subscriptionsReady}}
     <div class="ui padded segment container">
       <div class="ui dividing header">
@@ -191,7 +237,9 @@
         {{#if reviews}}
           {{> Student_Explorer_Courses_Review_Widget course = item}}
         {{else}}
-          <div class="ui divider"></div>
+        <div class="ui dividing header">
+          <h4>REVIEWS</h4>
+          </div>
           <p>There are no reviews yet.</p>
         {{/if}}
       {{#if completed}}
