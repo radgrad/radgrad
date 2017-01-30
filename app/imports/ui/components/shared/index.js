@@ -17,8 +17,8 @@ import './retrieve-student-widget.js';
 
 import './route-user-name.js';
 
-import './student-selector.html';
-import './student-selector.js';
+import './student-selector-widget.html';
+import './student-selector-widget.js';
 
 import './verification-event.html';
 import './verification-event.js';

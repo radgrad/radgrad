@@ -1,0 +1,36 @@
+<template name="Star_Upload_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>UPLOAD STAR DATA</h4></div>
+      <form class="ui equal width form {{successClass}} {{errorClass}}">
+        <div class="field">
+          <!-- CSV -->
+          <label>STAR CSV</label>
+          <div class="ui action input">
+            {{#with currentUpload}}
+              Uploading <b>{{file.name}}</b>:
+              <span id="progress">{{progress.get}}%</span>
+            {{else}}
+              <input id="fileInput" type="file"/>
+            {{/with}}
+            <!--<input id="fileInput" type="file"/>-->
+          </div>
+        </div>
+        <button class="ui basic green button jsStarData" type="submit">Load Star Data</button>
+
+        <div class="field">
+          <!-- Star Data Log -->
+          <label>STAR Data Upload Log</label>
+          {{#each log in starLogs}}
+            <div class="ui segment">
+              <p><strong>{{log.uploadedOn}}:</strong> {{log.note}}</p>
+            </div>
+          {{/each}}
+        </div>
+
+      </form>
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>
