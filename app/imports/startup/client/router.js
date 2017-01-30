@@ -239,7 +239,9 @@ mentorRoutes.route('/home', {
 const studentRoutes = FlowRouter.group({
   prefix: '/student/:username',
   name: 'student',
-  triggersEnter: [addBodyClass],
+  triggersEnter: [addBodyClass, function () {
+    this.window.scrollTo(0, 0);
+  }],
   triggersExit: [removeBodyClass],
 });
 
