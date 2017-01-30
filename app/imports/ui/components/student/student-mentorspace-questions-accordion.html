@@ -6,7 +6,13 @@
         <div class="ui active list title">
           <div class="item">
             <i class="dropdown icon"></i>
-            {{title}} ({{answerCount (questionID)}} answers)
+            {{title}}
+            <div class="right floated content">
+              {{answerCount (questionID)}} {{#if isOneAnswer questionID}}answer
+              {{else}}
+              answers
+              {{/if}}
+            </div>
           </div>
         </div>
 
@@ -15,8 +21,8 @@
           {{#each listAnswers (questionID)}}
           <div class="ui divider"></div>
           <div class="author">
-            <img class="ui left floated mini image" src="{{picture (mentorID)}}">
-            {{mentorName (mentorID)}} answered: {{text}}
+            <img style="margin-bottom: 0;" class="ui left floated mini image" src="{{picture (mentorID)}}">
+            <a>{{mentorName (mentorID)}}</a> answered: <br> &nbsp;{{text}}
           </div>
           {{/each}}
 

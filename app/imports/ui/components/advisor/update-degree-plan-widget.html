@@ -1,0 +1,74 @@
+<template name="Update_Degree_Plan_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>UPDATE STUDENT &amp; DEGREE PLAN</h4></div>
+
+      <form class="ui equal width form {{successClass}} {{errorClass}}">
+        <div class="fields">
+          {{> Input_Form_Field label="First" name="firstName" value=user.firstName errorMessage=(fieldError "firstName") required=true}}
+          {{> Input_Form_Field label="Last" name="lastName" value=user.lastName errorMessage=(fieldError "lastName") required=true}}
+          {{> Input_Form_Field label="Slug (Username)" name="slug" value=slug errorMessage=(fieldError "slug") disabled=true}}
+        </div>
+
+        <div class="fields">
+          {{> Input_Form_Field label="UH ID" name="uhID" value=user.uhID errorMessage=(fieldError "uhID") disabled=true}}
+          {{> Input_Form_Field label="Email" name="email" value=user.email errorMessage=(fieldError "email") disabled=true}}
+          {{> Input_Form_Field label="Picture" name="picture" value=user.picture errorMessage=(fieldError "picture") }}
+        </div>
+
+        <div class="fields">
+          {{> Input_Form_Field label="Website" name="website" value=user.website errorMessage=(fieldError "website") }}
+          {{> Role_Form_Field roles=roles selectedRole=selectedRole errorMessage=(fieldError "role") disabled="true" }}
+        </div>
+        <div class="fields">
+          {{> Career_Goals_Form_Field careerGoals=careerGoals selectedCareerGoalIDs=selectedCareerGoalIDs errorMessage=(fieldError "careerGoals")}}
+          {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError "interests")}}
+        </div>
+        <div class="fields">
+          {{> Desired_Degree_Form_Field desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "desiredDegree")}}
+          {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") required=true type="Number"}}
+        </div>
+
+
+        <button class="ui green basic button" type="submit">Update Student</button>
+        <!--<button class="ui green basic button jsCancel" type="submit">Cancel</button>-->
+        {{> Success_Message_Form_Field message="The Student was successfully updated."}}
+        <div class="ui divider"></div>
+
+        {{> Plan_Starting_Semester_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
+
+
+      </form>
+
+      <div class="ui bottom attached basic green button jsGeneratePlan" tabindex="0">Generate Degree Plan</div>
+      {{#if slug}}
+      <p>View {{slug}}'s degree plan <a target="_blank" href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a> </p>
+      {{/if}}
+
+    </div>
+    <div class="ui modal">
+      <i class="close icon"></i>
+      <div class="header">
+        Generate Degree Plan
+      </div>
+      <div class="ui error message">
+        <div class="header">
+          Warning!
+        </div>
+        <p>This will delete any courses and opportunities currently planned for future semesters!</p>
+        <p>Continue?</p>
+      </div>
+      <div class="actions">
+        <div class="ui positive right labeled icon button">
+          Yes
+          <i class="checkmark icon"></i>
+        </div>
+        <div class="ui black deny button">
+          No
+        </div>
+      </div>
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>
