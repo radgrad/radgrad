@@ -21,7 +21,14 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
       revieweeID: opportunity._id,
       visible: true,
     }).fetch();
-    return matchingReviews;
+    const matchingReviewsFinal = _.filter(matchingReviews, function(review){
+      let ret = true;
+      if (review.studentID === getUserIdFromRoute()) {
+        ret = false;
+      }
+      return ret;
+    });
+    return matchingReviewsFinal;
   },
   averageRating(opportunity) {
     let averageRating = 0;
@@ -47,12 +54,11 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
     return { name: userName, picture: userPicture, semester: reviewSemester,
       rating: reviewRating, comments: reviewComments };
   },
-  reviewUser(review) {
-    let ret = false;
-    if (review.studentID === getUserIdFromRoute()) {
-      ret = true;
-    }
-    return ret;
+  currentUserName() {
+    return Users.getFullName(getUserIdFromRoute());
+  },
+  currentUserPicture() {
+    return Users.findDoc(getUserIdFromRoute()).picture;
   },
 });
 
