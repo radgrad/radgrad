@@ -61,22 +61,7 @@
         {{else}}
           {{> Student_Explorer_Opportunities_Widget_Button buttonType='add' opportunity=item}}
         {{/if}}
-
-      {{#if reviews}}
-        {{> Student_Explorer_Opportunities_Review_Widget opportunity = item}}
-      {{else}}
-        <div class="ui divider"></div>
-        <p>There are no reviews yet.</p>
-      {{/if}}
-      {{#if completed}}
-        {{#if reviewed}}
-          {{> Student_Explorer_Opportunities_Edit_Review_Widget review = review opportunity = item}}
-        {{else}}
-          {{> Student_Explorer_Opportunities_Add_Review_Widget opportunity = item}}
-        {{/if}}
-      {{else}}
-        <p><i>You must complete this opportunity first before posting a review.</i></p>
-      {{/if}}
+        {{> Student_Explorer_Opportunities_Review_Widget opportunity=item userReview=review completed=completed}}
       </p>
     </div>
   {{else}}
