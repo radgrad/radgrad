@@ -24,15 +24,8 @@
         </div>
       </div>
           {{/with}}
-        <div class="ui accordion">
-          <div class="title">
-            <i class="dropdown icon"></i>
-            Edit my review
-          </div>
-          <div class="content">
-            {{> Student_Explorer_Opportunities_Edit_Review_Widget review = userReview opportunity = opportunity}}
-          </div>
-        </div>
+        {{> Student_Explorer_Opportunities_Edit_Review_Widget review = userReview opportunity = opportunity}}
+
       {{else}}
         <div class="item">
           <div class="ui grid">
@@ -48,15 +41,7 @@
             </div>
           </div>
           {{#if completed}}
-          <div class="ui accordion">
-            <div class="title">
-              <i class="dropdown icon"></i>
-              Add a review
-            </div>
-            <div class="content">
               {{> Student_Explorer_Opportunities_Add_Review_Widget opportunity = opportunity}}
-            </div>
-          </div>
           {{/if}}
         </div>
       {{/if}}
