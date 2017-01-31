@@ -20,10 +20,7 @@ function passedCourseHelper(courseSlugName) {
     courseID: course[0]._id,
   }).fetch();
   _.map(ci, (c) => {
-<<<<<<< HEAD
     //console.log(c);
-=======
->>>>>>> master
     if (c.verified === true) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
           c.grade === 'B' || c.grade === 'B-' || c.grade === 'CR') {
