@@ -53,10 +53,6 @@
           "year": 2017
         },
         {
-          "student": "betty",
-          "year": 2018
-        },
-        {
           "student": "charley",
           "year": 2016
         },
@@ -71,10 +67,6 @@
         {
           "student": "charley",
           "year": 2019
-        },
-        {
-          "student": "charley",
-          "year": 2020
         }
       ]
     },
@@ -1417,7 +1409,7 @@
           "student": "alfred"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Fall-2014",
           "course": "ics111",
           "note": "ICS 111",
           "verified": true,
@@ -1426,7 +1418,7 @@
           "student": "betty"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Fall-2014",
           "course": "ics141",
           "note": "ICS 141",
           "verified": true,
@@ -1435,7 +1427,7 @@
           "student": "betty"
         },
         {
-          "semester": "Fall-2015",
+          "semester": "Spring-2015",
           "course": "ics211",
           "note": "ICS 211",
           "verified": true,
@@ -1444,7 +1436,7 @@
           "student": "betty"
         },
         {
-          "semester": "Fall-2015",
+          "semester": "Spring-2015",
           "course": "ics241",
           "note": "ICS 241",
           "verified": true,
@@ -1453,7 +1445,7 @@
           "student": "betty"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Fall-2015",
           "course": "ics311",
           "note": "ICS 311",
           "verified": true,
@@ -1462,7 +1454,7 @@
           "student": "betty"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Fall-2015",
           "course": "ics314",
           "note": "ICS 314",
           "verified": true,
@@ -1471,7 +1463,7 @@
           "student": "betty"
         },
         {
-          "semester": "Fall-2016",
+          "semester": "Spring-2016",
           "course": "ics212",
           "note": "ICS 212",
           "verified": true,
@@ -1480,7 +1472,7 @@
           "student": "betty"
         },
         {
-          "semester": "Fall-2016",
+          "semester": "Spring-2016",
           "course": "ics321",
           "note": "ICS 321",
           "verified": true,
@@ -1489,7 +1481,7 @@
           "student": "betty"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Fall-2016",
           "course": "ics313",
           "note": "ICS 313",
           "verified": false,
@@ -1498,7 +1490,7 @@
           "student": "betty"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Fall-2016",
           "course": "ics331",
           "note": "ICS 331",
           "verified": false,
@@ -1507,7 +1499,7 @@
           "student": "betty"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Spring-2017",
           "course": "ics332",
           "note": "ICS 332",
           "verified": false,
@@ -1516,7 +1508,7 @@
           "student": "betty"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Spring-2017",
           "course": "ics422",
           "note": "ICS 422",
           "verified": false,
@@ -1525,7 +1517,7 @@
           "student": "betty"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Fall-2017",
           "course": "ics414",
           "note": "ICS 414",
           "verified": false,
@@ -1534,7 +1526,7 @@
           "student": "betty"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Fall-2017",
           "course": "ics471",
           "note": "ICS 471",
           "verified": false,
@@ -1543,7 +1535,7 @@
           "student": "betty"
         },
         {
-          "semester": "Fall-2018",
+          "semester": "Spring-2018",
           "course": "ics475",
           "note": "ICS 475",
           "verified": false,
@@ -1552,7 +1544,7 @@
           "student": "betty"
         },
         {
-          "semester": "Fall-2018",
+          "semester": "Spring-2018",
           "course": "ics484",
           "note": "ICS 484",
           "verified": false,
@@ -1561,7 +1553,7 @@
           "student": "betty"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Fall-2016",
           "course": "ics111",
           "note": "ICS 111",
           "verified": false,
@@ -1570,7 +1562,7 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Fall-2016",
           "course": "ics141",
           "note": "ICS 141",
           "verified": false,
@@ -1579,7 +1571,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Spring-2017",
           "course": "ics211",
           "note": "ICS 211",
           "verified": false,
@@ -1588,7 +1580,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2017",
+          "semester": "Spring-2017",
           "course": "ics241",
           "note": "ICS 241",
           "verified": false,
@@ -1597,7 +1589,7 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Fall-2017",
           "course": "ics311",
           "note": "ICS 311",
           "verified": false,
@@ -1606,7 +1598,7 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2018",
+          "semester": "Fall-2017",
           "course": "ics314",
           "note": "ICS 314",
           "verified": false,
@@ -1615,7 +1607,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2018",
+          "semester": "Spring-2018",
           "course": "ics212",
           "note": "ICS 212",
           "verified": false,
@@ -1624,7 +1616,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2018",
+          "semester": "Spring-2018",
           "course": "ics321",
           "note": "ICS 321",
           "verified": false,
@@ -1633,7 +1625,7 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2019",
+          "semester": "Fall-2018",
           "course": "ics313",
           "note": "ICS 313",
           "verified": false,
@@ -1642,7 +1634,7 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2019",
+          "semester": "Fall-2018",
           "course": "ics331",
           "note": "ICS 331",
           "verified": false,
@@ -1651,7 +1643,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2019",
+          "semester": "Spring-2019",
           "course": "ics332",
           "note": "ICS 332",
           "verified": false,
@@ -1660,7 +1652,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2019",
+          "semester": "Spring-2019",
           "course": "ics422",
           "note": "ICS 422",
           "verified": false,
@@ -1669,7 +1661,7 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2020",
+          "semester": "Fall-2019",
           "course": "ics414",
           "note": "ICS 414",
           "verified": false,
@@ -1678,7 +1670,7 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2020",
+          "semester": "Fall-2019",
           "course": "ics471",
           "note": "ICS 471",
           "verified": false,
@@ -1687,7 +1679,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2020",
+          "semester": "Spring-2020",
           "course": "ics475",
           "note": "ICS 475",
           "verified": false,
@@ -1696,7 +1688,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2020",
+          "semester": "Spring-2020",
           "course": "ics484",
           "note": "ICS 484",
           "verified": false,
