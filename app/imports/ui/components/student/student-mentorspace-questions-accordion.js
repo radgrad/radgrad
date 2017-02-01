@@ -52,5 +52,5 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
   },
   isOneAnswer(questionID) {
     return MentorAnswers.getAnswers(questionID).count() === 1;
-  }
+  },
 });

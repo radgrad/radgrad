@@ -21,7 +21,7 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
       revieweeID: opportunity._id,
       visible: true,
     }).fetch();
-    const matchingReviewsFinal = _.filter(matchingReviews, function(review){
+    const matchingReviewsFinal = _.filter(matchingReviews, function matchStudentID(review) {
       let ret = true;
       if (review.studentID === getUserIdFromRoute()) {
         ret = false;

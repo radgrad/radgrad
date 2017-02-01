@@ -16,7 +16,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     if (Users.findDoc(user).picture) {
       return Users.findDoc(user).picture;
     }
-    return "/images/default-profile-picture.png";
+    return '/images/default-profile-picture.png';
   },
   userStatus(opportunity) {
     let ret = false;
