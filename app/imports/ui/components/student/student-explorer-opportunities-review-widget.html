@@ -1,13 +1,7 @@
 <template name="Student_Explorer_Opportunities_Review_Widget">
 
   <div style="padding-top: 30px;" class="ui padded container">
-    <div class="ui dividing header"><h4>OPPORTUNITY REVIEWS
-      <div style="float: right">
-        <i>Average review: </i>
-        <div class="ui large star rating" data-rating="{{averageRating opportunity}}" data-max-rating="5"></div>
-
-      </div>
-    </h4>
+    <div class="ui dividing header"><h4>OPPORTUNITY REVIEWS</h4>
     </div>
     <div class="ui middle aligned very relaxed divided list">
       {{#if userReview}}
@@ -18,21 +12,14 @@
             <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><b>{{name}}</b><br>{{semester}}
           </div>
           <div class="twelve wide column">
-            <div class="ui large star rating" data-rating="{{rating}}" data-max-rating="5"></div>
+            {{> Student_Explorer_Review_Stars_Widget rating=rating}}
             <br><div style="padding-top: 5px">{{comments}}</div>
           </div>
         </div>
       </div>
           {{/with}}
-        <div class="ui accordion">
-          <div class="title">
-            <i class="dropdown icon"></i>
-            Edit my review
-          </div>
-          <div class="content">
-            {{> Student_Explorer_Opportunities_Edit_Review_Widget review = userReview opportunity = opportunity}}
-          </div>
-        </div>
+        {{> Student_Explorer_Opportunities_Edit_Review_Widget review = userReview opportunity = opportunity}}
+
       {{else}}
         <div class="item">
           <div class="ui grid">
@@ -48,15 +35,7 @@
             </div>
           </div>
           {{#if completed}}
-          <div class="ui accordion">
-            <div class="title">
-              <i class="dropdown icon"></i>
-              Add a review
-            </div>
-            <div class="content">
               {{> Student_Explorer_Opportunities_Add_Review_Widget opportunity = opportunity}}
-            </div>
-          </div>
           {{/if}}
         </div>
       {{/if}}
@@ -68,7 +47,7 @@
                 <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><b>{{name}}</b><br>{{semester}}
               </div>
               <div class="twelve wide column">
-                <div class="ui large star rating" data-rating="{{rating}}" data-max-rating="5"></div>
+                {{> Student_Explorer_Review_Stars_Widget rating=rating}}
                 <br><div style="padding-top: 5px">{{comments}}</div>
               </div>
             </div>

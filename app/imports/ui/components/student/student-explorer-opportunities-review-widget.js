@@ -67,7 +67,6 @@ Template.Student_Explorer_Opportunities_Review_Widget.events({
 });
 
 Template.Student_Explorer_Opportunities_Review_Widget.onRendered(function studentExplorerOpportunitiesReviewWidget() {
-  this.$('.ui.accordion').accordion();
   this.$('.ui.rating').rating('disable');
 });
 
