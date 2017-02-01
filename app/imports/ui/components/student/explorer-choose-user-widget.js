@@ -8,7 +8,8 @@ Template.Explorer_Choose_User_Widget.helpers({
     return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
   },
   label(user) {
-    return `${user.lastName}, ${user.firstName}`;
+    const name = `${user.firstName} ${user.lastName}`;
+    return name.length > 11 ? `${name.substring(0, 9)}...` : name;
   },
   picture(user) {
     if (user.picture) {

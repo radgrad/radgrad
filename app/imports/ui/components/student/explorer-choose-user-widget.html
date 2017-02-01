@@ -45,10 +45,12 @@
       </div>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="students">
-      <div class="ui small horizontal list">
+      <!--<div class="ui small horizontal list">-->
+      <div class="ui grid">
         {{#each user in users studentRole}}
-          <div class="item">
-            <a id="{{user.username}}" class="ui basic grey label jsRetrieve" href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img class="ui avatar image" src="{{picture user}}">{{label user}}</a>
+          <!--<div class="item">-->
+        <div class="four wide column" style="padding: 2px;">
+            <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve" href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img class="ui avatar image" src="{{picture user}}">{{label user}}</a>
           </div>
         {{/each}}
       </div>
