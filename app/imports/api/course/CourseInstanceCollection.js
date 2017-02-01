@@ -185,9 +185,9 @@ class CourseInstanceCollection extends BaseCollection {
         return instance._collection.find({ studentID: this.userId });
       });
       Meteor.publish(this.publicationNames[1], function publicPublish(courseID) {  // eslint-disable-line
-        // check the opportunityID.
+        // check the courseID.
         new SimpleSchema({
-          opportunityID: { type: String },
+          courseID: { type: String },
         }).validate({ courseID });
 
         return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });

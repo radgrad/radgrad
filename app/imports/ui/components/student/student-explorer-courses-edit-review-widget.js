@@ -64,3 +64,7 @@ Template.Student_Explorer_Courses_Edit_Review_Widget.events({
   },
   'click .jsCancel': FormUtils.processCancelButtonClick,
 });
+
+Template.Student_Explorer_Courses_Edit_Review_Widget.onRendered(function studentExplorerCoursesEditReviewWidget() {
+  this.$('.ui.accordion').accordion();
+});

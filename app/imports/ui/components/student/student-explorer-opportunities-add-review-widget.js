@@ -65,3 +65,7 @@ Template.Student_Explorer_Opportunities_Add_Review_Widget.events({
     }
   },
 });
+
+Template.Student_Explorer_Opportunities_Add_Review_Widget.onRendered(function studentExplorerOpportunitiesAddReviewWidget() {
+  this.$('.ui.accordion').accordion();
+});

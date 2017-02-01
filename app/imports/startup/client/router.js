@@ -236,10 +236,13 @@ mentorRoutes.route('/home', {
 /*                        STUDENT ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.
+// Student pages will automatically go to top when rendered.
 const studentRoutes = FlowRouter.group({
   prefix: '/student/:username',
   name: 'student',
-  triggersEnter: [addBodyClass],
+  triggersEnter: [addBodyClass, function () {
+    this.window.scrollTo(0, 0);
+  }],
   triggersExit: [removeBodyClass],
 });
 
