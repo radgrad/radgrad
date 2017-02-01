@@ -2612,9 +2612,9 @@
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 10,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "hardware"
@@ -2637,9 +2637,9 @@
           "opportunityType": "club",
           "sponsor": "glau",
           "ice": {
-            "i": 5,
+            "i": 10,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "virtual-reality"
@@ -2663,9 +2663,9 @@
           "opportunityType": "club",
           "sponsor": "glau",
           "ice": {
-            "i": 5,
+            "i": 10,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "application-development",
@@ -2843,9 +2843,9 @@
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
-            "i": 5,
+            "i": 25,
             "c": 0,
-            "e": 5
+            "e": 25
           },
           "interests": [
             "security"
@@ -2973,7 +2973,7 @@
           "ice": {
             "i": 0,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "art",
@@ -2999,7 +2999,7 @@
           "ice": {
             "i": 0,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "data-science",
@@ -3148,9 +3148,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 25,
             "c": 0,
-            "e": 5
+            "e": 25
           },
           "interests": [
             "application-development",
@@ -3339,9 +3339,9 @@
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
-            "i": 20,
+            "i": 25,
             "c": 0,
-            "e": 20
+            "e": 25
           },
           "interests": [
             "artificial-intelligence",
@@ -3429,9 +3429,9 @@
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 10,
             "c": 0,
-            "e": 5
+            "e": 15
           },
           "interests": [
             "data-visualization",
@@ -3648,7 +3648,7 @@
           "ice": {
             "i": 5,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "game-design",
