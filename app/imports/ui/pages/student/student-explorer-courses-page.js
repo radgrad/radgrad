@@ -20,7 +20,7 @@ function passedCourseHelper(courseSlugName) {
     courseID: course[0]._id,
   }).fetch();
   _.map(ci, (c) => {
-    console.log(c);
+    //console.log(c);
     if (c.verified === true) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
           c.grade === 'B' || c.grade === 'B-' || c.grade === 'CR') {
@@ -162,9 +162,9 @@ Template.Student_Explorer_Courses_Page.helpers({
 });
 
 Template.Student_Explorer_Courses_Page.onCreated(function studentExplorerCoursesPageOnCreated() {
+  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(Interests.getPublicationName());
 });
