@@ -287,7 +287,7 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
 });
 
 export const studentExplorerUsersPageRouteName = 'Student_Explorer_Users_Page';
-studentRoutes.route('/explorer/users/', {
+studentRoutes.route('/explorer/users/:explorerUserName', {
   name: studentExplorerUsersPageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerUsersPageRouteName });

@@ -12,7 +12,7 @@
       <div class="ui small horizontal list">
         {{#each user in users advisorRole}}
           <div class="item">
-            <button id="{{user.username}}" class="ui basic grey label jsRetrieve">{{label user}}</button>
+            <button id="{{user.username}}" class="ui basic grey label jsRetrieve"><img class="ui avatar image" src="{{picture user}}">{{label user}}</button>
           </div>
         {{/each}}
       </div>
@@ -21,7 +21,7 @@
       <div class="ui small horizontal list">
         {{#each user in users alumniRole}}
           <div class="item">
-            <button id="{{user.username}}" class="ui basic grey label jsRetrieve">{{label user}}</button>
+            <button id="{{user.username}}" class="ui basic grey label jsRetrieve"><img class="ui avatar image" src="{{picture user}}">{{label user}}</button>
           </div>
         {{/each}}
       </div>
@@ -30,7 +30,7 @@
       <div class="ui small horizontal list">
         {{#each user in users facultyRole}}
           <div class="item">
-            <button id="{{user.username}}" class="ui basic grey label jsRetrieve">{{label user}}</button>
+            <button id="{{user.username}}" class="ui basic grey label jsRetrieve"><img class="ui avatar image" src="{{picture user}}">{{label user}}</button>
           </div>
         {{/each}}
       </div>
@@ -39,7 +39,7 @@
       <div class="ui small horizontal list">
         {{#each user in users mentorRole}}
           <div class="item">
-            <button id="{{user.username}}" class="ui basic grey label jsRetrieve">{{label user}}</button>
+            <button id="{{user.username}}" class="ui basic grey label jsRetrieve"><img class="ui avatar image" src="{{picture user}}">{{label user}}</button>
           </div>
         {{/each}}
       </div>
@@ -48,7 +48,7 @@
       <div class="ui small horizontal list">
         {{#each user in users studentRole}}
           <div class="item">
-            <button id="{{user.username}}" class="ui basic grey label jsRetrieve">{{label user}}</button>
+            <a id="{{user.username}}" class="ui basic grey label jsRetrieve" href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img class="ui avatar image" src="{{picture user}}">{{label user}}</a>
           </div>
         {{/each}}
       </div>

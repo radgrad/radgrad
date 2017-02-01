@@ -22,6 +22,14 @@ Template.Explore_User_Widget.helpers({
     }
     return false;
   },
+  level() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      const user = Users.findDoc(id);
+      return user.level;
+    }
+    return 6;
+  },
   name() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();

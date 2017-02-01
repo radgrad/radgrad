@@ -1,13 +1,23 @@
 import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Explorer_Choose_User_Widget.helpers({
   users(role) {
     return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
   },
   label(user) {
-    return `${user.lastName}, ${user.firstName} (${user.username})`;
+    return `${user.lastName}, ${user.firstName}`;
+  },
+  picture(user) {
+    if (user.picture) {
+      return user.picture;
+    }
+    return '/images/default-profile-picture.png';
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
   studentRole() {
     return ROLE.STUDENT;
@@ -31,7 +41,6 @@ Template.Explorer_Choose_User_Widget.helpers({
 
 Template.Explorer_Choose_User_Widget.events({
   'click .jsRetrieve': function clickJSRetrieve(event, instance) {
-    event.preventDefault();
     const username = event.target.id;
     const user = Users.getUserFromUsername(username);
     if (user) {

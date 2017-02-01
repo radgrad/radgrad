@@ -3,9 +3,18 @@
     <div class="ui padded container segment">
       <div class="ui dividing header"><h4>{{role}} PROFILE</h4></div>
       <div class="ui card">
-        <img class="ui small circular image" src="{{picture}}">
+        <div class="image">
+          <img class="ui small circular image" src="{{picture}}">
+        </div>
         <div class="content">
-          <a class="header">{{name}}</a>
+          <a class="header">
+            <div style='position:relative;'>
+              {{name}}
+            </div>
+            {{#if isStudent}}
+              <div style="background-image: url('/images/level-icons/radgrad-level-{{level}}-icon.png'); background-repeat: no-repeat; width: 55px; height: 55px; margin: 0 0 2px 5px; padding: 0; background-size: 100% 100%;position:absolute;right:0;top:0"></div>
+            {{/if}}
+          </a>
           <div class="meta">
             <span class="date">{{email}}</span>
           </div>
