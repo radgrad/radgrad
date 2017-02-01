@@ -74,21 +74,24 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
     return Users.findDoc(getUserIdFromRoute()).picture;
   },
   abbreviateSemester(semester) {
-    var semNameYear = semester.split(" ");
-    var semName = "";
+    const semNameYear = semester.split(' ');
+    let semName = '';
     switch (semNameYear[0]) {
       case 'Spring':
-        semName = "Spr";
+        semName = 'Spr';
         break;
       case 'Fall':
-        semName = "Fall";
+        semName = 'Fall';
         break;
       case 'Summer':
         semName = 'Sum';
         break;
+      default:
+        semName = 'N/A';
+        break;
     }
-    return semName + " " + semNameYear[1];  
-  }
+    return `${semName} ${semNameYear[1]}`;
+  },
 });
 
 Template.Student_Explorer_Courses_Review_Widget.events({

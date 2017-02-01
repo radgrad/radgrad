@@ -17,7 +17,7 @@ Template.Student_Explorer_Courses_Widget.helpers({
     if (Users.findDoc(user).picture) {
       return Users.findDoc(user).picture;
     }
-    return "/images/default-profile-picture.png";
+    return '/images/default-profile-picture.png';
   },
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
@@ -90,6 +90,8 @@ Template.Student_Explorer_Courses_Widget.helpers({
         return '<h4><i class="yellow warning sign icon"></i>In Plan (Not Yet Completed)</h4>';
       case 2:
         return '<h4><i class="red warning circle icon"></i>Not in Plan';
+      default:
+        return 'ERROR: More than one table.';
     }
   },
   tableStyle(table) {

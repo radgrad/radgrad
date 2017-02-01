@@ -17,10 +17,10 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
     if (Users.findDoc(user).picture) {
       return Users.findDoc(user).picture;
     }
-    return "/images/default-profile-picture.png";
+    return '/images/default-profile-picture.png';
   },
   fullName(user) {
-    return Users.findDoc(user).firstName + " " + Users.findDoc(user).lastName;
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
   },
   careerGoalName(careerGoalSlugName) {
     const slug = Slugs.find({ name: careerGoalSlugName }).fetch();
