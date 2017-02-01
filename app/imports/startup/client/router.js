@@ -289,7 +289,7 @@ studentRoutes.route('/explorer/users/', {
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerUsersPageRouteName });
   },
-})
+});
 
 export const studentHomePageRouteName = 'Student_Home_Page';
 studentRoutes.route('/home', {

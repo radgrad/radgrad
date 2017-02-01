@@ -34,7 +34,6 @@ Template.Explorer_Choose_User_Widget.events({
     event.preventDefault();
     const username = event.target.id;
     const user = Users.getUserFromUsername(username);
-    console.log(user);
     if (user) {
       instance.userID.set(user._id);
     }

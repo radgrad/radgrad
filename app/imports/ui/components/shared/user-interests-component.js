@@ -2,14 +2,22 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
+import { getRouteUserName } from '../shared/route-user-name';
 
 Template.User_Interests_Component.helpers({
+  count() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const userID = Template.instance().userID.get();
+      const user = Users.findDoc(userID);
+      return (user.interestIDs.length);
+    }
+    return 0;
+  },
   interests() {
     const interests = [];
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
       const user = Users.findDoc(userID);
-      console.log(user, Template.instance());
       if (user) {
         _.map(user.interestIDs, (id) => {
           interests.push(Interests.findDoc(id));
@@ -21,6 +29,10 @@ Template.User_Interests_Component.helpers({
   labelSize() {
     return Template.instance().labelSize;
   },
+  interestURL(i) {
+    const slug = null;
+    return `/student/${getRouteUserName()}/explorer/courses/${slug}`;
+  },
 });
 
 Template.User_Interests_Component.events({
@@ -30,12 +42,10 @@ Template.User_Interests_Component.events({
 Template.User_Interests_Component.onCreated(function userInterestsComponentOnCreated() {
   this.labelSize = this.data.labelSize;
   this.userID = this.data.userID;
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
 });
 
 Template.User_Interests_Component.onRendered(function userInterestsComponentOnRendered() {
-  // add your statement here
+  this.$('.ui.accordion').accordion();
 });
 
 Template.User_Interests_Component.onDestroyed(function userInterestsComponentOnDestroyed() {

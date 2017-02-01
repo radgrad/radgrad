@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Users } from '../../../api/user/UserCollection';
 
 Template.Student_Explorer_Users_Page.helpers({
   userID() {
@@ -16,12 +15,11 @@ Template.Student_Explorer_Users_Page.events({
 });
 
 Template.Student_Explorer_Users_Page.onCreated(function studentExplorerUsersPageOnCreated() {
-  this.subscribe(Users.getPublicationName());
   this.userID = new ReactiveVar('');
 });
 
 Template.Student_Explorer_Users_Page.onRendered(function studentExplorerUsersPageOnRendered() {
-  // add your statement here
+  // add on rendered.
 });
 
 Template.Student_Explorer_Users_Page.onDestroyed(function studentExplorerUsersPageOnDestroyed() {

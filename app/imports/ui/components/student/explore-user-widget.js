@@ -1,4 +1,8 @@
 import { Template } from 'meteor/templating';
+import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Courses } from '../../../api/course/CourseCollection';
+import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
 
@@ -58,6 +62,11 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
   if (this.data.userID) {
     this.userID = this.data.userID;
   }
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Users.getPublicationName());
 });
 
 Template.Explore_User_Widget.onRendered(function exploreUserWidgetOnRendered() {

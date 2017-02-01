@@ -1,17 +1,16 @@
 <template name="User_Interests_Component">
-  {{#if Template.subscriptionsReady}}
-    {{#if interests}}
-      <div><b>Interests:</b><br>
-        <span class="left floated">
-          {{#each interest in interests}}
-            <label class="ui {{labelSize}} label">
-              <i style="color:white !important" class="fitted star icon"></i>{{interest.name}}
-            </label>
-          {{/each}}
-        </span>
+  {{#if interests}}
+    <div class="ui styled fluid accordion">
+      <div class="title"><i class="dropdown icon"></i>
+        <b>Interests:</b> ({{ count }})
       </div>
-    {{/if}}
-  {{else}}
-    {{> Loading}}
+      <div class="content">
+        {{#each interest in interests}}
+          <label class="ui {{labelSize}} label">
+            <i style="color:white !important" class="fitted star icon"></i>{{interest.name}}
+          </label>
+        {{/each}}
+      </div>
+    </div>
   {{/if}}
 </template>

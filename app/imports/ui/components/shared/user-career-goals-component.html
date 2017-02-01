@@ -1,20 +1,19 @@
 <template name="User_Career_Goals_Component">
-  {{#if Template.subscriptionsReady}}
-    {{#if careerGoals}}
-      <div><b>Career Goals:</b><br>
-        <span class="left floated">
-          {{#each careerGoal in careerGoals}}
-            <label class="ui {{labelSize}} label">
-              <i style="color:white !important" class="fitted star icon"></i>{{careerGoal.name}}
-            </label>
-          {{/each}}
-        </span>
-        <br>
+  {{#if careerGoals}}
+    <div class="ui styled fluid accordion">
+      <div class="title">
+        <i class="dropdown icon"></i>
+        <b>Career Goals:</b> ({{count}})<br>
       </div>
-    {{else}}
-      <p>No career goals chosen yet.</p>
-    {{/if}}
+      <div class="content">
+        {{#each careerGoal in careerGoals}}
+          <label class="ui {{labelSize}} label">
+              <i style="color:white !important" class="fitted suitcase icon"></i>{{careerGoal.name}}
+            </label>
+        {{/each}}
+      </div>
+    </div>
   {{else}}
-    {{> Loading}}
+    <p>No career goals chosen yet.</p>
   {{/if}}
 </template>

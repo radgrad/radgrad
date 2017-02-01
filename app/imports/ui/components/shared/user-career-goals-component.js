@@ -17,6 +17,15 @@ Template.User_Career_Goals_Component.helpers({
     }
     return careerGoals;
   },
+  count() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const userID = Template.instance().userID.get();
+      const user = Users.findDoc(userID);
+      return (user.careerGoalIDs.length);
+    }
+    return 0;
+  },
+
   labelSize() {
     return Template.instance().labelSize;
   },
@@ -29,12 +38,10 @@ Template.User_Career_Goals_Component.events({
 Template.User_Career_Goals_Component.onCreated(function userCareerGoalsComponentOnCreated() {
   this.labelSize = this.data.labelSize;
   this.userID = this.data.userID;
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Users.getPublicationName());
 });
 
 Template.User_Career_Goals_Component.onRendered(function userCareerGoalsComponentOnRendered() {
-  // add your statement here
+  this.$('.ui.accordion').accordion();
 });
 
 Template.User_Career_Goals_Component.onDestroyed(function userCareerGoalsComponentOnDestroyed() {
