@@ -3,7 +3,6 @@
     <div class="ui segments">
       <div class="ui padded segment container">
 
-        <!-- Header -->
         <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
           <h4 class="ui left floated header">{{toUpper shortName}} ({{name}})</h4>
           {{#if userStatus item}}
@@ -15,7 +14,6 @@
         <div class="ui divider" style="margin-top: 0;"></div>
 
         <div class="ui stackable two column grid">
-          <!-- Course Description -->
           <div class="column">
             {{#each descriptionPair in descriptionPairs}}
 
@@ -71,13 +69,11 @@
       </div>
 
       {{#each descriptionPair in descriptionPairs}}
-        <!-- Prerequisites -->
         {{#if isLabel descriptionPair.label 'Prerequisites'}}
           <div class="ui horizontal segments" style="background-color: white;">
             {{#each table in descriptionPair.value}}
               <div class="ui center aligned segment">
                 {{{getTableTitle @index}}}
-                <!-- Course List -->
                 {{#with tableStyle table}}
                   {{#each prerequisite in table}}
                     <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a> <br>
@@ -90,7 +86,6 @@
       {{/each}}
 
       {{#each descriptionPair in descriptionPairs}}
-        <!-- Labels -->
         {{#if isLabel descriptionPair.label 'Interests'}}
           <div class="ui right aligned secondary segment">
             {{#each interest in descriptionPair.value}}
@@ -99,35 +94,13 @@
           </div>
         {{/if}}
       {{/each}}
-
     </div>
 
     <div class="ui stackable two column grid">
-
       <div class="ten wide column">
         <div class="ui padded segment">
           {{> Student_Explorer_Courses_Review_Widget course=item userReview=review completed=completed}}
-          <!--
-          {{#if reviews}}
-            {{> Student_Explorer_Courses_Review_Widget course = item}}
-          {{else}}
-            <div class="ui dividing header">
-              <h4>COURSE REVIEWS</h4>
-            </div>
-            <p style="text-align: center;">There are no reviews yet.</p>
-          {{/if}}
-
-          {{#if completed}}
-            {{#if reviewed}}
-              {{> Student_Explorer_Courses_Edit_Review_Widget review = review course = item}}
-            {{else}}
-              {{> Student_Explorer_Courses_Add_Review_Widget course = item}}
-            {{/if}}
-          {{else}}
-            <p style="text-align: center;"><i>You must complete this class first before posting a review.</i></p>
-          {{/if}} -->
         </div>
-
       </div>
 
       <div class="six wide column">
@@ -142,120 +115,12 @@
                 <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
               {{/each}}
             </div>
-
           </div>
         {{/each}}
       </div>
-      
     </div>
 
   {{else}}
     {{> Loading}}
   {{/if}}
-
-  <!--
-  {{#if Template.subscriptionsReady}}
-    <div class="ui padded segment container">
-      <div class="ui dividing header">
-        <h4>{{shortName}} ({{name}})</h4>
-      </div>
-      {{#each descriptionPair in descriptionPairs}}
-        {{#if isLabel descriptionPair.label 'Interests'}}
-          <p>
-            {{#each interest in descriptionPair.value}}
-              <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
-            {{/each}}
-          </p>
-        {{else}}
-          {{#if isLabel descriptionPair.label 'Prerequisites'}}
-            {{#if notEmpty descriptionPair.value}}
-              <b>{{descriptionPair.label}}:</b>
-              <div class="ui padded equal width grid">
-                {{#each table in descriptionPair.value}}
-                  {{#if table}}
-                    {{#with tableStyle table}}
-                      <div class="column">
-                        <table class="ui collapsing compact small table">
-                          <tbody>
-                          <tr class="{{color}}"><td><i class="{{icon}}"></i><b>{{title}}</b></td></tr>
-                          {{#each prerequisite in table}}
-                            <tr class="{{color}}">
-                              <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a></td>
-                            </tr>
-                          {{/each}}
-                          </tbody>
-                        </table>
-                      </div>
-                    {{/with}}
-                  {{/if}}
-                {{/each}}
-              </div>
-              <br>
-            {{else}}
-              <p><b>{{descriptionPair.label}}:</b> None</p>
-            {{/if}}
-          {{else}}
-            {{#if descriptionPair.value }}
-              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}} </p>
-            {{else}}
-              <p><b>{{descriptionPair.label}}:</b> N/A</p>
-            {{/if}}
-          {{/if}}
-        {{/if}}
-      {{/each}}
-
-      <div class="ui three column grid">
-        {{#each socialPair in socialPairs}}
-          <div class="stretched column">
-            <table class="ui small table">
-              <thead>
-              <tr>
-                <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>
-                  <div class="ui circular mini bordered images">
-                    {{#each user in socialPair.value}}
-                      <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
-                    {{/each}}
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        {{/each}}
-      </div>
-      <br>
-      <p>
-        {{#if userStatus item}}
-          {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
-        {{else}}
-          {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
-        {{/if}}
-
-        {{#if reviews}}
-          {{> Student_Explorer_Courses_Review_Widget course = item}}
-        {{else}}
-        <div class="ui dividing header">
-          <h4>REVIEWS</h4>
-          </div>
-          <p>There are no reviews yet.</p>
-        {{/if}}
-      {{#if completed}}
-        {{#if reviewed}}
-          {{> Student_Explorer_Courses_Edit_Review_Widget review = review course = item}}
-        {{else}}
-          {{> Student_Explorer_Courses_Add_Review_Widget course = item}}
-        {{/if}}
-      {{else}}
-        <p><i>You must complete this class first before posting a review.</i></p>
-      {{/if}}
-      </p>
-    </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}} -->
 </template>

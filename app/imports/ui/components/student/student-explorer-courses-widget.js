@@ -14,7 +14,10 @@ Template.Student_Explorer_Courses_Widget.helpers({
     return label === value;
   },
   userPicture(user) {
-    return Users.findDoc(user).picture;
+    if (Users.findDoc(user).picture) {
+      return Users.findDoc(user).picture;
+    }
+    return "/images/default-profile-picture.png";
   },
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
