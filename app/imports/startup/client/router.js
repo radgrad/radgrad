@@ -286,6 +286,14 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
   },
 });
 
+export const studentExplorerUsersPageRouteName = 'Student_Explorer_Users_Page';
+studentRoutes.route('/explorer/users/:explorerUserName', {
+  name: studentExplorerUsersPageRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentExplorerUsersPageRouteName });
+  },
+});
+
 export const studentHomePageRouteName = 'Student_Home_Page';
 studentRoutes.route('/home', {
   name: studentHomePageRouteName,

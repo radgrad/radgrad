@@ -64,6 +64,13 @@ class InterestCollection extends BaseInstanceCollection {
     return instanceIDs.map(instanceID => this.findDoc(instanceID).name);
   }
 
+  getSlug(interestID) {
+    this.assertDefined(interestID);
+    const courseDoc = this.findDoc(interestID);
+    return Slugs.findDoc(courseDoc.slugID).name;
+  }
+
+
   /**
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.

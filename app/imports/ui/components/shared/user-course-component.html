@@ -1,0 +1,24 @@
+<template name="User_Course_Component">
+  <div class="ui styled fluid accordion">
+    <div class="title">
+      <i class="dropdown icon"></i>
+      <strong>Courses Taken:</strong> ({{count true}})
+    </div>
+    <div class="content">
+      {{#each ci in coursesTaken}}
+        <a href="{{courseURL ci}}" class="ui basic green label">{{courseName ci}} ({{courseNumber ci}})</a>
+      {{/each}}
+    </div>
+  </div>
+  <div class="ui styled fluid accordion">
+    <div class="title">
+      <i class="dropdown icon"></i>
+      <strong>Courses Planned:</strong> ({{count false}})
+    </div>
+    <div class="content">
+      {{#each ci in coursesPlanned}}
+        <a href="{{courseURL ci}}" class="ui basic green label">{{courseName ci}} ({{courseNumber ci}})</a>
+      {{/each}}
+    </div>
+  </div>
+</template>
