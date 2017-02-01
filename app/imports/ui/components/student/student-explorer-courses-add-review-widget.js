@@ -66,3 +66,7 @@ Template.Student_Explorer_Courses_Add_Review_Widget.events({
     }
   },
 });
+
+Template.Student_Explorer_Courses_Add_Review_Widget.onRendered(function studentExplorerCoursesAddReviewWidget() {
+  this.$('.ui.accordion').accordion();
+});
