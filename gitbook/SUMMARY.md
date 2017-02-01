@@ -3,13 +3,13 @@
 ### Introduction
 
 * [Why RadGrad?](README.md)
-* [Requirements](requirements.md)
-  * [Improve course scheduling](requirements.md#scheduling)
-  * [Provide recommendations](requirements.md#recommendations)
-  * [Improve student engagement](requirements.md#engagement)
-  * [Improve student diversity](requirements.md#diversity)
-  * [Improve degree program](requirements.md#degree-program)
-  * [Improve graduate success](requirements.md#graduate)
+* [Goals](goals.md)
+  * [Improve degree planning](goals.md#planning)
+  * [Provide useful recommendations](goals.md#recommendations)
+  * [Improve student engagement](goals.md#engagement)
+  * [Improve student diversity](goals.md#diversity)
+  * [Improve degree program](goals.md#degree-program)
+  * [Improve graduate success](goals.md#graduate)
 * [Use Cases](use-cases.md)
   * [First advisor meeting, ICS Newbie](use-cases.md#first-meeting)
   * [First advisor meeting, ICS Ninja](use-cases.md#first-meeting-ics-background)
@@ -41,9 +41,7 @@
   * [meteor npm run start](developerguide/meteor-guidelines.md#meteor-npm-run-start)
   * [meteor npm run lint](developerguide/meteor-guidelines.md#meteor-npm-run-lint)
   * [meteor npm run test-watch](developerguide/meteor-guidelines.md#meteor-npm-run-test-watch)
-* [Mockup Design Evaluation](mockup-design-evaluation.md)
-  * [Advisor role evaluation](mockup-design-evaluation.md#advisor-role-evaluation)
-  * [Student role evaluation](mockup-design-evaluation.md#student-role-evaluation)
+* [Spring 2017 Usability Test](usability-test.md)
 
 ### Data Model
 

@@ -13,7 +13,7 @@ Template.Student_Explorer_Degrees_Widget.helpers({
     if (Users.findDoc(user).picture) {
       return Users.findDoc(user).picture;
     }
-    return "/images/default-profile-picture.png";
+    return '/images/default-profile-picture.png';
   },
   degreeName(degreeSlugName) {
     const slug = Slugs.find({ name: degreeSlugName }).fetch();

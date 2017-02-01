@@ -88,7 +88,6 @@ Template.Student_Levels_Widget.helpers({
   },
   achievedLevel(userLevel, level) {
     return userLevel >= level;
-    
   },
   studentPicture(student) {
     return `/images/landing/${student.picture}`;
