@@ -106,6 +106,8 @@
 
       <div class="ten wide column">
         <div class="ui padded segment">
+          {{> Student_Explorer_Courses_Review_Widget course=item userReview=review completed=completed}}
+          <!--
           {{#if reviews}}
             {{> Student_Explorer_Courses_Review_Widget course = item}}
           {{else}}
@@ -123,7 +125,7 @@
             {{/if}}
           {{else}}
             <p style="text-align: center;"><i>You must complete this class first before posting a review.</i></p>
-          {{/if}}
+          {{/if}} -->
         </div>
 
       </div>

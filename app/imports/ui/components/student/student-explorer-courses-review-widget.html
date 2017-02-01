@@ -1,6 +1,69 @@
 <template name="Student_Explorer_Courses_Review_Widget">
 
   <div class="ui padded container">
+    <div class="ui dividing header"><h4>COURSE REVIEWS</h4>
+    </div>
+    <div class="ui middle aligned very relaxed divided list">
+      {{#if userReview}}
+        {{#with reviewData userReview}}
+          <div class="item">
+            <div class="ui grid">
+              <div class="four wide column">
+                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
+              </div>
+              <div class="twelve wide column">
+                {{#each star in stars}}
+                  <i style="font-size: 1.2em;" class="{{star}}"></i>
+                {{/each}}
+                <br><div style="padding-top: 5px">{{comments}}</div>
+              </div>
+            </div>
+         </div>
+        {{/with}}
+        {{> Student_Explorer_Courses_Edit_Review_Widget review=userReview course=course}}
+
+      {{else}}
+        <div class="item">
+          <div class="ui grid">
+            <div class="four wide column">
+              <img class="ui left floated middle aligned circular mini image" src="{{currentUserPicture}}"><a>{{currentUserName}}</a>
+            </div>
+            <div class="twelve wide column">
+              {{#if completed}}
+                <p><i>You have not reviewed this yet.</i></p>
+              {{else}}
+                <p><i>You must complete this course first to leave a review.</i></p>
+              {{/if}}
+            </div>
+          </div>
+          {{#if completed}}
+              {{> Student_Explorer_Courses_Add_Review_Widget course=course}}
+          {{/if}}
+        </div>
+      {{/if}}
+      {{#each review in reviews}}
+        {{#with reviewData review}}
+          <div class="item">
+            <div class="ui grid">
+              <div class="four wide column">
+                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
+              </div>
+              <div class="twelve wide column">
+                  {{#each star in stars}}
+                    <i style="font-size: 1.2em;" class="{{star}}"></i>
+                  {{/each}}
+                <br><div style="padding-top: 5px">{{comments}}</div>
+              </div>
+            </div>
+          </div>
+        {{/with}}
+      {{/each}}
+    </div>
+  </div>
+
+
+  <!--
+  <div class="ui padded container">
     <div class="ui dividing header">
       <h4>COURSE REVIEWS
         <div style="float: right">
@@ -32,6 +95,6 @@
         {{/with}}
       {{/each}}
     </div>
-  </div>
+  </div>-->
 
 </template>

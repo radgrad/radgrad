@@ -4,6 +4,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_Explorer_Courses_Review_Widget.onCreated(function onCreated() {
   this.subscribe(Slugs.getPublicationName());
@@ -66,6 +67,28 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
     return { name: userName, picture: userPicture, semester: reviewSemester,
       rating: review, stars: reviewStars, comments: reviewComments };
   },
+  currentUserName() {
+    return Users.getFullName(getUserIdFromRoute());
+  },
+  currentUserPicture() {
+    return Users.findDoc(getUserIdFromRoute()).picture;
+  },
+  abbreviateSemester(semester) {
+    var semNameYear = semester.split(" ");
+    var semName = "";
+    switch (semNameYear[0]) {
+      case 'Spring':
+        semName = "Spr";
+        break;
+      case 'Fall':
+        semName = "Fall";
+        break;
+      case 'Summer':
+        semName = 'Sum';
+        break;
+    }
+    return semName + " " + semNameYear[1];  
+  }
 });
 
 Template.Student_Explorer_Courses_Review_Widget.events({
