@@ -6,9 +6,9 @@
       </div>
       <div class="content">
         {{#each interest in interests}}
-          <label class="ui {{labelSize}} label">
+          <a href="{{interestURL interest}}" class="ui {{labelSize}} label">
             <i style="color:white !important" class="fitted star icon"></i>{{interest.name}}
-          </label>
+          </a>
         {{/each}}
       </div>
     </div>

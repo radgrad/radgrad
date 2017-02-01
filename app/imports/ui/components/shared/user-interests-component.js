@@ -30,8 +30,8 @@ Template.User_Interests_Component.helpers({
     return Template.instance().labelSize;
   },
   interestURL(i) {
-    const slug = null;
-    return `/student/${getRouteUserName()}/explorer/courses/${slug}`;
+    const slug = Interests.getSlug(i._id);
+    return `/student/${getRouteUserName()}/explorer/interests/${slug}`;
   },
 });
 

@@ -7,9 +7,9 @@
       </div>
       <div class="content">
         {{#each careerGoal in careerGoals}}
-          <label class="ui {{labelSize}} label">
+          <a href="{{careerGoalURL careerGoal}}" class="ui {{labelSize}} label">
               <i style="color:white !important" class="fitted suitcase icon"></i>{{careerGoal.name}}
-            </label>
+            </a>
         {{/each}}
       </div>
     </div>

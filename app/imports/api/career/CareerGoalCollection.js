@@ -68,6 +68,18 @@ class CareerGoalCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Returns the slug for the given CareerGoalID.
+   * @param goalID The CareerGoal ID.
+   * @throws { Meteor.Error} If goalID cannot be found.
+   */
+  getSlug(goalID) {
+    this.assertDefined(goalID);
+    const courseDoc = this.findDoc(goalID);
+    return Slugs.findDoc(courseDoc.slugID).name;
+  }
+
+
+  /**
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.
    * Checks slugID and interestIDs.

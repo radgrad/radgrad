@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Users } from '../../../api/user/UserCollection';
+import { getRouteUserName } from '../shared/route-user-name';
 
 Template.User_Career_Goals_Component.helpers({
   careerGoals() {
@@ -16,6 +17,10 @@ Template.User_Career_Goals_Component.helpers({
       }
     }
     return careerGoals;
+  },
+  careerGoalURL(goal) {
+    const slug = CareerGoals.getSlug(goal._id);
+    return `/student/${getRouteUserName()}/explorer/career-goals/${slug}`;
   },
   count() {
     if (Template.instance().userID && Template.instance().userID.get()) {
