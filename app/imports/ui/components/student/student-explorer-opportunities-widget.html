@@ -49,7 +49,7 @@
 
               {{#if isLabel descriptionPair.label 'Semesters'}}
               <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
                   {{else}}
                     N/A <br>
                 {{/if}}
@@ -57,7 +57,7 @@
 
               {{#if isLabel descriptionPair.label 'Event Date'}}
               <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
                   {{else}}
                     N/A <br>
                 {{/if}}
@@ -65,15 +65,27 @@
 
               {{#if isLabel descriptionPair.label 'Sponsor'}}
               <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
                   {{else}}
                     N/A <br>
                 {{/if}}
               {{/if}}
 
+              {{#if isLabel descriptionPair.label 'ICE'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">
+                  <b style="color:green">{{descriptionPair.value.i}}</b>
+                  <b style="color:blue">{{descriptionPair.value.c}}</b>
+                  <b style="color:purple">{{descriptionPair.value.e}}</b></span>
+                  <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+
               {{#if isLabel descriptionPair.label 'Teaser'}}
               <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
                   {{else}}
                     N/A <br>
                 {{/if}}
