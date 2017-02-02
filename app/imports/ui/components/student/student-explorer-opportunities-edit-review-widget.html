@@ -1,11 +1,10 @@
 <template name="Student_Explorer_Opportunities_Edit_Review_Widget">
   <div class="ui accordion">
-    <div class="title">
-      <i class="dropdown icon"></i>
-      Edit my review
+    <div class="title" style="text-align: center; text-decoration: underline; color: #38840F;">
+      <i class="dropdown icon"></i><a>Edit Review</a>
     </div>
     <div class="content">
-      <div style="padding-bottom:30px;" class="ui padded container">
+      <div style="padding-bottom:1.5em;" class="ui padded container">
         {{#if review.visible}}
           {{#if review.moderated}}
             <p><i class="green checkmark icon"></i>Your post is visible to the RadGrad community and has been approved by moderators.</p>
@@ -29,5 +28,6 @@
         </form>
       </div>    
     </div>
-  </div>
+  </div> 
+
 </template>

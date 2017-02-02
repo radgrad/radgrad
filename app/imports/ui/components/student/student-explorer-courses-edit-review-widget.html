@@ -1,33 +1,4 @@
 <template name="Student_Explorer_Courses_Edit_Review_Widget">
-  <!--
-  <div style="margin-top: 30px;" class="ui padded container">
-  <div class="ui dividing header"><h4>EDIT COURSE REVIEW</h4>
-    </div>
-    {{#if review.visible}}
-        {{#if review.moderated}}
-      <p><i class="green checkmark icon"></i>Your post is visible to the RadGrad community and has been approved by moderators.</p>
-        {{else}}
-          <p><i class="yellow warning sign icon"></i>Your post is visible to the RadGrad community but has not yet been approved by moderators.</p>
-        {{/if}}
-    {{else}}
-      <p><i class="warning red circle icon"></i>Your post has been hidden by moderators for the following reasons:
-      {{course.moderatorComments}}</p>
-    {{/if}}
-    <form class="ui equal width form {{successClass}} {{errorClass}}">
-      <div class="fields">
-        {{> Semesters_Single_Form_Field semesters=semesters name="semester" errorMessage=(fieldError "semesters") selectedSemesterID=review.semesterID required="true" }}
-
-        {{> Rating_Form_Field label="Rating" name="rating" ratings=ratings selectedRating=review.rating  errorMessage=(fieldError "rating") required=false}}
-      </div>
-
-      {{> TextArea_Form_Field label="Comments" rows=5 name="comments" value=review.comments placeholder="Explain the reasoning behind your rating here." errorMessage=(fieldError "comments") required=true}}
-
-      <button class="ui green basic mini button" type="submit">UPDATE</button>
-      {{> Success_Message_Form_Field message="Your review was successfully updated."}}
-      <button class="ui green basic mini button" type="submit">DELETE</button>
-
-    </form>
-  </div>-->
 
   <div class="ui accordion">
     <div class="title" style="text-align: center; text-decoration: underline; color: #38840F;">
