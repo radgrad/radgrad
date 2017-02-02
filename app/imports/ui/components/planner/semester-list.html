@@ -1,12 +1,12 @@
 <template name="Semester_List">
-  <div class="ui center aligned padded segment bodyDrop" ondragover="allowDrop(event)" style="margin-bottom: 0 !important; position: relative; {{#if isCurrentSemester}}border-color: #6FBE44;{{/if}}">
+  <div class="ui center aligned padded segment {{#if isFuture}}bodyDrop{{/if}}" ondragover="{{#if isFuture}}allowDrop(event){{/if}}" style="margin-bottom: 0 !important; position: relative; {{#if isCurrentSemester}}border-color: #6FBE44;{{/if}}">
     <div class="ui dividing {{#if isCurrentSemester}}green{{/if}} header" style="{{#if isCurrentSemester}}text-transform: uppercase;{{/if}}">{{semesterName}} {{year}}</div>
-    <table class="ui very basic table bodyDrop" ondragover="allowDrop(event)" style="flex-grow: 3; font-size: 0.85em;">
+    <table class="ui very basic table {{#if isFuture}}bodyDrop{{/if}}" ondragover="{{#if isFuture}}allowDrop(event){{/if}}" style="flex-grow: 3; font-size: 0.85em;">
       <tbody>
       {{#each course in icsCourses}}
       {{#if isFuture}}
       <tr id="{{course._id}}" class="courseInstance clickEnabled" draggable="true" ondragstart="drag(event)"
-          data-position="top center">
+          data-position="top center" style="cursor: pointer;">
         <td style="border-top: none;"><strong>{{course.note}}</strong></td>
         <td style="border-top: none;">
           <div id="{{course._id}}" class="ui selection dropdown">
@@ -20,7 +20,7 @@
             </div>
           </div>
         </td>
-        <td class="right aligned" style="border-top: none; margin: 0;"><i id="{{course._id}}" class="red remove circle icon jsDelCourse"></i></td>
+        <td class="right aligned" style="border-top: none; margin: 0;"><i id="{{course._id}}" class="red remove icon jsDelCourse"></i></td>
       </tr>
       {{else}}
       <tr id="{{course._id}}" data-position="top center" class="courseInstance clickEnabled">
@@ -43,7 +43,7 @@
           <strong>{{opportunityName opportunity._id}}</strong>
         </td>
         <td class="right aligned" style="border-top: none; margin: 0;">
-          <i id="{{opportunity._id}}" class="red remove circle icon jsDelOpp"></i>
+          <i id="{{opportunity._id}}" class="red remove icon jsDelOpp"></i>
         </td>
         {{else}}
         <td style="border-top: none;" colspan="2">
@@ -54,9 +54,8 @@
       {{/each}}
       </tbody>
     </table>
-    <!-- <button class="ui tiny icon button"><i class="plus icon"></i></button> -->
-      {{#if isFuture}}
-  <div class="ui tiny green basic compact button" data-position="top center" style="flex-grow: 0; margin: 1em 0; position: absolute; bottom: 0; left: 6.5em">Add</div>
+  {{#if isFuture}}
+  <div class="ui tiny green basic compact button" data-position="top center" style="flex-grow: 0; margin: 1em 0; position: absolute; bottom: 0; left: 50%; margin-left: -2.2em;">Add</div>
   <div class="ui fluid popup transition hidden">
     <div class="ui vertical menu">
       {{#if isFuture}}

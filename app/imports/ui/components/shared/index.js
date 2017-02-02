@@ -20,6 +20,18 @@ import './route-user-name.js';
 import './student-selector-widget.html';
 import './student-selector-widget.js';
 
+import './user-career-goals-component.html';
+import './user-career-goals-component.js';
+
+import './user-course-component.html';
+import './user-course-component.js';
+
+import './user-interests-component.html';
+import './user-interests-component.js';
+
+import './user-level-component.html';
+import './user-level-component.js';
+
 import './verification-event.html';
 import './verification-event.js';
 
@@ -28,3 +40,6 @@ import './verification-requests-completed.js';
 
 import './verification-requests-pending.html';
 import './verification-requests-pending.js';
+
+import './widget-header-number.html';
+import './widget-header-number.js';

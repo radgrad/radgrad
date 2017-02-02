@@ -21,7 +21,7 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
       revieweeID: opportunity._id,
       visible: true,
     }).fetch();
-    const matchingReviewsFinal = _.filter(matchingReviews, function(review){
+    const matchingReviewsFinal = _.filter(matchingReviews, function matchStudentID(review) {
       let ret = true;
       if (review.studentID === getUserIdFromRoute()) {
         ret = false;
@@ -29,6 +29,25 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
       return ret;
     });
     return matchingReviewsFinal;
+  },
+  abbreviateSemester(semester) {
+    const semNameYear = semester.split(' ');
+    let semName = '';
+    switch (semNameYear[0]) {
+      case 'Spring':
+        semName = 'Spr';
+        break;
+      case 'Fall':
+        semName = 'Fall';
+        break;
+      case 'Summer':
+        semName = 'Sum';
+        break;
+      default:
+        semName = 'N/A';
+        break;
+    }
+    return `${semName} ${semNameYear[1]}`;
   },
   averageRating(opportunity) {
     let averageRating = 0;
@@ -51,8 +70,15 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
     const reviewSemester = Semesters.toString(review.semesterID);
     const reviewRating = review.rating;
     const reviewComments = review.comments;
+    const reviewStars = [];
+    for (let i = 0; i < reviewRating; i += 1) {
+      reviewStars.push('yellow fitted star icon');
+    }
+    for (let i = reviewRating; i < 5; i += 1) {
+      reviewStars.push('yellow fitted empty star icon');
+    }
     return { name: userName, picture: userPicture, semester: reviewSemester,
-      rating: reviewRating, comments: reviewComments };
+      rating: review, stars: reviewStars, comments: reviewComments };
   },
   currentUserName() {
     return Users.getFullName(getUserIdFromRoute());

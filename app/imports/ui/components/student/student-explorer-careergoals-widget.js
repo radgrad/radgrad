@@ -10,8 +10,17 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
   isLabel(label, value) {
     return label === value;
   },
+  toUpper(string) {
+    return string.toUpperCase();
+  },
   userPicture(user) {
-    return Users.findDoc(user).picture;
+    if (Users.findDoc(user).picture) {
+      return Users.findDoc(user).picture;
+    }
+    return '/images/default-profile-picture.png';
+  },
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
   },
   careerGoalName(careerGoalSlugName) {
     const slug = Slugs.find({ name: careerGoalSlugName }).fetch();

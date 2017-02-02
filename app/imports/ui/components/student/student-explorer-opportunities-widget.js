@@ -13,7 +13,16 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     return label === value;
   },
   userPicture(user) {
-    return Users.findDoc(user).picture;
+    if (Users.findDoc(user).picture) {
+      return Users.findDoc(user).picture;
+    }
+    return '/images/default-profile-picture.png';
+  },
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+  },
+  toUpper(string) {
+    return string.toUpperCase();
   },
   userStatus(opportunity) {
     let ret = false;

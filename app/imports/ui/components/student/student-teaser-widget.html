@@ -2,7 +2,7 @@
   {{#if Template.subscriptionsReady}}
     <div class="ui padded segment container">
       <div class="ui dividing header">
-        <h4>TEASERS ({{teaserCount}})</h4>
+        <h4>TEASERS {{> Widget_Header_Number inputValue = teaserCount}}</h4>
       </div>
       {{#if teasers}}
       <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui cards">

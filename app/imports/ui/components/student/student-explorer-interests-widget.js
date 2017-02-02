@@ -57,7 +57,16 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return label === value;
   },
   userPicture(user) {
-    return Users.findDoc(user).picture;
+    if (Users.findDoc(user).picture) {
+      return Users.findDoc(user).picture;
+    }
+    return '/images/default-profile-picture.png';
+  },
+  toUpper(string) {
+    return string.toUpperCase();
+  },
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
   },
   interestName(interestSlugName) {
     const slug = Slugs.find({ name: interestSlugName }).fetch();
@@ -169,6 +178,18 @@ Template.Student_Explorer_Interests_Widget.helpers({
       tableTitle = 'In plan, but not yet complete';
     }
     return { color: tableColor, icon: tableIcon, title: tableTitle };
+  },
+  getTableTitle(tableIndex) {
+    switch (tableIndex) {
+      case 0:
+        return '<h4><i class="green checkmark icon"></i>Completed</h4>';
+      case 1:
+        return '<h4><i class="yellow warning sign icon"></i>In Plan (Not Yet Completed)</h4>';
+      case 2:
+        return '<h4><i class="red warning circle icon"></i>Not in Plan';
+      default:
+        return 'ERROR: More than one table.';
+    }
   },
   notEmpty(list) {
     let ret = false;

@@ -31,6 +31,9 @@ Template.Student_Explorer_Menu.helpers({
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
   courseName(course) {
     return course.shortName;
   },

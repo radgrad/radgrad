@@ -1,11 +1,10 @@
 <template name="Student_Explorer_Opportunities_Edit_Review_Widget">
   <div class="ui accordion">
-    <div class="title">
-      <i class="dropdown icon"></i>
-      Edit my review
+    <div class="title" style="text-align: center; text-decoration: underline; color: #38840F;">
+      <i class="dropdown icon"></i><a>Edit Review</a>
     </div>
     <div class="content">
-      <div style="padding-bottom:30px;" class="ui padded container">
+      <div style="padding-bottom:1.5em;" class="ui padded container">
         {{#if review.visible}}
           {{#if review.moderated}}
             <p><i class="green checkmark icon"></i>Your post is visible to the RadGrad community and has been approved by moderators.</p>
@@ -24,9 +23,11 @@
 
           {{> TextArea_Form_Field label="Comments" rows=5 name="comments" value=review.comments placeholder="Explain the reasoning behind your rating here." errorMessage=(fieldError "comments") required=true}}
 
-          <button class="ui green basic mini button" type="submit">Submit edited review</button>
+          <button class="ui green basic mini button" type="submit">UPDATE</button>
           {{> Success_Message_Form_Field message="Your review was successfully updated."}}
         </form>
-      </div>    </div>
-  </div>
+      </div>    
+    </div>
+  </div> 
+
 </template>
