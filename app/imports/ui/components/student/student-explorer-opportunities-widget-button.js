@@ -18,12 +18,23 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
   opportunitySemesters() {
     const opp = this.opportunity;
     const semesters = opp.semesterIDs;
+    const takenSemesters = [];
     const semesterNames = [];
     const currentSemesterID = Semesters.getCurrentSemester();
     const currentSemester = Semesters.findDoc(currentSemesterID);
+    const opportunity = this.opportunity;
+    const oi = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      opportunityID: opportunity._id,
+    }).fetch();
+    _.map(oi, (o) => {
+      takenSemesters.push(o.semesterID);
+    });
     _.map(semesters, (sem) => {
       if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
-        semesterNames.push(Semesters.toString(sem));
+        if (!_.includes(takenSemesters, sem)) {
+          semesterNames.push(Semesters.toString(sem));
+        }
       }
     });
     return semesterNames;

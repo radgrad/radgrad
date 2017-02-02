@@ -9,7 +9,9 @@
               <div class="ui fluid popup transition hidden">
                 <div class="ui vertical menu">
                   {{#each semester in yearSemesters year}}
-                    <a class="item addToPlan" data-position="right center">{{semester}}</a>
+                    {{#if semesterNotInPlan semester}}
+                      <a class="item addToPlan" data-position="right center">{{semester}}</a>
+                    {{/if}}
                   {{/each}}
                 </div>
               </div>
