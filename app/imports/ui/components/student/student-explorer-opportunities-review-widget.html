@@ -11,9 +11,7 @@
                 <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
               </div>
               <div class="twelve wide column">
-                {{#each star in stars}}
-                  <i style="font-size: 1.2em;" class="{{star}}"></i>
-                {{/each}}
+                {{> Student_Explorer_Review_Stars_Widget rating = rating}}
                 <br><div style="padding-top: 5px">{{comments}}</div>
               </div>
             </div>
@@ -48,9 +46,7 @@
                 <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
               </div>
               <div class="twelve wide column">
-                  {{#each star in stars}}
-                    <i style="font-size: 1.2em;" class="{{star}}"></i>
-                  {{/each}}
+                {{> Student_Explorer_Review_Stars_Widget rating = rating}}
                 <br><div style="padding-top: 5px">{{comments}}</div>
               </div>
             </div>
@@ -59,63 +55,4 @@
       {{/each}}
     </div>
   </div>
-
-  <!--
-  <div style="padding-top: 30px;" class="ui padded container">
-    <div class="ui dividing header"><h4>OPPORTUNITY REVIEWS</h4>
-    </div>
-    <div class="ui middle aligned very relaxed divided list">
-      {{#if userReview}}
-        {{#with reviewData userReview}}
-          <div class="item">
-        <div class="ui grid">
-          <div class="four wide column">
-            <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><b>{{name}}</b><br>{{semester}}
-          </div>
-          <div class="twelve wide column">
-            {{> Student_Explorer_Review_Stars_Widget rating=rating}}
-            <br><div style="padding-top: 5px">{{comments}}</div>
-          </div>
-        </div>
-      </div>
-          {{/with}}
-        {{> Student_Explorer_Opportunities_Edit_Review_Widget review = userReview opportunity = opportunity}}
-
-      {{else}}
-        <div class="item">
-          <div class="ui grid">
-            <div class="four wide column">
-              <img class="ui left floated middle aligned circular mini image" src="{{currentUserPicture}}"><b>{{currentUserName}}</b>
-            </div>
-            <div class="twelve wide column">
-              {{#if completed}}
-                <p><i>You have not reviewed this yet.</i></p>
-              {{else}}
-                <p><i>You must complete this opportunity first to leave a review.</i></p>
-              {{/if}}
-            </div>
-          </div>
-          {{#if completed}}
-              {{> Student_Explorer_Opportunities_Add_Review_Widget opportunity = opportunity}}
-          {{/if}}
-        </div>
-      {{/if}}
-      {{#each review in reviews}}
-        {{#with reviewData review}}
-          <div class="item">
-            <div class="ui grid">
-              <div class="four wide column">
-                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><b>{{name}}</b><br>{{semester}}
-              </div>
-              <div class="twelve wide column">
-                {{> Student_Explorer_Review_Stars_Widget rating=rating}}
-                <br><div style="padding-top: 5px">{{comments}}</div>
-              </div>
-            </div>
-          </div>
-        {{/with}}
-      {{/each}}
-    </div>
-  </div>-->
-
 </template>
