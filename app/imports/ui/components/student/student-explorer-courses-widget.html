@@ -9,7 +9,11 @@
             {{#if futureInstance item}}
               {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
             {{else}}
-              {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+              {{#if passedCourse item}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
+              {{else}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+              {{/if}}
             {{/if}}
           {{else}}
             {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}

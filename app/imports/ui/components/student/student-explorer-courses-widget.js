@@ -57,6 +57,20 @@ Template.Student_Explorer_Courses_Widget.helpers({
     }
     return ret;
   },
+  passedCourse(course) {
+    let ret = false;
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    for (const c of ci) {
+      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' ||
+          c.grade === 'B+' || c.grade === 'B') {
+        ret = true;
+      }
+    }
+    return ret;
+  },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
     return semesters;

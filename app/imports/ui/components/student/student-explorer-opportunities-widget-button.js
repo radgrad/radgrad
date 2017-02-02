@@ -41,13 +41,17 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
   },
   existingSemesters() {
     const semesters = [];
+    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSemester = Semesters.findDoc(currentSemesterID);
     const opportunity = this.opportunity;
     const oi = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
     _.map(oi, (o) => {
-      semesters.push(Semesters.toString(o.semesterID, false));
+      if (Semesters.findDoc(o.semesterID).sortBy >= currentSemester.sortBy) {
+        semesters.push(Semesters.toString(o.semesterID, false));
+      }
     });
     return semesters;
   },
