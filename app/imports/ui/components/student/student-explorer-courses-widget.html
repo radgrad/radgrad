@@ -107,7 +107,7 @@
         {{#each socialPair in socialPairs}}
           <div class="ui padded segment">
             <div class="ui dividing header">
-              <h4>INTERESTED {{toUpper socialPair.label}} ({{socialPair.amount}})</h4>
+              <h4>INTERESTED {{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
             </div>
 
             <div class="ui circular mini bordered images">
