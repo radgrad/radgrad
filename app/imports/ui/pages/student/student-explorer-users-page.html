@@ -1,0 +1,22 @@
+<template name="Student_Explorer_Users_Page">
+  {{#if Template.subscriptionsReady}}
+    {{#Student_Explorer_Layout type = 'users'}}
+      <div class="ui grid container">
+        <div class="eleven wide column">
+          {{> Explorer_Choose_User_Widget userID=userID}}
+        </div>
+        <div class="five wide column">
+          {{#if displayUser}}
+            {{> Explore_User_Widget userID=userID}}
+          {{else}}
+            <div class="ui padded segment">
+              <p>Choose a user from the panel on the left.</p>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    {{/Student_Explorer_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

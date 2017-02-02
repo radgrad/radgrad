@@ -1,0 +1,59 @@
+<template name="Explorer_Choose_User_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>CHOOSE USER</h4></div>
+    <div class="ui top attached tabular stackable menu">
+      <a class="item" data-tab="advisors">Advisors</a>
+      <a class="item" data-tab="alumni">Alumni</a>
+      <a class="item" data-tab="faculty">Faculty</a>
+      <a class="item" data-tab="mentors">Mentors</a>
+      <a class="active item" data-tab="students">Students</a>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="advisors">
+      <div class="ui small horizontal list">
+        {{#each user in users advisorRole}}
+          <div class="item">
+            <button id="{{user.username}}" class="ui basic grey label jsRetrieve"><img class="ui avatar image" src="{{picture user}}">{{label user}}</button>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="alumni">
+      <div class="ui small horizontal list">
+        {{#each user in users alumniRole}}
+          <div class="item">
+            <button id="{{user.username}}" class="ui basic grey label jsRetrieve"><img class="ui avatar image" src="{{picture user}}">{{label user}}</button>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="faculty">
+      <div class="ui small horizontal list">
+        {{#each user in users facultyRole}}
+          <div class="item">
+            <button id="{{user.username}}" class="ui basic grey label jsRetrieve"><img class="ui avatar image" src="{{picture user}}">{{label user}}</button>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="mentors">
+      <div class="ui small horizontal list">
+        {{#each user in users mentorRole}}
+          <div class="item">
+            <button id="{{user.username}}" class="ui basic grey label jsRetrieve"><img class="ui avatar image" src="{{picture user}}">{{label user}}</button>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="students">
+      <!--<div class="ui small horizontal list">-->
+      <div class="ui grid">
+        {{#each user in users studentRole}}
+          <!--<div class="item">-->
+        <div class="four wide column" style="padding: 2px;">
+            <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve" href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img class="ui avatar image" src="{{picture user}}">{{label user}}</a>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>
