@@ -44,6 +44,19 @@ Template.Student_Explorer_Courses_Widget.helpers({
     }
     return ret;
   },
+  futureInstance(course) {
+    let ret = false;
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    for (const courseInstance of ci) {
+      if (Semesters.findDoc(courseInstance.semesterID).sortBy > Semesters.getCurrentSemesterDoc().sortBy) {
+        ret = true;
+      }
+    }
+    return ret;
+  },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
     return semesters;

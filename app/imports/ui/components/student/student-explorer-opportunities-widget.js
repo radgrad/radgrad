@@ -35,6 +35,19 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     }
     return ret;
   },
+  futureInstance(opportunity) {
+    let ret = false;
+    const oi = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      opportunityID: opportunity._id,
+    }).fetch();
+    for (const opportunityInstance of oi) {
+      if (Semesters.findDoc(opportunityInstance.semesterID).sortBy > Semesters.getCurrentSemesterDoc().sortBy) {
+        ret = true;
+      }
+    }
+    return ret;
+  },
   teaserUrl(teaser) {
     return teaser.url;
   },
