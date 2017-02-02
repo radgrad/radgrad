@@ -107,12 +107,12 @@
         {{#each socialPair in socialPairs}}
           <div class="ui padded segment">
             <div class="ui dividing header">
-              <h4>INTERESTED {{toUpper socialPair.label}} ({{socialPair.amount}})</h4>
+              <h4>INTERESTED {{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
             </div>
 
-            <div class="ui circular mini bordered images">
+            <div class="ui circular mini bordered images" style="overflow: visible;">
               {{#each user in socialPair.value}}
-                <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
+                <a href="#" data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}></a>
               {{/each}}
             </div>
           </div>

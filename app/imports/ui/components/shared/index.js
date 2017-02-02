@@ -40,3 +40,6 @@ import './verification-requests-completed.js';
 
 import './verification-requests-pending.html';
 import './verification-requests-pending.js';
+
+import './widget-header-number.html';
+import './widget-header-number.js';

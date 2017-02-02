@@ -43,7 +43,7 @@
       <div class="ui horizontal segments" style="background-color: white;">
         {{#each socialPair in socialPairs}}
         <div class="ui segment">
-            <h5 style="text-align: center;">{{toUpper socialPair.label}} ({{socialPair.amount}})</h5>
+            <h5 style="text-align: center;">{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h5>
 
           <div class="ui circular mini bordered images" style="overflow: visible;">
             {{#each user in socialPair.value}}

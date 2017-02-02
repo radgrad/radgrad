@@ -9,6 +9,12 @@ Template.Student_Explorer_Degrees_Widget.helpers({
   isLabel(label, value) {
     return label === value;
   },
+  toUpper(string) {
+    return string.toUpperCase();
+  },
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+  },
   userPicture(user) {
     if (Users.findDoc(user).picture) {
       return Users.findDoc(user).picture;

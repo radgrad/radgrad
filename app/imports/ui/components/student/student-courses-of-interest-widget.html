@@ -2,7 +2,7 @@
   {{#if Template.subscriptionsReady}}
   <div class="ui padded segment container">
     <div class="ui dividing header">
-      <h4>RECOMMENDED COURSES ({{coursesCount}})</h4>
+      <h4>RECOMMENDED COURSES {{> Widget_Header_Number inputValue = coursesCount}}</h4>
     </div>
     {{#if courses}}
     <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui two cards">

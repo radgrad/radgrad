@@ -19,6 +19,9 @@ Template.Student_Explorer_Courses_Widget.helpers({
     }
     return '/images/default-profile-picture.png';
   },
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+  },
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
   },
