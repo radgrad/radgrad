@@ -56,4 +56,3 @@ export function removeAllEntities() {
   WorkInstances.removeAll();
   AcademicYearInstances.removeAll();
 }
-

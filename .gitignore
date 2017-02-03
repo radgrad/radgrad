@@ -19,3 +19,6 @@ _book
 
 # Production settings
 settings.production.json
+
+# Kadira ?
+*.cpuprofile
