@@ -62,10 +62,10 @@ export function makeCourseICE(course, grade) {
   }
   // ICS courses get competency points if you get an A or a B.
   if (grade.includes('B')) {
-    c = 5;
+    c = 7;
   } else
     if (grade.includes('A')) {
-      c = 9;
+      c = 10;
     }
   return { i, c, e };
 }
