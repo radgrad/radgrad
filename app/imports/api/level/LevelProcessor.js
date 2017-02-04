@@ -17,7 +17,6 @@ export function calcLevel(studentID) {
   });
   const ice = getTotalICE(verified);
   const numReviews = Reviews.find({ studentID, type: 'course', moderated: true, visible: true }).count();
-  console.log(numReviews);
   let level = 1;
   if (ice.i === 100 && ice.c === 100 && ice.e === 100 && numReviews >= 6) {
     level = 6;
@@ -34,11 +33,13 @@ export function calcLevel(studentID) {
           if (ice.c >= 12) {
             level = 2;
           }
+  // console.log(ice, numReviews, level);
   return level;
 }
 
 export function updateStudentLevel(studentID) {
   const level = calcLevel(studentID);
+  // console.log(studentID, level);
   Users.setLevel(studentID, level);
 }
 
