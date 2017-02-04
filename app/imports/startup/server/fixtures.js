@@ -47,7 +47,7 @@ function totalDocuments() {
 }
 
 // Must match the format in the client-side ui/pages/admin/admin-database-dump-page.js
-const restoreFileDateFormat = 'YYYY-MM-DD-hh-mm-ss';
+const restoreFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
 
 
 /**
