@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 import { Meteor } from 'meteor/meteor';
-import { isICE, assertICE, makeCourseICE } from '/imports/api/ice/IceProcessor';
+import { isICE, assertICE, makeCourseICE, gradeCompetency } from '/imports/api/ice/IceProcessor';
 import { expect } from 'chai';
 
 if (Meteor.isServer) {
@@ -20,9 +20,9 @@ if (Meteor.isServer) {
       expect(function foo() { assertICE(notIce); }).to.throw(Error);
     });
     it('#makeCourseICE', function test() {
-      expect(makeCourseICE('ICS111', 'A').c).to.equal(9);
-      expect(makeCourseICE('ICS111', 'B').c).to.equal(5);
-      expect(makeCourseICE('other', 'A').c).to.equal(0);
+      expect(makeCourseICE('ICS111', 'A').c).to.equal(gradeCompetency.A);
+      expect(makeCourseICE('ICS111', 'B').c).to.equal(gradeCompetency.B);
+      expect(makeCourseICE('other', 'A').c).to.equal(gradeCompetency.C);
     });
   });
 }

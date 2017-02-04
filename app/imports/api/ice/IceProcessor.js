@@ -14,6 +14,12 @@ Number.isInteger = Number.isInteger ||
           Math.floor(value) === value;
     };
 
+export const gradeCompetency = {
+  A: 10,
+  B: 6,
+  C: 0,
+};
+
 /**
  * Returns true if the object passed conforms to the ICE object specifications.
  * Note this does not test to see if additional fields are present.
@@ -62,10 +68,10 @@ export function makeCourseICE(course, grade) {
   }
   // ICS courses get competency points if you get an A or a B.
   if (grade.includes('B')) {
-    c = 7;
+    c = gradeCompetency.B;
   } else
     if (grade.includes('A')) {
-      c = 10;
+      c = gradeCompetency.A;
     }
   return { i, c, e };
 }

@@ -1,1 +1,2 @@
 import './LevelProcessor';
+import './LevelProcessorMethods';
