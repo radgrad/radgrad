@@ -71,11 +71,9 @@
       </div>
       <div class="ui grid container">
         <div class="row">
-          <div class="column">
-            <div class="ui left aligned segment">
+            <div class="ui basic segment" style="padding: 0;">
               {{#if hasCourse}}
-                <p><b>{{courseNumber}}</b>
-                  {{courseName}}</p>
+                <div class="ui dividing header"><h4>{{courseNumber}}: {{courseName}}</h4></div>
                 <div class="content">
                   {{#each recommendationStars}}
                     <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
@@ -84,20 +82,34 @@
                   <p>
                     <b>Catalog Descrption:</b> {{courseDescription}}
                   </p>
-                  <p><b>When scheduled:</b> {{instanceSemester}}</p>
+                  <b>Scheduled:</b> {{#if instanceSemester}} {{instanceSemester}} {{else}} N/A {{/if}}
                   <p><b>ICE Value:</b> {{> ICE_Badge ice=courseIce }}</p>
-                  <p><b>Interests:</b> <span class="left floated"> <br>
-                    {{#each interest in interests}}
-                      <label class="ui mini label"><i style="color:white !important"
-                                                      class="fitted star icon"></i>{{interest.name}}</label>
-                    {{/each}}
-              </span></p>
                   <p><b>Prerequisites:</b>
-                    {{#each prerequisite in prerequisites}}
-                      <label style="text-transform: uppercase" class="ui mini {{#if missingPrerequisite
-                                                  prerequisite}}red{{/if}} label">{{prerequisite}}</label>
-                    {{/each}}
+                    {{#if prerequisites}}
+                      <div class="ui bulleted list" style="margin-top: 0; margin-left: 25px;">
+                        {{#each prerequisite in prerequisites}}
+                          <div class="ui item">
+                            <a href="{{pathFor coursesRouteName username=routeUserName course = prerequisite}}" style="text-transform: uppercase;">{{prerequisite}}
+                              {{#if missingPrerequisite prerequisite}}
+                                <i class="red warning icon"></i>
+                              {{else}}
+                                <i class="green checkmark icon"></i>
+                              {{/if}}
+                            </a>
+                          </div>
+                        {{/each}}
+                      </div>
+                      {{else}}
+                      N/A
+                    {{/if}}
                   </p>
+                  {{#if interests}}
+                    <div class="ui right floated" style="float: right;">
+                      {{#each interest in interests}}
+                        <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestName interest.slugID)}}" ><i class="fitted star icon"></i>{{interest.name}}</a>
+                      {{/each}}
+                    </div>
+                  {{/if}}
                 </div>
               {{else}}
                 {{#if hasOpportunity}}
@@ -143,7 +155,7 @@
                 {{/if}}
               {{/if}}
             </div>
-          </div>
+
         </div>
       </div>
     </div>

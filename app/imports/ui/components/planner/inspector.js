@@ -15,8 +15,15 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { plannerKeys } from './academic-plan';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Inspector.helpers({
+  coursesRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
+  },
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
   courses100() {
     let ret = [];
     const courses = Courses.find({ number: /ICS 1/ }).fetch();
@@ -199,7 +206,11 @@ Template.Inspector.helpers({
               ret.push(Interests.findDoc(iid));
             });
           }
+    console.log(ret);
     return ret;
+  },
+  interestName(interestSlugName) {
+    return Slugs.getNameFromID(interestSlugName);
   },
   isPastInstance() {
     const currentSemester = Semesters.getCurrentSemesterDoc();
