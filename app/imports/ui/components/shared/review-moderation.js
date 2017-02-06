@@ -16,10 +16,6 @@ Template.Review_Moderation.helpers({
   pendingOpportunityReviews() {
     return Reviews.find({ moderated: false, reviewType: 'opportunity' });
   },
-  processedDate(date) {
-    const processed = moment(date);
-    return processed.calendar();
-  },
   rating(review) {
     return review.rating;
   },
@@ -52,21 +48,18 @@ Template.Review_Moderation.events({
     event.preventDefault();
     const split = event.target.id.split('-');
     const reviewID = split[0];
+    console.log(reviewID);
     const review = Reviews.findDoc(reviewID);
-    const processRecord = {};
-    processRecord.date = new Date();
     if (split[1] === 'accept') {
-      review.status = Reviews.ACCEPTED;
-      processRecord.status = Reviews.ACCEPTED;
+      review.moderated = true;
+      review.visible = true;
     } else {
-      review.status = Reviews.REJECTED;
-      processRecord.status = Reviews.REJECTED;
+      review.moderated = true;
+      review.visible = false;
     }
-    processRecord.verifier = Users.getFullName(Meteor.userId());
-    processRecord.feedback = event.target.parentElement.querySelectorAll('input')[0].value;
-    review.processed.push(processRecord);
-    const status = review.status;
-    const processed = review.processed;
-    Reviews.updateStatus(reviewID, status, processed);
+   // review.moderatorComments = event.target.parentElement.querySelectorAll('input')[0].value;
+    const moderated = review.moderated;
+    const visible = review.visible;
+    Reviews.updateModerated(reviewID, moderated, visible);
   },
 });

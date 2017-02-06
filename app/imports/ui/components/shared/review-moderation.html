@@ -29,14 +29,10 @@
                       <div class="field">
                         <label>Moderator Comments:</label>
                         <div class="ui action input">
-                        <textarea rows="2" id="{{request._id}}-comments"></textarea>
-                      </div>
-                      <div class="ui basic green mini button" id="{{request._id}}-accept" type="submit" style="margin-top:10px">
-                        <div class="chooseSemester">ACCEPT</div>
-                      </div>
-                      <div class="ui basic green mini button" id="{{request._id}}-reject" type="submit" style="margin-top:10px">
-                        <div class="chooseSemester">REJECT</div>
-                      </div>
+                        <textarea rows="2" id="{{review._id}}-comments"></textarea>
+                      <button class="ui basic green mini button" id="{{review._id}}-accept" type="submit" style="margin-top:10px">ACCEPT</button>
+                      <button class="ui basic green mini button" id="{{review._id}}-reject" type="submit" style="margin-top:10px">REJECT</button>
+                        </div>
                     </div>
                   </form>
                 </div>
@@ -76,13 +72,11 @@
                     <form class="ui form">
                       <div class="field">
                         <label>Moderator Comments:</label>
-                        <textarea rows="2" style="padding-bottom:5px"></textarea>
-                      </div>
-                      <div class="ui basic green mini button" type="submit">
-                        <div class="chooseSemester">ACCEPT</div>
-                      </div>
-                      <div class="ui basic green mini button" type="submit">
-                        <div class="chooseSemester">REJECT</div>
+                        <div class="ui action input">
+                          <textarea rows="2" id="{{review._id}}-comments"></textarea>
+                        <button class="ui basic green mini button" id="{{review._id}}-accept" type="submit" style="margin-top:10px">ACCEPT</button>
+                        <button class="ui basic green mini button" id="{{review._id}}-reject" type="submit" style="margin-top:10px">REJECT</button>
+                        </div>
                       </div>
                     </form>
                   </div>
