@@ -9,6 +9,9 @@ import './get-user-id-from-route';
 import './help-panel-widget.html';
 import './help-panel-widget.js';
 
+import './ice-header.html';
+import './ice-header.js';
+
 import './projected-ice-component.html';
 import './projected-ice-component.js';
 

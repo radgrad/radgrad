@@ -24,6 +24,9 @@ Template.Inspector.helpers({
   interestsRouteName() {
     return RouteNames.studentExplorerInterestsPageRouteName;
   },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+  },
   courses100() {
     let ret = [];
     const courses = Courses.find({ number: /ICS 1/ }).fetch();
@@ -147,6 +150,16 @@ Template.Inspector.helpers({
       }
     return null;
   },
+  courseSlugID() {
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      return Slugs.getNameFromID(Template.instance().state.get(plannerKeys.detailCourse).slugID);
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+        return Slugs.getNameFromID(course.slugID);
+      }
+    return null;
+  },
   courseNumber() {
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).number;
@@ -164,6 +177,16 @@ Template.Inspector.helpers({
   hasOpportunity() {
     return Template.instance().state.get(plannerKeys.detailOpportunity) ||
         Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+  },
+  opportunitySlugID() {
+    if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      return Slugs.getNameFromID(Template.instance().state.get(plannerKeys.detailOpportunity).slugID);
+    } else
+      if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailOpportunityInstance).courseID);
+        return Slugs.getNameFromID(course.slugID);
+      }
+    return null;
   },
   hasRequest() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
@@ -206,7 +229,6 @@ Template.Inspector.helpers({
               ret.push(Interests.findDoc(iid));
             });
           }
-    console.log(ret);
     return ret;
   },
   interestName(interestSlugName) {

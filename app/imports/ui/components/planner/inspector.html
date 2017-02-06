@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="or"></div>
-        <div class="ui floating dropdown icon button">&nbsp;&nbsp;Opportunities
+        <div class="ui scrolling dropdown icon button">&nbsp;&nbsp;Opportunities
           <div class="menu">
             {{#each opportunity in opportunities}}
               <div id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</div>
@@ -70,20 +70,18 @@
         </div>
       </div>
       <div class="ui grid container">
-        <div class="row">
+        <div class="row" style="padding-bottom: 0;">
             <div class="ui basic segment" style="padding: 0;">
               {{#if hasCourse}}
-                <div class="ui dividing header"><h4>{{courseNumber}}: {{courseName}}</h4></div>
+                <div class="ui dividing header">
+                  <h4>{{> ICE_header ice=courseIce }} {{courseNumber}}: {{courseName}}</h4>
+                </div>
                 <div class="content">
                   {{#each recommendationStars}}
                     <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
                        class="yellow star icon"></i>
                   {{/each}}
-                  <p>
-                    <b>Catalog Descrption:</b> {{courseDescription}}
-                  </p>
                   <b>Scheduled:</b> {{#if instanceSemester}} {{instanceSemester}} {{else}} N/A {{/if}}
-                  <p><b>ICE Value:</b> {{> ICE_Badge ice=courseIce }}</p>
                   <p><b>Prerequisites:</b>
                     {{#if prerequisites}}
                       <div class="ui bulleted list" style="margin-top: 0; margin-left: 25px;">
@@ -103,8 +101,16 @@
                       N/A
                     {{/if}}
                   </p>
+                  <p>
+                    <b>Catalog Descrption:</b> {{courseDescription}}
+                  </p>
+                  <p style="text-align: right;">
+                    <a href="{{pathFor coursesRouteName username=routeUserName course = courseSlugID}}">
+                      View in Explorer <i class="arrow right icon"></i>
+                    </a>
+                  </p>
                   {{#if interests}}
-                    <div class="ui right floated" style="float: right;">
+                    <div class="ui right floated">
                       {{#each interest in interests}}
                         <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestName interest.slugID)}}" ><i class="fitted star icon"></i>{{interest.name}}</a>
                       {{/each}}
@@ -113,23 +119,31 @@
                 </div>
               {{else}}
                 {{#if hasOpportunity}}
-                  <p><b>Name: </b> {{opportunityName}}</p>
+                  <div class="ui dividing header">
+                    <h4>{{> ICE_header ice=opportunityIce }} {{opportunityName}}</h4>
+                  </div>
                   <div class="content">
-                    <p><b>Description: </b> {{opportunityDescription}}</p>
-                    <p><b>When: </b> {{opportunitySemester}}</p>
-                    <p><b>ICE Value: </b>{{> ICE_Badge ice=opportunityIce }}</p>
-                    <p><b>More: </b><a href="{{opportunityMore}}">{{opportunityMore}}</a></p>
-                    <p><b>Interests:</b> <span class="left floated"> <br>
-                      {{#each interest in interests}}
-                        <label class="ui mini label"><i style="color:white !important"
-                                                        class="fitted star icon"></i>{{interest.name}}</label>
-                      {{/each}}
-              </span></p>
+                    <b>When: </b> {{opportunitySemester}}
+                    <p>
+                      <b>Description: </b>{{opportunityDescription}} <br>
+                      <b>More Information: </b><a href="{{opportunityMore}}">{{opportunityMore}}</a> <br>
+                    </p>
+                    <p style="text-align: right;">
+                      <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = opportunitySlugID}}">
+                        View in Explorer <i class="arrow right icon"></i>
+                      </a>
+                    </p>
 
+                   
+                    {{#if isPastInstance}}
+                      <div class="ui basic center aligned segment">
+                        <button id="{{instanceID}}" class="ui mini green basic button verifyInstance">REQUEST VERIFICATION</button>
+                      </div>
+                    {{/if}}
                     {{#if hasRequest}}
                       <div class="ui horizontal divider">Request Status</div>
-                      <p><strong>Request sent:</strong> {{requestWhenSubmitted}}</p>
-                      <p><strong>Status: </strong>{{requestStatus}} </p>
+                      <strong>Date Submitted:</strong> {{requestWhenSubmitted}} <br>
+                      <strong>Status: </strong>{{requestStatus}}
                       <p>
                         {{#each processed in requestHistory}}
                           <span>Processed: {{processedDate processed.date}} by {{processed.verifier}}
@@ -137,17 +151,13 @@
                         {{/each}}
                       </p>
                     {{/if}}
-                    <div class="ui equal width grid">
-                      {{#if isPastInstance}}
-                        <div class="left aligned column">
-                          <p>
-                            <button id="{{instanceID}}" class="ui blue button verifyInstance">Request
-                              Verification
-                            </button>
-                          </p>
-                        </div>
-                      {{/if}}
+
+                    <div class="ui right floated">
+                      {{#each interest in interests}}
+                        <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestName interest.slugID)}}" ><i class="fitted star icon"></i>{{interest.name}}</a>
+                      {{/each}}
                     </div>
+
                   </div>
                 {{else}}
                   <p>Please select an ICS course or opportunity menus above or click on a course or
