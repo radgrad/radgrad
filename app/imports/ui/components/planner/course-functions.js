@@ -58,7 +58,7 @@ export const checkPrerequisites = () => {
           }
         } else {
           const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
-              'not found.';
+              ' not found.';
           FeedbackInstances.define({
             feedback,
             user: getRouteUserName(),

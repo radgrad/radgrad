@@ -1,13 +1,10 @@
 <template name="Recommendations">
   <div class="ui left aligned padded segment">
     <div class="ui dividing header"><h4>RECOMMENDATIONS</h4></div>
-    <div class="content">
-      <div>
-        {{#each recommendation in recommendations}}
-          {{> Recommendation_Item (recommendationArgs recommendation)}}
-          <p></p>
-        {{/each}}
-      </div>
+    <div class="ui list">
+      {{#each recommendation in recommendations}}
+        {{> Recommendation_Item (recommendationArgs recommendation)}}
+      {{/each}}
     </div>
   </div>
 
