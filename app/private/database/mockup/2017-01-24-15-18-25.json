@@ -2561,9 +2561,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 20,
             "c": 0,
-            "e": 5
+            "e": 15
           },
           "interests": [
             "algorithms",
@@ -2585,9 +2585,9 @@
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
-            "i": 10,
+            "i": 5,
             "c": 0,
-            "e": 10
+            "e": 5
           },
           "interests": [
             "hardware",
@@ -2612,9 +2612,9 @@
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
-            "i": 10,
+            "i": 5,
             "c": 0,
-            "e": 10
+            "e": 5
           },
           "interests": [
             "hardware"
@@ -2637,9 +2637,9 @@
           "opportunityType": "club",
           "sponsor": "glau",
           "ice": {
-            "i": 10,
+            "i": 5,
             "c": 0,
-            "e": 10
+            "e": 5
           },
           "interests": [
             "virtual-reality"
@@ -2663,9 +2663,9 @@
           "opportunityType": "club",
           "sponsor": "glau",
           "ice": {
-            "i": 10,
+            "i": 5,
             "c": 0,
-            "e": 10
+            "e": 5
           },
           "interests": [
             "application-development",
@@ -2689,9 +2689,9 @@
           "opportunityType": "project",
           "sponsor": "esb",
           "ice": {
-            "i": 25,
+            "i": 30,
             "c": 0,
-            "e": 25
+            "e": 15
           },
           "interests": [
             "application-development",
@@ -2742,9 +2742,9 @@
           "opportunityType": "project",
           "sponsor": "binsted",
           "ice": {
-            "i": 25,
+            "i": 30,
             "c": 0,
-            "e": 25
+            "e": 15
           },
           "interests": [
             "application-development",
@@ -2764,9 +2764,9 @@
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 30,
             "c": 0,
-            "e": 5
+            "e": 15
           },
           "interests": [
             "research",
@@ -2795,7 +2795,7 @@
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
-            "i": 15,
+            "i": 25,
             "c": 0,
             "e": 15
           },
@@ -2817,9 +2817,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 0,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "data-science",
@@ -2843,9 +2843,9 @@
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
-            "i": 25,
+            "i": 0,
             "c": 0,
-            "e": 25
+            "e": 15
           },
           "interests": [
             "security"
@@ -2899,7 +2899,7 @@
           "ice": {
             "i": 0,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "careers"
@@ -2923,8 +2923,8 @@
           "sponsor": "johnson",
           "ice": {
             "i": 0,
-            "c": 0,
-            "e": 5
+            "c": 10,
+            "e": 0
           },
           "interests": [
             "entrepreneurship"
@@ -2948,8 +2948,8 @@
           "sponsor": "johnson",
           "ice": {
             "i": 0,
-            "c": 0,
-            "e": 5
+            "c": 10,
+            "e": 0
           },
           "interests": [
             "data-science",
@@ -2972,8 +2972,8 @@
           "sponsor": "johnson",
           "ice": {
             "i": 0,
-            "c": 0,
-            "e": 10
+            "c": 10,
+            "e": 0
           },
           "interests": [
             "art",
@@ -2998,8 +2998,8 @@
           "sponsor": "johnson",
           "ice": {
             "i": 0,
-            "c": 0,
-            "e": 10
+            "c": 10,
+            "e": 0
           },
           "interests": [
             "data-science",
@@ -3048,9 +3048,9 @@
           "opportunityType": "internship",
           "sponsor": "glau",
           "ice": {
-            "i": 5,
+            "i": 15,
             "c": 0,
-            "e": 5
+            "e": 30
           },
           "interests": [
             "hci",
@@ -3070,9 +3070,9 @@
           "opportunityType": "project",
           "sponsor": "lipyeow",
           "ice": {
-            "i": 25,
+            "i": 30,
             "c": 0,
-            "e": 25
+            "e": 15
           },
           "interests": [
             "algorithms",
@@ -3099,9 +3099,9 @@
           "opportunityType": "internship",
           "sponsor": "glau",
           "ice": {
-            "i": 5,
+            "i": 15,
             "c": 0,
-            "e": 5
+            "e": 30
           },
           "interests": [
             "security"
@@ -3148,9 +3148,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 25,
+            "i": 20,
             "c": 0,
-            "e": 25
+            "e": 20
           },
           "interests": [
             "application-development",
@@ -3252,9 +3252,9 @@
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
-            "i": 10,
+            "i": 5,
             "c": 0,
-            "e": 10
+            "e": 5
           },
           "interests": [
             "application-development",
@@ -3339,9 +3339,9 @@
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
-            "i": 25,
+            "i": 20,
             "c": 0,
-            "e": 25
+            "e": 15
           },
           "interests": [
             "artificial-intelligence",
@@ -3429,7 +3429,7 @@
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
-            "i": 10,
+            "i": 30,
             "c": 0,
             "e": 15
           },
@@ -3462,9 +3462,9 @@
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
-            "i": 25,
+            "i": 30,
             "c": 0,
-            "e": 25
+            "e": 15
           },
           "interests": [
             "application-development",
@@ -3501,9 +3501,9 @@
           "opportunityType": "internship",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 15,
             "c": 0,
-            "e": 5
+            "e": 30
           },
           "interests": [
             "application-development",
@@ -3526,9 +3526,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 20,
             "c": 0,
-            "e": 5
+            "e": 15
           },
           "interests": [
             "application-development",
@@ -3574,9 +3574,9 @@
           "opportunityType": "internship",
           "sponsor": "glau",
           "ice": {
-            "i": 5,
+            "i": 15,
             "c": 0,
-            "e": 5
+            "e": 30
           },
           "interests": [
             "data-visualization"
@@ -3596,9 +3596,9 @@
           "opportunityType": "project",
           "sponsor": "depengli",
           "ice": {
-            "i": 25,
+            "i": 30,
             "c": 0,
-            "e": 25
+            "e": 15
           },
           "interests": [
             "application-development",
@@ -3623,9 +3623,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 10,
+            "i": 20,
             "c": 0,
-            "e": 25
+            "e": 15
           },
           "interests": [
             "entrepreneurship"
@@ -3646,9 +3646,9 @@
           "opportunityType": "online-learning",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
-            "c": 0,
-            "e": 10
+            "i": 0,
+            "c": 10,
+            "e": 0
           },
           "interests": [
             "game-design",
@@ -3723,7 +3723,7 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 10,
+            "i": 5,
             "c": 0,
             "e": 10
           },
