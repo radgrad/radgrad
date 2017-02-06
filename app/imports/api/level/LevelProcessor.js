@@ -11,7 +11,7 @@ export function calcLevel(studentID) {
       OpportunityInstances.find({ studentID }).fetch());
   const verified = [];
   _.map(instances, (i) => {
-    if (i.verified) { // TODO need to not add taking the class again.
+    if (i.verified) { // May need to account for taking the class again.
       verified.push(i);
     }
   });
