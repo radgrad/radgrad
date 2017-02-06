@@ -6,7 +6,7 @@
   padding: 4px 4px;
 }
 
-.degreePlanner .ui.segment {
+.academicYear .segment {
   padding: 1em 1em 2em 1em;
 }
 
@@ -31,4 +31,8 @@
 
 body.waiting * {
   cursor: progress;
+}
+
+.jsDelCourse, .jsDelOpp {
+  font-size: 1.2em ! important;
 }

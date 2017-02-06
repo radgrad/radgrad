@@ -1,6 +1,7 @@
 <template name="Semester_List">
-  <div class="ui center aligned padded segment {{#if isFuture}}bodyDrop{{/if}}" ondragover="{{#if isFuture}}allowDrop(event){{/if}}" style="margin-bottom: 0 !important; position: relative; {{#if isCurrentSemester}}border-color: #6FBE44;{{/if}}">
-    <div class="ui dividing {{#if isCurrentSemester}}green{{/if}} header" style="{{#if isCurrentSemester}}text-transform: uppercase;{{/if}}">{{semesterName}} {{year}}</div>
+  <div class="ui center aligned segment {{#if isFuture}}bodyDrop{{/if}}" ondragover="{{#if isFuture}}allowDrop(event){{/if}}" style="margin-bottom: 0 !important; position: relative; {{#if isCurrentSemester}}border-color: #6FBE44;{{/if}}">
+    <div class="ui dividing {{#if isCurrentSemester}}green{{/if}} header"
+      style="{{#if isCurrentSemester}}text-transform: uppercase;{{/if}} {{#unless isFuture}}color: rgba(0,0,0,.55);{{/unless}}">{{semesterName}} {{year}}</div>
     <table class="ui very basic table {{#if isFuture}}bodyDrop{{/if}}" ondragover="{{#if isFuture}}allowDrop(event){{/if}}" style="flex-grow: 3; font-size: 0.85em;">
       <tbody>
       {{#each course in icsCourses}}
@@ -23,7 +24,7 @@
         <td class="right aligned" style="border-top: none; margin: 0;"><i id="{{course._id}}" class="red remove icon jsDelCourse"></i></td>
       </tr>
       {{else}}
-      <tr id="{{course._id}}" data-position="top center" class="courseInstance clickEnabled">
+      <tr id="{{course._id}}" data-position="top center" class="courseInstance clickEnabled" style="color: rgba(0,0,0,.55);">
         <td style="border-top: none;"><strong>{{course.note}}</strong></td>
         <td style="border-top: none;"><strong>{{course.grade}}</strong></td>
       </tr>
@@ -37,7 +38,7 @@
       {{/each}}
       {{#each opportunity in semesterOpportunities}}
       <tr id="{{opportunity._id}}" class="opportunityInstance clickEnabled" draggable="true"
-          ondragstart="drag(event)" data-position="top center">
+          ondragstart="drag(event)" data-position="top center" style="{{#unless isFuture}}color: rgba(0,0,0,.55);{{/unless}}">
         {{#if isFuture}}
         <td style="border-top: none;" colspan="2">
           <strong>{{opportunityName opportunity._id}}</strong>
@@ -55,7 +56,7 @@
       </tbody>
     </table>
   {{#if isFuture}}
-  <div class="ui tiny green basic compact button" data-position="top center" style="flex-grow: 0; margin: 1em 0; position: absolute; bottom: 0; left: 50%; margin-left: -2.2em;">Add</div>
+  <div class="ui tiny green basic compact button" data-position="top center" style="flex-grow: 0; margin: 1em 0; position: absolute; bottom: 0; left: 50%; margin-left: -2.2em;">ADD</div>
   <div class="ui fluid popup transition hidden">
     <div class="ui vertical menu">
       {{#if isFuture}}
