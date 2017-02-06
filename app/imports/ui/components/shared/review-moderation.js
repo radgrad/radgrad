@@ -16,6 +16,9 @@ Template.Review_Moderation.helpers({
   pendingOpportunityReviews() {
     return Reviews.find({ moderated: false, reviewType: 'opportunity' });
   },
+  moderatorComments(review) {
+    return review.moderatorComments;
+  },
   rating(review) {
     return review.rating;
   },
@@ -57,9 +60,9 @@ Template.Review_Moderation.events({
       review.moderated = true;
       review.visible = false;
     }
-   // review.moderatorComments = event.target.parentElement.querySelectorAll('input')[0].value;
+    const moderatorComments = event.target.parentElement.querySelectorAll('textarea')[0].value;
     const moderated = review.moderated;
     const visible = review.visible;
-    Reviews.updateModerated(reviewID, moderated, visible);
+    Reviews.updateModerated(reviewID, moderated, visible, moderatorComments);
   },
 });

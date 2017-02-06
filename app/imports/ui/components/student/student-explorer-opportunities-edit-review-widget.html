@@ -1,7 +1,16 @@
 <template name="Student_Explorer_Opportunities_Edit_Review_Widget">
   <div class="ui accordion">
-    <div class="title" style="text-align: center; text-decoration: underline; color: #38840F;">
+    <div class="title" style="text-align: center; color: #38840F;">
       <i class="dropdown icon"></i><a>Edit Review</a>
+      {{#if review.moderated}}
+        {{#if review.visible}}
+          <i class="green checkmark icon"></i>
+        {{else}}
+          <i class="red warning circle icon"></i>
+        {{/if}}
+      {{else}}
+        <i class="yellow checkmark icon"></i>
+      {{/if}}
     </div>
     <div class="content">
       <div style="padding-bottom:1.5em;" class="ui padded container">
@@ -13,7 +22,7 @@
           {{/if}}
         {{else}}
           <p><i class="warning red circle icon"></i>Your post has been hidden by moderators for the following reasons:
-            {{course.moderatorComments}}</p>
+            <br><i>{{review.moderatorComments}}</i></p>
         {{/if}}
         <form class="ui equal width form {{successClass}} {{errorClass}}">
           <div class="fields">

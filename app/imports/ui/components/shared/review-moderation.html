@@ -29,7 +29,7 @@
                       <div class="field">
                         <label>Moderator Comments:</label>
                         <div class="ui action input">
-                        <textarea rows="2" id="{{review._id}}-comments"></textarea>
+                        <textarea rows="2" id="{{review._id}}-comments">{{moderatorComments review}}</textarea>
                       <button class="ui basic green mini button" id="{{review._id}}-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                       <button class="ui basic green mini button" id="{{review._id}}-reject" type="submit" style="margin-top:10px">REJECT</button>
                         </div>
@@ -73,8 +73,8 @@
                       <div class="field">
                         <label>Moderator Comments:</label>
                         <div class="ui action input">
-                          <textarea rows="2" id="{{review._id}}-comments"></textarea>
-                        <button class="ui basic green mini button" id="{{review._id}}-accept" type="submit" style="margin-top:10px">ACCEPT</button>
+                          <textarea rows="2" id="{{review._id}}-comments">{{moderatorComments review}}</textarea>
+                          <button class="ui basic green mini button" id="{{review._id}}-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                         <button class="ui basic green mini button" id="{{review._id}}-reject" type="submit" style="margin-top:10px">REJECT</button>
                         </div>
                       </div>

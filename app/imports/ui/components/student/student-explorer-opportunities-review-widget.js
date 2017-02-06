@@ -56,10 +56,9 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
       revieweeID: opportunity._id,
     }).fetch();
     numReviews = matchingReviews.length;
-    _.map(matchingReviews, (review) => {
+    _.map(matchingReviews, function (review) {
       averageRating += review.rating;
-    })
-    ;
+    });
     averageRating /= numReviews;
     return Math.floor(averageRating);
   },

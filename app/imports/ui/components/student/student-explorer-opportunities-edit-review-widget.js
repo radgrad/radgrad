@@ -58,6 +58,7 @@ Template.Student_Explorer_Opportunities_Edit_Review_Widget.events({
       updatedData.reviewType = this.review.reviewType;
       updatedData.reviewee = this.review.reviewee;
       updatedData.slug = this.review.slug;
+      updatedData.moderated = false;
       console.log(updatedData.revieweeID);
       Reviews.update(this.review._id, { $set: updatedData });
       FormUtils.indicateSuccess(instance, event);
