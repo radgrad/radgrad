@@ -1279,7 +1279,7 @@
           "note": "ICS 141",
           "verified": true,
           "creditHrs": 3,
-          "grade": "B+",
+          "grade": "A",
           "student": "alfred"
         },
         {
@@ -1306,7 +1306,7 @@
           "note": "ICS 311",
           "verified": true,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "A",
           "student": "alfred"
         },
         {
@@ -1324,7 +1324,7 @@
           "note": "ICS 212",
           "verified": true,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "A",
           "student": "alfred"
         },
         {
@@ -1333,7 +1333,7 @@
           "note": "ICS 321",
           "verified": true,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "A",
           "student": "alfred"
         },
         {
@@ -1342,7 +1342,7 @@
           "note": "ICS 313",
           "verified": true,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "A",
           "student": "alfred"
         },
         {
@@ -1360,7 +1360,7 @@
           "note": "ICS 332",
           "verified": false,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "A",
           "student": "alfred"
         },
         {
@@ -1369,7 +1369,7 @@
           "note": "ICS 464",
           "verified": false,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "A",
           "student": "alfred"
         },
         {
@@ -1396,7 +1396,7 @@
           "note": "ICS 466",
           "verified": false,
           "creditHrs": 3,
-          "grade": "B",
+          "grade": "A",
           "student": "alfred"
         },
         {
@@ -3898,12 +3898,6 @@
         },
         {
           "semester": "Spring-2017",
-          "opportunity": "lava-lab",
-          "verified": false,
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2017",
           "opportunity": "wetware-wednesday",
           "verified": false,
           "student": "betty"
@@ -3981,14 +3975,8 @@
           "student": "alfred"
         },
         {
-          "semester": "Fall-2015",
-          "opportunity": "acm-manoa-hardware",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2015",
-          "opportunity": "hawaii-virtual-reality",
+          "semester": "Summer-2015",
+          "opportunity": "coursera-graphic-design",
           "verified": true,
           "student": "alfred"
         },
@@ -5271,14 +5259,6 @@
         {
           "student": "betty",
           "semester": "Spring-2017",
-          "opportunity": "lava-lab",
-          "submittedOn": "2017-01-19T00:36:55.639Z",
-          "status": "Open",
-          "processed": []
-        },
-        {
-          "student": "betty",
-          "semester": "Spring-2017",
           "opportunity": "wetware-wednesday",
           "submittedOn": "2017-01-19T00:36:58.741Z",
           "status": "Open",
@@ -5293,20 +5273,6 @@
           "processed": [
             {
               "date": "2017-01-19T00:37:20.397Z",
-              "status": "Accepted",
-              "verifier": "Admin RadGrad"
-            }
-          ]
-        },
-        {
-          "student": "betty",
-          "semester": "Spring-2017",
-          "opportunity": "lava-lab",
-          "submittedOn": "2017-01-19T00:36:55.659Z",
-          "status": "Accepted",
-          "processed": [
-            {
-              "date": "2017-01-19T00:37:21.376Z",
               "status": "Accepted",
               "verifier": "Admin RadGrad"
             }
