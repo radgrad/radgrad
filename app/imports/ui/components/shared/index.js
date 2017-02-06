@@ -15,6 +15,9 @@ import './projected-ice-component.js';
 import './retrieve-student-widget.html';
 import './retrieve-student-widget.js';
 
+import './review-moderation.html';
+import './review-moderation.js';
+
 import './route-user-name.js';
 
 import './student-selector-widget.html';

@@ -10,7 +10,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 const editSchema = new SimpleSchema({
-  semester: { type: String, optional: false, minCount: 1 },
+  semester: { type: String, optional: false },
   rating: { type: Number, optional: true },
   comments: { type: String, optional: false },
 });
@@ -58,6 +58,7 @@ Template.Student_Explorer_Opportunities_Edit_Review_Widget.events({
       updatedData.reviewType = this.review.reviewType;
       updatedData.reviewee = this.review.reviewee;
       updatedData.slug = this.review.slug;
+      console.log(updatedData.revieweeID);
       Reviews.update(this.review._id, { $set: updatedData });
       FormUtils.indicateSuccess(instance, event);
     } else {
