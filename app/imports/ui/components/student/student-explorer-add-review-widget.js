@@ -3,6 +3,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -11,42 +13,53 @@ import { getRouteUserName } from '../shared/route-user-name';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
-  semester: { type: String, optional: false, minCount: 1 },
+  semester: { type: String, optional: false },
   rating: { type: Number, optional: true },
   comments: { type: String, optional: false },
 });
 
-Template.Student_Explorer_Courses_Add_Review_Widget.onCreated(function onCreated() {
+Template.Student_Explorer_Add_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
 });
 
-Template.Student_Explorer_Courses_Add_Review_Widget.helpers({
+Template.Student_Explorer_Add_Review_Widget.helpers({
   ratings() {
     return [{ score: 1, description: '1 (In general, this is one of the worst ICS ' +
-    'courses/opportunities I have ever taken)' },
+    'courses/opportunities I have ever partcipiated in)' },
       { score: 2, description: '2 (In general, this is below average for an ICS course/opportunity)' },
       { score: 3, description: '3 (In general, this is an average ICS course/opportunity)' },
       { score: 4, description: '4 (In general, this is above average for an ICS course/opportunity)' },
-      { score: 5, description: '5 (In general, this is one of the best ICS courses/opportunities I have ever taken)' }];
+    { score: 5, description: '5 (In general, this is one of the best ICS courses/opportunities ' +
+      'I have ever participated in)' }];
   },
   semesters() {
     const semesters = [];
-    const course = this.course;
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    _.map(ci, (c) => {
-      semesters.push(Semesters.findDoc(c.semesterID));
+    let instances;
+    if (this.reviewType === 'course') {
+      const course = this.event;
+      instances = CourseInstances.find({
+        studentID: getUserIdFromRoute(),
+        courseID: course._id,
+      }).fetch();
+    } else {
+      const opportunity = this.event;
+      instances = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opportunity._id,
+      }).fetch();
+    }
+    _.map(instances, (instance) => {
+      semesters.push(Semesters.findDoc(instance.semesterID));
     });
     return semesters;
   },
 });
 
-Template.Student_Explorer_Courses_Add_Review_Widget.events({
+Template.Student_Explorer_Add_Review_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
@@ -55,10 +68,13 @@ Template.Student_Explorer_Courses_Add_Review_Widget.events({
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       newData.student = getRouteUserName();
-      console.log(newData.slug);
-      newData.reviewType = 'course';
-      newData.reviewee = this.course._id;
-      newData.slug = `review-course-${Courses.getSlug(newData.reviewee)}-${newData.student}`;
+      newData.reviewType = this.reviewType;
+      newData.reviewee = this.event._id;
+      if (this.reviewType === 'course') {
+        newData.slug = `review-course-${Courses.getSlug(newData.reviewee)}-${newData.student}`;
+      } else {
+        newData.slug = `review-opportunity-${Opportunities.getSlug(newData.reviewee)}-${newData.student}`;
+      }
       Reviews.define(newData);
       FormUtils.indicateSuccess(instance, event);
     } else {
@@ -67,6 +83,8 @@ Template.Student_Explorer_Courses_Add_Review_Widget.events({
   },
 });
 
-Template.Student_Explorer_Courses_Add_Review_Widget.onRendered(function studentExplorerCoursesAddReviewWidget() {
-  this.$('.ui.accordion').accordion();
-});
+Template.Student_Explorer_Add_Review_Widget.onRendered(
+  function studentExplorerAddReviewWidget() {
+    this.$('.ui.accordion').accordion();
+  }
+);

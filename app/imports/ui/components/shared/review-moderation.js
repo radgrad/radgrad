@@ -51,7 +51,6 @@ Template.Review_Moderation.events({
     event.preventDefault();
     const split = event.target.id.split('-');
     const reviewID = split[0];
-    console.log(reviewID);
     const review = Reviews.findDoc(reviewID);
     if (split[1] === 'accept') {
       review.moderated = true;

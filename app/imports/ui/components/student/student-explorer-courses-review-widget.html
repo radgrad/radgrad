@@ -18,7 +18,7 @@
             </div>
          </div>
         {{/with}}
-        {{> Student_Explorer_Courses_Edit_Review_Widget review=userReview course=course}}
+        {{> Student_Explorer_Edit_Review_Widget review=userReview event=course}}
 
       {{else}}
         <div class="item">
@@ -35,7 +35,7 @@
             </div>
           </div>
           {{#if completed}}
-              {{> Student_Explorer_Courses_Add_Review_Widget course=course}}
+            {{> Student_Explorer_Add_Review_Widget event = course reviewType = 'course'}}
           {{/if}}
         </div>
       {{/if}}

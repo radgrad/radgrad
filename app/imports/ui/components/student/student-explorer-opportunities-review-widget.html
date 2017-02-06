@@ -17,7 +17,7 @@
             </div>
          </div>
         {{/with}}
-        {{> Student_Explorer_Opportunities_Edit_Review_Widget review = userReview opportunity = opportunity}}
+        {{> Student_Explorer_Edit_Review_Widget review = userReview event = opportunity}}
       {{else}}
         <div class="item">
           <div class="ui grid">
@@ -33,7 +33,7 @@
             </div>
           </div>
           {{#if completed}}
-              {{> Student_Explorer_Opportunities_Add_Review_Widget opportunity = opportunity}}
+              {{> Student_Explorer_Add_Review_Widget event = opportunity reviewType = 'opportunity'}}
           {{/if}}
         </div>
       {{/if}}
