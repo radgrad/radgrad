@@ -76,6 +76,11 @@ Template.Student_Explorer_Edit_Review_Widget.events({
       FormUtils.indicateError(instance);
     }
   },
+  'click .jsDelete': function (event) {
+    event.preventDefault();
+    const id = event.target.value;
+    Reviews.removeIt(id);
+  },
 });
 
 Template.Student_Explorer_Edit_Review_Widget.onRendered(
