@@ -1,0 +1,18 @@
+<template name="Advisor_Review_Moderation_Page">
+  <div class="layout-page">
+
+    <div class="ui container">
+      {{#if currentUser}}
+        {{#if Template.subscriptionsReady}}
+          {{> Review_Moderation }}
+        {{else}}
+          {{> Loading}}
+        {{/if}}
+      {{else}}
+        <p>You are not authorized to view this page.</p>
+        <p>Please login.</p>
+        {{> loginButtons }}
+      {{/if}}
+    </div>
+  </div>
+</template>

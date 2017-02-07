@@ -56,16 +56,9 @@ Template.Student_Explorer_Courses_Review_Widget.helpers({
     const userPicture = user.picture;
     const reviewSemester = Semesters.toString(review.semesterID);
     const reviewRating = review.rating;
-    const reviewStars = [];
-    for (let i = 0; i < reviewRating; i += 1) {
-      reviewStars.push('yellow fitted star icon');
-    }
-    for (let i = reviewRating; i < 5; i += 1) {
-      reviewStars.push('yellow fitted empty star icon');
-    }
     const reviewComments = review.comments;
     return { name: userName, picture: userPicture, semester: reviewSemester,
-      rating: review, stars: reviewStars, comments: reviewComments };
+      rating: reviewRating, comments: reviewComments };
   },
   currentUserName() {
     return Users.getFullName(getUserIdFromRoute());

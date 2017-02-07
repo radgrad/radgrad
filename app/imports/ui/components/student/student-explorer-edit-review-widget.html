@@ -1,0 +1,60 @@
+<template name="Student_Explorer_Edit_Review_Widget">
+  <div class="ui accordion">
+    <div class="title" style="text-align: center; color: #38840F;">
+      <i class="dropdown icon"></i><a>Edit Review</a>
+      {{#if review.moderated}}
+        {{#if review.visible}}
+          <i class="green checkmark icon"></i>
+        {{else}}
+          <i class="red warning circle icon"></i>
+        {{/if}}
+      {{else}}
+        {{#if review.visible}}
+          <i class="yellow checkmark icon"></i>
+        {{else}}
+          <i class="yellow warning circle icon"></i>
+        {{/if}}
+      {{/if}}
+    </div>
+    <div class="content">
+      <div style="padding-bottom:1.5em;" class="ui padded container">
+        {{#if review.visible}}
+          {{#if review.moderated}}
+            <div class="ui positive message">
+            <p><i class="green checkmark icon"></i>Your post is visible to the RadGrad community and has been approved by moderators.</p>
+            </div>
+          {{else}}
+            <div class="ui warning message">
+            <p><i class="yellow checkmark icon"></i>Your post is visible to the RadGrad community but has not yet been approved by moderators.</p>
+            </div>
+          {{/if}}
+        {{else}}
+          {{#if review.moderated}}
+            <div class="ui negative message">
+          <p><i class="warning red circle icon"></i>Your post has been hidden by moderators for the following reasons:
+            <br><i>{{review.moderatorComments}}</i></p>
+            </div>
+          {{else}}
+            <div class="ui warning message">
+            <p><i class="warning yellow circle icon"></i>Your edited post is waiting for moderator approval. Your post has currently been hidden by moderators for the following reasons:
+              <br><i>{{review.moderatorComments}}</i></p>
+            </div>
+          {{/if}}
+        {{/if}}
+        <form class="ui equal width form {{successClass}} {{errorClass}}">
+          <div class="fields">
+            {{> Semesters_Single_Form_Field semesters=semesters name="semester" errorMessage=(fieldError "semesters") selectedSemesterID=review.semesterID required="true" }}
+            {{> Rating_Form_Field label="Rating" name="rating" ratings=ratings selectedRating=review.rating  errorMessage=(fieldError "rating") required=false}}
+          </div>
+
+          {{> TextArea_Form_Field label="Comments" rows=5 name="comments" value=review.comments errorMessage=(fieldError "comments") required=true}}
+
+          <button class="ui green basic mini button" type="submit">UPDATE</button>
+          {{> Success_Message_Form_Field message="Your review was successfully updated."}}
+          <button value="{{review._id}}" class="ui red basic mini button jsDelete">DELETE</button>
+        </form>
+      </div>    
+    </div>
+  </div> 
+
+</template>

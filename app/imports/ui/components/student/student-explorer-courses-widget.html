@@ -6,7 +6,15 @@
         <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
           <h4 class="ui left floated header">{{toUpper shortName}} ({{name}})</h4>
           {{#if userStatus item}}
-            {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
+            {{#if futureInstance item}}
+              {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
+            {{else}}
+              {{#if passedCourse item}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
+              {{else}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+              {{/if}}
+            {{/if}}
           {{else}}
             {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
           {{/if}}
@@ -107,7 +115,7 @@
         {{#each socialPair in socialPairs}}
           <div class="ui padded segment">
             <div class="ui dividing header">
-              <h4>INTERESTED {{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
+              <h4>IN DEGREE PLAN {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
             </div>
 
             <div class="ui circular mini bordered images" style="overflow: visible;">
