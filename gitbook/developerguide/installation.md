@@ -15,7 +15,7 @@ This will download and install the third-party libraries required to run this sy
 To run the system, invoke this command:
 
 ```
-app$ meteor npm start
+app$ meteor npm run start
 ```
 
 Go to [http://localhost:3000](http://localhost:3000) to confirm that the system can load successfully: 
