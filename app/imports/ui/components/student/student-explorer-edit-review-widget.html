@@ -24,7 +24,7 @@
             <p><i class="green checkmark icon"></i>Your post is visible to the RadGrad community and has been approved by moderators.</p>
             </div>
           {{else}}
-            <div class="ui yellow message">
+            <div class="ui warning message">
             <p><i class="yellow checkmark icon"></i>Your post is visible to the RadGrad community but has not yet been approved by moderators.</p>
             </div>
           {{/if}}
@@ -35,7 +35,7 @@
             <br><i>{{review.moderatorComments}}</i></p>
             </div>
           {{else}}
-            <div class="ui yellow message">
+            <div class="ui warning message">
             <p><i class="warning yellow circle icon"></i>Your edited post is waiting for moderator approval. Your post has currently been hidden by moderators for the following reasons:
               <br><i>{{review.moderatorComments}}</i></p>
             </div>
