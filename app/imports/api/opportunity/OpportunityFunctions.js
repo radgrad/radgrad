@@ -4,7 +4,7 @@ import { OpportunityInstances } from './OpportunityInstanceCollection';
 import { Users } from '../user/UserCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
-function getRandomInt(min, max) {
+export function getRandomInt(min, max) {
   min = Math.ceil(min);  // eslint-disable-line no-param-reassign
   max = Math.floor(max);  // eslint-disable-line no-param-reassign
   return Math.floor(Math.random() * (max - min)) + min;
@@ -22,8 +22,8 @@ export const clearPlannedOpportunityInstances = (studentID) => {
 
 export const calculateOpportunityCompatibility = (opportunityID, studentID) => {
   const course = Opportunities.findDoc(opportunityID);
-  const student = Users.findDoc(studentID);
-  const intersection = _.intersection(course.interestIDs, student.interestIDs);
+  const studentInterests = Users.getInterestIDs(studentID);
+  const intersection = _.intersection(course.interestIDs, studentInterests);
   return intersection.length;
 };
 

@@ -3,6 +3,7 @@ import { CourseInstances } from './CourseInstanceCollection';
 import { Courses } from './CourseCollection';
 import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
 import { Feedbacks } from '../feedback/FeedbackCollection';
+import PreferredChoice from '../preference/PreferredChoice';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
@@ -92,72 +93,9 @@ export const clearPlannedCourseInstances = (studentID) => {
   });
 };
 
-export const calculateCompatibility = (courseID, studentID) => {
-  const course = Courses.findDoc(courseID);
-  const student = Users.findDoc(studentID);
-  const intersection = _.intersection(course.interestIDs, student.interestIDs);
-  return intersection.length;
-};
-
-export const get100LevelDocs = () => {
-  let ret = [];
-  const courses = Courses.find().fetch();
-  ret = _.filter(courses, function filter(c) {
-    if (c.number.startsWith('ICS 1')) {
-      return true;
-    }
-    return false;
-  });
-  return ret;
-};
-
-export const get100LevelDocsWithInterest = (interestID) => {
-  const courses = get100LevelDocs();
-  return _.filter(courses, function filter(c) {
-    return _.indexOf(c.interestIDs, interestID) !== -1;
-  });
-};
-
-export const get200LevelDocs = () => {
-  let ret = [];
-  const courses = Courses.find().fetch();
-  ret = _.filter(courses, function filter(c) {
-    if (c.number.startsWith('ICS 2')) {
-      return true;
-    }
-    return false;
-  });
-  return ret;
-};
-
-export const getStudent200LevelDocs = (studentID) => {
-  let ret = [];
-  const courses = get200LevelDocs();
-  const instances = CourseInstances.find({ studentID }).fetch();
-  const courseTakenIDs = [];
-  instances.forEach((courseInstance) => {
-    if (CourseInstances.isICS(courseInstance._id)) {
-      if (courseInstance.note !== 'ICS 499') {
-        courseTakenIDs.push(courseInstance.courseID);
-      }
-    }
-  });
-  ret = _.filter(courses, function filter(c) {
-    return _.indexOf(courseTakenIDs, c._id) === -1;
-  });
-  return ret;
-};
-
 export const get300LevelDocs = () => {
-  let ret = [];
-  const courses = Courses.find().fetch();
-  ret = _.filter(courses, function filter(c) {
-    if (c.number.startsWith('ICS 3')) {
-      return true;
-    }
-    return false;
-  });
-  return ret;
+  const courses = Courses.find({ number: /ICS 3/ }).fetch();
+  return courses;
 };
 
 export const getStudent300LevelDocs = (studentID, coursesTakenSlugs) => {
@@ -181,48 +119,19 @@ export const getStudent300LevelDocs = (studentID, coursesTakenSlugs) => {
   return ret;
 };
 
-export const getStudent300LevelChoices = (studentID, coursesTakenSlugs) => {
-  const arr = {};
-  let max = 0;
-  const available = getStudent300LevelDocs(studentID, coursesTakenSlugs);
-  _.map(available, (course) => {
-    const score = calculateCompatibility(course._id, studentID);
-    if (score > max) {
-      max = score;
-    }
-    if (!arr[score]) {
-      arr[score] = [];
-    }
-    arr[score].push(course);
-  });
-  arr.max = max;
-  return arr;
-};
-
 export const chooseStudent300LevelCourse = (studentID, coursesTakenSlugs) => {
-  const choices = getStudent300LevelChoices(studentID, coursesTakenSlugs);
-  const best = choices[choices.max];
+  const choices = getStudent300LevelDocs(studentID, coursesTakenSlugs);
+  const interestIDs = Users.getInterestIDs(studentID);
+  const preferred = new PreferredChoice(choices, interestIDs);
+  const best = preferred.getBestChoices();
   return best[getRandomInt(0, best.length)];
 };
 
 export const get400LevelDocs = () => {
-  let ret = [];
-  const courses = Courses.find().fetch();
-  ret = _.filter(courses, function filter(c) {
-    if (c.number.startsWith('ICS 4')) {
-      return true;
-    }
-    return false;
-  });
-  return ret;
+  const courses = Courses.find({ number: /ICS 4/ }).fetch();
+  return courses;
 };
 
-export const get400LevelDocsWithInterest = (interestID) => {
-  const courses = get400LevelDocs();
-  return _.filter(courses, function filter(c) {
-    return _.indexOf(c.interestIDs, interestID) !== -1;
-  });
-};
 export const getStudent400LevelDocs = (studentID, coursesTakenSlugs) => {
   let ret = [];
   const courses = get400LevelDocs();
@@ -244,35 +153,12 @@ export const getStudent400LevelDocs = (studentID, coursesTakenSlugs) => {
   return ret;
 };
 
-export const getStudent400LevelChoices = (studentID, coursesTakenSlugs) => {
-  const arr = {};
-  let max = 0;
-  const available = getStudent400LevelDocs(studentID, coursesTakenSlugs);
-  _.map(available, (course) => {
-    const score = calculateCompatibility(course._id, studentID);
-    if (score > max) {
-      max = score;
-    }
-    if (!arr[score]) {
-      arr[score] = [];
-    }
-    arr[score].push(course);
-  });
-  arr.max = max;
-  return arr;
-};
-
 export const chooseStudent400LevelCourse = (studentID, coursesTakenSlugs) => {
-  const choices = getStudent400LevelChoices(studentID, coursesTakenSlugs);
-  const best = choices[choices.max];
+  const choices = getStudent400LevelDocs(studentID, coursesTakenSlugs);
+  const interestIDs = Users.getInterestIDs(studentID);
+  const preferred = new PreferredChoice(choices, interestIDs);
+  const best = preferred.getBestChoices();
   return best[getRandomInt(0, best.length)];
-};
-
-export const getCourseDocsWithInterest = (interestID) => {
-  const courses = Courses.find().fetch();
-  return _.filter(courses, function filter(c) {
-    return _.indexOf(c.interestIDs, interestID) !== -1;
-  });
 };
 
 export const chooseBetween = (slugs, studentID, coursesTakenSlugs) => {
@@ -283,19 +169,9 @@ export const chooseBetween = (slugs, studentID, coursesTakenSlugs) => {
       courses.push(Courses.findDoc(courseID));
     }
   });
-  const arr = {};
-  let max = 0;
-  _.map(courses, (course) => {
-    const score = calculateCompatibility(course._id, studentID);
-    if (score > max) {
-      max = score;
-    }
-    if (!arr[score]) {
-      arr[score] = [];
-    }
-    arr[score].push(course);
-  });
-  arr.max = max;
-  const best = arr[arr.max];
+  const interestIDs = Users.getInterestIDs(studentID);
+  const preferred = new PreferredChoice(courses, interestIDs);
+  const best = preferred.getBestChoices();
+  // console.log('chooseBetween', best, interestIDs);
   return best[getRandomInt(0, best.length)];
 };
