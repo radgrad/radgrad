@@ -55,11 +55,9 @@
                 {{#each table in descriptionPair.value}}
                   <div class="ui center aligned segment">
                     {{{getTableTitle @index}}}
-                    {{#with tableStyle table}}
                       {{#each prerequisite in table}}
                         <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a> <br>
                       {{/each}}
-                    {{/with}}
                   </div>
                 {{/each}}
               </div>

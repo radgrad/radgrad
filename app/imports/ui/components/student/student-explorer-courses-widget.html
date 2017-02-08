@@ -26,7 +26,7 @@
             {{#each descriptionPair in descriptionPairs}}
 
               {{#if isLabel descriptionPair.label 'Course Number'}}
-                <b>{{descriptionPair.label}}:</b> 
+                <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
                   {{else}}
                     N/A <br>
@@ -82,11 +82,9 @@
             {{#each table in descriptionPair.value}}
               <div class="ui center aligned segment">
                 {{{getTableTitle @index}}}
-                {{#with tableStyle table}}
                   {{#each prerequisite in table}}
                     <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a> <br>
                   {{/each}}
-                {{/with}}
               </div>
             {{/each}}
           </div>

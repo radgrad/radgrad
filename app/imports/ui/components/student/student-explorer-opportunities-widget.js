@@ -56,7 +56,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     const semesterNames = [];
     const currentSemesterID = Semesters.getCurrentSemester();
     const currentSemester = Semesters.findDoc(currentSemesterID);
-    _.map(semesters, (sem) => {
+    _.map(semesters, function (sem) {
       if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
         semesterNames.push(Semesters.toString(sem));
       }
@@ -105,7 +105,7 @@ Template.Student_Explorer_Opportunities_Widget.events({
 
 
 Template.Student_Explorer_Opportunities_Widget.onRendered(function enableVideo() {
-  setTimeout(() => {
+  setTimeout(function () {
     this.$('.ui.embed').embed();
   }, 300);
   const template = this;

@@ -34,7 +34,7 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
     }).fetch();
-    _.map(ci, (c) => {
+    _.map(ci, function (c) {
       semesters.push(Semesters.toString(c.semesterID, false));
     });
     return semesters;

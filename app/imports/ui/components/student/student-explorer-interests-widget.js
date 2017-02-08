@@ -160,25 +160,6 @@ Template.Student_Explorer_Interests_Widget.helpers({
     }
     return ret;
   },
-  tableStyle(table) {
-    let tableColor;
-    let tableIcon;
-    let tableTitle;
-    if (table[0].status === 'Completed') {
-      tableColor = 'positive';
-      tableIcon = 'icon checkmark';
-      tableTitle = 'Completed';
-    } else if (table[0].status === 'Not in plan') {
-      tableColor = 'negative';
-      tableIcon = 'warning circle icon';
-      tableTitle = 'Not in plan';
-    } else if (table[0].status === 'In plan, but not yet complete') {
-      tableColor = 'warning';
-      tableIcon = 'warning sign icon';
-      tableTitle = 'In plan, but not yet complete';
-    }
-    return { color: tableColor, icon: tableIcon, title: tableTitle };
-  },
   getTableTitle(tableIndex) {
     switch (tableIndex) {
       case 0:
