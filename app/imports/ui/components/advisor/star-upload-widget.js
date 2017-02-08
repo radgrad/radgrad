@@ -48,6 +48,7 @@ Template.Star_Upload_Widget.events({
         fr.onload = (e) => {
           const csvData = e.target.result;
           Meteor.call('StarProcessor.loadStarCsvData', student.username, csvData);
+          Meteor.call('LevelProcessor.updateLevel', { studentID: student._id });
         };
         fr.readAsText(starData);
       }

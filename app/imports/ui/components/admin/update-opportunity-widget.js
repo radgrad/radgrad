@@ -74,6 +74,8 @@ Template.Update_Opportunity_Widget.events({
       FormUtils.convertICE(updatedData);
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       FormUtils.renameKey(updatedData, 'semesters', 'semesterIDs');
+      FormUtils.renameKey(updatedData, 'opportunityType', 'opportunityTypeID');
+      FormUtils.renameKey(updatedData, 'sponsor', 'sponsorID');
       Opportunities.update(instance.data.updateID.get(), { $set: updatedData });
       FormUtils.indicateSuccess(instance, event);
     } else {

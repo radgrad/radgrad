@@ -6,7 +6,15 @@
         <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
           <h4 class="ui left floated header">{{toUpper shortName}} ({{name}})</h4>
           {{#if userStatus item}}
-            {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
+            {{#if futureInstance item}}
+              {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
+            {{else}}
+              {{#if passedCourse item}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
+              {{else}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+              {{/if}}
+            {{/if}}
           {{else}}
             {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
           {{/if}}
@@ -18,7 +26,7 @@
             {{#each descriptionPair in descriptionPairs}}
 
               {{#if isLabel descriptionPair.label 'Course Number'}}
-                <b>{{descriptionPair.label}}:</b> 
+                <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
                   {{else}}
                     N/A <br>
@@ -74,11 +82,9 @@
             {{#each table in descriptionPair.value}}
               <div class="ui center aligned segment">
                 {{{getTableTitle @index}}}
-                {{#with tableStyle table}}
                   {{#each prerequisite in table}}
                     <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a> <br>
                   {{/each}}
-                {{/with}}
               </div>
             {{/each}}
           </div>
@@ -99,7 +105,7 @@
     <div class="ui stackable two column grid">
       <div class="ten wide column">
         <div class="ui padded segment">
-          {{> Student_Explorer_Courses_Review_Widget course=item userReview=review completed=completed}}
+          {{> Student_Explorer_Review_Widget event=item userReview=review completed=completed reviewType = 'course'}}
         </div>
       </div>
 
@@ -107,7 +113,7 @@
         {{#each socialPair in socialPairs}}
           <div class="ui padded segment">
             <div class="ui dividing header">
-              <h4>INTERESTED {{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
+              <h4>IN DEGREE PLAN {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
             </div>
 
             <div class="ui circular mini bordered images" style="overflow: visible;">

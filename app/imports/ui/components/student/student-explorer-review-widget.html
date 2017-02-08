@@ -1,7 +1,6 @@
-<template name="Student_Explorer_Courses_Review_Widget">
-
+<template name="Student_Explorer_Review_Widget">
   <div class="ui padded container">
-    <div class="ui dividing header"><h4>COURSE REVIEWS</h4>
+    <div class="ui dividing header"><h4 style="text-transform:uppercase">{{reviewType}} REVIEWS</h4>
     </div>
     <div class="ui middle aligned very relaxed divided list">
       {{#if userReview}}
@@ -12,16 +11,13 @@
                 <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
               </div>
               <div class="twelve wide column">
-                {{#each star in stars}}
-                  <i style="font-size: 1.2em;" class="{{star}}"></i>
-                {{/each}}
+                {{> Student_Explorer_Review_Stars_Widget rating = rating}}
                 <br><div style="padding-top: 5px">{{comments}}</div>
               </div>
             </div>
          </div>
         {{/with}}
-        {{> Student_Explorer_Courses_Edit_Review_Widget review=userReview course=course}}
-
+        {{> Student_Explorer_Edit_Review_Widget review = userReview event = event}}
       {{else}}
         <div class="item">
           <div class="ui grid">
@@ -32,12 +28,12 @@
               {{#if completed}}
                 <p><i>You have not reviewed this yet.</i></p>
               {{else}}
-                <p><i>You must complete this course first to leave a review.</i></p>
+                <p><i>You must complete this {{reviewType}} first to leave a review.</i></p>
               {{/if}}
             </div>
           </div>
           {{#if completed}}
-              {{> Student_Explorer_Courses_Add_Review_Widget course=course}}
+              {{> Student_Explorer_Add_Review_Widget event = event reviewType = reviewType}}
           {{/if}}
         </div>
       {{/if}}
@@ -49,9 +45,7 @@
                 <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
               </div>
               <div class="twelve wide column">
-                  {{#each star in stars}}
-                    <i style="font-size: 1.2em;" class="{{star}}"></i>
-                  {{/each}}
+                {{> Student_Explorer_Review_Stars_Widget rating = rating}}
                 <br><div style="padding-top: 5px">{{comments}}</div>
               </div>
             </div>
@@ -60,5 +54,4 @@
       {{/each}}
     </div>
   </div>
-
 </template>

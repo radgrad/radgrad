@@ -44,6 +44,33 @@ Template.Student_Explorer_Courses_Widget.helpers({
     }
     return ret;
   },
+  futureInstance(course) {
+    let ret = false;
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    for (const courseInstance of ci) {
+      if (Semesters.findDoc(courseInstance.semesterID).sortBy > Semesters.getCurrentSemesterDoc().sortBy) {
+        ret = true;
+      }
+    }
+    return ret;
+  },
+  passedCourse(course) {
+    let ret = false;
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    for (const c of ci) {
+      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' ||
+          c.grade === 'B+' || c.grade === 'B') {
+        ret = true;
+      }
+    }
+    return ret;
+  },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
     return semesters;
@@ -96,26 +123,7 @@ Template.Student_Explorer_Courses_Widget.helpers({
       default:
         return 'ERROR: More than one table.';
     }
-  },
-  tableStyle(table) {
-    let tableColor;
-    let tableIcon;
-    let tableTitle;
-    if (table[0].status === 'Completed') {
-      tableColor = 'green';
-      tableIcon = 'icon checkmark';
-      tableTitle = 'Completed';
-    } else if (table[0].status === 'Not in plan') {
-      tableColor = 'red';
-      tableIcon = 'warning circle icon';
-      tableTitle = 'Not in Plan';
-    } else if (table[0].status === 'In plan, but not yet complete') {
-      tableColor = 'yellow';
-      tableIcon = 'warning sign icon';
-      tableTitle = 'In Plan (Not Yet Completed)';
-    }
-    return { color: tableColor, icon: tableIcon, title: tableTitle };
-  },
+  }
 });
 
 Template.Student_Explorer_Courses_Widget.events({

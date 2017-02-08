@@ -7,6 +7,7 @@ import '/imports/api/feedback';
 import '/imports/api/help';
 import '/imports/api/ice';
 import '/imports/api/interest';
+import '/imports/api/level';
 import '/imports/api/log';
 import '/imports/api/opportunity';
 import '/imports/api/role';

@@ -10,15 +10,6 @@ import './student-home-menu.js';
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
 
-import './student-explorer-courses-add-review-widget.html';
-import './student-explorer-courses-add-review-widget.js';
-
-import './student-explorer-courses-edit-review-widget.html';
-import './student-explorer-courses-edit-review-widget.js';
-
-import './student-explorer-courses-review-widget.html';
-import './student-explorer-courses-review-widget.js';
-
 import './student-explorer-courses-widget-button.html';
 import './student-explorer-courses-widget-button.js';
 
@@ -34,14 +25,14 @@ import './student-explorer-interests-widget.js';
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';
 
-import './student-explorer-opportunities-add-review-widget.html';
-import './student-explorer-opportunities-add-review-widget.js';
+import './student-explorer-add-review-widget.html';
+import './student-explorer-add-review-widget.js';
 
-import './student-explorer-opportunities-edit-review-widget.html';
-import './student-explorer-opportunities-edit-review-widget.js';
+import './student-explorer-edit-review-widget.html';
+import './student-explorer-edit-review-widget.js';
 
-import './student-explorer-opportunities-review-widget.html';
-import './student-explorer-opportunities-review-widget.js';
+import './student-explorer-review-widget.html';
+import './student-explorer-review-widget.js';
 
 import './student-explorer-opportunities-widget.html';
 import './student-explorer-opportunities-widget.js';

@@ -18,25 +18,40 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
   opportunitySemesters() {
     const opp = this.opportunity;
     const semesters = opp.semesterIDs;
+    const takenSemesters = [];
     const semesterNames = [];
     const currentSemesterID = Semesters.getCurrentSemester();
     const currentSemester = Semesters.findDoc(currentSemesterID);
-    _.map(semesters, (sem) => {
+    const opportunity = this.opportunity;
+    const oi = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      opportunityID: opportunity._id,
+    }).fetch();
+    _.map(oi, function (o) {
+      takenSemesters.push(o.semesterID);
+    });
+    _.map(semesters, function (sem) {
       if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
-        semesterNames.push(Semesters.toString(sem));
+        if (!_.includes(takenSemesters, sem)) {
+          semesterNames.push(Semesters.toString(sem));
+        }
       }
     });
     return semesterNames;
   },
   existingSemesters() {
     const semesters = [];
+    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSemester = Semesters.findDoc(currentSemesterID);
     const opportunity = this.opportunity;
     const oi = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
-    _.map(oi, (o) => {
-      semesters.push(Semesters.toString(o.semesterID, false));
+    _.map(oi, function (o) {
+      if (Semesters.findDoc(o.semesterID).sortBy >= currentSemester.sortBy) {
+        semesters.push(Semesters.toString(o.semesterID, false));
+      }
     });
     return semesters;
   },
