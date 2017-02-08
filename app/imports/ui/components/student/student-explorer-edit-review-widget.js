@@ -50,7 +50,7 @@ Template.Student_Explorer_Edit_Review_Widget.helpers({
         opportunityID: opportunity._id,
       }).fetch();
     }
-    _.map(instances, (instance) => {
+    _.map(instances, function (instance) {
       semesters.push(Semesters.findDoc(instance.semesterID));
     });
     return semesters;

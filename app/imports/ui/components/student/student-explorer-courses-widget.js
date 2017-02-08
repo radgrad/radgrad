@@ -123,26 +123,7 @@ Template.Student_Explorer_Courses_Widget.helpers({
       default:
         return 'ERROR: More than one table.';
     }
-  },
-  tableStyle(table) {
-    let tableColor;
-    let tableIcon;
-    let tableTitle;
-    if (table[0].status === 'Completed') {
-      tableColor = 'green';
-      tableIcon = 'icon checkmark';
-      tableTitle = 'Completed';
-    } else if (table[0].status === 'Not in plan') {
-      tableColor = 'red';
-      tableIcon = 'warning circle icon';
-      tableTitle = 'Not in Plan';
-    } else if (table[0].status === 'In plan, but not yet complete') {
-      tableColor = 'yellow';
-      tableIcon = 'warning sign icon';
-      tableTitle = 'In Plan (Not Yet Completed)';
-    }
-    return { color: tableColor, icon: tableIcon, title: tableTitle };
-  },
+  }
 });
 
 Template.Student_Explorer_Courses_Widget.events({
