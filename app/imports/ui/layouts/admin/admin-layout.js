@@ -7,7 +7,8 @@ Template.Admin_Layout.helpers({
       { label: 'Home', route: RouteNames.adminHomePageRouteName, regex: 'home' },
       { label: 'Data Model', route: RouteNames.adminDataModelPageRouteName, regex: 'datamodel' },
       { label: 'Data Base', route: RouteNames.adminDataBasePageRouteName, regex: 'database' },
-      { label: 'Review Moderation', route: RouteNames.advisorReviewModerationPage, regex: 'reviewmoderation' },
+      { label: 'Review Moderation', route: RouteNames.adminReviewModerationPageRouteName,
+        regex: 'admin-review-moderation' },
     ];
   },
   secondMenuLength() {
