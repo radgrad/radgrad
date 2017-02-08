@@ -77,11 +77,9 @@
                 {{#each table in descriptionPair.value}}
                   <div class="ui center aligned segment">
                     {{{getTableTitle @index}}}
-                    {{#with tableStyle table}}
                       {{#each relatedOpportunity in table}}
                         <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug relatedOpportunity.opportunity}} </a> <br>
                       {{/each}}
-                    {{/with}}
                   </div>
                 {{/each}}
               </div>
