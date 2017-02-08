@@ -1,9 +1,393 @@
 {
-  "timestamp": "2017-02-08T08:47:48.555Z",
+  "timestamp": "2017-01-23T01:18:25.046Z",
   "collections": [
     {
       "name": "AcademicYearInstanceCollection",
       "contents": [
+        {
+          "student": "aaronvil",
+          "year": 2014
+        },
+        {
+          "student": "aaronvil",
+          "year": 2015
+        },
+        {
+          "student": "aaronvil",
+          "year": 2016
+        },
+        {
+          "student": "aaronvil",
+          "year": 2017
+        },
+        {
+          "student": "ahlim",
+          "year": 2014
+        },
+        {
+          "student": "ahlim",
+          "year": 2015
+        },
+        {
+          "student": "ahlim",
+          "year": 2016
+        },
+        {
+          "student": "ahlim",
+          "year": 2017
+        },
+        {
+          "student": "brianmay",
+          "year": 2014
+        },
+        {
+          "student": "brianmay",
+          "year": 2015
+        },
+        {
+          "student": "brianmay",
+          "year": 2016
+        },
+        {
+          "student": "brianmay",
+          "year": 2017
+        },
+        {
+          "student": "christopher-nguyen",
+          "year": 2014
+        },
+        {
+          "student": "christopher-nguyen",
+          "year": 2015
+        },
+        {
+          "student": "christopher-nguyen",
+          "year": 2016
+        },
+        {
+          "student": "christopher-nguyen",
+          "year": 2017
+        },
+        {
+          "student": "cpjaro",
+          "year": 2014
+        },
+        {
+          "student": "cpjaro",
+          "year": 2015
+        },
+        {
+          "student": "cpjaro",
+          "year": 2016
+        },
+        {
+          "student": "cpjaro",
+          "year": 2017
+        },
+        {
+          "student": "dtan808",
+          "year": 2014
+        },
+        {
+          "student": "dtan808",
+          "year": 2015
+        },
+        {
+          "student": "dtan808",
+          "year": 2016
+        },
+        {
+          "student": "dtan808",
+          "year": 2017
+        },
+        {
+          "student": "joshuajw",
+          "year": 2014
+        },
+        {
+          "student": "joshuajw",
+          "year": 2015
+        },
+        {
+          "student": "joshuajw",
+          "year": 2016
+        },
+        {
+          "student": "joshuajw",
+          "year": 2017
+        },
+        {
+          "student": "jrude",
+          "year": 2014
+        },
+        {
+          "student": "jrude",
+          "year": 2015
+        },
+        {
+          "student": "jrude",
+          "year": 2016
+        },
+        {
+          "student": "jrude",
+          "year": 2017
+        },
+        {
+          "student": "kellyl4",
+          "year": 2014
+        },
+        {
+          "student": "kellyl4",
+          "year": 2015
+        },
+        {
+          "student": "kellyl4",
+          "year": 2016
+        },
+        {
+          "student": "kellyl4",
+          "year": 2017
+        },
+        {
+          "student": "kirk6",
+          "year": 2014
+        },
+        {
+          "student": "kirk6",
+          "year": 2015
+        },
+        {
+          "student": "kirk6",
+          "year": 2016
+        },
+        {
+          "student": "kirk6",
+          "year": 2017
+        },
+        {
+          "student": "kurtkn",
+          "year": 2014
+        },
+        {
+          "student": "kurtkn",
+          "year": 2015
+        },
+        {
+          "student": "kurtkn",
+          "year": 2016
+        },
+        {
+          "student": "kurtkn",
+          "year": 2017
+        },
+        {
+          "student": "markrc",
+          "year": 2014
+        },
+        {
+          "student": "markrc",
+          "year": 2015
+        },
+        {
+          "student": "markrc",
+          "year": 2016
+        },
+        {
+          "student": "markrc",
+          "year": 2017
+        },
+        {
+          "student": "nathancy",
+          "year": 2014
+        },
+        {
+          "student": "nathancy",
+          "year": 2015
+        },
+        {
+          "student": "nathancy",
+          "year": 2016
+        },
+        {
+          "student": "nathancy",
+          "year": 2017
+        },
+        {
+          "student": "pakchar",
+          "year": 2014
+        },
+        {
+          "student": "pakchar",
+          "year": 2015
+        },
+        {
+          "student": "pakchar",
+          "year": 2016
+        },
+        {
+          "student": "pakchar",
+          "year": 2017
+        },
+        {
+          "student": "slike",
+          "year": 2014
+        },
+        {
+          "student": "slike",
+          "year": 2015
+        },
+        {
+          "student": "slike",
+          "year": 2016
+        },
+        {
+          "student": "slike",
+          "year": 2017
+        },
+        {
+          "student": "hailing",
+          "year": 2014
+        },
+        {
+          "student": "hailing",
+          "year": 2015
+        },
+        {
+          "student": "hailing",
+          "year": 2016
+        },
+        {
+          "student": "hailing",
+          "year": 2017
+        },
+        {
+          "student": "jameyia-shamia",
+          "year": 2014
+        },
+        {
+          "student": "jameyia-shamia",
+          "year": 2015
+        },
+        {
+          "student": "jameyia-shamia",
+          "year": 2016
+        },
+        {
+          "student": "jameyia-shamia",
+          "year": 2017
+        },
+        {
+          "student": "lamanh",
+          "year": 2014
+        },
+        {
+          "student": "lamanh",
+          "year": 2015
+        },
+        {
+          "student": "lamanh",
+          "year": 2016
+        },
+        {
+          "student": "lamanh",
+          "year": 2017
+        },
+        {
+          "student": "linhongb",
+          "year": 2014
+        },
+        {
+          "student": "linhongb",
+          "year": 2015
+        },
+        {
+          "student": "linhongb",
+          "year": 2016
+        },
+        {
+          "student": "linhongb",
+          "year": 2017
+        },
+        {
+          "student": "zknoebel",
+          "year": 2014
+        },
+        {
+          "student": "zknoebel",
+          "year": 2015
+        },
+        {
+          "student": "zknoebel",
+          "year": 2016
+        },
+        {
+          "student": "zknoebel",
+          "year": 2017
+        },
+        {
+          "student": "creindle",
+          "year": 2014
+        },
+        {
+          "student": "creindle",
+          "year": 2015
+        },
+        {
+          "student": "creindle",
+          "year": 2016
+        },
+        {
+          "student": "creindle",
+          "year": 2017
+        },
+        {
+          "student": "erikhuan",
+          "year": 2014
+        },
+        {
+          "student": "erikhuan",
+          "year": 2015
+        },
+        {
+          "student": "erikhuan",
+          "year": 2016
+        },
+        {
+          "student": "erikhuan",
+          "year": 2017
+        },
+        {
+          "student": "rao642",
+          "year": 2014
+        },
+        {
+          "student": "rao642",
+          "year": 2015
+        },
+        {
+          "student": "rao642",
+          "year": 2016
+        },
+        {
+          "student": "rao642",
+          "year": 2017
+        },
+        {
+          "student": "shaziney",
+          "year": 2014
+        },
+        {
+          "student": "shaziney",
+          "year": 2015
+        },
+        {
+          "student": "shaziney",
+          "year": 2016
+        },
+        {
+          "student": "shaziney",
+          "year": 2017
+        },
         {
           "student": "abi",
           "year": 2014
@@ -1120,6 +1504,582 @@
     {
       "name": "CourseInstanceCollection",
       "contents": [
+        {
+          "semester": "Fall-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "aaronvil"
+        },
+        {
+          "semester": "Fall-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "ahlim"
+        },
+        {
+          "semester": "Fall-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "brianmay"
+        },
+        {
+          "semester": "Fall-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "christopher-nguyen"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "cpjaro"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "dtan808"
+        },
+        {
+          "semester": "Spring-2013",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "joshuajw"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "jrude"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kellyl4"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kirk6"
+        },
+        {
+          "semester": "Spring-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kurtkn"
+        },
+        {
+          "semester": "Fall-2013",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "markrc"
+        },
+        {
+          "semester": "Spring-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kurtkn"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "nathancy"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "pakchar"
+        },
+        {
+          "semester": "Spring-2013",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "slike"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "aaronvil"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "cpjaro"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "hailing"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "jameyia-shamia"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "jrude"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "kellyl4"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "kirk6"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "lamanh"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "linhongb"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "pakchar"
+        },
+        {
+          "semester": "Fall-2013",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "slike"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "zknoebel"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "aaronvil"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "ahlim"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "christopher-nguyen"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "cpjaro"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "creindle"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "dtan808"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "hailing"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "jrude"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kellyl4"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kirk6"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "linhongb"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "pakchar"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "zknoebel"
+        },
+        {
+          "semester": "Spring-2013",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "erikhuan"
+        },
+        {
+          "semester": "Spring-2013",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "joshuajw"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "lamanh"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "rao642"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "zknoebel"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "brianmay"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "creindle"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "dtan808"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "joshuajw"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kurtkn"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "markrc"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "rao642"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "slike"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics313",
+          "note": "ICS 313",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "kurtkn"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "ahlim"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "brianmay"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "christopher-nguyen"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "creindle"
+        },
+        {
+          "semester": "Fall-2014",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "erikhuan"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "markrc"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "rao642"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "shaziney"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics331",
+          "note": "ICS 331",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "erikhuan"
+        },
         {
           "semester": "Fall-2014",
           "course": "ics111",
@@ -4092,6 +5052,12 @@
           "opportunity": "data-analytics-for-solar-energy",
           "verified": false,
           "student": "charley"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "shaziney"
         },
         {
           "semester": "Spring-2019",
