@@ -1,6 +1,6 @@
-<template name="Student_Explorer_Opportunities_Review_Widget">
+<template name="Student_Explorer_Review_Widget">
   <div class="ui padded container">
-    <div class="ui dividing header"><h4>OPPORTUNITY REVIEWS</h4>
+    <div class="ui dividing header"><h4 style="text-transform:uppercase">{{reviewType}} REVIEWS</h4>
     </div>
     <div class="ui middle aligned very relaxed divided list">
       {{#if userReview}}
@@ -17,7 +17,7 @@
             </div>
          </div>
         {{/with}}
-        {{> Student_Explorer_Edit_Review_Widget review = userReview event = opportunity}}
+        {{> Student_Explorer_Edit_Review_Widget review = userReview event = event}}
       {{else}}
         <div class="item">
           <div class="ui grid">
@@ -28,12 +28,12 @@
               {{#if completed}}
                 <p><i>You have not reviewed this yet.</i></p>
               {{else}}
-                <p><i>You must complete this opportunity first to leave a review.</i></p>
+                <p><i>You must complete this {{reviewType}} first to leave a review.</i></p>
               {{/if}}
             </div>
           </div>
           {{#if completed}}
-              {{> Student_Explorer_Add_Review_Widget event = opportunity reviewType = 'opportunity'}}
+              {{> Student_Explorer_Add_Review_Widget event = event reviewType = reviewType}}
           {{/if}}
         </div>
       {{/if}}
