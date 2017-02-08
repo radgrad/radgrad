@@ -10,9 +10,6 @@ import './student-home-menu.js';
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
 
-import './student-explorer-courses-review-widget.html';
-import './student-explorer-courses-review-widget.js';
-
 import './student-explorer-courses-widget-button.html';
 import './student-explorer-courses-widget-button.js';
 
@@ -34,8 +31,8 @@ import './student-explorer-add-review-widget.js';
 import './student-explorer-edit-review-widget.html';
 import './student-explorer-edit-review-widget.js';
 
-import './student-explorer-opportunities-review-widget.html';
-import './student-explorer-opportunities-review-widget.js';
+import './student-explorer-review-widget.html';
+import './student-explorer-review-widget.js';
 
 import './student-explorer-opportunities-widget.html';
 import './student-explorer-opportunities-widget.js';
