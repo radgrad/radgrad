@@ -7,18 +7,18 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 
-Template.Student_Explorer_Opportunities_Review_Widget.onCreated(function onCreated() {
+Template.Student_Explorer_Review_Widget.onCreated(function onCreated() {
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Reviews.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
 
-Template.Student_Explorer_Opportunities_Review_Widget.helpers({
+Template.Student_Explorer_Review_Widget.helpers({
   reviews() {
-    const opportunity = this.opportunity;
+    const event = this.event;
     const matchingReviews = Reviews.find({
-      revieweeID: opportunity._id,
+      revieweeID: event._id,
       visible: true,
     }).fetch();
     const matchingReviewsFinal = _.filter(matchingReviews, function matchStudentID(review) {
@@ -49,11 +49,11 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
     }
     return `${semName} ${semNameYear[1]}`;
   },
-  averageRating(opportunity) {
+  averageRating(event) {
     let averageRating = 0;
     let numReviews = 0;
     const matchingReviews = Reviews.find({
-      revieweeID: opportunity._id,
+      revieweeID: event._id,
     }).fetch();
     numReviews = matchingReviews.length;
     _.map(matchingReviews, function (review) {
@@ -80,7 +80,7 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
   },
 });
 
-Template.Student_Explorer_Opportunities_Review_Widget.events({
+Template.Student_Explorer_Review_Widget.events({
 
 });
 

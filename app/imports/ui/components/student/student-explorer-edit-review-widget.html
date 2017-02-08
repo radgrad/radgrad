@@ -43,7 +43,7 @@
         {{/if}}
         <form class="ui equal width form {{successClass}} {{errorClass}}">
           <div class="fields">
-            {{> Semesters_Single_Form_Field semesters=semesters name="semester" errorMessage=(fieldError "semesters") selectedSemesterID=review.semesterID required="true" }}
+            {{> Semesters_Single_Form_Field semesters=semesters name="semester" errorMessage=(fieldError "semester") selectedSemesterID=review.semesterID required=true }}
             {{> Rating_Form_Field label="Rating" name="rating" ratings=ratings selectedRating=review.rating  errorMessage=(fieldError "rating") required=false}}
           </div>
 
