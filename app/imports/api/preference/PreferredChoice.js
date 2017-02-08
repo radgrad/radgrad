@@ -32,6 +32,14 @@ class PreferredChoice {
   getBestChoices() {
     return this._rankedChoices[this.max];
   }
+
+  /**
+   * Returns true if there are any preferences.
+   * @return {boolean} true if max !== 0.
+   */
+  hasPreferences() {
+    return this.max !== 0;
+  }
 }
 
 export { PreferredChoice as default };
