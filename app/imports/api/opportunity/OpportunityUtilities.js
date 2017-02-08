@@ -1,6 +1,7 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Opportunities } from './OpportunityCollection';
 import { OpportunityInstances } from './OpportunityInstanceCollection';
+import PreferredChoice from '../preference/PreferredChoice';
 import { Users } from '../user/UserCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
@@ -48,28 +49,27 @@ export const semesterOpportunities = (semester, semesterNumber) => {
 };
 
 export const getStudentSemesterOpportunityChoices = (semester, semesterNumber, studentID) => {
-  const arr = {};
-  let max = 0;
   const opportunities = semesterOpportunities(semester, semesterNumber);
-  _.map(opportunities, (opportunity) => {
-    const score = calculateOpportunityCompatibility(opportunity._id, studentID);
-    if (score > max) {
-      max = score;
-    }
-    if (!arr[score]) {
-      arr[score] = [];
-    }
-    arr[score].push(opportunity);
+  const oppInstances = OpportunityInstances.find({ studentID }).fetch();
+  const filtered = _.filter(opportunities, function removeInstances(opp) {
+    let taken = true;
+    _.map(oppInstances, (oi) => {
+      if (oi.opportunityID === opp._id) {
+        taken = false;
+      }
+    });
+    return taken;
   });
-  arr.max = max;
-  return arr;
+  return filtered;
 };
 
 export const chooseStudentSemesterOpportunity = (semester, semesterNumber, studentID) => {
   const choices = getStudentSemesterOpportunityChoices(semester, semesterNumber, studentID);
-  const best = choices[choices.max];
+  const interestIDs = Users.getInterestIDs(studentID);
+  const preferred = new PreferredChoice(choices, interestIDs);
+  const best = preferred.getBestChoices();
   if (best) {
     return best[getRandomInt(0, best.length)];
   }
-  return undefined;
+  return null;
 };

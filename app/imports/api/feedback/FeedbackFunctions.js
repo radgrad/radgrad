@@ -1,11 +1,12 @@
 // import { check } from 'meteor/check';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { calculateOpportunityCompatibility, getRandomInt } from '../opportunity/OpportunityFunctions';
+import { calculateOpportunityCompatibility, getRandomInt } from '../opportunity/OpportunityUtilities';
 import { Feedbacks } from './FeedbackCollection';
 import { FeedbackInstances } from './FeedbackInstanceCollection';
 import { FeedbackType } from './FeedbackType';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { Semesters } from '../semester/SemesterCollection';
+import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 
 /** @module FeedbackFunctions */
@@ -130,9 +131,9 @@ export class FeedbackFunctionClass {
   }
 
   generateRecommendedOpportunities(studentID) {
-    this._clearFeedbackInstances(studentID, FeedbackInstances.INTERESTS);
     const feedback = Feedbacks.findDoc({ name: 'Opportunity recommendations based on interests' });
     const feedbackSlug = Slugs.getEntityID(feedback.slugID, 'Feedback');
+    this._clearFeedbackInstances(studentID, feedbackSlug);
 
     const bestChoices = bestStudentSemesterOpportunities(studentID);
     console.log(bestChoices);

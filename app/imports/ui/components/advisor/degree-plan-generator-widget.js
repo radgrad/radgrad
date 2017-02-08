@@ -11,8 +11,8 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as planUtils from '../../../api/degree-program/plan-generator';
 import * as semUtils from '../../../api/semester/SemesterUtilities';
-import * as courseUtils from '../../../api/course/CourseFunctions';
-import * as opportunityUtils from '../../../api/opportunity/OpportunityFunctions';
+import * as courseUtils from '../../../api/course/CourseUtilities';
+import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Degree_Plan_Generator_Widget.helpers({

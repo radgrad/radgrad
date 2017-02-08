@@ -6,8 +6,8 @@ import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import * as semUtils from '../semester/SemesterUtilities';
-import * as courseUtils from '../course/CourseFunctions';
-import * as opportunityUtils from '../opportunity/OpportunityFunctions';
+import * as courseUtils from '../course/CourseUtilities';
+import * as opportunityUtils from '../opportunity/OpportunityUtilities';
 import { getPlanningICE } from '../ice/IceProcessor';
 import { BS_CS_LIST, BA_ICS_LIST } from './degree-program';
 
