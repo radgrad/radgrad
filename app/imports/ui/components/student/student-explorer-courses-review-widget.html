@@ -12,15 +12,13 @@
                 <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
               </div>
               <div class="twelve wide column">
-                {{#each star in stars}}
-                  <i style="font-size: 1.2em;" class="{{star}}"></i>
-                {{/each}}
+                {{> Student_Explorer_Review_Stars_Widget rating = rating}}
                 <br><div style="padding-top: 5px">{{comments}}</div>
               </div>
             </div>
          </div>
         {{/with}}
-        {{> Student_Explorer_Courses_Edit_Review_Widget review=userReview course=course}}
+        {{> Student_Explorer_Edit_Review_Widget review=userReview event=course}}
 
       {{else}}
         <div class="item">
@@ -37,7 +35,7 @@
             </div>
           </div>
           {{#if completed}}
-              {{> Student_Explorer_Courses_Add_Review_Widget course=course}}
+            {{> Student_Explorer_Add_Review_Widget event = course reviewType = 'course'}}
           {{/if}}
         </div>
       {{/if}}
@@ -49,9 +47,7 @@
                 <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
               </div>
               <div class="twelve wide column">
-                  {{#each star in stars}}
-                    <i style="font-size: 1.2em;" class="{{star}}"></i>
-                  {{/each}}
+                {{> Student_Explorer_Review_Stars_Widget rating = rating}}
                 <br><div style="padding-top: 5px">{{comments}}</div>
               </div>
             </div>

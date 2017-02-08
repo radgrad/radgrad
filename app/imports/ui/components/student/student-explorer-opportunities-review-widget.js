@@ -56,10 +56,9 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
       revieweeID: opportunity._id,
     }).fetch();
     numReviews = matchingReviews.length;
-    _.map(matchingReviews, (review) => {
+    _.map(matchingReviews, function (review) {
       averageRating += review.rating;
-    })
-    ;
+    });
     averageRating /= numReviews;
     return Math.floor(averageRating);
   },
@@ -70,15 +69,8 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
     const reviewSemester = Semesters.toString(review.semesterID);
     const reviewRating = review.rating;
     const reviewComments = review.comments;
-    const reviewStars = [];
-    for (let i = 0; i < reviewRating; i += 1) {
-      reviewStars.push('yellow fitted star icon');
-    }
-    for (let i = reviewRating; i < 5; i += 1) {
-      reviewStars.push('yellow fitted empty star icon');
-    }
     return { name: userName, picture: userPicture, semester: reviewSemester,
-      rating: review, stars: reviewStars, comments: reviewComments };
+      rating: reviewRating, comments: reviewComments };
   },
   currentUserName() {
     return Users.getFullName(getUserIdFromRoute());
@@ -90,9 +82,5 @@ Template.Student_Explorer_Opportunities_Review_Widget.helpers({
 
 Template.Student_Explorer_Opportunities_Review_Widget.events({
 
-});
-
-Template.Student_Explorer_Opportunities_Review_Widget.onRendered(function studentExplorerOpportunitiesReviewWidget() {
-  this.$('.ui.rating').rating('disable');
 });
 

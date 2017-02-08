@@ -186,6 +186,14 @@ advisorRoutes.route('/completed-verifications', {
   },
 });
 
+export const advisorReviewModerationPageRouteName = 'Advisor_Review_Moderation_Page';
+advisorRoutes.route('/review-moderation', {
+  name: advisorReviewModerationPageRouteName,
+  action() {
+    BlazeLayout.render('Advisor_Layout', { main: advisorReviewModerationPageRouteName });
+  },
+});
+
 /*                        FACULTY ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.

@@ -32,10 +32,15 @@ Template.Advisor_Layout.helpers({
         route: RouteNames.advisorCompletedVerificationsPageRouteName,
         regex: 'completed-verifications',
       },
+      {
+        label: 'Review Moderation',
+        route: RouteNames.advisorReviewModerationPageRouteName,
+        regex: 'review-moderation',
+      },
     ];
   },
   secondMenuLength() {
-    return 'four';
+    return 'five';
   },
 });
 
