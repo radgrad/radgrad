@@ -18,6 +18,7 @@ import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
+import { Reviews } from '../../api/review/ReviewCollection';
 import { Teasers } from '../../api/teaser/TeaserCollection';
 import { Users } from '../../api/user/UserCollection';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
@@ -99,7 +100,7 @@ function newStartupProcess() { // eslint-disable-line
       const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, CareerGoals, DesiredDegrees,
         ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
         CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
-        VerificationRequests, Feed, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers];
+        VerificationRequests, Feed, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews];
 
       const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
       const collectionNames = _.map(collectionList, collection => collection._collectionName);

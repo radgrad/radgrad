@@ -140,14 +140,14 @@ class ReviewCollection extends BaseInstanceCollection {
   /**
    * Updates the Review's modified, visible, and moderatorComments variables.
    * @param reviewID The review ID.
-   * @param modified The new modified value.
+   * @param moderated The new moderated value.
    * @param visible The new visible value.
    * @param moderatorComments The new moderatorComments value.
    */
   updateModerated(reviewID, moderated, visible, moderatorComments) {
     this.assertDefined(reviewID);
     this._collection.update({ _id: reviewID },
-        { $set: { moderated: moderated, visible: visible, moderatorComments: moderatorComments } });
+        { $set: { moderated, visible, moderatorComments } });
   }
 
   /**
