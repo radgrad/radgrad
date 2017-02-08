@@ -5,6 +5,390 @@
       "name": "AcademicYearInstanceCollection",
       "contents": [
         {
+          "student": "aaronvil",
+          "year": 2014
+        },
+        {
+          "student": "aaronvil",
+          "year": 2015
+        },
+        {
+          "student": "aaronvil",
+          "year": 2016
+        },
+        {
+          "student": "aaronvil",
+          "year": 2017
+        },
+        {
+          "student": "ahlim",
+          "year": 2014
+        },
+        {
+          "student": "ahlim",
+          "year": 2015
+        },
+        {
+          "student": "ahlim",
+          "year": 2016
+        },
+        {
+          "student": "ahlim",
+          "year": 2017
+        },
+        {
+          "student": "brianmay",
+          "year": 2014
+        },
+        {
+          "student": "brianmay",
+          "year": 2015
+        },
+        {
+          "student": "brianmay",
+          "year": 2016
+        },
+        {
+          "student": "brianmay",
+          "year": 2017
+        },
+        {
+          "student": "christopher-nguyen",
+          "year": 2014
+        },
+        {
+          "student": "christopher-nguyen",
+          "year": 2015
+        },
+        {
+          "student": "christopher-nguyen",
+          "year": 2016
+        },
+        {
+          "student": "christopher-nguyen",
+          "year": 2017
+        },
+        {
+          "student": "cpjaro",
+          "year": 2014
+        },
+        {
+          "student": "cpjaro",
+          "year": 2015
+        },
+        {
+          "student": "cpjaro",
+          "year": 2016
+        },
+        {
+          "student": "cpjaro",
+          "year": 2017
+        },
+        {
+          "student": "dtan808",
+          "year": 2014
+        },
+        {
+          "student": "dtan808",
+          "year": 2015
+        },
+        {
+          "student": "dtan808",
+          "year": 2016
+        },
+        {
+          "student": "dtan808",
+          "year": 2017
+        },
+        {
+          "student": "joshuajw",
+          "year": 2014
+        },
+        {
+          "student": "joshuajw",
+          "year": 2015
+        },
+        {
+          "student": "joshuajw",
+          "year": 2016
+        },
+        {
+          "student": "joshuajw",
+          "year": 2017
+        },
+        {
+          "student": "jrude",
+          "year": 2014
+        },
+        {
+          "student": "jrude",
+          "year": 2015
+        },
+        {
+          "student": "jrude",
+          "year": 2016
+        },
+        {
+          "student": "jrude",
+          "year": 2017
+        },
+        {
+          "student": "kellyl4",
+          "year": 2014
+        },
+        {
+          "student": "kellyl4",
+          "year": 2015
+        },
+        {
+          "student": "kellyl4",
+          "year": 2016
+        },
+        {
+          "student": "kellyl4",
+          "year": 2017
+        },
+        {
+          "student": "kirk6",
+          "year": 2014
+        },
+        {
+          "student": "kirk6",
+          "year": 2015
+        },
+        {
+          "student": "kirk6",
+          "year": 2016
+        },
+        {
+          "student": "kirk6",
+          "year": 2017
+        },
+        {
+          "student": "kurtkn",
+          "year": 2014
+        },
+        {
+          "student": "kurtkn",
+          "year": 2015
+        },
+        {
+          "student": "kurtkn",
+          "year": 2016
+        },
+        {
+          "student": "kurtkn",
+          "year": 2017
+        },
+        {
+          "student": "markrc",
+          "year": 2014
+        },
+        {
+          "student": "markrc",
+          "year": 2015
+        },
+        {
+          "student": "markrc",
+          "year": 2016
+        },
+        {
+          "student": "markrc",
+          "year": 2017
+        },
+        {
+          "student": "nathancy",
+          "year": 2014
+        },
+        {
+          "student": "nathancy",
+          "year": 2015
+        },
+        {
+          "student": "nathancy",
+          "year": 2016
+        },
+        {
+          "student": "nathancy",
+          "year": 2017
+        },
+        {
+          "student": "pakchar",
+          "year": 2014
+        },
+        {
+          "student": "pakchar",
+          "year": 2015
+        },
+        {
+          "student": "pakchar",
+          "year": 2016
+        },
+        {
+          "student": "pakchar",
+          "year": 2017
+        },
+        {
+          "student": "slike",
+          "year": 2014
+        },
+        {
+          "student": "slike",
+          "year": 2015
+        },
+        {
+          "student": "slike",
+          "year": 2016
+        },
+        {
+          "student": "slike",
+          "year": 2017
+        },
+        {
+          "student": "hailing",
+          "year": 2014
+        },
+        {
+          "student": "hailing",
+          "year": 2015
+        },
+        {
+          "student": "hailing",
+          "year": 2016
+        },
+        {
+          "student": "hailing",
+          "year": 2017
+        },
+        {
+          "student": "jameyia-shamia",
+          "year": 2014
+        },
+        {
+          "student": "jameyia-shamia",
+          "year": 2015
+        },
+        {
+          "student": "jameyia-shamia",
+          "year": 2016
+        },
+        {
+          "student": "jameyia-shamia",
+          "year": 2017
+        },
+        {
+          "student": "lamanh",
+          "year": 2014
+        },
+        {
+          "student": "lamanh",
+          "year": 2015
+        },
+        {
+          "student": "lamanh",
+          "year": 2016
+        },
+        {
+          "student": "lamanh",
+          "year": 2017
+        },
+        {
+          "student": "linhongb",
+          "year": 2014
+        },
+        {
+          "student": "linhongb",
+          "year": 2015
+        },
+        {
+          "student": "linhongb",
+          "year": 2016
+        },
+        {
+          "student": "linhongb",
+          "year": 2017
+        },
+        {
+          "student": "zknoebel",
+          "year": 2014
+        },
+        {
+          "student": "zknoebel",
+          "year": 2015
+        },
+        {
+          "student": "zknoebel",
+          "year": 2016
+        },
+        {
+          "student": "zknoebel",
+          "year": 2017
+        },
+        {
+          "student": "creindle",
+          "year": 2014
+        },
+        {
+          "student": "creindle",
+          "year": 2015
+        },
+        {
+          "student": "creindle",
+          "year": 2016
+        },
+        {
+          "student": "creindle",
+          "year": 2017
+        },
+        {
+          "student": "erikhuan",
+          "year": 2014
+        },
+        {
+          "student": "erikhuan",
+          "year": 2015
+        },
+        {
+          "student": "erikhuan",
+          "year": 2016
+        },
+        {
+          "student": "erikhuan",
+          "year": 2017
+        },
+        {
+          "student": "rao642",
+          "year": 2014
+        },
+        {
+          "student": "rao642",
+          "year": 2015
+        },
+        {
+          "student": "rao642",
+          "year": 2016
+        },
+        {
+          "student": "rao642",
+          "year": 2017
+        },
+        {
+          "student": "shaziney",
+          "year": 2014
+        },
+        {
+          "student": "shaziney",
+          "year": 2015
+        },
+        {
+          "student": "shaziney",
+          "year": 2016
+        },
+        {
+          "student": "shaziney",
+          "year": 2017
+        },
+        {
           "student": "abi",
           "year": 2014
         },
@@ -1120,6 +1504,582 @@
     {
       "name": "CourseInstanceCollection",
       "contents": [
+        {
+          "semester": "Fall-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "aaronvil"
+        },
+        {
+          "semester": "Fall-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "ahlim"
+        },
+        {
+          "semester": "Fall-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "brianmay"
+        },
+        {
+          "semester": "Fall-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "christopher-nguyen"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "cpjaro"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "dtan808"
+        },
+        {
+          "semester": "Spring-2013",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "joshuajw"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "jrude"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kellyl4"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kirk6"
+        },
+        {
+          "semester": "Spring-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kurtkn"
+        },
+        {
+          "semester": "Fall-2013",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "markrc"
+        },
+        {
+          "semester": "Spring-2014",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kurtkn"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "nathancy"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "pakchar"
+        },
+        {
+          "semester": "Spring-2013",
+          "course": "ics111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "slike"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "aaronvil"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "cpjaro"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "hailing"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "jameyia-shamia"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "jrude"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "kellyl4"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "kirk6"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "lamanh"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "linhongb"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "pakchar"
+        },
+        {
+          "semester": "Fall-2013",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "slike"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "zknoebel"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "aaronvil"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "ahlim"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "christopher-nguyen"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "cpjaro"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "creindle"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "dtan808"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "hailing"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "jrude"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kellyl4"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kirk6"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "linhongb"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "pakchar"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "zknoebel"
+        },
+        {
+          "semester": "Spring-2013",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "erikhuan"
+        },
+        {
+          "semester": "Spring-2013",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "joshuajw"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "lamanh"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "rao642"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "zknoebel"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "brianmay"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "creindle"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "dtan808"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "joshuajw"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "kurtkn"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "markrc"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "rao642"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "slike"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics313",
+          "note": "ICS 313",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "kurtkn"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "ahlim"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "brianmay"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "christopher-nguyen"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "creindle"
+        },
+        {
+          "semester": "Fall-2014",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "erikhuan"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "markrc"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "rao642"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "shaziney"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics331",
+          "note": "ICS 331",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "erikhuan"
+        },
         {
           "semester": "Fall-2014",
           "course": "ics111",
@@ -4097,6 +5057,12 @@
           "semester": "Spring-2019",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
+          "student": "shaziney"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
           "student": "rao642"
         },
         {
@@ -4170,6 +5136,715 @@
           "name": "Project",
           "slug": "project",
           "description": "A project related to computer science."
+        }
+      ]
+    },
+    {
+      "name": "ReviewCollection",
+      "contents": [
+        {
+          "slug": "review-course-ics111-aaronvil",
+          "student": "aaronvil",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "The course was very fun in learning how to do the projects we did in ICS 111. The projects weren't hard for beginner programmers and were interesting to get them to have more fun with programming. The only downside was that the class didn't fully prepare you for ICS 211 where the fun little projects became assignments focused on the next stage of programming. There isn't much new students can do in terms of preparing for ICS 211 from ICS 111 since it is based on what you learn, but the things that you do learn may prove useful.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-ahlim",
+          "student": "ahlim",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "The graphics involved in ics111 made it easy to visualize difficult programming concepts, and helped me gain interest in coding. However, I felt that the class didn’t fully prepare me for the upcoming required ics courses that do not use graphics. I would inform future students that future ics courses may not be as interesting as ics111.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-brianmay",
+          "student": "brianmay",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2014",
+          "rating": 2,
+          "comments": "When I took ICS 111 in Fall 2014, there were no homework assignments, quizzes, nor exams (with the exception of a take-home final exam). Although it made it easy to get a good grade in the course, it negatively impacted my ability to fully understand the fundamental concepts taught in ICS 111. I entered the C.S. program at UH Manoa with no prior experience in programming and ICS 111 did not provide the necessary foundation for a struggling student, like me, who never programmed anything before. However, I am glad that the course has changed since then and implemented homework assignments and quizzes. As an assistant TA for the course in Fall 2016, the assignments and quizzes proved to be extremely helpful in guiding the students in understanding fundamental programming concepts. In addition, the graphics-oriented style of teaching helped them (and myself when I took the course) to be able to visualize the concepts. This seemed to be more effective as opposed to looking at output on the console with no graphics to give hints on how your code executed. For any students that take this course in the future, I highly encourage them to take advantage of the open lab hours and the TA's office hours. It's their job to help you and chances are that they were in your shoes not too long ago. They won't make any negative judgement about you unless you didn't start the homework yet...",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-christopher-nguyen",
+          "student": "christopher-nguyen",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2014",
+          "rating": 5,
+          "comments": "ICS 111 was my first Computer Science and programming class. It was a interesting class and I enjoyed it. The projects in the class utilized EZ, a Java graphics library provided by the professor to make programming fun and interactive. This was definitely one of the strengths in the class because the students of this class can visually see how programming concepts such as arrays and inheritance can be applied to. Using a graphics-based approach was definitely something that makes programming more appealing to those who are just trying ICS out for the first time-- and those who initially joined ICS to become video game developers. Although making graphics move around through Java was more interesting than just looking at black and white text, I feel that it could also be one of the weaknesses in this course as well. The more time spent on learning how to use EZ at the beginning meant less time learning how to catch on the basics of programming such as functions and classes. I felt that it took me two months or so to catch onto these things when I took the class. My main advice to future students is that although this class is super fun it is important to learn and understand what they are doing. It's nice to know that \"oh this method makes a picture move\" but understanding the return types and what is happening in the background is important too.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-cpjaro",
+          "student": "cpjaro",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2015",
+          "rating": 3,
+          "comments": "My course that was taught by a KCC professor, but it was held at UH, and was somewhat decent because she went by the book on the basics of ICS, both theory and code. This course was very good in terms of introducing students to ICS because it went over the theory of computing, taught how to properly trace, and was really strict on code style. However, the projects done were lack luster and the pacing of the actual course could have been much faster. My course had very simple projects such as creating a program to calculate the area/volume of a sphere then display it out on console in \"pretty print.\" The most complex project done was to make an e-shop interface using JAVA FX which would add items to the cart and calculate the total. However, this was the very last project we had to do. This was possibly the funnest project out of the bunch and made me really enjoy the class, but I wanted more of these fun projects rather than the simple calculate. From what I understand, the course taught by another professor does what I suggest right now but does not go over over-arching themes in ICS/theory of computation. I think that tracing and understand how computers work are an integral part in an introductory course to ICS. As for workload, the main issue with students when they first enter the course is that they work on their code at the very last minute. Future courses in the ICS department will not give you this same luxury and it is advised to get in the habit of doing work earlier.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-dtan808",
+          "student": "dtan808",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2016",
+          "rating": 4,
+          "comments": "ICS 111, taught by Jason Leigh, was a great course to begin the ICS journey here at UH Manoa.  The class was big, but the smaller lab classes really made the class interactive.  As a transfer student, I already took beginner CS classes at another university, so a lot of the topics were review.  However, I was challenged by the projects and homework assignments given in the course.  The TA for our lab section was helpful and accessible.  The one weakness of the class that I can think of is that all of the assignments except for the last final project was individual work.  That made it difficult to work with others at the end of the semester, since most of the work had to be done individually prior to the final project.  Other than that, I thought the class was challenging and even though it wasn't my first ICS class, I still learned a lot.  A tip for future students would be to utilize the TA.  They are there to help and want you to do well in the class.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-joshuajw",
+          "student": "joshuajw",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Spring-2013",
+          "rating": 3,
+          "comments": "During the semester I took ICS 111, I found the labs to be the best part apart the class. The labs definitely gave me a lot of much needed time to ask the TA questions and work on my code. Learning the material in lecture, then reinforcing it during labs, was a big strength for this class. One thing I found to be a weakness were the practical exams. Coding is best done when one can be comfortable and focused. I felt I wasn't able to produce the best quality of code I could have under the pressure of the given time limit. Since this class sets the foundations for basic coding behavior, many things learned here will be helpful for future ICS classes.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-jrude",
+          "student": "jrude",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2015",
+          "rating": 3,
+          "comments": "ICS 111 is a great class for people who are interested in coding.  The pros.  I found ICS 111 to be very fun and laid back.  Just understanding the basic concepts of coding can be tough, but taking a easy approach and doing fun stuff, like making games, made the class very enjoyable and easy to learn from.  The cons.  I felt that there were some core concepts missed in ICS 111.  When I went on to 211 I struggled a bit in the beginning because I had to relearn how to do some basic concepts E.G. ,\"For loops\", because they were not instilled very effectively.  But overall this class is great for people who have just begun to code and makes some of the more abstract concepts tangible.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-kellyl4",
+          "student": "kellyl4",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Spring-2016",
+          "rating": 4,
+          "comments": "I took this course with Jason Leigh and he was a great professor. A strength for this course is that Jason Leigh makes the lectures very fun and uses real life examples when teaching code. The lectures made the rules and basics of java very easy to understand. \n\nThe weakness of this course was that there was not enough TA to go around to help the students. I first took this course in the semester Fall 2015 and had a huge lab. Many students barely got any help due to the TA helping out other students. I would see half the students in my lab class just sitting and waiting for help majority of the time. I was one of those students so I ended up getting a B-. Second time I took this class, luckily I had a smaller lab class and was able to get the help I needed. My advice to future students are to practice and start projects early so you can go in for office hours and be the one of the first students in lab asking for help because getting help is very hard to come by when there are a lot of students taking ICS 111.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-kirk6",
+          "student": "kirk6",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Spring-2016",
+          "rating": 4,
+          "comments": "I felt that the course was great overall. The student learning outcomes was clearly laid out. I was also given a schedule so I always know what was due and what assignments were coming up so I could budget my time properly. The professor was always available and quickly responded. I think one possible way the course could improve is to offer extra optional work. I think it could allow students who felt comfortable with the material to push themselves in order to learn more.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-kurtkn",
+          "student": "kurtkn",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Spring-2014",
+          "rating": 5,
+          "comments": "This was the first ICS course I took (I have a background in Biology). Since it is often the gateway for many people into ICS, I believe that it is very important. Overall I enjoyed the class and have enjoyed programming since. The lab was definitely a strength in this class as it served as a time where we could get questions answered. I can't really remember any weaknesses. My advice to future students is to go to all classes/labs and get help early if you don't understand something. It can be a lot to take in at first and the subject matter builds on itself.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-linhongb",
+          "student": "linhongb",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Spring-2016",
+          "rating": 5,
+          "comments": "ICS 111 was taught by Professor Jason Leigh in Spring 2016 for me. Since ICS 111 is an introductory class to computer science, it focus more on the creativity on programming and develop our interest on coding. I think Professor Jason Leigh did a really good job on this course and led our interest to programming. The three projects we designed are all game projects and really fun for his class. However, we did not learn much as coding( we did learn the basis java). For every project we had done, we also need import EZ.java which is a library consisting many useful functions created by the instructor. Such as: if we want to create a window, we do not have to go through all the JFrame things, just simply use initialize(height, width) to create a new window. Anyway, ICS 111 is a fun class and I do recommend taking his class for the future students.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-markrc",
+          "student": "markrc",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2013",
+          "rating": 4,
+          "comments": "The ICS 111 course taught under Professor Robertson allowed new incoming students to be introduced to the world of programming. Some of the strengths of the class was that you had it four days a week. Two days in lecture (where you learn topics and code) and two days in the lab that focuses entirely on applying what you learned in the lecture. What made the labs even better was that they implemented the flipped classroom setting. Another strength was that the homework assignments were just right in terms of difficulty as well as being fun to do. If they were too hard, the student had many opportunities finding help. The only weakness the class had was not introducing us to Java toolkits or other topics like graphical user interfaces.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-nathancy",
+          "student": "nathancy",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Spring-2016",
+          "rating": 4,
+          "comments": "This course provided a great foundation for Java as the course material was methodically taught in which new topics built upon previous concepts. New material had some type of connection with past material, which made it relatively easy to understand new concepts. With each additional concept learned, there was supportive practice material that enabled mastery of the concepts. In addition, “challenge” questions were assigned as extra credit, which allowed students to really test if they understood the material. Strengths include clear lectures, which made the material easy to understand as examples that utilized a new concept helped strengthen understanding. Weaknesses include not enough one-on-one time with instructors or with teaching assistants, as there were so many students in the class. For future students taking this course, I would recommend to constantly practice as the material can pile on quickly.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-pakchar",
+          "student": "pakchar",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Spring-2016",
+          "rating": 4,
+          "comments": "A strength to ICS 111 is that the class usually meets 4 times a week, so that gives you plenty of face to face time with your professor to ask questions about the material/homework. 4 times a week seems like a lot, but if you have no prior knowledge of coding or don't understand something, this is a blessing in disguise. Also there is no textbook, yay our wallets!\nA weakness of this course is that it can give you a sense of false confidence. ICS 111 is like learning how to swim in knee deep water with a personal lifeguard by your side. So when it time to move on to the higher classes you can feel overwhelmed because of how many things you can do with what you learned in ICS 111.\nMy advice to future students is ICS 111 is make sure you do your homework and you understand your homework. ICS 111 is like learning a foreign language. Just because it is an introductory class, doesn't mean you won't have to put in time outside of the class. To some people it comes to them naturally, to others this class can be one of the most challenging class you have ever taken. But don't give up, because once you see the solution to your problem, you will realize that you had the answer, but you forgot a curly bracket.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-slike",
+          "student": "slike",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Spring-2013",
+          "rating": 3,
+          "comments": "ICS 111 will be most students intro to programming. For the most part this will decide for the student if they will want to continue through the ICS program or not. Students will find this class to be very easy, if they put the work and time into this class. The most important thing that you can do for yourself in this class is to get a good teacher. Because of how easy the class is the only thing that will hold a student back in it is their interest. If you have a boring teacher you will not be motivated to learn and you will fall farther and farther behind in the class.There are many different ways to find the perfect teacher but in my experience the best ways are to use sites like rate my professor or to use publicly view able cafes.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-aaronvil",
+          "student": "aaronvil",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Spring-2016",
+          "rating": 3,
+          "comments": "The weakness I would say for this course is that there are a lot of concepts to go over, a bit that I felt didn't build on or connect with other chapters. So it felt that I was learning a new subject every few chapters which can be confusing to remember everything come exam time. The strength I feel would depend if you get a good TA or not, but the recitations were really helpful in better understanding the concepts and asking question on concepts you didn't understand. For future students I would utilize the recitations to better understand concepts and other students outside of class time for help as well.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-cpjaro",
+          "student": "cpjaro",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Fall-2015",
+          "rating": 2,
+          "comments": "ICS 141 is very important when it comes to the theory of coding. The only problem with the course is that not everyone has the ability to digest a math heavy class. ICS 141 taken in conjunction with ICS 111 allows you to somewhat get the application of the things you learn. However, the problems given on homework and exams do not properly illustrate the application of ICS141 to certain individuals. Like when one has students extensively simplify predicates, there should be a call back to actual code where simplifying predicates would greatly save screen space on a file and increase source code legibility. If students are able to further understand the application of the theory behind 141 and where to apply it, then I feel more people will be able to digest the content easily -- I don't think the actual text helped many students understand the applications of the theory.  Personally, I was unable to stay awake during the long lectures because of the time they took place, 6:00, and I ended up watching screen casts for the course by the professor or from another professor in another college. Because of this, I feel that the flipped-class format is really good because not all students are able to properly pay attention and process the information they are being given during long extended time periods. The only two pieces advice I have for students that take this course is to actually put in the time and read/practice/create problems related to the current topic being covered during the week. In addition, make a study group where every contributes to a portion of the notes and people teach/go over the concepts that were covered in the chapter. The sole purpose of study groups should not only be dedicated to doing homework.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-hailing",
+          "student": "hailing",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Spring-2016",
+          "rating": 3,
+          "comments": "This class is really organized. We have lectures 2 days per week and we have a recitation once a week. The strength of this course is that it helped me to develop logical thinking skills. I think the most important but also the hardest concept learnt in this class is counting. There are a lot of real like applications about this. The recitation is very helpful, because it’s easier to study this kind of material by doing practice problems. On the other hand, lecture is organized, but it’s not that interesting. Maybe it was depending on how it’s taught. I think talk more about more real life applications of what’ve learnt, can keep us more interested in learning the material.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-jameyia-shamia",
+          "student": "jameyia-shamia",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Fall-2015",
+          "rating": 4,
+          "comments": "The course was extremely easy coming from the background of a (at the time) Electrical Engineering Undergraduate. The thing I found most helpful was that the instructor made a custom website where each student created an anonymous username, and the grades of every student were posted alongside their nickname, so you could gauge how you were doing in the class compared to others. This also incentivized you to do better if you felt you were 'under the curve'. In addition, we were walked through the LaTeX typing system through various tutorials and that was an invaluable skill.\n\nThere were really no weaknesses to the course. HW assignments were submitted online which meant students didn't have to fuss around with papers and attend lectures if they felt they didn't need to. You could exceed the class on your own time.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-jrude",
+          "student": "jrude",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Spring-2016",
+          "rating": 3,
+          "comments": "ICS 141 can be a very daunting course to those who have no idea what they are getting into.  The Pros.  ICS 141 taught me a lot of the abstract concepts associated with Computer Sciences.  The material is mostly to train your brain to think more logically.  Because logic is heavily used in ICS.  It helped me understand concepts I learned in 211 and 212 much better.  The Cons.   This class is very difficult, especially to people who are not the most advanced in Math.  I find that some of the material is difficult to understand and grasp but when you finally do figure it out, it makes a lot of sense.  Definitely use any resource you can to help you understand the concepts.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-kellyl4",
+          "student": "kellyl4",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Fall-2015",
+          "rating": 2,
+          "comments": "A strength for this class is that the students would have a class once a week with the TA and go over things we had a hard time understanding and go over practice problems.\n\nA weakness for this course is that it was mostly online based and the notes/sides the professor provides on the website were very hard to understand. Everything is explained in pseudocode and mathematical equations. This is a class of people just starting to learn pseudocode so this made it almost impossible to understand the notes/slides. We did have a website where we could ask questions about homework problems, but it was very difficult to write these mathematical equations and try to understand a very complicating answer online. I strongly advice students to form study groups with students in class because it is very hard to learn this material on your own, especially with a lot of discrete math professors not having good teaching skills.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-kirk6",
+          "student": "kirk6",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Spring-2016",
+          "rating": 2,
+          "comments": "While I enjoyed the course I did have some problems with it. I don't feel that a lot of the material applied to computer science. But I do feel that the section on Big O is something I could easily apply to the software I write in my other classes. Other than that I felt the course was graded fairly and the lectures were very clear. I also like that the lessons were available in different formats. Sometimes what wasn't clear in the lecture I was able to understand by going over the PowerPoint and examples.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-lamanh",
+          "student": "lamanh",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Spring-2016",
+          "rating": 2,
+          "comments": "This course required a B or higher in order to advance. It was my first year as an engineering student and being exposed to proofs and theoretical math was impractical to me. I knew a little programming at the time but couldn't relate the math to computer science. There was only one grade for the class and that was the final, so if you fail the final, you fail the class. The materials were very intimidating and sadly the professor didn't make it motivating to learn either. I took advance courses in math before but even then, I had a difficult time understanding discrete math. What happened was I ended up turning in HW that were considered complete or not complete, try to memorize last minute concepts to attempt quizzes without knowing why I got it wrong and settle to just pass the course without fully understanding what was going on. Now I am currently taking 311 (algorithms )and I am in for major catching up as I only skimmed through the fundamentals without applying it to computer science.\nThe only good thing about this class I thought was that yes, this course checks the block for taking discrete math but fail to prepare the students for future ICS courses.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-linhongb",
+          "student": "linhongb",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Spring-2016",
+          "rating": 4,
+          "comments": "ICS 141 was taught by Professor Baek in Spring 2016 for me. ICS 141 introduce us to the discrete mathematics for computer science. It covers many concepts that is used in the future courses. This is really heavy-text based class. In the class, we only listen to her taking on her slides and boring. However, her class is really easy, guarantee an A if you do all her homework and go over all materials, since problems on the test is really, really, really similar to the one she probably had assigned.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-pakchar",
+          "student": "pakchar",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Spring-2016",
+          "rating": 3,
+          "comments": "A strength of ICS 141, Discrete Math, is that this class will truly challenge you as a freshmen or sophomore. It isn't like your normal math class you were taught in high school. It is more about problem solving and logical reasoning without the numbers. This class will open your mind, and definitely improve your thinking process (This will be very very very important when trying to write programs in your other ICS classes).\nA weakness of ICS 141 is that as a freshman this will most likely by your hardest class. Not because of the workload, but because it will demand you to think. Not trying to say that you don't know how to think, but lets say this isn't one of those classes where you just drink an energy drink the night before an exam and cram. That won't work here. Another weakness is that the textbook is quite expensive and heavy.\nMy advice to future students is to do every homework question assigned. If you don't get it, make use of your professor and TA's office hours. Even if they explain it the same way they did the first, you will be amazed how much of a difference it makes to hear something a second time. A good way to practice before exams is to do the odd problems that are similar to the homework questions you got wrong or topics where you are still shaky on. Lastly, do not sell back your textbook during buyback week. You will need it for ICS 241.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-slike",
+          "student": "slike",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Fall-2013",
+          "rating": 3,
+          "comments": "ICS 141 will be one of the more challenging classes you will take in your career as an ICS student. This will set your bases of understanding for multiple classes that will follow such as ICS 241 and 311. You must put extra time into this class if you wish to succeed in ICS. Which teacher you have is very important as some teachers are better at explaining concepts than others. If you get through this class but do not feel like you have a 100% grasp on the concepts I would recommend retaking the class as you will struggle in the following classes.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics141-zknoebel",
+          "student": "zknoebel",
+          "reviewType": "course",
+          "reviewee": "ics141",
+          "semester": "Spring-2016",
+          "rating": 3,
+          "comments": "This course is a great introduction to the mathematics used in computer science. It goes at an easy pace and most of the information is not hard to understand. However for the parts of the class that are difficult, it might be harder than other classes to learn the material. This is because even though the information is pertinent, it is also very dry. The hardest part of this class will be staying focused long enough to grasp what is being taught.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-aaronvil",
+          "student": "aaronvil",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Spring-2016",
+          "rating": 5,
+          "comments": "The one good point of the course was that it brought the challenge of programming that you do not get in ICS 111. Some of the assignments are a little difficult, but doable, especially if you utilized the TA. Another thing, at least with the professor I took it with is having to write code on paper. It really proved helpful in knowing the syntax of the code without the help of an IDE to tell you what would work and what wouldn't. I would say future students should really get into this practice as soon as possible, because it can help you later in a job interview and also knowing the syntax of a language better. I can't really say there were any weakness to the course.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-ahlim",
+          "student": "ahlim",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Fall-2015",
+          "rating": 3,
+          "comments": "The things we learned in ics211 were extremely important to my success in my future classes such as ics212, ics311, ics313, etc. The data structures and algorithms we learn from this class are foundational to a proper computer science education. However, it was difficult because of the amount of material we have to cover. I would advise future students to not be afraid to ask questions.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-christopher-nguyen",
+          "student": "christopher-nguyen",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Spring-2015",
+          "rating": 4,
+          "comments": "The most important aspect of ICS 211 was data structures. Data structures are a fundamental aspect of Computer Science and are the No. 1 thing tested at technical interviews. A strength of this course is definitely being able to take it right after ICS 111. Near the end of this course when I had a technical interview for an internship, I barely had to study for my interview because ICS 211 gave me a sneak peek of how technical interviews are like and what is tested on them-- Data structures. I ended up getting the internship and if it weren't for my ICS 211 professor preparing me for this, I would have not been where I am today. Being tested on writing code everyday was a great strength of this course because in a real life interview, it is just you and a whiteboard-- No IDE. I can say that one of the weaknesses of this course is that once students realize the basic methods of a data structure like a LinkedList, it becomes easy to just memorize code and forget about it a month later compared to actually understanding it. With that said, my advice for future students is to be diligent when studying for this course because it will shape their ability to perform well on a technical interview. Understanding how a data structure works along with their runtimes and tradeoffs are definitely essential for anyone desiring to be a Software Engineer.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-cpjaro",
+          "student": "cpjaro",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Fall-2016",
+          "rating": 4,
+          "comments": "ICS 211 was taught in the flipped-classroom format where students would do readings and watch the screencasts while in class they would work on problems. This format was possibly the most ideal because I was able to work at my own pace and take notes at my own pace. Simply being able to playback the screen cast at whatever speed was possibly the best thing for my learning experience. All the resources were collectively on youtube and I did not have to look any where else in order to find the screencast that I was looking for. In addition, having a daily quiz about writing out code on the actual implementation on the data structures helped solidify how the data structures worked and kept me on my toes in order to maintain a grade. The course schedule, assignments, readings, and screencasts all found on the morea review/course website was incredibly useful in planning how much time I need to invest in order to properly learn topics rather than copy pasting from my brain the code that was from the book/video. The only issue is homework assignments were rather lack luster from time to time because certain homework assignments were simply just implementing the data structure and that was it--or some rather trivial application that did not take much thought. I feel that the screencasts, quizzes, and exercises that were done in and outside of classes were more than enough to understand how to implement a data structure. Therefore, I wanted more assignments that involved using the data structure to solve a given problem, preferably real-world rather than theoretical. Students taking this course should have no problem passing it as long as they take the time to read and understand the concepts that are shown on the website. If students struggle with certain topics, it's best to make a study group and, essentially, teach each other the concepts so that everyone understand the topic to the point where the student is \"fluent\" in said topic.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-creindle",
+          "student": "creindle",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Spring-2015",
+          "rating": 3,
+          "comments": "This class was the introductory class to very important and difficult material. Due to the material being so difficult, the professor was extremely lenient when it came to grading our work. But, some of the homework assignments were extremely difficult to solve. This may be because the professor wanted us to collaborate with one another. But, my advice to students would be to help one another often and start on the homework early.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-dtan808",
+          "student": "dtan808",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Spring-2016",
+          "rating": 5,
+          "comments": "If I could describe ICS 211 in one phrase, it would be \"very challenging, but very rewarding.\"  The topics I learned in this class were complimented nicely with the assignments given in lab by the TA.  These assignments were very challenging and really put me to the test.  Many stressful hours spent on projects led to feelings of accomplishment once I figured something out.  Lectures were easily understood and labs were very essential for putting what we learned into practice.  For future students of this class: no one is going to force you to show up to class or complete the assignments.  However, learning to manage time with different assignments will greatly prepare you for future ICS classes.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-hailing",
+          "student": "hailing",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Spring-2016",
+          "rating": 4,
+          "comments": "For me, this is the actual introductory course, even though I’d taken ICS 111 before it. I’ve learnt so much more in this class comparing to ICS 111. One of my favorite thing about taking this class is that it’s structured in a small classroom. It’s hard for me to learn in a big lecture room, because it’s really hard to follow along. Studying in a small classroom help me to pay more attention, since it’s easier to ask questions, and I also feel like the professor is paying attention to me, so it keep me alerted. Second thing I like about this class is that we come to class only to take a quiz and to ask questions, and we were required to do take the lecture at home. I personally prefer self-studying, since I can follow my own pace, and I also like practicing while studying. I think I’m absorbing a lot more information in this way, since when practicing, I’m constantly getting more and more questions, by answering question of my own, I’m strengthening my memory. I think this is a good course in general, but one weakness is that I think this class didn’t go into detail about how program works, or how computer process the program. I would like more reasoning or analyzing instead of memorizing.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-jrude",
+          "student": "jrude",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Spring-2016",
+          "rating": 5,
+          "comments": "ICS 211 was a very engaging and rigorous course.  The pros.  First off this course teaches you a lot.  You get into the nitty gritty of Java and learn how to become an efficient coder.  It makes learning other coding languages easier and installs good coding habits.  The cons.  This class is very time consuming.  You will spend upwards of 20 hours a week on projects.  But all this extra time coding makes you a very good programmer.  Overall I enjoyed this class a lot and would take it again.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-kellyl4",
+          "student": "kellyl4",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Fall-2016",
+          "rating": 3,
+          "comments": "A strength for this course is the flipped classroom teaching method. The podcasts were very straight forward, short, and easy to understand. At the beginning of each class, the professor would ask the class if we had any questions on the material we learned at home and would briefly go over it making sure we fully understood. It was also nice being able to work on problems in class so the professor is right there when we need help.\n\nA weakness is I think ICS 211 courses should take a little more time on the more complicated sort methods and data structures. I kind of felt we took a long time on easy methods like bubble sorts and insertion sort, but once we hit merge sort, recursion, queues, etc. the lessons went by so quick I wasn't able to feel like I fully perfected these before moving onto the next topic. I advice students to make sure to keep up with the material and never start on your projects on the day of. Also, I advice them to stay in class during the practice problems to get the extra help.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-kirk6",
+          "student": "kirk6",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Fall-2016",
+          "rating": 3,
+          "comments": "A strength of this course is that I felt I learned a lot over the course of the semester. The lessons was very clear and the pacing over the course wasn't too demanding. A weakness was that the difficulty of the assignments varied greatly in some cases. One assignment would only take a few hours to cover a simple concept and other assignments could take a week because they were more complex. A possible solution could be to break up the more complex assignments or give less time on the easier ones to free up more time.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-linhongb",
+          "student": "linhongb",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Fall-2016",
+          "rating": 5,
+          "comments": "ICS 211 was taught by Professor Carleton Moore in Fall 2016 for me. The main focus for this course is to understand and use Abstract Data Structures in programs such as Array list, Linked list, Stack, Queue, etc. We need to implement our own codes for ADT. He is really fun guy to be with. The funniest he ever said is after we learn all these things, he said that, \" Do not implement your own code and just use the one provided by the language you use if there is one\". I do recommend taking his class for the future students. The only thing is that he made this class way more easy, guarantee an A for his class if you did do some work.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-pakchar",
+          "student": "pakchar",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Fall-2016",
+          "rating": 3,
+          "comments": "A strength to ICS 211 is that it is a lot easier than you think. Learning about all the different types of Abstract Data Types(ADTs) and methods seem pointless, but you will be surprised how easy they make your life.\nA weakness to ICS 211 is that you are constantly learning a new ADT 1-2 weeks. It may seem like a lot of time, but it really isn't. Trying to do the homework without knowing how the ADT works is borderline impossible.\nMy advice to future students is that you should try to start on the homework 3-5 days before its due. You don't actually have to work on, but just try to start it. This is so when you are doing other things and have free time, just think/brainstorm your program. A lot of times, if you can draw out your code then like write a general summary of the process of what has to happen. It makes writing the actual code a lot easier.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-zknoebel",
+          "student": "zknoebel",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Fall-2016",
+          "rating": 4,
+          "comments": "If you like data structures or just learning in general, this class can be really fun. For me, it was one of those classes that I was actually excited to go home and do homework for. Learning data structures in this class means that you will learn how Java implements its own data structures, be able to write them yourself and because of that know how to use them in the real world. One downside with all of the focus being on the data structures themselves is that you really only learn a small amount about programming in Java during the semester, but over all, it is a great class.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics241-erikhuan",
+          "student": "erikhuan",
+          "reviewType": "course",
+          "reviewee": "ics241",
+          "semester": "Spring-2013",
+          "rating": 2,
+          "comments": "In ICS 241 Discrete Mathematics you build upon the learning you did in ICS 141. This class teaches more math theory to strengthen your understanding of computer science. There is no actual coding involved and mainly has paper-pencil-tests to see if you understood the concepts learned in class. It is not a very fun class to take in particular, but it is required so you can start having access to the 300 level courses. My advice would be to be focused on studying the course material and do NOT slack off.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics241-joshuajw",
+          "student": "joshuajw",
+          "reviewType": "course",
+          "reviewee": "ics241",
+          "semester": "Spring-2013",
+          "rating": 3,
+          "comments": "Discrete math can be a rather hard subject. One strength I found with this class were the recitations. During recitations, the TA would clearly explain and answer any questions the students had. We would take the hardest questions and go through each of them step by step with the TA making sure the students understood why and how each step was done. The ability of the professor to teach this class and the willingness of the student to learn the material, is what gives it it's weakness. Since Discrete Math can be a rather difficult subject, the student can feel overwhelmed by the content. The teaching style of the professor can mean the difference of a student excelling or struggling to fully understand the material. At the same time the student also has to put a lot of effort into studying and preparing.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics241-lamanh",
+          "student": "lamanh",
+          "reviewType": "course",
+          "reviewee": "ics241",
+          "semester": "Fall-2016",
+          "rating": 4,
+          "comments": "This course had a solid schedule and the professor tried her best to explain the materials to us. I was prepared and knew the materials enough to passed all my exams. This taught us the basics of discrete math II and I enjoyed the class because recitation helped a lot. After other classes of programming and relate able problems, I was able to see the connection. New materials were difficult but manageable. I think students would perform better if there were aptitude quizzes after each lecture to have the student recall concepts and check understandings. The TA broke things down in laymen terms  and for that, I was able to grasp the theories.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics241-rao642",
+          "student": "rao642",
+          "reviewType": "course",
+          "reviewee": "ics241",
+          "semester": "Fall-2015",
+          "rating": 3,
+          "comments": "This is a very traditional class with straightforward assignments, which I believe many student will find the structure familiar. I learned a lot in the course as the content was taught on the board with a slideshow accompaniment. It allowed the students to really use their heads on in class exercises. Baek was my professor that semester I took it, and she is very efficient in teaching and obviously passionate, though, she can be quiet at times. Overall she is a great professor who will answer your questions very well. Test and final are fair, and tend to be as difficult as the homework given. The true test is being able to apply all of the skills learned without any reference material. And be warned, the tests do cover a lot of material. The TA of the class does sample problems from homework in recitation periods, which is also very helpful so be sure to attend those whenever possible. Assuming you have taken 141 here at UHM, you should come to realize that the content covered in this class is slightly easier.  So long as you do the homework, attend lecture and TA sessions, you should be able to pass with a B.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics241-zknoebel",
+          "student": "zknoebel",
+          "reviewType": "course",
+          "reviewee": "ics241",
+          "semester": "Fall-2016",
+          "rating": 3,
+          "comments": "This is the second discrete math class. It is a lot like ICS 141, but it is a bit harder. A lot of the material is more abstract and the answers that are expected on homeworks and exams have a more strict format than those expected in ICS 141. Again the material can be pretty dry, so a good suggestion would be to try to sit at the front of the class. That way you are not tempted to play on your phone or laptop and will be less likely to be distracted by the people around you.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-brianmay",
+          "student": "brianmay",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Spring-2016",
+          "rating": 4,
+          "comments": "So far, algorithms was the most difficult and time consuming class I took at UH Manoa. However, I think ICS 311 is one of the most important courses in the Computer Science program. Despite being time consuming and difficult, the topics discussed in ICS 311 were highly applicable to CS and crucial for anyone wanting to excel in the tech industry. For any students that take this course in the future, I highly encourage them to NOT take this course when they have a huge workload. If you think you can challenge yourself to pull it off, I'm going to tell you now that it is not worth it. When I took this course, I needed to study almost every single day in order to do well. Also, take advantage of office hours the moment you need help. You will not survive ICS 311 if you go through the semester without help from the instructor or TA.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-creindle",
+          "student": "creindle",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Fall-2015",
+          "rating": 3,
+          "comments": "At the time I took this course, it was rumored that, on average, students took two tries to pass this course. Another rumor was that one student even took six attempts at the class before he was able to pass. These rumors terrified me. Had I not been scared, I would've enjoyed a very fun class that covered some of the most important material in my life. My advice to future students would to not be afraid of the material and to talk to your professor because the material will come up again further down the line of your CS career and the professors truly want you to pass the class.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-dtan808",
+          "student": "dtan808",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Spring-2016",
+          "rating": 2,
+          "comments": "ICS 311 is by far the toughest ICS class I have taken so far.  The material and topics covered are challenging to learn, but what made the class difficult was the teaching style.  The lectures were given by video, which we would watch outside of class.  These lectures were clear and very useful.  However, I did not find the activities and problems done in class very helpful.  Quizzes given every class were difficult and since it was graded by fellow classmates, the grading was very inconsistent.  We also created our own quizzes, called flip-flop quizzes, which we made for other classmates to take.  These quizzes were a waste of time and most students just created them to fulfill the assignment, rather than create quality challenging questions.  One positive thing about the class was the help of the TA.  I would go to office hours every week to get extra help on the homework or class problems, which was extremely helpful.  For future students, be ready to learn most of the material on your own.  I probably learned more on my own than I did in class.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-joshuajw",
+          "student": "joshuajw",
+          "reviewType": "course",
+          "reviewee": "ics331",
+          "semester": "Fall-2016",
+          "rating": 4,
+          "comments": "The use of Logisim, the program we used to build digital circuits, played a very important role in the learning and understanding of creating and making different circuits. Logisim gave me a visual interactive experience that I thoroughly enjoyed by turning an ordinary assignment into a fun challenge for me to overcome. A weakness this class has is the transition from circuits to assembly code. During my class, I felt this transition into assembly code could have been a bit smoother. I had a relatively hard time understanding assembly.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-kurtkn",
+          "student": "kurtkn",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Fall-2016",
+          "rating": 4,
+          "comments": "Many have called this class the \"flagship class\" of the ICS program and after taking it I can see why. The class was quite challenging and required a lot of time (which is why it is worth 4 credits). The course material was good and it definitely has impacted the way in which I approach problems. My biggest problem with the class was the online quizzes. The instructor had students create quizzes on his website, but I found that this was not a helpful tool for learning. Many students did not complete their quizzes and there was not a clear outline for how these quizzes would be scored. The syllabus stated that the online quizzes would be worth 11% of our total grade, but throughout the semester points for the online quizzes were never posted nor did we get any feedback on them from the instructor. This caused a lot of stress toward the end of the semester since we did not know how well we were doing. My advice to future students is to watch the video lectures from MIT and to read the lecture notes.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-markrc",
+          "student": "markrc",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Fall-2015",
+          "rating": 4,
+          "comments": "The ICS 311 Algorithms course is now tailored to all types of student learning thanks to Professor Suthers. Because the course uses a flipped classroom style of learning, you gain access to all the lectures on YouTube, allowing the instructor to focus class time on solving problems and answering questions. The course itself gives you a thorough understanding of many famous algorithms, runtime correctness, and other topics like parallel programming. I enjoyed learning under Professor Sitchinava as the course was challenging and interesting. I really like the fact that I could watch the videos, read the lecture notes, and be able to fully understand what I was reading when I went to textbook for deeper understanding. The weaknesses of the class was its lack of coding or any sort of work where you develop your own algorithm to apply what you learned.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-rao642",
+          "student": "rao642",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Fall-2015",
+          "rating": 4,
+          "comments": "This is the hardest 300 level class in the program. But this is a good thing. This class builds off of the discrete math foundation formed in 141 and 241 to delve into algorithmic theory. So be sure you know that you understand time complexity and how to express programs in pseudocode. One of the things to note of this class is its inverted structure. You use the given resources and the CLSR Algorithms text book to learn yourself the chapter outside of class. In class, you will then take a quiz to test your knowledge and then split into groups to solve problems pertaining to what you have learned. This can be a good or a bad thing for a student. On one hand, class time is devoted to practice and you have the professor (in my case Nodari) to track how you are doing in person. On the other, those who do not have a lot of out-of-class time will not be able to grasp the material as well as those who do. It really depends on your situation. \nHomework in this class is very difficult. You have a week to complete a set of 3 to 5 problems. Do not be fooled by the amount of problems, because each homework assignment takes at least 5-6 hours to complete. Tests in this class are fair, but cover a lot of material at a time so study hard This is a class where you must have time to commit yourself with the material in order to succeed.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-slike",
+          "student": "slike",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Fall-2016",
+          "rating": 4,
+          "comments": "The course itself is not as difficult as some of your peers may have you believe. This is however one of if not the important class that you will take in your ICS career. Overall the course was designed in a way in which you used your peers to learn and excel in the course. Most of the work done was in groups, with the teachers chiming in if the students required assistance with any part of the class work. If you are able to learn well in a group environment then this class will work well for you. One thing that you do not want to do in this class is procrastinate on the readings. The reading itself is not that difficult but the concepts do take a while to master and if you do not spend time everyday working on the material it will catch up and overwhelm you.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics313-kurtkn",
+          "student": "kurtkn",
+          "reviewType": "course",
+          "reviewee": "ics313",
+          "semester": "Spring-2015",
+          "rating": 1,
+          "comments": "I did not enjoy this class very much. I found the lectures to be very boring and uninspiring. The assignments were straight out of the book and the tests were very difficult. The instructor made up for this by grading easy. I would not recommend taking this class unless it has been changed significantly since I took it.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-ahlim",
+          "student": "ahlim",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Spring-2016",
+          "rating": 3,
+          "comments": "Ics321 allows students to get a good grasp of what the back-end of a website looks like. Unfortunately, the class is so flexible on deadlines, that many of the students would wait till the end of the semester to finish the assignments. I would inform future students to stay up-to-date and complete the assignments on time.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-brianmay",
+          "student": "brianmay",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Spring-2016",
+          "rating": 3,
+          "comments": "The Databases course at UH Manoa felt highly dependent on the student's effort to learn. Although it was easy to get a good grade (depending on the instructor), I felt like I needed to motivate myself in order to grasp a good understanding of databases, MySQL, JavaScript, etc. I thought the final project was the best aspect of this course because it is something that can be used for your online portfolio if it is well done. For any future students that take this course, I highly encourage them to attend office hours and ask questions because it's easy to get lost on some of the material.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-christopher-nguyen",
+          "student": "christopher-nguyen",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Fall-2015",
+          "rating": 3,
+          "comments": "ICS 321 focuses on databases. The final project in this course was a great strength in this course because it allows students to use what they have learned from other classes and outside resources to create an amazing application that uses a SQL database. Being able to create a database-backed application is very important because it allows students to get a sense of what \"real\" programming and software development is like which makes this final project extremely relevant to the real world. One weakness I found in the course is that the majority of the course focuses on things like Normal Forms and Triggers and other theories of DBMS. Theory is extremely important when it comes to research and I feel like understanding them would greatly benefit me as a Computer Scientist; however, I had a difficult time understanding how to use what I learned from them in a real life situation. Therefore, I felt that I would have benefitted more from this course if we worked more on manipulating a database as opposed to only having only one assignment on SQL. My advice for future students is that they should take this class and see it through the very end because the final project is really useful and a great way to build their professional portfolio. Learning how to integrate databases with an application is important for any software engineer or software developer to know.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-creindle",
+          "student": "creindle",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Fall-2016",
+          "rating": 4,
+          "comments": "The strengths of this class were the material covered and the professor teaching it. The material was super cool and important as it focused on real life examples on the importance of using databases. The abstract concepts were translated into tangible material. Also, the tests reflected this and covered the homework assignments rather than theories. For some, a weakness of the class was the professor as he was not very strict on due dates. The reason for this, as he put it this way, was \"Ultimately, I want my students to learn, not be put off by due dates.\"",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-erikhuan",
+          "student": "erikhuan",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Fall-2014",
+          "rating": 3,
+          "comments": "The ICS 321 Database course teaches students what databases are and how to develop them. It is an important concept to learn if you are planning to host and store user or personal data for a website or app as you can have a better understanding as to how your information is store away. If I had to give a weakness to this class it would be that during the final project where we create our own simple database, I often see other students be proficient in not only making a functioning database, but they also had the knowledge to create a proper website front for their project. For this class specifically we are not taught how to create a website so for people who do not have any knowledge, looking at other people's projects could make yours feel a bit inadequate sometimes. But don't worry, as long as the database itself is working properly you still get the A. My advice would be to just start your assignments early and maybe look up how to make a website to have a nicer final project.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-markrc",
+          "student": "markrc",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Spring-2015",
+          "rating": 4,
+          "comments": "The Database course gives a student a very comprehensive walk-through of SQL. The only weakness of the class was that the final project assumed we knew HTML and XML, making it very difficult for those that were unfamiliar with those languages. The strengths of this class are that it's challenging, easy to get help, and very relevant. My advice for students taking the course would be to brush up on your Java (as some of the assignments require you to do some coding) and to get a head start on SQL by doing free tutorials online.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-rao642",
+          "student": "rao642",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Spring-2016",
+          "rating": 3,
+          "comments": "One of the strengths of this course is its focus on practical, business usage of the content covered. All of the projects in the class were designed to mimic real life implementations and the final project was a theme of choice web app. However most of the assignments that required programming, required knowledge of html and php, which was only covered slightly in class. This may be a turn off and a difficulty for most students who do not have this kind of experience. As one of those students, however, I did end up getting an A. Halverson, a the professor of the class at the time I took it, is very straight forward and records lectures for convenience, which I really appreciated. However, he did piggyback off of the resources of the previous professor who taught the class.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-shaziney",
+          "student": "shaziney",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Spring-2016",
+          "rating": 5,
+          "comments": "The main thing one can learn from this course is Server Query Language or SQL. This is a great language to learn since it is the most common programming language used to manipulate or manage a database.  Knowing SQL can be a useful skill since it is sought after by employers in positions and fields that are not strictly ICS related.  For example, any business that uses a database to function requires it, including retailers, hospitals, banks, et cetera. With that said, I highly recommend taking this course to learn this invaluable language.\n\nDr. Halverson is the professor who has been teaching this course these past spring semesters, and the previous summer semester, and I personally took this course from him.  One nice thing about taking this course from him is that he records his in-class lectures.  Bear in mind that the purpose of this is not to encourage students to get lazy and not attend his class.  I would not recommend this since there are times when his recordings do not cover solutions that he explains exclusively to those who attend his class.  Instead, the advantage of having these recordings available will allow one to rewatch the lecture in case he or she gets stuck and has a \"How do I do this again?\" moment.  Dr. Halverson is also quite responsive and flexible, so if you decide to take this course, I would recommend taking it from him.",
+          "moderated": false,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics331-erikhuan",
+          "student": "erikhuan",
+          "reviewType": "course",
+          "reviewee": "ics331",
+          "semester": "Fall-2015",
+          "rating": 4,
+          "comments": "The ICS 331 Machine programming course teaches students how to read and use binary and hex-based coding. The assignments are very interesting because you get to mess around with a program that allows you to make and manipulate a virtual circuit. The downside is unless you plan on working with low level language code, the material you learn in this class may be irrelevant to what you will do in the future. That being said, I did enjoy the class and the assignments, and I advise that you should take the time to learn about binary and hex coding anyway.",
+          "moderated": false,
+          "visible": true
         }
       ]
     },

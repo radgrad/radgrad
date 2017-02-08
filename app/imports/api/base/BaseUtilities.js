@@ -15,6 +15,7 @@ import { MentorProfiles } from '/imports/api/mentor/MentorProfileCollection';
 import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
+import { Reviews } from '/imports/api/review/ReviewCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
@@ -47,6 +48,7 @@ export function removeAllEntities() {
   Opportunities.removeAll();
   OpportunityInstances.removeAll();
   OpportunityTypes.removeAll();
+  Reviews.removeAll();
   Semesters.removeAll();
   Slugs.removeAll();
   StarDataLogs.removeAll();
