@@ -1,15 +1,11 @@
 {
-  "timestamp": "2017-01-23T01:18:25.046Z",
+  "timestamp": "2017-01-27T22:44:53.130Z",
   "collections": [
     {
       "name": "AcademicYearInstanceCollection",
       "contents": [
         {
           "student": "abi",
-          "year": 2014
-        },
-        {
-          "student": "abi",
           "year": 2015
         },
         {
@@ -21,27 +17,15 @@
           "year": 2017
         },
         {
-          "student": "alfred",
-          "year": 2013
-        },
-        {
-          "student": "alfred",
-          "year": 2014
-        },
-        {
-          "student": "alfred",
-          "year": 2015
+          "student": "abi",
+          "year": 2018
         },
         {
           "student": "alfred",
           "year": 2016
         },
         {
-          "student": "betty",
-          "year": 2014
-        },
-        {
-          "student": "betty",
+          "student": "alfred",
           "year": 2015
         },
         {
@@ -50,7 +34,27 @@
         },
         {
           "student": "betty",
-          "year": 2017
+          "year": 2015
+        },
+        {
+          "student": "betty",
+          "year": 2014
+        },
+        {
+          "student": "betty",
+          "year": 2012
+        },
+        {
+          "student": "betty",
+          "year": 2011
+        },
+        {
+          "student": "betty",
+          "year": 2010
+        },
+        {
+          "student": "betty",
+          "year": 2009
         },
         {
           "student": "charley",
@@ -67,7 +71,7 @@
         {
           "student": "charley",
           "year": 2019
-        }
+        },
       ]
     },
     {
@@ -1121,7 +1125,7 @@
       "name": "CourseInstanceCollection",
       "contents": [
         {
-          "semester": "Fall-2014",
+          "semester": "Fall-2015",
           "course": "ics111",
           "note": "ICS 111",
           "verified": true,
@@ -1130,7 +1134,7 @@
           "student": "abi"
         },
         {
-          "semester": "Fall-2014",
+          "semester": "Fall-2015",
           "course": "ics141",
           "note": "ICS 141",
           "verified": true,
@@ -1139,7 +1143,34 @@
           "student": "abi"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Fall-2015",
+          "course": "other",
+          "note": "MATH 241",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "B+",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "other",
+          "note": "ENG 100",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "other",
+          "note": "SOC 100",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B-",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2016",
           "course": "ics211",
           "note": "ICS 211",
           "verified": true,
@@ -1148,7 +1179,7 @@
           "student": "abi"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Spring-2016",
           "course": "ics241",
           "note": "ICS 241",
           "verified": true,
@@ -1157,281 +1188,398 @@
           "student": "abi"
         },
         {
-          "semester": "Fall-2015",
-          "course": "ics311",
-          "note": "ICS 311",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2015",
-          "course": "ics314",
-          "note": "ICS 314",
+          "semester": "Spring-2016",
+          "course": "other",
+          "note": "MATH 242",
           "verified": true,
           "creditHrs": 4,
-          "grade": "B",
+          "grade": "B+",
           "student": "abi"
         },
         {
           "semester": "Spring-2016",
-          "course": "ics212",
-          "note": "ICS 212",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2016",
-          "course": "ics321",
-          "note": "ICS 321",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics313",
-          "note": "ICS 313",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics331",
-          "note": "ICS 331",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2017",
-          "course": "ics332",
-          "note": "ICS 332",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2017",
-          "course": "ics464",
-          "note": "ICS 464",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2017",
-          "course": "ics414",
-          "note": "ICS 414",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2017",
-          "course": "ics415",
-          "note": "ICS 415",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2018",
-          "course": "ics466",
-          "note": "ICS 466",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2018",
-          "course": "ics432",
-          "note": "ICS 432",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "B",
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2013",
-          "course": "ics111",
-          "note": "ICS 111",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "A",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2013",
-          "course": "ics141",
-          "note": "ICS 141",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2014",
-          "course": "ics211",
-          "note": "ICS 211",
-          "verified": true,
-          "creditHrs": 4,
-          "grade": "A",
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2014",
-          "course": "ics241",
-          "note": "ICS 241",
+          "course": "other",
+          "note": "HIST 151",
           "verified": true,
           "creditHrs": 3,
           "grade": "A-",
-          "student": "alfred"
+          "student": "abi"
         },
         {
-          "semester": "Fall-2014",
+          "semester": "Fall-2016",
           "course": "ics311",
           "note": "ICS 311",
           "verified": true,
           "creditHrs": 3,
-          "grade": "A",
-          "student": "alfred"
+          "grade": "B",
+          "student": "abi"
         },
         {
-          "semester": "Fall-2014",
+          "semester": "Fall-2016",
           "course": "ics314",
           "note": "ICS 314",
           "verified": true,
           "creditHrs": 4,
           "grade": "B",
-          "student": "alfred"
+          "student": "abi"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Spring-2017",
           "course": "ics212",
           "note": "ICS 212",
-          "verified": true,
+          "verified": false,
           "creditHrs": 3,
-          "grade": "A",
-          "student": "alfred"
+          "grade": "B",
+          "student": "abi"
         },
         {
-          "semester": "Spring-2015",
+          "semester": "Spring-2017",
           "course": "ics321",
           "note": "ICS 321",
-          "verified": true,
+          "verified": false,
           "creditHrs": 3,
-          "grade": "A",
-          "student": "alfred"
+          "grade": "B",
+          "student": "abi"
         },
         {
-          "semester": "Fall-2015",
-          "course": "ics313",
-          "note": "ICS 313",
-          "verified": true,
+          "semester": "Fall-2017",
+          "course": "ics361",
+          "note": "ICS 361",
+          "verified": false,
           "creditHrs": 3,
-          "grade": "A",
-          "student": "alfred"
+          "grade": "B",
+          "student": "abi"
         },
         {
-          "semester": "Fall-2015",
-          "course": "ics331",
-          "note": "ICS 331",
-          "verified": true,
+          "semester": "Fall-2017",
+          "course": "ics312",
+          "note": "ICS 312",
+          "verified": false,
           "creditHrs": 3,
           "grade": "A",
-          "student": "alfred"
+          "student": "abi"
         },
         {
-          "semester": "Spring-2016",
+          "semester": "Spring-2018",
           "course": "ics332",
           "note": "ICS 332",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
-          "student": "alfred"
+          "grade": "B",
+          "student": "abi"
         },
         {
-          "semester": "Spring-2016",
-          "course": "ics464",
-          "note": "ICS 464",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2016",
+          "semester": "Spring-2018",
           "course": "ics414",
           "note": "ICS 414",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
-          "student": "alfred"
+          "grade": "B",
+          "student": "abi"
         },
         {
-          "semester": "Fall-2016",
+          "semester": "Fall-2018",
+          "course": "ics461",
+          "note": "ICS 461",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2019",
           "course": "ics415",
           "note": "ICS 415",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2019",
+          "course": "ics499",
+          "note": "ICS 499",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "other",
+          "note": "JPN 201",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "***",
           "student": "alfred"
         },
         {
-          "semester": "Spring-2017",
-          "course": "ics466",
-          "note": "ICS 466",
-          "verified": false,
+          "semester": "Fall-2016",
+          "course": "other",
+          "note": "GG 101",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "***",
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "***",
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "other",
+          "note": "GG 101L",
+          "verified": true,
+          "creditHrs": 1,
+          "grade": "***",
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics212",
+          "note": "ICS 212",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "***",
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "other",
+          "note": "PSY 100",
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
         },
         {
-          "semester": "Spring-2017",
-          "course": "ics432",
-          "note": "ICS 432",
-          "verified": false,
+          "semester": "Spring-2016",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
           "creditHrs": 3,
+          "grade": "A",
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "other",
+          "note": "JPN 102",
+          "verified": true,
+          "creditHrs": 4,
           "grade": "B",
           "student": "alfred"
         },
         {
-          "semester": "Fall-2014",
+          "semester": "Spring-2016",
+          "course": "other",
+          "note": "HAW 100",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A+",
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "B+",
+          "student": "alfred"
+        },
+        {
+          "semester": "Summer-2018",
+          "course": "ics355",
+          "note": "ICS 355 Security & Trust I",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "other",
+          "note": "ART 175",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "C+",
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "D-",
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "other",
+          "note": "MUS 106",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "CR",
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "other",
+          "note": "JPN 101",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "CR",
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2015",
           "course": "ics111",
           "note": "ICS 111",
           "verified": true,
-          "creditHrs": 4,
-          "grade": "A",
+          "creditHrs": 3,
+          "grade": "CR",
+          "student": "alfred"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics491",
+          "note": "ICS 491",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
           "student": "betty"
         },
         {
-          "semester": "Fall-2014",
-          "course": "ics141",
-          "note": "ICS 141",
+          "semester": "Fall-2016",
+          "course": "other",
+          "note": "CHEM 162",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics499",
+          "note": "ICS 499",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "B",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "other",
+          "note": "CHEM 162L",
+          "verified": true,
+          "creditHrs": 1,
+          "grade": "B",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "other",
+          "note": "CHEM 161",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "other",
+          "note": "CHEM 161L",
+          "verified": true,
+          "creditHrs": 1,
+          "grade": "B",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics332",
+          "note": "ICS 332",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics425",
+          "note": "ICS 425",
           "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty"
         },
         {
-          "semester": "Spring-2015",
-          "course": "ics211",
-          "note": "ICS 211",
+          "semester": "Spring-2016",
+          "course": "other",
+          "note": "MATH 242",
           "verified": true,
           "creditHrs": 4,
+          "grade": "C",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "other",
+          "note": "CHEM 131",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "other",
+          "note": "MATH 241",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "B+",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics361",
+          "note": "ICS 361",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "B+",
+          "student": "betty"
+        },
+        {
+          "semester": "Summer-2015",
+          "course": "other",
+          "note": "MATH 140",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "CR",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics212",
+          "note": "ICS 212",
+          "verified": true,
+          "creditHrs": 3,
           "grade": "A",
           "student": "betty"
         },
@@ -1445,109 +1593,217 @@
           "student": "betty"
         },
         {
-          "semester": "Fall-2015",
-          "course": "ics311",
-          "note": "ICS 311",
+          "semester": "Fall-2014",
+          "course": "ics141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2012",
+          "course": "other",
+          "note": "LTEC 448",
           "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty"
         },
         {
-          "semester": "Fall-2015",
-          "course": "ics314",
-          "note": "ICS 314",
+          "semester": "Fall-2012",
+          "course": "other",
+          "note": "PACS 108",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2012",
+          "course": "other",
+          "note": "JPN 211",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2012",
+          "course": "other",
+          "note": "ACC 201",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "CR",
+          "student": "betty"
+        },
+        {
+          "semester": "Summer-2012",
+          "course": "other",
+          "note": "ES 370",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Summer-2012",
+          "course": "other",
+          "note": "FR 259",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2012",
+          "course": "other",
+          "note": "ART 123",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2012",
+          "course": "other",
+          "note": "ENG 414",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2012",
+          "course": "other",
+          "note": "FR 102",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2012",
+          "course": "other",
+          "note": "ENG 352",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2012",
+          "course": "other",
+          "note": "POLS 110",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2011",
+          "course": "other",
+          "note": "ENG 313",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2011",
+          "course": "other",
+          "note": "ENG 413",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2011",
+          "course": "other",
+          "note": "FR 101",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2011",
+          "course": "ics211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Fall-2011",
+          "course": "other",
+          "note": "HIST 151",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "CR",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2011",
+          "course": "other",
+          "note": "BOT 101",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2011",
+          "course": "other",
+          "note": "BOT 101L",
+          "verified": true,
+          "creditHrs": 1,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2011",
+          "course": "other",
+          "note": "ENG 320",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2011",
+          "course": "other",
+          "note": "ENG 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B+",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2011",
+          "course": "other",
+          "note": "PSY 100",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "C",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2011",
+          "course": "ics111",
+          "note": "ICS 111",
           "verified": true,
           "creditHrs": 4,
           "grade": "A",
           "student": "betty"
         },
         {
-          "semester": "Spring-2016",
-          "course": "ics212",
-          "note": "ICS 212",
+          "semester": "Summer-2010",
+          "course": "other",
+          "note": "JOUR 150",
           "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2016",
-          "course": "ics321",
-          "note": "ICS 321",
-          "verified": true,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics313",
-          "note": "ICS 313",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2016",
-          "course": "ics331",
-          "note": "ICS 331",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2017",
-          "course": "ics332",
-          "note": "ICS 332",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2017",
-          "course": "ics422",
-          "note": "ICS 422",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2017",
-          "course": "ics414",
-          "note": "ICS 414",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2017",
-          "course": "ics471",
-          "note": "ICS 471",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2018",
-          "course": "ics475",
-          "note": "ICS 475",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2018",
-          "course": "ics484",
-          "note": "ICS 484",
-          "verified": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty"
@@ -1556,27 +1812,27 @@
           "semester": "Fall-2016",
           "course": "ics111",
           "note": "ICS 111",
-          "verified": false,
+          "verified": true,
           "creditHrs": 4,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
           "semester": "Fall-2016",
           "course": "ics141",
           "note": "ICS 141",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
-          "semester": "Spring-2017",
+          "semester": "Fall-2016",
           "course": "ics211",
           "note": "ICS 211",
           "verified": false,
           "creditHrs": 4,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
@@ -1585,7 +1841,7 @@
           "note": "ICS 241",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
@@ -1594,7 +1850,7 @@
           "note": "ICS 311",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
@@ -1603,7 +1859,7 @@
           "note": "ICS 314",
           "verified": false,
           "creditHrs": 4,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
@@ -1612,7 +1868,7 @@
           "note": "ICS 212",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
@@ -1621,25 +1877,25 @@
           "note": "ICS 321",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
           "semester": "Fall-2018",
-          "course": "ics313",
-          "note": "ICS 313",
+          "course": "ics361",
+          "note": "ICS 361",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
           "semester": "Fall-2018",
-          "course": "ics331",
-          "note": "ICS 331",
+          "course": "ics312",
+          "note": "ICS 312",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
@@ -1648,53 +1904,80 @@
           "note": "ICS 332",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
           "semester": "Spring-2019",
-          "course": "ics422",
-          "note": "ICS 422",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2019",
           "course": "ics414",
           "note": "ICS 414",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
           "semester": "Fall-2019",
-          "course": "ics471",
-          "note": "ICS 471",
+          "course": "ics499",
+          "note": "ICS 499",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics461",
+          "note": "ICS 461",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
           "student": "charley"
         },
         {
           "semester": "Spring-2020",
-          "course": "ics475",
-          "note": "ICS 475",
+          "course": "ics415",
+          "note": "ICS 415",
           "verified": false,
           "creditHrs": 3,
-          "grade": "A",
+          "grade": "B",
           "student": "charley"
         },
         {
           "semester": "Spring-2020",
-          "course": "ics484",
-          "note": "ICS 484",
+          "course": "ics499",
+          "note": "ICS 499",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics321",
+          "note": "ICS 321 Databases I",
           "verified": false,
           "creditHrs": 3,
           "grade": "A",
-          "student": "charley"
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics314",
+          "note": "ICS 314 Software Eng I",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics331",
+          "note": "ICS 331 Microprocessors",
+          "verified": false,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "betty"
         }
       ]
     },
@@ -1914,6 +2197,12 @@
           "opportunity": "udacity-learn-unity",
           "feedType": "new",
           "timestamp": 1485133495242
+        },
+        {
+          "student": "johnson",
+          "opportunity": "urop-funding",
+          "feedType": "new",
+          "timestamp": 1485293873375
         }
       ]
     },
@@ -1979,7 +2268,120 @@
     {
       "name": "FeedbackInstanceCollection",
       "contents": [
-
+        {
+          "feedback": "CourseRecommendationsBasedOnInterests",
+          "user": "alfred",
+          "description": "We recommend ICS 314 based on your interest in software engineering",
+          "area": "Interests"
+        },
+        {
+          "feedback": "iceInnovationPoints",
+          "user": "alfred",
+          "description": "You need 22 more Innovation points in your plan to get to 100.",
+          "area": "ICE"
+        },
+        {
+          "feedback": "updateStarData",
+          "user": "alfred",
+          "description": "See your ICS advisor to upload STAR data from Spring 2016.",
+          "area": "STAR"
+        },
+        {
+          "feedback": "requiredCourseMissing",
+          "user": "alfred",
+          "description": "Required course ICS 212 does not appear in your degree plan.",
+          "area": "DegreePlan"
+        },
+        {
+          "feedback": "semesterOverloaded",
+          "user": "alfred",
+          "description": "Fall 2017 appears overloaded with course work.",
+          "area": "Overload"
+        },
+        {
+          "feedback": "courseNotOffered",
+          "user": "alfred",
+          "description": "Your plan includes ICS 451 in Fall 2017, but it is unlikely to occur then.",
+          "area": "DegreePlan"
+        },
+        {
+          "feedback": "iceInnovationPoints",
+          "user": "abi",
+          "description": "You need 22 more Innovation points in your plan to get to 100.",
+          "area": "ICE"
+        },
+        {
+          "feedback": "iceCompetencyPoints",
+          "user": "abi",
+          "description": "You need 7 more Innovation points in your plan to get to 100.",
+          "area": "ICE"
+        },
+        {
+          "feedback": "updateStarData",
+          "user": "abi",
+          "description": "See your ICS advisor to upload STAR data from Spring 2016.",
+          "area": "STAR"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "abi",
+          "description": "Summer 2018: Prerequisite ICS 222 for ICS 355not found.",
+          "area": "DegreePlanPrerequisites"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "charley",
+          "description": "Fall 2016: ICS 211's prerequisite ICS 111 is after or in Fall 2016.",
+          "area": "DegreePlanPrerequisites"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "betty",
+          "description": "Fall 2016: ICS 491's prerequisite ICS 314 is after or in Spring 2017.",
+          "area": "DegreePlanPrerequisites"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "betty",
+          "description": "Fall 2016: ICS 499's prerequisite ICS 314 is after or in Spring 2017.",
+          "area": "DegreePlanPrerequisites"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "betty",
+          "description": "Spring 2016: ICS 332's prerequisite ICS 314 is after or in Spring 2017.",
+          "area": "DegreePlanPrerequisites"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "betty",
+          "description": "Spring 2016: Prerequisite ICS 355 for ICS 425not found.",
+          "area": "DegreePlanPrerequisites"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "betty",
+          "description": "Fall 2015: ICS 361's prerequisite ICS 311 is after or in Fall 2015.",
+          "area": "DegreePlanPrerequisites"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "betty",
+          "description": "Fall 2015: ICS 361's prerequisite ICS 314 is after or in Spring 2017.",
+          "area": "DegreePlanPrerequisites"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "betty",
+          "description": "Spring 2017: ICS 321's prerequisite ICS 314 is after or in Spring 2017.",
+          "area": "DegreePlanPrerequisites"
+        },
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "betty",
+          "description": "Spring 2017: ICS 331's prerequisite ICS 314 is after or in Spring 2017.",
+          "area": "DegreePlanPrerequisites"
+        }
       ]
     },
     {
@@ -2561,9 +2963,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 20,
+            "i": 5,
             "c": 0,
-            "e": 15
+            "e": 5
           },
           "interests": [
             "algorithms",
@@ -2585,9 +2987,9 @@
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 10,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "hardware",
@@ -2689,9 +3091,9 @@
           "opportunityType": "project",
           "sponsor": "esb",
           "ice": {
-            "i": 30,
+            "i": 25,
             "c": 0,
-            "e": 15
+            "e": 25
           },
           "interests": [
             "application-development",
@@ -2742,9 +3144,9 @@
           "opportunityType": "project",
           "sponsor": "binsted",
           "ice": {
-            "i": 30,
+            "i": 25,
             "c": 0,
-            "e": 15
+            "e": 25
           },
           "interests": [
             "application-development",
@@ -2764,9 +3166,9 @@
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
-            "i": 30,
+            "i": 5,
             "c": 0,
-            "e": 15
+            "e": 5
           },
           "interests": [
             "research",
@@ -2791,20 +3193,27 @@
         {
           "name": "AT&T Hackathon",
           "slug": "att-iot-hackathon",
-          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\n    If so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.",
+          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\n    If so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.\n\nSpring 2017 registration: https://www.eventbrite.com/e/att-hackathon-hawaii-tickets-31100289804",
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
-            "i": 25,
+            "i": 15,
             "c": 0,
             "e": 15
           },
           "interests": [
-            "artificial-intelligence",
-            "application-development"
+            "application-development",
+            "artificial-intelligence"
           ],
           "semesters": [
-            "Fall-2016"
+            "Fall-2016",
+            "Spring-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Fall-2019",
+            "Spring-2020"
           ],
           "moreInformation": "http://developer.ibm.com/iotplatform/events/att-iot-hackathon-dallas/",
           "independentStudy": false,
@@ -2817,9 +3226,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 0,
+            "i": 5,
             "c": 0,
-            "e": 10
+            "e": 5
           },
           "interests": [
             "data-science",
@@ -2837,15 +3246,41 @@
           "independentStudy": false
         },
         {
+          "name": "Booz Allen Internship",
+          "slug": "booz-allen-internship",
+          "description": "10 weeks, 40/week, $24/hr, or about $10K total. During the internship, you will spend the first week working in a group to figure out an idea, the next eight weeks developing it in a team, and the final week going to Washington DC to pitch your idea/prototype against the ones developed by other Booz-Allen interns across the country",
+          "opportunityType": "internship",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 10,
+            "c": 0,
+            "e": 5
+          },
+          "interests": [
+            "data-science",
+            "entrepreneurship",
+            "research",
+            "virtual-reality"
+          ],
+          "semesters": [
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019",
+            "Summer-2020"
+          ],
+          "moreInformation": "http://www.boozallen.com/careers/find-your-job/graduating-students/strategic-innovation-games",
+          "independentStudy": false
+        },
+        {
           "name": "CCDC",
           "slug": "ccdc",
           "description": "The National Collegiate Cyber Defense Competition (NCCDC) is the championship event for the Collegiate Cyber Defense Competition system – the largest college-level cyber defense competition in the USA.[1] The event is held annually in the San Antonio area.\n\nIn an effort to help facilitate the development of a regular, national level cyber security exercise, the Center for Infrastructure Assurance and Security at the University of Texas at San Antonio (UTSA) hosted the first Collegiate Cyber Defense Competition for the Southwestern region in May 2005. On June 29, 2010, United States House legislature passed recognizing the National CCDC for promoting cyber security curriculum.\n\nWhile similar to other cyber defense competitions in many aspects, the NCCDC, is unique in that it focuses on the operational aspect of managing and protecting an existing network infrastructure. While other exercises examine the abilities of a group of students to design, configure, and protect a network over the course of an entire semester, this competition is focused on the more operational task of assuming administrative and protective duties for an existing commercial network. Teams are assessed based on their ability to detect and respond to outside threats, maintain availability of existing services such as mail servers and web servers, respond to business requests such as the addition or removal of additional services, and balance security needs against business needs.",
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
-            "i": 0,
+            "i": 5,
             "c": 0,
-            "e": 15
+            "e": 5
           },
           "interests": [
             "security"
@@ -2899,7 +3334,7 @@
           "ice": {
             "i": 0,
             "c": 0,
-            "e": 10
+            "e": 5
           },
           "interests": [
             "careers"
@@ -2919,12 +3354,12 @@
           "name": "Customer Analytics",
           "slug": "coursera-customer-analytics",
           "description": "Data about our browsing and buying patterns are everywhere.  From credit card transactions and online shopping carts, to customer loyalty programs and user-generated ratings/reviews, there is a staggering amount of data that can be used to describe our past buying behaviors, predict future ones, and prescribe new ways to influence future purchasing decisions. In this course, four of Wharton’s top marketing professors will provide an overview of key areas of customer analytics: descriptive analytics, predictive analytics, prescriptive analytics, and their application to real-world business practices including Amazon, Google, and Starbucks to name a few. This course provides an overview of the field of analytics so that you can make informed business decisions. It is an introduction to the theory of customer analytics, and is not intended to prepare learners to perform customer analytics.",
-          "opportunityType": "online-learning",
+          "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
             "i": 0,
-            "c": 10,
-            "e": 0
+            "c": 0,
+            "e": 5
           },
           "interests": [
             "entrepreneurship"
@@ -2944,12 +3379,12 @@
           "name": "Introduction to Big Data",
           "slug": "coursera-introduction-to-big-data",
           "description": "Interested in increasing your knowledge of the Big Data landscape?  This Coursera online course is for those new to data science and interested in understanding why the Big Data Era has come to be.  It is for those who want to become conversant with the terminology and the core concepts behind big data problems, applications, and systems.  It is for those who want to start thinking about how Big Data might be useful in their business or career.  It provides an introduction to one of the most common frameworks, Hadoop, that has made big data analysis easier and more accessible -- increasing the potential for data to transform our world!",
-          "opportunityType": "online-learning",
+          "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
             "i": 0,
-            "c": 10,
-            "e": 0
+            "c": 0,
+            "e": 5
           },
           "interests": [
             "data-science",
@@ -2965,41 +3400,15 @@
           "independentStudy": false
         },
         {
-          "name": "Graphic Design",
-          "slug": "coursera-graphic-design",
-          "description": "This Coursera online course is for those new to graphic design and interested in the process, historical context, and communication through image-making and typography. For those who want to have a starting point for further work in interface design, motion graphics, and editorial design, this course, will provide the core skill set and conceptual tools for “making and communicating” in the field of graphic design!",
-          "opportunityType": "online-learning",
-          "sponsor": "johnson",
-          "ice": {
-            "i": 0,
-            "c": 10,
-            "e": 0
-          },
-          "interests": [
-            "art",
-            "computer-graphics"
-          ],
-          "semesters": [
-            "Summer-2014",
-            "Summer-2015",
-            "Summer-2016",
-            "Summer-2017",
-            "Summer-2018",
-            "Summer-2019"
-          ],
-          "moreInformation": "https://www.coursera.org/specializations/graphic-design",
-          "independentStudy": false
-        },
-        {
           "name": "R Programming",
           "slug": "coursera-r-programming",
           "description": "In this course you will learn how to program in R and how to use R for effective data analysis. You will learn how to install and configure software necessary for a statistical programming environment and describe generic programming language concepts as they are implemented in a high-level statistical language. The course covers practical issues in statistical computing which includes programming in R, reading data into R, accessing R packages, writing R functions, debugging, profiling R code, and organizing and commenting R code. Topics in statistical data analysis will provide working examples.",
-          "opportunityType": "online-learning",
+          "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
             "i": 0,
-            "c": 10,
-            "e": 0
+            "c": 0,
+            "e": 5
           },
           "interests": [
             "data-science",
@@ -3048,9 +3457,9 @@
           "opportunityType": "internship",
           "sponsor": "glau",
           "ice": {
-            "i": 15,
+            "i": 5,
             "c": 0,
-            "e": 30
+            "e": 5
           },
           "interests": [
             "hci",
@@ -3070,9 +3479,9 @@
           "opportunityType": "project",
           "sponsor": "lipyeow",
           "ice": {
-            "i": 30,
+            "i": 25,
             "c": 0,
-            "e": 15
+            "e": 25
           },
           "interests": [
             "algorithms",
@@ -3099,9 +3508,9 @@
           "opportunityType": "internship",
           "sponsor": "glau",
           "ice": {
-            "i": 15,
+            "i": 5,
             "c": 0,
-            "e": 30
+            "e": 5
           },
           "interests": [
             "security"
@@ -3148,9 +3557,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 20,
+            "i": 5,
             "c": 0,
-            "e": 20
+            "e": 5
           },
           "interests": [
             "application-development",
@@ -3252,9 +3661,9 @@
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 10,
             "c": 0,
-            "e": 5
+            "e": 10
           },
           "interests": [
             "application-development",
@@ -3341,7 +3750,7 @@
           "ice": {
             "i": 20,
             "c": 0,
-            "e": 15
+            "e": 20
           },
           "interests": [
             "artificial-intelligence",
@@ -3429,9 +3838,9 @@
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
-            "i": 30,
+            "i": 5,
             "c": 0,
-            "e": 15
+            "e": 5
           },
           "interests": [
             "data-visualization",
@@ -3462,9 +3871,9 @@
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
-            "i": 30,
+            "i": 25,
             "c": 0,
-            "e": 15
+            "e": 25
           },
           "interests": [
             "application-development",
@@ -3501,9 +3910,9 @@
           "opportunityType": "internship",
           "sponsor": "johnson",
           "ice": {
-            "i": 15,
+            "i": 5,
             "c": 0,
-            "e": 30
+            "e": 5
           },
           "interests": [
             "application-development",
@@ -3526,9 +3935,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 20,
+            "i": 5,
             "c": 0,
-            "e": 15
+            "e": 5
           },
           "interests": [
             "application-development",
@@ -3574,9 +3983,9 @@
           "opportunityType": "internship",
           "sponsor": "glau",
           "ice": {
-            "i": 15,
+            "i": 5,
             "c": 0,
-            "e": 30
+            "e": 5
           },
           "interests": [
             "data-visualization"
@@ -3596,9 +4005,9 @@
           "opportunityType": "project",
           "sponsor": "depengli",
           "ice": {
-            "i": 30,
+            "i": 25,
             "c": 0,
-            "e": 15
+            "e": 25
           },
           "interests": [
             "application-development",
@@ -3623,9 +4032,9 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 20,
+            "i": 10,
             "c": 0,
-            "e": 15
+            "e": 25
           },
           "interests": [
             "entrepreneurship"
@@ -3646,9 +4055,9 @@
           "opportunityType": "online-learning",
           "sponsor": "johnson",
           "ice": {
-            "i": 0,
-            "c": 10,
-            "e": 0
+            "i": 5,
+            "c": 0,
+            "e": 5
           },
           "interests": [
             "game-design",
@@ -3688,6 +4097,32 @@
           "eventDate": "2016-10-11T00:00:00.000Z"
         },
         {
+          "name": "UROP Funding",
+          "slug": "urop-funding",
+          "description": "The Undergraduate Research Opportunities Program (UROP) offers funding to\nundergraduate students for individual or group research and creative\nprojects mentored by UHM faculty. We encourage you to ignite interest in\nresearch and creative projects, and guide student-initiated endeavors with\nthe support of UROP.\n\nWe can help you to embolden students to apply for funding to help bring\ntheir research ideas to life. We are happy to come to a class or meeting\nto present about UROP funding opportunities. We know time is scarce and\nthings get busy, so we are flexible in time and duration (15 to 30 min)\naccording to your needs. Please consider that the students need to have at\nleast one remaining semester of enrollment to be eligible for funding.\n\nApplication cycles are every Fall (9/9 to 10/10) and Spring (2/2 to 3/3)\nsemester.\n\nIn case your students are ready to apply for the current application cycle\n(2/2 to 3/3), please encourage them to attend a more detailed information\nsession to understand the application process.  Info sessions are offered\nfor students on the following dates in Sinclair 201 (approximately 1 hour\nlong):\n\n10:30 a.m. Wednesday, January 25, 2017\n10:30 a.m. Thursday, January 26, 2017",
+          "opportunityType": "project",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 5,
+            "c": 0,
+            "e": 5
+          },
+          "interests": [
+            "research"
+          ],
+          "semesters": [
+            "Spring-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Fall-2019",
+            "Spring-2020"
+          ],
+          "moreInformation": "manoa.hawaii.edu/undergrad/urop",
+          "independentStudy": false
+        },
+        {
           "name": "Virtual Art",
           "slug": "virtual-art-meetup",
           "description": "For anyone interested in a novel way of creating art, we have tech which allows creating in virtual reality. Meetings occur at our small studio in Kaimuki where we currently have two HTC Vives and an Oculus Rift.",
@@ -3723,7 +4158,7 @@
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
-            "i": 5,
+            "i": 10,
             "c": 0,
             "e": 10
           },
@@ -3753,268 +4188,46 @@
       "name": "OpportunityInstanceCollection",
       "contents": [
         {
-          "semester": "Fall-2014",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2015",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2015",
-          "opportunity": "hawaii-hacker-hours",
-          "verified": true,
-          "student": "abi"
-        },
-        {
           "semester": "Fall-2015",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2015",
-          "opportunity": "hawaii-hacker-hours",
+          "opportunity": "wetware-wednesday",
           "verified": true,
           "student": "abi"
         },
         {
           "semester": "Spring-2016",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2016",
-          "opportunity": "hawaii-hacker-hours",
+          "opportunity": "wetware-wednesday",
           "verified": true,
           "student": "abi"
         },
         {
           "semester": "Fall-2016",
-          "opportunity": "greyhats",
-          "verified": true,
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2016",
-          "opportunity": "hawaii-hacker-hours",
+          "opportunity": "open-power-quality",
           "verified": true,
           "student": "abi"
         },
         {
           "semester": "Spring-2017",
-          "opportunity": "greyhats",
-          "verified": false,
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2017",
-          "opportunity": "hawaii-hacker-hours",
-          "verified": true,
-          "student": "abi"
-        },
-        {
-          "semester": "Spring-2017",
-          "opportunity": "ccdc",
-          "verified": false,
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2017",
-          "opportunity": "asecolab",
-          "verified": false,
-          "student": "abi"
-        },
-        {
-          "semester": "Fall-2017",
-          "opportunity": "greyhats",
+          "opportunity": "open-power-quality",
           "verified": false,
           "student": "abi"
         },
         {
           "semester": "Spring-2018",
-          "opportunity": "asecolab",
+          "opportunity": "open-power-quality",
           "verified": false,
           "student": "abi"
         },
         {
-          "semester": "Spring-2018",
-          "opportunity": "greyhats",
-          "verified": false,
-          "student": "abi"
-        },
-        {
-          "semester": "Summer-2016",
-          "opportunity": "coursera-graphic-design",
-          "verified": true,
-          "student": "abi"
-        },
-        {
-          "semester": "Summer-2017",
-          "opportunity": "gen-cyber-internship",
-          "verified": false,
-          "student": "abi"
-        },
-        {
-          "semester": "Summer-2015",
-          "opportunity": "coursera-introduction-to-big-data",
-          "verified": true,
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2015",
-          "opportunity": "lava-lab",
-          "verified": true,
-          "student": "betty"
-        },
-        {
-          "semester": "Summer-2016",
-          "opportunity": "coursera-r-programming",
-          "verified": true,
-          "student": "betty"
-        },
-        {
-          "semester": "Summer-2016",
-          "opportunity": "lava-lab",
-          "verified": true,
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2016",
-          "opportunity": "lava-lab",
-          "verified": true,
-          "student": "betty"
-        },
-        {
-          "semester": "Spring-2016",
-          "opportunity": "lava-lab",
+          "semester": "Spring-2017",
+          "opportunity": "allnet",
           "verified": true,
           "student": "betty"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "wetware-wednesday",
-          "verified": false,
+          "verified": true,
           "student": "betty"
-        },
-        {
-          "semester": "Spring-2017",
-          "opportunity": "booz-allen-ideas-festival",
-          "verified": false,
-          "student": "betty"
-        },
-        {
-          "semester": "Summer-2017",
-          "opportunity": "sarp-internship",
-          "verified": false,
-          "student": "betty"
-        },
-        {
-          "semester": "Fall-2013",
-          "opportunity": "acm-manoa-hardware",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2013",
-          "opportunity": "hawaii-virtual-reality",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2014",
-          "opportunity": "acm-manoa-hardware",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2014",
-          "opportunity": "hawaii-virtual-reality",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Summer-2014",
-          "opportunity": "udacity-learn-unity",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2014",
-          "opportunity": "acm-manoa-hardware",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2014",
-          "opportunity": "hawaii-virtual-reality",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2015",
-          "opportunity": "acm-manoa-hardware",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2015",
-          "opportunity": "hawaii-virtual-reality",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Summer-2015",
-          "opportunity": "virtual-art-meetup",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Summer-2015",
-          "opportunity": "coursera-graphic-design",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2015",
-          "opportunity": "att-iot-hackathon",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2016",
-          "opportunity": "shidler-bpc",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2016",
-          "opportunity": "acm-manoa-vr",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Fall-2016",
-          "opportunity": "hacc",
-          "verified": true,
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2017",
-          "opportunity": "booz-allen-ideas-festival",
-          "verified": false,
-          "student": "alfred"
-        },
-        {
-          "semester": "Spring-2017",
-          "opportunity": "uh-career-fair",
-          "verified": false,
-          "student": "alfred"
         },
         {
           "semester": "Spring-2017",
@@ -4027,6 +4240,84 @@
           "opportunity": "data-analytics-for-solar-energy",
           "verified": false,
           "student": "charley"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "shaziney"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "betty"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "alfred"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "rao642"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "dtan808"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "cpjaro"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "brianmay"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "jrude"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "joshuajw"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "nathancy"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "christopher-nguyen"
         }
       ]
     },
@@ -4065,14 +4356,26 @@
       "contents": [
         {
           "term": "Spring",
-          "year": 2014
+          "year": 2013
+        },
+        {
+          "term": "Summer",
+          "year": 2013
         },
         {
           "term": "Fall",
+          "year": 2013
+        },
+        {
+          "term": "Spring",
           "year": 2014
         },
         {
           "term": "Summer",
+          "year": 2014
+        },
+        {
+          "term": "Fall",
           "year": 2014
         },
         {
@@ -4137,10 +4440,6 @@
         },
         {
           "term": "Spring",
-          "year": 2020
-        },
-        {
-          "term": "Fall",
           "year": 2020
         },
         {
@@ -4170,19 +4469,6 @@
         {
           "term": "Summer",
           "year": 2010
-        },
-
-        {
-          "term": "Spring",
-          "year": 2013
-        },
-        {
-          "term": "Fall",
-          "year": 2013
-        },
-        {
-          "term": "Summer",
-          "year": 2013
         },
         {
           "term": "Fall",
@@ -4199,6 +4485,18 @@
         {
           "term": "Spring",
           "year": 2010
+        },
+        {
+          "term": "Fall",
+          "year": 2020
+        },
+        {
+          "term": "Spring",
+          "year": 2021
+        },
+        {
+          "term": "Summer",
+          "year": 2021
         }
       ]
     },
@@ -4313,13 +4611,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/aaronvil.jpg",
           "website": null,
           "interests": [
             "networks"
           ],
           "careerGoals": [
-            "information-system-manager"
+            "information-system-manager",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4335,11 +4634,12 @@
           "picture": "/images/mockup/abi.jpg",
           "website": "http://abi.github.io",
           "interests": [
-            "security",
-            "software-engineering"
+            "application-development",
+            "research"
           ],
           "careerGoals": [
-            "web-developer"
+            "data-scientist",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 3
@@ -4352,13 +4652,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/ahlim.jpg",
           "website": null,
           "interests": [
             "sql"
           ],
           "careerGoals": [
-            "database-administrator"
+            "database-administrator",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4374,15 +4675,15 @@
           "picture": "/images/mockup/alfred.png",
           "website": null,
           "interests": [
-            "game-design",
             "hardware",
-            "virtual-reality"
+            "it-management"
           ],
           "careerGoals": [
+            "system-administrator",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 6
+          "level": 1
         },
         {
           "firstName": "Betty",
@@ -4395,16 +4696,16 @@
           "picture": "/images/mockup/betty.jpg",
           "website": "http://keanu.github.io/",
           "interests": [
-            "data-science",
-            "data-visualization",
-            "research"
+            "algorithms",
+            "artificial-intelligence",
+            "game-design"
           ],
           "careerGoals": [
             "data-scientist",
-            "graduate-school"
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 4
+          "level": 5
         },
         {
           "firstName": "Kim",
@@ -4414,10 +4715,15 @@
           "password": "foo",
           "role": "FACULTY",
           "uhID": "8765-4320",
-          "picture": null,
-          "website": null,
-          "interests": [],
-          "careerGoals": [],
+          "picture": "/images/people/binsted.jpg",
+          "website": "http://www2.hawaii.edu/~binsted/",
+          "interests": [
+            "artificial-intelligence",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4432,7 +4738,9 @@
           "picture": "/images/mentors/brewer.jpg",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4444,13 +4752,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/brianmay.jpg",
           "website": null,
           "interests": [
             "computer-architecture"
           ],
           "careerGoals": [
-            "network-architect"
+            "network-architect",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4466,12 +4775,36 @@
           "picture": "/images/mockup/charley.jpg",
           "website": null,
           "interests": [
-            "bioinformatics"
+            "art",
+            "computer-graphics",
+            "hci",
+            "javascript"
           ],
           "careerGoals": [
-            "data-scientist"
+            "web-developer",
+            "software-developer"
           ],
-          "desiredDegree": "bs-cs",
+          "desiredDegree": "ba-ics",
+          "level": 1
+        },
+        {
+          "firstName": "David",
+          "lastName": "Chin",
+          "slug": "chin",
+          "email": "chin@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/chin.jpg",
+          "website": "http://www2.hawaii.edu/~chin/",
+          "interests": [
+            "artificial-intelligence",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
           "level": 1
         },
         {
@@ -4482,13 +4815,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/christopher-nguyen.jpg",
           "website": null,
           "interests": [
             "application-development"
           ],
           "careerGoals": [
-            "web-developer"
+            "web-developer",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4503,8 +4837,13 @@
           "uhID": "1017-6869",
           "picture": "/images/mockup/cmoore.jpg",
           "website": null,
-          "interests": [],
-          "careerGoals": [],
+          "interests": [
+            "research",
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4516,13 +4855,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/cpjaro.jpg",
           "website": null,
           "interests": [
             "sql"
           ],
           "careerGoals": [
-            "information-system-manager"
+            "information-system-manager",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4535,15 +4875,36 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/creindle.jpg",
           "website": null,
           "interests": [
             "teaching"
           ],
           "careerGoals": [
-            "network-architect"
+            "network-architect",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
+          "level": 1
+        },
+        {
+          "firstName": "Martha",
+          "lastName": "Crosby",
+          "slug": "crosby",
+          "email": "crosby@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/crosby.jpg",
+          "website": null,
+          "interests": [
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
           "level": 1
         },
         {
@@ -4554,10 +4915,16 @@
           "password": "foo",
           "role": "FACULTY",
           "uhID": "8765-4318",
-          "picture": null,
-          "website": null,
-          "interests": [],
-          "careerGoals": [],
+          "picture": "/images/people/depengli.jpg",
+          "website": "http://www2.hawaii.edu/~depengli/",
+          "interests": [
+            "networks",
+            "research",
+            "security"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4569,15 +4936,36 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/dtan808.jpg",
           "website": null,
           "interests": [
             "sql"
           ],
           "careerGoals": [
-            "research-scientist"
+            "research-scientist",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
+          "level": 1
+        },
+        {
+          "firstName": "Dusko",
+          "lastName": "Pavlovic",
+          "slug": "dusko",
+          "email": "dusko@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/dusko.jpg",
+          "website": "dusko.org",
+          "interests": [
+            "research",
+            "security"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
           "level": 1
         },
         {
@@ -4590,14 +4978,11 @@
           "uhID": "1234-5682",
           "picture": "/images/mockup/ella.jpg",
           "website": null,
-          "interests": [
-            "civic-engagement",
-            "web-development"
-          ],
+          "interests": [],
           "careerGoals": [
-            "web-developer"
+            "software-developer"
           ],
-          "desiredDegree": "ba-ics",
+          "desiredDegree": "bs-ce",
           "level": 1
         },
         {
@@ -4608,13 +4993,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/erikhuan.jpg",
           "website": null,
           "interests": [
             "ruby"
           ],
           "careerGoals": [
-            "information-security-analyst"
+            "information-security-analyst",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4627,10 +5013,16 @@
           "password": "foo",
           "role": "FACULTY",
           "uhID": "8765-4317",
-          "picture": null,
-          "website": null,
-          "interests": [],
-          "careerGoals": [],
+          "picture": "/images/people/esb.jpg",
+          "website": "http://www2.hawaii.edu/~esb/",
+          "interests": [
+            "mobile",
+            "networks",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4645,7 +5037,9 @@
           "picture": "/images/mentors/geis.jpg",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4660,7 +5054,29 @@
           "picture": "/images/mockup/glau.jpg",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
+          "level": 1
+        },
+        {
+          "firstName": "Guylaine",
+          "lastName": "Poisson",
+          "slug": "guylaine",
+          "email": "guylaine@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/default-profile-picture.png",
+          "website": "http://navet.ics.hawaii.edu/~poisson/BiL/index.html",
+          "interests": [
+            "bioinformatics",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4672,7 +5088,7 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/hailing.jpg",
           "website": null,
           "interests": [
             "operating-systems"
@@ -4681,6 +5097,26 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
+          "level": 1
+        },
+        {
+          "firstName": "Henri",
+          "lastName": "Casanova",
+          "slug": "henric",
+          "email": "henric@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/henric.jpg",
+          "website": "http://navet.ics.hawaii.edu/~casanova/",
+          "interests": [
+            "hpc",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
           "level": 1
         },
         {
@@ -4694,7 +5130,9 @@
           "picture": "/images/mentors/ito.png",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4706,15 +5144,36 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/jameyia-shamia.jpg",
           "website": null,
           "interests": [
             "application-development"
           ],
           "careerGoals": [
-            "web-developer"
+            "web-developer",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
+          "level": 1
+        },
+        {
+          "firstName": "Jan",
+          "lastName": "Stelovsky",
+          "slug": "janst",
+          "email": "janst",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/janst.jpg",
+          "website": "http://www2.hawaii.edu/~janst/",
+          "interests": [
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
           "level": 1
         },
         {
@@ -4727,8 +5186,16 @@
           "uhID": "8765-4321",
           "picture": "/images/mockup/johnson.jpg",
           "website": null,
-          "interests": [],
-          "careerGoals": [],
+          "interests": [
+            "civic-engagement",
+            "research",
+            "software-engineering",
+            "sustainability"
+          ],
+          "careerGoals": [
+            "software-developer",
+            "web-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4740,13 +5207,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/joshuajw.jpg",
           "website": null,
           "interests": [
             "hpc"
           ],
           "careerGoals": [
-            "web-developer"
+            "web-developer",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4759,7 +5227,7 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/jrude.jpg",
           "website": null,
           "interests": [
             "sql"
@@ -4781,7 +5249,9 @@
           "picture": "/images/mentors/kagawa.jpg",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4796,7 +5266,9 @@
           "picture": "/images/mentors/karjala.jpg",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4808,13 +5280,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/kellyl4.jpg",
           "website": null,
           "interests": [
             "sql"
           ],
           "careerGoals": [
-            "information-system-manager"
+            "information-system-manager",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4827,13 +5300,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/kirk6.jpg",
           "website": null,
           "interests": [
             "prolog"
           ],
           "careerGoals": [
-            "network-architect"
+            "network-architect",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4846,7 +5320,7 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/kurtkn.jpg",
           "website": null,
           "interests": [
             "robotics"
@@ -4858,6 +5332,26 @@
           "level": 1
         },
         {
+          "firstName": "Kyungim",
+          "lastName": "Baek",
+          "slug": "kyungim",
+          "email": "kyungim@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/kyungim.jpg",
+          "website": "http://www2.hawaii.edu/~kyungim/",
+          "interests": [
+            "data-visualization",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
+          "level": 1
+        },
+        {
           "firstName": "Anh",
           "lastName": "Lam",
           "slug": "lamanh",
@@ -4865,13 +5359,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/anhlam.jpg",
           "website": null,
           "interests": [
             "security"
           ],
           "careerGoals": [
-            "information-security-analyst"
+            "information-security-analyst",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4887,7 +5382,29 @@
           "picture": "/images/mentors/lee.jpg",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
+          "level": 1
+        },
+        {
+          "firstName": "Jason",
+          "lastName": "Leigh",
+          "slug": "leighj",
+          "email": "leighj@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/leighj.jpg",
+          "website": "http://www2.hawaii.edu/~leighj/JASON_LEIGH/Jason_Leigh_Home_Page.html",
+          "interests": [
+            "data-visualization",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4902,7 +5419,9 @@
           "picture": "/images/mentors/leuck.jpg",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4914,13 +5433,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/linhongb.jpg",
           "website": null,
           "interests": [
             "python"
           ],
           "careerGoals": [
-            "information-system-manager"
+            "information-system-manager",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4933,10 +5453,16 @@
           "password": "foo",
           "role": "FACULTY",
           "uhID": "8765-4319",
-          "picture": null,
+          "picture": "/images/people/lipyeow.jpg",
           "website": null,
-          "interests": [],
-          "careerGoals": [],
+          "interests": [
+            "data-science",
+            "research",
+            "sustainability"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4948,13 +5474,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/markrc.jpg",
           "website": null,
           "interests": [
             "lisp"
           ],
           "careerGoals": [
-            "web-developer"
+            "web-developer",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -4970,7 +5497,9 @@
           "picture": "/images/mentors/nagashima.jpg",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -4982,15 +5511,36 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/nathancy.jpg",
           "website": null,
           "interests": [
             "perl"
           ],
           "careerGoals": [
-            "web-developer"
+            "web-developer",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
+          "level": 1
+        },
+        {
+          "firstName": "Nodari",
+          "lastName": "Sitchinava",
+          "slug": "nodari",
+          "email": "nodari@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/nodari.jpg",
+          "website": "http://www2.hawaii.edu/~nodari/",
+          "interests": [
+            "algorithms",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
           "level": 1
         },
         {
@@ -5001,15 +5551,37 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/pakchar.jpg",
           "website": null,
           "interests": [
             "parallel-programming"
           ],
           "careerGoals": [
-            "web-developer"
+            "web-developer",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
+          "level": 1
+        },
+        {
+          "firstName": "Peter-Michael",
+          "lastName": "Seidel",
+          "slug": "pseidel",
+          "email": "pseidel@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/pseidel.jpg",
+          "website": null,
+          "interests": [
+            "hardware",
+            "algorithms",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
           "level": 1
         },
         {
@@ -5023,7 +5595,9 @@
           "picture": "/images/mockup/radgrad.png",
           "website": null,
           "interests": [],
-          "careerGoals": [],
+          "careerGoals": [
+            "software-developer"
+          ],
           "desiredDegree": null,
           "level": 1
         },
@@ -5035,15 +5609,37 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/rao642.jpg",
           "website": null,
           "interests": [
             "application-development"
           ],
           "careerGoals": [
-            "web-developer"
+            "web-developer",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
+          "level": 1
+        },
+        {
+          "firstName": "Scott",
+          "lastName": "Robertson",
+          "slug": "scottpr",
+          "email": "scottpr@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/scottrobertson.jpg",
+          "website": "http://www2.hawaii.edu/~scottpr/",
+          "interests": [
+            "civic-engagement",
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
           "level": 1
         },
         {
@@ -5054,13 +5650,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/shaziney.jpg",
           "website": null,
           "interests": [
             "prolog"
           ],
           "careerGoals": [
-            "data-scientist"
+            "data-scientist",
+            "software-developer"
           ],
           "desiredDegree": "bs-cs",
           "level": 1
@@ -5073,7 +5670,7 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/slike.jpg",
           "website": null,
           "interests": [
             "software-engineering"
@@ -5085,6 +5682,66 @@
           "level": 1
         },
         {
+          "firstName": "Suzanne",
+          "lastName": "Still",
+          "slug": "sstill",
+          "email": "sstill@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/sstill.jpg",
+          "website": "http://www2.hawaii.edu/~sstill/",
+          "interests": [
+            "machine-learning",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
+          "level": 1
+        },
+        {
+          "firstName": "Kazuo",
+          "lastName": "Sugihara",
+          "slug": "sugihara",
+          "email": "sugihara@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/default-profile-picture.png",
+          "website": null,
+          "interests": [
+            "research",
+            "robotics"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
+          "level": 1
+        },
+        {
+          "firstName": "Daniel",
+          "lastName": "Suthers",
+          "slug": "suthers",
+          "email": "suthers@hawaii.edu",
+          "password": "foo",
+          "role": "FACULTY",
+          "uhID": "1",
+          "picture": "/images/people/suthers.jpg",
+          "website": "http://www2.hawaii.edu/~suthers/",
+          "interests": [
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
+          "level": 1
+        },
+        {
           "firstName": "Zachary",
           "lastName": "Knoebel",
           "slug": "zknoebel",
@@ -5092,13 +5749,14 @@
           "password": "foo",
           "role": "STUDENT",
           "uhID": "1",
-          "picture": null,
+          "picture": "/images/people/zknoebel.jpg",
           "website": null,
           "interests": [
             "data-visualization"
           ],
           "careerGoals": [
-            "research-scientist"
+            "research-scientist",
+            "software-developer"
           ],
           "desiredDegree": "ba-ics",
           "level": 1
@@ -5242,6 +5900,51 @@
         },
         {
           "username": "creindle"
+        },
+        {
+          "username": "kyungim"
+        },
+        {
+          "username": "henric"
+        },
+        {
+          "username": "chin"
+        },
+        {
+          "username": "crosby"
+        },
+        {
+          "username": "leighj"
+        },
+        {
+          "username": "dusko"
+        },
+        {
+          "username": "guylaine"
+        },
+        {
+          "username": "scott.robertson"
+        },
+        {
+          "username": "pseidel"
+        },
+        {
+          "username": "nodari"
+        },
+        {
+          "username": "janst"
+        },
+        {
+          "username": "sstill"
+        },
+        {
+          "username": "sugihara"
+        },
+        {
+          "username": "suthers"
+        },
+        {
+          "username": "scottpr"
         }
       ]
     },
@@ -5249,10 +5952,26 @@
       "name": "VerificationRequestCollection",
       "contents": [
         {
+          "student": "abi",
+          "semester": "Spring-2016",
+          "opportunity": "wetware-wednesday",
+          "submittedOn": "2017-01-15T21:43:21.632Z",
+          "status": "Open",
+          "processed": []
+        },
+        {
           "student": "charley",
           "semester": "Spring-2017",
           "opportunity": "acm-manoa",
           "submittedOn": "2017-01-19T00:36:15.511Z",
+          "status": "Open",
+          "processed": []
+        },
+        {
+          "student": "betty",
+          "semester": "Spring-2017",
+          "opportunity": "allnet",
+          "submittedOn": "2017-01-19T00:36:55.639Z",
           "status": "Open",
           "processed": []
         },
@@ -5265,6 +5984,34 @@
           "processed": []
         },
         {
+          "student": "abi",
+          "semester": "Fall-2015",
+          "opportunity": "wetware-wednesday",
+          "submittedOn": "2017-01-15T21:43:21.530Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2017-01-19T00:37:16.912Z",
+              "status": "Accepted",
+              "verifier": "Admin RadGrad"
+            }
+          ]
+        },
+        {
+          "student": "abi",
+          "semester": "Fall-2016",
+          "opportunity": "open-power-quality",
+          "submittedOn": "2017-01-15T21:43:21.640Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2017-01-19T00:37:19.127Z",
+              "status": "Accepted",
+              "verifier": "Admin RadGrad"
+            }
+          ]
+        },
+        {
           "student": "charley",
           "semester": "Spring-2017",
           "opportunity": "acm-manoa",
@@ -5273,6 +6020,20 @@
           "processed": [
             {
               "date": "2017-01-19T00:37:20.397Z",
+              "status": "Accepted",
+              "verifier": "Admin RadGrad"
+            }
+          ]
+        },
+        {
+          "student": "betty",
+          "semester": "Spring-2017",
+          "opportunity": "allnet",
+          "submittedOn": "2017-01-19T00:36:55.659Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2017-01-19T00:37:21.376Z",
               "status": "Accepted",
               "verifier": "Admin RadGrad"
             }
