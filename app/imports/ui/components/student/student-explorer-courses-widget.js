@@ -174,6 +174,9 @@ Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCours
   this.subscribe(Users.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Reviews.getPublicationName());
+  this.autorun(() => {
+    this.subscribe(CourseInstances.getPublicationName(1), this.data.item._id);
+  });
 });
 
 Template.Student_Explorer_Courses_Widget.onRendered(function studentExplorerCoursesWidgetOnRendered() {
