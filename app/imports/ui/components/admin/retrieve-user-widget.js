@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Users } from '../../../api/user/UserCollection.js';
+import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessorMethods';
 
@@ -45,6 +46,7 @@ Template.Retrieve_User_Widget.events({
 Template.Retrieve_User_Widget.onCreated(function advisorLogViewerOnCreated() {
   this.subscribe(CourseInstances.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Reviews.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
 

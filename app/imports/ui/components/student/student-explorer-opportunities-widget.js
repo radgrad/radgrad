@@ -7,6 +7,8 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import * as RouteNames from '/imports/startup/client/router.js';
+import { Interests } from '../../../api/interest/InterestCollection';
 
 Template.Student_Explorer_Opportunities_Widget.helpers({
   isLabel(label, value) {
@@ -81,6 +83,26 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       ret = true;
     }
     return ret;
+  },
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
+  interestName(interestSlugName) {
+    return Interests.findDoc(interestSlugName).name;
+  },
+  interestSlugName(interestSlugName) {
+    const slugID = Interests.findDoc(interestSlugName).slugID;
+    return Slugs.getNameFromID(slugID);
+  },
+  replaceSemString(array) {
+    const semString = array.join(', ');
+    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
+  userUsername(user) {
+    return Users.findDoc(user).username;
   },
 });
 

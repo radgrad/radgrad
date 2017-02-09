@@ -190,7 +190,7 @@ class CourseInstanceCollection extends BaseCollection {
           courseID: { type: String },
         }).validate({ courseID });
 
-        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
+        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
       });
       Meteor.publish(this.publicationNames[2],
           function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line

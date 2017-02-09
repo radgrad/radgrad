@@ -4,6 +4,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Explorer_Degrees_Widget.helpers({
   isLabel(label, value) {
@@ -33,6 +34,12 @@ Template.Student_Explorer_Degrees_Widget.helpers({
       ret = false;
     }
     return ret;
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
+  userUsername(user) {
+    return Users.findDoc(user).username;
   },
 });
 

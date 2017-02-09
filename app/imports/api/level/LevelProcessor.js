@@ -16,7 +16,7 @@ export function calcLevel(studentID) {
     }
   });
   const ice = getTotalICE(verified);
-  const numReviews = Reviews.find({ studentID, type: 'course', moderated: true, visible: true }).count();
+  const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true }).count();
   let level = 1;
   if (ice.i === 100 && ice.c === 100 && ice.e === 100 && numReviews >= 6) {
     level = 6;
