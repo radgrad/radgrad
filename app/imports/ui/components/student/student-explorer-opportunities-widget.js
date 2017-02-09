@@ -44,7 +44,20 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       opportunityID: opportunity._id,
     }).fetch();
     for (const opportunityInstance of oi) {
-      if (Semesters.findDoc(opportunityInstance.semesterID).sortBy > Semesters.getCurrentSemesterDoc().sortBy) {
+      if (Semesters.findDoc(opportunityInstance.semesterID).sortBy >= Semesters.getCurrentSemesterDoc().sortBy) {
+        ret = true;
+      }
+    }
+    return ret;
+  },
+  unverified(opportunity) {
+    let ret = false;
+    const oi = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      opportunityID: opportunity._id,
+    }).fetch();
+    for (const opportunityInstance of oi) {
+      if (!opportunityInstance.verified) {
         ret = true;
       }
     }

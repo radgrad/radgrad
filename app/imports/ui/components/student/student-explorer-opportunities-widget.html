@@ -8,6 +8,10 @@
           {{#if userStatus item}}
             {{#if futureInstance item}}
               {{> Student_Explorer_Opportunities_Widget_Button buttonType='remove' opportunity=item}}
+            {{else}}
+              {{#if unverified item}}
+                {{> Student_Explorer_Opportunities_Widget_Button buttonType='remove' opportunity=item}}
+              {{/if}}
             {{/if}}
           {{/if}}
           {{> Student_Explorer_Opportunities_Widget_Button buttonType='add' opportunity=item}}

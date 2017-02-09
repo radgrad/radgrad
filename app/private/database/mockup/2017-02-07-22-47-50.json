@@ -4780,7 +4780,7 @@
         {
           "semester": "Fall-2014",
           "opportunity": "greyhats",
-          "verified": true,
+          "verified": false,
           "student": "abi"
         },
         {
@@ -4792,7 +4792,7 @@
         {
           "semester": "Spring-2015",
           "opportunity": "hawaii-hacker-hours",
-          "verified": true,
+          "verified": false,
           "student": "abi"
         },
         {
