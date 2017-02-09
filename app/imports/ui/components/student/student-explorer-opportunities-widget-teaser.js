@@ -9,7 +9,6 @@ Template.Student_Explorer_Opportunities_Widget_Teaser.onRendered(function enable
 
 Template.Student_Explorer_Opportunities_Widget_Teaser.helpers({
   teaserUrl(teaser) {
-    console.log(teaser.title);
     return teaser.url;
   },
 });

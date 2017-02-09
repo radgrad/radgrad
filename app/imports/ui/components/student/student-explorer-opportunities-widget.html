@@ -83,7 +83,8 @@
 
               {{#if isLabel descriptionPair.label 'Teaser'}}
               <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
+                {{#if descriptionPair.value}}
+                  {{> Student_Explorer_Opportunities_Widget_Teaser teaser=descriptionPair.value}}<br>
                   {{else}}
                     N/A <br>
                 {{/if}}
