@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -8,6 +9,26 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+
+function interestedUsers(course) {
+  const interested = [];
+  console.log(CourseInstances.find().fetch());
+  const ci = CourseInstances.find({
+    courseID: course._id,
+  }).fetch();
+  console.log(ci);
+  _.map(ci, (c) => {
+    if (!_.includes(interested, c.studentID)) {
+      interested.push(c.studentID);
+    }
+  });
+  console.log(interested);
+  return interested;
+}
+
+function numUsers(course) {
+  return interestedUsers(course).length;
+}
 
 Template.Student_Explorer_Courses_Widget.helpers({
   isLabel(label, value) {
@@ -123,7 +144,14 @@ Template.Student_Explorer_Courses_Widget.helpers({
       default:
         return 'ERROR: More than one table.';
     }
-  }
+  },
+  socialPairs() {
+    const course = this.item;
+    return [
+      { label: 'students', amount: numUsers(course),
+        value: interestedUsers(course) },
+    ];
+  },
 });
 
 Template.Student_Explorer_Courses_Widget.events({
@@ -153,6 +181,9 @@ Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCours
   this.subscribe(Users.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Reviews.getPublicationName());
+  this.autorun(() => {
+    this.subscribe(CourseInstances.getPublicationName(1), this.data.item._id);
+  });
 });
 
 Template.Student_Explorer_Courses_Widget.onRendered(function studentExplorerCoursesWidgetOnRendered() {
