@@ -115,11 +115,11 @@ export class FeedbackFunctionClass {
    */
   constructor() {
     // ensure the Feedback definitions exist before we work.
-    _.map(feedbackDefinitions, (definition) => {
-      if (Feedbacks.find({ name: definition.name }).count() === 0) {
-        Feedbacks.define(definition);
-      }
-    });
+    // _.map(feedbackDefinitions, (definition) => {
+    //   if (Feedbacks.find({ name: definition.name }).count() === 0) {
+    //     Feedbacks.define(definition);
+    //   }
+    // });
   }
 
   _clearFeedbackInstances(studentID, area) {
