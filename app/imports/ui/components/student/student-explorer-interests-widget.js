@@ -179,6 +179,12 @@ Template.Student_Explorer_Interests_Widget.helpers({
     }
     return ret;
   },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
+  userUsername(user) {
+    return Users.findDoc(user).username;
+  },
 });
 
 Template.Student_Explorer_Interests_Widget.events({

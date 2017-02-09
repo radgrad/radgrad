@@ -11,6 +11,11 @@
             {{/if}}
           {{/if}}
           {{> Student_Explorer_Opportunities_Widget_Button buttonType='add' opportunity=item}}
+          {{#each descriptionPair in descriptionPairs}}
+            {{#if isLabel descriptionPair.label 'ICE'}}
+              {{> ICE_header ice=descriptionPair.value}}
+            {{/if}}
+          {{/each}}  
         </div>
         <div class="ui divider" style="margin-top: 0;"></div>
 
@@ -50,7 +55,7 @@
 
               {{#if isLabel descriptionPair.label 'Semesters'}}
               <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{replaceSemString descriptionPair.value}}</span> <br>
                   {{else}}
                     N/A <br>
                 {{/if}}
@@ -72,18 +77,6 @@
                 {{/if}}
               {{/if}}
 
-              {{#if isLabel descriptionPair.label 'ICE'}}
-                <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">
-                  <b style="color:green">{{descriptionPair.value.i}}</b>
-                  <b style="color:blue">{{descriptionPair.value.c}}</b>
-                  <b style="color:purple">{{descriptionPair.value.e}}</b></span>
-                  <br>
-                {{else}}
-                  N/A <br>
-                {{/if}}
-              {{/if}}
-
               {{#if isLabel descriptionPair.label 'Teaser'}}
               <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
@@ -101,7 +94,7 @@
         {{#if isLabel descriptionPair.label 'Interests'}}
           <div class="ui right aligned secondary segment">
             {{#each interest in descriptionPair.value}}
-              <a class="ui mini label"><i class="fitted star icon"></i>{{interest}}</a>
+              <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestSlugName interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
             {{/each}}
           </div>
         {{/if}}
@@ -124,7 +117,7 @@
 
             <div class="ui circular mini bordered images" style="overflow: visible;">
               {{#each user in socialPair.value}}
-                <a href="#" data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}></a>
+                <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername user)}}" data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}></a>
               {{/each}}
             </div>
           </div>

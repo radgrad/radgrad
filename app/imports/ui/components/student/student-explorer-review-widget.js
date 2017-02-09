@@ -5,6 +5,7 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 
 Template.Student_Explorer_Review_Widget.onCreated(function onCreated() {
@@ -65,11 +66,12 @@ Template.Student_Explorer_Review_Widget.helpers({
   reviewData(review) {
     const user = Users.findDoc(review.studentID);
     const userName = Users.getFullName(review.studentID);
+    const userUsername = user.username;
     const userPicture = user.picture;
     const reviewSemester = Semesters.toString(review.semesterID);
     const reviewRating = review.rating;
     const reviewComments = review.comments;
-    return { name: userName, picture: userPicture, semester: reviewSemester,
+    return { name: userName, username: userUsername, picture: userPicture, semester: reviewSemester,
       rating: reviewRating, comments: reviewComments };
   },
   currentUserName() {
@@ -77,6 +79,12 @@ Template.Student_Explorer_Review_Widget.helpers({
   },
   currentUserPicture() {
     return Users.findDoc(getUserIdFromRoute()).picture;
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
+  userUsername(user) {
+    return Users.findDoc(user).username;
   },
 });
 
