@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -10,23 +9,6 @@ import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { Interests } from '../../../api/interest/InterestCollection';
-
-function interestedUsers(course) {
-  const interested = [];
-  const ci = CourseInstances.find({
-    courseID: course._id,
-  }).fetch();
-  _.map(ci, (c) => {
-    if (!_.includes(interested, c.studentID)) {
-      interested.push(c.studentID);
-    }
-  });
-  return interested;
-}
-
-function numUsers(course) {
-  return interestedUsers(course).length;
-}
 
 Template.Student_Explorer_Courses_Widget.helpers({
   isLabel(label, value) {

@@ -49,12 +49,10 @@ Template.Student_Explorer_Social_Widget.onCreated(function studentExplorerSocial
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
-  console.log("hello");
   this.subscribe(CourseInstances.getPublicationName(1), this.data.item._id);
   this.currentItem = new ReactiveVar('');
 });
 
 Template.Student_Explorer_Social_Widget.onRendered(function studentExplorerSocialWidgetOnRendered() {
-  console.log("rendered");
 });
 
