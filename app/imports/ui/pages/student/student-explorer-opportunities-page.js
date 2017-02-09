@@ -109,7 +109,7 @@ Template.Student_Explorer_Opportunities_Page.helpers({
       { label: 'Sponsor', value: sponsor(opportunity) },
       { label: 'Description', value: opportunity.description },
       { label: 'More Information', value: makeLink(opportunity.moreInformation) },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
+      { label: 'Interests', value: opportunity.interestIDs },
       { label: 'ICE', value: opportunity.ice },
       { label: 'Teaser', value: teaser(opportunity) },
     ];

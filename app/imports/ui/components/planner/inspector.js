@@ -183,8 +183,9 @@ Template.Inspector.helpers({
       return Slugs.getNameFromID(Template.instance().state.get(plannerKeys.detailOpportunity).slugID);
     } else
       if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-        const course = Courses.findDoc(Template.instance().state.get(plannerKeys.detailOpportunityInstance).courseID);
-        return Slugs.getNameFromID(course.slugID);
+        const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+        const opp = Opportunities.findDoc({ _id: oi.opportunityID });
+        return Slugs.getNameFromID(opp.slugID);
       }
     return null;
   },
