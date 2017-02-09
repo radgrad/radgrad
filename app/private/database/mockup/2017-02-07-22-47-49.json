@@ -2121,7 +2121,7 @@
           "course": "ics311",
           "note": "ICS 311",
           "verified": true,
-          "creditHrs": 3,
+          "creditHrs": 4,
           "grade": "B",
           "student": "abi"
         },
@@ -2265,7 +2265,7 @@
           "course": "ics311",
           "note": "ICS 311",
           "verified": true,
-          "creditHrs": 3,
+          "creditHrs": 4,
           "grade": "A",
           "student": "alfred"
         },
@@ -2318,7 +2318,7 @@
           "semester": "Spring-2016",
           "course": "ics332",
           "note": "ICS 332",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
@@ -2327,7 +2327,7 @@
           "semester": "Spring-2016",
           "course": "ics464",
           "note": "ICS 464",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
@@ -2336,7 +2336,7 @@
           "semester": "Fall-2016",
           "course": "ics414",
           "note": "ICS 414",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
@@ -2345,7 +2345,7 @@
           "semester": "Fall-2016",
           "course": "ics415",
           "note": "ICS 415",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
@@ -2409,7 +2409,7 @@
           "course": "ics311",
           "note": "ICS 311",
           "verified": true,
-          "creditHrs": 3,
+          "creditHrs": 4,
           "grade": "A",
           "student": "betty"
         },
@@ -2444,7 +2444,7 @@
           "semester": "Fall-2016",
           "course": "ics313",
           "note": "ICS 313",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty"
@@ -2453,7 +2453,7 @@
           "semester": "Fall-2016",
           "course": "ics331",
           "note": "ICS 331",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty"
@@ -2516,7 +2516,7 @@
           "semester": "Fall-2016",
           "course": "ics111",
           "note": "ICS 111",
-          "verified": false,
+          "verified": true,
           "creditHrs": 4,
           "grade": "A",
           "student": "charley"
@@ -2525,7 +2525,7 @@
           "semester": "Fall-2016",
           "course": "ics141",
           "note": "ICS 141",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley"
@@ -2553,7 +2553,7 @@
           "course": "ics311",
           "note": "ICS 311",
           "verified": false,
-          "creditHrs": 3,
+          "creditHrs": 4,
           "grade": "A",
           "student": "charley"
         },
