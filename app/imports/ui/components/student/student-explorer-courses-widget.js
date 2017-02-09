@@ -12,17 +12,14 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 function interestedUsers(course) {
   const interested = [];
-  console.log(CourseInstances.find().fetch());
   const ci = CourseInstances.find({
     courseID: course._id,
   }).fetch();
-  console.log(ci);
   _.map(ci, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
     }
   });
-  console.log(interested);
   return interested;
 }
 

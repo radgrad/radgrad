@@ -46,6 +46,9 @@ import './student-explorer-opportunities-widget-teaser.js';
 import './student-explorer-review-stars-widget.html';
 import './student-explorer-review-stars-widget.js';
 
+import './student-explorer-social-widget.html';
+import './student-explorer-social-widget.js';
+
 import './student-explorer-student-info.html';
 import './student-explorer-student-info.js';
 
