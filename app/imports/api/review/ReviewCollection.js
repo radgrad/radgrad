@@ -95,7 +95,7 @@ class ReviewCollection extends BaseInstanceCollection {
 
   /**
    * Removes the passed Review and its associated Slug.
-   * @param opportunity The document or _id associated with this Reivew.
+   * @param opportunity The document or _id associated with this Review.
    * @throws {Meteor.Error} If review is not defined.
    */
   removeIt(review) {
