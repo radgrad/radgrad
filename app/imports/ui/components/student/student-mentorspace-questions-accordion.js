@@ -12,6 +12,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_MentorSpace_Questions_Accordion.onCreated(function studentMentorSpacePageAccordionOnCreated() {
   this.autorun(() => {
@@ -52,5 +53,11 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
   },
   isOneAnswer(questionID) {
     return MentorAnswers.getAnswers(questionID).count() === 1;
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
+  userUsername(mentorID) {
+    return Users.find({ _id: mentorID }).fetch()[0].username;
   },
 });

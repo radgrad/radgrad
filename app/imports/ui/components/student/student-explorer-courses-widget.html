@@ -95,7 +95,7 @@
         {{#if isLabel descriptionPair.label 'Interests'}}
           <div class="ui right aligned secondary segment">
             {{#each interest in descriptionPair.value}}
-              <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
+              <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestSlugName interest)}}"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
             {{/each}}
           </div>
         {{/if}}

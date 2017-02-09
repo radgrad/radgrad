@@ -8,7 +8,7 @@
           <div class="item">
             <div class="ui grid">
               <div class="four wide column">
-                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
+                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a href="{{pathFor usersRouteName username=routeUserName explorerUserName=userUsername}}">{{name}}</a><br>{{abbreviateSemester semester}}
               </div>
               <div class="twelve wide column">
                 {{> Student_Explorer_Review_Stars_Widget rating = rating}}
@@ -22,7 +22,7 @@
         <div class="item">
           <div class="ui grid">
             <div class="four wide column">
-              <img class="ui left floated middle aligned circular mini image" src="{{currentUserPicture}}"><a>{{currentUserName}}</a>
+              <img class="ui left floated middle aligned circular mini image" src="{{currentUserPicture}}"><a href="{{pathFor usersRouteName username=routeUserName explorerUserName=userUsername}}">{{currentUserName}}</a>
             </div>
             <div class="twelve wide column">
               {{#if completed}}
@@ -42,7 +42,7 @@
           <div class="item">
             <div class="ui grid">
               <div class="four wide column">
-                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a>{{name}}</a><br>{{abbreviateSemester semester}}
+                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a href="{{pathFor usersRouteName username=routeUserName explorerUserName=username}}">{{name}}</a><br>{{abbreviateSemester semester}}
               </div>
               <div class="twelve wide column">
                 {{> Student_Explorer_Review_Stars_Widget rating = rating}}

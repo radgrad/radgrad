@@ -586,7 +586,9 @@
           "number": "ICS 110",
           "description": "Basic concepts needed to write computer programs. Simple program design and implementation using a specific programming language; (C) C; (D) through animations; (P) Python. Each alpha repeatable unlimited times, but credit earned one time only.",
           "creditHrs": 3,
-          "interests": [],
+          "interests": [
+            "python"
+          ],
           "prerequisites": []
         },
         {
@@ -732,8 +734,8 @@
             "computer-architecture",
             "application-development"
           ],
-          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS311.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS311/",
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS312.html",
+          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS312/",
           "prerequisites": [
             "ics212",
             "ics314"
@@ -786,7 +788,8 @@
           "creditHrs": 3,
           "interests": [
             "databases",
-            "application-development"
+            "application-development",
+            "sql"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS321.html",
           "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS321/",
@@ -845,7 +848,7 @@
             "hardware",
             "application-development"
           ],
-          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS331.html",
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS351.html",
           "prerequisites": [
             "ics311",
             "ics314"
@@ -1030,7 +1033,7 @@
             "computer-ethics",
             "it-management"
           ],
-          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS415.html",
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS425.html",
           "prerequisites": [
             "ics355"
           ]
@@ -1294,9 +1297,10 @@
           "creditHrs": 3,
           "interests": [
             "mobile",
-            "application-development"
+            "application-development",
+            "android"
           ],
-          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS424.html",
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS466.html",
           "prerequisites": [
             "ics311",
             "ics314"
@@ -1456,7 +1460,7 @@
           "description": "Reflects special interests of faculty. Oriented toward juniors and seniors. Repeatable one time for BS/CS students.",
           "creditHrs": 3,
           "interests": [],
-          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS485.html",
+          "syllabus": "",
           "prerequisites": [
             "ics311",
             "ics314"
@@ -1469,8 +1473,10 @@
           "number": "ICS 495",
           "description": "Special topics in security oriented toward juniors and seniors. Repeatable unlimited times.",
           "creditHrs": 3,
-          "interests": [],
-          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS485.html",
+          "interests": [
+            "security"
+          ],
+          "syllabus": "",
           "prerequisites": [
             "ics311",
             "ics314"
@@ -2121,7 +2127,7 @@
           "course": "ics311",
           "note": "ICS 311",
           "verified": true,
-          "creditHrs": 3,
+          "creditHrs": 4,
           "grade": "B",
           "student": "abi"
         },
@@ -2265,7 +2271,7 @@
           "course": "ics311",
           "note": "ICS 311",
           "verified": true,
-          "creditHrs": 3,
+          "creditHrs": 4,
           "grade": "A",
           "student": "alfred"
         },
@@ -2318,7 +2324,7 @@
           "semester": "Spring-2016",
           "course": "ics332",
           "note": "ICS 332",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
@@ -2327,7 +2333,7 @@
           "semester": "Spring-2016",
           "course": "ics464",
           "note": "ICS 464",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
@@ -2336,7 +2342,7 @@
           "semester": "Fall-2016",
           "course": "ics414",
           "note": "ICS 414",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
@@ -2345,7 +2351,7 @@
           "semester": "Fall-2016",
           "course": "ics415",
           "note": "ICS 415",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "alfred"
@@ -2409,7 +2415,7 @@
           "course": "ics311",
           "note": "ICS 311",
           "verified": true,
-          "creditHrs": 3,
+          "creditHrs": 4,
           "grade": "A",
           "student": "betty"
         },
@@ -2444,7 +2450,7 @@
           "semester": "Fall-2016",
           "course": "ics313",
           "note": "ICS 313",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty"
@@ -2453,7 +2459,7 @@
           "semester": "Fall-2016",
           "course": "ics331",
           "note": "ICS 331",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty"
@@ -2516,7 +2522,7 @@
           "semester": "Fall-2016",
           "course": "ics111",
           "note": "ICS 111",
-          "verified": false,
+          "verified": true,
           "creditHrs": 4,
           "grade": "A",
           "student": "charley"
@@ -2525,7 +2531,7 @@
           "semester": "Fall-2016",
           "course": "ics141",
           "note": "ICS 141",
-          "verified": false,
+          "verified": true,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley"
@@ -2553,7 +2559,7 @@
           "course": "ics311",
           "note": "ICS 311",
           "verified": false,
-          "creditHrs": 3,
+          "creditHrs": 4,
           "grade": "A",
           "student": "charley"
         },
@@ -3150,7 +3156,7 @@
           "moreInformation": "https://en.wikipedia.org/wiki/Entrepreneurship"
         },
         {
-          "name": "Game design",
+          "name": "Game Design",
           "slug": "game-design",
           "description": "Game design is the art of applying design and aesthetics to create a game to facilitate interaction between players for entertainment or for medical, educational, or experimental purposes. Game design creates goals, rules, and challenges to produce desirable interactions among its participants and, possibly, spectators.",
           "interestType": "cs-disciplines",
@@ -4666,6 +4672,32 @@
           "independentStudy": false
         },
         {
+          "name": "Learn Linux",
+          "slug": "udacity-learn-linux",
+          "description": "Learn Linux in 5 Days doesn't make any assumptions about your background or knowledge of Linux.\nYou need no prior knowledge to benefit from this course.\nYou will be guided step by step using a logical and systematic approach.\nAs new concepts, commands, or jargon are encountered they are explained in plain language, making it easy for anyone to understand.\nAs an added bonus for enrolling in the Learn Linux in 5 Days video training course, you'll receive a step-by-step checklist and video that teaches you how to install WordPress on an Ubuntu Linux system.\nYou'll learn how to install a web server, how to install a database server, how to create database users, and how to configure WordPress.",
+          "opportunityType": "online-learning",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 0,
+            "c": 10,
+            "e": 0
+          },
+          "interests": [
+            "linux",
+            "databases"
+          ],
+          "semesters": [
+            "Summer-2015",
+            "Summer-2016",
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019",
+            "Summer-2020"
+          ],
+          "moreInformation": "https://www.udemy.com/learn-linux-in-5-days/",
+          "independentStudy": false
+        },
+        {
           "name": "Career Fair",
           "slug": "uh-career-fair",
           "description": "The purpose of this career fair is to provide students with the “tools” and resources to make important and valuable career decisions. During the Career Fair, you will take your “first steps” toward meaningful employment by meeting with employers face to face to exchange information.",
@@ -6115,6 +6147,7 @@
           ],
           "careerGoals": [
             "information-system-manager",
+            "system-administrator",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
@@ -6354,6 +6387,7 @@
           ],
           "careerGoals": [
             "information-system-manager",
+            "system-administrator",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
