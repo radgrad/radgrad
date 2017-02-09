@@ -8,7 +8,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
-
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Courses_Of_Interest_Card.onCreated(function studentCoursesOfInterestCardOnCreated() {
   this.subscribe(Courses.getPublicationName());
@@ -16,7 +16,7 @@ Template.Student_Courses_Of_Interest_Card.onCreated(function studentCoursesOfInt
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(3));
 });
 
 function interestedStudentsHelper(course) {
@@ -88,7 +88,27 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     }
     return description;
   },
-
+  courseSlug(course) {
+    return Slugs.findDoc(course.slugID).name;
+  },
+  interestSlug(interest) {
+    return Slugs.findDoc(interest.slugID).name;
+  },
+  userSlug(studentID) {
+    return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
+  },
+  coursesRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
+  },
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
   matchingInterests(course) {
     return matchingInterestsHelper(course);
   },

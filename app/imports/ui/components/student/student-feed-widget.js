@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { Feed } from '../../../api/feed/FeedCollection.js';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 function dateDiffInDays(a, b) {
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -43,6 +45,12 @@ Template.Student_Feed_Widget.helpers({
   },
   feedPicture(feed) {
     return feed.picture;
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
+  userSlug(feed) {
+    return Slugs.findDoc((Users.findDoc(feed.studentID)).slugID).name;
   },
 });
 
