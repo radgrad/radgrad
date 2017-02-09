@@ -50,7 +50,7 @@ Template.Student_Explorer_Edit_Review_Widget.helpers({
         opportunityID: opportunity._id,
       }).fetch();
     }
-    _.map(instances, (instance) => {
+    _.map(instances, function (instance) {
       semesters.push(Semesters.findDoc(instance.semesterID));
     });
     return semesters;
@@ -65,11 +65,8 @@ Template.Student_Explorer_Edit_Review_Widget.events({
     editSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
-      updatedData.student = this.review.student;
-      updatedData.reviewType = this.review.reviewType;
-      updatedData.reviewee = this.review.reviewee;
-      updatedData.slug = this.review.slug;
       updatedData.moderated = false;
+      FormUtils.renameKey(updatedData, 'semester', 'semesterID');
       Reviews.update(this.review._id, { $set: updatedData });
       FormUtils.indicateSuccess(instance, event);
     } else {
