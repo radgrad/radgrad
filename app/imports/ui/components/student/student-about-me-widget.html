@@ -29,7 +29,7 @@
           {{else}}
             <p>No desired degree specified yet.</p>
           {{/if}}
-          <a href="{{pathFor 'Student_Explorer_Degree_Page' username=routeUserName}}">Edit in degree explorer</a>
+          <a href="{{pathFor degreesRouteName username=routeUserName degree='#'}}">Edit in degree explorer</a>
         </div>
         <div class="two wide column">
           <p><b>Professional Website</b></p>

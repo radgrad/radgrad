@@ -5,6 +5,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 function interestedUsers(course) {
   const interested = [];
@@ -49,8 +50,10 @@ Template.Student_Explorer_Social_Widget.onCreated(function studentExplorerSocial
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(3));
-  this.currentItem = new ReactiveVar('');
+  this.currentItem = () => FlowRouter.getParam('course');
+  this.autorun(() => {
+    this.subscribe(CourseInstances.getPublicationName(3), this.currentItem());
+  });
 });
 
 Template.Student_Explorer_Social_Widget.onRendered(function studentExplorerSocialWidgetOnRendered() {
