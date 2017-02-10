@@ -49,7 +49,7 @@ Template.Student_Explorer_Social_Widget.onCreated(function studentExplorerSocial
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(1), this.data.item._id);
+  this.subscribe(CourseInstances.getPublicationName(3));
   this.currentItem = new ReactiveVar('');
 });
 

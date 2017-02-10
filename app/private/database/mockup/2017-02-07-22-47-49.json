@@ -5179,6 +5179,72 @@
       "name": "ReviewCollection",
       "contents": [
         {
+          "slug": "review-course-ics111-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2013",
+          "rating": 5,
+          "comments": "ICS 111 was fun, and I learned a lot. The projects weren't difficult nor were the assignments. Come to the lectures, do the readings, and take the time to understand the concepts, and you'll do fine.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Spring-2014",
+          "rating": 5,
+          "comments": "A step up from ICS 111, ICS 211 taught me a lot about data structures. Lectures were engaging, and the programming assignments were challenging. Most people will do well in this course if they put their time into learning the concepts and if they start the assignments early!",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "I've heard a lot about how this course is the bottleneck for progressing through the ICS program. Compared to all the courses I've taken before, this has to be the most time consuming. It's not that the concepts are difficult to understand nor is the courseload that heavy, but I found myself having to put more time to review and understand everything. The class structure for this was inverted, so we watched video lectures in our own time and used class time to do actual problems. I thought it was a better use of class time. ",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics241-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics241",
+          "semester": "Spring-2014",
+          "rating": 3,
+          "comments": "I understand how Discrete Math relates to Information and Computer Science, but I still didn't enjoy this course-- the content, that is. Initially the homework problems were, to me, difficult. Fortunately, the professor tried very hard to teach the concepts well, and I received a lot of help from the TA and the professor during office hours.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Spring-2015",
+          "rating": 5,
+          "comments": "ICS 321 was enjoyable. The things we learned were straightforward. We watched lectures online, did problems in class, and there were very few homework assignments. Much of my grade came from the final project. There I had the chance to show off my programming prowess by designing a database and applying what I learned. I hadn't created a website before, but I learned! I created a simple website with a backend MySQL database.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-opportunity-hacc-alfred",
+          "student": "alfred",
+          "reviewType": "opportunity",
+          "reviewee": "hacc",
+          "semester": "Fall-2016",
+          "rating": 5,
+          "comments": "HACC was a great opportunity to display what I've learned as an ICS student and to have the opportunity to help address a problem in Hawai'i.",
+          "moderated": true,
+          "visible": true
+        },
+        {
           "slug": "review-course-ics111-aaronvil",
           "student": "aaronvil",
           "reviewType": "course",
@@ -6046,7 +6112,8 @@
           "interests": [
             "application-development",
             "javascript"
-          ]
+          ],
+          "opportunity": "acmanoa-web-development"
         },
         {
           "title": "Algorithm Visualization",
@@ -6080,7 +6147,8 @@
           "duration": "0:50",
           "interests": [
             "security"
-          ]
+          ],
+          "opportunity": "greyhats"
         },
         {
           "title": "Open Power Quality",
@@ -6091,7 +6159,8 @@
           "duration": "0:21",
           "interests": [
             "software-engineering"
-          ]
+          ],
+          "opportunity": "open-power-quality"
         },
         {
           "title": "RadGrad",
@@ -6129,7 +6198,8 @@
           "duration": "0:17",
           "interests": [
             "data-science"
-          ]
+          ],
+          "opportunity": "data-analytics-for-solar-energy"
         }
       ]
     },
