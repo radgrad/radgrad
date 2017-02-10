@@ -18,7 +18,7 @@ export function calcLevel(studentID) {
   const ice = getTotalICE(verified);
   const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true }).count();
   let level = 1;
-  if (ice.i === 100 && ice.c === 100 && ice.e === 100 && numReviews >= 6) {
+  if (ice.i >= 100 && ice.c >= 100 && ice.e >= 100 && numReviews >= 6) {
     level = 6;
   } else
     if (ice.i >= 80 && ice.c >= 80 && ice.e >= 80 && numReviews >= 1) {

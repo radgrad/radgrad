@@ -5175,6 +5175,17 @@
       "name": "ReviewCollection",
       "contents": [
         {
+          "slug": "review-course-ics314-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics314",
+          "semester": "Fall-2014",
+          "rating": 5,
+          "comments": "ICS 314 teaches valuable concepts if you want to be a Software Engineer. I thought the class was fun, and Professor Johnson is great.",
+          "moderated": true,
+          "visible": true
+        },
+        {
           "slug": "review-course-ics111-alfred",
           "student": "alfred",
           "reviewType": "course",
