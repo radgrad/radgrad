@@ -11,10 +11,20 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_About_Me_Widget.helpers({
   getDictionary() {
     return Template.instance().state;
+  },
+  careerGoalsRouteName() {
+    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+  },
+  degreesRouteName() {
+    return RouteNames.studentExplorerDegreesPageRouteName;
+  },
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
   },
   careerGoals() {
     const ret = [];

@@ -8,6 +8,7 @@ import {Courses} from '/imports/api/course/CourseCollection';
 import {ROLE} from '/imports/api/role/Role';
 import {Semesters} from '/imports/api/semester/SemesterCollection';
 import {Users} from '/imports/api/user/UserCollection';
+import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import {makeCourseICE} from '/imports/api/ice/IceProcessor';
 import {radgradCollections} from '/imports/api/integrity/RadGradCollections';
@@ -40,6 +41,7 @@ class CourseInstanceCollection extends BaseCollection {
     this.publicationNames.push(`${this._collectionName}.Public`);
     this.publicationNames.push(`${this._collectionName}.PerStudentAndSemester`);
     this.publicationNames.push(`${this._collectionName}.PublicStudent`);
+    this.publicationNames.push(`${this._collectionName}.PublicSlugStudent`);
 
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
@@ -204,6 +206,17 @@ class CourseInstanceCollection extends BaseCollection {
           });
       Meteor.publish(this.publicationNames[3], function publicStudentPublish() {  // eslint-disable-line
         return instance._collection.find({}, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
+      });
+      Meteor.publish(this.publicationNames[4], function publicSlugPublish(courseSlug) {  // eslint-disable-line
+        // check the courseID.
+        const slug = Slugs.find({ name: courseSlug }).fetch();
+        const course = Courses.find({ slugID: slug[0]._id }).fetch();
+        const courseID = course[0]._id;
+        new SimpleSchema({
+          courseID: { type: String },
+        }).validate({ courseID });
+
+        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
       });
     }
   }

@@ -181,6 +181,13 @@ Template.Student_Opportunities_Of_Interest_Card.events({
     };
     OpportunityInstances.define(oi);
   },
+  'click .hide': function clickHide(event) {
+    event.preventDefault();
+    this.opportunityList = _.reject(this.opportunityList, function(opp) {
+      return opp === this.opportunity;
+    });
+    console.log("hi");
+  },
 });
 
 Template.Student_Opportunities_Of_Interest_Card.onRendered(function studentOpportunitiesOfInterestCardOnRendered() {
