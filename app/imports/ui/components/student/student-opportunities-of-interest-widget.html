@@ -7,7 +7,7 @@
     {{#if opportunities}}
       <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui two cards">
         {{#each opp in opportunities}}
-        {{> Student_Opportunities_Of_Interest_Card opportunity = opp}}
+        {{> Student_Opportunities_Of_Interest_Card opportunity = opp opportunityList = opportunities}}
         {{/each}}
       </div>
     {{else}}

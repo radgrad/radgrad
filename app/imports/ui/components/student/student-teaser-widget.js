@@ -2,8 +2,11 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection.js';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Teaser_Widget.onCreated(function appBodyOnCreated() {
   this.subscribe(Teasers.getPublicationName());
@@ -61,6 +64,24 @@ function matchingInterestsHelper(teaser) {
 Template.Student_Teaser_Widget.helpers({
   getDictionary() {
     return Template.instance().state;
+  },
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
+  interestSlug(interest) {
+    return Slugs.findDoc(interest.slugID).name;
+  },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+  },
+  opportunitySlug(teaser) {
+    let ret;
+    if (teaser.opportunityID) {
+      ret = Slugs.findDoc(Opportunities.findDoc(teaser.opportunityID).slugID).name;
+    } else {
+      ret = '#';
+    }
+    return ret;
   },
   teasers() {
     return matchingTeasers();

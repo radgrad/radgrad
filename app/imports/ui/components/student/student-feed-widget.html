@@ -11,7 +11,7 @@
       </div>
       <div class="content">
         <div class="summary">
-          <a>{{feedStudent feed}}</a> {{feedDescription feed}}
+          <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feedStudent feed}}</a> {{feedDescription feed}}
           <div class="date">
             {{feedTimestamp feed}}
           </div>

@@ -9,12 +9,14 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 function getEventsHelper(iceType, type, earned, semester) {
   if (getUserIdFromRoute()) {
@@ -168,6 +170,18 @@ Template.Student_Ice_Widget.helpers({
   experiencePoints(ice) {
     return ice.e;
   },
+  coursesRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
+  },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+  },
+  courseSlug(course) {
+    return Slugs.findDoc(Courses.findDoc(course.courseID).slugID).name;
+  },
+  opportunitySlug(opportunity) {
+    return Slugs.findDoc(Opportunities.findDoc(opportunity.opportunityID).slugID).name;
+  },
   years() {
     const studentID = getUserIdFromRoute();
     const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
@@ -290,6 +304,7 @@ Template.Student_Ice_Widget.onCreated(function studentIceOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(VerificationRequests.getPublicationName());
 });

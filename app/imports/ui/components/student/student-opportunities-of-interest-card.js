@@ -8,6 +8,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Opportunities_Of_Interest_Card.onCreated(function studentOpportunitiesOfInterestCardOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
@@ -113,11 +114,29 @@ Template.Student_Opportunities_Of_Interest_Card.helpers({
   interestedStudents(opp) {
     return interestedStudentsHelper(opp);
   },
+  interestSlug(interest) {
+    return Slugs.findDoc(interest.slugID).name;
+  },
+  userSlug(studentID) {
+    return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
+  },
   numberStudents(opp) {
     return interestedStudentsHelper(opp).length;
   },
   matchingInterests(opp) {
     return matchingInterestsHelper(opp);
+  },
+  opportunitySlug(opportunity) {
+    return Slugs.findDoc(opportunity.slugID).name;
+  },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+  },
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
   otherInterests(opp) {
     const matchingInterests = matchingInterestsHelper(opp);
@@ -161,6 +180,13 @@ Template.Student_Opportunities_Of_Interest_Card.events({
       student: username,
     };
     OpportunityInstances.define(oi);
+  },
+  'click .hide': function clickHide(event) {
+    event.preventDefault();
+    this.opportunityList = _.reject(this.opportunityList, function(opp) {
+      return opp === this.opportunity;
+    });
+    console.log("hi");
   },
 });
 
