@@ -33,7 +33,7 @@ export function calcLevel(studentID) {
           if (ice.c >= 12) {
             level = 2;
           }
-  console.log(studentID, ice, numReviews, level);
+  // console.log(studentID, ice, numReviews, level);
   return level;
 }
 

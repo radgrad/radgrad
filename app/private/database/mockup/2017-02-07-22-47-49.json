@@ -2903,6 +2903,12 @@
           "feedbackType": "Recommendation"
         },
         {
+          "name": "Opportunity recommendations based on interests",
+          "slug": "OpportunityRecommendationsBasedOnInterests",
+          "description": "These opportunities are recommended based upon your interests.",
+          "feedbackType": "Recommendation"
+        },
+        {
           "name": "Course not likely to be offered",
           "slug": "courseNotOffered",
           "description": "Your plan include a course that is not offered in the semester",

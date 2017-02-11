@@ -2,8 +2,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Opportunities } from './OpportunityCollection';
 import { OpportunityInstances } from './OpportunityInstanceCollection';
 import PreferredChoice from '../preference/PreferredChoice';
+import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
+import { getStudentsCurrentSemesterNumber } from '../year/AcademicYearUtilities';
 
 export function getRandomInt(min, max) {
   min = Math.ceil(min);  // eslint-disable-line no-param-reassign
@@ -68,6 +70,28 @@ export const chooseStudentSemesterOpportunity = (semester, semesterNumber, stude
   const interestIDs = Users.getInterestIDs(studentID);
   const preferred = new PreferredChoice(choices, interestIDs);
   const best = preferred.getBestChoices();
+  if (best) {
+    return best[getRandomInt(0, best.length)];
+  }
+  return null;
+};
+
+export const getStudentCurrentSemesterOpportunityChoices = (studentID) => {
+  const currentSemester = Semesters.getCurrentSemesterDoc();
+  const semesterNum = getStudentsCurrentSemesterNumber(studentID);
+  return getStudentSemesterOpportunityChoices(currentSemester, semesterNum, studentID);
+};
+
+export const getRecommendedCurrentSemesterOpportunityChoices = (studentID) => {
+  const choices = getStudentCurrentSemesterOpportunityChoices(studentID);
+  const interestIDs = Users.getInterestIDs(studentID);
+  const preferred = new PreferredChoice(choices, interestIDs);
+  const best = preferred.getBestChoices();
+  return best;
+};
+
+export const chooseCurrentSemesterOpportunity = (studentID) => {
+  const best = getRecommendedCurrentSemesterOpportunityChoices(studentID);
   if (best) {
     return best[getRandomInt(0, best.length)];
   }

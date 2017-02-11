@@ -1,5 +1,5 @@
 <template name="Academic_Plan_2">
-  <!--{{#if Template.subscriptionsReady}}-->
+  {{#if Template.subscriptionsReady}}
     <div class="ui divided stackable grid">
       <div class="stretched row">
         <div class="ui ten wide column">
@@ -55,9 +55,9 @@
         </div>
       </div>
     </div>
-  <!--{{else}}-->
-    <!--{{> Loading}}-->
-  <!--{{/if}}-->
+  {{else}}
+    {{> Loading}}
+  {{/if}}
   <script>
     function allowDrop(ev) {
       ev.preventDefault();

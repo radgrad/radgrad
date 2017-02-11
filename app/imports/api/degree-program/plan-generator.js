@@ -2,6 +2,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicYearInstances } from '../year/AcademicYearInstanceCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
+import { FeedbackFunctions } from '../feedback/FeedbackFunctions';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
@@ -10,8 +11,6 @@ import * as courseUtils from '../course/CourseUtilities';
 import * as opportunityUtils from '../opportunity/OpportunityUtilities';
 import { getPlanningICE } from '../ice/IceProcessor';
 import { BS_CS_LIST, BA_ICS_LIST } from './degree-program';
-
-const area = 'PlanGeneratorPrerequisites';
 
 /**
  * Converts a course Slug into the capitalized note needed for CourseInstances.
@@ -536,6 +535,6 @@ export function generateDegreePlan(template, startSemester, student) {
     // update the semester
     semester = semUtils.nextSemester(semester);
   }
-  courseUtils.checkPrerequisites(studentID, area);
+  FeedbackFunctions.checkPrerequisites(studentID);
   return plan;
 }

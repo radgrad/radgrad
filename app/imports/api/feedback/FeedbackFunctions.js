@@ -1,102 +1,17 @@
 // import { check } from 'meteor/check';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { calculateOpportunityCompatibility, getRandomInt } from '../opportunity/OpportunityUtilities';
+import { CourseInstances } from '../course/CourseInstanceCollection';
+import { Courses } from '../course/CourseCollection';
+import { DesiredDegrees } from '../degree/DesiredDegreeCollection';
 import { Feedbacks } from './FeedbackCollection';
 import { FeedbackInstances } from './FeedbackInstanceCollection';
-import { FeedbackType } from './FeedbackType';
-import { Opportunities } from '../opportunity/OpportunityCollection';
 import { Semesters } from '../semester/SemesterCollection';
+import * as oppUtils from '../opportunity/OpportunityUtilities';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 
 /** @module FeedbackFunctions */
 
-const feedbackDefinitions = [
-  {
-    name: 'Course recommendations based on interests',
-    slug: 'CourseRecommendationsBasedOnInterests',
-    description: 'These courses are recommended based upon your interests.',
-    feedbackType: 'Recommendation',
-  },
-  {
-    name: 'Opportunity recommendations based on interests',
-    slug: 'OpportunityRecommendationsBasedOnInterests',
-    description: 'These opportunities are recommended based upon your interests.',
-    feedbackType: 'Recommendation',
-  },
-  {
-    name: 'Course not likely to be offered',
-    slug: 'courseNotOffered',
-    description: 'Your plan include a course that is not offered in the semester',
-    feedbackType: 'Warning',
-  },
-  {
-    name: 'ICE competency points',
-    slug: 'iceCompetencyPoints',
-    description: 'Recommendation for ICE competency points.',
-    feedbackType: 'Recommendation',
-  },
-  {
-    name: 'ICE experience points',
-    slug: 'iceExperiencePoints',
-    description: 'Recommendation for ICE experience points.',
-    feedbackType: 'Recommendation',
-  },
-  {
-    name: 'ICE innovation points',
-    slug: 'iceInnovationPoints',
-    description: 'Recommendation for ICE innovation points.',
-    feedbackType: 'Recommendation',
-  },
-  {
-    name: 'Prerequisite missing',
-    slug: 'prerequisiteMissing',
-    description: 'A prerequisite course is missing.',
-    feedbackType: 'Warning',
-  },
-  {
-    name: 'Required course missing',
-    slug: 'requiredCourseMissing',
-    description: 'A required course is missing.',
-    feedbackType: 'Warning',
-  },
-  {
-    name: 'Semester overloaded',
-    slug: 'semesterOverloaded',
-    description: 'Semester appears overloaded.',
-    feedbackType: 'Warning',
-  },
-  {
-    name: 'Upload STAR data',
-    slug: 'updateStarData',
-    description: 'See your ICS advisor to upload STAR data',
-    feedbackType: 'Recommendation',
-  },
-];
-
-function buildCurrentSemesterChoices(studentID) {
-  const choices = {};
-  let max = 0;
-  const currentSemesterID = Semesters.getCurrentSemester();
-  const opportunities = Opportunities.find({ semesterIDs: currentSemesterID }).fetch();
-  _.map(opportunities, (opportunity) => {
-    const score = calculateOpportunityCompatibility(opportunity._id, studentID);
-    if (score > max) {
-      max = score;
-    }
-    if (!choices[score]) {
-      choices[score] = [];
-    }
-    choices[score].push(opportunity);
-  });
-  choices.max = max;
-  return choices;
-}
-
-function bestStudentSemesterOpportunities(studentID) {
-  const choices = buildCurrentSemesterChoices(studentID);
-  return choices[choices.max];
-};
 
 /**
  * A class containing Feedback functions. Each Feedback function is a method on the singleton instance
@@ -122,7 +37,13 @@ export class FeedbackFunctionClass {
     // });
   }
 
-  _clearFeedbackInstances(studentID, area) {
+  /**
+   * Clears the feedback instances.
+   * @param studentID
+   * @param area
+   * @private
+   */
+  clearFeedbackInstances(studentID, area) {
     const userID = studentID;
     const instances = FeedbackInstances.find({ userID, area }).fetch();
     _.map(instances, (fi) => {
@@ -130,16 +51,117 @@ export class FeedbackFunctionClass {
     });
   }
 
-  generateRecommendedOpportunities(studentID) {
-    const feedback = Feedbacks.findDoc({ name: 'Opportunity recommendations based on interests' });
-    const feedbackSlug = Slugs.getEntityID(feedback.slugID, 'Feedback');
-    this._clearFeedbackInstances(studentID, feedbackSlug);
-
-    const bestChoices = bestStudentSemesterOpportunities(studentID);
-    console.log(bestChoices);
-    _.map(bestChoices, (opp) => {
-
+  /**
+   * Checks the student's degree plan to ensure that all the prerequisites are met.
+   * @param studentID the student's ID.
+   */
+  checkPrerequisites(studentID) {
+    // console.log('checkPrerequisites');
+    const f = Feedbacks.find({ name: 'Prerequisite missing' }).fetch()[0];
+    const feedback = Slugs.getEntityID(f.slugID, 'Feedback');
+    const area = `ffn-${feedback}`;
+    this.clearFeedbackInstances(studentID, area);
+    const cis = CourseInstances.find({ studentID }).fetch();
+    cis.forEach((ci) => {
+      const semester = Semesters.findDoc(ci.semesterID);
+      const semesterName = Semesters.toString(ci.semesterID, false);
+      const course = Courses.findDoc(ci.courseID);
+      if (course) {
+        const prereqs = course.prerequisites;
+        prereqs.forEach((p) => {
+          const courseID = Slugs.getEntityID(p, 'Course');
+          const prerequisiteCourse = Courses.find({ _id: courseID }).fetch()[0];
+          const preCiIndex = _.findIndex(cis, function find(obj) {
+            return obj.courseID === courseID;
+          });
+          if (preCiIndex !== -1) {
+            const preCi = cis[preCiIndex];
+            const preCourse = Courses.findDoc(preCi.courseID);
+            const preSemester = Semesters.findDoc(preCi.semesterID);
+            if (preSemester) {
+              if (preSemester.sortBy >= semester.sortBy) {
+                const semesterName2 = Semesters.toString(preSemester._id, false);
+                const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is after or` +
+                    ` in ${semesterName2}.`;
+                FeedbackInstances.define({
+                  feedback,
+                  user: studentID,
+                  description,
+                  area,
+                });
+              }
+            }
+          } else {
+            const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
+                ' not found.';
+            FeedbackInstances.define({
+              feedback,
+              user: studentID,
+              description,
+              area,
+            });
+          }
+        });
+      }
     });
+  }
+
+  /**
+   * Checks the student's degree plan to ensure that it satisfies the degree requirements.
+   * @param studentID the student's ID.
+   */
+  checkCompletePlan(studentID) {
+    // console.log('checkCompletePlan');
+    const f = Feedbacks.find({ name: 'Required course missing' }).fetch()[0];
+    const feedback = Slugs.getEntityID(f.slugID, 'Feedback');
+    const area = `ffn-${feedback}`;
+    this.clearFeedbackInstances(studentID, area);
+    const student = Users.findDoc(studentID);
+    const courseIDs = Users.getCourseIDs(studentID);
+    const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
+    if (degree.shortName.startsWith('B.S.')) {
+      _.map(courseIDs, (id) => {
+        const course = Courses.findDoc(id);
+        const slug = Slugs.findDoc(course.slugID);
+        console.log(slug.name);
+      });
+    }
+    if (degree.shortName.startsWith('B.A.')) {
+      _.map(courseIDs, (id) => {
+        console.log(Courses.findDoc(id).shortName);
+      });
+    }
+
+  }
+
+  /**
+   * Creates a recommended opportunities FeedbackInstance for the given student and the current semester.
+   * @param studentID the student's ID.
+   */
+  generateRecommendedCurrentSemesterOpportunities(studentID) {
+    const feedbackDoc = Feedbacks.findDoc({ name: 'Opportunity recommendations based on interests' });
+    const feedback = Slugs.getEntityID(feedbackDoc.slugID, 'Feedback');
+    const area = `ffn-${feedback}`;
+    let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(studentID);
+    // console.log(bestChoices);
+    if (bestChoices) {
+      const len = bestChoices.length;
+      if (len > 3) {
+        bestChoices = _.drop(bestChoices, len - 3);
+      }
+      this.clearFeedbackInstances(studentID, area);
+      let description = 'Consider the following opportunities for this semester: ';
+      _.map(bestChoices, (opp) => {
+        description = `${description} ${opp.name}, `;
+      });
+      description = description.substring(0, description.length - 2);
+      FeedbackInstances.define({
+        feedback,
+        user: studentID,
+        description,
+        area,
+      });
+    }
   }
 }
 
