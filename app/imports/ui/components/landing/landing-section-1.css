@@ -1,8 +1,18 @@
-.landing-section-1 {
-  background: url('/images/landing/gradbackground.png') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  padding-bottom: 20px;
+.landing-menu > .item, .landing-menu .right.menu > .item {
+  position: initial !important;
+}
+
+#landing-section-1 {
+  background-color: rgba(0,0,0,.8);
+  padding-top: 68px;
+}
+
+.landing-ice {
+  margin: 0;
+}
+
+.landing-ice > .column {
+  padding-bottom: 0 !important;
 }
 
 .landing-section-1-welcome {
