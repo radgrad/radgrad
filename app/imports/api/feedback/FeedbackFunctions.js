@@ -161,6 +161,70 @@ export class FeedbackFunctionClass {
     }
   }
 
+  generateRecommendedCourse(studentID) {
+    // console.log('generateRecommendedCourse');
+    const feedbackDoc = Feedbacks.findDoc({ name: 'Course recommendations based on interests' });
+    const feedback = Slugs.getNameFromID(feedbackDoc.slugID, 'Feedback');
+    const area = `ffn-${feedback}`;
+    const coursesTakenSlugs = [];
+    const student = Users.findDoc(studentID);
+    const courseIDs = Users.getCourseIDs(studentID);
+    const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
+    let coursesNeeded;
+    if (degree.shortName.startsWith('B.S.')) {
+      coursesNeeded = BS_CS_LIST.slice(0);
+    }
+    if (degree.shortName.startsWith('B.A.')) {
+      coursesNeeded = BA_ICS_LIST.slice(0);
+    }
+    _.map(courseIDs, (cID) => {
+      const course = Courses.findDoc(cID);
+      coursesTakenSlugs.push(Slugs.getNameFromID(course.slugID));
+    });
+    this.clearFeedbackInstances(studentID, area);
+    const missing = this.missingCourses(courseIDs, coursesNeeded);
+    // console.log(missing);
+    if (missing.length > 0) {
+      let description = 'Consider taking the following class to meet the degree requirement: ';
+      if (missing.length > 1) {
+        description = 'Consider taking the following classes to meet the degree requirement: ';
+      }
+      const currentRoute = FlowRouter.current().path;
+      const index = getPosition(currentRoute, '/', 3);
+      const basePath = currentRoute.substring(0, index + 1);
+      _.map(missing, (slug) => {
+        if (Array.isArray(slug)) {
+          const course = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
+          const courseSlug = Slugs.findDoc(course.slugID);
+          description = 'Consider taking the following class to meet the degree requirement: ';
+          description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name})`;
+        } else if (slug.startsWith('ics3')) {
+          const courseID = Slugs.getEntityID(slug, 'Course');
+          const course = Courses.findDoc(courseID);
+          description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
+        } else if (slug.startsWith('ics4')) {
+          let bestChoices = courseUtils.bestStudent400LevelCourses(studentID, coursesTakenSlugs);
+          if (bestChoices) {
+            const len = bestChoices.length;
+            if (len > 5) {
+              bestChoices = _.drop(bestChoices, len - 5);
+            }
+            _.map(bestChoices, (course) => {
+              const cSlug = Slugs.findDoc(course.slugID);
+              description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${cSlug.name}), `;
+            });
+          }
+        }
+      });
+      FeedbackInstances.define({
+        feedback,
+        user: studentID,
+        description,
+        area,
+      });
+    }
+  }
+
   generateRecommended400LevelCourse(studentID) {
     // console.log('generateRecommended400');
     const feedbackDoc = Feedbacks.findDoc({ name: 'Course recommendations based on interests' });
@@ -264,13 +328,16 @@ export class FeedbackFunctionClass {
       // console.log(slug, index);
       if (index !== -1) {
         courses.splice(index, 1);
-      } else if (slug.startsWith('ics4')) {
-        courses.splice(_.indexOf(courses, 'ics4xx'), 1);
-      } else if (_.indexOf(courses[0], slug)) {
-        courses.splice(0, 1);
-      } else if (_.indexOf(courses[1], slug)) {
-        courses.splice(1, 1);
-      }
+      } else
+        if (slug.startsWith('ics4')) {
+          courses.splice(_.indexOf(courses, 'ics4xx'), 1);
+        } else
+          if (_.indexOf(courses[0], slug)) {
+            courses.splice(0, 1);
+          } else
+            if (_.indexOf(courses[1], slug)) {
+              courses.splice(1, 1);
+            }
     });
     return courses;
   }

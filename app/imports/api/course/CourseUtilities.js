@@ -119,11 +119,15 @@ export const getStudent300LevelDocs = (studentID, coursesTakenSlugs) => {
   return ret;
 };
 
-export const chooseStudent300LevelCourse = (studentID, coursesTakenSlugs) => {
+export const bestStudent300LevelCourses = (studentID, coursesTakenSlugs) => {
   const choices = getStudent300LevelDocs(studentID, coursesTakenSlugs);
   const interestIDs = Users.getInterestIDs(studentID);
   const preferred = new PreferredChoice(choices, interestIDs);
-  const best = preferred.getBestChoices();
+  return preferred.getBestChoices();
+};
+
+export const chooseStudent300LevelCourse = (studentID, coursesTakenSlugs) => {
+  const best = bestStudent300LevelCourses(studentID, coursesTakenSlugs);
   return best[getRandomInt(0, best.length)];
 };
 

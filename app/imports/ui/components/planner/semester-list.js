@@ -293,7 +293,7 @@ Template.Semester_List.events({
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
     // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
     template.state.set(plannerKeys.detailCourse, null);
     template.state.set(plannerKeys.detailCourseInstance, CourseInstances.findDoc(id));
     Tracker.afterFlush(() => {
@@ -414,7 +414,7 @@ Template.Semester_List.events({
     CourseInstances.removeIt(id);
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
     const template = Template.instance();
     template.state.set(plannerKeys.detailCourse, null);
     template.state.set(plannerKeys.detailCourseInstance, null);
