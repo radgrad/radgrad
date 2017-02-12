@@ -1,5 +1,5 @@
 <template name="First_Menu_backup">
-  <div class="ui top fixed borderless menu radgrad-first-menu">
+  <div id="top" class="ui top fixed borderless menu radgrad-first-menu">
     <div class="item"><img class="ui mini image" src="/images/radgrad_logo.png" style="width: 45px;"></div>
     <div class="item" style="padding-left: 0;">
       <h1>{{> RadGrad_Logo_Text}}</h1>
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="item">
-        <button class="ui grey button">
+        <button class="ui green basic button">
           {{#if useCAS}}
             {{> Cas_Login}}
           {{else}}
