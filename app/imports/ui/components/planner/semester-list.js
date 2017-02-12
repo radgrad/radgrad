@@ -4,6 +4,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Logger } from 'meteor/jag:pince';
 import { moment } from 'meteor/momentjs:moment';
+import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
@@ -291,7 +292,8 @@ Template.Semester_List.events({
     const id = CourseInstances.define(ci);
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
+    // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
     template.state.set(plannerKeys.detailCourse, null);
     template.state.set(plannerKeys.detailCourseInstance, CourseInstances.findDoc(id));
     Tracker.afterFlush(() => {
@@ -299,7 +301,7 @@ Template.Semester_List.events({
           .popup({
             on: 'click',
           });
-      template.$('a.100.item')
+      template.$('.item.oneHundredLevel')
           .popup({
             inline: true,
             hoverable: true,
@@ -412,6 +414,7 @@ Template.Semester_List.events({
     CourseInstances.removeIt(id);
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
     const template = Template.instance();
     template.state.set(plannerKeys.detailCourse, null);
     template.state.set(plannerKeys.detailCourseInstance, null);
@@ -438,6 +441,7 @@ Template.Semester_List.onCreated(function semesterListOnCreate() {
     this.state = this.data.dictionary;
   }
   this.localState = new ReactiveDict();
+  this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName(2), getUserIdFromRoute(), this.data.semester._id);
   this.subscribe(DesiredDegrees.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
@@ -462,6 +466,8 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
         .popup({
           inline: false,
           hoverable: true,
+          position: 'right center',
+          lastResort: 'right center',
         });
     template.$('.item.addOpportunityMenu')
         .popup({
@@ -470,20 +476,22 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
           position: 'right center',
           lastResort: 'right center',
         });
-    template.$('a.100.item')
+    template.$('.item.oneHundredLevel')
         .popup({
           inline: true,
           hoverable: true,
         });
     template.$('a.200.item')
         .popup({
-          inline: true,
+          inline: false,
           hoverable: true,
+          lastResort: 'right center',
         });
     template.$('a.300.item')
         .popup({
           inline: true,
           hoverable: true,
+          lastResort: 'right center',
         });
     template.$('a.400.item')
         .popup({

@@ -5,6 +5,9 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
+import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -165,11 +168,16 @@ Template.Student_Explorer_Courses_Widget.events({
       student: username,
     };
     CourseInstances.define(ci);
+    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
   },
 });
 
 Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCoursesWidgetOnCreated() {
   this.subscribe(Courses.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(Semesters.getPublicationName());

@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
+import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -59,6 +59,9 @@ Template.Student_Explorer_Courses_Widget_Button.events({
       student: username,
     };
     CourseInstances.define(ci);
+    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
@@ -76,6 +79,9 @@ Template.Student_Explorer_Courses_Widget_Button.events({
       console.log('Too many course instances found for a single semester.');
     }
     CourseInstances.removeIt(ci[0]._id);
+    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
   },
 });
 

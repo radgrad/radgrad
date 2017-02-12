@@ -153,11 +153,15 @@ export const getStudent400LevelDocs = (studentID, coursesTakenSlugs) => {
   return ret;
 };
 
-export const chooseStudent400LevelCourse = (studentID, coursesTakenSlugs) => {
+export const bestStudent400LevelCourses = (studentID, coursesTakenSlugs) => {
   const choices = getStudent400LevelDocs(studentID, coursesTakenSlugs);
   const interestIDs = Users.getInterestIDs(studentID);
   const preferred = new PreferredChoice(choices, interestIDs);
-  const best = preferred.getBestChoices();
+  return preferred.getBestChoices();
+};
+
+export const chooseStudent400LevelCourse = (studentID, coursesTakenSlugs) => {
+  const best = bestStudent400LevelCourses(studentID, coursesTakenSlugs);
   return best[getRandomInt(0, best.length)];
 };
 
