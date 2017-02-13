@@ -86,7 +86,15 @@ Template.Student_Courses_Of_Interest_Widget.helpers({
     return description;
   },
   courses() {
-    return matchingCourses();
+    const courses = matchingCourses();
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const nonHiddenCourses = _.filter(courses, (course) => {
+      if (_.includes(user.hiddenCourseIDs, course._id)) {
+        return false;
+      }
+      return true;
+    });
+    return nonHiddenCourses;
   },
 
 });

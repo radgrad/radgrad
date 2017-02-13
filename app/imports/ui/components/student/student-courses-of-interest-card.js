@@ -180,6 +180,19 @@ Template.Student_Courses_Of_Interest_Card.events({
     };
     CourseInstances.define(ci);
   },
+  'click .hide': function clickItemHide(event) {
+    event.preventDefault();
+    const student = Users.findDoc({ username: getRouteUserName() });
+    const id = this.course._id;
+    const studentItems = student.hiddenCourseIDs;
+    console.log("look here: " + studentItems);
+    try {
+      studentItems.push(id);
+      Users.setHiddenCourseIds(student._id, studentItems);
+    } catch (e) {
+      // don't do anything.
+    }
+  },
 });
 
 Template.Student_Courses_Of_Interest_Card.onRendered(function studentCoursesOfInterestCardOnRendered() {
