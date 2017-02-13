@@ -29,7 +29,7 @@
         {{/each}}
       </span>
     </div>
-    <div class="radgrad-home-buttons ui center aligned three bottom attached buttons">
+    <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
       <a class="ui button" href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug course)}}"><i class="chevron circle right icon"></i><br>View More</a>
       <div class="ui button chooseYear"><div class="chooseYear"><i class="plus icon"></i><br>Add to Plan</div>
         <div class="ui fluid popup transition hidden">
@@ -47,7 +47,11 @@
           </div>
         </div>
       </div>
-      <div class="ui button hide"><i class="hide icon"></i><br>Hide</div>
+      {{#if hidden}}
+        <div class="ui button unhide"><i class="unhide icon"></i><br>Unhide</div>
+      {{else}}
+        <div class="ui button hide"><i class="hide icon"></i><br>Hide</div>
+      {{/if}}
     </div>
   </div>
 </template>

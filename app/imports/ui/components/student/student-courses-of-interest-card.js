@@ -129,6 +129,16 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     });
     return filtered;
   },
+  hidden() {
+    let ret = '';
+    const student = Users.findDoc({ username: getRouteUserName() });
+    if (_.includes(student.hiddenCourseIDs, this.course._id)) {
+      ret = 'grey';
+    } else {
+      // buttons remain green
+    }
+    return ret;
+  },
   interestName(interest) {
     return interest.name;
   },
@@ -185,7 +195,6 @@ Template.Student_Courses_Of_Interest_Card.events({
     const student = Users.findDoc({ username: getRouteUserName() });
     const id = this.course._id;
     const studentItems = student.hiddenCourseIDs;
-    console.log("look here: " + studentItems);
     try {
       studentItems.push(id);
       Users.setHiddenCourseIds(student._id, studentItems);
@@ -198,7 +207,6 @@ Template.Student_Courses_Of_Interest_Card.events({
     const student = Users.findDoc({ username: getRouteUserName() });
     const id = this.course._id;
     let studentItems = student.hiddenCourseIDs;
-    console.log("look here: " + studentItems);
     try {
       studentItems = _.without(studentItems, id);
       Users.setHiddenCourseIds(student._id, studentItems);

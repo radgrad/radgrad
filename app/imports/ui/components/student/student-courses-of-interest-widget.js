@@ -115,14 +115,19 @@ Template.Student_Courses_Of_Interest_Widget.helpers({
     }
     return visibleCourses;
   },
-
+  hidden() {
+    return Template.instance().hidden.get();
+  }
 });
 
 Template.Student_Courses_Of_Interest_Widget.events({
   'click .showHidden': function clickShowHidden(event) {
     event.preventDefault();
     Template.instance().hidden.set(false);
-    console.log("hello");
+  },
+  'click .hideHidden': function clickHideHidden(event) {
+    event.preventDefault();
+    Template.instance().hidden.set(true);
   },
 });
 
