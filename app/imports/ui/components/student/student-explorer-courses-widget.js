@@ -170,7 +170,7 @@ Template.Student_Explorer_Courses_Widget.events({
     CourseInstances.define(ci);
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
   },
 });
 

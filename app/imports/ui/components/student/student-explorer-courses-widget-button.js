@@ -61,7 +61,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     CourseInstances.define(ci);
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
@@ -81,7 +81,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     CourseInstances.removeIt(ci[0]._id);
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommended400LevelCourse(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
   },
 });
 
