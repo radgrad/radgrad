@@ -1,6 +1,10 @@
 import './advisor-log-viewer.html';
 import './advisor-log-viewer.js';
 
+import './back-to-top-button.html';
+import './back-to-top-button.js';
+import './back-to-top-button.css';
+
 import './earned-ice.html';
 import './earned-ice.js';
 

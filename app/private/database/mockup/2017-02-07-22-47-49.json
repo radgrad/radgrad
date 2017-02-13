@@ -4840,6 +4840,18 @@
           "student": "abi"
         },
         {
+          "semester": "Spring-2015",
+          "opportunity": "ccdc",
+          "verified": true,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2016",
+          "opportunity": "ccdc",
+          "verified": true,
+          "student": "abi"
+        },
+        {
           "semester": "Spring-2016",
           "opportunity": "greyhats",
           "verified": true,
@@ -4860,6 +4872,12 @@
         {
           "semester": "Fall-2016",
           "opportunity": "hawaii-hacker-hours",
+          "verified": true,
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2016",
+          "opportunity": "asecolab",
           "verified": true,
           "student": "abi"
         },
@@ -4871,8 +4889,14 @@
         },
         {
           "semester": "Spring-2017",
+          "opportunity": "asecolab",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2017",
           "opportunity": "hawaii-hacker-hours",
-          "verified": true,
+          "verified": false,
           "student": "abi"
         },
         {
@@ -4906,15 +4930,15 @@
           "student": "abi"
         },
         {
-          "semester": "Summer-2016",
+          "semester": "Summer-2015",
           "opportunity": "coursera-graphic-design",
           "verified": true,
           "student": "abi"
         },
         {
-          "semester": "Summer-2017",
+          "semester": "Summer-2016",
           "opportunity": "gen-cyber-internship",
-          "verified": false,
+          "verified": true,
           "student": "abi"
         },
         {
@@ -4932,12 +4956,6 @@
         {
           "semester": "Summer-2016",
           "opportunity": "coursera-r-programming",
-          "verified": true,
-          "student": "betty"
-        },
-        {
-          "semester": "Summer-2016",
-          "opportunity": "lava-lab",
           "verified": true,
           "student": "betty"
         },
@@ -5032,7 +5050,7 @@
           "student": "alfred"
         },
         {
-          "semester": "Summer-2015",
+          "semester": "Summer-2016",
           "opportunity": "coursera-graphic-design",
           "verified": true,
           "student": "alfred"
@@ -5174,6 +5192,17 @@
     {
       "name": "ReviewCollection",
       "contents": [
+        {
+          "slug": "review-course-ics111-abi",
+          "student": "abi",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2014",
+          "rating": 5,
+          "comments": "Lecture can be boring. Tests can be tricky... so pay attention and read the questions and answers twice before answering them. Lab is were all the fun is. If you're not an ICS major or don't like programing, you probably shouldn't take the course.",
+          "moderated": true,
+          "visible": true
+        },
         {
           "slug": "review-course-ics314-alfred",
           "student": "alfred",
@@ -6253,7 +6282,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 3
+          "level": 5
         },
         {
           "firstName": "Ah Lim",
@@ -6391,7 +6420,7 @@
             "data-scientist"
           ],
           "desiredDegree": "ba-ics",
-          "level": 1
+          "level": 2
         },
         {
           "firstName": "David",
