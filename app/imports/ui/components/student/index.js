@@ -80,14 +80,11 @@ import './student-mentorspace-question-form.js';
 import './student-mentorspace-mentor-directory.html';
 import './student-mentorspace-mentor-directory.js';
 
-import './student-opportunities-of-interest-card.html';
-import './student-opportunities-of-interest-card.js';
+import './student-of-interest-card.html';
+import './student-of-interest-card.js';
 
-import './student-courses-of-interest-card.html';
-import './student-courses-of-interest-card.js';
-
-import './student-courses-of-interest-widget.html';
-import './student-courses-of-interest-widget.js';
+import './student-of-interest-widget.html';
+import './student-of-interest-widget.js';
 
 import './student-feed-widget.html';
 import './student-feed-widget.js';
@@ -97,9 +94,6 @@ import './student-home-help.js';
 
 import './student-ice-help.html';
 import './student-ice-help.js';
-
-import './student-opportunities-of-interest-widget.html';
-import './student-opportunities-of-interest-widget.js';
 
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';

@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.First_Menu_Ice.helpers({
   pClass(value) {
@@ -7,8 +6,5 @@ Template.First_Menu_Ice.helpers({
   },
   finalEarned(value) {
     return (value <= 100) ? value : 100;
-  },
-  iceRouteName() {
-    return RouteNames.studentHomeIcePageRouteName;
   },
 });

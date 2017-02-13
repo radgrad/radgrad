@@ -1,40 +1,42 @@
-<template name="Student_Courses_Of_Interest_Card">
+<template name="Student_Of_Interest_Card">
   <div class="ui card">
     <div class="content">
-      <div class="header">{{courseName course}}</div>
+      <div class="header">{{itemName item}}</div>
       <div class="meta">
-        {{#each semester in courseSemesters course}}
+        {{#each semester in itemSemesters}}
           {{semester}}&nbsp;
         {{/each}}
       </div>
     </div>
     <div class="content">
-      {{courseShortDescription course}}<a>...</a>
+      {{itemShortDescription item}}<a>...</a>
     </div>
     <div class="content">
-      {{numberStudents course}} students plan to participate
+      {{numberStudents item}} students plan to participate
       <div class="ui circular mini bordered images">
-        {{#each student in interestedStudents course}}
+        {{#each student in interestedStudents item}}
         <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userSlug student)}}"><img class="ui image" src={{studentPicture student}}></a>
         {{/each}}
       </div>
     </div>
     <div class="content">
       <span class="left floated">
-        {{#each interest in matchingInterests course}}
+        {{#each interest in matchingInterests item}}
           <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
         {{/each}}
-        {{#each interest in otherInterests course}}
+        {{#each interest in otherInterests item}}
           <a class="ui mini grey label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
         {{/each}}
       </span>
     </div>
+
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
-      <a class="ui button" href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug course)}}"><i class="chevron circle right icon"></i><br>View More</a>
-      <div class="ui button chooseYear"><div class="chooseYear"><i class="plus icon"></i><br>Add to Plan</div>
-        <div class="ui fluid popup transition hidden">
-          <div class="ui vertical menu">
-            {{#each year in nextYears 4}}
+      {{#if typeCourse}}
+        <a class="ui button" href="{{pathFor coursesRouteName username=routeUserName course=(itemSlug item)}}"><i class="chevron circle right icon"></i><br>View More</a>
+        <div class="ui button chooseYear"><div class="chooseYear"><i class="plus icon"></i><br>Add to Plan</div>
+          <div class="ui fluid popup transition hidden">
+            <div class="ui vertical menu">
+              {{#each year in nextYears 4}}
                 <a class="item chooseSemester" data-position="right center">{{year}}</a>
                 <div class="ui fluid popup transition hidden">
                   <div class="ui vertical menu">
@@ -43,10 +45,23 @@
                     {{/each}}
                   </div>
                 </div>
-            {{/each}}
+              {{/each}}
+            </div>
           </div>
         </div>
-      </div>
+      {{else}}
+        <a class="ui button" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(itemSlug item)}}"><i class="chevron circle right icon"></i><br>View More</a>
+        <div class="ui button"><div class="chooseSemester"><i class="plus icon"></i><br>Add to plan</div>
+          <div class="ui fluid popup transition hidden">
+            <div class="ui vertical menu">
+              {{#each semester in itemSemesters item}}
+                <a class="item addToPlan" data-position="right center">{{semester}}</a>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
+
       {{#if hidden}}
         <div class="ui button unhide"><i class="unhide icon"></i><br>Unhide</div>
       {{else}}

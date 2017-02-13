@@ -3,6 +3,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -10,22 +12,30 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 
-Template.Student_Courses_Of_Interest_Card.onCreated(function studentCoursesOfInterestCardOnCreated() {
+Template.Student_Of_Interest_Card.onCreated(function studentOfInterestCardOnCreated() {
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName(3));
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
 });
 
-function interestedStudentsHelper(course) {
+function interestedStudentsHelper(item) {
   const interested = [];
   let count = 0;
-  const ci = CourseInstances.find({
-    courseID: course._id,
-  }).fetch();
-  _.map(ci, (c) => {
+  let instances;
+  if (this.type == 'courses') {
+    instances = CourseInstances.find({ courseID: item._id,
+    }).fetch();
+  } else {
+    instances = OpportunityInstances.find({
+      opportunityID: item._id,
+    }).fetch();
+  }
+  _.map(instances, (c) => {
     if (count < 17) {
       if (!_.includes(interested, c.studentID)) {
         interested.push(c.studentID);
@@ -38,20 +48,20 @@ function interestedStudentsHelper(course) {
   return interested;
 }
 
-function matchingInterestsHelper(course) {
+function matchingInterestsHelper(item) {
   const matchingInterests = [];
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
-  const courseInterests = [];
-  _.map(course.interestIDs, (id) => {
-    courseInterests.push(Interests.findDoc(id));
+  const itemInterests = [];
+  _.map(item.interestIDs, (id) => {
+    itemInterests.push(Interests.findDoc(id));
   });
   _.map(user.interestIDs, (id) => {
     userInterests.push(Interests.findDoc(id));
   });
-  _.map(courseInterests, (courseInterest) => {
+  _.map(itemInterests, (itemInterest) => {
     _.map(userInterests, (userInterest) => {
-      if (_.isEqual(courseInterest, userInterest)) {
+      if (_.isEqual(itemInterest, userInterest)) {
         matchingInterests.push(userInterest);
       }
     });
@@ -65,31 +75,48 @@ function currentSemester() {
   return currentSem;
 }
 
-Template.Student_Courses_Of_Interest_Card.helpers({
-  getDictionary() {
-    return Template.instance().state;
-  },
+function opportunitySemesters(opp) {
+  const semesters = opp.semesterIDs;
+  const semesterNames = [];
+  _.map(semesters, (sem) => {
+    if (Semesters.findDoc(sem).sortBy >= currentSemester().sortBy) {
+      semesterNames.push(Semesters.toString(sem));
+    }
+  });
+  return semesterNames;
+}
+
+Template.Student_Of_Interest_Card.helpers({
   courses() {
     return Courses.find().fetch();
   },
-  courseInterests(course) {
-    return Interests.findNames(course.interestIDs);
+  opportunities() {
+    return Opportunities.find().fetch();
   },
-  courseName(course) {
-    return course.name;
+  itemInterests(item) {
+    return Interests.findNames(item.interestIDs);
   },
-  courseSemesters() {
-    // no semesters associated with courses
+  itemName(item) {
+    return item.name;
   },
-  courseShortDescription(course) {
-    let description = course.description;
+  itemShortDescription(item) {
+    let description = item.description;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
     }
     return description;
   },
-  courseSlug(course) {
-    return Slugs.findDoc(course.slugID).name;
+  itemSemesters() {
+    let ret = [];
+    if (this.type === 'courses') {
+      //do nothing
+    } else {
+      ret = opportunitySemesters(this.item);
+    }
+    return ret;
+  },
+  itemSlug(item) {
+    return Slugs.findDoc(item.slugID).name;
   },
   interestSlug(interest) {
     return Slugs.findDoc(interest.slugID).name;
@@ -132,10 +159,18 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   hidden() {
     let ret = '';
     const student = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(student.hiddenCourseIDs, this.course._id)) {
-      ret = 'grey';
+    if (this.type === 'courses') {
+      if (_.includes(student.hiddenCourseIDs, this.item._id)) {
+        ret = 'grey';
+      } else {
+        // buttons remain green
+      }
     } else {
-      // buttons remain green
+      if (_.includes(student.hiddenOpportunityIDs, this.item._id)) {
+        ret = 'grey';
+      } else {
+        // buttons remain green
+      }
     }
     return ret;
   },
@@ -155,6 +190,9 @@ Template.Student_Courses_Of_Interest_Card.helpers({
     const student = Users.findDoc(studentID);
     return student.picture;
   },
+  typeCourse() {
+    return (this.type === 'courses');
+  },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
     return semesters;
@@ -171,52 +209,88 @@ Template.Student_Courses_Of_Interest_Card.helpers({
   },
 });
 
-Template.Student_Courses_Of_Interest_Card.events({
+Template.Student_Of_Interest_Card.events({
   'click .addToPlan': function clickItemAddToPlan(event) {
     event.preventDefault();
-    const course = this.course;
-    const semester = event.target.text;
-    const courseSlug = Slugs.findDoc({ _id: course.slugID });
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = getRouteUserName();
-    const ci = {
-      semester: semSlug,
-      course: courseSlug,
-      verified: false,
-      note: course.number,
-      grade: 'B',
-      student: username,
-    };
-    CourseInstances.define(ci);
+    if (this.type === 'courses') {
+      const course = this.course;
+      const semester = event.target.text;
+      const courseSlug = Slugs.findDoc({ _id: course.slugID });
+      const semSplit = semester.split(' ');
+      const semSlug = `${semSplit[0]}-${semSplit[1]}`;
+      const username = getRouteUserName();
+      const ci = {
+        semester: semSlug,
+        course: courseSlug,
+        verified: false,
+        note: course.number,
+        grade: 'B',
+        student: username,
+      };
+      CourseInstances.define(ci);
+    } else {
+      const opportunity = this.opportunity;
+      const semester = event.target.text;
+      const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
+      const semSplit = semester.split(' ');
+      const semSlug = `${semSplit[0]}-${semSplit[1]}`;
+      const username = getRouteUserName();
+      const oi = {
+        semester: semSlug,
+        opportunity: oppSlug.name,
+        verified: false,
+        student: username,
+      };
+      OpportunityInstances.define(oi);
+    }
   },
   'click .hide': function clickItemHide(event) {
     event.preventDefault();
     const student = Users.findDoc({ username: getRouteUserName() });
-    const id = this.course._id;
-    const studentItems = student.hiddenCourseIDs;
-    try {
-      studentItems.push(id);
-      Users.setHiddenCourseIds(student._id, studentItems);
-    } catch (e) {
-      // don't do anything.
+    const id = this.item._id;
+    if (this.type === 'courses') {
+      const studentItems = student.hiddenCourseIDs;
+      try {
+        studentItems.push(id);
+        Users.setHiddenCourseIds(student._id, studentItems);
+      } catch (e) {
+        // don't do anything.
+      }
+    } else {
+      const studentItems = student.hiddenOpportunityIDs;
+      try {
+        studentItems.push(id);
+        Users.setHiddenOpportunityIds(student._id, studentItems);
+      } catch (e) {
+        // don't do anything.
+      }
     }
   },
   'click .unhide': function clickItemHide(event) {
     event.preventDefault();
     const student = Users.findDoc({ username: getRouteUserName() });
-    const id = this.course._id;
-    let studentItems = student.hiddenCourseIDs;
-    try {
-      studentItems = _.without(studentItems, id);
-      Users.setHiddenCourseIds(student._id, studentItems);
-    } catch (e) {
-      // don't do anything.
+    const id = this.item._id;
+    if (this.type === 'courses') {
+      let studentItems = student.hiddenCourseIDs;
+      try {
+        studentItems = _.without(studentItems, id);
+        Users.setHiddenCourseIds(student._id, studentItems);
+      } catch (e) {
+        // don't do anything.
+      }
+    } else {
+      let studentItems = student.hiddenOpportunityIDs;
+      try {
+        studentItems = _.without(studentItems, id);
+        Users.setHiddenOpportunityIds(student._id, studentItems);
+      } catch (e) {
+        // don't do anything.
+      }
     }
   },
 });
 
-Template.Student_Courses_Of_Interest_Card.onRendered(function studentCoursesOfInterestCardOnRendered() {
+Template.Student_Of_Interest_Card.onRendered(function studentOfInterestCardOnRendered() {
   const template = this;
   template.$('.chooseSemester')
       .popup({

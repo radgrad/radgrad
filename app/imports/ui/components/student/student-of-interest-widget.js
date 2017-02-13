@@ -7,13 +7,17 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-Template.Student_Courses_Of_Interest_Widget.onCreated(function studentCoursesOfInterestWidgetOnCreated() {
+Template.Student_Of_Interest_Widget.onCreated(function studentOfInterestWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
@@ -70,21 +74,90 @@ function hiddenCoursesHelper() {
   if (Template.instance().hidden.get()) {
     const user = Users.findDoc({ username: getRouteUserName() });
     nonHiddenCourses = _.filter(courses, (course) => {
-          if (_.includes(user.hiddenCourseIDs, course._id)) {
-      return false;
-    }
-    return true;
-  });
+      if (_.includes(user.hiddenCourseIDs, course._id)) {
+        return false;
+      }
+      return true;
+    });
   } else {
     nonHiddenCourses = courses;
   }
   return nonHiddenCourses;
 }
 
-Template.Student_Courses_Of_Interest_Widget.helpers({
-  getDictionary() {
-    return Template.instance().state;
-  },
+const availableOpps = () => {
+  const opps = Opportunities.find({}).fetch();
+  const currentSemesterID = Semesters.getCurrentSemester();
+  const currentSemester = Semesters.findDoc(currentSemesterID);
+  if (opps.length > 0) {
+    const filteredBySem = _.filter(opps, function filter(opp) {
+      const oi = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opp._id,
+      }).fetch();
+      return oi.length === 0;
+    });
+    const filteredByInstance = _.filter(filteredBySem, function filter(opp) {
+      let inFuture = false;
+      _.map(opp.semesterIDs, (semID) => {
+        const sem = Semesters.findDoc(semID);
+      if (sem.sortBy >= currentSemester.sortBy) {
+        inFuture = true;
+      }
+    });
+      return inFuture;
+    });
+    return filteredByInstance;
+  }
+  return [];
+};
+
+function matchingOpportunities() {
+  const allOpportunities = availableOpps();
+  const matching = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterests = [];
+  let opportunityInterests = [];
+  _.map(user.interestIDs, (id) => {
+    userInterests.push(Interests.findDoc(id));
+  });
+  _.map(allOpportunities, (opp) => {
+    opportunityInterests = [];
+    _.map(opp.interestIDs, (id) => {
+      opportunityInterests.push(Interests.findDoc(id));
+      _.map(opportunityInterests, (oppInterest) => {
+        _.map(userInterests, (userInterest) => {
+          if (_.isEqual(oppInterest, userInterest)) {
+            if (!_.includes(matching, opp)) {
+              matching.push(opp);
+            }
+          }
+        });
+      });
+    });
+  });
+  return matching;
+}
+
+function hiddenOpportunitiesHelper() {
+  const opportunities = matchingOpportunities();
+  let nonHiddenOpportunities;
+  if (Template.instance().hidden.get()) {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    nonHiddenOpportunities = _.filter(opportunities, (opp) => {
+      if (_.includes(user.hiddenOpportunityIDs, opp._id)) {
+        return false;
+      }
+      return true;
+    });
+  } else {
+    nonHiddenOpportunities = opportunities;
+  }
+  return nonHiddenOpportunities;
+}
+
+
+Template.Student_Of_Interest_Widget.helpers({
   coursesCount() {
     Template.instance().hidden.get();
     return hiddenCoursesHelper().length;
@@ -117,10 +190,35 @@ Template.Student_Courses_Of_Interest_Widget.helpers({
   },
   hidden() {
     return Template.instance().hidden.get();
-  }
+  },
+  opportunities() {
+    const opportunities = matchingOpportunities();
+    let visibleOpportunities;
+    if (Template.instance().hidden.get()) {
+      visibleOpportunities = hiddenOpportunitiesHelper();
+    } else {
+      visibleOpportunities = opportunities;
+    }
+    return visibleOpportunities;
+  },
+  itemCount() {
+    let ret;
+    if (this.type === 'courses') {
+      ret = hiddenCoursesHelper().length;
+    } else {
+      ret = hiddenOpportunitiesHelper().length;
+    }
+    return ret;
+  },
+  opportunityCount() {
+    return hiddenOpportunitiesHelper().length;
+  },
+  typeCourse() {
+    return this.type === 'courses';
+  },
 });
 
-Template.Student_Courses_Of_Interest_Widget.events({
+Template.Student_Of_Interest_Widget.events({
   'click .showHidden': function clickShowHidden(event) {
     event.preventDefault();
     Template.instance().hidden.set(false);
@@ -131,6 +229,6 @@ Template.Student_Courses_Of_Interest_Widget.events({
   },
 });
 
-Template.Student_Courses_Of_Interest_Widget.onRendered(function studentCoursesOfInterestWidgetOnRendered() {
+Template.Student_Of_Interest_Widget.onRendered(function studentOfInterestWidgetOnRendered() {
 
 });
