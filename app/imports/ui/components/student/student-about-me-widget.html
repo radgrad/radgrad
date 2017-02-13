@@ -58,7 +58,7 @@
         <div class="six wide column">
           {{#if careerGoals}}
             {{#each goal in careerGoals}}
-              <a class="ui label"><i class="fitted suitcase icon"></i>{{goalName goal}}</a>
+              <a class="ui label" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName goal)}}"><i class="fitted suitcase icon"></i>{{goalName goal}}</a>
             {{/each}}
             <br>
           {{else}}
@@ -73,7 +73,7 @@
         <div class="five wide column">
           {{#if interests}}
             {{#each interest in interests}}
-              <a class="ui label"><i class="fitted star icon"></i>{{interestName interest}}</a>
+              <a class="ui label" href="{{pathFor interestsRouteName username=routeUserName interest=(slugName interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
             {{/each}}
             <br>
           {{else}}

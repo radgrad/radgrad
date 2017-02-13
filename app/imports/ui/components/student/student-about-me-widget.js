@@ -71,6 +71,9 @@ Template.Student_About_Me_Widget.helpers({
     }
     return ret;
   },
+  slugName(item) {
+    return Slugs.findDoc(item.slugID).name;
+  },
   name() {
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
@@ -100,15 +103,17 @@ Template.Student_About_Me_Widget.helpers({
     return '';
   },
   interests() {
-    let ret = [];
+    const ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      ret = user.interestIDs;
+      _.map(user.interestIDs, (id) => {
+        ret.push(Interests.findDoc(id));
+      });
     }
     return ret;
   },
   interestName(interest) {
-    return Interests.findDoc(interest).name;
+    return interest.name;
   },
   goalName(goal) {
     return goal.name;
