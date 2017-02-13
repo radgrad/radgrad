@@ -8,8 +8,10 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 Template.Student_Courses_Of_Interest_Widget.onCreated(function studentCoursesOfInterestWidgetOnCreated() {
+  this.hidden = new ReactiveVar(true);
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
@@ -62,12 +64,30 @@ function matchingCourses() {
   return matching;
 }
 
+function hiddenCoursesHelper() {
+  const courses = matchingCourses();
+  let nonHiddenCourses;
+  if (Template.instance().hidden.get()) {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    nonHiddenCourses = _.filter(courses, (course) => {
+          if (_.includes(user.hiddenCourseIDs, course._id)) {
+      return false;
+    }
+    return true;
+  });
+  } else {
+    nonHiddenCourses = courses;
+  }
+  return nonHiddenCourses;
+}
+
 Template.Student_Courses_Of_Interest_Widget.helpers({
   getDictionary() {
     return Template.instance().state;
   },
   coursesCount() {
-    return matchingCourses().length;
+    Template.instance().hidden.get();
+    return hiddenCoursesHelper().length;
   },
   courseInterests(course) {
     return Interests.findNames(course.interestIDs);
@@ -87,20 +107,23 @@ Template.Student_Courses_Of_Interest_Widget.helpers({
   },
   courses() {
     const courses = matchingCourses();
-    const user = Users.findDoc({ username: getRouteUserName() });
-    const nonHiddenCourses = _.filter(courses, (course) => {
-      if (_.includes(user.hiddenCourseIDs, course._id)) {
-        return false;
-      }
-      return true;
-    });
-    return nonHiddenCourses;
+    let visibleCourses;
+    if (Template.instance().hidden.get()) {
+      visibleCourses = hiddenCoursesHelper();
+    } else {
+      visibleCourses = courses;
+    }
+    return visibleCourses;
   },
 
 });
 
 Template.Student_Courses_Of_Interest_Widget.events({
-
+  'click .showHidden': function clickShowHidden(event) {
+    event.preventDefault();
+    Template.instance().hidden.set(false);
+    console.log("hello");
+  },
 });
 
 Template.Student_Courses_Of_Interest_Widget.onRendered(function studentCoursesOfInterestWidgetOnRendered() {

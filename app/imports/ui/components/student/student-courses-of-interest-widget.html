@@ -4,6 +4,7 @@
     <div class="ui dividing header">
       <h4>RECOMMENDED COURSES {{> Widget_Header_Number inputValue = coursesCount}}</h4>
     </div>
+    <div class="ui basic green mini button showHidden">SHOW HIDDEN RECOMMENDED COURSES</div>
     {{#if courses}}
     <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui two cards">
       {{#each course in courses}}

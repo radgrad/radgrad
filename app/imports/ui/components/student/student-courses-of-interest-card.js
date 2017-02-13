@@ -193,6 +193,19 @@ Template.Student_Courses_Of_Interest_Card.events({
       // don't do anything.
     }
   },
+  'click .unhide': function clickItemHide(event) {
+    event.preventDefault();
+    const student = Users.findDoc({ username: getRouteUserName() });
+    const id = this.course._id;
+    let studentItems = student.hiddenCourseIDs;
+    console.log("look here: " + studentItems);
+    try {
+      studentItems = _.without(studentItems, id);
+      Users.setHiddenCourseIds(student._id, studentItems);
+    } catch (e) {
+      // don't do anything.
+    }
+  },
 });
 
 Template.Student_Courses_Of_Interest_Card.onRendered(function studentCoursesOfInterestCardOnRendered() {
