@@ -258,7 +258,10 @@ Template.Semester_List.events({
         // CourseInstances.updateSemester(id, semesterID);
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-        FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
+        FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+        FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+        FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
+        // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
       } else {
         const opportunities = OpportunityInstances.find({
           studentID: getUserIdFromRoute(),
