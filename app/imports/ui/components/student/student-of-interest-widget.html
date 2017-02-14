@@ -4,10 +4,14 @@
     <div class="ui dividing header">
       <h4>RECOMMENDED <span style="text-transform: uppercase;">{{type}}</span> {{> Widget_Header_Number inputValue = itemCount}}</h4>
     </div>
-    {{#if hidden}}
-      <div class="ui basic green mini button showHidden">SHOW HIDDEN RECOMMENDED <span style="text-transform: uppercase;">{{type}}</span></div>
+    {{#if hiddenExists}}
+      {{#if hidden}}
+        <div class="ui basic green mini button showHidden">SHOW HIDDEN RECOMMENDED <span style="text-transform: uppercase;">{{type}}</span></div>
+      {{else}}
+        <div class="ui basic green mini button hideHidden">HIDE HIDDEN RECOMMENDED <span style="text-transform: uppercase;">{{type}}</span></div>
+      {{/if}}
     {{else}}
-      <div class="ui basic green mini button hideHidden">HIDE HIDDEN RECOMMENDED <span style="text-transform: uppercase;">{{type}}</span></div>
+      <div class="ui basic green mini button disabled">NO HIDDEN RECOMMENDED <span style="text-transform: uppercase;">{{type}}</span></div>
     {{/if}}
     {{#if courses}}
     <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui two cards">

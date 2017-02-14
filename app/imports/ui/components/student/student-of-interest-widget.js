@@ -216,6 +216,16 @@ Template.Student_Of_Interest_Widget.helpers({
   typeCourse() {
     return this.type === 'courses';
   },
+  hiddenExists() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    let ret;
+    if (this.type === 'courses') {
+      ret = user.hiddenCourseIDs.length !== 0;
+    } else {
+      ret = user.hiddenOpportunityIDs.length !== 0;
+    }
+    return ret;
+  },
 });
 
 Template.Student_Of_Interest_Widget.events({
