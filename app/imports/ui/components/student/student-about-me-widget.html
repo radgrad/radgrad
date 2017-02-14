@@ -29,7 +29,7 @@
           {{else}}
             <p>No desired degree specified yet.</p>
           {{/if}}
-          <a href="{{pathFor degreesRouteName username=routeUserName degree='#'}}">Edit in degree explorer</a>
+          <a href="{{pathFor degreesRouteName username=routeUserName degree=firstDegree}}">Edit in degree explorer</a>
         </div>
         <div class="two wide column">
           <p><b>Professional Website</b></p>
@@ -58,13 +58,13 @@
         <div class="six wide column">
           {{#if careerGoals}}
             {{#each goal in careerGoals}}
-              <a class="ui label"><i class="fitted suitcase icon"></i>{{goalName goal}}</a>
+              <a class="ui label" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName goal)}}"><i class="fitted suitcase icon"></i>{{goalName goal}}</a>
             {{/each}}
             <br>
           {{else}}
             <p>No career goals added yet.</p>
           {{/if}}
-          <br><a href="{{pathFor 'Student_Explorer_Career_Page' username=routeUserName}}">Edit in career
+          <br><a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in career
           explorer</a>
         </div>
         <div class="two wide column">
@@ -73,13 +73,13 @@
         <div class="five wide column">
           {{#if interests}}
             {{#each interest in interests}}
-              <a class="ui label"><i class="fitted star icon"></i>{{interestName interest}}</a>
+              <a class="ui label" href="{{pathFor interestsRouteName username=routeUserName interest=(slugName interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
             {{/each}}
             <br>
           {{else}}
             <p>No interests added yet.</p>
           {{/if}}
-          <br><a href="{{pathFor 'Student_Explorer_Interest_Page' username=routeUserName}}">Edit in interest
+          <br><a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Edit in interest
           explorer</a>
         </div>
       </div>

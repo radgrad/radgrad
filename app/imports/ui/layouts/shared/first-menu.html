@@ -45,10 +45,10 @@
 
       {{#if displayLevelAndIce}}
         <div class="item">
-          {{> First_Menu_Level_Icon level=level}}
-          {{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov"}}
-          {{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp"}}
-          {{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp"}}
+          <a href="{{pathFor levelsRouteName username=routeUserName}}">{{> First_Menu_Level_Icon level=level}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov"}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp"}}</a>
+            <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp"}}</a>
         </div>
       {{/if}}
 
