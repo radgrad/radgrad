@@ -9,6 +9,8 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Interests } from '../../../api/interest/InterestCollection';
+import { ReactiveVar } from 'meteor/reactive-var';
+
 
 Template.Student_Explorer_Opportunities_Widget.helpers({
   isLabel(label, value) {
@@ -117,6 +119,9 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
   userUsername(user) {
     return Users.findDoc(user).username;
   },
+  updatedTeaser(teaser){
+    return teaser;
+  },
 });
 
 Template.Student_Explorer_Opportunities_Widget.events({
@@ -152,6 +157,7 @@ Template.Student_Explorer_Opportunities_Widget.onRendered(function enableVideo()
 
 
 Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
+  this.updated = new ReactiveVar(false);
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(Semesters.getPublicationName());

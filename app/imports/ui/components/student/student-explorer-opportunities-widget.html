@@ -84,7 +84,7 @@
               {{#if isLabel descriptionPair.label 'Teaser'}}
               <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}}
-                  {{> Student_Explorer_Opportunities_Widget_Teaser teaser=descriptionPair.value}}<br>
+                  {{> Student_Explorer_Opportunities_Widget_Teaser teaser=(updatedTeaser descriptionPair.value)}}<br>
                   {{else}}
                     N/A <br>
                 {{/if}}
