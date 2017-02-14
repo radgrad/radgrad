@@ -8,6 +8,7 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
@@ -37,12 +38,41 @@ Template.Student_About_Me_Widget.helpers({
     return ret;
   },
   desiredDegree() {
+    let ret = '';
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      const degreeID = user.desiredDegreeID;
-      return DesiredDegrees.findDoc(degreeID).name;
+      if (user.desiredDegreeID) {
+        ret = DesiredDegrees.findDoc(user.desiredDegreeID).name;
+      }
     }
-    return '';
+    return ret;
+  },
+  firstCareerGoal() {
+    let ret;
+    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
+    if (careerGoals.length > 0) {
+      ret = Slugs.findDoc(careerGoals[0].slugID).name;
+    }
+    return ret;
+  },
+  firstDegree() {
+    let ret;
+    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    if (degrees.length > 0) {
+      ret = Slugs.findDoc(degrees[0].slugID).name;
+    }
+    return ret;
+  },
+  firstInterest() {
+    let ret;
+    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
+    if (interests.length > 0) {
+      ret = Slugs.findDoc(interests[0].slugID).name;
+    }
+    return ret;
+  },
+  slugName(item) {
+    return Slugs.findDoc(item.slugID).name;
   },
   name() {
     if (getRouteUserName()) {
@@ -73,15 +103,17 @@ Template.Student_About_Me_Widget.helpers({
     return '';
   },
   interests() {
-    let ret = [];
+    const ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      ret = user.interestIDs;
+      _.map(user.interestIDs, (id) => {
+        ret.push(Interests.findDoc(id));
+      });
     }
     return ret;
   },
   interestName(interest) {
-    return Interests.findDoc(interest).name;
+    return interest.name;
   },
   goalName(goal) {
     return goal.name;
@@ -121,6 +153,7 @@ Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreate
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
 });

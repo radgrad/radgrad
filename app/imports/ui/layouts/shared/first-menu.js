@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.First_Menu.onCreated(function onCreated() {
   this.subscribe(Users.getPublicationName());
@@ -41,5 +42,11 @@ Template.First_Menu.helpers({
       return (user.picture) ? user.picture : '/images/default-profile-picture.png';
     }
     return '/images/default-profile-picture.png';
+  },
+  levelsRouteName() {
+    return RouteNames.studentHomeLevelsPageRouteName;
+  },
+  iceRouteName() {
+    return RouteNames.studentHomeIcePageRouteName;
   },
 });

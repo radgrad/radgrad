@@ -1,17 +1,17 @@
-import {Meteor} from 'meteor/meteor';
-import {_} from 'meteor/erasaur:meteor-lodash';
+import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 // import { Logger } from 'meteor/jag:pince';
-import {Roles} from 'meteor/alanning:roles';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import { Roles } from 'meteor/alanning:roles';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // import { moment } from 'meteor/momentjs:moment';
-import {Courses} from '/imports/api/course/CourseCollection';
-import {ROLE} from '/imports/api/role/Role';
-import {Semesters} from '/imports/api/semester/SemesterCollection';
-import {Users} from '/imports/api/user/UserCollection';
+import { Courses } from '/imports/api/course/CourseCollection';
+import { ROLE } from '/imports/api/role/Role';
+import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { Users } from '/imports/api/user/UserCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import {makeCourseICE} from '/imports/api/ice/IceProcessor';
-import {radgradCollections} from '/imports/api/integrity/RadGradCollections';
+import { makeCourseICE } from '/imports/api/ice/IceProcessor';
+import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 /** @module CourseInstance */
 
@@ -286,7 +286,7 @@ class CourseInstanceCollection extends BaseCollection {
   checkIntegrity() {
     const problems = [];
     this.find().forEach(doc => {
-      if (!Semesters.isDefined(doc.semesterID)){
+      if (!Semesters.isDefined(doc.semesterID)) {
         problems.push(`Bad semesterID: ${doc.semesterID}`);
       }
       if (!Courses.isDefined(doc.courseID)) {
