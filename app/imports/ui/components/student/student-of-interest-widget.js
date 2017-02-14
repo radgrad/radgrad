@@ -101,10 +101,10 @@ const availableOpps = () => {
       let inFuture = false;
       _.map(opp.semesterIDs, (semID) => {
         const sem = Semesters.findDoc(semID);
-      if (sem.sortBy >= currentSemester.sortBy) {
-        inFuture = true;
-      }
-    });
+        if (sem.sortBy >= currentSemester.sortBy) {
+          inFuture = true;
+        }
+      });
       return inFuture;
     });
     return filteredByInstance;

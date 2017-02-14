@@ -27,7 +27,7 @@ function interestedStudentsHelper(item) {
   const interested = [];
   let count = 0;
   let instances;
-  if (this.type == 'courses') {
+  if (this.type === 'courses') {
     instances = CourseInstances.find({ courseID: item._id,
     }).fetch();
   } else {
@@ -109,7 +109,7 @@ Template.Student_Of_Interest_Card.helpers({
   itemSemesters() {
     let ret = [];
     if (this.type === 'courses') {
-      //do nothing
+      // do nothing
     } else {
       ret = opportunitySemesters(this.item);
     }
