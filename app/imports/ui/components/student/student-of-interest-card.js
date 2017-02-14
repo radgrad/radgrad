@@ -28,7 +28,8 @@ function interestedStudentsHelper(item) {
   let count = 0;
   let instances;
   if (this.type === 'courses') {
-    instances = CourseInstances.find({ courseID: item._id,
+    instances = CourseInstances.find({
+      courseID: item._id,
     }).fetch();
   } else {
     instances = OpportunityInstances.find({
@@ -41,9 +42,10 @@ function interestedStudentsHelper(item) {
         interested.push(c.studentID);
         count += 1;
       }
-    } else if (count === 17) {
-      interested.push('elipsis');
-    }
+    } else
+      if (count === 17) {
+        interested.push('elipsis');
+      }
   });
   return interested;
 }
@@ -165,13 +167,12 @@ Template.Student_Of_Interest_Card.helpers({
       } else {
         // buttons remain green
       }
-    } else {
+    } else
       if (_.includes(student.hiddenOpportunityIDs, this.item._id)) {
         ret = 'grey';
       } else {
         // buttons remain green
       }
-    }
     return ret;
   },
   interestName(interest) {
