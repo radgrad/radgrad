@@ -1,6 +1,10 @@
 <template name="Student_Explorer_Opportunities_Widget_Teaser">
   {{#if Template.subscriptionsReady}}
-    <div class="ui embed" data-url="{{teaserUrl teaser}}"></div>
+    {{#if newTeaser}}
+      <div class="ui embed" data-url="{{teaserUrl teaser}}"></div>
+    {{else}}
+      <div class="ui embed" data-url="{{teaserUrl teaser}}"></div>
+    {{/if}}
   {{else}}
     {{> Loading}}
   {{/if}}

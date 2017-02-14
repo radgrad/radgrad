@@ -138,6 +138,26 @@ Template.Student_Ice_Widget.helpers({
     }
     return null;
   },
+  limitedEarnedICE() {
+    if (getUserIdFromRoute()) {
+      const user = Users.findDoc(getUserIdFromRoute());
+      const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
+      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
+      const earnedInstances = courseInstances.concat(oppInstances);
+      const totalICE = getTotalICE(earnedInstances);
+      if (totalICE.i > 100) {
+        totalICE.i = 100;
+      }
+      if (totalICE.c > 100) {
+        totalICE.c = 100;
+      }
+      if (totalICE.e > 100) {
+        totalICE.e = 100;
+      }
+      return totalICE;
+    }
+    return null;
+  },
   plannedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
