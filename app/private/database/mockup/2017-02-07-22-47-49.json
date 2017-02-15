@@ -182,6 +182,10 @@
         },
         {
           "student": "markrc",
+          "year": 2013
+        },
+        {
+          "student": "markrc",
           "year": 2014
         },
         {
@@ -2899,6 +2903,12 @@
           "feedbackType": "Recommendation"
         },
         {
+          "name": "Opportunity recommendations based on interests",
+          "slug": "OpportunityRecommendationsBasedOnInterests",
+          "description": "These opportunities are recommended based upon your interests.",
+          "feedbackType": "Recommendation"
+        },
+        {
           "name": "Course not likely to be offered",
           "slug": "courseNotOffered",
           "description": "Your plan include a course that is not offered in the semester",
@@ -2944,6 +2954,12 @@
           "name": "Upload STAR data",
           "slug": "updateStarData",
           "description": "See your ICS advisor to upload STAR data",
+          "feedbackType": "Recommendation"
+        },
+        {
+          "name": "Recommendation for next Level",
+          "slug": "recommendationForNextLevel",
+          "description": "What to do to achieve the next RadGrad level.",
           "feedbackType": "Recommendation"
         }
       ]

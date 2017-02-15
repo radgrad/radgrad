@@ -18,8 +18,8 @@ import { ROLE, ROLES } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import * as planUtils from '../../../api/degree-program/plan-generator';
 import * as semUtils from '../../../api/semester/SemesterUtilities';
-import * as courseUtils from '../../../api/course/CourseFunctions';
-import * as opportunityUtils from '../../../api/opportunity/OpportunityFunctions';
+import * as courseUtils from '../../../api/course/CourseUtilities';
+import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 const updateSchema = new SimpleSchema({

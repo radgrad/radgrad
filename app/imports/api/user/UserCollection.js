@@ -427,6 +427,22 @@ class UserCollection extends BaseInstanceCollection {
     return _.uniq(courseIDs);
   }
 
+  /**
+   * Returns the user's interests as IDs. It is a union of interestIDs and careerGoal interestIDs.
+   * @param userID
+   * @returns {Array}
+   */
+  getInterestIDs(userID) {
+    const user = this._collection.findOne({ _id: userID });
+    let interestIDs = [];
+    interestIDs = _.union(interestIDs, user.interestIDs);
+    _.map(user.careerGoalIDs, (goalID) => {
+      const goal = CareerGoals.findDoc(goalID);
+      interestIDs = _.union(interestIDs, goal.interestIDs);
+    });
+    return interestIDs;
+  }
+
   publish() {
     if (Meteor.isServer) {
       Meteor.publish(this._collectionName, function () {
