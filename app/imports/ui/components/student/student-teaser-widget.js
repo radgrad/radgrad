@@ -8,7 +8,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection.js';
 import * as RouteNames from '/imports/startup/client/router.js';
 
-Template.Student_Teaser_Widget.onCreated(function appBodyOnCreated() {
+Template.Student_Teaser_Widget.onCreated(function studentTeaserWidgetOnCreated() {
   this.subscribe(Teasers.getPublicationName());
   this.subscribe(Interests.getPublicationName());
 });
