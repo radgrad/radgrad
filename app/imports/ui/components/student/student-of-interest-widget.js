@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -15,6 +17,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 Template.Student_Of_Interest_Widget.onCreated(function studentOfInterestWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
   this.subscribe(Courses.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
