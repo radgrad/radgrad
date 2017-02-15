@@ -2595,7 +2595,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2018",
+          "semester": "Fall-2019",
           "course": "ics313",
           "note": "ICS 313",
           "verified": false,
@@ -2622,45 +2622,9 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2019",
+          "semester": "Spring-2020",
           "course": "ics422",
           "note": "ICS 422",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2019",
-          "course": "ics414",
-          "note": "ICS 414",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2019",
-          "course": "ics471",
-          "note": "ICS 471",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2020",
-          "course": "ics475",
-          "note": "ICS 475",
-          "verified": false,
-          "creditHrs": 3,
-          "grade": "A",
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2020",
-          "course": "ics484",
-          "note": "ICS 484",
           "verified": false,
           "creditHrs": 3,
           "grade": "A",
@@ -5115,7 +5079,55 @@
         },
         {
           "semester": "Summer-2017",
-          "opportunity": "data-analytics-for-solar-energy",
+          "opportunity": "hawaii-open-data",
+          "verified": false,
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2017",
+          "opportunity": "code-for-hawaii",
+          "verified": false,
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2018",
+          "opportunity": "itma",
+          "verified": false,
+          "student": "charley"
+        },
+        {
+          "semester": "Summer-2018",
+          "opportunity": "open-power-quality",
+          "verified": false,
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2018",
+          "opportunity": "att-iot-hackathon",
+          "verified": false,
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "charley"
+        },
+        {
+          "semester": "Summer-2019",
+          "opportunity": "booz-allen-internship",
+          "verified": false,
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "opportunity": "acm-manoa-vr",
+          "verified": false,
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "hicapacity",
           "verified": false,
           "student": "charley"
         },
