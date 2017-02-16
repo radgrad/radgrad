@@ -49,4 +49,7 @@ Template.First_Menu.helpers({
   iceRouteName() {
     return RouteNames.studentHomeIcePageRouteName;
   },
+  landingRouteName() {
+    return RouteNames.landingPageRouteName;
+  },
 });

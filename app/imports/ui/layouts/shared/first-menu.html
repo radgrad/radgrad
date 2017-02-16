@@ -37,7 +37,7 @@
 
 <template name="First_Menu">
   <div class="ui top fixed borderless menu radgrad-first-menu">
-    <div class="item"><img class="ui image" src="/images/radgrad_logo.png" style="width: 50px;"></div>
+    <div class="item"><a href="{{pathFor landingRouteName}}"><img class="ui image" src="/images/radgrad_logo.png" style="width: 50px;"></a></div>
     <div class="item" style="padding-left: 0;">
       <h1>{{> RadGrad_Logo_Text}}</h1>
     </div>
@@ -48,7 +48,7 @@
           <a href="{{pathFor levelsRouteName username=routeUserName}}">{{> First_Menu_Level_Icon level=level}}</a>
           <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov"}}</a>
           <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp"}}</a>
-            <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp"}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp"}}</a>
         </div>
       {{/if}}
 

@@ -1,20 +1,94 @@
-.landing-section-1 {
-  background: url('/images/landing/gradbackground.png') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  padding-bottom: 20px;
+.landing-menu > .item, .landing-menu .right.menu > .item {
+  position: initial !important;
 }
 
-.landing-section-1-welcome {
-  font-family: 'Roboto';
-  font-weight: 800;
+.inverted-section {
+  background-color: rgba(0,0,0,.8);
+  padding-top: 68px !important;
+  padding-bottom: 9px !important;
+}
+
+.inverted-main-header {
+  color: white;
   font-size: 72px;
-  color: white;
 }
 
-.landing-section-1-tagline {
-  font-family: 'Roboto';
-  font-weight: 400;
-  font-size: 36px;
+.inverted-main-description {
+  color: rgba(255,255,255,.7);
+  font-size: 20px
+}
+
+.main-header-ice {
+  text-align: left !important;
+  margin-top: 90px !important;
+  padding-bottom: 80px;
+}
+
+.green-text {
+  color: #6FBE44;
+}
+
+#landing-section-1 .container {
+  padding-top: 5rem !important;
+}
+
+#landing-section-3 .grid, #landing-section-4 .grid,
+#landing-section-5 .grid, #landing-section-6 .container,
+#landing-section-7 .grid, #landing-section-8 .container,
+#landing-section-9 .container {
+  padding-bottom: 5rem !important;
+}
+
+#landing-section-4, #landing-section-6, #landing-section-8 {
+  padding-top: 68px !important;
+  padding-bottom: 9px !important;
+}
+
+.inverted-header {
   color: white;
+  font-size: 45px;
+}
+
+.inverted-description {
+  color: rgba(255,255,255,.7);
+  font-size: 18px;
+}
+
+.header-text {
+  font-size: 45px;
+}
+
+.header-description {
+  font-size: 18px;
+}
+
+.header-section {
+  background-color: #f7f7f7;
+  padding-top: 60px;
+  padding-bottom: 79px;
+}
+
+.grey-section {
+  background-color: #f7f7f7;
+}
+
+.vertical-align {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.landing-stats {
+  margin-top: 10px;
+}
+
+.landing-stats > .statistic {
+  margin: 0 !important;
+}
+
+.landing-stats .statistic > .label {
+  font-size: 16px !important;
+}
+
+.footer-item:before, .footer-item {
+  color: rgba(255,255,255,.7) !important;
 }
