@@ -17,7 +17,7 @@ export const plannerKeys = {
   detailICE: 'detailICE',
 };
 
-Template.Academic_Plan_2.helpers({
+Template.Academic_Plan.helpers({
   fallArgs(year) {
     if (Template.instance().state.get('currentSemesterID')) {
       const currentSemesterID = Template.instance().state.get('currentSemesterID');
@@ -98,7 +98,7 @@ Template.Academic_Plan_2.helpers({
   },
 });
 
-Template.Academic_Plan_2.events({
+Template.Academic_Plan.events({
   'click #addAY': function clickAddAY(event) {
     event.preventDefault();
     const student = getUserIdFromRoute();
@@ -122,7 +122,7 @@ Template.Academic_Plan_2.events({
   },
 });
 
-Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {
+Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   this.state = new ReactiveDict();
   if (this.data) {
     this.state.set('currentSemesterID', this.data.currentSemesterID);
@@ -134,7 +134,7 @@ Template.Academic_Plan_2.onCreated(function academicPlan2OnCreated() {
   this.subscribe(Semesters.getPublicationName());
 });
 
-Template.Academic_Plan_2.onRendered(function academicPlan2OnRendered() {
+Template.Academic_Plan.onRendered(function academicPlanOnRendered() {
   this.state.set('currentSemesterID', this.data.currentSemesterID);
   this.state.set('studentUsername', this.data.studentUserName);
   const template = this;
@@ -143,7 +143,7 @@ Template.Academic_Plan_2.onRendered(function academicPlan2OnRendered() {
   });
 });
 
-Template.Academic_Plan_2.onDestroyed(function academicPlan2OnDestroyed() {
+Template.Academic_Plan.onDestroyed(function academicPlanOnDestroyed() {
   // add your statement here
 });
 

@@ -14,8 +14,27 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import * as RouteNames from '/imports/startup/client/router.js';
+
+function matchingInterestsHelper(item) {
+  const matchingInterests = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterests = Users.getInterestIDs(user._id);
+  const itemInterests = [];
+  _.map(item.interestIDs, (id) => {
+    itemInterests.push(Interests.findDoc(id));
+  });
+  _.map(itemInterests, (itemInterest) => {
+    _.map(userInterests, (userInterest) => {
+      if (_.isEqual(itemInterest, userInterest)) {
+        matchingInterests.push(userInterest);
+      }
+    });
+  });
+  return matchingInterests;
+}
 
 Template.Inspector.helpers({
   coursesRouteName() {
@@ -232,8 +251,14 @@ Template.Inspector.helpers({
           }
     return ret;
   },
-  interestName(interestSlugName) {
-    return Slugs.getNameFromID(interestSlugName);
+  interestName(interest) {
+    return interest.name;
+  },
+  // interestName(interestSlugName) {
+  //   return Slugs.getNameFromID(interestSlugName);
+  // },
+  interestSlug(interest) {
+    return Slugs.findDoc(interest.slugID).name;
   },
   isPastInstance() {
     const currentSemester = Semesters.getCurrentSemesterDoc();
@@ -250,6 +275,41 @@ Template.Inspector.helpers({
         return !oi.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
       }
     return false;
+  },
+  matchingInterests() {
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      const course = Template.instance().state.get(plannerKeys.detailCourse);
+      return matchingInterestsHelper(course);
+    } else if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      const course = Courses.findDoc(ci.courseID);
+      return matchingInterestsHelper(course);
+    }
+    return null;
+  },
+  otherInterests() {
+    let course;
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      course = Template.instance().state.get(plannerKeys.detailCourse);
+    } else if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      course = Courses.findDoc(ci.courseID);
+    }
+    const matchingInterests = matchingInterestsHelper(course);
+    const courseInterests = [];
+    _.map(course.interestIDs, (id) => {
+      courseInterests.push(Interests.findDoc(id));
+    });
+    const filtered = _.filter(courseInterests, function (courseInterest) {
+      let ret = true;
+      _.map(matchingInterests, (matchingInterest) => {
+        if (_.isEqual(courseInterest, matchingInterest)) {
+          ret = false;
+        }
+      });
+      return ret;
+    });
+    return filtered;
   },
   missingPrerequisite(prereqSlug) {
     const prereqID = Courses.findIdBySlug(prereqSlug);

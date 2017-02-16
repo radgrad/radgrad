@@ -111,9 +111,17 @@
                   </p>
                   {{#if interests}}
                     <div class="ui right floated">
-                      {{#each interest in interests}}
-                        <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestName interest.slugID)}}" ><i class="fitted star icon"></i>{{interest.name}}</a>
-                      {{/each}}
+                      <span class="left floated">
+                        {{#each interest in matchingInterests}}
+                          <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
+                        {{/each}}
+                        {{#each interest in otherInterests}}
+                          <a class="ui mini grey label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
+                        {{/each}}
+                      </span>
+                      <!--{{#each interest in interests}}-->
+                        <!--<a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestName interest.slugID)}}" ><i class="fitted star icon"></i>{{interest.name}}</a>-->
+                      <!--{{/each}}-->
                     </div>
                   {{/if}}
                 </div>
