@@ -10,14 +10,14 @@ import { makeSampleUser } from '/imports/api/user/SampleUsers';
 if (Meteor.isServer) {
   describe('FeedCollection', function testSuite() {
     // Define course data.
-    let student;
+    let user;
     let feedType;
     let timestamp;
 
     before(function setup() {
       removeAllEntities();
-      student = makeSampleUser();
-      feedType = 'new';
+      user = [makeSampleUser()];
+      feedType = 'new-user';
       timestamp = Date.now();
     });
 
@@ -26,7 +26,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      let docID = Feed.define({ student, feedType, timestamp });
+      let docID = Feed.define({ user, feedType, timestamp });
       expect(Feed.isDefined(docID)).to.be.true;
       const dumpObject = Feed.dumpOne(docID);
       Feed.removeIt(docID);

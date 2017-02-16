@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { Feed } from '../../../api/feed/FeedCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -66,6 +67,12 @@ Template.Add_User_Widget.events({
         if (error) {
           console.log('Error during new user creation: ', error);
         }
+        const feedDefinition = {
+          user: newData.slug,
+          feedType: 'new-user',
+          timestamp: new Date().getTime(),
+        };
+        Feed.define(feedDefinition);
         FormUtils.indicateSuccess(instance, event);
       });
     } else {

@@ -55,9 +55,10 @@ Template.Verification_Event.events({
       VerificationRequests.updateStatus(requestID, status, processed);
 
       const feedDefinition = {
-        student: studentID,
-        opportunity: opportunityID,
-        feedType: 'verified',
+        user: Slugs.findDoc(studentDoc.slugID),
+        opportunity: Slugs.findDoc(opportunity.slugID),
+        semester: Slugs.findDoc(semester.slugID),
+        feedType: 'verified-opportunity',
         timestamp: Date.now(),
       };
       Feed.define(feedDefinition);
