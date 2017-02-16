@@ -13,6 +13,7 @@ import './landing-section-1.html';
 import './landing-section-1.js';
 
 import './landing-section-2.html';
+import './landing-section-2.js';
 import './landing-section-3.html';
 import './landing-section-4.html';
 import './landing-section-5.html';

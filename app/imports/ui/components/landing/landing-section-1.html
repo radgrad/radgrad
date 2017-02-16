@@ -10,7 +10,7 @@
 
       <div class="right menu">
         <div class="item">
-          <a href="#">TOUR GUIDE</a>
+          <a href="#landing-section-9">TOUR GUIDE</a>
         </div>
 
 
@@ -21,7 +21,21 @@
             {{else}}
               {{#if checkLanding}}
                 {{#if currentUser}}
-                  <a style="color: #6FBE44;" href="{{pathFor studentHomePageRouteName username=(currentUser.username)}}">Home</a>
+                  {{#if isInRole 'FACULTY'}}
+                    <a style="color: #6FBE44;" href="{{pathFor facultyHomePageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
+                  {{#if isInRole 'STUDENT'}}
+                    <a style="color: #6FBE44;" href="{{pathFor studentHomePageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
+                  {{#if isInRole 'ADMIN'}}
+                    <a style="color: #6FBE44;" href="{{pathFor adminHomePageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
+                  {{#if isInRole 'ADVISOR'}}
+                    <a style="color: #6FBE44;" href="{{pathFor advisorStudentConfigurationPageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
+                  {{#if isInRole 'MENTOR'}}
+                    <a style="color: #6FBE44;" href="{{pathFor mentorHomePageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
                 {{else}}
                   {{> loginButtons align="right"}}
                 {{/if}}
@@ -44,7 +58,7 @@
           <div class="content">
             <img class="right floated mini ui image" src="/images/landing/yamakawa.jpg">
             <div class="header">
-              Kelsie Y. {{interestsCount}}+
+              Kelsie Y.
             </div>
             <div class="meta">
               B.S. in Computer Science

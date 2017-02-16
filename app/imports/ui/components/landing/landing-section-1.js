@@ -2,23 +2,21 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '/imports/startup/client/router.js';
 
-import { Courses } from '../../../api/course/CourseCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
-
-Template.Landing_Section_1.onCreated(function landingSection1OnCreated() {
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-});
-
 Template.Landing_Section_1.helpers({
-  coursesCount() {
-    return Math.floor(Courses.find().count());
-  },
-  interestsCount() {
-    return Interests.find().count();
-  },
   studentHomePageRouteName() {
     return RouteNames.studentHomePageRouteName;
+  },
+  facultyHomePageRouteName() {
+    return RouteNames.facultyHomePageRouteName;
+  },
+  adminHomePageRouteName() {
+    return RouteNames.adminHomePageRouteName;
+  },
+  advisorStudentConfigurationPageRouteName() {
+    return RouteNames.advisorStudentConfigurationPageRouteName;
+  },
+  mentorHomePageRouteName() {
+    return RouteNames.mentorHomePageRouteName;
   },
   checkLanding() {
     const routeName = FlowRouter.current().route.name;
