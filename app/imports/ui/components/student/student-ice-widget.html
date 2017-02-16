@@ -6,7 +6,7 @@
 
         <div class="ui segment">
           <div class="radgrad-ice">
-            <div class="radgrad-ice-circle p{{plannedICE.i}} radgrad-proj-innov">
+            <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.i}} radgrad-proj-innov">
               <div class="radgrad-ice-stat">
                 <span>{{earnedICE.i}}</span>
                 <hr>
@@ -17,11 +17,11 @@
                 <div class="fill"></div>
               </div>
             </div>
-            <div class="radgrad-ice-circle p{{limitedEarnedICE.i}} radgrad-earn-innov">
+            <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.i}} radgrad-earn-innov">
               <span></span>
               <div class="slice">
                 <div class="bar" ></div>
-                <div class="fill" style="background-color: red"></div>
+                <div class="fill"></div>
               </div>
             </div>
            </div>
@@ -127,7 +127,7 @@
       <div class="column">
         <div class="ui segment">
           <div class="radgrad-ice">
-            <div class="radgrad-ice-circle p{{plannedICE.c}} radgrad-proj-comp">
+            <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.c}} radgrad-proj-comp">
               <div class="radgrad-ice-stat">
                 <span>{{earnedICE.c}}</span>
                 <hr>
@@ -138,7 +138,8 @@
                 <div class="fill"></div>
               </div>
             </div>
-            <div class="radgrad-ice-circle p{{limitedEarnedICE.c}} radgrad-earn-comp">
+
+            <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.c}} radgrad-earn-comp">
               <span></span>
               <div class="slice">
                 <div class="bar"></div>
@@ -240,7 +241,7 @@
 
         <div class="ui segment">
           <div class="radgrad-ice">
-            <div class="radgrad-ice-circle p{{plannedICE.e}} radgrad-proj-exp">
+            <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.e}} radgrad-proj-exp">
               <div class="radgrad-ice-stat">
                 <span>{{earnedICE.e}}</span>
                 <hr>
@@ -251,7 +252,8 @@
                 <div class="fill"></div>
               </div>
             </div>
-            <div class="radgrad-ice-circle p{{limitedEarnedICE.e}} radgrad-earn-exp">
+
+            <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.e}} radgrad-earn-exp">
               <span></span>
               <div class="slice">
                 <div class="bar"></div>

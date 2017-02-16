@@ -19,7 +19,6 @@ function withinPastDay(feed, timestamp) {
   let ret = false;
   const feedTime = feed.timestamp;
   const currentFeedTime = timestamp;
-  console.log(feedTime + "|" + currentFeedTime);
   const timeDiff = dateDiffInDays(currentFeedTime, feedTime);
   if (timeDiff === 0) {
     ret = true;
@@ -176,7 +175,8 @@ class FeedCollection extends BaseCollection {
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
-    const description = `${Users.getFullName(userID)} and ${existingFeed.userIDs.length - 1} other(s) has joined RadGrad.`;
+    const description = `${Users.getFullName(userID)} and 
+      ${existingFeed.userIDs.length - 1} other(s) has joined RadGrad.`;
     let picture = Users.findDoc(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
