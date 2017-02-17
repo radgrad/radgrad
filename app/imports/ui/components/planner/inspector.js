@@ -21,7 +21,11 @@ import * as RouteNames from '/imports/startup/client/router.js';
 function matchingInterestsHelper(item) {
   const matchingInterests = [];
   const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterests = Users.getInterestIDs(user._id);
+  const userInterestIDs = Users.getInterestIDs(user._id);
+  const userInterests = [];
+  _.map(userInterestIDs, (id) => {
+    userInterests.push(Interests.findDoc(id));
+  });
   const itemInterests = [];
   _.map(item.interestIDs, (id) => {
     itemInterests.push(Interests.findDoc(id));
@@ -284,6 +288,12 @@ Template.Inspector.helpers({
       const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
       const course = Courses.findDoc(ci.courseID);
       return matchingInterestsHelper(course);
+    } else if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      return matchingInterestsHelper(Template.instance().state.get(plannerKeys.detailOpportunity));
+    } else if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      const opp = Opportunities.findDoc(oi.opportunityID);
+      return matchingInterestsHelper(opp);
     }
     return null;
   },
@@ -294,6 +304,11 @@ Template.Inspector.helpers({
     } else if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
       const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
       course = Courses.findDoc(ci.courseID);
+    } else if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      course = Template.instance().state.get(plannerKeys.detailOpportunity);
+    }else if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+      course = Opportunities.findDoc(oi.opportunityID);
     }
     const matchingInterests = matchingInterestsHelper(course);
     const courseInterests = [];
