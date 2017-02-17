@@ -45,7 +45,7 @@ Template.Planned_Course_Grade.onCreated(function plannedCourseGradeOnCreated() {
 });
 
 Template.Planned_Course_Grade.onRendered(function plannedCourseGradeOnRendered() {
-  // add your statement here
+  this.$('.ui.selection.dropdown').dropdown();
 });
 
 Template.Planned_Course_Grade.onDestroyed(function plannedCourseGradeOnDestroyed() {
