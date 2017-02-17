@@ -16,6 +16,9 @@ import './help-panel-widget.js';
 import './ice-header.html';
 import './ice-header.js';
 
+import './interest-list.html';
+import './interest-list.js';
+
 import './projected-ice-component.html';
 import './projected-ice-component.js';
 
