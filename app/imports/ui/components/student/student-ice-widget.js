@@ -138,6 +138,12 @@ Template.Student_Ice_Widget.helpers({
     }
     return null;
   },
+  greaterThan100(num) {
+    if (num > 100) {
+      return 100;
+    }
+    return num;
+  },
   plannedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());

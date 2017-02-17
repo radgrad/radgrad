@@ -1,12 +1,59 @@
 <template name="Landing_Section_2">
-  <div class="landing-grey-background">
-    <div class="ui center aligned text container">
-        <h1 class="landing-grey-background-header">Why use {{> RadGrad_Logo_Text}}?</h1>
-        <h3>Discover your interests.</h3>
-        <h3>Build your community.</h3>
-        <h3>Strengthen your preparation.</h3>
-        <h3>Define, then achieve your career goals.</h3>
-        <h3>Pay it forward.</h3>
+  <div class="header-section">
+    <div class="ui stackable grid">
+      <div class="three wide column">
+      </div>
+
+      <div class="five wide right aligned column">
+        <h1 class="header-text">Why use {{> RadGrad_Logo_Text}}?</h1>
+
+        <p class="header-description">
+          <b>Discover</b> your interests. <br>
+          <b>Build</b> your community. <br>
+          <b>Strengthen</b> your preparation. <br>
+          <b>Define</b>, then <b>achieve</b> your career goals. <br>
+          <b>Pay it forward.</b> <br>
+        </p>
+
+      </div>
+
+      <div class="five wide column vertical-align">
+        <div class="ui huge horizontal statistics landing-stats" style="margin-top: 10px;">
+          <div class="green statistic">
+            <div class="value">
+              {{interestsCount}}+
+            </div>
+            <div class="label">
+              Interests
+            </div>
+          </div>
+          <div class="green statistic">
+            <div class="value">
+              {{opportunitiesCount}}+
+            </div>
+            <div class="label">
+              Opportunities
+            </div>
+          </div>
+          <div class="green statistic">
+            <div class="value">
+              {{coursesCount}}+
+            </div>
+            <div class="label">
+              Course Reviews
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="three wide column">
+      </div>
+
     </div>
+    
   </div>
+
+
+    
+
 </template>
