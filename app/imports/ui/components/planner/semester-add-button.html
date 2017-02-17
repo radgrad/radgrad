@@ -1,0 +1,64 @@
+<template name="Semester_Add_Button">
+  <div class="ui tiny green basic compact button" data-position="top center"
+       style="flex-grow: 0; margin: 1em 0; position: absolute; bottom: 0; left: 50%; margin-left: -2.2em;">ADD
+  </div>
+  <div class="ui fluid popup transition hidden">
+    <div class="ui vertical menu">
+      <a class="item addCourseMenu" data-position="right center">Add Course</a>
+      <div class="ui fluid popup transition hidden">
+        <div class="ui vertical menu">
+          {{#if hasCourses 100}}
+            <a class="item oneHundredLevel" data-position="right center">1xx</a>
+            <div class="ui fluid popup transition hidden">
+              <div class="ui vertical menu">
+                <!--<div class="ui link list">-->
+                {{#each course in (courses 100)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+                <!--</div>-->
+              </div>
+            </div>
+          {{/if}}
+          {{#if hasCourses 200}}
+            <a class="item 200" data-position="right center">2xx</a>
+            <div class="ui fluid popup transition hidden">
+              <div class="ui vertical menu">
+                {{#each course in (courses 200)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+          {{#if hasCourses 300}}
+            <a class="item 300" data-position="right center">3xx</a>
+            <div class="ui fluid popup transition hidden">
+              <div class="ui vertical menu">
+                {{#each course in (courses 300)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+          {{#if hasCourses 400}}
+            <a class="item 400" data-position="right center">4xx</a>
+            <div class="ui fluid popup transition hidden" style="overflow: auto">
+              <div class="ui vertical menu">
+                {{#each course in (courses 400)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+      <a class="item addOpportunityMenu">Add Opportunity</a>
+      <div class="ui fluid popup transition hidden" style="overflow: auto">
+        <div class="ui vertical menu">
+          {{#each opportunity in opportunities}}
+            <a class="item addOpportunity">{{opportunity.name}}</a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
