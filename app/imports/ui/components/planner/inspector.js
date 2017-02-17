@@ -284,32 +284,38 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       const course = Template.instance().state.get(plannerKeys.detailCourse);
       return matchingInterestsHelper(course);
-    } else if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
-      const course = Courses.findDoc(ci.courseID);
-      return matchingInterestsHelper(course);
-    } else if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-      return matchingInterestsHelper(Template.instance().state.get(plannerKeys.detailOpportunity));
-    } else if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-      const opp = Opportunities.findDoc(oi.opportunityID);
-      return matchingInterestsHelper(opp);
-    }
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+        const course = Courses.findDoc(ci.courseID);
+        return matchingInterestsHelper(course);
+      } else
+        if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+          return matchingInterestsHelper(Template.instance().state.get(plannerKeys.detailOpportunity));
+        } else
+          if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+            const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+            const opp = Opportunities.findDoc(oi.opportunityID);
+            return matchingInterestsHelper(opp);
+          }
     return null;
   },
   otherInterests() {
     let course;
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       course = Template.instance().state.get(plannerKeys.detailCourse);
-    } else if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
-      course = Courses.findDoc(ci.courseID);
-    } else if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-      course = Template.instance().state.get(plannerKeys.detailOpportunity);
-    }else if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-      course = Opportunities.findDoc(oi.opportunityID);
-    }
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+        course = Courses.findDoc(ci.courseID);
+      } else
+        if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+          course = Template.instance().state.get(plannerKeys.detailOpportunity);
+        } else
+          if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+            const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+            course = Opportunities.findDoc(oi.opportunityID);
+          }
     const matchingInterests = matchingInterestsHelper(course);
     const courseInterests = [];
     _.map(course.interestIDs, (id) => {

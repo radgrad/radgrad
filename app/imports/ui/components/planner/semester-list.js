@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { Tracker } from 'meteor/tracker';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -230,51 +229,6 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);
   }
-  const template = this;
-  // Tracker.afterFlush(() => {
-  //   template.$('.ui.button')
-  //       .popup({
-  //         on: 'click',
-  //       });
-  //   template.$('.item.addCourseMenu')
-  //       .popup({
-  //         inline: false,
-  //         hoverable: true,
-  //         position: 'right center',
-  //         lastResort: 'right center',
-  //       });
-  //   template.$('.item.addOpportunityMenu')
-  //       .popup({
-  //         inline: false,
-  //         hoverable: true,
-  //         position: 'right center',
-  //         lastResort: 'right center',
-  //       });
-  //   template.$('.item.oneHundredLevel')
-  //       .popup({
-  //         inline: true,
-  //         hoverable: true,
-  //       });
-  //   template.$('a.200.item')
-  //       .popup({
-  //         inline: false,
-  //         hoverable: true,
-  //         lastResort: 'right center',
-  //       });
-  //   template.$('a.300.item')
-  //       .popup({
-  //         inline: true,
-  //         hoverable: true,
-  //         lastResort: 'right center',
-  //       });
-  //   template.$('a.400.item')
-  //       .popup({
-  //         inline: true,
-  //         hoverable: true,
-  //         lastResort: 'right center',
-  //       });
-  //   // template.$('.ui.selection.dropdown').dropdown();
-  // });
 });
 
 Template.Semester_List.onDestroyed(function semesterListOnDestroyed() {
