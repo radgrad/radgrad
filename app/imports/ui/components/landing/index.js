@@ -1,10 +1,3 @@
-import './ice-badge.css';
-import './ice-badge.html';
-import './ice-badge.js';
-
-import './ice-badge-proj.html';
-import './ice-badge-proj.js';
-
 import './landing-green-background.css';
 import './landing-grey-background.css';
 
