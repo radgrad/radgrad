@@ -13,7 +13,7 @@
             {{/if}}
         </div>
 
-        <div class="ui divider" style="margin-top: 0;"></div>
+        <div class="ui divider" style="margin-top: 0; "></div>
 
         <div class="ui stackable grid">
           <div class="column">
@@ -21,7 +21,7 @@
 
               {{#if isLabel descriptionPair.label 'Description'}}
                 <b>{{descriptionPair.label}}:</b> 
-                {{#if descriptionPair.value}} {{descriptionPair.value}} <br> <br>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
                   {{else}}
                     N/A <br>
                 {{/if}}
@@ -33,6 +33,15 @@
                   {{else}}
                     N/A <br>
                 {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Interest_List item=item size='mini'}}
+                  <!--{{#each interest in descriptionPair.value}}-->
+                    <!--<a class="ui right aligned mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestSlugName interest)}}"><i class="fitted star icon"></i>{{interest}}</a>-->
+                  <!--{{/each}}-->
+                </div>
               {{/if}}
 
             {{/each}}
@@ -53,14 +62,6 @@
         </div>
         {{/each}}
       </div>
-
-      {{#each descriptionPair in descriptionPairs}}
-        {{#if isLabel descriptionPair.label 'Interests'}}
-          <div class="ui right aligned secondary segment">
-            {{> Interest_List item=item size='mini'}}
-          </div>
-        {{/if}}
-      {{/each}}
     </div>
 
   {{else}}

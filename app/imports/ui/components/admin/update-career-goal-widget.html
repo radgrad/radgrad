@@ -14,7 +14,7 @@
         {{> Input_Form_Field label='More Information' name='moreInformation' value=careerGoal.moreInformation errorMessage=(fieldError 'moreInformation') required=true}}
       </div>
 
-      {{> TextArea_Form_Field label='Description' rows=5 name='description' value=careerGoal.description errorMessage=(fieldError 'description') required=true}}
+      {{> TextArea_Form_Field label='Description' rows=15 name='description' value=careerGoal.description errorMessage=(fieldError 'description') required=true}}
 
       <button class="ui green basic button" type="submit">Update</button>
       <button class="ui green basic button jsCancel" type="submit">Cancel</button>
