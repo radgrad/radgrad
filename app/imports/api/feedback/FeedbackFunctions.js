@@ -109,7 +109,7 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   checkCompletePlan(studentID) {
-    // console.log('checkCompletePlan');
+    console.log('checkCompletePlan');
     const f = Feedbacks.findDoc({ name: 'Required course missing' });
     const feedback = Slugs.getNameFromID(f.slugID, 'Feedback');
     const area = `ffn-${feedback}`;
@@ -126,6 +126,7 @@ export class FeedbackFunctionClass {
     }
     courses = this._missingCourses(courseIDs, courses);
     if (courses.length > 0) {
+      // console.log(courses);
       let description = 'Your degree plan is missing: ';
       const currentRoute = FlowRouter.current().path;
       const index = getPosition(currentRoute, '/', 3);
@@ -412,6 +413,7 @@ export class FeedbackFunctionClass {
    * @return {*|Array.<T>}
    */
   _missingCourses(courseIDs, coursesNeeded) {
+    // console.log('_missingCourses', courseIDs, coursesNeeded);
     const courses = coursesNeeded.splice(0);
     _.map(courseIDs, (id) => {
       const course = Courses.findDoc(id);
@@ -424,13 +426,17 @@ export class FeedbackFunctionClass {
           if (_.indexOf(courses, 'ics4xx') !== -1) {
             courses.splice(_.indexOf(courses, 'ics4xx'), 1);
           }
-        } else
-          if (_.indexOf(courses[0], slug) !== -1) {
-            courses.splice(0, 1);
-          } else
-            if (_.indexOf(courses[1], slug) !== -1) {
-              courses.splice(1, 1);
+        } else {
+          let i = 0;
+          _.map(courses, (c) => {
+            if (Array.isArray(c)) {
+              if (_.indexOf(c, slug) !== -1) {
+                courses.splice(i, 1);
+              }
             }
+            i += 1;
+          });
+        }
     });
     return courses;
   }

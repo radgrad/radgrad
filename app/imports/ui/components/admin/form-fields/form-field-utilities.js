@@ -3,6 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../../../../api/slug/SlugCollection.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
+import { Showdown } from 'meteor/markdown';
 
 /**
  * Return the data from the submitted form corresponding to the fields in the passed schema.
@@ -115,3 +116,10 @@ Template.registerHelper('fieldError', (fieldName) => {
   const errorObject = _.find(invalidKeys, (keyObj) => keyObj.name === fieldName);
   return errorObject && Template.instance().context.keyErrorMessage(errorObject.name);
 });
+
+/**
+ * Helper for markdown processing. Takes a string in markdown format and returns it as HTML.
+ * Call this within triple curly braces to insert markdown.
+ */
+/* eslint-disable new-cap */
+Template.registerHelper('markdownify', text => new Showdown.converter().makeHtml(text));
