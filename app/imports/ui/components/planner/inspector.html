@@ -111,17 +111,7 @@
                   </p>
                   {{#if interests}}
                     <div class="ui right floated">
-                      <span class="left floated">
-                        {{#each interest in matchingInterests}}
-                          <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
-                        {{/each}}
-                        {{#each interest in otherInterests}}
-                          <a class="ui mini grey label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
-                        {{/each}}
-                      </span>
-                      <!--{{#each interest in interests}}-->
-                        <!--<a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestName interest.slugID)}}" ><i class="fitted star icon"></i>{{interest.name}}</a>-->
-                      <!--{{/each}}-->
+                      {{> Interest_List item=getCourse size='small'}}
                     </div>
                   {{/if}}
                 </div>
@@ -161,19 +151,8 @@
                     {{/if}}
 
                     <div class="ui right floated">
-                      <span class="left floated">
-                        {{#each interest in matchingInterests}}
-                          <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
-                        {{/each}}
-                        {{#each interest in otherInterests}}
-                          <a class="ui mini grey label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
-                        {{/each}}
-                      </span>
-                      <!--{{#each interest in interests}}-->
-                        <!--<a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestName interest.slugID)}}" ><i class="fitted star icon"></i>{{interest.name}}</a>-->
-                      <!--{{/each}}-->
+                      {{> Interest_List item=getOpportunity size='small'}}
                     </div>
-
                   </div>
                 {{else}}
                   <p>Please select an ICS course or opportunity menus above or click on a course or
