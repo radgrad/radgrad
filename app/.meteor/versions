@@ -110,6 +110,7 @@ templating-runtime@1.2.15
 templating-tools@1.0.5
 tmeasday:test-reporter-helpers@0.2.1
 tracker@1.1.1
+udondan:slick@1.3.11_1
 udondan:zipzap@2.2.2_1
 ui@1.0.12
 underscore@1.0.10

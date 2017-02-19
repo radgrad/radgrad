@@ -13,6 +13,10 @@ Template.Guided_Tour_Layout.onCreated(function guidedTourLayoutOnCreated() {
 
 Template.Guided_Tour_Layout.onRendered(function guidedTourLayoutOnRendered() {
   // add your statement here
+  this.$('#carousel').slick({
+    dots: true,
+    arrows: true,
+  });
 });
 
 Template.Guided_Tour_Layout.onDestroyed(function guidedTourLayoutOnDestroyed() {

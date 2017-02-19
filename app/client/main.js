@@ -31,6 +31,7 @@ import '/imports/ui/components/landing';
 import '/imports/ui/components/planner';
 import '/imports/ui/components/shared';
 import '/imports/ui/components/student';
+import '/imports/ui/components/guidedtour';
 
 import '/imports/ui/layouts/admin';
 import '/imports/ui/layouts/advisor';

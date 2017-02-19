@@ -238,6 +238,16 @@ FlowRouter.route('/guidedtour', {
   },
 });
 
+/*
+export const studentHomeLevelsPageRouteName = 'Student_Home_Levels_Page';
+studentRoutes.route('/home/levels', {
+  name: studentHomeLevelsPageRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentHomeLevelsPageRouteName });
+  },
+});
+*/
+
 
 /*                        MENTOR ROUTES                       */
 
