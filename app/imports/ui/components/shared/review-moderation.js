@@ -8,14 +8,14 @@ import { moment } from 'meteor/momentjs:moment';
 
 
 Template.Review_Moderation.helpers({
+  moderatorComments(review) {
+    return review.moderatorComments;
+  },
   pendingCourseReviews() {
     return Reviews.find({ moderated: false, reviewType: 'course' });
   },
   pendingOpportunityReviews() {
     return Reviews.find({ moderated: false, reviewType: 'opportunity' });
-  },
-  moderatorComments(review) {
-    return review.moderatorComments;
   },
   rating(review) {
     return review.rating;
@@ -37,10 +37,6 @@ Template.Review_Moderation.helpers({
   },
   studentComments(review) {
     return review.comments;
-  },
-  whenSubmitted(request) {
-    const submitted = moment(request.submittedOn);
-    return submitted.calendar();
   },
 });
 

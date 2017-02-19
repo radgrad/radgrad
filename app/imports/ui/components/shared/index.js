@@ -5,9 +5,6 @@ import './back-to-top-button.html';
 import './back-to-top-button.js';
 import './back-to-top-button.css';
 
-import './earned-ice.html';
-import './earned-ice.js';
-
 import './get-user-id-from-route';
 
 import './help-panel-widget.html';
@@ -18,12 +15,6 @@ import './ice-header.js';
 
 import './interest-list.html';
 import './interest-list.js';
-
-import './projected-ice-component.html';
-import './projected-ice-component.js';
-
-import './retrieve-student-widget.html';
-import './retrieve-student-widget.js';
 
 import './review-moderation.html';
 import './review-moderation.js';
@@ -41,9 +32,6 @@ import './user-course-component.js';
 
 import './user-interests-component.html';
 import './user-interests-component.js';
-
-import './user-level-component.html';
-import './user-level-component.js';
 
 import './verification-event.html';
 import './verification-event.js';

@@ -30,7 +30,6 @@ Template.User_Career_Goals_Component.helpers({
     }
     return 0;
   },
-
   labelSize() {
     return Template.instance().labelSize;
   },
