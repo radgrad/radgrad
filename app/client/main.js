@@ -39,6 +39,7 @@ import '/imports/ui/layouts/landing';
 import '/imports/ui/layouts/mentor';
 import '/imports/ui/layouts/shared';
 import '/imports/ui/layouts/student';
+import '/imports/ui/layouts/guidedtour';
 
 import '/imports/ui/pages/admin';
 import '/imports/ui/pages/advisor';

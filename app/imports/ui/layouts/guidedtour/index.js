@@ -1,2 +1,2 @@
-import './guidedtour-layout.html';
-import './guidedtour-layout.js';
+import './guided-tour-layout.html';
+import './guided-tour-layout.js';
