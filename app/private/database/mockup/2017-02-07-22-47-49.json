@@ -54,6 +54,10 @@
         },
         {
           "student": "christopher-nguyen",
+          "year": 2013
+        },
+        {
+          "student": "christopher-nguyen",
           "year": 2014
         },
         {
@@ -163,6 +167,10 @@
         {
           "student": "kirk6",
           "year": 2017
+        },
+        {
+          "student": "kurtkn",
+          "year": 2013
         },
         {
           "student": "kurtkn",
@@ -234,6 +242,10 @@
         },
         {
           "student": "slike",
+          "year": 2013
+        },
+        {
+          "student": "slike",
           "year": 2014
         },
         {
@@ -343,6 +355,10 @@
         {
           "student": "creindle",
           "year": 2017
+        },
+        {
+          "student": "erikhuan",
+          "year": 2013
         },
         {
           "student": "erikhuan",
@@ -6496,7 +6512,7 @@
           "slug": "cmoore",
           "email": "cmoore@hawaii.edu",
           "password": "foo",
-          "role": "ADVISOR",
+          "role": "FACULTY",
           "uhID": "1017-6869",
           "picture": "/images/mockup/cmoore.jpg",
           "website": null,
