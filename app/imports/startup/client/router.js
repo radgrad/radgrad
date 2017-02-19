@@ -230,6 +230,14 @@ FlowRouter.route('/', {
   },
 });
 
+export const guidedTourPageRouteName = 'Guided_Tour_Page';
+FlowRouter.route('/guidedtour', {
+  name: guidedTourPageRouteName,
+  action() {
+    BlazeLayout.render('Guided_Tour_Layout');
+  },
+});
+
 
 /*                        MENTOR ROUTES                       */
 
