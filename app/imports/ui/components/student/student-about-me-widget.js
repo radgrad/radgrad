@@ -15,18 +15,6 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_About_Me_Widget.helpers({
-  getDictionary() {
-    return Template.instance().state;
-  },
-  careerGoalsRouteName() {
-    return RouteNames.studentExplorerCareerGoalsPageRouteName;
-  },
-  degreesRouteName() {
-    return RouteNames.studentExplorerDegreesPageRouteName;
-  },
-  interestsRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
-  },
   careerGoals() {
     const ret = [];
     if (getRouteUserName()) {
@@ -37,6 +25,12 @@ Template.Student_About_Me_Widget.helpers({
     }
     return ret;
   },
+  careerGoalsRouteName() {
+    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+  },
+  degreesRouteName() {
+    return RouteNames.studentExplorerDegreesPageRouteName;
+  },
   desiredDegree() {
     let ret = '';
     if (getRouteUserName()) {
@@ -46,6 +40,13 @@ Template.Student_About_Me_Widget.helpers({
       }
     }
     return ret;
+  },
+  email() {
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      return Users.getEmail(user._id);
+    }
+    return '';
   },
   firstCareerGoal() {
     let ret;
@@ -71,36 +72,14 @@ Template.Student_About_Me_Widget.helpers({
     }
     return ret;
   },
-  slugName(item) {
-    return Slugs.findDoc(item.slugID).name;
+  getDictionary() {
+    return Template.instance().state;
   },
-  name() {
-    if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return `${user.firstName} ${user.lastName}`;
-    }
-    return '';
+  goalName(goal) {
+    return goal.name;
   },
-  email() {
-    if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return Users.getEmail(user._id);
-    }
-    return '';
-  },
-  website() {
-    if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return user.website;
-    }
-    return '';
-  },
-  picture() {
-    if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return user.picture;
-    }
-    return '';
+  interestName(interest) {
+    return interest.name;
   },
   interests() {
     const ret = [];
@@ -112,16 +91,37 @@ Template.Student_About_Me_Widget.helpers({
     }
     return ret;
   },
-  interestName(interest) {
-    return interest.name;
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
   },
-  goalName(goal) {
-    return goal.name;
+  name() {
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      return `${user.firstName} ${user.lastName}`;
+    }
+    return '';
+  },
+  picture() {
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      return user.picture;
+    }
+    return '';
+  },
+  slugName(item) {
+    return Slugs.findDoc(item.slugID).name;
   },
   studentPicture() {
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
       return user.picture;
+    }
+    return '';
+  },
+  website() {
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      return user.website;
     }
     return '';
   },
