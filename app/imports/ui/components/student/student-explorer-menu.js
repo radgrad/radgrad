@@ -19,81 +19,6 @@ Template.Student_Explorer_Menu.helpers({
   careerGoalsRouteName() {
     return RouteNames.studentExplorerCareerGoalsPageRouteName;
   },
-  coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
-  },
-  degreesRouteName() {
-    return RouteNames.studentExplorerDegreesPageRouteName;
-  },
-  interestsRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
-  },
-  opportunitiesRouteName() {
-    return RouteNames.studentExplorerOpportunitiesPageRouteName;
-  },
-  usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
-  },
-  courseName(course) {
-    return course.shortName;
-  },
-  slugName(item) {
-    return Slugs.findDoc(item.slugID).name;
-  },
-  itemName(item) {
-    return item.name;
-  },
-  firstCourse() {
-    let ret;
-    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
-    if (courses.length > 0) {
-      ret = Slugs.findDoc(courses[0].slugID).name;
-    }
-    return ret;
-  },
-  firstCareerGoal() {
-    let ret;
-    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
-    if (careerGoals.length > 0) {
-      ret = Slugs.findDoc(careerGoals[0].slugID).name;
-    }
-    return ret;
-  },
-  firstDegree() {
-    let ret;
-    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
-    if (degrees.length > 0) {
-      ret = Slugs.findDoc(degrees[0].slugID).name;
-    }
-    return ret;
-  },
-  firstOpportunity() {
-    let ret;
-    const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    if (opportunities.length > 0) {
-      ret = Slugs.findDoc(opportunities[0].slugID).name;
-    }
-    return ret;
-  },
-  firstInterest() {
-    let ret;
-    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    if (interests.length > 0) {
-      ret = Slugs.findDoc(interests[0].slugID).name;
-    }
-    return ret;
-  },
-  isType(type, value) {
-    return type === value;
-  },
-  opportunity(opportunity) {
-    let ret = 'item';
-    const current = FlowRouter.getParam('opportunity');
-    if (opportunity === current) {
-      ret = 'active item';
-    }
-    return ret;
-  },
   classType(item, type) {
     let ret = 'item';
     let current;
@@ -113,42 +38,85 @@ Template.Student_Explorer_Menu.helpers({
     }
     return ret;
   },
-  courseClass(course) {
-    let ret = 'item';
-    const current = FlowRouter.getParam('course');
-    if (course === current) {
-      ret = 'active item';
+  courseName(course) {
+    return course.shortName;
+  },
+  coursesRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
+  },
+  degreesRouteName() {
+    return RouteNames.studentExplorerDegreesPageRouteName;
+  },
+  firstCareerGoal() {
+    let ret;
+    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
+    if (careerGoals.length > 0) {
+      ret = Slugs.findDoc(careerGoals[0].slugID).name;
     }
     return ret;
   },
-  degreeClass(degree) {
-    let ret = 'item';
-    const current = FlowRouter.getParam('degree');
-    if (degree === current) {
-      ret = 'active item';
+  firstCourse() {
+    let ret;
+    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    if (courses.length > 0) {
+      ret = Slugs.findDoc(courses[0].slugID).name;
     }
     return ret;
   },
-  careerGoalClass(careerGoal) {
-    let ret = 'item';
-    const current = FlowRouter.getParam('careerGoal');
-    if (careerGoal === current) {
-      ret = 'active item';
+  firstDegree() {
+    let ret;
+    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    if (degrees.length > 0) {
+      ret = Slugs.findDoc(degrees[0].slugID).name;
     }
     return ret;
   },
-  interestClass(interest) {
-    let ret = 'item';
-    const current = FlowRouter.getParam('interest');
-    if (interest === current) {
-      ret = 'active item';
+  firstInterest() {
+    let ret;
+    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
+    if (interests.length > 0) {
+      ret = Slugs.findDoc(interests[0].slugID).name;
     }
     return ret;
+  },
+  firstOpportunity() {
+    let ret;
+    const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    if (opportunities.length > 0) {
+      ret = Slugs.findDoc(opportunities[0].slugID).name;
+    }
+    return ret;
+  },
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
+  isType(type, value) {
+    return type === value;
+  },
+  itemName(item) {
+    return item.name;
+  },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+  },
+  slugName(item) {
+    return Slugs.findDoc(item.slugID).name;
   },
   userCareerGoals(careerGoal) {
     let ret = '';
     const user = Users.findDoc({ username: getRouteUserName() });
     if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+      ret = 'check green circle outline icon';
+    }
+    return ret;
+  },
+  userCourses(course) {
+    let ret = '';
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    if (ci.length > 0) {
       ret = 'check green circle outline icon';
     }
     return ret;
@@ -169,17 +137,6 @@ Template.Student_Explorer_Menu.helpers({
     }
     return ret;
   },
-  userCourses(course) {
-    let ret = '';
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    if (ci.length > 0) {
-      ret = 'check green circle outline icon';
-    }
-    return ret;
-  },
   userOpportunities(opportunity) {
     let ret = '';
     const oi = OpportunityInstances.find({
@@ -190,6 +147,9 @@ Template.Student_Explorer_Menu.helpers({
       ret = 'check green circle outline icon';
     }
     return ret;
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
 });
 

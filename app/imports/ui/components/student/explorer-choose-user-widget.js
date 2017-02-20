@@ -4,12 +4,21 @@ import { ROLE } from '../../../api/role/Role.js';
 import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Explorer_Choose_User_Widget.helpers({
-  users(role) {
-    return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
+  advisorRole() {
+    return ROLE.ADVISOR;
+  },
+  alumniRole() {
+    return ROLE.ALUMNI;
+  },
+  facultyRole() {
+    return ROLE.FACULTY;
   },
   label(user) {
     const name = `${user.firstName} ${user.lastName}`;
     return name.length > 11 ? `${name.substring(0, 9)}...` : name;
+  },
+  mentorRole() {
+    return ROLE.MENTOR;
   },
   picture(user) {
     if (user.picture) {
@@ -17,26 +26,14 @@ Template.Explorer_Choose_User_Widget.helpers({
     }
     return '/images/default-profile-picture.png';
   },
-  usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
-  },
   studentRole() {
     return ROLE.STUDENT;
   },
-  mentorRole() {
-    return ROLE.MENTOR;
+  users(role) {
+    return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
   },
-  advisorRole() {
-    return ROLE.ADVISOR;
-  },
-  adminRole() {
-    return ROLE.ADMIN;
-  },
-  facultyRole() {
-    return ROLE.FACULTY;
-  },
-  alumniRole() {
-    return ROLE.ALUMNI;
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
 });
 

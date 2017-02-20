@@ -53,17 +53,17 @@ Template.Student_Teaser_Widget.helpers({
     }
     return ret;
   },
-  teasers() {
-    return matchingTeasers();
+  teaserAuthor(teaser) {
+    return teaser.author;
   },
   teaserCount() {
     return matchingTeasers().length;
   },
+  teasers() {
+    return matchingTeasers();
+  },
   teaserTitle(teaser) {
     return teaser.title;
-  },
-  teaserAuthor(teaser) {
-    return teaser.author;
   },
   teaserUrl(teaser) {
     return teaser.url;

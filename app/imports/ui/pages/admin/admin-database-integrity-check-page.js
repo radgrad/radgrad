@@ -31,15 +31,15 @@ const clientDataKey = 'client';
 const serverDataKey = 'server';
 
 Template.Admin_DataBase_Integrity_Check_Page.helpers({
-  results(side) {
-    const key = (side === 'client') ? clientDataKey : serverDataKey;
-    const data = Template.instance().results.get(key);
-    return (data) ? data.message : '';
-  },
   hidden(side) {
     const key = (side === 'client') ? clientDataKey : serverDataKey;
     const data = Template.instance().results.get(key);
     return (data) ? '' : 'hidden';
+  },
+  results(side) {
+    const key = (side === 'client') ? clientDataKey : serverDataKey;
+    const data = Template.instance().results.get(key);
+    return (data) ? data.message : '';
   },
   successOrError(side) {
     const key = (side === 'client') ? clientDataKey : serverDataKey;
