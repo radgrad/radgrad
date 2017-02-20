@@ -4,12 +4,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 
 Template.Advisor_Student_Configuration_Page.helpers({
-  prevID() {
-    return Template.instance().prevID;
-  },
-  studentID() {
-    return Template.instance().studentID;
-  },
   displayWidget() {
     const prevID = Template.instance().prevID.get();
     const currID = Template.instance().studentID.get();
@@ -23,6 +17,9 @@ Template.Advisor_Student_Configuration_Page.helpers({
       Template.instance().prevID.set(currID);
     }
     return ret;
+  },
+  studentID() {
+    return Template.instance().studentID;
   },
   getDictionary() {
     return Template.instance().state;

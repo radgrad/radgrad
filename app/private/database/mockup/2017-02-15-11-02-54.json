@@ -1,5 +1,5 @@
 {
-  "timestamp": "2017-02-19T02:23:36.403Z",
+  "timestamp": "2017-01-23T01:18:25.046Z",
   "collections": [
     {
       "name": "AcademicYearInstanceCollection",
@@ -179,10 +179,6 @@
         {
           "student": "kurtkn",
           "year": 2017
-        },
-        {
-          "student": "markrc",
-          "year": 2013
         },
         {
           "student": "markrc",
@@ -469,13 +465,14 @@
           "name": "Data Scientist",
           "slug": "data-scientist",
           "interests": [
-            "algorithms",
-            "data-science",
+            "research",
+            "software-engineering",
             "databases",
             "machine-learning",
-            "research"
+            "algorithms",
+            "data-science"
           ],
-          "description": "A data scientist analyzes and interprets extremely complex and large data sets, typically in order to assist an organization in its decision making.  Unlike traditional database engineers, data scientists must manage Big Data, which is typified by the following \"Three V's\":\n\n* Volume: from hundreds of millions to hundreds of billions of data points;\n* Velocity: data may arrive at high speed and must be dealt with in a timely manner; \n* Variety: data can range from structured to unstructured, and maybe be buggy or incomplete.\n\nCompanies like LinkedIn, Intuit, GE, Google, Zynga, and Netflix all employ data scientists to support their services.  The skills and tools used by a data scientist are extensive, and include:\n\n  * Languages, including a statistical programming language like R or Python and a database querying language like SQL. \n  * Statistical knowledge, including statistical tests, distributions, maximum likelihood estimators, etc. \n  * Machine learning methods, including k-nearest neighbors, random forests, and ensemble methods.\n  * Mathematics, including basic multivariate calculus and linear algebra in case you need to customize machine learning libraries.\n  * Visualization and communication, including describing your findings to both technical and non-technical audiences and use of data visualization tools like ggplot and d3.js. \n\nTo prepare for the Data Scientist career path, you will want to be proficient with algorithms ([ICS 311](../courses/ics311)) and machine learning techniques ([ICS 435](../courses/ics435)). Obviously, you will want to take both database courses: [ICS 321](../courses/ics321) and [ICS 421](../courses/ics421). You may want to explore data visualization ([ICS 484](../courses/ics484)).  A research project that involves machine learning and/or \"big data\" techniques will provide valuable experience. You might consider a summer internship with a company like LinkedIn or Google where you can work with data scientists directly.  \n\nFinally, if you are serious about becoming a data scientist, you should add [Graduate School](graduate-school) as a career goal.  Most data scientists have a Ph.D. in Computer Science or some other STEM discipline.",
+          "description": "Data scientists are high-ranking professionals with the training and curiosity to make discoveries in the world of big data. LinkedIn uses data scientists to generate ideas for products, features, and value-adding services. At Intuit, data scientists are asked to develop insights for small-business customers and consumers and report to a new senior vice president of big data, social design, and marketing. GE uses data scientists to optimize the service contracts and maintenance intervals for industrial products. Googleuses data scientists to refine its core search and ad-serving algorithms. Zynga uses data scientists to optimize the game experience for both long-term engagement and revenue. Netflix created the well-known Netflix Prize, given to the data science team that developed the best way to improve the company’s movie recommendation system. The test-preparation firm Kaplan uses its data scientists to uncover effective learning strategies. Salary range (according to GlassDoor): $95,000 - $133,000.",
           "moreInformation": "https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century/"
         },
         {
@@ -483,47 +480,11 @@
           "slug": "database-administrator",
           "interests": [
             "application-development",
-            "databases",
-            "software-engineering"
-          ],
-          "description": "Companies, private organizations, and government agencies rely on database administrators (DBAs) to organize and monitor financial records, employee profiles, and other sensitive information. These professionals also work to improve security and efficiency through testing, regular evaluation, and routine modifications. \n\nDBAs may be employed in-house at larger firms or organizations, but an increasing number of these professionals are finding work at third-party companies that specialize in database services. \n\nYou will need to be experienced with a variety of database platforms including MySQL, Oracle, and DB2.  \n\nDBAs typically do not work with \"Big Data\", which requires a different set of skills associated with the [data scientist](data-scientist) career goal.\n\nIf you want to prepare for jobs in database administration, you will want to take both semesters of Databases ([ICS 321](../courses/ics321) and [ICS 421](../courses/ics421)).  Networking and security classes will also be important preparation.",
-          "moreInformation": "http://www.bls.gov/ooh/computer-and-information-technology/database-administrators.htm"
-        },
-        {
-          "name": "DevOps Engineer",
-          "slug": "devops-engineer",
-          "interests": [
-            "application-development",
-            "databases",
-            "networks",
-            "software-engineering"
-          ],
-          "description": "\"DevOps\" (short for \"development operations\") is a new and important specialization within software engineering. It refers to tools, technologies, and development processes in support of high speed application design, implementation, deployment, evolution, and scaling.  Put more simply, a DevOps engineer makes sure that business systems get deployed fast, stay up under heavy loads, are not hacked (or can be fixed quickly if hacked), and can be updated without loss of downtime. \n\nAccording to the [2015 State of DevOps report](http://puppetlabs.com/2015-devops-report), organizations using DevOps deploy code up to 30 times more frequently with 50% less deployment failures than those who do not.\n\nTo prepare for a career in DevOps, you need to start with software engineering ([ICS 314](../courses/ics314)).  Build on that base with coursework in databases ([ICS 321](../courses/ics321)) and networks ([ICS 351](../courses/ics351)).  Finally, put all of that together with experience deploying applications in real-world, high stress situations.  That requires finding a summer internship where you can shadow experienced DevOps engineers as they do their daily work.",
-          "moreInformation": "https://puppet.com/blog/what-a-devops-engineer"
-        },
-        {
-          "name": "Full Stack Developer",
-          "slug": "full-stack-developer",
-          "interests": [
-            "databases",
             "software-engineering",
-            "web-development"
+            "databases"
           ],
-          "description": "Full Stack Developer is a career goal focused on the design and implementation of web applications.  \"Full stack\" refers to a broad skill set that starts with front-end user interface design using a CSS framework such as Twitter Bootstrap or Semantic UI, proceeds through business logic implementation using Java, Javascript, Python, Ruby, C#, or some other programming language, and concludes with the design and implementation of a back-end database system using SQL, MongoDB, or some other variant.   \n\nIn addition, full stack developers must ensure that the application performs appropriately across multiple devices (laptops, tablets, and mobile). Full stack developers must often ensure that their design is scalable as usage increases.  \n\nTo prepare for this career goal, supplement your skills acquired inSoftware Engineering ([ICS 314](../courses/ics314)) with other coursework including Databases ([ICS 321](../courses/ics321)) and (perhaps) Design for Mobile Devices ([ICS 466](../courses/ics466)). You might also want to do a summer internship with a business doing web application development to hone your skills and obtain experience in a \"real-world\" application development setting.",
-          "moreInformation": "http://www.bls.gov/ooh/computer-and-information-technology/web-developers.htm"
-        },
-        {
-          "name": "Game Developer",
-          "slug": "game-developer",
-          "interests": [
-            "computer-graphics",
-            "databases",
-            "game-design",
-            "unity",
-            "virtual-reality"
-          ],
-          "description": "The Game Developer career goal refers to a specialized form of Software Developer who focuses on game design and implementation. This is a challenging career path as it is both highly competitive and, depending upon the game, can require advanced skills including one or more of: graphic design, physics, algorithms, networking, UI design, hardware, device driver and OS-level programming, and the appropriate use of game mechanics to provide an entertaining and/or educational experience.   That said, being a Game Developer is totally cool and you should totally go for it.\n\nAs the above paragraph indicates, game development in general involves an intimidating level of both breadth and depth in knowledge.  But you don't need to know everything to get started.  To be well prepared for this career goal, it helps to start by developing a solid analytical background through coursework in math, physics, and algorithms ([ICS 311](../courses/ics311)), then add solid programming skills including high level (software engineering ([ICS 3114](../courses/ics314))) and low-level ([ICS 312](../courses/ics312)), plus databases ([ICS 321](../courses/ics321)).  If you are interested in designing games involving an AI, then you'll want basic AI ([ICS 361](../courses/ics361)) as well as AI for Games ([ICS 462](../courses/ics462)).  Cap it off with Video Game Design and Development ([ICS 485](../courses/ics485)). \n\nYou should also take advantage of opportunities outside of the classroom to experience game development, such as the yearly Global Game Jam.  There are often summer internships at companies doing game design that can provide invaluable \"real-world\" experience and help you decide if this career path is for you.",
-          "moreInformation": "http://study.com/articles/Game_Developer_Job_Description_Duties_and_Requirements.html"
+          "description": "Companies, private organizations, and government agencies rely on database administrators (DBAs) to organize and monitor financial records, employee profiles, and other sensitive information. These professionals also work to improve security and efficiency through testing, regular evaluation, and routine modifications. Evolving technologies and an increased demand for secure electronic recordkeeping are expected to drive employment growth in this sector.  DBAs may be employed in-house at larger firms or organizations, but an increasing number of these professionals are finding work at third-party companies that specialize in database services. Salary range (according to GlassDoor): $48,000 - $101,000.",
+          "moreInformation": "http://www.bls.gov/ooh/computer-and-information-technology/database-administrators.htm"
         },
         {
           "name": "Graduate School",
@@ -531,48 +492,37 @@
           "interests": [
             "research"
           ],
-          "description": "Let's be frank: if you are considering a long-term career in computer science, then graduate school should one of your career goals.  This doesn't mean you need to go right back to school after you graduate; many if not most graduate students in computer science spent at least a few years working before returning to school. But obtaining an M.S. or Ph.D. in Computer Science at some point can open up many new opportunities in your professional career. \n\nThe basic difference between an M.S. and Ph.D. degree is \"scientific contribution\".  An M.S. degree enables you to obtain more advanced skills in any of the CS disciplines.  M.S. programs are typically two years long.  A Ph.D. degree adds the requirement that you develop a dissertation that documents a scientific contribution: some entirely new knowledge about computer science. The Ph.D. degree typically requires at least two to four additional years after the M.S. degree.  \n\nTo prepare to include graduate school at some point after you graduate, the most important thing to do is to plan one or more semesters where you participate in a research project with a professor.  You can do this via [ICS 499](../courses/ics499), or even on a volunteer basis as long as you devote sufficient time to the project. This is important for two reasons. First, successful participation demonstrates to the people who later review your graduate school application that you are able to do graduate-level work, which is usually more independent and research-related.  Second, it enables your professor to get to know you on a more personal level and in the context of an independent project, not just a few homework assignments.  This will enable your professor to write you a strong recommendation letter, which is crucial to getting accepted to graduate school.",
+          "description": "If you've liked the last year or so of school, if you like working on problems that no one's solved before, if you like teaching or mentoring, you should consider graduate school. If you feel you need another year or two of school before heading into a competitive job market, then you probably want to pursue an MS. If you're a self-starting hands-on type, you may do just as well on the job. If you like working on really hard problems, well before the productization phase, you should consider getting a Ph.D. With a Ph.D. you can work in a corporate or government research lab, become a college professor, or become a university professor. The hours are long and the uncharted territory can be frustrating, but you won't really notice if you enjoy it. The pay is pretty good, if you ignore the fact that you're not working a 40 hour work week.",
           "moreInformation": "http://www.ics.hawaii.edu/academics/graduate-degree-programs/so-you-want-to-apply-to-graduate-school/"
         },
         {
           "name": "Information Security Analyst",
           "slug": "information-security-analyst",
           "interests": [
-            "databases",
-            "networks",
             "security"
           ],
-          "description": "In RadGrad, the \"information security analyst\" career goal is intended to cover the wide variety of security-related positions, including Security Analyst, Security Architect, Security Software Developer, Cryptanalyst, Security Engineer, Security Administrator, Cryptographer, and Security Consultant. \n\nSecurity professionals range from \"ethical hackers\" who probe and exploit security vulnerabilities in web-based applications and network systems to cryptographers who analyze and decrypt hidden information from cyber-terrorists. There are jobs in security in virtually every industry, as well as in government. \n\nThe ICS degree  program offers many opportunities to develop security-related expertise.  We offer the [Security Science Focus](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/) which includes [ICS 355](../courses/ics355), [ICS 455](../courses/ics455), and (for motivated undergraduates) ICS 655.  We offer two courses related to Information Assurance ([ICS 425](../courses/ics425) and [ICS 426](../courses/ics426)).  You will also want to take at least one course in networking and one course in databases.\n\nIf you are interested in a career in security, we also recommend that you participate in [ICS GreyHats](http://www.ics.hawaii.edu/community/community-profile-the-ics-grey-hats/), a student club providing a venue for networking with industry and government, performing community service, and practical application of security skills in a supportive environment.\n\nFinally, the ICS Department sponsors a variety of security-related hackathons and contests every year. These also provide important learning opportunities in security.",
+          "description": "Information security analysts protect the computers and online networks of private companies, organizations, and government agencies. They primarily monitor information systems for suspicious activity and use different programs — such as firewalls and encryption software — to maintain security. Analysts may also develop information security plans and work with company leaders to increase system efficiency. Salary range (according to GlassDoor): $59,000 - $109,000.",
           "moreInformation": "http://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm"
         },
         {
           "name": "Information System Manager",
           "slug": "information-system-manager",
           "interests": [
-            "it-management"
+            "application-development",
+            "it-management",
+            "research"
           ],
-          "description": "The Information System Manager career goal combines computer science with business management.  In RadGrad, Information Systems Manager is an umbrella term for a variety of positions such as Chief Information Officer, Chief Technology Officer, and IT or MIS Director.  \n\nDepending upon the specific position, your responsibilities will include planning and coordination of computer-related business functions,  defining technology strategy, and/or evaluating new technology. The positions tend to involve supervision of other employees and determining the financial implications and business risks of your decisions.\n\nAs an undergrad, you can prepare for this career goal by enrolling in both computer science and business classes.  If your interests skew heavily toward the management side, you might consider transferring to the [Information Technology Management program](http://shidler.hawaii.edu/itm) in the School of Business. \n\nYou might also consider pursuing our [B.A. in ICS](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/ba-ics/). This choice provides more curricular freedom to support a combination of computer science and business courses. \n\nBe aware: this career goal is highly competitive.  If you are serious about it, then the best preparation is to first obtain a [B.S. in Computer Science](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ics/) or [B.S. in Computer Engineering](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ce/), and follow that with a Masters degree in Business Administration.  You do not have to go directly to graduate school: you can obtain your undergraduate degree, work for a few years, and then obtain your MBA.",
+          "description": "Information systems managers (including Chief Information Officers, Chief Technology Officers, and IT Directors) plan, coordinate, and direct computer-related activities in an organization. Chief Information Officers (CIOs) are responsible for the overall technology strategy of their organizations. Chief Technology Officers (CTOs) evaluate new technology and determine how it can help their organization. IT Directors, including management information systems (MIS) directors, are in charge of their organizations’ information technology departments, and they directly supervise other employees. Successful applicants often combine a technical undergraduate degree in computer science or engineering with a graduate degree (Masters of Business Administration). Salary range (according to GlassDoor): $97,000 - $166,000.",
           "moreInformation": "http://www.bls.gov/ooh/management/computer-and-information-systems-managers.htm"
         },
         {
-          "name": "Mobile App Developer",
-          "slug": "mobile-app-developer",
-          "interests": [
-            "android",
-            "mobile",
-            "ios"
-          ],
-          "description": "The Mobile App Developer career path refers to a specialized software developer who can build \"native\" mobile applications for the Android and/or iOS operating systems.  \n\nTo prepare for this career path, begin with solid software development skills through coursework in software engineering ([ICS 314](../courses/ics314)), networking ([ICS 351](../courses/ics351)), and databases ([ICS 321](../courses/ics321)).  You'll also want to take Design for Mobile Devices ([ICS 466](../courses/ics466)).  \n\nIn addition to coursework, you'll want to develop specialized skills for your platform of choice: Android development involves a variant of Java, while modern iOS development involves the Swift programming language. You might want to take a summer course through Udacity or Coursera to augment your ICS preparation.\n\nFinally, if you want a career in mobile application development, don't wait to get started!   There's nothing preventing you from building a few applications and releasing them in the Android or iOS app stores.  If nothing else, they can be presented as part of your professional portfolio when you are interviewing for a job.  In the best case scenario, you might make a few bucks.",
-          "moreInformation": "http://www.tomsitpro.com/articles/become-mobile-app-developer,1-2219.html"
-        },
-        {
           "name": "Network Engineer",
-          "slug": "network-engineer",
+          "slug": "network-architect",
           "interests": [
-            "hardware",
-            "networks"
+            "networks",
+            "hardware"
           ],
-          "description": "In RadGrad, the Network Engineer career goal also refers to positions such as Network Administrator, Network Architect, Network Manager, and Wireless Network Engineer.\n\nIn all cases, this career goal involves the design, construction, and maintenance of data communication networks, including local area networks (LANs), wide area networks (WANs), and intranets, wired or wireless. Such networks could range from simple connections between a set of offices to large-scale cloud infrastructures serving millions of people. \n\nConsider this career goal if you are comfortable and interested in work that combines design and decision-making about both software and hardware.    If your interests lean heavily toward the hardware side, you might want to consider the [B.S. in Computer Engineering](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ce/) degree.\n\nTo prepare for this career goal, you will want to take courses in both networking (such as [ICS 351](../courses/ics351) and [ICS 451](../courses/ics451)) and hardware ([ICS 331](../courses/ics331)). To augment the traditional curriculum, consider an Independent Study  ([ICS 499](../courses/ics499)) in a research project involving networking.",
+          "description": "Network architects design and build data communication networks, including local area networks (LANs), wide area networks (WANs), and intranets. These networks range from small connections between two offices to next-generation networking capabilities such as a cloud infrastructure that serves multiple customers. Network architects must have extensive knowledge of an organization’s structure and processes to design a network that can help the organization achieve its goals. Salary range according to GlassDoor: $58,000 - $125,000.",
           "moreInformation": "http://www.bls.gov/ooh/computer-and-information-technology/computer-network-architects.htm"
         },
         {
@@ -581,41 +531,38 @@
           "interests": [
             "research"
           ],
-          "description": "The Research Scientist career goal is for those who want to prepare, quite simply, to invent the future. In RadGrad, the research scientist career goal represents job positions that typically require a Ph.D., such as \"Professor\" (in academia) or \"Research Scientist\" (in industry).  \n\nResearch scientists design, implement, and evaluate new approaches to computing and computing technology, and apply those approaches to solving significant problems in business, medicine, science, and other fields. Research scientists have the highest level of autonomy of any career goal; you are hired by an organization with the expectation that you will define and organize your work yourself (while within the general business or academic constraints of the organization).  Research scientists can often wear jeans and a t-shirt to work, because you will be evaluated almost totally on your ability to innovate. \n\nTo prepare to become a research scientist, you should also have [graduate school](graduate-school) as a career goal, and you should plan to (eventually) get a Ph.D. That said, you don't have to go to graduate school immediately: you might decide after graduation to first join or create a startup company based upon an idea you had as an undergraduate.  Successful research scientists have a tolerance for risk: not all research ideas are successful (if you can guarantee in advance that an idea will be successful, then by definition it no longer involves research).\n\nIf this career goal appeals to you, get involved with one (or more) research projects as an undergraduate.  This will both give you a taste for the work and enable you to develop connections with professors that will help when you eventually apply to graduate school.  If possible, try to publish a paper while you are an undergraduate. Your professor can help you to make that happen.",
+          "description": "Research scientists invent and design new approaches to computing technology and find innovative uses for existing technology. They study and solve complex problems in computing for business, medicine, science, and other fields. Most jobs for research scientists require a graduate degree in computer science or a related field. Salary range (according to GlassDoor): $115,000 - $168,000.",
           "moreInformation": "http://www.bls.gov/ooh/computer-and-information-technology/computer-and-information-research-scientists.htm"
-        },
-        {
-          "name": "Robotics Engineer",
-          "slug": "robotics-engineer",
-          "interests": [
-            "hardware",
-            "robotics",
-            "software-engineering"
-          ],
-          "description": "The robotics engineer career path involves the design of hardware and associated software to create automated systems to accomplish physical tasks that humans cannot or prefer not to do. The range of applications for Robotics Engineers is quite wide: from self-driving vacuum cleaners ([Roomba](https://store.irobot.com/default/robot-vacuum-roomba/)) to self-driving cars ([Tesla's autopilot](https://www.tesla.com/autopilot)).  Robotics engineers also work on drones, automated factory equipment, and other hardware systems involving autonomous behavior.\n\nTo prepare for the Robotics Engineer career path, most students will want to pursue the [B.S. in Computer Engineering](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ce/) degree program. This degree program will give you a solid foundation in hardware design, including circuits, signals, and digital electronics. Helpful ICS coursework includes Machine-level Programming ([ICS 312](../courses/ics312)), Software Design for Robotics ([ICS 452](../courses/ics452)), and Computer Vision ([ICS 483](../courses/ics483)).",
-          "moreInformation": "https://www.sokanu.com/careers/robotics-engineer/"
         },
         {
           "name": "Software Developer",
           "slug": "software-developer",
           "interests": [
             "application-development",
-            "software-engineering"
+            "software-engineering",
+            "databases"
           ],
-          "description": "Software Developer is probably the most common career goal for computer science students, at least initially. This career goal also includes position titles such as Developer, Software Engineer, Programmer, Coder, Software Architect, Business Application Programmer, Programmer Analyst, and so forth.  \n\nBecause of their popularity and because they require specialized software development skills, RadGrad also defines more specialized career goals that are related to Software Developer: [Mobile App Developer](mobile-app-developer), [Game Developer](game-developer), and [Full Stack Developer](full-stack-developer). If you're not sure what kind of development you want to do, then Software Developer is a good bet.\n\nIn general, software developers are responsible for designing computing programs, applications, and support systems. They meet with clients to discuss technological needs, and then develop software to addresses those demands.  Once initially implemented, software developers must modify and maintain the systems as business requirements for the software change.\n\nTo prepare for the software developer, you need strong programming and software engineering skills which is guaranteed by any of the ICS degree programs.  Beyond the classroom, you should participate in programming-related events like coding competitions and hackathons.  You should also consider a summer internship doing software development for a business in order to gain \"real-world\" experience prior to graduation.",
+          "description": "Software developers are responsible for designing computing programs, apps, and support systems. They meet with clients to discuss technological needs, and then develop software that addresses these demands. Once complete, developer specs and instructions are used as a reference point during the programming/coding process. With more than 1.1 million working professionals, software development represents one of the largest fields in computer science. Salary range (according to GlassDoor): $55,000 - $118,000.",
           "moreInformation": "http://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm"
         },
         {
-          "name": "UX Designer",
-          "slug": "ux-designer",
+          "name": "System Administrator",
+          "slug": "system-administrator",
           "interests": [
-            "computer-graphics",
-            "data-visualization",
-            "hci",
-            "web-development"
+            "networks"
           ],
-          "description": "The UX (User Experience) Designer career goal refers to jobs that involve the evaluation and improvement of usability, accessibility, and pleasure in the interaction with a software application.  UX design is closely related to human-computer interaction design, but extends it by addressing all aspects of the product or service as experienced by users.\n\nTo prepare for this career goal, you will want to extend your foundation in computer science with preparation in human-computer interaction ([ICS 464](../courses/ics464)), cognitive science ([ICS 469](../courses/ics469)), and/or data visualization ([ICS 484](../courses/ics484)). \n\nIf you are passionate about UX design, you may wish to pursue the [B.A. in ICS](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/ba-ics/) degree plan to leave room in your schedule for coursework in Psychology or Graphic Arts.",
-          "moreInformation": "https://en.wikipedia.org/wiki/User_experience_design"
+          "description": "System administrators manage an organization’s servers and desktop and mobile equipment. They ensure that email and data storage networks work properly. They also make sure that employee workstations are working efficiently and stay connected to the network. Some administrators manage telecommunication networks, or help network architects design and analyze network models. They also participate in decisions about buying future hardware or software to upgrade their organization’s network. Some administrators provide technical support to computer users, and they also may supervise computer support specialists who help solve users’ problems. Salary range (according to GlassDoor): $54,000 - $98,000.",
+          "moreInformation": "http://www.bls.gov/ooh/computer-and-information-technology/computer-network-architects.htm"
+        },
+        {
+          "name": "Web Developer",
+          "slug": "web-developer",
+          "interests": [
+            "application-development",
+            "software-engineering"
+          ],
+          "description": "Web developers design and create websites. They are responsible for the look of the site, its performance, and its capacity. In addition, web developers may create content for the site. Web developers often work on a team, and may specialize in a certain area of web development, including site layout or graphics integration. About 1 in 7 of web developers were self-employed in 2014. Many web developers have only an associates degree. Salary range (according to GlassDoor): $54,000 - $84,000.",
+          "moreInformation": "http://www.bls.gov/ooh/computer-and-information-technology/web-developers.htm"
         }
       ]
     },
@@ -1441,6 +1388,7 @@
           "description": "Fundamentals of computer graphics including graphics hardware, representation, manipulation, and display of two- and three-dimensional objects, use of commercial software.",
           "creditHrs": 3,
           "interests": [
+            "art",
             "computer-graphics"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS481.html",
@@ -1494,7 +1442,7 @@
           "creditHrs": 3,
           "interests": [
             "computer-graphics",
-            "graphic-design",
+            "art",
             "game-design",
             "application-development"
           ],
@@ -1512,6 +1460,7 @@
           "description": "Reflects special interests of faculty. Oriented toward juniors and seniors. Repeatable one time for BS/CS students.",
           "creditHrs": 3,
           "interests": [],
+          "syllabus": "",
           "prerequisites": [
             "ics311",
             "ics314"
@@ -1527,6 +1476,7 @@
           "interests": [
             "security"
           ],
+          "syllabus": "",
           "prerequisites": [
             "ics311",
             "ics314"
@@ -2641,7 +2591,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2019",
+          "semester": "Fall-2018",
           "course": "ics313",
           "note": "ICS 313",
           "verified": false,
@@ -2668,9 +2618,45 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2020",
+          "semester": "Spring-2019",
           "course": "ics422",
           "note": "ICS 422",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics414",
+          "note": "ICS 414",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics471",
+          "note": "ICS 471",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics475",
+          "note": "ICS 475",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics484",
+          "note": "ICS 484",
           "verified": false,
           "creditHrs": 3,
           "grade": "A",
@@ -2685,19 +2671,19 @@
           "name": "B.A. in Information and Computer Sciences",
           "shortName": "B.A. ICS",
           "slug": "ba-ics",
-          "description": "The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline. You might find the BA degree of interest if you are also interested in biology, entrepreneurship, game design, graphic arts, financial engineering, foreign languages, or other disciplines.\n\nIn general, the BA requires you to complete the ICS core curriculum, plus three ICS 400-level courses, plus four upper division courses in a related area of concentration.\n\nFor more details, see the [ICS BA Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/ba-ics/)."
+          "description": "The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline. You might find the BA degree of interest if you are also interested in biology, entrepreneurship, game design, graphic arts, financial engineering, foreign languages, or other disciplines."
         },
         {
           "name": "B.S. in Computer Engineering",
           "shortName": "B.S. CE",
           "slug": "bs-ce",
-          "description": "The Department of Information and Computer Sciences and the Department of Electrical Engineering offer a joint Bachelor of Science degree in Computer Engineering (BSCE).  The BSCE degree program provides you with the opportunity to learn about computer hardware and software, computer organization and architecture, computer security, software engineering, computer networks and Internet technology, embedded systems, computer-aided design, multi-core and parallel computing, wireless networks, and other topics.\n\nIn general, the BSCE requires you to complete the College of Engineering core requirements (calculus, chemistry, physics, etc.), plus the BSCE core courses (EE 160, 205, 211, 213, 260, 315, 323, 324, 342, 361, 366, 367, 371, 495, etc), plus two technical electives.\n\nFor more details, see the [BSCE Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ce/)."
+          "description": "The Department of Information and Computer Sciences and the Department of Electrical Engineering offer a joint Bachelor of Science degree in Computer Engineering (BSCE).  The BSCE degree program provides you with the opportunity to learn about computer hardware and software, computer organization and architecture, computer security, software engineering, computer networks and Internet technology, embedded systems, computer-aided design, multi-core and parallel computing, wireless networks, and other topics."
         },
         {
           "name": "B.S. in Computer Science",
           "shortName": "B.S. CS",
           "slug": "bs-cs",
-          "description": "The Bachelor of Science in Computer Science provides you with an in-depth foundation in software technology, science, and math. You may find this degree of interest if you want to pursue software development as a career path or go to graduate school in computer science. \n\nIn general, the BS requires you to complete the ICS core curriculum, plus (312 or 331), plus (313 or 361), 321, 332, plus five ICS 400-level courses.\n\nFor more details, see the [ICS BS Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ics/)."
+          "description": "The Bachelor of Science in Computer Science provides you with an in-depth foundation in software technology, science, and math. You may find this degree of interest if you want to pursue software development as a career path or go to graduate school in computer science."
         }
       ]
     },
@@ -2714,12 +2700,6 @@
           "name": "Course recommendations based on interests",
           "slug": "CourseRecommendationsBasedOnInterests",
           "description": "These courses are recommended based upon your interests.",
-          "feedbackType": "Recommendation"
-        },
-        {
-          "name": "Opportunity recommendations based on interests",
-          "slug": "OpportunityRecommendationsBasedOnInterests",
-          "description": "These opportunities are recommended based upon your interests.",
           "feedbackType": "Recommendation"
         },
         {
@@ -2753,12 +2733,6 @@
           "feedbackType": "Warning"
         },
         {
-          "name": "Recommendation for next Level",
-          "slug": "recommendationForNextLevel",
-          "description": "What to do to achieve the next RadGrad level.",
-          "feedbackType": "Recommendation"
-        },
-        {
           "name": "Required course missing",
           "slug": "requiredCourseMissing",
           "description": "A required course is missing.",
@@ -2780,7 +2754,9 @@
     },
     {
       "name": "FeedbackInstanceCollection",
-      "contents": []
+      "contents": [
+
+      ]
     },
     {
       "name": "HelpMessageCollection",
@@ -2803,7 +2779,7 @@
         {
           "routeName": "Student_Home_AboutMe_Page",
           "title": "Learn about the about me page.",
-          "text": "This page is so great!"
+          "text": "Your About Me page gives you a quick look at your basic profile information (name, email, desired degree, professional website, career goals, interests, profile image). You can view your desired degree, career goals, and interests and navigate to the explorer to edit them. You can update your professional website URL and your profile image on this page. You cannot edit your name or your email address.\n\n(If you want to remove this help pane from this page, click on the \"X\" in the upper right corner to hide it. You can always bring it back from your profile page.)"
         },
         {
           "routeName": "Student_About_Ice",
@@ -2813,12 +2789,12 @@
         {
           "routeName": "Student_Home_Ice_Page",
           "title": "Learn about ICE (Innovation, Competency, Experience)",
-          "text": "Help goes here."
+          "text": "ICE points are a way for students to gauge the progression and balance of innovation, competency, and experience in their ICS degree program.\n\nThere are three graphs that display your ICE score: Innovation (green), Competency (blue), and Experience (purple). The total amount of possible points for each graph is 100. Ideally, you should reach 100 for each graph by the time your graduate. \n\nEach graph has a dark fill, and a light fill. The dark fill represents the actual amount of points you have, or \"earned points\". These are points gathered from completing and getting verified from various opportunities and courses. The light fill represents the amount of points you plan to earn, or \"planned points\". This is the amount of points that you will have after completing and getting verified from all opportunities and courses on your degree plan. This includes future events that have yet to occur. \n\nThe numbers inside of the graph are numerical representation of the same data as the fills, with the colors corresponding to its respective fill color. The top number (dark color) is the amount of earned points you have, and the bottom number (light color) is the amount of planned points you have.\n\nWhen only one number appears inside the graph, such as on the top right side of the menu bar, or in your degree planner, this number is the same as the top number (dark color) you see on this page, and thus corresponds only to your earned points. \n\n(If you want to remove this help pane from this page, click on the \"X\" in the upper right corner to hide it. You can always bring it back from your profile page.)"
         },
         {
           "routeName": "Student_Home_Levels_Page",
           "title": "Learn about RadGrad Levels",
-          "text": "Help on levels goes here."
+          "text": "RadGrad levels mark milestones in your computer science education experience. After completing certain courses, opportunities, and actions, you may visit your advisor to level up. Your level will change on RadGrad, and you will also be given a physical sticker as a token of your progress. \n\nThere are 6 levels. All computer science students begin at level 1, and the most successful students will be able to reach level 6 by the time they graduate. \n\nOn the levels page, you can view your current level, view level hints, and view other students who are in the same level as you. Viewing other students who are in the same level as you will allow you to see who is in a similar position within the degree program."
         },
         {
           "routeName": "Student_Ice",
@@ -2851,6 +2827,13 @@
           "interestType": "cs-disciplines"
         },
         {
+          "name": "Art",
+          "slug": "art",
+          "description": "A diverse range of human activities in creating visual, auditory or performing artifacts artworks, expressing the author's imaginative or technical skill, intended to be appreciated for their beauty or emotional power.",
+          "interestType": "non-cs-disciplines",
+          "moreInformation": "https://en.wikipedia.org/wiki/Art"
+        },
+        {
           "name": "Artificial Intelligence",
           "slug": "artificial-intelligence",
           "description": "The use of hardware and software to create a flexible rational agent that perceives its environment and takes actions that maximize its chance of success at an arbitrary goal. Colloquially, the term \"artificial intelligence\" is likely to be applied when a machine uses cutting-edge techniques to competently perform or mimic functions that we intuitively associate with human minds, such as \"learning\" and \"problem solving\".",
@@ -2879,18 +2862,18 @@
           "moreInformation": "https://en.wikipedia.org/wiki/Biology"
         },
         {
-          "name": "C and C++",
+          "name": "C",
           "slug": "c",
-          "description": "C is a general-purpose, imperative computer programming language, supporting structured programming, lexical variable scope and recursion, and includes a static type system that prevents many unintended operations. By design, C provides constructs that map efficiently to typical machine instructions, and therefore it has found lasting use in applications that had formerly been coded in assembly language. C++ is an object-oriented extension of C.",
+          "description": "C is a general-purpose, imperative computer programming language, supporting structured programming, lexical variable scope and recursion, and includes a static type system that prevents many unintended operations. By design, C provides constructs that map efficiently to typical machine instructions, and therefore it has found lasting use in applications that had formerly been coded in assembly language. Despite its low-level capabilities, the language was designed to encourage cross-platform programming. A standards-compliant and portably written C program can be compiled for a very wide variety of computer platforms and operating systems with few changes to its source code. The language has become available on a very wide range of platforms, from embedded microcontrollers to supercomputers.",
           "interestType": "technologies",
           "moreInformation": "https://en.wikipedia.org/wiki/C_(programming_language)"
         },
         {
-          "name": "C#",
-          "slug": "c-sharp",
-          "description": "C# is a general purpose, object-oriented programming language developed by Microsoft for .NET.  It is now also used extensively for game development in the Unity platform.",
+          "name": "Careers",
+          "slug": "careers",
+          "description": "This interest indicates an interest in opportunities focused on your future career. Every student should add this as an interest!",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/C_Sharp_(programming_language)"
+          "moreInformation": "http://www.computerscienceonline.org/careers/"
         },
         {
           "name": "Civic Engagement",
@@ -2970,13 +2953,6 @@
           "moreInformation": "https://en.wikipedia.org/wiki/Database"
         },
         {
-          "name": ".NET",
-          "slug": "dotNet",
-          "description": ".NET is a software framework developed by Microsoft that runs primarily on Microsoft Windows. It includes a large class library called Framework Class Library that provides user interface, data access, database connectivity, cryptography, web application development, numeric algorithms, and network communications.",
-          "interestType": "cs-disciplines",
-          "moreInformation": "https://www.microsoft.com/net/"
-        },
-        {
           "name": "Entrepreneurship",
           "slug": "entrepreneurship",
           "description": "Entrepreneurship is the process of designing, launching and running a new business, such as a startup company offering a product, process or service. It requires the capacity and willingness to develop, organize, and manage a business venture along with any of its risks in order to make a profit. Entrepreneurs tend to be good at perceiving new business opportunities and they often exhibit positive biases in their perception (i.e., a bias towards finding new possibilities and seeing unmet market needs) and a pro-risk-taking attitude that makes them more likely to exploit the opportunity.",
@@ -2989,13 +2965,6 @@
           "description": "Game design is the art of applying design and aesthetics to create a game to facilitate interaction between players for entertainment or for medical, educational, or experimental purposes. Game design creates goals, rules, and challenges to produce desirable interactions among its participants and, possibly, spectators.",
           "interestType": "cs-disciplines",
           "moreInformation": "https://en.wikipedia.org/wiki/Game_design"
-        },
-        {
-          "name": "Graphic Design",
-          "slug": "graphic-design",
-          "description": "Graphic design is the process of visual communication and problem-solving using one or more of typography, photography and illustration.",
-          "interestType": "non-cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Graphic_design"
         },
         {
           "name": "Hardware",
@@ -3017,13 +2986,6 @@
           "description": "High Performance Computing concerns the hardware and software capabilities required for effective use of \"supercomputers\". HPC techniques are needed for computationally intensive tasks in various fields, including quantum mechanics, weather forecasting, climate research, oil and gas exploration, molecular modeling (computing the structures and properties of chemical compounds, biological macromolecules, polymers, and crystals), and physical simulations (such as simulations of the early moments of the universe, airplane and spacecraft aerodynamics, the detonation of nuclear weapons, and nuclear fusion). Throughout their history, they have been essential in the field of cryptanalysis.",
           "interestType": "cs-disciplines",
           "moreInformation": "https://en.wikipedia.org/wiki/Supercomputer"
-        },
-        {
-          "name": "iOS",
-          "slug": "ios",
-          "description": "iOS is a mobile operating system developed by Apple Inc. exclusively for its hardware. It is the OS for the iPhone, iPad, and iPod. As of January 2017, Apple's AppStore contains more than 2.2 million iOS applications.",
-          "interestType": "cs-disciplines",
-          "moreInformation": "http://www.apple.com/ios/"
         },
         {
           "name": "IT Management",
@@ -3371,7 +3333,7 @@
         {
           "name": "ACM ICPC",
           "slug": "acm-icpc",
-          "description": "The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of thousands of the finest students and faculty in computing disciplines at almost 2,736 universities from over 102 countries on six continents. \n\nThe contest fosters creativity, teamwork, and innovation in building new software programs, and enables students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious programming contest in the world.\n\nWikipedia: https://en.wikipedia.org/wiki/ACM_International_Collegiate_Programming_Contest",
+          "description": "The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of thousands of the finest students and faculty in computing disciplines at almost 2,736 universities from over 102 countries on six continents. The contest fosters creativity, teamwork, and innovation in building new software programs, and enables students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious programming contest in the world.\n\nWikipedia: https://en.wikipedia.org/wiki/ACM_International_Collegiate_Programming_Contest",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -3395,7 +3357,7 @@
         {
           "name": "ACM Manoa",
           "slug": "acm-manoa",
-          "description": "The Association for Computing Machinery at Manoa is UH Manoa’s student chapter of the Association for Computing Machinery. We are a Registered Independent Organization (RIO) focused on providing opportunities and resources for our members’ personal and professional advancement.  ACM Manoa has 3 pillars: - social, professional, and technical.\n\n  * We hold social activities for our members to have fun as well as develop and strengthen their interpersonal relationships.\n\n  * We strive to connect our members to professionals in the industry, abroad and within the Honolulu community.\n\n  * We are largely comprised of aspiring professionals in the computing industry; accordingly, members in ACM Manoa are encouraged to join and create Special Interest Groups (SIG) and Playgrounds where they can collaborate on interesting projects.",
+          "description": "The Association for Computing Machinery at Manoa is UH Manoa’s student chapter of the Association for Computing Machinery. We are a Registered Independent Organization (RIO) focused on providing opportunities and resources for our members’ personal and professional advancement.  ACM Manoa has 3 pillars - social, professional, and technical. We hold social activities for our members to have fun as well as develop and strengthen their interpersonal relationships. We strive to connect our members to professionals in the industry, abroad and within the Honolulu community. We are largely comprised of aspiring professionals in the computing industry; accordingly, members in ACM Manoa are encouraged to join and create Special Interest Groups (SIG) and Playgrounds where they can collaborate on interesting projects.",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -3605,7 +3567,7 @@
         {
           "name": "AT&T Hackathon",
           "slug": "att-iot-hackathon",
-          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\nIf so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.",
+          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\n    If so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.",
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
@@ -3634,7 +3596,7 @@
         {
           "name": "Booz Allen Ideas Festival",
           "slug": "booz-allen-ideas-festival",
-          "description": "At the heart of every new idea lies \"What IF?\" It represents the untapped potential within us all, it dares us to think bigger, to think differently, and to think freely.\n\nBooz Allen is honored to be hosting the second annual Ideas Festival 2017 in Honolulu! Bring your big, new, inspiring ideas to us on January 28th at the Plaza Club in Honolulu.\n\nIdeas Festival is Booz Allen’s annual innovation event, providing an opportunity for you to join local community and government leaders, students, and Booz Allen Hamilton to Ideate, Inspire, and Interact, asking yourself, WHAT IF? We have an exciting event planned featuring speakers, panel discussions, and idea ‘pitch’ competitions from across the Hawaii community. Bring ideas from your work experience and areas of personal passion. IF17 topics will focus on Grid Resilience, Renewable Energy, Virtual Reality, Analytics and Workforce Development.",
+          "description": "At the heart of every new idea lies \"What IF?\" It represents the untapped potential within us all, it dares us to think bigger, to think differently, and to think freely. Booz Allen is honored to be hosting the second annual Ideas Festival 2017 in Honolulu! Bring your big, new, inspiring ideas to us on January 28th at the Plaza Club in Honolulu.\nIdeas Festival is Booz Allen’s annual innovation event, providing an opportunity for you to join local community and government leaders, students, and Booz Allen Hamilton to Ideate, Inspire, and Interact, asking yourself, WHAT IF? We have an exciting event planned featuring speakers, panel discussions, and idea ‘pitch’ competitions from across the Hawaii community. Bring ideas from your work experience and areas of personal passion. IF17 topics will focus on Grid Resilience, Renewable Energy, Virtual Reality, Analytics and Workforce Development.",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -3660,7 +3622,7 @@
         {
           "name": "Booz Allen Internship",
           "slug": "booz-allen-internship",
-          "description": "Booz Allen provides summer internship opportunities to talented undergraduates and graduate students. \n\nDuring the internship, you will spend the first week working in a group to figure out an idea, the next eight weeks developing it in a team, and the final week going to Washington DC to pitch your idea/prototype against the ones developed by other Booz-Allen interns across the country.\n\nIn the past, this 10 week internship paid approximately $10K. ",
+          "description": "10 weeks, 40/week, $24/hr, or about $10K total. During the internship, you will spend the first week working in a group to figure out an idea, the next eight weeks developing it in a team, and the final week going to Washington DC to pitch your idea/prototype against the ones developed by other Booz-Allen interns across the country",
           "opportunityType": "internship",
           "sponsor": "johnson",
           "ice": {
@@ -3709,7 +3671,7 @@
         {
           "name": "Code for Hawaii",
           "slug": "code-for-hawaii",
-          "description": "Code for Hawaii is a Code for America Brigade. We are volunteers interested in open data, open knowledge, civic apps, data visualization, APIs and the application of technology to make our community better. We encourage civic engagement and collaboration with our local government. We hold weekly project nights (and a monthly all-hands meeting) to see how we can help make a difference in Hawaii. \n\nMain website: [http://codeforhawaii.org](http://codeforhawaii.org)\n\nOur projects range from events like National Day of Civic Hacking, to transit apps that help navigate Hawaii, submit FOIA requests, or adopt your local siren. \nIf you're passionate about civic technology, this is the meetup for you!",
+          "description": "Code for Hawaii is a Code for America Brigade. We are volunteers interested in open data, open knowledge, civic apps, data visualization, APIs and the application of technology to make our community better. We encourage civic engagement and collaboration with our local government. We hold weekly project nights (and a monthly all-hands meeting) to see how we can help make a difference in Hawaii. \n\nMain website: http://codeforhawaii.org\n\nOur projects range from events like National Day of Civic Hacking, to transit apps that help navigate Hawaii, submit FOIA requests, or adopt your local siren. \nIf you're passionate about civic technology, this is the meetup for you!",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -3749,7 +3711,7 @@
             "e": 10
           },
           "interests": [
-            "application-development"
+            "careers"
           ],
           "semesters": [
             "Spring-2017",
@@ -3788,32 +3750,6 @@
           "independentStudy": false
         },
         {
-          "name": "Graphic Design",
-          "slug": "coursera-graphic-design",
-          "description": "This Coursera online course is for those new to graphic design and interested in the process, historical context, and communication through image-making and typography. For those who want to have a starting point for further work in interface design, motion graphics, and editorial design, this course, will provide the core skill set and conceptual tools for “making and communicating” in the field of graphic design!",
-          "opportunityType": "online-learning",
-          "sponsor": "johnson",
-          "ice": {
-            "i": 0,
-            "c": 10,
-            "e": 0
-          },
-          "interests": [
-            "graphic-design",
-            "computer-graphics"
-          ],
-          "semesters": [
-            "Summer-2014",
-            "Summer-2015",
-            "Summer-2016",
-            "Summer-2017",
-            "Summer-2018",
-            "Summer-2019"
-          ],
-          "moreInformation": "https://www.coursera.org/specializations/graphic-design",
-          "independentStudy": false
-        },
-        {
           "name": "Introduction to Big Data",
           "slug": "coursera-introduction-to-big-data",
           "description": "Interested in increasing your knowledge of the Big Data landscape?  This Coursera online course is for those new to data science and interested in understanding why the Big Data Era has come to be.  It is for those who want to become conversant with the terminology and the core concepts behind big data problems, applications, and systems.  It is for those who want to start thinking about how Big Data might be useful in their business or career.  It provides an introduction to one of the most common frameworks, Hadoop, that has made big data analysis easier and more accessible -- increasing the potential for data to transform our world!",
@@ -3835,6 +3771,32 @@
             "Summer-2020"
           ],
           "moreInformation": "https://www.coursera.org/specializations/big-data",
+          "independentStudy": false
+        },
+        {
+          "name": "Graphic Design",
+          "slug": "coursera-graphic-design",
+          "description": "This Coursera online course is for those new to graphic design and interested in the process, historical context, and communication through image-making and typography. For those who want to have a starting point for further work in interface design, motion graphics, and editorial design, this course, will provide the core skill set and conceptual tools for “making and communicating” in the field of graphic design!",
+          "opportunityType": "online-learning",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 0,
+            "c": 10,
+            "e": 0
+          },
+          "interests": [
+            "art",
+            "computer-graphics"
+          ],
+          "semesters": [
+            "Summer-2014",
+            "Summer-2015",
+            "Summer-2016",
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019"
+          ],
+          "moreInformation": "https://www.coursera.org/specializations/graphic-design",
           "independentStudy": false
         },
         {
@@ -4214,7 +4176,7 @@
         {
           "name": "Apple iOS Dev Meetup",
           "slug": "ios-dev-meetup",
-          "description": "This group was created to provide a regular meetup for iOS developers actively working on projects. The purpose is to work together to support one another in bringing our ideas to life. The goals are also to meet people in the Honolulu, Hawaii area who are doing the same type of work (programming and creating apps for the iPhone, iPad, and Mac) and to have fun.\n\nThis meetup is for:\n\n  * iPhone Developers of all levels. \n\n  * People who are interested in getting their hands dirty in code.\n\n  * People just starting to develop for iOS who do not have much experience.\n\n  * Developers on other platforms (Android, etc) who are interested in learning about iOS development.\n\n  * Developers looking for specific help in adding functionality to their app.",
+          "description": "This group was created to provide a regular meetup for iOS developers actively working on projects. The purpose is to work together to support one another in bringing our ideas to life. The goals are also to meet people in the Honolulu, Hawaii area who are doing the same type of work (programming and creating apps for the iPhone, iPad, and Mac) and to have fun.\n\nThis meetup is for:\n\niPhone Developers of all levels. \n\nPeople who are interested in getting their hands dirty in code.\n\nPeople just starting to develop for iOS who do not have much experience.\n\nDevelopers on other platforms (Android, etc) who are interested in learning about iOS development.\n\nDevelopers looking for specific help in adding functionality to their app.",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4487,32 +4449,6 @@
           "independentStudy": false
         },
         {
-          "name": "Learn Linux",
-          "slug": "udacity-learn-linux",
-          "description": "Learn Linux in 5 Days doesn't make any assumptions about your background or knowledge of Linux.\nYou need no prior knowledge to benefit from this course.\nYou will be guided step by step using a logical and systematic approach.\nAs new concepts, commands, or jargon are encountered they are explained in plain language, making it easy for anyone to understand.\nAs an added bonus for enrolling in the Learn Linux in 5 Days video training course, you'll receive a step-by-step checklist and video that teaches you how to install WordPress on an Ubuntu Linux system.\nYou'll learn how to install a web server, how to install a database server, how to create database users, and how to configure WordPress.",
-          "opportunityType": "online-learning",
-          "sponsor": "johnson",
-          "ice": {
-            "i": 0,
-            "c": 10,
-            "e": 0
-          },
-          "interests": [
-            "linux",
-            "databases"
-          ],
-          "semesters": [
-            "Summer-2015",
-            "Summer-2016",
-            "Summer-2017",
-            "Summer-2018",
-            "Summer-2019",
-            "Summer-2020"
-          ],
-          "moreInformation": "https://www.udemy.com/learn-linux-in-5-days/",
-          "independentStudy": false
-        },
-        {
           "name": "Learn Unity",
           "slug": "udacity-learn-unity",
           "description": "Learn how to create video games using Unity 3D, the free-to-use game development tool. We start super simple so you need no prior experience or Unity of coding! With our online tutorials, you'll be amazed what you can achieve.\n\nWhat am I going to get from this course?\nLearn C#, a powerful modern language.\nDevelop a positive attitude to problem solving.\nGain an excellent general knowledge of game creation.\nLearn how object oriented programming works in practice.\nTransfer your knowledge to .NET, other languages, and more.",
@@ -4540,6 +4476,32 @@
           "independentStudy": false
         },
         {
+          "name": "Learn Linux",
+          "slug": "udacity-learn-linux",
+          "description": "Learn Linux in 5 Days doesn't make any assumptions about your background or knowledge of Linux.\nYou need no prior knowledge to benefit from this course.\nYou will be guided step by step using a logical and systematic approach.\nAs new concepts, commands, or jargon are encountered they are explained in plain language, making it easy for anyone to understand.\nAs an added bonus for enrolling in the Learn Linux in 5 Days video training course, you'll receive a step-by-step checklist and video that teaches you how to install WordPress on an Ubuntu Linux system.\nYou'll learn how to install a web server, how to install a database server, how to create database users, and how to configure WordPress.",
+          "opportunityType": "online-learning",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 0,
+            "c": 10,
+            "e": 0
+          },
+          "interests": [
+            "linux",
+            "databases"
+          ],
+          "semesters": [
+            "Summer-2015",
+            "Summer-2016",
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019",
+            "Summer-2020"
+          ],
+          "moreInformation": "https://www.udemy.com/learn-linux-in-5-days/",
+          "independentStudy": false
+        },
+        {
           "name": "Career Fair",
           "slug": "uh-career-fair",
           "description": "The purpose of this career fair is to provide students with the “tools” and resources to make important and valuable career decisions. During the Career Fair, you will take your “first steps” toward meaningful employment by meeting with employers face to face to exchange information.",
@@ -4551,7 +4513,7 @@
             "e": 10
           },
           "interests": [
-            "application-development"
+            "careers"
           ],
           "semesters": [
             "Fall-2016"
@@ -4598,7 +4560,7 @@
             "e": 5
           },
           "interests": [
-            "graphic-design",
+            "art",
             "virtual-reality"
           ],
           "semesters": [
@@ -4941,55 +4903,7 @@
         },
         {
           "semester": "Summer-2017",
-          "opportunity": "hawaii-open-data",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2017",
-          "opportunity": "code-for-hawaii",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2018",
-          "opportunity": "itma",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Summer-2018",
-          "opportunity": "open-power-quality",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2018",
-          "opportunity": "att-iot-hackathon",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2019",
-          "opportunity": "booz-allen-ideas-festival",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Summer-2019",
-          "opportunity": "booz-allen-internship",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2019",
-          "opportunity": "acm-manoa-vr",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2020",
-          "opportunity": "hicapacity",
+          "opportunity": "data-analytics-for-solar-energy",
           "verified": false,
           "student": "charley"
         },
@@ -5083,17 +4997,6 @@
       "name": "ReviewCollection",
       "contents": [
         {
-          "slug": "review-course-ics111-aaronvil",
-          "student": "aaronvil",
-          "reviewType": "course",
-          "reviewee": "ics111",
-          "semester": "Fall-2014",
-          "rating": 4,
-          "comments": "The course was very fun in learning how to do the projects we did in ICS 111. The projects weren't hard for beginner programmers and were interesting to get them to have more fun with programming. The only downside was that the class didn't fully prepare you for ICS 211 where the fun little projects became assignments focused on the next stage of programming. There isn't much new students can do in terms of preparing for ICS 211 from ICS 111 since it is based on what you learn, but the things that you do learn may prove useful.",
-          "moderated": true,
-          "visible": true
-        },
-        {
           "slug": "review-course-ics111-abi",
           "student": "abi",
           "reviewType": "course",
@@ -5105,13 +5008,13 @@
           "visible": true
         },
         {
-          "slug": "review-course-ics111-ahlim",
-          "student": "ahlim",
+          "slug": "review-course-ics314-alfred",
+          "student": "alfred",
           "reviewType": "course",
-          "reviewee": "ics111",
+          "reviewee": "ics314",
           "semester": "Fall-2014",
-          "rating": 4,
-          "comments": "The graphics involved in ics111 made it easy to visualize difficult programming concepts, and helped me gain interest in coding. However, I felt that the class didn’t fully prepare me for the upcoming required ics courses that do not use graphics. I would inform future students that future ics courses may not be as interesting as ics111.",
+          "rating": 5,
+          "comments": "ICS 314 teaches valuable concepts if you want to be a Software Engineer. I thought the class was fun, and Professor Johnson is great.",
           "moderated": true,
           "visible": true
         },
@@ -5123,6 +5026,83 @@
           "semester": "Fall-2013",
           "rating": 5,
           "comments": "ICS 111 was fun, and I learned a lot. The projects weren't difficult nor were the assignments. Come to the lectures, do the readings, and take the time to understand the concepts, and you'll do fine.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics211-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Spring-2014",
+          "rating": 5,
+          "comments": "A step up from ICS 111, ICS 211 taught me a lot about data structures. Lectures were engaging, and the programming assignments were challenging. Most people will do well in this course if they put their time into learning the concepts and if they start the assignments early!",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "I've heard a lot about how this course is the bottleneck for progressing through the ICS program. Compared to all the courses I've taken before, this has to be the most time consuming. It's not that the concepts are difficult to understand nor is the courseload that heavy, but I found myself having to put more time to review and understand everything. The class structure for this was inverted, so we watched video lectures in our own time and used class time to do actual problems. I thought it was a better use of class time. ",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics241-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics241",
+          "semester": "Spring-2014",
+          "rating": 3,
+          "comments": "I understand how Discrete Math relates to Information and Computer Science, but I still didn't enjoy this course-- the content, that is. Initially the homework problems were, to me, difficult. Fortunately, the professor tried very hard to teach the concepts well, and I received a lot of help from the TA and the professor during office hours.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Spring-2015",
+          "rating": 5,
+          "comments": "ICS 321 was enjoyable. The things we learned were straightforward. We watched lectures online, did problems in class, and there were very few homework assignments. Much of my grade came from the final project. There I had the chance to show off my programming prowess by designing a database and applying what I learned. I hadn't created a website before, but I learned! I created a simple website with a backend MySQL database.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-opportunity-hacc-alfred",
+          "student": "alfred",
+          "reviewType": "opportunity",
+          "reviewee": "hacc",
+          "semester": "Fall-2016",
+          "rating": 5,
+          "comments": "HACC was a great opportunity to display what I've learned as an ICS student and to have the opportunity to help address a problem in Hawai'i.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-aaronvil",
+          "student": "aaronvil",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "The course was very fun in learning how to do the projects we did in ICS 111. The projects weren't hard for beginner programmers and were interesting to get them to have more fun with programming. The only downside was that the class didn't fully prepare you for ICS 211 where the fun little projects became assignments focused on the next stage of programming. There isn't much new students can do in terms of preparing for ICS 211 from ICS 111 since it is based on what you learn, but the things that you do learn may prove useful.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-ahlim",
+          "student": "ahlim",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "The graphics involved in ics111 made it easy to visualize difficult programming concepts, and helped me gain interest in coding. However, I felt that the class didn’t fully prepare me for the upcoming required ics courses that do not use graphics. I would inform future students that future ics courses may not be as interesting as ics111.",
           "moderated": true,
           "visible": true
         },
@@ -5435,17 +5415,6 @@
           "visible": true
         },
         {
-          "slug": "review-course-ics211-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics211",
-          "semester": "Spring-2014",
-          "rating": 5,
-          "comments": "A step up from ICS 111, ICS 211 taught me a lot about data structures. Lectures were engaging, and the programming assignments were challenging. Most people will do well in this course if they put their time into learning the concepts and if they start the assignments early!",
-          "moderated": true,
-          "visible": true
-        },
-        {
           "slug": "review-course-ics211-christopher-nguyen",
           "student": "christopher-nguyen",
           "reviewType": "course",
@@ -5567,17 +5536,6 @@
           "visible": true
         },
         {
-          "slug": "review-course-ics241-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics241",
-          "semester": "Spring-2014",
-          "rating": 3,
-          "comments": "I understand how Discrete Math relates to Information and Computer Science, but I still didn't enjoy this course-- the content, that is. Initially the homework problems were, to me, difficult. Fortunately, the professor tried very hard to teach the concepts well, and I received a lot of help from the TA and the professor during office hours.",
-          "moderated": true,
-          "visible": true
-        },
-        {
           "slug": "review-course-ics241-erikhuan",
           "student": "erikhuan",
           "reviewType": "course",
@@ -5629,17 +5587,6 @@
           "semester": "Fall-2016",
           "rating": 3,
           "comments": "This is the second discrete math class. It is a lot like ICS 141, but it is a bit harder. A lot of the material is more abstract and the answers that are expected on homeworks and exams have a more strict format than those expected in ICS 141. Again the material can be pretty dry, so a good suggestion would be to try to sit at the front of the class. That way you are not tempted to play on your phone or laptop and will be less likely to be distracted by the people around you.",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-course-ics311-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics311",
-          "semester": "Fall-2014",
-          "rating": 4,
-          "comments": "I've heard a lot about how this course is the bottleneck for progressing through the ICS program. Compared to all the courses I've taken before, this has to be the most time consuming. It's not that the concepts are difficult to understand nor is the courseload that heavy, but I found myself having to put more time to review and understand everything. The class structure for this was inverted, so we watched video lectures in our own time and used class time to do actual problems. I thought it was a better use of class time.",
           "moderated": true,
           "visible": true
         },
@@ -5743,17 +5690,6 @@
           "visible": true
         },
         {
-          "slug": "review-course-ics314-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics314",
-          "semester": "Fall-2014",
-          "rating": 5,
-          "comments": "ICS 314 teaches valuable concepts if you want to be a Software Engineer. I thought the class was fun, and Professor Johnson is great.",
-          "moderated": true,
-          "visible": true
-        },
-        {
           "slug": "review-course-ics321-ahlim",
           "student": "ahlim",
           "reviewType": "course",
@@ -5761,17 +5697,6 @@
           "semester": "Spring-2016",
           "rating": 3,
           "comments": "Ics321 allows students to get a good grasp of what the back-end of a website looks like. Unfortunately, the class is so flexible on deadlines, that many of the students would wait till the end of the semester to finish the assignments. I would inform future students to stay up-to-date and complete the assignments on time.",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-course-ics321-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics321",
-          "semester": "Spring-2015",
-          "rating": 5,
-          "comments": "ICS 321 was enjoyable. The things we learned were straightforward. We watched lectures online, did problems in class, and there were very few homework assignments. Much of my grade came from the final project. There I had the chance to show off my programming prowess by designing a database and applying what I learned. I hadn't created a website before, but I learned! I created a simple website with a backend MySQL database.",
           "moderated": true,
           "visible": true
         },
@@ -5860,17 +5785,6 @@
           "semester": "Fall-2015",
           "rating": 4,
           "comments": "The ICS 331 Machine programming course teaches students how to read and use binary and hex-based coding. The assignments are very interesting because you get to mess around with a program that allows you to make and manipulate a virtual circuit. The downside is unless you plan on working with low level language code, the material you learn in this class may be irrelevant to what you will do in the future. That being said, I did enjoy the class and the assignments, and I advise that you should take the time to learn about binary and hex coding anyway.",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-opportunity-hacc-alfred",
-          "student": "alfred",
-          "reviewType": "opportunity",
-          "reviewee": "hacc",
-          "semester": "Fall-2016",
-          "rating": 5,
-          "comments": "HACC was a great opportunity to display what I've learned as an ICS student and to have the opportunity to help address a problem in Hawai'i.",
           "moderated": true,
           "visible": true
         }
@@ -6038,7 +5952,8 @@
           "interests": [
             "application-development",
             "javascript"
-          ]
+          ],
+          "opportunity": "acmanoa-web-development"
         },
         {
           "title": "Algorithm Visualization",
@@ -6072,7 +5987,8 @@
           "duration": "0:50",
           "interests": [
             "security"
-          ]
+          ],
+          "opportunity": "greyhats"
         },
         {
           "title": "Open Power Quality",
@@ -6083,7 +5999,8 @@
           "duration": "0:21",
           "interests": [
             "software-engineering"
-          ]
+          ],
+          "opportunity": "open-power-quality"
         },
         {
           "title": "RadGrad",
@@ -6121,7 +6038,8 @@
           "duration": "0:17",
           "interests": [
             "data-science"
-          ]
+          ],
+          "opportunity": "data-analytics-for-solar-energy"
         }
       ]
     },
@@ -6143,12 +6061,11 @@
           ],
           "careerGoals": [
             "information-system-manager",
+            "system-administrator",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Abigail",
@@ -6169,9 +6086,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 5,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 5
         },
         {
           "firstName": "Ah Lim",
@@ -6191,9 +6106,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Alfred",
@@ -6213,9 +6126,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 6,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 6
         },
         {
           "firstName": "Betty",
@@ -6237,9 +6148,7 @@
             "graduate-school"
           ],
           "desiredDegree": "bs-cs",
-          "level": 4,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 4
         },
         {
           "firstName": "Kim",
@@ -6259,9 +6168,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Robert",
@@ -6278,9 +6185,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Brian",
@@ -6296,13 +6201,11 @@
             "computer-architecture"
           ],
           "careerGoals": [
-            "network-engineer",
+            "network-architect",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Charley",
@@ -6321,9 +6224,7 @@
             "data-scientist"
           ],
           "desiredDegree": "ba-ics",
-          "level": 2,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 2
         },
         {
           "firstName": "David",
@@ -6343,9 +6244,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Christopher",
@@ -6361,13 +6260,11 @@
             "application-development"
           ],
           "careerGoals": [
-            "full-stack-developer",
+            "web-developer",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Cam",
@@ -6387,9 +6284,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Christopher",
@@ -6406,12 +6301,11 @@
           ],
           "careerGoals": [
             "information-system-manager",
+            "system-administrator",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Christie",
@@ -6427,13 +6321,11 @@
             "teaching"
           ],
           "careerGoals": [
-            "network-engineer",
+            "network-architect",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Martha",
@@ -6453,9 +6345,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Depeng",
@@ -6476,9 +6366,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Daniel",
@@ -6498,9 +6386,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Dusko",
@@ -6520,9 +6406,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Ella",
@@ -6539,12 +6423,10 @@
             "web-development"
           ],
           "careerGoals": [
-            "full-stack-developer"
+            "web-developer"
           ],
           "desiredDegree": "ba-ics",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Erik",
@@ -6564,9 +6446,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Edo",
@@ -6587,9 +6467,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Jennifer",
@@ -6606,9 +6484,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Gerald",
@@ -6625,9 +6501,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Guylaine",
@@ -6647,9 +6521,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Hailing",
@@ -6668,9 +6540,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Henri",
@@ -6690,9 +6560,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Austen",
@@ -6709,9 +6577,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Jameyia",
@@ -6727,13 +6593,11 @@
             "application-development"
           ],
           "careerGoals": [
-            "full-stack-developer",
+            "web-developer",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Jan",
@@ -6753,9 +6617,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Philip",
@@ -6775,12 +6637,10 @@
           ],
           "careerGoals": [
             "software-developer",
-            "full-stack-developer"
+            "web-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Joshua",
@@ -6796,13 +6656,11 @@
             "hpc"
           ],
           "careerGoals": [
-            "full-stack-developer",
+            "web-developer",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Jack",
@@ -6821,9 +6679,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Aaron",
@@ -6840,9 +6696,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Patrick",
@@ -6859,9 +6713,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Kelly",
@@ -6881,9 +6733,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Kirk",
@@ -6899,13 +6749,11 @@
             "prolog"
           ],
           "careerGoals": [
-            "network-engineer",
+            "network-architect",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Kurt",
@@ -6924,9 +6772,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Kyungim",
@@ -6946,9 +6792,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Anh",
@@ -6968,9 +6812,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "George",
@@ -6987,9 +6829,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Jason",
@@ -7009,9 +6849,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Daniel",
@@ -7028,9 +6866,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Hongbo",
@@ -7050,9 +6886,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Lipyeow",
@@ -7073,9 +6907,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Mark",
@@ -7091,13 +6923,11 @@
             "lisp"
           ],
           "careerGoals": [
-            "full-stack-developer",
+            "web-developer",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Yuka",
@@ -7114,9 +6944,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Nathan",
@@ -7132,13 +6960,11 @@
             "perl"
           ],
           "careerGoals": [
-            "full-stack-developer",
+            "web-developer",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Nodari",
@@ -7158,9 +6984,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Charles",
@@ -7176,13 +7000,11 @@
             "parallel-programming"
           ],
           "careerGoals": [
-            "full-stack-developer",
+            "web-developer",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Peter-Michael",
@@ -7203,9 +7025,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Admin",
@@ -7222,9 +7042,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Russell",
@@ -7240,13 +7058,11 @@
             "application-development"
           ],
           "careerGoals": [
-            "full-stack-developer",
+            "web-developer",
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Scott",
@@ -7267,9 +7083,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Shaziney",
@@ -7289,9 +7103,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Connor",
@@ -7310,9 +7122,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Suzanne",
@@ -7332,9 +7142,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Kazuo",
@@ -7354,9 +7162,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Daniel",
@@ -7376,9 +7182,7 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         },
         {
           "firstName": "Zachary",
@@ -7398,9 +7202,7 @@
             "software-developer"
           ],
           "desiredDegree": "ba-ics",
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "level": 1
         }
       ]
     },

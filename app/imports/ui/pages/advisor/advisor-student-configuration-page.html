@@ -4,7 +4,7 @@
       <div class="ui stackable grid container">
         {{> Help_Panel_Widget}}
 
-        {{> Student_Selector dictionary=getDictionary studentID=studentID}}
+        {{> Student_Selector_Widget dictionary=getDictionary studentID=studentID}}
 
         <div class="ten wide column">
           {{#if displayWidget}}
@@ -14,7 +14,6 @@
           {{/if}}
         </div>
         <div class="six wide column">
-          <!--{{> Degree_Plan_Generator_Widget dictionary=getDictionary}}-->
           {{> Advisor_Log_Entry_Widget dictionary=getDictionary}}
           {{> Star_Upload_Widget studentID=studentID}}
         </div>

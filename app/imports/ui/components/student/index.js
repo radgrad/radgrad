@@ -49,9 +49,6 @@ import './student-explorer-review-stars-widget.js';
 import './student-explorer-social-widget.html';
 import './student-explorer-social-widget.js';
 
-import './student-explorer-student-info.html';
-import './student-explorer-student-info.js';
-
 import './student-ice-column.html';
 import './student-ice-column.js';
 
@@ -88,12 +85,6 @@ import './student-of-interest-widget.js';
 
 import './student-feed-widget.html';
 import './student-feed-widget.js';
-
-import './student-home-help.html';
-import './student-home-help.js';
-
-import './student-ice-help.html';
-import './student-ice-help.js';
 
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';

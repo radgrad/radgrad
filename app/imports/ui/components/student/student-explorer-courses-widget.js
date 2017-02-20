@@ -11,42 +11,15 @@ import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { Interests } from '../../../api/interest/InterestCollection';
 
 Template.Student_Explorer_Courses_Widget.helpers({
-  isLabel(label, value) {
-    return label === value;
-  },
-  userPicture(user) {
-    if (Users.findDoc(user).picture) {
-      return Users.findDoc(user).picture;
-    }
-    return '/images/default-profile-picture.png';
-  },
-  fullName(user) {
-    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
-  },
-  coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
-  },
   courseNameFromSlug(courseSlugName) {
     const slug = Slugs.find({ name: courseSlugName }).fetch();
     const course = Courses.find({ slugID: slug[0]._id }).fetch();
     return course[0].shortName;
   },
-  toUpper(string) {
-    return string.toUpperCase();
-  },
-  userStatus(course) {
-    let ret = false;
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    if (ci.length > 0) {
-      ret = true;
-    }
-    return ret;
+  coursesRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
   },
   futureInstance(course) {
     let ret = false;
@@ -58,61 +31,6 @@ Template.Student_Explorer_Courses_Widget.helpers({
       if (Semesters.findDoc(courseInstance.semesterID).sortBy > Semesters.getCurrentSemesterDoc().sortBy) {
         ret = true;
       }
-    }
-    return ret;
-  },
-  passedCourse(course) {
-    let ret = false;
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    for (const c of ci) {
-      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' ||
-          c.grade === 'B+' || c.grade === 'B') {
-        ret = true;
-      }
-    }
-    return ret;
-  },
-  yearSemesters(year) {
-    const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
-    return semesters;
-  },
-  nextYears(amount) {
-    const nextYears = [];
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSem = Semesters.findDoc(currentSemesterID);
-    let currentYear = currentSem.year;
-    for (let i = 0; i < amount; i += 1) {
-      nextYears.push(currentYear);
-      currentYear += 1;
-    }
-    return nextYears;
-  },
-  notEmpty(list) {
-    let ret = false;
-    if (list[0].length + list[1].length + list[2].length > 0) {
-      ret = true;
-    }
-    return ret;
-  },
-  review() {
-    let review = '';
-    review = Reviews.find({
-      studentID: getUserIdFromRoute(),
-      revieweeID: this.item._id,
-    }).fetch();
-    return review[0];
-  },
-  reviews() {
-    let ret = false;
-    let reviews = '';
-    reviews = Reviews.find({
-      revieweeID: this.item._id,
-    }).fetch();
-    if (reviews.length > 0) {
-      ret = true;
     }
     return ret;
   },
@@ -128,25 +46,44 @@ Template.Student_Explorer_Courses_Widget.helpers({
         return 'ERROR: More than one table.';
     }
   },
-  interestsRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
+  isLabel(label, value) {
+    return label === value;
   },
-  interestName(interestSlugName) {
-    return Interests.findDoc(interestSlugName).name;
+  passedCourse(course) {
+    let ret = false;
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    for (const c of ci) {
+      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' ||
+          c.grade === 'B+' || c.grade === 'B') {
+        ret = true;
+      }
+    }
+    return ret;
   },
-  interestSlugName(interestSlugName) {
-    const slugID = Interests.findDoc(interestSlugName).slugID;
-    return Slugs.getNameFromID(slugID);
+  review() {
+    let review = '';
+    review = Reviews.find({
+      studentID: getUserIdFromRoute(),
+      revieweeID: this.item._id,
+    }).fetch();
+    return review[0];
   },
-  replaceSemString(array) {
-    const semString = array.join(', ');
-    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+  toUpper(string) {
+    return string.toUpperCase();
   },
-  usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
-  },
-  userUsername(user) {
-    return Users.findDoc(user).username;
+  userStatus(course) {
+    let ret = false;
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    if (ci.length > 0) {
+      ret = true;
+    }
+    return ret;
   },
 });
 
