@@ -99,7 +99,6 @@ class FeedCollection extends BaseCollection {
     if (feedType === 'new-user') {
       if (user !== undefined) {
         userIDs = _.map(user, function (u) {
-          console.log("hello" + u);
           return Users.getUserFromUsername(u)._id;
         });
         if (userIDs.length > 1) {
