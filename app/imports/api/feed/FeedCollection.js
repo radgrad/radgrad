@@ -90,16 +90,16 @@ class FeedCollection extends BaseCollection {
       }
     } else if (feedType === 'new-opportunity') {
       if (opportunity !== undefined) {
-        opportunityID = [Opportunities.getID(opportunity)];
-        description = `${Opportunities.findDoc(opportunityID[0]).name} has been added to Opportunities.`;
+        opportunityID = Opportunities.getID(opportunity);
+        description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities.`;
         picture = '/images/radgrad_logo.png';
       } else {
         throw new Meteor.Error('Opportunity must be specified for feedType new-opportunity.');
       }
     } else if (feedType === 'new-course') {
       if (course !== undefined) {
-        courseID = [Courses.getID(course)];
-        description = `${Courses.findDoc(courseID[0]).name} has been added to Courses.`;
+        courseID = Courses.getID(course);
+        description = `${Courses.findDoc(courseID).name} has been added to Courses.`;
         picture = '/images/radgrad_logo.png';
       } else {
         throw new Meteor.Error('Course must be specified for feedType new-course.');
