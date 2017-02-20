@@ -40,37 +40,7 @@ function matchingTeasers() {
   return matching;
 }
 
-function matchingInterestsHelper(teaser) {
-  const matchingInterests = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterests = [];
-  const teaserInterests = [];
-  _.map(teaser.interestIDs, (id) => {
-    teaserInterests.push(Interests.findDoc(id));
-  });
-  _.map(user.interestIDs, (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  _.map(teaserInterests, (teaserInterest) => {
-    _.map(userInterests, (userInterest) => {
-      if (_.isEqual(teaserInterest, userInterest)) {
-        matchingInterests.push(userInterest);
-      }
-    });
-  });
-  return matchingInterests;
-}
-
 Template.Student_Teaser_Widget.helpers({
-  getDictionary() {
-    return Template.instance().state;
-  },
-  interestsRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
-  },
-  interestSlug(interest) {
-    return Slugs.findDoc(interest.slugID).name;
-  },
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
@@ -89,9 +59,6 @@ Template.Student_Teaser_Widget.helpers({
   teaserCount() {
     return matchingTeasers().length;
   },
-  teaserInterests(teaser) {
-    return Interests.findNames(teaser.interestIDs);
-  },
   teaserTitle(teaser) {
     return teaser.title;
   },
@@ -100,29 +67,6 @@ Template.Student_Teaser_Widget.helpers({
   },
   teaserUrl(teaser) {
     return teaser.url;
-  },
-  matchingInterests(teaser) {
-    return matchingInterestsHelper(teaser);
-  },
-  otherInterests(teaser) {
-    const matchingInterests = matchingInterestsHelper(teaser);
-    const teaserInterests = [];
-    _.map(teaser.interestIDs, (id) => {
-      teaserInterests.push(Interests.findDoc(id));
-    });
-    const filtered = _.filter(teaserInterests, function (teaserInterest) {
-      let ret = true;
-      _.map(matchingInterests, (matchingInterest) => {
-        if (_.isEqual(teaserInterest, matchingInterest)) {
-          ret = false;
-        }
-      });
-      return ret;
-    });
-    return filtered;
-  },
-  interestName(interest) {
-    return interest.name;
   },
 });
 

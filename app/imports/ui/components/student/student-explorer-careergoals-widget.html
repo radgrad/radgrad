@@ -37,9 +37,10 @@
 
               {{#if isLabel descriptionPair.label 'Interests'}}
                 <div style="margin-top: 5px">
-                  {{#each interest in descriptionPair.value}}
-                    <a class="ui right aligned mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestSlugName interest)}}"><i class="fitted star icon"></i>{{interest}}</a>
-                  {{/each}}
+                  {{> Interest_List item=item size='mini'}}
+                  <!--{{#each interest in descriptionPair.value}}-->
+                    <!--<a class="ui right aligned mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestSlugName interest)}}"><i class="fitted star icon"></i>{{interest}}</a>-->
+                  <!--{{/each}}-->
                 </div>
               {{/if}}
 

@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
+import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -13,6 +14,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Of_Interest_Card.onCreated(function studentOfInterestCardOnCreated() {
+  this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
@@ -50,27 +52,6 @@ function interestedStudentsHelper(item) {
   return interested;
 }
 
-function matchingInterestsHelper(item) {
-  const matchingInterests = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterests = [];
-  const itemInterests = [];
-  _.map(item.interestIDs, (id) => {
-    itemInterests.push(Interests.findDoc(id));
-  });
-  _.map(user.interestIDs, (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  _.map(itemInterests, (itemInterest) => {
-    _.map(userInterests, (userInterest) => {
-      if (_.isEqual(itemInterest, userInterest)) {
-        matchingInterests.push(userInterest);
-      }
-    });
-  });
-  return matchingInterests;
-}
-
 function currentSemester() {
   const currentSemesterID = Semesters.getCurrentSemester();
   const currentSem = Semesters.findDoc(currentSemesterID);
@@ -89,15 +70,6 @@ function opportunitySemesters(opp) {
 }
 
 Template.Student_Of_Interest_Card.helpers({
-  courses() {
-    return Courses.find().fetch();
-  },
-  opportunities() {
-    return Opportunities.find().fetch();
-  },
-  itemInterests(item) {
-    return Interests.findNames(item.interestIDs);
-  },
   itemName(item) {
     return item.name;
   },
@@ -120,43 +92,17 @@ Template.Student_Of_Interest_Card.helpers({
   itemSlug(item) {
     return Slugs.findDoc(item.slugID).name;
   },
-  interestSlug(interest) {
-    return Slugs.findDoc(interest.slugID).name;
-  },
   userSlug(studentID) {
     return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
   },
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
   },
-  interestsRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
-  },
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
-  },
-  matchingInterests(course) {
-    return matchingInterestsHelper(course);
-  },
-  otherInterests(course) {
-    const matchingInterests = matchingInterestsHelper(course);
-    const courseInterests = [];
-    _.map(course.interestIDs, (id) => {
-      courseInterests.push(Interests.findDoc(id));
-    });
-    const filtered = _.filter(courseInterests, function (courseInterest) {
-      let ret = true;
-      _.map(matchingInterests, (matchingInterest) => {
-        if (_.isEqual(courseInterest, matchingInterest)) {
-          ret = false;
-        }
-      });
-      return ret;
-    });
-    return filtered;
   },
   hidden() {
     let ret = '';
@@ -174,9 +120,6 @@ Template.Student_Of_Interest_Card.helpers({
         // buttons remain green
       }
     return ret;
-  },
-  interestName(interest) {
-    return interest.name;
   },
   interestedStudents(course) {
     return interestedStudentsHelper(course);

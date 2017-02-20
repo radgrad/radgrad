@@ -20,14 +20,7 @@
       </div>
     </div>
     <div class="content">
-      <span class="left floated">
-        {{#each interest in matchingInterests item}}
-          <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
-        {{/each}}
-        {{#each interest in otherInterests item}}
-          <a class="ui mini grey label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
-        {{/each}}
-      </span>
+      {{> Interest_List item=item size='mini'}}
     </div>
 
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
