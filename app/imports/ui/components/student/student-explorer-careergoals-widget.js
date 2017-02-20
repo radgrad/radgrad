@@ -9,6 +9,21 @@ import { Interests } from '../../../api/interest/InterestCollection';
 
 
 Template.Student_Explorer_CareerGoals_Widget.helpers({
+  careerGoalName(careerGoalSlugName) {
+    const slug = Slugs.find({ name: careerGoalSlugName }).fetch();
+    const course = CareerGoals.find({ slugID: slug[0]._id }).fetch();
+    return course[0].name;
+  },
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+  },
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
+  interestSlugName(interestSlugName) {
+    const slugID = Interests.findDoc(interestSlugName).slugID;
+    return Slugs.getNameFromID(slugID);
+  },
   isLabel(label, value) {
     return label === value;
   },
@@ -21,13 +36,8 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
     }
     return '/images/default-profile-picture.png';
   },
-  fullName(user) {
-    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
-  },
-  careerGoalName(careerGoalSlugName) {
-    const slug = Slugs.find({ name: careerGoalSlugName }).fetch();
-    const course = CareerGoals.find({ slugID: slug[0]._id }).fetch();
-    return course[0].name;
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
   userStatus(careerGoal) {
     let ret = false;
@@ -36,23 +46,6 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
       ret = true;
     }
     return ret;
-  },
-  interestsRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
-  },
-  interestName(interestSlugName) {
-    return Interests.findDoc(interestSlugName).name;
-  },
-  interestSlugName(interestSlugName) {
-    const slugID = Interests.findDoc(interestSlugName).slugID;
-    return Slugs.getNameFromID(slugID);
-  },
-  replaceSemString(array) {
-    const semString = array.join(', ');
-    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
-  },
-  usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
   },
   userUsername(user) {
     return Users.findDoc(user).username;

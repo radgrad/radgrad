@@ -1,14 +1,10 @@
 <template name="Recommendations">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui left aligned padded segment">
-      <div class="ui dividing header"><h4>RECOMMENDATIONS</h4></div>
-      <div class="ui list">
-        {{#each recommendation in recommendations}}
-          {{> Recommendation_Item (recommendationArgs recommendation)}}
-        {{/each}}
-      </div>
+  <div class="ui left aligned padded segment">
+    <div class="ui dividing header"><h4>RECOMMENDATIONS</h4></div>
+    <div class="ui list">
+      {{#each recommendation in recommendations}}
+        {{> Recommendation_Item (recommendationArgs recommendation)}}
+      {{/each}}
     </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+  </div>
 </template>

@@ -16,21 +16,6 @@ Template.Student_Explorer_Review_Widget.onCreated(function onCreated() {
 });
 
 Template.Student_Explorer_Review_Widget.helpers({
-  reviews() {
-    const event = this.event;
-    const matchingReviews = Reviews.find({
-      revieweeID: event._id,
-      visible: true,
-    }).fetch();
-    const matchingReviewsFinal = _.filter(matchingReviews, function matchStudentID(review) {
-      let ret = true;
-      if (review.studentID === getUserIdFromRoute()) {
-        ret = false;
-      }
-      return ret;
-    });
-    return matchingReviewsFinal;
-  },
   abbreviateSemester(semester) {
     const semNameYear = semester.split(' ');
     let semName = '';
@@ -50,18 +35,11 @@ Template.Student_Explorer_Review_Widget.helpers({
     }
     return `${semName} ${semNameYear[1]}`;
   },
-  averageRating(event) {
-    let averageRating = 0;
-    let numReviews = 0;
-    const matchingReviews = Reviews.find({
-      revieweeID: event._id,
-    }).fetch();
-    numReviews = matchingReviews.length;
-    _.map(matchingReviews, function (review) {
-      averageRating += review.rating;
-    });
-    averageRating /= numReviews;
-    return Math.floor(averageRating);
+  currentUserName() {
+    return Users.getFullName(getUserIdFromRoute());
+  },
+  currentUserPicture() {
+    return Users.findDoc(getUserIdFromRoute()).picture;
   },
   reviewData(review) {
     const user = Users.findDoc(review.studentID);
@@ -74,11 +52,20 @@ Template.Student_Explorer_Review_Widget.helpers({
     return { name: userName, username: userUsername, picture: userPicture, semester: reviewSemester,
       rating: reviewRating, comments: reviewComments };
   },
-  currentUserName() {
-    return Users.getFullName(getUserIdFromRoute());
-  },
-  currentUserPicture() {
-    return Users.findDoc(getUserIdFromRoute()).picture;
+  reviews() {
+    const event = this.event;
+    const matchingReviews = Reviews.find({
+      revieweeID: event._id,
+      visible: true,
+    }).fetch();
+    const matchingReviewsFinal = _.filter(matchingReviews, function matchStudentID(review) {
+      let ret = true;
+      if (review.studentID === getUserIdFromRoute()) {
+        ret = false;
+      }
+      return ret;
+    });
+    return matchingReviewsFinal;
   },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;

@@ -22,7 +22,7 @@ const userDefineSchema = new SimpleSchema({
 const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
-Template.Student_Selector.helpers({
+Template.Student_Selector_Widget.helpers({
   users(role) {
     return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
   },
@@ -80,7 +80,7 @@ Template.Student_Selector.helpers({
   },
 });
 
-Template.Student_Selector.events({
+Template.Student_Selector_Widget.events({
   'click .jsRetrieve': function clickJSRetrieve(event, instance) {
     event.preventDefault();
     const username = event.target.id;
@@ -174,7 +174,7 @@ Template.Student_Selector.events({
   },
 });
 
-Template.Student_Selector.onCreated(function studentSelectorOnCreated() {
+Template.Student_Selector_Widget.onCreated(function studentSelectorOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   } else {
@@ -190,7 +190,7 @@ Template.Student_Selector.onCreated(function studentSelectorOnCreated() {
   this.subscribe(Users.getPublicationName());
 });
 
-Template.Student_Selector.onRendered(function studentSelectorOnRendered() {
+Template.Student_Selector_Widget.onRendered(function studentSelectorOnRendered() {
   this.$('.menu .item').tab();
   this.$('.dropdown').dropdown({
     // action: 'select',
@@ -198,6 +198,6 @@ Template.Student_Selector.onRendered(function studentSelectorOnRendered() {
   this.state.set('addNewUser', false);
 });
 
-Template.Student_Selector.onDestroyed(function studentSelectorOnDestroyed() {
+Template.Student_Selector_Widget.onDestroyed(function studentSelectorOnDestroyed() {
   // add your statement here
 });

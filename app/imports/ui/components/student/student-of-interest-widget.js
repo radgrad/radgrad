@@ -162,26 +162,6 @@ function hiddenOpportunitiesHelper() {
 
 
 Template.Student_Of_Interest_Widget.helpers({
-  coursesCount() {
-    Template.instance().hidden.get();
-    return hiddenCoursesHelper().length;
-  },
-  courseInterests(course) {
-    return Interests.findNames(course.interestIDs);
-  },
-  courseSemesters(semesterID) {
-    const sem = Semesters.findDoc(semesterID);
-    const oppTerm = sem.term;
-    const oppYear = sem.year;
-    return `${oppTerm} ${oppYear}`;
-  },
-  courseShortDescription(descript) {
-    let description = descript;
-    if (description.length > 200) {
-      description = `${description.substring(0, 200)}...`;
-    }
-    return description;
-  },
   courses() {
     const courses = matchingCourses();
     let visibleCourses;
@@ -195,15 +175,15 @@ Template.Student_Of_Interest_Widget.helpers({
   hidden() {
     return Template.instance().hidden.get();
   },
-  opportunities() {
-    const opportunities = matchingOpportunities();
-    let visibleOpportunities;
-    if (Template.instance().hidden.get()) {
-      visibleOpportunities = hiddenOpportunitiesHelper();
+  hiddenExists() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    let ret;
+    if (this.type === 'courses') {
+      ret = user.hiddenCourseIDs.length !== 0;
     } else {
-      visibleOpportunities = opportunities;
+      ret = user.hiddenOpportunityIDs.length !== 0;
     }
-    return visibleOpportunities;
+    return ret;
   },
   itemCount() {
     let ret;
@@ -214,21 +194,18 @@ Template.Student_Of_Interest_Widget.helpers({
     }
     return ret;
   },
-  opportunityCount() {
-    return hiddenOpportunitiesHelper().length;
+  opportunities() {
+    const opportunities = matchingOpportunities();
+    let visibleOpportunities;
+    if (Template.instance().hidden.get()) {
+      visibleOpportunities = hiddenOpportunitiesHelper();
+    } else {
+      visibleOpportunities = opportunities;
+    }
+    return visibleOpportunities;
   },
   typeCourse() {
     return this.type === 'courses';
-  },
-  hiddenExists() {
-    const user = Users.findDoc({ username: getRouteUserName() });
-    let ret;
-    if (this.type === 'courses') {
-      ret = user.hiddenCourseIDs.length !== 0;
-    } else {
-      ret = user.hiddenOpportunityIDs.length !== 0;
-    }
-    return ret;
   },
 });
 

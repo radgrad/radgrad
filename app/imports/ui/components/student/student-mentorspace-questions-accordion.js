@@ -37,22 +37,22 @@ Template.Student_MentorSpace_Questions_Accordion.onRendered(function listMentorS
 });
 
 Template.Student_MentorSpace_Questions_Accordion.helpers({
-  listAnswers(questionID) {
-    return MentorAnswers.getAnswers(questionID);
-  },
   answerCount(questionID) {
     return MentorAnswers.getAnswers(questionID).count();
   },
-  picture(mentorID) {
-    return Users.find({ _id: mentorID }).fetch()[0].picture;
+  isOneAnswer(questionID) {
+    return MentorAnswers.getAnswers(questionID).count() === 1;
+  },
+  listAnswers(questionID) {
+    return MentorAnswers.getAnswers(questionID);
   },
   mentorName(mentorID) {
     const firstName = Users.find({ _id: mentorID }).fetch()[0].firstName;
     const lastName = Users.find({ _id: mentorID }).fetch()[0].lastName;
     return `${firstName}  ${lastName}`;
   },
-  isOneAnswer(questionID) {
-    return MentorAnswers.getAnswers(questionID).count() === 1;
+  picture(mentorID) {
+    return Users.find({ _id: mentorID }).fetch()[0].picture;
   },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;

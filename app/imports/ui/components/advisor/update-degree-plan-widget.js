@@ -39,44 +39,17 @@ const updateSchema = new SimpleSchema({
 });
 
 Template.Update_Degree_Plan_Widget.helpers({
-  user() {
-    if (Template.currentData().studentID.get()) {
-      return Users.findDoc(Template.currentData().studentID.get());
-    }
-    return '';
-  },
-  interests() {
-    return Interests.find({}, { sort: { name: 1 } });
-  },
   careerGoals() {
     return CareerGoals.find({}, { sort: { name: 1 } });
   },
   desiredDegrees() {
     return DesiredDegrees.find({}, { sort: { name: 1 } });
   },
+  interests() {
+    return Interests.find({}, { sort: { name: 1 } });
+  },
   roles() {
     return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
-  },
-  slug() {
-    if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
-      return Slugs.findDoc(user.slugID).name;
-    }
-    return '';
-  },
-  semesters() {
-    const currentSemester = Semesters.getCurrentSemesterDoc();
-    return _.filter(Semesters.find({ sortBy: { $gte: currentSemester.sortBy } }, { sort: { sortBy: 1 } }).fetch(),
-        function notSummer(s) {
-          return s.term !== Semesters.SUMMER;
-        });
-  },
-  selectedInterestIDs() {
-    if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
-      return user.interestIDs;
-    }
-    return '';
   },
   selectedCareerGoalIDs() {
     if (Template.currentData().studentID.get()) {
@@ -92,10 +65,37 @@ Template.Update_Degree_Plan_Widget.helpers({
     }
     return '';
   },
+  selectedInterestIDs() {
+    if (Template.currentData().studentID.get()) {
+      const user = Users.findDoc(Template.currentData().studentID.get());
+      return user.interestIDs;
+    }
+    return '';
+  },
   selectedRole() {
     if (Template.currentData().studentID.get()) {
       const user = Users.findDoc(Template.currentData().studentID.get());
       return user.roles[0];
+    }
+    return '';
+  },
+  semesters() {
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    return _.filter(Semesters.find({ sortBy: { $gte: currentSemester.sortBy } }, { sort: { sortBy: 1 } }).fetch(),
+        function notSummer(s) {
+          return s.term !== Semesters.SUMMER;
+        });
+  },
+  slug() {
+    if (Template.currentData().studentID.get()) {
+      const user = Users.findDoc(Template.currentData().studentID.get());
+      return Slugs.findDoc(user.slugID).name;
+    }
+    return '';
+  },
+  user() {
+    if (Template.currentData().studentID.get()) {
+      return Users.findDoc(Template.currentData().studentID.get());
     }
     return '';
   },

@@ -24,9 +24,7 @@ Template.Help_Panel_Widget.helpers({
 Template.Help_Panel_Widget.events({});
 
 Template.Help_Panel_Widget.onCreated(function helpPanelOnCreated() {
-  this.autorun(() => {
-    this.subscribe(HelpMessages.getPublicationName());
-  });
+  this.subscribe(HelpMessages.getPublicationName());
 });
 
 Template.Help_Panel_Widget.onRendered(function helpPanelOnRendered() {

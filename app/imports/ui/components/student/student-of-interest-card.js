@@ -70,39 +70,8 @@ function opportunitySemesters(opp) {
 }
 
 Template.Student_Of_Interest_Card.helpers({
-  itemName(item) {
-    return item.name;
-  },
-  itemShortDescription(item) {
-    let description = item.description;
-    if (description.length > 200) {
-      description = `${description.substring(0, 200)}`;
-    }
-    return description;
-  },
-  itemSemesters() {
-    let ret = [];
-    if (this.type === 'courses') {
-      // do nothing
-    } else {
-      ret = opportunitySemesters(this.item);
-    }
-    return ret;
-  },
-  itemSlug(item) {
-    return Slugs.findDoc(item.slugID).name;
-  },
-  userSlug(studentID) {
-    return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
-  },
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
-  },
-  opportunitiesRouteName() {
-    return RouteNames.studentExplorerOpportunitiesPageRouteName;
-  },
-  usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
   },
   hidden() {
     let ret = '';
@@ -124,8 +93,43 @@ Template.Student_Of_Interest_Card.helpers({
   interestedStudents(course) {
     return interestedStudentsHelper(course);
   },
+  itemName(item) {
+    return item.name;
+  },
+  itemSemesters() {
+    let ret = [];
+    if (this.type === 'courses') {
+      // do nothing
+    } else {
+      ret = opportunitySemesters(this.item);
+    }
+    return ret;
+  },
+  itemShortDescription(item) {
+    let description = item.description;
+    if (description.length > 200) {
+      description = `${description.substring(0, 200)}`;
+    }
+    return description;
+  },
+  itemSlug(item) {
+    return Slugs.findDoc(item.slugID).name;
+  },
+  nextYears(amount) {
+    const nextYears = [];
+    const currentSem = currentSemester();
+    let currentYear = currentSem.year;
+    for (let i = 0; i < amount; i += 1) {
+      nextYears.push(currentYear);
+      currentYear += 1;
+    }
+    return nextYears;
+  },
   numberStudents(course) {
     return interestedStudentsHelper(course).length;
+  },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
   studentPicture(studentID) {
     if (studentID === 'elipsis') {
@@ -137,19 +141,15 @@ Template.Student_Of_Interest_Card.helpers({
   typeCourse() {
     return (this.type === 'courses');
   },
+  userSlug(studentID) {
+    return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
     return semesters;
-  },
-  nextYears(amount) {
-    const nextYears = [];
-    const currentSem = currentSemester();
-    let currentYear = currentSem.year;
-    for (let i = 0; i < amount; i += 1) {
-      nextYears.push(currentYear);
-      currentYear += 1;
-    }
-    return nextYears;
   },
 });
 

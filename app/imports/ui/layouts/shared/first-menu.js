@@ -8,17 +8,6 @@ Template.First_Menu.onCreated(function onCreated() {
 });
 
 Template.First_Menu.helpers({
-  useCAS() {
-    return false;
-  },
-  fullName() {
-    const username = getRouteUserName();
-    if (username) {
-      const user = Users.getUserFromUsername(username);
-      return `${user.firstName} ${user.lastName}`;
-    }
-    return 'Unknown user';
-  },
   firstName() {
     const username = getRouteUserName();
     if (username) {
@@ -26,6 +15,12 @@ Template.First_Menu.helpers({
       return user.firstName;
     }
     return 'Unknown';
+  },
+  iceRouteName() {
+    return RouteNames.studentHomeIcePageRouteName;
+  },
+  landingRouteName() {
+    return RouteNames.landingPageRouteName;
   },
   lastName() {
     const username = getRouteUserName();
@@ -35,6 +30,9 @@ Template.First_Menu.helpers({
     }
     return 'Unknown';
   },
+  levelsRouteName() {
+    return RouteNames.studentHomeLevelsPageRouteName;
+  },
   pictureSrc() {
     const username = getRouteUserName();
     if (username) {
@@ -43,13 +41,7 @@ Template.First_Menu.helpers({
     }
     return '/images/default-profile-picture.png';
   },
-  levelsRouteName() {
-    return RouteNames.studentHomeLevelsPageRouteName;
-  },
-  iceRouteName() {
-    return RouteNames.studentHomeIcePageRouteName;
-  },
-  landingRouteName() {
-    return RouteNames.landingPageRouteName;
+  useCAS() {
+    return false;
   },
 });
