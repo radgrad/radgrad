@@ -147,12 +147,6 @@ function careerGoals(interest) {
 }
 
 Template.Student_Explorer_Interests_Page.helpers({
-  interest() {
-    const interestSlugName = FlowRouter.getParam('interest');
-    const slug = Slugs.find({ name: interestSlugName }).fetch();
-    const interest = Interests.find({ slugID: slug[0]._id }).fetch();
-    return interest[0];
-  },
   addedInterests() {
     const addedInterests = [];
     const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
@@ -163,6 +157,21 @@ Template.Student_Explorer_Interests_Page.helpers({
       }
     });
     return addedInterests;
+  },
+  descriptionPairs(interest) {
+    return [
+      { label: 'Description', value: interest.description },
+      { label: 'More Information', value: makeLink(interest.moreInformation) },
+      { label: 'Related Career Goals', value: careerGoals(interest) },
+      { label: 'Related Courses', value: courses(interest) },
+      { label: 'Related Opportunities', value: opportunities(interest) },
+    ];
+  },
+  interest() {
+    const interestSlugName = FlowRouter.getParam('interest');
+    const slug = Slugs.find({ name: interestSlugName }).fetch();
+    const interest = Interests.find({ slugID: slug[0]._id }).fetch();
+    return interest[0];
   },
   nonAddedInterests() {
     const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
@@ -175,23 +184,8 @@ Template.Student_Explorer_Interests_Page.helpers({
     });
     return nonAddedInterests;
   },
-  interestName(interest) {
-    return interest.name;
-  },
-  count() {
-    return Interests.count();
-  },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
-  },
-  descriptionPairs(interest) {
-    return [
-      { label: 'Description', value: interest.description },
-      { label: 'More Information', value: makeLink(interest.moreInformation) },
-      { label: 'Related Career Goals', value: careerGoals(interest) },
-      { label: 'Related Courses', value: courses(interest) },
-      { label: 'Related Opportunities', value: opportunities(interest) },
-    ];
   },
   socialPairs(interest) {
     return [
