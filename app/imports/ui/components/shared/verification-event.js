@@ -54,14 +54,20 @@ Template.Verification_Event.events({
       const processed = request.processed;
       VerificationRequests.updateStatus(requestID, status, processed);
 
-      const feedDefinition = {
-        user: Slugs.findDoc(studentDoc.slugID),
-        opportunity: Slugs.findDoc(opportunity.slugID),
-        semester: Slugs.findDoc(semester.slugID),
-        feedType: 'verified-opportunity',
-        timestamp: Date.now(),
-      };
-      Feed.define(feedDefinition);
+      const timestamp = new Date().getTime();
+      if (Feed.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID)) {
+        Feed.updateVerifiedOpportunity(studentDoc.username,
+            Feed.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID));
+      } else {
+        const feedDefinition = {
+          user: [studentDoc.username],
+          opportunity: opportunitySlug,
+          semester: semesterSlug,
+          feedType: 'verified-opportunity',
+          timestamp: Date.now(),
+        };
+        Feed.define(feedDefinition);
+      }
     } catch (e) {
       alert(`${student} is not a valid student. ${e}`); // eslint-disable-line no-undef, no-alert
     }
@@ -69,7 +75,7 @@ Template.Verification_Event.events({
 });
 
 Template.Verification_Event.onCreated(function eventVerificationOnCreated() {
-  // placeholder: typically you will put global subscriptions here if you remove the autopublish package.
+  this.subscribe(Feed.getPublicationName());
 });
 
 Template.Verification_Event.onRendered(function eventVerificationOnRendered() {

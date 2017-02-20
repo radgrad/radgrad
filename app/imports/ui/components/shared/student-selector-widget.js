@@ -144,7 +144,7 @@ Template.Student_Selector.events({
               const feedDefinition = {
                 user: [userName],
                 feedType: 'new-user',
-                timestamp: timestamp,
+                timestamp,
               };
               Feed.define(feedDefinition);
             }

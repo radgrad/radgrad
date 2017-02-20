@@ -33,6 +33,7 @@ Template.Add_User_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
+  this.subscribe(Feed.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
@@ -67,12 +68,17 @@ Template.Add_User_Widget.events({
         if (error) {
           console.log('Error during new user creation: ', error);
         }
-        const feedDefinition = {
-          user: newData.slug,
-          feedType: 'new-user',
-          timestamp: new Date().getTime(),
-        };
-        Feed.define(feedDefinition);
+        const timestamp = new Date().getTime();
+        if (Feed.checkPastDayFeed(timestamp, 'new-user')) {
+          Feed.updateNewUser(newData.slug, Feed.checkPastDayFeed(timestamp, 'new-user'));
+        } else {
+          const feedDefinition = {
+            user: newData.slug,
+            feedType: 'new-user',
+            timestamp,
+          };
+          Feed.define(feedDefinition);
+        }
         FormUtils.indicateSuccess(instance, event);
       });
     } else {

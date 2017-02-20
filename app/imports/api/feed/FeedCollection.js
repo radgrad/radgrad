@@ -20,6 +20,7 @@ function withinPastDay(feed, timestamp) {
   const feedTime = feed.timestamp;
   const currentFeedTime = timestamp;
   const timeDiff = dateDiffInDays(currentFeedTime, feedTime);
+  // console.log(currentFeedTime + "|" + feedTime);
   if (timeDiff === 0) {
     ret = true;
   }
@@ -105,8 +106,8 @@ class FeedCollection extends BaseCollection {
       }
     } else if (feedType === 'verified-opportunity') {
       if (user !== undefined) {
-        userIDs = _.map(user, function (u){
-          Users.getID(u);
+        userIDs = _.map(user, function (u) {
+          return Users.getUserFromUsername(u)._id;
         });
       } else {
         throw new Meteor.Error('User must be specified for feedType verified-opportunity.');
@@ -117,13 +118,13 @@ class FeedCollection extends BaseCollection {
         throw new Meteor.Error('Semester must be specified for feedType opportunity-verified.');
       }
       if (opportunity !== undefined) {
-        opportunityID = [Opportunities.getID(opportunity)];
+        opportunityID = Opportunities.getID(opportunity);
         if (userIDs.length > 1) {
           description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} others() have been verified for 
-          ${Opportunities.findDoc(opportunityID[0]).name} (${Semesters.toString(semesterID, false)}).`;
+          ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)}).`;
         } else {
           description = `${Users.getFullName(userIDs[0])} has been verified for 
-          ${Opportunities.findDoc(opportunityID[0]).name} (${Semesters.toString(semesterID, false)}).`;
+          ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)}).`;
         }
         picture = '/images/radgrad_logo.png';
       } else {
@@ -145,12 +146,18 @@ class FeedCollection extends BaseCollection {
    * Note that userID, opportunityID, and courseID are all optional.
    * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
    */
-  checkPastDayFeed(timestamp, feedType) {
+  checkPastDayFeed(timestamp, feedType, opportunity) {
     let ret = false;
     const existingFeed = _.find(this._collection.find().fetch(), function (feed) {
       if (withinPastDay(feed, timestamp)) {
         if (feed.feedType === feedType) {
-          return true;
+          if (feedType === 'verified-opportunity') {
+            if (opportunity === feed.opportunityID) {
+              return true;
+            }
+          } else {
+            return true;
+          }
         }
       }
       return false;
@@ -164,8 +171,7 @@ class FeedCollection extends BaseCollection {
   /**
    * Updates the existingFeedID with the new userID information
    * @param userID the new userID, existingFeedID the existing feed of the same type within the past 24 hours
-   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
-   * @throws {Meteor.Error} If userID is not a userID, or if existingFeedID is not a feedID.
+   * @throws {Meteor.Error} If username is not a username, or if existingFeedID is not a feedID.
    */
   updateNewUser(username, existingFeedID) {
     const user = Users.getUserFromUsername(username);
@@ -176,12 +182,33 @@ class FeedCollection extends BaseCollection {
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
     const description = `${Users.getFullName(userID)} and 
-      ${existingFeed.userIDs.length - 1} other(s) has joined RadGrad.`;
+      ${existingFeed.userIDs.length - 1} other(s) have joined RadGrad.`;
     let picture = Users.findDoc(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
     this._collection.update(existingFeedID, { $set: { userIDs, description, picture } });
+  }
+
+  /**
+   * Updates the existingFeedID with the new userID information
+   * @param userID the new userID, existingFeedID the existing feed of the same type within the past 24 hours
+   * @throws {Meteor.Error} If username is not a username, or if existingFeedID is not a feedID.
+   */
+  updateVerifiedOpportunity(username, existingFeedID) {
+    const user = Users.getUserFromUsername(username);
+    const userID = user._id;
+    Users.assertDefined(userID);
+    this.assertDefined(existingFeedID);
+    const existingFeed = this.findDoc(existingFeedID);
+    const userIDs = existingFeed.userIDs;
+    userIDs.push(userID);
+    console.log("heelo" + userIDs);
+    const description = `${Users.getFullName(userID)} and 
+      ${existingFeed.userIDs.length - 1} other(s) have been verified for 
+          ${Opportunities.findDoc(existingFeed.opportunityID).name} 
+          (${Semesters.toString(existingFeed.semesterID, false)}).`;
+    this._collection.update(existingFeedID, { $set: { userIDs, description } });
   }
 
   /**
