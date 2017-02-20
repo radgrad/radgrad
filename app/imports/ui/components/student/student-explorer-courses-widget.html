@@ -22,19 +22,11 @@
         <div class="ui divider" style="margin-top: 0;"></div>
 
         <div class="ui stackable two column grid">
-          <div class="column">
+          <div class="six wide column">
             {{#each descriptionPair in descriptionPairs}}
 
               {{#if isLabel descriptionPair.label 'Course Number'}}
                 <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
-                  {{else}}
-                    N/A <br>
-                {{/if}}
-              {{/if}}
-
-              {{#if isLabel descriptionPair.label 'Description'}}
-              <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
                   {{else}}
                     N/A <br>
@@ -52,7 +44,7 @@
             {{/each}}
           </div>
 
-          <div class="column">
+          <div class="ten wide column">
             {{#each descriptionPair in descriptionPairs}}
 
               {{#if isLabel descriptionPair.label 'Syllabus'}}
@@ -69,6 +61,28 @@
                   {{else}}
                     N/A <br>
                 {{/if}}
+              {{/if}}
+
+            {{/each}}
+          </div>
+        </div>
+
+        <div style="margin-top: 0" class="ui stackable grid">
+          <div class="column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Interest_List item=item size='mini'}}
+                </div>
               {{/if}}
 
             {{/each}}
@@ -91,13 +105,6 @@
         {{/if}}
       {{/each}}
 
-      {{#each descriptionPair in descriptionPairs}}
-        {{#if isLabel descriptionPair.label 'Interests'}}
-          <div class="ui right aligned secondary segment">
-            {{> Interest_List item=item size='mini'}}
-          </div>
-        {{/if}}
-      {{/each}}
     </div>
 
     <div class="ui stackable two column grid">
