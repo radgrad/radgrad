@@ -14,20 +14,14 @@ Template.Student_Feed_Widget.onCreated(function studentFeedWidgetOnCreated() {
 });
 
 Template.Student_Feed_Widget.helpers({
-  getDictionary() {
-    return Template.instance().state;
-  },
   feeds() {
     return Feed.find().fetch();
   },
   feedStudent(feed) {
-    return Users.getFullName(feed.studentID);
+    return Users.getFullName(feed.userID);
   },
   feedDescription(feed) {
-    const studentFullName = Users.getFullName(feed.studentID);
-    let studentAction = feed.description;
-    studentAction = studentAction.split(studentFullName)[1];
-    return studentAction;
+    return feed.description;
   },
   feedTimestamp(feed) {
     let ret = '';
@@ -52,8 +46,4 @@ Template.Student_Feed_Widget.helpers({
   userSlug(feed) {
     return Slugs.findDoc((Users.findDoc(feed.studentID)).slugID).name;
   },
-});
-
-Template.Student_Feed_Widget.events({
-  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });

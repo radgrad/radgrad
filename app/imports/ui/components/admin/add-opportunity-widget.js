@@ -67,7 +67,7 @@ Template.Add_Opportunity_Widget.events({
 
     const feedDefinition = {
       opportunity: newData.slug,
-      feedType: 'new',
+      feedType: 'new-opportunity',
       timestamp: Date.now(),
     };
     Feed.define(feedDefinition);
