@@ -137,12 +137,17 @@ Template.Student_Selector_Widget.events({
           if (error) {
             // console.log(error);
           } else {
-            const feedDefinition = {
-              student: userName,
-              feedType: 'new',
-              timestamp: new Date().getTime(),
-            };
-            Feed.define(feedDefinition);
+            const timestamp = new Date().getTime();
+            if (Feed.checkPastDayFeed(timestamp, 'new-user')) {
+              Feed.updateNewUser(userName, Feed.checkPastDayFeed(timestamp, 'new-user'));
+            } else {
+              const feedDefinition = {
+                user: [userName],
+                feedType: 'new-user',
+                timestamp,
+              };
+              Feed.define(feedDefinition);
+            }
             const user = Users.getUserFromUsername(userName);
             instance.studentID.set(user._id);
             instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
@@ -181,6 +186,7 @@ Template.Student_Selector_Widget.onCreated(function studentSelectorOnCreated() {
   this.state.set(displaySuccessMessage, false);
   this.state.set(displayErrorMessages, false);
   this.context = userDefineSchema.namedContext('Add_Create_Student');
+  this.subscribe(Feed.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
 
@@ -195,4 +201,3 @@ Template.Student_Selector_Widget.onRendered(function studentSelectorOnRendered()
 Template.Student_Selector_Widget.onDestroyed(function studentSelectorOnDestroyed() {
   // add your statement here
 });
-

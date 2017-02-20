@@ -1,5 +1,5 @@
 {
-  "timestamp": "2017-01-23T01:18:25.046Z",
+  "timestamp": "2017-02-15T21:02:53.657Z",
   "collections": [
     {
       "name": "AcademicYearInstanceCollection",
@@ -54,10 +54,6 @@
         },
         {
           "student": "christopher-nguyen",
-          "year": 2013
-        },
-        {
-          "student": "christopher-nguyen",
           "year": 2014
         },
         {
@@ -170,10 +166,6 @@
         },
         {
           "student": "kurtkn",
-          "year": 2013
-        },
-        {
-          "student": "kurtkn",
           "year": 2014
         },
         {
@@ -187,10 +179,6 @@
         {
           "student": "kurtkn",
           "year": 2017
-        },
-        {
-          "student": "markrc",
-          "year": 2013
         },
         {
           "student": "markrc",
@@ -239,10 +227,6 @@
         {
           "student": "pakchar",
           "year": 2017
-        },
-        {
-          "student": "slike",
-          "year": 2013
         },
         {
           "student": "slike",
@@ -355,10 +339,6 @@
         {
           "student": "creindle",
           "year": 2017
-        },
-        {
-          "student": "erikhuan",
-          "year": 2013
         },
         {
           "student": "erikhuan",
@@ -1480,7 +1460,6 @@
           "description": "Reflects special interests of faculty. Oriented toward juniors and seniors. Repeatable one time for BS/CS students.",
           "creditHrs": 3,
           "interests": [],
-          "syllabus": "",
           "prerequisites": [
             "ics311",
             "ics314"
@@ -1496,7 +1475,6 @@
           "interests": [
             "security"
           ],
-          "syllabus": "",
           "prerequisites": [
             "ics311",
             "ics314"
@@ -2611,7 +2589,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2019",
+          "semester": "Fall-2018",
           "course": "ics313",
           "note": "ICS 313",
           "verified": false,
@@ -2638,9 +2616,45 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2020",
+          "semester": "Spring-2019",
           "course": "ics422",
           "note": "ICS 422",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics414",
+          "note": "ICS 414",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics471",
+          "note": "ICS 471",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics475",
+          "note": "ICS 475",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics484",
+          "note": "ICS 484",
           "verified": false,
           "creditHrs": 3,
           "grade": "A",
@@ -2684,12 +2698,6 @@
           "name": "Course recommendations based on interests",
           "slug": "CourseRecommendationsBasedOnInterests",
           "description": "These courses are recommended based upon your interests.",
-          "feedbackType": "Recommendation"
-        },
-        {
-          "name": "Opportunity recommendations based on interests",
-          "slug": "OpportunityRecommendationsBasedOnInterests",
-          "description": "These opportunities are recommended based upon your interests.",
           "feedbackType": "Recommendation"
         },
         {
@@ -2739,20 +2747,12 @@
           "slug": "updateStarData",
           "description": "See your ICS advisor to upload STAR data",
           "feedbackType": "Recommendation"
-        },
-        {
-          "name": "Recommendation for next Level",
-          "slug": "recommendationForNextLevel",
-          "description": "What to do to achieve the next RadGrad level.",
-          "feedbackType": "Recommendation"
         }
       ]
     },
     {
       "name": "FeedbackInstanceCollection",
-      "contents": [
-
-      ]
+      "contents": []
     },
     {
       "name": "HelpMessageCollection",
@@ -2775,7 +2775,7 @@
         {
           "routeName": "Student_Home_AboutMe_Page",
           "title": "Learn about the about me page.",
-          "text": "This page is so great!"
+          "text": "Your About Me page gives you a quick look at your basic profile information (name, email, desired degree, professional website, career goals, interests, profile image). You can view your desired degree, career goals, and interests and navigate to the explorer to edit them. You can update your professional website URL and your profile image on this page. You cannot edit your name or your email address.\n\n(If you want to remove this help pane from this page, click on the \"X\" in the upper right corner to hide it. You can always bring it back from your profile page.)"
         },
         {
           "routeName": "Student_About_Ice",
@@ -2785,12 +2785,12 @@
         {
           "routeName": "Student_Home_Ice_Page",
           "title": "Learn about ICE (Innovation, Competency, Experience)",
-          "text": "Help goes here."
+          "text": "ICE points are a way for students to gauge the progression and balance of innovation, competency, and experience in their ICS degree program.\n\nThere are three graphs that display your ICE score: Innovation (green), Competency (blue), and Experience (purple). The total amount of possible points for each graph is 100. Ideally, you should reach 100 for each graph by the time your graduate. \n\nEach graph has a dark fill, and a light fill. The dark fill represents the actual amount of points you have, or \"earned points\". These are points gathered from completing and getting verified from various opportunities and courses. The light fill represents the amount of points you plan to earn, or \"planned points\". This is the amount of points that you will have after completing and getting verified from all opportunities and courses on your degree plan. This includes future events that have yet to occur. \n\nThe numbers inside of the graph are numerical representation of the same data as the fills, with the colors corresponding to its respective fill color. The top number (dark color) is the amount of earned points you have, and the bottom number (light color) is the amount of planned points you have.\n\nWhen only one number appears inside the graph, such as on the top right side of the menu bar, or in your degree planner, this number is the same as the top number (dark color) you see on this page, and thus corresponds only to your earned points. \n\n(If you want to remove this help pane from this page, click on the \"X\" in the upper right corner to hide it. You can always bring it back from your profile page.)"
         },
         {
           "routeName": "Student_Home_Levels_Page",
           "title": "Learn about RadGrad Levels",
-          "text": "Help on levels goes here."
+          "text": "RadGrad levels mark milestones in your computer science education experience. After completing certain courses, opportunities, and actions, you may visit your advisor to level up. Your level will change on RadGrad, and you will also be given a physical sticker as a token of your progress. \n\nThere are 6 levels. All computer science students begin at level 1, and the most successful students will be able to reach level 6 by the time they graduate. \n\nOn the levels page, you can view your current level, view level hints, and view other students who are in the same level as you. Viewing other students who are in the same level as you will allow you to see who is in a similar position within the degree program."
         },
         {
           "routeName": "Student_Ice",
@@ -3563,7 +3563,7 @@
         {
           "name": "AT&T Hackathon",
           "slug": "att-iot-hackathon",
-          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\nIf so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.",
+          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\n    If so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.",
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
@@ -3667,7 +3667,7 @@
         {
           "name": "Code for Hawaii",
           "slug": "code-for-hawaii",
-          "description": "Code for Hawaii is a Code for America Brigade. We are volunteers interested in open data, open knowledge, civic apps, data visualization, APIs and the application of technology to make our community better. We encourage civic engagement and collaboration with our local government. We hold weekly project nights (and a monthly all-hands meeting) to see how we can help make a difference in Hawaii. \n\nMain website: [http://codeforhawaii.org](http://codeforhawaii.org)\n\nOur projects range from events like National Day of Civic Hacking, to transit apps that help navigate Hawaii, submit FOIA requests, or adopt your local siren. \nIf you're passionate about civic technology, this is the meetup for you!",
+          "description": "Code for Hawaii is a Code for America Brigade. We are volunteers interested in open data, open knowledge, civic apps, data visualization, APIs and the application of technology to make our community better. We encourage civic engagement and collaboration with our local government. We hold weekly project nights (and a monthly all-hands meeting) to see how we can help make a difference in Hawaii. \n\nMain website: http://codeforhawaii.org\n\nOur projects range from events like National Day of Civic Hacking, to transit apps that help navigate Hawaii, submit FOIA requests, or adopt your local siren. \nIf you're passionate about civic technology, this is the meetup for you!",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -3746,30 +3746,6 @@
           "independentStudy": false
         },
         {
-          "name": "Introduction to Big Data",
-          "slug": "coursera-introduction-to-big-data",
-          "description": "Interested in increasing your knowledge of the Big Data landscape?  This Coursera online course is for those new to data science and interested in understanding why the Big Data Era has come to be.  It is for those who want to become conversant with the terminology and the core concepts behind big data problems, applications, and systems.  It is for those who want to start thinking about how Big Data might be useful in their business or career.  It provides an introduction to one of the most common frameworks, Hadoop, that has made big data analysis easier and more accessible -- increasing the potential for data to transform our world!",
-          "opportunityType": "online-learning",
-          "sponsor": "johnson",
-          "ice": {
-            "i": 0,
-            "c": 10,
-            "e": 0
-          },
-          "interests": [
-            "data-science",
-            "databases"
-          ],
-          "semesters": [
-            "Summer-2017",
-            "Summer-2018",
-            "Summer-2019",
-            "Summer-2020"
-          ],
-          "moreInformation": "https://www.coursera.org/specializations/big-data",
-          "independentStudy": false
-        },
-        {
           "name": "Graphic Design",
           "slug": "coursera-graphic-design",
           "description": "This Coursera online course is for those new to graphic design and interested in the process, historical context, and communication through image-making and typography. For those who want to have a starting point for further work in interface design, motion graphics, and editorial design, this course, will provide the core skill set and conceptual tools for “making and communicating” in the field of graphic design!",
@@ -3793,6 +3769,30 @@
             "Summer-2019"
           ],
           "moreInformation": "https://www.coursera.org/specializations/graphic-design",
+          "independentStudy": false
+        },
+        {
+          "name": "Introduction to Big Data",
+          "slug": "coursera-introduction-to-big-data",
+          "description": "Interested in increasing your knowledge of the Big Data landscape?  This Coursera online course is for those new to data science and interested in understanding why the Big Data Era has come to be.  It is for those who want to become conversant with the terminology and the core concepts behind big data problems, applications, and systems.  It is for those who want to start thinking about how Big Data might be useful in their business or career.  It provides an introduction to one of the most common frameworks, Hadoop, that has made big data analysis easier and more accessible -- increasing the potential for data to transform our world!",
+          "opportunityType": "online-learning",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 0,
+            "c": 10,
+            "e": 0
+          },
+          "interests": [
+            "data-science",
+            "databases"
+          ],
+          "semesters": [
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019",
+            "Summer-2020"
+          ],
+          "moreInformation": "https://www.coursera.org/specializations/big-data",
           "independentStudy": false
         },
         {
@@ -4445,6 +4445,32 @@
           "independentStudy": false
         },
         {
+          "name": "Learn Linux",
+          "slug": "udacity-learn-linux",
+          "description": "Learn Linux in 5 Days doesn't make any assumptions about your background or knowledge of Linux.\nYou need no prior knowledge to benefit from this course.\nYou will be guided step by step using a logical and systematic approach.\nAs new concepts, commands, or jargon are encountered they are explained in plain language, making it easy for anyone to understand.\nAs an added bonus for enrolling in the Learn Linux in 5 Days video training course, you'll receive a step-by-step checklist and video that teaches you how to install WordPress on an Ubuntu Linux system.\nYou'll learn how to install a web server, how to install a database server, how to create database users, and how to configure WordPress.",
+          "opportunityType": "online-learning",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 0,
+            "c": 10,
+            "e": 0
+          },
+          "interests": [
+            "linux",
+            "databases"
+          ],
+          "semesters": [
+            "Summer-2015",
+            "Summer-2016",
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019",
+            "Summer-2020"
+          ],
+          "moreInformation": "https://www.udemy.com/learn-linux-in-5-days/",
+          "independentStudy": false
+        },
+        {
           "name": "Learn Unity",
           "slug": "udacity-learn-unity",
           "description": "Learn how to create video games using Unity 3D, the free-to-use game development tool. We start super simple so you need no prior experience or Unity of coding! With our online tutorials, you'll be amazed what you can achieve.\n\nWhat am I going to get from this course?\nLearn C#, a powerful modern language.\nDevelop a positive attitude to problem solving.\nGain an excellent general knowledge of game creation.\nLearn how object oriented programming works in practice.\nTransfer your knowledge to .NET, other languages, and more.",
@@ -4469,32 +4495,6 @@
             "Summer-2020"
           ],
           "moreInformation": "https://www.udemy.com/unitycourse/",
-          "independentStudy": false
-        },
-        {
-          "name": "Learn Linux",
-          "slug": "udacity-learn-linux",
-          "description": "Learn Linux in 5 Days doesn't make any assumptions about your background or knowledge of Linux.\nYou need no prior knowledge to benefit from this course.\nYou will be guided step by step using a logical and systematic approach.\nAs new concepts, commands, or jargon are encountered they are explained in plain language, making it easy for anyone to understand.\nAs an added bonus for enrolling in the Learn Linux in 5 Days video training course, you'll receive a step-by-step checklist and video that teaches you how to install WordPress on an Ubuntu Linux system.\nYou'll learn how to install a web server, how to install a database server, how to create database users, and how to configure WordPress.",
-          "opportunityType": "online-learning",
-          "sponsor": "johnson",
-          "ice": {
-            "i": 0,
-            "c": 10,
-            "e": 0
-          },
-          "interests": [
-            "linux",
-            "databases"
-          ],
-          "semesters": [
-            "Summer-2015",
-            "Summer-2016",
-            "Summer-2017",
-            "Summer-2018",
-            "Summer-2019",
-            "Summer-2020"
-          ],
-          "moreInformation": "https://www.udemy.com/learn-linux-in-5-days/",
           "independentStudy": false
         },
         {
@@ -4899,55 +4899,7 @@
         },
         {
           "semester": "Summer-2017",
-          "opportunity": "hawaii-open-data",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2017",
-          "opportunity": "code-for-hawaii",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2018",
-          "opportunity": "itma",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Summer-2018",
-          "opportunity": "open-power-quality",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2018",
-          "opportunity": "att-iot-hackathon",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2019",
-          "opportunity": "booz-allen-ideas-festival",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Summer-2019",
-          "opportunity": "booz-allen-internship",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2019",
-          "opportunity": "acm-manoa-vr",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2020",
-          "opportunity": "hicapacity",
+          "opportunity": "data-analytics-for-solar-energy",
           "verified": false,
           "student": "charley"
         },
@@ -5041,94 +4993,6 @@
       "name": "ReviewCollection",
       "contents": [
         {
-          "slug": "review-course-ics111-abi",
-          "student": "abi",
-          "reviewType": "course",
-          "reviewee": "ics111",
-          "semester": "Fall-2014",
-          "rating": 5,
-          "comments": "Lecture can be boring. Tests can be tricky... so pay attention and read the questions and answers twice before answering them. Lab is were all the fun is. If you're not an ICS major or don't like programing, you probably shouldn't take the course.",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-course-ics314-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics314",
-          "semester": "Fall-2014",
-          "rating": 5,
-          "comments": "ICS 314 teaches valuable concepts if you want to be a Software Engineer. I thought the class was fun, and Professor Johnson is great.",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-course-ics111-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics111",
-          "semester": "Fall-2013",
-          "rating": 5,
-          "comments": "ICS 111 was fun, and I learned a lot. The projects weren't difficult nor were the assignments. Come to the lectures, do the readings, and take the time to understand the concepts, and you'll do fine.",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-course-ics211-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics211",
-          "semester": "Spring-2014",
-          "rating": 5,
-          "comments": "A step up from ICS 111, ICS 211 taught me a lot about data structures. Lectures were engaging, and the programming assignments were challenging. Most people will do well in this course if they put their time into learning the concepts and if they start the assignments early!",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-course-ics311-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics311",
-          "semester": "Fall-2014",
-          "rating": 4,
-          "comments": "I've heard a lot about how this course is the bottleneck for progressing through the ICS program. Compared to all the courses I've taken before, this has to be the most time consuming. It's not that the concepts are difficult to understand nor is the courseload that heavy, but I found myself having to put more time to review and understand everything. The class structure for this was inverted, so we watched video lectures in our own time and used class time to do actual problems. I thought it was a better use of class time. ",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-course-ics241-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics241",
-          "semester": "Spring-2014",
-          "rating": 3,
-          "comments": "I understand how Discrete Math relates to Information and Computer Science, but I still didn't enjoy this course-- the content, that is. Initially the homework problems were, to me, difficult. Fortunately, the professor tried very hard to teach the concepts well, and I received a lot of help from the TA and the professor during office hours.",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-course-ics321-alfred",
-          "student": "alfred",
-          "reviewType": "course",
-          "reviewee": "ics321",
-          "semester": "Spring-2015",
-          "rating": 5,
-          "comments": "ICS 321 was enjoyable. The things we learned were straightforward. We watched lectures online, did problems in class, and there were very few homework assignments. Much of my grade came from the final project. There I had the chance to show off my programming prowess by designing a database and applying what I learned. I hadn't created a website before, but I learned! I created a simple website with a backend MySQL database.",
-          "moderated": true,
-          "visible": true
-        },
-        {
-          "slug": "review-opportunity-hacc-alfred",
-          "student": "alfred",
-          "reviewType": "opportunity",
-          "reviewee": "hacc",
-          "semester": "Fall-2016",
-          "rating": 5,
-          "comments": "HACC was a great opportunity to display what I've learned as an ICS student and to have the opportunity to help address a problem in Hawai'i.",
-          "moderated": true,
-          "visible": true
-        },
-        {
           "slug": "review-course-ics111-aaronvil",
           "student": "aaronvil",
           "reviewType": "course",
@@ -5140,6 +5004,17 @@
           "visible": true
         },
         {
+          "slug": "review-course-ics111-abi",
+          "student": "abi",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2014",
+          "rating": 5,
+          "comments": "Lecture can be boring. Tests can be tricky... so pay attention and read the questions and answers twice before answering them. Lab is were all the fun is. If you're not an ICS major or don't like programing, you probably shouldn't take the course.",
+          "moderated": true,
+          "visible": true
+        },
+        {
           "slug": "review-course-ics111-ahlim",
           "student": "ahlim",
           "reviewType": "course",
@@ -5147,6 +5022,17 @@
           "semester": "Fall-2014",
           "rating": 4,
           "comments": "The graphics involved in ics111 made it easy to visualize difficult programming concepts, and helped me gain interest in coding. However, I felt that the class didn’t fully prepare me for the upcoming required ics courses that do not use graphics. I would inform future students that future ics courses may not be as interesting as ics111.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics111-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics111",
+          "semester": "Fall-2013",
+          "rating": 5,
+          "comments": "ICS 111 was fun, and I learned a lot. The projects weren't difficult nor were the assignments. Come to the lectures, do the readings, and take the time to understand the concepts, and you'll do fine.",
           "moderated": true,
           "visible": true
         },
@@ -5459,6 +5345,17 @@
           "visible": true
         },
         {
+          "slug": "review-course-ics211-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics211",
+          "semester": "Spring-2014",
+          "rating": 5,
+          "comments": "A step up from ICS 111, ICS 211 taught me a lot about data structures. Lectures were engaging, and the programming assignments were challenging. Most people will do well in this course if they put their time into learning the concepts and if they start the assignments early!",
+          "moderated": true,
+          "visible": true
+        },
+        {
           "slug": "review-course-ics211-christopher-nguyen",
           "student": "christopher-nguyen",
           "reviewType": "course",
@@ -5580,6 +5477,17 @@
           "visible": true
         },
         {
+          "slug": "review-course-ics241-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics241",
+          "semester": "Spring-2014",
+          "rating": 3,
+          "comments": "I understand how Discrete Math relates to Information and Computer Science, but I still didn't enjoy this course-- the content, that is. Initially the homework problems were, to me, difficult. Fortunately, the professor tried very hard to teach the concepts well, and I received a lot of help from the TA and the professor during office hours.",
+          "moderated": true,
+          "visible": true
+        },
+        {
           "slug": "review-course-ics241-erikhuan",
           "student": "erikhuan",
           "reviewType": "course",
@@ -5631,6 +5539,17 @@
           "semester": "Fall-2016",
           "rating": 3,
           "comments": "This is the second discrete math class. It is a lot like ICS 141, but it is a bit harder. A lot of the material is more abstract and the answers that are expected on homeworks and exams have a more strict format than those expected in ICS 141. Again the material can be pretty dry, so a good suggestion would be to try to sit at the front of the class. That way you are not tempted to play on your phone or laptop and will be less likely to be distracted by the people around you.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics311-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics311",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "I've heard a lot about how this course is the bottleneck for progressing through the ICS program. Compared to all the courses I've taken before, this has to be the most time consuming. It's not that the concepts are difficult to understand nor is the courseload that heavy, but I found myself having to put more time to review and understand everything. The class structure for this was inverted, so we watched video lectures in our own time and used class time to do actual problems. I thought it was a better use of class time.",
           "moderated": true,
           "visible": true
         },
@@ -5734,6 +5653,17 @@
           "visible": true
         },
         {
+          "slug": "review-course-ics314-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics314",
+          "semester": "Fall-2014",
+          "rating": 5,
+          "comments": "ICS 314 teaches valuable concepts if you want to be a Software Engineer. I thought the class was fun, and Professor Johnson is great.",
+          "moderated": true,
+          "visible": true
+        },
+        {
           "slug": "review-course-ics321-ahlim",
           "student": "ahlim",
           "reviewType": "course",
@@ -5741,6 +5671,17 @@
           "semester": "Spring-2016",
           "rating": 3,
           "comments": "Ics321 allows students to get a good grasp of what the back-end of a website looks like. Unfortunately, the class is so flexible on deadlines, that many of the students would wait till the end of the semester to finish the assignments. I would inform future students to stay up-to-date and complete the assignments on time.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-course-ics321-alfred",
+          "student": "alfred",
+          "reviewType": "course",
+          "reviewee": "ics321",
+          "semester": "Spring-2015",
+          "rating": 5,
+          "comments": "ICS 321 was enjoyable. The things we learned were straightforward. We watched lectures online, did problems in class, and there were very few homework assignments. Much of my grade came from the final project. There I had the chance to show off my programming prowess by designing a database and applying what I learned. I hadn't created a website before, but I learned! I created a simple website with a backend MySQL database.",
           "moderated": true,
           "visible": true
         },
@@ -5829,6 +5770,17 @@
           "semester": "Fall-2015",
           "rating": 4,
           "comments": "The ICS 331 Machine programming course teaches students how to read and use binary and hex-based coding. The assignments are very interesting because you get to mess around with a program that allows you to make and manipulate a virtual circuit. The downside is unless you plan on working with low level language code, the material you learn in this class may be irrelevant to what you will do in the future. That being said, I did enjoy the class and the assignments, and I advise that you should take the time to learn about binary and hex coding anyway.",
+          "moderated": true,
+          "visible": true
+        },
+        {
+          "slug": "review-opportunity-hacc-alfred",
+          "student": "alfred",
+          "reviewType": "opportunity",
+          "reviewee": "hacc",
+          "semester": "Fall-2016",
+          "rating": 5,
+          "comments": "HACC was a great opportunity to display what I've learned as an ICS student and to have the opportunity to help address a problem in Hawai'i.",
           "moderated": true,
           "visible": true
         }
@@ -5996,8 +5948,7 @@
           "interests": [
             "application-development",
             "javascript"
-          ],
-          "opportunity": "acmanoa-web-development"
+          ]
         },
         {
           "title": "Algorithm Visualization",
@@ -6031,8 +5982,7 @@
           "duration": "0:50",
           "interests": [
             "security"
-          ],
-          "opportunity": "greyhats"
+          ]
         },
         {
           "title": "Open Power Quality",
@@ -6043,8 +5993,7 @@
           "duration": "0:21",
           "interests": [
             "software-engineering"
-          ],
-          "opportunity": "open-power-quality"
+          ]
         },
         {
           "title": "RadGrad",
@@ -6082,8 +6031,7 @@
           "duration": "0:17",
           "interests": [
             "data-science"
-          ],
-          "opportunity": "data-analytics-for-solar-energy"
+          ]
         }
       ]
     },
@@ -6109,7 +6057,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Abigail",
@@ -6130,7 +6080,11 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 5
+          "level": 5,
+          "hiddenCourses": [
+            "ics312"
+          ],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Ah Lim",
@@ -6150,7 +6104,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Alfred",
@@ -6170,7 +6126,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 6
+          "level": 6,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Betty",
@@ -6192,7 +6150,9 @@
             "graduate-school"
           ],
           "desiredDegree": "bs-cs",
-          "level": 4
+          "level": 4,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Kim",
@@ -6212,7 +6172,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Robert",
@@ -6229,7 +6191,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Brian",
@@ -6249,7 +6213,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Charley",
@@ -6268,7 +6234,9 @@
             "data-scientist"
           ],
           "desiredDegree": "ba-ics",
-          "level": 2
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "David",
@@ -6288,7 +6256,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Christopher",
@@ -6308,7 +6278,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Cam",
@@ -6316,7 +6288,7 @@
           "slug": "cmoore",
           "email": "cmoore@hawaii.edu",
           "password": "foo",
-          "role": "FACULTY",
+          "role": "ADVISOR",
           "uhID": "1017-6869",
           "picture": "/images/mockup/cmoore.jpg",
           "website": null,
@@ -6328,7 +6300,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Christopher",
@@ -6349,7 +6323,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Christie",
@@ -6369,7 +6345,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Martha",
@@ -6389,7 +6367,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Depeng",
@@ -6410,7 +6390,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Daniel",
@@ -6430,7 +6412,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Dusko",
@@ -6450,7 +6434,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Ella",
@@ -6470,7 +6456,9 @@
             "web-developer"
           ],
           "desiredDegree": "ba-ics",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Erik",
@@ -6490,7 +6478,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Edo",
@@ -6511,7 +6501,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Jennifer",
@@ -6528,7 +6520,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Gerald",
@@ -6545,7 +6539,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Guylaine",
@@ -6565,7 +6561,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Hailing",
@@ -6584,7 +6582,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Henri",
@@ -6604,7 +6604,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Austen",
@@ -6621,7 +6623,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Jameyia",
@@ -6641,7 +6645,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Jan",
@@ -6661,7 +6667,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Philip",
@@ -6684,7 +6692,9 @@
             "web-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Joshua",
@@ -6704,7 +6714,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Jack",
@@ -6723,7 +6735,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Aaron",
@@ -6740,7 +6754,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Patrick",
@@ -6757,7 +6773,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Kelly",
@@ -6777,7 +6795,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Kirk",
@@ -6797,7 +6817,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Kurt",
@@ -6816,7 +6838,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Kyungim",
@@ -6836,7 +6860,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Anh",
@@ -6856,7 +6882,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "George",
@@ -6873,7 +6901,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Jason",
@@ -6893,7 +6923,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Daniel",
@@ -6910,7 +6942,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Hongbo",
@@ -6930,7 +6964,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Lipyeow",
@@ -6951,7 +6987,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Mark",
@@ -6971,7 +7009,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Yuka",
@@ -6988,7 +7028,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Nathan",
@@ -7008,7 +7050,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Nodari",
@@ -7028,7 +7072,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Charles",
@@ -7048,7 +7094,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Peter-Michael",
@@ -7069,7 +7117,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Admin",
@@ -7086,7 +7136,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Russell",
@@ -7106,7 +7158,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Scott",
@@ -7127,7 +7181,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Shaziney",
@@ -7147,7 +7203,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Connor",
@@ -7166,7 +7224,9 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Suzanne",
@@ -7186,7 +7246,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Kazuo",
@@ -7206,7 +7268,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Daniel",
@@ -7226,7 +7290,9 @@
             "software-developer"
           ],
           "desiredDegree": null,
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         },
         {
           "firstName": "Zachary",
@@ -7246,7 +7312,9 @@
             "software-developer"
           ],
           "desiredDegree": "ba-ics",
-          "level": 1
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
         }
       ]
     },

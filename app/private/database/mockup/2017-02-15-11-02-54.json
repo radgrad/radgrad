@@ -54,10 +54,6 @@
         },
         {
           "student": "christopher-nguyen",
-          "year": 2013
-        },
-        {
-          "student": "christopher-nguyen",
           "year": 2014
         },
         {
@@ -170,10 +166,6 @@
         },
         {
           "student": "kurtkn",
-          "year": 2013
-        },
-        {
-          "student": "kurtkn",
           "year": 2014
         },
         {
@@ -187,10 +179,6 @@
         {
           "student": "kurtkn",
           "year": 2017
-        },
-        {
-          "student": "markrc",
-          "year": 2013
         },
         {
           "student": "markrc",
@@ -239,10 +227,6 @@
         {
           "student": "pakchar",
           "year": 2017
-        },
-        {
-          "student": "slike",
-          "year": 2013
         },
         {
           "student": "slike",
@@ -355,10 +339,6 @@
         {
           "student": "creindle",
           "year": 2017
-        },
-        {
-          "student": "erikhuan",
-          "year": 2013
         },
         {
           "student": "erikhuan",
@@ -2611,7 +2591,7 @@
           "student": "charley"
         },
         {
-          "semester": "Fall-2019",
+          "semester": "Fall-2018",
           "course": "ics313",
           "note": "ICS 313",
           "verified": false,
@@ -2638,9 +2618,45 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2020",
+          "semester": "Spring-2019",
           "course": "ics422",
           "note": "ICS 422",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics414",
+          "note": "ICS 414",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics471",
+          "note": "ICS 471",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics475",
+          "note": "ICS 475",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics484",
+          "note": "ICS 484",
           "verified": false,
           "creditHrs": 3,
           "grade": "A",
@@ -2684,12 +2700,6 @@
           "name": "Course recommendations based on interests",
           "slug": "CourseRecommendationsBasedOnInterests",
           "description": "These courses are recommended based upon your interests.",
-          "feedbackType": "Recommendation"
-        },
-        {
-          "name": "Opportunity recommendations based on interests",
-          "slug": "OpportunityRecommendationsBasedOnInterests",
-          "description": "These opportunities are recommended based upon your interests.",
           "feedbackType": "Recommendation"
         },
         {
@@ -2739,12 +2749,6 @@
           "slug": "updateStarData",
           "description": "See your ICS advisor to upload STAR data",
           "feedbackType": "Recommendation"
-        },
-        {
-          "name": "Recommendation for next Level",
-          "slug": "recommendationForNextLevel",
-          "description": "What to do to achieve the next RadGrad level.",
-          "feedbackType": "Recommendation"
         }
       ]
     },
@@ -2775,7 +2779,7 @@
         {
           "routeName": "Student_Home_AboutMe_Page",
           "title": "Learn about the about me page.",
-          "text": "This page is so great!"
+          "text": "Your About Me page gives you a quick look at your basic profile information (name, email, desired degree, professional website, career goals, interests, profile image). You can view your desired degree, career goals, and interests and navigate to the explorer to edit them. You can update your professional website URL and your profile image on this page. You cannot edit your name or your email address.\n\n(If you want to remove this help pane from this page, click on the \"X\" in the upper right corner to hide it. You can always bring it back from your profile page.)"
         },
         {
           "routeName": "Student_About_Ice",
@@ -2785,12 +2789,12 @@
         {
           "routeName": "Student_Home_Ice_Page",
           "title": "Learn about ICE (Innovation, Competency, Experience)",
-          "text": "Help goes here."
+          "text": "ICE points are a way for students to gauge the progression and balance of innovation, competency, and experience in their ICS degree program.\n\nThere are three graphs that display your ICE score: Innovation (green), Competency (blue), and Experience (purple). The total amount of possible points for each graph is 100. Ideally, you should reach 100 for each graph by the time your graduate. \n\nEach graph has a dark fill, and a light fill. The dark fill represents the actual amount of points you have, or \"earned points\". These are points gathered from completing and getting verified from various opportunities and courses. The light fill represents the amount of points you plan to earn, or \"planned points\". This is the amount of points that you will have after completing and getting verified from all opportunities and courses on your degree plan. This includes future events that have yet to occur. \n\nThe numbers inside of the graph are numerical representation of the same data as the fills, with the colors corresponding to its respective fill color. The top number (dark color) is the amount of earned points you have, and the bottom number (light color) is the amount of planned points you have.\n\nWhen only one number appears inside the graph, such as on the top right side of the menu bar, or in your degree planner, this number is the same as the top number (dark color) you see on this page, and thus corresponds only to your earned points. \n\n(If you want to remove this help pane from this page, click on the \"X\" in the upper right corner to hide it. You can always bring it back from your profile page.)"
         },
         {
           "routeName": "Student_Home_Levels_Page",
           "title": "Learn about RadGrad Levels",
-          "text": "Help on levels goes here."
+          "text": "RadGrad levels mark milestones in your computer science education experience. After completing certain courses, opportunities, and actions, you may visit your advisor to level up. Your level will change on RadGrad, and you will also be given a physical sticker as a token of your progress. \n\nThere are 6 levels. All computer science students begin at level 1, and the most successful students will be able to reach level 6 by the time they graduate. \n\nOn the levels page, you can view your current level, view level hints, and view other students who are in the same level as you. Viewing other students who are in the same level as you will allow you to see who is in a similar position within the degree program."
         },
         {
           "routeName": "Student_Ice",
@@ -3563,7 +3567,7 @@
         {
           "name": "AT&T Hackathon",
           "slug": "att-iot-hackathon",
-          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\nIf so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.",
+          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\n    If so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.",
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
@@ -3667,7 +3671,7 @@
         {
           "name": "Code for Hawaii",
           "slug": "code-for-hawaii",
-          "description": "Code for Hawaii is a Code for America Brigade. We are volunteers interested in open data, open knowledge, civic apps, data visualization, APIs and the application of technology to make our community better. We encourage civic engagement and collaboration with our local government. We hold weekly project nights (and a monthly all-hands meeting) to see how we can help make a difference in Hawaii. \n\nMain website: [http://codeforhawaii.org](http://codeforhawaii.org)\n\nOur projects range from events like National Day of Civic Hacking, to transit apps that help navigate Hawaii, submit FOIA requests, or adopt your local siren. \nIf you're passionate about civic technology, this is the meetup for you!",
+          "description": "Code for Hawaii is a Code for America Brigade. We are volunteers interested in open data, open knowledge, civic apps, data visualization, APIs and the application of technology to make our community better. We encourage civic engagement and collaboration with our local government. We hold weekly project nights (and a monthly all-hands meeting) to see how we can help make a difference in Hawaii. \n\nMain website: http://codeforhawaii.org\n\nOur projects range from events like National Day of Civic Hacking, to transit apps that help navigate Hawaii, submit FOIA requests, or adopt your local siren. \nIf you're passionate about civic technology, this is the meetup for you!",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4899,55 +4903,7 @@
         },
         {
           "semester": "Summer-2017",
-          "opportunity": "hawaii-open-data",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2017",
-          "opportunity": "code-for-hawaii",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2018",
-          "opportunity": "itma",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Summer-2018",
-          "opportunity": "open-power-quality",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2018",
-          "opportunity": "att-iot-hackathon",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2019",
-          "opportunity": "booz-allen-ideas-festival",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Summer-2019",
-          "opportunity": "booz-allen-internship",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Fall-2019",
-          "opportunity": "acm-manoa-vr",
-          "verified": false,
-          "student": "charley"
-        },
-        {
-          "semester": "Spring-2020",
-          "opportunity": "hicapacity",
+          "opportunity": "data-analytics-for-solar-energy",
           "verified": false,
           "student": "charley"
         },
@@ -6316,7 +6272,7 @@
           "slug": "cmoore",
           "email": "cmoore@hawaii.edu",
           "password": "foo",
-          "role": "FACULTY",
+          "role": "ADVISOR",
           "uhID": "1017-6869",
           "picture": "/images/mockup/cmoore.jpg",
           "website": null,
