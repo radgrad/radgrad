@@ -8,7 +8,7 @@
     </div>
     <div class="content">
       {{#each descriptionPair in descriptionPairs}}
-        <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+        <p><b>{{descriptionPair.label}}:</b> {{{markdownify descriptionPair.value}}}</p>
       {{/each}}
       <p>
         <button value="{{id}}" class="ui green basic mini button jsUpdate">Update</button>

@@ -17,14 +17,7 @@
               </div>
             </div>
             <div class="content">
-                <span class="left floated">
-                  {{#each interest in matchingInterests teaser}}
-                    <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
-                  {{/each}}
-                  {{#each interest in otherInterests teaser}}
-                    <a class="ui mini grey label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
-                  {{/each}}
-                </span>
+              {{> Interest_List item=teaser size='mini'}}
             </div>
             {{#if teaser.opportunityID}}
               <a class="ui bottom attached button" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug teaser)}}">

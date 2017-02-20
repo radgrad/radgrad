@@ -14,7 +14,7 @@ Template.Retrieve_User_Widget.helpers({
     return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
   },
   label(user) {
-    return `${user.lastName}, ${user.firstName} (${user.username})`;
+    return `${user.lastName}, ${user.firstName}`;
   },
   studentRole() {
     return ROLE.STUDENT;

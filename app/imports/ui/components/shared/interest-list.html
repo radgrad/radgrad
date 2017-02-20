@@ -1,0 +1,10 @@
+<template name="Interest_List">
+      <span class="left floated">
+        {{#each interest in matchingInterests item}}
+          <a class="ui {{size}} label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
+        {{/each}}
+        {{#each interest in otherInterests item}}
+          <a class="ui {{size}} grey label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
+        {{/each}}
+      </span>
+</template>
