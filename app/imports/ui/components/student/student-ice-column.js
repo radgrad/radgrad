@@ -106,6 +106,17 @@ function matchingOpportunities() {
 }
 
 Template.Student_Ice_Column.helpers({
+  competencyPoints(ice) {
+    return ice.c;
+  },
+  courseName(c) {
+    const course = Courses.findDoc(c.courseID);
+    return course.shortName;
+  },
+  courseNumber(c) {
+    const course = Courses.findDoc(c.courseID);
+    return course.number;
+  },
   earnedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -116,34 +127,14 @@ Template.Student_Ice_Column.helpers({
     }
     return null;
   },
-  projectedICE() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();
-      const oppInstances = OpportunityInstances.find({ studentID: user._id }).fetch();
-      const earnedInstances = courseInstances.concat(oppInstances);
-      const ice = getPlanningICE(earnedInstances);
-      if (ice.i > 100) {
-        ice.i = 100;
-      }
-      if (ice.c > 100) {
-        ice.c = 100;
-      }
-      if (ice.e > 100) {
-        ice.e = 100;
-      }
-      return ice;
-    }
-    return null;
+  eventIce(event) {
+    return event.ice;
   },
-  remainingICE(earned, projected) {
-    return projected - earned;
-  },
-  innovationPoints(ice) {
-    return ice.i;
-  },
-  competencyPoints(ice) {
-    return ice.c;
+  eventSem(event) {
+    const sem = Semesters.findDoc(event.semesterID);
+    const oppTerm = sem.term;
+    const oppYear = sem.year;
+    return `${oppTerm} ${oppYear}`;
   },
   experiencePoints(ice) {
     return ice.e;
@@ -180,7 +171,45 @@ Template.Student_Ice_Column.helpers({
     }
     return null;
   },
-
+  innovationPoints(ice) {
+    return ice.i;
+  },
+  opportunityName(opp) {
+    const opportunity = Opportunities.findDoc(opp.opportunityID);
+    return opportunity.name;
+  },
+  opportunitySemesters(opp) {
+    const semesters = opp.semesterIDs;
+    let semesterNames = '';
+    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSemester = Semesters.findDoc(currentSemesterID);
+    _.map(semesters, (sem) => {
+      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
+        semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
+      }
+    });
+    return semesterNames.slice(0, -2); // removes unnecessary comma and space
+  },
+  projectedICE() {
+    if (getUserIdFromRoute()) {
+      const user = Users.findDoc(getUserIdFromRoute());
+      const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();
+      const oppInstances = OpportunityInstances.find({ studentID: user._id }).fetch();
+      const earnedInstances = courseInstances.concat(oppInstances);
+      const ice = getPlanningICE(earnedInstances);
+      if (ice.i > 100) {
+        ice.i = 100;
+      }
+      if (ice.c > 100) {
+        ice.c = 100;
+      }
+      if (ice.e > 100) {
+        ice.e = 100;
+      }
+      return ice;
+    }
+    return null;
+  },
   recommendedEvents(iceType, type, projected) {
     if (getUserIdFromRoute()) {
       let allInstances = [];
@@ -221,38 +250,8 @@ Template.Student_Ice_Column.helpers({
     }
     return null;
   },
-  opportunitySemesters(opp) {
-    const semesters = opp.semesterIDs;
-    let semesterNames = '';
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSemester = Semesters.findDoc(currentSemesterID);
-    _.map(semesters, (sem) => {
-      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
-        semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
-      }
-    });
-    return semesterNames.slice(0, -2); // removes unnecessary comma and space
-  },
-  courseName(c) {
-    const course = Courses.findDoc(c.courseID);
-    return course.shortName;
-  },
-  courseNumber(c) {
-    const course = Courses.findDoc(c.courseID);
-    return course.number;
-  },
-  opportunityName(opp) {
-    const opportunity = Opportunities.findDoc(opp.opportunityID);
-    return opportunity.name;
-  },
-  eventSem(event) {
-    const sem = Semesters.findDoc(event.semesterID);
-    const oppTerm = sem.term;
-    const oppYear = sem.year;
-    return `${oppTerm} ${oppYear}`;
-  },
-  eventIce(event) {
-    return event.ice;
+  remainingICE(earned, projected) {
+    return projected - earned;
   },
 });
 

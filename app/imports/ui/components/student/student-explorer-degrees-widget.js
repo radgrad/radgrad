@@ -7,14 +7,11 @@ import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Explorer_Degrees_Widget.helpers({
-  isLabel(label, value) {
-    return label === value;
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
   },
   toUpper(string) {
     return string.toUpperCase();
-  },
-  fullName(user) {
-    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
   },
   userPicture(user) {
     if (Users.findDoc(user).picture) {
@@ -22,10 +19,8 @@ Template.Student_Explorer_Degrees_Widget.helpers({
     }
     return '/images/default-profile-picture.png';
   },
-  degreeName(degreeSlugName) {
-    const slug = Slugs.find({ name: degreeSlugName }).fetch();
-    const degree = DesiredDegrees.find({ slugID: slug[0]._id }).fetch();
-    return degree[0].name;
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
   userStatus(degree) {
     let ret = true;
@@ -34,9 +29,6 @@ Template.Student_Explorer_Degrees_Widget.helpers({
       ret = false;
     }
     return ret;
-  },
-  usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
   },
   userUsername(user) {
     return Users.findDoc(user).username;

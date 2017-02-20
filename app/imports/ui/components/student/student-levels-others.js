@@ -6,41 +6,6 @@ import { ROLE } from '../../../api/role/Role.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_Levels_Others.helpers({
-  students(userLevel) {
-    if (getUserIdFromRoute()) {
-      const students = [];
-      const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
-      _.map(users, (user) => {
-        if (user.level === userLevel) {
-          if (user._id !== getUserIdFromRoute()) {
-            students.push(user);
-          }
-        }
-      });
-      return students;
-    }
-    return '';
-  },
-
-  pastLevelsClass(level) {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      if (level < user.level) {
-        return '"ui bordered image"';
-      }
-      return '"ui image"';
-    }
-    return '';
-  },
-  studentLevelImageName() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      if (user.level) {
-        return `level${user.level}`;
-      }
-    }
-    return 'level1';
-  },
   studentLevelName() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -59,30 +24,23 @@ Template.Student_Levels_Others.helpers({
     }
     return 1;
   },
-  studentLevelColor() {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      switch (user.level) {
-        case 1:
-          return 'white';
-        case 2:
-          return 'yellow';
-        case 3:
-          return 'blue';
-        case 4:
-          return 'red';
-        case 5:
-          return 'brown';
-        case 6:
-          return 'black';
-        default:
-          return 'white';
-      }
-    }
-    return 'white';
-  },
   studentPicture(student) {
     return student.picture;
+  },
+  students(userLevel) {
+    if (getUserIdFromRoute()) {
+      const students = [];
+      const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
+      _.map(users, (user) => {
+        if (user.level === userLevel) {
+          if (user._id !== getUserIdFromRoute()) {
+            students.push(user);
+          }
+        }
+      });
+      return students;
+    }
+    return '';
   },
 });
 

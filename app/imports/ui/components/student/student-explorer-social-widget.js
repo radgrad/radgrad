@@ -24,12 +24,6 @@ function numUsers(course) {
 }
 
 Template.Student_Explorer_Social_Widget.helpers({
-  userPicture(user) {
-    if (Users.findDoc(user).picture) {
-      return Users.findDoc(user).picture;
-    }
-    return '/images/default-profile-picture.png';
-  },
   fullName(user) {
     return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
   },
@@ -39,6 +33,12 @@ Template.Student_Explorer_Social_Widget.helpers({
       { label: 'students', amount: numUsers(course),
         value: interestedUsers(course) },
     ];
+  },
+  userPicture(user) {
+    if (Users.findDoc(user).picture) {
+      return Users.findDoc(user).picture;
+    }
+    return '/images/default-profile-picture.png';
   },
 });
 

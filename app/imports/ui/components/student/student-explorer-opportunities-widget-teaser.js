@@ -20,8 +20,4 @@ Template.Student_Explorer_Opportunities_Widget_Teaser.helpers({
     const oppTeaser = Teasers.find({ opportunityID }).fetch();
     return oppTeaser[0].url;
   },
-  teaserUrl2(teaser) {
-    console.log(teaser.title);
-    return teaser.url;
-  },
 });

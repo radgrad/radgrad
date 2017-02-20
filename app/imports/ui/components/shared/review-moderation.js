@@ -4,7 +4,6 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { moment } from 'meteor/momentjs:moment';
 
 
 Template.Review_Moderation.helpers({
