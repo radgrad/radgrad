@@ -56,11 +56,36 @@ class FeedCollection extends BaseCollection {
   /**
    * Defines a new Feed.
    * @example
+   * Feed.define({ user: ['abigailkealoha'],
+   *               feedType: 'new-user'
+   *               timestamp: '12345465465', });
+   *
    * Feed.define({ user: 'abigailkealoha',
-   *               opportunity: 'att-hackathon
+   *               course: 'ics-100'
+   *               feedType: 'new-course'
+   *               timestamp: '12345465465', });
+   *
+   * Feed.define({ user: 'abigailkealoha',
+   *               opportunity: 'att-hackathon'
+   *               feedType: 'new-opportunity'
+   *               timestamp: '12345465465', });
+   *
+   * Feed.define({ user: ['abigailkealoha'],
+   *               opportunity: 'att-hackathon'
+   *               semester: 'Spring-2013'
    *               feedType: 'verified-opportunity'
-   *               timestamp: '12345465465',
-   * @param { Object } description Object with keys user, opportunity, course, feedType, and timestamp.
+   *               timestamp: '12345465465', });
+   *
+   * There are currently six feedTypes: new-user, new-course,
+   * new-opportunity, verified-opportunity, new-course-review, and new-opportunity-review.
+   * All feeds require keys feedType and timestamp.
+   * FeedType new-user requires keys user, feedType, timestamp.
+   * FeedType new-course requires keys user, course, feedType, timestamp.
+   * FeedType new-opportunity requires keys user, opportunity, feedType, timestamp.
+   * FeedType verified-opportunity requires keys user, opportunity, semester, feedType, and timestamp.
+   * FeedType new-course-review requires keys user, course, feedType, and timestamp.
+   * FeedType new-opportunity-review requires keys user, opportunity, feedType, and timestamp.
+   * @param { Object } description Object with keys user, opportunity, course, semester, feedType, and timestamp.
    * @returns The newly created docID.
    */
   define({ user, opportunity, course, semester, feedType, timestamp }) {
@@ -130,6 +155,43 @@ class FeedCollection extends BaseCollection {
       } else {
         throw new Meteor.Error('Opportunity must be specified for feedType opportunity-verified.');
       }
+    } else if (feedType === 'new-course-review') {
+      if (user !== undefined) {
+        userIDs = _.map(user, function (u) {
+          return Users.getUserFromUsername(u)._id;
+        });
+      } else {
+        throw new Meteor.Error('User must be specified for feedType new-course-review.');
+      }
+      if (course !== undefined) {
+        courseID = Courses.getID(course);
+      } else {
+        throw new Meteor.Error('Course must be specified for feedType new-course-review.');
+      }
+      description = `${Users.getFullName(userIDs[0])} has added a course review for ${Courses.findDoc(courseID).name}.`;
+      picture = Users.findDoc(userIDs[0]).picture;
+      if (!picture) {
+        picture = '/images/people/default-profile-picture.png';
+      }
+    } else if (feedType === 'new-opportunity-review') {
+      if (user !== undefined) {
+        userIDs = _.map(user, function (u) {
+          return Users.getUserFromUsername(u)._id;
+        });
+      } else {
+        throw new Meteor.Error('User must be specified for feedType new-opportunity-review.');
+      }
+      if (opportunity !== undefined) {
+        opportunityID = Opportunities.getID(opportunity);
+      } else {
+        throw new Meteor.Error('Opportunity must be specified for feedType new-opportunity-review.');
+      }
+      description = `${Users.getFullName(userIDs[0])} has added an opportunity review for 
+      ${Opportunities.findDoc(opportunityID).name}.`;
+      picture = Users.findDoc(userIDs[0]).picture;
+      if (!picture) {
+        picture = '/images/people/default-profile-picture.png';
+      }
     } else {
       throw new Meteor.Error(`FeedType ${feedType} is not a valid feedType.`);
     }
@@ -140,11 +202,12 @@ class FeedCollection extends BaseCollection {
   }
 
   /**
-   * Returns an array of strings, each one representing an integrity problem with this collection.
-   * Returns an empty array if no problems were found.
-   * Checks slugID, userID, opportunityID, and courseID.
-   * Note that userID, opportunityID, and courseID are all optional.
-   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   * Returns a feedID with the same feedType (and opportunity, if feedType === 'verified-opportunity')
+   * if it exists within the past 24 hours.
+   * Returns false if no such feedID is found.
+   * Opportunity is required only if feedType === 'verified-opportunity'
+   * @returns {Object} The feedID if found.
+   * @returns {boolean} False if feedID is not found.
    */
   checkPastDayFeed(timestamp, feedType, opportunity) {
     let ret = false;

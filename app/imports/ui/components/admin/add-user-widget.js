@@ -73,7 +73,7 @@ Template.Add_User_Widget.events({
           Feed.updateNewUser(newData.slug, Feed.checkPastDayFeed(timestamp, 'new-user'));
         } else {
           const feedDefinition = {
-            user: newData.slug,
+            user: [newData.slug],
             feedType: 'new-user',
             timestamp,
           };

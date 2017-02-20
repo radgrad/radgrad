@@ -1,28 +1,31 @@
 <template name="Student_Feed_Widget">
   {{#if Template.subscriptionsReady}}
-<div class="ui padded segment container">
-  <div class="ui dividing header"><h4>RADGRAD COMMUNITY ACTIVITY</h4></div>
+  <div class="ui padded segment container">
+    <div class="ui dividing header"><h4>RADGRAD COMMUNITY ACTIVITY</h4></div>
 
-  <div style="max-height: 488px; overflow:scroll; margin-top: 10px;" class="ui feed">
-    {{#each feed in feeds}}
-    <div class="event">
-      <div class="label">
-        <img src={{feedPicture feed}}>
-      </div>
-      <div class="content">
-        <div class="summary">
-          <a>{{feedDescription feed}}</a>
-          <div class="date">
-            {{feedTimestamp feed}}
+    {{#if feeds}}
+      <div style="max-height: 488px; overflow:scroll; margin-top: 10px;" class="ui feed">
+        {{#each feed in feeds}}
+          <div class="event">
+            <div class="label">
+              <img src={{feedPicture feed}}>
+            </div>
+            <div class="content">
+              <div class="summary">
+                <a>{{feedDescription feed}}</a>
+                <div class="date">
+                  {{feedTimestamp feed}}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+          <div class="ui divider"></div>
+        {{/each}}
       </div>
-    </div>
-    <div class="ui divider"></div>
-    {{/each}}
+    {{else}}
+      <p>No recent feed items</p>
+    {{/if}}
   </div>
-
-</div>
 
   {{else}}
   {{> Loading}}
