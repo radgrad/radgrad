@@ -16,7 +16,7 @@
           <div class="column">
             {{#each descriptionPair in descriptionPairs}}
               {{#if descriptionPair.value }}
-                <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
+                <p><b>{{descriptionPair.label}}:</b> {{{markdownify descriptionPair.value}}}</p>
               {{else}}
                 <p><b>{{descriptionPair.label}}:</b> N/A</p>
               {{/if}}

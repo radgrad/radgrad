@@ -43,7 +43,7 @@ Template.Student_Explorer_Degrees_Widget.events({
     try {
       Users.setDesiredDegree(student._id, id);
     } catch (e) {
-      // don't do anything.
+      // don't do anything. // TODO: do something.
     }
   },
   'click .deleteItem': function clickRemoveItem(event) {
