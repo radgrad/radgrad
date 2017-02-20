@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { Feed } from './FeedCollection';
+import { Users } from '/imports/api/user/UserCollection';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -16,7 +17,7 @@ if (Meteor.isServer) {
 
     before(function setup() {
       removeAllEntities();
-      user = [makeSampleUser()];
+      user = [Users.findDoc(makeSampleUser()).username];
       feedType = 'new-user';
       timestamp = Date.now();
     });

@@ -120,7 +120,6 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     return Users.findDoc(user).username;
   },
   updatedTeaser(teaser) {
-    console.log("calling from widget template");
     return teaser;
   },
 });

@@ -99,6 +99,7 @@ class FeedCollection extends BaseCollection {
     if (feedType === 'new-user') {
       if (user !== undefined) {
         userIDs = _.map(user, function (u) {
+          console.log("hello" + u);
           return Users.getUserFromUsername(u)._id;
         });
         if (userIDs.length > 1) {
@@ -266,7 +267,6 @@ class FeedCollection extends BaseCollection {
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
-    console.log("heelo" + userIDs);
     const description = `${Users.getFullName(userID)} and 
       ${existingFeed.userIDs.length - 1} other(s) have been verified for 
           ${Opportunities.findDoc(existingFeed.opportunityID).name} 

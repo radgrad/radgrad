@@ -52,7 +52,6 @@ function semesters(opportunity) {
 
 function teaser(opp) {
   const oppTeaser = Teasers.find({ opportunityID: opp._id }).fetch();
-  console.log("calling from page level");
   return oppTeaser[0];
 }
 
