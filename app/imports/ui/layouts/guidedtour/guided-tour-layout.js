@@ -1,6 +1,10 @@
 import { Template } from 'meteor/templating';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Guided_Tour_Layout.helpers({
+  landingPageRouteName() {
+    return RouteNames.landingPageRouteName;
+  },
 });
 
 Template.Guided_Tour_Layout.events({
@@ -16,6 +20,7 @@ Template.Guided_Tour_Layout.onRendered(function guidedTourLayoutOnRendered() {
   this.$('#carousel').slick({
     dots: true,
     arrows: true,
+    infinite: false,
   });
 });
 

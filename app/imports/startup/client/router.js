@@ -230,24 +230,23 @@ FlowRouter.route('/', {
   },
 });
 
-export const guidedTourPageRouteName = 'Guided_Tour_Page';
-FlowRouter.route('/guidedtour', {
-  name: guidedTourPageRouteName,
+/*                        GUIDED TOUR ROUTE                       */
+
+export const studentGuidedTourPageRouteName = 'Student_Guided_Tour_Page';
+FlowRouter.route('/guidedtour/student', {
+  name: studentGuidedTourPageRouteName,
   action() {
-    BlazeLayout.render('Guided_Tour_Layout');
+    BlazeLayout.render('Guided_Tour_Layout', { main: studentGuidedTourPageRouteName });
   },
 });
 
-/*
-export const studentHomeLevelsPageRouteName = 'Student_Home_Levels_Page';
-studentRoutes.route('/home/levels', {
-  name: studentHomeLevelsPageRouteName,
+export const advisorGuidedTourPageRouteName = 'Advisor_Guided_Tour_Page';
+FlowRouter.route('/guidedtour/advisor', {
+  name: advisorGuidedTourPageRouteName,
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentHomeLevelsPageRouteName });
+    BlazeLayout.render('Guided_Tour_Layout', { main: advisorGuidedTourPageRouteName });
   },
 });
-*/
-
 
 /*                        MENTOR ROUTES                       */
 

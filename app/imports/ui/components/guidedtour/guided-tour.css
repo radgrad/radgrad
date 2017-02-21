@@ -6,3 +6,37 @@
   color: white;
   font-size: 8px !important;
 }
+
+.slick-dots {
+  bottom: -60px;
+}
+
+.guided-tour-background {
+  background-color: #333333;
+}
+
+.guided-tour-background:first-child {
+  padding: 2.5rem 0;
+}
+
+.guided-tour-description > h1 {
+  color: white;
+  font-size: 36px;
+  text-align: left
+}
+
+.guided-tour-description > p {
+  color: rgba(255,255,255,.7);
+  font-size: 16px;
+  text-indent: 1rem;
+  text-align: left;
+}
+
+.guided-tour-description > p b {
+  color: #70BE44;
+}
+
+.guided-tour-background .container > a {
+  color: white;
+  text-decoration: underline;
+}
