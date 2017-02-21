@@ -12,8 +12,16 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
   equals(a, b) {
     return a === b;
   },
-  yearSemesters(year) {
-    const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
+  existingSemesters() {
+    const semesters = [];
+    const course = this.course;
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    _.map(ci, function (c) {
+      semesters.push(Semesters.toString(c.semesterID, false));
+    });
     return semesters;
   },
   nextYears(amount) {
@@ -27,16 +35,8 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
     }
     return nextYears;
   },
-  existingSemesters() {
-    const semesters = [];
-    const course = this.course;
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    _.map(ci, function (c) {
-      semesters.push(Semesters.toString(c.semesterID, false));
-    });
+  yearSemesters(year) {
+    const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
     return semesters;
   },
 });

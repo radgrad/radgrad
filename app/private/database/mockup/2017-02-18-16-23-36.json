@@ -2685,19 +2685,19 @@
           "name": "B.A. in Information and Computer Sciences",
           "shortName": "B.A. ICS",
           "slug": "ba-ics",
-          "description": "The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline. You might find the BA degree of interest if you are also interested in biology, entrepreneurship, game design, graphic arts, financial engineering, foreign languages, or other disciplines."
+          "description": "The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline. You might find the BA degree of interest if you are also interested in biology, entrepreneurship, game design, graphic arts, financial engineering, foreign languages, or other disciplines.\n\nIn general, the BA requires you to complete the ICS core curriculum, plus three ICS 400-level courses, plus four upper division courses in a related area of concentration.\n\nFor more details, see the [ICS BA Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/ba-ics/)."
         },
         {
           "name": "B.S. in Computer Engineering",
           "shortName": "B.S. CE",
           "slug": "bs-ce",
-          "description": "The Department of Information and Computer Sciences and the Department of Electrical Engineering offer a joint Bachelor of Science degree in Computer Engineering (BSCE).  The BSCE degree program provides you with the opportunity to learn about computer hardware and software, computer organization and architecture, computer security, software engineering, computer networks and Internet technology, embedded systems, computer-aided design, multi-core and parallel computing, wireless networks, and other topics."
+          "description": "The Department of Information and Computer Sciences and the Department of Electrical Engineering offer a joint Bachelor of Science degree in Computer Engineering (BSCE).  The BSCE degree program provides you with the opportunity to learn about computer hardware and software, computer organization and architecture, computer security, software engineering, computer networks and Internet technology, embedded systems, computer-aided design, multi-core and parallel computing, wireless networks, and other topics.\n\nIn general, the BSCE requires you to complete the College of Engineering core requirements (calculus, chemistry, physics, etc.), plus the BSCE core courses (EE 160, 205, 211, 213, 260, 315, 323, 324, 342, 361, 366, 367, 371, 495, etc), plus two technical electives.\n\nFor more details, see the [BSCE Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ce/)."
         },
         {
           "name": "B.S. in Computer Science",
           "shortName": "B.S. CS",
           "slug": "bs-cs",
-          "description": "The Bachelor of Science in Computer Science provides you with an in-depth foundation in software technology, science, and math. You may find this degree of interest if you want to pursue software development as a career path or go to graduate school in computer science."
+          "description": "The Bachelor of Science in Computer Science provides you with an in-depth foundation in software technology, science, and math. You may find this degree of interest if you want to pursue software development as a career path or go to graduate school in computer science. \n\nIn general, the BS requires you to complete the ICS core curriculum, plus (312 or 331), plus (313 or 361), 321, 332, plus five ICS 400-level courses.\n\nFor more details, see the [ICS BS Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ics/)."
         }
       ]
     },
@@ -3371,7 +3371,7 @@
         {
           "name": "ACM ICPC",
           "slug": "acm-icpc",
-          "description": "The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of thousands of the finest students and faculty in computing disciplines at almost 2,736 universities from over 102 countries on six continents. The contest fosters creativity, teamwork, and innovation in building new software programs, and enables students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious programming contest in the world.\n\nWikipedia: https://en.wikipedia.org/wiki/ACM_International_Collegiate_Programming_Contest",
+          "description": "The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of thousands of the finest students and faculty in computing disciplines at almost 2,736 universities from over 102 countries on six continents. \n\nThe contest fosters creativity, teamwork, and innovation in building new software programs, and enables students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious programming contest in the world.\n\nWikipedia: https://en.wikipedia.org/wiki/ACM_International_Collegiate_Programming_Contest",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -3395,7 +3395,7 @@
         {
           "name": "ACM Manoa",
           "slug": "acm-manoa",
-          "description": "The Association for Computing Machinery at Manoa is UH Manoa’s student chapter of the Association for Computing Machinery. We are a Registered Independent Organization (RIO) focused on providing opportunities and resources for our members’ personal and professional advancement.  ACM Manoa has 3 pillars - social, professional, and technical. We hold social activities for our members to have fun as well as develop and strengthen their interpersonal relationships. We strive to connect our members to professionals in the industry, abroad and within the Honolulu community. We are largely comprised of aspiring professionals in the computing industry; accordingly, members in ACM Manoa are encouraged to join and create Special Interest Groups (SIG) and Playgrounds where they can collaborate on interesting projects.",
+          "description": "The Association for Computing Machinery at Manoa is UH Manoa’s student chapter of the Association for Computing Machinery. We are a Registered Independent Organization (RIO) focused on providing opportunities and resources for our members’ personal and professional advancement.  ACM Manoa has 3 pillars: - social, professional, and technical.\n\n  * We hold social activities for our members to have fun as well as develop and strengthen their interpersonal relationships.\n\n  * We strive to connect our members to professionals in the industry, abroad and within the Honolulu community.\n\n  * We are largely comprised of aspiring professionals in the computing industry; accordingly, members in ACM Manoa are encouraged to join and create Special Interest Groups (SIG) and Playgrounds where they can collaborate on interesting projects.",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -3634,7 +3634,7 @@
         {
           "name": "Booz Allen Ideas Festival",
           "slug": "booz-allen-ideas-festival",
-          "description": "At the heart of every new idea lies \"What IF?\" It represents the untapped potential within us all, it dares us to think bigger, to think differently, and to think freely. Booz Allen is honored to be hosting the second annual Ideas Festival 2017 in Honolulu! Bring your big, new, inspiring ideas to us on January 28th at the Plaza Club in Honolulu.\nIdeas Festival is Booz Allen’s annual innovation event, providing an opportunity for you to join local community and government leaders, students, and Booz Allen Hamilton to Ideate, Inspire, and Interact, asking yourself, WHAT IF? We have an exciting event planned featuring speakers, panel discussions, and idea ‘pitch’ competitions from across the Hawaii community. Bring ideas from your work experience and areas of personal passion. IF17 topics will focus on Grid Resilience, Renewable Energy, Virtual Reality, Analytics and Workforce Development.",
+          "description": "At the heart of every new idea lies \"What IF?\" It represents the untapped potential within us all, it dares us to think bigger, to think differently, and to think freely.\n\nBooz Allen is honored to be hosting the second annual Ideas Festival 2017 in Honolulu! Bring your big, new, inspiring ideas to us on January 28th at the Plaza Club in Honolulu.\n\nIdeas Festival is Booz Allen’s annual innovation event, providing an opportunity for you to join local community and government leaders, students, and Booz Allen Hamilton to Ideate, Inspire, and Interact, asking yourself, WHAT IF? We have an exciting event planned featuring speakers, panel discussions, and idea ‘pitch’ competitions from across the Hawaii community. Bring ideas from your work experience and areas of personal passion. IF17 topics will focus on Grid Resilience, Renewable Energy, Virtual Reality, Analytics and Workforce Development.",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -3660,7 +3660,7 @@
         {
           "name": "Booz Allen Internship",
           "slug": "booz-allen-internship",
-          "description": "10 weeks, 40/week, $24/hr, or about $10K total. During the internship, you will spend the first week working in a group to figure out an idea, the next eight weeks developing it in a team, and the final week going to Washington DC to pitch your idea/prototype against the ones developed by other Booz-Allen interns across the country",
+          "description": "Booz Allen provides summer internship opportunities to talented undergraduates and graduate students. \n\nDuring the internship, you will spend the first week working in a group to figure out an idea, the next eight weeks developing it in a team, and the final week going to Washington DC to pitch your idea/prototype against the ones developed by other Booz-Allen interns across the country.\n\nIn the past, this 10 week internship paid approximately $10K. ",
           "opportunityType": "internship",
           "sponsor": "johnson",
           "ice": {
@@ -4214,7 +4214,7 @@
         {
           "name": "Apple iOS Dev Meetup",
           "slug": "ios-dev-meetup",
-          "description": "This group was created to provide a regular meetup for iOS developers actively working on projects. The purpose is to work together to support one another in bringing our ideas to life. The goals are also to meet people in the Honolulu, Hawaii area who are doing the same type of work (programming and creating apps for the iPhone, iPad, and Mac) and to have fun.\n\nThis meetup is for:\n\niPhone Developers of all levels. \n\nPeople who are interested in getting their hands dirty in code.\n\nPeople just starting to develop for iOS who do not have much experience.\n\nDevelopers on other platforms (Android, etc) who are interested in learning about iOS development.\n\nDevelopers looking for specific help in adding functionality to their app.",
+          "description": "This group was created to provide a regular meetup for iOS developers actively working on projects. The purpose is to work together to support one another in bringing our ideas to life. The goals are also to meet people in the Honolulu, Hawaii area who are doing the same type of work (programming and creating apps for the iPhone, iPad, and Mac) and to have fun.\n\nThis meetup is for:\n\n  * iPhone Developers of all levels. \n\n  * People who are interested in getting their hands dirty in code.\n\n  * People just starting to develop for iOS who do not have much experience.\n\n  * Developers on other platforms (Android, etc) who are interested in learning about iOS development.\n\n  * Developers looking for specific help in adding functionality to their app.",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {

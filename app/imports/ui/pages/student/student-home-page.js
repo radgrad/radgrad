@@ -29,22 +29,6 @@ Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
 });
 
 Template.Student_Home_Page.helpers({
-  getDictionary() {
-    return Template.instance().state;
-  },
-  getTeasers() {
-    const allTeasers = Teasers.find().fetch();
-    return allTeasers;
-  },
-  getTeaserInterests(teaser) {
-    return Interests.findNames(teaser.interestIDs);
-  },
-  opportunities() {
-    return Opportunities.find().fetch();
-  },
-  activateSemanticUiJavascript() {
-    this.$('.ui .embed').embed();
-  },
 });
 
 Template.Student_Home_Page.events({

@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { Users } from '../../../api/user/UserCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
@@ -14,8 +13,8 @@ Template.Landing_Section_2.onCreated(function landingSection2OnCreated() {
 });
 
 Template.Landing_Section_2.helpers({
-  reviewsCount() {
-    return Reviews.find().count();
+  careerGoalsCount() {
+    return CareerGoals.find().count();
   },
   interestsCount() {
     return Interests.find().count();
@@ -23,11 +22,8 @@ Template.Landing_Section_2.helpers({
   opportunitiesCount() {
     return Opportunities.find().count();
   },
-  careerGoalsCount() {
-    return CareerGoals.find().count();
-  },
-  usersCount() {
-    return Users.find().count();
+  reviewsCount() {
+    return Reviews.find().count();
   },
 });
 

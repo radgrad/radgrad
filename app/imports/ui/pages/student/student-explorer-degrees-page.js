@@ -24,15 +24,20 @@ function numUsers(degree) {
 }
 
 Template.Student_Explorer_Degrees_Page.helpers({
+  addedDegrees() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    return [DesiredDegrees.findDoc(user.desiredDegreeID)];
+  },
   degree() {
     const degreeSlugName = FlowRouter.getParam('degree');
     const slug = Slugs.find({ name: degreeSlugName }).fetch();
     const degree = DesiredDegrees.find({ slugID: slug[0]._id }).fetch();
     return degree[0];
   },
-  addedDegrees() {
-    const user = Users.findDoc({ username: getRouteUserName() });
-    return [DesiredDegrees.findDoc(user.desiredDegreeID)];
+  descriptionPairs(degree) {
+    return [
+      { label: 'Description', value: degree.description },
+    ];
   },
   nonAddedDegrees() {
     const allDegrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
@@ -45,19 +50,8 @@ Template.Student_Explorer_Degrees_Page.helpers({
     });
     return nonAddedDegrees;
   },
-  degreeName(degree) {
-    return degree.name;
-  },
-  count() {
-    return DesiredDegrees.count();
-  },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
-  },
-  descriptionPairs(degree) {
-    return [
-      { label: 'Description', value: degree.description },
-    ];
   },
   socialPairs(degree) {
     return [

@@ -27,12 +27,6 @@ function numUsers(careerGoal, role) {
 }
 
 Template.Student_Explorer_CareerGoals_Page.helpers({
-  careerGoal() {
-    const careerGoalSlugName = FlowRouter.getParam('careerGoal');
-    const slug = Slugs.find({ name: careerGoalSlugName }).fetch();
-    const careerGoal = CareerGoals.find({ slugID: slug[0]._id }).fetch();
-    return careerGoal[0];
-  },
   addedCareerGoals() {
     const addedCareerGoals = [];
     const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
@@ -43,6 +37,19 @@ Template.Student_Explorer_CareerGoals_Page.helpers({
       }
     });
     return addedCareerGoals;
+  },
+  careerGoal() {
+    const careerGoalSlugName = FlowRouter.getParam('careerGoal');
+    const slug = Slugs.find({ name: careerGoalSlugName }).fetch();
+    const careerGoal = CareerGoals.find({ slugID: slug[0]._id }).fetch();
+    return careerGoal[0];
+  },
+  descriptionPairs(careerGoal) {
+    return [
+      { label: 'Description', value: careerGoal.description },
+      { label: 'More Information', value: makeLink(careerGoal.moreInformation) },
+      { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
+    ];
   },
   nonAddedCareerGoals() {
     const user = Users.findDoc({ username: getRouteUserName() });
@@ -55,21 +62,8 @@ Template.Student_Explorer_CareerGoals_Page.helpers({
     });
     return nonAddedCareerGoals;
   },
-  courseName(careerGoal) {
-    return careerGoal.name;
-  },
-  count() {
-    return CareerGoals.count();
-  },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
-  },
-  descriptionPairs(careerGoal) {
-    return [
-      { label: 'Description', value: careerGoal.description },
-      { label: 'More Information', value: makeLink(careerGoal.moreInformation) },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
-    ];
   },
   socialPairs(careerGoal) {
     return [

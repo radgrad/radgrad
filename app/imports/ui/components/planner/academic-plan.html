@@ -7,13 +7,9 @@
             <div class=" row">
               {{#each year in years}}
                 <div class="stretched column academicYear" style="padding-left: 2px; padding-right: 2px;">
-                  <!--<div class="ui center aligned padded segment">-->
-                  <!--<div class="ui dividing header"><h4>AY {{year.year}} - {{year.springYear}}</h4></div>-->
                   {{> Semester_List (fallArgs year)}}
                   {{> Semester_List (springArgs year)}}
                   {{> Semester_List (summerArgs year)}}
-                  <!--{{> Cumulative_Ice_Component year=year}}-->
-                  <!--</div>-->
                 </div>
               {{/each}}
             </div>
