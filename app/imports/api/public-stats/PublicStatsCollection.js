@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '/imports/api/base/BaseCollection';
@@ -170,5 +172,14 @@ class PublicStatsCollection extends BaseCollection {
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const
-    PublicStats = new PublicStatsCollection();
+export const PublicStats = new PublicStatsCollection();
+
+if (Meteor.isClient) {
+  Template.registerHelper('publicStats', (key) => {
+    const stat = PublicStats.findDoc({ key });
+    if (stat) {
+      return stat.value;
+    }
+    return null;
+  });
+}
