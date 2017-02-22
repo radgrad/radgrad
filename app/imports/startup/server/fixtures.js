@@ -29,6 +29,7 @@ import { VerificationRequests } from '../../api/verification/VerificationRequest
 import { radgradCollections } from '../../api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
+import { SyncedCron } from 'meteor/percolate:synced-cron';
 
 /**
  * Returns an Array of numbers, one per RadGradCollection, indicating the number of documents in that collection.
@@ -120,6 +121,16 @@ function newStartupProcess() { // eslint-disable-line
       }
     }
     PublicStats.generateStats();
+    SyncedCron.add({
+      name: 'Run the PublicStats.generateStats method',
+      schedule: function (parser) {
+        return parser.text('every 24 hours');
+      },
+      job: function () {
+        PublicStats.generateStats();
+      },
+    });
+    SyncedCron.start();
   });
 }
 

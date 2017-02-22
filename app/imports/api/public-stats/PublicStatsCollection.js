@@ -66,7 +66,8 @@ class PublicStatsCollection extends BaseCollection {
    */
   careerGoalsList() {
     const goals = CareerGoals.find().fetch();
-    this._collection.upsert({ key: this.careerGoalsListKey }, { $set: { value: goals.join(', ') } });
+    const names = _.map(goals, 'name')
+    this._collection.upsert({ key: this.careerGoalsListKey }, { $set: { value: names.join(', ') } });
   }
 
   interestsTotal() {
@@ -74,10 +75,10 @@ class PublicStatsCollection extends BaseCollection {
     this._collection.upsert({ key: this.interestsTotalKey }, { $set: { value: `${numInterests}` } });
   }
 
-
   interestsList() {
     const interests = Interests.find().fetch();
-    this._collection.upsert({ key: this.interestsListKey }, { $set: { value: interests.join(', ') } });
+    const names = _.map(interests, 'name');
+    this._collection.upsert({ key: this.interestsListKey }, { $set: { value: names.join(', ') } });
   }
 
   opportunitiesTotal() {
@@ -94,7 +95,8 @@ class PublicStatsCollection extends BaseCollection {
   opportunitiesProjectsList() {
     const projectType = OpportunityTypes.findDoc({ name: 'Project' });
     const projects = Opportunities.find({ opportunityTypeID: projectType._id }).fetch();
-    this._collection.upsert({ key: this.opportunitiesProjectsListKey }, { $set: { value: projects.join(', ') } });
+    const names = _.map(projects, 'name');
+    this._collection.upsert({ key: this.opportunitiesProjectsListKey }, { $set: { value: names.join(', ') } });
   }
 
   usersTotal() {
@@ -140,28 +142,26 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   courseReviewsTotal() {
-    const numCourseReviews = Reviews.find({ type: 'course' }).count();
+    const numCourseReviews = Reviews.find({ reviewType: 'course' }).count();
     this._collection.upsert({ key: this.courseReviewsTotalKey }, { $set: { value: `${numCourseReviews}` } });
   }
 
   courseReviewsCourses() {
-    const courseReviews = Reviews.find({ type: 'course' }).fetch();
-    console.log(courseReviews);
+    const courseReviews = Reviews.find({ reviewType: 'course' }).fetch();
     let courseNumbers = [];
     _.map(courseReviews, (review) => {
       const course = Courses.findDoc(review.revieweeID);
-      console.log(course);
       courseNumbers.push(course.number);
     });
     courseNumbers = _.union(courseNumbers);
-    console.log(courseNumbers);
-    this._collection.upsert({ key: this.courseReviewsCoursesKey }, { $set: { value: courseNumbers.join(', ') } });
+    if (courseNumbers) {
+      this._collection.upsert({ key: this.courseReviewsCoursesKey }, { $set: { value: courseNumbers.join(', ') } });
+    }
   }
 
   generateStats() {
     const instance = this;
     _.map(this.stats, (key) => {
-      console.log(key);
       instance[key]();
     });
   }
@@ -170,4 +170,5 @@ class PublicStatsCollection extends BaseCollection {
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const PublicStats = new PublicStatsCollection();
+export const
+    PublicStats = new PublicStatsCollection();
