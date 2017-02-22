@@ -22,9 +22,6 @@
             {{#if teaser.opportunityID}}
               <a class="ui bottom attached button" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug teaser)}}">
                 <i class="chevron circle right icon" style="margin-right: 1px;"></i>View More</a>
-            {{else}}
-              <a class="ui bottom attached disabled button">
-                <i class="chevron circle right icon" style="margin-right: 1px;"></i>View More</a>
             {{/if}}
           </div>
         {{/each}}

@@ -9,7 +9,7 @@ import * as RouteNames from '/imports/startup/client/router.js';
 function matchingInterestsHelper(item) {
   const matchingInterests = [];
   const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterestIDs = user.interestIDs;
+  const userInterestIDs = Users.getInterestIDs(user._id);
   const userInterests = [];
   _.map(userInterestIDs, (id) => {
     userInterests.push(Interests.findDoc(id));
