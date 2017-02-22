@@ -18,6 +18,7 @@ import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
+import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { Reviews } from '../../api/review/ReviewCollection';
 import { Teasers } from '../../api/teaser/TeaserCollection';
 import { Users } from '../../api/user/UserCollection';
@@ -118,6 +119,7 @@ function newStartupProcess() { // eslint-disable-line
         _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
       }
     }
+    PublicStats.generateStats();
   });
 }
 
