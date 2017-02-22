@@ -4,6 +4,7 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
+import { PublicStats } from '../../../api/public-stats/PublicStatsCollection';
 
 Template.Landing_Section_2.onCreated(function landingSection2OnCreated() {
   this.subscribe(Reviews.getPublicationName());
@@ -14,16 +15,20 @@ Template.Landing_Section_2.onCreated(function landingSection2OnCreated() {
 
 Template.Landing_Section_2.helpers({
   careerGoalsCount() {
-    return CareerGoals.find().count();
+    const stat = PublicStats.findDoc({ key: PublicStats.careerGoalsTotalKey });
+    return stat.value;
   },
   interestsCount() {
-    return Interests.find().count();
+    const stat = PublicStats.findDoc({ key: PublicStats.interestsTotalKey });
+    return stat.value;
   },
   opportunitiesCount() {
-    return Opportunities.find().count();
+    const stat = PublicStats.findDoc({ key: PublicStats.opportunitiesProjectsTotalKey });
+    return stat.value;
   },
   reviewsCount() {
-    return Reviews.find().count();
+    const stat = PublicStats.findDoc({ key: PublicStats.courseReviewsTotalKey });
+    return stat.value;
   },
 });
 
@@ -32,7 +37,7 @@ Template.Landing_Section_2.events({
 });
 
 Template.Landing_Section_2.onCreated(function landingBodyOnCreated() {
-  // add your statement here
+  this.subscribe(PublicStats.getPublicationName());
 });
 
 Template.Landing_Section_2.onRendered(function landingBodyOnRendered() {
