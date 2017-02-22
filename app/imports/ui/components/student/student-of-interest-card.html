@@ -1,5 +1,6 @@
 <template name="Student_Of_Interest_Card">
-  <div class="ui card">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui card">
     <div class="content">
       <div class="header">{{itemName item}}</div>
       <div class="meta">
@@ -62,4 +63,7 @@
       {{/if}}
     </div>
   </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
 </template>
