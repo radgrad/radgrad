@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
+import { makeCourseRecommendationFeedback } from '/imports/api/feedback/SampleFeedbacks';
 import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { makeSampleCourse, makeSampleCourseInstance } from '/imports/api/course/SampleCourses';
 import { Users } from '/imports/api/user/UserCollection';
@@ -24,6 +25,7 @@ if (Meteor.isServer) {
       // Make a user with an interest.
       const userID = makeSampleUser();
       const interestID = makeSampleInterest();
+      const feedbackID = makeCourseRecommendationFeedback();
       Users.setInterestIds(userID, [interestID]);
       // Make a course ICS 100.
       const number = 'ICS 100';
@@ -35,7 +37,7 @@ if (Meteor.isServer) {
       makeSampleCourseInstance(userID, { course: courseID });
       // Now check to see that ICS 101 is recommended.
       /* eslint dot-notation: "off" */
-      const recommendation = FeedbackFunctions['recommendedCoursesBasedOnInterest'](userID, interestID);
+      const recommendation = FeedbackFunctions['generateRecommendedCourse'](userID);
       expect(recommendation).to.contain(number2);
     });
   });
