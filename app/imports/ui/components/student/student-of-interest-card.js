@@ -79,14 +79,10 @@ Template.Student_Of_Interest_Card.helpers({
     if (this.type === 'courses') {
       if (_.includes(student.hiddenCourseIDs, this.item._id)) {
         ret = 'grey';
-      } else {
-        // buttons remain green
       }
     } else
       if (_.includes(student.hiddenOpportunityIDs, this.item._id)) {
         ret = 'grey';
-      } else {
-        // buttons remain green
       }
     return ret;
   },

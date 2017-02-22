@@ -9,6 +9,7 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -16,6 +17,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 Template.Student_Of_Interest_Widget.onCreated(function studentOfInterestWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
+  this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(FeedbackInstances.getPublicationName());
   this.subscribe(Feedbacks.getPublicationName());
@@ -51,7 +53,7 @@ function matchingCourses() {
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
   let courseInterests = [];
-  _.map(user.interestIDs, (id) => {
+  _.map(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
   });
   _.map(allCourses, (course) => {
@@ -122,7 +124,7 @@ function matchingOpportunities() {
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
   let opportunityInterests = [];
-  _.map(user.interestIDs, (id) => {
+  _.map(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
   });
   _.map(allOpportunities, (opp) => {
