@@ -127,6 +127,16 @@ Template.Student_Of_Interest_Card.helpers({
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
+  replaceSemString(array) {
+    const currentSem = currentSemester();
+    const currentYear = currentSem.year;
+    let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
+      return semesterYear.split(' ')[1] >= currentYear;
+    });
+    fourRecentSem = array.slice(0, 4);
+    const semString = fourRecentSem.join(' - ');
+    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+  },
   studentPicture(studentID) {
     if (studentID === 'elipsis') {
       return '/images/elipsis.png';

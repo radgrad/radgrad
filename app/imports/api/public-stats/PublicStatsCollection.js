@@ -1,0 +1,195 @@
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import BaseCollection from '/imports/api/base/BaseCollection';
+import { CareerGoals } from '../career/CareerGoalCollection';
+import { Courses } from '../course/CourseCollection';
+import { DesiredDegrees } from '../degree/DesiredDegreeCollection';
+import { Interests } from '../interest/InterestCollection';
+import { MentorProfiles } from '../mentor/MentorProfileCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
+import { Reviews } from '../review/ReviewCollection';
+import { ROLE } from '../role/Role';
+import { Users } from '../user/UserCollection';
+
+class PublicStatsCollection extends BaseCollection {
+  /**
+   * Creates the PublicStats collection.
+   */
+  constructor() {
+    super('PublicStats', new SimpleSchema({
+      key: { type: String },
+      value: { type: String },
+    }));
+    this.stats = [];
+    this.careerGoalsTotalKey = 'careerGoalsTotal';
+    this.stats.push(this.careerGoalsTotalKey);
+    this.careerGoalsListKey = 'careerGoalsList';
+    this.stats.push(this.careerGoalsListKey);
+    this.desiredDegreesTotalKey = 'desiredDegreesTotal';
+    this.stats.push(this.desiredDegreesTotalKey);
+    this.desiredDegreesListKey = 'desiredDegreesList';
+    this.stats.push(this.desiredDegreesListKey);
+    this.interestsTotalKey = 'interestsTotal';
+    this.stats.push(this.interestsTotalKey);
+    this.interestsListKey = 'interestsList';
+    this.stats.push(this.interestsListKey);
+    this.opportunitiesTotalKey = 'opportunitiesTotal';
+    this.stats.push(this.opportunitiesTotalKey);
+    this.opportunitiesProjectsTotalKey = 'opportunitiesProjectsTotal';
+    this.stats.push(this.opportunitiesProjectsTotalKey);
+    this.opportunitiesProjectsListKey = 'opportunitiesProjectsList';
+    this.stats.push(this.opportunitiesProjectsListKey);
+    this.usersTotalKey = 'usersTotal';
+    this.stats.push(this.usersTotalKey);
+    this.usersStudentsTotalKey = 'usersStudentsTotal';
+    this.stats.push(this.usersStudentsTotalKey);
+    this.usersFacultyTotalKey = 'usersFacultyTotal';
+    this.stats.push(this.usersFacultyTotalKey);
+    this.usersMentorsTotalKey = 'usersMentorsTotal';
+    this.stats.push(this.usersMentorsTotalKey);
+    this.usersMentorsProfessionsListKey = 'usersMentorsProfessionsList';
+    this.stats.push(this.usersMentorsProfessionsListKey);
+    this.usersMentorsLocationsKey = 'usersMentorsLocations';
+    this.stats.push(this.usersMentorsLocationsKey);
+    this.courseReviewsTotalKey = 'courseReviewsTotal';
+    this.stats.push(this.courseReviewsTotalKey);
+    this.courseReviewsCoursesKey = 'courseReviewsCourses';
+    this.stats.push(this.courseReviewsCoursesKey);
+  }
+
+  careerGoalsTotal() {
+    const count = CareerGoals.find().count();
+    this._collection.upsert({ key: this.careerGoalsTotalKey }, { $set: { value: `${count}` } });
+  }
+
+  careerGoalsList() {
+    const goals = CareerGoals.find().fetch();
+    const names = _.map(goals, 'name');
+    this._collection.upsert({ key: this.careerGoalsListKey }, { $set: { value: names.join(', ') } });
+  }
+
+  desiredDegreesTotal() {
+    const count = DesiredDegrees.find().count();
+    this._collection.upsert({ key: this.desiredDegreesTotalKey }, { $set: { value: `${count}` } });
+  }
+
+  desiredDegreesList() {
+    const degrees = DesiredDegrees.find().fetch();
+    const names = _.map(degrees, 'name');
+    this._collection.upsert({ key: this.desiredDegreesListKey }, { $set: { value: names.join(', ') } });
+  }
+
+  interestsTotal() {
+    const numInterests = Interests.find().count();
+    this._collection.upsert({ key: this.interestsTotalKey }, { $set: { value: `${numInterests}` } });
+  }
+
+  interestsList() {
+    const interests = Interests.find().fetch();
+    const names = _.map(interests, 'name');
+    this._collection.upsert({ key: this.interestsListKey }, { $set: { value: names.join(', ') } });
+  }
+
+  opportunitiesTotal() {
+    const numOpps = Opportunities.find().count();
+    this._collection.upsert({ key: this.opportunitiesTotalKey }, { $set: { value: `${numOpps}` } });
+  }
+
+  opportunitiesProjectsTotal() {
+    const projectType = OpportunityTypes.findDoc({ name: 'Project' });
+    const numProjects = Opportunities.find({ opportunityTypeID: projectType._id }).count();
+    this._collection.upsert({ key: this.opportunitiesProjectsTotalKey }, { $set: { value: `${numProjects}` } });
+  }
+
+  opportunitiesProjectsList() {
+    const projectType = OpportunityTypes.findDoc({ name: 'Project' });
+    const projects = Opportunities.find({ opportunityTypeID: projectType._id }).fetch();
+    const names = _.map(projects, 'name');
+    this._collection.upsert({ key: this.opportunitiesProjectsListKey }, { $set: { value: names.join(', ') } });
+  }
+
+  usersTotal() {
+    const numUsers = Users.find().count();
+    this._collection.upsert({ key: this.usersTotalKey }, { $set: { value: `${numUsers}` } });
+  }
+
+  usersStudentsTotal() {
+    const numUsers = Users.find({ roles: [ROLE.STUDENT] }).count();
+    this._collection.upsert({ key: this.usersStudentsTotalKey }, { $set: { value: `${numUsers}` } });
+  }
+
+  usersFacultyTotal() {
+    const numUsers = Users.find({ roles: [ROLE.FACULTY] }).count();
+    this._collection.upsert({ key: this.usersFacultyTotalKey }, { $set: { value: `${numUsers}` } });
+  }
+
+  usersMentorsTotal() {
+    const numUsers = Users.find({ roles: [ROLE.MENTOR] }).count();
+    this._collection.upsert({ key: this.usersMentorsLocationsKey }, { $set: { value: `${numUsers}` } });
+  }
+
+  usersMentorsProfessionsList() {
+    const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
+    let professions = [];
+    _.map(mentors, (m) => {
+      const profile = MentorProfiles.findDoc({ mentorID: m._id });
+      professions.push(profile.career);
+    });
+    professions = _.union(professions);
+    this._collection.upsert({ key: this.usersMentorsProfessionsListKey }, { $set: { value: professions.join(', ') } });
+  }
+
+  usersMentorsLocations() {
+    const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
+    let locations = [];
+    _.map(mentors, (m) => {
+      const profile = MentorProfiles.findDoc({ mentorID: m._id });
+      locations.push(profile.location);
+    });
+    locations = _.union(locations);
+    this._collection.upsert({ key: this.usersMentorsLocationsKey }, { $set: { value: locations.join(', ') } });
+  }
+
+  courseReviewsTotal() {
+    const numCourseReviews = Reviews.find({ reviewType: 'course' }).count();
+    this._collection.upsert({ key: this.courseReviewsTotalKey }, { $set: { value: `${numCourseReviews}` } });
+  }
+
+  courseReviewsCourses() {
+    const courseReviews = Reviews.find({ reviewType: 'course' }).fetch();
+    let courseNumbers = [];
+    _.map(courseReviews, (review) => {
+      const course = Courses.findDoc(review.revieweeID);
+      courseNumbers.push(course.number);
+    });
+    courseNumbers = _.union(courseNumbers);
+    if (courseNumbers) {
+      this._collection.upsert({ key: this.courseReviewsCoursesKey }, { $set: { value: courseNumbers.join(', ') } });
+    }
+  }
+
+  generateStats() {
+    const instance = this;
+    _.map(this.stats, (key) => {
+      instance[key]();
+    });
+  }
+}
+
+/**
+ * Provides the singleton instance of this class to all other entities.
+ */
+export const PublicStats = new PublicStatsCollection();
+
+if (Meteor.isClient) {
+  Template.registerHelper('publicStats', (key) => {
+    const stat = PublicStats.findDoc({ key });
+    if (stat) {
+      return stat.value;
+    }
+    return null;
+  });
+}

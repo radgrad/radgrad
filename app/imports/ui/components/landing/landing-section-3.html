@@ -9,8 +9,13 @@
 
         <div class="column">
           <h1 class="inverted-header">Specify your degree, career goals, and interests</h1>
-          <p class="inverted-description">Getting started with RadGrad is easy. Just meet with an ICS advisor, and they will set up your account and answer your questions.
-          To start, you'll provide RadGrad with your desired degree, one or more career goals, and a few interests. Don't worry, you can change them later!</p>
+          <p class="inverted-description">
+            {{#markdown}}
+Getting started with RadGrad is easy. Just meet with an ICS advisor, and they will set up your account and answer your questions.
+
+To start, you'll select 1 of the {{publicStats 'desiredDegreesTotal'}} ICS degree programs, one out of {{publicStats 'careerGoalsTotal'}} career directions, and a few of the {{publicStats 'interestsTotal'}} ICS interest areas. Don't worry, you can change them later!
+              {{/markdown}}
+          </p>
         </div>
       </div>
     </div>
