@@ -15,10 +15,8 @@ Meteor.methods({
     check(student, String);
     check(csvData, String);
     const definitions = processStarCsvData(student, csvData);
-    // console.log('definitions', definitions);
     const studentID = Users.findDoc({ username: student })._id;
     const oldInstances = CourseInstances.find({ studentID, verified: true }).fetch();
-    // console.log('oldInstances', oldInstances);
     _.map(oldInstances, (instance) => {
       CourseInstances.removeIt(instance._id);
     });
@@ -40,6 +38,9 @@ Meteor.methods({
         }
       } else {
         numOtherCourses += 1;
+      }
+      if (definition.grade === '***') {
+        definition.grade = 'B';  // eslint-disable-line
       }
       // console.log('CourseInstances.define', definition);
       CourseInstances.define(definition);

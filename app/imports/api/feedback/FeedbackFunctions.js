@@ -68,7 +68,7 @@ export class FeedbackFunctionClass {
         const prereqs = course.prerequisites;
         prereqs.forEach((p) => {
           const courseID = Slugs.getEntityID(p, 'Course');
-          const prerequisiteCourse = Courses.find({ _id: courseID }).fetch()[0];
+          const prerequisiteCourse = Courses.findDoc({ _id: courseID });
           const preCiIndex = _.findIndex(cis, function find(obj) {
             return obj.courseID === courseID;
           });
@@ -109,7 +109,7 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   checkCompletePlan(studentID) {
-    console.log('checkCompletePlan');
+    // console.log('checkCompletePlan');
     const f = Feedbacks.findDoc({ name: 'Required course missing' });
     const feedback = Slugs.getNameFromID(f.slugID, 'Feedback');
     const area = `ffn-${feedback}`;
@@ -218,7 +218,6 @@ export class FeedbackFunctionClass {
     });
     this.clearFeedbackInstances(studentID, area);
     const missing = this._missingCourses(courseIDs, coursesNeeded);
-    // console.log(missing);
     if (missing.length > 0) {
       let description = 'Consider taking the following class to meet the degree requirement: ';
       if (missing.length > 1) {
@@ -228,12 +227,15 @@ export class FeedbackFunctionClass {
       const index = getPosition(currentRoute, '/', 3);
       const basePath = currentRoute.substring(0, index + 1);
       _.map(missing, (slug) => {
+        // console.log(slug);
         if (Array.isArray(slug)) {
           const course = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
-          const courseSlug = Slugs.findDoc(course.slugID);
-          description = 'Consider taking the following class to meet the degree requirement: ';
-          // eslint-disable-next-line max-len
-          description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name})`;
+          if (course) {
+            const courseSlug = Slugs.findDoc(course.slugID);
+            description = 'Consider taking the following class to meet the degree requirement: ';
+            // eslint-disable-next-line max-len
+            description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name})`;
+          }
         } else
           if (slug.startsWith('ics3')) {
             const courseID = Slugs.getEntityID(slug, 'Course');

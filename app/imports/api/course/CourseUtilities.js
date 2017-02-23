@@ -180,6 +180,9 @@ export const chooseBetween = (slugs, studentID, coursesTakenSlugs) => {
   const interestIDs = Users.getInterestIDs(studentID);
   const preferred = new PreferredChoice(courses, interestIDs);
   const best = preferred.getBestChoices();
-  // console.log('chooseBetween', best, interestIDs);
-  return best[getRandomInt(0, best.length)];
+  if (best) {
+    // console.log('chooseBetween', best, interestIDs);
+    return best[getRandomInt(0, best.length)];
+  }
+  return null;
 };
