@@ -41,7 +41,7 @@ class FeedCollection extends BaseCollection {
       opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
-      description: { type: String },
+      description: { type: Object, blackbox: true },
       timestamp: { type: Number },   // TODO: shouldn't timestamp be a date object?
       picture: { type: String },
       feedType: { type: String },
@@ -76,6 +76,16 @@ class FeedCollection extends BaseCollection {
    *               feedType: 'verified-opportunity'
    *               timestamp: '12345465465', });
    *
+   * Feed.define({ user: ['abigailkealoha'],
+   *               course: 'ics111'
+   *               feedType: 'new-course-review'
+   *               timestamp: '12345465465', });
+   *
+   * Feed.define({ user: ['abigailkealoha'],
+   *               opportunity: 'att-hackathon'
+   *               feedType: 'new-opportunity-review'
+   *               timestamp: '12345465465', });
+   *
    * There are currently six feedTypes: new-user, new-course,
    * new-opportunity, verified-opportunity, new-course-review, and new-opportunity-review.
    * All feeds require keys feedType and timestamp.
@@ -102,9 +112,12 @@ class FeedCollection extends BaseCollection {
           return Users.getUserFromUsername(u)._id;
         });
         if (userIDs.length > 1) {
-          description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have joined RadGrad.`;
+          // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have joined RadGrad.`;
+          description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
+            description: 'other(s) have joined RadGrad.' };
         } else {
-          description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
+          // description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
+          description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.'};
         }
         picture = Users.findDoc(userIDs[0]).picture;
         if (!picture) {
@@ -116,7 +129,9 @@ class FeedCollection extends BaseCollection {
     } else if (feedType === 'new-opportunity') {
       if (opportunity !== undefined) {
         opportunityID = Opportunities.getID(opportunity);
-        description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities.`;
+        // description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities.`;
+        description = { item: Opportunities.findDoc(opportunityID).name,
+          description: 'has been added to Opportunities' };
         picture = '/images/radgrad_logo.png';
       } else {
         throw new Meteor.Error('Opportunity must be specified for feedType new-opportunity.');
@@ -124,7 +139,9 @@ class FeedCollection extends BaseCollection {
     } else if (feedType === 'new-course') {
       if (course !== undefined) {
         courseID = Courses.getID(course);
-        description = `${Courses.findDoc(courseID).name} has been added to Courses.`;
+        // description = `${Courses.findDoc(courseID).name} has been added to Courses.`;
+        description = { item: Courses.findDoc(courseID).name,
+          description: 'has been added to Courses' };
         picture = '/images/radgrad_logo.png';
       } else {
         throw new Meteor.Error('Course must be specified for feedType new-course.');
@@ -140,20 +157,26 @@ class FeedCollection extends BaseCollection {
       if (semester !== undefined) {
         semesterID = Semesters.getID(semester);
       } else {
-        throw new Meteor.Error('Semester must be specified for feedType opportunity-verified.');
+        throw new Meteor.Error('Semester must be specified for feedType verified-opportunity.');
       }
       if (opportunity !== undefined) {
         opportunityID = Opportunities.getID(opportunity);
         if (userIDs.length > 1) {
-          description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} others() have been verified for 
-          ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)}).`;
+          // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have been verified for
+          // ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)}).`;
+          description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
+            description: 'other(s) have been verified for', item: Opportunities.findDoc(opportunityID).name,
+            semester: Semesters.toString(semesterID, false) };
         } else {
-          description = `${Users.getFullName(userIDs[0])} has been verified for 
-          ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)}).`;
+          // description = `${Users.getFullName(userIDs[0])} has been verified for
+          // ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)}).`;
+          description = { user: Users.getFullName(userIDs[0]),
+            description: 'has been verified for', item: Opportunities.findDoc(opportunityID).name,
+            semester: Semesters.toString(semesterID, false) };
         }
         picture = '/images/radgrad_logo.png';
       } else {
-        throw new Meteor.Error('Opportunity must be specified for feedType opportunity-verified.');
+        throw new Meteor.Error('Opportunity must be specified for feedType verified-opportunity.');
       }
     } else if (feedType === 'new-course-review') {
       if (user !== undefined) {
@@ -168,7 +191,10 @@ class FeedCollection extends BaseCollection {
       } else {
         throw new Meteor.Error('Course must be specified for feedType new-course-review.');
       }
-      description = `${Users.getFullName(userIDs[0])} has added a course review for ${Courses.findDoc(courseID).name}.`;
+      // description = `${Users.getFullName(userIDs[0])} has added a course review for
+      // ${Courses.findDoc(courseID).name}.`;
+      description = { user: Users.getFullName(userIDs[0]), description: ' has added a course review for ',
+        item: Courses.findDoc(courseID).name };
       picture = Users.findDoc(userIDs[0]).picture;
       if (!picture) {
         picture = '/images/people/default-profile-picture.png';
@@ -186,8 +212,10 @@ class FeedCollection extends BaseCollection {
       } else {
         throw new Meteor.Error('Opportunity must be specified for feedType new-opportunity-review.');
       }
-      description = `${Users.getFullName(userIDs[0])} has added an opportunity review for 
-      ${Opportunities.findDoc(opportunityID).name}.`;
+      // description = `${Users.getFullName(userIDs[0])} has added an opportunity review for
+      // ${Opportunities.findDoc(opportunityID).name}.`;
+      description = { user: Users.getFullName(userIDs[0]), description: ' has added an opportunity review for ',
+        item: Opportunities.findDoc(opportunityID).name};
       picture = Users.findDoc(userIDs[0]).picture;
       if (!picture) {
         picture = '/images/people/default-profile-picture.png';
@@ -195,6 +223,7 @@ class FeedCollection extends BaseCollection {
     } else {
       throw new Meteor.Error(`FeedType ${feedType} is not a valid feedType.`);
     }
+    console.log(description);
     const feedID = this._collection.insert({
       userIDs, opportunityID, courseID, semesterID, description, timestamp, picture, feedType,
     });
@@ -244,8 +273,8 @@ class FeedCollection extends BaseCollection {
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
-    const description = `${Users.getFullName(userID)} and 
-      ${existingFeed.userIDs.length - 1} other(s) have joined RadGrad.`;
+    const description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
+      description: 'other(s) have joined RadGrad.' };
     let picture = Users.findDoc(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
@@ -266,10 +295,9 @@ class FeedCollection extends BaseCollection {
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
-    const description = `${Users.getFullName(userID)} and 
-      ${existingFeed.userIDs.length - 1} other(s) have been verified for 
-          ${Opportunities.findDoc(existingFeed.opportunityID).name} 
-          (${Semesters.toString(existingFeed.semesterID, false)}).`;
+    const description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
+      description: 'other(s) have been verified for', item: Opportunities.findDoc(existingFeed.opportunityID).name,
+      semester: Semesters.toString(existingFeed.semesterID, false) };
     this._collection.update(existingFeedID, { $set: { userIDs, description } });
   }
 
