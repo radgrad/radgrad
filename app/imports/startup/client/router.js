@@ -230,6 +230,25 @@ FlowRouter.route('/', {
   },
 });
 
+/*                        GUIDED TOUR ROUTE                       */
+
+export const studentGuidedTourPageRouteName = 'Student_Guided_Tour_Page';
+FlowRouter.route('/guidedtour/student', {
+  name: studentGuidedTourPageRouteName,
+  action() {
+    BlazeLayout.render('Guided_Tour_Layout', { main: studentGuidedTourPageRouteName });
+  },
+});
+
+/* TODO: Implement afterwards!
+export const advisorGuidedTourPageRouteName = 'Advisor_Guided_Tour_Page';
+FlowRouter.route('/guidedtour/advisor', {
+  name: advisorGuidedTourPageRouteName,
+  action() {
+    BlazeLayout.render('Guided_Tour_Layout', { main: advisorGuidedTourPageRouteName });
+  },
+});
+*/
 
 /*                        MENTOR ROUTES                       */
 
