@@ -128,7 +128,7 @@ class PublicStatsCollection extends BaseCollection {
 
   usersMentorsTotal() {
     const numUsers = Users.find({ roles: [ROLE.MENTOR] }).count();
-    this._collection.upsert({ key: this.usersMentorsLocationsKey }, { $set: { value: `${numUsers}` } });
+    this._collection.upsert({ key: this.usersMentorsTotalKey }, { $set: { value: `${numUsers}` } });
   }
 
   usersMentorsProfessionsList() {
