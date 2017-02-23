@@ -54,6 +54,10 @@
   font-size: 18px;
 }
 
+.inverted-description p > strong, .header-description p > strong {
+  color: #6FBE44;
+}
+
 .header-text {
   font-size: 45px;
 }
