@@ -19,7 +19,7 @@ function matchingTeasers() {
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
   let teaserInterests = [];
-  _.map(user.interestIDs, (id) => {
+  _.map(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
   });
   _.map(allTeasers, (teaser) => {

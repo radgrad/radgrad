@@ -5,6 +5,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
+import { DesiredDegrees } from '../degree/DesiredDegreeCollection';
 import { Interests } from '../interest/InterestCollection';
 import { MentorProfiles } from '../mentor/MentorProfileCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
@@ -27,6 +28,10 @@ class PublicStatsCollection extends BaseCollection {
     this.stats.push(this.careerGoalsTotalKey);
     this.careerGoalsListKey = 'careerGoalsList';
     this.stats.push(this.careerGoalsListKey);
+    this.desiredDegreesTotalKey = 'desiredDegreesTotal';
+    this.stats.push(this.desiredDegreesTotalKey);
+    this.desiredDegreesListKey = 'desiredDegreesList';
+    this.stats.push(this.desiredDegreesListKey);
     this.interestsTotalKey = 'interestsTotal';
     this.stats.push(this.interestsTotalKey);
     this.interestsListKey = 'interestsList';
@@ -55,21 +60,26 @@ class PublicStatsCollection extends BaseCollection {
     this.stats.push(this.courseReviewsCoursesKey);
   }
 
-  /**
-   * Upserts the careerGoalsTotal statistic.
-   */
   careerGoalsTotal() {
     const count = CareerGoals.find().count();
     this._collection.upsert({ key: this.careerGoalsTotalKey }, { $set: { value: `${count}` } });
   }
 
-  /**
-   * Upserts the careerGoalsList statistic.
-   */
   careerGoalsList() {
     const goals = CareerGoals.find().fetch();
-    const names = _.map(goals, 'name')
+    const names = _.map(goals, 'name');
     this._collection.upsert({ key: this.careerGoalsListKey }, { $set: { value: names.join(', ') } });
+  }
+
+  desiredDegreesTotal() {
+    const count = DesiredDegrees.find().count();
+    this._collection.upsert({ key: this.desiredDegreesTotalKey }, { $set: { value: `${count}` } });
+  }
+
+  desiredDegreesList() {
+    const degrees = DesiredDegrees.find().fetch();
+    const names = _.map(degrees, 'name');
+    this._collection.upsert({ key: this.desiredDegreesListKey }, { $set: { value: names.join(', ') } });
   }
 
   interestsTotal() {
@@ -118,7 +128,7 @@ class PublicStatsCollection extends BaseCollection {
 
   usersMentorsTotal() {
     const numUsers = Users.find({ roles: [ROLE.MENTOR] }).count();
-    this._collection.upsert({ key: this.usersMentorsLocationsKey }, { $set: { value: `${numUsers}` } });
+    this._collection.upsert({ key: this.usersMentorsTotalKey }, { $set: { value: `${numUsers}` } });
   }
 
   usersMentorsProfessionsList() {
