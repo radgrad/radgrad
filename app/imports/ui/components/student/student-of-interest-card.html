@@ -4,9 +4,9 @@
     <div class="content">
       <div class="header">{{itemName item}}</div>
       <div class="meta">
-        {{#each semester in itemSemesters}}
-          {{semester}}&nbsp;
-        {{/each}}
+        {{#if itemSemesters}}
+          {{replaceSemString itemSemesters}}
+        {{/if}}
       </div>
     </div>
     <div class="content">
