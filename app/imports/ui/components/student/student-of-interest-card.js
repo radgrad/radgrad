@@ -79,14 +79,10 @@ Template.Student_Of_Interest_Card.helpers({
     if (this.type === 'courses') {
       if (_.includes(student.hiddenCourseIDs, this.item._id)) {
         ret = 'grey';
-      } else {
-        // buttons remain green
       }
     } else
       if (_.includes(student.hiddenOpportunityIDs, this.item._id)) {
         ret = 'grey';
-      } else {
-        // buttons remain green
       }
     return ret;
   },
@@ -131,6 +127,16 @@ Template.Student_Of_Interest_Card.helpers({
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
+  replaceSemString(array) {
+    const currentSem = currentSemester();
+    const currentYear = currentSem.year;
+    let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
+      return semesterYear.split(' ')[1] >= currentYear;
+    });
+    fourRecentSem = array.slice(0, 4);
+    const semString = fourRecentSem.join(' - ');
+    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+  },
   studentPicture(studentID) {
     if (studentID === 'elipsis') {
       return '/images/elipsis.png';
@@ -156,32 +162,25 @@ Template.Student_Of_Interest_Card.helpers({
 Template.Student_Of_Interest_Card.events({
   'click .addToPlan': function clickItemAddToPlan(event) {
     event.preventDefault();
+    const semester = event.target.text;
+    const itemSlug = Slugs.findDoc({ _id: this.item.slugID });
+    const semSplit = semester.split(' ');
+    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
+    const username = getRouteUserName();
     if (this.type === 'courses') {
-      const course = this.course;
-      const semester = event.target.text;
-      const courseSlug = Slugs.findDoc({ _id: course.slugID });
-      const semSplit = semester.split(' ');
-      const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-      const username = getRouteUserName();
       const ci = {
         semester: semSlug,
-        course: courseSlug,
+        course: itemSlug,
         verified: false,
-        note: course.number,
+        note: this.item.number,
         grade: 'B',
         student: username,
       };
       CourseInstances.define(ci);
     } else {
-      const opportunity = this.opportunity;
-      const semester = event.target.text;
-      const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
-      const semSplit = semester.split(' ');
-      const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-      const username = getRouteUserName();
       const oi = {
         semester: semSlug,
-        opportunity: oppSlug.name,
+        opportunity: itemSlug.name,
         verified: false,
         student: username,
       };

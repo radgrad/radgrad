@@ -4,11 +4,14 @@
       <div class="ui two column centered padded stackable grid">
 
         <div class="column">
-          <h1 class="header-text">Generate a <span class="green-text">custom</span> degree experience</h1>
-          <p class="header-description">Based on your degree, career goals, and interests, RadGrad helps you plan what you'll do each semester: not just the classes you'll take, but also
-        extracurricular opportunities such as hackathons, internships, clubs, and more.</p>
+          <h1 class="header-text">Generate a custom degree experience</h1>
+          <p class="header-description">
+            {{#markdown}}
+Based on your degree, career goals, and interests, RadGrad helps you plan what you'll do each semester: not just the classes you'll take, but also *relevant* extracurricular opportunities such as hackathons, internships, clubs, and more. RadGrad currently provides you with **{{publicStats 'opportunitiesTotal'}}** opportunities to choose from, with more on the way!
 
-          <p class="header-description">RadGrad recognizes that what you do outside of class is sometimes just as important as what you do in it.</p>
+RadGrad recognizes that what you do outside of class is sometimes just as important as what you do in it.
+            {{/markdown}}
+          </p>
         </div>
 
         <div class="column">
