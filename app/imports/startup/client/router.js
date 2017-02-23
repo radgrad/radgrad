@@ -240,6 +240,7 @@ FlowRouter.route('/guidedtour/student', {
   },
 });
 
+/* TODO: Implement afterwards!
 export const advisorGuidedTourPageRouteName = 'Advisor_Guided_Tour_Page';
 FlowRouter.route('/guidedtour/advisor', {
   name: advisorGuidedTourPageRouteName,
@@ -247,6 +248,7 @@ FlowRouter.route('/guidedtour/advisor', {
     BlazeLayout.render('Guided_Tour_Layout', { main: advisorGuidedTourPageRouteName });
   },
 });
+*/
 
 /*                        MENTOR ROUTES                       */
 
