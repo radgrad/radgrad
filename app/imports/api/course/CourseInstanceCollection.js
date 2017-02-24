@@ -28,6 +28,7 @@ class CourseInstanceCollection extends BaseCollection {
       semesterID: { type: SimpleSchema.RegEx.Id },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       verified: { type: Boolean },
+      fromSTAR: { type: Boolean, optional: true },
       grade: { type: String, optional: true },
       creditHrs: { type: Number },
       note: { type: String, optional: true },
@@ -55,6 +56,7 @@ class CourseInstanceCollection extends BaseCollection {
    * CourseInstances.define({ semester: 'Spring-2016',
    *                          course: 'ics311',
    *                          verified: false,
+   *                          fromSTAR: false,
    *                          grade: 'B',
    *                          student: 'joesmith' });
    * // To define an instance of a non-CS course:
@@ -63,6 +65,7 @@ class CourseInstanceCollection extends BaseCollection {
    *                          note: 'ENG 101',
    *                          verified: true,
    *                          creditHrs: 3,
+   *                          fromSTAR: true,
    *                          grade: 'B',
    *                          student: 'joesmith' });
    * @param { Object } description Object with keys semester, course, verified, notCS, grade, studen.
@@ -73,7 +76,7 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If the definition includes an undefined course or student.
    * @returns The newly created docID.
    */
-  define({ semester, course, verified = false, grade = '', note = '', student, creditHrs }) {
+  define({ semester, course, verified = false, fromSTAR = false, grade = '', note = '', student, creditHrs }) {
     // Check arguments
     const semesterID = Semesters.getID(semester);
     const courseID = Courses.getID(course);
@@ -90,7 +93,8 @@ class CourseInstanceCollection extends BaseCollection {
       creditHrs = Courses.findDoc(courseID).creditHrs;
     }
     // Define and return the CourseInstance
-    return this._collection.insert({ semesterID, courseID, verified, grade, studentID, creditHrs, note, ice });
+    // eslint-disable-next-line max-len
+    return this._collection.insert({ semesterID, courseID, verified, fromSTAR, grade, studentID, creditHrs, note, ice });
   }
 
   /**
@@ -170,8 +174,12 @@ class CourseInstanceCollection extends BaseCollection {
    */
   isICS(courseInstanceID) {
     this.assertDefined(courseInstanceID);
-    const courseID = this.findDoc(courseInstanceID).courseID;
-    return Courses.findDoc(courseID).number.substring(0, 3) === 'ICS';
+    const instance = this.findDoc(courseInstanceID);
+    const retVal = instance.note.startsWith('ICS');
+    if (retVal) {
+      return retVal;
+    }
+    return Courses.findDoc(instance.courseID).number.substring(0, 3) === 'ICS';
   }
 
   /**

@@ -29,7 +29,8 @@ Template.Warnings.events({
 });
 
 Template.Warnings.onCreated(function warningsOnCreated() {
-  // add your statement here
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
 });
 
 Template.Warnings.onRendered(function warningsOnRendered() {

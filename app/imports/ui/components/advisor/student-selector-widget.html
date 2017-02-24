@@ -1,0 +1,10 @@
+<template name="Student_Selector_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>STUDENTS</h4></div>
+      {{> Student_Selector_Tabs dictionary=dictionary studentID=studentID}}
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>
