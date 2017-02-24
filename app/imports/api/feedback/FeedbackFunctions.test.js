@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor';
 // import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
-import { makeCourseRecommendationFeedback } from '/imports/api/feedback/SampleFeedbacks';
+// import { makeCourseRecommendationFeedback } from '/imports/api/feedback/SampleFeedbacks';
 import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { makeSampleCourse, makeSampleCourseInstance } from '/imports/api/course/SampleCourses';
 import { Users } from '/imports/api/user/UserCollection';
