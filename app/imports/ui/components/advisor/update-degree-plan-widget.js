@@ -7,6 +7,9 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
@@ -139,6 +142,11 @@ Template.Update_Degree_Plan_Widget.events({
           if (degree.shortName.startsWith('B.A.')) {
             planUtils.generateBADegreePlan(student, startSemester);
           }
+          FeedbackFunctions.checkPrerequisites(studentID);
+          FeedbackFunctions.checkCompletePlan(studentID);
+          FeedbackFunctions.generateRecommendedCourse(studentID);
+          FeedbackFunctions.checkOverloadedSemesters(studentID);
+          FeedbackFunctions.generateNextLevelRecommendation(studentID);
         }
       },
     }).modal('show');
@@ -179,6 +187,8 @@ Template.Update_Degree_Plan_Widget.events({
 
 Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
   this.subscribe(AcademicYearInstances.getPublicationName());
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());

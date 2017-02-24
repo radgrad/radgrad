@@ -87,7 +87,7 @@ function getRandomInt(min, max) {
 }
 
 export const clearPlannedCourseInstances = (studentID) => {
-  const courses = CourseInstances.find({ studentID, verified: false }).fetch();
+  const courses = CourseInstances.find({ studentID, verified: false, fromSTAR: false }).fetch();
   _.map(courses, (ci) => {
     CourseInstances.removeIt(ci);
   });

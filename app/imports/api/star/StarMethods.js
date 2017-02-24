@@ -39,8 +39,10 @@ Meteor.methods({
       } else {
         numOtherCourses += 1;
       }
+      definition.fromSTAR = true; // eslint-disable-line
       if (definition.grade === '***') {
         definition.grade = 'B';  // eslint-disable-line
+        definition.verified = false; // eslint-disable-line
       }
       // console.log('CourseInstances.define', definition);
       CourseInstances.define(definition);
@@ -52,6 +54,7 @@ Meteor.methods({
       // console.log('AcademicYearInstances.define', student, yearVal);
       return AcademicYearInstances.define({ student, year: yearVal });
     });
+
     const note = `Uploaded ${numIcsCourses} ICS courses and ${numOtherCourses} other courses.`;
     StarDataLogs.define({ student, note });
   },
