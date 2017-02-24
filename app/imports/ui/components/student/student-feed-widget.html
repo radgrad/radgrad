@@ -20,7 +20,7 @@
                 {{/if}}
                 {{#if isType feed 'new-user'}}
                   {{#if multipleUsers feed}}
-                    <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> and {{feed.description.numUsers}} {{feed.description.description}}
+                    <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> and {{> Student_Feed_Modal number = feed.description.numUsers students=(students feed)}} {{feed.description.description}}
                   {{else}}
                     <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> {{feed.description.description}}
                   {{/if}}
@@ -33,7 +33,7 @@
                 {{/if}}
                 {{#if isType feed 'verified-opportunity'}}
                   {{#if multipleUsers feed}}
-                    <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> and {{feed.description.numUsers}} {{feed.description.description}} <a href="{{pathFor opportunityRouteName username=routeUserName opportunity=(opportunitySlug feed)}}">{{feed.description.item}}</a> ({{feed.description.semester}})
+                    <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> and {{> Student_Feed_Modal number = feed.description.numUsers students=(students feed)}} {{feed.description.description}} <a href="{{pathFor opportunityRouteName username=routeUserName opportunity=(opportunitySlug feed)}}">{{feed.description.item}}</a> ({{feed.description.semester}})
                   {{else}}
                     <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> {{feed.description.description}} <a href="{{pathFor opportunityRouteName username=routeUserName opportunity=(opportunitySlug feed)}}">{{feed.description.item}}</a> ({{feed.description.semester}})
                   {{/if}}

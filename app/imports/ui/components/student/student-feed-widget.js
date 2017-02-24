@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -58,10 +59,16 @@ Template.Student_Feed_Widget.helpers({
     return ret;
   },
   isType(feed, type) {
-    console.log(feed);
     return feed.feedType === type;
   },
   multipleUsers(feed) {
     return feed.userIDs.length > 1;
   },
+  students(feed) {
+    const students = [];
+    _.map(feed.userIDs, function(userID) {
+      students.push(Users.findDoc(userID));
+    });
+    return students;
+  }
 });
