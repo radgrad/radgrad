@@ -1,26 +1,32 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Landing_Section_1.helpers({
-  useCAS() {
+  adminHomePageRouteName() {
+    return RouteNames.adminHomePageRouteName;
+  },
+  advisorStudentConfigurationPageRouteName() {
+    return RouteNames.advisorStudentConfigurationPageRouteName;
+  },
+  checkLanding() {
+    const routeName = FlowRouter.current().route.name;
+    if (routeName === 'Landing_Page') {
+      return true;
+    }
     return false;
   },
-  josephineICE() {
-    return { i: 100, c: 100, e: 100 };
+  facultyHomePageRouteName() {
+    return RouteNames.facultyHomePageRouteName;
   },
-  brianICE() {
-    return { i: 100, c: 95, e: 99 };
+  mentorHomePageRouteName() {
+    return RouteNames.mentorHomePageRouteName;
   },
-  micheleICE() {
-    return { i: 98, c: 100, e: 94 };
+  studentHomePageRouteName() {
+    return RouteNames.studentHomePageRouteName;
   },
-  aljonICE() {
-    return { i: 100, c: 99, e: 99 };
-  },
-  kelsieICE() {
-    return { i: 96, c: 100, e: 100 };
-  },
-  syICE() {
-    return { i: 95, c: 97, e: 100 };
+  useCAS() {
+    return false;
   },
 });
 

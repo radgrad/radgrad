@@ -38,7 +38,7 @@ atoy40:accounts-cas
 momentjs:moment
 harrison:papa-parse
 erasaur:meteor-lodash
-underscore@1.0.10           # Should pick one, underscore or lodash.
+underscore@1.0.10           # TODO: Should pick one, underscore or lodash.
 shell-server@0.2.1
 sacha:spin
 random@1.0.10
@@ -62,3 +62,5 @@ ostrio:files
 jag:pince
 johanbrook:publication-collector
 udondan:zipzap
+udondan:slick
+percolate:synced-cron

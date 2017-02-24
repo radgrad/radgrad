@@ -1,85 +1,141 @@
 <template name="Student_Explorer_Opportunities_Widget">
   {{#if Template.subscriptionsReady}}
-    <div class="ui padded segment container">
-      <div class="ui dividing header">
-        <h4>{{name}}</h4>
-      </div>
-      {{#each descriptionPair in descriptionPairs}}
-        {{#if isLabel descriptionPair.label 'Interests'}}
-          <p>
-            {{#each interest in descriptionPair.value}}
-              <a class="ui mini label"><i class="fitted star icon"></i>{{interest}}</a>
-            {{/each}}
-          </p>
-        {{else}}
-          {{#if isLabel descriptionPair.label 'Teaser'}}
-            {{#if descriptionPair.value}}
-              <p><b>{{descriptionPair.label}}:</b>
-              {{> Student_Explorer_Opportunities_Widget_Teaser teaser = (descriptionPair.value)}}
-             </p>
+    <div class="ui segments">
+      <div class="ui padded segment container">
+
+        <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+          <h4 class="ui left floated header">{{toUpper name}}</h4>
+          {{#if userStatus item}}
+            {{#if futureInstance item}}
+              {{> Student_Explorer_Opportunities_Widget_Button buttonType='remove' opportunity=item}}
             {{else}}
-            <p><b>{{descriptionPair.label}}:</b> None</p>
-            {{/if}}
-          {{else}}
-              {{#if descriptionPair.value }}
-              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
-            {{else}}
-              <p><b>{{descriptionPair.label}}:</b> N/A</p>
+              {{#if unverified item}}
+                {{> Student_Explorer_Opportunities_Widget_Button buttonType='remove' opportunity=item}}
+              {{/if}}
             {{/if}}
           {{/if}}
-        {{/if}}
-      {{/each}}
+          {{> Student_Explorer_Opportunities_Widget_Button buttonType='add' opportunity=item}}
+          {{#each descriptionPair in descriptionPairs}}
+            {{#if isLabel descriptionPair.label 'ICE'}}
+              {{> ICE_header ice=descriptionPair.value}}
+            {{/if}}
+          {{/each}}  
+        </div>
+        <div class="ui divider" style="margin-top: 0;"></div>
 
-      <div class="ui three column grid">
+        <div class="ui stackable two column grid">
+          <div class="five wide column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Opportunity Type'}}
+                <b>{{descriptionPair.label}}:</b> 
+                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Sponsor'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
+                {{else}}
+                  N/A <br>
+                {{/if}}
+              {{/if}}
+
+            {{/each}}
+          </div>
+
+          <div class="eleven wide column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Semesters'}}
+              <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{replaceSemString descriptionPair.value}}</span> <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Event Date'}}
+              <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{descriptionPair.value}}</span> <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+            {{/each}}
+          </div>
+        </div>
+        <div class="ui stackable grid">
+          <div style="margin-top: 0" class="column">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                {{else}}
+                  N/A
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Teaser' }}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}}
+                  {{> Student_Explorer_Opportunities_Widget_Teaser item=item}}
+                {{else}}
+                  <p>N/A</p>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'More Information'}}
+                <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}}<span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span>
+                {{else}}
+                  N/A
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Interest_List item=item size='mini'}}
+                </div>
+              {{/if}}
+            {{/each}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ui stackable two column grid">
+      <div class="ten wide column">
+        <div class="ui padded segment">
+          {{> Student_Explorer_Review_Widget event=item userReview=review completed=completed reviewType='opportunity'}}
+        </div>
+      </div>
+
+      <div class="six wide column">
         {{#each socialPair in socialPairs}}
-          <div class="stretched column">
-            <table class="ui small table">
-              <thead>
-              <tr>
-                <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>
-                  <div class="ui circular mini bordered images">
-                    {{#each user in socialPair.value}}
-                      <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
-                    {{/each}}
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+          <div class="ui padded segment">
+            <div class="ui dividing header">
+              <h4>{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
+            </div>
+
+            <div class="ui circular mini bordered images" style="overflow: visible;">
+              {{#each user in socialPair.value}}
+                <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername user)}}" data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}></a>
+              {{/each}}
+            </div>
           </div>
         {{/each}}
       </div>
-      <br>
-      <p>
-        {{#if userStatus item}}
-          {{> Student_Explorer_Opportunities_Widget_Button buttonType='remove' opportunity=item}}
-        {{else}}
-          {{> Student_Explorer_Opportunities_Widget_Button buttonType='add' opportunity=item}}
-        {{/if}}
-
-      {{#if reviews}}
-        {{> Student_Explorer_Opportunities_Review_Widget opportunity = item}}
-      {{else}}
-        <div class="ui divider"></div>
-        <p>There are no reviews yet.</p>
-      {{/if}}
-      {{#if completed}}
-        {{#if reviewed}}
-          {{> Student_Explorer_Opportunities_Edit_Review_Widget review = review opportunity = item}}
-        {{else}}
-          {{> Student_Explorer_Opportunities_Add_Review_Widget opportunity = item}}
-        {{/if}}
-      {{else}}
-        <p><i>You must complete this opportunity first before posting a review.</i></p>
-      {{/if}}
-      </p>
     </div>
+
+    {{> Back_To_Top_Button}}
+
   {{else}}
     {{> Loading}}
   {{/if}}
+  
 </template>

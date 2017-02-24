@@ -1,20 +1,20 @@
 <template name="First_Menu_Ice">
   <div class="radgrad-ice menu" style="margin-right: 5px;">
-    <div class="radgrad-ice-circle {{pClass projected}} radgrad-proj-{{iceType}}">
+    <a class="radgrad-ice-circle {{pClass projected}} radgrad-proj-{{iceType}}" href="{{pathFor iceRouteName username=routeUserName}}">
       <div class="radgrad-ice-stat">
-        <span>{{earned}}</span>
+        <span>{{finalEarned earned}}</span>
       </div>
       <div class="slice">
         <div class="bar"></div>
         <div class="fill"></div>
       </div>
-    </div>
-    <div class="radgrad-ice-circle {{pClass earned}} radgrad-earn-{{iceType}}">
+    </a>
+    <a class="radgrad-ice-circle {{pClass earned}} radgrad-earn-{{iceType}}">
       <span></span>
       <div class="slice">
         <div class="bar"></div>
         <div class="fill"></div>
       </div>
-    </div>
+    </a>
   </div>
 </template>

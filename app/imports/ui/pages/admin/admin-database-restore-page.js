@@ -7,18 +7,9 @@ import { restoreFileDateFormat } from '/imports/ui/pages/admin/admin-database-du
 import { moment } from 'meteor/momentjs:moment';
 
 Template.Admin_DataBase_Restore_Page.helpers({
-  results() {
-    return Template.instance().results.get() || '';
-  },
   hidden() {
     const data = Template.instance().results.get();
     return (data) ? '' : 'hidden';
-  },
-  successOrError() {
-    return Template.instance().successOrError.get();
-  },
-  restoreFile() {
-    return Meteor.settings.public.databaseRestoreFileName;
   },
   restoreDate() {
     // Assumes file name is like: private/database/mockup/2017-01-12-02-59-12.json
@@ -27,6 +18,15 @@ Template.Admin_DataBase_Restore_Page.helpers({
     const terms = _.words(fileName, /[^/. ]+/g);
     const dateString = terms[terms.length - 2];
     return moment(dateString, restoreFileDateFormat).fromNow();
+  },
+  restoreFile() {
+    return Meteor.settings.public.databaseRestoreFileName;
+  },
+  results() {
+    return Template.instance().results.get() || '';
+  },
+  successOrError() {
+    return Template.instance().successOrError.get();
   },
 });
 

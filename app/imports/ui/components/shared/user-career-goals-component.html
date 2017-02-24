@@ -1,0 +1,19 @@
+<template name="User_Career_Goals_Component">
+  {{#if careerGoals}}
+    <div class="ui styled fluid accordion">
+      <div class="title">
+        <i class="dropdown icon"></i>
+        <b>Career Goals:</b> ({{count}})<br>
+      </div>
+      <div class="content">
+        {{#each careerGoal in careerGoals}}
+          <a href="{{careerGoalURL careerGoal}}" class="ui {{labelSize}} label">
+              <i style="color:white !important" class="fitted suitcase icon"></i>{{careerGoal.name}}
+            </a>
+        {{/each}}
+      </div>
+    </div>
+  {{else}}
+    <p>No career goals chosen yet.</p>
+  {{/if}}
+</template>

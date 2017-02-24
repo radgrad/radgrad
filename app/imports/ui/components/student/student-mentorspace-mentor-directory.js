@@ -13,6 +13,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_MentorSpace_Mentor_Directory.onCreated(function studentMentorSpaceMentorDirectoryOnCreated() {
   this.autorun(() => {
@@ -35,7 +36,9 @@ Template.Student_MentorSpace_Mentor_Directory.onCreated(function studentMentorSp
 
 Template.Student_MentorSpace_Mentor_Directory.helpers({
   // placeholder: if you display dynamic data in your layout, you will put your template helpers here.
-
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
 });
 
 Template.Student_MentorSpace_Mentor_Directory.events({

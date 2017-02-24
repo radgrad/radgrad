@@ -4,18 +4,23 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Explorer_Degrees_Widget.helpers({
-  isLabel(label, value) {
-    return label === value;
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+  },
+  toUpper(string) {
+    return string.toUpperCase();
   },
   userPicture(user) {
-    return Users.findDoc(user).picture;
+    if (Users.findDoc(user).picture) {
+      return Users.findDoc(user).picture;
+    }
+    return '/images/default-profile-picture.png';
   },
-  degreeName(degreeSlugName) {
-    const slug = Slugs.find({ name: degreeSlugName }).fetch();
-    const degree = DesiredDegrees.find({ slugID: slug[0]._id }).fetch();
-    return degree[0].name;
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
   userStatus(degree) {
     let ret = true;
@@ -24,6 +29,9 @@ Template.Student_Explorer_Degrees_Widget.helpers({
       ret = false;
     }
     return ret;
+  },
+  userUsername(user) {
+    return Users.findDoc(user).username;
   },
 });
 
@@ -35,7 +43,7 @@ Template.Student_Explorer_Degrees_Widget.events({
     try {
       Users.setDesiredDegree(student._id, id);
     } catch (e) {
-      // don't do anything.
+      // don't do anything. // TODO: do something.
     }
   },
   'click .deleteItem': function clickRemoveItem(event) {

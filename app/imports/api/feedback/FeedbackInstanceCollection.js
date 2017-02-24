@@ -25,6 +25,11 @@ class FeedbackInstanceCollection extends BaseCollection {
       description: { type: String },
       area: { type: String },
     }));
+    this.INTERESTS = 'Interests';
+    this.ICE = 'ICE';
+    this.STAR = 'STAR';
+    this.DegreePlan = 'DegreePlan';
+    this.AREAS = [this.INTERESTS, this.ICE, this.STAR, this.DegreePlan];
   }
 
   /**

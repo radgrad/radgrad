@@ -1,14 +1,24 @@
 <template name="Landing_Section_7">
-  <div class="landing-green-background">
-    <div class="ui center aligned container">
-      <h1 class="landing-green-background-header">Discover new directions</h1>
-      <img class="ui image" src="/images/landing/abi-explorer-career-goals.png">
-    </div>
 
-    <div style="margin-top: 20px" class="ui text container">
-      <p>Computer science is changing all the time, and your interests and career goals will evolve as you progress through the program.</p>
+  <div class="inverted-section" id="landing-section-7">
+    <div class="ui container">
+      <div class="ui two column centered padded stackable grid">
 
-      <p>RadGrad provides "Explorers" for career goals, interests, degrees, and more so you can stay on top of the latest trends.</p>
+        <div class="column">
+          <h1 class="inverted-header">Discover new directions</h1>
+          <p class="inverted-description">
+            {{#markdown}}
+Computer science is changing all the time, and so your interests and career goals might evolve as well.
+        
+RadGrad provides "Explorers" for career goals, interests, degrees, and more so you can stay on top of the latest trends.  For example, RadGrad's career goals include: **{{publicStats 'careerGoalsList'}}**.
+              {{/markdown}}
+          </p>
+        </div>
+
+        <div class="column">
+          <img class="ui rounded image" src="/images/landing/abi-explorer-career-goals.png">
+        </div>
+      </div>
     </div>
   </div>
 </template>

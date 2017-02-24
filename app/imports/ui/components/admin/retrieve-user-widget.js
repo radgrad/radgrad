@@ -1,6 +1,10 @@
 import { Template } from 'meteor/templating';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Users } from '../../../api/user/UserCollection.js';
+import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
+import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessorMethods';
 
 Template.Retrieve_User_Widget.helpers({
   users(role) {
@@ -10,7 +14,7 @@ Template.Retrieve_User_Widget.helpers({
     return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
   },
   label(user) {
-    return `${user.lastName}, ${user.firstName} (${user.username})`;
+    return `${user.lastName}, ${user.firstName}`;
   },
   studentRole() {
     return ROLE.STUDENT;
@@ -33,10 +37,16 @@ Template.Retrieve_User_Widget.helpers({
 });
 
 Template.Retrieve_User_Widget.events({
-  // add your events here
+  'click .ui.button': function clickUpdateLevels(event) {
+    event.preventDefault();
+    updateAllStudentLevelsMethod.call();
+  },
 });
 
 Template.Retrieve_User_Widget.onCreated(function advisorLogViewerOnCreated() {
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Reviews.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
 

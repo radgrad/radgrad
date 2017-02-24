@@ -6,8 +6,8 @@
   padding: 4px 4px;
 }
 
-.degreePlanner .ui.segment {
-  padding: 1em 1em 2.5em 1em;
+.academicYear .segment {
+  padding: 1em 1em 2em 1em;
 }
 
 .degreePlanner .ui.selection.dropdown {
@@ -31,4 +31,8 @@
 
 body.waiting * {
   cursor: progress;
+}
+
+.jsDelCourse, .jsDelOpp {
+  font-size: 1.2em ! important;
 }

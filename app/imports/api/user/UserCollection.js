@@ -6,9 +6,11 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
+import { Courses } from '/imports/api/course/CourseCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
 import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
+import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
 import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
@@ -43,6 +45,8 @@ class UserCollection extends BaseInstanceCollection {
       picture: { type: String, optional: true },
       level: { type: Number, optional: true },
       website: { type: String, optional: true },
+      hiddenCourseIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
+      hiddenOpportunityIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
     }));
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
     this._collection = Meteor.users;
@@ -87,19 +91,22 @@ class UserCollection extends BaseInstanceCollection {
    *                interests: ['software-engineering'],
    *                careerGoals: ['application-developer'],
    *                desiredDegree: 'bs-cs',
-   *                level: 1
+   *                level: 1,
+   *                hiddenCourses: ['ics312']
+   *                hiddenOpportunities: ['acm-icpc']
    *               });
    * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
-   * picture, website, interests, careerGoals, and desiredDegree are optional.
+   * picture, website, interests, careerGoals, hiddenCourseIDs, hiddenOpportunityIDs and desiredDegree are optional.
    * desiredDegree, if supplied, must be a DesiredDegree slug or docID.
    * Level defaults to 1.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
   define({
-      firstName, lastName, slug, email, role, password, picture, interests, careerGoals, desiredDegree,
-      website, uhID, level = 1,
+      firstName, lastName, slug, email, role, password,
+      picture = '/images/default-profile-picture.png', interests, careerGoals, desiredDegree,
+      website, uhID, level = 1, hiddenCourses = [], hiddenOpportunities = [],
   }) {
     // Users can only be defined on the server side.
     if (Meteor.isServer) {
@@ -111,6 +118,9 @@ class UserCollection extends BaseInstanceCollection {
       }
       const interestIDs = Interests.getIDs(interests);
       const careerGoalIDs = CareerGoals.getIDs(careerGoals);
+      const hiddenCourseIDs = Courses.getIDs(hiddenCourses);
+      const hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
+
       // desiredDegree is optional.
       const desiredDegreeID = (desiredDegree) ? DesiredDegrees.getID(desiredDegree) : undefined;
       // Now define the user.
@@ -128,7 +138,7 @@ class UserCollection extends BaseInstanceCollection {
       Meteor.users.update(userID, {
         $set: {
           username: slug, firstName, lastName, slugID, email, picture, website, password,
-          desiredDegreeID, interestIDs, careerGoalIDs, uhID, level,
+          desiredDegreeID, interestIDs, careerGoalIDs, uhID, level, hiddenCourseIDs, hiddenOpportunityIDs,
         },
       });
 
@@ -347,6 +357,29 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Updates userID with an array of hiddenCourseIDs.
+   * @param userID The userID.
+   * @param hiddenCourseIDs A list of courseIDs.
+   * @throws {Meteor.Error} If userID is not a userID, or if hiddenCourseIDs is not a list of courseIDs.
+   */
+  setHiddenCourseIds(userID, hiddenCourseIDs) {
+    this.assertDefined(userID);
+    Courses.assertAllDefined(hiddenCourseIDs);
+    this._collection.update(userID, { $set: { hiddenCourseIDs } });
+  }
+
+  /**
+   * Updates userID with an array of hiddenOpportunityIDs.
+   * @param userID The userID.
+   * @param hiddenOpportunityIDs A list of opportunityIDs.
+   * @throws {Meteor.Error} If userID is not a userID, or if hiddenOpportunityIDs is not a list of opportunityIDs.
+   */
+  setHiddenOpportunityIds(userID, hiddenOpportunityIDs) {
+    this.assertDefined(userID);
+    Opportunities.assertAllDefined(hiddenOpportunityIDs);
+    this._collection.update(userID, { $set: { hiddenOpportunityIDs } });
+  }
+  /**
    * Returns an ICE object with the total of verified course and opportunity instance ICE values.
    * @param studentID The userID.
    * @throws {Meteor.Error} If userID is not a userID.
@@ -394,6 +427,22 @@ class UserCollection extends BaseInstanceCollection {
     return _.uniq(courseIDs);
   }
 
+  /**
+   * Returns the user's interests as IDs. It is a union of interestIDs and careerGoal interestIDs.
+   * @param userID
+   * @returns {Array}
+   */
+  getInterestIDs(userID) {
+    const user = this._collection.findOne({ _id: userID });
+    let interestIDs = [];
+    interestIDs = _.union(interestIDs, user.interestIDs);
+    _.map(user.careerGoalIDs, (goalID) => {
+      const goal = CareerGoals.findDoc(goalID);
+      interestIDs = _.union(interestIDs, goal.interestIDs);
+    });
+    return interestIDs;
+  }
+
   publish() {
     if (Meteor.isServer) {
       Meteor.publish(this._collectionName, function () {
@@ -428,6 +477,16 @@ class UserCollection extends BaseInstanceCollection {
           problems.push(`Bad interestID: ${interestID}`);
         }
       });
+      _.forEach(doc.hiddenCourseIDs, hiddenCourseID => {
+        if (!Courses.isDefined(hiddenCourseID)) {
+          problems.push(`Bad hiddenCourseID: ${hiddenCourseID}`);
+        }
+      });
+      _.forEach(doc.hiddenOpportunityIDs, hiddenOpportunityID => {
+        if (!Opportunities.isDefined(hiddenOpportunityID)) {
+          problems.push(`Bad hiddenOpportunityID: ${hiddenOpportunityID}`);
+        }
+      });
     });
     return problems;
   }
@@ -452,8 +511,12 @@ class UserCollection extends BaseInstanceCollection {
     const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
     const desiredDegree = doc.desiredDegreeID && DesiredDegrees.findSlugByID(doc.desiredDegreeID);
     const level = doc.level;
+    const hiddenCourses = _.map(doc.hiddenCourseIDs, hiddenCourseID => Courses.findSlugByID(hiddenCourseID));
+    const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs, hiddenOpportunityID =>
+        Opportunities.findSlugByID(hiddenOpportunityID));
+
     return { firstName, lastName, slug, email, password, role, uhID, picture, website, interests, careerGoals,
-      desiredDegree, level };
+      desiredDegree, level, hiddenCourses, hiddenOpportunities };
   }
 
 }

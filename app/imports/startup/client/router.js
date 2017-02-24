@@ -144,6 +144,14 @@ adminRoutes.route('/database/restore', {
   },
 });
 
+export const adminReviewModerationPageRouteName = 'Admin_Review_Moderation_Page';
+adminRoutes.route('/review-moderation', {
+  name: adminReviewModerationPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminReviewModerationPageRouteName });
+  },
+});
+
 /*                        ADVISOR ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.
@@ -186,6 +194,14 @@ advisorRoutes.route('/completed-verifications', {
   },
 });
 
+export const advisorReviewModerationPageRouteName = 'Advisor_Review_Moderation_Page';
+advisorRoutes.route('/review-moderation', {
+  name: advisorReviewModerationPageRouteName,
+  action() {
+    BlazeLayout.render('Advisor_Layout', { main: advisorReviewModerationPageRouteName });
+  },
+});
+
 /*                        FACULTY ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.
@@ -214,6 +230,25 @@ FlowRouter.route('/', {
   },
 });
 
+/*                        GUIDED TOUR ROUTE                       */
+
+export const studentGuidedTourPageRouteName = 'Student_Guided_Tour_Page';
+FlowRouter.route('/guidedtour/student', {
+  name: studentGuidedTourPageRouteName,
+  action() {
+    BlazeLayout.render('Guided_Tour_Layout', { main: studentGuidedTourPageRouteName });
+  },
+});
+
+/* TODO: Implement afterwards!
+export const advisorGuidedTourPageRouteName = 'Advisor_Guided_Tour_Page';
+FlowRouter.route('/guidedtour/advisor', {
+  name: advisorGuidedTourPageRouteName,
+  action() {
+    BlazeLayout.render('Guided_Tour_Layout', { main: advisorGuidedTourPageRouteName });
+  },
+});
+*/
 
 /*                        MENTOR ROUTES                       */
 
@@ -236,10 +271,14 @@ mentorRoutes.route('/home', {
 /*                        STUDENT ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.
+// Student pages will automatically go to top when rendered. This helps when navigating the long left
+// side menu in the explorer pages.
 const studentRoutes = FlowRouter.group({
   prefix: '/student/:username',
   name: 'student',
-  triggersEnter: [addBodyClass],
+  triggersEnter: [addBodyClass, function () {
+    this.window.scrollTo(0, 0);
+  }],
   triggersExit: [removeBodyClass],
 });
 
@@ -280,6 +319,14 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
   name: studentExplorerOpportunitiesPageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerOpportunitiesPageRouteName });
+  },
+});
+
+export const studentExplorerUsersPageRouteName = 'Student_Explorer_Users_Page';
+studentRoutes.route('/explorer/users/:explorerUserName', {
+  name: studentExplorerUsersPageRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentExplorerUsersPageRouteName });
   },
 });
 

@@ -1,64 +1,161 @@
 <template name="Landing_Section_1">
-  <div class="landing-section-1">
-    <div class="ui container">
+  <div class="ui container">
+    <div class="ui small top fixed menu landing-menu">
+      <div class="item">
+        <img class="ui image" src="/images/radgrad_logo.png" style="width: 45px;">
+      </div>
+      <div class="item">
+        <h2>{{> RadGrad_Logo_Text}}</h2>
+      </div>
 
-      <div style="padding-top: 10px" class="row">
-        <div class="ui grid">
-          <div class="ui left aligned two wide column">
-            <img id="logo" src="/images/ICS-logo.png" class="ui image" width="64px">
-          </div>
+      <div class="right menu">
+        <div class="item">
+          <a href="#landing-section-9">GUIDED TOUR</a>
+        </div>
 
-          <div class="ui center aligned twelve wide column">
-            <h1 class="landing-section-1-welcome">Welcome to {{> RadGrad_Logo_Text}}</h1>
-            <h3 class="landing-section-1-tagline">Developing awesome computer scientists, <br> one graduate at a time
-            </h3>
-          </div>
 
-          <div class="ui right aligned two wide column">
+        <div class="item">
+          <div class="ui small compact green basic button">
             {{#if useCAS}}
               {{> Cas_Login align="right"}}
             {{else}}
-              {{> loginButtons align="right"}}
+              {{#if checkLanding}}
+                {{#if currentUser}}
+                  {{#if isInRole 'FACULTY'}}
+                    <a style="color: #6FBE44;" href="{{pathFor facultyHomePageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
+                  {{#if isInRole 'STUDENT'}}
+                    <a style="color: #6FBE44;" href="{{pathFor studentHomePageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
+                  {{#if isInRole 'ADMIN'}}
+                    <a style="color: #6FBE44;" href="{{pathFor adminHomePageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
+                  {{#if isInRole 'ADVISOR'}}
+                    <a style="color: #6FBE44;" href="{{pathFor advisorStudentConfigurationPageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
+                  {{#if isInRole 'MENTOR'}}
+                    <a style="color: #6FBE44;" href="{{pathFor mentorHomePageRouteName username=(currentUser.username)}}">Home</a>
+                  {{/if}}
+                {{else}}
+                  {{> loginButtons align="right"}}
+                {{/if}}
+              {{/if}}
             {{/if}}
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="ui six column grid">
-          <div class="ui center aligned column">
-            <img width="100px" src="/images/landing/garces.jpg" alt="" class="ui centered circular image">
-            <p style="margin-bottom: 1px; margin-top:0px">Josephine G.<br>B.S. Comp. Sci.</p>
-            {{> ICE_Badge ice=josephineICE }}
-          </div>
-          <div class="ui center aligned column">
-            <img width="100px" src="/images/landing/boado.jpg" alt="" class="ui centered circular image">
-            <p style="margin-bottom: 1px; margin-top:0px">Brian B.<br>B.S. Comp. Sci.</p>
-            {{> ICE_Badge ice=brianICE }}
-          </div>
-          <div class="ui center aligned column">
-            <img width="100px" src="/images/landing/shimoda.jpg" alt="" class="ui centered circular image">
-            <p style="margin-bottom: 1px; margin-top:0px">Michele S.<br>B.S. Comp. Eng.</p>
-            {{> ICE_Badge ice=micheleICE }}
-          </div>
-          <div class="ui center aligned column">
-            <img width="100px" src="/images/landing/preza.png" alt="" class="ui centered circular image">
-            <p style="margin-bottom: 1px; margin-top:0px">Aljon P.<br>B.A. Info. & Comp. Sci</p>
-            {{> ICE_Badge ice=aljonICE }}
-          </div>
-          <div class="ui center aligned column">
-            <img width="100px" src="/images/landing/yamakawa.jpg" alt="" class="ui centered circular image">
-            <p style="margin-bottom: 1px; margin-top:0px">Kelsie Y.<br>B.S. Comp. Eng.</p>
-            {{> ICE_Badge ice=kelsieICE }}
-          </div>
-          <div class="ui center aligned column">
-            <img width="100px" src="/images/landing/morikawa.jpg" alt="" class="ui centered circular image">
-            <p style="margin-bottom: 1px; margin-top:0px">Sy M.<br>B.S. Comp. Sci.</p>
-            {{> ICE_Badge ice=syICE }}
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="inverted-section" id="landing-section-1">
+    <div class="ui center aligned container">
+      <h1 class="inverted-main-header">Welcome to <span class="green-text">{{> RadGrad_Logo_Text}}</span></h1>
+      <span class="inverted-main-description">Developing awesome computer scientists, <b>one</b> graduate at a time.</span>
+
+      <div class="ui stackable doubling four cards main-header-ice">
+
+        <div class="card">
+          <div class="content">
+            <img class="right floated mini ui image" src="/images/landing/yamakawa.jpg">
+            <div class="header">
+              Kelsie Y.
+            </div>
+            <div class="meta">
+              B.S. in Computer Science
+            </div>
+            <div class="description">
+              <div class="ui landing-ice three column grid">
+                <div class="center aligned column">
+                  {{> First_Menu_Ice earned="92" projected="100" iceType="innov"}}
+                </div>
+                <div class="column">
+                  {{> First_Menu_Ice earned="81" projected="100" iceType="comp"}}
+                </div>
+                <div class="column">
+                  {{> First_Menu_Ice earned="90" projected="100" iceType="exp"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="content">
+            <img class="right floated mini ui image" src="/images/landing/boado.jpg">
+            <div class="header">
+              Brian B.
+            </div>
+            <div class="meta">
+              B.A. in Info. & Comp. Sci.
+            </div>
+            <div class="description">
+              <div class="ui landing-ice three column grid" style="margin: 0;">
+                <div class="column">
+                  {{> First_Menu_Ice earned="68" projected="100" iceType="innov"}}
+                </div>
+                <div class="column">
+                  {{> First_Menu_Ice earned="63" projected="100" iceType="comp"}}
+                </div>
+                <div class="column">
+                  {{> First_Menu_Ice earned="70" projected="100" iceType="exp"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="content">
+            <img class="right floated mini ui image" src="/images/landing/shimoda.jpg">
+            <div class="header">
+              Michele S.
+            </div>
+            <div class="meta">
+              B.S. in Computer Science
+            </div>
+            <div class="description">
+              <div class="ui landing-ice three column grid">
+                <div class="column">
+                  {{> First_Menu_Ice earned="86" projected="100" iceType="innov"}}
+                </div>
+                <div class="column">
+                  {{> First_Menu_Ice earned="81" projected="100" iceType="comp"}}
+                </div>
+                <div class="column">
+                  {{> First_Menu_Ice earned="95" projected="100" iceType="exp"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="content">
+            <img class="right floated mini ui image" src="/images/landing/morikawa.jpg">
+            <div class="header">
+              Sy M.
+            </div>
+            <div class="meta">
+              B.S. in Computer Science
+            </div>
+            <div class="description">
+              <div class="ui landing-ice three column grid">
+                <div class="column">
+                  {{> First_Menu_Ice earned="65" projected="100" iceType="innov"}}
+                </div>
+                <div class="column">
+                  {{> First_Menu_Ice earned="78" projected="100" iceType="comp"}}
+                </div>
+                <div class="column">
+                  {{> First_Menu_Ice earned="74" projected="100" iceType="exp"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 </template>

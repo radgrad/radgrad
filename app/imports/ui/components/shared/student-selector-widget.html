@@ -1,0 +1,73 @@
+<template name="Student_Selector_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>STUDENTS</h4></div>
+      <div class="ui top attached tabular stackable menu">
+        <a class="active item" data-tab="students">Students</a>
+        <a class="item" data-tab="add">Add New</a>
+      </div>
+      <div class="ui bottom attached active tab segment" data-tab="students">
+        <div class="ui small horizontal list">
+          {{#each user in users studentRole}}
+            <div class="item">
+              <button id="{{user.username}}" class="ui basic grey label jsRetrieve" href="{{url user}}">{{label
+                  user}}</button>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="ui bottom attached tab segment" data-tab="add">
+        <form class="ui form jsNewStudent {{ successClass }} {{ errorClass }}">
+          <div class="two fields">
+            <div class="field">
+              <label>First Name</label>
+              <input id="firstName" type="text" name="firstName" placeholder="First Name">
+              {{#if displayFieldError 'firstName' }}
+                <div class="ui error message">
+                  <p>{{fieldErrorMessage 'firstName'}}.</p>
+                </div>
+              {{/if}}
+            </div>
+            <div class="field">
+              <label>Last Name</label>
+              <input type="text" name="lastName" placeholder="Last Name">
+              {{#if displayFieldError 'lastName' }}
+                <div class="ui error message">
+                  <p>{{fieldErrorMessage 'lastName'}}.</p>
+                </div>
+              {{/if}}
+            </div>
+          </div>
+          <div class="two fields">
+            <div class="field">
+              <label>Userame</label>
+              <input type="text" name="username" placeholder="Username">
+              {{#if displayFieldError 'userName' }}
+                <div class="ui error message">
+                  <p>{{fieldErrorMessage 'userName'}}.</p>
+                </div>
+              {{/if}}
+            </div>
+            <div class="field">
+              <label>UH ID</label>
+              <input type="text" name="uhID" placeholder="1234-5678">
+              {{#if displayFieldError 'uhID' }}
+                <div class="ui error message">
+                  <p>{{fieldErrorMessage 'uhID'}} ####-####.</p>
+                </div>
+              {{/if}}
+            </div>
+          </div>
+          <button class="ui basic green button jsNewStudent" type="submit">Submit</button>
+          {{#if alreadyDefined }}
+            <div class="ui error message">
+              <p>User {{username}} is already defined.</p>
+            </div>
+          {{/if}}
+        </form>
+      </div>
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

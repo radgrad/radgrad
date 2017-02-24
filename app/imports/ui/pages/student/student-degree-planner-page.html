@@ -1,22 +1,14 @@
 <template name="Student_Degree_Planner_Page">
   <div class="layout-page degreePlanner">
-    {{#if currentUser}}
-      {{#if Template.subscriptionsReady}}
-        <div class="ui stackable grid">
-          <div class="sixteen wide column">
-            <p>{{> Help_Panel_Widget}}</p>
-          </div>
+    {{#if Template.subscriptionsReady}}
+      <div class="ui stackable grid">
+        <div class="sixteen wide column">
+          <p>{{> Help_Panel_Widget}}</p>
         </div>
-        {{> Academic_Plan_2 args}}
-      {{else}}
-        {{> Loading}}
-      {{/if}}
-    {{else}}
-      <div class="ui text container">
-        <p>You are not authorized to view this page.</p>
-        <p>Please login.</p>
-        {{> loginButtons }}
       </div>
+      {{> Academic_Plan args}}
+    {{else}}
+      {{> Loading}}
     {{/if}}
   </div>
 </template>

@@ -20,7 +20,6 @@ function passedCourseHelper(courseSlugName) {
     courseID: course[0]._id,
   }).fetch();
   _.map(ci, (c) => {
-    console.log(c);
     if (c.verified === true) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
           c.grade === 'B' || c.grade === 'B-' || c.grade === 'CR') {
@@ -33,23 +32,6 @@ function passedCourseHelper(courseSlugName) {
     }
   });
   return ret;
-}
-
-function interestedUsers(course) {
-  const interested = [];
-  const ci = CourseInstances.find({
-    courseID: course._id,
-  }).fetch();
-  _.map(ci, (c) => {
-    if (!_.includes(interested, c.studentID)) {
-      interested.push(c.studentID);
-    }
-  });
-  return interested;
-}
-
-function numUsers(course) {
-  return interestedUsers(course).length;
 }
 
 function prerequisites(course) {
@@ -72,30 +54,6 @@ function prerequisites(course) {
 }
 
 Template.Student_Explorer_Courses_Page.helpers({
-  course() {
-    const courseSlugName = FlowRouter.getParam('course');
-    const slug = Slugs.find({ name: courseSlugName }).fetch();
-    const course = Courses.find({ slugID: slug[0]._id }).fetch();
-    return course[0];
-  },
-  nonAddedCourses() {
-    const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
-    const userID = getUserIdFromRoute();
-    const nonAddedCourses = _.filter(allCourses, function (course) {
-      const ci = CourseInstances.find({
-        studentID: userID,
-        courseID: course._id,
-      }).fetch();
-      if (ci.length > 0) {
-        return false;
-      }
-      if (course.shortName === 'Non-CS Course') {
-        return false;
-      }
-      return true;
-    });
-    return nonAddedCourses;
-  },
   addedCourses() {
     const addedCourses = [];
     const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
@@ -122,11 +80,40 @@ Template.Student_Explorer_Courses_Page.helpers({
     }
     return ret;
   },
-  courseName(course) {
-    return course.shortName;
+  course() {
+    const courseSlugName = FlowRouter.getParam('course');
+    const slug = Slugs.find({ name: courseSlugName }).fetch();
+    const course = Courses.find({ slugID: slug[0]._id }).fetch();
+    return course[0];
   },
-  count() {
-    return Courses.count() - 1;
+  descriptionPairs(course) {
+    return [
+      { label: 'Course Number', value: course.number },
+      { label: 'Credit Hours', value: course.creditHrs },
+      { label: 'Prerequisites', value: prerequisites(course) },
+      { label: 'Description', value: course.description },
+      { label: 'Syllabus', value: makeLink(course.syllabus) },
+      { label: 'More Information', value: makeLink(course.moreInformation) },
+      { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
+    ];
+  },
+  nonAddedCourses() {
+    const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    const userID = getUserIdFromRoute();
+    const nonAddedCourses = _.filter(allCourses, function (course) {
+      const ci = CourseInstances.find({
+        studentID: userID,
+        courseID: course._id,
+      }).fetch();
+      if (ci.length > 0) {
+        return false;
+      }
+      if (course.shortName === 'Non-CS Course') {
+        return false;
+      }
+      return true;
+    });
+    return nonAddedCourses;
   },
   reviewed(course) {
     let ret = false;
@@ -142,29 +129,12 @@ Template.Student_Explorer_Courses_Page.helpers({
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
   },
-  descriptionPairs(course) {
-    return [
-      { label: 'Course Number', value: course.number },
-      { label: 'Credit Hours', value: course.creditHrs },
-      { label: 'Prerequisites', value: prerequisites(course) },
-      { label: 'Description', value: course.description },
-      { label: 'Syllabus', value: makeLink(course.syllabus) },
-      { label: 'More Information', value: makeLink(course.moreInformation) },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
-    ];
-  },
-  socialPairs(course) {
-    return [
-      { label: 'students', amount: numUsers(course),
-        value: interestedUsers(course) },
-    ];
-  },
 });
 
 Template.Student_Explorer_Courses_Page.onCreated(function studentExplorerCoursesPageOnCreated() {
+  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(Interests.getPublicationName());
 });

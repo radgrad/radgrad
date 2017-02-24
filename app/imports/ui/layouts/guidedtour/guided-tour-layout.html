@@ -1,0 +1,13 @@
+<template name="Guided_Tour_Layout">
+  <div class="guided-tour-background">
+    <div class="ui center aligned container">
+      <div class="ui basic padded segment">
+        <div id="carousel">
+          {{> Template.dynamic template=main}}
+        </div>
+      </div>
+      <a href="{{pathFor landingPageRouteName}}">Return to RadGrad</a>
+    </div>
+  </div>
+  {{>Footer}}
+</template>

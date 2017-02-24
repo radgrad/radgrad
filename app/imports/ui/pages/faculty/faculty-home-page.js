@@ -6,13 +6,11 @@ import { Users } from '../../../api/user/UserCollection';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 Template.Faculty_Home_Page.onCreated(function appBodyOnCreated() {
-  this.autorun(() => {
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-    this.subscribe(VerificationRequests.getPublicationName());
-  });
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Faculty_Home_Page.helpers({
@@ -20,5 +18,5 @@ Template.Faculty_Home_Page.helpers({
 });
 
 Template.Faculty_Home_Page.events({
- // placeholder: if you add a form to this top-level layout, handle the associated events here.
+  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });

@@ -1,0 +1,33 @@
+<template name="Student_Of_Interest_Widget">
+  {{#if Template.subscriptionsReady}}
+  <div class="ui padded segment container">
+    <div class="ui dividing header">
+      <h4>RECOMMENDED <span style="text-transform: uppercase;">{{type}}</span> {{> Widget_Header_Number inputValue = itemCount}}</h4>
+    </div>
+    {{#if hiddenExists}}
+      {{#if hidden}}
+        <div class="ui basic green mini button showHidden"><i class="chevron up icon"></i> HIDDEN <span style="text-transform: uppercase;">{{type}}</span></div>
+      {{else}}
+        <div class="ui basic green mini button hideHidden"><i class="chevron down icon"></i> HIDDEN <span style="text-transform: uppercase;">{{type}}</span></div>
+      {{/if}}
+    {{/if}}
+    {{#if courses}}
+    <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui two cards">
+      {{#if typeCourse}}
+        {{#each course in courses}}
+          {{> Student_Of_Interest_Card item = course type = type}}
+        {{/each}}
+      {{else}}
+        {{#each opp in opportunities}}
+          {{> Student_Of_Interest_Card item = opp type = type}}
+        {{/each}}
+      {{/if}}
+    </div>
+    {{else}}
+      <p>Add more interests to see recommendations here.</p>
+    {{/if}}
+  </div>
+  {{else}}
+  {{> Loading}}
+  {{/if}}
+</template>

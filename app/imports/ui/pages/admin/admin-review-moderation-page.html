@@ -1,0 +1,11 @@
+<template name="Admin_Review_Moderation_Page">
+  <div class="layout-page">
+    <div class="ui container">
+      {{#if Template.subscriptionsReady}}
+        {{> Review_Moderation }}
+      {{else}}
+        {{> Loading}}
+      {{/if}}
+    </div>
+  </div>
+</template>

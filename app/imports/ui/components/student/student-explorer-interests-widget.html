@@ -1,119 +1,115 @@
 <template name="Student_Explorer_Interests_Widget">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui padded segment container">
-      <div class="ui dividing header">
-        <h4>{{name}}</h4>
-      </div>
-      {{#each descriptionPair in descriptionPairs}}
-        {{#if isLabel descriptionPair.label 'Related Career Goals'}}
-          <p>
-            {{#each careerGoal in descriptionPair.value}}
-              <a class="ui mini label"><i style="color:white !important"
-                                          class="fitted suitcase icon"></i>{{careerGoalName careerGoal}}</a>
-            {{/each}}
-          </p>
-        {{else}}
-          {{#if isLabel descriptionPair.label 'Related Courses'}}
-            {{#if notEmpty descriptionPair.value}}
+    {{#if Template.subscriptionsReady}}
+    <div class="ui segments">
+      <div class="ui padded segment container">
+        <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+          <h4 class="ui left floated header">
+            {{toUpper name}}
+          </h4>
+          {{#if userStatus item}}
+            <button value="{{id}}" class="ui green basic right floated mini button deleteItem">REMOVE FROM INTERESTS</button>
+          {{else}}
+            <button value="{{id}}" class="ui green basic right floated mini button addItem">ADD TO INTERESTS</button>
+          {{/if}}
+            
+        </div>
+        <div class="ui divider" style="margin-top: 0;"></div>
+
+        <div class="ui stackable grid">
+          <div class="column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Description'}}
               <b>{{descriptionPair.label}}:</b>
-              <div class="ui padded equal width grid">
+                {{#if descriptionPair.value}} {{descriptionPair.value}} <br> <br>
+                  {{else}}
+                    N/A <br> <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'More Information'}}
+              <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui stackable two column grid">
+      <div class="ten wide column">
+        <div class="ui segments">
+          <div class="ui segment" style="padding-bottom: 0.2em;">
+            <div class="ui header">
+                <h4>RELATED COURSES</h4>
+            </div>
+          </div>
+          {{#each descriptionPair in descriptionPairs}}
+            {{#if isLabel descriptionPair.label 'Related Courses'}}
+              <div class="ui horizontal segments" style="background-color: white;">
                 {{#each table in descriptionPair.value}}
-                  {{#if table}}
-                    {{#with tableStyle table}}
-                    <div class="column">
-                      <table class="ui collapsing compact small table">
-                        <tbody>
-                        <tr class="{{color}}"><td><i class="{{icon}}"></i><b>{{title}}</b></td></tr>
-                        {{#each relatedCourse in table}}
-                          <tr class="{{color}}">
-                            <td><a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = relatedCourse.course}}">{{courseNameFromSlug relatedCourse.course}} </a></td>
-                          </tr>
-                        {{/each}}
-                        </tbody>
-                      </table>
-                    </div>
-                    {{/with}}
-                  {{/if}}
+                  <div class="ui center aligned segment">
+                    {{{getTableTitle @index}}}
+                      {{#each prerequisite in table}}
+                        <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a> <br>
+                      {{/each}}
+                  </div>
                 {{/each}}
               </div>
-              <br>
-            {{else}}
-              <p><b>{{descriptionPair.label}}:</b> None</p>
             {{/if}}
-          {{else}}
+          {{/each}}
+        </div>
+
+        <div class="ui segments">
+          <div class="ui segment" style="padding-bottom: 0.2em;">
+            <div class="ui header">
+                <h4>RELATED OPPORTUNITIES</h4>
+            </div>
+          </div>
+          {{#each descriptionPair in descriptionPairs}}
             {{#if isLabel descriptionPair.label 'Related Opportunities'}}
-              {{#if notEmpty descriptionPair.value}}
-                <b>{{descriptionPair.label}}:</b>
-                <div class="ui padded equal width grid">
-                  {{#each table in descriptionPair.value}}
-                    {{#if table}}
-                      {{#with tableStyle table}}
-                        <div class="column">
-                          <table class="ui collapsing compact small table">
-                            <tbody>
-                            <tr class="{{color}}"><td><i class="{{icon}}"></i><b>{{title}}</b></td></tr>
-                            {{#each relatedOpportunity in table}}
-                              <tr class="{{color}}">
-                                <td><a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug relatedOpportunity.opportunity}} </a></td>
-                              </tr>
-                            {{/each}}
-                            </tbody>
-                          </table>
-                        </div>
-                      {{/with}}
-                    {{/if}}
-                  {{/each}}
-                </div>
-                <br>
-              {{else}}
-                <p><b>{{descriptionPair.label}}:</b> None</p>
-              {{/if}}
-            {{else}}
-              {{#if descriptionPair.value }}
-                <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
-              {{else}}
-                <p><b>{{descriptionPair.label}}:</b> N/A</p>
-              {{/if}}
-            {{/if}}
-          {{/if}}
-        {{/if}}
-      {{/each}}
-
-
-      <div class="ui three column grid">
-        {{#each socialPair in socialPairs}}
-          <div class="stretched column">
-            <table class="ui small table">
-              <thead>
-              <tr>
-                <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>
-                  <div class="ui circular mini bordered images">
-                    {{#each user in socialPair.value}}
-                      <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
-                    {{/each}}
+              <div class="ui horizontal segments" style="background-color: white;">
+                {{#each table in descriptionPair.value}}
+                  <div class="ui center aligned segment">
+                    {{{getTableTitle @index}}}
+                      {{#each relatedOpportunity in table}}
+                        <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug relatedOpportunity.opportunity}} </a> <br>
+                      {{/each}}
                   </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+                {{/each}}
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="six wide column">
+        {{#each socialPair in socialPairs}}
+          <div class="ui padded segment">
+            <div class="ui dividing header">
+              <h4>{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
+            </div>
+
+              <div class="ui circular mini bordered images" style="overflow: visible;">
+                {{#each user in socialPair.value}}
+                  <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername user)}}" data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}></a>
+                {{/each}}
+              </div>
+
           </div>
         {{/each}}
       </div>
-      <br>
-      <p>
-        {{#if userStatus item}}
-          <button value="{{id}}" class="ui green basic mini button deleteItem">Remove from my interests</button>
-        {{else}}
-          <button value="{{id}}" class="ui green basic mini button addItem">Add to my interests</button>
-        {{/if}}
-      </p>
     </div>
+
+    {{> Back_To_Top_Button}}
+
   {{else}}
     {{> Loading}}
   {{/if}}
+
 </template>

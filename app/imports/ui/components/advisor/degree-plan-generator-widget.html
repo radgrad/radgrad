@@ -2,6 +2,7 @@
   <div class="ui padded container segment" style="margin-bottom: 0 !important;">
     <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Template degree plan
       generator</h4></div>
+    {{> Plan_Starting_Semester_Form_Field semesters=futureSemesters errorMessage=(fieldError "semesters") required="true" }}
     <div class="field">
       <label>Starting Semester</label>
       <div class="ui action input">

@@ -18,6 +18,8 @@ import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
+import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
+import { Reviews } from '../../api/review/ReviewCollection';
 import { Teasers } from '../../api/teaser/TeaserCollection';
 import { Users } from '../../api/user/UserCollection';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
@@ -27,6 +29,7 @@ import { VerificationRequests } from '../../api/verification/VerificationRequest
 import { radgradCollections } from '../../api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
+import { SyncedCron } from 'meteor/percolate:synced-cron';
 
 /**
  * Returns an Array of numbers, one per RadGradCollection, indicating the number of documents in that collection.
@@ -47,7 +50,7 @@ function totalDocuments() {
 }
 
 // Must match the format in the client-side ui/pages/admin/admin-database-dump-page.js
-const restoreFileDateFormat = 'YYYY-MM-DD-hh-mm-ss';
+const restoreFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
 
 
 /**
@@ -99,7 +102,7 @@ function newStartupProcess() { // eslint-disable-line
       const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, CareerGoals, DesiredDegrees,
         ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
         CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
-        VerificationRequests, Feed, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers];
+        VerificationRequests, Feed, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews];
 
       const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
       const collectionNames = _.map(collectionList, collection => collection._collectionName);
@@ -117,6 +120,17 @@ function newStartupProcess() { // eslint-disable-line
         _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
       }
     }
+    PublicStats.generateStats();
+    SyncedCron.add({
+      name: 'Run the PublicStats.generateStats method',
+      schedule: function (parser) {
+        return parser.text('every 24 hours');
+      },
+      job: function () {
+        PublicStats.generateStats();
+      },
+    });
+    SyncedCron.start();
   });
 }
 

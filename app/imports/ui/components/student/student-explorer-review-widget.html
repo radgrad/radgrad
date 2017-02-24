@@ -1,0 +1,57 @@
+<template name="Student_Explorer_Review_Widget">
+  <div class="ui padded container">
+    <div class="ui dividing header"><h4 style="text-transform:uppercase">{{reviewType}} REVIEWS</h4>
+    </div>
+    <div class="ui middle aligned very relaxed divided list">
+      {{#if userReview}}
+        {{#with reviewData userReview}}
+          <div class="item">
+            <div class="ui grid">
+              <div class="four wide column">
+                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a href="{{pathFor usersRouteName username=routeUserName explorerUserName=userUsername}}">{{name}}</a><br>{{abbreviateSemester semester}}
+              </div>
+              <div class="twelve wide column">
+                {{> Student_Explorer_Review_Stars_Widget rating = rating}}
+                <br><div style="padding-top: 5px">{{comments}}</div>
+              </div>
+            </div>
+         </div>
+        {{/with}}
+        {{> Student_Explorer_Edit_Review_Widget review = userReview event = event}}
+      {{else}}
+        <div class="item">
+          <div class="ui grid">
+            <div class="four wide column">
+              <img class="ui left floated middle aligned circular mini image" src="{{currentUserPicture}}"><a href="{{pathFor usersRouteName username=routeUserName explorerUserName=userUsername}}">{{currentUserName}}</a>
+            </div>
+            <div class="twelve wide column">
+              {{#if completed}}
+                <p><i>You have not reviewed this yet.</i></p>
+              {{else}}
+                <p><i>You must complete this {{reviewType}} first to leave a review.</i></p>
+              {{/if}}
+            </div>
+          </div>
+          {{#if completed}}
+              {{> Student_Explorer_Add_Review_Widget event = event reviewType = reviewType}}
+          {{/if}}
+        </div>
+      {{/if}}
+      {{#each review in reviews}}
+        {{#with reviewData review}}
+          <div class="item">
+            <div class="ui grid">
+              <div class="four wide column">
+                <img class="ui left floated middle aligned circular mini image" src="{{picture}}"><a href="{{pathFor usersRouteName username=routeUserName explorerUserName=username}}">{{name}}</a><br>{{abbreviateSemester semester}}
+              </div>
+              <div class="twelve wide column">
+                {{> Student_Explorer_Review_Stars_Widget rating = rating}}
+                <br><div style="padding-top: 5px">{{comments}}</div>
+              </div>
+            </div>
+          </div>
+        {{/with}}
+      {{/each}}
+    </div>
+  </div>
+</template>

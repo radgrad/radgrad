@@ -95,7 +95,7 @@ class ReviewCollection extends BaseInstanceCollection {
 
   /**
    * Removes the passed Review and its associated Slug.
-   * @param opportunity The document or _id associated with this Reivew.
+   * @param opportunity The document or _id associated with this Review.
    * @throws {Meteor.Error} If review is not defined.
    */
   removeIt(review) {
@@ -135,6 +135,19 @@ class ReviewCollection extends BaseInstanceCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Updates the Review's modified, visible, and moderatorComments variables.
+   * @param reviewID The review ID.
+   * @param moderated The new moderated value.
+   * @param visible The new visible value.
+   * @param moderatorComments The new moderatorComments value.
+   */
+  updateModerated(reviewID, moderated, visible, moderatorComments) {
+    this.assertDefined(reviewID);
+    this._collection.update({ _id: reviewID },
+        { $set: { moderated, visible, moderatorComments } });
   }
 
   /**

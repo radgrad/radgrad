@@ -27,7 +27,7 @@ if (Meteor.isServer) {
       const reviewType = 'opportunity';
       const faculty = makeSampleUser(ROLE.FACULTY);
       const reviewee = makeSampleOpportunity(faculty);
-      const semester = ['Fall-2015'];
+      const semester = 'Fall-2015';
       const rating = 3;
       const comments = 'What a great course to write a test review for!';
       let docID = Reviews.define({

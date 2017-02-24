@@ -1,7 +1,8 @@
 <template name="Student_Explorer_Courses_Widget_Button">
   {{#if Template.subscriptionsReady}}
     {{#if equals buttonType 'add'}}
-      <div class="ui green basic mini button chooseYear"><div class="chooseYear">Add to my plan</div>
+      <div class="ui basic green mini right floated button chooseYear">
+        <div class="chooseYear">ADD TO PLAN</div>
         <div class="ui fluid popup transition hidden">
           <div class="ui vertical menu">
             {{#each year in nextYears 4}}
@@ -17,18 +18,23 @@
           </div>
         </div>
       </div>
-      {{else}}
-        {{#if equals buttonType 'remove'}}
-          <div class="ui green basic mini button chooseYear"><div class="chooseYear">Remove from my plan</div>
-            <div class="ui fluid popup transition hidden">
-              <div class="ui vertical menu">
-                {{#each semester in existingSemesters}}
-                  <a class="item removeFromPlan" data-position="right center">{{semester}}</a>
-                {{/each}}
-              </div>
+    {{else}}
+      {{#if equals buttonType 'remove'}}
+        <div class="ui basic green right floated mini button chooseYear">
+          <div class="chooseYear">REMOVE FROM PLAN</div>
+          <div class="ui fluid popup transition hidden">
+            <div class="ui vertical menu">
+              {{#each semester in existingSemesters}}
+                <a class="item removeFromPlan" data-position="right center">{{semester}}</a>
+              {{/each}}
             </div>
           </div>
+        </div>
+      {{else}}
+        {{#if equals buttonType 'taken'}}
+          <h5 class="ui green right floated" style="margin-top: 0; color: #6FBE44">COMPLETED</h5>
         {{/if}}
+      {{/if}}
     {{/if}}
   {{else}}
     {{> Loading}}

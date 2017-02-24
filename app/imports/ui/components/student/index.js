@@ -1,17 +1,14 @@
+import './explore-user-widget.html';
+import './explore-user-widget.js';
+
+import './explorer-choose-user-widget.html';
+import './explorer-choose-user-widget.js';
+
 import './student-home-menu.html';
 import './student-home-menu.js';
 
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
-
-import './student-explorer-courses-add-review-widget.html';
-import './student-explorer-courses-add-review-widget.js';
-
-import './student-explorer-courses-edit-review-widget.html';
-import './student-explorer-courses-edit-review-widget.js';
-
-import './student-explorer-courses-review-widget.html';
-import './student-explorer-courses-review-widget.js';
 
 import './student-explorer-courses-widget-button.html';
 import './student-explorer-courses-widget-button.js';
@@ -28,14 +25,14 @@ import './student-explorer-interests-widget.js';
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';
 
-import './student-explorer-opportunities-add-review-widget.html';
-import './student-explorer-opportunities-add-review-widget.js';
+import './student-explorer-add-review-widget.html';
+import './student-explorer-add-review-widget.js';
 
-import './student-explorer-opportunities-edit-review-widget.html';
-import './student-explorer-opportunities-edit-review-widget.js';
+import './student-explorer-edit-review-widget.html';
+import './student-explorer-edit-review-widget.js';
 
-import './student-explorer-opportunities-review-widget.html';
-import './student-explorer-opportunities-review-widget.js';
+import './student-explorer-review-widget.html';
+import './student-explorer-review-widget.js';
 
 import './student-explorer-opportunities-widget.html';
 import './student-explorer-opportunities-widget.js';
@@ -46,8 +43,11 @@ import './student-explorer-opportunities-widget-button.js';
 import './student-explorer-opportunities-widget-teaser.html';
 import './student-explorer-opportunities-widget-teaser.js';
 
-import './student-explorer-student-info.html';
-import './student-explorer-student-info.js';
+import './student-explorer-review-stars-widget.html';
+import './student-explorer-review-stars-widget.js';
+
+import './student-explorer-social-widget.html';
+import './student-explorer-social-widget.js';
 
 import './student-ice-column.html';
 import './student-ice-column.js';
@@ -77,26 +77,14 @@ import './student-mentorspace-question-form.js';
 import './student-mentorspace-mentor-directory.html';
 import './student-mentorspace-mentor-directory.js';
 
-import './student-opportunities-of-interest-card.html';
-import './student-opportunities-of-interest-card.js';
+import './student-of-interest-card.html';
+import './student-of-interest-card.js';
 
-import './student-courses-of-interest-card.html';
-import './student-courses-of-interest-card.js';
-
-import './student-courses-of-interest-widget.html';
-import './student-courses-of-interest-widget.js';
+import './student-of-interest-widget.html';
+import './student-of-interest-widget.js';
 
 import './student-feed-widget.html';
 import './student-feed-widget.js';
-
-import './student-home-help.html';
-import './student-home-help.js';
-
-import './student-ice-help.html';
-import './student-ice-help.js';
-
-import './student-opportunities-of-interest-widget.html';
-import './student-opportunities-of-interest-widget.js';
 
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';

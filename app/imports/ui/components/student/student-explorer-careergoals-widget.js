@@ -4,19 +4,40 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '/imports/startup/client/router.js';
+import { Interests } from '../../../api/interest/InterestCollection';
 
 
 Template.Student_Explorer_CareerGoals_Widget.helpers({
-  isLabel(label, value) {
-    return label === value;
-  },
-  userPicture(user) {
-    return Users.findDoc(user).picture;
-  },
   careerGoalName(careerGoalSlugName) {
     const slug = Slugs.find({ name: careerGoalSlugName }).fetch();
     const course = CareerGoals.find({ slugID: slug[0]._id }).fetch();
     return course[0].name;
+  },
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+  },
+  interestsRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
+  interestSlugName(interestSlugName) {
+    const slugID = Interests.findDoc(interestSlugName).slugID;
+    return Slugs.getNameFromID(slugID);
+  },
+  isLabel(label, value) {
+    return label === value;
+  },
+  toUpper(string) {
+    return string.toUpperCase();
+  },
+  userPicture(user) {
+    if (Users.findDoc(user).picture) {
+      return Users.findDoc(user).picture;
+    }
+    return '/images/default-profile-picture.png';
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
   userStatus(careerGoal) {
     let ret = false;
@@ -25,6 +46,9 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
       ret = true;
     }
     return ret;
+  },
+  userUsername(user) {
+    return Users.findDoc(user).username;
   },
 });
 

@@ -5,143 +5,55 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-
-function passedCourseHelper(courseSlugName) {
-  let ret = 'Not in plan';
-  const slug = Slugs.find({ name: courseSlugName }).fetch();
-  const course = Courses.find({ slugID: slug[0]._id }).fetch();
-  const ci = CourseInstances.find({
-    studentID: getUserIdFromRoute(),
-    courseID: course[0]._id,
-  }).fetch();
-  _.map(ci, (c) => {
-    if (c.verified === true) {
-      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
-        c.grade === 'B' || c.grade === 'B-') {
-        ret = 'Completed';
-      } else {
-        ret = 'In plan, but not yet complete';
-      }
-    } else {
-      ret = 'In plan, but not yet complete';
-    }
-  });
-  return ret;
-}
-
-function verifiedOpportunityHelper(opportunitySlugName) {
-  let ret = 'Not in plan';
-  const slug = Slugs.find({ name: opportunitySlugName }).fetch();
-  const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
-  const oi = OpportunityInstances.find({
-    studentID: getUserIdFromRoute(),
-    opportunityID: opportunity[0]._id,
-  }).fetch();
-  _.map(oi, (o) => {
-    if (o.verified === true) {
-      ret = 'Completed and verified';
-    } else {
-      ret = 'In plan, but not yet verified';
-    }
-  });
-  return ret;
-}
 
 Template.Student_Explorer_Interests_Widget.helpers({
-  isLabel(label, value) {
-    return label === value;
-  },
-  userPicture(user) {
-    return Users.findDoc(user).picture;
-  },
-  interestName(interestSlugName) {
-    const slug = Slugs.find({ name: interestSlugName }).fetch();
-    const course = CareerGoals.find({ slugID: slug[0]._id }).fetch();
-    return course[0].name;
-  },
-  courseName(course) {
-    return course.shortName;
-  },
-  opportunityName(opportunity) {
-    return opportunity.name;
-  },
-  careerGoalName(careerGoal) {
-    return careerGoal.name;
-  },
-  coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
-  },
-  opportunitiesRouteName() {
-    return RouteNames.studentExplorerOpportunitiesPageRouteName;
-  },
   courseNameFromSlug(courseSlugName) {
     const slug = Slugs.find({ name: courseSlugName }).fetch();
     const course = Courses.find({ slugID: slug[0]._id }).fetch();
     return course[0].shortName;
+  },
+  coursesRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
+  },
+  fullName(user) {
+    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+  },
+  getTableTitle(tableIndex) {
+    switch (tableIndex) {
+      case 0:
+        return '<h4><i class="green checkmark icon"></i>Completed</h4>';
+      case 1:
+        return '<h4><i class="yellow warning sign icon"></i>In Plan (Not Yet Completed)</h4>';
+      case 2:
+        return '<h4><i class="red warning circle icon"></i>Not in Plan';
+      default:
+        return 'ERROR: More than one table.';
+    }
+  },
+  isLabel(label, value) {
+    return label === value;
+  },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
   opportunityNameFromSlug(opportunitySlugName) {
     const slug = Slugs.find({ name: opportunitySlugName }).fetch();
     const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
     return opportunity[0].name;
   },
-  passedCourse(courseSlugName) {
-    return passedCourseHelper(courseSlugName);
+  toUpper(string) {
+    return string.toUpperCase();
   },
-  verifiedOpportunity(opportunitySlugName) {
-    return verifiedOpportunityHelper(opportunitySlugName);
-  },
-  rowColorCourse(courseSlugName) {
-    let ret = '';
-    const passed = passedCourseHelper(courseSlugName);
-    if (passed === 'Completed') {
-      ret = 'positive';
-    } else if (passed === 'In plan, but not yet complete') {
-      ret = 'warning';
-    } else {
-      ret = 'negative';
+  userPicture(user) {
+    if (Users.findDoc(user).picture) {
+      return Users.findDoc(user).picture;
     }
-    return ret;
+    return '/images/default-profile-picture.png';
   },
-  rowColorOpportunity(opportunitySlugName) {
-    let ret = '';
-    const passed = verifiedOpportunityHelper(opportunitySlugName);
-    if (passed === 'Completed and verified') {
-      ret = 'positive';
-    } else if (passed === 'In plan, but not yet verified') {
-      ret = 'warning';
-    } else {
-      ret = 'negative';
-    }
-    return ret;
-  },
-  iconCourse(courseSlugName) {
-    let ret = '';
-    const passed = passedCourseHelper(courseSlugName);
-    if (passed === 'Completed') {
-      ret = 'icon checkmark';
-    } else if (passed === 'In plan, but not yet complete') {
-      ret = 'warning sign icon';
-    } else {
-      ret = 'warning circle icon';
-    }
-    return ret;
-  },
-  iconOpportunity(opportunitySlugName) {
-    let ret = '';
-    const passed = verifiedOpportunityHelper(opportunitySlugName);
-    if (passed === 'Completed') {
-      ret = 'icon checkmark';
-    } else if (passed === 'In plan, but not yet verified') {
-      ret = 'warning sign icon';
-    } else {
-      ret = 'warning circle icon';
-    }
-    return ret;
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
   userStatus(interest) {
     let ret = false;
@@ -151,31 +63,8 @@ Template.Student_Explorer_Interests_Widget.helpers({
     }
     return ret;
   },
-  tableStyle(table) {
-    let tableColor;
-    let tableIcon;
-    let tableTitle;
-    if (table[0].status === 'Completed') {
-      tableColor = 'positive';
-      tableIcon = 'icon checkmark';
-      tableTitle = 'Completed';
-    } else if (table[0].status === 'Not in plan') {
-      tableColor = 'negative';
-      tableIcon = 'warning circle icon';
-      tableTitle = 'Not in plan';
-    } else if (table[0].status === 'In plan, but not yet complete') {
-      tableColor = 'warning';
-      tableIcon = 'warning sign icon';
-      tableTitle = 'In plan, but not yet complete';
-    }
-    return { color: tableColor, icon: tableIcon, title: tableTitle };
-  },
-  notEmpty(list) {
-    let ret = false;
-    if (list[0].length + list[1].length + list[2].length > 0) {
-      ret = true;
-    }
-    return ret;
+  userUsername(user) {
+    return Users.findDoc(user).username;
   },
 });
 

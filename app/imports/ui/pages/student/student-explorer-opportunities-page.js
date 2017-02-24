@@ -56,27 +56,6 @@ function teaser(opp) {
 }
 
 Template.Student_Explorer_Opportunities_Page.helpers({
-  opportunity() {
-    const opportunitySlugName = FlowRouter.getParam('opportunity');
-    const slug = Slugs.find({ name: opportunitySlugName }).fetch();
-    const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
-    return opportunity[0];
-  },
-  nonAddedOpportunities() {
-    const allOpportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    const userID = getUserIdFromRoute();
-    const nonAddedOpportunities = _.filter(allOpportunities, function (opportunity) {
-      const oi = OpportunityInstances.find({
-        studentID: userID,
-        opportunityID: opportunity._id,
-      }).fetch();
-      if (oi.length > 0) {
-        return false;
-      }
-      return true;
-    });
-    return nonAddedOpportunities;
-  },
   addedOpportunities() {
     const addedOpportunities = [];
     const allOpportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
@@ -91,33 +70,6 @@ Template.Student_Explorer_Opportunities_Page.helpers({
       }
     });
     return addedOpportunities;
-  },
-  opportunityName(opportunity) {
-    return opportunity.name;
-  },
-  count() {
-    return Opportunities.count();
-  },
-  slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
-  },
-  descriptionPairs(opportunity) {
-    return [
-      { label: 'Opportunity Type', value: opportunityType(opportunity) },
-      { label: 'Semesters', value: semesters(opportunity) },
-      { label: 'Event Date', value: opportunity.eventDate },
-      { label: 'Sponsor', value: sponsor(opportunity) },
-      { label: 'Description', value: opportunity.description },
-      { label: 'More Information', value: makeLink(opportunity.moreInformation) },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
-      { label: 'Teaser', value: teaser(opportunity) },
-    ];
-  },
-  socialPairs(opportunity) {
-    return [
-      { label: 'students', amount: numUsers(opportunity),
-        value: interestedUsers(opportunity) },
-    ];
   },
   completed() {
     const opportunitySlugName = FlowRouter.getParam('opportunity');
@@ -134,6 +86,40 @@ Template.Student_Explorer_Opportunities_Page.helpers({
     }
     return ret;
   },
+  descriptionPairs(opportunity) {
+    return [
+      { label: 'Opportunity Type', value: opportunityType(opportunity) },
+      { label: 'Semesters', value: semesters(opportunity) },
+      { label: 'Event Date', value: opportunity.eventDate },
+      { label: 'Sponsor', value: sponsor(opportunity) },
+      { label: 'Description', value: opportunity.description },
+      { label: 'More Information', value: makeLink(opportunity.moreInformation) },
+      { label: 'Interests', value: opportunity.interestIDs },
+      { label: 'ICE', value: opportunity.ice },
+      { label: 'Teaser', value: teaser(opportunity) },
+    ];
+  },
+  nonAddedOpportunities() {
+    const allOpportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const userID = getUserIdFromRoute();
+    const nonAddedOpportunities = _.filter(allOpportunities, function (opportunity) {
+      const oi = OpportunityInstances.find({
+        studentID: userID,
+        opportunityID: opportunity._id,
+      }).fetch();
+      if (oi.length > 0) {
+        return false;
+      }
+      return true;
+    });
+    return nonAddedOpportunities;
+  },
+  opportunity() {
+    const opportunitySlugName = FlowRouter.getParam('opportunity');
+    const slug = Slugs.find({ name: opportunitySlugName }).fetch();
+    const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
+    return opportunity[0];
+  },
   reviewed(opportunity) {
     let ret = false;
     const review = Reviews.find({
@@ -144,6 +130,15 @@ Template.Student_Explorer_Opportunities_Page.helpers({
       ret = true;
     }
     return ret;
+  },
+  slugName(slugID) {
+    return Slugs.findDoc(slugID).name;
+  },
+  socialPairs(opportunity) {
+    return [
+      { label: 'students', amount: numUsers(opportunity),
+        value: interestedUsers(opportunity) },
+    ];
   },
 });
 

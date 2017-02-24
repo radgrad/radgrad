@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
+import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -12,8 +12,16 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
   equals(a, b) {
     return a === b;
   },
-  yearSemesters(year) {
-    const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
+  existingSemesters() {
+    const semesters = [];
+    const course = this.course;
+    const ci = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      courseID: course._id,
+    }).fetch();
+    _.map(ci, function (c) {
+      semesters.push(Semesters.toString(c.semesterID, false));
+    });
     return semesters;
   },
   nextYears(amount) {
@@ -27,16 +35,8 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
     }
     return nextYears;
   },
-  existingSemesters() {
-    const semesters = [];
-    const course = this.course;
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    _.map(ci, (c) => {
-      semesters.push(Semesters.toString(c.semesterID, false));
-    });
+  yearSemesters(year) {
+    const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
     return semesters;
   },
 });
@@ -59,6 +59,9 @@ Template.Student_Explorer_Courses_Widget_Button.events({
       student: username,
     };
     CourseInstances.define(ci);
+    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
@@ -76,6 +79,9 @@ Template.Student_Explorer_Courses_Widget_Button.events({
       console.log('Too many course instances found for a single semester.');
     }
     CourseInstances.removeIt(ci[0]._id);
+    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
   },
 });
 

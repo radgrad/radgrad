@@ -1,60 +1,71 @@
 <template name="Student_Explorer_CareerGoals_Widget">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui padded segment container">
-      <div class="ui dividing header">
-        <h4>{{name}}</h4>
-      </div>
-      {{#each descriptionPair in descriptionPairs}}
-        {{#if isLabel descriptionPair.label 'Interests'}}
-          <p>
-            {{#each interest in descriptionPair.value}}
-              <a class="ui mini label"><i style="color:white !important" class="fitted star icon"></i>{{interest}}</a>
-            {{/each}}
-          </p>
-        {{else}}
-          {{#if descriptionPair.value }}
-              <p><b>{{descriptionPair.label}}:</b> {{{descriptionPair.value}}}</p>
-          {{else}}
-              <p><b>{{descriptionPair.label}}:</b> N/A</p>
-          {{/if}}
-        {{/if}}
-      {{/each}}
+    
+    {{#if Template.subscriptionsReady}}
+    <div class="ui segments">
+      <div class="ui padded segment container">
 
-      <div class="ui three column grid">
-        {{#each socialPair in socialPairs}}
-          <div class="stretched column">
-            <table class="ui small table">
-              <thead>
-              <tr>
-                <th>Interested {{socialPair.label}} ({{socialPair.amount}})</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>
-                  <div class="ui circular mini bordered images">
-                    {{#each user in socialPair.value}}
-                      <img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}>
-                    {{/each}}
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+        <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+          <h4 class="ui left floated header">{{toUpper name}}</h4>
+            {{#if userStatus item}}
+              <button value="{{id}}" class="ui basic green mini right floated button deleteItem">REMOVE FROM CAREER GOALS</button>
+            {{else}}
+              <button value="{{id}}" class="ui basic green mini right floated button addItem">ADD TO CAREER GOALS</button>
+            {{/if}}
+        </div>
+
+        <div class="ui divider" style="margin-top: 0; "></div>
+
+        <div class="ui stackable grid">
+          <div class="column">
+            {{#each descriptionPair in descriptionPairs}}
+
+              {{#if isLabel descriptionPair.label 'Description'}}
+                <b>{{descriptionPair.label}}:</b> 
+                {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'More Information'}}
+              <b>{{descriptionPair.label}}:</b>
+                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
+                  {{else}}
+                    N/A <br>
+                {{/if}}
+              {{/if}}
+
+              {{#if isLabel descriptionPair.label 'Interests'}}
+                <div style="margin-top: 5px">
+                  {{> Interest_List item=item size='mini'}}
+                  <!--{{#each interest in descriptionPair.value}}-->
+                    <!--<a class="ui right aligned mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestSlugName interest)}}"><i class="fitted star icon"></i>{{interest}}</a>-->
+                  <!--{{/each}}-->
+                </div>
+              {{/if}}
+
+            {{/each}}
           </div>
+        </div>
+      </div>
+
+      <div class="ui horizontal segments" style="background-color: white;">
+        {{#each socialPair in socialPairs}}
+        <div class="ui segment">
+            <h5 style="text-align: center;">{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h5>
+
+          <div class="ui circular mini bordered images" style="overflow: visible;">
+            {{#each user in socialPair.value}}
+              <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername user)}}" data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;" class="ui image" src={{userPicture user}}></a>
+            {{/each}}
+          </div>
+        </div>
         {{/each}}
       </div>
-
-      <br>
-      <p>
-        {{#if userStatus item}}
-          <button value="{{id}}" class="ui green basic mini button deleteItem">Remove from my career goals</button>
-        {{else}}
-          <button value="{{id}}" class="ui green basic mini button addItem">Add to my career goals</button>
-        {{/if}}
-      </p>
     </div>
+
   {{else}}
     {{> Loading}}
   {{/if}}
+
 </template>

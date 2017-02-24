@@ -1,5 +1,5 @@
 <template name="First_Menu_backup">
-  <div class="ui top fixed borderless menu radgrad-first-menu">
+  <div id="top" class="ui top fixed borderless menu radgrad-first-menu">
     <div class="item"><img class="ui mini image" src="/images/radgrad_logo.png" style="width: 45px;"></div>
     <div class="item" style="padding-left: 0;">
       <h1>{{> RadGrad_Logo_Text}}</h1>
@@ -37,7 +37,7 @@
 
 <template name="First_Menu">
   <div class="ui top fixed borderless menu radgrad-first-menu">
-    <div class="item"><img class="ui image" src="/images/radgrad_logo.png" style="width: 50px;"></div>
+    <div class="item"><a href="{{pathFor landingRouteName}}"><img class="ui image" src="/images/radgrad_logo.png" style="width: 50px;"></a></div>
     <div class="item" style="padding-left: 0;">
       <h1>{{> RadGrad_Logo_Text}}</h1>
     </div>
@@ -45,10 +45,10 @@
 
       {{#if displayLevelAndIce}}
         <div class="item">
-          {{> First_Menu_Level_Icon level=level}}
-          {{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov"}}
-          {{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp"}}
-          {{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp"}}
+          <a href="{{pathFor levelsRouteName username=routeUserName}}">{{> First_Menu_Level_Icon level=level}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov"}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp"}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp"}}</a>
         </div>
       {{/if}}
 
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="item">
-        <button class="ui grey button">
+        <button class="ui green basic button">
           {{#if useCAS}}
             {{> Cas_Login}}
           {{else}}

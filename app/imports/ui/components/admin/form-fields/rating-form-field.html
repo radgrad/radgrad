@@ -4,7 +4,8 @@
     <select class="ui dropdown" name="rating">
       <option value="">Select Rating</option>
       {{#each rating in ratings}}
-        <option value="{{rating.score}}" selected="{{isSelected rating selectedRating}}">{{rating.description}}</option>
+        <option value="{{rating.score}}" selected="{{isSelected rating selectedRating}}">                          {{> Student_Explorer_Review_Stars_Widget rating = rating.score}}
+          <br>{{rating.description}}</option>
       {{/each}}
     </select>
     {{> Form_Error_Message errorMessage=errorMessage}}
