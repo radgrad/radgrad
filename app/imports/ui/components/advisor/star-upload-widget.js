@@ -6,7 +6,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
-import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
+// import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
@@ -45,15 +45,11 @@ Template.Star_Upload_Widget.helpers({
   },
 });
 
-function foo(error, result, studentID) {
-  console.log('error', error, ' result', result, ' studentID', studentID);
-}
-
 Template.Star_Upload_Widget.events({
   'click .jsStarData': function clickJsStarData(event, instance) {
     event.preventDefault();
     if (instance.data.studentID.get()) {
-      const studentID = instance.data.studentID.get();
+      // const studentID = instance.data.studentID.get();
       const student = Users.findDoc(instance.data.studentID.get());
       const fileName = event.target.parentElement.getElementsByTagName('input')[0];
       if (fileName.files && fileName.files[0]) {
@@ -61,16 +57,16 @@ Template.Star_Upload_Widget.events({
         const fr = new FileReader();
         fr.onload = (e) => {
           const csvData = e.target.result;
-          Meteor.call('StarProcessor.loadStarCsvData', student.username, csvData, foo);
+          Meteor.call('StarProcessor.loadStarCsvData', student.username, csvData);
           Meteor.call('LevelProcessor.updateLevel', { studentID: student._id });
         };
         fr.readAsText(starData);
       }
-      FeedbackFunctions.checkPrerequisites(studentID);
-      FeedbackFunctions.checkCompletePlan(studentID);
-      FeedbackFunctions.generateRecommendedCourse(studentID);
-      FeedbackFunctions.checkOverloadedSemesters(studentID);
-      FeedbackFunctions.generateNextLevelRecommendation(studentID);
+      // FeedbackFunctions.checkPrerequisites(studentID);
+      // FeedbackFunctions.checkCompletePlan(studentID);
+      // FeedbackFunctions.generateRecommendedCourse(studentID);
+      // FeedbackFunctions.checkOverloadedSemesters(studentID);
+      // FeedbackFunctions.generateNextLevelRecommendation(studentID);
     }
   },
 });
