@@ -63,7 +63,7 @@ export class FeedbackFunctionClass {
     const cis = CourseInstances.find({ studentID }).fetch();
     cis.forEach((ci) => {
       const semester = Semesters.findDoc(ci.semesterID);
-      if (semester.semesterNumber >= currentSemester.semesterNumber) {
+      if (semester.semesterNumber > currentSemester.semesterNumber) {
         const semesterName = Semesters.toString(ci.semesterID, false);
         const course = Courses.findDoc(ci.courseID);
         if (course) {
@@ -130,7 +130,7 @@ export class FeedbackFunctionClass {
     courses = this._missingCourses(courseIDs, courses);
     if (courses.length > 0) {
       // console.log(courses);
-      let description = 'Your degree plan is missing: ';
+      let description = 'Your degree plan is missing: \n\n';
       const currentRoute = FlowRouter.current().path;
       const index = getPosition(currentRoute, '/', 3);
       const basePath = currentRoute.substring(0, index + 1);
@@ -181,7 +181,7 @@ export class FeedbackFunctionClass {
     let description = 'Your plan is overloaded. ';
     _.map(semesters, (semesterID) => {
       const semester = Semesters.findDoc(semesterID);
-      if (semester.semesterNumber >= currentSemester.semesterNumber) {
+      if (semester.semesterNumber > currentSemester.semesterNumber) {
         const cis = CourseInstances.find({ studentID, semesterID, note: /ICS/ }).fetch();
         if (cis.length > 2) {
           haveOverloaded = true;
@@ -229,37 +229,37 @@ export class FeedbackFunctionClass {
     const missing = this._missingCourses(courseIDs, coursesNeeded);
     if (missing.length > 0) {
       let description = 'Consider taking the following class to meet the degree requirement: ';
-      if (missing.length > 1) {
-        description = 'Consider taking the following classes to meet the degree requirement: ';
-      }
+      // if (missing.length > 1) {
+      //   description = 'Consider taking the following classes to meet the degree requirement: ';
+      // }
       const currentRoute = FlowRouter.current().path;
       const index = getPosition(currentRoute, '/', 3);
       const basePath = currentRoute.substring(0, index + 1);
-      _.map(missing, (slug) => {
-        if (Array.isArray(slug)) {
-          const course = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
-          if (course) {
-            const courseSlug = Slugs.findDoc(course.slugID);
-            description = 'Consider taking the following class to meet the degree requirement: ';
+      const slug = missing[0];
+      // _.map(missing, (slug) => {
+      if (Array.isArray(slug)) {
+        const course = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
+        if (course) {
+          const courseSlug = Slugs.findDoc(course.slugID);
+          // eslint-disable-next-line max-len
+          description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name}), `;
+        }
+      } else
+        if (slug.startsWith('ics4')) {
+          const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
+          if (bestChoice) {
+            const cSlug = Slugs.findDoc(bestChoice.slugID);
             // eslint-disable-next-line max-len
-            description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name}), `;
+            description = `${description} \n- [${bestChoice.number} ${bestChoice.shortName}](${basePath}explorer/courses/${cSlug.name}), `;
           }
         } else
-          if (slug.startsWith('ics3')) {
+          if (slug.startsWith('ics')) {
             const courseID = Slugs.getEntityID(slug, 'Course');
             const course = Courses.findDoc(courseID);
             // eslint-disable-next-line max-len
             description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
-          } else
-            if (slug.startsWith('ics4')) {
-              const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
-              if (bestChoice) {
-                const cSlug = Slugs.findDoc(bestChoice.slugID);
-                // eslint-disable-next-line max-len
-                description = `${description} \n- [${bestChoice.number} ${bestChoice.shortName}](${basePath}explorer/courses/${cSlug.name}), `;
-              }
-            }
-      });
+          }
+      // });
       FeedbackInstances.define({
         feedback,
         user: studentID,

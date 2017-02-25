@@ -185,6 +185,8 @@ Template.Semester_List.events({
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
     FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+    FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+    FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
     const template = Template.instance();
     template.state.set(plannerKeys.detailCourse, null);
     template.state.set(plannerKeys.detailCourseInstance, null);
