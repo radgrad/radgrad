@@ -28,6 +28,50 @@ function matchingInterestsHelper(item) {
   return matchingInterests;
 }
 
+function matchingUserInterestsHelper(item) {
+  const matchingInterests = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterestIDs = Users.getInterestIDsByType(user._id);
+  const userInterests = [];
+  _.map(userInterestIDs[0], (id) => {
+    userInterests.push(Interests.findDoc(id));
+  });
+  const itemInterests = [];
+  _.map(item.interestIDs, (id) => {
+    itemInterests.push(Interests.findDoc(id));
+  });
+  _.map(itemInterests, (itemInterest) => {
+    _.map(userInterests, (userInterest) => {
+      if (_.isEqual(itemInterest, userInterest)) {
+        matchingInterests.push(userInterest);
+      }
+    });
+  });
+  return matchingInterests;
+}
+
+function matchingCareerInterestsHelper(item) {
+  const matchingInterests = [];
+  const user = Users.findDoc({ username: getRouteUserName() });
+  const userInterestIDs = Users.getInterestIDsByType(user._id);
+  const userInterests = [];
+  _.map(userInterestIDs[1], (id) => {
+    userInterests.push(Interests.findDoc(id));
+  });
+  const itemInterests = [];
+  _.map(item.interestIDs, (id) => {
+    itemInterests.push(Interests.findDoc(id));
+  });
+  _.map(itemInterests, (itemInterest) => {
+    _.map(userInterests, (userInterest) => {
+      if (_.isEqual(itemInterest, userInterest)) {
+        matchingInterests.push(userInterest);
+      }
+    });
+  });
+  return matchingInterests;
+}
+
 Template.Interest_List.helpers({
   item() {
     return Template.currentData().item;
@@ -47,6 +91,20 @@ Template.Interest_List.helpers({
   matchingInterests(course) {
     try {
       return matchingInterestsHelper(course);
+    } catch (err) {
+      return null;
+    }
+  },
+  matchingUserInterests(course) {
+    try {
+      return matchingUserInterestsHelper(course);
+    } catch (err) {
+      return null;
+    }
+  },
+  matchingCareerInterests(course) {
+    try {
+      return matchingCareerInterestsHelper(course);
     } catch (err) {
       return null;
     }
