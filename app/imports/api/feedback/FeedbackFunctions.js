@@ -23,6 +23,19 @@ function getPosition(string, subString, index) {
   return string.split(subString, index).join(subString).length;
 }
 
+function getBasePath(studentID) {
+  const currentRoute = FlowRouter.current().path;
+  let basePath;
+  if (currentRoute.startsWith('/advisor')) {
+    const student = Users.findDoc(studentID);
+    basePath = `/student/${student.username}/`;
+  } else {
+    const index = getPosition(currentRoute, '/', 3);
+    basePath = currentRoute.substring(0, index + 1);
+  }
+  return basePath;
+}
+
 /**
  * A class containing Feedback functions. Each Feedback function is a method on the singleton instance
  * FeedbackFunctions.
@@ -112,7 +125,7 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   checkCompletePlan(studentID) {
-    // console.log('checkCompletePlan');
+    // console.log('checkCompletePlan', studentID);
     const f = Feedbacks.findDoc({ name: 'Required course missing' });
     const feedback = Slugs.getNameFromID(f.slugID, 'Feedback');
     const area = `ffn-${feedback}`;
@@ -131,9 +144,7 @@ export class FeedbackFunctionClass {
     if (courses.length > 0) {
       // console.log(courses);
       let description = 'Your degree plan is missing: \n\n';
-      const currentRoute = FlowRouter.current().path;
-      const index = getPosition(currentRoute, '/', 3);
-      const basePath = currentRoute.substring(0, index + 1);
+      const basePath = getBasePath(studentID);
       _.map(courses, (slug) => {
         if (Array.isArray(slug)) {
           description = `${description}\n\n- `;
@@ -232,9 +243,7 @@ export class FeedbackFunctionClass {
       // if (missing.length > 1) {
       //   description = 'Consider taking the following classes to meet the degree requirement: ';
       // }
-      const currentRoute = FlowRouter.current().path;
-      const index = getPosition(currentRoute, '/', 3);
-      const basePath = currentRoute.substring(0, index + 1);
+      const basePath = getBasePath(studentID);
       const slug = missing[0];
       // _.map(missing, (slug) => {
       if (Array.isArray(slug)) {
@@ -291,9 +300,7 @@ export class FeedbackFunctionClass {
     });
     if (this._missingCourses(courseIDs, coursesNeeded).length > 0) {
       let bestChoices = courseUtils.bestStudent400LevelCourses(studentID, coursesTakenSlugs);
-      const currentRoute = FlowRouter.current().path;
-      const index = getPosition(currentRoute, '/', 3);
-      const basePath = currentRoute.substring(0, index + 1);
+      const basePath = getBasePath(studentID);
       if (bestChoices) {
         const len = bestChoices.length;
         if (len > 5) {
@@ -330,9 +337,7 @@ export class FeedbackFunctionClass {
     const area = `ffn-${feedback}`;
     this.clearFeedbackInstances(studentID, area);
     let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(studentID);
-    const currentRoute = FlowRouter.current().path;
-    const index = getPosition(currentRoute, '/', 3);
-    const basePath = currentRoute.substring(0, index + 1);
+    const basePath = getBasePath(studentID);
     const semesterID = Semesters.getCurrentSemester();
     const oppInstances = OpportunityInstances.find({ studentID, semesterID }).fetch();
     if (oppInstances.length === 0) {  // only make suggestions if there are no opportunities planned.
@@ -370,9 +375,8 @@ export class FeedbackFunctionClass {
     const area = `ffn-${feedback}`;
     this.clearFeedbackInstances(studentID, area);
     const student = Users.findDoc(studentID);
-    const currentRoute = FlowRouter.current().path;
-    const index = getPosition(currentRoute, '/', 3);
-    const basePath = currentRoute.substring(0, index + 1);
+    // Need to build the route not use current route since might be the Advisor.
+    const basePath = getBasePath(studentID);
     let description = 'Getting to the next Level: ';
     switch (student.level) {
       case 0:

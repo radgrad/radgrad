@@ -464,7 +464,7 @@ class UserCollection extends BaseInstanceCollection {
 
   publish() {
     if (Meteor.isServer) {
-      Meteor.publish(this._collectionName, function () {
+      Meteor.publish(this._collectionName, function publish() {
         const fields = (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) ? this._allData : this._publicData;
         return Meteor.users.find({}, fields);
       });

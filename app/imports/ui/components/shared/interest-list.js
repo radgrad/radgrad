@@ -116,7 +116,7 @@ Template.Interest_List.helpers({
       _.map(course.interestIDs, (id) => {
         courseInterests.push(Interests.findDoc(id));
       });
-      const filtered = _.filter(courseInterests, function (courseInterest) {
+      const filtered = _.filter(courseInterests, function filter(courseInterest) {
         let ret = true;
         _.map(matchingInterests, (matchingInterest) => {
           if (_.isEqual(courseInterest, matchingInterest)) {
