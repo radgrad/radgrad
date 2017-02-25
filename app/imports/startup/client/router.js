@@ -238,6 +238,9 @@ FlowRouter.route('/guidedtour/student', {
   action() {
     BlazeLayout.render('Guided_Tour_Layout', { main: studentGuidedTourPageRouteName });
   },
+  triggersEnter: [function scrollTop() {
+    this.window.scrollTo(0, 0);
+  }],
 });
 
 /* TODO: Implement afterwards!

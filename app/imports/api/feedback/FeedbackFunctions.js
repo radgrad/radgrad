@@ -58,48 +58,51 @@ export class FeedbackFunctionClass {
     const f = Feedbacks.find({ name: 'Prerequisite missing' }).fetch()[0];
     const feedback = Slugs.getNameFromID(f.slugID, 'Feedback');
     const area = `ffn-${feedback}`;
+    const currentSemester = Semesters.getCurrentSemesterDoc();
     this.clearFeedbackInstances(studentID, area);
     const cis = CourseInstances.find({ studentID }).fetch();
     cis.forEach((ci) => {
       const semester = Semesters.findDoc(ci.semesterID);
-      const semesterName = Semesters.toString(ci.semesterID, false);
-      const course = Courses.findDoc(ci.courseID);
-      if (course) {
-        const prereqs = course.prerequisites;
-        prereqs.forEach((p) => {
-          const courseID = Slugs.getEntityID(p, 'Course');
-          const prerequisiteCourse = Courses.find({ _id: courseID }).fetch()[0];
-          const preCiIndex = _.findIndex(cis, function find(obj) {
-            return obj.courseID === courseID;
-          });
-          if (preCiIndex !== -1) {
-            const preCi = cis[preCiIndex];
-            const preCourse = Courses.findDoc(preCi.courseID);
-            const preSemester = Semesters.findDoc(preCi.semesterID);
-            if (preSemester) {
-              if (preSemester.sortBy >= semester.sortBy) {
-                const semesterName2 = Semesters.toString(preSemester._id, false);
-                const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is after or` +
-                    ` in ${semesterName2}.`;
-                FeedbackInstances.define({
-                  feedback,
-                  user: studentID,
-                  description,
-                  area,
-                });
-              }
-            }
-          } else {
-            const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
-                ' not found.';
-            FeedbackInstances.define({
-              feedback,
-              user: studentID,
-              description,
-              area,
+      if (semester.semesterNumber >= currentSemester.semesterNumber) {
+        const semesterName = Semesters.toString(ci.semesterID, false);
+        const course = Courses.findDoc(ci.courseID);
+        if (course) {
+          const prereqs = course.prerequisites;
+          prereqs.forEach((p) => {
+            const courseID = Slugs.getEntityID(p, 'Course');
+            const prerequisiteCourse = Courses.findDoc({ _id: courseID });
+            const preCiIndex = _.findIndex(cis, function find(obj) {
+              return obj.courseID === courseID;
             });
-          }
-        });
+            if (preCiIndex !== -1) {
+              const preCi = cis[preCiIndex];
+              const preCourse = Courses.findDoc(preCi.courseID);
+              const preSemester = Semesters.findDoc(preCi.semesterID);
+              if (preSemester) {
+                if (preSemester.sortBy >= semester.sortBy) {
+                  const semesterName2 = Semesters.toString(preSemester._id, false);
+                  const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is ` +
+                      `after or in ${semesterName2}.`;
+                  FeedbackInstances.define({
+                    feedback,
+                    user: studentID,
+                    description,
+                    area,
+                  });
+                }
+              }
+            } else {
+              const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
+                  ' not found.';
+              FeedbackInstances.define({
+                feedback,
+                user: studentID,
+                description,
+                area,
+              });
+            }
+          });
+        }
       }
     });
   }
@@ -109,7 +112,7 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   checkCompletePlan(studentID) {
-    console.log('checkCompletePlan');
+    // console.log('checkCompletePlan');
     const f = Feedbacks.findDoc({ name: 'Required course missing' });
     const feedback = Slugs.getNameFromID(f.slugID, 'Feedback');
     const area = `ffn-${feedback}`;
@@ -133,13 +136,15 @@ export class FeedbackFunctionClass {
       const basePath = currentRoute.substring(0, index + 1);
       _.map(courses, (slug) => {
         if (Array.isArray(slug)) {
+          description = `${description}\n\n- `;
           _.map(slug, (s) => {
             const id = Slugs.getEntityID(s, 'Course');
             const course = Courses.findDoc(id);
             // eslint-disable-next-line max-len
-            description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}) or `;
+            description = `${description} [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}) or `;
           });
-          description = description.substring(0, description.length - 2);
+          description = description.substring(0, description.length - 4);
+          description = `${description}, `;
         } else
           if (slug.startsWith('ics4')) {
             description = `${description} \n- a 400 level elective, `;
@@ -170,14 +175,18 @@ export class FeedbackFunctionClass {
     const feedback = Slugs.getNameFromID(feedbackDoc.slugID, 'Feedback');
     const area = `ffn-${feedback}`;
     this.clearFeedbackInstances(studentID, area);
+    const currentSemester = Semesters.getCurrentSemesterDoc();
     const semesters = yearUtils.getStudentSemesters(studentID);
     let haveOverloaded = false;
     let description = 'Your plan is overloaded. ';
     _.map(semesters, (semesterID) => {
-      const cis = CourseInstances.find({ studentID, semesterID }).fetch();
-      if (cis.length > 2) {
-        haveOverloaded = true;
-        description = `${description} ${Semesters.toString(semesterID, false)}, `;
+      const semester = Semesters.findDoc(semesterID);
+      if (semester.semesterNumber >= currentSemester.semesterNumber) {
+        const cis = CourseInstances.find({ studentID, semesterID, note: /ICS/ }).fetch();
+        if (cis.length > 2) {
+          haveOverloaded = true;
+          description = `${description} ${Semesters.toString(semesterID, false)}, `;
+        }
       }
     });
     description = description.substring(0, description.length - 2);
@@ -218,7 +227,6 @@ export class FeedbackFunctionClass {
     });
     this.clearFeedbackInstances(studentID, area);
     const missing = this._missingCourses(courseIDs, coursesNeeded);
-    // console.log(missing);
     if (missing.length > 0) {
       let description = 'Consider taking the following class to meet the degree requirement: ';
       if (missing.length > 1) {
@@ -230,29 +238,25 @@ export class FeedbackFunctionClass {
       _.map(missing, (slug) => {
         if (Array.isArray(slug)) {
           const course = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
-          const courseSlug = Slugs.findDoc(course.slugID);
-          description = 'Consider taking the following class to meet the degree requirement: ';
-          // eslint-disable-next-line max-len
-          description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name})`;
+          if (course) {
+            const courseSlug = Slugs.findDoc(course.slugID);
+            description = 'Consider taking the following class to meet the degree requirement: ';
+            // eslint-disable-next-line max-len
+            description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name}), `;
+          }
         } else
           if (slug.startsWith('ics3')) {
             const courseID = Slugs.getEntityID(slug, 'Course');
             const course = Courses.findDoc(courseID);
             // eslint-disable-next-line max-len
-            description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
+            description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
           } else
             if (slug.startsWith('ics4')) {
-              let bestChoices = courseUtils.bestStudent400LevelCourses(studentID, coursesTakenSlugs);
-              if (bestChoices) {
-                const len = bestChoices.length;
-                if (len > 5) {
-                  bestChoices = _.drop(bestChoices, len - 5);
-                }
-                _.map(bestChoices, (course) => {
-                  const cSlug = Slugs.findDoc(course.slugID);
-                  // eslint-disable-next-line max-len
-                  description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${cSlug.name}), `;
-                });
+              const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
+              if (bestChoice) {
+                const cSlug = Slugs.findDoc(bestChoice.slugID);
+                // eslint-disable-next-line max-len
+                description = `${description} \n- [${bestChoice.number} ${bestChoice.shortName}](${basePath}explorer/courses/${cSlug.name}), `;
               }
             }
       });
@@ -418,11 +422,12 @@ export class FeedbackFunctionClass {
     _.map(courseIDs, (id) => {
       const course = Courses.findDoc(id);
       const slug = Slugs.getNameFromID(course.slugID);
+      // console.log('missing', slug);
       const index = _.indexOf(courses, slug);
       if (index !== -1) {
         courses.splice(index, 1);
       } else
-        if (slug.startsWith('ics4')) {
+        if (slug.startsWith('ics4') || slug.startsWith('other')) {
           if (_.indexOf(courses, 'ics4xx') !== -1) {
             courses.splice(_.indexOf(courses, 'ics4xx'), 1);
           }

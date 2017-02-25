@@ -87,7 +87,9 @@ function removeTakenCourses(student, degreeList) {
     const index = _.indexOf(degreeList, courseSlug);
     if (index !== -1) {
       degreeList.splice(index, 1);
-    } else {
+    } else if (courseSlug.startsWith('ics4') || courseSlug.startsWith('other')) {
+      const fourIndex = _.indexOf(degreeList, 'ics4xx');
+      degreeList.splice(fourIndex, 1);
       // console.log(`${student.username} took ${courseSlug}, but it isn't a required course`);
     }
   });
@@ -110,15 +112,18 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
   const grade = 'A';
   const courseSlug = degreeList.splice(0, 1)[0];
   if (typeof courseSlug === 'object') {
+    // console.log(courseSlug);
     const bestChoice = courseUtils.chooseBetween(courseSlug, studentID, courseTakenSlugs);
-    // console.log('bestChoice', courseSlug, bestChoice);
-    CourseInstances.define({
-      semester: Semesters.getSlug(semester._id),
-      course: Courses.getSlug(bestChoice._id),
-      note: bestChoice.number,
-      grade,
-      student: student.username,
-    });
+    if (bestChoice) {
+      // console.log('bestChoice', courseSlug, bestChoice);
+      CourseInstances.define({
+        semester: Semesters.getSlug(semester._id),
+        course: Courses.getSlug(bestChoice._id),
+        note: bestChoice.number,
+        grade,
+        student: student.username,
+      });
+    }
   } else
     if (courseSlug.endsWith('3xx')) {
       const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID, courseTakenSlugs);
@@ -232,6 +237,7 @@ export function generateBSDegreePlan(student, startSemester) {
   const degreeList = BS_CS_LIST.slice(0);
   // remove the courses that the student has already taken.
   removeTakenCourses(student, degreeList);
+  // console.log('degreeList', degreeList);
   let semester = startSemester;
   let ice;
   const chosenOpportunites = [];
@@ -465,15 +471,17 @@ export function generateDegreePlan(template, startSemester, student) {
     _.map(semesterCourses, (slug) => { // eslint-disable-line no-loop-func
       if (typeof slug === 'object') {
         const bestChoice = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
-        CourseInstances.define({
-          semester: Semesters.getSlug(semester._id),
-          course: Courses.getSlug(bestChoice._id),
-          note: bestChoice.number,
-          grade,
-          student: student.username,
-        });
-        courseTakenIDs.push(bestChoice._id);
-        coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
+        if (bestChoice) {
+          CourseInstances.define({
+            semester: Semesters.getSlug(semester._id),
+            course: Courses.getSlug(bestChoice._id),
+            note: bestChoice.number,
+            grade,
+            student: student.username,
+          });
+          courseTakenIDs.push(bestChoice._id);
+          coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
+        }
       } else
         if (slug.endsWith('3xx')) {
           const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID, coursesTakenSlugs);
