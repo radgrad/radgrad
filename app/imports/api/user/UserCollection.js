@@ -457,7 +457,7 @@ class UserCollection extends BaseInstanceCollection {
       const goal = CareerGoals.findDoc(goalID);
       careerInterestIDs = _.union(careerInterestIDs, goal.interestIDs);
     });
-    careerInterestIDs = _.difference(careerInterestIDs, user.interesIDs);
+    careerInterestIDs = _.difference(careerInterestIDs, user.interestIDs);
     interestIDs.push(careerInterestIDs);
     return interestIDs;
   }
