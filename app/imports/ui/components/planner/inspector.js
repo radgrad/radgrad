@@ -14,6 +14,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import * as RouteNames from '/imports/startup/client/router.js';
 
@@ -199,6 +200,21 @@ Template.Inspector.helpers({
       return VerificationRequests.find({ opportunityInstanceID: instance._id }).count() > 0;
     }
     return false;
+  },
+  instanceID() {
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      return Template.instance().state.get(plannerKeys.detailCourse)._id;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        return Template.instance().state.get(plannerKeys.detailCourseInstance)._id;
+      } else
+        if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+          return Template.instance().state.get(plannerKeys.detailOpportunity)._id;
+        } else
+          if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+            return Template.instance().state.get(plannerKeys.detailOpportunityInstance)._id;
+          }
+    return null;
   },
   instanceSemester() {
     if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
@@ -420,8 +436,7 @@ Template.Inspector.events({
     event.preventDefault();
     const id = event.target.id;
     const opportunityInstance = id;
-    const studentID = getUserIdFromRoute();
-    const student = Users.findDoc(studentID).username;
+    const student = getRouteUserName();
     VerificationRequests.define({ student, opportunityInstance });
   },
 });
