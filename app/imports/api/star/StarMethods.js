@@ -15,10 +15,8 @@ Meteor.methods({
     check(student, String);
     check(csvData, String);
     const definitions = processStarCsvData(student, csvData);
-    // console.log('definitions', definitions);
     const studentID = Users.findDoc({ username: student })._id;
     const oldInstances = CourseInstances.find({ studentID, verified: true }).fetch();
-    // console.log('oldInstances', oldInstances);
     _.map(oldInstances, (instance) => {
       CourseInstances.removeIt(instance._id);
     });
@@ -41,6 +39,11 @@ Meteor.methods({
       } else {
         numOtherCourses += 1;
       }
+      definition.fromSTAR = true; // eslint-disable-line
+      if (definition.grade === '***') {
+        definition.grade = 'B';  // eslint-disable-line
+        definition.verified = false; // eslint-disable-line
+      }
       // console.log('CourseInstances.define', definition);
       CourseInstances.define(definition);
       const split = definition.semester.split('-');
@@ -51,6 +54,7 @@ Meteor.methods({
       // console.log('AcademicYearInstances.define', student, yearVal);
       return AcademicYearInstances.define({ student, year: yearVal });
     });
+
     const note = `Uploaded ${numIcsCourses} ICS courses and ${numOtherCourses} other courses.`;
     StarDataLogs.define({ student, note });
   },

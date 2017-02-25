@@ -22,7 +22,7 @@ const userDefineSchema = new SimpleSchema({
 const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
-Template.Student_Selector_Widget.helpers({
+Template.Student_Selector_Tabs.helpers({
   users(role) {
     return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
   },
@@ -80,7 +80,7 @@ Template.Student_Selector_Widget.helpers({
   },
 });
 
-Template.Student_Selector_Widget.events({
+Template.Student_Selector_Tabs.events({
   'click .jsRetrieve': function clickJSRetrieve(event, instance) {
     event.preventDefault();
     const username = event.target.id;
@@ -174,7 +174,7 @@ Template.Student_Selector_Widget.events({
   },
 });
 
-Template.Student_Selector_Widget.onCreated(function studentSelectorOnCreated() {
+Template.Student_Selector_Tabs.onCreated(function studentSelectorTabsOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   } else {
@@ -186,11 +186,9 @@ Template.Student_Selector_Widget.onCreated(function studentSelectorOnCreated() {
   this.state.set(displaySuccessMessage, false);
   this.state.set(displayErrorMessages, false);
   this.context = userDefineSchema.namedContext('Add_Create_Student');
-  this.subscribe(Feed.getPublicationName());
-  this.subscribe(Users.getPublicationName());
 });
 
-Template.Student_Selector_Widget.onRendered(function studentSelectorOnRendered() {
+Template.Student_Selector_Tabs.onRendered(function studentSelectorTabsOnRendered() {
   this.$('.menu .item').tab();
   this.$('.dropdown').dropdown({
     // action: 'select',
@@ -198,6 +196,7 @@ Template.Student_Selector_Widget.onRendered(function studentSelectorOnRendered()
   this.state.set('addNewUser', false);
 });
 
-Template.Student_Selector_Widget.onDestroyed(function studentSelectorOnDestroyed() {
+Template.Student_Selector_Tabs.onDestroyed(function studentSelectorTabsOnDestroyed() {
   // add your statement here
 });
+

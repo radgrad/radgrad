@@ -10,7 +10,7 @@ SERVER_NAME=radgrad.ics.hawaii.edu
 PORT=5003
 MONGO_PORT=6003
 URL_SUFFIX=/            # Starts with a '/', and does not end with a '/'!
-SETTINGS_FILE=../../settings.production.json
+SETTINGS_FILE=../config/settings.development.json
 SERVICE_NAME=meteor_radgrad
 
 ###############################

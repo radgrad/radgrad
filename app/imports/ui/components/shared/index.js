@@ -21,8 +21,8 @@ import './review-moderation.js';
 
 import './route-user-name.js';
 
-import './student-selector-widget.html';
-import './student-selector-widget.js';
+import '../advisor/student-selector-widget.html';
+import '../advisor/student-selector-widget.js';
 
 import './user-career-goals-component.html';
 import './user-career-goals-component.js';

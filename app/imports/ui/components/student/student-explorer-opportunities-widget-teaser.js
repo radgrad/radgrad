@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { $ } from 'meteor/jquery';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
@@ -27,5 +28,6 @@ Template.Student_Explorer_Opportunities_Widget_Teaser.onCreated(function student
     $('.ui.embed.teaser').embed({
       source: 'youtube',
       id: teaserUrlHelper(FlowRouter.getParam('opportunity')),
-    }); }, 300);
+    });
+  }, 300);
 });
