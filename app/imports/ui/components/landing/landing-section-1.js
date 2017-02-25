@@ -19,6 +19,9 @@ Template.Landing_Section_1.helpers({
   facultyHomePageRouteName() {
     return RouteNames.facultyHomePageRouteName;
   },
+  studentGuidedTourPageRouteName() {
+    return RouteNames.studentGuidedTourPageRouteName;
+  },
   mentorHomePageRouteName() {
     return RouteNames.mentorHomePageRouteName;
   },
