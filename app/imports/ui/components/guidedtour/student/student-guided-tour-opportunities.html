@@ -1,12 +1,9 @@
 <template name="Student_Guided_Tour_Opportunities">
-  <div>
-    <div class="ui two column stackable grid">
-      <div class="ten wide column">
-        <img class="ui rounded image" src="/images/guidedtour/guidedtour-opp.png">
-      </div>
-      <div class="six wide column guided-tour-description">
-        {{#markdown}}
+
+  {{#Guided_Tour_Page_Layout leftColumns="ten" rightColumns="six" image="/images/guidedtour/guidedtour-opp.png"}}
+
 # Garner wide ranges of experiences.
+
 A well-balanced student is a student who has collected experience inside and outside of school.  Here at RadGrad, we encourage students to reach above and beyond - and more specifically, the **Explorer - Opportunities** page.
 
 In the explorer page, you will find an abundant amount of opportunities tailored for ICS students.  Here you will find when opportunities are open, what types of opportunities are available, and reviews created by students like you.  The following types of opportunities are as followed:
@@ -16,8 +13,7 @@ In the explorer page, you will find an abundant amount of opportunities tailored
 * **Internship** - Interning for an organization of a specific interest.
 * **Online-Learning** - Attending an online course.
 * **Event** - Attending a one-day event.
-        {{/markdown}}
-      </div>
-    </div>
-  </div>
+
+  {{/Guided_Tour_Page_Layout}}
+
 </template>

@@ -1,17 +1,13 @@
 <template name="Student_Guided_Tour_Mentor">
-  <div>
-    <div class="ui two column stackable grid">
-      <div class="ten wide column">
-        <img class="ui rounded image" src="/images/guidedtour/guidedtour-mentorspace.png">
-      </div>
-      <div class="six wide column guided-tour-description">
-        {{#markdown}}
+
+  {{#Guided_Tour_Page_Layout leftColumns="ten" rightColumns="six" image="/images/guidedtour/guidedtour-mentorspace.png"}}
+
 # Rocket through the Mentor Space.
+
 One of the primary goals that RadGrad hopes to achieve is a community-based system.  With course reviews made by students like you, we have also pumped up the social volume by providing opportunities to talk to **mentors**.
 
 At the **mentor space page**, you will find a list of mentors ready to help with any questions you have in regards to the wonders of Computer Science.  These mentors are ICS alumni and community members from professional areas who have agreed to serve you in all your concerns.  Questions are anonymous to make the experience as comfortable as possible.  If answering is not your jam, then you can always take a look at the number of questions made by other students.
-        {{/markdown}}
-      </div>
-    </div>
-  </div>
+
+  {{/Guided_Tour_Page_Layout}}
+
 </template>

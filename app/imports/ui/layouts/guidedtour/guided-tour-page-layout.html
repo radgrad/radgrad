@@ -1,0 +1,16 @@
+<template name="Guided_Tour_Page_Layout">
+
+  <div>
+    <div class="ui two column stackable grid">
+      <div class="{{leftColumns}} wide column">
+        <img class="ui rounded image" src="{{image}}">
+      </div>
+      <div class="{{rightColumns}} wide column guided-tour-description">
+        {{#markdown}}
+          {{> Template.contentBlock}}
+        {{/markdown}}
+      </div>
+    </div>
+  </div>
+
+</template>
