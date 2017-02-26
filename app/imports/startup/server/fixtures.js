@@ -123,10 +123,10 @@ function newStartupProcess() { // eslint-disable-line
     PublicStats.generateStats();
     SyncedCron.add({
       name: 'Run the PublicStats.generateStats method',
-      schedule: function (parser) {
+      schedule(parser) {
         return parser.text('every 24 hours');
       },
-      job: function () {
+      job() {
         PublicStats.generateStats();
       },
     });

@@ -167,6 +167,9 @@ Template.Semester_Add_Button.events({
     const id = CourseInstances.define(ci);
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+    FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+    FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
     // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
     FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
     template.state.set(plannerKeys.detailCourse, null);

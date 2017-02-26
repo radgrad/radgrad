@@ -5,4 +5,3 @@ Template.Landing_Layout.onCreated(function landingBodyOnCreated() {
   this.subscribe(PublicStats.getPublicationName());
 });
 
-
