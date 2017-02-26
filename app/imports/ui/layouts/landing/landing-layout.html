@@ -1,11 +1,13 @@
 <template name="Landing_Layout">
-  {{> Landing_Section_1}}
-  {{> Landing_Section_2}}
-  {{> Landing_Section_3}}
-  {{> Landing_Section_4}}
-  {{> Landing_Section_5}}
-  {{> Landing_Section_6}}
-  {{> Landing_Section_7}}
-  {{> Landing_Section_8}}
-  {{> Landing_Section_9}}
+  {{#if Template.subscriptionsReady}}
+    {{> Landing_Section_1}}
+    {{> Landing_Section_2}}
+    {{> Landing_Section_3}}
+    {{> Landing_Section_4}}
+    {{> Landing_Section_5}}
+    {{> Landing_Section_6}}
+    {{> Landing_Section_7}}
+    {{> Landing_Section_8}}
+    {{> Landing_Section_9}}
+  {{/if}}
 </template>

@@ -1,21 +1,16 @@
 <template name="Student_Guided_Tour_Interest">
-  <div>
-    <div class="ui two column stackable grid">
-      <div class="nine wide column">
-        <img class="ui rounded image" src="/images/guidedtour/guidedtour-interests.png">
-      </div>
-      <div class="seven wide column guided-tour-description">
-        {{#markdown}}
-# Hashtags of the RadGrad world.
-Once a part of RadGrad, it's always best to see what we have to offer.  Heading to the **Explorer** page, you will find a list of interests, courses, opportunities, and other attributes.  If you happen to lack interests, take a look at what we have to offer!
 
-**Interests** are the prime entities in assessing and recommending courses and opportunities for you.  It is recommended to have multiple interests to get the most of RadGrad's organizing magic.  You can say they are the "hashtags" to the RadGrad world.
+  {{#Guided_Tour_Page_Layout leftColumns="nine" rightColumns="seven" image="/images/guidedtour/guidedtour-interests.png"}}
 
-Once you have a handful of interests, you'll find that it will be easier to filter out items that have no relation to you.  You will also find items that you have not considered or even knew about that are very important in your career growth.  These items are viewable in your **Home** page.
+# Interests: the hashtags of the RadGrad world.
 
-That doesn't end there!  We believe in a tied community, and as such, each interest within the Explorer page displays students, faculty members, and alumni connected to them.  Make connections, form a group, and race through the world with friends and mentors aside with you.
-        {{/markdown}}
-      </div>
-    </div>
-  </div>
+After joining RadGrad, head on over to the **Explorer** page where you can learn about computer science interest areas, courses, opportunities, and other information.
+
+RadGrad uses your specified **interests** to decide which courses and opportunities to recommend. You can think of them as the "hashtags" to the RadGrad world.
+
+Once you have specified one or more of RadGrad's **{{publicStats 'interestsTotal'}}** interests, RadGrad can start to filter out opportunities that are unrelated to you. RadGrad can also make suggestions about courses and opportunities that you might not even know about.
+
+It doesn't end there!  RadGrad is designed to build community, so each interest within the Explorer page displays students, faculty members, and alumni that have chosen them.  Make connections and learn faster.
+
+     {{/Guided_Tour_Page_Layout}}
 </template>
