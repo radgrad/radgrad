@@ -24,6 +24,8 @@ class PublicStatsCollection extends BaseCollection {
       value: { type: String },
     }));
     this.stats = [];
+    this.coursesTotalKey = 'coursesTotal';
+    this.stats.push(this.coursesTotalKey);
     this.careerGoalsTotalKey = 'careerGoalsTotal';
     this.stats.push(this.careerGoalsTotalKey);
     this.careerGoalsListKey = 'careerGoalsList';
@@ -75,6 +77,11 @@ class PublicStatsCollection extends BaseCollection {
   careerGoalsTotal() {
     const count = CareerGoals.find().count();
     this._collection.upsert({ key: this.careerGoalsTotalKey }, { $set: { value: `${count}` } });
+  }
+
+  coursesTotal() {
+    const count = Courses.find().count();
+    this._collection.upsert({ key: this.coursesTotalKey }, { $set: { value: `${count}` } });
   }
 
   careerGoalsList() {
