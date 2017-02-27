@@ -1,17 +1,24 @@
 <template name="Landing_Section_4">
-  <div class="landing-grey-background">
-    <div class="ui center aligned container">
-      <div>
-        <h1 class="landing-grey-background-header">Generate a custom degree experience</h1>
-        <img class="ui image" src="/images/landing/abi-degree-planner.png">
+  <div class="grey-section" id="landing-section-4">
+    <div class="ui container">
+      <div class="ui two column centered padded stackable grid">
+
+        <div class="column">
+          <h1 class="header-text">Generate a custom degree experience</h1>
+          <p class="header-description">
+            {{#markdown}}
+Based on your degree, career goals, and interests, RadGrad helps you plan what you'll do each semester: not just the classes you'll take, but also *relevant* extracurricular opportunities such as hackathons, internships, clubs, and more. RadGrad currently provides you with **{{publicStats 'opportunitiesTotal'}}** opportunities to choose from, with more on the way!
+
+RadGrad recognizes that what you do outside of class is sometimes just as important as what you do in it.
+            {{/markdown}}
+          </p>
+        </div>
+
+        <div class="column">
+          <img class="ui bordered rounded image" src="/images/landing/abi-degree-planner.png">
+        </div>
+
       </div>
-    </div>
-
-    <div style="margin-top: 20px" class="ui text container">
-      <p>Based on your degree, career goals, and interests, RadGrad helps you plan what you'll do each semester: not just the classes you'll take, but also
-        extracurricular opportunities such as hackathons, internships, clubs, and more.</p>
-
-      <p>RadGrad recognizes that what you do outside of class is sometimes just as important as what you do in it.</p>
     </div>
   </div>
 </template>

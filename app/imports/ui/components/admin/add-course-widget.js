@@ -50,7 +50,7 @@ Template.Add_Course_Widget.events({
     }
     const feedDefinition = {
       course: newData.slug,
-      feedType: 'new',
+      feedType: 'new-course',
       timestamp: Date.now(),
     };
     Feed.define(feedDefinition);

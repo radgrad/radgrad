@@ -7,6 +7,9 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
@@ -18,8 +21,8 @@ import { ROLE, ROLES } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import * as planUtils from '../../../api/degree-program/plan-generator';
 import * as semUtils from '../../../api/semester/SemesterUtilities';
-import * as courseUtils from '../../../api/course/CourseFunctions';
-import * as opportunityUtils from '../../../api/opportunity/OpportunityFunctions';
+import * as courseUtils from '../../../api/course/CourseUtilities';
+import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 const updateSchema = new SimpleSchema({
@@ -39,44 +42,17 @@ const updateSchema = new SimpleSchema({
 });
 
 Template.Update_Degree_Plan_Widget.helpers({
-  user() {
-    if (Template.currentData().studentID.get()) {
-      return Users.findDoc(Template.currentData().studentID.get());
-    }
-    return '';
-  },
-  interests() {
-    return Interests.find({}, { sort: { name: 1 } });
-  },
   careerGoals() {
     return CareerGoals.find({}, { sort: { name: 1 } });
   },
   desiredDegrees() {
     return DesiredDegrees.find({}, { sort: { name: 1 } });
   },
+  interests() {
+    return Interests.find({}, { sort: { name: 1 } });
+  },
   roles() {
     return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
-  },
-  slug() {
-    if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
-      return Slugs.findDoc(user.slugID).name;
-    }
-    return '';
-  },
-  semesters() {
-    const currentSemester = Semesters.getCurrentSemesterDoc();
-    return _.filter(Semesters.find({ sortBy: { $gte: currentSemester.sortBy } }, { sort: { sortBy: 1 } }).fetch(),
-        function notSummer(s) {
-          return s.term !== Semesters.SUMMER;
-        });
-  },
-  selectedInterestIDs() {
-    if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
-      return user.interestIDs;
-    }
-    return '';
   },
   selectedCareerGoalIDs() {
     if (Template.currentData().studentID.get()) {
@@ -92,10 +68,37 @@ Template.Update_Degree_Plan_Widget.helpers({
     }
     return '';
   },
+  selectedInterestIDs() {
+    if (Template.currentData().studentID.get()) {
+      const user = Users.findDoc(Template.currentData().studentID.get());
+      return user.interestIDs;
+    }
+    return '';
+  },
   selectedRole() {
     if (Template.currentData().studentID.get()) {
       const user = Users.findDoc(Template.currentData().studentID.get());
       return user.roles[0];
+    }
+    return '';
+  },
+  semesters() {
+    const currentSemester = Semesters.getCurrentSemesterDoc();
+    return _.filter(Semesters.find({ sortBy: { $gte: currentSemester.sortBy } }, { sort: { sortBy: 1 } }).fetch(),
+        function notSummer(s) {
+          return s.term !== Semesters.SUMMER;
+        });
+  },
+  slug() {
+    if (Template.currentData().studentID.get()) {
+      const user = Users.findDoc(Template.currentData().studentID.get());
+      return Slugs.findDoc(user.slugID).name;
+    }
+    return '';
+  },
+  user() {
+    if (Template.currentData().studentID.get()) {
+      return Users.findDoc(Template.currentData().studentID.get());
     }
     return '';
   },
@@ -139,6 +142,11 @@ Template.Update_Degree_Plan_Widget.events({
           if (degree.shortName.startsWith('B.A.')) {
             planUtils.generateBADegreePlan(student, startSemester);
           }
+          FeedbackFunctions.checkPrerequisites(studentID);
+          FeedbackFunctions.checkCompletePlan(studentID);
+          FeedbackFunctions.generateRecommendedCourse(studentID);
+          FeedbackFunctions.checkOverloadedSemesters(studentID);
+          FeedbackFunctions.generateNextLevelRecommendation(studentID);
         }
       },
     }).modal('show');
@@ -156,7 +164,7 @@ Template.Update_Degree_Plan_Widget.events({
       FormUtils.renameKey(updatedData, 'slug', 'username');
       Meteor.call('Users.update', updatedData, (error) => {
         if (error) {
-          console.log('Error during user update: ', error);
+          // console.log('Error during user update: ', error);
         }
         // FormUtils.indicateSuccess(instance, event);
         instance.successClass.set('success');
@@ -179,6 +187,8 @@ Template.Update_Degree_Plan_Widget.events({
 
 Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
   this.subscribe(AcademicYearInstances.getPublicationName());
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());

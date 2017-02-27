@@ -8,6 +8,7 @@ import { Courses } from '/imports/api/course/CourseCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
+import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { makeCourseICE } from '/imports/api/ice/IceProcessor';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
@@ -27,6 +28,7 @@ class CourseInstanceCollection extends BaseCollection {
       semesterID: { type: SimpleSchema.RegEx.Id },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       verified: { type: Boolean },
+      fromSTAR: { type: Boolean, optional: true },
       grade: { type: String, optional: true },
       creditHrs: { type: Number },
       note: { type: String, optional: true },
@@ -39,6 +41,9 @@ class CourseInstanceCollection extends BaseCollection {
     this.publicationNames.push(this._collectionName);
     this.publicationNames.push(`${this._collectionName}.Public`);
     this.publicationNames.push(`${this._collectionName}.PerStudentAndSemester`);
+    this.publicationNames.push(`${this._collectionName}.PublicStudent`);
+    this.publicationNames.push(`${this._collectionName}.PublicSlugStudent`);
+
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
     }
@@ -51,6 +56,7 @@ class CourseInstanceCollection extends BaseCollection {
    * CourseInstances.define({ semester: 'Spring-2016',
    *                          course: 'ics311',
    *                          verified: false,
+   *                          fromSTAR: false,
    *                          grade: 'B',
    *                          student: 'joesmith' });
    * // To define an instance of a non-CS course:
@@ -59,6 +65,7 @@ class CourseInstanceCollection extends BaseCollection {
    *                          note: 'ENG 101',
    *                          verified: true,
    *                          creditHrs: 3,
+   *                          fromSTAR: true,
    *                          grade: 'B',
    *                          student: 'joesmith' });
    * @param { Object } description Object with keys semester, course, verified, notCS, grade, studen.
@@ -69,7 +76,7 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If the definition includes an undefined course or student.
    * @returns The newly created docID.
    */
-  define({ semester, course, verified = false, grade = '', note = '', student, creditHrs }) {
+  define({ semester, course, verified = false, fromSTAR = false, grade = '', note = '', student, creditHrs }) {
     // Check arguments
     const semesterID = Semesters.getID(semester);
     const courseID = Courses.getID(course);
@@ -86,7 +93,8 @@ class CourseInstanceCollection extends BaseCollection {
       creditHrs = Courses.findDoc(courseID).creditHrs;
     }
     // Define and return the CourseInstance
-    return this._collection.insert({ semesterID, courseID, verified, grade, studentID, creditHrs, note, ice });
+    // eslint-disable-next-line max-len
+    return this._collection.insert({ semesterID, courseID, verified, fromSTAR, grade, studentID, creditHrs, note, ice });
   }
 
   /**
@@ -166,8 +174,12 @@ class CourseInstanceCollection extends BaseCollection {
    */
   isICS(courseInstanceID) {
     this.assertDefined(courseInstanceID);
-    const courseID = this.findDoc(courseInstanceID).courseID;
-    return Courses.findDoc(courseID).number.substring(0, 3) === 'ICS';
+    const instance = this.findDoc(courseInstanceID);
+    const retVal = instance.note.startsWith('ICS');
+    if (retVal) {
+      return retVal;
+    }
+    return Courses.findDoc(instance.courseID).number.substring(0, 3) === 'ICS';
   }
 
   /**
@@ -190,7 +202,7 @@ class CourseInstanceCollection extends BaseCollection {
           courseID: { type: String },
         }).validate({ courseID });
 
-        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1 } });
+        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
       });
       Meteor.publish(this.publicationNames[2],
           function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
@@ -200,6 +212,20 @@ class CourseInstanceCollection extends BaseCollection {
             }).validate({ studentID, semesterID });
             return instance._collection.find({ studentID, semesterID });
           });
+      Meteor.publish(this.publicationNames[3], function publicStudentPublish() {  // eslint-disable-line
+        return instance._collection.find({}, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
+      });
+      Meteor.publish(this.publicationNames[4], function publicSlugPublish(courseSlug) {  // eslint-disable-line
+        // check the courseID.
+        const slug = Slugs.find({ name: courseSlug }).fetch();
+        const course = Courses.find({ slugID: slug[0]._id }).fetch();
+        const courseID = course[0]._id;
+        new SimpleSchema({
+          courseID: { type: String },
+        }).validate({ courseID });
+
+        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
+      });
     }
   }
 

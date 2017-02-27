@@ -10,6 +10,7 @@ import '/imports/api/interest';
 import '/imports/api/level';
 import '/imports/api/log';
 import '/imports/api/opportunity';
+import '/imports/api/preference';
 import '/imports/api/role';
 import '/imports/api/semester';
 import '/imports/api/slug';
@@ -30,6 +31,8 @@ import '/imports/ui/components/landing';
 import '/imports/ui/components/planner';
 import '/imports/ui/components/shared';
 import '/imports/ui/components/student';
+import '/imports/ui/components/guidedtour';
+import '/imports/ui/components/guidedtour/student';
 
 import '/imports/ui/layouts/admin';
 import '/imports/ui/layouts/advisor';
@@ -38,12 +41,14 @@ import '/imports/ui/layouts/landing';
 import '/imports/ui/layouts/mentor';
 import '/imports/ui/layouts/shared';
 import '/imports/ui/layouts/student';
+import '/imports/ui/layouts/guidedtour';
 
 import '/imports/ui/pages/admin';
 import '/imports/ui/pages/advisor';
 import '/imports/ui/pages/faculty';
 import '/imports/ui/pages/mentor';
 import '/imports/ui/pages/student';
+import '/imports/ui/pages/guidedtour';
 
 import './lib/semantic-ui/semantic.min.css';
 import './lib/semantic-ui/semantic.min.js';

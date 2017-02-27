@@ -21,6 +21,7 @@ class SemesterCollection extends BaseInstanceCollection {
       term: { type: String },
       year: { type: Number },
       sortBy: { type: Number },
+      semesterNumber: { type: Number },
       slugID: { type: SimpleSchema.RegEx.Id },
     }));
     this.SPRING = 'Spring';
@@ -77,13 +78,22 @@ class SemesterCollection extends BaseInstanceCollection {
     } else {
       sortBy = (year * 10) + 1;
     }
+    let semesterNumber = 0;
+    const yearDiff = year - 2010;
+    if (term === this.SPRING) {
+      semesterNumber = (3 * yearDiff) - 2;
+    } else if (term === this.SUMMER) {
+      semesterNumber = (3 * yearDiff) - 1;
+    } else {
+      semesterNumber = 3 * yearDiff;
+    }
     // Otherwise define a new semester and add it to the collection if successful.
     const slug = `${term}-${year}`;
     if (Slugs.isDefined(slug)) {
       throw new Meteor.Error(`Slug is already defined for undefined semester: ${slug}`);
     }
     const slugID = Slugs.define({ name: slug, entityName: 'Semester' });
-    const semesterID = this._collection.insert({ term, year, sortBy, slugID });
+    const semesterID = this._collection.insert({ term, year, sortBy, semesterNumber, slugID });
     Slugs.updateEntityID(slugID, semesterID);
     return semesterID;
   }

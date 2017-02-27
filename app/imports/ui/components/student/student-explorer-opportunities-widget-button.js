@@ -9,11 +9,25 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 
 Template.Student_Explorer_Opportunities_Widget_Button.helpers({
+  empty(list) {
+    return list.length === 0;
+  },
   equals(a, b) {
     return a === b;
   },
-  empty(list) {
-    return list.length === 0;
+  existingSemesters() {
+    const semesters = [];
+    const opportunity = this.opportunity;
+    const oi = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      opportunityID: opportunity._id,
+    }).fetch();
+    _.map(oi, function (o) {
+      if (!o.verified) {
+        semesters.push(Semesters.toString(o.semesterID, false));
+      }
+    });
+    return semesters;
   },
   opportunitySemesters() {
     const opp = this.opportunity;
@@ -38,22 +52,6 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
       }
     });
     return semesterNames;
-  },
-  existingSemesters() {
-    const semesters = [];
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSemester = Semesters.findDoc(currentSemesterID);
-    const opportunity = this.opportunity;
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-    }).fetch();
-    _.map(oi, function (o) {
-      if (Semesters.findDoc(o.semesterID).sortBy >= currentSemester.sortBy) {
-        semesters.push(Semesters.toString(o.semesterID, false));
-      }
-    });
-    return semesters;
   },
 });
 

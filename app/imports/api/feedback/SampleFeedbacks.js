@@ -14,3 +14,11 @@ export function makeSampleFeedback() {
   const feedbackType = FeedbackType.RECOMMENDATION;
   return Feedbacks.define({ name, slug, description, feedbackType });
 }
+
+export function makeCourseRecommendationFeedback() {
+  const name = 'Course recommendations based on interests';
+  const slug = 'CourseRecommendationsBasedOnInterests';
+  const description = 'These courses are recommended based upon your interests.';
+  const feedbackType = FeedbackType.RECOMMENDATION;
+  return Feedbacks.define({ name, slug, description, feedbackType });
+}

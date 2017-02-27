@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { Feed } from '../../../api/feed/FeedCollection';
 import { moment } from 'meteor/momentjs:moment';
@@ -54,13 +55,21 @@ Template.Verification_Requests_Pending.events({
         studentID: VerificationRequests.getStudentDoc(request._id)._id,
         opportunityID: VerificationRequests.getOpportunityDoc(request._id)._id,
       }).fetch();
-      const feedDefinition = {
-        student: VerificationRequests.getStudentDoc(request._id),
-        opportunity: opportunities[0],
-        feedType: 'verified',
-        timestamp: Date.now(),
-      };
-      Feed.define(feedDefinition);
+      const timestamp = new Date().getTime();
+      const opportunityID = VerificationRequests.getOpportunityDoc(request._id)._id;
+      if (Feed.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID)) {
+        Feed.updateVerifiedOpportunity(VerificationRequests.getStudentDoc(request._id).username,
+            Feed.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID));
+      } else {
+        const feedDefinition = {
+          user: [VerificationRequests.getStudentDoc(request._id).username],
+          opportunity: Slugs.findDoc(VerificationRequests.getOpportunityDoc(request._id).slugID),
+          semester: Slugs.findDoc(Semesters.findDoc(opportunities[0].semesterID).slugID),
+          feedType: 'verified-opportunity',
+          timestamp,
+        };
+        Feed.define(feedDefinition);
+      }
     } else {
       request.status = VerificationRequests.REJECTED;
       processRecord.status = VerificationRequests.REJECTED;
@@ -76,7 +85,7 @@ Template.Verification_Requests_Pending.events({
 });
 
 Template.Verification_Requests_Pending.onCreated(function pendingVerificationRequestsOnCreated() {
-
+  this.subscribe(Feed.getPublicationName());
 });
 
 Template.Verification_Requests_Pending.onRendered(function pendingVerificationRequestsOnRendered() {

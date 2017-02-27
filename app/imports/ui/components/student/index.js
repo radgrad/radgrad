@@ -46,8 +46,8 @@ import './student-explorer-opportunities-widget-teaser.js';
 import './student-explorer-review-stars-widget.html';
 import './student-explorer-review-stars-widget.js';
 
-import './student-explorer-student-info.html';
-import './student-explorer-student-info.js';
+import './student-explorer-social-widget.html';
+import './student-explorer-social-widget.js';
 
 import './student-ice-column.html';
 import './student-ice-column.js';
@@ -77,26 +77,14 @@ import './student-mentorspace-question-form.js';
 import './student-mentorspace-mentor-directory.html';
 import './student-mentorspace-mentor-directory.js';
 
-import './student-opportunities-of-interest-card.html';
-import './student-opportunities-of-interest-card.js';
+import './student-of-interest-card.html';
+import './student-of-interest-card.js';
 
-import './student-courses-of-interest-card.html';
-import './student-courses-of-interest-card.js';
-
-import './student-courses-of-interest-widget.html';
-import './student-courses-of-interest-widget.js';
+import './student-of-interest-widget.html';
+import './student-of-interest-widget.js';
 
 import './student-feed-widget.html';
 import './student-feed-widget.js';
-
-import './student-home-help.html';
-import './student-home-help.js';
-
-import './student-ice-help.html';
-import './student-ice-help.js';
-
-import './student-opportunities-of-interest-widget.html';
-import './student-opportunities-of-interest-widget.js';
 
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';

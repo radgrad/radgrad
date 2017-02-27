@@ -13,22 +13,15 @@
               <div class="meta">By {{teaserAuthor teaser}}</div>
             </div>
             <div style="padding:0;" class="content">
-              <div class="ui embed active" style="width:290px; height:auto" data-url="{{teaserUrl teaser}}">
-              </div>
+              <div class="ui embed active" style="width:290px; height:auto" data-source="youtube" data-id="{{teaserUrl teaser}}"></div>
             </div>
             <div class="content">
-                <span class="left floated">
-                  {{#each interest in matchingInterests teaser}}
-                    <a class="ui mini label"><i class="fitted star icon"></i>{{interestName interest}}</a>
-                  {{/each}}
-                  {{#each interest in otherInterests teaser}}
-                    <a class="ui mini grey label"><i class="fitted star icon"></i>{{interestName interest}}</a>
-                  {{/each}}
-                </span>
+              {{> Interest_List item=teaser size='mini'}}
             </div>
-            <div class="ui bottom attched button">
-              <i class="chevron circle right icon" style="margin-right: 1px;"></i> View More
-            </div>
+            {{#if teaser.opportunityID}}
+              <a class="ui bottom attached button" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug teaser)}}">
+                <i class="chevron circle right icon" style="margin-right: 1px;"></i>View More</a>
+            {{/if}}
           </div>
         {{/each}}
       </div>

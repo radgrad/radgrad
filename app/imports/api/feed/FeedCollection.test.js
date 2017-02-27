@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { Feed } from './FeedCollection';
+import { Users } from '/imports/api/user/UserCollection';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -10,14 +11,14 @@ import { makeSampleUser } from '/imports/api/user/SampleUsers';
 if (Meteor.isServer) {
   describe('FeedCollection', function testSuite() {
     // Define course data.
-    let student;
+    let user;
     let feedType;
     let timestamp;
 
     before(function setup() {
       removeAllEntities();
-      student = makeSampleUser();
-      feedType = 'new';
+      user = [Users.findDoc(makeSampleUser()).username];
+      feedType = 'new-user';
       timestamp = Date.now();
     });
 
@@ -26,7 +27,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      let docID = Feed.define({ student, feedType, timestamp });
+      let docID = Feed.define({ user, feedType, timestamp });
       expect(Feed.isDefined(docID)).to.be.true;
       const dumpObject = Feed.dumpOne(docID);
       Feed.removeIt(docID);

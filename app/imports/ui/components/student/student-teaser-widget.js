@@ -2,10 +2,13 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection.js';
+import * as RouteNames from '/imports/startup/client/router.js';
 
-Template.Student_Teaser_Widget.onCreated(function appBodyOnCreated() {
+Template.Student_Teaser_Widget.onCreated(function studentTeaserWidgetOnCreated() {
   this.subscribe(Teasers.getPublicationName());
   this.subscribe(Interests.getPublicationName());
 });
@@ -16,7 +19,7 @@ function matchingTeasers() {
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
   let teaserInterests = [];
-  _.map(user.interestIDs, (id) => {
+  _.map(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
   });
   _.map(allTeasers, (teaser) => {
@@ -37,71 +40,33 @@ function matchingTeasers() {
   return matching;
 }
 
-function matchingInterestsHelper(teaser) {
-  const matchingInterests = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterests = [];
-  const teaserInterests = [];
-  _.map(teaser.interestIDs, (id) => {
-    teaserInterests.push(Interests.findDoc(id));
-  });
-  _.map(user.interestIDs, (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  _.map(teaserInterests, (teaserInterest) => {
-    _.map(userInterests, (userInterest) => {
-      if (_.isEqual(teaserInterest, userInterest)) {
-        matchingInterests.push(userInterest);
-      }
-    });
-  });
-  return matchingInterests;
-}
-
 Template.Student_Teaser_Widget.helpers({
-  getDictionary() {
-    return Template.instance().state;
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
-  teasers() {
-    return matchingTeasers();
-  },
-  teaserCount() {
-    return matchingTeasers().length;
-  },
-  teaserInterests(teaser) {
-    return Interests.findNames(teaser.interestIDs);
-  },
-  teaserTitle(teaser) {
-    return teaser.title;
+  opportunitySlug(teaser) {
+    let ret;
+    if (teaser.opportunityID) {
+      ret = Slugs.findDoc(Opportunities.findDoc(teaser.opportunityID).slugID).name;
+    } else {
+      ret = '#';
+    }
+    return ret;
   },
   teaserAuthor(teaser) {
     return teaser.author;
   },
+  teaserCount() {
+    return matchingTeasers().length;
+  },
+  teasers() {
+    return matchingTeasers();
+  },
+  teaserTitle(teaser) {
+    return teaser.title;
+  },
   teaserUrl(teaser) {
     return teaser.url;
-  },
-  matchingInterests(teaser) {
-    return matchingInterestsHelper(teaser);
-  },
-  otherInterests(teaser) {
-    const matchingInterests = matchingInterestsHelper(teaser);
-    const teaserInterests = [];
-    _.map(teaser.interestIDs, (id) => {
-      teaserInterests.push(Interests.findDoc(id));
-    });
-    const filtered = _.filter(teaserInterests, function (teaserInterest) {
-      let ret = true;
-      _.map(matchingInterests, (matchingInterest) => {
-        if (_.isEqual(teaserInterest, matchingInterest)) {
-          ret = false;
-        }
-      });
-      return ret;
-    });
-    return filtered;
-  },
-  interestName(interest) {
-    return interest.name;
   },
 });
 
@@ -111,6 +76,6 @@ Template.Student_Teaser_Widget.events({
 
 Template.Student_Teaser_Widget.onRendered(function enableVideo() {
   setTimeout(() => {
-    this.$('.ui.embed').embed();
+    this.$('.ui.embed').embed('show');
   }, 300);
 });

@@ -9,12 +9,14 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 function getEventsHelper(iceType, type, earned, semester) {
   if (getUserIdFromRoute()) {
@@ -126,6 +128,23 @@ function matchingOpportunities() {
 }
 
 Template.Student_Ice_Widget.helpers({
+  competencyPoints(ice) {
+    return ice.c;
+  },
+  courseName(c) {
+    const course = Courses.findDoc(c.courseID);
+    return course.shortName;
+  },
+  courseNumber(c) {
+    const course = Courses.findDoc(c.courseID);
+    return course.number;
+  },
+  courseSlug(course) {
+    return Slugs.findDoc(Courses.findDoc(course.courseID).slugID).name;
+  },
+  coursesRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
+  },
   earnedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -135,6 +154,61 @@ Template.Student_Ice_Widget.helpers({
       return getTotalICE(earnedInstances);
     }
     return null;
+  },
+  eventIce(event) {
+    return event.ice;
+  },
+  experiencePoints(ice) {
+    return ice.e;
+  },
+  getEvents(iceType, type, earned, semester) {
+    return getEventsHelper(iceType, type, earned, semester);
+  },
+  greaterThan100(num) {
+    if (num > 100) {
+      return 100;
+    }
+    return num;
+  },
+  hasEvents(iceType, earned, semester) {
+    let ret = false;
+    if ((getEventsHelper(iceType, 'course', earned, semester).length > 0) ||
+        (getEventsHelper(iceType, 'opportunity', earned, semester).length > 0)) {
+      ret = true;
+    }
+    return ret;
+  },
+  hasNoInterests() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    return user.interestIDs === undefined;
+  },
+  innovationPoints(ice) {
+    return ice.i;
+  },
+  matchingPoints(a, b) {
+    return a === b;
+  },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+  },
+  opportunityName(opp) {
+    const opportunity = Opportunities.findDoc(opp.opportunityID);
+    return opportunity.name;
+  },
+  opportunitySemesters(opp) {
+    const semesters = opp.semesterIDs;
+    let semesterNames = '';
+    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSemester = Semesters.findDoc(currentSemesterID);
+    _.map(semesters, (sem) => {
+      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
+        semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
+      }
+    });
+    return semesterNames.slice(0, -2); // removes unnecessary comma and space
+  },
+  opportunitySlug(opportunity) {
+    return Slugs.findDoc(Opportunities.findDoc(opportunity.opportunityID).slugID).name;
   },
   plannedICE() {
     if (getUserIdFromRoute()) {
@@ -156,41 +230,8 @@ Template.Student_Ice_Widget.helpers({
     }
     return null;
   },
-  remainingICE(earned, planned) {
-    return planned - earned;
-  },
-  innovationPoints(ice) {
-    return ice.i;
-  },
-  competencyPoints(ice) {
-    return ice.c;
-  },
-  experiencePoints(ice) {
-    return ice.e;
-  },
-  years() {
-    const studentID = getUserIdFromRoute();
-    const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
-    return ay;
-  },
-  semesters(year) {
-    const yearSemesters = [];
-    const semIDs = year.semesterIDs;
-    _.map(semIDs, (semID) => {
-      yearSemesters.push(Semesters.findDoc(semID));
-    });
-    return yearSemesters;
-  },
-  hasEvents(iceType, earned, semester) {
-    let ret = false;
-    if ((getEventsHelper(iceType, 'course', earned, semester).length > 0) ||
-        (getEventsHelper(iceType, 'opportunity', earned, semester).length > 0)) {
-      ret = true;
-    }
-    return ret;
-  },
-  getEvents(iceType, type, earned, semester) {
-    return getEventsHelper(iceType, type, earned, semester);
+  printSemester(semester) {
+    return Semesters.toString(semester._id, false);
   },
   recommendedEvents(iceType, type, projected) {
     if (getUserIdFromRoute()) {
@@ -232,48 +273,21 @@ Template.Student_Ice_Widget.helpers({
     }
     return null;
   },
-  opportunitySemesters(opp) {
-    const semesters = opp.semesterIDs;
-    let semesterNames = '';
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSemester = Semesters.findDoc(currentSemesterID);
-    _.map(semesters, (sem) => {
-      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
-        semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
-      }
+  remainingICE(earned, planned) {
+    return planned - earned;
+  },
+  semesters(year) {
+    const yearSemesters = [];
+    const semIDs = year.semesterIDs;
+    _.map(semIDs, (semID) => {
+      yearSemesters.push(Semesters.findDoc(semID));
     });
-    return semesterNames.slice(0, -2); // removes unnecessary comma and space
+    return yearSemesters;
   },
-  courseName(c) {
-    const course = Courses.findDoc(c.courseID);
-    return course.shortName;
-  },
-  courseNumber(c) {
-    const course = Courses.findDoc(c.courseID);
-    return course.number;
-  },
-  opportunityName(opp) {
-    const opportunity = Opportunities.findDoc(opp.opportunityID);
-    return opportunity.name;
-  },
-  eventSem(event) {
-    const sem = Semesters.findDoc(event.semesterID);
-    const oppTerm = sem.term;
-    const oppYear = sem.year;
-    return `${oppTerm} ${oppYear}`;
-  },
-  eventIce(event) {
-    return event.ice;
-  },
-  printSemester(semester) {
-    return Semesters.toString(semester._id, false);
-  },
-  matchingPoints(a, b) {
-    return a === b;
-  },
-  hasNoInterests() {
-    const user = Users.findDoc({ username: getRouteUserName() });
-    return user.interestIDs === undefined;
+  years() {
+    const studentID = getUserIdFromRoute();
+    const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
+    return ay;
   },
 });
 
@@ -290,6 +304,7 @@ Template.Student_Ice_Widget.onCreated(function studentIceOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(VerificationRequests.getPublicationName());
 });

@@ -7,21 +7,21 @@ import { ZipZap } from 'meteor/udondan:zipzap';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 Template.Admin_DataBase_Dump_Page.helpers({
-  results() {
-    return Template.instance().results.get() || '';
+  errorMessage() {
+    return Template.instance().successOrError.get() === 'error' ? Template.instance().results.get() : '';
   },
   hidden() {
     const data = Template.instance().results.get();
     return (data) ? '' : 'hidden';
+  },
+  results() {
+    return Template.instance().results.get() || '';
   },
   successOrError() {
     return Template.instance().successOrError.get();
   },
   timestamp() {
     return moment(Template.instance().timestamp.get()).format('MMMM Do YYYY, H:mm:ss a');
-  },
-  errorMessage() {
-    return Template.instance().successOrError.get() === 'error' ? Template.instance().results.get() : '';
   },
   totalEntries() {
     return _.reduce(Template.instance().results.get(), function (sum, collection) {

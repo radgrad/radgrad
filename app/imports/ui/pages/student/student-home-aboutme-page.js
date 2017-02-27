@@ -1,9 +1,6 @@
 import { Template } from 'meteor/templating';
 
 Template.Student_Home_AboutMe_Page.helpers({
-  getDictionary() {
-    return Template.instance().state;
-  },
 });
 
 Template.Student_Home_AboutMe_Page.events({

@@ -9,7 +9,7 @@
               <span class="text">1xx</span>
               <div class="menu">
                 {{#each course in courses100}}
-                  <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
                 {{/each}}
               </div>
             </div>
@@ -18,7 +18,7 @@
               <span class="text">2xx</span>
               <div class="menu">
                 {{#each course in courses200}}
-                  <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
                 {{/each}}
               </div>
             </div>
@@ -27,7 +27,7 @@
               <span class="text">3xx</span>
               <div class="menu">
                 {{#each course in courses300}}
-                  <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
                 {{/each}}
               </div>
             </div>
@@ -36,7 +36,7 @@
               <span class="text">41x - 43x</span>
               <div class="menu" style="overflow: auto; height: 300px">
                 {{#each course in courses410}}
-                  <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
                 {{/each}}
               </div>
             </div>
@@ -45,7 +45,7 @@
               <span class="text">44x - 46x</span>
               <div class="menu" style="overflow: auto; height: 300px">
                 {{#each course in courses440}}
-                  <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
                 {{/each}}
               </div>
             </div>
@@ -54,7 +54,7 @@
               <span class="text">47x - 499</span>
               <div class="menu" style="overflow: auto; height: 300px">
                 {{#each course in courses470}}
-                  <div id="{{course._id}}" class="course item">{{course.number}}</div>
+                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
                 {{/each}}
               </div>
             </div>
@@ -102,7 +102,7 @@
                     {{/if}}
                   </p>
                   <p>
-                    <b>Catalog Descrption:</b> {{courseDescription}}
+                    <b>Catalog Descrption:</b> {{#markdown}}{{courseDescription}}{{/markdown}}
                   </p>
                   <p style="text-align: right;">
                     <a href="{{pathFor coursesRouteName username=routeUserName course = courseSlugID}}">
@@ -111,9 +111,7 @@
                   </p>
                   {{#if interests}}
                     <div class="ui right floated">
-                      {{#each interest in interests}}
-                        <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestName interest.slugID)}}" ><i class="fitted star icon"></i>{{interest.name}}</a>
-                      {{/each}}
+                      {{> Interest_List item=getCourse size='small'}}
                     </div>
                   {{/if}}
                 </div>
@@ -125,7 +123,7 @@
                   <div class="content">
                     <b>When: </b> {{opportunitySemester}}
                     <p>
-                      <b>Description: </b>{{opportunityDescription}} <br>
+                      <b>Description: </b>{{#markdown}}{{opportunityDescription}}{{/markdown}} <br>
                       <b>More Information: </b><a href="{{opportunityMore}}">{{opportunityMore}}</a> <br>
                     </p>
                     <p style="text-align: right;">
@@ -153,11 +151,8 @@
                     {{/if}}
 
                     <div class="ui right floated">
-                      {{#each interest in interests}}
-                        <a class="ui mini label" href="{{pathFor interestsRouteName username=routeUserName interest = (interestName interest.slugID)}}" ><i class="fitted star icon"></i>{{interest.name}}</a>
-                      {{/each}}
+                      {{> Interest_List item=getOpportunity size='small'}}
                     </div>
-
                   </div>
                 {{else}}
                   <p>Please select an ICS course or opportunity menus above or click on a course or

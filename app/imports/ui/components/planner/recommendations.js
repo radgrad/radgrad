@@ -30,7 +30,8 @@ Template.Recommendations.events({
 });
 
 Template.Recommendations.onCreated(function recommendationsOnCreated() {
-  // add your statement here
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
 });
 
 Template.Recommendations.onRendered(function recommendationsOnRendered() {
