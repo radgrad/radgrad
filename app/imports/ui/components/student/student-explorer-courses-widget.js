@@ -28,7 +28,7 @@ Template.Student_Explorer_Courses_Widget.helpers({
       courseID: course._id,
     }).fetch();
     for (const courseInstance of ci) {
-      if (Semesters.findDoc(courseInstance.semesterID).sortBy > Semesters.getCurrentSemesterDoc().sortBy) {
+      if (Semesters.findDoc(courseInstance.semesterID).sortBy >= Semesters.getCurrentSemesterDoc().sortBy) {
         ret = true;
       }
     }

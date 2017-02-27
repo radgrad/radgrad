@@ -164,7 +164,7 @@ Template.Update_Degree_Plan_Widget.events({
       FormUtils.renameKey(updatedData, 'slug', 'username');
       Meteor.call('Users.update', updatedData, (error) => {
         if (error) {
-          console.log('Error during user update: ', error);
+          // console.log('Error during user update: ', error);
         }
         // FormUtils.indicateSuccess(instance, event);
         instance.successClass.set('success');

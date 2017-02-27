@@ -24,6 +24,8 @@ class PublicStatsCollection extends BaseCollection {
       value: { type: String },
     }));
     this.stats = [];
+    this.coursesTotalKey = 'coursesTotal';
+    this.stats.push(this.coursesTotalKey);
     this.careerGoalsTotalKey = 'careerGoalsTotal';
     this.stats.push(this.careerGoalsTotalKey);
     this.careerGoalsListKey = 'careerGoalsList';
@@ -58,11 +60,28 @@ class PublicStatsCollection extends BaseCollection {
     this.stats.push(this.courseReviewsTotalKey);
     this.courseReviewsCoursesKey = 'courseReviewsCourses';
     this.stats.push(this.courseReviewsCoursesKey);
+    this.levelOneTotalKey = 'levelOneTotal';
+    this.stats.push(this.levelOneTotalKey);
+    this.levelTwoTotalKey = 'levelTwoTotal';
+    this.stats.push(this.levelTwoTotalKey);
+    this.levelThreeTotalKey = 'levelThreeTotal';
+    this.stats.push(this.levelThreeTotalKey);
+    this.levelFourTotalKey = 'levelFourTotal';
+    this.stats.push(this.levelFourTotalKey);
+    this.levelFiveTotalKey = 'levelFiveTotal';
+    this.stats.push(this.levelFiveTotalKey);
+    this.levelSixTotalKey = 'levelSixTotal';
+    this.stats.push(this.levelSixTotalKey);
   }
 
   careerGoalsTotal() {
     const count = CareerGoals.find().count();
     this._collection.upsert({ key: this.careerGoalsTotalKey }, { $set: { value: `${count}` } });
+  }
+
+  coursesTotal() {
+    const count = Courses.find().count();
+    this._collection.upsert({ key: this.coursesTotalKey }, { $set: { value: `${count}` } });
   }
 
   careerGoalsList() {
@@ -109,6 +128,35 @@ class PublicStatsCollection extends BaseCollection {
     const projects = Opportunities.find({ opportunityTypeID: projectType._id }).fetch();
     const names = _.map(projects, 'name');
     this._collection.upsert({ key: this.opportunitiesProjectsListKey }, { $set: { value: names.join(', ') } });
+  }
+
+  upsertLevelTotal(level, key) {
+    const numUsers = Users.find({ level }).count();
+    this._collection.upsert({ key }, { $set: { value: `${numUsers}` } });
+  }
+
+  levelOneTotal() {
+    this.upsertLevelTotal(1, this.levelOneTotalKey);
+  }
+
+  levelTwoTotal() {
+    this.upsertLevelTotal(2, this.levelTwoTotalKey);
+  }
+
+  levelThreeTotal() {
+    this.upsertLevelTotal(3, this.levelThreeTotalKey);
+  }
+
+  levelFourTotal() {
+    this.upsertLevelTotal(4, this.levelFourTotalKey);
+  }
+
+  levelFiveTotal() {
+    this.upsertLevelTotal(5, this.levelFiveTotalKey);
+  }
+
+  levelSixTotal() {
+    this.upsertLevelTotal(6, this.levelSixTotalKey);
   }
 
   usersTotal() {
@@ -186,7 +234,7 @@ export const PublicStats = new PublicStatsCollection();
 
 if (Meteor.isClient) {
   Template.registerHelper('publicStats', (key) => {
-    const stat = PublicStats.findDoc({ key });
+    const stat = PublicStats.isDefined({ key }) && PublicStats.findDoc({ key });
     if (stat) {
       return stat.value;
     }

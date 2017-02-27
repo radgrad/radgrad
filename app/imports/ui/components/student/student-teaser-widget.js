@@ -76,6 +76,6 @@ Template.Student_Teaser_Widget.events({
 
 Template.Student_Teaser_Widget.onRendered(function enableVideo() {
   setTimeout(() => {
-    this.$('.ui.embed').embed();
+    this.$('.ui.embed').embed('show');
   }, 300);
 });

@@ -16,9 +16,16 @@
             </div>
           </div>
 
-          <h1 class="header-text">Level Up</h1>
-          <p class="header-description">The RadGrad path to an improved degree experience is long and challenging. To recognize stages in your progress, RadGrad defines six levels of achievement: white, yellow, green, blue, brown and black.</p>
-          <p class="header-description">Once you achieve a level, the corresponding badge appears in your profile and is visible to other community members. In addition, your ICS advisor will give you a laptop sticker representing your level. Congratulations, grasshopper!</p>
+          <h1 class="header-text">Level up</h1>
+          <div class="header-description">
+          {{#markdown}}
+The RadGrad path to an improved degree experience is long and challenging. To recognize stages in your progress, RadGrad defines six levels of achievement: white, yellow, green, blue, brown and black.
+
+Right now, there are **{{publicStats 'levelOneTotal'}}** student(s) at Level One, **{{publicStats 'levelTwoTotal'}}** at Level Two, **{{publicStats 'levelThreeTotal'}}** at Level Three, **{{publicStats 'levelFourTotal'}}** at Level Four, **{{publicStats 'levelFiveTotal'}}** at Level Five, and **{{publicStats 'levelSixTotal'}}** at Level Six.
+
+Once you achieve a level, the corresponding badge appears in your profile and is visible to other community members. In addition, your ICS advisor will give you a laptop sticker representing your level. Congratulations, grasshopper!
+            {{/markdown}}
+          </div>
 
           <div class="ui three column grid" style="margin: 21px;">
             <div class="column">
