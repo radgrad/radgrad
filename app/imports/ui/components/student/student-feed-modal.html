@@ -1,7 +1,7 @@
 <template name="Student_Feed_Modal">
   {{#if Template.subscriptionsReady}}
-    <a class="openModal">{{number}}</a>
-    <div class="ui small modal">
+    <a class="modal">{{number}}</a>
+    <div id = "{{feedID}}" class="ui small modal">
       <i class="close icon"></i>
       <div class="ui small header">Students</div>
       <div class="content">

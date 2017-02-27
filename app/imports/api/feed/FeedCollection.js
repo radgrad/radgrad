@@ -117,7 +117,7 @@ class FeedCollection extends BaseCollection {
             description: 'other(s) have joined RadGrad.' };
         } else {
           // description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
-          description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.'};
+          description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.' };
         }
         picture = Users.findDoc(userIDs[0]).picture;
         if (!picture) {
@@ -215,7 +215,7 @@ class FeedCollection extends BaseCollection {
       // description = `${Users.getFullName(userIDs[0])} has added an opportunity review for
       // ${Opportunities.findDoc(opportunityID).name}.`;
       description = { user: Users.getFullName(userIDs[0]), description: ' has added an opportunity review for ',
-        item: Opportunities.findDoc(opportunityID).name};
+        item: Opportunities.findDoc(opportunityID).name };
       picture = Users.findDoc(userIDs[0]).picture;
       if (!picture) {
         picture = '/images/people/default-profile-picture.png';

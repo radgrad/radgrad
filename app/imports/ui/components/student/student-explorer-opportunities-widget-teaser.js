@@ -16,7 +16,7 @@ Template.Student_Explorer_Opportunities_Widget_Teaser.onRendered(function enable
 
 Template.Student_Explorer_Opportunities_Widget_Teaser.helpers({
   updateTeaser() {
-      $('.ui.embed.teaser').embed('destroy');
+    $('.ui.embed.teaser').embed('destroy');
     $('.ui.embed').embed('change', 'youtube', teaserUrlHelper(FlowRouter.getParam('opportunity')));
   },
 });
