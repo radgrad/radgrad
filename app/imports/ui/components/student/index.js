@@ -58,7 +58,6 @@ import './student-feed-widget.js';
 import './student-ice-column.html';
 import './student-ice-column.js';
 
-import './student-ice-widget.css';
 import './student-ice-widget.html';
 import './student-ice-widget.js';
 

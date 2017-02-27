@@ -1,362 +1,362 @@
 <template name="Student_Ice_Widget">
-  <div class="ui padded segment">
-    <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
-    <div class="ui equal width grid stackable container">
-      <div class="column">
+    <div class="ui padded segment">
+      <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
+      <div class="ui equal width grid stackable container">
+        <div class="column">
 
-        <div class="ui segment">
-          <div class="radgrad-ice">
-            <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.i}} radgrad-proj-innov">
-              <div class="radgrad-ice-stat">
-                <span>{{earnedICE.i}}</span>
-                <hr>
-                <span>{{plannedICE.i}}</span>
+          <div class="ui segment">
+            <div class="radgrad-ice">
+              <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.i}} radgrad-proj-innov">
+                <div class="radgrad-ice-stat">
+                  <span>{{earnedICE.i}}</span>
+                  <hr>
+                  <span>{{plannedICE.i}}</span>
+                </div>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
               </div>
-              <div class="slice">
-                <div class="bar"></div>
-                <div class="fill"></div>
+              <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.i}} radgrad-earn-innov">
+                <span></span>
+                <div class="slice">
+                  <div class="bar" ></div>
+                  <div class="fill"></div>
+                </div>
               </div>
             </div>
-            <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.i}} radgrad-earn-innov">
-              <span></span>
-              <div class="slice">
-                <div class="bar" ></div>
-                <div class="fill"></div>
+
+            <h3 class="ui centered header ice-innovation-color">
+              Innovation
+            </h3>
+
+            <div class="ui styled fluid accordion">
+              <div class="active title">
+                <i class="dropdown icon"></i>
+                Earned ({{innovationPoints earnedICE}} points)
               </div>
-            </div>
-           </div>
 
-          <h3 class="ui centered header ice-innovation-color">
-            Innovation
-          </h3>
-
-          <div class="ui styled fluid accordion">
-            <div class="active title">
-              <i class="dropdown icon"></i>
-              Earned ({{innovationPoints earnedICE}} points)
-            </div>
-
-            <div class="active content">
-              {{#if matchingPoints (innovationPoints earnedICE) 0}}
+              <div class="active content">
+                {{#if matchingPoints (innovationPoints earnedICE) 0}}
                   <p>You have not yet earned any Innovation points.</p>
-              {{else}}
-                <p>You have earned {{innovationPoints earnedICE}} Innovation points for the following:</p>
-                <div class="ui very relaxed list">
-                  {{#each year in years}}
-                    {{#each semester in semesters year}}
-                      {{#if hasEvents 'i' true semester}}
-                        <div class="item">
-                          <div class="header">{{printSemester semester}}</div>
-                          {{#each event in getEvents 'i' 'opportunity' true semester}}
-                            <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                            {{ opportunityName event }}<br></a>
-                          {{/each}}
-                          {{#each event in getEvents 'i' 'course' true semester}}
-                            <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                            {{ courseName event }} ({{courseNumber event}})<br></a>
-                          {{/each}}
-                        </div>
-                      {{/if}}
+                {{else}}
+                  <p>You have earned {{innovationPoints earnedICE}} Innovation points for the following:</p>
+                  <div class="ui very relaxed list">
+                    {{#each year in years}}
+                      {{#each semester in semesters year}}
+                        {{#if hasEvents 'i' true semester}}
+                          <div class="item">
+                            <div class="header">{{printSemester semester}}</div>
+                            {{#each event in getEvents 'i' 'opportunity' true semester}}
+                              <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
+                                {{ opportunityName event }}<br></a>
+                            {{/each}}
+                            {{#each event in getEvents 'i' 'course' true semester}}
+                              <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
+                                {{ courseName event }} ({{courseNumber event}})<br></a>
+                            {{/each}}
+                          </div>
+                        {{/if}}
+                      {{/each}}
                     {{/each}}
-                  {{/each}}
-                </div>
+                  </div>
                 {{/if}}
-            </div>
-            <div class="title">
-              <i class="dropdown icon"></i>
-              Planned ({{innovationPoints plannedICE}} points)
-            </div>
-            <div class="content">
-              {{#if matchingPoints (innovationPoints plannedICE) (innovationPoints earnedICE)}}
+              </div>
+              <div class="title">
+                <i class="dropdown icon"></i>
+                Planned ({{innovationPoints plannedICE}} points)
+              </div>
+              <div class="content">
+                {{#if matchingPoints (innovationPoints plannedICE) (innovationPoints earnedICE)}}
                   <p>You have earned all of your {{innovationPoints plannedICE}} planned points.</p>
-              {{else}}
-                <p>You have a total of {{innovationPoints plannedICE}} planned Innovation points, with {{remainingICE (innovationPoints earnedICE) (innovationPoints plannedICE) }} unearned points for the following:</p>
-                <div class="ui very relaxed list">
-                  {{#each year in years}}
-                    {{#each semester in semesters year}}
-                      {{#if hasEvents 'i' false semester}}
-                        <div class="item">
-                          <div class="header">{{printSemester semester}}</div>
-                          {{#each event in getEvents 'i' 'opportunity' false semester}}
-                            <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                            {{ opportunityName event }} <br></a>
-                          {{/each}}
-                          {{#each event in getEvents 'i' 'course' false semester}}
-                            <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                            {{ courseName event }} ({{courseNumber event}}) <br></a>
-                          {{/each}}
-                        </div>
-                      {{/if}}
+                {{else}}
+                  <p>You have a total of {{innovationPoints plannedICE}} planned Innovation points, with {{remainingICE (innovationPoints earnedICE) (innovationPoints plannedICE) }} unearned points for the following:</p>
+                  <div class="ui very relaxed list">
+                    {{#each year in years}}
+                      {{#each semester in semesters year}}
+                        {{#if hasEvents 'i' false semester}}
+                          <div class="item">
+                            <div class="header">{{printSemester semester}}</div>
+                            {{#each event in getEvents 'i' 'opportunity' false semester}}
+                              <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
+                                {{ opportunityName event }} <br></a>
+                            {{/each}}
+                            {{#each event in getEvents 'i' 'course' false semester}}
+                              <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
+                                {{ courseName event }} ({{courseNumber event}}) <br></a>
+                            {{/each}}
+                          </div>
+                        {{/if}}
+                      {{/each}}
                     {{/each}}
-                  {{/each}}
-                </div>
+                  </div>
                 {{/if}}
-            </div>
-            <div class="title">
-              <i class="dropdown icon"></i>
-              Get to 100
-            </div>
-            <div class="content">
-              {{#if matchingPoints (innovationPoints earnedICE) 100}}
+              </div>
+              <div class="title">
+                <i class="dropdown icon"></i>
+                Get to 100
+              </div>
+              <div class="content">
+                {{#if matchingPoints (innovationPoints earnedICE) 100}}
                   <p>Congratulations! You have earned 100 Innovation points!</p>
-              {{else}}
-                {{#if matchingPoints (innovationPoints plannedICE) 100}}
-                  <p>You already have 100 planned Innovation points.</p>
                 {{else}}
-                  {{#if hasNoInterests}}
-                    <p>Consider adding interests to see recommendations here.</p>
+                  {{#if matchingPoints (innovationPoints plannedICE) 100}}
+                    <p>You already have 100 planned Innovation points.</p>
                   {{else}}
-                    <p>Consider the following to complete the full 100 Innovation points.</p>
-                    <div class="ui list">
-                      {{#each event in recommendedEvents 'i' 'opportunities' (innovationPoints plannedICE)}}
-                        <div class="item">
-                          <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                            {{ event.name }} ({{ opportunitySemesters event}})</a>
-                        </div>
-                      {{/each}}
-                    </div>
+                    {{#if hasNoInterests}}
+                      <p>Consider adding interests to see recommendations here.</p>
+                    {{else}}
+                      <p>Consider the following to complete the full 100 Innovation points.</p>
+                      <div class="ui list">
+                        {{#each event in recommendedEvents 'i' 'opportunities' (innovationPoints plannedICE)}}
+                          <div class="item">
+                            <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
+                              {{ event.name }} ({{ opportunitySemesters event}})</a>
+                          </div>
+                        {{/each}}
+                      </div>
+                    {{/if}}
                   {{/if}}
                 {{/if}}
-              {{/if}}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
 
-      <div class="column">
-        <div class="ui segment">
-          <div class="radgrad-ice">
-            <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.c}} radgrad-proj-comp">
-              <div class="radgrad-ice-stat">
-                <span>{{earnedICE.c}}</span>
-                <hr>
-                <span>{{plannedICE.c}}</span>
-              </div>
-              <div class="slice">
-                <div class="bar"></div>
-                <div class="fill"></div>
-              </div>
-            </div>
-
-            <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.c}} radgrad-earn-comp">
-              <span></span>
-              <div class="slice">
-                <div class="bar"></div>
-                <div class="fill"></div>
-              </div>
-            </div>
-        </div>
-
-
-          <h3 class="ui centered header ice-competency-color">
-            Competency
-          </h3>
-
-          <div class="ui styled fluid accordion">
-            <div class="active title">
-              <i class="dropdown icon"></i>
-              Earned ({{competencyPoints earnedICE}} points)
-            </div>
-            <div class="active content">
-              {{#if matchingPoints (competencyPoints earnedICE) 0}}
-                <p>You have not yet earned any Competency Points</p>
-              {{else}}
-                <p>You have earned {{competencyPoints earnedICE}} Competency points for the following:</p>
-                <div class="ui very relaxed list">
-                  {{#each year in years}}
-                    {{#each semester in semesters year}}
-                      {{#if hasEvents 'c' true semester}}
-                        <div class="item">
-                          <div class="header">{{printSemester semester}}</div>
-                          {{#each event in getEvents 'c' 'course' true semester}}
-                            <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{competencyPoints (eventIce event)}}</b>
-                            {{ courseName event }} ({{courseNumber event}}) <br></a>
-                          {{/each}}
-                        </div>
-                      {{/if}}
-                    {{/each}}
-                  {{/each}}
+        <div class="column">
+          <div class="ui segment">
+            <div class="radgrad-ice">
+              <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.c}} radgrad-proj-comp">
+                <div class="radgrad-ice-stat">
+                  <span>{{earnedICE.c}}</span>
+                  <hr>
+                  <span>{{plannedICE.c}}</span>
                 </div>
-              {{/if}}
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+
+              <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.c}} radgrad-earn-comp">
+                <span></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
             </div>
-            <div class="title">
-              <i class="dropdown icon"></i>
-              Planned ({{competencyPoints plannedICE}} points)
-            </div>
-            <div class="content">
-              {{#if matchingPoints (competencyPoints plannedICE) (competencyPoints earnedICE)}}
+
+
+            <h3 class="ui centered header ice-competency-color">
+              Competency
+            </h3>
+
+            <div class="ui styled fluid accordion">
+              <div class="active title">
+                <i class="dropdown icon"></i>
+                Earned ({{competencyPoints earnedICE}} points)
+              </div>
+              <div class="active content">
+                {{#if matchingPoints (competencyPoints earnedICE) 0}}
+                  <p>You have not yet earned any Competency Points</p>
+                {{else}}
+                  <p>You have earned {{competencyPoints earnedICE}} Competency points for the following:</p>
+                  <div class="ui very relaxed list">
+                    {{#each year in years}}
+                      {{#each semester in semesters year}}
+                        {{#if hasEvents 'c' true semester}}
+                          <div class="item">
+                            <div class="header">{{printSemester semester}}</div>
+                            {{#each event in getEvents 'c' 'course' true semester}}
+                              <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{competencyPoints (eventIce event)}}</b>
+                                {{ courseName event }} ({{courseNumber event}}) <br></a>
+                            {{/each}}
+                          </div>
+                        {{/if}}
+                      {{/each}}
+                    {{/each}}
+                  </div>
+                {{/if}}
+              </div>
+              <div class="title">
+                <i class="dropdown icon"></i>
+                Planned ({{competencyPoints plannedICE}} points)
+              </div>
+              <div class="content">
+                {{#if matchingPoints (competencyPoints plannedICE) (competencyPoints earnedICE)}}
                   <p>You have earned all of your {{competencyPoints plannedICE}} projected points.</p>
-              {{else}}
-                <p>You have a total of {{competencyPoints plannedICE}} planned Competency points, with {{remainingICE (competencyPoints earnedICE) (competencyPoints plannedICE) }} unearned points for the following:</p>
-                <div class="ui very relaxed list">
-                  {{#each year in years}}
-                    {{#each semester in semesters year}}
-                      {{#if hasEvents 'c' false semester}}
-                        <div class="item">
-                          <div class="header">{{printSemester semester}}</div>
-                          {{#each event in getEvents 'c' 'course' false semester}}
-                            <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{competencyPoints (eventIce event)}}</b>
-                            {{ courseName event }} ({{courseNumber event}}) <br></a>
-                          {{/each}}
-                        </div>
-                      {{/if}}
-                    {{/each}}
-                  {{/each}}
-                </div>
-                {{/if}}
-            </div>
-            <div class="title">
-              <i class="dropdown icon"></i>
-              Get to 100
-            </div>
-            <div class="content">
-              {{#if matchingPoints (competencyPoints earnedICE) 100}}
-                <p>Congratulations! You have earned 100 Competency points!</p>
-              {{else}}
-                {{#if matchingPoints (competencyPoints plannedICE) 100}}
-                  <p>You already have 100 planned Competency points.</p>
                 {{else}}
-                  {{#if hasNoInterests}}
-                    <p>Consider adding interests to see recommendations here.</p>
-                  {{else}}
-                    <p>Consider the following to complete the full 100 Competency points.</p>
-                    <div class="ui list">
-                      {{#each event in recommendedEvents 'c' 'course' (competencyPoints plannedICE)}}
-                        <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><div class="item">
-                          <b>+9</b>
-                          {{ event.name }}
-                        </div></a>
+                  <p>You have a total of {{competencyPoints plannedICE}} planned Competency points, with {{remainingICE (competencyPoints earnedICE) (competencyPoints plannedICE) }} unearned points for the following:</p>
+                  <div class="ui very relaxed list">
+                    {{#each year in years}}
+                      {{#each semester in semesters year}}
+                        {{#if hasEvents 'c' false semester}}
+                          <div class="item">
+                            <div class="header">{{printSemester semester}}</div>
+                            {{#each event in getEvents 'c' 'course' false semester}}
+                              <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{competencyPoints (eventIce event)}}</b>
+                                {{ courseName event }} ({{courseNumber event}}) <br></a>
+                            {{/each}}
+                          </div>
+                        {{/if}}
                       {{/each}}
-                    </div>
+                    {{/each}}
+                  </div>
+                {{/if}}
+              </div>
+              <div class="title">
+                <i class="dropdown icon"></i>
+                Get to 100
+              </div>
+              <div class="content">
+                {{#if matchingPoints (competencyPoints earnedICE) 100}}
+                  <p>Congratulations! You have earned 100 Competency points!</p>
+                {{else}}
+                  {{#if matchingPoints (competencyPoints plannedICE) 100}}
+                    <p>You already have 100 planned Competency points.</p>
+                  {{else}}
+                    {{#if hasNoInterests}}
+                      <p>Consider adding interests to see recommendations here.</p>
+                    {{else}}
+                      <p>Consider the following to complete the full 100 Competency points.</p>
+                      <div class="ui list">
+                        {{#each event in recommendedEvents 'c' 'course' (competencyPoints plannedICE)}}
+                          <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><div class="item">
+                            <b>+9</b>
+                            {{ event.name }}
+                          </div></a>
+                        {{/each}}
+                      </div>
+                    {{/if}}
                   {{/if}}
                 {{/if}}
-              {{/if}}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="column">
+        <div class="column">
 
-        <div class="ui segment">
-          <div class="radgrad-ice">
-            <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.e}} radgrad-proj-exp">
-              <div class="radgrad-ice-stat">
-                <span>{{earnedICE.e}}</span>
-                <hr>
-                <span>{{plannedICE.e}}</span>
+          <div class="ui segment">
+            <div class="radgrad-ice">
+              <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.e}} radgrad-proj-exp">
+                <div class="radgrad-ice-stat">
+                  <span>{{earnedICE.e}}</span>
+                  <hr>
+                  <span>{{plannedICE.e}}</span>
+                </div>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
               </div>
-              <div class="slice">
-                <div class="bar"></div>
-                <div class="fill"></div>
+
+              <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.e}} radgrad-earn-exp">
+                <span></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
               </div>
             </div>
 
-            <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.e}} radgrad-earn-exp">
-              <span></span>
-              <div class="slice">
-                <div class="bar"></div>
-                <div class="fill"></div>
+            <h3 class="ui centered header ice-experience-color">
+              Experience
+            </h3>
+
+            <div class="ui styled fluid accordion">
+              <div class="active title">
+                <i class="dropdown icon"></i>
+                Earned ({{experiencePoints earnedICE}} points)
               </div>
-            </div>
-          </div>
-
-          <h3 class="ui centered header ice-experience-color">
-            Experience
-          </h3>
-
-          <div class="ui styled fluid accordion">
-            <div class="active title">
-              <i class="dropdown icon"></i>
-              Earned ({{experiencePoints earnedICE}} points)
-            </div>
-            <div class="active content">
-              {{#if matchingPoints (experiencePoints earnedICE) 0}}
+              <div class="active content">
+                {{#if matchingPoints (experiencePoints earnedICE) 0}}
                   <p>You have not yet earned any Experience points.</p>
-              {{else}}
-                <p>You have earned {{experiencePoints earnedICE}} Experience points for the following:</p>
-                <div class="ui very relaxed list">
-                  {{#each year in years}}
-                    {{#each semester in semesters year}}
-                      {{#if hasEvents 'e' true semester}}
-                        <div class="item">
-                          <div class="header">{{printSemester semester}}</div>
-                          {{#each event in getEvents 'e' 'opportunity' true semester}}
-                            <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{experiencePoints (eventIce event)}}</b>
-                            {{ opportunityName event }} <br></a>
-                          {{/each}}
-                          {{#each event in getEvents 'e' 'course' true semester}}
-                           <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"> <b>+{{experiencePoints (eventIce event)}}</b>
-                            {{ courseName event }} ({{courseNumber event}}) <br></a>
-                          {{/each}}
-                        </div>
-                      {{/if}}
-                    {{/each}}
-                  {{/each}}
-                </div>
-                {{/if}}
-            </div>
-            <div class="title">
-              <i class="dropdown icon"></i>
-              Planned ({{experiencePoints plannedICE}} points)
-            </div>
-            <div class="content">
-              {{#if matchingPoints (experiencePoints plannedICE) (experiencePoints earnedICE)}}
-                  <p>You have earned all of your {{experiencePoints plannedICE}} planned points.</p>
-              {{else}}
-                <p>You have a total of {{experiencePoints plannedICE}} planned Experience points, with {{remainingICE (experiencePoints earnedICE) (experiencePoints plannedICE) }} unearned points for the following:</p>
-                <div class="ui very relaxed list">
-                  {{#each year in years}}
-                    {{#each semester in semesters year}}
-                      {{#if hasEvents 'e' false semester}}
-                        <div class="item">
-                          <div class="header">{{printSemester semester}}</div>
-                          {{#each event in getEvents 'e' 'opportunity' false semester}}
-                            <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{experiencePoints (eventIce event)}}</b>
-                            {{ opportunityName event }} <br></a>
-                          {{/each}}
-                          {{#each event in getEvents 'e' 'course' false semester}}
-                            <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{experiencePoints (eventIce event)}}</b>
-                            {{ courseName event }} ({{courseNumber event}}) <br></a>
-                          {{/each}}
-                        </div>
-                      {{/if}}
-                    {{/each}}
-                  {{/each}}
-                </div>
-                {{/if}}
-            </div>
-            <div class="title">
-              <i class="dropdown icon"></i>
-              Get to 100
-            </div>
-            <div class="content">
-              {{#if matchingPoints (experiencePoints earnedICE) 100}}
-                <p>Congratulations! You have earned 100 Experience points!</p>
-              {{else}}
-                {{#if matchingPoints (experiencePoints plannedICE) 100}}
-                  <p>You already have 100 planned Experience points.</p>
                 {{else}}
-                  {{#if hasNoInterests}}
-                    <p>Consider adding interests to see recommendations here.</p>
-                  {{else}}
-                    <p>Consider the following to complete the full 100 Experience points.</p>
-                    <div class="ui list">
-                      {{#each event in recommendedEvents 'e' 'opportunities' (experiencePoints plannedICE)}}
-                        <div class="item">
-                          <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{experiencePoints (eventIce event)}}</b>
-                          {{ event.name }} ({{ opportunitySemesters event}})</a>
-                        </div>
+                  <p>You have earned {{experiencePoints earnedICE}} Experience points for the following:</p>
+                  <div class="ui very relaxed list">
+                    {{#each year in years}}
+                      {{#each semester in semesters year}}
+                        {{#if hasEvents 'e' true semester}}
+                          <div class="item">
+                            <div class="header">{{printSemester semester}}</div>
+                            {{#each event in getEvents 'e' 'opportunity' true semester}}
+                              <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{experiencePoints (eventIce event)}}</b>
+                                {{ opportunityName event }} <br></a>
+                            {{/each}}
+                            {{#each event in getEvents 'e' 'course' true semester}}
+                              <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"> <b>+{{experiencePoints (eventIce event)}}</b>
+                                {{ courseName event }} ({{courseNumber event}}) <br></a>
+                            {{/each}}
+                          </div>
+                        {{/if}}
                       {{/each}}
-                    </div>
+                    {{/each}}
+                  </div>
+                {{/if}}
+              </div>
+              <div class="title">
+                <i class="dropdown icon"></i>
+                Planned ({{experiencePoints plannedICE}} points)
+              </div>
+              <div class="content">
+                {{#if matchingPoints (experiencePoints plannedICE) (experiencePoints earnedICE)}}
+                  <p>You have earned all of your {{experiencePoints plannedICE}} planned points.</p>
+                {{else}}
+                  <p>You have a total of {{experiencePoints plannedICE}} planned Experience points, with {{remainingICE (experiencePoints earnedICE) (experiencePoints plannedICE) }} unearned points for the following:</p>
+                  <div class="ui very relaxed list">
+                    {{#each year in years}}
+                      {{#each semester in semesters year}}
+                        {{#if hasEvents 'e' false semester}}
+                          <div class="item">
+                            <div class="header">{{printSemester semester}}</div>
+                            {{#each event in getEvents 'e' 'opportunity' false semester}}
+                              <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{experiencePoints (eventIce event)}}</b>
+                                {{ opportunityName event }} <br></a>
+                            {{/each}}
+                            {{#each event in getEvents 'e' 'course' false semester}}
+                              <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{experiencePoints (eventIce event)}}</b>
+                                {{ courseName event }} ({{courseNumber event}}) <br></a>
+                            {{/each}}
+                          </div>
+                        {{/if}}
+                      {{/each}}
+                    {{/each}}
+                  </div>
+                {{/if}}
+              </div>
+              <div class="title">
+                <i class="dropdown icon"></i>
+                Get to 100
+              </div>
+              <div class="content">
+                {{#if matchingPoints (experiencePoints earnedICE) 100}}
+                  <p>Congratulations! You have earned 100 Experience points!</p>
+                {{else}}
+                  {{#if matchingPoints (experiencePoints plannedICE) 100}}
+                    <p>You already have 100 planned Experience points.</p>
+                  {{else}}
+                    {{#if hasNoInterests}}
+                      <p>Consider adding interests to see recommendations here.</p>
+                    {{else}}
+                      <p>Consider the following to complete the full 100 Experience points.</p>
+                      <div class="ui list">
+                        {{#each event in recommendedEvents 'e' 'opportunities' (experiencePoints plannedICE)}}
+                          <div class="item">
+                            <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{experiencePoints (eventIce event)}}</b>
+                              {{ event.name }} ({{ opportunitySemesters event}})</a>
+                          </div>
+                        {{/each}}
+                      </div>
+                    {{/if}}
                   {{/if}}
                 {{/if}}
-              {{/if}}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
