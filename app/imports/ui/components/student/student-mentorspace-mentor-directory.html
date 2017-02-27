@@ -15,21 +15,15 @@
         </div>
       </div>
 
-      <div class="active content">
+      <div class="active right aligned content">
         <div class="ui divider"></div>
-        {{firstName}} {{lastName}} is based in
+        <div class="ui basic segment mentorspace-description">
+          "{{profile.motivation}}" <br><br>
+          {{firstName}} {{lastName}} is based in {{profile.location}}<br>
 
-        {{profile.location}}<br>
-
-        <i class="mail outline icon"></i>: <a href="mailto:{{email}}">{{email}}</a><br>
-        <i class="linkedin icon"></i>: <a href="https://www.linkedin.com/in/{{profile.linkedin}}">{{profile.linkedin}}</a><br>
-        <h6 class="ui horizontal divider header">
-          WHY I MENTOR
-        </h6>
-        <div class="description mentorspace-description">
-          {{profile.motivation}}
+          <i class="mail outline icon"></i><a href="mailto:{{email}}">{{email}}</a><br>
+          <i class="linkedin icon"></i><a href="https://www.linkedin.com/in/{{profile.linkedin}}">{{profile.linkedin}}</a><br>
         </div>
-
       </div>
     </div>
   </div>
