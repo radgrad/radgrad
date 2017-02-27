@@ -147,6 +147,15 @@ function careerGoals(interest) {
 }
 
 Template.Student_Explorer_Interests_Page.helpers({
+  addedCareerInterests() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const addedCareerInterests = [];
+    const allInterests = Users.getInterestIDsByType(user._id);
+    _.map(allInterests[1], (interest) => {
+      addedCareerInterests.push(Interests.findDoc(interest));
+    });
+    return addedCareerInterests;
+  },
   addedInterests() {
     const addedInterests = [];
     const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
@@ -177,7 +186,7 @@ Template.Student_Explorer_Interests_Page.helpers({
     const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
     const user = Users.findDoc({ username: getRouteUserName() });
     const nonAddedInterests = _.filter(allInterests, function (interest) {
-      if (_.includes(user.interestIDs, interest._id)) {
+      if (_.includes(Users.getInterestIDs(user._id), interest._id)) {
         return false;
       }
       return true;
