@@ -1,3 +1,20 @@
+To update radgrad.ics.hawaii.edu (Philip's instructions)
+
+$ ssh casanova@radgrad.ics.hawaii.edu
+$ cd RADGRAD/radgrad/deploy
+$ git pull
+$ ./setup_as_<TAB>
+$ # at end, cut and past the yellow restart instructions (there are three commands)
+$ # wait 30 seconds.
+
+To blow away Mongo collections (this is approximate):
+$ mongo --port 6003
+> use admin
+> db.dropDatabase()
+> ctrl-C
+
+
+DOCS
 * setup_as_a_service_on_ITS_vm.sh:
 	Master script that should be edited and executed on the ITS VM
 
@@ -17,4 +34,5 @@
 
 * generate_init.d_script.sh (called by setup_as_a_service_on_ITS_vm.sh):
 	Script to generate the RHEL6 service script
+
 
