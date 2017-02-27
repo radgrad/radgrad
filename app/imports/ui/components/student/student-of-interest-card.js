@@ -25,11 +25,11 @@ Template.Student_Of_Interest_Card.onCreated(function studentOfInterestCardOnCrea
   this.subscribe(OpportunityInstances.getPublicationName());
 });
 
-function interestedStudentsHelper(item) {
+function interestedStudentsHelper(item, type) {
   const interested = [];
   let count = 0;
   let instances;
-  if (this.type === 'courses') {
+  if (type === 'courses') {
     instances = CourseInstances.find({
       courseID: item._id,
     }).fetch();
@@ -87,7 +87,7 @@ Template.Student_Of_Interest_Card.helpers({
     return ret;
   },
   interestedStudents(course) {
-    return interestedStudentsHelper(course);
+    return interestedStudentsHelper(course, this.type);
   },
   itemName(item) {
     return item.name;
@@ -122,7 +122,7 @@ Template.Student_Of_Interest_Card.helpers({
     return nextYears;
   },
   numberStudents(course) {
-    return interestedStudentsHelper(course).length;
+    return interestedStudentsHelper(course, this.type).length;
   },
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;

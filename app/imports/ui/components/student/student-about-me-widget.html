@@ -59,11 +59,11 @@
         <div class="six wide column">
           {{#if careerGoals}}
             {{#each goal in careerGoals}}
-              <a class="ui label" href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName goal)}}"><i class="fitted suitcase icon"></i>{{goalName goal}}</a>
+              {{goalName goal}}
+              <br>
             {{/each}}
-            <br>
           {{else}}
-            <p>No career goals added yet.</p>
+            No career goals added yet.
           {{/if}}
           <br><a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in career
           explorer</a>

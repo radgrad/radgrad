@@ -49,10 +49,15 @@ import './student-explorer-review-stars-widget.js';
 import './student-explorer-social-widget.html';
 import './student-explorer-social-widget.js';
 
+import './student-feed-modal.html';
+import './student-feed-modal.js';
+
+import './student-feed-widget.html';
+import './student-feed-widget.js';
+
 import './student-ice-column.html';
 import './student-ice-column.js';
 
-import './student-ice-widget.css';
 import './student-ice-widget.html';
 import './student-ice-widget.js';
 
@@ -82,9 +87,6 @@ import './student-of-interest-card.js';
 
 import './student-of-interest-widget.html';
 import './student-of-interest-widget.js';
-
-import './student-feed-widget.html';
-import './student-feed-widget.js';
 
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';

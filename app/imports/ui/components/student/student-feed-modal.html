@@ -1,0 +1,23 @@
+<template name="Student_Feed_Modal">
+  {{#if Template.subscriptionsReady}}
+    <a class="modal">{{number}} other(s) </a>
+    <div id = "{{feedID}}" class="ui small modal">
+      <i class="close icon"></i>
+      <div class="ui small header">Students</div>
+      <div class="content">
+        <div class="ui middle aligned list">
+          {{#each student in students}}
+            <div class="item">
+              <img class="ui avatar image" src={{student.picture}}>
+              <div class="content">
+                <a class="header">{{fullName student}}</a>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>
