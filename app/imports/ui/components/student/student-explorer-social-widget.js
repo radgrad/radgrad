@@ -4,7 +4,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 function interestedUsers(course) {
   const interested = [];
@@ -25,7 +25,7 @@ function numUsers(course) {
 
 Template.Student_Explorer_Social_Widget.helpers({
   fullName(user) {
-    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+    return Users.getFullName(user);
   },
   socialPairs() {
     const course = this.item;
@@ -39,6 +39,12 @@ Template.Student_Explorer_Social_Widget.helpers({
       return Users.findDoc(user).picture;
     }
     return '/images/default-profile-picture.png';
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
+  userUsername(user) {
+    return Users.findDoc(user).username;
   },
 });
 
