@@ -165,7 +165,7 @@ class FeedCollection extends BaseCollection {
           // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have been verified for
           // ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)}).`;
           description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-            description: 'other(s) have been verified for', item: Opportunities.findDoc(opportunityID).name,
+            description: 'have been verified for', item: Opportunities.findDoc(opportunityID).name,
             semester: Semesters.toString(semesterID, false) };
         } else {
           // description = `${Users.getFullName(userIDs[0])} has been verified for
@@ -193,7 +193,7 @@ class FeedCollection extends BaseCollection {
       }
       // description = `${Users.getFullName(userIDs[0])} has added a course review for
       // ${Courses.findDoc(courseID).name}.`;
-      description = { user: Users.getFullName(userIDs[0]), description: ' has added a course review for ',
+      description = { user: Users.getFullName(userIDs[0]), description: 'has added a course review for ',
         item: Courses.findDoc(courseID).name };
       picture = Users.findDoc(userIDs[0]).picture;
       if (!picture) {
@@ -214,7 +214,7 @@ class FeedCollection extends BaseCollection {
       }
       // description = `${Users.getFullName(userIDs[0])} has added an opportunity review for
       // ${Opportunities.findDoc(opportunityID).name}.`;
-      description = { user: Users.getFullName(userIDs[0]), description: ' has added an opportunity review for ',
+      description = { user: Users.getFullName(userIDs[0]), description: 'has added an opportunity review for ',
         item: Opportunities.findDoc(opportunityID).name };
       picture = Users.findDoc(userIDs[0]).picture;
       if (!picture) {
@@ -274,7 +274,7 @@ class FeedCollection extends BaseCollection {
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
     const description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-      description: 'other(s) have joined RadGrad.' };
+      description: 'have joined RadGrad.' };
     let picture = Users.findDoc(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
@@ -296,7 +296,7 @@ class FeedCollection extends BaseCollection {
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
     const description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-      description: 'other(s) have been verified for', item: Opportunities.findDoc(existingFeed.opportunityID).name,
+      description: 'have been verified for', item: Opportunities.findDoc(existingFeed.opportunityID).name,
       semester: Semesters.toString(existingFeed.semesterID, false) };
     this._collection.update(existingFeedID, { $set: { userIDs, description } });
   }

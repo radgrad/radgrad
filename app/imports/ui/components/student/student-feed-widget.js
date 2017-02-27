@@ -5,7 +5,6 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Feed } from '../../../api/feed/FeedCollection.js';
-import { ReactiveVar } from 'meteor/reactive-var';
 import * as RouteNames from '/imports/startup/client/router.js';
 
 function dateDiffInDays(a, b) {
