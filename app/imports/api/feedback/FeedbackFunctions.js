@@ -23,6 +23,19 @@ function getPosition(string, subString, index) {
   return string.split(subString, index).join(subString).length;
 }
 
+function getBasePath(studentID) {
+  const currentRoute = FlowRouter.current().path;
+  let basePath;
+  if (currentRoute.startsWith('/advisor')) {
+    const student = Users.findDoc(studentID);
+    basePath = `/student/${student.username}/`;
+  } else {
+    const index = getPosition(currentRoute, '/', 3);
+    basePath = currentRoute.substring(0, index + 1);
+  }
+  return basePath;
+}
+
 /**
  * A class containing Feedback functions. Each Feedback function is a method on the singleton instance
  * FeedbackFunctions.
@@ -63,7 +76,7 @@ export class FeedbackFunctionClass {
     const cis = CourseInstances.find({ studentID }).fetch();
     cis.forEach((ci) => {
       const semester = Semesters.findDoc(ci.semesterID);
-      if (semester.semesterNumber >= currentSemester.semesterNumber) {
+      if (semester.semesterNumber > currentSemester.semesterNumber) {
         const semesterName = Semesters.toString(ci.semesterID, false);
         const course = Courses.findDoc(ci.courseID);
         if (course) {
@@ -112,7 +125,7 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   checkCompletePlan(studentID) {
-    // console.log('checkCompletePlan');
+    // console.log('checkCompletePlan', studentID);
     const f = Feedbacks.findDoc({ name: 'Required course missing' });
     const feedback = Slugs.getNameFromID(f.slugID, 'Feedback');
     const area = `ffn-${feedback}`;
@@ -130,10 +143,8 @@ export class FeedbackFunctionClass {
     courses = this._missingCourses(courseIDs, courses);
     if (courses.length > 0) {
       // console.log(courses);
-      let description = 'Your degree plan is missing: ';
-      const currentRoute = FlowRouter.current().path;
-      const index = getPosition(currentRoute, '/', 3);
-      const basePath = currentRoute.substring(0, index + 1);
+      let description = 'Your degree plan is missing: \n\n';
+      const basePath = getBasePath(studentID);
       _.map(courses, (slug) => {
         if (Array.isArray(slug)) {
           description = `${description}\n\n- `;
@@ -181,7 +192,7 @@ export class FeedbackFunctionClass {
     let description = 'Your plan is overloaded. ';
     _.map(semesters, (semesterID) => {
       const semester = Semesters.findDoc(semesterID);
-      if (semester.semesterNumber >= currentSemester.semesterNumber) {
+      if (semester.semesterNumber > currentSemester.semesterNumber) {
         const cis = CourseInstances.find({ studentID, semesterID, note: /ICS/ }).fetch();
         if (cis.length > 2) {
           haveOverloaded = true;
@@ -229,37 +240,35 @@ export class FeedbackFunctionClass {
     const missing = this._missingCourses(courseIDs, coursesNeeded);
     if (missing.length > 0) {
       let description = 'Consider taking the following class to meet the degree requirement: ';
-      if (missing.length > 1) {
-        description = 'Consider taking the following classes to meet the degree requirement: ';
-      }
-      const currentRoute = FlowRouter.current().path;
-      const index = getPosition(currentRoute, '/', 3);
-      const basePath = currentRoute.substring(0, index + 1);
-      _.map(missing, (slug) => {
-        if (Array.isArray(slug)) {
-          const course = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
-          if (course) {
-            const courseSlug = Slugs.findDoc(course.slugID);
-            description = 'Consider taking the following class to meet the degree requirement: ';
+      // if (missing.length > 1) {
+      //   description = 'Consider taking the following classes to meet the degree requirement: ';
+      // }
+      const basePath = getBasePath(studentID);
+      const slug = missing[0];
+      // _.map(missing, (slug) => {
+      if (Array.isArray(slug)) {
+        const course = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
+        if (course) {
+          const courseSlug = Slugs.findDoc(course.slugID);
+          // eslint-disable-next-line max-len
+          description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name}), `;
+        }
+      } else
+        if (slug.startsWith('ics4')) {
+          const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
+          if (bestChoice) {
+            const cSlug = Slugs.findDoc(bestChoice.slugID);
             // eslint-disable-next-line max-len
-            description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name}), `;
+            description = `${description} \n- [${bestChoice.number} ${bestChoice.shortName}](${basePath}explorer/courses/${cSlug.name}), `;
           }
         } else
-          if (slug.startsWith('ics3')) {
+          if (slug.startsWith('ics')) {
             const courseID = Slugs.getEntityID(slug, 'Course');
             const course = Courses.findDoc(courseID);
             // eslint-disable-next-line max-len
             description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
-          } else
-            if (slug.startsWith('ics4')) {
-              const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
-              if (bestChoice) {
-                const cSlug = Slugs.findDoc(bestChoice.slugID);
-                // eslint-disable-next-line max-len
-                description = `${description} \n- [${bestChoice.number} ${bestChoice.shortName}](${basePath}explorer/courses/${cSlug.name}), `;
-              }
-            }
-      });
+          }
+      // });
       FeedbackInstances.define({
         feedback,
         user: studentID,
@@ -291,9 +300,7 @@ export class FeedbackFunctionClass {
     });
     if (this._missingCourses(courseIDs, coursesNeeded).length > 0) {
       let bestChoices = courseUtils.bestStudent400LevelCourses(studentID, coursesTakenSlugs);
-      const currentRoute = FlowRouter.current().path;
-      const index = getPosition(currentRoute, '/', 3);
-      const basePath = currentRoute.substring(0, index + 1);
+      const basePath = getBasePath(studentID);
       if (bestChoices) {
         const len = bestChoices.length;
         if (len > 5) {
@@ -330,9 +337,7 @@ export class FeedbackFunctionClass {
     const area = `ffn-${feedback}`;
     this.clearFeedbackInstances(studentID, area);
     let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(studentID);
-    const currentRoute = FlowRouter.current().path;
-    const index = getPosition(currentRoute, '/', 3);
-    const basePath = currentRoute.substring(0, index + 1);
+    const basePath = getBasePath(studentID);
     const semesterID = Semesters.getCurrentSemester();
     const oppInstances = OpportunityInstances.find({ studentID, semesterID }).fetch();
     if (oppInstances.length === 0) {  // only make suggestions if there are no opportunities planned.
@@ -370,9 +375,8 @@ export class FeedbackFunctionClass {
     const area = `ffn-${feedback}`;
     this.clearFeedbackInstances(studentID, area);
     const student = Users.findDoc(studentID);
-    const currentRoute = FlowRouter.current().path;
-    const index = getPosition(currentRoute, '/', 3);
-    const basePath = currentRoute.substring(0, index + 1);
+    // Need to build the route not use current route since might be the Advisor.
+    const basePath = getBasePath(studentID);
     let description = 'Getting to the next Level: ';
     switch (student.level) {
       case 0:

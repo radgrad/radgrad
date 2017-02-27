@@ -443,9 +443,28 @@ class UserCollection extends BaseInstanceCollection {
     return interestIDs;
   }
 
+  /**
+   * Returns the user's interest IDs in an Array with two sub-arrays. The first sub-array is the interest IDs that the
+   * User selected. The second sub-array is the interestIDs from the user's career goals.
+   * @param userID The user's ID.
+   */
+  getInterestIDsByType(userID) {
+    const user = this._collection.findOne({ _id: userID });
+    const interestIDs = [];
+    interestIDs.push(user.interestIDs);
+    let careerInterestIDs = [];
+    _.map(user.careerGoalIDs, (goalID) => {
+      const goal = CareerGoals.findDoc(goalID);
+      careerInterestIDs = _.union(careerInterestIDs, goal.interestIDs);
+    });
+    careerInterestIDs = _.difference(careerInterestIDs, user.interestIDs);
+    interestIDs.push(careerInterestIDs);
+    return interestIDs;
+  }
+
   publish() {
     if (Meteor.isServer) {
-      Meteor.publish(this._collectionName, function () {
+      Meteor.publish(this._collectionName, function publish() {
         const fields = (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) ? this._allData : this._publicData;
         return Meteor.users.find({}, fields);
       });

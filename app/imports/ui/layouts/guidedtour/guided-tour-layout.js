@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '/imports/startup/client/router.js';
+import { PublicStats } from '../../../api/public-stats/PublicStatsCollection';
 
 Template.Guided_Tour_Layout.helpers({
   landingPageRouteName() {
@@ -7,23 +8,15 @@ Template.Guided_Tour_Layout.helpers({
   },
 });
 
-Template.Guided_Tour_Layout.events({
-  // add your events here
+Template.Guided_Tour_Layout.onCreated(function onCreated() {
+  this.subscribe(PublicStats.getPublicationName());
 });
 
-Template.Guided_Tour_Layout.onCreated(function guidedTourLayoutOnCreated() {
-  // add your statement here
-});
-
-Template.Guided_Tour_Layout.onRendered(function guidedTourLayoutOnRendered() {
+Template.Guided_Tour_Layout.onRendered(function onRendered() {
   // add your statement here
   this.$('#carousel').slick({
     dots: true,
     arrows: true,
     infinite: false,
   });
-});
-
-Template.Guided_Tour_Layout.onDestroyed(function guidedTourLayoutOnDestroyed() {
-  // add your statement here
 });
