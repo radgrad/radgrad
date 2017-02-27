@@ -132,7 +132,7 @@ Template.Student_Explorer_Menu.helpers({
   userInterests(interest) {
     let ret = '';
     const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(user.interestIDs, interest._id)) {
+    if (_.includes(Users.getInterestIDs(user._id), interest._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;
