@@ -12,7 +12,32 @@
             </div>
             <div class="content">
               <div class="summary">
-                <a>{{feedDescription feed}}</a>
+                {{#if isType feed 'new-course'}}
+                  <a href="{{pathFor courseRouteName username=routeUserName course=(courseSlug feed)}}">{{feed.description.item}}</a> {{feed.description.description}}
+                {{/if}}
+                {{#if isType feed 'new-opportunity'}}
+                  <a href="{{pathFor opportunityRouteName username=routeUserName opportunity=(opportunitySlug feed)}}">{{feed.description.item}}</a> {{feed.description.description}}
+                {{/if}}
+                {{#if isType feed 'new-user'}}
+                  {{#if multipleUsers feed}}
+                    <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> and {{> Student_Feed_Modal students = (students feed) number = feed.description.numUsers feedID = feed._id}}{{feed.description.description}}
+                  {{else}}
+                    <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> {{feed.description.description}}
+                  {{/if}}
+                {{/if}}
+                {{#if isType feed 'new-course-review'}}
+                  <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> {{feed.description.description}} <a href="{{pathFor courseRouteName username=routeUserName course=(courseSlug feed)}}">{{feed.description.item}}</a>
+                {{/if}}
+                {{#if isType feed 'new-opportunity-review'}}
+                  <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> {{feed.description.description}} <a href="{{pathFor opportunityRouteName username=routeUserName opportunity=(opportunitySlug feed)}}">{{feed.description.item}}</a>
+                {{/if}}
+                {{#if isType feed 'verified-opportunity'}}
+                  {{#if multipleUsers feed}}
+                    <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> and {{> Student_Feed_Modal students=(students feed) number = feed.description.numUsers feedID = feed._id}} {{feed.description.description}} <a href="{{pathFor opportunityRouteName username=routeUserName opportunity=(opportunitySlug feed)}}">{{feed.description.item}}</a> ({{feed.description.semester}})
+                  {{else}}
+                    <a href="{{pathFor userRouteName username=routeUserName explorerUserName=(userSlug feed)}}">{{feed.description.user}}</a> {{feed.description.description}} <a href="{{pathFor opportunityRouteName username=routeUserName opportunity=(opportunitySlug feed)}}">{{feed.description.item}}</a> ({{feed.description.semester}})
+                  {{/if}}
+                {{/if}}
                 <div class="date">
                   {{feedTimestamp feed}}
                 </div>
