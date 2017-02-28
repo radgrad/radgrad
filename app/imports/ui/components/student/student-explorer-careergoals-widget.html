@@ -1,7 +1,7 @@
 <template name="Student_Explorer_CareerGoals_Widget">
     
     {{#if Template.subscriptionsReady}}
-    <div class="ui segments">
+    <div class="ui segments" style="background-color: white;">
       <div class="ui padded segment container">
 
         <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
@@ -51,7 +51,7 @@
 
       <div class="ui horizontal segments" style="background-color: white;">
         {{#each socialPair in socialPairs}}
-        <div class="ui segment">
+        <div class="ui segment" style="min-width: 30%;">
             <h5 style="text-align: center;">{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h5>
 
           <div class="ui circular mini bordered images" style="overflow: visible;">
