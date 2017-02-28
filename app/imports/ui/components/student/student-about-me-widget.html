@@ -3,7 +3,7 @@
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>PROFILE</h4></div>
 
-    <div class="ui grid">
+    <div class="ui stackable grid">
 
       <div class="row">
         <div class="two wide column">
@@ -74,7 +74,7 @@
         <div class="five wide column">
           {{#if interests}}
             {{#each interest in interests}}
-              <a class="ui label" href="{{pathFor interestsRouteName username=routeUserName interest=(slugName interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
+              <a class="ui tiny label" href="{{pathFor interestsRouteName username=routeUserName interest=(slugName interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
             {{/each}}
             <br>
           {{else}}
