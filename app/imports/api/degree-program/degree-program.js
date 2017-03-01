@@ -1,5 +1,7 @@
 // TODO: Seems like this data should be incorporated into the DesiredDegree collection.
 
+export const ICS_CORE = ['ics111', 'ics141', 'ics211', 'ics241', 'ics314', 'ics311'];
+
 export const BS_CS = {
   requiredCourses: ['ics111', 'ics141', 'ics211', 'ics212', 'ics241', 'ics311',
     ['ics312', 'ics331'], ['ics313', 'ics361'], 'ics314', 'ics321', 'ics332'],
