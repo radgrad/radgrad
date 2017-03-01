@@ -87,7 +87,7 @@ function removeTakenCourses(student, degreeList) {
     const index = _.indexOf(degreeList, courseSlug);
     if (index !== -1) {
       degreeList.splice(index, 1);
-    } else if (courseSlug.startsWith('ics4') || courseSlug.startsWith('other')) {
+    } else if (courseSlug.startsWith('ics4') || instance.note.startsWith('ICS 6')) {
       const fourIndex = _.indexOf(degreeList, 'ics4xx');
       degreeList.splice(fourIndex, 1);
       // console.log(`${student.username} took ${courseSlug}, but it isn't a required course`);
@@ -179,7 +179,7 @@ function choose2Core(student, semester, degreeList) {
       student: student.username,
     });
   } else {
-    degreeList.splice(1, 0, firstCourseSlug);
+    degreeList.splice(1, 0, firstCourseSlug);  // return slug to list in the second spot
     firstCourseSlug = degreeList.splice(0, 1)[0];
     if (hasPrerequisites(firstCourseSlug, takenSlugs)) {
       const note = createNote(firstCourseSlug);
@@ -253,7 +253,12 @@ export function generateBSDegreePlan(student, startSemester) {
       AcademicYearInstances.define({ year: semester.year, student: student.username });
     }
     if (semester.term !== Semesters.SUMMER) {
-      choose2Core(student, semester, degreeList);
+      // choose2Core(student, semester, degreeList);
+      const coursesTaken = getPassedCourseSlugs(student);
+      chooseCourse(student, semester, degreeList, coursesTaken);
+      if (degreeList.length > 0) {
+        chooseCourse(student, semester, degreeList, coursesTaken);
+      }
     }
     // Define the opportunity instance for the semester
     // Choose an opportunity.
@@ -378,171 +383,172 @@ export function generateBADegreePlan(student, startSemester) {
   }
 }
 
-export function generateDegreePlan(template, startSemester, student) {
-  const plan = {};
-  const studentID = student._id;
-  const instances = CourseInstances.find({ studentID }).fetch();
-  const grade = 'A';
-  const courseTakenIDs = [];
-  const coursesTakenSlugs = [];
-  instances.forEach((courseInstance) => {
-    if (CourseInstances.isICS(courseInstance._id)) {
-      if (courseInstance.note !== 'ICS 499') {
-        courseTakenIDs.push(courseInstance.courseID);
-        coursesTakenSlugs.push(Courses.getSlug(courseInstance.courseID));
-      }
-    }
-  });
-  let ice;
-  const chosenOpportunites = [];
-  // year 1
-  let semester = startSemester;
-  // Define the Academic Year(s)
-  if (semester.term === Semesters.SPRING) {
-    AcademicYearInstances.define({ year: semester.year - 1, student: student.username });
-  }
-  let semesterCourses;
-  let semesterOpportunity;
-  let oppDefn;
-  for (let i = 0; i < 12; i += 1) {
-    if (i % 3 === 0) {
-      AcademicYearInstances.define({ year: semester.year, student: student.username });
-    }
-    if (startSemester.term === Semesters.FALL) {
-      // Define the course instances for the semester
-      switch (i) {
-        case 0:
-          semesterCourses = template.ay1.fallSem;
-          break;
-        case 1:
-          semesterCourses = template.ay1.springSem;
-          break;
-        case 3:
-          semesterCourses = template.ay2.fallSem;
-          break;
-        case 4:
-          semesterCourses = template.ay2.springSem;
-          break;
-        case 6:
-          semesterCourses = template.ay3.fallSem;
-          break;
-        case 7:
-          semesterCourses = template.ay3.springSem;
-          break;
-        case 9:
-          semesterCourses = template.ay4.fallSem;
-          break;
-        case 10:
-          semesterCourses = template.ay4.springSem;
-          break;
-        default:
-          semesterCourses = [];
-      }
-    } else {
-      switch (i) {
-        case 0:
-          semesterCourses = template.ay1.fallSem;
-          break;
-        case 2:
-          semesterCourses = template.ay1.springSem;
-          break;
-        case 3:
-          semesterCourses = template.ay2.fallSem;
-          break;
-        case 5:
-          semesterCourses = template.ay2.springSem;
-          break;
-        case 6:
-          semesterCourses = template.ay3.fallSem;
-          break;
-        case 8:
-          semesterCourses = template.ay3.springSem;
-          break;
-        case 9:
-          semesterCourses = template.ay4.fallSem;
-          break;
-        case 11:
-          semesterCourses = template.ay4.springSem;
-          break;
-        default:
-          semesterCourses = [];
-      }
-    }
-    _.map(semesterCourses, (slug) => { // eslint-disable-line no-loop-func
-      if (typeof slug === 'object') {
-        const bestChoice = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
-        if (bestChoice) {
-          CourseInstances.define({
-            semester: Semesters.getSlug(semester._id),
-            course: Courses.getSlug(bestChoice._id),
-            note: bestChoice.number,
-            grade,
-            student: student.username,
-          });
-          courseTakenIDs.push(bestChoice._id);
-          coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
-        }
-      } else
-        if (slug.endsWith('3xx')) {
-          const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID, coursesTakenSlugs);
-          CourseInstances.define({
-            semester: Semesters.getSlug(semester._id),
-            course: Courses.getSlug(bestChoice._id),
-            note: bestChoice.number,
-            grade,
-            student: student.username,
-          });
-          courseTakenIDs.push(bestChoice._id);
-          coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
-        } else
-          if (slug.endsWith('4xx')) {
-            const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
-            CourseInstances.define({
-              semester: Semesters.getSlug(semester._id),
-              course: Courses.getSlug(bestChoice._id),
-              note: bestChoice.number,
-              grade,
-              student: student.username,
-            });
-            courseTakenIDs.push(bestChoice._id);
-            coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
-          } else {
-            // console.log(typeof slug);
-            const courseID = Courses.getID(slug);
-            const course = Courses.findDoc(courseID);
-            if (_.indexOf(courseTakenIDs, course._id) === -1) {
-              const note = createNote(slug);
-              CourseInstances.define({
-                semester: Semesters.getSlug(semester._id),
-                course: slug,
-                note,
-                grade,
-                student: student.username,
-              });
-              courseTakenIDs.push(course._id);
-              coursesTakenSlugs.push(Courses.getSlug(course._id));
-            }
-          }
-    });
-    // Define the opportunity instance for the semester
-    // Choose an opportunity.
-    semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, student._id);
-    if (semesterOpportunity) {
-      ice = getPlanningICE(chosenOpportunites);
-      chosenOpportunites.push(semesterOpportunity);
-      if (ice.i < 100 || ice.e < 100) {
-        oppDefn = {
-          semester: Semesters.getSlug(semester._id),
-          opportunity: Opportunities.getSlug(semesterOpportunity._id),
-          verified: false,
-          student: student.username,
-        };
-        OpportunityInstances.define(oppDefn);
-      }
-    }
-    // update the semester
-    semester = semUtils.nextSemester(semester);
-  }
-  FeedbackFunctions.checkPrerequisites(studentID);
-  return plan;
-}
+
+// export function generateDegreePlan(template, startSemester, student) {
+//   const plan = {};
+//   const studentID = student._id;
+//   const instances = CourseInstances.find({ studentID }).fetch();
+//   const grade = 'A';
+//   const courseTakenIDs = [];
+//   const coursesTakenSlugs = [];
+//   instances.forEach((courseInstance) => {
+//     if (CourseInstances.isICS(courseInstance._id)) {
+//       if (courseInstance.note !== 'ICS 499') {
+//         courseTakenIDs.push(courseInstance.courseID);
+//         coursesTakenSlugs.push(Courses.getSlug(courseInstance.courseID));
+//       }
+//     }
+//   });
+//   let ice;
+//   const chosenOpportunites = [];
+//   // year 1
+//   let semester = startSemester;
+//   // Define the Academic Year(s)
+//   if (semester.term === Semesters.SPRING) {
+//     AcademicYearInstances.define({ year: semester.year - 1, student: student.username });
+//   }
+//   let semesterCourses;
+//   let semesterOpportunity;
+//   let oppDefn;
+//   for (let i = 0; i < 12; i += 1) {
+//     if (i % 3 === 0) {
+//       AcademicYearInstances.define({ year: semester.year, student: student.username });
+//     }
+//     if (startSemester.term === Semesters.FALL) {
+//       // Define the course instances for the semester
+//       switch (i) {
+//         case 0:
+//           semesterCourses = template.ay1.fallSem;
+//           break;
+//         case 1:
+//           semesterCourses = template.ay1.springSem;
+//           break;
+//         case 3:
+//           semesterCourses = template.ay2.fallSem;
+//           break;
+//         case 4:
+//           semesterCourses = template.ay2.springSem;
+//           break;
+//         case 6:
+//           semesterCourses = template.ay3.fallSem;
+//           break;
+//         case 7:
+//           semesterCourses = template.ay3.springSem;
+//           break;
+//         case 9:
+//           semesterCourses = template.ay4.fallSem;
+//           break;
+//         case 10:
+//           semesterCourses = template.ay4.springSem;
+//           break;
+//         default:
+//           semesterCourses = [];
+//       }
+//     } else {
+//       switch (i) {
+//         case 0:
+//           semesterCourses = template.ay1.fallSem;
+//           break;
+//         case 2:
+//           semesterCourses = template.ay1.springSem;
+//           break;
+//         case 3:
+//           semesterCourses = template.ay2.fallSem;
+//           break;
+//         case 5:
+//           semesterCourses = template.ay2.springSem;
+//           break;
+//         case 6:
+//           semesterCourses = template.ay3.fallSem;
+//           break;
+//         case 8:
+//           semesterCourses = template.ay3.springSem;
+//           break;
+//         case 9:
+//           semesterCourses = template.ay4.fallSem;
+//           break;
+//         case 11:
+//           semesterCourses = template.ay4.springSem;
+//           break;
+//         default:
+//           semesterCourses = [];
+//       }
+//     }
+//     _.map(semesterCourses, (slug) => { // eslint-disable-line no-loop-func
+//       if (typeof slug === 'object') {
+//         const bestChoice = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
+//         if (bestChoice) {
+//           CourseInstances.define({
+//             semester: Semesters.getSlug(semester._id),
+//             course: Courses.getSlug(bestChoice._id),
+//             note: bestChoice.number,
+//             grade,
+//             student: student.username,
+//           });
+//           courseTakenIDs.push(bestChoice._id);
+//           coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
+//         }
+//       } else
+//         if (slug.endsWith('3xx')) {
+//           const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID, coursesTakenSlugs);
+//           CourseInstances.define({
+//             semester: Semesters.getSlug(semester._id),
+//             course: Courses.getSlug(bestChoice._id),
+//             note: bestChoice.number,
+//             grade,
+//             student: student.username,
+//           });
+//           courseTakenIDs.push(bestChoice._id);
+//           coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
+//         } else
+//           if (slug.endsWith('4xx')) {
+//             const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
+//             CourseInstances.define({
+//               semester: Semesters.getSlug(semester._id),
+//               course: Courses.getSlug(bestChoice._id),
+//               note: bestChoice.number,
+//               grade,
+//               student: student.username,
+//             });
+//             courseTakenIDs.push(bestChoice._id);
+//             coursesTakenSlugs.push(Courses.getSlug(bestChoice._id));
+//           } else {
+//             // console.log(typeof slug);
+//             const courseID = Courses.getID(slug);
+//             const course = Courses.findDoc(courseID);
+//             if (_.indexOf(courseTakenIDs, course._id) === -1) {
+//               const note = createNote(slug);
+//               CourseInstances.define({
+//                 semester: Semesters.getSlug(semester._id),
+//                 course: slug,
+//                 note,
+//                 grade,
+//                 student: student.username,
+//               });
+//               courseTakenIDs.push(course._id);
+//               coursesTakenSlugs.push(Courses.getSlug(course._id));
+//             }
+//           }
+//     });
+//     // Define the opportunity instance for the semester
+//     // Choose an opportunity.
+//     semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, student._id);
+//     if (semesterOpportunity) {
+//       ice = getPlanningICE(chosenOpportunites);
+//       chosenOpportunites.push(semesterOpportunity);
+//       if (ice.i < 100 || ice.e < 100) {
+//         oppDefn = {
+//           semester: Semesters.getSlug(semester._id),
+//           opportunity: Opportunities.getSlug(semesterOpportunity._id),
+//           verified: false,
+//           student: student.username,
+//         };
+//         OpportunityInstances.define(oppDefn);
+//       }
+//     }
+//     // update the semester
+//     semester = semUtils.nextSemester(semester);
+//   }
+//   FeedbackFunctions.checkPrerequisites(studentID);
+//   return plan;
+// }
