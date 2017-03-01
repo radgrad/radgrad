@@ -4,8 +4,12 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Levels_Others.helpers({
+  fullName(student) {
+    return Users.getFullName(student._id);
+  },
   studentLevelName() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -41,6 +45,12 @@ Template.Student_Levels_Others.helpers({
       return students;
     }
     return '';
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
+  userUsername(student) {
+    return student.username;
   },
 });
 

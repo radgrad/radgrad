@@ -1,6 +1,6 @@
 <template name="Student_Explorer_Interests_Widget">
     {{#if Template.subscriptionsReady}}
-    <div class="ui segments">
+    <div class="ui segments" style="background-color: white;">
       <div class="ui padded segment container">
         <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
           <h4 class="ui left floated header">
@@ -53,7 +53,7 @@
             {{#if isLabel descriptionPair.label 'Related Courses'}}
               <div class="ui horizontal segments" style="background-color: white;">
                 {{#each table in descriptionPair.value}}
-                  <div class="ui center aligned segment">
+                  <div class="ui center aligned segment" style="min-width: 33%;">
                     {{{getTableTitle @index}}}
                       {{#each prerequisite in table}}
                         <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a> <br>
@@ -75,7 +75,7 @@
             {{#if isLabel descriptionPair.label 'Related Opportunities'}}
               <div class="ui horizontal segments" style="background-color: white;">
                 {{#each table in descriptionPair.value}}
-                  <div class="ui center aligned segment">
+                  <div class="ui center aligned segment" style="min-width: 33%;">
                     {{{getTableTitle @index}}}
                       {{#each relatedOpportunity in table}}
                         <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug relatedOpportunity.opportunity}} </a> <br>

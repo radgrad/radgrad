@@ -77,6 +77,12 @@
                     <a class="{{classType (slugName listItem) 'interest'}}" data-tab="tab-name" href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}"><i style="position: absolute; margin-left: -20px;" class="{{userInterests listItem}}"></i>{{itemName listItem}}</a>
                   {{/each}}
                   <h4 class="ui dividing header">
+                    CAREER GOAL INTERESTS
+                  </h4>
+                  {{#each listItem in menuCareerList}}
+                    <a class="{{classType (slugName listItem) 'interest'}}" data-tab="tab-name" href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}"><i style="position: absolute; margin-left: -20px;" class="{{userInterests listItem}}"></i>{{itemName listItem}}</a>
+                  {{/each}}
+                  <h4 class="ui dividing header">
                     ALL OTHER INTERESTS
                   </h4>
                   {{#each listItem in menuNonAddedList}}

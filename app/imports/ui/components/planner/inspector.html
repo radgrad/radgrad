@@ -124,22 +124,26 @@
                     <b>When: </b> {{opportunitySemester}}
                     <p>
                       <b>Description: </b>{{#markdown}}{{opportunityDescription}}{{/markdown}} <br>
-                      <b>More Information: </b><a href="{{opportunityMore}}">{{opportunityMore}}</a> <br>
+                      <b>More Information: </b><a href="{{opportunityMore}}" style="font-size: 0.95em;">{{opportunityMore}}</a> <br>
                     </p>
+                    {{> Interest_List item=getOpportunity size='small'}}
                     <p style="text-align: right;">
                       <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = opportunitySlugID}}">
                         View in Explorer <i class="arrow right icon"></i>
                       </a>
                     </p>
 
-                   
                     {{#if isPastInstance}}
-                      <div class="ui basic center aligned segment">
-                        <button id="{{instanceID}}" class="ui mini green basic button verifyInstance">REQUEST VERIFICATION</button>
+                      <div class="ui divider"></div>
+                      <div style="text-align: center;">
+                        <button class="ui tiny green basic button verifyInstance center aligned" id="{{instanceID}}">
+                          Request Verification
+                        </button>
                       </div>
                     {{/if}}
                     {{#if hasRequest}}
-                      <div class="ui horizontal divider">Request Status</div>
+                      <div class="ui divider"></div>
+                      <h4 class="ui center aligned header">REQUEST STATUS</h4>
                       <strong>Date Submitted:</strong> {{requestWhenSubmitted}} <br>
                       <strong>Status: </strong>{{requestStatus}}
                       <p>
@@ -150,9 +154,6 @@
                       </p>
                     {{/if}}
 
-                    <div class="ui right floated">
-                      {{> Interest_List item=getOpportunity size='small'}}
-                    </div>
                   </div>
                 {{else}}
                   <p>Please select an ICS course or opportunity menus above or click on a course or
