@@ -29,42 +29,39 @@
           {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") required=true type="Number"}}
         </div>
 
-
-        <button class="ui green basic button" type="submit">Update Student</button>
+        <button class="ui tiny green basic button" type="submit">UPDATE STUDENT</button>
         <!--<button class="ui green basic button jsCancel" type="submit">Cancel</button>-->
         {{> Success_Message_Form_Field message="The Student was successfully updated."}}
         <div class="ui divider"></div>
 
         {{> Plan_Starting_Semester_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
 
-
       </form>
 
-      <div class="ui bottom attached basic green button jsGeneratePlan" tabindex="0">Generate Degree Plan</div>
+      <br>
+      <button class="ui tiny basic green button jsGeneratePlan">GENERATE DEGREE PLAN</button>
       {{#if slug}}
-      <p>View {{slug}}'s degree plan <a target="_blank" href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a> </p>
+      <p><b>View {{slug}}'s degree plan:</b> <a target="_blank" href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a> </p>
       {{/if}}
 
     </div>
-    <div class="ui modal">
-      <i class="close icon"></i>
-      <div class="header">
-        Generate Degree Plan
+    <div class="ui basic modal">
+      <div class="ui icon header">
+        <i class="circle warning icon"></i>
+        Generate Degree Plan - Warning
       </div>
-      <div class="ui error message">
-        <div class="header">
-          Warning!
-        </div>
+      <div class="content" style="text-align: center;">
         <p>This will delete any courses and opportunities currently planned for future semesters!</p>
-        <p>Continue?</p>
+        <p><b>Continue?</b></p>
       </div>
       <div class="actions">
-        <div class="ui positive right labeled icon button">
-          Yes
-          <i class="checkmark icon"></i>
-        </div>
-        <div class="ui black deny button">
+        <div class="ui red basic cancel inverted button">
+          <i class="remove icon"></i>
           No
+        </div>
+        <div class="ui green ok inverted button">
+          <i class="checkmark icon"></i>
+          Yes
         </div>
       </div>
     </div>
