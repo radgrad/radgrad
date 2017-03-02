@@ -1,0 +1,17 @@
+<template name="Student_Log_Widget">
+  {{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>ADVISOR LOG</h4></div>
+      {{#each log in logs}}
+      <div class="ui message">
+        <div class="header">
+          {{log.createdOn}}
+        </div>
+        <p>{{log.text}}</p>
+      </div>
+      {{/each}}
+    </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+</template>

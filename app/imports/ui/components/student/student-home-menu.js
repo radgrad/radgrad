@@ -14,4 +14,7 @@ Template.Student_Home_Menu.helpers({
   studentHomeLevelsPageRouteName() {
     return RouteNames.studentHomeLevelsPageRouteName;
   },
+  studentHomeLogPageRouteName() {
+    return RouteNames.studentHomeLogPageRouteName;
+  },
 });

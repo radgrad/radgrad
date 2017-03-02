@@ -350,6 +350,14 @@ studentRoutes.route('/home/aboutme', {
   },
 });
 
+export const studentHomeLogPageRouteName = 'Student_Home_Log_Page';
+studentRoutes.route('/home/log', {
+  name: studentHomeLogPageRouteName,
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentHomeLogPageRouteName });
+  },
+});
+
 export const studentHomeLevelsPageRouteName = 'Student_Home_Levels_Page';
 studentRoutes.route('/home/levels', {
   name: studentHomeLevelsPageRouteName,
@@ -363,22 +371,6 @@ studentRoutes.route('/home/ice', {
   name: studentHomeIcePageRouteName,
   action() {
     BlazeLayout.render('Student_Layout', { main: studentHomeIcePageRouteName });
-  },
-});
-
-export const studentHomePageAboutIceRouteName = 'Student_About_Ice';
-studentRoutes.route('/home/about-ice', {
-  name: studentHomePageAboutIceRouteName,
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentHomePageAboutIceRouteName });
-  },
-});
-
-export const studentHomePageAboutLevelsRouteName = 'Student_About_Levels';
-studentRoutes.route('/home/about-levels', {
-  name: studentHomePageAboutLevelsRouteName,
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentHomePageAboutLevelsRouteName });
   },
 });
 
