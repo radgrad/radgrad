@@ -107,7 +107,7 @@ Template.Update_Degree_Plan_Widget.helpers({
 Template.Update_Degree_Plan_Widget.events({
   'click .jsGeneratePlan': function clickGeneratePlan(event, instance) {
     event.preventDefault();
-    instance.$('.ui.modal').modal({
+    instance.$('.ui.basic.modal').modal({
       onApprove() {
         const studentID = instance.data.studentID.get();
         const student = Users.findDoc(studentID);

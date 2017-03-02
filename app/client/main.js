@@ -33,6 +33,7 @@ import '/imports/ui/components/shared';
 import '/imports/ui/components/student';
 import '/imports/ui/components/guidedtour';
 import '/imports/ui/components/guidedtour/student';
+import '/imports/ui/components/guidedtour/advisor';
 
 import '/imports/ui/layouts/admin';
 import '/imports/ui/layouts/advisor';

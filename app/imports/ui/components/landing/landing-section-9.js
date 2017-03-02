@@ -5,6 +5,9 @@ Template.Landing_Section_9.helpers({
   studentGuidedTourPageRouteName() {
     return RouteNames.studentGuidedTourPageRouteName;
   },
+  advisorGuidedTourPageRouteName() {
+    return RouteNames.advisorGuidedTourPageRouteName;
+  },
 });
 
 Template.Landing_Section_9.events({

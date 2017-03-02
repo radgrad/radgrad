@@ -203,6 +203,7 @@ Template.Student_Explorer_Interests_Page.helpers({
       { label: 'faculty members', amount: numUsers(interest, ROLE.FACULTY),
         value: interestedUsers(interest, ROLE.FACULTY) },
       { label: 'alumni', amount: numUsers(interest, ROLE.ALUMNI), value: interestedUsers(interest, ROLE.ALUMNI) },
+      { label: 'mentor', amount: numUsers(interest, ROLE.MENTOR), value: interestedUsers(interest, ROLE.MENTOR) },
     ];
   },
 });
