@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { _, lodash } from 'meteor/erasaur:meteor-lodash';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -9,42 +9,67 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '/imports/startup/client/router.js';
 
-
-function passedCourse(course) {
-  let ret = false;
-  if (course.grade === 'A+' || course.grade === 'A' || course.grade === 'A-' ||
-      course.grade === 'B+' || course.grade === 'B' || course.grade === 'B-' ||
-      course.grade === 'CR') {
-    ret = true;
+function getEventsHelper(iceType, type, earned, semester) {
+  if (getUserIdFromRoute()) {
+    const user = Users.findDoc(getUserIdFromRoute());
+    let allInstances = [];
+    const iceInstances = [];
+    if (type === 'course') {
+      const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: user._id,
+        verified: earned }).fetch();
+      courseInstances.forEach((courseInstance) => {
+        if (CourseInstances.isICS(courseInstance._id)) {
+          allInstances.push(Courses.findDoc(courseInstance.courseID));
+      }
+    });
+    } else {
+      console.log(earned);
+      allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: user._id,
+         }).fetch();
+    }
+    //console.log(OpportunityInstances.find({studentID: user._id, semesterID: semester._id }).fetch());
+    allInstances.forEach((instance) => {
+      if (iceType === 'Innovation') {
+      console.log(Opportunities.findDoc(instance.opportunityID).name +": " + instance.verified);
+        if (instance.ice.i > 0) {
+          iceInstances.push(Opportunities.findDoc(instance.opportunityID));
+        }
+    } else if (iceType === 'Competency') {
+      if (instance.ice.c > 0) {
+        iceInstances.push(Courses.findDoc(instance.courseID));
+      }
+    } else if (iceType === 'Experience') {
+      if (instance.ice.e > 0) {
+        iceInstances.push(Opportunities.findDoc(instance.opportunityID));
+      }
+    }
+  });
+    return iceInstances;
   }
-  return ret;
+  return null;
 }
 
 const availableCourses = () => {
   const courses = Courses.find({}).fetch();
   if (courses.length > 0) {
-    const filtered = lodash.filter(courses, function filter(course) {
+    const filtered = _.filter(courses, function filter(course) {
       if (course.number === 'ICS 499') {
         return true;
       }
-      const passedCourses = [];
       const ci = CourseInstances.find({
         studentID: getUserIdFromRoute(),
         courseID: course._id,
       }).fetch();
-      _.map(ci, (c) => {
-        if (passedCourse(c)) {
-          passedCourses.push(c);
-        }
-      });
-      return passedCourses.length === 0;
+      return ci.length === 0;
     });
     return filtered;
   }
@@ -57,24 +82,24 @@ function matchingCourses() {
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
   let courseInterests = [];
-  _.map(user.interestIDs, (id) => {
+  _.map(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
-  });
+});
   _.map(allCourses, (course) => {
     courseInterests = [];
-    _.map(course.interestIDs, (id) => {
-      courseInterests.push(Interests.findDoc(id));
-      _.map(courseInterests, (courseInterest) => {
-        _.map(userInterests, (userInterest) => {
-          if (_.isEqual(courseInterest, userInterest)) {
-            if (!_.includes(matching, course)) {
-              matching.push(course);
-            }
-          }
-        });
-      });
-    });
-  });
+  _.map(course.interestIDs, (id) => {
+    courseInterests.push(Interests.findDoc(id));
+  _.map(courseInterests, (courseInterest) => {
+    _.map(userInterests, (userInterest) => {
+    if (_.isEqual(courseInterest, userInterest)) {
+    if (!_.includes(matching, course)) {
+      matching.push(course);
+    }
+  }
+});
+});
+});
+});
   return matching;
 }
 
@@ -84,24 +109,24 @@ function matchingOpportunities() {
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
   let opportunityInterests = [];
-  _.map(user.interestIDs, (id) => {
+  _.map(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
-  });
+});
   _.map(allOpportunities, (opp) => {
     opportunityInterests = [];
-    _.map(opp.interestIDs, (id) => {
-      opportunityInterests.push(Interests.findDoc(id));
-      _.map(opportunityInterests, (oppInterest) => {
-        _.map(userInterests, (userInterest) => {
-          if (_.isEqual(oppInterest, userInterest)) {
-            if (!_.includes(matching, opp)) {
-              matching.push(opp);
-            }
-          }
-        });
-      });
-    });
-  });
+  _.map(opp.interestIDs, (id) => {
+    opportunityInterests.push(Interests.findDoc(id));
+  _.map(opportunityInterests, (oppInterest) => {
+    _.map(userInterests, (userInterest) => {
+    if (_.isEqual(oppInterest, userInterest)) {
+    if (!_.includes(matching, opp)) {
+      matching.push(opp);
+    }
+  }
+});
+});
+});
+});
   return matching;
 }
 
@@ -117,6 +142,12 @@ Template.Student_Ice_Column.helpers({
     const course = Courses.findDoc(c.courseID);
     return course.number;
   },
+  courseSlug(course) {
+    return Slugs.findDoc(Courses.findDoc(course.courseID).slugID).name;
+  },
+  coursesRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
+  },
   earnedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -130,49 +161,49 @@ Template.Student_Ice_Column.helpers({
   eventIce(event) {
     return event.ice;
   },
-  eventSem(event) {
-    const sem = Semesters.findDoc(event.semesterID);
-    const oppTerm = sem.term;
-    const oppYear = sem.year;
-    return `${oppTerm} ${oppYear}`;
-  },
   experiencePoints(ice) {
     return ice.e;
   },
-  getEvents(iceType, type, earned) {
-    if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      let allInstances = [];
-      const iceInstances = [];
-      if (type === 'course') {
-        const courseInstances = CourseInstances.find({ studentID: user._id, verified: earned }).fetch();
-        courseInstances.forEach((courseInstance) => {
-          if (CourseInstances.isICS(courseInstance._id)) {
-            allInstances.push(courseInstance);
-          }
-        });
-      } else {
-        allInstances = OpportunityInstances.find({ studentID: user._id, verified: earned }).fetch();
-      }
-      allInstances.forEach((instance) => {
-        if (iceType === 'i') {
-          if (instance.ice.i > 0) {
-            iceInstances.push(instance);
-          }
-        } else if (iceType === 'c') {
-          iceInstances.push(instance);
-        } else if (iceType === 'e') {
-          if (instance.ice.e > 0) {
-            iceInstances.push(instance);
-          }
-        }
-      });
-      return iceInstances;
+  getEvents(type, earned, semester) {
+    let ret = [];
+    if (this.type === 'Competency' && type !== 'opportunity') {
+      ret = getEventsHelper(this.type, 'course', earned, semester);
+    } else if (this.type !== 'Competency' && type !== 'course') {
+      ret = getEventsHelper(this.type, 'opportunity', earned, semester);
     }
-    return null;
+    //console.log(semester);
+    return ret;
+  },
+  greaterThan100(num) {
+    if (num > 100) {
+      return 100;
+    }
+    return num;
+  },
+  hasEvents(earned, semester) {
+    let ret = false;
+    if ((getEventsHelper(this.type, 'course', earned, semester).length > 0) ||
+        (getEventsHelper(this.type, 'opportunity', earned, semester).length > 0)) {
+      ret = true;
+    }
+    console.log(ret);
+    return ret;
+  },
+  hasNoInterests() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    return user.interestIDs === undefined;
   },
   innovationPoints(ice) {
     return ice.i;
+  },
+  isType(type) {
+    return type === this.type;
+  },
+  matchingPoints(a, b) {
+    return a <= b;
+  },
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
   opportunityName(opp) {
     const opportunity = Opportunities.findDoc(opp.opportunityID);
@@ -190,7 +221,10 @@ Template.Student_Ice_Column.helpers({
     });
     return semesterNames.slice(0, -2); // removes unnecessary comma and space
   },
-  projectedICE() {
+  opportunitySlug(opportunity) {
+    return Slugs.findDoc(Opportunities.findDoc(opportunity._id).slugID).name;
+  },
+  plannedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
       const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();
@@ -210,37 +244,55 @@ Template.Student_Ice_Column.helpers({
     }
     return null;
   },
-  recommendedEvents(iceType, type, projected) {
+  points(ice) {
+    let ret;
+    if (this.type === 'Innovation') {
+      ret = ice.i;
+    } else if (this.type === 'Competency') {
+      ret = ice.c;
+    } else if (this.type === 'Experience') {
+      ret = ice.e;
+    }
+    return ret;
+  },
+  printSemester(semester) {
+    return Semesters.toString(semester._id, false);
+  },
+  recommendedEvents(projected) {
     if (getUserIdFromRoute()) {
       let allInstances = [];
       const recommendedInstances = [];
       let totalIce = 0;
       const remainder = 100 - projected;
-      if (type === 'course') {
+      if (this.type === 'Competency') {
         allInstances = matchingCourses();
       } else {
         allInstances = matchingOpportunities();
       }
 
-      if (iceType === 'i') {
+      if (this.type === 'Innovation') {
         allInstances.forEach((instance) => {
           if (totalIce < remainder) {
-            totalIce += instance.ice.i;
-            recommendedInstances.push(instance);
+            if (instance.ice.i > 0){
+              totalIce += instance.ice.i;
+              recommendedInstances.push(instance);
+            }
           }
         });
-      } else if (iceType === 'c') {
+      } else if (this.type === 'Competency') {
         allInstances.forEach((instance) => {
           if (totalIce < remainder) {
             totalIce += 9; // assume A grade
             recommendedInstances.push(instance);
           }
         });
-      } else if (iceType === 'e') {
+      } else if (this.type === 'Experience') {
         allInstances.forEach((instance) => {
           if (totalIce < remainder) {
-            totalIce += instance.ice.e;
-            recommendedInstances.push(instance);
+            if (instance.ice.e > 0) {
+              totalIce += instance.ice.e;
+              recommendedInstances.push(instance);
+            }
           }
         });
       } else {
@@ -250,16 +302,25 @@ Template.Student_Ice_Column.helpers({
     }
     return null;
   },
-  remainingICE(earned, projected) {
-    return projected - earned;
+  remainingICE(earned, planned) {
+    return planned - earned;
+  },
+  semesters(year) {
+    const yearSemesters = [];
+    const semIDs = year.semesterIDs;
+    _.map(semIDs, (semID) => {
+      yearSemesters.push(Semesters.findDoc(semID));
+  });
+    return yearSemesters;
+  },
+  years() {
+    const studentID = getUserIdFromRoute();
+    const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
+    return ay;
   },
 });
 
-Template.Student_Ice_Column.events({
-  // add events here
-});
-
-Template.Student_Ice_Column.onCreated(function studentIceOnCreated() {
+Template.Student_Ice_Column.onCreated(function studentIceColumnOnCreated() {
   this.subscribe(AcademicYearInstances.getPublicationName());
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
@@ -268,13 +329,11 @@ Template.Student_Ice_Column.onCreated(function studentIceOnCreated() {
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(VerificationRequests.getPublicationName());
 });
 
-Template.Student_Ice_Column.onDestroyed(function studentIceOnDestroyed() {
-  // add your statement here
-});
 
 Template.Student_Ice_Column.onRendered(function enableAccordion() {
   this.$('.accordion').accordion({

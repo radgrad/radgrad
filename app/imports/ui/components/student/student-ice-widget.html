@@ -1,4 +1,5 @@
 <template name="Student_Ice_Widget">
+{{#if Template.subscriptionsReady}}
     <div class="ui padded segment">
       <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
       <div class="ui equal width grid stackable container">
@@ -29,97 +30,7 @@
             <h3 class="ui centered header ice-innovation-color">
               Innovation
             </h3>
-
-            <div class="ui styled fluid accordion">
-              <div class="active title">
-                <i class="dropdown icon"></i>
-                Earned ({{innovationPoints earnedICE}} points)
-              </div>
-
-              <div class="active content">
-                {{#if matchingPoints (innovationPoints earnedICE) 0}}
-                  <p>You have not yet earned any Innovation points.</p>
-                {{else}}
-                  <p>You have earned {{innovationPoints earnedICE}} Innovation points for the following:</p>
-                  <div class="ui very relaxed list">
-                    {{#each year in years}}
-                      {{#each semester in semesters year}}
-                        {{#if hasEvents 'i' true semester}}
-                          <div class="item">
-                            <div class="header">{{printSemester semester}}</div>
-                            {{#each event in getEvents 'i' 'opportunity' true semester}}
-                              <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                                {{ opportunityName event }}<br></a>
-                            {{/each}}
-                            {{#each event in getEvents 'i' 'course' true semester}}
-                              <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                                {{ courseName event }} ({{courseNumber event}})<br></a>
-                            {{/each}}
-                          </div>
-                        {{/if}}
-                      {{/each}}
-                    {{/each}}
-                  </div>
-                {{/if}}
-              </div>
-              <div class="title">
-                <i class="dropdown icon"></i>
-                Planned ({{innovationPoints plannedICE}} points)
-              </div>
-              <div class="content">
-                {{#if matchingPoints (innovationPoints plannedICE) (innovationPoints earnedICE)}}
-                  <p>You have earned all of your {{innovationPoints plannedICE}} planned points.</p>
-                {{else}}
-                  <p>You have a total of {{innovationPoints plannedICE}} planned Innovation points, with {{remainingICE (innovationPoints earnedICE) (innovationPoints plannedICE) }} unearned points for the following:</p>
-                  <div class="ui very relaxed list">
-                    {{#each year in years}}
-                      {{#each semester in semesters year}}
-                        {{#if hasEvents 'i' false semester}}
-                          <div class="item">
-                            <div class="header">{{printSemester semester}}</div>
-                            {{#each event in getEvents 'i' 'opportunity' false semester}}
-                              <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                                {{ opportunityName event }} <br></a>
-                            {{/each}}
-                            {{#each event in getEvents 'i' 'course' false semester}}
-                              <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                                {{ courseName event }} ({{courseNumber event}}) <br></a>
-                            {{/each}}
-                          </div>
-                        {{/if}}
-                      {{/each}}
-                    {{/each}}
-                  </div>
-                {{/if}}
-              </div>
-              <div class="title">
-                <i class="dropdown icon"></i>
-                Get to 100
-              </div>
-              <div class="content">
-                {{#if matchingPoints (innovationPoints earnedICE) 100}}
-                  <p>Congratulations! You have earned 100 Innovation points!</p>
-                {{else}}
-                  {{#if matchingPoints (innovationPoints plannedICE) 100}}
-                    <p>You already have 100 planned Innovation points.</p>
-                  {{else}}
-                    {{#if hasNoInterests}}
-                      <p>Consider adding interests to see recommendations here.</p>
-                    {{else}}
-                      <p>Consider the following to complete the full 100 Innovation points.</p>
-                      <div class="ui list">
-                        {{#each event in recommendedEvents 'i' 'opportunities' (innovationPoints plannedICE)}}
-                          <div class="item">
-                            <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b>
-                              {{ event.name }} ({{ opportunitySemesters event}})</a>
-                          </div>
-                        {{/each}}
-                      </div>
-                    {{/if}}
-                  {{/if}}
-                {{/if}}
-              </div>
-            </div>
+            {{> Student_Ice_Column type = 'Innovation' }}
           </div>
         </div>
 
@@ -359,4 +270,7 @@
         </div>
       </div>
     </div>
+{{else}}
+  {{> Loading}}
+{{/if}}
 </template>
