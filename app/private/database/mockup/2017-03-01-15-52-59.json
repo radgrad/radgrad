@@ -1,5 +1,5 @@
 {
-  "timestamp": "2017-02-22T20:29:44.627Z",
+  "timestamp": "2017-03-02T01:52:59.151Z",
   "collections": [
     {
       "name": "AcademicYearInstanceCollection",
@@ -2725,6 +2725,24 @@
           "creditHrs": 3,
           "grade": "A",
           "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics451",
+          "note": "ICS 451",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "charley"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics452",
+          "note": "ICS 452",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "charley"
         }
       ]
     },
@@ -2753,7 +2771,15 @@
     },
     {
       "name": "FeedCollection",
-      "contents": []
+      "contents": [
+        {
+          "user": [
+            "jakephilips"
+          ],
+          "feedType": "new-user",
+          "timestamp": 1488400138529
+        }
+      ]
     },
     {
       "name": "FeedbackCollection",
@@ -2828,7 +2854,26 @@
     },
     {
       "name": "FeedbackInstanceCollection",
-      "contents": []
+      "contents": [
+        {
+          "feedback": "prerequisiteMissing",
+          "user": "charley",
+          "description": "Spring 2020: Prerequisite ICS 312 for ICS 452 not found.",
+          "area": "ffn-prerequisiteMissing"
+        },
+        {
+          "feedback": "semesterOverloaded",
+          "user": "charley",
+          "description": "Your plan is overloaded.  Spring 2020",
+          "area": "ffn-semesterOverloaded"
+        },
+        {
+          "feedback": "recommendationForNextLevel",
+          "user": "charley",
+          "description": "Getting to the next Level:  Get some innovation and experience [ICE points](/student/charley/home/ice)",
+          "area": "ffn-recommendationForNextLevel"
+        }
+      ]
     },
     {
       "name": "HelpMessageCollection",
@@ -2841,17 +2886,17 @@
         {
           "routeName": "Student_Home_Page",
           "title": "Learn about your home page",
-          "text": "<p>Your home page provides the latest information on your degree plan.</p>\n\n<p>The Content of Interest pane provides information on selected opportunities and courses that we hope will be of interest to you based on your selected interests and career goals. Click \"View More\" to go to a page with details, \"Add to plan\" to add it to your Degree Plan, and \"Hide\" if you're not interested in this content and don't want to see it in your feed.</p>\n\n<p>The ICS Teaser pane provides very short videos by ICS community members. When you have a spare moment, take a look at a video or two! </p>\n\n<p>Finally, the Recent Community Activity pane gives you a sense of what other ICS students are doing.</p>\n\n<p>(If you want to remove this help pane from this page, click on the \"X\" in the upper right corner to hide it. You can always bring it back from your profile page.)</p>"
+          "text": "This page presents RadGrad's recommendations for courses and opportunities based on your interests, as well as new events in the RadGrad community.\n\n#### Recommended Opportunities\n\n<img class=\"ui medium left floated image\" src=\"/images/help/home-recommended-opportunities.png\">\n\nThis pane shows opportunities based upon your interests and career goals.  Click \"View More\" to go to a page with details, \"Add to plan\" to add it to your Degree Plan, and \"Hide\" if you're not interested in this content and don't want to see it in this pane.\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Recommended Courses\n\n<img class=\"ui medium left floated image\" src=\"/images/help/home-recommended-courses.png\">\n\nThis pane shows courses based upon your interests and career goals.  Click \"View More\" to go to a page with details, \"Add to plan\" to add it to your Degree Plan, and \"Hide\" if you're not interested in this content and don't want to see it in this pane.\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Teasers\n\n<img class=\"ui medium left floated image\" src=\"/images/help/home-teasers.png\">\n\nThe ICS Teaser pane provides very short videos by ICS community members that match your interests or career goals. When you have a spare moment, take a look at a video or two!\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Recent Community Activity\n\n<img class=\"ui medium left floated image\" src=\"/images/help/home-community-activity.png\">\n\nFinally, the Recent Community Activity pane lets you know when a new student joins RadGrad, or when a new course, opportunity, or review becomes available. You can click on the link to learn more about the update.\n\n<div class=\"ui hidden clearing divider\"></div>"
         },
         {
           "routeName": "Student_Degree_Planner_Page",
-          "title": "Modify Your Degree Plan",
-          "text": "Stuff"
+          "title": "Learn about the Degree Planner",
+          "text": "The Degree Planner helps you organize your ICS Degree experience on a semester-by-semester basis: not just the courses you will take, but just as importantly, the extra-curricular opportunities that provide you with real-world experience and chances to innovate outside the classroom. \n\n#### Degree Plan\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-courses-opportunities.png\">\n\nThe degree plan shows you your courses and opportunities on a semester-by-semester basis.\n\nClick the \"Add\" button to add a course or opportunity, and click the <i class=\"red remove icon\"></i> button to delete one.  If you need to add or delete a course or opportunity from a previous semester, see an ICS advisor.\n\nClicking on a course will display details about it in the Courses-or-Opportunities pane.\n\nFor courses in the future, you can estimate the grade you hope to receive when you take the course using the pull-down menu. That enables RadGrad to project the total ICE Competency points you will receive by the end of your degree program if you achieve your estimated grades.\n\nThe bottom of the pane shows, for each academic year, the ICE points you have achieved (the number in the middle of the circle) and the ICE points you are projected to have obtained by the end of that academic year (the percentage of the circle filled in with the color). For more details, see [your ICE Page](../home/ice).\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Courses-or-Opportunities\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-courses-opportunities.png\">\n\nThe Courses-or-Opportunities pane provides details about any course or opportunity in the system. \n\nFor courses or opportunities already in your degree plan, you can display details by clicking on them in the Degree Plan pane.\n\nTo learn about courses or opportunities not in your Degree Plan, click on the \"Courses\" or \"Opportunities\" header to obtain a pop-up hierarchical menu that allows you to select a course or opportunity.\n\n<div class=\"ui clearing hidden divider\"></div>\n\n#### Recommendations\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-recommendations.png\">\n\nRadGrad will offer personalized recommendations for courses and opportunities based upon your desired degree, your interests, and your career goals. \n\nRadGrad will also offer hints on how to get to the next [Level](../home/levels].\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Warnings\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-warnings.png\">\n\nWhen RadGrad detects a problem with your Degree Plan, it will issue a warning.  Examples of degree plan problems include: overloaded semesters (where you are taking 4 or more ICS classes), inclusion of a course in your plan without satisfying the prerequisite, and the absence of a required course for your desired degree in the degree plan. \n\nDespite our best efforts,  RadGrad might sometimes generate a warning that is not valid, and sometimes your degree plan might have a problem that RadGrad does not detect.  Be sure to consult with your ICS advisor to guarantee that your plan will satisfy all the requirements for your desired degree.\n\n<div class=\"ui clearing hidden divider\"></div>"
         },
         {
           "routeName": "Student_Home_AboutMe_Page",
           "title": "Learn about the about me page.",
-          "text": "This page is so great!"
+          "text": "This page presents profile data.\n\n**Name**, **Email**: Your name and email cannot be changed unless you visit an ICS advisor or admin. \n\n**Desired Degree**: You can update your desired degree at any time.  RadGrad will recommend courses and opportunities based upon your degree program.\n\n**Professional Website**: Help others learn more about you by providing a link to your professional website. If you don't have one already, you will create one as part of ICS 314.\n\n**Career Goals**: Specify at least one career goal, so that RadGrad can recommend courses and opportunities. You can change this at any time. \n\n**Interests**:  Specifying interests also helps RadGrad to recommend courses and opportunities for you. Of course, your interests will change as you progress through the degree program.  \n\n**Profile Image**: Help us recognize you IRL (in real life!) Don't worry, your image is not displayed outside of RadGrad."
         },
         {
           "routeName": "Student_About_Ice",
@@ -2861,17 +2906,27 @@
         {
           "routeName": "Student_Home_Ice_Page",
           "title": "Learn about ICE (Innovation, Competency, Experience)",
-          "text": "Help goes here."
+          "text": "To become a well-rounded ICS graduate, RadGrad recommends that you achieve 100 points in each of the following three categories by the time you graduate.\n\n**Innovation**: You earn innovation points by completing opportunities that involve \"innovation\", such as research projects, hackathons, or other activities producing new insights or technologies. \n\n**Competency**: You earn competency points by taking classes.  The number of competency points depends upon your grade: you get 10 points for any kind of A, 6 points for any kind of B, and no points for a C or below. \n\n**Experience**: You earn experience points by completing opportunities that provide \"real world experience\", such as internships or business plan competitions."
         },
         {
           "routeName": "Student_Home_Levels_Page",
           "title": "Learn about RadGrad Levels",
-          "text": "Help on levels goes here."
+          "text": "As you progress through your degree program, RadGrad recognizes your development through six levels, represented by the colors white, yellow, green, blue, and black. The exact requirements to achieve each level are shrouded in mystery, but here are some hints:\n\n**Level 1 (White)**:  You begin your RadGrad experience at Level 1. \"A journey of a thousand miles begins with a single step\" -- Lao Tzu\n\n**Level 2 (Yellow)**: Successfully pass your first semester in ICS to achieve Level 2.\n\n**Level 3 (Green)**: With any luck, you'll achieve Level 3 after your second semester, as long as your grades are good.\n\n**Level 4 (Blue)**: ICS has a \"core curriculum\", and Level 4 students have not only accomplished it, but they have also thought beyond mere competency.\n\n**Level 5 (Brown)**: Level 5 students are far along in their degree program, and they are not neglecting opportunities to produce innovation and gain experience.\n\n**Level 6 (Black)**: Level 6 is awarded only to those ICS students who have not only prepared themselves for success with ICE, but have also given back to the RadGrad community.\n\nRadGrad will inform you when you achieve a new level.  When that happens, be sure to see your ICS advisor and pick up a limited edition RadGrad laptop sticker"
         },
         {
           "routeName": "Student_Ice",
           "title": "Learn about ICE",
           "text": "<div class=\"active content\">\n<p>ICE points are a way for students to gauge the progression and balance of innovation, competency, and experience in their ICS degree program.</p>\n<p>There are three graphs that display your ICE score: <span class=\"innovation\">Innovation (blue)</span>, <span class=\"competency\">Competence (green)</span>, and <span class=\"experience\">Experience (orange)</span>. The total amount of possible points for each graph is 100. Each graph has a dark fill, and a light fill. The dark fill represents the actual amount of points you have. These are points gathered from completing and getting approval from various events. The light fill represents the projected amount of points you have. These are the amount of points that you will have after completing and getting approval from all events on your schedule plan. This includes future events that have yet to occur. The fraction on the inside of the graph is a numerical representation of the same data. The first number is the amount of actual points you have, and the second number is the amount of projected points you have.</p>\n\n<div class=\"ui equal width grid container\">\n<div class=\"row\"><div class=\"column\"><div class=\"ui equal width grid container\"><div class=\"row\"><div style=\"margin-left:auto; margin-right:auto\" class=\"c100 p100 blue\"><span>I</span><div class=\"slice\"><div class=\"bar\"></div><div class=\"fill\"></div></div></div></div><div class=\"centered row\"><h3 class=\"ui header\">Innovation</h3></div><div class=\"row\"> <p>Students can gain Innovation points by completing the following actions:</p></div><div class=\"row\">    <div class=\"ui list\">    <div class=\"item\">    <div class=\"content\">    <a class=\"header\">Complete a personal ICS related project.</a><div class=\"description\">This includes web development, mobile app development, algorithm research, etc.</div></div></div><div class=\"item\">    <div class=\"content\">    <a class=\"header\">Participate in a public competitive computer science event.</a><div class=\"description\">This includes hackathons, cybersecurity competitions, coding competitions, etc.</div></div></div><div class=\"item\">    <div class=\"content\">    <a class=\"header\">Contribute to an open source project.</a><div class=\"description\">Credit will be given for substantial contributions, as decided by the adviser.</div></div></div></div></div></div></div><div class=\"column\">    <div class=\"ui equal width grid container\">    <div class=\"row\">    <div style=\"margin-left:auto; margin-right:auto\" class=\"c100 p100 green\">    <span>C</span>    <div class=\"slice\">    <div class=\"bar\"></div>    <div class=\"fill\"></div>   </div>    </div>    </div>    <div class=\"centered row\">    <h3 class=\"ui header\">Competency</h3>    </div>    <div class=\"row\">    <p>Students can gain Competency points by completing the following actions:</p></div><div class=\"row\">    <div class=\"ui list\">    <div class=\"item\">    <div class=\"content\">    <a class=\"header\">Complete an ICS course with a B- or higher.</a><div class=\"description\">These courses must appear on your STAR records.</div></div></div><div class=\"item\">    <div class=\"content\">    <a class=\"header\">Achieve a semester GPA of at least a 3.0.</a><div class=\"description\">The GPA must appear on your STAR records.</div></div></div></div></div></div></div><div class=\"column\">    <div class=\"ui equal width grid container\">    <div class=\"row\">    <div style=\"margin-left:auto; margin-right:auto\" class=\"c100 p100 orange\">    <span>E</span>    <div class=\"slice\">    <div class=\"bar\"></div>    <div class=\"fill\"></div>    </div>    </div>    </div>    <div class=\"centered row\">    <h3 class=\"ui header\">Experience</h3>    </div>    <div class=\"row\">    <p>Students can gain Experience points by completing the following actions:</p></div><div class=\"row\">    <div class=\"ui list\">    <div class=\"item\">    <div class=\"content\">    <a class=\"header\">Complete an ICS related internship.</a><div class=\"description\">This internship must appear on your RadGrad account.</div></div></div><div class=\"item\">    <div class=\"content\">    <a class=\"header\">Work at an ICS related job for a semester.</a><div class=\"description\">This opportunity must appear on your RadGrad account.</div></div></div><div class=\"item\">    <div class=\"content\">    <a class=\"header\">Participate in a study under a professor.</a><div class=\"description\">This opportunity must appear on your RadGrad account.</div></div></div><div class=\"item\">    <div class=\"content\">    <a class=\"header\">Attend a professional networking event.</a><div class=\"description\">This includes ACM's Professional Interaction Night, Wetware Wednesdays, etc.</div></div></div><div class=\"item\">    <div class=\"content\">    <a class=\"header\">Attend a professional development workshop.</a><div class=\"description\">This includes resume workshops, Techfolio workshops, etc.</div></div></div><div class=\"item\">    <div class=\"content\">    <a class=\"header\">Attend a technical talk.</a><div class=\"description\">This includes formal talks given by graduate students, professors, and outside professionals.</div></div></div></div></div></div></div></div></div></div>"
+        },
+        {
+          "routeName": "Student_Explorer_Page",
+          "title": "Learn about the Explorer",
+          "text": "The Explorer provides detailed information about Career Goals, Courses, Degrees, Interests, Opportunities, and Users.\n\nJust click the pull-down menu to the left to select the type of information you wish to explore."
+        },
+        {
+          "routeName": "Student_MentorSpace_Page",
+          "title": "Learn about Mentor Space",
+          "text": "Mentor Space enables you to connect with RadGrad mentors: ICS alumni and other high tech professionals who are volunteering their time to help get the latest information about careers and job opportunities in Hawaii and beyond.\n\nThere are two basic ways to interact with mentors. The best way is to propose a new question using the \"Ask a new question\" form. This question will be reviewed by RadGrad administrators, potentially edited for clarity, and then released for all the mentors to answer. This approach is the best way to interact with mentors because you can get a variety of perspectives from different fields and different geographic areas. \n\nA second way is to email a single mentor directly.  Please do this only if you have a very specific question of the mentor: perhaps you are interested in applying for a job at the mentor's company.  If you contact a mentor directly, please be sure to have your professional portfolio up to date and ready for them to review so that they can learn more about your background in order to provide a high quality answer.  You should also have reviewed the mentor's LinkedIn profile to learn more about them, and of course have reviewed all of the publicly available information about the company. Don't ask simple questions of a mentor that you could have easily found out through Google!"
         }
       ]
     },
@@ -5036,12 +5091,6 @@
           "student": "charley"
         },
         {
-          "semester": "Spring-2020",
-          "opportunity": "hicapacity",
-          "verified": false,
-          "student": "charley"
-        },
-        {
           "semester": "Spring-2019",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
@@ -5611,7 +5660,7 @@
           "semester": "Fall-2016",
           "rating": 4,
           "comments": "If you like data structures or just learning in general, this class can be really fun. For me, it was one of those classes that I was actually excited to go home and do homework for. Learning data structures in this class means that you will learn how Java implements its own data structures, be able to write them yourself and because of that know how to use them in the real world. One downside with all of the focus being on the data structures themselves is that you really only learn a small amount about programming in Java during the semester, but over all, it is a great class.",
-          "moderated": false,
+          "moderated": true,
           "visible": true
         },
         {
@@ -5633,7 +5682,7 @@
           "semester": "Spring-2013",
           "rating": 2,
           "comments": "In ICS 241 Discrete Mathematics you build upon the learning you did in ICS 141. This class teaches more math theory to strengthen your understanding of computer science. There is no actual coding involved and mainly has paper-pencil-tests to see if you understood the concepts learned in class. It is not a very fun class to take in particular, but it is required so you can start having access to the 300 level courses. My advice would be to be focused on studying the course material and do NOT slack off.",
-          "moderated": false,
+          "moderated": true,
           "visible": true
         },
         {
@@ -6086,8 +6135,7 @@
           "interests": [
             "application-development",
             "javascript"
-          ],
-          "opportunity": "acmanoa-web-development"
+          ]
         },
         {
           "title": "Algorithm Visualization",
@@ -6121,8 +6169,7 @@
           "duration": "0:50",
           "interests": [
             "security"
-          ],
-          "opportunity": "greyhats"
+          ]
         },
         {
           "title": "Open Power Quality",
@@ -6133,8 +6180,7 @@
           "duration": "0:21",
           "interests": [
             "software-engineering"
-          ],
-          "opportunity": "open-power-quality"
+          ]
         },
         {
           "title": "RadGrad",
@@ -6172,8 +6218,7 @@
           "duration": "0:17",
           "interests": [
             "data-science"
-          ],
-          "opportunity": "data-analytics-for-solar-energy"
+          ]
         }
       ]
     },
@@ -6198,7 +6243,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6243,7 +6288,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6305,10 +6350,15 @@
           "website": "http://www2.hawaii.edu/~binsted/",
           "interests": [
             "artificial-intelligence",
-            "research"
+            "hci",
+            "psychology",
+            "research",
+            "teaching"
           ],
           "careerGoals": [
-            "software-developer"
+            "mobile-app-developer",
+            "research-scientist",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6325,9 +6375,29 @@
           "uhID": "8289-0001",
           "picture": "/images/mentors/brewer.jpg",
           "website": null,
-          "interests": [],
+          "interests": [
+            "algorithms",
+            "data-science",
+            "data-visualization",
+            "entrepreneurship",
+            "hci",
+            "research",
+            "software-engineering",
+            "sustainability"
+          ],
           "careerGoals": [
-            "software-developer"
+            "data-scientist",
+            "database-administrator",
+            "devops-engineer",
+            "game-developer",
+            "graduate-school",
+            "information-system-manager",
+            "network-engineer",
+            "research-scientist",
+            "software-developer",
+            "startup-cofounder",
+            "teacher",
+            "ux-designer"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6352,7 +6422,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6392,7 +6462,11 @@
             "research"
           ],
           "careerGoals": [
-            "software-developer"
+            "data-scientist",
+            "game-developer",
+            "graduate-school",
+            "research-scientist",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6417,7 +6491,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6436,7 +6510,7 @@
             "software-engineering"
           ],
           "careerGoals": [
-            "software-developer"
+            "devops-engineer"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6461,7 +6535,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6483,7 +6557,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6502,7 +6576,11 @@
             "research"
           ],
           "careerGoals": [
-            "software-developer"
+            "data-scientist",
+            "graduate-school",
+            "information-security-analyst",
+            "research-scientist",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6525,7 +6603,10 @@
             "security"
           ],
           "careerGoals": [
-            "software-developer"
+            "graduate-school",
+            "information-security-analyst",
+            "research-scientist",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6550,7 +6631,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6569,7 +6650,9 @@
             "security"
           ],
           "careerGoals": [
-            "software-developer"
+            "graduate-school",
+            "information-security-analyst",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6616,7 +6699,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6636,7 +6719,9 @@
             "research"
           ],
           "careerGoals": [
-            "software-developer"
+            "graduate-school",
+            "network-engineer",
+            "research-scientist"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6653,8 +6738,18 @@
           "uhID": "8289-0002",
           "picture": "/images/mentors/geis.jpg",
           "website": null,
-          "interests": [],
+          "interests": [
+            "application-development",
+            "civic-engagement",
+            "data-science",
+            "data-visualization",
+            "it-management",
+            "software-engineering",
+            "web-development"
+          ],
           "careerGoals": [
+            "graduate-school",
+            "information-system-manager",
             "software-developer"
           ],
           "desiredDegree": null,
@@ -6672,9 +6767,16 @@
           "uhID": "8765-4315",
           "picture": "/images/mockup/glau.jpg",
           "website": null,
-          "interests": [],
+          "interests": [
+            "application-development",
+            "it-management",
+            "security",
+            "teaching"
+          ],
           "careerGoals": [
-            "software-developer"
+            "graduate-school",
+            "information-security-analyst",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6696,7 +6798,11 @@
             "research"
           ],
           "careerGoals": [
-            "software-developer"
+            "data-scientist",
+            "game-developer",
+            "research-scientist",
+            "startup-cofounder",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6720,7 +6826,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6735,11 +6841,16 @@
           "picture": "/images/people/henric.jpg",
           "website": "http://navet.ics.hawaii.edu/~casanova/",
           "interests": [
+            "algorithms",
             "hpc",
-            "research"
+            "parallel-programming",
+            "research",
+            "teaching"
           ],
           "careerGoals": [
-            "software-developer"
+            "graduate-school",
+            "research-scientist",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6756,11 +6867,43 @@
           "uhID": "8289-0003",
           "picture": "/images/mentors/ito.png",
           "website": null,
-          "interests": [],
+          "interests": [
+            "entrepreneurship",
+            "game-design",
+            "mobile",
+            "robotics",
+            "software-engineering",
+            "web-development"
+          ],
           "careerGoals": [
-            "software-developer"
+            "iot-architect",
+            "robotics-engineer",
+            "software-developer",
+            "startup-cofounder",
+            "ux-designer"
           ],
           "desiredDegree": null,
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
+        },
+        {
+          "firstName": "Jake",
+          "lastName": "Philips",
+          "slug": "jakephilips",
+          "email": "jake@hawaii.edu",
+          "password": "foo",
+          "role": "STUDENT",
+          "uhID": "1111",
+          "picture": "/images/default-profile-picture.png",
+          "website": null,
+          "interests": [
+            "dotNet"
+          ],
+          "careerGoals": [
+            "data-scientist"
+          ],
+          "desiredDegree": "ba-ics",
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -6802,7 +6945,18 @@
             "research"
           ],
           "careerGoals": [
-            "software-developer"
+            "data-scientist",
+            "devops-engineer",
+            "full-stack-developer",
+            "game-developer",
+            "graduate-school",
+            "information-system-manager",
+            "mobile-app-developer",
+            "research-scientist",
+            "software-developer",
+            "startup-cofounder",
+            "teacher",
+            "ux-designer"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6818,7 +6972,7 @@
           "role": "FACULTY",
           "uhID": "8765-4321",
           "picture": "/images/mockup/johnson.jpg",
-          "website": null,
+          "website": "http://philipmjohnson.org",
           "interests": [
             "civic-engagement",
             "research",
@@ -6826,8 +6980,11 @@
             "sustainability"
           ],
           "careerGoals": [
+            "devops-engineer",
+            "full-stack-developer",
             "software-developer",
-            "full-stack-developer"
+            "startup-cofounder",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6852,7 +7009,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6873,7 +7030,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6887,9 +7044,21 @@
           "uhID": "8289-0004",
           "picture": "/images/mentors/kagawa.jpg",
           "website": null,
-          "interests": [],
+          "interests": [
+            "application-development",
+            "civic-engagement",
+            "data-visualization",
+            "entrepreneurship",
+            "it-management",
+            "software-engineering"
+          ],
           "careerGoals": [
-            "software-developer"
+            "data-scientist",
+            "devops-engineer",
+            "graduate-school",
+            "information-system-manager",
+            "software-developer",
+            "startup-cofounder"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6906,9 +7075,14 @@
           "uhID": "8289-0005",
           "picture": "/images/mentors/karjala.jpg",
           "website": null,
-          "interests": [],
+          "interests": [
+            "application-development",
+            "it-management",
+            "web-development"
+          ],
           "careerGoals": [
-            "software-developer"
+            "software-developer",
+            "ux-designer"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -6933,7 +7107,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6955,7 +7129,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6976,7 +7150,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -6991,14 +7165,20 @@
           "picture": "/images/people/kyungim.jpg",
           "website": "http://www2.hawaii.edu/~kyungim/",
           "interests": [
+            "algorithms",
+            "computer-vision",
+            "data-science",
             "data-visualization",
-            "research"
+            "teaching"
           ],
           "careerGoals": [
-            "software-developer"
+            "data-scientist",
+            "graduate-school",
+            "research-scientist",
+            "teacher"
           ],
           "desiredDegree": null,
-          "level": 1,
+          "level": 6,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -7020,7 +7200,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -7034,9 +7214,27 @@
           "uhID": "8289-0006",
           "picture": "/images/mentors/lee.jpg",
           "website": null,
-          "interests": [],
+          "interests": [
+            "algorithms",
+            "application-development",
+            "civic-engagement",
+            "databases",
+            "entrepreneurship",
+            "it-management",
+            "software-engineering",
+            "web-development"
+          ],
           "careerGoals": [
-            "software-developer"
+            "devops-engineer",
+            "full-stack-developer",
+            "game-developer",
+            "graduate-school",
+            "iot-architect",
+            "mobile-app-developer",
+            "software-developer",
+            "startup-cofounder",
+            "teacher",
+            "ux-designer"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -7058,7 +7256,10 @@
             "research"
           ],
           "careerGoals": [
-            "software-developer"
+            "graduate-school",
+            "research-scientist",
+            "teacher",
+            "vr-ar-engineer"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -7075,9 +7276,29 @@
           "uhID": "8289-0007",
           "picture": "/images/mentors/leuck.jpg",
           "website": null,
-          "interests": [],
+          "interests": [
+            "algorithms",
+            "application-development",
+            "artificial-intelligence",
+            "civic-engagement",
+            "cryptography",
+            "data-science",
+            "entrepreneurship",
+            "it-management",
+            "mobile",
+            "software-engineering",
+            "web-development"
+          ],
           "careerGoals": [
-            "software-developer"
+            "data-scientist",
+            "devops-engineer",
+            "full-stack-developer",
+            "game-developer",
+            "information-system-manager",
+            "mobile-app-developer",
+            "software-developer",
+            "startup-cofounder",
+            "ux-designer"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -7102,7 +7323,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -7122,7 +7343,11 @@
             "sustainability"
           ],
           "careerGoals": [
-            "software-developer"
+            "data-scientist",
+            "database-administrator",
+            "graduate-school",
+            "research-scientist",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -7147,7 +7372,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -7161,9 +7386,16 @@
           "uhID": "8289-0008",
           "picture": "/images/mentors/nagashima.jpg",
           "website": null,
-          "interests": [],
+          "interests": [
+            "application-development",
+            "civic-engagement",
+            "entrepreneurship",
+            "it-management"
+          ],
           "careerGoals": [
-            "software-developer"
+            "software-developer",
+            "startup-cofounder",
+            "teacher"
           ],
           "desiredDegree": null,
           "level": 1,
@@ -7232,7 +7464,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -7247,11 +7479,17 @@
           "picture": "/images/people/pseidel.jpg",
           "website": null,
           "interests": [
-            "hardware",
             "algorithms",
-            "research"
+            "hardware",
+            "research",
+            "security"
           ],
           "careerGoals": [
+            "graduate-school",
+            "information-security-analyst",
+            "information-system-manager",
+            "iot-architect",
+            "robotics-engineer",
             "software-developer"
           ],
           "desiredDegree": null,
@@ -7296,7 +7534,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -7362,7 +7600,7 @@
             "software-developer"
           ],
           "desiredDegree": "bs-cs",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         },
@@ -7450,7 +7688,7 @@
             "software-developer"
           ],
           "desiredDegree": "ba-ics",
-          "level": 1,
+          "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": []
         }
@@ -7638,6 +7876,9 @@
         },
         {
           "username": "scottpr"
+        },
+        {
+          "username": "jakephilips"
         }
       ]
     },

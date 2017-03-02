@@ -35,7 +35,7 @@ Template.Advisor_Layout.helpers({
       {
         label: 'Review Moderation',
         route: RouteNames.advisorReviewModerationPageRouteName,
-        regex: 'advisor-review-moderation',
+        regex: 'review-moderation',
       },
     ];
   },
