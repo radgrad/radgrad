@@ -223,7 +223,7 @@ class FeedCollection extends BaseCollection {
     } else {
       throw new Meteor.Error(`FeedType ${feedType} is not a valid feedType.`);
     }
-    console.log(description);
+    // console.log(description);
     const feedID = this._collection.insert({
       userIDs, opportunityID, courseID, semesterID, description, timestamp, picture, feedType,
     });
