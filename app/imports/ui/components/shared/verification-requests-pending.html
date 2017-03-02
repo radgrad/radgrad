@@ -1,5 +1,5 @@
 <template name="Verification_Requests_Pending">
-    <div class="ui padded container segment">
+    <div class="ui padded container segment" style="margin-bottom: 2.5rem;">
       <div class="ui dividing header"><h4>PENDING VERIFICATION REQUESTS</h4></div>
       <div class="ui divided items">
         {{#each request in pendingRequests}}
@@ -21,8 +21,8 @@
                         <div class="ui action input">
                           <input id="{{request._id}}-feedback" type="text" name="feedback"
                                  placeholder="Optional feedback">
-                          <button id="{{request._id}}-accept" class="ui green button" type="submit">Accept</button>
-                          <button id="{{request._id}}-decline" class="ui red button" type="submit">Decline</button>
+                          <button id="{{request._id}}-accept" class="ui tiny green basic button" type="submit">ACCEPT</button>
+                          <button id="{{request._id}}-decline" class="ui tiny red basic button" type="submit" style="margin-left: 0.15rem;">DECLINE</button>
                         </div>
                       </div>
                     </form>
