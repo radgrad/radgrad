@@ -2,7 +2,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicYearInstances } from '../year/AcademicYearInstanceCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
-import { FeedbackFunctions } from '../feedback/FeedbackFunctions';
+// import { FeedbackFunctions } from '../feedback/FeedbackFunctions';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
@@ -41,6 +41,11 @@ export function getStartingSemester(student) {
   return firstSemester;
 }
 
+/**
+ * Returns true if the courseInstance is a core ICS course, 111, 141, 211, 241, 314, 311.
+ * @param courseInstance the course instance.
+ * @returns {boolean}
+ */
 function isCoreInstance(courseInstance) {
   const note = courseInstance.note;
   return (note === 'ICS 111' ||
@@ -53,20 +58,25 @@ function isCoreInstance(courseInstance) {
 
 function getPassedCourseInstances(student) {
   const studentID = student._id;
-  const instances = CourseInstances.find({ studentID }).fetch();
+  const instances = CourseInstances.find({ studentID, note: /ICS/ }).fetch();
+  const currentSemester = Semesters.getCurrentSemesterDoc();
   const passedInstances = [];
   _.map(instances, (instance) => {
-    const instanceID = instance._id;
-    if (CourseInstances.isICS(instanceID)) {
-      if (isCoreInstance(instance)) {
-        if (instance.grade.includes('A') || instance.grade.includes('B')) {
-          passedInstances.push(instance);
-        }
+    const instanceSemester = Semesters.findDoc(instance.semesterID);
+    // const instanceID = instance._id;
+    // if (CourseInstances.isICS(instanceID)) {
+    if (isCoreInstance(instance)) {
+      if (instance.grade.includes('A') || instance.grade.includes('B') || instance.grade.includes('CR')) {
+        passedInstances.push(instance);
       } else
-        if (instance.grade.includes('A') || instance.grade.includes('B') || instance.grade.includes('C')) {
+        if ((currentSemester.semesterNumber - instanceSemester.semesterNumber) > 2) {
           passedInstances.push(instance);
         }
-    }
+    } else
+      if (instance.grade.includes('A') || instance.grade.includes('B') || instance.grade.includes('C')) {
+        passedInstances.push(instance);
+      }
+    // }
   });
   return passedInstances;
 }
@@ -87,11 +97,12 @@ function removeTakenCourses(student, degreeList) {
     const index = _.indexOf(degreeList, courseSlug);
     if (index !== -1) {
       degreeList.splice(index, 1);
-    } else if (courseSlug.startsWith('ics4') || instance.note.startsWith('ICS 6')) {
-      const fourIndex = _.indexOf(degreeList, 'ics4xx');
-      degreeList.splice(fourIndex, 1);
-      // console.log(`${student.username} took ${courseSlug}, but it isn't a required course`);
-    }
+    } else
+      if (courseSlug.startsWith('ics4') || instance.note.startsWith('ICS 6')) {
+        const fourIndex = _.indexOf(degreeList, 'ics4xx');
+        degreeList.splice(fourIndex, 1);
+        // console.log(`${student.username} took ${courseSlug}, but it isn't a required course`);
+      }
   });
 }
 
@@ -382,7 +393,6 @@ export function generateBADegreePlan(student, startSemester) {
     i += 1;
   }
 }
-
 
 // export function generateDegreePlan(template, startSemester, student) {
 //   const plan = {};

@@ -107,13 +107,8 @@ Template.Update_Degree_Plan_Widget.helpers({
 Template.Update_Degree_Plan_Widget.events({
   'click .jsGeneratePlan': function clickGeneratePlan(event, instance) {
     event.preventDefault();
-<<<<<<< HEAD
-    console.log('jsGeneratePlan');
     // debugger
-    instance.$('.ui.modal').modal({
-=======
     instance.$('.ui.basic.modal').modal({
->>>>>>> master
       onApprove() {
         // debugger
         const studentID = instance.data.studentID.get();
