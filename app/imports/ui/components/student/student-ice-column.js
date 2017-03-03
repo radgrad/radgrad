@@ -166,12 +166,11 @@ Template.Student_Ice_Column.helpers({
   },
   getEvents(type, earned, semester) {
     let ret = [];
-    if (this.type === 'Competency' && type !== 'opportunity') {
+    if ((this.type === 'Competency') && (type !== 'opportunity')) {
       ret = getEventsHelper(this.type, 'course', earned, semester);
-    } else if (this.type !== 'Competency' && type !== 'course') {
+    } else if ((this.type !== 'Competency') && (type !== 'course')) {
       ret = getEventsHelper(this.type, 'opportunity', earned, semester);
     }
-    //console.log(semester);
     return ret;
   },
   greaterThan100(num) {

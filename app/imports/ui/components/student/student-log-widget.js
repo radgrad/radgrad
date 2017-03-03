@@ -15,12 +15,19 @@ Template.Student_Log_Widget.helpers({
   advisorName(log){
     return Users.findDoc(log.advisorID).firstName;
   },
+  advisorUsername(log){
+    return Users.findDoc(log.advisorID).username;
+  },
   displayDate(log) {
     const date = log.createdOn;
     return `${date.toDateString()}  ${date.getHours()}:${date.getMinutes()}`;
   },
   logs() {
     return AdvisorLogs.find({ studentID: getUserIdFromRoute() }, { sort: { createdOn: -1 } });
+  },
+
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
   },
 });
 
