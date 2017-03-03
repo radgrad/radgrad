@@ -31,6 +31,7 @@ class OpportunityInstanceCollection extends BaseCollection {
     this.publicationNames.push(this._collectionName);
     this.publicationNames.push(`${this._collectionName}.Public`);
     this.publicationNames.push(`${this._collectionName}.PerStudentAndSemester`);
+    this.publicationNames.push(`${this._collectionName}.studentID`);
   }
 
   /**
@@ -168,6 +169,12 @@ class OpportunityInstanceCollection extends BaseCollection {
             }).validate({ studentID, semesterID });
             return this._collection.find({ studentID, semesterID });
           });
+      Meteor.publish(this.publicationNames[3], function filterStudentID(studentID) { // eslint-disable-line
+        new SimpleSchema({
+          studentID: { type: String },
+        }).validate({ studentID });
+        return this._collection.find({ studentID });
+      });
     }
   }
 
