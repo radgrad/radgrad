@@ -159,7 +159,7 @@ class OpportunityInstanceCollection extends BaseCollection {
         new SimpleSchema({
           opportunityID: { type: String },
         }).validate({ opportunityID });
-        return this._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
+        return instance._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
       });
       Meteor.publish(this.publicationNames[2],
           function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
@@ -167,13 +167,13 @@ class OpportunityInstanceCollection extends BaseCollection {
               studentID: { type: String },
               semesterID: { type: String },
             }).validate({ studentID, semesterID });
-            return this._collection.find({ studentID, semesterID });
+            return instance._collection.find({ studentID, semesterID });
           });
       Meteor.publish(this.publicationNames[3], function filterStudentID(studentID) { // eslint-disable-line
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
-        return this._collection.find({ studentID });
+        return instance._collection.find({ studentID });
       });
     }
   }

@@ -14,6 +14,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import * as RouteNames from '/imports/startup/client/router.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_MentorSpace_Mentor_Directory.onCreated(function studentMentorSpaceMentorDirectoryOnCreated() {
   this.autorun(() => {
@@ -29,7 +30,7 @@ Template.Student_MentorSpace_Mentor_Directory.onCreated(function studentMentorSp
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
     this.subscribe(Users.getPublicationName());
-    this.subscribe(AcademicYearInstances.getPublicationName());
+    this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
     this.subscribe(VerificationRequests.getPublicationName());
   });
 });

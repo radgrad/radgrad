@@ -231,7 +231,7 @@ class CourseInstanceCollection extends BaseCollection {
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
-        return this._collection.find({ studentID });
+        return instance._collection.find({ studentID });
       });
     }
   }

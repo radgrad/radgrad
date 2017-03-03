@@ -7,15 +7,15 @@
 # Basic Meteor stuff
 meteor-base@1.0.4
 mobile-experience@1.0.4
-mongo@1.1.14
+mongo@1.1.15
 blaze-html-templates@1.0.4
 reactive-var@1.0.11
 jquery@1.11.10
-tracker@1.1.1
+tracker@1.1.2
 session@1.1.7
-standard-minifier-js@1.2.1
+standard-minifier-js@1.2.2
 es5-shim@4.6.15
-ecmascript@0.6.1
+ecmascript@0.6.3
 ejson@1.0.13
 
 # Collections
@@ -30,7 +30,7 @@ practicalmeteor:mocha
 
 # Users and accounts
 alanning:roles
-accounts-password@1.3.3
+accounts-password@1.3.4
 accounts-ui@1.1.9
 atoy40:accounts-cas
 
@@ -39,7 +39,7 @@ momentjs:moment
 harrison:papa-parse
 erasaur:meteor-lodash
 underscore@1.0.10           # TODO: Should pick one, underscore or lodash.
-shell-server@0.2.1
+shell-server@0.2.2
 sacha:spin
 random@1.0.10
 
@@ -51,16 +51,17 @@ arillo:flow-router-helpers
 
 # Semantic UI (and packages to integrate with accounts and autoform)
 juliancwirko:postcss
-less@2.7.8
+less@2.7.9
 
 # Prototyping
 insecure@1.0.7
-markdown
+markdown@1.0.11
 ostrio:files
-# meteorhacks:kadira
-# meteorhacks:kadira-profiler
+meteorhacks:kadira
+meteorhacks:kadira-profiler
 jag:pince
 johanbrook:publication-collector
 udondan:zipzap
 udondan:slick
 percolate:synced-cron
+kadira:debug

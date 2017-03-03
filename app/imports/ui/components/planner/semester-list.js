@@ -110,6 +110,7 @@ Template.Semester_List.helpers({
 Template.Semester_List.events({
   'drop .bodyDrop': function dropBodyDrop(event) {
     event.preventDefault();
+    console.log(CourseInstances.find().count());
     if (Template.instance().localState.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
       const semesterID = Template.instance().localState.get('semester')._id;
