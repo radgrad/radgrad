@@ -462,7 +462,7 @@
       "name": "AdvisorLogCollection",
       "contents": [
         {
-          "advisor": "glau",
+          "advisor": "cmoore",
           "student": "abi",
           "text": "Set up RadGrad account. Must sign up for ICS111 and ICS141 on Star."
         },

@@ -3,12 +3,23 @@
     <div class="ui padded container segment">
       <div class="ui dividing header"><h4>ADVISOR LOG</h4></div>
       {{#each log in logs}}
-      <div class="ui message">
-        <div class="header">
-          {{log.createdOn}}
+      <div class="ui relaxed divided items">
+        <div class="item">
+          <div class="ui tiny image">
+            <img src="{{advisorImage log}}">
+          </div>
+          <div class="content">
+            <a class="header">{{displayDate log}}</a>
+            <div class="meta">
+              <span>{{advisorName log}} says:</span>
+            </div>
+            <div class="description">
+              <p>{{log.text}}</p>
+            </div>
+          </div>
         </div>
-        <p>{{log.text}}</p>
       </div>
+        <div class="ui divider"></div>
       {{/each}}
     </div>
   {{else}}

@@ -15,6 +15,8 @@ Template.Advisor_Log_Entry_Widget.events({
       const text = textAreas[0].value;
       const studentID = instance.state.get(sessionKeys.CURRENT_STUDENT_ID);
       const advisorID = instance.state.get(sessionKeys.CURRENT_ADVISOR_ID);
+      console.log("student: " + studentID);
+      console.log("advisor: " + advisorID);
       AdvisorLogs.define({ advisorID, studentID, text });
     }
   },
