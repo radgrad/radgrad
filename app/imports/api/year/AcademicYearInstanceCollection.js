@@ -26,6 +26,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       semesterIDs: { type: [SimpleSchema.RegEx.Id] },
     }));
+    this.publicationNames = [];
   }
 
   /**
