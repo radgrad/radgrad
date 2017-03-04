@@ -57,11 +57,11 @@ less@2.7.9
 insecure@1.0.7
 markdown@1.0.11
 ostrio:files
-meteorhacks:kadira
+# meteorhacks:kadira
 meteorhacks:kadira-profiler
 jag:pince
 johanbrook:publication-collector
 udondan:zipzap
 udondan:slick
 percolate:synced-cron
-kadira:debug
+# kadira:debug
