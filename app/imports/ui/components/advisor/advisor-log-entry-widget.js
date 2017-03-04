@@ -14,7 +14,7 @@ Template.Advisor_Log_Entry_Widget.helpers({
     }
     return null;
   },
-  advisorName(log){
+  advisorName(log) {
     return Users.findDoc(log.advisorID).firstName;
   },
   displayDate(log) {

@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Users } from '../../../api/user/UserCollection.js';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
@@ -8,13 +7,13 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Log_Widget.helpers({
-  advisorImage(log){
+  advisorImage(log) {
     return Users.findDoc(log.advisorID).picture;
   },
-  advisorName(log){
+  advisorName(log) {
     return Users.findDoc(log.advisorID).firstName;
   },
-  advisorUsername(log){
+  advisorUsername(log) {
     return Users.findDoc(log.advisorID).username;
   },
   displayDate(log) {
@@ -22,9 +21,8 @@ Template.Student_Log_Widget.helpers({
     return `${date.toDateString()}  ${date.getHours()}:${date.getMinutes()}`;
   },
   logs() {
-    return AdvisorLogs.find({ studentID: getUserIdFromRoute() }, { sort: { createdOn: -1 } });
+    return AdvisorLogs.find({ studentID: getUserIdFromRoute() }, { sort: { createdOn: -1 } }).fetch();
   },
-
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
   },

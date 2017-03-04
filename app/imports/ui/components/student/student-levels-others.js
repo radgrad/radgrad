@@ -38,12 +38,12 @@ Template.Student_Levels_Others.helpers({
     const students = [];
     const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
     _.map(users, (user) => {
-      if (user.level === userLevel){
-      if (user._id !== getUserIdFromRoute()) {
-        students.push(user);
+      if (user.level === userLevel) {
+        if (user._id !== getUserIdFromRoute()) {
+          students.push(user);
+        }
       }
-    }
-  });
+    });
     return students;
   },
   usersRouteName() {
