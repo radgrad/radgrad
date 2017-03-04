@@ -15,11 +15,9 @@ Template.Student_Home_Menu.helpers({
   studentHomeLevelsPageRouteName() {
     return RouteNames.studentHomeLevelsPageRouteName;
   },
-<<<<<<< HEAD
   studentHomeLogPageRouteName() {
     return RouteNames.studentHomeLogPageRouteName;
   },
-=======
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
@@ -39,5 +37,4 @@ Template.Student_Home_Menu.helpers({
 
 Template.Student_Home_Menu.onRendered(function studentHomeOnRendered() {
   this.$('.ui.dropdown').dropdown();
->>>>>>> master
 });
