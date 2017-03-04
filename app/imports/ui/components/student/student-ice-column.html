@@ -1,6 +1,7 @@
 <template name="Student_Ice_Column">
     <div class="ui styled fluid accordion">
-    <div class="active title">
+      <!-- Earned -->
+      <div class="active title">
       <i class="dropdown icon"></i>
       Earned ({{points earnedICE}} points)
     </div>
@@ -17,10 +18,10 @@
                 <div class="item">
                   <div class="header">{{printSemester semester}}</div>
                   {{#each event in getEvents 'opportunity' true semester}}
-                    <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{innovationPoints (eventIce event)}}</b> {{ event.name }}<br></a>
+                    <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{points (eventIce event)}}</b> {{ opportunityName event }}<br></a>
                   {{/each}}
                   {{#each event in getEvents 'course' true semester}}
-                    <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{points (eventIce event)}}</b>{{ courseName event }} ({{courseNumber event}})<br></a>
+                    <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{points (eventIce event)}}</b> {{ courseName event }} ({{courseNumber event}})<br></a>
                   {{/each}}
                 </div>
               {{/if}}
@@ -29,7 +30,9 @@
         </div>
       {{/if}}
     </div>
-    <div class="title">
+
+      <!-- Planned -->
+      <div class="title">
       <i class="dropdown icon"></i>
       Planned ({{points plannedICE}} points)
     </div>
@@ -45,10 +48,10 @@
                 <div class="item">
                   <div class="header">{{printSemester semester}}</div>
                   {{#each event in getEvents 'opportunity' false semester}}
-                    <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{points (eventIce event)}}</b>{{ opportunityName event }} <br></a>
+                    <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{points (eventIce event)}}</b> {{ opportunityName event }} <br></a>
                   {{/each}}
                   {{#each event in getEvents 'course' false semester}}
-                    <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{points (eventIce event)}}</b>{{ courseName event }} ({{courseNumber event}}) <br></a>
+                    <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><b>+{{points (eventIce event)}}</b> {{ courseName event }} ({{courseNumber event}}) <br></a>
                   {{/each}}
                 </div>
               {{/if}}
@@ -57,15 +60,17 @@
         </div>
       {{/if}}
     </div>
-    <div class="title">
+
+      <!-- Recommended -->
+      <div class="title">
       <i class="dropdown icon"></i>
       Get to 100
     </div>
     <div class="content">
-      {{#if matchingPoints (points earnedICE) 100}}
+      {{#if matchingPoints 100 (points earnedICE) }}
         <p>Congratulations! You have earned 100 {{type}} points!</p>
       {{else}}
-        {{#if matchingPoints (points plannedICE) 100}}
+        {{#if matchingPoints 100 (points plannedICE) }}
           <p>You already have 100 planned {{type}} points.</p>
         {{else}}
           {{#if hasNoInterests}}
@@ -77,10 +82,10 @@
                 <div class="item">
                   {{#if isType 'Competency'}}
                     <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><div class="item">
-                      <b>+9</b>{{ event.name }}
+                      <b>+9</b> {{ event.name }}
                     </div></a>
                   {{else}}
-                    <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{points (eventIce event)}}</b>{{ event.name }} ({{ opportunitySemesters event}})</a>
+                    <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug event)}}"><b>+{{points (eventIce event)}}</b> {{ event.name }} ({{ opportunitySemesters event}})</a>
                   {{/if}}
                 </div>
               {{/each}}

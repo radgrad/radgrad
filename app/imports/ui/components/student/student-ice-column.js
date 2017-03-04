@@ -28,31 +28,28 @@ function getEventsHelper(iceType, type, earned, semester) {
         verified: earned }).fetch();
       courseInstances.forEach((courseInstance) => {
         if (CourseInstances.isICS(courseInstance._id)) {
-          allInstances.push(Courses.findDoc(courseInstance.courseID));
+          allInstances.push(courseInstance);
       }
     });
     } else {
-      console.log(earned);
       allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: user._id,
-         }).fetch();
+        verified: earned }).fetch();
     }
-    //console.log(OpportunityInstances.find({studentID: user._id, semesterID: semester._id }).fetch());
     allInstances.forEach((instance) => {
       if (iceType === 'Innovation') {
-      console.log(Opportunities.findDoc(instance.opportunityID).name +": " + instance.verified);
         if (instance.ice.i > 0) {
-          iceInstances.push(Opportunities.findDoc(instance.opportunityID));
+          iceInstances.push(instance);
         }
-    } else if (iceType === 'Competency') {
-      if (instance.ice.c > 0) {
-        iceInstances.push(Courses.findDoc(instance.courseID));
+      } else if (iceType === 'Competency') {
+        if (instance.ice.c > 0) {
+          iceInstances.push(instance);
+        }
+      } else if (iceType === 'Experience') {
+        if (instance.ice.e > 0) {
+          iceInstances.push(instance);
+        }
       }
-    } else if (iceType === 'Experience') {
-      if (instance.ice.e > 0) {
-        iceInstances.push(Opportunities.findDoc(instance.opportunityID));
-      }
-    }
-  });
+    });
     return iceInstances;
   }
   return null;
@@ -84,22 +81,22 @@ function matchingCourses() {
   let courseInterests = [];
   _.map(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
-});
+  });
   _.map(allCourses, (course) => {
     courseInterests = [];
   _.map(course.interestIDs, (id) => {
     courseInterests.push(Interests.findDoc(id));
   _.map(courseInterests, (courseInterest) => {
     _.map(userInterests, (userInterest) => {
-    if (_.isEqual(courseInterest, userInterest)) {
-    if (!_.includes(matching, course)) {
-      matching.push(course);
-    }
-  }
-});
-});
-});
-});
+      if (_.isEqual(courseInterest, userInterest)) {
+        if (!_.includes(matching, course)) {
+          matching.push(course);
+        }
+      }
+    });
+  });
+  });
+  });
   return matching;
 }
 
@@ -111,22 +108,22 @@ function matchingOpportunities() {
   let opportunityInterests = [];
   _.map(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
-});
+  });
   _.map(allOpportunities, (opp) => {
     opportunityInterests = [];
   _.map(opp.interestIDs, (id) => {
     opportunityInterests.push(Interests.findDoc(id));
   _.map(opportunityInterests, (oppInterest) => {
     _.map(userInterests, (userInterest) => {
-    if (_.isEqual(oppInterest, userInterest)) {
-    if (!_.includes(matching, opp)) {
-      matching.push(opp);
-    }
-  }
-});
-});
-});
-});
+      if (_.isEqual(oppInterest, userInterest)) {
+        if (!_.includes(matching, opp)) {
+          matching.push(opp);
+        }
+      }
+    });
+  });
+  });
+  });
   return matching;
 }
 
@@ -165,13 +162,7 @@ Template.Student_Ice_Column.helpers({
     return ice.e;
   },
   getEvents(type, earned, semester) {
-    let ret = [];
-    if ((this.type === 'Competency') && (type !== 'opportunity')) {
-      ret = getEventsHelper(this.type, 'course', earned, semester);
-    } else if ((this.type !== 'Competency') && (type !== 'course')) {
-      ret = getEventsHelper(this.type, 'opportunity', earned, semester);
-    }
-    return ret;
+    return getEventsHelper(this.type, type, earned, semester);
   },
   greaterThan100(num) {
     if (num > 100) {
@@ -185,7 +176,6 @@ Template.Student_Ice_Column.helpers({
         (getEventsHelper(this.type, 'opportunity', earned, semester).length > 0)) {
       ret = true;
     }
-    console.log(ret);
     return ret;
   },
   hasNoInterests() {
@@ -221,7 +211,7 @@ Template.Student_Ice_Column.helpers({
     return semesterNames.slice(0, -2); // removes unnecessary comma and space
   },
   opportunitySlug(opportunity) {
-    return Slugs.findDoc(Opportunities.findDoc(opportunity._id).slugID).name;
+    return Slugs.findDoc(Opportunities.findDoc(opportunity.opportunityID).slugID).name;
   },
   plannedICE() {
     if (getUserIdFromRoute()) {
@@ -230,15 +220,6 @@ Template.Student_Ice_Column.helpers({
       const oppInstances = OpportunityInstances.find({ studentID: user._id }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
       const ice = getPlanningICE(earnedInstances);
-      if (ice.i > 100) {
-        ice.i = 100;
-      }
-      if (ice.c > 100) {
-        ice.c = 100;
-      }
-      if (ice.e > 100) {
-        ice.e = 100;
-      }
       return ice;
     }
     return null;
