@@ -28,8 +28,7 @@
       {{else}}
         <a class="ui button" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(itemSlug item)}}"><i class="chevron circle right icon"></i><br>View More</a>
       {{/if}}
-
-      {{> Student_Of_Interest_Add item = item type = type}}
+        {{> Student_Of_Interest_Add item = item type = type}}
 
       {{#if hidden}}
         <div class="ui button unhide"><i class="unhide icon"></i><br>Unhide</div>
