@@ -2,7 +2,6 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Users } from '../../../api/user/UserCollection.js';
-import {  } from '../../components/shared/route-user-name.js';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 

@@ -7,6 +7,20 @@
         <textarea></textarea>
       </div>
       <div class="ui tiny basic green submit button jsComment">ADD COMMENTS</div>
+
+      <div class="field">
+        <!-- Past Advisor Log -->
+        <label style="margin-top: 15px">Past Advisor Logs</label>
+        {{#if advisorLogs}}
+          {{#each log in advisorLogs}}
+            <div class="ui segment">
+              <p><strong>{{displayDate log}}:</strong> {{log.text}} <i>({{advisorName log}})</i></p>
+            </div>
+          {{/each}}
+        {{else}}
+          <p><i>No past advisor logs with this student.</i></p>
+        {{/if}}
+      </div>
     </div>
   </div>
 </template>
