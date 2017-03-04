@@ -24,7 +24,7 @@ Template.Student_Explorer_Add_Review_Widget.onCreated(function onCreated() {
   this.subscribe(Feed.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
 });
 

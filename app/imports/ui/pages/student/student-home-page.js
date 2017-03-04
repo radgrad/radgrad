@@ -21,7 +21,7 @@ Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
   this.subscribe(FeedbackInstances.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Teasers.getPublicationName());
   this.subscribe(Users.getPublicationName());

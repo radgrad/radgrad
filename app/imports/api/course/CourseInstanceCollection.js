@@ -44,7 +44,6 @@ class CourseInstanceCollection extends BaseCollection {
     this.publicationNames.push(`${this._collectionName}.PublicStudent`);
     this.publicationNames.push(`${this._collectionName}.PublicSlugStudent`);
     this.publicationNames.push(`${this._collectionName}.studentID`);
-
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
     }

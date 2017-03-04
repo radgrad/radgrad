@@ -26,7 +26,7 @@ Template.Student_MentorSpace_Mentor_Directory.onCreated(function studentMentorSp
   this.subscribe(MentorAnswers.getPublicationName());
   this.subscribe(MentorProfiles.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());

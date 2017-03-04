@@ -24,7 +24,7 @@ Template.Student_MentorSpace_Questions_Accordion.onCreated(function studentMento
   this.subscribe(MentorQuestions.getPublicationName());
   this.subscribe(MentorAnswers.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());

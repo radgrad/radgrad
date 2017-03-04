@@ -110,7 +110,6 @@ Template.Semester_List.helpers({
 Template.Semester_List.events({
   'drop .bodyDrop': function dropBodyDrop(event) {
     event.preventDefault();
-    console.log(CourseInstances.find().count());
     if (Template.instance().localState.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
       const semesterID = Template.instance().localState.get('semester')._id;
@@ -217,7 +216,7 @@ Template.Semester_List.onCreated(function semesterListOnCreate() {
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName(2), getUserIdFromRoute(), this.data.semester._id);
   this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(OpportunityTypes.getPublicationName());
   this.subscribe(FeedbackInstances.getPublicationName());
   this.subscribe(Feedbacks.getPublicationName());

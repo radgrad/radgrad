@@ -29,6 +29,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
     this.publicationNames = [];
     this.publicationNames.push(this._collectionName);
     this.publicationNames.push(`${this._collectionName}.studentID`);
+    if (Meteor.server) {
+      this._collection._ensureIndex({ studentID: 1 });
+    }
   }
 
   /**

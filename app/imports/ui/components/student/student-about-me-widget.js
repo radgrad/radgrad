@@ -152,7 +152,7 @@ Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreate
   this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
