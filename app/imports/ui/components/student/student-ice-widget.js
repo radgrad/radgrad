@@ -15,136 +15,8 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import { getRouteUserName } from '../shared/route-user-name';
-import * as RouteNames from '/imports/startup/client/router.js';
-
-function getEventsHelper(iceType, type, earned, semester) {
-  if (getUserIdFromRoute()) {
-    const user = Users.findDoc(getUserIdFromRoute());
-    let allInstances = [];
-    const iceInstances = [];
-    if (type === 'course') {
-      const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: user._id,
-        verified: earned }).fetch();
-      courseInstances.forEach((courseInstance) => {
-        if (CourseInstances.isICS(courseInstance._id)) {
-          allInstances.push(courseInstance);
-        }
-      });
-    } else {
-      allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: user._id,
-        verified: earned }).fetch();
-    }
-    allInstances.forEach((instance) => {
-      if (iceType === 'i') {
-        if (instance.ice.i > 0) {
-          iceInstances.push(instance);
-        }
-      } else if (iceType === 'c') {
-        if (instance.ice.c > 0) {
-          iceInstances.push(instance);
-        }
-      } else if (iceType === 'e') {
-        if (instance.ice.e > 0) {
-          iceInstances.push(instance);
-        }
-      }
-    });
-    return iceInstances;
-  }
-  return null;
-}
-
-const availableCourses = () => {
-  const courses = Courses.find({}).fetch();
-  if (courses.length > 0) {
-    const filtered = _.filter(courses, function filter(course) {
-      if (course.number === 'ICS 499') {
-        return true;
-      }
-      const ci = CourseInstances.find({
-        studentID: getUserIdFromRoute(),
-        courseID: course._id,
-      }).fetch();
-      return ci.length === 0;
-    });
-    return filtered;
-  }
-  return [];
-};
-
-function matchingCourses() {
-  const allCourses = availableCourses();
-  const matching = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterests = [];
-  let courseInterests = [];
-  _.map(user.interestIDs, (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  _.map(allCourses, (course) => {
-    courseInterests = [];
-    _.map(course.interestIDs, (id) => {
-      courseInterests.push(Interests.findDoc(id));
-      _.map(courseInterests, (courseInterest) => {
-        _.map(userInterests, (userInterest) => {
-          if (_.isEqual(courseInterest, userInterest)) {
-            if (!_.includes(matching, course)) {
-              matching.push(course);
-            }
-          }
-        });
-      });
-    });
-  });
-  return matching;
-}
-
-function matchingOpportunities() {
-  const allOpportunities = Opportunities.find().fetch();
-  const matching = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterests = [];
-  let opportunityInterests = [];
-  _.map(user.interestIDs, (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  _.map(allOpportunities, (opp) => {
-    opportunityInterests = [];
-    _.map(opp.interestIDs, (id) => {
-      opportunityInterests.push(Interests.findDoc(id));
-      _.map(opportunityInterests, (oppInterest) => {
-        _.map(userInterests, (userInterest) => {
-          if (_.isEqual(oppInterest, userInterest)) {
-            if (!_.includes(matching, opp)) {
-              matching.push(opp);
-            }
-          }
-        });
-      });
-    });
-  });
-  return matching;
-}
 
 Template.Student_Ice_Widget.helpers({
-  competencyPoints(ice) {
-    return ice.c;
-  },
-  courseName(c) {
-    const course = Courses.findDoc(c.courseID);
-    return course.shortName;
-  },
-  courseNumber(c) {
-    const course = Courses.findDoc(c.courseID);
-    return course.number;
-  },
-  courseSlug(course) {
-    return Slugs.findDoc(Courses.findDoc(course.courseID).slugID).name;
-  },
-  coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
-  },
   earnedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -155,60 +27,11 @@ Template.Student_Ice_Widget.helpers({
     }
     return null;
   },
-  eventIce(event) {
-    return event.ice;
-  },
-  experiencePoints(ice) {
-    return ice.e;
-  },
-  getEvents(iceType, type, earned, semester) {
-    return getEventsHelper(iceType, type, earned, semester);
-  },
   greaterThan100(num) {
     if (num > 100) {
       return 100;
     }
     return num;
-  },
-  hasEvents(iceType, earned, semester) {
-    let ret = false;
-    if ((getEventsHelper(iceType, 'course', earned, semester).length > 0) ||
-        (getEventsHelper(iceType, 'opportunity', earned, semester).length > 0)) {
-      ret = true;
-    }
-    return ret;
-  },
-  hasNoInterests() {
-    const user = Users.findDoc({ username: getRouteUserName() });
-    return user.interestIDs === undefined;
-  },
-  innovationPoints(ice) {
-    return ice.i;
-  },
-  matchingPoints(a, b) {
-    return a === b;
-  },
-  opportunitiesRouteName() {
-    return RouteNames.studentExplorerOpportunitiesPageRouteName;
-  },
-  opportunityName(opp) {
-    const opportunity = Opportunities.findDoc(opp.opportunityID);
-    return opportunity.name;
-  },
-  opportunitySemesters(opp) {
-    const semesters = opp.semesterIDs;
-    let semesterNames = '';
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSemester = Semesters.findDoc(currentSemesterID);
-    _.map(semesters, (sem) => {
-      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
-        semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
-      }
-    });
-    return semesterNames.slice(0, -2); // removes unnecessary comma and space
-  },
-  opportunitySlug(opportunity) {
-    return Slugs.findDoc(Opportunities.findDoc(opportunity.opportunityID).slugID).name;
   },
   plannedICE() {
     if (getUserIdFromRoute()) {
@@ -229,65 +52,6 @@ Template.Student_Ice_Widget.helpers({
       return ice;
     }
     return null;
-  },
-  printSemester(semester) {
-    return Semesters.toString(semester._id, false);
-  },
-  recommendedEvents(iceType, type, projected) {
-    if (getUserIdFromRoute()) {
-      let allInstances = [];
-      const recommendedInstances = [];
-      let totalIce = 0;
-      const remainder = 100 - projected;
-      if (type === 'course') {
-        allInstances = matchingCourses();
-      } else {
-        allInstances = matchingOpportunities();
-      }
-
-      if (iceType === 'i') {
-        allInstances.forEach((instance) => {
-          if (totalIce < remainder) {
-            totalIce += instance.ice.i;
-            recommendedInstances.push(instance);
-          }
-        });
-      } else if (iceType === 'c') {
-        allInstances.forEach((instance) => {
-          if (totalIce < remainder) {
-            totalIce += 9; // assume A grade
-            recommendedInstances.push(instance);
-          }
-        });
-      } else if (iceType === 'e') {
-        allInstances.forEach((instance) => {
-          if (totalIce < remainder) {
-            totalIce += instance.ice.e;
-            recommendedInstances.push(instance);
-          }
-        });
-      } else {
-        return null;
-      }
-      return recommendedInstances;
-    }
-    return null;
-  },
-  remainingICE(earned, planned) {
-    return planned - earned;
-  },
-  semesters(year) {
-    const yearSemesters = [];
-    const semIDs = year.semesterIDs;
-    _.map(semIDs, (semID) => {
-      yearSemesters.push(Semesters.findDoc(semID));
-    });
-    return yearSemesters;
-  },
-  years() {
-    const studentID = getUserIdFromRoute();
-    const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
-    return ay;
   },
 });
 
