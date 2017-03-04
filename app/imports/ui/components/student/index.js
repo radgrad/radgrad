@@ -85,6 +85,9 @@ import './student-mentorspace-question-form.js';
 import './student-mentorspace-mentor-directory.html';
 import './student-mentorspace-mentor-directory.js';
 
+import './student-of-interest-add.html';
+import './student-of-interest-add.js';
+
 import './student-of-interest-card.html';
 import './student-of-interest-card.js';
 
