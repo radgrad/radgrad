@@ -5,11 +5,11 @@
       <div class="ui fluid popup transition hidden">
         <div class="ui vertical menu">
           {{#each year in nextYears 4}}
-            <a class="item chooseSemester" data-position="right center">{{year}}</a>
+            <a class="item chooseSemester">{{year}}</a>
             <div class="ui fluid popup transition hidden">
               <div class="ui vertical menu">
                 {{#each semester in yearSemesters year}}
-                  <a class="item addToPlan" data-position="right center">{{semester}}</a>
+                  <a class="item addToPlan">{{semester}}</a>
                 {{/each}}
               </div>
             </div>
