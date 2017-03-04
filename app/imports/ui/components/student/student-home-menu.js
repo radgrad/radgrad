@@ -29,6 +29,8 @@ Template.Student_Home_Menu.helpers({
         return 'ICE Points';
       case RouteNames.studentHomeLevelsPageRouteName:
         return 'Levels';
+      case RouteNames.studentHomeLogPageRouteName:
+        return 'Advisor Log';
       default:
         return 'Menu';
     }
