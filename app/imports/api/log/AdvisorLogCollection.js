@@ -33,6 +33,8 @@ class AdvisorLogCollection extends BaseCollection {
    * @param text The contents of the session.
    */
   define({ advisor, student, text }) {
+    console.log("advisor: " + advisor);
+    console.log("student: " + student);
     const advisorID = Users.getID(advisor);
     const studentID = Users.getID(student);
     const createdOn = new Date();
