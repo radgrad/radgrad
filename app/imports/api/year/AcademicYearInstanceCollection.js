@@ -27,6 +27,8 @@ class AcademicYearInstanceCollection extends BaseCollection {
       semesterIDs: { type: [SimpleSchema.RegEx.Id] },
     }));
     this.publicationNames = [];
+    this.publicationNames.push(this._collectionName);
+    this.publicationNames.push(`${this._collectionName}.studentID`);
   }
 
   /**
@@ -72,13 +74,32 @@ class AcademicYearInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this._collectionName, function publish() {
+      Meteor.publish(this.publicationNames[0], function publish() {
         if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
       });
+      Meteor.publish(this.publicationNames[1], function filterStudentID(studentID) { // eslint-disable-line
+        new SimpleSchema({
+          studentID: { type: String },
+        }).validate({ studentID });
+        return instance._collection.find({ studentID });
+      });
+
     }
+  }
+
+  /**
+   * Return the publication name.
+   * @param index The optional index for the publication name.
+   * @returns { String } The publication name, as a string.
+   */
+  getPublicationName(index) {
+    if (index) {
+      return this.publicationNames[index];
+    }
+    return this._collectionName;
   }
 
   /**

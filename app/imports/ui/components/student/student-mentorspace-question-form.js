@@ -14,6 +14,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 
 const displaySuccessMessage = 'displaySuccessMessage';
@@ -33,7 +34,7 @@ Template.Student_MentorSpace_Question_Form.onCreated(function studentMentorSpace
     this.subscribe(OpportunityInstances.getPublicationName());
     this.subscribe(Semesters.getPublicationName());
     this.subscribe(Users.getPublicationName());
-    this.subscribe(AcademicYearInstances.getPublicationName());
+    this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
     this.subscribe(VerificationRequests.getPublicationName());
   });
 

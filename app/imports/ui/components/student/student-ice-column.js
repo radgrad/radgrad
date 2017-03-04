@@ -260,7 +260,7 @@ Template.Student_Ice_Column.events({
 });
 
 Template.Student_Ice_Column.onCreated(function studentIceOnCreated() {
-  this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
