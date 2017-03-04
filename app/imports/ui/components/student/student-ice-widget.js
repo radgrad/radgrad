@@ -62,7 +62,7 @@ Template.Student_Ice_Widget.onCreated(function studentIceOnCreated() {
   this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());

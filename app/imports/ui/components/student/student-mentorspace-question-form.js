@@ -16,27 +16,24 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-
 const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
 Template.Student_MentorSpace_Question_Form.onCreated(function studentMentorSpaceMentorQuestionFormOnCreated() {
-  this.autorun(() => {
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Feedbacks.getPublicationName());
-    this.subscribe(FeedbackInstances.getPublicationName());
-    this.subscribe(Interests.getPublicationName());
-    this.subscribe(MentorQuestions.getPublicationName());
-    this.subscribe(MentorAnswers.getPublicationName());
-    this.subscribe(MentorProfiles.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-    this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
-    this.subscribe(VerificationRequests.getPublicationName());
-  });
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
+  this.subscribe(Feedbacks.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(MentorQuestions.getPublicationName());
+  this.subscribe(MentorAnswers.getPublicationName());
+  this.subscribe(MentorProfiles.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
+  this.subscribe(VerificationRequests.getPublicationName());
 
   this.messageFlags = new ReactiveDict();
   this.messageFlags.set(displaySuccessMessage, false);
@@ -73,10 +70,10 @@ Template.Student_MentorSpace_Question_Form.onRendered(function mentorSpaceOnRend
   this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
 
   this.$('.ui.dropdown')
-    .dropdown()
+      .dropdown()
   ;
 
   this.$('.ui.rating')
-    .rating()
+      .rating()
   ;
 });

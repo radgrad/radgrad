@@ -16,7 +16,7 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 
 Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
   this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(Feedbacks.getPublicationName());
   this.subscribe(FeedbackInstances.getPublicationName());
   this.subscribe(Interests.getPublicationName());
