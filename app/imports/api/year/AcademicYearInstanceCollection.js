@@ -86,7 +86,6 @@ class AcademicYearInstanceCollection extends BaseCollection {
         }).validate({ studentID });
         return instance._collection.find({ studentID });
       });
-
     }
   }
 

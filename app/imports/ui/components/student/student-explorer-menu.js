@@ -156,7 +156,7 @@ Template.Student_Explorer_Menu.helpers({
 
 Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated() {
   this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());

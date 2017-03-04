@@ -24,7 +24,6 @@ import * as semUtils from '../../../api/semester/SemesterUtilities';
 import * as courseUtils from '../../../api/course/CourseUtilities';
 import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 const updateSchema = new SimpleSchema({
   firstName: { type: String, optional: false },

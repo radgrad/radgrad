@@ -23,7 +23,7 @@ Template.Student_Explorer_Add_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
   this.subscribe(Feed.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
 });
