@@ -90,20 +90,24 @@
         </div>
       </div>
 
-      {{#each descriptionPair in descriptionPairs}}
-        {{#if isLabel descriptionPair.label 'Prerequisites'}}
-          <div class="ui horizontal segments" style="background-color: white;">
-            {{#each table in descriptionPair.value}}
-              <div class="ui center aligned segment" style="min-width: 33%;">
-                {{{getTableTitle @index}}}
-                  {{#each prerequisite in table}}
-                    <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a> <br>
+      <div class="ui segment">
+        <div class="ui three column stackable internally celled grid">
+          <div class="row">
+            {{#each descriptionPair in descriptionPairs}}
+              {{#if isLabel descriptionPair.label 'Prerequisites'}}
+                  {{#each table in descriptionPair.value}}
+                    <div class="column" style="text-align: center;">
+                        {{{getTableTitle @index}}}
+                          {{#each prerequisite in table}}
+                            - <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a> <br>
+                          {{/each}}
+                    </div>
                   {{/each}}
-              </div>
+              {{/if}}
             {{/each}}
           </div>
-        {{/if}}
-      {{/each}}
+        </div>
+      </div>
 
     </div>
 

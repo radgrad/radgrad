@@ -105,6 +105,9 @@ Template.Student_Of_Interest_Card.helpers({
     let description = item.description;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
+      if (description.charAt(description.length - 1) === ' ') {
+        description = `${description.substring(0, 199)}`;
+      }
     }
     return description;
   },
