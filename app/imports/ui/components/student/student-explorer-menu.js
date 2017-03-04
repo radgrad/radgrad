@@ -47,6 +47,9 @@ Template.Student_Explorer_Menu.helpers({
   degreesRouteName() {
     return RouteNames.studentExplorerDegreesPageRouteName;
   },
+  equals(a, b) {
+    return a === b;
+  },
   firstCareerGoal() {
     let ret;
     const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
@@ -86,6 +89,25 @@ Template.Student_Explorer_Menu.helpers({
       ret = Slugs.findDoc(opportunities[0].slugID).name;
     }
     return ret;
+  },
+  getRouteName() {
+    const routeName = FlowRouter.getRouteName();
+    switch (routeName) {
+      case RouteNames.studentExplorerCareerGoalsPageRouteName:
+        return 'Career Goals';
+      case RouteNames.studentExplorerCoursesPageRouteName:
+        return 'Courses';
+      case RouteNames.studentExplorerDegreesPageRouteName:
+        return 'Degrees';
+      case RouteNames.studentExplorerInterestsPageRouteName:
+        return 'Interests';
+      case RouteNames.studentExplorerOpportunitiesPageRouteName:
+        return 'Opportunities';
+      case RouteNames.studentExplorerUsersPageRouteName:
+        return 'Users';
+      default:
+        return 'Select Explorer';
+    }
   },
   interestsRouteName() {
     return RouteNames.studentExplorerInterestsPageRouteName;
