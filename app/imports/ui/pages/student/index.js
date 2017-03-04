@@ -37,6 +37,9 @@ import './student-home-ice-page.js';
 import './student-home-levels-page.html';
 import './student-home-levels-page.js';
 
+import './student-home-log-page.html';
+import './student-home-log-page.js';
+
 import './student-home-page.html';
 import './student-home-page.js';
 import './student-home-page.css';

@@ -1,9 +1,11 @@
 <template name="Student_Level_Hints">
   {{#if Template.subscriptionsReady}}
-    <div class="ui padded segment">
-    <div class="ui dividing header"><h4>LEVELING UP HINTS</h4></div>
-      {{#markdown}}{{levelFeedback.description}}{{/markdown}}
-  </div>
+    <div class="ui warning icon message">
+      <i class="rocket icon"></i>
+      <div class="content">
+        {{#markdown}}{{levelFeedback.description}}{{/markdown}}
+      </div>
+    </div>
   {{else}}
     {{> Loading}}
   {{/if}}

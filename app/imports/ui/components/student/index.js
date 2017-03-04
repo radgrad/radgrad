@@ -73,6 +73,9 @@ import './student-levels-others.js';
 import './student-levels-widget.html';
 import './student-levels-widget.js';
 
+import './student-log-widget.html';
+import './student-log-widget.js';
+
 import './student-mentorspace-questions-accordion.html';
 import './student-mentorspace-questions-accordion.js';
 
