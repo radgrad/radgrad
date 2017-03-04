@@ -2,6 +2,9 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { AdvisorLogs } from '/imports/api/log/AdvisorLogCollection';
 import { sessionKeys } from '../../../startup/client/session-state';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Advisor_Log_Entry_Widget.helpers({
   // add you helpers here
@@ -13,11 +16,9 @@ Template.Advisor_Log_Entry_Widget.events({
     const textAreas = event.target.parentElement.getElementsByTagName('textarea');
     if (textAreas.length > 0) {
       const text = textAreas[0].value;
-      const studentID = instance.state.get(sessionKeys.CURRENT_STUDENT_ID);
-      const advisorID = instance.state.get(sessionKeys.CURRENT_ADVISOR_ID);
-      console.log("student: " + studentID);
-      console.log("advisor: " + advisorID);
-      AdvisorLogs.define({ advisorID, studentID, text });
+      const student = instance.state.get(sessionKeys.CURRENT_STUDENT_ID);
+      const advisor = getUserIdFromRoute();
+      AdvisorLogs.define({ advisor, student, text });
     }
   },
 });
@@ -28,6 +29,8 @@ Template.Advisor_Log_Entry_Widget.onCreated(function advisorLogEntryOnCreated() 
   } else {
     this.state = new ReactiveDict();
   }
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
 });
 
 Template.Advisor_Log_Entry_Widget.onRendered(function advisorLogEntryOnRendered() {
