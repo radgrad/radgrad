@@ -10,6 +10,9 @@ Template.Student_Levels_Others.helpers({
   fullName(student) {
     return Users.getFullName(student._id);
   },
+  studentsExist(students) {
+    return students.length > 0;
+  },
   studentLevelName() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
@@ -32,19 +35,16 @@ Template.Student_Levels_Others.helpers({
     return student.picture;
   },
   students(userLevel) {
-    if (getUserIdFromRoute()) {
-      const students = [];
-      const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
-      _.map(users, (user) => {
-        if (user.level === userLevel) {
-          if (user._id !== getUserIdFromRoute()) {
-            students.push(user);
-          }
+    const students = [];
+    const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
+    _.map(users, (user) => {
+      if (user.level === userLevel) {
+        if (user._id !== getUserIdFromRoute()) {
+          students.push(user);
         }
-      });
-      return students;
-    }
-    return '';
+      }
+    });
+    return students;
   },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;

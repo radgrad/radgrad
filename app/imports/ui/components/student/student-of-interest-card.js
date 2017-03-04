@@ -105,6 +105,9 @@ Template.Student_Of_Interest_Card.helpers({
     let description = item.description;
     if (description.length > 200) {
       description = `${description.substring(0, 200)}`;
+      if (description.charAt(description.length - 1) === ' ') {
+        description = `${description.substring(0, 199)}`;
+      }
     }
     return description;
   },
@@ -160,33 +163,6 @@ Template.Student_Of_Interest_Card.helpers({
 });
 
 Template.Student_Of_Interest_Card.events({
-  'click .addToPlan': function clickItemAddToPlan(event) {
-    event.preventDefault();
-    const semester = event.target.text;
-    const itemSlug = Slugs.findDoc({ _id: this.item.slugID });
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = getRouteUserName();
-    if (this.type === 'courses') {
-      const ci = {
-        semester: semSlug,
-        course: itemSlug,
-        verified: false,
-        note: this.item.number,
-        grade: 'B',
-        student: username,
-      };
-      CourseInstances.define(ci);
-    } else {
-      const oi = {
-        semester: semSlug,
-        opportunity: itemSlug.name,
-        verified: false,
-        student: username,
-      };
-      OpportunityInstances.define(oi);
-    }
-  },
   'click .hide': function clickItemHide(event) {
     event.preventDefault();
     const student = Users.findDoc({ username: getRouteUserName() });
@@ -233,15 +209,5 @@ Template.Student_Of_Interest_Card.events({
   },
 });
 
-Template.Student_Of_Interest_Card.onRendered(function studentOfInterestCardOnRendered() {
-  const template = this;
-  template.$('.chooseSemester')
-      .popup({
-        on: 'click',
-      });
-  template.$('.chooseYear')
-      .popup({
-        on: 'click',
-      });
-});
+
 

@@ -1,5 +1,5 @@
 <template name="Verification_Requests_Completed">
-    <div class="ui padded container segment">
+    <div class="ui padded container segment" style="margin-bottom: 2.5rem;">
       <div class="ui dividing header"><h4>COMPLETED VERIFICATION REQUESTS</h4></div>
       <div class="ui divided items">
         {{#each verification in completedVerifications}}
@@ -28,7 +28,7 @@
               </div>
               <div class="description">
                 <form class="ui form">
-                  <button id="{{verification._id}}" class="ui green button" type="submit">Reopen</button>
+                  <button id="{{verification._id}}" class="ui tiny basic green button" type="submit">REOPEN</button>
                 </form>
               </div>
             </div>

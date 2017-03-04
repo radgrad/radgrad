@@ -1,13 +1,13 @@
 <template name="Interest_List">
-      <span class="left floated">
-        {{#each interest in matchingUserInterests item}}
-          <a class="ui {{size}} label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
-        {{/each}}
-        {{#each interest in matchingCareerInterests item}}
-          <a class="ui {{size}} label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted suitcase icon"></i>{{interestName interest}}</a>
-        {{/each}}
-        {{#each interest in otherInterests item}}
-          <a class="ui {{size}} grey label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}">{{interestName interest}}</a>
-        {{/each}}
-      </span>
+  <div class="ui {{size}} labels">
+    {{#each interest in matchingUserInterests item}}
+      <a class="ui {{size}} label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
+    {{/each}}
+    {{#each interest in matchingCareerInterests item}}
+      <a class="ui {{size}} label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}"><i class="fitted suitcase icon"></i>{{interestName interest}}</a>
+    {{/each}}
+    {{#each interest in otherInterests item}}
+      <a class="ui {{size}} grey label" href="{{pathFor interestsRouteName username=routeUserName interest=(interestSlug interest)}}">{{interestName interest}}</a>
+    {{/each}}
+  </div>
 </template>

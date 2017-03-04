@@ -632,6 +632,15 @@
           "moreInformation": "https://en.wikipedia.org/wiki/Startup_company"
         },
         {
+          "name": "Teacher",
+          "slug": "teacher",
+          "interests": [
+            "teaching"
+          ],
+          "description": "Teaching often appears in lists of [the top 10 most satisfying careers](http://www.careercast.com/jobs-rated/whistling-while-you-work-10-most-satisfying-careers), and it's easy to see why: you are helping others, you are benefitting society, and you get summers off, among [other things](https://www.buzzfeed.com/mrloganrhoades/the-24-best-parts-about-being-a-teacher?utm_term=.arAKJwPVrG#.txpklaR2Bx).\n\nIf you are interested in teaching high school computer science, we recommend that you complete either the B.A. or B.S. in computer science degree program, then plan to obtain a [Certificate in Secondary Education](https://coe.hawaii.edu/academics/institute-teacher-education/pbc-secondary).  This certificate can be obtained in 18 months after graduation, and you can take classes in the evening or online. \n\nYou don't have to wait until you obtain a teaching certificate to get started teaching. Consider programs such as [Teach for America](https://hawaii.teachforamerica.org/teaching-here). In addition, many private schools in Hawaii do not require a teaching certificate.",
+          "moreInformation": "http://tobecomeateacher.org/becoming-a-cs-teacher/"
+        },
+        {
           "name": "UX Designer",
           "slug": "ux-designer",
           "interests": [
