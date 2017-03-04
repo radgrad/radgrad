@@ -20,7 +20,6 @@ function withinPastDay(feed, timestamp) {
   const feedTime = feed.timestamp;
   const currentFeedTime = timestamp;
   const timeDiff = dateDiffInDays(currentFeedTime, feedTime);
-  // console.log(currentFeedTime + "|" + feedTime);
   if (timeDiff === 0) {
     ret = true;
   }
@@ -223,7 +222,6 @@ class FeedCollection extends BaseCollection {
     } else {
       throw new Meteor.Error(`FeedType ${feedType} is not a valid feedType.`);
     }
-    // console.log(description);
     const feedID = this._collection.insert({
       userIDs, opportunityID, courseID, semesterID, description, timestamp, picture, feedType,
     });

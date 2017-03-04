@@ -1,8 +1,28 @@
 <template name="Student_Home_Menu">
-  <div  class="ui left vertical text menu">
+  <div  class="ui left vertical text menu mobile hidden">
     <a class="{{isActiveRoute studentHomePageRouteName}} item" href="{{pathFor studentHomePageRouteName username=routeUserName}}">Home</a>
     <a class="{{isActiveRoute studentHomeAboutMePageRouteName}} item" href="{{pathFor studentHomeAboutMePageRouteName username=routeUserName}}">About Me</a>
     <a class="{{isActiveRoute studentHomeIcePageRouteName}} item" href="{{pathFor studentHomeIcePageRouteName username=routeUserName}}">ICE Points</a>
     <a class="{{isActiveRoute studentHomeLevelsPageRouteName}} item" href="{{pathFor studentHomeLevelsPageRouteName username=routeUserName}}">Level</a>
+    <a class="{{isActiveRoute studentHomeLogPageRouteName}} item" href="{{pathFor studentHomeLogPageRouteName username=routeUserName}}">Advisor Log</a>
+  </div>
+
+  <div class="ui fluid selection dropdown mobile only">
+    <i class="dropdown icon"></i>
+    <span>{{getRouteName}}</span>
+    <div class="menu">
+      <a class="item" href="{{pathFor studentHomePageRouteName username=routeUserName}}">
+        Home
+      </a>
+      <a class="item" href="{{pathFor studentHomeAboutMePageRouteName username=routeUserName}}">
+        About Me
+      </a>
+      <a class="item" href="{{pathFor studentHomeIcePageRouteName username=routeUserName}}">
+        ICE Points
+      </a>
+      <a class="item" href="{{pathFor studentHomeLevelsPageRouteName username=routeUserName}}">
+        Level
+      </a>
+    </div>
   </div>
 </template>
