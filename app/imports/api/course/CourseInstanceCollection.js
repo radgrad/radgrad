@@ -5,7 +5,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // import { moment } from 'meteor/momentjs:moment';
 import { Courses } from '/imports/api/course/CourseCollection';
-import { AcademicYearInstances } from '/imports/api/year/AcademicYearCollection';
+import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
@@ -80,10 +80,10 @@ class CourseInstanceCollection extends BaseCollection {
   define({ semester, course, verified = false, fromSTAR = false, grade = '', note = '', student, creditHrs }) {
     // Check arguments
     const semesterID = Semesters.getID(semester);
-    const semesterDoc = Semesters.getDoc(semesterID);
+    const semesterDoc = Semesters.findDoc(semesterID);
     const courseID = Courses.getID(course);
     const studentID = Users.getID(student);
-    const user = Users.getDoc(studentID);
+    const user = Users.findDoc(studentID);
     // ensure the AcademicYearInstance is defined.
     if (semester.term === Semesters.SPRING || semester.term === Semesters.SUMMER) {
       AcademicYearInstances.define({ year: semesterDoc.year - 1, student: user.username });

@@ -160,7 +160,7 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
     // console.log(courseSlug);
     const bestChoice = courseUtils.chooseBetween(courseSlug, studentID, courseTakenSlugs);
     if (bestChoice) {
-      // console.log('bestChoice', courseSlug, bestChoice);
+      console.log('bestChoice', courseSlug, bestChoice.number, Semesters.toString(semester._id, false));
       CourseInstances.define({
         semester: Semesters.getSlug(semester._id),
         course: Courses.getSlug(bestChoice._id),
@@ -172,7 +172,7 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
   } else
     if (courseSlug.endsWith('3xx')) {
       const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID, courseTakenSlugs);
-      // console.log('bestChoice', courseSlug, bestChoice);
+      console.log('bestChoice', courseSlug, bestChoice.number, Semesters.toString(semester._id, false));
       CourseInstances.define({
         semester: Semesters.getSlug(semester._id),
         course: Courses.getSlug(bestChoice._id),
@@ -183,7 +183,7 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
     } else
       if (courseSlug.endsWith('4xx')) {
         const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, courseTakenSlugs);
-        // console.log('bestChoice', courseSlug, bestChoice);
+        console.log('bestChoice', courseSlug, bestChoice.number, Semesters.toString(semester._id, false));
         CourseInstances.define({
           semester: Semesters.getSlug(semester._id),
           course: Courses.getSlug(bestChoice._id),
@@ -192,6 +192,7 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
           student: student.username,
         });
       } else {
+        console.log('only choice', courseSlug, Semesters.toString(semester._id, false));
         const note = createNote(courseSlug);
         CourseInstances.define({
           semester: Semesters.getSlug(semester._id),
@@ -299,9 +300,10 @@ export function generateBSDegreePlan(student, startSemester) {
     }
     if (semester.term !== Semesters.SUMMER) {
       // choose2Core(student, semester, degreeList);
-      const coursesTaken = getPassedCourseSlugs(student);
+      let coursesTaken = getPassedCourseSlugs(student);
       chooseCourse(student, semester, degreeList, coursesTaken);
       if (degreeList.length > 0) {
+        coursesTaken = getPassedCourseSlugs(student);
         chooseCourse(student, semester, degreeList, coursesTaken);
       }
     }
