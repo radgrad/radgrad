@@ -2,10 +2,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicYearInstances } from '../year/AcademicYearInstanceCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
-// import { FeedbackFunctions } from '../feedback/FeedbackFunctions';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
+import { Slugs } from '../slug/SlugCollection';
 import * as semUtils from '../semester/SemesterUtilities';
 import * as courseUtils from '../course/CourseUtilities';
 import * as opportunityUtils from '../opportunity/OpportunityUtilities';
@@ -90,20 +90,54 @@ function getPassedCourseSlugs(student) {
   return ret;
 }
 
-function removeTakenCourses(student, degreeList) {
-  const takenCourses = getPassedCourseInstances(student);
-  _.map(takenCourses, (instance) => {
-    const courseSlug = CourseInstances.getCourseSlug(instance._id);
-    const index = _.indexOf(degreeList, courseSlug);
+function _missingCourses(courseIDs, coursesNeeded) {
+  // console.log('_missingCourses', courseIDs, coursesNeeded);
+  const courses = coursesNeeded.splice(0);
+  _.map(courseIDs, (id) => {
+    const course = Courses.findDoc(id);
+    const slug = Slugs.getNameFromID(course.slugID);
+    // console.log('missing', slug);
+    const index = _.indexOf(courses, slug);
     if (index !== -1) {
-      degreeList.splice(index, 1);
+      courses.splice(index, 1);
     } else
-      if (courseSlug.startsWith('ics4') || instance.note.startsWith('ICS 6')) {
-        const fourIndex = _.indexOf(degreeList, 'ics4xx');
-        degreeList.splice(fourIndex, 1);
-        // console.log(`${student.username} took ${courseSlug}, but it isn't a required course`);
+      if (slug.startsWith('ics4') || slug.startsWith('other')) {
+        if (_.indexOf(courses, 'ics4xx') !== -1) {
+          courses.splice(_.indexOf(courses, 'ics4xx'), 1);
+        }
+      } else {
+        let i = 0;
+        _.map(courses, (c) => {
+          if (Array.isArray(c)) {
+            if (_.indexOf(c, slug) !== -1) {
+              courses.splice(i, 1);
+            }
+          }
+          i += 1;
+        });
       }
   });
+  return courses;
+}
+
+function removeTakenCourses(student, degreeList) {
+  const slugs = getPassedCourseSlugs(student);
+  const missing = _missingCourses(slugs, degreeList);
+  console.log(missing);
+  return missing;
+  // const takenCourses = getPassedCourseInstances(student);
+  // _.map(takenCourses, (instance) => {
+  //   const courseSlug = CourseInstances.getCourseSlug(instance._id);
+  //   const index = _.indexOf(degreeList, courseSlug);
+  //   if (index !== -1) {
+  //     degreeList.splice(index, 1);
+  //   } else
+  //     if (courseSlug.startsWith('ics4') || instance.note.startsWith('ICS 6')) {
+  //       const fourIndex = _.indexOf(degreeList, 'ics4xx');
+  //       degreeList.splice(fourIndex, 1);
+  //       // console.log(`${student.username} took ${courseSlug}, but it isn't a required course`);
+  //     }
+  // });
 }
 
 function hasPrerequisites(courseSlug, takenCourseSlugs) {
@@ -245,9 +279,9 @@ function choose2Core(student, semester, degreeList) {
 
 export function generateBSDegreePlan(student, startSemester) {
   // Get the correct list of courses needed for the plan.
-  const degreeList = BS_CS_LIST.slice(0);
+  let degreeList = BS_CS_LIST.slice(0);
   // remove the courses that the student has already taken.
-  removeTakenCourses(student, degreeList);
+  degreeList = removeTakenCourses(student, degreeList);
   // console.log('degreeList', degreeList);
   let semester = startSemester;
   let ice;
@@ -324,16 +358,16 @@ export function generateBSDegreePlan(student, startSemester) {
 
 export function generateBADegreePlan(student, startSemester) {
   // get the right course list.
-  const degreeList = BA_ICS_LIST.slice(0);
+  let degreeList = BA_ICS_LIST.slice(0);
   // remove the courses that the student has already taken.
-  removeTakenCourses(student, degreeList);
+  degreeList = removeTakenCourses(student, degreeList);
   let semester = startSemester;
   let ice;
   const chosenOpportunites = [];
   let oppDefn;
 
   // Define the First Academic Year
-  if (semester.term === Semesters.SPRING) {
+  if (semester.term === Semesters.SPRING || semester.term === Semesters.SUMMER) {
     AcademicYearInstances.define({ year: semester.year - 1, student: student.username });
   }
   let i = 0;
