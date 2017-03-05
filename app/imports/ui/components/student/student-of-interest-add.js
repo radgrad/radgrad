@@ -11,7 +11,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
-import * as RouteNames from '/imports/startup/client/router.js';
+
 
 Template.Student_Of_Interest_Add.onCreated(function studentOfInterestCardOnCreated() {
   this.subscribe(CareerGoals.getPublicationName());
@@ -36,9 +36,9 @@ function opportunitySemesters(opp) {
   const semesterNames = [];
   _.map(semesters, (sem) => {
     if (Semesters.findDoc(sem).sortBy >= currentSemester().sortBy) {
-    semesterNames.push(Semesters.toString(sem));
-  }
-});
+      semesterNames.push(Semesters.toString(sem));
+    }
+  });
   return semesterNames;
 }
 

@@ -208,6 +208,3 @@ Template.Student_Of_Interest_Card.events({
     }
   },
 });
-
-
-

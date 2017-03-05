@@ -1,9 +1,9 @@
 <template name="User_Career_Goals_Component">
   {{#if careerGoals}}
-    <div class="ui styled fluid accordion">
+    <div class="ui fluid accordion">
       <div class="title">
         <i class="dropdown icon"></i>
-        <b>Career Goals:</b> ({{count}})<br>
+        <b>Career Goals {{> Widget_Header_Number inputValue=count}}</b> <br>
       </div>
       <div class="content">
         {{#each careerGoal in careerGoals}}
