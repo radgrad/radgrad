@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { moment } from 'meteor/momentjs:moment';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
@@ -32,10 +33,9 @@ class AdvisorLogCollection extends BaseCollection {
    * @param student The student's username.
    * @param text The contents of the session.
    */
-  define({ advisor, student, text }) {
+  define({ advisor, student, text, createdOn = moment().toDate() }) {
     const advisorID = Users.getID(advisor);
     const studentID = Users.getID(student);
-    const createdOn = new Date();
     this._collection.insert({ advisorID, studentID, text, createdOn });
   }
 
@@ -95,6 +95,21 @@ class AdvisorLogCollection extends BaseCollection {
       }
     });
     return problems;
+  }
+
+
+  /**
+   * Returns an object representing the Log docID in a format acceptable to define().
+   * @param docID The docID of a Log.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const student = Users.findSlugByID(doc.studentID);
+    const advisor = Users.findSlugByID(doc.advisorID);
+    const text = doc.text;
+    const createdOn = doc.createdOn;
+    return { student, advisor, text, createdOn};
   }
 }
 
