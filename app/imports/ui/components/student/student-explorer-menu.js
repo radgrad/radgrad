@@ -48,7 +48,11 @@ Template.Student_Explorer_Menu.helpers({
     return RouteNames.studentExplorerDegreesPageRouteName;
   },
   equals(a, b) {
-    return a === b;
+    const listArg = b.split(',');
+    if (listArg.indexOf(a) < 0) {
+      return false;
+    }
+    return true;
   },
   firstCareerGoal() {
     let ret;

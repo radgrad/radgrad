@@ -1,8 +1,8 @@
 <template name="User_Interests_Component">
   {{#if interests}}
-    <div class="ui styled fluid accordion">
+    <div class="ui fluid accordion">
       <div class="title"><i class="dropdown icon"></i>
-        <b>Interests:</b> ({{ count }})
+        <b>Interests {{> Widget_Header_Number inputValue=count}}</b>
       </div>
       <div class="content">
         {{#each interest in interests}}

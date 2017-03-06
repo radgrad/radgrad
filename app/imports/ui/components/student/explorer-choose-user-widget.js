@@ -56,6 +56,7 @@ Template.Explorer_Choose_User_Widget.onCreated(function explorerChooseUserWidget
 
 Template.Explorer_Choose_User_Widget.onRendered(function explorerChooseUserWidgetOnRendered() {
   this.$('.menu .item').tab();
+  this.$('.ui.dropdown').dropdown();
 });
 
 Template.Explorer_Choose_User_Widget.onDestroyed(function explorerChooseUserWidgetOnDestroyed() {
