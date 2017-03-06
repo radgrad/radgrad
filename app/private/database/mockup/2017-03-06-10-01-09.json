@@ -1,5 +1,5 @@
 {
-  "timestamp": "2017-03-02T01:52:59.151Z",
+  "timestamp": "2017-03-06T20:01:09.289Z",
   "collections": [
     {
       "name": "AcademicYearInstanceCollection",
@@ -2786,6 +2786,24 @@
           "creditHrs": 3,
           "grade": "B",
           "student": "charley"
+        },
+        {
+          "semester": "Summer-2019",
+          "course": "ics215",
+          "note": "ICS 215",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Summer-2018",
+          "course": "ics419",
+          "note": "ICS 419",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
         }
       ]
     },
@@ -2914,6 +2932,12 @@
           "feedback": "recommendationForNextLevel",
           "user": "charley",
           "description": "Getting to the next Level:  Get some innovation and experience [ICE points](/student/charley/home/ice)",
+          "area": "ffn-recommendationForNextLevel"
+        },
+        {
+          "feedback": "recommendationForNextLevel",
+          "user": "abi",
+          "description": "Getting to the next Level:  Get some more innovation and experience [ICE points](/student/abi/home/ice) and do more reviews.",
           "area": "ffn-recommendationForNextLevel"
         }
       ]
@@ -5186,6 +5210,48 @@
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
           "student": "christopher-nguyen"
+        },
+        {
+          "semester": "Spring-2018",
+          "opportunity": "acm-icpc",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Summer-2017",
+          "opportunity": "acm-manoa",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2018",
+          "opportunity": "acmanoa-web-development",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2017",
+          "opportunity": "allnet",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2017",
+          "opportunity": "apps-for-high-latency-communication",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2017",
+          "opportunity": "data-analytics-for-solar-energy",
+          "verified": false,
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "booz-allen-ideas-festival",
+          "verified": false,
+          "student": "abi"
         }
       ]
     },
