@@ -96,3 +96,6 @@ import './student-of-interest-widget.js';
 
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';
+
+import './student-teaser-widget-video.html';
+import './student-teaser-widget-video.js';
