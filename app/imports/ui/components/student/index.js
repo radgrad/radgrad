@@ -73,6 +73,9 @@ import './student-levels-others.js';
 import './student-levels-widget.html';
 import './student-levels-widget.js';
 
+import './student-log-widget.html';
+import './student-log-widget.js';
+
 import './student-mentorspace-questions-accordion.html';
 import './student-mentorspace-questions-accordion.js';
 
@@ -81,6 +84,9 @@ import './student-mentorspace-question-form.js';
 
 import './student-mentorspace-mentor-directory.html';
 import './student-mentorspace-mentor-directory.js';
+
+import './student-of-interest-add.html';
+import './student-of-interest-add.js';
 
 import './student-of-interest-card.html';
 import './student-of-interest-card.js';

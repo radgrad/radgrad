@@ -1,76 +1,154 @@
 <template name="Explorer_Choose_User_Widget">
-  <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>CHOOSE USER</h4></div>
-    <div class="ui top attached tabular stackable menu">
-      <a class="item" data-tab="advisors">Advisors</a>
-      <a class="item" data-tab="alumni">Alumni</a>
-      <a class="item" data-tab="faculty">Faculty</a>
-      <a class="item" data-tab="mentors">Mentors</a>
-      <a class="active item" data-tab="students">Students</a>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="advisors">
-      <!--<div class="ui small horizontal list">-->
-      <div class="ui stackable grid">
-        {{#each user in users advisorRole}}
-          <!--<div class="item">-->
-          <div class="four wide column" style="padding: 2px;">
-            <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
-               href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
-                class="ui avatar image" src="{{picture user}}">{{label user}}</a>
-          </div>
-        {{/each}}
+  <div class="mobile only">
+    <div class="ui vertical menu">
+      <div class="ui dropdown item">
+        Select Group
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item" data-tab="advisors">Advisors</div>
+          <div class="item" data-tab="alumni">Alumni</div>
+          <div class="item" data-tab="faculty">Faculty</div>
+          <div class="item" data-tab="mentors">Mentors</div>
+          <div class="active item" data-tab="students">Students</div>
+        </div>
       </div>
     </div>
-    <div class="ui bottom attached tab segment" data-tab="alumni">
-      <!--<div class="ui small horizontal list">-->
-      <div class="ui stackable grid">
-        {{#each user in users alumniRole}}
-          <!--<div class="item">-->
-          <div class="four wide column" style="padding: 2px;">
-            <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
-               href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
-                class="ui avatar image" src="{{picture user}}">{{label user}}</a>
-          </div>
-        {{/each}}
+
+    <div class="ui tab" data-tab="advisors">
+      <div class="ui fluid search selection dropdown">
+        <span class="text">Select User</span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each user in users advisorRole}}
+            <a id="{{user.username}}" class="jsRetrieve item" href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}">
+              <img class="ui avatar image" src="{{picture user}}">{{user.firstName}} {{user.lastName}}
+            </a>
+          {{/each}}
+        </div>
       </div>
     </div>
-    <div class="ui bottom attached tab segment" data-tab="faculty">
-      <!--<div class="ui small horizontal list">-->
-      <div class="ui stackable grid">
-        {{#each user in users facultyRole}}
-          <!--<div class="item">-->
-          <div class="four wide column" style="padding: 2px;">
-            <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
-               href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
-                class="ui avatar image" src="{{picture user}}">{{label user}}</a>
-          </div>
-        {{/each}}
+
+    <div class="ui tab" data-tab="alumni">
+      <div class="ui fluid search selection dropdown">
+        <span class="text">Select User</span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each user in users alumniRole}}
+            <a id="{{user.username}}" class="jsRetrieve item" href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}">
+              <img class="ui avatar image" src="{{picture user}}">{{user.firstName}} {{user.lastName}}
+            </a>
+          {{/each}}
+        </div>
       </div>
     </div>
-    <div class="ui bottom attached tab segment" data-tab="mentors">
-      <!--<div class="ui small horizontal list">-->
-      <div class="ui stackable grid">
-        {{#each user in users mentorRole}}
-          <!--<div class="item">-->
-          <div class="four wide column" style="padding: 2px;">
-            <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
-               href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
-                class="ui avatar image" src="{{picture user}}">{{label user}}</a>
-          </div>
-        {{/each}}
+
+    <div class="ui tab" data-tab="faculty">
+      <div class="ui fluid search selection dropdown">
+        <span class="text">Select User</span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each user in users facultyRole}}
+            <a id="{{user.username}}" class="jsRetrieve item" href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}">
+              <img class="ui avatar image" src="{{picture user}}">{{user.firstName}} {{user.lastName}}
+            </a>
+          {{/each}}
+        </div>
       </div>
     </div>
-    <div class="ui bottom attached active tab segment" data-tab="students">
-      <!--<div class="ui small horizontal list">-->
-      <div class="ui stackable grid">
-        {{#each user in users studentRole}}
-          <!--<div class="item">-->
-          <div class="four wide column" style="padding: 2px;">
-            <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
-               href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
-                class="ui avatar image" src="{{picture user}}">{{label user}}</a>
-          </div>
-        {{/each}}
+
+    <div class="ui tab" data-tab="mentors">
+      <div class="ui fluid search selection dropdown">
+        <span class="text">Select User</span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each user in users mentorRole}}
+            <a id="{{user.username}}" class="jsRetrieve item" href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}">
+              <img class="ui avatar image" src="{{picture user}}">{{user.firstName}} {{user.lastName}}
+            </a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <div class="ui tab" data-tab="students">
+      <div class="ui fluid search selection dropdown">
+        <span class="text">Select User</span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each user in users studentRole}}
+            <a id="{{user.username}}" class="jsRetrieve item" href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}">
+              <img class="ui avatar image" src="{{picture user}}">{{user.firstName}} {{user.lastName}}
+            </a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile hidden">
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>CHOOSE USER</h4></div>
+      <div class="ui top attached tabular stackable menu">
+        <a class="item" data-tab="advisors">Advisors</a>
+        <a class="item" data-tab="alumni">Alumni</a>
+        <a class="item" data-tab="faculty">Faculty</a>
+        <a class="item" data-tab="mentors">Mentors</a>
+        <a class="active item" data-tab="students">Students</a>
+      </div>
+      <div class="ui bottom attached tab segment" data-tab="advisors">
+        <div class="ui stackable grid">
+          {{#each user in users advisorRole}}
+            <div class="four wide column" style="padding: 2px;">
+              <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
+                href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
+                  class="ui avatar image" src="{{picture user}}">{{label user}}</a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="ui bottom attached tab segment" data-tab="alumni">
+        <div class="ui stackable grid">
+          {{#each user in users alumniRole}}
+            <div class="four wide column" style="padding: 2px;">
+              <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
+                href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
+                  class="ui avatar image" src="{{picture user}}">{{label user}}</a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="ui bottom attached tab segment" data-tab="faculty">
+        <div class="ui stackable grid">
+          {{#each user in users facultyRole}}
+            <div class="four wide column" style="padding: 2px;">
+              <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
+                href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
+                  class="ui avatar image" src="{{picture user}}">{{label user}}</a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="ui bottom attached tab segment" data-tab="mentors">
+        <div class="ui stackable grid">
+          {{#each user in users mentorRole}}
+            <div class="four wide column" style="padding: 2px;">
+              <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
+                href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
+                  class="ui avatar image" src="{{picture user}}">{{label user}}</a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="ui bottom attached active tab segment" data-tab="students">
+        <div class="ui stackable grid">
+          {{#each user in users studentRole}}
+            <div class="four wide column" style="padding: 2px;">
+              <a id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
+                href="{{pathFor usersRouteName username=routeUserName explorerUserName=user.username}}"><img
+                  class="ui avatar image" src="{{picture user}}">{{label user}}</a>
+            </div>
+          {{/each}}
+        </div>
       </div>
     </div>
   </div>

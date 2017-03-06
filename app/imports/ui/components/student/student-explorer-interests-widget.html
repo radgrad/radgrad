@@ -7,9 +7,9 @@
             {{toUpper name}}
           </h4>
           {{#if userStatus item}}
-            <button value="{{id}}" class="ui green basic right floated mini button deleteItem">REMOVE FROM INTERESTS</button>
+            <button value="{{id}}" class="ui green basic right floated mini button deleteItem" style="margin-bottom: 1rem;">REMOVE FROM INTERESTS</button>
           {{else}}
-            <button value="{{id}}" class="ui green basic right floated mini button addItem">ADD TO INTERESTS</button>
+            <button value="{{id}}" class="ui green basic right floated mini button addItem" style="margin-bottom: 1rem;">ADD TO INTERESTS</button>
           {{/if}}
             
         </div>
@@ -43,54 +43,54 @@
 
     <div class="ui stackable two column grid">
       <div class="ten wide column">
-        <div class="ui segments">
-          <div class="ui segment" style="padding-bottom: 0.2em;">
-            <div class="ui header">
+        <div class="ui segment">
+            <div class="ui dividing header">
                 <h4>RELATED COURSES</h4>
             </div>
-          </div>
-          {{#each descriptionPair in descriptionPairs}}
-            {{#if isLabel descriptionPair.label 'Related Courses'}}
-              <div class="ui horizontal segments" style="background-color: white;">
-                {{#each table in descriptionPair.value}}
-                  <div class="ui center aligned segment" style="min-width: 33%;">
-                    {{{getTableTitle @index}}}
-                      {{#each prerequisite in table}}
-                        <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}} </a> <br>
+            <div class="ui three column stackable internally celled grid">
+              <div class="row">
+                {{#each descriptionPair in descriptionPairs}}
+                  {{#if isLabel descriptionPair.label 'Related Courses'}}
+                      {{#each table in descriptionPair.value}}
+                        <div class="column" style="text-align: center;">
+                            {{{getTableTitle @index}}}
+                              {{#each prerequisite in table}}
+                                - <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a> <br>
+                              {{/each}}
+                        </div>
                       {{/each}}
-                  </div>
+                  {{/if}}
                 {{/each}}
               </div>
-            {{/if}}
-          {{/each}}
+            </div>
         </div>
 
-        <div class="ui segments">
-          <div class="ui segment" style="padding-bottom: 0.2em;">
-            <div class="ui header">
+        <div class="ui segment">
+            <div class="ui dividing header">
                 <h4>RELATED OPPORTUNITIES</h4>
             </div>
-          </div>
-          {{#each descriptionPair in descriptionPairs}}
-            {{#if isLabel descriptionPair.label 'Related Opportunities'}}
-              <div class="ui horizontal segments" style="background-color: white;">
-                {{#each table in descriptionPair.value}}
-                  <div class="ui center aligned segment" style="min-width: 33%;">
-                    {{{getTableTitle @index}}}
-                      {{#each relatedOpportunity in table}}
-                        <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug relatedOpportunity.opportunity}} </a> <br>
+            <div class="ui three column stackable internally celled grid">
+              <div class="row">
+                {{#each descriptionPair in descriptionPairs}}
+                  {{#if isLabel descriptionPair.label 'Related Opportunities'}}
+                      {{#each table in descriptionPair.value}}
+                        <div class="column" style="text-align: center;">
+                            {{{getTableTitle @index}}}
+                              {{#each relatedOpportunity in table}}
+                                - <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug relatedOpportunity.opportunity}}</a> <br>
+                              {{/each}}
+                        </div>
                       {{/each}}
-                  </div>
+                  {{/if}}
                 {{/each}}
               </div>
-            {{/if}}
-          {{/each}}
+            </div>
         </div>
       </div>
 
       <div class="six wide column">
         {{#each socialPair in socialPairs}}
-          <div class="ui padded segment">
+          <div class="ui padded center aligned segment">
             <div class="ui dividing header">
               <h4>{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
             </div>

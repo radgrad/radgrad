@@ -1,44 +1,66 @@
 <template name="Student_Levels_Widget">
+  {{#if Template.subscriptionsReady}}
     <div class="ui padded segment">
       <div class="ui dividing header"><h4>CURRENT LEVEL</h4></div>
-      <div class="ui center aligned container">
-        <img class="ui centered small image" src="/images/level-icons/radgrad-level-{{studentLevelNumber}}-icon.png">
-        <h3 class="ui header">{{studentLevelName}}
-        </h3>
-        <div class="ui mini circular images">
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-1-icon.png">
-
-          {{#if achievedLevel studentLevelNumber "2"}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-2-icon.png">
-          {{else}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-2-inactive-icon.png">
-          {{/if}}
-
-          {{#if achievedLevel studentLevelNumber "3"}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-3-icon.png">
-          {{else}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-3-inactive-icon.png">
-          {{/if}}
-
-          {{#if achievedLevel studentLevelNumber "4"}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-4-icon.png">
-          {{else}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-4-inactive-icon.png">
-          {{/if}}
-
-          {{#if achievedLevel studentLevelNumber "5"}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-5-icon.png">
-          {{else}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-5-inactive-icon.png">
-          {{/if}}
-
-          {{#if achievedLevel studentLevelNumber "6"}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-6-icon.png">
-          {{else}}
-          <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-6-inactive-icon.png">
-          {{/if}}
-
+      <div class="ui stackable grid">
+        <div class="four wide column">
+          <div class="ui container">
+            <div class="ui mini circular images">
+              <div class="ui grid container">
+                <div class="column">
+                  <div class="row">
+                    {{#if achievedLevel studentLevelNumber "6"}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-6-icon.png">
+                    {{else}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-6-inactive-icon.png">
+                    {{/if}}              </div>
+                  <div class="row">
+                    {{#if achievedLevel studentLevelNumber "5"}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-5-icon.png">
+                    {{else}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-5-inactive-icon.png">
+                    {{/if}}
+                  </div>
+                  <div class="row">
+                    {{#if achievedLevel studentLevelNumber "4"}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-4-icon.png">
+                    {{else}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-4-inactive-icon.png">
+                    {{/if}}
+                  </div>
+                  <div class="row">
+                    {{#if achievedLevel studentLevelNumber "3"}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-3-icon.png">
+                    {{else}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-3-inactive-icon.png">
+                    {{/if}}
+                  </div>
+                  <div class="row">
+                    {{#if achievedLevel studentLevelNumber "2"}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-2-icon.png">
+                    {{else}}
+                      <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-2-inactive-icon.png">
+                    {{/if}}
+                  </div>
+                  <div class="row">
+                    <img style="height:40px; width: auto;" class="ui image" src="/images/level-icons/radgrad-level-1-icon.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="twelve wide column">
+          <div class="ui container">
+            <img class="ui centered small image" style="width: 230px" src="/images/level-icons/radgrad-level-{{studentLevelNumber}}-icon.png">
+            <h3 class="ui centered header">{{studentLevelName}}
+            </h3>
+          </div>
         </div>
       </div>
+      {{> Student_Level_Hints}}
     </div>
+  {{else}}
+    {{> Loading}}
+  {{/if}}
 </template>
