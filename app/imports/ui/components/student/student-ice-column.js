@@ -173,6 +173,28 @@ Template.Student_Ice_Column.helpers({
     }
     return num;
   },
+  getTypeColors() {
+    const typeColor = {
+      color: '',
+      projColor: '',
+    };
+    switch (this.type) {
+      case 'Innovation':
+        typeColor.color = 'ice-innovation-color';
+        typeColor.projColor = 'ice-innovation-proj-color';
+        return typeColor;
+      case 'Competency':
+        typeColor.color = 'ice-competency-color';
+        typeColor.projColor = 'ice-competency-proj-color';
+        return typeColor;
+      case 'Experience':
+        typeColor.color = 'ice-experience-color';
+        typeColor.projColor = 'ice-experience-proj-color';
+        return typeColor;
+      default:
+        return typeColor;
+    }
+  },
   hasEvents(earned, semester) {
     let ret = false;
     if ((getEventsHelper(this.type, 'course', earned, semester).length > 0) ||
@@ -324,7 +346,7 @@ Template.Student_Ice_Column.onCreated(function studentIceColumnOnCreated() {
 Template.Student_Ice_Column.onRendered(function enableAccordion() {
   this.$('.accordion').accordion({
     selector: {
-      trigger: '.title .icon',
+      trigger: '.title',
     },
     exclusive: false,
   });
