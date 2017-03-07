@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
-import { Feed } from './FeedCollection';
+import { Feeds } from './FeedCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
 
@@ -27,14 +27,14 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      let docID = Feed.define({ user, feedType, timestamp });
-      expect(Feed.isDefined(docID)).to.be.true;
-      const dumpObject = Feed.dumpOne(docID);
-      Feed.removeIt(docID);
-      expect(Feed.isDefined(docID)).to.be.false;
-      docID = Feed.restoreOne(dumpObject);
-      expect(Feed.isDefined(docID)).to.be.true;
-      Feed.removeIt(docID);
+      let docID = Feeds.define({ user, feedType, timestamp });
+      expect(Feeds.isDefined(docID)).to.be.true;
+      const dumpObject = Feeds.dumpOne(docID);
+      Feeds.removeIt(docID);
+      expect(Feeds.isDefined(docID)).to.be.false;
+      docID = Feeds.restoreOne(dumpObject);
+      expect(Feeds.isDefined(docID)).to.be.true;
+      Feeds.removeIt(docID);
     });
   });
 }

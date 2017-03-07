@@ -74,16 +74,18 @@ Template.Star_Upload_Widget.events({
 Template.Star_Upload_Widget.onCreated(function starUploadWidgetOnCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
   this.currentUpload = new ReactiveVar(false);
-  this.subscribe(CourseInstances.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
   this.subscribe(FeedbackInstances.getPublicationName());
   this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(StarDataLogs.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.autorun(() => {
+    this.subscribe(CourseInstances.getPublicationName(5), this.data.studentID.get());
+    this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
+  });
 });
 
 Template.Star_Upload_Widget.onRendered(function starUploadWidgetOnRendered() {

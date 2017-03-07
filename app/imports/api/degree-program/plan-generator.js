@@ -82,12 +82,13 @@ function getPassedCourseSlugs(student) {
 
 function removeTakenCourses(student, degreeList) {
   const takenCourses = getPassedCourseInstances(student);
+  console.log(takenCourses);
   _.map(takenCourses, (instance) => {
     const courseSlug = CourseInstances.getCourseSlug(instance._id);
     const index = _.indexOf(degreeList, courseSlug);
     if (index !== -1) {
       degreeList.splice(index, 1);
-    } else if (courseSlug.startsWith('ics4') || courseSlug.startsWith('other')) {
+    } else if (courseSlug.startsWith('ics4') || instance.note.startsWith('ICS 6')) {
       const fourIndex = _.indexOf(degreeList, 'ics4xx');
       degreeList.splice(fourIndex, 1);
       // console.log(`${student.username} took ${courseSlug}, but it isn't a required course`);
@@ -311,6 +312,7 @@ export function generateBADegreePlan(student, startSemester) {
   const degreeList = BA_ICS_LIST.slice(0);
   // remove the courses that the student has already taken.
   removeTakenCourses(student, degreeList);
+  console.log(degreeList);
   let semester = startSemester;
   let ice;
   const chosenOpportunites = [];

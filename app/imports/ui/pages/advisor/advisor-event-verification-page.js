@@ -1,6 +1,4 @@
 import { Template } from 'meteor/templating';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Courses } from '../../../api/course/CourseCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -16,15 +14,11 @@ Template.Advisor_Event_Verification_Page.events({
 });
 
 Template.Advisor_Event_Verification_Page.onCreated(function advisorEventVerificationPageOnCreated() {
-  this.autorun(() => {
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-    this.subscribe(VerificationRequests.getPublicationName());
-  });
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Advisor_Event_Verification_Page.onRendered(function advisorEventVerificationPageOnRendered() {

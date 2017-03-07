@@ -16,15 +16,13 @@ Template.Advisor_Review_Moderation_Page.events({
 });
 
 Template.Advisor_Review_Moderation_Page.onCreated(function advisorReviewModerationPageOnCreated() {
-  this.autorun(() => {
-    this.subscribe(Reviews.getPublicationName());
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-  });
+  this.subscribe(Reviews.getPublicationName());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
 });
 
 Template.Advisor_Review_Moderation_Page.onRendered(function advisorReviewModerationPageOnRendered() {
