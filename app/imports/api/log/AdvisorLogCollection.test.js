@@ -26,11 +26,15 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = AdvisorLogs.define({ advisor, student, text });
-      expect(AdvisorLogs.isDefined(instanceID)).to.be.true;
-      AdvisorLogs.removeIt(instanceID);
-      expect(AdvisorLogs.isDefined(instanceID)).to.be.false;
+    it('#define, #isDefined, #removeIt #dumpOne, #restoreOne', function test() {
+      let docID = AdvisorLogs.define({ advisor, student, text });
+      expect(AdvisorLogs.isDefined(docID)).to.be.true;
+      const dumpObject = AdvisorLogs.dumpOne(docID);
+      AdvisorLogs.removeIt(docID);
+      expect(AdvisorLogs.isDefined(docID)).to.be.false;
+      docID = AdvisorLogs.restoreOne(dumpObject);
+      expect(AdvisorLogs.isDefined(docID)).to.be.true;
+      AdvisorLogs.removeIt(docID);
     });
   });
 }
