@@ -5,7 +5,7 @@ import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollec
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
-import { Feed } from '../../api/feed/FeedCollection.js';
+import { Feeds } from '../../api/feed/FeedCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
 import { HelpMessages } from '../../api/help/HelpMessageCollection';
@@ -102,7 +102,7 @@ function newStartupProcess() { // eslint-disable-line
       const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, CareerGoals, DesiredDegrees,
         ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
         CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
-        VerificationRequests, Feed, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews];
+        VerificationRequests, Feeds, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews];
 
       const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
       const collectionNames = _.map(collectionList, collection => collection._collectionName);

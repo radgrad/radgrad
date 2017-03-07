@@ -1,11 +1,11 @@
 import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection.js';
-import { Feed } from '../../../api/feed/FeedCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection.js';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { $ } from 'meteor/jquery';
 
 Template.Student_Feed_Modal.onCreated(function studentFeedModalOnCreated() {
-  this.subscribe(Feed.getPublicationName());
+  this.subscribe(Feeds.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
 
