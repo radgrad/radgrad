@@ -1,3 +1,4 @@
+import './student-guided-tour-advisor-log.html';
 import './student-guided-tour-set-up.html';
 import './student-guided-tour-interest.html';
 import './student-guided-tour-courses.html';
