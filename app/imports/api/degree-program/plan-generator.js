@@ -90,13 +90,21 @@ function getPassedCourseSlugs(student) {
   return ret;
 }
 
+function getPassedCourseIDs(student) {
+  const ret = [];
+  const passedInstances = getPassedCourseInstances(student);
+  _.map(passedInstances, (instance) => {
+    ret.push(instance.courseID);
+  });
+  return ret;
+}
+
 function _missingCourses(courseIDs, coursesNeeded) {
   // console.log('_missingCourses', courseIDs, coursesNeeded);
   const courses = coursesNeeded.splice(0);
   _.map(courseIDs, (id) => {
     const course = Courses.findDoc(id);
     const slug = Slugs.getNameFromID(course.slugID);
-    // console.log('missing', slug);
     const index = _.indexOf(courses, slug);
     if (index !== -1) {
       courses.splice(index, 1);
@@ -121,9 +129,8 @@ function _missingCourses(courseIDs, coursesNeeded) {
 }
 
 function removeTakenCourses(student, degreeList) {
-  const slugs = getPassedCourseSlugs(student);
+  const slugs = getPassedCourseIDs(student);
   const missing = _missingCourses(slugs, degreeList);
-  console.log(missing);
   return missing;
   // const takenCourses = getPassedCourseInstances(student);
   // _.map(takenCourses, (instance) => {
@@ -283,7 +290,7 @@ export function generateBSDegreePlan(student, startSemester) {
   let degreeList = BS_CS_LIST.slice(0);
   // remove the courses that the student has already taken.
   degreeList = removeTakenCourses(student, degreeList);
-  // console.log('degreeList', degreeList);
+  console.log('degreeList', degreeList);
   let semester = startSemester;
   let ice;
   const chosenOpportunites = [];

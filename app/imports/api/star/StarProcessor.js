@@ -112,6 +112,7 @@ export function processStarCsvData(student, csvData) {
     const numberIndex = _.findIndex(headers, (str) => str === 'Course Number');
     const creditsIndex = _.findIndex(headers, (str) => str === 'Credits');
     const gradeIndex = _.findIndex(headers, (str) => str === 'Grade');
+    const transferGradeIndex = _.findIndex(headers, (str) => str === 'Transfer Grade');
     if (_.every([semesterIndex, nameIndex, numberIndex, creditsIndex, gradeIndex], (num) => num === -1)) {
       throw new Meteor.Error(`Required CSV header field was not found in ${headers}`);
     }
@@ -121,12 +122,17 @@ export function processStarCsvData(student, csvData) {
 
     // Create array of objects containing raw data to facilitate error message during processing.
     const dataObjects = _.map(filteredData, (data) => {
+      const name = data[nameIndex];
+      let grade = data[gradeIndex];
+      if (name === 'ICS' && grade === 'CR' && data[transferGradeIndex]) {
+        grade = data[transferGradeIndex];
+      }
       const obj = {
         semester: data[semesterIndex],
-        name: data[nameIndex],
+        name,
         number: data[numberIndex],
         credits: data[creditsIndex],
-        grade: data[gradeIndex],
+        grade,
         student,
       };
       return obj;

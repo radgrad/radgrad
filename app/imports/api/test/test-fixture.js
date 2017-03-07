@@ -72,8 +72,8 @@ export function defineTestFixture() {
 
   const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
   const collectionNames = _.map(collectionList, collection => collection._collectionName);
-  const extraRestoreNames = _.difference(restoreNames, collectionNames);
-  const extraCollectionNames = _.difference(collectionNames, restoreNames);
+  // const extraRestoreNames = _.difference(restoreNames, collectionNames);
+  // const extraCollectionNames = _.difference(collectionNames, restoreNames);
 
   // if (extraRestoreNames.length) {
   //   console.log(`Error: Expected collections are missing from collection list: ${extraRestoreNames}`);
