@@ -13,6 +13,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import * as RouteNames from '/imports/startup/client/router.js';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_About_Me_Widget.helpers({
   careerGoals() {
@@ -148,10 +149,10 @@ Template.Student_About_Me_Widget.events({
 Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreated() {
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());

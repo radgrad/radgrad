@@ -13,23 +13,22 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import * as RouteNames from '/imports/startup/client/router.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_MentorSpace_Questions_Accordion.onCreated(function studentMentorSpacePageAccordionOnCreated() {
-  this.autorun(() => {
-    this.subscribe(Courses.getPublicationName());
-    this.subscribe(CourseInstances.getPublicationName());
-    this.subscribe(Feedbacks.getPublicationName());
-    this.subscribe(FeedbackInstances.getPublicationName());
-    this.subscribe(Interests.getPublicationName());
-    this.subscribe(MentorQuestions.getPublicationName());
-    this.subscribe(MentorAnswers.getPublicationName());
-    this.subscribe(Opportunities.getPublicationName());
-    this.subscribe(OpportunityInstances.getPublicationName());
-    this.subscribe(Semesters.getPublicationName());
-    this.subscribe(Users.getPublicationName());
-    this.subscribe(AcademicYearInstances.getPublicationName());
-    this.subscribe(VerificationRequests.getPublicationName());
-  });
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
+  this.subscribe(Feedbacks.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(MentorQuestions.getPublicationName());
+  this.subscribe(MentorAnswers.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
+  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Student_MentorSpace_Questions_Accordion.onRendered(function listMentorSpaceQuestionsOnRendered() {

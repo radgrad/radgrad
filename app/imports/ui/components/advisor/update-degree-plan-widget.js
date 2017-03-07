@@ -189,18 +189,20 @@ Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCr
   FormUtils.setupFormWidget(this, updateSchema);
   this.subscribe(FeedbackInstances.getPublicationName());
   this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(AcademicYearInstances.getPublicationName());
   this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(OpportunityTypes.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.autorun(() => {
+    this.subscribe(CourseInstances.getPublicationName(5), this.data.studentID.get());
+    this.subscribe(AcademicYearInstances.getPublicationName(1), this.data.studentID.get());
+    this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
+  });
 });
 
 Template.Update_Degree_Plan_Widget.onRendered(function updateDegreePlanWidgetOnRendered() {

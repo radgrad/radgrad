@@ -43,7 +43,7 @@ class CourseInstanceCollection extends BaseCollection {
     this.publicationNames.push(`${this._collectionName}.PerStudentAndSemester`);
     this.publicationNames.push(`${this._collectionName}.PublicStudent`);
     this.publicationNames.push(`${this._collectionName}.PublicSlugStudent`);
-
+    this.publicationNames.push(`${this._collectionName}.studentID`);
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
     }
@@ -225,6 +225,12 @@ class CourseInstanceCollection extends BaseCollection {
         }).validate({ courseID });
 
         return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
+      });
+      Meteor.publish(this.publicationNames[5], function filterStudentID(studentID) { // eslint-disable-line
+        new SimpleSchema({
+          studentID: { type: String },
+        }).validate({ studentID });
+        return instance._collection.find({ studentID });
       });
     }
   }
