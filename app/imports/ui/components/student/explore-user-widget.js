@@ -31,6 +31,14 @@ Template.Explore_User_Widget.helpers({
     }
     return '';
   },
+  isMentor() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      const user = Users.findDoc(id);
+      return user.roles[0] === ROLE.MENTOR;
+    }
+    return false;
+  },
   isStudent() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
