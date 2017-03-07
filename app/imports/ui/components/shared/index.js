@@ -33,6 +33,9 @@ import './user-course-component.js';
 import './user-interests-component.html';
 import './user-interests-component.js';
 
+import './user-opportunity-component.html';
+import './user-opportunity-component.js';
+
 import './verification-event.html';
 import './verification-event.js';
 
