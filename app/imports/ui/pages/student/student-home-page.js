@@ -12,19 +12,20 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_Home_Page.onCreated(function appBodyOnCreated() {
   this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(Feedbacks.getPublicationName());
   this.subscribe(FeedbackInstances.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Teasers.getPublicationName());
   this.subscribe(Users.getPublicationName());
-  this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
   this.subscribe(VerificationRequests.getPublicationName());
 });
 

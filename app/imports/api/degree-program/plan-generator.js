@@ -370,6 +370,7 @@ export function generateBADegreePlan(student, startSemester) {
   let degreeList = BA_ICS_LIST.slice(0);
   // remove the courses that the student has already taken.
   degreeList = removeTakenCourses(student, degreeList);
+  console.log(degreeList);
   let semester = startSemester;
   let ice;
   const chosenOpportunites = [];
