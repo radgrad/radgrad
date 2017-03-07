@@ -3,7 +3,7 @@
       <!-- Earned -->
       <div class="active title">
       <i class="dropdown icon"></i>
-      Earned ({{points earnedICE}} points)
+      Earned <div class="ui right floated {{#with getTypeColors}}{{color}}{{/with}}">{{points earnedICE}} pts</div>
     </div>
 
     <div class="active content">
@@ -34,7 +34,7 @@
       <!-- Planned -->
       <div class="title">
       <i class="dropdown icon"></i>
-      Planned ({{points plannedICE}} points)
+      Planned <div class="ui right floated {{#with getTypeColors}}{{projColor}}{{/with}}">{{points plannedICE}} pts</div>
     </div>
     <div class="content">
       {{#if matchingPoints (points plannedICE) (points earnedICE)}}
