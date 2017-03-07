@@ -2,15 +2,31 @@ import { Template } from 'meteor/templating';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
+import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
 
 Template.Explore_User_Widget.helpers({
+  desiredDegree() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      return DesiredDegrees.findDoc(Users.findDoc(id).desiredDegreeID).shortName;
+    }
+    return '';
+  },
   email() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
       return Users.getEmail(id);
+    }
+    return '';
+  },
+  firstName() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      const user = Users.findDoc(id);
+      return user.firstName;
     }
     return '';
   },
@@ -59,6 +75,13 @@ Template.Explore_User_Widget.helpers({
   },
   userID() {
     return Template.instance().userID;
+  },
+  website() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      return Users.findDoc(id).website;
+    }
+    return '';
   },
 });
 
