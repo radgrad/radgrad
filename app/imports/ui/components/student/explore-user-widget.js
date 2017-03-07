@@ -6,6 +6,7 @@ import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Explore_User_Widget.helpers({
   desiredDegree() {
@@ -94,7 +95,7 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
     this.userID = this.data.userID;
   }
   this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());

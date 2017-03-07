@@ -216,7 +216,7 @@ Template.Semester_List.onCreated(function semesterListOnCreate() {
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName(2), getUserIdFromRoute(), this.data.semester._id);
   this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(OpportunityTypes.getPublicationName());
   this.subscribe(FeedbackInstances.getPublicationName());
   this.subscribe(Feedbacks.getPublicationName());
