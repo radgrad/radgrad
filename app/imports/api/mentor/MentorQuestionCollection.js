@@ -41,6 +41,17 @@ class MentorQuestionCollection extends BaseInstanceCollection {
   }
 
   /**
+   * Updates the MentorQuestion's approved variable.
+   * @param questionID The MentorQuestion ID.
+   * @param approved The new approved value.
+   */
+  updateApproved(questionID, approved) {
+    this.assertDefined(questionID);
+    this._collection.update({ _id: questionID },
+        { $set: { approved } });
+  }
+
+  /**
    * Returns an empty array (no integrity checking done on this collection.)
    * @returns {Array} An empty array.
    */

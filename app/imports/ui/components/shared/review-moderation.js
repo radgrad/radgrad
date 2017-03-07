@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -15,6 +16,9 @@ Template.Review_Moderation.helpers({
   },
   pendingOpportunityReviews() {
     return Reviews.find({ moderated: false, reviewType: 'opportunity' });
+  },
+  pendingQuestions() {
+    return MentorQuestions.find({ approved: false });
   },
   rating(review) {
     return review.rating;
@@ -43,18 +47,32 @@ Template.Review_Moderation.events({
   'click button': function clickButton(event) {
     event.preventDefault();
     const split = event.target.id.split('-');
-    const reviewID = split[0];
-    const review = Reviews.findDoc(reviewID);
-    if (split[1] === 'accept') {
-      review.moderated = true;
-      review.visible = true;
+    const itemID = split[0];
+    let item;
+    if (split[1] === 'review') {
+      item = Reviews.findDoc(itemID);
+      if (split[2] === 'accept') {
+        item.moderated = true;
+        item.visible = true;
+      } else {
+        item.moderated = true;
+        item.visible = false;
+      }
+      const moderatorComments = event.target.parentElement.querySelectorAll('textarea')[0].value;
+      const moderated = review.moderated;
+      const visible = review.visible;
+      Reviews.updateModerated(itemID, moderated, visible, moderatorComments);
     } else {
-      review.moderated = true;
-      review.visible = false;
+      item = MentorQuestions.findDoc(itemID);
+      if (split[2] === 'accept') {
+        item.approved = true;
+      }
+      const approved = item.approved;
+      MentorQuestions.updateApproved(itemID, approved );
     }
-    const moderatorComments = event.target.parentElement.querySelectorAll('textarea')[0].value;
-    const moderated = review.moderated;
-    const visible = review.visible;
-    Reviews.updateModerated(reviewID, moderated, visible, moderatorComments);
   },
+});
+
+Template.Review_Moderation.onCreated(function reviewModerationOnCreated() {
+  this.subscribe(MentorQuestions.getPublicationName());
 });

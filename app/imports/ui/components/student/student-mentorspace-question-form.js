@@ -57,7 +57,7 @@ Template.Student_MentorSpace_Question_Form.events({
     event.preventDefault();
     const question = event.target.msquestion.value;
     const slugTemp = (new Date().getTime()).toString(12); //  TODO: slug shouldn't have to be defined by the user?
-    const mentorQuestion = { title: question, slug: slugTemp, approved: true };
+    const mentorQuestion = { title: question, slug: slugTemp, approved: false };
     MentorQuestions.define(mentorQuestion);
     instance.messageFlags.set(displaySuccessMessage, true);
     instance.messageFlags.set(displayErrorMessages, false);
