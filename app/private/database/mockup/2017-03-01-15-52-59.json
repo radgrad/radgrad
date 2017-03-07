@@ -460,7 +460,50 @@
     },
     {
       "name": "AdvisorLogCollection",
-      "contents": []
+      "contents": [
+        {
+          "student": "abi",
+          "advisor": "glau",
+          "text": "Set up RadGrad account. Congratulations on your Level 1 RadGrad sticker! Check out the GreyHats meeting every Friday afternoon if you are still interested in learning about security.",
+          "createdOn": "2014-08-26T20:52:13.660Z"
+        },
+        {
+          "student": "abi",
+          "advisor": "glau",
+          "text": "Updated RadGrad STAR data. Congratulations on leveling up to Level 2! Keep up the good work.",
+          "createdOn": "2015-01-09T19:15:13.660Z"
+        },
+        {
+          "student": "abi",
+          "advisor": "glau",
+          "text": "Updated RadGrad STAR data. Congratulations on leveling up to Level 3!",
+          "createdOn": "2015-08-24T22:19:13.660Z"
+        },
+        {
+          "student": "abi",
+          "advisor": "glau",
+          "text": "Make sure to sign up for ICS212 and ICS321 next semester to fulfill prerequisites for upper level courses.",
+          "createdOn": "2015-11-06T20:56:13.660Z"
+        },
+        {
+          "student": "abi",
+          "advisor": "glau",
+          "text": "Updated RadGrad STAR data. Congratulations on leveling up to Level 4! I recommend you check out the GenCyber Internship for this summer.",
+          "createdOn": "2016-01-26T20:32:13.660Z"
+        },
+        {
+          "student": "abi",
+          "advisor": "glau",
+          "text": "Updated RadGrad STAR data. Congratulations on leveling up to Level 5!",
+          "createdOn": "2016-08-30T19:56:13.660Z"
+        },
+        {
+          "student": "abi",
+          "advisor": "glau",
+          "text": "Updated RadGrad STAR data. Keep up the good work! Still on track to graduate Spring 2018.",
+          "createdOn": "2017-01-11T21:54:13.660Z"
+        }
+      ]
     },
     {
       "name": "CareerGoalCollection",
@@ -6135,7 +6178,8 @@
           "interests": [
             "application-development",
             "javascript"
-          ]
+          ],
+          "opportunity": "acmanoa-web-development"
         },
         {
           "title": "Algorithm Visualization",
@@ -6169,7 +6213,8 @@
           "duration": "0:50",
           "interests": [
             "security"
-          ]
+          ],
+          "opportunity": "greyhats"
         },
         {
           "title": "Open Power Quality",
@@ -6180,7 +6225,8 @@
           "duration": "0:21",
           "interests": [
             "software-engineering"
-          ]
+          ],
+          "opportunity": "open-power-quality"
         },
         {
           "title": "RadGrad",
@@ -6218,7 +6264,8 @@
           "duration": "0:17",
           "interests": [
             "data-science"
-          ]
+          ],
+          "opportunity": "data-analytics-for-solar-energy"
         }
       ]
     },
