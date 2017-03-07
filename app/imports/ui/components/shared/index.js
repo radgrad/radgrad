@@ -24,6 +24,9 @@ import './route-user-name.js';
 import '../advisor/student-selector-widget.html';
 import '../advisor/student-selector-widget.js';
 
+import './user-answers-component.html';
+import './user-answers-component.js';
+
 import './user-career-goals-component.html';
 import './user-career-goals-component.js';
 
