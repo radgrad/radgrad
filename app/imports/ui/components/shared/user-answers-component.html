@@ -1,15 +1,15 @@
 <template name="User_Answers_Component">
   <div class="ui fluid accordion">
-    <div class="title">
+    <div class="active title" style="text-align: center;">
       <i class="dropdown icon"></i>
-      <strong>MentorSpace Answers {{> Widget_Header_Number inputValue=(count true)}}</strong>
+      <strong>MENTORSPACE ANSWERS {{> Widget_Header_Number inputValue=(count true)}}</strong>
     </div>
-    <div class="content">
-      <ul class="ui small list" style="margin-left: 3.3em;">
+    <div class="active content">
+      <ol class="ui small list">
         {{#each answer in answers}}
-          <li><a href="{{questionURL}}">{{questionName answer}}</a></li>
+          <li li value="-"><a href="{{questionURL}}">{{questionName answer}}</a></li>
         {{/each}}
-      </ul>
+      </ol>
     </div>
   </div>
 </template>

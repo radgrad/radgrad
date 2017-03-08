@@ -1,5 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
+import { Users } from '/imports/api/user/UserCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
@@ -18,7 +19,10 @@ class MentorQuestionCollection extends BaseInstanceCollection {
     super('MentorQuestion', new SimpleSchema({
       title: { type: String },
       slugID: { type: SimpleSchema.RegEx.Id },
-      approved: { type: Boolean },
+      studentID: { type: SimpleSchema.RegEx.Id },
+      moderated: { type: Boolean },
+      visible: { type: Boolean },
+      moderatorComments: { type: String, optional: true },
     }));
   }
 
@@ -26,18 +30,36 @@ class MentorQuestionCollection extends BaseInstanceCollection {
    * Defines a new MentorSpace question.
    * @param title the question.
    * @param slug A unique identifier for this question.
-   * @param approved If the question is approved. Defaults to false.
+   * @param student The student that asked this question.
+   * @param moderated If the question is moderated. Defaults to false.
+   * @param visible If the question is visible. Defaults to false.
    * @return { String } the docID of this question.
    */
-  define({ title, slug, approved = false }) {
-    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const docID = this._collection.insert({ title, slugID, approved });
+  define({ title, slug, student, moderated = false, visible = false, moderatorComments }) {
+    const studentID = Users.getID(student);
+    let questionSlug = slug;
+    if (!slug) {
+      questionSlug = `question-${student}-${this._collection.find({ studentID }).fetch().length}`;
+    }
+    const slugID = Slugs.define({ name: questionSlug, entityName: this.getType() });
+    const docID = this._collection.insert({ title, slugID, studentID, moderated, visible, moderatorComments });
     Slugs.updateEntityID(slugID, docID);
     return docID;
   }
 
   getQuestions() {
     return this._collection.find({}).fetch().reverse();
+  }
+
+  /**
+   * Updates the MentorQuestion's approved variable.
+   * @param questionID The MentorQuestion ID.
+   * @param approved The new approved value.
+   */
+  updateModerated(questionID, moderated, visible, moderatorComments) {
+    this.assertDefined(questionID);
+    this._collection.update({ _id: questionID },
+        { $set: { moderated, visible, moderatorComments } });
   }
 
   /**

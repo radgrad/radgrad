@@ -1,4 +1,4 @@
-<template name="Review_Moderation">
+<template name="Moderation">
   <div class="ui equal width grid">
     <div class="column">
       <div class="ui padded container segment">
@@ -31,8 +31,8 @@
                         <div class="ui action input">
                         <textarea rows="2" id="{{review._id}}-comments">{{moderatorComments review}}</textarea>
                         </div>
-                      <button class="ui basic green mini button" id="{{review._id}}-accept" type="submit" style="margin-top:10px">ACCEPT</button>
-                      <button class="ui basic red mini button" id="{{review._id}}-reject" type="submit" style="margin-top:10px">REJECT</button>
+                      <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
+                      <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
                     </div>
                   </form>
                 </div>
@@ -75,8 +75,8 @@
                         <div class="ui action input">
                           <textarea rows="2" id="{{review._id}}-comments">{{moderatorComments review}}</textarea>
                           </div>
-                          <button class="ui basic green mini button" id="{{review._id}}-accept" type="submit" style="margin-top:10px">ACCEPT</button>
-                        <button class="ui basic red mini button" id="{{review._id}}-reject" type="submit" style="margin-top:10px">REJECT</button>
+                          <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
+                        <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
                       </div>
                     </form>
                   </div>
@@ -88,5 +88,37 @@
       </div>
     </div>
   </div>
+    <div class="column">
+      <div class="ui padded container segment">
+        <div class="ui dividing header"><h4>PENDING MENTORSPACE QUESTIONS</h4></div>
+        <div class="ui divided items">
+          {{#each question in pendingQuestions}}
+            <div class="item">
+              <div class="content">
+                <div class="ui equal width grid">
+                  <div class="column">
+                    <div class="meta">
+                      <strong>Question:</strong> {{question.title}}
+                    </div>
+                    <div class="ui segment">
+                      <form class="ui form">
+                        <div class="field">
+                          <label>Moderator Comments:</label>
+                          <div class="ui action input">
+                            <textarea rows="2" id="{{question._id}}-comments">{{moderatorComments question}}</textarea>
+                          </div>
+                          <button class="ui basic green mini button" id="{{question._id}}-question-accept" type="submit" style="margin-top:10px">ACCEPT</button>
+                          <button class="ui basic red mini button" id="{{question._id}}-question-reject" type="submit" style="margin-top:10px">REJECT</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
   </div>
 </template>

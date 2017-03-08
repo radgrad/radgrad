@@ -2,10 +2,10 @@
   {{#if Template.subscriptionsReady}}
     {{#Student_Explorer_Layout type = 'users'}}
       <div class="ui stackable grid">
-        <div class="eleven wide column">
+        <div class="ten wide column">
           {{> Explorer_Choose_User_Widget userID=userID}}
         </div>
-        <div class="five wide column">
+        <div class="six wide column">
           {{#if displayUser}}
             {{> Explore_User_Widget userID=userID}}
           {{else}}

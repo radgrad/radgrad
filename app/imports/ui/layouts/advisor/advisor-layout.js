@@ -33,9 +33,9 @@ Template.Advisor_Layout.helpers({
         regex: 'completed-verifications',
       },
       {
-        label: 'Review Moderation',
-        route: RouteNames.advisorReviewModerationPageRouteName,
-        regex: 'review-moderation',
+        label: 'Moderation',
+        route: RouteNames.advisorModerationPageRouteName,
+        regex: 'moderation',
       },
     ];
   },

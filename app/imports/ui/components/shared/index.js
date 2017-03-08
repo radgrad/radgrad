@@ -16,8 +16,8 @@ import './ice-header.js';
 import './interest-list.html';
 import './interest-list.js';
 
-import './review-moderation.html';
-import './review-moderation.js';
+import './moderation.html';
+import './moderation.js';
 
 import './route-user-name.js';
 

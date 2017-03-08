@@ -10,5 +10,5 @@ import './advisor-student-configuration-page.js';
 import './advisor-verification-requests-pending-page.html';
 import './advisor-verification-requests-pending-page.js';
 
-import './advisor-review-moderation-page.html';
-import './advisor-review-moderation-page.js';
+import './advisor-moderation-page.html';
+import './advisor-moderation-page.js';

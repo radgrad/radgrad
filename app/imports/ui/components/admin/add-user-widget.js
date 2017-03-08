@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
-import { Feed } from '../../../api/feed/FeedCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -33,7 +33,7 @@ Template.Add_User_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(Feed.getPublicationName());
+  this.subscribe(Feeds.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
@@ -69,15 +69,15 @@ Template.Add_User_Widget.events({
           console.log('Error during new user creation: ', error);
         }
         const timestamp = new Date().getTime();
-        if (Feed.checkPastDayFeed(timestamp, 'new-user')) {
-          Feed.updateNewUser(newData.slug, Feed.checkPastDayFeed(timestamp, 'new-user'));
+        if (Feeds.checkPastDayFeed(timestamp, 'new-user')) {
+          Feeds.updateNewUser(newData.slug, Feeds.checkPastDayFeed(timestamp, 'new-user'));
         } else {
           const feedDefinition = {
             user: [newData.slug],
             feedType: 'new-user',
             timestamp,
           };
-          Feed.define(feedDefinition);
+          Feeds.define(feedDefinition);
         }
         FormUtils.indicateSuccess(instance, event);
       });
