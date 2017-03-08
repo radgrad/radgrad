@@ -16,6 +16,10 @@ $ mongo --port 6003
 StackOverFlow:
 http://stackoverflow.com/questions/3366397/delete-everything-in-a-mongodb-database
 
+mongo admin --port 6003 --eval "db.getCollectionNames().forEach(function(n){db[n].remove({})});"
+mongo admin --port 6003 --eval "db.dropDatabase();"
+
+
 DOCS
 * setup_as_a_service_on_ITS_vm.sh:
 	Master script that should be edited and executed on the ITS VM
