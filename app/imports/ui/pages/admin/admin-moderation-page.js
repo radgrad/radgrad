@@ -7,15 +7,15 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 
-Template.Admin_Review_Moderation_Page.helpers({
+Template.Admin_Moderation_Page.helpers({
   // add you helpers here
 });
 
-Template.Admin_Review_Moderation_Page.events({
+Template.Admin_Moderation_Page.events({
   // add your events here
 });
 
-Template.Admin_Review_Moderation_Page.onCreated(function adminReviewModerationPageOnCreated() {
+Template.Admin_Moderation_Page.onCreated(function adminModerationPageOnCreated() {
   this.autorun(() => {
     this.subscribe(Reviews.getPublicationName());
     this.subscribe(Courses.getPublicationName());
@@ -27,10 +27,10 @@ Template.Admin_Review_Moderation_Page.onCreated(function adminReviewModerationPa
   });
 });
 
-Template.Admin_Review_Moderation_Page.onRendered(function adminReviewModerationPageOnRendered() {
+Template.Admin_Moderation_Page.onRendered(function adminModerationPageOnRendered() {
 });
 
-Template.Admin_Review_Moderation_Page.onDestroyed(function adminReviewModerationPageOnDestroyed() {
+Template.Admin_Moderation_Page.onDestroyed(function adminModerationPageOnDestroyed() {
   // add your statement here
 });
 

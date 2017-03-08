@@ -144,11 +144,11 @@ adminRoutes.route('/database/restore', {
   },
 });
 
-export const adminReviewModerationPageRouteName = 'Admin_Review_Moderation_Page';
-adminRoutes.route('/review-moderation', {
-  name: adminReviewModerationPageRouteName,
+export const adminModerationPageRouteName = 'Admin_Moderation_Page';
+adminRoutes.route('/moderation', {
+  name: adminModerationPageRouteName,
   action() {
-    BlazeLayout.render('Admin_Layout', { main: adminReviewModerationPageRouteName });
+    BlazeLayout.render('Admin_Layout', { main: adminModerationPageRouteName });
   },
 });
 
@@ -194,11 +194,11 @@ advisorRoutes.route('/completed-verifications', {
   },
 });
 
-export const advisorReviewModerationPageRouteName = 'Advisor_Review_Moderation_Page';
-advisorRoutes.route('/review-moderation', {
-  name: advisorReviewModerationPageRouteName,
+export const advisorModerationPageRouteName = 'Advisor_Moderation_Page';
+advisorRoutes.route('/moderation', {
+  name: advisorModerationPageRouteName,
   action() {
-    BlazeLayout.render('Advisor_Layout', { main: advisorReviewModerationPageRouteName });
+    BlazeLayout.render('Advisor_Layout', { main: advisorModerationPageRouteName });
   },
 });
 

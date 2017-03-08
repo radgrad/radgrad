@@ -4,10 +4,11 @@ import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 
 
-Template.Review_Moderation.helpers({
+Template.Moderation.helpers({
   moderatorComments(review) {
     return review.moderatorComments;
   },
@@ -18,7 +19,7 @@ Template.Review_Moderation.helpers({
     return Reviews.find({ moderated: false, reviewType: 'opportunity' });
   },
   pendingQuestions() {
-    return MentorQuestions.find({ approved: false });
+    return MentorQuestions.find({ moderated: false, visible: false });
   },
   rating(review) {
     return review.rating;
@@ -43,7 +44,7 @@ Template.Review_Moderation.helpers({
   },
 });
 
-Template.Review_Moderation.events({
+Template.Moderation.events({
   'click button': function clickButton(event) {
     event.preventDefault();
     const split = event.target.id.split('-');
@@ -51,28 +52,28 @@ Template.Review_Moderation.events({
     let item;
     if (split[1] === 'review') {
       item = Reviews.findDoc(itemID);
-      if (split[2] === 'accept') {
-        item.moderated = true;
-        item.visible = true;
-      } else {
-        item.moderated = true;
-        item.visible = false;
-      }
-      const moderatorComments = event.target.parentElement.querySelectorAll('textarea')[0].value;
-      const moderated = review.moderated;
-      const visible = review.visible;
-      Reviews.updateModerated(itemID, moderated, visible, moderatorComments);
     } else {
       item = MentorQuestions.findDoc(itemID);
-      if (split[2] === 'accept') {
-        item.approved = true;
-      }
-      const approved = item.approved;
-      MentorQuestions.updateApproved(itemID, approved );
+    }
+    if (split[2] === 'accept') {
+      item.moderated = true;
+      item.visible = true;
+    } else {
+      item.moderated = true;
+      item.visible = false;
+    }
+    const moderatorComments = event.target.parentElement.querySelectorAll('textarea')[0].value;
+    const moderated = item.moderated;
+    const visible = item.visible;
+    if (split[1] === 'review') {
+      Reviews.updateModerated(itemID, moderated, visible, moderatorComments);
+    } else {
+      MentorQuestions.updateModerated(itemID, moderated, visible, moderatorComments);
     }
   },
 });
 
-Template.Review_Moderation.onCreated(function reviewModerationOnCreated() {
+Template.Moderation.onCreated(function ModerationOnCreated() {
   this.subscribe(MentorQuestions.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
 });

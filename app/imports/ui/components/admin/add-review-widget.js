@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Feed } from '../../../api/feed/FeedCollection';
+import { Feeds } from '../../../api/feed/FeedCollection';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -22,7 +22,7 @@ const addSchema = new SimpleSchema({
 
 Template.Add_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Feed.getPublicationName());
+  this.subscribe(Feeds.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
@@ -76,7 +76,7 @@ Template.Add_Review_Widget.events({
           timestamp: Date.now(),
         };
       }
-      Feed.define(feedDefinition);
+      Feeds.define(feedDefinition);
     } else {
       FormUtils.indicateError(instance);
     }

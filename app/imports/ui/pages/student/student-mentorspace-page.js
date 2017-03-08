@@ -14,8 +14,7 @@ Template.Student_MentorSpace_Page.onCreated(function studentMentorSpacePageOnCre
 Template.Student_MentorSpace_Page.helpers({
 
   questionsList() {
-    console.log(MentorQuestions.getQuestions({ approved: true }));
-    return MentorQuestions.find({ approved: true });
+    return MentorQuestions.find({ visible: true });
   },
 
   mentorsList() {

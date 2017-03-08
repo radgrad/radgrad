@@ -1,4 +1,4 @@
-<template name="Review_Moderation">
+<template name="Moderation">
   <div class="ui equal width grid">
     <div class="column">
       <div class="ui padded container segment">
@@ -100,12 +100,18 @@
                     <div class="meta">
                       <strong>Question:</strong> {{question.title}}
                     </div>
+                    <div class="ui segment">
                       <form class="ui form">
                         <div class="field">
+                          <label>Moderator Comments:</label>
+                          <div class="ui action input">
+                            <textarea rows="2" id="{{question._id}}-comments">{{moderatorComments question}}</textarea>
+                          </div>
                           <button class="ui basic green mini button" id="{{question._id}}-question-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                           <button class="ui basic red mini button" id="{{question._id}}-question-reject" type="submit" style="margin-top:10px">REJECT</button>
                         </div>
                       </form>
+                    </div>
                   </div>
                 </div>
               </div>
