@@ -2,10 +2,10 @@
 {{#if Template.subscriptionsReady}}
     <div class="ui padded segment">
       <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
-      <div class="ui equal width grid stackable container">
+      <div class="ui equal width grid stackable internally celled">
         <!-- Innovation -->
-        <div class="column">
-          <div class="ui segment">
+        <div class="column" style="padding-left: 0;">
+          <div class="ui basic segment">
             <div class="radgrad-ice">
               <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.i}} radgrad-proj-innov">
                 <div class="radgrad-ice-stat">
@@ -28,7 +28,7 @@
             </div>
 
             <h3 class="ui centered header ice-innovation-color">
-              Innovation
+              INNOVATION
             </h3>
             {{> Student_Ice_Column type = 'Innovation' }}
           </div>
@@ -36,7 +36,7 @@
 
         <!-- Competency -->
         <div class="column">
-          <div class="ui segment">
+          <div class="ui basic segment">
             <div class="radgrad-ice">
               <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.c}} radgrad-proj-comp">
                 <div class="radgrad-ice-stat">
@@ -60,15 +60,15 @@
             </div>
 
             <h3 class="ui centered header ice-competency-color">
-              Competency
+              COMPETENCY
             </h3>
             {{> Student_Ice_Column type = 'Competency' }}
           </div>
         </div>
 
         <!-- Experience -->
-        <div class="column">
-          <div class="ui segment">
+        <div class="column" style="padding-right: 0;">
+          <div class="ui basic segment">
             <div class="radgrad-ice">
               <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.e}} radgrad-proj-exp">
                 <div class="radgrad-ice-stat">
@@ -92,7 +92,7 @@
             </div>
 
             <h3 class="ui centered header ice-experience-color">
-              Experience
+              EXPERIENCE
             </h3>
             {{> Student_Ice_Column type = 'Experience' }}
 

@@ -24,6 +24,9 @@ import './route-user-name.js';
 import '../advisor/student-selector-widget.html';
 import '../advisor/student-selector-widget.js';
 
+import './user-answers-component.html';
+import './user-answers-component.js';
+
 import './user-career-goals-component.html';
 import './user-career-goals-component.js';
 
@@ -32,6 +35,9 @@ import './user-course-component.js';
 
 import './user-interests-component.html';
 import './user-interests-component.js';
+
+import './user-opportunity-component.html';
+import './user-opportunity-component.js';
 
 import './verification-event.html';
 import './verification-event.js';

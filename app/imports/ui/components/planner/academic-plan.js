@@ -34,6 +34,9 @@ Template.Academic_Plan.helpers({
   getDictionary() {
     return Template.instance().state;
   },
+  getAcademicYear(year) {
+    return `Academic Year ${year}-${year + 1}`;
+  },
   hasNextYear() {
     const instance = Template.instance();
     const ays = AcademicYearInstances.find({
@@ -130,7 +133,7 @@ Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   } else {
     console.log('there is a problem no data.'); // eslint-disable-line no-console
   }
-  this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
 });
 

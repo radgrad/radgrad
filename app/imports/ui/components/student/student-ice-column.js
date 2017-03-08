@@ -328,14 +328,18 @@ Template.Student_Ice_Column.helpers({
   },
 });
 
+Template.Student_Ice_Column.events({
+  // add events here
+});
+
 Template.Student_Ice_Column.onCreated(function studentIceColumnOnCreated() {
-  this.subscribe(AcademicYearInstances.getPublicationName());
+  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());

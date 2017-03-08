@@ -2970,6 +2970,11 @@
           "routeName": "Student_MentorSpace_Page",
           "title": "Learn about Mentor Space",
           "text": "Mentor Space enables you to connect with RadGrad mentors: ICS alumni and other high tech professionals who are volunteering their time to help get the latest information about careers and job opportunities in Hawaii and beyond.\n\nThere are two basic ways to interact with mentors. The best way is to propose a new question using the \"Ask a new question\" form. This question will be reviewed by RadGrad administrators, potentially edited for clarity, and then released for all the mentors to answer. This approach is the best way to interact with mentors because you can get a variety of perspectives from different fields and different geographic areas. \n\nA second way is to email a single mentor directly.  Please do this only if you have a very specific question of the mentor: perhaps you are interested in applying for a job at the mentor's company.  If you contact a mentor directly, please be sure to have your professional portfolio up to date and ready for them to review so that they can learn more about your background in order to provide a high quality answer.  You should also have reviewed the mentor's LinkedIn profile to learn more about them, and of course have reviewed all of the publicly available information about the company. Don't ask simple questions of a mentor that you could have easily found out through Google!"
+        },
+        {
+          "routeName": "Student_Home_Log_Page",
+          "title": "Learn about the Advisor Meeting Log",
+          "text": "Each time you meet with an ICS Advisor, they can summarize the results from your meeting as a RadGrad Advisor Log entry.\n\nYou can refer to this log to make sure you are following advisor recommendations. This also enables the advisor to follow up on issues raised in prior meetings."
         }
       ]
     },
