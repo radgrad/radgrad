@@ -1,28 +1,30 @@
 <template name="User_Course_Component">
-  <div class="ui fluid accordion">
-    <div class="title">
-      <i class="dropdown icon"></i>
-      <strong>Courses Taken {{> Widget_Header_Number inputValue=(count true)}}</strong>
+    <div class="ui fluid accordion">
+      <div class="active title" style="text-align: center">
+        <i class="dropdown icon"></i>
+        <strong>COURSES</strong>
+      </div>
+      {{#if Template.subscriptionsReady}}
+      <div class="active content">
+        <div class="ui two column stackable grid">
+          <div class="center aligned column">
+            <h5>TAKEN {{> Widget_Header_Number inputValue=(count true)}}</h5>
+            <ol class="ui small list">
+              {{#each ci in coursesTaken}}
+                <li li value="-"><a href="{{courseURL ci}}">{{courseName ci}}<!--({{courseNumber ci}})--></a></li>
+              {{/each}}
+            </ol>
+          </div>
+          <div class="center aligned column">
+            <h5>PLANNED {{> Widget_Header_Number inputValue=(count false)}}</h5>
+            <ol class="ui small list">
+              {{#each ci in coursesPlanned}}
+                <li li value="-"><a href="{{courseURL ci}}">{{courseName ci}}<!--({{courseNumber ci}})--></a></li>
+              {{/each}}
+            </ol>
+          </div>
+        </div>
+      </div>
+      {{/if}}
     </div>
-    <div class="content">
-      <ul class="ui small list" style="margin-left: 3.3em;">
-        {{#each ci in coursesTaken}}
-          <li><a href="{{courseURL ci}}">{{courseName ci}} ({{courseNumber ci}})</a></li>
-        {{/each}}
-      </ul>
-    </div>
-  </div>
-  <div class="ui fluid accordion">
-    <div class="title">
-      <i class="dropdown icon"></i>
-      <strong>Courses Planned {{> Widget_Header_Number inputValue=(count false)}}</strong>
-    </div>
-    <div class="content">
-      <ul class="ui small list" style="margin-left: 3.3em;">
-        {{#each ci in coursesPlanned}}
-          <li><a href="{{courseURL ci}}">{{courseName ci}} ({{courseNumber ci}})</a></li>
-        {{/each}}
-      </ul>
-    </div>
-  </div>
 </template>

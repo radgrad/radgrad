@@ -1,16 +1,9 @@
 <template name="User_Interests_Component">
   {{#if interests}}
-    <div class="ui fluid accordion">
-      <div class="title"><i class="dropdown icon"></i>
-        <b>Interests {{> Widget_Header_Number inputValue=count}}</b>
-      </div>
-      <div class="content">
-        {{#each interest in interests}}
-          <a href="{{interestURL interest}}" class="ui {{labelSize}} label">
-            <i style="color:white !important" class="fitted star icon"></i>{{interest.name}}
-          </a>
-        {{/each}}
-      </div>
-    </div>
+    {{#each interest in interests}}
+      <a href="{{interestURL interest}}" class="ui {{labelSize}} label">
+        <i style="color:white !important" class="fitted star icon"></i>{{interest.name}}
+      </a>
+    {{/each}}
   {{/if}}
 </template>

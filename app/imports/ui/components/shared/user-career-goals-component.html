@@ -1,19 +1,9 @@
 <template name="User_Career_Goals_Component">
   {{#if careerGoals}}
-    <div class="ui fluid accordion">
-      <div class="title">
-        <i class="dropdown icon"></i>
-        <b>Career Goals {{> Widget_Header_Number inputValue=count}}</b> <br>
-      </div>
-      <div class="content">
-        {{#each careerGoal in careerGoals}}
-          <a href="{{careerGoalURL careerGoal}}" class="ui {{labelSize}} label">
-              <i class="fitted suitcase icon"></i>{{careerGoal.name}}
-            </a>
-        {{/each}}
-      </div>
-    </div>
-  {{else}}
-    <p>No career goals chosen yet.</p>
+    {{#each careerGoal in careerGoals}}
+      <a href="{{careerGoalURL careerGoal}}" class="ui {{labelSize}} label">
+        <i class="fitted suitcase icon"></i>{{careerGoal.name}}
+      </a>
+    {{/each}}
   {{/if}}
 </template>
