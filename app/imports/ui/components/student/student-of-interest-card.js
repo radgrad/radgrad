@@ -22,7 +22,7 @@ Template.Student_Of_Interest_Card.onCreated(function studentOfInterestCardOnCrea
   this.subscribe(Users.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName(3));
   this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3));
 });
 
 function interestedStudentsHelper(item, type) {

@@ -17,15 +17,25 @@
           </a>
           <div class="meta">
             <span class="date">{{email}}</span>
+            {{#if isStudent}}
+            <br>
+            <span class="date">Desired Degree: {{desiredDegree}}</span>
+            {{/if}}
+            {{#if website}}
+              <br>
+              <span class="date"><a href="{{website}}">{{firstName}}'s Professional Website</a></span>
+            {{/if}}
           </div>
           <div class="description">
             <div class="ui divider"></div>
-            {{#if isStudent}}
               {{> User_Career_Goals_Component labelSize='mini' userID=userID}}
-            {{/if}}
-            {{> User_Interests_Component labelSize='mini' userID=userID}}
+              {{> User_Interests_Component labelSize='mini' userID=userID}}
             {{#if isStudent}}
               {{> User_Course_Component userID=userID}}
+              {{> User_Opportunity_Component userID=userID}}
+            {{/if}}
+            {{#if isMentor}}
+              {{> User_Answers_Component userID=userID}}
             {{/if}}
           </div>
         </div>
