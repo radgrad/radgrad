@@ -68,12 +68,6 @@ Template.Student_MentorSpace_Question_Form.events({
 
 Template.Student_MentorSpace_Question_Form.onRendered(function mentorSpaceOnRendered() {
   this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
-
-  this.$('.ui.dropdown')
-      .dropdown()
-  ;
-
-  this.$('.ui.rating')
-      .rating()
-  ;
+  this.$('.ui.dropdown').dropdown();
+  this.$('.ui.rating').rating();
 });

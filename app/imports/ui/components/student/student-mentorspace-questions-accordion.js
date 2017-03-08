@@ -39,7 +39,6 @@ Template.Student_MentorSpace_Questions_Accordion.onRendered(function listMentorS
 
 Template.Student_MentorSpace_Questions_Accordion.helpers({
   answerCount(questionID) {
-    console.log(Slugs.findDoc(MentorQuestions.findDoc(questionID).slugID).name);
     return MentorAnswers.getAnswers(questionID).count();
   },
   isOneAnswer(questionID) {
