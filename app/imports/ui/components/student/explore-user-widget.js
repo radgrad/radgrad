@@ -103,10 +103,12 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
     this.userID = this.data.userID;
   }
   this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
+  this.autorun(() => {
+    this.subscribe(CourseInstances.getPublicationName(5), this.data.userID);
+  });
 });
 
 Template.Explore_User_Widget.onRendered(function exploreUserWidgetOnRendered() {
