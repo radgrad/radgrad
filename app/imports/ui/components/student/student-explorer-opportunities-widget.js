@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -20,11 +21,11 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
-    for (const opportunityInstance of oi) {
+    _.map(oi, function (opportunityInstance) {
       if (Semesters.findDoc(opportunityInstance.semesterID).sortBy >= Semesters.getCurrentSemesterDoc().sortBy) {
         ret = true;
       }
-    }
+    });
     return ret;
   },
   isLabel(label, value) {
@@ -51,11 +52,11 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
-    for (const opportunityInstance of oi) {
+    _.map(oi, function (opportunityInstance) {
       if (!opportunityInstance.verified) {
         ret = true;
       }
-    }
+    });
     return ret;
   },
   updatedTeaser(teaser) {

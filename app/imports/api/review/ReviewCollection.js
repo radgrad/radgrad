@@ -68,7 +68,7 @@ class ReviewCollection extends BaseInstanceCollection {
     let revieweeID;
     if (reviewType === 'course') {
       revieweeID = Courses.getID(reviewee);
-      if (!slug){
+      if (!slug) {
         slug = `review-course-${Courses.getSlug(reviewee)}-${student}`;
       }
     } else if (reviewType === 'opportunity') {

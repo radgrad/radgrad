@@ -22,7 +22,7 @@ class MentorQuestionCollection extends BaseInstanceCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       moderated: { type: Boolean },
       visible: { type: Boolean },
-      moderatorComments: { type: String, optional: true},
+      moderatorComments: { type: String, optional: true },
     }));
   }
 
@@ -37,10 +37,11 @@ class MentorQuestionCollection extends BaseInstanceCollection {
    */
   define({ title, slug, student, moderated = false, visible = false, moderatorComments }) {
     const studentID = Users.getID(student);
-    if(!slug) {
-      slug = `question-${student}-${this._collection.find({studentID}).fetch().length}`;
+    let questionSlug = slug;
+    if (!slug) {
+      questionSlug = `question-${student}-${this._collection.find({ studentID }).fetch().length}`;
     }
-    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
+    const slugID = Slugs.define({ name: questionSlug, entityName: this.getType() });
     const docID = this._collection.insert({ title, slugID, studentID, moderated, visible, moderatorComments });
     Slugs.updateEntityID(slugID, docID);
     return docID;

@@ -10,9 +10,9 @@ function getOpportunities(studentID, isPast) {
   const taken = [];
   _.map(opportunityInstances, (oi) => {
     if (_.indexOf(taken, oi) === -1) {
-    taken.push(oi);
-  }
-});
+      taken.push(oi);
+    }
+  });
   return taken;
 }
 

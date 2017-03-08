@@ -1,10 +1,8 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
@@ -97,8 +95,6 @@ Template.Student_Explorer_Add_Review_Widget.events({
   },
 });
 
-Template.Student_Explorer_Add_Review_Widget.onRendered(
-  function studentExplorerAddReviewWidget() {
-    this.$('.ui.accordion').accordion();
-  }
-);
+Template.Student_Explorer_Add_Review_Widget.onRendered(function studentExplorerAddReviewWidget() {
+  this.$('.ui.accordion').accordion();
+});
