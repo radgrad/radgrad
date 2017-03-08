@@ -1,9 +1,8 @@
-<template name="Advisor_Review_Moderation_Page">
+<template name="Admin_Moderation_Page">
   <div class="layout-page">
-
     <div class="ui container">
       {{#if Template.subscriptionsReady}}
-        {{> Review_Moderation }}
+        {{> Moderation }}
       {{else}}
         {{> Loading}}
       {{/if}}

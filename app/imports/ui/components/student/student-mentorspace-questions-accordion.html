@@ -3,7 +3,8 @@
     <div class="ui segment">
       <div class="ui vertical accordion">
 
-        <div class="ui active list title">
+        <div class="active title">
+          <div class="ui list">
           <div class="item">
             <i class="dropdown icon"></i>
             {{title}}
@@ -14,6 +15,7 @@
               {{/if}}
             </div>
           </div>
+            </div>
         </div>
 
         <div class="active content">
@@ -25,13 +27,8 @@
             <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername mentorID)}}">{{mentorName (mentorID)}}</a> answered: <br> &nbsp;{{text}}
           </div>
           {{/each}}
-
         </div>
-
-
       </div>
-
     </div>
   </div>
-
 </template>

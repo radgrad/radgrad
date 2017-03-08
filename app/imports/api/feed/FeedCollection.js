@@ -49,7 +49,6 @@ class FeedCollection extends BaseCollection {
 
   // TODO: The define method needs more documentation. What are valid values for each parameter?
   // Consider multiple define methods, one for each feed type, with appropriate required params for each.
-  
   /**
    * Defines a new Feed.
    * @example

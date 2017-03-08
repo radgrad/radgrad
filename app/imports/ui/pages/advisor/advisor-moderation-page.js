@@ -7,15 +7,15 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 
-Template.Advisor_Review_Moderation_Page.helpers({
+Template.Advisor_Moderation_Page.helpers({
   // add you helpers here
 });
 
-Template.Advisor_Review_Moderation_Page.events({
+Template.Advisor_Moderation_Page.events({
   // add your events here
 });
 
-Template.Advisor_Review_Moderation_Page.onCreated(function advisorReviewModerationPageOnCreated() {
+Template.Advisor_Moderation_Page.onCreated(function advisorModerationPageOnCreated() {
   this.subscribe(Reviews.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
@@ -25,10 +25,10 @@ Template.Advisor_Review_Moderation_Page.onCreated(function advisorReviewModerati
   this.subscribe(Users.getPublicationName());
 });
 
-Template.Advisor_Review_Moderation_Page.onRendered(function advisorReviewModerationPageOnRendered() {
+Template.Advisor_Moderation_Page.onRendered(function advisorModerationPageOnRendered() {
 });
 
-Template.Advisor_Review_Moderation_Page.onDestroyed(function advisorReviewModerationPageOnDestroyed() {
+Template.Advisor_Moderation_Page.onDestroyed(function advisorModerationPageOnDestroyed() {
   // add your statement here
 });
 

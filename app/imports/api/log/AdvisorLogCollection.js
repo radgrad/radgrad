@@ -109,7 +109,7 @@ class AdvisorLogCollection extends BaseCollection {
     const advisor = Users.findSlugByID(doc.advisorID);
     const text = doc.text;
     const createdOn = doc.createdOn;
-    return { student, advisor, text, createdOn};
+    return { student, advisor, text, createdOn };
   }
 }
 

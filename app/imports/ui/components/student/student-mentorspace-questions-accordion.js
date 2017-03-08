@@ -10,6 +10,7 @@ import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import * as RouteNames from '/imports/startup/client/router.js';
@@ -26,6 +27,7 @@ Template.Student_MentorSpace_Questions_Accordion.onCreated(function studentMento
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
   this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
   this.subscribe(VerificationRequests.getPublicationName());
@@ -37,6 +39,7 @@ Template.Student_MentorSpace_Questions_Accordion.onRendered(function listMentorS
 
 Template.Student_MentorSpace_Questions_Accordion.helpers({
   answerCount(questionID) {
+    console.log(Slugs.findDoc(MentorQuestions.findDoc(questionID).slugID).name);
     return MentorAnswers.getAnswers(questionID).count();
   },
   isOneAnswer(questionID) {
