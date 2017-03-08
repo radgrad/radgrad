@@ -15,6 +15,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name';
 
 const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
@@ -56,8 +57,7 @@ Template.Student_MentorSpace_Question_Form.events({
   'submit .mentorspace-question-form': function (event, instance) {
     event.preventDefault();
     const question = event.target.msquestion.value;
-    const slugTemp = (new Date().getTime()).toString(12); //  TODO: slug shouldn't have to be defined by the user?
-    const mentorQuestion = { title: question, slug: slugTemp, approved: true };
+    const mentorQuestion = { title: question, student: getRouteUserName() };
     MentorQuestions.define(mentorQuestion);
     instance.messageFlags.set(displaySuccessMessage, true);
     instance.messageFlags.set(displayErrorMessages, false);
@@ -68,12 +68,6 @@ Template.Student_MentorSpace_Question_Form.events({
 
 Template.Student_MentorSpace_Question_Form.onRendered(function mentorSpaceOnRendered() {
   this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
-
-  this.$('.ui.dropdown')
-      .dropdown()
-  ;
-
-  this.$('.ui.rating')
-      .rating()
-  ;
+  this.$('.ui.dropdown').dropdown();
+  this.$('.ui.rating').rating();
 });

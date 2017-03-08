@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -27,11 +29,11 @@ Template.Student_Explorer_Courses_Widget.helpers({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
     }).fetch();
-    for (const courseInstance of ci) {
+    _.map(ci, function (courseInstance) {
       if (Semesters.findDoc(courseInstance.semesterID).sortBy >= Semesters.getCurrentSemesterDoc().sortBy) {
         ret = true;
       }
-    }
+    });
     return ret;
   },
   getTableTitle(tableIndex) {
@@ -55,12 +57,12 @@ Template.Student_Explorer_Courses_Widget.helpers({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
     }).fetch();
-    for (const c of ci) {
+    _.map(ci, function (c) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' ||
           c.grade === 'B+' || c.grade === 'B') {
         ret = true;
       }
-    }
+    });
     return ret;
   },
   review() {

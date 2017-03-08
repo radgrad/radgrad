@@ -1,34 +1,41 @@
 <template name="Explore_User_Widget">
   {{#if Template.subscriptionsReady}}
-    <div class="ui padded container segment">
-      <div class="ui dividing header"><h4>{{role}} PROFILE</h4></div>
-      <div class="ui card">
-        <div class="image">
-          <img src="{{picture}}">
+    <div class="ui fluid card">
+      <div class="content">
+        <img class="right floated tiny ui image" src="{{picture}}" style="width: 90px; margin-bottom: 0;">
+        <div class="header">
+          {{name}}
         </div>
-        <div class="content">
-          <a class="header">
-            <div style='position:relative;'>
-              {{name}}
-            </div>
-            {{#if isStudent}}
-              <div style="background-image: url('/images/level-icons/radgrad-level-{{level}}-icon.png'); background-repeat: no-repeat; width: 55px; height: 55px; margin: 0 0 2px 5px; padding: 0; background-size: 100% 100%;position:absolute;right:5px;top:5px"></div>
-            {{/if}}
+        <div class="meta">
+          {{#if isStudent}}{{desiredDegree}} <br>{{/if}}
+          {{email}}
+          {{#if isStudent}}
+            <br>
+            <img class="ui mini image" src='/images/level-icons/radgrad-level-{{level}}-icon.png'>
+          {{/if}}
+          {{#if website}}
+          <a class="ui compact basic mini green button" href="{{website}}">
+            WEBSITE
           </a>
-          <div class="meta">
-            <span class="date">{{email}}</span>
-          </div>
-          <div class="description">
-            <div class="ui divider"></div>
-            {{#if isStudent}}
-              {{> User_Career_Goals_Component labelSize='mini' userID=userID}}
-            {{/if}}
-            {{> User_Interests_Component labelSize='mini' userID=userID}}
-            {{#if isStudent}}
-              {{> User_Course_Component userID=userID}}
-            {{/if}}
-          </div>
+          {{/if}}
         </div>
+      </div>
+      <div class="content">
+          {{#if isMentor}}
+            {{> User_Answers_Component userID=userID}}
+          {{/if}}
+          {{#if isStudent}}
+            {{> User_Course_Component userID=userID}}
+          {{/if}}
+      </div>
+      {{#if isStudent}}
+        <div class="content">
+          {{> User_Opportunity_Component userID=userID}}
+        </div>
+      {{/if}}
+      <div class="extra content">
+        {{> User_Career_Goals_Component labelSize='mini' userID=userID}}
+        {{> User_Interests_Component labelSize='mini' userID=userID}}
       </div>
     </div>
   {{else}}

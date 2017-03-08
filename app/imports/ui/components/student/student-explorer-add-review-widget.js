@@ -1,10 +1,8 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { Feed } from '../../../api/feed/FeedCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
@@ -21,7 +19,7 @@ const addSchema = new SimpleSchema({
 
 Template.Student_Explorer_Add_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Feed.getPublicationName());
+  this.subscribe(Feeds.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
   this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
@@ -72,11 +70,6 @@ Template.Student_Explorer_Add_Review_Widget.events({
       newData.student = getRouteUserName();
       newData.reviewType = this.reviewType;
       newData.reviewee = this.event._id;
-      if (this.reviewType === 'course') {
-        newData.slug = `review-course-${Courses.getSlug(newData.reviewee)}-${newData.student}`;
-      } else {
-        newData.slug = `review-opportunity-${Opportunities.getSlug(newData.reviewee)}-${newData.student}`;
-      }
       Reviews.define(newData);
       FormUtils.indicateSuccess(instance, event);
       let feedDefinition;
@@ -95,15 +88,13 @@ Template.Student_Explorer_Add_Review_Widget.events({
           timestamp: Date.now(),
         };
       }
-      Feed.define(feedDefinition);
+      Feeds.define(feedDefinition);
     } else {
       FormUtils.indicateError(instance);
     }
   },
 });
 
-Template.Student_Explorer_Add_Review_Widget.onRendered(
-  function studentExplorerAddReviewWidget() {
-    this.$('.ui.accordion').accordion();
-  }
-);
+Template.Student_Explorer_Add_Review_Widget.onRendered(function studentExplorerAddReviewWidget() {
+  this.$('.ui.accordion').accordion();
+});

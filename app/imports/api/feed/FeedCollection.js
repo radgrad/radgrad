@@ -49,9 +49,6 @@ class FeedCollection extends BaseCollection {
 
   // TODO: The define method needs more documentation. What are valid values for each parameter?
   // Consider multiple define methods, one for each feed type, with appropriate required params for each.
-
-  // TODO: Why do feeds have a slugID? I don't think slugs are appropriate for this collection. Do you use them?
-
   /**
    * Defines a new Feed.
    * @example
@@ -229,10 +226,10 @@ class FeedCollection extends BaseCollection {
   }
 
   /**
-   * Returns a feedID with the same feedType (and opportunity, if feedType === 'verified-opportunity')
+   * Returns a feedID with the same feedType (and opportunity, if feedType is 'verified-opportunity')
    * if it exists within the past 24 hours.
    * Returns false if no such feedID is found.
-   * Opportunity is required only if feedType === 'verified-opportunity'
+   * Opportunity is required only if feedType is 'verified-opportunity'
    * @returns {Object} The feedID if found.
    * @returns {boolean} False if feedID is not found.
    */
@@ -347,5 +344,5 @@ class FeedCollection extends BaseCollection {
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const Feed = new FeedCollection();  // TODO: Rename this to 'Feeds' for consistency with other collections.
-radgradCollections.push(Feed);
+export const Feeds = new FeedCollection();
+radgradCollections.push(Feeds);

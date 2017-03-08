@@ -38,5 +38,5 @@ import './admin-datamodel-users-page.js';
 import './admin-home-page.html';
 import './admin-home-page.js';
 
-import './admin-review-moderation-page.html';
-import './admin-review-moderation-page.js';
+import './admin-moderation-page.html';
+import './admin-moderation-page.js';

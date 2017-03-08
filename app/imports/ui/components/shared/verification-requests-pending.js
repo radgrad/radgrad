@@ -5,7 +5,7 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { Feed } from '../../../api/feed/FeedCollection';
+import { Feeds } from '../../../api/feed/FeedCollection';
 import { moment } from 'meteor/momentjs:moment';
 
 
@@ -57,9 +57,9 @@ Template.Verification_Requests_Pending.events({
       }).fetch();
       const timestamp = new Date().getTime();
       const opportunityID = VerificationRequests.getOpportunityDoc(request._id)._id;
-      if (Feed.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID)) {
-        Feed.updateVerifiedOpportunity(VerificationRequests.getStudentDoc(request._id).username,
-            Feed.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID));
+      if (Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID)) {
+        Feeds.updateVerifiedOpportunity(VerificationRequests.getStudentDoc(request._id).username,
+            Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID));
       } else {
         const feedDefinition = {
           user: [VerificationRequests.getStudentDoc(request._id).username],
@@ -68,7 +68,7 @@ Template.Verification_Requests_Pending.events({
           feedType: 'verified-opportunity',
           timestamp,
         };
-        Feed.define(feedDefinition);
+        Feeds.define(feedDefinition);
       }
     } else {
       request.status = VerificationRequests.REJECTED;
@@ -85,7 +85,7 @@ Template.Verification_Requests_Pending.events({
 });
 
 Template.Verification_Requests_Pending.onCreated(function pendingVerificationRequestsOnCreated() {
-  this.subscribe(Feed.getPublicationName());
+  this.subscribe(Feeds.getPublicationName());
 });
 
 Template.Verification_Requests_Pending.onRendered(function pendingVerificationRequestsOnRendered() {

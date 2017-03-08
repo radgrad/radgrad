@@ -68,8 +68,14 @@ class ReviewCollection extends BaseInstanceCollection {
     let revieweeID;
     if (reviewType === 'course') {
       revieweeID = Courses.getID(reviewee);
+      if (!slug) {
+        slug = `review-course-${Courses.getSlug(reviewee)}-${student}`;
+      }
     } else if (reviewType === 'opportunity') {
       revieweeID = Opportunities.getID(reviewee);
+      if (!slug) {
+        slug = `review-opportunity-${Opportunities.getSlug(reviewee)}-${student}`;
+      }
     } else {
       throw new Meteor.Error(`reviewType ${reviewType} is not a valid reviewType.`);
     }

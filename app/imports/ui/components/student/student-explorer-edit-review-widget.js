@@ -80,8 +80,6 @@ Template.Student_Explorer_Edit_Review_Widget.events({
   },
 });
 
-Template.Student_Explorer_Edit_Review_Widget.onRendered(
-  function studentExplorerEditReviewWidget() {
-    this.$('.ui.accordion').accordion();
-  }
-);
+Template.Student_Explorer_Edit_Review_Widget.onRendered(function studentExplorerEditReviewWidget() {
+  this.$('.ui.accordion').accordion();
+});
