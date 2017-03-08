@@ -34,6 +34,9 @@ Template.Academic_Plan.helpers({
   getDictionary() {
     return Template.instance().state;
   },
+  getAcademicYear(year) {
+    return `Academic Year ${year}-${year + 1}`;
+  },
   hasNextYear() {
     const instance = Template.instance();
     const ays = AcademicYearInstances.find({
