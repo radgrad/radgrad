@@ -4118,6 +4118,70 @@
           "independentStudy": false
         },
         {
+          "name": "Internship",
+          "slug": "generic-internship",
+          "description": "If you want to plan for an internship in the future, but not sure what company or what kind of work you'll want to do, then you can use this Opportunity as a \"placeholder\" in your degree plan.",
+          "opportunityType": "internship",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 15,
+            "c": 0,
+            "e": 30
+          },
+          "interests": [
+            "application-development"
+          ],
+          "semesters": [
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
+          ],
+          "moreInformation": "http://www.internships.com/computer-science",
+          "independentStudy": false
+        },
+        {
+          "name": "Research Project",
+          "slug": "generic-project",
+          "description": "If you want to plan to participate in a research project in some future semester, but are not sure yet what project you want to work on, then you can add this Opportunity as a \"placeholder\" in your degree plan until you know more precisely what you want to do.",
+          "opportunityType": "project",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 30,
+            "c": 0,
+            "e": 15
+          },
+          "interests": [
+            "research"
+          ],
+          "semesters": [
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
+          ],
+          "moreInformation": "http://www.ics.hawaii.edu/research/research-areas/",
+          "independentStudy": false
+        },
+        {
           "name": "Greyhats",
           "slug": "greyhats",
           "description": "The ICS Grey Hats is a student-led, extracurricular organization focused on real-world training for cyber defense. Membership gives students an outstanding opportunity to learn and apply critical skills, and to share with others interested in modern security issues.\n\nThe Grey Hats is a Registered Independent Organization at the University of Hawai’i – Manoa, and fosters education in the fields of Information Assurance, Network Management, Cyber Security, and Security Ethics. Hosted by the Department of Information and Computer Sciences, the group provides students a venue for networking with industry and government, performing community outreach, and for practical application of security skills in a supportive environment.",
