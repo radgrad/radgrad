@@ -77,7 +77,7 @@ Template.Student_MentorSpace_Question_Form.helpers({
     return { color, icon, message };
   },
   questions() {
-    return MentorQuestions.find({ studentID: getUserIdFromRoute(), visible: false });
+    return MentorQuestions.find({ studentID: getUserIdFromRoute(), visible: false }).fetch();
   },
 });
 
