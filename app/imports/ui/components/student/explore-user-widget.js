@@ -107,7 +107,7 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.autorun(() => {
-    this.subscribe(CourseInstances.getPublicationName(5), this.data.userID);
+    this.subscribe(CourseInstances.getPublicationName(5), this.data.userID.curValue);
   });
 });
 
