@@ -6,7 +6,14 @@ import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+
+function getExplorerUserID() {
+  const username = FlowRouter.getParam('explorerUserName');
+  return Users.findDoc({ username })._id;
+}
 
 Template.Explore_User_Widget.helpers({
   desiredDegree() {
@@ -99,15 +106,15 @@ Template.Explore_User_Widget.events({
 });
 
 Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
-  if (this.data.userID) {
-    this.userID = this.data.userID;
-  }
   this.subscribe(CareerGoals.getPublicationName());
   this.subscribe(Courses.getPublicationName());
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.autorun(() => {
-    this.subscribe(CourseInstances.getPublicationName(5), this.data.userID);
+    if (this.data.userID) {
+      this.userID = this.data.userID;
+    }
+    this.subscribe(CourseInstances.getPublicationName(5), getExplorerUserID());
   });
 });
 

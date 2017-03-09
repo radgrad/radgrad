@@ -33,7 +33,7 @@ Template.Student_MentorSpace_Questions_Accordion.onCreated(function studentMento
   this.subscribe(VerificationRequests.getPublicationName());
 });
 
-Template.Student_MentorSpace_Questions_Accordion.onRendered(function listMentorSpaceQuestionsOnRendered() {
+Template.Student_MentorSpace_Questions_Accordion.onRendered(function studentMentorSpaceQuestionsAccordionOnRendered() {
   this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
 });
 

@@ -10,22 +10,26 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 
 const availableCourses = () => {
-  const courses = Courses.find({}).fetch();
-  if (courses.length > 0 && Template.instance().localState.get('semester')) {
-    const filtered = _.filter(courses, function filter(course) {
-      if (course.number === 'ICS 499') {
-        return true;
-      }
-      const ci = CourseInstances.find({
-        courseID: course._id,
-        grade: /[AB]/,
-      }).fetch();
-      return ci.length === 0;
-    });
-    return filtered;
+  if (getRouteUserName()) {
+    const courses = Courses.find({}).fetch();
+    if (courses.length > 0 && Template.instance().localState.get('semester')) {
+      const filtered = _.filter(courses, function filter(course) {
+        if (course.number === 'ICS 499') {
+          return true;
+        }
+        const ci = CourseInstances.find({
+          courseID: course._id,
+          grade: /[AB]/,
+        }).fetch();
+        return ci.length === 0;
+      });
+      return filtered;
+    }
+    return [];
   }
   return [];
 };
@@ -63,16 +67,19 @@ const available4xxCourses = () => {
 };
 
 const availableOpportunities = () => {
-  const opportunities = Opportunities.find({}).fetch();
-  if (opportunities.length > 0 && Template.instance().localState.get('semester')) {
-    const filtered = _.filter(opportunities, function filter(opportunity) {
-      const oi = OpportunityInstances.find({
-        studentID: getUserIdFromRoute(),
-        courseID: opportunity._id,
-      }).fetch();
-      return oi.length === 0;
-    });
-    return filtered;
+  if (getRouteUserName()) {
+    const opportunities = Opportunities.find({}).fetch();
+    if (opportunities.length > 0 && Template.instance().localState.get('semester')) {
+      const filtered = _.filter(opportunities, function filter(opportunity) {
+        const oi = OpportunityInstances.find({
+          studentID: getUserIdFromRoute(),
+          courseID: opportunity._id,
+        }).fetch();
+        return oi.length === 0;
+      });
+      return filtered;
+    }
+    return [];
   }
   return [];
 };
@@ -130,6 +137,9 @@ Template.Semester_Add_Button.helpers({
         ret = false;
     }
     return ret;
+  },
+  loggedIn() {
+    return (getRouteUserName() !== null);
   },
   opportunities() {
     let ret = [];

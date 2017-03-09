@@ -48,47 +48,53 @@ const availableCourses = () => {
 };
 
 function matchingCourses() {
-  const allCourses = availableCourses();
-  const matching = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterests = [];
-  let courseInterests = [];
-  _.map(Users.getInterestIDs(user._id), (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  _.map(allCourses, (course) => {
-    courseInterests = [];
-    _.map(course.interestIDs, (id) => {
-      courseInterests.push(Interests.findDoc(id));
-      _.map(courseInterests, (courseInterest) => {
-        _.map(userInterests, (userInterest) => {
-          if (_.isEqual(courseInterest, userInterest)) {
-            if (!_.includes(matching, course)) {
-              matching.push(course);
+  if (getRouteUserName()) {
+    const allCourses = availableCourses();
+    const matching = [];
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const userInterests = [];
+    let courseInterests = [];
+    _.map(Users.getInterestIDs(user._id), (id) => {
+      userInterests.push(Interests.findDoc(id));
+    });
+    _.map(allCourses, (course) => {
+      courseInterests = [];
+      _.map(course.interestIDs, (id) => {
+        courseInterests.push(Interests.findDoc(id));
+        _.map(courseInterests, (courseInterest) => {
+          _.map(userInterests, (userInterest) => {
+            if (_.isEqual(courseInterest, userInterest)) {
+              if (!_.includes(matching, course)) {
+                matching.push(course);
+              }
             }
-          }
+          });
         });
       });
     });
-  });
-  return matching;
+    return matching;
+  }
+  return [];
 }
 
 function hiddenCoursesHelper() {
-  const courses = matchingCourses();
-  let nonHiddenCourses;
-  if (Template.instance().hidden.get()) {
-    const user = Users.findDoc({ username: getRouteUserName() });
-    nonHiddenCourses = _.filter(courses, (course) => {
-      if (_.includes(user.hiddenCourseIDs, course._id)) {
-        return false;
-      }
-      return true;
-    });
-  } else {
-    nonHiddenCourses = courses;
+  if (getRouteUserName()) {
+    const courses = matchingCourses();
+    let nonHiddenCourses;
+    if (Template.instance().hidden.get()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      nonHiddenCourses = _.filter(courses, (course) => {
+        if (_.includes(user.hiddenCourseIDs, course._id)) {
+          return false;
+        }
+        return true;
+      });
+    } else {
+      nonHiddenCourses = courses;
+    }
+    return nonHiddenCourses;
   }
-  return nonHiddenCourses;
+  return [];
 }
 
 const availableOpps = () => {
@@ -146,20 +152,23 @@ function matchingOpportunities() {
 }
 
 function hiddenOpportunitiesHelper() {
-  const opportunities = matchingOpportunities();
-  let nonHiddenOpportunities;
-  if (Template.instance().hidden.get()) {
-    const user = Users.findDoc({ username: getRouteUserName() });
-    nonHiddenOpportunities = _.filter(opportunities, (opp) => {
-      if (_.includes(user.hiddenOpportunityIDs, opp._id)) {
-        return false;
-      }
-      return true;
-    });
-  } else {
-    nonHiddenOpportunities = opportunities;
+  if (getRouteUserName()) {
+    const opportunities = matchingOpportunities();
+    let nonHiddenOpportunities;
+    if (Template.instance().hidden.get()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      nonHiddenOpportunities = _.filter(opportunities, (opp) => {
+        if (_.includes(user.hiddenOpportunityIDs, opp._id)) {
+          return false;
+        }
+        return true;
+      });
+    } else {
+      nonHiddenOpportunities = opportunities;
+    }
+    return nonHiddenOpportunities;
   }
-  return nonHiddenOpportunities;
+  return [];
 }
 
 
@@ -178,14 +187,17 @@ Template.Student_Of_Interest_Widget.helpers({
     return Template.instance().hidden.get();
   },
   hiddenExists() {
-    const user = Users.findDoc({ username: getRouteUserName() });
-    let ret;
-    if (this.type === 'courses') {
-      ret = user.hiddenCourseIDs.length !== 0;
-    } else {
-      ret = user.hiddenOpportunityIDs.length !== 0;
+    if (getRouteUserName()) {
+      const user = Users.findDoc({ username: getRouteUserName() });
+      let ret;
+      if (this.type === 'courses') {
+        ret = user.hiddenCourseIDs.length !== 0;
+      } else {
+        ret = user.hiddenOpportunityIDs.length !== 0;
+      }
+      return ret;
     }
-    return ret;
+    return false;
   },
   itemCount() {
     let ret;
