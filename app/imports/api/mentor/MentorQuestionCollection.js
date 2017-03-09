@@ -35,7 +35,7 @@ class MentorQuestionCollection extends BaseInstanceCollection {
    * @param visible If the question is visible. Defaults to false.
    * @return { String } the docID of this question.
    */
-  define({ title, slug, student, moderated = false, visible = false, moderatorComments }) {
+  define({ title, slug, student, moderated = false, visible = false, moderatorComments = '' }) {
     const studentID = Users.getID(student);
     let questionSlug = slug;
     if (!slug) {
@@ -52,14 +52,28 @@ class MentorQuestionCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Updates the MentorQuestion's approved variable.
+   * Updates the MentorQuestion's moderated, visible, and moderatorComments variable.
    * @param questionID The MentorQuestion ID.
-   * @param approved The new approved value.
+   * @param moderated The new moderated value.
+   * @param moderated The new visible value.
+   * @param moderated The new moderatorComments value.
+
    */
   updateModerated(questionID, moderated, visible, moderatorComments) {
     this.assertDefined(questionID);
     this._collection.update({ _id: questionID },
         { $set: { moderated, visible, moderatorComments } });
+  }
+
+  /**
+   * Updates the MentorQuestion's title, visible, and moderated variables.
+   * @param questionID The MentorQuestion ID.
+   * @param title The new title value.
+   */
+  updateQuestion(questionID, title) {
+    this.assertDefined(questionID);
+    this._collection.update({ _id: questionID },
+        { $set: { title, moderated: false, visible: false } });
   }
 
   /**
@@ -74,6 +88,15 @@ class MentorQuestionCollection extends BaseInstanceCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Removes the passed MentorQuestion and its associated Slug.
+   * @param opportunity The document or _id associated with this MentorQuestion.
+   * @throws {Meteor.Error} If MentorQuestion is not defined.
+   */
+  removeIt(question) {
+    super.removeIt(question);
   }
 
   /**
