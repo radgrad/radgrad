@@ -9,7 +9,7 @@
 
 # Private information
 realdata/
-app/database/production/
+app/private/database/production/
 
 # NPM
 node_modules
