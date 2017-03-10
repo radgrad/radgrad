@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
@@ -9,6 +10,7 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 const editSchema = new SimpleSchema({
   semester: { type: String, optional: false },
@@ -68,6 +70,7 @@ Template.Student_Explorer_Edit_Review_Widget.events({
       updatedData.moderated = false;
       FormUtils.renameKey(updatedData, 'semester', 'semesterID');
       Reviews.update(this.review._id, { $set: updatedData });
+      FlowRouter.reload();
       FormUtils.indicateSuccess(instance, event);
     } else {
       FormUtils.indicateError(instance);
