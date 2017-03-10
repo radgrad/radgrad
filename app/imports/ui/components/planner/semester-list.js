@@ -72,6 +72,7 @@ Template.Semester_List.helpers({
       }
       return ret;
     }
+    return [];
   },
   opportunityName(opportunityID) {
     const opp = OpportunityInstances.find({ _id: opportunityID }).fetch();

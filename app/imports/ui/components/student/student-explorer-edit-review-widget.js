@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { Meteor } from 'meteor/meteor';
 
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -8,7 +7,6 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { Roles } from 'meteor/alanning:roles';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';

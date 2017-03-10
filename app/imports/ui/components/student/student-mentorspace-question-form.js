@@ -48,9 +48,8 @@ Template.Student_MentorSpace_Question_Form.helpers({
   defaultQuestion() {
     if (Template.instance().setDefaultQuestion.get()) {
       return MentorQuestions.findDoc(Template.instance().setDefaultQuestion.get()).title;
-    } else {
-      return '';
     }
+    return '';
   },
   successClass() {
     return Template.instance().messageFlags.get(displaySuccessMessage) ? 'success' : '';
