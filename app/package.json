@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "start": "meteor --settings ../config/settings.development.json --no-release-check",
+    "start-production": "meteor --settings ../config/settings.production.json --no-release-check",
+    "start-production-local": "meteor --settings ../config/settings.production.local.json --no-release-check",
     "lint": "eslint --quiet ./imports",
     "lint-loud": "eslint ./imports",
     "pretest": "npm run lint --silent",
