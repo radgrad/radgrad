@@ -7,7 +7,7 @@ import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
 import { Users } from '../../../api/user/UserCollection.js';
-import { Feed } from '../../../api/feed/FeedCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection.js';
 
 const userDefineSchema = new SimpleSchema({
   firstName: { type: String },
@@ -138,15 +138,15 @@ Template.Student_Selector_Tabs.events({
             // console.log(error);
           } else {
             const timestamp = new Date().getTime();
-            if (Feed.checkPastDayFeed(timestamp, 'new-user')) {
-              Feed.updateNewUser(userName, Feed.checkPastDayFeed(timestamp, 'new-user'));
+            if (Feeds.checkPastDayFeed(timestamp, 'new-user')) {
+              Feeds.updateNewUser(userName, Feeds.checkPastDayFeed(timestamp, 'new-user'));
             } else {
               const feedDefinition = {
                 user: [userName],
                 feedType: 'new-user',
                 timestamp,
               };
-              Feed.define(feedDefinition);
+              Feeds.define(feedDefinition);
             }
             const user = Users.getUserFromUsername(userName);
             instance.studentID.set(user._id);

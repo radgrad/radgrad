@@ -100,3 +100,11 @@
 .footer-item:before, .footer-item {
   color: rgba(255,255,255,.7) !important;
 }
+
+.landing-ice .column .radgrad-ice.menu .radgrad-ice-stat {
+  top: 15px !important;
+}
+
+.main-header-ice .card .content {
+  padding-bottom: 0;
+}

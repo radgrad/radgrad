@@ -21,7 +21,7 @@ import { HelpMessages } from '../../../api/help/HelpMessageCollection.js';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
-import { Feed } from '../../../api/feed/FeedCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
@@ -69,7 +69,7 @@ Template.Admin_DataBase_Integrity_Check_Page.onCreated(function onCreated() {
   this.subscribe(AdvisorLogs.getPublicationName());
   this.subscribe(VerificationRequests.getPublicationName());
   this.subscribe(AcademicYearInstances.getPublicationName());
-  this.subscribe(Feed.getPublicationName());
+  this.subscribe(Feeds.getPublicationName());
   this.subscribe(MentorAnswers.getPublicationName());
   this.subscribe(MentorQuestions.getPublicationName());
   this.subscribe(Teasers.getPublicationName());

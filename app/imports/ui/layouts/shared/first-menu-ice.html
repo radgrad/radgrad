@@ -1,20 +1,41 @@
 <template name="First_Menu_Ice">
+  {{#if includeLink}}
   <div class="radgrad-ice menu">
-    <a class="radgrad-ice-circle {{pClass projected}} radgrad-proj-{{iceType}}" href="{{pathFor iceRouteName username=routeUserName}}">
-      <div class="radgrad-ice-stat">
-        <span>{{earned}}</span>
+      <a class="radgrad-ice-circle {{pClass projected}} radgrad-proj-{{iceType}}" href="{{pathFor iceRouteName username=routeUserName}}">
+        <div class="radgrad-ice-stat">
+          <span>{{earned}}</span>
+        </div>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </a>
+      <a class="radgrad-ice-circle {{pClass earned}} radgrad-earn-{{iceType}}">
+        <span></span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </a>
+    </div>
+  {{else}}
+    <div class="radgrad-ice menu">
+      <div class="radgrad-ice-circle {{pClass projected}} radgrad-proj-{{iceType}}" href="{{pathFor iceRouteName username=routeUserName}}">
+        <div class="radgrad-ice-stat">
+          <span>{{earned}}</span>
+        </div>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
       </div>
-      <div class="slice">
-        <div class="bar"></div>
-        <div class="fill"></div>
+      <div class="radgrad-ice-circle {{pClass earned}} radgrad-earn-{{iceType}}">
+        <span></span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
       </div>
-    </a>
-    <a class="radgrad-ice-circle {{pClass earned}} radgrad-earn-{{iceType}}">
-      <span></span>
-      <div class="slice">
-        <div class="bar"></div>
-        <div class="fill"></div>
-      </div>
-    </a>
-  </div>
+    </div>
+  {{/if}}
 </template>
