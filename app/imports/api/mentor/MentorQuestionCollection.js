@@ -95,8 +95,10 @@ class MentorQuestionCollection extends BaseInstanceCollection {
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     const problems = [];
     this.find().forEach(doc => {
-      if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`Bad slugID: ${doc.slugID}`);
+      if (doc.slugID) {
+        if (!Slugs.isDefined(doc.slugID)) {
+          problems.push(`Bad slugID: ${doc.slugID}`);
+        }
       }
       if (!Users.isDefined(doc.studentID)) {
         problems.push(`Bad studentID: ${doc.studentID}`);
@@ -122,12 +124,14 @@ class MentorQuestionCollection extends BaseInstanceCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const title = doc.title;
-    const slug = Slugs.getNameFromID(doc.slugID);
+    let slug;
+    if (doc.slugID) {
+      slug = Slugs.getNameFromID(doc.slugID);
+    }
     const student = Users.findSlugByID(doc.studentID);
     const moderated = doc.moderated;
     const visible = doc.visible;
     const moderatorComments = doc.moderatorComments;
-
     return { title, slug, student, moderated, visible, moderatorComments };
   }
 }
