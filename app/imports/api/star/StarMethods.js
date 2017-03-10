@@ -13,7 +13,7 @@ export function processStudentStarCsvData(student, csvData) {
   // console.log(`loadStarCsvData ${student} ${csvData}`);
   const definitions = processStarCsvData(student, csvData);
   const studentID = Users.findDoc({ username: student })._id;
-  const oldInstances = CourseInstances.find({ studentID, verified: true }).fetch();
+  const oldInstances = CourseInstances.find({ studentID, fromSTAR: true }).fetch();
   _.map(oldInstances, (instance) => {
     CourseInstances.removeIt(instance._id);
   });

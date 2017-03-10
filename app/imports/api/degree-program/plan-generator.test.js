@@ -36,6 +36,7 @@ if (Meteor.isServer) {
     this.timeout(20000);
     let studentID;
     const sophmoreStudentCleanData = 'testdata/sophmoreClean.csv';
+    const sophmoreStudentMissingOneData = 'testdata/sophmoreMissingOne.csv';
     before(function setup() {
       console.log('setup');
       removeAllEntities();

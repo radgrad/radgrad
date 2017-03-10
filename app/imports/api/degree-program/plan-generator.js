@@ -148,6 +148,7 @@ function removeTakenCourses(student, degreeList) {
 }
 
 function hasPrerequisites(courseSlug, takenCourseSlugs) {
+  // console.log('hasPre', courseSlug, takenCourseSlugs);
   const courseID = Courses.findIdBySlug(courseSlug);
   const course = Courses.findDoc(courseID);
   let retVal = true;
@@ -162,7 +163,7 @@ function hasPrerequisites(courseSlug, takenCourseSlugs) {
 function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
   const studentID = student._id;
   const grade = 'A';
-  const courseSlug = degreeList.splice(0, 1)[0];
+  let courseSlug = degreeList.splice(0, 1)[0];
   if (typeof courseSlug === 'object') {
     // console.log(courseSlug);
     const bestChoice = courseUtils.chooseBetween(courseSlug, studentID, courseTakenSlugs);
@@ -198,17 +199,34 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
           grade,
           student: student.username,
         });
-      } else {
-        console.log('only choice', courseSlug, Semesters.toString(semester._id, false));
-        const note = createNote(courseSlug);
-        CourseInstances.define({
-          semester: Semesters.getSlug(semester._id),
-          course: courseSlug,
-          note,
-          grade,
-          student: student.username,
-        });
-      }
+      } else
+        if (hasPrerequisites(courseSlug, courseTakenSlugs)) {
+          console.log('only choice', courseSlug, Semesters.toString(semester._id, false));
+          const note = createNote(courseSlug);
+          CourseInstances.define({
+            semester: Semesters.getSlug(semester._id),
+            course: courseSlug,
+            note,
+            grade,
+            student: student.username,
+          });
+        } else {
+          degreeList.splice(1, 0, courseSlug);  // return slug to list in the second spot
+          courseSlug = degreeList.splice(0, 1)[0];
+          if (hasPrerequisites(courseSlug, courseTakenSlugs)) {
+            console.log('2nd choice', courseSlug, Semesters.toString(semester._id, false));
+            const note = createNote(courseSlug);
+            CourseInstances.define({
+              semester: Semesters.getSlug(semester._id),
+              course: courseSlug,
+              note,
+              grade,
+              student: student.username,
+            });
+          } else { // do we try one more time?
+            console.log(degreeList);
+          }
+        }
 }
 
 /**
@@ -290,7 +308,7 @@ export function generateBSDegreePlan(student, startSemester) {
   let degreeList = BS_CS_LIST.slice(0);
   // remove the courses that the student has already taken.
   degreeList = removeTakenCourses(student, degreeList);
-  console.log('degreeList', degreeList);
+  // console.log('degreeList', degreeList);
   let semester = startSemester;
   let ice;
   const chosenOpportunites = [];
@@ -370,7 +388,7 @@ export function generateBADegreePlan(student, startSemester) {
   let degreeList = BA_ICS_LIST.slice(0);
   // remove the courses that the student has already taken.
   degreeList = removeTakenCourses(student, degreeList);
-  console.log(degreeList);
+  // console.log(degreeList);
   let semester = startSemester;
   let ice;
   const chosenOpportunites = [];
