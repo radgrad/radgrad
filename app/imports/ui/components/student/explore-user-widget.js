@@ -8,8 +8,6 @@ import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-
 function getExplorerUserID() {
   const username = FlowRouter.getParam('explorerUserName');
   return Users.findDoc({ username })._id;

@@ -1,6 +1,6 @@
 /* global Assets */
 
-import { Meteor } from 'meteor/meteor';
+// import { Meteor } from 'meteor/meteor';
 import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
@@ -55,14 +55,14 @@ function getDefinitions(restoreJSON, collection) {
  */
 function restoreCollection(collection, restoreJSON) {
   const definitions = getDefinitions(restoreJSON, collection._collectionName);
-  console.log(`Defining ${definitions.length} ${collection._collectionName} documents.`);
+  console.log(`Defining ${definitions.length} ${collection._collectionName} documents.`); // eslint-disable-line
   _.each(definitions, definition => collection.define(definition));
 }
 
 export function defineTestFixture() {
-  const restoreFileName = 'database/mockup/2017-03-01-15-52-59.json';
+  const restoreFileName = 'database/mockup/2017-03-10-10-04-41.json';
   const restoreFileAge = getRestoreFileAge(restoreFileName);
-  console.log(`Restoring test fixture from file ${restoreFileName}, dumped ${restoreFileAge}.`);
+  console.log(`Restoring test fixture from file ${restoreFileName}, dumped ${restoreFileAge}.`); // eslint-disable-line
   const restoreJSON = JSON.parse(Assets.getText(restoreFileName));
   // The list of collections, ordered so that they can be sequentially restored.
   const collectionList = [Semesters, InterestTypes, Interests, CareerGoals, DesiredDegrees,
@@ -70,8 +70,8 @@ export function defineTestFixture() {
     CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
     VerificationRequests];
 
-  const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
-  const collectionNames = _.map(collectionList, collection => collection._collectionName);
+  // const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
+  // const collectionNames = _.map(collectionList, collection => collection._collectionName);
   // const extraRestoreNames = _.difference(restoreNames, collectionNames);
   // const extraCollectionNames = _.difference(collectionNames, restoreNames);
 
@@ -83,6 +83,6 @@ export function defineTestFixture() {
   // }
 
   // if (!extraRestoreNames.length && !extraCollectionNames.length) {
-    _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
+  _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
   // }
 }

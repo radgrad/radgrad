@@ -1,3 +1,4 @@
+/* global isNaN */
 import { Meteor } from 'meteor/meteor';
 import { Papa } from 'meteor/harrison:papa-parse';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -41,7 +42,7 @@ function findSemesterSlug(starDataObject) {
   let year = parseInt(semesterTokens[1], 10);
   if (isNaN(year)) {
     year = parseInt(semesterTokens[2], 10);
-    if (isNan(year)) {
+    if (isNaN(year)) {
       throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);
     }
   }
