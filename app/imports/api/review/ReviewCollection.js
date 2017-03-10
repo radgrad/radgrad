@@ -60,7 +60,7 @@ class ReviewCollection extends BaseInstanceCollection {
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ slug, student, reviewType, reviewee, semester, rating, comments,
+  define({ slug, student, reviewType, reviewee, semester, rating = 3, comments,
       moderated = false, visible = true, moderatorComments }) {
     // Get instances, or throw error
     const studentID = Users.getID(student);
