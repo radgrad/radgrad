@@ -50,10 +50,10 @@
           {{> TextArea_Form_Field label="Comments" rows=5 name="comments" value=review.comments errorMessage=(fieldError "comments") required=true}}
 
           <button class="ui green basic mini button" type="submit">UPDATE</button>
-          {{> Success_Message_Form_Field message="Your review was successfully updated."}}
           <button value="{{review._id}}" class="ui red basic mini button jsDelete">DELETE</button>
+          {{> Success_Message_Form_Field message="Your review was successfully updated."}}
         </form>
-      </div>    
+      </div>
     </div>
   </div> 
 

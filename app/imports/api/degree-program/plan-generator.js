@@ -59,19 +59,16 @@ function isCoreInstance(courseInstance) {
 function getPassedCourseInstances(student) {
   const studentID = student._id;
   const instances = CourseInstances.find({ studentID, note: /ICS/ }).fetch();
-  const currentSemester = Semesters.getCurrentSemesterDoc();
+  // const currentSemester = Semesters.getCurrentSemesterDoc();
   const passedInstances = [];
   _.map(instances, (instance) => {
-    const instanceSemester = Semesters.findDoc(instance.semesterID);
+    // const instanceSemester = Semesters.findDoc(instance.semesterID);
     // const instanceID = instance._id;
     // if (CourseInstances.isICS(instanceID)) {
     if (isCoreInstance(instance)) {
       if (instance.grade.includes('A') || instance.grade.includes('B') || instance.grade.includes('CR')) {
         passedInstances.push(instance);
-      } else
-        if ((currentSemester.semesterNumber - instanceSemester.semesterNumber) > 2) {
-          passedInstances.push(instance);
-        }
+      }
     } else
       if (instance.grade.includes('A') || instance.grade.includes('B') || instance.grade.includes('C')) {
         passedInstances.push(instance);
@@ -129,8 +126,8 @@ function _missingCourses(courseIDs, coursesNeeded) {
 }
 
 function removeTakenCourses(student, degreeList) {
-  const slugs = getPassedCourseIDs(student);
-  const missing = _missingCourses(slugs, degreeList);
+  const passedIDs = getPassedCourseIDs(student);
+  const missing = _missingCourses(passedIDs, degreeList);
   return missing;
   // const takenCourses = getPassedCourseInstances(student);
   // _.map(takenCourses, (instance) => {
@@ -149,15 +146,18 @@ function removeTakenCourses(student, degreeList) {
 
 function hasPrerequisites(courseSlug, takenCourseSlugs) {
   // console.log('hasPre', courseSlug, takenCourseSlugs);
-  const courseID = Courses.findIdBySlug(courseSlug);
-  const course = Courses.findDoc(courseID);
-  let retVal = true;
-  _.map(course.prerequisites, (prereq) => {
-    if (_.indexOf(takenCourseSlugs, prereq) === -1) {
-      retVal = false;
-    }
-  });
-  return retVal;
+  if (typeof courseSlug !== 'object') {
+    const courseID = Courses.findIdBySlug(courseSlug);
+    const course = Courses.findDoc(courseID);
+    let retVal = true;
+    _.map(course.prerequisites, (prereq) => {
+      if (_.indexOf(takenCourseSlugs, prereq) === -1) {
+        retVal = false;
+      }
+    });
+    return retVal;
+  }
+  return false;
 }
 
 function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
@@ -227,80 +227,6 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
             // console.log(degreeList);
           }
         }
-}
-
-/**
- * Used to select 2 core courses. This only works for the up until ics321. No choices.
- * @param student
- * @param semester
- * @param degreeList
- */
-function choose2Core(student, semester, degreeList) {
-  const takenSlugs = getPassedCourseSlugs(student);
-  const grade = 'A';
-  let firstCourseSlug = degreeList.splice(0, 1)[0];
-  let secondCourseSlug = degreeList.splice(0, 1)[0];
-  if (hasPrerequisites(firstCourseSlug, takenSlugs)) {
-    const note = createNote(firstCourseSlug);
-    CourseInstances.define({
-      semester: Semesters.getSlug(semester._id),
-      course: firstCourseSlug,
-      note,
-      grade,
-      student: student.username,
-    });
-  } else {
-    degreeList.splice(1, 0, firstCourseSlug);  // return slug to list in the second spot
-    firstCourseSlug = degreeList.splice(0, 1)[0];
-    if (hasPrerequisites(firstCourseSlug, takenSlugs)) {
-      const note = createNote(firstCourseSlug);
-      CourseInstances.define({
-        semester: Semesters.getSlug(semester._id),
-        course: firstCourseSlug,
-        note,
-        grade,
-        student: student.username,
-      });
-    } else {
-      degreeList.splice(1, 0, firstCourseSlug);
-      firstCourseSlug = degreeList.splice(0, 1)[0];
-      if (hasPrerequisites(firstCourseSlug, takenSlugs)) {
-        const note = createNote(firstCourseSlug);
-        CourseInstances.define({
-          semester: Semesters.getSlug(semester._id),
-          course: firstCourseSlug,
-          note,
-          grade,
-          student: student.username,
-        });
-      }  // give up
-    }
-  }
-  if (hasPrerequisites(secondCourseSlug, takenSlugs)) {
-    const note = createNote(secondCourseSlug);
-    CourseInstances.define({
-      semester: Semesters.getSlug(semester._id),
-      course: secondCourseSlug,
-      note,
-      grade,
-      student: student.username,
-    });
-  } else {
-    degreeList.splice(1, 0, secondCourseSlug);
-    secondCourseSlug = degreeList.splice(0, 1)[0];
-    if (hasPrerequisites(secondCourseSlug, takenSlugs)) {
-      const note = createNote(secondCourseSlug);
-      CourseInstances.define({
-        semester: Semesters.getSlug(semester._id),
-        course: secondCourseSlug,
-        note,
-        grade,
-        student: student.username,
-      });
-    } else {
-      degreeList.splice(1, 0, secondCourseSlug);
-    }
-  } // give up here?
 }
 
 export function generateBSDegreePlan(student, startSemester) {
@@ -384,6 +310,7 @@ export function generateBSDegreePlan(student, startSemester) {
 }
 
 export function generateBADegreePlan(student, startSemester) {
+  // console.log('generateBADegreePlan');
   // get the right course list.
   let degreeList = BA_ICS_LIST.slice(0);
   // remove the courses that the student has already taken.
@@ -404,7 +331,13 @@ export function generateBADegreePlan(student, startSemester) {
       AcademicYearInstances.define({ year: semester.year, student: student.username });
     }
     if (semester.term !== Semesters.SUMMER) {
-      choose2Core(student, semester, degreeList);
+      // choose2Core(student, semester, degreeList);
+      let coursesTaken = getPassedCourseSlugs(student);
+      chooseCourse(student, semester, degreeList, coursesTaken);
+      if (degreeList.length > 0) {
+        coursesTaken = getPassedCourseSlugs(student);
+        chooseCourse(student, semester, degreeList, coursesTaken);
+      }
     }
     // Define the opportunity instance for the semester
     // Choose an opportunity.
