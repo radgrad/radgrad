@@ -49,6 +49,10 @@
   font-size: 45px;
 }
 
+.mobile-header {
+  font-size: 60px !important;
+}
+
 .inverted-description {
   color: rgba(255,255,255,.7);
   font-size: 18px;
@@ -95,4 +99,12 @@
 
 .footer-item:before, .footer-item {
   color: rgba(255,255,255,.7) !important;
+}
+
+.landing-ice .column .radgrad-ice.menu .radgrad-ice-stat {
+  top: 15px !important;
+}
+
+.main-header-ice .card .content {
+  padding-bottom: 0;
 }

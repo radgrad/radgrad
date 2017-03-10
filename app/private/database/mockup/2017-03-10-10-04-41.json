@@ -1,5 +1,5 @@
 {
-  "timestamp": "2017-03-02T01:52:59.151Z",
+  "timestamp": "2017-03-10T20:04:41.798Z",
   "collections": [
     {
       "name": "AcademicYearInstanceCollection",
@@ -2815,13 +2815,6 @@
     {
       "name": "FeedCollection",
       "contents": [
-        {
-          "user": [
-            "jakephilips"
-          ],
-          "feedType": "new-user",
-          "timestamp": 1488400138529
-        }
       ]
     },
     {
@@ -3496,25 +3489,29 @@
       "contents": [
         {
           "title": "I'm interested in a career in data science. What should I be doing as an undergrad to prepare?",
+          "slug": "question-abi-0",
           "student": "abi",
           "moderated": true,
           "visible": true
         },
         {
-          "title": "What do you look for when hiring a new graduate?",
-          "student": "ella",
+          "title": "What aspects of your undergraduate degree experience has proven most useful to you?",
+          "slug": "question-betty-0",
+          "student": "betty",
           "moderated": true,
           "visible": true
         },
         {
           "title": "What mistakes do CS students make during interviews?",
+          "slug": "question-charley-0",
           "student": "charley",
           "moderated": true,
           "visible": true
         },
         {
-          "title": "What aspects of your undergraduate degree experience has proven most useful to you?",
-          "student": "betty",
+          "title": "What do you look for when hiring a new graduate?",
+          "slug": "question-ella-0",
+          "student": "ella",
           "moderated": true,
           "visible": true
         }
@@ -3561,17 +3558,34 @@
             "e": 5
           },
           "interests": [
-            "hardware",
+            "application-development",
             "entrepreneurship",
-            "application-development"
+            "hardware"
           ],
           "semesters": [
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
             "Fall-2015",
             "Spring-2016",
             "Summer-2016",
             "Fall-2016",
             "Spring-2017",
-            "Summer-2017"
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "http://acmanoa.github.io/",
           "independentStudy": false
@@ -3591,12 +3605,29 @@
             "hardware"
           ],
           "semesters": [
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
             "Spring-2017",
+            "Summer-2017",
             "Fall-2017",
             "Spring-2018",
+            "Summer-2018",
             "Fall-2018",
             "Spring-2019",
-            "Fall-2019"
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "http://acmanoa.github.io/activities/",
           "independentStudy": false
@@ -3616,13 +3647,25 @@
             "virtual-reality"
           ],
           "semesters": [
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
             "Spring-2017",
+            "Summer-2017",
             "Fall-2017",
             "Spring-2018",
+            "Summer-2018",
             "Fall-2018",
             "Spring-2019",
+            "Summer-2019",
             "Fall-2019",
-            "Spring-2020"
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "http://acmanoa.github.io/activities/",
           "independentStudy": false
@@ -3643,12 +3686,26 @@
             "web-development"
           ],
           "semesters": [
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
             "Spring-2017",
+            "Summer-2017",
             "Fall-2017",
             "Spring-2018",
+            "Summer-2018",
             "Fall-2018",
             "Spring-2019",
-            "Fall-2019"
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "http://acmanoa.github.io/activities/",
           "independentStudy": false
@@ -3676,7 +3733,19 @@
             "Summer-2016",
             "Fall-2016",
             "Spring-2017",
-            "Summer-2017"
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "http://alnt.org/",
           "independentStudy": true
@@ -3701,7 +3770,15 @@
             "Fall-2017",
             "Spring-2018",
             "Summer-2018",
-            "Fall-2018"
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "https://www.meetup.com/aloharb/",
           "independentStudy": false
@@ -3722,8 +3799,24 @@
             "research"
           ],
           "semesters": [
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
             "Fall-2016",
-            "Spring-2017"
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020"
           ],
           "moreInformation": "http://hi-seas.org",
           "independentStudy": true
@@ -3771,8 +3864,8 @@
             "e": 15
           },
           "interests": [
-            "artificial-intelligence",
-            "application-development"
+            "application-development",
+            "artificial-intelligence"
           ],
           "semesters": [
             "Fall-2016",
@@ -3782,7 +3875,8 @@
             "Fall-2018",
             "Spring-2019",
             "Fall-2019",
-            "Spring-2020"
+            "Spring-2020",
+            "Spring-2021"
           ],
           "moreInformation": "http://developer.ibm.com/iotplatform/events/att-iot-hackathon-dallas/",
           "independentStudy": false,
@@ -3855,10 +3949,15 @@
             "security"
           ],
           "semesters": [
+            "Spring-2014",
+            "Spring-2015",
+            "Spring-2016",
             "Spring-2017",
             "Spring-2018",
             "Spring-2019",
-            "Spring-2020"
+            "Spring-2020",
+            "Spring-2012",
+            "Spring-2021"
           ],
           "moreInformation": "http://www.nationalccdc.org/index.php/competition/competitors/ccdc-regionals",
           "independentStudy": false
@@ -3909,12 +4008,18 @@
             "application-development"
           ],
           "semesters": [
+            "Fall-2014",
+            "Spring-2015",
+            "Spring-2016",
+            "Fall-2016",
             "Spring-2017",
             "Fall-2017",
             "Spring-2018",
             "Fall-2018",
             "Spring-2019",
-            "Fall-2019"
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020"
           ],
           "moreInformation": "https://apply.eng.hawaii.edu/resume",
           "independentStudy": false
@@ -3939,7 +4044,12 @@
             "Fall-2017",
             "Spring-2018",
             "Summer-2018",
-            "Fall-2018"
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Summer-2020"
           ],
           "moreInformation": "https://www.coursera.org/specializations/business-analytics",
           "independentStudy": false
@@ -4021,6 +4131,47 @@
           "independentStudy": false
         },
         {
+          "name": "CS Job",
+          "slug": "cs-job",
+          "description": "Use this opportunity to indicate work at a paid job as a software developer or other activity directly related to computer science.",
+          "opportunityType": "internship",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 15,
+            "c": 0,
+            "e": 15
+          },
+          "interests": [
+            "application-development"
+          ],
+          "semesters": [
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
+          ],
+          "moreInformation": "https://www.indeed.com/q-Computer-Science-l-Hawaii-jobs.html",
+          "independentStudy": false
+        },
+        {
           "name": "Cyber Security for Automated Processes",
           "slug": "cyber-security-for-automated-processes",
           "description": "This meetup is dedicated to all professionals involved in Cyber Security for Automated Processes and Control Systems including security for Operating Technology (OT), Industrial Control Systems (ICS), SCADA Systems, Transportation Systems, Building Control Systems (BCS), and even emerging Industrial Internet of Things (IIoT) systems. Our purpose is to connect the professionals in the Greater Honolulu area with real interest in or responsibility for the cyber security of these systems.\n\nOnce we have enough critical mass of interest in Honolulu, we will gather for purposes of education, information exchange, and discovery of new opportunities and, yes, perhaps a few happy hours! If you are interested in serving on a committee to help shape this meetup experience, please contact the organizers directly.",
@@ -4089,9 +4240,26 @@
             "sustainability"
           ],
           "semesters": [
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
             "Fall-2016",
             "Spring-2017",
-            "Summer-2017"
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "http://www2.hawaii.edu/~lipyeow/",
           "independentStudy": true
@@ -4111,10 +4279,13 @@
             "security"
           ],
           "semesters": [
+            "Summer-2015",
+            "Summer-2016",
             "Summer-2017",
             "Summer-2018",
             "Summer-2019",
-            "Summer-2020"
+            "Summer-2020",
+            "Summer-2021"
           ],
           "moreInformation": "https://gencyber-hi.org/",
           "independentStudy": false
@@ -4134,6 +4305,16 @@
             "application-development"
           ],
           "semesters": [
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
+            "Spring-2017",
             "Summer-2017",
             "Fall-2017",
             "Spring-2018",
@@ -4143,6 +4324,7 @@
             "Summer-2019",
             "Fall-2019",
             "Spring-2020",
+            "Fall-2020",
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
@@ -4151,28 +4333,131 @@
           "independentStudy": false
         },
         {
-          "name": "Kaggle",
-          "slug": "kaggle",
-          "description": "[Kaggle](https://www.kaggle.com/) is an online service that hosts data science and machine learning competitions, as well as a job board with listings for analysts, programmers, and more.  If you are interested in a career in data science, you should definitely get involved with Kaggle!\n\nKaggle, which was recently acquired by Google, has been used by over 800,000 data scientists to explore, understand, and contribute to machine learning and data analytics.\n\nThe Kaggle community has worked together to utilize machine learning for everything from essay marking to diagnosing heart failure. Last August, Kaggle launched an open data platform in which scientists have contributed a range of datasets relating to everything from credit card fraud to H-1B Visa petitions and tsunami wave rates.\n\nTo gain ICE points for this opportunity, join Kaggle, and then work through the [Titanic](https://www.kaggle.com/c/titanic) competition.",
-          "opportunityType": "online-learning",
+          "name": "Research Project",
+          "slug": "generic-project",
+          "description": "If you want to plan to participate in a research project in some future semester, but are not sure yet what project you want to work on, then you can add this Opportunity as a \"placeholder\" in your degree plan until you know more precisely what you want to do.",
+          "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
-            "i": 15,
-            "c": 15,
-            "e": 0
+            "i": 30,
+            "c": 0,
+            "e": 15
           },
           "interests": [
-            "algorithms",
-            "artificial-intelligence",
-            "data-science",
-            "machine-learning",
-            "python",
-            "r",
             "research"
           ],
           "semesters": [
-            "Spring-2013",
-            "Summer-2013",
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
+          ],
+          "moreInformation": "http://www.ics.hawaii.edu/research/research-areas/",
+          "independentStudy": false
+        },
+        {
+          "name": "Workshop or Conference",
+          "slug": "generic-workshop",
+          "description": "If you attend a workshop or a conference, you can gain valuable insights as well as a few competency points!",
+          "opportunityType": "event",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 0,
+            "c": 5,
+            "e": 0
+          },
+          "interests": [
+            "application-development"
+          ],
+          "semesters": [
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
+          ],
+          "moreInformation": "http://honolulu.eventful.com/events/categories/conference",
+          "independentStudy": false
+        },
+        {
+          "name": "Global Game Jam",
+          "slug": "global-game-jam",
+          "description": "The Global Game Jam® (GGJ) is the world's largest game jam event (game creation) taking place around the world at physical locations. Think of it as a hackathon focused on game development. It is the growth of an idea that in today’s heavily connected world, we could come together, be creative, share experiences and express ourselves in a multitude of ways using video games – it is very universal. The weekend stirs a global creative buzz in games, while at the same time exploring the process of development, be it programming, iterative design, narrative exploration or artistic expression. It is all condensed into a 48 hour development cycle. The GGJ encourages people with all kinds of backgrounds to participate and contribute to this global spread of game development and creativity.",
+          "opportunityType": "event",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 10,
+            "c": 0,
+            "e": 10
+          },
+          "interests": [
+            "game-design"
+          ],
+          "semesters": [
+            "Spring-2014",
+            "Spring-2015",
+            "Spring-2016",
+            "Spring-2017",
+            "Spring-2018",
+            "Spring-2019",
+            "Spring-2020",
+            "Spring-2021"
+          ],
+          "moreInformation": "http://globalgamejam.org/",
+          "independentStudy": false
+        },
+        {
+          "name": "Greyhats",
+          "slug": "greyhats",
+          "description": "The ICS Grey Hats is a student-led, extracurricular organization focused on real-world training for cyber defense. Membership gives students an outstanding opportunity to learn and apply critical skills, and to share with others interested in modern security issues.\n\nThe Grey Hats is a Registered Independent Organization at the University of Hawai’i – Manoa, and fosters education in the fields of Information Assurance, Network Management, Cyber Security, and Security Ethics. Hosted by the Department of Information and Computer Sciences, the group provides students a venue for networking with industry and government, performing community outreach, and for practical application of security skills in a supportive environment.",
+          "opportunityType": "club",
+          "sponsor": "glau",
+          "ice": {
+            "i": 5,
+            "c": 0,
+            "e": 5
+          },
+          "interests": [
+            "security"
+          ],
+          "semesters": [
             "Fall-2013",
             "Spring-2014",
             "Summer-2014",
@@ -4195,77 +4480,8 @@
             "Spring-2020",
             "Fall-2020",
             "Summer-2020",
-            "Fall-2012",
-            "Summer-2012",
-            "Spring-2012",
-            "Fall-2011",
-            "Spring-2011",
-            "Summer-2010",
-            "Fall-2010",
-            "Summer-2011",
-            "Fall-2009",
-            "Spring-2010",
             "Spring-2021",
             "Summer-2021"
-          ],
-          "moreInformation": "https://www.kaggle.com/",
-          "independentStudy": false
-        },
-        {
-          "name": "Research Project",
-          "slug": "generic-project",
-          "description": "If you want to plan to participate in a research project in some future semester, but are not sure yet what project you want to work on, then you can add this Opportunity as a \"placeholder\" in your degree plan until you know more precisely what you want to do.",
-          "opportunityType": "project",
-          "sponsor": "johnson",
-          "ice": {
-            "i": 30,
-            "c": 0,
-            "e": 15
-          },
-          "interests": [
-            "research"
-          ],
-          "semesters": [
-            "Spring-2017",
-            "Summer-2017",
-            "Fall-2017",
-            "Spring-2018",
-            "Summer-2018",
-            "Fall-2018",
-            "Spring-2019",
-            "Summer-2019",
-            "Fall-2019",
-            "Spring-2020",
-            "Fall-2020",
-            "Summer-2020",
-            "Spring-2021",
-            "Summer-2021"
-          ],
-          "moreInformation": "http://www.ics.hawaii.edu/research/research-areas/",
-          "independentStudy": false
-        },
-        {
-          "name": "Greyhats",
-          "slug": "greyhats",
-          "description": "The ICS Grey Hats is a student-led, extracurricular organization focused on real-world training for cyber defense. Membership gives students an outstanding opportunity to learn and apply critical skills, and to share with others interested in modern security issues.\n\nThe Grey Hats is a Registered Independent Organization at the University of Hawai’i – Manoa, and fosters education in the fields of Information Assurance, Network Management, Cyber Security, and Security Ethics. Hosted by the Department of Information and Computer Sciences, the group provides students a venue for networking with industry and government, performing community outreach, and for practical application of security skills in a supportive environment.",
-          "opportunityType": "club",
-          "sponsor": "glau",
-          "ice": {
-            "i": 5,
-            "c": 0,
-            "e": 5
-          },
-          "interests": [
-            "security"
-          ],
-          "semesters": [
-            "Spring-2017",
-            "Fall-2017",
-            "Spring-2018",
-            "Fall-2018",
-            "Spring-2019",
-            "Fall-2019",
-            "Spring-2020"
           ],
           "moreInformation": "https://github.com/uhmgreyhats",
           "independentStudy": false
@@ -4516,7 +4732,10 @@
             "Fall-2018",
             "Spring-2019",
             "Summer-2019",
-            "Fall-2019"
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020"
           ],
           "moreInformation": "https://www.meetup.com/Hawaii-iOS-Developer-Meetup/",
           "independentStudy": false
@@ -4552,6 +4771,67 @@
           "independentStudy": false
         },
         {
+          "name": "Kaggle",
+          "slug": "kaggle",
+          "description": "[Kaggle](https://www.kaggle.com/) is an online service that hosts data science and machine learning competitions, as well as a job board with listings for analysts, programmers, and more.  If you are interested in a career in data science, you should definitely get involved with Kaggle!\n\nKaggle, which was recently acquired by Google, has been used by over 800,000 data scientists to explore, understand, and contribute to machine learning and data analytics.\n\nThe Kaggle community has worked together to utilize machine learning for everything from essay marking to diagnosing heart failure. Last August, Kaggle launched an open data platform in which scientists have contributed a range of datasets relating to everything from credit card fraud to H-1B Visa petitions and tsunami wave rates.\n\nTo gain ICE points for this opportunity, join Kaggle, and then work through the [Titanic](https://www.kaggle.com/c/titanic) competition.",
+          "opportunityType": "online-learning",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 15,
+            "c": 15,
+            "e": 0
+          },
+          "interests": [
+            "algorithms",
+            "artificial-intelligence",
+            "data-science",
+            "machine-learning",
+            "python",
+            "r",
+            "research"
+          ],
+          "semesters": [
+            "Spring-2013",
+            "Summer-2013",
+            "Fall-2013",
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Fall-2012",
+            "Summer-2012",
+            "Spring-2012",
+            "Fall-2011",
+            "Spring-2011",
+            "Summer-2010",
+            "Fall-2010",
+            "Summer-2011",
+            "Fall-2009",
+            "Spring-2010",
+            "Spring-2021",
+            "Summer-2021"
+          ],
+          "moreInformation": "https://www.kaggle.com/",
+          "independentStudy": false
+        },
+        {
           "name": "Lava Lab",
           "slug": "lava-lab",
           "description": "The University of Hawaiʻi at Mānoa’s Laboratory for Advanced Visualization & Applications (LAVA) was founded in January 1, 2014 by Jason Leigh- director Emeritus of the Electronic Visualization Laboratory (EVL) at the University of Illinois at Chicago. The mission of LAVA is to conduct research and development in big data visualization techniques, and to apply these techniques in cutting edge domain science, engineering, and training applications.",
@@ -4569,6 +4849,12 @@
             "virtual-reality"
           ],
           "semesters": [
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
             "Spring-2017",
             "Summer-2017",
             "Fall-2017",
@@ -4579,7 +4865,10 @@
             "Summer-2019",
             "Fall-2019",
             "Spring-2020",
-            "Summer-2020"
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "http://lava.manoa.hawaii.edu/about/",
           "independentStudy": false
@@ -4686,12 +4975,20 @@
             "python"
           ],
           "semesters": [
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
             "Spring-2017",
             "Summer-2017",
             "Fall-2017",
             "Spring-2018",
             "Summer-2018",
-            "Fall-2018"
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020"
           ],
           "moreInformation": "https://www.meetup.com/PyHawaii-Python-Users-Group/",
           "independentStudy": false
@@ -4711,9 +5008,14 @@
             "data-visualization"
           ],
           "semesters": [
+            "Summer-2014",
+            "Summer-2015",
+            "Summer-2016",
             "Summer-2017",
             "Summer-2018",
-            "Summer-2019"
+            "Summer-2019",
+            "Summer-2020",
+            "Summer-2012"
           ],
           "moreInformation": "https://earthscience.arc.nasa.gov/nsrc/sarp",
           "independentStudy": false
@@ -4731,8 +5033,8 @@
           },
           "interests": [
             "application-development",
-            "security",
-            "hci"
+            "hci",
+            "security"
           ],
           "semesters": [
             "Fall-2015",
@@ -4740,7 +5042,19 @@
             "Summer-2016",
             "Fall-2016",
             "Spring-2017",
-            "Summer-2017"
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "http://www2.hawaii.edu/~depengli/index.html",
           "independentStudy": true
@@ -4760,12 +5074,58 @@
             "entrepreneurship"
           ],
           "semesters": [
-            "Fall-2015",
+            "Spring-2013",
+            "Spring-2014",
+            "Spring-2015",
             "Spring-2016",
-            "Fall-2016",
-            "Spring-2017"
+            "Spring-2017",
+            "Spring-2018",
+            "Spring-2019",
+            "Spring-2020"
           ],
           "moreInformation": "http://pace.shidler.hawaii.edu/bpc",
+          "independentStudy": false
+        },
+        {
+          "name": "Teaching or Tutoring",
+          "slug": "teaching-or-tutoring",
+          "description": "There are opportunities to be a lab assistant in the ICS Department, or serve as a tutor in the Nat Sci Learning emporium.  If you want to gain experience teaching or tutoring, this opportunity is for you!",
+          "opportunityType": "project",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 10,
+            "c": 10,
+            "e": 10
+          },
+          "interests": [
+            "teaching"
+          ],
+          "semesters": [
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
+          ],
+          "moreInformation": "http://cacm.acm.org/blogs/blog-cacm/189498-top-10-myths-about-teaching-computer-science/fulltext",
           "independentStudy": false
         },
         {
@@ -4836,7 +5196,12 @@
             "application-development"
           ],
           "semesters": [
-            "Fall-2016"
+            "Fall-2015",
+            "Fall-2016",
+            "Fall-2017",
+            "Fall-2018",
+            "Fall-2019",
+            "Fall-2020"
           ],
           "moreInformation": "http://manoa.hawaii.edu/careercenter/students/career-fair/",
           "independentStudy": false,
@@ -4857,13 +5222,22 @@
             "research"
           ],
           "semesters": [
+            "Spring-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Fall-2015",
+            "Fall-2016",
             "Spring-2017",
             "Fall-2017",
             "Spring-2018",
             "Fall-2018",
             "Spring-2019",
             "Fall-2019",
-            "Spring-2020"
+            "Spring-2020",
+            "Fall-2020",
+            "Spring-2012",
+            "Spring-2011",
+            "Spring-2021"
           ],
           "moreInformation": "manoa.hawaii.edu/undergrad/urop",
           "independentStudy": false
@@ -4912,6 +5286,8 @@
             "entrepreneurship"
           ],
           "semesters": [
+            "Spring-2015",
+            "Summer-2015",
             "Fall-2015",
             "Spring-2016",
             "Summer-2016",
@@ -4923,7 +5299,13 @@
             "Summer-2018",
             "Fall-2018",
             "Spring-2019",
-            "Summer-2019"
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
           ],
           "moreInformation": "http://htdc.org/wetwarewed/",
           "independentStudy": false
@@ -6314,8 +6696,7 @@
           "interests": [
             "application-development",
             "javascript"
-          ],
-          "opportunity": "acmanoa-web-development"
+          ]
         },
         {
           "title": "Algorithm Visualization",
@@ -6349,8 +6730,7 @@
           "duration": "0:50",
           "interests": [
             "security"
-          ],
-          "opportunity": "greyhats"
+          ]
         },
         {
           "title": "Open Power Quality",
@@ -6361,8 +6741,7 @@
           "duration": "0:21",
           "interests": [
             "software-engineering"
-          ],
-          "opportunity": "open-power-quality"
+          ]
         },
         {
           "title": "RadGrad",
@@ -6400,8 +6779,7 @@
           "duration": "0:17",
           "interests": [
             "data-science"
-          ],
-          "opportunity": "data-analytics-for-solar-energy"
+          ]
         }
       ]
     },

@@ -29,12 +29,21 @@ Template.Student_Layout.helpers({
     return 'four';
   },
   earnedICE() {
-    return Users.getEarnedICE(getStudentDoc()._id);
+    if (getRouteUserName()) {
+      return Users.getEarnedICE(getStudentDoc()._id);
+    }
+    return null;
   },
   projectedICE() {
-    return Users.getProjectedICE(getStudentDoc()._id);
+    if (getRouteUserName()) {
+      return Users.getProjectedICE(getStudentDoc()._id);
+    }
+    return null;
   },
   level() {
-    return getStudentDoc().level ? getStudentDoc().level : '0';
+    if (getRouteUserName()) {
+      return getStudentDoc().level ? getStudentDoc().level : '0';
+    }
+    return null;
   },
 });
