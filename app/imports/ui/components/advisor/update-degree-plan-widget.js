@@ -109,6 +109,7 @@ Template.Update_Degree_Plan_Widget.events({
     event.preventDefault();
     // debugger
     instance.$('.ui.basic.modal').modal({
+      detachable: false,
       onApprove() {
         // debugger
         const studentID = instance.data.studentID.get();
