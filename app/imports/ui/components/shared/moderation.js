@@ -12,6 +12,9 @@ Template.Moderation.helpers({
   moderatorComments(review) {
     return review.moderatorComments;
   },
+  noSlug(question) {
+    return !question.slugID;
+  },
   pendingCourseReviews() {
     return Reviews.find({ moderated: false, reviewType: 'course' });
   },
@@ -69,6 +72,10 @@ Template.Moderation.events({
       Reviews.updateModerated(itemID, moderated, visible, moderatorComments);
     } else {
       MentorQuestions.updateModerated(itemID, moderated, visible, moderatorComments);
+      if (!item.slugiD) {
+        const slug = event.target.parentElement.querySelectorAll('input')[0].value;
+        MentorQuestions.updateSlug(itemID, slug);
+      }
     }
   },
 });

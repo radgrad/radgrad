@@ -102,14 +102,20 @@
                     </div>
                     <div class="ui segment">
                       <form class="ui form">
+                        {{#if noSlug question}}
+                          <div class="field">
+                            <label>Slug:</label>
+                            <input type="text" name="slug" placeholder="Slug">
+                          </div>
+                        {{/if}}
                         <div class="field">
-                          <label>Moderator Comments:</label>
-                          <div class="ui action input">
-                            <textarea rows="2" id="{{question._id}}-comments">{{moderatorComments question}}</textarea>
+                            <label>Moderator Comments:</label>
+                            <div class="ui action input">
+                              <textarea rows="2" id="{{question._id}}-comments">{{moderatorComments question}}</textarea>
+                            </div>
                           </div>
                           <button class="ui basic green mini button" id="{{question._id}}-question-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                           <button class="ui basic red mini button" id="{{question._id}}-question-reject" type="submit" style="margin-top:10px">REJECT</button>
-                        </div>
                       </form>
                     </div>
                   </div>
