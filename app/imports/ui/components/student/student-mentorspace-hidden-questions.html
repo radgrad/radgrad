@@ -1,0 +1,24 @@
+<template name="Student_MentorSpace_Hidden_Questions">
+  {{#if questions}}
+    <div style="margin-top: 10px" class="ui accordion">
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Your hidden questions
+      </div>
+      <div class="content">
+        {{#each question in questions}}
+          {{#with moderated question}}
+            <div class="ui visible {{color}} message">
+              <div class="header">
+                <i class="{{icon}} icon"></i> {{message}}
+              </div>
+              <p>{{question.title}}</p>
+              <button value="{{question._id}}" class="ui yellow basic mini button edit">EDIT</button>
+              <button value="{{question._id}}" class="ui red basic mini button discard">DISCARD</button>
+            </div>
+          {{/with}}
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+</template>
