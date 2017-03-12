@@ -94,10 +94,8 @@ Template.Student_MentorSpace_Question_Form.events({
     instance.messageFlags.set(displayErrorMessages, false);
     event.target.reset();
   },
-  'click .discard': function (event) {
-    event.preventDefault();
-    const id = event.target.value;
-    MentorQuestions.removeIt(id);
+  'click .discard': function () {
+    Template.instance().setDefaultQuestion.set(false);
   },
   'click .edit': function (event) {
     event.preventDefault();
@@ -108,7 +106,7 @@ Template.Student_MentorSpace_Question_Form.events({
 });
 
 Template.Student_MentorSpace_Question_Form.onRendered(function mentorSpaceOnRendered() {
-  this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
+  this.$('.ui.accordion').accordion();
   this.$('.ui.dropdown').dropdown();
   this.$('.ui.rating').rating();
 });
