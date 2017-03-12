@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import BaseCollection from '/imports/api/base/BaseCollection';
 
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
@@ -72,6 +73,7 @@ class MentorQuestionCollection extends BaseInstanceCollection {
    */
   updateSlug(questionID, slug) {
     this.assertDefined(questionID);
+    console.log(slug);
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     this._collection.update({ _id: questionID },
         { $set: { slugID } });
@@ -113,7 +115,12 @@ class MentorQuestionCollection extends BaseInstanceCollection {
    * @throws {Meteor.Error} If MentorQuestion is not defined.
    */
   removeIt(question) {
-    super.removeIt(question);
+    console.log(this.findDoc(question).slugID);
+    if (this.findDoc(question).slugID) {
+      super.removeIt(question);
+    } else {
+      super.removeItNoSlug(question);
+    }
   }
 
   /**

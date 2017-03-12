@@ -94,10 +94,8 @@ Template.Student_MentorSpace_Question_Form.events({
     instance.messageFlags.set(displayErrorMessages, false);
     event.target.reset();
   },
-  'click .discard': function (event) {
-    event.preventDefault();
-    const id = event.target.value;
-    MentorQuestions.removeIt(id);
+  'click .discard': function () {
+    Template.instance().setDefaultQuestion.set(false);
   },
   'click .edit': function (event) {
     event.preventDefault();
