@@ -43,7 +43,6 @@ Template.Student_MentorSpace_Hidden_Questions.helpers({
     return { color, icon, message };
   },
   questions() {
-    console.log(MentorQuestions.find({ studentID: getUserIdFromRoute(), visible: false }).fetch());
     return MentorQuestions.find({ studentID: getUserIdFromRoute(), visible: false }).fetch();
   },
 });

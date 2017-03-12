@@ -70,7 +70,6 @@ Template.Student_Explorer_Edit_Review_Widget.events({
       updatedData.moderated = false;
       FormUtils.renameKey(updatedData, 'semester', 'semesterID');
       Reviews.update(this.review._id, { $set: updatedData });
-      FlowRouter.reload();
       FormUtils.indicateSuccess(instance, event);
     } else {
       FormUtils.indicateError(instance);

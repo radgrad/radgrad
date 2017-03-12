@@ -28,8 +28,6 @@ function getSchemaDataFromEvent(schema, event) {
   const eventData = {};
   _.map(schema._firstLevelSchemaKeys, function (key) {
     eventData[key] = event.target.form[key].value;
-    console.log(key);
-    console.log(event.target.form[key].value);
   });
   return eventData;
 }
@@ -82,7 +80,6 @@ Template.Moderation.helpers({
 Template.Moderation.events({
   'click button': function clickButton(event, instance) {
     event.preventDefault();
-    console.log(event);
     const split = event.target.id.split('-');
     const itemID = split[0];
     let newData;
@@ -96,7 +93,6 @@ Template.Moderation.events({
       instance.context.resetValidation();
       withSlugSchema.clean(newData);
     } else {
-      console.log("hello");
       newData = getSchemaDataFromEvent(noSlugSchema, event);
       instance.context.resetValidation();
       noSlugSchema.clean(newData);
