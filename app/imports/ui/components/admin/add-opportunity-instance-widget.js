@@ -2,51 +2,40 @@ import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
-import { Feeds } from '../../../api/feed/FeedCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
-import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
-  eventDate: { type: Date, optional: true },
-  description: { type: String, optional: false },
-  opportunityType: { type: String, optional: false },
-  sponsor: { type: String, optional: false },
+  semester: { type: String, optional: false },
+  opportunity: { type: String, optional: false },
+  verified: { type: String, optional: false },
+  user: { type: String, optional: false },
   innovation: { type: Number, optional: false, min: 0, max: 100 },
   competency: { type: Number, optional: false, min: 0, max: 100 },
   experience: { type: Number, optional: false, min: 0, max: 100 },
-  interests: { type: [String], optional: false, minCount: 1 },
-  semesters: { type: [String], optional: false, minCount: 1 },
-  moreInformation: { type: String, optional: false },
-  icon: { type: String, optional: true },
 });
+
 
 Template.Add_Opportunity_Instance_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(OpportunityTypes.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
 });
 
 Template.Add_Opportunity_Instance_Widget.helpers({
-  opportunityTypes() {
-    return OpportunityTypes.find({}, { sort: { name: 1 } });
-  },
-  interests() {
-    return Interests.find({}, { sort: { name: 1 } });
-  },
   semesters() {
     return Semesters.find({});
   },
-  sponsors() {
-    return Roles.getUsersInRole([ROLE.FACULTY, ROLE.ADMIN, ROLE.ADVISOR]);
+  students() {
+    return Roles.getUsersInRole([ROLE.STUDENT]);
+  },
+  opportunities() {
+    return Opportunities.find().fetch();
   },
 });
 
@@ -58,18 +47,13 @@ Template.Add_Opportunity_Instance_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
+      newData.verified = (newData.verified === 'true');
+      FormUtils.renameKey(newData, 'user', 'student');
       FormUtils.convertICE(newData);
-      Opportunities.define(newData);
+      OpportunityInstances.define(newData);
       FormUtils.indicateSuccess(instance, event);
     } else {
       FormUtils.indicateError(instance);
     }
-
-    const feedDefinition = {
-      opportunity: newData.slug,
-      feedType: 'new-opportunity',
-      timestamp: Date.now(),
-    };
-    Feeds.define(feedDefinition);
   },
 });
