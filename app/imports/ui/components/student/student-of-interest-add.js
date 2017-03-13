@@ -54,7 +54,6 @@ Template.Student_Of_Interest_Add.helpers({
       ret = opportunitySemesters(this.item);
     }
     return ret.slice(0, 8);
-
   },
   itemSlug(item) {
     return Slugs.findDoc(item.slugID).name;

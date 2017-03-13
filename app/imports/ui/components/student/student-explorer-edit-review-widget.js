@@ -10,7 +10,6 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
 const editSchema = new SimpleSchema({
   semester: { type: String, optional: false },

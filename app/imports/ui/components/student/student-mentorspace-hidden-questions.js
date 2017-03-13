@@ -1,14 +1,11 @@
 import { Template } from 'meteor/templating';
-import { ReactiveDict } from 'meteor/reactive-dict';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import { getRouteUserName } from '../shared/route-user-name';
-import { ReactiveVar } from 'meteor/reactive-var';
-
 
 Template.Student_MentorSpace_Hidden_Questions.onCreated(function studentMentorSpaceHiddenQuestionsOnCreated() {
   this.subscribe(Interests.getPublicationName());

@@ -9,8 +9,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
-import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
-import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
