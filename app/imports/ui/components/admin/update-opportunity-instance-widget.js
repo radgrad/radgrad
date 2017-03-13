@@ -5,23 +5,19 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  eventDate: { type: Date, optional: true },
-  description: { type: String, optional: false },
-  opportunityType: { type: String, optional: false },
-  sponsor: { type: String, optional: false },
+  semester: { type: String, optional: false },
+  opportunity: { type: String, optional: false },
+  verified: { type: String, optional: false },
+  user: { type: String, optional: false },
   innovation: { type: Number, optional: false, min: 0, max: 100 },
   competency: { type: Number, optional: false, min: 0, max: 100 },
   experience: { type: Number, optional: false, min: 0, max: 100 },
-  interests: { type: [String], optional: false, minCount: 1 },
-  semesters: { type: [String], optional: false, minCount: 1 },
-  moreInformation: { type: String, optional: false },
-  icon: { type: String, optional: true },
 });
 
 Template.Update_Opportunity_Instance_Widget.onCreated(function onCreated() {
@@ -29,37 +25,40 @@ Template.Update_Opportunity_Instance_Widget.onCreated(function onCreated() {
   this.subscribe(Interests.getPublicationName());
   this.subscribe(OpportunityTypes.getPublicationName());
   this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
 });
 
 Template.Update_Opportunity_Instance_Widget.helpers({
-  opportunityTypes() {
-    return OpportunityTypes.find({}, { sort: { name: 1 } });
-  },
-  interests() {
-    return Interests.find({}, { sort: { name: 1 } });
-  },
   semesters() {
     return Semesters.find({});
   },
-  sponsors() {
-    return Roles.getUsersInRole([ROLE.FACULTY, ROLE.ADMIN, ROLE.ADVISOR]);
+  students() {
+    return Roles.getUsersInRole([ROLE.STUDENT]);
   },
-  slug() {
-    const opportunity = Opportunities.findDoc(Template.currentData().updateID.get());
-    return Slugs.findDoc(opportunity.slugID).name;
+  opportunityInstance() {
+    const oi = OpportunityInstances.findDoc(Template.currentData().updateID.get());
+    return oi;
+  },
+  selectedSemesterID() {
+    const opportunity = OpportunityInstances.findDoc(Template.currentData().updateID.get());
+    return opportunity.semesterID;
+  },
+  trueValue() {
+    const opportunity = OpportunityInstances.findDoc(Template.currentData().updateID.get());
+    return opportunity.verified;
+  },
+  falseValue() {
+    const opportunity = OpportunityInstances.findDoc(Template.currentData().updateID.get());
+    return !opportunity.verified;
+  },
+  opportunities() {
+    return Opportunities.find().fetch();
   },
   opportunity() {
-    return Opportunities.findDoc(Template.currentData().updateID.get());
-  },
-  selectedInterestIDs() {
-    const opportunity = Opportunities.findDoc(Template.currentData().updateID.get());
-    return opportunity.interestIDs;
-  },
-  selectedSemesterIDs() {
-    const opportunity = Opportunities.findDoc(Template.currentData().updateID.get());
-    return opportunity.semesterIDs;
+    const opportunity = OpportunityInstances.findDoc(Template.currentData().updateID.get());
+    return opportunity.opportunityID;
   },
 });
 
@@ -72,11 +71,11 @@ Template.Update_Opportunity_Instance_Widget.events({
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(updatedData);
-      FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      FormUtils.renameKey(updatedData, 'semesters', 'semesterIDs');
-      FormUtils.renameKey(updatedData, 'opportunityType', 'opportunityTypeID');
-      FormUtils.renameKey(updatedData, 'sponsor', 'sponsorID');
-      Opportunities.update(instance.data.updateID.get(), { $set: updatedData });
+      updatedData.verified = (updatedData.verified === 'true');
+      FormUtils.renameKey(updatedData, 'semester', 'semesterID');
+      FormUtils.renameKey(updatedData, 'opportunity', 'opportunityID');
+      FormUtils.renameKey(updatedData, 'user', 'studentID');
+      OpportunityInstances.update(instance.data.updateID.get(), { $set: updatedData });
       FormUtils.indicateSuccess(instance, event);
     } else {
       FormUtils.indicateError(instance);
