@@ -88,22 +88,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
 });
 
 Template.Student_Explorer_Opportunities_Widget.events({
-  'click .addToPlan': function clickItemAddToPlan(event) {
-    event.preventDefault();
-    const opportunity = this.item;
-    const semester = event.target.text;
-    const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = getRouteUserName();
-    const oi = {
-      semester: semSlug,
-      opportunity: oppSlug.name,
-      verified: false,
-      student: username,
-    };
-    OpportunityInstances.define(oi);
-  },
+
 });
 
 
