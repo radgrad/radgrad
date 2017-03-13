@@ -24,6 +24,9 @@ import './admin-datamodel-interests-page.js';
 import './admin-datamodel-opportunities-page.html';
 import './admin-datamodel-opportunities-page.js';
 
+import './admin-datamodel-opportunity-instances-page.html';
+import './admin-datamodel-opportunity-instances-page.js';
+
 import './admin-datamodel-page.html';
 
 import './admin-datamodel-reviews-page.html';

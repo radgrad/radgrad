@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_Opportunity_Instances_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      {{#if displayUpdateWidget}}
+        {{> Update_Opportunity_Instance_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Opportunity_Instance_Widget }}
+      {{/if}}
+      {{> List_Opportunity_Instances_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading}}
+  {{/if}}
+
+</template>
