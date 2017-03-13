@@ -110,7 +110,7 @@ class FeedCollection extends BaseCollection {
         if (userIDs.length > 1) {
           // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have joined RadGrad.`;
           description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-            description: 'other(s) have joined RadGrad.' };
+            description: 'have joined RadGrad.' };
         } else {
           // description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
           description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.' };
