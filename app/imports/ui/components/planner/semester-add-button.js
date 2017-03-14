@@ -66,6 +66,37 @@ const available4xxCourses = () => {
   return filtered;
 };
 
+const filterByRangeAZ = (list, range) => {
+  const ret = _.filter(list, function filter(opportunity) {
+    return range.indexOf(opportunity.name.charAt(0).toLowerCase()) !== -1;
+  });
+  return ret;
+};
+
+const createOpportunityRange = (oppList) => {
+  const ret = {
+    AToE: [],
+    FToJ: [],
+    KToO: [],
+    PToT: [],
+    UToZ: [],
+  };
+
+  const rangeAToE = ['a', 'b', 'c', 'd', 'e'];
+  const rangeFToJ = ['f', 'g', 'h', 'i', 'j'];
+  const rangeKToO = ['k', 'l', 'm', 'n', 'o'];
+  const rangePToT = ['p', 'q', 'r', 's', 't'];
+  const rangeUToZ = ['u', 'v', 'w', 'x', 'y', 'z'];
+
+  ret.AToE = filterByRangeAZ(oppList, rangeAToE);
+  ret.FToJ = filterByRangeAZ(oppList, rangeFToJ);
+  ret.KToO = filterByRangeAZ(oppList, rangeKToO);
+  ret.PToT = filterByRangeAZ(oppList, rangePToT);
+  ret.UToZ = filterByRangeAZ(oppList, rangeUToZ);
+
+  return ret;
+};
+
 const availableOpportunities = () => {
   if (getRouteUserName()) {
     const opportunities = Opportunities.find({}).fetch();
@@ -149,6 +180,8 @@ Template.Semester_Add_Button.helpers({
       ret = _.filter(opportunities, function filter(o) {
         return _.indexOf(o.semesterIDs, semester._id) !== -1;
       });
+      ret = _.sortBy(ret, 'name');
+      ret = createOpportunityRange(ret);
     }
     return ret;
   },
@@ -280,6 +313,36 @@ Template.Semester_Add_Button.onRendered(function semesterAddButtonOnRendered() {
         lastResort: 'right center',
       });
   template.$('a.400.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.AToE.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.FToJ.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.KToO.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.PToT.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.UToZ.item')
       .popup({
         inline: true,
         hoverable: true,
