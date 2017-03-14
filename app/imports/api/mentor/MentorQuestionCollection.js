@@ -2,7 +2,6 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
 
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 

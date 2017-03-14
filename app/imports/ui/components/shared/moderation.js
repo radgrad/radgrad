@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
