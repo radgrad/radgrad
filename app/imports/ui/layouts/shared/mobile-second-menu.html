@@ -1,0 +1,24 @@
+<template name="Mobile_Second_Menu">
+  <div class="ui sidebar vertical menu">
+    <div class="item">
+      <div class="ui grid">
+        <div class="five wide column">
+          <img class="ui image" src="{{pictureSrc}}" style="width: 50px; border-radius: 2px;">
+        </div>
+        <div class="eleven wide column" style="padding-left: 0;">
+          <h4 style="line-height: 18px; text-transform: uppercase; margin-bottom: 4px;">{{firstName}}<br/>{{lastName}}</h4>
+          <button class="ui green basic tiny compact button">
+            {{#if useCAS}}
+              {{> Cas_Login}}
+            {{else}}
+              {{> loginButtons align="center"}}
+            {{/if}}
+          </button>
+        </div>
+      </div>
+    </div>
+    {{#each menuItem in menuItems}}
+      <a class="{{#if isActivePath regex=menuItem.regex}} active {{/if}} item" href="{{pathFor menuItem.route username=routeUserName}}">{{ menuItem.label }}</a>
+    {{/each}}
+  </div>
+</template>

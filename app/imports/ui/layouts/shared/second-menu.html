@@ -1,8 +1,7 @@
 <template name="Second_Menu">
-  <div class="ui top fixed {{ menuLength }} item secondary pointing menu radgrad-second-menu">
+  <div class="ui top fixed {{ menuLength }} item secondary pointing menu radgrad-second-menu mobile hidden">
     {{#each menuItem in menuItems}}
-        <a class="{{#if isActivePath regex=menuItem.regex}} active {{/if}} item" href="{{pathFor menuItem.route username=routeUserName}}">{{ menuItem.label }}</a>
+      <a class="{{#if isActivePath regex=menuItem.regex}} active {{/if}} item" href="{{pathFor menuItem.route username=routeUserName}}">{{ menuItem.label }}</a>
     {{/each}}
-
   </div>
 </template>

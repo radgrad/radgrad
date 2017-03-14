@@ -1,5 +1,13 @@
-.layout-page.degreePlanner {
-  padding-top: 82px;
+@media only screen and (max-width: 767px) {
+  .layout-page.degreePlanner {
+  padding-top: 70px !important;
+}
+}
+
+@media only screen and (min-width: 768px) {
+  .layout-page.degreePlanner {
+  padding-top: 118px !important;
+}
 }
 
 .degreePlanner div.stretched.row {
