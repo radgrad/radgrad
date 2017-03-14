@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -12,6 +13,7 @@ const updateSchema = new SimpleSchema({
   description: { type: String, optional: false },
   duration: { type: String, optional: false },
   interests: { type: [String], optional: false, minCount: 1 },
+  opportunity: { type: String, optional: true },
 });
 
 Template.Update_Teaser_Widget.onCreated(function onCreated() {
@@ -19,6 +21,7 @@ Template.Update_Teaser_Widget.onCreated(function onCreated() {
   this.subscribe(Teasers.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
   this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
 });
 
 Template.Update_Teaser_Widget.helpers({
@@ -36,6 +39,13 @@ Template.Update_Teaser_Widget.helpers({
     const teaser = Teasers.findDoc(Template.currentData().updateID.get());
     return teaser.interestIDs;
   },
+  opportunity() {
+    const teaser = Teasers.findDoc(Template.currentData().updateID.get());
+    return teaser.opportunityID;
+  },
+  opportunities() {
+    return Opportunities.find().fetch();
+  },
 });
 
 Template.Update_Teaser_Widget.events({
@@ -47,6 +57,7 @@ Template.Update_Teaser_Widget.events({
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
+      FormUtils.renameKey(updatedData, 'opportunity', 'opportunityID');
       Teasers.update(instance.data.updateID.get(), { $set: updatedData });
       FormUtils.indicateSuccess(instance, event);
     } else {
