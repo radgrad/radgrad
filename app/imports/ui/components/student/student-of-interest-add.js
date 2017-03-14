@@ -53,7 +53,7 @@ Template.Student_Of_Interest_Add.helpers({
     } else {
       ret = opportunitySemesters(this.item);
     }
-    return ret;
+    return ret.slice(0, 8);
   },
   itemSlug(item) {
     return Slugs.findDoc(item.slugID).name;

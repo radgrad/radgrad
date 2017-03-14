@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -7,8 +9,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
-import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
-import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
@@ -27,11 +27,11 @@ Template.Student_Explorer_Courses_Widget.helpers({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
     }).fetch();
-    for (const courseInstance of ci) {
+    _.map(ci, function (courseInstance) {
       if (Semesters.findDoc(courseInstance.semesterID).sortBy >= Semesters.getCurrentSemesterDoc().sortBy) {
         ret = true;
       }
-    }
+    });
     return ret;
   },
   getTableTitle(tableIndex) {
@@ -55,12 +55,12 @@ Template.Student_Explorer_Courses_Widget.helpers({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
     }).fetch();
-    for (const c of ci) {
+    _.map(ci, function (c) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' ||
           c.grade === 'B+' || c.grade === 'B') {
         ret = true;
       }
-    }
+    });
     return ret;
   },
   review() {
@@ -88,27 +88,6 @@ Template.Student_Explorer_Courses_Widget.helpers({
 });
 
 Template.Student_Explorer_Courses_Widget.events({
-  'click .addItem': function clickAddItem(event) {
-    event.preventDefault();
-    const course = this.course;
-    const semester = event.target.text;
-    const courseSlug = Slugs.findDoc({ _id: course.slugID });
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = getRouteUserName();
-    const ci = {
-      semester: semSlug,
-      course: courseSlug,
-      verified: false,
-      note: course.number,
-      grade: 'B',
-      student: username,
-    };
-    CourseInstances.define(ci);
-    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-  },
 });
 
 Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCoursesWidgetOnCreated() {

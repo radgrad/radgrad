@@ -10,6 +10,9 @@ import './add-help-message-widget.js';
 import './add-interest-widget.html';
 import './add-interest-widget.js';
 
+import './add-opportunity-instance-widget.html';
+import './add-opportunity-instance-widget.js';
+
 import './add-opportunity-widget.html';
 import './add-opportunity-widget.js';
 
@@ -48,6 +51,9 @@ import './list-help-messages-widget.js';
 import './list-interests-widget.html';
 import './list-interests-widget.js';
 
+import './list-opportunity-instances-widget.html';
+import './list-opportunity-instances-widget.js';
+
 import './list-opportunities-widget.html';
 import './list-opportunities-widget.js';
 
@@ -77,6 +83,9 @@ import './update-help-message-widget.js';
 
 import './update-interest-widget.html';
 import './update-interest-widget.js';
+
+import './update-opportunity-instance-widget.html';
+import './update-opportunity-instance-widget.js';
 
 import './update-opportunity-widget.html';
 import './update-opportunity-widget.js';

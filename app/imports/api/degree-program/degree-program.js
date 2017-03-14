@@ -1,5 +1,7 @@
 // TODO: Seems like this data should be incorporated into the DesiredDegree collection.
 
+export const ICS_CORE = ['ics111', 'ics141', 'ics211', 'ics241', 'ics314', 'ics311'];
+
 export const BS_CS = {
   requiredCourses: ['ics111', 'ics141', 'ics211', 'ics212', 'ics241', 'ics311',
     ['ics312', 'ics331'], ['ics313', 'ics361'], 'ics314', 'ics321', 'ics332'],
@@ -30,6 +32,8 @@ export const BS_CS_TEMPLATE = {
 
 export const BS_CS_LIST = ['ics111', 'ics141', 'ics211', 'ics241', 'ics311', 'ics314', 'ics212', 'ics321',
   ['ics313', 'ics361'], ['ics312', 'ics331'], 'ics332', 'ics4xx', 'ics4xx', 'ics4xx', 'ics4xx', 'ics4xx'];
+
+export const BS_NUM_LIST = [2, 2, 2, 2, 2, 2, 2, 2];
 
 export const BS_CS_SECSCI = {
   requiredCourses: ['ics111', 'ics141', 'ics211', 'ics212', 'ics241', 'ics311',
@@ -91,6 +95,8 @@ export const BA_ICS_TEMPLATE = {
 
 export const BA_ICS_LIST = ['ics111', 'ics141', 'ics211', 'ics241', 'ics311', 'ics314', 'ics212', 'ics321',
   ['ics312', 'ics331'], 'ics332', ['ics313', 'ics361'], 'ics4xx'];
+
+export const BA_NUM_LIST = [2, 2, 2, 2, 1, 1, 1, 1];
 
 export const BA_ICS_SECSCI = {
   requiredCourses: ['ics111', 'ics141', 'ics211', ['ics212', 'ics215'], 'ics222', 'ics241', 'ics311',

@@ -15,6 +15,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 
 Template.Semester_List.helpers({
@@ -55,20 +56,23 @@ Template.Semester_List.helpers({
     return Template.instance().localState;
   },
   nonIcsCourses() {
-    const ret = [];
-    if (Template.instance().localState.get('semester')) {
-      const courses = CourseInstances.find({
-        studentID: getUserIdFromRoute(),
-        number: /[^ICS]/,
-        semesterID: Template.instance().localState.get('semester')._id,
-      }).fetch();
-      courses.forEach((c) => {
-        if (!CourseInstances.isICS(c._id)) {
-          ret.push(c);
-        }
-      });
+    if (getRouteUserName()) {
+      const ret = [];
+      if (Template.instance().localState.get('semester')) {
+        const courses = CourseInstances.find({
+          studentID: getUserIdFromRoute(),
+          number: /[^ICS]/,
+          semesterID: Template.instance().localState.get('semester')._id,
+        }).fetch();
+        courses.forEach((c) => {
+          if (!CourseInstances.isICS(c._id)) {
+            ret.push(c);
+          }
+        });
+      }
+      return ret;
     }
-    return ret;
+    return null;
   },
   opportunityName(opportunityID) {
     const opp = OpportunityInstances.find({ _id: opportunityID }).fetch();
@@ -88,15 +92,18 @@ Template.Semester_List.helpers({
     return null;
   },
   semesterOpportunities() {
-    const ret = [];
-    if (Template.instance().localState.get('semester')) {
-      const opps = OpportunityInstances.find({
-        semesterID: Template.instance().localState.get('semester')._id,
-        studentID: getUserIdFromRoute(),
-      }).fetch();
-      return opps;
+    if (getRouteUserName()) {
+      const ret = [];
+      if (Template.instance().localState.get('semester')) {
+        const opps = OpportunityInstances.find({
+          semesterID: Template.instance().localState.get('semester')._id,
+          studentID: getUserIdFromRoute(),
+        }).fetch();
+        return opps;
+      }
+      return ret;
     }
-    return ret;
+    return [];
   },
   year() {
     const semester = Template.instance().localState.get('semester');

@@ -60,7 +60,7 @@ class ReviewCollection extends BaseInstanceCollection {
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ slug, student, reviewType, reviewee, semester, rating, comments,
+  define({ slug, student, reviewType, reviewee, semester, rating = 3, comments,
       moderated = false, visible = true, moderatorComments }) {
     // Get instances, or throw error
     const studentID = Users.getID(student);
@@ -68,8 +68,14 @@ class ReviewCollection extends BaseInstanceCollection {
     let revieweeID;
     if (reviewType === 'course') {
       revieweeID = Courses.getID(reviewee);
+      if (!slug) {
+        slug = `review-course-${Courses.getSlug(reviewee)}-${student}`;
+      }
     } else if (reviewType === 'opportunity') {
       revieweeID = Opportunities.getID(reviewee);
+      if (!slug) {
+        slug = `review-opportunity-${Opportunities.getSlug(reviewee)}-${student}`;
+      }
     } else {
       throw new Meteor.Error(`reviewType ${reviewType} is not a valid reviewType.`);
     }

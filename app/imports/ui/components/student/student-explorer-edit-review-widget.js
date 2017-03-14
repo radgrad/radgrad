@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
@@ -80,8 +81,6 @@ Template.Student_Explorer_Edit_Review_Widget.events({
   },
 });
 
-Template.Student_Explorer_Edit_Review_Widget.onRendered(
-  function studentExplorerEditReviewWidget() {
-    this.$('.ui.accordion').accordion();
-  }
-);
+Template.Student_Explorer_Edit_Review_Widget.onRendered(function studentExplorerEditReviewWidget() {
+  this.$('.ui.accordion').accordion();
+});

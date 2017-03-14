@@ -1,0 +1,12 @@
+<template name="Opportunity_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Opportunity</label>
+    <select class="ui dropdown" name="opportunity">
+      <option value="">Select Opportunity</option>
+      {{#each opportunity in opportunities}}
+        <option value="{{opportunity._id}}" selected="{{isSelected opportunity._id selectedOpportunityID}}">{{opportunity.name}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

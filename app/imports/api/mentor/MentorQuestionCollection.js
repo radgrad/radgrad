@@ -1,5 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '/imports/api/slug/SlugCollection';
+import { Users } from '/imports/api/user/UserCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
@@ -17,8 +18,11 @@ class MentorQuestionCollection extends BaseInstanceCollection {
   constructor() {
     super('MentorQuestion', new SimpleSchema({
       title: { type: String },
-      slugID: { type: SimpleSchema.RegEx.Id },
-      approved: { type: Boolean },
+      slugID: { type: SimpleSchema.RegEx.Id, optional: true },
+      studentID: { type: SimpleSchema.RegEx.Id },
+      moderated: { type: Boolean },
+      visible: { type: Boolean },
+      moderatorComments: { type: String, optional: true },
     }));
   }
 
@@ -26,18 +30,63 @@ class MentorQuestionCollection extends BaseInstanceCollection {
    * Defines a new MentorSpace question.
    * @param title the question.
    * @param slug A unique identifier for this question.
-   * @param approved If the question is approved. Defaults to false.
+   * @param student The student that asked this question.
+   * @param moderated If the question is moderated. Defaults to false.
+   * @param visible If the question is visible. Defaults to false.
    * @return { String } the docID of this question.
    */
-  define({ title, slug, approved = false }) {
-    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const docID = this._collection.insert({ title, slugID, approved });
-    Slugs.updateEntityID(slugID, docID);
+  define({ title, slug, student, moderated = false, visible = false, moderatorComments = '' }) {
+    const studentID = Users.getID(student);
+    let slugID;
+    if (slug) {
+      slugID = Slugs.define({ name: slug, entityName: this.getType() });
+    }
+    const docID = this._collection.insert({ title, slugID, studentID, moderated, visible, moderatorComments });
+    if (slug) {
+      Slugs.updateEntityID(slugID, docID);
+    }
     return docID;
   }
 
   getQuestions() {
     return this._collection.find({}).fetch().reverse();
+  }
+
+  /**
+   * Updates the MentorQuestion's moderated, visible, and moderatorComments variable.
+   * @param questionID The MentorQuestion ID.
+   * @param moderated The new moderated value.
+   * @param visible The new visible value.
+   * @param moderatorComments The new moderatorComments value.
+   */
+  updateModerated(questionID, moderated, visible, moderatorComments) {
+    this.assertDefined(questionID);
+    this._collection.update({ _id: questionID },
+        { $set: { moderated, visible, moderatorComments } });
+  }
+
+  /**
+   * Updates the MentorQuestion's slug variable, if the slug has not been defined yet.
+   * @param questionID The MentorQuestion ID.
+   * @param slug The new slug value.
+   */
+  updateSlug(questionID, slug) {
+    this.assertDefined(questionID);
+    console.log(slug);
+    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
+    this._collection.update({ _id: questionID },
+        { $set: { slugID } });
+  }
+
+  /**
+   * Updates the MentorQuestion's title, visible, and moderated variables.
+   * @param questionID The MentorQuestion ID.
+   * @param title The new title value.
+   */
+  updateQuestion(questionID, title) {
+    this.assertDefined(questionID);
+    this._collection.update({ _id: questionID },
+        { $set: { title, moderated: false, visible: false } });
   }
 
   /**
@@ -47,11 +96,30 @@ class MentorQuestionCollection extends BaseInstanceCollection {
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     const problems = [];
     this.find().forEach(doc => {
-      if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`Bad slugID: ${doc.slugID}`);
+      if (doc.slugID) {
+        if (!Slugs.isDefined(doc.slugID)) {
+          problems.push(`Bad slugID: ${doc.slugID}`);
+        }
+      }
+      if (!Users.isDefined(doc.studentID)) {
+        problems.push(`Bad studentID: ${doc.studentID}`);
       }
     });
     return problems;
+  }
+
+  /**
+   * Removes the passed MentorQuestion and its associated Slug.
+   * @param opportunity The document or _id associated with this MentorQuestion.
+   * @throws {Meteor.Error} If MentorQuestion is not defined.
+   */
+  removeIt(question) {
+    console.log(this.findDoc(question).slugID);
+    if (this.findDoc(question).slugID) {
+      super.removeIt(question);
+    } else {
+      super.removeItNoSlug(question);
+    }
   }
 
   /**
@@ -62,9 +130,15 @@ class MentorQuestionCollection extends BaseInstanceCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const title = doc.title;
-    const slug = Slugs.getNameFromID(doc.slugID);
-    const approved = doc.approved;
-    return { title, slug, approved };
+    let slug;
+    if (doc.slugID) {
+      slug = Slugs.getNameFromID(doc.slugID);
+    }
+    const student = Users.findSlugByID(doc.studentID);
+    const moderated = doc.moderated;
+    const visible = doc.visible;
+    const moderatorComments = doc.moderatorComments;
+    return { title, slug, student, moderated, visible, moderatorComments };
   }
 }
 

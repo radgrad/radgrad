@@ -1,14 +1,13 @@
 import { Template } from 'meteor/templating';
+import * as RouteNames from '/imports/startup/client/router.js';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { getRouteUserName } from '../shared/route-user-name';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import * as RouteNames from '/imports/startup/client/router.js';
-import { ReactiveVar } from 'meteor/reactive-var';
-
 
 Template.Student_Explorer_Opportunities_Widget.helpers({
   fullName(user) {
@@ -20,11 +19,11 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
-    for (const opportunityInstance of oi) {
+    _.map(oi, function (opportunityInstance) {
       if (Semesters.findDoc(opportunityInstance.semesterID).sortBy >= Semesters.getCurrentSemesterDoc().sortBy) {
         ret = true;
       }
-    }
+    });
     return ret;
   },
   isLabel(label, value) {
@@ -51,11 +50,11 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
-    for (const opportunityInstance of oi) {
+    _.map(oi, function (opportunityInstance) {
       if (!opportunityInstance.verified) {
         ret = true;
       }
-    }
+    });
     return ret;
   },
   updatedTeaser(teaser) {
@@ -87,22 +86,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
 });
 
 Template.Student_Explorer_Opportunities_Widget.events({
-  'click .addToPlan': function clickItemAddToPlan(event) {
-    event.preventDefault();
-    const opportunity = this.item;
-    const semester = event.target.text;
-    const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = getRouteUserName();
-    const oi = {
-      semester: semSlug,
-      opportunity: oppSlug.name,
-      verified: false,
-      student: username,
-    };
-    OpportunityInstances.define(oi);
-  },
+
 });
 
 

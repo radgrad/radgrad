@@ -5,7 +5,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
-import { Feed } from '../../../api/feed/FeedCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { moment } from 'meteor/momentjs:moment';
 
@@ -55,9 +55,9 @@ Template.Verification_Event.events({
       VerificationRequests.updateStatus(requestID, status, processed);
 
       const timestamp = new Date().getTime();
-      if (Feed.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID)) {
-        Feed.updateVerifiedOpportunity(studentDoc.username,
-            Feed.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID));
+      if (Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID)) {
+        Feeds.updateVerifiedOpportunity(studentDoc.username,
+            Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID));
       } else {
         const feedDefinition = {
           user: [studentDoc.username],
@@ -66,7 +66,7 @@ Template.Verification_Event.events({
           feedType: 'verified-opportunity',
           timestamp: Date.now(),
         };
-        Feed.define(feedDefinition);
+        Feeds.define(feedDefinition);
       }
     } catch (e) {
       alert(`${student} is not a valid student. ${e}`); // eslint-disable-line no-undef, no-alert
@@ -75,7 +75,7 @@ Template.Verification_Event.events({
 });
 
 Template.Verification_Event.onCreated(function eventVerificationOnCreated() {
-  this.subscribe(Feed.getPublicationName());
+  this.subscribe(Feeds.getPublicationName());
 });
 
 Template.Verification_Event.onRendered(function eventVerificationOnRendered() {

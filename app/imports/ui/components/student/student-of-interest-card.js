@@ -27,7 +27,6 @@ Template.Student_Of_Interest_Card.onCreated(function studentOfInterestCardOnCrea
 
 function interestedStudentsHelper(item, type) {
   const interested = [];
-  let count = 0;
   let instances;
   if (type === 'courses') {
     instances = CourseInstances.find({
@@ -39,15 +38,9 @@ function interestedStudentsHelper(item, type) {
     }).fetch();
   }
   _.map(instances, (c) => {
-    if (count < 17) {
-      if (!_.includes(interested, c.studentID)) {
-        interested.push(c.studentID);
-        count += 1;
-      }
-    } else
-      if (count === 17) {
-        interested.push('elipsis');
-      }
+    if (!_.includes(interested, c.studentID)) {
+      interested.push(c.studentID);
+    }
   });
   return interested;
 }

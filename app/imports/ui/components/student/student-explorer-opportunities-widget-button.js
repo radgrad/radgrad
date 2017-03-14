@@ -51,7 +51,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
         }
       }
     });
-    return semesterNames;
+    return semesterNames.slice(0, 8);
   },
 });
 

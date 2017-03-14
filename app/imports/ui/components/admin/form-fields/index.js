@@ -22,6 +22,9 @@ import './interest-types-form-field.js';
 import './interests-form-field.html';
 import './interests-form-field.js';
 
+import './opportunity-form-field.html';
+import './opportunity-form-field.js';
+
 import './opportunity-types-form-field.html';
 import './opportunity-types-form-field.js';
 
@@ -52,3 +55,6 @@ import './sponsor-form-field.js';
 import './success-message-form-field.html';
 
 import './textarea-form-field.html';
+
+import './user-form-field.html';
+import './user-form-field.js';

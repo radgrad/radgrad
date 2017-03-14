@@ -1,3 +1,4 @@
+/* global isNaN */
 import { Meteor } from 'meteor/meteor';
 import { Papa } from 'meteor/harrison:papa-parse';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -38,9 +39,12 @@ function findSemesterSlug(starDataObject) {
     default:
       throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);
   }
-  const year = parseInt(semesterTokens[1], 10);
+  let year = parseInt(semesterTokens[1], 10);
   if (isNaN(year)) {
-    throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);
+    year = parseInt(semesterTokens[2], 10);
+    if (isNaN(year)) {
+      throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);
+    }
   }
   return Semesters.findSlugByID(Semesters.define({ term, year }));
 }
@@ -112,6 +116,8 @@ export function processStarCsvData(student, csvData) {
     const numberIndex = _.findIndex(headers, (str) => str === 'Course Number');
     const creditsIndex = _.findIndex(headers, (str) => str === 'Credits');
     const gradeIndex = _.findIndex(headers, (str) => str === 'Grade');
+    const transferGradeIndex = _.findIndex(headers, (str) => str === 'Transfer Grade');
+    // const transferCourseDesc = _.findIndex(headers, (str) => str === 'Transfer Course Description');
     if (_.every([semesterIndex, nameIndex, numberIndex, creditsIndex, gradeIndex], (num) => num === -1)) {
       throw new Meteor.Error(`Required CSV header field was not found in ${headers}`);
     }
@@ -121,12 +127,23 @@ export function processStarCsvData(student, csvData) {
 
     // Create array of objects containing raw data to facilitate error message during processing.
     const dataObjects = _.map(filteredData, (data) => {
+      const name = data[nameIndex];
+      let grade = data[gradeIndex];
+      if (name === 'ICS' && grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
+        grade = data[transferGradeIndex];
+      } else if (name === 'ICS' && grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
+        // got number assuming it is AP exam score need to determine the type of the exam.
+        // const exam = data[transferCourseDesc];
+        if (data[transferGradeIndex] > 2) {
+          grade = 'B';
+        }
+      }
       const obj = {
         semester: data[semesterIndex],
-        name: data[nameIndex],
+        name,
         number: data[numberIndex],
         credits: data[creditsIndex],
-        grade: data[gradeIndex],
+        grade,
         student,
       };
       return obj;
