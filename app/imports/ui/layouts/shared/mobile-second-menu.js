@@ -1,14 +1,16 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { $ } from 'meteor/jquery';
 
-Template.First_Menu.onCreated(function onCreated() {
-  this.subscribe(Users.getPublicationName());
-});
-
-Template.First_Menu.helpers({
+Template.Mobile_Second_Menu.helpers({
+  isCurrentPage: function currentPage(routeName) {
+    return FlowRouter.getRouteName() === routeName;
+  },
+  useCase() {
+    return false;
+  },
   firstName() {
     const username = getRouteUserName();
     if (username) {
@@ -16,12 +18,6 @@ Template.First_Menu.helpers({
       return user.firstName;
     }
     return 'Unknown';
-  },
-  iceRouteName() {
-    return RouteNames.studentHomeIcePageRouteName;
-  },
-  landingRouteName() {
-    return RouteNames.landingPageRouteName;
   },
   lastName() {
     const username = getRouteUserName();
@@ -31,9 +27,6 @@ Template.First_Menu.helpers({
     }
     return 'Unknown';
   },
-  levelsRouteName() {
-    return RouteNames.studentHomeLevelsPageRouteName;
-  },
   pictureSrc() {
     const username = getRouteUserName();
     if (username) {
@@ -42,14 +35,11 @@ Template.First_Menu.helpers({
     }
     return '/images/default-profile-picture.png';
   },
-  useCAS() {
-    return false;
+});
+
+Template.Mobile_Second_Menu.events({
+  'click a.item': function clickMobileSidebar() {
+    $('.ui.sidebar').sidebar('hide');
   },
 });
 
-Template.First_Menu.events({
-  'click .mobileSidebar': function clickMobileSidebar(event) {
-    event.preventDefault();
-    $('.ui.sidebar').sidebar('toggle');
-  },
-});

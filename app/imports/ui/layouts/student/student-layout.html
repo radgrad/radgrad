@@ -1,9 +1,12 @@
 <template name="Student_Layout">
   {{#If_Authorized}}
     {{#if Template.subscriptionsReady}}
-      {{> First_Menu displayLevelAndIce=true level=level earnedICE=earnedICE projectedICE=projectedICE}}
-      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength username=routeUserName}}
-      {{> Template.dynamic template=main}}
+      {{> Mobile_Second_Menu menuItems=secondMenuItems username=routeUserName}}
+      <div class="pusher">
+        {{> First_Menu displayLevelAndIce=true level=level earnedICE=earnedICE projectedICE=projectedICE}}
+        {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength username=routeUserName}}
+        {{> Template.dynamic template=main}}
+      </div>
     {{else}}
       {{> Loading}}
     {{/if}}
