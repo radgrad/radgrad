@@ -6696,7 +6696,8 @@
           "interests": [
             "application-development",
             "javascript"
-          ]
+          ],
+          "opportunity": "acmanoa-web-development"
         },
         {
           "title": "Algorithm Visualization",
@@ -6730,7 +6731,8 @@
           "duration": "0:50",
           "interests": [
             "security"
-          ]
+          ],
+          "opportunity": "greyhats"
         },
         {
           "title": "Open Power Quality",
@@ -6741,7 +6743,8 @@
           "duration": "0:21",
           "interests": [
             "software-engineering"
-          ]
+          ],
+          "opportunity": "open-power-quality"
         },
         {
           "title": "RadGrad",
@@ -6779,7 +6782,8 @@
           "duration": "0:17",
           "interests": [
             "data-science"
-          ]
+          ],
+          "opportunity": "data-analytics-for-solar-energy"
         }
       ]
     },

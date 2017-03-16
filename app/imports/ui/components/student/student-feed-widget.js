@@ -1,11 +1,11 @@
 import { Template } from 'meteor/templating';
+import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
-import * as RouteNames from '/imports/startup/client/router.js';
 
 function dateDiffInDays(a, b) {
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -13,7 +13,6 @@ function dateDiffInDays(a, b) {
 }
 
 Template.Student_Feed_Widget.onCreated(function studentFeedWidgetOnCreated() {
-  this.subscribe(Feeds.getPublicationName());
 });
 
 Template.Student_Feed_Widget.helpers({

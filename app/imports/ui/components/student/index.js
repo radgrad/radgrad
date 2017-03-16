@@ -55,6 +55,9 @@ import './student-feed-modal.js';
 import './student-feed-widget.html';
 import './student-feed-widget.js';
 
+import './student-home-widget.html';
+import './student-home-widget.js';
+
 import './student-ice-column.html';
 import './student-ice-column.js';
 
