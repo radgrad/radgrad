@@ -8,10 +8,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 
-
-Template.Student_Of_Interest_Add.onCreated(function studentOfInterestCardOnCreated() {
-});
-
 function currentSemester() {
   const currentSemesterID = Semesters.getCurrentSemester();
   const currentSem = Semesters.findDoc(currentSemesterID);
