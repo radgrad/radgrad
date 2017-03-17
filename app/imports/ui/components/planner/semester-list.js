@@ -43,29 +43,6 @@ Template.Semester_List.helpers({
     window.camDebugging.stop('icsCourses');
     return ret;
   },
-  isCurrentSemester() {
-    window.camDebugging.start('isCurrentSemester');
-    const semester = Template.instance().localState.get('semester');
-    const currentSemester = Template.instance().localState.get('currentSemester');
-    if (semester && currentSemester) {
-      window.camDebugging.stop('isCurrentSemester');
-      return semester.sortBy === currentSemester.sortBy;
-    }
-    window.camDebugging.stop('isCurrentSemester');
-    return false;
-  },
-  isFuture() {
-    window.camDebugging.start('isFuture');
-    const semester = Template.instance().localState.get('semester');
-    const currentSemester = Template.instance().localState.get('currentSemester');
-    if (semester && currentSemester) {
-      // console.log(`${moment().format('HH:mm:ss.SSS')} isFuture ${semester.semesterNumber}`);
-      window.camDebugging.stop('isFuture');
-      return semester.sortBy >= currentSemester.sortBy;
-    }
-    window.camDebugging.stop('isFuture');
-    return false;
-  },
   localState() {
     window.camDebugging.start('localState');
     window.camDebugging.stop('localState');
