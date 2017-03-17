@@ -128,7 +128,7 @@ Template.Academic_Plan.helpers({
     return null;
   },
   years() {
-    window.camDebugging.start('ap.years');
+    // window.camDebugging.start('ap.years');
     // debugger
     const studentID = getUserIdFromRoute();
     const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
@@ -143,7 +143,7 @@ Template.Academic_Plan.helpers({
       }
       return false;
     });
-    window.camDebugging.stop('ap.years');
+    // window.camDebugging.stop('ap.years');
     return ret;
   },
 });
@@ -161,18 +161,18 @@ Template.Academic_Plan.events({
     AcademicYearInstances.define({ year, student });
   },
   'click #nextYear': function clickNextYear(event) {
-    window.camDebugging.start('click nextYear');
+    // window.camDebugging.start('click nextYear');
     event.preventDefault();
     const year = Template.instance().startYear.get();
     Template.instance().startYear.set(year + 1);
-    window.camDebugging.stop('click nextYear');
+    // window.camDebugging.stop('click nextYear');
   },
   'click #prevYear': function clickPrevYear(event) {
-    window.camDebugging.start('click prevYear');
+    // window.camDebugging.start('click prevYear');
     event.preventDefault();
     const year = Template.instance().startYear.get();
     Template.instance().startYear.set(year - 1);
-    window.camDebugging.stop('click prevYear');
+    // window.camDebugging.stop('click prevYear');
   },
 });
 
