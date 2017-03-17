@@ -14,20 +14,13 @@ import { plannerKeys } from './academic-plan';
 
 Template.Semester_List.helpers({
   dictionary() {
-    window.camDebugging.early();
-    window.camDebugging.early('dictionary');
-    window.camDebugging.incHelper();
-    window.camDebugging.incHelper('dictionary');
+    window.camDebugging.start('dictionary');
     // console.log(`${moment().format('HH:mm:ss.SSS')} dictionary`);
-    window.camDebugging.late();
-    window.camDebugging.late('dictionary');
+    window.camDebugging.stop('dictionary');
     return Template.instance().state;
   },
   icsCourses() {
-    window.camDebugging.early();
-    window.camDebugging.early('icsCourses');
-    window.camDebugging.incHelper();
-    window.camDebugging.incHelper('icsCourses');
+    window.camDebugging.start('icsCourses');
     const ret = [];
     if (Template.instance().localState.get('semester')) {
       // console.log(`${moment().format('HH:mm:ss.SSS')} icsCourses`);
@@ -40,42 +33,35 @@ Template.Semester_List.helpers({
         ret.push(c);
       });
     }
-    window.camDebugging.late();
+    window.camDebugging.stop('icsCourses');
     return ret;
   },
   isCurrentSemester() {
-    window.camDebugging.early();
-    window.camDebugging.early('isCurrentSemester');
-    window.camDebugging.incHelper();
-    window.camDebugging.incHelper('isCurrentSemester');
+    window.camDebugging.start('isCurrentSemester');
     const semester = Template.instance().localState.get('semester');
     const currentSemester = Template.instance().localState.get('currentSemester');
     if (semester && currentSemester) {
-      window.camDebugging.late();
+      window.camDebugging.stop('isCurrentSemester');
       return semester.sortBy === currentSemester.sortBy;
     }
-    window.camDebugging.late();
+    window.camDebugging.stop('isCurrentSemester');
     return false;
   },
   isFuture() {
-    window.camDebugging.early();
-    window.camDebugging.incHelper();
-    window.camDebugging.incHelper('isFuture');
+    window.camDebugging.start('isFuture');
     const semester = Template.instance().localState.get('semester');
     const currentSemester = Template.instance().localState.get('currentSemester');
     if (semester && currentSemester) {
       // console.log(`${moment().format('HH:mm:ss.SSS')} isFuture ${semester.semesterNumber}`);
-      window.camDebugging.late();
+      window.camDebugging.stop('isFuture');
       return semester.sortBy >= currentSemester.sortBy;
     }
-    window.camDebugging.late();
+    window.camDebugging.stop('isFuture');
     return false;
   },
   localState() {
-    window.camDebugging.early();
-    window.camDebugging.incHelper();
-    window.camDebugging.incHelper('localState');
-    window.camDebugging.late();
+    window.camDebugging.start('localState');
+    window.camDebugging.stop('localState');
     return Template.instance().localState;
   },
   // nonIcsCourses() {
@@ -98,36 +84,30 @@ Template.Semester_List.helpers({
   //   return null;
   // },
   opportunityName(opportunityID) {
-    window.camDebugging.early();
-    window.camDebugging.incHelper();
-    window.camDebugging.incHelper('opportunityName');
+    window.camDebugging.start('opportunityName');
     const opp = OpportunityInstances.find({ _id: opportunityID }).fetch();
     if (opp.length > 0) {
       const opportunity = Opportunities.find({ _id: opp[0].opportunityID }).fetch();
       if (opportunity.length > 0) {
-        window.camDebugging.late();
+        window.camDebugging.stop('opportunityName');
         return opportunity[0].name;
       }
     }
-    window.camDebugging.late();
+    window.camDebugging.stop('opportunityName');
     return null;
   },
   semesterName() {
-    window.camDebugging.early();
-    window.camDebugging.incHelper();
-    window.camDebugging.incHelper('semesterName');
+    window.camDebugging.start('semesterName');
     const semester = Template.instance().localState.get('semester');
     if (semester) {
-      window.camDebugging.late();
+      window.camDebugging.stop('semesterName');
       return semester.term;
     }
-    window.camDebugging.late();
+    window.camDebugging.stop('semesterName');
     return null;
   },
   semesterOpportunities() {
-    window.camDebugging.early();
-    window.camDebugging.incHelper();
-    window.camDebugging.incHelper('semesterOpportunities');
+    window.camDebugging.start('semesterOpportunities');
     if (getRouteUserName()) {
       const ret = [];
       if (Template.instance().localState.get('semester')) {
@@ -135,22 +115,22 @@ Template.Semester_List.helpers({
           semesterID: Template.instance().localState.get('semester')._id,
           studentID: getUserIdFromRoute(),
         }).fetch();
-        window.camDebugging.late();
+        window.camDebugging.stop('semesterOpportunities');
         return opps;
       }
-      window.camDebugging.late();
+      window.camDebugging.stop('semesterOpportunities');
       return ret;
     }
     return [];
   },
   year() {
-    window.camDebugging.early();
-    window.camDebugging.incHelper();
-    window.camDebugging.incHelper('year');
+    window.camDebugging.start('year');
     const semester = Template.instance().localState.get('semester');
     if (semester) {
+      window.camDebugging.stop('year');
       return semester.year;
     }
+    window.camDebugging.stop('year');
     return null;
   },
 });
