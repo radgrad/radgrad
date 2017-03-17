@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Feed } from '../../../api/feed/FeedCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -53,6 +53,6 @@ Template.Add_Course_Widget.events({
       feedType: 'new-course',
       timestamp: Date.now(),
     };
-    Feed.define(feedDefinition);
+    Feeds.define(feedDefinition);
   },
 });

@@ -2,10 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-import { Users } from '/imports/api/user/UserCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
+import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
@@ -49,9 +49,6 @@ class FeedCollection extends BaseCollection {
 
   // TODO: The define method needs more documentation. What are valid values for each parameter?
   // Consider multiple define methods, one for each feed type, with appropriate required params for each.
-
-  // TODO: Why do feeds have a slugID? I don't think slugs are appropriate for this collection. Do you use them?
-
   /**
    * Defines a new Feed.
    * @example
@@ -113,7 +110,7 @@ class FeedCollection extends BaseCollection {
         if (userIDs.length > 1) {
           // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have joined RadGrad.`;
           description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-            description: 'other(s) have joined RadGrad.' };
+            description: 'have joined RadGrad.' };
         } else {
           // description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
           description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.' };
@@ -229,10 +226,10 @@ class FeedCollection extends BaseCollection {
   }
 
   /**
-   * Returns a feedID with the same feedType (and opportunity, if feedType === 'verified-opportunity')
+   * Returns a feedID with the same feedType (and opportunity, if feedType is 'verified-opportunity')
    * if it exists within the past 24 hours.
    * Returns false if no such feedID is found.
-   * Opportunity is required only if feedType === 'verified-opportunity'
+   * Opportunity is required only if feedType is 'verified-opportunity'
    * @returns {Object} The feedID if found.
    * @returns {boolean} False if feedID is not found.
    */
@@ -334,10 +331,22 @@ class FeedCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const user = _.map(doc.userIDs, userID => Users.findSlugByID(userID));
-    const opportunity = doc.opportunityID;
-    const course = doc.courseID;
-    const semester = doc.semesterID && Semesters.findSlugByID(doc.semesterID);
+    let user;
+    if (doc.userIDs) {
+      user = _.map(doc.userIDs, userID => Users.findSlugByID(userID));
+    }
+    let opportunity;
+    if (doc.opportunityID) {
+      opportunity = Opportunities.findSlugByID(doc.opportunityID);
+    }
+    let course;
+    if (doc.courseID) {
+      course = Courses.findSlugByID(doc.courseID);
+    }
+    let semester;
+    if (doc.semesterID) {
+      semester = Semesters.findSlugByID(doc.semesterID);
+    }
     const feedType = doc.feedType;
     const timestamp = doc.timestamp;
     return { user, opportunity, course, semester, feedType, timestamp };
@@ -347,5 +356,5 @@ class FeedCollection extends BaseCollection {
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const Feed = new FeedCollection();  // TODO: Rename this to 'Feeds' for consistency with other collections.
-radgradCollections.push(Feed);
+export const Feeds = new FeedCollection();
+radgradCollections.push(Feeds);

@@ -1,0 +1,115 @@
+<template name="Moderation">
+  <div class="ui equal width grid">
+    <div class="column">
+      <div class="ui padded container segment">
+        <div class="ui dividing header"><h4>PENDING COURSE REVIEWS</h4></div>
+      <div class="ui divided items">
+        {{#each review in pendingCourseReviews}}
+          <div class="item">
+            <div class="content">
+              <div class="ui equal width grid">
+                <div class="column">
+                  <div class="meta">
+                    <strong>Student:</strong> {{studentName review}}
+                  </div>
+                  <div class="meta">
+                    <strong>Reviewee:</strong> {{revieweeName review}}
+                  </div>
+                  <div class="meta">
+                    <strong>Semester:</strong> {{semester review}}
+                  </div>
+                  <div class="meta">
+                    <strong>Rating:</strong>{{> Student_Explorer_Review_Stars_Widget rating = (rating review)}}
+                  </div>
+                  <div class="meta">
+                    <strong>Comments:</strong> {{studentComments review}}
+                  </div>
+                  <div class="ui segment">
+                    <form class="ui form">
+                      {{> TextArea_Form_Field label="ModeratorComments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
+                      <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
+                      <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
+                      {{> Success_Message_Form_Field message="Student will be notified of moderation results"}}
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui padded container segment">
+      <div class="ui dividing header"><h4>PENDING OPPORTUNITY REVIEWS</h4></div>
+      <div class="ui divided items">
+        {{#each review in pendingOpportunityReviews}}
+          <div class="item">
+            <div class="content">
+              <div class="ui equal width grid">
+                <div class="column">
+                  <div class="meta">
+                    <strong>Student:</strong> {{studentName review}}
+                  </div>
+                  <div class="meta">
+                    <strong>Reviewee:</strong> {{revieweeName review}}
+                  </div>
+                  <div class="meta">
+                    <strong>Semester:</strong> {{semester review}}
+                  </div>
+                  <div class="meta">
+                    <strong>Rating:</strong>{{> Student_Explorer_Review_Stars_Widget rating = (rating review)}}
+                  </div>
+                  <div class="meta">
+                    <strong>Comments:</strong> {{studentComments review}}
+                  </div>
+                  <div class="ui segment">
+                    <form class="ui form">
+                      {{> TextArea_Form_Field label="ModeratorComments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
+                          <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
+                        <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
+                      {{> Success_Message_Form_Field message="Student will be notified of moderation results"}}
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+    <div class="column">
+      <div class="ui padded container segment">
+        <div class="ui dividing header"><h4>PENDING MENTORSPACE QUESTIONS</h4></div>
+        <div class="ui divided items">
+          {{#each question in pendingQuestions}}
+            <div class="item">
+              <div class="content">
+                <div class="ui equal width grid">
+                  <div class="column">
+                    <div class="meta">
+                      <strong>Question:</strong> {{question.title}}
+                    </div>
+                    <div class="ui segment">
+                      <form class="ui form">
+                        {{#if noSlug question}}
+                          {{> Input_Form_Field label="Slug" name="slug" placeholder="" errorMessage=(fieldError "slug") required=false}}
+                        {{/if}}
+                        {{> TextArea_Form_Field label="Moderator Comments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
+                          <button class="ui basic green mini button" id="{{question._id}}-{{noSlug question}}-question-accept" type="submit" style="margin-top:10px">ACCEPT</button>
+                          <button class="ui basic red mini button" id="{{question._id}}-{{noSlug question}}-question-reject" type="submit" style="margin-top:10px">REJECT</button>
+                        {{> Success_Message_Form_Field message="Student will be notified of moderation results"}}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

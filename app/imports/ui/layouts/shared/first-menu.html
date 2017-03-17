@@ -4,14 +4,17 @@
     <div class="mobile hidden item" style="padding-left: 0;">
       <h1>{{> RadGrad_Logo_Text}}</h1>
     </div>
+    <div class="mobile only item" style="padding-right: 0;">
+      <a class="ui icon basic green compact button mobileSidebar"><i class="content icon" style="color: #6FBE44 !important;"></i></a>
+    </div>
     <div class="right menu radgrad-menu-profile">
 
       {{#if displayLevelAndIce}}
         <div class="item">
           <a href="{{pathFor levelsRouteName username=routeUserName}}">{{> First_Menu_Level_Icon level=level}}</a>
-          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov"}}</a>
-          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp"}}</a>
-          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp"}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-right: 5px;">{{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov" includeLink=true}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-right: 5px;">{{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp" includeLink=true}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp" includeLink=true}}</a>
         </div>
       {{/if}}
 
@@ -22,7 +25,7 @@
         <div class="header" style="line-height: 13px;"><span>{{firstName}}<br/>{{lastName}}</span>
         </div>
       </div>
-      <div class="item">
+      <div class="mobile hidden item">
         <button class="ui green basic button">
           {{#if useCAS}}
             {{> Cas_Login}}

@@ -30,6 +30,9 @@ class FeedbackInstanceCollection extends BaseCollection {
     this.STAR = 'STAR';
     this.DegreePlan = 'DegreePlan';
     this.AREAS = [this.INTERESTS, this.ICE, this.STAR, this.DegreePlan];
+    if (Meteor.server) {
+      this._collection._ensureIndex({ _id: 1, userID: 1 });
+    }
   }
 
   /**

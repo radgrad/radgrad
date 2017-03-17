@@ -3,7 +3,7 @@ import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
 import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
-import { Feed } from '/imports/api/feed/FeedCollection';
+import { Feeds } from '/imports/api/feed/FeedCollection';
 import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
 import { FeedbackInstances } from '/imports/api/feedback/FeedbackInstanceCollection';
 import { HelpMessages } from '/imports/api/help/HelpMessageCollection';
@@ -35,7 +35,7 @@ export function removeAllEntities() {
   Courses.removeAll();
   CourseInstances.removeAll();
   DesiredDegrees.removeAll();
-  Feed.removeAll();
+  Feeds.removeAll();
   Feedbacks.removeAll();
   FeedbackInstances.removeAll();
   HelpMessages.removeAll();

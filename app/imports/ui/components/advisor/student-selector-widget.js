@@ -1,7 +1,7 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection.js';
-import { Feed } from '../../../api/feed/FeedCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection.js';
 
 
 Template.Student_Selector_Widget.helpers({
@@ -19,7 +19,7 @@ Template.Student_Selector_Widget.onCreated(function studentSelectorOnCreated() {
   if (this.data.studentID) {
     this.studentID = this.data.studentID;
   }
-  this.subscribe(Feed.getPublicationName());
+  this.subscribe(Feeds.getPublicationName());
   this.subscribe(Users.getPublicationName());
 });
 

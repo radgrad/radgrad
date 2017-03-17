@@ -1,8 +1,8 @@
 #back-to-top {
   margin: 0;
   position: fixed;
-  bottom: 50px;
-  right: 50px;
+  bottom: 25px;
+  right: 25px;
   z-index: 100;
   display: none;
 }

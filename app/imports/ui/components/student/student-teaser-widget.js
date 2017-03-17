@@ -9,35 +9,37 @@ import { Users } from '../../../api/user/UserCollection.js';
 import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Teaser_Widget.onCreated(function studentTeaserWidgetOnCreated() {
-  this.subscribe(Teasers.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
+
 });
 
 function matchingTeasers() {
-  const allTeasers = Teasers.find().fetch();
-  const matching = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterests = [];
-  let teaserInterests = [];
-  _.map(Users.getInterestIDs(user._id), (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  _.map(allTeasers, (teaser) => {
-    teaserInterests = [];
-    _.map(teaser.interestIDs, (id) => {
-      teaserInterests.push(Interests.findDoc(id));
-      _.map(teaserInterests, (teaserInterest) => {
-        _.map(userInterests, (userInterest) => {
-          if (_.isEqual(teaserInterest, userInterest)) {
-            if (!_.includes(matching, teaser)) {
-              matching.push(teaser);
+  if (getRouteUserName()) {
+    const allTeasers = Teasers.find().fetch();
+    const matching = [];
+    const user = Users.findDoc({ username: getRouteUserName() });
+    const userInterests = [];
+    let teaserInterests = [];
+    _.map(Users.getInterestIDs(user._id), (id) => {
+      userInterests.push(Interests.findDoc(id));
+    });
+    _.map(allTeasers, (teaser) => {
+      teaserInterests = [];
+      _.map(teaser.interestIDs, (id) => {
+        teaserInterests.push(Interests.findDoc(id));
+        _.map(teaserInterests, (teaserInterest) => {
+          _.map(userInterests, (userInterest) => {
+            if (_.isEqual(teaserInterest, userInterest)) {
+              if (!_.includes(matching, teaser)) {
+                matching.push(teaser);
+              }
             }
-          }
+          });
         });
       });
     });
-  });
-  return matching;
+    return matching;
+  }
+  return [];
 }
 
 Template.Student_Teaser_Widget.helpers({

@@ -21,11 +21,10 @@ Template.Help_Panel_Widget.helpers({
   },
 });
 
-
 Template.Help_Panel_Widget.onCreated(function helpPanelOnCreated() {
   this.subscribe(HelpMessages.getPublicationName());
 });
 
 Template.Help_Panel_Widget.onRendered(function helpPanelOnRendered() {
-  this.$('.ui.accordion').accordion('close', 0);
+  this.$('.ui.accordion').accordion();
 });

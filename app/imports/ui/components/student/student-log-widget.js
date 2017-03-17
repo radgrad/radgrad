@@ -18,7 +18,7 @@ Template.Student_Log_Widget.helpers({
   },
   displayDate(log) {
     const date = log.createdOn;
-    return `${date.toDateString()}  ${date.getHours()}:${date.getMinutes()}`;
+    return `${date.toDateString()}`;
   },
   logs() {
     return AdvisorLogs.find({ studentID: getUserIdFromRoute() }, { sort: { createdOn: -1 } }).fetch();

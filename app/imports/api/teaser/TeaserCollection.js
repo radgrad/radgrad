@@ -99,7 +99,11 @@ class TeaserCollection extends BaseInstanceCollection {
     const description = doc.description;
     const duration = doc.duration;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
-    return { title, slug, author, url, description, duration, interests };
+    let opportunity;
+    if (doc.opportunityID) {
+      opportunity = Opportunities.findSlugByID(doc.opportunityID);
+    }
+    return { title, slug, author, url, description, duration, interests, opportunity };
   }
 
 }

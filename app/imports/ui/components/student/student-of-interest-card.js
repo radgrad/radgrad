@@ -1,33 +1,18 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
-import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { Courses } from '../../../api/course/CourseCollection.js';
+import * as RouteNames from '/imports/startup/client/router.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
-import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Of_Interest_Card.onCreated(function studentOfInterestCardOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(3));
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3));
 });
 
 function interestedStudentsHelper(item, type) {
   const interested = [];
-  let count = 0;
   let instances;
   if (type === 'courses') {
     instances = CourseInstances.find({
@@ -39,15 +24,9 @@ function interestedStudentsHelper(item, type) {
     }).fetch();
   }
   _.map(instances, (c) => {
-    if (count < 17) {
-      if (!_.includes(interested, c.studentID)) {
-        interested.push(c.studentID);
-        count += 1;
-      }
-    } else
-      if (count === 17) {
-        interested.push('elipsis');
-      }
+    if (!_.includes(interested, c.studentID)) {
+      interested.push(c.studentID);
+    }
   });
   return interested;
 }

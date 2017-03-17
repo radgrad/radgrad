@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '/imports/startup/client/router.js';
+import { $ } from 'meteor/jquery';
 
 Template.First_Menu.onCreated(function onCreated() {
   this.subscribe(Users.getPublicationName());
@@ -43,5 +44,12 @@ Template.First_Menu.helpers({
   },
   useCAS() {
     return false;
+  },
+});
+
+Template.First_Menu.events({
+  'click .mobileSidebar': function clickMobileSidebar(event) {
+    event.preventDefault();
+    $('.ui.sidebar').sidebar('toggle');
   },
 });
