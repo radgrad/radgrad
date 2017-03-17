@@ -1,5 +1,5 @@
 <template name="Academic_Plan">
-  <!--{{#if Template.subscriptionsReady}}-->
+  {{#if Template.subscriptionsReady}}
     <div class="ui stackable grid">
       <div class="stretched row">
         <div class="ui ten wide column" style="margin-right: 0">
@@ -10,8 +10,8 @@
                   <h3 class="ui horizontal divider header">{{getAcademicYear year.year}}</h3>
                 </div>
                 <div class="stretched column academicYear" style="padding: 0 0.6rem;">
-                  {{> Semester_List (fallArgs year)}}
-                  {{> Semester_List (springArgs year)}}
+                  <!--{{> Semester_List (fallArgs year)}}-->
+                  <!--{{> Semester_List (springArgs year)}}-->
                   {{> Semester_List (summerArgs year)}}
                   <div class="mobile only" style="margin-top: 1rem;">
                     {{> Cumulative_Ice_Component year=year}}
@@ -52,9 +52,9 @@
         </div>
       </div>
     </div>
-  <!--{{else}}-->
-    <!--{{> Loading}}-->
-  <!--{{/if}}-->
+  {{else}}
+    {{> Loading}}
+  {{/if}}
   <script>
     function allowDrop(ev) {
       ev.preventDefault();

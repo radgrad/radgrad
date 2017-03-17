@@ -6,7 +6,20 @@ import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 // import { Logger } from 'meteor/jag:pince';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
+import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Courses } from '../../../api/course/CourseCollection';
+import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
+import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
+import { Interests } from '../../../api/interest/InterestCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Slugs } from '../../../api/slug/SlugCollection';
+import { Users } from '../../../api/user/UserCollection';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 export const plannerKeys = {
@@ -134,7 +147,24 @@ Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
     console.log('there is a problem no data.'); // eslint-disable-line no-console
   }
   this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(DesiredDegrees.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
+  this.subscribe(OpportunityTypes.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Academic_Plan.onRendered(function academicPlanOnRendered() {
