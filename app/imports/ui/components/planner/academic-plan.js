@@ -30,6 +30,33 @@ export const plannerKeys = {
   detailICE: 'detailICE',
 };
 
+Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
+  this.state = new ReactiveDict();
+  if (this.data) {
+    this.state.set('currentSemesterID', this.data.currentSemesterID);
+    this.state.set('studentUsername', this.data.studentUserName);
+  } else {
+    console.log('there is a problem no data.'); // eslint-disable-line no-console
+  }
+  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
+  this.subscribe(CareerGoals.getPublicationName());
+  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
+  this.subscribe(Courses.getPublicationName());
+  this.subscribe(DesiredDegrees.getPublicationName());
+  this.subscribe(FeedbackInstances.getPublicationName());
+  this.subscribe(Feedbacks.getPublicationName());
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Opportunities.getPublicationName());
+  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
+  this.subscribe(OpportunityTypes.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
+  this.subscribe(Semesters.getPublicationName());
+  this.subscribe(Slugs.getPublicationName());
+  this.subscribe(Users.getPublicationName());
+  this.subscribe(VerificationRequests.getPublicationName());
+});
+
 Template.Academic_Plan.helpers({
   fallArgs(year) {
     if (Template.instance().state.get('currentSemesterID')) {
@@ -136,35 +163,6 @@ Template.Academic_Plan.events({
     const year = Template.instance().state.get('startYear');
     Template.instance().state.set('startYear', year - 1);
   },
-});
-
-Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
-  this.state = new ReactiveDict();
-  if (this.data) {
-    this.state.set('currentSemesterID', this.data.currentSemesterID);
-    this.state.set('studentUsername', this.data.studentUserName);
-  } else {
-    console.log('there is a problem no data.'); // eslint-disable-line no-console
-  }
-  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(OpportunityTypes.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Academic_Plan.onRendered(function academicPlanOnRendered() {

@@ -10,8 +10,8 @@
                   <h3 class="ui horizontal divider header">{{getAcademicYear year.year}}</h3>
                 </div>
                 <div class="stretched column academicYear" style="padding: 0 0.6rem;">
-                  <!--{{> Semester_List (fallArgs year)}}-->
-                  <!--{{> Semester_List (springArgs year)}}-->
+                  {{> Semester_List (fallArgs year)}}
+                  {{> Semester_List (springArgs year)}}
                   {{> Semester_List (summerArgs year)}}
                   <div class="mobile only" style="margin-top: 1rem;">
                     {{> Cumulative_Ice_Component year=year}}

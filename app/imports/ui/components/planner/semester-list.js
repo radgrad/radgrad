@@ -12,6 +12,13 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 // import { moment } from 'meteor/momentjs:moment';
 
+Template.Semester_List.onCreated(function semesterListOnCreate() {
+  if (this.data) {
+    this.state = this.data.dictionary;
+  }
+  this.localState = new ReactiveDict();
+});
+
 Template.Semester_List.helpers({
   dictionary() {
     window.camDebugging.start('dictionary');
@@ -64,25 +71,6 @@ Template.Semester_List.helpers({
     window.camDebugging.stop('localState');
     return Template.instance().localState;
   },
-  // nonIcsCourses() {
-  //   if (getRouteUserName()) {
-  //     const ret = [];
-  //     if (Template.instance().localState.get('semester')) {
-  //       const courses = CourseInstances.find({
-  //         studentID: getUserIdFromRoute(),
-  //         number: /[^ICS]/,
-  //         semesterID: Template.instance().localState.get('semester')._id,
-  //       }).fetch();
-  //       courses.forEach((c) => {
-  //         if (!CourseInstances.isICS(c._id)) {
-  //           ret.push(c);
-  //         }
-  //       });
-  //     }
-  //     return ret;
-  //   }
-  //   return null;
-  // },
   opportunityName(opportunityID) {
     window.camDebugging.start('opportunityName');
     const opp = OpportunityInstances.find({ _id: opportunityID }).fetch();
@@ -234,23 +222,6 @@ Template.Semester_List.events({
     template.state.set(plannerKeys.detailOpportunity, null);
     template.state.set(plannerKeys.detailOpportunityInstance, null);
   },
-});
-
-Template.Semester_List.onCreated(function semesterListOnCreate() {
-  if (this.data) {
-    this.state = this.data.dictionary;
-  }
-  this.localState = new ReactiveDict();
-  // this.subscribe(CareerGoals.getPublicationName());
-  // this.subscribe(CourseInstances.getPublicationName(2), getUserIdFromRoute(), this.data.semester._id);
-  // this.subscribe(DesiredDegrees.getPublicationName());
-  // this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  // this.subscribe(OpportunityTypes.getPublicationName());
-  // this.subscribe(FeedbackInstances.getPublicationName());
-  // this.subscribe(Feedbacks.getPublicationName());
-  // this.subscribe(Semesters.getPublicationName());
-  // this.subscribe(Slugs.getPublicationName());
-  // this.subscribe(Users.getPublicationName());
 });
 
 Template.Semester_List.onRendered(function semesterListOnRendered() {
