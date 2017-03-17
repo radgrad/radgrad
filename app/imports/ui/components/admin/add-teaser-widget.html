@@ -12,9 +12,11 @@
 
       <div class="fields">
         {{> Input_Form_Field label="Duration" name="duration" placeholder="2:30" errorMessage=(fieldError "duration")}}
-        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests") required="true" }}
+        {{> Opportunity_Form_Field opportunities=opportunities errorMessage=(fieldError "opportunity") required=true}}
         {{> Input_Form_Field label="URL" name="url" placeholder="http://youtube.com/embed/foo" errorMessage=(fieldError "url") required="true" }}
       </div>
+
+      {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests") required="true" }}
 
       {{> Input_Form_Field label="Description" name="description" placeholder="Describe the teaser here" errorMessage=(fieldError "description") required=true}}
 

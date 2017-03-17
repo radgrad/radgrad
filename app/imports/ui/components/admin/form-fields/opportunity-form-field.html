@@ -4,7 +4,7 @@
     <select class="ui dropdown" name="opportunity">
       <option value="">Select Opportunity</option>
       {{#each opportunity in opportunities}}
-        <option value="{{opportunity._id}}" selected="{{isSelected opportunity._id selectedOpportunityID}}">{{opportunity.name}}</option>
+        <option value="{{id opportunity}}" selected="{{isSelected opportunity._id selectedOpportunityID}}">{{name opportunity}}</option>
       {{/each}}
     </select>
     {{> Form_Error_Message errorMessage=errorMessage}}
