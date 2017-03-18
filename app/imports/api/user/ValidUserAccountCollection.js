@@ -44,7 +44,7 @@ class ValidUserAccountCollection extends BaseInstanceCollection {
         if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
-        return null;
+        return this.ready();
       });
     }
   }

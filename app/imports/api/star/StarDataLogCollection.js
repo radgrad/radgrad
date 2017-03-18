@@ -79,7 +79,7 @@ class StarDataLogCollection extends BaseCollection {
         if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
-        return null;
+        return this.ready();
       });
     }
   }
