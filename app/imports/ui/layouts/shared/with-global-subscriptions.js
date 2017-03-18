@@ -20,38 +20,32 @@ import { Users } from '../../../api/user/UserCollection';
 /*
  For details on this approach, see:
  https://kadira.io/academy/meteor-routing-guide/content/subscriptions-and-data-management/using-subs-manager
- */
 
-const GlobalSubs = new SubsManager({ cacheLimit: 15, expireIn: 30 });
+ https://github.com/kadirahq/subs-manager
+*/
+
+// cacheLimit default is 10, so increased to handle 13 subscriptions.
+// expireLimit set to 30 minutes because: why not.
+const globalSubs = new SubsManager({ cacheLimit: 15, expireIn: 30 });
 
 Template.With_Global_Subscriptions.onCreated(function onCreated() {
   const self = this;
   self.ready = new ReactiveVar();
   self.autorun(function () {
-    const careerGoalsHandle = GlobalSubs.subscribe(CareerGoals.getPublicationName());
-    const coursesHandle = GlobalSubs.subscribe(Courses.getPublicationName());
-    const desiredDegreesHandle = GlobalSubs.subscribe(DesiredDegrees.getPublicationName());
-    const feedbacksHandle = GlobalSubs.subscribe(Feedbacks.getPublicationName());
-    const helpMessagesHandle = GlobalSubs.subscribe(HelpMessages.getPublicationName());
-    const interestsHandle = GlobalSubs.subscribe(Interests.getPublicationName());
-    const interestTypesHandle = GlobalSubs.subscribe(InterestTypes.getPublicationName());
-    const opportunitiesHandle = GlobalSubs.subscribe(Opportunities.getPublicationName());
-    const opportunityTypesHandle = GlobalSubs.subscribe(OpportunityTypes.getPublicationName());
-    const semestersHandle = GlobalSubs.subscribe(Semesters.getPublicationName());
-    const usersHandle = GlobalSubs.subscribe(Users.getPublicationName());
-    self.ready.set(
-        careerGoalsHandle.ready() &&
-        coursesHandle.ready() &&
-        desiredDegreesHandle.ready() &&
-        feedbacksHandle.ready() &&
-        helpMessagesHandle.ready() &&
-        interestsHandle.ready() &&
-        interestTypesHandle.ready() &&
-        opportunitiesHandle.ready() &&
-        opportunityTypesHandle.ready() &&
-        semestersHandle.ready() &&
-        usersHandle.ready()
-    );
+    globalSubs.subscribe(CareerGoals.getPublicationName());
+    globalSubs.subscribe(Courses.getPublicationName());
+    globalSubs.subscribe(DesiredDegrees.getPublicationName());
+    globalSubs.subscribe(Feedbacks.getPublicationName());
+    globalSubs.subscribe(HelpMessages.getPublicationName());
+    globalSubs.subscribe(Interests.getPublicationName());
+    globalSubs.subscribe(InterestTypes.getPublicationName());
+    globalSubs.subscribe(Opportunities.getPublicationName());
+    globalSubs.subscribe(OpportunityTypes.getPublicationName());
+    globalSubs.subscribe(Semesters.getPublicationName());
+    globalSubs.subscribe(Slugs.getPublicationName());
+    globalSubs.subscribe(Teasers.getPublicationName());
+    globalSubs.subscribe(Users.getPublicationName());
+    self.ready.set(globalSubs.ready());
   });
 });
 
