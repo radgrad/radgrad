@@ -49,8 +49,6 @@ Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   this.subscribe(OpportunityTypes.getPublicationName());
   this.subscribe(Semesters.getPublicationName());
   this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
   this.subscribe(Users.getPublicationName());
   this.subscribe(VerificationRequests.getPublicationName());
 });
