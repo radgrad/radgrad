@@ -26,3 +26,6 @@ import './second-menu.js';
 
 import './mobile-second-menu.html';
 import './mobile-second-menu.js';
+
+import './with-global-subscriptions.html';
+import './with-global-subscriptions.js';
