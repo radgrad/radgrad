@@ -134,6 +134,4 @@ Template.Moderation.events({
 Template.Moderation.onCreated(function ModerationOnCreated() {
   FormUtils.setupFormWidget(this, noSlugSchema);
   FormUtils.setupFormWidget(this, withSlugSchema);
-  this.subscribe(MentorQuestions.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
 });

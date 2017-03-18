@@ -60,7 +60,6 @@ Template.Student_Levels_Others.onCreated(function levelStickerLogOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   }
-  this.subscribe(Users.getPublicationName());
 });
 
 Template.Student_Levels_Others.onRendered(function levelStickerLogOnRendered() {

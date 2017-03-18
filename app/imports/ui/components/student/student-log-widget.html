@@ -1,32 +1,29 @@
 <template name="Student_Log_Widget">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui padded container segment">
-      <div class="ui dividing header"><h4>ADVISOR MEETING LOG</h4></div>
-      {{#if logs}}
-        {{#each log in logs}}
-          <div class="ui relaxed divided items">
-            <div class="item">
-              <div class="ui tiny image">
-                <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(advisorUsername log)}}"><img src="{{advisorImage log}}"></a>
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADVISOR MEETING LOG</h4></div>
+    {{#if logs}}
+      {{#each log in logs}}
+        <div class="ui relaxed divided items">
+          <div class="item">
+            <div class="ui tiny image">
+              <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(advisorUsername log)}}"><img
+                  src="{{advisorImage log}}"></a>
+            </div>
+            <div class="content">
+              <div class="ui header">{{displayDate log}}</div>
+              <div class="meta">
+                <span>Results from the meeting with {{advisorName log}}: </span>
               </div>
-              <div class="content">
-                <div class="ui header">{{displayDate log}}</div>
-                <div class="meta">
-                  <span>Results from the meeting with {{advisorName log}}: </span>
-                </div>
-                <div class="description">
-                  <p>{{log.text}}</p>
-                </div>
+              <div class="description">
+                <p>{{log.text}}</p>
               </div>
             </div>
           </div>
-          <div class="ui divider"></div>
-        {{/each}}
-      {{else}}
-        <p><i>There are no advisor logs.</i></p>
-      {{/if}}
-    </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+        </div>
+        <div class="ui divider"></div>
+      {{/each}}
+    {{else}}
+      <p><i>There are no advisor logs.</i></p>
+    {{/if}}
+  </div>
 </template>

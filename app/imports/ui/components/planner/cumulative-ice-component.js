@@ -64,9 +64,9 @@ Template.Cumulative_Ice_Component.events({
 });
 
 Template.Cumulative_Ice_Component.onCreated(function cumulativeIceComponentOnCreated() {
-  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
+  // this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
+  // this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
+  // this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
 });
 
 Template.Cumulative_Ice_Component.onRendered(function cumulativeIceComponentOnRendered() {

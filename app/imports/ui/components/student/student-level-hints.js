@@ -4,11 +4,6 @@ import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
-Template.Student_Level_Hints.onCreated(function studentLevelHints() {
-  this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(FeedbackInstances.getPublicationName());
-});
-
 Template.Student_Level_Hints.helpers({
   levelFeedback() {
     const feedback = Feedbacks.find({ name: 'Recommendation for next Level' }).fetch();

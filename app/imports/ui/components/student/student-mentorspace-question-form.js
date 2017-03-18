@@ -1,19 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { Courses } from '../../../api/course/CourseCollection.js';
-import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
-import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
-import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
-import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Users } from '../../../api/user/UserCollection.js';
-import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -22,22 +9,6 @@ const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
 Template.Student_MentorSpace_Question_Form.onCreated(function studentMentorSpaceMentorQuestionFormOnCreated() {
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(MentorQuestions.getPublicationName());
-  this.subscribe(MentorAnswers.getPublicationName());
-  this.subscribe(MentorProfiles.getPublicationName());
-  this.subscribe(MentorQuestions.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
-  this.subscribe(VerificationRequests.getPublicationName());
-
   this.messageFlags = new ReactiveDict();
   this.messageFlags.set(displaySuccessMessage, false);
   this.messageFlags.set(displayErrorMessages, false);

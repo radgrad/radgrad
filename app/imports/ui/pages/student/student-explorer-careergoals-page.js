@@ -77,9 +77,3 @@ Template.Student_Explorer_CareerGoals_Page.helpers({
   },
 });
 
-Template.Student_Explorer_CareerGoals_Page.onCreated(function studentExplorerCareerGoalsPageOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-});

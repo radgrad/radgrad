@@ -1,14 +1,11 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
-import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
@@ -91,13 +88,6 @@ Template.Student_Explorer_Courses_Widget.events({
 });
 
 Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCoursesWidgetOnCreated() {
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Reviews.getPublicationName());
   this.autorun(() => {
     this.subscribe(CourseInstances.getPublicationName(1), this.data.item._id);
   });

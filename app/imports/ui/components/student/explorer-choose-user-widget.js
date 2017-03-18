@@ -3,6 +3,12 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import * as RouteNames from '/imports/startup/client/router.js';
 
+Template.Explorer_Choose_User_Widget.onCreated(function explorerChooseUserWidgetOnCreated() {
+  if (this.data.userID) {
+    this.userID = this.data.userID;
+  }
+});
+
 Template.Explorer_Choose_User_Widget.helpers({
   advisorRole() {
     return ROLE.ADVISOR;
@@ -47,19 +53,7 @@ Template.Explorer_Choose_User_Widget.events({
   },
 });
 
-Template.Explorer_Choose_User_Widget.onCreated(function explorerChooseUserWidgetOnCreated() {
-  this.subscribe(Users.getPublicationName());
-  if (this.data.userID) {
-    this.userID = this.data.userID;
-  }
-});
-
 Template.Explorer_Choose_User_Widget.onRendered(function explorerChooseUserWidgetOnRendered() {
   this.$('.menu .item').tab();
   this.$('.ui.dropdown').dropdown();
 });
-
-Template.Explorer_Choose_User_Widget.onDestroyed(function explorerChooseUserWidgetOnDestroyed() {
-  // add your statement here
-});
-

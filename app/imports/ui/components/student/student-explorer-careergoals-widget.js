@@ -78,9 +78,3 @@ Template.Student_Explorer_CareerGoals_Widget.events({
     }
   },
 });
-
-Template.Student_Explorer_CareerGoals_Widget.onCreated(function studentExplorerCareerGoalsWidgetOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});

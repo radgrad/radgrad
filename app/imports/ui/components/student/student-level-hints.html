@@ -1,12 +1,8 @@
 <template name="Student_Level_Hints">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui warning icon message">
-      <i class="rocket icon"></i>
-      <div class="content">
-        {{#markdown}}{{levelFeedback.description}}{{/markdown}}
-      </div>
+  <div class="ui warning icon message">
+    <i class="rocket icon"></i>
+    <div class="content">
+      {{#markdown}}{{levelFeedback.description}}{{/markdown}}
     </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+  </div>
 </template>
