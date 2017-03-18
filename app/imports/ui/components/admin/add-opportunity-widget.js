@@ -28,11 +28,6 @@ const addSchema = new SimpleSchema({
 
 Template.Add_Opportunity_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(OpportunityTypes.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
 });
 
 Template.Add_Opportunity_Widget.helpers({

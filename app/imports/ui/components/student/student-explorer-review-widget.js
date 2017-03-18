@@ -7,14 +7,6 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as RouteNames from '/imports/startup/client/router.js';
 
-
-Template.Student_Explorer_Review_Widget.onCreated(function onCreated() {
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Reviews.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});
-
 Template.Student_Explorer_Review_Widget.helpers({
   abbreviateSemester(semester) {
     const semNameYear = semester.split(' ');

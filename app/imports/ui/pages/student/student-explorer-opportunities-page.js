@@ -142,13 +142,3 @@ Template.Student_Explorer_Opportunities_Page.helpers({
   },
 });
 
-Template.Student_Explorer_Opportunities_Page.onCreated(function studentExplorerOpportunitiesPageOnCreated() {
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityTypes.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Teasers.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-});

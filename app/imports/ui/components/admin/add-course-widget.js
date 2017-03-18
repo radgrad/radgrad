@@ -21,9 +21,6 @@ const addSchema = new SimpleSchema({
 
 Template.Add_Course_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
 });
 
 Template.Add_Course_Widget.helpers({

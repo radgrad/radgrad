@@ -13,7 +13,6 @@ const addSchema = new SimpleSchema({
 
 Template.Add_Help_Message_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(HelpMessages.getPublicationName());
 });
 
 Template.Add_Help_Message_Widget.helpers({

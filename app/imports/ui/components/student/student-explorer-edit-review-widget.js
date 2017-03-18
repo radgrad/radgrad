@@ -19,10 +19,6 @@ const editSchema = new SimpleSchema({
 
 Template.Student_Explorer_Edit_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, editSchema);
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
 });
 
 Template.Student_Explorer_Edit_Review_Widget.helpers({

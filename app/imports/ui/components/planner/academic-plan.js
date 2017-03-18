@@ -36,21 +36,6 @@ export const plannerKeys = {
 Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   this.state = new ReactiveDict();
   this.startYear = new ReactiveVar();
-  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(OpportunityTypes.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(VerificationRequests.getPublicationName());
 });
 
 Template.Academic_Plan.helpers({

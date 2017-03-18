@@ -56,9 +56,3 @@ Template.Student_Explorer_Degrees_Widget.events({
     }
   },
 });
-
-Template.Student_Explorer_Degrees_Widget.onCreated(function studentExplorerDegreesWidgetOnCreated() {
-  this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});

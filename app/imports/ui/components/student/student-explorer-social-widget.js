@@ -53,9 +53,6 @@ Template.Student_Explorer_Social_Widget.events({
 });
 
 Template.Student_Explorer_Social_Widget.onCreated(function studentExplorerSocialWidgetOnCreated() {
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
   this.currentItem = () => FlowRouter.getParam('course');
   this.autorun(() => {
     this.subscribe(CourseInstances.getPublicationName(3), this.currentItem());

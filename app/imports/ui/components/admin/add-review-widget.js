@@ -22,10 +22,6 @@ const addSchema = new SimpleSchema({
 
 Template.Add_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Feeds.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
 });
 
 Template.Add_Review_Widget.helpers({

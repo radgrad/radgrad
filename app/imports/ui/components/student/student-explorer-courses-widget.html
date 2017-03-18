@@ -1,131 +1,131 @@
 <template name="Student_Explorer_Courses_Widget">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui segments" style="background-color: white;">
-      <div class="ui padded segment container">
+  <div class="ui segments" style="background-color: white;">
+    <div class="ui padded segment container">
 
-        <div class="ui clearing basic segment" style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
-          <h4 class="ui left floated header">{{toUpper shortName}} ({{name}})</h4>
-          {{#if userStatus item}}
-            {{#if futureInstance item}}
-              {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
+      <div class="ui clearing basic segment"
+           style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+        <h4 class="ui left floated header">{{toUpper shortName}} ({{name}})</h4>
+        {{#if userStatus item}}
+          {{#if futureInstance item}}
+            {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
+          {{else}}
+            {{#if passedCourse item}}
+              {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
             {{else}}
-              {{#if passedCourse item}}
-                {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
+              {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+            {{/if}}
+          {{/if}}
+        {{else}}
+          {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+        {{/if}}
+      </div>
+      <div class="ui divider" style="margin-top: 0;"></div>
+
+      <div class="ui stackable two column grid">
+        <div class="six wide column">
+          {{#each descriptionPair in descriptionPairs}}
+
+            {{#if isLabel descriptionPair.label 'Course Number'}}
+              <b>{{descriptionPair.label}}:</b>
+              {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
               {{else}}
-                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+                N/A <br>
               {{/if}}
             {{/if}}
-          {{else}}
-            {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
-          {{/if}}
-        </div>
-        <div class="ui divider" style="margin-top: 0;"></div>
 
-        <div class="ui stackable two column grid">
-          <div class="six wide column">
-            {{#each descriptionPair in descriptionPairs}}
-
-              {{#if isLabel descriptionPair.label 'Course Number'}}
-                <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
-                  {{else}}
-                    N/A <br>
-                {{/if}}
-              {{/if}}
-
-              {{#if isLabel descriptionPair.label 'Credit Hours'}}
+            {{#if isLabel descriptionPair.label 'Credit Hours'}}
               <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
-                  {{else}}
-                    N/A <br>
-                {{/if}}
+              {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+              {{else}}
+                N/A <br>
               {{/if}}
+            {{/if}}
 
-            {{/each}}
-          </div>
-
-          <div class="ten wide column">
-            {{#each descriptionPair in descriptionPairs}}
-
-              {{#if isLabel descriptionPair.label 'Syllabus'}}
-              <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
-                  {{else}}
-                    N/A <br>
-                {{/if}}
-              {{/if}}
-
-              {{#if isLabel descriptionPair.label 'More Information'}}
-              <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
-                  {{else}}
-                    N/A <br>
-                {{/if}}
-              {{/if}}
-
-            {{/each}}
-          </div>
+          {{/each}}
         </div>
 
-        <div style="margin-top: 0" class="ui stackable grid">
-          <div class="column">
-            {{#each descriptionPair in descriptionPairs}}
+        <div class="ten wide column">
+          {{#each descriptionPair in descriptionPairs}}
 
-              {{#if isLabel descriptionPair.label 'Description'}}
-                <b>{{descriptionPair.label}}:</b>
-                {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
-                {{else}}
-                  N/A <br>
-                {{/if}}
+            {{#if isLabel descriptionPair.label 'Syllabus'}}
+              <b>{{descriptionPair.label}}:</b>
+              {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
+              {{else}}
+                N/A <br>
               {{/if}}
+            {{/if}}
 
-              {{#if isLabel descriptionPair.label 'Interests'}}
-                <div style="margin-top: 5px">
-                  {{> Interest_List item=item size='mini'}}
-                </div>
+            {{#if isLabel descriptionPair.label 'More Information'}}
+              <b>{{descriptionPair.label}}:</b>
+              {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
+              {{else}}
+                N/A <br>
               {{/if}}
+            {{/if}}
 
-            {{/each}}
-          </div>
+          {{/each}}
         </div>
       </div>
 
-      <div class="ui segment">
-        <div class="ui three column stackable internally celled grid">
-          <div class="row">
-            {{#each descriptionPair in descriptionPairs}}
-              {{#if isLabel descriptionPair.label 'Prerequisites'}}
-                  {{#each table in descriptionPair.value}}
-                    <div class="column" style="text-align: center;">
-                        {{{getTableTitle @index}}}
-                          {{#each prerequisite in table}}
-                            - <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesRouteName username=routeUserName course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a> <br>
-                          {{/each}}
-                    </div>
+      <div style="margin-top: 0" class="ui stackable grid">
+        <div class="column">
+          {{#each descriptionPair in descriptionPairs}}
+
+            {{#if isLabel descriptionPair.label 'Description'}}
+              <b>{{descriptionPair.label}}:</b>
+              {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+              {{else}}
+                N/A <br>
+              {{/if}}
+            {{/if}}
+
+            {{#if isLabel descriptionPair.label 'Interests'}}
+              <div style="margin-top: 5px">
+                {{> Interest_List item=item size='mini'}}
+              </div>
+            {{/if}}
+
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <div class="ui segment">
+      <div class="ui three column stackable internally celled grid">
+        <div class="row">
+          {{#each descriptionPair in descriptionPairs}}
+            {{#if isLabel descriptionPair.label 'Prerequisites'}}
+              {{#each table in descriptionPair.value}}
+                <div class="column" style="text-align: center;">
+                  {{{getTableTitle @index}}}
+                  {{#each prerequisite in table}}
+                    - <a class="{{isActiveRoute coursesRouteName}} item"
+                         href="{{pathFor coursesRouteName username=routeUserName
+                                         course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a>
+                    <br>
                   {{/each}}
-              {{/if}}
-            {{/each}}
-          </div>
+                </div>
+              {{/each}}
+            {{/if}}
+          {{/each}}
         </div>
-      </div>
-
-    </div>
-
-    <div class="ui stackable two column grid">
-      <div class="ten wide column">
-        <div class="ui padded segment">
-          {{> Student_Explorer_Review_Widget event=item userReview=review completed=completed reviewType = 'course'}}
-        </div>
-      </div>
-
-      <div class="six wide column">
-        {{> Student_Explorer_Social_Widget item=item}}
       </div>
     </div>
 
-    {{> Back_To_Top_Button}}
-    
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+  </div>
+
+  <div class="ui stackable two column grid">
+    <div class="ten wide column">
+      <div class="ui padded segment">
+        {{> Student_Explorer_Review_Widget event=item userReview=review completed=completed reviewType = 'course'}}
+      </div>
+    </div>
+
+    <div class="six wide column">
+      {{> Student_Explorer_Social_Widget item=item}}
+    </div>
+  </div>
+
+  {{> Back_To_Top_Button}}
+
 </template>

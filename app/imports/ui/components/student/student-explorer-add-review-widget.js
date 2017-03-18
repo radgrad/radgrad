@@ -19,11 +19,6 @@ const addSchema = new SimpleSchema({
 
 Template.Student_Explorer_Add_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Feeds.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
 });
 
 Template.Student_Explorer_Add_Review_Widget.helpers({

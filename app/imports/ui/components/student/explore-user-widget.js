@@ -13,6 +13,15 @@ function getExplorerUserID() {
   return Users.findDoc({ username })._id;
 }
 
+Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
+  this.autorun(() => {
+    if (this.data.userID) {
+      this.userID = this.data.userID;
+    }
+    this.subscribe(CourseInstances.getPublicationName(5), getExplorerUserID());
+  });
+});
+
 Template.Explore_User_Widget.helpers({
   desiredDegree() {
     if (Template.instance().userID && Template.instance().userID.get()) {
@@ -97,30 +106,5 @@ Template.Explore_User_Widget.helpers({
     }
     return '';
   },
-});
-
-Template.Explore_User_Widget.events({
-  // add your events here
-});
-
-Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.autorun(() => {
-    if (this.data.userID) {
-      this.userID = this.data.userID;
-    }
-    this.subscribe(CourseInstances.getPublicationName(5), getExplorerUserID());
-  });
-});
-
-Template.Explore_User_Widget.onRendered(function exploreUserWidgetOnRendered() {
-  // add your statement here
-});
-
-Template.Explore_User_Widget.onDestroyed(function exploreUserWidgetOnDestroyed() {
-  // add your statement here
 });
 

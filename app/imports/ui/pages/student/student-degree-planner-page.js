@@ -6,8 +6,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
   this.state = new ReactiveDict();
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Users.getPublicationName());
 });
 
 Template.Student_Degree_Planner_Page.helpers({
@@ -21,8 +19,4 @@ Template.Student_Degree_Planner_Page.helpers({
     }
     return null;
   },
-});
-
-Template.Student_Degree_Planner_Page.onRendered(function plannerOnRendered() {
-  // Accounts._loginButtonsSession.set('dropdownVisible', true);
 });

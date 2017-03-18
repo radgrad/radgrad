@@ -1,14 +1,14 @@
 <template name="Advisor_Layout">
   {{#If_Authorized}}
-    {{#if Template.subscriptionsReady}}
-    {{> Mobile_Second_Menu menuItems=secondMenuItems username=routeUserName}}
-    <div class="pusher">
-      {{> First_Menu role="Advisor"}}
-      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
-      {{> Template.dynamic template=main}}
-    </div>
-    {{else}}
-      {{> Loading}}
-    {{/if}}
+    {{#With_Global_Subscriptions}}
+      {{#With_Instance_Subscriptions}}
+        {{> Mobile_Second_Menu menuItems=secondMenuItems username=routeUserName}}
+        <div class="pusher">
+          {{> First_Menu role="Advisor"}}
+          {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
+          {{> Template.dynamic template=main}}
+        </div>
+      {{/With_Instance_Subscriptions}}
+    {{/With_Global_Subscriptions}}
   {{/If_Authorized}}
 </template>

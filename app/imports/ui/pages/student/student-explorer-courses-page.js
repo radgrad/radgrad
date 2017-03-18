@@ -131,10 +131,3 @@ Template.Student_Explorer_Courses_Page.helpers({
   },
 });
 
-Template.Student_Explorer_Courses_Page.onCreated(function studentExplorerCoursesPageOnCreated() {
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-});

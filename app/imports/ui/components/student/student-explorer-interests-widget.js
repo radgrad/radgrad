@@ -94,11 +94,3 @@ Template.Student_Explorer_Interests_Widget.events({
     }
   },
 });
-
-Template.Student_Explorer_Interests_Widget.onCreated(function studentExplorerInterestsWidgetOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});

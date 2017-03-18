@@ -145,26 +145,3 @@ Template.Student_About_Me_Widget.events({
     event.preventDefault();
   },
 });
-
-Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-});
-
-
-Template.Student_About_Me_Widget.onRendered(function studentAboutMeOnRendered() {
-  // add your statement here
-});
-
-Template.Student_About_Me_Widget.onDestroyed(function studentAboutMeOnDestroyed() {
-  // add your statement here
-});
-

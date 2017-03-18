@@ -4,13 +4,6 @@ import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
-Template.Student_MentorSpace_Page.onCreated(function studentMentorSpacePageOnCreated() {
-  this.subscribe(MentorQuestions.getPublicationName());
-  this.subscribe(MentorAnswers.getPublicationName());
-  this.subscribe(MentorProfiles.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});
-
 Template.Student_MentorSpace_Page.helpers({
 
   questionsList() {

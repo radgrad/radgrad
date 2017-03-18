@@ -15,8 +15,6 @@ const addSchema = new SimpleSchema({
 
 Template.Add_Interest_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(InterestTypes.getPublicationName());
 });
 
 Template.Add_Interest_Widget.helpers({

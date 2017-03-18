@@ -27,8 +27,3 @@ Template.Student_Log_Widget.helpers({
     return RouteNames.studentExplorerUsersPageRouteName;
   },
 });
-
-Template.Student_Log_Widget.onCreated(function studentLogWidgetOnCreated() {
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(AdvisorLogs.getPublicationName());
-});

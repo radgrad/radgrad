@@ -104,8 +104,4 @@ Template.Student_Explorer_Opportunities_Widget.onRendered(function enableVideo()
 
 Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.updated = new ReactiveVar(false);
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Reviews.getPublicationName());
 });
