@@ -1,10 +1,6 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '/imports/startup/client/router.js';
-import { Interests } from '../../../api/interest/InterestCollection';
-import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
-import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Student_MentorSpace_Questions_Accordion.onRendered(function studentMentorSpaceQuestionsAccordionOnRendered() {
