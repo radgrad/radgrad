@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
-import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 

@@ -6,7 +6,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';

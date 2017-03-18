@@ -9,20 +9,7 @@ import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 // import { Logger } from 'meteor/jag:pince';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Courses } from '../../../api/course/CourseCollection';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
-import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
-import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
-import { Interests } from '../../../api/interest/InterestCollection';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection';
-import { Users } from '../../../api/user/UserCollection';
-import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 export const plannerKeys = {

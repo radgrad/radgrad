@@ -8,7 +8,6 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 function passedCourseHelper(courseSlugName) {

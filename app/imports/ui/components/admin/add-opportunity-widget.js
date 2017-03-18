@@ -7,7 +7,6 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
