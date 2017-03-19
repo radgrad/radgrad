@@ -11,17 +11,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-Template.List_Interests_Widget.onCreated(function onCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(InterestTypes.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Teasers.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});
-
 function numReferences(interest) {
   let references = 0;
   [CareerGoals, Courses, Opportunities, Teasers, Users].forEach(function (entity) {

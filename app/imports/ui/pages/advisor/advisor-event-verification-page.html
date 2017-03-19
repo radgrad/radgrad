@@ -1,13 +1,7 @@
 <template name="Advisor_Event_Verification_Page">
   <div class="layout-page">
-
     <div class="ui container">
-      {{#if Template.subscriptionsReady}}
-        {{> Verification_Event }}
-      {{else}}
-        {{> Loading }}
-      {{/if}}
+      {{> Verification_Event }}
     </div>
-
   </div>
 </template>

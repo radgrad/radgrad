@@ -1,6 +1,5 @@
 /* global window */
 
-// import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
@@ -13,7 +12,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 // comment out next line to silence AP logger
-Logger.setLevel('AP', 'trace');
+// Logger.setLevel('AP', 'trace');
 const ap = new Logger('AP');
 
 export const plannerKeys = {
@@ -31,7 +30,7 @@ Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
 
 Template.Academic_Plan.helpers({
   fallArgs(year) {
-    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start fallArgs`);
+    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start fallArgs ${year.year}`);
     if (Template.instance().data.currentSemesterID) {
       const currentSemesterID = Template.instance().data.currentSemesterID;
       const currentSemester = Semesters.findDoc(currentSemesterID);
@@ -75,7 +74,7 @@ Template.Academic_Plan.helpers({
     return false;
   },
   springArgs(year) {
-    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start springArgs`);
+    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start springArgs ${year.year}`);
     if (Template.instance().data.currentSemesterID) {
       const currentSemesterID = Template.instance().data.currentSemesterID;
       const currentSemester = Semesters.findDoc(currentSemesterID);
@@ -91,7 +90,7 @@ Template.Academic_Plan.helpers({
     return null;
   },
   summerArgs(year) {
-    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start summerArgs`);
+    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start summerArgs ${year.year}`);
     if (Template.instance().data.currentSemesterID) {
       const currentSemesterID = Template.instance().data.currentSemesterID;
       const currentSemester = Semesters.findDoc(currentSemesterID);

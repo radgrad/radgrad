@@ -4,10 +4,6 @@ import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { $ } from 'meteor/jquery';
 
-Template.First_Menu.onCreated(function onCreated() {
-  this.subscribe(Users.getPublicationName());
-});
-
 Template.First_Menu.helpers({
   firstName() {
     const username = getRouteUserName();

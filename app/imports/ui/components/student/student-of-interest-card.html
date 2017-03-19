@@ -1,14 +1,13 @@
 <template name="Student_Of_Interest_Card">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui card radgrad-interest-card">
-      <div class="content">
-        <div class="header">{{itemName item}}</div>
-        <div class="meta">
-          {{#if itemSemesters}}
-            {{replaceSemString itemSemesters}}
-          {{/if}}
-        </div>
+  <div class="ui card radgrad-interest-card">
+    <div class="content">
+      <div class="header">{{itemName item}}</div>
+      <div class="meta">
+        {{#if itemSemesters}}
+          {{replaceSemString itemSemesters}}
+        {{/if}}
       </div>
+    </div>
     <div class="content">
       <p>{{itemShortDescription item}}...</p>
       {{> Interest_List item=item size='mini'}}
@@ -17,18 +16,22 @@
       <span>STUDENTS PARTICIPATING {{> Widget_Header_Number inputValue = (numberStudents item)}}</span>
       <div class="ui circular mini bordered images">
         {{#each student in interestedStudents item}}
-        <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userSlug student)}}"><img class="ui image" src={{studentPicture student}}></a>
+          <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userSlug student)}}"><img
+              class="ui image" src={{studentPicture student}}></a>
         {{/each}}
       </div>
     </div>
 
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
       {{#if typeCourse}}
-        <a class="ui button" href="{{pathFor coursesRouteName username=routeUserName course=(itemSlug item)}}"><i class="chevron circle right icon"></i><br>View More</a>
+        <a class="ui button" href="{{pathFor coursesRouteName username=routeUserName course=(itemSlug item)}}"><i
+            class="chevron circle right icon"></i><br>View More</a>
       {{else}}
-        <a class="ui button" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(itemSlug item)}}"><i class="chevron circle right icon"></i><br>View More</a>
+        <a class="ui button"
+           href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(itemSlug item)}}"><i
+            class="chevron circle right icon"></i><br>View More</a>
       {{/if}}
-        {{> Student_Of_Interest_Add item = item type = type}}
+      {{> Student_Of_Interest_Add item = item type = type}}
 
       {{#if hidden}}
         <div class="ui button unhide"><i class="unhide icon"></i><br>Unhide</div>
@@ -37,5 +40,4 @@
       {{/if}}
     </div>
   </div>
-  {{/if}}
 </template>

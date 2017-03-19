@@ -22,11 +22,6 @@ const updateSchema = new SimpleSchema({
 
 Template.Update_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
 });
 
 Template.Update_Review_Widget.helpers({

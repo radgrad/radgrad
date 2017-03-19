@@ -1,13 +1,5 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
-import { Users } from '../../../api/user/UserCollection';
-
-Template.Advisor_Layout.onCreated(function appBodyOnCreated() {
-  this.subscribe(Users.getPublicationName());
-});
-
-Template.Advisor_Layout.onRendered(function advisorLayoutOnRendered() {
-});
 
 Template.Advisor_Layout.helpers({
   secondMenuItems() {
@@ -42,8 +34,4 @@ Template.Advisor_Layout.helpers({
   secondMenuLength() {
     return 'five';
   },
-});
-
-Template.Advisor_Layout.events({
-  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });

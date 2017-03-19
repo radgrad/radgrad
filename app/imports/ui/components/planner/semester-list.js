@@ -15,10 +15,12 @@ import { moment } from 'meteor/momentjs:moment';
 import { Logger } from 'meteor/jag:pince';
 
 // comment out next line to silence SL logger.
-Logger.setLevel('SL', 'trace');
+// Logger.setLevel('SL', 'trace');
 const sl = new Logger('SL');
 
 Template.Semester_List.onCreated(function semesterListOnCreate() {
+  // eslint-disable-next-line
+  sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onCreated`);
   if (this.data) {
     this.state = this.data.dictionary;
   }
@@ -208,7 +210,6 @@ Template.Semester_List.events({
 });
 
 Template.Semester_List.onRendered(function semesterListOnRendered() {
-  sl.debug(this.data);
   // eslint-disable-next-line
   sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onRendered`);
   if (this.data) {
