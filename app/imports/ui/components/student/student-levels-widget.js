@@ -39,18 +39,3 @@ Template.Student_Levels_Widget.helpers({
     return feed[0];
   },
 });
-
-Template.Student_Levels_Widget.onCreated(function levelStickerLogOnCreated() {
-  if (this.data.dictionary) {
-    this.state = this.data.dictionary;
-  }
-});
-
-Template.Student_Levels_Widget.onRendered(function levelStickerLogOnRendered() {
-
-});
-
-Template.Student_Levels_Widget.onDestroyed(function levelStickerLogOnDestroyed() {
-  // add your statement here
-});
-

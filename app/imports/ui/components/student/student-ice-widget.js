@@ -46,14 +46,6 @@ Template.Student_Ice_Widget.helpers({
   },
 });
 
-Template.Student_Ice_Widget.events({
-  // add events here
-});
-
-Template.Student_Ice_Widget.onDestroyed(function studentIceOnDestroyed() {
-  // add your statement here
-});
-
 Template.Student_Ice_Widget.onRendered(function enableAccordion() {
   this.$('.accordion').accordion({
     selector: {

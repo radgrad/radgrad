@@ -12,9 +12,6 @@ function dateDiffInDays(a, b) {
   return Math.floor((a - b) / MS_PER_DAY);
 }
 
-Template.Student_Feed_Widget.onCreated(function studentFeedWidgetOnCreated() {
-});
-
 Template.Student_Feed_Widget.helpers({
   courseSlug(feed) {
     return Slugs.findDoc(Courses.findDoc(feed.courseID).slugID).name;

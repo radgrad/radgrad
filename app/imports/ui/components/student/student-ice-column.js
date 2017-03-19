@@ -326,10 +326,6 @@ Template.Student_Ice_Column.helpers({
   },
 });
 
-Template.Student_Ice_Column.events({
-  // add events here
-});
-
 Template.Student_Ice_Column.onRendered(function enableAccordion() {
   this.$('.accordion').accordion({
     selector: {

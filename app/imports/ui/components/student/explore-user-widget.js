@@ -1,14 +1,9 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-
-function getExplorerUserID() {
-  const username = FlowRouter.getParam('explorerUserName');
-  return Users.findDoc({ username })._id;
-}
 
 Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
   this.autorun(() => {
@@ -18,6 +13,11 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
     this.subscribe(CourseInstances.getPublicationName(5), getExplorerUserID());
   });
 });
+
+function getExplorerUserID() {
+  const username = FlowRouter.getParam('explorerUserName');
+  return Users.findDoc({ username })._id;
+}
 
 Template.Explore_User_Widget.helpers({
   desiredDegree() {
