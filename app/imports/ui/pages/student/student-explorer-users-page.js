@@ -11,6 +11,11 @@ export function getExplorerUserID() {
   return Users.findDoc({ username })._id;
 }
 
+Template.Student_Explorer_Users_Page.onCreated(function studentExplorerUsersPageOnCreated() {
+  this.userID = new ReactiveVar('');
+  this.userID.set(getExplorerUserID());
+});
+
 Template.Student_Explorer_Users_Page.helpers({
   userID() {
     return Template.instance().userID;
@@ -22,11 +27,6 @@ Template.Student_Explorer_Users_Page.helpers({
 
 Template.Student_Explorer_Users_Page.events({
   // add your events here
-});
-
-Template.Student_Explorer_Users_Page.onCreated(function studentExplorerUsersPageOnCreated() {
-  this.userID = new ReactiveVar('');
-  this.userID.set(getExplorerUserID());
 });
 
 Template.Student_Explorer_Users_Page.onRendered(function studentExplorerUsersPageOnRendered() {

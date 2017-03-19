@@ -7,7 +7,6 @@ import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Interests } from '../../../api/interest/InterestCollection';
 
-
 Template.Student_Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
     const slug = Slugs.find({ name: careerGoalSlugName }).fetch();

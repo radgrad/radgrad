@@ -1,10 +1,9 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
+import * as RouteNames from '/imports/startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Levels_Others.helpers({
   fullName(student) {
@@ -53,20 +52,3 @@ Template.Student_Levels_Others.helpers({
     return student.username;
   },
 });
-
-Template.Student_Levels_Others.events({});
-
-Template.Student_Levels_Others.onCreated(function levelStickerLogOnCreated() {
-  if (this.data.dictionary) {
-    this.state = this.data.dictionary;
-  }
-});
-
-Template.Student_Levels_Others.onRendered(function levelStickerLogOnRendered() {
-
-});
-
-Template.Student_Levels_Others.onDestroyed(function levelStickerLogOnDestroyed() {
-  // add your statement here
-});
-

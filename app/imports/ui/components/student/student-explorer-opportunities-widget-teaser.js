@@ -10,17 +10,6 @@ function teaserUrlHelper(opportunitySlug) {
   return oppTeaser[0].url;
 }
 
-Template.Student_Explorer_Opportunities_Widget_Teaser.onRendered(function enableVideo() {
-
-});
-
-Template.Student_Explorer_Opportunities_Widget_Teaser.helpers({
-  updateTeaser() {
-    $('.ui.embed.teaser').embed('destroy');
-    $('.ui.embed').embed('change', 'youtube', teaserUrlHelper(FlowRouter.getParam('opportunity')));
-  },
-});
-
 Template.Student_Explorer_Opportunities_Widget_Teaser.onCreated(function studentExplorerOpportunitiesWidgetTeaser() {
   setTimeout(() => {
     $('.ui.embed.teaser').embed({
@@ -28,4 +17,11 @@ Template.Student_Explorer_Opportunities_Widget_Teaser.onCreated(function student
       id: teaserUrlHelper(FlowRouter.getParam('opportunity')),
     });
   }, 300);
+});
+
+Template.Student_Explorer_Opportunities_Widget_Teaser.helpers({
+  updateTeaser() {
+    $('.ui.embed.teaser').embed('destroy');
+    $('.ui.embed').embed('change', 'youtube', teaserUrlHelper(FlowRouter.getParam('opportunity')));
+  },
 });

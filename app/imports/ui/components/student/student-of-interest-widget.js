@@ -219,7 +219,3 @@ Template.Student_Of_Interest_Widget.events({
     Template.instance().hidden.set(true);
   },
 });
-
-Template.Student_Of_Interest_Widget.onRendered(function studentOfInterestWidgetOnRendered() {
-
-});

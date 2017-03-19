@@ -24,6 +24,7 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
     instanceSubs.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
     instanceSubs.subscribe(AdvisorLogs.getPublicationName());
     instanceSubs.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
+    instanceSubs.subscribe(CourseInstances.getPublicationName(3));
     instanceSubs.subscribe(FeedbackInstances.getPublicationName());
     instanceSubs.subscribe(Feeds.getPublicationName());
     instanceSubs.subscribe(MentorAnswers.getPublicationName());

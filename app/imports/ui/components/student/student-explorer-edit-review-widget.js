@@ -1,7 +1,5 @@
 import { Template } from 'meteor/templating';
-
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';

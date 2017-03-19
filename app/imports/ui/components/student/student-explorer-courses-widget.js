@@ -1,13 +1,18 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
+import * as RouteNames from '/imports/startup/client/router.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+
+Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCoursesWidgetOnCreated() {
+  this.autorun(() => {
+    this.subscribe(CourseInstances.getPublicationName(1), this.data.item._id);
+  });
+});
 
 Template.Student_Explorer_Courses_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -83,17 +88,3 @@ Template.Student_Explorer_Courses_Widget.helpers({
     return ret;
   },
 });
-
-Template.Student_Explorer_Courses_Widget.events({
-});
-
-Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCoursesWidgetOnCreated() {
-  this.autorun(() => {
-    this.subscribe(CourseInstances.getPublicationName(1), this.data.item._id);
-  });
-});
-
-Template.Student_Explorer_Courses_Widget.onRendered(function studentExplorerCoursesWidgetOnRendered() {
-
-});
-
