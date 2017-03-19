@@ -23,21 +23,3 @@ Template.Warnings.helpers({
     return ret;
   },
 });
-
-Template.Warnings.events({
-  // add your events here
-});
-
-Template.Warnings.onCreated(function warningsOnCreated() {
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(Feedbacks.getPublicationName());
-});
-
-Template.Warnings.onRendered(function warningsOnRendered() {
-  // add your statement here
-});
-
-Template.Warnings.onDestroyed(function warningsOnDestroyed() {
-  // add your statement here
-});
-

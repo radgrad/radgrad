@@ -1,106 +1,102 @@
 <template name="Student_Ice_Widget">
-{{#if Template.subscriptionsReady}}
-    <div class="ui padded segment">
-      <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
-      <div class="ui equal width grid stackable internally celled">
-        <!-- Innovation -->
-        <div class="column" style="padding-left: 0;">
-          <div class="ui basic segment">
-            <div class="radgrad-ice">
-              <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.i}} radgrad-proj-innov">
-                <div class="radgrad-ice-stat">
-                  <span>{{earnedICE.i}}</span>
-                  <hr>
-                  <span>{{plannedICE.i}}</span>
-                </div>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
-                </div>
+  <div class="ui padded segment">
+    <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
+    <div class="ui equal width grid stackable internally celled">
+      <!-- Innovation -->
+      <div class="column" style="padding-left: 0;">
+        <div class="ui basic segment">
+          <div class="radgrad-ice">
+            <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.i}} radgrad-proj-innov">
+              <div class="radgrad-ice-stat">
+                <span>{{earnedICE.i}}</span>
+                <hr>
+                <span>{{plannedICE.i}}</span>
               </div>
-              <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.i}} radgrad-earn-innov">
-                <span></span>
-                <div class="slice">
-                  <div class="bar" ></div>
-                  <div class="fill"></div>
-                </div>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
               </div>
             </div>
-
-            <h3 class="ui centered header ice-innovation-color">
-              INNOVATION
-            </h3>
-            {{> Student_Ice_Column type = 'Innovation' }}
+            <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.i}} radgrad-earn-innov">
+              <span></span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
           </div>
+
+          <h3 class="ui centered header ice-innovation-color">
+            INNOVATION
+          </h3>
+          {{> Student_Ice_Column type = 'Innovation' }}
         </div>
+      </div>
 
-        <!-- Competency -->
-        <div class="column">
-          <div class="ui basic segment">
-            <div class="radgrad-ice">
-              <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.c}} radgrad-proj-comp">
-                <div class="radgrad-ice-stat">
-                  <span>{{earnedICE.c}}</span>
-                  <hr>
-                  <span>{{plannedICE.c}}</span>
-                </div>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
-                </div>
+      <!-- Competency -->
+      <div class="column">
+        <div class="ui basic segment">
+          <div class="radgrad-ice">
+            <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.c}} radgrad-proj-comp">
+              <div class="radgrad-ice-stat">
+                <span>{{earnedICE.c}}</span>
+                <hr>
+                <span>{{plannedICE.c}}</span>
               </div>
-
-              <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.c}} radgrad-earn-comp">
-                <span></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
-                </div>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
               </div>
             </div>
 
-            <h3 class="ui centered header ice-competency-color">
-              COMPETENCY
-            </h3>
-            {{> Student_Ice_Column type = 'Competency' }}
+            <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.c}} radgrad-earn-comp">
+              <span></span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
           </div>
+
+          <h3 class="ui centered header ice-competency-color">
+            COMPETENCY
+          </h3>
+          {{> Student_Ice_Column type = 'Competency' }}
         </div>
+      </div>
 
-        <!-- Experience -->
-        <div class="column" style="padding-right: 0;">
-          <div class="ui basic segment">
-            <div class="radgrad-ice">
-              <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.e}} radgrad-proj-exp">
-                <div class="radgrad-ice-stat">
-                  <span>{{earnedICE.e}}</span>
-                  <hr>
-                  <span>{{plannedICE.e}}</span>
-                </div>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
-                </div>
+      <!-- Experience -->
+      <div class="column" style="padding-right: 0;">
+        <div class="ui basic segment">
+          <div class="radgrad-ice">
+            <div class="radgrad-ice-circle p{{greaterThan100 plannedICE.e}} radgrad-proj-exp">
+              <div class="radgrad-ice-stat">
+                <span>{{earnedICE.e}}</span>
+                <hr>
+                <span>{{plannedICE.e}}</span>
               </div>
-
-              <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.e}} radgrad-earn-exp">
-                <span></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
-                </div>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
               </div>
             </div>
 
-            <h3 class="ui centered header ice-experience-color">
-              EXPERIENCE
-            </h3>
-            {{> Student_Ice_Column type = 'Experience' }}
-
+            <div class="radgrad-ice-circle p{{greaterThan100 earnedICE.e}} radgrad-earn-exp">
+              <span></span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
           </div>
+
+          <h3 class="ui centered header ice-experience-color">
+            EXPERIENCE
+          </h3>
+          {{> Student_Ice_Column type = 'Experience' }}
+
         </div>
       </div>
     </div>
-{{else}}
-  {{> Loading}}
-{{/if}}
+  </div>
 </template>

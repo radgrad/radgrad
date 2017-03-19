@@ -8,7 +8,6 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 function passedCourseHelper(courseSlugName) {
@@ -131,10 +130,3 @@ Template.Student_Explorer_Courses_Page.helpers({
   },
 });
 
-Template.Student_Explorer_Courses_Page.onCreated(function studentExplorerCoursesPageOnCreated() {
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-});

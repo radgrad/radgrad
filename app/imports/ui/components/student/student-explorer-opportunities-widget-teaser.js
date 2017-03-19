@@ -22,8 +22,6 @@ Template.Student_Explorer_Opportunities_Widget_Teaser.helpers({
 });
 
 Template.Student_Explorer_Opportunities_Widget_Teaser.onCreated(function studentExplorerOpportunitiesWidgetTeaser() {
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Teasers.getPublicationName());
   setTimeout(() => {
     $('.ui.embed.teaser').embed({
       source: 'youtube',

@@ -29,12 +29,6 @@
             </tr>
           {{/if}}
         {{/each}}
-        {{#each course in nonIcsCourses}}
-          <tr class="top aligned">
-            <td style="border-top: none;">{{course.note}}</td>
-            <td style="border-top: none;">{{course.grade}}</td>
-          </tr>
-        {{/each}}
         {{#each opportunity in semesterOpportunities}}
           <tr id="{{opportunity._id}}" class="opportunityInstance clickEnabled" draggable="true"
               ondragstart="drag(event)" data-position="top center"

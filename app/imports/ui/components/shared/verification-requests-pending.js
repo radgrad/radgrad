@@ -84,10 +84,6 @@ Template.Verification_Requests_Pending.events({
   },
 });
 
-Template.Verification_Requests_Pending.onCreated(function pendingVerificationRequestsOnCreated() {
-  this.subscribe(Feeds.getPublicationName());
-});
-
 Template.Verification_Requests_Pending.onRendered(function pendingVerificationRequestsOnRendered() {
   this.$('.dropdown').dropdown({
     // action: 'select',

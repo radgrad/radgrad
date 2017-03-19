@@ -61,8 +61,3 @@ Template.Student_Explorer_Degrees_Page.helpers({
   },
 });
 
-Template.Student_Explorer_Degrees_Page.onCreated(function studentExplorerDegreesPageOnCreated() {
-  this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});

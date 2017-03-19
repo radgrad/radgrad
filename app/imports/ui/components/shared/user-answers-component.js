@@ -35,8 +35,6 @@ Template.User_Answers_Component.onCreated(function userAnswersComponentOnCreated
   if (this.data.userID) {
     this.userID = this.data.userID;
   }
-  this.subscribe(MentorQuestions.getPublicationName());
-  this.subscribe(MentorAnswers.getPublicationName());
 });
 
 Template.User_Answers_Component.onRendered(function userAnswersComponentOnRendered() {

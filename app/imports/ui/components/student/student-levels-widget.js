@@ -44,9 +44,6 @@ Template.Student_Levels_Widget.onCreated(function levelStickerLogOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;
   }
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(FeedbackInstances.getPublicationName());
 });
 
 Template.Student_Levels_Widget.onRendered(function levelStickerLogOnRendered() {

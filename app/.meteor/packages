@@ -65,3 +65,4 @@ percolate:synced-cron
 meteorhacks:kadira
 meteorhacks:kadira-profiler
 kadira:debug
+meteorhacks:subs-manager

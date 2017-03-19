@@ -208,10 +208,3 @@ Template.Student_Explorer_Interests_Page.helpers({
   },
 });
 
-Template.Student_Explorer_Interests_Page.onCreated(function studentExplorerInterestsPageOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-});

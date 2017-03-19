@@ -74,9 +74,6 @@ Template.Verification_Event.events({
   },
 });
 
-Template.Verification_Event.onCreated(function eventVerificationOnCreated() {
-  this.subscribe(Feeds.getPublicationName());
-});
 
 Template.Verification_Event.onRendered(function eventVerificationOnRendered() {
   this.$('.dropdown').dropdown({

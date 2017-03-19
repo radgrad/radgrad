@@ -56,9 +56,7 @@ Template.User_Opportunity_Component.onCreated(function userOpportunityComponentO
   if (this.data.userID) {
     this.userID = this.data.userID;
   }
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
+  // this.subscribe(OpportunityInstances.getPublicationName());
 });
 
 Template.User_Opportunity_Component.onRendered(function userOpportunityComponentOnRendered() {

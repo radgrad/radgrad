@@ -1,5 +1,8 @@
+/* global window */
+
 // import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { lodash } from 'meteor/erasaur:meteor-lodash';
@@ -17,17 +20,24 @@ export const plannerKeys = {
   detailICE: 'detailICE',
 };
 
+Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
+  this.state = new ReactiveDict();
+  this.startYear = new ReactiveVar();
+});
+
 Template.Academic_Plan.helpers({
   fallArgs(year) {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
+    if (Template.instance().data.currentSemesterID) {
+      const currentSemesterID = Template.instance().data.currentSemesterID;
       const currentSemester = Semesters.findDoc(currentSemesterID);
       const semesterID = Semesters.define({
         year: year.year,
         term: Semesters.FALL,
       });
       const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester, dictionary: Template.instance().state };
+      const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
+      const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
+      return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
     }
     return null;
   },
@@ -43,7 +53,7 @@ Template.Academic_Plan.helpers({
       studentID: getUserIdFromRoute(),
     }, { sort: { year: 1 } }).fetch();
     if (ays.length > 0) {
-      return ays[ays.length - 1].year > instance.state.get('startYear');
+      return ays[ays.length - 1].year > instance.startYear.get();
     }
     return false;
   },
@@ -53,50 +63,57 @@ Template.Academic_Plan.helpers({
       studentID: getUserIdFromRoute(),
     }, { sort: { year: 1 } }).fetch();
     if (ays.length > 0) {
-      return ays[0].year < instance.state.get('startYear') - 3;
+      return ays[0].year < instance.startYear.get() - 3;
     }
     return false;
   },
   springArgs(year) {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
+    if (Template.instance().data.currentSemesterID) {
+      const currentSemesterID = Template.instance().data.currentSemesterID;
       const currentSemester = Semesters.findDoc(currentSemesterID);
       const semesterID = Semesters.define({
         year: year.year + 1,
         term: Semesters.SPRING,
       });
       const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester, dictionary: Template.instance().state };
+      const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
+      const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
+      return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
     }
     return null;
   },
   summerArgs(year) {
-    if (Template.instance().state.get('currentSemesterID')) {
-      const currentSemesterID = Template.instance().state.get('currentSemesterID');
+    if (Template.instance().data.currentSemesterID) {
+      const currentSemesterID = Template.instance().data.currentSemesterID;
       const currentSemester = Semesters.findDoc(currentSemesterID);
       const semesterID = Semesters.define({
         year: year.year + 1,
         term: Semesters.SUMMER,
       });
       const semester = Semesters.findDoc(semesterID);
-      return { currentSemester, semester, dictionary: Template.instance().state };
+      const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
+      const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
+      return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
     }
     return null;
   },
   years() {
+    // window.camDebugging.start('ap.years');
+    // debugger
     const studentID = getUserIdFromRoute();
     const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     const instance = Template.instance();
-    if (ay.length > 0 && !instance.state.get('startYear')) {
-      instance.state.set('startYear', ay[ay.length - 1].year);  // TODO: Do we want to show the future or the past?
+    if (ay.length > 0 && !instance.startYear.get()) {
+      instance.startYear.set(ay[ay.length - 1].year);  // TODO: Do we want to show the future or the past?
     }
     const ret = lodash.filter(ay, function filter(academicYear) {
       const year = academicYear.year;
-      if (year >= instance.state.get('startYear') - 3 && year <= instance.state.get('startYear')) {
+      if (year >= instance.startYear.get() - 3 && year <= instance.startYear.get()) {
         return true;
       }
       return false;
     });
+    // window.camDebugging.stop('ap.years');
     return ret;
   },
 });
@@ -114,39 +131,24 @@ Template.Academic_Plan.events({
     AcademicYearInstances.define({ year, student });
   },
   'click #nextYear': function clickNextYear(event) {
+    // window.camDebugging.start('click nextYear');
     event.preventDefault();
-    const year = Template.instance().state.get('startYear');
-    Template.instance().state.set('startYear', year + 1);
+    const year = Template.instance().startYear.get();
+    Template.instance().startYear.set(year + 1);
+    // window.camDebugging.stop('click nextYear');
   },
   'click #prevYear': function clickPrevYear(event) {
+    // window.camDebugging.start('click prevYear');
     event.preventDefault();
-    const year = Template.instance().state.get('startYear');
-    Template.instance().state.set('startYear', year - 1);
+    const year = Template.instance().startYear.get();
+    Template.instance().startYear.set(year - 1);
+    // window.camDebugging.stop('click prevYear');
   },
-});
-
-Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
-  this.state = new ReactiveDict();
-  if (this.data) {
-    this.state.set('currentSemesterID', this.data.currentSemesterID);
-    this.state.set('studentUsername', this.data.studentUserName);
-  } else {
-    console.log('there is a problem no data.'); // eslint-disable-line no-console
-  }
-  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
 });
 
 Template.Academic_Plan.onRendered(function academicPlanOnRendered() {
-  this.state.set('currentSemesterID', this.data.currentSemesterID);
-  this.state.set('studentUsername', this.data.studentUserName);
   const template = this;
   Tracker.afterFlush(() => {
     template.$('.ui.dropdown').dropdown({ transition: 'drop' });
   });
 });
-
-Template.Academic_Plan.onDestroyed(function academicPlanOnDestroyed() {
-  // add your statement here
-});
-

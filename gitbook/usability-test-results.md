@@ -1,6 +1,6 @@
 # Spring 2017 Usability Test Results
 
-## Subject A (March 13, 2007)
+## Subject A (March 13, 2017)
 
 Subject A is a Senior in ICS who plans to graduate this year. Subject A had a significant amount of extra-curricular activities and coursework; A's initial ICE score was 80/132/115 (Level 4).
  

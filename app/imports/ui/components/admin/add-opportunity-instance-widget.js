@@ -5,7 +5,6 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
@@ -22,9 +21,6 @@ const addSchema = new SimpleSchema({
 Template.Add_Opportunity_Instance_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
   this.subscribe(OpportunityInstances.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
 });
 
 Template.Add_Opportunity_Instance_Widget.helpers({

@@ -24,9 +24,8 @@ function numReferences() {
 function opportunity(teaser) {
   if (teaser.opportunityID) {
     return Opportunities.findDoc(teaser.opportunityID).name;
-  } else {
-    return '';
   }
+  return '';
 }
 
 Template.List_Teasers_Widget.helpers({
