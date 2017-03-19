@@ -1,9 +1,16 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import * as RouteNames from '/imports/startup/client/router.js';
+
+Template.Student_Explorer_Social_Widget.onCreated(function studentExplorerSocialWidgetOnCreated() {
+  this.currentItem = () => FlowRouter.getParam('course');
+  this.autorun(() => {
+    this.subscribe(CourseInstances.getPublicationName(3), this.currentItem());
+  });
+});
 
 function interestedUsers(course) {
   const interested = [];
@@ -46,17 +53,3 @@ Template.Student_Explorer_Social_Widget.helpers({
     return Users.findDoc(user).username;
   },
 });
-
-Template.Student_Explorer_Social_Widget.events({
-});
-
-Template.Student_Explorer_Social_Widget.onCreated(function studentExplorerSocialWidgetOnCreated() {
-  this.currentItem = () => FlowRouter.getParam('course');
-  this.autorun(() => {
-    this.subscribe(CourseInstances.getPublicationName(3), this.currentItem());
-  });
-});
-
-Template.Student_Explorer_Social_Widget.onRendered(function studentExplorerSocialWidgetOnRendered() {
-});
-

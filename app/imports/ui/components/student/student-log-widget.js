@@ -1,10 +1,8 @@
 import { Template } from 'meteor/templating';
-
+import * as RouteNames from '/imports/startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-
-import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Log_Widget.helpers({
   advisorImage(log) {

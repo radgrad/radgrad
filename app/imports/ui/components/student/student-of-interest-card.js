@@ -8,9 +8,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 
-Template.Student_Of_Interest_Card.onCreated(function studentOfInterestCardOnCreated() {
-});
-
 function interestedStudentsHelper(item, type) {
   const interested = [];
   let instances;
