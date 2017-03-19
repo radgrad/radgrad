@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import * as RouteNames from '/imports/startup/client/router.js';
 
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -16,7 +17,6 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
-import * as RouteNames from '/imports/startup/client/router.js';
 
 function getEventsHelper(iceType, type, earned, semester) {
   if (getUserIdFromRoute()) {
