@@ -5,6 +5,12 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 
+Template.User_Opportunity_Component.onCreated(function userOpportunityComponentOnCreated() {
+  if (this.data.userID) {
+    this.userID = this.data.userID;
+  }
+});
+
 function getOpportunities(studentID, isPast) {
   const opportunityInstances = OpportunityInstances.find({ studentID, verified: isPast }).fetch();
   const taken = [];
@@ -50,13 +56,6 @@ Template.User_Opportunity_Component.helpers({
     const slug = Opportunities.getSlug(opportunity._id);
     return `/student/${getRouteUserName()}/explorer/opportunities/${slug}`;
   },
-});
-
-Template.User_Opportunity_Component.onCreated(function userOpportunityComponentOnCreated() {
-  if (this.data.userID) {
-    this.userID = this.data.userID;
-  }
-  // this.subscribe(OpportunityInstances.getPublicationName());
 });
 
 Template.User_Opportunity_Component.onRendered(function userOpportunityComponentOnRendered() {
