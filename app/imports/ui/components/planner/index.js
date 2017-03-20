@@ -24,7 +24,6 @@ import './semester-list.html';
 import './semester-list.js';
 
 import './warning-item.html';
-import './warning-item.js';
 
 import './warnings.html';
 import './warnings.js';
