@@ -1,15 +1,16 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Users } from '../../../api/user/UserCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { getRouteUserName } from '../shared/route-user-name';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Users } from '../../../api/user/UserCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Reviews } from '../../../api/review/ReviewCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
+Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
+  this.updated = new ReactiveVar(false);
+});
 
 Template.Student_Explorer_Opportunities_Widget.helpers({
   fullName(user) {
@@ -87,26 +88,6 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
   },
 });
 
-Template.Student_Explorer_Opportunities_Widget.events({
-  'click .addToPlan': function clickItemAddToPlan(event) {
-    event.preventDefault();
-    const opportunity = this.item;
-    const semester = event.target.text;
-    const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const username = getRouteUserName();
-    const oi = {
-      semester: semSlug,
-      opportunity: oppSlug.name,
-      verified: false,
-      student: username,
-    };
-    OpportunityInstances.define(oi);
-  },
-});
-
-
 Template.Student_Explorer_Opportunities_Widget.onRendered(function enableVideo() {
   setTimeout(function () {
     this.$('.ui.embed').embed();
@@ -116,13 +97,4 @@ Template.Student_Explorer_Opportunities_Widget.onRendered(function enableVideo()
       .popup({
         on: 'click',
       });
-});
-
-
-Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
-  this.updated = new ReactiveVar(false);
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Reviews.getPublicationName());
 });

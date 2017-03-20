@@ -3539,6 +3539,8 @@
             "application-development"
           ],
           "semesters": [
+            "Spring-2015",
+            "Spring-2016",
             "Spring-2017",
             "Spring-2018",
             "Spring-2019",
@@ -4146,6 +4148,67 @@
             "Summer-2021"
           ],
           "moreInformation": "http://www.internships.com/computer-science",
+          "independentStudy": false
+        },
+        {
+          "name": "Kaggle",
+          "slug": "kaggle",
+          "description": "[Kaggle](https://www.kaggle.com/) is an online service that hosts data science and machine learning competitions, as well as a job board with listings for analysts, programmers, and more.  If you are interested in a career in data science, you should definitely get involved with Kaggle!\n\nKaggle, which was recently acquired by Google, has been used by over 800,000 data scientists to explore, understand, and contribute to machine learning and data analytics.\n\nThe Kaggle community has worked together to utilize machine learning for everything from essay marking to diagnosing heart failure. Last August, Kaggle launched an open data platform in which scientists have contributed a range of datasets relating to everything from credit card fraud to H-1B Visa petitions and tsunami wave rates.\n\nTo gain ICE points for this opportunity, join Kaggle, and then work through the [Titanic](https://www.kaggle.com/c/titanic) competition.",
+          "opportunityType": "online-learning",
+          "sponsor": "johnson",
+          "ice": {
+            "i": 15,
+            "c": 15,
+            "e": 0
+          },
+          "interests": [
+            "algorithms",
+            "artificial-intelligence",
+            "data-science",
+            "machine-learning",
+            "python",
+            "r",
+            "research"
+          ],
+          "semesters": [
+            "Spring-2013",
+            "Summer-2013",
+            "Fall-2013",
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Fall-2012",
+            "Summer-2012",
+            "Spring-2012",
+            "Fall-2011",
+            "Spring-2011",
+            "Summer-2010",
+            "Fall-2010",
+            "Summer-2011",
+            "Fall-2009",
+            "Spring-2010",
+            "Spring-2021",
+            "Summer-2021"
+          ],
+          "moreInformation": "https://www.kaggle.com/",
           "independentStudy": false
         },
         {

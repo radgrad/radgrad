@@ -1,10 +1,8 @@
 import { Template } from 'meteor/templating';
-
+import * as RouteNames from '/imports/startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-
-import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Log_Widget.helpers({
   advisorImage(log) {
@@ -26,9 +24,4 @@ Template.Student_Log_Widget.helpers({
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
   },
-});
-
-Template.Student_Log_Widget.onCreated(function studentLogWidgetOnCreated() {
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(AdvisorLogs.getPublicationName());
 });

@@ -1,30 +1,30 @@
 <template name="User_Opportunity_Component">
-    <div class="ui fluid accordion">
-      <div class="title" style="text-align: center">
-        <i class="dropdown icon"></i>
-        <strong>OPPORTUNITIES</strong>
-      </div>
-      {{#if Template.subscriptionsReady}}
-      <div class="content">
-        <div class="ui two column stackable grid">
-          <div class="center aligned column">
-            <h5>COMPLETED {{> Widget_Header_Number inputValue=(count true)}}</h5>
-            <ol class="ui small list">
-              {{#each oi in opportunitiesCompleted}}
-                <li li value="-"><a href="{{opportunityURL oi}}">{{opportunityName oi}} ({{opportunitySemester oi}})</a></li>
-              {{/each}}
-            </ol>
-          </div>
-          <div class="center aligned column">
-            <h5>PLANNED {{> Widget_Header_Number inputValue=(count false)}}</h5>
-            <ol class="ui small list">
-              {{#each oi in opportunitiesPlanned}}
-                <li li value="-"><a href="{{opportunityURL oi}}">{{opportunityName oi}} ({{opportunitySemester oi}})</a></li>
-              {{/each}}
-            </ol>
-          </div>
+  <div class="ui fluid accordion">
+    <div class="title" style="text-align: center">
+      <i class="dropdown icon"></i>
+      <strong>OPPORTUNITIES</strong>
+    </div>
+    <div class="content">
+      <div class="ui two column stackable grid">
+        <div class="center aligned column">
+          <h5>COMPLETED {{> Widget_Header_Number inputValue=(count true)}}</h5>
+          <ol class="ui small list">
+            {{#each oi in opportunitiesCompleted}}
+              <li li value="-"><a href="{{opportunityURL oi}}">{{opportunityName oi}} ({{opportunitySemester oi}})</a>
+              </li>
+            {{/each}}
+          </ol>
+        </div>
+        <div class="center aligned column">
+          <h5>PLANNED {{> Widget_Header_Number inputValue=(count false)}}</h5>
+          <ol class="ui small list">
+            {{#each oi in opportunitiesPlanned}}
+              <li li value="-"><a href="{{opportunityURL oi}}">{{opportunityName oi}} ({{opportunitySemester oi}})</a>
+              </li>
+            {{/each}}
+          </ol>
         </div>
       </div>
-      {{/if}}
     </div>
+  </div>
 </template>

@@ -1,12 +1,11 @@
 import { Template } from 'meteor/templating';
+import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
-import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Student_Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -93,12 +92,4 @@ Template.Student_Explorer_Interests_Widget.events({
       // don't do anything.
     }
   },
-});
-
-Template.Student_Explorer_Interests_Widget.onCreated(function studentExplorerInterestsWidgetOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
 });

@@ -3,7 +3,6 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { AdvisorLogs } from '/imports/api/log/AdvisorLogCollection';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Advisor_Log_Entry_Widget.helpers({
@@ -31,7 +30,6 @@ Template.Advisor_Log_Entry_Widget.events({
       const text = textAreas[0].value;
       const student = instance.state.get(sessionKeys.CURRENT_STUDENT_ID);
       const advisor = getUserIdFromRoute();
-      console.log(student);
       AdvisorLogs.define({ advisor, student, text });
     }
   },
@@ -43,16 +41,4 @@ Template.Advisor_Log_Entry_Widget.onCreated(function advisorLogEntryOnCreated() 
   } else {
     this.state = new ReactiveDict();
   }
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(AdvisorLogs.getPublicationName());
 });
-
-Template.Advisor_Log_Entry_Widget.onRendered(function advisorLogEntryOnRendered() {
-  // add your statement here
-});
-
-Template.Advisor_Log_Entry_Widget.onDestroyed(function advisorLogEntryOnDestroyed() {
-  // add your statement here
-});
-

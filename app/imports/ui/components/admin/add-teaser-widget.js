@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
@@ -17,14 +17,17 @@ const addSchema = new SimpleSchema({
 
 Template.Add_Teaser_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Teasers.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
 });
 
 Template.Add_Teaser_Widget.helpers({
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
+  },
+  opportunities() {
+    const opportunities = Opportunities.find().fetch();
+    opportunities.push('None');
+    console.log(opportunities);
+    return opportunities;
   },
 });
 

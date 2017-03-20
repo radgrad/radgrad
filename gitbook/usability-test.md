@@ -1,4 +1,4 @@
-# Spring 2017 Usability Test
+# Spring 2017 Usability Test Design
 
 The goals of Spring 2017 RadGrad Usability Test are to: identify problems faced by students and advisors when using the system; collect data useful for improving the system; and determine overall satisfaction with the current design of RadGrad by these two user roles. 
 

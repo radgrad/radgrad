@@ -10,8 +10,13 @@ function teaserUrlHelper(opportunitySlug) {
   return oppTeaser[0].url;
 }
 
-Template.Student_Explorer_Opportunities_Widget_Teaser.onRendered(function enableVideo() {
-
+Template.Student_Explorer_Opportunities_Widget_Teaser.onCreated(function studentExplorerOpportunitiesWidgetTeaser() {
+  setTimeout(() => {
+    $('.ui.embed.teaser').embed({
+      source: 'youtube',
+      id: teaserUrlHelper(FlowRouter.getParam('opportunity')),
+    });
+  }, 300);
 });
 
 Template.Student_Explorer_Opportunities_Widget_Teaser.helpers({
@@ -19,15 +24,4 @@ Template.Student_Explorer_Opportunities_Widget_Teaser.helpers({
     $('.ui.embed.teaser').embed('destroy');
     $('.ui.embed').embed('change', 'youtube', teaserUrlHelper(FlowRouter.getParam('opportunity')));
   },
-});
-
-Template.Student_Explorer_Opportunities_Widget_Teaser.onCreated(function studentExplorerOpportunitiesWidgetTeaser() {
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Teasers.getPublicationName());
-  setTimeout(() => {
-    $('.ui.embed.teaser').embed({
-      source: 'youtube',
-      id: teaserUrlHelper(FlowRouter.getParam('opportunity')),
-    });
-  }, 300);
 });

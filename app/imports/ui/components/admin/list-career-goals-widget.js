@@ -7,13 +7,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-Template.List_Career_Goals_Widget.onCreated(function onCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-});
-
 function numReferences(careerGoal) {
   let references = 0;
   Users.find().forEach(function (userDoc) {

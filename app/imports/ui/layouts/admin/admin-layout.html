@@ -1,11 +1,11 @@
 <template name="Admin_Layout">
   {{#If_Authorized}}
-    {{#if Template.subscriptionsReady}}
-      {{> First_Menu role="Admin"}}
-      {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength }}
-      {{> Template.dynamic template=main}}
-    {{else}}
-      {{> Loading}}
-    {{/if}}
+    {{#With_Global_Subscriptions}}
+      {{#With_Instance_Subscriptions}}
+        {{> First_Menu role="Admin"}}
+        {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength }}
+        {{> Template.dynamic template=main}}
+      {{/With_Instance_Subscriptions}}
+    {{/With_Global_Subscriptions}}
   {{/If_Authorized}}
 </template>

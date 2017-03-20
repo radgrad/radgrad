@@ -2,7 +2,6 @@ import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
@@ -15,8 +14,6 @@ const addSchema = new SimpleSchema({
 
 Template.Add_Interest_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(InterestTypes.getPublicationName());
 });
 
 Template.Add_Interest_Widget.helpers({

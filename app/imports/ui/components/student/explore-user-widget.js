@@ -1,19 +1,23 @@
 import { Template } from 'meteor/templating';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
-import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 function getExplorerUserID() {
   const username = FlowRouter.getParam('explorerUserName');
   return Users.findDoc({ username })._id;
 }
+
+Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
+  this.autorun(() => {
+    if (this.data.userID) {
+      this.userID = this.data.userID;
+    }
+    this.subscribe(CourseInstances.getPublicationName(5), getExplorerUserID());
+  });
+});
 
 Template.Explore_User_Widget.helpers({
   desiredDegree() {
@@ -99,30 +103,5 @@ Template.Explore_User_Widget.helpers({
     }
     return '';
   },
-});
-
-Template.Explore_User_Widget.events({
-  // add your events here
-});
-
-Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.autorun(() => {
-    if (this.data.userID) {
-      this.userID = this.data.userID;
-    }
-    this.subscribe(CourseInstances.getPublicationName(5), getExplorerUserID());
-  });
-});
-
-Template.Explore_User_Widget.onRendered(function exploreUserWidgetOnRendered() {
-  // add your statement here
-});
-
-Template.Explore_User_Widget.onDestroyed(function exploreUserWidgetOnDestroyed() {
-  // add your statement here
 });
 

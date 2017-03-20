@@ -7,7 +7,6 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
-import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -29,12 +28,6 @@ const updateSchema = new SimpleSchema({
 
 Template.Update_User_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(ValidUserAccounts.getPublicationName());
 });
 
 Template.Update_User_Widget.helpers({

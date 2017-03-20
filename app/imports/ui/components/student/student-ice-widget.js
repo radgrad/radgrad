@@ -1,17 +1,7 @@
 import { Template } from 'meteor/templating';
-
-import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Interests } from '../../../api/interest/InterestCollection';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { Semesters } from '../../../api/semester/SemesterCollection';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
-
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
@@ -52,28 +42,6 @@ Template.Student_Ice_Widget.helpers({
     }
     return null;
   },
-});
-
-Template.Student_Ice_Widget.events({
-  // add events here
-});
-
-Template.Student_Ice_Widget.onCreated(function studentIceOnCreated() {
-  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(VerificationRequests.getPublicationName());
-});
-
-Template.Student_Ice_Widget.onDestroyed(function studentIceOnDestroyed() {
-  // add your statement here
 });
 
 Template.Student_Ice_Widget.onRendered(function enableAccordion() {

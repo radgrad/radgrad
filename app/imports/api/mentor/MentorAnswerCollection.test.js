@@ -26,7 +26,8 @@ if (Meteor.isServer) {
     it('#define, #isDefined, #removeIt', function test() {
       // Define mentor and the question.
       const mentor = makeSampleUser(ROLE.MENTOR);
-      MentorQuestions.define({ title: 'Sample Question', slug: questionSlug });
+      const student = makeSampleUser(ROLE.STUDENT);
+      MentorQuestions.define({ title: 'Sample Question', slug: questionSlug, student });
       // Now define an answer, passing the defined question and the defined mentor.
       const instanceID = MentorAnswers.define({ question: questionSlug, mentor, text });
       expect(MentorAnswers.isDefined(instanceID)).to.be.true;

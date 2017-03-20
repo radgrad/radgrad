@@ -12,6 +12,10 @@ import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
+import { moment } from 'meteor/momentjs:moment';
+import { Logger } from 'meteor/jag:pince';
+
+const logger = new Logger('SB');
 
 const availableCourses = () => {
   if (getRouteUserName()) {
@@ -66,6 +70,37 @@ const available4xxCourses = () => {
   return filtered;
 };
 
+const filterByRangeAZ = (list, range) => {
+  const ret = _.filter(list, function filter(opportunity) {
+    return range.indexOf(opportunity.name.charAt(0).toLowerCase()) !== -1;
+  });
+  return ret;
+};
+
+const createOpportunityRange = (oppList) => {
+  const ret = {
+    AToE: [],
+    FToJ: [],
+    KToO: [],
+    PToT: [],
+    UToZ: [],
+  };
+
+  const rangeAToE = ['a', 'b', 'c', 'd', 'e'];
+  const rangeFToJ = ['f', 'g', 'h', 'i', 'j'];
+  const rangeKToO = ['k', 'l', 'm', 'n', 'o'];
+  const rangePToT = ['p', 'q', 'r', 's', 't'];
+  const rangeUToZ = ['u', 'v', 'w', 'x', 'y', 'z'];
+
+  ret.AToE = filterByRangeAZ(oppList, rangeAToE);
+  ret.FToJ = filterByRangeAZ(oppList, rangeFToJ);
+  ret.KToO = filterByRangeAZ(oppList, rangeKToO);
+  ret.PToT = filterByRangeAZ(oppList, rangePToT);
+  ret.UToZ = filterByRangeAZ(oppList, rangeUToZ);
+
+  return ret;
+};
+
 const availableOpportunities = () => {
   if (getRouteUserName()) {
     const opportunities = Opportunities.find({}).fetch();
@@ -83,6 +118,14 @@ const availableOpportunities = () => {
   }
   return [];
 };
+
+Template.Semester_Add_Button.onCreated(function semesterAddButtonOnCreated() {
+  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onCreated`);
+  if (this.data) {
+    this.localState = this.data.localState;
+    this.state = this.data.dictionary;
+  }
+});
 
 Template.Semester_Add_Button.helpers({
   courses(level) {
@@ -149,6 +192,8 @@ Template.Semester_Add_Button.helpers({
       ret = _.filter(opportunities, function filter(o) {
         return _.indexOf(o.semesterIDs, semester._id) !== -1;
       });
+      ret = _.sortBy(ret, 'name');
+      ret = createOpportunityRange(ret);
     }
     return ret;
   },
@@ -235,14 +280,8 @@ Template.Semester_Add_Button.events({
   },
 });
 
-Template.Semester_Add_Button.onCreated(function semesterAddButtonOnCreated() {
-  if (this.data) {
-    this.localState = this.data.localState;
-    this.state = this.data.dictionary;
-  }
-});
-
 Template.Semester_Add_Button.onRendered(function semesterAddButtonOnRendered() {
+  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onRendered`);
   const template = this;
   template.$('.ui.button')
       .popup({
@@ -285,9 +324,34 @@ Template.Semester_Add_Button.onRendered(function semesterAddButtonOnRendered() {
         hoverable: true,
         lastResort: 'right center',
       });
+  template.$('a.AToE.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.FToJ.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.KToO.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.PToT.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.UToZ.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
 });
-
-Template.Semester_Add_Button.onDestroyed(function semesterAddButtonOnDestroyed() {
-  // add your statement here
-});
-

@@ -1,171 +1,168 @@
 <template name="Inspector">
-  <!--{{#if Template.subscriptionsReady}}-->
-    <div class="ui segment">
-      <div class="ui top attached green buttons">
-        <div class="ui floating dropdown icon button">Courses
-          <div class="menu">
-            <div class="item">
-              <i class="dropdown icon"></i>
-              <span class="text">1xx</span>
-              <div class="menu">
-                {{#each course in courses100}}
-                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-                {{/each}}
-              </div>
-            </div>
-            <div class="item">
-              <i class="dropdown icon"></i>
-              <span class="text">2xx</span>
-              <div class="menu">
-                {{#each course in courses200}}
-                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-                {{/each}}
-              </div>
-            </div>
-            <div class="item">
-              <i class="dropdown icon"></i>
-              <span class="text">3xx</span>
-              <div class="menu">
-                {{#each course in courses300}}
-                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-                {{/each}}
-              </div>
-            </div>
-            <div class="item">
-              <i class="dropdown icon"></i>
-              <span class="text">41x - 43x</span>
-              <div class="menu" style="overflow: auto; height: 300px">
-                {{#each course in courses410}}
-                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-                {{/each}}
-              </div>
-            </div>
-            <div class="item">
-              <i class="dropdown icon"></i>
-              <span class="text">44x - 46x</span>
-              <div class="menu" style="overflow: auto; height: 300px">
-                {{#each course in courses440}}
-                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-                {{/each}}
-              </div>
-            </div>
-            <div class="item">
-              <i class="dropdown icon"></i>
-              <span class="text">47x - 499</span>
-              <div class="menu" style="overflow: auto; height: 300px">
-                {{#each course in courses470}}
-                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-                {{/each}}
-              </div>
+  <div class="ui segment">
+    <div class="ui top attached green buttons">
+      <div class="ui floating dropdown icon button">Courses
+        <div class="menu">
+          <div class="item">
+            <i class="dropdown icon"></i>
+            <span class="text">1xx</span>
+            <div class="menu">
+              {{#each course in courses100}}
+                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
+              {{/each}}
             </div>
           </div>
-        </div>
-        <div class="or"></div>
-        <div class="ui scrolling dropdown icon button">&nbsp;&nbsp;Opportunities
-          <div class="menu">
-            {{#each opportunity in opportunities}}
-              <div id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</div>
-            {{/each}}
+          <div class="item">
+            <i class="dropdown icon"></i>
+            <span class="text">2xx</span>
+            <div class="menu">
+              {{#each course in courses200}}
+                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
+              {{/each}}
+            </div>
+          </div>
+          <div class="item">
+            <i class="dropdown icon"></i>
+            <span class="text">3xx</span>
+            <div class="menu">
+              {{#each course in courses300}}
+                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
+              {{/each}}
+            </div>
+          </div>
+          <div class="item">
+            <i class="dropdown icon"></i>
+            <span class="text">41x - 43x</span>
+            <div class="menu" style="overflow: auto; height: 300px">
+              {{#each course in courses410}}
+                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
+              {{/each}}
+            </div>
+          </div>
+          <div class="item">
+            <i class="dropdown icon"></i>
+            <span class="text">44x - 46x</span>
+            <div class="menu" style="overflow: auto; height: 300px">
+              {{#each course in courses440}}
+                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
+              {{/each}}
+            </div>
+          </div>
+          <div class="item">
+            <i class="dropdown icon"></i>
+            <span class="text">47x - 499</span>
+            <div class="menu" style="overflow: auto; height: 300px">
+              {{#each course in courses470}}
+                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
+              {{/each}}
+            </div>
           </div>
         </div>
       </div>
-      <div class="ui grid container">
-        <div class="row" style="padding-bottom: 0;">
-            <div class="ui basic segment" style="padding: 0;">
-              {{#if hasCourse}}
-                <div class="ui dividing header">
-                  <h4>{{> ICE_header ice=courseIce }} {{courseNumber}}: {{courseName}}</h4>
-                </div>
-                <div class="content">
-                  {{#each recommendationStars}}
-                    <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
-                       class="yellow star icon"></i>
-                  {{/each}}
-                  <b>Scheduled:</b> {{#if instanceSemester}} {{instanceSemester}} {{else}} N/A {{/if}}
-                  <p><b>Prerequisites:</b>
-                    {{#if prerequisites}}
-                      <div class="ui bulleted list" style="margin-top: 0; margin-left: 25px;">
-                        {{#each prerequisite in prerequisites}}
-                          <div class="ui item">
-                            <a href="{{pathFor coursesRouteName username=routeUserName course = prerequisite}}" style="text-transform: uppercase;">{{prerequisite}}
-                              {{#if missingPrerequisite prerequisite}}
-                                <i class="red warning icon"></i>
-                              {{else}}
-                                <i class="green checkmark icon"></i>
-                              {{/if}}
-                            </a>
-                          </div>
-                        {{/each}}
-                      </div>
-                      {{else}}
-                      N/A
-                    {{/if}}
-                  </p>
-                  <p>
-                    <b>Catalog Descrption:</b> {{#markdown}}{{courseDescription}}{{/markdown}}
-                  </p>
-                  <p style="text-align: right;">
-                    <a href="{{pathFor coursesRouteName username=routeUserName course = courseSlugID}}">
-                      View in Explorer <i class="arrow right icon"></i>
-                    </a>
-                  </p>
-                  {{#if interests}}
-                    <div class="ui right floated">
-                      {{> Interest_List item=getCourse size='small'}}
-                    </div>
-                  {{/if}}
-                </div>
-              {{else}}
-                {{#if hasOpportunity}}
-                  <div class="ui dividing header">
-                    <h4>{{> ICE_header ice=opportunityIce }} {{opportunityName}}</h4>
-                  </div>
-                  <div class="content">
-                    <b>When: </b> {{opportunitySemester}}
-                    <p>
-                      <b>Description: </b>{{#markdown}}{{opportunityDescription}}{{/markdown}} <br>
-                      <b>More Information: </b><a href="{{opportunityMore}}" style="font-size: 0.95em;">{{opportunityMore}}</a> <br>
-                    </p>
-                    {{> Interest_List item=getOpportunity size='small'}}
-                    <p style="text-align: right;">
-                      <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = opportunitySlugID}}">
-                        View in Explorer <i class="arrow right icon"></i>
-                      </a>
-                    </p>
-
-                    {{#if isPastInstance}}
-                      <div class="ui divider"></div>
-                      <div style="text-align: center;">
-                        <button class="ui tiny green basic button verifyInstance center aligned" id="{{instanceID}}">
-                          Request Verification
-                        </button>
-                      </div>
-                    {{/if}}
-                    {{#if hasRequest}}
-                      <div class="ui divider"></div>
-                      <h4 class="ui center aligned header">REQUEST STATUS</h4>
-                      <strong>Date Submitted:</strong> {{requestWhenSubmitted}} <br>
-                      <strong>Status: </strong>{{requestStatus}}
-                      <p>
-                        {{#each processed in requestHistory}}
-                          <span>Processed: {{processedDate processed.date}} by {{processed.verifier}}
-                            ({{processed.status}}) <em>{{processed.feedback}}</em></span><br>
-                        {{/each}}
-                      </p>
-                    {{/if}}
-
-                  </div>
-                {{else}}
-                  <p>Please select an ICS course or opportunity menus above or click on a course or
-                    opportunity in you plan.</p>
-                {{/if}}
-              {{/if}}
-            </div>
-
+      <div class="or"></div>
+      <div class="ui scrolling dropdown icon button">&nbsp;&nbsp;Opportunities
+        <div class="menu">
+          {{#each opportunity in opportunities}}
+            <div id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</div>
+          {{/each}}
         </div>
       </div>
     </div>
-  <!--{{else}}-->
-    <!--{{> Loading}}-->
-  <!--{{/if}}-->
+    <div class="ui grid container">
+      <div class="row" style="padding-bottom: 0;">
+        <div class="ui basic segment" style="padding: 0;">
+          {{#if hasCourse}}
+            <div class="ui dividing header">
+              <h4>{{> ICE_header ice=courseIce }} {{courseNumber}}: {{courseName}}</h4>
+            </div>
+            <div class="content">
+              {{#each recommendationStars}}
+                <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
+                   class="yellow star icon"></i>
+              {{/each}}
+              <b>Scheduled:</b> {{#if instanceSemester}} {{instanceSemester}} {{else}} N/A {{/if}}
+            <p><b>Prerequisites:</b>
+              {{#if prerequisites}}
+                <div class="ui bulleted list" style="margin-top: 0; margin-left: 25px;">
+                  {{#each prerequisite in prerequisites}}
+                    <div class="ui item">
+                      <a href="{{pathFor coursesRouteName username=routeUserName course = prerequisite}}"
+                         style="text-transform: uppercase;">{{prerequisite}}
+                        {{#if missingPrerequisite prerequisite}}
+                          <i class="red warning icon"></i>
+                        {{else}}
+                          <i class="green checkmark icon"></i>
+                        {{/if}}
+                      </a>
+                    </div>
+                  {{/each}}
+                </div>
+              {{else}}
+                N/A
+              {{/if}}
+              </p>
+              <p>
+                <b>Catalog Descrption:</b> {{#markdown}}{{courseDescription}}{{/markdown}}
+              </p>
+              <p style="text-align: right;">
+                <a href="{{pathFor coursesRouteName username=routeUserName course = courseSlugID}}">
+                  View in Explorer <i class="arrow right icon"></i>
+                </a>
+              </p>
+              {{#if interests}}
+                <div class="ui right floated">
+                  {{> Interest_List item=getCourse size='small'}}
+                </div>
+              {{/if}}
+            </div>
+          {{else}}
+            {{#if hasOpportunity}}
+              <div class="ui dividing header">
+                <h4>{{> ICE_header ice=opportunityIce }} {{opportunityName}}</h4>
+              </div>
+              <div class="content">
+                <b>When: </b> {{opportunitySemester}}
+                <p>
+                  <b>Description: </b>{{#markdown}}{{opportunityDescription}}{{/markdown}} <br>
+                  <b>More Information: </b><a href="{{opportunityMore}}"
+                                              style="font-size: 0.95em;">{{opportunityMore}}</a> <br>
+                </p>
+                {{> Interest_List item=getOpportunity size='small'}}
+                <p style="text-align: right;">
+                  <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = opportunitySlugID}}">
+                    View in Explorer <i class="arrow right icon"></i>
+                  </a>
+                </p>
+
+                {{#if isPastInstance}}
+                  <div class="ui divider"></div>
+                  <div style="text-align: center;">
+                    <button class="ui tiny green basic button verifyInstance center aligned" id="{{instanceID}}">
+                      Request Verification
+                    </button>
+                  </div>
+                {{/if}}
+                {{#if hasRequest}}
+                  <div class="ui divider"></div>
+                  <h4 class="ui center aligned header">REQUEST STATUS</h4>
+                  <strong>Date Submitted:</strong> {{requestWhenSubmitted}} <br>
+                  <strong>Status: </strong>{{requestStatus}}
+                  <p>
+                    {{#each processed in requestHistory}}
+                      <span>Processed: {{processedDate processed.date}} by {{processed.verifier}}
+                        ({{processed.status}}) <em>{{processed.feedback}}</em></span><br>
+                    {{/each}}
+                  </p>
+                {{/if}}
+
+              </div>
+            {{else}}
+              <p>Please select an ICS course or opportunity menus above or click on a course or
+                opportunity in you plan.</p>
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

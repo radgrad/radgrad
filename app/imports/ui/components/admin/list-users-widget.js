@@ -9,14 +9,6 @@ import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-Template.List_Users_Widget.onCreated(function onCreated() {
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-});
-
 // TODO: implement numReferences to enable the delete operation.
 function numReferences() {
   const references = 1;

@@ -23,3 +23,12 @@ import './radgrad-logo-text.html';
 
 import './second-menu.html';
 import './second-menu.js';
+
+import './mobile-second-menu.html';
+import './mobile-second-menu.js';
+
+import './with-global-subscriptions.html';
+import './with-global-subscriptions.js';
+
+import './with-instance-subscriptions.html';
+import './with-instance-subscriptions.js';

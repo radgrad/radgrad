@@ -1,27 +1,23 @@
 <template name="Advisor_Student_Configuration_Page">
   <div class="layout-page">
-    {{#if Template.subscriptionsReady}}
-      <div class="ui stackable grid container">
-        {{> Help_Panel_Widget}}
+    <div class="ui stackable grid container">
+      {{> Help_Panel_Widget}}
 
-        {{> Student_Selector_Widget dictionary=getDictionary studentID=studentID}}
+      {{> Student_Selector_Widget dictionary=getDictionary studentID=studentID}}
 
-        <div class="ten wide column">
-          {{#if displayWidget}}
-            {{> Update_Degree_Plan_Widget studentID=studentID}}
-          {{else}}
-            {{> Update_Degree_Plan_Widget studentID=studentID}}
-          {{/if}}
-        </div>
-        <div class="six wide column">
-          {{> Advisor_Log_Entry_Widget dictionary=getDictionary studentID=studentID}}
-          {{> Star_Upload_Widget studentID=studentID}}
-        </div>
-        <div class="six wide stretched column">
-        </div>
+      <div class="ten wide column">
+        {{#if displayWidget}}
+          {{> Update_Degree_Plan_Widget studentID=studentID}}
+        {{else}}
+          {{> Update_Degree_Plan_Widget studentID=studentID}}
+        {{/if}}
       </div>
-    {{else}}
-      {{> Loading}}
-    {{/if}}
+      <div class="six wide column">
+        {{> Advisor_Log_Entry_Widget dictionary=getDictionary studentID=studentID}}
+        {{> Star_Upload_Widget studentID=studentID}}
+      </div>
+      <div class="six wide stretched column">
+      </div>
+    </div>
   </div>
 </template>

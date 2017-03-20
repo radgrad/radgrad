@@ -1,12 +1,10 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
@@ -18,10 +16,6 @@ const editSchema = new SimpleSchema({
 
 Template.Student_Explorer_Edit_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, editSchema);
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
 });
 
 Template.Student_Explorer_Edit_Review_Widget.helpers({

@@ -5,15 +5,10 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
-import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
-import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -39,6 +34,15 @@ const updateSchema = new SimpleSchema({
   careerGoals: { type: [String], optional: true },
   interests: { type: [String], optional: true },
   website: { type: String, optional: true },
+});
+
+Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
+  FormUtils.setupFormWidget(this, updateSchema);
+  this.autorun(() => {
+    this.subscribe(CourseInstances.getPublicationName(5), this.data.studentID.get());
+    this.subscribe(AcademicYearInstances.getPublicationName(1), this.data.studentID.get());
+    this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
+  });
 });
 
 Template.Update_Degree_Plan_Widget.helpers({
@@ -107,8 +111,11 @@ Template.Update_Degree_Plan_Widget.helpers({
 Template.Update_Degree_Plan_Widget.events({
   'click .jsGeneratePlan': function clickGeneratePlan(event, instance) {
     event.preventDefault();
+    // debugger
     instance.$('.ui.basic.modal').modal({
+      detachable: false,
       onApprove() {
+        // debugger
         const studentID = instance.data.studentID.get();
         const student = Users.findDoc(studentID);
         const currentSemester = Semesters.getCurrentSemesterDoc();
@@ -184,32 +191,3 @@ Template.Update_Degree_Plan_Widget.events({
   },
   // 'click .jsCancel': FormUtils.processCancelButtonClick,
 });
-
-Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
-  FormUtils.setupFormWidget(this, updateSchema);
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(OpportunityTypes.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.autorun(() => {
-    this.subscribe(CourseInstances.getPublicationName(5), this.data.studentID.get());
-    this.subscribe(AcademicYearInstances.getPublicationName(1), this.data.studentID.get());
-    this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
-  });
-});
-
-Template.Update_Degree_Plan_Widget.onRendered(function updateDegreePlanWidgetOnRendered() {
-  // add your statement here
-});
-
-Template.Update_Degree_Plan_Widget.onDestroyed(function updateDegreePlanWidgetOnDestroyed() {
-  // add your statement here
-});
-

@@ -1,19 +1,10 @@
 import { Template } from 'meteor/templating';
+import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import * as RouteNames from '/imports/startup/client/router.js';
-
-
-Template.Student_Explorer_Review_Widget.onCreated(function onCreated() {
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Reviews.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});
 
 Template.Student_Explorer_Review_Widget.helpers({
   abbreviateSemester(semester) {
@@ -74,8 +65,3 @@ Template.Student_Explorer_Review_Widget.helpers({
     return Users.findDoc(user).username;
   },
 });
-
-Template.Student_Explorer_Review_Widget.events({
-
-});
-

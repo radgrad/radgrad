@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -6,12 +7,6 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection.js';
-import * as RouteNames from '/imports/startup/client/router.js';
-
-Template.Student_Teaser_Widget.onCreated(function studentTeaserWidgetOnCreated() {
-  this.subscribe(Teasers.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-});
 
 function matchingTeasers() {
   if (getRouteUserName()) {
@@ -71,10 +66,6 @@ Template.Student_Teaser_Widget.helpers({
   teaserUrl(teaser) {
     return teaser.url;
   },
-});
-
-Template.Student_Teaser_Widget.events({
-  // placeholder: if you add a form to this top-level layout, handle the associated events here.
 });
 
 Template.Student_Teaser_Widget.onRendered(function enableVideo() {

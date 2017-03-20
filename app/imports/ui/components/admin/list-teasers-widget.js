@@ -1,22 +1,22 @@
 import { Template } from 'meteor/templating';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
-import { Users } from '../../../api/user/UserCollection';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-Template.List_Teasers_Widget.onCreated(function onCreated() {
-  this.subscribe(Teasers.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-});
-
 function numReferences() {
   // currently nothing refers to a Teaser, but maybe in future something will.
   return 0;
+}
+
+function opportunity(teaser) {
+  if (teaser.opportunityID) {
+    return Opportunities.findDoc(teaser.opportunityID).name;
+  }
+  return '';
 }
 
 Template.List_Teasers_Widget.helpers({
@@ -39,7 +39,7 @@ Template.List_Teasers_Widget.helpers({
       { label: 'Duration', value: teaser.duration },
       { label: 'Interests', value: _.sortBy(Interests.findNames(teaser.interestIDs)) },
       { label: 'URL', value: makeLink(teaser.url) },
-      { label: 'References', value: `${numReferences(teaser)}` },
+      { label: 'Opportunity', value: opportunity(teaser) },
     ];
   },
 });

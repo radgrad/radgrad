@@ -4,7 +4,6 @@ import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackType } from '../../../api/feedback/FeedbackType.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
-
 Template.Recommendations.helpers({
   recommendationArgs(recommendation) {
     return {
@@ -24,21 +23,3 @@ Template.Recommendations.helpers({
     return ret;
   },
 });
-
-Template.Recommendations.events({
-  // add your events here
-});
-
-Template.Recommendations.onCreated(function recommendationsOnCreated() {
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(Feedbacks.getPublicationName());
-});
-
-Template.Recommendations.onRendered(function recommendationsOnRendered() {
-  // add your statement here
-});
-
-Template.Recommendations.onDestroyed(function recommendationsOnDestroyed() {
-  // add your statement here
-});
-

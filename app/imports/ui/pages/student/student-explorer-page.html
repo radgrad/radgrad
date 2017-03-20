@@ -1,11 +1,5 @@
 <template name="Student_Explorer_Page">
-
-  {{#if Template.subscriptionsReady}}
-    {{#Student_Explorer_Layout}}
-      {{> Help_Panel_Widget noHelpClass=true}}
-    {{/Student_Explorer_Layout}}
-  {{else}}
-    {{> Loading}}
-  {{/if}}
-
+  {{#Student_Explorer_Layout}}
+    {{> Help_Panel_Widget noHelpClass=true}}
+  {{/Student_Explorer_Layout}}
 </template>

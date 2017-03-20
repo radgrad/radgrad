@@ -1,32 +1,18 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
-import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
-import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { ReactiveVar } from 'meteor/reactive-var';
 
 Template.Student_Of_Interest_Widget.onCreated(function studentOfInterestWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(Feedbacks.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
 });
 
 const availableCourses = () => {
@@ -232,8 +218,4 @@ Template.Student_Of_Interest_Widget.events({
     event.preventDefault();
     Template.instance().hidden.set(true);
   },
-});
-
-Template.Student_Of_Interest_Widget.onRendered(function studentOfInterestWidgetOnRendered() {
-
 });

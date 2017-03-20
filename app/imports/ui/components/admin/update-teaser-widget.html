@@ -12,8 +12,12 @@
 
       <div class="fields">
         {{> Input_Form_Field label="Duration" name="duration" value=teaser.duration errorMessage=(fieldError "duration")}}
-        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
+        {{> Opportunity_Form_Field opportunities=opportunities selectedOpportunityID=opportunity errorMessage=(fieldError "opportunity") required=true}}
         {{> Input_Form_Field label="URL" name="url" value=teaser.url errorMessage=(fieldError "url") required="true" }}
+      </div>
+
+      <div class="field">
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
       </div>
 
       {{> Input_Form_Field label="Description" name="description" value=teaser.description errorMessage=(fieldError "description") required=true}}

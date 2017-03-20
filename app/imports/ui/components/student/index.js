@@ -55,6 +55,8 @@ import './student-feed-modal.js';
 import './student-feed-widget.html';
 import './student-feed-widget.js';
 
+import './student-home-widget.html';
+
 import './student-ice-column.html';
 import './student-ice-column.js';
 
@@ -75,6 +77,9 @@ import './student-levels-widget.js';
 
 import './student-log-widget.html';
 import './student-log-widget.js';
+
+import './student-mentorspace-hidden-questions.html';
+import './student-mentorspace-hidden-questions.js';
 
 import './student-mentorspace-questions-accordion.html';
 import './student-mentorspace-questions-accordion.js';

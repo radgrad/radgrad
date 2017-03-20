@@ -1,8 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
+import * as RouteNames from '/imports/startup/client/router.js';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
@@ -11,12 +10,10 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
-import * as RouteNames from '/imports/startup/client/router.js';
 
 function getEventsHelper(iceType, type, earned, semester) {
   if (getUserIdFromRoute()) {
@@ -327,25 +324,6 @@ Template.Student_Ice_Column.helpers({
     return ay;
   },
 });
-
-Template.Student_Ice_Column.events({
-  // add events here
-});
-
-Template.Student_Ice_Column.onCreated(function studentIceColumnOnCreated() {
-  this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(VerificationRequests.getPublicationName());
-});
-
 
 Template.Student_Ice_Column.onRendered(function enableAccordion() {
   this.$('.accordion').accordion({

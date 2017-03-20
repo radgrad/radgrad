@@ -1,19 +1,12 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
+import * as RouteNames from '/imports/startup/client/router.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { Courses } from '../../../api/course/CourseCollection';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
-import * as RouteNames from '/imports/startup/client/router.js';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_About_Me_Widget.helpers({
   careerGoals() {
@@ -145,26 +138,3 @@ Template.Student_About_Me_Widget.events({
     event.preventDefault();
   },
 });
-
-Template.Student_About_Me_Widget.onCreated(function studentAboutMeWidgetOnCreated() {
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-});
-
-
-Template.Student_About_Me_Widget.onRendered(function studentAboutMeOnRendered() {
-  // add your statement here
-});
-
-Template.Student_About_Me_Widget.onDestroyed(function studentAboutMeOnDestroyed() {
-  // add your statement here
-});
-

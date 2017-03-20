@@ -179,19 +179,6 @@ Template.Student_Explorer_Menu.helpers({
   },
 });
 
-
-Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated() {
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});
-
-
 Template.Student_Explorer_Menu.onRendered(function studentExplorerMenuOnRendered() {
   const template = this;
   template.$('.ui.dropdown')

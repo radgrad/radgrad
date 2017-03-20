@@ -5,8 +5,6 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
 import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -31,13 +29,6 @@ const addSchema = new SimpleSchema({
 
 Template.Add_User_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(Feeds.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(ValidUserAccounts.getPublicationName());
 });
 
 Template.Add_User_Widget.helpers({

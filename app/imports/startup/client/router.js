@@ -88,6 +88,14 @@ adminRoutes.route('/datamodel/opportunities', {
   },
 });
 
+export const adminDataModelOpportunityInstancesPageRouteName = 'Admin_DataModel_Opportunity_Instances_Page';
+adminRoutes.route('/datamodel/opportunityInstances', {
+  name: adminDataModelOpportunityInstancesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelOpportunityInstancesPageRouteName });
+  },
+});
+
 export const adminDataModelReviewsPageRouteName = 'Admin_DataModel_Reviews_Page';
 adminRoutes.route('/datamodel/reviews', {
   name: adminDataModelReviewsPageRouteName,

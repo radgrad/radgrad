@@ -1,5 +1,4 @@
 <template name="Student_MentorSpace_Question_Form">
-
   <form class="ui form mentorspace-question-form {{ successClass }} {{ errorClass }}">
 
     <div class="field">
@@ -9,33 +8,11 @@
     <button class="ui basic green button" type="submit">Submit</button>
 
     {{#if displaySuccessMessage}}
-    <div class="ui success message">
-      <p>Your question has been submitted to moderation.</p>
-    </div>
+      <div class="ui success message">
+        <p>Your question has been submitted to moderation.</p>
+      </div>
     {{/if}}
 
   </form>
-  {{#if questions}}
-    <div style="margin-top: 10px" class="ui accordion">
-      <div class="title">
-        <i class="dropdown icon"></i>
-        Your hidden questions
-      </div>
-      <div class="content">
-        {{#each question in questions}}
-          {{#with moderated question}}
-            <div class="ui visible {{color}} message">
-              <div class="header">
-                <i class="{{icon}} icon"></i> {{message}}
-              </div>
-              <p>{{question.title}}</p>
-              <button value="{{question._id}}" class="ui yellow basic mini button edit">EDIT</button>
-              <button value="{{question._id}}" class="ui red basic mini button discard">DISCARD</button>
-            </div>
-          {{/with}}
-        {{/each}}
-      </div>
-    </div>
-  {{/if}}
-
+  {{> Student_MentorSpace_Hidden_Questions }}
 </template>
