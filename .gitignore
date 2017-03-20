@@ -9,11 +9,8 @@
 
 # Private information
 realdata/
-<<<<<<< HEAD
-app/private/database/production/
-=======
 app/private/database/production
->>>>>>> master
+
 
 # NPM
 node_modules
