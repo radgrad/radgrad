@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
+import * as RouteNames from '/imports/startup/client/router.js';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -14,7 +14,6 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
-import * as RouteNames from '/imports/startup/client/router.js';
 
 function getEventsHelper(iceType, type, earned, semester) {
   if (getUserIdFromRoute()) {

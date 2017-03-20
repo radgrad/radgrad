@@ -1,8 +1,8 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.Student_Degree_Planner_Page.onCreated(function plannerOnCreated() {
   this.state = new ReactiveDict();

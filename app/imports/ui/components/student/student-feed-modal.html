@@ -4,21 +4,21 @@
     <i class="close icon"></i>
     <div class="ui small header">STUDENTS</div>
     <div class="content">
-      <div class="ui three column grid">
-        {{#each student in students}}
-          <div class="column">
-            <div class="ui items">
-              <div class="item">
-                <img class="ui avatar image" src={{student.picture}} height="28">
-                <div class="middle aligned content">
-                  <a href="{{pathFor userRouteName username=routeUserName explorerUserName=student.username}}"
-                     onclick="$('.ui.small.modal').modal('hide')">{{fullName student}}</a>
-                </div>
+    <div class="ui three column grid">
+      {{#each student in students}}
+        <div class="column">
+          <div class="ui items">
+            <div class="item">
+              <img class="ui avatar image" src={{student.picture}} height="28">
+              <div class="middle aligned content">
+                <a href="{{pathFor userRouteName username=routeUserName explorerUserName=student.username}}"
+                   onclick="$('.ui.small.modal').modal('hide')">{{fullName student}}</a>
               </div>
             </div>
           </div>
-        {{/each}}
+        </div>
       </div>
+      {{/each}}
     </div>
   </div>
 </template>
