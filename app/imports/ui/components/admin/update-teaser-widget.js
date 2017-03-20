@@ -18,10 +18,6 @@ const updateSchema = new SimpleSchema({
 
 Template.Update_Teaser_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
-  this.subscribe(Teasers.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
 });
 
 Template.Update_Teaser_Widget.helpers({

@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
@@ -20,9 +20,6 @@ const updateSchema = new SimpleSchema({
 
 Template.Update_Course_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
 });
 
 Template.Update_Course_Widget.helpers({

@@ -11,7 +11,6 @@ const updateSchema = new SimpleSchema({
 
 Template.Update_Help_Message_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
-  this.subscribe(HelpMessages.getPublicationName());
 });
 
 Template.Update_Help_Message_Widget.helpers({
