@@ -223,3 +223,8 @@ Template.Semester_List.onRendered(function semesterListOnRendered() {
     this.localState.set('currentSemester', this.data.currentSemester);
   }
 });
+
+Template.Semester_List.onDestroyed(function semesterListOnDestroyed() {
+  // eslint-disable-next-line
+  sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onDestroyed`);
+});
