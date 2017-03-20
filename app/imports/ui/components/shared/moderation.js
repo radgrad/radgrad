@@ -18,6 +18,12 @@ const withSlugSchema = new SimpleSchema({
   moderatorComments: { type: String, optional: true },
   slug: { type: String, optional: true, custom: FormUtils.slugFieldValidator },
 });
+
+Template.Moderation.onCreated(function ModerationOnCreated() {
+  FormUtils.setupFormWidget(this, noSlugSchema);
+  FormUtils.setupFormWidget(this, withSlugSchema);
+});
+
 /**
  * Return the data from the submitted form corresponding to the fields in the passed schema.
  * @param schema The simple schema.
@@ -85,11 +91,11 @@ Template.Moderation.events({
     const itemID = split[0];
     let newData;
     let item;
-    if (split[2] === 'review') {
+    if (split[1] === 'review') {
       newData = getSchemaDataFromEvent(noSlugSchema, event);
       instance.context.resetValidation();
       noSlugSchema.clean(newData);
-    } else if (split[1]) {
+    } else if (split[3]) {
       newData = getSchemaDataFromEvent(withSlugSchema, event);
       instance.context.resetValidation();
       withSlugSchema.clean(newData);
@@ -99,14 +105,13 @@ Template.Moderation.events({
       noSlugSchema.clean(newData);
     }
     instance.context.validate(newData);
-    console.log(instance.context);
     if (instance.context.isValid()) {
-      if (split[2] === 'review') {
+      if (split[1] === 'review') {
         item = Reviews.findDoc(itemID);
       } else {
         item = MentorQuestions.findDoc(itemID);
       }
-      if (split[3] === 'accept') {
+      if (split[2] === 'accept') {
         item.moderated = true;
         item.visible = true;
       } else {
@@ -129,9 +134,4 @@ Template.Moderation.events({
       FormUtils.indicateError(instance);
     }
   },
-});
-
-Template.Moderation.onCreated(function ModerationOnCreated() {
-  FormUtils.setupFormWidget(this, noSlugSchema);
-  FormUtils.setupFormWidget(this, withSlugSchema);
 });

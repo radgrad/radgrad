@@ -39,6 +39,5 @@ import './admin-datamodel-users-page.html';
 import './admin-datamodel-users-page.js';
 
 import './admin-home-page.html';
-import './admin-home-page.js';
 
 import './admin-moderation-page.html';

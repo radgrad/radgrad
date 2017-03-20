@@ -2,19 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { checkIntegrity } from '/imports/api/integrity/IntegrityChecker';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection.js';
-import { WorkInstances } from '../../../api/work/WorkInstanceCollection.js';
-import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
-import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
-import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
-import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
-import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
-import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection.js';
 
 const clientDataKey = 'client';
 const serverDataKey = 'server';
+
+Template.Admin_DataBase_Integrity_Check_Page.onCreated(function onCreated() {
+  this.results = new ReactiveDict();
+});
 
 Template.Admin_DataBase_Integrity_Check_Page.helpers({
   hidden(side) {
@@ -32,20 +26,6 @@ Template.Admin_DataBase_Integrity_Check_Page.helpers({
     const data = Template.instance().results.get(key);
     return (data && data.count === 0) ? 'success' : 'error';
   },
-});
-
-Template.Admin_DataBase_Integrity_Check_Page.onCreated(function onCreated() {
-  this.results = new ReactiveDict();
-  this.subscribe(OpportunityInstances.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
-  this.subscribe(FeedbackInstances.getPublicationName());
-  this.subscribe(WorkInstances.getPublicationName());
-  this.subscribe(AdvisorLogs.getPublicationName());
-  this.subscribe(VerificationRequests.getPublicationName());
-  this.subscribe(AcademicYearInstances.getPublicationName());
-  this.subscribe(MentorAnswers.getPublicationName());
-  this.subscribe(MentorQuestions.getPublicationName());
-  this.subscribe(ValidUserAccounts.getPublicationName());
 });
 
 Template.Admin_DataBase_Integrity_Check_Page.events({
