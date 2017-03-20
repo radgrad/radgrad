@@ -20,7 +20,7 @@ const sl = new Logger('SL');
 
 Template.Semester_List.onCreated(function semesterListOnCreate() {
   // eslint-disable-next-line
-  sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onCreated`);
+  sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onCreated`);
   if (this.data) {
     this.state = this.data.dictionary;
   }
@@ -29,12 +29,16 @@ Template.Semester_List.onCreated(function semesterListOnCreate() {
 
 Template.Semester_List.helpers({
   dictionary() {
+    // eslint-disable-next-line
+    sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} dictionary`);
     // window.camDebugging.start('dictionary');
     // console.log(`${moment().format('HH:mm:ss.SSS')} dictionary`);
     // window.camDebugging.stop('dictionary');
     return Template.instance().state;
   },
   icsCourses() {
+    // eslint-disable-next-line
+    sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} icsCourses`);
     // window.camDebugging.start('icsCourses');
     const ret = [];
     if (Template.instance().localState.get('semester')) {
@@ -48,6 +52,8 @@ Template.Semester_List.helpers({
         ret.push(c);
       });
     }
+    // eslint-disable-next-line
+    sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} end icsCourses ${ret.length}`);
     // window.camDebugging.stop('icsCourses');
     return ret;
   },
@@ -211,7 +217,7 @@ Template.Semester_List.events({
 
 Template.Semester_List.onRendered(function semesterListOnRendered() {
   // eslint-disable-next-line
-  sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onRendered`);
+  sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onRendered`);
   if (this.data) {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);

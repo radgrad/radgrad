@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-// import { Logger } from 'meteor/jag:pince';
+import { Logger } from 'meteor/jag:pince';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';
@@ -17,8 +17,16 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import * as RouteNames from '/imports/startup/client/router.js';
 
+const logger = new Logger('IN');
+
+Template.Inspector.onCreated(function inspectorOnCreated() {
+  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Inspector.onCreated`);
+  this.state = this.data.dictionary;
+});
+
 Template.Inspector.helpers({
   courseDescription() {
+    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseDescription`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).description;
     } else
@@ -29,6 +37,7 @@ Template.Inspector.helpers({
     return null;
   },
   courseName() {
+    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseName`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).name;
     } else
@@ -39,6 +48,7 @@ Template.Inspector.helpers({
     return null;
   },
   courseNumber() {
+    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseNumber`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).number;
     } else
@@ -49,24 +59,25 @@ Template.Inspector.helpers({
     return null;
   },
   courseIce() {
-    // const logger = new Logger('inspector.courseIce');
+    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseIce`);
+
     // $('body').removeClass('waiting');
     if (Template.instance().state.get(plannerKeys.detailICE)) {
       const ice = Template.instance().state.get(plannerKeys.detailICE);
-      // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using detailICE {${ice.i}, ${ice.c}, ${ice.e}}`);
+      logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} using detailICE {${ice.i}, ${ice.c}, ${ice.e}}`);
       return ice;
     }
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       const course = Template.instance().state.get(plannerKeys.detailCourse);
       const slug = Slugs.findDoc(course.slugID);
       const ice = makeCourseICE(slug.name, 'C');
-      // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using generic ice {${ice.i}, ${ice.c}, ${ice.e}}`);
+      logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} using generic ice {${ice.i}, ${ice.c}, ${ice.e}}`);
       return ice;
     } else
       if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
         const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
         const ice = ci.ice;
-        // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} using ci ice {${ice.i}, ${ice.c}, ${ice.e}}`);
+        logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} using ci ice {${ice.i}, ${ice.c}, ${ice.e}}`);
         return ice;
       }
     return null;
@@ -440,18 +451,10 @@ Template.Inspector.events({
   },
 });
 
-Template.Inspector.onCreated(function inspectorOnCreated() {
-  this.state = this.data.dictionary;
-});
-
 Template.Inspector.onRendered(function inspectorOnRendered() {
+  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Inspector.onRendered`);
   const template = this;
   Tracker.afterFlush(() => {
     template.$('.ui.dropdown').dropdown({ transition: 'drop' });
   });
 });
-
-Template.Inspector.onDestroyed(function inspectorOnDestroyed() {
-  // add your statement here
-});
-

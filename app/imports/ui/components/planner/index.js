@@ -12,7 +12,6 @@ import './planned-course-grade.html';
 import './planned-course-grade.js';
 
 import './recommendation-item.html';
-import './recommendation-item.js';
 
 import './recommendations.html';
 import './recommendations.js';

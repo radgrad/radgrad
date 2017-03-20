@@ -24,6 +24,7 @@ export const plannerKeys = {
 };
 
 Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
+  ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Academic_Plan.onCreated`);
   this.state = new ReactiveDict();
   this.startYear = new ReactiveVar();
 });
@@ -41,6 +42,7 @@ Template.Academic_Plan.helpers({
       const semester = Semesters.findDoc(semesterID);
       const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
       const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
+      ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end fallArgs ${year.year}`);
       return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
     }
     return null;
@@ -49,6 +51,7 @@ Template.Academic_Plan.helpers({
     return Template.instance().state;
   },
   getAcademicYear(year) {
+    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} getAcademicYear ${year}`);
     return `Academic Year ${year}-${year + 1}`;
   },
   hasNextYear() {
@@ -58,6 +61,7 @@ Template.Academic_Plan.helpers({
       studentID: getUserIdFromRoute(),
     }, { sort: { year: 1 } }).fetch();
     if (ays.length > 0) {
+      ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end hasNextYear`);
       return ays[ays.length - 1].year > instance.startYear.get();
     }
     return false;
@@ -69,6 +73,7 @@ Template.Academic_Plan.helpers({
       studentID: getUserIdFromRoute(),
     }, { sort: { year: 1 } }).fetch();
     if (ays.length > 0) {
+      ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end hasPrevYear`);
       return ays[0].year < instance.startYear.get() - 3;
     }
     return false;
@@ -85,6 +90,7 @@ Template.Academic_Plan.helpers({
       const semester = Semesters.findDoc(semesterID);
       const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
       const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
+      ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end springArgs ${year.year}`);
       return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
     }
     return null;
@@ -101,6 +107,7 @@ Template.Academic_Plan.helpers({
       const semester = Semesters.findDoc(semesterID);
       const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
       const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
+      ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end summerArgs ${year.year}`);
       return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
     }
     return null;
@@ -123,7 +130,7 @@ Template.Academic_Plan.helpers({
       return false;
     });
     // window.camDebugging.stop('ap.years');
-    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} years ${ret}`);
+    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end years ${ret.length}`);
     return ret;
   },
 });
@@ -161,6 +168,7 @@ Template.Academic_Plan.events({
 });
 
 Template.Academic_Plan.onRendered(function academicPlanOnRendered() {
+  ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Academic_Plan.onRendered`);
   const template = this;
   Tracker.afterFlush(() => {
     template.$('.ui.dropdown').dropdown({ transition: 'drop' });
