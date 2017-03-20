@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
+import * as RouteNames from '/imports/startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
-import * as RouteNames from '/imports/startup/client/router.js';
 
 Template.Explorer_Choose_User_Widget.onCreated(function explorerChooseUserWidgetOnCreated() {
   if (this.data.userID) {

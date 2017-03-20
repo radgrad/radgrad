@@ -1,5 +1,4 @@
 <template name="Student_Home_Widget">
-  {{#if Template.subscriptionsReady}}
   <div class="ui centered stackable grid">
     <div class="ten wide column">
       {{> Student_Of_Interest_Widget type = 'opportunities'}}
@@ -10,7 +9,4 @@
       {{> Student_Teaser_Widget}}
     </div>
   </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}}
 </template>

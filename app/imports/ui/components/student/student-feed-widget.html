@@ -1,8 +1,6 @@
 <template name="Student_Feed_Widget">
-  {{#if Template.subscriptionsReady}}
   <div class="ui padded segment container">
     <div class="ui dividing header"><h4>RADGRAD COMMUNITY ACTIVITY</h4></div>
-
     {{#if feeds}}
       <div style="max-height: 488px; overflow:scroll; margin-top: 10px;" class="ui feed">
         {{#each feed in feeds}}
@@ -51,5 +49,4 @@
       <p>No recent feeds.</p>
     {{/if}}
   </div>
-  {{/if}}
 </template>

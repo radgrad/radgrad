@@ -1,5 +1,4 @@
 <template name="Student_Explorer_Courses_Widget_Button">
-  {{#if Template.subscriptionsReady}}
     {{#if equals buttonType 'add'}}
       <div class="ui basic green mini right floated button chooseYear" style="margin-bottom: 1rem;">
         <div class="chooseYear">ADD TO PLAN</div>
@@ -36,7 +35,4 @@
         {{/if}}
       {{/if}}
     {{/if}}
-  {{else}}
-    {{> Loading}}
-  {{/if}}
 </template>

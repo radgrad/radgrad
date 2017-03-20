@@ -1,9 +1,7 @@
 import { Template } from 'meteor/templating';
-
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-
 import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 

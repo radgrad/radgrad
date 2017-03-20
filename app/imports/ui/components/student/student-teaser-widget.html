@@ -1,5 +1,4 @@
 <template name="Student_Teaser_Widget">
-  {{#if Template.subscriptionsReady}}
     <div class="ui padded segment container">
       <div class="ui dividing header">
         <h4>TEASERS {{> Widget_Header_Number inputValue = teaserCount}}</h4>
@@ -29,8 +28,4 @@
         <p>Add interests to see recommendations here.</p>
       {{/if}}
     </div>
-
-  {{else}}
-    {{> Loading}}
-  {{/if}}
 </template>
