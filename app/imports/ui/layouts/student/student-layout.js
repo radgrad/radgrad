@@ -2,14 +2,6 @@ import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
 import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-
-Template.Student_Layout.onCreated(function studentLayoutOnCreated() {
-  this.subscribe(Users.getPublicationName());
-  this.subscribe(CourseInstances.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
-});
 
 function getStudentDoc() {
   const username = getRouteUserName();

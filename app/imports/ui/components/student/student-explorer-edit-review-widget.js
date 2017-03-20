@@ -8,14 +8,14 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
-Template.Student_Explorer_Edit_Review_Widget.onCreated(function onCreated() {
-  FormUtils.setupFormWidget(this, editSchema);
-});
-
 const editSchema = new SimpleSchema({
   semester: { type: String, optional: false },
   rating: { type: Number, optional: true },
   comments: { type: String, optional: false },
+});
+
+Template.Student_Explorer_Edit_Review_Widget.onCreated(function onCreated() {
+  FormUtils.setupFormWidget(this, editSchema);
 });
 
 Template.Student_Explorer_Edit_Review_Widget.helpers({

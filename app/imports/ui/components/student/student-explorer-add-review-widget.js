@@ -10,14 +10,14 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
-Template.Student_Explorer_Add_Review_Widget.onCreated(function onCreated() {
-  FormUtils.setupFormWidget(this, addSchema);
-});
-
 const addSchema = new SimpleSchema({
   semester: { type: String, optional: false },
   rating: { type: Number, optional: true },
   comments: { type: String, optional: false },
+});
+
+Template.Student_Explorer_Add_Review_Widget.onCreated(function onCreated() {
+  FormUtils.setupFormWidget(this, addSchema);
 });
 
 Template.Student_Explorer_Add_Review_Widget.helpers({

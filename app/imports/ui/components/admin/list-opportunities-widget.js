@@ -11,16 +11,6 @@ import { makeLink } from './datamodel-utilities';
 import { moment } from 'meteor/momentjs:moment';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-Template.List_Opportunities_Widget.onCreated(function onCreated() {
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(OpportunityTypes.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});
-
 function numReferences(opportunity) {
   let references = 0;
   [OpportunityInstances].forEach(function (entity) {

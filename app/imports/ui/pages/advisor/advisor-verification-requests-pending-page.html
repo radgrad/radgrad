@@ -1,18 +1,7 @@
 <template name="Advisor_Verification_Requests_Pending_Page">
   <div class="layout-page">
-
     <div class="ui container">
-      {{#if currentUser}}
-        {{#if Template.subscriptionsReady}}
-          {{> Verification_Requests_Pending }}
-        {{else}}
-          {{> Loading}}
-        {{/if}}
-      {{else}}
-        <p>You are not authorized to view this page.</p>
-        <p>Please login.</p>
-        {{> loginButtons }}
-      {{/if}}
+      {{> Verification_Requests_Pending }}
     </div>
   </div>
 </template>

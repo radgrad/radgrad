@@ -42,4 +42,3 @@ import './admin-home-page.html';
 import './admin-home-page.js';
 
 import './admin-moderation-page.html';
-import './admin-moderation-page.js';

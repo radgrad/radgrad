@@ -5,6 +5,10 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { moment } from 'meteor/momentjs:moment';
+import { Logger } from 'meteor/jag:pince';
+
+const logger = new Logger('CIC');
 
 function getCumulativeIceInstances(year) {
   const studentID = getUserIdFromRoute();
@@ -40,6 +44,7 @@ function getCumulativeProjectedIce(year) {
 
 Template.Cumulative_Ice_Component.helpers({
   earnedC(year) {
+    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')}  earnedC ${year}`);
     return getCumulativeEarnedIce(year).c;
   },
   earnedE(year) {
@@ -58,22 +63,3 @@ Template.Cumulative_Ice_Component.helpers({
     return getCumulativeProjectedIce(year).i;
   },
 });
-
-Template.Cumulative_Ice_Component.events({
-  // add your events here
-});
-
-Template.Cumulative_Ice_Component.onCreated(function cumulativeIceComponentOnCreated() {
-  // this.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
-  // this.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-  // this.subscribe(OpportunityInstances.getPublicationName(3), getUserIdFromRoute());
-});
-
-Template.Cumulative_Ice_Component.onRendered(function cumulativeIceComponentOnRendered() {
-  // add your statement here
-});
-
-Template.Cumulative_Ice_Component.onDestroyed(function cumulativeIceComponentOnDestroyed() {
-  // add your statement here
-});
-

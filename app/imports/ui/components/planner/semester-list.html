@@ -1,59 +1,55 @@
 <template name="Semester_List">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui center aligned segment {{#if isFuture}}bodyDrop{{/if}}"
-         ondragover="{{#if isFuture}}allowDrop(event){{/if}}"
-         style="margin-bottom: 0.25rem; {{#if isCurrentSemester}}border-color: #6FBE44;{{/if}}">
-      <div class="ui dividing {{#if isCurrentSemester}}green{{/if}} header"
-           style="{{#if isCurrentSemester}}text-transform: uppercase;{{/if}} {{#unless
-               isFuture}}color: rgba(0,0,0,.55);{{/unless}}">{{semesterName}} {{year}}</div>
-      <table class="ui very basic unstackable table {{#if isFuture}}bodyDrop{{/if}}"
-             ondragover="{{#if isFuture}}allowDrop(event){{/if}}" style="flex-grow: 3; font-size: 0.85em;">
-        <tbody>
-        {{#each course in icsCourses}}
-          {{#if isFuture}}
-            <tr id="{{course._id}}" class="courseInstance clickEnabled" draggable="true" ondragstart="drag(event)"
-                data-position="top center" style="cursor: pointer;">
-              <td style="border-top: none;"><strong>{{course.note}}</strong></td>
-              <td style="border-top: none;">
-                {{> Planned_Course_Grade course=course dictionary=dictionary}}
-              </td>
-              <td class="right aligned" style="border-top: none; margin: 0;"><i id="{{course._id}}"
-                                                                                class="red remove icon jsDelCourse"></i>
-              </td>
-            </tr>
-          {{else}}
-            <tr id="{{course._id}}" data-position="top center" class="courseInstance clickEnabled"
-                style="color: rgba(0,0,0,.55);">
-              <td style="border-top: none;"><strong>{{course.note}}</strong></td>
-              <td style="border-top: none;"><strong>{{course.grade}}</strong></td>
-            </tr>
-          {{/if}}
-        {{/each}}
-        {{#each opportunity in semesterOpportunities}}
-          <tr id="{{opportunity._id}}" class="opportunityInstance clickEnabled" draggable="true"
-              ondragstart="drag(event)" data-position="top center"
-              style="{{#unless isFuture}}color: rgba(0,0,0,.55);{{/unless}}">
-            {{#if isFuture}}
-              <td style="border-top: none; cursor: pointer;" colspan="2" >
-                <strong>{{opportunityName opportunity._id}}</strong>
-              </td>
-              <td class="right aligned" style="border-top: none; margin: 0;">
-                <i id="{{opportunity._id}}" class="red remove icon jsDelOpp"></i>
-              </td>
-            {{else}}
-              <td style="border-top: none;" colspan="2">
-                <strong>{{opportunityName opportunity._id}}</strong>
-              </td>
-            {{/if}}
+  <div class="ui center aligned segment {{#if isFuture}}bodyDrop{{/if}}"
+       ondragover="{{#if isFuture}}allowDrop(event){{/if}}"
+       style="margin-bottom: 0.25rem; {{#if isCurrentSemester}}border-color: #6FBE44;{{/if}}">
+    <div class="ui dividing {{#if isCurrentSemester}}green{{/if}} header"
+         style="{{#if isCurrentSemester}}text-transform: uppercase;{{/if}} {{#unless
+             isFuture}}color: rgba(0,0,0,.55);{{/unless}}">{{semesterName}} {{year}}</div>
+    <table class="ui very basic unstackable table {{#if isFuture}}bodyDrop{{/if}}"
+           ondragover="{{#if isFuture}}allowDrop(event){{/if}}" style="flex-grow: 3; font-size: 0.85em;">
+      <tbody>
+      {{#each course in icsCourses}}
+        {{#if isFuture}}
+          <tr id="{{course._id}}" class="courseInstance clickEnabled" draggable="true" ondragstart="drag(event)"
+              data-position="top center" style="cursor: pointer;">
+            <td style="border-top: none;"><strong>{{course.note}}</strong></td>
+            <td style="border-top: none;">
+              {{> Planned_Course_Grade course=course dictionary=dictionary}}
+            </td>
+            <td class="right aligned" style="border-top: none; margin: 0;"><i id="{{course._id}}"
+                                                                              class="red remove icon jsDelCourse"></i>
+            </td>
           </tr>
-        {{/each}}
-        </tbody>
-      </table>
-      {{#if isFuture}}
-        {{> Semester_Add_Button dictionary=dictionary localState=localState}}
-      {{/if}}
-    </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+        {{else}}
+          <tr id="{{course._id}}" data-position="top center" class="courseInstance clickEnabled"
+              style="color: rgba(0,0,0,.55);">
+            <td style="border-top: none;"><strong>{{course.note}}</strong></td>
+            <td style="border-top: none;"><strong>{{course.grade}}</strong></td>
+          </tr>
+        {{/if}}
+      {{/each}}
+      {{#each opportunity in semesterOpportunities}}
+        <tr id="{{opportunity._id}}" class="opportunityInstance clickEnabled" draggable="true"
+            ondragstart="drag(event)" data-position="top center"
+            style="{{#unless isFuture}}color: rgba(0,0,0,.55);{{/unless}}">
+          {{#if isFuture}}
+            <td style="border-top: none; cursor: pointer;" colspan="2">
+              <strong>{{opportunityName opportunity._id}}</strong>
+            </td>
+            <td class="right aligned" style="border-top: none; margin: 0;">
+              <i id="{{opportunity._id}}" class="red remove icon jsDelOpp"></i>
+            </td>
+          {{else}}
+            <td style="border-top: none;" colspan="2">
+              <strong>{{opportunityName opportunity._id}}</strong>
+            </td>
+          {{/if}}
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+    {{#if isFuture}}
+      {{> Semester_Add_Button dictionary=dictionary localState=localState}}
+    {{/if}}
+  </div>
 </template>

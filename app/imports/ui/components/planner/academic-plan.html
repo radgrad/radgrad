@@ -1,60 +1,58 @@
 <template name="Academic_Plan">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui stackable grid">
-      <div class="stretched row">
-        <div class="ui ten wide column" style="margin-right: 0">
-          <div class="ui equal width grid" style="margin: 0;">
-            <div class="stackable row">
-              {{#each year in years}}
-                <div class="center aligned mobile only column">
-                  <h3 class="ui horizontal divider header">{{getAcademicYear year.year}}</h3>
-                </div>
-                <div class="stretched column academicYear" style="padding: 0 0.6rem;">
-                  {{> Semester_List (fallArgs year)}}
-                  {{> Semester_List (springArgs year)}}
-                  {{> Semester_List (summerArgs year)}}
-                  <div class="mobile only" style="margin-top: 1rem;">
-                    {{> Cumulative_Ice_Component year=year}}
-                  </div>
-                </div>
-              {{/each}}
-            </div>
-            <div class="row mobile hidden">
-              {{#each year in years}}
-                <div class="degreeICE column">
+  <div class="ui stackable grid">
+    <div class="stretched row">
+      <div class="ui ten wide column" style="margin-right: 0">
+        <div class="ui equal width grid" style="margin: 0;">
+          <div class="stackable row">
+            {{#each year in years}}
+              <div class="center aligned mobile only column">
+                <h3 class="ui horizontal divider header">{{getAcademicYear year.year}}</h3>
+              </div>
+              <div class="stretched column academicYear" style="padding: 0 0.6rem;">
+                {{> Semester_List (fallArgs year)}}
+                {{> Semester_List (springArgs year)}}
+                {{> Semester_List (summerArgs year)}}
+                <div class="mobile only" style="margin-top: 1rem;">
                   {{> Cumulative_Ice_Component year=year}}
                 </div>
-              {{/each}}
+              </div>
+            {{/each}}
+          </div>
+          <div class="row mobile hidden">
+            {{#each year in years}}
+              <div class="degreeICE column">
+                {{> Cumulative_Ice_Component year=year}}
+              </div>
+            {{/each}}
+          </div>
+          <div class="row">
+            <div class="column">
+              {{#if hasPrevYear}}
+                <button id="prevYear" class="ui icon green labeled button" data-content="View previous academic year">
+                  <i class="ui arrow left icon"></i>Prev Year
+                </button>
+              {{/if}}
             </div>
-            <div class="row">
-              <div class="column">
-                {{#if hasPrevYear}}
-                  <button id="prevYear" class="ui icon green labeled button" data-content="View previous academic year">
-                    <i class="ui arrow left icon"></i>Prev Year</button>
-                {{/if}}
-              </div>
-              <div class="center aligned column">
-                <button id="addAY" class="positive ui icon button"><i class="ui plus icon"></i> Add Academic Year</button>
-              </div>
-              <div class="right aligned column">
-                {{#if hasNextYear}}
-                  <button id="nextYear" class="ui icon green right labeled button"><i
-                      class="ui arrow right icon" data-content="View next academic year"></i>Next Year</button>
-                {{/if}}
-              </div>
+            <div class="center aligned column">
+              <button id="addAY" class="positive ui icon button"><i class="ui plus icon"></i> Add Academic Year</button>
+            </div>
+            <div class="right aligned column">
+              {{#if hasNextYear}}
+                <button id="nextYear" class="ui icon green right labeled button"><i
+                    class="ui arrow right icon" data-content="View next academic year"></i>Next Year
+                </button>
+              {{/if}}
             </div>
           </div>
         </div>
-        <div class="ui six wide column" style="padding-top: 1rem;">
-          {{> Inspector dictionary=getDictionary}}
-          {{> Recommendations}}
-          {{> Warnings}}
-        </div>
+      </div>
+      <div class="ui six wide column" style="padding-top: 1rem;">
+        {{> Inspector dictionary=getDictionary}}
+        {{> Recommendations}}
+        {{> Warnings}}
       </div>
     </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+  </div>
   <script>
     function allowDrop(ev) {
       ev.preventDefault();
