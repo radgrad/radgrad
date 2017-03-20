@@ -14,9 +14,6 @@ const updateSchema = new SimpleSchema({
 
 Template.Update_Career_Goal_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
 });
 
 Template.Update_Career_Goal_Widget.helpers({

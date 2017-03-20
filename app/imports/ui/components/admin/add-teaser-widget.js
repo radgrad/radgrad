@@ -26,7 +26,6 @@ Template.Add_Teaser_Widget.helpers({
   opportunities() {
     const opportunities = Opportunities.find().fetch();
     opportunities.push('None');
-    console.log(opportunities);
     return opportunities;
   },
 });

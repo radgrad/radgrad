@@ -26,7 +26,7 @@
                   </div>
                   <div class="ui segment">
                     <form class="ui form">
-                      {{> TextArea_Form_Field label="ModeratorComments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
+                      {{> TextArea_Form_Field label="Moderator Comments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
                       <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                       <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
                       {{> Success_Message_Form_Field message="Student will be notified of moderation results"}}
@@ -66,7 +66,7 @@
                   </div>
                   <div class="ui segment">
                     <form class="ui form">
-                      {{> TextArea_Form_Field label="ModeratorComments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
+                      {{> TextArea_Form_Field label="Moderator Comments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
                           <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                         <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
                       {{> Success_Message_Form_Field message="Student will be notified of moderation results"}}
@@ -98,8 +98,8 @@
                           {{> Input_Form_Field label="Slug" name="slug" placeholder="" errorMessage=(fieldError "slug") required=false}}
                         {{/if}}
                         {{> TextArea_Form_Field label="Moderator Comments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
-                          <button class="ui basic green mini button" id="{{question._id}}-{{noSlug question}}-question-accept" type="submit" style="margin-top:10px">ACCEPT</button>
-                          <button class="ui basic red mini button" id="{{question._id}}-{{noSlug question}}-question-reject" type="submit" style="margin-top:10px">REJECT</button>
+                          <button class="ui basic green mini button" id="{{question._id}}-question-accept-{{noSlug question}}" type="submit" style="margin-top:10px">ACCEPT</button>
+                          <button class="ui basic red mini button" id="{{question._id}}-question-reject-{{noSlug question}}" type="submit" style="margin-top:10px">REJECT</button>
                         {{> Success_Message_Form_Field message="Student will be notified of moderation results"}}
                       </form>
                     </div>

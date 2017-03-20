@@ -1,10 +1,10 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { makeLink } from './datamodel-utilities';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 
@@ -31,7 +31,7 @@ Template.List_Courses_Widget.helpers({
   descriptionPairs(course) {
     return [
       { label: 'Description', value: course.description },
-      { label: 'Credit Hours:', value: course.creditHrs },
+      { label: 'Credit Hours', value: course.creditHrs },
       { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
       { label: 'Syllabus', value: makeLink(course.syllabus) },
       { label: 'Prerequisites', value: course.prerequisites },
