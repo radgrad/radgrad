@@ -1,27 +1,12 @@
 import { Template } from 'meteor/templating';
 import { Courses } from '../../../api/course/CourseCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection';
-import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Users } from '../../../api/user/UserCollection';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as FormUtils from './form-fields/form-field-utilities.js';
-
-Template.List_Reviews_Widget.onCreated(function onCreated() {
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(OpportunityTypes.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(OpportunityInstances.getPublicationName());
-  this.subscribe(Reviews.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
-  this.subscribe(Semesters.getPublicationName());
-  this.subscribe(Users.getPublicationName());
-});
 
 function numReferences() {
   // currently nothing refers to a Teaser, but maybe in future something will.

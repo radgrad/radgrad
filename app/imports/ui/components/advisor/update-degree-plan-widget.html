@@ -1,71 +1,69 @@
 <template name="Update_Degree_Plan_Widget">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui padded container segment">
-      <div class="ui dividing header"><h4>UPDATE STUDENT &amp; DEGREE PLAN</h4></div>
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE STUDENT &amp; DEGREE PLAN</h4></div>
 
-      <form class="ui equal width form {{successClass}} {{errorClass}}">
-        <div class="fields">
-          {{> Input_Form_Field label="First" name="firstName" value=user.firstName errorMessage=(fieldError "firstName") required=true}}
-          {{> Input_Form_Field label="Last" name="lastName" value=user.lastName errorMessage=(fieldError "lastName") required=true}}
-          {{> Input_Form_Field label="Slug (Username)" name="slug" value=slug errorMessage=(fieldError "slug") disabled=true}}
-        </div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+      <div class="fields">
+        {{> Input_Form_Field label="First" name="firstName" value=user.firstName errorMessage=(fieldError "firstName") required=true}}
+        {{> Input_Form_Field label="Last" name="lastName" value=user.lastName errorMessage=(fieldError "lastName") required=true}}
+        {{> Input_Form_Field label="Slug (Username)" name="slug" value=slug errorMessage=(fieldError "slug") disabled=true}}
+      </div>
 
-        <div class="fields">
-          {{> Input_Form_Field label="UH ID" name="uhID" value=user.uhID errorMessage=(fieldError "uhID") disabled=true}}
-          {{> Input_Form_Field label="Email" name="email" value=user.email errorMessage=(fieldError "email") disabled=true}}
-          {{> Input_Form_Field label="Picture" name="picture" value=user.picture errorMessage=(fieldError "picture") }}
-        </div>
+      <div class="fields">
+        {{> Input_Form_Field label="UH ID" name="uhID" value=user.uhID errorMessage=(fieldError "uhID") disabled=true}}
+        {{> Input_Form_Field label="Email" name="email" value=user.email errorMessage=(fieldError "email") disabled=true}}
+        {{> Input_Form_Field label="Picture" name="picture" value=user.picture errorMessage=(fieldError "picture") }}
+      </div>
 
-        <div class="fields">
-          {{> Input_Form_Field label="Website" name="website" value=user.website errorMessage=(fieldError "website") }}
-          {{> Role_Form_Field roles=roles selectedRole=selectedRole errorMessage=(fieldError "role") disabled="true" }}
-        </div>
-        <div class="fields">
-          {{> Career_Goals_Form_Field careerGoals=careerGoals selectedCareerGoalIDs=selectedCareerGoalIDs errorMessage=(fieldError "careerGoals")}}
-          {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError "interests")}}
-        </div>
-        <div class="fields">
-          {{> Desired_Degree_Form_Field desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "desiredDegree")}}
-          {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") required=true type="Number"}}
-        </div>
+      <div class="fields">
+        {{> Input_Form_Field label="Website" name="website" value=user.website errorMessage=(fieldError "website") }}
+        {{> Role_Form_Field roles=roles selectedRole=selectedRole errorMessage=(fieldError "role") disabled="true" }}
+      </div>
+      <div class="fields">
+        {{> Career_Goals_Form_Field careerGoals=careerGoals selectedCareerGoalIDs=selectedCareerGoalIDs errorMessage=(fieldError "careerGoals")}}
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError "interests")}}
+      </div>
+      <div class="fields">
+        {{> Desired_Degree_Form_Field desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "desiredDegree")}}
+        {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") required=true type="Number"}}
+      </div>
 
-        <button class="ui tiny green basic button" type="submit">UPDATE STUDENT</button>
-        <!--<button class="ui green basic button jsCancel" type="submit">Cancel</button>-->
-        {{> Success_Message_Form_Field message="The Student was successfully updated."}}
-        <div class="ui divider"></div>
+      <button class="ui tiny green basic button" type="submit">UPDATE STUDENT</button>
+      <!--<button class="ui green basic button jsCancel" type="submit">Cancel</button>-->
+      {{> Success_Message_Form_Field message="The Student was successfully updated."}}
+      <div class="ui divider"></div>
 
-        {{> Plan_Starting_Semester_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
+      {{> Plan_Starting_Semester_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
 
-      </form>
+    </form>
 
-      <br>
-      <button class="ui tiny basic green button jsGeneratePlan">GENERATE DEGREE PLAN</button>
-      {{#if slug}}
-      <p><b>View {{slug}}'s degree plan:</b> <a target="_blank" href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a> </p>
-      {{/if}}
+    <br>
+    <button class="ui tiny basic green button jsGeneratePlan">GENERATE DEGREE PLAN</button>
+    {{#if slug}}
+      <p><b>View {{slug}}'s degree plan:</b> <a target="_blank"
+                                                href="/student/{{slug}}/degree-planner">/student/{{slug}}
+        /degree-planner</a></p>
+    {{/if}}
 
+  </div>
+  <div class="ui basic modal">
+    <div class="ui icon header">
+      <i class="circle warning icon"></i>
+      Generate Degree Plan - Warning
     </div>
-    <div class="ui basic modal">
-      <div class="ui icon header">
-        <i class="circle warning icon"></i>
-        Generate Degree Plan - Warning
+    <div class="content" style="text-align: center;">
+      <p>This will delete any courses and opportunities currently planned for future semesters!</p>
+      <p><b>Continue?</b></p>
+    </div>
+    <div class="actions">
+      <div class="ui red basic cancel inverted button">
+        <i class="remove icon"></i>
+        No
       </div>
-      <div class="content" style="text-align: center;">
-        <p>This will delete any courses and opportunities currently planned for future semesters!</p>
-        <p><b>Continue?</b></p>
-      </div>
-      <div class="actions">
-        <div class="ui red basic cancel inverted button">
-          <i class="remove icon"></i>
-          No
-        </div>
-        <div class="ui green ok inverted button">
-          <i class="checkmark icon"></i>
-          Yes
-        </div>
+      <div class="ui green ok inverted button">
+        <i class="checkmark icon"></i>
+        Yes
       </div>
     </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+  </div>
 </template>

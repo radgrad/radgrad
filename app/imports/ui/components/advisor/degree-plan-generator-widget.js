@@ -15,6 +15,14 @@ import * as courseUtils from '../../../api/course/CourseUtilities';
 import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
 import { Users } from '../../../api/user/UserCollection.js';
 
+Template.Degree_Plan_Generator_Widget.onCreated(function degreePlanGeneratorOnCreated() {
+  if (this.data.dictionary) {
+    this.state = this.data.dictionary;
+  } else {
+    this.state = new ReactiveDict();
+  }
+});
+
 Template.Degree_Plan_Generator_Widget.helpers({
   careerGoals() {
     const ret = [];
@@ -127,22 +135,8 @@ Template.Degree_Plan_Generator_Widget.events({
   },
 });
 
-Template.Degree_Plan_Generator_Widget.onCreated(function degreePlanGeneratorOnCreated() {
-  if (this.data.dictionary) {
-    this.state = this.data.dictionary;
-  } else {
-    this.state = new ReactiveDict();
-  }
-  this.subscribe(DesiredDegrees.getPublicationName());
-});
-
 Template.Degree_Plan_Generator_Widget.onRendered(function degreePlanGeneratorOnRendered() {
   this.$('.dropdown').dropdown({
     // action: 'select',
   });
 });
-
-Template.Degree_Plan_Generator_Widget.onDestroyed(function degreePlanGeneratorOnDestroyed() {
-  // add your statement here
-});
-

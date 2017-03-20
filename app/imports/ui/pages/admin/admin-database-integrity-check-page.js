@@ -36,29 +36,15 @@ Template.Admin_DataBase_Integrity_Check_Page.helpers({
 
 Template.Admin_DataBase_Integrity_Check_Page.onCreated(function onCreated() {
   this.results = new ReactiveDict();
-  // this.subscribe(Slugs.getPublicationName());
-  // this.subscribe(InterestTypes.getPublicationName());
-  // this.subscribe(Interests.getPublicationName());
-  // this.subscribe(CareerGoals.getPublicationName());
-  // this.subscribe(Courses.getPublicationName());
-  // this.subscribe(Semesters.getPublicationName());
-  // this.subscribe(DesiredDegrees.getPublicationName());
-  // this.subscribe(OpportunityTypes.getPublicationName());
-  // this.subscribe(Opportunities.getPublicationName());
   this.subscribe(OpportunityInstances.getPublicationName());
-  // this.subscribe(Users.getPublicationName());
   this.subscribe(CourseInstances.getPublicationName());
-  // this.subscribe(Feedbacks.getPublicationName());
   this.subscribe(FeedbackInstances.getPublicationName());
   this.subscribe(WorkInstances.getPublicationName());
-  // this.subscribe(HelpMessages.getPublicationName());
   this.subscribe(AdvisorLogs.getPublicationName());
   this.subscribe(VerificationRequests.getPublicationName());
   this.subscribe(AcademicYearInstances.getPublicationName());
-  // this.subscribe(Feeds.getPublicationName());
   this.subscribe(MentorAnswers.getPublicationName());
   this.subscribe(MentorQuestions.getPublicationName());
-  // this.subscribe(Teasers.getPublicationName());
   this.subscribe(ValidUserAccounts.getPublicationName());
 });
 

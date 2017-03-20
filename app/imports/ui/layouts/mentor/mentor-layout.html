@@ -1,11 +1,9 @@
 <template name="Mentor_Layout">
   {{#If_Authorized}}
-    {{#if Template.subscriptionsReady}}
+    {{#With_Global_Subscriptions}}
       {{> First_Menu role="Mentor"}}
       {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength}}
       {{> Template.dynamic template=main}}
-    {{else}}
-      {{> Loading}}
-    {{/if}}
+    {{/With_Global_Subscriptions}}
   {{/If_Authorized}}
 </template>

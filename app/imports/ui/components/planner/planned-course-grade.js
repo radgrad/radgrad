@@ -1,6 +1,17 @@
 import { Template } from 'meteor/templating';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { plannerKeys } from './academic-plan';
+import { moment } from 'meteor/momentjs:moment';
+import { Logger } from 'meteor/jag:pince';
+
+const logger = new Logger('PG');
+
+Template.Planned_Course_Grade.onCreated(function plannedCourseGradeOnCreated() {
+  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Planned_Course_Grade.onCreated`);
+  if (this.data) {
+    this.state = this.data.dictionary;
+  }
+});
 
 Template.Planned_Course_Grade.helpers({
   hasGrade(courseInstanceID) {
@@ -38,17 +49,7 @@ Template.Planned_Course_Grade.events({
   },
 });
 
-Template.Planned_Course_Grade.onCreated(function plannedCourseGradeOnCreated() {
-  if (this.data) {
-    this.state = this.data.dictionary;
-  }
-});
-
 Template.Planned_Course_Grade.onRendered(function plannedCourseGradeOnRendered() {
+  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Planned_Course_Grade.onRendered`);
   this.$('.ui.selection.dropdown').dropdown();
 });
-
-Template.Planned_Course_Grade.onDestroyed(function plannedCourseGradeOnDestroyed() {
-  // add your statement here
-});
-

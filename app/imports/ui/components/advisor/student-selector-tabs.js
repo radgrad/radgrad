@@ -59,6 +59,12 @@ Template.Student_Selector_Tabs.helpers({
   alreadyDefined() {
     return Template.instance().state.get('alreadyDefined');
   },
+  otherError() {
+    return Template.instance().state.get('otherError');
+  },
+  errorMessage() {
+    return Template.instance().state.get('errorMessage');
+  },
   notDefined() {
     return Template.instance().state.get('notDefined');
   },
@@ -135,7 +141,10 @@ Template.Student_Selector_Tabs.events({
         };
         const studentID = Meteor.call('Users.define', userDefinition, (error) => {
           if (error) {
-            // console.log(error);
+            instance.state.set(displaySuccessMessage, false);
+            instance.state.set(displayErrorMessages, true);
+            instance.state.set('otherError', true);
+            instance.state.set('errorMessage', error.reason);
           } else {
             const timestamp = new Date().getTime();
             if (Feeds.checkPastDayFeed(timestamp, 'new-user')) {

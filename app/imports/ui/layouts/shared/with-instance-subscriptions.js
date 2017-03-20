@@ -20,7 +20,7 @@ const instanceSubs = new SubsManager({ expireIn: 30 });
 Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscriptionsOnCreated() {
   const self = this;
   self.ready = new ReactiveVar();
-  self.autorun(function () {
+  this.autorun(function () {
     instanceSubs.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
     instanceSubs.subscribe(AdvisorLogs.getPublicationName());
     instanceSubs.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());

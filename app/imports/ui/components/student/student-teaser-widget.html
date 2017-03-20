@@ -1,9 +1,9 @@
 <template name="Student_Teaser_Widget">
-    <div class="ui padded segment container">
-      <div class="ui dividing header">
-        <h4>TEASERS {{> Widget_Header_Number inputValue = teaserCount}}</h4>
-      </div>
-      {{#if teasers}}
+  <div class="ui padded segment container">
+    <div class="ui dividing header">
+      <h4>TEASERS {{> Widget_Header_Number inputValue = teaserCount}}</h4>
+    </div>
+    {{#if teasers}}
       <div style="max-height: 500px; overflow:scroll; margin-top: 10px;" class="ui cards">
         {{#each teaser in teasers}}
           <div class="ui centered card">
@@ -18,14 +18,15 @@
               {{> Interest_List item=teaser size='mini'}}
             </div>
             {{#if teaser.opportunityID}}
-              <a class="ui bottom attached button" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug teaser)}}">
+              <a class="ui bottom attached button"
+                 href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(opportunitySlug teaser)}}">
                 <i class="chevron circle right icon" style="margin-right: 1px;"></i>View More</a>
             {{/if}}
           </div>
         {{/each}}
       </div>
-      {{else}}
-        <p>Add interests to see recommendations here.</p>
-      {{/if}}
-    </div>
+    {{else}}
+      <p>Add interests to see recommendations here.</p>
+    {{/if}}
+  </div>
 </template>

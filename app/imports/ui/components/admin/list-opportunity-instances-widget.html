@@ -1,12 +1,8 @@
 <template name="List_Opportunity_Instances_Widget">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui padded container segment">
-      <div class="ui dividing header"><h4>OPPORTUNITY INSTANCES ({{ count }})</h4></div>
-      {{#each opportunityInstance in opportunityInstances}}
-        {{> Admin_DataModel_Accordion name=(name opportunityInstance) descriptionPairs=(descriptionPairs opportunityInstance) id=opportunityInstance._id updateID=updateID deleteDisabled=(deleteDisabled opportunityInstance)}}
-      {{/each}}
-    </div>
-  {{else}}
-    {{> Loading}}
-  {{/if}}
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>OPPORTUNITY INSTANCES ({{ count }})</h4></div>
+    {{#each opportunityInstance in opportunityInstances}}
+      {{> Admin_DataModel_Accordion name=(name opportunityInstance) descriptionPairs=(descriptionPairs opportunityInstance) id=opportunityInstance._id updateID=updateID deleteDisabled=(deleteDisabled opportunityInstance)}}
+    {{/each}}
+  </div>
 </template>

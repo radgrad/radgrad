@@ -7,12 +7,20 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
-// import { moment } from 'meteor/momentjs:moment';
+import { moment } from 'meteor/momentjs:moment';
+import { Logger } from 'meteor/jag:pince';
+
+// comment out next line to silence SL logger.
+// Logger.setLevel('SL', 'trace');
+const sl = new Logger('SL');
 
 Template.Semester_List.onCreated(function semesterListOnCreate() {
+  // eslint-disable-next-line
+  sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onCreated`);
   if (this.data) {
     this.state = this.data.dictionary;
   }
@@ -21,12 +29,16 @@ Template.Semester_List.onCreated(function semesterListOnCreate() {
 
 Template.Semester_List.helpers({
   dictionary() {
+    // eslint-disable-next-line
+    sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} dictionary`);
     // window.camDebugging.start('dictionary');
     // console.log(`${moment().format('HH:mm:ss.SSS')} dictionary`);
     // window.camDebugging.stop('dictionary');
     return Template.instance().state;
   },
   icsCourses() {
+    // eslint-disable-next-line
+    sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} icsCourses`);
     // window.camDebugging.start('icsCourses');
     const ret = [];
     if (Template.instance().localState.get('semester')) {
@@ -40,6 +52,8 @@ Template.Semester_List.helpers({
         ret.push(c);
       });
     }
+    // eslint-disable-next-line
+    sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} end icsCourses ${ret.length}`);
     // window.camDebugging.stop('icsCourses');
     return ret;
   },
@@ -202,14 +216,10 @@ Template.Semester_List.events({
 });
 
 Template.Semester_List.onRendered(function semesterListOnRendered() {
-  // console.log(this.data);
+  // eslint-disable-next-line
+  sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onRendered`);
   if (this.data) {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);
   }
 });
-
-Template.Semester_List.onDestroyed(function semesterListOnDestroyed() {
-  // add your statement here
-});
-

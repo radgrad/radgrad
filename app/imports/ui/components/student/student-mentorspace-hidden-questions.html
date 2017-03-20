@@ -13,12 +13,8 @@
                   <i class="{{icon}} icon"></i> {{message}}
                 </div>
                 <p>{{question.title}}</p>
-                {{#if Template.subscriptionsReady}}
                   <button value="{{question._id}}" class="ui yellow basic mini button edit">EDIT</button>
                 <button value="{{question._id}}" class="ui red basic mini button discard">DISCARD</button>
-                {{else}}
-                  {{> Loading}}
-                {{/if}}
               </div>
             {{/with}}
           {{/each}}

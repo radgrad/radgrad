@@ -36,7 +36,7 @@
         </div>
         <div class="five wide column">
           {{#if website}}
-          <a href={{website}}>{{website}}</a><br><br>
+            <a href={{website}}>{{website}}</a><br><br>
           {{else}}
             <p>No website specified yet.</p>
           {{/if}}
@@ -64,7 +64,8 @@
           {{else}}
             No career goals added yet.
           {{/if}}
-          <br><a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in career
+          <br><a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in
+          career
           explorer</a>
         </div>
         <div class="two wide column">
@@ -73,7 +74,9 @@
         <div class="five wide column">
           {{#if interests}}
             {{#each interest in interests}}
-              <a class="ui tiny label" href="{{pathFor interestsRouteName username=routeUserName interest=(slugName interest)}}"><i class="fitted star icon"></i>{{interestName interest}}</a>
+              <a class="ui tiny label"
+                 href="{{pathFor interestsRouteName username=routeUserName interest=(slugName interest)}}"><i
+                  class="fitted star icon"></i>{{interestName interest}}</a>
             {{/each}}
             <br>
           {{else}}
@@ -86,23 +89,25 @@
 
       <div class="row">
         <div class="two wide column">
-        <p><b>Profile Image</b></p>
-      </div>
-      <div class="six wide column">
-        <img class="ui tiny circular image" src={{studentPicture student}}><br>
-        <div class="ui action input">
-          {{#with currentUpload}}
-            Uploading <b>{{file.name}}</b>:
-            <span id="progress">{{progress.get}}%</span>
-          {{else}}
-            <input id="fileInput" type="file"/>
-          {{/with}}
-          <!--<input id="fileInput" type="file"/>-->
-          <button class="ui basic green button picture mobile hidden" type="submit">Upload Image</button>
+          <p><b>Profile Image</b></p>
         </div>
-          <button class="ui basic green button picture mobile only" type="submit" style="margin-top: 10px;">Upload Image</button>
+        <div class="six wide column">
+          <img class="ui tiny circular image" src={{studentPicture student}}><br>
+          <div class="ui action input">
+            {{#with currentUpload}}
+              Uploading <b>{{file.name}}</b>:
+              <span id="progress">{{progress.get}}%</span>
+            {{else}}
+              <input id="fileInput" type="file"/>
+            {{/with}}
+            <!--<input id="fileInput" type="file"/>-->
+            <button class="ui basic green button picture mobile hidden" type="submit">Upload Image</button>
+          </div>
+          <button class="ui basic green button picture mobile only" type="submit" style="margin-top: 10px;">Upload
+            Image
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>

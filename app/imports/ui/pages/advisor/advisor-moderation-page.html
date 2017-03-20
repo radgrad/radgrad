@@ -1,12 +1,7 @@
 <template name="Advisor_Moderation_Page">
   <div class="layout-page">
-
     <div class="ui container">
-      {{#if Template.subscriptionsReady}}
-        {{> Moderation }}
-      {{else}}
-        {{> Loading}}
-      {{/if}}
+      {{> Moderation }}
     </div>
   </div>
 </template>
