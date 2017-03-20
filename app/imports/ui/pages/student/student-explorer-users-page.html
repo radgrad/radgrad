@@ -1,5 +1,4 @@
 <template name="Student_Explorer_Users_Page">
-  {{#if Template.subscriptionsReady}}
     {{#Student_Explorer_Layout type = 'users'}}
       <div class="ui stackable grid">
         <div class="ten wide column">
@@ -16,7 +15,4 @@
         </div>
       </div>
     {{/Student_Explorer_Layout}}
-  {{else}}
-    {{> Loading}}
-  {{/if}}
 </template>

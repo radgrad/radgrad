@@ -1,5 +1,4 @@
 <template name="Student_Home_Page">
-  {{#if Template.subscriptionsReady}}
   <div class="layout-page">
     <div class="ui centered stackable grid container">
       {{> Help_Panel_Widget}}
@@ -12,7 +11,4 @@
     </div>
     {{> Back_To_Top_Button}}
   </div>
-  {{else}}
-  {{> Loading}}
-  {{/if}}
 </template>
