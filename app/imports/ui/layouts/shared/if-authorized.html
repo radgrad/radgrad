@@ -1,6 +1,6 @@
 <template name="If_Authorized">
   {{#if authInProcess}}
-    {{> Loading }}
+    {{> Loading message="Authorizing..."}}
   {{else}}
     {{#if Template.subscriptionsReady}}
       {{#if isAuthorized}}
