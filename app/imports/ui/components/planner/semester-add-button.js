@@ -156,6 +156,24 @@ Template.Semester_Add_Button.helpers({
             ret.push(cLabel);
           }
           break;
+        case 41:
+          if (cNumber.startsWith('ICS 40') || cNumber.startsWith('ICS 41') ||
+              cNumber.startsWith('ICS 42') || cNumber.startsWith('ICS 43')) {
+            ret.push(cLabel);
+          }
+          break;
+        case 44:
+          if (cNumber.startsWith('ICS 44') || cNumber.startsWith('ICS 45') ||
+              cNumber.startsWith('ICS 46')) {
+            ret.push(cLabel);
+          }
+          break;
+        case 47:
+          if (cNumber.startsWith('ICS 47') || cNumber.startsWith('ICS 48') ||
+              cNumber.startsWith('ICS 49')) {
+            ret.push(cLabel);
+          }
+          break;
         default:
           break;
       }
@@ -219,7 +237,19 @@ Template.Semester_Add_Button.events({
           inline: true,
           hoverable: true,
         });
-    template.$('a.400.item')
+    template.$('a.410.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+    template.$('a.440.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+    template.$('a.470.item')
         .popup({
           inline: true,
           hoverable: true,
@@ -259,7 +289,7 @@ Template.Semester_Add_Button.events({
   'click .item.addClass': function clickItemAddClass(event) {
     event.preventDefault();
     const template = Template.instance();
-    template.$('a.item.400').popup('hide all');
+    template.$('a.item').popup('hide all');
     const courseSplit = event.target.text.split(' ');
     const courseSlug = `${courseSplit[0].toLowerCase()}${courseSplit[1]}`;
     const semester = template.localState.get('semester');

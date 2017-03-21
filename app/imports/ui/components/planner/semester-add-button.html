@@ -38,10 +38,26 @@
             </div>
           {{/if}}
           {{#if hasCourses 400}}
-            <a class="item 400" data-position="bottom right">4xx</a>
+            <a class="item 410" data-position="bottom right">41x - 43x</a>
             <div class="ui popup transition hidden">
               <div class="ui secondary vertical tiny menu">
-                {{#each course in (courses 400)}}
+                {{#each course in (courses 41)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+            <a class="item 440" data-position="bottom right">44x - 46x</a>
+            <div class="ui popup transition hidden">
+              <div class="ui secondary vertical tiny menu">
+                {{#each course in (courses 44)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+            <a class="item 470" data-position="bottom right">47x - 49x</a>
+            <div class="ui popup transition hidden">
+              <div class="ui secondary vertical tiny menu">
+                {{#each course in (courses 47)}}
                   <a class="item addClass">{{course}}</a>
                 {{/each}}
               </div>
