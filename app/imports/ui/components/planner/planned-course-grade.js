@@ -32,28 +32,40 @@ Template.Planned_Course_Grade.helpers({
 });
 
 Template.Planned_Course_Grade.events({
-  'click .item.grade': function clickItemGrade(event) {
+  'change': function change(event) {
     event.preventDefault();
+    const div = event.target.parentElement;
+    const grade = div.childNodes[2].textContent;
+    const id = div.parentElement.id;
+    CourseInstances.clientUpdateGrade(id, grade);
+    const ci = CourseInstances.findDoc(id);
     const template = Template.instance();
-    const div = event.target.parentElement.parentElement;
-    const grade = div.childNodes[1].value;
-    // const logger = new Logger('semester-list.clickItemGrade');
-    // eslint-disable-next-line max-len
-    // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} about to call CourseInstances.clientUpdateGrade(${div.id}, ${grade})`);
-    CourseInstances.clientUpdateGrade(div.id, grade);
-    const ci = CourseInstances.findDoc(div.id);
-    // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} find returned id: ${ci._id} with grade ${ci.grade}`);
     template.state.set(plannerKeys.detailICE, ci.ice);
-    // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} set ICE to {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}}`);
     template.state.set(plannerKeys.detailCourseInstance, ci);
-    // eslint-disable-next-line max-len
-    // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade} ${template.state.get(plannerKeys.detailCourseInstance).grade}`);
   },
+  // 'click .item.grade': function clickItemGrade(event) {
+  //   event.preventDefault();
+  //   const template = Template.instance();
+  //   const div = event.target.parentElement.parentElement;
+  //   const grade = div.childNodes[1].value;
+  //   // const logger = new Logger('semester-list.clickItemGrade');
+  //   // eslint-disable-next-line max-len
+  //   // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} about to call CourseInstances.clientUpdateGrade(${div.id}, ${grade})`);
+  //   CourseInstances.clientUpdateGrade(div.id, grade);
+  //   const ci = CourseInstances.findDoc(div.id);
+  //   // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} find returned id: ${ci._id} with grade ${ci.grade}`);
+  //   template.state.set(plannerKeys.detailICE, ci.ice);
+  //   // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} set ICE to {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}}`);
+  //   template.state.set(plannerKeys.detailCourseInstance, ci);
+  //   // eslint-disable-next-line max-len
+  //   // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade} ${template.state.get(plannerKeys.detailCourseInstance).grade}`);
+  // },
 });
 
 Template.Planned_Course_Grade.onRendered(function plannedCourseGradeOnRendered() {
   logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Planned_Course_Grade.onRendered`);
   this.$('.ui.selection.dropdown').dropdown();
+  this.$('select.dropdown').dropdown();
   document.getElementsByTagName('body')[0].style.cursor = 'auto';
 
 });
