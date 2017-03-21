@@ -61,6 +61,7 @@ Template.Cumulative_Ice_Component.helpers({
   },
   projectedE(year) {
     logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.projectedE ${year}`);
+    // debugger;
     return getCumulativeProjectedIce(year).e;
   },
   projectedI(year) {

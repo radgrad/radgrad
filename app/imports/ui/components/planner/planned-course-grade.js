@@ -1,3 +1,5 @@
+/* global document */
+
 import { Template } from 'meteor/templating';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { plannerKeys } from './academic-plan';
@@ -52,4 +54,6 @@ Template.Planned_Course_Grade.events({
 Template.Planned_Course_Grade.onRendered(function plannedCourseGradeOnRendered() {
   logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Planned_Course_Grade.onRendered`);
   this.$('.ui.selection.dropdown').dropdown();
+  document.getElementsByTagName('body')[0].style.cursor = 'auto';
+
 });

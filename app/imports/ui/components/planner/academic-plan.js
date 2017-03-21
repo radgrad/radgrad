@@ -1,4 +1,4 @@
-/* global window */
+/* global window document */
 
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -27,6 +27,7 @@ Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Academic_Plan.onCreated`);
   this.state = new ReactiveDict();
   this.startYear = new ReactiveVar();
+  document.getElementsByTagName('body')[0].style.cursor = 'progress';
 });
 
 Template.Academic_Plan.helpers({

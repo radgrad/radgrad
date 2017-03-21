@@ -23,6 +23,10 @@ import './semester-list.css';
 import './semester-list.html';
 import './semester-list.js';
 
+import './semester-list-2.html';
+import './semester-list-2.js';
+
+
 import './warning-item.html';
 
 import './warnings.html';
