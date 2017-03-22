@@ -12,7 +12,10 @@
       <div class="fields">
         {{> Boolean_Form_Field label="Verified" trueValue=trueValueVerified falseValue=falseValueVerified name="verified" errorMessage=(fieldError "verified")}}
         {{> Boolean_Form_Field label="fromSTAR" trueValue=trueValueFromSTAR falseValue=falseValueFromSTAR name="fromSTAR" errorMessage=(fieldError "fromSTAR")}}
-        {{> Input_Form_Field label="Grade" name="grade" value=courseInstance.grade errorMessage=(fieldError "grade") required=true type="number"}}
+      </div>
+      <div class="fields">
+        {{> Input_Form_Field label="Grade" name="grade" value=courseInstance.grade errorMessage=(fieldError "grade") required=true }}
+        {{> Input_Form_Field label="CreditHrs" name="creditHrs" value=courseInstance.creditHrs errorMessage=(fieldError "creditHrs") required=true }}
         {{> Input_Form_Field label="Note" name="note" value=courseInstance.note errorMessage=(fieldError "note") required=true }}
       </div>
 
@@ -23,7 +26,7 @@
       </div>
       <button class="ui green basic button" type="submit">Update</button>
       <button class="ui green basic button jsCancel" type="submit">Cancel</button>
-      {{> Success_Message_Form_Field message="The Course was successfully updated.  Press cancel to continue."}}
+      {{> Success_Message_Form_Field message="The Course Instance was successfully updated.  Press cancel to continue."}}
     </form>
   </div>
 
