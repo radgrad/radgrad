@@ -376,7 +376,7 @@ Template.Semester_Add_Button.events({
   'click .item.addOpportunity': function clickItemAddOpportunity(event) {
     event.preventDefault();
     const template = Template.instance();
-    template.$('a.item.400').popup('hide all');
+    template.$('a.item').popup('hide all');
     const name = event.target.text;
     const opportunity = Opportunities.find({ name }).fetch()[0];
     const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });

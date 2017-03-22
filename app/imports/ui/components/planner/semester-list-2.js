@@ -54,6 +54,7 @@ Template.Semester_List_2.helpers({
     }
     // eslint-disable-next-line
     sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} end icsCourses ${ret.length}`);
+    // debugger;
     // window.camDebugging.stop('icsCourses');
     return ret;
   },

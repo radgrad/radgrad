@@ -33,6 +33,7 @@ Template.Planned_Course_Grade.helpers({
 
 Template.Planned_Course_Grade.events({
   'change': function change(event) { // eslint-disable-line
+    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Planned_Course_Grade change start`);
     event.preventDefault();
     const div = event.target.parentElement;
     const grade = div.childNodes[2].textContent;
@@ -42,6 +43,7 @@ Template.Planned_Course_Grade.events({
     const template = Template.instance();
     template.state.set(plannerKeys.detailICE, ci.ice);
     template.state.set(plannerKeys.detailCourseInstance, ci);
+    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Planned_Course_Grade change end`);
   },
 });
 
