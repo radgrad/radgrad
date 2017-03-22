@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 Template.List_Opportunity_Instances_Widget.helpers({

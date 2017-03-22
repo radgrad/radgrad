@@ -1,34 +1,32 @@
 <template name="Add_Course_Instance_Widget">
 
   <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>ADD COURSE</h4></div>
+    <div class="ui dividing header"><h4>ADD COURSE INSTANCE</h4></div>
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> Input_Form_Field label="Name" name="name" placeholder="Introduction to programming" errorMessage=(fieldError "name") required=true }}
-        {{> Input_Form_Field label="Short Name" name="shortName" placeholder="Defaults to Name" errorMessage=(fieldError "shortName")}}
+        {{> Semesters_Single_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
+        {{> Course_Form_Field courses=courses errorMessage=(fieldError "course") required=true}}
+        {{> User_Form_Field users=students errorMessage=(fieldError "student") required=true}}
+      </div>
+      <div class="fields">
+        {{> Boolean_Form_Field label="Verified" name="verified" errorMessage=(fieldError "verified") required=true}}
+        {{> Boolean_Form_Field label="fromSTAR" name="fromSTAR" errorMessage=(fieldError "fromSTAR") required=true}}
+      </div>
+      <div class="fields">
+        {{> Input_Form_Field label="Grade" name="grade" errorMessage=(fieldError "grade") required=true }}
+        {{> Input_Form_Field label="CreditHrs" name="creditHrs" errorMessage=(fieldError "creditHrs") required=true }}
+        {{> Input_Form_Field label="Note" name="note" errorMessage=(fieldError "note") required=true }}
       </div>
 
       <div class="fields">
-        {{> Input_Form_Field label="Slug" name="slug" placeholder="ics234" errorMessage=(fieldError "slug") required=true }}
-        {{> Input_Form_Field label="Number" name="number" placeholder="ICS 234" errorMessage=(fieldError "number") required=true}}
-        {{> Input_Form_Field label="Credit Hours" name="creditHrs" placeholder="Defaults to 3, between 1-15" errorMessage=(fieldError "creditHrs")}}
+        {{> Input_Form_Field label="Innovation" name="innovation" errorMessage=(fieldError "innovation") required=true type="number"}}
+        {{> Input_Form_Field label="Competency" name="competency" errorMessage=(fieldError "competency") required=true type="number"}}
+        {{> Input_Form_Field label="Experience" name="experience" errorMessage=(fieldError "experience") required=true type="number"}}
       </div>
-
-      <div class="fields">
-        {{> Input_Form_Field label="Syllabus" name="syllabus" placeholder="http://courses.ics.hawaii.edu/syllabuses/ICS234.html" errorMessage=(fieldError "syllabus")}}
-        {{> Input_Form_Field label="More Information" name="moreInformation" placeholder="http://courses.ics.hawaii.edu/ReviewICS234/" errorMessage=(fieldError "moreInformation")}}
-      </div>
-
-      <div class="fields">
-        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests") required="true" }}
-        {{> Prerequisites_Form_Field courses=courses errorMessage=(fieldError "prerequisites")}}
-      </div>
-
-      {{> TextArea_Form_Field label="Description" rows=5 name="description" placeholder="Describe the course here" errorMessage=(fieldError "description") required=true}}
 
       <button class="ui green basic button" type="submit">Add</button>
-      {{> Success_Message_Form_Field message="The Course was successfully added."}}
+      {{> Success_Message_Form_Field message="The Course Instance was successfully added."}}
     </form>
   </div>
 

@@ -2,42 +2,49 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Interests } from '../../../api/interest/InterestCollection';
-import { Slugs } from '../../../api/slug/SlugCollection';
-import { makeLink } from './datamodel-utilities';
+import { Semesters } from '../../../api/semester/SemesterCollection';
+import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-
-function numReferences(course) {
-  return CourseInstances.find({ courseID: course._id }).count();
-}
+Template.List_Course_Instances_Widget.onCreated(function onCreated() {
+  this.subscribe(CourseInstances.getPublicationName());
+});
 
 Template.List_Course_Instances_Widget.helpers({
-  courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+  courseInstances() {
+    const allCourseInstances = CourseInstances.find().fetch();
+    const sortBySemester = _.sortBy(allCourseInstances, function (ci) {
+      return Semesters.toString(ci.semesterID, true);
+    });
+    const sortByStudent = _.sortBy(sortBySemester, function (ci) {
+      return Users.getFullName(ci.studentID);
+    });
+    return _.sortBy(sortByStudent, function (ci) {
+      return Courses.findDoc(ci.courseID).name;
+    });
   },
   count() {
-    return Courses.count();
+    return CourseInstances.count();
   },
-  courseTitle(course) {
-    return `${course.number}: ${course.shortName}`;
+  name(courseInstance) {
+    return `${Courses.findDoc(courseInstance.courseID).shortName}-${Users.findDoc(courseInstance.studentID).username}-
+      ${Semesters.toString(courseInstance.semesterID, true)}`;
   },
-  slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+  deleteDisabled() {
+    return '';
   },
-  deleteDisabled(course) {
-    return (numReferences(course) > 0) ? 'disabled' : '';
-  },
-  descriptionPairs(course) {
+  descriptionPairs(courseInstance) {
     return [
-      { label: 'Description', value: course.description },
-      { label: 'Credit Hours', value: course.creditHrs },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
-      { label: 'Syllabus', value: makeLink(course.syllabus) },
-      { label: 'Prerequisites', value: course.prerequisites },
-      { label: 'More Information', value: makeLink(course.moreInformation) },
-      { label: 'References', value: `Course Instances: ${numReferences(course)}` },
-
+      { label: 'Semester', value: Semesters.toString(courseInstance.semesterID) },
+      { label: 'Course', value: (Courses.findDoc(courseInstance.courseID)).name },
+      { label: 'Verified', value: courseInstance.verified.toString() },
+      { label: 'fromSTAR', value: courseInstance.fromSTAR.toString() },
+      { label: 'Grade', value: courseInstance.grade },
+      { label: 'CreditHrs', value: courseInstance.creditHrs },
+      { label: 'Note', value: courseInstance.note },
+      { label: 'Student', value: Users.getFullName(courseInstance.studentID) },
+      { label: 'ICE', value: `${courseInstance.ice.i}, ${courseInstance.ice.c}, 
+        ${courseInstance.ice.e}` },
     ];
   },
 });
@@ -47,6 +54,6 @@ Template.List_Course_Instances_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Courses.removeIt(id);
+    CourseInstances.removeIt(id);
   },
 });
