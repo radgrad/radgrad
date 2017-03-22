@@ -1,21 +1,26 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
-import { Interests } from '../../../api/interest/InterestCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { ROLE } from '../../../api/role/Role.js';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  shortName: { type: String, optional: true },
-  number: { type: String, optional: false },
-  creditHrs: { type: Number, optional: true, defaultValue: 3 },
-  syllabus: { type: String, optional: true },
-  moreInformation: { type: String, optional: true },
-  description: { type: String, optional: false },
-  interests: { type: [String], optional: false, minCount: 1 },
-  prerequisites: { type: [String], optional: true },
+  semester: { type: String, optional: false },
+  course: { type: String, optional: false },
+  verified: { type: String, optional: false },
+  fromSTAR: { type: String, optional: false },
+  grade: { type: String, optional: false },
+  creditHrs: { type: String, optional: false },
+  note: { type: String, optional: false },
+  user: { type: String, optional: false },
+  innovation: { type: Number, optional: false, min: 0, max: 100 },
+  competency: { type: Number, optional: false, min: 0, max: 100 },
+  experience: { type: Number, optional: false, min: 0, max: 100 },
 });
 
 Template.Update_Course_Instance_Widget.onCreated(function onCreated() {
@@ -23,29 +28,42 @@ Template.Update_Course_Instance_Widget.onCreated(function onCreated() {
 });
 
 Template.Update_Course_Instance_Widget.helpers({
-  course() {
-    return Courses.findDoc(Template.currentData().updateID.get());
+  semesters() {
+    return Semesters.find({});
   },
-  slug() {
-    const course = Courses.findDoc(Template.currentData().updateID.get());
-    return Slugs.findDoc(course.slugID).name;
+  students() {
+    return Roles.getUsersInRole([ROLE.STUDENT]);
   },
-  interests() {
-    return Interests.find({}, { sort: { name: 1 } });
+  courseInstance() {
+    const ci = CourseInstances.findDoc(Template.currentData().updateID.get());
+    return ci;
+  },
+  selectedSemesterID() {
+    const course = CourseInstances.findDoc(Template.currentData().updateID.get());
+    return course.semesterID;
+  },
+  trueValueVerified() {
+    const course = CourseInstances.findDoc(Template.currentData().updateID.get());
+    return course.verified;
+  },
+  falseValueVerified() {
+    const course = CourseInstances.findDoc(Template.currentData().updateID.get());
+    return !course.verified;
+  },
+  trueValueFromSTAR() {
+    const course = CourseInstances.findDoc(Template.currentData().updateID.get());
+    return course.fromSTAR;
+  },
+  falseValueFromSTAR() {
+    const course = CourseInstances.findDoc(Template.currentData().updateID.get());
+    return !course.fromSTAR;
   },
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    return Courses.find().fetch();
   },
-  selectedInterestIDs() {
-    const course = Courses.findDoc(Template.currentData().updateID.get());
-    return course.interestIDs;
-  },
-  selectedCourseIDs() {
-    const course = Courses.findDoc(Template.currentData().updateID.get());
-    return _.map(course.prerequisites, prerequisite => Courses.findIdBySlug(prerequisite));
-  },
-  prerequisites() {
-    return Courses.find({}, { sort: { number: 1 } });
+  course() {
+    const course = CourseInstances.findDoc(Template.currentData().updateID.get());
+    return course.courseID;
   },
 });
 
@@ -57,8 +75,13 @@ Template.Update_Course_Instance_Widget.events({
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      Courses.update(instance.data.updateID.get(), { $set: updatedData });
+      FormUtils.convertICE(updatedData);
+      updatedData.verified = (updatedData.verified === 'true');
+      updatedData.fromSTAR = (updatedData.fromSTAR === 'true');
+      FormUtils.renameKey(updatedData, 'semester', 'semesterID');
+      FormUtils.renameKey(updatedData, 'course', 'courseID');
+      FormUtils.renameKey(updatedData, 'user', 'studentID');
+      CourseInstances.update(instance.data.updateID.get(), { $set: updatedData });
       FormUtils.indicateSuccess(instance, event);
     } else {
       FormUtils.indicateError(instance);
