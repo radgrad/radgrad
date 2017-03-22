@@ -1,0 +1,10 @@
+<template name="Admin_DataModel_Course_Instances_Page">
+  {{#Admin_DataModel_Layout}}
+    {{#if displayUpdateWidget}}
+      {{> Update_Course_Instance_Widget updateID=updateID}}
+    {{else}}
+      {{> Add_Course_Instance_Widget }}
+    {{/if}}
+    {{> List_Course_Instances_Widget updateID=updateID}}
+  {{/Admin_DataModel_Layout}}
+</template>

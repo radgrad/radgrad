@@ -56,6 +56,14 @@ adminRoutes.route('/datamodel/career-goals', {
   },
 });
 
+export const adminDataModelCourseInstancesPageRouteName = 'Admin_DataModel_Course_Instances_Page';
+adminRoutes.route('/datamodel/course-instances', {
+  name: adminDataModelCourseInstancesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelCourseInstancesPageRouteName });
+  },
+});
+
 export const adminDataModelCoursesPageRouteName = 'Admin_DataModel_Courses_Page';
 adminRoutes.route('/datamodel/courses', {
   name: adminDataModelCoursesPageRouteName,
@@ -89,7 +97,7 @@ adminRoutes.route('/datamodel/opportunities', {
 });
 
 export const adminDataModelOpportunityInstancesPageRouteName = 'Admin_DataModel_Opportunity_Instances_Page';
-adminRoutes.route('/datamodel/opportunityInstances', {
+adminRoutes.route('/datamodel/opportunity-instances', {
   name: adminDataModelOpportunityInstancesPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: adminDataModelOpportunityInstancesPageRouteName });
