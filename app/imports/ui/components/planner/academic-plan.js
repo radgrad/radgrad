@@ -27,10 +27,16 @@ Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Academic_Plan.onCreated`);
   this.state = new ReactiveDict();
   this.startYear = new ReactiveVar();
-  document.getElementsByTagName('body')[0].style.cursor = 'progress';
+  // document.getElementsByTagName('body')[0].style.cursor = 'progress';
 });
 
 Template.Academic_Plan.helpers({
+  cumIceArgs(year) {
+    return { year };
+  },
+  fallID(year) {
+    return `fall${year.year}`;
+  },
   fallArgs(year) {
     ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start fallArgs ${year.year}`);
     if (Template.instance().data.currentSemesterID) {
@@ -96,6 +102,9 @@ Template.Academic_Plan.helpers({
     }
     return null;
   },
+  springID(year) {
+    return `spring${year.year}`;
+  },
   summerArgs(year) {
     ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start summerArgs ${year.year}`);
     if (Template.instance().data.currentSemesterID) {
@@ -112,6 +121,9 @@ Template.Academic_Plan.helpers({
       return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
     }
     return null;
+  },
+  summerID(year) {
+    return `summer${year.year}`;
   },
   years() {
     ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start years`);

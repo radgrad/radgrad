@@ -399,78 +399,79 @@ Template.Semester_Add_Button.events({
 Template.Semester_Add_Button.onRendered(function semesterAddButtonOnRendered() {
   logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onRendered`);
   const template = this;
-  template.autorun(function autorun() {
-    template.$('.ui.button')
-        .popup({
-          popup: $(),
-          on: 'click',
-        });
-    template.$('.item.addCourseMenu')
-        .popup({
-          inline: false,
-          hoverable: true,
-          position: 'right center',
-          lastResort: 'right center',
-        });
-    template.$('.item.addOpportunityMenu')
-        .popup({
-          inline: false,
-          hoverable: true,
-          position: 'right center',
-          lastResort: 'right center',
-        });
-    template.$('.item.oneHundredLevel')
-        .popup({
-          inline: true,
-          hoverable: true,
-        });
-    template.$('a.200.item')
-        .popup({
-          inline: false,
-          hoverable: true,
-          lastResort: 'right center',
-        });
-    template.$('a.300.item')
-        .popup({
-          inline: true,
-          hoverable: true,
-          lastResort: 'right center',
-        });
-    template.$('a.400.item')
-        .popup({
-          inline: true,
-          hoverable: true,
-          lastResort: 'right center',
-        });
-    template.$('a.AToE.item')
-        .popup({
-          inline: true,
-          hoverable: true,
-          lastResort: 'right center',
-        });
-    template.$('a.FToJ.item')
-        .popup({
-          inline: true,
-          hoverable: true,
-          lastResort: 'right center',
-        });
-    template.$('a.KToO.item')
-        .popup({
-          inline: true,
-          hoverable: true,
-          lastResort: 'right center',
-        });
-    template.$('a.PToT.item')
-        .popup({
-          inline: true,
-          hoverable: true,
-          lastResort: 'right center',
-        });
-    template.$('a.UToZ.item')
-        .popup({
-          inline: true,
-          hoverable: true,
-          lastResort: 'right center',
-        });
-  });
+  logger.info(`${template.$('.ui.button').length}`);
+  // template.autorun(function autorun() {
+  template.$('.ui.button')
+      .popup({
+        popup: $(),
+        on: 'click',
+      });
+  template.$('.item.addCourseMenu')
+      .popup({
+        inline: false,
+        hoverable: true,
+        position: 'right center',
+        lastResort: 'right center',
+      });
+  template.$('.item.addOpportunityMenu')
+      .popup({
+        inline: false,
+        hoverable: true,
+        position: 'right center',
+        lastResort: 'right center',
+      });
+  template.$('.item.oneHundredLevel')
+      .popup({
+        inline: true,
+        hoverable: true,
+      });
+  template.$('a.200.item')
+      .popup({
+        inline: false,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.300.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.400.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.AToE.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.FToJ.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.KToO.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.PToT.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  template.$('a.UToZ.item')
+      .popup({
+        inline: true,
+        hoverable: true,
+        lastResort: 'right center',
+      });
+  // });
 });
