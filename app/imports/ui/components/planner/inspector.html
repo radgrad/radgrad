@@ -104,16 +104,14 @@
               <p>
                 <b>Catalog Descrption:</b> {{#markdown}}{{courseDescription}}{{/markdown}}
               </p>
+              {{#if interests}}
+                {{> Interest_List item=getCourse size='mini'}}
+              {{/if}}
               <p style="text-align: right;">
                 <a href="{{pathFor coursesRouteName username=routeUserName course = courseSlugID}}">
                   View in Explorer <i class="arrow right icon"></i>
                 </a>
               </p>
-              {{#if interests}}
-                <div class="ui right floated">
-                  {{> Interest_List item=getCourse size='small'}}
-                </div>
-              {{/if}}
             </div>
           {{else}}
             {{#if hasOpportunity}}
@@ -127,7 +125,7 @@
                   <b>More Information: </b><a href="{{opportunityMore}}"
                                               style="font-size: 0.95em;">{{opportunityMore}}</a> <br>
                 </p>
-                {{> Interest_List item=getOpportunity size='small'}}
+                {{> Interest_List item=getOpportunity size='mini'}}
                 <p style="text-align: right;">
                   <a href="{{pathFor opportunitiesRouteName username=routeUserName opportunity = opportunitySlugID}}">
                     View in Explorer <i class="arrow right icon"></i>
