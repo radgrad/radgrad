@@ -25,6 +25,15 @@ Template.Inspector.onCreated(function inspectorOnCreated() {
 });
 
 Template.Inspector.helpers({
+  course() {
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      return Template.instance().state.get(plannerKeys.detailCourse);
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        return Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+      }
+    return null;
+  },
   courseDescription() {
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseDescription`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
@@ -99,6 +108,7 @@ Template.Inspector.helpers({
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses100`);
     let ret = [];
     const courses = Courses.find({ number: /ICS 1/ }).fetch();
+    console.log(CourseInstances.find({}).count());
     const instances = CourseInstances.find({ note: /ICS 1/ }).fetch();
     const courseTakenIDs = [];
     _.map(instances, (ci) => {
@@ -164,6 +174,14 @@ Template.Inspector.helpers({
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
+  },
+  futureInstance() {
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      const semester = Semesters.findDoc(ci.semesterID);
+      return Semesters.getCurrentSemesterDoc().semesterNumber <= semester.semesterNumber;
+    }
+    return false;
   },
   courses470() {
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses470`);
@@ -276,6 +294,10 @@ Template.Inspector.helpers({
           }
     return ret;
   },
+  isInPlan() {
+    return (Template.instance().state.get(plannerKeys.detailCourseInstance) ||
+    Template.instance().state.get(plannerKeys.detailOpportunityInstance));
+  },
   isPastInstance() {
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} isPastInstance`);
     const currentSemester = Semesters.getCurrentSemesterDoc();
@@ -305,6 +327,16 @@ Template.Inspector.helpers({
       }
     });
     return ret;
+  },
+  passedCourse() {
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      if (ci.grade === 'A+' || ci.grade === 'A' || ci.grade === 'A-' ||
+          ci.grade === 'B+' || ci.grade === 'B') {
+        return true;
+      }
+    }
+    return false;
   },
   opportunities() {
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} opportunities`);

@@ -12,11 +12,11 @@ import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
-import { moment } from 'meteor/momentjs:moment';
-import { Logger } from 'meteor/jag:pince';
 import { $ } from 'meteor/jquery';
 
-const logger = new Logger('SB');
+// import { moment } from 'meteor/momentjs:moment';
+// import { Logger } from 'meteor/jag:pince';
+// const logger = new Logger('SB');
 
 const availableCourses = () => {
   if (getRouteUserName()) {
@@ -122,7 +122,7 @@ const availableOpportunities = () => {
 };
 
 Template.Semester_Add_Button.onCreated(function semesterAddButtonOnCreated() {
-  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onCreated`);
+  // logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onCreated`);
   if (this.data) {
     this.localState = this.data.localState;
     this.state = this.data.dictionary;
@@ -398,7 +398,7 @@ Template.Semester_Add_Button.events({
 });
 
 Template.Semester_Add_Button.onRendered(function semesterAddButtonOnRendered() {
-  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onRendered`);
+  // logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onRendered`);
   const template = this;
   // template.autorun(function autorun() {
   template.$('.ui.button')

@@ -7,18 +7,18 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { Semesters } from '../../../api/semester/SemesterCollection';
+// import { Semesters } from '../../../api/semester/SemesterCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
-import { moment } from 'meteor/momentjs:moment';
-import { Logger } from 'meteor/jag:pince';
 
-const sl = new Logger('SL');
+// import { moment } from 'meteor/momentjs:moment';
+// import { Logger } from 'meteor/jag:pince';
+// const sl = new Logger('SL');
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
   // eslint-disable-next-line
-  sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onCreated`);
+  // sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onCreated`);
   if (this.data) {
     this.state = this.data.dictionary;
   }
@@ -205,14 +205,9 @@ Template.Semester_List_2.events({
 
 Template.Semester_List_2.onRendered(function semesterListOnRendered() {
   // eslint-disable-next-line
-  sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onRendered`);
+  // sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onRendered`);
   if (this.data) {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);
   }
-});
-
-Template.Semester_List_2.onDestroyed(function semesterListOnDestroyed() {
-  // eslint-disable-next-line
-  sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onDestroyed`);
 });

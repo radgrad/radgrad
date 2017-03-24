@@ -76,6 +76,20 @@
               <h4>{{> ICE_header ice=courseIce }} {{courseNumber}}: {{courseName}}</h4>
             </div>
             <div class="content">
+              {{#if isInPlan}}
+                {{#if futureInstance}}
+                  {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=course}}
+                {{else}}
+                  {{#if passedCourse}}
+                    {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
+                  {{else}}
+                    {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=course}}
+                  {{/if}}
+                {{/if}}
+              {{else}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=course}}
+              {{/if}}
+
               {{#each recommendationStars}}
                 <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
                    class="yellow star icon"></i>
