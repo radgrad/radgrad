@@ -2,6 +2,12 @@ import './academic-plan.css';
 import './academic-plan.html';
 import './academic-plan.js';
 
+import './add-course-button.html';
+import './add-course-button.js';
+
+import './add-opportunity-button.html';
+import './add-opportunity-button.js';
+
 import './cumulative-ice-component.html';
 import './cumulative-ice-component.js';
 

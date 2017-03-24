@@ -78,16 +78,16 @@
             <div class="content">
               {{#if isInPlan}}
                 {{#if futureInstance}}
-                  {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=selectedCourse}}
+                  {{> Add_Course_Button buttonType='remove' dictionary=dictionary course=selectedCourse}}
                 {{else}}
                   {{#if passedCourse}}
-                    {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
+                    {{> Add_Course_Button buttonType='taken'}}
                   {{else}}
-                    {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=selectedCourse}}
+                    {{> Add_Course_Button buttonType='add' dictionary=dictionary course=selectedCourse}}
                   {{/if}}
                 {{/if}}
               {{else}}
-                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=selectedCourse}}
+                {{> Add_Course_Button buttonType='add' dictionary=dictionary course=selectedCourse}}
               {{/if}}
 
               {{#each recommendationStars}}
@@ -133,6 +133,16 @@
                 <h4>{{> ICE_header ice=opportunityIce }} {{opportunityName}}</h4>
               </div>
               <div class="content">
+                {{#if isInPlan}}
+                  {{#if futureInstance}}
+                    {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=selectedOpportunity}}
+                  {{else}}
+                    {{#if unverified}}
+                      {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=selectedOpportunity}}
+                    {{/if}}
+                  {{/if}}
+                {{/if}}
+                {{> Add_Opportunity_Button buttonType='add' dictionary=dictionary opportunity=selectedOpportunity}}
                 <b>When: </b> {{opportunitySemester}}
                 <p>
                   <b>Description: </b>{{#markdown}}{{opportunityDescription}}{{/markdown}} <br>

@@ -16,9 +16,6 @@
               <td style="border-top: none;">
                 {{> Planned_Course_Grade course=course dictionary=dictionary}}
               </td>
-              <td class="right aligned" style="border-top: none; margin: 0;"><i id="{{course._id}}"
-                                                                                class="red remove icon jsDelCourse"></i>
-              </td>
             </tr>
           {{/each}}
           {{#each opportunity in semesterOpportunities}}
@@ -28,14 +25,10 @@
               <td style="border-top: none; cursor: pointer;" colspan="2">
                 <strong>{{opportunityName opportunity._id}}</strong>
               </td>
-              <td class="right aligned" style="border-top: none; margin: 0;">
-                <i id="{{opportunity._id}}" class="red remove icon jsDelOpp"></i>
-              </td>
             </tr>
           {{/each}}
           </tbody>
         </table>
-        <!--{{> Semester_Add_Button dictionary=dictionary localState=localState}}-->
       </div>
     {{else}}
       <div class="ui center aligned segment bodyDrop"
@@ -53,9 +46,6 @@
               <td style="border-top: none;">
                 {{> Planned_Course_Grade course=course dictionary=dictionary}}
               </td>
-              <td class="right aligned" style="border-top: none; margin: 0;"><i id="{{course._id}}"
-                                                                                class="red remove icon jsDelCourse"></i>
-              </td>
             </tr>
           {{/each}}
           {{#each opportunity in semesterOpportunities}}
@@ -65,14 +55,10 @@
               <td style="border-top: none; cursor: pointer;" colspan="2">
                 <strong>{{opportunity.name}}</strong>
               </td>
-              <td class="right aligned" style="border-top: none; margin: 0;">
-                <i id="{{opportunity._id}}" class="red remove icon jsDelOpp"></i>
-              </td>
             </tr>
           {{/each}}
           </tbody>
         </table>
-        <!--{{> Semester_Add_Button dictionary=dictionary localState=localState}}-->
       </div>
     {{/if}}
   {{/if}}

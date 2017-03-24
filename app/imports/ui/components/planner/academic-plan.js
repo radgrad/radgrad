@@ -166,8 +166,18 @@ Template.Academic_Plan.helpers({
       const semester = Semesters.findDoc(semesterID);
       const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
       const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
+      const semesterName = 'Spring';
+      const yearArg = year.year;
       // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end springArgs ${year.year}`);
-      return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
+      return {
+        currentSemester,
+        semester,
+        dictionary: Template.instance().state,
+        isFuture,
+        isCurrentSemester,
+        semesterName,
+        year: yearArg,
+      };
     }
     return null;
   },
@@ -185,8 +195,18 @@ Template.Academic_Plan.helpers({
       const semester = Semesters.findDoc(semesterID);
       const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
       const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
+      const semesterName = 'Summer';
+      const yearArg = year.year;
       // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end summerArgs ${year.year}`);
-      return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
+      return {
+        currentSemester,
+        semester,
+        dictionary: Template.instance().state,
+        isFuture,
+        isCurrentSemester,
+        semesterName,
+        year: yearArg,
+      };
     }
     return null;
   },

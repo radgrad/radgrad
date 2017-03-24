@@ -25,15 +25,6 @@ Template.Inspector.onCreated(function inspectorOnCreated() {
 });
 
 Template.Inspector.helpers({
-  selectedCourse() {
-    if (Template.instance().state.get(plannerKeys.detailCourse)) {
-      return Template.instance().state.get(plannerKeys.detailCourse);
-    } else
-      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-        return Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
-      }
-    return null;
-  },
   courseDescription() {
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseDescription`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
@@ -174,14 +165,6 @@ Template.Inspector.helpers({
     });
     return ret;
   },
-  futureInstance() {
-    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
-      const semester = Semesters.findDoc(ci.semesterID);
-      return Semesters.getCurrentSemesterDoc().semesterNumber <= semester.semesterNumber;
-    }
-    return false;
-  },
   courses470() {
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses470`);
     let ret = [];
@@ -197,6 +180,17 @@ Template.Inspector.helpers({
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
     return ret;
+  },
+  dictionary() {
+    return Template.instance().state;
+  },
+  futureInstance() {
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      const semester = Semesters.findDoc(ci.semesterID);
+      return Semesters.getCurrentSemesterDoc().semesterNumber <= semester.semesterNumber;
+    }
+    return false;
   },
   getCourse() {
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} getCourse`);
@@ -327,16 +321,6 @@ Template.Inspector.helpers({
     });
     return ret;
   },
-  passedCourse() {
-    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
-      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
-      if (ci.grade === 'A+' || ci.grade === 'A' || ci.grade === 'A-' ||
-          ci.grade === 'B+' || ci.grade === 'B') {
-        return true;
-      }
-    }
-    return false;
-  },
   opportunities() {
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} opportunities`);
     let ret = [];
@@ -426,6 +410,16 @@ Template.Inspector.helpers({
       }
     return null;
   },
+  passedCourse() {
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      if (ci.grade === 'A+' || ci.grade === 'A' || ci.grade === 'A-' ||
+          ci.grade === 'B+' || ci.grade === 'B') {
+        return true;
+      }
+    }
+    return false;
+  },
   prerequisites() {
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} prerequisites`);
     const ret = [];
@@ -475,6 +469,33 @@ Template.Inspector.helpers({
       }
     }
     return '';
+  },
+  selectedCourse() {
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      return Template.instance().state.get(plannerKeys.detailCourse);
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        return Courses.findDoc(Template.instance().state.get(plannerKeys.detailCourseInstance).courseID);
+      }
+    return null;
+  },
+  selectedOpportunity() {
+    if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
+      return Template.instance().state.get(plannerKeys.detailOpportunity);
+    } else
+      if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
+        // eslint-disable-next-line
+        return Opportunities.findDoc(Template.instance().state.get(plannerKeys.detailOpportunityInstance).opportunityID);
+      }
+    return null;
+  },
+  unverified() {
+    let ret = false;
+    const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+    if (!oi.verified) {
+      ret = true;
+    }
+    return ret;
   },
 });
 
