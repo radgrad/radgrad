@@ -1,14 +1,13 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
-import { moment } from 'meteor/momentjs:moment';
-import { Logger } from 'meteor/jag:pince';
 import { plannerKeys } from './academic-plan';
 
-const pl = new Logger('PL');
+// import { moment } from 'meteor/momentjs:moment';
+// import { Logger } from 'meteor/jag:pince';
+// const pl = new Logger('PL');
 
 Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
   // eslint-disable-next-line
-  pl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Past_Semester_List onCreated`);
+  // pl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Past_Semester_List onCreated`);
   if (this.data) {
     // use dictionary to indicate what is selected for the Inspector.
     this.state = this.data.dictionary;

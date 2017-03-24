@@ -44,28 +44,28 @@ function getCumulativeProjectedIce(year) {
 
 Template.Cumulative_Ice_Component.helpers({
   earnedC(year) {
-    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.earnedC ${year}`);
+    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.earnedC ${year}`);
     return getCumulativeEarnedIce(year).c;
   },
   earnedE(year) {
-    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.earnedE ${year}`);
+    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.earnedE ${year}`);
     return getCumulativeEarnedIce(year).e;
   },
   earnedI(year) {
-    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.earnedI ${year}`);
+    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.earnedI ${year}`);
     return getCumulativeEarnedIce(year).i;
   },
   projectedC(year) {
-    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.projectedC ${year}`);
+    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.projectedC ${year}`);
     return getCumulativeProjectedIce(year).c;
   },
   projectedE(year) {
-    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.projectedE ${year}`);
+    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.projectedE ${year}`);
     // debugger;
     return getCumulativeProjectedIce(year).e;
   },
   projectedI(year) {
-    logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.projectedI ${year}`);
+    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Cumulative_Ice_Component.projectedI ${year}`);
     return getCumulativeProjectedIce(year).i;
   },
 });

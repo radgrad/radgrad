@@ -14,8 +14,6 @@ import { plannerKeys } from './academic-plan';
 import { moment } from 'meteor/momentjs:moment';
 import { Logger } from 'meteor/jag:pince';
 
-// comment out next line to silence SL logger.
-// Logger.setLevel('SL', 'trace');
 const sl = new Logger('SL');
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
@@ -30,7 +28,7 @@ Template.Semester_List_2.onCreated(function semesterListOnCreate() {
 Template.Semester_List_2.helpers({
   dictionary() {
     // eslint-disable-next-line
-    sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} dictionary`);
+    // sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} dictionary`);
     // window.camDebugging.start('dictionary');
     // console.log(`${moment().format('HH:mm:ss.SSS')} dictionary`);
     // window.camDebugging.stop('dictionary');
@@ -38,7 +36,7 @@ Template.Semester_List_2.helpers({
   },
   icsCourses() {
     // eslint-disable-next-line
-    sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} icsCourses`);
+    // sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} icsCourses`);
     // window.camDebugging.start('icsCourses');
     const ret = [];
     if (Template.instance().data.semester) {
@@ -50,7 +48,7 @@ Template.Semester_List_2.helpers({
       }, { sort: { note: 1 } }).fetch();
     }
     // eslint-disable-next-line
-    sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} end icsCourses ${ret.length}`);
+    // sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} end icsCourses ${ret.length}`);
     // debugger;
     return ret;
   },
