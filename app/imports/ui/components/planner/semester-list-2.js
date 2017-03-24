@@ -41,21 +41,17 @@ Template.Semester_List_2.helpers({
     sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} icsCourses`);
     // window.camDebugging.start('icsCourses');
     const ret = [];
-    if (Template.instance().localState.get('semester')) {
+    if (Template.instance().data.semester) {
       // console.log(`${moment().format('HH:mm:ss.SSS')} icsCourses`);
-      const courses = CourseInstances.find({
+      return CourseInstances.find({
         studentID: getUserIdFromRoute(),
         note: /ICS/,
-        semesterID: Template.instance().localState.get('semester')._id,
+        semesterID: Template.instance().data.semester._id,
       }, { sort: { note: 1 } }).fetch();
-      _.map(courses, (c) => {
-        ret.push(c);
-      });
     }
     // eslint-disable-next-line
     sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} end icsCourses ${ret.length}`);
     // debugger;
-    // window.camDebugging.stop('icsCourses');
     return ret;
   },
   localState() {
@@ -76,26 +72,19 @@ Template.Semester_List_2.helpers({
     // window.camDebugging.stop('opportunityName');
     return null;
   },
-  semesterName() {
-    // window.camDebugging.start('semesterName');
-    const semester = Template.instance().localState.get('semester');
-    if (semester) {
-      // window.camDebugging.stop('semesterName');
-      return semester.term;
-    }
-    // window.camDebugging.stop('semesterName');
-    return null;
-  },
   semesterOpportunities() {
     // window.camDebugging.start('semesterOpportunities');
     if (getRouteUserName()) {
       const ret = [];
-      if (Template.instance().localState.get('semester')) {
+      if (Template.instance().data.semester) {
         const opps = OpportunityInstances.find({
-          semesterID: Template.instance().localState.get('semester')._id,
+          semesterID: Template.instance().data.semester._id,
           studentID: getUserIdFromRoute(),
         }).fetch();
         // window.camDebugging.stop('semesterOpportunities');
+        _.map(opps, (opp) => {
+          opp.name = Opportunities.findDoc(opp.opportunityID).name; // eslint-disable-line
+        });
         return opps;
       }
       // window.camDebugging.stop('semesterOpportunities');

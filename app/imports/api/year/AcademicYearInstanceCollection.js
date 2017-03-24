@@ -51,21 +51,25 @@ class AcademicYearInstanceCollection extends BaseCollection {
       return doc[0]._id;
     }
     const semesterIDs = [];
+    // const semesters = [];
     try {
       semesterIDs.push(Semesters.getID(`Fall-${year}`));
     } catch (e) {
       semesterIDs.push(Semesters.define({ term: 'Fall', year }));
     }
+    // semesters.push(Semesters.findDoc(semesterIDs[0]));
     try {
       semesterIDs.push(Semesters.getID(`Spring-${year + 1}`));
     } catch (e) {
       semesterIDs.push(Semesters.define({ term: 'Spring', year: year + 1 }));
     }
+    // semesters.push(Semesters.findDoc(semesterIDs[1]));
     try {
       semesterIDs.push(Semesters.getID(`Summer-${year + 1}`));
     } catch (e) {
       semesterIDs.push(Semesters.define({ term: 'Summer', year: year + 1 }));
     }
+    // semesters.push(Semesters.findDoc(semesterIDs[2]));
     // Define and return the docID
     return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs });
   }

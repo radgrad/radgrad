@@ -27,6 +27,7 @@ const availableCourses = () => {
           return true;
         }
         const ci = CourseInstances.find({
+          studentID: getUserIdFromRoute(),
           courseID: course._id,
           grade: /[AB]/,
         }).fetch();
@@ -399,7 +400,6 @@ Template.Semester_Add_Button.events({
 Template.Semester_Add_Button.onRendered(function semesterAddButtonOnRendered() {
   logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onRendered`);
   const template = this;
-  logger.info(`${template.$('.ui.button').length}`);
   // template.autorun(function autorun() {
   template.$('.ui.button')
       .popup({

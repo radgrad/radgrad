@@ -8,6 +8,9 @@ import { lodash } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { Logger } from 'meteor/jag:pince';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
@@ -39,18 +42,24 @@ Template.Academic_Plan.helpers({
   },
   fallArgs(year) {
     ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start fallArgs ${year.year}`);
-    if (Template.instance().data.currentSemesterID) {
-      const currentSemesterID = Template.instance().data.currentSemesterID;
-      const currentSemester = Semesters.findDoc(currentSemesterID);
-      const semesterID = Semesters.define({
-        year: year.year,
-        term: Semesters.FALL,
-      });
+    if (Template.instance().data.currentSemester) {
+      const currentSemester = Template.instance().data.currentSemester
+      const semesterID = year.semesterIDs[0];
       const semester = Semesters.findDoc(semesterID);
-      const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
+      const isFuture = true;
       const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
+      const semesterName = 'Fall';
+      const yearArg = year.year;
       ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end fallArgs ${year.year}`);
-      return { currentSemester, semester, dictionary: Template.instance().state, isFuture, isCurrentSemester };
+      return {
+        currentSemester,
+        semester,
+        dictionary: Template.instance().state,
+        isFuture,
+        isCurrentSemester,
+        semesterName,
+        year: yearArg,
+      };
     }
     return null;
   },
@@ -85,11 +94,73 @@ Template.Academic_Plan.helpers({
     }
     return false;
   },
+  isPastFall(year) {
+    const semester = Semesters.findDoc(year.semesterIDs[0]);
+    return semester.semesterNumber < Template.instance().data.currentSemester.semesterNumber;
+  },
+  isPastSpring(year) {
+    const semester = Semesters.findDoc(year.semesterIDs[1]);
+    return semester.semesterNumber < Template.instance().data.currentSemester.semesterNumber;
+  },
+  isPastSummer(year) {
+    const semester = Semesters.findDoc(year.semesterIDs[2]);
+    return semester.semesterNumber < Template.instance().data.currentSemester.semesterNumber;
+  },
+  pastFallArgs(year) {
+    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} pastFallArgs ${year.year}`);
+    const icsCourses = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      semesterID: year.semesterIDs[0],
+    }).fetch();
+    const semesterOpportunities = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      semesterID: year.semesterIDs[0],
+    }).fetch();
+    _.map(semesterOpportunities, (opp) => {
+      opp.name = Opportunities.findDoc(opp.opportunityID).name;  // eslint-disable-line
+    });
+    const semesterName = 'Fall';
+    const yearArg = year.year;
+    return { icsCourses, semesterOpportunities, semesterName, dictionary: Template.instance().state, year: yearArg };
+  },
+  pastSpringArgs(year) {
+    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} pastSpringArgs ${year.year}`);
+    const icsCourses = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      semesterID: year.semesterIDs[1],
+    }).fetch();
+    const semesterOpportunities = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      semesterID: year.semesterIDs[1],
+    }).fetch();
+    _.map(semesterOpportunities, (opp) => {
+      opp.name = Opportunities.findDoc(opp.opportunityID).name;  // eslint-disable-line
+    });
+    const semesterName = 'Spring';
+    const yearArg = year.year;
+    return { icsCourses, semesterOpportunities, semesterName, dictionary: Template.instance().state, year: yearArg };
+  },
+  pastSummerArgs(year) {
+    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} pastSpringArgs ${year.year}`);
+    const icsCourses = CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      semesterID: year.semesterIDs[2],
+    }).fetch();
+    const semesterOpportunities = OpportunityInstances.find({
+      studentID: getUserIdFromRoute(),
+      semesterID: year.semesterIDs[2],
+    }).fetch();
+    _.map(semesterOpportunities, (opp) => {
+      opp.name = Opportunities.findDoc(opp.opportunityID).name;  // eslint-disable-line
+    });
+    const semesterName = 'Summer';
+    const yearArg = year.year;
+    return { icsCourses, semesterOpportunities, semesterName, dictionary: Template.instance().state, year: yearArg };
+  },
   springArgs(year) {
     ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start springArgs ${year.year}`);
-    if (Template.instance().data.currentSemesterID) {
-      const currentSemesterID = Template.instance().data.currentSemesterID;
-      const currentSemester = Semesters.findDoc(currentSemesterID);
+    if (Template.instance().data.currentSemester) {
+      const currentSemester = Template.instance().data.currentSemester;
       const semesterID = Semesters.define({
         year: year.year + 1,
         term: Semesters.SPRING,
@@ -107,9 +178,8 @@ Template.Academic_Plan.helpers({
   },
   summerArgs(year) {
     ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start summerArgs ${year.year}`);
-    if (Template.instance().data.currentSemesterID) {
-      const currentSemesterID = Template.instance().data.currentSemesterID;
-      const currentSemester = Semesters.findDoc(currentSemesterID);
+    if (Template.instance().data.currentSemester) {
+      const currentSemester = Template.instance().data.currentSemester;
       const semesterID = Semesters.define({
         year: year.year + 1,
         term: Semesters.SUMMER,
@@ -126,7 +196,7 @@ Template.Academic_Plan.helpers({
     return `summer${year.year}`;
   },
   years() {
-    ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start years`);
+    ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start years`);
     // window.camDebugging.start('ap.years');
     // debugger
     const studentID = getUserIdFromRoute();

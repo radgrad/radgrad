@@ -9,12 +9,27 @@
                 <h3 class="ui horizontal divider header">{{getAcademicYear year.year}}</h3>
               </div>
               <div class="stretched column academicYear" style="padding: 0 0.6rem;">
-                <!--{{> Semester_List_2 (fallArgs year)}}-->
-                <!--{{> Semester_List_2 (springArgs year)}}-->
-                <!--{{> Semester_List_2 (summerArgs year)}}-->
-                {{> cacher  template='Semester_List_2' id=(fallID year) data=(fallArgs year)}}
-                {{> cacher  template='Semester_List_2' id=(springID year) data=(springArgs year)}}
-                {{> cacher  template='Semester_List_2' id=(summerID year) data=(summerArgs year)}}
+                {{#if isPastFall year}}
+                  {{> Past_Semester_List (pastFallArgs year)}}
+                  <!--{{> cacher template='Past_Semester_List' id=(fallID year) data=(pastFallArgs year)}}-->
+                {{else}}
+                  {{> Semester_List_2 (fallArgs year)}}
+                  <!--{{> cacher  template='Semester_List_2' id=(fallID year) data=(fallArgs year)}}-->
+                {{/if}}
+                {{#if isPastSpring year}}
+                  {{> Past_Semester_List (pastSpringArgs year)}}
+                  <!--{{> cacher template='Past_Semester_List' id=(springID year) data=(pastSpringArgs year)}}-->
+                {{else}}
+                  {{> Semester_List_2 (springArgs year)}}
+                  <!--{{> cacher  template='Semester_List_2' id=(springID year) data=(springArgs year)}}-->
+                {{/if}}
+                {{#if isPastSummer year}}
+                  {{> Past_Semester_List (pastSummerArgs year)}}
+                  <!--{{> cacher template='Past_Semester_List' id=(summerID year) data=(pastSummerArgs year)}}-->
+                {{else}}
+                  {{> Semester_List_2 (summerArgs year)}}
+                  <!--{{> cacher  template='Semester_List_2' id=(summerID year) data=(summerArgs year)}}-->
+                {{/if}}
                 <div class="mobile only" style="margin-top: 1rem;">
                   {{> Cumulative_Ice_Component year=year}}
                 </div>
