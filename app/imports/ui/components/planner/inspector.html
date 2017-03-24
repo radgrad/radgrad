@@ -78,16 +78,16 @@
             <div class="content">
               {{#if isInPlan}}
                 {{#if futureInstance}}
-                  {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=course}}
+                  {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=selectedCourse}}
                 {{else}}
                   {{#if passedCourse}}
                     {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
                   {{else}}
-                    {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=course}}
+                    {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=selectedCourse}}
                   {{/if}}
                 {{/if}}
               {{else}}
-                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=course}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=selectedCourse}}
               {{/if}}
 
               {{#each recommendationStars}}

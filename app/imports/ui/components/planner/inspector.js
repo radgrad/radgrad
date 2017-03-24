@@ -25,7 +25,7 @@ Template.Inspector.onCreated(function inspectorOnCreated() {
 });
 
 Template.Inspector.helpers({
-  course() {
+  selectedCourse() {
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse);
     } else
@@ -108,7 +108,6 @@ Template.Inspector.helpers({
     // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses100`);
     let ret = [];
     const courses = Courses.find({ number: /ICS 1/ }).fetch();
-    console.log(CourseInstances.find({}).count());
     const instances = CourseInstances.find({ note: /ICS 1/ }).fetch();
     const courseTakenIDs = [];
     _.map(instances, (ci) => {
