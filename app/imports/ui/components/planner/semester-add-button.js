@@ -12,10 +12,11 @@ import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
-import { moment } from 'meteor/momentjs:moment';
-import { Logger } from 'meteor/jag:pince';
+import { $ } from 'meteor/jquery';
 
-const logger = new Logger('SB');
+// import { moment } from 'meteor/momentjs:moment';
+// import { Logger } from 'meteor/jag:pince';
+// const logger = new Logger('SB');
 
 const availableCourses = () => {
   if (getRouteUserName()) {
@@ -26,6 +27,7 @@ const availableCourses = () => {
           return true;
         }
         const ci = CourseInstances.find({
+          studentID: getUserIdFromRoute(),
           courseID: course._id,
           grade: /[AB]/,
         }).fetch();
@@ -120,7 +122,7 @@ const availableOpportunities = () => {
 };
 
 Template.Semester_Add_Button.onCreated(function semesterAddButtonOnCreated() {
-  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onCreated`);
+  // logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onCreated`);
   if (this.data) {
     this.localState = this.data.localState;
     this.state = this.data.dictionary;
@@ -152,6 +154,24 @@ Template.Semester_Add_Button.helpers({
           break;
         case 400:
           if (cNumber.substring(0, 5) === 'ICS 4') {
+            ret.push(cLabel);
+          }
+          break;
+        case 41:
+          if (cNumber.startsWith('ICS 40') || cNumber.startsWith('ICS 41') ||
+              cNumber.startsWith('ICS 42') || cNumber.startsWith('ICS 43')) {
+            ret.push(cLabel);
+          }
+          break;
+        case 44:
+          if (cNumber.startsWith('ICS 44') || cNumber.startsWith('ICS 45') ||
+              cNumber.startsWith('ICS 46')) {
+            ret.push(cLabel);
+          }
+          break;
+        case 47:
+          if (cNumber.startsWith('ICS 47') || cNumber.startsWith('ICS 48') ||
+              cNumber.startsWith('ICS 49')) {
             ret.push(cLabel);
           }
           break;
@@ -200,10 +220,77 @@ Template.Semester_Add_Button.helpers({
 });
 
 Template.Semester_Add_Button.events({
+  'click .ui.button': function clickAddButton(event) {
+    event.preventDefault();
+    const template = Template.instance();
+    template.$('.item.100')
+        .popup({
+          inline: true,
+          hoverable: true,
+        });
+    template.$('a.200.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+        });
+    template.$('a.300.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+        });
+    template.$('a.410.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+    template.$('a.440.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+    template.$('a.470.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+    template.$('a.AToE.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+    template.$('a.FToJ.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+    template.$('a.KToO.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+    template.$('a.PToT.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+    template.$('a.UToZ.item')
+        .popup({
+          inline: true,
+          hoverable: true,
+          lastResort: 'right center',
+        });
+  },
   'click .item.addClass': function clickItemAddClass(event) {
     event.preventDefault();
     const template = Template.instance();
-    template.$('a.item.400').popup('hide all');
+    template.$('a.item').popup('hide all');
     const courseSplit = event.target.text.split(' ');
     const courseSlug = `${courseSplit[0].toLowerCase()}${courseSplit[1]}`;
     const semester = template.localState.get('semester');
@@ -234,7 +321,7 @@ Template.Semester_Add_Button.events({
           .popup({
             on: 'click',
           });
-      template.$('.item.oneHundredLevel')
+      template.$('.item.100')
           .popup({
             inline: true,
             hoverable: true,
@@ -255,12 +342,42 @@ Template.Semester_Add_Button.events({
             hoverable: true,
             lastResort: 'right center',
           });
+      template.$('a.AToE.item')
+          .popup({
+            inline: true,
+            hoverable: true,
+            lastResort: 'right center',
+          });
+      template.$('a.FToJ.item')
+          .popup({
+            inline: true,
+            hoverable: true,
+            lastResort: 'right center',
+          });
+      template.$('a.KToO.item')
+          .popup({
+            inline: true,
+            hoverable: true,
+            lastResort: 'right center',
+          });
+      template.$('a.PToT.item')
+          .popup({
+            inline: true,
+            hoverable: true,
+            lastResort: 'right center',
+          });
+      template.$('a.UToZ.item')
+          .popup({
+            inline: true,
+            hoverable: true,
+            lastResort: 'right center',
+          });
     });
   },
   'click .item.addOpportunity': function clickItemAddOpportunity(event) {
     event.preventDefault();
     const template = Template.instance();
-    template.$('a.item.400').popup('hide all');
+    template.$('a.item').popup('hide all');
     const name = event.target.text;
     const opportunity = Opportunities.find({ name }).fetch()[0];
     const oppSlug = Slugs.findDoc({ _id: opportunity.slugID });
@@ -281,10 +398,12 @@ Template.Semester_Add_Button.events({
 });
 
 Template.Semester_Add_Button.onRendered(function semesterAddButtonOnRendered() {
-  logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onRendered`);
+  // logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_Add_Button.onRendered`);
   const template = this;
+  // template.autorun(function autorun() {
   template.$('.ui.button')
       .popup({
+        popup: $(),
         on: 'click',
       });
   template.$('.item.addCourseMenu')
@@ -354,4 +473,5 @@ Template.Semester_Add_Button.onRendered(function semesterAddButtonOnRendered() {
         hoverable: true,
         lastResort: 'right center',
       });
+  // });
 });

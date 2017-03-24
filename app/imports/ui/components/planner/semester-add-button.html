@@ -8,8 +8,8 @@
       <div class="ui popup transition hidden">
         <div class="ui secondary vertical tiny menu">
           {{#if hasCourses 100}}
-            <a class="item oneHundredLevel" data-position="right center">1xx</a>
-            <div class="ui popup transition hidden">
+            <a class="item 100" data-position="right center">1xx</a>
+            <div class="ui popup transition ">
               <div class="ui secondary vertical tiny menu">
                 {{#each course in (courses 100)}}
                   <a class="item addClass">{{course}}</a>
@@ -38,10 +38,26 @@
             </div>
           {{/if}}
           {{#if hasCourses 400}}
-            <a class="item 400" data-position="bottom right">4xx</a>
+            <a class="item 410" data-position="bottom right">41x - 43x</a>
             <div class="ui popup transition hidden">
               <div class="ui secondary vertical tiny menu">
-                {{#each course in (courses 400)}}
+                {{#each course in (courses 41)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+            <a class="item 440" data-position="bottom right">44x - 46x</a>
+            <div class="ui popup transition hidden">
+              <div class="ui secondary vertical tiny menu">
+                {{#each course in (courses 44)}}
+                  <a class="item addClass">{{course}}</a>
+                {{/each}}
+              </div>
+            </div>
+            <a class="item 470" data-position="bottom right">47x - 49x</a>
+            <div class="ui popup transition hidden">
+              <div class="ui secondary vertical tiny menu">
+                {{#each course in (courses 47)}}
                   <a class="item addClass">{{course}}</a>
                 {{/each}}
               </div>
@@ -53,70 +69,68 @@
       <div class="ui popup transition hidden">
         <div class="ui secondary vertical tiny menu">
           {{#with opportunities}}
-            <div class="ui secondary vertical tiny menu">
-              <a class="item AToE" data-position="right center">A - E</a>
-              <div class="ui popup transition hidden">
-                <div class="ui secondary vertical tiny menu">
-                  {{#if AToE}}
-                    {{#each opportunity in AToE}}
-                      <a class="item addOpportunity">{{opportunity.name}}</a>
-                    {{/each}}
-                  {{else}}
-                    <div class="item">No opportunities at the moment.</div>
-                  {{/if}}
-                </div>
+            <a class="item AToE" data-position="right center">A - E</a>
+            <div class="ui popup transition hidden">
+              <div class="ui secondary vertical tiny menu">
+                {{#if AToE}}
+                  {{#each opportunity in AToE}}
+                    <a class="item addOpportunity">{{opportunity.name}}</a>
+                  {{/each}}
+                {{else}}
+                  <div class="item">No opportunities at the moment.</div>
+                {{/if}}
               </div>
+            </div>
 
-              <a class="item FToJ" data-position="right center">F - J</a>
-              <div class="ui popup transition hidden">
-                <div class="ui secondary vertical tiny menu">
-                  {{#if FToJ}}
-                    {{#each opportunity in FToJ}}
-                      <a class="item addOpportunity">{{opportunity.name}}</a>
-                    {{/each}}
-                  {{else}}
-                    <div class="item">No opportunities at the moment.</div>
-                  {{/if}}
-                </div>
+            <a class="item FToJ" data-position="right center">F - J</a>
+            <div class="ui popup transition hidden">
+              <div class="ui secondary vertical tiny menu">
+                {{#if FToJ}}
+                  {{#each opportunity in FToJ}}
+                    <a class="item addOpportunity">{{opportunity.name}}</a>
+                  {{/each}}
+                {{else}}
+                  <div class="item">No opportunities at the moment.</div>
+                {{/if}}
               </div>
+            </div>
 
-              <a class="item KToO" data-position="right center">K - O</a>
-              <div class="ui popup transition hidden">
-                <div class="ui secondary vertical tiny menu">
-                  {{#if KToO}}
-                    {{#each opportunity in KToO}}
-                      <a class="item addOpportunity">{{opportunity.name}}</a>
-                    {{/each}}
-                  {{else}}
-                    <div class="item">No opportunities at the moment.</div>
-                  {{/if}}
-                </div>
+            <a class="item KToO" data-position="right center">K - O</a>
+            <div class="ui popup transition hidden">
+              <div class="ui secondary vertical tiny menu">
+                {{#if KToO}}
+                  {{#each opportunity in KToO}}
+                    <a class="item addOpportunity">{{opportunity.name}}</a>
+                  {{/each}}
+                {{else}}
+                  <div class="item">No opportunities at the moment.</div>
+                {{/if}}
               </div>
+            </div>
 
-              <a class="item PToT" data-position="right center">P - T</a>
-              <div class="ui popup transition hidden">
-                <div class="ui secondary vertical tiny menu">
-                  {{#if PToT}}
-                    {{#each opportunity in PToT}}
-                      <a class="item addOpportunity">{{opportunity.name}}</a>
-                    {{/each}}
-                  {{else}}
-                    <div class="item">No opportunities at the moment.</div>
-                  {{/if}}
-                </div>
+            <a class="item PToT" data-position="right center">P - T</a>
+            <div class="ui popup transition hidden">
+              <div class="ui secondary vertical tiny menu">
+                {{#if PToT}}
+                  {{#each opportunity in PToT}}
+                    <a class="item addOpportunity">{{opportunity.name}}</a>
+                  {{/each}}
+                {{else}}
+                  <div class="item">No opportunities at the moment.</div>
+                {{/if}}
               </div>
+            </div>
 
-              <a class="item UToZ" data-position="right center">U - Z</a>
-              <div class="ui popup transition hidden">
-                <div class="ui secondary vertical tiny menu">
-                  {{#if UToZ}}
-                    {{#each opportunity in UToZ}}
-                      <a class="item addOpportunity">{{opportunity.name}}</a>
-                    {{/each}}
-                  {{else}}
-                    <div class="item">No opportunities at the moment.</div>
-                  {{/if}}
-                </div>
+            <a class="item UToZ" data-position="right center">U - Z</a>
+            <div class="ui popup transition hidden">
+              <div class="ui secondary vertical tiny menu">
+                {{#if UToZ}}
+                  {{#each opportunity in UToZ}}
+                    <a class="item addOpportunity">{{opportunity.name}}</a>
+                  {{/each}}
+                {{else}}
+                  <div class="item">No opportunities at the moment.</div>
+                {{/if}}
               </div>
             </div>
           {{/with}}

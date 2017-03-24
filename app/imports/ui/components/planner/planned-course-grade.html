@@ -1,12 +1,26 @@
 <template name="Planned_Course_Grade">
-  <div id="{{course._id}}" class="ui selection dropdown">
-    <input type="hidden" name="grade">
-    <i class="dropdown icon"></i>
-    <div class="default text">{{#if hasGrade}}{{course.grade}}{{else}}Grade{{/if}}</div>
-    <div class="menu">
-      <div class="item grade{{#if isGrade course._id 'A'}} active selected{{/if}}" data-value="A">A</div>
-      <div class="item grade{{#if isGrade course._id 'B'}} active selected{{/if}}" data-value="B">B</div>
-      <div class="item grade{{#if isGrade course._id 'C'}} active selected{{/if}}" data-value="C">C</div>
-    </div>
+  <div id="{{course._id}}" class="field">
+    <!--<input type="hidden" name="grade">-->
+    <!--<i class="dropdown icon"></i>-->
+    <!--<div class="default text">{{#if hasGrade}}{{course.grade}}{{else}}Grade{{/if}}</div>-->
+    <!--<div class="menu">-->
+      <!--<div class="item grade{{#if isGrade course._id 'A'}} active selected{{/if}}" data-value="A">A</div>-->
+      <!--<div class="item grade{{#if isGrade course._id 'B'}} active selected{{/if}}" data-value="B">B</div>-->
+      <!--<div class="item grade{{#if isGrade course._id 'C'}} active selected{{/if}}" data-value="C">C</div>-->
+    <!--</div>-->
+    <!--<select class="ui dropdown" name="{{course._id}}">-->
+      <!--<option value="A" selected="{{#if isGrade course._id 'A'}}true{{/if}}">A</option>-->
+      <!--<option value="B" selected="{{#if isGrade course._id 'B'}}true{{/if}}">B</option>-->
+      <!--<option value="C" selected="{{#if isGrade course._id 'C'}}true{{/if}}">C</option>-->
+    <!--</select>-->
+    <!--<div class="field">-->
+      <select class="ui dropdown field" name="GPA">
+        <option value="">(Select one)</option>
+        <option value="A" selected="{{#if isGrade course._id 'A'}}true{{/if}}">A</option>
+        <option value="B" selected="{{#if isGrade course._id 'B'}}true{{/if}}">B</option>
+        <option value="C" selected="{{#if isGrade course._id 'C'}}true{{/if}}">C</option>
+      </select>
+    <!--</div>-->
+
   </div>
 </template>

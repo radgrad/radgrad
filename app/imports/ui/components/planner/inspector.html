@@ -76,6 +76,20 @@
               <h4>{{> ICE_header ice=courseIce }} {{courseNumber}}: {{courseName}}</h4>
             </div>
             <div class="content">
+              {{#if isInPlan}}
+                {{#if futureInstance}}
+                  {{> Add_Course_Button buttonType='remove' dictionary=dictionary course=selectedCourse}}
+                {{else}}
+                  {{#if passedCourse}}
+                    {{> Add_Course_Button buttonType='taken'}}
+                  {{else}}
+                    {{> Add_Course_Button buttonType='add' dictionary=dictionary course=selectedCourse}}
+                  {{/if}}
+                {{/if}}
+              {{else}}
+                {{> Add_Course_Button buttonType='add' dictionary=dictionary course=selectedCourse}}
+              {{/if}}
+
               {{#each recommendationStars}}
                 <i style="margin: 0px 0px 3px; font-size: 18px; width: 19px; line-height: 1.5em"
                    class="yellow star icon"></i>
@@ -119,6 +133,16 @@
                 <h4>{{> ICE_header ice=opportunityIce }} {{opportunityName}}</h4>
               </div>
               <div class="content">
+                {{#if isInPlan}}
+                  {{#if futureInstance}}
+                    {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=selectedOpportunity}}
+                  {{else}}
+                    {{#if unverified}}
+                      {{> Add_Opportunity_Button buttonType='remove' dictionary=dictionary opportunity=selectedOpportunity}}
+                    {{/if}}
+                  {{/if}}
+                {{/if}}
+                {{> Add_Opportunity_Button buttonType='add' dictionary=dictionary opportunity=selectedOpportunity}}
                 <b>When: </b> {{opportunitySemester}}
                 <p>
                   <b>Description: </b>{{#markdown}}{{opportunityDescription}}{{/markdown}} <br>
