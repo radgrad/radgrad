@@ -5,6 +5,9 @@ Template.Admin_DataModel_Menu.helpers({
   careerGoalsRouteName() {
     return RouteNames.adminDataModelCareerGoalsPageRouteName;
   },
+  courseInstancesRouteName() {
+    return RouteNames.adminDataModelCourseInstancesPageRouteName;
+  },
   coursesRouteName() {
     return RouteNames.adminDataModelCoursesPageRouteName;
   },

@@ -1,0 +1,12 @@
+<template name="List_Course_Instances_Widget">
+{{#if Template.subscriptionsReady}}
+    <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>COURSE INSTANCES ({{ count }})</h4></div>
+    {{#each courseInstance in courseInstances}}
+      {{> Admin_DataModel_Accordion name=(name courseInstance) descriptionPairs=(descriptionPairs courseInstance) id=courseInstance._id updateID=updateID deleteDisabled=(deleteDisabled courseInstance)}}
+    {{/each}}
+  </div>
+{{else}}
+  {{> Loading}}
+{{/if}}
+</template>

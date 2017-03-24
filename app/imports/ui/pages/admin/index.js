@@ -12,6 +12,9 @@ import './admin-database-restore-page.js';
 import './admin-datamodel-careergoals-page.html';
 import './admin-datamodel-careergoals-page.js';
 
+import './admin-datamodel-course-instances-page.html';
+import './admin-datamodel-course-instances-page.js';
+
 import './admin-datamodel-courses-page.html';
 import './admin-datamodel-courses-page.js';
 

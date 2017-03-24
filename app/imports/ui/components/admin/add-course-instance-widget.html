@@ -1,0 +1,33 @@
+<template name="Add_Course_Instance_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD COURSE INSTANCE</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Semesters_Single_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
+        {{> Course_Form_Field courses=courses errorMessage=(fieldError "course") required=true}}
+        {{> User_Form_Field users=students errorMessage=(fieldError "student") required=true}}
+      </div>
+      <div class="fields">
+        {{> Boolean_Form_Field label="Verified" name="verified" errorMessage=(fieldError "verified") required=true}}
+        {{> Boolean_Form_Field label="fromSTAR" name="fromSTAR" errorMessage=(fieldError "fromSTAR") required=true}}
+      </div>
+      <div class="fields">
+        {{> Input_Form_Field label="Grade" name="grade" errorMessage=(fieldError "grade") required=true }}
+        {{> Input_Form_Field label="CreditHrs" name="creditHrs" errorMessage=(fieldError "creditHrs") required=true }}
+        {{> Input_Form_Field label="Note" name="note" errorMessage=(fieldError "note") required=true }}
+      </div>
+
+      <div class="fields">
+        {{> Input_Form_Field label="Innovation" name="innovation" errorMessage=(fieldError "innovation") required=true type="number"}}
+        {{> Input_Form_Field label="Competency" name="competency" errorMessage=(fieldError "competency") required=true type="number"}}
+        {{> Input_Form_Field label="Experience" name="experience" errorMessage=(fieldError "experience") required=true type="number"}}
+      </div>
+
+      <button class="ui green basic button" type="submit">Add</button>
+      {{> Success_Message_Form_Field message="The Course Instance was successfully added."}}
+    </form>
+  </div>
+
+</template>
