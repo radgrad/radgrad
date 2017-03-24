@@ -41,7 +41,7 @@ Template.Academic_Plan.helpers({
   fallArgs(year) {
     // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start fallArgs ${year.year}`);
     if (Template.instance().data.currentSemester) {
-      const currentSemester = Template.instance().data.currentSemester
+      const currentSemester = Template.instance().data.currentSemester;
       const semesterID = year.semesterIDs[0];
       const semester = Semesters.findDoc(semesterID);
       const isFuture = true;

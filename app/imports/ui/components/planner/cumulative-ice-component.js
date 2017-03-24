@@ -5,10 +5,10 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { moment } from 'meteor/momentjs:moment';
-import { Logger } from 'meteor/jag:pince';
 
-const logger = new Logger('IC');
+// import { moment } from 'meteor/momentjs:moment';
+// import { Logger } from 'meteor/jag:pince';
+// const logger = new Logger('IC');
 
 function getCumulativeIceInstances(year) {
   const studentID = getUserIdFromRoute();

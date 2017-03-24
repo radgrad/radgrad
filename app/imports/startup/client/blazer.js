@@ -4,10 +4,10 @@ import { Blaze } from 'meteor/blaze';
 import { Spacebars } from 'meteor/spacebars';
 import { HTML } from 'meteor/htmljs';
 import { $ } from 'meteor/jquery';
-import { moment } from 'meteor/momentjs:moment';
-import { Logger } from 'meteor/jag:pince';
 
-const logger = new Logger('cache');
+// import { moment } from 'meteor/momentjs:moment';
+// import { Logger } from 'meteor/jag:pince';
+// const logger = new Logger('cache');
 
 const viewMap = window.viewMap = {};
 // const HTML = HTML;
