@@ -12,11 +12,8 @@ Template.List_Opportunity_Instances_Widget.helpers({
     const sortBySemester = _.sortBy(allOpportunityInstances, function (oi) {
       return Semesters.toString(oi.semesterID, true);
     });
-    const sortByStudent = _.sortBy(sortBySemester, function (oi) {
-      return Users.getFullName(oi.studentID);
-    });
-    return _.sortBy(sortByStudent, function (oi) {
-      return Opportunities.findDoc(oi.opportunityID).name;
+    return _.sortBy(sortBySemester, function (oi) {
+      return Users.findSlugByID(oi.studentID);
     });
   },
   count() {
@@ -36,8 +33,10 @@ Template.List_Opportunity_Instances_Widget.helpers({
     ];
   },
   name(oi) {
-    return `${Opportunities.findDoc(oi.opportunityID).name}-${Users.findDoc(oi.studentID).username}-
-      ${Semesters.toString(oi.semesterID, true)}`;
+    const oppName = Opportunities.findDoc(oi.opportunityID).name;
+    const username = Users.findDoc(oi.studentID).username;
+    const semester = Semesters.toString(oi.semesterID, true);
+    return `${username}-${oppName}-${semester}`;
   },
 });
 
