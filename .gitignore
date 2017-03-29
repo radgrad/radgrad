@@ -14,7 +14,7 @@ app/private/database/production
 
 # NPM
 node_modules
-npm-debug.log
+npm-debug.*
 
 # GitBook
 _book

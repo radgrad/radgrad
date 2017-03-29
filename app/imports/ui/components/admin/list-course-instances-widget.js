@@ -16,19 +16,21 @@ Template.List_Course_Instances_Widget.helpers({
     const sortBySemester = _.sortBy(allCourseInstances, function (ci) {
       return Semesters.toString(ci.semesterID, true);
     });
-    const sortByStudent = _.sortBy(sortBySemester, function (ci) {
-      return Users.getFullName(ci.studentID);
+    return _.sortBy(sortBySemester, function (ci) {
+      return Users.findSlugByID(ci.studentID);
     });
-    return _.sortBy(sortByStudent, function (ci) {
-      return Courses.findDoc(ci.courseID).name;
-    });
+    // return _.sortBy(sortByStudent, function (ci) {
+    //   return Courses.findDoc(ci.courseID).name;
+    // });
   },
   count() {
     return CourseInstances.count();
   },
   name(courseInstance) {
-    return `${Courses.findDoc(courseInstance.courseID).shortName}-${Users.findDoc(courseInstance.studentID).username}-
-      ${Semesters.toString(courseInstance.semesterID, true)}`;
+    const userSlug = Users.findDoc(courseInstance.studentID).username;
+    const courseNum = Courses.findDoc(courseInstance.courseID).number;
+    const semester = Semesters.toString(courseInstance.semesterID, true);
+    return `${userSlug}-${courseNum}-${semester}`;
   },
   deleteDisabled() {
     return '';
