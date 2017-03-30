@@ -20,13 +20,8 @@ function passedCourseHelper(courseSlugName) {
   }).fetch();
   _.map(ci, (c) => {
     if (c.verified === true) {
-      if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
-          c.grade === 'B' || c.grade === 'B-' || c.grade === 'CR') {
-        ret = 'Completed';
-      } else {
-        ret = 'In plan, but not yet complete';
-      }
-    } else {
+      ret = 'Completed';
+    } else if (ret !== 'Completed') {
       ret = 'In plan, but not yet complete';
     }
   });

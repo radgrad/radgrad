@@ -47,7 +47,10 @@ Template.Student_Explorer_Add_Review_Widget.helpers({
       }).fetch();
     }
     _.map(instances, (instance) => {
-      semesters.push(Semesters.findDoc(instance.semesterID));
+      const semester = Semesters.findDoc(instance.semesterID);
+      if (semester.sortBy < Semesters.getCurrentSemesterDoc().sortBy) {
+        semesters.push(Semesters.findDoc(instance.semesterID));
+      }
     });
     return semesters;
   },
