@@ -31,7 +31,7 @@
                   <!--{{> cacher  template='Semester_List_2' id=(summerID year) data=(summerArgs year)}}-->
                 {{/if}}
                 <div class="mobile only" style="margin-top: 1rem;">
-                  {{> Cumulative_Ice_Component year=year}}
+                  <!-- {{> Cumulative_Ice_Component year=year}} -->
                 </div>
               </div>
             {{/each}}
@@ -39,8 +39,8 @@
           <div class="row mobile hidden">
             {{#each year in years}}
               <div class="degreeICE column">
-                <!--{{> Cumulative_Ice_Component year=year}}-->
-                {{> cacher template='Cumulative_Ice_Component' id=year.year data=(cumIceArgs year)}}
+                <!-- {{> Cumulative_Ice_Component year=year}} -->
+                <!-- {{> cacher template='Cumulative_Ice_Component' id=year.year data=(cumIceArgs year)}} -->
               </div>
             {{/each}}
           </div>
