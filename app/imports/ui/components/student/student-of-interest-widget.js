@@ -58,7 +58,8 @@ function matchingCourses() {
         });
       });
     });
-    return matching;
+    // Only display up to the first six matches.
+    return (matching < 7) ? matching : matching.slice(0, 6);
   }
   return [];
 }
@@ -134,7 +135,8 @@ function matchingOpportunities() {
       });
     });
   });
-  return matching;
+  // Only display up to the first six matches.
+  return (matching < 7) ? matching : matching.slice(0, 6);
 }
 
 function hiddenOpportunitiesHelper() {
