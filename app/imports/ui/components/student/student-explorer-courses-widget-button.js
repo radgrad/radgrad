@@ -20,7 +20,10 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
       courseID: course._id,
     }).fetch();
     _.map(ci, function (c) {
-      semesters.push(Semesters.toString(c.semesterID, false));
+      const semester = Semesters.findDoc(c.semesterID);
+      if (semester.sortBy >= Semesters.getCurrentSemesterDoc().sortBy) {
+        semesters.push(Semesters.toString(c.semesterID, false));
+      }
     });
     return semesters;
   },
