@@ -30,20 +30,24 @@
                   {{> Semester_List_2 (summerArgs year)}}
                   <!--{{> cacher  template='Semester_List_2' id=(summerID year) data=(summerArgs year)}}-->
                 {{/if}}
+                <!--
                 <div class="mobile only" style="margin-top: 1rem;">
-                  <!-- {{> Cumulative_Ice_Component year=year}} -->
+                   {{> Cumulative_Ice_Component year=year}}
                 </div>
+                -->
               </div>
             {{/each}}
           </div>
+          <!--
           <div class="row mobile hidden">
             {{#each year in years}}
               <div class="degreeICE column">
-                <!-- {{> Cumulative_Ice_Component year=year}} -->
-                <!-- {{> cacher template='Cumulative_Ice_Component' id=year.year data=(cumIceArgs year)}} -->
+                {{> Cumulative_Ice_Component year=year}}
+                {{> cacher template='Cumulative_Ice_Component' id=year.year data=(cumIceArgs year)}}
               </div>
             {{/each}}
           </div>
+          -->
           <div class="row">
             <div class="column">
               {{#if hasPrevYear}}
