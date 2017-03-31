@@ -12,9 +12,9 @@ const addSchema = new SimpleSchema({
   opportunity: { type: String, optional: false },
   verified: { type: String, optional: false },
   user: { type: String, optional: false },
-  innovation: { type: Number, optional: false, min: 0, max: 100 },
-  competency: { type: Number, optional: false, min: 0, max: 100 },
-  experience: { type: Number, optional: false, min: 0, max: 100 },
+  innovation: { type: Number, optional: true, min: 0, max: 100 },
+  competency: { type: Number, optional: true, min: 0, max: 100 },
+  experience: { type: Number, optional: true, min: 0, max: 100 },
 });
 
 
