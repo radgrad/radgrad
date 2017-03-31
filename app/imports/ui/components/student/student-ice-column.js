@@ -220,18 +220,6 @@ Template.Student_Ice_Column.helpers({
     const opportunity = Opportunities.findDoc(opp.opportunityID);
     return opportunity.name;
   },
-  opportunitySemesters(opp) {
-    const semesters = opp.semesterIDs;
-    let semesterNames = '';
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSemester = Semesters.findDoc(currentSemesterID);
-    _.map(semesters, (sem) => {
-      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
-        semesterNames = semesterNames.concat(`${Semesters.toString(sem)}, `);
-      }
-    });
-    return semesterNames.slice(0, -2); // removes unnecessary comma and space
-  },
   opportunitySlug(opportunity) {
     if (opportunity.opportunityID) {
       return Slugs.findDoc(Opportunities.findDoc(opportunity.opportunityID).slugID).name;

@@ -26,7 +26,7 @@ Template.Student_Layout.helpers({
     }
     return null;
   },
-  projectedICE() {
+  plannedICE() {
     if (getRouteUserName()) {
       return Users.getProjectedICE(getStudentDoc()._id);
     }

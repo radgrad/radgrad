@@ -34,14 +34,26 @@ Template.User_Course_Component.helpers({
   coursesPlanned() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      return getICSCourses(userID, false);
+      const courses = getICSCourses(userID, false);
+      const noRepeat = _.map(_.groupBy(courses, function (course) {
+        return course.courseID;
+      }), function (grouped) {
+        return grouped[0];
+      });
+      return noRepeat;
     }
     return null;
   },
   coursesTaken() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      return getICSCourses(userID, true);
+      const courses = getICSCourses(userID, true);
+      const noRepeat = _.map(_.groupBy(courses, function (course) {
+        return course.courseID;
+      }), function (grouped) {
+        return grouped[0];
+      });
+      return noRepeat;
     }
     return null;
   },

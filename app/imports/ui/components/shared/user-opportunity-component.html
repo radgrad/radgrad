@@ -1,28 +1,28 @@
 <template name="User_Opportunity_Component">
   <div class="ui fluid accordion">
-    <div class="title" style="text-align: center">
+    <div class="title">
       <i class="dropdown icon"></i>
       <strong>OPPORTUNITIES</strong>
     </div>
     <div class="content">
-      <div class="ui two column stackable grid">
-        <div class="center aligned column">
+      <div class="ui two column stackable grid" style="padding-top:10px">
+        <div class="column">
           <h5>COMPLETED {{> Widget_Header_Number inputValue=(count true)}}</h5>
-          <ol class="ui small list">
+          <div class="ui small list">
             {{#each oi in opportunitiesCompleted}}
-              <li li value="-"><a href="{{opportunityURL oi}}">{{opportunityName oi}} ({{opportunitySemester oi}})</a>
-              </li>
+              <div class="item"><a href="{{opportunityURL oi}}">{{opportunityName oi}}</a>
+              </div>
             {{/each}}
-          </ol>
+          </div>
         </div>
-        <div class="center aligned column">
+        <div class="column">
           <h5>PLANNED {{> Widget_Header_Number inputValue=(count false)}}</h5>
-          <ol class="ui small list">
+          <div class="ui small list">
             {{#each oi in opportunitiesPlanned}}
-              <li li value="-"><a href="{{opportunityURL oi}}">{{opportunityName oi}} ({{opportunitySemester oi}})</a>
-              </li>
+              <div class="item"><a href="{{opportunityURL oi}}">{{opportunityName oi}}</a>
+              </div>
             {{/each}}
-          </ol>
+          </div>
         </div>
       </div>
     </div>

@@ -38,7 +38,7 @@ Template.Student_Feed_Widget.helpers({
     return feed.picture;
   },
   feeds() {
-    return Feeds.find().fetch();
+    return Feeds.find({}, { sort: { timestamp: -1 } });
   },
   feedTimestamp(feed) {
     let ret = '';

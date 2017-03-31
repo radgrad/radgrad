@@ -12,9 +12,9 @@
       {{#if displayLevelAndIce}}
         <div class="item">
           <a href="{{pathFor levelsRouteName username=routeUserName}}">{{> First_Menu_Level_Icon level=level}}</a>
-          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-right: 5px;">{{> First_Menu_Ice earned=earnedICE.i projected=projectedICE.i iceType="innov" includeLink=true}}</a>
-          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-right: 5px;">{{> First_Menu_Ice earned=earnedICE.c projected=projectedICE.c iceType="comp" includeLink=true}}</a>
-          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.e projected=projectedICE.e iceType="exp" includeLink=true}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-right: 5px;">{{> First_Menu_Ice earned=earnedICE.i planned=plannedICE.i iceType="innov" menu=true}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}" style="margin-right: 5px;">{{> First_Menu_Ice earned=earnedICE.c planned=plannedICE.c iceType="comp" menu=true}}</a>
+          <a href="{{pathFor iceRouteName username=routeUserName}}">{{> First_Menu_Ice earned=earnedICE.e planned=plannedICE.e iceType="exp" menu=true}}</a>
         </div>
       {{/if}}
 

@@ -33,14 +33,26 @@ Template.User_Opportunity_Component.helpers({
   opportunitiesPlanned() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      return getOpportunities(userID, false);
+      const opportunities = getOpportunities(userID, false);
+      const noRepeat = _.map(_.groupBy(opportunities, function (opp) {
+        return opp.opportunityID;
+      }), function (grouped) {
+        return grouped[0];
+      });
+      return noRepeat;
     }
     return null;
   },
   opportunitiesCompleted() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      return getOpportunities(userID, true);
+      const opportunities = getOpportunities(userID, true);
+      const noRepeat = _.map(_.groupBy(opportunities, function (opp) {
+        return opp.opportunityID;
+      }), function (grouped) {
+        return grouped[0];
+      });
+      return noRepeat;
     }
     return null;
   },
