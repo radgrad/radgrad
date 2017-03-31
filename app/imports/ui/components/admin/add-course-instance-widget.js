@@ -30,8 +30,9 @@ Template.Add_Course_Instance_Widget.helpers({
     return Semesters.find({});
   },
   students() {
-    return Roles.getUsersInRole([ROLE.STUDENT]);
-  },
+    const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
+    const sorted = _.sortBy(students, 'lastName');
+    return sorted;  },
   courses() {
     return Courses.find({}, { sort: { number: 1 } });
   },

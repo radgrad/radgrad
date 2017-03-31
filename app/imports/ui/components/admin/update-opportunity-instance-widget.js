@@ -26,8 +26,9 @@ Template.Update_Opportunity_Instance_Widget.helpers({
     return Semesters.find({});
   },
   students() {
-    return Roles.getUsersInRole([ROLE.STUDENT]);
-  },
+    const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
+    const sorted = _.sortBy(students, 'lastName');
+    return sorted;  },
   opportunityInstance() {
     const oi = OpportunityInstances.findDoc(Template.currentData().updateID.get());
     return oi;
