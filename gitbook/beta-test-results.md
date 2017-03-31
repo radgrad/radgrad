@@ -1,4 +1,4 @@
-# Spring 2017 Usability Test Results
+# Spring 2017 Beta Test Results
 
 ## Subject A (March 13, 2017)
 
