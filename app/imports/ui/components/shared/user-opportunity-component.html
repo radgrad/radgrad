@@ -10,7 +10,7 @@
           <h5>COMPLETED {{> Widget_Header_Number inputValue=(count true)}}</h5>
           <div class="ui small list">
             {{#each oi in opportunitiesCompleted}}
-              <div class="item"><a href="{{opportunityURL oi}}">{{opportunityName oi}} ({{opportunitySemester oi}})</a>
+              <div class="item"><a href="{{opportunityURL oi}}">{{opportunityName oi}}</a>
               </div>
             {{/each}}
           </div>
@@ -19,7 +19,7 @@
           <h5>PLANNED {{> Widget_Header_Number inputValue=(count false)}}</h5>
           <div class="ui small list">
             {{#each oi in opportunitiesPlanned}}
-              <div class="item"><a href="{{opportunityURL oi}}">{{opportunityName oi}} ({{opportunitySemester oi}})</a>
+              <div class="item"><a href="{{opportunityURL oi}}">{{opportunityName oi}}</a>
               </div>
             {{/each}}
           </div>
