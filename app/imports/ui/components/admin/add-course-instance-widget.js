@@ -13,12 +13,8 @@ const addSchema = new SimpleSchema({
   verified: { type: String, optional: false },
   fromSTAR: { type: String, optional: false },
   grade: { type: String, optional: false },
-  creditHrs: { type: String, optional: false },
-  note: { type: String, optional: false },
+  note: { type: String, optional: true },
   user: { type: String, optional: false },
-  innovation: { type: Number, optional: false, min: 0, max: 100 },
-  competency: { type: Number, optional: false, min: 0, max: 100 },
-  experience: { type: Number, optional: false, min: 0, max: 100 },
 });
 
 Template.Add_Course_Instance_Widget.onCreated(function onCreated() {
@@ -49,6 +45,9 @@ Template.Add_Course_Instance_Widget.events({
       FormUtils.convertICE(newData);
       newData.verified = (newData.verified === 'true');
       newData.fromSTAR = (newData.fromSTAR === 'true');
+      if (!newData.note) {
+        newData.note = Courses.findDoc(newData.course).number;
+      }
       FormUtils.renameKey(newData, 'user', 'student');
       CourseInstances.define(newData);
       FormUtils.indicateSuccess(instance, event);

@@ -15,14 +15,7 @@
       </div>
       <div class="fields">
         {{> Input_Form_Field label="Grade" name="grade" errorMessage=(fieldError "grade") required=true }}
-        {{> Input_Form_Field label="CreditHrs" name="creditHrs" errorMessage=(fieldError "creditHrs") required=true }}
-        {{> Input_Form_Field label="Note" name="note" errorMessage=(fieldError "note") required=true }}
-      </div>
-
-      <div class="fields">
-        {{> Input_Form_Field label="Innovation" name="innovation" errorMessage=(fieldError "innovation") required=true type="number"}}
-        {{> Input_Form_Field label="Competency" name="competency" errorMessage=(fieldError "competency") required=true type="number"}}
-        {{> Input_Form_Field label="Experience" name="experience" errorMessage=(fieldError "experience") required=true type="number"}}
+        {{> Input_Form_Field label="Note" name="note" errorMessage=(fieldError "note") required=false }}
       </div>
 
       <button class="ui green basic button" type="submit">Add</button>
