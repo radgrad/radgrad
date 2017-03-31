@@ -3,7 +3,7 @@
     <div class="ui basic green mini right floated button">
       <div class="chooseSemester">ADD TO PLAN</div>
       <div class="ui fluid popup mini transition hidden">
-        <div class="ui vertical menu">
+        <div class="ui vertical mini menu">
           {{#if empty (opportunitySemesters item)}}
             <a class="item" data-position="right center">No available future semesters</a>
           {{else}}
@@ -19,7 +19,7 @@
       <div class="ui basic green mini right floated button">
         <div class="chooseSemester">REMOVE FROM PLAN</div>
         <div class="ui fluid popup transition hidden">
-          <div class="ui vertical menu">
+          <div class="ui vertical mini menu">
             {{#each semester in existingSemesters}}
               <a class="item removeFromPlan" data-position="right center">{{semester}}</a>
             {{/each}}
