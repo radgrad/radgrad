@@ -25,5 +25,5 @@ Template.Course_Form_Field.helpers({
       return course.number;
     }
     return 'NONE';
-  }
+  },
 });

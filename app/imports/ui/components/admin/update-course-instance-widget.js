@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
@@ -74,7 +76,8 @@ Template.Update_Course_Instance_Widget.events({
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
-    if (instance.context.isValid()) {
+    if (instance.context.isValid() &&
+        !CourseInstances.isCourseInstance(updatedData.semester, updatedData.course, updatedData.user)) {
       FormUtils.convertICE(updatedData);
       updatedData.verified = (updatedData.verified === 'true');
       updatedData.fromSTAR = (updatedData.fromSTAR === 'true');
