@@ -1,7 +1,7 @@
 <template name="First_Menu_Ice">
   {{#if menu}}
   <div class="radgrad-ice menu">
-      <a class="radgrad-ice-circle {{pClass projected}} radgrad-proj-{{iceType}}" href="{{pathFor iceRouteName username=routeUserName}}">
+      <a class="radgrad-ice-circle {{pClass planned}} radgrad-proj-{{iceType}}" href="{{pathFor iceRouteName username=routeUserName}}">
         <div class="radgrad-ice-stat">
           <span>{{earned}}</span>
         </div>
@@ -20,7 +20,7 @@
     </div>
   {{else}}
     <div class="radgrad-ice">
-      <div class="radgrad-ice-circle {{pClass projected}} radgrad-proj-{{iceType}}" href="{{pathFor iceRouteName username=routeUserName}}">
+      <div class="radgrad-ice-circle {{pClass planned}} radgrad-proj-{{iceType}}" href="{{pathFor iceRouteName username=routeUserName}}">
         <div style="position: absolute; z-index: 1; left: -22px; top:48px; width: 3.45em; font-size:0.40em">
           <span>{{earned}}</span>
         </div>

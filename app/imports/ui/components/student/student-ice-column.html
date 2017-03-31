@@ -31,16 +31,16 @@
       {{/if}}
     </div>
 
-      <!-- Planned -->
+      <!-- Not earned -->
       <div class="title">
       <i class="dropdown icon"></i>
-      Planned <div class="ui right floated {{#with getTypeColors}}{{projColor}}{{/with}}">{{points plannedICE}} pts</div>
+      Not Yet Earned <div class="ui right floated {{#with getTypeColors}}{{projColor}}{{/with}}">{{remainingICE (points earnedICE) (points plannedICE) }} pts</div>
     </div>
     <div class="content">
-      {{#if matchingPoints (points plannedICE) (points earnedICE)}}
-        <p>You have earned all of your {{points plannedICE}} planned {{type}} points.</p>
+      {{#if matchingPoints (points plannedICE) 0}}
+        <p>You have earned all of your planned points.</p>
       {{else}}
-        <p>You have a total of {{points plannedICE}} planned {{type}} points, with {{remainingICE (points earnedICE) (points plannedICE) }} unearned points for the following:</p>
+        <p>You have a total of {{remainingICE (points earnedICE) (points plannedICE) }} not yet earned {{type}} points.</p>
         <div class="ui very relaxed list">
           {{#each year in years}}
             {{#each semester in semesters year}}
