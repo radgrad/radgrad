@@ -16,8 +16,14 @@ Template.Course_Form_Field.helpers({
   },
   name(course) {
     if (course.name) {
-      return course.name;
+      return course.shortName;
     }
     return 'NONE';
   },
+  number(course) {
+    if (course.number) {
+      return course.number;
+    }
+    return 'NONE';
+  }
 });

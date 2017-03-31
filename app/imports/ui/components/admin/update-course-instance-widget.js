@@ -57,7 +57,7 @@ Template.Update_Course_Instance_Widget.helpers({
     return !course.fromSTAR;
   },
   courses() {
-    return Courses.find({}, { sort: { name: 1 } });
+    return Courses.find({}, { sort: { number: 1 } });
   },
   course() {
     const course = CourseInstances.findDoc(Template.currentData().updateID.get());
