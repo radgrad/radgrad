@@ -11,4 +11,7 @@ Template.First_Menu_Ice.helpers({
   iceRouteName() {
     return RouteNames.studentHomeIcePageRouteName;
   },
+  equalTo(type) {
+    return this.type === type;
+  },
 });
