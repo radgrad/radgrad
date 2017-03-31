@@ -91,8 +91,8 @@ export function indicateSuccess(instance, event) {
  * @param instance The template instance.
  */
 export function indicateError(instance) {
-  instance.successClass.set('');
   instance.errorClass.set('error');
+  instance.successClass.set('');
 }
 
 export function processCancelButtonClick(event, instance) {

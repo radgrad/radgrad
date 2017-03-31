@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -13,12 +15,8 @@ const addSchema = new SimpleSchema({
   verified: { type: String, optional: false },
   fromSTAR: { type: String, optional: false },
   grade: { type: String, optional: false },
-  creditHrs: { type: String, optional: false },
-  note: { type: String, optional: false },
+  note: { type: String, optional: true },
   user: { type: String, optional: false },
-  innovation: { type: Number, optional: false, min: 0, max: 100 },
-  competency: { type: Number, optional: false, min: 0, max: 100 },
-  experience: { type: Number, optional: false, min: 0, max: 100 },
 });
 
 Template.Add_Course_Instance_Widget.onCreated(function onCreated() {
@@ -30,10 +28,12 @@ Template.Add_Course_Instance_Widget.helpers({
     return Semesters.find({});
   },
   students() {
-    return Roles.getUsersInRole([ROLE.STUDENT]);
+    const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
+    const sorted = _.sortBy(students, 'lastName');
+    return sorted;
   },
   courses() {
-    return Courses.find({}, { sort: { name: 1 } });
+    return Courses.find({}, { sort: { number: 1 } });
   },
 });
 
@@ -44,10 +44,14 @@ Template.Add_Course_Instance_Widget.events({
     instance.context.resetValidation();
     addSchema.clean(newData);
     instance.context.validate(newData);
-    if (instance.context.isValid()) {
+    if (instance.context.isValid() &&
+        !CourseInstances.isCourseInstance(newData.semester, newData.course, newData.user)) {
       FormUtils.convertICE(newData);
       newData.verified = (newData.verified === 'true');
       newData.fromSTAR = (newData.fromSTAR === 'true');
+      if (!newData.note) {
+        newData.note = Courses.findDoc(newData.course).number;
+      }
       FormUtils.renameKey(newData, 'user', 'student');
       CourseInstances.define(newData);
       FormUtils.indicateSuccess(instance, event);

@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
@@ -30,7 +32,9 @@ Template.Update_Course_Instance_Widget.helpers({
     return Semesters.find({});
   },
   students() {
-    return Roles.getUsersInRole([ROLE.STUDENT]);
+    const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
+    const sorted = _.sortBy(students, 'lastName');
+    return sorted;
   },
   courseInstance() {
     const ci = CourseInstances.findDoc(Template.currentData().updateID.get());
@@ -57,7 +61,7 @@ Template.Update_Course_Instance_Widget.helpers({
     return !course.fromSTAR;
   },
   courses() {
-    return Courses.find({}, { sort: { name: 1 } });
+    return Courses.find({}, { sort: { number: 1 } });
   },
   course() {
     const course = CourseInstances.findDoc(Template.currentData().updateID.get());
@@ -72,7 +76,8 @@ Template.Update_Course_Instance_Widget.events({
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
-    if (instance.context.isValid()) {
+    if (instance.context.isValid() &&
+        !CourseInstances.isCourseInstance(updatedData.semester, updatedData.course, updatedData.user)) {
       FormUtils.convertICE(updatedData);
       updatedData.verified = (updatedData.verified === 'true');
       updatedData.fromSTAR = (updatedData.fromSTAR === 'true');

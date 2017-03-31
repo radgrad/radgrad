@@ -183,6 +183,33 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Returns the courseInstance document associated with semester, course, and student.
+   * @param semester The semester (slug or ID).
+   * @param course The course (slug or ID).
+   * @param student The student (slug or ID)
+   * @returns { Object } Returns the document or null if not found.
+   * @throws { Meteor.Error } If semester, course, or student does not exist.
+   */
+  findCourseInstanceDoc(semester, course, student) {
+    const semesterID = Semesters.getID(semester);
+    const studentID = Users.getID(student);
+    const courseID = Courses.getID(course);
+    return this._collection.findOne({ semesterID, studentID, courseID });
+  }
+
+  /**
+   * Returns true if there exists a CourseInstance for the given semester, course, and student.
+   * @param semester The semester (slug or ID).
+   * @param course The course (slug or ID).
+   * @param student The student (slug or ID).
+   * @returns True if the course instance exists.
+   * @throws { Meteor.Error } If semester, course, or student does not exist.
+   */
+  isCourseInstance(semester, course, student) {
+    return !!this.findCourseInstanceDoc(semester, course, student);
+  }
+
+  /**
    * @returns { boolean } If the course is an ICS course associated with courseInstanceID.
    * @param courseInstanceID The course instance ID.
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.

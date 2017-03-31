@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
@@ -26,7 +27,9 @@ Template.Update_Opportunity_Instance_Widget.helpers({
     return Semesters.find({});
   },
   students() {
-    return Roles.getUsersInRole([ROLE.STUDENT]);
+    const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
+    const sorted = _.sortBy(students, 'lastName');
+    return sorted;
   },
   opportunityInstance() {
     const oi = OpportunityInstances.findDoc(Template.currentData().updateID.get());
@@ -60,7 +63,8 @@ Template.Update_Opportunity_Instance_Widget.events({
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
-    if (instance.context.isValid()) {
+    if (instance.context.isValid() &&
+        !OpportunityInstances.isOpportunityInstance(updatedData.semester, updatedData.opportunity, updatedData.user)) {
       FormUtils.convertICE(updatedData);
       updatedData.verified = (updatedData.verified === 'true');
       FormUtils.renameKey(updatedData, 'semester', 'semesterID');

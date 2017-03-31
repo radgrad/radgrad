@@ -8,7 +8,7 @@ Template.User_Form_Field.helpers({
   isSelected(user, selectedUser) {
     return user === selectedUser;
   },
-  userName(user) {
-    return `${user.firstName} ${user.lastName}`;
+  name(user) {
+    return `${user.lastName}, ${user.firstName}`;
   },
 });
