@@ -1,8 +1,8 @@
-# Spring 2017 Usability Test Design
+# Spring 2017 Beta Test Design
 
-The goals of Spring 2017 RadGrad Usability Test are to: identify problems faced by students and advisors when using the system; collect data useful for improving the system; and determine overall satisfaction with the current design of RadGrad by these two user roles. 
+The goals of Spring 2017 RadGrad Beta Test are to: identify problems faced by students and advisors when using the system; collect data useful for improving the system; and determine overall satisfaction with the current design of RadGrad by these two user roles. 
 
-This usability test will not assess users in the faculty or mentor roles.
+This beta test will not assess users in the faculty or mentor roles.
 
 ## Test Plan: Students
 

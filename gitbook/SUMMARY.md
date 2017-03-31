@@ -41,9 +41,9 @@
   * [meteor npm run start](developerguide/meteor-guidelines.md#meteor-npm-run-start)
   * [meteor npm run lint](developerguide/meteor-guidelines.md#meteor-npm-run-lint)
   * [meteor npm run test-watch](developerguide/meteor-guidelines.md#meteor-npm-run-test-watch)
-* Spring 2017 Usability Test
-  * [Design](usability-test.md)
-  * [Results](usability-test-results.md)
+* Spring 2017 Beta Test
+  * [Design](beta-test.md)
+  * [Results](beta-test-results.md)
 
 ### Data Model
 
