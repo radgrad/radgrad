@@ -30,7 +30,7 @@ Template.Add_Opportunity_Instance_Widget.helpers({
     return Roles.getUsersInRole([ROLE.STUDENT]);
   },
   opportunities() {
-    return Opportunities.find().fetch();
+    return Opportunities.find({}, { sort: { name: 1 } });
   },
 });
 

@@ -33,7 +33,7 @@ Template.Add_Course_Instance_Widget.helpers({
     return Roles.getUsersInRole([ROLE.STUDENT]);
   },
   courses() {
-    return Courses.find().fetch();
+    return Courses.find({}, { sort: { name: 1 } });
   },
 });
 

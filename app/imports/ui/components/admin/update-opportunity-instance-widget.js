@@ -45,7 +45,7 @@ Template.Update_Opportunity_Instance_Widget.helpers({
     return !opportunity.verified;
   },
   opportunities() {
-    return Opportunities.find().fetch();
+    return Opportunities.find({}, { sort: { name: 1 } });
   },
   opportunity() {
     const opportunity = OpportunityInstances.findDoc(Template.currentData().updateID.get());
