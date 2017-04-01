@@ -152,7 +152,7 @@ export class FeedbackFunctionClass {
             const id = Slugs.getEntityID(s, 'Course');
             const course = Courses.findDoc(id);
             // eslint-disable-next-line max-len
-            description = `${description} [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}) or `;
+            description = `${description} [${course.number} ${course.shortName}](${basePath}explorer/courses/${s}) or `;
           });
           description = description.substring(0, description.length - 4);
           description = `${description}, `;
