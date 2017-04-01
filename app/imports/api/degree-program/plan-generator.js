@@ -129,19 +129,6 @@ function removeTakenCourses(student, degreeList) {
   const passedIDs = getPassedCourseIDs(student);
   const missing = _missingCourses(passedIDs, degreeList);
   return missing;
-  // const takenCourses = getPassedCourseInstances(student);
-  // _.map(takenCourses, (instance) => {
-  //   const courseSlug = CourseInstances.getCourseSlug(instance._id);
-  //   const index = _.indexOf(degreeList, courseSlug);
-  //   if (index !== -1) {
-  //     degreeList.splice(index, 1);
-  //   } else
-  //     if (courseSlug.startsWith('ics4') || instance.note.startsWith('ICS 6')) {
-  //       const fourIndex = _.indexOf(degreeList, 'ics4xx');
-  //       degreeList.splice(fourIndex, 1);
-  //       // console.log(`${student.username} took ${courseSlug}, but it isn't a required course`);
-  //     }
-  // });
 }
 
 function hasPrerequisites(courseSlug, takenCourseSlugs) {
@@ -236,9 +223,9 @@ export function generateBSDegreePlan(student, startSemester) {
   degreeList = removeTakenCourses(student, degreeList);
   // console.log('degreeList', degreeList);
   let semester = startSemester;
-  let ice;
-  const chosenOpportunites = [];
-  let oppDefn;
+  // let ice;
+  // const chosenOpportunites = [];
+  // let oppDefn;
 
   // Define the First Academic Year
   if (semester.term === Semesters.SPRING) {
@@ -260,20 +247,20 @@ export function generateBSDegreePlan(student, startSemester) {
     }
     // Define the opportunity instance for the semester
     // Choose an opportunity.
-    const semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, i, student._id);
-    if (semesterOpportunity) {
-      ice = getPlanningICE(chosenOpportunites);
-      chosenOpportunites.push(semesterOpportunity);
-      if (ice.i < 100 || ice.e < 100) {
-        oppDefn = {
-          semester: Semesters.getSlug(semester._id),
-          opportunity: Opportunities.getSlug(semesterOpportunity._id),
-          verified: false,
-          student: student.username,
-        };
-        OpportunityInstances.define(oppDefn);
-      }
-    }
+    // const semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, i, student._id);
+    // if (semesterOpportunity) {
+    //   ice = getPlanningICE(chosenOpportunites);
+    //   chosenOpportunites.push(semesterOpportunity);
+    //   if (ice.i < 100 || ice.e < 100) {
+    //     oppDefn = {
+    //       semester: Semesters.getSlug(semester._id),
+    //       opportunity: Opportunities.getSlug(semesterOpportunity._id),
+    //       verified: false,
+    //       student: student.username,
+    //     };
+    //     OpportunityInstances.define(oppDefn);
+    //   }
+    // }
     semester = semUtils.nextSemester(semester);
     i += 1;
   }
@@ -290,20 +277,20 @@ export function generateBSDegreePlan(student, startSemester) {
     }
     // Define the opportunity instance for the semester
     // Choose an opportunity.
-    const semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, i, student._id);
-    if (semesterOpportunity) {
-      ice = getPlanningICE(chosenOpportunites);
-      chosenOpportunites.push(semesterOpportunity);
-      if (ice.i < 100 || ice.e < 100) {
-        oppDefn = {
-          semester: Semesters.getSlug(semester._id),
-          opportunity: Opportunities.getSlug(semesterOpportunity._id),
-          verified: false,
-          student: student.username,
-        };
-        OpportunityInstances.define(oppDefn);
-      }
-    }
+    // const semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, i, student._id);
+    // if (semesterOpportunity) {
+    //   ice = getPlanningICE(chosenOpportunites);
+    //   chosenOpportunites.push(semesterOpportunity);
+    //   if (ice.i < 100 || ice.e < 100) {
+    //     oppDefn = {
+    //       semester: Semesters.getSlug(semester._id),
+    //       opportunity: Opportunities.getSlug(semesterOpportunity._id),
+    //       verified: false,
+    //       student: student.username,
+    //     };
+    //     OpportunityInstances.define(oppDefn);
+    //   }
+    // }
     semester = semUtils.nextSemester(semester);
     i += 1;
   }
@@ -317,9 +304,9 @@ export function generateBADegreePlan(student, startSemester) {
   degreeList = removeTakenCourses(student, degreeList);
   // console.log(degreeList);
   let semester = startSemester;
-  let ice;
-  const chosenOpportunites = [];
-  let oppDefn;
+  // let ice;
+  // const chosenOpportunites = [];
+  // let oppDefn;
 
   // Define the First Academic Year
   if (semester.term === Semesters.SPRING || semester.term === Semesters.SUMMER) {
@@ -341,20 +328,20 @@ export function generateBADegreePlan(student, startSemester) {
     }
     // Define the opportunity instance for the semester
     // Choose an opportunity.
-    const semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, i, student._id);
-    if (semesterOpportunity) {
-      ice = getPlanningICE(chosenOpportunites);
-      chosenOpportunites.push(semesterOpportunity);
-      if (ice.i < 100 || ice.e < 100) {
-        oppDefn = {
-          semester: Semesters.getSlug(semester._id),
-          opportunity: Opportunities.getSlug(semesterOpportunity._id),
-          verified: false,
-          student: student.username,
-        };
-        OpportunityInstances.define(oppDefn);
-      }
-    }
+    // const semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, i, student._id);
+    // if (semesterOpportunity) {
+    //   ice = getPlanningICE(chosenOpportunites);
+    //   chosenOpportunites.push(semesterOpportunity);
+    //   if (ice.i < 100 || ice.e < 100) {
+    //     oppDefn = {
+    //       semester: Semesters.getSlug(semester._id),
+    //       opportunity: Opportunities.getSlug(semesterOpportunity._id),
+    //       verified: false,
+    //       student: student.username,
+    //     };
+    //     OpportunityInstances.define(oppDefn);
+    //   }
+    // }
     // update the semester
     semester = semUtils.nextSemester(semester);
     i += 1;
@@ -369,20 +356,20 @@ export function generateBADegreePlan(student, startSemester) {
     }
     // Define the opportunity instance for the semester
     // Choose an opportunity.
-    const semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, i, student._id);
-    if (semesterOpportunity) {
-      ice = getPlanningICE(chosenOpportunites);
-      chosenOpportunites.push(semesterOpportunity);
-      if (ice.i < 100 || ice.e < 100) {
-        oppDefn = {
-          semester: Semesters.getSlug(semester._id),
-          opportunity: Opportunities.getSlug(semesterOpportunity._id),
-          verified: false,
-          student: student.username,
-        };
-        OpportunityInstances.define(oppDefn);
-      }
-    }
+    // const semesterOpportunity = opportunityUtils.chooseStudentSemesterOpportunity(semester, i, student._id);
+    // if (semesterOpportunity) {
+    //   ice = getPlanningICE(chosenOpportunites);
+    //   chosenOpportunites.push(semesterOpportunity);
+    //   if (ice.i < 100 || ice.e < 100) {
+    //     oppDefn = {
+    //       semester: Semesters.getSlug(semester._id),
+    //       opportunity: Opportunities.getSlug(semesterOpportunity._id),
+    //       verified: false,
+    //       student: student.username,
+    //     };
+    //     OpportunityInstances.define(oppDefn);
+    //   }
+    // }
     // update the semester
     semester = semUtils.nextSemester(semester);
     i += 1;
