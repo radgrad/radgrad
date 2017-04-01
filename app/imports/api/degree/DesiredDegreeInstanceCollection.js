@@ -1,4 +1,5 @@
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { Slugs } from '/imports/api/slug/SlugCollection';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
@@ -23,6 +24,23 @@ class DesiredDegreeInstanceCollection extends BaseInstanceCollection {
     }));
   }
 
+  /**
+   * Defines a DesiredDegreeInstance.
+   * @param degreeSlug
+   * @param startSemesterID
+   * @param coursesPerSemester
+   * @param courseList
+   * @param endSemesterID
+   * @returns {*}
+   */
+  define({ degreeSlug, startSemesterID, coursesPerSemester, courseList, endSemesterID = null }) {
+    const degreeID = Slugs.getID(degreeSlug);
+    const doc = this._collection.find({ degreeID, startSemesterID });
+    if (doc) {
+      return doc._id;
+    }
+    return this._collection.insert({ degreeID, startSemesterID, endSemesterID, coursesPerSemester, courseList });
+  }
 }
 
 /**
