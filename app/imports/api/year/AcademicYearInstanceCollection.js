@@ -5,6 +5,7 @@ import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
+import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -73,6 +74,35 @@ class AcademicYearInstanceCollection extends BaseCollection {
     // Define and return the docID
     return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs });
   }
+
+  /**
+   * Returns the number of CourseInstance for the given AcademicYear. This includes non ics courses.
+   * @param id the AcademicYear ID.
+   * @return {number}
+   */
+  courseInstanceCount(id) {
+    const year = this.findDoc(id);
+    let count = 0;
+    _.map(year.semesterIDs, (semID) => {
+      count += CourseInstances.find({ studentID: year.studentID, semesterID: semID }).count();
+    });
+    return count;
+  }
+
+  /**
+   * Returns the number of ICS CourseInstances for the given AcademicYear.
+   * @param id the AcademicYear ID.
+   * @return {number}
+   */
+  icsCourseInstanceCount(id) {
+    const year = this.findDoc(id);
+    let count = 0;
+    _.map(year.semesterIDs, (semID) => {
+      count += CourseInstances.find({ studentID: year.studentID, semesterID: semID, note: /ICS/ }).count();
+    });
+    return count;
+  }
+
   /**
    * Depending on the logged in user publish only their AcademicYears. If
    * the user is in the Role.ADMIN then publish all AcademicYears. If the
