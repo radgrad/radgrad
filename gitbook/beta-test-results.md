@@ -44,13 +44,13 @@ Observations from review of the screencast:
  
 3. What are three good things about RadGrad?
 
-  * There are so many students who just take classes and don't think beyond them. RadGrad is good at showing the importance of other activities.  Even though professors tell us, the message doesn't sink in.  In RadGrad, the ICE metric drives it home: if you don't do other things, you're just not prepared. 
+  * "There are so many students who just take classes and don't think beyond them. RadGrad is good at showing the importance of other activities.  Even though professors tell us, the message doesn't sink in.  In RadGrad, the ICE metric drives it home: if you don't do other things, you're just not prepared." 
   
 4. What are things that could be improved?
 
   * "I'm not sure, I haven't had the opportunity to look at it in detail. But maybe the ability to customize opportunities or be notified when new opportunities come up?" Notifications are scheduled for implementation in Issue [111](https://github.com/radgrad/radgrad/issues/111). 
   
-  * "Are there links to other resources, leads for us to follow? I could just google..."  (The system does provide links for further reading.)
+  * "Are there links to other resources, leads for us to follow? I guess I could just google..."  (The system does provide links for further reading.)
 
 ## Beta Test Interlude I
 
