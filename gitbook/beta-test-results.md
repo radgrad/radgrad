@@ -6,7 +6,7 @@ Subject A is a Senior in ICS who plans to graduate this year. Subject A had a si
  
 Here are some observations from review of the screencast:
  
-1. On the ICE Points page, the "100" in the circles was confusing (since the subject's ICE score was over 100 in two categories). Recommend showing only the actual ICE value in the circle. The explanatory boxes provide enough breakdown.
+1. On the ICE Points page, the "100" in the circles was confusing (since the subject's ICE score was over 100 in two categories). Recommend showing only the actual ICE value in the circle. The explanatory boxes provide enough breakdown. Addressed in Issue [100](https://github.com/radgrad/radgrad/issues/100)
 
 2. Opportunities scroll off top of screen (already addressed by Aljon).
 
@@ -14,7 +14,7 @@ Here are some observations from review of the screencast:
 
 4. Rating widget for reviews should display all five star options without scrolling.
 
-5. "You're the kind of student who didn't need RadGrad."  "Yes, but I had to put in a lot of extra work to get there. This makes it much simpler to see what you have to do."
+5. In response to telling the subject that you're the kind of student who didn't need RadGrad, the subject responded, "Yes, but I had to put in a lot of extra work to get there. This makes it much simpler to see what you have to do."
 
 6. What are three good things about RadGrad?  
 
@@ -34,11 +34,11 @@ Here are some observations from review of the screencast:
     
 ## Subject B (March 13, 2017)
 
-Subject B is a freshman in ICS who has completed only the first semester of courses.  Subject B ICE score is 10/10/10 (we awarded Level 2).
+Subject B is a freshman in ICS who has completed only the first semester of courses.  Subject B's ICE score is 10/10/10 (we awarded Level 2).
   
 Observations from review of the screencast:
 
-1. Performance is a significant issue; it prevents us from being able to evaluate much of the UI. Loading times for the degree planner and home page are so slow that it inhibits users from retrieving them.  The beta test need to focus more on the overall goals of the system as a result. 
+1. Performance is a significant issue; it currently prevents us from being able to evaluate much of the UI. Loading times for the degree planner and home page are so slow that it inhibits users from retrieving them.  This beta test session needed to focus on the high level goals of the system as a result. 
 
 2. Subject G was interested in how rankings and "relevant" opportunities were computed, because he was interested in the "less popular" interests and how to find them. For example, he was interested in "computer vision" and how to find opportunities specific for that interest. If there's no interest defined for a student's interest, then the system can't help find them.
  
@@ -48,16 +48,16 @@ Observations from review of the screencast:
   
 4. What are things that could be improved?
 
-  * I'm not sure, I haven't had the opportunity to look at it in detail. But maybe the ability to customize opportunities or be notified when new opportunities come up.  
+  * "I'm not sure, I haven't had the opportunity to look at it in detail. But maybe the ability to customize opportunities or be notified when new opportunities come up?" Notifications are scheduled for implementation in Issue [111](https://github.com/radgrad/radgrad/issues/111). 
   
-  * Are there links to other resources, leads for us to follow? I could just google, but it would be nice to have a curated list of resources. 
+  * "Are there links to other resources, leads for us to follow? I could just google..."  (The system does provide links for further reading.)
 
 ## Beta Test Interlude I
 
 Following the first day of beta testing, we realized that we needed to improve the performance of the system prior to doing any further beta testing.  This led to almost two weeks of work to determine the cause of the performance issues and how to address them.  We ultimately addressed the performance problems through two basic changes:
 
   * We implemented subscription caching to avoid subscribe/unsubscribe costs when traversing pages. 
-  * In the degree planner, we removed the Add button from each semester, and the cumulative ICE icons.
+  * In the degree planner, we removed the Add button from each semester, and the cumulative ICE icons, as these were found to be computationally expensive on each page render and were not necessary to the UI.
 
 We made a number of other UI improvements during this time as well, which are summarized in Issues [96](https://github.com/radgrad/radgrad/issues/96), [97](https://github.com/radgrad/radgrad/issues/97), and [98](https://github.com/radgrad/radgrad/issues/98).
 
