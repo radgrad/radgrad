@@ -12,6 +12,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { emptyICSAcademicYears } from '../../../api/year/AcademicYearUtilities';
 
 // import { Logger } from 'meteor/jag:pince';
 // const ap = new Logger('AP');
@@ -28,7 +29,7 @@ Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   // ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Academic_Plan.onCreated`);
   this.state = new ReactiveDict();
   this.startYear = new ReactiveVar();
-  // document.getElementsByTagName('body')[0].style.cursor = 'progress';
+  // console.log(emptyICSAcademicYears(getUserIdFromRoute()));
 });
 
 Template.Academic_Plan.helpers({

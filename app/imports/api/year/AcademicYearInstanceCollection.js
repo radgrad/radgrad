@@ -6,6 +6,7 @@ import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
+import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -99,6 +100,21 @@ class AcademicYearInstanceCollection extends BaseCollection {
     let count = 0;
     _.map(year.semesterIDs, (semID) => {
       count += CourseInstances.find({ studentID: year.studentID, semesterID: semID, note: /ICS/ }).count();
+    });
+    return count;
+  }
+
+  /**
+   * Returns the number of ICS CourseInstances and OpportunityInstances for the given AcademicYear.
+   * @param id
+   * @return {number}
+   */
+  icsCiAndOppCount(id) {
+    const year = this.findDoc(id);
+    let count = 0;
+    _.map(year.semesterIDs, (semID) => {
+      count += CourseInstances.find({ studentID: year.studentID, semesterID: semID, note: /ICS/ }).count();
+      count += OpportunityInstances.find({ studentID: year.studentID, semesterID: semID }).count();
     });
     return count;
   }

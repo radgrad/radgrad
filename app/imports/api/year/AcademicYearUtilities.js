@@ -40,33 +40,16 @@ export function getStudentSemesters(studentID) {
 }
 
 /**
- * Returns the semesters the student has taken or is planning on taking an ICS course.
- * @param studentID the student's ID.
- * @return {Array}
- */
-export function getStudentICSSemesters(studentID) {
-  const years = AcademicYearInstances.find({ studentID }, { $sort: { year: 1 } }).fetch();
-  let semesters = [];
-  _.map(years, (ay) => {
-    semesters = _.concat(semesters, ay.semesterIDs);
-  });
-  const cis = CourseInstances.find({
-    studentID,
-    note: /ICS/,
-  }).fetch();
-  let courseSemesters = [];
-  _.map(cis, (ci) => {
-    courseSemesters.push(ci.semesterID);
-  });
-  courseSemesters = _.uniq(courseSemesters);
-  return semesters;
-}
-
-/**
  * Returns an array of the AcademicYears with no ICS CourseInstances in them.
  * @param studentID
  */
 export function emptyICSAcademicYears(studentID) {
   const years = AcademicYearInstances.find({ studentID }, { $sort: { year: 1 } }).fetch();
-
+  const emptyYears = [];
+  _.map(years, (ay) => {
+    if (AcademicYearInstances.icsCiAndOppCount(ay._id) <= 0) {
+      emptyYears.push(ay);
+    }
+  });
+  return emptyYears;
 }
