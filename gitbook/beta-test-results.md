@@ -6,7 +6,7 @@ Subject A is a Senior in ICS who plans to graduate this year. Subject A had a si
  
 Here are some observations from review of the screencast:
  
-1. On the ICE Points page, the "100" in the circles was confusing (since the subject's ICE score was over 100 in two categories). Recommend showing only the actual ICE value in the circle. The explanatory boxes provide enough breakdown. Addressed in Issue [100](https://github.com/radgrad/radgrad/issues/100)
+1. On the ICE Points page, the "100" in the circles was confusing (since the subject's ICE score was over 100 in two categories). Recommend showing only the actual ICE value in the circle. The explanatory boxes provide enough breakdown. Addressed in Issue [100](https://github.com/radgrad/radgrad/issues/100).
 
 2. Opportunities scroll off top of screen (already addressed by Aljon).
 
