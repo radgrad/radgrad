@@ -4,6 +4,7 @@ import { Feeds } from '../../../api/feed/FeedCollection';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
@@ -34,12 +35,7 @@ Template.Add_Review_Widget.helpers({
     return ['course', 'opportunity'];
   },
   ratings() {
-    return [{ score: 1, description: '1 (In general, this is one of the worst ICS ' +
-    'courses/opportunities I have ever taken)' },
-      { score: 2, description: '2 (In general, this is below average for an ICS course/opportunity)' },
-      { score: 3, description: '3 (In general, this is an average ICS course/opportunity)' },
-      { score: 4, description: '4 (In general, this is above average for an ICS course/opportunity)' },
-      { score: 5, description: '5 (In general, this is one of the best ICS courses/opportunities I have ever taken)' }];
+    return reviewRatingsObjects;
   },
 });
 

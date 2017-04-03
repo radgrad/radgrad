@@ -6,6 +6,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 const editSchema = new SimpleSchema({
@@ -20,13 +21,7 @@ Template.Student_Explorer_Edit_Review_Widget.onCreated(function onCreated() {
 
 Template.Student_Explorer_Edit_Review_Widget.helpers({
   ratings() {
-    return [{ score: 1, description: '(In general, this is one of the worst ICS ' +
-    'courses/opportunities I have ever participated in)' },
-      { score: 2, description: '(In general, this is below average for an ICS course/opportunity)' },
-      { score: 3, description: '(In general, this is an average ICS course/opportunity)' },
-      { score: 4, description: '(In general, this is above average for an ICS course/opportunity)' },
-    { score: 5, description: '(In general, this is one of the best ICS courses/opportunities ' +
-      'I have ever participated in)' }];
+    return reviewRatingsObjects;
   },
   semesters() {
     const semesters = [];

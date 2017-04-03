@@ -19,6 +19,8 @@ import './interest-list.js';
 import './moderation.html';
 import './moderation.js';
 
+import './review-ratings.js';
+
 import './route-user-name.js';
 
 import '../advisor/student-selector-widget.html';
