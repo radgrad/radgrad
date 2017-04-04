@@ -86,7 +86,7 @@ class CourseInstanceCollection extends BaseCollection {
     const studentID = Users.getID(student);
     const user = Users.findDoc(studentID);
     // ensure the AcademicYearInstance is defined.
-    if (semester.term === Semesters.SPRING || semester.term === Semesters.SUMMER) {
+    if (semesterDoc.term === Semesters.SPRING || semesterDoc.term === Semesters.SUMMER) {
       AcademicYearInstances.define({ year: semesterDoc.year - 1, student: user.username });
     } else {
       AcademicYearInstances.define({ year: semesterDoc.year, student: user.username });

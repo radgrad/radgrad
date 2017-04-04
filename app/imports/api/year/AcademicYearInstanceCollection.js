@@ -158,5 +158,6 @@ class AcademicYearInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const AcademicYearInstances = new AcademicYearInstanceCollection();
-radgradCollections.push(AcademicYearInstances);
+// We are not going to persist AcademicYearInstances
+// radgradCollections.push(AcademicYearInstances);
 
