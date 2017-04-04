@@ -236,7 +236,7 @@ function addOpportunities(student, semester) {
   };
   OpportunityInstances.define(oppDefn);
   const securityInterest = Interests.findDoc({ name: 'Security' });
-  if (_.indexOf(securityInterest._id, student.interestIDs) !== -1) {
+  if (_.indexOf(student.interestIDs, securityInterest._id) !== -1) {
     oppDefn = {
       semester: Semesters.getSlug(semester._id),
       opportunity: 'greyhats',
