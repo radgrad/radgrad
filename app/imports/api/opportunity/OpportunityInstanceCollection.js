@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { ROLE } from '/imports/api/role/Role';
+import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
@@ -53,13 +54,20 @@ class OpportunityInstanceCollection extends BaseCollection {
   define({ semester, opportunity, verified = false, student }) {
     // Validate semester, opportunity, verified, and studentID
     const semesterID = Semesters.getID(semester);
+    const semesterDoc = Semesters.findDoc(semesterID);
     const studentID = Users.getID(student);
+    const user = Users.findDoc(studentID);
     const opportunityID = Opportunities.getID(opportunity);
+    if (semesterDoc.term === Semesters.SPRING || semesterDoc.term === Semesters.SUMMER) {
+      AcademicYearInstances.define({ year: semesterDoc.year - 1, student: user.username });
+    } else {
+      AcademicYearInstances.define({ year: semesterDoc.year, student: user.username });
+    }
     if ((typeof verified) !== 'boolean') {
       throw new Meteor.Error(`${verified} is not a boolean.`);
     }
     if (this.isOpportunityInstance(semester, opportunity, student)) {
-      throw new Meteor.Error(`An opportunity instance exists for ${semester}, ${student}, and ${opportunity}`);
+      return this.findOpportunityInstanceDoc(semester, opportunity, student)._id;
     }
     const ice = Opportunities.findDoc(opportunityID).ice;
     // Define and return the new OpportunityInstance
