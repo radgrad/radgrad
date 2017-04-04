@@ -27,7 +27,7 @@ export const plannerKeys = {
 Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
   // ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Academic_Plan.onCreated`);
   this.state = new ReactiveDict();
-  this.startYear = new ReactiveVar();
+  this.startYearIndex = new ReactiveVar();
   // document.getElementsByTagName('body')[0].style.cursor = 'progress';
 });
 
@@ -76,7 +76,7 @@ Template.Academic_Plan.helpers({
     }, { sort: { year: 1 } }).fetch();
     if (ays.length > 0) {
       // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end hasNextYear`);
-      return ays[ays.length - 1].year > instance.startYear.get();
+      return instance.startYearIndex.get() < ays.length - 4;
     }
     return false;
   },
@@ -88,7 +88,7 @@ Template.Academic_Plan.helpers({
     }, { sort: { year: 1 } }).fetch();
     if (ays.length > 0) {
       // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end hasPrevYear`);
-      return ays[0].year < instance.startYear.get() - 3;
+      return instance.startYearIndex.get() > 0;
     }
     return false;
   },
@@ -215,22 +215,47 @@ Template.Academic_Plan.helpers({
   },
   years() {
     // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} start years`);
-    // window.camDebugging.start('ap.years');
-    // debugger
     const studentID = getUserIdFromRoute();
     const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
+    // We always want to show 4 AYs.
     const instance = Template.instance();
-    if (ay.length > 0 && !instance.startYear.get()) {
-      instance.startYear.set(ay[ay.length - 1].year);  // TODO: Do we want to show the future or the past?
+    if (ay.length > 0 && typeof instance.startYearIndex.get() === 'undefined') {
+      const currentSemID = Semesters.getCurrentSemester();
+      let currentAyIndex = -1;
+      let index = 0;
+      _.map(ay, (aYear) => {
+        if (_.indexOf(aYear.semesterIDs, currentSemID) !== -1) {
+          currentAyIndex = index;
+        }
+        index += 1;
+      });
+      if (currentAyIndex !== -1) {
+        if (currentAyIndex > 0 && currentAyIndex < ay.length - 4) {
+          instance.startYearIndex.set(currentAyIndex - 1);
+        } else
+          if (currentAyIndex > 0 && currentAyIndex >= ay.length - 4) {
+            instance.startYearIndex.set(ay.length - 4);
+          } else {
+            instance.startYearIndex.set(0);
+          }
+      } else {
+        instance.startYearIndex.set(0);
+      }
     }
     const ret = _.filter(ay, function filter(academicYear) {
-      const year = academicYear.year;
-      if (year >= instance.startYear.get() - 3 && year <= instance.startYear.get()) {
-        return true;
+      const index = _.indexOf(ay, academicYear);
+      const yearIndex = instance.startYearIndex.get();
+      if (index < yearIndex) {
+        // startIndex is 0 just show 0 - 3
+        // show startIndex -1 through startIndex + 2
+        // show len - 4 throug len - 1
+        return false;
       }
-      return false;
+      if (index > yearIndex + 3) {
+        return false;
+      }
+      return true;
     });
-    // window.camDebugging.stop('ap.years');
     // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end years ${ret.length}`);
     return ret;
   },
@@ -252,8 +277,8 @@ Template.Academic_Plan.events({
     // ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} click nextYear`);
     // window.camDebugging.start('click nextYear');
     event.preventDefault();
-    const year = Template.instance().startYear.get();
-    Template.instance().startYear.set(year + 1);
+    const year = Template.instance().startYearIndex.get();
+    Template.instance().startYearIndex.set(year + 1);
     // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Done: click nextYear`);
     // window.camDebugging.stop('click nextYear');
   },
@@ -261,8 +286,8 @@ Template.Academic_Plan.events({
     // ap.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} click prevYear`);
     // window.camDebugging.start('click prevYear');
     event.preventDefault();
-    const year = Template.instance().startYear.get();
-    Template.instance().startYear.set(year - 1);
+    const year = Template.instance().startYearIndex.get();
+    Template.instance().startYearIndex.set(year - 1);
     // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} click prevYear`);
     // window.camDebugging.stop('click prevYear');
   },

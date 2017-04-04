@@ -1,1 +1,2 @@
 import './DesiredDegreeCollection';
+import './DesiredDegreeInstanceCollection';

@@ -1,0 +1,7 @@
+<template name="With_Advisor_Subscriptions">
+  {{#if subsReady}}
+    {{> UI.contentBlock }}
+  {{else}}
+    {{> Loading message="Loading advisor data"}}
+  {{/if}}
+</template>

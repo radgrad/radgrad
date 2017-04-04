@@ -18,7 +18,7 @@ export function processStudentStarCsvData(student, csvData) {
     CourseInstances.removeIt(instance._id);
   });
   let numIcsCourses = 0;
-  let numOtherCourses = 0;
+  // let numOtherCourses = 0;
   // console.log('create new instances');
   _.map(definitions, (definition) => {
     // console.log(definition);
@@ -34,7 +34,7 @@ export function processStudentStarCsvData(student, csvData) {
         CourseInstances.removeIt(planning[0]._id);
       }
     } else {
-      numOtherCourses += 1;
+      // numOtherCourses += 1;
     }
     definition.fromSTAR = true; // eslint-disable-line
     if (definition.grade === '***') {
@@ -42,7 +42,9 @@ export function processStudentStarCsvData(student, csvData) {
       definition.verified = false; // eslint-disable-line
     }
     // console.log('CourseInstances.define', definition);
-    CourseInstances.define(definition);
+    if (definition.course !== 'other') {
+      CourseInstances.define(definition);
+    }
     const split = definition.semester.split('-');
     let yearVal = parseInt(split[1], 10);
     if (split[0] !== 'Fall') {
@@ -50,9 +52,10 @@ export function processStudentStarCsvData(student, csvData) {
     }
     // console.log('AcademicYearInstances.define', student, yearVal);
     return AcademicYearInstances.define({ student, year: yearVal });
+    // return true;
   });
 
-  const note = `Uploaded ${numIcsCourses} ICS courses and ${numOtherCourses} other courses.`;
+  const note = `Uploaded ${numIcsCourses} ICS courses.`;
   StarDataLogs.define({ student, note });
 }
 
