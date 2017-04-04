@@ -8,11 +8,11 @@ Here are some observations from review of the screencast:
  
 1. On the ICE Points page, the "100" in the circles was confusing (since the subject's ICE score was over 100 in two categories). Recommend showing only the actual ICE value in the circle. The explanatory boxes provide enough breakdown. Addressed in Issue [100](https://github.com/radgrad/radgrad/issues/100).
 
-2. Opportunities scroll off top of screen (already addressed by Aljon).
+2. Opportunities scroll off top of screen. Addressed by branch [design cleanup](https://github.com/radgrad/radgrad/tree/design-clean-up).
 
 3. "Recommended opportunities is really useful. It's hard to know what's out there unless you watch the emails from Gerald."
 
-4. Rating widget for reviews should display all five star options without scrolling.
+4. Rating widget for reviews should display all five star options without scrolling. Addressed in commit [c36b6a0eb7edc7dba937d0619a05fdf3809eaee5](https://github.com/radgrad/radgrad/commit/c36b6a0eb7edc7dba937d0619a05fdf3809eaee5).
 
 5. In response to telling the subject that you're the kind of student who didn't need RadGrad, the subject responded, "Yes, but I had to put in a lot of extra work to get there. This makes it much simpler to see what you have to do."
 
@@ -30,7 +30,7 @@ Here are some observations from review of the screencast:
 
     * Figuring out where to find things seems difficult, but maybe after a training with Gerald it would be OK.
     
-    * Performance is an issue.
+    * Performance is an issue. (This is now fixed.)
     
 ## Subject B (March 13, 2017)
 
@@ -38,7 +38,7 @@ Subject B is a freshman in ICS who has completed only the first semester of cour
   
 Observations from review of the screencast:
 
-1. Performance is a significant issue; it currently prevents us from being able to evaluate much of the UI. Loading times for the degree planner and home page are so slow that it inhibits users from retrieving them.  This beta test session needed to focus on the high level goals of the system as a result. 
+1. Performance is a significant issue; it currently prevents us from being able to evaluate much of the UI. Loading times for the degree planner and home page are so slow that it inhibits users from retrieving them.  This beta test session needed to focus on the high level goals of the system as a result.  (This is now fixed.)
 
 2. Subject G was interested in how rankings and "relevant" opportunities were computed, because he was interested in the "less popular" interests and how to find them. For example, he was interested in "computer vision" and how to find opportunities specific for that interest. If there's no interest defined for a student's interest, then the system can't help find them.
  
@@ -50,7 +50,7 @@ Observations from review of the screencast:
 
   * "I'm not sure, I haven't had the opportunity to look at it in detail. But maybe the ability to customize opportunities or be notified when new opportunities come up?" Notifications are scheduled for implementation in Issue [111](https://github.com/radgrad/radgrad/issues/111). 
   
-  * "Are there links to other resources, leads for us to follow? I guess I could just google..."  (The system does provide links for further reading.)
+  * "Are there links to other resources, leads for us to follow? I guess I could just google..."  (Editor's note: The system does provide links for further reading, but this feature was not illustrated in this beta test. So not sure whether this is a usability issue or not.)
 
 ## Beta Test Interlude I
 
@@ -86,7 +86,7 @@ However, Amy and Philip took notes during the session and discussed the test aft
   
 6. What could be improved?
 
-   * Subject C brought up the issue of stalking, and suggested it would be good to be able to opt-out of revealing your current/planned courses and opportunities in order to reduce the ability of stalkers to know your whereabouts.
+   * Subject C brought up the issue of stalking, and suggested it would be good to be able to opt-out of revealing your current/planned courses and opportunities in order to reduce the ability of stalkers to know your whereabouts. This feature will be added as part of work for Issue [112](https://github.com/radgrad/radgrad/issues/112).
      
 
 ## Beta Test Interlude II
@@ -132,7 +132,9 @@ Things that could be improved:
 
   * If a course only appears once, it would be nice if clicking the remove button didn't pop up a menu with only one item.
   
-  * It would be nice if the system could support the focus areas (i.e. Security focus degree requirements).
+  * It would be nice if the system could support the focus areas (i.e. Security focus degree requirements). This will be addressed in Issue [113](https://github.com/radgrad/radgrad/issues/113).
+  
+  
 
 
 
