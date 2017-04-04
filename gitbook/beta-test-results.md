@@ -6,13 +6,13 @@ Subject A is a Senior in ICS who plans to graduate this year. Subject A had a si
  
 Here are some observations from review of the screencast:
  
-1. On the ICE Points page, the "100" in the circles was confusing (since the subject's ICE score was over 100 in two categories). Recommend showing only the actual ICE value in the circle. The explanatory boxes provide enough breakdown. Addressed in Issue [100](https://github.com/radgrad/radgrad/issues/100).
+1. On the ICE Points page, the "100" in the circles was confusing (since the subject's ICE score was over 100 in two categories). Recommend showing only the actual ICE value in the circle. The explanatory boxes provide enough breakdown. *(Addressed in Issue [100](https://github.com/radgrad/radgrad/issues/100).)*
 
-2. Opportunities scroll off top of screen. Addressed by branch [design cleanup](https://github.com/radgrad/radgrad/tree/design-clean-up).
+2. Opportunities scroll off top of screen. *(Addressed by branch [design cleanup](https://github.com/radgrad/radgrad/tree/design-clean-up).)*
 
 3. "Recommended opportunities is really useful. It's hard to know what's out there unless you watch the emails from Gerald."
 
-4. Rating widget for reviews should display all five star options without scrolling. Addressed in commit [c36b6a0eb7edc7dba937d0619a05fdf3809eaee5](https://github.com/radgrad/radgrad/commit/c36b6a0eb7edc7dba937d0619a05fdf3809eaee5).
+4. Rating widget for reviews should display all five star options without scrolling. *(Addressed in [commit of April 3,2017](https://github.com/radgrad/radgrad/commit/c36b6a0eb7edc7dba937d0619a05fdf3809eaee5).)*
 
 5. In response to telling the subject that you're the kind of student who didn't need RadGrad, the subject responded, "Yes, but I had to put in a lot of extra work to get there. This makes it much simpler to see what you have to do."
 
@@ -48,9 +48,9 @@ Observations from review of the screencast:
   
 4. What are things that could be improved?
 
-  * "I'm not sure, I haven't had the opportunity to look at it in detail. But maybe the ability to customize opportunities or be notified when new opportunities come up?" Notifications are scheduled for implementation in Issue [111](https://github.com/radgrad/radgrad/issues/111). 
+  * "I'm not sure, I haven't had the opportunity to look at it in detail. But maybe the ability to customize opportunities or be notified when new opportunities come up?" *(Notifications are scheduled for implementation in Issue [111](https://github.com/radgrad/radgrad/issues/111).)* 
   
-  * "Are there links to other resources, leads for us to follow? I guess I could just google..."  (Editor's note: The system does provide links for further reading, but this feature was not illustrated in this beta test. So not sure whether this is a usability issue or not.)
+  * "Are there links to other resources, leads for us to follow? I guess I could just google..."  *(Editor's note: The system does provide links for further reading, but this feature was not illustrated in this beta test. So not sure whether this is a usability issue or not.)*
 
 ## Beta Test Interlude I
 
@@ -132,7 +132,7 @@ Things that could be improved:
 
   * If a course only appears once, it would be nice if clicking the remove button didn't pop up a menu with only one item.
   
-  * It would be nice if the system could support the focus areas (i.e. Security focus degree requirements). This will be addressed in Issue [113](https://github.com/radgrad/radgrad/issues/113).
+  * It would be nice if the system could support the focus areas (i.e. Security focus degree requirements). *(This will be addressed in Issue [113](https://github.com/radgrad/radgrad/issues/113).)*
   
   
 
