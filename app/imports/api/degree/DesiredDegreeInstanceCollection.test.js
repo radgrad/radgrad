@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
-import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
-import { DesiredDegreeInstances } from '/imports/api/degree/DesiredDegreeInstanceCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { expect } from 'chai';
+// import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
+// import { DesiredDegreeInstances } from '/imports/api/degree/DesiredDegreeInstanceCollection';
+// import { Semesters } from '/imports/api/semester/SemesterCollection';
+// import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
