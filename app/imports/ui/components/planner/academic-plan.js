@@ -87,9 +87,8 @@ Template.Academic_Plan.helpers({
       studentID: getUserIdFromRoute(),
     }, { sort: { year: 1 } }).fetch();
     if (ays.length > 0) {
-      console.log('hasPrev', ays.length, instance.startYearIndex.get());
       // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end hasPrevYear`);
-      return instance.startYearIndex.get() - 3 >= 0;
+      return instance.startYearIndex.get() > 0;
     }
     return false;
   },
@@ -220,7 +219,7 @@ Template.Academic_Plan.helpers({
     const ay = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     // We always want to show 4 AYs.
     const instance = Template.instance();
-    if (ay.length > 0 && !instance.startYearIndex.get()) {
+    if (ay.length > 0 && typeof instance.startYearIndex.get() === 'undefined') {
       const currentSemID = Semesters.getCurrentSemester();
       let currentAyIndex = -1;
       let index = 0;
@@ -231,41 +230,31 @@ Template.Academic_Plan.helpers({
         index += 1;
       });
       if (currentAyIndex !== -1) {
-        instance.startYearIndex.set(ay.length - (ay.length - currentAyIndex));
+        if (currentAyIndex > 0 && currentAyIndex < ay.length - 4) {
+          instance.startYearIndex.set(currentAyIndex - 1);
+        } else
+          if (currentAyIndex > 0 && currentAyIndex >= ay.length - 4) {
+            instance.startYearIndex.set(ay.length - 4);
+          } else {
+            instance.startYearIndex.set(0);
+          }
       } else {
-        console.log('no current semester');
         instance.startYearIndex.set(0);
       }
     }
     const ret = _.filter(ay, function filter(academicYear) {
       const index = _.indexOf(ay, academicYear);
       const yearIndex = instance.startYearIndex.get();
-      // startIndex is 0 just show 0 - 3
-      // show startIndex -1 through startIndex + 2
-      // show len - 4 throug len - 1
-      const diff = index - yearIndex;
-      console.log(index, yearIndex, diff, (ay.length - yearIndex));
-      if (yearIndex === 0) {
-        console.log('just starting');
-        if (diff < 4) {
-          return true;
-        }
+      if (index < yearIndex) {
+        // startIndex is 0 just show 0 - 3
+        // show startIndex -1 through startIndex + 2
+        // show len - 4 throug len - 1
         return false;
-      } else
-        if ((ay.length - yearIndex) < 4) {
-          console.log('at end');
-          if (index < ay.length - 4) {
-            return false;
-          }
-          return true;
-        } else
-          if (diff >= -1 && diff <= 2) {
-            console.log(diff, index, instance.startYearIndex.get(), 'true');
-            return true;
-          } else {
-            console.log(diff, index, instance.startYearIndex.get(), 'false');
-            return false;
-          }
+      }
+      if (index > yearIndex + 3) {
+        return false;
+      }
+      return true;
     });
     // ap.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} end years ${ret.length}`);
     return ret;
