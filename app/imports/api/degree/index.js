@@ -1,1 +1,2 @@
+import './AcademicPlanCollection';
 import './DesiredDegreeCollection';
