@@ -84,34 +84,38 @@
                 {{> Interest_List item=item size='mini'}}
               </div>
             {{/if}}
-
           {{/each}}
         </div>
       </div>
-    </div>
 
-    <div class="ui segment">
-      <div class="ui three column stackable internally celled grid">
-        <div class="row">
+      <div style="margin-top: 0" class="ui stackable grid">
+        <div class="column">
           {{#each descriptionPair in descriptionPairs}}
+
             {{#if isLabel descriptionPair.label 'Prerequisites'}}
-              {{#each table in descriptionPair.value}}
-                <div class="column" style="text-align: center;">
-                  {{{getTableTitle @index}}}
-                  {{#each prerequisite in table}}
-                    - <a class="{{isActiveRoute coursesRouteName}} item"
-                         href="{{pathFor coursesRouteName username=routeUserName
-                                         course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a>
-                    <br>
-                  {{/each}}
-                </div>
-              {{/each}}
+              {{#if descriptionPair.value}}
+                <b>{{descriptionPair.label}}:</b>
+                  <div class="ui three column stackable celled grid">
+                    <div class="row">
+                      {{#each table in descriptionPair.value}}
+                        <div class="column" style="text-align: center;">
+                          {{{getTableTitle @index}}}
+                          {{#each prerequisite in table}}
+                            <a class="{{isActiveRoute coursesRouteName}} item"
+                               href="{{pathFor coursesRouteName username=routeUserName
+                               course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a>
+                            <br>
+                          {{/each}}
+                        </div>
+                      {{/each}}
+                    </div>
+                  </div>
+              {{/if}}
             {{/if}}
           {{/each}}
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="ui stackable two column grid">

@@ -44,6 +44,9 @@ function prerequisites(course) {
       incomplete.push({ course: item, status: itemStatus });
     }
   });
+  if (complete.length === 0 && incomplete.length === 0 && notInPlan.length === 0) {
+    return null;
+  }
   return [complete, incomplete, notInPlan];
 }
 
@@ -84,11 +87,11 @@ Template.Student_Explorer_Courses_Page.helpers({
     return [
       { label: 'Course Number', value: course.number },
       { label: 'Credit Hours', value: course.creditHrs },
-      { label: 'Prerequisites', value: prerequisites(course) },
       { label: 'Description', value: course.description },
       { label: 'Syllabus', value: makeLink(course.syllabus) },
       { label: 'More Information', value: makeLink(course.moreInformation) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
+      { label: 'Prerequisites', value: prerequisites(course) },
     ];
   },
   nonAddedCourses() {
