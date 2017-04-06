@@ -94,18 +94,26 @@
 
             {{#if isLabel descriptionPair.label 'Prerequisites'}}
               {{#if descriptionPair.value}}
-                <b>{{descriptionPair.label}}:</b>
-                  <div class="ui three column stackable celled grid">
+                <h4 class="ui horizontal divider header">
+                  {{descriptionPair.label}}
+                </h4>
+                  <div class="ui three column stackable padded celled grid">
                     <div class="row">
                       {{#each table in descriptionPair.value}}
-                        <div class="column" style="text-align: center;">
-                          {{{getTableTitle @index}}}
-                          {{#each prerequisite in table}}
-                            <a class="{{isActiveRoute coursesRouteName}} item"
-                               href="{{pathFor coursesRouteName username=routeUserName
-                               course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a>
-                            <br>
-                          {{/each}}
+                        <div class="column" style="text-align: center; background-color: {{color table}}">
+                          {{{getTableTitle @index table}}}
+                          {{#if length table}}
+                            {{#each prerequisite in table}}
+                              <a class="{{isActiveRoute coursesRouteName}} item"
+                                 href="{{pathFor coursesRouteName username=routeUserName
+                                 course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a>
+                              <br>
+                            {{/each}}
+                          {{else}}
+                            <a class="item" style="color: grey">
+                              None
+                            </a>
+                          {{/if}}
                         </div>
                       {{/each}}
                     </div>

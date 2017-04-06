@@ -45,7 +45,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
    * @returns The newly created docID.
    */
   define({ year, student }) {
-    const studentID = Users.getID(student);
+    const studentID = Users.getUserFromUsername(student)._id;
     const doc = this._collection.find({ year, studentID }).fetch();
     if (doc.length > 0) {
       return doc[0]._id;

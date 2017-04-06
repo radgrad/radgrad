@@ -135,7 +135,7 @@ Template.Academic_Plan.helpers({
       opp.name = Opportunities.findDoc(opp.opportunityID).name;  // eslint-disable-line
     });
     const semesterName = 'Spring';
-    const yearArg = year.year;
+    const yearArg = year.year + 1;
     return { icsCourses, semesterOpportunities, semesterName, dictionary: Template.instance().state, year: yearArg };
   },
   pastSummerArgs(year) {
@@ -152,7 +152,7 @@ Template.Academic_Plan.helpers({
       opp.name = Opportunities.findDoc(opp.opportunityID).name;  // eslint-disable-line
     });
     const semesterName = 'Summer';
-    const yearArg = year.year;
+    const yearArg = year.year + 1;
     return { icsCourses, semesterOpportunities, semesterName, dictionary: Template.instance().state, year: yearArg };
   },
   springArgs(year) {
