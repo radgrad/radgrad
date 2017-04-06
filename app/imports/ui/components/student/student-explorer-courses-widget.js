@@ -15,6 +15,13 @@ Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCours
 });
 
 Template.Student_Explorer_Courses_Widget.helpers({
+  color(table) {
+    if (table.length === 0) {
+      return 'whitesmoke';
+    } else {
+      return '';
+    }
+  },
   courseNameFromSlug(courseSlugName) {
     const slug = Slugs.find({ name: courseSlugName }).fetch();
     const course = Courses.find({ slugID: slug[0]._id }).fetch();
@@ -36,20 +43,32 @@ Template.Student_Explorer_Courses_Widget.helpers({
     });
     return ret;
   },
-  getTableTitle(tableIndex) {
+  getTableTitle(tableIndex, table) {
     switch (tableIndex) {
       case 0:
-        return '<h4><i class="green checkmark icon"></i>Completed</h4>';
+        if (table.length !== 0) {
+          return '<h4><i class="green checkmark icon"></i>Completed</h4>';
+        }
+        return '<h4 style="color:grey"><i class="grey checkmark icon"></i>Completed</h4>';
       case 1:
-        return '<h4><i class="yellow warning sign icon"></i>In Plan (Not Yet Completed)</h4>';
+        if (table.length !== 0) {
+          return '<h4><i class="yellow warning sign icon"></i>In Plan (Not Yet Completed)</h4>';
+        }
+        return '<h4 style="color:grey"><i class="grey warning sign icon"></i>In Plan (Not Yet Completed)</h4>';
       case 2:
-        return '<h4><i class="red warning circle icon"></i>Not in Plan';
+        if (table.length !== 0) {
+          return '<h4><i class="red warning circle icon"></i>Not in Plan</h4>';
+        }
+        return '<h4 style="color:grey"><i class="grey warning circle icon"></i>Not in Plan</h4>';
       default:
         return 'ERROR: More than one table.';
     }
   },
   isLabel(label, value) {
     return label === value;
+  },
+  length(table) {
+    return table.length !== 0;
   },
   passedCourse(course) {
     let ret = false;
