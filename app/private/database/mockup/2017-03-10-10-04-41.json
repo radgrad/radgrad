@@ -2,11 +2,6 @@
   "timestamp": "2017-03-10T20:04:41.798Z",
   "collections": [
     {
-      "name": "AcademicYearInstanceCollection",
-      "contents": [
-      ]
-    },
-    {
       "name": "AdvisorLogCollection",
       "contents": [
         {

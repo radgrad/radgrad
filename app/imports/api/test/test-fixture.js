@@ -1,7 +1,7 @@
 /* global Assets */
 
 // import { Meteor } from 'meteor/meteor';
-import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
+// import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
@@ -67,7 +67,7 @@ export function defineTestFixture() {
   // The list of collections, ordered so that they can be sequentially restored.
   const collectionList = [Semesters, InterestTypes, Interests, CareerGoals, DesiredDegrees,
     ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
-    CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
+    CourseInstances, OpportunityInstances, FeedbackInstances,
     VerificationRequests];
 
   // const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
