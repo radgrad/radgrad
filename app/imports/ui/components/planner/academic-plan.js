@@ -12,6 +12,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name';
 
 // import { Logger } from 'meteor/jag:pince';
 // const ap = new Logger('AP');
@@ -264,8 +265,9 @@ Template.Academic_Plan.helpers({
 Template.Academic_Plan.events({
   'click #addAY': function clickAddAY(event) {
     event.preventDefault();
-    const student = getUserIdFromRoute();
-    const ays = AcademicYearInstances.find({ studentID: student }, { sort: { year: 1 } }).fetch();
+    const studentID = getUserIdFromRoute();
+    const student = getRouteUserName();
+    const ays = AcademicYearInstances.find({ studentID }, { sort: { year: 1 } }).fetch();
     let year = moment().year();
     if (ays.length > 0) {
       const ay = ays[ays.length - 1];
