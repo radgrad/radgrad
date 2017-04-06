@@ -5,7 +5,7 @@ import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+// import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module AcademicYearInstance */
@@ -159,5 +159,5 @@ class AcademicYearInstanceCollection extends BaseCollection {
  */
 export const AcademicYearInstances = new AcademicYearInstanceCollection();
 // We are not going to persist AcademicYearInstances
-radgradCollections.push(AcademicYearInstances);
+// radgradCollections.push(AcademicYearInstances);
 

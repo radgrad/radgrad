@@ -1,7 +1,6 @@
 /* global Assets */
 
 import { Meteor } from 'meteor/meteor';
-import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
@@ -101,7 +100,7 @@ function newStartupProcess() { // eslint-disable-line
       // The list of collections, ordered so that they can be sequentially restored.
       const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, CareerGoals, DesiredDegrees,
         ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
-        CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances,
+        CourseInstances, OpportunityInstances, FeedbackInstances,
         VerificationRequests, Feeds, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews];
 
       const restoreNames = _.map(restoreJSON.collections, obj => obj.name);

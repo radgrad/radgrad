@@ -18,9 +18,8 @@ Template.Student_Explorer_Courses_Widget.helpers({
   color(table) {
     if (table.length === 0) {
       return 'whitesmoke';
-    } else {
-      return '';
     }
+    return '';
   },
   courseNameFromSlug(courseSlugName) {
     const slug = Slugs.find({ name: courseSlugName }).fetch();
