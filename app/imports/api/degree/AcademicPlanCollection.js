@@ -14,7 +14,7 @@ const CourseChoiceSchema = new SimpleSchema({
 class AcademicPlanCollection extends BaseCollection {
 
   constructor() {
-    super('AcademicPlanCollection', new SimpleSchema({
+    super('AcademicPlan', new SimpleSchema({
       degreeID: { type: SimpleSchema.RegEx.Id },
       name: { type: String },
       effectiveSemesterID: { type: SimpleSchema.RegEx.Id },
