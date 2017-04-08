@@ -16,10 +16,11 @@ if (Meteor.isServer) {
     const description = 'B.S. in CS.';
     const semester = 'Spring-2017';
     const coursesPerSemester = [2, 2, 2, 2, 2, 2, 2, 2];
-    const courseList = [{ slug: 'ics111' }, { slug: 'ics141' }, { slug: 'ics211' }, { slug: 'ics241' },
-      { slug: 'ics311' }, { slug: 'ics314' }, { slug: 'ics212' }, { slug: 'ics321' },
-      ['ics313', 'ics361'], ['ics312', 'ics331'], { slug: 'ics332' }, { slug: 'ics4xx' },
-      { slug: 'ics4xx' }, { slug: 'ics4xx' }, { slug: 'ics4xx' }, { slug: 'ics4xx' }];
+    const courseList = [{ course: ['ics111'] }, { course: ['ics141'] }, { course: ['ics211'] }, { course: ['ics241'] },
+      { course: ['ics311'] }, { course: ['ics314'] }, { course: ['ics212'] }, { course: ['ics321'] },
+      { course: ['ics313', 'ics361'] }, { course: ['ics312', 'ics331'] }, { course: ['ics332'] },
+      { course: ['ics4xx'] }, { course: ['ics4xx'] }, { course: ['ics4xx'] },
+      { course: ['ics4xx'] }, { course: ['ics4xx'] }];
 
     before(function setup() {
       removeAllEntities();
@@ -33,15 +34,11 @@ if (Meteor.isServer) {
       Semesters.define({ term: 'Spring', year: 2017 });
       DesiredDegrees.define({ name, shortName, slug, description });
       const docID = AcademicPlans.define({
-        degreeSlug: slug, semester, coursesPerSemester, courseList,
+        degreeSlug: slug, name: description, semester, coursesPerSemester, courseList,
       });
       expect(AcademicPlans.isDefined(docID)).to.be.true;
-      const dumpObject = AcademicPlans.dumpOne(docID);
       AcademicPlans.removeIt(docID);
       expect(AcademicPlans.isDefined(docID)).to.be.false;
-      AcademicPlans.restoreOne(dumpObject);
-      expect(AcademicPlans.isDefined(docID)).to.be.true;
-      AcademicPlans.removeIt(docID);
     });
   });
 }

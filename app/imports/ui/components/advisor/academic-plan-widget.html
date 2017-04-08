@@ -1,0 +1,85 @@
+<template name="Academic_Plan_Widget">
+  <div class="ui padded container segment" style="margin-bottom: 0 !important;">
+    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Academic Plan</h4>
+    </div>
+    <div class="ui stackable grid">
+      <div class="ten wide column">
+        <div class="ui equal width grid" style="margin: 0;">
+          <div class="stackable row">
+            {{#each year in years}}
+              <div class="stretched column academicYear" style="padding: 0 0.6rem;">
+                <h3 class="ui horizontal divider header">{{year}}</h3>
+                <table class="ui very basic unstackable selectable table segment"
+                        style="flex-grow: 3; font-size: 0.85em;">
+                  <thead>
+                  <tr>
+                    <th>Fall</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  </tbody>
+                </table>
+                <table class="ui very basic unstackable selectable table segment"
+                       ondragover="allowDrop(event)" style="flex-grow: 3; font-size: 0.85em;">
+                  <thead>
+                  <tr>
+                    <th>Spring</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  </tbody>
+                </table>
+                <table class="ui very basic unstackable selectable table segment"
+                       ondragover="allowDrop(event)" style="flex-grow: 3; font-size: 0.85em;">
+                  <thead>
+                  <tr>
+                    <th>Summer</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  <tr class="bodyDrop" ondragover="allowDrop(event)"><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      <div class="six wide column">
+        <div class="ui segment">
+          <div class="ui dividing header"><h4>Courses</h4></div>
+          {{#each course in courses}}
+            <div id="{{course}}" class="ui basic green label" draggable="true" ondragstart="drag(event)">{{courseName course}}</div>
+          {{/each}}
+        </div>
+        <div class="ui segment trash" ondragover="allowDrop(event)">
+          <i class="big trash outline icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+    function dragTable(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+      ev.dataTransfer.setData("fromTable", true);
+    }
+  </script>
+</template>

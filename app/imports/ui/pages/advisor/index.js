@@ -1,3 +1,5 @@
+import './advisor-academic-plan-page.html';
+
 import './advisor-completed-verifications-page.html';
 
 import './advisor-event-verification-page.html';

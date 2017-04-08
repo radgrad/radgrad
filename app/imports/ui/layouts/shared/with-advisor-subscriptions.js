@@ -1,7 +1,9 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
+import { AcademicPlans } from '/imports/api/degree/AcademicPlanCollection';
 import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
+
 /* eslint-disable object-shorthand */
 
 /*
@@ -20,6 +22,7 @@ Template.With_Advisor_Subscriptions.onCreated(function withAdvisorSubscriptionsO
   self.ready = new ReactiveVar();
   self.autorun(function () {
     globalSubs.subscribe(StarDataLogs.getPublicationName());
+    globalSubs.subscribe(AcademicPlans.getPublicationName());
     self.ready.set(globalSubs.ready());
   });
 });
