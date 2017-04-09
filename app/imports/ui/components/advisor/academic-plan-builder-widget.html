@@ -5,16 +5,10 @@
     <form class="ui form jsNewPlan {{ successClass }} {{ errorClass }}">
       <div class="three fields">
         <div class="field">
-          {{> Degree_Form_Field desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "desiredDegree")}}
+          {{> Degree_Form_Field desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "desiredDegree") required=true}}
         </div>
         <div class="field">
-          <label>Name</label>
-          <input id="name" type="text" name="name" placeholder="Name">
-          {{#if displayFieldError 'name' }}
-            <div class="ui error message">
-              <p>{{fieldErrorMessage 'name'}}.</p>
-            </div>
-          {{/if}}
+          {{> Input_Form_Field label="Name" name="name" placeholder="B.S. in Computer Science" errorMessage=(fieldError "name") required=true}}
         </div>
         <div class="field">
           {{> Year_Form_Field years=academicYears selectedYearID='' errorMessage=(fieldError "year")}}
@@ -50,7 +44,7 @@
                     </tbody>
                   </table>
                   <table class="ui very basic unstackable selectable table segment"
-                         ondragover="allowDrop(event)" style="flex-grow: 3; font-size: 0.85em;">
+                         style="flex-grow: 3; font-size: 0.85em;">
                     <thead>
                     <tr>
                       <th>Spring</th>
@@ -72,7 +66,7 @@
                     </tbody>
                   </table>
                   <table class="ui very basic unstackable selectable table segment"
-                         ondragover="allowDrop(event)" style="flex-grow: 3; font-size: 0.85em;">
+                         style="flex-grow: 3; font-size: 0.85em;">
                     <thead>
                     <tr>
                       <th>Summer</th>
@@ -111,7 +105,11 @@
           </div>
         </div>
       </div>
+
       <button class="ui basic green button jsNewPlan" type="submit">Submit</button>
+
+      {{> Success_Message_Form_Field message="The Academic Plan was successfully added."}}
+
     </form>
   </div>
   <script>

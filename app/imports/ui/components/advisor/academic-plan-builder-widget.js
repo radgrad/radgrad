@@ -1,16 +1,31 @@
 /* global document */
 import { Template } from 'meteor/templating';
+import { ReactiveDict } from 'meteor/reactive-dict';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
+import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
+// const CourseChoiceSchema = new SimpleSchema({
+//   course: { type: [String] },
+// });
+
+const addSchema = new SimpleSchema({
+  desiredDegree: { type: String },
+  name: { type: String },
+  year: { type: Number },
+});
+
 Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCreated() {
+  FormUtils.setupFormWidget(this, addSchema);
+  this.state = new ReactiveDict();
   this.inPlan = new ReactiveVar('');
   this.inPlan.set([]);
 });
@@ -50,13 +65,13 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return _.find(errorKeys, (keyObj) => keyObj.name === fieldName);
   },
   errorClass() {
-    return Template.instance().state.get(displayErrorMessages) ? 'error' : '';
+    return Template.instance().errorClass.get() ? 'error' : '';
   },
   fieldErrorMessage(fieldName) {
     return Template.instance().context.keyErrorMessage(fieldName);
   },
   successClass() {
-    return Template.instance().state.get(displaySuccessMessage) ? 'success' : '';
+    return Template.instance().successClass.get() ? 'success' : '';
   },
   years() {
     return ['Year 1', 'Year 2', 'Year 3', 'Year 4'];
@@ -107,6 +122,28 @@ Template.Academic_Plan_Builder_Widget.events({
     const inPlan = Template.instance().inPlan.get();
     _.pullAll(inPlan, slugs);
     Template.instance().inPlan.set(inPlan);
+  },
+  submit(event, instance) {
+    event.preventDefault();
+    const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
+    instance.context.resetValidation();
+    addSchema.clean(newData);
+    instance.context.validate(newData);
+    const desiredDegree = DesiredDegrees.findDoc(newData.desiredDegree);
+    const degreeSlug = Slugs.findDoc(desiredDegree.slugID).name;
+    const semester = `Fall-${newData.year}`;
+    const coursesPerSemester = [];
+    const courseList = [];
+    const ays = instance.$('.academicYear');
+    _.map(ays, (ay) => {
+      console.log(ay);
+    });
+    console.log(degreeSlug, semester, coursesPerSemester, courseList);
+    if (instance.context.isValid()) {
+      FormUtils.indicateSuccess(instance, event);
+    } else {
+      FormUtils.indicateError(instance);
+    }
   },
 });
 
