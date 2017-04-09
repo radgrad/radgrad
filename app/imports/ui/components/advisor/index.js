@@ -1,6 +1,9 @@
 import './academic-plan-builder-widget.html';
 import './academic-plan-builder-widget.js';
 
+import './academic-plan-viewer-widget.html';
+import './academic-plan-builder-widget.js';
+
 import './advisor-log-entry-widget.html';
 import './advisor-log-entry-widget.js';
 

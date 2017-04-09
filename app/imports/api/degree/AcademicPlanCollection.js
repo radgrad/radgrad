@@ -18,7 +18,7 @@ class AcademicPlanCollection extends BaseCollection {
       degreeID: { type: SimpleSchema.RegEx.Id },
       name: { type: String },
       effectiveSemesterID: { type: SimpleSchema.RegEx.Id },
-      coursesPerSemester: { type: [Number], minCount: 8, maxCount: 8 },
+      coursesPerSemester: { type: [Number], minCount: 12, maxCount: 12 },
       courseList: { type: [CourseChoiceSchema] },
     }));
   }
@@ -30,7 +30,7 @@ class AcademicPlanCollection extends BaseCollection {
    * DesiredDegreeInstances.define({ degreeSlug: 'bs-cs',
    *                                 name: 'B.S. in Computer Science'
    *                                 semester: 'Spring-2016',
-   *                                 coursesPerSemester: [2, 2, 2, 2, 2, 2, 2, 2],
+   *                                 coursesPerSemester: [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0],
    *                                 courseList: [{ course: ['ics111'] }, { course: ['ics141'] },
     *                                 { course: ['ics211'] }, { course: ['ics241'] }, { course: ['ics311'] },
      *                                 { course: 'ics314' }, { course: ['ics212'] }, { course: ['ics321'] },
@@ -48,7 +48,6 @@ class AcademicPlanCollection extends BaseCollection {
     const degreeID = Slugs.getEntityID(degreeSlug, 'DesiredDegree');
     const effectiveSemesterID = Semesters.getID(semester);
     const doc = this._collection.findOne({ degreeID, effectiveSemesterID });
-    console.log(doc);
     if (doc) {
       return doc._id;
     }

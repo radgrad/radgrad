@@ -4,18 +4,12 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { AcademicPlans } from '../../../api/degree/AcademicPlanCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-
-const displaySuccessMessage = 'displaySuccessMessage';
-const displayErrorMessages = 'displayErrorMessages';
-
-// const CourseChoiceSchema = new SimpleSchema({
-//   course: { type: [String] },
-// });
 
 const addSchema = new SimpleSchema({
   desiredDegree: { type: String },
@@ -87,7 +81,6 @@ Template.Academic_Plan_Builder_Widget.events({
     const slug = event.originalEvent.dataTransfer.getData('text');
     const fromTable = event.originalEvent.dataTransfer.getData('fromTable');
     if (fromTable) {
-      console.log('from table');
       const element = document.getElementById(slug);
       while (element.firstChild) {
         element.removeChild(element.firstChild);
@@ -129,18 +122,35 @@ Template.Academic_Plan_Builder_Widget.events({
     instance.context.resetValidation();
     addSchema.clean(newData);
     instance.context.validate(newData);
-    const desiredDegree = DesiredDegrees.findDoc(newData.desiredDegree);
-    const degreeSlug = Slugs.findDoc(desiredDegree.slugID).name;
-    const semester = `Fall-${newData.year}`;
-    const coursesPerSemester = [];
-    const courseList = [];
-    const ays = instance.$('.academicYear');
-    _.map(ays, (ay) => {
-      console.log(ay);
-    });
-    console.log(degreeSlug, semester, coursesPerSemester, courseList);
     if (instance.context.isValid()) {
-      FormUtils.indicateSuccess(instance, event);
+      const desiredDegree = DesiredDegrees.findDoc(newData.desiredDegree);
+      const degreeSlug = Slugs.findDoc(desiredDegree.slugID).name;
+      const name = newData.name;
+      const semester = `Fall-${newData.year}`;
+      const coursesPerSemester = [];
+      const courseList = [];
+      const ays = instance.$('.academicYear');
+      _.map(ays, (ay) => {
+        const tables = ay.querySelectorAll('table');
+        _.map(tables, (table) => {
+          const tds = table.querySelectorAll('td');
+          let count = 0;
+          _.map(tds, (td) => {
+            if (td.id) {
+              courseList.push({ course: td.id.split(',') });
+              count += 1;
+            }
+          });
+          coursesPerSemester.push(count);
+        });
+      });
+      // console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
+      try {
+        AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
+        FormUtils.indicateSuccess(instance, event);
+      } catch (e) {
+        FormUtils.indicateError(instance);
+      }
     } else {
       FormUtils.indicateError(instance);
     }
