@@ -11,18 +11,18 @@
     </div>
   {{#each group in alphabeticalGroups}}
     <div class="ui bottom attached {{isActive group}} tab segment" data-tab={{group}}>
-      <div class="ui small horizontal list">
         {{#if (users studentRole group)}}
-        {{#each user in (users studentRole group)}}
-          <div class="item">
-            <button id="{{user.username}}" class="ui basic grey label jsRetrieve" href="{{url user}}">{{label
-            user}}</button>
+          <div class="ui stackable grid">
+            {{#each user in (users studentRole group)}}
+              <div class="two wide column" style="padding: 2px;">
+                <button id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
+                   href="{{url user}}">{{name user}}<br>({{studentUsername user}})</button>
+              </div>
+            {{/each}}
           </div>
-        {{/each}}
         {{else}}
           <i>No students in this category</i>
         {{/if}}
-      </div>
     </div>
   {{/each}}
   </div>

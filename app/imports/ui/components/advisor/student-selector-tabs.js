@@ -40,8 +40,9 @@ Template.Student_Selector_Tabs.helpers({
   url(user) {
     return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
   },
-  label(user) {
-    return `${user.lastName}, ${user.firstName} (${user.username})`;
+  name(user) {
+    const name = `${user.lastName}, ${user.firstName}`;
+    return name.length > 16 ? `${name.substring(0, 16)}...` : name;
   },
   studentRole() {
     return ROLE.STUDENT;
@@ -60,6 +61,10 @@ Template.Student_Selector_Tabs.helpers({
       return user.uhID;
     }
     return '1111-1111';
+  },
+  studentUsername(user) {
+    const name = user.username;
+    return name.length > 16 ? `${name.substring(0, 16)}...` : name;
   },
   isUserSelected() {
     return Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID);
