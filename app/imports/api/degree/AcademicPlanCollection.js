@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
@@ -21,6 +22,9 @@ class AcademicPlanCollection extends BaseCollection {
       coursesPerSemester: { type: [Number], minCount: 12, maxCount: 12 },
       courseList: { type: [CourseChoiceSchema] },
     }));
+    if (Meteor.server) {
+      this._collection._ensureIndex({ _id: 1, degreeID: 1, effectiveSemesterID: 1 });
+    }
   }
 
   /**

@@ -4,7 +4,17 @@
       {{> Help_Panel_Widget}}
 
       <div class="sixteen wide column">
-        {{> Academic_Plan_Builder_Widget}}
+        <div class="ui top attached tabular menu">
+          <a class="item" data-tab="viewer">Viewer</a>
+          <a class="active item" data-tab="builder">Builder</a>
+        </div>
+        <div class="ui bottom attached active tab segment" data-tab="builder">
+          {{> Academic_Plan_Builder_Widget}}
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="viewer">
+          {{> Academic_Plan_Chooser_Widget plan=getPlan}}
+          {{> Academic_Plan_Viewer_Widget plan=getPlan}}
+        </div>
       </div>
     </div>
   </div>

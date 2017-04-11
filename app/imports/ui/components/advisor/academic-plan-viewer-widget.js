@@ -9,16 +9,62 @@ Template.Academic_Plan_Viewer_Widget.onCreated(function academicPlanViewerWidget
 });
 
 Template.Academic_Plan_Viewer_Widget.helpers({
+  courses(yearNumber, semesterNumber) {
+    const ret = [];
+    if (Template.instance().plan.get()) {
+      const totalSem = (3 * yearNumber) + semesterNumber;
+      console.log(`courses(${yearNumber}, ${semesterNumber}) ${totalSem}`);
+      const plan = Template.instance().plan.get();
+      const numCoursesList = plan.coursesPerSemester.slice(0);
+      const numCourses = numCoursesList[semesterNumber];
+      const courseList = plan.courseList.slice(0);
+      // console.log(numCourses, courseList);
+      let i = 0;
+      for (i = 0; i < totalSem; i += 1) {
+        console.log(`courseList.splice(${numCoursesList[i]}`);
+        courseList.splice(0, numCoursesList[i]);
+      }
+      console.log(courseList.length);
+      for (i = 0; i < numCourses; i += 1) {
+        const course = courseList.splice(0, 1);
+        console.log(course);
+        ret.push(course[0].course);
+      }
+    }
+    // console.log(ret);
+    return ret;
+  },
   degreeName() {
-    return DesiredDegrees.findDoc(Template.instance().plan.degreeID).shortName;
+    if (Template.instance().plan.get()) {
+      return DesiredDegrees.findDoc(Template.instance().plan.get().degreeID).shortName;
+    }
+    return '';
   },
   fallYear() {
-    const effectiveSemester = Semesters.findDoc(Template.instance().plan.effectiveSemesterID);
-    return effectiveSemester.year;
+    if (Template.instance().plan.get()) {
+      const plan = Template.instance().plan.get();
+      const effectiveSemester = Semesters.findDoc(plan.effectiveSemesterID);
+      return effectiveSemester.year;
+    }
+    return '';
+  },
+  getPlan() {
+    return Template.instance().plan.get();
+  },
+  name() {
+    if (Template.instance().plan.get()) {
+      const plan = Template.instance().plan.get();
+      return plan.name;
+    }
+    return '';
   },
   springYear() {
-    const effectiveSemester = Semesters.findDoc(Template.instance().plan.effectiveSemesterID);
-    return effectiveSemester.year + 1;
+    if (Template.instance().plan.get()) {
+      const plan = Template.instance().plan.get();
+      const effectiveSemester = Semesters.findDoc(plan.effectiveSemesterID);
+      return effectiveSemester.year + 1;
+    }
+    return '';
   },
   years() {
     return ['Year 1', 'Year 2', 'Year 3', 'Year 4'];

@@ -3,7 +3,214 @@
   "collections": [
     {
       "name": "AcademicPlanCollection",
-      "contents": []
+      "contents": [
+        {
+          "degreeSlug": "bs-cs",
+          "name": "B.S. in Computer Science",
+          "semester": "Fall-2016",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            {
+              "course": [
+                "ics111"
+              ]
+            },
+            {
+              "course": [
+                "ics141"
+              ]
+            },
+            {
+              "course": [
+                "ics211"
+              ]
+            },
+            {
+              "course": [
+                "ics241"
+              ]
+            },
+            {
+              "course": [
+                "ics311"
+              ]
+            },
+            {
+              "course": [
+                "ics314"
+              ]
+            },
+            {
+              "course": [
+                "ics212"
+              ]
+            },
+            {
+              "course": [
+                "ics321"
+              ]
+            },
+            {
+              "course": [
+                "ics312",
+                "ics351"
+              ]
+            },
+            {
+              "course": [
+                "ics313",
+                "ics361"
+              ]
+            },
+            {
+              "course": [
+                "ics331"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            }
+          ]
+        },
+        {
+          "degreeSlug": "bs-cs",
+          "name": "B.S. in Computer Science",
+          "semester": "Fall-2015",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            {
+              "course": [
+                "ics111"
+              ]
+            },
+            {
+              "course": [
+                "ics141"
+              ]
+            },
+            {
+              "course": [
+                "ics211"
+              ]
+            },
+            {
+              "course": [
+                "ics241"
+              ]
+            },
+            {
+              "course": [
+                "ics212"
+              ]
+            },
+            {
+              "course": [
+                "ics311"
+              ]
+            },
+            {
+              "course": [
+                "ics312",
+                "ics331"
+              ]
+            },
+            {
+              "course": [
+                "ics321"
+              ]
+            },
+            {
+              "course": [
+                "ics313",
+                "ics361"
+              ]
+            },
+            {
+              "course": [
+                "ics314"
+              ]
+            },
+            {
+              "course": [
+                "ics332"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "AdvisorLogCollection",

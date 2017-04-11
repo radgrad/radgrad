@@ -1,22 +1,9 @@
 <template name="Academic_Plan_Viewer_Widget">
   <div class="ui padded container segment" style="margin-bottom: 0 !important;">
-    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Academic Plan {{plan.name}}</h4>
+
+    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Academic Plan: {{name}} {{fallYear}} - {{springYear}}</h4>
     </div>
     <form class="ui form">
-      <div class="three fields">
-        <div class="field">
-          <label>Degree</label>
-          {{degreeName}}
-        </div>
-        <div class="field">
-          <label>Name</label>
-          {{plan.name}}
-        </div>
-        <div class="field">
-          <label>Years</label>
-          {{fallYear}} - {{springYear}}
-        </div>
-      </div>
       <div class="ui stackable grid">
         <div class="column">
           <div class="ui equal width grid" style="margin: 0;">
@@ -32,18 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                    </tr>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
+                    {{> Academic_Plan_Semester courses=(courses @index 0)}}
                     </tbody>
                   </table>
                   <table class="ui very basic unstackable selectable table segment"
@@ -54,18 +30,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
+                    {{> Academic_Plan_Semester courses=(courses @index 1)}}
                     </tbody>
                   </table>
                   <table class="ui very basic unstackable selectable table segment"
@@ -76,18 +41,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
-                    <tr class="bodyDrop" ondragover="allowDrop(event)">
-                      <td></td>
-                    </tr>
+                    {{> Academic_Plan_Semester courses=(courses @index 2)}}
                     </tbody>
                   </table>
                 </div>
