@@ -1,5 +1,12 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { ROLE } from '../../../api/role/Role';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Slugs } from '../../../api/slug/SlugCollection';
+import { Roles } from 'meteor/alanning:roles';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+
+let electiveCount = 0;
 
 Template.Academic_Plan_Semester.onCreated(function academicPlanSemesterOnCreated() {
   // console.log(this.data);
@@ -16,6 +23,23 @@ Template.Academic_Plan_Semester.helpers({
       return str;
     }
     return '';
+  },
+  inPlan(course) {
+    const studentID = getUserIdFromRoute();
+    const courseReqs = Template.instance().data.courses;
+    console.log(courseReqs);
+    let ret = false;
+    if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
+      const courses = CourseInstances.find({ studentID }).fetch();
+      _.map(courses, (c) => {
+        const doc = CourseInstances.getCourseDoc(c._id);
+        const slug = Slugs.getNameFromID(doc.slugID);
+        if (_.indexOf(course, slug) !== -1) {
+          ret = true;
+        }
+      });
+    }
+    return ret;
   },
 });
 

@@ -22,7 +22,6 @@ Template.Academic_Plan_Chooser_Component.helpers({
         ret.push(year);
       }
     });
-    console.log('years', ret);
     return _.sortBy(ret, [function sort(o) { return o; }]);
   },
   names() {
