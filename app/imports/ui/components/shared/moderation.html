@@ -3,6 +3,7 @@
     <div class="column">
       <div class="ui padded container segment">
         <div class="ui dividing header"><h4>PENDING COURSE REVIEWS</h4></div>
+        {{#if pendingCourseReviews}}
       <div class="ui divided items">
         {{#each review in pendingCourseReviews}}
           <div class="item">
@@ -30,7 +31,6 @@
                       <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                       <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
                       {{> Success_Message_Form_Field message="Student will be notified of moderation results"}}
-                      {{> Form_Error_Message errorMessage="There was an error. Please try again"}}
                     </form>
                 </div>
               </div>
@@ -39,11 +39,15 @@
         </div>
         {{/each}}
       </div>
+        {{else}}
+          <i style="margin-top:5px;">No pending course reviews</i>
+        {{/if}}
     </div>
   </div>
   <div class="column">
     <div class="ui padded container segment">
       <div class="ui dividing header"><h4>PENDING OPPORTUNITY REVIEWS</h4></div>
+      {{#if pendingOpportunityReviews}}
       <div class="ui divided items">
         {{#each review in pendingOpportunityReviews}}
           <div class="item">
@@ -71,7 +75,6 @@
                           <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                         <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
                       {{> Success_Message_Form_Field message="Student will be notified of moderation results"}}
-                      {{> Form_Error_Message errorMessage="There was an error. Please try again"}}
                     </form>
                   </div>
                 </div>
@@ -80,11 +83,15 @@
           </div>
         {{/each}}
       </div>
+      {{else}}
+        <i style="margin-top:5px;">No pending opportunity reviews</i>
+      {{/if}}
     </div>
   </div>
     <div class="column">
       <div class="ui padded container segment">
         <div class="ui dividing header"><h4>PENDING MENTORSPACE QUESTIONS</h4></div>
+        {{#if pendingQuestions}}
         <div class="ui divided items">
           {{#each question in pendingQuestions}}
             <div class="item">
@@ -103,7 +110,6 @@
                           <button class="ui basic green mini button" id="{{question._id}}-question-accept-{{noSlug question}}" type="submit" style="margin-top:10px">ACCEPT</button>
                           <button class="ui basic red mini button" id="{{question._id}}-question-reject-{{noSlug question}}" type="submit" style="margin-top:10px">REJECT</button>
                         {{> Success_Message_Form_Field message="Student will be notified of moderation results"}}
-                        {{> Form_Error_Message errorMessage="There was an error. Please try again"}}
                       </form>
                     </div>
                   </div>
@@ -112,6 +118,9 @@
             </div>
           {{/each}}
         </div>
+        {{else}}
+          <i style="margin-top:5px;">No pending Mentorspace questions</i>
+        {{/if}}
       </div>
     </div>
   </div>

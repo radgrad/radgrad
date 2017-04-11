@@ -204,8 +204,3 @@ Template.Student_Selector_Tabs.onRendered(function studentSelectorTabsOnRendered
   });
   this.state.set('addNewUser', false);
 });
-
-Template.Student_Selector_Tabs.onDestroyed(function studentSelectorTabsOnDestroyed() {
-  // add your statement here
-});
-
