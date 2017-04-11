@@ -14,9 +14,9 @@
         {{#if (users studentRole group)}}
           <div class="ui stackable grid">
             {{#each user in (users studentRole group)}}
-              <div class="two wide column" style="padding: 2px;">
+              <div class="two wide column" style="padding: 2px;" data-tooltip={{name user true}}>
                 <button id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
-                   href="{{url user}}">{{name user}}<br>({{studentUsername user}})</button>
+                   href="{{url user}}">{{name user false}}<br>({{studentUsername user}})</button>
               </div>
             {{/each}}
           </div>

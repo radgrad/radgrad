@@ -40,9 +40,12 @@ Template.Student_Selector_Tabs.helpers({
   url(user) {
     return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
   },
-  name(user) {
+  name(user, tooltip) {
     const name = `${user.lastName}, ${user.firstName}`;
-    return name.length > 16 ? `${name.substring(0, 16)}...` : name;
+    if (!tooltip) {
+      return name.length > 16 ? `${name.substring(0, 16)}...` : name;
+    }
+    return name;
   },
   studentRole() {
     return ROLE.STUDENT;
