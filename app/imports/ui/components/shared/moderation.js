@@ -47,13 +47,13 @@ Template.Moderation.helpers({
     return review.moderatorComments;
   },
   pendingCourseReviews() {
-    return Reviews.find({ moderated: false, reviewType: 'course' });
+    return Reviews.find({ moderated: false, reviewType: 'course' }).fetch();
   },
   pendingOpportunityReviews() {
-    return Reviews.find({ moderated: false, reviewType: 'opportunity' });
+    return Reviews.find({ moderated: false, reviewType: 'opportunity' }).fetch();
   },
   pendingQuestions() {
-    return MentorQuestions.find({ moderated: false, visible: false });
+    return MentorQuestions.find({ moderated: false, visible: false }).fetch();
   },
   rating(review) {
     return review.rating;

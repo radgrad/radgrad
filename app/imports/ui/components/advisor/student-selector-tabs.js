@@ -23,14 +23,28 @@ const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
 Template.Student_Selector_Tabs.helpers({
-  users(role) {
-    return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
+  alphabeticalGroups() {
+    return ['ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQRS', 'TUV', 'WXYZ'];
+  },
+  isActive(group) {
+    if (group === 'ABC') {
+      return 'active';
+    }
+    return '';
+  },
+  users(role, range) {
+    const regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}`);
+    return Users.find({ roles: [role], lastName: regex }, { sort: { lastName: 1 } }).fetch();
   },
   url(user) {
     return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
   },
-  label(user) {
-    return `${user.lastName}, ${user.firstName} (${user.username})`;
+  name(user, tooltip) {
+    const name = `${user.lastName}, ${user.firstName}`;
+    if (!tooltip) {
+      return name.length > 16 ? `${name.substring(0, 16)}...` : name;
+    }
+    return name;
   },
   studentRole() {
     return ROLE.STUDENT;
@@ -49,6 +63,10 @@ Template.Student_Selector_Tabs.helpers({
       return user.uhID;
     }
     return '1111-1111';
+  },
+  studentUsername(user) {
+    const name = user.username;
+    return name.length > 16 ? `${name.substring(0, 16)}...` : name;
   },
   isUserSelected() {
     return Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID);
@@ -204,8 +222,3 @@ Template.Student_Selector_Tabs.onRendered(function studentSelectorTabsOnRendered
   });
   this.state.set('addNewUser', false);
 });
-
-Template.Student_Selector_Tabs.onDestroyed(function studentSelectorTabsOnDestroyed() {
-  // add your statement here
-});
-
