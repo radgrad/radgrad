@@ -29,12 +29,11 @@ Template.Student_Selector_Tabs.helpers({
   isActive(group) {
     if (group === 'ABC') {
       return 'active';
-    } else {
-      return '';
     }
+    return '';
   },
   users(role, range) {
-    const regex = new RegExp('^' + range.substring(0,1) + '|^' + range.substring(1,2) + '|^' + range.substring(2,3));
+    const regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}`);
     return Users.find({ roles: [role], lastName: regex }, { sort: { lastName: 1 } }).fetch();
   },
   url(user) {
