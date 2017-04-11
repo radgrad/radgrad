@@ -1,55 +1,6 @@
 <template name="Academic_Plan_Viewer_Widget">
-  <div class="ui padded container segment" style="margin-bottom: 0 !important;">
-
-    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Academic Plan: {{name}} {{fallYear}} - {{springYear}}</h4>
-    </div>
-    <form class="ui form">
-      <div class="ui stackable grid">
-        <div class="column">
-          <div class="ui equal width grid" style="margin: 0;">
-            <div class="stackable row">
-              {{#each year in years}}
-                <div class="stretched column academicYear" style="padding: 0 0.6rem;">
-                  <h3 class="ui horizontal divider header">{{year}}</h3>
-                  <table class="ui very basic unstackable selectable table segment"
-                         style="flex-grow: 3; font-size: 0.85em;">
-                    <thead>
-                    <tr>
-                      <th>Fall</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{> Academic_Plan_Semester courses=(courses @index 0)}}
-                    </tbody>
-                  </table>
-                  <table class="ui very basic unstackable selectable table segment"
-                         style="flex-grow: 3; font-size: 0.85em;">
-                    <thead>
-                    <tr>
-                      <th>Spring</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{> Academic_Plan_Semester courses=(courses @index 1)}}
-                    </tbody>
-                  </table>
-                  <table class="ui very basic unstackable selectable table segment"
-                         style="flex-grow: 3; font-size: 0.85em;">
-                    <thead>
-                    <tr>
-                      <th>Summer</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{> Academic_Plan_Semester courses=(courses @index 2)}}
-                    </tbody>
-                  </table>
-                </div>
-              {{/each}}
-            </div>
-          </div>
-        </div>
-       </div>
-    </form>
+  <div class="ui segment">
+    {{> Academic_Plan_Chooser_Component plan=getPlan}}
+    {{> Academic_Plan_Viewer_Component plan=getPlan}}
   </div>
 </template>

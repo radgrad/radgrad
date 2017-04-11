@@ -1,5 +1,5 @@
 <template name="Academic_Plan_Semester">
   {{#each course in courses}}
-    <tr><td><strong>{{course}}</strong></td></tr>
+    <tr><td><div id="{{course}}" class="ui basic green label" draggable="true">{{choiceLabel course}}</div></td></tr>
   {{/each}}
 </template>

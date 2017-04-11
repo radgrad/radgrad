@@ -1,11 +1,14 @@
 import './academic-plan-builder-widget.html';
 import './academic-plan-builder-widget.js';
 
-import './academic-plan-chooser-widget.html';
-import './academic-plan-chooser-widget.js';
+import './academic-plan-chooser-component.html';
+import './academic-plan-chooser-component.js';
 
 import './academic-plan-semester.html';
 import './academic-plan-semester.js';
+
+import './academic-plan-viewer-component.html';
+import './academic-plan-viewer-component.js';
 
 import './academic-plan-viewer-widget.html';
 import './academic-plan-viewer-widget.js';

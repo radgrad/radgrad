@@ -6,12 +6,13 @@ import { AcademicPlans } from '../../../api/degree/AcademicPlanCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 
-Template.Academic_Plan_Chooser_Widget.onCreated(function academicPlanChooserWidgetOnCreated() {
+Template.Academic_Plan_Chooser_Component.onCreated(function academicPlanChooserComponentOnCreated() {
+  // console.log(this.data);
   this.chosenYear = new ReactiveVar('');
   this.plan = this.data.plan;
 });
 
-Template.Academic_Plan_Chooser_Widget.helpers({
+Template.Academic_Plan_Chooser_Component.helpers({
   years() {
     const ret = [];
     const plans = AcademicPlans.find().fetch();
@@ -21,6 +22,7 @@ Template.Academic_Plan_Chooser_Widget.helpers({
         ret.push(year);
       }
     });
+    console.log('years', ret);
     return _.sortBy(ret, [function sort(o) { return o; }]);
   },
   names() {
@@ -37,7 +39,7 @@ Template.Academic_Plan_Chooser_Widget.helpers({
   },
 });
 
-Template.Academic_Plan_Chooser_Widget.events({
+Template.Academic_Plan_Chooser_Component.events({
   'change [name=year]': function changeYear(event) {
     event.preventDefault();
     Template.instance().chosenYear.set($(event.target).val());
@@ -49,16 +51,18 @@ Template.Academic_Plan_Chooser_Widget.events({
     const effectiveSemesterID = Slugs.getEntityID(semesterSlug, 'Semester');
     const name = $(event.target).val();
     const plan = AcademicPlans.findDoc({ effectiveSemesterID, name });
-    console.log(plan);
+    // console.log(plan);
     Template.instance().plan.set(plan);
   },
 });
 
-Template.Academic_Plan_Chooser_Widget.onRendered(function academicPlanChooserWidgetOnRendered() {
-  // add your statement here
+Template.Academic_Plan_Chooser_Component.onRendered(function academicPlanChooserComponentOnRendered() {
+  this.$('.dropdown').dropdown({
+    // action: 'select',
+  });
 });
 
-Template.Academic_Plan_Chooser_Widget.onDestroyed(function academicPlanChooserWidgetOnDestroyed() {
+Template.Academic_Plan_Chooser_Component.onDestroyed(function academicPlanChooserComponentOnDestroyed() {
   // add your statement here
 });
 

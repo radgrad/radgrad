@@ -1,11 +1,22 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 Template.Academic_Plan_Semester.onCreated(function academicPlanSemesterOnCreated() {
   // console.log(this.data);
 });
 
 Template.Academic_Plan_Semester.helpers({
-  // add your helpers here
+  choiceLabel(course) {
+    if (course) {
+      let str = '';
+      _.map(course, (c) => {
+        str = `${str} or ${c}`;
+      });
+      str = str.substring(4, str.length);
+      return str;
+    }
+    return '';
+  },
 });
 
 Template.Academic_Plan_Semester.events({
