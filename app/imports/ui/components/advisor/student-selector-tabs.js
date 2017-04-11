@@ -23,8 +23,19 @@ const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
 Template.Student_Selector_Tabs.helpers({
-  users(role) {
-    return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
+  alphabeticalGroups() {
+    return ['ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQRS', 'TUV', 'WXYZ'];
+  },
+  isActive(group) {
+    if (group === 'ABC') {
+      return 'active';
+    } else {
+      return '';
+    }
+  },
+  users(role, range) {
+    const regex = new RegExp('^' + range.substring(0,1) + '|^' + range.substring(1,2) + '|^' + range.substring(2,3));
+    return Users.find({ roles: [role], lastName: regex }, { sort: { lastName: 1 } }).fetch();
   },
   url(user) {
     return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
