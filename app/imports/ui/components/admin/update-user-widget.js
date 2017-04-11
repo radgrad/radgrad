@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
@@ -76,6 +77,7 @@ Template.Update_User_Widget.events({
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
+      const oldRole = Roles.getRolesForUser(Template.currentData().updateID.get());
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       FormUtils.renameKey(updatedData, 'careerGoals', 'careerGoalIDs');
       FormUtils.renameKey(updatedData, 'desiredDegree', 'desiredDegreeID');
@@ -86,6 +88,9 @@ Template.Update_User_Widget.events({
         }
         FormUtils.indicateSuccess(instance, event);
       });
+      if (oldRole !== updatedData.role) {
+        Users.updateRole(Template.currentData().updateID.get(), [updatedData.role], oldRole);
+      }
     } else {
       FormUtils.indicateError(instance);
     }

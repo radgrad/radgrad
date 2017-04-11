@@ -4,14 +4,27 @@
     <a class="item" data-tab="add">Add New</a>
   </div>
   <div class="ui bottom attached active tab segment" data-tab="students">
-    <div class="ui small horizontal list">
-      {{#each user in users studentRole}}
-        <div class="item">
-          <button id="{{user.username}}" class="ui basic grey label jsRetrieve" href="{{url user}}">{{label
-              user}}</button>
-        </div>
+    <div class="ui top attached tabular stackable menu">
+      {{#each group in alphabeticalGroups}}
+      <a class="item" data-tab={{group}}>{{group}}</a>
       {{/each}}
     </div>
+  {{#each group in alphabeticalGroups}}
+    <div class="ui bottom attached {{isActive group}} tab segment" data-tab={{group}}>
+        {{#if (users studentRole group)}}
+          <div class="ui stackable grid">
+            {{#each user in (users studentRole group)}}
+              <div class="two wide column" style="padding: 2px;" data-tooltip={{name user true}}>
+                <button id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
+                   href="{{url user}}">{{name user false}}<br>({{studentUsername user}})</button>
+              </div>
+            {{/each}}
+          </div>
+        {{else}}
+          <i>No students in this category</i>
+        {{/if}}
+    </div>
+  {{/each}}
   </div>
   <div class="ui bottom attached tab segment" data-tab="add">
     <form class="ui form jsNewStudent {{ successClass }} {{ errorClass }}">
@@ -37,7 +50,7 @@
       </div>
       <div class="two fields">
         <div class="field">
-          <label>Userame</label>
+          <label>Username</label>
           <input type="text" name="username" placeholder="Username">
           {{#if displayFieldError 'userName' }}
             <div class="ui error message">

@@ -1,6 +1,8 @@
 /* global FileReader */
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -12,13 +14,12 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { ROLE, ROLES } from '../../../api/role/Role.js';
+import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import * as planUtils from '../../../api/degree-program/plan-generator';
 import * as semUtils from '../../../api/semester/SemesterUtilities';
 import * as courseUtils from '../../../api/course/CourseUtilities';
 import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 
 const updateSchema = new SimpleSchema({
   firstName: { type: String, optional: false },
@@ -56,7 +57,7 @@ Template.Update_Degree_Plan_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   roles() {
-    return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
+    return [ROLE.STUDENT, ROLE.ALUMNI];
   },
   selectedCareerGoalIDs() {
     if (Template.currentData().studentID.get()) {
@@ -165,6 +166,7 @@ Template.Update_Degree_Plan_Widget.events({
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
+      const oldRole = Roles.getRolesForUser(Template.currentData().studentID.get());
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       FormUtils.renameKey(updatedData, 'careerGoals', 'careerGoalIDs');
       FormUtils.renameKey(updatedData, 'desiredDegree', 'desiredDegreeID');
@@ -177,6 +179,9 @@ Template.Update_Degree_Plan_Widget.events({
         instance.successClass.set('success');
         instance.errorClass.set('');
       });
+      if (oldRole !== updatedData.role) {
+        Users.updateRole(Template.currentData().studentID.get(), [updatedData.role], oldRole);
+      }
     } else {
       FormUtils.indicateError(instance);
     }

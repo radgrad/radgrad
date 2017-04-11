@@ -161,6 +161,18 @@ class UserCollection extends BaseInstanceCollection {
     const userID = this.findIdBySlug(userInfo.username);
     this._collection.update(userID, { $set: userInfo });
   }
+
+  /**
+   * Adds user to the new role and removes user from old role.
+   * @param userID the id of the user.
+   * @param newRole The new role for the user.
+   * @param newRole The old role for the user.
+   */
+  updateRole(userID, newRole, oldRole) {
+    Roles.removeUsersFromRoles(userID, oldRole);
+    Roles.addUsersToRoles(userID, newRole);
+  }
+
   /**
    * Returns the full name for the given userID.
    * @param userID the id of the user.
