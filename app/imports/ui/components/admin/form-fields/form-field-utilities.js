@@ -37,6 +37,18 @@ export function slugFieldValidator() {
   return (Slugs.isDefined(this.value)) ? 'duplicateSlug' : true;
 }
 
+/**
+ * Custom validator for the username field.
+ * @returns True if the username value is not previously defined, otherwise errorType 'duplicateUsername'.
+ * @throws Error if there are no Slugs in the SlugCollection.
+ */
+export function usernameFieldValidator() {
+  if (Slugs.count() === 0) {
+    throw Meteor.Error('slugFieldValidator called but SlugCollection is empty. Probably not subscribed to.');
+  }
+  return (Slugs.isDefined(this.value)) ? 'duplicateSlug' : true;
+}
+
 /* eslint-disable no-param-reassign */
 
 /**

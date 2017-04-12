@@ -74,6 +74,11 @@
           <p>User {{username}} is already defined.</p>
         </div>
       {{/if}}
+      {{#if badUsername }}
+        <div class="ui error message">
+          <p>Username {{username}} is not a valid username.</p>
+        </div>
+      {{/if}}
       {{#if otherError }}
         <div class="ui error message">
           <p>{{errorMessage}}</p>

@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { lodash } from 'meteor/erasaur:meteor-lodash';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
@@ -77,6 +77,9 @@ Template.Student_Selector_Tabs.helpers({
   alreadyDefined() {
     return Template.instance().state.get('alreadyDefined');
   },
+  badUsername() {
+    return Template.instance().state.get('badUsername');
+  },
   otherError() {
     return Template.instance().state.get('otherError');
   },
@@ -97,7 +100,7 @@ Template.Student_Selector_Tabs.helpers({
   },
   displayFieldError(fieldName) {
     const errorKeys = Template.instance().context.invalidKeys();
-    return lodash.find(errorKeys, (keyObj) => keyObj.name === fieldName);
+    return _.find(errorKeys, (keyObj) => keyObj.name === fieldName);
   },
   fieldErrorMessage(fieldName) {
     return Template.instance().context.keyErrorMessage(fieldName);
@@ -159,10 +162,18 @@ Template.Student_Selector_Tabs.events({
         };
         const studentID = Meteor.call('Users.define', userDefinition, (error) => {
           if (error) {
-            instance.state.set(displaySuccessMessage, false);
-            instance.state.set(displayErrorMessages, true);
-            instance.state.set('otherError', true);
-            instance.state.set('errorMessage', error.reason);
+            const regexp = /^[a-zA-Z0-9-_]+$/;
+            if (userName.search(regexp) === -1) {
+              instance.state.set(displaySuccessMessage, false);
+              instance.state.set(displayErrorMessages, true);
+              instance.state.set('alreadyDefined', false);
+              instance.state.set('badUsername', true);
+            } else {
+              instance.state.set(displaySuccessMessage, false);
+              instance.state.set(displayErrorMessages, true);
+              instance.state.set('otherError', true);
+              instance.state.set('errorMessage', error.reason);
+            }
           } else {
             const timestamp = new Date().getTime();
             if (Feeds.checkPastDayFeed(timestamp, 'new-user')) {
@@ -181,7 +192,6 @@ Template.Student_Selector_Tabs.events({
             instance.state.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
           }
         });
-
         instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
         instance.state.set(sessionKeys.CURRENT_STUDENT_ID, studentID);
         instance.state.set('notDefined', false);
@@ -191,6 +201,7 @@ Template.Student_Selector_Tabs.events({
       } else {
         instance.state.set(displaySuccessMessage, false);
         instance.state.set(displayErrorMessages, true);
+        instance.state.set('badUsername', false);
         instance.state.set('alreadyDefined', true);
         instance.state.set('username', userName);
       }
