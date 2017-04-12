@@ -190,14 +190,13 @@ Template.Student_Selector_Tabs.events({
             instance.studentID.set(user._id);
             instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
             instance.state.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
+            
+            instance.state.set('notDefined', false);
+            instance.state.set(displaySuccessMessage, userName);
+            instance.state.set(displayErrorMessages, false);
+            instance.state.set('addNewUser', false);
           }
         });
-        instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
-        instance.state.set(sessionKeys.CURRENT_STUDENT_ID, studentID);
-        instance.state.set('notDefined', false);
-        instance.state.set(displaySuccessMessage, userName);
-        instance.state.set(displayErrorMessages, false);
-        instance.state.set('addNewUser', false);
       } else {
         instance.state.set(displaySuccessMessage, false);
         instance.state.set(displayErrorMessages, true);
