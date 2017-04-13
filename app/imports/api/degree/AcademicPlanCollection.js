@@ -51,7 +51,7 @@ class AcademicPlanCollection extends BaseCollection {
   define({ degreeSlug, name, semester, coursesPerSemester, courseList }) {
     const degreeID = Slugs.getEntityID(degreeSlug, 'DesiredDegree');
     const effectiveSemesterID = Semesters.getID(semester);
-    const doc = this._collection.findOne({ degreeID, effectiveSemesterID });
+    const doc = this._collection.findOne({ degreeID, name, effectiveSemesterID });
     if (doc) {
       return doc._id;
     }

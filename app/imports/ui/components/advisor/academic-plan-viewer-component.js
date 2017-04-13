@@ -16,7 +16,7 @@ Template.Academic_Plan_Viewer_Component.helpers({
       // console.log(`courses(${yearNumber}, ${semesterNumber}) ${totalSem}`);
       const plan = Template.instance().plan.get();
       const numCoursesList = plan.coursesPerSemester.slice(0);
-      const numCourses = numCoursesList[semesterNumber];
+      const numCourses = numCoursesList[totalSem];
       const courseList = plan.courseList.slice(0);
       let i = 0;
       for (i = 0; i < totalSem; i += 1) {

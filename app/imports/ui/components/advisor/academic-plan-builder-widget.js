@@ -47,7 +47,8 @@ Template.Academic_Plan_Builder_Widget.helpers({
         ret.push(slug);
       }
     });
-    _.pullAll(ret, Template.instance().inPlan.get());
+    // _.pullAll(ret, Template.instance().inPlan.get());
+    ret.push('ics300+');
     ret.push('ics4xx');
     return ret;
   },
@@ -144,7 +145,7 @@ Template.Academic_Plan_Builder_Widget.events({
           coursesPerSemester.push(count);
         });
       });
-      // console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
+      console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
       try {
         AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
         FormUtils.indicateSuccess(instance, event);
