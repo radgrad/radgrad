@@ -175,4 +175,26 @@ Things that could be improved:
     
 
 
+### Subject Gerald Lau (April 13, 2017)
+ 
+During this session we did a walkthrough of the system with Gerald Lau, the ICS academic advisor.  Our goal was to re-acquaint him with the basic capabilities of the system. We did not have him actively use the system, since we are in the process of implementing Academic Plans as first class entities in the system, and their implementation will substantially change the user interface with respect to a primary advisor function.  So, we walked him through the various pages available to both students and advisors and solicited his comments. Here are some of them:
+ 
+  * About 300 students per year will use the system.
+  
+  * "It will be really helpful to have descriptions of faculty projects available to students.", "Right now, they'll say they are interested in Artificial Intelligence, and the only thing I can say is, 'Go see Professor Chin, or go see Professor Binsted.'"
+  
+  * "Need the versions of the Academic Plan in the planner. I know Cam is working on it."
+  
+  * "It's good to have a version of their ICS plan without the GenEd stuff."
+  
+  * "I'll need to have a mirror of the big screen monitor on my desktop since I wear bifocal glasses."
+  
+  * The research project opportunities are a good feature. "For the faculty, they can get an undergrad to help with research, and the undergrad gets 499 credit for it."
+  
+  * "It's important to allow students to opt-out of displaying future courses/opportunities, since some students have TROs out against others."
+  
+
+  
+
+
 
