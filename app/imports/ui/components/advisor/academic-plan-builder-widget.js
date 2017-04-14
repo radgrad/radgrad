@@ -117,6 +117,23 @@ Template.Academic_Plan_Builder_Widget.events({
     _.pullAll(inPlan, slugs);
     Template.instance().inPlan.set(inPlan);
   },
+  'drop .comboArea': function dropCombo(event) {
+    event.preventDefault();
+    const slug = event.originalEvent.dataTransfer.getData('text');
+    const slugs = slug.split(',');
+    console.log(slugs, event.target);
+    const element = event.target;
+    const div = document.createElement('div');
+    div.setAttribute('class', 'ui basic green label');
+    div.setAttribute('draggable', 'true');
+    div.setAttribute('ondragstart', 'drag(event)');
+    const text = document.createTextNode(`${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`);
+    div.appendChild(text);
+    element.appendChild(div);
+//             <div id="{{course}}" class="ui basic green label" draggable="true" ondragstart="drag(event)">{{courseName
+//    course}}</div>
+
+},
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
