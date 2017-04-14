@@ -2,6 +2,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
 import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
+
 /* eslint-disable object-shorthand */
 
 /*

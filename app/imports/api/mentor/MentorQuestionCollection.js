@@ -72,7 +72,6 @@ class MentorQuestionCollection extends BaseInstanceCollection {
    */
   updateSlug(questionID, slug) {
     this.assertDefined(questionID);
-    console.log(slug);
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     this._collection.update({ _id: questionID },
         { $set: { slugID } });

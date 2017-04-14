@@ -1,8 +1,9 @@
 <template name="Moderation">
-  <div class="ui equal width grid">
+  <div class="ui padded equal width grid">
     <div class="column">
       <div class="ui padded container segment">
         <div class="ui dividing header"><h4>PENDING COURSE REVIEWS</h4></div>
+        {{#if pendingCourseReviews}}
       <div class="ui divided items">
         {{#each review in pendingCourseReviews}}
           <div class="item">
@@ -25,7 +26,7 @@
                     <strong>Comments:</strong> {{studentComments review}}
                   </div>
                   <div class="ui segment">
-                    <form class="ui form">
+                    <form class="ui form {{successClass}} {{errorClass}}">
                       {{> TextArea_Form_Field label="Moderator Comments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
                       <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                       <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
@@ -38,11 +39,15 @@
         </div>
         {{/each}}
       </div>
+        {{else}}
+          <i style="margin-top:5px;">No pending course reviews</i>
+        {{/if}}
     </div>
   </div>
   <div class="column">
     <div class="ui padded container segment">
       <div class="ui dividing header"><h4>PENDING OPPORTUNITY REVIEWS</h4></div>
+      {{#if pendingOpportunityReviews}}
       <div class="ui divided items">
         {{#each review in pendingOpportunityReviews}}
           <div class="item">
@@ -65,7 +70,7 @@
                     <strong>Comments:</strong> {{studentComments review}}
                   </div>
                   <div class="ui segment">
-                    <form class="ui form">
+                    <form class="ui form {{successClass}} {{errorClass}}">
                       {{> TextArea_Form_Field label="Moderator Comments" rows=5 name="moderatorComments" placeholder="" errorMessage=(fieldError "moderatorComments") required=false}}
                           <button class="ui basic green mini button" id="{{review._id}}-review-accept" type="submit" style="margin-top:10px">ACCEPT</button>
                         <button class="ui basic red mini button" id="{{review._id}}-review-reject" type="submit" style="margin-top:10px">REJECT</button>
@@ -78,11 +83,15 @@
           </div>
         {{/each}}
       </div>
+      {{else}}
+        <i style="margin-top:5px;">No pending opportunity reviews</i>
+      {{/if}}
     </div>
   </div>
     <div class="column">
       <div class="ui padded container segment">
         <div class="ui dividing header"><h4>PENDING MENTORSPACE QUESTIONS</h4></div>
+        {{#if pendingQuestions}}
         <div class="ui divided items">
           {{#each question in pendingQuestions}}
             <div class="item">
@@ -93,7 +102,7 @@
                       <strong>Question:</strong> {{question.title}}
                     </div>
                     <div class="ui segment">
-                      <form class="ui form">
+                      <form class="ui form {{successClass}} {{errorClass}}">
                         {{#if noSlug question}}
                           {{> Input_Form_Field label="Slug" name="slug" placeholder="" errorMessage=(fieldError "slug") required=false}}
                         {{/if}}
@@ -109,6 +118,9 @@
             </div>
           {{/each}}
         </div>
+        {{else}}
+          <i style="margin-top:5px;">No pending Mentorspace questions</i>
+        {{/if}}
       </div>
     </div>
   </div>

@@ -29,9 +29,14 @@ Template.Advisor_Layout.helpers({
         route: RouteNames.advisorModerationPageRouteName,
         regex: 'moderation',
       },
+      {
+        label: 'Academic Plan',
+        route: RouteNames.advisorAcademicPlanPageRouteName,
+        regex: 'academic-plan',
+      },
     ];
   },
   secondMenuLength() {
-    return 'five';
+    return 'six';
   },
 });

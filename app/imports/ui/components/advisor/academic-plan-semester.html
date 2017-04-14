@@ -1,0 +1,5 @@
+<template name="Academic_Plan_Semester">
+  {{#each course in courses}}
+    <tr><td><div id="{{course}}" class="ui basic {{#if inPlan course}}grey {{else}}green {{/if}}label" draggable="true">{{choiceLabel course}}</div></td></tr>
+  {{/each}}
+</template>

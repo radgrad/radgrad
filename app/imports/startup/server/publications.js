@@ -1,3 +1,4 @@
+import { AcademicPlans } from '../../api/degree/AcademicPlanCollection';
 import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
@@ -25,6 +26,7 @@ import { Users } from '../../api/user/UserCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 
+AcademicPlans.publish();
 AcademicYearInstances.publish();
 AdvisorLogs.publish();
 CareerGoals.publish();

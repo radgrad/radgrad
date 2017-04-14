@@ -2,6 +2,410 @@
   "timestamp": "2017-03-10T20:04:41.798Z",
   "collections": [
     {
+      "name": "AcademicPlanCollection",
+      "contents": [
+        {
+          "degreeSlug": "bs-cs",
+          "name": "B.S. in Computer Sciences",
+          "semester": "Fall-2016",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            {
+              "course": [
+                "ics111"
+              ]
+            },
+            {
+              "course": [
+                "ics141"
+              ]
+            },
+            {
+              "course": [
+                "ics211"
+              ]
+            },
+            {
+              "course": [
+                "ics241"
+              ]
+            },
+            {
+              "course": [
+                "ics311"
+              ]
+            },
+            {
+              "course": [
+                "ics314"
+              ]
+            },
+            {
+              "course": [
+                "ics212"
+              ]
+            },
+            {
+              "course": [
+                "ics321"
+              ]
+            },
+            {
+              "course": [
+                "ics312",
+                "ics351"
+              ]
+            },
+            {
+              "course": [
+                "ics313",
+                "ics361"
+              ]
+            },
+            {
+              "course": [
+                "ics331"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            }
+          ]
+        },
+        {
+          "degreeSlug": "bs-cs",
+          "name": "B.S. in Computer Sciences",
+          "semester": "Fall-2015",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            {
+              "course": [
+                "ics111"
+              ]
+            },
+            {
+              "course": [
+                "ics141"
+              ]
+            },
+            {
+              "course": [
+                "ics211"
+              ]
+            },
+            {
+              "course": [
+                "ics241"
+              ]
+            },
+            {
+              "course": [
+                "ics212"
+              ]
+            },
+            {
+              "course": [
+                "ics311"
+              ]
+            },
+            {
+              "course": [
+                "ics312",
+                "ics331"
+              ]
+            },
+            {
+              "course": [
+                "ics321"
+              ]
+            },
+            {
+              "course": [
+                "ics313",
+                "ics361"
+              ]
+            },
+            {
+              "course": [
+                "ics314"
+              ]
+            },
+            {
+              "course": [
+                "ics332"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            }
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A. in Computer Sciences",
+          "semester": "Fall-2015",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            1,
+            1,
+            0
+          ],
+          "courseList": [
+            {
+              "course": [
+                "ics111"
+              ]
+            },
+            {
+              "course": [
+                "ics141"
+              ]
+            },
+            {
+              "course": [
+                "ics211"
+              ]
+            },
+            {
+              "course": [
+                "ics241"
+              ]
+            },
+            {
+              "course": [
+                "ics212"
+              ]
+            },
+            {
+              "course": [
+                "ics311"
+              ]
+            },
+            {
+              "course": [
+                "ics321"
+              ]
+            },
+            {
+              "course": [
+                "ics312",
+                "ics331"
+              ]
+            },
+            {
+              "course": [
+                "ics313",
+                "ics361"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics332"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            }
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A. in Computer Sciences",
+          "semester": "Fall-2016",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            1,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            {
+              "course": [
+                "ics111"
+              ]
+            },
+            {
+              "course": [
+                "ics141"
+              ]
+            },
+            {
+              "course": [
+                "ics211"
+              ]
+            },
+            {
+              "course": [
+                "ics241"
+              ]
+            },
+            {
+              "course": [
+                "ics311"
+              ]
+            },
+            {
+              "course": [
+                "ics314"
+              ]
+            },
+            {
+              "course": [
+                "ics212"
+              ]
+            },
+            {
+              "course": [
+                "ics321"
+              ]
+            },
+            {
+              "course": [
+                "ics312",
+                "ics331"
+              ]
+            },
+            {
+              "course": [
+                "ics4xx"
+              ]
+            },
+            {
+              "course": [
+                "ics414",
+                "ics464"
+              ]
+            },
+            {
+              "course": [
+                "ics313",
+                "ics361"
+              ]
+            },
+            {
+              "course": [
+                "ics423"
+              ]
+            },
+            {
+              "course": [
+                "ics332"
+              ]
+            },
+            {
+              "course": [
+                "ics491",
+                "ics495"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "AdvisorLogCollection",
       "contents": [
         {
@@ -2342,12 +2746,6 @@
           "description": "The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline. You might find the BA degree of interest if you are also interested in biology, entrepreneurship, game design, graphic arts, financial engineering, foreign languages, or other disciplines.\n\nIn general, the BA requires you to complete the ICS core curriculum, plus three ICS 400-level courses, plus four upper division courses in a related area of concentration.\n\nFor more details, see the [ICS BA Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/ba-ics/)."
         },
         {
-          "name": "B.S. in Computer Engineering",
-          "shortName": "B.S. CE",
-          "slug": "bs-ce",
-          "description": "The Department of Information and Computer Sciences and the Department of Electrical Engineering offer a joint Bachelor of Science degree in Computer Engineering (BSCE).  The BSCE degree program provides you with the opportunity to learn about computer hardware and software, computer organization and architecture, computer security, software engineering, computer networks and Internet technology, embedded systems, computer-aided design, multi-core and parallel computing, wireless networks, and other topics.\n\nIn general, the BSCE requires you to complete the College of Engineering core requirements (calculus, chemistry, physics, etc.), plus the BSCE core courses (EE 160, 205, 211, 213, 260, 315, 323, 324, 342, 361, 366, 367, 371, 495, etc), plus two technical electives.\n\nFor more details, see the [BSCE Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ce/)."
-        },
-        {
           "name": "B.S. in Computer Science",
           "shortName": "B.S. CS",
           "slug": "bs-cs",
@@ -2459,8 +2857,8 @@
       "contents": [
         {
           "routeName": "Advisor_Student_Configuration_Page",
-          "title": "Setting up a new Student.",
-          "text": "You can update a student's degree plan, or view the student's current degree plan. It's really cool."
+          "title": "Learn About Student Configuration",
+          "text": "You can add new students and edit existing students on this page.\n\n#### Add New Student\n\n<img class=\"ui medium left floated image\" src=\"/images/help/advisor-new-student.png\">\n\nClick on the \"Add New\" tab on the \"Students\" pane to add a new student. You will need to input the student's first name, last name, UH username and UH ID. Click \"Submit\" to create the new student. Duplicate usernames are not allowed.\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Choose Existing Student\n\n<img class=\"ui medium left floated image\" src=\"/images/help/advisor-choose-student.png\">\n\nClick on the \"Students\" tab on the \"Students\" pane to choose an existing student to edit. Students are listed alphabetically by last name. Click on a student's name to view and edit their data in the panes below.\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Configure Student\n\n<img class=\"ui medium left floated image\" src=\"/images/help/advisor-configure-student.png\">\n\nUse the \"UPDATE STUDENT & DEGREE PLAN\" pane to view and edit student data. You can view and edit the following fields: first name, last name, picture, website, role, career goals, interests, desired degree, and level. The following fields are view-only: slug (username), UH ID, and email. At the bottom of the pane, you can generate a degree plan by choosing a \"Plan Starting Semester\" (the semester that the student will begin taking ICS courses) and clicking the \"GENERATE DEGREE PLAN\" button. By clicking this button, any existing degree plan for this student will be erased and replaced. You can view the resulting generated degree plan by clicking on the link at the very bottom of the pane.\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### View and Edit Advisor Log\n\n<img class=\"ui medium left floated image\" src=\"/images/help/advisor-advisor-log.png\">\n\nUse this pane to add advisor comments for the selected student. You can also view past advisor comments. If there are multiple advisors, you can view all past comments from all advisors.\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Upload Star Data\n\n<img class=\"ui medium left floated image\" src=\"/images/help/advisor-upload-star-data.png\">\n\nClick on the \"Choose File\" button to choose a STAR data file from your local directory. The file must be in a .csv format, and can be downloaded from [STAR](https://www.star.hawaii.edu). Click on the \"LOAD STAR DATA\" button to upload the data for the selected student. The \"STAR Data Upload Log\" below the button lists a history of past star data uploads. You can click the link at the very bottom of the \"UPDATE STUDENT & DEGREE PLAN\" pane to view changes in the student's degree plan after uploading the STAR data.\n\n<div class=\"ui hidden clearing divider\"></div>"
         },
         {
           "routeName": "Student_Home_Page",
@@ -2511,6 +2909,26 @@
           "routeName": "Student_Home_Log_Page",
           "title": "Learn about the Advisor Meeting Log",
           "text": "Each time you meet with an ICS Advisor, they can summarize the results from your meeting as a RadGrad Advisor Log entry.\n\nYou can refer to this log to make sure you are following advisor recommendations. This also enables the advisor to follow up on issues raised in prior meetings."
+        },
+        {
+          "routeName": "Advisor_Verification_Requests_Pending_Page",
+          "title": "Learn About Verification Requests",
+          "text": "This page lists all pending verification requests. Verification requests are submitted by students when they would like RadGrad to acknowledge that they have successfully completed a particular opportunity. If you believe that the student has successfully completed this opportunity, you can accept a request by clicking the green \"ACCEPT\" button. If you believe that the student has NOT successfully completed this opportunity, you can decline a request by clicking the red \"DECLINE\" button. You may also provide any feedback for your response. The student will be able to see your response on their RadGrad site."
+        },
+        {
+          "routeName": "Advisor_Event_Verification_Page",
+          "title": "Learn About Event Verification",
+          "text": "This page allows you to verify a student for successful completion of a particular opportunity (event). This is the same as accepting a verification request on the \"VERIFICATION REQUESTS\" page. If you believe that the student has successfully completed this opportunity, you can verify the student by selecting the event, inputting the student's UH username, and clicking on the \"VERIFY ATTENDANCE\" button."
+        },
+        {
+          "routeName": "Advisor_Completed_Verifications_Page",
+          "title": "Learn About Completed Verifications",
+          "text": "This page lists all completed verification requests. Verification requests are submitted by students when they would like RadGrad to acknowledge that they have successfully completed a particular opportunity. These verification requests are either accepted or declined by an advisor. You may reopen a verification request by clicking on the green \"REOPEN\" button. By doing this, the verification request will disappear from the \"COMPLETED VERIFICATIONS\" page, and will reappear on the \"VERIFICATION REQUESTS\" page. Then, you may go through the process of providing feedback and either accepting or declining the verification request again."
+        },
+        {
+          "routeName": "Advisor_Moderation_Page",
+          "title": "Learn About Moderation",
+          "text": "On RadGrad, students can provide public feedback with course reviews, opportunity reviews, and Mentorspace questions. To maintain a high-integrity learning environment, all of these public feedbacks require moderation. \n\n**Course and Opportunity Reviews:**\nCourse reviews and opportunity reviews will be visible to the public unless they are rejected through moderation. \n\n**Mentorspace Questions:**\nMentorspace questions remain hidden from the public until they are accepted through moderation, to avoid mentors answering questions that will get deleted in the future. All Mentorspace questions are required to have a slug, and you will be required to provide one if it is the first time the question is going through moderation. If the question has already been assigned a slug, you cannot change it. \n\nIf the review or question is acceptable by RadGrad standards, you can accept it by clicking on the green \"ACCEPT\" button. If the review or question is unacceptable in any way by RadGrad standards, you can decline it by clicking on the red \"DECLINE\" button. You may also provide any feedback for your response. The student will be able to see your response on their RadGrad site. A student may decide to either discard their review or question or edit it and resubmit it for further moderation. There is currently no limit to the amount of edits that a student may make."
         }
       ]
     },

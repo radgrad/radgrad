@@ -1,0 +1,12 @@
+<template name="Year_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Year</label>
+    <select class="ui dropdown" name="year">
+      <option value="">Select Year</option>
+      {{#each year in years}}
+        <option value="{{year}}" selected="{{isSelected year selectedYear}}">{{year}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

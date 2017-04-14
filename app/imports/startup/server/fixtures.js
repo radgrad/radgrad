@@ -1,6 +1,7 @@
 /* global Assets */
 
 import { Meteor } from 'meteor/meteor';
+import { AcademicPlans } from './../../api/degree/AcademicPlanCollection';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
@@ -101,7 +102,8 @@ function newStartupProcess() { // eslint-disable-line
       const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, CareerGoals, DesiredDegrees,
         ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
         CourseInstances, OpportunityInstances, FeedbackInstances,
-        VerificationRequests, Feeds, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews];
+        VerificationRequests, Feeds, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews,
+        AcademicPlans];
 
       const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
       const collectionNames = _.map(collectionList, collection => collection._collectionName);
