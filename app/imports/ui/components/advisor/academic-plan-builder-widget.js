@@ -7,6 +7,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../../../api/degree/AcademicPlanCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { PlanChoices } from '../../../api/degree/PlanChoiceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
@@ -40,16 +41,18 @@ Template.Academic_Plan_Builder_Widget.helpers({
   },
   courses() {
     const ret = [];
-    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
-    _.map(courses, (course) => {
-      const slug = Slugs.findDoc(course.slugID).name;
-      if (!slug.startsWith('other')) {
-        ret.push(slug);
+    const choices = PlanChoices.find().fetch();
+    _.map(choices, (choice) => {
+      // console.log(choice.planChoice, choice.planChoice.length);
+      if (choice.planChoice.length === 1) {
+        const planChoice = choice.planChoice[0];
+        if (planChoice.choices.length > 0) {
+          const choiceObj = planChoice.choices[0];
+          ret.push(choiceObj.choice.toString());
+        }
       }
     });
     // _.pullAll(ret, Template.instance().inPlan.get());
-    ret.push('ics300+');
-    ret.push('ics4xx');
     return ret;
   },
   desiredDegrees() {

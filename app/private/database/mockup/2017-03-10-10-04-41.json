@@ -5699,6 +5699,179 @@
       ]
     },
     {
+      "name": "PlanChoiceCollection",
+      "contents": [
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics101"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics110"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics111"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics141"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics211"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics212"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics215"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics222"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics241"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics311"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics312"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics313"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics314"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics321"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics331"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics332"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics351"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics355"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics361"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics390"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics414"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics415"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics419"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics421"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics422"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics423"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics424"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics425"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics426"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics431"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics432"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics435"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics441"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics442"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics443"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics451"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics452"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics455"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics461"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics462"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics464"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics465"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics466"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics469"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics471"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics475"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics476"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics481"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics483"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics484"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics485"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics491"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics495"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics499"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics300+"] }] }]
+        },
+        {
+          "planChoice": [{ "choices": [{ "choice": ["ics4xx"] }] }]
+        }
+      ]
+    },
+    {
       "name": "ReviewCollection",
       "contents": [
         {

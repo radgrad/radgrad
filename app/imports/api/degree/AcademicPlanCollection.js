@@ -61,8 +61,8 @@ class AcademicPlanCollection extends BaseCollection {
   }
 
   /**
-   * Returns an empty array (no integrity checking done on this collection.)
-   * @returns {Array} An empty array.
+   * Returns an array of problems. Checks the semesterID and DesiredDegree ID.
+   * @returns {Array} An array of problem messages.
    */
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     const problems = [];
@@ -78,7 +78,7 @@ class AcademicPlanCollection extends BaseCollection {
   }
 
   /**
-   * Returns an object representing the HelpMessage docID in a format acceptable to define().
+   * Returns an object representing the AcademicPlan docID in a format acceptable to define().
    * @param docID The docID of a HelpMessage.
    * @returns { Object } An object representing the definition of docID.
    */
