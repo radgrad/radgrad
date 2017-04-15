@@ -134,6 +134,66 @@ Things that could be improved:
   
   * It would be nice if the system could support the focus areas (i.e. Security focus degree requirements). *(This will be addressed in Issue [113](https://github.com/radgrad/radgrad/issues/113).)*
   
+### Subject E (April 12, 2017)
+
+Subject E is a freshman who is double majoring, with one major being in ICS, and is currently enrolled in ICS111/ICS141. Subject E's ICE score is 0/0/0 (Level 1).  
+
+While setting up Subject E's RadGrad account, Philip manually edited the degree plan to correspond more to the student's specfied interests in security. 
+
+Amy may have not stressed the importance of the over-arching philosophy behind RadGrad (importance of incorporating opportunities with courses to have a successful degree experience that will make a student competitive in the workforce) enough, so the student may not have fully understood the significance of incorporating features such as ICE.
+
+Review of the screencast revealed the following:
+
+1. The student was interested in the degree planner because it "Reminded me a lot of STAR. I like how it gives a thorough explanation of all the courses." When asked about experience using the degree planning on STAR, the response was that they do not use it because "it's very glitchy." Also added that "one factor that frustrates the most [about STAR] is that it doesn't let you consolidate the two majors. I have to switch back and forth between [the two degrees] and it feels really unnecessary."
+
+2. The student was concerned about being able to know when certain courses are being offered, because it will "heavily affect" the student's degree planning.
+ 
+3. Although the student's degree plan showed a four year plan, the student is currently planning for a five or six year plan and needed to manually reduce the amount of courses each semester.
+
+4. On ICE points, the student wondered about "tangible benefits" for completing ICE.
+
+5. Amy asked if the student liked how the recommended four year degree plan was generated rather than the student manually doing it themselves. Answer: yes.
+
+6. The student instinctively dragged and dropped courses from one semester to another without being told how to do it.
+
+7. Amy asked if they student would use it if it was released to the students to use. Answer: "I think yes. I think I will use it periodically. Especially during the registration period. I think the degree planner is the feature I will use the most often."
+
+
+Things the student liked about Rad Grad:
+
+  * "I liked how the department decided to create a individual space catered just towards the ICE students instead of just the STAR system."
+  
+  * "I like how you created a Mentorspace to connect to the graduates with actual experience in the field because when you are contained within the school, it is hard to get an idea of what you're actually going to do with the degree. Would be nice to reach out to even more graduates."
+  
+  * "Degree planner was nice."
+  
+  * "I like the layout."
+  
+Things that could be improved:
+
+  * "I don't have any negative feelings about it at the moment."
+    
+
+
+### Subject Gerald Lau (April 13, 2017)
+ 
+During this session we did a walkthrough of the system with Gerald Lau, the ICS academic advisor.  Our goal was to re-acquaint him with the basic capabilities of the system. We did not have him actively use the system, since we are in the process of implementing Academic Plans as first class entities in the system, and their implementation will substantially change the user interface with respect to a primary advisor function.  So, we walked him through the various pages available to both students and advisors and solicited his comments. Here are some of them:
+ 
+  * About 300 students per year will use the system.
+  
+  * "It will be really helpful to have descriptions of faculty projects available to students.", "Right now, they'll say they are interested in Artificial Intelligence, and the only thing I can say is, 'Go see Professor Chin, or go see Professor Binsted.'"
+  
+  * "Need the versions of the Academic Plan in the planner. I know Cam is working on it."
+  
+  * "It's good to have a version of their ICS plan without the GenEd stuff."
+  
+  * "I'll need to have a mirror of the big screen monitor on my desktop since I wear bifocal glasses."
+  
+  * The research project opportunities are a good feature. "For the faculty, they can get an undergrad to help with research, and the undergrad gets 499 credit for it."
+  
+  * "It's important to allow students to opt-out of displaying future courses/opportunities, since some students have TROs out against others."
+  
+
   
 
 
