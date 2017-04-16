@@ -82,13 +82,12 @@ Template.Academic_Plan_Builder_Widget.helpers({
 Template.Academic_Plan_Builder_Widget.events({
   'drop .bodyDrop': function dropBodyDrop(event) {
     event.preventDefault();
-    const slug = event.originalEvent.dataTransfer.getData('text');
+    const slug = event.originalEvent.dataTransfer.getData('id');
     const fromTable = event.originalEvent.dataTransfer.getData('fromTable');
     if (fromTable) {
       const element = document.getElementById(slug);
-      while (element.firstChild) {
-        element.removeChild(element.firstChild);
-      }
+      const parent = element.parentNode;
+      parent.removeChild(element);
     }
     const inPlan = Template.instance().inPlan.get();
     if (_.indexOf(inPlan, slug) === -1) {
@@ -96,47 +95,47 @@ Template.Academic_Plan_Builder_Widget.events({
     }
     Template.instance().inPlan.set(inPlan);
     const target = event.target;
-    target.setAttribute('draggable', true);
-    target.setAttribute('ondragstart', 'dragTable(event)');
-    const inner = target.innerHTML;
-    if (!inner) {
-      target.setAttribute('id', slug);
-      target.innerHTML = `<strong>${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}</strong>`;
-    } else {
-      const oldID = target.getAttribute('id');
-      target.setAttribute('id', `${oldID},${slug}`);
-      target.innerHTML = `${inner} or <strong>${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}</strong>`;
-    }
+    const div = document.createElement('div');
+    div.setAttribute('id', slug);
+    div.setAttribute('class', 'ui basic green label');
+    div.setAttribute('draggable', 'true');
+    div.setAttribute('ondragstart', 'dragTable(event)');
+    div.textContent = event.originalEvent.dataTransfer.getData('text');
+    target.appendChild(div);
   },
   'drop .trash': function dropTrash(event) {
     // event.preventDefault();
-    const slug = event.originalEvent.dataTransfer.getData('text');
+    const slug = event.originalEvent.dataTransfer.getData('id');
     const slugs = slug.split(',');
     const element = document.getElementById(slug);
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
+    const parent = element.parentNode;
+    parent.removeChild(element);
     const inPlan = Template.instance().inPlan.get();
     _.pullAll(inPlan, slugs);
     Template.instance().inPlan.set(inPlan);
   },
   'drop .comboArea': function dropCombo(event) {
     event.preventDefault();
-    const slug = event.originalEvent.dataTransfer.getData('text');
-    const slugs = slug.split(',');
-    console.log(slugs, event.target);
+    const slug = event.originalEvent.dataTransfer.getData('id');
+    // const slugs = slug.split(',');
     const element = event.target;
-    const div = document.createElement('div');
-    div.setAttribute('class', 'ui basic green label');
-    div.setAttribute('draggable', 'true');
-    div.setAttribute('ondragstart', 'drag(event)');
-    const text = document.createTextNode(`${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`);
-    div.appendChild(text);
-    element.appendChild(div);
-//             <div id="{{course}}" class="ui basic green label" draggable="true" ondragstart="drag(event)">{{courseName
-//    course}}</div>
-
-},
+    const divs = element.getElementsByTagName('div');
+    if (divs && divs.length > 0) {
+      const div = divs[0];
+      const text = div.textContent;
+      const id = div.getAttribute('id');
+      div.setAttribute('id', `${id},${slug}`);
+      div.textContent = `${text} or ${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`;
+    } else {
+      const div = document.createElement('div');
+      div.setAttribute('id', slug);
+      div.setAttribute('class', 'ui basic green label');
+      div.setAttribute('draggable', 'true');
+      div.setAttribute('ondragstart', 'drag(event)');
+      div.textContent = `${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`;
+      element.appendChild(div);
+    }
+  },
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);

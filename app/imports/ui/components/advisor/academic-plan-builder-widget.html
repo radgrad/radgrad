@@ -120,10 +120,12 @@
     }
 
     function drag(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
+      ev.dataTransfer.setData("id", ev.target.id);
+      ev.dataTransfer.setData("text", ev.target.textContent);
     }
     function dragTable(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
+      ev.dataTransfer.setData("id", ev.target.id);
+      ev.dataTransfer.setData("text", ev.target.textContent);
       ev.dataTransfer.setData("fromTable", true);
     }
   </script>
