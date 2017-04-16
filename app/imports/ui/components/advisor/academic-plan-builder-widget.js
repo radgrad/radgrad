@@ -115,6 +115,7 @@ Template.Academic_Plan_Builder_Widget.events({
     const target = event.target;
     const div = document.createElement('div');
     div.setAttribute('id', slug);
+    div.setAttribute('slug', slug);
     div.setAttribute('class', 'ui basic green label');
     div.setAttribute('draggable', 'true');
     div.setAttribute('ondragstart', 'dragTable(event)');
@@ -141,18 +142,19 @@ Template.Academic_Plan_Builder_Widget.events({
       const text = div.textContent;
       const id = div.getAttribute('id');
       if (innerOrP) {
-        div.setAttribute('id', `${id},[${slug}]`);
+        div.setAttribute('id', `${id},[${slug}]-combine`);
       } else {
-        div.setAttribute('id', `${id},${slug}`);
+        div.setAttribute('id', `${id},${slug}-combine`);
       }
       div.textContent = `${text} or ${createName(slug)}`;
     } else {
       const div = document.createElement('div');
       if (innerOrP) {
-        div.setAttribute('id', `[${slug}]`);
+        div.setAttribute('id', `[${slug}]-combine`);
       } else {
-        div.setAttribute('id', slug);
+        div.setAttribute('id', `${slug}-combine`);
       }
+      div.setAttribute('slug', slug);
       div.setAttribute('class', 'ui basic green label');
       div.setAttribute('draggable', 'true');
       div.setAttribute('ondragstart', 'drag(event)');
@@ -169,7 +171,7 @@ Template.Academic_Plan_Builder_Widget.events({
       removeElement(slug);
     }
     const div = document.createElement('div');
-    div.setAttribute('id', slug);
+    div.setAttribute('id', `${slug}-choice`);
     div.setAttribute('class', 'ui basic green label');
     div.setAttribute('draggable', 'true');
     div.setAttribute('ondragstart', 'drag(event)');

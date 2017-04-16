@@ -96,7 +96,7 @@
           <div class="ui segment choiceArea" ondragover="allowDrop(event)">
             <div class="ui dividing header"><h4>Course Choices</h4></div>
             {{#each course in courses}}
-              <div id="{{course}}" class="ui basic green label" draggable="true" ondragstart="drag(event)">{{courseName
+              <div id="{{course}}-choice" class="ui basic green label" draggable="true" ondragstart="drag(event)" slug="{{course}}">{{courseName
                   course}}</div>
             {{/each}}
           </div>
@@ -128,7 +128,7 @@
     }
 
     function drag(ev) {
-      ev.dataTransfer.setData("id", ev.target.id);
+      ev.dataTransfer.setData("id", ev.target.getAttribute('slug'));
       ev.dataTransfer.setData("text", ev.target.textContent);
       ev.dataTransfer.setData("fromTable", false);
     }
