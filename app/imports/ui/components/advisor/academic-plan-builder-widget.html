@@ -93,14 +93,14 @@
           </div>
         </div>
         <div class="six wide column">
-          <div class="ui segment">
+          <div class="ui segment choiceArea" ondragover="allowDrop(event)">
             <div class="ui dividing header"><h4>Course Choices</h4></div>
             {{#each course in courses}}
               <div id="{{course}}" class="ui basic green label" draggable="true" ondragstart="drag(event)">{{courseName
                   course}}</div>
             {{/each}}
           </div>
-          <div class="ui segment comboArea" ondragover="allowDrop(event)">
+          <div class="ui segment comboArea" ondragover="allowComboAreaDrop(event)">
             <i class="big linkify icon"></i>
           </div>
           <div class="ui segment trash" ondragover="allowDrop(event)">
@@ -119,9 +119,18 @@
       ev.preventDefault();
     }
 
+    function allowComboAreaDrop(ev) {
+      if (ev.dataTransfer.getData("fromTable") == "true") {
+        // don't allow the drop
+      } else {
+        ev.preventDefault();
+      }
+    }
+
     function drag(ev) {
       ev.dataTransfer.setData("id", ev.target.id);
       ev.dataTransfer.setData("text", ev.target.textContent);
+      ev.dataTransfer.setData("fromTable", false);
     }
     function dragTable(ev) {
       ev.dataTransfer.setData("id", ev.target.id);

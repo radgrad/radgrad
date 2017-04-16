@@ -18,6 +18,26 @@ const addSchema = new SimpleSchema({
   year: { type: Number },
 });
 
+function createName(slug) {
+  const slugs = slug.split(',');
+  if (slugs.length > 1) {
+    let ret = '(';
+    _.map(slugs, (s) => {
+      ret = `${ret}${s.substring(0, 3).toUpperCase()} ${s.substring(3)} or `;
+    });
+    ret = `${ret.substring(0, ret.length - 4)})`;
+    return ret;
+  }
+  return `${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`;
+}
+
+function removeElement(slug) {
+  console.log((`removeElement(${slug})`));
+  const element = document.getElementById(slug);
+  const parent = element.parentNode;
+  parent.removeChild(element);
+}
+
 Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCreated() {
   FormUtils.setupFormWidget(this, addSchema);
   this.state = new ReactiveDict();
@@ -84,10 +104,8 @@ Template.Academic_Plan_Builder_Widget.events({
     event.preventDefault();
     const slug = event.originalEvent.dataTransfer.getData('id');
     const fromTable = event.originalEvent.dataTransfer.getData('fromTable');
-    if (fromTable) {
-      const element = document.getElementById(slug);
-      const parent = element.parentNode;
-      parent.removeChild(element);
+    if (fromTable === 'true') {
+      removeElement(slug);
     }
     const inPlan = Template.instance().inPlan.get();
     if (_.indexOf(inPlan, slug) === -1) {
@@ -107,9 +125,7 @@ Template.Academic_Plan_Builder_Widget.events({
     // event.preventDefault();
     const slug = event.originalEvent.dataTransfer.getData('id');
     const slugs = slug.split(',');
-    const element = document.getElementById(slug);
-    const parent = element.parentNode;
-    parent.removeChild(element);
+    removeElement(slug);
     const inPlan = Template.instance().inPlan.get();
     _.pullAll(inPlan, slugs);
     Template.instance().inPlan.set(inPlan);
@@ -117,24 +133,48 @@ Template.Academic_Plan_Builder_Widget.events({
   'drop .comboArea': function dropCombo(event) {
     event.preventDefault();
     const slug = event.originalEvent.dataTransfer.getData('id');
-    // const slugs = slug.split(',');
+    const innerOrP = slug.split(',').length > 1;
     const element = event.target;
     const divs = element.getElementsByTagName('div');
     if (divs && divs.length > 0) {
       const div = divs[0];
       const text = div.textContent;
       const id = div.getAttribute('id');
-      div.setAttribute('id', `${id},${slug}`);
-      div.textContent = `${text} or ${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`;
+      if (innerOrP) {
+        div.setAttribute('id', `${id},[${slug}]`);
+      } else {
+        div.setAttribute('id', `${id},${slug}`);
+      }
+      div.textContent = `${text} or ${createName(slug)}`;
     } else {
       const div = document.createElement('div');
-      div.setAttribute('id', slug);
+      if (innerOrP) {
+        div.setAttribute('id', `[${slug}]`);
+      } else {
+        div.setAttribute('id', slug);
+      }
       div.setAttribute('class', 'ui basic green label');
       div.setAttribute('draggable', 'true');
       div.setAttribute('ondragstart', 'drag(event)');
-      div.textContent = `${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`;
+      div.textContent = createName(slug);
       element.appendChild(div);
     }
+  },
+  'drop .choiceArea': function dropChoiceArea(event) {
+    event.preventDefault();
+    const slug = event.originalEvent.dataTransfer.getData('id');
+    const text = event.originalEvent.dataTransfer.getData('text');
+    const fromTable = event.originalEvent.dataTransfer.getData('fromTable');
+    if (fromTable === 'true') {
+      removeElement(slug);
+    }
+    const div = document.createElement('div');
+    div.setAttribute('id', slug);
+    div.setAttribute('class', 'ui basic green label');
+    div.setAttribute('draggable', 'true');
+    div.setAttribute('ondragstart', 'drag(event)');
+    div.textContent = text;
+    event.target.appendChild(div);
   },
   submit(event, instance) {
     event.preventDefault();
