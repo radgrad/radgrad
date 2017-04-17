@@ -135,7 +135,10 @@ Template.Academic_Plan_Builder_Widget.events({
     event.preventDefault();
     const slug = event.originalEvent.dataTransfer.getData('id');
     const innerOrP = slug.split(',').length > 1;
-    const element = event.target;
+    let element = event.target;
+    while (element && !element.className.includes('segment')) {
+      element = element.parentNode;
+    }
     const divs = element.getElementsByTagName('div');
     if (divs && divs.length > 0) {
       const div = divs[0];
@@ -170,13 +173,17 @@ Template.Academic_Plan_Builder_Widget.events({
     if (fromTable === 'true') {
       removeElement(slug);
     }
+    let element = event.target;
+    while (element && !element.className.includes('segment')) {
+      element = element.parentNode;
+    }
     const div = document.createElement('div');
     div.setAttribute('id', `${slug}-choice`);
     div.setAttribute('class', 'ui basic green label');
     div.setAttribute('draggable', 'true');
     div.setAttribute('ondragstart', 'drag(event)');
     div.textContent = text;
-    event.target.appendChild(div);
+    element.appendChild(div);
   },
   submit(event, instance) {
     event.preventDefault();
