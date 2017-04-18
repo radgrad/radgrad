@@ -95,9 +95,6 @@
         <div class="six wide column">
           <div class="ui segment choiceArea" ondragover="allowDrop(event)">
             <div class="ui dividing header"><h4>Course Choices</h4></div>
-            <p>
-              <button class="ui basic green button jsSaveChoices">Save Choices</button>
-            </p>
             {{#each course in courses}}
               <div id="{{course}}-choice" class="ui basic label" draggable="true" ondragstart="drag(event)"
                    slug="{{course}}">{{courseName
@@ -117,6 +114,27 @@
 
       {{> Success_Message_Form_Field message="The Academic Plan was successfully added."}}
     </form>
+    <div class="ui basic modal">
+      <div class="ui icon header">
+        <i class="circle warning icon"></i>
+        Add Course Choice - Warning
+      </div>
+      <div class="content" style="text-align: center;">
+        <p>Do you want to add {{choice}} to the Course Choices.  You cannot delete it, yet.</p>
+        <p><b>Continue?</b></p>
+      </div>
+      <div class="actions">
+        <div class="ui red basic cancel inverted button">
+          <i class="remove icon"></i>
+          No
+        </div>
+        <div class="ui green ok inverted button">
+          <i class="checkmark icon"></i>
+          Yes
+        </div>
+      </div>
+    </div>
+
   </div>
   <script>
     function allowDrop(ev) {

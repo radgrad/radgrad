@@ -85,6 +85,7 @@ Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCre
   this.state = new ReactiveDict();
   this.inPlan = new ReactiveVar('');
   this.inPlan.set([]);
+  this.choice = new ReactiveVar('');
 });
 
 Template.Academic_Plan_Builder_Widget.helpers({
@@ -97,6 +98,12 @@ Template.Academic_Plan_Builder_Widget.helpers({
       }
     });
     return ret;
+  },
+  choice() {
+    if (Template.instance().choice.get()) {
+      return createName(Template.instance().choice.get());
+    }
+    return '';
   },
   courseName(slug) {
     return createName(slug);
@@ -120,7 +127,6 @@ Template.Academic_Plan_Builder_Widget.helpers({
       }
     });
     // _.pullAll(ret, Template.instance().inPlan.get());
-    console.log(ret);
     return ret;
   },
   desiredDegrees() {
@@ -217,59 +223,39 @@ Template.Academic_Plan_Builder_Widget.events({
       element.appendChild(div);
     }
   },
-  'drop .choiceArea': function dropChoiceArea(event) {
+  'drop .choiceArea': function dropChoiceArea(event, instance) {
     event.preventDefault();
     const id = event.originalEvent.dataTransfer.getData('id');
     const slug = event.originalEvent.dataTransfer.getData('slug');
+    Template.instance().choice.set(slug);
     const text = event.originalEvent.dataTransfer.getData('text');
     const from = event.originalEvent.dataTransfer.getData('from');
-    console.log('choiceArea', id, slug, from);
-    if (from === 'table' || from === 'combine') {
-      removeElement(id);
-    }
-    let element = event.target;
-    while (element && !element.className.includes('segment')) {
-      element = element.parentNode;
-    }
-    const div = document.createElement('div');
-    div.setAttribute('id', `${slug}-choice`);
-    div.setAttribute('class', 'ui basic label');
-    div.setAttribute('draggable', 'true');
-    div.setAttribute('ondragstart', 'drag(event)');
-    div.setAttribute('slug', slug);
-    div.textContent = text;
-    element.appendChild(div);
-  },
-  'click .jsSaveChoices': function clickSaveChoices(event) {
-    event.preventDefault();
-    let element = event.target;
-    while (element && !element.className.includes('segment')) {
-      element = element.parentNode;
-    }
-    const divs = element.getElementsByTagName('div');
-    // {
-    //   "planChoice": [{ "choices": [{ "choice": ["ics101"] }] }]
-    // },
-    _.map(divs, (div) => {
-      const slug = div.getAttribute('slug');
-      const planChoice = [];
-      const outer = {};
-      outer.choices = [];
-      if (slug && slug.indexOf('[') === -1) {
-        outer.choices.push(buildChoice(slug));
-        planChoice.push(outer);
-        PlanChoices.define({ planChoice });
-      } else if (slug) {
-        const complex = slug.split('],');
-        _.map(complex, (c) => {
-          let str = c.replace(/\[/g, '');
-          str = str.replace(/]/g, '');
-          outer.choices.push(buildChoice(str));
-        });
-        planChoice.push(outer);
-        PlanChoices.define({ planChoice });
-      }
-    });
+    instance.$('.ui.basic.modal').modal({
+      detachable: false,
+      onApprove() {
+        // console.log('choiceArea', id, slug, from);
+        if (from === 'table' || from === 'combine') {
+          removeElement(id);
+        }
+        const planChoice = [];
+        const outer = {};
+        outer.choices = [];
+        if (slug && slug.indexOf('[') === -1) {
+          outer.choices.push(buildChoice(slug));
+          planChoice.push(outer);
+          PlanChoices.define({ planChoice });
+        } else if (slug) {
+          const complex = slug.split('],');
+          _.map(complex, (c) => {
+            let str = c.replace(/\[/g, '');
+            str = str.replace(/]/g, '');
+            outer.choices.push(buildChoice(str));
+          });
+          planChoice.push(outer);
+          PlanChoices.define({ planChoice });
+        }
+      },
+    }).modal('show');
   },
   submit(event, instance) {
     event.preventDefault();
