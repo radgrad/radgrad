@@ -18,7 +18,7 @@ const addSchema = new SimpleSchema({
   year: { type: Number },
 });
 
-function createName(slug) {
+function createSimpleName(slug) {
   const slugs = slug.split(',');
   if (slugs.length > 1) {
     let ret = '(';
@@ -31,11 +31,53 @@ function createName(slug) {
   return `${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`;
 }
 
+function createName(slug) {
+  // console.log('createName', slug);
+  if (slug.indexOf('[') !== -1) {
+    let ret = '';
+    const complex = slug.split('],');
+    _.map(complex, (c) => {
+      let str = c.replace(/\[/g, '');
+      str = str.replace(/]/g, '');
+      ret = `${ret}${createSimpleName(str)} or `;
+    });
+    return ret.substring(0, ret.length - 4);
+  }
+  return createSimpleName(slug);
+}
+
 function removeElement(slug) {
-  console.log((`removeElement(${slug})`));
   const element = document.getElementById(slug);
-  const parent = element.parentNode;
-  parent.removeChild(element);
+  if (element) {
+    const parent = element.parentNode;
+    parent.removeChild(element);
+  }
+}
+
+function getAllElementsWithAttribute(attribute, value) {
+  const matchingElements = [];
+  const allElements = document.getElementsByTagName('*');
+  for (let i = 0, n = allElements.length; i < n; i += 1) {
+    if (allElements[i].getAttribute(attribute) !== null && allElements[i].getAttribute(attribute) === value) {
+      // Element exists with attribute. Add to array.
+      matchingElements.push(allElements[i]);
+    }
+  }
+  return matchingElements;
+}
+
+/**
+ * Returns an array of choices for use in the array of choice.
+ * {
+ *   "planChoice": [{ "choices": [{ "choice": ["ics101"] }] }]
+ * }
+ * @param slug
+ */
+function buildChoice(slug) {
+  const inner = {};
+  inner.choice = slug.split(',');
+  // console.log(inner);
+  return inner;
 }
 
 Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCreated() {
@@ -57,22 +99,28 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return ret;
   },
   courseName(slug) {
-    return `${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`;
+    return createName(slug);
   },
   courses() {
     const ret = [];
     const choices = PlanChoices.find().fetch();
     _.map(choices, (choice) => {
-      // console.log(choice.planChoice, choice.planChoice.length);
       if (choice.planChoice.length === 1) {
         const planChoice = choice.planChoice[0];
-        if (planChoice.choices.length > 0) {
+        if (planChoice.choices.length > 1) {
+          let str = '';
+          _.map(planChoice.choices, (c) => {
+            str = `${str}[${c.choice.toString()}],`;
+          });
+          ret.push(str.substring(0, str.length - 1));
+        } else {
           const choiceObj = planChoice.choices[0];
           ret.push(choiceObj.choice.toString());
         }
       }
     });
     // _.pullAll(ret, Template.instance().inPlan.get());
+    console.log(ret);
     return ret;
   },
   desiredDegrees() {
@@ -102,10 +150,12 @@ Template.Academic_Plan_Builder_Widget.helpers({
 Template.Academic_Plan_Builder_Widget.events({
   'drop .bodyDrop': function dropBodyDrop(event) {
     event.preventDefault();
-    const slug = event.originalEvent.dataTransfer.getData('id');
-    const fromTable = event.originalEvent.dataTransfer.getData('fromTable');
-    if (fromTable === 'true') {
-      removeElement(slug);
+    const id = event.originalEvent.dataTransfer.getData('id');
+    const slug = event.originalEvent.dataTransfer.getData('slug');
+    const from = event.originalEvent.dataTransfer.getData('from');
+    const numInPlan = getAllElementsWithAttribute('slug', slug).length;
+    if (from === 'table' || from === 'combine') {
+      removeElement(id);
     }
     const inPlan = Template.instance().inPlan.get();
     if (_.indexOf(inPlan, slug) === -1) {
@@ -114,9 +164,9 @@ Template.Academic_Plan_Builder_Widget.events({
     Template.instance().inPlan.set(inPlan);
     const target = event.target;
     const div = document.createElement('div');
-    div.setAttribute('id', slug);
+    div.setAttribute('id', `${slug}${numInPlan}`);
     div.setAttribute('slug', slug);
-    div.setAttribute('class', 'ui basic green label');
+    div.setAttribute('class', 'ui basic label');
     div.setAttribute('draggable', 'true');
     div.setAttribute('ondragstart', 'dragTable(event)');
     div.textContent = event.originalEvent.dataTransfer.getData('text');
@@ -124,16 +174,15 @@ Template.Academic_Plan_Builder_Widget.events({
   },
   'drop .trash': function dropTrash(event) {
     // event.preventDefault();
-    const slug = event.originalEvent.dataTransfer.getData('id');
-    const slugs = slug.split(',');
-    removeElement(slug);
-    const inPlan = Template.instance().inPlan.get();
-    _.pullAll(inPlan, slugs);
-    Template.instance().inPlan.set(inPlan);
+    const id = event.originalEvent.dataTransfer.getData('id');
+    const choiceP = event.originalEvent.dataTransfer.getData('from') === 'choice';
+    if (!choiceP) {
+      removeElement(id);
+    }
   },
   'drop .comboArea': function dropCombo(event) {
     event.preventDefault();
-    const slug = event.originalEvent.dataTransfer.getData('id');
+    const slug = event.originalEvent.dataTransfer.getData('slug');
     const innerOrP = slug.split(',').length > 1;
     let element = event.target;
     while (element && !element.className.includes('segment')) {
@@ -144,10 +193,13 @@ Template.Academic_Plan_Builder_Widget.events({
       const div = divs[0];
       const text = div.textContent;
       const id = div.getAttribute('id');
+      const oldID = id.substring(0, id.length - 8);
       if (innerOrP) {
-        div.setAttribute('id', `${id},[${slug}]-combine`);
+        div.setAttribute('id', `${oldID},[${slug}]-combine`);
+        div.setAttribute('slug', `${oldID},[${slug}]`);
       } else {
-        div.setAttribute('id', `${id},${slug}-combine`);
+        div.setAttribute('id', `${oldID},${slug}-combine`);
+        div.setAttribute('slug', `${oldID},${slug}`);
       }
       div.textContent = `${text} or ${createName(slug)}`;
     } else {
@@ -158,20 +210,22 @@ Template.Academic_Plan_Builder_Widget.events({
         div.setAttribute('id', `${slug}-combine`);
       }
       div.setAttribute('slug', slug);
-      div.setAttribute('class', 'ui basic green label');
+      div.setAttribute('class', 'ui basic label');
       div.setAttribute('draggable', 'true');
-      div.setAttribute('ondragstart', 'drag(event)');
+      div.setAttribute('ondragstart', 'dragCombine(event)');
       div.textContent = createName(slug);
       element.appendChild(div);
     }
   },
   'drop .choiceArea': function dropChoiceArea(event) {
     event.preventDefault();
-    const slug = event.originalEvent.dataTransfer.getData('id');
+    const id = event.originalEvent.dataTransfer.getData('id');
+    const slug = event.originalEvent.dataTransfer.getData('slug');
     const text = event.originalEvent.dataTransfer.getData('text');
-    const fromTable = event.originalEvent.dataTransfer.getData('fromTable');
-    if (fromTable === 'true') {
-      removeElement(slug);
+    const from = event.originalEvent.dataTransfer.getData('from');
+    console.log('choiceArea', id, slug, from);
+    if (from === 'table' || from === 'combine') {
+      removeElement(id);
     }
     let element = event.target;
     while (element && !element.className.includes('segment')) {
@@ -179,11 +233,43 @@ Template.Academic_Plan_Builder_Widget.events({
     }
     const div = document.createElement('div');
     div.setAttribute('id', `${slug}-choice`);
-    div.setAttribute('class', 'ui basic green label');
+    div.setAttribute('class', 'ui basic label');
     div.setAttribute('draggable', 'true');
     div.setAttribute('ondragstart', 'drag(event)');
+    div.setAttribute('slug', slug);
     div.textContent = text;
     element.appendChild(div);
+  },
+  'click .jsSaveChoices': function clickSaveChoices(event) {
+    event.preventDefault();
+    let element = event.target;
+    while (element && !element.className.includes('segment')) {
+      element = element.parentNode;
+    }
+    const divs = element.getElementsByTagName('div');
+    // {
+    //   "planChoice": [{ "choices": [{ "choice": ["ics101"] }] }]
+    // },
+    _.map(divs, (div) => {
+      const slug = div.getAttribute('slug');
+      const planChoice = [];
+      const outer = {};
+      outer.choices = [];
+      if (slug && slug.indexOf('[') === -1) {
+        outer.choices.push(buildChoice(slug));
+        planChoice.push(outer);
+        PlanChoices.define({ planChoice });
+      } else if (slug) {
+        const complex = slug.split('],');
+        _.map(complex, (c) => {
+          let str = c.replace(/\[/g, '');
+          str = str.replace(/]/g, '');
+          outer.choices.push(buildChoice(str));
+        });
+        planChoice.push(outer);
+        PlanChoices.define({ planChoice });
+      }
+    });
   },
   submit(event, instance) {
     event.preventDefault();
@@ -198,30 +284,22 @@ Template.Academic_Plan_Builder_Widget.events({
       const semester = `Fall-${newData.year}`;
       const coursesPerSemester = [];
       const courseList = [];
-      const ays = instance.$('.academicYear');
-      _.map(ays, (ay) => {
-        const tables = ay.querySelectorAll('table');
-        _.map(tables, (table) => {
-          const tds = table.querySelectorAll('td');
-          let count = 0;
-          _.map(tds, (td) => {
-            if (td.id) {
-              courseList.push({ course: td.id.split(',') });
-              count += 1;
-            }
-          });
-          coursesPerSemester.push(count);
-        });
-      });
+      // const ays = instance.$('.academicYear');
+      // _.map(ays, (ay) => {
+      //   const tables = ay.querySelectorAll('table');
+      //   _.map(tables, (table) => {
+      //   });
+      // });
       console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
-      try {
-        AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
-        FormUtils.indicateSuccess(instance, event);
-      } catch (e) {
-        FormUtils.indicateError(instance);
-      }
-    } else {
-      FormUtils.indicateError(instance);
+      //   try {
+      //     AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
+      //     FormUtils.indicateSuccess(instance, event);
+      //   } catch (e) {
+      //     FormUtils.indicateError(instance);
+      //   }
+      // } else {
+      //   FormUtils.indicateError(instance);
+      // }
     }
   },
 });

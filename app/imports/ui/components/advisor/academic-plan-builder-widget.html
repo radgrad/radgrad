@@ -95,8 +95,12 @@
         <div class="six wide column">
           <div class="ui segment choiceArea" ondragover="allowDrop(event)">
             <div class="ui dividing header"><h4>Course Choices</h4></div>
+            <p>
+              <button class="ui basic green button jsSaveChoices">Save Choices</button>
+            </p>
             {{#each course in courses}}
-              <div id="{{course}}-choice" class="ui basic green label" draggable="true" ondragstart="drag(event)" slug="{{course}}">{{courseName
+              <div id="{{course}}-choice" class="ui basic label" draggable="true" ondragstart="drag(event)"
+                   slug="{{course}}">{{courseName
                   course}}</div>
             {{/each}}
           </div>
@@ -109,7 +113,7 @@
         </div>
       </div>
 
-      <button class="ui basic green button jsNewPlan" type="submit">Submit</button>
+      <button class="ui basic green button jsNewPlan" type="submit">Save Academic Plan</button>
 
       {{> Success_Message_Form_Field message="The Academic Plan was successfully added."}}
     </form>
@@ -120,7 +124,7 @@
     }
 
     function allowComboAreaDrop(ev) {
-      if (ev.dataTransfer.getData("fromTable") == "true") {
+      if (ev.dataTransfer.getData("from") == "table") {
         // don't allow the drop
       } else {
         ev.preventDefault();
@@ -128,14 +132,21 @@
     }
 
     function drag(ev) {
-      ev.dataTransfer.setData("id", ev.target.getAttribute('slug'));
+      ev.dataTransfer.setData("slug", ev.target.getAttribute('slug'));
       ev.dataTransfer.setData("text", ev.target.textContent);
-      ev.dataTransfer.setData("fromTable", false);
+      ev.dataTransfer.setData("from", 'choice');
     }
     function dragTable(ev) {
       ev.dataTransfer.setData("id", ev.target.id);
+      ev.dataTransfer.setData("slug", ev.target.getAttribute('slug'));
       ev.dataTransfer.setData("text", ev.target.textContent);
-      ev.dataTransfer.setData("fromTable", true);
+      ev.dataTransfer.setData("from", 'table');
+    }
+    function dragCombine(ev) {
+      ev.dataTransfer.setData("id", ev.target.id);
+      ev.dataTransfer.setData("slug", ev.target.getAttribute('slug'));
+      ev.dataTransfer.setData("text", ev.target.textContent);
+      ev.dataTransfer.setData("from", 'combine');
     }
   </script>
 </template>
