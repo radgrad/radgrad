@@ -26,8 +26,8 @@ Template.Academic_Plan_Semester.helpers({
   },
   inPlan(course) {
     const studentID = getUserIdFromRoute();
-    const courseReqs = Template.instance().data.courses;
-    console.log(courseReqs);
+    // const courseReqs = Template.instance().data.courses;
+    // console.log(courseReqs);
     let ret = false;
     if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
       const courses = CourseInstances.find({ studentID }).fetch();

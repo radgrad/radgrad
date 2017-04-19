@@ -25,8 +25,8 @@ Template.Academic_Plan_Viewer_Component.helpers({
       // console.log(numCourses, courseList);
       for (i = 0; i < numCourses; i += 1) {
         const course = courseList.splice(0, 1);
-        // console.log(course[0].course);
-        ret.push(course[0].course);
+        // console.log(course[0].planChoice[0].choices[0].choice);
+        ret.push(course[0].planChoice[0].choices[0].choice);
       }
     }
     return ret;

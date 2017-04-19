@@ -16,11 +16,25 @@ if (Meteor.isServer) {
     const description = 'B.S. in CS.';
     const semester = 'Spring-2017';
     const coursesPerSemester = [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0];
-    const courseList = [{ course: ['ics111'] }, { course: ['ics141'] }, { course: ['ics211'] }, { course: ['ics241'] },
-      { course: ['ics311'] }, { course: ['ics314'] }, { course: ['ics212'] }, { course: ['ics321'] },
-      { course: ['ics313', 'ics361'] }, { course: ['ics312', 'ics331'] }, { course: ['ics332'] },
-      { course: ['ics4xx'] }, { course: ['ics4xx'] }, { course: ['ics4xx'] },
-      { course: ['ics4xx'] }, { course: ['ics4xx'] }];
+    const planChoice = [
+      { choices: [{ choice: ['ics111'] }] },
+      { choices: [{ choice: ['ics141'] }] },
+      { choices: [{ choice: ['ics211'] }] },
+      { choices: [{ choice: ['ics241'] }] },
+      { choices: [{ choice: ['ics311'] }] },
+      { choices: [{ choice: ['ics314'] }] },
+      { choices: [{ choice: ['ics212'] }] },
+      { choices: [{ choice: ['ics321'] }] },
+      { choices: [{ choice: ['ics313', 'ics361'] }] },
+      { choices: [{ choice: ['ics312', 'ics331'] }] },
+      { choices: [{ choice: ['ics332'] }] },
+      { choices: [{ choice: ['ics4xx'] }] },
+      { choices: [{ choice: ['ics4xx'] }] },
+      { choices: [{ choice: ['ics4xx'] }] },
+      { choices: [{ choice: ['ics4xx'] }] },
+      { choices: [{ choice: ['ics4xx'] }] },
+    ];
+    const courseList = [{ planChoice }];
 
     before(function setup() {
       removeAllEntities();

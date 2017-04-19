@@ -280,18 +280,21 @@ Template.Academic_Plan_Builder_Widget.events({
         const tables = ay.querySelectorAll('table');
         _.map(tables, (table) => {
           const divs = table.getElementsByTagName('div');
+          coursesPerSemester.push(divs.length);
           _.map(divs, (div) => {
-            console.log(div.getAttribute('slug'));
+            const planChoice = buildPlanChoice(div.getAttribute('slug'));
+            courseList.push({ planChoice });
           });
         });
       });
       console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
-      //   try {
-      //     AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
-      //     FormUtils.indicateSuccess(instance, event);
-      //   } catch (e) {
-      //     FormUtils.indicateError(instance);
-      //   }
+      try {
+        AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
+        FormUtils.indicateSuccess(instance, event);
+      } catch (e) {
+        alert(e);
+        FormUtils.indicateError(instance);
+      }
     } else {
       FormUtils.indicateError(instance);
     }

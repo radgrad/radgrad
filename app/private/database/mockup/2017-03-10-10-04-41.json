@@ -4,6 +4,237 @@
     {
       "name": "AcademicPlanCollection",
       "contents": [
+        {
+          "degreeSlug": "bs-cs",
+          "name": "B.S. in Computer Sciences",
+          "semester": "Fall-2016",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics111"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics141"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics211"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics241"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics311"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics314"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics212"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics321"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics312",
+                        "ics331"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics313",
+                        "ics361"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics332"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics4xx"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics4xx"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics4xx"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics4xx"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "planChoice": [
+                {
+                  "choices": [
+                    {
+                      "choice": [
+                        "ics4xx"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -6078,6 +6309,62 @@
               "choices": [
                 {
                   "choice": [
+                    "ics415",
+                    "ics351"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "planChoice": [
+            {
+              "choices": [
+                {
+                  "choice": [
+                    "ics414",
+                    "ics464"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "planChoice": [
+            {
+              "choices": [
+                {
+                  "choice": [
+                    "ics425",
+                    "ics426"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "planChoice": [
+            {
+              "choices": [
+                {
+                  "choice": [
+                    "ics491",
+                    "ics495"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "planChoice": [
+            {
+              "choices": [
+                {
+                  "choice": [
                     "ics312",
                     "ics331"
                   ]
@@ -6091,6 +6378,30 @@
                 {
                   "choice": [
                     "ics355"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "planChoice": [
+            {
+              "choices": [
+                {
+                  "choice": [
+                    "ics321"
+                  ]
+                },
+                {
+                  "choice": [
+                    "ics332"
+                  ]
+                },
+                {
+                  "choice": [
+                    "ics415",
+                    "ics351"
                   ]
                 }
               ]
