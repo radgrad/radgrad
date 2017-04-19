@@ -3,14 +3,11 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { DesiredDegrees } from './../degree/DesiredDegreeCollection';
+import { PlanChoiceSchema } from './PlanChoiceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 
 /** @module AcademicPlan */
-
-const CourseChoiceSchema = new SimpleSchema({
-  course: { type: [String] },
-});
 
 class AcademicPlanCollection extends BaseCollection {
 
@@ -20,7 +17,7 @@ class AcademicPlanCollection extends BaseCollection {
       name: { type: String },
       effectiveSemesterID: { type: SimpleSchema.RegEx.Id },
       coursesPerSemester: { type: [Number], minCount: 12, maxCount: 12 },
-      courseList: { type: [CourseChoiceSchema] },
+      courseList: { type: [PlanChoiceSchema] },
     }));
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, degreeID: 1, effectiveSemesterID: 1 });

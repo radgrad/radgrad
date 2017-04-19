@@ -80,6 +80,26 @@ function buildChoice(slug) {
   return inner;
 }
 
+function buildPlanChoice(slug) {
+  const planChoice = [];
+  const outer = {};
+  outer.choices = [];
+  if (slug && slug.indexOf('[') === -1) {
+    outer.choices.push(buildChoice(slug));
+    planChoice.push(outer);
+  } else
+    if (slug) {
+      const complex = slug.split('],');
+      _.map(complex, (c) => {
+        let str = c.replace(/\[/g, '');
+        str = str.replace(/]/g, '');
+        outer.choices.push(buildChoice(str));
+      });
+      planChoice.push(outer);
+    }
+  return planChoice;
+}
+
 Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCreated() {
   FormUtils.setupFormWidget(this, addSchema);
   this.state = new ReactiveDict();
@@ -228,7 +248,6 @@ Template.Academic_Plan_Builder_Widget.events({
     const id = event.originalEvent.dataTransfer.getData('id');
     const slug = event.originalEvent.dataTransfer.getData('slug');
     Template.instance().choice.set(slug);
-    const text = event.originalEvent.dataTransfer.getData('text');
     const from = event.originalEvent.dataTransfer.getData('from');
     instance.$('.ui.basic.modal').modal({
       detachable: false,
@@ -237,27 +256,13 @@ Template.Academic_Plan_Builder_Widget.events({
         if (from === 'table' || from === 'combine') {
           removeElement(id);
         }
-        const planChoice = [];
-        const outer = {};
-        outer.choices = [];
-        if (slug && slug.indexOf('[') === -1) {
-          outer.choices.push(buildChoice(slug));
-          planChoice.push(outer);
-          PlanChoices.define({ planChoice });
-        } else if (slug) {
-          const complex = slug.split('],');
-          _.map(complex, (c) => {
-            let str = c.replace(/\[/g, '');
-            str = str.replace(/]/g, '');
-            outer.choices.push(buildChoice(str));
-          });
-          planChoice.push(outer);
-          PlanChoices.define({ planChoice });
-        }
+        const planChoice = buildPlanChoice(slug);
+        PlanChoices.define({ planChoice });
       },
     }).modal('show');
   },
   submit(event, instance) {
+    console.log('submit Plan');
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.resetValidation();
@@ -270,12 +275,16 @@ Template.Academic_Plan_Builder_Widget.events({
       const semester = `Fall-${newData.year}`;
       const coursesPerSemester = [];
       const courseList = [];
-      // const ays = instance.$('.academicYear');
-      // _.map(ays, (ay) => {
-      //   const tables = ay.querySelectorAll('table');
-      //   _.map(tables, (table) => {
-      //   });
-      // });
+      const ays = instance.$('.academicYear');
+      _.map(ays, (ay) => {
+        const tables = ay.querySelectorAll('table');
+        _.map(tables, (table) => {
+          const divs = table.getElementsByTagName('div');
+          _.map(divs, (div) => {
+            console.log(div.getAttribute('slug'));
+          });
+        });
+      });
       console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
       //   try {
       //     AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
@@ -283,9 +292,8 @@ Template.Academic_Plan_Builder_Widget.events({
       //   } catch (e) {
       //     FormUtils.indicateError(instance);
       //   }
-      // } else {
-      //   FormUtils.indicateError(instance);
-      // }
+    } else {
+      FormUtils.indicateError(instance);
     }
   },
 });

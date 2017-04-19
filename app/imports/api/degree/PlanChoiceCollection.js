@@ -10,15 +10,17 @@ const ComplexChoiceSchema = new SimpleSchema({
   choices: { type: [SimpleChoiceSchema] },
 });
 
+export const PlanChoiceSchema = new SimpleSchema({
+  planChoice: { type: [ComplexChoiceSchema] },
+});
+
 class PlanChoiceCollection extends BaseCollection {
 
   /**
    * Creates a plan choice.
    */
   constructor() {
-    super('PlanChoice', new SimpleSchema({
-      planChoice: { type: [ComplexChoiceSchema] },
-    }));
+    super('PlanChoice', PlanChoiceSchema);
   }
 
   define({ planChoice }) {
