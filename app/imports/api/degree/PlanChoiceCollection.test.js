@@ -8,24 +8,10 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('PlanChoiceCollection', function testSuite() {
-    const planChoice = [
-      { choices: [{ choice: ['ics111'] }] },
-      { choices: [{ choice: ['ics141'] }] },
-      { choices: [{ choice: ['ics211'] }] },
-      { choices: [{ choice: ['ics241'] }] },
-      { choices: [{ choice: ['ics311'] }] },
-      { choices: [{ choice: ['ics314'] }] },
-      { choices: [{ choice: ['ics212'] }] },
-      { choices: [{ choice: ['ics321'] }] },
-      { choices: [{ choice: ['ics313', 'ics361'] }] },
-      { choices: [{ choice: ['ics312', 'ics331'] }] },
-      { choices: [{ choice: ['ics332'] }] },
-      { choices: [{ choice: ['ics4xx'] }] },
-      { choices: [{ choice: ['ics4xx'] }] },
-      { choices: [{ choice: ['ics4xx'] }] },
-      { choices: [{ choice: ['ics4xx'] }] },
-      { choices: [{ choice: ['ics4xx'] }] },
-    ];
+    const simple = 'ics111';
+    const choice = 'ics313,ics361';
+    const complex = 'ics321,ics332,(ics415,ics351)';
+    const complex2 = '(ics312,ics331),(ics313,ics361),ics355';
 
     before(function setup() {
       removeAllEntities();
@@ -35,16 +21,24 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      const docID = PlanChoices.define({
-        planChoice,
-      });
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #toStringFromSlug', function test() {
+      const docID = PlanChoices.define(simple);
       expect(PlanChoices.isDefined(docID)).to.be.true;
       const dumpObject = PlanChoices.dumpOne(docID);
+      console.log(dumpObject);
       PlanChoices.removeIt(docID);
       expect(PlanChoices.isDefined(docID)).to.be.false;
       const planID = PlanChoices.restoreOne(dumpObject);
       expect(PlanChoices.isDefined(planID)).to.be.true;
+      const choiceID = PlanChoices.define(choice);
+      expect(PlanChoices.isDefined(choiceID)).to.be.true;
+      const complexID = PlanChoices.define(complex);
+      expect(PlanChoices.isDefined(complexID)).to.be.true;
+      expect(PlanChoices.toStringFromSlug(simple) === 'ICS 111').to.be.true;
+      expect(PlanChoices.toStringFromSlug(choice) === 'ICS 313 or ICS 361').to.be.true;
+      expect(PlanChoices.toStringFromSlug(complex) === 'ICS 321 or ICS 332 or (ICS 415 or ICS 351)').to.be.true;
+      expect(PlanChoices.toStringFromSlug(complex2) ===
+          '(ICS 312 or ICS 331) or (ICS 313 or ICS 361) or ICS 355').to.be.true;
     });
   });
 }

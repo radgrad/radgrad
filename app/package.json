@@ -16,7 +16,8 @@
     "babel-runtime": "^6.23.0",
     "bcrypt": "^0.8.7",
     "chai": "^3.5.0",
-    "meteor-node-stubs": "^0.2.5"
+    "meteor-node-stubs": "^0.2.5",
+    "node-balanced": "0.0.14"
   },
   "devDependencies": {
     "chai": "*",

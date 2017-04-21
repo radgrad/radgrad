@@ -5,12 +5,12 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../../../api/degree/AcademicPlanCollection';
-import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { PlanChoices } from '../../../api/degree/PlanChoiceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import { buildSimpleName } from '../../../api/degree/PlanChoiceUtilities';
 
 const addSchema = new SimpleSchema({
   desiredDegree: { type: String },
@@ -18,36 +18,8 @@ const addSchema = new SimpleSchema({
   year: { type: Number },
 });
 
-function createSimpleName(slug) {
-  const slugs = slug.split(',');
-  if (slugs.length > 1) {
-    let ret = '(';
-    _.map(slugs, (s) => {
-      ret = `${ret}${s.substring(0, 3).toUpperCase()} ${s.substring(3)} or `;
-    });
-    ret = `${ret.substring(0, ret.length - 4)})`;
-    return ret;
-  }
-  return `${slug.substring(0, 3).toUpperCase()} ${slug.substring(3)}`;
-}
-
-function createName(slug) {
-  // console.log('createName', slug);
-  if (slug.indexOf('[') !== -1) {
-    let ret = '';
-    const complex = slug.split('],');
-    _.map(complex, (c) => {
-      let str = c.replace(/\[/g, '');
-      str = str.replace(/]/g, '');
-      ret = `${ret}${createSimpleName(str)} or `;
-    });
-    return ret.substring(0, ret.length - 4);
-  }
-  return createSimpleName(slug);
-}
-
-function removeElement(slug) {
-  const element = document.getElementById(slug);
+function removeElement(id) {
+  const element = document.getElementById(id);
   if (element) {
     const parent = element.parentNode;
     parent.removeChild(element);
@@ -64,40 +36,6 @@ function getAllElementsWithAttribute(attribute, value) {
     }
   }
   return matchingElements;
-}
-
-/**
- * Returns an array of choices for use in the array of choice.
- * {
- *   "planChoice": [{ "choices": [{ "choice": ["ics101"] }] }]
- * }
- * @param slug
- */
-function buildChoice(slug) {
-  const inner = {};
-  inner.choice = slug.split(',');
-  // console.log(inner);
-  return inner;
-}
-
-function buildPlanChoice(slug) {
-  const planChoice = [];
-  const outer = {};
-  outer.choices = [];
-  if (slug && slug.indexOf('[') === -1) {
-    outer.choices.push(buildChoice(slug));
-    planChoice.push(outer);
-  } else
-    if (slug) {
-      const complex = slug.split('],');
-      _.map(complex, (c) => {
-        let str = c.replace(/\[/g, '');
-        str = str.replace(/]/g, '');
-        outer.choices.push(buildChoice(str));
-      });
-      planChoice.push(outer);
-    }
-  return planChoice;
 }
 
 Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCreated() {
@@ -121,32 +59,19 @@ Template.Academic_Plan_Builder_Widget.helpers({
   },
   choice() {
     if (Template.instance().choice.get()) {
-      return createName(Template.instance().choice.get());
+      return buildSimpleName(Template.instance().choice.get());
     }
     return '';
   },
   courseName(slug) {
-    return createName(slug);
+    return buildSimpleName(slug);
   },
   courses() {
     const ret = [];
     const choices = PlanChoices.find().fetch();
-    _.map(choices, (choice) => {
-      if (choice.planChoice.length === 1) {
-        const planChoice = choice.planChoice[0];
-        if (planChoice.choices.length > 1) {
-          let str = '';
-          _.map(planChoice.choices, (c) => {
-            str = `${str}[${c.choice.toString()}],`;
-          });
-          ret.push(str.substring(0, str.length - 1));
-        } else {
-          const choiceObj = planChoice.choices[0];
-          ret.push(choiceObj.choice.toString());
-        }
-      }
+    _.map(choices, (c) => {
+      ret.push(c.choice);
     });
-    // _.pullAll(ret, Template.instance().inPlan.get());
     return ret;
   },
   desiredDegrees() {
@@ -221,8 +146,8 @@ Template.Academic_Plan_Builder_Widget.events({
       const id = div.getAttribute('id');
       const oldID = id.substring(0, id.length - 8);
       if (innerOrP) {
-        div.setAttribute('id', `${oldID},[${slug}]-combine`);
-        div.setAttribute('slug', `${oldID},[${slug}]`);
+        div.setAttribute('id', `${oldID},(${slug})-combine`);
+        div.setAttribute('slug', `${oldID},(${slug})`);
       } else {
         div.setAttribute('id', `${oldID},${slug}-combine`);
         div.setAttribute('slug', `${oldID},${slug}`);
@@ -231,7 +156,7 @@ Template.Academic_Plan_Builder_Widget.events({
     } else {
       const div = document.createElement('div');
       if (innerOrP) {
-        div.setAttribute('id', `[${slug}]-combine`);
+        div.setAttribute('id', `(${slug})-combine`);
       } else {
         div.setAttribute('id', `${slug}-combine`);
       }
