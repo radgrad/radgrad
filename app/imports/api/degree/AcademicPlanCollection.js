@@ -3,7 +3,6 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { DesiredDegrees } from './../degree/DesiredDegreeCollection';
-import { PlanChoiceSchema } from './PlanChoiceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 
@@ -17,7 +16,7 @@ class AcademicPlanCollection extends BaseCollection {
       name: { type: String },
       effectiveSemesterID: { type: SimpleSchema.RegEx.Id },
       coursesPerSemester: { type: [Number], minCount: 12, maxCount: 12 },
-      courseList: { type: [PlanChoiceSchema] },
+      courseList: { type: [String] },
     }));
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, degreeID: 1, effectiveSemesterID: 1 });
@@ -32,12 +31,9 @@ class AcademicPlanCollection extends BaseCollection {
    *                                 name: 'B.S. in Computer Science'
    *                                 semester: 'Spring-2016',
    *                                 coursesPerSemester: [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0],
-   *                                 courseList: [{ course: ['ics111'] }, { course: ['ics141'] },
-    *                                 { course: ['ics211'] }, { course: ['ics241'] }, { course: ['ics311'] },
-     *                                 { course: 'ics314' }, { course: ['ics212'] }, { course: ['ics321'] },
-      *                                 { course: ['ics313', 'ics361'] }, { course: ['ics312', 'ics331'] },
-       *                                 { course: ['ics332'] }, { course: ['ics4xx'] }, { course: ['ics4xx'] },
-        *                                 { course: ['ics4xx'] }, { course: ['ics4xx'] }, { course: ['ics4xx'] }] });
+   *                                 courseList: ['ics111', 'ics141, 'ics211', 'ics241, 'ics311', 'ics314',
+    *                                 'ics212', 'ics321', 'ics313,ics361', 'ics312,ics331', 'ics332', 'ics4xx',
+     *                                 'ics4xx', 'ics4xx', 'ics4xx', 'ics4xx'] })
    * @param degreeSlug
    * @param startSemesterID
    * @param coursesPerSemester

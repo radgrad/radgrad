@@ -25,7 +25,6 @@ if (Meteor.isServer) {
       const docID = PlanChoices.define(simple);
       expect(PlanChoices.isDefined(docID)).to.be.true;
       const dumpObject = PlanChoices.dumpOne(docID);
-      console.log(dumpObject);
       PlanChoices.removeIt(docID);
       expect(PlanChoices.isDefined(docID)).to.be.false;
       const planID = PlanChoices.restoreOne(dumpObject);

@@ -10,7 +10,7 @@ import { PlanChoices } from '../../../api/degree/PlanChoiceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import { buildSimpleName } from '../../../api/degree/PlanChoiceUtilities';
+import { buildSimpleName, getAllElementsWithAttribute } from '../../../api/degree/PlanChoiceUtilities';
 
 const addSchema = new SimpleSchema({
   desiredDegree: { type: String },
@@ -24,18 +24,6 @@ function removeElement(id) {
     const parent = element.parentNode;
     parent.removeChild(element);
   }
-}
-
-function getAllElementsWithAttribute(attribute, value) {
-  const matchingElements = [];
-  const allElements = document.getElementsByTagName('*');
-  for (let i = 0, n = allElements.length; i < n; i += 1) {
-    if (allElements[i].getAttribute(attribute) !== null && allElements[i].getAttribute(attribute) === value) {
-      // Element exists with attribute. Add to array.
-      matchingElements.push(allElements[i]);
-    }
-  }
-  return matchingElements;
 }
 
 Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCreated() {
@@ -64,7 +52,10 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return '';
   },
   courseName(slug) {
-    return buildSimpleName(slug);
+    if (slug) {
+      return PlanChoices.toStringFromSlug(slug);
+    }
+    return '';
   },
   courses() {
     const ret = [];
@@ -142,17 +133,19 @@ Template.Academic_Plan_Builder_Widget.events({
     const divs = element.getElementsByTagName('div');
     if (divs && divs.length > 0) {
       const div = divs[0];
-      const text = div.textContent;
       const id = div.getAttribute('id');
       const oldID = id.substring(0, id.length - 8);
+      let newSlug;
       if (innerOrP) {
         div.setAttribute('id', `${oldID},(${slug})-combine`);
-        div.setAttribute('slug', `${oldID},(${slug})`);
+        newSlug = `${oldID},(${slug})`;
+        div.setAttribute('slug', newSlug);
       } else {
         div.setAttribute('id', `${oldID},${slug}-combine`);
-        div.setAttribute('slug', `${oldID},${slug}`);
+        newSlug = `${oldID},${slug}`;
+        div.setAttribute('slug', newSlug);
       }
-      div.textContent = `${text} or ${createName(slug)}`;
+      div.textContent = `${PlanChoices.toStringFromSlug(newSlug)}`;
     } else {
       const div = document.createElement('div');
       if (innerOrP) {
@@ -164,7 +157,7 @@ Template.Academic_Plan_Builder_Widget.events({
       div.setAttribute('class', 'ui basic label');
       div.setAttribute('draggable', 'true');
       div.setAttribute('ondragstart', 'dragCombine(event)');
-      div.textContent = createName(slug);
+      div.textContent = PlanChoices.toStringFromSlug(slug);
       element.appendChild(div);
     }
   },
@@ -181,8 +174,7 @@ Template.Academic_Plan_Builder_Widget.events({
         if (from === 'table' || from === 'combine') {
           removeElement(id);
         }
-        const planChoice = buildPlanChoice(slug);
-        PlanChoices.define({ planChoice });
+        PlanChoices.define(slug);
       },
     }).modal('show');
   },
@@ -207,8 +199,7 @@ Template.Academic_Plan_Builder_Widget.events({
           const divs = table.getElementsByTagName('div');
           coursesPerSemester.push(divs.length);
           _.map(divs, (div) => {
-            const planChoice = buildPlanChoice(div.getAttribute('slug'));
-            courseList.push({ planChoice });
+            courseList.push(div.getAttribute('slug'));
           });
         });
       });
@@ -217,7 +208,6 @@ Template.Academic_Plan_Builder_Widget.events({
         AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
         FormUtils.indicateSuccess(instance, event);
       } catch (e) {
-        alert(e);
         FormUtils.indicateError(instance);
       }
     } else {

@@ -2,11 +2,11 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { PlanChoices } from '../../../api/degree/PlanChoiceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Roles } from 'meteor/alanning:roles';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-
-let electiveCount = 0;
+import { getAllElementsWithAttribute } from '../../../api/degree/PlanChoiceUtilities';
 
 Template.Academic_Plan_Semester.onCreated(function academicPlanSemesterOnCreated() {
   // console.log(this.data);
@@ -14,15 +14,12 @@ Template.Academic_Plan_Semester.onCreated(function academicPlanSemesterOnCreated
 
 Template.Academic_Plan_Semester.helpers({
   choiceLabel(course) {
-    if (course) {
-      let str = '';
-      _.map(course, (c) => {
-        str = `${str} or ${c}`;
-      });
-      str = str.substring(4, str.length);
-      return str;
-    }
-    return '';
+    return PlanChoices.toStringFromSlug(course);
+  },
+  courseID(course) {
+    console.log(course);
+    const numInPlan = getAllElementsWithAttribute('slug', course).length;
+    return `${course}${numInPlan}`;
   },
   inPlan(course) {
     const studentID = getUserIdFromRoute();

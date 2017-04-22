@@ -23,7 +23,7 @@ class PlanChoiceCollection extends BaseCollection {
     return this._collection.insert({ choice });
   }
 
-  toStringFromSlug(planChoiceSlug) {
+  toStringFromSlug(planChoiceSlug) { // eslint-disable-line class-methods-use-this
     let ret = '';
     let slug = planChoiceSlug;
     while (slug.length > 0) {
@@ -32,6 +32,7 @@ class PlanChoiceCollection extends BaseCollection {
       if (slug.startsWith('(')) {
         index = slug.indexOf(')');
         temp = slug.substring(1, index);
+        ret = `${ret}(${buildSimpleName(temp)}) or `;
         if (index < slug.length - 2) {
           slug = slug.substring(index + 2); // skip over the ,
         } else {
@@ -42,11 +43,12 @@ class PlanChoiceCollection extends BaseCollection {
           index = slug.indexOf(',');
           temp = slug.substring(0, index);
           slug = slug.substring(index + 1);
+          ret = `${ret}${buildSimpleName(temp)} or `;
         } else {
           temp = slug;
           slug = '';
+          ret = `${ret}${buildSimpleName(temp)} or `;
         }
-      ret = `${ret}${buildSimpleName(temp)} or `;
     }
     return ret.substring(0, ret.length - 4);
   }

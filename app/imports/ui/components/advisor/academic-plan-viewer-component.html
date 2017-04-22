@@ -10,40 +10,12 @@
               <div class="stackable row">
                 {{#each year in years}}
                   <div class="stretched column academicYear" style="padding: 0 0.6rem;">
-                    <!--<h3 class="ui horizontal divider header">{{year}}</h3>-->
-                    <!--<table class="ui very basic unstackable selectable table segment"-->
-                    <!--style="flex-grow: 3; font-size: 0.85em;">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
                     <div class="ui header">Fall</div>
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
                     {{> Academic_Plan_Semester courses=(courses @index 0)}}
-                    <!--</tbody>-->
-                    <!--</table>-->
-                    <!--<table class="ui very basic unstackable selectable table segment"-->
-                    <!--style="flex-grow: 3; font-size: 0.85em;">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
                     <div class="ui header">Spring</div>
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
                     {{> Academic_Plan_Semester courses=(courses @index 1)}}
-                    <!--</tbody>-->
-                    <!--</table>-->
-                    <!--<table class="ui very basic unstackable selectable table segment"-->
-                    <!--style="flex-grow: 3; font-size: 0.85em;">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
                     <div class="ui header">Summer</div>
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
                     {{> Academic_Plan_Semester courses=(courses @index 2)}}
-                    <!--</tbody>-->
-                    <!--</table>-->
                   </div>
                 {{/each}}
               </div>

@@ -23,216 +23,353 @@
             0
           ],
           "courseList": [
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics111"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics141"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics211"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics241"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics311"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics314"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics212"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics321"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics312",
-                        "ics331"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics313",
-                        "ics361"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics332"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics4xx"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics4xx"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics4xx"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics4xx"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "planChoice": [
-                {
-                  "choices": [
-                    {
-                      "choice": [
-                        "ics4xx"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics311",
+            "ics314",
+            "ics212",
+            "ics321",
+            "ics312,ics331",
+            "ics313,ics361",
+            "ics332",
+            "ics4xx",
+            "ics4xx",
+            "ics4xx",
+            "ics4xx",
+            "ics4xx"
+          ]
+        },
+        {
+          "degreeSlug": "bs-cs",
+          "name": "B.S. in Computer Sciences Security Sciences",
+          "semester": "Fall-2016",
+          "coursesPerSemester": [
+            2,
+            3,
+            0,
+            2,
+            2,
+            0,
+            1,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics222",
+            "ics311",
+            "ics314",
+            "ics212",
+            "ics355",
+            "ics455",
+            "ics321,ics332,(ics415,ics351)",
+            "ics414,ics464",
+            "ics321,ics332,(ics415,ics351)",
+            "ics423",
+            "ics425,ics426",
+            "ics491,ics495"
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A in Information and Computer Sciences",
+          "semester": "Fall-2016",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "courseList": [
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics311",
+            "ics314",
+            "ics212",
+            "ics321",
+            "ics312,ics331",
+            "ics4xx",
+            "ics313,ics361",
+            "ics332"
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A. in ICS Security Science Focus",
+          "semester": "Fall-2016",
+          "coursesPerSemester": [
+            2,
+            3,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            1,
+            0
+          ],
+          "courseList": [
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics222",
+            "ics311",
+            "ics314",
+            "ics355",
+            "ics414",
+            "ics455",
+            "ics212",
+            "ics321,ics332,ics351",
+            "ics441,ics451",
+            "ics415,ics423",
+            "ics321,ics332,ics351",
+            "ics425,ics426,ics491,ics495"
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A. in ICS IT Focus",
+          "semester": "Fall-2016",
+          "coursesPerSemester": [
+            2,
+            3,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            3,
+            3,
+            0
+          ],
+          "courseList": [
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics222",
+            "ics311",
+            "ics314",
+            "ics414",
+            "ics355",
+            "ics321",
+            "ics212",
+            "ics351",
+            "ics425",
+            "ics300+",
+            "ics426",
+            "ics415",
+            "ics300+",
+            "ics332",
+            "ics464"
+          ]
+        },
+        {
+          "degreeSlug": "bs-cs",
+          "name": "B.S. in Computer Sciences",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics311",
+            "ics314",
+            "ics212",
+            "ics321",
+            "(ics312,ics331),(ics313,ics361),ics355",
+            "(ics312,ics331),(ics313,ics361),ics355",
+            "ics332",
+            "ics4xx",
+            "ics4xx",
+            "ics4xx",
+            "ics4xx",
+            "ics4xx"
+          ]
+        },
+        {
+          "degreeSlug": "bs-cs",
+          "name": "B.S. in Computer Science Security Science",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics311",
+            "ics314",
+            "ics212",
+            "ics222",
+            "ics355",
+            "ics321",
+            "ics332",
+            "ics351,ics451",
+            "ics423,ics425,ics426,ics455,ics495",
+            "ics423,ics425,ics426,ics455,ics495",
+            "ics423,ics425,ics426,ics455,ics495",
+            "ics423,ics425,ics426,ics455,ics495"
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A. in Information and Computer Sciences",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "courseList": [
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics311",
+            "ics314",
+            "ics212",
+            "ics321",
+            "(ics312,ics331),(ics313,ics361),(ics351,ics451),ics355",
+            "ics332",
+            "(ics312,ics331),(ics313,ics361),(ics351,ics451),ics355",
+            "ics4xx"
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A. in ICS Security Science Focus",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics311",
+            "ics314",
+            "ics212",
+            "ics222",
+            "ics355",
+            "ics321",
+            "ics332",
+            "ics351,ics451",
+            "ics423,ics425,ics426,ics455,ics495",
+            "ics423,ics425,ics426,ics455,ics495",
+            "ics423,ics425,ics426,ics455,ics495",
+            "ics423,ics425,ics426,ics455,ics495"
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A. in Computer Sciences IT Focus",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            2,
+            3,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            3,
+            3,
+            0
+          ],
+          "courseList": [
+            "ics111",
+            "ics141",
+            "ics211",
+            "ics241",
+            "ics222",
+            "ics311",
+            "ics314",
+            "ics414",
+            "ics355",
+            "ics321",
+            "ics212",
+            "ics351,ics451",
+            "ics425",
+            "ics300+",
+            "ics426",
+            "ics415",
+            "ics300+",
+            "ics332",
+            "ics464"
           ]
         }
       ]
@@ -5534,70 +5671,70 @@
       "name": "PlanChoiceCollection",
       "contents": [
         "ics101",
-          "ics110",
-          "ics111",
-          "ics141",
-          "ics211",
-          "ics212",
-          "ics215",
-          "ics222",
-          "ics241",
-          "ics311",
-          "ics312",
-          "ics313",
-          "ics314",
-          "ics321",
-          "ics331",
-          "ics332",
-          "ics351",
-          "ics355",
-          "ics361",
-          "ics390",
-          "ics414",
-          "ics415",
-          "ics419",
-          "ics421",
-          "ics422",
-          "ics423",
-          "ics424",
-          "ics425",
-          "ics426",
-          "ics431",
-          "ics432",
-          "ics435",
-          "ics441",
-          "ics442",
-          "ics443",
-          "ics451",
-          "ics452",
-          "ics455",
-          "ics461",
-          "ics462",
-          "ics464",
-          "ics465",
-          "ics466",
-          "ics469",
-          "ics471",
-          "ics475",
-          "ics476",
-          "ics481",
-          "ics483",
-          "ics484",
-          "ics485",
-          "ics491",
-          "ics495",
-          "ics499",
-          "ics300+",
-          "ics4xx",
-          "ics312,ics331",
-          "ics313,ics361",
-          "ics351,ics451",
-          "ics415,ics351",
-          "ics414,ics464",
-          "ics425,ics426",
-          "ics491,ics495",
-          "(ics312,ics331),(ics313,ics361),ics355",
-          "ics321,ics332,(ics415,ics351)"
+        "ics110",
+        "ics111",
+        "ics141",
+        "ics211",
+        "ics212",
+        "ics215",
+        "ics222",
+        "ics241",
+        "ics311",
+        "ics312",
+        "ics313",
+        "ics314",
+        "ics321",
+        "ics331",
+        "ics332",
+        "ics351",
+        "ics355",
+        "ics361",
+        "ics390",
+        "ics414",
+        "ics415",
+        "ics419",
+        "ics421",
+        "ics422",
+        "ics423",
+        "ics424",
+        "ics425",
+        "ics426",
+        "ics431",
+        "ics432",
+        "ics435",
+        "ics441",
+        "ics442",
+        "ics443",
+        "ics451",
+        "ics452",
+        "ics455",
+        "ics461",
+        "ics462",
+        "ics464",
+        "ics465",
+        "ics466",
+        "ics469",
+        "ics471",
+        "ics475",
+        "ics476",
+        "ics481",
+        "ics483",
+        "ics484",
+        "ics485",
+        "ics491",
+        "ics495",
+        "ics499",
+        "ics300+",
+        "ics4xx",
+        "ics312,ics331",
+        "ics313,ics361",
+        "ics351,ics451",
+        "ics415,ics351",
+        "ics414,ics464",
+        "ics425,ics426",
+        "ics491,ics495",
+        "(ics312,ics331),(ics313,ics361),ics355",
+        "ics321,ics332,(ics415,ics351)"
       ]
     },
     {
