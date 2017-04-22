@@ -179,7 +179,7 @@ Template.Academic_Plan_Builder_Widget.events({
     }).modal('show');
   },
   submit(event, instance) {
-    console.log('submit Plan');
+    // console.log('submit Plan');
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.resetValidation();
@@ -203,7 +203,7 @@ Template.Academic_Plan_Builder_Widget.events({
           });
         });
       });
-      console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
+      // console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
       try {
         AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
         FormUtils.indicateSuccess(instance, event);

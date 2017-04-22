@@ -17,7 +17,6 @@ Template.Academic_Plan_Semester.helpers({
     return PlanChoices.toStringFromSlug(course);
   },
   courseID(course) {
-    console.log(course);
     const numInPlan = getAllElementsWithAttribute('slug', course).length;
     return `${course}${numInPlan}`;
   },
