@@ -17,20 +17,23 @@ Template.Academic_Plan_Semester.helpers({
     return PlanChoices.toStringFromSlug(course);
   },
   courseID(course) {
+    const counts = Template.instance().data.courseCounts;
+    if (!counts.get(course)) {
+      counts.set(course, 0);
+    }
+    // console.log(course, counts.get(course));
     const numInPlan = getAllElementsWithAttribute('slug', course).length;
     return `${course}${numInPlan}`;
   },
   inPlan(course) {
     const studentID = getUserIdFromRoute();
-    // const courseReqs = Template.instance().data.courses;
-    // console.log(courseReqs);
     let ret = false;
     if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
       const courses = CourseInstances.find({ studentID }).fetch();
       _.map(courses, (c) => {
         const doc = CourseInstances.getCourseDoc(c._id);
         const slug = Slugs.getNameFromID(doc.slugID);
-        if (_.indexOf(course, slug) !== -1) {
+        if (course.indexOf(slug) !== -1) {
           ret = true;
         }
       });
