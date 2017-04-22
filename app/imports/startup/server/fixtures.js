@@ -1,6 +1,7 @@
 /* global Assets */
 
 import { Meteor } from 'meteor/meteor';
+import { AcademicPlans } from './../../api/degree/AcademicPlanCollection';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
@@ -17,6 +18,7 @@ import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
+import { PlanChoices } from '../../api/degree/PlanChoiceCollection';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { Reviews } from '../../api/review/ReviewCollection';
 import { Teasers } from '../../api/teaser/TeaserCollection';
@@ -101,7 +103,8 @@ function newStartupProcess() { // eslint-disable-line
       const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, CareerGoals, DesiredDegrees,
         ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
         CourseInstances, OpportunityInstances, FeedbackInstances,
-        VerificationRequests, Feeds, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews];
+        VerificationRequests, Feeds, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews,
+        AcademicPlans, PlanChoices];
 
       const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
       const collectionNames = _.map(collectionList, collection => collection._collectionName);

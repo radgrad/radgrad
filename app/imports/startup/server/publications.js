@@ -1,3 +1,4 @@
+import { AcademicPlans } from '../../api/degree/AcademicPlanCollection';
 import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
@@ -16,6 +17,7 @@ import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
+import { PlanChoices } from '../../api/degree/PlanChoiceCollection';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { Reviews } from '../../api/review/ReviewCollection.js';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
@@ -25,6 +27,7 @@ import { Users } from '../../api/user/UserCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 
+AcademicPlans.publish();
 AcademicYearInstances.publish();
 AdvisorLogs.publish();
 CareerGoals.publish();
@@ -43,6 +46,7 @@ MentorProfiles.publish();
 Opportunities.publish();
 OpportunityInstances.publish();
 OpportunityTypes.publish();
+PlanChoices.publish();
 PublicStats.publish();
 Reviews.publish();
 Semesters.publish();

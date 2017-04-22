@@ -218,6 +218,14 @@ advisorRoutes.route('/moderation', {
   },
 });
 
+export const advisorAcademicPlanPageRouteName = 'Advisor_Academic_Plan_Page';
+advisorRoutes.route('/academic-plan', {
+  name: advisorAcademicPlanPageRouteName,
+  action() {
+    BlazeLayout.render('Advisor_Layout', { main: advisorAcademicPlanPageRouteName });
+  },
+});
+
 /*                        FACULTY ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.

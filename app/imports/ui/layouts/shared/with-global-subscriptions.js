@@ -1,6 +1,7 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
+import { AcademicPlans } from '/imports/api/degree/AcademicPlanCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
@@ -28,12 +29,13 @@ import { Users } from '../../../api/user/UserCollection';
 
 // cacheLimit default is 10, so increased to handle 13 subscriptions.
 // expireLimit set to 30 minutes because: why not.
-const globalSubs = new SubsManager({ cacheLimit: 15, expireIn: 30 });
+const globalSubs = new SubsManager({ cacheLimit: 16, expireIn: 30 });
 
 Template.With_Global_Subscriptions.onCreated(function onCreated() {
   const self = this;
   self.ready = new ReactiveVar();
   self.autorun(function () {
+    globalSubs.subscribe(AcademicPlans.getPublicationName());
     globalSubs.subscribe(CareerGoals.getPublicationName());
     globalSubs.subscribe(Courses.getPublicationName());
     globalSubs.subscribe(DesiredDegrees.getPublicationName());

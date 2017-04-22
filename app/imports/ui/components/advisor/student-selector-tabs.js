@@ -196,7 +196,7 @@ Template.Student_Selector_Tabs.events({
             instance.state.set('addNewUser', false);
           }
         });
-        const user = Users.getUserFromUsername(userName);
+        // const user = Users.getUserFromUsername(userName);
         instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
         instance.state.set(sessionKeys.CURRENT_STUDENT_ID, studentID);
       } else {
