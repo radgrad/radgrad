@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { ReactiveDict } from 'meteor/reactive-dict';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 

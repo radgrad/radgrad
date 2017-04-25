@@ -6,7 +6,6 @@ import { PlanChoices } from '../../../api/degree/PlanChoiceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Roles } from 'meteor/alanning:roles';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { getAllElementsWithAttribute } from '../../../api/degree/PlanChoiceUtilities';
 
 function takenSlugs(courseInstances) {
   const ret = [];
