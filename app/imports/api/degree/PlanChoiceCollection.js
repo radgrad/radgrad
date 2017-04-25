@@ -25,7 +25,13 @@ class PlanChoiceCollection extends BaseCollection {
 
   toStringFromSlug(planChoiceSlug) { // eslint-disable-line class-methods-use-this
     let ret = '';
-    let slug = planChoiceSlug;
+    let slug;
+    const countIndex = planChoiceSlug.indexOf('-');
+    if (countIndex === -1) {
+      slug = planChoiceSlug;
+    } else {
+      slug = planChoiceSlug.substring(0, countIndex);
+    }
     while (slug.length > 0) {
       let temp;
       let index;

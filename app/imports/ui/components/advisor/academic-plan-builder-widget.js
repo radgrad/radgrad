@@ -106,7 +106,7 @@ Template.Academic_Plan_Builder_Widget.events({
     Template.instance().inPlan.set(inPlan);
     const target = event.target;
     const div = document.createElement('div');
-    div.setAttribute('id', `${slug}${numInPlan}`);
+    div.setAttribute('id', `${slug}-${numInPlan}`);
     div.setAttribute('slug', slug);
     div.setAttribute('class', 'ui basic label');
     div.setAttribute('draggable', 'true');
@@ -199,7 +199,7 @@ Template.Academic_Plan_Builder_Widget.events({
           const divs = table.getElementsByTagName('div');
           coursesPerSemester.push(divs.length);
           _.map(divs, (div) => {
-            courseList.push(div.getAttribute('slug'));
+            courseList.push(div.getAttribute('id'));
           });
         });
       });
