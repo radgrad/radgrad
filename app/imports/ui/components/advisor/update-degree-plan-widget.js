@@ -35,6 +35,7 @@ const updateSchema = new SimpleSchema({
   careerGoals: { type: [String], optional: true },
   interests: { type: [String], optional: true },
   website: { type: String, optional: true },
+  declaredSemester: { type: String, optional: true },
 });
 
 Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
@@ -50,6 +51,9 @@ Template.Update_Degree_Plan_Widget.helpers({
   careerGoals() {
     return CareerGoals.find({}, { sort: { name: 1 } });
   },
+  declaredSemesters() {
+    return Semesters.find({});
+  },
   desiredDegrees() {
     return DesiredDegrees.find({}, { sort: { name: 1 } });
   },
@@ -63,6 +67,13 @@ Template.Update_Degree_Plan_Widget.helpers({
     if (Template.currentData().studentID.get()) {
       const user = Users.findDoc(Template.currentData().studentID.get());
       return user.careerGoalIDs;
+    }
+    return '';
+  },
+  selectedDeclaredSemesterID() {
+    if (Template.currentData().studentID.get()) {
+      const user = Users.findDoc(Template.currentData().studentID.get());
+      return user.declaredSemesterID;
     }
     return '';
   },
@@ -170,6 +181,7 @@ Template.Update_Degree_Plan_Widget.events({
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       FormUtils.renameKey(updatedData, 'careerGoals', 'careerGoalIDs');
       FormUtils.renameKey(updatedData, 'desiredDegree', 'desiredDegreeID');
+      FormUtils.renameKey(updatedData, 'declaredSemester', 'declaredSemesterID');
       FormUtils.renameKey(updatedData, 'slug', 'username');
       Meteor.call('Users.update', updatedData, (error) => {
         if (error) {

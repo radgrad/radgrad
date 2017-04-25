@@ -13,6 +13,7 @@ import { Interests } from '/imports/api/interest/InterestCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
+import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
@@ -47,6 +48,7 @@ class UserCollection extends BaseInstanceCollection {
       website: { type: String, optional: true },
       hiddenCourseIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
       hiddenOpportunityIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
+      declaredSemesterID: { type: SimpleSchema.RegEx.Id, optional: true },
     }));
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
     this._collection = Meteor.users;
@@ -92,8 +94,9 @@ class UserCollection extends BaseInstanceCollection {
    *                careerGoals: ['application-developer'],
    *                desiredDegree: 'bs-cs',
    *                level: 1,
-   *                hiddenCourses: ['ics312']
-   *                hiddenOpportunities: ['acm-icpc']
+   *                hiddenCourses: ['ics312'],
+   *                hiddenOpportunities: ['acm-icpc'],
+   *                declaredSemester: 'Spring-2016',
    *               });
    * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
@@ -106,7 +109,7 @@ class UserCollection extends BaseInstanceCollection {
   define({
       firstName, lastName, slug, email, role, password,
       picture = '/images/default-profile-picture.png', interests, careerGoals, desiredDegree,
-      website, uhID, level = 1, hiddenCourses = [], hiddenOpportunities = [],
+      website, uhID, level = 1, hiddenCourses = [], hiddenOpportunities = [], declaredSemester = undefined,
   }) {
     // Users can only be defined on the server side.
     if (Meteor.isServer) {
@@ -123,6 +126,8 @@ class UserCollection extends BaseInstanceCollection {
 
       // desiredDegree is optional.
       const desiredDegreeID = (desiredDegree) ? DesiredDegrees.getID(desiredDegree) : undefined;
+      // declaredSemester is optional.
+      const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;
       // Now define the user.
       let userID;
       if (password) {  // TODO: not sure this is the best way to distinguish the two cases.
@@ -139,6 +144,7 @@ class UserCollection extends BaseInstanceCollection {
         $set: {
           username: slug, firstName, lastName, slugID, email, picture, website, password,
           desiredDegreeID, interestIDs, careerGoalIDs, uhID, level, hiddenCourseIDs, hiddenOpportunityIDs,
+          declaredSemesterID,
         },
       });
 
@@ -391,6 +397,18 @@ class UserCollection extends BaseInstanceCollection {
     Opportunities.assertAllDefined(hiddenOpportunityIDs);
     this._collection.update(userID, { $set: { hiddenOpportunityIDs } });
   }
+
+  /**
+   * Updates user with userID's declaredSemesterID.
+   * @param userID The userID.
+   * @param declaredSemesterID The declared semester ID.
+   */
+  setDeclaredSemesterID(userID, declaredSemesterID) {
+    this.assertDefined(userID);
+    Semesters.assertDefined(declaredSemesterID);
+    this._collection.update(userID, { $set: { declaredSemesterID } });
+  }
+
   /**
    * Returns an ICE object with the total of verified course and opportunity instance ICE values.
    * @param studentID The userID.
