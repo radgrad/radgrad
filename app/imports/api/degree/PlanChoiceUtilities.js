@@ -22,3 +22,11 @@ export function getAllElementsWithAttribute(attribute, value) {
   return matchingElements;
 }
 
+/**
+ * Returns true if the courseSlug satisfies the plan choice.
+ * @param planChoice The plan choice.
+ * @param courseSlug The course slug.
+ */
+export function satisfiesPlanChoice(planChoice, courseSlug) {
+  return planChoice.indexOf(courseSlug) !== -1;
+}

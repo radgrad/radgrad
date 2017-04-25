@@ -11,11 +11,11 @@
                 {{#each year in years}}
                   <div class="stretched column academicYear" style="padding: 0 0.6rem;">
                     <div class="ui header">Fall</div>
-                    {{> Academic_Plan_Semester courses=(courses @index 0) courseCounts=getCourseCounts}}
+                    {{> Academic_Plan_Semester courses=(courses @index 0) plan=getPlan}}
                     <div class="ui header">Spring</div>
-                    {{> Academic_Plan_Semester courses=(courses @index 1) courseCounts=getCourseCounts}}
+                    {{> Academic_Plan_Semester courses=(courses @index 1) plan=getPlan}}
                     <div class="ui header">Summer</div>
-                    {{> Academic_Plan_Semester courses=(courses @index 2) courseCounts=getCourseCounts}}
+                    {{> Academic_Plan_Semester courses=(courses @index 2) plan=getPlan}}
                   </div>
                 {{/each}}
               </div>

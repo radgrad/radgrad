@@ -7,7 +7,6 @@ Template.Academic_Plan_Viewer_Component.onCreated(function academicPlanViewerWid
   if (this.data) {
     this.plan = this.data.plan;
   }
-  this.courseCounts = new ReactiveDict('');
 });
 
 Template.Academic_Plan_Viewer_Component.helpers({
@@ -45,9 +44,6 @@ Template.Academic_Plan_Viewer_Component.helpers({
       return effectiveSemester.year;
     }
     return '';
-  },
-  getCourseCounts() {
-    return Template.instance().courseCounts;
   },
   getPlan() {
     return Template.instance().plan.get();
