@@ -5,6 +5,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { buildSimpleName } from '../../../api/degree/PlanChoiceUtilities';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { plannerKeys } from './academic-plan';
@@ -14,6 +15,9 @@ Template.Add_Course_Button.onCreated(function addCourseButtonOnCreated() {
 });
 
 Template.Add_Course_Button.helpers({
+  courseName() {
+    return buildSimpleName(Slugs.getNameFromID(this.course.slugID));
+  },
   equals(a, b) {
     return a === b;
   },
@@ -29,6 +33,9 @@ Template.Add_Course_Button.helpers({
     });
     return semesters;
   },
+  id() {
+    return this.course._id;
+  },
   nextYears(amount) {
     const nextYears = [];
     const currentSemesterID = Semesters.getCurrentSemester();
@@ -39,6 +46,10 @@ Template.Add_Course_Button.helpers({
       currentYear += 1;
     }
     return nextYears;
+  },
+  slug() {
+    const slug = Slugs.getNameFromID(this.course.slugID);
+    return slug;
   },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];

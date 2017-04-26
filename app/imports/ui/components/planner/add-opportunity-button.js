@@ -34,6 +34,9 @@ Template.Add_Opportunity_Button.helpers({
     });
     return semesters;
   },
+  id() {
+    return this.opportunity._id;
+  },
   opportunitySemesters() {
     const opp = this.opportunity;
     const semesters = opp.semesterIDs;
@@ -57,6 +60,10 @@ Template.Add_Opportunity_Button.helpers({
       }
     });
     return semesterNames.slice(0, 8);
+  },
+  slug() {
+    const slug = Slugs.getNameFromID(this.opportunity.slugID);
+    return slug;
   },
 });
 

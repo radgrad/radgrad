@@ -1,21 +1,7 @@
 <template name="Add_Course_Button">
   {{#if equals buttonType 'add'}}
-    <div class="ui basic green mini right floated button chooseYear" style="margin-bottom: 1rem;">
-      <div class="chooseYear">ADD TO PLAN</div>
-      <div class="ui fluid popup transition hidden">
-        <div class="ui vertical mini menu">
-          {{#each year in nextYears 4}}
-            <a class="item chooseSemester" data-position="right center">{{year}}</a>
-            <div class="ui fluid popup transition hidden">
-              <div class="ui vertical mini menu">
-                {{#each semester in yearSemesters year}}
-                  <a class="item addToPlan" data-position="right center">{{semester}}</a>
-                {{/each}}
-              </div>
-            </div>
-          {{/each}}
-        </div>
-      </div>
+    <div id="{{id}}" class="ui basic green mini right floated button" style="margin-bottom: 1rem;" draggable="true" ondragstart="dragCourse(event)" slug="{{slug}}">
+      <div data-tooltip="Drag to add to plan">{{courseName}}</div>
     </div>
   {{else}}
     {{#if equals buttonType 'remove'}}
@@ -35,4 +21,9 @@
       {{/if}}
     {{/if}}
   {{/if}}
+  <script>
+    function dragCourse(ev) {
+      ev.dataTransfer.setData("slug", ev.target.getAttribute('slug'));
+    }
+  </script>
 </template>

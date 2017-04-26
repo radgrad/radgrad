@@ -1,18 +1,7 @@
 <template name="Add_Opportunity_Button">
   {{#if equals buttonType 'add'}}
-    <div class="ui basic green mini right floated button">
-      <div class="chooseSemester">ADD TO PLAN</div>
-      <div class="ui fluid popup mini transition hidden">
-        <div class="ui vertical mini menu">
-          {{#if empty (opportunitySemesters item)}}
-            <a class="item" data-position="right center">No available future semesters</a>
-          {{else}}
-            {{#each semester in opportunitySemesters item}}
-              <a class="item addToPlan" data-position="right center">{{semester}}</a>
-            {{/each}}
-          {{/if}}
-        </div>
-      </div>
+    <div id="{{id}}" class="ui basic green mini right floated button" draggable="true" ondragstart="dragOpportunity(event)" slug="{{slug}}">
+      <div class="chooseSemester">DRAG TO ADD TO PLAN</div>
     </div>
   {{else}}
     {{#if equals buttonType 'remove'}}
@@ -28,4 +17,9 @@
       </div>
     {{/if}}
   {{/if}}
+  <script>
+    function dragOpportunity(ev) {
+      ev.dataTransfer.setData("slug", ev.target.getAttribute('slug'));
+    }
+  </script>
 </template>
