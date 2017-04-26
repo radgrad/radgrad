@@ -22,8 +22,8 @@ import './planned-course-grade.js';
 
 import './recommendation-item.html';
 
-import './recommendations.html';
-import './recommendations.js';
+import './recommendations-and-warnings.html';
+import './recommendations-and-warnings.js';
 
 import './semester-add-button.html';
 import './semester-add-button.js';
@@ -36,6 +36,3 @@ import './semester-list-2.html';
 import './semester-list-2.js';
 
 import './warning-item.html';
-
-import './warnings.html';
-import './warnings.js';
