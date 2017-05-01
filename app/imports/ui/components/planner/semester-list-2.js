@@ -60,12 +60,16 @@ Template.Semester_List_2.helpers({
   },
   opportunityName(opportunityID) {
     // window.camDebugging.start('opportunityName');
-    const opp = OpportunityInstances.find({ _id: opportunityID }).fetch();
-    if (opp.length > 0) {
-      const opportunity = Opportunities.find({ _id: opp[0].opportunityID }).fetch();
-      if (opportunity.length > 0) {
+    const opp = OpportunityInstances.findDoc({ _id: opportunityID });
+    if (opp) {
+      const opportunity = Opportunities.findDoc({ _id: opp.opportunityID });
+      if (opportunity) {
         // window.camDebugging.stop('opportunityName');
-        return opportunity[0].name;
+        const name = opportunity.name;
+        if (name.length > 20) {
+          return `${name.substring(0, 16)}...`;
+        }
+        return name;
       }
     }
     // window.camDebugging.stop('opportunityName');

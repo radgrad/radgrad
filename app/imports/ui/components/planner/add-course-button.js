@@ -89,25 +89,13 @@ Template.Add_Course_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
     const course = this.course;
-    const semester = event.target.text;
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const semID = Semesters.getID(semSlug);
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-      semesterID: semID,
-    }).fetch();
-    if (ci > 1) {
-      console.log('Too many course instances found for a single semester.');
-    }
-    const doc = Courses.findDoc(ci[0].courseID);
-    Template.instance().state.set(plannerKeys.detailCourse, doc);
+    const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+    Template.instance().state.set(plannerKeys.detailCourse, course);
     Template.instance().state.set(plannerKeys.detailCourseInstance, null);
     Template.instance().state.set(plannerKeys.detailOpportunity, null);
     Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
 
-    CourseInstances.removeIt(ci[0]._id);
+    CourseInstances.removeIt(ci._id);
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
     FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());

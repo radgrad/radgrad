@@ -1,19 +1,12 @@
 <template name="Add_Opportunity_Button">
   {{#if equals buttonType 'add'}}
-    <div id="{{id}}" class="ui basic green mini right floated button" draggable="true" ondragstart="dragOpportunity(event)" slug="{{slug}}">
-      <div class="chooseSemester">DRAG TO ADD TO PLAN</div>
+    <div id="{{id}}" class="ui basic green mini right floated button" style="margin-bottom: 1rem; cursor: move;" draggable="true" ondragstart="dragOpportunity(event)" slug="{{slug}}">
+      <div class="chooseSemester">{{name}}</div>
     </div>
   {{else}}
     {{#if equals buttonType 'remove'}}
-      <div class="ui basic green mini right floated button">
+      <div class="ui basic green mini right floated button removeFromPlan">
         <div class="chooseSemester">REMOVE FROM PLAN</div>
-        <div class="ui fluid popup transition hidden">
-          <div class="ui vertical mini menu">
-            {{#each semester in existingSemesters}}
-              <a class="item removeFromPlan" data-position="right center">{{semester}}</a>
-            {{/each}}
-          </div>
-        </div>
       </div>
     {{/if}}
   {{/if}}

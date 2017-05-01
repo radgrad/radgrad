@@ -37,6 +37,13 @@ Template.Add_Opportunity_Button.helpers({
   id() {
     return this.opportunity._id;
   },
+  name() {
+    const name = this.opportunity.name;
+    if (name.length > 15) {
+      return `${name.substring(0, 12)}...`;
+    }
+    return name;
+  },
   opportunitySemesters() {
     const opp = this.opportunity;
     const semesters = opp.semesterIDs;
@@ -93,23 +100,11 @@ Template.Add_Opportunity_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
     const opportunity = this.opportunity;
-    const semester = event.target.text;
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const semID = Semesters.getID(semSlug);
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-      semesterID: semID,
-    }).fetch();
-    if (oi > 1) {
-      console.log('Too many opportunity instances found for a single semester.');
-    }
-    const doc = Opportunities.findDoc(oi[0].opportunityID);
-    OpportunityInstances.removeIt(oi[0]._id);
+    const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+    OpportunityInstances.removeIt(oi._id);
     Template.instance().state.set(plannerKeys.detailCourse, null);
     Template.instance().state.set(plannerKeys.detailCourseInstance, null);
-    Template.instance().state.set(plannerKeys.detailOpportunity, doc);
+    Template.instance().state.set(plannerKeys.detailOpportunity, opportunity);
     Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
     Template.instance().$('.chooseSemester').popup('hide');
   },
