@@ -3,7 +3,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Courses } from '../../../api/course/CourseCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { buildSimpleName } from '../../../api/degree/PlanChoiceUtilities';
 import { getRouteUserName } from '../shared/route-user-name';
