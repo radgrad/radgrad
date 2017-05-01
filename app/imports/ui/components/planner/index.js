@@ -8,9 +8,6 @@ import './add-course-button.js';
 import './add-opportunity-button.html';
 import './add-opportunity-button.js';
 
-import './cumulative-ice-component.html';
-import './cumulative-ice-component.js';
-
 import './inspector.html';
 import './inspector.js';
 
@@ -25,12 +22,7 @@ import './recommendation-item.html';
 import './recommendations-and-warnings.html';
 import './recommendations-and-warnings.js';
 
-import './semester-add-button.html';
-import './semester-add-button.js';
-
 import './semester-list.css';
-import './semester-list.html';
-import './semester-list.js';
 
 import './semester-list-2.html';
 import './semester-list-2.js';
