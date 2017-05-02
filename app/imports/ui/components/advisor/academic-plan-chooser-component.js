@@ -15,6 +15,35 @@ Template.Academic_Plan_Chooser_Component.onCreated(function academicPlanChooserC
 });
 
 Template.Academic_Plan_Chooser_Component.helpers({
+  names() {
+    const ret = [];
+    const chosen = parseInt(Template.instance().chosenYear.get(), 10);
+    const plans = AcademicPlans.find().fetch();
+    _.map(plans, (p) => {
+      const year = Semesters.findDoc(p.effectiveSemesterID).year;
+      if (chosen === year) {
+        ret.push(p.name);
+      }
+    });
+    return _.sortBy(ret, [function sort(o) {
+      return o;
+    }]);
+  },
+  selectedName() {
+    if (Template.instance().plan.get()) {
+      return Template.instance().plan.get().name;
+    }
+    return '';
+  },
+  selectedYear() {
+    if (Template.instance().plan.get()) {
+      const plan = Template.instance().plan.get();
+      const semester = Semesters.findDoc(plan.effectiveSemesterID);
+      Template.instance().chosenYear.set(semester.year);
+      return semester.year;
+    }
+    return '';
+  },
   years() {
     const studentID = getUserIdFromRoute();
     const student = Users.findDoc({ _id: studentID });
@@ -40,20 +69,6 @@ Template.Academic_Plan_Chooser_Component.helpers({
       return o;
     }]);
   },
-  names() {
-    const ret = [];
-    const chosen = parseInt(Template.instance().chosenYear.get(), 10);
-    const plans = AcademicPlans.find().fetch();
-    _.map(plans, (p) => {
-      const year = Semesters.findDoc(p.effectiveSemesterID).year;
-      if (chosen === year) {
-        ret.push(p.name);
-      }
-    });
-    return _.sortBy(ret, [function sort(o) {
-      return o;
-    }]);
-  },
 });
 
 Template.Academic_Plan_Chooser_Component.events({
@@ -68,7 +83,6 @@ Template.Academic_Plan_Chooser_Component.events({
     const effectiveSemesterID = Slugs.getEntityID(semesterSlug, 'Semester');
     const name = $(event.target).val();
     const plan = AcademicPlans.findDoc({ effectiveSemesterID, name });
-    // console.log(plan);
     Template.instance().plan.set(plan);
   },
 });

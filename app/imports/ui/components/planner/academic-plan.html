@@ -11,43 +11,22 @@
               <div class="stretched column academicYear" style="padding: 0 0.6rem;">
                 {{#if isPastFall year}}
                   {{> Past_Semester_List (pastFallArgs year)}}
-                  <!--{{> cacher template='Past_Semester_List' id=(fallID year) data=(pastFallArgs year)}}-->
                 {{else}}
                   {{> Semester_List_2 (fallArgs year)}}
-                  <!--{{> cacher  template='Semester_List_2' id=(fallID year) data=(fallArgs year)}}-->
                 {{/if}}
                 {{#if isPastSpring year}}
                   {{> Past_Semester_List (pastSpringArgs year)}}
-                  <!--{{> cacher template='Past_Semester_List' id=(springID year) data=(pastSpringArgs year)}}-->
                 {{else}}
                   {{> Semester_List_2 (springArgs year)}}
-                  <!--{{> cacher  template='Semester_List_2' id=(springID year) data=(springArgs year)}}-->
                 {{/if}}
                 {{#if isPastSummer year}}
                   {{> Past_Semester_List (pastSummerArgs year)}}
-                  <!--{{> cacher template='Past_Semester_List' id=(summerID year) data=(pastSummerArgs year)}}-->
                 {{else}}
                   {{> Semester_List_2 (summerArgs year)}}
-                  <!--{{> cacher  template='Semester_List_2' id=(summerID year) data=(summerArgs year)}}-->
                 {{/if}}
-                <!--
-                <div class="mobile only" style="margin-top: 1rem;">
-                   {{> Cumulative_Ice_Component year=year}}
-                </div>
-                -->
               </div>
             {{/each}}
           </div>
-          <!--
-          <div class="row mobile hidden">
-            {{#each year in years}}
-              <div class="degreeICE column">
-                {{> Cumulative_Ice_Component year=year}}
-                {{> cacher template='Cumulative_Ice_Component' id=year.year data=(cumIceArgs year)}}
-              </div>
-            {{/each}}
-          </div>
-          -->
           <div class="row">
             <div class="column">
               {{#if hasPrevYear}}

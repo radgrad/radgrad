@@ -28,6 +28,10 @@
         {{> Declared_Semester_Form_Field semesters=declaredSemesters selectedSemesterID=selectedDeclaredSemesterID errorMessage=(fieldError "semesters") }}
         {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") required=true type="Number"}}
       </div>
+      <div class="two fields">
+        {{> Year_Form_Field years=years selectedYear=selectedYear}}
+        {{> Academic_Plan_Form_Field plans=plans selectedPlan=selectedPlan}}
+      </div>
 
       <button class="ui tiny green basic button" type="submit">UPDATE STUDENT</button>
       <!--<button class="ui green basic button jsCancel" type="submit">Cancel</button>-->

@@ -1,9 +1,12 @@
 /* global FileReader */
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { $ } from 'meteor/jquery';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { AcademicPlans } from '../../../api/degree/AcademicPlanCollection';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -36,9 +39,11 @@ const updateSchema = new SimpleSchema({
   interests: { type: [String], optional: true },
   website: { type: String, optional: true },
   declaredSemester: { type: String, optional: true },
+  academicPlan: { type: String, optional: true },
 });
 
 Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
+  this.chosenYear = new ReactiveVar('');
   FormUtils.setupFormWidget(this, updateSchema);
   this.autorun(() => {
     this.subscribe(CourseInstances.getPublicationName(5), this.data.studentID.get());
@@ -59,6 +64,35 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
+  },
+  plans() {
+    const ret = [];
+    if (Template.currentData().studentID.get()) {
+      const user = Users.findDoc(Template.currentData().studentID.get());
+      if (user.academicPlanID) {
+        const plan = AcademicPlans.findDoc(user.academicPlanID);
+        const semester = Semesters.findDoc(plan.effectiveSemesterID);
+        const plans = AcademicPlans.find().fetch();
+        _.map(plans, (p) => {
+          const year = Semesters.findDoc(p.effectiveSemesterID).year;
+          if (semester.year === year) {
+            ret.push(p);
+          }
+        });
+      }
+    } else {
+      const chosen = parseInt(Template.instance().chosenYear.get(), 10);
+      const plans = AcademicPlans.find().fetch();
+      _.map(plans, (p) => {
+        const year = Semesters.findDoc(p.effectiveSemesterID).year;
+        if (chosen === year) {
+          ret.push(p);
+        }
+      });
+    }
+    return _.sortBy(ret, [function sort(o) {
+      return o.name;
+    }]);
   },
   roles() {
     return [ROLE.STUDENT, ROLE.ALUMNI];
@@ -91,6 +125,26 @@ Template.Update_Degree_Plan_Widget.helpers({
     }
     return '';
   },
+  selectedPlan() {
+    if (Template.currentData().studentID.get()) {
+      const user = Users.findDoc(Template.currentData().studentID.get());
+      if (user.academicPlanID) {
+        return AcademicPlans.findDoc(user.academicPlanID).name;
+      }
+    }
+    return '';
+  },
+  selectedYear() {
+    if (Template.currentData().studentID.get()) {
+      const user = Users.findDoc(Template.currentData().studentID.get());
+      if (user.academicPlanID) {
+        const plan = AcademicPlans.findDoc(user.academicPlanID);
+        const semester = Semesters.findDoc(plan.effectiveSemesterID);
+        return semester.year;
+      }
+    }
+    return '';
+  },
   selectedRole() {
     if (Template.currentData().studentID.get()) {
       const user = Users.findDoc(Template.currentData().studentID.get());
@@ -117,6 +171,34 @@ Template.Update_Degree_Plan_Widget.helpers({
       return Users.findDoc(Template.currentData().studentID.get());
     }
     return '';
+  },
+  years() {
+    const ret = [];
+    if (Template.currentData().studentID.get()) {
+      const studentID = Template.currentData().studentID.get();
+      const student = Users.findDoc({ _id: studentID });
+      let declaredYear;
+      if (student.declaredSemesterID) {
+        const decSem = Semesters.findDoc(student.declaredSemesterID);
+        declaredYear = decSem.year;
+      }
+      const plans = AcademicPlans.find().fetch();
+      _.map(plans, (p) => {
+        const year = Semesters.findDoc(p.effectiveSemesterID).year;
+        if (declaredYear && year >= declaredYear) {
+          if (_.indexOf(ret, year) === -1) {
+            ret.push(year);
+          }
+        } else
+          if (!declaredYear && _.indexOf(ret, year) === -1) {
+            ret.push(year);
+          }
+      });
+      return _.sortBy(ret, [function sort(o) {
+        return o;
+      }]);
+    }
+    return ret;
   },
 });
 
@@ -176,12 +258,14 @@ Template.Update_Degree_Plan_Widget.events({
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
+    console.log(updatedData);
     if (instance.context.isValid()) {
       const oldRole = Roles.getRolesForUser(Template.currentData().studentID.get());
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       FormUtils.renameKey(updatedData, 'careerGoals', 'careerGoalIDs');
       FormUtils.renameKey(updatedData, 'desiredDegree', 'desiredDegreeID');
       FormUtils.renameKey(updatedData, 'declaredSemester', 'declaredSemesterID');
+      FormUtils.renameKey(updatedData, 'academicPlan', 'academicPlanID');
       FormUtils.renameKey(updatedData, 'slug', 'username');
       Meteor.call('Users.update', updatedData, (error) => {
         if (error) {
@@ -197,6 +281,12 @@ Template.Update_Degree_Plan_Widget.events({
     } else {
       FormUtils.indicateError(instance);
     }
+  },
+  'change [name=year]': function changeYear(event, instance) {
+    event.preventDefault();
+    instance.successClass.set('');
+    instance.errorClass.set('');
+    Template.instance().chosenYear.set($(event.target).val());
   },
   change(event, instance) {
     instance.successClass.set('');

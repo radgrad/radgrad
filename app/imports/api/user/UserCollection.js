@@ -5,6 +5,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { AcademicPlans } from '/imports/api/degree/AcademicPlanCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
@@ -49,6 +50,7 @@ class UserCollection extends BaseInstanceCollection {
       hiddenCourseIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
       hiddenOpportunityIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
       declaredSemesterID: { type: SimpleSchema.RegEx.Id, optional: true },
+      academicPlanID: { type: SimpleSchema.RegEx.Id, optional: true },
     }));
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
     this._collection = Meteor.users;
@@ -69,6 +71,7 @@ class UserCollection extends BaseInstanceCollection {
         desiredDegreeID: 1,
         website: 1,
         emails: 1,
+        academicPlanID: 1,
       },
     };
     this._privateData = { fields: { uhID: 1 } };
@@ -407,6 +410,17 @@ class UserCollection extends BaseInstanceCollection {
     this.assertDefined(userID);
     Semesters.assertDefined(declaredSemesterID);
     this._collection.update(userID, { $set: { declaredSemesterID } });
+  }
+
+  /**
+   * Updates the user's academic plan ID.
+   * @param userID The user's ID.
+   * @param academicPlanID The academic plan's ID.
+   */
+  setAcademicPlanID(userID, academicPlanID) {
+    this.assertDefined(userID);
+    AcademicPlans.assertDefined(academicPlanID);
+    this._collection.update(userID, { $set: { academicPlanID } });
   }
 
   /**

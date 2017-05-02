@@ -53,6 +53,7 @@ export const updateUser = new ValidatedMethod({
     interestIDs: { type: [String], optional: true },
     website: { type: String, optional: true },
     declaredSemesterID: { type: SimpleSchema.RegEx.Id, optional: true },
+    academicPlanID: { type: SimpleSchema.RegEx.Id, optional: true },
   }).validator(),
   run(userDefn) {
     if (!this.userId) {

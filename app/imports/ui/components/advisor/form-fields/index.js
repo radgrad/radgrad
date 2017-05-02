@@ -1,3 +1,6 @@
+import './academic-plan-form-field.html';
+import './academic-plan-form-field.js';
+
 import './declared-semester-form-field.html';
 import './declared-semester-form-field.js';
 
