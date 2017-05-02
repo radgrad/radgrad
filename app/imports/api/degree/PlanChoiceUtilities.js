@@ -22,11 +22,39 @@ export function getAllElementsWithAttribute(attribute, value) {
   return matchingElements;
 }
 
+export function getDepartment(courseSlug) {
+  const re = /^[A-Za-z]+/g;
+  const result = re.exec(courseSlug);
+  return result[0];
+}
+
 /**
  * Returns true if the courseSlug satisfies the plan choice.
  * @param planChoice The plan choice.
  * @param courseSlug The course slug.
  */
 export function satisfiesPlanChoice(planChoice, courseSlug) {
+  const dept = getDepartment(courseSlug);
+  if (planChoice.includes('300')) {
+    return courseSlug.startsWith(`${dept}3`) || courseSlug.startsWith(`${dept}4`);
+  } else
+    if (planChoice.includes('4xx')) {
+      return courseSlug.startsWith(`${dept}4`);
+    }
   return planChoice.indexOf(courseSlug) !== -1;
+}
+
+/**
+ * Returns the index of the courseSlug in the array of plan choices.
+ * @param planChoices an array of plan choices.
+ * @param courseSlug the course slug.
+ * @return the index of courseSlug in the array.
+ */
+export function planIndexOf(planChoices, courseSlug) {
+  for (let i = 0; i < planChoices.length; i += 1) {
+    if (satisfiesPlanChoice(planChoices[i], courseSlug)) {
+      return i;
+    }
+  }
+  return -1;
 }

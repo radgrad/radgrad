@@ -1,6 +1,7 @@
 // import { check } from 'meteor/check';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { AcademicPlans } from '../degree/AcademicPlanCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
 import { DesiredDegrees } from '../degree/DesiredDegreeCollection';
@@ -11,6 +12,7 @@ import { Semesters } from '../semester/SemesterCollection';
 import * as courseUtils from '../course/CourseUtilities';
 import * as oppUtils from '../opportunity/OpportunityUtilities';
 import * as yearUtils from '../year/AcademicYearUtilities';
+import * as planUtils from '../degree/PlanChoiceUtilities';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 import { BS_CS_LIST, BA_ICS_LIST } from '../degree-program/degree-program';
@@ -132,13 +134,18 @@ export class FeedbackFunctionClass {
     this.clearFeedbackInstances(studentID, area);
     const student = Users.findDoc(studentID);
     const courseIDs = Users.getCourseIDs(studentID);
-    const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
     let courses;
-    if (degree.shortName.startsWith('B.S.')) {
-      courses = BS_CS_LIST.slice(0);
-    }
-    if (degree.shortName.startsWith('B.A.')) {
-      courses = BA_ICS_LIST.slice(0);
+    if (student.academicPlanID) {
+      const academicPlan = AcademicPlans.findDoc(student.academicPlanID);
+      courses = academicPlan.courseList;
+    } else {
+      const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
+      if (degree.shortName.startsWith('B.S.')) {
+        courses = BS_CS_LIST.slice(0);
+      }
+      if (degree.shortName.startsWith('B.A.')) {
+        courses = BA_ICS_LIST.slice(0);
+      }
     }
     courses = this._missingCourses(courseIDs, courses);
     if (courses.length > 0) {
@@ -422,32 +429,16 @@ export class FeedbackFunctionClass {
    */
   _missingCourses(courseIDs, coursesNeeded) {
     // console.log('_missingCourses', courseIDs, coursesNeeded);
-    const courses = coursesNeeded.splice(0);
+    const planChoices = coursesNeeded.splice(0);
     _.map(courseIDs, (id) => {
       const course = Courses.findDoc(id);
       const slug = Slugs.getNameFromID(course.slugID);
-      // console.log('missing', slug);
-      const index = _.indexOf(courses, slug);
+      const index = planUtils.planIndexOf(planChoices, slug);
       if (index !== -1) {
-        courses.splice(index, 1);
-      } else
-        if (slug.startsWith('ics4') || slug.startsWith('other')) {
-          if (_.indexOf(courses, 'ics4xx') !== -1) {
-            courses.splice(_.indexOf(courses, 'ics4xx'), 1);
-          }
-        } else {
-          let i = 0;
-          _.map(courses, (c) => {
-            if (Array.isArray(c)) {
-              if (_.indexOf(c, slug) !== -1) {
-                courses.splice(i, 1);
-              }
-            }
-            i += 1;
-          });
-        }
+        planChoices.splice(index, 1);
+      }
     });
-    return courses;
+    return planChoices;
   }
 }
 
