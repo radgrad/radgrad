@@ -3,8 +3,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Courses } from '../../../api/course/CourseCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { buildSimpleName } from '../../../api/degree/PlanChoiceUtilities';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { plannerKeys } from './academic-plan';
@@ -14,6 +14,9 @@ Template.Add_Course_Button.onCreated(function addCourseButtonOnCreated() {
 });
 
 Template.Add_Course_Button.helpers({
+  courseName() {
+    return buildSimpleName(Slugs.getNameFromID(this.course.slugID));
+  },
   equals(a, b) {
     return a === b;
   },
@@ -29,6 +32,9 @@ Template.Add_Course_Button.helpers({
     });
     return semesters;
   },
+  id() {
+    return this.course._id;
+  },
   nextYears(amount) {
     const nextYears = [];
     const currentSemesterID = Semesters.getCurrentSemester();
@@ -39,6 +45,10 @@ Template.Add_Course_Button.helpers({
       currentYear += 1;
     }
     return nextYears;
+  },
+  slug() {
+    const slug = Slugs.getNameFromID(this.course.slugID);
+    return slug;
   },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
@@ -78,25 +88,13 @@ Template.Add_Course_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
     const course = this.course;
-    const semester = event.target.text;
-    const semSplit = semester.split(' ');
-    const semSlug = `${semSplit[0]}-${semSplit[1]}`;
-    const semID = Semesters.getID(semSlug);
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-      semesterID: semID,
-    }).fetch();
-    if (ci > 1) {
-      console.log('Too many course instances found for a single semester.');
-    }
-    const doc = Courses.findDoc(ci[0].courseID);
-    Template.instance().state.set(plannerKeys.detailCourse, doc);
+    const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+    Template.instance().state.set(plannerKeys.detailCourse, course);
     Template.instance().state.set(plannerKeys.detailCourseInstance, null);
     Template.instance().state.set(plannerKeys.detailOpportunity, null);
     Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
 
-    CourseInstances.removeIt(ci[0]._id);
+    CourseInstances.removeIt(ci._id);
     FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
     FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
     FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
