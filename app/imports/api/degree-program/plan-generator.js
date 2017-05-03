@@ -149,22 +149,21 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
   const studentID = student._id;
   const grade = 'A';
   let courseSlug = degreeList.splice(0, 1)[0];
-  if (typeof courseSlug === 'object') {
-    // console.log(courseSlug);
-    const bestChoice = courseUtils.chooseBetween(courseSlug, studentID, courseTakenSlugs);
-    if (bestChoice) {
-      // console.log('bestChoice', courseSlug, bestChoice.number, Semesters.toString(semester._id, false));
-      CourseInstances.define({
-        semester: Semesters.getSlug(semester._id),
-        course: Courses.getSlug(bestChoice._id),
-        note: bestChoice.number,
-        grade,
-        student: student.username,
-      });
-    }
+  const split = courseSlug.split('-');
+  courseSlug = split[0];
+  if (courseSlug.endsWith('3xx')) {
+    const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID, courseTakenSlugs);
+    // console.log('bestChoice', courseSlug, bestChoice.number, Semesters.toString(semester._id, false));
+    CourseInstances.define({
+      semester: Semesters.getSlug(semester._id),
+      course: Courses.getSlug(bestChoice._id),
+      note: bestChoice.number,
+      grade,
+      student: student.username,
+    });
   } else
-    if (courseSlug.endsWith('3xx')) {
-      const bestChoice = courseUtils.chooseStudent300LevelCourse(studentID, courseTakenSlugs);
+    if (courseSlug.endsWith('4xx')) {
+      const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, courseTakenSlugs);
       // console.log('bestChoice', courseSlug, bestChoice.number, Semesters.toString(semester._id, false));
       CourseInstances.define({
         semester: Semesters.getSlug(semester._id),
@@ -174,19 +173,21 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
         student: student.username,
       });
     } else
-      if (courseSlug.endsWith('4xx')) {
-        const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, courseTakenSlugs);
-        // console.log('bestChoice', courseSlug, bestChoice.number, Semesters.toString(semester._id, false));
+      if (hasPrerequisites(courseSlug, courseTakenSlugs)) {
+        // console.log('only choice', courseSlug, Semesters.toString(semester._id, false));
+        const note = createNote(courseSlug);
         CourseInstances.define({
           semester: Semesters.getSlug(semester._id),
-          course: Courses.getSlug(bestChoice._id),
-          note: bestChoice.number,
+          course: courseSlug,
+          note,
           grade,
           student: student.username,
         });
-      } else
+      } else {
+        degreeList.splice(1, 0, courseSlug);  // return slug to list in the second spot
+        courseSlug = degreeList.splice(0, 1)[0];
         if (hasPrerequisites(courseSlug, courseTakenSlugs)) {
-          // console.log('only choice', courseSlug, Semesters.toString(semester._id, false));
+          // console.log('2nd choice', courseSlug, Semesters.toString(semester._id, false));
           const note = createNote(courseSlug);
           CourseInstances.define({
             semester: Semesters.getSlug(semester._id),
@@ -195,23 +196,10 @@ function chooseCourse(student, semester, degreeList, courseTakenSlugs) {
             grade,
             student: student.username,
           });
-        } else {
-          degreeList.splice(1, 0, courseSlug);  // return slug to list in the second spot
-          courseSlug = degreeList.splice(0, 1)[0];
-          if (hasPrerequisites(courseSlug, courseTakenSlugs)) {
-            // console.log('2nd choice', courseSlug, Semesters.toString(semester._id, false));
-            const note = createNote(courseSlug);
-            CourseInstances.define({
-              semester: Semesters.getSlug(semester._id),
-              course: courseSlug,
-              note,
-              grade,
-              student: student.username,
-            });
-          } else { // do we try one more time?
-            // console.log(degreeList);
-          }
+        } else { // do we try one more time?
+          // console.log(degreeList);
         }
+      }
 }
 
 /**
