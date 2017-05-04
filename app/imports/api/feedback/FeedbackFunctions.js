@@ -26,14 +26,16 @@ function getPosition(string, subString, index) {
 }
 
 function getBasePath(studentID) {
-  const currentRoute = FlowRouter.current().path;
-  let basePath;
-  if (currentRoute.startsWith('/advisor')) {
-    const student = Users.findDoc(studentID);
-    basePath = `/student/${student.username}/`;
-  } else {
-    const index = getPosition(currentRoute, '/', 3);
-    basePath = currentRoute.substring(0, index + 1);
+  let basePath = '';
+  if (FlowRouter.current()) {
+    const currentRoute = FlowRouter.current().path;
+    if (currentRoute.startsWith('/advisor')) {
+      const student = Users.findDoc(studentID);
+      basePath = `/student/${student.username}/`;
+    } else {
+      const index = getPosition(currentRoute, '/', 3);
+      basePath = currentRoute.substring(0, index + 1);
+    }
   }
   return basePath;
 }
@@ -134,29 +136,25 @@ export class FeedbackFunctionClass {
     this.clearFeedbackInstances(studentID, area);
     const student = Users.findDoc(studentID);
     const courseIDs = Users.getCourseIDs(studentID);
-    let courses;
+    let courses = [];
+    let academicPlan;
     if (student.academicPlanID) {
-      const academicPlan = AcademicPlans.findDoc(student.academicPlanID);
-      courses = academicPlan.courseList;
+      academicPlan = AcademicPlans.findDoc(student.academicPlanID);
     } else {
-      const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
-      if (degree.shortName.startsWith('B.S.')) {
-        courses = BS_CS_LIST.slice(0);
-      }
-      if (degree.shortName.startsWith('B.A.')) {
-        courses = BA_ICS_LIST.slice(0);
-      }
+      const degreeID = student.desiredDegreeID;
+      academicPlan = AcademicPlans.findDoc({ degreeID });
     }
+    courses = academicPlan.courseList.slice(0);
     courses = this._missingCourses(courseIDs, courses);
     if (courses.length > 0) {
-      // console.log(courses);
       let description = 'Your degree plan is missing: \n\n';
       const basePath = getBasePath(studentID);
       _.map(courses, (slug) => {
-        if (Array.isArray(slug)) {
+        if (!planUtils.isSingleChoice(slug)) {
+          const slugs = planUtils.complexChoiceToArray(slug);
           description = `${description}\n\n- `;
-          _.map(slug, (s) => {
-            const id = Slugs.getEntityID(s, 'Course');
+          _.map(slugs, (s) => {
+            const id = Slugs.getEntityID(planUtils.stripCounter(s), 'Course');
             const course = Courses.findDoc(id);
             // eslint-disable-next-line max-len
             description = `${description} [${course.number} ${course.shortName}](${basePath}explorer/courses/${s}) or `;
@@ -167,7 +165,7 @@ export class FeedbackFunctionClass {
           if (slug.startsWith('ics4')) {
             description = `${description} \n- a 400 level elective, `;
           } else {
-            const id = Slugs.getEntityID(slug, 'Course');
+            const id = Slugs.getEntityID(planUtils.stripCounter(slug), 'Course');
             const course = Courses.findDoc(id);
             // eslint-disable-next-line max-len
             description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
