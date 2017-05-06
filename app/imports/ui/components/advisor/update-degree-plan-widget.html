@@ -25,7 +25,12 @@
       </div>
       <div class="fields">
         {{> Desired_Degree_Form_Field desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "desiredDegree")}}
+        {{> Declared_Semester_Form_Field semesters=declaredSemesters selectedSemesterID=selectedDeclaredSemesterID errorMessage=(fieldError "semesters") }}
         {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") required=true type="Number"}}
+      </div>
+      <div class="two fields">
+        {{> Year_Form_Field years=years selectedYear=selectedYear}}
+        {{> Academic_Plan_Form_Field plans=plans selectedPlan=selectedPlan}}
       </div>
 
       <button class="ui tiny green basic button" type="submit">UPDATE STUDENT</button>
@@ -41,7 +46,8 @@
     <button class="ui tiny basic green button jsGeneratePlan">GENERATE DEGREE PLAN</button>
     {{#if slug}}
       <p><b>View {{user.firstName}}'s degree plan:</b> <a target="_blank"
-                                                href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a></p>
+                                                          href="/student/{{slug}}/degree-planner">/student/{{slug}}
+        /degree-planner</a></p>
     {{/if}}
 
   </div>

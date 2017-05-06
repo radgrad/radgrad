@@ -47,6 +47,14 @@ Template.Academic_Plan_Viewer_Component.helpers({
   getPlan() {
     return Template.instance().plan.get();
   },
+  hasSummer(yearNum) {
+    if (Template.instance().plan.get()) {
+      const plan = Template.instance().plan.get();
+      const numCoursesList = plan.coursesPerSemester.slice(0);
+      return numCoursesList[(3 * yearNum) + 2] !== 0;
+    }
+    return false;
+  },
   name() {
     if (Template.instance().plan.get()) {
       const plan = Template.instance().plan.get();

@@ -11,7 +11,7 @@
           <tbody>
           {{#each course in icsCourses}}
             <tr id="{{course._id}}" class="courseInstance clickEnabled" draggable="true" ondragstart="drag(event)"
-                data-position="top center" style="cursor: pointer;">
+                data-position="top center" style="cursor: move;">
               <td style="border-top: none;"><strong>{{course.note}}</strong></td>
               <td style="border-top: none;">
                 {{> Planned_Course_Grade course=course dictionary=dictionary}}
@@ -21,7 +21,7 @@
           {{#each opportunity in semesterOpportunities}}
             <tr id="{{opportunity._id}}" class="opportunityInstance clickEnabled" draggable="true"
                 ondragstart="drag(event)" data-position="top center"
-                style="">
+                style="cursor: move;">
               <td style="border-top: none; cursor: pointer;" colspan="2">
                 <strong>{{opportunityName opportunity._id}}</strong>
               </td>
@@ -41,7 +41,7 @@
           <tbody>
           {{#each course in icsCourses}}
             <tr id="{{course._id}}" class="courseInstance clickEnabled" draggable="true" ondragstart="drag(event)"
-                data-position="top center" style="cursor: pointer;">
+                data-position="top center" style="cursor: move;">
               <td style="border-top: none;"><strong>{{course.note}}</strong></td>
               <td style="border-top: none;">
                 {{> Planned_Course_Grade course=course dictionary=dictionary}}
@@ -51,8 +51,8 @@
           {{#each opportunity in semesterOpportunities}}
             <tr id="{{opportunity._id}}" class="opportunityInstance clickEnabled" draggable="true"
                 ondragstart="drag(event)" data-position="top center"
-                style="{{#unless isFuture}}color: rgba(0,0,0,.55);{{/unless}}">
-              <td style="border-top: none; cursor: pointer;" colspan="2">
+                style="{{#unless isFuture}}color: rgba(0,0,0,.55);{{/unless}} cursor: move;">
+              <td style="border-top: none;" colspan="2">
                 <strong>{{opportunityName opportunity._id}}</strong>
               </td>
             </tr>
