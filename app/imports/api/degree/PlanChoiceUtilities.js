@@ -69,11 +69,15 @@ export function complexChoiceToArray(planChoice) {
   });
   return ret;
 }
+export function buildCourseSlugName(slug) {
+  const splits = slug.split(/([A-Za-z]+)/);
+  return `${splits[1].toUpperCase()} ${splits[2]}`;
+}
 export function buildSimpleName(slug) {
   const splits = slug.split(',');
   let ret = '';
   _.map(splits, (s) => {
-    ret = `${ret}${s.substring(0, 3).toUpperCase()} ${s.substring(3)} or `;
+    ret = `${ret}${buildCourseSlugName(s)} or `;
   });
   return ret.substring(0, ret.length - 4);
 }
