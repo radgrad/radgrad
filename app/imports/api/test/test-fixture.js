@@ -2,6 +2,7 @@
 
 // import { Meteor } from 'meteor/meteor';
 // import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
+import { AcademicPlans } from '../../api/degree/AcademicPlanCollection';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
@@ -68,7 +69,7 @@ export function defineTestFixture() {
   const collectionList = [Semesters, InterestTypes, Interests, CareerGoals, DesiredDegrees,
     ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
     CourseInstances, OpportunityInstances, FeedbackInstances,
-    VerificationRequests];
+    VerificationRequests, AcademicPlans];
 
   // const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
   // const collectionNames = _.map(collectionList, collection => collection._collectionName);

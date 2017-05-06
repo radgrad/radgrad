@@ -169,7 +169,16 @@ export const chooseStudent400LevelCourse = (studentID, coursesTakenSlugs) => {
   return best[getRandomInt(0, best.length)];
 };
 
+/**
+ * Chooses the 'best' course to take given an array of slugs, the student and the courses the student
+ * has taken.
+ * @param slugs an array of course slugs to choose between.
+ * @param studentID the student's ID.
+ * @param coursesTakenSlugs an array of the course slugs the student has taken.
+ * @returns {*}
+ */
 export const chooseBetween = (slugs, studentID, coursesTakenSlugs) => {
+  // console.log('chooseBetween', slugs, coursesTakenSlugs);
   const courses = [];
   _.map(slugs, (slug) => {
     const courseID = Courses.getID(slug);

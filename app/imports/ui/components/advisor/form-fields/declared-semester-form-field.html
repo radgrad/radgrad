@@ -1,0 +1,12 @@
+<template name="Declared_Semester_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Declared Semester</label>
+    <select class="ui dropdown" name="declaredSemester">
+      <option value="">Select Semester</option>
+      {{#each semester in semesters}}
+        <option value="{{semester._id}}" selected="{{isSelected semester._id selectedSemesterID}}">{{semester.term}} {{semester.year}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

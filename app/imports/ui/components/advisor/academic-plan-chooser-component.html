@@ -1,8 +1,8 @@
 <template name="Academic_Plan_Chooser_Component">
   <form class="ui form">
     <div class="two fields">
-      {{> Year_Form_Field years=years required=true}}
-      {{> Name_Form_Field names=names required=true}}
+      {{> Year_Form_Field years=years selectedYear=selectedYear}}
+      {{> Name_Form_Field names=names selectedName=selectedName}}
     </div>
   </form>
 </template>

@@ -1,21 +1,24 @@
 <template name="Academic_Plan_Viewer_Component">
   <div class="ui padded container" style="margin-bottom: 0 !important;">
     {{#if getPlan}}
-      <div class="ui header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">{{name}} {{fallYear}} - {{springYear}}</h4>
-      </div>
+      <!--<div class="ui header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">{{name}} {{fallYear}}-->
+      <!--- {{springYear}}</h4>-->
+      <!--</div>-->
       <form class="ui form">
         <div class="ui stackable grid">
           <div class="column">
             <div class="ui equal width grid" style="margin: 0;">
               <div class="stackable row">
                 {{#each year in years}}
-                  <div class="stretched column academicYear" style="padding: 0 0.6rem;">
+                  <div class=" column academicYear" style="padding: 0 0.6rem;">
                     <div class="ui header">Fall</div>
                     {{> Academic_Plan_Semester courses=(courses @index 0) plan=getPlan}}
                     <div class="ui header">Spring</div>
                     {{> Academic_Plan_Semester courses=(courses @index 1) plan=getPlan}}
-                    <div class="ui header">Summer</div>
-                    {{> Academic_Plan_Semester courses=(courses @index 2) plan=getPlan}}
+                    {{#if hasSummer @index}}
+                      <div class="ui header">Summer</div>
+                      {{> Academic_Plan_Semester courses=(courses @index 2) plan=getPlan}}
+                    {{/if}}
                   </div>
                 {{/each}}
               </div>

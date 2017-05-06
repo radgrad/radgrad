@@ -371,6 +371,116 @@
             "ics332-1",
             "ics464-1"
           ]
+        },
+        {
+          "degreeSlug": "bs-cs",
+          "name": "B.S. in Computer Science",
+          "semester": "Fall-2015",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0
+          ],
+          "courseList": [
+            "ics111-1",
+            "ics141-1",
+            "ics211-1",
+            "ics241-1",
+            "ics212-1",
+            "ics311-1",
+            "ics312,ics331-1",
+            "ics321-1",
+            "ics313,ics361-1",
+            "ics314-1",
+            "ics332-1",
+            "ics4xx-1",
+            "ics4xx-2",
+            "ics4xx-3",
+            "ics4xx-4",
+            "ics4xx-5"
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A. in Information and Computer Sciences",
+          "semester": "Fall-2015",
+          "coursesPerSemester": [
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            1,
+            1,
+            0
+          ],
+          "courseList": [
+            "ics111-1",
+            "ics141-1",
+            "ics211-1",
+            "ics241-1",
+            "ics212-1",
+            "ics311-1",
+            "ics312,ics331-1",
+            "ics321-1",
+            "ics313,ics361-1",
+            "ics4xx-6",
+            "ics332-1",
+            "ics4xx-1",
+            "ics4xx-2",
+            "ics4xx-4"
+          ]
+        },
+        {
+          "degreeSlug": "ba-ics",
+          "name": "B.A. in Computer Sciences IT Focus",
+          "semester": "Fall-2015",
+          "coursesPerSemester": [
+            2,
+            1,
+            0,
+            2,
+            2,
+            0,
+            2,
+            3,
+            0,
+            3,
+            2,
+            0
+          ],
+          "courseList": [
+            "ics111-1",
+            "ics141-1",
+            "ics211-1",
+            "ics212,ics215-1",
+            "ics314-2",
+            "ics414-1",
+            "ics415-1",
+            "ics321-1",
+            "ics332-2",
+            "ics351-1",
+            "ics425-1",
+            "ics464-1",
+            "ics426-1",
+            "ics300+-2",
+            "ics300+-3",
+            "ics300+-4",
+            "ics300+-5"
+          ]
         }
       ]
     },
