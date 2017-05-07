@@ -1,0 +1,18 @@
+<template name="Faculty_Explorer_Users_Page">
+  {{#Student_Explorer_Layout type = 'users'}}
+    <div class="ui stackable grid">
+      <div class="ten wide column">
+        {{> Explorer_Choose_User_Widget userID=userID}}
+      </div>
+      <div class="six wide column">
+        {{#if displayUser}}
+          {{> Explore_User_Widget userID=userID}}
+        {{else}}
+          <div class="ui padded segment">
+            <p>Choose a user from the panel on the left.</p>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  {{/Student_Explorer_Layout}}
+</template>

@@ -113,8 +113,9 @@
   {{/unless}}
 
   <div class="ui vertical text menu mobile hidden">
-      {{#if isType type 'courses'}}
-        <h4 class="ui dividing header">
+  {{#if isType type 'courses'}}
+    {{#if isInRole 'STUDENT'}}
+      <h4 class="ui dividing header">
           COURSES IN MY PLAN
         </h4>
         {{#each listItem in menuAddedList}}
@@ -123,7 +124,10 @@
         <h4 class="ui dividing header">
           ALL OTHER COURSES
         </h4>
-        {{#each listItem in menuNonAddedList}}
+      {{else}}
+    {{/if}}
+
+    {{#each listItem in menuNonAddedList}}
           <a class="{{classType (slugName listItem) 'course'}}" data-tab="tab-name" href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}"><i style="position: absolute; margin-left: -20px;" class="{{userCourses listItem}}"></i>{{courseName listItem}}</a>
         {{/each}}
       {{else}}
@@ -142,7 +146,8 @@
           {{/each}}
           {{else}}
             {{#if isType type 'degrees'}}
-              <h4 class="ui dividing header">
+              {{#if isInRole 'STUDENT'}}
+                  <h4 class="ui dividing header">
                 MY DESIRED DEGREE
               </h4>
               {{#each listItem in menuAddedList}}
@@ -151,12 +156,14 @@
               <h4 class="ui dividing header">
                 ALL OTHER DEGREES
               </h4>
+                {{/if}}
               {{#each listItem in menuNonAddedList}}
                 <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name" href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}"><i style="position: absolute; margin-left: -20px;" class="{{userDegrees listItem}}"></i>{{itemName listItem}}</a>
               {{/each}}
             {{else}}
               {{#if isType type 'opportunities'}}
-                <h4 class="ui dividing header">
+                {{#if isInRole 'STUDENT'}}
+                    <h4 class="ui dividing header">
                   OPPORTUNITIES IN MY PLAN
                 </h4>
                 {{#each listItem in menuAddedList}}
@@ -165,6 +172,7 @@
                 <h4 class="ui dividing header">
                   ALL OTHER OPPORTUNITIES
                 </h4>
+                  {{/if}}
                 {{#each listItem in menuNonAddedList}}
                   <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}"><i style="position: absolute; margin-left: -20px;" class="{{userOpportunities listItem}}"></i>{{itemName listItem}}</a>
                 {{/each}}
