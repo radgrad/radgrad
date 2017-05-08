@@ -108,8 +108,8 @@ function _missingCourses(courseIDs, planChoiceList) {
       choices.splice(index, 1);
     } else
       if (slug.startsWith('ics4') || slug.startsWith('other')) {
-        if (_.indexOf(choices, 'ics4xx') !== -1) {
-          choices.splice(_.indexOf(choices, 'ics4xx'), 1);
+        if (_.indexOf(choices, 'ics400+') !== -1) {
+          choices.splice(_.indexOf(choices, 'ics400+'), 1);
         }
       } else {
         let i = 0;
@@ -167,7 +167,7 @@ function chooseCourse(student, semester, planChoiceList, courseTakenSlugs) {
         student: student.username,
       });
     } else
-      if (planChoice.endsWith('4xx')) {
+      if (planChoice.endsWith('400+')) {
         const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, courseTakenSlugs);
         // console.log('bestChoice', planChoice, bestChoice.number, Semesters.toString(semester._id, false));
         CourseInstances.define({
