@@ -41,6 +41,12 @@ Template.List_Opportunities_Widget.helpers({
     return Opportunities.count();
   },
   deleteDisabled(opportunity) {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'faculty') {
+      if (opportunity.sponsor !== getUserIdFromRoute()) {
+        return 'disabled';
+      }
+    }
     return (numReferences(opportunity) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
