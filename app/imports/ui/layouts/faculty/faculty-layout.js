@@ -8,7 +8,7 @@ Template.Faculty_Layout.helpers({
         route: RouteNames.facultyHomePageRouteName,
         regex: 'home' },
       { label: 'Manage Opportunities',
-        route: RouteNames.facultyHomePageRouteName,
+        route: RouteNames.facultyOpportunitiesPageRouteName,
         regex: 'manage-opportunities' },
       { label: 'Verification',
         route: RouteNames.facultyVerificationPageRouteName,

@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
@@ -8,6 +9,7 @@ import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollec
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 const addSchema = new SimpleSchema({
   name: { type: String, optional: false },
@@ -33,11 +35,22 @@ Template.Add_Opportunity_Widget.helpers({
   opportunityTypes() {
     return OpportunityTypes.find({}, { sort: { name: 1 } });
   },
+  faculty() {
+    const group = FlowRouter.current().route.group.name;
+    return group === 'faculty';
+  },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },
   semesters() {
     return Semesters.find({});
+  },
+  sponsor() {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'faculty') {
+      return getUserIdFromRoute();
+    }
+    return '';
   },
   sponsors() {
     return Roles.getUsersInRole([ROLE.FACULTY, ROLE.ADMIN, ROLE.ADVISOR]);

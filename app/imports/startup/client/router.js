@@ -316,6 +316,14 @@ facultyRoutes.route('/verification-completed', {
   },
 });
 
+export const facultyOpportunitiesPageRouteName = 'Faculty_Opportunities_Page';
+facultyRoutes.route('/opportunities', {
+  name: facultyOpportunitiesPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyOpportunitiesPageRouteName });
+  },
+});
+
 /*                        LANDING ROUTE                       */
 
 export const landingPageRouteName = 'Landing_Page';
