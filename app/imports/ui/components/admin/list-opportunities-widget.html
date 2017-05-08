@@ -1,7 +1,7 @@
 <template name="List_Opportunities_Widget">
   <div class="ui padded container segment">
     {{#if isInRole 'faculty'}}
-      <div class="ui dividing header"><h4>YOUR OPPORTUNITIES ({{ count }})</h4></div>
+      <div class="ui dividing header"><h4>YOUR OPPORTUNITIES ({{ facultyCount }})</h4></div>
       {{#each opportunity in facultyOpportunities}}
         {{> Admin_DataModel_Accordion name=opportunity.name slug=(slugName opportunity.slugID) descriptionPairs=(descriptionPairs opportunity) id=opportunity._id updateID=updateID deleteDisabled=(deleteDisabled opportunity) updateDisabled=(updateDisabled opportunity) }}
       {{/each}}

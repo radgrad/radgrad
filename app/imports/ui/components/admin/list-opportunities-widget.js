@@ -38,7 +38,7 @@ Template.List_Opportunities_Widget.helpers({
     return Opportunities.find({}, { sort: { name: 1 } });
   },
   count() {
-    return Opportunities.count();
+    return Opportunities.find({ sponsorID: { $ne: getUserIdFromRoute() } }).count();
   },
   deleteDisabled(opportunity) {
     const group = FlowRouter.current().route.group.name;
@@ -48,6 +48,9 @@ Template.List_Opportunities_Widget.helpers({
       }
     }
     return (numReferences(opportunity) > 0) ? 'disabled' : '';
+  },
+  facultyCount() {
+    return Opportunities.find({ sponsorID: getUserIdFromRoute() }).count();
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
