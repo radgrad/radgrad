@@ -14,7 +14,11 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return course[0].shortName;
   },
   coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerCoursesPageRouteName;
+    }
+    return RouteNames.facultyExplorerCoursesPageRouteName;
   },
   fullName(user) {
     return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
@@ -35,8 +39,11 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return label === value;
   },
   opportunitiesRouteName() {
-    return RouteNames.studentExplorerOpportunitiesPageRouteName;
-  },
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerOpportunitiesPageRouteName;
+    }
+    return RouteNames.facultyExplorerOpportunitiesPageRouteName;  },
   opportunityNameFromSlug(opportunitySlugName) {
     const slug = Slugs.find({ name: opportunitySlugName }).fetch();
     const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
@@ -52,7 +59,11 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return '/images/default-profile-picture.png';
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerUsersPageRouteName;
+    }
+    return RouteNames.facultyExplorerUsersPageRouteName;
   },
   userStatus(interest) {
     let ret = false;

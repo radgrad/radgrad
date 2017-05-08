@@ -5,9 +5,11 @@
       <div class="ui clearing basic segment"
            style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
         <h4 class="ui left floated header">{{toUpper name}}</h4>
+    {{#if isInRole 'STUDENT'}}
         {{#if userStatus item}}
-          <button value="{{id}}" class="ui basic green mini right floated button  addItem">SET AS DEGREE GOAL</button>
-        {{/if}}
+                <button value="{{id}}" class="ui basic green mini right floated button  addItem">SET AS DEGREE GOAL</button>
+              {{/if}}
+    {{/if}}
       </div>
 
       <div class="ui divider" style="margin-top: 0;"></div>

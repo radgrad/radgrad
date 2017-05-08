@@ -51,7 +51,8 @@
         <div class="ui dividing header">
           <h4>RELATED COURSES</h4>
         </div>
-        <div class="ui three column stackable internally celled grid">
+{{#if isInRole 'STUDENT'}}
+    <div class="ui three column stackable internally celled grid">
           <div class="row">
             {{#each descriptionPair in descriptionPairs}}
               {{#if isLabel descriptionPair.label 'Related Courses'}}
@@ -59,7 +60,7 @@
                   <div class="column" style="text-align: center;">
                     {{{getTableTitle @index}}}
                     {{#each prerequisite in table}}
-                      - <a class="{{isActiveRoute coursesRouteName}} item"
+                      <a class="{{isActiveRoute coursesRouteName}} item"
                            href="{{pathFor coursesRouteName username=routeUserName
                                            course = prerequisite.course}}">{{courseNameFromSlug
                         prerequisite.course}}</a> <br>
@@ -70,13 +71,32 @@
             {{/each}}
           </div>
         </div>
+  {{else}}
+  <div class="ui horizontal bulleted list">
+    {{#each descriptionPair in descriptionPairs}}
+      {{#if isLabel descriptionPair.label 'Related Courses'}}
+        {{#each table in descriptionPair.value}}
+            {{#each prerequisite in table}}
+            <a class="item">
+              <a class="{{isActiveRoute coursesRouteName}} item"
+                 href="{{pathFor coursesRouteName username=routeUserName
+                 course = prerequisite.course}}">{{courseNameFromSlug
+              prerequisite.course}}</a> <br>
+              </a>
+            {{/each}}
+        {{/each}}
+      {{/if}}
+    {{/each}}
+  </div>
+{{/if}}
       </div>
 
       <div class="ui segment">
         <div class="ui dividing header">
           <h4>RELATED OPPORTUNITIES</h4>
         </div>
-        <div class="ui three column stackable internally celled grid">
+  {{#if isInRole 'STUDENT'}}
+      <div class="ui three column stackable internally celled grid">
           <div class="row">
             {{#each descriptionPair in descriptionPairs}}
               {{#if isLabel descriptionPair.label 'Related Opportunities'}}
@@ -84,7 +104,7 @@
                   <div class="column" style="text-align: center;">
                     {{{getTableTitle @index}}}
                     {{#each relatedOpportunity in table}}
-                      - <a class="{{isActiveRoute opportunitiesRouteName}} item"
+                      <a class="{{isActiveRoute opportunitiesRouteName}} item"
                            href="{{pathFor opportunitiesRouteName username=routeUserName
                                            opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug
                         relatedOpportunity.opportunity}}</a> <br>
@@ -95,6 +115,24 @@
             {{/each}}
           </div>
         </div>
+    {{else}}
+  <div class="ui horizontal bulleted list">
+    {{#each descriptionPair in descriptionPairs}}
+      {{#if isLabel descriptionPair.label 'Related Opportunities'}}
+        {{#each table in descriptionPair.value}}
+            {{#each relatedOpportunity in table}}
+            <a class="item">
+              <a class="{{isActiveRoute opportunitiesRouteName}} item"
+                 href="{{pathFor opportunitiesRouteName username=routeUserName
+                 opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug
+              relatedOpportunity.opportunity}}</a> <br>
+              </a>
+            {{/each}}
+        {{/each}}
+      {{/if}}
+    {{/each}}
+  </div>
+  {{/if}}
       </div>
     </div>
 
