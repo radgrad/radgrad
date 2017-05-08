@@ -68,6 +68,10 @@ Template.Student_Explorer_Courses_Widget.helpers({
         return 'ERROR: More than one table.';
     }
   },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
+  },
   isLabel(label, value) {
     return label === value;
   },

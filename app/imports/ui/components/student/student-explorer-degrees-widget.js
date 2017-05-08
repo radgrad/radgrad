@@ -9,6 +9,10 @@ Template.Student_Explorer_Degrees_Widget.helpers({
   fullName(user) {
     return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
   },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
+  },
   toUpper(string) {
     return string.toUpperCase();
   },

@@ -43,7 +43,7 @@ Template.List_Opportunities_Widget.helpers({
   deleteDisabled(opportunity) {
     const group = FlowRouter.current().route.group.name;
     if (group === 'faculty') {
-      if (opportunity.sponsor !== getUserIdFromRoute()) {
+      if (opportunity.sponsorID !== getUserIdFromRoute()) {
         return 'disabled';
       }
     }
@@ -52,10 +52,14 @@ Template.List_Opportunities_Widget.helpers({
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
   },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
+  },
   updateDisabled(opportunity) {
     const group = FlowRouter.current().route.group.name;
     if (group === 'faculty') {
-      if (opportunity.sponsor !== getUserIdFromRoute()) {
+      if (opportunity.sponsorID !== getUserIdFromRoute()) {
         return 'disabled';
       }
     }

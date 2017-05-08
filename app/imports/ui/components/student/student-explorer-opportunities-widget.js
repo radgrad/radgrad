@@ -29,6 +29,10 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     });
     return ret;
   },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
+  },
   isLabel(label, value) {
     return label === value;
   },
