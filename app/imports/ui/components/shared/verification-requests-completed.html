@@ -2,6 +2,7 @@
     <div class="ui padded container segment" style="margin-bottom: 2.5rem;">
       <div class="ui dividing header"><h4>COMPLETED VERIFICATION REQUESTS</h4></div>
       <div class="ui divided items">
+        {{#if completedVerifications}}
         {{#each verification in completedVerifications}}
           <div class="item">
             <div class="content">
@@ -34,6 +35,9 @@
             </div>
           </div>
         {{/each}}
+        {{else}}
+          <i>No Completed Verifications</i>
+        {{/if}}
       </div>
     </div>
 </template>
