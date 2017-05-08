@@ -80,15 +80,13 @@
       {{#if isLabel descriptionPair.label 'Related Courses'}}
         {{#if descriptionPair.value}}
         <div class="ui horizontal bulleted list">
-          {{#each table in descriptionPair.value}}
-            {{#each prerequisite in table}}
+          {{#each prerequisite in descriptionPair.value}}
             <a class="item">
               <a class="{{isActiveRoute coursesRouteName}} item"
                  href="{{pathFor coursesRouteName username=routeUserName
-                 course = prerequisite.course}}">{{courseNameFromSlug
-              prerequisite.course}}</a> <br>
+                 course = prerequisite}}">{{courseNameFromSlug
+              prerequisite}}</a> <br>
               </a>
-        {{/each}}
         {{/each}}
         </div>
         {{else}}
@@ -134,19 +132,14 @@
       {{#if isLabel descriptionPair.label 'Related Opportunities'}}
         {{#if descriptionPair.value}}
             <div class="ui horizontal bulleted list">
-        {{#each table in descriptionPair.value}}
-          {{#if table}}
-            {{#each relatedOpportunity in table}}
+            {{#each relatedOpportunity in descriptionPair.value}}
             <a class="item">
               <a class="{{isActiveRoute opportunitiesRouteName}} item"
                  href="{{pathFor opportunitiesRouteName username=routeUserName
-                 opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug
-              relatedOpportunity.opportunity}}</a> <br>
+                 opportunity = relatedOpportunity}}">{{opportunityNameFromSlug
+              relatedOpportunity}}</a> <br>
               </a>
             {{/each}}
-            {{else}}
-            {{/if}}
-        {{/each}}
       </div>
           {{else}}
           <i>None</i>

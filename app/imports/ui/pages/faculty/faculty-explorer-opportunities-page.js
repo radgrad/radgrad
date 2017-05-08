@@ -59,19 +59,7 @@ Template.Faculty_Explorer_Opportunities_Page.helpers({
     return Opportunities.find({ sponsorID: getUserIdFromRoute() }, { sort: { name: 1 } }).fetch();
   },
   completed() {
-    const opportunitySlugName = FlowRouter.getParam('opportunity');
-    let ret = false;
-    const slug = Slugs.find({ name: opportunitySlugName }).fetch();
-    const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity[0]._id,
-      verified: true,
-    }).fetch();
-    if (oi.length > 0) {
-      ret = true;
-    }
-    return ret;
+    return false;
   },
   descriptionPairs(opportunity) {
     return [
@@ -95,16 +83,8 @@ Template.Faculty_Explorer_Opportunities_Page.helpers({
     const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
     return opportunity[0];
   },
-  reviewed(opportunity) {
-    let ret = false;
-    const review = Reviews.find({
-      studentID: getUserIdFromRoute(),
-      revieweeID: opportunity._id,
-    }).fetch();
-    if (review.length > 0) {
-      ret = true;
-    }
-    return ret;
+  reviewed() {
+    return false;
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;

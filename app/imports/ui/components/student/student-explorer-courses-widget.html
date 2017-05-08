@@ -122,16 +122,14 @@
                     </div>
                   </div>
                 {{else}}
-                  {{#each table in descriptionPair.value}}
                       <div class="ui horizontal bulleted list">
-                      {{#each prerequisite in table}}
+                        {{#each prerequisite in descriptionPair.value}}
                           <a class="item">
                             <a class="{{isActiveRoute coursesRouteName}} item"
                                href="{{pathFor coursesRouteName username=routeUserName
-                               course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a>                                     </a>
-                      {{/each}}
-                    </div>
-                  {{/each}}
+                               course = prerequisite}}">{{courseNameFromSlug prerequisite}}</a>                                                    </a>
+                        {{/each}}
+                      </div>
                 {{/if}}
                 {{/if}}
             {{/if}}
