@@ -34,7 +34,7 @@ Template.Faculty_Explorer_Courses_Page.helpers({
   nonAddedCourses() {
     return Courses.find({}, { sort: { shortName: 1 } }).fetch();
   },
-  reviewed(course) {
+  reviewed() {
     return false;
   },
   slugName(slugID) {
