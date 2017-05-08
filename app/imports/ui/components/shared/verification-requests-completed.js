@@ -1,5 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
@@ -7,7 +11,19 @@ import { moment } from 'meteor/momentjs:moment';
 
 Template.Verification_Requests_Completed.helpers({
   completedVerifications() {
-    return VerificationRequests.find({ status: { $ne: VerificationRequests.OPEN } });
+    const group = FlowRouter.current().route.group.name;
+    const openRequests = VerificationRequests.find({ status: { $ne: VerificationRequests.OPEN } }).fetch();
+    if (group === 'faculty'){
+      const matchingRequests = [];
+      _.map(openRequests, (request) => {
+        const oi = OpportunityInstances.findDoc(request.opportunityInstanceID);
+        if ((Opportunities.findDoc(oi.opportunityID)).sponsorID === getUserIdFromRoute()){
+          matchingRequests.push(request);
+        }
+      });
+      return matchingRequests;
+    }
+    return openRequests;
   },
   opportunityName(verification) {
     return VerificationRequests.getOpportunityDoc(verification._id).name;

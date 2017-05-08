@@ -308,6 +308,14 @@ facultyRoutes.route('/verification', {
   },
 });
 
+export const facultyVerificationCompletedPageRouteName = 'Faculty_Verification_Completed_Page';
+facultyRoutes.route('/verification-completed', {
+  name: facultyVerificationCompletedPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyVerificationCompletedPageRouteName });
+  },
+});
+
 /*                        LANDING ROUTE                       */
 
 export const landingPageRouteName = 'Landing_Page';
