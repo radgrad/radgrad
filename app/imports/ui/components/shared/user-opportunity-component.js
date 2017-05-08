@@ -1,5 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 import { getRouteUserName } from '../shared/route-user-name';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
@@ -66,7 +68,11 @@ Template.User_Opportunity_Component.helpers({
   opportunityURL(o) {
     const opportunity = Opportunities.findDoc(o.opportunityID);
     const slug = Opportunities.getSlug(opportunity._id);
-    return `/student/${getRouteUserName()}/explorer/opportunities/${slug}`;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return `/student/${getRouteUserName()}/explorer/opportunities/${slug}`;
+    }
+    return `/faculty/${getRouteUserName()}/explorer/opportunities/${slug}`;
   },
 });
 

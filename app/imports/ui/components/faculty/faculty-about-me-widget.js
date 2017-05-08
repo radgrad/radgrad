@@ -20,10 +20,10 @@ Template.Faculty_About_Me_Widget.helpers({
     return ret;
   },
   careerGoalsRouteName() {
-    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+    return RouteNames.facultyExplorerCareerGoalsPageRouteName;
   },
   degreesRouteName() {
-    return RouteNames.studentExplorerDegreesPageRouteName;
+    return RouteNames.facultyExplorerDegreesPageRouteName;
   },
   desiredDegree() {
     let ret = '';
@@ -86,7 +86,7 @@ Template.Faculty_About_Me_Widget.helpers({
     return ret;
   },
   interestsRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
+    return RouteNames.facultyExplorerInterestsPageRouteName;
   },
   name() {
     if (getRouteUserName()) {

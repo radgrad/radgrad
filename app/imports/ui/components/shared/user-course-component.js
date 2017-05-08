@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -60,7 +61,11 @@ Template.User_Course_Component.helpers({
   courseURL(c) {
     const course = Courses.findDoc(c.courseID);
     const slug = Courses.getSlug(course._id);
-    return `/student/${getRouteUserName()}/explorer/courses/${slug}`;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return `/student/${getRouteUserName()}/explorer/courses/${slug}`;
+    }
+    return `/faculty/${getRouteUserName()}/explorer/courses/${slug}`;
   },
 });
 
