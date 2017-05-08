@@ -132,6 +132,10 @@ Template.Student_Explorer_Menu.helpers({
     }
     return RouteNames.facultyExplorerInterestsPageRouteName;
   },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
+  },
   isType(type, value) {
     return type === value;
   },

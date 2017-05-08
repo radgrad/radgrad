@@ -56,7 +56,7 @@ function teaser(opp) {
 
 Template.Faculty_Explorer_Opportunities_Page.helpers({
   addedOpportunities() {
-    return [];
+    return Opportunities.find({ sponsorID: getUserIdFromRoute() }, { sort: { name: 1 } }).fetch();
   },
   completed() {
     const opportunitySlugName = FlowRouter.getParam('opportunity');
@@ -87,7 +87,7 @@ Template.Faculty_Explorer_Opportunities_Page.helpers({
     ];
   },
   nonAddedOpportunities() {
-    return Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    return Opportunities.find({ sponsorID: { $ne: getUserIdFromRoute() } }, { sort: { name: 1 } }).fetch();
   },
   opportunity() {
     const opportunitySlugName = FlowRouter.getParam('opportunity');
