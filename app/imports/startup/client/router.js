@@ -300,6 +300,14 @@ facultyRoutes.route('/explorer/users/:explorerUserName', {
   },
 });
 
+export const facultyVerificationPageRouteName = 'Faculty_Verification_Page';
+facultyRoutes.route('/verification', {
+  name: facultyVerificationPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyVerificationPageRouteName });
+  },
+});
+
 /*                        LANDING ROUTE                       */
 
 export const landingPageRouteName = 'Landing_Page';

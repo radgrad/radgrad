@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -7,7 +9,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
 import { moment } from 'meteor/momentjs:moment';
-
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Verification_Requests_Pending.helpers({
   opportunityName(request) {
@@ -19,7 +21,19 @@ Template.Verification_Requests_Pending.helpers({
     return Users.getFullName(sponsor._id);
   },
   pendingRequests() {
-    return VerificationRequests.find({ status: VerificationRequests.OPEN });
+    const group = FlowRouter.current().route.group.name;
+    const openRequests = VerificationRequests.find({ status: VerificationRequests.OPEN }).fetch();
+    if (group === 'faculty'){
+      const matchingRequests = [];
+      _.map(openRequests, (request) => {
+        const oi = OpportunityInstances.findDoc(request.opportunityInstanceID);
+        if ((Opportunities.findDoc(oi.opportunityID)).sponsorID === getUserIdFromRoute()){
+          matchingRequests.push(request);
+        }
+      });
+      return matchingRequests;
+    }
+    return openRequests;
   },
   processedDate(date) {
     const processed = moment(date);
