@@ -67,6 +67,9 @@ function courses(interest) {
       console.log('Invalid course status');
     }
   });
+  if (complete.length + incomplete.length + notInPlan.length === 0) {
+    return [];
+  }
   return [complete, incomplete, notInPlan];
 }
 
@@ -117,6 +120,9 @@ function opportunities(interest) {
       console.log('Invalid opportunity status');
     }
   });
+  if (complete.length + incomplete.length + notInPlan.length === 0) {
+    return [];
+  }
   return [complete, incomplete, notInPlan];
 }
 
