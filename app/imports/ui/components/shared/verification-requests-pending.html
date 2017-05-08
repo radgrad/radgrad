@@ -2,6 +2,7 @@
     <div class="ui padded container segment" style="margin-bottom: 2.5rem;">
       <div class="ui dividing header"><h4>PENDING VERIFICATION REQUESTS</h4></div>
       <div class="ui divided items">
+        {{#if pendingRequests}}
         {{#each request in pendingRequests}}
           <div class="item">
             <div class="content">
@@ -42,6 +43,9 @@
             </div>
           </div>
         {{/each}}
+          {{else}}
+          <i>No Pending Requests</i>
+        {{/if}}
       </div>
     </div>
 </template>

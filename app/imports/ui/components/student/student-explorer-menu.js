@@ -17,7 +17,11 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 
 Template.Student_Explorer_Menu.helpers({
   careerGoalsRouteName() {
-    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerCareerGoalsPageRouteName;
+    }
+    return RouteNames.facultyExplorerCareerGoalsPageRouteName;
   },
   classType(item, type) {
     let ret = 'item';
@@ -42,10 +46,18 @@ Template.Student_Explorer_Menu.helpers({
     return course.shortName;
   },
   coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerCoursesPageRouteName;
+    }
+    return RouteNames.facultyExplorerCoursesPageRouteName;
   },
   degreesRouteName() {
-    return RouteNames.studentExplorerDegreesPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerDegreesPageRouteName;
+    }
+    return RouteNames.facultyExplorerDegreesPageRouteName;
   },
   equals(a, b) {
     const listArg = b.split(',');
@@ -114,7 +126,15 @@ Template.Student_Explorer_Menu.helpers({
     }
   },
   interestsRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerInterestsPageRouteName;
+    }
+    return RouteNames.facultyExplorerInterestsPageRouteName;
+  },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
   },
   isType(type, value) {
     return type === value;
@@ -123,7 +143,11 @@ Template.Student_Explorer_Menu.helpers({
     return item.name;
   },
   opportunitiesRouteName() {
-    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerOpportunitiesPageRouteName;
+    }
+    return RouteNames.facultyExplorerOpportunitiesPageRouteName;
   },
   slugName(item) {
     return Slugs.findDoc(item.slugID).name;
@@ -175,7 +199,11 @@ Template.Student_Explorer_Menu.helpers({
     return ret;
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerUsersPageRouteName;
+    }
+    return RouteNames.facultyExplorerUsersPageRouteName;
   },
 });
 

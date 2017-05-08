@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 import { Interests } from '../../../api/interest/InterestCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
@@ -10,6 +12,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { makeLink } from './datamodel-utilities';
 import { moment } from 'meteor/momentjs:moment';
 import * as FormUtils from './form-fields/form-field-utilities.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 function numReferences(opportunity) {
   let references = 0;
@@ -24,17 +27,43 @@ function numReferences(opportunity) {
 }
 
 Template.List_Opportunities_Widget.helpers({
+  facultyOpportunities() {
+    return Opportunities.find({ sponsorID: getUserIdFromRoute() }, { sort: { name: 1 } });
+  },
   opportunities() {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'faculty') {
+      return Opportunities.find({ sponsorID: { $ne: getUserIdFromRoute() } }, { sort: { name: 1 } });
+    }
     return Opportunities.find({}, { sort: { name: 1 } });
   },
   count() {
     return Opportunities.count();
   },
   deleteDisabled(opportunity) {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'faculty') {
+      if (opportunity.sponsorID !== getUserIdFromRoute()) {
+        return 'disabled';
+      }
+    }
     return (numReferences(opportunity) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
+  },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
+  },
+  updateDisabled(opportunity) {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'faculty') {
+      if (opportunity.sponsorID !== getUserIdFromRoute()) {
+        return 'disabled';
+      }
+    }
+    return '';
   },
   descriptionPairs(opportunity) {
     return [

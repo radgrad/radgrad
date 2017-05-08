@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -20,7 +21,11 @@ Template.User_Career_Goals_Component.helpers({
   },
   careerGoalURL(goal) {
     const slug = CareerGoals.getSlug(goal._id);
-    return `/student/${getRouteUserName()}/explorer/career-goals/${slug}`;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return `/student/${getRouteUserName()}/explorer/career-goals/${slug}`;
+    }
+    return `/faculty/${getRouteUserName()}/explorer/career-goals/${slug}`;
   },
   count() {
     if (Template.instance().userID && Template.instance().userID.get()) {

@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -28,6 +29,10 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       }
     });
     return ret;
+  },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
   },
   isLabel(label, value) {
     return label === value;
@@ -70,7 +75,11 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     return '/images/default-profile-picture.png';
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerUsersPageRouteName;
+    }
+    return RouteNames.facultyExplorerUsersPageRouteName;
   },
   userStatus(opportunity) {
     let ret = false;

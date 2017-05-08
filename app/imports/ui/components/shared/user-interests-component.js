@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -30,8 +31,13 @@ Template.User_Interests_Component.helpers({
     return Template.instance().labelSize;
   },
   interestURL(i) {
+    const group = FlowRouter.current().route.group.name;
     const slug = Interests.getSlug(i._id);
-    return `/student/${getRouteUserName()}/explorer/interests/${slug}`;
+
+    if (group === 'student') {
+      return `/student/${getRouteUserName()}/explorer/interests/${slug}`;
+    }
+    return `/faculty/${getRouteUserName()}/explorer/interests/${slug}`;
   },
 });
 

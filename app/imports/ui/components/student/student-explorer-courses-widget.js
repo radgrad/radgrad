@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -27,7 +28,11 @@ Template.Student_Explorer_Courses_Widget.helpers({
     return course[0].shortName;
   },
   coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerCoursesPageRouteName;
+    }
+    return RouteNames.facultyExplorerCoursesPageRouteName;
   },
   futureInstance(course) {
     let ret = false;
@@ -62,6 +67,10 @@ Template.Student_Explorer_Courses_Widget.helpers({
       default:
         return 'ERROR: More than one table.';
     }
+  },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
   },
   isLabel(label, value) {
     return label === value;

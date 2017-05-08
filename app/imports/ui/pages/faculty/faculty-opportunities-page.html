@@ -1,0 +1,14 @@
+<template name="Faculty_Opportunities_Page">
+  <div class="layout-page">
+  {{#if Template.subscriptionsReady}}
+      {{#if displayUpdateWidget}}
+        {{> Update_Opportunity_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Opportunity_Widget }}
+      {{/if}}
+      {{> List_Opportunities_Widget updateID=updateID}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+  </div>
+</template>

@@ -244,6 +244,86 @@ facultyRoutes.route('/home', {
   },
 });
 
+export const facultyExplorerPageRouteName = 'Faculty_Explorer_Page';
+facultyRoutes.route('/explorer', {
+  name: facultyExplorerPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerPageRouteName });
+  },
+});
+
+export const facultyExplorerCareerGoalsPageRouteName = 'Faculty_Explorer_CareerGoals_Page';
+facultyRoutes.route('/explorer/career-goals/:careerGoal', {
+  name: facultyExplorerCareerGoalsPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerCareerGoalsPageRouteName });
+  },
+});
+
+export const facultyExplorerCoursesPageRouteName = 'Faculty_Explorer_Courses_Page';
+facultyRoutes.route('/explorer/courses/:course', {
+  name: facultyExplorerCoursesPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerCoursesPageRouteName });
+  },
+});
+
+export const facultyExplorerDegreesPageRouteName = 'Faculty_Explorer_Degrees_Page';
+facultyRoutes.route('/explorer/degrees/:degree', {
+  name: facultyExplorerDegreesPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerDegreesPageRouteName });
+  },
+});
+
+export const facultyExplorerInterestsPageRouteName = 'Faculty_Explorer_Interests_Page';
+facultyRoutes.route('/explorer/interests/:interest', {
+  name: facultyExplorerInterestsPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerInterestsPageRouteName });
+  },
+});
+
+export const facultyExplorerOpportunitiesPageRouteName = 'Faculty_Explorer_Opportunities_Page';
+facultyRoutes.route('/explorer/opportunities/:opportunity', {
+  name: facultyExplorerOpportunitiesPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerOpportunitiesPageRouteName });
+  },
+});
+
+export const facultyExplorerUsersPageRouteName = 'Faculty_Explorer_Users_Page';
+facultyRoutes.route('/explorer/users/:explorerUserName', {
+  name: facultyExplorerUsersPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerUsersPageRouteName });
+  },
+});
+
+export const facultyVerificationPageRouteName = 'Faculty_Verification_Page';
+facultyRoutes.route('/verification', {
+  name: facultyVerificationPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyVerificationPageRouteName });
+  },
+});
+
+export const facultyVerificationCompletedPageRouteName = 'Faculty_Verification_Completed_Page';
+facultyRoutes.route('/verification-completed', {
+  name: facultyVerificationCompletedPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyVerificationCompletedPageRouteName });
+  },
+});
+
+export const facultyOpportunitiesPageRouteName = 'Faculty_Opportunities_Page';
+facultyRoutes.route('/opportunities', {
+  name: facultyOpportunitiesPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyOpportunitiesPageRouteName });
+  },
+});
+
 /*                        LANDING ROUTE                       */
 
 export const landingPageRouteName = 'Landing_Page';
