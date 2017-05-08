@@ -51,50 +51,102 @@
         <div class="ui dividing header">
           <h4>RELATED COURSES</h4>
         </div>
-        <div class="ui three column stackable internally celled grid">
+{{#if isInRole 'student'}}
+    <div class="ui three column stackable internally celled grid">
           <div class="row">
             {{#each descriptionPair in descriptionPairs}}
               {{#if isLabel descriptionPair.label 'Related Courses'}}
                 {{#each table in descriptionPair.value}}
                   <div class="column" style="text-align: center;">
                     {{{getTableTitle @index}}}
+                    {{#if table}}
                     {{#each prerequisite in table}}
-                      - <a class="{{isActiveRoute coursesRouteName}} item"
+                      <a class="{{isActiveRoute coursesRouteName}} item"
                            href="{{pathFor coursesRouteName username=routeUserName
                                            course = prerequisite.course}}">{{courseNameFromSlug
                         prerequisite.course}}</a> <br>
                     {{/each}}
+                      {{else}}
+                      <i>None</i>
+                    {{/if}}
                   </div>
                 {{/each}}
               {{/if}}
             {{/each}}
           </div>
         </div>
+  {{else}}
+    {{#each descriptionPair in descriptionPairs}}
+      {{#if isLabel descriptionPair.label 'Related Courses'}}
+        {{#if descriptionPair.value}}
+        <div class="ui horizontal bulleted list">
+          {{#each prerequisite in descriptionPair.value}}
+            <a class="item">
+              <a class="{{isActiveRoute coursesRouteName}} item"
+                 href="{{pathFor coursesRouteName username=routeUserName
+                 course = prerequisite}}">{{courseNameFromSlug
+              prerequisite}}</a> <br>
+              </a>
+        {{/each}}
+        </div>
+        {{else}}
+          <i>None</i>
+      {{/if}}
+      {{/if}}
+    {{/each}}
+{{/if}}
       </div>
 
       <div class="ui segment">
         <div class="ui dividing header">
           <h4>RELATED OPPORTUNITIES</h4>
         </div>
-        <div class="ui three column stackable internally celled grid">
+  {{#if isInRole 'student'}}
+      <div class="ui three column stackable internally celled grid">
           <div class="row">
             {{#each descriptionPair in descriptionPairs}}
               {{#if isLabel descriptionPair.label 'Related Opportunities'}}
-                {{#each table in descriptionPair.value}}
-                  <div class="column" style="text-align: center;">
+                  {{#each table in descriptionPair.value}}
+                      <div class="column" style="text-align: center;">
                     {{{getTableTitle @index}}}
-                    {{#each relatedOpportunity in table}}
-                      - <a class="{{isActiveRoute opportunitiesRouteName}} item"
+                      {{#if table}}
+                        {{#each relatedOpportunity in table}}
+                      <a class="{{isActiveRoute opportunitiesRouteName}} item"
                            href="{{pathFor opportunitiesRouteName username=routeUserName
                                            opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug
                         relatedOpportunity.opportunity}}</a> <br>
                     {{/each}}
+                      {{else}}
+                        <i>None</i>
+                      {{/if}}
                   </div>
                 {{/each}}
               {{/if}}
             {{/each}}
           </div>
         </div>
+    {{else}}
+
+
+    {{#each descriptionPair in descriptionPairs}}
+      {{#if isLabel descriptionPair.label 'Related Opportunities'}}
+        {{#if descriptionPair.value}}
+            <div class="ui horizontal bulleted list">
+            {{#each relatedOpportunity in descriptionPair.value}}
+            <a class="item">
+              <a class="{{isActiveRoute opportunitiesRouteName}} item"
+                 href="{{pathFor opportunitiesRouteName username=routeUserName
+                 opportunity = relatedOpportunity}}">{{opportunityNameFromSlug
+              relatedOpportunity}}</a> <br>
+              </a>
+            {{/each}}
+      </div>
+          {{else}}
+          <i>None</i>
+          {{/if}}
+      {{/if}}
+    {{/each}}
+  {{/if}}
       </div>
     </div>
 

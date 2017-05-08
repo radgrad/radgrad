@@ -1,7 +1,7 @@
 <template name="Sponsor_Form_Field">
   <div class="{{#if required}}required{{/if}} field">
     <label>Sponsor</label>
-    <select class="ui dropdown" name="sponsor">
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="sponsor">
       <option value="">Select Sponsor</option>
       {{#each sponsor in sponsors}}
         <option value="{{sponsor._id}}" selected="{{isSelected sponsor._id selectedSponsorID}}">{{sponsorName sponsor}}</option>

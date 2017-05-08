@@ -1,3 +1,4 @@
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -7,6 +8,10 @@ import { getRouteUserName } from '../shared/route-user-name';
 Template.Student_Explorer_Degrees_Widget.helpers({
   fullName(user) {
     return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+  },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
   },
   toUpper(string) {
     return string.toUpperCase();
@@ -18,7 +23,11 @@ Template.Student_Explorer_Degrees_Widget.helpers({
     return '/images/default-profile-picture.png';
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerUsersPageRouteName;
+    }
+    return RouteNames.facultyExplorerUsersPageRouteName;
   },
   userStatus(degree) {
     let ret = true;

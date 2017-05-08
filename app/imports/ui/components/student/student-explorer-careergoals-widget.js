@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -36,7 +37,11 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
     return '/images/default-profile-picture.png';
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerUsersPageRouteName;
+    }
+    return RouteNames.facultyExplorerUsersPageRouteName;
   },
   userStatus(careerGoal) {
     let ret = false;

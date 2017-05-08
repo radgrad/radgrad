@@ -11,7 +11,7 @@
         <p><b>{{descriptionPair.label}}:</b> {{{markdownify descriptionPair.value}}}</p>
       {{/each}}
       <p>
-        <button value="{{id}}" class="ui green basic mini button jsUpdate">Update</button>
+        <button value="{{id}}" class="ui green basic mini button {{updateDisabled}} jsUpdate">Update</button>
         <button value="{{id}}" class="ui green basic mini button {{deleteDisabled}} jsDelete">Delete</button>
       </p>
     </div>

@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -14,7 +15,11 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return course[0].shortName;
   },
   coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerCoursesPageRouteName;
+    }
+    return RouteNames.facultyExplorerCoursesPageRouteName;
   },
   fullName(user) {
     return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
@@ -31,11 +36,19 @@ Template.Student_Explorer_Interests_Widget.helpers({
         return 'ERROR: More than one table.';
     }
   },
+  isInRole(role) {
+    const group = FlowRouter.current().route.group.name;
+    return group === role;
+  },
   isLabel(label, value) {
     return label === value;
   },
   opportunitiesRouteName() {
-    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerOpportunitiesPageRouteName;
+    }
+    return RouteNames.facultyExplorerOpportunitiesPageRouteName;
   },
   opportunityNameFromSlug(opportunitySlugName) {
     const slug = Slugs.find({ name: opportunitySlugName }).fetch();
@@ -52,7 +65,11 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return '/images/default-profile-picture.png';
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerUsersPageRouteName;
+    }
+    return RouteNames.facultyExplorerUsersPageRouteName;
   },
   userStatus(interest) {
     let ret = false;

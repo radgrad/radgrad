@@ -3,7 +3,8 @@
     <div class="ui dividing header"><h4 style="text-transform:uppercase">{{reviewType}} REVIEWS</h4>
     </div>
     <div class="ui middle aligned very relaxed divided list">
-      {{#if userReview}}
+  {{#if isInRole 'STUDENT'}}
+  {{#if userReview}}
         {{#with reviewData userReview}}
           <div class="item">
             <div class="ui grid">
@@ -37,6 +38,8 @@
           {{/if}}
         </div>
       {{/if}}
+  {{/if}}
+      {{#if reviews}}
       {{#each review in reviews}}
         {{#with reviewData review}}
           <div class="item">
@@ -52,6 +55,9 @@
           </div>
         {{/with}}
       {{/each}}
+      {{else}}
+  <i>No reviews to display</i>
+  {{/if}}
     </div>
   </div>
 </template>

@@ -5,7 +5,8 @@
       <div class="ui clearing basic segment"
            style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
         <h4 class="ui left floated header">{{toUpper name}}</h4>
-        {{#if userStatus item}}
+      {{#if isInRole 'student'}}
+      {{#if userStatus item}}
           {{#if futureInstance item}}
             {{> Student_Explorer_Opportunities_Widget_Button buttonType='remove' opportunity=item}}
           {{else}}
@@ -20,6 +21,7 @@
             {{> ICE_header ice=descriptionPair.value}}
           {{/if}}
         {{/each}}
+      {{/if}}
       </div>
       <div class="ui divider" style="margin-top: 0;"></div>
 
