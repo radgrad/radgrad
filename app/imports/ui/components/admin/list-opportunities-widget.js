@@ -46,6 +46,15 @@ Template.List_Opportunities_Widget.helpers({
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
   },
+  updateDisabled(opportunity) {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'faculty') {
+      if (opportunity.sponsor !== getUserIdFromRoute()) {
+        return 'disabled';
+      }
+    }
+    return '';
+  },
   descriptionPairs(opportunity) {
     return [
       { label: 'Description', value: opportunity.description },
