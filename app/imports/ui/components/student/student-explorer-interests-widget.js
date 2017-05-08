@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -47,7 +48,8 @@ Template.Student_Explorer_Interests_Widget.helpers({
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
     }
-    return RouteNames.facultyExplorerOpportunitiesPageRouteName;  },
+    return RouteNames.facultyExplorerOpportunitiesPageRouteName;
+  },
   opportunityNameFromSlug(opportunitySlugName) {
     const slug = Slugs.find({ name: opportunitySlugName }).fetch();
     const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();

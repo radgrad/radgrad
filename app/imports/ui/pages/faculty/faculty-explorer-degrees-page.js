@@ -6,7 +6,6 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 function interestedUsers(degree) {
   const interested = [];

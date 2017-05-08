@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
@@ -23,11 +25,11 @@ Template.Verification_Requests_Pending.helpers({
   pendingRequests() {
     const group = FlowRouter.current().route.group.name;
     const openRequests = VerificationRequests.find({ status: VerificationRequests.OPEN }).fetch();
-    if (group === 'faculty'){
+    if (group === 'faculty') {
       const matchingRequests = [];
       _.map(openRequests, (request) => {
         const oi = OpportunityInstances.findDoc(request.opportunityInstanceID);
-        if ((Opportunities.findDoc(oi.opportunityID)).sponsorID === getUserIdFromRoute()){
+        if ((Opportunities.findDoc(oi.opportunityID)).sponsorID === getUserIdFromRoute()) {
           matchingRequests.push(request);
         }
       });
