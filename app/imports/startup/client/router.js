@@ -376,6 +376,62 @@ mentorRoutes.route('/home', {
   },
 });
 
+export const mentorExplorerPageRouteName = 'Mentor_Explorer_Page';
+mentorRoutes.route('/explorer', {
+  name: mentorExplorerPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerPageRouteName });
+  },
+});
+
+export const mentorExplorerCareerGoalsPageRouteName = 'Mentor_Explorer_CareerGoals_Page';
+mentorRoutes.route('/explorer/career-goals/:careerGoal', {
+  name: mentorExplorerCareerGoalsPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerCareerGoalsPageRouteName });
+  },
+});
+
+export const mentorExplorerCoursesPageRouteName = 'Mentor_Explorer_Courses_Page';
+mentorRoutes.route('/explorer/courses/:course', {
+  name: mentorExplorerCoursesPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerCoursesPageRouteName });
+  },
+});
+
+export const mentorExplorerDegreesPageRouteName = 'Mentor_Explorer_Degrees_Page';
+mentorRoutes.route('/explorer/degrees/:degree', {
+  name: mentorExplorerDegreesPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerDegreesPageRouteName });
+  },
+});
+
+export const mentorExplorerInterestsPageRouteName = 'Mentor_Explorer_Interests_Page';
+mentorRoutes.route('/explorer/interests/:interest', {
+  name: mentorExplorerInterestsPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerInterestsPageRouteName });
+  },
+});
+
+export const mentorExplorerOpportunitiesPageRouteName = 'Mentor_Explorer_Opportunities_Page';
+mentorRoutes.route('/explorer/opportunities/:opportunity', {
+  name: mentorExplorerOpportunitiesPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerOpportunitiesPageRouteName });
+  },
+});
+
+export const mentorExplorerUsersPageRouteName = 'Mentor_Explorer_Users_Page';
+mentorRoutes.route('/explorer/users/:explorerUserName', {
+  name: mentorExplorerUsersPageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerUsersPageRouteName });
+  },
+});
+
 /*                        STUDENT ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.

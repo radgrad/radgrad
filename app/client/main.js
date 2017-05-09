@@ -30,6 +30,7 @@ import '/imports/ui/components/advisor';
 import '/imports/ui/components/advisor/form-fields';
 import '/imports/ui/components/faculty';
 import '/imports/ui/components/landing';
+import '/imports/ui/components/mentor';
 import '/imports/ui/components/planner';
 import '/imports/ui/components/shared';
 import '/imports/ui/components/student';
@@ -49,6 +50,7 @@ import '/imports/ui/layouts/guidedtour';
 import '/imports/ui/pages/admin';
 import '/imports/ui/pages/advisor';
 import '/imports/ui/pages/faculty';
+import '/imports/ui/pages/mentor';
 import '/imports/ui/pages/student';
 import '/imports/ui/pages/guidedtour';
 
