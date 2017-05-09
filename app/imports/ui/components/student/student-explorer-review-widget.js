@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '/imports/startup/client/router.js';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
@@ -59,8 +60,13 @@ Template.Student_Explorer_Review_Widget.helpers({
     return matchingReviewsFinal;
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
-  },
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerUsersPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerUsersPageRouteName;
+    }
+    return RouteNames.mentorExplorerUsersPageRouteName;  },
   userUsername(user) {
     return Users.findDoc(user).username;
   },

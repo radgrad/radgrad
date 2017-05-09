@@ -1,0 +1,40 @@
+<template name="Mentor_MentorSpace_Page">
+
+  <div class="layout-page">
+    <div class="ui grid container stackable">
+      {{> Help_Panel_Widget noHelpClass=true}}
+
+      <div class="eleven wide column">
+
+        <div class="ui center aligned segment">
+          <div class="ui dividing header">
+            <h4 style="text-align: left;">ASK A NEW QUESTION</h4>
+          </div>
+          {{> Student_MentorSpace_Question_Form}}
+        </div>
+
+        {{#each question in questionsList}}
+        {{> Student_MentorSpace_Questions_Accordion title=question.title questionID=question._id}}
+        {{/each}}
+
+      </div>
+
+      <div class="five wide column">
+
+        <div class="ui segment">
+          <div class="ui dividing header">
+            <h4>MENTOR DIRECTORY</h4>
+          </div>
+          {{#each mentor in mentorsList}}
+
+          {{> Student_MentorSpace_Mentor_Directory profile=(mentorProfile mentor._id) mentorID=mentor.username firstName=mentor.firstName lastName=mentor.lastName email=mentor.email picture=mentor.picture}}
+
+          {{/each}}
+        </div>
+      </div>
+
+    </div>
+
+    {{> Back_To_Top_Button}}
+  </div>
+</template>

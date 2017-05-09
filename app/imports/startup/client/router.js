@@ -432,6 +432,14 @@ mentorRoutes.route('/explorer/users/:explorerUserName', {
   },
 });
 
+export const mentorMentorSpacePageRouteName = 'Mentor_MentorSpace_Page';
+mentorRoutes.route('/mentor-space', {
+  name: mentorMentorSpacePageRouteName,
+  action() {
+    BlazeLayout.render('Mentor_Layout', { main: mentorMentorSpacePageRouteName });
+  },
+});
+
 /*                        STUDENT ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.

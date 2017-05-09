@@ -71,8 +71,10 @@ Template.User_Opportunity_Component.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return `/student/${getRouteUserName()}/explorer/opportunities/${slug}`;
+    } else if (group === 'faculty') {
+      return `/faculty/${getRouteUserName()}/explorer/opportunities/${slug}`;
     }
-    return `/faculty/${getRouteUserName()}/explorer/opportunities/${slug}`;
+    return `/mentor/${getRouteUserName()}/explorer/opportunities/${slug}`;
   },
 });
 

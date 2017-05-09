@@ -12,5 +12,6 @@ import './mentor-explorer-opportunities-page.html';
 import './mentor-explorer-opportunities-page';
 import './mentor-explorer-users-page.html';
 import './mentor-explorer-users-page';
-
-
+import './mentor-mentorspace-page.html';
+import './mentor-mentorspace-page.js';
+import './mentor-mentorspace-page.css';

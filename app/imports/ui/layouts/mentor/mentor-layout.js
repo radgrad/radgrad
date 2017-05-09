@@ -7,7 +7,7 @@ Template.Mentor_Layout.helpers({
       { label: 'Home',
         route: RouteNames.mentorHomePageRouteName },
       { label: 'Mentor Space',
-        route: RouteNames.mentorExplorerPageRouteName },
+        route: RouteNames.mentorMentorSpacePageRouteName },
       { label: 'Explorer',
         route: RouteNames.mentorExplorerPageRouteName },
     ];
