@@ -158,12 +158,12 @@
           {{else}}
             <p>No motivation specified yet.</p>
           {{/if}}
-          <div class="ui form motivation">
+          <form class="ui form motivation">
             <div class="field">
-              <textarea rows="5" id="motivation" value="{{motivation}}"></textarea>
+              <textarea rows="5" id="motivation" name="motivation" value="{{motivation}}"></textarea>
             </div>
-          </div>
-          <button class="ui basic green button motivation" type="submit">Update</button>
+            <button class="ui basic green button motivation" type="submit">Update</button>
+          </form>
         </div>
       </div>
       <div class="row">

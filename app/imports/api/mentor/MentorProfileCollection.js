@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { Users } from '/imports/api/user/UserCollection';
@@ -63,6 +64,71 @@ class MentorProfileCollection extends BaseCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Updates company.
+   * @param userID The userID.
+   * @param email The user's email as a string.
+   * @throws {Meteor.Error} If userID is not a userID
+   */
+  setCompany(mentorID, company) {
+    Users.assertDefined(mentorID);
+    check(company, String);
+    const mentorProfile = this._collection.find({ mentorID }).fetch();
+    this._collection.update(mentorProfile[0]._id, { $set: { company } });
+  }
+
+  /**
+   * Updates career.
+   * @param userID The userID.
+   * @param email The user's email as a string.
+   * @throws {Meteor.Error} If userID is not a userID
+   */
+  setCareer(mentorID, career) {
+    Users.assertDefined(mentorID);
+    check(career, String);
+    const mentorProfile = this._collection.find({ mentorID }).fetch();
+    this._collection.update(mentorProfile[0]._id, { $set: { career } });
+  }
+
+  /**
+   * Updates location.
+   * @param userID The userID.
+   * @param email The user's email as a string.
+   * @throws {Meteor.Error} If userID is not a userID
+   */
+  setLocation(mentorID, location) {
+    Users.assertDefined(mentorID);
+    check(location, String);
+    const mentorProfile = this._collection.find({ mentorID }).fetch();
+    this._collection.update(mentorProfile[0]._id, { $set: { location } });
+  }
+
+  /**
+   * Updates linkedin
+   * @param userID The userID.
+   * @param email The user's email as a string.
+   * @throws {Meteor.Error} If userID is not a userID
+   */
+  setLinkedIn(mentorID, linkedin) {
+    Users.assertDefined(mentorID);
+    check(linkedin, String);
+    const mentorProfile = this._collection.find({ mentorID }).fetch();
+    this._collection.update(mentorProfile[0]._id, { $set: { linkedin } });
+  }
+
+  /**
+   * Updates email with new email address.
+   * @param userID The userID.
+   * @param email The user's email as a string.
+   * @throws {Meteor.Error} If userID is not a userID
+   */
+  setMotivation(mentorID, motivation) {
+    Users.assertDefined(mentorID);
+    check(motivation, String);
+    const mentorProfile = this._collection.find({ mentorID }).fetch();
+    this._collection.update(mentorProfile[0]._id, { $set: { motivation } });
   }
 
   /**

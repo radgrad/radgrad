@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -9,6 +10,13 @@ import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+
+const edit = 'edit';
+
+Template.Mentor_About_Me_Widget.onCreated(function onCreated() {
+  this.messageFlags = new ReactiveDict();
+  this.messageFlags.set(edit, undefined);
+});
 
 Template.Mentor_About_Me_Widget.helpers({
   career() {
@@ -171,7 +179,30 @@ Template.Mentor_About_Me_Widget.events({
     const choice = event.target.picture.value;
     Users.setPicture(user._id, choice);
   },
-  'click .picture': function clickPicture(event) {
+  'submit .company': function submitCompany(event) {
     event.preventDefault();
+    const choice = event.target.company.value;
+    MentorProfiles.setCompany(getUserIdFromRoute(), choice);
+  },
+  'submit .career': function submitCareer(event) {
+    event.preventDefault();
+    const choice = event.target.career.value;
+    MentorProfiles.setCareer(getUserIdFromRoute(), choice);
+  },
+  'submit .location': function submitLocation(event) {
+    event.preventDefault();
+    const choice = event.target.location.value;
+    MentorProfiles.setLocation(getUserIdFromRoute(), choice);
+  },
+  'submit .linkedin': function submitLinkedIn(event) {
+    event.preventDefault();
+    const choice = event.target.linkedin.value;
+    MentorProfiles.setLinkedIn(getUserIdFromRoute(), choice);
+  },
+  'submit .motivation': function submitMotivation(event) {
+    event.preventDefault();
+    const choice = event.target.motivation.value;
+    console.log("hello " + choice);
+    MentorProfiles.setMotivation(getUserIdFromRoute(), choice);
   },
 });
