@@ -1,7 +1,12 @@
 <template name="Mentor_About_Me_Widget">
   <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>PROFILE</h4></div>
-
+    <div class="ui dividing header">PROFILE
+  {{#if edit}}
+    <span class="doneEdit" style="float: right"><a>Save Profile</a></span>
+  {{else}}
+    <span class="editProfile" style="float: right"><a>Edit Profile</a></span>
+  {{/if}}
+      </div>
     <div class="ui stackable grid">
       <div class="row">
         <div class="two wide column">
@@ -57,29 +62,28 @@
           <p><b>Professional Website</b></p>
         </div>
         <div class="six wide column">
-          {{#if website}}
-            <a href={{website}}>{{website}}</a>
-          {{else}}
-            <p>No website specified yet.</p>
-          {{/if}}
-          <form class="ui form website">
-            <div class="inline field">
-              <div class="ui action input">
-                <input id="website" type="text" name="website" placeholder="Enter new website url" value="http://www.">
-                <button class="ui basic green button website" type="submit">Update</button>
+          {{#if edit}}
+            <form class="ui form website">
+              <div class="inline field">
+                <div class="ui action input">
+                  <input id="website" type="text" name="website" placeholder="Enter new website url" value="http://www.">
+                  <button class="ui basic green button website" type="submit">Update</button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          {{else}}
+          {{#if website}}
+                <a href={{website}}>{{website}}</a>
+              {{else}}
+                <p>No website specified yet.</p>
+          {{/if}}
+          {{/if}}
         </div>
         <div class="two wide column">
           <p><b>Current Company</b></p>
         </div>
         <div class="five wide column">
-          {{#if company}}
-            <p>{{company}}</p>
-          {{else}}
-            <p>No company specified yet.</p>
-          {{/if}}
+          {{#if edit}}
           <form class="ui form company">
             <div class="inline field">
               <div class="ui action input">
@@ -88,6 +92,13 @@
               </div>
             </div>
           </form>
+          {{else}}
+            {{#if company}}
+              <p>{{company}}</p>
+            {{else}}
+              <p>No company specified yet.</p>
+            {{/if}}
+          {{/if}}
         </div>
       </div>
 
@@ -96,11 +107,7 @@
           <p><b>Current Job Title</b></p>
         </div>
         <div class="six wide column">
-          {{#if career}}
-            <p>{{career}}</p>
-          {{else}}
-            <p>No current job title specified yet.</p>
-          {{/if}}
+          {{#if edit}}
           <form class="ui form career">
             <div class="inline field">
               <div class="ui action input">
@@ -109,16 +116,19 @@
               </div>
             </div>
           </form>
+          {{else}}
+            {{#if career}}
+              <p>{{career}}</p>
+            {{else}}
+              <p>No current job title specified yet.</p>
+            {{/if}}
+          {{/if}}
         </div>
         <div class="two wide column">
           <p><b>Current Location</b></p>
         </div>
         <div class="five wide column">
-          {{#if location}}
-            <p>{{location}}</p>
-          {{else}}
-            <p>No current location specified yet.</p>
-          {{/if}}
+          {{#if edit}}
           <form class="ui form location">
             <div class="inline field">
               <div class="ui action input">
@@ -127,6 +137,13 @@
               </div>
             </div>
           </form>
+          {{else}}
+            {{#if location}}
+              <p>{{location}}</p>
+            {{else}}
+              <p>No current location specified yet.</p>
+            {{/if}}
+          {{/if}}
         </div>
       </div>
 
@@ -135,11 +152,8 @@
           <p><b>LinkedIn</b></p>
         </div>
         <div class="six wide column">
-          {{#if linkedin}}
-            <p>{{linkedin}}</p>
-          {{else}}
-            <p>No LinkedIn specified yet.</p>
-          {{/if}}
+
+          {{#if edit}}
           <form class="ui form linkedin">
             <div class="inline field">
               <div class="ui action input">
@@ -148,22 +162,32 @@
               </div>
             </div>
           </form>
+          {{else}}
+            {{#if linkedin}}
+              <p>{{linkedin}}</p>
+            {{else}}
+              <p>No LinkedIn specified yet.</p>
+            {{/if}}
+          {{/if}}
         </div>
         <div class="two wide column">
           <p><b>Motivation</b></p>
         </div>
         <div class="five wide column">
-          {{#if motivation}}
-            <p>{{motivation}}</p>
-          {{else}}
-            <p>No motivation specified yet.</p>
-          {{/if}}
+          {{#if edit}}
           <form class="ui form motivation">
             <div class="field">
               <textarea rows="5" id="motivation" name="motivation" value="{{motivation}}"></textarea>
             </div>
             <button class="ui basic green button motivation" type="submit">Update</button>
           </form>
+          {{else}}
+            {{#if motivation}}
+              <p>{{motivation}}</p>
+            {{else}}
+              <p>No motivation specified yet.</p>
+            {{/if}}
+          {{/if}}
         </div>
       </div>
       <div class="row">
@@ -172,6 +196,7 @@
         </div>
         <div class="fourteen wide column">
           <img class="ui bottom aligned tiny circular image" src={{studentPicture student}}>
+          {{#if edit}}
           <span style="margin-left:10px">
             <div class="ui action input">
             {{#with currentUpload}}
@@ -186,6 +211,7 @@
             Image
           </button>
           </span>
+          {{/if}}
         </div>
       </div>
   </div>

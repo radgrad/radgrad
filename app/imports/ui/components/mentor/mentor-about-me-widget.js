@@ -11,11 +11,11 @@ import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-const edit = 'edit';
+const edit = false;
 
 Template.Mentor_About_Me_Widget.onCreated(function onCreated() {
   this.messageFlags = new ReactiveDict();
-  this.messageFlags.set(edit, undefined);
+  this.messageFlags.set(edit, false);
 });
 
 Template.Mentor_About_Me_Widget.helpers({
@@ -58,6 +58,9 @@ Template.Mentor_About_Me_Widget.helpers({
       }
     }
     return ret;
+  },
+  edit() {
+    return Template.instance().messageFlags.get(edit);
   },
   email() {
     if (getRouteUserName()) {
@@ -202,7 +205,12 @@ Template.Mentor_About_Me_Widget.events({
   'submit .motivation': function submitMotivation(event) {
     event.preventDefault();
     const choice = event.target.motivation.value;
-    console.log("hello " + choice);
     MentorProfiles.setMotivation(getUserIdFromRoute(), choice);
+  },
+  'click .editProfile': function submitMotivation(event, instance) {
+    instance.messageFlags.set(edit, true);
+  },
+  'click .doneEdit': function submitMotivation(event, instance) {
+    instance.messageFlags.set(edit, false);
   },
 });
