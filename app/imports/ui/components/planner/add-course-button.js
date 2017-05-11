@@ -15,7 +15,11 @@ Template.Add_Course_Button.onCreated(function addCourseButtonOnCreated() {
 
 Template.Add_Course_Button.helpers({
   courseName() {
-    return buildSimpleName(Slugs.getNameFromID(this.course.slugID));
+    try {
+      return buildSimpleName(Slugs.getNameFromID(this.course.slugID));
+    } catch (e) {
+      return '';
+    }
   },
   equals(a, b) {
     return a === b;
@@ -47,8 +51,12 @@ Template.Add_Course_Button.helpers({
     return nextYears;
   },
   slug() {
-    const slug = Slugs.getNameFromID(this.course.slugID);
-    return slug;
+    try {
+      const slug = Slugs.findDoc(this.course.slugID);
+      return slug.name;
+    } catch (e) {
+      return '';
+    }
   },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];

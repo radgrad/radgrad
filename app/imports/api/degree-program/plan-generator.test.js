@@ -156,14 +156,17 @@ if (Meteor.isServer) {
       const courseInstances = CourseInstances.find({ studentID: student._id }).fetch();
       expect(courseInstances.length).to.equal(19);
     });
-    // it('#sophmoreStudent', function test() {
-    // const student = Users.findDoc(studentID);
-    // const csvData = Assets.getText(sophmoreStudentCleanData);
-    // const user = Users.findSlugByID(studentID);
-    // processStudentStarCsvData(user, csvData);
-    // generateBSDegreePlan(student, Semesters.getCurrentSemesterDoc());
-    // const icsCourses = CourseInstances.find({ studentID, note: /ICS/ }).fetch();
-    // expect(icsCourses.length).to.equal(16);
+    // it('B.S. CE 2017', function test() {
+    //   const effectiveSemesterID = Semesters.define({ year: 2017, term: 'Fall' });
+    //   const plan = AcademicPlans.findDoc({
+    //     name: 'B.S. in Computer Engineering',
+    //     effectiveSemesterID,
+    //   });
+    //   const student = Users.findDoc(studentID);
+    //   student.academicPlanID = plan._id;
+    //   generateAcademicPlan(student, Semesters.getCurrentSemesterDoc());
+    //   const courseInstances = CourseInstances.find({ studentID: student._id }).fetch();
+    //   expect(courseInstances.length).to.equal(19);
     // });
   });
 }
