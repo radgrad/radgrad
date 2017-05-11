@@ -134,7 +134,9 @@ export function clientRemoveAllEntities() {
     OpportunityTypes.removeIt(i._id);
   });
   items = Reviews.find().fetch();
-  _.map(items, (i) => {});
+  _.map(items, (i) => {
+    Reviews.removeIt(i._id);
+  });
   items = Semesters.find().fetch();
   _.map(items, (i) => {
     Semesters.removeIt(i._id);
