@@ -28,11 +28,11 @@ if (Meteor.isServer) {
       'ics312,ics331',
       'ics313,ics361',
       'ics332',
-      'ics4xx',
-      'ics4xx',
-      'ics4xx',
-      'ics4xx',
-      'ics4xx',
+      'ics400+',
+      'ics400+',
+      'ics400+',
+      'ics400+',
+      'ics400+',
     ];
 
     before(function setup() {

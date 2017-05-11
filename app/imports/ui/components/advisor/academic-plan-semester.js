@@ -21,7 +21,7 @@ function fooBar(takenCourseSlugs, planCourseSlugs, planSlug) {
   const countIndex = planSlug.indexOf('-');
   const planCount = parseInt(planSlug.substring(countIndex + 1), 10);
   if (planCount === 1) {
-    if (planSlug.startsWith('ics4xx')) {
+    if (planSlug.startsWith('ics400+')) {
       _.map(takenCourseSlugs, (s) => {
         if (s.startsWith('ics4')) {
           ret = true;
@@ -55,7 +55,7 @@ function fooBar(takenCourseSlugs, planCourseSlugs, planSlug) {
         });
       }
   } else
-    if (planSlug.startsWith('ics4xx')) {
+    if (planSlug.startsWith('ics400+')) {
       let c = 0;
       _.map(takenCourseSlugs, (s) => {
         if (s.startsWith('ics4')) {
