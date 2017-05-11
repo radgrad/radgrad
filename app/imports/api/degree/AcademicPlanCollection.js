@@ -32,8 +32,8 @@ class AcademicPlanCollection extends BaseCollection {
    *                                 semester: 'Spring-2016',
    *                                 coursesPerSemester: [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0],
    *                                 courseList: ['ics111', 'ics141, 'ics211', 'ics241, 'ics311', 'ics314',
-    *                                 'ics212', 'ics321', 'ics313,ics361', 'ics312,ics331', 'ics332', 'ics4xx',
-     *                                 'ics4xx', 'ics4xx', 'ics4xx', 'ics4xx'] })
+    *                                 'ics212', 'ics321', 'ics313,ics361', 'ics312,ics331', 'ics332', 'ics400+',
+     *                                 'ics400+', 'ics400+', 'ics400+', 'ics400+'] })
    * @param degreeSlug
    * @param startSemesterID
    * @param coursesPerSemester
