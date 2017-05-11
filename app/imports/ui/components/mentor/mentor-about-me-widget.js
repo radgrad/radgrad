@@ -213,4 +213,7 @@ Template.Mentor_About_Me_Widget.events({
   'click .doneEdit': function submitMotivation(event, instance) {
     instance.messageFlags.set(edit, false);
   },
+  'click .cancel': function (event, instance) {
+    instance.messageFlags.set(edit, false);
+  },
 });
