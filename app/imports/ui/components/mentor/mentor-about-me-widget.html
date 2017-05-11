@@ -1,14 +1,42 @@
 <template name="Mentor_About_Me_Widget">
   <div class="ui padded container segment">
-    <div class="ui dividing header">PROFILE
-  {{#if edit}}
-    <span class="cancel" style="float: right"><a>Cancel</a></span>
-    <span class="doneEdit" style="float: right"><a>Save Profile /&nbsp;</a> </span>
-  {{else}}
-    <span class="editProfile" style="float: right"><a>Edit Profile</a></span>
-  {{/if}}
-      </div>
+    <div class="ui dividing header">PROFILE</div>
     <div class="ui stackable grid">
+      {{#if edit}}
+        <div class="row">
+          <div class="two wide column">
+            <p><b>Profile Image</b></p>
+          </div>
+          <div class="fourteen wide column">
+            <img class="ui bottom aligned tiny circular image" src={{studentPicture student}}>
+            {{#if edit}}
+              <span style="margin-left:10px">
+            <div class="ui action input">
+            {{#with currentUpload}}
+              Uploading <b>{{file.name}}</b>:
+              <span id="progress">{{progress.get}}%</span>
+            {{else}}
+              <input id="fileInput" type="file"/>
+            {{/with}}
+              <button class="ui basic green button picture mobile hidden" type="submit">Upload Image</button>
+          </div>
+          <button class="ui basic green button picture mobile only" type="submit" style="margin-top: 10px;">Upload
+            Image
+          </button>
+          </span>
+            {{/if}}
+          </div>
+        </div>
+      {{else}}
+        <div class="row">
+          <div class="two wide column">
+            <p><b>Profile Image</b></p>
+          </div>
+          <div class="fourteen wide column">
+            <img class="ui bottom aligned tiny circular image" src={{studentPicture student}}>
+          </div>
+        </div>
+      {{/if}}
       <div class="row">
         <div class="two wide column">
           <p><b>Name</b></p>
@@ -19,7 +47,7 @@
         <div class="two wide column">
           <p><b>Email</b></p>
         </div>
-        <div class="five wide column">
+        <div class="six wide column">
           <p>{{email}}</p>
         </div>
       </div>
@@ -45,7 +73,7 @@
         <div class="two wide column">
           <p><b>Career Goals</b></p>
         </div>
-        <div class="five wide column">
+        <div class="six wide column">
           {{#if careerGoals}}
             {{#each goal in careerGoals}}
               {{goalName goal}}
@@ -57,49 +85,48 @@
           <br><a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in career explorer</a>
         </div>
       </div>
+      </div>
 
+    {{#if edit}}
+      <form class="ui equal width form {{successClass}} {{errorClass}}">
+        <div class="fields">
+          {{> Input_Form_Field label='Website' name='website' value=website }}
+          {{> Input_Form_Field label='Company' name='company' value=company }}
+        </div>
+        <div class="fields">
+          {{> Input_Form_Field label='Job Title' name='career' value=career }}
+          {{> Input_Form_Field label='Location' name='location' value=location }}
+        </div>
+        <div class="fields">
+          {{> Input_Form_Field label='LinkedIn' name='linkedin' value=linkedin }}
+          {{> TextArea_Form_Field label='Motivation' rows=10 name='motivation' value=motivation }}
+        </div>
+        <button class="ui button basic green doneEdit" type="submit">Save Profile</button>
+        <button class="ui button basic green cancel">Cancel</button>
+      </form>
+
+    {{else}}
+    <div class="ui stackable grid">
       <div class="row">
         <div class="two wide column">
           <p><b>Professional Website</b></p>
         </div>
         <div class="six wide column">
-          {{#if edit}}
-            <form class="ui form website">
-              <div class="inline field">
-                <div class="ui action input">
-                  <input id="website" type="text" name="website" placeholder="Enter new website url" value="http://www.">
-                  <button class="ui basic green button website" type="submit">Update</button>
-                </div>
-              </div>
-            </form>
-          {{else}}
-          {{#if website}}
-                <a href={{website}}>{{website}}</a>
-              {{else}}
-                <p>No website specified yet.</p>
-          {{/if}}
-          {{/if}}
+            {{#if website}}
+              <a href={{website}}>{{website}}</a>
+            {{else}}
+              <p>No website specified yet.</p>
+            {{/if}}
         </div>
         <div class="two wide column">
           <p><b>Current Company</b></p>
         </div>
-        <div class="five wide column">
-          {{#if edit}}
-          <form class="ui form company">
-            <div class="inline field">
-              <div class="ui action input">
-                <input id="company" type="text" name="company" placeholder="Enter current company" value={{company}}>
-                <button class="ui basic green button company" type="submit">Update</button>
-              </div>
-            </div>
-          </form>
-          {{else}}
+        <div class="six wide column">
             {{#if company}}
               <p>{{company}}</p>
             {{else}}
               <p>No company specified yet.</p>
             {{/if}}
-          {{/if}}
         </div>
       </div>
 
@@ -108,43 +135,21 @@
           <p><b>Current Job Title</b></p>
         </div>
         <div class="six wide column">
-          {{#if edit}}
-          <form class="ui form career">
-            <div class="inline field">
-              <div class="ui action input">
-                <input id="career" type="text" name="career" placeholder="Enter current job title" value={{career}}>
-                <button class="ui basic green button career" type="submit">Update</button>
-              </div>
-            </div>
-          </form>
-          {{else}}
             {{#if career}}
               <p>{{career}}</p>
             {{else}}
               <p>No current job title specified yet.</p>
             {{/if}}
-          {{/if}}
         </div>
         <div class="two wide column">
           <p><b>Current Location</b></p>
         </div>
-        <div class="five wide column">
-          {{#if edit}}
-          <form class="ui form location">
-            <div class="inline field">
-              <div class="ui action input">
-                <input id="location" type="text" name="location" placeholder="Enter new location" value={{location}}>
-                <button class="ui basic green button location" type="submit">Update</button>
-              </div>
-            </div>
-          </form>
-          {{else}}
+        <div class="six wide column">
             {{#if location}}
               <p>{{location}}</p>
             {{else}}
               <p>No current location specified yet.</p>
             {{/if}}
-          {{/if}}
         </div>
       </div>
 
@@ -153,68 +158,25 @@
           <p><b>LinkedIn</b></p>
         </div>
         <div class="six wide column">
-
-          {{#if edit}}
-          <form class="ui form linkedin">
-            <div class="inline field">
-              <div class="ui action input">
-                <input id="linkedin" type="text" name="linkedin" placeholder="Enter new LinkedIn url" value={{linkedin}}>
-                <button class="ui basic green button linkedin" type="submit">Update</button>
-              </div>
-            </div>
-          </form>
-          {{else}}
             {{#if linkedin}}
               <p>{{linkedin}}</p>
             {{else}}
               <p>No LinkedIn specified yet.</p>
             {{/if}}
-          {{/if}}
         </div>
         <div class="two wide column">
           <p><b>Motivation</b></p>
         </div>
-        <div class="five wide column">
-          {{#if edit}}
-          <form class="ui form motivation">
-            <div class="field">
-              <textarea rows="5" id="motivation" name="motivation" value="{{motivation}}"></textarea>
-            </div>
-            <button class="ui basic green button motivation" type="submit">Update</button>
-          </form>
-          {{else}}
+        <div class="six wide column">
             {{#if motivation}}
               <p>{{motivation}}</p>
             {{else}}
               <p>No motivation specified yet.</p>
             {{/if}}
-          {{/if}}
         </div>
       </div>
-      <div class="row">
-        <div class="two wide column">
-          <p><b>Profile Image</b></p>
-        </div>
-        <div class="fourteen wide column">
-          <img class="ui bottom aligned tiny circular image" src={{studentPicture student}}>
-          {{#if edit}}
-          <span style="margin-left:10px">
-            <div class="ui action input">
-            {{#with currentUpload}}
-              Uploading <b>{{file.name}}</b>:
-              <span id="progress">{{progress.get}}%</span>
-            {{else}}
-              <input id="fileInput" type="file"/>
-            {{/with}}
-              <button class="ui basic green button picture mobile hidden" type="submit">Upload Image</button>
-          </div>
-          <button class="ui basic green button picture mobile only" type="submit" style="margin-top: 10px;">Upload
-            Image
-          </button>
-          </span>
-          {{/if}}
-        </div>
-      </div>
-  </div>
     </div>
+      <button class="ui button basic green editProfile">Edit Profile</button>
+    {{/if}}
+  </div>
 </template>

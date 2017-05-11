@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import * as FormUtils from '../../components/admin/form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
@@ -13,9 +15,18 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 
 const edit = false;
 
+const updateSchema = new SimpleSchema({
+  company: { type: String, optional: true },
+  career: { type: String, optional: true },
+  location: { type: String, optional: true },
+  linkedin: { type: String, optional: true },
+  motivation: { type: String, optional: true },
+});
+
 Template.Mentor_About_Me_Widget.onCreated(function onCreated() {
   this.messageFlags = new ReactiveDict();
   this.messageFlags.set(edit, false);
+  FormUtils.setupFormWidget(this, updateSchema);
 });
 
 Template.Mentor_About_Me_Widget.helpers({
@@ -170,47 +181,23 @@ Template.Mentor_About_Me_Widget.helpers({
 });
 
 Template.Mentor_About_Me_Widget.events({
-  'submit .website': function submitWebsite(event) {
-    event.preventDefault();
-    const user = Users.findDoc({ username: getRouteUserName() });
-    const choice = event.target.website.value;
-    Users.setWebsite(user._id, choice);
-  },
-  'submit .picture': function submitPicture(event) {
-    event.preventDefault();
-    const user = Users.findDoc({ username: getRouteUserName() });
-    const choice = event.target.picture.value;
-    Users.setPicture(user._id, choice);
-  },
-  'submit .company': function submitCompany(event) {
-    event.preventDefault();
-    const choice = event.target.company.value;
-    MentorProfiles.setCompany(getUserIdFromRoute(), choice);
-  },
-  'submit .career': function submitCareer(event) {
-    event.preventDefault();
-    const choice = event.target.career.value;
-    MentorProfiles.setCareer(getUserIdFromRoute(), choice);
-  },
-  'submit .location': function submitLocation(event) {
-    event.preventDefault();
-    const choice = event.target.location.value;
-    MentorProfiles.setLocation(getUserIdFromRoute(), choice);
-  },
-  'submit .linkedin': function submitLinkedIn(event) {
-    event.preventDefault();
-    const choice = event.target.linkedin.value;
-    MentorProfiles.setLinkedIn(getUserIdFromRoute(), choice);
-  },
-  'submit .motivation': function submitMotivation(event) {
-    event.preventDefault();
-    const choice = event.target.motivation.value;
-    MentorProfiles.setMotivation(getUserIdFromRoute(), choice);
-  },
   'click .editProfile': function submitMotivation(event, instance) {
     instance.messageFlags.set(edit, true);
   },
-  'click .doneEdit': function submitMotivation(event, instance) {
+  'submit .doneEdit': function submitDoneEdit(event, instance) {
+    console.log("HELLLOOOOOOOOOOO");
+    event.preventDefault();
+    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    instance.context.resetValidation();
+    updateSchema.clean(updatedData);
+    instance.context.validate(updatedData);
+    const mentorProfile = MentorProfiles.find({ mentorID: getUserIdFromRoute() }).fetch();
+    if (instance.context.isValid()) {
+      MentorProfiles.update(mentorProfile[0]._id, { $set: updatedData });
+      FormUtils.indicateSuccess(instance, event);
+    } else {
+      FormUtils.indicateError(instance);
+    }
     instance.messageFlags.set(edit, false);
   },
   'click .cancel': function (event, instance) {
