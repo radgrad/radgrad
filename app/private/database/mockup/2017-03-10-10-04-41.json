@@ -481,6 +481,49 @@
             "ics300+-4",
             "ics300+-5"
           ]
+        },
+        {
+          "degreeSlug": "bs-ce",
+          "name": "B.S. in Computer Engineering",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            0,
+            4,
+            4,
+            0,
+            4,
+            4,
+            0
+          ],
+          "courseList": [
+            "ee160-1",
+            "ee211-1",
+            "ee260-1",
+            "ee296-1",
+            "ee205-1",
+            "ee213-1",
+            "ee324-1",
+            "ee361-1",
+            "ee362-1",
+            "ee371-1",
+            "ee315-1",
+            "ee323-1",
+            "ee367,ics311-1",
+            "ee396-1",
+            "ee342-1",
+            "ee467,ics314-1",
+            "ee468-1",
+            "ee300+,ics300+-1",
+            "ee495-1",
+            "ee496-1",
+            "ee300+,ics300+-2",
+            "cee270,me311,cee300+,me300+,oe300+,be300+-1"
+          ]
         }
       ]
     },
@@ -1843,6 +1886,26 @@
           "creditHrs": 3,
           "interests": [],
           "prerequisites": ["ee361", "ee367"]
+        },
+        {
+          "name": "Ethics in Electrical Engineering",
+          "shortName": "Ethics",
+          "slug": "ee495",
+          "number": "EE 495",
+          "description": "Equip electrical engineers with the necessary background for ethical reasoning, as it pertains to technology, society, workplace issues, and the environment.",
+          "creditHrs": 1,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Capstone Design Project",
+          "shortName": "Capstone",
+          "slug": "ee496",
+          "number": "EE 496",
+          "description": "Significant project integrating the design content of previous courses and incorporating engineering standards and realistic constraints. Written report must document all aspects of the design process: reliability, safety, economics, ethics.",
+          "creditHrs": 1,
+          "interests": [],
+          "prerequisites": []
         },
         {
           "name": "Applied Mechanics I",
@@ -6032,15 +6095,6 @@
         "ics499",
         "ics300+",
         "ics400+",
-        "ics312,ics331",
-        "ics313,ics361",
-        "ics351,ics451",
-        "ics415,ics351",
-        "ics414,ics464",
-        "ics425,ics426",
-        "ics491,ics495",
-        "(ics312,ics331),(ics313,ics361),ics355",
-        "ics321,ics332,(ics415,ics351)",
         "ee160",
         "ee205",
         "ee211",
@@ -6058,6 +6112,8 @@
         "ee396",
         "ee467",
         "ee468",
+        "ee495",
+        "ee496",
         "ee300+",
         "cee270",
         "me311",
