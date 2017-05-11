@@ -3,8 +3,14 @@ import * as RouteNames from '/imports/startup/client/router.js';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
+Template.Student_MentorSpace_Questions_Accordion.onCreated(function studentMentorSpaceQuestionsAccordionOnCreated() {
+  if (this.data.answering) {
+    this.answering = this.data.answering;
+  }
+});
+
 Template.Student_MentorSpace_Questions_Accordion.onRendered(function studentMentorSpaceQuestionsAccordionOnRendered() {
-  this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
+  this.$('.ui.accordion').accordion({ exclusive: false, active: false });
 });
 
 Template.Student_MentorSpace_Questions_Accordion.helpers({
@@ -30,5 +36,13 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
   },
   userUsername(mentorID) {
     return Users.find({ _id: mentorID }).fetch()[0].username;
+  },
+});
+
+
+Template.Student_MentorSpace_Questions_Accordion.events({
+  'click .addAnswer': function clickaddAnswer(event, instance) {
+    const questionID = event.target.id;
+    instance.answering.set(questionID);
   },
 });

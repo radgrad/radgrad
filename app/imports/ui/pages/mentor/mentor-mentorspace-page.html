@@ -5,16 +5,20 @@
       {{> Help_Panel_Widget noHelpClass=true}}
 
       <div class="eleven wide column">
-
+        {{#if displayAnswering}}
         <div class="ui center aligned segment">
           <div class="ui dividing header">
-            <h4 style="text-align: left;">ASK A NEW QUESTION</h4>
+            <h4 style="text-align: left;">ANSWER A QUESTION</h4>
           </div>
-          {{> Student_MentorSpace_Question_Form}}
+          <div class="ui left aligned segment">
+            <b>Question: </b>{{currentQuestion}}
+          </div>
+          {{> Mentor_MentorSpace_Answer_Form answering=answering}}
         </div>
+        {{/if}}
 
         {{#each question in questionsList}}
-        {{> Student_MentorSpace_Questions_Accordion title=question.title questionID=question._id}}
+        {{> Student_MentorSpace_Questions_Accordion title=question.title questionID=question._id answering=answering}}
         {{/each}}
 
       </div>

@@ -3,6 +3,11 @@ import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js
 import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
+Template.Student_MentorSpace_Page.onCreated(function onCreated() {
+  this.messageFlags = new ReactiveDict();
+});
+
+
 Template.Student_MentorSpace_Page.helpers({
 
   questionsList() {

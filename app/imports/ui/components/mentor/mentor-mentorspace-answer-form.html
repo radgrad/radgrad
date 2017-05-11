@@ -1,0 +1,17 @@
+<template name="Mentor_MentorSpace_Answer_Form">
+  <form class="ui form mentorspace-answer-form {{ successClass }} {{ errorClass }}">
+
+    <div class="field">
+      <textarea rows="5" name="msanswer" id="msanswer"></textarea>
+    </div>
+
+    <button class="ui basic green button" type="submit">Submit Answer</button>
+
+    {{#if displaySuccessMessage}}
+      <div class="ui success message">
+        <p>Your answer has been submitted!</p>
+      </div>
+    {{/if}}
+
+  </form>
+</template>
