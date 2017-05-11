@@ -18,6 +18,14 @@ Template.Mentor_MentorSpace_Answer_Form.onCreated(function mentorMentorSpaceAnsw
 });
 
 Template.Mentor_MentorSpace_Answer_Form.helpers({
+  existingAnswer() {
+    const questionID = Template.instance().answering.get();
+    const answer = MentorAnswers.find({ questionID, mentorID: getUserIdFromRoute() }).fetch();
+    if (answer.length > 0) {
+      return answer[0].text;
+    }
+    return '';
+  },
   successClass() {
     return Template.instance().messageFlags.get(displaySuccessMessage) ? 'success' : '';
   },
@@ -35,18 +43,20 @@ Template.Mentor_MentorSpace_Answer_Form.events({
     const answer = event.target.msanswer.value;
     const question = instance.answering.get();
     const newAnswer = { question, mentor: getUserIdFromRoute(), text: answer };
-    MentorAnswers.define(newAnswer);
+    const existingAnswer = MentorAnswers.find({ questionID: question, mentorID: getUserIdFromRoute() }).fetch();
+    if (answer.length > 0) {
+      MentorAnswers.update(existingAnswer[0]._id, { $set: newAnswer });
+    } else {
+      MentorAnswers.define(newAnswer);
+    }
     instance.messageFlags.set(displaySuccessMessage, true);
     instance.messageFlags.set(displayErrorMessages, false);
     event.target.reset();
   },
-  'click .discard': function () {
+  'click .cancel': function (event) {
+    event.preventDefault();
     Template.instance().answering.set(false);
   },
-  'click .edit': function (event) {
-    event.preventDefault();
-  },
-
 });
 
 Template.Mentor_MentorSpace_Answer_Form.onRendered(function mentorSpaceOnRendered() {

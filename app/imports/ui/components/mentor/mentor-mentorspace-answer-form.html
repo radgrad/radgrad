@@ -2,10 +2,11 @@
   <form class="ui form mentorspace-answer-form {{ successClass }} {{ errorClass }}">
 
     <div class="field">
-      <textarea rows="5" name="msanswer" id="msanswer"></textarea>
+      <textarea rows="5" name="msanswer" id="msanswer" value="{{existingAnswer}}"></textarea>
     </div>
 
     <button class="ui basic green button" type="submit">Submit Answer</button>
+    <button class="ui green basic button cancel" type="submit">Cancel</button>
 
     {{#if displaySuccessMessage}}
       <div class="ui success message">

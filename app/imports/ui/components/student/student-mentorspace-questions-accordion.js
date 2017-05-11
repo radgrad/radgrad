@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_MentorSpace_Questions_Accordion.onCreated(function studentMentorSpaceQuestionsAccordionOnCreated() {
   if (this.data.answering) {
@@ -16,6 +17,9 @@ Template.Student_MentorSpace_Questions_Accordion.onRendered(function studentMent
 Template.Student_MentorSpace_Questions_Accordion.helpers({
   answerCount(questionID) {
     return MentorAnswers.getAnswers(questionID).count();
+  },
+  answered(questionID) {
+    return ((MentorAnswers.find({ questionID, mentorID: getUserIdFromRoute() }).fetch()).length !== 0 );
   },
   isOneAnswer(questionID) {
     return MentorAnswers.getAnswers(questionID).count() === 1;
@@ -41,7 +45,7 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
 
 
 Template.Student_MentorSpace_Questions_Accordion.events({
-  'click .addAnswer': function clickaddAnswer(event, instance) {
+  'click .answer': function clickAnswer(event, instance) {
     const questionID = event.target.id;
     instance.answering.set(questionID);
   },
