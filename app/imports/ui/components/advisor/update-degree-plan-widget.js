@@ -79,20 +79,22 @@ Template.Update_Degree_Plan_Widget.helpers({
             ret.push(p);
           }
         });
+
+      } else {
+        const chosen = parseInt(Template.instance().chosenYear.get(), 10);
+        const plans = AcademicPlans.find().fetch();
+        _.map(plans, (p) => {
+          const year = Semesters.findDoc(p.effectiveSemesterID).year;
+          if (chosen === year) {
+            ret.push(p);
+          }
+        });
       }
-    } else {
-      const chosen = parseInt(Template.instance().chosenYear.get(), 10);
-      const plans = AcademicPlans.find().fetch();
-      _.map(plans, (p) => {
-        const year = Semesters.findDoc(p.effectiveSemesterID).year;
-        if (chosen === year) {
-          ret.push(p);
-        }
-      });
+      return _.sortBy(ret, [function sort(o) {
+        return o.name;
+      }]);
     }
-    return _.sortBy(ret, [function sort(o) {
-      return o.name;
-    }]);
+    return ret;
   },
   roles() {
     return [ROLE.STUDENT, ROLE.ALUMNI];
