@@ -14,6 +14,6 @@ import './faculty-explorer-users-page.html';
 import './faculty-explorer-users-page';
 import './faculty-verification-page.html';
 import './faculty-verification-completed-page.html';
-import './faculty-opportunities-page.html';
-import './faculty-opportunities-page.js';
+import './faculty-manage-opportunities-page.html';
+import './faculty-manage-opportunities-page.js';
 

@@ -31,8 +31,10 @@ Template.Student_Explorer_Courses_Widget.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerCoursesPageRouteName;
     }
-    return RouteNames.facultyExplorerCoursesPageRouteName;
+    return RouteNames.mentorExplorerCoursesPageRouteName;
   },
   futureInstance(course) {
     let ret = false;

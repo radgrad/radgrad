@@ -64,8 +64,10 @@ Template.User_Course_Component.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return `/student/${getRouteUserName()}/explorer/courses/${slug}`;
+    } else if (group === 'faculty') {
+      return `/faculty/${getRouteUserName()}/explorer/courses/${slug}`;
     }
-    return `/faculty/${getRouteUserName()}/explorer/courses/${slug}`;
+    return `/mentor/${getRouteUserName()}/explorer/courses/${slug}`;
   },
 });
 

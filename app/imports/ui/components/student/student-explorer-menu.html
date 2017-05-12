@@ -166,17 +166,25 @@
                     <h4 class="ui dividing header">
                   OPPORTUNITIES IN MY PLAN
                 </h4>
-                  {{else}}
+                {{else}}
+                  {{#if isInRole 'faculty'}}
                   <h4 class="ui dividing header">
                     SPONSORED OPPORTUNITIES
                   </h4>
+                  {{/if}}
                 {{/if}}
                 {{#each listItem in menuAddedList}}
                   <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}"><i style="position: absolute; margin-left: -20px;" class="{{userOpportunities listItem}}"></i>{{itemName listItem}}</a>
                 {{/each}}
+                {{#if isInRole 'mentor'}}
                 <h4 class="ui dividing header">
-                  ALL OTHER OPPORTUNITIES
+                  ALL OPPORTUNITIES
                 </h4>
+                {{else}}
+                    <h4 class="ui dividing header">
+                      ALL OTHER OPPORTUNITIES
+                    </h4>
+                {{/if}}
                 {{#each listItem in menuNonAddedList}}
                   <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}"><i style="position: absolute; margin-left: -20px;" class="{{userOpportunities listItem}}"></i>{{itemName listItem}}</a>
                 {{/each}}

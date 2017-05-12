@@ -18,8 +18,10 @@ Template.Student_Explorer_Interests_Widget.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerCoursesPageRouteName;
     }
-    return RouteNames.facultyExplorerCoursesPageRouteName;
+    return RouteNames.mentorExplorerCoursesPageRouteName;
   },
   fullName(user) {
     return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
@@ -47,8 +49,10 @@ Template.Student_Explorer_Interests_Widget.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
-    return RouteNames.facultyExplorerOpportunitiesPageRouteName;
+    return RouteNames.mentorExplorerOpportunitiesPageRouteName;
   },
   opportunityNameFromSlug(opportunitySlugName) {
     const slug = Slugs.find({ name: opportunitySlugName }).fetch();
@@ -68,8 +72,10 @@ Template.Student_Explorer_Interests_Widget.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerUsersPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerUsersPageRouteName;
     }
-    return RouteNames.facultyExplorerUsersPageRouteName;
+    return RouteNames.mentorExplorerUsersPageRouteName;
   },
   userStatus(interest) {
     let ret = false;

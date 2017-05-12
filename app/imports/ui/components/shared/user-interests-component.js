@@ -36,8 +36,10 @@ Template.User_Interests_Component.helpers({
 
     if (group === 'student') {
       return `/student/${getRouteUserName()}/explorer/interests/${slug}`;
+    } else if (group === 'faculty') {
+      return `/faculty/${getRouteUserName()}/explorer/interests/${slug}`;
     }
-    return `/faculty/${getRouteUserName()}/explorer/interests/${slug}`;
+    return `/mentor/${getRouteUserName()}/explorer/interests/${slug}`;
   },
 });
 
