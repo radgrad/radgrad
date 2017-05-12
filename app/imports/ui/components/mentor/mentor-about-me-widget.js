@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { Meteor } from 'meteor/meteor';
+
 import { ReactiveDict } from 'meteor/reactive-dict';
 import * as FormUtils from '../../components/admin/form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -16,6 +18,7 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 const edit = false;
 
 const updateSchema = new SimpleSchema({
+  website: { type: String, optional: true },
   company: { type: String, optional: true },
   career: { type: String, optional: true },
   location: { type: String, optional: true },
@@ -182,17 +185,20 @@ Template.Mentor_About_Me_Widget.helpers({
 
 Template.Mentor_About_Me_Widget.events({
   'click .editProfile': function submitMotivation(event, instance) {
+    event.preventDefault();
     instance.messageFlags.set(edit, true);
   },
-  'submit .doneEdit': function submitDoneEdit(event, instance) {
-    console.log("HELLLOOOOOOOOOOO");
+  submit: function submitDoneEdit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    const website = updatedData.website;
+    delete updatedData.website;
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     const mentorProfile = MentorProfiles.find({ mentorID: getUserIdFromRoute() }).fetch();
     if (instance.context.isValid()) {
+      Users.setWebsite(getUserIdFromRoute(), website);
       MentorProfiles.update(mentorProfile[0]._id, { $set: updatedData });
       FormUtils.indicateSuccess(instance, event);
     } else {
@@ -201,6 +207,7 @@ Template.Mentor_About_Me_Widget.events({
     instance.messageFlags.set(edit, false);
   },
   'click .cancel': function (event, instance) {
+    event.preventDefault();
     instance.messageFlags.set(edit, false);
   },
 });
