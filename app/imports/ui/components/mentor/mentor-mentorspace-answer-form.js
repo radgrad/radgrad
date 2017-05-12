@@ -1,8 +1,6 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
-import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 const displaySuccessMessage = 'displaySuccessMessage';

@@ -19,7 +19,7 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
     return MentorAnswers.getAnswers(questionID).count();
   },
   answered(questionID) {
-    return ((MentorAnswers.find({ questionID, mentorID: getUserIdFromRoute() }).fetch()).length !== 0 );
+    return ((MentorAnswers.find({ questionID, mentorID: getUserIdFromRoute() }).fetch()).length !== 0);
   },
   isOneAnswer(questionID) {
     return MentorAnswers.getAnswers(questionID).count() === 1;

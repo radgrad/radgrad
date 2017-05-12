@@ -1,6 +1,4 @@
 import { Template } from 'meteor/templating';
-import { Meteor } from 'meteor/meteor';
-
 import { ReactiveDict } from 'meteor/reactive-dict';
 import * as FormUtils from '../../components/admin/form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';

@@ -66,7 +66,8 @@ Template.Student_Explorer_Review_Widget.helpers({
     } else if (group === 'faculty') {
       return RouteNames.facultyExplorerUsersPageRouteName;
     }
-    return RouteNames.mentorExplorerUsersPageRouteName;  },
+    return RouteNames.mentorExplorerUsersPageRouteName;
+  },
   userUsername(user) {
     return Users.findDoc(user).username;
   },

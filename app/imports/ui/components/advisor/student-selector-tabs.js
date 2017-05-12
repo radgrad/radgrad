@@ -35,7 +35,7 @@ Template.Student_Selector_Tabs.helpers({
   users(role, range) {
     const rangeLength = range.length;
     let regex;
-    if (rangeLength === 3)  {
+    if (rangeLength === 3) {
       regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}`);
     } else if (rangeLength === 4) {
       regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^
