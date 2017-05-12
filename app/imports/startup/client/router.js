@@ -316,11 +316,11 @@ facultyRoutes.route('/verification-completed', {
   },
 });
 
-export const facultyOpportunitiesPageRouteName = 'Faculty_Opportunities_Page';
-facultyRoutes.route('/opportunities', {
-  name: facultyOpportunitiesPageRouteName,
+export const facultyManageOpportunitiesPageRouteName = 'Faculty_Manage_Opportunities_Page';
+facultyRoutes.route('/manage-opportunities', {
+  name: facultyManageOpportunitiesPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyOpportunitiesPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: facultyManageOpportunitiesPageRouteName });
   },
 });
 
