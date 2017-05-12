@@ -5,11 +5,17 @@ Template.Mentor_Layout.helpers({
   secondMenuItems() {
     return [
       { label: 'Home',
-        route: RouteNames.mentorHomePageRouteName },
+        route: RouteNames.mentorHomePageRouteName,
+        regex: 'home',
+      },
       { label: 'Mentor Space',
-        route: RouteNames.mentorMentorSpacePageRouteName },
+        route: RouteNames.mentorMentorSpacePageRouteName,
+        regex: 'mentor-space',
+      },
       { label: 'Explorer',
-        route: RouteNames.mentorExplorerPageRouteName },
+        route: RouteNames.mentorExplorerPageRouteName,
+        regex: 'explorer',
+      },
     ];
   },
   secondMenuLength() {
