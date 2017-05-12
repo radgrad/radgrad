@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /**
  * Strips of the counter for the plan choice. The counter is used in academic plans to keep track of how many
- * choices there are (e.g. five ics4xx in the B.S. degree).
+ * choices there are (e.g. five ics400+ in the B.S. degree).
  * @param planChoice the plan choice.
  * @returns {*}
  */
@@ -69,11 +69,27 @@ export function complexChoiceToArray(planChoice) {
   });
   return ret;
 }
+
+/**
+ * Creates the course name from the slug. Course names have department in all caps.
+ * @param slug the course slug.
+ * @returns {string}
+ */
+export function buildCourseSlugName(slug) {
+  const splits = slug.split(/([A-Za-z]+)/);
+  return `${splits[1].toUpperCase()} ${splits[2]}`;
+}
+
+/**
+ * Builds the Name for a simple planChoice. Will have commas replaced by ' or '.
+ * @param slug the simple plan choice.
+ * @returns {string}
+ */
 export function buildSimpleName(slug) {
   const splits = slug.split(',');
   let ret = '';
   _.map(splits, (s) => {
-    ret = `${ret}${s.substring(0, 3).toUpperCase()} ${s.substring(3)} or `;
+    ret = `${ret}${buildCourseSlugName(s)} or `;
   });
   return ret.substring(0, ret.length - 4);
 }
@@ -92,8 +108,40 @@ export function getAllElementsWithAttribute(attribute, value) {
 
 export function getDepartment(courseSlug) {
   const re = /^[A-Za-z]+/g;
-  const result = re.exec(courseSlug);
+  let slug = courseSlug;
+  if (courseSlug.startsWith('(')) {
+    slug = courseSlug.substring(1);
+  }
+  const result = re.exec(slug);
   return result[0];
+}
+
+/**
+ * Returns an array of the departments in the plan choice.
+ * @param planChoice The plan choice.
+ * @returns {Array}
+ */
+export function getDepartments(planChoice) {
+  const choices = planChoice.split(',');
+  const ret = [];
+  _.map(choices, (c) => {
+    const dept = getDepartment(c);
+    if (_.indexOf(ret, dept) === -1) {
+      ret.push(dept);
+    }
+  });
+  return ret;
+}
+
+function satisfiesSinglePlanChoice(planChoice, courseSlug) {
+  const dept = getDepartment(planChoice);
+  if (planChoice.includes('300+')) {
+    return courseSlug.startsWith(`${dept}3`) || courseSlug.startsWith(`${dept}4`);
+  } else
+    if (planChoice.includes('400+')) {
+      return courseSlug.startsWith(`${dept}4`);
+    }
+  return planChoice.indexOf(courseSlug) !== -1;
 }
 
 /**
@@ -102,14 +150,14 @@ export function getDepartment(courseSlug) {
  * @param courseSlug The course slug.
  */
 export function satisfiesPlanChoice(planChoice, courseSlug) {
-  const dept = getDepartment(courseSlug);
-  if (planChoice.includes('300')) {
-    return courseSlug.startsWith(`${dept}3`) || courseSlug.startsWith(`${dept}4`);
-  } else
-    if (planChoice.includes('4xx')) {
-      return courseSlug.startsWith(`${dept}4`);
+  const singleChoices = planChoice.split(',');
+  let ret = false;
+  _.map(singleChoices, (choice) => {
+    if (satisfiesSinglePlanChoice(choice, courseSlug)) {
+      ret = true;
     }
-  return planChoice.indexOf(courseSlug) !== -1;
+  });
+  return ret;
 }
 
 /**

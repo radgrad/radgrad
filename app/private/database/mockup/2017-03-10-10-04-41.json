@@ -34,11 +34,11 @@
             "ics312,ics331-1",
             "ics313,ics361-1",
             "ics332-1",
-            "ics4xx-1",
-            "ics4xx-2",
-            "ics4xx-3",
-            "ics4xx-4",
-            "ics4xx-5"
+            "ics400+-1",
+            "ics400+-2",
+            "ics400+-3",
+            "ics400+-4",
+            "ics400+-5"
           ]
         },
         {
@@ -106,7 +106,7 @@
             "ics212-1",
             "ics321-1",
             "ics312,ics331-1",
-            "ics4xx-1",
+            "ics400+-1",
             "ics313,ics361-1",
             "ics332-1"
           ]
@@ -218,11 +218,11 @@
             "(ics312,ics331),(ics313,ics361),ics355-1",
             "(ics312,ics331),(ics313,ics361),ics355-2",
             "ics332-1",
-            "ics4xx-1",
-            "ics4xx-2",
-            "ics4xx-3",
-            "ics4xx-4",
-            "ics4xx-5"
+            "ics400+-1",
+            "ics400+-2",
+            "ics400+-3",
+            "ics400+-4",
+            "ics400+-5"
           ]
         },
         {
@@ -292,7 +292,7 @@
             "(ics312,ics331),(ics313,ics361),(ics351,ics451),ics355-1",
             "ics332-1",
             "(ics312,ics331),(ics313,ics361),(ics351,ics451),ics355-2",
-            "ics4xx-1"
+            "ics400+-1"
           ]
         },
         {
@@ -402,11 +402,11 @@
             "ics313,ics361-1",
             "ics314-1",
             "ics332-1",
-            "ics4xx-1",
-            "ics4xx-2",
-            "ics4xx-3",
-            "ics4xx-4",
-            "ics4xx-5"
+            "ics400+-1",
+            "ics400+-2",
+            "ics400+-3",
+            "ics400+-4",
+            "ics400+-5"
           ]
         },
         {
@@ -437,11 +437,11 @@
             "ics312,ics331-1",
             "ics321-1",
             "ics313,ics361-1",
-            "ics4xx-6",
+            "ics400+-6",
             "ics332-1",
-            "ics4xx-1",
-            "ics4xx-2",
-            "ics4xx-4"
+            "ics400+-1",
+            "ics400+-2",
+            "ics400+-4"
           ]
         },
         {
@@ -480,6 +480,49 @@
             "ics300+-3",
             "ics300+-4",
             "ics300+-5"
+          ]
+        },
+        {
+          "degreeSlug": "bs-ce",
+          "name": "B.S. in Computer Engineering",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            0,
+            4,
+            4,
+            0,
+            4,
+            4,
+            0
+          ],
+          "courseList": [
+            "ee160-1",
+            "ee211-1",
+            "ee260-1",
+            "ee296-1",
+            "ee205-1",
+            "ee213-1",
+            "ee324-1",
+            "ee361-1",
+            "ee362-1",
+            "ee371-1",
+            "ee315-1",
+            "ee323-1",
+            "ee367,ics311-1",
+            "ee396-1",
+            "ee342-1",
+            "ee467,ics314-1",
+            "ee468-1",
+            "ee300+,ics300+-1",
+            "ee495-1",
+            "ee496-1",
+            "ee300+,ics300+-2",
+            "cee270,me311,cee300+,me300+,oe300+,be300+-1"
           ]
         }
       ]
@@ -1673,6 +1716,216 @@
           "creditHrs": 3,
           "interests": [],
           "prerequisites": []
+        },
+        {
+          "name": "Programming for Engineers",
+          "shortName": "Programming for Engr.",
+          "slug": "ee160",
+          "number": "EE 160",
+          "description": "Introductory course on computer programming and modern computing environments in C with an emphasis on algorithm and program design, implementation, and debugging. Includes a hands-on laboratory to develop and practice programming skills.",
+          "creditHrs": 4,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Object Oriented Programming",
+          "shortName": "OOP",
+          "slug": "ee205",
+          "number": "EE 205",
+          "description": "Second-level programming for computer engineers. Object-oriented programming paradigm, definition and use of classes, fundamentals of object-oriented design in modern object-oriented languages such as C++. Common data structures, simple searching and sorting techniques.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee160"]
+        },
+        {
+          "name": "Basic Circuit Analysis I",
+          "shortName": "Circuit Analysis I",
+          "slug": "ee211",
+          "number": "EE 211",
+          "description": "Linear passive circuits, time domain analysis, transient and steady-state responses, phasors, impedance and admittance; power and energy, frequency responses, resonance.",
+          "creditHrs": 4,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Basic Circuit Analysis II",
+          "shortName": "Circuit Analysis II",
+          "slug": "ee213",
+          "number": "EE 213",
+          "description": "Laplace transforms and their application to circuits, Fourier transforms and their applications to circuits, frequency selective circuits, introduction to and design of active filters, convolution, and state space analysis of circuits.",
+          "creditHrs": 4,
+          "interests": [],
+          "prerequisites": ["ee211"]
+        },
+        {
+          "name": "Introduction to Digital Design",
+          "shortName": "Intro. to Digital Design",
+          "slug": "ee260",
+          "number": "EE 260",
+          "description": "Introduction to the design of digital systems with an emphasis on design methods and the implementation and use of fundamental digital components.",
+          "creditHrs": 4,
+          "interests": [],
+          "prerequisites": ["ee160"]
+        },
+        {
+          "name": "Sophomore Project",
+          "shortName": "Sophomore Project",
+          "slug": "ee296",
+          "number": "EE 296",
+          "description": "Sophomore level individual or team project under EE faculty direction and guidance. The project provides design experience and develops practical skills.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Signal and Systems Analysis",
+          "shortName": "Signal Analysis",
+          "slug": "ee315",
+          "number": "EE 315",
+          "description": "Discrete-time and continuous time signals and systems, linear systems, convolution, Fourier series, Fourier transform, sampling.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee213"]
+        },
+        {
+          "name": "Microelectronic Circuits I",
+          "shortName": "Microelectronic I",
+          "slug": "ee323",
+          "number": "EE 323",
+          "description": "Semiconductor structures, operating principles and characteristics of diodes and amplifying devices. Their application as circuit elements in building basic digital, analog, and integrated circuit subsystems.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee213"]
+        },
+        {
+          "name": "Physical Electronics",
+          "shortName": "Physical Electronics",
+          "slug": "ee324",
+          "number": "EE 324",
+          "description": "Review of quantum mechanics fundamentals, H-atom, and chemical bonding. Introduction to band structure models and materials. Semiconductor doping, charge carrier statistics and charge transport, including ambipolar transport. Metal-semiconductor and PN junctions.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Probability and Statistics",
+          "shortName": "Probability and Statistics",
+          "slug": "ee342",
+          "number": "EE 342",
+          "description": "Probability, statistics, random variables, distributions, densities, expectations, limit theorems, and applications to electrical engineering.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee315"]
+        },
+        {
+          "name": "Digital Systems and Computer Design",
+          "shortName": "Digital Systems",
+          "slug": "ee361",
+          "number": "EE 361",
+          "description": "Design methodology, processor design, control design, memory organization, system organization.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee160", "ee260"]
+        },
+        {
+          "name": "Discrete Math for Engineers",
+          "shortName": "Discrete Math",
+          "slug": "ee362",
+          "number": "EE 362",
+          "description": "Logic, sets, number theory, properties of functions, properties of relations, methods of proofs, recursion, counting, probability, trees, graphs, analysis of algorithms, finite state autonoma.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee160", "ee260"]
+        },
+        {
+          "name": "Computer Data Structures and Algorithms",
+          "shortName": "Data Structures",
+          "slug": "ee367",
+          "number": "EE 367",
+          "description": "Introduction to computer programming algorithms with emphasis on advanced data structures, input-output routines, files, and interpreters.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee205", "ics141"]
+        },
+        {
+          "name": "Engineering Electromagnetics I",
+          "shortName": "Electromagnetics I",
+          "slug": "ee371",
+          "number": "EE 371",
+          "description": "Transient and steady-state waves on transmission lines. Plane wave solutions of Maxwell's equations. Application of Maxwell's equations under static and time-varying conditions.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee213"]
+        },
+        {
+          "name": "Junior Project",
+          "shortName": "Junior Project",
+          "slug": "ee396",
+          "number": "EE 396",
+          "description": "Junior level individual or team project under EE faculty direction and guidance. The project provides design experience and develops practical skills. It may be a continuation of EE 296 or a new project.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee296"]
+        },
+        {
+          "name": "Object-oriented Software Engineering",
+          "shortName": "OO Software Engineering",
+          "slug": "ee467",
+          "number": "EE 467",
+          "description": "Introduction to advanced techniques for designing, implementing, and testing computer software with a particular focus on using object-oriented design, analysis, and programming to produce high-quality computer programs that solve non-trivial problems.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee367"]
+        },
+        {
+          "name": "Introduction to Operating Systems",
+          "shortName": "Operating Systems",
+          "slug": "ee468",
+          "number": "EE 468",
+          "description": "Computer system organization; multiprocessor systems, memory hierarchies, assemblers, compilers, operating systems, virtual machine, memory management, processor management; information management.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": ["ee361", "ee367"]
+        },
+        {
+          "name": "Ethics in Electrical Engineering",
+          "shortName": "Ethics",
+          "slug": "ee495",
+          "number": "EE 495",
+          "description": "Equip electrical engineers with the necessary background for ethical reasoning, as it pertains to technology, society, workplace issues, and the environment.",
+          "creditHrs": 1,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Capstone Design Project",
+          "shortName": "Capstone",
+          "slug": "ee496",
+          "number": "EE 496",
+          "description": "Significant project integrating the design content of previous courses and incorporating engineering standards and realistic constraints. Written report must document all aspects of the design process: reliability, safety, economics, ethics.",
+          "creditHrs": 1,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Applied Mechanics I",
+          "shortName": "Applied Mechanics I",
+          "slug": "cee270",
+          "number": "CEE 270",
+          "description": "Forces, resultants, and equilibrium; analysis of trusses, frames, and machines; centroids, moments of inertia; friction.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Thermodynamics",
+          "shortName": "Thermodynamics",
+          "slug": "me311",
+          "number": "ME 311",
+          "description": "Basic laws, closed and open systems. Work, heat, concept of entropy. Properties of pure simple substances. Ideal gases. Introduction to power and refrigeration cycles.",
+          "creditHrs": 4,
+          "interests": [],
+          "prerequisites": []
         }
       ]
     },
@@ -2823,6 +3076,12 @@
           "shortName": "B.A. ICS",
           "slug": "ba-ics",
           "description": "The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline. You might find the BA degree of interest if you are also interested in biology, entrepreneurship, game design, graphic arts, financial engineering, foreign languages, or other disciplines.\n\nIn general, the BA requires you to complete the ICS core curriculum, plus three ICS 400-level courses, plus four upper division courses in a related area of concentration.\n\nFor more details, see the [ICS BA Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/ba-ics/)."
+        },
+        {
+          "name": "B.S. in Computer Engineering",
+          "shortName": "B.S. CE",
+          "slug": "bs-ce",
+          "description": "The Department of Information and Computer Sciences and the Department of Electrical Engineering offer a joint Bachelor of Science degree in Computer Engineering (BSCE).  The BSCE degree program provides you with the opportunity to learn about computer hardware and software, computer organization and architecture, computer security, software engineering, computer networks and Internet technology, embedded systems, computer-aided design, multi-core and parallel computing, wireless networks, and other topics."
         },
         {
           "name": "B.S. in Computer Science",
@@ -5835,16 +6094,33 @@
         "ics495",
         "ics499",
         "ics300+",
-        "ics4xx",
-        "ics312,ics331",
-        "ics313,ics361",
-        "ics351,ics451",
-        "ics415,ics351",
-        "ics414,ics464",
-        "ics425,ics426",
-        "ics491,ics495",
-        "(ics312,ics331),(ics313,ics361),ics355",
-        "ics321,ics332,(ics415,ics351)"
+        "ics400+",
+        "ee160",
+        "ee205",
+        "ee211",
+        "ee213",
+        "ee260",
+        "ee296",
+        "ee315",
+        "ee323",
+        "ee324",
+        "ee342",
+        "ee361",
+        "ee362",
+        "ee367",
+        "ee371",
+        "ee396",
+        "ee467",
+        "ee468",
+        "ee495",
+        "ee496",
+        "ee300+",
+        "cee270",
+        "me311",
+        "cee300+",
+        "me300+",
+        "oe300+",
+        "be300+"
       ]
     },
     {

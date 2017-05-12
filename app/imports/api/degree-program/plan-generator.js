@@ -108,8 +108,8 @@ function _missingCourses(courseIDs, planChoiceList) {
       choices.splice(index, 1);
     } else
       if (slug.startsWith('ics4') || slug.startsWith('other')) {
-        if (_.indexOf(choices, 'ics4xx') !== -1) {
-          choices.splice(_.indexOf(choices, 'ics4xx'), 1);
+        if (_.indexOf(choices, 'ics400+') !== -1) {
+          choices.splice(_.indexOf(choices, 'ics400+'), 1);
         }
       } else {
         let i = 0;
@@ -151,9 +151,10 @@ function hasPrerequisites(courseSlug, takenCourseSlugs) {
 
 function chooseCourse(student, semester, planChoiceList, courseTakenSlugs) {
   const studentID = student._id;
-  const grade = 'A';
+  const grade = 'B';
   let planChoice = planChoiceList.splice(0, 1)[0];
   planChoice = planChoiceUtils.stripCounter(planChoice);
+  // console.log('chooseCourse', planChoice);
   if (planChoiceUtils.isSingleChoice(planChoice)) {
     // console.log('single choice', planChoice);
     if (planChoice.endsWith('300+')) {
@@ -167,7 +168,7 @@ function chooseCourse(student, semester, planChoiceList, courseTakenSlugs) {
         student: student.username,
       });
     } else
-      if (planChoice.endsWith('4xx')) {
+      if (planChoice.endsWith('400+')) {
         const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, courseTakenSlugs);
         // console.log('bestChoice', planChoice, bestChoice.number, Semesters.toString(semester._id, false));
         CourseInstances.define({
@@ -191,6 +192,7 @@ function chooseCourse(student, semester, planChoiceList, courseTakenSlugs) {
         } else {
           planChoiceList.splice(1, 0, planChoice);  // return slug to list in the second spot
           planChoice = planChoiceList.splice(0, 1)[0];
+          planChoice = planChoiceUtils.stripCounter(planChoice);
           if (hasPrerequisites(planChoice, courseTakenSlugs)) {
             // console.log('2nd choice', planChoice, Semesters.toString(semester._id, false));
             const note = createNote(planChoice);
@@ -373,12 +375,14 @@ export function generateAcademicPlan(student, startSemester) {
     const coursesPerSemesterList = academicPlan.coursesPerSemester.slice(0);
     // remove the courses that the student has already taken.
     planChoiceList = removeTakenCourses(student, planChoiceList, 'ICS');
+    planChoiceList = removeTakenCourses(student, planChoiceList, 'EE');
     let semester = startSemester;
     let i = 0;
     while (planChoiceList.length > 0) {
       const numCourses = coursesPerSemesterList[i];
       for (let j = 0; j < numCourses; j += 1) {
-        const coursesTaken = getPassedCourseSlugs(student, 'ICS');
+        let coursesTaken = getPassedCourseSlugs(student, 'ICS');
+        coursesTaken = coursesTaken.concat(getPassedCourseSlugs(student, 'EE'));
         chooseCourse(student, semester, planChoiceList, coursesTaken);
       }
       semester = semUtils.nextSemester(semester);
