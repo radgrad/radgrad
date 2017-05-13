@@ -79,7 +79,6 @@ Template.Update_Degree_Plan_Widget.helpers({
             ret.push(p);
           }
         });
-
       } else {
         const chosen = parseInt(Template.instance().chosenYear.get(), 10);
         const plans = AcademicPlans.find().fetch();
