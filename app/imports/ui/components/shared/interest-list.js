@@ -87,8 +87,10 @@ Template.Interest_List.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerInterestsPageRouteName;
     }
-    return RouteNames.facultyExplorerInterestsPageRouteName;
+    return RouteNames.mentorExplorerInterestsPageRouteName;
   },
   interestSlug(interest) {
     return Slugs.findDoc(interest.slugID).name;

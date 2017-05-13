@@ -30,5 +30,10 @@
         </div>
       </div>
     </div>
+    {{#if answered questionID}}
+      <div id="{{questionID}}" class="ui bottom attached basic green button answer">Edit your answer</div>
+    {{else}}
+      <div id="{{questionID}}" class="ui bottom attached basic green button answer">Answer this question</div>
+    {{/if}}
   </div>
 </template>

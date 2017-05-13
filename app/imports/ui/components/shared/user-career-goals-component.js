@@ -24,8 +24,10 @@ Template.User_Career_Goals_Component.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return `/student/${getRouteUserName()}/explorer/career-goals/${slug}`;
+    } else if (group === 'faculty') {
+      return `/faculty/${getRouteUserName()}/explorer/career-goals/${slug}`;
     }
-    return `/faculty/${getRouteUserName()}/explorer/career-goals/${slug}`;
+    return `/mentor/${getRouteUserName()}/explorer/career-goals/${slug}`;
   },
   count() {
     if (Template.instance().userID && Template.instance().userID.get()) {

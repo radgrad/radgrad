@@ -50,8 +50,10 @@ Template.Student_Explorer_Social_Widget.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerUsersPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerUsersPageRouteName;
     }
-    return RouteNames.facultyExplorerUsersPageRouteName;
+    return RouteNames.mentorExplorerUsersPageRouteName;
   },
   userUsername(user) {
     return Users.findDoc(user).username;

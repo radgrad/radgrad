@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-Template.Faculty_Opportunities_Page.helpers({
+Template.Faculty_Manage_Opportunities_Page.helpers({
   updateID() {
     return Template.instance().updateID;
   },
@@ -10,7 +10,7 @@ Template.Faculty_Opportunities_Page.helpers({
   },
 });
 
-Template.Faculty_Opportunities_Page.onCreated(function onCreated() {
+Template.Faculty_Manage_Opportunities_Page.onCreated(function onCreated() {
   this.updateID = new ReactiveVar('');
 });
 
