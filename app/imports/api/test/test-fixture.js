@@ -61,7 +61,7 @@ function restoreCollection(collection, restoreJSON) {
 }
 
 export function defineTestFixture() {
-  const restoreFileName = 'database/mockup/2017-03-10-10-04-41.json';
+  const restoreFileName = 'database/mockup/testing.json';
   const restoreFileAge = getRestoreFileAge(restoreFileName);
   console.log(`Restoring test fixture from file ${restoreFileName}, dumped ${restoreFileAge}.`); // eslint-disable-line
   const restoreJSON = JSON.parse(Assets.getText(restoreFileName));
