@@ -23,7 +23,6 @@ import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
 import { Teasers } from '/imports/api/teaser/TeaserCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import { VerificationRequests } from '/imports/api/verification/VerificationRequestCollection';
-import { WorkInstances } from '/imports/api/work/WorkInstanceCollection';
 import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection';
 import { PlanChoices } from '/imports/api/degree/PlanChoiceCollection';
 import { AcademicPlans } from '/imports/api/degree/AcademicPlanCollection';
@@ -58,7 +57,6 @@ export function removeAllEntities() {
   Teasers.removeAll();
   Users.removeAll();
   VerificationRequests.removeAll();
-  WorkInstances.removeAll();
   AcademicYearInstances.removeAll();
   PlanChoices.removeAll();
   AcademicPlans.removeAll();
@@ -160,10 +158,6 @@ export function clientRemoveAllEntities() {
   items = VerificationRequests.find().fetch();
   _.map(items, (i) => {
     VerificationRequests.removeIt(i._id);
-  });
-  items = WorkInstances.find().fetch();
-  _.map(items, (i) => {
-    WorkInstances.removeIt(i._id);
   });
   items = AcademicYearInstances.find().fetch();
   _.map(items, (i) => {
