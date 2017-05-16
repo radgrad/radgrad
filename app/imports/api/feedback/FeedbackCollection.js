@@ -7,11 +7,11 @@ import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 // import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
 // import { Meteor } from 'meteor/meteor';
 
-/** @module Feedback */
+/** @module api/feedback/FeedbackCollection */
 
 /**
  * Feedback is the generalized representation for recommendations, warnings, and (perhaps in future) predictions.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class FeedbackCollection extends BaseInstanceCollection {
 

@@ -12,14 +12,11 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 import { makeCourseICE } from '/imports/api/ice/IceProcessor';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-// import { Logger } from 'meteor/jag:pince';
-// import { moment } from 'meteor/momentjs:moment';
-/** @module CourseInstance */
-// const cl = new Logger('cIL');
+/** @module api/course/CourseInstanceCollection */
 
 /**
  * Represents the taking of a course by a specific student in a specific semester.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class CourseInstanceCollection extends BaseCollection {
   /**
@@ -298,11 +295,7 @@ class CourseInstanceCollection extends BaseCollection {
    * @param grade The new grade.
    */
   clientUpdateGrade(courseInstanceID, grade) {
-    // cl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} clientUpdateGrade ${courseInstanceID}, ${grade}`);
-    // const logger = new Logger('CourseInstance.clientUpdateGrade');
-    // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} ${courseInstanceID}, ${grade}`);
     Meteor.call('CourseInstance.updateGrade', { courseInstanceID, grade });
-    // cl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} after Meteor.call(CourseInstance.updateGrade)`);
   }
 
   /**
@@ -312,16 +305,9 @@ class CourseInstanceCollection extends BaseCollection {
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
    */
   updateGrade(courseInstanceID, grade) {
-    // cl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} updateGrade ${courseInstanceID}, ${grade}`);
-    // const logger = new Logger('CourseInstance.updateGrade');
-    // logger.info(`${courseInstanceID}, ${grade}`);
     this.assertDefined(courseInstanceID);
-    // logger.info('after assert');
     const ice = makeCourseICE(courseInstanceID, grade);
-    // logger.info('after ice');
     this._collection.update({ _id: courseInstanceID }, { $set: { grade, ice, verified: false } });
-    // cl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} updateGrade done`);
-    // logger.info('after _collection update');
   }
 
   /**

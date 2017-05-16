@@ -7,10 +7,10 @@ import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '/imports/api/role/Role';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module MentorAnswers */
+/** @module api/mentor/MentorProfileCollection */
 /**
  * Represents a mentor answer.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class MentorProfileCollection extends BaseCollection {
   /**

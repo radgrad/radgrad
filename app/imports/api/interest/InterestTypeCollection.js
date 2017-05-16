@@ -1,11 +1,11 @@
 import BaseTypeCollection from '/imports/api/base/BaseTypeCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module InterestType */
+/** @module api/interest/InterestTypeCollection */
 
 /**
  * InterestTypes help organize Interests into logically related groupings such as "CS-Disciplines", "Locations", etc.
- * @extends module:BaseType~BaseTypeCollection
+ * @extends module:api/base/BaseTypeCollection~BaseTypeCollection
  */
 class InterestTypeCollection extends BaseTypeCollection {
 

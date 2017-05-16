@@ -4,11 +4,11 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 
-/** @module DesiredDegree */
+/** @module api/degree/DesiredDegreeCollection */
 
 /**
  * DesiredDegrees specifies the set of degrees possible in this department.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class DesiredDegreeCollection extends BaseInstanceCollection {
 

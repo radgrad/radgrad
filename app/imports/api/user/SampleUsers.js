@@ -2,7 +2,7 @@ import { Users } from '/imports/api/user/UserCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { moment } from 'meteor/momentjs:moment';
 
-/** @module SampleUsers */
+/** @module api/user/SampleUsers */
 
 /**
  * Creates a User with a unique slug and unique email and returns its docID.

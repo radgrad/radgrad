@@ -17,7 +17,7 @@ import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 import { BS_CS_LIST, BA_ICS_LIST } from '../degree-program/degree-program';
 
-/** @module FeedbackFunctions */
+/** @module api/feedback/FeedbackFunctions */
 
 /* eslint-disable class-methods-use-this */
 

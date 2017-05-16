@@ -5,8 +5,12 @@ import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { moment } from 'meteor/momentjs:moment';
 
 
-/** @module SampleCourses */
+/** @module api/course/SampleCourses */
 
+/**
+ * The name of the sample course.
+ * @type {string}
+ */
 export const sampleCourseName = 'Sample Course';
 
 /**

@@ -7,11 +7,11 @@ import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module FeedbackInstance */
+/** @module api/feedback/FeedbackInstanceCollection */
 
 /**
  * Each FeedbackInstance represents one recommendation or warning for a user.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class FeedbackInstanceCollection extends BaseCollection {
 

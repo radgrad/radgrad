@@ -12,6 +12,8 @@ import * as courseUtils from '../course/CourseUtilities';
 import * as planChoiceUtils from '../degree/PlanChoiceUtilities';
 import { BS_CS_LIST, BA_ICS_LIST } from './degree-program';
 
+/** @module api/degree-program/plan-generator */
+
 /**
  * Converts a course Slug into the capitalized note needed for CourseInstances.
  * @param slug the course Slug e.g. 'ics111'

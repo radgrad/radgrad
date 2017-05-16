@@ -14,6 +14,12 @@ import { Reviews } from '../review/ReviewCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 
+/** @module api/public-stats/PublicStatsCollection */
+
+/**
+ * PublicStats holds public statistics about RadGrad.
+ * @extends api/base/BaseCollection~BaseCollection
+ */
 class PublicStatsCollection extends BaseCollection {
   /**
    * Creates the PublicStats collection.

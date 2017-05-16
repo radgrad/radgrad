@@ -1,5 +1,5 @@
 import './BaseCollection';
-import './BaseCollectionMethods';
+import './BaseCollection.methods';
 import './BaseInstanceCollection';
 import './BaseTypeCollection';
 import './BaseUtilities';

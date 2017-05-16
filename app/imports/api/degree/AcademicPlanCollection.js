@@ -6,8 +6,12 @@ import { DesiredDegrees } from './../degree/DesiredDegreeCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 
-/** @module AcademicPlan */
+/** @module api/degree/AcademicPlanCollection */
 
+/**
+ * AcademicPlans specifies the set of academic plans possible in this department.
+ * @extends module:api/base/BaseCollection~BaseCollection
+ */
 class AcademicPlanCollection extends BaseCollection {
 
   constructor() {
@@ -89,5 +93,8 @@ class AcademicPlanCollection extends BaseCollection {
 
 }
 
+/**
+ * Provides the singleton instance of this class to all other entities.
+ */
 export const AcademicPlans = new AcademicPlanCollection();
 radgradCollections.push(AcademicPlans);

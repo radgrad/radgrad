@@ -28,7 +28,7 @@ import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCol
 import { PlanChoices } from '/imports/api/degree/PlanChoiceCollection';
 import { AcademicPlans } from '/imports/api/degree/AcademicPlanCollection';
 
-/** @module BaseUtilities */
+/** @module api/base/BaseUtilities */
 
 /**
  * Deletes all RadGrad data model entities. (Hopefully).

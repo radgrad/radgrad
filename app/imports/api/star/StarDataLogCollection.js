@@ -7,11 +7,11 @@ import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 
-/** @module StarDataLog */
+/** @module api/star/StarDataLogCollection */
 
 /**
  * Represents STAR data for a particular student.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class StarDataLogCollection extends BaseCollection {
   /**

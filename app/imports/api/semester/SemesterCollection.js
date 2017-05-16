@@ -5,11 +5,11 @@ import { Meteor } from 'meteor/meteor';
 import { moment } from 'meteor/momentjs:moment';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module Semester */
+/** @module api/semester/SemesterCollection */
 
 /**
  * Represents a specific semester, such as "Spring, 2016", "Fall, 2017", or "Summer, 2015".
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class SemesterCollection extends BaseInstanceCollection {
 

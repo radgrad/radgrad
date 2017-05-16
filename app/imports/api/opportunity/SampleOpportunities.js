@@ -6,7 +6,7 @@ import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { moment } from 'meteor/momentjs:moment';
 
 
-/** @module SampleOpportunities */
+/** @module api/opportunity/SampleOpportunities */
 
 /**
  * Creates an OpportunityType with a unique slug and returns its docID.

@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
-import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessorMethods';
+import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessor.methods';
 
 Template.Retrieve_User_Widget.helpers({
   users(role) {

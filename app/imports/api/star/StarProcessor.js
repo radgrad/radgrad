@@ -7,7 +7,7 @@ import { Courses } from '/imports/api/course/CourseCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 
 
-/** @module StarProcessor */
+/** @module api/star/StarProcessor */
 
 /**
  * Given the semester string from STAR (for example, 'Fall 2015 ext'), parses it, defines the corresponding semester,

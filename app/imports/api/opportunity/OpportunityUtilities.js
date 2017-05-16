@@ -7,6 +7,8 @@ import { Users } from '../user/UserCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 import { getStudentsCurrentSemesterNumber } from '../year/AcademicYearUtilities';
 
+/** @module api/opportunity/OpportunityUtilities */
+
 export function getRandomInt(min, max) {
   min = Math.ceil(min);  // eslint-disable-line no-param-reassign
   max = Math.floor(max);  // eslint-disable-line no-param-reassign

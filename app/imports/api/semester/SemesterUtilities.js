@@ -1,5 +1,10 @@
 import { Semesters } from './SemesterCollection';
 
+/** @module api/semester/SemesterUtilities */
+
+/**
+ * Defines default semesters from 2014 till 2020.
+ */
 export function defineSemesters() {
   if (Semesters.find().count() === 0) {
     Semesters.define({ term: Semesters.FALL, year: 2014 });
@@ -23,6 +28,11 @@ export function defineSemesters() {
   }
 }
 
+/**
+ * Returns the next semester given a semester.
+ * @param semester the semester.
+ * @returns {*}
+ */
 export function nextSemester(semester) {
   let sortBy = semester.sortBy;
   let year = Math.trunc(sortBy / 10);
@@ -50,6 +60,11 @@ export function nextSemester(semester) {
   return undefined;
 }
 
+/**
+ * Returns the next Fall or Spring semester. Skips over Summer semesters.
+ * @param semester the semester
+ * @returns {undefined}
+ */
 export function nextFallSpringSemester(semester) {
   let sortBy = semester.sortBy;
   const year = Math.trunc(sortBy / 10);

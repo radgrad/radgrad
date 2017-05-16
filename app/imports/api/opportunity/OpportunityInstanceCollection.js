@@ -9,11 +9,11 @@ import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module OpportunityInstance */
+/** @module api/opportunity/OpportunityInstanceCollection */
 
 /**
  * OpportunityInstances indicate that a student wants to take advantage of an Opportunity in a specific semester.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class OpportunityInstanceCollection extends BaseCollection {
 

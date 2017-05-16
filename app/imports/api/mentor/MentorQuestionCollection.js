@@ -5,11 +5,11 @@ import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module MentorQuestions */
+/** @module api/mentor/MentorQuestionCollection */
 
 /**
  * Represents a mentor answer.
- * @extends module:Base~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class MentorQuestionCollection extends BaseInstanceCollection {
   /**

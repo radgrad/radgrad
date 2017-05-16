@@ -2,11 +2,11 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module Help */
+/** @module api/help/HelpMessageCollection */
 
 /**
  * Represents a Help message for a RadGrad page.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class HelpMessageCollection extends BaseCollection {
   /**

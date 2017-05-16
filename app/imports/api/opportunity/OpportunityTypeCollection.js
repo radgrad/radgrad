@@ -1,11 +1,11 @@
 import BaseTypeCollection from '/imports/api/base/BaseTypeCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module OpportunityType */
+/** @module api/opportunity/OpportunityTypeCollection */
 
 /**
  * OpportunityTypes help organize Opportunities into logically related groupings such as "Internships", "Clubs", etc.
- * @extends module:BaseType~BaseTypeCollection
+ * @extends module:api/base/BaseTypeCollection~BaseTypeCollection
  */
 class OpportunityTypeCollection extends BaseTypeCollection {
 

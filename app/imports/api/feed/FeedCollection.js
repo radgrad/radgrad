@@ -9,7 +9,8 @@ import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module Feed */
+/** @module api/feed/FeedCollection */
+
 function dateDiffInDays(a, b) {
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
   return Math.floor((a - b) / MS_PER_DAY);
@@ -28,7 +29,7 @@ function withinPastDay(feed, timestamp) {
 
 /**
  * Represents a feed instance.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class FeedCollection extends BaseCollection {
   /**
