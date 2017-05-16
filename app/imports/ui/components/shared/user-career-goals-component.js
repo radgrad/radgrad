@@ -5,6 +5,8 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 
+// /** @module ui/components/shared/User_Career_Goals_Component */
+
 Template.User_Career_Goals_Component.helpers({
   careerGoals() {
     const careerGoals = [];

@@ -14,7 +14,7 @@ import { moment } from 'meteor/momentjs:moment';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-/** @module ui/components/admin/List_Opportunities_Widget */
+// /** @module ui/components/admin/List_Opportunities_Widget */
 
 function numReferences(opportunity) {
   let references = 0;

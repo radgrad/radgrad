@@ -6,7 +6,7 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
-/** @module ui/components/mentor/Mentor_MentorSpace_Answer_Form */
+// /** @module ui/components/mentor/Mentor_MentorSpace_Answer_Form */
 
 Template.Mentor_MentorSpace_Answer_Form.onCreated(function mentorMentorSpaceAnswerFormOnCreated() {
   this.messageFlags = new ReactiveDict();

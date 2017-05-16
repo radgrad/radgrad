@@ -11,7 +11,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-/** @module ui/components/admin/List_Interests_Widget */
+// /** @module ui/components/admin/List_Interests_Widget */
 
 function numReferences(interest) {
   let references = 0;

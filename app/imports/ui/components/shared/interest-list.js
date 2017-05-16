@@ -7,6 +7,8 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '/imports/startup/client/router.js';
 
+// /** @module ui/components/shared/Interest_List */
+
 function matchingInterestsHelper(item) {
   const matchingInterests = [];
   const user = Users.findDoc({ username: getRouteUserName() });

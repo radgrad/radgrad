@@ -1,11 +1,12 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-
 import { getRouteUserName } from '../shared/route-user-name';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
+
+// /** @module ui/components/shared/User_Opportunity_Component */
 
 Template.User_Opportunity_Component.onCreated(function userOpportunityComponentOnCreated() {
   if (this.data.userID) {

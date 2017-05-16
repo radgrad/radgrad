@@ -11,7 +11,7 @@ import { ROLE, ROLES } from '../../../api/role/Role.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** @module ui/components/admin/Update_User_Widget */
+// /** @module ui/components/admin/Update_User_Widget */
 
 const updateSchema = new SimpleSchema({
   firstName: { type: String, optional: false },

@@ -6,7 +6,7 @@ import { plannerKeys } from './academic-plan';
 import { moment } from 'meteor/momentjs:moment';
 import { Logger } from 'meteor/jag:pince';
 
-/** @module ui/components/planner/Planned_Course_Grade */
+// /** @module ui/components/planner/Planned_Course_Grade */
 
 Template.Planned_Course_Grade.onCreated(function plannedCourseGradeOnCreated() {
   if (this.data) {

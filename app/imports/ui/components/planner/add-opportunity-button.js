@@ -7,7 +7,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { plannerKeys } from './academic-plan';
 
-/** @module ui/components/planner/Add_Opportunity_Button */
+// /** @module ui/components/planner/Add_Opportunity_Button */
 
 Template.Add_Opportunity_Button.onCreated(function addOpportunityButtonOnCreated() {
   this.state = this.data.dictionary;

@@ -9,7 +9,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-/** @module ui/components/admin/Update_Opportunity_Widget */
+// /** @module ui/components/admin/Update_Opportunity_Widget */
 
 const updateSchema = new SimpleSchema({
   name: { type: String, optional: false },

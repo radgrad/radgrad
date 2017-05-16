@@ -4,7 +4,7 @@ import { AcademicPlans } from '../../../api/degree/AcademicPlanCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
-/** @module ui/components/advisor/Academic_Plan_Viewer_Widget */
+// /** @module ui/components/advisor/Academic_Plan_Viewer_Widget */
 
 Template.Academic_Plan_Viewer_Widget.onCreated(function academicPlanWidgetOnCreated() {
   this.plan = new ReactiveVar('');

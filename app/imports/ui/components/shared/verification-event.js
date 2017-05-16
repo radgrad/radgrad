@@ -9,6 +9,8 @@ import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { moment } from 'meteor/momentjs:moment';
 
+// /** @module ui/components/shared/Verification_Event */
+
 Template.Verification_Event.helpers({
   events() {
     return Opportunities.find({ eventDate: { $exists: true } }).fetch();

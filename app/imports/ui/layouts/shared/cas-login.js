@@ -3,6 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+/** @module ui/layouts/shared/Cas_Login */
+
 Template.Cas_Login.events({
   /**
    * Handle the click on the logout link.

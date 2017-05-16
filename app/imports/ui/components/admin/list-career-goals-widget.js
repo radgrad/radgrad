@@ -7,7 +7,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-/** @module ui/components/admin/List_Career_Goal_Widget */
+// /** @module ui/components/admin/List_Career_Goal_Widget */
 
 function numReferences(careerGoal) {
   let references = 0;

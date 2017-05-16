@@ -4,7 +4,7 @@ import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackType } from '../../../api/feedback/FeedbackType.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
-/** @module ui/components/planner/Recommendations_And_Warnings */
+// /** @module ui/components/planner/Recommendations_And_Warnings */
 
 Template.Recommendations_And_Warnings.helpers({
   recommendationArgs(recommendation) {

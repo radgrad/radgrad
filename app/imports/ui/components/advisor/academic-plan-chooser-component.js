@@ -8,7 +8,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
-/** @module ui/components/advisor/Academic_Plan_Chooser_Component */
+// /** @module ui/components/advisor/Academic_Plan_Chooser_Component */
 
 Template.Academic_Plan_Chooser_Component.onCreated(function academicPlanChooserComponentOnCreated() {
   // console.log(this.data);

@@ -10,6 +10,8 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { moment } from 'meteor/momentjs:moment';
 
+// /** @module ui/components/shared/Verification_Requests_Completed */
+
 Template.Verification_Requests_Completed.helpers({
   completedVerifications() {
     const group = FlowRouter.current().route.group.name;

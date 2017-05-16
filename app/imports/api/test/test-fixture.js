@@ -20,6 +20,8 @@ import { VerificationRequests } from '../../api/verification/VerificationRequest
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 
+/** @module api/test/test-fixture */
+
 // Must match the format in the client-side ui/pages/admin/admin-database-dump-page.js
 const restoreFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
 

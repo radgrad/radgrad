@@ -16,7 +16,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import * as RouteNames from '/imports/startup/client/router.js';
 
-/** @module ui/components/planner/Inspector */
+// /** @module ui/components/planner/Inspector */
 
 Template.Inspector.onCreated(function inspectorOnCreated() {
   this.state = this.data.dictionary;

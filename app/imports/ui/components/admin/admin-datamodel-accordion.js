@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Showdown } from 'meteor/markdown';
 
-/** @module ui/components/admin/Admin_DataModel_Accordion */
+// /** @module ui/components/admin/Admin_DataModel_Accordion */
 
 Template.Admin_DataModel_Accordion.onRendered(function listCareerGoalsWidgetOnRendered() {
   this.$('.ui.accordion').accordion();

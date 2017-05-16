@@ -12,7 +12,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 
-/** @module ui/components/planner/Semester_List */
+// /** @module ui/components/planner/Semester_List */
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
   if (this.data) {

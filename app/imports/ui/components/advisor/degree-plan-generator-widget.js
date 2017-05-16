@@ -14,7 +14,7 @@ import * as courseUtils from '../../../api/course/CourseUtilities';
 import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
 import { Users } from '../../../api/user/UserCollection.js';
 
-/** @module ui/components/advisor/Degree_Plan_Generator_Widget */
+// /** @module ui/components/advisor/Degree_Plan_Generator_Widget */
 
 Template.Degree_Plan_Generator_Widget.onCreated(function degreePlanGeneratorOnCreated() {
   if (this.data.dictionary) {

@@ -5,7 +5,7 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 import { routeNames } from '../../../startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** @module ui/components/admin/Add_Help_Message_Widget */
+// /** @module ui/components/admin/Add_Help_Message_Widget */
 
 const addSchema = new SimpleSchema({
   routeName: { type: String, optional: false },

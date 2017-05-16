@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { plannerKeys } from './academic-plan';
 
-/** @module ui/components/planner/Past_Semester_List */
+// /** @module ui/components/planner/Past_Semester_List */
 
 Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
   if (this.data) {

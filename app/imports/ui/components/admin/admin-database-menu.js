@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '/imports/startup/client/router.js';
 
-/** @module ui/components/admin/Admin_DataBase_Menu */
+// /** @module ui/components/admin/Admin_DataBase_Menu */
 
 Template.Admin_DataBase_Menu.helpers({
   integrityCheckRouteName() {

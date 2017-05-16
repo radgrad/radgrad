@@ -5,6 +5,8 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 
+// /** @module ui/components/shared/User_Interests_Component */
+
 Template.User_Interests_Component.helpers({
   count() {
     if (Template.instance().userID && Template.instance().userID.get()) {

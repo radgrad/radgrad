@@ -7,7 +7,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-/** @module ui/components/admin/Add_Review_Widget */
+// /** @module ui/components/admin/Add_Review_Widget */
 
 const addSchema = new SimpleSchema({
   slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },

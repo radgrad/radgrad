@@ -9,7 +9,7 @@ import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection'
 import { Users } from '../../../api/user/UserCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
 
-/** @module ui/components/advisor/Student_Selector_Tabs */
+// /** @module ui/components/advisor/Student_Selector_Tabs */
 
 const userDefineSchema = new SimpleSchema({
   firstName: { type: String },
