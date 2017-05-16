@@ -6,6 +6,8 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
+/** @module ui/components/admin/Update_Teaser_Widget */
+
 const updateSchema = new SimpleSchema({
   title: { type: String, optional: false },
   author: { type: String, optional: false },

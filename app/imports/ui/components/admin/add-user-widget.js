@@ -10,6 +10,8 @@ import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection'
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
+/** @module ui/components/admin/Add_User_Widget */
+
 const addSchema = new SimpleSchema({
   firstName: { type: String, optional: false },
   lastName: { type: String, optional: false },

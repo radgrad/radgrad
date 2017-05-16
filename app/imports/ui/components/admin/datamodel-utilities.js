@@ -1,3 +1,5 @@
+/** @module ui/components/admin/AdminUtilities */
+
 /**
  * Returns a link element for opening URL in a new tab.
  * @param url The URL.

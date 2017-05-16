@@ -5,6 +5,8 @@ import { InterestTypes } from '../../../api/interest/InterestTypeCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
+/** @module ui/components/admin/Update_Interest_Widget */
+
 const updateSchema = new SimpleSchema({
   name: { type: String, optional: false },
   description: { type: String, optional: false },

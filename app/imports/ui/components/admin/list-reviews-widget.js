@@ -8,6 +8,8 @@ import { Users } from '../../../api/user/UserCollection';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
+/** @module ui/components/admin/List_Reviews_Widget */
+
 function numReferences() {
   // currently nothing refers to a Teaser, but maybe in future something will.
   return 0;

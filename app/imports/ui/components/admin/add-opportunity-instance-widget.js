@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
@@ -8,6 +7,8 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
+
+/** @module ui/components/admin/Add_Opportunity_Instance_Widget */
 
 const addSchema = new SimpleSchema({
   semester: { type: String, optional: false },

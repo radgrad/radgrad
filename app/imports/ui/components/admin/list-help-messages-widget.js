@@ -2,6 +2,8 @@ import { Template } from 'meteor/templating';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
+/** @module ui/components/admin/List_Help_Messages_Widget */
+
 Template.List_Help_Messages_Widget.helpers({
   helpMessages() {
     return HelpMessages.find({}, { sort: { routeName: 1 } });
