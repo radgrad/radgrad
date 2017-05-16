@@ -76,6 +76,7 @@
 ### API
 
 * [JSDocs](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/)
+* [New JSDocs](newapi/api.md)
 
 ### User Guide
 

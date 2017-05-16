@@ -10,7 +10,8 @@
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
-    "mddocs": "jsdoc2md imports/**/*.js > ../gitbook/api/jsdocs.md"
+    "mddocs": "jsdoc2md imports/**/*.js > ../gitbook/api/jsdocs.md",
+    "api": "./node_modules/.bin/jsdoc2md imports/**/**/**/**/**/*.js --configure ../tooling/docs/jsdoc.json --global-index-format none --partial ../tooling/docs/header.hbs --partial ../tooling/docs/link.hbs --partial ../tooling/docs/body.hbs  > ../gitbook/newapi/api.md"
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
@@ -20,6 +21,7 @@
     "node-balanced": "0.0.14"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "chai": "*",
     "docdash": "^0.3.0",
     "es6-enum": "^1.0.3",
@@ -29,8 +31,9 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-meteor": "^4.0.1",
     "eslint-plugin-react": "^6.4.1",
-    "jsdoc": "^3.4.0",
-    "jsdoc-to-markdown": "^2.0.0"
+    "gitbook-cli": "^2.3.0",
+    "jsdoc-babel": "^0.3.0",
+    "jsdoc-to-markdown": "^3.0.0"
   },
   "kadira": {
     "appId": "uLpKNYddpngcRwpQP",
