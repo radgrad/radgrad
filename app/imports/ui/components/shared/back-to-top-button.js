@@ -1,16 +1,6 @@
 import { Template } from 'meteor/templating';
 
-Template.Back_To_Top_Button.helpers({
-  // add your helpers here
-});
-
-Template.Back_To_Top_Button.events({
-  // add your events here
-});
-
-Template.Back_To_Top_Button.onCreated(function backToTopButtonOnCreated() {
-  // add your statement here
-});
+// /** @module ui/components/shared/Back_To_Top_Button */
 
 Template.Back_To_Top_Button.onRendered(function backToTopButtonOnRendered() {
   // add your statement here
@@ -31,8 +21,3 @@ Template.Back_To_Top_Button.onRendered(function backToTopButtonOnRendered() {
     return false;
   });
 });
-
-Template.Back_To_Top_Button.onDestroyed(function backToTopButtonOnDestroyed() {
-  // add your statement here
-});
-

@@ -1,4 +1,4 @@
 import './CourseCollection';
 import './CourseInstanceCollection';
-import './CourseInstanceMethods';
+import './CourseInstance.methods';
 import './CourseUtilities';

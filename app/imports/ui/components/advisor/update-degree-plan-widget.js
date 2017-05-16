@@ -24,6 +24,8 @@ import * as semUtils from '../../../api/semester/SemesterUtilities';
 import * as courseUtils from '../../../api/course/CourseUtilities';
 import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
 
+// /** @module ui/components/advisor/Update_Degree_Plan_Widget */
+
 const updateSchema = new SimpleSchema({
   firstName: { type: String, optional: false },
   lastName: { type: String, optional: false },
@@ -79,7 +81,6 @@ Template.Update_Degree_Plan_Widget.helpers({
             ret.push(p);
           }
         });
-
       } else {
         const chosen = parseInt(Template.instance().chosenYear.get(), 10);
         const plans = AcademicPlans.find().fetch();

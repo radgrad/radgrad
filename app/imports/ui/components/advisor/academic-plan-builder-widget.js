@@ -12,6 +12,8 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { buildSimpleName, getAllElementsWithAttribute } from '../../../api/degree/PlanChoiceUtilities';
 
+// /** @module ui/components/advisor/Academic_Plan_Builder_Widget */
+
 const addSchema = new SimpleSchema({
   desiredDegree: { type: String },
   name: { type: String },

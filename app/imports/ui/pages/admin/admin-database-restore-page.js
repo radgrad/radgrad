@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { restoreDatabaseMethodName } from '../../../api/base/BaseCollectionMethods.js';
+import { restoreDatabaseMethodName } from '../../../api/base/BaseCollection.methods.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { restoreFileDateFormat } from '/imports/ui/pages/admin/admin-database-dump-page.js';
 import { moment } from 'meteor/momentjs:moment';

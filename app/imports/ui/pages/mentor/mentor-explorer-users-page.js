@@ -3,6 +3,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Users } from '../../../api/user/UserCollection.js';
 
+/** @module ui/pages/mentor/Mentor_Explorer_Users_Page */
+
 /**
  * Returns the explorerUserName portion of the route.
  */

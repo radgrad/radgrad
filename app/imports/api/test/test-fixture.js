@@ -1,7 +1,5 @@
 /* global Assets */
 
-// import { Meteor } from 'meteor/meteor';
-// import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
 import { AcademicPlans } from '../../api/degree/AcademicPlanCollection';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
@@ -10,13 +8,9 @@ import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection
 import { DesiredDegrees } from '../../api/degree/DesiredDegreeCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
-// import { MentorAnswers } from '../../api/mentor/MentorAnswerCollection.js';
-// import { MentorQuestions } from '../../api/mentor/MentorQuestionCollection.js';
-// import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
-// import { Reviews } from '../../api/review/ReviewCollection';
 import { Teasers } from '../../api/teaser/TeaserCollection';
 import { Users } from '../../api/user/UserCollection';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
@@ -25,6 +19,8 @@ import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
+
+/** @module api/test/test-fixture */
 
 // Must match the format in the client-side ui/pages/admin/admin-database-dump-page.js
 const restoreFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';

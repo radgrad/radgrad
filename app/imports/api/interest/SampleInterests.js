@@ -3,7 +3,7 @@ import { Interests } from '/imports/api/interest/InterestCollection';
 import { moment } from 'meteor/momentjs:moment';
 
 
-/** @module SampleInterests */
+/** @module api/interest/SampleInterests */
 
 /**
  * Creates an InterestType with a unique slug and returns its docID.

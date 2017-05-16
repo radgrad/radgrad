@@ -17,7 +17,6 @@ import '/imports/api/semester';
 import '/imports/api/slug';
 import '/imports/api/star';
 import '/imports/api/user';
-import '/imports/api/work';
 import '/imports/api/verification';
 import '/imports/api/year';
 

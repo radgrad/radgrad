@@ -32,6 +32,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 
+/** @module startup/server/fixtures */
+
 /**
  * Returns an Array of numbers, one per RadGradCollection, indicating the number of documents in that collection.
  * @returns { Array } An array of collection document counts.

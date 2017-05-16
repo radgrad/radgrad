@@ -3,11 +3,11 @@ import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { check } from 'meteor/check';
 
-/** @module BaseType */
+/** @module api/base/BaseTypeCollection */
 
 /**
  * BaseType is an abstract superclass that factors out common code for the "type" entities: OpportunityType and TagType.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class BaseTypeCollection extends BaseCollection {
 

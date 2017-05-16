@@ -3,6 +3,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
+// /** @module ui/components/admin/Update_Help_Message_Widget */
+
 const updateSchema = new SimpleSchema({
   routeName: { type: String, optional: false },
   title: { type: String, optional: false },

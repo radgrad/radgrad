@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** @module Base */
+/** @module api/base/BaseCollection */
 
 /**
  * BaseCollection is an abstract superclass of all RadGrad data model entities.

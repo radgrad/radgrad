@@ -19,11 +19,11 @@ import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/Ice
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module User */
+/** @module api/user/UserCollection */
 
 /**
  * Represent a user. Users have roles: admin, advisor, alumni, faculty, student, mentor.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class UserCollection extends BaseInstanceCollection {
 

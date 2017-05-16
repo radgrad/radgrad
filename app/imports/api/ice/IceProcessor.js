@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-/** @module IceProcessor */
+/** @module api/ics/IceProcessor */
 
 /**
  * Polyfill definition of isInteger in case it's not defined.

@@ -4,6 +4,12 @@ import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { buildSimpleName } from './PlanChoiceUtilities';
 
+/** @module api/degree/PlanChoiceCollection */
+
+/**
+ * Represents a choice in an academic plan.
+ * @extends api/base/BaseCollection~BaseCollection
+ */
 class PlanChoiceCollection extends BaseCollection {
 
   /**
@@ -80,5 +86,8 @@ class PlanChoiceCollection extends BaseCollection {
 
 }
 
+/**
+ * Provides the singleton instance of this class to all other entities.
+ */
 export const PlanChoices = new PlanChoiceCollection();
 radgradCollections.push(PlanChoices);

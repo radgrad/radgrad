@@ -5,6 +5,8 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 
+// /** @module ui/components/shared/User_Course_Component */
+
 function getICSCourses(studentID, isPast) {
   const courseInstances = CourseInstances.find({ studentID, verified: isPast, note: /ICS/ }).fetch();
   const taken = [];

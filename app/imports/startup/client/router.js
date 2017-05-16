@@ -3,6 +3,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
+/** @module startup/client/Router */
 
 /**
  * Design notes:

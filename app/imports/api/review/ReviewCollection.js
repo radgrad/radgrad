@@ -8,11 +8,11 @@ import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { Meteor } from 'meteor/meteor';
 
-/** @module Review */
+/** @module api/review/ReviewCollection */
 
 /**
  * Represents a course or opportunity student Review
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class ReviewCollection extends BaseInstanceCollection {
 

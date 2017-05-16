@@ -9,6 +9,8 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
+// /** @module ui/components/admin/Update_Course_Instance_Widget */
+
 const updateSchema = new SimpleSchema({
   semester: { type: String, optional: false },
   course: { type: String, optional: false },

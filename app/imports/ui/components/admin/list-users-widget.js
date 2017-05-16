@@ -9,6 +9,8 @@ import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
+/** @module ui/components/admin/List_Users_Widget */
+
 // TODO: implement numReferences to enable the delete operation.
 function numReferences() {
   const references = 1;

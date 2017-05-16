@@ -1,4 +1,4 @@
-/** @module Role */
+/** @module api/role/Role */
 
 /** Defines the legal strings used to represent roles in the system. */
 

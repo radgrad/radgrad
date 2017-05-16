@@ -3,11 +3,11 @@ import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
 
-/** @module Slug */
+/** @module api/slug/SlugCollection */
 
 /**
  * Slugs are unique strings that can be used to identify entities and can be used in URLs.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class SlugCollection extends BaseCollection {
 

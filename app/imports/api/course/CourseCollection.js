@@ -7,12 +7,12 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 
-/** @module Course */
+/** @module api/course/CourseCollection */
 
 /**
  * Represents a specific course, such as "ICS 311".
  * To represent a specific course for a specific semester, use CourseInstance.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class CourseCollection extends BaseInstanceCollection {
 

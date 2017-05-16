@@ -1,6 +1,8 @@
 /* global document */
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
+/** @module api/degree/PlanChoiceUtilities */
+
 /**
  * Strips of the counter for the plan choice. The counter is used in academic plans to keep track of how many
  * choices there are (e.g. five ics400+ in the B.S. degree).

@@ -6,11 +6,11 @@ import { Opportunities } from '/imports/api/opportunity/OpportunityCollection.js
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** @module Teaser */
+/** @module api/teaser/TeaserCollection */
 
 /**
  * Represents a teaser instance, such as "ACM Webmasters".
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class TeaserCollection extends BaseInstanceCollection {
 

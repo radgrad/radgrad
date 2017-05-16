@@ -14,8 +14,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 
-// import { Logger } from 'meteor/jag:pince';
-// const ap = new Logger('AP');
+// /** @module ui/components/planner/Academic_Plan */
 
 export const plannerKeys = {
   detailCourse: 'detailCourse',

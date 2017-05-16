@@ -4,12 +4,12 @@ import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module Interest */
+/** @module api/interest/InterestCollection */
 
 /**
  * Represents a specific interest, such as "Software Engineering".
  * Note that all Interests must have an associated InterestType.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class InterestCollection extends BaseInstanceCollection {
 

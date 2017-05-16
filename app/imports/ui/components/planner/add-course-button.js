@@ -9,6 +9,8 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { plannerKeys } from './academic-plan';
 
+// /** @module ui/components/planner/Add_Course_Button */
+
 Template.Add_Course_Button.onCreated(function addCourseButtonOnCreated() {
   this.state = this.data.dictionary;
 });

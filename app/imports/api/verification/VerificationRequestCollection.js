@@ -10,7 +10,7 @@ import { Semesters } from '../semester/SemesterCollection.js';
 import { Users } from '/imports/api/user/UserCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module Verification */
+/** @module api/verification/VerificationRequestCollection */
 
 const ProcessedSchema = new SimpleSchema({
   date: { type: Date },

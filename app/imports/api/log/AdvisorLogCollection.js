@@ -7,11 +7,11 @@ import { ROLE } from '/imports/api/role/Role';
 import { Users } from '../user/UserCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module AdvisorLog */
+/** @module api/log/AdvisorLogCollection */
 
 /**
  * Represents a log of an Advisor talking to a Student.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class AdvisorLogCollection extends BaseCollection {
 

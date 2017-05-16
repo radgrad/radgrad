@@ -11,12 +11,12 @@ import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 
-/** @module Opportunity */
+/** @module api/opportunity/OpportunityCollection */
 
 /**
  * Represents an Opportunity, such as "LiveWire Internship".
  * To represent an Opportunity taken by a specific student in a specific semester, use OpportunityInstance.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class OpportunityCollection extends BaseInstanceCollection {
 

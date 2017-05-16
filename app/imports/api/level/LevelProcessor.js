@@ -6,6 +6,13 @@ import { Users } from '../user/UserCollection';
 import { getTotalICE } from '../ice/IceProcessor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
+/** @module api/level/LevelProcessor */
+
+/**
+ * Calculates the given student's Level.
+ * @param studentID the studentID.
+ * @returns {number}
+ */
 export function calcLevel(studentID) {
   const instances = _.concat(CourseInstances.find({ studentID }).fetch(),
       OpportunityInstances.find({ studentID }).fetch());
@@ -37,12 +44,19 @@ export function calcLevel(studentID) {
   return level;
 }
 
+/**
+ * Updates the student's level.
+ * @param studentID the studentID.
+ */
 export function updateStudentLevel(studentID) {
   const level = calcLevel(studentID);
   // console.log(studentID, level);
   Users.setLevel(studentID, level);
 }
 
+/**
+ * Updates all the students level.
+ */
 export function updateAllStudentLevels() {
   const students = Users.find({ roles: [ROLE.STUDENT] }).fetch();
   _.map(students, (student) => {

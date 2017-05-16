@@ -20,7 +20,6 @@ if (Meteor.isServer) {
     after(function teardown() {
       removeAllEntities();
     });
-
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
       const interests = [makeSampleInterest()];
       const docID = CareerGoals.define({ name, slug, description, interests });

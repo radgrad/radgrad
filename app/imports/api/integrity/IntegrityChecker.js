@@ -2,7 +2,12 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { radgradCollections } from './RadGradCollections.js';
 
+/** @module api/integrity/IntegrityChecker */
 
+/**
+ * Checks the integrity of the RadGradCollections.
+ * @returns {{count: number, message: string}}
+ */
 export function checkIntegrity() {
   let message = `Integrity check results (${moment().format('MMM Do YYYY, H:mm:ss a')})`;
   const startTime = moment();
