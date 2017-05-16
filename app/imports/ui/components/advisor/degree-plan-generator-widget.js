@@ -1,7 +1,6 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
 import { sessionKeys } from '../../../startup/client/session-state';
 import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -14,6 +13,8 @@ import * as semUtils from '../../../api/semester/SemesterUtilities';
 import * as courseUtils from '../../../api/course/CourseUtilities';
 import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
 import { Users } from '../../../api/user/UserCollection.js';
+
+/** @module ui/components/advisor/Degree_Plan_Generator_Widget */
 
 Template.Degree_Plan_Generator_Widget.onCreated(function degreePlanGeneratorOnCreated() {
   if (this.data.dictionary) {

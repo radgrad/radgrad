@@ -7,6 +7,8 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Roles } from 'meteor/alanning:roles';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
+/** @module ui/components/advisor/Academic_Plan_Semester */
+
 function takenSlugs(courseInstances) {
   const ret = [];
   _.map(courseInstances, (ci) => {

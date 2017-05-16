@@ -8,7 +8,8 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { StarDataLogs } from '../../../api/star/StarDataLogCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-// import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
+
+/** @module ui/components/advisor/Star_Upload_Widget */
 
 const updateSchema = new SimpleSchema({
   firstName: { type: String, optional: false },

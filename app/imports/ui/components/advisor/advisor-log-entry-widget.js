@@ -5,6 +5,8 @@ import { sessionKeys } from '../../../startup/client/session-state';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { Users } from '../../../api/user/UserCollection.js';
 
+/** @module ui/components/advisor/Advisor_Log_Entry_Widget */
+
 Template.Advisor_Log_Entry_Widget.helpers({
   advisorLogs() {
     if (Template.currentData().studentID.get()) {

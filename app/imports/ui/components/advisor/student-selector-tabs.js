@@ -9,6 +9,8 @@ import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection'
 import { Users } from '../../../api/user/UserCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
 
+/** @module ui/components/advisor/Student_Selector_Tabs */
+
 const userDefineSchema = new SimpleSchema({
   firstName: { type: String },
   lastName: { type: String },
@@ -21,6 +23,28 @@ const userDefineSchema = new SimpleSchema({
 
 const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
+
+Template.Student_Selector_Tabs.onCreated(function studentSelectorTabsOnCreated() {
+  if (this.data.dictionary) {
+    this.state = this.data.dictionary;
+  } else {
+    this.state = new ReactiveDict();
+  }
+  if (this.data.studentID) {
+    this.studentID = this.data.studentID;
+  }
+  this.state.set(displaySuccessMessage, false);
+  this.state.set(displayErrorMessages, false);
+  this.context = userDefineSchema.namedContext('Add_Create_Student');
+});
+
+Template.Student_Selector_Tabs.onRendered(function studentSelectorTabsOnRendered() {
+  this.$('.menu .item').tab();
+  this.$('.dropdown').dropdown({
+    // action: 'select',
+  });
+  this.state.set('addNewUser', false);
+});
 
 Template.Student_Selector_Tabs.helpers({
   alphabeticalGroups() {
@@ -218,26 +242,4 @@ Template.Student_Selector_Tabs.events({
       instance.state.set(displayErrorMessages, true);
     }
   },
-});
-
-Template.Student_Selector_Tabs.onCreated(function studentSelectorTabsOnCreated() {
-  if (this.data.dictionary) {
-    this.state = this.data.dictionary;
-  } else {
-    this.state = new ReactiveDict();
-  }
-  if (this.data.studentID) {
-    this.studentID = this.data.studentID;
-  }
-  this.state.set(displaySuccessMessage, false);
-  this.state.set(displayErrorMessages, false);
-  this.context = userDefineSchema.namedContext('Add_Create_Student');
-});
-
-Template.Student_Selector_Tabs.onRendered(function studentSelectorTabsOnRendered() {
-  this.$('.menu .item').tab();
-  this.$('.dropdown').dropdown({
-    // action: 'select',
-  });
-  this.state.set('addNewUser', false);
 });
