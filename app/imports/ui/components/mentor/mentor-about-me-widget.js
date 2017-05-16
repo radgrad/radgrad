@@ -13,6 +13,8 @@ import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
+/** @module ui/components/mentor/Mentor_About_Me_Widget */
+
 const edit = false;
 
 const updateSchema = new SimpleSchema({

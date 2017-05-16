@@ -1,13 +1,9 @@
 import { Template } from 'meteor/templating';
 import { plannerKeys } from './academic-plan';
 
-// import { moment } from 'meteor/momentjs:moment';
-// import { Logger } from 'meteor/jag:pince';
-// const pl = new Logger('PL');
+/** @module ui/components/planner/Past_Semester_List */
 
 Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
-  // eslint-disable-next-line
-  // pl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Past_Semester_List onCreated`);
   if (this.data) {
     // use dictionary to indicate what is selected for the Inspector.
     this.state = this.data.dictionary;
@@ -25,8 +21,6 @@ Template.Past_Semester_List.events({
     const template = Template.instance();
     if (firstClass === 'courseInstance') {
       const ci = template.data.icsCourses[target.id];
-      // eslint-disable-next-line max-len
-      // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade}`);
       template.state.set(plannerKeys.detailCourse, null);
       template.state.set(plannerKeys.detailCourseInstance, ci);
       template.state.set(plannerKeys.detailICE, ci.ice);

@@ -4,9 +4,7 @@ import { Feedbacks } from '../../../api/feedback/FeedbackCollection.js';
 import { FeedbackType } from '../../../api/feedback/FeedbackType.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
-Template.Recommendations_And_Warnings.onCreated(function recommendationsAndWarningsOnCreated() {
-  // add your statement here
-});
+/** @module ui/components/planner/Recommendations_And_Warnings */
 
 Template.Recommendations_And_Warnings.helpers({
   recommendationArgs(recommendation) {
@@ -44,16 +42,3 @@ Template.Recommendations_And_Warnings.helpers({
     return ret;
   },
 });
-
-Template.Recommendations_And_Warnings.events({
-  // add your events here
-});
-
-Template.Recommendations_And_Warnings.onRendered(function recommendationsAndWarningsOnRendered() {
-  // add your statement here
-});
-
-Template.Recommendations_And_Warnings.onDestroyed(function recommendationsAndWarningsOnDestroyed() {
-  // add your statement here
-});
-

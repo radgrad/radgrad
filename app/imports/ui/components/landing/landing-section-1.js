@@ -32,19 +32,3 @@ Template.Landing_Section_1.helpers({
     return false;
   },
 });
-
-Template.Landing_Section_1.events({
-  // add your events here
-});
-
-Template.Landing_Section_1.onCreated(function landingBodyOnCreated() {
-  // add your statement here
-});
-
-Template.Landing_Section_1.onRendered(function landingBodyOnRendered() {
-});
-
-Template.Landing_Section_1.onDestroyed(function landingBodyOnDestroyed() {
-  // add your statement here
-});
-

@@ -8,6 +8,8 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
+/** @module ui/components/faculty/Faculty_About_Me_Widget */
+
 Template.Faculty_About_Me_Widget.helpers({
   careerGoals() {
     const ret = [];

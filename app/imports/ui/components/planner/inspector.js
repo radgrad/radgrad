@@ -16,17 +16,14 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import * as RouteNames from '/imports/startup/client/router.js';
 
-// import { Logger } from 'meteor/jag:pince';
-// const logger = new Logger('IN');
+/** @module ui/components/planner/Inspector */
 
 Template.Inspector.onCreated(function inspectorOnCreated() {
-  // logger.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Inspector.onCreated`);
   this.state = this.data.dictionary;
 });
 
 Template.Inspector.helpers({
   courseDescription() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseDescription`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).description;
     } else
@@ -37,7 +34,6 @@ Template.Inspector.helpers({
     return null;
   },
   courseName() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseName`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).name;
     } else
@@ -48,7 +44,6 @@ Template.Inspector.helpers({
     return null;
   },
   courseNumber() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseNumber`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse).number;
     } else
@@ -59,24 +54,19 @@ Template.Inspector.helpers({
     return null;
   },
   courseIce() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courseIce`);
-    // $('body').removeClass('waiting');
     if (Template.instance().state.get(plannerKeys.detailICE)) {
       const ice = Template.instance().state.get(plannerKeys.detailICE);
-      // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} using detailICE {${ice.i}, ${ice.c}, ${ice.e}}`);
       return ice;
     }
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       const course = Template.instance().state.get(plannerKeys.detailCourse);
       const slug = Slugs.findDoc(course.slugID);
       const ice = makeCourseICE(slug.name, 'C');
-      // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} using generic ice {${ice.i}, ${ice.c}, ${ice.e}}`);
       return ice;
     } else
       if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
         const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
         const ice = ci.ice;
-        // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} using ci ice {${ice.i}, ${ice.c}, ${ice.e}}`);
         return ice;
       }
     return null;
@@ -96,7 +86,6 @@ Template.Inspector.helpers({
     return RouteNames.studentExplorerCoursesPageRouteName;
   },
   courses100() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses100`);
     let ret = [];
     const courses = Courses.find({ number: /ICS 1/ }).fetch();
     const instances = CourseInstances.find({ note: /ICS 1/ }).fetch();
@@ -110,7 +99,6 @@ Template.Inspector.helpers({
     return ret;
   },
   courses200() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses200`);
     let ret = [];
     const courses = Courses.find({ number: /ICS 2/ }).fetch();
     const instances = CourseInstances.find({ note: /ICS 2/ }).fetch();
@@ -124,7 +112,6 @@ Template.Inspector.helpers({
     return ret;
   },
   courses300() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses300`);
     let ret = [];
     const courses = Courses.find({ number: /ICS 3/ }).fetch();
     const instances = CourseInstances.find({ note: /ICS 3/ }).fetch();
@@ -138,7 +125,6 @@ Template.Inspector.helpers({
     return ret;
   },
   courses410() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses410`);
     let ret = [];
     const courses = Courses.find({ number: /ICS 4[0123]/ }).fetch();
     const instances = CourseInstances.find({ note: /ICS 4[0123]/ }).fetch();
@@ -152,7 +138,6 @@ Template.Inspector.helpers({
     return ret;
   },
   courses440() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses440`);
     let ret = [];
     const courses = Courses.find({ number: /ICS 4[456]/ }).fetch();
     const instances = CourseInstances.find({ note: /ICS 4[456]/ }).fetch();
@@ -166,7 +151,6 @@ Template.Inspector.helpers({
     return ret;
   },
   courses470() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} courses470`);
     let ret = [];
     const courses = Courses.find({ number: /ICS 4[789]/ }).fetch();
     const instances = CourseInstances.find({ note: /ICS 4[789]/ }).fetch();
@@ -193,7 +177,6 @@ Template.Inspector.helpers({
     return false;
   },
   getCourse() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} getCourse`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse);
     } else
@@ -204,7 +187,6 @@ Template.Inspector.helpers({
     return null;
   },
   getOpportunity() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} getOpportunity`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       const opp = Opportunities.findDoc({ _id: oi.opportunityID });
@@ -216,17 +198,14 @@ Template.Inspector.helpers({
     return null;
   },
   hasCourse() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} hasCourse`);
     return Template.instance().state.get(plannerKeys.detailCourse) ||
         Template.instance().state.get(plannerKeys.detailCourseInstance);
   },
   hasOpportunity() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} hasOpportunity`);
     return Template.instance().state.get(plannerKeys.detailOpportunity) ||
         Template.instance().state.get(plannerKeys.detailOpportunityInstance);
   },
   hasRequest() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} hasRequest`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const instance = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       return VerificationRequests.find({ opportunityInstanceID: instance._id }).count() > 0;
@@ -234,7 +213,6 @@ Template.Inspector.helpers({
     return false;
   },
   instanceID() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} instanceID`);
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       return Template.instance().state.get(plannerKeys.detailCourse)._id;
     } else
@@ -250,7 +228,6 @@ Template.Inspector.helpers({
     return null;
   },
   instanceSemester() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} instanceSemester`);
     if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
       const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
       const semester = Semesters.findDoc(ci.semesterID);
@@ -259,7 +236,6 @@ Template.Inspector.helpers({
     return null;
   },
   interests() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} interests`);
     const ret = [];
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       const course = Template.instance().state.get(plannerKeys.detailCourse);
@@ -292,7 +268,6 @@ Template.Inspector.helpers({
     Template.instance().state.get(plannerKeys.detailOpportunityInstance));
   },
   isPastInstance() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} isPastInstance`);
     const currentSemester = Semesters.getCurrentSemesterDoc();
     if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
       const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
@@ -309,7 +284,6 @@ Template.Inspector.helpers({
     return false;
   },
   missingPrerequisite(prereqSlug) {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} missingPrerequisite`);
     const prereqID = Courses.findIdBySlug(prereqSlug);
     const studentID = getUserIdFromRoute();
     const courseInstances = CourseInstances.find({ studentID }).fetch();
@@ -322,7 +296,6 @@ Template.Inspector.helpers({
     return ret;
   },
   opportunities() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} opportunities`);
     let ret = [];
     const opportunities = Opportunities.find().fetch();
     const currentSemesterID = Semesters.getCurrentSemester();
@@ -335,7 +308,6 @@ Template.Inspector.helpers({
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
   opportunityDescription() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} opportunityDescription`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       const opp = Opportunities.findDoc({ _id: oi.opportunityID });
@@ -347,7 +319,6 @@ Template.Inspector.helpers({
     return null;
   },
   opportunityIce() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} opportunityIce`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       return Opportunities.findDoc(oi.opportunityID).ice;
@@ -358,7 +329,6 @@ Template.Inspector.helpers({
     return null;
   },
   opportunityMore() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} opportunityMore`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       return Opportunities.findDoc(oi.opportunityID).moreInformation;
@@ -369,7 +339,6 @@ Template.Inspector.helpers({
     return null;
   },
   opportunityName() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} opportunityName`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       const opp = Opportunities.findDoc({ _id: oi.opportunityID });
@@ -381,7 +350,6 @@ Template.Inspector.helpers({
     return null;
   },
   opportunitySemester() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} opportunitySemester`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       const semester = OpportunityInstances.getSemesterDoc(oi._id);
@@ -399,7 +367,6 @@ Template.Inspector.helpers({
     return null;
   },
   opportunitySlugID() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} opportunitySlugID`);
     if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
       return Slugs.getNameFromID(Template.instance().state.get(plannerKeys.detailOpportunity).slugID);
     } else
@@ -421,7 +388,6 @@ Template.Inspector.helpers({
     return false;
   },
   prerequisites() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} prerequisites`);
     const ret = [];
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
       _.map(Template.instance().state.get(plannerKeys.detailCourse).prerequisites, (pre) => {
@@ -437,7 +403,6 @@ Template.Inspector.helpers({
     return ret;
   },
   requestHistory() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} requestHistory`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oppInstance = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id }).fetch();
@@ -448,7 +413,6 @@ Template.Inspector.helpers({
     return '';
   },
   requestStatus() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} requestStatus`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oppInstance = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id }).fetch();
@@ -459,7 +423,6 @@ Template.Inspector.helpers({
     return '';
   },
   requestWhenSubmitted() {
-    // logger.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} requestWhenSubmitted`);
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oppInstance = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
       const request = VerificationRequests.find({ opportunityInstanceID: oppInstance._id }).fetch();
