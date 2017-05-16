@@ -34,7 +34,6 @@
 * [JSDocs](developerguide/jsdoc.md)
 * [Directory Structure](developerguide/directorystructure.md)
 * [Project management](developerguide/project-management.md)
-* [Master branch baton pass](developerguide/branchmerge.md)
 * [Meteor guidelines](developerguide/meteor-guidelines.md)
   * [Avoid downloads](developerguide/meteor-guidelines.md#avoid-downloads)
   * [Update in branch](developerguide/meteor-guidelines.md#update-in-branch)
@@ -76,7 +75,6 @@
 ### API
 
 * [JSDocs](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/)
-* [New JSDocs](newapi/api.md)
 
 ### User Guide
 

@@ -12,13 +12,19 @@ app$ npm install
 
 This will download and install the third-party libraries required to run this system.
 
+To make sure the database starts from an empty state, run:
+
+```
+app$ meteor reset
+```
+
 To run the system, invoke this command:
 
 ```
 app$ meteor npm run start
 ```
 
-Go to [http://localhost:3000](http://localhost:3000) to confirm that the system can load successfully: 
+Go to [http://localhost:3000](http://localhost:3000) to confirm that the system is running:
 
 
 <img src="images/home-page.png" width="100%">

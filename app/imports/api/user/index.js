@@ -1,3 +1,3 @@
 import './UserCollection';
 import './ValidUserAccountCollection';
-import './methods';
+import './UserCollection.methods.js';
