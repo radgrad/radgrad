@@ -2,7 +2,7 @@
 /* eslint-disable func-names, prefer-arrow-callback */
 
 import { Template } from 'meteor/templating';
-import { chai } from 'meteor/practicalmeteor:chai';
+import { expect } from 'chai';
 import { withRenderedTemplate } from '../../../test-helpers';
 import { $ } from 'meteor/jquery';
 import { Courses } from '/imports/api/course/CourseCollection';
@@ -39,8 +39,8 @@ describe('Add_Course_Button', function test() {
       course,
     };
     withRenderedTemplate('Add_Course_Button', data, (el) => {
-      chai.assert.equal($(el).find('[draggable]').length, 1);
-      chai.assert.equal($(el).find('[draggable]').text().trim(), 'ICS 311');
+      expect($(el).find('[draggable]').length).to.equal(1);
+      expect($(el).find('[draggable]').text().trim()).to.equal('ICS 311');
     });
   });
   it('renders correctly with type remove', function () {
@@ -48,9 +48,9 @@ describe('Add_Course_Button', function test() {
       buttonType: 'remove',
     };
     withRenderedTemplate('Add_Course_Button', data, (el) => {
-      chai.assert.equal($(el).find('div.removeFromPlan').length, 1);
-      chai.assert.equal($(el).find('div.removeFromPlan').text().trim(), 'REMOVE FROM PLAN');
-      chai.assert.equal($(el).find('[draggable]').length, 0);
+      expect($(el).find('div.removeFromPlan').length).to.equal(1);
+      expect($(el).find('div.removeFromPlan').text().trim()).to.equal('REMOVE FROM PLAN');
+      expect($(el).find('[draggable]').length).to.equal(0);
     });
   });
   it('renders correctly with type taken', function () {
@@ -58,9 +58,9 @@ describe('Add_Course_Button', function test() {
       buttonType: 'taken',
     };
     withRenderedTemplate('Add_Course_Button', data, (el) => {
-      chai.assert.equal($(el).find('h5').length, 1);
-      chai.assert.equal($(el).find('h5').text().trim(), 'COMPLETED');
-      chai.assert.equal($(el).find('[draggable]').length, 0);
+      expect($(el).find('h5').length).to.equal(1);
+      expect($(el).find('h5').text().trim()).to.equal('COMPLETED');
+      expect($(el).find('[draggable]').length).to.equal(0);
     });
   });
 });

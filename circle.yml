@@ -3,17 +3,16 @@ general:
   branches:
     only:
       - master
-    ignore:
-      - gh-pages
 machine:
   node:
-    version: 0.10.43
+    version: 6.10.3
+  environment:
+    METEOR_NO_RELEASE_CHECK: 1
 dependencies:
   override:
     - curl https://install.meteor.com | /bin/sh
-    - npm install
-    - meteor update
-    - meteor remove practicalmeteor:mocha
-checkout:
-  post:
-    - git submodule update --init
+    - meteor npm install
+test:
+  override:
+    - meteor npm run test
+    - meteor npm run jsdoc
