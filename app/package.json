@@ -7,8 +7,8 @@
     "lint": "eslint --quiet ./imports",
     "lint-loud": "eslint ./imports",
     "pretest": "npm run lint --silent",
-    "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
-    "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
+    "test": "meteor test --once --driver-package dispatch:mocha-phantomjs --no-release-check",
+    "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r ."
   },
   "dependencies": {
