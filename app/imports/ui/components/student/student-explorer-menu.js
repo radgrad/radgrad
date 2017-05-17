@@ -5,7 +5,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';

@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 
 // /** @module ui/components/advisor/Academic_Plan_Viewer_Component */

@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { Roles } from 'meteor/alanning:roles';

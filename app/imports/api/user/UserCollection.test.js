@@ -3,7 +3,7 @@
 
 import { Users } from '/imports/api/user/UserCollection';
 import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
-import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '/imports/api/degree-plan/DesiredDegreeCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
 import { ROLE } from '/imports/api/role/Role';

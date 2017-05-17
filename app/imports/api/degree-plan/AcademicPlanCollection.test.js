@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
-import { AcademicPlans } from '/imports/api/degree/AcademicPlanCollection';
+import { DesiredDegrees } from '/imports/api/degree-plan/DesiredDegreeCollection';
+import { AcademicPlans } from '/imports/api/degree-plan/AcademicPlanCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';

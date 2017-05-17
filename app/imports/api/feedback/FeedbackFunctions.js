@@ -1,10 +1,10 @@
 // import { check } from 'meteor/check';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { AcademicPlans } from '../degree/AcademicPlanCollection';
+import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
-import { DesiredDegrees } from '../degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Feedbacks } from './FeedbackCollection';
 import { FeedbackInstances } from './FeedbackInstanceCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
@@ -12,10 +12,10 @@ import { Semesters } from '../semester/SemesterCollection';
 import * as courseUtils from '../course/CourseUtilities';
 import * as oppUtils from '../opportunity/OpportunityUtilities';
 import * as yearUtils from '../year/AcademicYearUtilities';
-import * as planUtils from '../degree/PlanChoiceUtilities';
+import * as planUtils from '../degree-plan/PlanChoiceUtilities';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
-import { BS_CS_LIST, BA_ICS_LIST } from '../degree-program/degree-program';
+import { BS_CS_LIST, BA_ICS_LIST } from '../degree-plan/degree-program';
 
 /** @module api/feedback/FeedbackFunctions */
 

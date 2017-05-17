@@ -1,7 +1,7 @@
 /* global document */
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** @module api/degree/PlanChoiceUtilities */
+/** @module api/degree-plan/PlanChoiceUtilities */
 
 /**
  * Strips of the counter for the plan choice. The counter is used in academic plans to keep track of how many

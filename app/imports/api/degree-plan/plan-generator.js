@@ -1,5 +1,5 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { AcademicPlans } from '../degree/AcademicPlanCollection';
+import { AcademicPlans } from './AcademicPlanCollection';
 import { AcademicYearInstances } from '../year/AcademicYearInstanceCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
@@ -9,10 +9,10 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import * as semUtils from '../semester/SemesterUtilities';
 import * as courseUtils from '../course/CourseUtilities';
-import * as planChoiceUtils from '../degree/PlanChoiceUtilities';
+import * as planChoiceUtils from './PlanChoiceUtilities';
 import { BS_CS_LIST, BA_ICS_LIST } from './degree-program';
 
-/** @module api/degree-program/plan-generator */
+/** @module api/degree-plan/plan-generator */
 
 /**
  * Converts a course Slug into the capitalized note needed for CourseInstances.

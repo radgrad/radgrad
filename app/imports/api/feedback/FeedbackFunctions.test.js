@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
 import { FeedbackInstances } from '/imports/api/feedback/FeedbackInstanceCollection';
-import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '/imports/api/degree-plan/DesiredDegreeCollection';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
 import { defineTestFixture } from '/imports/api/test/test-fixture';

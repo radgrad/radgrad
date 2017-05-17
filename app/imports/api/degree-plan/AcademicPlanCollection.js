@@ -2,11 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { DesiredDegrees } from './../degree/DesiredDegreeCollection';
+import { DesiredDegrees } from './DesiredDegreeCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 
-/** @module api/degree/AcademicPlanCollection */
+/** @module api/degree-plan/AcademicPlanCollection */
 
 /**
  * AcademicPlans specifies the set of academic plans possible in this department.

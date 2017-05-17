@@ -4,7 +4,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
 
-/** @module api/degree/DesiredDegreeCollection */
+/** @module api/degree-plan/DesiredDegreeCollection */
 
 /**
  * DesiredDegrees specifies the set of degrees possible in this department.

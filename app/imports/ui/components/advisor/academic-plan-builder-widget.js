@@ -4,13 +4,13 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { AcademicPlans } from '../../../api/degree/AcademicPlanCollection';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
-import { PlanChoices } from '../../../api/degree/PlanChoiceCollection';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
+import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import { buildSimpleName, getAllElementsWithAttribute } from '../../../api/degree/PlanChoiceUtilities';
+import { buildSimpleName, getAllElementsWithAttribute } from '../../../api/degree-plan/PlanChoiceUtilities';
 
 // /** @module ui/components/advisor/Academic_Plan_Builder_Widget */
 
