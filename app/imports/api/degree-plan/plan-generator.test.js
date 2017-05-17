@@ -16,7 +16,7 @@ import { generateAcademicPlan } from './plan-generator';
 
 if (Meteor.isServer) {
   describe('plan-generator', function testSuite() {
-    this.timeout(20000);
+    this.timeout(0);
     let studentID;
     // const sophmoreStudentCleanData = 'testdata/sophmoreClean.csv';
     // const sophmoreStudentMissingOneData = 'testdata/sophmoreMissingOne.csv';
