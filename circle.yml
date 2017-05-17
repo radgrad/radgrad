@@ -17,8 +17,8 @@ dependencies:
   override:
     - curl https://install.meteor.com | /bin/sh
     - npm install
-    #- meteor remove practicalmeteor:mocha
+    - meteor remove practicalmeteor:mocha
 test:
   override:
-    # - meteor npm run test
+    - meteor npm run test
     - meteor npm run jsdoc
