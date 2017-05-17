@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '/imports/api/course/CourseCollection';
-import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection';
+import { AcademicYearInstances } from '/imports/api/degree-plan/AcademicYearInstanceCollection';
 import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';

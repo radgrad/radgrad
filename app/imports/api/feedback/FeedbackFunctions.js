@@ -11,7 +11,7 @@ import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollecti
 import { Semesters } from '../semester/SemesterCollection';
 import * as courseUtils from '../course/CourseUtilities';
 import * as oppUtils from '../opportunity/OpportunityUtilities';
-import * as yearUtils from '../year/AcademicYearUtilities';
+import * as yearUtils from '../degree-plan/AcademicYearUtilities';
 import * as planUtils from '../degree-plan/PlanChoiceUtilities';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';

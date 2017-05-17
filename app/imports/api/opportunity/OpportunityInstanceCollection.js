@@ -3,7 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { ROLE } from '/imports/api/role/Role';
-import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection';
+import { AcademicYearInstances } from '/imports/api/degree-plan/AcademicYearInstanceCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';

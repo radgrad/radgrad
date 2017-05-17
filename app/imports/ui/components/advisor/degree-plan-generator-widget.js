@@ -2,7 +2,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { sessionKeys } from '../../../startup/client/session-state';
-import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
+import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';

@@ -8,7 +8,7 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 // import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** @module api/year/AcademicYearInstanceCollection */
+/** @module api/degree-plan/AcademicYearInstanceCollection */
 
 /**
  * Each AcademicYearInstance represents a sequence of three semesters for a given student.

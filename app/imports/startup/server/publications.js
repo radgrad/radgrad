@@ -1,5 +1,5 @@
 import { AcademicPlans } from '../../api/degree-plan/AcademicPlanCollection';
-import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
+import { AcademicYearInstances } from '../../api/degree-plan/AcademicYearInstanceCollection.js';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
