@@ -1,7 +1,7 @@
 /* global Assets */
 
 import { Meteor } from 'meteor/meteor';
-import { AcademicPlans } from './../../api/degree/AcademicPlanCollection';
+import { AcademicPlans } from '../../api/degree-plan/AcademicPlanCollection';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
@@ -9,7 +9,7 @@ import { Feeds } from '../../api/feed/FeedCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
 import { HelpMessages } from '../../api/help/HelpMessageCollection';
-import { DesiredDegrees } from '../../api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../../api/degree-plan/DesiredDegreeCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { MentorAnswers } from '../../api/mentor/MentorAnswerCollection.js';
@@ -18,7 +18,7 @@ import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
-import { PlanChoices } from '../../api/degree/PlanChoiceCollection';
+import { PlanChoices } from '../../api/degree-plan/PlanChoiceCollection';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { Reviews } from '../../api/review/ReviewCollection';
 import { Teasers } from '../../api/teaser/TeaserCollection';

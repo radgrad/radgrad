@@ -1,7 +1,7 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
-import { PlanChoices } from '/imports/api/degree/PlanChoiceCollection';
+import { PlanChoices } from '/imports/api/degree-plan/PlanChoiceCollection';
 import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
 
 /* eslint-disable object-shorthand */

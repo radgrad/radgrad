@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { AcademicPlans } from '../../../api/degree/AcademicPlanCollection';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
