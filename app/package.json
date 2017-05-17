@@ -6,7 +6,7 @@
     "start-local-production": "meteor --settings ../config/settings.production.local.json --no-release-check",
     "lint": "eslint --quiet ./imports",
     "lint-loud": "eslint ./imports",
-    "pretest": "npm run lint --silent",
+    "pretest": "npm run lint",
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs --no-release-check",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r ."

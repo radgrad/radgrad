@@ -11,6 +11,7 @@ machine:
 dependencies:
   cache_directories:
     - "node_modules"
+    - ".meteor"
     - "~/.npm"
     - "~/.meteor"
   override:
@@ -19,5 +20,5 @@ dependencies:
     - meteor remove practicalmeteor:mocha
 test:
   override:
-    - meteor npm run lint
     - meteor npm run test
+    - meteor npm run jsdoc
