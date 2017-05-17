@@ -9,14 +9,9 @@ machine:
   environment:
     METEOR_NO_RELEASE_CHECK: 1
 dependencies:
-  cache_directories:
-    - "node_modules"
-    - ".meteor"
-    - "~/.npm"
-    - "~/.meteor"
   override:
     - curl https://install.meteor.com | /bin/sh
-    - npm install
+    - meteor npm install
     - meteor remove practicalmeteor:mocha
 test:
   override:
