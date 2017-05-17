@@ -3,7 +3,7 @@ import { AcademicYearInstances } from './AcademicYearInstanceCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 
-/** @module api/year/AcademicYearUtilities */
+/** @module api/degree-plan/AcademicYearUtilities */
 
 /**
  * Returns the student's current semester number (i.e. which semester are they currently in.)

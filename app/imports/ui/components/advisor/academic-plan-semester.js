@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { PlanChoices } from '../../../api/degree/PlanChoiceCollection';
+import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Roles } from 'meteor/alanning:roles';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';

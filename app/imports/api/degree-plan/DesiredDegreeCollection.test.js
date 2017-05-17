@@ -1,4 +1,4 @@
-import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '/imports/api/degree-plan/DesiredDegreeCollection';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';

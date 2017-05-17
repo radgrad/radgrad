@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
 

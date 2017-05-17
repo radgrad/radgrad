@@ -3,7 +3,7 @@ import { AdvisorLogs } from '/imports/api/log/AdvisorLogCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '/imports/api/degree-plan/DesiredDegreeCollection';
 import { Feeds } from '/imports/api/feed/FeedCollection';
 import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
 import { FeedbackInstances } from '/imports/api/feedback/FeedbackInstanceCollection';
@@ -23,9 +23,9 @@ import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
 import { Teasers } from '/imports/api/teaser/TeaserCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import { VerificationRequests } from '/imports/api/verification/VerificationRequestCollection';
-import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection';
-import { PlanChoices } from '/imports/api/degree/PlanChoiceCollection';
-import { AcademicPlans } from '/imports/api/degree/AcademicPlanCollection';
+import { AcademicYearInstances } from '/imports/api/degree-plan/AcademicYearInstanceCollection';
+import { PlanChoices } from '/imports/api/degree-plan/PlanChoiceCollection';
+import { AcademicPlans } from '/imports/api/degree-plan/AcademicPlanCollection';
 
 /** @module api/base/BaseUtilities */
 

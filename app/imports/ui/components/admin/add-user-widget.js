@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';

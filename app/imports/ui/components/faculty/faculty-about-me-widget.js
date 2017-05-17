@@ -5,7 +5,7 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 // /** @module ui/components/faculty/Faculty_About_Me_Widget */

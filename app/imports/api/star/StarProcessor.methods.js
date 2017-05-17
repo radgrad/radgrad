@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { processStarCsvData } from './StarProcessor';
-import { AcademicYearInstances } from '../year/AcademicYearInstanceCollection';
+import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
 import { Semesters } from '../semester/SemesterCollection';

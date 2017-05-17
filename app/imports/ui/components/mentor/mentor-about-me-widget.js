@@ -8,7 +8,7 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
