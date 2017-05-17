@@ -11,10 +11,12 @@ machine:
 dependencies:
   cache_directories:
     - "node_modules"
+    - ".meteor"
     - "~/.npm"
+    - "~/.meteor"
   override:
     - curl https://install.meteor.com | /bin/sh
-    - meteor npm install
+    - npm install
     - meteor remove practicalmeteor:mocha
 test:
   override:
