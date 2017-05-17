@@ -23,6 +23,6 @@ dependencies:
     - npm install
     - meteor update
     - meteor remove practicalmeteor:mocha
-checkout:
-  post:
-    - git submodule update --init
+test:
+  override:
+    - meteor npm run lint
