@@ -8,7 +8,7 @@ machine:
     version: 4.6.2
 dependencies:
   cache_directories:
-    - "node_modules"
+    - "node_modules" 
     - "~/.npm"
     - "~/.meteor"
     - "app/.meteor/local/build"
