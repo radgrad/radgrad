@@ -1,6 +1,6 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from './AcademicPlanCollection';
-import { AcademicYearInstances } from '../year/AcademicYearInstanceCollection';
+import { AcademicYearInstances } from './AcademicYearInstanceCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
 import { Interests } from '../interest/InterestCollection';

@@ -18,7 +18,6 @@ import '/imports/api/star';
 import '/imports/api/teaser';
 import '/imports/api/user';
 import '/imports/api/verification';
-import '/imports/api/year';
 
 import '/imports/startup/client';
 import '/imports/startup/both';

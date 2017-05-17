@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
+import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection.js';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';

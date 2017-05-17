@@ -7,7 +7,7 @@ import { $ } from 'meteor/jquery';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
-import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection';
+import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';

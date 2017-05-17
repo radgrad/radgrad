@@ -23,7 +23,7 @@ import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
 import { Teasers } from '/imports/api/teaser/TeaserCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import { VerificationRequests } from '/imports/api/verification/VerificationRequestCollection';
-import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection';
+import { AcademicYearInstances } from '/imports/api/degree-plan/AcademicYearInstanceCollection';
 import { PlanChoices } from '/imports/api/degree-plan/PlanChoiceCollection';
 import { AcademicPlans } from '/imports/api/degree-plan/AcademicPlanCollection';
 

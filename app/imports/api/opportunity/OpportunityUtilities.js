@@ -5,7 +5,7 @@ import PreferredChoice from '../preference/PreferredChoice';
 import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
-import { getStudentsCurrentSemesterNumber } from '../year/AcademicYearUtilities';
+import { getStudentsCurrentSemesterNumber } from '../degree-plan/AcademicYearUtilities';
 
 /** @module api/opportunity/OpportunityUtilities */
 
