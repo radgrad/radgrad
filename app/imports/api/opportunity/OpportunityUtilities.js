@@ -1,7 +1,7 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Opportunities } from './OpportunityCollection';
 import { OpportunityInstances } from './OpportunityInstanceCollection';
-import PreferredChoice from '../preference/PreferredChoice';
+import PreferredChoice from '../degree-plan/PreferredChoice';
 import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';

@@ -11,7 +11,6 @@ import '/imports/api/level';
 import '/imports/api/log';
 import '/imports/api/opportunity';
 import '/imports/api/public-stats';
-import '/imports/api/preference';
 import '/imports/api/role';
 import '/imports/api/semester';
 import '/imports/api/slug';

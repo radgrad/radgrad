@@ -3,7 +3,7 @@ import { CourseInstances } from './CourseInstanceCollection';
 import { Courses } from './CourseCollection';
 import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
 import { Feedbacks } from '../feedback/FeedbackCollection';
-import PreferredChoice from '../preference/PreferredChoice';
+import PreferredChoice from '../degree-plan/PreferredChoice';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
