@@ -1,11 +1,11 @@
 /* global Assets */
 
-import { AcademicPlans } from '../../api/degree/AcademicPlanCollection';
+import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
-import { DesiredDegrees } from '../../api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';

@@ -7,10 +7,10 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import { defineTestFixture } from '/imports/api/test/test-fixture';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
 import { expect } from 'chai';
-import { AcademicPlans } from '../../api/degree/AcademicPlanCollection';
-import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
-import { Users } from '../../api/user/UserCollection';
-import { Semesters } from '../../api/semester/SemesterCollection.js';
+import { AcademicPlans } from './AcademicPlanCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection.js';
+import { Users } from '../user/UserCollection';
+import { Semesters } from '../semester/SemesterCollection.js';
 import { generateAcademicPlan } from './plan-generator';
 // import { processStudentStarCsvData } from '../star/StarMethods';
 

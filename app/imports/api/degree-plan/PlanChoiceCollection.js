@@ -4,7 +4,7 @@ import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { buildSimpleName } from './PlanChoiceUtilities';
 
-/** @module api/degree/PlanChoiceCollection */
+/** @module api/degree-plan/PlanChoiceCollection */
 
 /**
  * Represents a choice in an academic plan.

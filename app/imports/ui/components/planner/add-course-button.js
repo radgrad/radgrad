@@ -4,7 +4,7 @@ import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { buildSimpleName } from '../../../api/degree/PlanChoiceUtilities';
+import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { plannerKeys } from './academic-plan';

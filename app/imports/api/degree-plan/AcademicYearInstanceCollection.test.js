@@ -1,5 +1,5 @@
 import { Users } from '/imports/api/user/UserCollection';
-import { AcademicYearInstances } from '/imports/api/year/AcademicYearInstanceCollection';
+import { AcademicYearInstances } from '/imports/api/degree-plan/AcademicYearInstanceCollection';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';

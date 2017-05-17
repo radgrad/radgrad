@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { PlanChoices } from '/imports/api/degree/PlanChoiceCollection';
+import { PlanChoices } from '/imports/api/degree-plan/PlanChoiceCollection';
 import { expect } from 'chai';
 import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 

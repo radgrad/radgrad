@@ -5,7 +5,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
-import { DesiredDegrees } from '../degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Interests } from '../interest/InterestCollection';
 import { MentorProfiles } from '../mentor/MentorProfileCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
