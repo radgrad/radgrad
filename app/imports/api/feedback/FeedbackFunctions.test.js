@@ -15,7 +15,7 @@ import { Users } from '/imports/api/user/UserCollection';
 
 if (Meteor.isServer) {
   describe('FeedbackFunctions', function testSuite() {
-    this.timeout(20000);
+    this.timeout(0);
     let studentID;
 
     before(function setup() {

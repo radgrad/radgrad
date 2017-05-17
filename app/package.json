@@ -6,15 +6,14 @@
     "start-local-production": "meteor --settings ../config/settings.production.local.json --no-release-check",
     "lint": "eslint --quiet ./imports",
     "lint-loud": "eslint ./imports",
-    "pretest": "npm run lint --silent",
-    "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
-    "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
+    "pretest": "npm run lint",
+    "test": "meteor test --once --driver-package dispatch:mocha-phantomjs --no-release-check",
+    "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r ."
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "bcrypt": "^0.8.7",
-    "chai": "^3.5.0",
     "meteor-node-stubs": "^0.2.5",
     "node-balanced": "0.0.14"
   },
