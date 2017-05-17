@@ -11,18 +11,11 @@ dependencies:
     - "node_modules"
     - "~/.npm"
     - "~/.meteor"
-    - "app/.meteor/local/build"
-    - "app/.meteor/local/bundler-cache"
-    - "app/.meteor/local/db"
-    - "app/.meteor/local/isopacks"
-    - "app/.meteor/local/plugin-cache"
-    - "/home/ubuntu/nvm/versions/node/v4.6.2/bin"
-    - "/home/ubuntu/nvm/versions/node/v4.6.2/lib/node_modules"
   override:
     - curl https://install.meteor.com | /bin/sh
     - npm install
-    - meteor update
     - meteor remove practicalmeteor:mocha
 test:
   override:
     - meteor npm run lint
+    - meteor npm run test
