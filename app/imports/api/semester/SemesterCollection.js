@@ -101,7 +101,7 @@ class SemesterCollection extends BaseInstanceCollection {
         } else {
           semesterNumber = 3 * yearDiff;
         }
-    } else {
+    } else
       if (term === this.SPRING) {
         semesterNumber = (4 * yearDiff) - 3;
       } else
@@ -113,8 +113,6 @@ class SemesterCollection extends BaseInstanceCollection {
           } else {
             semesterNumber = 4 * yearDiff;
           }
-    }
-
     // Otherwise define a new semester and add it to the collection if successful.
     const slug = `${term}-${year}`;
 
@@ -134,13 +132,7 @@ class SemesterCollection extends BaseInstanceCollection {
    */
   assertSemester(semester) {
     if (!this.isDefined(semester)) {
-      throw new Meteor.Error(`
-$
-{
-  semester
-}
- is not a valid Semester.
-`);
+      throw new Meteor.Error(`${semester} is not a valid Semester.`);
     }
   }
 
@@ -233,25 +225,7 @@ $
   toString(semesterID, nospace) {
     this.assertSemester(semesterID);
     const semesterDoc = this.findDoc(semesterID);
-    return (nospace) ? `
-$
-{
-  semesterDoc.term
-}
-$
-{
-  semesterDoc.year
-}
-` : `
-$
-{
-  semesterDoc.term
-}
- $
-{
-  semesterDoc.year
-}
-`;
+    return (nospace) ? `${semesterDoc.term}${semesterDoc.year}` : `${semesterDoc.term} ${semesterDoc.year}`;
   }
 
   /**
@@ -264,12 +238,7 @@ $
     const problems = [];
     this.find().forEach(doc => {
       if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`
-Bad slugID: $
-{
-  doc.slugID
-}
-`);
+        problems.push(`Bad slugID: ${doc.slugID}`);
       }
     });
     return problems;
