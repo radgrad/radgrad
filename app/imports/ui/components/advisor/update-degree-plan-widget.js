@@ -49,7 +49,7 @@ Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCr
   FormUtils.setupFormWidget(this, updateSchema);
   this.autorun(() => {
     this.subscribe(CourseInstances.getPublicationName(5), this.data.studentID.get());
-    this.subscribe(AcademicYearInstances.getPublicationName(1), this.data.studentID.get());
+    this.subscribe(AcademicYearInstances.publicationName.PerStudentID, this.data.studentID.get());
     this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
   });
 });

@@ -12,5 +12,6 @@
     },
     "databaseRestoreFileName": "database/mockup/2017-03-10-10-04-41.json"
   },
+  "quarters": false,
   "mockup": false
 }
