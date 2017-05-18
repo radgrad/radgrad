@@ -824,13 +824,12 @@
           "shortName": "Discrete Math I",
           "slug": "ics141",
           "number": "ICS 141",
-          "description": "Introduction to propositional and predicate logic, sets, functions, linear algebra, algorithms, mathematical reasoning, recursion, counting techniques, and probability theory.",
+          "description": "Introduction to propositional and predicate logic, sets, functions, linear algebra, algorithms, mathematical reasoning, recursion, counting techniques, and probability theory. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS141/)",
           "creditHrs": 3,
           "interests": [
             "algorithms"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS141.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS141/",
           "prerequisites": []
         },
         {
@@ -838,7 +837,7 @@
           "shortName": "Comp Sci II",
           "slug": "ics211",
           "number": "ICS 211",
-          "description": "Object-oriented programming, algorithms and their complexity, introduction to software engineering, lists, stacks, queues, trees hash tables, and searching and sorting algorithms.",
+          "description": "Object-oriented programming, algorithms and their complexity, introduction to software engineering, lists, stacks, queues, trees hash tables, and searching and sorting algorithms. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS211/)",
           "creditHrs": 4,
           "interests": [
             "algorithms",
@@ -846,7 +845,6 @@
             "java"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS211.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS211/",
           "prerequisites": [
             "ics111"
           ]
@@ -873,7 +871,7 @@
           "shortName": "Scripting",
           "slug": "ics215",
           "number": "ICS 215",
-          "description": "Introduction to scripting languages for the integration of applications and systems. Scripting in operating systems, web pages, server-side application integration, regular expressions, event handling, input validation, selection, repetition, parameter passing, Perl, JavaScript, and PHP.",
+          "description": "Introduction to scripting languages for the integration of applications and systems. Scripting in operating systems, web pages, server-side application integration, regular expressions, event handling, input validation, selection, repetition, parameter passing, Perl, JavaScript, and PHP. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS215/)",
           "creditHrs": 3,
           "interests": [
             "perl",
@@ -882,7 +880,6 @@
             "application-development"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS215.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS215/",
           "prerequisites": [
             "ics211"
           ]
@@ -907,13 +904,12 @@
           "shortName": "Discrete Math II",
           "slug": "ics241",
           "number": "ICS 241",
-          "description": "Program correctness, recurrence relations and their solutions, divide and conquer relations, relations and their properties, graph theory, trees and their applications, Boolean algebra, introduction to formal languages and automata theory.",
+          "description": "Program correctness, recurrence relations and their solutions, divide and conquer relations, relations and their properties, graph theory, trees and their applications, Boolean algebra, introduction to formal languages and automata theory. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS241/)",
           "creditHrs": 3,
           "interests": [
             "algorithms"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS241.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS241/",
           "prerequisites": [
             "ics141"
           ]
@@ -923,14 +919,13 @@
           "shortName": "Algorithms",
           "slug": "ics311",
           "number": "ICS 311",
-          "description": "Design and correctness of algorithms, including divide-and-conquer, greedy and dynamic programming methods. Complexity analyses using recurrence relations, probabilistic methods, and NP-completeness. Applications to order statistics, disjoint sets, B-trees and balanced trees, graphs, network flows, and string matching.",
+          "description": "Design and correctness of algorithms, including divide-and-conquer, greedy and dynamic programming methods. Complexity analyses using recurrence relations, probabilistic methods, and NP-completeness. Applications to order statistics, disjoint sets, B-trees and balanced trees, graphs, network flows, and string matching. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS311/)",
           "creditHrs": 4,
           "interests": [
             "algorithms",
             "data-science"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS311.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS311/",
           "prerequisites": [
             "ics241",
             "ics211"
@@ -941,7 +936,7 @@
           "shortName": "Systems Programming",
           "slug": "ics312",
           "number": "ICS 312",
-          "description": "Machine organization, machine instructions, addressing modes, assembler language, subroutine linkage, linking to higher-level languages, interface to operating systems, introduction to assemblers, loaders and compilers.",
+          "description": "Machine organization, machine instructions, addressing modes, assembler language, subroutine linkage, linking to higher-level languages, interface to operating systems, introduction to assemblers, loaders and compilers. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS312/)",
           "creditHrs": 3,
           "interests": [
             "assembler",
@@ -949,7 +944,6 @@
             "application-development"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS312.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS312/",
           "prerequisites": [
             "ics212",
             "ics314"
@@ -978,7 +972,7 @@
           "shortName": "Software Eng I",
           "slug": "ics314",
           "number": "ICS 314",
-          "description": "Problem analysis and design, team-oriented development, quality assurance, configuration management, project planning.",
+          "description": "Problem analysis and design, team-oriented development, quality assurance, configuration management, project planning. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS314/)",
           "creditHrs": 3,
           "interests": [
             "software-engineering",
@@ -987,7 +981,6 @@
             "it-management"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS314.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS314/",
           "prerequisites": [
             "ics211",
             "ics241"
@@ -998,7 +991,7 @@
           "shortName": "Databases I",
           "slug": "ics321",
           "number": "ICS 321",
-          "description": "Data storage devices, timing and capacity, programming for files, hashed and indexed files, introduction to relational database systems.",
+          "description": "Data storage devices, timing and capacity, programming for files, hashed and indexed files, introduction to relational database systems. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS321/)",
           "creditHrs": 3,
           "interests": [
             "databases",
@@ -1006,7 +999,6 @@
             "sql"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS321.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS321/",
           "prerequisites": [
             "ics311",
             "ics314"
@@ -1073,13 +1065,12 @@
           "shortName": "Security & Trust I",
           "slug": "ics355",
           "number": "ICS 355",
-          "description": "Security and trust in computers, networks, and society. Security models. Access and authorization. Availability and Denial-of-Service. Trust processes and network interactions.",
+          "description": "Security and trust in computers, networks, and society. Security models. Access and authorization. Availability and Denial-of-Service. Trust processes and network interactions. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS355/)",
           "creditHrs": 3,
           "interests": [
             "security"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS355.html",
-          "moreInformation": "http://courses.ics.hawaii.edu/ReviewICS355/",
           "prerequisites": [
             "ics222",
             "ics311",
@@ -3275,16 +3266,14 @@
         {
           "name": "Algorithms",
           "slug": "algorithms",
-          "description": "Simply put, an algorithm is a self-contained step-by-step set of operations to be performed. More specifically, an algorithm is an effective method that can be expressed within a finite amount of space and time and in a well-defined formal language for calculating a function. Starting from an initial state and initial input (perhaps empty), the instructions describe a computation that, when executed, proceeds through a finite number of well-defined successive states, eventually producing \"output\" and terminating at a final ending state. The transition from one state to the next is not necessarily deterministic; some algorithms, known as randomized algorithms, incorporate random input.",
+          "description": "Simply put, an algorithm is a self-contained step-by-step set of operations to be performed. More specifically, an algorithm is an effective method that can be expressed within a finite amount of space and time and in a well-defined formal language for calculating a function. Starting from an initial state and initial input (perhaps empty), the instructions describe a computation that, when executed, proceeds through a finite number of well-defined successive states, eventually producing \"output\" and terminating at a final ending state. The transition from one state to the next is not necessarily deterministic; some algorithms, known as randomized algorithms, incorporate random input. [Learn more here.](https://en.wikipedia.org/wiki/Algorithm)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Algorithm"
         },
         {
           "name": "Android",
           "slug": "android",
-          "description": "Android is a mobile operating system (OS) currently developed by Google, based on the Linux kernel and designed primarily for touchscreen mobile devices such as smartphones and tablets. In addition to touchscreen devices, Google has further developed Android TV for televisions, Android Auto for cars, and Android Wear for wrist watches, each with a specialized user interface. Variants of Android are also used on notebooks, game consoles, digital cameras, and other electronics. Android has the largest installed base of all operating systems of any kind. Android has been the best selling OS on tablets since 2013, and on smartphones it is dominant by any metric.",
+          "description": "Android is a mobile operating system (OS) currently developed by Google, based on the Linux kernel and designed primarily for touchscreen mobile devices such as smartphones and tablets. In addition to touchscreen devices, Google has further developed Android TV for televisions, Android Auto for cars, and Android Wear for wrist watches, each with a specialized user interface. Variants of Android are also used on notebooks, game consoles, digital cameras, and other electronics. Android has the largest installed base of all operating systems of any kind. Android has been the best selling OS on tablets since 2013, and on smartphones it is dominant by any metric. [Learn more here.](https://www.android.com/)",
           "interestType": "technologies",
-          "moreInformation": "https://www.android.com/"
         },
         {
           "name": "Application Development",
@@ -3295,366 +3284,314 @@
         {
           "name": "Artificial Intelligence",
           "slug": "artificial-intelligence",
-          "description": "The use of hardware and software to create a flexible rational agent that perceives its environment and takes actions that maximize its chance of success at an arbitrary goal. Colloquially, the term \"artificial intelligence\" is likely to be applied when a machine uses cutting-edge techniques to competently perform or mimic functions that we intuitively associate with human minds, such as \"learning\" and \"problem solving\".",
+          "description": "The use of hardware and software to create a flexible rational agent that perceives its environment and takes actions that maximize its chance of success at an arbitrary goal. Colloquially, the term \"artificial intelligence\" is likely to be applied when a machine uses cutting-edge techniques to competently perform or mimic functions that we intuitively associate with human minds, such as \"learning\" and \"problem solving\". [Learn more here.](https://en.wikipedia.org/wiki/Artificial_intelligence)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Artificial_intelligence"
         },
         {
           "name": "Assembler",
           "slug": "assembler",
-          "description": "An assembler (or assembly) language is a low-level programming language for a computer in which there is a direct correspondence between the language and the architecture's machine code instructions. Each assembly language is specific to a particular computer architecture, in contrast to most high-level programming languages, which are generally portable across multiple architectures, but require interpreting or compiling. Assembly language may also be called symbolic machine code. Assembly language is converted into executable machine code by a utility program referred to as an assembler. The conversion process is referred to as assembly, or assembling the source code.",
+          "description": "An assembler (or assembly) language is a low-level programming language for a computer in which there is a direct correspondence between the language and the architecture's machine code instructions. Each assembly language is specific to a particular computer architecture, in contrast to most high-level programming languages, which are generally portable across multiple architectures, but require interpreting or compiling. Assembly language may also be called symbolic machine code. Assembly language is converted into executable machine code by a utility program referred to as an assembler. The conversion process is referred to as assembly, or assembling the source code. [Learn more here.](https://en.wikipedia.org/wiki/Assembly_language)",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/Assembly_language"
         },
         {
           "name": "Bioinformatics",
           "slug": "bioinformatics",
-          "description": "Bioinformatics is an interdisciplinary field combining computer science, statistics, mathematics, and engineering that develops methods and software tools for understanding biological data. Common uses of bioinformatics include the identification of candidate genes and nucleotides (SNPs). Often, such identification is made with the aim of better understanding the genetic basis of disease, unique adaptations, desirable properties (esp. in agricultural species), or differences between populations.",
+          "description": "Bioinformatics is an interdisciplinary field combining computer science, statistics, mathematics, and engineering that develops methods and software tools for understanding biological data. Common uses of bioinformatics include the identification of candidate genes and nucleotides (SNPs). Often, such identification is made with the aim of better understanding the genetic basis of disease, unique adaptations, desirable properties (esp. in agricultural species), or differences between populations. [Learn more here.](https://en.wikipedia.org/wiki/Bioinformatics)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Bioinformatics"
         },
         {
           "name": "Biology",
           "slug": "biology",
-          "description": "A natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, and taxonomy.",
+          "description": "A natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, and taxonomy. [Learn more here.](https://en.wikipedia.org/wiki/Biology)",
           "interestType": "non-cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Biology"
         },
         {
           "name": "C and C++",
           "slug": "c",
-          "description": "C is a general-purpose, imperative computer programming language, supporting structured programming, lexical variable scope and recursion, and includes a static type system that prevents many unintended operations. By design, C provides constructs that map efficiently to typical machine instructions, and therefore it has found lasting use in applications that had formerly been coded in assembly language. C++ is an object-oriented extension of C.",
+          "description": "C is a general-purpose, imperative computer programming language, supporting structured programming, lexical variable scope and recursion, and includes a static type system that prevents many unintended operations. By design, C provides constructs that map efficiently to typical machine instructions, and therefore it has found lasting use in applications that had formerly been coded in assembly language. C++ is an object-oriented extension of C. [Learn more here.](https://en.wikipedia.org/wiki/C_(programming_language))",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/C_(programming_language)"
         },
         {
           "name": "C#",
           "slug": "c-sharp",
-          "description": "C# is a general purpose, object-oriented programming language developed by Microsoft for .NET.  It is now also used extensively for game development in the Unity platform.",
+          "description": "C# is a general purpose, object-oriented programming language developed by Microsoft for .NET.  It is now also used extensively for game development in the Unity platform. [Learn more here.](https://en.wikipedia.org/wiki/C_Sharp_(programming_language))",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/C_Sharp_(programming_language)"
         },
         {
           "name": "Civic Engagement",
           "slug": "civic-engagement",
-          "description": "Civic engagement means working to make a difference in the civic life of our communities and developing the combination of knowledge, skills, values and motivation to make that difference. It means promoting the quality of life in a community, through both political and non-political processes.",
+          "description": "Civic engagement means working to make a difference in the civic life of our communities and developing the combination of knowledge, skills, values and motivation to make that difference. It means promoting the quality of life in a community, through both political and non-political processes. [Learn more here.](https://en.wikipedia.org/wiki/Civic_engagement)",
           "interestType": "non-cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Civic_engagement"
         },
         {
           "name": "Cognitive Science",
           "slug": "cognitive-science",
-          "description": "Cognitive science is the interdisciplinary scientific study of the mind and its processes. It examines what cognition is, what it does and how it works. It includes research on intelligence and behaviour, especially focusing on how information is represented, processed, and transformed (in faculties such as perception, language, memory, attention, reasoning, and emotion) within nervous systems (humans or other animals) and machines (e.g. computers). Cognitive science includes multiple research disciplines, including psychology, artificial intelligence, philosophy, neuroscience, linguistics, and anthropology.",
+          "description": "Cognitive science is the interdisciplinary scientific study of the mind and its processes. It examines what cognition is, what it does and how it works. It includes research on intelligence and behaviour, especially focusing on how information is represented, processed, and transformed (in faculties such as perception, language, memory, attention, reasoning, and emotion) within nervous systems (humans or other animals) and machines (e.g. computers). Cognitive science includes multiple research disciplines, including psychology, artificial intelligence, philosophy, neuroscience, linguistics, and anthropology. [Learn more here.](https://en.wikipedia.org/wiki/Cognitive_science)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Cognitive_science"
         },
         {
           "name": "Computer Architecture",
           "slug": "computer-architecture",
-          "description": "Computer architecture describes the functionality, organization, and implementation of computer systems. Some architectures define the capabilities and programming model of a computer but not a particular implementation. Others include instruction set design, micro-architecture design, logic design, and implementation. Computer architecture can focus on hardware or can include both hardware and software.",
+          "description": "Computer architecture describes the functionality, organization, and implementation of computer systems. Some architectures define the capabilities and programming model of a computer but not a particular implementation. Others include instruction set design, micro-architecture design, logic design, and implementation. Computer architecture can focus on hardware or can include both hardware and software. [Learn more here.](https://en.wikipedia.org/wiki/Computer_architecture)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Computer_architecture"
         },
         {
           "name": "Computer Ethics",
           "slug": "computer-ethics",
-          "description": "Computer Ethics is a part of practical philosophy which concerns with how computing professionals should make decisions regarding professional and social conduct. Computer ethics can inform issues such as copyright infringement, privacy, piracy, and social informatics.",
+          "description": "Computer Ethics is a part of practical philosophy which concerns with how computing professionals should make decisions regarding professional and social conduct. Computer ethics can inform issues such as copyright infringement, privacy, piracy, and social informatics. [Learn more here.](https://en.wikipedia.org/wiki/Computer_ethics)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Computer_ethics"
         },
         {
           "name": "Computer Graphics",
           "slug": "computer-graphics",
-          "description": "Computer graphics are pictures and movies created using computers - usually referring to image data created by a computer specifically with help from specialized graphical hardware and software. Important topics in computer graphics include user interface design, sprite graphics, vector graphics, 3D modeling, shaders, GPU design, and computer vision. The overall methodology depends heavily on the sciences of geometry, optics, and physics. Computer graphic development has had a significant impact on many types of media and has revolutionized animation, movies, advertising, video games, and graphic design generally.",
+          "description": "Computer graphics are pictures and movies created using computers - usually referring to image data created by a computer specifically with help from specialized graphical hardware and software. Important topics in computer graphics include user interface design, sprite graphics, vector graphics, 3D modeling, shaders, GPU design, and computer vision. The overall methodology depends heavily on the sciences of geometry, optics, and physics. Computer graphic development has had a significant impact on many types of media and has revolutionized animation, movies, advertising, video games, and graphic design generally. [Learn more here.](https://en.wikipedia.org/wiki/Computer_graphics)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Computer_graphics"
         },
         {
           "name": "Computer Vision",
           "slug": "computer-vision",
-          "description": "Computer vision is a field that includes methods for acquiring, processing, analyzing, and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information that can be used to take action. A common theme is to duplicate the abilities of human vision by electronically perceiving and understanding an image. Subdomains of computer vision include scene reconstruction, event detection, video tracking, object recognition, object pose estimation, learning, indexing, motion estimation, and image restoration.",
+          "description": "Computer vision is a field that includes methods for acquiring, processing, analyzing, and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information that can be used to take action. A common theme is to duplicate the abilities of human vision by electronically perceiving and understanding an image. Subdomains of computer vision include scene reconstruction, event detection, video tracking, object recognition, object pose estimation, learning, indexing, motion estimation, and image restoration. [Learn more here.](https://en.wikipedia.org/wiki/Computer_vision)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Computer_vision"
         },
         {
           "name": "C++",
           "slug": "cplusplus",
-          "description": "C++ is a general-purpose programming language. It has imperative, object-oriented and generic programming features, while also providing facilities for low-level memory manipulation. It was designed with a bias toward system programming and embedded, resource-constrained and large systems, with performance, efficiency and flexibility of use as its design highlights. Many other programming languages have been influenced by C++, including C#, Java, and newer versions of C (after 1998).",
+          "description": "C++ is a general-purpose programming language. It has imperative, object-oriented and generic programming features, while also providing facilities for low-level memory manipulation. It was designed with a bias toward system programming and embedded, resource-constrained and large systems, with performance, efficiency and flexibility of use as its design highlights. Many other programming languages have been influenced by C++, including C#, Java, and newer versions of C (after 1998). [Learn more here.](https://en.wikipedia.org/wiki/C_(programming_language))",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/C_(programming_language)"
         },
         {
           "name": "Cryptography",
           "slug": "cryptography",
-          "description": "Cryptography is the study of techniques for secure communication: constructing and analyzing protocols that prevent third parties or the public from reading private messages. Data confidentiality, data integrity, authentication, and non-repudiation are central to modern cryptography. Modern cryptography exists at the intersection of mathematics, computer science, and electrical engineering. Applications of cryptography include ATM cards, computer passwords, and electronic commerce.",
+          "description": "Cryptography is the study of techniques for secure communication: constructing and analyzing protocols that prevent third parties or the public from reading private messages. Data confidentiality, data integrity, authentication, and non-repudiation are central to modern cryptography. Modern cryptography exists at the intersection of mathematics, computer science, and electrical engineering. Applications of cryptography include ATM cards, computer passwords, and electronic commerce. [Learn more here.](https://en.wikipedia.org/wiki/Cryptography)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Cryptography"
         },
         {
           "name": "Data Science",
           "slug": "data-science",
-          "description": "Data science is an interdisciplinary field about processes and systems to extract knowledge or insights from data in various forms, either structured or unstructured. Data science employs techniques and theories drawn from many fields within the broad areas of mathematics, statistics, information science, and computer science, including signal processing, probability models, machine learning, statistical learning, data mining, database, data engineering, pattern recognition and learning, visualization, predictive analytics, uncertainty modeling, data warehousing, data compression, computer programming, artificial intelligence, and high performance computing. Methods that scale to big data are of particular interest in data science. Data science affects many domains, including machine translation, speech recognition, robotics, search engines, digital economy, but also the biological sciences, medical informatics, health care, social sciences and the humanities.",
+          "description": "Data science is an interdisciplinary field about processes and systems to extract knowledge or insights from data in various forms, either structured or unstructured. Data science employs techniques and theories drawn from many fields within the broad areas of mathematics, statistics, information science, and computer science, including signal processing, probability models, machine learning, statistical learning, data mining, database, data engineering, pattern recognition and learning, visualization, predictive analytics, uncertainty modeling, data warehousing, data compression, computer programming, artificial intelligence, and high performance computing. Methods that scale to big data are of particular interest in data science. Data science affects many domains, including machine translation, speech recognition, robotics, search engines, digital economy, but also the biological sciences, medical informatics, health care, social sciences and the humanities. [Learn more here.](https://en.wikipedia.org/wiki/Data_science)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Data_science"
         },
         {
           "name": "Data Visualization",
           "slug": "data-visualization",
-          "description": "Data visualization is both an art and a science. A primary goal of data visualization is to communicate information clearly and efficiently via statistical graphics, plots and information graphics. Numerical data may be encoded using dots, lines, or bars, to visually communicate a quantitative message. Effective visualization helps users analyze and reason about data and evidence. It makes complex data more accessible, understandable and usable.",
+          "description": "Data visualization is both an art and a science. A primary goal of data visualization is to communicate information clearly and efficiently via statistical graphics, plots and information graphics. Numerical data may be encoded using dots, lines, or bars, to visually communicate a quantitative message. Effective visualization helps users analyze and reason about data and evidence. It makes complex data more accessible, understandable and usable. [Learn more here.](https://en.wikipedia.org/wiki/Data_visualization)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Data_visualization"
         },
         {
           "name": "Databases",
           "slug": "databases",
-          "description": "A database is an organized collection of data. It includes schemas, tables, queries, reports, views and other objects. The data are typically organized to model aspects of reality in a way that supports processes requiring information, such as modelling the availability of rooms in hotels in a way that supports finding a hotel with vacancies. Access to these data is usually provided by a \"database management system\" (DBMS) consisting of an integrated set of computer software that allows users to interact with one or more databases and provides access to all of the data contained in the database (although restrictions may exist that limit access to particular data). The DBMS provides various functions that allow entry, storage and retrieval of large quantities of information and provides ways to manage how that information is organized.",
+          "description": "A database is an organized collection of data. It includes schemas, tables, queries, reports, views and other objects. The data are typically organized to model aspects of reality in a way that supports processes requiring information, such as modelling the availability of rooms in hotels in a way that supports finding a hotel with vacancies. Access to these data is usually provided by a \"database management system\" (DBMS) consisting of an integrated set of computer software that allows users to interact with one or more databases and provides access to all of the data contained in the database (although restrictions may exist that limit access to particular data). The DBMS provides various functions that allow entry, storage and retrieval of large quantities of information and provides ways to manage how that information is organized. [Learn more here.](https://en.wikipedia.org/wiki/Database)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Database"
         },
         {
           "name": ".NET",
           "slug": "dotNet",
-          "description": ".NET is a software framework developed by Microsoft that runs primarily on Microsoft Windows. It includes a large class library called Framework Class Library that provides user interface, data access, database connectivity, cryptography, web application development, numeric algorithms, and network communications.",
+          "description": ".NET is a software framework developed by Microsoft that runs primarily on Microsoft Windows. It includes a large class library called Framework Class Library that provides user interface, data access, database connectivity, cryptography, web application development, numeric algorithms, and network communications. [Learn more here.](https://www.microsoft.com/net/)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://www.microsoft.com/net/"
         },
         {
           "name": "Entrepreneurship",
           "slug": "entrepreneurship",
-          "description": "Entrepreneurship is the process of designing, launching and running a new business, such as a startup company offering a product, process or service. It requires the capacity and willingness to develop, organize, and manage a business venture along with any of its risks in order to make a profit. Entrepreneurs tend to be good at perceiving new business opportunities and they often exhibit positive biases in their perception (i.e., a bias towards finding new possibilities and seeing unmet market needs) and a pro-risk-taking attitude that makes them more likely to exploit the opportunity.",
+          "description": "Entrepreneurship is the process of designing, launching and running a new business, such as a startup company offering a product, process or service. It requires the capacity and willingness to develop, organize, and manage a business venture along with any of its risks in order to make a profit. Entrepreneurs tend to be good at perceiving new business opportunities and they often exhibit positive biases in their perception (i.e., a bias towards finding new possibilities and seeing unmet market needs) and a pro-risk-taking attitude that makes them more likely to exploit the opportunity. [Learn more here.](https://en.wikipedia.org/wiki/Entrepreneurship)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Entrepreneurship"
         },
         {
           "name": "Game Design",
           "slug": "game-design",
-          "description": "Game design is the art of applying design and aesthetics to create a game to facilitate interaction between players for entertainment or for medical, educational, or experimental purposes. Game design creates goals, rules, and challenges to produce desirable interactions among its participants and, possibly, spectators.",
+          "description": "Game design is the art of applying design and aesthetics to create a game to facilitate interaction between players for entertainment or for medical, educational, or experimental purposes. Game design creates goals, rules, and challenges to produce desirable interactions among its participants and, possibly, spectators. [Learn more here.](https://en.wikipedia.org/wiki/Game_design)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Game_design"
         },
         {
           "name": "Graphic Design",
           "slug": "graphic-design",
-          "description": "Graphic design is the process of visual communication and problem-solving using one or more of typography, photography and illustration.",
+          "description": "Graphic design is the process of visual communication and problem-solving using one or more of typography, photography and illustration. [Learn more here.](https://en.wikipedia.org/wiki/Graphic_design)",
           "interestType": "non-cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Graphic_design"
         },
         {
           "name": "Hardware",
           "slug": "hardware",
-          "description": "Computer hardware is the physical parts or components of a computer, such as the monitor, mouse, keyboard, computer data storage, hard disk drive (HDD), graphic cards, sound cards, memory (RAM), motherboard, and so on, all of which are tangible physical objects. By contrast, software is instructions that can be stored and run by hardware.",
+          "description": "Computer hardware is the physical parts or components of a computer, such as the monitor, mouse, keyboard, computer data storage, hard disk drive (HDD), graphic cards, sound cards, memory (RAM), motherboard, and so on, all of which are tangible physical objects. By contrast, software is instructions that can be stored and run by hardware. [Learn more here.](https://en.wikipedia.org/wiki/Computer_hardware)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Computer_hardware"
         },
         {
           "name": "Human-Computer Interaction",
           "slug": "hci",
-          "description": "Researchers in the field of HCI both observe the ways in which humans interact with computers and design technologies that let humans interact with computers in novel ways. Human-computer interaction is situated at the intersection of computer science, behavioral sciences, design, and media studies.",
+          "description": "Researchers in the field of HCI both observe the ways in which humans interact with computers and design technologies that let humans interact with computers in novel ways. Human-computer interaction is situated at the intersection of computer science, behavioral sciences, design, and media studies. [Learn more here.](https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction"
         },
         {
           "name": "High Performance Computing",
           "slug": "hpc",
-          "description": "High Performance Computing concerns the hardware and software capabilities required for effective use of \"supercomputers\". HPC techniques are needed for computationally intensive tasks in various fields, including quantum mechanics, weather forecasting, climate research, oil and gas exploration, molecular modeling (computing the structures and properties of chemical compounds, biological macromolecules, polymers, and crystals), and physical simulations (such as simulations of the early moments of the universe, airplane and spacecraft aerodynamics, the detonation of nuclear weapons, and nuclear fusion). Throughout their history, they have been essential in the field of cryptanalysis.",
+          "description": "High Performance Computing concerns the hardware and software capabilities required for effective use of \"supercomputers\". HPC techniques are needed for computationally intensive tasks in various fields, including quantum mechanics, weather forecasting, climate research, oil and gas exploration, molecular modeling (computing the structures and properties of chemical compounds, biological macromolecules, polymers, and crystals), and physical simulations (such as simulations of the early moments of the universe, airplane and spacecraft aerodynamics, the detonation of nuclear weapons, and nuclear fusion). Throughout their history, they have been essential in the field of cryptanalysis. [Learn more here.](https://en.wikipedia.org/wiki/Supercomputer)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Supercomputer"
         },
         {
           "name": "iOS",
           "slug": "ios",
-          "description": "iOS is a mobile operating system developed by Apple Inc. exclusively for its hardware. It is the OS for the iPhone, iPad, and iPod. As of January 2017, Apple's AppStore contains more than 2.2 million iOS applications.",
+          "description": "iOS is a mobile operating system developed by Apple Inc. exclusively for its hardware. It is the OS for the iPhone, iPad, and iPod. As of January 2017, Apple's AppStore contains more than 2.2 million iOS applications. [Learn more here.](http://www.apple.com/ios/",
           "interestType": "cs-disciplines",
-          "moreInformation": "http://www.apple.com/ios/"
         },
         {
           "name": "IT Management",
           "slug": "it-management",
-          "description": "IT management is the discipline whereby all of the information technology resources of a firm are managed in accordance with its needs and priorities. These resources may include tangible investments like computer hardware, software, data, networks and data centre facilities, as well as the staff who are hired to maintain them. Managing this responsibility within a company entails many of the basic management functions, like budgeting, staffing, change management, and organizing and controlling, along with other aspects that are unique to technology, like software design, network planning, tech support etc.",
+          "description": "IT management is the discipline whereby all of the information technology resources of a firm are managed in accordance with its needs and priorities. These resources may include tangible investments like computer hardware, software, data, networks and data centre facilities, as well as the staff who are hired to maintain them. Managing this responsibility within a company entails many of the basic management functions, like budgeting, staffing, change management, and organizing and controlling, along with other aspects that are unique to technology, like software design, network planning, tech support etc. [Learn more here.](https://en.wikipedia.org/wiki/Information_technology_management)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Information_technology_management"
         },
         {
           "name": "Java",
           "slug": "java",
-          "description": "Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers \"write once, run anywhere\", meaning that compiled Java code can run on all platforms that support Java without the need for recompilation. Java applications are typically compiled to bytecode that can run on any Java virtual machine regardless of computer architecture. As of 2016, Java is one of the most popular programming languages in use, particularly for client-server web applications, with a reported 9 million developers.",
+          "description": "Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers \"write once, run anywhere\", meaning that compiled Java code can run on all platforms that support Java without the need for recompilation. Java applications are typically compiled to bytecode that can run on any Java virtual machine regardless of computer architecture. As of 2016, Java is one of the most popular programming languages in use, particularly for client-server web applications, with a reported 9 million developers. [Learn more here.](https://en.wikipedia.org/wiki/Java_(programming_language))",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/Java_(programming_language)"
         },
         {
           "name": "Javascript",
           "slug": "javascript",
-          "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. Despite some syntactic similarities, JavaScript and Java are otherwise unrelated and have very different semantics. Alongside HTML and CSS, Javascript is one of the three core technologies of World Wide Web content production; the majority of websites employ it and it is supported by all modern Web browsers without plug-ins. JavaScript is prototype-based with first-class functions, making it a multi-paradigm language, supporting object-oriented, imperative, and functional programming styles. It has an API for working with text, arrays, dates and regular expressions, but does not include any I/O, such as networking, storage, or graphics facilities, relying for these upon the host environment in which it is embedded.",
+          "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. Despite some syntactic similarities, JavaScript and Java are otherwise unrelated and have very different semantics. Alongside HTML and CSS, Javascript is one of the three core technologies of World Wide Web content production; the majority of websites employ it and it is supported by all modern Web browsers without plug-ins. JavaScript is prototype-based with first-class functions, making it a multi-paradigm language, supporting object-oriented, imperative, and functional programming styles. It has an API for working with text, arrays, dates and regular expressions, but does not include any I/O, such as networking, storage, or graphics facilities, relying for these upon the host environment in which it is embedded. [Learn more here.](https://en.wikipedia.org/wiki/JavaScript)",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/JavaScript"
         },
         {
           "name": "Linux",
           "slug": "linux",
-          "description": "A Unix-like and mostly POSIX-compliant computer operating system (OS) assembled under the model of free and open-source software development and distribution. Linux was originally developed as a free operating system for personal computers based on the Intel x86 architecture, but has since been ported to more computer hardware platforms than any other operating system. Because of the dominance of Android on smartphones, Linux has the largest installed base of all general-purpose operating systems.",
+          "description": "A Unix-like and mostly POSIX-compliant computer operating system (OS) assembled under the model of free and open-source software development and distribution. Linux was originally developed as a free operating system for personal computers based on the Intel x86 architecture, but has since been ported to more computer hardware platforms than any other operating system. Because of the dominance of Android on smartphones, Linux has the largest installed base of all general-purpose operating systems. [Learn more here.](https://en.wikipedia.org/wiki/Linux)",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/Linux"
         },
         {
           "name": "Lisp",
           "slug": "lisp",
-          "description": "Lisp is a family of computer programming languages with a long history and a distinctive, fully parenthesized prefix notation. Originally specified in 1958, Lisp is the second-oldest high-level programming language in widespread use today; only Fortran is older (by one year). Lisp was originally created as a practical mathematical notation for computer programs, influenced by the notation of Alonzo Church's lambda calculus. It quickly became the favored programming language for artificial intelligence (AI) research. As one of the earliest programming languages, Lisp pioneered many ideas in computer science, including tree data structures, automatic storage management, dynamic typing, conditionals, higher-order functions, recursion, and the self-hosting compiler.",
+          "description": "Lisp is a family of computer programming languages with a long history and a distinctive, fully parenthesized prefix notation. Originally specified in 1958, Lisp is the second-oldest high-level programming language in widespread use today; only Fortran is older (by one year). Lisp was originally created as a practical mathematical notation for computer programs, influenced by the notation of Alonzo Church's lambda calculus. It quickly became the favored programming language for artificial intelligence (AI) research. As one of the earliest programming languages, Lisp pioneered many ideas in computer science, including tree data structures, automatic storage management, dynamic typing, conditionals, higher-order functions, recursion, and the self-hosting compiler. [Learn more here.](https://en.wikipedia.org/wiki/Lisp_(programming_language))",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/Lisp_(programming_language)"
         },
         {
           "name": "Machine Learning",
           "slug": "machine-learning",
-          "description": "Machine learning is a subfield of computer science that evolved from the study of pattern recognition and computational learning theory in artificial intelligence. Machine learning explores the study and construction of algorithms that can learn from and make predictions on data. Such algorithms operate by building a model from example inputs in order to make data-driven predictions or decisions expressed as outputs. Machine learning is employed in a range of computing tasks where designing and programming explicit algorithms is infeasible. Example applications include spam filtering, optical character recognition (OCR), search engines, and computer vision.",
+          "description": "Machine learning is a subfield of computer science that evolved from the study of pattern recognition and computational learning theory in artificial intelligence. Machine learning explores the study and construction of algorithms that can learn from and make predictions on data. Such algorithms operate by building a model from example inputs in order to make data-driven predictions or decisions expressed as outputs. Machine learning is employed in a range of computing tasks where designing and programming explicit algorithms is infeasible. Example applications include spam filtering, optical character recognition (OCR), search engines, and computer vision. [Learn more here.](https://en.wikipedia.org/wiki/Machine_learning)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Machine_learning"
         },
         {
           "name": "Mobile Computing",
           "slug": "mobile",
-          "description": "Mobile computing is human–computer interaction by which a computer is expected to be transported during normal usage, which allows for transmission of data, voice and video. Mobile computing involves mobile communication, mobile hardware, and mobile software. Communication issues include ad hoc networks and infrastructure networks as well as communication properties, protocols, data formats and concrete technologies. Hardware includes mobile devices or device components. Mobile software deals with the characteristics and requirements of mobile applications.",
+          "description": "Mobile computing is human–computer interaction by which a computer is expected to be transported during normal usage, which allows for transmission of data, voice and video. Mobile computing involves mobile communication, mobile hardware, and mobile software. Communication issues include ad hoc networks and infrastructure networks as well as communication properties, protocols, data formats and concrete technologies. Hardware includes mobile devices or device components. Mobile software deals with the characteristics and requirements of mobile applications. [Learn more here.](https://en.wikipedia.org/wiki/Mobile_computing)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Mobile_computing"
         },
         {
           "name": "Networks",
           "slug": "networks",
-          "description": "A computer network or data network is a telecommunications network which allows computers to exchange data. In computer networks, networked computing devices exchange data with each other using a data link. The connections between nodes are established using either cable media or wireless media. The best-known computer network is the Internet.",
+          "description": "A computer network or data network is a telecommunications network which allows computers to exchange data. In computer networks, networked computing devices exchange data with each other using a data link. The connections between nodes are established using either cable media or wireless media. The best-known computer network is the Internet. [Learn more here.](https://en.wikipedia.org/wiki/Computer_network)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Computer_network"
         },
         {
           "name": "Operating Systems",
           "slug": "operating-systems",
-          "description": "An operating system (OS) is system software that manages computer hardware and software resources and provides common services for computer programs. Examples of popular desktop operating systems include Apple OS X, Linux and its variants, and Microsoft Windows. So-called mobile operating systems include Android and iOS. Other classes of operating systems, such as real-time (RTOS), also exist.",
+          "description": "An operating system (OS) is system software that manages computer hardware and software resources and provides common services for computer programs. Examples of popular desktop operating systems include Apple OS X, Linux and its variants, and Microsoft Windows. So-called mobile operating systems include Android and iOS. Other classes of operating systems, such as real-time (RTOS), also exist. [Learn more here.](https://en.wikipedia.org/wiki/Operating_system)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Operating_system"
         },
         {
           "name": "Parallel Programming",
           "slug": "parallel-programming",
-          "description": "Parallel programming refers to a type of computation in which many calculations are carried out simultaneously, operating on the principle that large problems can often be divided into smaller ones, which are then solved at the same time. In some cases parallelism is transparent to the programmer, such as in bit-level or instruction-level parallelism, but explicitly parallel algorithms, particularly those that use concurrency, are more difficult to write than sequential ones, because concurrency introduces several new classes of potential software bugs, of which race conditions are the most common. Communication and synchronization between the different subtasks are typically some of the greatest obstacles to getting good parallel program performance.",
+          "description": "Parallel programming refers to a type of computation in which many calculations are carried out simultaneously, operating on the principle that large problems can often be divided into smaller ones, which are then solved at the same time. In some cases parallelism is transparent to the programmer, such as in bit-level or instruction-level parallelism, but explicitly parallel algorithms, particularly those that use concurrency, are more difficult to write than sequential ones, because concurrency introduces several new classes of potential software bugs, of which race conditions are the most common. Communication and synchronization between the different subtasks are typically some of the greatest obstacles to getting good parallel program performance. [Learn more here.](https://en.wikipedia.org/wiki/Parallel_computing)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Parallel_computing"
         },
         {
           "name": "Perl",
           "slug": "perl",
-          "description": "Perl is a family of high-level, general-purpose, interpreted, dynamic programming languages. Perl 5 is used for graphics programming, system administration, network programming, finance, bioinformatics, and other applications. It has been nicknamed \"the Swiss Army chainsaw of scripting languages\" because of its flexibility and power, and possibly also because of its \"ugliness\". In 1998, it was also referred to as the \"duct tape that holds the Internet together\", in reference to both its ubiquitous use as a glue language and its perceived inelegance.",
+          "description": "Perl is a family of high-level, general-purpose, interpreted, dynamic programming languages. Perl 5 is used for graphics programming, system administration, network programming, finance, bioinformatics, and other applications. It has been nicknamed \"the Swiss Army chainsaw of scripting languages\" because of its flexibility and power, and possibly also because of its \"ugliness\". In 1998, it was also referred to as the \"duct tape that holds the Internet together\", in reference to both its ubiquitous use as a glue language and its perceived inelegance. [Learn more here.](https://www.perl.org/)",
           "interestType": "technologies",
-          "moreInformation": "https://www.perl.org/"
         },
         {
           "name": "Prolog",
           "slug": "prolog",
-          "description": "Prolog is a general-purpose logic programming language associated with artificial intelligence and computational linguistics. Prolog has its roots in first-order logic, a formal logic, and unlike many other programming languages, Prolog is declarative: the program logic is expressed in terms of relations, represented as facts and rules. The language has been used for theorem proving, expert systems, as well as its original intended field of use, natural language processing.",
+          "description": "Prolog is a general-purpose logic programming language associated with artificial intelligence and computational linguistics. Prolog has its roots in first-order logic, a formal logic, and unlike many other programming languages, Prolog is declarative: the program logic is expressed in terms of relations, represented as facts and rules. The language has been used for theorem proving, expert systems, as well as its original intended field of use, natural language processing. [Learn more here.](https://en.wikipedia.org/wiki/Prolog)",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/Prolog"
         },
         {
           "name": "Psychology",
           "slug": "psychology",
-          "description": "The scientific study of the human mind and its functions, especially those affecting behavior in a given context.",
+          "description": "The scientific study of the human mind and its functions, especially those affecting behavior in a given context. [Learn more here.](https://en.wikipedia.org/wiki/Psychology)",
           "interestType": "non-cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Psychology"
         },
         {
           "name": "Python",
           "slug": "python",
-          "description": "Python is a widely used high-level, general-purpose, interpreted, dynamic programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C++ or Java. Python supports multiple programming paradigms, including object-oriented, imperative and functional programming or procedural styles. It features a dynamic type system and automatic memory management and has a large and comprehensive standard library.",
+          "description": "Python is a widely used high-level, general-purpose, interpreted, dynamic programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C++ or Java. Python supports multiple programming paradigms, including object-oriented, imperative and functional programming or procedural styles. It features a dynamic type system and automatic memory management and has a large and comprehensive standard library. [Learn more here.](https://www.python.org/)",
           "interestType": "technologies",
-          "moreInformation": "https://www.python.org/"
         },
         {
           "name": "R",
           "slug": "r",
-          "description": "R is a programming language and software environment that is widely used among statisticians and data miners for developing statistical software and data analysis. R and its libraries implement a wide variety of statistical and graphical techniques, including linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, and others.",
+          "description": "R is a programming language and software environment that is widely used among statisticians and data miners for developing statistical software and data analysis. R and its libraries implement a wide variety of statistical and graphical techniques, including linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, and others. [Learn more here.](https://en.wikipedia.org/wiki/R_(programming_language))",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/R_(programming_language)"
         },
         {
           "name": "Research",
           "slug": "research",
-          "description": "Research comprises \"creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications.\"",
+          "description": "Research comprises \"creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications.\" [Learn more here.](https://en.wikipedia.org/wiki/Research)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Research"
         },
         {
           "name": "Robotics",
           "slug": "robotics",
-          "description": "Robotics is the branch of mechanical engineering, electrical engineering and computer science that deals with the design, construction, operation, and application of robots, as well as computer systems for their control, sensory feedback, and information processing. Robots can take the place of humans in dangerous environments or manufacturing processes, or resemble humans in appearance, behaviour, and or cognition. Many robots are inspired by nature contributing to the field of bio-inspired robotics.",
+          "description": "Robotics is the branch of mechanical engineering, electrical engineering and computer science that deals with the design, construction, operation, and application of robots, as well as computer systems for their control, sensory feedback, and information processing. Robots can take the place of humans in dangerous environments or manufacturing processes, or resemble humans in appearance, behaviour, and or cognition. Many robots are inspired by nature contributing to the field of bio-inspired robotics. [Learn more here.](https://en.wikipedia.org/wiki/Robotics)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Robotics"
         },
         {
           "name": "Ruby",
           "slug": "ruby",
-          "description": "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. Ruby was influenced by Perl, Smalltalk, Eiffel, Ada, and Lisp. It supports multiple programming paradigms, including functional, object-oriented, and imperative. It also has a dynamic type system and automatic memory management. Ruby's creator, Yukihiro Matsumoto, has stated, \"I hope to see Ruby help every programmer in the world to be productive, and to enjoy programming, and to be happy. That is the primary purpose of Ruby language.\"",
+          "description": "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. Ruby was influenced by Perl, Smalltalk, Eiffel, Ada, and Lisp. It supports multiple programming paradigms, including functional, object-oriented, and imperative. It also has a dynamic type system and automatic memory management. Ruby's creator, Yukihiro Matsumoto, has stated, \"I hope to see Ruby help every programmer in the world to be productive, and to enjoy programming, and to be happy. That is the primary purpose of Ruby language.\" [Learn more here.](http://www.ruby-lang.org/en/)",
           "interestType": "technologies",
-          "moreInformation": "http://www.ruby-lang.org/en/"
         },
         {
           "name": "Security",
           "slug": "security",
-          "description": "Computer security, also known as cybersecurity or IT security, is the protection of information systems from theft or damage to the hardware, the software, and to the information on them, as well as from disruption or misdirection of the services they provide. It includes controlling physical access to the hardware, as well as protecting against harm that may come via network access, data and code injection, and due to malpractice by operators, whether intentional, accidental, or due to them being tricked into deviating from secure procedures.",
+          "description": "Computer security, also known as cybersecurity or IT security, is the protection of information systems from theft or damage to the hardware, the software, and to the information on them, as well as from disruption or misdirection of the services they provide. It includes controlling physical access to the hardware, as well as protecting against harm that may come via network access, data and code injection, and due to malpractice by operators, whether intentional, accidental, or due to them being tricked into deviating from secure procedures. [Learn more here.](https://en.wikipedia.org/wiki/Computer_security)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Computer_security"
         },
         {
           "name": "Software Engineering",
           "slug": "software-engineering",
-          "description": "The systematic application of scientific and technological knowledge, methods, and experience to the design, implementation, testing, and documentation of software. The discipline of software engineering was created to address poor quality of software, get projects exceeding time and budget under control, and ensure that software is built systematically, rigorously, measurably, on time, on budget, and within specification. In 2012, Software Engineering was ranked as the best job in the United States by CareerCast.com.",
+          "description": "The systematic application of scientific and technological knowledge, methods, and experience to the design, implementation, testing, and documentation of software. The discipline of software engineering was created to address poor quality of software, get projects exceeding time and budget under control, and ensure that software is built systematically, rigorously, measurably, on time, on budget, and within specification. In 2012, Software Engineering was ranked as the best job in the United States by CareerCast.com. [Learn more here.](https://en.wikipedia.org/wiki/Software_engineering)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Software_engineering"
         },
         {
           "name": "SQL",
           "slug": "sql",
-          "description": "SQL (Structured Query Language) is a special-purpose programming language designed for managing data held in a relational database management system , or for stream processing in a relational data stream management system. Originally based upon relational algebra and tuple relational calculus, SQL consists of a data definition language, data manipulation language, and a data control language. The scope of SQL includes data insert, query, update and delete, schema creation and modification, and data access control.",
+          "description": "SQL (Structured Query Language) is a special-purpose programming language designed for managing data held in a relational database management system , or for stream processing in a relational data stream management system. Originally based upon relational algebra and tuple relational calculus, SQL consists of a data definition language, data manipulation language, and a data control language. The scope of SQL includes data insert, query, update and delete, schema creation and modification, and data access control. [Learn more here.](https://en.wikipedia.org/wiki/SQL)",
           "interestType": "technologies",
-          "moreInformation": "https://en.wikipedia.org/wiki/SQL"
         },
         {
           "name": "Sustainability",
           "slug": "sustainability",
-          "description": "In ecology, sustainability (from sustain and ability) is the property of biological systems to remain diverse and productive indefinitely. Long-lived and healthy wetlands and forests are examples of sustainable biological systems. In more general terms, sustainability is the endurance of systems and processes. The organizing principle for sustainability is sustainable development, which includes the four interconnected domains: ecology, economics, politics and culture. Sustainability science is the study of sustainable development and environmental science.",
+          "description": "In ecology, sustainability (from sustain and ability) is the property of biological systems to remain diverse and productive indefinitely. Long-lived and healthy wetlands and forests are examples of sustainable biological systems. In more general terms, sustainability is the endurance of systems and processes. The organizing principle for sustainability is sustainable development, which includes the four interconnected domains: ecology, economics, politics and culture. Sustainability science is the study of sustainable development and environmental science. [Learn more here.](https://en.wikipedia.org/wiki/Sustainability)",
           "interestType": "non-cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Sustainability"
         },
         {
           "name": "Teaching",
           "slug": "teaching",
-          "description": "Teaching is the process of facilitating learning, or the acquisition of knowledge, skills, values, beliefs, and habits. Educational methods include storytelling, discussion, teaching, training, and directed research.",
+          "description": "Teaching is the process of facilitating learning, or the acquisition of knowledge, skills, values, beliefs, and habits. Educational methods include storytelling, discussion, teaching, training, and directed research. [Learn more here.](https://en.wikipedia.org/wiki/Education)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Education"
         },
         {
           "name": "Theory of computation",
           "slug": "theory-of-computation",
-          "description": "Theory of computation deals with how efficiently problems can be solved on a model of computation, using an algorithm. The field is divided into three major branches: automata theory and language, computability theory, and computational complexity theory, which are linked by the question: \"What are the fundamental capabilities and limitations of computers?\".",
+          "description": "Theory of computation deals with how efficiently problems can be solved on a model of computation, using an algorithm. The field is divided into three major branches: automata theory and language, computability theory, and computational complexity theory, which are linked by the question: \"What are the fundamental capabilities and limitations of computers?\". [Learn more here.](https://en.wikipedia.org/wiki/Theory_of_computation)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Theory_of_computation"
         },
         {
           "name": "Unity",
           "slug": "unity",
-          "description": "Unity is a cross-platform game engine developed by Unity Technologies and used to develop video games for PC, consoles, mobile devices and websites. First announced only for OS X, at Apple's Worldwide Developers Conference in 2005, it has since been extended to target 27 platforms. Nintendo provides free licenses of Unity 5 to all licensed Nintendo Developers along with their software development kits (SDKs) for the Wii U and Nintendo 3DS Family.",
+          "description": "Unity is a cross-platform game engine developed by Unity Technologies and used to develop video games for PC, consoles, mobile devices and websites. First announced only for OS X, at Apple's Worldwide Developers Conference in 2005, it has since been extended to target 27 platforms. Nintendo provides free licenses of Unity 5 to all licensed Nintendo Developers along with their software development kits (SDKs) for the Wii U and Nintendo 3DS Family. [Learn more here.](https://unity3d.com/)",
           "interestType": "technologies",
-          "moreInformation": "https://unity3d.com/"
         },
         {
           "name": "Virtual Reality",
           "slug": "virtual-reality",
-          "description": "Virtual reality (VR) typically refers to computer technologies that use software to generate realistic images, sounds and other sensations that replicate a real environment (or create an imaginary setting), and simulate a user's physical presence in this environment. VR has been defined as \"...a realistic and immersive simulation of a three-dimensional environment, created using interactive software and hardware, and experienced or controlled by movement of the body\" or as an \"immersive, interactive experience generated by a computer\".",
+          "description": "Virtual reality (VR) typically refers to computer technologies that use software to generate realistic images, sounds and other sensations that replicate a real environment (or create an imaginary setting), and simulate a user's physical presence in this environment. VR has been defined as \"...a realistic and immersive simulation of a three-dimensional environment, created using interactive software and hardware, and experienced or controlled by movement of the body\" or as an \"immersive, interactive experience generated by a computer\". [Learn more here.](https://en.wikipedia.org/wiki/Virtual_reality)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Virtual_reality"
         },
         {
           "name": "Web Development",
           "slug": "web-development",
-          "description": "In computing, a web application or web app is a client–server software application in which the client (or user interface) runs in a web browser. Common web applications include webmail, online retail sales, online auctions, wikis, instant messaging services and many other functions.",
+          "description": "In computing, a web application or web app is a client–server software application in which the client (or user interface) runs in a web browser. Common web applications include webmail, online retail sales, online auctions, wikis, instant messaging services and many other functions. [Learn more here.](https://en.wikipedia.org/wiki/Web_application)",
           "interestType": "cs-disciplines",
-          "moreInformation": "https://en.wikipedia.org/wiki/Web_application"
         }
       ]
     },
@@ -3821,7 +3758,7 @@
         {
           "name": "ACM ICPC",
           "slug": "acm-icpc",
-          "description": "The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of thousands of the finest students and faculty in computing disciplines at almost 2,736 universities from over 102 countries on six continents. \n\nThe contest fosters creativity, teamwork, and innovation in building new software programs, and enables students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious programming contest in the world.\n\nWikipedia: https://en.wikipedia.org/wiki/ACM_International_Collegiate_Programming_Contest",
+          "description": "The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of thousands of the finest students and faculty in computing disciplines at almost 2,736 universities from over 102 countries on six continents. \n\nThe contest fosters creativity, teamwork, and innovation in building new software programs, and enables students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious programming contest in the world. [Learn more here.](https://icpc.baylor.edu/) \n\nWikipedia: https://en.wikipedia.org/wiki/ACM_International_Collegiate_Programming_Contest",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -3841,13 +3778,12 @@
             "Spring-2019",
             "Spring-2020"
           ],
-          "moreInformation": "https://icpc.baylor.edu/",
           "independentStudy": false
         },
         {
           "name": "ACM Manoa",
           "slug": "acm-manoa",
-          "description": "The Association for Computing Machinery at Manoa is UH Manoa’s student chapter of the Association for Computing Machinery. We are a Registered Independent Organization (RIO) focused on providing opportunities and resources for our members’ personal and professional advancement.  ACM Manoa has 3 pillars: - social, professional, and technical.\n\n  * We hold social activities for our members to have fun as well as develop and strengthen their interpersonal relationships.\n\n  * We strive to connect our members to professionals in the industry, abroad and within the Honolulu community.\n\n  * We are largely comprised of aspiring professionals in the computing industry; accordingly, members in ACM Manoa are encouraged to join and create Special Interest Groups (SIG) and Playgrounds where they can collaborate on interesting projects.",
+          "description": "The Association for Computing Machinery at Manoa is UH Manoa’s student chapter of the Association for Computing Machinery. We are a Registered Independent Organization (RIO) focused on providing opportunities and resources for our members’ personal and professional advancement.  ACM Manoa has 3 pillars: - social, professional, and technical.\n\n  * We hold social activities for our members to have fun as well as develop and strengthen their interpersonal relationships.\n\n  * We strive to connect our members to professionals in the industry, abroad and within the Honolulu community.\n\n  * We are largely comprised of aspiring professionals in the computing industry; accordingly, members in ACM Manoa are encouraged to join and create Special Interest Groups (SIG) and Playgrounds where they can collaborate on interesting projects. [Learn more here.](http://acmanoa.github.io/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -3885,13 +3821,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://acmanoa.github.io/",
           "independentStudy": false
         },
         {
           "name": "ACM Manoa (Hardware)",
           "slug": "acm-manoa-hardware",
-          "description": "ACM is dedicated to providing its members with a range of professional, social, and technical activities. Movie nights, game nights, beach outings, hikes, tech talks, industry guest speaker presentations, hackathons, playgrounds, and demos – to name a few.\n\nThis special interest group focusses on hardware, embedded systems, technology stacks like Arduino and Raspberry PI.",
+          "description": "ACM is dedicated to providing its members with a range of professional, social, and technical activities. Movie nights, game nights, beach outings, hikes, tech talks, industry guest speaker presentations, hackathons, playgrounds, and demos – to name a few.\n\nThis special interest group focusses on hardware, embedded systems, technology stacks like Arduino and Raspberry PI. [Learn more here.](http://acmanoa.github.io/activities/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -3927,13 +3862,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://acmanoa.github.io/activities/",
           "independentStudy": false
         },
         {
           "name": "ACM Manoa (VR)",
           "slug": "acm-manoa-vr",
-          "description": "ACM is dedicated to providing its members with a range of professional, social, and technical activities. Movie nights, game nights, beach outings, hikes, tech talks, industry guest speaker presentations, hackathons, playgrounds, and demos – to name a few.\n\nThis special interest group focusses on virtual reality, including hardware such as Oculus Rift.",
+          "description": "ACM is dedicated to providing its members with a range of professional, social, and technical activities. Movie nights, game nights, beach outings, hikes, tech talks, industry guest speaker presentations, hackathons, playgrounds, and demos – to name a few.\n\nThis special interest group focusses on virtual reality, including hardware such as Oculus Rift. [Learn more here.](http://acmanoa.github.io/activities/)",
           "opportunityType": "club",
           "sponsor": "glau",
           "ice": {
@@ -3965,13 +3899,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://acmanoa.github.io/activities/",
           "independentStudy": false
         },
         {
           "name": "ACM Manoa (Web Development)",
           "slug": "acmanoa-web-development",
-          "description": "ACM is dedicated to providing its members with a range of professional, social, and technical activities. Movie nights, game nights, beach outings, hikes, tech talks, industry guest speaker presentations, hackathons, playgrounds, and demos – to name a few.\n\nThis special interest group focuses on web development.",
+          "description": "ACM is dedicated to providing its members with a range of professional, social, and technical activities. Movie nights, game nights, beach outings, hikes, tech talks, industry guest speaker presentations, hackathons, playgrounds, and demos – to name a few.\n\nThis special interest group focuses on web development. [Learn more here.](http://acmanoa.github.io/activities/)",
           "opportunityType": "club",
           "sponsor": "glau",
           "ice": {
@@ -4005,13 +3938,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://acmanoa.github.io/activities/",
           "independentStudy": false
         },
         {
           "name": "AllNet",
           "slug": "allnet",
-          "description": "My cellphone has a radio that could easily communicate with the radio in your cellphone. However, currently they do not, even when they are smartphones with wifi (802.11) capability. The AllNet project aims to allow personal devices to communicate directly with each other. We are looking for students who want to learn how to get different devices, both computers and cellphones/mobiles, to talk directly with each other. We are also interested in students who think they can adapt the current code to run as an app on their favorite mobile device.",
+          "description": "My cellphone has a radio that could easily communicate with the radio in your cellphone. However, currently they do not, even when they are smartphones with wifi (802.11) capability. The AllNet project aims to allow personal devices to communicate directly with each other. We are looking for students who want to learn how to get different devices, both computers and cellphones/mobiles, to talk directly with each other. We are also interested in students who think they can adapt the current code to run as an app on their favorite mobile device. [Learn more here.](http://alnt.org/)",
           "opportunityType": "project",
           "sponsor": "esb",
           "ice": {
@@ -4045,13 +3977,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://alnt.org/",
           "independentStudy": true
         },
         {
           "name": "Aloha.rb",
           "slug": "aloha-rb",
-          "description": "Aloha.rb is Hawaii's Ruby Community. We have monthly meetings, hackfests, presentations, contests and frequent pub nights.",
+          "description": "Aloha.rb is Hawaii's Ruby Community. We have monthly meetings, hackfests, presentations, contests and frequent pub nights. [Learn more here.](https://www.meetup.com/aloharb/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4078,13 +4009,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "https://www.meetup.com/aloharb/",
           "independentStudy": false
         },
         {
           "name": "HI-SEAS",
           "slug": "apps-for-high-latency-communication",
-          "description": "HI-SEAS (Hawaii Space Exploration Analog and Simulation) simulates the conditions of long-duration human space exploration. Due to the distance between Earth and Mars, it takes 4-24 minutes for a signal to get from one to the other. However, most communication software is designed for much lower latency. For this project, you will design and implement a communications/social-media app that can handle high latency gracefully.",
+          "description": "HI-SEAS (Hawaii Space Exploration Analog and Simulation) simulates the conditions of long-duration human space exploration. Due to the distance between Earth and Mars, it takes 4-24 minutes for a signal to get from one to the other. However, most communication software is designed for much lower latency. For this project, you will design and implement a communications/social-media app that can handle high latency gracefully. [Learn more here.](http://hi-seas.org)",
           "opportunityType": "project",
           "sponsor": "binsted",
           "ice": {
@@ -4116,13 +4046,12 @@
             "Fall-2020",
             "Summer-2020"
           ],
-          "moreInformation": "http://hi-seas.org",
           "independentStudy": true
         },
         {
           "name": "ASECOLab",
           "slug": "asecolab",
-          "description": "We are the security research lab at Information and Computer Sciences at University of Hawaii at Manoa. We are also still affiliated with Department of Computer Science at Royal Holloway University of London (where the first ASECOLab was founded in 2012).\n\nWe study how security is achieved through adaptation, and how  fortifications give an illusion of security. This has to do with economics, but also with cryptography (see the pictures above). Our research is thus more “interdisciplinary”, and perhaps riskier than most people like; but it’s huge fun.\n\nWe also teach SecSci (Security Science) courses and try to share the fun.",
+          "description": "We are the security research lab at Information and Computer Sciences at University of Hawaii at Manoa. We are also still affiliated with Department of Computer Science at Royal Holloway University of London (where the first ASECOLab was founded in 2012).\n\nWe study how security is achieved through adaptation, and how  fortifications give an illusion of security. This has to do with economics, but also with cryptography (see the pictures above). Our research is thus more “interdisciplinary”, and perhaps riskier than most people like; but it’s huge fun.\n\nWe also teach SecSci (Security Science) courses and try to share the fun. [Learn more here.](http://www.asecolab.org/)",
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
@@ -4147,13 +4076,12 @@
             "Spring-2020",
             "Summer-2020"
           ],
-          "moreInformation": "http://www.asecolab.org/",
           "independentStudy": false
         },
         {
           "name": "AT&T Hackathon",
           "slug": "att-iot-hackathon",
-          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\nIf so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech.",
+          "description": "Do you like to design and make things? Are you inspired by the power of technology to build the world around you?\n\nIf so, we want to see you in action. The AT&T Developer Program and The Dallas Entrepreneur Center is inviting you to innovate and build what’s next in technology. We’re looking for creative thinkers like you to join us at this special IoT focused hackathon. All skill levels are welcome! We need a wide variety skills and perspectives to create positive change. There will be prizes around Smart Cities, Mechatronics and Women in Tech. [Learn more here.](http://developer.ibm.com/iotplatform/events/att-iot-hackathon-dallas/)",
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
@@ -4176,14 +4104,13 @@
             "Spring-2020",
             "Spring-2021"
           ],
-          "moreInformation": "http://developer.ibm.com/iotplatform/events/att-iot-hackathon-dallas/",
           "independentStudy": false,
           "eventDate": "2016-11-18T00:00:00.000Z"
         },
         {
           "name": "Booz Allen Ideas Festival",
           "slug": "booz-allen-ideas-festival",
-          "description": "At the heart of every new idea lies \"What IF?\" It represents the untapped potential within us all, it dares us to think bigger, to think differently, and to think freely.\n\nBooz Allen is honored to be hosting the second annual Ideas Festival 2017 in Honolulu! Bring your big, new, inspiring ideas to us on January 28th at the Plaza Club in Honolulu.\n\nIdeas Festival is Booz Allen’s annual innovation event, providing an opportunity for you to join local community and government leaders, students, and Booz Allen Hamilton to Ideate, Inspire, and Interact, asking yourself, WHAT IF? We have an exciting event planned featuring speakers, panel discussions, and idea ‘pitch’ competitions from across the Hawaii community. Bring ideas from your work experience and areas of personal passion. IF17 topics will focus on Grid Resilience, Renewable Energy, Virtual Reality, Analytics and Workforce Development.",
+          "description": "At the heart of every new idea lies \"What IF?\" It represents the untapped potential within us all, it dares us to think bigger, to think differently, and to think freely.\n\nBooz Allen is honored to be hosting the second annual Ideas Festival 2017 in Honolulu! Bring your big, new, inspiring ideas to us on January 28th at the Plaza Club in Honolulu.\n\nIdeas Festival is Booz Allen’s annual innovation event, providing an opportunity for you to join local community and government leaders, students, and Booz Allen Hamilton to Ideate, Inspire, and Interact, asking yourself, WHAT IF? We have an exciting event planned featuring speakers, panel discussions, and idea ‘pitch’ competitions from across the Hawaii community. Bring ideas from your work experience and areas of personal passion. IF17 topics will focus on Grid Resilience, Renewable Energy, Virtual Reality, Analytics and Workforce Development. [Learn more here.](http://www.boozallen.com/insights/ideas/booz-allen-ideas-festival)",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -4203,13 +4130,12 @@
             "Spring-2019",
             "Spring-2020"
           ],
-          "moreInformation": "http://www.boozallen.com/insights/ideas/booz-allen-ideas-festival",
           "independentStudy": false
         },
         {
           "name": "Booz Allen Internship",
           "slug": "booz-allen-internship",
-          "description": "Booz Allen provides summer internship opportunities to talented undergraduates and graduate students. \n\nDuring the internship, you will spend the first week working in a group to figure out an idea, the next eight weeks developing it in a team, and the final week going to Washington DC to pitch your idea/prototype against the ones developed by other Booz-Allen interns across the country.\n\nIn the past, this 10 week internship paid approximately $10K.",
+          "description": "Booz Allen provides summer internship opportunities to talented undergraduates and graduate students. \n\nDuring the internship, you will spend the first week working in a group to figure out an idea, the next eight weeks developing it in a team, and the final week going to Washington DC to pitch your idea/prototype against the ones developed by other Booz-Allen interns across the country.\n\nIn the past, this 10 week internship paid approximately $10K. [Learn more here.](http://www.boozallen.com/careers/find-your-job/graduating-students/strategic-innovation-games)",
           "opportunityType": "internship",
           "sponsor": "johnson",
           "ice": {
@@ -4229,13 +4155,12 @@
             "Summer-2019",
             "Summer-2020"
           ],
-          "moreInformation": "http://www.boozallen.com/careers/find-your-job/graduating-students/strategic-innovation-games",
           "independentStudy": false
         },
         {
           "name": "CCDC",
           "slug": "ccdc",
-          "description": "The National Collegiate Cyber Defense Competition (NCCDC) is the championship event for the Collegiate Cyber Defense Competition system – the largest college-level cyber defense competition in the USA.[1] The event is held annually in the San Antonio area.\n\nIn an effort to help facilitate the development of a regular, national level cyber security exercise, the Center for Infrastructure Assurance and Security at the University of Texas at San Antonio (UTSA) hosted the first Collegiate Cyber Defense Competition for the Southwestern region in May 2005. On June 29, 2010, United States House legislature passed recognizing the National CCDC for promoting cyber security curriculum.\n\nWhile similar to other cyber defense competitions in many aspects, the NCCDC, is unique in that it focuses on the operational aspect of managing and protecting an existing network infrastructure. While other exercises examine the abilities of a group of students to design, configure, and protect a network over the course of an entire semester, this competition is focused on the more operational task of assuming administrative and protective duties for an existing commercial network. Teams are assessed based on their ability to detect and respond to outside threats, maintain availability of existing services such as mail servers and web servers, respond to business requests such as the addition or removal of additional services, and balance security needs against business needs.",
+          "description": "The National Collegiate Cyber Defense Competition (NCCDC) is the championship event for the Collegiate Cyber Defense Competition system – the largest college-level cyber defense competition in the USA.[1] The event is held annually in the San Antonio area.\n\nIn an effort to help facilitate the development of a regular, national level cyber security exercise, the Center for Infrastructure Assurance and Security at the University of Texas at San Antonio (UTSA) hosted the first Collegiate Cyber Defense Competition for the Southwestern region in May 2005. On June 29, 2010, United States House legislature passed recognizing the National CCDC for promoting cyber security curriculum.\n\nWhile similar to other cyber defense competitions in many aspects, the NCCDC, is unique in that it focuses on the operational aspect of managing and protecting an existing network infrastructure. While other exercises examine the abilities of a group of students to design, configure, and protect a network over the course of an entire semester, this competition is focused on the more operational task of assuming administrative and protective duties for an existing commercial network. Teams are assessed based on their ability to detect and respond to outside threats, maintain availability of existing services such as mail servers and web servers, respond to business requests such as the addition or removal of additional services, and balance security needs against business needs. [Learn more here.](http://www.nationalccdc.org/index.php/competition/competitors/ccdc-regionals)",
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
@@ -4257,13 +4182,12 @@
             "Spring-2012",
             "Spring-2021"
           ],
-          "moreInformation": "http://www.nationalccdc.org/index.php/competition/competitors/ccdc-regionals",
           "independentStudy": false
         },
         {
           "name": "Code for Hawaii",
           "slug": "code-for-hawaii",
-          "description": "Code for Hawaii is a Code for America Brigade. We are volunteers interested in open data, open knowledge, civic apps, data visualization, APIs and the application of technology to make our community better. We encourage civic engagement and collaboration with our local government. We hold weekly project nights (and a monthly all-hands meeting) to see how we can help make a difference in Hawaii. \n\nMain website: [http://codeforhawaii.org](http://codeforhawaii.org)\n\nOur projects range from events like National Day of Civic Hacking, to transit apps that help navigate Hawaii, submit FOIA requests, or adopt your local siren. \nIf you're passionate about civic technology, this is the meetup for you!",
+          "description": "Code for Hawaii is a Code for America Brigade. We are volunteers interested in open data, open knowledge, civic apps, data visualization, APIs and the application of technology to make our community better. We encourage civic engagement and collaboration with our local government. We hold weekly project nights (and a monthly all-hands meeting) to see how we can help make a difference in Hawaii. \n\nMain website: [http://codeforhawaii.org](http://codeforhawaii.org)\n\nOur projects range from events like National Day of Civic Hacking, to transit apps that help navigate Hawaii, submit FOIA requests, or adopt your local siren. \nIf you're passionate about civic technology, this is the meetup for you! [Learn more here.](https://www.meetup.com/Code-for-Hawaii/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4288,13 +4212,12 @@
             "Spring-2020",
             "Summer-2020"
           ],
-          "moreInformation": "https://www.meetup.com/Code-for-Hawaii/",
           "independentStudy": false
         },
         {
           "name": "CoE Career Day",
           "slug": "coe-career-day",
-          "description": "Career Day is a career fair that provides a great opportunity for current students in engineering, computer science, physics and math -- and now our engineering alumni -- to talk directly to recruiters from engineering and technical firms about many exciting opportunities. Over 60 companies and organizations regularly participate in Career Day.",
+          "description": "Career Day is a career fair that provides a great opportunity for current students in engineering, computer science, physics and math -- and now our engineering alumni -- to talk directly to recruiters from engineering and technical firms about many exciting opportunities. Over 60 companies and organizations regularly participate in Career Day. [Learn more here.](https://apply.eng.hawaii.edu/resume)",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -4319,13 +4242,12 @@
             "Spring-2020",
             "Fall-2020"
           ],
-          "moreInformation": "https://apply.eng.hawaii.edu/resume",
           "independentStudy": false
         },
         {
           "name": "Customer Analytics",
           "slug": "coursera-customer-analytics",
-          "description": "Data about our browsing and buying patterns are everywhere.  From credit card transactions and online shopping carts, to customer loyalty programs and user-generated ratings/reviews, there is a staggering amount of data that can be used to describe our past buying behaviors, predict future ones, and prescribe new ways to influence future purchasing decisions. In this course, four of Wharton’s top marketing professors will provide an overview of key areas of customer analytics: descriptive analytics, predictive analytics, prescriptive analytics, and their application to real-world business practices including Amazon, Google, and Starbucks to name a few. This course provides an overview of the field of analytics so that you can make informed business decisions. It is an introduction to the theory of customer analytics, and is not intended to prepare learners to perform customer analytics.",
+          "description": "Data about our browsing and buying patterns are everywhere.  From credit card transactions and online shopping carts, to customer loyalty programs and user-generated ratings/reviews, there is a staggering amount of data that can be used to describe our past buying behaviors, predict future ones, and prescribe new ways to influence future purchasing decisions. In this course, four of Wharton’s top marketing professors will provide an overview of key areas of customer analytics: descriptive analytics, predictive analytics, prescriptive analytics, and their application to real-world business practices including Amazon, Google, and Starbucks to name a few. This course provides an overview of the field of analytics so that you can make informed business decisions. It is an introduction to the theory of customer analytics, and is not intended to prepare learners to perform customer analytics. [Learn more here.](https://www.coursera.org/specializations/business-analytics)",
           "opportunityType": "online-learning",
           "sponsor": "johnson",
           "ice": {
@@ -4349,13 +4271,12 @@
             "Spring-2020",
             "Summer-2020"
           ],
-          "moreInformation": "https://www.coursera.org/specializations/business-analytics",
           "independentStudy": false
         },
         {
           "name": "Graphic Design",
           "slug": "coursera-graphic-design",
-          "description": "This Coursera online course is for those new to graphic design and interested in the process, historical context, and communication through image-making and typography. For those who want to have a starting point for further work in interface design, motion graphics, and editorial design, this course, will provide the core skill set and conceptual tools for “making and communicating” in the field of graphic design!",
+          "description": "This Coursera online course is for those new to graphic design and interested in the process, historical context, and communication through image-making and typography. For those who want to have a starting point for further work in interface design, motion graphics, and editorial design, this course, will provide the core skill set and conceptual tools for “making and communicating” in the field of graphic design! [Learn more here.](https://www.coursera.org/specializations/graphic-design)",
           "opportunityType": "online-learning",
           "sponsor": "johnson",
           "ice": {
@@ -4375,13 +4296,12 @@
             "Summer-2018",
             "Summer-2019"
           ],
-          "moreInformation": "https://www.coursera.org/specializations/graphic-design",
           "independentStudy": false
         },
         {
           "name": "Introduction to Big Data",
           "slug": "coursera-introduction-to-big-data",
-          "description": "Interested in increasing your knowledge of the Big Data landscape?  This Coursera online course is for those new to data science and interested in understanding why the Big Data Era has come to be.  It is for those who want to become conversant with the terminology and the core concepts behind big data problems, applications, and systems.  It is for those who want to start thinking about how Big Data might be useful in their business or career.  It provides an introduction to one of the most common frameworks, Hadoop, that has made big data analysis easier and more accessible -- increasing the potential for data to transform our world!",
+          "description": "Interested in increasing your knowledge of the Big Data landscape?  This Coursera online course is for those new to data science and interested in understanding why the Big Data Era has come to be.  It is for those who want to become conversant with the terminology and the core concepts behind big data problems, applications, and systems.  It is for those who want to start thinking about how Big Data might be useful in their business or career.  It provides an introduction to one of the most common frameworks, Hadoop, that has made big data analysis easier and more accessible -- increasing the potential for data to transform our world! [Learn more here.](https://www.coursera.org/specializations/big-data)",
           "opportunityType": "online-learning",
           "sponsor": "johnson",
           "ice": {
@@ -4399,13 +4319,12 @@
             "Summer-2019",
             "Summer-2020"
           ],
-          "moreInformation": "https://www.coursera.org/specializations/big-data",
           "independentStudy": false
         },
         {
           "name": "R Programming",
           "slug": "coursera-r-programming",
-          "description": "In this course you will learn how to program in R and how to use R for effective data analysis. You will learn how to install and configure software necessary for a statistical programming environment and describe generic programming language concepts as they are implemented in a high-level statistical language. The course covers practical issues in statistical computing which includes programming in R, reading data into R, accessing R packages, writing R functions, debugging, profiling R code, and organizing and commenting R code. Topics in statistical data analysis will provide working examples.",
+          "description": "In this course you will learn how to program in R and how to use R for effective data analysis. You will learn how to install and configure software necessary for a statistical programming environment and describe generic programming language concepts as they are implemented in a high-level statistical language. The course covers practical issues in statistical computing which includes programming in R, reading data into R, accessing R packages, writing R functions, debugging, profiling R code, and organizing and commenting R code. Topics in statistical data analysis will provide working examples. [Learn more here.](https://www.coursera.org/specializations/jhu-data-science)",
           "opportunityType": "online-learning",
           "sponsor": "johnson",
           "ice": {
@@ -4425,13 +4344,12 @@
             "Summer-2018",
             "Fall-2018"
           ],
-          "moreInformation": "https://www.coursera.org/specializations/jhu-data-science",
           "independentStudy": false
         },
         {
           "name": "CS Job",
           "slug": "cs-job",
-          "description": "Use this opportunity to indicate work at a paid job as a software developer or other activity directly related to computer science.",
+          "description": "Use this opportunity to indicate work at a paid job as a software developer or other activity directly related to computer science. [Learn more here.](https://www.indeed.com/q-Computer-Science-l-Hawaii-jobs.html)",
           "opportunityType": "internship",
           "sponsor": "johnson",
           "ice": {
@@ -4466,13 +4384,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "https://www.indeed.com/q-Computer-Science-l-Hawaii-jobs.html",
           "independentStudy": false
         },
         {
           "name": "Cyber Security for Automated Processes",
           "slug": "cyber-security-for-automated-processes",
-          "description": "This meetup is dedicated to all professionals involved in Cyber Security for Automated Processes and Control Systems including security for Operating Technology (OT), Industrial Control Systems (ICS), SCADA Systems, Transportation Systems, Building Control Systems (BCS), and even emerging Industrial Internet of Things (IIoT) systems. Our purpose is to connect the professionals in the Greater Honolulu area with real interest in or responsibility for the cyber security of these systems.\n\nOnce we have enough critical mass of interest in Honolulu, we will gather for purposes of education, information exchange, and discovery of new opportunities and, yes, perhaps a few happy hours! If you are interested in serving on a committee to help shape this meetup experience, please contact the organizers directly.",
+          "description": "This meetup is dedicated to all professionals involved in Cyber Security for Automated Processes and Control Systems including security for Operating Technology (OT), Industrial Control Systems (ICS), SCADA Systems, Transportation Systems, Building Control Systems (BCS), and even emerging Industrial Internet of Things (IIoT) systems. Our purpose is to connect the professionals in the Greater Honolulu area with real interest in or responsibility for the cyber security of these systems.\n\nOnce we have enough critical mass of interest in Honolulu, we will gather for purposes of education, information exchange, and discovery of new opportunities and, yes, perhaps a few happy hours! If you are interested in serving on a committee to help shape this meetup experience, please contact the organizers directly. [Learn more here.](https://www.meetup.com/Honolulu-Cyber-Security-for-Control-Systems/)",
           "opportunityType": "club",
           "sponsor": "glau",
           "ice": {
@@ -4491,13 +4408,12 @@
             "Summer-2018",
             "Fall-2018"
           ],
-          "moreInformation": "https://www.meetup.com/Honolulu-Cyber-Security-for-Control-Systems/",
           "independentStudy": false
         },
         {
           "name": "DAHI Internship",
           "slug": "dahi-internship",
-          "description": "The UH Digital Arts and Humanities Initiative (DAHI) explores the full potential of today’s digital resources and capabilities in the broad realm of the Arts and Humanities. The chief goal of the initiative is to provide open access for state-of-the-art instances of digital media, scholarship and performance. The DAHI community creates an environment of trust, so that faculty, students and community members with ideas can find collaborators and access resources to pursue a range of cross-disciplinary and multimedia projects.",
+          "description": "The UH Digital Arts and Humanities Initiative (DAHI) explores the full potential of today’s digital resources and capabilities in the broad realm of the Arts and Humanities. The chief goal of the initiative is to provide open access for state-of-the-art instances of digital media, scholarship and performance. The DAHI community creates an environment of trust, so that faculty, students and community members with ideas can find collaborators and access resources to pursue a range of cross-disciplinary and multimedia projects. [Learn more here.](http://dahi.manoa.hawaii.edu/)",
           "opportunityType": "internship",
           "sponsor": "glau",
           "ice": {
@@ -4513,13 +4429,12 @@
             "Spring-2017",
             "Summer-2017"
           ],
-          "moreInformation": "http://dahi.manoa.hawaii.edu/",
           "independentStudy": false
         },
         {
           "name": "Solar Energy Analytics",
           "slug": "data-analytics-for-solar-energy",
-          "description": "Integrating renewable energy to the power grid requires grid operators to balance energy generation with consumption. This project investigates the use of various data mining techniques to forecast solar irradiance using a variety of time-series data sources. We are looking for motivated students interested in data integration, fusion, mining and visualization.",
+          "description": "Integrating renewable energy to the power grid requires grid operators to balance energy generation with consumption. This project investigates the use of various data mining techniques to forecast solar irradiance using a variety of time-series data sources. We are looking for motivated students interested in data integration, fusion, mining and visualization. [Learn more here.](http://www2.hawaii.edu/~lipyeow/)",
           "opportunityType": "project",
           "sponsor": "lipyeow",
           "ice": {
@@ -4559,13 +4474,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://www2.hawaii.edu/~lipyeow/",
           "independentStudy": true
         },
         {
           "name": "Gen Cyber Internship",
           "slug": "gen-cyber-internship",
-          "description": "The GenCyber Hawai`i program provides summer cybersecurity camp experiences for students and teachers at the K-12 level. The goals of the program are to help all students understand correct and safe on-line behavior, increase diversity and interest in cybersecurity and careers in the cybersecurity workforce of the Nation, and improve teaching methods for delivering cybersecurity content in K-12 computer science curricula.\n\nOur vision is for the GenCyber program to be part of the solution to the shortfall of skilled cybersecurity professionals. Ensuring that enough young people are inspired to direct their talents in this area is critical to the future of our country’s national and economic security as we become even more reliant on cyber-based technology in every aspect of our daily lives.",
+          "description": "The GenCyber Hawai`i program provides summer cybersecurity camp experiences for students and teachers at the K-12 level. The goals of the program are to help all students understand correct and safe on-line behavior, increase diversity and interest in cybersecurity and careers in the cybersecurity workforce of the Nation, and improve teaching methods for delivering cybersecurity content in K-12 computer science curricula.\n\nOur vision is for the GenCyber program to be part of the solution to the shortfall of skilled cybersecurity professionals. Ensuring that enough young people are inspired to direct their talents in this area is critical to the future of our country’s national and economic security as we become even more reliant on cyber-based technology in every aspect of our daily lives. [Learn more here.](https://gencyber-hi.org/)",
           "opportunityType": "internship",
           "sponsor": "glau",
           "ice": {
@@ -4585,13 +4499,12 @@
             "Summer-2020",
             "Summer-2021"
           ],
-          "moreInformation": "https://gencyber-hi.org/",
           "independentStudy": false
         },
         {
           "name": "Internship",
           "slug": "generic-internship",
-          "description": "If you want to plan for an internship in the future, but not sure what company or what kind of work you'll want to do, then you can use this Opportunity as a \"placeholder\" in your degree plan.",
+          "description": "If you want to plan for an internship in the future, but not sure what company or what kind of work you'll want to do, then you can use this Opportunity as a \"placeholder\" in your degree plan. [Learn more here.](http://www.internships.com/computer-science)",
           "opportunityType": "internship",
           "sponsor": "johnson",
           "ice": {
@@ -4627,13 +4540,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://www.internships.com/computer-science",
           "independentStudy": false
         },
         {
           "name": "Research Project",
           "slug": "generic-project",
-          "description": "If you want to plan to participate in a research project in some future semester, but are not sure yet what project you want to work on, then you can add this Opportunity as a \"placeholder\" in your degree plan until you know more precisely what you want to do.",
+          "description": "If you want to plan to participate in a research project in some future semester, but are not sure yet what project you want to work on, then you can add this Opportunity as a \"placeholder\" in your degree plan until you know more precisely what you want to do. [Learn more here.](http://www.ics.hawaii.edu/research/research-areas/)",
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
@@ -4669,13 +4581,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://www.ics.hawaii.edu/research/research-areas/",
           "independentStudy": false
         },
         {
           "name": "Workshop or Conference",
           "slug": "generic-workshop",
-          "description": "If you attend a workshop or a conference, you can gain valuable insights as well as a few competency points!",
+          "description": "If you attend a workshop or a conference, you can gain valuable insights as well as a few competency points! [Learn more here.](http://honolulu.eventful.com/events/categories/conference)",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -4711,13 +4622,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://honolulu.eventful.com/events/categories/conference",
           "independentStudy": false
         },
         {
           "name": "Global Game Jam",
           "slug": "global-game-jam",
-          "description": "The Global Game Jam® (GGJ) is the world's largest game jam event (game creation) taking place around the world at physical locations. Think of it as a hackathon focused on game development. It is the growth of an idea that in today’s heavily connected world, we could come together, be creative, share experiences and express ourselves in a multitude of ways using video games – it is very universal. The weekend stirs a global creative buzz in games, while at the same time exploring the process of development, be it programming, iterative design, narrative exploration or artistic expression. It is all condensed into a 48 hour development cycle. The GGJ encourages people with all kinds of backgrounds to participate and contribute to this global spread of game development and creativity.",
+          "description": "The Global Game Jam® (GGJ) is the world's largest game jam event (game creation) taking place around the world at physical locations. Think of it as a hackathon focused on game development. It is the growth of an idea that in today’s heavily connected world, we could come together, be creative, share experiences and express ourselves in a multitude of ways using video games – it is very universal. The weekend stirs a global creative buzz in games, while at the same time exploring the process of development, be it programming, iterative design, narrative exploration or artistic expression. It is all condensed into a 48 hour development cycle. The GGJ encourages people with all kinds of backgrounds to participate and contribute to this global spread of game development and creativity. [Learn more here.](http://globalgamejam.org/)",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -4738,13 +4648,12 @@
             "Spring-2020",
             "Spring-2021"
           ],
-          "moreInformation": "http://globalgamejam.org/",
           "independentStudy": false
         },
         {
           "name": "Greyhats",
           "slug": "greyhats",
-          "description": "The ICS Grey Hats is a student-led, extracurricular organization focused on real-world training for cyber defense. Membership gives students an outstanding opportunity to learn and apply critical skills, and to share with others interested in modern security issues.\n\nThe Grey Hats is a Registered Independent Organization at the University of Hawai’i – Manoa, and fosters education in the fields of Information Assurance, Network Management, Cyber Security, and Security Ethics. Hosted by the Department of Information and Computer Sciences, the group provides students a venue for networking with industry and government, performing community outreach, and for practical application of security skills in a supportive environment.",
+          "description": "The ICS Grey Hats is a student-led, extracurricular organization focused on real-world training for cyber defense. Membership gives students an outstanding opportunity to learn and apply critical skills, and to share with others interested in modern security issues.\n\nThe Grey Hats is a Registered Independent Organization at the University of Hawai’i – Manoa, and fosters education in the fields of Information Assurance, Network Management, Cyber Security, and Security Ethics. Hosted by the Department of Information and Computer Sciences, the group provides students a venue for networking with industry and government, performing community outreach, and for practical application of security skills in a supportive environment. [Learn more here.](https://github.com/uhmgreyhats)",
           "opportunityType": "club",
           "sponsor": "glau",
           "ice": {
@@ -4781,13 +4690,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "https://github.com/uhmgreyhats",
           "independentStudy": false
         },
         {
           "name": "HACC",
           "slug": "hacc",
-          "description": "HACC is based on the concept of a hackathon, a problem-solving event that brings together creative individuals over a set duration. Hackathons serve a variety of purposes, from exploring a new technology or programming language to encouraging economic growth through technology development, and they are often sponsored by companies, nonprofit groups, and other organizations. But rather than the traditional around-the-clock development over a single day or weekend, HACC will offer an extended period for development over one month.\n\nThe kickoff event will include team formation, foundational training, and workshops. In addition, participants will select from a list of challenges themed around key problems facing the state, and then work over the next several weeks to develop their solutions. The expanded month-long timeframe is meant to encourage sustainable solutions that are appropriately matched with technologies and platforms in use or being considered by the state.",
+          "description": "HACC is based on the concept of a hackathon, a problem-solving event that brings together creative individuals over a set duration. Hackathons serve a variety of purposes, from exploring a new technology or programming language to encouraging economic growth through technology development, and they are often sponsored by companies, nonprofit groups, and other organizations. But rather than the traditional around-the-clock development over a single day or weekend, HACC will offer an extended period for development over one month.\n\nThe kickoff event will include team formation, foundational training, and workshops. In addition, participants will select from a list of challenges themed around key problems facing the state, and then work over the next several weeks to develop their solutions. The expanded month-long timeframe is meant to encourage sustainable solutions that are appropriately matched with technologies and platforms in use or being considered by the state. [Learn more here.](https://hacc.devpost.com/)",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -4804,13 +4712,12 @@
             "Fall-2018",
             "Fall-2019"
           ],
-          "moreInformation": "https://hacc.devpost.com/",
           "independentStudy": false
         },
         {
           "name": "Hawaii Hacker Hours",
           "slug": "hawaii-hacker-hours",
-          "description": "Hacker Hours are free office hours for information security\n\nThe format is super simple: you come with your questions or concerns and we answer it. Topics such as Penetration Testing, Threat Modeling, Security Operations & Architecture, Risk Management, Incident Response, and much more.",
+          "description": "Hacker Hours are free office hours for information security\n\nThe format is super simple: you come with your questions or concerns and we answer it. Topics such as Penetration Testing, Threat Modeling, Security Operations & Architecture, Risk Management, Incident Response, and much more. [Learn more here.](https://www.meetup.com/hihackerhours/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4829,13 +4736,12 @@
             "Summer-2018",
             "Fall-2018"
           ],
-          "moreInformation": "https://www.meetup.com/hihackerhours/",
           "independentStudy": false
         },
         {
           "name": "Hawaii Open Data",
           "slug": "hawaii-open-data",
-          "description": "Hawaii Open Data, is a non-profit organization dedicated to advancing the adoption of open data/API standards and the development of solutions capitalizing on open data in Hawaii. We focus on helping organizations leverage open data as an asset.\n\nWe accomplish this through education and improving data accessibility and integrity in support of public/private collaboration, government transparency, and civic engagement. Our interest in data includes government datasets but extends into the fields of technology, energy, health, education, media, science, labor, agriculture, economic development, and the environment.",
+          "description": "Hawaii Open Data, is a non-profit organization dedicated to advancing the adoption of open data/API standards and the development of solutions capitalizing on open data in Hawaii. We focus on helping organizations leverage open data as an asset.\n\nWe accomplish this through education and improving data accessibility and integrity in support of public/private collaboration, government transparency, and civic engagement. Our interest in data includes government datasets but extends into the fields of technology, energy, health, education, media, science, labor, agriculture, economic development, and the environment. [Learn more here.](http://hawaiiopendata.com/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4860,13 +4766,12 @@
             "Summer-2019",
             "Fall-2019"
           ],
-          "moreInformation": "http://hawaiiopendata.com/",
           "independentStudy": false
         },
         {
           "name": "Hawaii Virtual Reality",
           "slug": "hawaii-virtual-reality",
-          "description": "Hawaii VR (HIVR) is a group for developers, makers, hackers, enthusiasts, gamers, entrepreneurs, and investors in Hawaii to meet and collaborate with each other to make the future of VR happen today. Recent innovations such as the Oculus Rift (immersive low cost HMD), Kinect (full body motion capture), Razer Hydra (low latency 1:1 positional tracking), and Virtuix Omni (omnidirectional treadmill) are making new experiences possible that simply could not exist until now. Come join us as we learn, grow, and play together.",
+          "description": "Hawaii VR (HIVR) is a group for developers, makers, hackers, enthusiasts, gamers, entrepreneurs, and investors in Hawaii to meet and collaborate with each other to make the future of VR happen today. Recent innovations such as the Oculus Rift (immersive low cost HMD), Kinect (full body motion capture), Razer Hydra (low latency 1:1 positional tracking), and Virtuix Omni (omnidirectional treadmill) are making new experiences possible that simply could not exist until now. Come join us as we learn, grow, and play together. [Learn more here.](https://www.meetup.com/HawaiiVR/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4885,13 +4790,12 @@
             "Summer-2018",
             "Fall-2018"
           ],
-          "moreInformation": "https://www.meetup.com/HawaiiVR/",
           "independentStudy": false
         },
         {
           "name": "HI Capacity",
           "slug": "hicapacity",
-          "description": "HI Capacity is a \"makerspace\" or \"hackerspace\": a community-operated physical place where people can meet and work on their projects. HI Capacity members are interested in hardware, software, art and the synergies between them. HI Capacity hosts social events, technical presentations, and soft skill workshops to support a vibrant technology sector in Hawaii while also trying to enrich other sectors with our skills in technology. We cater to all skill levels from hobbyist to student to senior professional.",
+          "description": "HI Capacity is a \"makerspace\" or \"hackerspace\": a community-operated physical place where people can meet and work on their projects. HI Capacity members are interested in hardware, software, art and the synergies between them. HI Capacity hosts social events, technical presentations, and soft skill workshops to support a vibrant technology sector in Hawaii while also trying to enrich other sectors with our skills in technology. We cater to all skill levels from hobbyist to student to senior professional. [Learn more here.](https://hicapacity.org/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4921,13 +4825,12 @@
             "Spring-2020",
             "Summer-2020"
           ],
-          "moreInformation": "https://hicapacity.org/",
           "independentStudy": false
         },
         {
           "name": "HNL Tech4Good",
           "slug": "hnl-tech4good",
-          "description": "What you'll get out of hnltech4good events: \n\nNonprofit staffers will find a friendly, welcoming atmosphere for those not experienced with technology, and many chances to ask questions of tech-experienced nonprofits and experts.\n\nTechies will find opportunities to hear the real-world stories of nonprofit clients, and put their own expertise to social good — as well as the potential for lasting relationships (be they paid or volunteer) with leading organizations in our community.\n\nActivists and community organizers will see and be given the chance to present on successful uses of technology for social change. We'll explore how technology can help support activism and where activism can push it forward.\n\nhnltech4good is sponsored by TechSoup's NetSquared Local. Join us!",
+          "description": "What you'll get out of hnltech4good events: \n\nNonprofit staffers will find a friendly, welcoming atmosphere for those not experienced with technology, and many chances to ask questions of tech-experienced nonprofits and experts.\n\nTechies will find opportunities to hear the real-world stories of nonprofit clients, and put their own expertise to social good — as well as the potential for lasting relationships (be they paid or volunteer) with leading organizations in our community.\n\nActivists and community organizers will see and be given the chance to present on successful uses of technology for social change. We'll explore how technology can help support activism and where activism can push it forward.\n\nhnltech4good is sponsored by TechSoup's NetSquared Local. Join us! [Learn more here.](https://www.meetup.com/hnltech4good/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4947,13 +4850,12 @@
             "Summer-2018",
             "Fall-2018"
           ],
-          "moreInformation": "https://www.meetup.com/hnltech4good/",
           "independentStudy": false
         },
         {
           "name": "Hon New Tech",
           "slug": "hon-new-tech",
-          "description": "Hon New Tech is a quarterly technology event and networking mixer for anyone interested in the local tech and startup scene. Hon New Tech’s stage is a platform for young startups and established companies alike, to show off what they’ve been working on in front of a room full of people who actually care.",
+          "description": "Hon New Tech is a quarterly technology event and networking mixer for anyone interested in the local tech and startup scene. Hon New Tech’s stage is a platform for young startups and established companies alike, to show off what they’ve been working on in front of a room full of people who actually care. [Learn more here.](https://www.meetup.com/Honolulu-New-Tech-Meetup/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -4972,13 +4874,12 @@
             "Summer-2018",
             "Fall-2018"
           ],
-          "moreInformation": "https://www.meetup.com/Honolulu-New-Tech-Meetup/",
           "independentStudy": false
         },
         {
           "name": "AI XPRIZE",
           "slug": "ibm-watson-ai-xprize",
-          "description": "The IBM Watson AI XPRIZE is a $5 million competition, challenging teams globally, to develop and demonstrate how humans can collaborate with powerful AI technologies to tackle the world’s grand challenges. The prize aims to accelerate adoption of AI technologies, and spark creative, innovative and audacious demonstrations of the technology that are truly scalable and solve societal grand challenges. To encourage innovation in any form, the competition is an open challenge in AI. Rather than set a single, universal goal for all teams, this competition will invite teams to each declare their own goal and solution to a grand challenge.\n\nThe IBM Watson AI XPRIZE is a four-year competition with annual milestone competitions in 2017, 2018, and 2019. The top three finalists will compete for the Grand Prize at TED 2020.",
+          "description": "The IBM Watson AI XPRIZE is a $5 million competition, challenging teams globally, to develop and demonstrate how humans can collaborate with powerful AI technologies to tackle the world’s grand challenges. The prize aims to accelerate adoption of AI technologies, and spark creative, innovative and audacious demonstrations of the technology that are truly scalable and solve societal grand challenges. To encourage innovation in any form, the competition is an open challenge in AI. Rather than set a single, universal goal for all teams, this competition will invite teams to each declare their own goal and solution to a grand challenge.\n\nThe IBM Watson AI XPRIZE is a four-year competition with annual milestone competitions in 2017, 2018, and 2019. The top three finalists will compete for the Grand Prize at TED 2020. [Learn more here.](http://developer.ibm.com/event/ibm-watson-ai-xprize/)",
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
@@ -5004,13 +4905,12 @@
             "Fall-2019",
             "Spring-2020"
           ],
-          "moreInformation": "http://developer.ibm.com/event/ibm-watson-ai-xprize/",
           "independentStudy": false
         },
         {
           "name": "Apple iOS Dev Meetup",
           "slug": "ios-dev-meetup",
-          "description": "This group was created to provide a regular meetup for iOS developers actively working on projects. The purpose is to work together to support one another in bringing our ideas to life. The goals are also to meet people in the Honolulu, Hawaii area who are doing the same type of work (programming and creating apps for the iPhone, iPad, and Mac) and to have fun.\n\nThis meetup is for:\n\n  * iPhone Developers of all levels. \n\n  * People who are interested in getting their hands dirty in code.\n\n  * People just starting to develop for iOS who do not have much experience.\n\n  * Developers on other platforms (Android, etc) who are interested in learning about iOS development.\n\n  * Developers looking for specific help in adding functionality to their app.",
+          "description": "This group was created to provide a regular meetup for iOS developers actively working on projects. The purpose is to work together to support one another in bringing our ideas to life. The goals are also to meet people in the Honolulu, Hawaii area who are doing the same type of work (programming and creating apps for the iPhone, iPad, and Mac) and to have fun.\n\nThis meetup is for:\n\n  * iPhone Developers of all levels. \n\n  * People who are interested in getting their hands dirty in code.\n\n  * People just starting to develop for iOS who do not have much experience.\n\n  * Developers on other platforms (Android, etc) who are interested in learning about iOS development.\n\n  * Developers looking for specific help in adding functionality to their app. [Learn more here.](https://www.meetup.com/Hawaii-iOS-Developer-Meetup/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -5035,13 +4935,12 @@
             "Fall-2020",
             "Summer-2020"
           ],
-          "moreInformation": "https://www.meetup.com/Hawaii-iOS-Developer-Meetup/",
           "independentStudy": false
         },
         {
           "name": "ITMA",
           "slug": "itma",
-          "description": "The mission of the Information Technology Management Association is to strengthen the social and professional network between members in ITMA, Alumni and professionals by focusing on the development of quality relationships.\n\nThe ITMA is motivated and dedicated to provide its members social and professional relationships, provide access to technical resources, and be an example of a growing technical environment to foster career development.\n\nThe Purposes of the Information Technology Management Association are to:\n\nProvide a better understanding of the nature and functions of information systems and related areas.\nPrepare its members for a career in information technology.\nProliferate interaction between members and the business community.\nPropagate a communication link between its members and faculty.\nProduce lasting-relationships between its members.",
+          "description": "The mission of the Information Technology Management Association is to strengthen the social and professional network between members in ITMA, Alumni and professionals by focusing on the development of quality relationships.\n\nThe ITMA is motivated and dedicated to provide its members social and professional relationships, provide access to technical resources, and be an example of a growing technical environment to foster career development.\n\nThe Purposes of the Information Technology Management Association are to:\n\nProvide a better understanding of the nature and functions of information systems and related areas.\nPrepare its members for a career in information technology.\nProliferate interaction between members and the business community.\nPropagate a communication link between its members and faculty.\nProduce lasting-relationships between its members. [Learn more here.](http://itmahawaii.com/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -5065,13 +4964,12 @@
             "Summer-2019",
             "Fall-2019"
           ],
-          "moreInformation": "http://itmahawaii.com/",
           "independentStudy": false
         },
         {
           "name": "Kaggle",
           "slug": "kaggle",
-          "description": "[Kaggle](https://www.kaggle.com/) is an online service that hosts data science and machine learning competitions, as well as a job board with listings for analysts, programmers, and more.  If you are interested in a career in data science, you should definitely get involved with Kaggle!\n\nKaggle, which was recently acquired by Google, has been used by over 800,000 data scientists to explore, understand, and contribute to machine learning and data analytics.\n\nThe Kaggle community has worked together to utilize machine learning for everything from essay marking to diagnosing heart failure. Last August, Kaggle launched an open data platform in which scientists have contributed a range of datasets relating to everything from credit card fraud to H-1B Visa petitions and tsunami wave rates.\n\nTo gain ICE points for this opportunity, join Kaggle, and then work through the [Titanic](https://www.kaggle.com/c/titanic) competition.",
+          "description": "[Kaggle](https://www.kaggle.com/) is an online service that hosts data science and machine learning competitions, as well as a job board with listings for analysts, programmers, and more.  If you are interested in a career in data science, you should definitely get involved with Kaggle!\n\nKaggle, which was recently acquired by Google, has been used by over 800,000 data scientists to explore, understand, and contribute to machine learning and data analytics.\n\nThe Kaggle community has worked together to utilize machine learning for everything from essay marking to diagnosing heart failure. Last August, Kaggle launched an open data platform in which scientists have contributed a range of datasets relating to everything from credit card fraud to H-1B Visa petitions and tsunami wave rates.\n\nTo gain ICE points for this opportunity, join Kaggle, and then work through the [Titanic](https://www.kaggle.com/c/titanic) competition. [Learn more here.](https://www.kaggle.com/)",
           "opportunityType": "online-learning",
           "sponsor": "johnson",
           "ice": {
@@ -5126,13 +5024,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "https://www.kaggle.com/",
           "independentStudy": false
         },
         {
           "name": "Lava Lab",
           "slug": "lava-lab",
-          "description": "The University of Hawaiʻi at Mānoa’s Laboratory for Advanced Visualization & Applications (LAVA) was founded in January 1, 2014 by Jason Leigh- director Emeritus of the Electronic Visualization Laboratory (EVL) at the University of Illinois at Chicago. The mission of LAVA is to conduct research and development in big data visualization techniques, and to apply these techniques in cutting edge domain science, engineering, and training applications.",
+          "description": "The University of Hawaiʻi at Mānoa’s Laboratory for Advanced Visualization & Applications (LAVA) was founded in January 1, 2014 by Jason Leigh- director Emeritus of the Electronic Visualization Laboratory (EVL) at the University of Illinois at Chicago. The mission of LAVA is to conduct research and development in big data visualization techniques, and to apply these techniques in cutting edge domain science, engineering, and training applications. [Learn more here.](http://lava.manoa.hawaii.edu/about/)",
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
@@ -5168,13 +5065,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://lava.manoa.hawaii.edu/about/",
           "independentStudy": false
         },
         {
           "name": "Open Power Quality",
           "slug": "open-power-quality",
-          "description": "The Open Power Quality project is designing custom hardware and software for low-cost, residential monitoring and cloud-based analysis of power quality. By better understanding power quality, we hope to enable more renewable energy in Hawaii and world-wide. We are looking for students who are interested in exploring circuit design, power quality algorithms, time series analysis, and/or web-based user interfaces.",
+          "description": "The Open Power Quality project is designing custom hardware and software for low-cost, residential monitoring and cloud-based analysis of power quality. By better understanding power quality, we hope to enable more renewable energy in Hawaii and world-wide. We are looking for students who are interested in exploring circuit design, power quality algorithms, time series analysis, and/or web-based user interfaces. [Learn more here.](http://openpowerquality.org)",
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
@@ -5207,13 +5103,12 @@
             "Spring-2020",
             "Summer-2020"
           ],
-          "moreInformation": "http://openpowerquality.org",
           "independentStudy": true
         },
         {
           "name": "Purple Mai'a",
           "slug": "purple-maia",
-          "description": "Purple Maiʻa Foundation is a startup technology education nonprofit founded by two Hawaiian men who’ve been successful in the tech industry and feel they have a kuleana to create access to empowering technology education for underserved youth in Hawaiʻi. Purple Maiʻa’s mission is to build channels of technological knowledge together with the Hawaiʻi’s youth in order to help communities thrive.\n\nIn 2014-2015 we ran a pilot year of after-school technology classes at Jarrett Middle School in Pālolo, and in 2015-2016 our classes are continuing at Jarrett and expanding to Stevenson Middle School and Kamaile Academy. Topics include circuitry, computer hardware and software, Minecraft ahupuaʻa, and modding. This year we’re also running a series of traveling workshops teaching javascript and xcode in different communities around Oʻahu and exposing more students to coding.\n\nWe target middle school kids because they’re at an age where they’re open and ready for learning coding basics, but we will eventually provide edtech opportunities throughout the course of education. The metaphor we use is the idea of a tech ʻauwai–a channel of tech knowledge that kids can flow along through school, interacting with and enriching their communities along the way.",
+          "description": "Purple Maiʻa Foundation is a startup technology education nonprofit founded by two Hawaiian men who’ve been successful in the tech industry and feel they have a kuleana to create access to empowering technology education for underserved youth in Hawaiʻi. Purple Maiʻa’s mission is to build channels of technological knowledge together with the Hawaiʻi’s youth in order to help communities thrive.\n\nIn 2014-2015 we ran a pilot year of after-school technology classes at Jarrett Middle School in Pālolo, and in 2015-2016 our classes are continuing at Jarrett and expanding to Stevenson Middle School and Kamaile Academy. Topics include circuitry, computer hardware and software, Minecraft ahupuaʻa, and modding. This year we’re also running a series of traveling workshops teaching javascript and xcode in different communities around Oʻahu and exposing more students to coding.\n\nWe target middle school kids because they’re at an age where they’re open and ready for learning coding basics, but we will eventually provide edtech opportunities throughout the course of education. The metaphor we use is the idea of a tech ʻauwai–a channel of tech knowledge that kids can flow along through school, interacting with and enriching their communities along the way. [Learn more here.](http://www.purplemaia.org/)",
           "opportunityType": "internship",
           "sponsor": "johnson",
           "ice": {
@@ -5232,13 +5127,12 @@
             "Summer-2019",
             "Summer-2020"
           ],
-          "moreInformation": "http://www.purplemaia.org/",
           "independentStudy": false
         },
         {
           "name": "Purple Prize",
           "slug": "purple-prize",
-          "description": "The PURPLE PRIZE is a contest for all ages, designed to push the limits in the way technology facilitates and amplifies the values of Aloha ʻĀina. The PURPLE PRIZE is designed to tap into Hawaiʻi’s creative resources to spur creativity and innovation and accelerate the rate of positive change. The PURPLE PRIZE challenges teams across Hawaiʻi to develop technology (hardware and/or software) that furthers Aloha ʻĀina in concert with a local, non-profit educational organization or cultural practitioners that aligns with these values and goals.",
+          "description": "The PURPLE PRIZE is a contest for all ages, designed to push the limits in the way technology facilitates and amplifies the values of Aloha ʻĀina. The PURPLE PRIZE is designed to tap into Hawaiʻi’s creative resources to spur creativity and innovation and accelerate the rate of positive change. The PURPLE PRIZE challenges teams across Hawaiʻi to develop technology (hardware and/or software) that furthers Aloha ʻĀina in concert with a local, non-profit educational organization or cultural practitioners that aligns with these values and goals. [Learn more here.](http://www.purpleprize.com/)",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -5255,13 +5149,12 @@
             "Fall-2017",
             "Fall-2018"
           ],
-          "moreInformation": "http://www.purpleprize.com/",
           "independentStudy": false
         },
         {
           "name": "PyHawaii",
           "slug": "py-hawaii",
-          "description": "PyHawaii is a community dedicated to the growth and use of the Python Programming Language in Honolulu, the Islands of Hawai'i and across the Pacific. Join us for tutorials, projects, mentoring, sprints and activities throughout the month. All skill levels are welcome! PyHawaii is your source for all things Python: * beginner training * advanced tradecraft * web development * data science and visualization * automation * system administration At PyHawaii, like PyCon, we are all about community, inclusivity and `ohana - so come join our meetup, where you will find friends, family and fantastic opportunities to learn, grow, contribute and advance your skills.",
+          "description": "PyHawaii is a community dedicated to the growth and use of the Python Programming Language in Honolulu, the Islands of Hawai'i and across the Pacific. Join us for tutorials, projects, mentoring, sprints and activities throughout the month. All skill levels are welcome! PyHawaii is your source for all things Python: * beginner training * advanced tradecraft * web development * data science and visualization * automation * system administration At PyHawaii, like PyCon, we are all about community, inclusivity and `ohana - so come join our meetup, where you will find friends, family and fantastic opportunities to learn, grow, contribute and advance your skills. [Learn more here.](https://www.meetup.com/PyHawaii-Python-Users-Group/)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -5288,13 +5181,12 @@
             "Spring-2020",
             "Fall-2020"
           ],
-          "moreInformation": "https://www.meetup.com/PyHawaii-Python-Users-Group/",
           "independentStudy": false
         },
         {
           "name": "SARP Internship",
           "slug": "sarp-internship",
-          "description": "The Student Airborne Research Program (SARP) is an eight-week summer program for rising senior undergraduate students to acquire hands-on research experience in all aspects of a scientific campaign using one or more NASA Airborne Science Program flying science laboratories (aircraft used for SARP include the DC-8, P-3B, Sherpa and ER-2). \n\nThe NASA Airborne Science Program mantains a fleet of aircraft used for studying Earth system processes, calibration/validation of space-borne observations, and prototyping instruments for possible satellite missions. SARP participants will assist in the operation of instruments onboard an aircraft to sample atmospheric chemicals, and/or to image land and water surfaces in multiple spectral bands.\n\nResearch areas include atmospheric chemistry, air quality, forest ecology, and ocean biology. Along with airborne data collection, students will participate in taking measurements at field sites. The program culminates with formal presentations of research results and conclusions.",
+          "description": "The Student Airborne Research Program (SARP) is an eight-week summer program for rising senior undergraduate students to acquire hands-on research experience in all aspects of a scientific campaign using one or more NASA Airborne Science Program flying science laboratories (aircraft used for SARP include the DC-8, P-3B, Sherpa and ER-2). \n\nThe NASA Airborne Science Program mantains a fleet of aircraft used for studying Earth system processes, calibration/validation of space-borne observations, and prototyping instruments for possible satellite missions. SARP participants will assist in the operation of instruments onboard an aircraft to sample atmospheric chemicals, and/or to image land and water surfaces in multiple spectral bands.\n\nResearch areas include atmospheric chemistry, air quality, forest ecology, and ocean biology. Along with airborne data collection, students will participate in taking measurements at field sites. The program culminates with formal presentations of research results and conclusions. [Learn more here.](https://earthscience.arc.nasa.gov/nsrc/sarp)",
           "opportunityType": "internship",
           "sponsor": "glau",
           "ice": {
@@ -5315,13 +5207,12 @@
             "Summer-2020",
             "Summer-2012"
           ],
-          "moreInformation": "https://earthscience.arc.nasa.gov/nsrc/sarp",
           "independentStudy": false
         },
         {
           "name": "Airline Security",
           "slug": "security-enhancement-of-commercial-airliner",
-          "description": "Malicious controllers can possibly manipulate a flight control system e.g. aircraft or drones. from various channels, e.g. autonomic control devices, remote cyber controller, or human operators. Thus, pilots could suicide the aircraft, the auto-pilot might be infected by malware, and air traffic controllers can mishandle the drone. To better mitigate the potential risks, we hope to propose theoretical framework model in physical, human and cyber triad, a more secure air traffic control system, and a more safe task allocation mechanism. Students who are interested in aviation, risk control, and human-machine interface are highly encouraged to apply.",
+          "description": "Malicious controllers can possibly manipulate a flight control system e.g. aircraft or drones. from various channels, e.g. autonomic control devices, remote cyber controller, or human operators. Thus, pilots could suicide the aircraft, the auto-pilot might be infected by malware, and air traffic controllers can mishandle the drone. To better mitigate the potential risks, we hope to propose theoretical framework model in physical, human and cyber triad, a more secure air traffic control system, and a more safe task allocation mechanism. Students who are interested in aviation, risk control, and human-machine interface are highly encouraged to apply. [Learn more here.](http://www2.hawaii.edu/~depengli/index.html)",
           "opportunityType": "project",
           "sponsor": "depengli",
           "ice": {
@@ -5354,13 +5245,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://www2.hawaii.edu/~depengli/index.html",
           "independentStudy": true
         },
         {
           "name": "Business Plan Competition",
           "slug": "shidler-bpc",
-          "description": "The annual Shidler Business Plan competition is an intense and unique semester-long learning opportunity for UH students who aspire to pursue a business venture. The competition provides mentorship, training and resources. Winners walk away with a wealth of business savvy and substantial cash prizes.",
+          "description": "The annual Shidler Business Plan competition is an intense and unique semester-long learning opportunity for UH students who aspire to pursue a business venture. The competition provides mentorship, training and resources. Winners walk away with a wealth of business savvy and substantial cash prizes. [Learn more here.](http://pace.shidler.hawaii.edu/bpc)",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -5381,13 +5271,12 @@
             "Spring-2019",
             "Spring-2020"
           ],
-          "moreInformation": "http://pace.shidler.hawaii.edu/bpc",
           "independentStudy": false
         },
         {
           "name": "Teaching or Tutoring",
           "slug": "teaching-or-tutoring",
-          "description": "There are opportunities to be a lab assistant in the ICS Department, or serve as a tutor in the Nat Sci Learning emporium.  If you want to gain experience teaching or tutoring, this opportunity is for you!",
+          "description": "There are opportunities to be a lab assistant in the ICS Department, or serve as a tutor in the Nat Sci Learning emporium.  If you want to gain experience teaching or tutoring, this opportunity is for you! [Learn more here.](http://cacm.acm.org/blogs/blog-cacm/189498-top-10-myths-about-teaching-computer-science/fulltext)",
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
@@ -5423,13 +5312,12 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://cacm.acm.org/blogs/blog-cacm/189498-top-10-myths-about-teaching-computer-science/fulltext",
           "independentStudy": false
         },
         {
           "name": "Learn Linux",
           "slug": "udacity-learn-linux",
-          "description": "Learn Linux in 5 Days doesn't make any assumptions about your background or knowledge of Linux.\nYou need no prior knowledge to benefit from this course.\nYou will be guided step by step using a logical and systematic approach.\nAs new concepts, commands, or jargon are encountered they are explained in plain language, making it easy for anyone to understand.\nAs an added bonus for enrolling in the Learn Linux in 5 Days video training course, you'll receive a step-by-step checklist and video that teaches you how to install WordPress on an Ubuntu Linux system.\nYou'll learn how to install a web server, how to install a database server, how to create database users, and how to configure WordPress.",
+          "description": "Learn Linux in 5 Days doesn't make any assumptions about your background or knowledge of Linux.\nYou need no prior knowledge to benefit from this course.\nYou will be guided step by step using a logical and systematic approach.\nAs new concepts, commands, or jargon are encountered they are explained in plain language, making it easy for anyone to understand.\nAs an added bonus for enrolling in the Learn Linux in 5 Days video training course, you'll receive a step-by-step checklist and video that teaches you how to install WordPress on an Ubuntu Linux system.\nYou'll learn how to install a web server, how to install a database server, how to create database users, and how to configure WordPress. [Learn more here.](https://www.udemy.com/learn-linux-in-5-days/)",
           "opportunityType": "online-learning",
           "sponsor": "johnson",
           "ice": {
@@ -5449,13 +5337,12 @@
             "Summer-2019",
             "Summer-2020"
           ],
-          "moreInformation": "https://www.udemy.com/learn-linux-in-5-days/",
           "independentStudy": false
         },
         {
           "name": "Learn Unity",
           "slug": "udacity-learn-unity",
-          "description": "Learn how to create video games using Unity 3D, the free-to-use game development tool. We start super simple so you need no prior experience or Unity of coding! With our online tutorials, you'll be amazed what you can achieve.\n\nWhat am I going to get from this course?\nLearn C#, a powerful modern language.\nDevelop a positive attitude to problem solving.\nGain an excellent general knowledge of game creation.\nLearn how object oriented programming works in practice.\nTransfer your knowledge to .NET, other languages, and more.",
+          "description": "Learn how to create video games using Unity 3D, the free-to-use game development tool. We start super simple so you need no prior experience or Unity of coding! With our online tutorials, you'll be amazed what you can achieve.\n\nWhat am I going to get from this course?\nLearn C#, a powerful modern language.\nDevelop a positive attitude to problem solving.\nGain an excellent general knowledge of game creation.\nLearn how object oriented programming works in practice.\nTransfer your knowledge to .NET, other languages, and more. [Learn more here.](https://www.udemy.com/unitycourse/)",
           "opportunityType": "online-learning",
           "sponsor": "johnson",
           "ice": {
@@ -5476,13 +5363,12 @@
             "Summer-2019",
             "Summer-2020"
           ],
-          "moreInformation": "https://www.udemy.com/unitycourse/",
           "independentStudy": false
         },
         {
           "name": "Career Fair",
           "slug": "uh-career-fair",
-          "description": "The purpose of this career fair is to provide students with the “tools” and resources to make important and valuable career decisions. During the Career Fair, you will take your “first steps” toward meaningful employment by meeting with employers face to face to exchange information.",
+          "description": "The purpose of this career fair is to provide students with the “tools” and resources to make important and valuable career decisions. During the Career Fair, you will take your “first steps” toward meaningful employment by meeting with employers face to face to exchange information. [Learn more here.](http://manoa.hawaii.edu/careercenter/students/career-fair/)",
           "opportunityType": "event",
           "sponsor": "glau",
           "ice": {
@@ -5501,14 +5387,13 @@
             "Fall-2019",
             "Fall-2020"
           ],
-          "moreInformation": "http://manoa.hawaii.edu/careercenter/students/career-fair/",
           "independentStudy": false,
           "eventDate": "2016-10-11T00:00:00.000Z"
         },
         {
           "name": "UROP Funding",
           "slug": "urop-funding",
-          "description": "The Undergraduate Research Opportunities Program (UROP) offers funding to\nundergraduate students for individual or group research and creative\nprojects mentored by UHM faculty. We encourage you to ignite interest in\nresearch and creative projects, and guide student-initiated endeavors with\nthe support of UROP.\n\nWe can help you to embolden students to apply for funding to help bring\ntheir research ideas to life. We are happy to come to a class or meeting\nto present about UROP funding opportunities. We know time is scarce and\nthings get busy, so we are flexible in time and duration (15 to 30 min)\naccording to your needs. Please consider that the students need to have at\nleast one remaining semester of enrollment to be eligible for funding.\n\nApplication cycles are every Fall (9/9 to 10/10) and Spring (2/2 to 3/3)\nsemester.\n\nIn case your students are ready to apply for the current application cycle\n(2/2 to 3/3), please encourage them to attend a more detailed information\nsession to understand the application process.  Info sessions are offered\nfor students on the following dates in Sinclair 201 (approximately 1 hour\nlong):\n\n10:30 a.m. Wednesday, January 25, 2017\n10:30 a.m. Thursday, January 26, 2017",
+          "description": "The Undergraduate Research Opportunities Program (UROP) offers funding to\nundergraduate students for individual or group research and creative\nprojects mentored by UHM faculty. We encourage you to ignite interest in\nresearch and creative projects, and guide student-initiated endeavors with\nthe support of UROP.\n\nWe can help you to embolden students to apply for funding to help bring\ntheir research ideas to life. We are happy to come to a class or meeting\nto present about UROP funding opportunities. We know time is scarce and\nthings get busy, so we are flexible in time and duration (15 to 30 min)\naccording to your needs. Please consider that the students need to have at\nleast one remaining semester of enrollment to be eligible for funding.\n\nApplication cycles are every Fall (9/9 to 10/10) and Spring (2/2 to 3/3)\nsemester.\n\nIn case your students are ready to apply for the current application cycle\n(2/2 to 3/3), please encourage them to attend a more detailed information\nsession to understand the application process.  Info sessions are offered\nfor students on the following dates in Sinclair 201 (approximately 1 hour\nlong):\n\n10:30 a.m. Wednesday, January 25, 2017\n10:30 a.m. Thursday, January 26, 2017 \n\n[Learn more here.](manoa.hawaii.edu/undergrad/urop)",
           "opportunityType": "project",
           "sponsor": "johnson",
           "ice": {
@@ -5537,13 +5422,12 @@
             "Spring-2011",
             "Spring-2021"
           ],
-          "moreInformation": "manoa.hawaii.edu/undergrad/urop",
           "independentStudy": false
         },
         {
           "name": "Virtual Art",
           "slug": "virtual-art-meetup",
-          "description": "For anyone interested in a novel way of creating art, we have tech which allows creating in virtual reality. Meetings occur at our small studio in Kaimuki where we currently have two HTC Vives and an Oculus Rift.",
+          "description": "For anyone interested in a novel way of creating art, we have tech which allows creating in virtual reality. Meetings occur at our small studio in Kaimuki where we currently have two HTC Vives and an Oculus Rift. [Learn more here.](https://www.meetup.com/Virtual-Art/events/past/?scroll=true)",
           "opportunityType": "club",
           "sponsor": "johnson",
           "ice": {
@@ -5566,13 +5450,12 @@
             "Summer-2019",
             "Fall-2019"
           ],
-          "moreInformation": "https://www.meetup.com/Virtual-Art/events/past/?scroll=true",
           "independentStudy": false
         },
         {
           "name": "Wetware Wednesday",
           "slug": "wetware-wednesday",
-          "description": "WetWare Wednesday is dedicated to software developers in Hawaii who are interested in meeting monthly in a casual and friendly environment to share ideas, collaborate and spark new opportunities. Founded by HTDC and Blue Planet Software, the goal of WetWare Wednesday is to bring software developers, students and educators together to connect, network, discuss projects, review products, and collaborate in an effort to further the software development community. Venues and sponsors change monthly.",
+          "description": "WetWare Wednesday is dedicated to software developers in Hawaii who are interested in meeting monthly in a casual and friendly environment to share ideas, collaborate and spark new opportunities. Founded by HTDC and Blue Planet Software, the goal of WetWare Wednesday is to bring software developers, students and educators together to connect, network, discuss projects, review products, and collaborate in an effort to further the software development community. Venues and sponsors change monthly. [Learn more here.](http://htdc.org/wetwarewed/)",
           "opportunityType": "event",
           "sponsor": "johnson",
           "ice": {
@@ -5605,7 +5488,6 @@
             "Spring-2021",
             "Summer-2021"
           ],
-          "moreInformation": "http://htdc.org/wetwarewed/",
           "independentStudy": false
         }
       ]
