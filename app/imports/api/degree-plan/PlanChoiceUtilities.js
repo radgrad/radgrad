@@ -154,10 +154,10 @@ export function getDepartments(planChoice) {
 function satisfiesSinglePlanChoice(planChoice, courseSlug) {
   const dept = getDepartment(planChoice);
   if (planChoice.includes('300+')) {
-    return courseSlug.startsWith(`${dept}3`) || courseSlug.startsWith(`${dept}4`);
+    return courseSlug.startsWith(`${dept}_3`) || courseSlug.startsWith(`${dept}_4`);
   } else
     if (planChoice.includes('400+')) {
-      return courseSlug.startsWith(`${dept}4`);
+      return courseSlug.startsWith(`${dept}_4`);
     }
   return planChoice.indexOf(courseSlug) !== -1;
 }
