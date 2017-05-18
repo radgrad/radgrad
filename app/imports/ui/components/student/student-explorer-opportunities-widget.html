@@ -91,14 +91,6 @@
               {{/if}}
             {{/if}}
 
-            {{#if isLabel descriptionPair.label 'More Information'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}}<span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span>
-              {{else}}
-                N/A
-              {{/if}}
-            {{/if}}
-
             {{#if isLabel descriptionPair.label 'Interests'}}
               <div style="margin-top: 5px">
                 {{> Interest_List item=item size='mini'}}

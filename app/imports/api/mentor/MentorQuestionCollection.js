@@ -113,7 +113,6 @@ class MentorQuestionCollection extends BaseInstanceCollection {
    * @throws {Meteor.Error} If MentorQuestion is not defined.
    */
   removeIt(question) {
-    console.log(this.findDoc(question).slugID);
     if (this.findDoc(question).slugID) {
       super.removeIt(question);
     } else {
