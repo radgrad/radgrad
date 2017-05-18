@@ -150,8 +150,6 @@ export class FeedbackFunctionClass {
       let description = 'Your degree plan is missing: \n\n';
       const basePath = getBasePath(studentID);
       _.map(courses, (slug) => {
-        const depts = planUtils.getDepartments(slug);
-        console.log(depts);
         if (!planUtils.isSingleChoice(slug)) {
           const slugs = planUtils.complexChoiceToArray(slug);
           description = `${description}\n\n- `;
