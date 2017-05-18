@@ -25,8 +25,6 @@ class CareerGoalCollection extends BaseInstanceCollection {
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
-      // Optional data
-      moreInformation: { type: String, optional: true },
     }));
   }
 
@@ -37,21 +35,19 @@ class CareerGoalCollection extends BaseInstanceCollection {
    *                      slug: 'database-administrator',
    *                      description: 'Wrangler of SQL.',
    *                      interests: ['application-development', 'software-engineering', 'databases'],
-   *                      moreInformation: 'http://www.bls.gov/ooh/database-administrators.htm' });
-   * @param { Object } description Object with keys name, slug, description, interests, and moreInformation.
+   * @param { Object } description Object with keys name, slug, description, interests.
    * Slug must be globally unique and previously undefined.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
    * Syllabus is optional. If supplied, should be a URL.
-   * MoreInformation is optional. If supplied, should be a URL.
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, interests, moreInformation }) {
+  define({ name, slug, description, interests }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const docID = this._collection.insert({ name, slugID, description, interestIDs, moreInformation });
+    const docID = this._collection.insert({ name, slugID, description, interestIDs });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, docID);
     return docID;
@@ -111,8 +107,7 @@ class CareerGoalCollection extends BaseInstanceCollection {
     const slug = Slugs.getNameFromID(doc.slugID);
     const description = doc.description;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
-    const moreInformation = doc.moreInformation;
-    return { name, slug, interests, description, moreInformation };
+    return { name, slug, interests, description };
   }
 }
 
