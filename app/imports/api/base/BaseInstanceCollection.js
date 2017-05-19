@@ -36,7 +36,6 @@ class BaseInstanceCollection extends BaseCollection {
     return (instances) ? instances.map((instance) => this.getID(instance)) : [];
   }
 
-
   /**
    * Removes the passed instance from its collection.
    * Also removes the associated Slug.
@@ -49,10 +48,14 @@ class BaseInstanceCollection extends BaseCollection {
     const docID = this.getID(instance);
     const doc = super.findDoc(docID);
     check(doc, Object);
-    const slugDoc = Slugs.findDoc(doc.slugID);
-    check(slugDoc, Object);
+    try {
+      const slugDoc = Slugs.findDoc(doc.slugID);
+      check(slugDoc, Object);
+      Slugs.removeIt(slugDoc);
+    } catch (e) {
+      // do nothing.
+    }
     super.removeIt(doc);
-    Slugs.removeIt(slugDoc);
   }
 
   /**

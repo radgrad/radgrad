@@ -23,9 +23,18 @@
           </div>
           <div class="item">
             <i class="dropdown icon"></i>
-            <span class="text">3xx</span>
+            <span class="text">31x - 34x</span>
             <div class="menu">
               {{#each course in courses300}}
+                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
+              {{/each}}
+            </div>
+          </div>
+          <div class="item">
+            <i class="dropdown icon"></i>
+            <span class="text">35x - 39x</span>
+            <div class="menu">
+              {{#each course in courses350}}
                 <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
               {{/each}}
             </div>
