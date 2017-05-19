@@ -21,6 +21,14 @@ class PlanChoiceCollection extends BaseCollection {
     }));
   }
 
+  /**
+   * Defines a PlanChoice.
+   * @example
+   * PlanChoices.define('ics312,ics331-1');
+   * Defines the choice of ICS 312 or ICS 331.
+   * @param choice
+   * @returns {*}
+   */
   define(choice) {
     const doc = this._collection.findOne(choice);
     if (doc) {
@@ -29,6 +37,11 @@ class PlanChoiceCollection extends BaseCollection {
     return this._collection.insert({ choice });
   }
 
+  /**
+   * Creates a human readable string representation of the choice.
+   * @param planChoiceSlug
+   * @returns {string}
+   */
   toStringFromSlug(planChoiceSlug) { // eslint-disable-line class-methods-use-this
     let ret = '';
     let slug;

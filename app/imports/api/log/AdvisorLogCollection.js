@@ -29,6 +29,12 @@ class AdvisorLogCollection extends BaseCollection {
 
   /**
    * Defines an advisor log record.
+   * @example
+   * AdvisorLogs.define({
+   *                      advisor: 'glau',
+   *                      student: 'abi',
+   *                      text: 'Talked about changing academic plan to B.S. CS from B.A. ICS.',
+   *                      });
    * @param advisor The advisor's username.
    * @param student The student's username.
    * @param text The contents of the session.
