@@ -22,8 +22,6 @@ class InterestCollection extends BaseInstanceCollection {
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
       interestTypeID: { type: SimpleSchema.RegEx.Id },
-      // Optional data
-      moreInformation: { type: String, optional: true },
     }));
   }
 
@@ -33,22 +31,20 @@ class InterestCollection extends BaseInstanceCollection {
    * Interests.define({ name: 'Software Engineering',
    *                    slug: 'software-engineering',
    *                    description: 'Methods for group development of large, high quality software systems',
-   *                    interestType: 'cs-disciplines',
-   *                    moreInformation: 'http://softwareengineering.com' });
-   * @param { Object } description Object with keys name, slug, description, interestType, moreInformation.
+   *                    interestType: 'cs-disciplines' });
+   * @param { Object } description Object with keys name, slug, description, interestType.
    * Slug must be previously undefined.
    * InterestType must be an InterestType slug or ID.
-   * MoreInformation is optional but if supplied should be a URL.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, interestType, moreInformation }) {
+  define({ name, slug, description, interestType }) {
     // Get InterestTypeID, throw error if not found.
     const interestTypeID = InterestTypes.getID(interestType);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the Interest and get its ID
-    const interestID = this._collection.insert({ name, description, slugID, interestTypeID, moreInformation });
+    const interestID = this._collection.insert({ name, description, slugID, interestTypeID });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, interestID);
     return interestID;
@@ -101,8 +97,7 @@ class InterestCollection extends BaseInstanceCollection {
     const slug = Slugs.getNameFromID(doc.slugID);
     const description = doc.description;
     const interestType = InterestTypes.findSlugByID(doc.interestTypeID);
-    const moreInformation = doc.moreInformation;
-    return { name, slug, description, interestType, moreInformation };
+    return { name, slug, description, interestType };
   }
 }
 

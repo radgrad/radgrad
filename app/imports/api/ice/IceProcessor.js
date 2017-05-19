@@ -142,7 +142,7 @@ export function getEarnedICE(docs) {
 }
 
 /**
- * Returns an ICE object that represents the total ICE points from the passed Course\Opportunity Instance Documents.
+ * Returns an ICE object that represents the total ICE points from the passed Course/Opportunity Instance Documents.
  * ICE values are counted whether or not they are verified.
  * REPLACES getPlanningICE!
  * @param docs An array of CourseInstance or OpportunityInstance documents.

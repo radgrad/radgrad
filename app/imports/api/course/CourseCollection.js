@@ -30,7 +30,6 @@ class CourseCollection extends BaseInstanceCollection {
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
       // Optional data
       syllabus: { type: String, optional: true },
-      moreInformation: { type: String, optional: true },
       prerequisites: { type: [String], optional: true }, // stored as a slug for some reason.
     }));
   }
@@ -46,7 +45,6 @@ class CourseCollection extends BaseInstanceCollection {
    *                  creditHrs: 4,
    *                  interests: ['perl', 'javascript', 'ruby'],
    *                  syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS215.html',
-   *                  moreInformation: 'http://courses.ics.hawaii.edu/ReviewICS215/',
    *                  prerequisites: ['ics211'] });
    * @param { Object } description Object with keys name, shortName, slug, number, description, creditHrs, interests.
    * Name is the official course name.
@@ -55,14 +53,13 @@ class CourseCollection extends BaseInstanceCollection {
    * CreditHrs is optional and defaults to 3. If supplied, must be a number between 1 and 15.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
    * Syllabus is optional. If supplied, should be a URL.
-   * MoreInformation is optional. If supplied, should be a URL.
    * Prerequisites is optional. If supplied, must be an array of previously defined Course slugs or courseIDs.
    * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest or invalid creditHrs.
    * @returns The newly created docID.
    */
   define({
       name, shortName = name, slug, number, description, creditHrs = 3,
-      interests, syllabus, moreInformation, prerequisites = [],
+      interests, syllabus, prerequisites = [],
   }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
@@ -82,8 +79,7 @@ class CourseCollection extends BaseInstanceCollection {
     // _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
     const courseID =
         this._collection.insert({
-          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus,
-          moreInformation, prerequisites,
+          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites,
         });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
@@ -132,9 +128,8 @@ class CourseCollection extends BaseInstanceCollection {
     const creditHrs = doc.creditHrs;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const syllabus = doc.syllabus;
-    const moreInformation = doc.moreInformation;
     const prerequisites = doc.prerequisites;
-    return { name, shortName, slug, number, description, creditHrs, interests, syllabus, moreInformation,
+    return { name, shortName, slug, number, description, creditHrs, interests, syllabus,
       prerequisites };
   }
 }
