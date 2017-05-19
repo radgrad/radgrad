@@ -1,5 +1,3 @@
-import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Slugs } from './SlugCollection';
