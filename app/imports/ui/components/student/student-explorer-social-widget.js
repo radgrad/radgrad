@@ -8,7 +8,7 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 Template.Student_Explorer_Social_Widget.onCreated(function studentExplorerSocialWidgetOnCreated() {
   this.currentItem = () => FlowRouter.getParam('course');
   this.autorun(() => {
-    this.subscribe(CourseInstances.getPublicationName(3), this.currentItem());
+    this.subscribe(CourseInstances.publicationNames.publicStudent, this.currentItem());
   });
 });
 

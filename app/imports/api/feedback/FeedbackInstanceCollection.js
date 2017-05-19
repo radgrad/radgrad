@@ -42,8 +42,8 @@ class FeedbackInstanceCollection extends BaseCollection {
    *                            user: 'joesmith',
     *                           description: 'We recommend ICS 314 based on your interest in software engineering',
      *                          area: 'Interests' });
-   * @param { Object }  object Requires feedback, the user slug or ID, and the feedback string returned from the
-   * feedback function.
+   * @param { Object } Requires feedback, the user slug or ID, the feedback string returned from the
+   * feedback function, and area.
    * @throws {Meteor.Error} If the slugs or IDs cannot be resolved correctly.
    * @returns The newly created docID.
    */
