@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import BaseCollection from '../base/BaseCollection';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/help/HelpMessageCollection */
 

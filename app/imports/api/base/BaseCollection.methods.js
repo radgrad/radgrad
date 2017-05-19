@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { radgradCollections } from '../integrity/RadGradCollections';
+import { radgradCollections } from './RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module api/base/BaseCollectionMethods */

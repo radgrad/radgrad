@@ -1,7 +1,7 @@
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { radgradCollections } from '../base/RadGradCollections';
 
 
 /** @module api/degree-plan/DesiredDegreeCollection */

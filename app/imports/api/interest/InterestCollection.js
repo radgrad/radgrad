@@ -1,8 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { Slugs } from '../slug/SlugCollection';
+import { InterestTypes } from '../interest/InterestTypeCollection';
+import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/interest/InterestCollection */
 

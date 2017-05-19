@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import BaseCollection from '/imports/api/base/BaseCollection';
+import { radgradCollections } from '../base/RadGradCollections';
 import { DesiredDegrees } from './DesiredDegreeCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';

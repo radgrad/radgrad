@@ -1,10 +1,10 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Slugs } from '../slug/SlugCollection';
+import { Interests } from '../interest/InterestCollection';
+import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import { radgradCollections } from '../base/RadGradCollections';
 
 
 /** @module api/course/CourseCollection */

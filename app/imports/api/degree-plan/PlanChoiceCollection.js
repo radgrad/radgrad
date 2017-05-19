@@ -1,6 +1,6 @@
 // import { _ } from 'meteor/erasaur:meteor-lodash';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import BaseCollection from '../base/BaseCollection';
+import { radgradCollections } from '../base/RadGradCollections';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { buildSimpleName } from './PlanChoiceUtilities';
 

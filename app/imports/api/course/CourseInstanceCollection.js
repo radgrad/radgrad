@@ -10,7 +10,7 @@ import { Users } from '/imports/api/user/UserCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { makeCourseICE } from '/imports/api/ice/IceProcessor';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/course/CourseInstanceCollection */
 
