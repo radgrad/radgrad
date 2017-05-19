@@ -190,18 +190,14 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
-   * @returns { boolean } If the course is an ICS course associated with courseInstanceID.
+   * @returns { boolean } If the course is an interesting course associated with courseInstanceID.
    * @param courseInstanceID The course instance ID.
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
    */
-  isICS(courseInstanceID) {
+  isInteresting(courseInstanceID) {
     this.assertDefined(courseInstanceID);
     const instance = this.findDoc(courseInstanceID);
-    const retVal = instance.note.startsWith('ICS');
-    if (retVal) {
-      return retVal;
-    }
-    return Courses.findDoc(instance.courseID).number.substring(0, 3) === 'ICS';
+    return Courses.findDoc(instance.courseID).number !== 'other';
   }
 
   /**

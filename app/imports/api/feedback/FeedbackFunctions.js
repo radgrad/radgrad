@@ -262,7 +262,7 @@ export class FeedbackFunctionClass {
           description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name}), `;
         }
       } else
-        if (slug.startsWith('ics4')) {
+        if (slug.startsWith('ics_4')) {
           const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
           if (bestChoice) {
             const cSlug = Slugs.findDoc(bestChoice.slugID);
@@ -294,14 +294,14 @@ export class FeedbackFunctionClass {
     const coursesTakenSlugs = [];
     const student = Users.findDoc(studentID);
     const courseIDs = Users.getCourseIDs(studentID);
-    const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
-    let coursesNeeded;
-    if (degree.shortName.startsWith('B.S.')) {
-      coursesNeeded = BS_CS_LIST.slice(0);
+    let academicPlan;
+    if (student.academicPlanID) {
+      academicPlan = AcademicPlans.findDoc(student.academicPlanID);
+    } else {
+      const degreeID = student.desiredDegreeID;
+      academicPlan = AcademicPlans.findDoc({ degreeID });
     }
-    if (degree.shortName.startsWith('B.A.')) {
-      coursesNeeded = BA_ICS_LIST.slice(0);
-    }
+    const coursesNeeded = academicPlan.courseList.slice(0);
     _.map(courseIDs, (cID) => {
       const course = Courses.findDoc(cID);
       coursesTakenSlugs.push(Slugs.getNameFromID(course.slugID));
