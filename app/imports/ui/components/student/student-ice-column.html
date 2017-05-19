@@ -34,13 +34,13 @@
       <!-- Not earned -->
       <div class="title">
       <i class="dropdown icon"></i>
-      Not Yet Earned <div class="ui right floated {{#with getTypeColors}}{{projColor}}{{/with}}">{{remainingICE (points earnedICE) (points plannedICE) }} pts</div>
+      Not Yet Earned <div class="ui right floated {{#with getTypeColors}}{{projColor}}{{/with}}">{{remainingICE (points earnedICE) (points projectedICE) }} pts</div>
     </div>
     <div class="content">
-      {{#if matchingPoints (points plannedICE) 0}}
+      {{#if matchingPoints (points projectedICE) 0}}
         <p>You have earned all of your planned points.</p>
       {{else}}
-        <p>You have a total of {{remainingICE (points earnedICE) (points plannedICE) }} not yet earned {{type}} points.</p>
+        <p>You have a total of {{remainingICE (points earnedICE) (points projectedICE) }} not yet earned {{type}} points.</p>
         <div class="ui very relaxed list">
           {{#each year in years}}
             {{#each semester in semesters year}}
@@ -70,7 +70,7 @@
       {{#if matchingPoints 100 (points earnedICE) }}
         <p>Congratulations! You have earned 100 {{type}} points!</p>
       {{else}}
-        {{#if matchingPoints 100 (points plannedICE) }}
+        {{#if matchingPoints 100 (points projectedICE) }}
           <p>You already have 100 planned {{type}} points.</p>
         {{else}}
           {{#if hasNoInterests}}
@@ -78,7 +78,7 @@
           {{else}}
             <p>Consider the following to complete the full 100 {{type}} points.</p>
             <div class="ui list">
-              {{#each event in recommendedEvents (points plannedICE)}}
+              {{#each event in recommendedEvents (points projectedICE)}}
                 <div class="item">
                   {{#if isType 'Competency'}}
                     <a href="{{pathFor coursesRouteName username=routeUserName course=(courseSlug event)}}"><div class="item">
