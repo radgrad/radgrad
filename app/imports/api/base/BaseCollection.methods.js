@@ -1,22 +1,29 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { radgradCollections } from './RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module api/base/BaseCollectionMethods */
 
+/**
+ * The string used to identify the dumpDatabase method.
+ * @type {string}
+ */
 export const dumpDatabaseMethodName = 'base.dumpDatabase';
 
+/**
+ * Allows admins to create and return a JSON object to the client representing a snapshot of the RadGrad database.
+ */
 export const dumpDatabaseMethod = new ValidatedMethod({
   name: dumpDatabaseMethodName,
   validate: null,
   run() {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to check integrity.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to check integrity.');
+      if (!Roles.userIsInRole(this.userId, ['ADMIN'])) {
+        throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.');
       }
     // Don't do the dump except on server side (disable client-side simulation).
     // Return an object with fields timestamp and collections.
@@ -28,26 +35,3 @@ export const dumpDatabaseMethod = new ValidatedMethod({
     return null;
   },
 });
-
-export const restoreDatabaseMethodName = 'base.restoreDatabase';
-
-export const restoreDatabaseMethod = new ValidatedMethod({
-  name: restoreDatabaseMethodName,
-  validate: null,
-  run() {
-    if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to restore databases.');
-    } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to restore databases.');
-      }
-    // Don't do the restore except on server side (disable client-side simulation).
-    // Return a string indicating success or throw an error.
-    if (Meteor.isServer) {
-      // Delete all collections.
-      radgradCollections.map(collection => collection.dumpAll());
-    }
-    return 'The database was successfully restored.';
-  },
-});
-

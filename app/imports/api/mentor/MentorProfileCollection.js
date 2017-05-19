@@ -1,11 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { Users } from '/imports/api/user/UserCollection';
 import { Roles } from 'meteor/alanning:roles';
-import { ROLE } from '/imports/api/role/Role';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import BaseCollection from '../base/BaseCollection';
+import { Users } from '../user/UserCollection';
+import { ROLE } from '../role/Role';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/mentor/MentorProfileCollection */
 /**

@@ -2,10 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { moment } from 'meteor/momentjs:moment';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { ROLE } from '/imports/api/role/Role';
+import BaseCollection from '../base/BaseCollection';
+import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/log/AdvisorLogCollection */
 
