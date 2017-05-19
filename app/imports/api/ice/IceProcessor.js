@@ -14,6 +14,10 @@ Number.isInteger = Number.isInteger ||
           Math.floor(value) === value;
     };
 
+/**
+ * The competency points earned for each grade A, B, or C.
+ * @type {{A: number, B: number, C: number}}
+ */
 export const gradeCompetency = {
   A: 10,
   B: 6,
@@ -43,6 +47,8 @@ export function assertICE(obj) {
 
 /**
  * Returns an ICE object based upon the course slug and the passed grade.
+ * Students only earn ICE competency points for 'interesting' courses. Interesting
+ * courses are courses that have non other slugs.
  * If ICS course and an A, then return 9 competency points.
  * If ICE course and a B, then return 5 competency points.
  * Otherwise return zero points.
@@ -52,19 +58,12 @@ export function assertICE(obj) {
  */
 export function makeCourseICE(course, grade) {
   // TODO: Hardcoding 'other' is a bad idea.
-  let i = 0;
+  const i = 0;
   let c = 0;
   const e = 0;
   // NonICS courses get no ICE points.
   if (course === 'other') {
     return { i, c, e };
-  }
-  // ICS499 gets experience and innovation points.
-  if (course === 'ics499') {
-    if (grade.includes('A') || grade.includes('B')) {
-      i = 25;
-      // TODO: Add experience points.
-    }
   }
   // ICS courses get competency points if you get an A or a B.
   if (grade.includes('B')) {
@@ -77,51 +76,8 @@ export function makeCourseICE(course, grade) {
 }
 
 /**
- * Returns an ICE object that represents the total ICE points from the passed Course\Opportunity Instance Documents.
- * ICE values are counted only if verified is true.
- * @param docs An array of CourseInstance or OpportunityInstance documents.
- * @returns {{i: number, c: number, e: number}} The ICE object.
- */
-export function getTotalICE(docs) {
-  const total = { i: 0, c: 0, e: 0 };
-  docs.map((instance) => {
-    if (!(isICE(instance.ice))) {
-      throw new Meteor.Error(`getTotalICE passed ${instance} without a valid .ice field.`);
-    }
-    if (instance.verified === true) {
-      total.i += instance.ice.i;
-      total.c += instance.ice.c;
-      total.e += instance.ice.e;
-    }
-    return null;
-  });
-  return total;
-}
-
-/**
- * Returns an ICE object that represents the total ICE points from the passed Course\Opportunity Instance Documents.
- * ICE values are counted.
- * @param docs An array of CourseInstance or OpportunityInstance documents.
- * @returns {{i: number, c: number, e: number}} The ICE object.
- */
-export function getPlanningICE(docs) {
-  const total = { i: 0, c: 0, e: 0 };
-  docs.map((instance) => {
-    if (!(isICE(instance.ice))) {
-      throw new Meteor.Error(`getPlanningICE passed ${instance} without a valid .ice field.`);
-    }
-    total.i += instance.ice.i;
-    total.c += instance.ice.c;
-    total.e += instance.ice.e;
-    return null;
-  });
-  return total;
-}
-
-/**
  * Returns an ICE object that represents the earned ICE points from the passed Course\Opportunity Instance Documents.
  * ICE values are counted only if verified is true.
- * REPLACES getTotalICE!!!
  * @param docs An array of CourseInstance or OpportunityInstance documents.
  * @returns {{i: number, c: number, e: number}} The ICE object.
  */
@@ -144,7 +100,6 @@ export function getEarnedICE(docs) {
 /**
  * Returns an ICE object that represents the total ICE points from the passed Course/Opportunity Instance Documents.
  * ICE values are counted whether or not they are verified.
- * REPLACES getPlanningICE!
  * @param docs An array of CourseInstance or OpportunityInstance documents.
  * @returns {{i: number, c: number, e: number}} The ICE object.
  */

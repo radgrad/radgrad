@@ -11,7 +11,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
-import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
+import { getEarnedICE, getProjectedICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 
@@ -151,7 +151,7 @@ Template.Student_Ice_Column.helpers({
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
       const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
-      return getTotalICE(earnedInstances);
+      return getEarnedICE(earnedInstances);
     }
     return null;
   },
@@ -226,13 +226,13 @@ Template.Student_Ice_Column.helpers({
     }
     return Slugs.findDoc(opportunity.slugID).name;
   },
-  plannedICE() {
+  projectedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
       const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();
       const oppInstances = OpportunityInstances.find({ studentID: user._id }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
-      const ice = getPlanningICE(earnedInstances);
+      const ice = getProjectedICE(earnedInstances);
       return ice;
     }
     return null;
