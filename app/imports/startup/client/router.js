@@ -153,14 +153,6 @@ adminRoutes.route('/database/dump', {
   },
 });
 
-export const adminDataBaseRestorePageRouteName = 'Admin_DataBase_Restore_Page';
-adminRoutes.route('/database/restore', {
-  name: adminDataBaseRestorePageRouteName,
-  action() {
-    BlazeLayout.render('Admin_Layout', { main: adminDataBaseRestorePageRouteName });
-  },
-});
-
 export const adminModerationPageRouteName = 'Admin_Moderation_Page';
 adminRoutes.route('/moderation', {
   name: adminModerationPageRouteName,

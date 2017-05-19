@@ -1,6 +1,6 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-import { radgradCollections } from './RadGradCollections.js';
+import { radgradCollections } from '../base/RadGradCollections.js';
 
 /** @module api/integrity/IntegrityChecker */
 

@@ -10,7 +10,4 @@ Template.Admin_DataBase_Menu.helpers({
   dumpRouteName() {
     return RouteNames.adminDataBaseDumpPageRouteName;
   },
-  restoreRouteName() {
-    return RouteNames.adminDataBaseRestorePageRouteName;
-  },
 });
