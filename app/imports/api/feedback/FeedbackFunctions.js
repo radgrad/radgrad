@@ -4,7 +4,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
-import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Feedbacks } from './FeedbackCollection';
 import { FeedbackInstances } from './FeedbackInstanceCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
@@ -15,7 +14,6 @@ import * as yearUtils from '../degree-plan/AcademicYearUtilities';
 import * as planUtils from '../degree-plan/PlanChoiceUtilities';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
-import { BS_CS_LIST, BA_ICS_LIST } from '../degree-plan/degree-program';
 
 /** @module api/feedback/FeedbackFunctions */
 
