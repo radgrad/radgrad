@@ -15,7 +15,7 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
     if (this.data.userID) {
       this.userID = this.data.userID;
     }
-    this.subscribe(CourseInstances.getPublicationName(5), getExplorerUserID());
+    this.subscribe(CourseInstances.publicationNames.studentID, getExplorerUserID());
   });
 });
 

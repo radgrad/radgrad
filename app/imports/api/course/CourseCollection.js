@@ -46,7 +46,8 @@ class CourseCollection extends BaseInstanceCollection {
    *                  interests: ['perl', 'javascript', 'ruby'],
    *                  syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS215.html',
    *                  prerequisites: ['ics211'] });
-   * @param { Object } description Object with keys name, shortName, slug, number, description, creditHrs, interests.
+   * @param { Object } description Object with keys name, shortName, slug, number, description, creditHrs,
+   *                   interests, syllabus, and prerequisites.
    * Name is the official course name.
    * ShortName is an optional abbreviation. Defaults to name.
    * Slug must not be previously defined.

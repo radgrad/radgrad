@@ -57,6 +57,56 @@ class FeedCollection extends BaseCollection {
    *               feedType: 'new-user'
    *               timestamp: '12345465465', });
    *
+   * There are currently six feedTypes: new-user, new-course,
+   * new-opportunity, verified-opportunity, new-course-review, and new-opportunity-review.
+   * All feeds require keys feedType and timestamp.
+   * FeedType new-user requires keys user, feedType, timestamp.
+   * FeedType new-course requires keys user, course, feedType, timestamp.
+   * FeedType new-opportunity requires keys user, opportunity, feedType, timestamp.
+   * FeedType verified-opportunity requires keys user, opportunity, semester, feedType, and timestamp.
+   * FeedType new-course-review requires keys user, course, feedType, and timestamp.
+   * FeedType new-opportunity-review requires keys user, opportunity, feedType, and timestamp.
+   * @param { Object } description Object with keys user, opportunity, course, semester, feedType, and timestamp.
+   * @returns The newly created docID.
+   */
+  defineNewUser({ user, timestamp }) {
+    let userIDs;
+    let picture;
+    let description;
+    if (user !== undefined) {
+      userIDs = _.map(user, function (u) {
+        return Users.getUserFromUsername(u)._id;
+      });
+      if (userIDs.length > 1) {
+        // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have joined RadGrad.`;
+        description = {
+          user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
+          description: 'have joined RadGrad.',
+        };
+      } else {
+        // description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
+        description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.' };
+      }
+      picture = Users.findDoc(userIDs[0]).picture;
+      if (!picture) {
+        picture = '/images/people/default-profile-picture.png';
+      }
+    } else {
+      throw new Meteor.Error('User must be specified for feedType new-user.');
+    }
+    const feedID = this._collection.insert({
+      userIDs, description, timestamp, picture,
+    });
+    return feedID;
+  }
+
+  /**
+   * Defines a new Feed.
+   * @example
+   * Feed.define({ user: ['abigailkealoha'],
+   *               feedType: 'new-user'
+   *               timestamp: '12345465465', });
+   *
    * Feed.define({ user: 'abigailkealoha',
    *               course: 'ics-100'
    *               feedType: 'new-course'
