@@ -36,13 +36,14 @@ class CourseInstanceCollection extends BaseCollection {
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
       'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W'];
-    this.publicationNames = [];
-    this.publicationNames.push(this._collectionName);
-    this.publicationNames.push(`${this._collectionName}.Public`);
-    this.publicationNames.push(`${this._collectionName}.PerStudentAndSemester`);
-    this.publicationNames.push(`${this._collectionName}.PublicStudent`);
-    this.publicationNames.push(`${this._collectionName}.PublicSlugStudent`);
-    this.publicationNames.push(`${this._collectionName}.studentID`);
+    this.publicationNames = {
+      student: this._collectionName,
+      publicPublish: `${this._collectionName}.Public`,
+      perStudentAndSemester: `${this._collectionName}.PerStudentAndSemester`,
+      publicStudent: `${this._collectionName}.PublicStudent`,
+      publicSlugStudent: `${this._collectionName}.PublicSlugStudent`,
+      studentID: `${this._collectionName}.studentID`,
+    };
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, courseID: 1 });
     }
@@ -57,17 +58,11 @@ class CourseInstanceCollection extends BaseCollection {
    *                          verified: false,
    *                          fromSTAR: false,
    *                          grade: 'B',
-   *                          student: 'joesmith' });
-   * // To define an instance of a non-CS course:
-   * CourseInstances.define({ semester: 'Spring-2016',
-   *                          course: 'other',
-   *                          note: 'ENG 101',
-   *                          verified: true,
-   *                          creditHrs: 3,
-   *                          fromSTAR: true,
-   *                          grade: 'B',
-   *                          student: 'joesmith' });
-   * @param { Object } description Object with keys semester, course, verified, notCS, grade, studen.
+   *                          note: '',
+   *                          student: 'joesmith',
+   *                          creditHrs: 3 });
+   * @param { Object } description Object with keys semester, course, verified, fromSTAR, grade,
+   * note, student, creditHrs.
    * Required fields: semester, student, course, which must all be valid slugs or instance IDs.
    * If the course slug is 'other', then the note field will be used as the course number.
    * Optional fields: note (defaults to ''), valid (defaults to false), grade (defaults to '').
@@ -130,18 +125,6 @@ class CourseInstanceCollection extends BaseCollection {
     this.assertDefined(instanceID);
     const instance = this._collection.findOne({ _id: instanceID });
     return Courses.getSlug(instance.courseID);
-  }
-
-  /**
-   * Return the publication name.
-   * @param index The optional index for the publication name.
-   * @returns { String } The publication name, as a string.
-   */
-  getPublicationName(index) {
-    if (index) {
-      return this.publicationNames[index];
-    }
-    return this._collectionName;
   }
 
   /**
@@ -229,13 +212,13 @@ class CourseInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this.publicationNames[0], function publish() {
+      Meteor.publish(this.publicationNames.student, function publish() {
         if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
       });
-      Meteor.publish(this.publicationNames[1], function publicPublish(courseID) {  // eslint-disable-line
+      Meteor.publish(this.publicationNames.publicPublish, function publicPublish(courseID) {  // eslint-disable-line
         // check the courseID.
         new SimpleSchema({
           courseID: { type: String },
@@ -243,7 +226,7 @@ class CourseInstanceCollection extends BaseCollection {
 
         return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
       });
-      Meteor.publish(this.publicationNames[2],
+      Meteor.publish(this.publicationNames.perStudentAndSemester,
           function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
             new SimpleSchema({
               studentID: { type: String },
@@ -251,10 +234,10 @@ class CourseInstanceCollection extends BaseCollection {
             }).validate({ studentID, semesterID });
             return instance._collection.find({ studentID, semesterID });
           });
-      Meteor.publish(this.publicationNames[3], function publicStudentPublish() {  // eslint-disable-line
+      Meteor.publish(this.publicationNames.publicStudent, function publicStudentPublish() {  // eslint-disable-line
         return instance._collection.find({}, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
       });
-      Meteor.publish(this.publicationNames[4], function publicSlugPublish(courseSlug) {  // eslint-disable-line
+      Meteor.publish(this.publicationNames.publicSlugStudent, function publicSlugPublish(courseSlug) {  // eslint-disable-line
         // check the courseID.
         const slug = Slugs.find({ name: courseSlug }).fetch();
         const course = Courses.find({ slugID: slug[0]._id }).fetch();
@@ -265,7 +248,7 @@ class CourseInstanceCollection extends BaseCollection {
 
         return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
       });
-      Meteor.publish(this.publicationNames[5], function filterStudentID(studentID) { // eslint-disable-line
+      Meteor.publish(this.publicationNames.studentID, function filterStudentID(studentID) { // eslint-disable-line
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });

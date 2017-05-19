@@ -57,7 +57,8 @@ class VerificationRequestCollection extends BaseCollection {
    * status defaults to OPEN, and processed defaults to an empty array.
    * You can either pass the opportunityInstanceID or pass the opportunity and semester slugs. If opportunityInstance
    * is not defined, then the student, opportunity, and semester arguments are used to look it up.
-   * @throws {Meteor.Error} If semester, opportunity, or student cannot be resolved, or if verified is not a boolean.
+   * @throws {Meteor.Error} If semester, opportunity, opportunityInstance or student cannot be resolved,
+   * or if verified is not a boolean.
    * @returns The newly created docID.
    */
   define({ student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [],

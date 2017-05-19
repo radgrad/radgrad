@@ -56,8 +56,9 @@ class ReviewCollection extends BaseInstanceCollection {
    * Moderated is optional and defaults to false.
    * Visible is optional and defaults to true.
    * ModeratorComments is optional.
-   * @throws {Meteor.Error} If the definition includes a defined slug, undefined student or undefined reviewee
-   * or startActive or endActive are not valid.
+   * reviewType must be either course or opportunity.
+   * @throws {Meteor.Error} If the definition includes a defined slug, undefined student,
+   * undefined reviewee, undefined semester, or invalid rating.
    * @returns The newly created docID.
    */
   define({ slug, student, reviewType, reviewee, semester, rating = 3, comments,
