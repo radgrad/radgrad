@@ -32,8 +32,8 @@ class AcademicPlanCollection extends BaseCollection {
 
   /**
    * Defines an AcademicPlan.
-   *    * @example
-   * AcademicPlans.define({ degreeSlug: 'bs-cs',
+   * @example
+   *     AcademicPlans.define({ degreeSlug: 'bs-cs',
    *                        name: 'B.S. in Computer Science'
    *                        semester: 'Spring-2016',
    *                        coursesPerSemester: [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0],

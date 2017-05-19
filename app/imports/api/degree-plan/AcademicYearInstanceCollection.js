@@ -39,8 +39,8 @@ class AcademicYearInstanceCollection extends BaseCollection {
    * Defines a new AcademicYearInstance.
    * @example
    * To define the 2016 - 2017 academic year for Joe Smith.
-   * AcademicYearInstances.define({ year: 2016,
-   *                                student: 'joesmith' });
+   *     AcademicYearInstances.define({ year: 2016,
+   *                                    student: 'joesmith' });
    * @param { Object } Object with keys year and student.
    * @throws {Meteor.Error} If the definition includes an undefined student or a year that is out of bounds.
    * @returns The newly created docID.
