@@ -7,7 +7,7 @@ import { AcademicYearInstances } from '/imports/api/degree-plan/AcademicYearInst
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/opportunity/OpportunityInstanceCollection */
 

@@ -1,8 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import { MentorQuestions } from '/imports/api/mentor/MentorQuestionCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import BaseCollection from '../base/BaseCollection';
+import { Users } from '../user/UserCollection';
+import { MentorQuestions } from '../mentor/MentorQuestionCollection';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/mentor/MentorAnswerCollection */
 

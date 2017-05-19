@@ -8,7 +8,7 @@ import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollecti
 import { ROLE } from '/imports/api/role/Role';
 import { Semesters } from '../semester/SemesterCollection.js';
 import { Users } from '/imports/api/user/UserCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/verification/VerificationRequestCollection */
 

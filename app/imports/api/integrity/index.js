@@ -1,3 +1,3 @@
 import './IntegrityChecker';
 import './IntegrityChecker.methods';
-import './RadGradCollections';
+import '../base/RadGradCollections';

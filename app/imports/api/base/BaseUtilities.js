@@ -1,4 +1,3 @@
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AdvisorLogs } from '/imports/api/log/AdvisorLogCollection';
 import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
 import { Courses } from '/imports/api/course/CourseCollection';
@@ -52,7 +51,6 @@ export function removeAllEntities() {
   OpportunityTypes.removeAll();
   Reviews.removeAll();
   Semesters.removeAll();
-  Slugs.removeAll();
   StarDataLogs.removeAll();
   Teasers.removeAll();
   Users.removeAll();
@@ -60,115 +58,5 @@ export function removeAllEntities() {
   AcademicYearInstances.removeAll();
   PlanChoices.removeAll();
   AcademicPlans.removeAll();
-}
-
-export function clientRemoveAllEntities() {
-  let items = CareerGoals.find().fetch();
-  _.map(items, (i) => {
-    CareerGoals.removeIt(i._id);
-  });
-  items = Courses.find().fetch();
-  _.map(items, (i) => {
-    Courses.removeIt(i._id);
-  });
-  items = CourseInstances.find().fetch();
-  _.map(items, (i) => {
-    CourseInstances.removeIt(i._id);
-  });
-  items = DesiredDegrees.find().fetch();
-  _.map(items, (i) => {
-    DesiredDegrees.removeIt(i._id);
-  });
-  items = Feeds.find().fetch();
-  _.map(items, (i) => {
-    Feeds.removeIt(i._id);
-  });
-  items = Feedbacks.find().fetch();
-  _.map(items, (i) => {
-    Feedbacks.removeIt(i._id);
-  });
-  items = FeedbackInstances.find().fetch();
-  _.map(items, (i) => {
-    FeedbackInstances.removeIt(i._id);
-  });
-  items = HelpMessages.find().fetch();
-  _.map(items, (i) => {
-    HelpMessages.removeIt(i._id);
-  });
-  items = Interests.find().fetch();
-  _.map(items, (i) => {
-    Interests.removeIt(i._id);
-  });
-  items = InterestTypes.find().fetch();
-  _.map(items, (i) => {
-    InterestTypes.removeIt(i._id);
-  });
-  items = AdvisorLogs.find().fetch();
-  _.map(items, (i) => {
-    AdvisorLogs.removeIt(i._id);
-  });
-  items = MentorAnswers.find().fetch();
-  _.map(items, (i) => {
-    MentorAnswers.removeIt(i._id);
-  });
-  items = MentorQuestions.find().fetch();
-  _.map(items, (i) => {
-    MentorQuestions.removeIt(i._id);
-  });
-  items = MentorProfiles.find().fetch();
-  _.map(items, (i) => {
-    MentorProfiles.removeIt(i._id);
-  });
-  items = Opportunities.find().fetch();
-  _.map(items, (i) => {
-    Opportunities.removeIt(i._id);
-  });
-  items = OpportunityInstances.find().fetch();
-  _.map(items, (i) => {
-    OpportunityInstances.removeIt(i._id);
-  });
-  items = OpportunityTypes.find().fetch();
-  _.map(items, (i) => {
-    OpportunityTypes.removeIt(i._id);
-  });
-  items = Reviews.find().fetch();
-  _.map(items, (i) => {
-    Reviews.removeIt(i._id);
-  });
-  items = Semesters.find().fetch();
-  _.map(items, (i) => {
-    Semesters.removeIt(i._id);
-  });
-  items = Slugs.find().fetch();
-  _.map(items, (i) => {
-    Slugs.removeIt(i._id);
-  });
-  items = StarDataLogs.find().fetch();
-  _.map(items, (i) => {
-    StarDataLogs.removeIt(i._id);
-  });
-  items = Teasers.find().fetch();
-  _.map(items, (i) => {
-    Teasers.removeIt(i._id);
-  });
-  items = Users.find().fetch();
-  _.map(items, (i) => {
-    Users.removeIt(i._id);
-  });
-  items = VerificationRequests.find().fetch();
-  _.map(items, (i) => {
-    VerificationRequests.removeIt(i._id);
-  });
-  items = AcademicYearInstances.find().fetch();
-  _.map(items, (i) => {
-    AcademicYearInstances.removeIt(i._id);
-  });
-  items = PlanChoices.find().fetch();
-  _.map(items, (i) => {
-    PlanChoices.removeIt(i._id);
-  });
-  items = AcademicPlans.find().fetch();
-  _.map(items, (i) => {
-    AcademicPlans.removeIt(i._id);
-  });
+  Slugs.removeAll();
 }

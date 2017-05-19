@@ -3,7 +3,7 @@ import { Slugs } from '/imports/api/slug/SlugCollection';
 import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection.js';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { radgradCollections } from '../base/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module api/teaser/TeaserCollection */

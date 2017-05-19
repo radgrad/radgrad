@@ -17,7 +17,7 @@ import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/user/UserCollection */
 
