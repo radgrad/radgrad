@@ -7,7 +7,7 @@ import { withRenderedTemplate } from '../../../test-helpers';
 import { $ } from 'meteor/jquery';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
-import { clientRemoveAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 import '/client/lib/semantic-ui/semantic.min';
 import '../academic-plan.html';
 import '../academic-plan';
@@ -17,12 +17,12 @@ import '../add-course-button.js';
 describe('Add_Course_Button', function test() {
   beforeEach(function () {
     Template.registerHelper('_', key => key);
-    clientRemoveAllEntities();
+    removeAllEntities();
   });
 
   afterEach(function () {
     Template.deregisterHelper('_');
-    clientRemoveAllEntities();
+    removeAllEntities();
   });
 
   it('renders correctly with type add', function () {
