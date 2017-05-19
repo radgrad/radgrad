@@ -23,8 +23,8 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
   this.autorun(function () {
     instanceSubs.subscribe(AcademicYearInstances.publicationNames.PerStudentID, getUserIdFromRoute());
     instanceSubs.subscribe(AdvisorLogs.getPublicationName());
-    instanceSubs.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-    instanceSubs.subscribe(CourseInstances.getPublicationName(3));
+    instanceSubs.subscribe(CourseInstances.publicationNames.studentID, getUserIdFromRoute());
+    instanceSubs.subscribe(CourseInstances.publicationNames.publicStudent);
     instanceSubs.subscribe(FeedbackInstances.getPublicationName());
     instanceSubs.subscribe(Feeds.getPublicationName());
     instanceSubs.subscribe(MentorAnswers.getPublicationName());

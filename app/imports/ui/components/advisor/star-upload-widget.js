@@ -31,7 +31,7 @@ Template.Star_Upload_Widget.onCreated(function starUploadWidgetOnCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
   this.currentUpload = new ReactiveVar(false);
   this.autorun(() => {
-    this.subscribe(CourseInstances.getPublicationName(5), this.data.studentID.get());
+    this.subscribe(CourseInstances.publicationNames.studentID, this.data.studentID.get());
     this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
   });
 });

@@ -43,8 +43,13 @@ Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCr
   this.chosenYear = new ReactiveVar('');
   FormUtils.setupFormWidget(this, updateSchema);
   this.autorun(() => {
+<<<<<<< HEAD
     this.subscribe(CourseInstances.getPublicationName(5), this.data.studentID.get());
     this.subscribe(AcademicYearInstances.publicationNames.PerStudentID, this.data.studentID.get());
+=======
+    this.subscribe(CourseInstances.publicationNames.studentID, this.data.studentID.get());
+    this.subscribe(AcademicYearInstances.getPublicationName(1), this.data.studentID.get());
+>>>>>>> master
     this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
   });
 });
