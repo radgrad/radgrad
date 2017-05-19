@@ -21,7 +21,7 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
   const self = this;
   self.ready = new ReactiveVar();
   this.autorun(function () {
-    instanceSubs.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
+    instanceSubs.subscribe(AcademicYearInstances.publicationNames.PerStudentID, getUserIdFromRoute());
     instanceSubs.subscribe(AdvisorLogs.getPublicationName());
     instanceSubs.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
     instanceSubs.subscribe(CourseInstances.getPublicationName(3));

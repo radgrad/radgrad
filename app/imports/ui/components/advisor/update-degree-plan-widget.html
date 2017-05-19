@@ -36,39 +36,13 @@
       <button class="ui tiny green basic button" type="submit">UPDATE STUDENT</button>
       <!--<button class="ui green basic button jsCancel" type="submit">Cancel</button>-->
       {{> Success_Message_Form_Field message="The Student was successfully updated."}}
-      <div class="ui divider"></div>
-
-      {{> Plan_Starting_Semester_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
-
     </form>
 
     <br>
-    <button class="ui tiny basic green button jsGeneratePlan">GENERATE DEGREE PLAN</button>
     {{#if slug}}
       <p><b>View {{user.firstName}}'s degree plan:</b> <a target="_blank"
-                                                          href="/student/{{slug}}/degree-planner">/student/{{slug}}
-        /degree-planner</a></p>
+                                                          href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a></p>
     {{/if}}
 
-  </div>
-  <div class="ui basic modal">
-    <div class="ui icon header">
-      <i class="circle warning icon"></i>
-      Generate Degree Plan - Warning
-    </div>
-    <div class="content" style="text-align: center;">
-      <p>This will delete any courses and opportunities currently planned for future semesters!</p>
-      <p><b>Continue?</b></p>
-    </div>
-    <div class="actions">
-      <div class="ui red basic cancel inverted button">
-        <i class="remove icon"></i>
-        No
-      </div>
-      <div class="ui green ok inverted button">
-        <i class="checkmark icon"></i>
-        Yes
-      </div>
-    </div>
   </div>
 </template>

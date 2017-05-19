@@ -78,8 +78,8 @@ export function complexChoiceToArray(planChoice) {
  * @returns {string}
  */
 export function buildCourseSlugName(slug) {
-  const splits = slug.split(/([A-Za-z]+)/);
-  return `${splits[1].toUpperCase()} ${splits[2]}`;
+  const splits = slug.split('_');
+  return `${splits[0].toUpperCase()} ${splits[1]}`;
 }
 
 /**
@@ -96,6 +96,12 @@ export function buildSimpleName(slug) {
   return ret.substring(0, ret.length - 4);
 }
 
+/**
+ * Returns the Elements in the DOM with the given attribute and  value.
+ * @param attribute The div attribute
+ * @param value the value.
+ * @returns {Array}
+ */
 export function getAllElementsWithAttribute(attribute, value) {
   const matchingElements = [];
   const allElements = document.getElementsByTagName('div');
@@ -108,13 +114,17 @@ export function getAllElementsWithAttribute(attribute, value) {
   return matchingElements;
 }
 
+/**
+ * Returns the department from a course slug.
+ * @param courseSlug
+ * @returns {*}
+ */
 export function getDepartment(courseSlug) {
-  const re = /^[A-Za-z]+/g;
   let slug = courseSlug;
   if (courseSlug.startsWith('(')) {
     slug = courseSlug.substring(1);
   }
-  const result = re.exec(slug);
+  const result = slug.split('_');
   return result[0];
 }
 
@@ -135,13 +145,19 @@ export function getDepartments(planChoice) {
   return ret;
 }
 
+/**
+ * Returns true if the courseSlug satisfies the planChoice.
+ * @param planChoice a plan choice.
+ * @param courseSlug a course's slug.
+ * @returns {*}
+ */
 function satisfiesSinglePlanChoice(planChoice, courseSlug) {
   const dept = getDepartment(planChoice);
   if (planChoice.includes('300+')) {
-    return courseSlug.startsWith(`${dept}3`) || courseSlug.startsWith(`${dept}4`);
+    return courseSlug.startsWith(`${dept}_3`) || courseSlug.startsWith(`${dept}_4`);
   } else
     if (planChoice.includes('400+')) {
-      return courseSlug.startsWith(`${dept}4`);
+      return courseSlug.startsWith(`${dept}_4`);
     }
   return planChoice.indexOf(courseSlug) !== -1;
 }

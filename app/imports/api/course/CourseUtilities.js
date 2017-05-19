@@ -197,3 +197,12 @@ export function chooseBetween(slugs, studentID, coursesTakenSlugs) {
   }
   return null;
 }
+
+/**
+ * Returns the department from the given course slug.
+ * @param courseSlug the course slug.
+ * @returns {string}
+ */
+export function getDepartment(courseSlug) {
+  return courseSlug.split('_')[0].toUpperCase();
+}
