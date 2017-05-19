@@ -81,7 +81,7 @@ class FeedCollection extends BaseCollection {
         // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have joined RadGrad.`;
         description = {
           user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-          description: 'have joined RadGrad.'
+          description: 'have joined RadGrad.',
         };
       } else {
         // description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
@@ -95,7 +95,7 @@ class FeedCollection extends BaseCollection {
       throw new Meteor.Error('User must be specified for feedType new-user.');
     }
     const feedID = this._collection.insert({
-      userIDs, description, timestamp, picture
+      userIDs, description, timestamp, picture,
     });
     return feedID;
   }
