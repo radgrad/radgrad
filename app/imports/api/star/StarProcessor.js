@@ -55,7 +55,7 @@ function findSemesterSlug(starDataObject) {
  * @returns { String } The slug.
  */
 function findCourseSlug(starDataObject) {
-  let slug = starDataObject.name.toLowerCase() + starDataObject.number;
+  let slug = `${starDataObject.name.toLowerCase()}_${starDataObject.number}`;
   if (!Slugs.isSlugForEntity(slug, Courses.getType())) {
     // TODO: hardwiring 'other' into the code is brittle.
     slug = 'other';
@@ -129,9 +129,9 @@ export function processStarCsvData(student, csvData) {
     const dataObjects = _.map(filteredData, (data) => {
       const name = data[nameIndex];
       let grade = data[gradeIndex];
-      if (name === 'ICS' && grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
+      if (grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
         grade = data[transferGradeIndex];
-      } else if (name === 'ICS' && grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
+      } else if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
         // got number assuming it is AP exam score need to determine the type of the exam.
         // const exam = data[transferCourseDesc];
         if (data[transferGradeIndex] > 2) {

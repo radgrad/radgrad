@@ -45,7 +45,7 @@ class SlugCollection extends BaseCollection {
   }
 
   /**
-   * Returns true if slugName is syntactically valid (i.e. consists of a-zA-Z0-9 or dash.)
+   * Returns true if slugName is syntactically valid (i.e. consists of a-zA-Z0-9 or dash or underscore.)
    * @param slugName The slug name.
    * @returns {boolean} True if it's OK.
    */

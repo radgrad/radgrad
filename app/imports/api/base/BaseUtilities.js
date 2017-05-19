@@ -19,7 +19,6 @@ import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstan
 import { Reviews } from '/imports/api/review/ReviewCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
-import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
 import { Teasers } from '/imports/api/teaser/TeaserCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import { VerificationRequests } from '/imports/api/verification/VerificationRequestCollection';
@@ -53,7 +52,6 @@ export function removeAllEntities() {
   Reviews.removeAll();
   Semesters.removeAll();
   Slugs.removeAll();
-  StarDataLogs.removeAll();
   Teasers.removeAll();
   Users.removeAll();
   VerificationRequests.removeAll();
@@ -142,10 +140,6 @@ export function clientRemoveAllEntities() {
   items = Slugs.find().fetch();
   _.map(items, (i) => {
     Slugs.removeIt(i._id);
-  });
-  items = StarDataLogs.find().fetch();
-  _.map(items, (i) => {
-    StarDataLogs.removeIt(i._id);
   });
   items = Teasers.find().fetch();
   _.map(items, (i) => {
