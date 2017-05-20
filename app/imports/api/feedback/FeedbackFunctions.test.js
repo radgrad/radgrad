@@ -20,7 +20,7 @@ if (Meteor.isServer) {
 
     before(function setup() {
       removeAllEntities();
-      defineTestFixture();
+      defineTestFixture('2017-03-10-10-04-42.json');
       studentID = makeSampleUser();
     });
 

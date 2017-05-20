@@ -13,10 +13,12 @@ if (Meteor.isServer) {
 
     before(function setup() {
       removeAllEntities();
+      Slugs.removeAll();
     });
 
     after(function teardown() {
       removeAllEntities();
+      Slugs.removeAll();
     });
 
     it('#isValidSlugName', function test() {
