@@ -56,5 +56,5 @@ export function removeAllEntities() {
   AcademicYearInstances.removeAll();
   PlanChoices.removeAll();
   AcademicPlans.removeAll();
-  Slugs.removeAll();
+//  Slugs.removeAll();
 }
