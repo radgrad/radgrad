@@ -50,6 +50,6 @@ export function defineTestFixture(fixtureName) {
   // }
 
   // if (!extraRestoreNames.length && !extraCollectionNames.length) {
-  _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
+  _.each(collectionList, collection => restoreCollection(collection, restoreJSON, false));
   // }
 }

@@ -34,9 +34,12 @@ function getDefinitions(restoreJSON, collection) {
  * Given a collection and the restoreJSON structure, looks up the definitions and invokes define() on them.
  * @param collection The collection to be restored.
  * @param restoreJSON The structure containing all of the definitions.
+ * @param consolep output console.log message if truey.
  */
-export function restoreCollection(collection, restoreJSON) {
+export function restoreCollection(collection, restoreJSON, consolep) {
   const definitions = getDefinitions(restoreJSON, collection._collectionName);
-  console.log(`Defining ${definitions.length} ${collection._collectionName} documents.`); // eslint-disable-line
+  if (consolep) {
+    console.log(`Defining ${definitions.length} ${collection._collectionName} documents.`); // eslint-disable-line
+  }
   _.each(definitions, definition => collection.define(definition));
 }
