@@ -1,4 +1,3 @@
-/* global document */
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module api/degree-plan/PlanChoiceUtilities */
@@ -94,24 +93,6 @@ export function buildSimpleName(slug) {
     ret = `${ret}${buildCourseSlugName(s)} or `;
   });
   return ret.substring(0, ret.length - 4);
-}
-
-/**
- * Returns the Elements in the DOM with the given attribute and  value.
- * @param attribute The div attribute
- * @param value the value.
- * @returns {Array}
- */
-export function getAllElementsWithAttribute(attribute, value) {
-  const matchingElements = [];
-  const allElements = document.getElementsByTagName('div');
-  for (let i = 0, n = allElements.length; i < n; i += 1) {
-    if (allElements[i].getAttribute(attribute) !== null && allElements[i].getAttribute(attribute) === value) {
-      // Element exists with attribute. Add to array.
-      matchingElements.push(allElements[i]);
-    }
-  }
-  return matchingElements;
 }
 
 /**
