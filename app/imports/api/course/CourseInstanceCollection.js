@@ -72,7 +72,15 @@ class CourseInstanceCollection extends BaseCollection {
    */
   define({ semester, course, verified = false, fromSTAR = false, grade = '', note = '', student, creditHrs }) {
     // Check arguments
-    const semesterID = Semesters.getID(semester);
+    let semesterID;
+    try {
+      semesterID = Semesters.getID(semester);
+    } catch (e) {
+      const split = semester.split('-');
+      const term = split[0];
+      const year = parseInt(split[1], 10);
+      semesterID = Semesters.define({ term, year });
+    }
     const semesterDoc = Semesters.findDoc(semesterID);
     const courseID = Courses.getID(course);
     const studentID = Users.getID(student);

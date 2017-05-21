@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { Users } from '/imports/api/user/UserCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { ROLE } from '../role/Role';
+import { Users } from '../user/UserCollection';
+import BaseCollection from '../base/BaseCollection';
 // import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -52,42 +52,42 @@ class AcademicYearInstanceCollection extends BaseCollection {
       return doc[0]._id;
     }
     const semesterIDs = [];
-    if (!Meteor.settings.quaters) {
+    if (!Meteor.settings.quarters) {
       try {
-        semesterIDs.push(Semesters.getID(`Fall-${year}`));
+        semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${year}`));
       } catch (e) {
-        semesterIDs.push(Semesters.define({ term: 'Fall', year }));
+        semesterIDs.push(Semesters.define({ term: Semesters.FALL, year }));
       }
       try {
-        semesterIDs.push(Semesters.getID(`Spring-${year + 1}`));
+        semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${year + 1}`));
       } catch (e) {
-        semesterIDs.push(Semesters.define({ term: 'Spring', year: year + 1 }));
+        semesterIDs.push(Semesters.define({ term: Semesters.SPRING, year: year + 1 }));
       }
       try {
-        semesterIDs.push(Semesters.getID(`Summer-${year + 1}`));
+        semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${year + 1}`));
       } catch (e) {
-        semesterIDs.push(Semesters.define({ term: 'Summer', year: year + 1 }));
+        semesterIDs.push(Semesters.define({ term: Semesters.SUMMER, year: year + 1 }));
       }
     } else {
       try {
-        semesterIDs.push(Semesters.getID(`Fall-${year}`));
+        semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${year}`));
       } catch (e) {
-        semesterIDs.push(Semesters.define({ term: 'Fall', year }));
+        semesterIDs.push(Semesters.define({ term: Semesters.FALL, year }));
       }
       try {
-        semesterIDs.push(Semesters.getID(`Winter-${year + 1}`));
+        semesterIDs.push(Semesters.getID(`${Semesters.WINTER}-${year + 1}`));
       } catch (e) {
-        semesterIDs.push(Semesters.define({ term: 'Winter', year: year + 1 }));
+        semesterIDs.push(Semesters.define({ term: Semesters.WINTER, year: year + 1 }));
       }
       try {
-        semesterIDs.push(Semesters.getID(`Spring-${year + 1}`));
+        semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${year + 1}`));
       } catch (e) {
-        semesterIDs.push(Semesters.define({ term: 'Spring', year: year + 1 }));
+        semesterIDs.push(Semesters.define({ term: Semesters.SPRING, year: year + 1 }));
       }
       try {
-        semesterIDs.push(Semesters.getID(`Summer-${year + 1}`));
+        semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${year + 1}`));
       } catch (e) {
-        semesterIDs.push(Semesters.define({ term: 'Summer', year: year + 1 }));
+        semesterIDs.push(Semesters.define({ term: Semesters.SUMMER, year: year + 1 }));
       }
     }
     // Define and return the docID

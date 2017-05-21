@@ -16,7 +16,7 @@ if (Meteor.isServer) {
 
     before(function setup() {
       removeAllEntities();
-      defineTestFixture('FeedbackFunctions.json');
+      defineTestFixture('PreferredChoice.json');
     });
 
     after(function teardown() {
