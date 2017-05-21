@@ -3,7 +3,7 @@ import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollecti
 import { Reviews } from '../review/ReviewCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
-import { getTotalICE } from '../ice/IceProcessor';
+import { getEarnedICE } from '../ice/IceProcessor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module api/level/LevelProcessor */
@@ -22,7 +22,7 @@ export function calcLevel(studentID) {
       verified.push(i);
     }
   });
-  const ice = getTotalICE(verified);
+  const ice = getEarnedICE(verified);
   const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true }).count();
   let level = 1;
   if (ice.i >= 100 && ice.c >= 100 && ice.e >= 100 && numReviews >= 6) {

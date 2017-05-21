@@ -72,7 +72,15 @@ class CourseInstanceCollection extends BaseCollection {
    */
   define({ semester, course, verified = false, fromSTAR = false, grade = '', note = '', student, creditHrs }) {
     // Check arguments
-    const semesterID = Semesters.getID(semester);
+    let semesterID;
+    try {
+      semesterID = Semesters.getID(semester);
+    } catch (e) {
+      const split = semester.split('-');
+      const term = split[0];
+      const year = parseInt(split[1], 10);
+      semesterID = Semesters.define({ term, year });
+    }
     const semesterDoc = Semesters.findDoc(semesterID);
     const courseID = Courses.getID(course);
     const studentID = Users.getID(student);
@@ -190,18 +198,14 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
-   * @returns { boolean } If the course is an ICS course associated with courseInstanceID.
+   * @returns { boolean } If the course is an interesting course associated with courseInstanceID.
    * @param courseInstanceID The course instance ID.
    * @throws {Meteor.Error} If courseInstanceID is not a valid ID.
    */
-  isICS(courseInstanceID) {
+  isInteresting(courseInstanceID) {
     this.assertDefined(courseInstanceID);
     const instance = this.findDoc(courseInstanceID);
-    const retVal = instance.note.startsWith('ICS');
-    if (retVal) {
-      return retVal;
-    }
-    return Courses.findDoc(instance.courseID).number.substring(0, 3) === 'ICS';
+    return Courses.findDoc(instance.courseID).number !== 'other';
   }
 
   /**

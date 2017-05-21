@@ -10,8 +10,6 @@ import { radgradCollections } from '../base/RadGradCollections';
 
 /**
  * CareerGoals represent the professional future(s) that the student wishes to work toward.
- * Note: Career Goals will probably need to be defined with a hook function that provides recommendations based upon
- * the specifics of the career. At that point, we'll probably need a new Base class that this class will extend.
  * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
  */
 class CareerGoalCollection extends BaseInstanceCollection {

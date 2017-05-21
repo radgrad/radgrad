@@ -12,7 +12,7 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 class SlugCollection extends BaseCollection {
 
   /**
-   * Creates the SlugCollection.
+   * Creates the Slug collection.
    */
   constructor() {
     super('Slug', new SimpleSchema({
@@ -38,19 +38,19 @@ class SlugCollection extends BaseCollection {
       throw new Meteor.Error(`Attempt to redefine slug: ${name}`);
     }
     if (!this.isValidSlugName(name)) {
-      throw new Meteor.Error(`Slug is not a-zA-Z0-9 or dash: ${name}`);
+      throw new Meteor.Error(`Slug is not a-zA-Z0-9 or dash or underscore: ${name}`);
     }
     const docID = this._collection.insert({ name, entityName });
     return docID;
   }
 
   /**
-   * Returns true if slugName is syntactically valid (i.e. consists of a-zA-Z0-9 or dash.)
+   * Returns true if slugName is syntactically valid (i.e. consists of a-zA-Z0-9 or dash or underscore.)
    * @param slugName The slug name.
    * @returns {boolean} True if it's OK.
    */
   isValidSlugName(slugName) {  // eslint-disable-line
-    const slugRegEx = new RegExp('^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$');
+    const slugRegEx = new RegExp('^[a-zA-Z0-9]+(?:[_-][a-zA-Z0-9]+)*$');
     return (typeof slugName === 'string') && slugName.length > 0 && slugRegEx.test(slugName);
   }
 
@@ -172,21 +172,3 @@ export const Slugs = new SlugCollection();
  */
 Slugs.publish();
 Slugs.subscribe();
-
-/* eslint object-shorthand: "off" */
-
-// TODO: Should methods be in their own file or at bottom of this one? I don't think we're consistent.
-Meteor.methods({
-  'SlugCollection.remove'(slug) {
-    check(slug, String);
-    Slugs.remove(slug); // TODO: 'remove(slug)' does not even exist. Why is this method defined?
-  },
-  'SlugCollection._removeAll'() {
-    Slugs._removeAll();
-  },
-  'SlugCollection.define'(name, entityName) {
-    check(name, String);
-    check(entityName, String);
-    Slugs.define(name, entityName);
-  },
-});

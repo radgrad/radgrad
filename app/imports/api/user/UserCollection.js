@@ -15,7 +15,7 @@ import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
+import { getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
@@ -421,18 +421,6 @@ class UserCollection extends BaseInstanceCollection {
     this.assertDefined(userID);
     AcademicPlans.assertDefined(academicPlanID);
     this._collection.update(userID, { $set: { academicPlanID } });
-  }
-
-  /**
-   * Returns an ICE object with the total of verified course and opportunity instance ICE values.
-   * @param studentID The userID.
-   * @throws {Meteor.Error} If userID is not a userID.
-   */
-  getTotalICE(studentID) {
-    this.assertDefined(studentID);
-    const courseDocs = CourseInstances.find({ studentID }).fetch();
-    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
-    return getTotalICE(courseDocs.concat(oppDocs));
   }
 
   /**

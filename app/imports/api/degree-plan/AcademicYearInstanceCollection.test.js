@@ -1,9 +1,9 @@
-import { Users } from '/imports/api/user/UserCollection';
-import { AcademicYearInstances } from '/imports/api/degree-plan/AcademicYearInstanceCollection';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { AcademicYearInstances } from './AcademicYearInstanceCollection';
+import { Users } from '../user/UserCollection';
+import { makeSampleUser } from '../user/SampleUsers';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
@@ -18,7 +18,7 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #toString', function test() {
       const student = Users.findSlugByID(makeSampleUser());
       const year = 2016;
       let docID = AcademicYearInstances.define({ year, student });
@@ -28,6 +28,7 @@ if (Meteor.isServer) {
       expect(AcademicYearInstances.isDefined(docID)).to.be.false;
       docID = AcademicYearInstances.restoreOne(dumpObject);
       expect(AcademicYearInstances.isDefined(docID)).to.be.true;
+      expect(AcademicYearInstances.toString(docID)).to.equal(`[AY 2016-2017 ${student}]`);
       AcademicYearInstances.removeIt(docID);
     });
   });

@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { Users } from '/imports/api/user/UserCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { ROLE } from '../role/Role';
+import { Users } from '../user/UserCollection';
+import BaseCollection from '../base/BaseCollection';
 // import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -26,9 +26,10 @@ class AcademicYearInstanceCollection extends BaseCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       semesterIDs: { type: [SimpleSchema.RegEx.Id] },
     }));
-    this.publicationNames = [];
-    this.publicationNames.push(this._collectionName);
-    this.publicationNames.push(`${this._collectionName}.studentID`);
+    this.publicationNames = {
+      Public: this._collectionName,
+      PerStudentID: `${this._collectionName}.studentID`,
+    };
     if (Meteor.server) {
       this._collection._ensureIndex({ studentID: 1 });
     }
@@ -38,8 +39,8 @@ class AcademicYearInstanceCollection extends BaseCollection {
    * Defines a new AcademicYearInstance.
    * @example
    * To define the 2016 - 2017 academic year for Joe Smith.
-   * AcademicYearInstances.define({ year: 2016,
-   *                                student: 'joesmith' });
+   *     AcademicYearInstances.define({ year: 2016,
+   *                                    student: 'joesmith' });
    * @param { Object } Object with keys year and student.
    * @throws {Meteor.Error} If the definition includes an undefined student or a year that is out of bounds.
    * @returns The newly created docID.
@@ -51,28 +52,48 @@ class AcademicYearInstanceCollection extends BaseCollection {
       return doc[0]._id;
     }
     const semesterIDs = [];
-    // const semesters = [];
-    try {
-      semesterIDs.push(Semesters.getID(`Fall-${year}`));
-    } catch (e) {
-      semesterIDs.push(Semesters.define({ term: 'Fall', year }));
+    if (!Meteor.settings.quarters) {
+      try {
+        semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${year}`));
+      } catch (e) {
+        semesterIDs.push(Semesters.define({ term: Semesters.FALL, year }));
+      }
+      try {
+        semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${year + 1}`));
+      } catch (e) {
+        semesterIDs.push(Semesters.define({ term: Semesters.SPRING, year: year + 1 }));
+      }
+      try {
+        semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${year + 1}`));
+      } catch (e) {
+        semesterIDs.push(Semesters.define({ term: Semesters.SUMMER, year: year + 1 }));
+      }
+    } else {
+      try {
+        semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${year}`));
+      } catch (e) {
+        semesterIDs.push(Semesters.define({ term: Semesters.FALL, year }));
+      }
+      try {
+        semesterIDs.push(Semesters.getID(`${Semesters.WINTER}-${year + 1}`));
+      } catch (e) {
+        semesterIDs.push(Semesters.define({ term: Semesters.WINTER, year: year + 1 }));
+      }
+      try {
+        semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${year + 1}`));
+      } catch (e) {
+        semesterIDs.push(Semesters.define({ term: Semesters.SPRING, year: year + 1 }));
+      }
+      try {
+        semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${year + 1}`));
+      } catch (e) {
+        semesterIDs.push(Semesters.define({ term: Semesters.SUMMER, year: year + 1 }));
+      }
     }
-    // semesters.push(Semesters.findDoc(semesterIDs[0]));
-    try {
-      semesterIDs.push(Semesters.getID(`Spring-${year + 1}`));
-    } catch (e) {
-      semesterIDs.push(Semesters.define({ term: 'Spring', year: year + 1 }));
-    }
-    // semesters.push(Semesters.findDoc(semesterIDs[1]));
-    try {
-      semesterIDs.push(Semesters.getID(`Summer-${year + 1}`));
-    } catch (e) {
-      semesterIDs.push(Semesters.define({ term: 'Summer', year: year + 1 }));
-    }
-    // semesters.push(Semesters.findDoc(semesterIDs[2]));
     // Define and return the docID
     return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs });
   }
+
   /**
    * Depending on the logged in user publish only their AcademicYears. If
    * the user is in the Role.ADMIN then publish all AcademicYears. If the
@@ -81,31 +102,19 @@ class AcademicYearInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this.publicationNames[0], function publish() {
+      Meteor.publish(this.publicationNames.Public, function publish() {
         if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
       });
-      Meteor.publish(this.publicationNames[1], function filterStudentID(studentID) { // eslint-disable-line
+      Meteor.publish(this.publicationNames.PerStudentID, function filterStudentID(studentID) { // eslint-disable-line
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
         return instance._collection.find({ studentID });
       });
     }
-  }
-
-  /**
-   * Return the publication name.
-   * @param index The optional index for the publication name.
-   * @returns { String } The publication name, as a string.
-   */
-  getPublicationName(index) {
-    if (index) {
-      return this.publicationNames[index];
-    }
-    return this._collectionName;
   }
 
   /**

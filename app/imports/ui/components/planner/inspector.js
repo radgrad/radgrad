@@ -87,8 +87,8 @@ Template.Inspector.helpers({
   },
   courses100() {
     let ret = [];
-    const courses = Courses.find({ number: /ICS 1/ }).fetch();
-    const instances = CourseInstances.find({ note: /ICS 1/ }).fetch();
+    const courses = Courses.find({ number: /1\d\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /1\d\d/ }).fetch();
     const courseTakenIDs = [];
     _.map(instances, (ci) => {
       courseTakenIDs.push(ci.courseID);
@@ -96,12 +96,19 @@ Template.Inspector.helpers({
     ret = _.filter(courses, function filter(c) {
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
-    return ret;
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else if (a.number > b.number) {
+        return 1;
+      }
+      return 0;
+    });
   },
   courses200() {
     let ret = [];
-    const courses = Courses.find({ number: /ICS 2/ }).fetch();
-    const instances = CourseInstances.find({ note: /ICS 2/ }).fetch();
+    const courses = Courses.find({ number: /2\d\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /2\d\d/ }).fetch();
     const courseTakenIDs = [];
     _.map(instances, (ci) => {
       courseTakenIDs.push(ci.courseID);
@@ -109,12 +116,19 @@ Template.Inspector.helpers({
     ret = _.filter(courses, function filter(c) {
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
-    return ret;
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else if (a.number > b.number) {
+        return 1;
+      }
+      return 0;
+    });
   },
   courses300() {
     let ret = [];
-    const courses = Courses.find({ number: /ICS 3/ }).fetch();
-    const instances = CourseInstances.find({ note: /ICS 3/ }).fetch();
+    const courses = Courses.find({ number: /3[01234]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /3[01234]\d/ }).fetch();
     const courseTakenIDs = [];
     _.map(instances, (ci) => {
       courseTakenIDs.push(ci.courseID);
@@ -122,12 +136,39 @@ Template.Inspector.helpers({
     ret = _.filter(courses, function filter(c) {
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
-    return ret;
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else if (a.number > b.number) {
+        return 1;
+      }
+      return 0;
+    });
+  },
+  courses350() {
+    let ret = [];
+    const courses = Courses.find({ number: /3[56789]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /3[56789]\d/ }).fetch();
+    const courseTakenIDs = [];
+    _.map(instances, (ci) => {
+      courseTakenIDs.push(ci.courseID);
+    });
+    ret = _.filter(courses, function filter(c) {
+      return _.indexOf(courseTakenIDs, c._id) === -1;
+    });
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else if (a.number > b.number) {
+        return 1;
+      }
+      return 0;
+    });
   },
   courses410() {
     let ret = [];
-    const courses = Courses.find({ number: /ICS 4[0123]/ }).fetch();
-    const instances = CourseInstances.find({ note: /ICS 4[0123]/ }).fetch();
+    const courses = Courses.find({ number: /4[0123]/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[0123]/ }).fetch();
     const courseTakenIDs = [];
     _.map(instances, (ci) => {
       courseTakenIDs.push(ci.courseID);
@@ -135,12 +176,19 @@ Template.Inspector.helpers({
     ret = _.filter(courses, function filter(c) {
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
-    return ret;
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else if (a.number > b.number) {
+        return 1;
+      }
+      return 0;
+    });
   },
   courses440() {
     let ret = [];
-    const courses = Courses.find({ number: /ICS 4[456]/ }).fetch();
-    const instances = CourseInstances.find({ note: /ICS 4[456]/ }).fetch();
+    const courses = Courses.find({ number: /4[456]/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[456]/ }).fetch();
     const courseTakenIDs = [];
     _.map(instances, (ci) => {
       courseTakenIDs.push(ci.courseID);
@@ -148,22 +196,36 @@ Template.Inspector.helpers({
     ret = _.filter(courses, function filter(c) {
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
-    return ret;
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else if (a.number > b.number) {
+        return 1;
+      }
+      return 0;
+    });
   },
   courses470() {
     let ret = [];
-    const courses = Courses.find({ number: /ICS 4[789]/ }).fetch();
-    const instances = CourseInstances.find({ note: /ICS 4[789]/ }).fetch();
+    const courses = Courses.find({ number: /4[789]/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[789]/ }).fetch();
     const courseTakenIDs = [];
     _.map(instances, (ci) => {
-      if (ci.note !== 'ICS 499') {
+      if (!ci.note.endsWith('499')) {
         courseTakenIDs.push(ci.courseID);
       }
     });
     ret = _.filter(courses, function filter(c) {
       return _.indexOf(courseTakenIDs, c._id) === -1;
     });
-    return ret;
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else if (a.number > b.number) {
+        return 1;
+      }
+      return 0;
+    });
   },
   dictionary() {
     return Template.instance().state;

@@ -8,10 +8,10 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('PlanChoiceCollection', function testSuite() {
-    const simple = 'ics111';
-    const choice = 'ics313,ics361';
-    const complex = 'ics321,ics332,(ics415,ics351)';
-    const complex2 = '(ics312,ics331),(ics313,ics361),ics355';
+    const simple = 'ics_111';
+    const choice = 'ics_313,ics_361';
+    const complex = 'ics_321,ics_332,(ics_415,ics_351)';
+    const complex2 = '(ics_312,ics_331),(ics_313,ics_361),ics_355';
 
     before(function setup() {
       removeAllEntities();

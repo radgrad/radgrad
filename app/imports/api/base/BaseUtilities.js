@@ -17,8 +17,7 @@ import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
 import { Reviews } from '/imports/api/review/ReviewCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
+// import { Slugs } from '/imports/api/slug/SlugCollection';
 import { Teasers } from '/imports/api/teaser/TeaserCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import { VerificationRequests } from '/imports/api/verification/VerificationRequestCollection';
@@ -51,12 +50,11 @@ export function removeAllEntities() {
   OpportunityTypes.removeAll();
   Reviews.removeAll();
   Semesters.removeAll();
-  StarDataLogs.removeAll();
   Teasers.removeAll();
   Users.removeAll();
   VerificationRequests.removeAll();
   AcademicYearInstances.removeAll();
   PlanChoices.removeAll();
   AcademicPlans.removeAll();
-  Slugs.removeAll();
+//  Slugs.removeAll();
 }
