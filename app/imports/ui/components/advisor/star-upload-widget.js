@@ -32,7 +32,7 @@ Template.Star_Upload_Widget.onCreated(function starUploadWidgetOnCreated() {
   this.currentUpload = new ReactiveVar(false);
   this.autorun(() => {
     this.subscribe(CourseInstances.publicationNames.studentID, this.data.studentID.get());
-    this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
+    this.subscribe(OpportunityInstances.publicationNames.studentID, this.data.studentID.get());
   });
 });
 
