@@ -28,7 +28,7 @@ class SemesterCollection extends BaseInstanceCollection {
     this.SUMMER = 'Summer';
     this.FALL = 'Fall';
     this.WINTER = 'Winter';
-    if (Meteor.settings.quaters) {
+    if (Meteor.settings.quarters) {
       this.terms = [this.SPRING, this.SUMMER, this.FALL, this.WINTER];
       // use Day of Year (1..365) to represent semester boundaries.
       // Boundaries might vary by a day depending upon whether this year is a leap year.

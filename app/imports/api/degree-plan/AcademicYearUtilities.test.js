@@ -14,7 +14,7 @@ if (Meteor.isServer) {
 
     before(function setup() {
       removeAllEntities();
-      defineTestFixture('FeedbackFunctions.json');
+      defineTestFixture('AcademicYearUtilities.json');
     });
 
     after(function teardown() {

@@ -1,0 +1,227 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "collections": [
+    {
+      "name": "AcademicPlanCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "AdvisorLogCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "CareerGoalCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "CourseCollection",
+      "contents": [
+        {
+          "name": "Introduction to Computer Science I",
+          "shortName": "Comp Sci I",
+          "slug": "ics_111",
+          "number": "ICS 111",
+          "description": "Overview of computer science, including Java programming, control structures, subroutines, objects and classes, GUI programming, arrays, and recursion.",
+          "creditHrs": 4,
+          "interests": [
+            "java"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS111.html",
+          "prerequisites": []
+        },
+        {
+          "name": "Discrete Mathematics for Computer Science I",
+          "shortName": "Discrete Math I",
+          "slug": "ics_141",
+          "number": "ICS 141",
+          "description": "Introduction to propositional and predicate logic, sets, functions, linear algebra, algorithms, mathematical reasoning, recursion, counting techniques, and probability theory. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS141/)",
+          "creditHrs": 3,
+          "interests": [
+            "algorithms"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS141.html",
+          "prerequisites": []
+        },
+        {
+          "name": "Introduction to Computer Science II",
+          "shortName": "Comp Sci II",
+          "slug": "ics_211",
+          "number": "ICS 211",
+          "description": "Object-oriented programming, algorithms and their complexity, introduction to software engineering, lists, stacks, queues, trees hash tables, and searching and sorting algorithms. [View more information here.](http://courses.ics.hawaii.edu/ReviewICS211/)",
+          "creditHrs": 4,
+          "interests": [
+            "algorithms",
+            "software-engineering",
+            "java"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS211.html",
+          "prerequisites": [
+            "ics_111"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CourseInstanceCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "DesiredDegreeCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "FeedCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "FeedbackCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "FeedbackInstanceCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "HelpMessageCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "InterestCollection",
+      "contents": [
+        {
+          "name": "Algorithms",
+          "slug": "algorithms",
+          "description": "Simply put, an algorithm is a self-contained step-by-step set of operations to be performed. More specifically, an algorithm is an effective method that can be expressed within a finite amount of space and time and in a well-defined formal language for calculating a function. Starting from an initial state and initial input (perhaps empty), the instructions describe a computation that, when executed, proceeds through a finite number of well-defined successive states, eventually producing \"output\" and terminating at a final ending state. The transition from one state to the next is not necessarily deterministic; some algorithms, known as randomized algorithms, incorporate random input. [Learn more here.](https://en.wikipedia.org/wiki/Algorithm)",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Java",
+          "slug": "java",
+          "description": "Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers \"write once, run anywhere\", meaning that compiled Java code can run on all platforms that support Java without the need for recompilation. Java applications are typically compiled to bytecode that can run on any Java virtual machine regardless of computer architecture. As of 2016, Java is one of the most popular programming languages in use, particularly for client-server web applications, with a reported 9 million developers. [Learn more here.](https://en.wikipedia.org/wiki/Java_(programming_language))",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Ruby",
+          "slug": "ruby",
+          "description": "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language. Ruby was influenced by Perl, Smalltalk, Eiffel, Ada, and Lisp. It supports multiple programming paradigms, including functional, object-oriented, and imperative. It also has a dynamic type system and automatic memory management. Ruby's creator, Yukihiro Matsumoto, has stated, \"I hope to see Ruby help every programmer in the world to be productive, and to enjoy programming, and to be happy. That is the primary purpose of Ruby language.\" [Learn more here.](http://www.ruby-lang.org/en/)",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Software Engineering",
+          "slug": "software-engineering",
+          "description": "The systematic application of scientific and technological knowledge, methods, and experience to the design, implementation, testing, and documentation of software. The discipline of software engineering was created to address poor quality of software, get projects exceeding time and budget under control, and ensure that software is built systematically, rigorously, measurably, on time, on budget, and within specification. In 2012, Software Engineering was ranked as the best job in the United States by CareerCast.com. [Learn more here.](https://en.wikipedia.org/wiki/Software_engineering)",
+          "interestType": "cs-disciplines"
+        }
+      ]
+    },
+    {
+      "name": "InterestTypeCollection",
+      "contents": [
+        {
+          "name": "CS Disciplines",
+          "slug": "cs-disciplines",
+          "description": "Computer science and engineering areas of interest, not including languages, tools, technologies."
+        },
+        {
+          "name": "technologies",
+          "slug": "technologies",
+          "description": "Computer science and engineering languages, tools, and technologies"
+        }
+      ]
+    },
+    {
+      "name": "MentorAnswerCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "MentorProfileCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "MentorQuestionCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "OpportunityCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "OpportunityInstanceCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "OpportunityTypeCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "PlanChoiceCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "ReviewCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "SemesterCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "TeaserCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "UserCollection",
+      "contents": [
+        {
+          "firstName": "Admin",
+          "lastName": "RadGrad",
+          "slug": "radgrad",
+          "email": "radgrad@hawaii.edu",
+          "password": "foo",
+          "role": "ADMIN",
+          "uhID": "1111-1111",
+          "picture": "/images/mockup/radgrad.png",
+          "website": null,
+          "interests": [],
+          "careerGoals": [],
+          "desiredDegree": null,
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
+        }
+      ]
+    },
+    {
+      "name": "ValidUserAccountCollection",
+      "contents": [
+        {
+          "username": "radgrad"
+        }
+      ]
+    },
+    {
+      "name": "VerificationRequestCollection",
+      "contents": [
+      ]
+    }
+  ]
+}

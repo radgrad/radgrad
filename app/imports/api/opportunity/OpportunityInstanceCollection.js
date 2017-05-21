@@ -53,7 +53,15 @@ class OpportunityInstanceCollection extends BaseCollection {
 
   define({ semester, opportunity, verified = false, student }) {
     // Validate semester, opportunity, verified, and studentID
-    const semesterID = Semesters.getID(semester);
+    let semesterID;
+    try {
+      semesterID = Semesters.getID(semester);
+    } catch (e) {
+      const split = semester.split('-');
+      const term = split[0];
+      const year = parseInt(split[1], 10);
+      semesterID = Semesters.define({ term, year });
+    }
     const semesterDoc = Semesters.findDoc(semesterID);
     const studentID = Users.getID(student);
     const user = Users.findDoc(studentID);
