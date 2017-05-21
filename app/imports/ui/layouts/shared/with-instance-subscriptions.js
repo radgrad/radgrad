@@ -29,7 +29,7 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
     instanceSubs.subscribe(Feeds.getPublicationName());
     instanceSubs.subscribe(MentorAnswers.getPublicationName());
     instanceSubs.subscribe(MentorQuestions.getPublicationName());
-    instanceSubs.subscribe(OpportunityInstances.getPublicationName());
+    instanceSubs.subscribe(OpportunityInstances.publicationNames.student);
     instanceSubs.subscribe(VerificationRequests.getPublicationName());
     self.ready.set(instanceSubs.ready());
   });
