@@ -28,11 +28,12 @@ class OpportunityInstanceCollection extends BaseCollection {
       studentID: { type: SimpleSchema.RegEx.Id },
       ice: { type: Object, optional: true, blackbox: true },
     }));
-    this.publicationNames = [];
-    this.publicationNames.push(this._collectionName);
-    this.publicationNames.push(`${this._collectionName}.Public`);
-    this.publicationNames.push(`${this._collectionName}.PerStudentAndSemester`);
-    this.publicationNames.push(`${this._collectionName}.studentID`);
+    this.publicationNames = {
+      student: this._collectionName,
+      publicPublish: `${this._collectionName}.Public`,
+      perStudentAndSemester: `${this._collectionName}.PerStudentAndSemester`,
+      studentID: `${this._collectionName}.studentID`,
+    };
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, studentID: 1, semesterID: 1 });
     }
@@ -123,18 +124,6 @@ class OpportunityInstanceCollection extends BaseCollection {
   }
 
   /**
-   * Return the publication name.
-   * @param index The optional index for the publication name.
-   * @returns { String } The publication name, as a string.
-   */
-  getPublicationName(index) {
-    if (index) {
-      return this.publicationNames[index];
-    }
-    return this._collectionName;
-  }
-
-  /**
    * Returns the Semester associated with the OpportunityInstance with the given instanceID.
    * @param instanceID The id of the OpportunityInstance.
    * @returns {Object} The associated Semester.
@@ -166,21 +155,21 @@ class OpportunityInstanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(this.publicationNames[0], function publish() {
+      Meteor.publish(this.publicationNames.student, function publish() {
         if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR,
           ROLE.FACULTY, ROLE.STUDENT])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
       });
-      Meteor.publish(this.publicationNames[1], function publicPublish(opportunityID) {  // eslint-disable-line
+      Meteor.publish(this.publicationNames.publicPublish, function publicPublish(opportunityID) {  // eslint-disable-line
         // check the opportunityID.
         new SimpleSchema({
           opportunityID: { type: String },
         }).validate({ opportunityID });
         return instance._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
       });
-      Meteor.publish(this.publicationNames[2],
+      Meteor.publish(this.publicationNames.perStudentAndSemester,
           function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
             new SimpleSchema({
               studentID: { type: String },
@@ -188,7 +177,7 @@ class OpportunityInstanceCollection extends BaseCollection {
             }).validate({ studentID, semesterID });
             return instance._collection.find({ studentID, semesterID });
           });
-      Meteor.publish(this.publicationNames[3], function filterStudentID(studentID) { // eslint-disable-line
+      Meteor.publish(this.publicationNames.studentID, function filterStudentID(studentID) { // eslint-disable-line
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
