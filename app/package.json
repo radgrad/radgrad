@@ -9,6 +9,7 @@
     "pretest": "npm run lint",
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs --no-release-check",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check",
+    "coverage-cam": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check --settings ../config/settings.coverage.cam.json",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r ."
   },
   "dependencies": {

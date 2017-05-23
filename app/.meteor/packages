@@ -26,7 +26,7 @@ mdg:validated-method
 
 # Testing
 dispatch:mocha-phantomjs
-practicalmeteor:mocha
+practicalmeteor:mocha@2.4.5_6
 
 # Users and accounts
 alanning:roles
@@ -65,3 +65,5 @@ meteorhacks:kadira
 meteorhacks:kadira-profiler
 kadira:debug
 meteorhacks:subs-manager
+lmieulet:meteor-coverage
+practicalmeteor:mocha-console-runner
