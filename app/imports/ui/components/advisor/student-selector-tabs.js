@@ -215,7 +215,7 @@ Template.Student_Selector_Tabs.events({
                 feedType: 'new-user',
                 timestamp,
               };
-              Feeds.define(feedDefinition);
+              Feeds.defineNewUser(feedDefinition);
             }
             const user = Users.getUserFromUsername(userName);
             instance.studentID.set(user._id);

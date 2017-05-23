@@ -72,6 +72,7 @@ Template.Student_Explorer_Add_Review_Widget.events({
           feedType: 'new-course-review',
           timestamp: Date.now(),
         };
+        Feeds.defineNewCourseReview(feedDefinition);
       } else {
         feedDefinition = {
           user: [newData.student],
@@ -79,8 +80,8 @@ Template.Student_Explorer_Add_Review_Widget.events({
           feedType: 'new-opportunity-review',
           timestamp: Date.now(),
         };
+        Feeds.defineNewOpportunityReview(feedDefinition);
       }
-      Feeds.define(feedDefinition);
     } else {
       FormUtils.indicateError(instance);
     }

@@ -68,7 +68,7 @@ Template.Verification_Event.events({
           feedType: 'verified-opportunity',
           timestamp: Date.now(),
         };
-        Feeds.define(feedDefinition);
+        Feeds.defineNewVerifiedOpportunity(feedDefinition);
       }
     } catch (e) {
       alert(`${student} is not a valid student. ${e}`); // eslint-disable-line no-undef, no-alert

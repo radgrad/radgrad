@@ -51,6 +51,6 @@ Template.Add_Course_Widget.events({
       feedType: 'new-course',
       timestamp: Date.now(),
     };
-    Feeds.define(feedDefinition);
+    Feeds.defineNewCourse(feedDefinition);
   },
 });

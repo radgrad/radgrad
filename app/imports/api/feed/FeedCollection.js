@@ -48,230 +48,198 @@ class FeedCollection extends BaseCollection {
     }));
   }
 
-  // TODO: The define method needs more documentation. What are valid values for each parameter?
-  // Consider multiple define methods, one for each feed type, with appropriate required params for each.
   /**
-   * Defines a new Feed.
+   * Defines a new Feed (new user).
    * @example
    * Feed.define({ user: ['abigailkealoha'],
    *               feedType: 'new-user'
    *               timestamp: '12345465465', });
-   *
-   * There are currently six feedTypes: new-user, new-course,
-   * new-opportunity, verified-opportunity, new-course-review, and new-opportunity-review.
-   * All feeds require keys feedType and timestamp.
-   * FeedType new-user requires keys user, feedType, timestamp.
-   * FeedType new-course requires keys user, course, feedType, timestamp.
-   * FeedType new-opportunity requires keys user, opportunity, feedType, timestamp.
-   * FeedType verified-opportunity requires keys user, opportunity, semester, feedType, and timestamp.
-   * FeedType new-course-review requires keys user, course, feedType, and timestamp.
-   * FeedType new-opportunity-review requires keys user, opportunity, feedType, and timestamp.
-   * @param { Object } description Object with keys user, opportunity, course, semester, feedType, and timestamp.
+   * @param { Object } description Object with keys user and timestamp.
    * @returns The newly created docID.
+   * @throws {Meteor.Error} If not a valid user.
    */
-  defineNewUser({ user, timestamp }) {
+  defineNewUser({ user, feedType, timestamp }) {
     let userIDs;
     let picture;
     let description;
-    if (user !== undefined) {
-      userIDs = _.map(user, function (u) {
-        return Users.getUserFromUsername(u)._id;
-      });
-      if (userIDs.length > 1) {
-        // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have joined RadGrad.`;
-        description = {
-          user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-          description: 'have joined RadGrad.',
-        };
-      } else {
-        // description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
-        description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.' };
+    let userID;
+    userIDs = _.map(user, function (u) {
+      userID = Users.getUserFromUsername(u)._id;
+      if (!userID) {
+        throw new Meteor.Error('User is invalid.');
       }
-      picture = Users.findDoc(userIDs[0]).picture;
-      if (!picture) {
-        picture = '/images/people/default-profile-picture.png';
-      }
-    } else {
-      throw new Meteor.Error('User must be specified for feedType new-user.');
-    }
-    const feedID = this._collection.insert({
-      userIDs, description, timestamp, picture,
+      return userID;
     });
+    if (userIDs.length > 1) {
+      description = {
+        user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
+        description: 'have joined RadGrad.',
+      };
+    } else {
+      description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.' };
+    }
+    picture = Users.findDoc(userIDs[0]).picture;
+    const feedID = this._collection.insert({ userIDs, description, feedType, timestamp, picture, });
     return feedID;
   }
 
   /**
-   * Defines a new Feed.
+   * Defines a new Feed (new course).
    * @example
-   * Feed.define({ user: ['abigailkealoha'],
-   *               feedType: 'new-user'
-   *               timestamp: '12345465465', });
-   *
    * Feed.define({ user: 'abigailkealoha',
    *               course: 'ics-100'
    *               feedType: 'new-course'
    *               timestamp: '12345465465', });
-   *
+   * @param { Object } description Object with keys course, feedType, and timestamp.
+   * @returns The newly created docID.
+   * @throws {Meteor.Error} If not a valid course.
+   */
+  defineNewCourse({ course, feedType, timestamp }) {
+    let courseID;
+    let picture;
+    let description;
+    courseID = Courses.getID(course);
+    description = {
+      item: Courses.findDoc(courseID).name,
+      description: 'has been added to Courses'
+    };
+    picture = '/images/radgrad_logo.png';
+    const feedID = this._collection.insert({ courseID, description, feedType, picture, timestamp, });
+    return feedID;
+  }
+
+  /**
+   * Defines a new Feed (new opportunity).
+   * @example
    * Feed.define({ user: 'abigailkealoha',
    *               opportunity: 'att-hackathon'
    *               feedType: 'new-opportunity'
    *               timestamp: '12345465465', });
-   *
+   * @param { Object } description Object with keys opportunity, feedType, and timestamp.
+   * @returns The newly created docID.
+   * @throws {Meteor.Error} If not a valid opportunity.
+   */
+  defineNewOpportunity({ opportunity, feedType, timestamp }) {
+    let opportunityID;
+    let picture;
+    let description;
+    opportunityID = Opportunities.getID(opportunity);
+    description = {
+      item: Opportunities.findDoc(opportunityID).name,
+      description: 'has been added to Opportunities'
+    };
+    picture = '/images/radgrad_logo.png';
+    const feedID = this._collection.insert({ opportunityID, description, timestamp, picture, feedType, });
+    return feedID;
+  }
+
+  /**
+   * Defines a new Feed (verified opportunity).
+   * @example
    * Feed.define({ user: ['abigailkealoha'],
    *               opportunity: 'att-hackathon'
    *               semester: 'Spring-2013'
    *               feedType: 'verified-opportunity'
    *               timestamp: '12345465465', });
-   *
+   * @param { Object } description Object with keys user, opportunity, semester, feedType, and timestamp.
+   * @returns The newly created docID.
+   * @throws {Meteor.Error} If not a valid opportunity, semester, or user.
+   */
+  defineNewVerifiedOpportunity({ user, opportunity, semester, feedType, timestamp }) {
+    let userIDs;
+    let opportunityID;
+    let semesterID;
+    let picture;
+    let description;
+    userIDs = _.map(user, function (u) {
+      return Users.getUserFromUsername(u)._id;
+    });
+    semesterID = Semesters.getID(semester);
+    opportunityID = Opportunities.getID(opportunity);
+    if (userIDs.length > 1) {
+      description = {
+        user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
+        description: 'have been verified for', item: Opportunities.findDoc(opportunityID).name,
+        semester: Semesters.toString(semesterID, false)
+      };
+    } else {
+      description = {
+        user: Users.getFullName(userIDs[0]),
+        description: 'has been verified for', item: Opportunities.findDoc(opportunityID).name,
+        semester: Semesters.toString(semesterID, false)
+      };
+    }
+    picture = '/images/radgrad_logo.png';
+    const feedID = this._collection.insert({
+      userIDs, opportunityID, semesterID, description, timestamp, picture, feedType,
+    });
+    return feedID;
+  }
+
+  /**
+   * Defines a new Feed (new course review).
+   * @example
    * Feed.define({ user: ['abigailkealoha'],
    *               course: 'ics111'
    *               feedType: 'new-course-review'
    *               timestamp: '12345465465', });
-   *
+   * @param { Object } description Object with keys user, course, feedType, and timestamp.
+   * @returns The newly created docID.
+   * @throws {Meteor.Error} If not a valid course or user.
+   */
+  defineNewCourseReview({ user, course, feedType, timestamp }) {
+    let userIDs;
+    let courseID;
+    let picture;
+    let description;
+    userIDs = _.map(user, function (u) {
+      return Users.getUserFromUsername(u)._id;
+    });
+    courseID = Courses.getID(course);
+    description = {
+      user: Users.getFullName(userIDs[0]), description: 'has added a course review for ',
+      item: Courses.findDoc(courseID).name
+    };
+    picture = Users.findDoc(userIDs[0]).picture;
+    if (!picture) {
+      picture = '/images/people/default-profile-picture.png';
+    }
+    const feedID = this._collection.insert({
+      userIDs, courseID, description, timestamp, picture, feedType,
+    });
+    return feedID;
+  }
+
+  /**
+   * Defines a new Feed (new opportunity review).
+   * @example
    * Feed.define({ user: ['abigailkealoha'],
    *               opportunity: 'att-hackathon'
    *               feedType: 'new-opportunity-review'
    *               timestamp: '12345465465', });
-   *
-   * There are currently six feedTypes: new-user, new-course,
-   * new-opportunity, verified-opportunity, new-course-review, and new-opportunity-review.
-   * All feeds require keys feedType and timestamp.
-   * FeedType new-user requires keys user, feedType, timestamp.
-   * FeedType new-course requires keys user, course, feedType, timestamp.
-   * FeedType new-opportunity requires keys user, opportunity, feedType, timestamp.
-   * FeedType verified-opportunity requires keys user, opportunity, semester, feedType, and timestamp.
-   * FeedType new-course-review requires keys user, course, feedType, and timestamp.
-   * FeedType new-opportunity-review requires keys user, opportunity, feedType, and timestamp.
-   * @param { Object } description Object with keys user, opportunity, course, semester, feedType, and timestamp.
+   * @param { Object } description Object with keys user, opportunity, feedType, and timestamp.
    * @returns The newly created docID.
+   * @throws {Meteor.Error} If not a valid opportunity or user.
    */
-  define({ user, opportunity, course, semester, feedType, timestamp }) {
+  defineNewOpportunityReview({ user, opportunity, feedType, timestamp }) {
     let userIDs;
     let opportunityID;
-    let courseID;
-    let semesterID;
     let picture;
     let description;
-    // TODO: The following logic is crazy hard to follow. What are allowable combinations of values?
-    if (feedType === 'new-user') {
-      if (user !== undefined) {
-        userIDs = _.map(user, function (u) {
-          return Users.getUserFromUsername(u)._id;
-        });
-        if (userIDs.length > 1) {
-          // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have joined RadGrad.`;
-          description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-            description: 'have joined RadGrad.' };
-        } else {
-          // description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
-          description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.' };
-        }
-        picture = Users.findDoc(userIDs[0]).picture;
-        if (!picture) {
-          picture = '/images/people/default-profile-picture.png';
-        }
-      } else {
-        throw new Meteor.Error('User must be specified for feedType new-user.');
-      }
-    } else if (feedType === 'new-opportunity') {
-      if (opportunity !== undefined) {
-        opportunityID = Opportunities.getID(opportunity);
-        // description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities.`;
-        description = { item: Opportunities.findDoc(opportunityID).name,
-          description: 'has been added to Opportunities' };
-        picture = '/images/radgrad_logo.png';
-      } else {
-        throw new Meteor.Error('Opportunity must be specified for feedType new-opportunity.');
-      }
-    } else if (feedType === 'new-course') {
-      if (course !== undefined) {
-        courseID = Courses.getID(course);
-        // description = `${Courses.findDoc(courseID).name} has been added to Courses.`;
-        description = { item: Courses.findDoc(courseID).name,
-          description: 'has been added to Courses' };
-        picture = '/images/radgrad_logo.png';
-      } else {
-        throw new Meteor.Error('Course must be specified for feedType new-course.');
-      }
-    } else if (feedType === 'verified-opportunity') {
-      if (user !== undefined) {
-        userIDs = _.map(user, function (u) {
-          return Users.getUserFromUsername(u)._id;
-        });
-      } else {
-        throw new Meteor.Error('User must be specified for feedType verified-opportunity.');
-      }
-      if (semester !== undefined) {
-        semesterID = Semesters.getID(semester);
-      } else {
-        throw new Meteor.Error('Semester must be specified for feedType verified-opportunity.');
-      }
-      if (opportunity !== undefined) {
-        opportunityID = Opportunities.getID(opportunity);
-        if (userIDs.length > 1) {
-          // description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} other(s) have been verified for
-          // ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)}).`;
-          description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-            description: 'have been verified for', item: Opportunities.findDoc(opportunityID).name,
-            semester: Semesters.toString(semesterID, false) };
-        } else {
-          // description = `${Users.getFullName(userIDs[0])} has been verified for
-          // ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)}).`;
-          description = { user: Users.getFullName(userIDs[0]),
-            description: 'has been verified for', item: Opportunities.findDoc(opportunityID).name,
-            semester: Semesters.toString(semesterID, false) };
-        }
-        picture = '/images/radgrad_logo.png';
-      } else {
-        throw new Meteor.Error('Opportunity must be specified for feedType verified-opportunity.');
-      }
-    } else if (feedType === 'new-course-review') {
-      if (user !== undefined) {
-        userIDs = _.map(user, function (u) {
-          return Users.getUserFromUsername(u)._id;
-        });
-      } else {
-        throw new Meteor.Error('User must be specified for feedType new-course-review.');
-      }
-      if (course !== undefined) {
-        courseID = Courses.getID(course);
-      } else {
-        throw new Meteor.Error('Course must be specified for feedType new-course-review.');
-      }
-      // description = `${Users.getFullName(userIDs[0])} has added a course review for
-      // ${Courses.findDoc(courseID).name}.`;
-      description = { user: Users.getFullName(userIDs[0]), description: 'has added a course review for ',
-        item: Courses.findDoc(courseID).name };
-      picture = Users.findDoc(userIDs[0]).picture;
-      if (!picture) {
-        picture = '/images/people/default-profile-picture.png';
-      }
-    } else if (feedType === 'new-opportunity-review') {
-      if (user !== undefined) {
-        userIDs = _.map(user, function (u) {
-          return Users.getUserFromUsername(u)._id;
-        });
-      } else {
-        throw new Meteor.Error('User must be specified for feedType new-opportunity-review.');
-      }
-      if (opportunity !== undefined) {
-        opportunityID = Opportunities.getID(opportunity);
-      } else {
-        throw new Meteor.Error('Opportunity must be specified for feedType new-opportunity-review.');
-      }
-      // description = `${Users.getFullName(userIDs[0])} has added an opportunity review for
-      // ${Opportunities.findDoc(opportunityID).name}.`;
-      description = { user: Users.getFullName(userIDs[0]), description: 'has added an opportunity review for ',
-        item: Opportunities.findDoc(opportunityID).name };
-      picture = Users.findDoc(userIDs[0]).picture;
-      if (!picture) {
-        picture = '/images/people/default-profile-picture.png';
-      }
-    } else {
-      throw new Meteor.Error(`FeedType ${feedType} is not a valid feedType.`);
+    userIDs = _.map(user, function (u) {
+      return Users.getUserFromUsername(u)._id;
+    });
+    opportunityID = Opportunities.getID(opportunity);
+    description = {
+      user: Users.getFullName(userIDs[0]), description: 'has added an opportunity review for ',
+      item: Opportunities.findDoc(opportunityID).name
+    };
+    picture = Users.findDoc(userIDs[0]).picture;
+    if (!picture) {
+      picture = '/images/people/default-profile-picture.png';
     }
     const feedID = this._collection.insert({
-      userIDs, opportunityID, courseID, semesterID, description, timestamp, picture, feedType,
+      userIDs, opportunityID, description, timestamp, picture, feedType,
     });
     return feedID;
   }

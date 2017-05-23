@@ -70,7 +70,7 @@ Template.Add_User_Widget.events({
             feedType: 'new-user',
             timestamp,
           };
-          Feeds.define(feedDefinition);
+          Feeds.defineNewUser(feedDefinition);
         }
         FormUtils.indicateSuccess(instance, event);
       });

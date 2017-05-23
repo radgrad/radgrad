@@ -86,7 +86,7 @@ Template.Verification_Requests_Pending.events({
           feedType: 'verified-opportunity',
           timestamp,
         };
-        Feeds.define(feedDefinition);
+        Feeds.defineNewVerifiedOpportunity(feedDefinition);
       }
     } else {
       request.status = VerificationRequests.REJECTED;
