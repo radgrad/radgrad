@@ -21,7 +21,7 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
   const self = this;
   self.ready = new ReactiveVar();
   this.autorun(function () {
-    instanceSubs.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
+    instanceSubs.subscribe(AcademicYearInstances.publicationNames.PerStudentID, getUserIdFromRoute());
     instanceSubs.subscribe(AdvisorLogs.getPublicationName());
     instanceSubs.subscribe(CourseInstances.publicationNames.studentID, getUserIdFromRoute());
     instanceSubs.subscribe(CourseInstances.publicationNames.publicStudent);
@@ -29,7 +29,7 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
     instanceSubs.subscribe(Feeds.getPublicationName());
     instanceSubs.subscribe(MentorAnswers.getPublicationName());
     instanceSubs.subscribe(MentorQuestions.getPublicationName());
-    instanceSubs.subscribe(OpportunityInstances.getPublicationName());
+    instanceSubs.subscribe(OpportunityInstances.publicationNames.student);
     instanceSubs.subscribe(VerificationRequests.getPublicationName());
     self.ready.set(instanceSubs.ready());
   });

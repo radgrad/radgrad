@@ -4,7 +4,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
-import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Feedbacks } from './FeedbackCollection';
 import { FeedbackInstances } from './FeedbackInstanceCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
@@ -15,7 +14,6 @@ import * as yearUtils from '../degree-plan/AcademicYearUtilities';
 import * as planUtils from '../degree-plan/PlanChoiceUtilities';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
-import { BS_CS_LIST, BA_ICS_LIST } from '../degree-plan/degree-program';
 
 /** @module api/feedback/FeedbackFunctions */
 
@@ -162,14 +160,17 @@ export class FeedbackFunctionClass {
           description = description.substring(0, description.length - 4);
           description = `${description}, `;
         } else
-          if (slug.startsWith('ics4')) {
+          if (slug.indexOf('400+') !== -1) {
             description = `${description} \n- a 400 level elective, `;
-          } else {
-            const id = Slugs.getEntityID(planUtils.stripCounter(slug), 'Course');
-            const course = Courses.findDoc(id);
-            // eslint-disable-next-line max-len
-            description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
-          }
+          } else
+            if (slug.indexOf('300+') !== -1) {
+              description = `${description} \n- a 300+ level elective, `;
+            } else {
+              const id = Slugs.getEntityID(planUtils.stripCounter(slug), 'Course');
+              const course = Courses.findDoc(id);
+              // eslint-disable-next-line max-len
+              description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
+            }
       });
       description = description.substring(0, description.length - 2);
       FeedbackInstances.define({
@@ -229,14 +230,14 @@ export class FeedbackFunctionClass {
     const coursesTakenSlugs = [];
     const student = Users.findDoc(studentID);
     const courseIDs = Users.getCourseIDs(studentID);
-    const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
-    let coursesNeeded;
-    if (degree.shortName.startsWith('B.S.')) {
-      coursesNeeded = BS_CS_LIST.slice(0);
+    let academicPlan;
+    if (student.academicPlanID) {
+      academicPlan = AcademicPlans.findDoc(student.academicPlanID);
+    } else {
+      const degreeID = student.desiredDegreeID;
+      academicPlan = AcademicPlans.findDoc({ degreeID });
     }
-    if (degree.shortName.startsWith('B.A.')) {
-      coursesNeeded = BA_ICS_LIST.slice(0);
-    }
+    const coursesNeeded = academicPlan.courseList.slice(0);
     _.map(courseIDs, (cID) => {
       const course = Courses.findDoc(cID);
       coursesTakenSlugs.push(Slugs.getNameFromID(course.slugID));
@@ -259,7 +260,7 @@ export class FeedbackFunctionClass {
           description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${courseSlug.name}), `;
         }
       } else
-        if (slug.startsWith('ics4')) {
+        if (slug.startsWith('ics_4')) {
           const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
           if (bestChoice) {
             const cSlug = Slugs.findDoc(bestChoice.slugID);
@@ -291,14 +292,14 @@ export class FeedbackFunctionClass {
     const coursesTakenSlugs = [];
     const student = Users.findDoc(studentID);
     const courseIDs = Users.getCourseIDs(studentID);
-    const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
-    let coursesNeeded;
-    if (degree.shortName.startsWith('B.S.')) {
-      coursesNeeded = BS_CS_LIST.slice(0);
+    let academicPlan;
+    if (student.academicPlanID) {
+      academicPlan = AcademicPlans.findDoc(student.academicPlanID);
+    } else {
+      const degreeID = student.desiredDegreeID;
+      academicPlan = AcademicPlans.findDoc({ degreeID });
     }
-    if (degree.shortName.startsWith('B.A.')) {
-      coursesNeeded = BA_ICS_LIST.slice(0);
-    }
+    const coursesNeeded = academicPlan.courseList.slice(0);
     _.map(courseIDs, (cID) => {
       const course = Courses.findDoc(cID);
       coursesTakenSlugs.push(Slugs.getNameFromID(course.slugID));
@@ -426,7 +427,6 @@ export class FeedbackFunctionClass {
    * @return {*|Array.<T>}
    */
   _missingCourses(courseIDs, coursesNeeded) {
-    // console.log('_missingCourses', courseIDs, coursesNeeded);
     const planChoices = coursesNeeded.splice(0);
     _.map(courseIDs, (id) => {
       const course = Courses.findDoc(id);

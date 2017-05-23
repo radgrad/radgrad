@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getTotalICE, getPlanningICE } from '../../../api/ice/IceProcessor';
+import { getEarnedICE, getProjectedICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_Ice_Widget.helpers({
@@ -12,7 +12,7 @@ Template.Student_Ice_Widget.helpers({
       const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
       const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
-      return getTotalICE(earnedInstances);
+      return getEarnedICE(earnedInstances);
     }
     return null;
   },
@@ -22,13 +22,13 @@ Template.Student_Ice_Widget.helpers({
     }
     return num;
   },
-  plannedICE() {
+  projectedICE() {
     if (getUserIdFromRoute()) {
       const user = Users.findDoc(getUserIdFromRoute());
       const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();
       const oppInstances = OpportunityInstances.find({ studentID: user._id }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
-      const ice = getPlanningICE(earnedInstances);
+      const ice = getProjectedICE(earnedInstances);
       if (ice.i > 100) {
         ice.i = 100;
       }

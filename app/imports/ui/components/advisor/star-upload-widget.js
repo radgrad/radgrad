@@ -5,8 +5,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { StarDataLogs } from '../../../api/star/StarDataLogCollection';
 import { Users } from '../../../api/user/UserCollection';
+import { getRouteUserName } from '../shared/route-user-name';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 // /** @module ui/components/advisor/Star_Upload_Widget */
@@ -32,20 +32,13 @@ Template.Star_Upload_Widget.onCreated(function starUploadWidgetOnCreated() {
   this.currentUpload = new ReactiveVar(false);
   this.autorun(() => {
     this.subscribe(CourseInstances.publicationNames.studentID, this.data.studentID.get());
-    this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
+    this.subscribe(OpportunityInstances.publicationNames.studentID, this.data.studentID.get());
   });
 });
 
 Template.Star_Upload_Widget.helpers({
   currentUpload() {
     return Template.instance().currentUpload.get();
-  },
-  starLogs() {
-    if (Template.currentData().studentID.get()) {
-      const studentID = Template.currentData().studentID.get();
-      return StarDataLogs.find({ studentID });
-    }
-    return null;
   },
 });
 
@@ -55,13 +48,14 @@ Template.Star_Upload_Widget.events({
     if (instance.data.studentID.get()) {
       // const studentID = instance.data.studentID.get();
       const student = Users.findDoc(instance.data.studentID.get());
+      const advisor = getRouteUserName();
       const fileName = event.target.parentElement.getElementsByTagName('input')[0];
       if (fileName.files && fileName.files[0]) {
         const starData = fileName.files[0];
         const fr = new FileReader();
         fr.onload = (e) => {
           const csvData = e.target.result;
-          Meteor.call('StarProcessor.loadStarCsvData', student.username, csvData);
+          Meteor.call('StarProcessor.loadStarCsvData', advisor, student.username, csvData);
           Meteor.call('LevelProcessor.updateLevel', { studentID: student._id });
         };
         fr.readAsText(starData);

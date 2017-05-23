@@ -9,11 +9,14 @@ import { Slugs } from '../slug/SlugCollection';
 /** @module api/degree-plan/AcademicPlanCollection */
 
 /**
- * AcademicPlans specifies the set of academic plans possible in this department.
+ * AcademicPlans holds the different academic plans possible in this department.
  * @extends module:api/base/BaseCollection~BaseCollection
  */
 class AcademicPlanCollection extends BaseCollection {
 
+  /**
+   * Creates the AcademicPlan collection.
+   */
   constructor() {
     super('AcademicPlan', new SimpleSchema({
       degreeID: { type: SimpleSchema.RegEx.Id },
@@ -28,26 +31,33 @@ class AcademicPlanCollection extends BaseCollection {
   }
 
   /**
-   * Defines a DesiredDegreeInstance.
-   *    * @example
-   * // To define an instance of a CS course:
-   * DesiredDegreeInstances.define({ degreeSlug: 'bs-cs',
-   *                                 name: 'B.S. in Computer Science'
-   *                                 semester: 'Spring-2016',
-   *                                 coursesPerSemester: [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0],
-   *                                 courseList: ['ics111', 'ics141, 'ics211', 'ics241, 'ics311', 'ics314',
-    *                                 'ics212', 'ics321', 'ics313,ics361', 'ics312,ics331', 'ics332', 'ics400+',
-     *                                 'ics400+', 'ics400+', 'ics400+', 'ics400+'] })
-   * @param degreeSlug
-   * @param startSemesterID
-   * @param coursesPerSemester
-   * @param courseList
-   * @param endSemesterID
+   * Defines an AcademicPlan.
+   * @example
+   *     AcademicPlans.define({ degreeSlug: 'bs-cs',
+   *                        name: 'B.S. in Computer Science'
+   *                        semester: 'Spring-2016',
+   *                        coursesPerSemester: [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0],
+   *                        courseList: ['ics111-1', 'ics141-1, 'ics211-1', 'ics241-1', 'ics311-1', 'ics314-1',
+   *                                     'ics212-1', 'ics321-1', 'ics313,ics361-1', 'ics312,ics331-1', 'ics332-1',
+   *                                     'ics400+-1', 'ics400+-2', 'ics400+-3', 'ics400+-4', 'ics400+-5'] })
+   * @param degreeSlug The slug for the desired degree.
+   * @param name The name of the academic plan.
+   * @param semester the slug for the semester.
+   * @param coursesPerSemester an array of the number of courses to take in each semester.
+   * @param courseList an array of PlanChoices. The choices for each course.
    * @returns {*}
    */
   define({ degreeSlug, name, semester, coursesPerSemester, courseList }) {
     const degreeID = Slugs.getEntityID(degreeSlug, 'DesiredDegree');
-    const effectiveSemesterID = Semesters.getID(semester);
+    let effectiveSemesterID;
+    try {
+      effectiveSemesterID = Semesters.getID(semester);
+    } catch (e) {
+      const split = semester.split('-');
+      const term = split[0];
+      const year = parseInt(split[1], 10);
+      effectiveSemesterID = Semesters.define({ term, year });
+    }
     const doc = this._collection.findOne({ degreeID, name, effectiveSemesterID });
     if (doc) {
       return doc._id;

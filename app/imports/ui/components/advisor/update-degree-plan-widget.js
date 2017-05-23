@@ -11,7 +11,6 @@ import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInst
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
-import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -19,10 +18,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import * as planUtils from '../../../api/degree-plan/plan-generator';
-import * as semUtils from '../../../api/semester/SemesterUtilities';
-import * as courseUtils from '../../../api/course/CourseUtilities';
-import * as opportunityUtils from '../../../api/opportunity/OpportunityUtilities';
 
 // /** @module ui/components/advisor/Update_Degree_Plan_Widget */
 
@@ -49,8 +44,8 @@ Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCr
   FormUtils.setupFormWidget(this, updateSchema);
   this.autorun(() => {
     this.subscribe(CourseInstances.publicationNames.studentID, this.data.studentID.get());
-    this.subscribe(AcademicYearInstances.getPublicationName(1), this.data.studentID.get());
-    this.subscribe(OpportunityInstances.getPublicationName(3), this.data.studentID.get());
+    this.subscribe(AcademicYearInstances.publicationNames.PerStudentID, this.data.studentID.get());
+    this.subscribe(OpportunityInstances.publicationNames.studentID, this.data.studentID.get());
   });
 });
 
@@ -206,62 +201,12 @@ Template.Update_Degree_Plan_Widget.helpers({
 });
 
 Template.Update_Degree_Plan_Widget.events({
-  'click .jsGeneratePlan': function clickGeneratePlan(event, instance) {
-    event.preventDefault();
-    // debugger
-    instance.$('.ui.basic.modal').modal({
-      detachable: false,
-      onApprove() {
-        // debugger
-        const studentID = instance.data.studentID.get();
-        const student = Users.findDoc(studentID);
-        const currentSemester = Semesters.getCurrentSemesterDoc();
-        const selectedSemesterID = instance.$('#planningSemester').val();
-        let startSemester;
-        if (selectedSemesterID) {
-          startSemester = Semesters.findDoc(selectedSemesterID);
-        } else {
-          startSemester = currentSemester;
-        }
-        if (currentSemester.sortBy === startSemester.sortBy) {
-          startSemester = semUtils.nextFallSpringSemester(startSemester);
-        }
-        // TODO: CAM do we really want to blow away the student's plan. What if they've made changes?
-        courseUtils.clearPlannedCourseInstances(studentID);
-        opportunityUtils.clearPlannedOpportunityInstances(studentID);
-        const cis = CourseInstances.find({ studentID }).fetch();
-        const ays = AcademicYearInstances.find({ studentID }).fetch();
-        if (cis.length === 0) {
-          _.map(ays, (year) => {
-            AcademicYearInstances.removeIt(year._id);
-          });
-        } else {
-          // TODO: CAM figure out which AYs to remove.
-        }
-        if (student.desiredDegreeID) {
-          const degree = DesiredDegrees.findDoc({ _id: student.desiredDegreeID });
-          if (degree.shortName.startsWith('B.S.')) {
-            planUtils.generateBSDegreePlan(student, startSemester);
-          }
-          if (degree.shortName.startsWith('B.A.')) {
-            planUtils.generateBADegreePlan(student, startSemester);
-          }
-          FeedbackFunctions.checkPrerequisites(studentID);
-          FeedbackFunctions.checkCompletePlan(studentID);
-          FeedbackFunctions.generateRecommendedCourse(studentID);
-          FeedbackFunctions.checkOverloadedSemesters(studentID);
-          FeedbackFunctions.generateNextLevelRecommendation(studentID);
-        }
-      },
-    }).modal('show');
-  },
   submit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
-    console.log(updatedData);
     if (instance.context.isValid()) {
       const oldRole = Roles.getRolesForUser(Template.currentData().studentID.get());
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');

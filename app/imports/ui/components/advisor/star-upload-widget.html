@@ -17,17 +17,6 @@
       </div>
       <button style="margin-bottom: 14px;" class="ui tiny basic green button jsStarData" type="submit">LOAD STAR DATA
       </button>
-
-      <div class="field">
-        <!-- Star Data Log -->
-        <label>STAR Data Upload Log</label>
-        {{#each log in starLogs}}
-          <div class="ui segment">
-            <p><strong>{{log.uploadedOn}}:</strong> {{log.note}}</p>
-          </div>
-        {{/each}}
-      </div>
-
     </form>
   </div>
 </template>

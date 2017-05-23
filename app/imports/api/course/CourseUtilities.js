@@ -96,7 +96,7 @@ export function clearPlannedCourseInstances(studentID) {
 }
 
 export function get300LevelDocs() {
-  const courses = Courses.find({ number: /ICS 3/ }).fetch();  // TODO don't just look for ICS courses.
+  const courses = Courses.find({ number: /3\d\d/ }).fetch();
   return courses;
 }
 
@@ -106,7 +106,7 @@ export function getStudent300LevelDocs(studentID, coursesTakenSlugs) {
   const instances = CourseInstances.find({ studentID }).fetch();
   const courseTakenIDs = [];
   instances.forEach((courseInstance) => {
-    if (CourseInstances.isICS(courseInstance._id)) {
+    if (CourseInstances.isInteresting(courseInstance._id)) {
       if (courseInstance.note !== 'ICS 499') {
         courseTakenIDs.push(courseInstance.courseID);
       }
@@ -134,7 +134,7 @@ export function chooseStudent300LevelCourse(studentID, coursesTakenSlugs) {
 }
 
 export function get400LevelDocs() {
-  const courses = Courses.find({ number: /ICS 4/ }).fetch();  // TODO: Don't just look for ICS courses.
+  const courses = Courses.find({ number: /4\d\d/ }).fetch();
   return courses;
 }
 
@@ -144,8 +144,8 @@ export function getStudent400LevelDocs(studentID, coursesTakenSlugs) {
   const instances = CourseInstances.find({ studentID }).fetch();
   const courseTakenIDs = [];
   instances.forEach((courseInstance) => {
-    if (CourseInstances.isICS(courseInstance._id)) {
-      if (courseInstance.note !== 'ICS 499') {
+    if (CourseInstances.isInteresting(courseInstance._id)) {
+      if (!courseInstance.note.endsWith('499')) {
         courseTakenIDs.push(courseInstance.courseID);
       }
     }
@@ -196,4 +196,13 @@ export function chooseBetween(slugs, studentID, coursesTakenSlugs) {
     return best[getRandomInt(0, best.length)];
   }
   return null;
+}
+
+/**
+ * Returns the department from the given course slug.
+ * @param courseSlug the course slug.
+ * @returns {string}
+ */
+export function getDepartment(courseSlug) {
+  return courseSlug.split('_')[0].toUpperCase();
 }

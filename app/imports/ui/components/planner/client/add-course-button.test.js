@@ -27,7 +27,7 @@ describe('Add_Course_Button', function test() {
 
   it('renders correctly with type add', function () {
     const name = 'Algorithms';
-    const slug = 'ics311';
+    const slug = 'ics_311';
     const number = 'ICS 311';
     const description = 'Study algorithms';
     const creditHrs = 3;

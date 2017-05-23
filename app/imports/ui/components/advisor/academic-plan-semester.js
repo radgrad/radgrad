@@ -6,6 +6,7 @@ import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Roles } from 'meteor/alanning:roles';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import * as planChoiceUtils from '../../../api/degree-plan/PlanChoiceUtilities';
 
 // /** @module ui/components/advisor/Academic_Plan_Semester */
 
@@ -22,15 +23,18 @@ function fooBar(takenCourseSlugs, planCourseSlugs, planSlug) {
   let ret = false;
   const countIndex = planSlug.indexOf('-');
   const planCount = parseInt(planSlug.substring(countIndex + 1), 10);
+  const depts = planChoiceUtils.getDepartments(planSlug);
   if (planCount === 1) {
-    if (planSlug.startsWith('ics400+')) {
+    if (planSlug.indexOf('400+') !== -1) {
       _.map(takenCourseSlugs, (s) => {
-        if (s.startsWith('ics4')) {
-          ret = true;
-        }
+        _.map(depts, (d) => {
+          if (s.startsWith(`${d}_4`)) {
+            ret = true;
+          }
+        });
       });
     } else
-      if (planSlug.startsWith('ics300+')) {
+      if (planSlug.indexOf('300+') !== -1) {
         const pcs = planCourseSlugs.slice();
         const tcs = takenCourseSlugs.slice();
         _.map(takenCourseSlugs, (ts) => {
@@ -45,9 +49,11 @@ function fooBar(takenCourseSlugs, planCourseSlugs, planSlug) {
           }
         });
         _.map(tcs, (slug) => {
-          if (slug.startsWith('ics3') || slug.startsWith('ics4')) {
-            ret = true;
-          }
+          _.map(depts, (d) => {
+            if (slug.startsWith(`${d}_3`) || slug.startsWith(`${d}_4`)) {
+              ret = true;
+            }
+          });
         });
       } else {
         _.map(takenCourseSlugs, (slug) => {
@@ -57,16 +63,18 @@ function fooBar(takenCourseSlugs, planCourseSlugs, planSlug) {
         });
       }
   } else
-    if (planSlug.startsWith('ics400+')) {
+    if (planSlug.indexOf('400+') !== -1) {
       let c = 0;
       _.map(takenCourseSlugs, (s) => {
-        if (s.startsWith('ics4')) {
-          c += 1;
-        }
+        _.map(depts, (d) => {
+          if (s.startsWith(`${d}_4`)) {
+            c += 1;
+          }
+        });
       });
       ret = c >= planCount;
     } else
-      if (planSlug.startsWith('ics300+')) {
+      if (planSlug.indexOf('300+') !== -1) {
         const pcs = planCourseSlugs.slice();
         const tcs = takenCourseSlugs.slice();
         _.map(takenCourseSlugs, (ts) => {
@@ -82,9 +90,11 @@ function fooBar(takenCourseSlugs, planCourseSlugs, planSlug) {
         });
         let c = 0;
         _.map(tcs, (slug) => {
-          if (slug.startsWith('ics3') || slug.startsWith('ics4')) {
-            c += 1;
-          }
+          _.map(depts, (d) => {
+            if (slug.startsWith(`${d}_3`) || slug.startsWith(`${d}_4`)) {
+              c += 1;
+            }
+          });
         });
         ret = c >= planCount;
       } else {
@@ -96,7 +106,6 @@ function fooBar(takenCourseSlugs, planCourseSlugs, planSlug) {
         });
         ret = c >= planCount;
       }
-
   return ret;
 }
 
