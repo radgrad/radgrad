@@ -41,7 +41,7 @@ class FeedCollection extends BaseCollection {
       opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
-      description: { type: Object, blackbox: true },
+      description: { type: String },
       timestamp: { type: Number },   // TODO: shouldn't timestamp be a date object?
       picture: { type: String },
       feedType: { type: String },
@@ -59,11 +59,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid user.
    */
   defineNewUser({ user, feedType, timestamp }) {
-    let userIDs;
-    let picture;
     let description;
     let userID;
-    userIDs = _.map(user, function (u) {
+    const userIDs = _.map(user, function (u) {
       userID = Users.getUserFromUsername(u)._id;
       if (!userID) {
         throw new Meteor.Error('User is invalid.');
@@ -71,14 +69,11 @@ class FeedCollection extends BaseCollection {
       return userID;
     });
     if (userIDs.length > 1) {
-      description = {
-        user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-        description: 'have joined RadGrad.',
-      };
+      description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} others have joined RadGrad.`;
     } else {
-      description = { user: Users.getFullName(userIDs[0]), description: 'has joined RadGrad.' };
+      description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
     }
-    picture = Users.findDoc(userIDs[0]).picture;
+    const picture = Users.findDoc(userIDs[0]).picture;
     const feedID = this._collection.insert({ userIDs, description, feedType, timestamp, picture, });
     return feedID;
   }
@@ -95,15 +90,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid course.
    */
   defineNewCourse({ course, feedType, timestamp }) {
-    let courseID;
-    let picture;
-    let description;
-    courseID = Courses.getID(course);
-    description = {
-      item: Courses.findDoc(courseID).name,
-      description: 'has been added to Courses'
-    };
-    picture = '/images/radgrad_logo.png';
+    const courseID = Courses.getID(course);
+    const description = `${Courses.findDoc(courseID).name} has been added to Courses`;
+    const picture = '/images/radgrad_logo.png';
     const feedID = this._collection.insert({ courseID, description, feedType, picture, timestamp, });
     return feedID;
   }
@@ -120,15 +109,9 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid opportunity.
    */
   defineNewOpportunity({ opportunity, feedType, timestamp }) {
-    let opportunityID;
-    let picture;
-    let description;
-    opportunityID = Opportunities.getID(opportunity);
-    description = {
-      item: Opportunities.findDoc(opportunityID).name,
-      description: 'has been added to Opportunities'
-    };
-    picture = '/images/radgrad_logo.png';
+    const opportunityID = Opportunities.getID(opportunity);
+    const description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities`;
+    const picture = '/images/radgrad_logo.png';
     const feedID = this._collection.insert({ opportunityID, description, timestamp, picture, feedType, });
     return feedID;
   }
@@ -146,30 +129,20 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid opportunity, semester, or user.
    */
   defineNewVerifiedOpportunity({ user, opportunity, semester, feedType, timestamp }) {
-    let userIDs;
-    let opportunityID;
-    let semesterID;
-    let picture;
     let description;
-    userIDs = _.map(user, function (u) {
+    const userIDs = _.map(user, function (u) {
       return Users.getUserFromUsername(u)._id;
     });
-    semesterID = Semesters.getID(semester);
-    opportunityID = Opportunities.getID(opportunity);
+    const semesterID = Semesters.getID(semester);
+    const opportunityID = Opportunities.getID(opportunity);
     if (userIDs.length > 1) {
-      description = {
-        user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-        description: 'have been verified for', item: Opportunities.findDoc(opportunityID).name,
-        semester: Semesters.toString(semesterID, false)
-      };
+      description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} others have been 
+        verified for ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)})`;
     } else {
-      description = {
-        user: Users.getFullName(userIDs[0]),
-        description: 'has been verified for', item: Opportunities.findDoc(opportunityID).name,
-        semester: Semesters.toString(semesterID, false)
-      };
+      description = `${Users.getFullName(userIDs[0])} has been verified for 
+        ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)})`;
     }
-    picture = '/images/radgrad_logo.png';
+    const picture = '/images/radgrad_logo.png';
     const feedID = this._collection.insert({
       userIDs, opportunityID, semesterID, description, timestamp, picture, feedType,
     });
@@ -188,18 +161,13 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid course or user.
    */
   defineNewCourseReview({ user, course, feedType, timestamp }) {
-    let userIDs;
-    let courseID;
     let picture;
-    let description;
-    userIDs = _.map(user, function (u) {
+    const userIDs = _.map(user, function (u) {
       return Users.getUserFromUsername(u)._id;
     });
-    courseID = Courses.getID(course);
-    description = {
-      user: Users.getFullName(userIDs[0]), description: 'has added a course review for ',
-      item: Courses.findDoc(courseID).name
-    };
+    const courseID = Courses.getID(course);
+    const description = `${Users.getFullName(userIDs[0])} has added a course review for 
+      ${Courses.findDoc(courseID).name}`;
     picture = Users.findDoc(userIDs[0]).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
@@ -222,18 +190,13 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If not a valid opportunity or user.
    */
   defineNewOpportunityReview({ user, opportunity, feedType, timestamp }) {
-    let userIDs;
-    let opportunityID;
     let picture;
-    let description;
-    userIDs = _.map(user, function (u) {
+    const userIDs = _.map(user, function (u) {
       return Users.getUserFromUsername(u)._id;
     });
-    opportunityID = Opportunities.getID(opportunity);
-    description = {
-      user: Users.getFullName(userIDs[0]), description: 'has added an opportunity review for ',
-      item: Opportunities.findDoc(opportunityID).name
-    };
+    const opportunityID = Opportunities.getID(opportunity);
+    const description = `${Users.getFullName(userIDs[0])} has added an opportunity review for 
+      ${Opportunities.findDoc(opportunityID).name}`;
     picture = Users.findDoc(userIDs[0]).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
@@ -287,8 +250,7 @@ class FeedCollection extends BaseCollection {
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
-    const description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-      description: 'have joined RadGrad.' };
+    const description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} others have joined RadGrad.`;
     let picture = Users.findDoc(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
@@ -309,9 +271,9 @@ class FeedCollection extends BaseCollection {
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
-    const description = { user: Users.getFullName(userIDs[0]), numUsers: userIDs.length - 1,
-      description: 'have been verified for', item: Opportunities.findDoc(existingFeed.opportunityID).name,
-      semester: Semesters.toString(existingFeed.semesterID, false) };
+    const description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1}
+      others have been verified for ${Opportunities.findDoc(existingFeed.opportunityID).name} 
+      (${Semesters.toString(existingFeed.semesterID, false)})`;
     this._collection.update(existingFeedID, { $set: { userIDs, description } });
   }
 
