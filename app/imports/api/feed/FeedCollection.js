@@ -1,10 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { Slugs } from '/imports/api/slug/SlugCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { radgradCollections } from '../base/RadGradCollections';
@@ -69,9 +70,10 @@ class FeedCollection extends BaseCollection {
       return userID;
     });
     if (userIDs.length > 1) {
-      description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} others have joined RadGrad.`;
+      description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
+        and ${userIDs.length - 1} others have joined RadGrad.`;
     } else {
-      description = `${Users.getFullName(userIDs[0])} has joined RadGrad.`;
+      description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) has joined RadGrad.`;
     }
     const picture = Users.findDoc(userIDs[0]).picture;
     const feedID = this._collection.insert({ userIDs, description, feedType, timestamp, picture, });
@@ -91,7 +93,9 @@ class FeedCollection extends BaseCollection {
    */
   defineNewCourse({ course, feedType, timestamp }) {
     const courseID = Courses.getID(course);
-    const description = `${Courses.findDoc(courseID).name} has been added to Courses`;
+    const c = Courses.findDoc(courseID);
+    const description = `[${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)}) 
+      has been added to Courses`;
     const picture = '/images/radgrad_logo.png';
     const feedID = this._collection.insert({ courseID, description, feedType, picture, timestamp, });
     return feedID;
@@ -110,7 +114,9 @@ class FeedCollection extends BaseCollection {
    */
   defineNewOpportunity({ opportunity, feedType, timestamp }) {
     const opportunityID = Opportunities.getID(opportunity);
-    const description = `${Opportunities.findDoc(opportunityID).name} has been added to Opportunities`;
+    const o = Opportunities.findDoc(opportunityID);
+    const description = `[${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
+      has been added to Opportunities`;
     const picture = '/images/radgrad_logo.png';
     const feedID = this._collection.insert({ opportunityID, description, timestamp, picture, feedType, });
     return feedID;
@@ -135,12 +141,16 @@ class FeedCollection extends BaseCollection {
     });
     const semesterID = Semesters.getID(semester);
     const opportunityID = Opportunities.getID(opportunity);
+    const o = Opportunities.findDoc(opportunityID);
     if (userIDs.length > 1) {
-      description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} others have been 
-        verified for ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)})`;
+      description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
+        and ${userIDs.length - 1} others have been verified for 
+        [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
+        (${Semesters.toString(semesterID, false)})`;
     } else {
-      description = `${Users.getFullName(userIDs[0])} has been verified for 
-        ${Opportunities.findDoc(opportunityID).name} (${Semesters.toString(semesterID, false)})`;
+      description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])})
+        has been verified for [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)})
+        (${Semesters.toString(semesterID, false)})`;
     }
     const picture = '/images/radgrad_logo.png';
     const feedID = this._collection.insert({
@@ -166,8 +176,9 @@ class FeedCollection extends BaseCollection {
       return Users.getUserFromUsername(u)._id;
     });
     const courseID = Courses.getID(course);
-    const description = `${Users.getFullName(userIDs[0])} has added a course review for 
-      ${Courses.findDoc(courseID).name}`;
+    const c = Courses.findDoc(courseID);
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
+      has added a course review for [${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)})`;
     picture = Users.findDoc(userIDs[0]).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
@@ -195,8 +206,10 @@ class FeedCollection extends BaseCollection {
       return Users.getUserFromUsername(u)._id;
     });
     const opportunityID = Opportunities.getID(opportunity);
-    const description = `${Users.getFullName(userIDs[0])} has added an opportunity review for 
-      ${Opportunities.findDoc(opportunityID).name}`;
+    const o = Opportunities.findDoc(opportunityID);
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])})  
+      has added an opportunity review for 
+      [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)})`;
     picture = Users.findDoc(userIDs[0]).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
@@ -250,7 +263,8 @@ class FeedCollection extends BaseCollection {
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
-    const description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1} others have joined RadGrad.`;
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
+      and ${userIDs.length - 1} others have joined RadGrad.`;
     let picture = Users.findDoc(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
@@ -271,8 +285,10 @@ class FeedCollection extends BaseCollection {
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
-    const description = `${Users.getFullName(userIDs[0])} and ${userIDs.length - 1}
-      others have been verified for ${Opportunities.findDoc(existingFeed.opportunityID).name} 
+    const o = Opportunities.findDoc(existingFeed.opportunityID);
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])})  
+      and ${userIDs.length - 1} others have been verified for 
+      [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
       (${Semesters.toString(existingFeed.semesterID, false)})`;
     this._collection.update(existingFeedID, { $set: { userIDs, description } });
   }
