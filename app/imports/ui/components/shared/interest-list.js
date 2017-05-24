@@ -13,16 +13,10 @@ function matchingInterestsHelper(item) {
   const matchingInterests = [];
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterestIDs = Users.getInterestIDs(user._id);
-  const userInterests = [];
-  _.map(userInterestIDs, (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  const itemInterests = [];
-  _.map(item.interestIDs, (id) => {
-    itemInterests.push(Interests.findDoc(id));
-  });
-  _.map(itemInterests, (itemInterest) => {
-    _.map(userInterests, (userInterest) => {
+  const userInterests = _.map(userInterestIDs, (id) => Interests.findDoc(id));
+  const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
+  _.forEach(itemInterests, (itemInterest) => {
+    _.forEach(userInterests, (userInterest) => {
       if (_.isEqual(itemInterest, userInterest)) {
         matchingInterests.push(userInterest);
       }
@@ -35,16 +29,10 @@ function matchingUserInterestsHelper(item) {
   const matchingInterests = [];
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterestIDs = Users.getInterestIDsByType(user._id);
-  const userInterests = [];
-  _.map(userInterestIDs[0], (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  const itemInterests = [];
-  _.map(item.interestIDs, (id) => {
-    itemInterests.push(Interests.findDoc(id));
-  });
-  _.map(itemInterests, (itemInterest) => {
-    _.map(userInterests, (userInterest) => {
+  const userInterests = _.map(userInterestIDs[0], (id) => Interests.findDoc(id));
+  const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
+  _.forEach(itemInterests, (itemInterest) => {
+    _.forEach(userInterests, (userInterest) => {
       if (_.isEqual(itemInterest, userInterest)) {
         matchingInterests.push(userInterest);
       }
@@ -57,16 +45,10 @@ function matchingCareerInterestsHelper(item) {
   const matchingInterests = [];
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterestIDs = Users.getInterestIDsByType(user._id);
-  const userInterests = [];
-  _.map(userInterestIDs[1], (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  const itemInterests = [];
-  _.map(item.interestIDs, (id) => {
-    itemInterests.push(Interests.findDoc(id));
-  });
-  _.map(itemInterests, (itemInterest) => {
-    _.map(userInterests, (userInterest) => {
+  const userInterests = _.map(userInterestIDs[1], (id) => Interests.findDoc(id));
+  const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
+  _.forEach(itemInterests, (itemInterest) => {
+    _.forEach(userInterests, (userInterest) => {
       if (_.isEqual(itemInterest, userInterest)) {
         matchingInterests.push(userInterest);
       }
@@ -121,39 +103,18 @@ Template.Interest_List.helpers({
   otherInterests(course) {
     try {
       const matchingInterests = matchingInterestsHelper(course);
-      const courseInterests = [];
-      _.map(course.interestIDs, (id) => {
-        courseInterests.push(Interests.findDoc(id));
-      });
-      const filtered = _.filter(courseInterests, function filter(courseInterest) {
+      const courseInterests = _.map(course.interestIDs, (id) => Interests.findDoc(id));
+      return _.filter(courseInterests, function filter(courseInterest) {
         let ret = true;
-        _.map(matchingInterests, (matchingInterest) => {
+        _.forEach(matchingInterests, (matchingInterest) => {
           if (_.isEqual(courseInterest, matchingInterest)) {
             ret = false;
           }
         });
         return ret;
       });
-      return filtered;
     } catch (err) {
       return null;
     }
   },
 });
-
-Template.Interest_List.events({
-  // add your events here
-});
-
-Template.Interest_List.onCreated(function interestListOnCreated() {
-  // add your statement here
-});
-
-Template.Interest_List.onRendered(function interestListOnRendered() {
-  // add your statement here
-});
-
-Template.Interest_List.onDestroyed(function interestListOnDestroyed() {
-  // add your statement here
-});
-
