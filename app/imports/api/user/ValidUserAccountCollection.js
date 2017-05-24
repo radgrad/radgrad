@@ -2,8 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { ROLE } from '/imports/api/role/Role';
+import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import { ROLE } from '../role/Role';
 import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/user/ValidUserAccountCollection */

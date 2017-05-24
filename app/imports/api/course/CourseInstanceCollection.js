@@ -2,14 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Courses } from '/imports/api/course/CourseCollection';
-import { AcademicYearInstances } from '/imports/api/degree-plan/AcademicYearInstanceCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { makeCourseICE } from '/imports/api/ice/IceProcessor';
+import { Courses } from '../course/CourseCollection';
+import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
+import { ROLE } from '../role/Role';
+import { Semesters } from '../semester/SemesterCollection';
+import { Users } from '../user/UserCollection';
+import { Slugs } from '../slug/SlugCollection';
+import BaseCollection from '../base/BaseCollection';
+import { makeCourseICE } from '../ice/IceProcessor';
 import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/course/CourseInstanceCollection */

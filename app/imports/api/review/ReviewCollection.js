@@ -1,10 +1,10 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import { Courses } from '/imports/api/course/CourseCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { Slugs } from '../slug/SlugCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { Users } from '../user/UserCollection';
+import { Courses } from '../course/CourseCollection';
+import BaseInstanceCollection from '../base/BaseInstanceCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 import { Meteor } from 'meteor/meteor';
 

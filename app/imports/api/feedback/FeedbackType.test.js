@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 import { expect } from 'chai';
-import { FeedbackType, isFeedbackType, assertFeedbackType } from '/imports/api/feedback/FeedbackType';
+import { FeedbackType, isFeedbackType, assertFeedbackType } from '../feedback/FeedbackType';
 import { Meteor } from 'meteor/meteor';
 
 if (Meteor.isServer) {
