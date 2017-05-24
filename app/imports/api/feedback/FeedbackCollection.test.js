@@ -1,11 +1,11 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
-import { FeedbackType } from '/imports/api/feedback/FeedbackType';
+import { Feedbacks } from '../feedback/FeedbackCollection';
+import { FeedbackType } from '../feedback/FeedbackType';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('FeedbackCollection', function testSuite() {

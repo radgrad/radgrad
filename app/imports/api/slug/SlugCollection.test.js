@@ -5,7 +5,7 @@ import { Slugs } from './SlugCollection';
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('SlugCollection', function testSuite() {

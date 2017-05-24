@@ -1,10 +1,10 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { Semesters } from '../semester/SemesterCollection';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('SemesterCollection', function testSuite() {

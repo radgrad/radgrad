@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
-import { DesiredDegrees } from '/imports/api/degree-plan/DesiredDegreeCollection';
-import { AcademicPlans } from '/imports/api/degree-plan/AcademicPlanCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
+import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
+import { Semesters } from '../semester/SemesterCollection';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */

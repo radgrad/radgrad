@@ -1,8 +1,8 @@
-import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
+import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { makeSampleInterest } from '../interest/SampleInterests';
 import { moment } from 'meteor/momentjs:moment';
 
 
