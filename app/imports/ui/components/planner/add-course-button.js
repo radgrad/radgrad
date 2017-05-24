@@ -1,7 +1,5 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
-import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
@@ -26,32 +24,6 @@ Template.Add_Course_Button.helpers({
   equals(a, b) {
     return a === b;
   },
-  existingSemesters() {
-    const semesters = [];
-    const course = this.course;
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    _.map(ci, function (c) {
-      semesters.push(Semesters.toString(c.semesterID, false));
-    });
-    return semesters;
-  },
-  id() {
-    return this.course._id;
-  },
-  nextYears(amount) {
-    const nextYears = [];
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSem = Semesters.findDoc(currentSemesterID);
-    let currentYear = currentSem.year;
-    for (let i = 0; i < amount; i += 1) {
-      nextYears.push(currentYear);
-      currentYear += 1;
-    }
-    return nextYears;
-  },
   slug() {
     try {
       const slug = Slugs.findDoc(this.course.slugID);
@@ -59,10 +31,6 @@ Template.Add_Course_Button.helpers({
     } catch (e) {
       return '';
     }
-  },
-  yearSemesters(year) {
-    const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
-    return semesters;
   },
 });
 

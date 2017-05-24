@@ -17,14 +17,10 @@ Template.Verification_Requests_Completed.helpers({
     const group = FlowRouter.current().route.group.name;
     const openRequests = VerificationRequests.find({ status: { $ne: VerificationRequests.OPEN } }).fetch();
     if (group === 'faculty') {
-      const matchingRequests = [];
-      _.map(openRequests, (request) => {
+      return _.filter(openRequests, (request) => {
         const oi = OpportunityInstances.findDoc(request.opportunityInstanceID);
-        if ((Opportunities.findDoc(oi.opportunityID)).sponsorID === getUserIdFromRoute()) {
-          matchingRequests.push(request);
-        }
+        return Opportunities.findDoc(oi.opportunityID).sponsorID === getUserIdFromRoute();
       });
-      return matchingRequests;
     }
     return openRequests;
   },

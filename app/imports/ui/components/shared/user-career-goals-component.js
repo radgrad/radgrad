@@ -9,17 +9,14 @@ import { getRouteUserName } from '../shared/route-user-name';
 
 Template.User_Career_Goals_Component.helpers({
   careerGoals() {
-    const careerGoals = [];
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
       const user = Users.findDoc(userID);
       if (user) {
-        _.map(user.careerGoalIDs, (id) => {
-          careerGoals.push(CareerGoals.findDoc(id));
-        });
+        return _.map(user.careerGoalIDs, (id) => CareerGoals.findDoc(id));
       }
     }
-    return careerGoals;
+    return [];
   },
   careerGoalURL(goal) {
     const slug = CareerGoals.getSlug(goal._id);
