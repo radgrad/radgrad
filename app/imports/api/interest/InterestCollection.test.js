@@ -1,12 +1,12 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { makeSampleInterestType } from '/imports/api/interest/SampleInterests';
+import { InterestTypes } from '../interest/InterestTypeCollection';
+import { Interests } from '../interest/InterestCollection';
+import { makeSampleInterestType } from '../interest/SampleInterests';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('InterestCollection', function testSuite() {

@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 import { MentorAnswers } from './MentorAnswerCollection';
 import { MentorQuestions } from './MentorQuestionCollection';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
-import { ROLE } from '/imports/api/role/Role';
+import { makeSampleUser } from '../user/SampleUsers';
+import { ROLE } from '../role/Role';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */

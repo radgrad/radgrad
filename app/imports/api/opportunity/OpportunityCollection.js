@@ -1,12 +1,12 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { Users } from '/imports/api/user/UserCollection';
-import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { assertICE } from '/imports/api/ice/IceProcessor';
+import { Slugs } from '../slug/SlugCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Interests } from '../interest/InterestCollection';
+import { ROLE } from '../role/Role';
+import { Users } from '../user/UserCollection';
+import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
+import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import { assertICE } from '../ice/IceProcessor';
 import { radgradCollections } from '../base/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 

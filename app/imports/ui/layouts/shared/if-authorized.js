@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { ROLE } from '/imports/api/role/Role';
+import { ROLE } from '../../../api/role/Role';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Users } from '../../../api/user/UserCollection';
 

@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
-import { ROLE } from '/imports/api/role/Role';
+import { ROLE } from '../role/Role';
 import { expect } from 'chai';
 import { VerificationRequests } from './VerificationRequestCollection.js';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
-import { makeSampleOpportunityInstance, makeSampleOpportunity } from '/imports/api/opportunity/SampleOpportunities';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
+import { Semesters } from '../semester/SemesterCollection';
+import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
+import { removeAllEntities } from '../base/BaseUtilities';
+import { makeSampleOpportunityInstance, makeSampleOpportunity } from '../opportunity/SampleOpportunities';
+import { makeSampleUser } from '../user/SampleUsers';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */

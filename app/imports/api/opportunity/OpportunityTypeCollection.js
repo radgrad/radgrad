@@ -1,4 +1,4 @@
-import BaseTypeCollection from '/imports/api/base/BaseTypeCollection';
+import BaseTypeCollection from '../base/BaseTypeCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/opportunity/OpportunityTypeCollection */

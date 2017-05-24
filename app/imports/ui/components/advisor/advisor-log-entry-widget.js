@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { AdvisorLogs } from '/imports/api/log/AdvisorLogCollection';
+import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { Users } from '../../../api/user/UserCollection.js';

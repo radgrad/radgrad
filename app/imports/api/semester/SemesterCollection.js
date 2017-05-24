@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { Slugs } from '../slug/SlugCollection';
+import BaseInstanceCollection from '../base/BaseInstanceCollection';
 import { Meteor } from 'meteor/meteor';
 import { moment } from 'meteor/momentjs:moment';
 import { radgradCollections } from '../base/RadGradCollections';
