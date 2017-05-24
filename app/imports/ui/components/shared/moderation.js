@@ -35,7 +35,7 @@ Template.Moderation.onCreated(function ModerationOnCreated() {
 
 function getSchemaDataFromEvent(schema, event) {
   const eventData = {};
-  _.map(schema._firstLevelSchemaKeys, function (key) {
+  _.forEach(schema._firstLevelSchemaKeys, function (key) {
     eventData[key] = event.target.form[key].value;
   });
   return eventData;

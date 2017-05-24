@@ -17,17 +17,14 @@ Template.User_Interests_Component.helpers({
     return 0;
   },
   interests() {
-    const interests = [];
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
       const user = Users.findDoc(userID);
       if (user) {
-        _.map(user.interestIDs, (id) => {
-          interests.push(Interests.findDoc(id));
-        });
+        return _.map(user.interestIDs, (id) => Interests.findDoc(id));
       }
     }
-    return interests;
+    return [];
   },
   labelSize() {
     return Template.instance().labelSize;
