@@ -72,10 +72,11 @@ class FeedCollection extends BaseCollection {
       description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
         and {{> Student_Feed_Modal ${userIDs.length - 1}}} others have joined RadGrad.`;
     } else {
-      description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) has joined RadGrad.`;
+      description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
+      has joined RadGrad.`;
     }
     const picture = Users.findDoc(userIDs[0]).picture;
-    const feedID = this._collection.insert({ userIDs, description, feedType, timestamp, picture, });
+    const feedID = this._collection.insert({ userIDs, description, feedType, timestamp, picture });
     return feedID;
   }
 
@@ -96,7 +97,7 @@ class FeedCollection extends BaseCollection {
     const description = `[${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)}) 
       has been added to Courses`;
     const picture = '/images/radgrad_logo.png';
-    const feedID = this._collection.insert({ courseID, description, feedType, picture, timestamp, });
+    const feedID = this._collection.insert({ courseID, description, feedType, picture, timestamp });
     return feedID;
   }
 
@@ -117,7 +118,7 @@ class FeedCollection extends BaseCollection {
     const description = `[${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
       has been added to Opportunities`;
     const picture = '/images/radgrad_logo.png';
-    const feedID = this._collection.insert({ opportunityID, description, timestamp, picture, feedType, });
+    const feedID = this._collection.insert({ opportunityID, description, timestamp, picture, feedType });
     return feedID;
   }
 
@@ -285,10 +286,6 @@ class FeedCollection extends BaseCollection {
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
     const o = Opportunities.findDoc(existingFeed.opportunityID);
-    let students = '';
-    _.map(userIDs, function (uid) {
-      students += `<a class=\"item\" data-position=\"right center\">${Users.findDoc(uid).username}</a>`;
-    });
     const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) and 
       ${userIDs.length - 1} others have been verified for 
       [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 

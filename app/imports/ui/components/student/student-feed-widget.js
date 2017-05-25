@@ -69,11 +69,3 @@ Template.Student_Feed_Widget.helpers({
     return students;
   },
 });
-
-Template.Student_Feed_Widget.onRendered(function studentFeedWidgetOnRendered() {
-  const template = this;
-  template.$('.studentList')
-      .popup({
-        on: 'click',
-      });
-});
