@@ -8,11 +8,13 @@
         {{{markdownify feed.description}}}
       </div>
       <div class="extra text">
-        <div class="date">
+        {{#if (multipleUsers feed)}}
+          <div style="float:right; margin-top: 0px" class="meta">
+            {{> Student_Feed_Modal feed = feed}}
+          </div>
+        {{/if}}
+        <div style="margin-top: 0px" class="date">
           {{feedTimestamp feed}}
-        </div>
-        <div class="meta">
-          {{> Student_Feed_Modal feed = feed}}
         </div>
       </div>
     </div>
