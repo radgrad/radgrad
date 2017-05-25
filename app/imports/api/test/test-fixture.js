@@ -22,7 +22,7 @@ import { restoreCollection } from '../../api/utility/fixture-utilities';
 
 /** @module api/test/test-fixture */
 
-
+// TODO rewrite this to use RadGrad.collections and to not be copy-pasted from the DB restoration code.
 /**
  *
  */
