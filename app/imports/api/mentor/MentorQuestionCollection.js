@@ -2,7 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 
 /** @module api/mentor/MentorQuestionCollection */
 
@@ -140,5 +140,5 @@ class MentorQuestionCollection extends BaseSlugCollection {
 }
 
 export const MentorQuestions = new MentorQuestionCollection();
-radgradCollections.push(MentorQuestions);
+RadGrad.collections.push(MentorQuestions);
 

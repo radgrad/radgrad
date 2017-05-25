@@ -5,7 +5,7 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { Users } from '../user/UserCollection';
 import { ROLE } from '../role/Role';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 
 /** @module api/mentor/MentorProfileCollection */
 /**
@@ -149,5 +149,5 @@ class MentorProfileCollection extends BaseCollection {
 }
 
 export const MentorProfiles = new MentorProfileCollection();
-radgradCollections.push(MentorProfiles);
+RadGrad.collections.push(MentorProfiles);
 

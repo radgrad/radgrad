@@ -1,5 +1,5 @@
 import BaseTypeCollection from '../base/BaseTypeCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 
 /** @module api/interest/InterestTypeCollection */
 
@@ -35,5 +35,5 @@ class InterestTypeCollection extends BaseTypeCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const InterestTypes = new InterestTypeCollection();
-radgradCollections.push(InterestTypes);
+RadGrad.collections.push(InterestTypes);
 

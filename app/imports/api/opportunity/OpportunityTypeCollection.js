@@ -1,5 +1,5 @@
 import BaseTypeCollection from '../base/BaseTypeCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 
 /** @module api/opportunity/OpportunityTypeCollection */
 
@@ -34,5 +34,5 @@ class OpportunityTypeCollection extends BaseTypeCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const OpportunityTypes = new OpportunityTypeCollection();
-radgradCollections.push(OpportunityTypes);
+RadGrad.collections.push(OpportunityTypes);
 

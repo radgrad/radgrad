@@ -4,7 +4,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '../slug/SlugCollection';
 import { Interests } from '../interest/InterestCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 
 
 /** @module api/course/CourseCollection */
@@ -139,4 +139,4 @@ class CourseCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Courses = new CourseCollection();
-radgradCollections.push(Courses);
+RadGrad.collections.push(Courses);

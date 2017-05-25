@@ -2,7 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '../slug/SlugCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { assertFeedbackType } from '../feedback/FeedbackType';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 
 /** @module api/feedback/FeedbackCollection */
 
@@ -88,5 +88,5 @@ class FeedbackCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Feedbacks = new FeedbackCollection();
-radgradCollections.push(Feedbacks);
+RadGrad.collections.push(Feedbacks);
 

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '../base/BaseCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 import { DesiredDegrees } from './DesiredDegreeCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
@@ -107,4 +107,4 @@ class AcademicPlanCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const AcademicPlans = new AcademicPlanCollection();
-radgradCollections.push(AcademicPlans);
+RadGrad.collections.push(AcademicPlans);

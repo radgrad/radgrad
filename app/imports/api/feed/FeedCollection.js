@@ -7,7 +7,7 @@ import { Opportunities } from '../opportunity/OpportunityCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 
 /** @module api/feed/FeedCollection */
 
@@ -359,4 +359,4 @@ class FeedCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Feeds = new FeedCollection();
-radgradCollections.push(Feeds);
+RadGrad.collections.push(Feeds);

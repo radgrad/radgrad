@@ -3,7 +3,7 @@ import { Slugs } from '../slug/SlugCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { Interests } from '../interest/InterestCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module api/teaser/TeaserCollection */
@@ -118,4 +118,4 @@ class TeaserCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Teasers = new TeaserCollection();
-radgradCollections.push(Teasers);
+RadGrad.collections.push(Teasers);

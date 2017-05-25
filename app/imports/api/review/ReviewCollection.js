@@ -5,7 +5,7 @@ import { Opportunities } from '../opportunity/OpportunityCollection';
 import { Users } from '../user/UserCollection';
 import { Courses } from '../course/CourseCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 import { Meteor } from 'meteor/meteor';
 
 /** @module api/review/ReviewCollection */
@@ -188,4 +188,4 @@ class ReviewCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Reviews = new ReviewCollection();
-radgradCollections.push(Reviews);
+RadGrad.collections.push(Reviews);

@@ -1,5 +1,3 @@
-/* global Assets */
-
 import { Meteor } from 'meteor/meteor';
 import { AcademicPlans } from '../../api/degree-plan/AcademicPlanCollection';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection.js';
@@ -27,10 +25,12 @@ import { CareerGoals } from '../../api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
-import { radgradCollections } from '../../api/base/RadGradCollections';
+import { RadGrad } from '../../api/base/RadGrad';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-utilities';
+
+/* global Assets */
 
 /** @module startup/server/fixtures */
 
@@ -39,7 +39,7 @@ import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-
  * @returns { Array } An array of collection document counts.
  */
 function documentCounts() {
-  return _.map(radgradCollections, collection => collection.count());
+  return _.map(RadGrad.collections, collection => collection.count());
 }
 
 /**

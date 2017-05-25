@@ -7,7 +7,7 @@ import { Users } from '../user/UserCollection';
 import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { assertICE } from '../ice/IceProcessor';
-import { radgradCollections } from '../base/RadGradCollections';
+import { RadGrad } from '../base/RadGrad';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 
@@ -187,4 +187,4 @@ class OpportunityCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Opportunities = new OpportunityCollection();
-radgradCollections.push(Opportunities);
+RadGrad.collections.push(Opportunities);
