@@ -37,7 +37,7 @@ export const RadGrad = {};
 
 /**
  * RadGrad.collections provides an alphabetized list of all collection class instances in the system.
- * @type {[*]}
+ * @type {Object[]}
  */
 RadGrad.collections = [
   AcademicPlans,
@@ -75,7 +75,7 @@ RadGrad.collections = [
  * Note that not all collection class instances get initialized from a snapshot file.
  * Currently, Slugs, AcademicYearInstances, and PublicStats collections are not initialized and thus are not in
  * this list.
- * @type {[*]}
+ * @type {Object[]}
  */
 RadGrad.collectionLoadSequence = [
   Semesters,

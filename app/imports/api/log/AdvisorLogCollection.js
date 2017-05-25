@@ -52,7 +52,7 @@ class AdvisorLogCollection extends BaseCollection {
    */
   getAdvisorDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this.findDoc(instanceID);
     return Users.findDoc(instance.advisorID);
   }
 
@@ -63,7 +63,7 @@ class AdvisorLogCollection extends BaseCollection {
    */
   getStudentDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this.findDoc(instanceID);
     return Users.findDoc(instance.studentID);
   }
 
