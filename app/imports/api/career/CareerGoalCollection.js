@@ -3,7 +3,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import { Interests } from '../interest/InterestCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
-import { radgradCollections } from '../base/RadGradCollections';
 
 
 /** @module api/career/CareerGoalCollection */
@@ -113,4 +112,3 @@ class CareerGoalCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const CareerGoals = new CareerGoalCollection();
-radgradCollections.push(CareerGoals);

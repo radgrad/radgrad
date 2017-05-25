@@ -1,7 +1,5 @@
 import './accounts.js';
-import './check-integrity';
+import './check-integrity.js';
 import './fixtures.js';
-import './logging';
+import './logging.js';
 import './publications.js';
-
-// icsdata/ directory is not imported here intentionally.

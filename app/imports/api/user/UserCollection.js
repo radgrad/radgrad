@@ -17,7 +17,7 @@ import { ROLE, isRole, assertRole } from '../role/Role';
 import { Semesters } from '../semester/SemesterCollection';
 import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
 import { Slugs } from '../slug/SlugCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+
 
 /** @module api/user/UserCollection */
 
@@ -576,4 +576,3 @@ class UserCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to other entities.
  */
 export const Users = new UserCollection();
-radgradCollections.push(Users);

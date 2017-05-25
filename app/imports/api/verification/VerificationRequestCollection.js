@@ -8,7 +8,7 @@ import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollecti
 import { ROLE } from '../role/Role';
 import { Semesters } from '../semester/SemesterCollection.js';
 import { Users } from '../user/UserCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+
 
 /** @module api/verification/VerificationRequestCollection */
 
@@ -210,4 +210,3 @@ class VerificationRequestCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const VerificationRequests = new VerificationRequestCollection();
-radgradCollections.push(VerificationRequests);

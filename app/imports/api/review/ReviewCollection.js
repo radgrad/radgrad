@@ -1,13 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-
 import { Slugs } from '../slug/SlugCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { Users } from '../user/UserCollection';
 import { Courses } from '../course/CourseCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
-import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/review/ReviewCollection */
 
@@ -189,4 +187,3 @@ class ReviewCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Reviews = new ReviewCollection();
-radgradCollections.push(Reviews);
