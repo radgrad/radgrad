@@ -8,7 +8,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 /**
  * BaseCollection is an abstract superclass of all RadGrad data model entities.
  * It is the direct superclass for SlugCollection and SemesterCollection.
- * Other collection classes are derived from BaseInstanceCollection or BaseTypeCollection, which are abstract
+ * Other collection classes are derived from BaseSlugCollection or BaseTypeCollection, which are abstract
  * classes that inherit from this one.
  */
 class BaseCollection {

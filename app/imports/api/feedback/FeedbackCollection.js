@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '../slug/SlugCollection';
-import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 import { assertFeedbackType } from '../feedback/FeedbackType';
 import { radgradCollections } from '../base/RadGradCollections';
 
@@ -8,9 +8,9 @@ import { radgradCollections } from '../base/RadGradCollections';
 
 /**
  * Feedback is the generalized representation for recommendations, warnings, and (perhaps in future) predictions.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class FeedbackCollection extends BaseInstanceCollection {
+class FeedbackCollection extends BaseSlugCollection {
 
   /**
    * Creates the Feedback collection.

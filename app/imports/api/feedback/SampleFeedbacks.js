@@ -1,5 +1,5 @@
-import { FeedbackType } from '/imports/api/feedback/FeedbackType';
-import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
+import { FeedbackType } from '../feedback/FeedbackType';
+import { Feedbacks } from '../feedback/FeedbackCollection';
 
 /** @module api/feedback/SampleFeedbacks */
 

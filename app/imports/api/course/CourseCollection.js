@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '../slug/SlugCollection';
 import { Interests } from '../interest/InterestCollection';
-import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
 
@@ -12,9 +12,9 @@ import { radgradCollections } from '../base/RadGradCollections';
 /**
  * Represents a specific course, such as "ICS 311".
  * To represent a specific course for a specific semester, use CourseInstance.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class CourseCollection extends BaseInstanceCollection {
+class CourseCollection extends BaseSlugCollection {
 
   /**
    * Creates the Course collection.

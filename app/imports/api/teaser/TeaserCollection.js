@@ -1,8 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection.js';
+import { Slugs } from '../slug/SlugCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
+import { Interests } from '../interest/InterestCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { radgradCollections } from '../base/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
@@ -10,9 +10,9 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /**
  * Represents a teaser instance, such as "ACM Webmasters".
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class TeaserCollection extends BaseInstanceCollection {
+class TeaserCollection extends BaseSlugCollection {
 
   /**
    * Creates the Teaser collection.

@@ -56,18 +56,16 @@ Template.Semester_List_2.helpers({
   },
   semesterOpportunities() {
     if (getRouteUserName()) {
-      const ret = [];
       if (Template.instance().data.semester) {
         const opps = OpportunityInstances.find({
           semesterID: Template.instance().data.semester._id,
           studentID: getUserIdFromRoute(),
         }).fetch();
-        _.map(opps, (opp) => {
+        _.forEach(opps, (opp) => {
           opp.name = Opportunities.findDoc(opp.opportunityID).name; // eslint-disable-line
         });
         return opps;
       }
-      return ret;
     }
     return [];
   },

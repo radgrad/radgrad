@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { PlanChoices } from '/imports/api/degree-plan/PlanChoiceCollection';
+import { PlanChoices } from '../degree-plan/PlanChoiceCollection';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */

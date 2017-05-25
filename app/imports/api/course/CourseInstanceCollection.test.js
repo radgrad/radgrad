@@ -3,12 +3,12 @@
 
 import { Meteor } from 'meteor/meteor';
 // import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { makeSampleCourse, sampleCourseName } from '/imports/api/course/SampleCourses';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
+import { Semesters } from '../semester/SemesterCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
+import { makeSampleCourse, sampleCourseName } from '../course/SampleCourses';
+import { makeSampleUser } from '../user/SampleUsers';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('CourseInstanceCollection', function testSuite() {

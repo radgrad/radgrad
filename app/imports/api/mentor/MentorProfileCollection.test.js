@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 import { MentorProfiles } from './MentorProfileCollection';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
-import { ROLE } from '/imports/api/role/Role';
+import { makeSampleUser } from '../user/SampleUsers';
+import { ROLE } from '../role/Role';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */

@@ -41,14 +41,11 @@ Template.Mentor_About_Me_Widget.helpers({
     return '';
   },
   careerGoals() {
-    const ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      _.map(user.careerGoalIDs, (id) => {
-        ret.push(CareerGoals.findDoc(id));
-      });
+      return _.map(user.careerGoalIDs, (id) => CareerGoals.findDoc(id));
     }
-    return ret;
+    return [];
   },
   careerGoalsRouteName() {
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
@@ -117,14 +114,11 @@ Template.Mentor_About_Me_Widget.helpers({
     return interest.name;
   },
   interests() {
-    const ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      _.map(user.interestIDs, (id) => {
-        ret.push(Interests.findDoc(id));
-      });
+      return _.map(user.interestIDs, (id) => Interests.findDoc(id));
     }
-    return ret;
+    return [];
   },
   interestsRouteName() {
     return RouteNames.mentorExplorerInterestsPageRouteName;

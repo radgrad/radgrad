@@ -4,28 +4,28 @@ import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { AcademicPlans } from '/imports/api/degree-plan/AcademicPlanCollection';
-import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
-import { Courses } from '/imports/api/course/CourseCollection';
-import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { DesiredDegrees } from '/imports/api/degree-plan/DesiredDegreeCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
-import { Slugs } from '/imports/api/slug/SlugCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
+import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
+import { CareerGoals } from '../career/CareerGoalCollection';
+import { Courses } from '../course/CourseCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
+import { Interests } from '../interest/InterestCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
+import { ROLE, isRole, assertRole } from '../role/Role';
+import { Semesters } from '../semester/SemesterCollection';
+import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
+import { Slugs } from '../slug/SlugCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/user/UserCollection */
 
 /**
  * Represent a user. Users have roles: admin, advisor, alumni, faculty, student, mentor.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class UserCollection extends BaseInstanceCollection {
+class UserCollection extends BaseSlugCollection {
 
   /**
    * Creates the User collection.

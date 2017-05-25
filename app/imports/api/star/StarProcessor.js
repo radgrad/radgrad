@@ -2,9 +2,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Papa } from 'meteor/harrison:papa-parse';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Courses } from '/imports/api/course/CourseCollection';
-import { Slugs } from '/imports/api/slug/SlugCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Courses } from '../course/CourseCollection';
+import { Slugs } from '../slug/SlugCollection';
 
 
 /** @module api/star/StarProcessor */

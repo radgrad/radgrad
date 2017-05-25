@@ -4,8 +4,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { calcLevel, updateStudentLevel } from './LevelProcessor';
-import { ROLE } from '/imports/api/role/Role';
-import { Users } from '/imports/api/user/UserCollection';
+import { ROLE } from '../role/Role';
+import { Users } from '../user/UserCollection';
 
 /** @module api/level/LevelProcessorMethods */
 

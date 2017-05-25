@@ -3,9 +3,9 @@
 
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 import { Teasers } from './TeaserCollection';
-import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
+import { makeSampleInterest } from '../interest/SampleInterests';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */

@@ -2,11 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-import { Courses } from '/imports/api/course/CourseCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import { Courses } from '../course/CourseCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Users } from '../user/UserCollection';
+import BaseCollection from '../base/BaseCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/feed/FeedCollection */
@@ -29,7 +29,7 @@ function withinPastDay(feed, timestamp) {
 
 /**
  * Represents a feed instance.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
 class FeedCollection extends BaseCollection {
   /**

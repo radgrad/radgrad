@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { AcademicYearInstances } from '/imports/api/degree-plan/AcademicYearInstanceCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { ROLE } from '../role/Role';
+import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Users } from '../user/UserCollection';
+import BaseCollection from '../base/BaseCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/opportunity/OpportunityInstanceCollection */

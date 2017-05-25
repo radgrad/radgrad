@@ -5,11 +5,11 @@
 import { Meteor } from 'meteor/meteor';
 import { defineTestFixture } from '../test/test-fixture';
 import { processStarCsvData } from './StarProcessor';
-import { Users } from '/imports/api/user/UserCollection';
-import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
+import { Users } from '../user/UserCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
+import { makeSampleUser } from '../user/SampleUsers';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('StarProcessor', function testSuite() {

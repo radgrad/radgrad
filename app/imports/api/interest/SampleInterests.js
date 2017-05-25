@@ -1,5 +1,5 @@
-import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
+import { InterestTypes } from '../interest/InterestTypeCollection';
+import { Interests } from '../interest/InterestCollection';
 import { moment } from 'meteor/momentjs:moment';
 
 

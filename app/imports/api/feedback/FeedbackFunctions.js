@@ -42,7 +42,7 @@ function getBasePath(studentID) {
  * A class containing Feedback functions. Each Feedback function is a method on the singleton instance
  * FeedbackFunctions.
  * @example
- * import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
+ * import { FeedbackFunctions } from '../feedback/FeedbackFunctions';
  * :
  * :
  * FeedbackFunctions.recommendedCoursesThisSemesterByInterest(studentID);

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { checkIntegrity } from '/imports/api/integrity/IntegrityChecker';
+import { checkIntegrity } from '../../../api/integrity/IntegrityChecker';
 
 const clientDataKey = 'client';
 const serverDataKey = 'server';

@@ -9,13 +9,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 
 function getICSCourses(studentID, isPast) {
   const courseInstances = CourseInstances.find({ studentID, verified: isPast, note: /ICS/ }).fetch();
-  const taken = [];
-  _.map(courseInstances, (ci) => {
-    if (_.indexOf(taken, ci) === -1) {
-      taken.push(ci);
-    }
-  });
-  return taken;
+  return _.uniq(courseInstances);
 }
 
 Template.User_Course_Component.helpers({
