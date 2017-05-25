@@ -1,5 +1,3 @@
-/* global Assets */
-
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { Courses } from '../../api/course/CourseCollection.js';
@@ -20,9 +18,11 @@ import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 import { restoreCollection } from '../../api/utility/fixture-utilities';
 
+/* global Assets */
+
 /** @module api/test/test-fixture */
 
-
+// TODO rewrite this to use RadGrad.collections and to not be copy-pasted from the DB restoration code.
 /**
  *
  */

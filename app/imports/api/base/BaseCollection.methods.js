@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { radgradCollections } from './RadGradCollections';
+import { RadGrad } from '../radgrad/radgrad';
 
 /** @module api/base/BaseCollectionMethods */
 
@@ -28,7 +28,8 @@ export const dumpDatabaseMethod = new ValidatedMethod({
     // Don't do the dump except on server side (disable client-side simulation).
     // Return an object with fields timestamp and collections.
     if (Meteor.isServer) {
-      const collections = _.sortBy(radgradCollections.map(collection => collection.dumpAll()), entry => entry.name);
+      const collections = _.sortBy(RadGrad.collectionLoadSequence.map(collection => collection.dumpAll()),
+          entry => entry.name);
       const timestamp = new Date();
       return { timestamp, collections };
     }

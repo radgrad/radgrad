@@ -22,7 +22,7 @@
     "chai": "*",
     "docdash": "^0.3.0",
     "es6-enum": "^1.0.3",
-    "eslint": "^3.7.1",
+    "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
