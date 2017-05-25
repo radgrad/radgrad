@@ -1,6 +1,8 @@
 /* global Assets */
 
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { AcademicPlans } from '../../api/degree-plan/AcademicPlanCollection';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
@@ -28,8 +30,6 @@ import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 import { radgradCollections } from '../../api/base/RadGradCollections';
-import { _ } from 'meteor/erasaur:meteor-lodash';
-import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-utilities';
 
 /** @module startup/server/fixtures */

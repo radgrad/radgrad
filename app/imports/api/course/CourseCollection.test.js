@@ -1,10 +1,10 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { Courses } from '../course/CourseCollection';
-import { makeSampleInterest } from '../interest/SampleInterests';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
+import { Courses } from '../course/CourseCollection';
+import { makeSampleInterest } from '../interest/SampleInterests';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {

@@ -1,13 +1,13 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
+import { Meteor } from 'meteor/meteor';
+import { expect } from 'chai';
 import { ROLE } from '../role/Role';
 import { Reviews } from '../review/ReviewCollection';
 import { defineSemesters } from '../semester/SemesterUtilities';
 import { makeSampleOpportunity } from '../opportunity/SampleOpportunities';
 import { makeSampleUser } from '../user/SampleUsers';
-import { Meteor } from 'meteor/meteor';
-import { expect } from 'chai';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {

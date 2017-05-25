@@ -1,6 +1,6 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { Slugs } from '../slug/SlugCollection';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { radgradCollections } from '../base/RadGradCollections';
 
 

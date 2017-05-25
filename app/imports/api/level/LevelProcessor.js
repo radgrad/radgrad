@@ -1,10 +1,10 @@
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Reviews } from '../review/ReviewCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 import { getEarnedICE } from '../ice/IceProcessor';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module api/level/LevelProcessor */
 

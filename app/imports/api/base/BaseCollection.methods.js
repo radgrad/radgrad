@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { radgradCollections } from './RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { radgradCollections } from './RadGradCollections';
 
 /** @module api/base/BaseCollectionMethods */
 

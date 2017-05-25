@@ -1,7 +1,7 @@
 // import { _ } from 'meteor/erasaur:meteor-lodash';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '../base/BaseCollection';
 import { radgradCollections } from '../base/RadGradCollections';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { buildSimpleName } from './PlanChoiceUtilities';
 
 /** @module api/degree-plan/PlanChoiceCollection */

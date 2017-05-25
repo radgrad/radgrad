@@ -1,8 +1,8 @@
 import { Template } from 'meteor/templating';
-import { getRouteUserName } from '../../components/shared/route-user-name';
-import { Users } from '../../../api/user/UserCollection';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { $ } from 'meteor/jquery';
+import { getRouteUserName } from '../../components/shared/route-user-name';
+import * as RouteNames from '../../../startup/client/router.js';
+import { Users } from '../../../api/user/UserCollection';
 
 Template.First_Menu.helpers({
   firstName() {
