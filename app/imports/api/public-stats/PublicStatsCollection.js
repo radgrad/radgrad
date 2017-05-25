@@ -231,6 +231,14 @@ class PublicStatsCollection extends BaseCollection {
       instance[key]();
     });
   }
+
+  /**
+   * Returns an empty array to indicate no integrity checking.
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() {  // eslint-disable-line class-methods-use-this
+    return [];
+  }
 }
 
 /**

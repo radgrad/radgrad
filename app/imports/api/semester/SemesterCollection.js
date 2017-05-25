@@ -3,7 +3,6 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { moment } from 'meteor/momentjs:moment';
 import { Slugs } from '../slug/SlugCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
-import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/semester/SemesterCollection */
 
@@ -249,4 +248,3 @@ class SemesterCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Semesters = new SemesterCollection();
-radgradCollections.push(Semesters);
