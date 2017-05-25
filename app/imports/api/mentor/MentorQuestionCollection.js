@@ -1,16 +1,16 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
-import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/mentor/MentorQuestionCollection */
 
 /**
  * Represents a mentor answer.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class MentorQuestionCollection extends BaseInstanceCollection {
+class MentorQuestionCollection extends BaseSlugCollection {
   /**
    * Creates the Mentor Question collection.
    */

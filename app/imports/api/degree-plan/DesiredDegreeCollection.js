@@ -1,4 +1,4 @@
-import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { radgradCollections } from '../base/RadGradCollections';
@@ -8,9 +8,9 @@ import { radgradCollections } from '../base/RadGradCollections';
 
 /**
  * DesiredDegrees specifies the set of degrees possible in this department.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class DesiredDegreeCollection extends BaseInstanceCollection {
+class DesiredDegreeCollection extends BaseSlugCollection {
 
   /**
    * Creates the DesiredDegree collection.
