@@ -3,12 +3,12 @@
 /* global Assets */
 
 import { Meteor } from 'meteor/meteor';
+import { expect } from 'chai';
 import { defineTestFixture } from '../test/test-fixture';
 import { processStarCsvData } from './StarProcessor';
 import { Users } from '../user/UserCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { makeSampleUser } from '../user/SampleUsers';
-import { expect } from 'chai';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {

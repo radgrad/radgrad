@@ -1,6 +1,6 @@
-import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */

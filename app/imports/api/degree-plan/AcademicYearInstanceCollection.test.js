@@ -29,6 +29,8 @@ if (Meteor.isServer) {
       docID = AcademicYearInstances.restoreOne(dumpObject);
       expect(AcademicYearInstances.isDefined(docID)).to.be.true;
       expect(AcademicYearInstances.toString(docID)).to.equal(`[AY 2016-2017 ${student}]`);
+      const errors = AcademicYearInstances.checkIntegrity();
+      expect(errors.length).to.equal(0);
       AcademicYearInstances.removeIt(docID);
     });
   });
