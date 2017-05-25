@@ -52,6 +52,7 @@ Template.Student_Feed_Widget.helpers({
     } else {
       ret = `${dateDiffInDays(currentTime, feedTime)} days ago`;
     }
+    console.log(feed.description);
     return ret;
   },
   isType(feed, type) {
@@ -67,4 +68,12 @@ Template.Student_Feed_Widget.helpers({
     });
     return students;
   },
+});
+
+Template.Student_Feed_Widget.onRendered(function studentFeedWidgetOnRendered() {
+  const template = this;
+  template.$('.studentList')
+      .popup({
+        on: 'click',
+      });
 });

@@ -13,11 +13,18 @@ Template.Student_Feed_Modal.helpers({
   userRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
   },
+  students(feed) {
+    const students = [];
+    _.map(feed.userIDs, function (userID) {
+      students.push(Users.findDoc(userID));
+    });
+    return students;
+  },
 });
 
 Template.Student_Feed_Modal.events({
   'click .modal': function clickOpenModal(event, instance) {
     event.preventDefault();
-    $(`#${instance.data.feedID}.ui.small.modal`).modal('show');
+    $(`#${instance.data.feed._id}.ui.small.modal`).modal('show');
   },
 });

@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Template } from 'meteor/templating';
+import { Blaze } from 'meteor/blaze';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
@@ -71,7 +73,7 @@ class FeedCollection extends BaseCollection {
     });
     if (userIDs.length > 1) {
       description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
-        and ${userIDs.length - 1} others have joined RadGrad.`;
+        and {{> Student_Feed_Modal ${userIDs.length - 1}}} others have joined RadGrad.`;
     } else {
       description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) has joined RadGrad.`;
     }
@@ -264,7 +266,7 @@ class FeedCollection extends BaseCollection {
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
     const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
-      and ${userIDs.length - 1} others have joined RadGrad.`;
+      and {{> Student_Feed_Modal ${userIDs.length - 1}}} others have joined RadGrad.`;
     let picture = Users.findDoc(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
@@ -286,8 +288,12 @@ class FeedCollection extends BaseCollection {
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
     const o = Opportunities.findDoc(existingFeed.opportunityID);
-    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])})  
-      and ${userIDs.length - 1} others have been verified for 
+    let students = '';
+    _.map(userIDs, function (uid) {
+      students += `<a class=\"item\" data-position=\"right center\">${Users.findDoc(uid).username}</a>`;
+    });
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) and 
+      ${userIDs.length - 1} others have been verified for 
       [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
       (${Semesters.toString(existingFeed.semesterID, false)})`;
     this._collection.update(existingFeedID, { $set: { userIDs, description } });
