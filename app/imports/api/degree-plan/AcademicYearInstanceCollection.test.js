@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
 import { expect } from 'chai';
 import { AcademicYearInstances } from './AcademicYearInstanceCollection';
 import { Users } from '../user/UserCollection';
@@ -32,6 +33,25 @@ if (Meteor.isServer) {
       const errors = AcademicYearInstances.checkIntegrity();
       expect(errors.length).to.equal(0);
       AcademicYearInstances.removeIt(docID);
+    });
+    it('#publish', function test(done) {
+      const studentID = makeSampleUser();
+      const collector = new PublicationCollector({ userID: studentID });
+      const student = Users.findSlugByID(studentID);
+      const year = 2016;
+      AcademicYearInstances.define({ year, student });
+      AcademicYearInstances.publish();
+      collector.collect(AcademicYearInstances.publicationNames.Public, (collections) => {
+        expect(collections).to.be.an('object');
+        expect(collections[AcademicYearInstances.publicationNames.Public]).to.be.an('array');
+        expect(collections[AcademicYearInstances.publicationNames.Public].length).to.equal(0);
+      });
+      collector.collect(AcademicYearInstances.publicationNames.PerStudentID, studentID, (collections) => {
+        expect(collections).to.be.an('object');
+        expect(collections[AcademicYearInstances.publicationNames.Public]).to.be.an('array');
+        expect(collections[AcademicYearInstances.publicationNames.Public].length).to.equal(1);
+      });
+      done();
     });
   });
 }

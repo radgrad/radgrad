@@ -1,12 +1,15 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
+import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { makeSampleUser } from '../user/SampleUsers';
 import { AdvisorLogs } from './AdvisorLogCollection';
 import { ROLE } from '../role/Role';
+import { Users } from '../user/UserCollection';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
+
 
 if (Meteor.isServer) {
   describe('AdvisorLogCollection', function testSuite() {
@@ -26,7 +29,7 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt #dumpOne, #restoreOne', function test() {
+    it('#define, #isDefined, #removeIt #dumpOne, #restoreOne, #checkIntegrity', function test() {
       let docID = AdvisorLogs.define({ advisor, student, text });
       expect(AdvisorLogs.isDefined(docID)).to.be.true;
       const dumpObject = AdvisorLogs.dumpOne(docID);
@@ -34,16 +37,30 @@ if (Meteor.isServer) {
       expect(AdvisorLogs.isDefined(docID)).to.be.false;
       docID = AdvisorLogs.restoreOne(dumpObject);
       expect(AdvisorLogs.isDefined(docID)).to.be.true;
+      const error = AdvisorLogs.checkIntegrity();
+      expect(error.length).to.equal(0);
       AdvisorLogs.removeIt(docID);
     });
-    it.skip('#getAdvisorDoc, #getStudentDoc, #checkIntegrity', function test() {
-      console.log(student, advisor);
+    it('#getAdvisorDoc, #getStudentDoc, #checkIntegrity', function test() {
       const docID = AdvisorLogs.define({ advisor, student, text });
       const advisorDoc = AdvisorLogs.getAdvisorDoc(docID);
-      expect(advisorDoc._id).to.equal(advisor);
+      const a = Users.findDoc(advisor);
+      expect(advisorDoc.username).to.equal(a.username);
       const studentDoc = AdvisorLogs.getStudentDoc(docID);
-      expect(studentDoc._id).to.equal(student);
+      const s = Users.findDoc(student);
+      expect(studentDoc.username).to.equal(s.username);
       AdvisorLogs.removeIt(docID);
+    });
+    it('#publish', function test(done) {
+      AdvisorLogs.define({ advisor, student, text });
+      AdvisorLogs.publish();
+      const collector = new PublicationCollector({ userID: student });
+      collector.collect(AdvisorLogs.getPublicationName(), (collections) => {
+        expect(collections).to.be.an('object');
+        expect(collections[AdvisorLogs.getPublicationName()]).to.be.an('array');
+        expect(collections[AdvisorLogs.getPublicationName()].length).to.equal(0);
+      });
+      done();
     });
   });
 }
