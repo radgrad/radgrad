@@ -11,7 +11,8 @@ machine:
 dependencies:
   override:
     - curl https://install.meteor.com | /bin/sh
-    - meteor npm install
+    - meteor npm install:
+        timeout: 600
 test:
   override:
     - meteor npm run test
