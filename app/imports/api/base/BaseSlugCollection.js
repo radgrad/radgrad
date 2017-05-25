@@ -1,17 +1,17 @@
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import { Slugs } from '../slug/SlugCollection';
+import BaseCollection from '../base/BaseCollection';
 import { check } from 'meteor/check';
 
-/** @module api/base/BaseInstanceCollection */
+/** @module api/base/BaseSlugCollection */
 
 /**
- * BaseInstanceCollection is an abstract superclass for use by entities that have a slug.
+ * BaseSlugCollection is an abstract superclass for use by entities that have a slug.
  * It provides an API where the user can provide either a slug or docID (or document-specifying object).
  * Note it does not define a constructor; subclasses should invoke super(type, schema) to get the
  * BaseCollection constructor.
  * @extends module:api/base/BaseCollection~BaseCollection
  */
-class BaseInstanceCollection extends BaseCollection {
+class BaseSlugCollection extends BaseCollection {
 
   /**
    * Returns the docID associated with instance, or throws an error if it cannot be found.
@@ -134,4 +134,4 @@ class BaseInstanceCollection extends BaseCollection {
 /**
  * Provide this class for use by instance collections such as Interest.
  */
-export default BaseInstanceCollection;
+export default BaseSlugCollection;

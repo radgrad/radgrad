@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import { Slugs } from '../slug/SlugCollection';
+import BaseCollection from '../base/BaseCollection';
 import { check } from 'meteor/check';
 
 /** @module api/base/BaseTypeCollection */

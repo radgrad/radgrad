@@ -7,8 +7,9 @@
     "lint": "eslint --quiet ./imports",
     "lint-loud": "eslint ./imports",
     "pretest": "npm run lint",
-    "test": "meteor test --once --driver-package dispatch:mocha-phantomjs --no-release-check",
-    "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check",
+    "test": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --no-release-check",
+    "test-watch": "TEST_WATCH=1 TEST_BROWSER_DRIVER=nightmare meteor test --driver-package dispatch:mocha --no-release-check",
+    "coverage-cam": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check --settings ../config/settings.coverage.cam.json",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r ."
   },
   "dependencies": {
@@ -27,7 +28,8 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-meteor": "^4.0.1",
     "eslint-plugin-react": "^6.4.1",
-    "jsdoc": "^3.4.0"
+    "jsdoc": "^3.4.0",
+    "nightmare": "^2.10.0"
   },
   "kadira": {
     "appId": "uLpKNYddpngcRwpQP",

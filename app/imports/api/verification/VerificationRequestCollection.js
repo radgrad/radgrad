@@ -2,12 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { moment } from 'meteor/momentjs:moment';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import BaseCollection from '../base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
-import { ROLE } from '/imports/api/role/Role';
+import { ROLE } from '../role/Role';
 import { Semesters } from '../semester/SemesterCollection.js';
-import { Users } from '/imports/api/user/UserCollection';
+import { Users } from '../user/UserCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/verification/VerificationRequestCollection */

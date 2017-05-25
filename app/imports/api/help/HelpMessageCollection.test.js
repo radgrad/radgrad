@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 import { HelpMessages } from './HelpMessageCollection';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */

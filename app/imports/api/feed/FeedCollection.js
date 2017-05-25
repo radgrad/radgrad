@@ -1,9 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Template } from 'meteor/templating';
-import { Blaze } from 'meteor/blaze';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
@@ -32,7 +29,7 @@ function withinPastDay(feed, timestamp) {
 
 /**
  * Represents a feed instance.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
 class FeedCollection extends BaseCollection {
   /**

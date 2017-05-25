@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 
 import { Meteor } from 'meteor/meteor';
-import { isICE, assertICE, makeCourseICE, gradeCompetency } from '/imports/api/ice/IceProcessor';
+import { isICE, assertICE, makeCourseICE, gradeCompetency } from '../ice/IceProcessor';
 import { expect } from 'chai';
 
 if (Meteor.isServer) {

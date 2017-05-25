@@ -1,7 +1,7 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
-import { AcademicPlans } from '/imports/api/degree-plan/AcademicPlanCollection';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';

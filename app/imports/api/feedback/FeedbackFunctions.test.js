@@ -3,15 +3,15 @@
 
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
-import { FeedbackInstances } from '/imports/api/feedback/FeedbackInstanceCollection';
-import { DesiredDegrees } from '/imports/api/degree-plan/DesiredDegreeCollection';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
-import { defineTestFixture } from '/imports/api/test/test-fixture';
-// import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
-// import { makeSampleCourse, makeSampleCourseInstance } from '/imports/api/course/SampleCourses';
-import { Users } from '/imports/api/user/UserCollection';
+import { FeedbackFunctions } from '../feedback/FeedbackFunctions';
+import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
+import { removeAllEntities } from '../base/BaseUtilities';
+import { makeSampleUser } from '../user/SampleUsers';
+import { defineTestFixture } from '../test/test-fixture';
+// import { makeSampleInterest } from '../interest/SampleInterests';
+// import { makeSampleCourse, makeSampleCourseInstance } from '../course/SampleCourses';
+import { Users } from '../user/UserCollection';
 
 if (Meteor.isServer) {
   describe('FeedbackFunctions', function testSuite() {

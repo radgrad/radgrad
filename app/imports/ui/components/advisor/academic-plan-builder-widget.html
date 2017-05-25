@@ -97,8 +97,8 @@
             <div class="ui dividing header"><h4>Course Choices</h4></div>
             {{#each course in courses}}
               <div id="{{course}}-choice" class="ui basic label" draggable="true" ondragstart="drag(event)"
-                   slug="{{course}}">{{courseName
-                  course}}</div>
+                   slug="{{course}}">{{courseName course}}
+              </div>
             {{/each}}
           </div>
           <div class="ui segment comboArea" ondragover="allowComboAreaDrop(event)">

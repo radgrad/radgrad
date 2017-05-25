@@ -16,13 +16,7 @@ Template.User_Opportunity_Component.onCreated(function userOpportunityComponentO
 
 function getOpportunities(studentID, isPast) {
   const opportunityInstances = OpportunityInstances.find({ studentID, verified: isPast }).fetch();
-  const taken = [];
-  _.map(opportunityInstances, (oi) => {
-    if (_.indexOf(taken, oi) === -1) {
-      taken.push(oi);
-    }
-  });
-  return taken;
+  return _.uniq(opportunityInstances);
 }
 
 Template.User_Opportunity_Component.helpers({

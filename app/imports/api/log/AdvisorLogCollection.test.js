@@ -3,10 +3,10 @@
 
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
+import { removeAllEntities } from '../base/BaseUtilities';
+import { makeSampleUser } from '../user/SampleUsers';
 import { AdvisorLogs } from './AdvisorLogCollection';
-import { ROLE } from '/imports/api/role/Role';
+import { ROLE } from '../role/Role';
 
 if (Meteor.isServer) {
   describe('AdvisorLogCollection', function testSuite() {

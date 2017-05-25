@@ -63,34 +63,31 @@ Template.Update_Degree_Plan_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   plans() {
-    const ret = [];
     if (Template.currentData().studentID.get()) {
       const user = Users.findDoc(Template.currentData().studentID.get());
       if (user.academicPlanID) {
         const plan = AcademicPlans.findDoc(user.academicPlanID);
         const semester = Semesters.findDoc(plan.effectiveSemesterID);
-        const plans = AcademicPlans.find().fetch();
-        _.map(plans, (p) => {
+        let plans = AcademicPlans.find().fetch();
+        plans = _.filter(plans, (p) => {
           const year = Semesters.findDoc(p.effectiveSemesterID).year;
-          if (semester.year === year) {
-            ret.push(p);
-          }
+          return semester.year === year;
         });
-      } else {
-        const chosen = parseInt(Template.instance().chosenYear.get(), 10);
-        const plans = AcademicPlans.find().fetch();
-        _.map(plans, (p) => {
-          const year = Semesters.findDoc(p.effectiveSemesterID).year;
-          if (chosen === year) {
-            ret.push(p);
-          }
-        });
+        return _.sortBy(plans, [function sort(o) {
+          return o.name;
+        }]);
       }
-      return _.sortBy(ret, [function sort(o) {
+      const chosen = parseInt(Template.instance().chosenYear.get(), 10);
+      let plans = AcademicPlans.find().fetch();
+      plans = _.filter(plans, (p) => {
+        const year = Semesters.findDoc(p.effectiveSemesterID).year;
+        return chosen === year;
+      });
+      return _.sortBy(plans, [function sort(o) {
         return o.name;
       }]);
     }
-    return ret;
+    return [];
   },
   roles() {
     return [ROLE.STUDENT, ROLE.ALUMNI];
@@ -171,32 +168,28 @@ Template.Update_Degree_Plan_Widget.helpers({
     return '';
   },
   years() {
-    const ret = [];
     if (Template.currentData().studentID.get()) {
       const studentID = Template.currentData().studentID.get();
       const student = Users.findDoc({ _id: studentID });
       let declaredYear;
       if (student.declaredSemesterID) {
-        const decSem = Semesters.findDoc(student.declaredSemesterID);
-        declaredYear = decSem.year;
+        declaredYear = Semesters.findDoc(student.declaredSemesterID).year;
       }
-      const plans = AcademicPlans.find().fetch();
-      _.map(plans, (p) => {
+      let plans = AcademicPlans.find().fetch();
+      plans = _.filter(plans, (p) => {
         const year = Semesters.findDoc(p.effectiveSemesterID).year;
-        if (declaredYear && year >= declaredYear) {
-          if (_.indexOf(ret, year) === -1) {
-            ret.push(year);
-          }
-        } else
-          if (!declaredYear && _.indexOf(ret, year) === -1) {
-            ret.push(year);
-          }
+        if (declaredYear) {
+          return year >= declaredYear;
+        }
+        return true;
       });
-      return _.sortBy(ret, [function sort(o) {
+      let years = _.map(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
+      years = _.uniq(years);
+      return _.sortBy(years, [function sort(o) {
         return o;
       }]);
     }
-    return ret;
+    return [];
   },
 });
 

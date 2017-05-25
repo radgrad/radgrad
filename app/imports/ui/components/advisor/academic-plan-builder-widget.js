@@ -38,14 +38,9 @@ Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCre
 
 Template.Academic_Plan_Builder_Widget.helpers({
   academicYears() {
-    const ret = [];
     const semesters = Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch();
-    _.map(semesters, (s) => {
-      if (_.indexOf(ret, s.year) === -1) {
-        ret.push(s.year);
-      }
-    });
-    return ret;
+    const years = _.uniqBy(semesters, (s) => s.year);
+    return _.map(years, (y) => y.year);
   },
   choice() {
     if (Template.instance().choice.get()) {
@@ -60,12 +55,8 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return '';
   },
   courses() {
-    const ret = [];
     const choices = PlanChoices.find().fetch();
-    _.map(choices, (c) => {
-      ret.push(c.choice);
-    });
-    return ret;
+    return _.map(choices, (c) => c.choice);
   },
   desiredDegrees() {
     return DesiredDegrees.find({}, { sort: { name: 1 } });
@@ -195,12 +186,12 @@ Template.Academic_Plan_Builder_Widget.events({
       const coursesPerSemester = [];
       const courseList = [];
       const ays = instance.$('.academicYear');
-      _.map(ays, (ay) => {
+      _.forEach(ays, (ay) => {
         const tables = ay.querySelectorAll('table');
-        _.map(tables, (table) => {
+        _.forEach(tables, (table) => {
           const divs = table.getElementsByTagName('div');
           coursesPerSemester.push(divs.length);
-          _.map(divs, (div) => {
+          _.forEach(divs, (div) => {
             courseList.push(div.getAttribute('id'));
           });
         });
