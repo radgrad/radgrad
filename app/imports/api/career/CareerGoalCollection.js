@@ -2,7 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import { Interests } from '../interest/InterestCollection';
-import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
 
@@ -10,9 +10,9 @@ import { radgradCollections } from '../base/RadGradCollections';
 
 /**
  * CareerGoals represent the professional future(s) that the student wishes to work toward.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class CareerGoalCollection extends BaseInstanceCollection {
+class CareerGoalCollection extends BaseSlugCollection {
 
   /**
    * Creates the CareerGoal collection.

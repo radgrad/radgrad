@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '../slug/SlugCollection';
-import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 import { Meteor } from 'meteor/meteor';
 import { moment } from 'meteor/momentjs:moment';
 import { radgradCollections } from '../base/RadGradCollections';
@@ -9,9 +9,9 @@ import { radgradCollections } from '../base/RadGradCollections';
 
 /**
  * Represents a specific semester, such as "Spring, 2016", "Fall, 2017", or "Summer, 2015".
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class SemesterCollection extends BaseInstanceCollection {
+class SemesterCollection extends BaseSlugCollection {
 
   /**
    * Creates the Semester collection.

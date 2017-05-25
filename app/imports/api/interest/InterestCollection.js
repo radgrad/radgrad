@@ -1,7 +1,7 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Slugs } from '../slug/SlugCollection';
 import { InterestTypes } from '../interest/InterestTypeCollection';
-import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/interest/InterestCollection */
@@ -9,9 +9,9 @@ import { radgradCollections } from '../base/RadGradCollections';
 /**
  * Represents a specific interest, such as "Software Engineering".
  * Note that all Interests must have an associated InterestType.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class InterestCollection extends BaseInstanceCollection {
+class InterestCollection extends BaseSlugCollection {
 
   /**
    * Creates the Interest collection.

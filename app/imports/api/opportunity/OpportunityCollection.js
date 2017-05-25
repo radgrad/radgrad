@@ -5,7 +5,7 @@ import { Interests } from '../interest/InterestCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
-import BaseInstanceCollection from '../base/BaseInstanceCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 import { assertICE } from '../ice/IceProcessor';
 import { radgradCollections } from '../base/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -16,9 +16,9 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 /**
  * Represents an Opportunity, such as "LiveWire Internship".
  * To represent an Opportunity taken by a specific student in a specific semester, use OpportunityInstance.
- * @extends module:api/base/BaseInstanceCollection~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class OpportunityCollection extends BaseInstanceCollection {
+class OpportunityCollection extends BaseSlugCollection {
 
   /**
    * Creates the Opportunity collection.

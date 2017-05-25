@@ -18,7 +18,7 @@ import { Users } from '../user/UserCollection';
 
 /**
  * PublicStats holds public statistics about RadGrad.
- * @extends api/base/BaseCollection~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class PublicStatsCollection extends BaseCollection {
   /**

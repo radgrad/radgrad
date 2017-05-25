@@ -18,7 +18,7 @@ import { CareerGoals } from '../../api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
-import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-utilities';
+import { restoreCollection } from '../../api/utility/fixture-utilities';
 
 /** @module api/test/test-fixture */
 
@@ -28,8 +28,7 @@ import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-
  */
 export function defineTestFixture(fixtureName) {
   const restoreFileName = `database/testing/${fixtureName}`;
-  const restoreFileAge = getRestoreFileAge(restoreFileName);
-  console.log(`Restoring test fixture from file ${restoreFileName}, dumped ${restoreFileAge}.`); // eslint-disable-line
+  console.log(`    (Restoring test fixture from file ${restoreFileName}.)`); // eslint-disable-line
   const restoreJSON = JSON.parse(Assets.getText(restoreFileName));
   // The list of collections, ordered so that they can be sequentially restored.
   const collectionList = [Semesters, InterestTypes, Interests, CareerGoals, DesiredDegrees,
