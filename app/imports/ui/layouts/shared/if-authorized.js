@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { ROLE } from '../../../api/role/Role';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { ROLE } from '../../../api/role/Role';
 import { Users } from '../../../api/user/UserCollection';
 
 /* eslint-disable object-shorthand */

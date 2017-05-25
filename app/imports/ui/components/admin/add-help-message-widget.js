@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { routeNames } from '../../../startup/client/router.js';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 
 // /** @module ui/components/admin/Add_Help_Message_Widget */
 

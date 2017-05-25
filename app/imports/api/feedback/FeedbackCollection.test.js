@@ -1,10 +1,10 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { Feedbacks } from '../feedback/FeedbackCollection';
-import { FeedbackType } from '../feedback/FeedbackType';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
+import { Feedbacks } from '../feedback/FeedbackCollection';
+import { FeedbackType } from '../feedback/FeedbackType';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {

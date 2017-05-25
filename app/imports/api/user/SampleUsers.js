@@ -1,6 +1,6 @@
+import { moment } from 'meteor/momentjs:moment';
 import { Users } from '../user/UserCollection';
 import { ROLE } from '../role/Role';
-import { moment } from 'meteor/momentjs:moment';
 
 /** @module api/user/SampleUsers */
 

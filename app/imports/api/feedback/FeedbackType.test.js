@@ -1,9 +1,9 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
+import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { FeedbackType, isFeedbackType, assertFeedbackType } from '../feedback/FeedbackType';
-import { Meteor } from 'meteor/meteor';
 
 if (Meteor.isServer) {
   describe('FeedbackType', function testSuite() {

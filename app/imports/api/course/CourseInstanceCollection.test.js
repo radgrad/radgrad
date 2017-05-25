@@ -2,12 +2,11 @@
 /* eslint-env mocha */
 
 import { Meteor } from 'meteor/meteor';
-// import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
+import { expect } from 'chai';
 import { Semesters } from '../semester/SemesterCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { makeSampleCourse, sampleCourseName } from '../course/SampleCourses';
 import { makeSampleUser } from '../user/SampleUsers';
-import { expect } from 'chai';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {

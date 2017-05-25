@@ -1,13 +1,13 @@
 import { Template } from 'meteor/templating';
+import { Roles } from 'meteor/alanning:roles';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { Roles } from 'meteor/alanning:roles';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 
 /** @module ui/components/admin/List_Users_Widget */
 

@@ -1,10 +1,10 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { Interests } from '../interest/InterestCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
-
-import { _ } from 'meteor/erasaur:meteor-lodash';
+import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/teaser/TeaserCollection */
 
@@ -118,3 +118,4 @@ class TeaserCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Teasers = new TeaserCollection();
+radgradCollections.push(Teasers);

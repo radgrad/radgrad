@@ -1,8 +1,8 @@
+import { moment } from 'meteor/momentjs:moment';
 import { Semesters } from '../semester/SemesterCollection';
 import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { makeSampleInterest } from '../interest/SampleInterests';
-import { moment } from 'meteor/momentjs:moment';
 
 
 /** @module api/course/SampleCourses */

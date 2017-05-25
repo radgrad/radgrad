@@ -14,7 +14,7 @@ import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
-import * as RouteNames from '/imports/startup/client/router.js';
+import * as RouteNames from '../../../startup/client/router.js';
 
 // /** @module ui/components/planner/Inspector */
 

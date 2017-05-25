@@ -1,4 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Interests } from '../interest/InterestCollection';
@@ -7,8 +8,7 @@ import { Users } from '../user/UserCollection';
 import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { assertICE } from '../ice/IceProcessor';
-
-import { _ } from 'meteor/erasaur:meteor-lodash';
+import { radgradCollections } from '../base/RadGradCollections';
 
 
 /** @module api/opportunity/OpportunityCollection */
@@ -187,3 +187,4 @@ class OpportunityCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Opportunities = new OpportunityCollection();
+radgradCollections.push(Opportunities);

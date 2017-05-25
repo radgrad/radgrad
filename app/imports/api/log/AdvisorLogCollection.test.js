@@ -36,5 +36,14 @@ if (Meteor.isServer) {
       expect(AdvisorLogs.isDefined(docID)).to.be.true;
       AdvisorLogs.removeIt(docID);
     });
+    it.skip('#getAdvisorDoc, #getStudentDoc, #checkIntegrity', function test() {
+      console.log(student, advisor);
+      const docID = AdvisorLogs.define({ advisor, student, text });
+      const advisorDoc = AdvisorLogs.getAdvisorDoc(docID);
+      expect(advisorDoc._id).to.equal(advisor);
+      const studentDoc = AdvisorLogs.getStudentDoc(docID);
+      expect(studentDoc._id).to.equal(student);
+      AdvisorLogs.removeIt(docID);
+    });
   });
 }

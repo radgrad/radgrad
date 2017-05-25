@@ -1,14 +1,14 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
+import { Meteor } from 'meteor/meteor';
+import { expect } from 'chai';
 import { Semesters } from '../semester/SemesterCollection';
 import { defineSemesters } from '../semester/SemesterUtilities';
 import { ROLE } from '../role/Role';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { makeSampleOpportunity } from '../opportunity/SampleOpportunities';
 import { makeSampleUser } from '../user/SampleUsers';
-import { Meteor } from 'meteor/meteor';
-import { expect } from 'chai';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {

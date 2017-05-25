@@ -1,10 +1,10 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { Slugs } from './SlugCollection';
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { expect } from 'chai';
+import { Slugs } from './SlugCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {

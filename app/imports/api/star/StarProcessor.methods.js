@@ -30,7 +30,7 @@ export function processStudentStarCsvData(advisor, student, csvData) {
   _.map(definitions, (definition) => {
     const semesterID = Semesters.findIdBySlug(definition.semester);
     // console.log('semesterID', semesterID);
-    if (definition.course !== 'other') {
+    if (definition.course !== Courses.unInterestingSlug) {
       const department = getDepartment(definition.course);
       if (!(department in departments)) {
         departments[department] = 1;
@@ -54,7 +54,7 @@ export function processStudentStarCsvData(advisor, student, csvData) {
       definition.verified = false; // eslint-disable-line
     }
     // console.log('CourseInstances.define', definition);
-    if (definition.course !== 'other') {
+    if (definition.course !== Courses.unInterestingSlug) {
       CourseInstances.define(definition);
     }
   });
