@@ -3,8 +3,8 @@
 /* global Assets */
 
 import { Meteor } from 'meteor/meteor';
-import { defineTestFixture } from '/imports/api/test/test-fixture';
-import { processStarCsvData } from '/imports/api/star/StarProcessor';
+import { defineTestFixture } from '../test/test-fixture';
+import { processStarCsvData } from './StarProcessor';
 import { Users } from '/imports/api/user/UserCollection';
 import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
 import { makeSampleUser } from '/imports/api/user/SampleUsers';
@@ -13,7 +13,8 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('StarProcessor', function testSuite() {
-    const starDataPath = 'testdata/StarSampleData-2.csv';
+    this.timeout(0);
+    const starDataPath = 'testdata/StarSampleData-1.csv';
     before(function setup() {
       removeAllEntities();
     });
@@ -22,19 +23,15 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it.skip('#processStarCsvData', function test() {
-      this.timeout(20000);
-      defineTestFixture();
+    it('#processStarCsvData', function test() {
+      defineTestFixture('CoursesInterests.json');
       const csvData = Assets.getText(starDataPath);
-      const user = Users.findSlugByID(makeSampleUser());
-      const courseInstanceDefinitions = processStarCsvData(user, csvData);
-      // console.log(courseInstanceDefinitions);
-      courseInstanceDefinitions.map((definition) => CourseInstances.define(definition));
-      expect(CourseInstances.count()).to.equal(159);
+      const user = Users.findDoc({ username: 'abi' });
+      const courseInstanceDefinitions = processStarCsvData(user.username, csvData);
+      expect(courseInstanceDefinitions.length).to.equal(11);
     });
 
     it.skip('check real data', function test() {
-      this.timeout(10000);
       const realDataFiles = [
         'realdata/star-data-1.csv',
         'realdata/star-data-2.csv',

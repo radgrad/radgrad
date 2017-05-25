@@ -3,6 +3,7 @@
 
 import { Meteor } from 'meteor/meteor';
 import { isICE, assertICE, makeCourseICE, gradeCompetency } from '/imports/api/ice/IceProcessor';
+import { Courses } from '../../api/course/CourseCollection';
 import { expect } from 'chai';
 
 if (Meteor.isServer) {
@@ -22,7 +23,7 @@ if (Meteor.isServer) {
     it('#makeCourseICE', function test() {
       expect(makeCourseICE('ICS111', 'A').c).to.equal(gradeCompetency.A);
       expect(makeCourseICE('ICS111', 'B').c).to.equal(gradeCompetency.B);
-      expect(makeCourseICE('other', 'A').c).to.equal(gradeCompetency.C);
+      expect(makeCourseICE(Courses.unInterestingSlug, 'A').c).to.equal(gradeCompetency.C);
     });
   });
 }

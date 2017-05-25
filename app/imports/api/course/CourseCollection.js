@@ -32,6 +32,7 @@ class CourseCollection extends BaseInstanceCollection {
       syllabus: { type: String, optional: true },
       prerequisites: { type: [String], optional: true }, // stored as a slug for some reason.
     }));
+    this.unInterestingSlug = 'other';
   }
 
   /**

@@ -36,6 +36,9 @@ function findSemesterSlug(starDataObject) {
     case 'Fall':
       term = Semesters.FALL;
       break;
+    case 'Winter': // Not used at UH, but could be somewhere else.
+      term = Semesters.WINTER;
+      break;
     default:
       throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);
   }
@@ -57,8 +60,7 @@ function findSemesterSlug(starDataObject) {
 function findCourseSlug(starDataObject) {
   let slug = `${starDataObject.name.toLowerCase()}_${starDataObject.number}`;
   if (!Slugs.isSlugForEntity(slug, Courses.getType())) {
-    // TODO: hardwiring 'other' into the code is brittle.
-    slug = 'other';
+    slug = Courses.unInterestingSlug;
   }
   return slug;
 }
@@ -149,7 +151,9 @@ export function processStarCsvData(student, csvData) {
       return obj;
     });
     // Now we take that array of objects and transform them into CourseInstance data objects.
-    return _.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject));
+    return _.filter(_.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) {
+      return ci.course !== Courses.unInterestingSlug;
+    });
   }
   // must be on the client.
   return null;
