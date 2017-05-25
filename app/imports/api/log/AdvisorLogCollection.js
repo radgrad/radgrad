@@ -5,7 +5,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
-import { RadGrad } from '../base/RadGrad';
+
 
 /** @module api/log/AdvisorLogCollection */
 
@@ -120,5 +120,4 @@ class AdvisorLogCollection extends BaseCollection {
 }
 
 export const AdvisorLogs = new AdvisorLogCollection();
-RadGrad.collections.push(AdvisorLogs);
 

@@ -7,7 +7,7 @@ import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollec
 import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
-import { RadGrad } from '../base/RadGrad';
+
 
 /** @module api/opportunity/OpportunityInstanceCollection */
 
@@ -263,4 +263,3 @@ class OpportunityInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const OpportunityInstances = new OpportunityInstanceCollection();
-RadGrad.collections.push(OpportunityInstances);

@@ -4,7 +4,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { ROLE } from '../role/Role';
-import { RadGrad } from '../base/RadGrad';
+
 
 /** @module api/user/ValidUserAccountCollection */
 
@@ -73,4 +73,3 @@ class ValidUserAccountCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const ValidUserAccounts = new ValidUserAccountCollection();
-RadGrad.collections.push(ValidUserAccounts);

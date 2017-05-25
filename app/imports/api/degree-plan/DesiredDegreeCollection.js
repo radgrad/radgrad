@@ -1,8 +1,6 @@
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { RadGrad } from '../base/RadGrad';
-
 
 /** @module api/degree-plan/DesiredDegreeCollection */
 
@@ -81,5 +79,4 @@ class DesiredDegreeCollection extends BaseSlugCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const DesiredDegrees = new DesiredDegreeCollection();
-RadGrad.collections.push(DesiredDegrees);
 

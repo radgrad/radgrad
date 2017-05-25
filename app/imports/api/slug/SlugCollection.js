@@ -164,7 +164,6 @@ class SlugCollection extends BaseCollection {
  */
 export const Slugs = new SlugCollection();
 // Slugs are implicitly defined by other collections, so don't explicitly dump/restore them.
-// RadGrad.collections.push(Slugs);
 
 
 /**

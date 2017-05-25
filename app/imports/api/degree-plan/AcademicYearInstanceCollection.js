@@ -168,5 +168,4 @@ class AcademicYearInstanceCollection extends BaseCollection {
  */
 export const AcademicYearInstances = new AcademicYearInstanceCollection();
 // We are not going to persist AcademicYearInstances
-// RadGrad.collections.push(AcademicYearInstances);
 

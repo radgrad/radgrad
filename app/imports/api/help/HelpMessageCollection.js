@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '../base/BaseCollection';
-import { RadGrad } from '../base/RadGrad';
+
 
 /** @module api/help/HelpMessageCollection */
 
@@ -70,5 +70,4 @@ class HelpMessageCollection extends BaseCollection {
 }
 
 export const HelpMessages = new HelpMessageCollection();
-RadGrad.collections.push(HelpMessages);
 

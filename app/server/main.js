@@ -6,7 +6,6 @@ import '/imports/api/feed';
 import '/imports/api/feedback';
 import '/imports/api/help';
 import '/imports/api/ice';
-import '/imports/api/integrity';
 import '/imports/api/interest';
 import '/imports/api/level';
 import '/imports/api/log';
@@ -19,11 +18,12 @@ import '/imports/api/semester';
 import '/imports/api/slug';
 import '/imports/api/star';
 import '/imports/api/teaser';
-import '/imports/api/test';
 import '/imports/api/user';
 import '/imports/api/utility';
 import '/imports/api/verification';
+// import '/imports/api/integrity';
 
+// import '/imports/api/radgrad';
 import '/imports/startup/server';
 
 import '/imports/startup/both';

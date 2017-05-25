@@ -1,6 +1,6 @@
 // import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
-import { RadGrad } from '../base/RadGrad';
+
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { buildSimpleName } from './PlanChoiceUtilities';
 
@@ -103,4 +103,3 @@ class PlanChoiceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const PlanChoices = new PlanChoiceCollection();
-RadGrad.collections.push(PlanChoices);

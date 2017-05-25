@@ -25,7 +25,7 @@ import { CareerGoals } from '../../api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
-import { RadGrad } from '../../api/base/RadGrad';
+import { RadGrad } from './radgrad';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-utilities';
