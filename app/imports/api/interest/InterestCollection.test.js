@@ -1,12 +1,12 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { InterestTypes } from '../interest/InterestTypeCollection';
 import { Interests } from '../interest/InterestCollection';
 import { makeSampleInterestType } from '../interest/SampleInterests';
 import { removeAllEntities } from '../base/BaseUtilities';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('InterestCollection', function testSuite() {
@@ -19,7 +19,6 @@ if (Meteor.isServer) {
     let interestType;
     let interest1;
     let interest2;
-
 
     before(function setup() {
       removeAllEntities();

@@ -1,11 +1,11 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { expect } from 'chai';
 import { Slugs } from './SlugCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('SlugCollection', function testSuite() {
