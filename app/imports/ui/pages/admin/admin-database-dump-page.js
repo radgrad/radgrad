@@ -37,7 +37,7 @@ Template.Admin_DataBase_Dump_Page.onCreated(function onCreated() {
   this.timestamp = new ReactiveVar();
 });
 
-// Must match the format in the server-side startup/server/fixtures.js
+// Must match the format in the server-side startup/server/initialize-db.js
 
 
 Template.Admin_DataBase_Dump_Page.events({
