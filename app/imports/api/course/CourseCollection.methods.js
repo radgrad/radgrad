@@ -19,12 +19,12 @@ export const coursesDefineMethod = new ValidatedMethod({
   name: coursesDefineMethodName,
   validate: new SimpleSchema({
     name: { type: String, optional: false },
-    shortName: { type: String, optional: false },
     slug: { type: String, optional: false },
     number: { type: String, optional: false },
     description: { type: String, optional: false },
-    creditHrs: { type: Number, optional: false },
-    interests: { type: [String], optional: false },
+    creditHrs: { type: Number, optional: false, defaultValue: 3 },
+    interests: { type: [String], optional: false, minCount: 1 },
+    shortName: { type: String, optional: true },
     syllabus: { type: String, optional: true },
     prerequisites: { type: [String], optional: true },
   }).validator(),
@@ -51,6 +51,7 @@ export const coursesUpdateMethodName = 'Courses.update';
 export const coursesUpdateMethod = new ValidatedMethod({
   name: coursesUpdateMethodName,
   validate: new SimpleSchema({
+    id: { type: SimpleSchema.RegEx.Id },
     name: { type: String },
     shortName: { type: String },
     number: { type: String },
