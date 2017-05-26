@@ -1,15 +1,15 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-/* global Assets */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { defineTestFixture } from '../test/test-fixture';
+import { defineTestFixture } from '../test/test-utilities';
 import { processStarCsvData } from './StarProcessor';
 import { Users } from '../user/UserCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { makeSampleUser } from '../user/SampleUsers';
 import { removeAllEntities } from '../base/BaseUtilities';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
+/* global Assets */
 
 if (Meteor.isServer) {
   describe('StarProcessor', function testSuite() {

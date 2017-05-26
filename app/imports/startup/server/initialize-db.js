@@ -3,11 +3,11 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { RadGrad } from '../../api/radgrad/radgrad';
-import { getRestoreFileAge, restoreCollection } from '../../api/test/fixture-utilities';
+import { getLoadFileAge, loadCollection } from '../../api/test/test-utilities';
 
 /* global Assets */
 
-/** @module startup/server/fixtures */
+/** @module startup/server/initialize-db */
 
 /**
  * Returns an Array of numbers, one per loadable collection, indicating the number of documents in that collection.
@@ -28,26 +28,26 @@ function totalDocuments() {
 }
 
 /**
- * If the database is empty, this function looks up the name of the restore file in the settings file,
+ * If the database is empty, this function looks up the name of the load file in the settings file,
  * then reads it in and calls define() on its contents in order to rebuild the RadGrad database.
- * Console messages are generated when the contents of the restore file does not include collections that
- * this function assumes are present. Conversely, if the restore file contains collections not processed with
+ * Console messages are generated when the contents of the load file does not include collections that
+ * this function assumes are present. Conversely, if the load file contains collections not processed with
  * this file, a string is also printed out.
  */
 function initializeDB() { // eslint-disable-line
   Meteor.startup(() => {
     if (totalDocuments() === 0) {
-      const restoreFileName = Meteor.settings.public.databaseRestoreFileName;
-      const restoreFileAge = getRestoreFileAge(restoreFileName);
-      console.log(`Restoring database from file ${restoreFileName}, dumped ${restoreFileAge}.`);
-      const restoreJSON = JSON.parse(Assets.getText(restoreFileName));
+      const loadFileName = Meteor.settings.public.databaseRestoreFileName;
+      const loadFileAge = getLoadFileAge(loadFileName);
+      console.log(`Loading database from file ${loadFileName}, dumped ${loadFileAge}.`);
+      const loadJSON = JSON.parse(Assets.getText(loadFileName));
       // The list of collections, ordered so that they can be sequentially restored.
       const collectionList = RadGrad.collectionLoadSequence;
 
-      const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
+      const loadNames = _.map(loadJSON.collections, obj => obj.name);
       const collectionNames = _.map(collectionList, collection => collection._collectionName);
-      const extraRestoreNames = _.difference(restoreNames, collectionNames);
-      const extraCollectionNames = _.difference(collectionNames, restoreNames);
+      const extraRestoreNames = _.difference(loadNames, collectionNames);
+      const extraCollectionNames = _.difference(collectionNames, loadNames);
 
       if (extraRestoreNames.length) {
         console.log(`Error: Expected collections are missing from collection list: ${extraRestoreNames}`);
@@ -57,7 +57,7 @@ function initializeDB() { // eslint-disable-line
       }
 
       if (!extraRestoreNames.length && !extraCollectionNames.length) {
-        _.each(collectionList, collection => restoreCollection(collection, restoreJSON, true));
+        _.each(collectionList, collection => loadCollection(collection, loadJSON, true));
       }
     }
     PublicStats.generateStats();

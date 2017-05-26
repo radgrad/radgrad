@@ -1,6 +1,3 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { FeedbackFunctions } from '../feedback/FeedbackFunctions';
@@ -8,10 +5,11 @@ import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { makeSampleUser } from '../user/SampleUsers';
-import { defineTestFixture } from '../test/test-fixture';
-// import { makeSampleInterest } from '../interest/SampleInterests';
-// import { makeSampleCourse, makeSampleCourseInstance } from '../course/SampleCourses';
+import { defineTestFixture } from '../test/test-utilities';
 import { Users } from '../user/UserCollection';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('FeedbackFunctions', function testSuite() {

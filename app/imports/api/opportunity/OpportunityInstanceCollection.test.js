@@ -1,6 +1,3 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { Semesters } from '../semester/SemesterCollection';
@@ -10,6 +7,9 @@ import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollecti
 import { makeSampleOpportunity } from '../opportunity/SampleOpportunities';
 import { makeSampleUser } from '../user/SampleUsers';
 import { removeAllEntities } from '../base/BaseUtilities';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('OpportunityInstanceCollection', function testSuite() {
