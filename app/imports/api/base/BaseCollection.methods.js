@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { RadGrad } from '../radgrad/radgrad';
+import { removeAllEntities } from './BaseUtilities';
 
 /** @module api/base/BaseCollectionMethods */
 
@@ -34,5 +35,18 @@ export const dumpDatabaseMethod = new ValidatedMethod({
       return { timestamp, collections };
     }
     return null;
+  },
+});
+
+export const resetDatabaseMethodName = 'base.resetDatabase';
+
+/**
+ * Resets all of the RadGrad collections to their empty state. Only available in test mode.
+ */
+export const resetDatabaseMethod = new ValidatedMethod({
+  name: resetDatabaseMethodName,
+  validate: null,
+  run() {
+    removeAllEntities();
   },
 });
