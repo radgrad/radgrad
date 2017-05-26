@@ -1,16 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { Users } from '/imports/api/user/UserCollection';
 import { Roles } from 'meteor/alanning:roles';
-import { ROLE } from '/imports/api/role/Role';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import BaseCollection from '../base/BaseCollection';
+import { Users } from '../user/UserCollection';
+import { ROLE } from '../role/Role';
 
-/** @module MentorAnswers */
+
+/** @module api/mentor/MentorProfileCollection */
 /**
  * Represents a mentor answer.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class MentorProfileCollection extends BaseCollection {
   /**
@@ -149,5 +149,4 @@ class MentorProfileCollection extends BaseCollection {
 }
 
 export const MentorProfiles = new MentorProfileCollection();
-radgradCollections.push(MentorProfiles);
 

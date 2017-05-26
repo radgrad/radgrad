@@ -1,69 +1,34 @@
-/* global Assets */
-
-// import { Meteor } from 'meteor/meteor';
-// import { AcademicYearInstances } from '../../api/year/AcademicYearInstanceCollection.js';
-import { AcademicPlans } from '../../api/degree/AcademicPlanCollection';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
-import { DesiredDegrees } from '../../api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
-// import { MentorAnswers } from '../../api/mentor/MentorAnswerCollection.js';
-// import { MentorQuestions } from '../../api/mentor/MentorQuestionCollection.js';
-// import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
-// import { Reviews } from '../../api/review/ReviewCollection';
 import { Teasers } from '../../api/teaser/TeaserCollection';
 import { Users } from '../../api/user/UserCollection';
 import { CareerGoals } from '../../api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
-import { _ } from 'meteor/erasaur:meteor-lodash';
-import { moment } from 'meteor/momentjs:moment';
+import { restoreCollection } from '../../api/utility/fixture-utilities';
 
-// Must match the format in the client-side ui/pages/admin/admin-database-dump-page.js
-const restoreFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
+/* global Assets */
 
+/** @module api/test/test-fixture */
+
+// TODO rewrite this to use RadGrad.collections and to not be copy-pasted from the DB restoration code.
 /**
- * Returns a string indicating how long ago the restore file was created. Parses the file name string.
- * @param restoreFileName The file name.
- * @returns { String } A string indicating how long ago the file was created.
+ *
  */
-function getRestoreFileAge(restoreFileName) {
-  const terms = _.words(restoreFileName, /[^/. ]+/g);
-  const dateString = terms[terms.length - 2];
-  return moment(dateString, restoreFileDateFormat).fromNow();
-}
-
-/**
- * Returns the definition array associated with collectionName in the restoreJSON structure.
- * @param restoreJSON The restore file contents.
- * @param collection The collection of interest.
- */
-function getDefinitions(restoreJSON, collection) {
-  return _.find(restoreJSON.collections, obj => obj.name === collection).contents;
-}
-
-/**
- * Given a collection and the restoreJSON structure, looks up the definitions and invokes define() on them.
- * @param collection The collection to be restored.
- * @param restoreJSON The structure containing all of the definitions.
- */
-function restoreCollection(collection, restoreJSON) {
-  const definitions = getDefinitions(restoreJSON, collection._collectionName);
-  console.log(`Defining ${definitions.length} ${collection._collectionName} documents.`); // eslint-disable-line
-  _.each(definitions, definition => collection.define(definition));
-}
-
-export function defineTestFixture() {
-  const restoreFileName = 'database/mockup/testing.json';
-  const restoreFileAge = getRestoreFileAge(restoreFileName);
-  console.log(`Restoring test fixture from file ${restoreFileName}, dumped ${restoreFileAge}.`); // eslint-disable-line
+export function defineTestFixture(fixtureName) {
+  const restoreFileName = `database/testing/${fixtureName}`;
+  console.log(`    (Restoring test fixture from file ${restoreFileName}.)`); // eslint-disable-line
   const restoreJSON = JSON.parse(Assets.getText(restoreFileName));
   // The list of collections, ordered so that they can be sequentially restored.
   const collectionList = [Semesters, InterestTypes, Interests, CareerGoals, DesiredDegrees,
@@ -84,6 +49,6 @@ export function defineTestFixture() {
   // }
 
   // if (!extraRestoreNames.length && !extraCollectionNames.length) {
-  _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
+  _.each(collectionList, collection => restoreCollection(collection, restoreJSON, false));
   // }
 }

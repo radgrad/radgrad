@@ -1,20 +1,17 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Slugs } from '../slug/SlugCollection';
+import { Interests } from '../interest/InterestCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 
 
-/** @module CareerGoal */
+/** @module api/career/CareerGoalCollection */
 
 /**
  * CareerGoals represent the professional future(s) that the student wishes to work toward.
- * Note: Career Goals will probably need to be defined with a hook function that provides recommendations based upon
- * the specifics of the career. At that point, we'll probably need a new Base class that this class will extend.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class CareerGoalCollection extends BaseInstanceCollection {
+class CareerGoalCollection extends BaseSlugCollection {
 
   /**
    * Creates the CareerGoal collection.
@@ -25,8 +22,6 @@ class CareerGoalCollection extends BaseInstanceCollection {
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
-      // Optional data
-      moreInformation: { type: String, optional: true },
     }));
   }
 
@@ -37,21 +32,19 @@ class CareerGoalCollection extends BaseInstanceCollection {
    *                      slug: 'database-administrator',
    *                      description: 'Wrangler of SQL.',
    *                      interests: ['application-development', 'software-engineering', 'databases'],
-   *                      moreInformation: 'http://www.bls.gov/ooh/database-administrators.htm' });
-   * @param { Object } description Object with keys name, slug, description, interests, and moreInformation.
+   * @param { Object } description Object with keys name, slug, description, interests.
    * Slug must be globally unique and previously undefined.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
    * Syllabus is optional. If supplied, should be a URL.
-   * MoreInformation is optional. If supplied, should be a URL.
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, interests, moreInformation }) {
+  define({ name, slug, description, interests }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const docID = this._collection.insert({ name, slugID, description, interestIDs, moreInformation });
+    const docID = this._collection.insert({ name, slugID, description, interestIDs });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, docID);
     return docID;
@@ -111,8 +104,7 @@ class CareerGoalCollection extends BaseInstanceCollection {
     const slug = Slugs.getNameFromID(doc.slugID);
     const description = doc.description;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
-    const moreInformation = doc.moreInformation;
-    return { name, slug, interests, description, moreInformation };
+    return { name, slug, interests, description };
   }
 }
 
@@ -120,4 +112,3 @@ class CareerGoalCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const CareerGoals = new CareerGoalCollection();
-radgradCollections.push(CareerGoals);

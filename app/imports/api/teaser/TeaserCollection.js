@@ -1,18 +1,17 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection.js';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Slugs } from '../slug/SlugCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
+import { Interests } from '../interest/InterestCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection.js';
 
-/** @module Teaser */
+/** @module api/teaser/TeaserCollection */
 
 /**
  * Represents a teaser instance, such as "ACM Webmasters".
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class TeaserCollection extends BaseInstanceCollection {
+class TeaserCollection extends BaseSlugCollection {
 
   /**
    * Creates the Teaser collection.
@@ -40,10 +39,13 @@ class TeaserCollection extends BaseInstanceCollection {
    *                 description: 'Learn web development by helping to develop and maintain the ACM Manoa website.',
    *                 duration: '0:39'
    *                 interests: ['html', 'javascript', 'css', 'web-development'],
+   *                 opportunities: 'acm-webmasters'
    * @param { Object } description Object with keys title, slug, URL, description, duration. interestIDs.
    * Slug must be previously undefined.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
-   * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestID.
+   * Opportunity must be a defined opportunity slug or opportunityID
+   * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestID,
+   * if the slug is already defined, or if the opportunity is undefined
    * @returns The newly created docID.
    */
   define({ title, slug, author, url, description, duration, interests, opportunity }) {
@@ -81,6 +83,9 @@ class TeaserCollection extends BaseInstanceCollection {
           problems.push(`Bad interestID: ${interestID}`);
         }
       });
+      if (!Opportunities.isDefined(doc.opportunityID)) {
+        problems.push(`Bad opportunityID: ${doc.opportunityID}`);
+      }
     });
     return problems;
   }
@@ -105,11 +110,9 @@ class TeaserCollection extends BaseInstanceCollection {
     }
     return { title, slug, author, url, description, duration, interests, opportunity };
   }
-
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
 export const Teasers = new TeaserCollection();
-radgradCollections.push(Teasers);

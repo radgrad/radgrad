@@ -1,11 +1,11 @@
-import BaseTypeCollection from '/imports/api/base/BaseTypeCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import BaseTypeCollection from '../base/BaseTypeCollection';
 
-/** @module InterestType */
+
+/** @module api/interest/InterestTypeCollection */
 
 /**
  * InterestTypes help organize Interests into logically related groupings such as "CS-Disciplines", "Locations", etc.
- * @extends module:BaseType~BaseTypeCollection
+ * @extends module:api/base/BaseTypeCollection~BaseTypeCollection
  */
 class InterestTypeCollection extends BaseTypeCollection {
 
@@ -35,5 +35,4 @@ class InterestTypeCollection extends BaseTypeCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const InterestTypes = new InterestTypeCollection();
-radgradCollections.push(InterestTypes);
 

@@ -1,15 +1,15 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { ROLE } from '/imports/api/role/Role';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { defineSemesters } from '/imports/api/semester/SemesterUtilities';
-import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
-import { makeSampleOpportunityType } from '/imports/api/opportunity/SampleOpportunities';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { ROLE } from '../role/Role';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { defineSemesters } from '../semester/SemesterUtilities';
+import { makeSampleInterest } from '../interest/SampleInterests';
+import { makeSampleOpportunityType } from '../opportunity/SampleOpportunities';
+import { makeSampleUser } from '../user/SampleUsers';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('OpportunityCollection', function testSuite() {

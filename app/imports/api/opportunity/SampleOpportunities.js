@@ -1,12 +1,12 @@
-import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { moment } from 'meteor/momentjs:moment';
+import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { makeSampleInterest } from '../interest/SampleInterests';
 
 
-/** @module SampleOpportunities */
+/** @module api/opportunity/SampleOpportunities */
 
 /**
  * Creates an OpportunityType with a unique slug and returns its docID.

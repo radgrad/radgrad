@@ -2,10 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import BaseCollection from '../base/BaseCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
-import { DesiredDegrees } from '../degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Interests } from '../interest/InterestCollection';
 import { MentorProfiles } from '../mentor/MentorProfileCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
@@ -14,6 +14,12 @@ import { Reviews } from '../review/ReviewCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 
+/** @module api/public-stats/PublicStatsCollection */
+
+/**
+ * PublicStats holds public statistics about RadGrad.
+ * @extends module:api/base/BaseCollection~BaseCollection
+ */
 class PublicStatsCollection extends BaseCollection {
   /**
    * Creates the PublicStats collection.
@@ -224,6 +230,14 @@ class PublicStatsCollection extends BaseCollection {
     _.map(this.stats, (key) => {
       instance[key]();
     });
+  }
+
+  /**
+   * Returns an empty array to indicate no integrity checking.
+   * @returns {Array} An empty array.
+   */
+  checkIntegrity() {  // eslint-disable-line class-methods-use-this
+    return [];
   }
 }
 

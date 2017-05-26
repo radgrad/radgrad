@@ -25,17 +25,9 @@
 
             {{#if isLabel descriptionPair.label 'Description'}}
               <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} {{descriptionPair.value}} <br> <br>
+              {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}} <br> <br>
               {{else}}
                 N/A <br> <br>
-              {{/if}}
-            {{/if}}
-
-            {{#if isLabel descriptionPair.label 'More Information'}}
-              <b>{{descriptionPair.label}}:</b>
-              {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
-              {{else}}
-                N/A <br>
               {{/if}}
             {{/if}}
 

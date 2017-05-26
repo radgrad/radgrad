@@ -1,17 +1,16 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
+import { Slugs } from '../slug/SlugCollection';
+import { Users } from '../user/UserCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module MentorQuestions */
+/** @module api/mentor/MentorQuestionCollection */
 
 /**
  * Represents a mentor answer.
- * @extends module:Base~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class MentorQuestionCollection extends BaseInstanceCollection {
+class MentorQuestionCollection extends BaseSlugCollection {
   /**
    * Creates the Mentor Question collection.
    */
@@ -113,7 +112,6 @@ class MentorQuestionCollection extends BaseInstanceCollection {
    * @throws {Meteor.Error} If MentorQuestion is not defined.
    */
   removeIt(question) {
-    console.log(this.findDoc(question).slugID);
     if (this.findDoc(question).slugID) {
       super.removeIt(question);
     } else {
@@ -142,5 +140,4 @@ class MentorQuestionCollection extends BaseInstanceCollection {
 }
 
 export const MentorQuestions = new MentorQuestionCollection();
-radgradCollections.push(MentorQuestions);
 

@@ -4,6 +4,8 @@ import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 
+// /** @module ui/components/shared/User_Answers_Component */
+
 function getAnswers(mentorID) {
   return MentorAnswers.find({ mentorID }).fetch();
 }

@@ -4,6 +4,8 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
+// /** @module ui/components/admin/Add_Career_Goal_Widget */
+
 const addSchema = new SimpleSchema({
   name: { type: String, optional: false },
   slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },

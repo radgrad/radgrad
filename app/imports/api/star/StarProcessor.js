@@ -2,12 +2,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Papa } from 'meteor/harrison:papa-parse';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Courses } from '/imports/api/course/CourseCollection';
-import { Slugs } from '/imports/api/slug/SlugCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Courses } from '../course/CourseCollection';
+import { Slugs } from '../slug/SlugCollection';
 
 
-/** @module StarProcessor */
+/** @module api/star/StarProcessor */
 
 /**
  * Given the semester string from STAR (for example, 'Fall 2015 ext'), parses it, defines the corresponding semester,
@@ -36,6 +36,9 @@ function findSemesterSlug(starDataObject) {
     case 'Fall':
       term = Semesters.FALL;
       break;
+    case 'Winter': // Not used at UH, but could be somewhere else.
+      term = Semesters.WINTER;
+      break;
     default:
       throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);
   }
@@ -55,10 +58,9 @@ function findSemesterSlug(starDataObject) {
  * @returns { String } The slug.
  */
 function findCourseSlug(starDataObject) {
-  let slug = starDataObject.name.toLowerCase() + starDataObject.number;
+  let slug = `${starDataObject.name.toLowerCase()}_${starDataObject.number}`;
   if (!Slugs.isSlugForEntity(slug, Courses.getType())) {
-    // TODO: hardwiring 'other' into the code is brittle.
-    slug = 'other';
+    slug = Courses.unInterestingSlug;
   }
   return slug;
 }
@@ -129,9 +131,9 @@ export function processStarCsvData(student, csvData) {
     const dataObjects = _.map(filteredData, (data) => {
       const name = data[nameIndex];
       let grade = data[gradeIndex];
-      if (name === 'ICS' && grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
+      if (grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
         grade = data[transferGradeIndex];
-      } else if (name === 'ICS' && grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
+      } else if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
         // got number assuming it is AP exam score need to determine the type of the exam.
         // const exam = data[transferCourseDesc];
         if (data[transferGradeIndex] > 2) {
@@ -149,7 +151,9 @@ export function processStarCsvData(student, csvData) {
       return obj;
     });
     // Now we take that array of objects and transform them into CourseInstance data objects.
-    return _.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject));
+    return _.filter(_.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) {
+      return ci.course !== Courses.unInterestingSlug;
+    });
   }
   // must be on the client.
   return null;

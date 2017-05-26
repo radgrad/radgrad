@@ -1,10 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { ROLE } from '/imports/api/role/Role';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { ROLE } from '../../../api/role/Role';
 import { Users } from '../../../api/user/UserCollection';
 
 /* eslint-disable object-shorthand */
+
+/** @module ui/layouts/shared/If_Authorized */
 
 Template.If_Authorized.onCreated(function ifAuthorizedOnCreated() {
   this.subscribe(Users.getPublicationName());

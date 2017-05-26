@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
 
@@ -15,7 +15,7 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
     if (this.data.userID) {
       this.userID = this.data.userID;
     }
-    this.subscribe(CourseInstances.getPublicationName(5), getExplorerUserID());
+    this.subscribe(CourseInstances.publicationNames.studentID, getExplorerUserID());
   });
 });
 

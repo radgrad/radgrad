@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import { AcademicYearInstances } from '../../../api/year/AcademicYearInstanceCollection.js';
+import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection.js';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { FeedbackInstances } from '../../../api/feedback/FeedbackInstanceCollection';
@@ -21,15 +21,15 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
   const self = this;
   self.ready = new ReactiveVar();
   this.autorun(function () {
-    instanceSubs.subscribe(AcademicYearInstances.getPublicationName(1), getUserIdFromRoute());
+    instanceSubs.subscribe(AcademicYearInstances.publicationNames.PerStudentID, getUserIdFromRoute());
     instanceSubs.subscribe(AdvisorLogs.getPublicationName());
-    instanceSubs.subscribe(CourseInstances.getPublicationName(5), getUserIdFromRoute());
-    instanceSubs.subscribe(CourseInstances.getPublicationName(3));
+    instanceSubs.subscribe(CourseInstances.publicationNames.studentID, getUserIdFromRoute());
+    instanceSubs.subscribe(CourseInstances.publicationNames.publicStudent);
     instanceSubs.subscribe(FeedbackInstances.getPublicationName());
     instanceSubs.subscribe(Feeds.getPublicationName());
     instanceSubs.subscribe(MentorAnswers.getPublicationName());
     instanceSubs.subscribe(MentorQuestions.getPublicationName());
-    instanceSubs.subscribe(OpportunityInstances.getPublicationName());
+    instanceSubs.subscribe(OpportunityInstances.publicationNames.student);
     instanceSubs.subscribe(VerificationRequests.getPublicationName());
     self.ready.set(instanceSubs.ready());
   });

@@ -2,11 +2,13 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
-import { AcademicPlans } from '../../../api/degree/AcademicPlanCollection';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+
+// /** @module ui/components/advisor/Academic_Plan_Chooser_Component */
 
 Template.Academic_Plan_Chooser_Component.onCreated(function academicPlanChooserComponentOnCreated() {
   // console.log(this.data);
@@ -16,16 +18,14 @@ Template.Academic_Plan_Chooser_Component.onCreated(function academicPlanChooserC
 
 Template.Academic_Plan_Chooser_Component.helpers({
   names() {
-    const ret = [];
     const chosen = parseInt(Template.instance().chosenYear.get(), 10);
     const plans = AcademicPlans.find().fetch();
-    _.map(plans, (p) => {
+    let name = _.filter(plans, (p) => {
       const year = Semesters.findDoc(p.effectiveSemesterID).year;
-      if (chosen === year) {
-        ret.push(p.name);
-      }
+      return chosen === year;
     });
-    return _.sortBy(ret, [function sort(o) {
+    name = _.map(name, (n) => n.name);
+    return _.sortBy(name, [function sort(o) {
       return o;
     }]);
   },
@@ -52,20 +52,19 @@ Template.Academic_Plan_Chooser_Component.helpers({
       const decSem = Semesters.findDoc(student.declaredSemesterID);
       declaredYear = decSem.year;
     }
-    const ret = [];
-    const plans = AcademicPlans.find().fetch();
-    _.map(plans, (p) => {
+    let plans = AcademicPlans.find().fetch();
+    plans = _.uniqBy(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
+    plans = _.filter(plans, (p) => {
       const year = Semesters.findDoc(p.effectiveSemesterID).year;
       if (declaredYear && year >= declaredYear) {
-        if (_.indexOf(ret, year) === -1) {
-          ret.push(year);
-        }
-      } else
-        if (!declaredYear && _.indexOf(ret, year) === -1) {
-          ret.push(year);
-        }
+        return true;
+      } else if (!declaredYear) {
+        return true;
+      }
+      return false;
     });
-    return _.sortBy(ret, [function sort(o) {
+    const years = _.map(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
+    return _.sortBy(years, [function sort(o) {
       return o;
     }]);
   },

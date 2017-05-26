@@ -1,24 +1,22 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { Users } from '/imports/api/user/UserCollection';
-import { OpportunityTypes } from '/imports/api/opportunity/OpportunityTypeCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { assertICE } from '/imports/api/ice/IceProcessor';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Slugs } from '../slug/SlugCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Interests } from '../interest/InterestCollection';
+import { ROLE } from '../role/Role';
+import { Users } from '../user/UserCollection';
+import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
+import { assertICE } from '../ice/IceProcessor';
 
-
-/** @module Opportunity */
+/** @module api/opportunity/OpportunityCollection */
 
 /**
  * Represents an Opportunity, such as "LiveWire Internship".
  * To represent an Opportunity taken by a specific student in a specific semester, use OpportunityInstance.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class OpportunityCollection extends BaseInstanceCollection {
+class OpportunityCollection extends BaseSlugCollection {
 
   /**
    * Creates the Opportunity collection.
@@ -31,12 +29,11 @@ class OpportunityCollection extends BaseInstanceCollection {
       opportunityTypeID: { type: SimpleSchema.RegEx.Id },
       sponsorID: { type: SimpleSchema.RegEx.Id },
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
-      iconURL: { type: SimpleSchema.RegEx.Url, optional: true },
       semesterIDs: { type: [SimpleSchema.RegEx.Id] },
-      eventDate: { type: Date, optional: true },
       independentStudy: { type: Boolean },
       // Optional data
-      moreInformation: { type: String, optional: true },
+      eventDate: { type: Date, optional: true },
+      iconURL: { type: SimpleSchema.RegEx.Url, optional: true },
       ice: { type: Object, optional: true, blackbox: true },
     }));
   }
@@ -52,7 +49,6 @@ class OpportunityCollection extends BaseInstanceCollection {
    *                        ice: { i: 10, c: 0, e: 10},
    *                        interests: ['software-engineering'],
    *                        semesters: ['Fall-2016', 'Spring-2016', 'Summer-2106'],
-    *                       moreInformation: 'http://atthackathon.com',
      *                      independentStudy: true});
    * @param { Object } description Object with keys name, slug, description, opportunityType, sponsor, interests,
    * startActive, and endActive.
@@ -62,13 +58,12 @@ class OpportunityCollection extends BaseInstanceCollection {
    * Semesters must be a (possibly empty) array of semester slugs or IDs.
    * Sponsor must be a User with role 'FACULTY', 'ADVISOR', or 'ADMIN'.
    * ICE must be a valid ICE object.
-   * MoreInformation is optional, but if supplied should be a URL.
    * IndependentStudy is optional and defaults to false.
    * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest, sponsor, opportunityType,
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, opportunityType, sponsor, interests, semesters, moreInformation,
+  define({ name, slug, description, opportunityType, sponsor, interests, semesters,
   independentStudy = false, ice, eventDate = null }) {
     // Get instances, or throw error
 
@@ -88,11 +83,11 @@ class OpportunityCollection extends BaseInstanceCollection {
       // Define the new Opportunity and its Slug.
       opportunityID = this._collection.insert({
         name, slugID, description, opportunityTypeID, sponsorID,
-        interestIDs, semesterIDs, moreInformation, independentStudy, ice, eventDate });
+        interestIDs, semesterIDs, independentStudy, ice, eventDate });
     } else {
       opportunityID = this._collection.insert({
         name, slugID, description, opportunityTypeID, sponsorID,
-        interestIDs, semesterIDs, moreInformation, independentStudy, ice });
+        interestIDs, semesterIDs, independentStudy, ice });
     }
     Slugs.updateEntityID(slugID, opportunityID);
 
@@ -179,10 +174,9 @@ class OpportunityCollection extends BaseInstanceCollection {
     const ice = doc.ice;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const semesters = _.map(doc.semesterIDs, semesterID => Semesters.findSlugByID(semesterID));
-    const moreInformation = doc.moreInformation;
     const independentStudy = doc.independentStudy;
     const eventDate = doc.eventDate;
-    return { name, slug, description, opportunityType, sponsor, ice, interests, semesters, moreInformation,
+    return { name, slug, description, opportunityType, sponsor, ice, interests, semesters,
       independentStudy, eventDate };
   }
 }
@@ -191,4 +185,3 @@ class OpportunityCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Opportunities = new OpportunityCollection();
-radgradCollections.push(Opportunities);

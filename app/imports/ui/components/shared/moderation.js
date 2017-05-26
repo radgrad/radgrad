@@ -10,6 +10,8 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
+/** @module ui/components/shared/Moderation */
+
 const noSlugSchema = new SimpleSchema({
   moderatorComments: { type: String, optional: true },
 });
@@ -33,7 +35,7 @@ Template.Moderation.onCreated(function ModerationOnCreated() {
 
 function getSchemaDataFromEvent(schema, event) {
   const eventData = {};
-  _.map(schema._firstLevelSchemaKeys, function (key) {
+  _.forEach(schema._firstLevelSchemaKeys, function (key) {
     eventData[key] = event.target.form[key].value;
   });
   return eventData;

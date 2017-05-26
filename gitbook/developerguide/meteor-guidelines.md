@@ -1,4 +1,4 @@
-# Meteor guidelines
+# Meteor scripts
 
 Here are some guidelines for how we use Meteor.
  

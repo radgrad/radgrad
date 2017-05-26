@@ -1,3 +1,2 @@
-import './StarDataLogCollection';
-import './StarMethods';
+import './StarProcessor.methods';
 import './StarProcessor';

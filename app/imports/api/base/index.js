@@ -1,5 +1,6 @@
 import './BaseCollection';
-import './BaseCollectionMethods';
-import './BaseInstanceCollection';
+import './BaseCollection.methods';
+import './BaseSlugCollection';
 import './BaseTypeCollection';
 import './BaseUtilities';
+import '../radgrad/radgrad';

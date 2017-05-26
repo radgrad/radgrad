@@ -11,7 +11,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCoursesWidgetOnCreated() {
   this.autorun(() => {
-    this.subscribe(CourseInstances.getPublicationName(1), this.data.item._id);
+    this.subscribe(CourseInstances.publicationNames.publicPublish, this.data.item._id);
   });
 });
 

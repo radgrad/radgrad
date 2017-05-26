@@ -2,14 +2,15 @@ import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-import { Courses } from '/imports/api/course/CourseCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { Courses } from '../course/CourseCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Users } from '../user/UserCollection';
+import BaseCollection from '../base/BaseCollection';
 
-/** @module Feed */
+
+/** @module api/feed/FeedCollection */
+
 function dateDiffInDays(a, b) {
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
   return Math.floor((a - b) / MS_PER_DAY);
@@ -28,7 +29,7 @@ function withinPastDay(feed, timestamp) {
 
 /**
  * Represents a feed instance.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
 class FeedCollection extends BaseCollection {
   /**
@@ -49,6 +50,7 @@ class FeedCollection extends BaseCollection {
 
   // TODO: The define method needs more documentation. What are valid values for each parameter?
   // Consider multiple define methods, one for each feed type, with appropriate required params for each.
+
   /**
    * Defines a new Feed.
    * @example
@@ -357,4 +359,3 @@ class FeedCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Feeds = new FeedCollection();
-radgradCollections.push(Feeds);

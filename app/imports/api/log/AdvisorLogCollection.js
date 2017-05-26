@@ -2,16 +2,16 @@ import { Meteor } from 'meteor/meteor';
 import { moment } from 'meteor/momentjs:moment';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { ROLE } from '/imports/api/role/Role';
+import BaseCollection from '../base/BaseCollection';
+import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 
-/** @module AdvisorLog */
+
+/** @module api/log/AdvisorLogCollection */
 
 /**
  * Represents a log of an Advisor talking to a Student.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class AdvisorLogCollection extends BaseCollection {
 
@@ -29,6 +29,12 @@ class AdvisorLogCollection extends BaseCollection {
 
   /**
    * Defines an advisor log record.
+   * @example
+   * AdvisorLogs.define({
+   *                      advisor: 'glau',
+   *                      student: 'abi',
+   *                      text: 'Talked about changing academic plan to B.S. CS from B.A. ICS.',
+   *                      });
    * @param advisor The advisor's username.
    * @param student The student's username.
    * @param text The contents of the session.
@@ -46,7 +52,7 @@ class AdvisorLogCollection extends BaseCollection {
    */
   getAdvisorDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this.findDoc(instanceID);
     return Users.findDoc(instance.advisorID);
   }
 
@@ -57,7 +63,7 @@ class AdvisorLogCollection extends BaseCollection {
    */
   getStudentDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this.findDoc(instanceID);
     return Users.findDoc(instance.studentID);
   }
 
@@ -114,5 +120,4 @@ class AdvisorLogCollection extends BaseCollection {
 }
 
 export const AdvisorLogs = new AdvisorLogCollection();
-radgradCollections.push(AdvisorLogs);
 

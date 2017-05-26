@@ -1,4 +1,4 @@
-/** @module FeedbackType */
+/** @module api/feedback/FeedbackType */
 
 /** Defines the legal strings used to represent FeedbackTypes in the system. */
 

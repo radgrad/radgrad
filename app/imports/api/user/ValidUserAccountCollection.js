@@ -2,19 +2,19 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import BaseSlugCollection from '../base/BaseSlugCollection';
+import { ROLE } from '../role/Role';
 
-/** @module User */
+
+/** @module api/user/ValidUserAccountCollection */
 
 // TODO: Is there a way we can avoid the need for this collection? Can't we just check onLogin that the account exists?
 
 /**
  * Represent a valid user. Users must be approved before they can be created.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class ValidUserAccountCollection extends BaseInstanceCollection {
+class ValidUserAccountCollection extends BaseSlugCollection {
   /**
    * Creates the Valid User Account collection.
    */
@@ -73,4 +73,3 @@ class ValidUserAccountCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const ValidUserAccounts = new ValidUserAccountCollection();
-radgradCollections.push(ValidUserAccounts);

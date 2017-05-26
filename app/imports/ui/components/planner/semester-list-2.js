@@ -1,4 +1,3 @@
-/* global window */
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -7,19 +6,14 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-// import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 
-// import { moment } from 'meteor/momentjs:moment';
-// import { Logger } from 'meteor/jag:pince';
-// const sl = new Logger('SL');
+// /** @module ui/components/planner/Semester_List */
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
-  // eslint-disable-next-line
-  // sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onCreated`);
   if (this.data) {
     this.state = this.data.dictionary;
   }
@@ -28,38 +22,23 @@ Template.Semester_List_2.onCreated(function semesterListOnCreate() {
 
 Template.Semester_List_2.helpers({
   dictionary() {
-    // eslint-disable-next-line
-    // sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} dictionary`);
-    // window.camDebugging.start('dictionary');
-    // console.log(`${moment().format('HH:mm:ss.SSS')} dictionary`);
-    // window.camDebugging.stop('dictionary');
     return Template.instance().state;
   },
   icsCourses() {
-    // eslint-disable-next-line
-    // sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} icsCourses`);
-    // window.camDebugging.start('icsCourses');
     const ret = [];
     if (Template.instance().data.semester) {
-      // console.log(`${moment().format('HH:mm:ss.SSS')} icsCourses`);
       return CourseInstances.find({
         studentID: getUserIdFromRoute(),
         note: /ICS/,
         semesterID: Template.instance().data.semester._id,
       }, { sort: { note: 1 } }).fetch();
     }
-    // eslint-disable-next-line
-    // sl.trace(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} ${Semesters.toString(Template.instance().data.semester._id, false)} end icsCourses ${ret.length}`);
-    // debugger;
     return ret;
   },
   localState() {
-    // window.camDebugging.start('localState');
-    // window.camDebugging.stop('localState');
     return Template.instance().localState;
   },
   opportunityName(opportunityID) {
-    // window.camDebugging.start('opportunityName');
     const opp = OpportunityInstances.findDoc({ _id: opportunityID });
     if (opp) {
       const opportunity = Opportunities.findDoc({ _id: opp.opportunityID });
@@ -72,37 +51,28 @@ Template.Semester_List_2.helpers({
         return name;
       }
     }
-    // window.camDebugging.stop('opportunityName');
     return null;
   },
   semesterOpportunities() {
-    // window.camDebugging.start('semesterOpportunities');
     if (getRouteUserName()) {
-      const ret = [];
       if (Template.instance().data.semester) {
         const opps = OpportunityInstances.find({
           semesterID: Template.instance().data.semester._id,
           studentID: getUserIdFromRoute(),
         }).fetch();
-        // window.camDebugging.stop('semesterOpportunities');
-        _.map(opps, (opp) => {
+        _.forEach(opps, (opp) => {
           opp.name = Opportunities.findDoc(opp.opportunityID).name; // eslint-disable-line
         });
         return opps;
       }
-      // window.camDebugging.stop('semesterOpportunities');
-      return ret;
     }
     return [];
   },
   year() {
-    // window.camDebugging.start('year');
     const semester = Template.instance().localState.get('semester');
     if (semester) {
-      // window.camDebugging.stop('year');
       return semester.year;
     }
-    // window.camDebugging.stop('year');
     return null;
   },
 });
@@ -165,7 +135,6 @@ Template.Semester_List_2.events({
   },
   'click tr.clickEnabled': function clickTrClickEnabled(event) {
     event.preventDefault();
-    // const logger = new Logger('academic-plan.clickTrClickEnabled');
     let target = event.target;
     while (target && target.nodeName !== 'TR') {
       target = target.parentNode;
@@ -175,8 +144,6 @@ Template.Semester_List_2.events({
     if (firstClass === 'courseInstance') {
       if (CourseInstances.isDefined(target.id)) {
         const ci = CourseInstances.findDoc(target.id);
-        // eslint-disable-next-line max-len
-        // logger.info(`${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')} {${ci.ice.i}, ${ci.ice.c}, ${ci.ice.e}} ${ci.grade}`);
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, ci);
         template.state.set(plannerKeys.detailICE, ci.ice);
@@ -239,8 +206,6 @@ Template.Semester_List_2.events({
 });
 
 Template.Semester_List_2.onRendered(function semesterListOnRendered() {
-  // eslint-disable-next-line
-  // sl.debug(`${moment().format('YYYY/MM/DD HH:mm:ss.SSS')} Semester_List ${Semesters.toString(this.data.semester._id, false)} onRendered`);
   if (this.data) {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);

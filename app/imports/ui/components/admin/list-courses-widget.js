@@ -7,6 +7,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
+// /** @module ui/components/admin/List_Courses_Widget */
 
 function numReferences(course) {
   return CourseInstances.find({ courseID: course._id }).count();

@@ -3,6 +3,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
+/** @module startup/client/Router */
 
 /**
  * Design notes:
@@ -149,14 +150,6 @@ adminRoutes.route('/database/dump', {
   name: adminDataBaseDumpPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: adminDataBaseDumpPageRouteName });
-  },
-});
-
-export const adminDataBaseRestorePageRouteName = 'Admin_DataBase_Restore_Page';
-adminRoutes.route('/database/restore', {
-  name: adminDataBaseRestorePageRouteName,
-  action() {
-    BlazeLayout.render('Admin_Layout', { main: adminDataBaseRestorePageRouteName });
   },
 });
 

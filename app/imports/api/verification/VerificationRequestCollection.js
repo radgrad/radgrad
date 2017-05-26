@@ -2,15 +2,15 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { moment } from 'meteor/momentjs:moment';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import BaseCollection from '../base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
-import { ROLE } from '/imports/api/role/Role';
+import { ROLE } from '../role/Role';
 import { Semesters } from '../semester/SemesterCollection.js';
-import { Users } from '/imports/api/user/UserCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { Users } from '../user/UserCollection';
 
-/** @module Verification */
+
+/** @module api/verification/VerificationRequestCollection */
 
 const ProcessedSchema = new SimpleSchema({
   date: { type: Date },
@@ -57,7 +57,8 @@ class VerificationRequestCollection extends BaseCollection {
    * status defaults to OPEN, and processed defaults to an empty array.
    * You can either pass the opportunityInstanceID or pass the opportunity and semester slugs. If opportunityInstance
    * is not defined, then the student, opportunity, and semester arguments are used to look it up.
-   * @throws {Meteor.Error} If semester, opportunity, or student cannot be resolved, or if verified is not a boolean.
+   * @throws {Meteor.Error} If semester, opportunity, opportunityInstance or student cannot be resolved,
+   * or if verified is not a boolean.
    * @returns The newly created docID.
    */
   define({ student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [],
@@ -209,4 +210,3 @@ class VerificationRequestCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const VerificationRequests = new VerificationRequestCollection();
-radgradCollections.push(VerificationRequests);

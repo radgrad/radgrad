@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Slugs } from '../../../../api/slug/SlugCollection.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { Showdown } from 'meteor/markdown';
+import { Slugs } from '../../../../api/slug/SlugCollection.js';
+
+/** @module ui/components/admin/form-fields/FormFieldUtilities */
 
 /**
  * Return the data from the submitted form corresponding to the fields in the passed schema.

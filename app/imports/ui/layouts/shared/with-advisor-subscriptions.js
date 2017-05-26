@@ -1,8 +1,7 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { SubsManager } from 'meteor/meteorhacks:subs-manager';
-import { PlanChoices } from '/imports/api/degree/PlanChoiceCollection';
-import { StarDataLogs } from '/imports/api/star/StarDataLogCollection';
+import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 
 /* eslint-disable object-shorthand */
 
@@ -22,7 +21,6 @@ Template.With_Advisor_Subscriptions.onCreated(function withAdvisorSubscriptionsO
   self.ready = new ReactiveVar();
   self.autorun(function () {
     globalSubs.subscribe(PlanChoices.getPublicationName());
-    globalSubs.subscribe(StarDataLogs.getPublicationName());
     self.ready.set(globalSubs.ready());
   });
 });

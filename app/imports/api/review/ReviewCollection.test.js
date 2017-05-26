@@ -1,14 +1,14 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { ROLE } from '/imports/api/role/Role';
-import { Reviews } from '/imports/api/review/ReviewCollection';
-import { defineSemesters } from '/imports/api/semester/SemesterUtilities';
-import { makeSampleOpportunity } from '/imports/api/opportunity/SampleOpportunities';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { ROLE } from '../role/Role';
+import { Reviews } from '../review/ReviewCollection';
+import { defineSemesters } from '../semester/SemesterUtilities';
+import { makeSampleOpportunity } from '../opportunity/SampleOpportunities';
+import { makeSampleUser } from '../user/SampleUsers';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('ReviewCollection', function testSuite() {

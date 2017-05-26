@@ -3,7 +3,7 @@
 
 import { Meteor } from 'meteor/meteor';
 // import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { removeAllEntities } from '../base/BaseUtilities';
 import { PublicStats } from './PublicStatsCollection';
 
 if (Meteor.isServer) {

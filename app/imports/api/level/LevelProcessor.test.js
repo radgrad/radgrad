@@ -1,20 +1,12 @@
 /* eslint prefer-arrow-callback: 'off', no-unused-expressions: 'off' */
 /* eslint-env mocha */
-/* global Assets */
 
 import { Meteor } from 'meteor/meteor';
-// import { processStarCsvData } from '/imports/api/star/StarProcessor';
-import { Users } from '/imports/api/user/UserCollection';
-import { calcLevel } from './LevelProcessor';
-// import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-// import { Courses } from '/imports/api/course/CourseCollection';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
-import { ROLE } from '/imports/api/role/Role';
 import { expect } from 'chai';
-// import { _ } from 'meteor/erasaur:meteor-lodash';
-// import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-// import { Interests } from '/imports/api/interest/InterestCollection';
-// import { FeedbackFunctions } from '/imports/api/feedback/FeedbackFunctions';
+import { Users } from '../user/UserCollection';
+import { calcLevel } from './LevelProcessor';
+import { removeAllEntities } from '../base/BaseUtilities';
+import { ROLE } from '../role/Role';
 
 // TODO: Waiting for test data based upon the Personae.
 

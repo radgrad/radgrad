@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
+import { moment } from 'meteor/momentjs:moment';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
@@ -10,8 +10,9 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
-import { moment } from 'meteor/momentjs:moment';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+
+// /** @module ui/components/shared/Verification_Requests_Pending */
 
 Template.Verification_Requests_Pending.helpers({
   opportunityName(request) {
@@ -26,14 +27,10 @@ Template.Verification_Requests_Pending.helpers({
     const group = FlowRouter.current().route.group.name;
     const openRequests = VerificationRequests.find({ status: VerificationRequests.OPEN }).fetch();
     if (group === 'faculty') {
-      const matchingRequests = [];
-      _.map(openRequests, (request) => {
+      return _.filter(openRequests, (request) => {
         const oi = OpportunityInstances.findDoc(request.opportunityInstanceID);
-        if ((Opportunities.findDoc(oi.opportunityID)).sponsorID === getUserIdFromRoute()) {
-          matchingRequests.push(request);
-        }
+        return Opportunities.findDoc(oi.opportunityID).sponsorID === getUserIdFromRoute();
       });
-      return matchingRequests;
     }
     return openRequests;
   },

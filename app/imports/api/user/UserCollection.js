@@ -4,28 +4,28 @@ import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { AcademicPlans } from '/imports/api/degree/AcademicPlanCollection';
-import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
-import { Courses } from '/imports/api/course/CourseCollection';
-import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { OpportunityInstances } from '/imports/api/opportunity/OpportunityInstanceCollection';
-import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { getTotalICE, getProjectedICE, getEarnedICE } from '/imports/api/ice/IceProcessor';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import BaseSlugCollection from '../base/BaseSlugCollection';
+import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
+import { CareerGoals } from '../career/CareerGoalCollection';
+import { Courses } from '../course/CourseCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
+import { Interests } from '../interest/InterestCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
+import { ROLE, isRole, assertRole } from '../role/Role';
+import { Semesters } from '../semester/SemesterCollection';
+import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
+import { Slugs } from '../slug/SlugCollection';
 
-/** @module User */
+
+/** @module api/user/UserCollection */
 
 /**
  * Represent a user. Users have roles: admin, advisor, alumni, faculty, student, mentor.
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class UserCollection extends BaseInstanceCollection {
+class UserCollection extends BaseSlugCollection {
 
   /**
    * Creates the User collection.
@@ -424,18 +424,6 @@ class UserCollection extends BaseInstanceCollection {
   }
 
   /**
-   * Returns an ICE object with the total of verified course and opportunity instance ICE values.
-   * @param studentID The userID.
-   * @throws {Meteor.Error} If userID is not a userID.
-   */
-  getTotalICE(studentID) {
-    this.assertDefined(studentID);
-    const courseDocs = CourseInstances.find({ studentID }).fetch();
-    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
-    return getTotalICE(courseDocs.concat(oppDocs));
-  }
-
-  /**
    * Returns an ICE object with the total earned course and opportunity ICE values.
    * @param studentID The userID.
    * @throws {Meteor.Error} If userID is not a userID.
@@ -588,4 +576,3 @@ class UserCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to other entities.
  */
 export const Users = new UserCollection();
-radgradCollections.push(Users);

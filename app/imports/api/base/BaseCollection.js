@@ -3,12 +3,12 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** @module Base */
+/** @module api/base/BaseCollection */
 
 /**
  * BaseCollection is an abstract superclass of all RadGrad data model entities.
  * It is the direct superclass for SlugCollection and SemesterCollection.
- * Other collection classes are derived from BaseInstanceCollection or BaseTypeCollection, which are abstract
+ * Other collection classes are derived from BaseSlugCollection or BaseTypeCollection, which are abstract
  * classes that inherit from this one.
  */
 class BaseCollection {
@@ -121,9 +121,16 @@ class BaseCollection {
 
   /**
    * Removes all elements of this collection.
+   * This is implemented by mapping through all elements because mini-mongo does not implement the remove operation.
+   * So this approach can be used on both client and server side.
+   * removeAll should only used for testing purposes, so it doesn't need to be efficient.
    */
   removeAll() {
-    this._collection.remove({});
+    const items = this._collection.find().fetch();
+    const instance = this;
+    _.map(items, (i) => {
+      instance.removeIt(i._id);
+    });
   }
 
   /**

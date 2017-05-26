@@ -5,6 +5,8 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 
+// /** @module ui/components/shared/User_Interests_Component */
+
 Template.User_Interests_Component.helpers({
   count() {
     if (Template.instance().userID && Template.instance().userID.get()) {
@@ -15,17 +17,14 @@ Template.User_Interests_Component.helpers({
     return 0;
   },
   interests() {
-    const interests = [];
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
       const user = Users.findDoc(userID);
       if (user) {
-        _.map(user.interestIDs, (id) => {
-          interests.push(Interests.findDoc(id));
-        });
+        return _.map(user.interestIDs, (id) => Interests.findDoc(id));
       }
     }
-    return interests;
+    return [];
   },
   labelSize() {
     return Template.instance().labelSize;

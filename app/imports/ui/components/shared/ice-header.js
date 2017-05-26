@@ -1,5 +1,7 @@
 import { Template } from 'meteor/templating';
 
+// /** @module ui/components/shared/ICS_Header */
+
 Template.ICE_header.helpers({
   i(ice) {
     if (ice) {

@@ -3,8 +3,8 @@
 
 import { expect } from 'chai';
 import { Meteor } from 'meteor/meteor';
-import { ROLE, isRole, assertRole } from '/imports/api/role/Role';
 import { Roles } from 'meteor/alanning:roles';
+import { ROLE, isRole, assertRole } from '../role/Role';
 
 if (Meteor.isServer) {
   describe('Role', function testSuite() {

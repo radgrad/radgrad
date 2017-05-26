@@ -9,19 +9,3 @@ Template.Landing_Section_9.helpers({
     return RouteNames.advisorGuidedTourPageRouteName;
   },
 });
-
-Template.Landing_Section_9.events({
-  // add your events here
-});
-
-Template.Landing_Section_9.onCreated(function landingBodyOnCreated() {
-  // add your statement here
-});
-
-Template.Landing_Section_9.onRendered(function landingBodyOnRendered() {
-});
-
-Template.Landing_Section_9.onDestroyed(function landingBodyOnDestroyed() {
-  // add your statement here
-});
-

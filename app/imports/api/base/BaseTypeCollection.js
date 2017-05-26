@@ -1,13 +1,13 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
 import { check } from 'meteor/check';
+import { Slugs } from '../slug/SlugCollection';
+import BaseCollection from '../base/BaseCollection';
 
-/** @module BaseType */
+/** @module api/base/BaseTypeCollection */
 
 /**
  * BaseType is an abstract superclass that factors out common code for the "type" entities: OpportunityType and TagType.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class BaseTypeCollection extends BaseCollection {
 
@@ -71,10 +71,14 @@ class BaseTypeCollection extends BaseCollection {
     const docID = this.getID(instance);
     const doc = super.findDoc(docID);
     check(doc, Object);
-    const slugDoc = Slugs.findDoc(doc.slugID);
-    check(slugDoc, Object);
+    try {
+      const slugDoc = Slugs.findDoc(doc.slugID);
+      check(slugDoc, Object);
+      Slugs.removeIt(slugDoc);
+    } catch (e) {
+      // do nothing.
+    }
     super.removeIt(doc);
-    Slugs.removeIt(slugDoc);
   }
 
   /**

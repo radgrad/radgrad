@@ -1,16 +1,16 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { Users } from '/imports/api/user/UserCollection';
-import { InterestTypes } from '/imports/api/interest/InterestTypeCollection';
-import { DesiredDegrees } from '/imports/api/degree/DesiredDegreeCollection';
-import { Interests } from '/imports/api/interest/InterestCollection';
-import { CourseInstances } from '/imports/api/course/CourseInstanceCollection';
-import { ROLE } from '/imports/api/role/Role';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
-import { makeSampleCourseInstance } from '/imports/api/course/SampleCourses';
+import { Users } from '../user/UserCollection';
+import { InterestTypes } from '../interest/InterestTypeCollection';
+import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
+import { Interests } from '../interest/InterestCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
+import { ROLE } from '../role/Role';
+import { removeAllEntities } from '../base/BaseUtilities';
+import { makeSampleCourseInstance } from '../course/SampleCourses';
 
 if (Meteor.isServer) {
   describe('UserCollection', function testSuite() {

@@ -1,7 +1,7 @@
-/* global Assets */
-
 import { Meteor } from 'meteor/meteor';
-import { AcademicPlans } from './../../api/degree/AcademicPlanCollection';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { SyncedCron } from 'meteor/percolate:synced-cron';
+import { AcademicPlans } from '../../api/degree-plan/AcademicPlanCollection';
 import { AdvisorLogs } from '../../api/log/AdvisorLogCollection.js';
 import { Courses } from '../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
@@ -9,7 +9,7 @@ import { Feeds } from '../../api/feed/FeedCollection.js';
 import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
 import { HelpMessages } from '../../api/help/HelpMessageCollection';
-import { DesiredDegrees } from '../../api/degree/DesiredDegreeCollection';
+import { DesiredDegrees } from '../../api/degree-plan/DesiredDegreeCollection';
 import { Interests } from '../../api/interest/InterestCollection.js';
 import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
 import { MentorAnswers } from '../../api/mentor/MentorAnswerCollection.js';
@@ -18,7 +18,7 @@ import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
 import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
-import { PlanChoices } from '../../api/degree/PlanChoiceCollection';
+import { PlanChoices } from '../../api/degree-plan/PlanChoiceCollection';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { Reviews } from '../../api/review/ReviewCollection';
 import { Teasers } from '../../api/teaser/TeaserCollection';
@@ -27,17 +27,19 @@ import { CareerGoals } from '../../api/career/CareerGoalCollection';
 import { Semesters } from '../../api/semester/SemesterCollection.js';
 import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
-import { radgradCollections } from '../../api/integrity/RadGradCollections';
-import { _ } from 'meteor/erasaur:meteor-lodash';
-import { moment } from 'meteor/momentjs:moment';
-import { SyncedCron } from 'meteor/percolate:synced-cron';
+import { RadGrad } from '../../api/radgrad/radgrad';
+import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-utilities';
+
+/* global Assets */
+
+/** @module startup/server/fixtures */
 
 /**
  * Returns an Array of numbers, one per RadGradCollection, indicating the number of documents in that collection.
  * @returns { Array } An array of collection document counts.
  */
 function documentCounts() {
-  return _.map(radgradCollections, collection => collection.count());
+  return _.map(RadGrad.collectionLoadSequence, collection => collection.count());
 }
 
 /**
@@ -48,41 +50,6 @@ function totalDocuments() {
   return _.reduce(documentCounts(), function (sum, count) {
     return sum + count;
   }, 0);
-}
-
-// Must match the format in the client-side ui/pages/admin/admin-database-dump-page.js
-const restoreFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
-
-
-/**
- * Returns the definition array associated with collectionName in the restoreJSON structure.
- * @param restoreJSON The restore file contents.
- * @param collection The collection of interest.
- */
-function getDefinitions(restoreJSON, collection) {
-  return _.find(restoreJSON.collections, obj => obj.name === collection).contents;
-}
-
-/**
- * Returns a string indicating how long ago the restore file was created. Parses the file name string.
- * @param restoreFileName The file name.
- * @returns { String } A string indicating how long ago the file was created.
- */
-function getRestoreFileAge(restoreFileName) {
-  const terms = _.words(restoreFileName, /[^/. ]+/g);
-  const dateString = terms[terms.length - 2];
-  return moment(dateString, restoreFileDateFormat).fromNow();
-}
-
-/**
- * Given a collection and the restoreJSON structure, looks up the definitions and invokes define() on them.
- * @param collection The collection to be restored.
- * @param restoreJSON The structure containing all of the definitions.
- */
-function restoreCollection(collection, restoreJSON) {
-  const definitions = getDefinitions(restoreJSON, collection._collectionName);
-  console.log(`Defining ${definitions.length} ${collection._collectionName} documents.`);
-  _.each(definitions, definition => collection.define(definition));
 }
 
 /**
@@ -119,7 +86,7 @@ function newStartupProcess() { // eslint-disable-line
       }
 
       if (!extraRestoreNames.length && !extraCollectionNames.length) {
-        _.each(collectionList, collection => restoreCollection(collection, restoreJSON));
+        _.each(collectionList, collection => restoreCollection(collection, restoreJSON, true));
       }
     }
     PublicStats.generateStats();

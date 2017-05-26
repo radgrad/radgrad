@@ -1,17 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
-import { ROLE } from '/imports/api/role/Role';
-import { Users } from '/imports/api/user/UserCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
+import { Feedbacks } from '../feedback/FeedbackCollection';
+import { ROLE } from '../role/Role';
+import { Users } from '../user/UserCollection';
+import BaseCollection from '../base/BaseCollection';
 
-/** @module FeedbackInstance */
+
+/** @module api/feedback/FeedbackInstanceCollection */
 
 /**
  * Each FeedbackInstance represents one recommendation or warning for a user.
- * @extends module:Base~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
 class FeedbackInstanceCollection extends BaseCollection {
 
@@ -42,8 +42,8 @@ class FeedbackInstanceCollection extends BaseCollection {
    *                            user: 'joesmith',
     *                           description: 'We recommend ICS 314 based on your interest in software engineering',
      *                          area: 'Interests' });
-   * @param { Object }  object Requires feedback, the user slug or ID, and the feedback string returned from the
-   * feedback function.
+   * @param { Object } Requires feedback, the user slug or ID, the feedback string returned from the
+   * feedback function, and area.
    * @throws {Meteor.Error} If the slugs or IDs cannot be resolved correctly.
    * @returns The newly created docID.
    */
@@ -113,4 +113,3 @@ class FeedbackInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const FeedbackInstances = new FeedbackInstanceCollection();
-radgradCollections.push(FeedbackInstances);

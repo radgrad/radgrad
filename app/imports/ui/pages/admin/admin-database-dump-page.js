@@ -1,10 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { dumpDatabaseMethodName } from '../../../api/base/BaseCollectionMethods.js';
 import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { dumpDatabaseMethodName } from '../../../api/base/BaseCollection.methods.js';
+import { restoreFileDateFormat } from '../../../api/utility/fixture-utilities';
 
 Template.Admin_DataBase_Dump_Page.helpers({
   errorMessage() {
@@ -37,7 +38,7 @@ Template.Admin_DataBase_Dump_Page.onCreated(function onCreated() {
 });
 
 // Must match the format in the server-side startup/server/fixtures.js
-export const restoreFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
+
 
 Template.Admin_DataBase_Dump_Page.events({
   'click .jsDumpDB': function clickEvent(event, instance) {

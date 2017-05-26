@@ -1,11 +1,11 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { Courses } from '/imports/api/course/CourseCollection';
-import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { Courses } from '../course/CourseCollection';
+import { makeSampleInterest } from '../interest/SampleInterests';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('CourseCollection', function testSuite() {

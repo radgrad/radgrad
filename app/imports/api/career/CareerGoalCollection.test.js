@@ -1,11 +1,11 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { CareerGoals } from '/imports/api/career/CareerGoalCollection';
-import { makeSampleInterest } from '/imports/api/interest/SampleInterests';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { CareerGoals } from '../career/CareerGoalCollection';
+import { makeSampleInterest } from '../interest/SampleInterests';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('CareerGoalCollection', function testSuite() {
@@ -21,10 +21,12 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #getSlug, #findNames', function test() {
       const interests = [makeSampleInterest()];
       const docID = CareerGoals.define({ name, slug, description, interests });
       expect(CareerGoals.isDefined(slug)).to.be.true;
+      expect(CareerGoals.getSlug(docID)).to.equal(slug);
+      expect(CareerGoals.findNames([docID])[0]).to.equal(name);
       const dumpObject = CareerGoals.dumpOne(docID);
       CareerGoals.removeIt(slug);
       expect(CareerGoals.isDefined(slug)).to.be.false;

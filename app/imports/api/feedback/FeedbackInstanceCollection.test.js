@@ -1,12 +1,12 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { FeedbackInstances } from '/imports/api/feedback/FeedbackInstanceCollection';
-import { makeSampleFeedback } from '/imports/api/feedback/SampleFeedbacks';
-import { makeSampleUser } from '/imports/api/user/SampleUsers';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { removeAllEntities } from '/imports/api/base/BaseUtilities';
+import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
+import { makeSampleFeedback } from '../feedback/SampleFeedbacks';
+import { makeSampleUser } from '../user/SampleUsers';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('FeedbackInstanceCollection', function testSuite() {

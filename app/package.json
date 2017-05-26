@@ -6,11 +6,11 @@
     "start-local-production": "meteor --settings ../config/settings.production.local.json --no-release-check",
     "lint": "eslint --quiet ./imports",
     "lint-loud": "eslint ./imports",
-    "pretest": "npm run lint --silent",
-    "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
-    "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100",
-    "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
-    "mddocs": "jsdoc2md imports/**/*.js > ../gitbook/api/jsdocs.md"
+    "pretest": "npm run lint",
+    "test": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --no-release-check",
+    "test-watch": "TEST_WATCH=1 TEST_BROWSER_DRIVER=nightmare meteor test --driver-package dispatch:mocha --no-release-check",
+    "coverage-cam": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check --settings ../config/settings.coverage.cam.json",
+    "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r ."
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
@@ -22,14 +22,14 @@
     "chai": "*",
     "docdash": "^0.3.0",
     "es6-enum": "^1.0.3",
-    "eslint": "^3.7.1",
-    "eslint-plugin-import": "^1.16.0",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-meteor": "^4.0.1",
-    "eslint-plugin-react": "^6.4.1",
+    "eslint-plugin-react": "^7.0.1",
     "jsdoc": "^3.4.0",
-    "jsdoc-to-markdown": "^2.0.0"
+    "nightmare": "^2.10.0"
   },
   "kadira": {
     "appId": "uLpKNYddpngcRwpQP",

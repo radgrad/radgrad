@@ -5,19 +5,18 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { DesiredDegrees } from '../../../api/degree/DesiredDegreeCollection.js';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
+
+// /** @module ui/components/faculty/Faculty_About_Me_Widget */
 
 Template.Faculty_About_Me_Widget.helpers({
   careerGoals() {
-    const ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      _.map(user.careerGoalIDs, (id) => {
-        ret.push(CareerGoals.findDoc(id));
-      });
+      return _.map(user.careerGoalIDs, (id) => CareerGoals.findDoc(id));
     }
-    return ret;
+    return [];
   },
   careerGoalsRouteName() {
     return RouteNames.facultyExplorerCareerGoalsPageRouteName;
@@ -76,14 +75,11 @@ Template.Faculty_About_Me_Widget.helpers({
     return interest.name;
   },
   interests() {
-    const ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      _.map(user.interestIDs, (id) => {
-        ret.push(Interests.findDoc(id));
-      });
+      return _.map(user.interestIDs, (id) => Interests.findDoc(id));
     }
-    return ret;
+    return [];
   },
   interestsRouteName() {
     return RouteNames.facultyExplorerInterestsPageRouteName;

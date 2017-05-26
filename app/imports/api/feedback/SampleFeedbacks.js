@@ -1,7 +1,7 @@
-import { FeedbackType } from '/imports/api/feedback/FeedbackType';
-import { Feedbacks } from '/imports/api/feedback/FeedbackCollection';
+import { FeedbackType } from '../feedback/FeedbackType';
+import { Feedbacks } from '../feedback/FeedbackCollection';
 
-/** @module SampleFeedbacks */
+/** @module api/feedback/SampleFeedbacks */
 
 /**
  * Creates a Feedback with the slug SampleFeedback and returns its docID.

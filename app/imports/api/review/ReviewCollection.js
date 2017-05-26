@@ -1,20 +1,19 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import { Courses } from '/imports/api/course/CourseCollection';
-import BaseInstanceCollection from '/imports/api/base/BaseInstanceCollection';
-import { radgradCollections } from '/imports/api/integrity/RadGradCollections';
 import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Slugs } from '../slug/SlugCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { Users } from '../user/UserCollection';
+import { Courses } from '../course/CourseCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 
-/** @module Review */
+/** @module api/review/ReviewCollection */
 
 /**
  * Represents a course or opportunity student Review
- * @extends module:BaseInstance~BaseInstanceCollection
+ * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
-class ReviewCollection extends BaseInstanceCollection {
+class ReviewCollection extends BaseSlugCollection {
 
   /**
    * Creates the Review collection.
@@ -56,8 +55,9 @@ class ReviewCollection extends BaseInstanceCollection {
    * Moderated is optional and defaults to false.
    * Visible is optional and defaults to true.
    * ModeratorComments is optional.
-   * @throws {Meteor.Error} If the definition includes a defined slug, undefined student or undefined reviewee
-   * or startActive or endActive are not valid.
+   * reviewType must be either course or opportunity.
+   * @throws {Meteor.Error} If the definition includes a defined slug, undefined student,
+   * undefined reviewee, undefined semester, or invalid rating.
    * @returns The newly created docID.
    */
   define({ slug, student, reviewType, reviewee, semester, rating = 3, comments,
@@ -187,4 +187,3 @@ class ReviewCollection extends BaseInstanceCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Reviews = new ReviewCollection();
-radgradCollections.push(Reviews);
