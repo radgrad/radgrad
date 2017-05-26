@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { RadGrad } from '../../api/radgrad/radgrad';
-import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-utilities';
+import { getRestoreFileAge, restoreCollection } from '../../api/test/fixture-utilities';
 
 /* global Assets */
 
