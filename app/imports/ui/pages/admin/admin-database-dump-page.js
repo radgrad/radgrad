@@ -5,7 +5,7 @@ import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { dumpDatabaseMethodName } from '../../../api/base/BaseCollection.methods.js';
-import { restoreFileDateFormat } from '../../../api/utility/fixture-utilities';
+import { restoreFileDateFormat } from '../../../api/test/fixture-utilities';
 
 Template.Admin_DataBase_Dump_Page.helpers({
   errorMessage() {
@@ -37,7 +37,7 @@ Template.Admin_DataBase_Dump_Page.onCreated(function onCreated() {
   this.timestamp = new ReactiveVar();
 });
 
-// Must match the format in the server-side startup/server/fixtures.js
+// Must match the format in the server-side startup/server/initialize-db.js
 
 
 Template.Admin_DataBase_Dump_Page.events({

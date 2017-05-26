@@ -1,21 +1,7 @@
 {
   "timestamp": "2017-03-10T20:04:41.798Z",
   "collections": [
-    {
-      "name": "AcademicPlanCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "AdvisorLogCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "CareerGoalCollection",
-      "contents": [
-      ]
-    },
+
     {
       "name": "CourseCollection",
       "contents": [
@@ -64,36 +50,7 @@
         }
       ]
     },
-    {
-      "name": "CourseInstanceCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "DesiredDegreeCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "FeedCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "FeedbackCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "FeedbackInstanceCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "HelpMessageCollection",
-      "contents": [
-      ]
-    },
+
     {
       "name": "InterestCollection",
       "contents": [
@@ -138,56 +95,7 @@
         }
       ]
     },
-    {
-      "name": "MentorAnswerCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "MentorProfileCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "MentorQuestionCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "OpportunityCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "OpportunityInstanceCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "OpportunityTypeCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "PlanChoiceCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "ReviewCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "SemesterCollection",
-      "contents": [
-      ]
-    },
-    {
-      "name": "TeaserCollection",
-      "contents": [
-      ]
-    },
+
     {
       "name": "UserCollection",
       "contents": [
