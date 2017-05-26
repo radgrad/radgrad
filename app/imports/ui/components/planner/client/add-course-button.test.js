@@ -5,7 +5,7 @@ import { Template } from 'meteor/templating';
 import { expect } from 'chai';
 import { $ } from 'meteor/jquery';
 import '../../../../../client/lib/semantic-ui/semantic.min';
-import { withRenderedTemplate } from '../../../test-helpers';
+import { withRenderedTemplate } from '../../../utilities/test-helpers';
 import { Courses } from '../../../../api/course/CourseCollection';
 import { makeSampleInterest } from '../../../../api/interest/SampleInterests';
 import { removeAllEntities } from '../../../../api/base/BaseUtilities';

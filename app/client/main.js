@@ -22,7 +22,6 @@ import '/imports/api/star';
 import '/imports/api/teaser';
 import '/imports/api/test';
 import '/imports/api/user';
-import '/imports/api/utility';
 import '/imports/api/verification';
 
 import '/imports/startup/client';

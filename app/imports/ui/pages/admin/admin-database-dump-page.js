@@ -5,7 +5,7 @@ import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { dumpDatabaseMethodName } from '../../../api/base/BaseCollection.methods.js';
-import { restoreFileDateFormat } from '../../../api/utility/fixture-utilities';
+import { restoreFileDateFormat } from '../../../api/test/fixture-utilities';
 
 Template.Admin_DataBase_Dump_Page.helpers({
   errorMessage() {
