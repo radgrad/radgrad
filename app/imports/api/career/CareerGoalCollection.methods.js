@@ -34,20 +34,55 @@ export const careerGoalsDefineMethod = new ValidatedMethod({
   },
 });
 
-export const careerGoalsRemoveItMethodName = 'CareerGoals.removeIt';
+/**
+ * The name of the CareerGoals update method.
+ * @type {string}
+ */
+export const careerGoalsUpdateMethodName = 'CareerGoals.update';
 
-export const careerGoalsRemoveItMethod = new ValidatedMethod({
-  name: careerGoalsRemoveItMethodName,
+/**
+ * The ValidatedMethod for updating CareerGoals.
+ */
+export const careerGoalsUpdateMethod = new ValidatedMethod({
+  name: careerGoalsUpdateMethodName,
   validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
+    id: { type: SimpleSchema.RegEx.Id },
+    name: { type: String },
+    description: { type: String },
+    interestIDs: { type: [SimpleSchema.RegEx.Id] },
   }).validator(),
-  run(id) {
+  run(goalUpdate) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
     } else
       if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
       }
-    return CareerGoals.removeIt(id);
+    return CareerGoals.update(goalUpdate.id, { $set: goalUpdate });
+  },
+});
+
+/**
+ * The name of the CareerGoals removeIt method.
+ * @type {string}
+ */
+export const careerGoalsRemoveItMethodName = 'CareerGoals.removeIt';
+
+/**
+ * The ValidatedMethod for removing CareerGoals.
+ */
+export const careerGoalsRemoveItMethod = new ValidatedMethod({
+  name: careerGoalsRemoveItMethodName,
+  validate: new SimpleSchema({
+    id: { type: SimpleSchema.RegEx.Id, optional: false },
+  }).validator(),
+  run(removeArgs) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+    } else
+      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+      }
+    return CareerGoals.removeIt(removeArgs.id);
   },
 });
