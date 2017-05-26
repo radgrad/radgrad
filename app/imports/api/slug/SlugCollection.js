@@ -163,11 +163,3 @@ class SlugCollection extends BaseCollection {
  * Provides the singleton instance of a SlugCollection to all other entities.
  */
 export const Slugs = new SlugCollection();
-// Slugs are implicitly defined by other collections, so don't explicitly dump/restore them.
-
-
-/**
- * Slugs are globally published and subscribed to when this module is loaded.
- */
-Slugs.publish();
-Slugs.subscribe();

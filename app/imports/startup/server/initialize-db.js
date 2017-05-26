@@ -1,32 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
-import { AcademicPlans } from '../../api/degree-plan/AcademicPlanCollection';
-import { AdvisorLogs } from '../../api/log/AdvisorLogCollection.js';
-import { Courses } from '../../api/course/CourseCollection.js';
-import { CourseInstances } from '../../api/course/CourseInstanceCollection.js';
-import { Feeds } from '../../api/feed/FeedCollection.js';
-import { Feedbacks } from '../../api/feedback/FeedbackCollection.js';
-import { FeedbackInstances } from '../../api/feedback/FeedbackInstanceCollection.js';
-import { HelpMessages } from '../../api/help/HelpMessageCollection';
-import { DesiredDegrees } from '../../api/degree-plan/DesiredDegreeCollection';
-import { Interests } from '../../api/interest/InterestCollection.js';
-import { InterestTypes } from '../../api/interest/InterestTypeCollection.js';
-import { MentorAnswers } from '../../api/mentor/MentorAnswerCollection.js';
-import { MentorQuestions } from '../../api/mentor/MentorQuestionCollection.js';
-import { MentorProfiles } from '../../api/mentor/MentorProfileCollection.js';
-import { Opportunities } from '../../api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../../api/opportunity/OpportunityInstanceCollection.js';
-import { OpportunityTypes } from '../../api/opportunity/OpportunityTypeCollection.js';
-import { PlanChoices } from '../../api/degree-plan/PlanChoiceCollection';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
-import { Reviews } from '../../api/review/ReviewCollection';
-import { Teasers } from '../../api/teaser/TeaserCollection';
-import { Users } from '../../api/user/UserCollection';
-import { CareerGoals } from '../../api/career/CareerGoalCollection';
-import { Semesters } from '../../api/semester/SemesterCollection.js';
-import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
-import { VerificationRequests } from '../../api/verification/VerificationRequestCollection.js';
 import { RadGrad } from '../../api/radgrad/radgrad';
 import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-utilities';
 
@@ -35,7 +10,7 @@ import { getRestoreFileAge, restoreCollection } from '../../api/utility/fixture-
 /** @module startup/server/fixtures */
 
 /**
- * Returns an Array of numbers, one per RadGradCollection, indicating the number of documents in that collection.
+ * Returns an Array of numbers, one per loadable collection, indicating the number of documents in that collection.
  * @returns { Array } An array of collection document counts.
  */
 function documentCounts() {
@@ -43,8 +18,8 @@ function documentCounts() {
 }
 
 /**
- * Returns the total number of documents in the RadGrad database.
- * @returns { Number } The total number of RadGrad documents.
+ * Returns the total number of documents in the loadable collections.
+ * @returns { Number } The total number of RadGrad documents in the loadable collections.
  */
 function totalDocuments() {
   return _.reduce(documentCounts(), function (sum, count) {
@@ -59,7 +34,7 @@ function totalDocuments() {
  * this function assumes are present. Conversely, if the restore file contains collections not processed with
  * this file, a string is also printed out.
  */
-function newStartupProcess() { // eslint-disable-line
+function initializeDB() { // eslint-disable-line
   Meteor.startup(() => {
     if (totalDocuments() === 0) {
       const restoreFileName = Meteor.settings.public.databaseRestoreFileName;
@@ -67,11 +42,7 @@ function newStartupProcess() { // eslint-disable-line
       console.log(`Restoring database from file ${restoreFileName}, dumped ${restoreFileAge}.`);
       const restoreJSON = JSON.parse(Assets.getText(restoreFileName));
       // The list of collections, ordered so that they can be sequentially restored.
-      const collectionList = [Semesters, HelpMessages, InterestTypes, Interests, CareerGoals, DesiredDegrees,
-        ValidUserAccounts, Users, OpportunityTypes, Opportunities, Courses, Feedbacks, Teasers,
-        CourseInstances, OpportunityInstances, FeedbackInstances,
-        VerificationRequests, Feeds, AdvisorLogs, MentorProfiles, MentorQuestions, MentorAnswers, Reviews,
-        AcademicPlans, PlanChoices];
+      const collectionList = RadGrad.collectionLoadSequence;
 
       const restoreNames = _.map(restoreJSON.collections, obj => obj.name);
       const collectionNames = _.map(collectionList, collection => collection._collectionName);
@@ -103,4 +74,5 @@ function newStartupProcess() { // eslint-disable-line
   });
 }
 
-newStartupProcess();
+// Now initialize the DB if it's currently empty.
+initializeDB();
