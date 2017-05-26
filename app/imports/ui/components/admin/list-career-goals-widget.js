@@ -1,6 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { careerGoalsRemoveItMethodName } from '../../../api/career/CareerGoalCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
@@ -46,6 +48,6 @@ Template.List_Career_Goals_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    CareerGoals.removeIt(id);
+    Meteor.call(careerGoalsRemoveItMethodName, { id });
   },
 });
