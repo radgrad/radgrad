@@ -1,2 +1,1 @@
-import './test-fixture';
-import './fixture-utilities';
+import './test-utilities';

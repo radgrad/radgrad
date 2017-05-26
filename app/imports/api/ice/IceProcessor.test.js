@@ -1,14 +1,13 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { Courses } from '../../api/course/CourseCollection';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection';
 import * as ICE from './IceProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
-import { defineTestFixture } from '../test/test-fixture';
+import { defineTestFixture } from '../test/test-utilities';
 
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('IceProcessor', function testSuite() {

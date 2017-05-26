@@ -1,6 +1,3 @@
-/* eslint-env mocha */
-/* eslint-disable func-names, prefer-arrow-callback */
-
 import { Template } from 'meteor/templating';
 import { expect } from 'chai';
 import { $ } from 'meteor/jquery';
@@ -13,6 +10,9 @@ import '../academic-plan.html';
 import '../academic-plan';
 import '../add-course-button.html';
 import '../add-course-button.js';
+
+/* eslint-env mocha */
+/* eslint-disable func-names, prefer-arrow-callback */
 
 describe('Add_Course_Button', function test() {
   beforeEach(function () {

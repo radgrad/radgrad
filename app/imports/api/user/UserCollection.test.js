@@ -1,6 +1,3 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { Users } from '../user/UserCollection';
@@ -11,6 +8,9 @@ import { CourseInstances } from '../course/CourseInstanceCollection';
 import { ROLE } from '../role/Role';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { makeSampleCourseInstance } from '../course/SampleCourses';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('UserCollection', function testSuite() {
