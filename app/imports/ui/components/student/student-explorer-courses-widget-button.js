@@ -1,8 +1,11 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { courseInstancesDefineMethodName,
+  courseInstancesRemoveItMethodName } from '../../../api/course/CourseInstanceCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -61,10 +64,13 @@ Template.Student_Explorer_Courses_Widget_Button.events({
       grade: 'B',
       student: username,
     };
-    CourseInstances.define(ci);
-    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+    Meteor.call(courseInstancesDefineMethodName, ci, function callback(error) {
+      if (!error) {
+        FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+        FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+        FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+      }
+    });
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
@@ -81,10 +87,13 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     if (ci > 1) {
       console.log('Too many course instances found for a single semester.');
     }
-    CourseInstances.removeIt(ci[0]._id);
-    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+    Meteor.call(courseInstancesRemoveItMethodName, { id: ci[0]._id }, function callback(error) {
+      if (!error) {
+        FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+        FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+        FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+      }
+    });
   },
 });
 

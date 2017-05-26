@@ -1,6 +1,7 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { courseInstancesDefineMethodName } from '../../../api/course/CourseInstanceCollection.methods';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -89,7 +90,7 @@ Template.Student_Of_Interest_Add.events({
         grade: 'B',
         student: username,
       };
-      CourseInstances.define(ci);
+      Meteor.call(courseInstancesDefineMethodName, ci);
     } else {
       const oi = {
         semester: semSlug,

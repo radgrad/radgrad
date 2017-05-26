@@ -1,9 +1,10 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { courseInstancesDefineMethodName } from '../../../api/course/CourseInstanceCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection';
 import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -56,8 +57,13 @@ Template.Add_Course_Instance_Widget.events({
         newData.note = Courses.findDoc(newData.course).number;
       }
       FormUtils.renameKey(newData, 'user', 'student');
-      CourseInstances.define(newData);
-      FormUtils.indicateSuccess(instance, event);
+      Meteor.call(courseInstancesDefineMethodName, newData, function callback(error) {
+        if (error) {
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

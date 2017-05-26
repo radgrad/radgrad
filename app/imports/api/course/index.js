@@ -1,5 +1,5 @@
 import './CourseCollection';
 import './CourseCollection.methods';
 import './CourseInstanceCollection';
-import './CourseInstance.methods';
+import './CourseInstanceCollection.methods';
 import './CourseUtilities';

@@ -1,7 +1,10 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { courseInstancesDefineMethodName,
+  courseInstancesUpdateMethodName } from '../../../api/course/CourseInstanceCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -93,11 +96,21 @@ Template.Semester_List_2.events({
             semester: semSlug,
             course: slug,
             verified: false,
+            fromSTAR: false,
             note: course.number,
             grade: 'B',
             student: username,
           };
-          CourseInstances.define(ci);
+          const semesterID = Template.instance().localState.get('semester')._id;
+          if (CourseInstances.find({ courseID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
+            Meteor.call(courseInstancesDefineMethodName, ci, function callback(error) {
+              if (!error) {
+                FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+                FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+                FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+              }
+            });
+          }
         } else if (Slugs.isSlugForEntity(slug, 'Opportunity')) {
           const oi = {
             semester: semSlug,
@@ -113,14 +126,25 @@ Template.Semester_List_2.events({
       } else {
         const semesterID = Template.instance().localState.get('semester')._id;
         if (CourseInstances.isDefined(id)) {
-          CourseInstances.update({ _id: id }, { $set: { semesterID } });
-          // CourseInstances.updateSemester(id, semesterID);
-          FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-          FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-          FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-          FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
-          FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
-          // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
+          // There's gotta be a better way of doing this.
+          const data = {};
+          _.mapKeys(CourseInstances.findDoc(id), (value, key) => {
+            if (key !== '_id') {
+              data[key] = value;
+            }
+          });
+          data.id = id;
+          data.semesterID = semesterID;
+          Meteor.call(courseInstancesUpdateMethodName, data, function callback(error) {
+            if (!error) {
+              FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+              FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+              FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+              FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+              FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
+              // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
+            }
+          });
         } else {
           const opportunities = OpportunityInstances.find({
             studentID: getUserIdFromRoute(),
@@ -174,22 +198,6 @@ Template.Semester_List_2.events({
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
       }
-  },
-  'click .jsDelCourse': function clickJsDelCourse(event) {
-    event.preventDefault();
-    const id = event.target.id;
-    CourseInstances.removeIt(id);
-    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-    FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
-    FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
-    const template = Template.instance();
-    template.state.set(plannerKeys.detailCourse, null);
-    template.state.set(plannerKeys.detailCourseInstance, null);
-    template.state.set(plannerKeys.detailICE, null);
-    template.state.set(plannerKeys.detailOpportunity, null);
-    template.state.set(plannerKeys.detailOpportunityInstance, null);
   },
   'click .jsDelOpp': function clickJsDelOpp(event) {
     event.preventDefault();
