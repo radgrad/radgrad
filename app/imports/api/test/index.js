@@ -1,2 +1,2 @@
-import './DomUtilities';
+import './test-fixture';
 import './fixture-utilities';

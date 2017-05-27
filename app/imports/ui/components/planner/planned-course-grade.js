@@ -1,10 +1,10 @@
 /* global document */
 
 import { Template } from 'meteor/templating';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { plannerKeys } from './academic-plan';
 import { moment } from 'meteor/momentjs:moment';
 import { Logger } from 'meteor/jag:pince';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { plannerKeys } from './academic-plan';
 
 // /** @module ui/components/planner/Planned_Course_Grade */
 

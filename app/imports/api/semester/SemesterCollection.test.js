@@ -1,9 +1,9 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { Semesters } from '../semester/SemesterCollection';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
+import { Semesters } from '../semester/SemesterCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {

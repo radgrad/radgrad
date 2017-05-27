@@ -22,12 +22,14 @@ export function getRestoreFileAge(restoreFileName) {
 }
 
 /**
- * Returns the definition array associated with collectionName in the restoreJSON structure.
+ * Returns the definition array associated with collectionName in the restoreJSON structure,
+ * or an empty array if none was found.
  * @param restoreJSON The restore file contents.
  * @param collection The collection of interest.
  */
 function getDefinitions(restoreJSON, collection) {
-  return _.find(restoreJSON.collections, obj => obj.name === collection).contents;
+  const definitionObj = _.find(restoreJSON.collections, obj => obj.name === collection);
+  return definitionObj ? definitionObj.contents : [];
 }
 
 /**

@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { ROLE } from '../role/Role';
 import { expect } from 'chai';
+import { ROLE } from '../role/Role';
 import { VerificationRequests } from './VerificationRequestCollection.js';
 import { Semesters } from '../semester/SemesterCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';

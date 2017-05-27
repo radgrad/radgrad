@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
+import { expect } from 'chai';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { Semesters } from '../semester/SemesterCollection';
-import { expect } from 'chai';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -15,6 +15,7 @@ if (Meteor.isServer) {
     const slug = 'bs-cs';
     const description = 'B.S. in CS.';
     const semester = 'Spring-2017';
+    const notDefinedSemester = 'Spring-1991';
     const coursesPerSemester = [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0];
     const courseList = [
       'ics_111-1',
@@ -43,7 +44,7 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
+    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne #checkIntegrity', function test() {
       Semesters.define({ term: 'Spring', year: 2017 });
       DesiredDegrees.define({ name, shortName, slug, description });
       const docID = AcademicPlans.define({
@@ -55,6 +56,20 @@ if (Meteor.isServer) {
       expect(AcademicPlans.isDefined(docID)).to.be.false;
       const planID = AcademicPlans.restoreOne(dumpObject);
       expect(AcademicPlans.isDefined(planID)).to.be.true;
+      AcademicPlans.removeIt(planID);
+      expect(AcademicPlans.isDefined(planID)).to.be.false;
+      const anotherID = AcademicPlans.define({
+        degreeSlug: slug, name: description, semester: notDefinedSemester, coursesPerSemester, courseList,
+      });
+      expect(AcademicPlans.isDefined(anotherID)).to.be.true;
+      const redefinedID = AcademicPlans.define({
+        degreeSlug: slug, name: description, semester: notDefinedSemester, coursesPerSemester, courseList,
+      });
+      expect(AcademicPlans.isDefined(redefinedID)).to.be.true;
+      expect(anotherID).to.be.equal(redefinedID);
+      const errors = AcademicPlans.checkIntegrity();
+      expect(errors.length).to.equal(0);
+      AcademicPlans.removeIt(anotherID);
     });
   });
 }

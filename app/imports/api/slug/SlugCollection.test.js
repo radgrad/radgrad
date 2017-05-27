@@ -1,10 +1,10 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { Slugs } from './SlugCollection';
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { expect } from 'chai';
+import { Slugs } from './SlugCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
@@ -33,7 +33,7 @@ if (Meteor.isServer) {
       expect(Slugs.isValidSlugName(12)).to.be.false;
     });
 
-    it('#define, #removeIt, #isDefined, #dumpOne, #restoreOne', function test() {
+    it('#define, #removeIt, #isDefined, #dumpOne, #restoreOne, #checkIntegrity, #hasSlug', function test() {
       const docID = Slugs.define({ name, entityName });
       expect(Slugs.isDefined(name)).to.be.true;
       const dumpObject = Slugs.dumpOne(docID);
@@ -41,6 +41,9 @@ if (Meteor.isServer) {
       expect(Slugs.isDefined(name)).to.be.false;
       Slugs.restoreOne(dumpObject);
       expect(Slugs.isDefined(name)).to.be.true;
+      const error = Slugs.checkIntegrity();
+      expect(error.length).to.equal(0);
+      expect(Slugs.hasSlug(docID)).to.be.false;
       Slugs.removeIt(name);
     });
 

@@ -10,7 +10,7 @@ import { Users } from '../user/UserCollection';
 import { Slugs } from '../slug/SlugCollection';
 import BaseCollection from '../base/BaseCollection';
 import { makeCourseICE } from '../ice/IceProcessor';
-import { radgradCollections } from '../base/RadGradCollections';
+
 
 /** @module api/course/CourseInstanceCollection */
 
@@ -205,7 +205,7 @@ class CourseInstanceCollection extends BaseCollection {
   isInteresting(courseInstanceID) {
     this.assertDefined(courseInstanceID);
     const instance = this.findDoc(courseInstanceID);
-    return Courses.findDoc(instance.courseID).number !== 'other';
+    return Courses.findDoc(instance.courseID).number !== Courses.unInterestingSlug;
   }
 
   /**
@@ -353,4 +353,3 @@ class CourseInstanceCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const CourseInstances = new CourseInstanceCollection();
-radgradCollections.push(CourseInstances);

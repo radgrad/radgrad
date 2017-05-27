@@ -1,8 +1,8 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { $ } from 'meteor/jquery';
 import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
-import { $ } from 'meteor/jquery';
 
 Template.Mobile_Second_Menu.helpers({
   isCurrentPage: function currentPage(routeName) {

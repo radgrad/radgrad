@@ -1,9 +1,9 @@
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-import { InterestTypes } from '../interest/InterestTypeCollection';
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
+import { InterestTypes } from '../interest/InterestTypeCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {

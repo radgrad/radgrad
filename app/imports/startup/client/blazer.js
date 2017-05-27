@@ -9,7 +9,7 @@ import { $ } from 'meteor/jquery';
 // import { Logger } from 'meteor/jag:pince';
 // const logger = new Logger('cache');
 
-const viewMap = window.viewMap = {};
+const viewMap = window.viewMap = {}; // eslint-disable-line
 // const HTML = HTML;
 
 Template.cacher = new Template('Template.cacher', function () {

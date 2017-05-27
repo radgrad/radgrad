@@ -5,7 +5,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
-import { radgradCollections } from '../base/RadGradCollections';
+
 
 /** @module api/log/AdvisorLogCollection */
 
@@ -52,7 +52,7 @@ class AdvisorLogCollection extends BaseCollection {
    */
   getAdvisorDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this.findDoc(instanceID);
     return Users.findDoc(instance.advisorID);
   }
 
@@ -63,7 +63,7 @@ class AdvisorLogCollection extends BaseCollection {
    */
   getStudentDoc(instanceID) {
     this.assertDefined(instanceID);
-    const instance = this._collection.find({ _id: instanceID });
+    const instance = this.findDoc(instanceID);
     return Users.findDoc(instance.studentID);
   }
 
@@ -120,5 +120,4 @@ class AdvisorLogCollection extends BaseCollection {
 }
 
 export const AdvisorLogs = new AdvisorLogCollection();
-radgradCollections.push(AdvisorLogs);
 

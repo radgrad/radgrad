@@ -376,4 +376,3 @@ class FeedCollection extends BaseCollection {
  * Provides the singleton instance of this class to all other entities.
  */
 export const Feeds = new FeedCollection();
-radgradCollections.push(Feeds);

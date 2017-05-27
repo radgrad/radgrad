@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { moment } from 'meteor/momentjs:moment';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -7,7 +8,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
-import { moment } from 'meteor/momentjs:moment';
 
 // /** @module ui/components/shared/Verification_Event */
 

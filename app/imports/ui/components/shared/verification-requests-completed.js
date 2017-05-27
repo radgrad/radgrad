@@ -2,13 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { moment } from 'meteor/momentjs:moment';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { moment } from 'meteor/momentjs:moment';
 
 // /** @module ui/components/shared/Verification_Requests_Completed */
 

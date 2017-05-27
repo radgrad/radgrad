@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Courses } from '../../api/course/CourseCollection';
 
 /** @module api/ics/IceProcessor */
 
@@ -57,12 +58,11 @@ export function assertICE(obj) {
  * @returns {{i: number, c: number, e: number}} The ICE object.
  */
 export function makeCourseICE(course, grade) {
-  // TODO: Hardcoding 'other' is a bad idea.
   const i = 0;
   let c = 0;
   const e = 0;
   // NonICS courses get no ICE points.
-  if (course === 'other') {
+  if (course === Courses.unInterestingSlug) {
     return { i, c, e };
   }
   // ICS courses get competency points if you get an A or a B.

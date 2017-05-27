@@ -3,12 +3,12 @@
 
 import { Template } from 'meteor/templating';
 import { expect } from 'chai';
-import { withRenderedTemplate } from '../../../test-helpers';
 import { $ } from 'meteor/jquery';
+import '../../../../../client/lib/semantic-ui/semantic.min';
+import { withRenderedTemplate } from '../../../utilities/test-helpers';
 import { Courses } from '../../../../api/course/CourseCollection';
 import { makeSampleInterest } from '../../../../api/interest/SampleInterests';
 import { removeAllEntities } from '../../../../api/base/BaseUtilities';
-import '/client/lib/semantic-ui/semantic.min';
 import '../academic-plan.html';
 import '../academic-plan';
 import '../add-course-button.html';
