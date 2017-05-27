@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { Users } from '../user/UserCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
-import { defineTestFixture } from '../test/test-fixture';
+import { defineTestFixture } from '../test/test-utilities';
 import * as utilities from './AcademicYearUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */

@@ -1,6 +1,4 @@
-/* eslint-env mocha */
-/* eslint-disable func-names, prefer-arrow-callback */
-
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { expect } from 'chai';
 import { $ } from 'meteor/jquery';
@@ -8,21 +6,24 @@ import '../../../../../client/lib/semantic-ui/semantic.min';
 import { withRenderedTemplate } from '../../../utilities/test-helpers';
 import { Courses } from '../../../../api/course/CourseCollection';
 import { makeSampleInterest } from '../../../../api/interest/SampleInterests';
-import { removeAllEntities } from '../../../../api/base/BaseUtilities';
+import { resetDatabaseMethodName } from '../../../../api/base/BaseCollection.methods';
 import '../academic-plan.html';
 import '../academic-plan';
 import '../add-course-button.html';
 import '../add-course-button.js';
 
+/* eslint-env mocha */
+/* eslint-disable func-names, prefer-arrow-callback */
+
 describe('Add_Course_Button', function test() {
   beforeEach(function () {
     Template.registerHelper('_', key => key);
-    removeAllEntities();
+    Meteor.call(resetDatabaseMethodName, null);
   });
 
   afterEach(function () {
     Template.deregisterHelper('_');
-    removeAllEntities();
+    Meteor.call(resetDatabaseMethodName, null);
   });
 
   it('renders correctly with type add', function () {

@@ -3,9 +3,8 @@ import { expect } from 'chai';
 import { Courses } from '../course/CourseCollection';
 import { Interests } from '../interest/InterestCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
-import { defineTestFixture } from '../test/test-fixture';
+import { defineTestFixture } from '../test/test-utilities';
 import PreferredChoice from './PreferredChoice';
-
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
