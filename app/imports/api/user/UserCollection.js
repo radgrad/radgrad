@@ -447,6 +447,16 @@ class UserCollection extends BaseSlugCollection {
     return getProjectedICE(courseDocs.concat(oppDocs));
   }
 
+  /**
+   * Returns the slug name.
+   * @param studentID The userID.
+   * @throws {Meteor.Error} If userID is not a userID.
+   */
+  getSlugName(studentID) {
+    this.assertDefined(studentID);
+    const user = this._collection.findOne({ _id: studentID });
+    return Slugs.getNameFromID(user.slugID);
+  }
   /* eslint class-methods-use-this: "off" */
 
   /**

@@ -52,6 +52,7 @@ Template.Student_Feed_Widget.helpers({
     } else {
       ret = `${dateDiffInDays(currentTime, feedTime)} days ago`;
     }
+    console.log(feed.description);
     return ret;
   },
   isType(feed, type) {

@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { moment } from 'meteor/momentjs:moment';
@@ -43,7 +42,7 @@ Template.Admin_DataBase_Dump_Page.onCreated(function onCreated() {
 Template.Admin_DataBase_Dump_Page.events({
   'click .jsDumpDB': function clickEvent(event, instance) {
     event.preventDefault();
-    Meteor.call(dumpDatabaseMethodName, null, (error, result) => {
+    dumpDatabaseMethod.call(null, (error, result) => {
       if (error) {
         console.log('Error during Database Dump: ', error);
         instance.results.set(error);

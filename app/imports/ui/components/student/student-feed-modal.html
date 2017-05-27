@@ -1,11 +1,11 @@
 <template name="Student_Feed_Modal">
-  <a class="modal">{{number}} other(s) </a>
-  <div id="{{feedID}}" class="ui small modal">
+  <a class="modal">View all users</a>
+  <div id="{{feed._id}}" class="ui small modal">
     <i class="close icon"></i>
     <div class="ui small header">STUDENTS</div>
     <div class="content">
       <div class="ui three column grid">
-        {{#each student in students}}
+        {{#each student in (students feed)}}
           <div class="column">
             <div class="ui items">
               <div class="item">

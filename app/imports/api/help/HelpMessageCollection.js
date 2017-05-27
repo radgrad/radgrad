@@ -10,7 +10,7 @@ import BaseCollection from '../base/BaseCollection';
  */
 class HelpMessageCollection extends BaseCollection {
   /**
-   * Creates the AdvisorLog collection.
+   * Creates the HelpMessage collection.
    */
   constructor() {
     super('HelpMessage', new SimpleSchema({
@@ -33,7 +33,7 @@ class HelpMessageCollection extends BaseCollection {
 
   /**
    * Returns the text for the given routeName.
-   * @param routeName
+   * @param routeName The route name.
    */
   getHelpText(routeName) {
     return this._collection.findOne({ routeName }).text;
@@ -41,7 +41,7 @@ class HelpMessageCollection extends BaseCollection {
 
   /**
    * Returns the title for the given routeName.
-   * @param routeName
+   * @param routeName The route name.
    */
   getHelpTitle(routeName) {
     return this._collection.findOne({ routeName }).title;
@@ -70,4 +70,3 @@ class HelpMessageCollection extends BaseCollection {
 }
 
 export const HelpMessages = new HelpMessageCollection();
-

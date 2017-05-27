@@ -61,15 +61,15 @@ Template.Add_Review_Widget.events({
           feedType: 'new-course-review',
           timestamp: Date.now(),
         };
+        Feeds.defineNewCourse(feedDefinition);
       } else {
         feedDefinition = {
           user: [newData.student],
           opportunity: newData.reviewee,
           feedType: 'new-opportunity-review',
-          timestamp: Date.now(),
         };
+        Feeds.defineNewOpportunity(feedDefinition);
       }
-      Feeds.define(feedDefinition);
     } else {
       FormUtils.indicateError(instance);
     }
