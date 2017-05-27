@@ -61,16 +61,14 @@ Template.Add_User_Widget.events({
         if (error) {
           console.log('Error during new user creation: ', error);
         }
-        const timestamp = new Date().getTime();
-        if (Feeds.checkPastDayFeed(timestamp, 'new-user')) {
-          Feeds.updateNewUser(newData.slug, Feeds.checkPastDayFeed(timestamp, 'new-user'));
+        if (Feeds.checkPastDayFeed('new-user')) {
+          Feeds.updateNewUser(newData.slug, Feeds.checkPastDayFeed('new-user'));
         } else {
           const feedDefinition = {
             user: [newData.slug],
             feedType: 'new-user',
-            timestamp,
           };
-          Feeds.define(feedDefinition);
+          Feeds.defineNewUser(feedDefinition);
         }
         FormUtils.indicateSuccess(instance, event);
       });
