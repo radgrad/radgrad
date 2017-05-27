@@ -8,16 +8,10 @@ import { removeAllEntities } from './BaseUtilities';
 /** @module api/base/BaseCollectionMethods */
 
 /**
- * The string used to identify the dumpDatabase method.
- * @type {string}
- */
-export const dumpDatabaseMethodName = 'base.dumpDatabase';
-
-/**
  * Allows admins to create and return a JSON object to the client representing a snapshot of the RadGrad database.
  */
 export const dumpDatabaseMethod = new ValidatedMethod({
-  name: dumpDatabaseMethodName,
+  name: 'base.dumpDatabase',
   validate: null,
   run() {
     if (!this.userId) {
@@ -38,13 +32,11 @@ export const dumpDatabaseMethod = new ValidatedMethod({
   },
 });
 
-export const resetDatabaseMethodName = 'base.resetDatabase';
-
 /**
  * Resets all of the RadGrad collections to their empty state. Only available in test mode.
  */
 export const resetDatabaseMethod = new ValidatedMethod({
-  name: resetDatabaseMethodName,
+  name: 'base.resetDatabase',
   validate: null,
   run() {
     removeAllEntities();
