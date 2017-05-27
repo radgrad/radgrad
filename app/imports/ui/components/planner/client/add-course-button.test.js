@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { expect } from 'chai';
 import { $ } from 'meteor/jquery';
@@ -6,7 +5,7 @@ import '../../../../../client/lib/semantic-ui/semantic.min';
 import { withRenderedTemplate } from '../../../utilities/test-helpers';
 import { Courses } from '../../../../api/course/CourseCollection';
 import { makeSampleInterest } from '../../../../api/interest/SampleInterests';
-import { resetDatabaseMethodName } from '../../../../api/base/BaseCollection.methods';
+import { resetDatabaseMethod } from '../../../../api/base/BaseCollection.methods';
 import '../academic-plan.html';
 import '../academic-plan';
 import '../add-course-button.html';
@@ -18,12 +17,12 @@ import '../add-course-button.js';
 describe('Add_Course_Button', function test() {
   beforeEach(function () {
     Template.registerHelper('_', key => key);
-    Meteor.call(resetDatabaseMethodName, null);
+    resetDatabaseMethod.call(null);
   });
 
   afterEach(function () {
     Template.deregisterHelper('_');
-    Meteor.call(resetDatabaseMethodName, null);
+    resetDatabaseMethod.call(null);
   });
 
   it('renders correctly with type add', function () {

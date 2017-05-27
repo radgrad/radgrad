@@ -1,7 +1,7 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { checkIntegrity } from '../../../api/integrity/IntegrityChecker';
+import { checkIntegrityMethod } from '../../../api/integrity/IntegrityChecker.methods';
 
 const clientDataKey = 'client';
 const serverDataKey = 'server';
@@ -31,7 +31,7 @@ Template.Admin_DataBase_Integrity_Check_Page.helpers({
 Template.Admin_DataBase_Integrity_Check_Page.events({
   'click .jsIntegrityCheck': function clickJSIntegrityCheck(event, instance) {
     event.preventDefault();
-    Meteor.call('IntegrityCheck', null, (error, result) => {
+    checkIntegrityMethod.call(null, (error, result) => {
       if (error) {
         console.log('Error during integrity check: ', error);
       } else {
