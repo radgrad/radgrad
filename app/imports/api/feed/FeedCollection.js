@@ -348,6 +348,28 @@ class FeedCollection extends BaseCollection {
     const timestamp = doc.timestamp;
     return { user, opportunity, course, semester, feedType, timestamp };
   }
+
+  /**
+   * Defines the entity represented by dumpObject.
+   * Defaults to calling the define() method if it exists.
+   * @param dumpObject An object representing one document in this collection.
+   * @returns { String } The docID of the newly created document.
+   */
+  restoreOne(dumpObject) {
+    if (dumpObject.feedType === 'new-user') {
+      this.defineNewUser(dumpObject);
+    } else if (dumpObject.feedType === 'new-course') {
+      this.defineNewCourse(dumpObject);
+    } else if (dumpObject.feedType === 'new-opportunity') {
+      this.defineNewOpportunity(dumpObject);
+    } else if (dumpObject.feedType === 'new-verified-opportunity') {
+      this.defineNewVerifiedOpportunity(dumpObject);
+    } else if (dumpObject.feedType === 'new-course-review') {
+      this.defineNewCourseReview(dumpObject);
+    } else if (dumpObject.feedType === 'new-opportunity-review') {
+      this.defineNewOpportunityReview(dumpObject);
+    }
+  }
 }
 
 /**
