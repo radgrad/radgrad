@@ -49,6 +49,9 @@ import './student-explorer-review-stars-widget.js';
 import './student-explorer-social-widget.html';
 import './student-explorer-social-widget.js';
 
+import './student-feed-item.html';
+import './student-feed-item.js';
+
 import './student-feed-modal.html';
 import './student-feed-modal.js';
 
