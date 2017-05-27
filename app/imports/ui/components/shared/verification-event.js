@@ -56,17 +56,15 @@ Template.Verification_Event.events({
       const processed = request.processed;
       VerificationRequests.updateStatus(requestID, status, processed);
 
-      const timestamp = new Date().getTime();
-      if (Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID)) {
+      if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
         Feeds.updateVerifiedOpportunity(studentDoc.username,
-            Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID));
+            Feeds.checkPastDayFeed('verified-opportunity', opportunityID));
       } else {
         const feedDefinition = {
           user: [studentDoc.username],
           opportunity: opportunitySlug,
           semester: semesterSlug,
           feedType: 'verified-opportunity',
-          timestamp: Date.now(),
         };
         Feeds.defineNewVerifiedOpportunity(feedDefinition);
       }

@@ -206,14 +206,12 @@ Template.Student_Selector_Tabs.events({
               instance.state.set('errorMessage', error.reason);
             }
           } else {
-            const timestamp = new Date().getTime();
-            if (Feeds.checkPastDayFeed(timestamp, 'new-user')) {
-              Feeds.updateNewUser(userName, Feeds.checkPastDayFeed(timestamp, 'new-user'));
+            if (Feeds.checkPastDayFeed('new-user')) {
+              Feeds.updateNewUser(userName, Feeds.checkPastDayFeed('new-user'));
             } else {
               const feedDefinition = {
                 user: [userName],
                 feedType: 'new-user',
-                timestamp,
               };
               Feeds.defineNewUser(feedDefinition);
             }

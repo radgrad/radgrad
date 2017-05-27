@@ -1,19 +1,21 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { moment } from 'meteor/momentjs:moment';
 import { Courses } from '/imports/api/course/CourseCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
 import { Users } from '/imports/api/user/UserCollection';
 import BaseCollection from '/imports/api/base/BaseCollection';
-import { radgradCollections } from '../base/RadGradCollections';
 
 /** @module api/feed/FeedCollection */
 
 function dateDiffInDays(a, b) {
+  const ams = Date.parse(a);
+  const bms = Date.parse(b);
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
-  return Math.floor((a - b) / MS_PER_DAY);
+  return Math.floor((ams - bms) / MS_PER_DAY);
 }
 
 function withinPastDay(feed, timestamp) {
@@ -42,7 +44,7 @@ class FeedCollection extends BaseCollection {
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
       description: { type: String },
-      timestamp: { type: Number },   // TODO: shouldn't timestamp be a date object?
+      timestamp: { type: Date },
       picture: { type: String },
       feedType: { type: String },
     }));
@@ -91,7 +93,7 @@ class FeedCollection extends BaseCollection {
    * @returns The newly created docID.
    * @throws {Meteor.Error} If not a valid course.
    */
-  defineNewCourse({ course, feedType, timestamp }) {
+  defineNewCourse({ course, feedType, timestamp = moment().toDate() }) {
     const courseID = Courses.getID(course);
     const c = Courses.findDoc(courseID);
     const description = `[${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)}) 
@@ -112,7 +114,7 @@ class FeedCollection extends BaseCollection {
    * @returns The newly created docID.
    * @throws {Meteor.Error} If not a valid opportunity.
    */
-  defineNewOpportunity({ opportunity, feedType, timestamp }) {
+  defineNewOpportunity({ opportunity, feedType, timestamp = moment().toDate() }) {
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
     const description = `[${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
@@ -134,7 +136,7 @@ class FeedCollection extends BaseCollection {
    * @returns The newly created docID.
    * @throws {Meteor.Error} If not a valid opportunity, semester, or user.
    */
-  defineNewVerifiedOpportunity({ user, opportunity, semester, feedType, timestamp }) {
+  defineNewVerifiedOpportunity({ user, opportunity, semester, feedType, timestamp = moment().toDate() }) {
     let description;
     const userIDs = _.map(user, function (u) {
       return Users.getUserFromUsername(u)._id;
@@ -170,7 +172,7 @@ class FeedCollection extends BaseCollection {
    * @returns The newly created docID.
    * @throws {Meteor.Error} If not a valid course or user.
    */
-  defineNewCourseReview({ user, course, feedType, timestamp }) {
+  defineNewCourseReview({ user, course, feedType, timestamp = moment().toDate() }) {
     let picture;
     const userIDs = _.map(user, function (u) {
       return Users.getUserFromUsername(u)._id;
@@ -200,7 +202,7 @@ class FeedCollection extends BaseCollection {
    * @returns The newly created docID.
    * @throws {Meteor.Error} If not a valid opportunity or user.
    */
-  defineNewOpportunityReview({ user, opportunity, feedType, timestamp }) {
+  defineNewOpportunityReview({ user, opportunity, feedType, timestamp = moment().toDate() }) {
     let picture;
     const userIDs = _.map(user, function (u) {
       return Users.getUserFromUsername(u)._id;
@@ -228,7 +230,7 @@ class FeedCollection extends BaseCollection {
    * @returns {Object} The feedID if found.
    * @returns {boolean} False if feedID is not found.
    */
-  checkPastDayFeed(timestamp, feedType, opportunity) {
+  checkPastDayFeed(feedType, opportunity, timestamp = moment().toDate()) {
     let ret = false;
     const existingFeed = _.find(this._collection.find().fetch(), function (feed) {
       if (withinPastDay(feed, timestamp)) {

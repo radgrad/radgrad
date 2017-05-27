@@ -68,18 +68,16 @@ Template.Verification_Requests_Pending.events({
         studentID: VerificationRequests.getStudentDoc(request._id)._id,
         opportunityID: VerificationRequests.getOpportunityDoc(request._id)._id,
       }).fetch();
-      const timestamp = new Date().getTime();
       const opportunityID = VerificationRequests.getOpportunityDoc(request._id)._id;
-      if (Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID)) {
+      if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
         Feeds.updateVerifiedOpportunity(VerificationRequests.getStudentDoc(request._id).username,
-            Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID));
+            Feeds.checkPastDayFeed('verified-opportunity', opportunityID));
       } else {
         const feedDefinition = {
           user: [VerificationRequests.getStudentDoc(request._id).username],
           opportunity: Slugs.findDoc(VerificationRequests.getOpportunityDoc(request._id).slugID),
           semester: Slugs.findDoc(Semesters.findDoc(opportunities[0].semesterID).slugID),
           feedType: 'verified-opportunity',
-          timestamp,
         };
         Feeds.defineNewVerifiedOpportunity(feedDefinition);
       }

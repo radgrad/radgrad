@@ -67,7 +67,6 @@ Template.Add_Review_Widget.events({
           user: [newData.student],
           opportunity: newData.reviewee,
           feedType: 'new-opportunity-review',
-          timestamp: Date.now(),
         };
         Feeds.defineNewOpportunity(feedDefinition);
       }

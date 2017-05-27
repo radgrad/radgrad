@@ -70,7 +70,6 @@ Template.Student_Explorer_Add_Review_Widget.events({
           user: [newData.student],
           course: newData.reviewee,
           feedType: 'new-course-review',
-          timestamp: Date.now(),
         };
         Feeds.defineNewCourseReview(feedDefinition);
       } else {
@@ -78,7 +77,6 @@ Template.Student_Explorer_Add_Review_Widget.events({
           user: [newData.student],
           opportunity: newData.reviewee,
           feedType: 'new-opportunity-review',
-          timestamp: Date.now(),
         };
         Feeds.defineNewOpportunityReview(feedDefinition);
       }
