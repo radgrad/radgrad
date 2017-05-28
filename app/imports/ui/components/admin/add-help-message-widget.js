@@ -1,9 +1,8 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
-import { helpMessagesDefineMethodName } from '../../../api/help/HelpMessageCollection.methods';
+import { helpMessagesDefineMethod } from '../../../api/help/HelpMessageCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { routeNames } from '../../../startup/client/router.js';
 
@@ -35,9 +34,13 @@ Template.Add_Help_Message_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      // HelpMessages.define(newData);
-      Meteor.call(helpMessagesDefineMethodName, newData);
-      FormUtils.indicateSuccess(instance, event);
+      helpMessagesDefineMethod.call(newData, (error) => {
+        if (error) {
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

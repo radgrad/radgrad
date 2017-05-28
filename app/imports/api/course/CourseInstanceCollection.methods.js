@@ -7,16 +7,10 @@ import { CourseInstances } from './CourseInstanceCollection';
 /** @module api/course/CourseInstanceCollectionMethods */
 
 /**
- * The name of the CourseInstances define method.
- * @type {string}
- */
-export const courseInstancesDefineMethodName = 'CourseInstances.define';
-
-/**
  * The Validated method for defining career goals.
  */
 export const courseInstancesDefineMethod = new ValidatedMethod({
-  name: courseInstancesDefineMethodName,
+  name: 'CourseInstances.define',
   validate: new SimpleSchema({
     semester: { type: String, optional: false },
     course: { type: String, optional: false },
@@ -36,16 +30,10 @@ export const courseInstancesDefineMethod = new ValidatedMethod({
 });
 
 /**
- * The name of the CourseInstances update method.
- * @type {string}
- */
-export const courseInstancesUpdateMethodName = 'CourseInstances.update';
-
-/**
  * The ValidatedMethod for updating CourseInstances.
  */
 export const courseInstancesUpdateMethod = new ValidatedMethod({
-  name: courseInstancesUpdateMethodName,
+  name: 'CourseInstances.update',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id },
     semesterID: { type: SimpleSchema.RegEx.Id },
@@ -58,25 +46,19 @@ export const courseInstancesUpdateMethod = new ValidatedMethod({
     studentID: { type: SimpleSchema.RegEx.Id },
     ice: { type: Object, optional: true, blackbox: true },
   }).validator(),
-  run(goalUpdate) {
+  run(instanceUpdate) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update CourseInstances.');
     }
-    return CourseInstances.update(goalUpdate.id, { $set: goalUpdate });
+    return CourseInstances.update(instanceUpdate.id, { $set: instanceUpdate });
   },
 });
-
-/**
- * The name of the CourseInstances removeIt method.
- * @type {string}
- */
-export const courseInstancesRemoveItMethodName = 'CourseInstances.removeIt';
 
 /**
  * The ValidatedMethod for removing CourseInstances.
  */
 export const courseInstancesRemoveItMethod = new ValidatedMethod({
-  name: courseInstancesRemoveItMethodName,
+  name: 'CourseInstances.removeIt',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id, optional: false },
   }).validator(),
@@ -89,15 +71,10 @@ export const courseInstancesRemoveItMethod = new ValidatedMethod({
 });
 
 /**
- * CourseInstance.updateGrade Validated method name.
- */
-export const courseInstanceUpdateGradeMethodName = 'CourseInstance.updateGrade';
-
-/**
  * CourseInstance update grade ValidatedMethod.
  */
 export const courseInstanceUpdateGradeMethod = new ValidatedMethod({
-  name: courseInstanceUpdateGradeMethodName,
+  name: 'CourseInstance.updateGrade',
   validate: new SimpleSchema({
     courseInstanceID: { type: SimpleSchema.RegEx.Id },
     grade: { type: String },

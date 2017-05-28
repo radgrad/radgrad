@@ -6,16 +6,10 @@ import { checkIntegrity } from './IntegrityChecker.js';
 /** @module api/integrity/IntegrityCheckerMethods */
 
 /**
- * Name of the check integrity Validated Method.
- * @type {string}
- */
-export const checkIntegrityMethodName = 'IntegrityCheck';
-
-/**
  * The check integrity ValidatedMethod.
  */
 export const checkIntegrityMethod = new ValidatedMethod({
-  name: checkIntegrityMethodName,
+  name: 'IntegrityCheck',
   validate: null,
   run() {
     if (!this.userId) {

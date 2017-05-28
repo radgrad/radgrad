@@ -1,7 +1,6 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
-import { helpMessagesRemoveItMethodName } from '../../../api/help/HelpMessageCollection.methods';
+import { helpMessagesRemoveItMethod } from '../../../api/help/HelpMessageCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/List_Help_Messages_Widget */
@@ -30,6 +29,6 @@ Template.List_Help_Messages_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Meteor.call(helpMessagesRemoveItMethodName, { id });
+    helpMessagesRemoveItMethod.call({ id });
   },
 });

@@ -1,9 +1,8 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { courseInstancesRemoveItMethodName } from '../../../api/course/CourseInstanceCollection.methods';
+import { courseInstancesRemoveItMethod } from '../../../api/course/CourseInstanceCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -60,6 +59,6 @@ Template.List_Course_Instances_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Meteor.call(courseInstancesRemoveItMethodName, { id });
+    courseInstancesRemoveItMethod.call({ id });
   },
 });

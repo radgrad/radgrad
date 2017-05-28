@@ -7,10 +7,11 @@ import { Users } from './UserCollection';
 /** @module api/user/UserCollectionMethods */
 
 // TODO: Centralize schemas. Currently three: (1) here, (2) admin UI, (3) UserCollection definition.
-export const defineUserMethodName = 'Users.define';
-
+/**
+ * The Users define validated method.
+ */
 export const defineUserMethod = new ValidatedMethod({
-  name: defineUserMethodName,
+  name: 'Users.define',
   validate: new SimpleSchema({
     firstName: { type: String, optional: false },
     lastName: { type: String, optional: false },
@@ -37,9 +38,11 @@ export const defineUserMethod = new ValidatedMethod({
   },
 });
 
-export const updateUserMethodName = 'Users.update';
+/**
+ * The Users update validated method.
+ */
 export const updateUserMethod = new ValidatedMethod({
-  name: updateUserMethodName,
+  name: 'Users.update',
   validate: new SimpleSchema({
     firstName: { type: String, optional: false },
     lastName: { type: String, optional: false },
@@ -66,3 +69,5 @@ export const updateUserMethod = new ValidatedMethod({
     return Users.update(userDefn);
   },
 });
+
+// TODO No way to remove Users?

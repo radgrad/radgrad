@@ -1,7 +1,6 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
-import { courseInstancesRemoveItMethodName } from '../../../api/course/CourseInstanceCollection.methods';
+import { courseInstancesRemoveItMethod } from '../../../api/course/CourseInstanceCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -43,23 +42,12 @@ Template.Add_Course_Button.events({
     Template.instance().state.set(plannerKeys.detailCourseInstance, null);
     Template.instance().state.set(plannerKeys.detailOpportunity, null);
     Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
-    Meteor.call(courseInstancesRemoveItMethodName, { id: ci._id });
-    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-    Template.instance().$('.chooseYear').popup('hide');
-    Template.instance().$('.chooseSemester').popup('hide');
+    courseInstancesRemoveItMethod.call({ id: ci._id }, (error) => {
+      if (!error) {
+        FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+        FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+        FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+      }
+    });
   },
-});
-
-Template.Add_Course_Button.onRendered(function addCourseButtonOnRendered() {
-  const template = this;
-  template.$('.chooseYear')
-      .popup({
-        on: 'click',
-      });
-  template.$('.chooseSemester')
-      .popup({
-        on: 'click',
-      });
 });

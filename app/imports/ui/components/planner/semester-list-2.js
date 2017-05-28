@@ -1,10 +1,9 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { courseInstancesDefineMethodName,
-  courseInstancesUpdateMethodName } from '../../../api/course/CourseInstanceCollection.methods';
+import { courseInstancesDefineMethod,
+  courseInstancesUpdateMethod } from '../../../api/course/CourseInstanceCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -103,7 +102,7 @@ Template.Semester_List_2.events({
           };
           const semesterID = Template.instance().localState.get('semester')._id;
           if (CourseInstances.find({ courseID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
-            Meteor.call(courseInstancesDefineMethodName, ci, function callback(error) {
+            courseInstancesDefineMethod.call(ci, (error) => {
               if (!error) {
                 FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                 FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
@@ -135,7 +134,7 @@ Template.Semester_List_2.events({
           });
           data.id = id;
           data.semesterID = semesterID;
-          Meteor.call(courseInstancesUpdateMethodName, data, function callback(error) {
+          courseInstancesUpdateMethod.call(data, (error) => {
             if (!error) {
               FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
               FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
@@ -198,18 +197,6 @@ Template.Semester_List_2.events({
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
       }
-  },
-  'click .jsDelOpp': function clickJsDelOpp(event) {
-    event.preventDefault();
-    // console.log(event.target);
-    const id = event.target.id;
-    OpportunityInstances.removeIt(id);
-    const template = Template.instance();
-    template.state.set(plannerKeys.detailCourse, null);
-    template.state.set(plannerKeys.detailCourseInstance, null);
-    template.state.set(plannerKeys.detailICE, null);
-    template.state.set(plannerKeys.detailOpportunity, null);
-    template.state.set(plannerKeys.detailOpportunityInstance, null);
   },
 });
 

@@ -1,11 +1,10 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { courseInstancesUpdateMethodName } from '../../../api/course/CourseInstanceCollection.methods';
+import { courseInstancesUpdateMethod } from '../../../api/course/CourseInstanceCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -88,7 +87,7 @@ Template.Update_Course_Instance_Widget.events({
       FormUtils.renameKey(updatedData, 'course', 'courseID');
       FormUtils.renameKey(updatedData, 'user', 'studentID');
       updatedData.id = instance.data.updateID.get();
-      Meteor.call(courseInstancesUpdateMethodName, updatedData, function callback(error) {
+      courseInstancesUpdateMethod.call(updatedData, (error) => {
         if (error) {
           FormUtils.indicateError(instance);
         } else {

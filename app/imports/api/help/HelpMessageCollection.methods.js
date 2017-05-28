@@ -7,16 +7,10 @@ import { HelpMessages } from './HelpMessageCollection';
 /** @module api/help/HelpMessageCollectionMethods */
 
 /**
- * The name of the HelpMessages define method.
- * @type {string}
- */
-export const helpMessagesDefineMethodName = 'HelpMessages.define';
-
-/**
- * The Validated method for defining help messages.
+ * The validated method for defining help messages.
  */
 export const helpMessagesDefineMethod = new ValidatedMethod({
-  name: helpMessagesDefineMethodName,
+  name: 'HelpMessages.define',
   validate: new SimpleSchema({
     routeName: { type: String },
     title: { type: String },
@@ -33,10 +27,11 @@ export const helpMessagesDefineMethod = new ValidatedMethod({
   },
 });
 
-export const helpMessagesRemoveItMethodName = 'HelpMessages.removeIt';
-
+/**
+ * The validated method for removing help messages.
+ */
 export const HelpMessagesRemoveItMethod = new ValidatedMethod({
-  name: helpMessagesRemoveItMethodName,
+  name: 'HelpMessages.removeIt',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id, optional: false },
   }).validator(),

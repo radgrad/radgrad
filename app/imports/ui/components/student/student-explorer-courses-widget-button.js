@@ -1,11 +1,10 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { courseInstancesDefineMethodName,
-  courseInstancesRemoveItMethodName } from '../../../api/course/CourseInstanceCollection.methods';
+import { courseInstancesDefineMethod,
+  courseInstancesRemoveItMethod } from '../../../api/course/CourseInstanceCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -64,7 +63,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
       grade: 'B',
       student: username,
     };
-    Meteor.call(courseInstancesDefineMethodName, ci, function callback(error) {
+    courseInstancesDefineMethod.call(ci, (error) => {
       if (!error) {
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
@@ -87,7 +86,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     if (ci > 1) {
       console.log('Too many course instances found for a single semester.');
     }
-    Meteor.call(courseInstancesRemoveItMethodName, { id: ci[0]._id }, function callback(error) {
+    courseInstancesRemoveItMethod.call({ id: ci[0]._id }, (error) => {
       if (!error) {
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
