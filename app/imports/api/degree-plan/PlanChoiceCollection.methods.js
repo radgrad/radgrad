@@ -23,7 +23,7 @@ export const planChoicesDefineMethod = new ValidatedMethod({
 });
 
 /**
- * The ValidatedMethod for updating PlanChices.
+ * The ValidatedMethod for updating PlanChoices.
  */
 export const planChoicesUpdateMethod = new ValidatedMethod({
   name: 'PlanChoices.update',
@@ -40,7 +40,7 @@ export const planChoicesUpdateMethod = new ValidatedMethod({
 });
 
 /**
- * The ValidatedMethod for removing PlanChices.
+ * The ValidatedMethod for removing PlanChoices.
  */
 export const planChoicesRemoveItMethod = new ValidatedMethod({
   name: 'PlanChoices.removeIt',

@@ -6,6 +6,7 @@ import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
 import { Feedbacks } from './FeedbackCollection';
 import { FeedbackInstances } from './FeedbackInstanceCollection';
+import { feedbackInstancesDefineMethod, feedbackInstancesRemoveItMethod } from './FeedbackInstanceCollection.methods';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import * as courseUtils from '../course/CourseUtilities';
@@ -59,8 +60,12 @@ export class FeedbackFunctionClass {
     const userID = studentID;
     const instances = FeedbackInstances.find({ userID, area }).fetch();
     // console.log(`found ${instances.length} feedback instances for ${studentID} ${area}`);
-    _.map(instances, (fi) => {
-      FeedbackInstances.removeIt(fi._id);
+    _.forEach(instances, (fi) => {
+      feedbackInstancesRemoveItMethod.call({ id: fi._id }, (error) => {
+        if (error) {
+          console.log('Error during FeedbackInstance removeIt: ', error);
+        }
+      });
     });
   }
 
@@ -98,22 +103,30 @@ export class FeedbackFunctionClass {
                   const semesterName2 = Semesters.toString(preSemester._id, false);
                   const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is ` +
                       `after or in ${semesterName2}.`;
-                  FeedbackInstances.define({
+                  feedbackInstancesDefineMethod.call({
                     feedback,
                     user: studentID,
                     description,
                     area,
+                  }, (error) => {
+                    if (error) {
+                      console.log('Error during FeedbackInstance define: ', error);
+                    }
                   });
                 }
               }
             } else {
               const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
                   ' not found.';
-              FeedbackInstances.define({
+              feedbackInstancesDefineMethod.call({
                 feedback,
                 user: studentID,
                 description,
                 area,
+              }, (error) => {
+                if (error) {
+                  console.log('Error during FeedbackInstance define: ', error);
+                }
               });
             }
           });
@@ -173,11 +186,15 @@ export class FeedbackFunctionClass {
             }
       });
       description = description.substring(0, description.length - 2);
-      FeedbackInstances.define({
+      feedbackInstancesDefineMethod.call({
         feedback,
         user: studentID,
         description,
         area,
+      }, (error) => {
+        if (error) {
+          console.log('Error during FeedbackInstance define: ', error);
+        }
       });
     }
   }
@@ -208,11 +225,15 @@ export class FeedbackFunctionClass {
     });
     description = description.substring(0, description.length - 2);
     if (haveOverloaded) {
-      FeedbackInstances.define({
+      feedbackInstancesDefineMethod.call({
         feedback,
         user: studentID,
         description,
         area,
+      }, (error) => {
+        if (error) {
+          console.log('Error during FeedbackInstance define: ', error);
+        }
       });
     }
   }
@@ -275,11 +296,15 @@ export class FeedbackFunctionClass {
             description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
           }
       // });
-      FeedbackInstances.define({
+      feedbackInstancesDefineMethod.call({
         feedback,
         user: studentID,
         description,
         area,
+      }, (error) => {
+        if (error) {
+          console.log('Error during FeedbackInstance define: ', error);
+        }
       });
     }
   }
@@ -320,11 +345,15 @@ export class FeedbackFunctionClass {
           description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug.name}), `;
         });
         description = description.substring(0, description.length - 2);
-        FeedbackInstances.define({
+        feedbackInstancesDefineMethod.call({
           feedback,
           user: studentID,
           description,
           area,
+        }, (error) => {
+          if (error) {
+            console.log('Error during FeedbackInstance define: ', error);
+          }
         });
       }
     } else {
@@ -360,11 +389,15 @@ export class FeedbackFunctionClass {
           description = `${description} \n- [${opp.name}](${basePath}explorer/opportunities/${slug.name}), `;
         });
         description = description.substring(0, description.length - 2);
-        FeedbackInstances.define({
+        feedbackInstancesDefineMethod.call({
           feedback,
           user: studentID,
           description,
           area,
+        }, (error) => {
+          if (error) {
+            console.log('Error during FeedbackInstance define: ', error);
+          }
         });
       }
     }
@@ -411,11 +444,15 @@ export class FeedbackFunctionClass {
         description = '';
     }
     if (description) {
-      FeedbackInstances.define({
+      feedbackInstancesDefineMethod.call({
         feedback,
         user: studentID,
         description,
         area,
+      }, (error) => {
+        if (error) {
+          console.log('Error during FeedbackInstance define: ', error);
+        }
       });
     }
   }
