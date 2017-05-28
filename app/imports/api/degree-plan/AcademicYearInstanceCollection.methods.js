@@ -12,17 +12,14 @@ import { AcademicYearInstances } from './AcademicYearInstanceCollection';
 export const academicYearInstancesDefineMethod = new ValidatedMethod({
   name: 'AcademicYearInstances.define',
   validate: new SimpleSchema({
-    degreeSlug: { type: String, optional: false },
-    name: { type: String, optional: false },
-    semester: { type: String, optional: false },
-    coursesPerSemester: { type: [Number], optional: false },
-    courseList: { type: [String], optional: true },
+    year: { type: Number, optional: false },
+    student: { type: String, optional: false },
   }).validator(),
-  run(planDefn) {
+  run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define AcademicYearInstances.');
     }
-    return AcademicYearInstances.define(planDefn);
+    return AcademicYearInstances.define(definition);
   },
 });
 
@@ -33,17 +30,16 @@ export const academicYearInstancesUpdateMethod = new ValidatedMethod({
   name: 'AcademicYearInstances.update',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id },
-    degreeID: { type: SimpleSchema.RegEx.Id },
-    name: { type: String },
-    effectiveSemesterID: { type: SimpleSchema.RegEx.Id },
-    coursesPerSemester: { type: [Number], minCount: 12, maxCount: 12 },
-    courseList: { type: [String] },
+    year: { type: Number },
+    springYear: { type: Number },
+    studentID: { type: SimpleSchema.RegEx.Id },
+    semesterIDs: { type: [SimpleSchema.RegEx.Id] },
   }).validator(),
-  run(planUpdate) {
+  run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update AcademicYearInstances.');
     }
-    return AcademicYearInstances.update(planUpdate.id, { $set: planUpdate });
+    return AcademicYearInstances.update(update.id, { $set: update });
   },
 });
 

@@ -12,17 +12,16 @@ import { DesiredDegrees } from './DesiredDegreeCollection';
 export const desiredDegreesDefineMethod = new ValidatedMethod({
   name: 'DesiredDegrees.define',
   validate: new SimpleSchema({
-    degreeSlug: { type: String, optional: false },
     name: { type: String, optional: false },
-    semester: { type: String, optional: false },
-    coursesPerSemester: { type: [Number], optional: false },
-    courseList: { type: [String], optional: true },
+    shortName: { type: String, optional: false },
+    slug: { type: String, optional: false },
+    description: { type: String, optional: false },
   }).validator(),
-  run(planDefn) {
+  run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define DesiredDegrees.');
     }
-    return DesiredDegrees.define(planDefn);
+    return DesiredDegrees.define(definition);
   },
 });
 
@@ -33,17 +32,16 @@ export const desiredDegreesUpdateMethod = new ValidatedMethod({
   name: 'DesiredDegrees.update',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id },
-    degreeID: { type: SimpleSchema.RegEx.Id },
     name: { type: String },
-    effectiveSemesterID: { type: SimpleSchema.RegEx.Id },
-    coursesPerSemester: { type: [Number], minCount: 12, maxCount: 12 },
-    courseList: { type: [String] },
+    shortName: { type: String },
+    slugID: { type: SimpleSchema.RegEx.Id },
+    description: { type: String },
   }).validator(),
-  run(planUpdate) {
+  run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update DesiredDegrees.');
     }
-    return DesiredDegrees.update(planUpdate.id, { $set: planUpdate });
+    return DesiredDegrees.update(update.id, { $set: update });
   },
 });
 
