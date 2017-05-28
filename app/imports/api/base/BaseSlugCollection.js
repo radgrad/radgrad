@@ -48,12 +48,10 @@ class BaseSlugCollection extends BaseCollection {
     const docID = this.getID(instance);
     const doc = super.findDoc(docID);
     check(doc, Object);
-    try {
+    if (Slugs.isDefined(doc.slugID)) {
       const slugDoc = Slugs.findDoc(doc.slugID);
       check(slugDoc, Object);
       Slugs.removeIt(slugDoc);
-    } catch (e) {
-      // do nothing.
     }
     super.removeIt(doc);
   }

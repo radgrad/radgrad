@@ -26,23 +26,10 @@ class SemesterCollection extends BaseSlugCollection {
     this.SPRING = 'Spring';
     this.SUMMER = 'Summer';
     this.FALL = 'Fall';
-    this.WINTER = 'Winter';
-    if (Meteor.settings.quarters) {
-      this.terms = [this.SPRING, this.SUMMER, this.FALL, this.WINTER];
-      // use Day of Year (1..365) to represent semester boundaries.
-      // Boundaries might vary by a day depending upon whether this year is a leap year.
-      this.fallStart = parseInt(moment('08-29-2015', 'MM-DD-YYYY').format('DDD'), 10);
-      this.winterStart = parseInt(moment('01-09-2015', 'MM-DD-YYYY').format('DDD'), 10);
-      this.springStart = parseInt(moment('04-03-2015', 'MM-DD-YYYY').format('DDD'), 10);
-      this.summerStart = parseInt(moment('06-26-2015', 'MM-DD-YYYY').format('DDD'), 10);
-    } else {
-      this.terms = [this.SPRING, this.SUMMER, this.FALL];
-      // use Day of Year (1..365) to represent semester boundaries.
-      // Boundaries might vary by a day depending upon whether this year is a leap year.
-      this.fallStart = parseInt(moment('08-15-2015', 'MM-DD-YYYY').format('DDD'), 10);
-      this.springStart = parseInt(moment('01-01-2015', 'MM-DD-YYYY').format('DDD'), 10);
-      this.summerStart = parseInt(moment('05-15-2015', 'MM-DD-YYYY').format('DDD'), 10);
-    }
+    this.terms = [this.SPRING, this.SUMMER, this.FALL];
+    this.fallStart = parseInt(moment('08-15-2015', 'MM-DD-YYYY').format('DDD'), 10);
+    this.springStart = parseInt(moment('01-01-2015', 'MM-DD-YYYY').format('DDD'), 10);
+    this.summerStart = parseInt(moment('05-15-2015', 'MM-DD-YYYY').format('DDD'), 10);
   }
 
   /**
@@ -69,50 +56,48 @@ class SemesterCollection extends BaseSlugCollection {
    * @returns The docID for this semester instance.
    */
   define({ term, year }) {
+    // Check that term and year are valid.
     if (this.terms.indexOf(term) < 0) {
       throw new Meteor.Error('Invalid term: ', term);
     }
     if ((year < 1990) || (year > 2050)) {
       throw new Meteor.Error('Invalid year: ', year);
     }
-    // Return immediately if we can find this semester.
+
+    // Return immediately if semester is already defined.
     const doc = this._collection.findOne({ term, year });
     if (doc) {
       return doc._id;
     }
+
+    // Otherwise define a new semester and add it to the collection if successful.
+
+    // Compute sortBy, a number putting semesters into chronological order.
     let sortBy = 0;
+    if (term === this.SPRING) {
+      sortBy = year * 10;
+    }
+    if (term === this.SUMMER) {
+      sortBy = (year * 10) + 1;
+    }
     if (term === this.FALL) {
       sortBy = (year * 10) + 2;
-    } else
-      if (term === this.SPRING) {
-        sortBy = year * 10;
-      } else {
-        sortBy = (year * 10) + 1;
-      }
+    }
+
+    // Compute semesterNumber, another number that puts semesters into chronological order.
     let semesterNumber = 0;
     const yearDiff = year - 2010;
-    if (!Meteor.settings.quaters) {
-      if (term === this.SPRING) {
-        semesterNumber = (3 * yearDiff) - 2;
-      } else
-        if (term === this.SUMMER) {
-          semesterNumber = (3 * yearDiff) - 1;
-        } else {
-          semesterNumber = 3 * yearDiff;
-        }
-    } else
-      if (term === this.SPRING) {
-        semesterNumber = (4 * yearDiff) - 3;
-      } else
-        if (term === this.SUMMER) {
-          semesterNumber = (4 * yearDiff) - 2;
-        } else
-          if (term === this.FALL) {
-            semesterNumber = (4 * yearDiff) - 1;
-          } else {
-            semesterNumber = 4 * yearDiff;
-          }
-    // Otherwise define a new semester and add it to the collection if successful.
+    if (term === this.SPRING) {
+      semesterNumber = (4 * yearDiff) - 3;
+    }
+    if (term === this.SUMMER) {
+      semesterNumber = (4 * yearDiff) - 2;
+    }
+    if (term === this.FALL) {
+      semesterNumber = (4 * yearDiff) - 1;
+    }
+
+    // Determine what the slug looks like.
     const slug = `${term}-${year}`;
 
     if (Slugs.isDefined(slug)) {
@@ -155,28 +140,17 @@ class SemesterCollection extends BaseSlugCollection {
   }
 
   /**
-   * Returns the semesterID associated with the current semester based upon the current timestamp.
+   * Returns the semester doc associated with the current semester based upon the current timestamp.
    * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
    */
   getCurrentSemesterDoc() {
-    const year = moment().year();
-    const day = moment().dayOfYear();
-    let term = '';
-    if (day >= this.fallStart) {
-      term = this.FALL;
-    } else
-      if (day >= this.summerStart) {
-        term = this.SUMMER;
-      } else {
-        term = this.SPRING;
-      }
-    const id = this.define({ term, year });
-    return this._collection.findOne({ _id: id });
+    const id = this.getCurrentSemester();
+    return this.findDoc(id);
   }
 
   /**
    * Returns the semester ID corresponding to the given date.
-   * @param date The date.
+   * @param date The date as a string. Must be able to be parsed by moment();
    * @returns {String} The semesterID that the date falls in.
    */
   getSemester(date) {
@@ -213,6 +187,24 @@ class SemesterCollection extends BaseSlugCollection {
     this.assertSemester(semesterID);
     const semesterDoc = this.findDoc(semesterID);
     return Slugs.findDoc(semesterDoc.slugID).name;
+  }
+
+  /**
+   * Returns the semester docID associated with the passed semester slug or docID.
+   * If the semester does not exist, it is defined.
+   * @param semester The Slug or docID associated with a semester
+   * @returns The semester ID.
+   * @throws { Meteor.Error } If the passed semester is not a valid semester slug.
+   */
+  getID(semester) {
+    if (this.isDefined(semester)) {
+      return super.getID(semester);
+    }
+    // Otherwise semester should be a slug.  Try to define it.
+    const split = semester.split('-');
+    const term = split[0];
+    const year = parseInt(split[1], 10);
+    return this.define({ term, year });
   }
 
   /**
