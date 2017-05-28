@@ -28,24 +28,61 @@ if (Meteor.isServer) {
     });
 
     it('#get (multiple definition)', function test() {
-      const semester = Semesters.define({ term: Semesters.FALL, year: 2012 });
-      const semester2 = Semesters.define({ term: Semesters.FALL, year: 2012 });
-      expect(semester).to.equal(semester2);
-      Semesters.removeIt(semester);
-      expect(Semesters.isDefined(semester2)).to.be.false;
+      const semesterID = Semesters.define({ term: Semesters.FALL, year: 2012 });
+      const semesterID2 = Semesters.define({ term: Semesters.FALL, year: 2012 });
+      expect(semesterID).to.equal(semesterID2);
+      Semesters.removeIt(semesterID);
+      expect(Semesters.isDefined(semesterID2)).to.be.false;
     });
 
     it('#assertSemester', function test() {
-      const semester = Semesters.define({ term: Semesters.SUMMER, year: 2015 });
-      expect(function foo() { Semesters.assertSemester(semester); }).to.not.throw(Error);
-      Semesters.removeIt(semester);
-      expect(function foo() { Semesters.assertSemester(semester); }).to.throw(Error);
+      const semesterID = Semesters.define({ term: Semesters.SUMMER, year: 2015 });
+      expect(function foo() { Semesters.assertSemester(semesterID); }).to.not.throw(Error);
+      Semesters.removeIt(semesterID);
+      expect(function foo() { Semesters.assertSemester(semesterID); }).to.throw(Error);
     });
 
     it('#toString', function test() {
-      const semester = Semesters.define({ term: Semesters.SPRING, year: 2010 });
-      expect(Semesters.toString(semester)).to.equal('Spring 2010');
-      Semesters.removeIt(semester);
+      const semesterID = Semesters.define({ term: Semesters.SPRING, year: 2010 });
+      expect(Semesters.toString(semesterID)).to.equal('Spring 2010');
+      Semesters.removeIt(semesterID);
+    });
+
+    it('#sortBy', function test() {
+      let semesterID = Semesters.define({ term: Semesters.SPRING, year: 2010 });
+      expect(Semesters.findDoc(semesterID).sortBy).to.equal(20100);
+
+      semesterID = Semesters.define({ term: Semesters.SUMMER, year: 2010 });
+      expect(Semesters.findDoc(semesterID).sortBy).to.equal(20101);
+
+      semesterID = Semesters.define({ term: Semesters.FALL, year: 2010 });
+      expect(Semesters.findDoc(semesterID).sortBy).to.equal(20102);
+    });
+
+    it('#semesterNumber', function test() {
+      let semesterID = Semesters.define({ term: Semesters.SPRING, year: 2011 });
+      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(1);
+
+      semesterID = Semesters.define({ term: Semesters.SUMMER, year: 2011 });
+      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(2);
+
+      semesterID = Semesters.define({ term: Semesters.FALL, year: 2011 });
+      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(3);
+
+      semesterID = Semesters.define({ term: Semesters.SPRING, year: 2012 });
+      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(5);
+
+      semesterID = Semesters.define({ term: Semesters.SUMMER, year: 2012 });
+      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(6);
+
+      semesterID = Semesters.define({ term: Semesters.FALL, year: 2012 });
+      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(7);
+    });
+
+    it('#getID', function test() {
+      expect(Semesters.getID('Summer-2010')).to.be.truthy;
+      expect(Semesters.getID('Summer-2040')).to.be.truthy;
+      expect(function foo() { Semesters.getID('foobar'); }).to.throw(Error);
     });
   });
 }
