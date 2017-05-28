@@ -3,6 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
+import { interestsRemoveItMethod } from '../../../api/interest/InterestCollection.methods';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
@@ -53,6 +54,10 @@ Template.List_Interests_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Interests.removeIt(id);
+    interestsRemoveItMethod.call({ id }, (error) => {
+      if (error) {
+        console.log('Error in removing Interest', error);
+      }
+    });
   },
 });

@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { interestsUpdateMethod } from '../../../api/interest/InterestCollection.methods';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -39,8 +40,14 @@ Template.Update_Interest_Widget.events({
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
-      Interests.update(instance.data.updateID.get(), { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updatedData.id = instance.data.updateID.get();
+      interestsUpdateMethod.call(updatedData, (error) => {
+        if (error) {
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }
