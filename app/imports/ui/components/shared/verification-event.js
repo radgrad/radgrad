@@ -7,6 +7,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
+import { feedsDefineNewVerifiedOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 
 // /** @module ui/components/shared/Verification_Event */
@@ -66,7 +67,7 @@ Template.Verification_Event.events({
           semester: semesterSlug,
           feedType: 'verified-opportunity',
         };
-        Feeds.defineNewVerifiedOpportunity(feedDefinition);
+        feedsDefineNewVerifiedOpportunityMethod.call(feedDefinition);
       }
     } catch (e) {
       alert(`${student} is not a valid student. ${e}`); // eslint-disable-line no-undef, no-alert

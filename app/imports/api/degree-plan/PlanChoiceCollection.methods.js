@@ -4,10 +4,10 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { PlanChoices } from './PlanChoiceCollection';
 
 
-/** @module api/degree-plan/PlanChiceCollectionMethods */
+/** @module api/degree-plan/PlanChoiceCollectionMethods */
 
 /**
- * The Validated method for defining PlanChices.
+ * The Validated method for defining PlanChoices.
  */
 export const planChoicesDefineMethod = new ValidatedMethod({
   name: 'PlanChoices.define',

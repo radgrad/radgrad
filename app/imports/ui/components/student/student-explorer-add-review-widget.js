@@ -2,7 +2,8 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { Feeds } from '../../../api/feed/FeedCollection.js';
+import { feedsDefineNewCourseReviewMethod,
+  feedsDefineNewOpportunityReviewMethod } from '../../../api/feed/FeedCollection.methods';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
@@ -71,14 +72,14 @@ Template.Student_Explorer_Add_Review_Widget.events({
           course: newData.reviewee,
           feedType: 'new-course-review',
         };
-        Feeds.defineNewCourseReview(feedDefinition);
+        feedsDefineNewCourseReviewMethod.call(feedDefinition);
       } else {
         feedDefinition = {
           user: [newData.student],
           opportunity: newData.reviewee,
           feedType: 'new-opportunity-review',
         };
-        Feeds.defineNewOpportunityReview(feedDefinition);
+        feedsDefineNewOpportunityReviewMethod.call(feedDefinition);
       }
     } else {
       FormUtils.indicateError(instance);

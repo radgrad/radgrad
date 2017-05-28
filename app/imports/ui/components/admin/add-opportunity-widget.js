@@ -3,7 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
-import { Feeds } from '../../../api/feed/FeedCollection.js';
+import { feedsDefineNewOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -78,6 +78,6 @@ Template.Add_Opportunity_Widget.events({
       opportunity: newData.slug,
       feedType: 'new-opportunity',
     };
-    Feeds.defineNewOpportunity(feedDefinition);
+    feedsDefineNewOpportunityMethod.call(feedDefinition);
   },
 });

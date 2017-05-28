@@ -10,6 +10,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
+import { feedsDefineNewVerifiedOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 // /** @module ui/components/shared/Verification_Requests_Pending */
@@ -79,7 +80,7 @@ Template.Verification_Requests_Pending.events({
           semester: Slugs.findDoc(Semesters.findDoc(opportunities[0].semesterID).slugID),
           feedType: 'verified-opportunity',
         };
-        Feeds.defineNewVerifiedOpportunity(feedDefinition);
+        feedsDefineNewVerifiedOpportunityMethod.call(feedDefinition);
       }
     } else {
       request.status = VerificationRequests.REJECTED;

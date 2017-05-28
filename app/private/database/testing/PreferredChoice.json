@@ -1,7 +1,6 @@
 {
   "timestamp": "2017-03-10T20:04:41.798Z",
   "collections": [
-
     {
       "name": "CourseCollection",
       "contents": [
@@ -50,7 +49,6 @@
         }
       ]
     },
-
     {
       "name": "InterestCollection",
       "contents": [
@@ -95,7 +93,6 @@
         }
       ]
     },
-
     {
       "name": "UserCollection",
       "contents": [
@@ -124,11 +121,6 @@
         {
           "username": "radgrad"
         }
-      ]
-    },
-    {
-      "name": "VerificationRequestCollection",
-      "contents": [
       ]
     }
   ]
