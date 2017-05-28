@@ -7,16 +7,10 @@ import { CareerGoals } from './CareerGoalCollection';
 /** @module api/career/CareerGoalCollectionMethods */
 
 /**
- * The name of the CareerGoals define method.
- * @type {string}
- */
-export const careerGoalsDefineMethodName = 'CareerGoals.define';
-
-/**
  * The Validated method for defining career goals.
  */
 export const careerGoalsDefineMethod = new ValidatedMethod({
-  name: careerGoalsDefineMethodName,
+  name: 'CareerGoals.define',
   validate: new SimpleSchema({
     name: { type: String, optional: false },
     slug: { type: String, optional: false },
@@ -24,27 +18,23 @@ export const careerGoalsDefineMethod = new ValidatedMethod({
     interests: { type: [String], optional: false },
   }).validator(),
   run(goalDefn) {
-    if (!this.userId) {
+    if (!Meteor.isTest && !this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Meteor.isTest && !Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
       }
-    return CareerGoals.define(goalDefn);
+    const goalID = CareerGoals.define(goalDefn);
+    console.log(goalID);
+    return goalID;
   },
 });
-
-/**
- * The name of the CareerGoals update method.
- * @type {string}
- */
-export const careerGoalsUpdateMethodName = 'CareerGoals.update';
 
 /**
  * The ValidatedMethod for updating CareerGoals.
  */
 export const careerGoalsUpdateMethod = new ValidatedMethod({
-  name: careerGoalsUpdateMethodName,
+  name: 'CareerGoals.update',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id },
     name: { type: String },
@@ -63,16 +53,10 @@ export const careerGoalsUpdateMethod = new ValidatedMethod({
 });
 
 /**
- * The name of the CareerGoals removeIt method.
- * @type {string}
- */
-export const careerGoalsRemoveItMethodName = 'CareerGoals.removeIt';
-
-/**
  * The ValidatedMethod for removing CareerGoals.
  */
 export const careerGoalsRemoveItMethod = new ValidatedMethod({
-  name: careerGoalsRemoveItMethodName,
+  name: 'CareerGoals.removeIt',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id, optional: false },
   }).validator(),

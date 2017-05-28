@@ -1,8 +1,7 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
-import { coursesDefineMethodName } from '../../../api/course/CourseCollection.methods';
+import { coursesDefineMethod } from '../../../api/course/CourseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -42,7 +41,7 @@ Template.Add_Course_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      Meteor.call(coursesDefineMethodName, newData, function callback(error) {
+      coursesDefineMethod.call(newData, (error) => {
         if (error) {
           FormUtils.indicateError(instance);
         } else {

@@ -1,8 +1,7 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { careerGoalsUpdateMethodName } from '../../../api/career/CareerGoalCollection.methods';
+import { careerGoalsUpdateMethod } from '../../../api/career/CareerGoalCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -47,8 +46,15 @@ Template.Update_Career_Goal_Widget.events({
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       // CareerGoals.update(instance.data.updateID.get(), { $set: updatedData });
       updatedData.id = instance.data.updateID.get();
-      Meteor.call(careerGoalsUpdateMethodName, updatedData);
-      FormUtils.indicateSuccess(instance, event);
+      careerGoalsUpdateMethod.call(updatedData, (error, result) => {
+        if (error) {
+          console.log('Error updating CareerGoal: ', error);
+          FormUtils.indicateError(instance);
+        }
+        if (result) {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

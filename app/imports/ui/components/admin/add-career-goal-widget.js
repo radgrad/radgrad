@@ -1,8 +1,6 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-// import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { careerGoalsDefineMethodName } from '../../../api/career/CareerGoalCollection.methods';
+import { careerGoalsDefineMethod } from '../../../api/career/CareerGoalCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -34,8 +32,15 @@ Template.Add_Career_Goal_Widget.events({
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       // CareerGoals.define(newData);
-      Meteor.call(careerGoalsDefineMethodName, newData);
-      FormUtils.indicateSuccess(instance, event);
+      careerGoalsDefineMethod.call(newData, (error, result) => {
+        if (error) {
+          console.log('Error defining CareerGoal: ', error);
+          FormUtils.indicateError(instance);
+        }
+        if (result) {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

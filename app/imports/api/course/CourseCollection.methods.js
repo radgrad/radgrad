@@ -7,16 +7,10 @@ import { Courses } from './CourseCollection';
 /** @module api/career/CourseCollectionMethods */
 
 /**
- * The name of the Courses define method.
- * @type {string}
- */
-export const coursesDefineMethodName = 'Courses.define';
-
-/**
  * The Validated method for defining career goals.
  */
 export const coursesDefineMethod = new ValidatedMethod({
-  name: coursesDefineMethodName,
+  name: 'Courses.define',
   validate: new SimpleSchema({
     name: { type: String, optional: false },
     slug: { type: String, optional: false },
@@ -40,16 +34,10 @@ export const coursesDefineMethod = new ValidatedMethod({
 });
 
 /**
- * The name of the Courses update method.
- * @type {string}
- */
-export const coursesUpdateMethodName = 'Courses.update';
-
-/**
  * The ValidatedMethod for updating Courses.
  */
 export const coursesUpdateMethod = new ValidatedMethod({
-  name: coursesUpdateMethodName,
+  name: 'Courses.update',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id },
     name: { type: String },
@@ -74,16 +62,10 @@ export const coursesUpdateMethod = new ValidatedMethod({
 });
 
 /**
- * The name of the Courses removeIt method.
- * @type {string}
- */
-export const coursesRemoveItMethodName = 'Courses.removeIt';
-
-/**
  * The ValidatedMethod for removing Courses.
  */
 export const coursesRemoveItMethod = new ValidatedMethod({
-  name: coursesRemoveItMethodName,
+  name: 'Courses.removeIt',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id, optional: false },
   }).validator(),

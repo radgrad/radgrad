@@ -1,9 +1,8 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
-import { coursesUpdateMethodName } from '../../../api/course/CourseCollection.methods';
+import { coursesUpdateMethod } from '../../../api/course/CourseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -62,7 +61,7 @@ Template.Update_Course_Widget.events({
     if (instance.context.isValid()) {
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       updatedData.id = instance.data.updateID.get();
-      Meteor.call(coursesUpdateMethodName, updatedData, function callback(error) {
+      coursesUpdateMethod.call(updatedData, (error) => {
         if (error) {
           FormUtils.indicateError(instance);
         } else {

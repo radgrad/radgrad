@@ -1,8 +1,7 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { careerGoalsRemoveItMethodName } from '../../../api/career/CareerGoalCollection.methods';
+import { careerGoalsRemoveItMethod } from '../../../api/career/CareerGoalCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
@@ -45,9 +44,17 @@ Template.List_Career_Goals_Widget.helpers({
 
 Template.List_Career_Goals_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
-  'click .jsDelete': function (event) {
+  'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    Meteor.call(careerGoalsRemoveItMethodName, { id });
+    careerGoalsRemoveItMethod.call({ id }, (error, result) => {
+      if (error) {
+        console.log('Error deleting CareerGoal: ', error);
+        FormUtils.indicateError(instance);
+      }
+      if (result) {
+        FormUtils.indicateSuccess(instance, event);
+      }
+    });
   },
 });
