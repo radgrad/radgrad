@@ -6,6 +6,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { academicPlansDefineMethod } from '../../../api/degree-plan/AcademicPlanCollection.methods';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
+import { planChoicesDefineMethod } from '../../../api/degree-plan/PlanChoiceCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
@@ -167,7 +168,11 @@ Template.Academic_Plan_Builder_Widget.events({
         if (from === 'table' || from === 'combine') {
           removeElement(id);
         }
-        PlanChoices.define(slug);
+        planChoicesDefineMethod.call({ choice: slug }, (error) => {
+          if (error) {
+            console.log('Error defining PlanChoice', error);
+          }
+        });
       },
     }).modal('show');
   },
