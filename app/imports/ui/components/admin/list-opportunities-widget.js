@@ -6,6 +6,7 @@ import { moment } from 'meteor/momentjs:moment';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { opportunitiesRemoveItMethod } from '../../../api/opportunity/OpportunityCollection.methods';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -91,6 +92,8 @@ Template.List_Opportunities_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Opportunities.removeIt(id);
+    opportunitiesRemoveItMethod.call({ id }, (error) => {
+      console.log('Error removing Opportunity', error);
+    });
   },
 });

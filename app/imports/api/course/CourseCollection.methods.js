@@ -25,10 +25,10 @@ export const coursesDefineMethod = new ValidatedMethod({
   }).validator(),
   run(courseDefn) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Courses.');
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Courses.');
       }
     return Courses.define(courseDefn);
   },
@@ -53,10 +53,10 @@ export const coursesUpdateMethod = new ValidatedMethod({
   }).validator(),
   run(goalUpdate) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update Courses.');
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to update Courses.');
       }
     return Courses.update(goalUpdate.id, { $set: goalUpdate });
   },
@@ -72,10 +72,10 @@ export const coursesRemoveItMethod = new ValidatedMethod({
   }).validator(),
   run(removeArgs) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to remove Courses.');
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to remove Courses.');
       }
     return Courses.removeIt(removeArgs.id);
   },

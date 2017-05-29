@@ -6,7 +6,7 @@ import { ROLE } from '../../../api/role/Role.js';
 import { feedsDefineNewOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { opportunitiesDefineMethod } from '../../../api/opportunity/OpportunityCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
@@ -68,8 +68,13 @@ Template.Add_Opportunity_Widget.events({
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(newData);
-      Opportunities.define(newData);
-      FormUtils.indicateSuccess(instance, event);
+      opportunitiesDefineMethod.call(newData, (error) => {
+        if (error) {
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

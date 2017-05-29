@@ -81,7 +81,7 @@ export const courseInstanceUpdateGradeMethod = new ValidatedMethod({
   }).validator(),
   run(args) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update grades.');
     }
     CourseInstances.updateGrade(args.courseInstanceID, args.grade);
   },

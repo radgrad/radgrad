@@ -5,6 +5,7 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { opportunitiesUpdateMethod } from '../../../api/opportunity/OpportunityCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -73,8 +74,14 @@ Template.Update_Opportunity_Widget.events({
       FormUtils.renameKey(updatedData, 'semesters', 'semesterIDs');
       FormUtils.renameKey(updatedData, 'opportunityType', 'opportunityTypeID');
       FormUtils.renameKey(updatedData, 'sponsor', 'sponsorID');
-      Opportunities.update(instance.data.updateID.get(), { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updatedData.id = instance.data.updateID.get();
+      opportunitiesUpdateMethod.call(updatedData, (error) => {
+        if (error) {
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

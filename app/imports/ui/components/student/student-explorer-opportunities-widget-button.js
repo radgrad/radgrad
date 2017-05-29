@@ -3,6 +3,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import {
+  opportunityInstancesDefineMethod,
+  opportunityInstancesRemoveItMethod,
+} from '../../../api/opportunity/OpportunityInstanceCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -70,7 +74,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
       verified: false,
       student: username,
     };
-    OpportunityInstances.define(oi);
+    opportunityInstancesDefineMethod.call(oi);
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
@@ -87,7 +91,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
     if (oi > 1) {
       console.log('Too many opportunity instances found for a single semester.');
     }
-    OpportunityInstances.removeIt(oi[0]._id);
+    opportunityInstancesRemoveItMethod.call({ id: oi[0]._id });
   },
 });
 
