@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Courses } from './CourseCollection';
+import { ROLE } from '../role/Role';
 
 /** @module api/career/CourseCollectionMethods */
 
@@ -26,7 +27,7 @@ export const coursesDefineMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
       }
     return Courses.define(courseDefn);
@@ -54,7 +55,7 @@ export const coursesUpdateMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
       }
     return Courses.update(goalUpdate.id, { $set: goalUpdate });
@@ -73,7 +74,7 @@ export const coursesRemoveItMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
       }
     return Courses.removeIt(removeArgs.id);

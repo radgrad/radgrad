@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { CareerGoals } from './CareerGoalCollection';
+import { ROLE } from '../role/Role';
 
 /** @module api/career/CareerGoalCollectionMethods */
 
@@ -21,7 +22,7 @@ export const careerGoalsDefineMethod = new ValidatedMethod({
     if (!Meteor.isTest && !this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
     } else
-      if (!Meteor.isTest && !Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Meteor.isTest && !Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
       }
     const goalID = CareerGoals.define(goalDefn);
@@ -45,7 +46,7 @@ export const careerGoalsUpdateMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
       }
     return CareerGoals.update(goalUpdate.id, { $set: goalUpdate });
@@ -64,7 +65,7 @@ export const careerGoalsRemoveItMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
       }
     return CareerGoals.removeIt(removeArgs.id);

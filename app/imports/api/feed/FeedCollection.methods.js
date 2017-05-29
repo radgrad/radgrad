@@ -13,7 +13,7 @@ export const feedsDefineNewUserMethod = new ValidatedMethod({
   validate: new SimpleSchema({
     user: { type: [String], optional: false },
     feedType: { type: String, optional: false },
-    timestamp: { type: String, optional: true },
+    timestamp: { type: Date, optional: true },
   }).validator(),
   run(planDefn) {
     if (!this.userId) {
@@ -31,7 +31,7 @@ export const feedsDefineNewCourseMethod = new ValidatedMethod({
   validate: new SimpleSchema({
     course: { type: String, optional: false },
     feedType: { type: String, optional: false },
-    timestamp: { type: String, optional: true },
+    timestamp: { type: Date, optional: true },
   }).validator(),
   run(planDefn) {
     if (!this.userId) {
@@ -49,7 +49,7 @@ export const feedsDefineNewOpportunityMethod = new ValidatedMethod({
   validate: new SimpleSchema({
     opportunity: { type: String, optional: false },
     feedType: { type: String, optional: false },
-    timestamp: { type: String, optional: true },
+    timestamp: { type: Date, optional: true },
   }).validator(),
   run(planDefn) {
     if (!this.userId) {
@@ -68,7 +68,7 @@ export const feedsDefineNewVerifiedOpportunityMethod = new ValidatedMethod({
     user: { type: [String], optional: false },
     opportunity: { type: String, optional: false },
     feedType: { type: String, optional: false },
-    timestamp: { type: String, optional: true },
+    timestamp: { type: Date, optional: true },
   }).validator(),
   run(planDefn) {
     if (!this.userId) {
@@ -87,7 +87,7 @@ export const feedsDefineNewCourseReviewMethod = new ValidatedMethod({
     user: { type: [String], optional: false },
     course: { type: String, optional: false },
     feedType: { type: String, optional: false },
-    timestamp: { type: String, optional: true },
+    timestamp: { type: Date, optional: true },
   }).validator(),
   run(planDefn) {
     if (!this.userId) {
@@ -106,7 +106,7 @@ export const feedsDefineNewOpportunityReviewMethod = new ValidatedMethod({
     user: { type: [String], optional: false },
     opportunity: { type: String, optional: false },
     feedType: { type: String, optional: false },
-    timestamp: { type: String, optional: true },
+    timestamp: { type: Date, optional: true },
   }).validator(),
   run(planDefn) {
     if (!this.userId) {

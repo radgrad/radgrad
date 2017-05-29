@@ -5,6 +5,7 @@ import * as CareerGoalMethods from '../../../../api/career/CareerGoalCollection.
 // import { resetDatabaseMethod } from '../../../../api/base/BaseCollection.methods';
 import { makeSampleInterest } from '../../../../api/interest/SampleInterests';
 import { Interests } from '../../../../api/interest/InterestCollection';
+import '../../../../api/career';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */

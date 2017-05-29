@@ -5,7 +5,7 @@ import { processStarCsvData } from './StarProcessor';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
 import { Semesters } from '../semester/SemesterCollection';
-import { AdvisorLogs } from '../log/AdvisorLogCollection';
+import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
 import { Users } from '../user/UserCollection';
 import { getDepartment } from '../course/CourseUtilities';
 
@@ -70,7 +70,11 @@ export function processStudentStarCsvData(advisor, student, csvData) {
   } else {
     text = `${text} course from STAR.`;
   }
-  AdvisorLogs.define({ advisor, student, text });
+  advisorLogsDefineMethod.call({ advisor, student, text }, (error) => {
+    if (error) {
+      console.log('Error creating AdvisorLog', error);
+    }
+  });
 }
 
 // TODO make this a ValidatedMethod.

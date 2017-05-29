@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Interests } from './InterestCollection';
+import { ROLE } from '../role/Role';
 
 /** @module api/interest/InterestCollectionMethods */
 
@@ -21,7 +22,7 @@ export const interestsDefineMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Interests.');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Interests.');
       }
     return Interests.define(helpDefn);
@@ -44,7 +45,7 @@ export const interestsUpdateMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Interests.');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to update Interests.');
       }
     return Interests.update(update.id, { $set: update });
@@ -63,7 +64,7 @@ export const InterestsRemoveItMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to remove Interests.');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to remove Interests.');
       }
     return Interests.removeIt(removeArgs.id);

@@ -3,7 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { ValidUserAccounts } from './ValidUserAccountCollection';
-
+import { ROLE } from '../role/Role';
 
 /** @module api/user/ValidUserAccountCollectionMethods */
 
@@ -18,7 +18,7 @@ export const validUserAccountsDefineMethod = new ValidatedMethod({
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define ValidUserAccounts.');
-    } else if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new ValidUserAccounts.');
     }
     return ValidUserAccounts.define(planDefn);
@@ -37,7 +37,7 @@ export const validUserAccountsUpdateMethod = new ValidatedMethod({
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update ValidUserAccounts.');
-    } else if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to update ValidUserAccounts.');
     }
     return ValidUserAccounts.update(update.id, { $set: update });
@@ -55,7 +55,7 @@ export const validUserAccountsRemoveItMethod = new ValidatedMethod({
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete ValidUserAccounts.');
-    } else if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to remove new ValidUserAccounts.');
     }
     return ValidUserAccounts.removeIt(removeArgs.id);

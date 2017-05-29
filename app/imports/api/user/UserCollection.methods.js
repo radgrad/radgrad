@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Users } from './UserCollection';
+import { ROLE } from '../role/Role';
 
 /** @module api/user/UserCollectionMethods */
 
@@ -31,7 +32,7 @@ export const defineUserMethod = new ValidatedMethod({
   run(userDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
-    } else if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Users.');
     }
     return Users.define(userDefn);
@@ -63,7 +64,7 @@ export const updateUserMethod = new ValidatedMethod({
   run(userDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Users.');
-    } else if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to update Users.');
     }
     return Users.update(userDefn);

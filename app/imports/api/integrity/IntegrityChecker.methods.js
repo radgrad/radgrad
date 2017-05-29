@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { checkIntegrity } from './IntegrityChecker.js';
+import { ROLE } from '../role/Role';
 
 /** @module api/integrity/IntegrityCheckerMethods */
 
@@ -14,7 +15,7 @@ export const checkIntegrityMethod = new ValidatedMethod({
   run() {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to check integrity.');
-    } else if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to check integrity.');
     }
     return checkIntegrity();

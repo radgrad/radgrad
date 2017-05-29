@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Feedbacks } from './FeedbackCollection';
+import { ROLE } from '../role/Role';
 
 /** @module api/feedback/FeedbackCollectionMethods */
 
@@ -22,7 +23,7 @@ export const feedbacksDefineMethod = new ValidatedMethod({
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feedbacks.');
-    } else if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Feedbacks.');
     }
     return Feedbacks.define(planDefn);
@@ -44,7 +45,7 @@ export const feedbacksUpdateMethod = new ValidatedMethod({
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Feedbacks.');
-    } else if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to update new Feedbacks.');
     }
     return Feedbacks.update(update.id, { $set: update });
@@ -62,7 +63,7 @@ export const feedbacksRemoveItMethod = new ValidatedMethod({
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete Feedbacks.');
-    } else if (!Roles.userIsInRole(this.userId, ['ADMIN', 'ADVISOR'])) {
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to remove new Feedbacks.');
     }
     return Feedbacks.removeIt(removeArgs.id);
