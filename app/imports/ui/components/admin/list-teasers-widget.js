@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
+import { teasersRemoveItMethod } from '../../../api/teaser/TeaserCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
@@ -51,6 +52,10 @@ Template.List_Teasers_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Teasers.removeIt(id);
+    teasersRemoveItMethod.call({ id }, (error) => {
+      if (error) {
+        console.log('Error removing Teaser', error);
+      }
+    });
   },
 });

@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Teasers } from '../../../api/teaser/TeaserCollection';
+import { teasersDefineMethod } from '../../../api/teaser/TeaserCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -40,8 +40,14 @@ Template.Add_Teaser_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      Teasers.define(newData);
-      FormUtils.indicateSuccess(instance, event);
+      teasersDefineMethod.call(newData, (error) => {
+        if (error) {
+          console.log('Error defining Teaser', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }
