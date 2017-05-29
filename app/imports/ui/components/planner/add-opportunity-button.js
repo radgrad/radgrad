@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { opportunityInstancesRemoveItMethod } from '../../../api/opportunity/OpportunityInstanceCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { plannerKeys } from './academic-plan';

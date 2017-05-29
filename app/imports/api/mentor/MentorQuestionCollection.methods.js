@@ -51,9 +51,47 @@ export const mentorQuestionsUpdateMethod = new ValidatedMethod({
 });
 
 /**
+ * The ValidatedMethod for calling MentorQuestions.updateModerated.
+ */
+export const mentorQuestionsUpdateModeratedMethod = new ValidatedMethod({
+  name: 'MentorQuestions.updateModerated',
+  validate: new SimpleSchema({
+    questionID: { type: SimpleSchema.RegEx.Id },
+    moderated: { type: Boolean },
+    visible: { type: Boolean },
+    moderatorComments: { type: String },
+  }).validator(),
+  run(update) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update MentorQuestions.');
+    }
+    // eslint-disable-next-line
+    return MentorQuestions.updateModerated(update.questionID, update.moderated, update.visible, update.moderatorComments);
+  },
+});
+
+/**
+ * The ValidatedMethod for calling MentorQuestions.updateSlug.
+ */
+export const mentorQuestionsUpdateSlugMethod = new ValidatedMethod({
+  name: 'MentorQuestions.updateSlug',
+  validate: new SimpleSchema({
+    questionID: { type: SimpleSchema.RegEx.Id },
+    slug: { type: String },
+  }).validator(),
+  run(update) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update MentorQuestions.');
+    }
+    // eslint-disable-next-line
+    return MentorQuestions.updateSlug(update.questionID, update.slug);
+  },
+});
+
+/**
  * The validated method for removing MentorQuestions.
  */
-export const MentorQuestionsRemoveItMethod = new ValidatedMethod({
+export const mentorQuestionsRemoveItMethod = new ValidatedMethod({
   name: 'MentorQuestions.removeIt',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id, optional: false },

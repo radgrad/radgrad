@@ -159,8 +159,7 @@ Template.Semester_List_2.events({
               // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
             }
           });
-        } else {
-          const semesterID = Template.instance().localState.get('semester')._id;
+        } else
           if (OpportunityInstances.isDefined(id)) {
             // There's gotta be a better way of doing this.
             const data = {};
@@ -182,7 +181,6 @@ Template.Semester_List_2.events({
               }
             });
           }
-        }
       }
     }
   },

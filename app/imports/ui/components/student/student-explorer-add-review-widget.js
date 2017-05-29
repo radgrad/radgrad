@@ -6,7 +6,7 @@ import { feedsDefineNewCourseReviewMethod,
   feedsDefineNewOpportunityReviewMethod } from '../../../api/feed/FeedCollection.methods';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Reviews } from '../../../api/review/ReviewCollection.js';
+import { reviewsDefineMethod } from '../../../api/review/ReviewCollection.methods';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { reviewRatingsObjects } from '../shared/review-ratings';
@@ -63,8 +63,14 @@ Template.Student_Explorer_Add_Review_Widget.events({
       newData.student = getRouteUserName();
       newData.reviewType = this.reviewType;
       newData.reviewee = this.event._id;
-      Reviews.define(newData);
-      FormUtils.indicateSuccess(instance, event);
+      reviewsDefineMethod.call(newData, (error) => {
+        if (error) {
+          console.log('Error defining Review', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
       let feedDefinition;
       if (this.reviewType === 'course') {
         feedDefinition = {
