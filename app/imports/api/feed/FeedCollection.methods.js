@@ -117,7 +117,7 @@ export const feedsDefineNewOpportunityReviewMethod = new ValidatedMethod({
 });
 
 /**
- * The ValidatedMethod for updating PlanChices.
+ * The ValidatedMethod for updating Feeds.
  */
 export const feedsUpdateMethod = new ValidatedMethod({
   name: 'Feeds.update',
@@ -141,7 +141,41 @@ export const feedsUpdateMethod = new ValidatedMethod({
 });
 
 /**
- * The ValidatedMethod for removing PlanChices.
+ * The ValidatedMethod for updating Feed new users.
+ */
+export const feedsUpdateNewUserMethod = new ValidatedMethod({
+  name: 'Feeds.updateNewUser',
+  validate: new SimpleSchema({
+    username: { type: String },
+    existingFeedID: { type: SimpleSchema.RegEx.Id },
+  }).validator(),
+  run(update) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update Feeds.');
+    }
+    return Feeds.updateNewUser(update.username, update.existingFeedID);
+  },
+});
+
+/**
+ * The Validated method for updating NewVerifiedOpportunity Feeds.
+ */
+export const feedsUpdateVerifiedOpportunityMethod = new ValidatedMethod({
+  name: 'Feeds.updateVerifiedOpportunity',
+  validate: new SimpleSchema({
+    username: { type: String },
+    existingFeedID: { type: SimpleSchema.RegEx.Id },
+  }).validator(),
+  run(update) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
+    }
+    return Feeds.updateVerifiedOpportunity(update.username, update.existingFeedID);
+  },
+});
+
+/**
+ * The ValidatedMethod for removing Feeds.
  */
 export const feedsRemoveItMethod = new ValidatedMethod({
   name: 'Feeds.removeIt',

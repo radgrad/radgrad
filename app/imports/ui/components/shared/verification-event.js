@@ -3,12 +3,18 @@ import { Template } from 'meteor/templating';
 import { moment } from 'meteor/momentjs:moment';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { opportunityInstancesDefineMethod } from '../../../api/opportunity/OpportunityInstanceCollection.methods';
+import {
+  opportunityInstancesDefineMethod,
+  opportunityInstancesUpdateVerifiedMethod,
+} from '../../../api/opportunity/OpportunityInstanceCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
-import { feedsDefineNewVerifiedOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
+import {
+  feedsDefineNewVerifiedOpportunityMethod,
+  feedsUpdateVerifiedOpportunityMethod,
+} from '../../../api/feed/FeedCollection.methods';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import {
   verificationRequestsDefineMethod,
@@ -70,8 +76,12 @@ Template.Verification_Event.events({
                       }
                     });
                     if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
-                      Feeds.updateVerifiedOpportunity(studentDoc.username,
-                        Feeds.checkPastDayFeed('verified-opportunity', opportunityID));
+                      feedsUpdateVerifiedOpportunityMethod({ username: studentDoc.username,
+                        existingFeedID: Feeds.checkPastDayFeed('verified-opportunity', opportunityID) }, (err2) => {
+                        if (err2) {
+                          console.log('Error updating Verified Opportunity Feed', err2);
+                        }
+                      });
                     } else {
                       const feedDefinition = {
                         user: [studentDoc.username],
@@ -87,7 +97,10 @@ Template.Verification_Event.events({
         });
       } else {
         opportunityInstance = opportunityInstances[0];
-        OpportunityInstances.updateVerified(opportunityInstance._id, true);
+        opportunityInstancesUpdateVerifiedMethod.call({
+          opportunityInstanceID: opportunityInstance._id,
+          verified: true,
+        });
         verificationRequestsDefineMethod.call({
           student: studentDoc.username,
           opportunityInstance,
@@ -113,8 +126,14 @@ Template.Verification_Event.events({
               }
             });
             if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
-              Feeds.updateVerifiedOpportunity(studentDoc.username,
-                  Feeds.checkPastDayFeed('verified-opportunity', opportunityID));
+              feedsUpdateVerifiedOpportunityMethod.call({
+                username: studentDoc.username,
+                existingFeedID: Feeds.checkPastDayFeed('verified-opportunity', opportunityID),
+              }, (err1) => {
+                if (err1) {
+                  console.log('Error updating verified opportunity feed', err1);
+                }
+              });
             } else {
               const feedDefinition = {
                 user: [studentDoc.username],

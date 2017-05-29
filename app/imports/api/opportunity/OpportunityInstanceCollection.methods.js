@@ -47,6 +47,40 @@ export const opportunityInstancesUpdateMethod = new ValidatedMethod({
 });
 
 /**
+ * The ValidatedMethod for updating OpportunityInstance semesters.
+ */
+export const opportunityInstancesUpdateSemesterMethod = new ValidatedMethod({
+  name: 'OpportunityInstances.updateSemester',
+  validate: new SimpleSchema({
+    opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
+    semesterID: { type: SimpleSchema.RegEx.Id },
+  }).validator(),
+  run(update) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update OpportunityInstances.');
+    }
+    return OpportunityInstances.updateSemester(update.opportunityInstanceID, update.semesterID);
+  },
+});
+
+/**
+ * The ValidatedMethod for updating OpportunityInstance verified status.
+ */
+export const opportunityInstancesUpdateVerifiedMethod = new ValidatedMethod({
+  name: 'OpportunityInstances.updateSemester',
+  validate: new SimpleSchema({
+    opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
+    verified: { type: Boolean },
+  }).validator(),
+  run(update) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update OpportunityInstances.');
+    }
+    return OpportunityInstances.updateSemester(update.opportunityInstanceID, update.verified);
+  },
+});
+
+/**
  * The ValidatedMethod for removing OpportunityInstances.
  */
 export const opportunityInstancesRemoveItMethod = new ValidatedMethod({

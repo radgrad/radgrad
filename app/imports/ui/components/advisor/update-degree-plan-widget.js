@@ -14,7 +14,10 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { updateUserMethod } from '../../../api/user/UserCollection.methods';
+import {
+  updateUserMethod,
+  updateUserRoleMethod,
+} from '../../../api/user/UserCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
@@ -216,7 +219,16 @@ Template.Update_Degree_Plan_Widget.events({
         instance.errorClass.set('');
       });
       if (oldRole !== updatedData.role) {
-        Users.updateRole(Template.currentData().studentID.get(), [updatedData.role], oldRole);
+        const update = {
+          userID: Template.currentData().studentID.get(),
+          newRole: [updatedData.role],
+          oldRole,
+        };
+        updateUserRoleMethod.call(update, (error) => {
+          if (error) {
+            console.log('Error updating user role', error);
+          }
+        });
       }
     } else {
       FormUtils.indicateError(instance);

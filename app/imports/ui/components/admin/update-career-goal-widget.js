@@ -44,7 +44,6 @@ Template.Update_Career_Goal_Widget.events({
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      // CareerGoals.update(instance.data.updateID.get(), { $set: updatedData });
       updatedData.id = instance.data.updateID.get();
       careerGoalsUpdateMethod.call(updatedData, (error, result) => {
         if (error) {

@@ -71,4 +71,23 @@ export const updateUserMethod = new ValidatedMethod({
   },
 });
 
+/**
+ * The Users update validated method.
+ */
+export const updateUserRoleMethod = new ValidatedMethod({
+  name: 'Users.updateRole',
+  validate: new SimpleSchema({
+    userID: { type: SimpleSchema.RegEx.Id },
+    newRole: { type: [String] },
+    oldRole: { type: String },
+  }).validator(),
+  run(definition) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update Users.');
+    } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+      throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to update Users.');
+    }
+    return Users.updateRole(definition.userID, definition.newRole, definition.oldRole);
+  },
+});
 // TODO No way to remove Users?

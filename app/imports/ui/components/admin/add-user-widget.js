@@ -4,7 +4,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
-import { feedsDefineNewUserMethod } from '../../../api/feed/FeedCollection.methods';
+import {
+  feedsDefineNewUserMethod,
+  feedsUpdateNewUserMethod,
+} from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
 import { defineUserMethod } from '../../../api/user/UserCollection.methods';
@@ -67,7 +70,12 @@ Template.Add_User_Widget.events({
           console.log('Error during new user creation: ', error);
         }
         if (Feeds.checkPastDayFeed('new-user')) {
-          Feeds.updateNewUser(newData.slug, Feeds.checkPastDayFeed('new-user'));
+          feedsUpdateNewUserMethod({ username: newData.slug, existingFeedID: Feeds.checkPastDayFeed('new-user') },
+              (err) => {
+                if (err) {
+                  console.log('Error updating new user Feed', err);
+                }
+              });
         } else {
           const feedDefinition = {
             user: [newData.slug],

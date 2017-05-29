@@ -5,7 +5,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
-import { feedsDefineNewUserMethod } from '../../../api/feed/FeedCollection.methods';
+import {
+  feedsDefineNewUserMethod,
+  feedsUpdateNewUserMethod,
+} from '../../../api/feed/FeedCollection.methods';
 import { Users } from '../../../api/user/UserCollection.js';
 import { defineUserMethod } from '../../../api/user/UserCollection.methods';
 import { validUserAccountsDefineMethod } from '../../../api/user/ValidUserAccountCollection.methods';
@@ -216,7 +219,12 @@ Template.Student_Selector_Tabs.events({
             }
           } else {
             if (Feeds.checkPastDayFeed('new-user')) {
-              Feeds.updateNewUser(userName, Feeds.checkPastDayFeed('new-user'));
+              feedsUpdateNewUserMethod.call({ username: userName, existingFeedID: Feeds.checkPastDayFeed('new-user') },
+                  (err) => {
+                    if (err) {
+                      console.log('Error updating Feed user name.', err);
+                    }
+                  });
             } else {
               const feedDefinition = {
                 user: [userName],
