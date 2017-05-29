@@ -10,6 +10,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import { verificationRequestsDefineMethod } from '../../../api/verification/VerificationRequestCollection.methods';
 import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -511,7 +512,11 @@ Template.Inspector.events({
     const id = event.target.id;
     const opportunityInstance = id;
     const student = getRouteUserName();
-    VerificationRequests.define({ student, opportunityInstance });
+    verificationRequestsDefineMethod.call({ student, opportunityInstance }, (error) => {
+      if (error) {
+        console.log('Error defining VerificationRequest', error);
+      }
+    });
   },
 });
 

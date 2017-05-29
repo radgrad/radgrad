@@ -6,6 +6,9 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import {
+  verificationRequestsUpdateStatusMethod,
+} from '../../../api/verification/VerificationRequestCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
@@ -92,7 +95,11 @@ Template.Verification_Requests_Pending.events({
     request.processed.push(processRecord);
     const status = request.status;
     const processed = request.processed;
-    VerificationRequests.updateStatus(requestID, status, processed);
+    verificationRequestsUpdateStatusMethod.call({ id: requestID, status, processed }, (error) => {
+      if (error) {
+        console.log('Error updating VerificationRequest status', error);
+      }
+    });
   },
 });
 

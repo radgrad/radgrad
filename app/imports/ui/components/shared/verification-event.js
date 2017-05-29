@@ -9,6 +9,10 @@ import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
 import { feedsDefineNewVerifiedOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import {
+  verificationRequestsDefineMethod,
+  verificationRequestsUpdateStatusMethod,
+} from '../../../api/verification/VerificationRequestCollection.methods';
 
 // /** @module ui/components/shared/Verification_Event */
 
@@ -43,32 +47,41 @@ Template.Verification_Event.events({
         opportunityInstance = opportunityInstances[0];
         OpportunityInstances.updateVerified(opportunityInstance._id, true);
       }
-      const requestID = VerificationRequests.define({ student: studentDoc.username, opportunityInstance });
-      const request = VerificationRequests.findDoc(requestID);
-      request.status = VerificationRequests.ACCEPTED;
-      const processRecord = {};
-      processRecord.date = new Date();
-      processRecord.status = VerificationRequests.ACCEPTED;
-      processRecord.verifier = Users.getFullName(Meteor.userId());
-      const studentFullName = Users.getFullName(studentDoc._id);
-      processRecord.feedback = `${studentFullName} attended ${opportunity.name}`;
-      request.processed.push(processRecord);
-      const status = VerificationRequests.ACCEPTED;
-      const processed = request.processed;
-      VerificationRequests.updateStatus(requestID, status, processed);
-
-      if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
-        Feeds.updateVerifiedOpportunity(studentDoc.username,
-            Feeds.checkPastDayFeed('verified-opportunity', opportunityID));
-      } else {
-        const feedDefinition = {
-          user: [studentDoc.username],
-          opportunity: opportunitySlug,
-          semester: semesterSlug,
-          feedType: 'verified-opportunity',
-        };
-        feedsDefineNewVerifiedOpportunityMethod.call(feedDefinition);
-      }
+      verificationRequestsDefineMethod.call({ student: studentDoc.username, opportunityInstance }, (error, result) => {
+        if (error) {
+          console.log('Error defining VerificationRequest', error);
+        } else {
+          const requestID = result;
+          const request = VerificationRequests.findDoc(requestID);
+          request.status = VerificationRequests.ACCEPTED;
+          const processRecord = {};
+          processRecord.date = new Date();
+          processRecord.status = VerificationRequests.ACCEPTED;
+          processRecord.verifier = Users.getFullName(Meteor.userId());
+          const studentFullName = Users.getFullName(studentDoc._id);
+          processRecord.feedback = `${studentFullName} attended ${opportunity.name}`;
+          request.processed.push(processRecord);
+          const status = VerificationRequests.ACCEPTED;
+          const processed = request.processed;
+          verificationRequestsUpdateStatusMethod.call({ requestID, status, processed }, (err) => {
+            if (err) {
+              console.log('Error updating VerificationRequest status', err);
+            }
+          });
+          if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
+            Feeds.updateVerifiedOpportunity(studentDoc.username,
+                Feeds.checkPastDayFeed('verified-opportunity', opportunityID));
+          } else {
+            const feedDefinition = {
+              user: [studentDoc.username],
+              opportunity: opportunitySlug,
+              semester: semesterSlug,
+              feedType: 'verified-opportunity',
+            };
+            feedsDefineNewVerifiedOpportunityMethod.call(feedDefinition);
+          }
+        }
+      });
     } catch (e) {
       alert(`${student} is not a valid student. ${e}`); // eslint-disable-line no-undef, no-alert
     }
