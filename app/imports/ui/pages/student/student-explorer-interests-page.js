@@ -9,7 +9,6 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
@@ -170,7 +169,6 @@ Template.Student_Explorer_Interests_Page.helpers({
   descriptionPairs(interest) {
     return [
       { label: 'Description', value: interest.description },
-      { label: 'More Information', value: makeLink(interest.moreInformation) },
       { label: 'Related Career Goals', value: careerGoals(interest) },
       { label: 'Related Courses', value: courses(interest) },
       { label: 'Related Opportunities', value: opportunities(interest) },

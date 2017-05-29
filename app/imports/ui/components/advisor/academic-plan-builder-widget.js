@@ -1,17 +1,18 @@
-/* global document */
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
+import { academicPlansDefineMethod } from '../../../api/degree-plan/AcademicPlanCollection.methods';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
+import { planChoicesDefineMethod } from '../../../api/degree-plan/PlanChoiceCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { buildSimpleName, getAllElementsWithAttribute } from '../../../api/degree-plan/PlanChoiceUtilities';
 
+/* global document */
 // /** @module ui/components/advisor/Academic_Plan_Builder_Widget */
 
 const addSchema = new SimpleSchema({
@@ -167,7 +168,11 @@ Template.Academic_Plan_Builder_Widget.events({
         if (from === 'table' || from === 'combine') {
           removeElement(id);
         }
-        PlanChoices.define(slug);
+        planChoicesDefineMethod.call({ choice: slug }, (error) => {
+          if (error) {
+            console.log('Error defining PlanChoice', error);
+          }
+        });
       },
     }).modal('show');
   },
@@ -197,12 +202,13 @@ Template.Academic_Plan_Builder_Widget.events({
         });
       });
       // console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
-      try {
-        AcademicPlans.define({ degreeSlug, name, semester, coursesPerSemester, courseList });
-        FormUtils.indicateSuccess(instance, event);
-      } catch (e) {
-        FormUtils.indicateError(instance);
-      }
+      academicPlansDefineMethod.call({ degreeSlug, name, semester, coursesPerSemester, courseList }, (error) => {
+        if (error) {
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

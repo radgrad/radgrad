@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { RadGrad } from '../../api/radgrad/radgrad';
-import { getLoadFileAge, loadCollection } from '../../api/test/test-utilities';
+import { getRestoreFileAge, loadCollection } from '../../api/test/test-utilities';
 
 /* global Assets */
 
@@ -38,7 +38,7 @@ function initializeDB() { // eslint-disable-line
   Meteor.startup(() => {
     if (totalDocuments() === 0) {
       const loadFileName = Meteor.settings.public.databaseRestoreFileName;
-      const loadFileAge = getLoadFileAge(loadFileName);
+      const loadFileAge = getRestoreFileAge(loadFileName);
       console.log(`Loading database from file ${loadFileName}, dumped ${loadFileAge}.`);
       const loadJSON = JSON.parse(Assets.getText(loadFileName));
       // The list of collections, ordered so that they can be sequentially restored.

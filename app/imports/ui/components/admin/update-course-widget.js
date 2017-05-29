@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
+import { coursesUpdateMethod } from '../../../api/course/CourseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -14,7 +15,6 @@ const updateSchema = new SimpleSchema({
   number: { type: String, optional: false },
   creditHrs: { type: Number, optional: true, defaultValue: 3 },
   syllabus: { type: String, optional: true },
-  moreInformation: { type: String, optional: true },
   description: { type: String, optional: false },
   interests: { type: [String], optional: false, minCount: 1 },
   prerequisites: { type: [String], optional: true },
@@ -60,8 +60,14 @@ Template.Update_Course_Widget.events({
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      Courses.update(instance.data.updateID.get(), { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updatedData.id = instance.data.updateID.get();
+      coursesUpdateMethod.call(updatedData, (error) => {
+        if (error) {
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { careerGoalsUpdateMethod } from '../../../api/career/CareerGoalCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -11,7 +12,6 @@ const updateSchema = new SimpleSchema({
   name: { type: String, optional: false },
   description: { type: String, optional: false },
   interests: { type: [String], optional: false, minCount: 1 },
-  moreInformation: { type: String, optional: false },
 });
 
 Template.Update_Career_Goal_Widget.onCreated(function onCreated() {
@@ -44,8 +44,16 @@ Template.Update_Career_Goal_Widget.events({
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      CareerGoals.update(instance.data.updateID.get(), { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updatedData.id = instance.data.updateID.get();
+      careerGoalsUpdateMethod.call(updatedData, (error, result) => {
+        if (error) {
+          console.log('Error updating CareerGoal: ', error);
+          FormUtils.indicateError(instance);
+        }
+        if (result) {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

@@ -89,7 +89,6 @@ Template.Student_Explorer_Courses_Page.helpers({
       { label: 'Credit Hours', value: course.creditHrs },
       { label: 'Description', value: course.description },
       { label: 'Syllabus', value: makeLink(course.syllabus) },
-      { label: 'More Information', value: makeLink(course.moreInformation) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(course.interestIDs)) },
       { label: 'Prerequisites', value: prerequisites(course) },
     ];

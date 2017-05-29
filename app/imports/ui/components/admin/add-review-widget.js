@@ -1,7 +1,8 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Feeds } from '../../../api/feed/FeedCollection';
-import { Reviews } from '../../../api/review/ReviewCollection.js';
+import { feedsDefineNewCourseReviewMethod,
+  feedsDefineNewOpportunityReviewMethod } from '../../../api/feed/FeedCollection.methods';
+import { reviewsDefineMethod } from '../../../api/review/ReviewCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { reviewRatingsObjects } from '../shared/review-ratings';
@@ -51,8 +52,14 @@ Template.Add_Review_Widget.events({
     newData.moderated = (newData.moderated === 'true');
     newData.visible = (newData.visible === 'true');
     if (instance.context.isValid()) {
-      Reviews.define(newData);
-      FormUtils.indicateSuccess(instance, event);
+      reviewsDefineMethod.call(newData, (error) => {
+        if (error) {
+          console.log('Error defining Review', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
       let feedDefinition;
       if (newData.reviewType === 'course') {
         feedDefinition = {
@@ -61,14 +68,14 @@ Template.Add_Review_Widget.events({
           feedType: 'new-course-review',
           timestamp: Date.now(),
         };
-        Feeds.defineNewCourse(feedDefinition);
+        feedsDefineNewCourseReviewMethod.call(feedDefinition);
       } else {
         feedDefinition = {
           user: [newData.student],
           opportunity: newData.reviewee,
           feedType: 'new-opportunity-review',
         };
-        Feeds.defineNewOpportunity(feedDefinition);
+        feedsDefineNewOpportunityReviewMethod.call(feedDefinition);
       }
     } else {
       FormUtils.indicateError(instance);

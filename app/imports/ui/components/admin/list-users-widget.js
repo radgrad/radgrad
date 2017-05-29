@@ -6,6 +6,7 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
+import { removeUserMethod } from '../../../api/user/UserCollection.methods';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -62,6 +63,10 @@ Template.List_Users_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Users.removeIt(id);
+    removeUserMethod.call({ id }, (error) => {
+      if (error) {
+        console.log('Error removing User', error);
+      }
+    });
   },
 });

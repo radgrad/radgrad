@@ -4,6 +4,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { RadGrad } from '../radgrad/radgrad';
 import { removeAllEntities } from './BaseUtilities';
+import { ROLE } from '../role/Role';
 
 /** @module api/base/BaseCollectionMethods */
 
@@ -17,7 +18,7 @@ export const dumpDatabaseMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..');
     } else
-      if (!Roles.userIsInRole(this.userId, ['ADMIN'])) {
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.');
       }
     // Don't do the dump except on server side (disable client-side simulation).

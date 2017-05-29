@@ -4,6 +4,7 @@ import { $ } from 'meteor/jquery';
 import '../../../../../client/lib/semantic-ui/semantic.min';
 import { withRenderedTemplate } from '../../../utilities/test-helpers';
 import { Courses } from '../../../../api/course/CourseCollection';
+import { coursesDefineMethod } from '../../../../api/course/CourseCollection.methods';
 import { makeSampleInterest } from '../../../../api/interest/SampleInterests';
 import { resetDatabaseMethod } from '../../../../api/base/BaseCollection.methods';
 import '../academic-plan.html';
@@ -32,15 +33,20 @@ describe('Add_Course_Button', function test() {
     const description = 'Study algorithms';
     const creditHrs = 3;
     const interests = [makeSampleInterest()];
-    const docID = Courses.define({ name, slug, number, description, creditHrs, interests });
-    const course = Courses.findDoc(docID);
-    const data = {
-      buttonType: 'add',
-      course,
-    };
-    withRenderedTemplate('Add_Course_Button', data, (el) => {
-      expect($(el).find('[draggable]').length).to.equal(1);
-      expect($(el).find('[draggable]').text().trim()).to.equal('ICS 311');
+    coursesDefineMethod.call({ name, slug, number, description, creditHrs, interests }, (error, result) => {
+      if (error) {
+        console.log('Error defining Course', error);
+      } else {
+        const course = Courses.findDoc(result);
+        const data = {
+          buttonType: 'add',
+          course,
+        };
+        withRenderedTemplate('Add_Course_Button', data, (el) => {
+          expect($(el).find('[draggable]').length).to.equal(1);
+          expect($(el).find('[draggable]').text().trim()).to.equal('ICS 311');
+        });
+      }
     });
   });
   it('renders correctly with type remove', function () {

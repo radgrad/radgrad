@@ -5,6 +5,7 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { opportunitiesUpdateMethod } from '../../../api/opportunity/OpportunityCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -13,6 +14,7 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   name: { type: String, optional: false },
+  slug: { type: String },
   eventDate: { type: Date, optional: true },
   description: { type: String, optional: false },
   opportunityType: { type: String, optional: false },
@@ -22,7 +24,6 @@ const updateSchema = new SimpleSchema({
   experience: { type: Number, optional: false, min: 0, max: 100 },
   interests: { type: [String], optional: false, minCount: 1 },
   semesters: { type: [String], optional: false, minCount: 1 },
-  moreInformation: { type: String, optional: false },
   icon: { type: String, optional: true },
 });
 
@@ -69,12 +70,21 @@ Template.Update_Opportunity_Widget.events({
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(updatedData);
+      FormUtils.renameKey(updatedData, 'slug', 'slugID');
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       FormUtils.renameKey(updatedData, 'semesters', 'semesterIDs');
       FormUtils.renameKey(updatedData, 'opportunityType', 'opportunityTypeID');
       FormUtils.renameKey(updatedData, 'sponsor', 'sponsorID');
-      Opportunities.update(instance.data.updateID.get(), { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updatedData.independentStudy = false;
+      updatedData.id = instance.data.updateID.get();
+      opportunitiesUpdateMethod.call(updatedData, (error) => {
+        if (error) {
+          console.log('Error updating Opportunity', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

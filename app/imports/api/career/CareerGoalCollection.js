@@ -32,6 +32,7 @@ class CareerGoalCollection extends BaseSlugCollection {
    *                      slug: 'database-administrator',
    *                      description: 'Wrangler of SQL.',
    *                      interests: ['application-development', 'software-engineering', 'databases'],
+   *                    });
    * @param { Object } description Object with keys name, slug, description, interests.
    * Slug must be globally unique and previously undefined.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
