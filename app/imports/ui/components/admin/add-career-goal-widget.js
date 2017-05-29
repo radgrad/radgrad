@@ -31,7 +31,6 @@ Template.Add_Career_Goal_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      // CareerGoals.define(newData);
       careerGoalsDefineMethod.call(newData, (error, result) => {
         if (error) {
           console.log('Error defining CareerGoal: ', error);
