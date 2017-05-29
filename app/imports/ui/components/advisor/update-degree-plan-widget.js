@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -15,6 +14,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { updateUserMethod } from '../../../api/user/UserCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
@@ -207,7 +207,7 @@ Template.Update_Degree_Plan_Widget.events({
       FormUtils.renameKey(updatedData, 'declaredSemester', 'declaredSemesterID');
       FormUtils.renameKey(updatedData, 'academicPlan', 'academicPlanID');
       FormUtils.renameKey(updatedData, 'slug', 'username');
-      Meteor.call('Users.update', updatedData, (error) => {
+      updateUserMethod.call(updatedData, (error) => {
         if (error) {
           // console.log('Error during user update: ', error);
         }

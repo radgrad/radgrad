@@ -29,32 +29,17 @@ Template.Academic_Plan.onCreated(function academicPlanOnCreated() {
 });
 
 Template.Academic_Plan.helpers({
-  cumIceArgs(year) {
-    return { year };
+  currentSemester() {
+    return Template.instance().data.currentSemester;
   },
-  fallID(year) {
-    return `fall${year.year}`;
+  fallSemester(year) {
+    return Semesters.findDoc(year.semesterIDs[0]);
   },
-  fallArgs(year) {
-    if (Template.instance().data.currentSemester) {
-      const currentSemester = Template.instance().data.currentSemester;
-      const semesterID = year.semesterIDs[0];
-      const semester = Semesters.findDoc(semesterID);
-      const isFuture = true;
-      const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
-      const semesterName = 'Fall';
-      const yearArg = year.year;
-      return {
-        currentSemester,
-        semester,
-        dictionary: Template.instance().state,
-        isFuture,
-        isCurrentSemester,
-        semesterName,
-        year: yearArg,
-      };
-    }
-    return null;
+  springSemester(year) {
+    return Semesters.findDoc(year.semesterIDs[1]);
+  },
+  summerSemester(year) {
+    return Semesters.findDoc(year.semesterIDs[2]);
   },
   getDictionary() {
     return Template.instance().state;
@@ -82,6 +67,36 @@ Template.Academic_Plan.helpers({
     }
     return false;
   },
+  icsCoursesFall(year) {
+    return CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      semesterID: year.semesterIDs[0],
+    }).fetch();
+  },
+  icsCoursesSpring(year) {
+    return CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      semesterID: year.semesterIDs[1],
+    }).fetch();
+  },
+  icsCoursesSummer(year) {
+    return CourseInstances.find({
+      studentID: getUserIdFromRoute(),
+      semesterID: year.semesterIDs[2],
+    }).fetch();
+  },
+  isCurrentSemesterFall(year) {
+    const semester = Semesters.findDoc(year.semesterIDs[0]);
+    return semester.semesterNumber === Template.instance().data.currentSemester.semesterNumber;
+  },
+  isCurrentSemesterSpring(year) {
+    const semester = Semesters.findDoc(year.semesterIDs[1]);
+    return semester.semesterNumber === Template.instance().data.currentSemester.semesterNumber;
+  },
+  isCurrentSemesterSummer(year) {
+    const semester = Semesters.findDoc(year.semesterIDs[2]);
+    return semester.semesterNumber === Template.instance().data.currentSemester.semesterNumber;
+  },
   isPastFall(year) {
     const semester = Semesters.findDoc(year.semesterIDs[0]);
     return semester.semesterNumber < Template.instance().data.currentSemester.semesterNumber;
@@ -94,11 +109,7 @@ Template.Academic_Plan.helpers({
     const semester = Semesters.findDoc(year.semesterIDs[2]);
     return semester.semesterNumber < Template.instance().data.currentSemester.semesterNumber;
   },
-  pastFallArgs(year) {  // TODO change to many helpers instead.
-    const icsCourses = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      semesterID: year.semesterIDs[0],
-    }).fetch();
+  opportunitiesFall(year) {
     const semesterOpportunities = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
       semesterID: year.semesterIDs[0],
@@ -106,15 +117,9 @@ Template.Academic_Plan.helpers({
     _.forEach(semesterOpportunities, (opp) => {
       opp.name = Opportunities.findDoc(opp.opportunityID).name;  // eslint-disable-line
     });
-    const semesterName = 'Fall';
-    const yearArg = year.year;
-    return { icsCourses, semesterOpportunities, semesterName, dictionary: Template.instance().state, year: yearArg };
+    return semesterOpportunities;
   },
-  pastSpringArgs(year) {  // TODO change to many helpers instead.
-    const icsCourses = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      semesterID: year.semesterIDs[1],
-    }).fetch();
+  opportunitiesSpring(year) {
     const semesterOpportunities = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
       semesterID: year.semesterIDs[1],
@@ -122,15 +127,9 @@ Template.Academic_Plan.helpers({
     _.forEach(semesterOpportunities, (opp) => {
       opp.name = Opportunities.findDoc(opp.opportunityID).name;  // eslint-disable-line
     });
-    const semesterName = 'Spring';
-    const yearArg = year.year + 1;
-    return { icsCourses, semesterOpportunities, semesterName, dictionary: Template.instance().state, year: yearArg };
+    return semesterOpportunities;
   },
-  pastSummerArgs(year) {  // TODO change to many helpers instead.
-    const icsCourses = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      semesterID: year.semesterIDs[2],
-    }).fetch();
+  opportunitiesSummer(year) {
     const semesterOpportunities = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
       semesterID: year.semesterIDs[2],
@@ -138,63 +137,10 @@ Template.Academic_Plan.helpers({
     _.forEach(semesterOpportunities, (opp) => {
       opp.name = Opportunities.findDoc(opp.opportunityID).name;  // eslint-disable-line
     });
-    const semesterName = 'Summer';
-    const yearArg = year.year + 1;
-    return { icsCourses, semesterOpportunities, semesterName, dictionary: Template.instance().state, year: yearArg };
+    return semesterOpportunities;
   },
-  springArgs(year) {  // TODO change to many helpers
-    if (Template.instance().data.currentSemester) {
-      const currentSemester = Template.instance().data.currentSemester;
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SPRING,
-      });
-      const semester = Semesters.findDoc(semesterID);
-      const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
-      const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
-      const semesterName = 'Spring';
-      const yearArg = year.year;
-      return {
-        currentSemester,
-        semester,
-        dictionary: Template.instance().state,
-        isFuture,
-        isCurrentSemester,
-        semesterName,
-        year: yearArg,
-      };
-    }
-    return null;
-  },
-  springID(year) {
-    return `spring${year.year}`;
-  },
-  summerArgs(year) {  // TODO change to many helpers
-    if (Template.instance().data.currentSemester) {
-      const currentSemester = Template.instance().data.currentSemester;
-      const semesterID = Semesters.define({
-        year: year.year + 1,
-        term: Semesters.SUMMER,
-      });
-      const semester = Semesters.findDoc(semesterID);
-      const isFuture = semester.semesterNumber >= currentSemester.semesterNumber;
-      const isCurrentSemester = semester.semesterNumber === currentSemester.semesterNumber;
-      const semesterName = 'Summer';
-      const yearArg = year.year;
-      return {
-        currentSemester,
-        semester,
-        dictionary: Template.instance().state,
-        isFuture,
-        isCurrentSemester,
-        semesterName,
-        year: yearArg,
-      };
-    }
-    return null;
-  },
-  summerID(year) {
-    return `summer${year.year}`;
+  springYear(year) {
+    return year.year + 1;
   },
   years() {
     const studentID = getUserIdFromRoute();

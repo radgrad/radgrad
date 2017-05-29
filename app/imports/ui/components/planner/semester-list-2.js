@@ -22,6 +22,7 @@ import { plannerKeys } from './academic-plan';
 // /** @module ui/components/planner/Semester_List */
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
+  console.log('semester list 2', this.data);
   if (this.data) {
     this.state = this.data.dictionary;
   }
