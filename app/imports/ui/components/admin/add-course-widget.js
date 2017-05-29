@@ -46,15 +46,15 @@ Template.Add_Course_Widget.events({
           FormUtils.indicateError(instance);
         } else {
           FormUtils.indicateSuccess(instance, event);
+          const feedDefinition = {
+            course: newData.slug,
+            feedType: 'new-course',
+          };
+          feedsDefineNewCourseMethod.call(feedDefinition);
         }
       });
     } else {
       FormUtils.indicateError(instance);
     }
-    const feedDefinition = {
-      course: newData.slug,
-      feedType: 'new-course',
-    };
-    feedsDefineNewCourseMethod.call(feedDefinition);
   },
 });

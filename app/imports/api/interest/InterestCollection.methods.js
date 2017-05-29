@@ -55,7 +55,7 @@ export const interestsUpdateMethod = new ValidatedMethod({
 /**
  * The validated method for removing Interests.
  */
-export const InterestsRemoveItMethod = new ValidatedMethod({
+export const interestsRemoveItMethod = new ValidatedMethod({
   name: 'Interests.removeIt',
   validate: new SimpleSchema({
     id: { type: SimpleSchema.RegEx.Id, optional: false },

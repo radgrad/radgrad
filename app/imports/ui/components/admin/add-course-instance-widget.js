@@ -58,6 +58,7 @@ Template.Add_Course_Instance_Widget.events({
       FormUtils.renameKey(newData, 'user', 'student');
       courseInstancesDefineMethod.call(newData, (error) => {
         if (error) {
+          console.log('Error could not define CourseInstance', error);
           FormUtils.indicateError(instance);
         } else {
           FormUtils.indicateSuccess(instance, event);

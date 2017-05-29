@@ -80,7 +80,6 @@ Template.List_Opportunities_Widget.helpers({
       { label: 'Semesters', value: _.map(opportunity.semesterIDs, id => Semesters.toString(id)) },
       { label: 'Icon', value: makeLink(opportunity.iconURL) },
       { label: 'Event Date', value: moment(opportunity.eventDate).format('lll') },
-      { label: 'More Information', value: makeLink(opportunity.moreInformation) },
       { label: 'ICE', value: `${opportunity.ice.i}, ${opportunity.ice.c}, ${opportunity.ice.e}` },
       { label: 'References', value: `${numReferences(opportunity)}` },
     ];

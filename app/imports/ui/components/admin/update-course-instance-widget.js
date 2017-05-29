@@ -78,6 +78,7 @@ Template.Update_Course_Instance_Widget.events({
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
+    // TODO update doesn't work.
     if (instance.context.isValid() &&
         !CourseInstances.isCourseInstance(updatedData.semester, updatedData.course, updatedData.user)) {
       FormUtils.convertICE(updatedData);
@@ -89,6 +90,7 @@ Template.Update_Course_Instance_Widget.events({
       updatedData.id = instance.data.updateID.get();
       courseInstancesUpdateMethod.call(updatedData, (error) => {
         if (error) {
+          console.log('Error could not update CourseInstance', error);
           FormUtils.indicateError(instance);
         } else {
           FormUtils.indicateSuccess(instance, event);

@@ -20,6 +20,7 @@ export const courseInstancesDefineMethod = new ValidatedMethod({
     verified: { type: Boolean, optional: true },
     note: { type: String, optional: true },
     creditHrs: { type: Number, optional: true },
+    ice: { type: Object, optional: true, blackbox: true },
   }).validator(),
   run(courseDefn) {
     if (!this.userId) {

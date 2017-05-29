@@ -10,9 +10,9 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   name: { type: String, optional: false },
+  slug: { type: String, optional: false },
   description: { type: String, optional: false },
   interestType: { type: String, optional: false, minCount: 1 },
-  moreInformation: { type: String, optional: false },
 });
 
 Template.Update_Interest_Widget.onCreated(function onCreated() {
@@ -40,9 +40,13 @@ Template.Update_Interest_Widget.events({
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
+      FormUtils.renameKey(updatedData, 'slug', 'slugID');
+      FormUtils.renameKey(updatedData, 'interestType', 'interestTypeID');
       updatedData.id = instance.data.updateID.get();
+      console.log(updatedData);
       interestsUpdateMethod.call(updatedData, (error) => {
         if (error) {
+          console.log('Error updating Interest', error);
           FormUtils.indicateError(instance);
         } else {
           FormUtils.indicateSuccess(instance, event);

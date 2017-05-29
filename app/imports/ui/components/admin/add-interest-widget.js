@@ -11,7 +11,6 @@ const addSchema = new SimpleSchema({
   slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
   description: { type: String, optional: false },
   interestType: { type: String, optional: false, minCount: 1 },
-  moreInformation: { type: String, optional: false },
 });
 
 Template.Add_Interest_Widget.onCreated(function onCreated() {

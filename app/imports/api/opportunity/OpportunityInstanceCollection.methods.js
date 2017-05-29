@@ -67,7 +67,7 @@ export const opportunityInstancesUpdateSemesterMethod = new ValidatedMethod({
  * The ValidatedMethod for updating OpportunityInstance verified status.
  */
 export const opportunityInstancesUpdateVerifiedMethod = new ValidatedMethod({
-  name: 'OpportunityInstances.updateSemester',
+  name: 'OpportunityInstances.updateVerified',
   validate: new SimpleSchema({
     opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
     verified: { type: Boolean },
@@ -76,7 +76,7 @@ export const opportunityInstancesUpdateVerifiedMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update OpportunityInstances.');
     }
-    return OpportunityInstances.updateSemester(update.opportunityInstanceID, update.verified);
+    return OpportunityInstances.updateVerified(update.opportunityInstanceID, update.verified);
   },
 });
 

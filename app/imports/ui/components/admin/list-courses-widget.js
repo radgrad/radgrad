@@ -49,5 +49,6 @@ Template.List_Courses_Widget.events({
     event.preventDefault();
     const id = event.target.value;
     coursesRemoveItMethod.call({ id });
+    // TODO delete the Feed associated with this course?
   },
 });

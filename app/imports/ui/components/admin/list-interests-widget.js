@@ -9,7 +9,6 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/List_Interests_Widget */
@@ -43,7 +42,6 @@ Template.List_Interests_Widget.helpers({
     return [
       { label: 'Description', value: interest.description },
       { label: 'Interest Type', value: InterestTypes.findDoc(interest.interestTypeID).name },
-      { label: 'More Information', value: makeLink(interest.moreInformation) },
       { label: 'References', value: `${numReferences(interest)}` },
     ];
   },

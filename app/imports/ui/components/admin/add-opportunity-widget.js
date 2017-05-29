@@ -25,7 +25,6 @@ const addSchema = new SimpleSchema({
   experience: { type: Number, optional: false, min: 0, max: 100 },
   interests: { type: [String], optional: false, minCount: 1 },
   semesters: { type: [String], optional: false, minCount: 1 },
-  moreInformation: { type: String, optional: false },
   icon: { type: String, optional: true },
 });
 

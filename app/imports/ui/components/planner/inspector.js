@@ -356,16 +356,6 @@ Template.Inspector.helpers({
       }
     return null;
   },
-  opportunityMore() {
-    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-      return Opportunities.findDoc(oi.opportunityID).moreInformation;
-    } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunity).moreInformation;
-      }
-    return null;
-  },
   opportunityName() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
