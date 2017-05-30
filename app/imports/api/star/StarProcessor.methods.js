@@ -90,7 +90,7 @@ export const starLoadDataMethod = new ValidatedMethod({
   }).validator(),
   run(data) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Semesters.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
     }
     processStudentStarCsvData(data.advisor, data.student, data.csvData);
   },

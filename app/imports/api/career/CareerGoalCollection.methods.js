@@ -20,7 +20,7 @@ export const careerGoalsDefineMethod = new ValidatedMethod({
   }).validator(),
   run(goalDefn) {
     if (!Meteor.isTest && !this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Career Goals.');
     } else
       if (!Meteor.isTest && !Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
@@ -44,10 +44,10 @@ export const careerGoalsUpdateMethod = new ValidatedMethod({
   }).validator(),
   run(goalUpdate) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to update Career Goals.');
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to update Career Goals.');
       }
     return CareerGoals.update(goalUpdate.id, { $set: goalUpdate });
   },
@@ -63,10 +63,10 @@ export const careerGoalsRemoveItMethod = new ValidatedMethod({
   }).validator(),
   run(removeArgs) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to remove Career Goals.');
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to remove Career Goals.');
       }
     return CareerGoals.removeIt(removeArgs.id);
   },
