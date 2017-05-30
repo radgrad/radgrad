@@ -18,6 +18,10 @@ import { Users } from '../user/UserCollection';
 
 /**
  * PublicStats holds public statistics about RadGrad.
+ * Each document is a key-value pair holding the name of a stat and its current value.
+ *
+ * The instance holds an array of strings in a field called 'stats.
+ * These strings name functions, which, when invoked, update the collection
  * @extends module:api/base/BaseCollection~BaseCollection
  */
 class PublicStatsCollection extends BaseCollection {
