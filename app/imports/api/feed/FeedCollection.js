@@ -55,12 +55,12 @@ class FeedCollection extends BaseCollection {
    * @example
    * Feed.define({ user: ['abigailkealoha'],
    *               feedType: 'new-user'
-   *               timestamp: '12345465465', });
+   *               timestamp: '12345465465' });
    * @param { Object } description Object with keys user and timestamp.
    * @returns The newly created docID.
    * @throws {Meteor.Error} If not a valid user.
    */
-  defineNewUser({ user, feedType, timestamp }) {
+  defineNewUser({ user, feedType, timestamp = moment().toDate() }) {
     let description;
     let userID;
     const userIDs = _.map(user, function (u) {
@@ -85,8 +85,7 @@ class FeedCollection extends BaseCollection {
   /**
    * Defines a new Feed (new course).
    * @example
-   * Feed.define({ user: 'abigailkealoha',
-   *               course: 'ics-100'
+   * Feed.define({ course: 'ics-100'
    *               feedType: 'new-course'
    *               timestamp: '12345465465', });
    * @param { Object } description Object with keys course, feedType, and timestamp.
@@ -106,8 +105,7 @@ class FeedCollection extends BaseCollection {
   /**
    * Defines a new Feed (new opportunity).
    * @example
-   * Feed.define({ user: 'abigailkealoha',
-   *               opportunity: 'att-hackathon'
+   * Feed.define({ opportunity: 'att-hackathon'
    *               feedType: 'new-opportunity'
    *               timestamp: '12345465465', });
    * @param { Object } description Object with keys opportunity, feedType, and timestamp.

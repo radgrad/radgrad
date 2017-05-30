@@ -4,7 +4,7 @@ import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { dumpDatabaseMethod } from '../../../api/base/BaseCollection.methods.js';
-import { restoreFileDateFormat } from '../../../api/test/fixture-utilities';
+import { loadFileDateFormat } from '../../../api/test/test-utilities';
 
 Template.Admin_DataBase_Dump_Page.helpers({
   errorMessage() {
@@ -53,7 +53,7 @@ Template.Admin_DataBase_Dump_Page.events({
         instance.successOrError.set('success');
         const zip = new ZipZap();
         const dir = 'radgrad-db';
-        const fileName = `${dir}/${moment(result.timestamp).format(restoreFileDateFormat)}.json`;
+        const fileName = `${dir}/${moment(result.timestamp).format(loadFileDateFormat)}.json`;
         zip.file(fileName, JSON.stringify(result, null, 2));
         zip.saveAs(`${dir}.zip`);
       }

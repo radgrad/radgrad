@@ -1,14 +1,14 @@
-/* global FileReader */
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { updateLevelMethod } from '../../../api/level/LevelProcessor.methods';
+import { starLoadDataMethod } from '../../../api/star/StarProcessor.methods';
 import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-
+/* global FileReader */
 // /** @module ui/components/advisor/Star_Upload_Widget */
 
 const updateSchema = new SimpleSchema({
@@ -55,8 +55,16 @@ Template.Star_Upload_Widget.events({
         const fr = new FileReader();
         fr.onload = (e) => {
           const csvData = e.target.result;
-          Meteor.call('StarProcessor.loadStarCsvData', advisor, student.username, csvData);
-          Meteor.call('LevelProcessor.updateLevel', { studentID: student._id });
+          starLoadDataMethod.call({ advisor, student: student.username, csvData }, (error) => {
+            if (error) {
+              console.log('Error loading STAR data', error);
+            }
+          });
+          updateLevelMethod.call({ studentID: student._id }, (error) => {
+            if (error) {
+              console.log('Error updating student level', error);
+            }
+          });
         };
         fr.readAsText(starData);
       }

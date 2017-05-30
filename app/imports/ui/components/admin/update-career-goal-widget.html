@@ -11,7 +11,6 @@
 
       <div class="fields">
         {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
-        {{> Input_Form_Field label='More Information' name='moreInformation' value=careerGoal.moreInformation errorMessage=(fieldError 'moreInformation') required=true}}
       </div>
 
       {{> TextArea_Form_Field label='Description' rows=15 name='description' value=careerGoal.description errorMessage=(fieldError 'description') required=true}}

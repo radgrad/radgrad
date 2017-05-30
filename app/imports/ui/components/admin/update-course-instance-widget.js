@@ -1,10 +1,10 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
 import { Roles } from 'meteor/alanning:roles';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { courseInstancesUpdateMethod } from '../../../api/course/CourseInstanceCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -78,6 +78,7 @@ Template.Update_Course_Instance_Widget.events({
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
+    // TODO update doesn't work.
     if (instance.context.isValid() &&
         !CourseInstances.isCourseInstance(updatedData.semester, updatedData.course, updatedData.user)) {
       FormUtils.convertICE(updatedData);
@@ -86,8 +87,15 @@ Template.Update_Course_Instance_Widget.events({
       FormUtils.renameKey(updatedData, 'semester', 'semesterID');
       FormUtils.renameKey(updatedData, 'course', 'courseID');
       FormUtils.renameKey(updatedData, 'user', 'studentID');
-      CourseInstances.update(instance.data.updateID.get(), { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updatedData.id = instance.data.updateID.get();
+      courseInstancesUpdateMethod.call(updatedData, (error) => {
+        if (error) {
+          console.log('Error could not update CourseInstance', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

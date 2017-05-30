@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
+import { interestsDefineMethod } from '../../../api/interest/InterestCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_Interest_Widget */
@@ -11,7 +11,6 @@ const addSchema = new SimpleSchema({
   slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
   description: { type: String, optional: false },
   interestType: { type: String, optional: false, minCount: 1 },
-  moreInformation: { type: String, optional: false },
 });
 
 Template.Add_Interest_Widget.onCreated(function onCreated() {
@@ -32,8 +31,14 @@ Template.Add_Interest_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      Interests.define(newData);
-      FormUtils.indicateSuccess(instance, event);
+      interestsDefineMethod.call(newData, (error) => {
+        if (error) {
+          console.log('Error defining Interest', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

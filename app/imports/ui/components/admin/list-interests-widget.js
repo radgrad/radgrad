@@ -3,12 +3,12 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
+import { interestsRemoveItMethod } from '../../../api/interest/InterestCollection.methods';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/List_Interests_Widget */
@@ -42,7 +42,6 @@ Template.List_Interests_Widget.helpers({
     return [
       { label: 'Description', value: interest.description },
       { label: 'Interest Type', value: InterestTypes.findDoc(interest.interestTypeID).name },
-      { label: 'More Information', value: makeLink(interest.moreInformation) },
       { label: 'References', value: `${numReferences(interest)}` },
     ];
   },
@@ -53,6 +52,10 @@ Template.List_Interests_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Interests.removeIt(id);
+    interestsRemoveItMethod.call({ id }, (error) => {
+      if (error) {
+        console.log('Error in removing Interest', error);
+      }
+    });
   },
 });

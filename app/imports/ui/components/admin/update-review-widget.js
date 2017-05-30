@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
+import { reviewsUpdateMethod } from '../../../api/review/ReviewCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -98,8 +99,15 @@ Template.Update_Review_Widget.events({
     updatedData.visible = (updatedData.visible === 'true');
     FormUtils.renameKey(updatedData, 'semester', 'semesterID');
     if (instance.context.isValid()) {
-      Reviews.update(instance.data.updateID.get(), { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updatedData.id = instance.data.updateID.get();
+      reviewsUpdateMethod.call(updatedData, (error) => {
+        if (error) {
+          console.log('Error defining Review', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

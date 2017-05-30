@@ -2,6 +2,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from './CourseInstanceCollection';
 import { Courses } from './CourseCollection';
 import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
+import { feedbackInstancesDefineMethod,
+  feedbackInstancesRemoveItMethod } from '../feedback/FeedbackInstanceCollection.methods';
 import { Feedbacks } from '../feedback/FeedbackCollection';
 import PreferredChoice from '../degree-plan/PreferredChoice';
 import { Semesters } from '../semester/SemesterCollection';
@@ -13,7 +15,11 @@ import { Users } from '../user/UserCollection';
 function clearFeedbackInstances(userID, area) {
   const instances = FeedbackInstances.find({ userID, area }).fetch();
   instances.forEach((i) => {
-    FeedbackInstances.removeIt(i._id);
+    feedbackInstancesRemoveItMethod.call({ id: i._id }, (error) => {
+      if (error) {
+        console.log('Error during FeedbackInstance removeIt: ', error);
+      }
+    });
   });
 }
 
@@ -59,22 +65,30 @@ export function checkPrerequisites(studentID, area) {
               const semesterName2 = Semesters.toString(preSemester._id, false);
               const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is after or` +
                   ` in ${semesterName2}.`;
-              FeedbackInstances.define({
+              feedbackInstancesDefineMethod.call({
                 feedback,
                 user: studentID,
                 description,
                 area,
+              }, (error) => {
+                if (error) {
+                  console.log('Error during FeedbackInstance define: ', error);
+                }
               });
             }
           }
         } else {
           const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
               ' not found.';
-          FeedbackInstances.define({
+          feedbackInstancesDefineMethod.call({
             feedback,
             user: studentID,
             description,
             area,
+          }, (error) => {
+            if (error) {
+              console.log('Error during FeedbackInstance define: ', error);
+            }
           });
         }
       });

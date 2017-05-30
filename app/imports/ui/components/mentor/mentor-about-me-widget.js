@@ -10,6 +10,7 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection';
+import { mentorProfilesUpdateMethod } from '../../../api/mentor/MentorProfileCollection.methods';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
@@ -193,7 +194,12 @@ Template.Mentor_About_Me_Widget.events({
     const mentorProfile = MentorProfiles.find({ mentorID: getUserIdFromRoute() }).fetch();
     if (instance.context.isValid()) {
       Users.setWebsite(getUserIdFromRoute(), website);
-      MentorProfiles.update(mentorProfile[0]._id, { $set: updatedData });
+      updatedData.id = mentorProfile[0]._id;
+      mentorProfilesUpdateMethod.call(updatedData, (error) => {
+        if (error) {
+          console.log('Error updating MentorProfile', error);
+        }
+      });
       FormUtils.indicateSuccess(instance, event);
     } else {
       FormUtils.indicateError(instance);

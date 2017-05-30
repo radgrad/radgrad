@@ -11,7 +11,6 @@
 
       <div class="fields">
         {{> Interest_Types_Form_Field interestTypes=interestTypes errorMessage=(fieldError "interestTypes") required="true" }}
-        {{> Input_Form_Field label="More Information" name="moreInformation" placeholder="http://interest.com/software-engineering" errorMessage=(fieldError "moreInformation") required=true}}
       </div>
 
       {{> TextArea_Form_Field label="Description" rows=5 name="description" placeholder="Describe the Interest here" errorMessage=(fieldError "description") required=true}}

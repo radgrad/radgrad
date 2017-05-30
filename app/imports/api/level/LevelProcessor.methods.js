@@ -10,16 +10,10 @@ import { Users } from '../user/UserCollection';
 /** @module api/level/LevelProcessorMethods */
 
 /**
- * The LevelProcessor calcLevel method name.
- * @type {string}
- */
-export const calcLevelMethodName = 'LevelProcessor.calcLevel';
-
-/**
  * The LevelProcessor calcLevel ValidatedMethod.
  */
 export const calcLevelMethod = new ValidatedMethod({
-  name: calcLevelMethodName,
+  name: 'LevelProcessor.calcLevel',
   validate: new SimpleSchema({
     studentID: { type: SimpleSchema.RegEx.Id },
   }).validator(),
@@ -32,16 +26,10 @@ export const calcLevelMethod = new ValidatedMethod({
 });
 
 /**
- * The LevelProcessor updateLevel method name.
- * @type {string}
- */
-export const updateLevelMethodName = 'LevelProcessor.updateLevel';
-
-/**
  * The LevelProcessor updateLevel ValidatedMethod.
  */
 export const updateLevelMethod = new ValidatedMethod({
-  name: updateLevelMethodName,
+  name: 'LevelProcessor.updateLevel',
   validate: new SimpleSchema({
     studentID: { type: SimpleSchema.RegEx.Id },
   }).validator(),
@@ -53,6 +41,9 @@ export const updateLevelMethod = new ValidatedMethod({
   },
 });
 
+/**
+ * The LevelProcessor update all students' level validated method.
+ */
 export const updateAllStudentLevelsMethod = new ValidatedMethod({
   name: 'LevelProcessor.updateAllStudentLevels',
   validate: null,

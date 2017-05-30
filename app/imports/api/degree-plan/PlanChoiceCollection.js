@@ -22,12 +22,12 @@ class PlanChoiceCollection extends BaseCollection {
   /**
    * Defines a PlanChoice.
    * @example
-   * PlanChoices.define('ics_312,ics_331-1');
+   * PlanChoices.define({ 'ics_312,ics_331-1' });
    * Defines the choice of ICS 312 or ICS 331.
    * @param choice
    * @returns {*}
    */
-  define(choice) {
+  define({ choice }) {
     const doc = this._collection.findOne(choice);
     if (doc) {
       return doc._id;
@@ -92,7 +92,7 @@ class PlanChoiceCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    return doc.choice;
+    return { choice: doc.choice };
   }
 
 }

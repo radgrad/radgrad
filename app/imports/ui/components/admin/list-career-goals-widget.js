@@ -1,10 +1,10 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { careerGoalsRemoveItMethod } from '../../../api/career/CareerGoalCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/List_Career_Goal_Widget */
@@ -36,16 +36,23 @@ Template.List_Career_Goals_Widget.helpers({
     return [
       { label: 'Description', value: careerGoal.description },
       { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
-      { label: 'More Information', value: makeLink(careerGoal.moreInformation) },
       { label: 'References', value: `Users: ${numReferences(careerGoal)}` }];
   },
 });
 
 Template.List_Career_Goals_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
-  'click .jsDelete': function (event) {
+  'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    CareerGoals.removeIt(id);
+    careerGoalsRemoveItMethod.call({ id }, (error, result) => {
+      if (error) {
+        console.log('Error deleting CareerGoal: ', error);
+        FormUtils.indicateError(instance);
+      }
+      if (result) {
+        FormUtils.indicateSuccess(instance, event);
+      }
+    });
   },
 });

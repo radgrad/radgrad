@@ -51,7 +51,6 @@ class OpportunityCollection extends BaseSlugCollection {
    *                        semesters: ['Fall-2016', 'Spring-2016', 'Summer-2106'],
      *                      independentStudy: true});
    * @param { Object } description Object with keys name, slug, description, opportunityType, sponsor, interests,
-   * startActive, and endActive.
    * Slug must not be previously defined.
    * OpportunityType and sponsor must be defined slugs.
    * Interests must be a (possibly empty) array of interest slugs or IDs.
