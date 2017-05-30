@@ -26,10 +26,10 @@ export const opportunitiesDefineMethod = new ValidatedMethod({
   }).validator(),
   run(courseDefn) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Opportunities.');
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Opportunities.');
       }
     return Opportunities.define(courseDefn);
   },
