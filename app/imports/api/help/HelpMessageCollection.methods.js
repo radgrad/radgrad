@@ -19,10 +19,10 @@ export const helpMessagesDefineMethod = new ValidatedMethod({
   }).validator(),
   run(helpDefn) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Help Messages.');
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new help Goals.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Help Messages.');
       }
     return HelpMessages.define(helpDefn);
   },
@@ -38,10 +38,10 @@ export const HelpMessagesRemoveItMethod = new ValidatedMethod({
   }).validator(),
   run(removeArgs) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to remove Help Messages.');
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to remove Help Messages.');
       }
     return HelpMessages.removeIt(removeArgs.id);
   },
