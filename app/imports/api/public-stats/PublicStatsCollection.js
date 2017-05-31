@@ -17,11 +17,16 @@ import { Users } from '../user/UserCollection';
 /** @module api/public-stats/PublicStatsCollection */
 
 /**
- * PublicStats holds public statistics about RadGrad.
- * Each document is a key-value pair holding the name of a stat and its current value.
+ * PublicStats holds statistics about RadGrad that can be accessed without logging in.
+ * These are referenced in the landing page and the guided tour.
+ * Basically, the collection is a set of documents with two fields: key and value.
+ * The field this.stats holds a list of strings which define the set of legal keys.
+ * Each of these strings is also the name of a method in this class which is responsible for calculating the value
+ * associated with the key and then upserting the key-value pair into the collection.
  *
- * The instance holds an array of strings in a field called 'stats.
- * These strings name functions, which, when invoked, update the collection
+ * See startup/server/initialize-db.js for the code that starts a cron job that updates this collection when the
+ * system starts up and once a day thereafter.
+ *
  * @extends module:api/base/BaseCollection~BaseCollection
  */
 class PublicStatsCollection extends BaseCollection {
@@ -250,6 +255,9 @@ class PublicStatsCollection extends BaseCollection {
  */
 export const PublicStats = new PublicStatsCollection();
 
+/**
+ * Create a global helper called publicStats that returns the value associated with the passed key.
+ */
 if (Meteor.isClient) {
   Template.registerHelper('publicStats', (key) => {
     const stat = PublicStats.isDefined({ key }) && PublicStats.findDoc({ key });
