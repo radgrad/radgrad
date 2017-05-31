@@ -1,13 +1,17 @@
-import { Meteor } from 'meteor/meteor';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
-import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
-import { Users } from '../../../api/user/UserCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
+import {
+  feedsDefineNewUserMethod,
+  feedsUpdateNewUserMethod,
+} from '../../../api/feed/FeedCollection.methods';
+import { Users } from '../../../api/user/UserCollection.js';
+import { defineUserMethod } from '../../../api/user/UserCollection.methods';
+import { validUserAccountsDefineMethod } from '../../../api/user/ValidUserAccountCollection.methods';
 
 // /** @module ui/components/advisor/Student_Selector_Tabs */
 
@@ -182,7 +186,14 @@ Template.Student_Selector_Tabs.events({
     if (instance.context.isValid()) {
       const notDefined = Users.find({ username: userName }).count() === 0;
       if (notDefined) {
-        ValidUserAccounts.define({ username: userName });
+        validUserAccountsDefineMethod.call({ username: userName }, (error) => {
+          if (error) {
+            console.log('Error during new user creation ValidUserAccounts: ', error);
+            instance.state.set(displaySuccessMessage, false);
+            instance.state.set(displayErrorMessages, true);
+            instance.state.set('errorMessage', error.reason);
+          }
+        });
         const userDefinition = {
           firstName,
           lastName,
@@ -191,7 +202,7 @@ Template.Student_Selector_Tabs.events({
           role: ROLE.STUDENT,
           uhID,
         };
-        const studentID = Meteor.call('Users.define', userDefinition, (error) => {
+        defineUserMethod.call(userDefinition, (error) => {
           if (error) {
             const regexp = /^[a-zA-Z0-9-_]+$/;
             if (userName.search(regexp) === -1) {
@@ -199,6 +210,7 @@ Template.Student_Selector_Tabs.events({
               instance.state.set(displayErrorMessages, true);
               instance.state.set('alreadyDefined', false);
               instance.state.set('badUsername', true);
+              instance.state.set('errorMessage', error.reason);
             } else {
               instance.state.set(displaySuccessMessage, false);
               instance.state.set(displayErrorMessages, true);
@@ -206,16 +218,23 @@ Template.Student_Selector_Tabs.events({
               instance.state.set('errorMessage', error.reason);
             }
           } else {
-            const timestamp = new Date().getTime();
-            if (Feeds.checkPastDayFeed(timestamp, 'new-user')) {
-              Feeds.updateNewUser(userName, Feeds.checkPastDayFeed(timestamp, 'new-user'));
+            if (Feeds.checkPastDayFeed('new-user')) {
+              feedsUpdateNewUserMethod.call({ username: userName, existingFeedID: Feeds.checkPastDayFeed('new-user') },
+                  (err) => {
+                    if (err) {
+                      console.log('Error updating Feed user name.', err);
+                    }
+                  });
             } else {
               const feedDefinition = {
                 user: [userName],
                 feedType: 'new-user',
-                timestamp,
               };
-              Feeds.define(feedDefinition);
+              feedsDefineNewUserMethod.call(feedDefinition, (err) => {
+                if (err) {
+                  console.log('Error during new user creation Feed define new user: ', err);
+                }
+              });
             }
             const user = Users.getUserFromUsername(userName);
             instance.studentID.set(user._id);
@@ -227,9 +246,6 @@ Template.Student_Selector_Tabs.events({
             instance.state.set('addNewUser', false);
           }
         });
-        // const user = Users.getUserFromUsername(userName);
-        instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
-        instance.state.set(sessionKeys.CURRENT_STUDENT_ID, studentID);
       } else {
         instance.state.set(displaySuccessMessage, false);
         instance.state.set(displayErrorMessages, true);

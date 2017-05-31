@@ -1,12 +1,12 @@
-/* eslint prefer-arrow-callback: 'off', no-unused-expressions: 'off' */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { Users } from '../user/UserCollection';
 import { calcLevel } from './LevelProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { ROLE } from '../role/Role';
+
+/* eslint prefer-arrow-callback: 'off', no-unused-expressions: 'off' */
+/* eslint-env mocha */
 
 // TODO: Waiting for test data based upon the Personae.
 

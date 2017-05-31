@@ -6,10 +6,14 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import {
+  verificationRequestsUpdateStatusMethod,
+} from '../../../api/verification/VerificationRequestCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
+import { feedsDefineNewVerifiedOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 // /** @module ui/components/shared/Verification_Requests_Pending */
@@ -68,20 +72,18 @@ Template.Verification_Requests_Pending.events({
         studentID: VerificationRequests.getStudentDoc(request._id)._id,
         opportunityID: VerificationRequests.getOpportunityDoc(request._id)._id,
       }).fetch();
-      const timestamp = new Date().getTime();
       const opportunityID = VerificationRequests.getOpportunityDoc(request._id)._id;
-      if (Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID)) {
+      if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
         Feeds.updateVerifiedOpportunity(VerificationRequests.getStudentDoc(request._id).username,
-            Feeds.checkPastDayFeed(timestamp, 'verified-opportunity', opportunityID));
+            Feeds.checkPastDayFeed('verified-opportunity', opportunityID));
       } else {
         const feedDefinition = {
           user: [VerificationRequests.getStudentDoc(request._id).username],
           opportunity: Slugs.findDoc(VerificationRequests.getOpportunityDoc(request._id).slugID),
           semester: Slugs.findDoc(Semesters.findDoc(opportunities[0].semesterID).slugID),
           feedType: 'verified-opportunity',
-          timestamp,
         };
-        Feeds.define(feedDefinition);
+        feedsDefineNewVerifiedOpportunityMethod.call(feedDefinition);
       }
     } else {
       request.status = VerificationRequests.REJECTED;
@@ -93,7 +95,11 @@ Template.Verification_Requests_Pending.events({
     request.processed.push(processRecord);
     const status = request.status;
     const processed = request.processed;
-    VerificationRequests.updateStatus(requestID, status, processed);
+    verificationRequestsUpdateStatusMethod.call({ id: requestID, status, processed }, (error) => {
+      if (error) {
+        console.log('Error updating VerificationRequest status', error);
+      }
+    });
   },
 });
 

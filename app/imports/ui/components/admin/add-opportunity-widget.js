@@ -3,10 +3,10 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
-import { Feeds } from '../../../api/feed/FeedCollection.js';
+import { feedsDefineNewOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { opportunitiesDefineMethod } from '../../../api/opportunity/OpportunityCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
@@ -25,7 +25,6 @@ const addSchema = new SimpleSchema({
   experience: { type: Number, optional: false, min: 0, max: 100 },
   interests: { type: [String], optional: false, minCount: 1 },
   semesters: { type: [String], optional: false, minCount: 1 },
-  moreInformation: { type: String, optional: false },
   icon: { type: String, optional: true },
 });
 
@@ -68,8 +67,13 @@ Template.Add_Opportunity_Widget.events({
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(newData);
-      Opportunities.define(newData);
-      FormUtils.indicateSuccess(instance, event);
+      opportunitiesDefineMethod.call(newData, (error) => {
+        if (error) {
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }
@@ -77,8 +81,7 @@ Template.Add_Opportunity_Widget.events({
     const feedDefinition = {
       opportunity: newData.slug,
       feedType: 'new-opportunity',
-      timestamp: Date.now(),
     };
-    Feeds.define(feedDefinition);
+    feedsDefineNewOpportunityMethod.call(feedDefinition);
   },
 });

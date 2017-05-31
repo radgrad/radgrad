@@ -1,11 +1,12 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { processStarCsvData } from './StarProcessor';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
 import { Semesters } from '../semester/SemesterCollection';
-import { AdvisorLogs } from '../log/AdvisorLogCollection';
+import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
 import { Users } from '../user/UserCollection';
 import { getDepartment } from '../course/CourseUtilities';
 
@@ -16,7 +17,7 @@ import { getDepartment } from '../course/CourseUtilities';
  * @param student the student's username.
  * @param csvData the student's STAR data.
  */
-export function processStudentStarCsvData(advisor, student, csvData) {
+function processStudentStarCsvData(advisor, student, csvData) {
   const definitions = processStarCsvData(student, csvData);
   const studentID = Users.findDoc({ username: student })._id;
   const oldInstances = CourseInstances.find({ studentID, fromSTAR: true }).fetch();
@@ -70,16 +71,27 @@ export function processStudentStarCsvData(advisor, student, csvData) {
   } else {
     text = `${text} course from STAR.`;
   }
-  AdvisorLogs.define({ advisor, student, text });
+  advisorLogsDefineMethod.call({ advisor, student, text }, (error) => {
+    if (error) {
+      console.log('Error creating AdvisorLog', error);
+    }
+  });
 }
 
-// TODO make this a ValidatedMethod.
-Meteor.methods({
-  'StarProcessor.loadStarCsvData': function process(a, s, c) {
-    check(a, String);
-    check(s, String);
-    check(c, String);
-    processStudentStarCsvData(a, s, c);
+/**
+ * ValidatedMethod for loading student STAR data.
+ */
+export const starLoadDataMethod = new ValidatedMethod({
+  name: 'StarProcessor.loadStarCsvData',
+  validate: new SimpleSchema({
+    advisor: { type: String },
+    student: { type: String },
+    csvData: { type: String },
+  }).validator(),
+  run(data) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
+    }
+    processStudentStarCsvData(data.advisor, data.student, data.csvData);
   },
 });
-

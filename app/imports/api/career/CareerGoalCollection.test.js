@@ -1,11 +1,11 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { makeSampleInterest } from '../interest/SampleInterests';
 import { removeAllEntities } from '../base/BaseUtilities';
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
+
 
 if (Meteor.isServer) {
   describe('CareerGoalCollection', function testSuite() {

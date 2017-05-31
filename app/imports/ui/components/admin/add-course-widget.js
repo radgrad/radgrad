@@ -1,8 +1,9 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection';
+import { coursesDefineMethod } from '../../../api/course/CourseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Feeds } from '../../../api/feed/FeedCollection.js';
+import { feedsDefineNewCourseMethod } from '../../../api/feed/FeedCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_Course_Widget */
@@ -14,7 +15,6 @@ const addSchema = new SimpleSchema({
   number: { type: String, optional: false },
   creditHrs: { type: Number, optional: true, defaultValue: 3 },
   syllabus: { type: String, optional: true },
-  moreInformation: { type: String, optional: true },
   description: { type: String, optional: false },
   interests: { type: [String], optional: false, minCount: 1 },
   prerequisites: { type: [String], optional: true },
@@ -41,16 +41,20 @@ Template.Add_Course_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      Courses.define(newData);
-      FormUtils.indicateSuccess(instance, event);
+      coursesDefineMethod.call(newData, (error) => {
+        if (error) {
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+          const feedDefinition = {
+            course: newData.slug,
+            feedType: 'new-course',
+          };
+          feedsDefineNewCourseMethod.call(feedDefinition);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }
-    const feedDefinition = {
-      course: newData.slug,
-      feedType: 'new-course',
-      timestamp: Date.now(),
-    };
-    Feeds.define(feedDefinition);
   },
 });

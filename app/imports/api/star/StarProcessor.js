@@ -1,4 +1,3 @@
-/* global isNaN */
 import { Meteor } from 'meteor/meteor';
 import { Papa } from 'meteor/harrison:papa-parse';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -6,6 +5,7 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Courses } from '../course/CourseCollection';
 import { Slugs } from '../slug/SlugCollection';
 
+/* global isNaN */
 
 /** @module api/star/StarProcessor */
 
@@ -35,9 +35,6 @@ function findSemesterSlug(starDataObject) {
       break;
     case 'Fall':
       term = Semesters.FALL;
-      break;
-    case 'Winter': // Not used at UH, but could be somewhere else.
-      term = Semesters.WINTER;
       break;
     default:
       throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);

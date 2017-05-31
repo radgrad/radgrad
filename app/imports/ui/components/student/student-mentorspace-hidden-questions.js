@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
+import { mentorQuestionsRemoveItMethod } from '../../../api/mentor/MentorQuestionCollection.methods';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_MentorSpace_Hidden_Questions.onCreated(function studentMentorSpaceHiddenQuestionsOnCreated() {
@@ -38,7 +39,11 @@ Template.Student_MentorSpace_Hidden_Questions.events({
   'click .discard': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    MentorQuestions.removeIt(id);
+    mentorQuestionsRemoveItMethod.call({ id }, (error) => {
+      if (error) {
+        console.log('Error removing MentorQuestion', error);
+      }
+    });
   },
   'click .edit': function (event) {
     event.preventDefault();

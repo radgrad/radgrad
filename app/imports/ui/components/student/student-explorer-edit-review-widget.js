@@ -4,7 +4,10 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Reviews } from '../../../api/review/ReviewCollection.js';
+import {
+  reviewsUpdateMethod,
+  reviewsRemoveItMethod,
+} from '../../../api/review/ReviewCollection.methods';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
@@ -59,16 +62,30 @@ Template.Student_Explorer_Edit_Review_Widget.events({
     if (instance.context.isValid()) {
       updatedData.moderated = false;
       FormUtils.renameKey(updatedData, 'semester', 'semesterID');
-      Reviews.update(this.review._id, { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updatedData.id = this.review._id;
+      reviewsUpdateMethod.call(updatedData, (error) => {
+        if (error) {
+          console.log('Error defining Review', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }
   },
-  'click .jsDelete': function (event) {
+  'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    Reviews.removeIt(id);
+    reviewsRemoveItMethod.call({ id }, (error) => {
+      if (error) {
+        console.log('Error defining Review', error);
+        FormUtils.indicateError(instance);
+      } else {
+        FormUtils.indicateSuccess(instance, event);
+      }
+    });
   },
 });
 

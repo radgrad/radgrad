@@ -39,7 +39,7 @@ class TeaserCollection extends BaseSlugCollection {
    *                 description: 'Learn web development by helping to develop and maintain the ACM Manoa website.',
    *                 duration: '0:39'
    *                 interests: ['html', 'javascript', 'css', 'web-development'],
-   *                 opportunities: 'acm-webmasters'
+   *                 opportunity: 'acm-webmasters'
    * @param { Object } description Object with keys title, slug, URL, description, duration. interestIDs.
    * Slug must be previously undefined.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.

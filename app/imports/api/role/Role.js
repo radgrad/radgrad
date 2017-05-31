@@ -1,11 +1,18 @@
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
+<<<<<<< HEAD
 
 /** @module api/role/Role */
 
 /** Defines the legal strings used to represent roles in the system. */
 
+=======
+>>>>>>> origin/master
+
+/** @module api/role/Role */
+
+/** Defines the legal strings used to represent roles in the system. */
 
 /**
  * ROLE Provides ROLE.FACULTY, ROLE.STUDENT, ROLE.ADMIN, ROLE.ALUMNI.

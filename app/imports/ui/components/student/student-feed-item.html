@@ -1,0 +1,22 @@
+<template name="Student_Feed_Item">
+  <div class="event">
+    <div class="label">
+      <img src={{feed.picture}}>
+    </div>
+    <div style="margin-top:0px" class="content">
+      <div class="summary">
+        {{{markdownify feed.description}}}
+      </div>
+      <div class="extra text">
+        {{#if (multipleUsers feed)}}
+          <div style="float:right; margin-top: 0px" class="meta">
+            {{> Student_Feed_Modal feed = feed}}
+          </div>
+        {{/if}}
+        <div style="margin-top: 0px" class="date">
+          {{feedTimestamp feed}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

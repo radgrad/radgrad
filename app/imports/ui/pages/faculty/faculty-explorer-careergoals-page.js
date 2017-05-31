@@ -5,7 +5,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
@@ -47,7 +46,6 @@ Template.Faculty_Explorer_CareerGoals_Page.helpers({
   descriptionPairs(careerGoal) {
     return [
       { label: 'Description', value: careerGoal.description },
-      { label: 'More Information', value: makeLink(careerGoal.moreInformation) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(careerGoal.interestIDs)) },
     ];
   },
