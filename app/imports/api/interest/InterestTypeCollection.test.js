@@ -1,10 +1,10 @@
-/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
-/* eslint-env mocha */
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { InterestTypes } from '../interest/InterestTypeCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
+
+/* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
+/* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('InterestTypeCollection', function testSuite() {

@@ -5,6 +5,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
+import { reviewsRemoveItMethod } from '../../../api/review/ReviewCollection.methods';
 import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -65,6 +66,10 @@ Template.List_Reviews_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    Reviews.removeIt(id);
+    reviewsRemoveItMethod.call({ id }, (error) => {
+      if (error) {
+        console.log('Error removing Review', error);
+      }
+    });
   },
 });

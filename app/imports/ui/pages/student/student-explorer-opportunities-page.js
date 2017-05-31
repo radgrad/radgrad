@@ -9,7 +9,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
-import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
@@ -92,7 +91,6 @@ Template.Student_Explorer_Opportunities_Page.helpers({
       { label: 'Event Date', value: opportunity.eventDate },
       { label: 'Sponsor', value: sponsor(opportunity) },
       { label: 'Description', value: opportunity.description },
-      { label: 'More Information', value: makeLink(opportunity.moreInformation) },
       { label: 'Interests', value: opportunity.interestIDs },
       { label: 'ICE', value: opportunity.ice },
       { label: 'Teaser', value: teaser(opportunity) },

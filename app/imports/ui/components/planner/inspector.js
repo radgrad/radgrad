@@ -10,6 +10,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import { verificationRequestsDefineMethod } from '../../../api/verification/VerificationRequestCollection.methods';
 import { makeCourseICE } from '../../../api/ice/IceProcessor.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -355,16 +356,6 @@ Template.Inspector.helpers({
       }
     return null;
   },
-  opportunityMore() {
-    if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
-      const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-      return Opportunities.findDoc(oi.opportunityID).moreInformation;
-    } else
-      if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
-        return Template.instance().state.get(plannerKeys.detailOpportunity).moreInformation;
-      }
-    return null;
-  },
   opportunityName() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
@@ -511,7 +502,11 @@ Template.Inspector.events({
     const id = event.target.id;
     const opportunityInstance = id;
     const student = getRouteUserName();
-    VerificationRequests.define({ student, opportunityInstance });
+    verificationRequestsDefineMethod.call({ student, opportunityInstance }, (error) => {
+      if (error) {
+        console.log('Error defining VerificationRequest', error);
+      }
+    });
   },
 });
 

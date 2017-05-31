@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
+import { advisorLogsDefineMethod } from '../../../api/log/AdvisorLogCollection.methods';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -32,7 +33,11 @@ Template.Advisor_Log_Entry_Widget.events({
       const text = textAreas[0].value;
       const student = instance.state.get(sessionKeys.CURRENT_STUDENT_ID);
       const advisor = getUserIdFromRoute();
-      AdvisorLogs.define({ advisor, student, text });
+      advisorLogsDefineMethod.call({ advisor, student, text }, (error) => {
+        if (error) {
+          console.log('Error creating AdvisorLog.', error);
+        }
+      });
     }
   },
 });

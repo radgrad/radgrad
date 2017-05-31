@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import { courseInstancesDefineMethod } from '../../../api/course/CourseInstanceCollection.methods';
+import { opportunityInstancesDefineMethod } from '../../../api/opportunity/OpportunityInstanceCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -89,7 +89,7 @@ Template.Student_Of_Interest_Add.events({
         grade: 'B',
         student: username,
       };
-      CourseInstances.define(ci);
+      courseInstancesDefineMethod.call(ci);  // TODO what do we do if there is an error?
     } else {
       const oi = {
         semester: semSlug,
@@ -97,7 +97,7 @@ Template.Student_Of_Interest_Add.events({
         verified: false,
         student: username,
       };
-      OpportunityInstances.define(oi);
+      opportunityInstancesDefineMethod.call(oi);
     }
   },
 });

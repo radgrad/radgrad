@@ -2,10 +2,18 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import {
+  courseInstancesDefineMethod,
+  courseInstancesUpdateMethod,
+} from '../../../api/course/CourseInstanceCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import {
+  opportunityInstancesDefineMethod,
+  opportunityInstancesUpdateMethod,
+} from '../../../api/opportunity/OpportunityInstanceCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -14,6 +22,7 @@ import { plannerKeys } from './academic-plan';
 // /** @module ui/components/planner/Semester_List */
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
+  console.log('semester list 2', this.data);
   if (this.data) {
     this.state = this.data.dictionary;
   }
@@ -93,43 +102,86 @@ Template.Semester_List_2.events({
             semester: semSlug,
             course: slug,
             verified: false,
+            fromSTAR: false,
             note: course.number,
             grade: 'B',
             student: username,
           };
-          CourseInstances.define(ci);
-        } else if (Slugs.isSlugForEntity(slug, 'Opportunity')) {
-          const oi = {
-            semester: semSlug,
-            opportunity: slug,
-            verified: false,
-            student: username,
-          };
-          OpportunityInstances.define(oi);
-        }
-        FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-        FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-        FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+          const semesterID = Template.instance().localState.get('semester')._id;
+          if (CourseInstances.find({ courseID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
+            courseInstancesDefineMethod.call(ci, (error) => {
+              if (!error) {
+                FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+                FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+                FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+              }
+            });
+          }
+        } else
+          if (Slugs.isSlugForEntity(slug, 'Opportunity')) {
+            const opportunityID = Slugs.getEntityID(slug, 'Opportunity');
+            const semesterID = Template.instance().localState.get('semester')._id;
+            const oi = {
+              semester: semSlug,
+              opportunity: slug,
+              verified: false,
+              student: username,
+            };
+            // eslint-disable-next-line
+            if (OpportunityInstances.find({ opportunityID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
+              opportunityInstancesDefineMethod.call(oi, (error) => {
+                if (!error) {
+                  FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+                  FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+                  FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                }
+              });
+            }
+          }
       } else {
         const semesterID = Template.instance().localState.get('semester')._id;
         if (CourseInstances.isDefined(id)) {
-          CourseInstances.update({ _id: id }, { $set: { semesterID } });
-          // CourseInstances.updateSemester(id, semesterID);
-          FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-          FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-          FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-          FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
-          FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
-          // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
-        } else {
-          const opportunities = OpportunityInstances.find({
-            studentID: getUserIdFromRoute(),
-            _id: id,
-          }).fetch();
-          if (opportunities.length > 0) {
-            OpportunityInstances.updateSemester(opportunities[0]._id, semesterID);
+          // There's gotta be a better way of doing this.
+          const data = {};
+          _.mapKeys(CourseInstances.findDoc(id), (value, key) => {
+            if (key !== '_id') {
+              data[key] = value;
+            }
+          });
+          data.id = id;
+          data.semesterID = semesterID;
+          courseInstancesUpdateMethod.call(data, (error) => {
+            if (!error) {
+              FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+              FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+              FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+              FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+              FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
+              // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
+            }
+          });
+        } else
+          if (OpportunityInstances.isDefined(id)) {
+            // There's gotta be a better way of doing this.
+            const data = {};
+            _.mapKeys(OpportunityInstances.findDoc(id), (value, key) => {
+              if (key !== '_id') {
+                data[key] = value;
+              }
+            });
+            data.id = id;
+            data.semesterID = semesterID;
+            opportunityInstancesUpdateMethod.call(data, (error) => {
+              if (!error) {
+                FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
+                FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
+                FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
+                FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
+                // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
+              }
+            });
           }
-        }
       }
     }
   },
@@ -147,13 +199,14 @@ Template.Semester_List_2.events({
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, ci);
         template.state.set(plannerKeys.detailICE, ci.ice);
-      } else if (Courses.isDefined(target.id)) {
-        const course = Courses.findDoc(target.id);
-        template.state.set(plannerKeys.detailCourse, course);
-        template.state.set(plannerKeys.detailCourseInstance, null);
-      } else {
-        template.state.set(plannerKeys.detailCourse, null);
-      }
+      } else
+        if (Courses.isDefined(target.id)) {
+          const course = Courses.findDoc(target.id);
+          template.state.set(plannerKeys.detailCourse, course);
+          template.state.set(plannerKeys.detailCourseInstance, null);
+        } else {
+          template.state.set(plannerKeys.detailCourse, null);
+        }
       template.state.set(plannerKeys.detailOpportunity, null);
       template.state.set(plannerKeys.detailOpportunityInstance, null);
     } else
@@ -163,45 +216,18 @@ Template.Semester_List_2.events({
           template.state.set(plannerKeys.detailOpportunity, null);
           template.state.set(plannerKeys.detailOpportunityInstance, oi);
           template.state.set(plannerKeys.detailICE, oi.ice);
-        } else if (Opportunities.isDefined(target.id)) {
-          const opportunity = Opportunities.findDoc(target.id);
-          template.state.set(plannerKeys.detailOpportunity, opportunity);
-          template.state.set(plannerKeys.detailOpportunityInstance, null);
-        } else {
-          template.state.set(plannerKeys.detailOpportunity, null);
-          template.state.set(plannerKeys.detailOpportunityInstance, null);
-        }
+        } else
+          if (Opportunities.isDefined(target.id)) {
+            const opportunity = Opportunities.findDoc(target.id);
+            template.state.set(plannerKeys.detailOpportunity, opportunity);
+            template.state.set(plannerKeys.detailOpportunityInstance, null);
+          } else {
+            template.state.set(plannerKeys.detailOpportunity, null);
+            template.state.set(plannerKeys.detailOpportunityInstance, null);
+          }
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
       }
-  },
-  'click .jsDelCourse': function clickJsDelCourse(event) {
-    event.preventDefault();
-    const id = event.target.id;
-    CourseInstances.removeIt(id);
-    FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
-    FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-    FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-    FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
-    FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
-    const template = Template.instance();
-    template.state.set(plannerKeys.detailCourse, null);
-    template.state.set(plannerKeys.detailCourseInstance, null);
-    template.state.set(plannerKeys.detailICE, null);
-    template.state.set(plannerKeys.detailOpportunity, null);
-    template.state.set(plannerKeys.detailOpportunityInstance, null);
-  },
-  'click .jsDelOpp': function clickJsDelOpp(event) {
-    event.preventDefault();
-    // console.log(event.target);
-    const id = event.target.id;
-    OpportunityInstances.removeIt(id);
-    const template = Template.instance();
-    template.state.set(plannerKeys.detailCourse, null);
-    template.state.set(plannerKeys.detailCourseInstance, null);
-    template.state.set(plannerKeys.detailICE, null);
-    template.state.set(plannerKeys.detailOpportunity, null);
-    template.state.set(plannerKeys.detailOpportunityInstance, null);
   },
 });
 

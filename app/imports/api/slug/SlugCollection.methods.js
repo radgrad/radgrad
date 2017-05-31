@@ -5,16 +5,10 @@ import { Slugs } from './SlugCollection';
 /* eslint object-shorthand: "off" */
 
 /**
- * Name of the Slug collection define method.
- * @type {string}
- */
-export const defineSlugMethodName = 'Slugs.define';
-
-/**
  * The Slug collection define validated method.
  */
 export const defineSlugMethod = new ValidatedMethod({
-  name: defineSlugMethodName,
+  name: 'Slugs.define',
   validate: new SimpleSchema({
     name: { type: String, optional: false },
     entityName: { type: String, optional: false },
@@ -25,16 +19,10 @@ export const defineSlugMethod = new ValidatedMethod({
 });
 
 /**
- * The Slug collection remove method name.
- * @type {string}
- */
-export const removeSlugMethodName = 'Slugs.remove';
-
-/**
  * The Slug collection define validated method.
  */
 export const removeSlugMethod = new ValidatedMethod({
-  name: removeSlugMethodName,
+  name: 'Slugs.remove',
   validate: new SimpleSchema({
     name: { type: String },
     entityName: { type: String },

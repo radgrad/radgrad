@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
+import { teasersUpdateMethod } from '../../../api/teaser/TeaserCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -56,8 +57,15 @@ Template.Update_Teaser_Widget.events({
     if (instance.context.isValid()) {
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
       FormUtils.renameKey(updatedData, 'opportunity', 'opportunityID');
-      Teasers.update(instance.data.updateID.get(), { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updatedData.id = instance.data.updateID.get();
+      teasersUpdateMethod.call(updatedData, (error) => {
+        if (error) {
+          console.log('Error updating Teaser', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

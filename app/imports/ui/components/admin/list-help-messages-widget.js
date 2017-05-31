@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
+import { helpMessagesRemoveItMethod } from '../../../api/help/HelpMessageCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/List_Help_Messages_Widget */
@@ -28,6 +29,6 @@ Template.List_Help_Messages_Widget.events({
   'click .jsDelete': function (event) {
     event.preventDefault();
     const id = event.target.value;
-    HelpMessages.removeIt(id);
+    helpMessagesRemoveItMethod.call({ id });
   },
 });

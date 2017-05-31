@@ -10,7 +10,6 @@ import { Users } from '../user/UserCollection';
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-
 if (Meteor.isServer) {
   describe('AdvisorLogCollection', function testSuite() {
     // Define course data.

@@ -22,16 +22,16 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #toStringFromSlug', function test() {
-      const docID = PlanChoices.define(simple);
+      const docID = PlanChoices.define({ choice: simple });
       expect(PlanChoices.isDefined(docID)).to.be.true;
       const dumpObject = PlanChoices.dumpOne(docID);
       PlanChoices.removeIt(docID);
       expect(PlanChoices.isDefined(docID)).to.be.false;
       const planID = PlanChoices.restoreOne(dumpObject);
       expect(PlanChoices.isDefined(planID)).to.be.true;
-      const choiceID = PlanChoices.define(choice);
+      const choiceID = PlanChoices.define({ choice });
       expect(PlanChoices.isDefined(choiceID)).to.be.true;
-      const complexID = PlanChoices.define(complex);
+      const complexID = PlanChoices.define({ choice: complex });
       expect(PlanChoices.isDefined(complexID)).to.be.true;
       expect(PlanChoices.toStringFromSlug(simple) === 'ICS 111').to.be.true;
       expect(PlanChoices.toStringFromSlug(choice) === 'ICS 313 or ICS 361').to.be.true;

@@ -7,6 +7,9 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
+import {
+  verificationRequestsUpdateStatusMethod,
+} from '../../../api/verification/VerificationRequestCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 
@@ -61,7 +64,7 @@ Template.Verification_Requests_Completed.events({
     processRecord.verifier = Users.getFullName(Meteor.userId());
     const processed = request.processed;
     processed.push(processRecord);
-    VerificationRequests.updateStatus(id, status, processed);
+    verificationRequestsUpdateStatusMethod.call({ id, status, processed });
   },
 });
 

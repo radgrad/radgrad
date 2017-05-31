@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
-import BaseSlugCollection from '../base/BaseSlugCollection';
+import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
 
@@ -12,9 +12,9 @@ import { ROLE } from '../role/Role';
 
 /**
  * Represent a valid user. Users must be approved before they can be created.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @extends module:api/base/BaseCollection~BaseCollection
  */
-class ValidUserAccountCollection extends BaseSlugCollection {
+class ValidUserAccountCollection extends BaseCollection {
   /**
    * Creates the Valid User Account collection.
    */

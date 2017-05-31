@@ -1,13 +1,17 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
-import { Feeds } from '../../../api/feed/FeedCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection';
+import {
+  feedsDefineNewUserMethod,
+  feedsUpdateNewUserMethod,
+} from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
-import { ValidUserAccounts } from '../../../api/user/ValidUserAccountCollection';
+import { defineUserMethod } from '../../../api/user/UserCollection.methods';
+import { validUserAccountsDefineMethod } from '../../../api/user/ValidUserAccountCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_User_Widget */
@@ -56,19 +60,28 @@ Template.Add_User_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      ValidUserAccounts.define({ username: newData.slug });
-      Meteor.call('Users.define', newData, (error) => {
+      validUserAccountsDefineMethod.call({ username: newData.slug }, (error) => {
+        if (error) {
+          console.log('Error during new user creation ValidUserAccounts: ', error);
+        }
+      });
+      defineUserMethod.call(newData, (error) => {
         if (error) {
           console.log('Error during new user creation: ', error);
         }
         if (Feeds.checkPastDayFeed('new-user')) {
-          Feeds.updateNewUser(newData.slug, Feeds.checkPastDayFeed('new-user'));
+          feedsUpdateNewUserMethod({ username: newData.slug, existingFeedID: Feeds.checkPastDayFeed('new-user') },
+              (err) => {
+                if (err) {
+                  console.log('Error updating new user Feed', err);
+                }
+              });
         } else {
           const feedDefinition = {
             user: [newData.slug],
             feedType: 'new-user',
           };
-          Feeds.defineNewUser(feedDefinition);
+          feedsDefineNewUserMethod.call(feedDefinition);
         }
         FormUtils.indicateSuccess(instance, event);
       });

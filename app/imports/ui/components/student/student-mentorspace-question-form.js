@@ -1,7 +1,12 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
+import {
+  mentorQuestionsDefineMethod,
+  mentorQuestionsUpdateMethod,
+} from '../../../api/mentor/MentorQuestionCollection.methods';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 
@@ -56,10 +61,40 @@ Template.Student_MentorSpace_Question_Form.events({
     event.preventDefault();
     const question = event.target.msquestion.value;
     if (Template.instance().setDefaultQuestion.get()) {
-      MentorQuestions.updateQuestion(Template.instance().setDefaultQuestion.get(), question);
+      const questionDoc = MentorQuestions.findDoc(Template.instance().setDefaultQuestion.get());
+      // There's gotta be a better way of doing this.
+      const data = {};
+      _.mapKeys(questionDoc, (value, key) => {
+        if (key !== '_id') {
+          data[key] = value;
+        }
+      });
+      data.id = questionDoc._id;
+      data.question = question;
+      mentorQuestionsUpdateMethod.call(data, (error) => {
+        if (error) {
+          instance.messageFlags.set(displaySuccessMessage, false);
+          instance.messageFlags.set(displayErrorMessages, true);
+          event.target.reset();
+        } else {
+          instance.messageFlags.set(displaySuccessMessage, true);
+          instance.messageFlags.set(displayErrorMessages, false);
+          event.target.reset();
+        }
+      });
     } else {
       const mentorQuestion = { title: question, student: getRouteUserName() };
-      MentorQuestions.define(mentorQuestion);
+      mentorQuestionsDefineMethod.call(mentorQuestion, (error) => {
+        if (error) {
+          instance.messageFlags.set(displaySuccessMessage, false);
+          instance.messageFlags.set(displayErrorMessages, true);
+          event.target.reset();
+        } else {
+          instance.messageFlags.set(displaySuccessMessage, true);
+          instance.messageFlags.set(displayErrorMessages, false);
+          event.target.reset();
+        }
+      });
     }
     instance.messageFlags.set(displaySuccessMessage, true);
     instance.messageFlags.set(displayErrorMessages, false);

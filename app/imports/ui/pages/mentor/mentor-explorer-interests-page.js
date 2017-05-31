@@ -7,7 +7,6 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
@@ -84,7 +83,6 @@ Template.Mentor_Explorer_Interests_Page.helpers({
   descriptionPairs(interest) {
     return [
       { label: 'Description', value: interest.description },
-      { label: 'More Information', value: makeLink(interest.moreInformation) },
       { label: 'Related Career Goals', value: careerGoals(interest) },
       { label: 'Related Courses', value: courses(interest) },
       { label: 'Related Opportunities', value: opportunities(interest) },

@@ -12,7 +12,10 @@ import { Users } from '../user/UserCollection';
 
 /** @module api/verification/VerificationRequestCollection */
 
-const ProcessedSchema = new SimpleSchema({
+/**
+ * Schema for the processed information of VerificationRequests.
+ */
+export const ProcessedSchema = new SimpleSchema({
   date: { type: Date },
   status: { type: String },
   verifier: { type: String },

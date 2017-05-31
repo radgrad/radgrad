@@ -12,12 +12,11 @@
       <div class="fields">
         {{> Input_Form_Field label='Slug' name='slug' value=slug errorMessage=(fieldError 'slug') disabled=true}}
         {{> Input_Form_Field label='Number' name='number' value=course.number errorMessage=(fieldError 'number') required=true}}
-        {{> Input_Form_Field label='Credit Hours' name='creditHrs' value=course.creditHrs errorMessage=(fieldError 'creditHrs')}}
       </div>
 
       <div class="fields">
         {{> Input_Form_Field label='Syllabus' name='syllabus' value=course.syllabus errorMessage=(fieldError 'syllabus')}}
-        {{> Input_Form_Field label='More Information' name='moreInformation' value=course.moreInformation errorMessage=(fieldError 'moreInformation')}}
+        {{> Input_Form_Field label='Credit Hours' name='creditHrs' value=course.creditHrs errorMessage=(fieldError 'creditHrs')}}
       </div>
 
       <div class="fields">

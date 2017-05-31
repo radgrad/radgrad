@@ -3,8 +3,13 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
+import {
+  mentorQuestionsUpdateModeratedMethod,
+  mentorQuestionsUpdateSlugMethod,
+} from '../../../api/mentor/MentorQuestionCollection.methods';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
+import { reviewsUpdateModeratedMethod } from '../../../api/review/ReviewCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
@@ -124,12 +129,12 @@ Template.Moderation.events({
       const moderated = item.moderated;
       const visible = item.visible;
       if (split[1] === 'review') {
-        Reviews.updateModerated(itemID, moderated, visible, moderatorComments);
+        reviewsUpdateModeratedMethod.call({ reviewID: itemID, moderated, visible, moderatorComments });
       } else {
-        MentorQuestions.updateModerated(itemID, moderated, visible, moderatorComments);
+        mentorQuestionsUpdateModeratedMethod.call({ questionID: itemID, moderated, visible, moderatorComments });
         if (!item.slugID) {
           const slug = newData.slug;
-          MentorQuestions.updateSlug(itemID, slug);
+          mentorQuestionsUpdateSlugMethod.call({ questionID: itemID, slug });
         }
       }
     } else {
