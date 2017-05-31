@@ -9,7 +9,7 @@ import { RadGrad } from '../radgrad/radgrad';
  * To be used only in testing mode.
  */
 export function removeAllEntities() {
-  if (Meteor.isTest) {
+  if (Meteor.isTest || Meteor.isAppTest) {
     _.forEach(RadGrad.collections, collection => collection._collection.remove({}));
   } else {
     throw new Meteor.Error('removeAllEntities not called in testing mode.');

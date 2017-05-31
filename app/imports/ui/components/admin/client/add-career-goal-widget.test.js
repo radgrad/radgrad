@@ -1,8 +1,6 @@
 import { Template } from 'meteor/templating';
-// import { expect } from 'chai';
 import { CareerGoals } from '../../../../api/career/CareerGoalCollection';
 import * as CareerGoalMethods from '../../../../api/career/CareerGoalCollection.methods';
-// import { resetDatabaseMethod } from '../../../../api/base/BaseCollection.methods';
 import { makeSampleInterest } from '../../../../api/interest/SampleInterests';
 import { Interests } from '../../../../api/interest/InterestCollection';
 import '../../../../api/career';
