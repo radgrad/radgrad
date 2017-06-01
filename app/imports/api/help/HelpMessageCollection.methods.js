@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { HelpMessages } from './HelpMessageCollection';
 import { ROLE } from '../role/Role';
@@ -12,11 +11,7 @@ import { ROLE } from '../role/Role';
  */
 export const helpMessagesDefineMethod = new ValidatedMethod({
   name: 'HelpMessages.define',
-  validate: new SimpleSchema({
-    routeName: { type: String },
-    title: { type: String },
-    text: { type: String },
-  }).validator(),
+  validate: null,
   run(helpDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Help Messages.');
@@ -33,9 +28,7 @@ export const helpMessagesDefineMethod = new ValidatedMethod({
  */
 export const HelpMessagesRemoveItMethod = new ValidatedMethod({
   name: 'HelpMessages.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to remove Help Messages.');

@@ -3,6 +3,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
 import { coursesRemoveItMethod } from '../../../api/course/CourseCollection.methods';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Feeds } from '../../../api/feed/FeedCollection';
+import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { makeLink } from './datamodel-utilities';
@@ -38,7 +40,6 @@ Template.List_Courses_Widget.helpers({
       { label: 'Syllabus', value: makeLink(course.syllabus) },
       { label: 'Prerequisites', value: course.prerequisites },
       { label: 'References', value: `Course Instances: ${numReferences(course)}` },
-
     ];
   },
 });
@@ -49,6 +50,9 @@ Template.List_Courses_Widget.events({
     event.preventDefault();
     const id = event.target.value;
     coursesRemoveItMethod.call({ id });
-    // TODO delete the Feed associated with this course?
+    const feeds = Feeds.find({ courseID: id }).fetch();
+    _.forEach(feeds, (f) => {
+      feedsRemoveItMethod.call({ id: f._id });
+    });
   },
 });

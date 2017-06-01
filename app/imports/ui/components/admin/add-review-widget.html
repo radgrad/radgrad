@@ -11,7 +11,7 @@
       </div>
 
       <div class="fields">
-        {{> Input_Form_Field label="Reviewee" name="reviewee" placeholder="ics141" errorMessage=(fieldError "reviewee") required=true}}
+        {{> Input_Form_Field label="Reviewee" name="reviewee" placeholder="ics_141" errorMessage=(fieldError "reviewee") required=true}}
         {{> Semesters_Single_Form_Field semesters=semesters errorMessage=(fieldError "semesters") required="true" }}
         {{> Rating_Form_Field label="Rating" ratings=ratings name="rating" placeholder="3" errorMessage=(fieldError "rating") required=true type="number"}}
       </div>

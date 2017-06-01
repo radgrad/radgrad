@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { MentorQuestions } from './MentorQuestionCollection';
@@ -12,14 +11,7 @@ import { ROLE } from '../role/Role';
  */
 export const mentorQuestionsDefineMethod = new ValidatedMethod({
   name: 'MentorQuestions.define',
-  validate: new SimpleSchema({
-    title: { type: String },
-    slug: { type: String, optional: true },
-    student: { type: String },
-    moderated: { type: Boolean, optional: true },
-    visible: { type: Boolean, optional: true },
-    moderatorComments: { type: String, optional: true },
-  }).validator(),
+  validate: null,
   run(helpDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define MentorQuestions.');
@@ -33,15 +25,7 @@ export const mentorQuestionsDefineMethod = new ValidatedMethod({
  */
 export const mentorQuestionsUpdateMethod = new ValidatedMethod({
   name: 'MentorQuestions.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    title: { type: String },
-    slugID: { type: SimpleSchema.RegEx.Id, optional: true },
-    studentID: { type: SimpleSchema.RegEx.Id },
-    moderated: { type: Boolean },
-    visible: { type: Boolean },
-    moderatorComments: { type: String, optional: true },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update MentorQuestions.');
@@ -55,12 +39,7 @@ export const mentorQuestionsUpdateMethod = new ValidatedMethod({
  */
 export const mentorQuestionsUpdateModeratedMethod = new ValidatedMethod({
   name: 'MentorQuestions.updateModerated',
-  validate: new SimpleSchema({
-    questionID: { type: SimpleSchema.RegEx.Id },
-    moderated: { type: Boolean },
-    visible: { type: Boolean },
-    moderatorComments: { type: String },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update MentorQuestions.');
@@ -75,10 +54,7 @@ export const mentorQuestionsUpdateModeratedMethod = new ValidatedMethod({
  */
 export const mentorQuestionsUpdateSlugMethod = new ValidatedMethod({
   name: 'MentorQuestions.updateSlug',
-  validate: new SimpleSchema({
-    questionID: { type: SimpleSchema.RegEx.Id },
-    slug: { type: String },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update MentorQuestions.');
@@ -93,9 +69,7 @@ export const mentorQuestionsUpdateSlugMethod = new ValidatedMethod({
  */
 export const mentorQuestionsRemoveItMethod = new ValidatedMethod({
   name: 'MentorQuestions.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to remove MentorQuestions.');
