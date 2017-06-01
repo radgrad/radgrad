@@ -1,13 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Users } from './UserCollection';
 import { ROLE } from '../role/Role';
 
 /** @module api/user/UserCollectionMethods */
 
-// TODO: Centralize schemas. Currently three: (1) here, (2) admin UI, (3) UserCollection definition.
+// TODO: Centralize schemas. Currently two: (1) admin UI, (2) UserCollection definition.
 /**
  * The Users define validated method.
  */
