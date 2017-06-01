@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection';
+import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -70,6 +72,14 @@ Template.List_Reviews_Widget.events({
       if (error) {
         console.log('Error removing Review', error);
       }
+    });
+    let feeds = Feeds.find({ opportunityID: id }).fetch();
+    _.forEach(feeds, (f) => {
+      feedsRemoveItMethod.call({ id: f._id });
+    });
+    feeds = Feeds.find({ courseID: id }).fetch();
+    _.forEach(feeds, (f) => {
+      feedsRemoveItMethod.call({ id: f._id });
     });
   },
 });

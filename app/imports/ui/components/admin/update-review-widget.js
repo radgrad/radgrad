@@ -98,6 +98,8 @@ Template.Update_Review_Widget.events({
     updatedData.moderated = (updatedData.moderated === 'true');
     updatedData.visible = (updatedData.visible === 'true');
     FormUtils.renameKey(updatedData, 'semester', 'semesterID');
+    FormUtils.renameKey(updatedData, 'student', 'studentID');
+    console.log(updatedData);
     if (instance.context.isValid()) {
       updatedData.id = instance.data.updateID.get();
       reviewsUpdateMethod.call(updatedData, (error) => {
