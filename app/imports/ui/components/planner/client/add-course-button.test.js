@@ -2,16 +2,16 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { expect } from 'chai';
 import { $ } from 'meteor/jquery';
-import '../../../../client/lib/semantic-ui/semantic.min';
-import { withRenderedTemplate } from '../../utilities/test-helpers';
-import { Courses } from '../../../api/course/CourseCollection';
-import { coursesDefineMethod } from '../../../api/course/CourseCollection.methods';
-import { makeSampleInterest } from '../../../api/interest/SampleInterests';
-import { resetDatabaseMethod } from '../../../api/base/BaseCollection.methods';
-import './academic-plan.html';
-import './academic-plan';
-import './add-course-button.html';
-import './add-course-button.js';
+import '../../../../../client/lib/semantic-ui/semantic.min';
+import { withRenderedTemplate } from '../../../utilities/test-helpers';
+import { Courses } from '../../../../api/course/CourseCollection';
+import { coursesDefineMethod } from '../../../../api/course/CourseCollection.methods';
+import { makeSampleInterest } from '../../../../api/interest/SampleInterests';
+import { resetDatabaseMethod } from '../../../../api/base/BaseCollection.methods';
+import '../academic-plan.html';
+import '../academic-plan';
+import '../add-course-button.html';
+import '../add-course-button.js';
 
 /* eslint-env mocha */
 /* eslint-disable func-names, prefer-arrow-callback */
