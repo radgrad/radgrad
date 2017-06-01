@@ -40,7 +40,7 @@ Template.List_Reviews_Widget.helpers({
     return (numReferences(opportunity) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;
+    return Slugs.findDoc(slugID).name;  // TODO deleting review causes an Error in the slugName helper.
   },
   descriptionPairs(review) {
     let reviewee;
