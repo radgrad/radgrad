@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { ValidUserAccounts } from './ValidUserAccountCollection';
 import { ROLE } from '../role/Role';
@@ -12,9 +11,7 @@ import { ROLE } from '../role/Role';
  */
 export const validUserAccountsDefineMethod = new ValidatedMethod({
   name: 'ValidUserAccounts.define',
-  validate: new SimpleSchema({
-    username: { type: String, optional: false },
-  }).validator(),
+  validate: null,
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define ValidUserAccounts.');
@@ -30,10 +27,7 @@ export const validUserAccountsDefineMethod = new ValidatedMethod({
  */
 export const validUserAccountsUpdateMethod = new ValidatedMethod({
   name: 'ValidUserAccounts.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    username: { type: String },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update ValidUserAccounts.');
@@ -49,9 +43,7 @@ export const validUserAccountsUpdateMethod = new ValidatedMethod({
  */
 export const validUserAccountsRemoveItMethod = new ValidatedMethod({
   name: 'ValidUserAccounts.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete ValidUserAccounts.');

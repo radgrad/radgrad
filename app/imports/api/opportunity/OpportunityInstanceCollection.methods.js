@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { OpportunityInstances } from './OpportunityInstanceCollection';
 
@@ -11,12 +10,7 @@ import { OpportunityInstances } from './OpportunityInstanceCollection';
  */
 export const opportunityInstancesDefineMethod = new ValidatedMethod({
   name: 'OpportunityInstances.define',
-  validate: new SimpleSchema({
-    semester: { type: String },
-    opportunity: { type: String },
-    verified: { type: Boolean, optional: true },
-    student: { type: String },
-  }).validator(),
+  validate: null,
   run(courseDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define OpportunityInstances.');
@@ -30,14 +24,7 @@ export const opportunityInstancesDefineMethod = new ValidatedMethod({
  */
 export const opportunityInstancesUpdateMethod = new ValidatedMethod({
   name: 'OpportunityInstances.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    semesterID: { type: SimpleSchema.RegEx.Id },
-    opportunityID: { type: SimpleSchema.RegEx.Id },
-    verified: { type: Boolean },
-    studentID: { type: SimpleSchema.RegEx.Id },
-    ice: { type: Object, optional: true, blackbox: true },
-  }).validator(),
+  validate: null,
   run(instanceUpdate) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update OpportunityInstances.');
@@ -51,10 +38,7 @@ export const opportunityInstancesUpdateMethod = new ValidatedMethod({
  */
 export const opportunityInstancesUpdateSemesterMethod = new ValidatedMethod({
   name: 'OpportunityInstances.updateSemester',
-  validate: new SimpleSchema({
-    opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
-    semesterID: { type: SimpleSchema.RegEx.Id },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update OpportunityInstances.');
@@ -68,10 +52,7 @@ export const opportunityInstancesUpdateSemesterMethod = new ValidatedMethod({
  */
 export const opportunityInstancesUpdateVerifiedMethod = new ValidatedMethod({
   name: 'OpportunityInstances.updateVerified',
-  validate: new SimpleSchema({
-    opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
-    verified: { type: Boolean },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update OpportunityInstances.');
@@ -85,9 +66,7 @@ export const opportunityInstancesUpdateVerifiedMethod = new ValidatedMethod({
  */
 export const opportunityInstancesRemoveItMethod = new ValidatedMethod({
   name: 'OpportunityInstances.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete OpportunityInstances.');

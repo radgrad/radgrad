@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Feeds } from './FeedCollection';
 
@@ -10,11 +9,7 @@ import { Feeds } from './FeedCollection';
  */
 export const feedsDefineNewUserMethod = new ValidatedMethod({
   name: 'Feeds.defineNewUser',
-  validate: new SimpleSchema({
-    user: { type: [String], optional: false },
-    feedType: { type: String, optional: false },
-    timestamp: { type: Date, optional: true },
-  }).validator(),
+  validate: null,
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
@@ -28,11 +23,7 @@ export const feedsDefineNewUserMethod = new ValidatedMethod({
  */
 export const feedsDefineNewCourseMethod = new ValidatedMethod({
   name: 'Feeds.defineNewCourse',
-  validate: new SimpleSchema({
-    course: { type: String, optional: false },
-    feedType: { type: String, optional: false },
-    timestamp: { type: Date, optional: true },
-  }).validator(),
+  validate: null,
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
@@ -46,11 +37,7 @@ export const feedsDefineNewCourseMethod = new ValidatedMethod({
  */
 export const feedsDefineNewOpportunityMethod = new ValidatedMethod({
   name: 'Feeds.defineNewOpportunity',
-  validate: new SimpleSchema({
-    opportunity: { type: String, optional: false },
-    feedType: { type: String, optional: false },
-    timestamp: { type: Date, optional: true },
-  }).validator(),
+  validate: null,
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
@@ -64,12 +51,7 @@ export const feedsDefineNewOpportunityMethod = new ValidatedMethod({
  */
 export const feedsDefineNewVerifiedOpportunityMethod = new ValidatedMethod({
   name: 'Feeds.defineNewVerifiedOpportunity',
-  validate: new SimpleSchema({
-    user: { type: [String], optional: false },
-    opportunity: { type: String, optional: false },
-    feedType: { type: String, optional: false },
-    timestamp: { type: Date, optional: true },
-  }).validator(),
+  validate: null,
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
@@ -83,12 +65,7 @@ export const feedsDefineNewVerifiedOpportunityMethod = new ValidatedMethod({
  */
 export const feedsDefineNewCourseReviewMethod = new ValidatedMethod({
   name: 'Feeds.defineNewCourseReview',
-  validate: new SimpleSchema({
-    user: { type: [String], optional: false },
-    course: { type: String, optional: false },
-    feedType: { type: String, optional: false },
-    timestamp: { type: Date, optional: true },
-  }).validator(),
+  validate: null,
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
@@ -102,12 +79,7 @@ export const feedsDefineNewCourseReviewMethod = new ValidatedMethod({
  */
 export const feedsDefineNewOpportunityReviewMethod = new ValidatedMethod({
   name: 'Feeds.defineNewOpportunityReview',
-  validate: new SimpleSchema({
-    user: { type: [String], optional: false },
-    opportunity: { type: String, optional: false },
-    feedType: { type: String, optional: false },
-    timestamp: { type: Date, optional: true },
-  }).validator(),
+  validate: null,
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
@@ -121,17 +93,7 @@ export const feedsDefineNewOpportunityReviewMethod = new ValidatedMethod({
  */
 export const feedsUpdateMethod = new ValidatedMethod({
   name: 'Feeds.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    userIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
-    opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
-    courseID: { type: SimpleSchema.RegEx.Id, optional: true },
-    semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
-    description: { type: String },
-    timestamp: { type: Date },
-    picture: { type: String },
-    feedType: { type: String },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Feeds.');
@@ -145,10 +107,7 @@ export const feedsUpdateMethod = new ValidatedMethod({
  */
 export const feedsUpdateNewUserMethod = new ValidatedMethod({
   name: 'Feeds.updateNewUser',
-  validate: new SimpleSchema({
-    username: { type: String },
-    existingFeedID: { type: SimpleSchema.RegEx.Id },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Feeds.');
@@ -162,10 +121,7 @@ export const feedsUpdateNewUserMethod = new ValidatedMethod({
  */
 export const feedsUpdateVerifiedOpportunityMethod = new ValidatedMethod({
   name: 'Feeds.updateVerifiedOpportunity',
-  validate: new SimpleSchema({
-    username: { type: String },
-    existingFeedID: { type: SimpleSchema.RegEx.Id },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
@@ -179,9 +135,7 @@ export const feedsUpdateVerifiedOpportunityMethod = new ValidatedMethod({
  */
 export const feedsRemoveItMethod = new ValidatedMethod({
   name: 'Feeds.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete Feeds.');
@@ -189,4 +143,3 @@ export const feedsRemoveItMethod = new ValidatedMethod({
     return Feeds.removeIt(removeArgs.id);
   },
 });
-

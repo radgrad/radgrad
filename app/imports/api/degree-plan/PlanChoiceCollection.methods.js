@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { PlanChoices } from './PlanChoiceCollection';
 
@@ -11,9 +10,7 @@ import { PlanChoices } from './PlanChoiceCollection';
  */
 export const planChoicesDefineMethod = new ValidatedMethod({
   name: 'PlanChoices.define',
-  validate: new SimpleSchema({
-    choice: { type: String, optional: false },
-  }).validator(),
+  validate: null,
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define PlanChoices.');
@@ -27,10 +24,7 @@ export const planChoicesDefineMethod = new ValidatedMethod({
  */
 export const planChoicesUpdateMethod = new ValidatedMethod({
   name: 'PlanChoices.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    choice: { type: String },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update PlanChoices.');
@@ -44,9 +38,7 @@ export const planChoicesUpdateMethod = new ValidatedMethod({
  */
 export const planChoicesRemoveItMethod = new ValidatedMethod({
   name: 'PlanChoices.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete PlanChoices.');

@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { calcLevel, updateStudentLevel } from './LevelProcessor';
@@ -14,9 +13,7 @@ import { Users } from '../user/UserCollection';
  */
 export const calcLevelMethod = new ValidatedMethod({
   name: 'LevelProcessor.calcLevel',
-  validate: new SimpleSchema({
-    studentID: { type: SimpleSchema.RegEx.Id },
-  }).validator(),
+  validate: null,
   run({ studentID }) {
     if (!this.userId && Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.');
@@ -30,9 +27,7 @@ export const calcLevelMethod = new ValidatedMethod({
  */
 export const updateLevelMethod = new ValidatedMethod({
   name: 'LevelProcessor.updateLevel',
-  validate: new SimpleSchema({
-    studentID: { type: SimpleSchema.RegEx.Id },
-  }).validator(),
+  validate: null,
   run({ studentID }) {
     if (!this.userId && Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.');

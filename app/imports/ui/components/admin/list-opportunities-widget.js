@@ -2,7 +2,8 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-
+import { Feeds } from '../../../api/feed/FeedCollection';
+import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
@@ -93,6 +94,10 @@ Template.List_Opportunities_Widget.events({
     const id = event.target.value;
     opportunitiesRemoveItMethod.call({ id }, (error) => {
       console.log('Error removing Opportunity', error);
+    });
+    const feeds = Feeds.find({ opportunityID: id }).fetch();
+    _.forEach(feeds, (f) => {
+      feedsRemoveItMethod.call({ id: f._id });
     });
   },
 });

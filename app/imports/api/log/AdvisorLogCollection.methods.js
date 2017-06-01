@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { AdvisorLogs } from './AdvisorLogCollection';
 import { ROLE } from '../role/Role';
@@ -12,12 +11,7 @@ import { ROLE } from '../role/Role';
  */
 export const advisorLogsDefineMethod = new ValidatedMethod({
   name: 'AdvisorLogs.define',
-  validate: new SimpleSchema({
-    advisor: { type: String },
-    student: { type: String },
-    text: { type: String },
-    createdOn: { type: Date, optional: true },
-  }).validator(),
+  validate: null,
   run(helpDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define AdvisorLogs.');
@@ -34,13 +28,7 @@ export const advisorLogsDefineMethod = new ValidatedMethod({
  */
 export const advisorLogsUpdateMethod = new ValidatedMethod({
   name: 'AdvisorLogs.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    studentID: { type: SimpleSchema.RegEx.Id },
-    advisorID: { type: SimpleSchema.RegEx.Id },
-    text: { type: String },
-    createdOn: { type: Date },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update AdvisorLogs.');
@@ -57,9 +45,7 @@ export const advisorLogsUpdateMethod = new ValidatedMethod({
  */
 export const AdvisorLogsRemoveItMethod = new ValidatedMethod({
   name: 'AdvisorLogs.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to remove AdvisorLogs.');
