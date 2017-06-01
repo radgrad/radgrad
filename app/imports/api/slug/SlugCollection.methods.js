@@ -9,10 +9,7 @@ import { Slugs } from './SlugCollection';
  */
 export const defineSlugMethod = new ValidatedMethod({
   name: 'Slugs.define',
-  validate: new SimpleSchema({
-    name: { type: String, optional: false },
-    entityName: { type: String, optional: false },
-  }).validator(),
+  validate: null,
   run({ name, entityName }) {
     Slugs.define(name, entityName);
   },
@@ -23,11 +20,7 @@ export const defineSlugMethod = new ValidatedMethod({
  */
 export const removeSlugMethod = new ValidatedMethod({
   name: 'Slugs.remove',
-  validate: new SimpleSchema({
-    name: { type: String },
-    entityName: { type: String },
-    entityID: { type: SimpleSchema.RegEx.Id, optional: true },
-  }).validator(),
+  validate: null,
   run(slug) {
     Slugs.removeIt(slug);
   },

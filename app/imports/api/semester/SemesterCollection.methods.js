@@ -10,10 +10,7 @@ import { Semesters } from './SemesterCollection';
  */
 export const semestersDefineMethod = new ValidatedMethod({
   name: 'Semesters.define',
-  validate: new SimpleSchema({
-    term: { type: String },
-    year: { type: Number },
-  }).validator(),
+  validate: null,
   run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Semesters.');
@@ -27,14 +24,7 @@ export const semestersDefineMethod = new ValidatedMethod({
  */
 export const semestersUpdateMethod = new ValidatedMethod({
   name: 'Semesters.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    term: { type: String },
-    year: { type: Number },
-    sortBy: { type: Number },
-    semesterNumber: { type: Number },
-    slugID: { type: SimpleSchema.RegEx.Id },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Semesters.');
@@ -48,9 +38,7 @@ export const semestersUpdateMethod = new ValidatedMethod({
  */
 export const semestersRemoveItMethod = new ValidatedMethod({
   name: 'Semesters.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete Semesters.');

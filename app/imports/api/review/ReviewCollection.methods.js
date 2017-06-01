@@ -11,18 +11,7 @@ import { Reviews } from './ReviewCollection';
  */
 export const reviewsDefineMethod = new ValidatedMethod({
   name: 'Reviews.define',
-  validate: new SimpleSchema({
-    slug: { type: String },
-    student: { type: String },
-    reviewType: { type: String },
-    reviewee: { type: String },
-    semester: { type: String },
-    rating: { type: Number },
-    comments: { type: String },
-    moderated: { type: Boolean },
-    visible: { type: Boolean },
-    moderatorComments: { type: String, optional: true },
-  }).validator(),
+  validate: null,
   run(courseDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Reviews.');
@@ -36,19 +25,7 @@ export const reviewsDefineMethod = new ValidatedMethod({
  */
 export const reviewsUpdateMethod = new ValidatedMethod({
   name: 'Reviews.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    slugID: { type: SimpleSchema.RegEx.Id },
-    studentID: { type: SimpleSchema.RegEx.Id },
-    reviewType: { type: String },
-    revieweeID: { type: SimpleSchema.RegEx.Id },
-    semesterID: { type: SimpleSchema.RegEx.Id },
-    rating: { type: Number },
-    comments: { type: String },
-    moderated: { type: Boolean },
-    visible: { type: Boolean },
-    moderatorComments: { type: String, optional: true },
-  }).validator(),
+  validate: null,
   run(instanceUpdate) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Reviews.');
@@ -62,12 +39,7 @@ export const reviewsUpdateMethod = new ValidatedMethod({
  */
 export const reviewsUpdateModeratedMethod = new ValidatedMethod({
   name: 'Reviews.updateModerated',
-  validate: new SimpleSchema({
-    reviewID: { type: SimpleSchema.RegEx.Id },
-    moderated: { type: Boolean },
-    visible: { type: Boolean },
-    moderatorComments: { type: String },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Reviews.');
@@ -81,9 +53,7 @@ export const reviewsUpdateModeratedMethod = new ValidatedMethod({
  */
 export const reviewsRemoveItMethod = new ValidatedMethod({
   name: 'Reviews.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete Reviews.');

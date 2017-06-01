@@ -12,12 +12,7 @@ import { ROLE } from '../role/Role';
  */
 export const interestsDefineMethod = new ValidatedMethod({
   name: 'Interests.define',
-  validate: new SimpleSchema({
-    name: { type: String },
-    slug: { type: String },
-    description: { type: String },
-    interestType: { type: String },
-  }).validator(),
+  validate: null,
   run(helpDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Interests.');
@@ -34,13 +29,7 @@ export const interestsDefineMethod = new ValidatedMethod({
  */
 export const interestsUpdateMethod = new ValidatedMethod({
   name: 'Interests.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    name: { type: String },
-    slugID: { type: SimpleSchema.RegEx.Id },
-    description: { type: String },
-    interestTypeID: { type: SimpleSchema.RegEx.Id },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Interests.');
@@ -57,9 +46,7 @@ export const interestsUpdateMethod = new ValidatedMethod({
  */
 export const interestsRemoveItMethod = new ValidatedMethod({
   name: 'Interests.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to remove Interests.');

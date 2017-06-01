@@ -13,12 +13,7 @@ import {
  */
 export const verificationRequestsDefineMethod = new ValidatedMethod({
   name: 'VerificationRequests.define',
-  validate: new SimpleSchema({
-    student: { type: String },
-    opportunityInstance: { type: SimpleSchema.RegEx.Id, optional: true },
-    opportunity: { type: String, optional: true },
-    semester: { type: String, optional: true },
-  }).validator(),
+  validate: null,
   run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define VerificationRequests.');
@@ -32,15 +27,7 @@ export const verificationRequestsDefineMethod = new ValidatedMethod({
  */
 export const verificationRequestsUpdateMethod = new ValidatedMethod({
   name: 'VerificationRequests.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    studentID: { type: SimpleSchema.RegEx.Id },
-    opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
-    submittedOn: { type: Date },
-    status: { type: String },
-    processed: { type: [ProcessedSchema] },
-    ice: { type: Object, optional: true, blackbox: true },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update VerificationRequests.');
@@ -54,11 +41,7 @@ export const verificationRequestsUpdateMethod = new ValidatedMethod({
  */
 export const verificationRequestsUpdateStatusMethod = new ValidatedMethod({
   name: 'VerificationRequests.updateStatus',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    status: { type: String },
-    processed: { type: [ProcessedSchema] },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update VerificationRequests.');
@@ -73,9 +56,7 @@ export const verificationRequestsUpdateStatusMethod = new ValidatedMethod({
  */
 export const verificationRequestsRemoveItMethod = new ValidatedMethod({
   name: 'VerificationRequests.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete VerificationRequests.');

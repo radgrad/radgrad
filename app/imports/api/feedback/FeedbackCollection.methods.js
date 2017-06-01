@@ -14,12 +14,7 @@ import { ROLE } from '../role/Role';
  */
 export const feedbacksDefineMethod = new ValidatedMethod({
   name: 'Feedbacks.define',
-  validate: new SimpleSchema({
-    name: { type: String, optional: false },
-    slug: { type: String, optional: false },
-    description: { type: String, optional: false },
-    feedbackType: { type: String, optional: false },
-  }).validator(),
+  validate: null,
   run(planDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feedbacks.');
@@ -35,13 +30,7 @@ export const feedbacksDefineMethod = new ValidatedMethod({
  */
 export const feedbacksUpdateMethod = new ValidatedMethod({
   name: 'Feedbacks.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    name: { type: String },
-    slugID: { type: SimpleSchema.RegEx.Id },
-    description: { type: String },
-    feedbackType: { type: String },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Feedbacks.');
@@ -57,9 +46,7 @@ export const feedbacksUpdateMethod = new ValidatedMethod({
  */
 export const feedbacksRemoveItMethod = new ValidatedMethod({
   name: 'Feedbacks.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete Feedbacks.');
@@ -69,4 +56,3 @@ export const feedbacksRemoveItMethod = new ValidatedMethod({
     return Feedbacks.removeIt(removeArgs.id);
   },
 });
-

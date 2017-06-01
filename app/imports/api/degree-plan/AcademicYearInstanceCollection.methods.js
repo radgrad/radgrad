@@ -11,10 +11,7 @@ import { AcademicYearInstances } from './AcademicYearInstanceCollection';
  */
 export const academicYearInstancesDefineMethod = new ValidatedMethod({
   name: 'AcademicYearInstances.define',
-  validate: new SimpleSchema({
-    year: { type: Number, optional: false },
-    student: { type: String, optional: false },
-  }).validator(),
+  validate: null,
   run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define AcademicYearInstances.');
@@ -28,13 +25,7 @@ export const academicYearInstancesDefineMethod = new ValidatedMethod({
  */
 export const academicYearInstancesUpdateMethod = new ValidatedMethod({
   name: 'AcademicYearInstances.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    year: { type: Number },
-    springYear: { type: Number },
-    studentID: { type: SimpleSchema.RegEx.Id },
-    semesterIDs: { type: [SimpleSchema.RegEx.Id] },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update AcademicYearInstances.');
@@ -48,9 +39,7 @@ export const academicYearInstancesUpdateMethod = new ValidatedMethod({
  */
 export const academicYearInstancesRemoveItMethod = new ValidatedMethod({
   name: 'AcademicYearInstances.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete AcademicYearInstances.');

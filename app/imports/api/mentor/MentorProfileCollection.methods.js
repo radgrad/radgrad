@@ -12,14 +12,7 @@ import { ROLE } from '../role/Role';
  */
 export const mentorProfilesDefineMethod = new ValidatedMethod({
   name: 'MentorProfiles.define',
-  validate: new SimpleSchema({
-    mentor: { type: String },
-    company: { type: String },
-    career: { type: String },
-    location: { type: String },
-    linkedin: { type: String },
-    motivation: { type: String },
-  }).validator(),
+  validate: null,
   run(helpDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define MentorProfiles.');
@@ -36,15 +29,7 @@ export const mentorProfilesDefineMethod = new ValidatedMethod({
  */
 export const mentorProfilesUpdateMethod = new ValidatedMethod({
   name: 'MentorProfiles.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    mentorID: { type: SimpleSchema.RegEx.Id },
-    company: { type: String },
-    career: { type: String },
-    location: { type: String },
-    linkedin: { type: String },
-    motivation: { type: String },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update MentorProfiles.');
@@ -61,9 +46,7 @@ export const mentorProfilesUpdateMethod = new ValidatedMethod({
  */
 export const MentorProfilesRemoveItMethod = new ValidatedMethod({
   name: 'MentorProfiles.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to remove MentorProfiles.');

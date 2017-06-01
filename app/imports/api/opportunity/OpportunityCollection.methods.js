@@ -12,18 +12,7 @@ import { ROLE } from '../role/Role';
  */
 export const opportunitiesDefineMethod = new ValidatedMethod({
   name: 'Opportunities.define',
-  validate: new SimpleSchema({
-    name: { type: String },
-    slug: { type: String },
-    description: { type: String },
-    opportunityType: { type: String },
-    sponsor: { type: String },
-    interests: { type: [String] },
-    semesters: { type: [String] },
-    ice: { type: Object, blackbox: true },
-    eventDate: { type: Date, optional: true },
-    independentStudy: { type: Boolean, optional: true },
-  }).validator(),
+  validate: null,
   run(courseDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Opportunities.');
@@ -40,21 +29,7 @@ export const opportunitiesDefineMethod = new ValidatedMethod({
  */
 export const opportunitiesUpdateMethod = new ValidatedMethod({
   name: 'Opportunities.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    name: { type: String },
-    slugID: { type: String },
-    description: { type: String },
-    opportunityTypeID: { type: SimpleSchema.RegEx.Id },
-    sponsorID: { type: SimpleSchema.RegEx.Id },
-    interestIDs: { type: [SimpleSchema.RegEx.Id] },
-    semesterIDs: { type: [SimpleSchema.RegEx.Id] },
-    independentStudy: { type: Boolean },
-    // Optional data
-    eventDate: { type: Date, optional: true },
-    iconURL: { type: SimpleSchema.RegEx.Url, optional: true },
-    ice: { type: Object, optional: true, blackbox: true },
-  }).validator(),
+  validate: null,
   run(goalUpdate) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Opportunities.');
@@ -71,9 +46,7 @@ export const opportunitiesUpdateMethod = new ValidatedMethod({
  */
 export const opportunitiesRemoveItMethod = new ValidatedMethod({
   name: 'Opportunities.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Opportunities.');

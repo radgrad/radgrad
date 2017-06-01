@@ -11,12 +11,7 @@ import { DesiredDegrees } from './DesiredDegreeCollection';
  */
 export const desiredDegreesDefineMethod = new ValidatedMethod({
   name: 'DesiredDegrees.define',
-  validate: new SimpleSchema({
-    name: { type: String, optional: false },
-    shortName: { type: String, optional: false },
-    slug: { type: String, optional: false },
-    description: { type: String, optional: false },
-  }).validator(),
+  validate: null,
   run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define DesiredDegrees.');
@@ -30,13 +25,7 @@ export const desiredDegreesDefineMethod = new ValidatedMethod({
  */
 export const desiredDegreesUpdateMethod = new ValidatedMethod({
   name: 'DesiredDegrees.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    name: { type: String },
-    shortName: { type: String },
-    slugID: { type: SimpleSchema.RegEx.Id },
-    description: { type: String },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update DesiredDegrees.');
@@ -50,9 +39,7 @@ export const desiredDegreesUpdateMethod = new ValidatedMethod({
  */
 export const desiredDegreesRemoveItMethod = new ValidatedMethod({
   name: 'DesiredDegrees.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete DesiredDegrees.');

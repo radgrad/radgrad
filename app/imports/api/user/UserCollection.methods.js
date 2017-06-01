@@ -13,22 +13,7 @@ import { ROLE } from '../role/Role';
  */
 export const defineUserMethod = new ValidatedMethod({
   name: 'Users.define',
-  validate: new SimpleSchema({
-    firstName: { type: String, optional: false },
-    lastName: { type: String, optional: false },
-    role: { type: String, optional: false },
-    slug: { type: String, optional: false },
-    email: { type: String, optional: false },
-    uhID: { type: String, optional: false },
-    // remaining are optional.
-    password: { type: String, optional: true },
-    desiredDegree: { type: String, optional: true },
-    picture: { type: String, optional: true },
-    level: { type: Number, optional: true },
-    careerGoals: { type: [String], optional: true },
-    interests: { type: [String], optional: true },
-    website: { type: String, optional: true },
-  }).validator(),
+  validate: null,
   run(userDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Users.');
@@ -44,23 +29,7 @@ export const defineUserMethod = new ValidatedMethod({
  */
 export const updateUserMethod = new ValidatedMethod({
   name: 'Users.update',
-  validate: new SimpleSchema({
-    firstName: { type: String, optional: false },
-    lastName: { type: String, optional: false },
-    username: { type: String, optional: false },
-    role: { type: String, optional: false },
-    email: { type: String, optional: false },
-    uhID: { type: String, optional: false },
-    // remaining are optional.
-    desiredDegreeID: { type: String, optional: true },
-    picture: { type: String, optional: true },
-    level: { type: Number, optional: true },
-    careerGoalIDs: { type: [String], optional: true },
-    interestIDs: { type: [String], optional: true },
-    website: { type: String, optional: true },
-    declaredSemesterID: { type: SimpleSchema.RegEx.Id, optional: true },
-    academicPlanID: { type: SimpleSchema.RegEx.Id, optional: true },
-  }).validator(),
+  validate: null,
   run(userDefn) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Users.');
@@ -76,11 +45,7 @@ export const updateUserMethod = new ValidatedMethod({
  */
 export const updateUserRoleMethod = new ValidatedMethod({
   name: 'Users.updateRole',
-  validate: new SimpleSchema({
-    userID: { type: SimpleSchema.RegEx.Id },
-    newRole: { type: [String] },
-    oldRole: { type: String },
-  }).validator(),
+  validate: null,
   run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Users.');
@@ -96,9 +61,7 @@ export const updateUserRoleMethod = new ValidatedMethod({
  */
 export const removeUserMethod = new ValidatedMethod({
   name: 'Users.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-  }).validator(),
+  validate: null,
   run(remove) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Users.');

@@ -83,11 +83,7 @@ function processStudentStarCsvData(advisor, student, csvData) {
  */
 export const starLoadDataMethod = new ValidatedMethod({
   name: 'StarProcessor.loadStarCsvData',
-  validate: new SimpleSchema({
-    advisor: { type: String },
-    student: { type: String },
-    csvData: { type: String },
-  }).validator(),
+  validate: null,
   run(data) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
