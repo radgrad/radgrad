@@ -42,6 +42,7 @@ class CareerGoalCollection extends BaseSlugCollection {
    */
   define({ name, slug, description, interests }) {
     // Get Interests, throw error if any of them are not found.
+    console.log(`In CareerGoal.define(), there are ${Interests.count()} interests. interests is: ${interests}`);
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });

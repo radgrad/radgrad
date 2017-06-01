@@ -60,7 +60,7 @@ export function defineTestFixture(fixtureName) {
     const loadFileName = `database/testing/${fixtureName}`;
     console.log(`    (Restoring test fixture from file ${loadFileName}.)`); // eslint-disable-line
     const loadJSON = JSON.parse(Assets.getText(loadFileName));
-    _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, false));
+    _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, true));
   }
 }
 
