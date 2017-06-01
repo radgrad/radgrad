@@ -2,10 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { expect } from 'chai';
 import { $ } from 'meteor/jquery';
+import StubCollections from 'meteor/hwillson:stubb-collections';
 import '../../../../../client/lib/semantic-ui/semantic.min';
 import { withRenderedTemplate } from '../../../utilities/test-helpers';
 import { Courses } from '../../../../api/course/CourseCollection';
-import { coursesDefineMethod } from '../../../../api/course/CourseCollection.methods';
+// import { coursesDefineMethod } from '../../../../api/course/CourseCollection.methods';
 import { makeSampleInterest } from '../../../../api/interest/SampleInterests';
 import { resetDatabaseMethod } from '../../../../api/base/BaseCollection.methods';
 import '../academic-plan.html';
@@ -28,27 +29,40 @@ if (Meteor.isClient) {
     });
 
     it('renders correctly with type add', function () {
+      StubCollections.stub(Courses);
       const name = 'Algorithms';
       const slug = 'ics_311';
       const number = 'ICS 311';
       const description = 'Study algorithms';
       const creditHrs = 3;
       const interests = [makeSampleInterest()];
-      coursesDefineMethod.call({ name, slug, number, description, creditHrs, interests }, (error, result) => {
-        if (error) {
-          console.log('Error defining Course', error);
-        } else {
-          const course = Courses.findDoc(result);
-          const data = {
-            buttonType: 'add',
-            course,
-          };
-          withRenderedTemplate('Add_Course_Button', data, (el) => {
-            expect($(el).find('[draggable]').length).to.equal(1);
-            expect($(el).find('[draggable]').text().trim()).to.equal('ICS 311');
-          });
-        }
+      const docID = Courses.define({ name, slug, number, description, creditHrs, interests });
+      // coursesDefineMethod.call({ name, slug, number, description, creditHrs, interests }, (error, result) => {
+      //   if (error) {
+      //     console.log('Error defining Course', error);
+      //   } else {
+      //     const course = Courses.findDoc(result);
+      //     const data = {
+      //       buttonType: 'add',
+      //       course,
+      //     };
+      //     withRenderedTemplate('Add_Course_Button', data, (el) => {
+      //       expect($(el).find('[draggable]').length).to.equal(1);
+      //       expect($(el).find('[draggable]').text().trim()).to.equal('ICS 311');
+      //     });
+      //   }
+      // });
+      const course = Courses.findDoc(docID);
+      const data = {
+        buttonType: 'add',
+        course,
+      };
+      withRenderedTemplate('Add_Course_Button', data, (el) => {
+        expect($(el).find('[draggable]').length).to.equal(1);
+        expect($(el).find('[draggable]').text().trim()).to.equal('ICS 311');
       });
+
+      StubCollections.restore();
     });
     it('renders correctly with type remove', function () {
       const data = {
