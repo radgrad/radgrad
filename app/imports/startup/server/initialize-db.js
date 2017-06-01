@@ -36,8 +36,8 @@ function totalDocuments() {
  */
 function initializeDB() { // eslint-disable-line
   Meteor.startup(() => {
-    if (totalDocuments() === 0) {
-      const loadFileName = Meteor.settings.public.databaseRestoreFileName;
+    const loadFileName = Meteor.settings.public.databaseRestoreFileName;
+    if (loadFileName && (totalDocuments() === 0)) {
       const loadFileAge = getRestoreFileAge(loadFileName);
       console.log(`Loading database from file ${loadFileName}, dumped ${loadFileAge}.`);
       const loadJSON = JSON.parse(Assets.getText(loadFileName));

@@ -19,12 +19,14 @@ export const careerGoalsDefineMethod = new ValidatedMethod({
     interests: { type: [String], optional: false },
   }).validator(),
   run(goalDefn) {
-    if (!Meteor.isTest && !this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to define Career Goals.');
-    } else
-      if (!Meteor.isTest && !Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
-      }
+    if (!Meteor.isTest && !Meteor.isAppTest) {
+      if (!this.userId) {
+        throw new Meteor.Error('unauthorized', 'You must be logged in to define Career Goals.');
+      } else
+        if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+          throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+        }
+    }
     const goalID = CareerGoals.define(goalDefn);
     console.log(goalID);
     return goalID;

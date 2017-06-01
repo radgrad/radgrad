@@ -1,5 +1,7 @@
+import { Meteor } from 'meteor/meteor'
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { RadGrad } from '../../api/radgrad/radgrad';
 
 /* global Assets */
@@ -54,8 +56,21 @@ export function getRestoreFileAge(loadFileName) {
  * @param fixtureName The name of the test fixture data file. (located in private/database/testing).
  */
 export function defineTestFixture(fixtureName) {
-  const loadFileName = `database/testing/${fixtureName}`;
-  console.log(`    (Restoring test fixture from file ${loadFileName}.)`); // eslint-disable-line
-  const loadJSON = JSON.parse(Assets.getText(loadFileName));
-  _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, false));
+  if (Meteor.isServer) {
+    const loadFileName = `database/testing/${fixtureName}`;
+    console.log(`    (Restoring test fixture from file ${loadFileName}.)`); // eslint-disable-line
+    const loadJSON = JSON.parse(Assets.getText(loadFileName));
+    _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, false));
+  }
 }
+
+/**
+ * Resets all of the RadGrad collections to their empty state. Only available in test mode.
+ */
+export const defineTestFixtureMethod = new ValidatedMethod({
+  name: 'test.defineTestFixtureMethod',
+  validate: null,
+  run(fixtureName) {
+    defineTestFixture(fixtureName);
+  },
+});
