@@ -57,19 +57,6 @@ class BaseSlugCollection extends BaseCollection {
   }
 
   /**
-   * Removes the passed instance from its collection.
-   * Note that prior to calling this method, the subclass should do additional checks to see if any dependent
-   * objects have been deleted.
-   * @param { String } instance A docID or slug representing the instance.
-   * @throws { Meteor.Error} If the instance (and its associated slug) cannot be found.
-   */
-  removeItNoSlug(instance) {
-    const doc = super.findDoc(instance);
-    check(doc, Object);
-    super.removeIt(doc);
-  }
-
-  /**
    * Return true if instance is a docID or a slug for this entity.
    * @param { String } instance A docID or a slug.
    * @returns {boolean} True if instance is a docID or slug for this entity.

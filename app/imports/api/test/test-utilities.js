@@ -1,6 +1,9 @@
+import { Meteor } from 'meteor/meteor';
+import { DDP } from 'meteor/ddp-client';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-import { RadGrad } from '../../api/radgrad/radgrad';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import { RadGrad } from '../radgrad/RadGrad';
 
 /* global Assets */
 
@@ -54,8 +57,51 @@ export function getRestoreFileAge(loadFileName) {
  * @param fixtureName The name of the test fixture data file. (located in private/database/testing).
  */
 export function defineTestFixture(fixtureName) {
-  const loadFileName = `database/testing/${fixtureName}`;
-  console.log(`    (Restoring test fixture from file ${loadFileName}.)`); // eslint-disable-line
-  const loadJSON = JSON.parse(Assets.getText(loadFileName));
-  _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, false));
+  if (Meteor.isServer) {
+    const loadFileName = `database/testing/${fixtureName}`;
+    console.log(`    (Restoring test fixture from file ${loadFileName}.)`); // eslint-disable-line
+    const loadJSON = JSON.parse(Assets.getText(loadFileName));
+    _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, false));
+  }
+}
+
+/**
+ * A validated method that sets all of the RadGrad collections to their empty state. Only available in test mode.
+ */
+export const defineTestFixtureMethod = new ValidatedMethod({
+  name: 'test.defineTestFixtureMethod',
+  validate: null,
+  run(fixtureName) {
+    defineTestFixture(fixtureName);
+  },
+});
+
+/**
+ * Returns a Promise that resolves when all RadGrad collections subscriptions are ready.
+ */
+export function withRadGradSubscriptions() {
+  return new Promise(resolve => {
+    _.each(RadGrad.collections, collection => collection.subscribe());
+    const poll = Meteor.setInterval(() => {
+      if (DDP._allSubscriptionsReady()) {
+        Meteor.clearInterval(poll);
+        resolve();
+      }
+    }, 200);
+  });
+}
+
+/**
+ * Returns a Promise that resolves if one can successfully login with the standard admin username and password.
+ */
+export function withAdminLogin() {
+  return new Promise((resolve, reject) => {
+    Meteor.loginWithPassword('radgrad', 'foo', (error) => {
+      if (error) {
+        reject();
+      } else {
+        resolve();
+      }
+    });
+  });
 }

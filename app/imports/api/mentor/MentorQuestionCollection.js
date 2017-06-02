@@ -17,7 +17,7 @@ class MentorQuestionCollection extends BaseSlugCollection {
   constructor() {
     super('MentorQuestion', new SimpleSchema({
       title: { type: String },
-      slugID: { type: SimpleSchema.RegEx.Id, optional: true },
+      slugID: { type: SimpleSchema.RegEx.Id, optional: true },  // TODO: Eliminate slugID from this collection.
       studentID: { type: SimpleSchema.RegEx.Id },
       moderated: { type: Boolean },
       visible: { type: Boolean },
@@ -106,18 +106,21 @@ class MentorQuestionCollection extends BaseSlugCollection {
     return problems;
   }
 
-  /**
-   * Removes the passed MentorQuestion and its associated Slug.
-   * @param opportunity The document or _id associated with this MentorQuestion.
-   * @throws {Meteor.Error} If MentorQuestion is not defined.
-   */
-  removeIt(question) {
-    if (this.findDoc(question).slugID) {
-      super.removeIt(question);
-    } else {
-      super.removeItNoSlug(question);
-    }
-  }
+  // TODO: removeItNoSlug should not exist in BaseSlugCollection, so I've removed it.
+  // This class should be able to us the default removeIt inherited from the superclass.
+
+  // /**
+  //  * Removes the passed MentorQuestion and its associated Slug.
+  //  * @param opportunity The document or _id associated with this MentorQuestion.
+  //  * @throws {Meteor.Error} If MentorQuestion is not defined.
+  //  */
+  // removeIt(question) {
+  //   if (this.findDoc(question).slugID) {
+  //     super.removeIt(question);
+  //   } else {
+  //     super.removeItNoSlug(question);
+  //   }
+  // }
 
   /**
    * Returns an object representing the MentorQuestion docID in a format acceptable to define().

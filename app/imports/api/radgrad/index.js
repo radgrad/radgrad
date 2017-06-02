@@ -1,1 +1,1 @@
-import './radgrad';
+import './RadGrad';
