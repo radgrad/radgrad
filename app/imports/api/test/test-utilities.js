@@ -1,4 +1,5 @@
-import { Meteor } from 'meteor/meteor'
+import { Meteor } from 'meteor/meteor';
+import { DDP } from 'meteor/ddp-client';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
@@ -60,7 +61,7 @@ export function defineTestFixture(fixtureName) {
     const loadFileName = `database/testing/${fixtureName}`;
     console.log(`    (Restoring test fixture from file ${loadFileName}.)`); // eslint-disable-line
     const loadJSON = JSON.parse(Assets.getText(loadFileName));
-    _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, true));
+    _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, false));
   }
 }
 
@@ -73,4 +74,27 @@ export const defineTestFixtureMethod = new ValidatedMethod({
   run(fixtureName) {
     defineTestFixture(fixtureName);
   },
+});
+
+/**
+ * Defines a Promise that resolves when all RadGrad collections subscriptions are ready.
+ */
+export const withRadGradSubscriptions = () => new Promise(resolve => {
+  _.each(RadGrad.collections, collection => collection.subscribe());
+  const poll = Meteor.setInterval(() => {
+    if (DDP._allSubscriptionsReady()) {
+      Meteor.clearInterval(poll);
+      resolve();
+    }
+  }, 200);
+});
+
+export const withAdminLogin = () => new Promise((resolve, reject) => {
+  Meteor.loginWithPassword('radgrad', 'foo', (error) => {
+    if (error) {
+      reject();
+    } else {
+      resolve();
+    }
+  });
 });

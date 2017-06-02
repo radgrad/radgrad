@@ -1,52 +1,54 @@
 import { Meteor } from 'meteor/meteor';
-import { DDP } from 'meteor/ddp-client';
-import { CareerGoals } from './CareerGoalCollection';
-import { Interests } from '../interest/InterestCollection';
-import { Slugs } from '../slug/SlugCollection';
-import { careerGoalsDefineMethod } from './CareerGoalCollection.methods';
+import { careerGoalsDefineMethod, careerGoalsRemoveItMethod } from './CareerGoalCollection.methods';
 import { resetDatabaseMethod } from '../base/BaseCollection.methods';
-import { defineTestFixtureMethod } from '../test/test-utilities';
+import { defineTestFixtureMethod, withRadGradSubscriptions, withAdminLogin } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-// Utility -- returns a promise which resolves when all subscriptions are done
-const waitForSubscriptions = () => new Promise(resolve => {
-  CareerGoals.subscribe();
-  Interests.subscribe();
-  Slugs.subscribe();
-  const poll = Meteor.setInterval(() => {
-    if (DDP._allSubscriptionsReady()) {
-      Meteor.clearInterval(poll);
-      resolve();
-    }
-  }, 200);
-});
-
 if (Meteor.isClient) {
-  describe('CareerGoalCollection.defineMethod', function test() {
-    before(function (done) {
+  describe('CareerGoalCollection Meteor Methods', function test() {
+    before(done => {
       defineTestFixtureMethod.call('CareerGoals.json', done);
     });
 
-    after(function (done) {
+    after(done => {
       resetDatabaseMethod.call(null, done);
     });
 
-    it('careerGoalDefineMethod', function (done) {
+    it('Define Method', function (done) {
       const careerDefn = {
-        name: 'career goal definition test',
+        name: 'name',
         slug: 'career-goal-slug',
-        description: 'career goal definition test description',
+        description: 'description',
         interests: ['data-science'],
       };
-      waitForSubscriptions().then(() => {
-        careerGoalsDefineMethod.call(careerDefn, (error, result) => {
-          console.log(`CareerGoals Define callback error="${error}" result="${result}"`);
-          const numGoals = CareerGoals.find().count();
-          console.log(CareerGoals.findDoc(result), numGoals);
-        });
-        done();
+      withAdminLogin().then(() => {
+        withRadGradSubscriptions().then(() => {
+          careerGoalsDefineMethod.call(careerDefn);
+          done();
+        }).catch(done);
+      });
+    });
+
+    it('Remove Method', function (done) {
+      const careerDefn = {
+        name: 'name',
+        slug: 'career-goal-slug2',
+        description: 'description',
+        interests: ['data-science'],
+      };
+      withAdminLogin().then(() => {
+        withRadGradSubscriptions().then(() => {
+          console.log('meteor user', Meteor.userId());
+          careerGoalsDefineMethod.call(careerDefn, (error, docID) => {
+            console.log('meteor user2', Meteor.userId());
+            careerGoalsRemoveItMethod.call(docID, (error2, result2) => {
+              console.log('after remove it', error2, result2);
+            });
+          });
+          done();
+        }).catch(done);
       });
     });
   });

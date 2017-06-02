@@ -13,16 +13,14 @@ export const careerGoalsDefineMethod = new ValidatedMethod({
   name: 'CareerGoals.define',
   validate: null,
   run(goalDefn) {
-    if (!Meteor.isTest && !Meteor.isAppTest) {
-      if (!this.userId) {
-        throw new Meteor.Error('unauthorized', 'You must be logged in to define Career Goals.');
-      } else
-        if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-          throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
-        }
-    }
+    console.log('define', this.userId, Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR]));
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Career Goals.');
+    } else
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to define new Career Goals.');
+      }
     const goalID = CareerGoals.define(goalDefn);
-    console.log(goalID);
     return goalID;
   },
 });
@@ -50,13 +48,14 @@ export const careerGoalsUpdateMethod = new ValidatedMethod({
 export const careerGoalsRemoveItMethod = new ValidatedMethod({
   name: 'CareerGoals.removeIt',
   validate: null,
-  run(removeArgs) {
+  run(instance) {
+    console.log('remove', this.userId, Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR]));
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to remove Career Goals.');
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
         throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to remove Career Goals.');
       }
-    return CareerGoals.removeIt(removeArgs.id);
+    return CareerGoals.removeIt(instance);
   },
 });
