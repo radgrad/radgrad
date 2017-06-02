@@ -3064,6 +3064,41 @@
       ]
     },
     {
+      "name": "FeedTypeCollection",
+      "contents": [
+        {
+          "name": "New User",
+          "slug": "new-user",
+          "description": "A new user has been added",
+        },
+        {
+          "name": "New Course",
+          "slug": "new-course",
+          "description": "A new course has been added",
+        },
+        {
+          "name": "New Opportunity",
+          "slug": "new-opportunity",
+          "description": "A new opportunity has been added",
+        },
+        {
+          "name": "Verified Opportunity",
+          "slug": "verified-opportunity",
+          "description": "A user has been verified for an opportunity",
+        },
+        {
+          "name": "New Course Review",
+          "slug": "new-course-review",
+          "description": "A new course review has been added",
+        },
+        {
+          "name": "New Opportunity Review",
+          "slug": "new-opportunity-review",
+          "description": "A new opportunity review has been added",
+        }
+      ]
+    },
+    {
       "name": "FeedCollection",
       "contents": [
       ]

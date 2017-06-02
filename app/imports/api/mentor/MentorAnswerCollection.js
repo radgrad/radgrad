@@ -41,7 +41,7 @@ class MentorAnswerCollection extends BaseCollection {
   }
 
   /**
-   * Returns the text for the given questionID.
+   * Returns all answers for the given question.
    * @param question
    */
   getAnswers(question) {
