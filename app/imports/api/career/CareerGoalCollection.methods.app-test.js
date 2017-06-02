@@ -8,6 +8,13 @@ import { defineTestFixtureMethod, withRadGradSubscriptions, withAdminLogin } fro
 
 if (Meteor.isClient) {
   describe('CareerGoalCollection Meteor Methods', function test() {
+    const careerDefn = {
+      name: 'name',
+      slug: 'career-goal-slug',
+      description: 'description',
+      interests: ['data-science'],
+    };
+
     before(done => {
       defineTestFixtureMethod.call('CareerGoals.json', done);
     });
@@ -17,12 +24,6 @@ if (Meteor.isClient) {
     });
 
     it('Define Method', function (done) {
-      const careerDefn = {
-        name: 'name',
-        slug: 'career-goal-slug',
-        description: 'description',
-        interests: ['data-science'],
-      };
       withAdminLogin().then(() => {
         withRadGradSubscriptions().then(() => {
           careerGoalsDefineMethod.call(careerDefn);
@@ -32,21 +33,9 @@ if (Meteor.isClient) {
     });
 
     it('Remove Method', function (done) {
-      const careerDefn = {
-        name: 'name',
-        slug: 'career-goal-slug2',
-        description: 'description',
-        interests: ['data-science'],
-      };
       withAdminLogin().then(() => {
         withRadGradSubscriptions().then(() => {
-          console.log('meteor user', Meteor.userId());
-          careerGoalsDefineMethod.call(careerDefn, (error, docID) => {
-            console.log('meteor user2', Meteor.userId());
-            careerGoalsRemoveItMethod.call(docID, (error2, result2) => {
-              console.log('after remove it', error2, result2);
-            });
-          });
+          careerGoalsRemoveItMethod.call('career-goal-slug');
           done();
         }).catch(done);
       });

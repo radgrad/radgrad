@@ -66,7 +66,7 @@ export function defineTestFixture(fixtureName) {
 }
 
 /**
- * Resets all of the RadGrad collections to their empty state. Only available in test mode.
+ * A validated method that sets all of the RadGrad collections to their empty state. Only available in test mode.
  */
 export const defineTestFixtureMethod = new ValidatedMethod({
   name: 'test.defineTestFixtureMethod',
@@ -77,24 +77,31 @@ export const defineTestFixtureMethod = new ValidatedMethod({
 });
 
 /**
- * Defines a Promise that resolves when all RadGrad collections subscriptions are ready.
+ * Returns a Promise that resolves when all RadGrad collections subscriptions are ready.
  */
-export const withRadGradSubscriptions = () => new Promise(resolve => {
-  _.each(RadGrad.collections, collection => collection.subscribe());
-  const poll = Meteor.setInterval(() => {
-    if (DDP._allSubscriptionsReady()) {
-      Meteor.clearInterval(poll);
-      resolve();
-    }
-  }, 200);
-});
-
-export const withAdminLogin = () => new Promise((resolve, reject) => {
-  Meteor.loginWithPassword('radgrad', 'foo', (error) => {
-    if (error) {
-      reject();
-    } else {
-      resolve();
-    }
+export function withRadGradSubscriptions() {
+  return new Promise(resolve => {
+    _.each(RadGrad.collections, collection => collection.subscribe());
+    const poll = Meteor.setInterval(() => {
+      if (DDP._allSubscriptionsReady()) {
+        Meteor.clearInterval(poll);
+        resolve();
+      }
+    }, 200);
   });
-});
+}
+
+/**
+ * Returns a Promise that resolves if one can successfully login with the standard admin username and password.
+ */
+export function withAdminLogin() {
+  return new Promise((resolve, reject) => {
+    Meteor.loginWithPassword('radgrad', 'foo', (error) => {
+      if (error) {
+        reject();
+      } else {
+        resolve();
+      }
+    });
+  });
+}
