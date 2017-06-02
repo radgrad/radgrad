@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { careerGoalsDefineMethod, careerGoalsRemoveItMethod } from './CareerGoalCollection.methods';
-import { resetDatabaseMethod } from '../base/BaseCollection.methods';
+import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { CareerGoals } from './CareerGoalCollection';
 import { defineTestFixtureMethod, withRadGradSubscriptions, withAdminLogin } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -26,7 +26,17 @@ if (Meteor.isClient) {
     it('Define Method', function (done) {
       withAdminLogin().then(() => {
         withRadGradSubscriptions().then(() => {
-          careerGoalsDefineMethod.call(careerDefn);
+          defineMethod.call({ collectionName: 'CareerGoalCollection', definition: careerDefn });
+          done();
+        }).catch(done);
+      });
+    });
+
+    it('Update Method', function (done) {
+      withAdminLogin().then(() => {
+        withRadGradSubscriptions().then(() => {
+          const id = CareerGoals.findIdBySlug(careerDefn.slug);
+          updateMethod.call({ collectionName: 'CareerGoalCollection', updateFields: { id, name: 'new name' } });
           done();
         }).catch(done);
       });
@@ -35,7 +45,7 @@ if (Meteor.isClient) {
     it('Remove Method', function (done) {
       withAdminLogin().then(() => {
         withRadGradSubscriptions().then(() => {
-          careerGoalsRemoveItMethod.call('career-goal-slug');
+          removeItMethod.call({ collectionName: 'CareerGoalCollection', instance: careerDefn.slug });
           done();
         }).catch(done);
       });

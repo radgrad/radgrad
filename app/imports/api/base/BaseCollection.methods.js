@@ -43,3 +43,34 @@ export const resetDatabaseMethod = new ValidatedMethod({
     removeAllEntities();
   },
 });
+
+
+export const defineMethod = new ValidatedMethod({
+  name: 'BaseCollection.define',
+  validate: null,
+  run({ collectionName, definition }) {
+    const collection = RadGrad.getCollection(collectionName);
+    collection.assertValidRoleForMethod(this.userId);
+    return collection.define(definition);
+  },
+});
+
+export const updateMethod = new ValidatedMethod({
+  name: 'BaseCollection.update',
+  validate: null,
+  run({ collectionName, updateFields }) {
+    const collection = RadGrad.getCollection(collectionName);
+    collection.assertValidRoleForMethod(this.userId);
+    return collection.update(updateFields.id, { $set: updateFields });
+  },
+});
+
+export const removeItMethod = new ValidatedMethod({
+  name: 'BaseCollection.removeIt',
+  validate: null,
+  run({ collectionName, instance }) {
+    const collection = RadGrad.getCollection(collectionName);
+    collection.assertValidRoleForMethod(this.userId);
+    return collection.removeIt(instance);
+  },
+});

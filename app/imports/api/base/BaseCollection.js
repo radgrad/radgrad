@@ -2,6 +2,8 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
+import { ROLE } from '../role/Role';
 
 /** @module api/base/BaseCollection */
 
@@ -63,9 +65,9 @@ class BaseCollection {
    */
   findDoc(name) {
     const doc = (
-            this._collection.findOne(name) ||
-            this._collection.findOne({ name }) ||
-            this._collection.findOne({ _id: name }));
+    this._collection.findOne(name) ||
+    this._collection.findOne({ name }) ||
+    this._collection.findOne({ _id: name }));
     if (!doc) {
       throw new Meteor.Error(`${name} is not a defined ${this._type}`);
     }
@@ -178,6 +180,30 @@ class BaseCollection {
       throw new Meteor.Error(`${names} is not an array.`);
     }
     names.map(name => this.assertDefined(name));
+  }
+
+  /**
+   * Internal helper function to simplify definition of the assertValidRoleForMethod method.
+   * @param userId The userID.
+   * @param roles An array of roles.
+   */
+  _assertRole(userId, roles) {  // eslint-disable-line class-methods-use-this
+    if (!userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in.');
+    } else
+      if (!Roles.userIsInRole(userId, roles)) {
+        throw new Meteor.Error('unauthorized', `You must be one of the following roles: ${roles}`);
+      }
+  }
+
+  /**
+   * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or Advisor.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
+   */
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR]);
   }
 
   /**
