@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { careerGoalsRemoveItMethod } from '../../../api/career/CareerGoalCollection.methods';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
@@ -45,7 +45,7 @@ Template.List_Career_Goals_Widget.events({
   'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    careerGoalsRemoveItMethod.call({ id }, (error, result) => {
+    removeItMethod.call({ collectionName: 'CareerGoalCollection', instance: id }, (error, result) => {
       if (error) {
         console.log('Error deleting CareerGoal: ', error);
         FormUtils.indicateError(instance);

@@ -3,7 +3,7 @@ import { DDP } from 'meteor/ddp-client';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { RadGrad } from '../../api/radgrad/radgrad';
+import { RadGrad } from '../radgrad/RadGrad';
 
 /* global Assets */
 

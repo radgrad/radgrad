@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
-import { RadGrad } from '../../api/radgrad/radgrad';
+import { RadGrad } from '../../api/radgrad/RadGrad';
 import { getRestoreFileAge, loadCollection } from '../../api/test/test-utilities';
 import { removeAllEntities } from '../../api/base/BaseUtilities';
 

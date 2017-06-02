@@ -36,7 +36,7 @@ if (Meteor.isClient) {
       withAdminLogin().then(() => {
         withRadGradSubscriptions().then(() => {
           const id = CareerGoals.findIdBySlug(careerDefn.slug);
-          updateMethod.call({ collectionName: 'CareerGoalCollection', updateFields: { id, name: 'new name' } });
+          updateMethod.call({ collectionName: 'CareerGoalCollection', updateData: { id, name: 'new name' } });
           done();
         }).catch(done);
       });

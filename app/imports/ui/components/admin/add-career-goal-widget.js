@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { careerGoalsDefineMethod } from '../../../api/career/CareerGoalCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -31,7 +31,7 @@ Template.Add_Career_Goal_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      careerGoalsDefineMethod.call(newData, (error, result) => {
+      defineMethod.call({ collectionName: 'CareerGoalCollection', definition: newData }, (error, result) => {
         if (error) {
           console.log('Error defining CareerGoal: ', error);
           FormUtils.indicateError(instance);  // TODO have a way of setting the FormUtils error text.

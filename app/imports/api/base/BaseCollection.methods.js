@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { RadGrad } from '../radgrad/radgrad';
+import { RadGrad } from '../radgrad/RadGrad';
 import { removeAllEntities } from './BaseUtilities';
 import { ROLE } from '../role/Role';
 
@@ -58,10 +58,10 @@ export const defineMethod = new ValidatedMethod({
 export const updateMethod = new ValidatedMethod({
   name: 'BaseCollection.update',
   validate: null,
-  run({ collectionName, updateFields }) {
+  run({ collectionName, updateData }) {
     const collection = RadGrad.getCollection(collectionName);
     collection.assertValidRoleForMethod(this.userId);
-    return collection.update(updateFields.id, { $set: updateFields });
+    return collection.update(updateData.id, { $set: updateData });
   },
 });
 
