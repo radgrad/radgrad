@@ -34,6 +34,21 @@ class MentorQuestionCollection extends BaseSlugCollection {
    * @param visible If the question is visible. Defaults to false.
    * @return { String } the docID of this question.
    */
+  /**
+   * Defines a mentorspace question.
+   * @example
+   * MentorQuestions.define({ title: 'What can I do to better prepare for interviews?',
+   *                  slug: 'interview-tips',
+   *                  student: 'abi',
+   *                  moderated: false,
+   *                  visible: false,
+   *                  moderatorComments: '' });
+   * @param { Object } description Object with keys title, slug, student, moderated, visible, and moderatorComments.
+   * Student must be a valid user
+   * Slug must be previously undefined
+   * @throws {Meteor.Error} If the definition includes an undefined student or a defined slug.
+   * @returns The newly created docID.
+   */
   define({ title, slug, student, moderated = false, visible = false, moderatorComments = '' }) {
     const studentID = Users.getID(student);
     let slugID;

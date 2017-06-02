@@ -29,14 +29,17 @@ class MentorProfileCollection extends BaseCollection {
 
   /**
    * Defines the profile associated with a Mentor.
-   * @param mentor The mentor (slug or ID).
-   * @param company The company the mentor is a member of.
-   * @param career The mentor's title.
-   * @param location The mentor's location
-   * @param linkedin The mentor's LinkedIn user ID.
-   * @param motivation The reason why the user mentors.
-   * @return { String } The docID of the MentorProfile.
-   * @throws { Meteor.Error } If mentor is not in ROLE.MENTOR.
+   * @example
+   * MentorProfiles.define({ mentor: 'akagawa',
+   *                  company: 'DataHouse',
+   *                  career: 'Software Engineer',
+   *                  location: 'Honolulu',
+   *                  linkedin: 'akagawa',
+   *                  motivation: 'I wanted to give back to my roots });
+   * @param { Object } description Object with keys mentor, company, career, location, linkedin, and motivation.
+   * Mentor must be a valid user slug with role mentor.
+   * @throws {Meteor.Error} If the definition includes an undefined mentor.
+   * @returns The newly created docID.
    */
   define({ mentor, company, career, location, linkedin, motivation }) {
     const mentorID = Users.getID(mentor);

@@ -23,12 +23,16 @@ class MentorAnswerCollection extends BaseCollection {
   }
 
   /**
-   * Defines the help for a given questionID.
-   * @param question The question (slug or ID).
-   * @param mentor The mentor who answered the question (slug or ID).
-   * @param text The answer itself.
-   * @return { String } The docID of the answer.
-   * @throws { Meteor.Error } If question or mentor is undefined.
+   * Defines an answer for a mentor question.
+   * @example
+   * MentorAnswers.define({ question: 'interview-tips',
+   *                  mentor: 'akagawa',
+   *                  text: 'Do lots of algorithm reviews' });
+   * @param { Object } description Object with keys question, mentor, and text.
+   * Mentor must be a valid user slug with role mentor.
+   * Question must be a valid question.
+   * @throws {Meteor.Error} If the definition includes an undefined mentor or undefined question.
+   * @returns The newly created docID.
    */
   define({ question, mentor, text }) {
     const questionID = MentorQuestions.getID(question);
