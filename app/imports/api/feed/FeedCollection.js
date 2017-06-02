@@ -3,6 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { Courses } from '/imports/api/course/CourseCollection';
+import { FeedTypes } from '/imports/api/feed/FeedTypeCollection';
 import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
 import { Semesters } from '/imports/api/semester/SemesterCollection';
 import { Slugs } from '/imports/api/slug/SlugCollection';
@@ -46,7 +47,7 @@ class FeedCollection extends BaseCollection {
       description: { type: String },
       timestamp: { type: Date },
       picture: { type: String },
-      feedType: { type: String },
+      feedTypeID: { type: SimpleSchema.RegEx.Id, optional: false },
     }));
   }
 
@@ -70,6 +71,7 @@ class FeedCollection extends BaseCollection {
       }
       return userID;
     });
+    const feedTypeID = FeedTypes.getID(feedType);
     if (userIDs.length > 1) {
       description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
         and {{> Student_Feed_Modal ${userIDs.length - 1}}} others have joined RadGrad.`;
@@ -78,7 +80,7 @@ class FeedCollection extends BaseCollection {
       has joined RadGrad.`;
     }
     const picture = Users.findDoc(userIDs[0]).picture;
-    const feedID = this._collection.insert({ userIDs, description, feedType, timestamp, picture });
+    const feedID = this._collection.insert({ userIDs, description, feedTypeID, timestamp, picture });
     return feedID;
   }
 
@@ -98,7 +100,8 @@ class FeedCollection extends BaseCollection {
     const description = `[${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)}) 
       has been added to Courses`;
     const picture = '/images/radgrad_logo.png';
-    const feedID = this._collection.insert({ courseID, description, feedType, picture, timestamp });
+    const feedTypeID = FeedTypes.getID(feedType);
+    const feedID = this._collection.insert({ courseID, description, feedTypeID, picture, timestamp });
     return feedID;
   }
 
@@ -118,7 +121,8 @@ class FeedCollection extends BaseCollection {
     const description = `[${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
       has been added to Opportunities`;
     const picture = '/images/radgrad_logo.png';
-    const feedID = this._collection.insert({ opportunityID, description, timestamp, picture, feedType });
+    const feedTypeID = FeedTypes.getID(feedType);
+    const feedID = this._collection.insert({ opportunityID, description, timestamp, picture, feedTypeID });
     return feedID;
   }
 
@@ -153,8 +157,9 @@ class FeedCollection extends BaseCollection {
         (${Semesters.toString(semesterID, false)})`;
     }
     const picture = '/images/radgrad_logo.png';
+    const feedTypeID = FeedTypes.getID(feedType);
     const feedID = this._collection.insert({
-      userIDs, opportunityID, semesterID, description, timestamp, picture, feedType,
+      userIDs, opportunityID, semesterID, description, timestamp, picture, feedTypeID,
     });
     return feedID;
   }
@@ -183,8 +188,9 @@ class FeedCollection extends BaseCollection {
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
+    const feedTypeID = FeedTypes.getID(feedType);
     const feedID = this._collection.insert({
-      userIDs, courseID, description, timestamp, picture, feedType,
+      userIDs, courseID, description, timestamp, picture, feedTypeID,
     });
     return feedID;
   }
@@ -214,8 +220,9 @@ class FeedCollection extends BaseCollection {
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
+    const feedTypeID = FeedTypes.getID(feedType);
     const feedID = this._collection.insert({
-      userIDs, opportunityID, description, timestamp, picture, feedType,
+      userIDs, opportunityID, description, timestamp, picture, feedTypeID,
     });
     return feedID;
   }
@@ -317,6 +324,9 @@ class FeedCollection extends BaseCollection {
       if (doc.semesterID && !Semesters.isDefined(doc.semesterID)) {
         problems.push(`Bad semesterID: ${doc.semesterID}`);
       }
+      if (!FeedTypes.isDefined(doc.feedTypeID)) {
+        problems.push(`Bad feedTypeID: ${doc.feedTypeID}`);
+      }
     });
     return problems;
   }
@@ -344,7 +354,7 @@ class FeedCollection extends BaseCollection {
     if (doc.semesterID) {
       semester = Semesters.findSlugByID(doc.semesterID);
     }
-    const feedType = doc.feedType;
+    const feedType = FeedTypes.findSlugByID(doc.feedTypeID);
     const timestamp = doc.timestamp;
     return { user, opportunity, course, semester, feedType, timestamp };
   }
@@ -356,17 +366,18 @@ class FeedCollection extends BaseCollection {
    * @returns { String } The docID of the newly created document.
    */
   restoreOne(dumpObject) {
-    if (dumpObject.feedType === 'new-user') {
+    const dumpType = dumpObject.feedType;
+    if (dumpType === 'new-user') {
       this.defineNewUser(dumpObject);
-    } else if (dumpObject.feedType === 'new-course') {
+    } else if (dumpType === 'new-course') {
       this.defineNewCourse(dumpObject);
-    } else if (dumpObject.feedType === 'new-opportunity') {
+    } else if (dumpType === 'new-opportunity') {
       this.defineNewOpportunity(dumpObject);
-    } else if (dumpObject.feedType === 'new-verified-opportunity') {
+    } else if (dumpType === 'new-verified-opportunity') {
       this.defineNewVerifiedOpportunity(dumpObject);
-    } else if (dumpObject.feedType === 'new-course-review') {
+    } else if (dumpType === 'new-course-review') {
       this.defineNewCourseReview(dumpObject);
-    } else if (dumpObject.feedType === 'new-opportunity-review') {
+    } else if (dumpType === 'new-opportunity-review') {
       this.defineNewOpportunityReview(dumpObject);
     }
   }

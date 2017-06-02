@@ -47,13 +47,6 @@ if (Meteor.isServer) {
       expect(doc).to.be.an('object');
       FeedTypes.removeIt(slug);
     });
-
-    it('#find', function test() {
-      FeedTypes.define({ name, slug, description });
-      const docs = FeedTypes.find().fetch();
-      expect(docs).to.have.lengthOf(1);
-      FeedTypes.removeIt(slug);
-    });
   });
 }
 

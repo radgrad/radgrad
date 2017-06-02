@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { Feeds } from './FeedCollection';
 import { Users } from '../user/UserCollection';
+import { makeSampleFeedType } from '../feed/SampleFeeds';
 import { makeSampleUser } from '../user/SampleUsers';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -18,7 +19,7 @@ if (Meteor.isServer) {
     before(function setup() {
       removeAllEntities();
       user = [Users.findDoc(makeSampleUser()).username];
-      feedType = 'new-user';
+      feedType = makeSampleFeedType();
       timestamp = Date.now();
     });
 
