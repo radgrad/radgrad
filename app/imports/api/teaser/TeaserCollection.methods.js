@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Teasers } from './TeaserCollection';
 
@@ -10,16 +9,7 @@ import { Teasers } from './TeaserCollection';
  */
 export const teasersDefineMethod = new ValidatedMethod({
   name: 'Teasers.define',
-  validate: new SimpleSchema({
-    title: { type: String },
-    slug: { type: String },
-    author: { type: String },
-    url: { type: String },
-    description: { type: String },
-    duration: { type: String },
-    interests: { type: [String] },
-    opportunity: { type: String, optional: true },
-  }).validator(),
+  validate: null,
   run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Teasers.');
@@ -33,17 +23,7 @@ export const teasersDefineMethod = new ValidatedMethod({
  */
 export const teasersUpdateMethod = new ValidatedMethod({
   name: 'Teasers.update',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id },
-    title: { type: String },
-    slugID: { type: SimpleSchema.RegEx.Id },
-    author: { type: String },
-    url: { type: String },
-    description: { type: String },
-    duration: { type: String },
-    interestIDs: { type: [SimpleSchema.RegEx.Id] },
-    opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
-  }).validator(),
+  validate: null,
   run(update) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Teasers.');
@@ -57,9 +37,7 @@ export const teasersUpdateMethod = new ValidatedMethod({
  */
 export const teasersRemoveItMethod = new ValidatedMethod({
   name: 'Teasers.removeIt',
-  validate: new SimpleSchema({
-    id: { type: SimpleSchema.RegEx.Id, optional: false },
-  }).validator(),
+  validate: null,
   run(removeArgs) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to delete Teasers.');

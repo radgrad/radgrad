@@ -72,16 +72,15 @@ Template.Add_Opportunity_Widget.events({
           FormUtils.indicateError(instance);
         } else {
           FormUtils.indicateSuccess(instance, event);
+          const feedDefinition = {
+            opportunity: newData.slug,
+            feedType: 'new-opportunity',
+          };
+          feedsDefineNewOpportunityMethod.call(feedDefinition);
         }
       });
     } else {
       FormUtils.indicateError(instance);
     }
-
-    const feedDefinition = {
-      opportunity: newData.slug,
-      feedType: 'new-opportunity',
-    };
-    feedsDefineNewOpportunityMethod.call(feedDefinition);
   },
 });

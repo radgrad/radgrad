@@ -34,7 +34,7 @@ Template.Add_Career_Goal_Widget.events({
       careerGoalsDefineMethod.call(newData, (error, result) => {
         if (error) {
           console.log('Error defining CareerGoal: ', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance);  // TODO have a way of setting the FormUtils error text.
         }
         if (result) {
           FormUtils.indicateSuccess(instance, event);

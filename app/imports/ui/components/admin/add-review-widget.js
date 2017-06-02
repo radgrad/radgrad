@@ -66,7 +66,6 @@ Template.Add_Review_Widget.events({
           user: [newData.student],
           course: newData.reviewee,
           feedType: 'new-course-review',
-          timestamp: Date.now(),
         };
         feedsDefineNewCourseReviewMethod.call(feedDefinition);
       } else {
