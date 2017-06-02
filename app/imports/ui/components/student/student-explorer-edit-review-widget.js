@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Feeds } from '../../../api/feed/FeedCollection';
+import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -84,6 +86,22 @@ Template.Student_Explorer_Edit_Review_Widget.events({
         FormUtils.indicateError(instance);
       } else {
         FormUtils.indicateSuccess(instance, event);
+        let feeds = Feeds.find({ opportunityID: id }).fetch();
+        _.forEach(feeds, (f) => {
+          feedsRemoveItMethod.call({ id: f._id }, (err) => {
+            if (err) {
+              console.log('Error removing Feed', err);
+            }
+          });
+        });
+        feeds = Feeds.find({ courseID: id }).fetch();
+        _.forEach(feeds, (f) => {
+          feedsRemoveItMethod.call({ id: f._id }, (err) => {
+            if (err) {
+              console.log('Error removing Feed', err);
+            }
+          });
+        });
       }
     });
   },
