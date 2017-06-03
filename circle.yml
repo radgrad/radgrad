@@ -16,4 +16,5 @@ dependencies:
 test:
   override:
     - meteor npm run test
+    - meteor npm run test-app
     - meteor npm run jsdoc

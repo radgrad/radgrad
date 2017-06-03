@@ -7,8 +7,8 @@
     "lint": "eslint --quiet ./imports",
     "lint-loud": "eslint ./imports",
     "pretest": "npm run lint",
-    "test": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --no-release-check --port 3100",
-    "test-app": "TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha --no-release-check --port 3100",
+    "test": "METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha --port 3100",
+    "test-app": "METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha --port 3100",
     "test-watch": "TEST_WATCH=1 TEST_BROWSER_DRIVER=nightmare meteor test --driver-package dispatch:mocha --no-release-check",
     "coverage-cam": "meteor test --driver-package practicalmeteor:mocha --port 3100 --no-release-check --settings ../config/settings.coverage.cam.json",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r ."
