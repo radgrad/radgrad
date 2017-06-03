@@ -93,11 +93,12 @@ export function withRadGradSubscriptions() {
 }
 
 /**
- * Returns a Promise that resolves if one can successfully login with the standard admin username and password.
+ * Returns a Promise that resolves if one can successfully login with the passed credentials.
+ * Credentials default to the standard admin username and password.
  */
-export function withAdminLogin() {
+export function withLoggedInUser({ username = 'RadGrad', password = 'foo' } = {}) {
   return new Promise((resolve, reject) => {
-    Meteor.loginWithPassword('radgrad', 'foo', (error) => {
+    Meteor.loginWithPassword(username, password, (error) => {
       if (error) {
         reject();
       } else {
