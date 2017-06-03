@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { RadGrad } from '../radgrad/RadGrad';
@@ -24,4 +25,17 @@ export function checkIntegrity() {
   const endTime = moment();
   message += `\nElapsed time: ${endTime.diff(startTime, 'seconds', true)} seconds`;
   return { count, message };
+}
+
+/**
+ * Checks the integrity of the database, and throws an Error if there are any integrity problems.
+ * @returns Null if nothing is wrong.
+ * @throws { Meteor.Error } If there is an integrity problem.
+ */
+export function assertIntegrity() {
+  const { count, message } = checkIntegrity();
+  if (count > 0) {
+    throw new Meteor.Error(message);
+  }
+  return null;
 }

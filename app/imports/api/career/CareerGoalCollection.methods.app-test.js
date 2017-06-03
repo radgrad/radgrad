@@ -1,49 +1,50 @@
 import { Meteor } from 'meteor/meteor';
 import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { CareerGoals } from './CareerGoalCollection';
-import { defineTestFixtureMethod, withRadGradSubscriptions, withAdminLogin } from '../test/test-utilities';
+import { defineTestFixtureMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
   describe('CareerGoalCollection Meteor Methods', function test() {
-    const careerDefn = {
+    const collectionName = 'CareerGoalCollection';
+    const definitionData = {
       name: 'name',
       slug: 'career-goal-slug',
       description: 'description',
       interests: ['data-science'],
     };
 
-    before(done => {
+    before(function (done) {
       defineTestFixtureMethod.call('CareerGoals.json', done);
     });
 
-    after(done => {
+    after(function (done) {
       resetDatabaseMethod.call(null, done);
     });
 
     it('Define Method', function (done) {
-      withAdminLogin().then(() => {
+      withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName: 'CareerGoalCollection', definition: careerDefn }, done);
+          defineMethod.call({ collectionName, definitionData }, done);
         }).catch(done);
       });
     });
 
     it('Update Method', function (done) {
-      withAdminLogin().then(() => {
+      withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const id = CareerGoals.findIdBySlug(careerDefn.slug);
-          updateMethod.call({ collectionName: 'CareerGoalCollection', updateData: { id, name: 'new name' } }, done);
+          const id = CareerGoals.findIdBySlug(definitionData.slug);
+          updateMethod.call({ collectionName, updateData: { id, name: 'new name', baz: 'baz' } }, done);
         }).catch(done);
       });
     });
 
     it('Remove Method', function (done) {
-      withAdminLogin().then(() => {
+      withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ collectionName: 'CareerGoalCollection', instance: careerDefn.slug }, done);
+          removeItMethod.call({ collectionName, instance: definitionData.slug }, done);
         }).catch(done);
       });
     });
