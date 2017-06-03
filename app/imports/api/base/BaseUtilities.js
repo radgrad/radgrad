@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { RadGrad } from '../radgrad/radgrad';
+import { RadGrad } from '../radgrad/RadGrad';
 
 /** @module api/base/BaseUtilities */
 

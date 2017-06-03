@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { RadGrad } from '../radgrad/radgrad';
+import { RadGrad } from '../radgrad/RadGrad';
 import { removeAllEntities } from './BaseUtilities';
 import { ROLE } from '../role/Role';
 
@@ -41,5 +41,36 @@ export const resetDatabaseMethod = new ValidatedMethod({
   validate: null,
   run() {
     removeAllEntities();
+  },
+});
+
+
+export const defineMethod = new ValidatedMethod({
+  name: 'BaseCollection.define',
+  validate: null,
+  run({ collectionName, definition }) {
+    const collection = RadGrad.getCollection(collectionName);
+    collection.assertValidRoleForMethod(this.userId);
+    return collection.define(definition);
+  },
+});
+
+export const updateMethod = new ValidatedMethod({
+  name: 'BaseCollection.update',
+  validate: null,
+  run({ collectionName, updateData }) {
+    const collection = RadGrad.getCollection(collectionName);
+    collection.assertValidRoleForMethod(this.userId);
+    return collection.update(updateData.id, { $set: updateData });
+  },
+});
+
+export const removeItMethod = new ValidatedMethod({
+  name: 'BaseCollection.removeIt',
+  validate: null,
+  run({ collectionName, instance }) {
+    const collection = RadGrad.getCollection(collectionName);
+    collection.assertValidRoleForMethod(this.userId);
+    return collection.removeIt(instance);
   },
 });

@@ -1,0 +1,78 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "collections": [
+    {
+      "name": "CareerGoalCollection",
+      "contents": [
+        {
+          "name": "Data Scientist",
+          "slug": "data-scientist",
+          "interests": [
+            "algorithms",
+            "data-science"
+          ],
+          "description": "A data scientist analyzes and interprets extremely complex and large data sets..."
+        }
+      ]
+    },
+    {
+      "name": "InterestCollection",
+      "contents": [
+        {
+          "name": "Algorithms",
+          "slug": "algorithms",
+          "description": "Simply put, an algorithm is a self-contained step-by-step set of operations to be performed. ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Data Science",
+          "slug": "data-science",
+          "description": "Data science is an interdisciplinary field about processes and systems to extract knowledge...",
+          "interestType": "cs-disciplines"
+        }
+      ]
+    },
+    {
+      "name": "InterestTypeCollection",
+      "contents": [
+        {
+          "name": "CS Disciplines",
+          "slug": "cs-disciplines",
+          "description": "Computer science and engineering areas of interest, not including languages, tools, technologies."
+        }
+      ]
+    },
+    {
+      "name": "UserCollection",
+      "contents": [
+        {
+          "firstName": "Admin",
+          "lastName": "RadGrad",
+          "slug": "radgrad",
+          "email": "radgrad@hawaii.edu",
+          "password": "foo",
+          "role": "ADMIN",
+          "uhID": "1111-1111",
+          "picture": "/images/mockup/radgrad.png",
+          "website": null,
+          "interests": [],
+          "careerGoals": [
+            "data-scientist"
+          ],
+          "desiredDegree": null,
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
+        }
+      ]
+    },
+    {
+      "name": "ValidUserAccountCollection",
+      "contents": [
+        {
+          "username": "radgrad"
+        }
+      ]
+    }
+  ]
+}

@@ -235,10 +235,12 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   generateStats() {
-    const instance = this;
-    _.map(this.stats, (key) => {
-      instance[key]();
-    });
+    if (!Meteor.isAppTest) {
+      const instance = this;
+      _.map(this.stats, (key) => {
+        instance[key]();
+      });
+    }
   }
 
   /**

@@ -1,3 +1,5 @@
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Meteor } from 'meteor/meteor';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { AdvisorLogs } from '../log/AdvisorLogCollection.js';
@@ -27,80 +29,100 @@ import { Users } from '../user/UserCollection';
 import { ValidUserAccounts } from '../user/ValidUserAccountCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection.js';
 
-/** @module api/base/RadGrad */
+/** @module api/radgrad/RadGrad */
 
-/**
- * RadGrad is an object intended to provide simple, global state information about the API.
- * @type { Object }
- */
-export const RadGrad = {};
+class RadGradClass {
 
-/**
- * RadGrad.collections provides an alphabetized list of all collection class instances in the system.
- * @type {Object[]}
- */
-RadGrad.collections = [
-  AcademicPlans,
-  AcademicYearInstances,
-  AdvisorLogs,
-  CareerGoals,
-  Courses,
-  CourseInstances,
-  Feeds,
-  Feedbacks,
-  FeedbackInstances,
-  HelpMessages,
-  DesiredDegrees,
-  Interests,
-  InterestTypes,
-  MentorAnswers,
-  MentorQuestions,
-  MentorProfiles,
-  Opportunities,
-  OpportunityInstances,
-  OpportunityTypes,
-  PlanChoices,
-  PublicStats,
-  Reviews,
-  Semesters,
-  Slugs,
-  Teasers,
-  Users,
-  ValidUserAccounts,
-  VerificationRequests,
-];
+  constructor() {
+    /**
+     * A list of all RadGrad API collections in alphabetical order.
+     */
+    this.collections = [
+      AcademicPlans,
+      AcademicYearInstances,
+      AdvisorLogs,
+      CareerGoals,
+      Courses,
+      CourseInstances,
+      Feeds,
+      Feedbacks,
+      FeedbackInstances,
+      HelpMessages,
+      DesiredDegrees,
+      Interests,
+      InterestTypes,
+      MentorAnswers,
+      MentorQuestions,
+      MentorProfiles,
+      Opportunities,
+      OpportunityInstances,
+      OpportunityTypes,
+      PlanChoices,
+      PublicStats,
+      Reviews,
+      Semesters,
+      Slugs,
+      Teasers,
+      Users,
+      ValidUserAccounts,
+      VerificationRequests,
+    ];
 
-/**
- * A list of collection class instances in the order required for them to be sequentially loaded from a snapshot file.
- * Note that not all collection class instances get initialized from a snapshot file.
- * Currently, Slugs, AcademicYearInstances, and PublicStats collections are not initialized and thus are not in
- * this list.
- * @type {Object[]}
- */
-RadGrad.collectionLoadSequence = [
-  Semesters,
-  HelpMessages,
-  InterestTypes,
-  Interests,
-  CareerGoals,
-  DesiredDegrees,
-  ValidUserAccounts,
-  Users,
-  OpportunityTypes,
-  Opportunities,
-  Courses,
-  Feedbacks,
-  Teasers,
-  CourseInstances,
-  OpportunityInstances,
-  FeedbackInstances,
-  VerificationRequests,
-  Feeds,
-  AdvisorLogs,
-  MentorProfiles,
-  MentorQuestions,
-  MentorAnswers,
-  Reviews,
-  AcademicPlans,
-  PlanChoices,
-];
+    /**
+     * A list of collection class instances in the order required for them to be sequentially loaded from a file.
+     * Note that some collection class instances are implicitly initialized: Slugs, AcademicYearInstancs, and
+     * PublicStats.
+     */
+    this.collectionLoadSequence = [
+      Semesters,
+      HelpMessages,
+      InterestTypes,
+      Interests,
+      CareerGoals,
+      DesiredDegrees,
+      ValidUserAccounts,
+      Users,
+      OpportunityTypes,
+      Opportunities,
+      Courses,
+      Feedbacks,
+      Teasers,
+      CourseInstances,
+      OpportunityInstances,
+      FeedbackInstances,
+      VerificationRequests,
+      Feeds,
+      AdvisorLogs,
+      MentorProfiles,
+      MentorQuestions,
+      MentorAnswers,
+      Reviews,
+      AcademicPlans,
+      PlanChoices,
+    ];
+
+    /**
+     * An object with keys equal to the collection name and values the associated collection instance.
+     */
+    this.collectionAssociation = {};
+    _.forEach(this.collections, collection => {
+      this.collectionAssociation[collection._collectionName] = collection;
+    });
+  }
+
+  /**
+   * Return the collection class instance given its name.
+   * @param collectionName The name of the collection.
+   * @returns The collection class instance.
+   * @throws { Meteor.Error } If collectionName does not name a collection.
+   */
+  getCollection(collectionName) {
+    const collection = this.collectionAssociation[collectionName];
+    if (!collection) {
+      throw new Meteor.Exception(`Called RadGrad.getCollection with unknown collection name: ${collectionName}`);
+    }
+    return collection;
+  }
+}
+
+export const RadGrad = new RadGradClass();
