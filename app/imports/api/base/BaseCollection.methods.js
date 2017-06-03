@@ -48,10 +48,10 @@ export const resetDatabaseMethod = new ValidatedMethod({
 export const defineMethod = new ValidatedMethod({
   name: 'BaseCollection.define',
   validate: null,
-  run({ collectionName, definition }) {
+  run({ collectionName, definitionData }) {
     const collection = RadGrad.getCollection(collectionName);
     collection.assertValidRoleForMethod(this.userId);
-    return collection.define(definition);
+    return collection.define(definitionData);
   },
 });
 
