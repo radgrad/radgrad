@@ -78,6 +78,7 @@ export const defineTestFixtureMethod = new ValidatedMethod({
 
 /**
  * Returns a Promise that resolves when all RadGrad collections subscriptions are ready.
+ * @see {@link https://guide.meteor.com/testing.html#full-app-integration-test}
  */
 export function withRadGradSubscriptions() {
   return new Promise(resolve => {

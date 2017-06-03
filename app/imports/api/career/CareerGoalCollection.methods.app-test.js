@@ -26,8 +26,7 @@ if (Meteor.isClient) {
     it('Define Method', function (done) {
       withAdminLogin().then(() => {
         withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName: 'CareerGoalCollection', definition: careerDefn });
-          done();
+          defineMethod.call({ collectionName: 'CareerGoalCollection', definition: careerDefn }, done);
         }).catch(done);
       });
     });
@@ -36,8 +35,7 @@ if (Meteor.isClient) {
       withAdminLogin().then(() => {
         withRadGradSubscriptions().then(() => {
           const id = CareerGoals.findIdBySlug(careerDefn.slug);
-          updateMethod.call({ collectionName: 'CareerGoalCollection', updateData: { id, name: 'new name' } });
-          done();
+          updateMethod.call({ collectionName: 'CareerGoalCollection', updateData: { id, name: 'new name' } }, done);
         }).catch(done);
       });
     });
@@ -45,8 +43,7 @@ if (Meteor.isClient) {
     it('Remove Method', function (done) {
       withAdminLogin().then(() => {
         withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ collectionName: 'CareerGoalCollection', instance: careerDefn.slug });
-          done();
+          removeItMethod.call({ collectionName: 'CareerGoalCollection', instance: careerDefn.slug }, done);
         }).catch(done);
       });
     });
