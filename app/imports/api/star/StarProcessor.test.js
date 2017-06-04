@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { defineTestFixture } from '../test/test-utilities';
+import { defineTestFixtures } from '../test/test-utilities';
 import { processStarCsvData } from './StarProcessor';
 import { Users } from '../user/UserCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
@@ -24,7 +24,7 @@ if (Meteor.isServer) {
     });
 
     it('#processStarCsvData', function test() {
-      defineTestFixture('CoursesInterests.json');
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'abi.user']);
       const csvData = Assets.getText(starDataPath);
       const user = Users.findDoc({ username: 'abi' });
       const courseInstanceDefinitions = processStarCsvData(user.username, csvData);

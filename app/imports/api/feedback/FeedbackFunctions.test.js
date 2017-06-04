@@ -5,7 +5,7 @@ import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { makeSampleUser } from '../user/SampleUsers';
-import { defineTestFixture } from '../test/test-utilities';
+import { defineTestFixtures } from '../test/test-utilities';
 import { Users } from '../user/UserCollection';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -13,12 +13,11 @@ import { Users } from '../user/UserCollection';
 
 if (Meteor.isServer) {
   describe('FeedbackFunctions', function testSuite() {
-    this.timeout(0);
     let studentID;
 
     before(function setup() {
-      removeAllEntities();
-      defineTestFixture('FeedbackFunctions.json');
+      this.timeout(0);
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'academicplan']);
       studentID = makeSampleUser();
     });
 

@@ -1,0 +1,155 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription" : "Abi's course instances. Requires abi.user and extended.courses.interests.",
+  "collections": [
+    {
+      "name": "CourseInstanceCollection",
+      "contents": [
+        {
+          "semester": "Fall-2014",
+          "course": "ics_111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2014",
+          "course": "ics_141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B+",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics_211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2015",
+          "course": "ics_241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics_311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics_314",
+          "note": "ICS 314",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics_212",
+          "note": "ICS 212",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics_321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics_313",
+          "note": "ICS 313",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics_331",
+          "note": "ICS 331",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics_332",
+          "note": "ICS 332",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics_464",
+          "note": "ICS 464",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics_414",
+          "note": "ICS 414",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics_415",
+          "note": "ICS 415",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics_466",
+          "note": "ICS 466",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics_432",
+          "note": "ICS 432",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi"
+        }
+      ]
+    }
+  ]
+}

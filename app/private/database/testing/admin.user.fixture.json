@@ -1,0 +1,37 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription" : "Defines the admin user.",
+  "collections": [
+    {
+      "name": "UserCollection",
+      "contents": [
+        {
+          "firstName": "Admin",
+          "lastName": "RadGrad",
+          "slug": "radgrad",
+          "email": "radgrad@hawaii.edu",
+          "password": "foo",
+          "role": "ADMIN",
+          "uhID": "1111-1111",
+          "picture": "/images/mockup/radgrad.png",
+          "website": null,
+          "interests": [],
+          "careerGoals": [
+          ],
+          "desiredDegree": null,
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
+        }
+      ]
+    },
+    {
+      "name": "ValidUserAccountCollection",
+      "contents": [
+        {
+          "username": "radgrad"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription" : "Defines Abi Kealoha. Requires minimal.fixture.",
+  "collections": [
+    {
+      "name": "UserCollection",
+      "contents": [
+        {
+          "firstName": "Abigail",
+          "lastName": "Kealoha",
+          "slug": "abi",
+          "email": "abi@hawaii.edu",
+          "password": "foo",
+          "role": "STUDENT",
+          "uhID": "1234-5678",
+          "picture": "/images/mockup/abi.jpg",
+          "website": "http://abi.github.io",
+          "interests": [
+            "java"
+          ],
+          "careerGoals": [
+            "data-scientist"
+          ],
+          "desiredDegree": null,
+          "level": 5,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
+        }
+      ]
+    },
+    {
+      "name": "ValidUserAccountCollection",
+      "contents": [
+        {
+          "username": "abi"
+        }
+      ]
+    }
+  ]
+}

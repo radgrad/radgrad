@@ -1,9 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { moment } from 'meteor/momentjs:moment';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { RadGrad } from '../../api/radgrad/RadGrad';
-import { getRestoreFileAge, loadCollection } from '../../api/test/test-utilities';
+import { loadCollection } from '../../api/test/test-utilities';
 import { removeAllEntities } from '../../api/base/BaseUtilities';
 
 /* global Assets */
@@ -28,6 +29,25 @@ function totalDocuments() {
     return sum + count;
   }, 0);
 }
+
+/**
+ * The load/fixture file date format.
+ * Used when dumping and restoring the RadGrad database.
+ * @type {string}
+ */
+const loadFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
+
+/**
+ * Returns a string indicating how long ago the load file was created. Parses the file name string.
+ * @param loadFileName The file name.
+ * @returns { String } A string indicating how long ago the file was created.
+ */
+function getRestoreFileAge(loadFileName) {
+  const terms = _.words(loadFileName, /[^/. ]+/g);
+  const dateString = terms[terms.length - 2];
+  return moment(dateString, loadFileDateFormat).fromNow();
+}
+
 
 /**
  * If the database is empty, this function looks up the name of the load file in the settings file,

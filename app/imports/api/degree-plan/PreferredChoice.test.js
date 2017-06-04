@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { Courses } from '../course/CourseCollection';
 import { Interests } from '../interest/InterestCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
-import { defineTestFixture } from '../test/test-utilities';
+import { defineTestFixtures } from '../test/test-utilities';
 import PreferredChoice from './PreferredChoice';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -11,11 +11,8 @@ import PreferredChoice from './PreferredChoice';
 
 if (Meteor.isServer) {
   describe('PreferredChoice', function testSuite() {
-    this.timeout(0);
-
     before(function setup() {
-      removeAllEntities();
-      defineTestFixture('PreferredChoice.json');
+      defineTestFixtures(['minimal', 'extended.courses.interests']);
     });
 
     after(function teardown() {

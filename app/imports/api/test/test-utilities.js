@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { DDP } from 'meteor/ddp-client';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { moment } from 'meteor/momentjs:moment';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { RadGrad } from '../radgrad/RadGrad';
 
@@ -35,44 +34,41 @@ export function loadCollection(collection, loadJSON, consolep) {
 }
 
 /**
- * The load/fixture file date format.
- * Used when dumping and restoring the RadGrad database.
- * @type {string}
- */
-export const loadFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
-
-/**
- * Returns a string indicating how long ago the load file was created. Parses the file name string.
- * @param loadFileName The file name.
- * @returns { String } A string indicating how long ago the file was created.
- */
-export function getRestoreFileAge(loadFileName) {
-  const terms = _.words(loadFileName, /[^/. ]+/g);
-  const dateString = terms[terms.length - 2];
-  return moment(dateString, loadFileDateFormat).fromNow();
-}
-
-/**
  * Loads data from a test fixture file.
  * @param fixtureName The name of the test fixture data file. (located in private/database/testing).
  */
 export function defineTestFixture(fixtureName) {
   if (Meteor.isServer) {
     const loadFileName = `database/testing/${fixtureName}`;
-    console.log(`    (Restoring test fixture from file ${loadFileName}.)`); // eslint-disable-line
     const loadJSON = JSON.parse(Assets.getText(loadFileName));
+    console.log(`    Loaded ${loadFileName}: ${loadJSON.fixtureDescription}`);
     _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, false));
   }
 }
 
+export function defineTestFixtures(fixtureNames) {
+  _.each(fixtureNames, fixtureName => defineTestFixture(`${fixtureName}.fixture.json`));
+}
+
 /**
- * A validated method that sets all of the RadGrad collections to their empty state. Only available in test mode.
+ * A validated method that loads the passed fixture file.
  */
 export const defineTestFixtureMethod = new ValidatedMethod({
   name: 'test.defineTestFixtureMethod',
   validate: null,
   run(fixtureName) {
     defineTestFixture(fixtureName);
+  },
+});
+
+/**
+ * A validated method that loads the passed list of fixture files in the order passed.
+ */
+export const defineTestFixturesMethod = new ValidatedMethod({
+  name: 'test.defineTestFixturesMethod',
+  validate: null,
+  run(fixtureNames) {
+    defineTestFixtures(fixtureNames);
   },
 });
 

@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { Users } from '../user/UserCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
-import { defineTestFixture } from '../test/test-utilities';
+import { defineTestFixtures } from '../test/test-utilities';
 import * as utilities from './AcademicYearUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -10,11 +10,9 @@ import * as utilities from './AcademicYearUtilities';
 
 if (Meteor.isServer) {
   describe('AcademicYearUtilities', function testSuite() {
-    this.timeout(0);
-
     before(function setup() {
-      removeAllEntities();
-      defineTestFixture('AcademicYearUtilities.json');
+      this.timeout(0);
+      defineTestFixtures(['minimal', 'abi.user', 'extended.courses.interests', 'abi.courseinstances']);
     });
 
     after(function teardown() {
