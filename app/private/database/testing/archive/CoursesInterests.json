@@ -1,0 +1,1564 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "collections": [
+    {
+      "name": "CareerGoalCollection",
+      "contents": [
+        {
+          "name": "Data Scientist",
+          "slug": "data-scientist",
+          "interests": [
+            "algorithms",
+            "data-science",
+            "databases",
+            "machine-learning",
+            "research"
+          ],
+          "description": "A data scientist analyzes and interprets extremely complex and large data sets"
+        },
+        {
+          "name": "Database Administrator",
+          "slug": "database-administrator",
+          "interests": [
+            "application-development",
+            "databases",
+            "software-engineering"
+          ],
+          "description": "Companies, private organizations, and government agencies rely on database administrators"
+        },
+        {
+          "name": "DevOps Engineer",
+          "slug": "devops-engineer",
+          "interests": [
+            "application-development",
+            "databases",
+            "networks",
+            "software-engineering"
+          ],
+          "description": "\"DevOps\" (short for \"development operations\") is a new and important specialization"
+        },
+        {
+          "name": "Full Stack Developer",
+          "slug": "full-stack-developer",
+          "interests": [
+            "databases",
+            "software-engineering",
+            "web-development"
+          ],
+          "description": "Full Stack Developer is a career goal focused on the design and implementation of web applications."
+        },
+        {
+          "name": "Game Developer",
+          "slug": "game-developer",
+          "interests": [
+            "computer-graphics",
+            "databases",
+            "game-design",
+            "unity",
+            "virtual-reality"
+          ],
+          "description": "The Game Developer career goal refers to a specialized form of Software Developer"
+        },
+        {
+          "name": "Graduate School",
+          "slug": "graduate-school",
+          "interests": [
+            "research"
+          ],
+          "description": "Let's be frank: if you are considering a long-term career in computer science"
+        },
+        {
+          "name": "Information Security Analyst",
+          "slug": "information-security-analyst",
+          "interests": [
+            "databases",
+            "networks",
+            "security"
+          ],
+          "description": "In RadGrad, the \"information security analyst\" career goal is intended"
+        },
+        {
+          "name": "Information System Manager",
+          "slug": "information-system-manager",
+          "interests": [
+            "it-management"
+          ],
+          "description": "The Information System Manager career goal combines computer science with business management."
+        },
+        {
+          "name": "IoT Architect",
+          "slug": "iot-architect",
+          "interests": [
+            "algorithms",
+            "computer-architecture",
+            "data-science",
+            "data-visualization",
+            "databases",
+            "hardware",
+            "hci",
+            "networks",
+            "security"
+          ],
+          "description": "The [Internet of Things](https://en.wikipedia.org/wiki/Internet_of_things)"
+        },
+        {
+          "name": "Mobile App Developer",
+          "slug": "mobile-app-developer",
+          "interests": [
+            "android",
+            "mobile",
+            "ios"
+          ],
+          "description": "The Mobile App Developer career path refers to a specialized software developer"
+        },
+        {
+          "name": "Network Engineer",
+          "slug": "network-engineer",
+          "interests": [
+            "hardware",
+            "networks"
+          ],
+          "description": "In RadGrad, the Network Engineer career goal also refers to positions such as Network Administrator"
+        },
+        {
+          "name": "Research Scientist",
+          "slug": "research-scientist",
+          "interests": [
+            "research"
+          ],
+          "description": "The Research Scientist career goal is for those who want to prepare"
+        },
+        {
+          "name": "Robotics Engineer",
+          "slug": "robotics-engineer",
+          "interests": [
+            "hardware",
+            "robotics",
+            "software-engineering"
+          ],
+          "description": "The robotics engineer career path involves the design of hardware and associated software"
+        },
+        {
+          "name": "Software Developer",
+          "slug": "software-developer",
+          "interests": [
+            "application-development",
+            "software-engineering"
+          ],
+          "description": "Software Developer is probably the most common career goal for computer science students"
+        },
+        {
+          "name": "Startup Co-Founder",
+          "slug": "startup-cofounder",
+          "interests": [
+            "entrepreneurship"
+          ],
+          "description": "According to [the wikipedia entry](https://en.wikipedia.org/wiki/Startup_company)"
+        },
+        {
+          "name": "Teacher",
+          "slug": "teacher",
+          "interests": [
+            "teaching"
+          ],
+          "description": "Teaching often appears in lists of the top 10 most satisfying careers"
+        },
+        {
+          "name": "UX Designer",
+          "slug": "ux-designer",
+          "interests": [
+            "computer-graphics",
+            "data-visualization",
+            "hci",
+            "web-development"
+          ],
+          "description": "The UX (User Experience) Designer career goal refers to jobs"
+        },
+        {
+          "name": "VR/AR Engineer",
+          "slug": "vr-ar-engineer",
+          "interests": [
+            "algorithms",
+            "artificial-intelligence",
+            "cognitive-science",
+            "computer-graphics",
+            "data-visualization",
+            "game-design",
+            "virtual-reality"
+          ],
+          "description": "Virtual Reality and Augmented Reality have the potential to fundamentally change"
+        }
+      ]
+    },
+    {
+      "name": "CourseCollection",
+      "contents": [
+        {
+          "name": "Digital Tools for the Information World",
+          "shortName": "Digital Tools",
+          "slug": "ics_101",
+          "number": "ICS 101",
+          "description": "Fundamental information technology concepts and computing terminology",
+          "creditHrs": 4,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Introduction to Computer Programming",
+          "shortName": "Intro to CS",
+          "slug": "ics_110",
+          "number": "ICS 110",
+          "description": "Basic concepts needed to write computer programs.",
+          "creditHrs": 3,
+          "interests": [
+            "python"
+          ],
+          "prerequisites": []
+        },
+        {
+          "name": "Introduction to Computer Science I",
+          "shortName": "Comp Sci I",
+          "slug": "ics_111",
+          "number": "ICS 111",
+          "description": "Overview of computer science, including Java programming",
+          "creditHrs": 4,
+          "interests": [
+            "java"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS111.html",
+          "prerequisites": []
+        },
+        {
+          "name": "Discrete Mathematics for Computer Science I",
+          "shortName": "Discrete Math I",
+          "slug": "ics_141",
+          "number": "ICS 141",
+          "description": "Introduction to propositional and predicate logic",
+          "creditHrs": 3,
+          "interests": [
+            "algorithms"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS141.html",
+          "prerequisites": []
+        },
+        {
+          "name": "Introduction to Computer Science II",
+          "shortName": "Comp Sci II",
+          "slug": "ics_211",
+          "number": "ICS 211",
+          "description": "Object-oriented programming, algorithms and their complexity",
+          "creditHrs": 4,
+          "interests": [
+            "algorithms",
+            "software-engineering",
+            "java"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS211.html",
+          "prerequisites": [
+            "ics_111"
+          ]
+        },
+        {
+          "name": "Program Structure",
+          "shortName": "Program Structure",
+          "slug": "ics_212",
+          "number": "ICS 212",
+          "description": "Program organization paradigms, programming environments, ",
+          "creditHrs": 3,
+          "interests": [
+            "c",
+            "cplusplus",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS212.html",
+          "prerequisites": [
+            "ics_211"
+          ]
+        },
+        {
+          "name": "Introduction to Scripting",
+          "shortName": "Scripting",
+          "slug": "ics_215",
+          "number": "ICS 215",
+          "description": "Introduction to scripting languages for the integration of applications and systems. ",
+          "creditHrs": 3,
+          "interests": [
+            "perl",
+            "javascript",
+            "ruby",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS215.html",
+          "prerequisites": [
+            "ics_211"
+          ]
+        },
+        {
+          "name": "Basic Concepts of Computer Science",
+          "shortName": "Comp Sci Concepts",
+          "slug": "ics_222",
+          "number": "ICS 222",
+          "description": "What is computer science about? ",
+          "creditHrs": 3,
+          "interests": [
+            "theory-of-computation"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS222.html",
+          "prerequisites": [
+            "ics_141"
+          ]
+        },
+        {
+          "name": "Discrete Mathematics for Computer Science II",
+          "shortName": "Discrete Math II",
+          "slug": "ics_241",
+          "number": "ICS 241",
+          "description": "Program correctness, recurrence relations and their solutions",
+          "creditHrs": 3,
+          "interests": [
+            "algorithms"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS241.html",
+          "prerequisites": [
+            "ics_141"
+          ]
+        },
+        {
+          "name": "Algorithms",
+          "shortName": "Algorithms",
+          "slug": "ics_311",
+          "number": "ICS 311",
+          "description": "Design and correctness of algorithms",
+          "creditHrs": 4,
+          "interests": [
+            "algorithms",
+            "data-science"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS311.html",
+          "prerequisites": [
+            "ics_241",
+            "ics_211"
+          ]
+        },
+        {
+          "name": "Machine-Level and Systems Programming",
+          "shortName": "Systems Programming",
+          "slug": "ics_312",
+          "number": "ICS 312",
+          "description": "Machine organization, machine instructions, addressing modes, ",
+          "creditHrs": 3,
+          "interests": [
+            "assembler",
+            "computer-architecture",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS312.html",
+          "prerequisites": [
+            "ics_212",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Programming Language Theory",
+          "shortName": "Programming Languages",
+          "slug": "ics_313",
+          "number": "ICS 313",
+          "description": "Syntax, semantics, control structures, ",
+          "creditHrs": 3,
+          "interests": [
+            "lisp",
+            "prolog"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS313.html",
+          "prerequisites": [
+            "ics_212",
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Software Engineering I",
+          "shortName": "Software Eng I",
+          "slug": "ics_314",
+          "number": "ICS 314",
+          "description": "Problem analysis and design, team-oriented development, quality assurance, ",
+          "creditHrs": 3,
+          "interests": [
+            "software-engineering",
+            "javascript",
+            "application-development",
+            "it-management"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS314.html",
+          "prerequisites": [
+            "ics_211",
+            "ics_241"
+          ]
+        },
+        {
+          "name": "Data Storage and Retrieval",
+          "shortName": "Databases I",
+          "slug": "ics_321",
+          "number": "ICS 321",
+          "description": "Data storage devices, timing and capacity, programming for files, ",
+          "creditHrs": 3,
+          "interests": [
+            "databases",
+            "application-development",
+            "sql"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS321.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Logic Design and Microprocessors",
+          "shortName": "Microprocessors",
+          "slug": "ics_331",
+          "number": "ICS 331",
+          "description": "Basic machine architecture, microprocessors, bus organization, ",
+          "creditHrs": 4,
+          "interests": [
+            "computer-architecture",
+            "hardware",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS331.html",
+          "prerequisites": [
+            "ics_212",
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Operating Systems",
+          "shortName": "Operating Systems",
+          "slug": "ics_332",
+          "number": "ICS 332",
+          "description": "Operating system concepts and structure, processes and threads, CPU scheduling, ",
+          "creditHrs": 3,
+          "interests": [
+            "operating-systems",
+            "computer-architecture",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS332.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Network Design and Management",
+          "shortName": "Networks",
+          "slug": "ics_351",
+          "number": "ICS 351",
+          "description": "Overview of the internet and its capabilities; introduction to HTTP, TCP/IP, ethernet.",
+          "creditHrs": 3,
+          "interests": [
+            "networks",
+            "security",
+            "hardware",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS351.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Security and Trust I: Resource Protections",
+          "shortName": "Security & Trust I",
+          "slug": "ics_355",
+          "number": "ICS 355",
+          "description": "Security and trust in computers, networks, and society.",
+          "creditHrs": 3,
+          "interests": [
+            "security"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS355.html",
+          "prerequisites": [
+            "ics_222",
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Introduction to Artificial Intelligence Programming",
+          "shortName": "AI Programming",
+          "slug": "ics_361",
+          "number": "ICS 361",
+          "description": "Introduction to the theory of Artificial Intelligence",
+          "creditHrs": 3,
+          "interests": [
+            "artificial-intelligence",
+            "lisp",
+            "prolog"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS361.html",
+          "prerequisites": [
+            "ics_212",
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Computing Ethics for Lab Assistants",
+          "shortName": "Ethics for LAs",
+          "slug": "ics_390",
+          "number": "ICS 390",
+          "description": "A lecture/discussion/internship on ethical issues and instructional techniques .",
+          "creditHrs": 3,
+          "interests": [
+            "teaching",
+            "computer-ethics"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS390.html",
+          "prerequisites": [
+            "ics_101"
+          ]
+        },
+        {
+          "name": "Software Engineering II",
+          "shortName": "Software Eng II",
+          "slug": "ics_414",
+          "number": "ICS 414",
+          "description": "Continuation of 314. Project management, quality, and productivity control,",
+          "creditHrs": 3,
+          "interests": [
+            "software-engineering",
+            "application-development",
+            "it-management"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS414.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Introduction to Programming for the Web",
+          "shortName": "Intro to Web Programming",
+          "slug": "ics_415",
+          "number": "ICS 415",
+          "description": "Introduction to emerging technologies for construction of World Wide Web (WWW)-based software",
+          "creditHrs": 3,
+          "interests": [
+            "application-development",
+            "software-engineering"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS415.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "The Science, Psychology and Philosophy of Systems Design",
+          "shortName": "Science of Systems Design",
+          "slug": "ics_419",
+          "number": "ICS 419",
+          "description": "Scientific, psychological and philosophical bases of systems design,",
+          "creditHrs": 3,
+          "interests": [
+            "software-engineering",
+            "hci"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS419.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Database Systems",
+          "shortName": "Databases II",
+          "slug": "ics_421",
+          "number": "ICS 421",
+          "description": "Principles of database systems, data modeling,",
+          "creditHrs": 3,
+          "interests": [
+            "databases"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS421.html",
+          "prerequisites": [
+            "ics_321"
+          ]
+        },
+        {
+          "name": "Data Processing",
+          "shortName": "Data Processing",
+          "slug": "ics_422",
+          "number": "ICS 422",
+          "description": "Role of data processing in organizations, programming practices, .",
+          "creditHrs": 3,
+          "interests": [
+            "databases"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS422.html",
+          "prerequisites": [
+            "ics_321"
+          ]
+        },
+        {
+          "name": "Data Security and Cryptography I",
+          "shortName": "Cryptography I",
+          "slug": "ics_423",
+          "number": "ICS 423",
+          "description": "History of secret communication and confidential data storage.",
+          "creditHrs": 3,
+          "interests": [
+            "cryptography",
+            "security"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS423.html",
+          "prerequisites": [
+            "ics_355"
+          ]
+        },
+        {
+          "name": "Application Frameworks",
+          "shortName": "Application Frameworks",
+          "slug": "ics_424",
+          "number": "ICS 424",
+          "description": "Experience producing applications with at least two different applications frameworks.",
+          "creditHrs": 3,
+          "interests": [
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS424.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Computer Security and Ethics",
+          "shortName": "Security & Ethics",
+          "slug": "ics_425",
+          "number": "ICS 425",
+          "description": "Theoretical results, security policy, encryption, key management, digital signatures,.",
+          "creditHrs": 3,
+          "interests": [
+            "security",
+            "computer-ethics",
+            "it-management"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS425.html",
+          "prerequisites": [
+            "ics_355"
+          ]
+        },
+        {
+          "name": "Computer System Security",
+          "shortName": "Computer System Security",
+          "slug": "ics_426",
+          "number": "ICS 426",
+          "description": "Information flow, confinement, information assurance, malicious programs,.",
+          "creditHrs": 3,
+          "interests": [
+            "security",
+            "it-management"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS426.html",
+          "prerequisites": [
+            "ics_355"
+          ]
+        },
+        {
+          "name": "Computer Architecture",
+          "shortName": "Computer Architecture",
+          "slug": "ics_431",
+          "number": "ICS 431",
+          "description": "Memory management, control flow, interrupt mechanisms, ",
+          "creditHrs": 3,
+          "interests": [
+            "computer-architecture",
+            "hardware"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS431.html",
+          "prerequisites": [
+            "ics_331"
+          ]
+        },
+        {
+          "name": "Concurrent and High-Performance Programming",
+          "shortName": "Concurrent Programming",
+          "slug": "ics_432",
+          "number": "ICS 432",
+          "description": "Principles of concurrent and high performance programming.",
+          "creditHrs": 3,
+          "interests": [
+            "parallel-programming",
+            "hpc",
+            "c",
+            "java",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS432.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314",
+            "ics_212"
+          ]
+        },
+        {
+          "name": "Machine Learning Fundamentals",
+          "shortName": "Machine Learning",
+          "slug": "ics_435",
+          "number": "ICS 435",
+          "description": "Introduction to machine learning concepts.",
+          "creditHrs": 3,
+          "interests": [
+            "machine-learning",
+            "data-science"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS435.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Theory of Computation",
+          "shortName": "Theory of Computation",
+          "slug": "ics_441",
+          "number": "ICS 441",
+          "description": "Grammars, sequential machines, equivalence,.",
+          "creditHrs": 3,
+          "interests": [
+            "theory-of-computation",
+            "algorithms"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS441.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Analytical Models and Methods",
+          "shortName": "Analytics Models",
+          "slug": "ics_442",
+          "number": "ICS 442",
+          "description": "Applications of mathematical methods in computer science with emphasis on discrete mathematics.",
+          "creditHrs": 3,
+          "interests": [
+            "algorithms"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS442.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Parallel Algorithms",
+          "shortName": "Parallel Algorithms",
+          "slug": "ics_443",
+          "number": "ICS 443",
+          "description": "Introduction to parallel models of computation and design and analysis of parallel algorithms.",
+          "creditHrs": 3,
+          "interests": [
+            "parallel-programming",
+            "algorithms",
+            "computer-architecture",
+            "data-science",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS443.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Data Networks",
+          "shortName": "Data Networks",
+          "slug": "ics_451",
+          "number": "ICS 451",
+          "description": "Network analysis, architecture, digital signal analysis and design;.",
+          "creditHrs": 3,
+          "interests": [
+            "networks",
+            "c"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS451.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314",
+            "ics_212"
+          ]
+        },
+        {
+          "name": "Software Design for Robotics",
+          "shortName": "Robotics",
+          "slug": "ics_452",
+          "number": "ICS 452",
+          "description": "Sensors, actuators, signal processing, paradigms of robotic software design,.",
+          "creditHrs": 3,
+          "interests": [
+            "robotics",
+            "machine-learning",
+            "hardware",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS452.html",
+          "prerequisites": [
+            "ics_312",
+            "ics_313"
+          ]
+        },
+        {
+          "name": "Security and Trust II: Information Assurance",
+          "shortName": "Security & Trust II",
+          "slug": "ics_455",
+          "number": "ICS 455",
+          "description": "Channel security. Trojan and noninterference..",
+          "creditHrs": 3,
+          "interests": [
+            "security",
+            "cryptography"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS455.html",
+          "prerequisites": [
+            "ics_355"
+          ]
+        },
+        {
+          "name": "Artificial Intelligence",
+          "shortName": "Artificial Intelligence",
+          "slug": "ics_461",
+          "number": "ICS 461",
+          "description": "Survey of artificial intelligence: natural language processing,.",
+          "creditHrs": 3,
+          "interests": [
+            "artificial-intelligence",
+            "algorithms",
+            "data-science",
+            "robotics"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS461.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Artificial Intelligence for Games",
+          "shortName": "AI for Games",
+          "slug": "ics_462",
+          "number": "ICS 462",
+          "description": "Techniques to stimulate intelligence in video games: movement, pathfinding with A* search.",
+          "creditHrs": 3,
+          "interests": [
+            "algorithms",
+            "game-design",
+            "artificial-intelligence",
+            "machine-learning",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS462.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314",
+            "ics_212"
+          ]
+        },
+        {
+          "name": "Human Computer Interaction I",
+          "shortName": "HCI I",
+          "slug": "ics_464",
+          "number": "ICS 464",
+          "description": "Application of concepts and methodologies of human factors, psychology .",
+          "creditHrs": 3,
+          "interests": [
+            "software-engineering",
+            "hci"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS464.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Introduction to Hypermedia",
+          "shortName": "Hypermedia",
+          "slug": "ics_465",
+          "number": "ICS 465",
+          "description": "Basic issues of interactive access to information in various formats on computers.",
+          "creditHrs": 3,
+          "interests": [
+            "software-engineering",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS465.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Design for Mobile Devices",
+          "shortName": "Design for Mobile Devices",
+          "slug": "ics_466",
+          "number": "ICS 466",
+          "description": "Design issues, programming languages, operating systems and mark-up languages",
+          "creditHrs": 3,
+          "interests": [
+            "mobile",
+            "application-development",
+            "android"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS466.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Cognitive Science",
+          "shortName": "Cognitive Science",
+          "slug": "ics_469",
+          "number": "ICS 469",
+          "description": "Introduces basic concepts, central problems, and methods from cognitive science.",
+          "creditHrs": 3,
+          "interests": [
+            "psychology",
+            "artificial-intelligence",
+            "cognitive-science",
+            "hci"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS469.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Probability, Statistics, and Queuing",
+          "shortName": "Probability & Statistics",
+          "slug": "ics_471",
+          "number": "ICS 471",
+          "description": "Introduction to probability, statistical inference, regression, Markov chains,",
+          "creditHrs": 3,
+          "interests": [
+            "r",
+            "data-science",
+            "algorithms"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS471.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Introduction to Bioinformatics Sequences and Genomes Analysis",
+          "shortName": "Bioinformatics I",
+          "slug": "ics_475",
+          "number": "ICS 475",
+          "description": "Introduction to bioinformatics to computer sciences students .",
+          "creditHrs": 3,
+          "interests": [
+            "bioinformatics",
+            "biology",
+            "algorithms",
+            "data-science"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS475.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Bioinformatics Algorithms and Tool Development",
+          "shortName": "Bioinformatics II",
+          "slug": "ics_476",
+          "number": "ICS 476",
+          "description": "Study of commonly used bioinformatic algorithms, with an emphasis on string",
+          "creditHrs": 3,
+          "interests": [
+            "bioinformatics",
+            "biology",
+            "algorithms",
+            "data-science"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS476.html",
+          "prerequisites": [
+            "ics_475"
+          ]
+        },
+        {
+          "name": "Introduction to Computer Graphics",
+          "shortName": "Computer Graphics",
+          "slug": "ics_481",
+          "number": "ICS 481",
+          "description": "Fundamentals of computer graphics including graphics ",
+          "creditHrs": 3,
+          "interests": [
+            "computer-graphics"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS481.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Computer Vision",
+          "shortName": "Computer Vision",
+          "slug": "ics_483",
+          "number": "ICS 483",
+          "description": "Introductory course in computer vision. .",
+          "creditHrs": 3,
+          "interests": [
+            "computer-vision",
+            "algorithms"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS483.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314",
+            "ics_212"
+          ]
+        },
+        {
+          "name": "Data Visualization",
+          "shortName": "Data Visualization",
+          "slug": "ics_484",
+          "number": "ICS 484",
+          "description": "Introduction to data visualization through practical techniques",
+          "creditHrs": 3,
+          "interests": [
+            "data-visualization",
+            "computer-graphics",
+            "data-science"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS484.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Video Game Design and Development",
+          "shortName": "Game Design",
+          "slug": "ics_485",
+          "number": "ICS 485",
+          "description": "Students will team design, build, and demonstrate video games ",
+          "creditHrs": 3,
+          "interests": [
+            "computer-graphics",
+            "graphic-design",
+            "game-design",
+            "application-development"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS485.html",
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Special Topics",
+          "shortName": "Special Topics",
+          "slug": "ics_491",
+          "number": "ICS 491",
+          "description": "Reflects special interests of faculty. Oriented toward juniors and seniors. ",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Special Topics in Security",
+          "shortName": "Special Topics: Security",
+          "slug": "ics_495",
+          "number": "ICS 495",
+          "description": "Special topics in security oriented toward juniors and seniors. Repeatable unlimited times.",
+          "creditHrs": 3,
+          "interests": [
+            "security"
+          ],
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Computer Project",
+          "shortName": "Independent Study",
+          "slug": "ics_499",
+          "number": "ICS 499",
+          "description": "Individual or small-group projects in system design or application under faculty supervision.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_311",
+            "ics_314"
+          ]
+        },
+        {
+          "name": "Non Computer Science Course",
+          "shortName": "Non-CS Course",
+          "slug": "other",
+          "number": "other",
+          "description": "The course used to represent all non-CS courses.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": []
+        }
+      ]
+    },
+    {
+      "name": "CourseInstanceCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "DesiredDegreeCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "FeedCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "FeedbackCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "FeedbackInstanceCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "HelpMessageCollection",
+      "contents": [
+      ]
+    },
+    {
+      "name": "InterestCollection",
+      "contents": [
+        {
+          "name": "Algorithms",
+          "slug": "algorithms",
+          "description": "Simply put, an algorithm is a self-contained step-by-step set of operations",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Android",
+          "slug": "android",
+          "description": "Android is a mobile operating system",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Application Development",
+          "slug": "application-development",
+          "description": "Application development is the use of tools",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Artificial Intelligence",
+          "slug": "artificial-intelligence",
+          "description": "The use of hardware and software to create a flexible rational agent ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Assembler",
+          "slug": "assembler",
+          "description": "An assembler (or assembly) language is a low-level programming language",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Bioinformatics",
+          "slug": "bioinformatics",
+          "description": "Bioinformatics is an interdisciplinary field",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Biology",
+          "slug": "biology",
+          "description": "A natural science concerned with the study of life and living organisms,",
+          "interestType": "non-cs-disciplines"
+        },
+        {
+          "name": "C and C++",
+          "slug": "c",
+          "description": "C is a general-purpose, imperative computer programming language",
+          "interestType": "technologies"
+        },
+        {
+          "name": "C#",
+          "slug": "c-sharp",
+          "description": "C# is a general purpose, object-oriented programming language ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Civic Engagement",
+          "slug": "civic-engagement",
+          "description": "Civic engagement means working to make a difference in the civic life of our communities",
+          "interestType": "non-cs-disciplines"
+        },
+        {
+          "name": "Cognitive Science",
+          "slug": "cognitive-science",
+          "description": "Cognitive science is the interdisciplinary scientific study of the mind and its processes.",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Computer Architecture",
+          "slug": "computer-architecture",
+          "description": "Computer architecture describes the functionality, organization, and implementation",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Computer Ethics",
+          "slug": "computer-ethics",
+          "description": "Computer Ethics is a part of practical philosophy",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Computer Graphics",
+          "slug": "computer-graphics",
+          "description": "Computer graphics are pictures and movies created using computers",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Computer Vision",
+          "slug": "computer-vision",
+          "description": "Computer vision is a field that includes methods for acquiring, processing, analyzing",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "C++",
+          "slug": "cplusplus",
+          "description": "C++ is a general-purpose programming language.",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Cryptography",
+          "slug": "cryptography",
+          "description": "Cryptography is the study of techniques for secure communication",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Data Science",
+          "slug": "data-science",
+          "description": "Data science is an interdisciplinary field about processes and systems",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Data Visualization",
+          "slug": "data-visualization",
+          "description": "Data visualization is both an art and a science.",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Databases",
+          "slug": "databases",
+          "description": "A database is an organized collection of data. ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": ".NET",
+          "slug": "dotNet",
+          "description": ".NET is a software framework developed by Microsoft",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Entrepreneurship",
+          "slug": "entrepreneurship",
+          "description": "Entrepreneurship is the process of designing, ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Game Design",
+          "slug": "game-design",
+          "description": "Game design is the art of applying design and aesthetics to create a game",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Graphic Design",
+          "slug": "graphic-design",
+          "description": "Graphic design is the process of visual communication",
+          "interestType": "non-cs-disciplines"
+        },
+        {
+          "name": "Hardware",
+          "slug": "hardware",
+          "description": "Computer hardware is the physical parts or components of a computer",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Human-Computer Interaction",
+          "slug": "hci",
+          "description": "Researchers in the field of HCI",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "High Performance Computing",
+          "slug": "hpc",
+          "description": "High Performance Computing concerns the hardware and software capabilities",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "iOS",
+          "slug": "ios",
+          "description": "iOS is a mobile operating system developed by Apple Inc. ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "IT Management",
+          "slug": "it-management",
+          "description": "IT management is the discipline whereby all of the information technology ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Java",
+          "slug": "java",
+          "description": "Java is a general-purpose computer programming language ",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Javascript",
+          "slug": "javascript",
+          "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language.",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Linux",
+          "slug": "linux",
+          "description": "A Unix-like and mostly POSIX-compliant computer operating system",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Lisp",
+          "slug": "lisp",
+          "description": "Lisp is a family of computer programming languages ",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Machine Learning",
+          "slug": "machine-learning",
+          "description": "Machine learning is a subfield of computer science ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Mobile Computing",
+          "slug": "mobile",
+          "description": "Mobile computing is human–computer interaction ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Networks",
+          "slug": "networks",
+          "description": "A computer network or data network is a telecommunications network ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Operating Systems",
+          "slug": "operating-systems",
+          "description": "An operating system (OS) is system software",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Parallel Programming",
+          "slug": "parallel-programming",
+          "description": "Parallel programming refers to a type of computation ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Perl",
+          "slug": "perl",
+          "description": "Perl is a family of high-level, general-purpose, interpreted, dynamic programming languages.",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Prolog",
+          "slug": "prolog",
+          "description": "Prolog is a general-purpose logic programming language )",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Psychology",
+          "slug": "psychology",
+          "description": "The scientific study of the human mind and its functions, ",
+          "interestType": "non-cs-disciplines"
+        },
+        {
+          "name": "Python",
+          "slug": "python",
+          "description": "Python is a widely used high-level, general-purpose, interpreted, dynamic programming language.",
+          "interestType": "technologies"
+        },
+        {
+          "name": "R",
+          "slug": "r",
+          "description": "R is a programming language and software environment that is widely used among statisticians",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Research",
+          "slug": "research",
+          "description": "Research comprises \"creative work undertaken on a systematic basis in order to increase ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Robotics",
+          "slug": "robotics",
+          "description": "Robotics is the branch of mechanical engineering, ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Ruby",
+          "slug": "ruby",
+          "description": "Ruby is a dynamic, reflective, object-oriented, general-purpose programming language.",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Security",
+          "slug": "security",
+          "description": "Computer security, also known as cybersecurity or IT security, ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Software Engineering",
+          "slug": "software-engineering",
+          "description": "The systematic application of scientific and technological knowledge, methods, and experience ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "SQL",
+          "slug": "sql",
+          "description": "SQL (Structured Query Language) is a special-purpose programming language ",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Sustainability",
+          "slug": "sustainability",
+          "description": "In ecology, sustainability (from sustain and ability) is the property of ",
+          "interestType": "non-cs-disciplines"
+        },
+        {
+          "name": "Teaching",
+          "slug": "teaching",
+          "description": "Teaching is the process of facilitating learning",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Theory of computation",
+          "slug": "theory-of-computation",
+          "description": "Theory of computation deals with how efficiently problems can be solved ",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Unity",
+          "slug": "unity",
+          "description": "Unity is a cross-platform game engine developed by Unity Technologies ",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Virtual Reality",
+          "slug": "virtual-reality",
+          "description": "Virtual reality (VR) typically refers to computer technologies",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Web Development",
+          "slug": "web-development",
+          "description": "In computing, a web application or web app is a client–server software application ",
+          "interestType": "cs-disciplines"
+        }
+      ]
+    },
+    {
+      "name": "InterestTypeCollection",
+      "contents": [
+        {
+          "name": "CS Disciplines",
+          "slug": "cs-disciplines",
+          "description": "Computer science and engineering areas of interest, not including languages, tools, technologies."
+        },
+        {
+          "name": "Non-CS Disciplines",
+          "slug": "non-cs-disciplines",
+          "description": "Areas of interest apart from computer science and engineering."
+        },
+        {
+          "name": "technologies",
+          "slug": "technologies",
+          "description": "Computer science and engineering languages, tools, and technologies"
+        }
+      ]
+    },
+
+    {
+      "name": "UserCollection",
+      "contents": [
+        {
+          "firstName": "Abigail",
+          "lastName": "Kealoha",
+          "slug": "abi",
+          "email": "abi@hawaii.edu",
+          "password": "foo",
+          "role": "STUDENT",
+          "uhID": "1234-5678",
+          "picture": "/images/mockup/abi.jpg",
+          "website": "http://abi.github.io",
+          "interests": [
+            "application-development",
+            "research"
+          ],
+          "careerGoals": [
+          ],
+          "desiredDegree": null,
+          "level": 5,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
+        },
+        {
+          "firstName": "Admin",
+          "lastName": "RadGrad",
+          "slug": "radgrad",
+          "email": "radgrad@hawaii.edu",
+          "password": "foo",
+          "role": "ADMIN",
+          "uhID": "1111-1111",
+          "picture": "/images/mockup/radgrad.png",
+          "website": null,
+          "interests": [],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "desiredDegree": null,
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
+        }
+      ]
+    },
+    {
+      "name": "ValidUserAccountCollection",
+      "contents": [
+        {
+          "username": "abi"
+        },
+        {
+          "username": "radgrad"
+        }
+      ]
+    }
+  ]
+}

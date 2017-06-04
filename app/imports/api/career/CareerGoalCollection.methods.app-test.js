@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { CareerGoals } from './CareerGoalCollection';
-import { defineTestFixtureMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
+import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
@@ -13,11 +13,13 @@ if (Meteor.isClient) {
       name: 'name',
       slug: 'career-goal-slug',
       description: 'description',
-      interests: ['data-science'],
+      interests: ['algorithms'],
     };
 
     before(function (done) {
-      defineTestFixtureMethod.call('CareerGoals.json', done);
+      this.timeout(0);
+      defineTestFixturesMethod.call(['minimal', 'admin.user', 'abi.user',
+        'extended.courses.interests', 'academicplan', 'abi.courseinstances'], done);
     });
 
     after(function (done) {
@@ -36,7 +38,7 @@ if (Meteor.isClient) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
           const id = CareerGoals.findIdBySlug(definitionData.slug);
-          updateMethod.call({ collectionName, updateData: { id, name: 'new name', baz: 'baz' } }, done);
+          updateMethod.call({ collectionName, updateData: { id, name: 'new name' } }, done);
         }).catch(done);
       });
     });
