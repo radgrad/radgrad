@@ -22,7 +22,6 @@ export function getStudentsCurrentSemesterNumber(studentID) {
     }
   });
   const currentSemester = Semesters.getCurrentSemesterDoc();
-  console.log(firstSemester, currentSemester);
   return (currentSemester.semesterNumber - firstSemester.semesterNumber) + 1;
 }
 
