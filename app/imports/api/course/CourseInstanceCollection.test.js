@@ -19,6 +19,7 @@ if (Meteor.isServer) {
     const grade = 'B';
 
     before(function setup() {
+      this.timeout(0);
       removeAllEntities();
       course = makeSampleCourse();
       student = makeSampleUser();
@@ -26,6 +27,7 @@ if (Meteor.isServer) {
     });
 
     after(function teardown() {
+      this.timeout(0)
       removeAllEntities();
     });
 

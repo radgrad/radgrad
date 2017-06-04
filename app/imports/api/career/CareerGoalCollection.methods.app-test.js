@@ -38,7 +38,10 @@ if (Meteor.isClient) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
           const id = CareerGoals.findIdBySlug(definitionData.slug);
-          updateMethod.call({ collectionName, updateData: { id, name: 'new name' } }, done);
+          const name = 'updated CareerGoal name';
+          const description = 'updated CareerGoal description';
+          const interests = ['algorithms', 'java'];
+          updateMethod.call({ collectionName, updateData: { id, name, description, interests } }, done);
         }).catch(done);
       });
     });
