@@ -61,7 +61,7 @@ export const updateMethod = new ValidatedMethod({
   run({ collectionName, updateData }) {
     const collection = RadGrad.getCollection(collectionName);
     collection.assertValidRoleForMethod(this.userId);
-    return collection.update(updateData.id, { $set: updateData });
+    return collection.update(updateData.id, updateData);
   },
 });
 
