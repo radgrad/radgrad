@@ -1,0 +1,118 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription" : "Sample definitions for basic entities.",
+  "collections": [
+    {
+      "name": "CareerGoalCollection",
+      "contents": [
+        {
+          "name": "Data Scientist",
+          "slug": "data-scientist",
+          "interests": [
+            "algorithms"
+          ],
+          "description": "A data scientist analyzes and interprets extremely complex and large data sets"
+        },
+        {
+          "name": "Database Administrator",
+          "slug": "database-administrator",
+          "interests": [
+            "algorithms"
+          ],
+          "description": "Companies, private organizations, and government agencies rely on database administrators"
+        }
+      ]
+    },
+    {
+      "name": "CourseCollection",
+      "contents": [
+        {
+          "name": "Introduction to Computer Science I",
+          "shortName": "Comp Sci I",
+          "slug": "ics_111",
+          "number": "ICS 111",
+          "description": "Overview of computer science, including Java programming",
+          "creditHrs": 4,
+          "interests": [
+            "java"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS111.html",
+          "prerequisites": []
+        },
+        {
+          "name": "Discrete Mathematics for Computer Science I",
+          "shortName": "Discrete Math I",
+          "slug": "ics_141",
+          "number": "ICS 141",
+          "description": "Introduction to propositional and predicate logic",
+          "creditHrs": 3,
+          "interests": [
+            "algorithms"
+          ],
+          "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS141.html",
+          "prerequisites": []
+        }
+      ]
+    },
+    {
+      "name": "DesiredDegreeCollection",
+      "contents": [
+        {
+          "name": "B.A. in Information and Computer Sciences",
+          "shortName": "B.A. ICS",
+          "slug": "ba-ics",
+          "description": "The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline."
+        },
+        {
+          "name": "B.S. in Computer Engineering",
+          "shortName": "B.S. CE",
+          "slug": "bs-ce",
+          "description": "ICS and EE offer a joint Bachelor of Science degree in Computer Engineering (BSCE)."
+        },
+        {
+          "name": "B.S. in Computer Science",
+          "shortName": "B.S. CS",
+          "slug": "bs-cs",
+          "description": "The Bachelor of Science in Computer Science provides you with an in-depth foundation."
+        }
+      ]
+    },
+    {
+      "name": "InterestCollection",
+      "contents": [
+        {
+          "name": "Algorithms",
+          "slug": "algorithms",
+          "description": "Simply put, an algorithm is a self-contained step-by-step set of operations",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Java",
+          "slug": "java",
+          "description": "Java is a general-purpose computer programming language ",
+          "interestType": "technologies"
+        }
+      ]
+    },
+    {
+      "name": "InterestTypeCollection",
+      "contents": [
+        {
+          "name": "CS Disciplines",
+          "slug": "cs-disciplines",
+          "description": "Computer science and engineering areas of interest, not including languages, tools, technologies."
+        },
+        {
+          "name": "Non-CS Disciplines",
+          "slug": "non-cs-disciplines",
+          "description": "Areas of interest apart from computer science and engineering."
+        },
+        {
+          "name": "technologies",
+          "slug": "technologies",
+          "description": "Computer science and engineering languages, tools, and technologies"
+        }
+      ]
+    }
+  ]
+}

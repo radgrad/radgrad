@@ -4,14 +4,13 @@ import { Courses } from '../../api/course/CourseCollection';
 import { CourseInstances } from '../../api/course/CourseInstanceCollection';
 import * as ICE from './IceProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
-import { defineTestFixture } from '../test/test-utilities';
+import { defineTestFixtures } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
 if (Meteor.isServer) {
   describe('IceProcessor', function testSuite() {
-    this.timeout(0);
     it('#isICE, #assertICE', function test() {
       const ice = { i: 0, c: 10, e: 15 };
       const notIce = { i: 0, d: 10, e: 15 };
@@ -24,13 +23,16 @@ if (Meteor.isServer) {
       expect(function foo() { ICE.assertICE(ice); }).to.not.throw(Error);
       expect(function foo() { ICE.assertICE(notIce); }).to.throw(Error);
     });
+
     it('#makeCourseICE', function test() {
       expect(ICE.makeCourseICE('ICS111', 'A').c).to.equal(ICE.gradeCompetency.A);
       expect(ICE.makeCourseICE('ICS111', 'B').c).to.equal(ICE.gradeCompetency.B);
       expect(ICE.makeCourseICE(Courses.unInterestingSlug, 'A').c).to.equal(ICE.gradeCompetency.C);
     });
+
     it('#getEarnedICE, #getProjectedICE', function test() {
-      defineTestFixture('AcademicYearUtilities.json');
+      this.timeout(0);
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'abi.user', 'abi.courseinstances']);
       const cis = CourseInstances.find().fetch();
       const earnedICE = ICE.getEarnedICE(cis);
       expect(ICE.isICE(earnedICE)).to.be.true;
