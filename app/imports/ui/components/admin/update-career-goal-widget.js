@@ -43,14 +43,11 @@ Template.Update_Career_Goal_Widget.events({
     updateSchema.clean(updateData);
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updateData, 'interests', 'interestIDs');
       updateData.id = instance.data.updateID.get();
-      updateMethod.call({ collectionName: 'CareerGoalCollection', updateData }, (error, result) => {
+      updateMethod.call({ collectionName: 'CareerGoalCollection', updateData }, (error) => {
         if (error) {
-          console.log('Error updating CareerGoal: ', error);
           FormUtils.indicateError(instance);
-        }
-        if (result) {
+        } else {
           FormUtils.indicateSuccess(instance, event);
         }
       });
