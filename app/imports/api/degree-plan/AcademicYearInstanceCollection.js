@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../semester/SemesterCollection';
 import { ROLE } from '../role/Role';
@@ -23,7 +23,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
       year: { type: Number },
       springYear: { type: Number },
       studentID: { type: SimpleSchema.RegEx.Id },
-      semesterIDs: { type: [SimpleSchema.RegEx.Id] },
+      semesterIDs: [SimpleSchema.RegEx.Id],
     }));
     this.publicationNames = {
       Public: this._collectionName,

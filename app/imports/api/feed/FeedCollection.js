@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { Courses } from '/imports/api/course/CourseCollection';
@@ -39,7 +39,7 @@ class FeedCollection extends BaseCollection {
    */
   constructor() {
     super('Feed', new SimpleSchema({
-      userIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
+      userIDs: [SimpleSchema.RegEx.Id],
       opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },

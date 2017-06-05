@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -29,7 +29,7 @@ Template.Update_Help_Message_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {

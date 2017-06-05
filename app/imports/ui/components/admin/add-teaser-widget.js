@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { teasersDefineMethod } from '../../../api/teaser/TeaserCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
@@ -14,7 +14,7 @@ const addSchema = new SimpleSchema({
   url: { type: String, optional: false },
   description: { type: String, optional: false },
   duration: { type: String, optional: false },
-  interests: { type: [String], optional: false, minCount: 1 },
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
 });
 
 Template.Add_Teaser_Widget.onCreated(function onCreated() {
@@ -36,7 +36,7 @@ Template.Add_Teaser_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {

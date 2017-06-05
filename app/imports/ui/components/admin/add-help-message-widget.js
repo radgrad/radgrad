@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import { helpMessagesDefineMethod } from '../../../api/help/HelpMessageCollection.methods';
@@ -30,7 +30,7 @@ Template.Add_Help_Message_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {

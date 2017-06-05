@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { Feeds } from '../../../api/feed/FeedCollection';
 import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
@@ -58,7 +58,7 @@ Template.Student_Explorer_Edit_Review_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(editSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     editSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {

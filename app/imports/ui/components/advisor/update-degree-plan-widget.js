@@ -3,7 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -34,8 +34,8 @@ const updateSchema = new SimpleSchema({
   desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
-  careerGoals: { type: [String], optional: true },
-  interests: { type: [String], optional: true },
+  careerGoals: { type: Array, minCount: 1 }, 'careerGoals.$': String,
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
   website: { type: String, optional: true },
   declaredSemester: { type: String, optional: true },
   academicPlan: { type: String, optional: true },
@@ -200,7 +200,7 @@ Template.Update_Degree_Plan_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {

@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -10,7 +10,7 @@ const addSchema = new SimpleSchema({
   name: { type: String, optional: false },
   slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
   description: { type: String, optional: false },
-  interests: { type: [String], optional: false, minCount: 1 },
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
 });
 
 Template.Add_Career_Goal_Widget.onCreated(function onCreated() {
@@ -27,7 +27,7 @@ Template.Add_Career_Goal_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {

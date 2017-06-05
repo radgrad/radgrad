@@ -2,7 +2,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
@@ -41,14 +41,14 @@ class UserCollection extends BaseSlugCollection {
       email: { type: String, optional: true },
       password: { type: String, optional: true },
       uhID: { type: String, optional: true },
-      careerGoalIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
-      interestIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
+      careerGoalIDs: [SimpleSchema.RegEx.Id],
+      interestIDs: [SimpleSchema.RegEx.Id],
       desiredDegreeID: { type: String, optional: true },
       picture: { type: String, optional: true },
       level: { type: Number, optional: true },
       website: { type: String, optional: true },
-      hiddenCourseIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
-      hiddenOpportunityIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
+      hiddenCourseIDs: [SimpleSchema.RegEx.Id],
+      hiddenOpportunityIDs: [SimpleSchema.RegEx.Id],
       declaredSemesterID: { type: SimpleSchema.RegEx.Id, optional: true },
       academicPlanID: { type: SimpleSchema.RegEx.Id, optional: true },
     }));

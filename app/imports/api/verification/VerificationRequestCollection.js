@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { moment } from 'meteor/momentjs:moment';
 import BaseCollection from '../base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
@@ -39,7 +39,7 @@ class VerificationRequestCollection extends BaseCollection {
       opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
       submittedOn: { type: Date },
       status: { type: String },
-      processed: { type: [ProcessedSchema] },
+      processed: [ProcessedSchema],
       ice: { type: Object, optional: true, blackbox: true },
     }));
     this.ACCEPTED = 'Accepted';

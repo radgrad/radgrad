@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { academicPlansDefineMethod } from '../../../api/degree-plan/AcademicPlanCollection.methods';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
@@ -63,7 +63,7 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return DesiredDegrees.find({}, { sort: { name: 1 } });
   },
   displayFieldError(fieldName) {
-    const errorKeys = Template.instance().context.invalidKeys();
+    const errorKeys = Template.instance().context.validationErrors();
     return _.find(errorKeys, (keyObj) => keyObj.name === fieldName);
   },
   errorClass() {
@@ -180,7 +180,7 @@ Template.Academic_Plan_Builder_Widget.events({
     // console.log('submit Plan');
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {

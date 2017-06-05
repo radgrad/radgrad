@@ -20,8 +20,6 @@ ejson@1.0.13
 
 # Collections
 check@1.2.5
-aldeed:simple-schema
-aldeed:collection2
 mdg:validated-method
 
 # Users and accounts
@@ -66,3 +64,4 @@ practicalmeteor:mocha@2.4.5_6
 hwillson:stub-collections
 practicalmeteor:sinon
 dburles:factory
+aldeed:collection2-core@2.0.0

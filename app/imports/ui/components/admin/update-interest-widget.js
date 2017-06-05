@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { interestsUpdateMethod } from '../../../api/interest/InterestCollection.methods';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection.js';
@@ -35,7 +35,7 @@ Template.Update_Interest_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {

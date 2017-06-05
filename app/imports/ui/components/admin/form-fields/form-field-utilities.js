@@ -73,7 +73,7 @@ export function setupFormWidget(instance, schema) {
   instance.errorClass = new ReactiveVar('');
   instance.context = schema.namedContext('widget');
   // do this just in case the schema has a slug. Not always needed but does no harm.
-  schema.messages({ duplicateSlug: 'The slug [value] is already defined.' });
+  schema.messageBox.messages({ duplicateSlug: 'The slug {{value}} is already defined.' });
 }
 
 /**
@@ -114,7 +114,7 @@ export function processUpdateButtonClick(event, instance) {
 Template.registerHelper('successClass', () => Template.instance().successClass.get());
 Template.registerHelper('errorClass', () => Template.instance().errorClass.get());
 Template.registerHelper('fieldError', (fieldName) => {
-  const invalidKeys = Template.instance().context.invalidKeys();
+  const invalidKeys = Template.instance().context.validationErrors();
   const errorObject = _.find(invalidKeys, (keyObj) => keyObj.name === fieldName);
   return errorObject && Template.instance().context.keyErrorMessage(errorObject.name);
 });

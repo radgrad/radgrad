@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { reviewsUpdateMethod } from '../../../api/review/ReviewCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -92,7 +92,7 @@ Template.Update_Review_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     updatedData.moderated = (updatedData.moderated === 'true');

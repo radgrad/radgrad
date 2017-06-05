@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { updateLevelMethod } from '../../../api/level/LevelProcessor.methods';
@@ -22,8 +22,8 @@ const updateSchema = new SimpleSchema({
   desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
-  careerGoals: { type: [String], optional: true },
-  interests: { type: [String], optional: true },
+  careerGoals: { type: Array, minCount: 1 }, 'careerGoals.$': String,
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
   website: { type: String, optional: true },
 });
 

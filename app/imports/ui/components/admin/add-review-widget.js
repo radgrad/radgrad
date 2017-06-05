@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { feedsDefineNewCourseReviewMethod,
   feedsDefineNewOpportunityReviewMethod } from '../../../api/feed/FeedCollection.methods';
 import { reviewsDefineMethod } from '../../../api/review/ReviewCollection.methods';
@@ -46,7 +46,7 @@ Template.Add_Review_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     addSchema.clean(newData);
     instance.context.validate(newData);
     newData.moderated = (newData.moderated === 'true');

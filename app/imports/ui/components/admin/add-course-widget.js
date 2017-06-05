@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { Courses } from '../../../api/course/CourseCollection';
 import { coursesDefineMethod } from '../../../api/course/CourseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -16,8 +16,8 @@ const addSchema = new SimpleSchema({
   creditHrs: { type: Number, optional: true, defaultValue: 3 },
   syllabus: { type: String, optional: true },
   description: { type: String, optional: false },
-  interests: { type: [String], optional: false, minCount: 1 },
-  prerequisites: { type: [String], optional: true },
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  prerequisites: [String],
 });
 
 Template.Add_Course_Widget.onCreated(function onCreated() {
@@ -37,7 +37,7 @@ Template.Add_Course_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {

@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { Feedbacks } from '../feedback/FeedbackCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';

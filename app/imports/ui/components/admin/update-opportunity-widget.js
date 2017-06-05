@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -22,8 +22,8 @@ const updateSchema = new SimpleSchema({
   innovation: { type: Number, optional: false, min: 0, max: 100 },
   competency: { type: Number, optional: false, min: 0, max: 100 },
   experience: { type: Number, optional: false, min: 0, max: 100 },
-  interests: { type: [String], optional: false, minCount: 1 },
-  semesters: { type: [String], optional: false, minCount: 1 },
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  semesters: { type: Array, minCount: 1 }, 'semesters.$': String,
   icon: { type: String, optional: true },
 });
 
@@ -65,7 +65,7 @@ Template.Update_Opportunity_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
