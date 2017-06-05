@@ -1,7 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '../base/BaseCollection';
-import { Users } from '../user/UserCollection';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection';
+import { ROLE } from '../role/Role';
+import { Users } from '../user/UserCollection';
 
 
 /** @module api/mentor/MentorAnswerCollection */
@@ -34,6 +35,17 @@ class MentorAnswerCollection extends BaseCollection {
     const questionID = MentorQuestions.getID(question);
     const mentorID = Users.getID(mentor); // TODO: Require that user is in role Mentor?
     return this._collection.insert({ questionID, mentorID, text });
+  }
+
+  /**
+   * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
+   * Mentor.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
+   */
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.MENTOR]);
   }
 
   /**

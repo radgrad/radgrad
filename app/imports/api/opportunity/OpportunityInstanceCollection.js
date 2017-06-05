@@ -77,6 +77,17 @@ class OpportunityInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
+   * Student.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
+   */
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT]);
+  }
+
+  /**
    * Returns the opportunityInstance document associated with semester, opportunity, and student.
    * @param semester The semester (slug or ID).
    * @param opportunity The opportunity (slug or ID).
