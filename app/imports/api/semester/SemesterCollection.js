@@ -19,7 +19,6 @@ class SemesterCollection extends BaseSlugCollection {
     super('Semester', new SimpleSchema({
       term: { type: String },
       year: { type: Number },
-      sortBy: { type: Number },
       semesterNumber: { type: Number },
       slugID: { type: SimpleSchema.RegEx.Id },
     }));
@@ -72,19 +71,8 @@ class SemesterCollection extends BaseSlugCollection {
 
     // Otherwise define a new semester and add it to the collection if successful.
 
-    // Compute sortBy, a number putting semesters into chronological order.
-    let sortBy = 0;
-    if (term === this.SPRING) {
-      sortBy = year * 10;
-    }
-    if (term === this.SUMMER) {
-      sortBy = (year * 10) + 1;
-    }
-    if (term === this.FALL) {
-      sortBy = (year * 10) + 2;
-    }
-
     // Compute semesterNumber, another number that puts semesters into chronological order.
+    // Epoch is Fall-2010
     let semesterNumber = 0;
     const yearDiff = year - 2010;
     if (term === this.SPRING) {
@@ -102,7 +90,7 @@ class SemesterCollection extends BaseSlugCollection {
       throw new Meteor.Error(`Slug is already defined for undefined semester: ${slug}`);
     }
     const slugID = Slugs.define({ name: slug, entityName: 'Semester' });
-    const semesterID = this._collection.insert({ term, year, sortBy, semesterNumber, slugID });
+    const semesterID = this._collection.insert({ term, year, semesterNumber, slugID });
     Slugs.updateEntityID(slugID, semesterID);
     return semesterID;
   }

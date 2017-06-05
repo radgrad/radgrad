@@ -46,7 +46,7 @@ Template.Student_Explorer_Edit_Review_Widget.helpers({
     }
     _.map(instances, function (instance) {
       const semester = Semesters.findDoc(instance.semesterID);
-      if (semester.sortBy < Semesters.getCurrentSemesterDoc().sortBy) {
+      if (semester.semesterNumber < Semesters.getCurrentSemesterDoc().semesterNumber) {
         semesters.push(Semesters.findDoc(instance.semesterID));
       }
     });

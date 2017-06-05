@@ -17,7 +17,7 @@ export function getStudentsCurrentSemesterNumber(studentID) {
     const semester = Semesters.findDoc(ci.semesterID);
     if (!firstSemester) {
       firstSemester = semester;
-    } else if (semester.sortBy < firstSemester.sortBy) {
+    } else if (semester.semesterNumber < firstSemester.semesterNumber) {
       firstSemester = semester;
     }
   });

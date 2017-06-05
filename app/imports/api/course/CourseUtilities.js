@@ -61,7 +61,7 @@ export function checkPrerequisites(studentID, area) {
           const preCourse = Courses.findDoc(preCi.courseID);
           const preSemester = Semesters.findDoc(preCi.semesterID);
           if (preSemester) {
-            if (preSemester.sortBy >= semester.sortBy) {
+            if (preSemester.semesterNumber >= semester.semesterNumber) {
               const semesterName2 = Semesters.toString(preSemester._id, false);
               const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is after or` +
                   ` in ${semesterName2}.`;
