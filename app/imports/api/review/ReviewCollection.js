@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { ROLE } from '../role/Role';
 import { Slugs } from '../slug/SlugCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
@@ -100,14 +101,25 @@ class ReviewCollection extends BaseSlugCollection {
   }
 
   /**
-   * Removes the passed Review and its associated Slug.
-   * @param opportunity The document or _id associated with this Review.
-   * @throws {Meteor.Error} If review is not defined.
+   * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
+   * Student.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
    */
-  removeIt(review) {
-    super.removeIt(review);
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT]);
   }
 
+  // /**
+  //  * Removes the passed Review and its associated Slug.
+  //  * @param review The document or _id associated with this Review.
+  //  * @throws {Meteor.Error} If review is not defined.
+  //  */
+  // removeIt(review) {
+  //   super.removeIt(review);
+  // }
+  //
   /**
    * Returns the slug for the given opportunity ID.
    * @param opportunityID the opportunity ID.
