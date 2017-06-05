@@ -48,17 +48,6 @@ if (Meteor.isServer) {
       Semesters.removeIt(semesterID);
     });
 
-    it('#sortBy', function test() {
-      let semesterID = Semesters.define({ term: Semesters.SPRING, year: 2010 });
-      expect(Semesters.findDoc(semesterID).sortBy).to.equal(20100);
-
-      semesterID = Semesters.define({ term: Semesters.SUMMER, year: 2010 });
-      expect(Semesters.findDoc(semesterID).sortBy).to.equal(20101);
-
-      semesterID = Semesters.define({ term: Semesters.FALL, year: 2010 });
-      expect(Semesters.findDoc(semesterID).sortBy).to.equal(20102);
-    });
-
     it('#semesterNumber', function test() {
       let semesterID = Semesters.define({ term: Semesters.SPRING, year: 2011 });
       expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(1);

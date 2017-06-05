@@ -151,7 +151,8 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
   semesters() {
     const currentSemester = Semesters.getCurrentSemesterDoc();
-    return _.filter(Semesters.find({ sortBy: { $gte: currentSemester.sortBy } }, { sort: { sortBy: 1 } }).fetch(),
+    return _.filter(Semesters.find({ semesterNumber: { $gte: currentSemester.semesterNumber } },
+        { sort: { semesterNumber: 1 } }).fetch(),
         function notSummer(s) {
           return s.term !== Semesters.SUMMER;
         });

@@ -17,7 +17,7 @@ function opportunitySemesters(opp) {
   const semesters = opp.semesterIDs;
   const semesterNames = [];
   _.map(semesters, (sem) => {
-    if (Semesters.findDoc(sem).sortBy >= currentSemester().sortBy) {
+    if (Semesters.findDoc(sem).semesterNumber >= currentSemester().semesterNumber) {
       semesterNames.push(Semesters.toString(sem));
     }
   });

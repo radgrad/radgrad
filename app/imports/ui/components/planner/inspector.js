@@ -300,14 +300,14 @@ Template.Inspector.helpers({
     if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
       const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
       const ciSemester = Semesters.findDoc(ci.semesterID);
-      return ciSemester.sortBy <= currentSemester.sortBy;
+      return ciSemester.semesterNumber <= currentSemester.semesterNumber;
     } else
       if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
         const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
         const studentID = getUserIdFromRoute();
         const requests = VerificationRequests.find({ opportunityInstanceID: oi._id, studentID }).fetch();
         const oppSemester = Semesters.findDoc(oi.semesterID);
-        return !oi.verified && oppSemester.sortBy <= currentSemester.sortBy && requests.length === 0;
+        return !oi.verified && oppSemester.semesterNumber <= currentSemester.semesterNumber && requests.length === 0;
       }
     return false;
   },
