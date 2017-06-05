@@ -73,15 +73,15 @@ class CareerGoalCollection extends BaseSlugCollection {
   }
 
   /**
-   * Update the name, description, and interests associated with a Career Goal.
-   * @param goalID A CareerGoal docID.
+   * Update a Career Goal.
+   * @param docID A CareerGoal docID.
    * @param name The new name (optional).
    * @param description The new description (optional).
    * @param interests A new list of interest slugs or IDs. (optional).
-   * @throws { Meteor.Error } If goalID is not defined, or if any interest is not a defined slug or ID.
+   * @throws { Meteor.Error } If docID is not defined, or if any interest is not a defined slug or ID.
    */
-  update(goalID, { name, description, interests }) {
-    this.assertDefined(goalID);
+  update(docID, { name, description, interests }) {
+    this.assertDefined(docID);
     const updateData = {};
     if (name) {
       updateData.name = name;
@@ -93,7 +93,7 @@ class CareerGoalCollection extends BaseSlugCollection {
       const interestIDs = Interests.getIDs(interests);
       updateData.interestIDs = interestIDs;
     }
-    super.update(goalID, { $set: updateData });
+    super.update(docID, { $set: updateData });
   }
 
 
