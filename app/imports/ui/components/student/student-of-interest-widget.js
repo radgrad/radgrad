@@ -100,7 +100,7 @@ const availableOpps = () => {
       let inFuture = false;
       _.map(opp.semesterIDs, (semID) => {
         const sem = Semesters.findDoc(semID);
-        if (sem.sortBy >= currentSemester.sortBy) {
+        if (sem.semesterNumber >= currentSemester.semesterNumber) {
           inFuture = true;
         }
       });

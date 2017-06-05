@@ -23,7 +23,7 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
     }).fetch();
     _.map(ci, function (c) {
       const semester = Semesters.findDoc(c.semesterID);
-      if (semester.sortBy >= Semesters.getCurrentSemesterDoc().sortBy) {
+      if (semester.semesterNumber >= Semesters.getCurrentSemesterDoc().semesterNumber) {
         semesters.push(Semesters.toString(c.semesterID, false));
       }
     });

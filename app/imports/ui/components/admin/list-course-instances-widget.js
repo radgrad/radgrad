@@ -22,9 +22,6 @@ Template.List_Course_Instances_Widget.helpers({
     return _.sortBy(sortBySemester, function (ci) {
       return Users.findSlugByID(ci.studentID);
     });
-    // return _.sortBy(sortByStudent, function (ci) {
-    //   return Courses.findDoc(ci.courseID).name;
-    // });
   },
   count() {
     return CourseInstances.count();

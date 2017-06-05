@@ -49,7 +49,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
       takenSemesters.push(o.semesterID);
     });
     _.map(semesters, function (sem) {
-      if (Semesters.findDoc(sem).sortBy >= currentSemester.sortBy) {
+      if (Semesters.findDoc(sem).semesterNumber >= currentSemester.semesterNumber) {
         if (!_.includes(takenSemesters, sem)) {
           semesterNames.push(Semesters.toString(sem));
         }

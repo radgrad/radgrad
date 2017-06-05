@@ -24,7 +24,8 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       opportunityID: opportunity._id,
     }).fetch();
     _.map(oi, function (opportunityInstance) {
-      if (Semesters.findDoc(opportunityInstance.semesterID).sortBy >= Semesters.getCurrentSemesterDoc().sortBy) {
+      if (Semesters.findDoc(opportunityInstance.semesterID).semesterNumber >=
+          Semesters.getCurrentSemesterDoc().semesterNumber) {
         ret = true;
       }
     });
