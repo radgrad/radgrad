@@ -53,6 +53,7 @@ Template.Verification_Event.events({
           if (error) {
             console.log('Error defining OpportunityInstance', error);
           } else {
+            // TODO Can we remove VerificationRequests?
             verificationRequestsDefineMethod.call({ student: studentDoc.username, opportunityInstance: result },
                 (err, res) => {
                   if (err) {

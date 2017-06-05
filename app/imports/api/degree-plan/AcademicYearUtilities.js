@@ -13,7 +13,7 @@ import { Semesters } from '../semester/SemesterCollection';
 export function getStudentsCurrentSemesterNumber(studentID) {
   const cis = CourseInstances.find({ studentID }).fetch();
   let firstSemester;
-  _.map(cis, (ci) => {
+  _.forEach(cis, (ci) => {
     const semester = Semesters.findDoc(ci.semesterID);
     if (!firstSemester) {
       firstSemester = semester;

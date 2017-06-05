@@ -71,15 +71,24 @@ Template.List_Reviews_Widget.events({
     reviewsRemoveItMethod.call({ id }, (error) => {
       if (error) {
         console.log('Error removing Review', error);
+      } else {
+        let feeds = Feeds.find({ opportunityID: id }).fetch();
+        _.forEach(feeds, (f) => {
+          feedsRemoveItMethod.call({ id: f._id }, (err) => {
+            if (err) {
+              console.log('Error removing Feed', err);
+            }
+          });
+        });
+        feeds = Feeds.find({ courseID: id }).fetch();
+        _.forEach(feeds, (f) => {
+          feedsRemoveItMethod.call({ id: f._id }, (err) => {
+            if (err) {
+              console.log('Error removing Feed', err);
+            }
+          });
+        });
       }
-    });
-    let feeds = Feeds.find({ opportunityID: id }).fetch();
-    _.forEach(feeds, (f) => {
-      feedsRemoveItMethod.call({ id: f._id });
-    });
-    feeds = Feeds.find({ courseID: id }).fetch();
-    _.forEach(feeds, (f) => {
-      feedsRemoveItMethod.call({ id: f._id });
     });
   },
 });
