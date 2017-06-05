@@ -29,7 +29,7 @@ class CourseCollection extends BaseSlugCollection {
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
       // Optional data
       syllabus: { type: String, optional: true },
-      prerequisites: { type: [String], optional: true }, // stored as a slug for some reason.
+      prerequisites: { type: [String], optional: true },
     }));
     this.unInterestingSlug = 'other';
   }
@@ -60,7 +60,7 @@ class CourseCollection extends BaseSlugCollection {
    */
   define({
       name, shortName = name, slug, number, description, creditHrs = 3,
-      interests, syllabus, prerequisites = [],
+      interests = [], syllabus, prerequisites = [],
   }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
@@ -73,11 +73,10 @@ class CourseCollection extends BaseSlugCollection {
     if (!Array.isArray(prerequisites)) {
       throw new Meteor.Error(`Prerequisites ${prerequisites} is not an array.`);
     }
-    // Ensure each prereq is either a slug or a courseID.
     // Currently we don't dump the DB is a way that prevents forward referencing of prereqs, so we
-    // can't enforce this during the define.
+    // can't check the validity of prereqs during a define, such as with:
+    //   _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
     // TODO: check that prerequisite strings are valid after all courses are defined.
-    // _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
     const courseID =
         this._collection.insert({
           name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites,
@@ -85,6 +84,22 @@ class CourseCollection extends BaseSlugCollection {
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
     return courseID;
+  }
+
+  update(docID, { name, shortName, number, description, creditHrs, interests, syllabus, prerequisites }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (name) {
+      updateData.name = name;
+    }
+    if (description) {
+      updateData.description = description;
+    }
+    if (interests) {
+      const interestIDs = Interests.getIDs(interests);
+      updateData.interestIDs = interestIDs;
+    }
+    super.update(goalID, { $set: updateData });
   }
 
   getSlug(courseID) {
