@@ -70,13 +70,13 @@ if (Meteor.isServer) {
       expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(3);
 
       semesterID = Semesters.define({ term: Semesters.SPRING, year: 2012 });
-      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(5);
+      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(4);
 
       semesterID = Semesters.define({ term: Semesters.SUMMER, year: 2012 });
-      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(6);
+      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(5);
 
       semesterID = Semesters.define({ term: Semesters.FALL, year: 2012 });
-      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(7);
+      expect(Semesters.findDoc(semesterID).semesterNumber).to.equal(6);
     });
 
     it('#getID', function test() {

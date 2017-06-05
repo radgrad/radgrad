@@ -88,13 +88,11 @@ class SemesterCollection extends BaseSlugCollection {
     let semesterNumber = 0;
     const yearDiff = year - 2010;
     if (term === this.SPRING) {
-      semesterNumber = (4 * yearDiff) - 3;
-    }
-    if (term === this.SUMMER) {
-      semesterNumber = (4 * yearDiff) - 2;
-    }
-    if (term === this.FALL) {
-      semesterNumber = (4 * yearDiff) - 1;
+      semesterNumber = (3 * yearDiff) - 2;
+    } else if (term === this.SUMMER) {
+      semesterNumber = (3 * yearDiff) - 1;
+    } else {
+      semesterNumber = 3 * yearDiff;
     }
 
     // Determine what the slug looks like.

@@ -27,7 +27,7 @@ if (Meteor.isServer) {
     });
 
     after(function teardown() {
-      this.timeout(0)
+      this.timeout(0);
       removeAllEntities();
     });
 

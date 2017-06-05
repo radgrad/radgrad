@@ -78,7 +78,7 @@ Template.Update_Course_Instance_Widget.events({
     instance.context.resetValidation();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
-    // TODO update doesn't work.
+    // TODO Can't update grade or ICE for an existing CourseInstance.
     if (instance.context.isValid() &&
         !CourseInstances.isCourseInstance(updatedData.semester, updatedData.course, updatedData.user)) {
       FormUtils.convertICE(updatedData);

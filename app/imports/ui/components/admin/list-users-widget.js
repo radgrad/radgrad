@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Feeds } from '../../../api/feed/FeedCollection';
+import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
@@ -60,13 +62,21 @@ Template.List_Users_Widget.helpers({
 
 Template.List_Users_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
-  'click .jsDelete': function (event) {
+  'click .jsDelete': function (event) { // TODO the Delete button is disabled. Do we need this?
     event.preventDefault();
     const id = event.target.value;
     removeUserMethod.call({ id }, (error) => {
       if (error) {
         console.log('Error removing User', error);
       }
+    });
+    const feeds = Feeds.find({ userIDs: { $in: [id] } }).fetch();
+    _.forEach(feeds, (f) => {
+      feedsRemoveItMethod.call({ id: f._id }, (error) => {
+        if (error) {
+          console.log('Error removing Feed', error);
+        }
+      });
     });
   },
 });
