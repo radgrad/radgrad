@@ -31,7 +31,7 @@ Template.Add_Career_Goal_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      defineMethod.call({ collectionName: 'CareerGoalCollection', definition: newData }, (error, result) => {
+      defineMethod.call({ collectionName: 'CareerGoalCollection', definitionData: newData }, (error, result) => {
         if (error) {
           console.log('Error defining CareerGoal: ', error);
           FormUtils.indicateError(instance);  // TODO have a way of setting the FormUtils error text.

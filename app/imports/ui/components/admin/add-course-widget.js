@@ -39,12 +39,16 @@ Template.Add_Course_Widget.events({
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.reset();
     addSchema.clean(newData);
+    SimpleSchema.debug = true;
     instance.context.validate(newData);
+    console.log(newData);
     if (instance.context.isValid()) {
       coursesDefineMethod.call(newData, (error) => {
         if (error) {
+          console.log('error', error);
           FormUtils.indicateError(instance);
         } else {
+          console.log('success');
           FormUtils.indicateSuccess(instance, event);
           const feedDefinition = {
             course: newData.slug,
@@ -54,6 +58,7 @@ Template.Add_Course_Widget.events({
         }
       });
     } else {
+      console.log('not valid');
       FormUtils.indicateError(instance);
     }
   },
