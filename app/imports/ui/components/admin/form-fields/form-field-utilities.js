@@ -123,8 +123,7 @@ export function processUpdateButtonClick(event, instance) {
 Template.registerHelper('successClass', () => Template.instance().successClass.get());
 Template.registerHelper('errorClass', () => Template.instance().errorClass.get());
 Template.registerHelper('fieldError', (fieldName) => {
-  console.log('running global fieldError');
-  const invalidKeys = Template.instance().context._validationErrors;
+  const invalidKeys = Template.instance().context.validationErrors();
   const errorObject = _.find(invalidKeys, (keyObj) => keyObj.name === fieldName);
   return errorObject && Template.instance().context.keyErrorMessage(errorObject.name);
 });
