@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
@@ -12,18 +13,18 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_Course_Instance_Widget */
 
 const updateSchema = new SimpleSchema({
-  semester: { type: String, optional: false },
-  course: { type: String, optional: false },
-  verified: { type: String, optional: false },
-  fromSTAR: { type: String, optional: false },
-  grade: { type: String, optional: false },
-  creditHrs: { type: String, optional: false },
-  note: { type: String, optional: false },
-  user: { type: String, optional: false },
+  semester: String,
+  course: String,
+  verified: String,
+  fromSTAR: String,
+  grade: String,
+  creditHrs: String,
+  note: String,
+  user: String,
   innovation: { type: Number, optional: false, min: 0, max: 100 },
   competency: { type: Number, optional: false, min: 0, max: 100 },
   experience: { type: Number, optional: false, min: 0, max: 100 },
-});
+}, { tracker: Tracker });
 
 Template.Update_Course_Instance_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
@@ -76,9 +77,10 @@ Template.Update_Course_Instance_Widget.events({
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData);
+    updateSchema.clean(updatedData, { mutate: true });
     instance.context.validate(updatedData);
     // TODO Can't update grade or ICE for an existing CourseInstance.
+    // TODO So we can't update a course instance for an existing semester/course/user? Why? (PJ)
     if (instance.context.isValid() &&
         !CourseInstances.isCourseInstance(updatedData.semester, updatedData.course, updatedData.user)) {
       FormUtils.convertICE(updatedData);
