@@ -39,14 +39,15 @@ class FeedCollection extends BaseCollection {
    */
   constructor() {
     super('Feed', new SimpleSchema({
-      userIDs: [SimpleSchema.RegEx.Id],
+      userIDs: { type: Array },
+      'userIDs.$': SimpleSchema.RegEx.Id,
       opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
-      description: { type: String },
-      timestamp: { type: Date },
-      picture: { type: String },
-      feedType: { type: String },
+      description: String,
+      timestamp: Date,
+      picture: String,
+      feedType: String,
     }));
   }
 
@@ -98,7 +99,7 @@ class FeedCollection extends BaseCollection {
     const description = `[${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)}) 
       has been added to Courses`;
     const picture = '/images/radgrad_logo.png';
-    const feedID = this._collection.insert({ courseID, description, feedType, picture, timestamp });
+    const feedID = this._collection.insert({ userIDs: [], courseID, description, feedType, picture, timestamp });
     return feedID;
   }
 
@@ -118,7 +119,7 @@ class FeedCollection extends BaseCollection {
     const description = `[${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
       has been added to Opportunities`;
     const picture = '/images/radgrad_logo.png';
-    const feedID = this._collection.insert({ opportunityID, description, timestamp, picture, feedType });
+    const feedID = this._collection.insert({ userIDs: [], opportunityID, description, timestamp, picture, feedType });
     return feedID;
   }
 
@@ -183,9 +184,7 @@ class FeedCollection extends BaseCollection {
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
-    const feedID = this._collection.insert({
-      userIDs, courseID, description, timestamp, picture, feedType,
-    });
+    const feedID = this._collection.insert({ userIDs, courseID, description, timestamp, picture, feedType });
     return feedID;
   }
 
@@ -214,9 +213,7 @@ class FeedCollection extends BaseCollection {
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
-    const feedID = this._collection.insert({
-      userIDs, opportunityID, description, timestamp, picture, feedType,
-    });
+    const feedID = this._collection.insert({ userIDs, opportunityID, description, timestamp, picture, feedType });
     return feedID;
   }
 

@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Courses } from '../../../api/course/CourseCollection';
@@ -10,15 +11,15 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_Course_Widget */
 
 const updateSchema = new SimpleSchema({
-  name: { type: String, optional: false },
+  name: String,
   shortName: { type: String, optional: true },
-  number: { type: String, optional: false },
+  number: String,
   creditHrs: { type: Number, optional: true, defaultValue: 3 },
   syllabus: { type: String, optional: true },
-  description: { type: String, optional: false },
+  description: String,
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
-  prerequisites: [String],
-});
+  prerequisites: { type: Array }, 'prerequisites.$': String,
+}, { tracker: Tracker });
 
 Template.Update_Course_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
@@ -56,7 +57,7 @@ Template.Update_Course_Widget.events({
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData);
+    updateSchema.clean(updatedData, { mutate: true });
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
       FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
