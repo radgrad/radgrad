@@ -63,14 +63,7 @@ class FeedCollection extends BaseCollection {
    */
   defineNewUser({ user, feedType, timestamp = moment().toDate() }) {
     let description;
-    let userID;
-    const userIDs = _.map(user, function (u) {
-      userID = Users.getUserFromUsername(u)._id;
-      if (!userID) {
-        throw new Meteor.Error('User is invalid.');
-      }
-      return userID;
-    });
+    const userIDs = Users.getIDs(user);
     if (userIDs.length > 1) {
       description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
         and {{> Student_Feed_Modal ${userIDs.length - 1}}} others have joined RadGrad.`;
@@ -137,9 +130,7 @@ class FeedCollection extends BaseCollection {
    */
   defineNewVerifiedOpportunity({ user, opportunity, semester, feedType, timestamp = moment().toDate() }) {
     let description;
-    const userIDs = _.map(user, function (u) {
-      return Users.getUserFromUsername(u)._id;
-    });
+    const userIDs = Users.getIDs(user);
     const semesterID = Semesters.getID(semester);
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
@@ -173,9 +164,7 @@ class FeedCollection extends BaseCollection {
    */
   defineNewCourseReview({ user, course, feedType, timestamp = moment().toDate() }) {
     let picture;
-    const userIDs = _.map(user, function (u) {
-      return Users.getUserFromUsername(u)._id;
-    });
+    const userIDs = Users.getIDs(user);
     const courseID = Courses.getID(course);
     const c = Courses.findDoc(courseID);
     const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
@@ -201,9 +190,7 @@ class FeedCollection extends BaseCollection {
    */
   defineNewOpportunityReview({ user, opportunity, feedType, timestamp = moment().toDate() }) {
     let picture;
-    const userIDs = _.map(user, function (u) {
-      return Users.getUserFromUsername(u)._id;
-    });
+    const userIDs = Users.getIDs(user);
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
     const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])})  

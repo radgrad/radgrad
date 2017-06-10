@@ -1,15 +1,17 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Update_Help_Message_Widget */
 
 const updateSchema = new SimpleSchema({
-  routeName: { type: String, optional: false },
-  title: { type: String, optional: false },
-  text: { type: String, optional: false },
-});
+  routeName: String,
+  title: String,
+  text: String,
+}, { tracker: Tracker });
 
 Template.Update_Help_Message_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
@@ -28,13 +30,20 @@ Template.Update_Help_Message_Widget.helpers({
 Template.Update_Help_Message_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData);
-    instance.context.validate(updatedData);
+    updateSchema.clean(updateData, { mutate: true });
+    instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      HelpMessages.update(instance.data.updateID.get(), { $set: updatedData });
-      FormUtils.indicateSuccess(instance, event);
+      updateData.id = instance.data.updateID.get();
+      updateMethod.call({ collectionName: 'HelpMessageCollection', updateData }, (error) => {
+        if (error) {
+          console.log('update error', error);
+          FormUtils.indicateError(instance);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

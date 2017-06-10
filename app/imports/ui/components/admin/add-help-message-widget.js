@@ -1,18 +1,19 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
-import { helpMessagesDefineMethod } from '../../../api/help/HelpMessageCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { routeNames } from '../../../startup/client/router.js';
 
 // /** @module ui/components/admin/Add_Help_Message_Widget */
 
 const addSchema = new SimpleSchema({
-  routeName: { type: String, optional: false },
-  title: { type: String, optional: false },
-  text: { type: String, optional: false },
-});
+  routeName: String,
+  title: String,
+  text: String,
+}, { tracker: Tracker });
 
 Template.Add_Help_Message_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
@@ -31,13 +32,14 @@ Template.Add_Help_Message_Widget.events({
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.reset();
-    addSchema.clean(newData);
+    addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      helpMessagesDefineMethod.call(newData, (error) => {
+      defineMethod.call({ collectionName: 'HelpMessageCollection', definitionData: newData }, (error, result) => {
         if (error) {
-          FormUtils.indicateError(instance);
-        } else {
+          FormUtils.indicateError(instance);  // TODO have a way of setting the FormUtils error text.
+        }
+        if (result) {
           FormUtils.indicateSuccess(instance, event);
         }
       });

@@ -40,7 +40,7 @@ Template.Update_Career_Goal_Widget.events({
     event.preventDefault();
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updateData);
+    updateSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();
@@ -49,7 +49,6 @@ Template.Update_Career_Goal_Widget.events({
           console.log('update error', error);
           FormUtils.indicateError(instance);
         } else {
-          console.log('success');
           FormUtils.indicateSuccess(instance, event);
         }
       });
