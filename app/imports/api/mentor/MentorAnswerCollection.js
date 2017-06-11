@@ -1,4 +1,4 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { ROLE } from '../role/Role';

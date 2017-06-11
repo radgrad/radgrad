@@ -1,6 +1,6 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
@@ -134,7 +134,7 @@ Template.Student_Selector_Tabs.helpers({
     return Template.instance().state.get(displayErrorMessages) ? 'error' : '';
   },
   displayFieldError(fieldName) {
-    const errorKeys = Template.instance().context.invalidKeys();
+    const errorKeys = Template.instance().context.validationErrors();
     return _.find(errorKeys, (keyObj) => keyObj.name === fieldName);
   },
   fieldErrorMessage(fieldName) {
@@ -178,7 +178,7 @@ Template.Student_Selector_Tabs.events({
     }
     const newStudentData = { firstName, lastName, userName, uhID };
     // Clear out any old validation errors.
-    instance.context.resetValidation();
+    instance.context.reset();
     // Invoke clean so that newStudentData reflects what will be defined
     userDefineSchema.clean(newStudentData);
     // Determine validity

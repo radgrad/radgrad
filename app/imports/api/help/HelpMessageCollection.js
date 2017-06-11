@@ -1,4 +1,4 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
 
 
@@ -46,6 +46,19 @@ class HelpMessageCollection extends BaseCollection {
   getHelpTitle(routeName) {
     return this._collection.findOne({ routeName }).title;
   }
+
+  /**
+   * Update the routeName, title, or text associated with a Help Message.
+   * Let the schema do the validation.
+   * @param docID The docID.
+   * @param updateData The object containing the new data.
+   * @throws { Meteor.Error } If docID is not defined, or the field data is not valid.
+   */
+  update(docID, updateData) {
+    this.assertDefined(docID);
+    super.update(docID, { $set: updateData });
+  }
+
 
   /**
    * Returns an empty array (no integrity checking done on this collection.)

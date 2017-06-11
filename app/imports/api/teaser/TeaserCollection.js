@@ -1,4 +1,4 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
@@ -24,7 +24,7 @@ class TeaserCollection extends BaseSlugCollection {
       url: { type: String },
       description: { type: String },
       duration: { type: String },
-      interestIDs: { type: [SimpleSchema.RegEx.Id] },
+      interestIDs: [SimpleSchema.RegEx.Id],
       opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
     }));
   }

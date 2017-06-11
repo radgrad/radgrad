@@ -1,5 +1,4 @@
-import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { Courses } from '/imports/api/course/CourseCollection';
@@ -39,14 +38,15 @@ class FeedCollection extends BaseCollection {
    */
   constructor() {
     super('Feed', new SimpleSchema({
-      userIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
+      userIDs: { type: Array },
+      'userIDs.$': SimpleSchema.RegEx.Id,
       opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
-      description: { type: String },
-      timestamp: { type: Date },
-      picture: { type: String },
-      feedType: { type: String },
+      description: String,
+      timestamp: Date,
+      picture: String,
+      feedType: String,
     }));
   }
 
@@ -62,14 +62,7 @@ class FeedCollection extends BaseCollection {
    */
   defineNewUser({ user, feedType, timestamp = moment().toDate() }) {
     let description;
-    let userID;
-    const userIDs = _.map(user, function (u) {
-      userID = Users.getUserFromUsername(u)._id;
-      if (!userID) {
-        throw new Meteor.Error('User is invalid.');
-      }
-      return userID;
-    });
+    const userIDs = Users.getIDs(user);
     if (userIDs.length > 1) {
       description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
         and {{> Student_Feed_Modal ${userIDs.length - 1}}} others have joined RadGrad.`;
@@ -98,7 +91,7 @@ class FeedCollection extends BaseCollection {
     const description = `[${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)}) 
       has been added to Courses`;
     const picture = '/images/radgrad_logo.png';
-    const feedID = this._collection.insert({ courseID, description, feedType, picture, timestamp });
+    const feedID = this._collection.insert({ userIDs: [], courseID, description, feedType, picture, timestamp });
     return feedID;
   }
 
@@ -118,7 +111,7 @@ class FeedCollection extends BaseCollection {
     const description = `[${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
       has been added to Opportunities`;
     const picture = '/images/radgrad_logo.png';
-    const feedID = this._collection.insert({ opportunityID, description, timestamp, picture, feedType });
+    const feedID = this._collection.insert({ userIDs: [], opportunityID, description, timestamp, picture, feedType });
     return feedID;
   }
 
@@ -136,9 +129,7 @@ class FeedCollection extends BaseCollection {
    */
   defineNewVerifiedOpportunity({ user, opportunity, semester, feedType, timestamp = moment().toDate() }) {
     let description;
-    const userIDs = _.map(user, function (u) {
-      return Users.getUserFromUsername(u)._id;
-    });
+    const userIDs = Users.getIDs(user);
     const semesterID = Semesters.getID(semester);
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
@@ -172,9 +163,7 @@ class FeedCollection extends BaseCollection {
    */
   defineNewCourseReview({ user, course, feedType, timestamp = moment().toDate() }) {
     let picture;
-    const userIDs = _.map(user, function (u) {
-      return Users.getUserFromUsername(u)._id;
-    });
+    const userIDs = Users.getIDs(user);
     const courseID = Courses.getID(course);
     const c = Courses.findDoc(courseID);
     const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
@@ -183,9 +172,7 @@ class FeedCollection extends BaseCollection {
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
-    const feedID = this._collection.insert({
-      userIDs, courseID, description, timestamp, picture, feedType,
-    });
+    const feedID = this._collection.insert({ userIDs, courseID, description, timestamp, picture, feedType });
     return feedID;
   }
 
@@ -202,9 +189,7 @@ class FeedCollection extends BaseCollection {
    */
   defineNewOpportunityReview({ user, opportunity, feedType, timestamp = moment().toDate() }) {
     let picture;
-    const userIDs = _.map(user, function (u) {
-      return Users.getUserFromUsername(u)._id;
-    });
+    const userIDs = Users.getIDs(user);
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
     const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])})  
@@ -214,9 +199,7 @@ class FeedCollection extends BaseCollection {
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
-    const feedID = this._collection.insert({
-      userIDs, opportunityID, description, timestamp, picture, feedType,
-    });
+    const feedID = this._collection.insert({ userIDs, opportunityID, description, timestamp, picture, feedType });
     return feedID;
   }
 

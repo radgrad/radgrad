@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Tracker } from 'meteor/tracker';
+import SimpleSchema from 'simpl-schema';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -7,11 +8,11 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Add_Career_Goal_Widget */
 
 const addSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
-  description: { type: String, optional: false },
-  interests: { type: [String], optional: false, minCount: 1 },
-});
+  name: String,
+  slug: { type: String, custom: FormUtils.slugFieldValidator },
+  description: String,
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+}, { tracker: Tracker });
 
 Template.Add_Career_Goal_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
@@ -27,13 +28,12 @@ Template.Add_Career_Goal_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
-    addSchema.clean(newData);
+    instance.context.reset();
+    addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      defineMethod.call({ collectionName: 'CareerGoalCollection', definition: newData }, (error, result) => {
+      defineMethod.call({ collectionName: 'CareerGoalCollection', definitionData: newData }, (error, result) => {
         if (error) {
-          console.log('Error defining CareerGoal: ', error);
           FormUtils.indicateError(instance);  // TODO have a way of setting the FormUtils error text.
         }
         if (result) {

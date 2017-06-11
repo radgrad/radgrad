@@ -11,7 +11,7 @@
       </div>
 
       <div class="fields">
-        {{> Input_Form_Field label="Duration" name="duration" placeholder="2:30" errorMessage=(fieldError "duration")}}
+        {{> Input_Form_Field label="Duration" name="duration" placeholder="2:30" errorMessage=(fieldError "duration") required=true}}
         {{> Opportunity_Form_Field opportunities=opportunities errorMessage=(fieldError "opportunity") required=true}}
         {{> Input_Form_Field label="URL" name="url" placeholder="http://youtube.com/embed/foo" errorMessage=(fieldError "url") required="true" }}
       </div>

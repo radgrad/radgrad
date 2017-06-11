@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Tracker } from 'meteor/tracker';
+import SimpleSchema from 'simpl-schema';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { reviewsUpdateMethod } from '../../../api/review/ReviewCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -13,16 +14,16 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_Review_Widget */
 
 const updateSchema = new SimpleSchema({
-  student: { type: String, optional: false },
-  reviewType: { type: String, optional: false },
-  reviewee: { type: String, optional: false },
-  semester: { type: String, optional: false },
-  rating: { type: Number, optional: false, min: 0, max: 5 },
-  comments: { type: String, optional: false },
+  student: String,
+  reviewType: String,
+  reviewee: String,
+  semester: String,
+  rating: { type: Number, min: 0, max: 5 },
+  comments: String,
   moderated: { type: String, optional: true },
   visible: { type: String, optional: true },
   moderatorComments: { type: String, optional: true },
-});
+}, { tracker: Tracker });
 
 Template.Update_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
@@ -91,16 +92,16 @@ Template.Update_Review_Widget.helpers({
 Template.Update_Review_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    instance.context.resetValidation();
-    updateSchema.clean(updatedData);
-    instance.context.validate(updatedData);
-    updatedData.moderated = (updatedData.moderated === 'true');
-    updatedData.visible = (updatedData.visible === 'true');
-    FormUtils.renameKey(updatedData, 'semester', 'semesterID');
+    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    instance.context.reset();
+    updateSchema.clean(updateData, { mutate: true });
+    instance.context.validate(updateData);
+    updateData.moderated = (updateData.moderated === 'true');
+    updateData.visible = (updateData.visible === 'true');
+    FormUtils.renameKey(updateData, 'semester', 'semesterID');
     if (instance.context.isValid()) {
-      updatedData.id = instance.data.updateID.get();
-      reviewsUpdateMethod.call(updatedData, (error) => {
+      updateData.id = instance.data.updateID.get();
+      reviewsUpdateMethod.call(updateData, (error) => {
         if (error) {
           console.log('Error defining Review', error);
           FormUtils.indicateError(instance);

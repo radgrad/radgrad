@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Tracker } from 'meteor/tracker';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
@@ -17,21 +18,20 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Add_User_Widget */
 
 const addSchema = new SimpleSchema({
-  firstName: { type: String, optional: false },
-  lastName: { type: String, optional: false },
-  role: { type: String, optional: false },
-  slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
-  email: { type: String, optional: false },
-  uhID: { type: String, optional: false },
-  // remaining are optional.
+  firstName: String,
+  lastName: String,
+  role: String,
+  slug: { type: String, custom: FormUtils.slugFieldValidator },
+  email: String,
+  uhID: String,
   password: { type: String, optional: true },
   desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
-  careerGoals: { type: [String], optional: true },
-  interests: { type: [String], optional: true },
+  careerGoals: { type: Array }, 'careerGoals.$': String,
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
   website: { type: String, optional: true },
-});
+}, { tracker: Tracker });
 
 Template.Add_User_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
@@ -56,8 +56,8 @@ Template.Add_User_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
-    addSchema.clean(newData);
+    instance.context.reset();
+    addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       validUserAccountsDefineMethod.call({ username: newData.slug }, (error) => {
@@ -69,6 +69,7 @@ Template.Add_User_Widget.events({
         if (error) {
           console.log('Error during new user creation: ', error);
         }
+        // TODO This check should happen inside the defineNewUser method (i.e. inside the API), not at client-level.
         if (Feeds.checkPastDayFeed('new-user')) {
           feedsUpdateNewUserMethod({ username: newData.slug, existingFeedID: Feeds.checkPastDayFeed('new-user') },
               (err) => {

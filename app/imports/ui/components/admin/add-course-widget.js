@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Tracker } from 'meteor/tracker';
+import SimpleSchema from 'simpl-schema';
 import { Courses } from '../../../api/course/CourseCollection';
 import { coursesDefineMethod } from '../../../api/course/CourseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -9,16 +10,17 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Add_Course_Widget */
 
 const addSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
+  name: String,
+  slug: { type: String, custom: FormUtils.slugFieldValidator },
   shortName: { type: String, optional: true },
-  number: { type: String, optional: false },
+  number: String,
   creditHrs: { type: Number, optional: true, defaultValue: 3 },
   syllabus: { type: String, optional: true },
-  description: { type: String, optional: false },
-  interests: { type: [String], optional: false, minCount: 1 },
-  prerequisites: { type: [String], optional: true },
-});
+  description: String,
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  prerequisites: { type: Array },
+  'prerequisites.$': String,
+}, { tracker: Tracker });
 
 Template.Add_Course_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
@@ -37,8 +39,8 @@ Template.Add_Course_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
-    addSchema.clean(newData);
+    instance.context.reset();
+    addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       coursesDefineMethod.call(newData, (error) => {

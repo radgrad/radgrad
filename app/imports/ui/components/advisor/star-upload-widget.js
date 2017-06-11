@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { updateLevelMethod } from '../../../api/level/LevelProcessor.methods';
@@ -12,18 +12,18 @@ import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 // /** @module ui/components/advisor/Star_Upload_Widget */
 
 const updateSchema = new SimpleSchema({
-  firstName: { type: String, optional: false },
-  lastName: { type: String, optional: false },
-  slug: { type: String, optional: false }, // will rename this to username
-  role: { type: String, optional: false },
-  email: { type: String, optional: false },
-  uhID: { type: String, optional: false },
+  firstName: String,
+  lastName: String,
+  slug: String, // will rename this to username
+  role: String,
+  email: String,
+  uhID: String,
   // remaining are optional.
   desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
-  careerGoals: { type: [String], optional: true },
-  interests: { type: [String], optional: true },
+  careerGoals: { type: Array, minCount: 1 }, 'careerGoals.$': String,
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
   website: { type: String, optional: true },
 });
 
