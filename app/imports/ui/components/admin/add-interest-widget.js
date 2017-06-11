@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection.js';
 import { interestsDefineMethod } from '../../../api/interest/InterestCollection.methods';
@@ -7,11 +8,11 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Add_Interest_Widget */
 
 const addSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
-  description: { type: String, optional: false },
-  interestType: { type: String, optional: false, minCount: 1 },
-});
+  name: String,
+  slug: { type: String, custom: FormUtils.slugFieldValidator },
+  description: String,
+  interestType: String,
+}, { tracker: Tracker });
 
 Template.Add_Interest_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
@@ -28,7 +29,7 @@ Template.Add_Interest_Widget.events({
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.reset();
-    addSchema.clean(newData);
+    addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       interestsDefineMethod.call(newData, (error) => {

@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { teasersUpdateMethod } from '../../../api/teaser/TeaserCollection.methods';
@@ -10,14 +11,14 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_Teaser_Widget */
 
 const updateSchema = new SimpleSchema({
-  title: { type: String, optional: false },
-  author: { type: String, optional: false },
-  url: { type: String, optional: false },
-  description: { type: String, optional: false },
-  duration: { type: String, optional: false },
+  title: String,
+  author: String,
+  url: String,
+  description: String,
+  duration: String,
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   opportunity: { type: String, optional: true },
-});
+}, { tracker: Tracker });
 
 Template.Update_Teaser_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
@@ -50,15 +51,15 @@ Template.Update_Teaser_Widget.helpers({
 Template.Update_Teaser_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData);
-    instance.context.validate(updatedData);
+    updateSchema.clean(updateData, { mutate: true });
+    instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      FormUtils.renameKey(updatedData, 'opportunity', 'opportunityID');
-      updatedData.id = instance.data.updateID.get();
-      teasersUpdateMethod.call(updatedData, (error) => {
+      FormUtils.renameKey(updateData, 'interests', 'interestIDs');
+      FormUtils.renameKey(updateData, 'opportunity', 'opportunityID');
+      updateData.id = instance.data.updateID.get();
+      teasersUpdateMethod.call(updateData, (error) => {
         if (error) {
           console.log('Error updating Teaser', error);
           FormUtils.indicateError(instance);

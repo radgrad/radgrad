@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
@@ -13,19 +14,18 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_Opportunity_Widget */
 
 const updateSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  slug: { type: String },
+  name: String,
   eventDate: { type: Date, optional: true },
-  description: { type: String, optional: false },
-  opportunityType: { type: String, optional: false },
-  sponsor: { type: String, optional: false },
-  innovation: { type: Number, optional: false, min: 0, max: 100 },
-  competency: { type: Number, optional: false, min: 0, max: 100 },
-  experience: { type: Number, optional: false, min: 0, max: 100 },
+  description: String,
+  opportunityType: String,
+  sponsor: String,
+  innovation: { type: Number, min: 0, max: 100 },
+  competency: { type: Number, min: 0, max: 100 },
+  experience: { type: Number, min: 0, max: 100 },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   semesters: { type: Array, minCount: 1 }, 'semesters.$': String,
   icon: { type: String, optional: true },
-});
+}, { tracker: Tracker });
 
 Template.Update_Opportunity_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
@@ -64,20 +64,20 @@ Template.Update_Opportunity_Widget.helpers({
 Template.Update_Opportunity_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData);
-    instance.context.validate(updatedData);
+    updateSchema.clean(updateData, { mutate: true });
+    instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.convertICE(updatedData);
-      FormUtils.renameKey(updatedData, 'slug', 'slugID');
-      FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      FormUtils.renameKey(updatedData, 'semesters', 'semesterIDs');
-      FormUtils.renameKey(updatedData, 'opportunityType', 'opportunityTypeID');
-      FormUtils.renameKey(updatedData, 'sponsor', 'sponsorID');
-      updatedData.independentStudy = false;
-      updatedData.id = instance.data.updateID.get();
-      opportunitiesUpdateMethod.call(updatedData, (error) => {
+      FormUtils.convertICE(updateData);
+      FormUtils.renameKey(updateData, 'slug', 'slugID');
+      FormUtils.renameKey(updateData, 'interests', 'interestIDs');
+      FormUtils.renameKey(updateData, 'semesters', 'semesterIDs');
+      FormUtils.renameKey(updateData, 'opportunityType', 'opportunityTypeID');
+      FormUtils.renameKey(updateData, 'sponsor', 'sponsorID');
+      updateData.independentStudy = false;
+      updateData.id = instance.data.updateID.get();
+      opportunitiesUpdateMethod.call(updateData, (error) => {
         if (error) {
           console.log('Error updating Opportunity', error);
           FormUtils.indicateError(instance);

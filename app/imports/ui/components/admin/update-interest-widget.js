@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { interestsUpdateMethod } from '../../../api/interest/InterestCollection.methods';
@@ -9,10 +10,10 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_Interest_Widget */
 
 const updateSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  description: { type: String, optional: false },
-  interestType: { type: String, optional: false, minCount: 1 },
-});
+  name: String,
+  description: String,
+  interestType: String,
+}, { tracker: Tracker });
 
 Template.Update_Interest_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
@@ -34,15 +35,14 @@ Template.Update_Interest_Widget.helpers({
 Template.Update_Interest_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData);
-    instance.context.validate(updatedData);
+    updateSchema.clean(updateData, { mutate: true });
+    instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updatedData, 'interestType', 'interestTypeID');
-      updatedData.id = instance.data.updateID.get();
-      console.log(updatedData);
-      interestsUpdateMethod.call(updatedData, (error) => {
+      FormUtils.renameKey(updateData, 'interestType', 'interestTypeID');
+      updateData.id = instance.data.updateID.get();
+      interestsUpdateMethod.call(updateData, (error) => {
         if (error) {
           console.log('Error updating Interest', error);
           FormUtils.indicateError(instance);

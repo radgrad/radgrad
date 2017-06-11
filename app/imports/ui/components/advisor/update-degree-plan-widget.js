@@ -24,12 +24,12 @@ import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 // /** @module ui/components/advisor/Update_Degree_Plan_Widget */
 
 const updateSchema = new SimpleSchema({
-  firstName: { type: String, optional: false },
-  lastName: { type: String, optional: false },
-  slug: { type: String, optional: false }, // will rename this to username
-  role: { type: String, optional: false },
-  email: { type: String, optional: false },
-  uhID: { type: String, optional: false },
+  firstName: String,
+  lastName: String,
+  slug: String, // will rename this to username
+  role: String,
+  email: String,
+  uhID: String,
   // remaining are optional.
   desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },

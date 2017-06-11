@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
@@ -9,10 +10,10 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_Career_Goal_Widget */
 
 const updateSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  description: { type: String, optional: false },
+  name: String,
+  description: String,
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
-});
+}, { tracker: Tracker });
 
 Template.Update_Career_Goal_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);

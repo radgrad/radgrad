@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -14,20 +15,19 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_User_Widget */
 
 const updateSchema = new SimpleSchema({
-  firstName: { type: String, optional: false },
-  lastName: { type: String, optional: false },
-  slug: { type: String, optional: false }, // will rename this to username
-  role: { type: String, optional: false },
-  email: { type: String, optional: false },
-  uhID: { type: String, optional: false },
-  // remaining are optional.
+  firstName: String,
+  lastName: String,
+  slug: String, // will rename this to username
+  role: String,
+  email: String,
+  uhID: String,
   desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
   careerGoals: [String],
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   website: { type: String, optional: true },
-});
+}, { tracker: Tracker });
 
 Template.Update_User_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
@@ -76,7 +76,7 @@ Template.Update_User_Widget.events({
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData);
+    updateSchema.clean(updatedData, { mutate: true });
     instance.context.validate(updatedData);
     if (instance.context.isValid()) {
       const oldRole = Roles.getRolesForUser(Template.currentData().updateID.get());

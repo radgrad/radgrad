@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
@@ -14,19 +15,19 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 // /** @module ui/components/admin/Add_Opportunity_Widget */
 
 const addSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
+  name: String,
+  slug: { type: String, custom: FormUtils.slugFieldValidator },
   eventDate: { type: Date, optional: true },
-  description: { type: String, optional: false },
-  opportunityType: { type: String, optional: false },
-  sponsor: { type: String, optional: false },
-  innovation: { type: Number, optional: false, min: 0, max: 100 },
-  competency: { type: Number, optional: false, min: 0, max: 100 },
-  experience: { type: Number, optional: false, min: 0, max: 100 },
+  description: String,
+  opportunityType: String,
+  sponsor: String,
+  innovation: { type: Number, min: 0, max: 100 },
+  competency: { type: Number, min: 0, max: 100 },
+  experience: { type: Number, min: 0, max: 100 },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   semesters: { type: Array, minCount: 1 }, 'semesters.$': String,
   icon: { type: String, optional: true },
-});
+}, { tracker: Tracker });
 
 Template.Add_Opportunity_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
@@ -63,7 +64,7 @@ Template.Add_Opportunity_Widget.events({
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.reset();
-    addSchema.clean(newData);
+    addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(newData);

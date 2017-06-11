@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { feedsDefineNewCourseReviewMethod,
   feedsDefineNewOpportunityReviewMethod } from '../../../api/feed/FeedCollection.methods';
@@ -10,18 +11,21 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_Review_Widget */
 
+// TODO Slug should be auto-generated, student and reviewee should be dropdowns, Schema should have validators
+// for Student, reviewType, reviewee.
+
 const addSchema = new SimpleSchema({
-  slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
-  student: { type: String, optional: false },
-  reviewType: { type: String, optional: false },
-  reviewee: { type: String, optional: false },
-  semester: { type: String, optional: false },
-  rating: { type: Number, optional: false, min: 0, max: 5 },
-  comments: { type: String, optional: false },
+  slug: { type: String, custom: FormUtils.slugFieldValidator },
+  student: String,
+  reviewType: String,
+  reviewee: String,
+  semester: String,
+  rating: { type: Number, min: 0, max: 5 },
+  comments: String,
   moderated: { type: String, optional: true },
   visible: { type: String, optional: true },
   moderatorComments: { type: String, optional: true },
-});
+}, { tracker: Tracker });
 
 Template.Add_Review_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
@@ -47,7 +51,7 @@ Template.Add_Review_Widget.events({
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.reset();
-    addSchema.clean(newData);
+    addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     newData.moderated = (newData.moderated === 'true');
     newData.visible = (newData.visible === 'true');

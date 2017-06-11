@@ -13,9 +13,9 @@ import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
-  semester: { type: String, optional: false },
+  semester: String,
   rating: { type: Number, optional: true },
-  comments: { type: String, optional: false },
+  comments: String,
 });
 
 Template.Student_Explorer_Add_Review_Widget.onCreated(function onCreated() {
