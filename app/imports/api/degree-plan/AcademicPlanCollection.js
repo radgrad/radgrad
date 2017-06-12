@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
 
 import { DesiredDegrees } from './DesiredDegreeCollection';
@@ -22,8 +22,9 @@ class AcademicPlanCollection extends BaseCollection {
       degreeID: { type: SimpleSchema.RegEx.Id },
       name: { type: String },
       effectiveSemesterID: { type: SimpleSchema.RegEx.Id },
-      coursesPerSemester: { type: [Number], minCount: 12, maxCount: 12 },
-      courseList: { type: [String] },
+      coursesPerSemester: { type: Array, minCount: 12, maxCount: 12 },
+      'coursesPerSemester.$': Number,
+      courseList: [String],
     }));
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, degreeID: 1, effectiveSemesterID: 1 });

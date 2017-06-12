@@ -1,8 +1,8 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
+import { ROLE } from '../role/Role';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
-
 
 /** @module api/mentor/MentorQuestionCollection */
 
@@ -45,6 +45,17 @@ class MentorQuestionCollection extends BaseSlugCollection {
       Slugs.updateEntityID(slugID, docID);
     }
     return docID;
+  }
+
+  /**
+   * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
+   * Student.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
+   */
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT]);
   }
 
   getQuestions() {

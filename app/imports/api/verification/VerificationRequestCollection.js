@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { moment } from 'meteor/momentjs:moment';
 import BaseCollection from '../base/BaseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
@@ -39,7 +39,7 @@ class VerificationRequestCollection extends BaseCollection {
       opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
       submittedOn: { type: Date },
       status: { type: String },
-      processed: { type: [ProcessedSchema] },
+      processed: [ProcessedSchema],
       ice: { type: Object, optional: true, blackbox: true },
     }));
     this.ACCEPTED = 'Accepted';
@@ -79,6 +79,17 @@ class VerificationRequestCollection extends BaseCollection {
       studentID, opportunityInstanceID, submittedOn, status, processed, ice,
     });
     return requestID;
+  }
+
+  /**
+   * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
+   * Student.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
+   */
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT]);
   }
 
   /**

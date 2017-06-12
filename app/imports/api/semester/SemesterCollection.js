@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { moment } from 'meteor/momentjs:moment';
 import { Slugs } from '../slug/SlugCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';

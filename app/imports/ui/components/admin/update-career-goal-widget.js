@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Tracker } from 'meteor/tracker';
+import SimpleSchema from 'simpl-schema';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
@@ -9,10 +10,10 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_Career_Goal_Widget */
 
 const updateSchema = new SimpleSchema({
-  name: { type: String, optional: false },
-  description: { type: String, optional: false },
-  interests: { type: [String], optional: false, minCount: 1 },
-});
+  name: String,
+  description: String,
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+}, { tracker: Tracker });
 
 Template.Update_Career_Goal_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
@@ -39,13 +40,14 @@ Template.Update_Career_Goal_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    instance.context.resetValidation();
-    updateSchema.clean(updateData);
+    instance.context.reset();
+    updateSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();
       updateMethod.call({ collectionName: 'CareerGoalCollection', updateData }, (error) => {
         if (error) {
+          console.log('update error', error);
           FormUtils.indicateError(instance);
         } else {
           FormUtils.indicateSuccess(instance, event);

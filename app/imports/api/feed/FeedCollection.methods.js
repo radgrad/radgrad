@@ -10,11 +10,11 @@ import { Feeds } from './FeedCollection';
 export const feedsDefineNewUserMethod = new ValidatedMethod({
   name: 'Feeds.defineNewUser',
   validate: null,
-  run(planDefn) {
+  run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
     }
-    return Feeds.defineNewUser(planDefn);
+    return Feeds.defineNewUser(definition);
   },
 });
 
@@ -24,11 +24,11 @@ export const feedsDefineNewUserMethod = new ValidatedMethod({
 export const feedsDefineNewCourseMethod = new ValidatedMethod({
   name: 'Feeds.defineNewCourse',
   validate: null,
-  run(planDefn) {
+  run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
     }
-    return Feeds.defineNewCourse(planDefn);
+    return Feeds.defineNewCourse(definition);
   },
 });
 
@@ -38,11 +38,11 @@ export const feedsDefineNewCourseMethod = new ValidatedMethod({
 export const feedsDefineNewOpportunityMethod = new ValidatedMethod({
   name: 'Feeds.defineNewOpportunity',
   validate: null,
-  run(planDefn) {
+  run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
     }
-    return Feeds.defineNewOpportunity(planDefn);
+    return Feeds.defineNewOpportunity(definition);
   },
 });
 
@@ -52,11 +52,11 @@ export const feedsDefineNewOpportunityMethod = new ValidatedMethod({
 export const feedsDefineNewVerifiedOpportunityMethod = new ValidatedMethod({
   name: 'Feeds.defineNewVerifiedOpportunity',
   validate: null,
-  run(planDefn) {
+  run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
     }
-    return Feeds.defineNewVerifiedOpportunity(planDefn);
+    return Feeds.defineNewVerifiedOpportunity(definition);
   },
 });
 
@@ -66,11 +66,11 @@ export const feedsDefineNewVerifiedOpportunityMethod = new ValidatedMethod({
 export const feedsDefineNewCourseReviewMethod = new ValidatedMethod({
   name: 'Feeds.defineNewCourseReview',
   validate: null,
-  run(planDefn) {
+  run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
     }
-    return Feeds.defineNewCourseReview(planDefn);
+    return Feeds.defineNewCourseReview(definition);
   },
 });
 
@@ -80,11 +80,11 @@ export const feedsDefineNewCourseReviewMethod = new ValidatedMethod({
 export const feedsDefineNewOpportunityReviewMethod = new ValidatedMethod({
   name: 'Feeds.defineNewOpportunityReview',
   validate: null,
-  run(planDefn) {
+  run(definition) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
     }
-    return Feeds.defineNewOpportunityReview(planDefn);
+    return Feeds.defineNewOpportunityReview(definition);
   },
 });
 

@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { Slugs } from '../slug/SlugCollection';
 import { Interests } from '../interest/InterestCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
@@ -26,10 +26,14 @@ class CourseCollection extends BaseSlugCollection {
       number: { type: String },
       description: { type: String },
       creditHrs: { type: Number },
-      interestIDs: { type: [SimpleSchema.RegEx.Id] },
+      interestIDs: [SimpleSchema.RegEx.Id],
       // Optional data
       syllabus: { type: String, optional: true },
+<<<<<<< HEAD
       prerequisites: { type: [String], optional: true },
+=======
+      prerequisites: [String],
+>>>>>>> master
     }));
     this.unInterestingSlug = 'other';
   }

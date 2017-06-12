@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { feedsDefineNewCourseReviewMethod,
   feedsDefineNewOpportunityReviewMethod } from '../../../api/feed/FeedCollection.methods';
@@ -13,9 +13,9 @@ import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
-  semester: { type: String, optional: false },
+  semester: String,
   rating: { type: Number, optional: true },
-  comments: { type: String, optional: false },
+  comments: String,
 });
 
 Template.Student_Explorer_Add_Review_Widget.onCreated(function onCreated() {
@@ -56,7 +56,7 @@ Template.Student_Explorer_Add_Review_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    instance.context.resetValidation();
+    instance.context.reset();
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {

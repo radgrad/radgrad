@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { Users } from '../user/UserCollection';

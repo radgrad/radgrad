@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../semester/SemesterCollection';
 import { ROLE } from '../role/Role';
@@ -23,7 +23,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
       year: { type: Number },
       springYear: { type: Number },
       studentID: { type: SimpleSchema.RegEx.Id },
-      semesterIDs: { type: [SimpleSchema.RegEx.Id] },
+      semesterIDs: [SimpleSchema.RegEx.Id],
     }));
     this.publicationNames = {
       Public: this._collectionName,
@@ -57,6 +57,17 @@ class AcademicYearInstanceCollection extends BaseCollection {
 
     // Define and return the docID
     return this._collection.insert({ year, springYear: year + 1, studentID, semesterIDs });
+  }
+
+  /**
+   * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
+   * Student.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
+   */
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT]);
   }
 
   /**

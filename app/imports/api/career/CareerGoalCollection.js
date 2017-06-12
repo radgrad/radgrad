@@ -1,4 +1,4 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import { Interests } from '../interest/InterestCollection';
@@ -21,7 +21,7 @@ class CareerGoalCollection extends BaseSlugCollection {
       name: { type: String },
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
-      interestIDs: { type: [SimpleSchema.RegEx.Id] },
+      interestIDs: [SimpleSchema.RegEx.Id],
     }));
   }
 

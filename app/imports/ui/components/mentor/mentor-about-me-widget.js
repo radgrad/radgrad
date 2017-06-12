@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import * as RouteNames from '/imports/startup/client/router.js';
 import * as FormUtils from '../../components/admin/form-fields/form-field-utilities.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -188,7 +188,7 @@ Template.Mentor_About_Me_Widget.events({
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     const website = updatedData.website;
     delete updatedData.website;
-    instance.context.resetValidation();
+    instance.context.reset();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     const mentorProfile = MentorProfiles.find({ mentorID: getUserIdFromRoute() }).fetch();

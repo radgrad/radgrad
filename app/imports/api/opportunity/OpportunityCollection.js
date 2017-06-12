@@ -1,4 +1,4 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import { Semesters } from '../semester/SemesterCollection';
@@ -28,8 +28,8 @@ class OpportunityCollection extends BaseSlugCollection {
       description: { type: String },
       opportunityTypeID: { type: SimpleSchema.RegEx.Id },
       sponsorID: { type: SimpleSchema.RegEx.Id },
-      interestIDs: { type: [SimpleSchema.RegEx.Id] },
-      semesterIDs: { type: [SimpleSchema.RegEx.Id] },
+      interestIDs: [SimpleSchema.RegEx.Id],
+      semesterIDs: [SimpleSchema.RegEx.Id],
       independentStudy: { type: Boolean },
       // Optional data
       eventDate: { type: Date, optional: true },
