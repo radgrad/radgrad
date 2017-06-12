@@ -29,11 +29,7 @@ class CourseCollection extends BaseSlugCollection {
       interestIDs: [SimpleSchema.RegEx.Id],
       // Optional data
       syllabus: { type: String, optional: true },
-<<<<<<< HEAD
-      prerequisites: { type: [String], optional: true },
-=======
       prerequisites: [String],
->>>>>>> master
     }));
     this.unInterestingSlug = 'other';
   }
@@ -103,7 +99,22 @@ class CourseCollection extends BaseSlugCollection {
       const interestIDs = Interests.getIDs(interests);
       updateData.interestIDs = interestIDs;
     }
-    super.update(goalID, { $set: updateData });
+    if (shortName) {
+      updateData.shortName = shortName;
+    }
+    if (number) {
+      updateData.number = number;
+    }
+    if (creditHrs) {
+      updateData.creditHrs = creditHrs;
+    }
+    if (syllabus) {
+      updateData.syllabus = syllabus;
+    }
+    if (prerequisites) {
+      updateData.prerequisites = prerequisites;
+    }
+    super.update(docID, { $set: updateData });
   }
 
   getSlug(courseID) {
