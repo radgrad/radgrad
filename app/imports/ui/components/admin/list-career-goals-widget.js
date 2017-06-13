@@ -45,13 +45,9 @@ Template.List_Career_Goals_Widget.events({
   'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    removeItMethod.call({ collectionName: 'CareerGoalCollection', instance: id }, (error, result) => {
+    removeItMethod.call({ collectionName: 'CareerGoalCollection', instance: id }, (error) => {
       if (error) {
-        console.log('Error deleting CareerGoal: ', error);
-        FormUtils.indicateError(instance);
-      }
-      if (result) {
-        FormUtils.indicateSuccess(instance, event);
+        FormUtils.indicateError(instance, error);
       }
     });
   },

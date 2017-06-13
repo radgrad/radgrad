@@ -68,7 +68,7 @@ Template.Student_Explorer_Edit_Review_Widget.events({
       reviewsUpdateMethod.call(updatedData, (error) => {
         if (error) {
           console.log('Error defining Review', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }
@@ -83,7 +83,7 @@ Template.Student_Explorer_Edit_Review_Widget.events({
     reviewsRemoveItMethod.call({ id }, (error) => {
       if (error) {
         console.log('Error defining Review', error);
-        FormUtils.indicateError(instance);
+        FormUtils.indicateError(instance, error);
       } else {
         FormUtils.indicateSuccess(instance, event);
         let feeds = Feeds.find({ opportunityID: id }).fetch();

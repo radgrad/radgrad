@@ -101,9 +101,12 @@ export function indicateSuccess(instance, event) {
  * If a form submission was not validated, update template state to indicate error.
  * @param instance The template instance.
  */
-export function indicateError(instance) {
+export function indicateError(instance, error) {
   instance.errorClass.set('error');
   instance.successClass.set('');
+  if (error) {
+    console.log(`Error: ${error}`);
+  }
 }
 
 export function processCancelButtonClick(event, instance) {

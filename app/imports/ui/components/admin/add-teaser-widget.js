@@ -43,8 +43,7 @@ Template.Add_Teaser_Widget.events({
     if (instance.context.isValid()) {
       teasersDefineMethod.call(newData, (error) => {
         if (error) {
-          console.log('Error defining Teaser', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

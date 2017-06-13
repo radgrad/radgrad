@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { Courses } from '../../../api/course/CourseCollection';
-import { coursesDefineMethod } from '../../../api/course/CourseCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { feedsDefineNewCourseMethod } from '../../../api/feed/FeedCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -43,16 +43,12 @@ Template.Add_Course_Widget.events({
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      coursesDefineMethod.call(newData, (error) => {
+      defineMethod.call({ collectionName: 'CourseCollection', definitionData: newData }, (error) => {
         if (error) {
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
-          const feedDefinition = {
-            course: newData.slug,
-            feedType: 'new-course',
-          };
-          feedsDefineNewCourseMethod.call(feedDefinition);
+          feedsDefineNewCourseMethod.call({ course: newData.slug, feedType: 'new-course' });
         }
       });
     } else {

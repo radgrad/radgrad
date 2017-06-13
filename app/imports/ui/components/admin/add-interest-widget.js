@@ -35,7 +35,7 @@ Template.Add_Interest_Widget.events({
       interestsDefineMethod.call(newData, (error) => {
         if (error) {
           console.log('Error defining Interest', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

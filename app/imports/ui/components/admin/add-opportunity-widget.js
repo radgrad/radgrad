@@ -70,7 +70,7 @@ Template.Add_Opportunity_Widget.events({
       FormUtils.convertICE(newData);
       opportunitiesDefineMethod.call(newData, (error) => {
         if (error) {
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
           const feedDefinition = {

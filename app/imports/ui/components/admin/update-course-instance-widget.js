@@ -92,8 +92,7 @@ Template.Update_Course_Instance_Widget.events({
       updatedData.id = instance.data.updateID.get();
       courseInstancesUpdateMethod.call(updatedData, (error) => {
         if (error) {
-          console.log('Error could not update CourseInstance', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

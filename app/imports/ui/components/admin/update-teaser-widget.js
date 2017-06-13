@@ -62,7 +62,7 @@ Template.Update_Teaser_Widget.events({
       teasersUpdateMethod.call(updateData, (error) => {
         if (error) {
           console.log('Error updating Teaser', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

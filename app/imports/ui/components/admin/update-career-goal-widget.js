@@ -47,8 +47,7 @@ Template.Update_Career_Goal_Widget.events({
       updateData.id = instance.data.updateID.get();
       updateMethod.call({ collectionName: 'CareerGoalCollection', updateData }, (error) => {
         if (error) {
-          console.log('update error', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

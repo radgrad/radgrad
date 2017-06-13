@@ -204,7 +204,7 @@ Template.Academic_Plan_Builder_Widget.events({
       // console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
       academicPlansDefineMethod.call({ degreeSlug, name, semester, coursesPerSemester, courseList }, (error) => {
         if (error) {
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

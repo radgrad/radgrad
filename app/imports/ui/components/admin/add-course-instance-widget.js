@@ -59,7 +59,7 @@ Template.Add_Course_Instance_Widget.events({
       courseInstancesDefineMethod.call(newData, (error) => {
         if (error) {
           console.log('Error could not define CourseInstance', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

@@ -45,7 +45,7 @@ Template.Update_Interest_Widget.events({
       interestsUpdateMethod.call(updateData, (error) => {
         if (error) {
           console.log('Error updating Interest', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }
