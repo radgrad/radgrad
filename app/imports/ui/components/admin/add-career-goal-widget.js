@@ -3,13 +3,14 @@ import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { newSlugValidator } from '../../../api/slug/SlugCollection.validators';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_Career_Goal_Widget */
 
 const addSchema = new SimpleSchema({
   name: String,
-  slug: { type: String, custom: FormUtils.slugFieldValidator },
+  slug: { type: String, custom: newSlugValidator },
   description: String,
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
 }, { tracker: Tracker });

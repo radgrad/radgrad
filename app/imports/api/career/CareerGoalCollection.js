@@ -74,7 +74,7 @@ class CareerGoalCollection extends BaseSlugCollection {
 
   /**
    * Update a Career Goal.
-   * @param docID A CareerGoal docID.
+   * @param docID The docID to be updated.
    * @param name The new name (optional).
    * @param description The new description (optional).
    * @param interests A new list of interest slugs or IDs. (optional).
