@@ -1,6 +1,8 @@
 import SimpleSchema from 'simpl-schema';
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
+import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
@@ -94,6 +96,23 @@ class CareerGoalCollection extends BaseSlugCollection {
       updateData.interestIDs = interestIDs;
     }
     super.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the Career Goal.
+   * @param instance The docID or slug of the entity to be removed.
+   * @throws { Meteor.Error } If docID is not a CareerGoal, or if any User lists this as a Career Goal.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // Check that this is not referenced by any User.
+    Users.find().map(function (user) {  // eslint-disable-line array-callback-return
+      if (Users.hasCareerGoal(user, docID)) {
+        throw new Meteor.Error(`Career Goal ${instance} is referenced by user ${user.username}.`);
+      }
+    });
+    // OK, clear to delete.
+    this._collection.remove(docID);
   }
 
 

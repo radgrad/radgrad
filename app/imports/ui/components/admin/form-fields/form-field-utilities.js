@@ -102,8 +102,12 @@ export function indicateSuccess(instance, event) {
  * @param instance The template instance.
  */
 export function indicateError(instance, error) {
-  instance.errorClass.set('error');
-  instance.successClass.set('');
+  if (instance.errorClass) {
+    instance.errorClass.set('error');
+  }
+  if (instance.successClass) {
+    instance.successClass.set('');
+  }
   if (error) {
     console.log(`Error: ${error}`);
   }

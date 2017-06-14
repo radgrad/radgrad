@@ -11,7 +11,7 @@ if (Meteor.isClient) {
     const collectionName = 'CareerGoalCollection';
     const definitionData = {
       name: 'name',
-      slug: 'career-goal-slug',
+      slug: 'career-goal-slug-example',
       description: 'description',
       interests: ['algorithms'],
     };
