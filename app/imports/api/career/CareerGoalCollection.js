@@ -112,7 +112,7 @@ class CareerGoalCollection extends BaseSlugCollection {
       }
     });
     // OK, clear to delete.
-    this._collection.remove(docID);
+    super.removeIt(docID);
   }
 
 

@@ -3,8 +3,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Feeds } from '../../../api/feed/FeedCollection';
-import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { makeLink } from './datamodel-utilities';
@@ -53,10 +51,6 @@ Template.List_Courses_Widget.events({
       if (error) {
         FormUtils.indicateError(instance, error);
       }
-    });
-    const feeds = Feeds.find({ courseID: id }).fetch();
-    _.forEach(feeds, (f) => {
-      feedsRemoveItMethod.call({ id: f._id });
     });
   },
 });

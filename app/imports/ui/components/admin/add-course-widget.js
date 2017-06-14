@@ -48,6 +48,7 @@ Template.Add_Course_Widget.events({
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
+          // Add the feed call here so that we don't clutter feed when initializing database.
           feedsDefineNewCourseMethod.call({ course: newData.slug, feedType: 'new-course' });
         }
       });

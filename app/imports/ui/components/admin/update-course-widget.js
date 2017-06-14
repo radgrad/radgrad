@@ -60,7 +60,6 @@ Template.Update_Course_Widget.events({
     updateSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updateData, 'interests', 'interestIDs');
       updateData.id = instance.data.updateID.get();
       updateMethod.call({ collectionName: 'CourseCollection', updateData }, (error) => {
         if (error) {

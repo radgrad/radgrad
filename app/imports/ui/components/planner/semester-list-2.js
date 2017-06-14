@@ -2,10 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import {
-  courseInstancesDefineMethod,
-  courseInstancesUpdateMethod,
-} from '../../../api/course/CourseInstanceCollection.methods';
+import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -97,7 +94,8 @@ Template.Semester_List_2.events({
         if (Slugs.isSlugForEntity(slug, 'Course')) {
           const courseID = Slugs.getEntityID(slug, 'Course');
           const course = Courses.findDoc(courseID);
-          const ci = {
+          const collectionName = 'CourseInstanceCollection';
+          const definitionData = {
             semester: semSlug,
             course: slug,
             verified: false,
@@ -108,7 +106,7 @@ Template.Semester_List_2.events({
           };
           const semesterID = Template.instance().localState.get('semester')._id;
           if (CourseInstances.find({ courseID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
-            courseInstancesDefineMethod.call(ci, (error) => {
+            defineMethod.call({ collectionName, definitionData }, (error) => {
               if (!error) {
                 FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                 FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
@@ -141,15 +139,16 @@ Template.Semester_List_2.events({
         const semesterID = Template.instance().localState.get('semester')._id;
         if (CourseInstances.isDefined(id)) {
           // There's gotta be a better way of doing this.
-          const data = {};
+          const collectionName = 'CourseInstanceCollection';
+          const updateData = {};
           _.mapKeys(CourseInstances.findDoc(id), (value, key) => {
             if (key !== '_id') {
-              data[key] = value;
+              updateData[key] = value;
             }
           });
-          data.id = id;
-          data.semesterID = semesterID;
-          courseInstancesUpdateMethod.call(data, (error) => {
+          updateData.id = id;
+          updateData.semesterID = semesterID;
+          updateMethod.call(collectionName, updateData, (error) => {
             if (!error) {
               FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
               FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());

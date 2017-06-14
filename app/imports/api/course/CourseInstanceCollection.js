@@ -107,35 +107,43 @@ class CourseInstanceCollection extends BaseCollection {
   /**
    * Update the course instance. Only a subset of fields can be updated.
    * @param docID The course instance docID (required).
-   * @param verified optional.
-   * @param fromSTAR optional.
+   * @param verified boolean optional.
+   * @param fromSTAR boolean optional.
    * @param grade optional.
+   * @param creditHrs optional.
    * @param note optional.
+   * @param ice an object with fields i, c, e (optional)
    */
-  update(docID, { verified, fromSTAR, grade, note }) {
+  update(docID, { verified, fromSTAR, grade, creditHrs, note, ice }) {
     this.assertDefined(docID);
     const updateData = {};
-    if (verified) {
+    if (_.isBoolean(verified)) {
       updateData.verified = verified;
     }
-    if (fromSTAR) {
+    if (_.isBoolean(fromSTAR)) {
       updateData.fromSTAR = fromSTAR;
     }
     if (grade) {
       updateData.grade = grade;
     }
+    if (creditHrs) {
+      updateData.creditHrs = creditHrs;
+    }
     if (note) {
       updateData.note = note;
+    }
+    if (ice) {
+      updateData.ice = ice;
     }
     this._collection.update(docID, { $set: updateData });
   }
 
   /**
    * Remove the course instance.
-   * @param instance The docID of the course instance.
+   * @param docID The docID of the course instance.
    */
-  removeIt(instance) {
-    const docID = this.getID(instance);
+  removeIt(docID) {
+    this.assertDefined(docID);
     // OK, clear to delete.
     this._collection.remove(docID);
   }

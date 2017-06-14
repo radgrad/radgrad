@@ -1,7 +1,7 @@
 <template name="Course_Form_Field">
   <div class="{{#if required}}required{{/if}} field">
     <label>Course</label>
-    <select class="ui dropdown" name="course">
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="course">
       <option value="">Select Course</option>
       {{#each course in courses}}
         <option value="{{id course}}" selected="{{isSelected course._id selectedCourseID}}">{{number course}} ({{name course}})</option>

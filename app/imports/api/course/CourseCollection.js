@@ -3,6 +3,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Slugs } from '../slug/SlugCollection';
 import { Interests } from '../interest/InterestCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
+import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
 
@@ -135,6 +137,27 @@ class CourseCollection extends BaseSlugCollection {
       updateData.prerequisites = prerequisites;
     }
     this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the Course.
+   * @param instance The docID or slug of the entity to be removed.
+   * @throws { Meteor.Error } If docID is not a Course, or if this course has any associated course instances.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // Check that this is not referenced by any User.
+    CourseInstances.find().map(function (courseInstance) {  // eslint-disable-line array-callback-return
+      if (courseInstance.courseID === docID) {
+        throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`);
+      }
+    });
+    // OK to delete. First remove any Feeds that reference this course.
+    Feeds.find({ courseID: docID }).map(function (feed) { // eslint-disable-line array-callback-return
+      Feeds.removeIt(feed._id);
+    });
+    // Now remove the Course.
+    super.removeIt(docID);
   }
 
   getSlug(courseID) {
