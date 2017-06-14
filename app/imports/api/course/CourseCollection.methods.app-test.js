@@ -38,14 +38,15 @@ if (Meteor.isClient) {
       });
     });
 
-    it.skip('Update Method', function (done) {
+    it('Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
           const id = Courses.findIdBySlug(definitionData.slug);
           const name = 'updated CareerGoal name';
           const description = 'updated CareerGoal description';
           const interests = ['algorithms', 'java'];
-          updateMethod.call({ collectionName, updateData: { id, name, description, interests } }, done);
+          const prerequisites = ['ics_111', 'ics_141'];
+          updateMethod.call({ collectionName, updateData: { id, name, description, interests, prerequisites } }, done);
         }).catch(done);
       });
     });

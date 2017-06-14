@@ -86,8 +86,20 @@ class CourseCollection extends BaseSlugCollection {
     return courseID;
   }
 
-  update(docID, { name, shortName, number, description, creditHrs, interests, syllabus, prerequisites }) {
-    this.assertDefined(docID);
+  /**
+   * Update a Course.
+   * @param docID The docID (or slug) associated with this course.
+   * @param name optional
+   * @param shortName optional
+   * @param number optional
+   * @param description optional
+   * @param creditHrs optional
+   * @param interests An array of interestIDs or slugs (optional)
+   * @param syllabus optional
+   * @param prerequisites An array of course slugs. (optional)
+   */
+  update(instance, { name, shortName, number, description, creditHrs, interests, prerequisites, syllabus }) {
+    const docID = this.getID(instance);
     const updateData = {};
     if (name) {
       updateData.name = name;
@@ -112,9 +124,17 @@ class CourseCollection extends BaseSlugCollection {
       updateData.syllabus = syllabus;
     }
     if (prerequisites) {
+      if (!Array.isArray(prerequisites)) {
+        throw new Meteor.Error(`Prerequisites ${prerequisites} is not an Array.`);
+      }
+      _.forEach(prerequisites, prereq => {
+        if (!this.hasSlug(prereq)) {
+          throw new Meteor.Error(`Prerequisite ${prereq} is not a slug for a course.`);
+        }
+      });
       updateData.prerequisites = prerequisites;
     }
-    super.update(docID, { $set: updateData });
+    this._collection.update(docID, { $set: updateData });
   }
 
   getSlug(courseID) {

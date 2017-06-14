@@ -95,7 +95,7 @@ class CareerGoalCollection extends BaseSlugCollection {
       const interestIDs = Interests.getIDs(interests);
       updateData.interestIDs = interestIDs;
     }
-    super.update(docID, { $set: updateData });
+    this._collection.update(docID, { $set: updateData });
   }
 
   /**
