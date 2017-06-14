@@ -131,6 +131,16 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Remove the course instance.
+   * @param instance The docID of the course instance.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // OK, clear to delete.
+    this._collection.remove(docID);
+  }
+
+  /**
    * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
    * Student.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
