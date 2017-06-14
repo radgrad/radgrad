@@ -59,7 +59,7 @@ Template.Add_Review_Widget.events({
       reviewsDefineMethod.call(newData, (error) => {
         if (error) {
           console.log('Error defining Review', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

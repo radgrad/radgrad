@@ -3,6 +3,8 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Slugs } from '../slug/SlugCollection';
 import { Interests } from '../interest/InterestCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
+import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
 
@@ -60,7 +62,7 @@ class CourseCollection extends BaseSlugCollection {
    */
   define({
       name, shortName = name, slug, number, description, creditHrs = 3,
-      interests, syllabus, prerequisites = [],
+      interests = [], syllabus, prerequisites = [],
   }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
@@ -73,11 +75,10 @@ class CourseCollection extends BaseSlugCollection {
     if (!Array.isArray(prerequisites)) {
       throw new Meteor.Error(`Prerequisites ${prerequisites} is not an array.`);
     }
-    // Ensure each prereq is either a slug or a courseID.
     // Currently we don't dump the DB is a way that prevents forward referencing of prereqs, so we
-    // can't enforce this during the define.
+    // can't check the validity of prereqs during a define, such as with:
+    //   _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
     // TODO: check that prerequisite strings are valid after all courses are defined.
-    // _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
     const courseID =
         this._collection.insert({
           name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites,
@@ -85,6 +86,78 @@ class CourseCollection extends BaseSlugCollection {
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
     return courseID;
+  }
+
+  /**
+   * Update a Course.
+   * @param docID The docID (or slug) associated with this course.
+   * @param name optional
+   * @param shortName optional
+   * @param number optional
+   * @param description optional
+   * @param creditHrs optional
+   * @param interests An array of interestIDs or slugs (optional)
+   * @param syllabus optional
+   * @param prerequisites An array of course slugs. (optional)
+   */
+  update(instance, { name, shortName, number, description, creditHrs, interests, prerequisites, syllabus }) {
+    const docID = this.getID(instance);
+    const updateData = {};
+    if (name) {
+      updateData.name = name;
+    }
+    if (description) {
+      updateData.description = description;
+    }
+    if (interests) {
+      const interestIDs = Interests.getIDs(interests);
+      updateData.interestIDs = interestIDs;
+    }
+    if (shortName) {
+      updateData.shortName = shortName;
+    }
+    if (number) {
+      updateData.number = number;
+    }
+    if (creditHrs) {
+      updateData.creditHrs = creditHrs;
+    }
+    if (syllabus) {
+      updateData.syllabus = syllabus;
+    }
+    if (prerequisites) {
+      if (!Array.isArray(prerequisites)) {
+        throw new Meteor.Error(`Prerequisites ${prerequisites} is not an Array.`);
+      }
+      _.forEach(prerequisites, prereq => {
+        if (!this.hasSlug(prereq)) {
+          throw new Meteor.Error(`Prerequisite ${prereq} is not a slug for a course.`);
+        }
+      });
+      updateData.prerequisites = prerequisites;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the Course.
+   * @param instance The docID or slug of the entity to be removed.
+   * @throws { Meteor.Error } If docID is not a Course, or if this course has any associated course instances.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // Check that this is not referenced by any User.
+    CourseInstances.find().map(function (courseInstance) {  // eslint-disable-line array-callback-return
+      if (courseInstance.courseID === docID) {
+        throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`);
+      }
+    });
+    // OK to delete. First remove any Feeds that reference this course.
+    Feeds.find({ courseID: docID }).map(function (feed) { // eslint-disable-line array-callback-return
+      Feeds.removeIt(feed._id);
+    });
+    // Now remove the Course.
+    super.removeIt(docID);
   }
 
   getSlug(courseID) {

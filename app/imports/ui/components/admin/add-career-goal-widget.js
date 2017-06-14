@@ -3,13 +3,14 @@ import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { newSlugValidator } from '../../../api/slug/SlugCollection.validators';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_Career_Goal_Widget */
 
 const addSchema = new SimpleSchema({
   name: String,
-  slug: { type: String, custom: FormUtils.slugFieldValidator },
+  slug: { type: String, custom: newSlugValidator },
   description: String,
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
 }, { tracker: Tracker });
@@ -32,11 +33,10 @@ Template.Add_Career_Goal_Widget.events({
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      defineMethod.call({ collectionName: 'CareerGoalCollection', definitionData: newData }, (error, result) => {
+      defineMethod.call({ collectionName: 'CareerGoalCollection', definitionData: newData }, (error) => {
         if (error) {
-          FormUtils.indicateError(instance);  // TODO have a way of setting the FormUtils error text.
-        }
-        if (result) {
+          FormUtils.indicateError(instance, error);
+        } else {
           FormUtils.indicateSuccess(instance, event);
         }
       });

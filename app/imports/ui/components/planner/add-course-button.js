@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
-import { courseInstancesRemoveItMethod } from '../../../api/course/CourseInstanceCollection.methods';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -42,7 +42,7 @@ Template.Add_Course_Button.events({
     Template.instance().state.set(plannerKeys.detailCourseInstance, null);
     Template.instance().state.set(plannerKeys.detailOpportunity, null);
     Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
-    courseInstancesRemoveItMethod.call({ id: ci._id }, (error) => {
+    removeItMethod.call({ collectionName: 'CourseInstanceCollection', instance: ci._id }, (error) => {
       if (!error) {
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());

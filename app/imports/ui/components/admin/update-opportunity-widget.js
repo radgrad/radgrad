@@ -80,7 +80,7 @@ Template.Update_Opportunity_Widget.events({
       opportunitiesUpdateMethod.call(updateData, (error) => {
         if (error) {
           console.log('Error updating Opportunity', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

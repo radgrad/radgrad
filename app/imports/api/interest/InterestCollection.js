@@ -62,8 +62,8 @@ class InterestCollection extends BaseSlugCollection {
 
   getSlug(interestID) {
     this.assertDefined(interestID);
-    const courseDoc = this.findDoc(interestID);
-    return Slugs.findDoc(courseDoc.slugID).name;
+    const interestDoc = this.findDoc(interestID);
+    return Slugs.findDoc(interestDoc.slugID).name;
   }
 
 

@@ -24,14 +24,14 @@ class CourseInstanceCollection extends BaseCollection {
    */
   constructor() {
     super('CourseInstance', new SimpleSchema({
-      semesterID: { type: SimpleSchema.RegEx.Id },
+      semesterID: SimpleSchema.RegEx.Id,
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
-      verified: { type: Boolean },
+      verified: Boolean,
       fromSTAR: { type: Boolean, optional: true },
       grade: { type: String, optional: true },
-      creditHrs: { type: Number },
+      creditHrs: Number,
       note: { type: String, optional: true },
-      studentID: { type: SimpleSchema.RegEx.Id },
+      studentID: SimpleSchema.RegEx.Id,
       ice: { type: Object, optional: true, blackbox: true },
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
@@ -102,6 +102,50 @@ class CourseInstanceCollection extends BaseCollection {
     // Define and return the CourseInstance
     // eslint-disable-next-line max-len
     return this._collection.insert({ semesterID, courseID, verified, fromSTAR, grade, studentID, creditHrs, note, ice });
+  }
+
+  /**
+   * Update the course instance. Only a subset of fields can be updated.
+   * @param docID The course instance docID (required).
+   * @param verified boolean optional.
+   * @param fromSTAR boolean optional.
+   * @param grade optional.
+   * @param creditHrs optional.
+   * @param note optional.
+   * @param ice an object with fields i, c, e (optional)
+   */
+  update(docID, { verified, fromSTAR, grade, creditHrs, note, ice }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (_.isBoolean(verified)) {
+      updateData.verified = verified;
+    }
+    if (_.isBoolean(fromSTAR)) {
+      updateData.fromSTAR = fromSTAR;
+    }
+    if (grade) {
+      updateData.grade = grade;
+    }
+    if (creditHrs) {
+      updateData.creditHrs = creditHrs;
+    }
+    if (note) {
+      updateData.note = note;
+    }
+    if (ice) {
+      updateData.ice = ice;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the course instance.
+   * @param docID The docID of the course instance.
+   */
+  removeIt(docID) {
+    this.assertDefined(docID);
+    // OK, clear to delete.
+    this._collection.remove(docID);
   }
 
   /**
@@ -220,7 +264,7 @@ class CourseInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this.publicationNames.student, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });

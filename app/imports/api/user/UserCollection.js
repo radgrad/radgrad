@@ -470,6 +470,19 @@ class UserCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns true if user has the specified career goal.
+   * @param user The user (docID or slug)
+   * @param careerGoal The Career Goal (docID or slug).
+   * @returns {boolean} True if the user has the associated Career Goal.
+   * @throws { Meteor.Error } If user is not a user or careerGoal is not a Career Goal.
+   */
+  hasCareerGoal(user, careerGoal) {
+    const careerGoalID = CareerGoals.getID(careerGoal);
+    const doc = this.findDoc(user);
+    return _.includes(doc.careerGoalIDs, careerGoalID);
+  }
+
+  /**
    * Returns the user's interests as IDs. It is a union of interestIDs and careerGoal interestIDs.
    * @param userID
    * @returns {Array}

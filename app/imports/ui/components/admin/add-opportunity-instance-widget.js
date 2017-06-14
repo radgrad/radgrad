@@ -55,7 +55,7 @@ Template.Add_Opportunity_Instance_Widget.events({
       FormUtils.convertICE(newData);
       opportunityInstancesDefineMethod.call(newData, (error) => {
         if (error) {
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

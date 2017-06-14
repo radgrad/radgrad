@@ -1,25 +1,29 @@
 import { Meteor } from 'meteor/meteor';
 import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
-import { CareerGoals } from './CareerGoalCollection';
+import { Courses } from './CourseCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('CareerGoalCollection Meteor Methods', function test() {
-    const collectionName = 'CareerGoalCollection';
+  describe('CourseCollection Meteor Methods', function test() {
+    const collectionName = 'CourseCollection';
     const definitionData = {
-      name: 'name',
-      slug: 'career-goal-slug-example',
-      description: 'description',
-      interests: ['algorithms'],
+      name: 'Introduction to the theory and practice of scripting',
+      shortName: 'Intro to Scripting',
+      slug: 'ics_215',
+      number: 'ICS 215',
+      description: 'Introduction to scripting languages.',
+      creditHrs: 4,
+      interests: ['java'],
+      syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS215.html',
+      prerequisites: ['ics_111'],
     };
 
     before(function (done) {
       this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user', 'abi.user',
-        'extended.courses.interests', 'academicplan', 'abi.courseinstances'], done);
+      defineTestFixturesMethod.call(['minimal', 'admin.user'], done);
     });
 
     after(function (done) {
@@ -37,11 +41,12 @@ if (Meteor.isClient) {
     it('Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const id = CareerGoals.findIdBySlug(definitionData.slug);
+          const id = Courses.findIdBySlug(definitionData.slug);
           const name = 'updated CareerGoal name';
           const description = 'updated CareerGoal description';
           const interests = ['algorithms', 'java'];
-          updateMethod.call({ collectionName, updateData: { id, name, description, interests } }, done);
+          const prerequisites = ['ics_111', 'ics_141'];
+          updateMethod.call({ collectionName, updateData: { id, name, description, interests, prerequisites } }, done);
         }).catch(done);
       });
     });

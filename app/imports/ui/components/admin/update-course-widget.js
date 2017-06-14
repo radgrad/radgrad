@@ -3,7 +3,7 @@ import { Tracker } from 'meteor/tracker';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Courses } from '../../../api/course/CourseCollection';
-import { coursesUpdateMethod } from '../../../api/course/CourseCollection.methods';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -55,16 +55,15 @@ Template.Update_Course_Widget.helpers({
 Template.Update_Course_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData, { mutate: true });
-    instance.context.validate(updatedData);
+    updateSchema.clean(updateData, { mutate: true });
+    instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      updatedData.id = instance.data.updateID.get();
-      coursesUpdateMethod.call(updatedData, (error) => {
+      updateData.id = instance.data.updateID.get();
+      updateMethod.call({ collectionName: 'CourseCollection', updateData }, (error) => {
         if (error) {
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

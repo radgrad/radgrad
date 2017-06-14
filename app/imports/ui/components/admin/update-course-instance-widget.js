@@ -5,7 +5,7 @@ import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { courseInstancesUpdateMethod } from '../../../api/course/CourseInstanceCollection.methods';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -75,25 +75,21 @@ Template.Update_Course_Instance_Widget.helpers({
 Template.Update_Course_Instance_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData, { mutate: true });
-    instance.context.validate(updatedData);
-    // TODO Can't update grade or ICE for an existing CourseInstance.
-    // TODO So we can't update a course instance for an existing semester/course/user? Why? (PJ)
-    if (instance.context.isValid() &&
-        !CourseInstances.isCourseInstance(updatedData.semester, updatedData.course, updatedData.user)) {
-      FormUtils.convertICE(updatedData);
-      updatedData.verified = (updatedData.verified === 'true');
-      updatedData.fromSTAR = (updatedData.fromSTAR === 'true');
-      FormUtils.renameKey(updatedData, 'semester', 'semesterID');
-      FormUtils.renameKey(updatedData, 'course', 'courseID');
-      FormUtils.renameKey(updatedData, 'user', 'studentID');
-      updatedData.id = instance.data.updateID.get();
-      courseInstancesUpdateMethod.call(updatedData, (error) => {
+    updateSchema.clean(updateData, { mutate: true });
+    instance.context.validate(updateData);
+    if (instance.context.isValid()) {
+      FormUtils.convertICE(updateData);
+      updateData.verified = (updateData.verified === 'true');
+      updateData.fromSTAR = (updateData.fromSTAR === 'true');
+      FormUtils.renameKey(updateData, 'semester', 'semesterID');
+      FormUtils.renameKey(updateData, 'course', 'courseID');
+      FormUtils.renameKey(updateData, 'user', 'studentID');
+      updateData.id = instance.data.updateID.get();
+      updateMethod.call({ collectionName: 'CourseInstanceCollection', updateData }, (error) => {
         if (error) {
-          console.log('Error could not update CourseInstance', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }

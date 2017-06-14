@@ -1,25 +1,31 @@
 import { Meteor } from 'meteor/meteor';
 import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
-import { CareerGoals } from './CareerGoalCollection';
+import { CourseInstances } from './CourseInstanceCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('CareerGoalCollection Meteor Methods', function test() {
-    const collectionName = 'CareerGoalCollection';
+  describe('CourseInstanceCollection Meteor Methods', function test() {
+    const collectionName = 'CourseInstanceCollection';
+    const semester = 'Spring-2017';
+    const student = 'abi';
+    const course = 'ics_111';
     const definitionData = {
-      name: 'name',
-      slug: 'career-goal-slug-example',
-      description: 'description',
-      interests: ['algorithms'],
+      semester,
+      course,
+      student,
+      verified: true,
+      fromSTAR: true,
+      grade: 'B',
+      note: '',
+      creditHrs: 3,
     };
 
     before(function (done) {
       this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user', 'abi.user',
-        'extended.courses.interests', 'academicplan', 'abi.courseinstances'], done);
+      defineTestFixturesMethod.call(['minimal', 'admin.user', 'abi.user'], done);
     });
 
     after(function (done) {
@@ -37,11 +43,11 @@ if (Meteor.isClient) {
     it('Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const id = CareerGoals.findIdBySlug(definitionData.slug);
-          const name = 'updated CareerGoal name';
-          const description = 'updated CareerGoal description';
-          const interests = ['algorithms', 'java'];
-          updateMethod.call({ collectionName, updateData: { id, name, description, interests } }, done);
+          const id = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
+          const verified = false;
+          const grade = 'A';
+          const creditHrs = 4;
+          updateMethod.call({ collectionName, updateData: { id, verified, grade, creditHrs } }, done);
         }).catch(done);
       });
     });
@@ -49,7 +55,8 @@ if (Meteor.isClient) {
     it('Remove Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ collectionName, instance: definitionData.slug }, done);
+          const instance = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
+          removeItMethod.call({ collectionName, instance }, done);
         }).catch(done);
       });
     });

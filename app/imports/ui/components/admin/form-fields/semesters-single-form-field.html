@@ -1,7 +1,7 @@
 <template name="Semesters_Single_Form_Field">
   <div class="{{#if required}}required{{/if}} field">
     <label>Semester</label>
-    <select class="ui dropdown" name="semester">
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="semester">
       <option value="">Select Semester</option>
       {{#each semester in semesters}}
         <option value="{{semester._id}}" selected="{{isSelected semester._id selectedSemesterID}}">{{semester.term}} {{semester.year}}</option>

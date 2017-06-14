@@ -1,10 +1,8 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
-import { coursesRemoveItMethod } from '../../../api/course/CourseCollection.methods';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Feeds } from '../../../api/feed/FeedCollection';
-import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { makeLink } from './datamodel-utilities';
@@ -46,13 +44,13 @@ Template.List_Courses_Widget.helpers({
 
 Template.List_Courses_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
-  'click .jsDelete': function (event) {
+  'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    coursesRemoveItMethod.call({ id });
-    const feeds = Feeds.find({ courseID: id }).fetch();
-    _.forEach(feeds, (f) => {
-      feedsRemoveItMethod.call({ id: f._id });
+    removeItMethod.call({ collectionName: 'CourseCollection', instance: id }, (error) => {
+      if (error) {
+        FormUtils.indicateError(instance, error);
+      }
     });
   },
 });

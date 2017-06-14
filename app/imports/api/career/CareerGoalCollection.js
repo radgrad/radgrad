@@ -1,6 +1,8 @@
 import SimpleSchema from 'simpl-schema';
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
+import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
@@ -73,15 +75,15 @@ class CareerGoalCollection extends BaseSlugCollection {
   }
 
   /**
-   * Update the name, description, and interests associated with a Career Goal.
-   * @param goalID A CareerGoal docID.
+   * Update a Career Goal.
+   * @param docID The docID to be updated.
    * @param name The new name (optional).
    * @param description The new description (optional).
    * @param interests A new list of interest slugs or IDs. (optional).
-   * @throws { Meteor.Error } If goalID is not defined, or if any interest is not a defined slug or ID.
+   * @throws { Meteor.Error } If docID is not defined, or if any interest is not a defined slug or ID.
    */
-  update(goalID, { name, description, interests }) {
-    this.assertDefined(goalID);
+  update(docID, { name, description, interests }) {
+    this.assertDefined(docID);
     const updateData = {};
     if (name) {
       updateData.name = name;
@@ -93,7 +95,24 @@ class CareerGoalCollection extends BaseSlugCollection {
       const interestIDs = Interests.getIDs(interests);
       updateData.interestIDs = interestIDs;
     }
-    super.update(goalID, { $set: updateData });
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the Career Goal.
+   * @param instance The docID or slug of the entity to be removed.
+   * @throws { Meteor.Error } If docID is not a CareerGoal, or if any User lists this as a Career Goal.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // Check that this is not referenced by any User.
+    Users.find().map(function (user) {  // eslint-disable-line array-callback-return
+      if (Users.hasCareerGoal(user, docID)) {
+        throw new Meteor.Error(`Career Goal ${instance} is referenced by user ${user.username}.`);
+      }
+    });
+    // OK, clear to delete.
+    super.removeIt(docID);
   }
 
 

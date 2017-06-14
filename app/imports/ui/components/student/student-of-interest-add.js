@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { courseInstancesDefineMethod } from '../../../api/course/CourseInstanceCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { opportunityInstancesDefineMethod } from '../../../api/opportunity/OpportunityInstanceCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -80,8 +80,9 @@ Template.Student_Of_Interest_Add.events({
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
     const username = getRouteUserName();
+    const collectionName = 'CourseInstanceCollection';
     if (this.type === 'courses') {
-      const ci = {
+      const definitionData = {
         semester: semSlug,
         course: itemSlug,
         verified: false,
@@ -89,7 +90,7 @@ Template.Student_Of_Interest_Add.events({
         grade: 'B',
         student: username,
       };
-      courseInstancesDefineMethod.call(ci);  // TODO what do we do if there is an error?
+      defineMethod.call({ collectionName, definitionData });  // TODO what do we do if there is an error?
     } else {
       const oi = {
         semester: semSlug,

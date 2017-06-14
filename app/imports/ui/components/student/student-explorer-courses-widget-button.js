@@ -3,8 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { courseInstancesDefineMethod,
-  courseInstancesRemoveItMethod } from '../../../api/course/CourseInstanceCollection.methods';
+import { defineMethod, removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -55,7 +54,8 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
     const username = getRouteUserName();
-    const ci = {
+    const collectionName = 'CourseInstanceCollection';
+    const definitionData = {
       semester: semSlug,
       course: courseSlug,
       verified: false,
@@ -63,7 +63,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
       grade: 'B',
       student: username,
     };
-    courseInstancesDefineMethod.call(ci, (error) => {
+    defineMethod.call({ collectionName, definitionData }, (error) => {
       if (!error) {
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
@@ -78,6 +78,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
     const semID = Semesters.getID(semSlug);
+    const collectionName = 'CourseInstanceCollection';
     const ci = CourseInstances.find({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
@@ -86,7 +87,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     if (ci > 1) {
       console.log('Too many course instances found for a single semester.');
     }
-    courseInstancesRemoveItMethod.call({ id: ci[0]._id }, (error) => {
+    removeItMethod.call({ collectionName, instance: ci[0]._id }, (error) => {
       if (!error) {
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());

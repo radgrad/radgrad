@@ -4,7 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { courseInstancesDefineMethod } from '../../../api/course/CourseInstanceCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection';
 import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -18,7 +18,7 @@ const addSchema = new SimpleSchema({
   verified: String,
   fromSTAR: String,
   grade: String,
-  note: String,
+  note: { type: String, optional: true },
   user: String,
 }, { tracker: Tracker });
 
@@ -56,10 +56,9 @@ Template.Add_Course_Instance_Widget.events({
         newData.note = Courses.findDoc(newData.course).number;
       }
       FormUtils.renameKey(newData, 'user', 'student');
-      courseInstancesDefineMethod.call(newData, (error) => {
+      defineMethod.call({ collectionName: 'CourseInstanceCollection', definitionData: newData }, (error) => {
         if (error) {
-          console.log('Error could not define CourseInstance', error);
-          FormUtils.indicateError(instance);
+          FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
         }
