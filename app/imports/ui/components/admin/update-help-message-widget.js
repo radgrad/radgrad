@@ -38,7 +38,6 @@ Template.Update_Help_Message_Widget.events({
       updateData.id = instance.data.updateID.get();
       updateMethod.call({ collectionName: 'HelpMessageCollection', updateData }, (error) => {
         if (error) {
-          console.log('update error', error);
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
