@@ -67,6 +67,19 @@ class TeaserCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns true if teaser has the specified interest.
+   * @param teaser The teaser (docID or slug)
+   * @param interest The Interest (docID or slug).
+   * @returns {boolean} True if the teaser has the associated Interest.
+   * @throws { Meteor.Error } If teaser is not a teaser or interest is not a Interest.
+   */
+  hasInterest(teaser, interest) {
+    const interestID = Interests.getID(interest);
+    const doc = this.findDoc(teaser);
+    return _.includes(doc.interestIDs, interestID);
+  }
+
+  /**
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.
    * Checks slugID, interestIDs

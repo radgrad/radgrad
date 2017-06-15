@@ -1,6 +1,13 @@
 import SimpleSchema from 'simpl-schema';
+import Meteor from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import { InterestTypes } from '../interest/InterestTypeCollection';
+import { Users } from '../user/UserCollection';
+import { Courses } from '../course/CourseCollection';
+import { CareerGoals } from '../career/CareerGoalCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { Teasers } from '../teaser/TeaserCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
 
@@ -49,6 +56,60 @@ class InterestCollection extends BaseSlugCollection {
     Slugs.updateEntityID(slugID, interestID);
     return interestID;
   }
+
+  /**
+   * Update an Interest.
+   * @param docID The docID to be updated.
+   * @param name The new name (optional).
+   * @param description The new description (optional).
+   * @param interestType The new interestType slug or ID (optional).
+   * @throws { Meteor.Error } If docID is not defined, or if interestType is not valid.
+   */
+  update(docID, { name, description, interestType }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (name) {
+      updateData.name = name;
+    }
+    if (description) {
+      updateData.description = description;
+    }
+    if (interestType) {
+      const interestTypeID = InterestTypes.getID(interestType);
+      updateData.interestTypeID = interestTypeID;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Throws an error if docID (an interest) is referenced in any of the passed collections.
+   * @param collectionList A list of collection class instances.
+   * @param docID The docID of an interest.
+   * @throws { Meteor.Error } If the interest is referenced in any of the collections.
+   */
+  assertUnusedInterest(collectionList, docID) { // eslint-disable-line class-methods-use-this
+    _.forEach(collectionList, function (collection) {
+      collection.find().map(function (doc) {  // eslint-disable-line array-callback-return
+        if (collection.hasInterest(doc, docID)) {
+          throw new Meteor.Error(`Interest ${docID.name} is referenced by collection ${collection._collectionName}.`);
+        }
+      });
+    });
+  }
+
+  /**
+   * Remove the Interest.
+   * @param instance The docID or slug of the entity to be removed.
+   * @throws { Meteor.Error } If Interest is associated with any User, Course, Career Goal, or Opportunity.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // Check that this interest is not referenced by any User.
+    this.assertUnusedInterest([Users, Courses, CareerGoals, Opportunities, Teasers], docID);
+    // OK, clear to delete.
+    super.removeIt(docID);
+  }
+
 
   /**
    * Returns a list of Interest names corresponding to the passed list of Interest docIDs.

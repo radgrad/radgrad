@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { interestsUpdateMethod } from '../../../api/interest/InterestCollection.methods';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -42,9 +42,8 @@ Template.Update_Interest_Widget.events({
     if (instance.context.isValid()) {
       FormUtils.renameKey(updateData, 'interestType', 'interestTypeID');
       updateData.id = instance.data.updateID.get();
-      interestsUpdateMethod.call(updateData, (error) => {
+      updateMethod.call({ collectionName: 'InterestCollection', updateData }, (error) => {
         if (error) {
-          console.log('Error updating Interest', error);
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);

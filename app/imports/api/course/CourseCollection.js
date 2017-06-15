@@ -160,6 +160,19 @@ class CourseCollection extends BaseSlugCollection {
     super.removeIt(docID);
   }
 
+  /**
+   * Returns true if Course has the specified interest.
+   * @param course The user (docID or slug)
+   * @param interest The Interest (docID or slug).
+   * @returns {boolean} True if the course has the associated Interest.
+   * @throws { Meteor.Error } If course is not a course or interest is not a Interest.
+   */
+  hasInterest(course, interest) {
+    const interestID = Interests.getID(interest);
+    const doc = this.findDoc(course);
+    return _.includes(doc.interestIDs, interestID);
+  }
+
   getSlug(courseID) {
     this.assertDefined(courseID);
     const courseDoc = this.findDoc(courseID);

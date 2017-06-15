@@ -159,6 +159,19 @@ class OpportunityCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns true if Opportunity has the specified interest.
+   * @param opportunity The opportunity(docID or slug)
+   * @param interest The Interest (docID or slug).
+   * @returns {boolean} True if the opportunity has the associated Interest.
+   * @throws { Meteor.Error } If opportunity is not a opportunity or interest is not a Interest.
+   */
+  hasInterest(opportunity, interest) {
+    const interestID = Interests.getID(interest);
+    const doc = this.findDoc(opportunity);
+    return _.includes(doc.interestIDs, interestID);
+  }
+
+  /**
    * Returns an object representing the Opportunity docID in a format acceptable to define().
    * @param docID The docID of an Opportunity.
    * @returns { Object } An object representing the definition of docID.
