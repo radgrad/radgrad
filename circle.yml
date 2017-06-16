@@ -15,6 +15,9 @@ dependencies:
         timeout: 600
 test:
   override:
-    - meteor npm run test
-    - meteor npm run test-app
-    - meteor npm run jsdoc
+    - meteor npm run test:
+        timeout: 1200 
+    - meteor npm run test-app:
+        timeout: 1200
+    - meteor npm run jsdoc:
+        timeout: 1200
