@@ -237,7 +237,7 @@ class UserCollection extends BaseSlugCollection {
   }
 
   /**
-   * Asserts that the passed user has one of the given roles.
+   * Asserts that the passed user has the specified role.
    * @param userID The user.
    * @param role The role or an array of roles.
    * @throws { Meteor.Error } If the user does not have the role, or if user or role is not valid.

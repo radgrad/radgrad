@@ -146,7 +146,7 @@ class CourseCollection extends BaseSlugCollection {
    */
   removeIt(instance) {
     const docID = this.getID(instance);
-    // Check that this is not referenced by any User.
+    // Check that this is not referenced by any Course Instance.
     CourseInstances.find().map(function (courseInstance) {  // eslint-disable-line array-callback-return
       if (courseInstance.courseID === docID) {
         throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`);

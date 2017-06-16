@@ -6,7 +6,7 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { opportunitiesUpdateMethod } from '../../../api/opportunity/OpportunityCollection.methods';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -70,16 +70,15 @@ Template.Update_Opportunity_Widget.events({
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(updateData);
-      FormUtils.renameKey(updateData, 'slug', 'slugID');
-      FormUtils.renameKey(updateData, 'interests', 'interestIDs');
-      FormUtils.renameKey(updateData, 'semesters', 'semesterIDs');
-      FormUtils.renameKey(updateData, 'opportunityType', 'opportunityTypeID');
-      FormUtils.renameKey(updateData, 'sponsor', 'sponsorID');
-      updateData.independentStudy = false;
+      // FormUtils.renameKey(updateData, 'slug', 'slugID');
+      // FormUtils.renameKey(updateData, 'interests', 'interestIDs');
+      // FormUtils.renameKey(updateData, 'semesters', 'semesterIDs');
+      // FormUtils.renameKey(updateData, 'opportunityType', 'opportunityTypeID');
+      // FormUtils.renameKey(updateData, 'sponsor', 'sponsorID');
+      // updateData.independentStudy = false;
       updateData.id = instance.data.updateID.get();
-      opportunitiesUpdateMethod.call(updateData, (error) => {
+      updateMethod.call({ collectionName: 'OpportunityCollection', updateData }, (error) => {
         if (error) {
-          console.log('Error updating Opportunity', error);
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
