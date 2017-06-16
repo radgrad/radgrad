@@ -7,6 +7,7 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Update_Opportunity_Instance_Widget */
@@ -66,15 +67,17 @@ Template.Update_Opportunity_Instance_Widget.events({
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
-    if (instance.context.isValid() &&  // TODO why can't we update existing opportunity (or course) instances?
-        !OpportunityInstances.isOpportunityInstance(updateData.semester, updateData.opportunity, updateData.user)) {
+    if (instance.context.isValid()) {
       FormUtils.convertICE(updateData);
       updateData.verified = (updateData.verified === 'true');
-      FormUtils.renameKey(updateData, 'semester', 'semesterID');
-      FormUtils.renameKey(updateData, 'opportunity', 'opportunityID');
-      FormUtils.renameKey(updateData, 'user', 'studentID');
-      OpportunityInstances.update(instance.data.updateID.get(), { $set: updateData });
-      FormUtils.indicateSuccess(instance, event);
+      updateData.id = instance.data.updateID.get();
+      updateMethod.call({ collectionName: 'OpportunityInstanceCollection', updateData }, (error) => {
+        if (error) {
+          FormUtils.indicateError(instance, error);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
+        }
+      });
     } else {
       FormUtils.indicateError(instance);
     }

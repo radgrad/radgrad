@@ -115,6 +115,18 @@ class CareerGoalCollection extends BaseSlugCollection {
     super.removeIt(docID);
   }
 
+  /**
+   * Returns true if CareerGoal has the specified interest.
+   * @param careerGoal The user (docID or slug)
+   * @param interest The Interest (docID or slug).
+   * @returns {boolean} True if the career goal has the associated Interest.
+   * @throws { Meteor.Error } If careerGoal is not a career goal or interest is not a Interest.
+   */
+  hasInterest(careerGoal, interest) {
+    const interestID = Interests.getID(interest);
+    const doc = this.findDoc(careerGoal);
+    return _.includes(doc.interestIDs, interestID);
+  }
 
   /**
    * Returns an array of strings, each one representing an integrity problem with this collection.

@@ -146,7 +146,7 @@ class CourseCollection extends BaseSlugCollection {
    */
   removeIt(instance) {
     const docID = this.getID(instance);
-    // Check that this is not referenced by any User.
+    // Check that this is not referenced by any Course Instance.
     CourseInstances.find().map(function (courseInstance) {  // eslint-disable-line array-callback-return
       if (courseInstance.courseID === docID) {
         throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`);
@@ -158,6 +158,19 @@ class CourseCollection extends BaseSlugCollection {
     });
     // Now remove the Course.
     super.removeIt(docID);
+  }
+
+  /**
+   * Returns true if Course has the specified interest.
+   * @param course The user (docID or slug)
+   * @param interest The Interest (docID or slug).
+   * @returns {boolean} True if the course has the associated Interest.
+   * @throws { Meteor.Error } If course is not a course or interest is not a Interest.
+   */
+  hasInterest(course, interest) {
+    const interestID = Interests.getID(interest);
+    const doc = this.findDoc(course);
+    return _.includes(doc.interestIDs, interestID);
   }
 
   getSlug(courseID) {

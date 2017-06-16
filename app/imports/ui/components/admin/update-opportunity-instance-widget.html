@@ -4,9 +4,9 @@
     <div class="ui dividing header"><h4>UPDATE OPPORTUNITY INSTANCE</h4></div>
     <form class="ui equal width form {{successClass}} {{errorClass}}">
       <div class="fields">
-        {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=selectedSemesterID errorMessage=(fieldError "semesters") required="true" }}
-        {{> Opportunity_Form_Field opportunities=opportunities selectedOpportunityID=opportunity errorMessage=(fieldError "opportunity") required=true}}
-        {{> User_Form_Field users=students selectedUserID=opportunityInstance.studentID errorMessage=(fieldError "student") required=true}}
+        {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=selectedSemesterID errorMessage=(fieldError "semesters") disabled=true }}
+        {{> Opportunity_Form_Field opportunities=opportunities selectedOpportunityID=opportunity errorMessage=(fieldError "opportunity") disabled=true}}
+        {{> User_Form_Field users=students selectedUserID=opportunityInstance.studentID errorMessage=(fieldError "student") disabled=true}}
       </div>
       <div class="fields">
         {{> Boolean_Form_Field label="Verified" trueValue=trueValue falseValue=falseValue name="verified" errorMessage=(fieldError "verified")}}

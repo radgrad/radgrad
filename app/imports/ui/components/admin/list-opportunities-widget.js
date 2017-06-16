@@ -2,12 +2,10 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-import { Feeds } from '../../../api/feed/FeedCollection';
-import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
-import { opportunitiesRemoveItMethod } from '../../../api/opportunity/OpportunityCollection.methods';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -89,15 +87,13 @@ Template.List_Opportunities_Widget.helpers({
 
 Template.List_Opportunities_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
-  'click .jsDelete': function (event) {
+  'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    opportunitiesRemoveItMethod.call({ id }, (error) => {
-      console.log('Error removing Opportunity', error);
-    });
-    const feeds = Feeds.find({ opportunityID: id }).fetch();
-    _.forEach(feeds, (f) => {
-      feedsRemoveItMethod.call({ id: f._id });
+    removeItMethod.call({ collectionName: 'OpportunityCollection', instance: id }, (error) => {
+      if (error) {
+        FormUtils.indicateError(instance, error);
+      }
     });
   },
 });

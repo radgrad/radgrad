@@ -7,7 +7,7 @@ import { ROLE } from '../../../api/role/Role.js';
 import { feedsDefineNewOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
-import { opportunitiesDefineMethod } from '../../../api/opportunity/OpportunityCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
@@ -68,16 +68,12 @@ Template.Add_Opportunity_Widget.events({
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(newData);
-      opportunitiesDefineMethod.call(newData, (error) => {
+      defineMethod.call({ collectionName: 'OpportunityCollection', definitionData: newData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
-          const feedDefinition = {
-            opportunity: newData.slug,
-            feedType: 'new-opportunity',
-          };
-          feedsDefineNewOpportunityMethod.call(feedDefinition);
+          feedsDefineNewOpportunityMethod.call({ opportunity: newData.slug, feedType: 'new-opportunity' });
         }
       });
     } else {

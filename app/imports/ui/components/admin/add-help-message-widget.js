@@ -35,11 +35,10 @@ Template.Add_Help_Message_Widget.events({
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      defineMethod.call({ collectionName: 'HelpMessageCollection', definitionData: newData }, (error, result) => {
+      defineMethod.call({ collectionName: 'HelpMessageCollection', definitionData: newData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);  // TODO have a way of setting the FormUtils error text.
-        }
-        if (result) {
+        } else {
           FormUtils.indicateSuccess(instance, event);
         }
       });

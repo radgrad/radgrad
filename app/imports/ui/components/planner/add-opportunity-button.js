@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { opportunityInstancesRemoveItMethod } from '../../../api/opportunity/OpportunityInstanceCollection.methods';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { plannerKeys } from './academic-plan';
 
@@ -33,8 +33,8 @@ Template.Add_Opportunity_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
     const opportunity = this.opportunity;
-    const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
-    opportunityInstancesRemoveItMethod.call({ id: oi._id }, (error) => {
+    const id = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+    removeItMethod.call({ collectionName: 'OpportunityInstanceCollection', instance: id }, (error) => {
       if (!error) {
         Template.instance().state.set(plannerKeys.detailCourse, null);
         Template.instance().state.set(plannerKeys.detailCourseInstance, null);

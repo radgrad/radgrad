@@ -1,11 +1,14 @@
 import SimpleSchema from 'simpl-schema';
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Interests } from '../interest/InterestCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
-import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
+import { OpportunityTypes } from './OpportunityTypeCollection';
+import { OpportunityInstances } from './OpportunityInstanceCollection';
+import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { assertICE } from '../ice/IceProcessor';
 
@@ -37,6 +40,8 @@ class OpportunityCollection extends BaseSlugCollection {
       ice: { type: Object, optional: true, blackbox: true },
     }));
   }
+
+  // TODO Delete independent study field?  iconURL never assigned. Delete? (pj)
 
   /**
    * Defines a new Opportunity.
@@ -95,6 +100,79 @@ class OpportunityCollection extends BaseSlugCollection {
   }
 
   /**
+   * Update an Opportunity.
+   * @param instance The docID or slug associated with this opportunity.
+   * @param name optional.
+   * @param description optional.
+   * @param opportunityType docID or slug (optional.)
+   * @param sponsor user in role admin, advisor, or faculty. optional.
+   * @param interests optional.
+   * @param semesters optional
+   * @param eventDate a Date. (optional)
+   * @param iconURL a URL (optional).
+   * @param ice An ICE object (optional).
+   */
+  update(instance, { name, description, opportunityType, sponsor, interests, semesters, eventDate, iconURL, ice }) {
+    const docID = this.getID(instance);
+    const updateData = {};
+    if (name) {
+      updateData.name = name;
+    }
+    if (description) {
+      updateData.description = description;
+    }
+    if (opportunityType) {
+      const opportunityTypeID = OpportunityTypes.getID(opportunityType);
+      updateData.opportunityTypeID = opportunityTypeID;
+    }
+    if (sponsor) {
+      const sponsorID = Users.getID(sponsor);
+      Users.assertInRole(sponsorID, [ROLE.FACULTY, ROLE.ADVISOR, ROLE.ADMIN]);
+      updateData.sponsorID = sponsorID;
+    }
+    if (interests) {
+      const interestIDs = Interests.getIDs(interests);
+      updateData.interestIDs = interestIDs;
+    }
+    if (semesters) {
+      const semesterIDs = Semesters.getIDs(semesters);
+      updateData.semesterIDs = semesterIDs;
+    }
+    if (eventDate) {
+      updateData.eventDate = eventDate;
+    }
+    if (iconURL) {
+      updateData.iconURL = iconURL;
+    }
+    if (ice) {
+      assertICE(ice);
+      updateData.ice = ice;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the Course.
+   * @param instance The docID or slug of the entity to be removed.
+   * @throws { Meteor.Error } If docID is not a Course, or if this course has any associated course instances.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // Check that this opportunity is not referenced by any Opportunity Instance.
+    OpportunityInstances.find().map(function (opportunityInstance) {  // eslint-disable-line array-callback-return
+      if (opportunityInstance.opportunityID === docID) {
+        throw new Meteor.Error(`Opportunity ${instance} referenced by a opportunity instance ${opportunityInstance}.`);
+      }
+    });
+    // OK to delete. First remove any Feeds that reference this opportunity.
+    Feeds.find({ opportunityID: docID }).map(function (feed) { // eslint-disable-line array-callback-return
+      Feeds.removeIt(feed._id);
+    });
+    super.removeIt(docID);
+  }
+
+
+  /**
    * Returns the OpportunityType associated with the Opportunity with the given instanceID.
    * @param instanceID The id of the Opportunity.
    * @returns {Object} The associated Opportunity.
@@ -106,15 +184,6 @@ class OpportunityCollection extends BaseSlugCollection {
     return OpportunityTypes.findDoc(instance.opportunityTypeID);
   }
 
-  /**
-   * Removes the passed Opportunity and its associated Slug.
-   * @param opportunity The document or _id associated with this Opportunity.
-   * @throws {Meteor.Error} If opportunity is not defined or there are any OpportunityInstances associated with it.
-   */
-  removeIt(opportunity) {
-    // TODO: check for defined OpportunityInstances before deletion.
-    super.removeIt(opportunity);
-  }
 
   /**
    * Returns the slug for the given opportunity ID.
@@ -156,6 +225,19 @@ class OpportunityCollection extends BaseSlugCollection {
       });
     });
     return problems;
+  }
+
+  /**
+   * Returns true if Opportunity has the specified interest.
+   * @param opportunity The opportunity(docID or slug)
+   * @param interest The Interest (docID or slug).
+   * @returns {boolean} True if the opportunity has the associated Interest.
+   * @throws { Meteor.Error } If opportunity is not a opportunity or interest is not a Interest.
+   */
+  hasInterest(opportunity, interest) {
+    const interestID = Interests.getID(interest);
+    const doc = this.findDoc(opportunity);
+    return _.includes(doc.interestIDs, interestID);
   }
 
   /**

@@ -6,7 +6,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { opportunityInstancesDefineMethod } from '../../../api/opportunity/OpportunityInstanceCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -17,9 +17,6 @@ const addSchema = new SimpleSchema({
   opportunity: String,
   verified: String,
   user: String,
-  innovation: { type: Number, optional: true, min: 0, max: 100 },
-  competency: { type: Number, optional: true, min: 0, max: 100 },
-  experience: { type: Number, optional: true, min: 0, max: 100 },
 }, { tracker: Tracker });
 
 
@@ -50,10 +47,10 @@ Template.Add_Opportunity_Instance_Widget.events({
     instance.context.validate(newData);
     if (instance.context.isValid() &&
         !OpportunityInstances.isOpportunityInstance(newData.semester, newData.opportunity, newData.user)) {
+      // Convert to boolean.
       newData.verified = (newData.verified === 'true');
       FormUtils.renameKey(newData, 'user', 'student');
-      FormUtils.convertICE(newData);
-      opportunityInstancesDefineMethod.call(newData, (error) => {
+      defineMethod.call({ collectionName: 'OpportunityInstanceCollection', definitionData: newData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {

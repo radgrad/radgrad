@@ -237,7 +237,7 @@ class UserCollection extends BaseSlugCollection {
   }
 
   /**
-   * Asserts that the passed user has one of the given roles.
+   * Asserts that the passed user has the specified role.
    * @param userID The user.
    * @param role The role or an array of roles.
    * @throws { Meteor.Error } If the user does not have the role, or if user or role is not valid.
@@ -480,6 +480,19 @@ class UserCollection extends BaseSlugCollection {
     const careerGoalID = CareerGoals.getID(careerGoal);
     const doc = this.findDoc(user);
     return _.includes(doc.careerGoalIDs, careerGoalID);
+  }
+
+  /**
+   * Returns true if user has the specified interest.
+   * @param user The user (docID or slug)
+   * @param interest The Interest (docID or slug).
+   * @returns {boolean} True if the user has the associated Interest.
+   * @throws { Meteor.Error } If user is not a user or interest is not a Interest.
+   */
+  hasInterest(user, interest) {
+    const interestID = Interests.getID(interest);
+    const doc = this.findDoc(user);
+    return _.includes(doc.interestIDs, interestID);
   }
 
   /**

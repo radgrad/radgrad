@@ -7,10 +7,6 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import {
-  opportunityInstancesDefineMethod,
-  opportunityInstancesUpdateMethod,
-} from '../../../api/opportunity/OpportunityInstanceCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -118,7 +114,8 @@ Template.Semester_List_2.events({
           if (Slugs.isSlugForEntity(slug, 'Opportunity')) {
             const opportunityID = Slugs.getEntityID(slug, 'Opportunity');
             const semesterID = Template.instance().localState.get('semester')._id;
-            const oi = {
+            const collectionName = 'OpportunityInstanceCollection';
+            const definitionData = {
               semester: semSlug,
               opportunity: slug,
               verified: false,
@@ -126,7 +123,7 @@ Template.Semester_List_2.events({
             };
             // eslint-disable-next-line
             if (OpportunityInstances.find({ opportunityID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
-              opportunityInstancesDefineMethod.call(oi, (error) => {
+              defineMethod.call({ collectionName, definitionData }, (error) => {
                 if (!error) {
                   FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                   FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
@@ -148,7 +145,7 @@ Template.Semester_List_2.events({
           });
           updateData.id = id;
           updateData.semesterID = semesterID;
-          updateMethod.call(collectionName, updateData, (error) => {
+          updateMethod.call({ collectionName, updateData }, (error) => {
             if (!error) {
               FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
               FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
@@ -161,15 +158,16 @@ Template.Semester_List_2.events({
         } else
           if (OpportunityInstances.isDefined(id)) {
             // There's gotta be a better way of doing this.
-            const data = {};
+            const collectionName = 'OpportunityInstanceCollection';
+            const updateData = {};
             _.mapKeys(OpportunityInstances.findDoc(id), (value, key) => {
               if (key !== '_id') {
-                data[key] = value;
+                updateData[key] = value;
               }
             });
-            data.id = id;
-            data.semesterID = semesterID;
-            opportunityInstancesUpdateMethod.call(data, (error) => {
+            updateData.id = id;
+            updateData.semesterID = semesterID;
+            updateMethod.call({ collectionName, updateData }, (error) => {
               if (!error) {
                 FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                 FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());

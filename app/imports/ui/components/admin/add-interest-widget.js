@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection.js';
-import { interestsDefineMethod } from '../../../api/interest/InterestCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_Interest_Widget */
@@ -32,9 +32,8 @@ Template.Add_Interest_Widget.events({
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      interestsDefineMethod.call(newData, (error) => {
+      defineMethod.call({ collectionName: 'InterestCollection', definitionData: newData }, (error) => {
         if (error) {
-          console.log('Error defining Interest', error);
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);

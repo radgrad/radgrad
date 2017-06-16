@@ -1,0 +1,79 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription" : "Sample opportunities. Requires admin.user.",
+  "collections": [
+    {
+      "name": "OpportunityCollection",
+      "contents": [
+        {
+          "name": "ACM ICPC",
+          "slug": "acm-icpc",
+          "description": "The ACM International Collegiate Programming Contest (ICPC) is a  programming competition",
+          "opportunityType": "event",
+          "sponsor": "radgrad",
+          "ice": {
+            "i": 20,
+            "c": 0,
+            "e": 15
+          },
+          "interests": [
+            "algorithms"
+          ],
+          "semesters": [
+            "Spring-2015"
+          ],
+          "independentStudy": false
+        },
+        {
+          "name": "ACM Manoa",
+          "slug": "acm-manoa",
+          "description": "The Association for Computing Machinery at Manoa is UH Manoa’s student chapter",
+          "opportunityType": "club",
+          "sponsor": "radgrad",
+          "ice": {
+            "i": 5,
+            "c": 0,
+            "e": 5
+          },
+          "interests": [
+            "java"
+          ],
+          "semesters": [
+            "Spring-2014"
+          ],
+          "independentStudy": false
+        }
+      ]
+    },
+    {
+      "name": "OpportunityTypeCollection",
+      "contents": [
+        {
+          "name": "Club",
+          "slug": "club",
+          "description": "A student club or professional organization related to computer science."
+        },
+        {
+          "name": "Event",
+          "slug": "event",
+          "description": "An event related to computer science."
+        },
+        {
+          "name": "Internship",
+          "slug": "internship",
+          "description": "An internship related to computer science."
+        },
+        {
+          "name": "Online Learning",
+          "slug": "online-learning",
+          "description": "A course or other extracurricular online learning opportunity."
+        },
+        {
+          "name": "Project",
+          "slug": "project",
+          "description": "A project related to computer science."
+        }
+      ]
+    }
+  ]
+}

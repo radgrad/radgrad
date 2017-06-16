@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { Opportunities } from '../opportunity/OpportunityCollection';
@@ -74,6 +75,34 @@ class OpportunityInstanceCollection extends BaseCollection {
     // Define and return the new OpportunityInstance
     const opportunityInstanceID = this._collection.insert({ semesterID, opportunityID, verified, studentID, ice });
     return opportunityInstanceID;
+  }
+
+  /**
+   * Update the opportunity instance. Only verified and ICE fields can be updated.
+   * @param docID The course instance docID (required).
+   * @param verified boolean optional.
+   * @param ice an object with fields i, c, e (optional)
+   */
+  update(docID, { verified, ice }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (_.isBoolean(verified)) {
+      updateData.verified = verified;
+    }
+    if (ice) {
+      updateData.ice = ice;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the opportunity instance.
+   * @param docID The docID of the opportunity instance.
+   */
+  removeIt(docID) {
+    this.assertDefined(docID);
+    // OK, clear to delete.
+    this._collection.remove(docID);
   }
 
   /**

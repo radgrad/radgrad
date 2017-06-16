@@ -32,6 +32,40 @@ class HelpMessageCollection extends BaseCollection {
   }
 
   /**
+   * Update a Help Message
+   * @param docID The docID to be updated.
+   * @param routeName The new routeName (optional).
+   * @param title The new title (optional)
+   * @param text New help text. (optional).
+   * @throws { Meteor.Error } If docID is not defined.
+   */
+  update(docID, { routeName, title, text }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (routeName) {
+      updateData.routeName = routeName;
+    }
+    if (title) {
+      updateData.title = title;
+    }
+    if (text) {
+      updateData.text = text;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the Help Message..
+   * @param docID The docID of the entity to be removed.
+   * @throws { Meteor.Error } If docID is not a Help Message.
+   */
+  removeIt(docID) {
+    this.assertDefined(docID);
+    // OK, clear to delete.
+    super.removeIt(docID);
+  }
+
+  /**
    * Returns the text for the given routeName.
    * @param routeName The route name.
    */
@@ -47,18 +81,6 @@ class HelpMessageCollection extends BaseCollection {
     return this._collection.findOne({ routeName }).title;
   }
 
-  /**
-   * Update the routeName, title, or text associated with a Help Message.
-   * Let the schema do the validation.
-   * @param docID The docID.
-   * @param updateData The object containing the new data.
-   * @throws { Meteor.Error } If docID is not defined, or the field data is not valid.
-   */
-  update(docID, updateData) {
-    this.assertDefined(docID);
-    super.update(docID, { $set: updateData });
-  }
-
 
   /**
    * Returns an empty array (no integrity checking done on this collection.)
@@ -66,6 +88,15 @@ class HelpMessageCollection extends BaseCollection {
    */
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     return [];
+  }
+
+  /**
+   * Returns the HelpMessage doc associated with RouteName.
+   * @param routeName The routeName
+   * @returns The doc, or null if not found.
+   */
+  findDocByRouteName(routeName) {
+    return this._collection.findOne({ routeName });
   }
 
   /**

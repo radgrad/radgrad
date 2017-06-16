@@ -1,7 +1,7 @@
 <template name="Opportunity_Form_Field">
   <div class="{{#if required}}required{{/if}} field">
     <label>Opportunity</label>
-    <select class="ui dropdown" name="opportunity">
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="opportunity">
       <option value="">Select Opportunity</option>
       {{#each opportunity in opportunities}}
         <option value="{{id opportunity}}" selected="{{isSelected opportunity._id selectedOpportunityID}}">{{name opportunity}}</option>

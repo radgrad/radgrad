@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
-import { interestsRemoveItMethod } from '../../../api/interest/InterestCollection.methods';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
@@ -49,12 +49,12 @@ Template.List_Interests_Widget.helpers({
 
 Template.List_Interests_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
-  'click .jsDelete': function (event) {
+  'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    interestsRemoveItMethod.call({ id }, (error) => {
+    removeItMethod.call({ collectionName: 'InterestCollection', instance: id }, (error) => {
       if (error) {
-        console.log('Error in removing Interest', error);
+        FormUtils.indicateError(instance, error);
       }
     });
   },
