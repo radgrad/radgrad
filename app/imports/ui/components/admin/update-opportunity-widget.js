@@ -70,12 +70,6 @@ Template.Update_Opportunity_Widget.events({
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(updateData);
-      // FormUtils.renameKey(updateData, 'slug', 'slugID');
-      // FormUtils.renameKey(updateData, 'interests', 'interestIDs');
-      // FormUtils.renameKey(updateData, 'semesters', 'semesterIDs');
-      // FormUtils.renameKey(updateData, 'opportunityType', 'opportunityTypeID');
-      // FormUtils.renameKey(updateData, 'sponsor', 'sponsorID');
-      // updateData.independentStudy = false;
       updateData.id = instance.data.updateID.get();
       updateMethod.call({ collectionName: 'OpportunityCollection', updateData }, (error) => {
         if (error) {

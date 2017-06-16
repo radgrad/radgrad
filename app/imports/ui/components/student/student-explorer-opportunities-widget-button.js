@@ -1,12 +1,8 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import {
-  opportunityInstancesDefineMethod,
-  opportunityInstancesRemoveItMethod,
-} from '../../../api/opportunity/OpportunityInstanceCollection.methods';
+import { defineMethod, removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -68,13 +64,13 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
     const username = getRouteUserName();
-    const oi = {
+    const definitionData = {
       semester: semSlug,
       opportunity: oppSlug.name,
       verified: false,
       student: username,
     };
-    opportunityInstancesDefineMethod.call(oi);
+    defineMethod.call({ collectionName: 'OpportunityInstanceCollection', definitionData });
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
@@ -91,7 +87,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
     if (oi > 1) {
       console.log('Too many opportunity instances found for a single semester.');
     }
-    opportunityInstancesRemoveItMethod.call({ id: oi[0]._id });
+    removeItMethod.call({ collectionName: 'OpportunityInstanceCollection', instance: oi[0]._id });
   },
 });
 

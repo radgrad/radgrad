@@ -1,12 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { moment } from 'meteor/momentjs:moment';
+import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import {
-  opportunityInstancesDefineMethod,
-  opportunityInstancesUpdateVerifiedMethod,
-} from '../../../api/opportunity/OpportunityInstanceCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
@@ -48,8 +45,9 @@ Template.Verification_Event.events({
       const opportunityInstances = OpportunityInstances.find({ opportunityID, studentID }).fetch();
       let opportunityInstance = null;
       if (opportunityInstances.length === 0) { // student didn't plan on attending in degree plan
-        opportunityInstancesDefineMethod.call({ student, semester: semesterSlug,
-          verified: true, opportunity: opportunitySlug }, (error, result) => {
+        const collectionName = 'OpportunityInstanceCollection';
+        const definitionData = { student, semester: semesterSlug, verified: true, opportunity: opportunitySlug };
+        defineMethod.call({ collectionName, definitionData }, (error, result) => {
           if (error) {
             console.log('Error defining OpportunityInstance', error);
           } else {
@@ -98,10 +96,8 @@ Template.Verification_Event.events({
         });
       } else {
         opportunityInstance = opportunityInstances[0];
-        opportunityInstancesUpdateVerifiedMethod.call({
-          opportunityInstanceID: opportunityInstance._id,
-          verified: true,
-        });
+        const updateData = { id: opportunityInstance._id, verified: true };
+        updateMethod.call({ collectionName: 'OpportunityInstanceCollection', updateData });
         verificationRequestsDefineMethod.call({
           student: studentDoc.username,
           opportunityInstance,
