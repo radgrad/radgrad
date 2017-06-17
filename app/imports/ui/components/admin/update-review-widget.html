@@ -5,13 +5,13 @@
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> Input_Form_Field label="Slug" name="slug" value=slug placeholder="review-course-ics141-abi" errorMessage=(fieldError "slug") required=true disabled=true}}
-        {{> Input_Form_Field label="Student" name="student" value=student placeholder="abi" errorMessage=(fieldError "student") required=true}}
-        {{> ReviewType_Form_Field reviewTypes=reviewTypes label="ReviewType" selectedReviewType=review.reviewType name="reviewType" placeholder="course" errorMessage=(fieldError "reviewType") required=true}}
+        {{> Input_Form_Field label="Slug" name="slug" value=slug placeholder="review-course-ics141-abi" errorMessage=(fieldError "slug") disabled=true}}
+        {{> Input_Form_Field label="Student" name="student" value=student placeholder="abi" errorMessage=(fieldError "student") disabled=true}}
+        {{> ReviewType_Form_Field reviewTypes=reviewTypes label="ReviewType" selectedReviewType=review.reviewType name="reviewType" placeholder="course" errorMessage=(fieldError "reviewType") disabled=true}}
       </div>
 
       <div class="fields">
-        {{> Input_Form_Field label="Reviewee" name="reviewee" value=reviewee placeholder="reviewee" errorMessage=(fieldError "reviewee") required=true}}
+        {{> Input_Form_Field label="Reviewee" name="reviewee" value=reviewee placeholder="reviewee" errorMessage=(fieldError "reviewee") disabled=true}}
         {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=review.semesterID errorMessage=(fieldError "semesters") required="true" }}
         {{> Rating_Form_Field label="Rating" ratings=ratings name="rating" placeholder="3" selectedRating=review.rating errorMessage=(fieldError "rating") required=true type="number"}}
       </div>

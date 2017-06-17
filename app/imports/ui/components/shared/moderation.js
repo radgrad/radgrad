@@ -9,7 +9,7 @@ import {
 } from '../../../api/mentor/MentorQuestionCollection.methods';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { reviewsUpdateModeratedMethod } from '../../../api/review/ReviewCollection.methods';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
@@ -129,7 +129,8 @@ Template.Moderation.events({
       const moderated = item.moderated;
       const visible = item.visible;
       if (split[1] === 'review') {
-        reviewsUpdateModeratedMethod.call({ reviewID: itemID, moderated, visible, moderatorComments });
+        const updateData = { id: itemID, moderated, visible, moderatorComments };
+        updateMethod.call({ collectionName: 'ReviewCollection', updateData });
       } else {
         mentorQuestionsUpdateModeratedMethod.call({ questionID: itemID, moderated, visible, moderatorComments });
         if (!item.slugID) {

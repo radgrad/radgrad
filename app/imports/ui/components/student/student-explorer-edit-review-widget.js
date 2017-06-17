@@ -1,15 +1,10 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
-import { Feeds } from '../../../api/feed/FeedCollection';
-import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import {
-  reviewsUpdateMethod,
-  reviewsRemoveItMethod,
-} from '../../../api/review/ReviewCollection.methods';
+import { updateMethod, removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
@@ -57,17 +52,16 @@ Template.Student_Explorer_Edit_Review_Widget.helpers({
 Template.Student_Explorer_Edit_Review_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(editSchema, event);
+    const updateData = FormUtils.getSchemaDataFromEvent(editSchema, event);
     instance.context.reset();
-    editSchema.clean(updatedData);
-    instance.context.validate(updatedData);
+    editSchema.clean(updateData);
+    instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      updatedData.moderated = false;
-      FormUtils.renameKey(updatedData, 'semester', 'semesterID');
-      updatedData.id = this.review._id;
-      reviewsUpdateMethod.call(updatedData, (error) => {
+      updateData.moderated = false;
+      FormUtils.renameKey(updateData, 'semester', 'semesterID');
+      updateData.id = this.review._id;
+      updateMethod.call({ collectionName: 'ReviewCollection', updateData }, (error) => {
         if (error) {
-          console.log('Error defining Review', error);
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
@@ -80,28 +74,9 @@ Template.Student_Explorer_Edit_Review_Widget.events({
   'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    reviewsRemoveItMethod.call({ id }, (error) => {
+    removeItMethod.call({ collectionName: 'ReviewCollection', instance: id }, (error) => {
       if (error) {
-        console.log('Error defining Review', error);
         FormUtils.indicateError(instance, error);
-      } else {
-        FormUtils.indicateSuccess(instance, event);
-        let feeds = Feeds.find({ opportunityID: id }).fetch();
-        _.forEach(feeds, (f) => {
-          feedsRemoveItMethod.call({ id: f._id }, (err) => {
-            if (err) {
-              console.log('Error removing Feed', err);
-            }
-          });
-        });
-        feeds = Feeds.find({ courseID: id }).fetch();
-        _.forEach(feeds, (f) => {
-          feedsRemoveItMethod.call({ id: f._id }, (err) => {
-            if (err) {
-              console.log('Error removing Feed', err);
-            }
-          });
-        });
       }
     });
   },

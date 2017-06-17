@@ -38,8 +38,7 @@ class FeedCollection extends BaseCollection {
    */
   constructor() {
     super('Feed', new SimpleSchema({
-      userIDs: { type: Array },
-      'userIDs.$': SimpleSchema.RegEx.Id,
+      userIDs: { type: Array }, 'userIDs.$': SimpleSchema.RegEx.Id,
       opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
