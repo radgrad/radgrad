@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
-import { teasersRemoveItMethod } from '../../../api/teaser/TeaserCollection.methods';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
@@ -49,12 +49,12 @@ Template.List_Teasers_Widget.helpers({
 
 Template.List_Teasers_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
-  'click .jsDelete': function (event) {
+  'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    teasersRemoveItMethod.call({ id }, (error) => {
+    removeItMethod.call({ collectionName: 'TeaserCollection', instance: id }, (error) => {
       if (error) {
-        console.log('Error removing Teaser', error);
+        FormUtils.indicateError(instance, error);
       }
     });
   },
