@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { reviewsUpdateMethod } from '../../../api/review/ReviewCollection.methods';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
@@ -14,9 +14,9 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_Review_Widget */
 
 const updateSchema = new SimpleSchema({
-  student: String,
-  reviewType: String,
-  reviewee: String,
+  // student: String,
+  // reviewType: String,
+  // reviewee: String,
   semester: String,
   rating: { type: Number, min: 0, max: 5 },
   comments: String,
@@ -101,9 +101,8 @@ Template.Update_Review_Widget.events({
     FormUtils.renameKey(updateData, 'semester', 'semesterID');
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();
-      reviewsUpdateMethod.call(updateData, (error) => {
+      updateMethod.call({ collectionName: 'ReviewCollection', updateData }, (error) => {
         if (error) {
-          console.log('Error defining Review', error);
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);

@@ -102,7 +102,7 @@ class OpportunityInstanceCollection extends BaseCollection {
   removeIt(docID) {
     this.assertDefined(docID);
     // OK, clear to delete.
-    this._collection.remove(docID);
+    super.removeIt(docID);
   }
 
   /**

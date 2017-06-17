@@ -1,11 +1,13 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
+import { ROLE } from '../../../api/role/Role.js';
 import { feedsDefineNewCourseReviewMethod,
   feedsDefineNewOpportunityReviewMethod } from '../../../api/feed/FeedCollection.methods';
-import { reviewsDefineMethod } from '../../../api/review/ReviewCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Users } from '../../../api/user/UserCollection.js';
 import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -15,8 +17,7 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // for Student, reviewType, reviewee.
 
 const addSchema = new SimpleSchema({
-  slug: { type: String, custom: FormUtils.slugFieldValidator },
-  student: String,
+  user: String,
   reviewType: String,
   reviewee: String,
   semester: String,
@@ -36,7 +37,9 @@ Template.Add_Review_Widget.helpers({
     return Semesters.find({});
   },
   students() {
-    return Users.find({});
+    const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
+    const sorted = _.sortBy(students, 'lastName');
+    return sorted;
   },
   reviewTypes() {
     return ['course', 'opportunity'];
@@ -56,9 +59,9 @@ Template.Add_Review_Widget.events({
     newData.moderated = (newData.moderated === 'true');
     newData.visible = (newData.visible === 'true');
     if (instance.context.isValid()) {
-      reviewsDefineMethod.call(newData, (error) => {
+      FormUtils.renameKey(newData, 'user', 'student');
+      defineMethod.call({ collectionName: 'ReviewCollection', definitionData: newData }, (error) => {
         if (error) {
-          console.log('Error defining Review', error);
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);

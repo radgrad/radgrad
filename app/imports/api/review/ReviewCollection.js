@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { ROLE } from '../role/Role';
 import { Slugs } from '../slug/SlugCollection';
@@ -11,7 +12,7 @@ import BaseSlugCollection from '../base/BaseSlugCollection';
 /** @module api/review/ReviewCollection */
 
 /**
- * Represents a course or opportunity student Review
+ * Represents a course or opportunity review by a student.
  * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
  */
 class ReviewCollection extends BaseSlugCollection {
@@ -40,51 +41,52 @@ class ReviewCollection extends BaseSlugCollection {
    * Review.define({ slug: 'review-course-ics111-abi',
    *                 student: 'abi',
    *                 reviewType: 'course',
-   *                 reviewee: 'ics111,
+   *                 reviewee: 'ics_111',
    *                 semester: 'Fall-2016',
    *                 rating: 3,
-   *                 comments: 'sample comments here',
+   *                 comments: 'This class is great!',
    *                 moderated: false,
    *                 visible: true,
    *                 moderatedComments: 'sample comments here'});
    * @param { Object } description Object with keys slug, student, reviewee,
    * reviewType,semester, rating, comments, moderated, public, and moderatorComments.
-   * Slug must not be previously defined.
-   * Reviewee must be a defined course or opportunity slug.
-   * Semester must be a defined slug.
+   * Slug is optional. If supplied, must not be previously defined.
    * Student must be a user with role 'STUDENT.'
+   * ReviewType must be either 'course' or 'opportunity'.
+   * Reviewee must be a defined course or opportunity slug, depending upon reviewType.
+   * Semester must be a defined slug.
    * Moderated is optional and defaults to false.
    * Visible is optional and defaults to true.
    * ModeratorComments is optional.
-   * reviewType must be either course or opportunity.
    * @throws {Meteor.Error} If the definition includes a defined slug, undefined student,
    * undefined reviewee, undefined semester, or invalid rating.
    * @returns The newly created docID.
    */
-  define({ slug, student, reviewType, reviewee, semester, rating = 3, comments,
-      moderated = false, visible = true, moderatorComments }) {
-    // Get instances, or throw error
+  define({ slug, student, reviewType, reviewee, semester, rating = 3, comments, moderated = false, visible = true,
+      moderatorComments,
+  }) {
+    // Validate student, get studentID.
     const studentID = Users.getID(student);
-    // Get instances, or throw error if not found or not a valid reviewType
+    Users.assertInRole(studentID, [ROLE.STUDENT]);
+    // Validate reviewType, get revieweeID and assign slug if not provided.
+    this.assertValidReviewType(reviewType);
     let revieweeID;
     if (reviewType === 'course') {
       revieweeID = Courses.getID(reviewee);
       if (!slug) {
-        slug = `review-course-${Courses.getSlug(reviewee)}-${student}`;
+        slug = `review-course-${Courses.getSlug(revieweeID)}-${Users.getSlugName(studentID)}`;
       }
-    } else if (reviewType === 'opportunity') {
-      revieweeID = Opportunities.getID(reviewee);
-      if (!slug) {
-        slug = `review-opportunity-${Opportunities.getSlug(reviewee)}-${student}`;
+    } else
+      if (reviewType === 'opportunity') {
+        revieweeID = Opportunities.getID(reviewee);
+        if (!slug) {
+          slug = `review-opportunity-${Opportunities.getSlug(revieweeID)}-${Users.getSlugName(studentID)}`;
+        }
       }
-    } else {
-      throw new Meteor.Error(`reviewType ${reviewType} is not a valid reviewType.`);
-    }
+    // Validate semester, get semesterID.
     const semesterID = Semesters.getID(semester);
-    // Make sure rating is a number between 1 and 5.
-    if (!(typeof rating) === 'number' || (rating < 1) || (rating > 5)) {
-      throw new Meteor.Error(`Rating ${rating} is not a number between 1 and 5.`);
-    }
+    // Validate rating.
+    this.assertValidRating(rating);
     // Guarantee that moderated and public are booleans.
     /* eslint no-param-reassign: "off" */
     moderated = !!moderated;
@@ -92,12 +94,70 @@ class ReviewCollection extends BaseSlugCollection {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Define the new Review and its Slug.
-    const reviewID = this._collection.insert({ slugID, studentID,
-      reviewType, revieweeID, semesterID, rating, comments, moderated, visible, moderatorComments });
+    const reviewID = this._collection.insert({
+      slugID, studentID, reviewType, revieweeID, semesterID, rating, comments, moderated, visible, moderatorComments,
+    });
     Slugs.updateEntityID(slugID, reviewID);
-
     // Return the id to the newly created Review.
     return reviewID;
+  }
+
+  /**
+   * Throws an error if rating is not an integer between 1 and 5.
+   * @param rating the rating.
+   */
+  assertValidRating(rating) { // eslint-disable-line class-methods-use-this
+    if (!_.isInteger(rating) || !_.inRange(rating, 1, 6)) {
+      throw new Meteor.Error(`Invalid rating: ${rating}`);
+    }
+  }
+
+  /**
+   * Throws an error if reviewType is not 'opportunity' or 'collection'.
+   * @param reviewType The review type.
+   */
+  assertValidReviewType(reviewType) { // eslint-disable-line class-methods-use-this
+    if (!_.includes(['opportunity', 'course'], reviewType)) {
+      throw new Meteor.Error(`Invalid reviewType: ${reviewType}`);
+    }
+  }
+
+  /**
+   * Update the review. Only semester, rating, comments, moderated, visible, and moderatorComments can be updated.
+   * @param docID The review docID (required).
+   */
+  update(docID, { semester, rating, comments, moderated, visible, moderatorComments }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (semester) {
+      updateData.semesterID = Semesters.getID(semester);
+    }
+    if (rating) {
+      this.assertValidRating(rating);
+      updateData.rating = rating;
+    }
+    if (comments) {
+      updateData.comments = comments;
+    }
+    if (_.isBoolean(moderated)) {
+      updateData.moderated = moderated;
+    }
+    if (_.isBoolean(visible)) {
+      updateData.visible = !!visible;
+    }
+    if (moderatorComments) {
+      updateData.moderatorComments = moderatorComments;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the review.
+   * @param docID The docID of the review.
+   */
+  removeIt(docID) {
+    this.assertDefined(docID);
+    super.removeIt(docID);
   }
 
   /**
@@ -111,15 +171,6 @@ class ReviewCollection extends BaseSlugCollection {
     this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT]);
   }
 
-  // /**
-  //  * Removes the passed Review and its associated Slug.
-  //  * @param review The document or _id associated with this Review.
-  //  * @throws {Meteor.Error} If review is not defined.
-  //  */
-  // removeIt(review) {
-  //   super.removeIt(review);
-  // }
-  //
   /**
    * Returns the slug for the given opportunity ID.
    * @param opportunityID the opportunity ID.
@@ -181,9 +232,10 @@ class ReviewCollection extends BaseSlugCollection {
     let reviewee;
     if (reviewType === 'course') {
       reviewee = Courses.findSlugByID(doc.revieweeID);
-    } else if (reviewType === 'opportunity') {
-      reviewee = Opportunities.findSlugByID(doc.revieweeID);
-    }
+    } else
+      if (reviewType === 'opportunity') {
+        reviewee = Opportunities.findSlugByID(doc.revieweeID);
+      }
     const semester = Semesters.findSlugByID(doc.semesterID);
     const rating = doc.rating;
     const comments = doc.comments;

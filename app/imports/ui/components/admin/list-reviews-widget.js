@@ -1,13 +1,11 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection.js';
-import { Feeds } from '../../../api/feed/FeedCollection';
-import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
-import { reviewsRemoveItMethod } from '../../../api/review/ReviewCollection.methods';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -40,7 +38,7 @@ Template.List_Reviews_Widget.helpers({
     return (numReferences(opportunity) > 0) ? 'disabled' : '';
   },
   slugName(slugID) {
-    return Slugs.findDoc(slugID).name;  // TODO deleting review causes an Error in the slugName helper.
+    return slugID && Slugs.hasSlug(slugID) && Slugs.findDoc(slugID).name;
   },
   descriptionPairs(review) {
     let reviewee;
@@ -65,29 +63,12 @@ Template.List_Reviews_Widget.helpers({
 
 Template.List_Reviews_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
-  'click .jsDelete': function (event) {
+  'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    reviewsRemoveItMethod.call({ id }, (error) => {
+    removeItMethod.call({ collectionName: 'ReviewCollection', instance: id }, (error) => {
       if (error) {
-        console.log('Error removing Review', error);
-      } else {
-        let feeds = Feeds.find({ opportunityID: id }).fetch();
-        _.forEach(feeds, (f) => {
-          feedsRemoveItMethod.call({ id: f._id }, (err) => {
-            if (err) {
-              console.log('Error removing Feed', err);
-            }
-          });
-        });
-        feeds = Feeds.find({ courseID: id }).fetch();
-        _.forEach(feeds, (f) => {
-          feedsRemoveItMethod.call({ id: f._id }, (err) => {
-            if (err) {
-              console.log('Error removing Feed', err);
-            }
-          });
-        });
+        FormUtils.indicateError(instance, error);
       }
     });
   },
