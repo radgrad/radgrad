@@ -40,7 +40,6 @@ Template.Update_Interest_Widget.events({
     updateSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updateData, 'interestType', 'interestTypeID');
       updateData.id = instance.data.updateID.get();
       updateMethod.call({ collectionName: 'InterestCollection', updateData }, (error) => {
         if (error) {

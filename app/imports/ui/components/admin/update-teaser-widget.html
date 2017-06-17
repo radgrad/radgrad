@@ -11,9 +11,9 @@
       </div>
 
       <div class="fields">
-        {{> Input_Form_Field label="Duration" name="duration" value=teaser.duration errorMessage=(fieldError "duration") required=true}}
         {{> Opportunity_Form_Field opportunities=opportunities selectedOpportunityID=opportunity errorMessage=(fieldError "opportunity") required=true}}
         {{> Input_Form_Field label="URL" name="url" value=teaser.url errorMessage=(fieldError "url") required="true" }}
+        {{> Input_Form_Field label="Duration" name="duration" value=teaser.duration errorMessage=(fieldError "duration") }}
       </div>
 
       <div class="field">

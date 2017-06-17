@@ -83,9 +83,6 @@ Template.Update_Course_Instance_Widget.events({
       FormUtils.convertICE(updateData);
       updateData.verified = (updateData.verified === 'true');
       updateData.fromSTAR = (updateData.fromSTAR === 'true');
-      FormUtils.renameKey(updateData, 'semester', 'semesterID');
-      FormUtils.renameKey(updateData, 'course', 'courseID');
-      FormUtils.renameKey(updateData, 'user', 'studentID');
       updateData.id = instance.data.updateID.get();
       updateMethod.call({ collectionName: 'CourseInstanceCollection', updateData }, (error) => {
         if (error) {

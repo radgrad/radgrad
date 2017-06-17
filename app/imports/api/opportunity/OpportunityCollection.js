@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import { Semesters } from '../semester/SemesterCollection';
+import { Teasers } from '../teaser/TeaserCollection';
 import { Interests } from '../interest/InterestCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
@@ -162,6 +163,12 @@ class OpportunityCollection extends BaseSlugCollection {
     OpportunityInstances.find().map(function (opportunityInstance) {  // eslint-disable-line array-callback-return
       if (opportunityInstance.opportunityID === docID) {
         throw new Meteor.Error(`Opportunity ${instance} referenced by a opportunity instance ${opportunityInstance}.`);
+      }
+    });
+    // Check that this opportunity is not referenced by any Teaser.
+    Teasers.find().map(function (teaser) {  // eslint-disable-line array-callback-return
+      if (Teasers.hasOpportunity(teaser, docID)) {
+        throw new Meteor.Error(`Opportunity ${instance} referenced by a teaser ${teaser}.`);
       }
     });
     // OK to delete. First remove any Feeds that reference this opportunity.

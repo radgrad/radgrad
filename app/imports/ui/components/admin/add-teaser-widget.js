@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
-import { teasersDefineMethod } from '../../../api/teaser/TeaserCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -10,11 +10,12 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
   title: String,
-  slug: { type: String, optional: false, custom: FormUtils.slugFieldValidator },
+  slug: { type: String, custom: FormUtils.slugFieldValidator },
   author: String,
   url: String,
   description: String,
-  duration: String,
+  opportunity: String,
+  duration: { type: String, optional: true },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
 }, { tracker: Tracker });
 
@@ -28,7 +29,6 @@ Template.Add_Teaser_Widget.helpers({
   },
   opportunities() {
     const opportunities = Opportunities.find().fetch();
-    opportunities.push('None');
     return opportunities;
   },
 });
@@ -41,7 +41,7 @@ Template.Add_Teaser_Widget.events({
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      teasersDefineMethod.call(newData, (error) => {
+      defineMethod.call({ collectionName: 'TeaserCollection', definitionData: newData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
