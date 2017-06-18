@@ -13,7 +13,7 @@ import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Interests } from '../interest/InterestCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
-import { ROLE, isRole, assertRole } from '../role/Role';
+import { ROLE, assertRole } from '../role/Role';
 import { Semesters } from '../semester/SemesterCollection';
 import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
 import { Slugs } from '../slug/SlugCollection';
@@ -116,12 +116,10 @@ class UserCollection extends BaseSlugCollection {
   }) {
     // Users can only be defined on the server side.
     if (Meteor.isServer) {
-      // Get SlugID, throw error if found.
-      const slugID = Slugs.define({ name: slug, entityName: this.getType() });
       // Make sure role is supplied and is valid.
-      if (!isRole(role)) {
-        throw new Meteor.Error(`Role ${role} is not a valid role name.`);
-      }
+      assertRole(role);
+      // Get docIDs for various entities.
+      const slugID = Slugs.define({ name: slug, entityName: this.getType() });
       const interestIDs = Interests.getIDs(interests);
       const careerGoalIDs = CareerGoals.getIDs(careerGoals);
       const hiddenCourseIDs = Courses.getIDs(hiddenCourses);
@@ -162,13 +160,84 @@ class UserCollection extends BaseSlugCollection {
   }
 
   /**
-   * Updates the User document with the fields specified in userInfo.
-   * This is intended to be called by the Users.update method.
-   * @param userInfo An object containing user fields.
+   * Update a User.
+   * @param docID The docID of the user to be updated.
+   * @throws { Meteor.Error } If docID is not defined, or if interests, careerGoals, level, hiddenCourses,
+   * hiddenOpportunities, declaredSemester, or academicPlan are not valid.
    */
-  update(userInfo) {
-    const userID = this.findIdBySlug(userInfo.username);
-    this._collection.update(userID, { $set: userInfo });
+  update(docID, { firstName, lastName, email, picture, website, password, desiredDegree, interests, careerGoals,
+  uhID, level, hiddenCourses, hiddenOpportunities, declaredSemester, academicPlan, role }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (firstName) {
+      updateData.firstName = firstName;
+    }
+    if (lastName) {
+      updateData.lastName = lastName;
+    }
+    if (email) {
+      updateData.email = email;
+    }
+    if (picture) {
+      updateData.picture = picture;
+    }
+    if (website) {
+      updateData.website = website;
+    }
+    if (password) {
+      updateData.password = password;
+    }
+    if (desiredDegree) {
+      updateData.desiredDegreeID = DesiredDegrees.getID(desiredDegree);
+    }
+    if (interests) {
+      updateData.interestIDs = Interests.getIDs(interests);
+    }
+    if (careerGoals) {
+      updateData.careerGoalIDs = CareerGoals.getIDs(careerGoals);
+    }
+    if (uhID) {
+      updateData.uhID = uhID;
+    }
+    if (level) {
+      this.assertValidLevel(level);
+      updateData.level = level;
+    }
+    if (hiddenCourses) {
+      updateData.hiddenCourseIDs = Courses.getIDs(hiddenCourses);
+    }
+    if (hiddenOpportunities) {
+      updateData.hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
+    }
+    if (declaredSemester) {
+      updateData.declaredSemesterID = Semesters.getID(declaredSemester);
+    }
+    if (academicPlan) {
+      updateData.academicPlanID = AcademicPlans.getID(academicPlan);
+    }
+    if (role) {
+      assertRole(role);
+      Roles.setUserRoles(docID, role);
+    }
+    Meteor.users.update(docID, { $set: updateData });
+  }
+
+
+  /**
+   * Removes the user and their associated DegreePlan (if present) and their Slug.
+   * @param user The object or docID representing this user.
+   * @throws { Meteor.Error } if the user or their slug is not defined, or if the user has remaining
+   * opportunity or course instances.
+   */
+  removeIt(user) {
+    const docID = this.findDoc(user)._id;
+    const courseInstanceCount = CourseInstances.find({ studentID: docID }).count();
+    const opportunityInstanceCount = OpportunityInstances.find({ studentID: docID }).count();
+    if ((courseInstanceCount + opportunityInstanceCount) === 0) {
+      super.removeIt(user);
+    } else {
+      throw new Meteor.Error(`Attempt to remove ${user} while course or opportunity instances remain.`);
+    }
   }
 
   /**
@@ -205,22 +274,6 @@ class UserCollection extends BaseSlugCollection {
     return user.roles;
   }
 
-  /**
-   * Removes the user and their associated DegreePlan (if present) and their Slug.
-   * @param user The object or docID representing this user.
-   * @throws { Meteor.Error } if the user or their slug is not defined, or if the user has remaining
-   * opportunity or course instances.
-   */
-  removeIt(user) {
-    const docID = this.findDoc(user)._id;
-    const courseInstanceCount = CourseInstances.find({ studentID: docID }).count();
-    const opportunityInstanceCount = OpportunityInstances.find({ studentID: docID }).count();
-    if ((courseInstanceCount + opportunityInstanceCount) === 0) {
-      super.removeIt(user);
-    } else {
-      throw new Meteor.Error(`Attempt to remove ${user} while course or opportunity instances remain.`);
-    }
-  }
 
   /**
    * Remove all users with the associated role.
@@ -247,6 +300,16 @@ class UserCollection extends BaseSlugCollection {
     assertRole(role);
     if (!Roles.userIsInRole(userID, role)) {
       throw new Meteor.Error(`${userID} (${this.findDoc(userID).firstName}) is not in role ${role}.`);
+    }
+  }
+
+  /**
+   * Asserts that level is an integer between 1 and 6.
+   * @param level The level.
+   */
+  assertValidLevel(level) {
+    if (!_.isInteger(level) && !_.inRange(level, 1, 7)) {
+      throw new Meteor.Error(`Level ${level} is not between 1 and 6.`);
     }
   }
 
