@@ -18,53 +18,99 @@ class TeaserCollection extends BaseSlugCollection {
    */
   constructor() {
     super('Teaser', new SimpleSchema({
-      title: { type: String },
-      slugID: { type: SimpleSchema.RegEx.Id },
-      author: { type: String },
-      url: { type: String },
-      description: { type: String },
-      duration: { type: String },
+      title: String,
+      slugID: SimpleSchema.RegEx.Id,
+      author: String,
+      url: String,
+      description: String,
       interestIDs: [SimpleSchema.RegEx.Id],
-      opportunityID: { type: SimpleSchema.RegEx.Id, optional: true },
+      opportunityID: SimpleSchema.RegEx.Id,
+      duration: { type: String, optional: true },
     }));
   }
 
   /**
-   * Defines a new Teaser and its associated Slug.
+   * Defines a new Teaser video to provide information about an opportunity.
    * @example
    * Teaser.define({ title: 'ACM Webmasters',
    *                 slug: 'acm-webmasters-teaser',
+   *                 opportunity: 'acm-webmasters'
+   *                 interests: ['html', 'javascript', 'css', 'web-development'],
    *                 author: 'Torlief Nielson'
    *                 url: 'https://www.youtube.com/watch?v=OI4CXULK3tw'
    *                 description: 'Learn web development by helping to develop and maintain the ACM Manoa website.',
    *                 duration: '0:39'
-   *                 interests: ['html', 'javascript', 'css', 'web-development'],
-   *                 opportunity: 'acm-webmasters'
+   *                 })
    * @param { Object } description Object with keys title, slug, URL, description, duration. interestIDs.
-   * Slug must be previously undefined.
-   * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
-   * Opportunity is an optional opportunity slug or opportunityID.
+   * Title is a required string.
+   * Slug is required and must be previously undefined. By convention, use a '-teaser' suffix.
+   * Interests is a required array of one or more defined interest slugs or interestIDs.
+   * Opportunity is a required opportunity slug or opportunityID.
+   * URL is a required string; the url to the (typically YouTube) video defining this teaser.
+   * Author is a required string indicating the author of the Teaser.
+   * Description is a required string providing a short description of this teaser.
+   * Duration is an optional string indicating the length of the teaser.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestID,
    * if the slug is already defined, or if the opportunity is supplied and not found.
    * @returns The newly created docID.
    */
   define({ title, slug, author, url, description, duration, interests, opportunity }) {
-    // Get Interests, throw error if any of them are not found.
+    // Get InterestIDs, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    let opportunityID;
-    if (opportunity) {
-      const opportunitySlug = Slugs.find({ name: opportunity }).fetch();
-      const opp = Opportunities.find({ slugID: opportunitySlug[0]._id }).fetch();
-      opportunityID = opp[0]._id;
-    }
-    const teaserID = this._collection.insert({ title, slugID, author, url,
-      description, duration, interestIDs, opportunityID });
+    // Get OpportunityID, throw error if not found.
+    const opportunityID = Opportunities.getID(opportunity);
+    const teaserID = this._collection.insert({ title, slugID, author, url, description, duration, interestIDs,
+      opportunityID });
     // Connect the Slug to this teaser
     Slugs.updateEntityID(slugID, teaserID);
     return teaserID;
   }
+
+  /**
+   * Update a Teaser. Everything can be updated except the slug.
+   * @param docID The docID to be updated.
+   * @throws { Meteor.Error } If docID is not defined, or if any interest or opportunity is undefined.
+   */
+  update(docID, { title, opportunity, interests, author, url, description, duration }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (title) {
+      updateData.title = title;
+    }
+    if (opportunity) {
+      updateData.opportunityID = Opportunities.getID(opportunity);
+    }
+    if (interests) {
+      updateData.interestIDs = Interests.getIDs(interests);
+    }
+    if (author) {
+      updateData.author = author;
+    }
+    if (url) {
+      updateData.url = url;
+    }
+    if (description) {
+      updateData.description = description;
+    }
+    if (duration) {
+      updateData.duration = duration;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the Teaser.
+   * @param instance The docID or slug of the entity to be removed.
+   * @throws { Meteor.Error } If docID is not a Teaser.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // OK, clear to delete.
+    super.removeIt(docID);
+  }
+
 
   /**
    * Returns true if teaser has the specified interest.
@@ -77,6 +123,19 @@ class TeaserCollection extends BaseSlugCollection {
     const interestID = Interests.getID(interest);
     const doc = this.findDoc(teaser);
     return _.includes(doc.interestIDs, interestID);
+  }
+
+  /**
+   * Returns true if teaser has the specified opportunity.
+   * @param teaser The teaser (docID or slug)
+   * @param opportunity The Interest (docID or slug).
+   * @returns {boolean} True if the teaser has the associated Opportunity.
+   * @throws { Meteor.Error } If teaser is not a teaser or opportunity is not a Opportunity.
+   */
+  hasOpportunity(teaser, opportunity) {
+    const opportunityID = Opportunities.getID(opportunity);
+    const doc = this.findDoc(teaser);
+    return (doc.opportunityID === opportunityID);
   }
 
   /**

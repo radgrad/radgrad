@@ -11,14 +11,14 @@
       </div>
 
       <div class="fields">
-        {{> Input_Form_Field label="Duration" name="duration" placeholder="2:30" errorMessage=(fieldError "duration") required=true}}
         {{> Opportunity_Form_Field opportunities=opportunities errorMessage=(fieldError "opportunity") required=true}}
         {{> Input_Form_Field label="URL" name="url" placeholder="http://youtube.com/embed/foo" errorMessage=(fieldError "url") required="true" }}
+        {{> Input_Form_Field label="Duration" name="duration" placeholder="2:30" errorMessage=(fieldError "duration") }}
       </div>
 
       {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests") required="true" }}
 
-      {{> Input_Form_Field label="Description" name="description" placeholder="Describe the teaser here" errorMessage=(fieldError "description") required=true}}
+      {{> Input_Form_Field label="Description" name="description" placeholder="Briefly describe the teaser" errorMessage=(fieldError "description") required=true}}
 
       <button class="ui green basic button" type="submit">Add</button>
       {{> Success_Message_Form_Field message="The Teaser was successfully added."}}

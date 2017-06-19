@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
-import { teasersUpdateMethod } from '../../../api/teaser/TeaserCollection.methods';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -15,9 +15,9 @@ const updateSchema = new SimpleSchema({
   author: String,
   url: String,
   description: String,
-  duration: String,
+  duration: { type: String, optional: true },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
-  opportunity: { type: String, optional: true },
+  opportunity: String,
 }, { tracker: Tracker });
 
 Template.Update_Teaser_Widget.onCreated(function onCreated() {
@@ -56,12 +56,9 @@ Template.Update_Teaser_Widget.events({
     updateSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updateData, 'interests', 'interestIDs');
-      FormUtils.renameKey(updateData, 'opportunity', 'opportunityID');
       updateData.id = instance.data.updateID.get();
-      teasersUpdateMethod.call(updateData, (error) => {
+      updateMethod.call({ collectionName: 'TeaserCollection', updateData }, (error) => {
         if (error) {
-          console.log('Error updating Teaser', error);
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
