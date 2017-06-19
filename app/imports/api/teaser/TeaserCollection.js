@@ -33,7 +33,7 @@ class TeaserCollection extends BaseSlugCollection {
    * Defines a new Teaser and its associated Slug.
    * @example
    * Teaser.define({ title: 'ACM Webmasters',
-   *                 slug: 'acm-webmasters',
+   *                 slug: 'acm-webmasters-teaser',
    *                 author: 'Torlief Nielson'
    *                 url: 'https://www.youtube.com/watch?v=OI4CXULK3tw'
    *                 description: 'Learn web development by helping to develop and maintain the ACM Manoa website.',
@@ -43,7 +43,7 @@ class TeaserCollection extends BaseSlugCollection {
    * @param { Object } description Object with keys title, slug, URL, description, duration. interestIDs.
    * Slug must be previously undefined.
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
-   * Opportunity is an optional opportunity slug or opportunityID
+   * Opportunity is an optional opportunity slug or opportunityID.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestID,
    * if the slug is already defined, or if the opportunity is supplied and not found.
    * @returns The newly created docID.
