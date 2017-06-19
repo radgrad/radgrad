@@ -238,6 +238,7 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If username is not a username, or if existingFeedID is not a feedID.
    */
   updateNewUser(username, existingFeedID) {
+    console.log('in updateNewUser', username, existingFeedID);
     const user = Users.getUserFromUsername(username);
     const userID = user._id;
     Users.assertDefined(userID);

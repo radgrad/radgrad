@@ -4,6 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Feeds } from '../../../api/feed/FeedCollection';
 import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
@@ -47,7 +48,7 @@ Template.List_Users_Widget.helpers({
    */
   descriptionPairs(user) {
     return user.careerGoalIDs && [
-      { label: 'Username', value: user.username },
+      { label: 'Username (Slug)', value: user.username },
       { label: 'Email', value: user.email },
       { label: 'UH ID', value: user.uhID },
       { label: 'Degree', value: (user.desiredDegreeID) ? DesiredDegrees.findDoc(user.desiredDegreeID).name : '' },
@@ -56,6 +57,8 @@ Template.List_Users_Widget.helpers({
       { label: 'Career Goals', value: _.sortBy(CareerGoals.findNames(user.careerGoalIDs)) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(user.interestIDs)) },
       { label: 'Website', value: makeLink(user.website) },
+      { label: 'Declared Semester', value: (user.declaredSemesterID) ?
+          Semesters.toString(user.declaredSemesterID) : '' },
     ];
   },
 });
