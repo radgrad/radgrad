@@ -10,7 +10,7 @@ import {
   feedsUpdateNewUserMethod,
 } from '../../../api/feed/FeedCollection.methods';
 import { Users } from '../../../api/user/UserCollection.js';
-import { defineUserMethod } from '../../../api/user/UserCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { validUserAccountsDefineMethod } from '../../../api/user/ValidUserAccountCollection.methods';
 
 // /** @module ui/components/advisor/Student_Selector_Tabs */
@@ -202,7 +202,7 @@ Template.Student_Selector_Tabs.events({
           role: ROLE.STUDENT,
           uhID,
         };
-        defineUserMethod.call(userDefinition, (error) => {
+        defineMethod.call({ collectionName: 'UserCollection', definitionData: userDefinition }, (error) => {
           if (error) {
             const regexp = /^[a-zA-Z0-9-_]+$/;
             if (userName.search(regexp) === -1) {

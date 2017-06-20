@@ -1,14 +1,14 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
-import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { updateUserMethod } from '../../../api/user/UserCollection.methods';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -20,13 +20,14 @@ const updateSchema = new SimpleSchema({
   slug: String, // will rename this to username
   role: String,
   email: String,
-  uhID: String,
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  uhID: { type: String, optional: true },
   desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
   careerGoals: [String],
-  interests: { type: Array, minCount: 1 }, 'interests.$': String,
   website: { type: String, optional: true },
+  declaredSemester: { type: String, optional: true },
 }, { tracker: Tracker });
 
 Template.Update_User_Widget.onCreated(function onCreated() {
@@ -49,6 +50,9 @@ Template.Update_User_Widget.helpers({
   roles() {
     return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
   },
+  semesters() {
+    return Semesters.find({});
+  },
   slug() {
     const user = Users.findDoc(Template.currentData().updateID.get());
     return Slugs.findDoc(user.slugID).name;
@@ -65,6 +69,10 @@ Template.Update_User_Widget.helpers({
     const user = Users.findDoc(Template.currentData().updateID.get());
     return user.desiredDegreeID;
   },
+  selectedSemesterID() {
+    const user = Users.findDoc(Template.currentData().updateID.get());
+    return user.declaredSemesterID;
+  },
   selectedRole() {
     const user = Users.findDoc(Template.currentData().updateID.get());
     return user.roles[0];
@@ -74,25 +82,20 @@ Template.Update_User_Widget.helpers({
 Template.Update_User_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData, { mutate: true });
-    instance.context.validate(updatedData);
+    updateSchema.clean(updateData, { mutate: true });
+    instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      const oldRole = Roles.getRolesForUser(Template.currentData().updateID.get());
-      FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      FormUtils.renameKey(updatedData, 'careerGoals', 'careerGoalIDs');
-      FormUtils.renameKey(updatedData, 'desiredDegree', 'desiredDegreeID');
-      FormUtils.renameKey(updatedData, 'slug', 'username');
-      updateUserMethod.call(updatedData, (error) => {
+      FormUtils.renameKey(updateData, 'slug', 'username');
+      updateData.id = instance.data.updateID.get();
+      updateMethod.call({ collectionName: 'UserCollection', updateData }, (error) => {
         if (error) {
-          console.log('Error during user update: ', error);
+          FormUtils.indicateError(instance, error);
+        } else {
+          FormUtils.indicateSuccess(instance, event);
         }
-        FormUtils.indicateSuccess(instance, event);
       });
-      if (oldRole !== updatedData.role) {
-        Users.updateRole(Template.currentData().updateID.get(), [updatedData.role], oldRole);
-      }
     } else {
       FormUtils.indicateError(instance);
     }

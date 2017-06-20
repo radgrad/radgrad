@@ -10,6 +10,7 @@ import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
+import { Feeds } from '../feed/FeedCollection';
 import { Interests } from '../interest/InterestCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
@@ -88,8 +89,8 @@ class UserCollection extends BaseSlugCollection {
    *                slug: 'joesmith',
    *                email: 'smith@hawaii.edu',
    *                role: ROLE.STUDENT,
-   *                password: 'foo',
    *                // following fields are optional.
+   *                password: 'foo',
    *                uhID: '12345678',
    *                picture: 'http://johnson.github.io/images/profile.jpg',
    *                website: 'http://johnson.github.io/',
@@ -222,21 +223,36 @@ class UserCollection extends BaseSlugCollection {
     Meteor.users.update(docID, { $set: updateData });
   }
 
+  /**
+   * Returns true if userID is referenced by other entities.
+   * Currently checks courseInstances and opportunityInstances.
+   * Used to determine if this userID can be deleted.
+   * @param user The user ID.
+   * @returns {boolean} True if this user is referenced elsewhere.
+   */
+  isReferenced(user) {
+    const userID = this.getID(user);
+    const courseInstanceCount = CourseInstances.find({ studentID: userID }).count();
+    const opportunityInstanceCount = OpportunityInstances.find({ studentID: userID }).count();
+    return (courseInstanceCount + opportunityInstanceCount) > 0;
+  }
+
 
   /**
    * Removes the user and their associated DegreePlan (if present) and their Slug.
-   * @param user The object or docID representing this user.
-   * @throws { Meteor.Error } if the user or their slug is not defined, or if the user has remaining
-   * opportunity or course instances.
+   * @param username The username associated with this user.
+   * @throws { Meteor.Error } if the username is not defined, or if the user is referenced by other entities.
    */
-  removeIt(user) {
-    const docID = this.findDoc(user)._id;
-    const courseInstanceCount = CourseInstances.find({ studentID: docID }).count();
-    const opportunityInstanceCount = OpportunityInstances.find({ studentID: docID }).count();
-    if ((courseInstanceCount + opportunityInstanceCount) === 0) {
-      super.removeIt(user);
+  removeIt(username) {
+    const docID = this.findDoc(username)._id;
+    if (!this.isReferenced(docID)) {
+      // Now remove all mentions of this user from the Feed.
+      const feeds = Feeds.find({ userIDs: { $in: [docID] } }).fetch();
+      _.forEach(feeds, (f) => Feeds.removeIt(f._id));
+      // Now remove the user.
+      super.removeIt(username);
     } else {
-      throw new Meteor.Error(`Attempt to remove ${user} while course or opportunity instances remain.`);
+      throw new Meteor.Error(`Attempt to remove ${username} while course or opportunity instances remain.`);
     }
   }
 
