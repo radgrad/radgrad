@@ -52,14 +52,14 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @returns {*}
    */
   define({ slug, degreeSlug, name, semester, coursesPerSemester, courseList }) {
-    // Get SlugID, throw error if found.
-    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     const degreeID = Slugs.getEntityID(degreeSlug, 'DesiredDegree');
     const effectiveSemesterID = Semesters.getID(semester);
     const doc = this._collection.findOne({ degreeID, name, effectiveSemesterID });
     if (doc) {
       return doc._id;
     }
+    // Get SlugID, throw error if found.
+    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     return this._collection.insert({
       slugID, degreeID, name, effectiveSemesterID, coursesPerSemester, courseList,
     });

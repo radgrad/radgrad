@@ -80,6 +80,7 @@ class RadGradClass {
       Interests,
       CareerGoals,
       DesiredDegrees,
+      AcademicPlans,
       ValidUserAccounts,
       Users,
       OpportunityTypes,
@@ -97,7 +98,6 @@ class RadGradClass {
       MentorQuestions,
       MentorAnswers,
       Reviews,
-      AcademicPlans,
       PlanChoices,
     ];
 
