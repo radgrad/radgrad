@@ -5,6 +5,7 @@
       "name": "AcademicPlanCollection",
       "contents": [
         {
+          "slug": "bs-cs-2016",
           "degreeSlug": "bs-cs",
           "name": "B.S. in Computer Sciences",
           "semester": "Fall-2016",
@@ -42,6 +43,7 @@
           ]
         },
         {
+          "slug": "bs-cs-ss-2016",
           "degreeSlug": "bs-cs",
           "name": "B.S. in Computer Sciences Security Sciences",
           "semester": "Fall-2016",
@@ -79,6 +81,7 @@
           ]
         },
         {
+          "slug": "ba-ics-2016",
           "degreeSlug": "ba-ics",
           "name": "B.A in Information and Computer Sciences",
           "semester": "Fall-2016",
@@ -112,6 +115,7 @@
           ]
         },
         {
+          "slug": "ba-ics-ss-2016",
           "degreeSlug": "ba-ics",
           "name": "B.A. in ICS Security Science Focus",
           "semester": "Fall-2016",
@@ -149,6 +153,7 @@
           ]
         },
         {
+          "slug": "ba-ics-it-2016",
           "degreeSlug": "ba-ics",
           "name": "B.A. in ICS IT Focus",
           "semester": "Fall-2016",
@@ -189,6 +194,7 @@
           ]
         },
         {
+          "slug": "bs-cs-2017",
           "degreeSlug": "bs-cs",
           "name": "B.S. in Computer Sciences",
           "semester": "Fall-2017",
@@ -226,6 +232,7 @@
           ]
         },
         {
+          "slug": "bs-cs-ss-2017",
           "degreeSlug": "bs-cs",
           "name": "B.S. in Computer Science Security Science",
           "semester": "Fall-2017",
@@ -263,6 +270,7 @@
           ]
         },
         {
+          "slug": "ba-ics-2017",
           "degreeSlug": "ba-ics",
           "name": "B.A. in Information and Computer Sciences",
           "semester": "Fall-2017",
@@ -296,6 +304,7 @@
           ]
         },
         {
+          "slug": "ba-ics-ss-2017",
           "degreeSlug": "ba-ics",
           "name": "B.A. in ICS Security Science Focus",
           "semester": "Fall-2017",
@@ -333,6 +342,7 @@
           ]
         },
         {
+          "slug": "ba-ics-it-2017",
           "degreeSlug": "ba-ics",
           "name": "B.A. in Computer Sciences IT Focus",
           "semester": "Fall-2017",
@@ -373,6 +383,7 @@
           ]
         },
         {
+          "slug": "bs-cs-2015",
           "degreeSlug": "bs-cs",
           "name": "B.S. in Computer Science",
           "semester": "Fall-2015",
@@ -410,6 +421,7 @@
           ]
         },
         {
+          "slug": "ba-ics-2015",
           "degreeSlug": "ba-ics",
           "name": "B.A. in Information and Computer Sciences",
           "semester": "Fall-2015",
@@ -445,6 +457,7 @@
           ]
         },
         {
+          "slug": "ba-ics-it-2015",
           "degreeSlug": "ba-ics",
           "name": "B.A. in Computer Sciences IT Focus",
           "semester": "Fall-2015",
@@ -483,6 +496,7 @@
           ]
         },
         {
+          "slug": "bs-ce-2017",
           "degreeSlug": "bs-ce",
           "name": "B.S. in Computer Engineering",
           "semester": "Fall-2017",
