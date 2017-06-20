@@ -239,20 +239,20 @@ class UserCollection extends BaseSlugCollection {
 
 
   /**
-   * Removes the user and their associated DegreePlan (if present) and their Slug.
-   * @param username The username associated with this user.
+   * Removes the user, their slug, and any associated feeds. // TODO remove AcademicPlan?
+   * @param user The username or docID associated with this user.
    * @throws { Meteor.Error } if the username is not defined, or if the user is referenced by other entities.
    */
-  removeIt(username) {
-    const docID = this.findDoc(username)._id;
+  removeIt(user) {
+    const docID = this.findDoc(user)._id;
     if (!this.isReferenced(docID)) {
       // Now remove all mentions of this user from the Feed.
       const feeds = Feeds.find({ userIDs: { $in: [docID] } }).fetch();
       _.forEach(feeds, (f) => Feeds.removeIt(f._id));
       // Now remove the user.
-      super.removeIt(username);
+      super.removeIt(user);
     } else {
-      throw new Meteor.Error(`Attempt to remove ${username} while course or opportunity instances remain.`);
+      throw new Meteor.Error(`Attempt to remove ${user} while course or opportunity instances remain.`);
     }
   }
 
