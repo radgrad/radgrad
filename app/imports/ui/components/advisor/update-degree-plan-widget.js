@@ -2,7 +2,6 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
-import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
@@ -14,10 +13,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import {
-  updateUserMethod,
-  updateUserRoleMethod,
-} from '../../../api/user/UserCollection.methods';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
@@ -199,38 +195,20 @@ Template.Update_Degree_Plan_Widget.helpers({
 Template.Update_Degree_Plan_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData);
-    instance.context.validate(updatedData);
+    updateSchema.clean(updateData);
+    instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      const oldRole = Roles.getRolesForUser(Template.currentData().studentID.get());
-      FormUtils.renameKey(updatedData, 'interests', 'interestIDs');
-      FormUtils.renameKey(updatedData, 'careerGoals', 'careerGoalIDs');
-      FormUtils.renameKey(updatedData, 'desiredDegree', 'desiredDegreeID');
-      FormUtils.renameKey(updatedData, 'declaredSemester', 'declaredSemesterID');
-      FormUtils.renameKey(updatedData, 'academicPlan', 'academicPlanID');
-      FormUtils.renameKey(updatedData, 'slug', 'username');
-      updateUserMethod.call(updatedData, (error) => {
+      FormUtils.renameKey(updateData, 'slug', 'username');
+      updateData.id = Template.currentData().studentID.get();
+      updateMethod.call({ collectionName: 'UserCollection', updateData }, (error) => {
         if (error) {
           // console.log('Error during user update: ', error);
         }
-        // FormUtils.indicateSuccess(instance, event);
         instance.successClass.set('success');
         instance.errorClass.set('');
       });
-      if (oldRole !== updatedData.role) {
-        const update = {
-          userID: Template.currentData().studentID.get(),
-          newRole: [updatedData.role],
-          oldRole,
-        };
-        updateUserRoleMethod.call(update, (error) => {
-          if (error) {
-            console.log('Error updating user role', error);
-          }
-        });
-      }
     } else {
       FormUtils.indicateError(instance);
     }

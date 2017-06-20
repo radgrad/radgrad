@@ -4,14 +4,11 @@ import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
-import { Feeds } from '../../../api/feed/FeedCollection';
-import {
-  feedsDefineNewUserMethod,
-  feedsUpdateNewUserMethod,
-} from '../../../api/feed/FeedCollection.methods';
+import { Semesters } from '../../../api/semester/SemesterCollection';
+import { feedsDefineNewUserMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
-import { defineUserMethod } from '../../../api/user/UserCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { validUserAccountsDefineMethod } from '../../../api/user/ValidUserAccountCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
@@ -23,14 +20,16 @@ const addSchema = new SimpleSchema({
   role: String,
   slug: { type: String, custom: FormUtils.slugFieldValidator },
   email: String,
-  uhID: String,
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  // Everything else is optional.
+  uhID: { type: String, optional: true },
   password: { type: String, optional: true },
   desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
   careerGoals: { type: Array }, 'careerGoals.$': String,
-  interests: { type: Array, minCount: 1 }, 'interests.$': String,
   website: { type: String, optional: true },
+  declaredSemester: { type: String, optional: true },
 }, { tracker: Tracker });
 
 Template.Add_User_Widget.onCreated(function onCreated() {
@@ -50,6 +49,9 @@ Template.Add_User_Widget.helpers({
   roles() {
     return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
   },
+  semesters() {
+    return Semesters.find({}, { sort: { semesterNumber: -1 } });
+  },
 });
 
 Template.Add_User_Widget.events({
@@ -60,31 +62,15 @@ Template.Add_User_Widget.events({
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      validUserAccountsDefineMethod.call({ username: newData.slug }, (error) => {
-        if (error) {
-          console.log('Error during new user creation ValidUserAccounts: ', error);
-        }
-      });
-      defineUserMethod.call(newData, (error) => {
-        if (error) {
-          console.log('Error during new user creation: ', error);
-        }
-        // TODO This check should happen inside the defineNewUser method (i.e. inside the API), not at client-level.
-        if (Feeds.checkPastDayFeed('new-user')) {
-          feedsUpdateNewUserMethod({ username: newData.slug, existingFeedID: Feeds.checkPastDayFeed('new-user') },
-              (err) => {
-                if (err) {
-                  console.log('Error updating new user Feed', err);
-                }
-              });
-        } else {
-          const feedDefinition = {
-            user: [newData.slug],
-            feedType: 'new-user',
-          };
-          feedsDefineNewUserMethod.call(feedDefinition);
-        }
-        FormUtils.indicateSuccess(instance, event);
+      validUserAccountsDefineMethod.call({ username: newData.slug }, () => {
+        defineMethod.call({ collectionName: 'UserCollection', definitionData: newData }, (error) => {
+          if (error) {
+            FormUtils.indicateError(instance, error);
+          } else {
+            feedsDefineNewUserMethod.call({ user: [newData.slug], feedType: 'new-user' });
+            FormUtils.indicateSuccess(instance, event);
+          }
+        });
       });
     } else {
       FormUtils.indicateError(instance);

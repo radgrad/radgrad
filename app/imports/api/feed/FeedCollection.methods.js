@@ -14,6 +14,9 @@ export const feedsDefineNewUserMethod = new ValidatedMethod({
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Feeds.');
     }
+    if (Feeds.checkPastDayFeed('new-user')) {
+      return Feeds.updateNewUser(definition.user[0], Feeds.checkPastDayFeed('new-user'));
+    }
     return Feeds.defineNewUser(definition);
   },
 });
@@ -99,20 +102,6 @@ export const feedsUpdateMethod = new ValidatedMethod({
       throw new Meteor.Error('unauthorized', 'You must be logged in to update Feeds.');
     }
     return Feeds.update(update.id, { $set: update });
-  },
-});
-
-/**
- * The ValidatedMethod for updating Feed new users.
- */
-export const feedsUpdateNewUserMethod = new ValidatedMethod({
-  name: 'Feeds.updateNewUser',
-  validate: null,
-  run(update) {
-    if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to update Feeds.');
-    }
-    return Feeds.updateNewUser(update.username, update.existingFeedID);
   },
 });
 

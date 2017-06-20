@@ -1,24 +1,17 @@
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Feeds } from '../../../api/feed/FeedCollection';
-import { feedsRemoveItMethod } from '../../../api/feed/FeedCollection.methods';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { removeUserMethod } from '../../../api/user/UserCollection.methods';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 /** @module ui/components/admin/List_Users_Widget */
-
-// TODO: implement numReferences to enable the delete operation.
-function numReferences() {
-  const references = 1;
-  return references;
-}
 
 Template.List_Users_Widget.helpers({
   users() {
@@ -28,7 +21,7 @@ Template.List_Users_Widget.helpers({
     return Users.count();
   },
   deleteDisabled(user) {
-    return user && (numReferences(user) > 0) ? 'disabled' : '';
+    return user && (Users.isReferenced(user.username)) ? 'disabled' : '';
   },
   slugName(slugID) {
     return slugID && Slugs.findDoc(slugID).name;
@@ -47,7 +40,7 @@ Template.List_Users_Widget.helpers({
    */
   descriptionPairs(user) {
     return user.careerGoalIDs && [
-      { label: 'Username', value: user.username },
+      { label: 'Username (Slug)', value: user.username },
       { label: 'Email', value: user.email },
       { label: 'UH ID', value: user.uhID },
       { label: 'Degree', value: (user.desiredDegreeID) ? DesiredDegrees.findDoc(user.desiredDegreeID).name : '' },
@@ -56,27 +49,21 @@ Template.List_Users_Widget.helpers({
       { label: 'Career Goals', value: _.sortBy(CareerGoals.findNames(user.careerGoalIDs)) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(user.interestIDs)) },
       { label: 'Website', value: makeLink(user.website) },
+      { label: 'Declared Semester', value: (user.declaredSemesterID) ?
+          Semesters.toString(user.declaredSemesterID) : '' },
     ];
   },
 });
 
 Template.List_Users_Widget.events({
   'click .jsUpdate': FormUtils.processUpdateButtonClick,
-  'click .jsDelete': function (event) { // TODO the Delete button is disabled. Do we need this?
+  'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    removeUserMethod.call({ id }, (error) => {
+    removeItMethod.call({ collectionName: 'UserCollection', instance: id }, (error) => {
       if (error) {
-        console.log('Error removing User', error);
+        FormUtils.indicateError(instance, error);
       }
-    });
-    const feeds = Feeds.find({ userIDs: { $in: [id] } }).fetch();
-    _.forEach(feeds, (f) => {
-      feedsRemoveItMethod.call({ id: f._id }, (error) => {
-        if (error) {
-          console.log('Error removing Feed', error);
-        }
-      });
     });
   },
 });

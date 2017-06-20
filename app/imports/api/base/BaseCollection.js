@@ -67,7 +67,8 @@ class BaseCollection {
     const doc = (
     this._collection.findOne(name) ||
     this._collection.findOne({ name }) ||
-    this._collection.findOne({ _id: name }));
+    this._collection.findOne({ _id: name }) ||
+    this._collection.findOne({ username: name }));
     if (!doc) {
       throw new Meteor.Error(`${name} is not a defined ${this._type}`);
     }

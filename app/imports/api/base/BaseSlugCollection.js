@@ -1,4 +1,5 @@
 import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
 import { Slugs } from '../slug/SlugCollection';
 import BaseCollection from '../base/BaseCollection';
 
@@ -21,7 +22,13 @@ class BaseSlugCollection extends BaseCollection {
    * @throws { Meteor.Error } If instance is not a docID or a slug.
    */
   getID(instance) {
-    return (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
+    let id;
+    try {
+      id = (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
+    } catch (err) {
+      throw new Meteor.Error(`Error in getID(): Failed to convert ${instance} to an ID.`);
+    }
+    return id;
   }
 
   /**
@@ -33,7 +40,13 @@ class BaseSlugCollection extends BaseCollection {
    * @throws { Meteor.Error } If any instance is not a docID or a slug.
    */
   getIDs(instances) {
-    return (instances) ? instances.map((instance) => this.getID(instance)) : [];
+    let ids;
+    try {
+      ids = (instances) ? instances.map((instance) => this.getID(instance)) : [];
+    } catch (err) {
+      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${instances} to an ID.`);
+    }
+    return ids;
   }
 
   /**
