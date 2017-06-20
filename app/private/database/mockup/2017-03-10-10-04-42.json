@@ -7136,7 +7136,8 @@
           "interests": [
             "algorithms",
             "teaching"
-          ]
+          ],
+          "opportunity": "generic-project"
         },
         {
           "title": "Flip Flop",
@@ -7147,7 +7148,8 @@
           "duration": "0:39",
           "interests": [
             "data-visualization"
-          ]
+          ],
+          "opportunity": "generic-project"
         },
         {
           "title": "Grey Hats",
@@ -7184,7 +7186,8 @@
             "software-engineering",
             "application-development",
             "javascript"
-          ]
+          ],
+          "opportunity": "generic-project"
         },
         {
           "title": "Scientific Workflows",
@@ -7198,7 +7201,8 @@
             "hpc",
             "parallel-programming",
             "theory-of-computation"
-          ]
+          ],
+          "opportunity": "generic-project"
         },
         {
           "title": "Solar Energy",
