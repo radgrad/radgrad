@@ -4,7 +4,6 @@ import SimpleSchema from 'simpl-schema';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
-import { feedsDefineNewOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
@@ -73,7 +72,8 @@ Template.Add_Opportunity_Widget.events({
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
-          feedsDefineNewOpportunityMethod.call({ opportunity: newData.slug, feedType: 'new-opportunity' });
+          const feedData = { feedType: 'new-opportunity', opportunity: newData.slug };
+          defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
         }
       });
     } else {
