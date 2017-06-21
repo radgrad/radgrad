@@ -4,11 +4,6 @@ import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
-import { Feeds } from '../../../api/feed/FeedCollection.js';
-import {
-  feedsDefineNewUserMethod,
-  feedsUpdateNewUserMethod,
-} from '../../../api/feed/FeedCollection.methods';
 import { Users } from '../../../api/user/UserCollection.js';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { validUserAccountsDefineMethod } from '../../../api/user/ValidUserAccountCollection.methods';
@@ -194,14 +189,8 @@ Template.Student_Selector_Tabs.events({
             instance.state.set('errorMessage', error.reason);
           }
         });
-        const userDefinition = {
-          firstName,
-          lastName,
-          slug: userName,
-          email: `${userName}@hawaii.edu`,
-          role: ROLE.STUDENT,
-          uhID,
-        };
+        const userDefinition = { firstName, lastName, slug: userName, email: `${userName}@hawaii.edu`,
+          role: ROLE.STUDENT, uhID };
         defineMethod.call({ collectionName: 'UserCollection', definitionData: userDefinition }, (error) => {
           if (error) {
             const regexp = /^[a-zA-Z0-9-_]+$/;
@@ -218,24 +207,8 @@ Template.Student_Selector_Tabs.events({
               instance.state.set('errorMessage', error.reason);
             }
           } else {
-            if (Feeds.checkPastDayFeed('new-user')) {
-              feedsUpdateNewUserMethod.call({ username: userName, existingFeedID: Feeds.checkPastDayFeed('new-user') },
-                  (err) => {
-                    if (err) {
-                      console.log('Error updating Feed user name.', err);
-                    }
-                  });
-            } else {
-              const feedDefinition = {
-                user: [userName],
-                feedType: 'new-user',
-              };
-              feedsDefineNewUserMethod.call(feedDefinition, (err) => {
-                if (err) {
-                  console.log('Error during new user creation Feed define new user: ', err);
-                }
-              });
-            }
+            const feedData = { feedType: 'new-user', user: userName };
+            defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
             const user = Users.getUserFromUsername(userName);
             instance.studentID.set(user._id);
             instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
