@@ -142,12 +142,13 @@ class FeedCollection extends BaseCollection {
       return recentFeedID;
     }
     // Otherwise create and return a new feed instance.
-    console.log('in _defineNewUse', user);
-    const userID = Users.getUserFromUsername(user)._id;
-    const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getSlugName(userID)}) 
-      has joined RadGrad.`;
-    const picture = Users.findDoc(userID).picture;
-    const feedID = this._collection.insert({ userIDs: [userID], description, feedType, timestamp, picture });
+    // First, create an array of users if we weren't passed one initially.
+    const users = (_.isArray(user)) ? user : [user];
+    const userIDs = _.map(users, (u) => Users.getUserFromUsername(u)._id);
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
+      has joined RadGrad${(userIDs.length > 1) ? ' along with some others.' : '.'}`;
+    const picture = Users.findDoc(userIDs[0]).picture;
+    const feedID = this._collection.insert({ userIDs, description, feedType, timestamp, picture });
     return feedID;
   }
 
