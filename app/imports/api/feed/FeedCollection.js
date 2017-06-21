@@ -76,7 +76,7 @@ class FeedCollection extends BaseCollection {
     if (feedDefinition.feedType === 'new-opportunity') {
       return this._defineNewOpportunity(feedDefinition);
     }
-    if (feedDefinition.feedType === 'new-verified-opportunity') {
+    if (feedDefinition.feedType === 'verified-opportunity') {
       return this._defineNewVerifiedOpportunity(feedDefinition);
     }
     if (feedDefinition.feedType === 'new-course-review') {
@@ -130,6 +130,7 @@ class FeedCollection extends BaseCollection {
    *                      user: 'abigailkealoha',
    *                      timestamp: '12345465465' });
    * @param { Object } description Object with keys user and timestamp.
+   * Note that user can be either a single username string or an array of usernames.
    * @returns The newly created docID.
    * @throws {Meteor.Error} If not a valid user.
    */
@@ -200,11 +201,12 @@ class FeedCollection extends BaseCollection {
    * returned.
    * @example
    * Feed._defineNewVerifiedOpportunity({ feedType: 'verified-opportunity',
-   *                                     user: 'abigailkealoha',
-   *                                     opportunity: 'att-hackathon'
-   *                                     semester: 'Spring-2013'
-   *                                     timestamp: '12345465465', });
+   *                                      user: 'abigailkealoha',
+   *                                      opportunity: 'att-hackathon'
+   *                                      semester: 'Spring-2013'
+   *                                      timestamp: '12345465465', });
    * @param { Object } description Object with keys user, opportunity, semester, feedType, and timestamp.
+   * Note that user can be either a single username string or an array of usernames.
    * @returns The docID associated with this info.
    * @throws {Meteor.Error} If not a valid opportunity, semester, or user.
    */
@@ -217,15 +219,16 @@ class FeedCollection extends BaseCollection {
       return recentFeedID;
     }
     // Otherwise, define a new feed instance.
-    const userID = Users.getID(user);
+    const users = (_.isArray(user)) ? user : [user];
+    const userIDs = _.map(users, (u) => Users.getUserFromUsername(u)._id);
     const semesterID = Semesters.getID(semester);
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
-    const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getSlugName(userID)})
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])})
         has been verified for [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)})
-        (${Semesters.toString(semesterID, false)})`;
+        (${Semesters.toString(semesterID, false)})${(userIDs.length > 1) ? ' along with some others.' : '.'}`;
     const picture = '/images/radgrad_logo.png';
-    const feedID = this._collection.insert({ userIDs: [userID], opportunityID, semesterID, description, timestamp,
+    const feedID = this._collection.insert({ userIDs, opportunityID, semesterID, description, timestamp,
       picture, feedType });
     return feedID;
   }
@@ -238,12 +241,13 @@ class FeedCollection extends BaseCollection {
    *                              course: 'ics111'
    *                              timestamp: '12345465465', });
    * @param { Object } description Object with keys user, course, feedType, and timestamp.
+   * User can either be the string username or an array containing a single username.
    * @returns The newly created docID.
    * @throws {Meteor.Error} If not a valid course or user.
    */
   _defineNewCourseReview({ user, course, feedType, timestamp = moment().toDate() }) {
     let picture;
-    const userID = Users.getID(user);
+    const userID = Users.getUserFromUsername((_.isArray(user)) ? user[0] : user)._id;
     const courseID = Courses.getID(course);
     const c = Courses.findDoc(courseID);
     const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getSlugName(userID)}) 
@@ -264,12 +268,13 @@ class FeedCollection extends BaseCollection {
    *                                   opportunity: 'att-hackathon'
    *                                   timestamp: '12345465465', });
    * @param { Object } description Object with keys user, opportunity, feedType, and timestamp.
+   * User can either be the string username or an array containing a single username.
    * @returns The newly created docID.
    * @throws {Meteor.Error} If not a valid opportunity or user.
    */
   _defineNewOpportunityReview({ user, opportunity, feedType, timestamp = moment().toDate() }) {
     let picture;
-    const userID = Users.getID(user);
+    const userID = Users.getUserFromUsername((_.isArray(user)) ? user[0] : user)._id;
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
     const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getSlugName(userID)})  
