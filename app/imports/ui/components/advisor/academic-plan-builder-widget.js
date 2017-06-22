@@ -3,12 +3,12 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { ReactiveVar } from 'meteor/reactive-var';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { academicPlansDefineMethod } from '../../../api/degree-plan/AcademicPlanCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { planChoicesDefineMethod } from '../../../api/degree-plan/PlanChoiceCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
-import { Slugs } from '../../../api/slug/SlugCollection';
+import { Slugs, slugify } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { buildSimpleName, getAllElementsWithAttribute } from '../../../api/degree-plan/PlanChoiceUtilities';
 
@@ -184,12 +184,16 @@ Template.Academic_Plan_Builder_Widget.events({
     addSchema.clean(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
+      const definitionData = {};
       const desiredDegree = DesiredDegrees.findDoc(newData.desiredDegree);
       const degreeSlug = Slugs.findDoc(desiredDegree.slugID).name;
       const name = newData.name;
       const semester = `Fall-${newData.year}`;
       const coursesPerSemester = [];
       const courseList = [];
+      const collectionName = 'AcademicPlanCollection';
+      let slug = `${name} ${newData.year}`;
+      slug = `${slugify(slug)}`;
       const ays = instance.$('.academicYear');
       _.forEach(ays, (ay) => {
         const tables = ay.querySelectorAll('table');
@@ -201,8 +205,14 @@ Template.Academic_Plan_Builder_Widget.events({
           });
         });
       });
+      definitionData.slug = slug;
+      definitionData.degreeSlug = degreeSlug;
+      definitionData.name = name;
+      definitionData.semester = semester;
+      definitionData.coursesPerSemester = coursesPerSemester;
+      definitionData.courseList = courseList;
       // console.log(degreeSlug, name, semester, coursesPerSemester, courseList);
-      academicPlansDefineMethod.call({ degreeSlug, name, semester, coursesPerSemester, courseList }, (error) => {
+      defineMethod.call({ collectionName, definitionData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
