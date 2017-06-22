@@ -1,7 +1,6 @@
 import './AcademicPlanCollection';
 
 import './AcademicYearInstanceCollection';
-import './AcademicYearInstanceCollection.methods';
 
 import './AcademicYearUtilities';
 

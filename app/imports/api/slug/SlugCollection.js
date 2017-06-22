@@ -5,6 +5,8 @@ import BaseCollection from '../base/BaseCollection';
 
 /** @module api/slug/SlugCollection */
 
+/* eslint no-useless-escape: 0 */
+
 export default function slugify(text) {
   return text.toString().toLowerCase()
       .replace(/\s+/g, '-')           // Replace spaces with -
