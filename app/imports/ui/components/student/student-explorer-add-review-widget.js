@@ -2,8 +2,6 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { feedsDefineNewCourseReviewMethod,
-  feedsDefineNewOpportunityReviewMethod } from '../../../api/feed/FeedCollection.methods';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
@@ -70,22 +68,14 @@ Template.Student_Explorer_Add_Review_Widget.events({
           FormUtils.indicateSuccess(instance, event);
         }
       });
-      let feedDefinition;
+      let feedData;
       if (this.reviewType === 'course') {
-        feedDefinition = {
-          user: [newData.student],
-          course: newData.reviewee,
-          feedType: 'new-course-review',
-        };
-        feedsDefineNewCourseReviewMethod.call(feedDefinition);
-      } else {
-        feedDefinition = {
-          user: [newData.student],
-          opportunity: newData.reviewee,
-          feedType: 'new-opportunity-review',
-        };
-        feedsDefineNewOpportunityReviewMethod.call(feedDefinition);
+        feedData = { feedType: 'new-course-review', user: newData.student, course: newData.reviewee };
       }
+      if (this.reviewType === 'opportunity') {
+        feedData = { feedType: 'new-opportunity-review', user: newData.student, opportunity: newData.reviewee };
+      }
+      defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
     } else {
       FormUtils.indicateError(instance);
     }

@@ -4,7 +4,6 @@ import SimpleSchema from 'simpl-schema';
 import { Courses } from '../../../api/course/CourseCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { feedsDefineNewCourseMethod } from '../../../api/feed/FeedCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_Course_Widget */
@@ -49,7 +48,8 @@ Template.Add_Course_Widget.events({
         } else {
           FormUtils.indicateSuccess(instance, event);
           // Add the feed call here so that we don't clutter feed when initializing database.
-          feedsDefineNewCourseMethod.call({ course: newData.slug, feedType: 'new-course' });
+          const feedData = { feedType: 'new-course', course: newData.slug };
+          defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
         }
       });
     } else {

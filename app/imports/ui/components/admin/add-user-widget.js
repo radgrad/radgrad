@@ -5,7 +5,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
-import { feedsDefineNewUserMethod } from '../../../api/feed/FeedCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
@@ -67,7 +66,8 @@ Template.Add_User_Widget.events({
           if (error) {
             FormUtils.indicateError(instance, error);
           } else {
-            feedsDefineNewUserMethod.call({ user: [newData.slug], feedType: 'new-user' });
+            const feedData = { feedType: 'new-user', user: newData.slug };
+            defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
             FormUtils.indicateSuccess(instance, event);
           }
         });
