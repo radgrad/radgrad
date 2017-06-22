@@ -13,7 +13,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
-import { feedsDefineNewVerifiedOpportunityMethod } from '../../../api/feed/FeedCollection.methods';
+import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 // /** @module ui/components/shared/Verification_Requests_Pending */
@@ -74,16 +74,16 @@ Template.Verification_Requests_Pending.events({
       }).fetch();
       const opportunityID = VerificationRequests.getOpportunityDoc(request._id)._id;
       if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
-        Feeds.updateVerifiedOpportunity(VerificationRequests.getStudentDoc(request._id).username,
+        Feeds._updateVerifiedOpportunity(VerificationRequests.getStudentDoc(request._id).username,
             Feeds.checkPastDayFeed('verified-opportunity', opportunityID));
       } else {
-        const feedDefinition = {
-          user: [VerificationRequests.getStudentDoc(request._id).username],
+        const feedData = {
+          feedType: 'verified-opportunity',
+          user: VerificationRequests.getStudentDoc(request._id).username,
           opportunity: Slugs.findDoc(VerificationRequests.getOpportunityDoc(request._id).slugID),
           semester: Slugs.findDoc(Semesters.findDoc(opportunities[0].semesterID).slugID),
-          feedType: 'verified-opportunity',
         };
-        feedsDefineNewVerifiedOpportunityMethod.call(feedDefinition);
+        defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
       }
     } else {
       request.status = VerificationRequests.REJECTED;

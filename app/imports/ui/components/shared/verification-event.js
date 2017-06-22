@@ -7,11 +7,6 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
-import { Feeds } from '../../../api/feed/FeedCollection.js';
-import {
-  feedsDefineNewVerifiedOpportunityMethod,
-  feedsUpdateVerifiedOpportunityMethod,
-} from '../../../api/feed/FeedCollection.methods';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
 import {
   verificationRequestsDefineMethod,
@@ -74,22 +69,9 @@ Template.Verification_Event.events({
                         console.log('Error updating VerificationRequest status', err1);
                       }
                     });
-                    if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
-                      feedsUpdateVerifiedOpportunityMethod({ username: studentDoc.username,
-                        existingFeedID: Feeds.checkPastDayFeed('verified-opportunity', opportunityID) }, (err2) => {
-                        if (err2) {
-                          console.log('Error updating Verified Opportunity Feed', err2);
-                        }
-                      });
-                    } else {
-                      const feedDefinition = {
-                        user: [studentDoc.username],
-                        opportunity: opportunitySlug,
-                        semester: semesterSlug,
-                        feedType: 'verified-opportunity',
-                      };
-                      feedsDefineNewVerifiedOpportunityMethod.call(feedDefinition);
-                    }
+                    const feedData = { feedType: 'verified-opportunity', user: studentDoc.username,
+                      opportunity: opportunitySlug, semester: semesterSlug };
+                    defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
                   }
                 });
           }
@@ -122,24 +104,9 @@ Template.Verification_Event.events({
                 console.log('Error updating VerificationRequest status', err);
               }
             });
-            if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
-              feedsUpdateVerifiedOpportunityMethod.call({
-                username: studentDoc.username,
-                existingFeedID: Feeds.checkPastDayFeed('verified-opportunity', opportunityID),
-              }, (err1) => {
-                if (err1) {
-                  console.log('Error updating verified opportunity feed', err1);
-                }
-              });
-            } else {
-              const feedDefinition = {
-                user: [studentDoc.username],
-                opportunity: opportunitySlug,
-                semester: semesterSlug,
-                feedType: 'verified-opportunity',
-              };
-              feedsDefineNewVerifiedOpportunityMethod.call(feedDefinition);
-            }
+            const feedData = { feedType: 'verified-opportunity', user: studentDoc.username,
+              opportunity: opportunitySlug, semester: semesterSlug };
+            defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
           }
         });
       }
