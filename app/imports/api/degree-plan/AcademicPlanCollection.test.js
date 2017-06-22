@@ -53,6 +53,7 @@ if (Meteor.isServer) {
         slug, degreeSlug, name: description, semester, coursesPerSemester, courseList,
       });
       expect(AcademicPlans.isDefined(docID)).to.be.true;
+      expect(AcademicPlans.findIdBySlug(slug)).to.be.defined;
       const dumpObject = AcademicPlans.dumpOne(docID);
       AcademicPlans.removeIt(docID);
       expect(AcademicPlans.isDefined(docID)).to.be.false;
