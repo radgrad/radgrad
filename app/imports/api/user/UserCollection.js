@@ -234,7 +234,8 @@ class UserCollection extends BaseSlugCollection {
     const userID = this.getID(user);
     const courseInstanceCount = CourseInstances.find({ studentID: userID }).count();
     const opportunityInstanceCount = OpportunityInstances.find({ studentID: userID }).count();
-    return (courseInstanceCount + opportunityInstanceCount) > 0;
+    const opportunityCount = Opportunities.find({ sponsorID: userID }).count();
+    return (courseInstanceCount + opportunityInstanceCount + opportunityCount) > 0;
   }
 
 
