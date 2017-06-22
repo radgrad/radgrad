@@ -112,7 +112,7 @@ class UserCollection extends BaseSlugCollection {
    */
   define({
       firstName, lastName, slug, email, role, password,
-      picture = '/images/default-profile-picture.png', interests, careerGoals, desiredDegree,
+      picture = '/images/default-profile-picture.png', interests, careerGoals, desiredDegree, academicPlan = undefined,
       website, uhID, level = 1, hiddenCourses = [], hiddenOpportunities = [], declaredSemester = undefined,
   }) {
     // Users can only be defined on the server side.
@@ -128,6 +128,14 @@ class UserCollection extends BaseSlugCollection {
 
       // desiredDegree is optional.
       const desiredDegreeID = (desiredDegree) ? DesiredDegrees.getID(desiredDegree) : undefined;
+      // academicPlan is optional.
+      let academicPlanID;
+      if (academicPlan) {
+        const acaSlugID = Slugs.findDoc({ name: academicPlan })._id;
+        const plan = AcademicPlans.findDoc({ slugID: acaSlugID });
+        academicPlanID = plan._id;
+      }
+      // console.log(academicPlan, academicPlanID);
       // declaredSemester is optional.
       const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;
       // Now define the user.
@@ -145,8 +153,8 @@ class UserCollection extends BaseSlugCollection {
       Meteor.users.update(userID, {
         $set: {
           username: slug, firstName, lastName, slugID, email, picture, website, password,
-          desiredDegreeID, interestIDs, careerGoalIDs, uhID, level, hiddenCourseIDs, hiddenOpportunityIDs,
-          declaredSemesterID,
+          desiredDegreeID, academicPlanID, interestIDs, careerGoalIDs, uhID, level, hiddenCourseIDs,
+          hiddenOpportunityIDs, declaredSemesterID,
         },
       });
 
@@ -677,13 +685,14 @@ class UserCollection extends BaseSlugCollection {
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
     const desiredDegree = doc.desiredDegreeID && DesiredDegrees.findSlugByID(doc.desiredDegreeID);
+    const academicPlan = doc.academicPlanID && AcademicPlans.findSlugByID(doc.academicPlanID);
     const level = doc.level;
     const hiddenCourses = _.map(doc.hiddenCourseIDs, hiddenCourseID => Courses.findSlugByID(hiddenCourseID));
     const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs, hiddenOpportunityID =>
         Opportunities.findSlugByID(hiddenOpportunityID));
 
     return { firstName, lastName, slug, email, password, role, uhID, picture, website, interests, careerGoals,
-      desiredDegree, level, hiddenCourses, hiddenOpportunities };
+      desiredDegree, academicPlan, level, hiddenCourses, hiddenOpportunities };
   }
 
 }

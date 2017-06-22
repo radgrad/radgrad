@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseCollection from '../base/BaseCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 
 import { DesiredDegrees } from './DesiredDegreeCollection';
 import { Semesters } from '../semester/SemesterCollection';
@@ -10,17 +10,18 @@ import { Slugs } from '../slug/SlugCollection';
 
 /**
  * AcademicPlans holds the different academic plans possible in this department.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseSlugCollection
  */
-class AcademicPlanCollection extends BaseCollection {
+class AcademicPlanCollection extends BaseSlugCollection {
 
   /**
    * Creates the AcademicPlan collection.
    */
   constructor() {
     super('AcademicPlan', new SimpleSchema({
-      degreeID: { type: SimpleSchema.RegEx.Id },
       name: { type: String },
+      slugID: { type: SimpleSchema.RegEx.Id },
+      degreeID: { type: SimpleSchema.RegEx.Id },
       effectiveSemesterID: { type: SimpleSchema.RegEx.Id },
       coursesPerSemester: { type: Array, minCount: 12, maxCount: 12 },
       'coursesPerSemester.$': Number,
@@ -34,13 +35,16 @@ class AcademicPlanCollection extends BaseCollection {
   /**
    * Defines an AcademicPlan.
    * @example
-   *     AcademicPlans.define({ degreeSlug: 'bs-cs',
+   *     AcademicPlans.define({
+   *                        slug: 'bs-cs-2016',
+   *                        degreeSlug: 'bs-cs',
    *                        name: 'B.S. in Computer Science'
    *                        semester: 'Spring-2016',
    *                        coursesPerSemester: [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0],
    *                        courseList: ['ics111-1', 'ics141-1, 'ics211-1', 'ics241-1', 'ics311-1', 'ics314-1',
    *                                     'ics212-1', 'ics321-1', 'ics313,ics361-1', 'ics312,ics331-1', 'ics332-1',
    *                                     'ics400+-1', 'ics400+-2', 'ics400+-3', 'ics400+-4', 'ics400+-5'] })
+   * @param slug The slug for the academic plan.
    * @param degreeSlug The slug for the desired degree.
    * @param name The name of the academic plan.
    * @param semester the slug for the semester.
@@ -48,15 +52,17 @@ class AcademicPlanCollection extends BaseCollection {
    * @param courseList an array of PlanChoices. The choices for each course.
    * @returns {*}
    */
-  define({ degreeSlug, name, semester, coursesPerSemester, courseList }) {
+  define({ slug, degreeSlug, name, semester, coursesPerSemester, courseList }) {
     const degreeID = Slugs.getEntityID(degreeSlug, 'DesiredDegree');
     const effectiveSemesterID = Semesters.getID(semester);
     const doc = this._collection.findOne({ degreeID, name, effectiveSemesterID });
     if (doc) {
       return doc._id;
     }
+    // Get SlugID, throw error if found.
+    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     return this._collection.insert({
-      degreeID, name, effectiveSemesterID, coursesPerSemester, courseList,
+      slugID, degreeID, name, effectiveSemesterID, coursesPerSemester, courseList,
     });
   }
 
@@ -84,6 +90,7 @@ class AcademicPlanCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
+    const slug = Slugs.getNameFromID(doc.slugID);
     const degree = DesiredDegrees.findDoc(doc.degreeID);
     const degreeSlug = Slugs.findDoc(degree.slugID).name;
     const name = doc.name;
@@ -91,7 +98,7 @@ class AcademicPlanCollection extends BaseCollection {
     const semester = Slugs.findDoc(semesterDoc.slugID).name;
     const coursesPerSemester = doc.coursesPerSemester;
     const courseList = doc.courseList;
-    return { degreeSlug, name, semester, coursesPerSemester, courseList };
+    return { slug, degreeSlug, name, semester, coursesPerSemester, courseList };
   }
 
 }
