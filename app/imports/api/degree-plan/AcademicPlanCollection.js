@@ -61,9 +61,12 @@ class AcademicPlanCollection extends BaseSlugCollection {
     }
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    return this._collection.insert({
+    const planID = this._collection.insert({
       slugID, degreeID, name, effectiveSemesterID, coursesPerSemester, courseList,
     });
+    // Connect the Slug to this AcademicPlan.
+    Slugs.updateEntityID(slugID, planID);
+    return planID;
   }
 
   /**
