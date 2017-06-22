@@ -225,7 +225,7 @@ class UserCollection extends BaseSlugCollection {
 
   /**
    * Returns true if userID is referenced by other entities.
-   * Currently checks courseInstances and opportunityInstances.
+   * Currently checks courseInstances, opportunityInstances, and opportunities.
    * Used to determine if this userID can be deleted.
    * @param user The user ID.
    * @returns {boolean} True if this user is referenced elsewhere.
