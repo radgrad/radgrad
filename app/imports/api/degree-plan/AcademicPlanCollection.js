@@ -44,6 +44,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    *                        courseList: ['ics111-1', 'ics141-1, 'ics211-1', 'ics241-1', 'ics311-1', 'ics314-1',
    *                                     'ics212-1', 'ics321-1', 'ics313,ics361-1', 'ics312,ics331-1', 'ics332-1',
    *                                     'ics400+-1', 'ics400+-2', 'ics400+-3', 'ics400+-4', 'ics400+-5'] })
+   * @param slug The slug for the academic plan.
    * @param degreeSlug The slug for the desired degree.
    * @param name The name of the academic plan.
    * @param semester the slug for the semester.
