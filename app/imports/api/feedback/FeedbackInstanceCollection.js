@@ -1,11 +1,10 @@
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
-import { Feedbacks } from '../feedback/FeedbackCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
-
 
 /** @module api/feedback/FeedbackInstanceCollection */
 
@@ -20,16 +19,12 @@ class FeedbackInstanceCollection extends BaseCollection {
    */
   constructor() {
     super('FeedbackInstance', new SimpleSchema({
-      feedbackID: { type: SimpleSchema.RegEx.Id },
       userID: { type: SimpleSchema.RegEx.Id },
-      description: { type: String },
-      area: { type: String },
+      functionName: String,
+      description: String,
+      feedbackType: String,
     }));
-    this.INTERESTS = 'Interests';
-    this.ICE = 'ICE';
-    this.STAR = 'STAR';
-    this.DegreePlan = 'DegreePlan';
-    this.AREAS = [this.INTERESTS, this.ICE, this.STAR, this.DegreePlan];
+    this.feedbackTypes = ['Recommendation', 'Warning'];
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, userID: 1 });
     }
@@ -38,28 +33,43 @@ class FeedbackInstanceCollection extends BaseCollection {
   /**
    * Defines a new FeedbackInstance.
    * @example
-   * FeedbackInstances.define({ feedback: 'CourseRecommendationsBasedOnInterests',
-   *                            user: 'joesmith',
-    *                           description: 'We recommend ICS 314 based on your interest in software engineering',
-     *                          area: 'Interests' });
-   * @param { Object } Requires feedback, the user slug or ID, the feedback string returned from the
-   * feedback function, and area.
-   * @throws {Meteor.Error} If the slugs or IDs cannot be resolved correctly.
+   * FeedbackInstances.define({ user: 'joesmith',
+   *                            functionName: 'checkPrerequisites',
+   *                            description: 'The prerequisite ICS 211 for the class ICS 314 is not satisfied.',
+   *                            feedbackType: 'Warning' });
+   * @param { Object } User, functionName, description, and feedbackType are all required.
+   * user must be a username or docID for a user (presumably a student).
+   * functionName is the name of a feedback function.
+   * Description is the string to appear as the feedback.
+   * feedbackType is either 'Recommendation' or 'Warning'.
+   * @throws {Meteor.Error} If user or feedbackType cannot be resolved.
    * @returns The newly created docID.
    */
 
-  define({ feedback, user, description, area }) {
+  define({ user, functionName, description, feedbackType }) {
     // Validate Feedback and user.
-    const feedbackID = Feedbacks.getID(feedback);
     const userID = Users.getID(user);
+    if (!_.includes(this.feedbackTypes, feedbackType)) {
+      throw new Meteor.Error(`FeedbackInstances.define passed illegal feedbackType: ${feedbackType}`);
+    }
     // Define and return the new FeedbackInstance
-    const feedbackInstanceID = this._collection.insert({ feedbackID, userID, description, area });
+    const feedbackInstanceID = this._collection.insert({ userID, functionName, description, feedbackType });
     return feedbackInstanceID;
   }
 
   /**
+   * Removes all FeedbackInstances associated with user and functionName.
+   * @param user The user (typically a student).
+   * @param functionName The FeedbackFunction name.
+   */
+  clear(user, functionName) {
+    const userID = Users.getID(user);
+    this._collection.remove({ userID, functionName });
+  }
+
+  /**
    * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
-   * Student.
+   * user.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
    * @param userId The userId of the logged in user. Can be null or undefined
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
@@ -77,7 +87,7 @@ class FeedbackInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return instance._collection.find({ userID: this.userId });
@@ -88,15 +98,12 @@ class FeedbackInstanceCollection extends BaseCollection {
   /**
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.
-   * Checks feedbackID and userID.
+   * Checks userID
    * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
    */
   checkIntegrity() {
     const problems = [];
     this.find().forEach(doc => {
-      if (!Feedbacks.isDefined(doc.feedbackID)) {
-        problems.push(`Bad feedbackID: ${doc.feedbackID}`);
-      }
       if (!Users.isDefined(doc.userID)) {
         problems.push(`Bad userID: ${doc.userID}`);
       }
@@ -111,11 +118,11 @@ class FeedbackInstanceCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const feedback = Feedbacks.findSlugByID(doc.feedbackID);
     const user = Users.findSlugByID(doc.userID);
+    const functionName = doc.functionName;
     const description = doc.description;
-    const area = doc.area;
-    return { feedback, user, description, area };
+    const feedbackType = doc.feedbackType;
+    return { user, functionName, description, feedbackType };
   }
 
 }

@@ -1,12 +1,10 @@
-// import { check } from 'meteor/check';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
 import { Feedbacks } from './FeedbackCollection';
-import { FeedbackInstances } from './FeedbackInstanceCollection';
-import { feedbackInstancesDefineMethod, feedbackInstancesRemoveItMethod } from './FeedbackInstanceCollection.methods';
+import { feedbackInstancesDefineMethod, clearFeedbackInstancesMethod } from './FeedbackInstanceCollection.methods';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import * as courseUtils from '../course/CourseUtilities';
@@ -20,66 +18,33 @@ import { Users } from '../user/UserCollection';
 
 /* eslint-disable class-methods-use-this */
 
-function getPosition(string, subString, index) {
-  return string.split(subString, index).join(subString).length;
-}
-
-function getBasePath(studentID) {
-  let basePath = '';
-  if (FlowRouter.current()) {
-    const currentRoute = FlowRouter.current().path;
-    if (currentRoute.startsWith('/advisor')) {
-      const student = Users.findDoc(studentID);
-      basePath = `/student/${student.username}/`;
-    } else {
-      const index = getPosition(currentRoute, '/', 3);
-      basePath = currentRoute.substring(0, index + 1);
-    }
-  }
-  return basePath;
-}
-
 /**
- * A class containing Feedback functions. Each Feedback function is a method on the singleton instance
- * FeedbackFunctions.
+ * Provides FeedbackFunctions. Each FeedbackFunction is a method of the singleton instance FeedbackFunctions.
+ * Each FeedbackFunction accepts a studentID and updates the FeedbackInstanceCollection based upon the current state
+ * of the student. Normally, the FeedbackFunction will first delete any FeedbackInstances it previously created
+ * for that student (if any), then add new ones if appropriate.
+ *
+ * Note that FeedbackFunctions call Meteor Methods to define and delete FeedbackInstances, so these functions must
+ * be called on the client side.
  * @example
  * import { FeedbackFunctions } from '../feedback/FeedbackFunctions';
- * :
- * :
+ *   :
  * FeedbackFunctions.recommendedCoursesThisSemesterByInterest(studentID);
  * @class FeedbackFunctions
+ *
  */
 export class FeedbackFunctionClass {
-  /**
-   * Clears the feedback instances.
-   * @param studentID
-   * @param area
-   * @private
-   */
-  clearFeedbackInstances(studentID, area) {
-    const userID = studentID;
-    const instances = FeedbackInstances.find({ userID, area }).fetch();
-    // console.log(`found ${instances.length} feedback instances for ${studentID} ${area}`);
-    _.forEach(instances, (fi) => {
-      feedbackInstancesRemoveItMethod.call({ id: fi._id }, (error) => {
-        if (error) {
-          console.log('Error during FeedbackInstance removeIt: ', error);
-        }
-      });
-    });
-  }
 
   /**
    * Checks the student's degree plan to ensure that all the prerequisites are met.
    * @param studentID the student's ID.
    */
   checkPrerequisites(studentID) {
-    // console.log('checkPrerequisites');
-    const f = Feedbacks.find({ name: 'Prerequisite missing' }).fetch()[0];
-    const feedback = Slugs.getNameFromID(f.slugID, 'Feedback');
-    const area = `ffn-${feedback}`;
+    // First clear any feedback instances previously created for this student.
+    clearFeedbackInstancesMethod.call({ studentID, functionName: 'checkPrerequisites' });
+
+
     const currentSemester = Semesters.getCurrentSemesterDoc();
-    this.clearFeedbackInstances(studentID, area);
     const cis = CourseInstances.find({ studentID }).fetch();
     cis.forEach((ci) => {
       const semester = Semesters.findDoc(ci.semesterID);
@@ -104,10 +69,8 @@ export class FeedbackFunctionClass {
                   const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is ` +
                       `after or in ${semesterName2}.`;
                   feedbackInstancesDefineMethod.call({
-                    feedback,
-                    user: studentID,
                     description,
-                    area,
+                    user: studentID,
                   }, (error) => {
                     if (error) {
                       console.log('Error during FeedbackInstance define: ', error);
@@ -119,10 +82,8 @@ export class FeedbackFunctionClass {
               const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
                   ' not found.';
               feedbackInstancesDefineMethod.call({
-                feedback,
-                user: studentID,
                 description,
-                area,
+                user: studentID,
               }, (error) => {
                 if (error) {
                   console.log('Error during FeedbackInstance define: ', error);
@@ -159,7 +120,7 @@ export class FeedbackFunctionClass {
     courses = this._missingCourses(courseIDs, courses);
     if (courses.length > 0) {
       let description = 'Your degree plan is missing: \n\n';
-      const basePath = getBasePath(studentID);
+      const basePath = this._getBasePath(studentID);
       _.map(courses, (slug) => {
         if (!planUtils.isSingleChoice(slug)) {
           const slugs = planUtils.complexChoiceToArray(slug);
@@ -270,7 +231,7 @@ export class FeedbackFunctionClass {
       // if (missing.length > 1) {
       //   description = 'Consider taking the following classes to meet the degree requirement: ';
       // }
-      const basePath = getBasePath(studentID);
+      const basePath = this._getBasePath(studentID);
       const slug = missing[0];
       // _.map(missing, (slug) => {
       if (Array.isArray(slug)) {
@@ -331,7 +292,7 @@ export class FeedbackFunctionClass {
     });
     if (this._missingCourses(courseIDs, coursesNeeded).length > 0) {
       let bestChoices = courseUtils.bestStudent400LevelCourses(studentID, coursesTakenSlugs);
-      const basePath = getBasePath(studentID);
+      const basePath = this._getBasePath(studentID);
       if (bestChoices) {
         const len = bestChoices.length;
         if (len > 5) {
@@ -372,7 +333,7 @@ export class FeedbackFunctionClass {
     const area = `ffn-${feedback}`;
     this.clearFeedbackInstances(studentID, area);
     let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(studentID);
-    const basePath = getBasePath(studentID);
+    const basePath = this._getBasePath(studentID);
     const semesterID = Semesters.getCurrentSemester();
     const oppInstances = OpportunityInstances.find({ studentID, semesterID }).fetch();
     if (oppInstances.length === 0) {  // only make suggestions if there are no opportunities planned.
@@ -415,7 +376,7 @@ export class FeedbackFunctionClass {
     this.clearFeedbackInstances(studentID, area);
     const student = Users.findDoc(studentID);
     // Need to build the route not use current route since might be the Advisor.
-    const basePath = getBasePath(studentID);
+    const basePath = this._getBasePath(studentID);
     let description = 'Getting to the next Level: ';
     switch (student.level) {
       case 0:
@@ -475,10 +436,29 @@ export class FeedbackFunctionClass {
     });
     return planChoices;
   }
+
+  _getBasePath(studentID) {
+    const getPosition = function (string, subString, index) {
+      return string.split(subString, index).join(subString).length;
+    };
+    let basePath = '';
+    if (FlowRouter.current()) {
+      const currentRoute = FlowRouter.current().path;
+      if (currentRoute.startsWith('/advisor')) {
+        const student = Users.findDoc(studentID);
+        basePath = `/student/${student.username}/`;
+      } else {
+        const index = getPosition(currentRoute, '/', 3);
+        basePath = currentRoute.substring(0, index + 1);
+      }
+    }
+    return basePath;
+  }
 }
 
 /**
  * Singleton instance for all FeedbackFunctions.
  * @type {FeedbackFunctionClass}
  */
-export const FeedbackFunctions = new FeedbackFunctionClass();
+export const
+    FeedbackFunctions = new FeedbackFunctionClass();

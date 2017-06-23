@@ -5,6 +5,20 @@ import { FeedbackInstances } from './FeedbackInstanceCollection';
 /** @module api/feedback/FeedbackInstanceCollectionMethods */
 
 /**
+ * Custom method for removing all the instances associated with a student and feedback function.
+ */
+export const clearFeedbackInstancesMethod = new ValidatedMethod({
+  name: 'FeedbackInstances.clear',
+  validate: null,
+  run({ studentID, functionName }) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to clear FeedbackInstances.');
+    }
+    return FeedbackInstances.clear(studentID, functionName);
+  },
+});
+
+/**
  * The Validated method for defining FeedbackInstances.
  */
 export const feedbackInstancesDefineMethod = new ValidatedMethod({
