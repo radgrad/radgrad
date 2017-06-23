@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('TeaserCollection Meteor Methods', function test() {
-    const collectionName = 'TeaserCollection';
+    const collectionName = Teasers.getCollectionName();
     const definitionData = {
       title: 'name',
       slug: 'opportunity-slug-example',

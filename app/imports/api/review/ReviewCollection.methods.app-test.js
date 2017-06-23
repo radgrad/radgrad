@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('ReviewCollection Meteor Methods', function test() {
-    const collectionName = 'ReviewCollection';
+    const collectionName = Reviews.getCollectionName();
     // Note that we allow the slug to be defined by default.
     const definitionData = {
       student: 'abi',

@@ -4,6 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { planChoicesDefineMethod } from '../../../api/degree-plan/PlanChoiceCollection.methods';
@@ -191,7 +192,7 @@ Template.Academic_Plan_Builder_Widget.events({
       const semester = `Fall-${newData.year}`;
       const coursesPerSemester = [];
       const courseList = [];
-      const collectionName = 'AcademicPlanCollection';
+      const collectionName = AcademicPlans.getCollectionName();
       let slug = `${name} ${newData.year}`;
       slug = `${slugify(slug)}`;
       const ays = instance.$('.academicYear');
