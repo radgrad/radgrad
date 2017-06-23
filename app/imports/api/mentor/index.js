@@ -1,5 +1,4 @@
 import './MentorAnswerCollection';
-import './MentorAnswerCollection.methods';
 
 import './MentorProfileCollection';
 import './MentorProfileCollection.methods';

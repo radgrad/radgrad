@@ -16,8 +16,8 @@ class MentorQuestionCollection extends BaseSlugCollection {
    */
   constructor() {
     super('MentorQuestion', new SimpleSchema({
-      title: { type: String },
-      slugID: { type: SimpleSchema.RegEx.Id, optional: true },  // TODO: Eliminate slugID from this collection.
+      question: { type: String },
+      slugID: { type: SimpleSchema.RegEx.Id, optional: true },
       studentID: { type: SimpleSchema.RegEx.Id },
       moderated: { type: Boolean },
       visible: { type: Boolean },
@@ -27,23 +27,18 @@ class MentorQuestionCollection extends BaseSlugCollection {
 
   /**
    * Defines a new MentorSpace question.
-   * @param title the question.
+   * @param question the question.
    * @param slug A unique identifier for this question.
    * @param student The student that asked this question.
    * @param moderated If the question is moderated. Defaults to false.
    * @param visible If the question is visible. Defaults to false.
    * @return { String } the docID of this question.
    */
-  define({ title, slug, student, moderated = false, visible = false, moderatorComments = '' }) {
+  define({ question, slug, student, moderated = false, visible = false, moderatorComments = '' }) {
     const studentID = Users.getID(student);
-    let slugID;
-    if (slug) {
-      slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    }
-    const docID = this._collection.insert({ title, slugID, studentID, moderated, visible, moderatorComments });
-    if (slug) {
-      Slugs.updateEntityID(slugID, docID);
-    }
+    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
+    const docID = this._collection.insert({ question, slugID, studentID, moderated, visible, moderatorComments });
+    Slugs.updateEntityID(slugID, docID);
     return docID;
   }
 
@@ -88,14 +83,14 @@ class MentorQuestionCollection extends BaseSlugCollection {
   }
 
   /**
-   * Updates the MentorQuestion's title, visible, and moderated variables.
+   * Updates the MentorQuestion's question, visible, and moderated variables.
    * @param questionID The MentorQuestion ID.
-   * @param title The new title value.
+   * @param question The new question value.
    */
-  updateQuestion(questionID, title) {
+  updateQuestion(questionID, question) {
     this.assertDefined(questionID);
     this._collection.update({ _id: questionID },
-        { $set: { title, moderated: false, visible: false } });
+        { $set: { question, moderated: false, visible: false } });
   }
 
   /**
@@ -140,7 +135,7 @@ class MentorQuestionCollection extends BaseSlugCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const title = doc.title;
+    const question = doc.question;
     let slug;
     if (doc.slugID) {
       slug = Slugs.getNameFromID(doc.slugID);
@@ -149,7 +144,7 @@ class MentorQuestionCollection extends BaseSlugCollection {
     const moderated = doc.moderated;
     const visible = doc.visible;
     const moderatorComments = doc.moderatorComments;
-    return { title, slug, student, moderated, visible, moderatorComments };
+    return { question, slug, student, moderated, visible, moderatorComments };
   }
 }
 
