@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('HelpMessageCollection Meteor Methods', function test() {
-    const collectionName = 'HelpMessageCollection';
+    const collectionName = HelpMessages.getCollectionName();
     const routeName = 'Admin_Database_Dump_Page';
     const definitionData = {
       routeName,

@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('CareerGoalCollection Meteor Methods', function test() {
-    const collectionName = 'CareerGoalCollection';
+    const collectionName = CareerGoals.getCollectionName();
     const definitionData = {
       name: 'name',
       slug: 'career-goal-slug-example',

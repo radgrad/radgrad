@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('AcademicPlanCollection Meteor Methods', function test() {
-    const collectionName = 'AcademicPlanCollection';
+    const collectionName = AcademicPlans.getCollectionName();
     const definitionData = {
       slug: 'bs-cs-2016',
       degreeSlug: 'bs-cs',

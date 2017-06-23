@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { Feeds } from './FeedCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -7,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('FeedCollection Meteor Methods', function test() {
-    const collectionName = 'FeedCollection';
+    const collectionName = Feeds.getCollectionName();
     let docID;
 
     before(function (done) {

@@ -1,6 +1,9 @@
+import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import BaseSlugCollection from '../base/BaseSlugCollection';
+import { AcademicPlans } from './AcademicPlanCollection';
 import { Slugs } from '../slug/SlugCollection';
+import { Users } from '../user/UserCollection';
 
 /** @module api/degree-plan/DesiredDegreeCollection */
 
@@ -42,6 +45,51 @@ class DesiredDegreeCollection extends BaseSlugCollection {
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, desiredDegreeID);
     return desiredDegreeID;
+  }
+
+  /**
+   * Update a DesiredDegree.
+   * @param instance The docID (or slug) associated with this degree.
+   * @param name the name of this degree.
+   * @param shortName the short name of this degree.
+   * @param description the description of this degree.
+   */
+  update(instance, { name, shortName, description }) {
+    const docID = this.getID(instance);
+    const updateData = {};
+    if (name) {
+      updateData.name = name;
+    }
+    if (shortName) {
+      updateData.shortName = shortName;
+    }
+    if (description) {
+      updateData.description = description;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the DesiredDegree.
+   * @param instance The docID or slug of the entity to be removed.
+   * @throws { Meteor.Error } If docID is not a DesiredDegree, or if this degree has any associated academic plans or
+   * is referenced by any user.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // Check that this is not referenced by any AcademicPlans.
+    AcademicPlans.find().map(function (plan) {  // eslint-disable-line array-callback-return
+      if (plan.degreeID === docID) {
+        throw new Meteor.Error(`DesiredDegree ${instance} is referenced by a academic plan ${plan}.`);
+      }
+    });
+    Users.find().map(function (user) {  // eslint-disable-line array-callback-return
+      if (user.desiredDegreeID === docID) {
+        throw new Meteor.Error(`DesiredDegree ${instance} is referenced by a user ${user}.`);
+      }
+    });
+    // Now remove the DesiredDegree.
+    super.removeIt(docID);
   }
 
   /**

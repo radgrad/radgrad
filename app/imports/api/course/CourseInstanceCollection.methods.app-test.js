@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('CourseInstanceCollection Meteor Methods', function test() {
-    const collectionName = 'CourseInstanceCollection';
+    const collectionName = CourseInstances.getCollectionName();
     const semester = 'Spring-2017';
     const student = 'abi';
     const course = 'ics_111';
