@@ -46,13 +46,14 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne #checkIntegrity', function test() {
+    it('#define, #isDefined, #findIdBySlug, #removeIt, #dumpOne, #restoreOne #checkIntegrity', function test() {
       Semesters.define({ term: 'Spring', year: 2017 });
       DesiredDegrees.define({ name, shortName, slug: degreeSlug, description });
       const docID = AcademicPlans.define({
         slug, degreeSlug, name: description, semester, coursesPerSemester, courseList,
       });
       expect(AcademicPlans.isDefined(docID)).to.be.true;
+      expect(AcademicPlans.findIdBySlug(slug)).to.be.a('string');
       const dumpObject = AcademicPlans.dumpOne(docID);
       AcademicPlans.removeIt(docID);
       expect(AcademicPlans.isDefined(docID)).to.be.false;

@@ -10,7 +10,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('UserCollection Meteor Methods', function test() {
-    const collectionName = 'UserCollection';
+    const collectionName = Users.getCollectionName();
     const definitionData = {
       firstName: 'Joe',
       lastName: 'Smith',

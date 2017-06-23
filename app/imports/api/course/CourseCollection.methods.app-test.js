@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('CourseCollection Meteor Methods', function test() {
-    const collectionName = 'CourseCollection';
+    const collectionName = Courses.getCollectionName();
     const definitionData = {
       name: 'Introduction to the theory and practice of scripting',
       shortName: 'Intro to Scripting',

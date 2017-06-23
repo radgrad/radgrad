@@ -153,6 +153,14 @@ class BaseCollection {
   }
 
   /**
+   * Returns the collection name.
+   * @return {string} The collection name as a string.
+   */
+  getCollectionName() {
+    return this._collectionName;
+  }
+
+  /**
    * Returns a string representing all of the documents in this collection.
    * @returns {String}
    */

@@ -54,7 +54,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
     const username = getRouteUserName();
-    const collectionName = 'CourseInstanceCollection';
+    const collectionName = CourseInstances.getCollectionName();
     const definitionData = {
       semester: semSlug,
       course: courseSlug,
@@ -78,7 +78,7 @@ Template.Student_Explorer_Courses_Widget_Button.events({
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
     const semID = Semesters.getID(semSlug);
-    const collectionName = 'CourseInstanceCollection';
+    const collectionName = CourseInstances.getCollectionName();
     const ci = CourseInstances.find({
       studentID: getUserIdFromRoute(),
       courseID: course._id,

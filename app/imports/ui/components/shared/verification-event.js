@@ -40,7 +40,7 @@ Template.Verification_Event.events({
       const opportunityInstances = OpportunityInstances.find({ opportunityID, studentID }).fetch();
       let opportunityInstance = null;
       if (opportunityInstances.length === 0) { // student didn't plan on attending in degree plan
-        const collectionName = 'OpportunityInstanceCollection';
+        const collectionName = OpportunityInstances.getCollectionName();
         const definitionData = { student, semester: semesterSlug, verified: true, opportunity: opportunitySlug };
         defineMethod.call({ collectionName, definitionData }, (error, result) => {
           if (error) {

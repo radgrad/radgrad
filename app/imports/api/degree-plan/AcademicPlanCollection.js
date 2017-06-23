@@ -1,10 +1,12 @@
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
 import { DesiredDegrees } from './DesiredDegreeCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
+import { Users } from '../user/UserCollection';
 
 /** @module api/degree-plan/AcademicPlanCollection */
 
@@ -61,9 +63,75 @@ class AcademicPlanCollection extends BaseSlugCollection {
     }
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    return this._collection.insert({
+    const planID = this._collection.insert({
       slugID, degreeID, name, effectiveSemesterID, coursesPerSemester, courseList,
     });
+    // Connect the Slug to this AcademicPlan.
+    Slugs.updateEntityID(slugID, planID);
+    return planID;
+  }
+
+  /**
+   * Updates the AcademicPlan, instance.
+   * @param instance the docID or slug associated with this AcademicPlan.
+   * @param degreeSlug the slug for the DesiredDegree that this plan satisfies.
+   * @param name the name of this AcademicPlan.
+   * @param semester the first semester this plan is effective.
+   * @param coursesPerSemester an array of the number of courses per semester.
+   * @param courseList an array of PlanChoices, the choices for each course.
+   */
+  update(instance, { degreeSlug, name, semester, coursesPerSemester, courseList }) {
+    const docID = this.getID(instance);
+    const updateData = {};
+    if (degreeSlug) {
+      updateData.degreeID = DesiredDegrees.getID(degreeSlug);
+    }
+    if (name) {
+      updateData.name = name;
+    }
+    if (semester) {
+      updateData.effectiveSemesterID = Semesters.getID(semester);
+    }
+    if (coursesPerSemester) {
+      if (!Array.isArray(coursesPerSemester)) {
+        throw new Meteor.Error(`CoursesPerSemester ${coursesPerSemester} is not an Array.`);
+      }
+      _.forEach(coursesPerSemester, (cps) => {
+        if (!_.isNumber(cps)) {
+          throw new Meteor.Error(`CoursePerSemester ${cps} is not a Number.`);
+        }
+      });
+      updateData.coursesPerSemester = coursesPerSemester;
+    }
+    if (courseList) {
+      if (!Array.isArray(courseList)) {
+        throw new Meteor.Error(`CourseList ${courseList} is not an Array.`);
+      }
+      _.forEach(courseList, (pc) => {
+        if (!_.isString(pc)) {
+          throw new Meteor.Error(`CourseList ${pc} is not a PlanChoice.`);
+        }
+      });
+      updateData.courseList = courseList;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the AcademicPlan.
+   * @param instance The docID or slug of the entity to be removed.
+   * @throws { Meteor.Error } If docID is not an AcademicPlan, or if this plan is referenced by a User.
+   */
+  removeIt(instance) {
+    const docID = this.getID(instance);
+    // Check that no student is using this AcademicPlan.
+    Users.find().map(function (user) { // eslint-disable-line array-callback-return
+      if (user.academicPlanID === docID) {
+        throw new Meteor.Error(`AcademicPlan ${instance} is referenced by a User ${user}.`);
+      }
+    });
+    // Now remove the AcademicPlan.
+    super.removeIt(docID);
   }
 
   /**

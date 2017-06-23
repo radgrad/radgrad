@@ -90,7 +90,7 @@ Template.Semester_List_2.events({
         if (Slugs.isSlugForEntity(slug, 'Course')) {
           const courseID = Slugs.getEntityID(slug, 'Course');
           const course = Courses.findDoc(courseID);
-          const collectionName = 'CourseInstanceCollection';
+          const collectionName = CourseInstances.getCollectionName();
           const definitionData = {
             semester: semSlug,
             course: slug,
@@ -114,7 +114,7 @@ Template.Semester_List_2.events({
           if (Slugs.isSlugForEntity(slug, 'Opportunity')) {
             const opportunityID = Slugs.getEntityID(slug, 'Opportunity');
             const semesterID = Template.instance().localState.get('semester')._id;
-            const collectionName = 'OpportunityInstanceCollection';
+            const collectionName = OpportunityInstances.getCollectionName();
             const definitionData = {
               semester: semSlug,
               opportunity: slug,
@@ -136,7 +136,7 @@ Template.Semester_List_2.events({
         const semesterID = Template.instance().localState.get('semester')._id;
         if (CourseInstances.isDefined(id)) {
           // There's gotta be a better way of doing this.
-          const collectionName = 'CourseInstanceCollection';
+          const collectionName = CourseInstances.getCollectionName();
           const updateData = {};
           _.mapKeys(CourseInstances.findDoc(id), (value, key) => {
             if (key !== '_id') {
@@ -158,7 +158,7 @@ Template.Semester_List_2.events({
         } else
           if (OpportunityInstances.isDefined(id)) {
             // There's gotta be a better way of doing this.
-            const collectionName = 'OpportunityInstanceCollection';
+            const collectionName = OpportunityInstances.getCollectionName();
             const updateData = {};
             _.mapKeys(OpportunityInstances.findDoc(id), (value, key) => {
               if (key !== '_id') {
