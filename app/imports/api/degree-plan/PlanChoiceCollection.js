@@ -36,6 +36,19 @@ class PlanChoiceCollection extends BaseCollection {
   }
 
   /**
+   * Updates this PlanChoice.
+   * @param docID The docID associated with this plan choice.
+   * @param choice the updated choice.
+   */
+  update(docID, { choice }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (choice) {
+      updateData.choice = choice;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+  /**
    * Creates a human readable string representation of the choice.
    * @param planChoiceSlug
    * @returns {string}
