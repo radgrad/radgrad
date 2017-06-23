@@ -4,6 +4,7 @@ import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
+import { Users } from './UserCollection';
 
 
 /** @module api/user/ValidUserAccountCollection */
@@ -32,6 +33,16 @@ class ValidUserAccountCollection extends BaseCollection {
   define({ username }) {
     check(username, String);
     return this._collection.insert({ username });
+  }
+
+  /**
+   * Removes the ValidUserAccount entry referring to user.
+   * @param user The user, either the ID or the username.
+   * @throws { Meteor.Error } If user is not an ID or username.
+   */
+  removeUser(user) {
+    const username = Users.findDoc(user).username;
+    this._collection.remove({ username });
   }
 
   /**

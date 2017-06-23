@@ -6,19 +6,26 @@ import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
+import { AdvisorLogs } from '../log/AdvisorLogCollection';
+import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Feeds } from '../feed/FeedCollection';
+import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
 import { Interests } from '../interest/InterestCollection';
+import { MentorAnswers } from '../mentor/MentorAnswerCollection';
+import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { ROLE, assertRole } from '../role/Role';
+import { Reviews } from '../review/ReviewCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
 import { Slugs } from '../slug/SlugCollection';
-
+import { ValidUserAccounts } from './ValidUserAccountCollection';
+import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /** @module api/user/UserCollection */
 
@@ -174,8 +181,10 @@ class UserCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If docID is not defined, or if interests, careerGoals, level, hiddenCourses,
    * hiddenOpportunities, declaredSemester, or academicPlan are not valid.
    */
-  update(docID, { firstName, lastName, email, picture, website, password, desiredDegree, interests, careerGoals,
-  uhID, level, hiddenCourses, hiddenOpportunities, declaredSemester, academicPlan, role }) {
+  update(docID, {
+      firstName, lastName, email, picture, website, password, desiredDegree, interests, careerGoals,
+      uhID, level, hiddenCourses, hiddenOpportunities, declaredSemester, academicPlan, role,
+  }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -232,36 +241,42 @@ class UserCollection extends BaseSlugCollection {
   }
 
   /**
-   * Returns true if userID is referenced by other entities.
-   * Currently checks courseInstances, opportunityInstances, and opportunities.
+   * Returns true if userID is referenced by other "public" entities. Specifically:
+   *   * The user is a student and has published a review.
+   *   * The user is a mentor and has published an answer.
+   *   * The user is a student and has published a question.
+   *   * The user is a faculty member as has sponsored an opportunity.
    * Used to determine if this userID can be deleted.
+   * Note this doesn't test for references to CourseInstances, etc. These are "private" and will be deleted
+   * implicitly if this user is deleted.
    * @param user The user ID.
-   * @returns {boolean} True if this user is referenced elsewhere.
+   * @returns {boolean} True if this user is referenced "publically" elsewhere.
    */
   isReferenced(user) {
     const userID = this.getID(user);
-    const courseInstanceCount = CourseInstances.find({ studentID: userID }).count();
-    const opportunityInstanceCount = OpportunityInstances.find({ studentID: userID }).count();
-    const opportunityCount = Opportunities.find({ sponsorID: userID }).count();
-    return (courseInstanceCount + opportunityInstanceCount + opportunityCount) > 0;
+    const hasReviews = Reviews.find({ studentID: userID }).count();
+    const hasAnswers = MentorAnswers.find({ mentorID: userID }).count();
+    const hasQuestions = MentorQuestions.find({ studentID: userID }).count();
+    const hasOpportunities = Opportunities.find({ sponsorID: userID }).count();
+    return (hasReviews || hasAnswers || hasQuestions || hasOpportunities);
   }
 
-
   /**
-   * Removes the user, their slug, and any associated feeds. // TODO remove AcademicPlan?
+   * Removes the user, their slug, and any associated feeds.
    * @param user The username or docID associated with this user.
    * @throws { Meteor.Error } if the username is not defined, or if the user is referenced by other entities.
    */
   removeIt(user) {
     const docID = this.findDoc(user)._id;
     if (!this.isReferenced(docID)) {
-      // Now remove all mentions of this user from the Feed.
-      const feeds = Feeds.find({ userIDs: { $in: [docID] } }).fetch();
-      _.forEach(feeds, (f) => Feeds.removeIt(f._id));
-      // Now remove the user.
+      // Automatically remove references to user from other collections that are "private" to this user.
+      _.forEach([Feeds, CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances, AdvisorLogs,
+        VerificationRequests], collection => collection.removeUser(user));
+      // Now remove the user from this collection and from ValidUserAccounts.
+      ValidUserAccounts.removeUser(user);
       super.removeIt(user);
     } else {
-      throw new Meteor.Error(`Attempt to remove ${user} while course or opportunity instances remain.`);
+      throw new Meteor.Error(`Attempt to remove ${user} while references to public entities remain.`);
     }
   }
 
@@ -298,7 +313,6 @@ class UserCollection extends BaseSlugCollection {
     const user = this._collection.findOne({ _id: userID });
     return user.roles;
   }
-
 
   /**
    * Remove all users with the associated role.
@@ -545,6 +559,7 @@ class UserCollection extends BaseSlugCollection {
     const user = this._collection.findOne({ _id: studentID });
     return Slugs.getNameFromID(user.slugID);
   }
+
   /* eslint class-methods-use-this: "off" */
 
   /**
@@ -691,8 +706,10 @@ class UserCollection extends BaseSlugCollection {
     const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs, hiddenOpportunityID =>
         Opportunities.findSlugByID(hiddenOpportunityID));
 
-    return { firstName, lastName, slug, email, password, role, uhID, picture, website, interests, careerGoals,
-      desiredDegree, academicPlan, level, hiddenCourses, hiddenOpportunities };
+    return {
+      firstName, lastName, slug, email, password, role, uhID, picture, website, interests, careerGoals,
+      desiredDegree, academicPlan, level, hiddenCourses, hiddenOpportunities,
+    };
   }
 
 }

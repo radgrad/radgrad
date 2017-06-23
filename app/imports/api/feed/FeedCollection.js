@@ -364,6 +364,17 @@ class FeedCollection extends BaseCollection {
   }
 
   /**
+   * Removes all Feed documents referring to user.
+   * @param user The user, either the ID or the username.
+   * @throws { Meteor.Error } If user is not an ID or username.
+   */
+  removeUser(user) {
+    const userID = Users.getID(user);
+    // There could be some collateral damage here, but whatever.
+    this._collection.remove({ userIDs: { $in: [userID] } });
+  }
+
+  /**
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.
    * Checks slugID, userID, opportunityID, and courseID.

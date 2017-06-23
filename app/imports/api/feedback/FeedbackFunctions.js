@@ -43,7 +43,6 @@ export class FeedbackFunctionClass {
     // First clear any feedback instances previously created for this student.
     clearFeedbackInstancesMethod.call({ studentID, functionName: 'checkPrerequisites' });
 
-
     const currentSemester = Semesters.getCurrentSemesterDoc();
     const cis = CourseInstances.find({ studentID }).fetch();
     cis.forEach((ci) => {

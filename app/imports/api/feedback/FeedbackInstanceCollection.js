@@ -68,6 +68,16 @@ class FeedbackInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Removes all FeedbackInstance documents referring to user.
+   * @param user The user, either the ID or the username.
+   * @throws { Meteor.Error } If user is not an ID or username.
+   */
+  removeUser(user) {
+    const userID = Users.getID(user);
+    this._collection.remove({ userID });
+  }
+
+  /**
    * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
    * user.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.

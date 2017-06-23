@@ -4,10 +4,8 @@ import { Users } from '../user/UserCollection';
 import { InterestTypes } from '../interest/InterestTypeCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Interests } from '../interest/InterestCollection';
-import { CourseInstances } from '../course/CourseInstanceCollection';
 import { ROLE } from '../role/Role';
 import { removeAllEntities } from '../base/BaseUtilities';
-import { makeSampleCourseInstance } from '../course/SampleCourses';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
@@ -81,15 +79,6 @@ if (Meteor.isServer) {
       Users.removeIt(docID);
       Interests.removeIt(interestId);
       InterestTypes.removeIt('discipline');
-    });
-
-    it('#getCourseIDs', function test() {
-      const userID = Users.define({ firstName, lastName, slug, email, role, password });
-      const courseInstanceID = makeSampleCourseInstance(Users.findSlugByID(userID));
-      expect(Users.getCourseIDs(userID)).to.have.lengthOf(1);
-      expect(function foo() { Users.removeIt(userID); }).to.throw(Error);
-      CourseInstances.removeIt(courseInstanceID);
-      Users.removeIt(userID);
     });
 
     it('#getID', function test() {
