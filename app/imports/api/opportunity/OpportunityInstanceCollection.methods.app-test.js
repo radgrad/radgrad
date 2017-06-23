@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('OpportunityInstanceCollection Meteor Methods', function test() {
-    const collectionName = 'OpportunityInstanceCollection';
+    const collectionName = OpportunityInstances.getCollectionName();
     const semester = 'Spring-2017';
     const student = 'abi';
     const opportunity = 'acm-manoa';

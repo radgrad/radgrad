@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('OpportunityCollection Meteor Methods', function test() {
-    const collectionName = 'OpportunityCollection';
+    const collectionName = Opportunities.getCollectionName();
     const definitionData = {
       name: 'name',
       slug: 'opportunity-slug-example',

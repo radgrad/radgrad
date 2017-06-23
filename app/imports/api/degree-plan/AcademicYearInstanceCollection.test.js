@@ -34,6 +34,7 @@ if (Meteor.isServer) {
       expect(errors.length).to.equal(0);
       AcademicYearInstances.removeIt(docID);
     });
+
     it('#publish', function test(done) {
       const studentID = makeSampleUser();
       const collector = new PublicationCollector({ userID: studentID });
