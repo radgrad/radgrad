@@ -89,6 +89,14 @@ if (Meteor.isServer) {
       expect(Users.getCourseIDs(userID)).to.have.lengthOf(1);
       expect(function foo() { Users.removeIt(userID); }).to.throw(Error);
       CourseInstances.removeIt(courseInstanceID);
+      Users.removeIt(userID);
+    });
+
+    it('#getID', function test() {
+      const userID = Users.define({ firstName, lastName, slug, email, role, password });
+      expect(Users.getID(userID)).to.equal(userID);
+      expect(Users.getID(slug)).to.equal(userID);
+      expect(function foo() { Users.getID('foo'); }).to.throw(Error);
     });
   });
 }
