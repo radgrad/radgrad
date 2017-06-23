@@ -10,9 +10,9 @@ if (Meteor.isClient) {
   describe('DesiredDegreeCollection Meteor Methods', function test() {
     const collectionName = DesiredDegrees.getCollectionName();
     const definitionData = {
-      name: 'B.A. in Information and Computer Sciences',
-      shortName: 'B.A. ICS',
-      slug: 'ba-ics',
+      name: 'B.A. in Information and Computer Sciences Test',
+      shortName: 'B.A. ICS Test',
+      slug: 'ba-ics-test',
       description: 'The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline. You might find the BA degree of interest if you are also interested in biology, entrepreneurship, game design, graphic arts, financial engineering, foreign languages, or other disciplines.\n\nIn general, the BA requires you to complete the ICS core curriculum, plus three ICS 400-level courses, plus four upper division courses in a related area of concentration.\n\nFor more details, see the [ICS BA Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/ba-ics/).',
     };
 
