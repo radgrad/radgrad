@@ -1,4 +1,6 @@
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { MentorAnswers } from './MentorAnswerCollection';
 import { ROLE } from '../role/Role';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
@@ -40,6 +42,47 @@ class MentorQuestionCollection extends BaseSlugCollection {
     const docID = this._collection.insert({ question, slugID, studentID, moderated, visible, moderatorComments });
     Slugs.updateEntityID(slugID, docID);
     return docID;
+  }
+
+  /**
+   * Updates the moderator question.
+   * @param instance the id or slug (required).
+   * @param question the question (optional).
+   * @param student the student's id or username (optional).
+   * @param moderated boolean (optional).
+   * @param visible boolean (optional).
+   * @param moderatorComments string (optional).
+   */
+  update(instance, { question, student, moderated, visible, moderatorComments }) {
+    const docID = this.getID(instance);
+    const updateData = {};
+    if (question) {
+      updateData.question = question;
+    }
+    if (student) {
+      updateData.studentID = Users.getID(student);
+    }
+    if (_.isBoolean(moderated)) {
+      updateData.moderated = moderated;
+    }
+    if (_.isBoolean(visible)) {
+      updateData.visble = visible;
+    }
+    if (moderatorComments) {
+      updateData.moderatorComments = moderatorComments;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the course instance.
+   * @param docID The docID of the course instance.
+   */
+  removeIt(docID) {
+    this.assertDefined(docID);
+    // OK, clear to delete.
+    super.removeIt(docID);
+    MentorAnswers.removeQuestion(docID);
   }
 
   /**
@@ -111,22 +154,6 @@ class MentorQuestionCollection extends BaseSlugCollection {
     });
     return problems;
   }
-
-  // TODO: removeItNoSlug should not exist in BaseSlugCollection, so I've removed it.
-  // This class should be able to us the default removeIt inherited from the superclass.
-
-  // /**
-  //  * Removes the passed MentorQuestion and its associated Slug.
-  //  * @param opportunity The document or _id associated with this MentorQuestion.
-  //  * @throws {Meteor.Error} If MentorQuestion is not defined.
-  //  */
-  // removeIt(question) {
-  //   if (this.findDoc(question).slugID) {
-  //     super.removeIt(question);
-  //   } else {
-  //     super.removeItNoSlug(question);
-  //   }
-  // }
 
   /**
    * Returns an object representing the MentorQuestion docID in a format acceptable to define().
