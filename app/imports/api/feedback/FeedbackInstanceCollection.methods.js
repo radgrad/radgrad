@@ -10,11 +10,11 @@ import { FeedbackInstances } from './FeedbackInstanceCollection';
 export const clearFeedbackInstancesMethod = new ValidatedMethod({
   name: 'FeedbackInstances.clear',
   validate: null,
-  run({ studentID, functionName }) {
+  run({ user, functionName }) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to clear FeedbackInstances.');
     }
-    return FeedbackInstances.clear(studentID, functionName);
+    return FeedbackInstances.clear(user, functionName);
   },
 });
 

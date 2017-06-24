@@ -38,16 +38,16 @@ export class FeedbackFunctionClass {
 
   /**
    * Checks the student's degree plan to ensure that all the prerequisites are met.
-   * @param studentID the student's ID.
+   * @param user the student's ID.
    */
-  checkPrerequisites(studentID) {
+  checkPrerequisites(user) {
     const functionName = 'checkPrerequisites';
-    const userID = studentID;
     const feedbackType = FeedbackInstances.WARNING;
     const currentSemester = Semesters.getCurrentSemesterDoc();
+    const studentID = Users.getID(user);
 
     // First clear any feedback instances previously created for this student.
-    clearFeedbackInstancesMethod.call({ studentID, functionName });
+    clearFeedbackInstancesMethod.call({ user, functionName });
 
     // Now iterate through all the CourseInstances associated with this student.
     const cis = CourseInstances.find({ studentID }).fetch();
@@ -73,14 +73,14 @@ export class FeedbackFunctionClass {
                   const semesterName2 = Semesters.toString(preSemester._id, false);
                   const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is ` +
                       `after or in ${semesterName2}.`;
-                  const definitionData = { userID, functionName, description, feedbackType };
+                  const definitionData = { user, functionName, description, feedbackType };
                   defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
                 }
               }
             } else {
               const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
                   ' not found.';
-              const definitionData = { userID, functionName, description, feedbackType };
+              const definitionData = { user, functionName, description, feedbackType };
               defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
             }
           });
@@ -91,18 +91,17 @@ export class FeedbackFunctionClass {
 
   /**
    * Checks the student's degree plan to ensure that it satisfies the degree requirements.
-   * @param studentID the student's ID.
+   * @param user the student's ID.
    */
-  checkCompletePlan(studentID) {
+  checkCompletePlan(user) {
     const functionName = 'checkCompletePlan';
-    const userID = studentID;
     const feedbackType = FeedbackInstances.WARNING;
 
     // First clear any feedback instances previously created for this student.
-    clearFeedbackInstancesMethod.call({ studentID, functionName });
+    clearFeedbackInstancesMethod.call({ user, functionName });
 
-    const student = Users.findDoc(studentID);
-    const courseIDs = Users.getCourseIDs(studentID);
+    const student = Users.findDoc(user);
+    const courseIDs = Users.getCourseIDs(user);
     let courses = [];
     let academicPlan;
     if (student.academicPlanID) {
@@ -115,7 +114,7 @@ export class FeedbackFunctionClass {
     courses = this._missingCourses(courseIDs, courses);
     if (courses.length > 0) {
       let description = 'Your degree plan is missing: \n\n';
-      const basePath = this._getBasePath(studentID);
+      const basePath = this._getBasePath(user);
       _.map(courses, (slug) => {
         if (!planUtils.isSingleChoice(slug)) {
           const slugs = planUtils.complexChoiceToArray(slug);
@@ -142,25 +141,25 @@ export class FeedbackFunctionClass {
             }
       });
       description = description.substring(0, description.length - 2);
-      const definitionData = { userID, functionName, description, feedbackType };
+      const definitionData = { user, functionName, description, feedbackType };
       defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
 
   /**
    * Checks the student's degree plan to ensure that there aren't too many ICS courses in any one semester.
-   * @param studentID the student's ID.
+   * @param user the student's ID.
    */
-  checkOverloadedSemesters(studentID) {
+  checkOverloadedSemesters(user) {
     const functionName = 'checkOverloadedSemesters';
-    const userID = studentID;
     const feedbackType = FeedbackInstances.WARNING;
+    const studentID = Users.getID(user);
 
     // First clear any feedback instances previously created for this student.
-    clearFeedbackInstancesMethod.call({ studentID, functionName });
+    clearFeedbackInstancesMethod.call({ user, functionName });
 
     const currentSemester = Semesters.getCurrentSemesterDoc();
-    const semesters = yearUtils.getStudentSemesters(studentID);
+    const semesters = yearUtils.getStudentSemesters(user);
     let haveOverloaded = false;
     let description = 'Your plan is overloaded. ';
     _.map(semesters, (semesterID) => {
@@ -175,7 +174,7 @@ export class FeedbackFunctionClass {
     });
     description = description.substring(0, description.length - 2);
     if (haveOverloaded) {
-      const definitionData = { userID, functionName, description, feedbackType };
+      const definitionData = { user, functionName, description, feedbackType };
       defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
@@ -183,19 +182,18 @@ export class FeedbackFunctionClass {
   /**
    * Creates recommended courses based upon the student's interests. Only generates feedback if the student's plann
    * is missing courses.
-   * @param studentID the student's ID.
+   * @param user the student's ID.
    */
-  generateRecommendedCourse(studentID) {
+  generateRecommendedCourse(user) {
     const functionName = 'generateRecommendedCourse';
-    const userID = studentID;
     const feedbackType = FeedbackInstances.RECOMMENDATION;
 
     // First clear any feedback instances previously created for this student.
-    clearFeedbackInstancesMethod.call({ studentID, functionName });
+    clearFeedbackInstancesMethod.call({ user, functionName });
 
     const coursesTakenSlugs = [];
-    const student = Users.findDoc(studentID);
-    const courseIDs = Users.getCourseIDs(studentID);
+    const student = Users.findDoc(user);
+    const courseIDs = Users.getCourseIDs(user);
     let academicPlan;
     if (student.academicPlanID) {
       academicPlan = AcademicPlans.findDoc(student.academicPlanID);
@@ -214,11 +212,11 @@ export class FeedbackFunctionClass {
       // if (missing.length > 1) {
       //   description = 'Consider taking the following classes to meet the degree requirement: ';
       // }
-      const basePath = this._getBasePath(studentID);
+      const basePath = this._getBasePath(user);
       const slug = missing[0];
       // _.map(missing, (slug) => {
       if (Array.isArray(slug)) {
-        const course = courseUtils.chooseBetween(slug, studentID, coursesTakenSlugs);
+        const course = courseUtils.chooseBetween(slug, user, coursesTakenSlugs);
         if (course) {
           const courseSlug = Slugs.findDoc(course.slugID);
           // eslint-disable-next-line max-len
@@ -226,7 +224,7 @@ export class FeedbackFunctionClass {
         }
       } else
         if (slug.startsWith('ics_4')) {
-          const bestChoice = courseUtils.chooseStudent400LevelCourse(studentID, coursesTakenSlugs);
+          const bestChoice = courseUtils.chooseStudent400LevelCourse(user, coursesTakenSlugs);
           if (bestChoice) {
             const cSlug = Slugs.findDoc(bestChoice.slugID);
             // eslint-disable-next-line max-len
@@ -239,22 +237,21 @@ export class FeedbackFunctionClass {
             // eslint-disable-next-line max-len
             description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
           }
-      const definitionData = { userID, functionName, description, feedbackType };
+      const definitionData = { user, functionName, description, feedbackType };
       defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
 
-  generateRecommended400LevelCourse(studentID) {
+  generateRecommended400LevelCourse(user) {
     const functionName = 'generateRecommended400LevelCourse';
-    const userID = studentID;
     const feedbackType = FeedbackInstances.RECOMMENDATION;
 
     // First clear any feedback instances previously created for this student.
-    clearFeedbackInstancesMethod.call({ studentID, functionName });
+    clearFeedbackInstancesMethod.call({ user, functionName });
 
     const coursesTakenSlugs = [];
-    const student = Users.findDoc(studentID);
-    const courseIDs = Users.getCourseIDs(studentID);
+    const student = Users.findDoc(user);
+    const courseIDs = Users.getCourseIDs(user);
     let academicPlan;
     if (student.academicPlanID) {
       academicPlan = AcademicPlans.findDoc(student.academicPlanID);
@@ -268,8 +265,8 @@ export class FeedbackFunctionClass {
       coursesTakenSlugs.push(Slugs.getNameFromID(course.slugID));
     });
     if (this._missingCourses(courseIDs, coursesNeeded).length > 0) {
-      let bestChoices = courseUtils.bestStudent400LevelCourses(studentID, coursesTakenSlugs);
-      const basePath = this._getBasePath(studentID);
+      let bestChoices = courseUtils.bestStudent400LevelCourses(user, coursesTakenSlugs);
+      const basePath = this._getBasePath(user);
       if (bestChoices) {
         const len = bestChoices.length;
         if (len > 5) {
@@ -282,28 +279,29 @@ export class FeedbackFunctionClass {
           description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug.name}), `;
         });
         description = description.substring(0, description.length - 2);
-        const definitionData = { userID, functionName, description, feedbackType };
+        const definitionData = { user, functionName, description, feedbackType };
         defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
       }
     } else {
-      clearFeedbackInstancesMethod.call({ studentID, functionName });
+      // TODO Why is this second call to clear needed? We do it at the top of this function.
+      clearFeedbackInstancesMethod.call({ user, functionName });
     }
   }
 
   /**
    * Creates a recommended opportunities FeedbackInstance for the given student and the current semester.
-   * @param studentID the student's ID.
+   * @param user the student's ID.
    */
-  generateRecommendedCurrentSemesterOpportunities(studentID) {
+  generateRecommendedCurrentSemesterOpportunities(user) {
     const functionName = 'generateRecommendedCurrentSemesterOpportunities';
-    const userID = studentID;
     const feedbackType = FeedbackInstances.RECOMMENDATION;
+    const studentID = Users.getID(user);
 
     // First clear any feedback instances previously created for this student.
-    clearFeedbackInstancesMethod.call({ studentID, functionName });
+    clearFeedbackInstancesMethod.call({ user, functionName });
 
-    let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(studentID);
-    const basePath = this._getBasePath(studentID);
+    let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(user);
+    const basePath = this._getBasePath(user);
     const semesterID = Semesters.getCurrentSemester();
     const oppInstances = OpportunityInstances.find({ studentID, semesterID }).fetch();
     if (oppInstances.length === 0) {  // only make suggestions if there are no opportunities planned.
@@ -319,7 +317,7 @@ export class FeedbackFunctionClass {
           description = `${description} \n- [${opp.name}](${basePath}explorer/opportunities/${slug.name}), `;
         });
         description = description.substring(0, description.length - 2);
-        const definitionData = { userID, functionName, description, feedbackType };
+        const definitionData = { user, functionName, description, feedbackType };
         defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
       }
     }
@@ -327,19 +325,18 @@ export class FeedbackFunctionClass {
 
   /**
    * Creates a recommendation for getting to the next RadGrad Level.
-   * @param studentID The student's ID.
+   * @param user The student's ID.
    */
-  generateNextLevelRecommendation(studentID) {
+  generateNextLevelRecommendation(user) {
     const functionName = 'generateNextLevelRecommendation';
-    const userID = studentID;
     const feedbackType = FeedbackInstances.RECOMMENDATION;
 
     // First clear any feedback instances previously created for this student.
-    clearFeedbackInstancesMethod.call({ studentID, functionName });
+    clearFeedbackInstancesMethod.call({ user, functionName });
 
-    const student = Users.findDoc(studentID);
+    const student = Users.findDoc(user);
     // Need to build the route not use current route since might be the Advisor.
-    const basePath = this._getBasePath(studentID);
+    const basePath = this._getBasePath(user);
     let description = 'Getting to the next Level: ';
     switch (student.level) {
       case 0:
@@ -368,7 +365,7 @@ export class FeedbackFunctionClass {
         description = '';
     }
     if (description) {
-      const definitionData = { userID, functionName, description, feedbackType };
+      const definitionData = { user, functionName, description, feedbackType };
       defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
