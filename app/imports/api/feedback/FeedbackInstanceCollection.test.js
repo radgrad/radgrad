@@ -21,7 +21,7 @@ if (Meteor.isServer) {
       const user = makeSampleUser();
       const functionName = 'checkPrerequisites';
       const description = 'The prereqs for ICS 314 were not satisfied.';
-      const feedbackType = 'Warning';
+      const feedbackType = FeedbackInstances.WARNING;
       let docID = FeedbackInstances.define({ user, functionName, description, feedbackType });
       expect(FeedbackInstances.isDefined(docID)).to.be.true;
       const dumpObject = FeedbackInstances.dumpOne(docID);
@@ -36,7 +36,7 @@ if (Meteor.isServer) {
       const user = makeSampleUser();
       const functionName = 'checkPrerequisites';
       const description = 'The prereqs for ICS 314 were not satisfied.';
-      const feedbackType = 'Warning';
+      const feedbackType = FeedbackInstances.RECOMMENDATION;
       const docID = FeedbackInstances.define({ user, functionName, description, feedbackType });
       expect(FeedbackInstances.isDefined(docID)).to.be.true;
       FeedbackInstances.clear(user, functionName);
