@@ -3,8 +3,9 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
-import { Feedbacks } from './FeedbackCollection';
-import { feedbackInstancesDefineMethod, clearFeedbackInstancesMethod } from './FeedbackInstanceCollection.methods';
+import { FeedbackInstances } from './FeedbackInstanceCollection';
+import { clearFeedbackInstancesMethod } from './FeedbackInstanceCollection.methods';
+import { defineMethod } from '../base/BaseCollection.methods';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import * as courseUtils from '../course/CourseUtilities';
@@ -40,10 +41,15 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   checkPrerequisites(studentID) {
-    // First clear any feedback instances previously created for this student.
-    clearFeedbackInstancesMethod.call({ studentID, functionName: 'checkPrerequisites' });
-
+    const functionName = 'checkPrerequisites';
+    const userID = studentID;
+    const feedbackType = FeedbackInstances.WARNING;
     const currentSemester = Semesters.getCurrentSemesterDoc();
+
+    // First clear any feedback instances previously created for this student.
+    clearFeedbackInstancesMethod.call({ studentID, functionName });
+
+    // Now iterate through all the CourseInstances associated with this student.
     const cis = CourseInstances.find({ studentID }).fetch();
     cis.forEach((ci) => {
       const semester = Semesters.findDoc(ci.semesterID);
@@ -67,27 +73,15 @@ export class FeedbackFunctionClass {
                   const semesterName2 = Semesters.toString(preSemester._id, false);
                   const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is ` +
                       `after or in ${semesterName2}.`;
-                  feedbackInstancesDefineMethod.call({
-                    description,
-                    user: studentID,
-                  }, (error) => {
-                    if (error) {
-                      console.log('Error during FeedbackInstance define: ', error);
-                    }
-                  });
+                  const definitionData = { userID, functionName, description, feedbackType };
+                  defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
                 }
               }
             } else {
               const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
                   ' not found.';
-              feedbackInstancesDefineMethod.call({
-                description,
-                user: studentID,
-              }, (error) => {
-                if (error) {
-                  console.log('Error during FeedbackInstance define: ', error);
-                }
-              });
+              const definitionData = { userID, functionName, description, feedbackType };
+              defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
             }
           });
         }
@@ -100,11 +94,13 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   checkCompletePlan(studentID) {
-    // console.log('checkCompletePlan', studentID);
-    const f = Feedbacks.findDoc({ name: 'Required course missing' });
-    const feedback = Slugs.getNameFromID(f.slugID, 'Feedback');
-    const area = `ffn-${feedback}`;
-    this.clearFeedbackInstances(studentID, area);
+    const functionName = 'checkCompletePlan';
+    const userID = studentID;
+    const feedbackType = FeedbackInstances.WARNING;
+
+    // First clear any feedback instances previously created for this student.
+    clearFeedbackInstancesMethod.call({ studentID, functionName });
+
     const student = Users.findDoc(studentID);
     const courseIDs = Users.getCourseIDs(studentID);
     let courses = [];
@@ -146,16 +142,8 @@ export class FeedbackFunctionClass {
             }
       });
       description = description.substring(0, description.length - 2);
-      feedbackInstancesDefineMethod.call({
-        feedback,
-        user: studentID,
-        description,
-        area,
-      }, (error) => {
-        if (error) {
-          console.log('Error during FeedbackInstance define: ', error);
-        }
-      });
+      const definitionData = { userID, functionName, description, feedbackType };
+      defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
 
@@ -164,11 +152,13 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   checkOverloadedSemesters(studentID) {
-    // console.log('checkOverloadedSemesters');
-    const feedbackDoc = Feedbacks.findDoc({ name: 'Semester overloaded' });
-    const feedback = Slugs.getNameFromID(feedbackDoc.slugID, 'Feedback');
-    const area = `ffn-${feedback}`;
-    this.clearFeedbackInstances(studentID, area);
+    const functionName = 'checkOverloadedSemesters';
+    const userID = studentID;
+    const feedbackType = FeedbackInstances.WARNING;
+
+    // First clear any feedback instances previously created for this student.
+    clearFeedbackInstancesMethod.call({ studentID, functionName });
+
     const currentSemester = Semesters.getCurrentSemesterDoc();
     const semesters = yearUtils.getStudentSemesters(studentID);
     let haveOverloaded = false;
@@ -185,16 +175,8 @@ export class FeedbackFunctionClass {
     });
     description = description.substring(0, description.length - 2);
     if (haveOverloaded) {
-      feedbackInstancesDefineMethod.call({
-        feedback,
-        user: studentID,
-        description,
-        area,
-      }, (error) => {
-        if (error) {
-          console.log('Error during FeedbackInstance define: ', error);
-        }
-      });
+      const definitionData = { userID, functionName, description, feedbackType };
+      defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
 
@@ -204,10 +186,13 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   generateRecommendedCourse(studentID) {
-    // console.log('generateRecommendedCourse');
-    const feedbackDoc = Feedbacks.findDoc({ name: 'Course recommendations based on interests' });
-    const feedback = Slugs.getNameFromID(feedbackDoc.slugID, 'Feedback');
-    const area = `ffn-${feedback}`;
+    const functionName = 'generateRecommendedCourse';
+    const userID = studentID;
+    const feedbackType = FeedbackInstances.RECOMMENDATION;
+
+    // First clear any feedback instances previously created for this student.
+    clearFeedbackInstancesMethod.call({ studentID, functionName });
+
     const coursesTakenSlugs = [];
     const student = Users.findDoc(studentID);
     const courseIDs = Users.getCourseIDs(studentID);
@@ -223,7 +208,6 @@ export class FeedbackFunctionClass {
       const course = Courses.findDoc(cID);
       coursesTakenSlugs.push(Slugs.getNameFromID(course.slugID));
     });
-    this.clearFeedbackInstances(studentID, area);
     const missing = this._missingCourses(courseIDs, coursesNeeded);
     if (missing.length > 0) {
       let description = 'Consider taking the following class to meet the degree requirement: ';
@@ -255,25 +239,19 @@ export class FeedbackFunctionClass {
             // eslint-disable-next-line max-len
             description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
           }
-      // });
-      feedbackInstancesDefineMethod.call({
-        feedback,
-        user: studentID,
-        description,
-        area,
-      }, (error) => {
-        if (error) {
-          console.log('Error during FeedbackInstance define: ', error);
-        }
-      });
+      const definitionData = { userID, functionName, description, feedbackType };
+      defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
 
   generateRecommended400LevelCourse(studentID) {
-    // console.log('generateRecommended400');
-    const feedbackDoc = Feedbacks.findDoc({ name: 'Course recommendations based on interests' });
-    const feedback = Slugs.getNameFromID(feedbackDoc.slugID, 'Feedback');
-    const area = `ffn-${feedback}`;
+    const functionName = 'generateRecommended400LevelCourse';
+    const userID = studentID;
+    const feedbackType = FeedbackInstances.RECOMMENDATION;
+
+    // First clear any feedback instances previously created for this student.
+    clearFeedbackInstancesMethod.call({ studentID, functionName });
+
     const coursesTakenSlugs = [];
     const student = Users.findDoc(studentID);
     const courseIDs = Users.getCourseIDs(studentID);
@@ -297,7 +275,6 @@ export class FeedbackFunctionClass {
         if (len > 5) {
           bestChoices = _.drop(bestChoices, len - 5);
         }
-        this.clearFeedbackInstances(studentID, area);
         let description = 'Consider taking the following classes to meet the degree requirement: ';
         _.map(bestChoices, (course) => {
           const slug = Slugs.findDoc(course.slugID);
@@ -305,19 +282,11 @@ export class FeedbackFunctionClass {
           description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug.name}), `;
         });
         description = description.substring(0, description.length - 2);
-        feedbackInstancesDefineMethod.call({
-          feedback,
-          user: studentID,
-          description,
-          area,
-        }, (error) => {
-          if (error) {
-            console.log('Error during FeedbackInstance define: ', error);
-          }
-        });
+        const definitionData = { userID, functionName, description, feedbackType };
+        defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
       }
     } else {
-      this.clearFeedbackInstances(studentID, area);
+      clearFeedbackInstancesMethod.call({ studentID, functionName });
     }
   }
 
@@ -326,11 +295,13 @@ export class FeedbackFunctionClass {
    * @param studentID the student's ID.
    */
   generateRecommendedCurrentSemesterOpportunities(studentID) {
-    // console.log('generateRecommendedCurrentSemesterOpportunities');
-    const feedbackDoc = Feedbacks.findDoc({ name: 'Opportunity recommendations based on interests' });
-    const feedback = Slugs.getNameFromID(feedbackDoc.slugID, 'Feedback');
-    const area = `ffn-${feedback}`;
-    this.clearFeedbackInstances(studentID, area);
+    const functionName = 'generateRecommendedCurrentSemesterOpportunities';
+    const userID = studentID;
+    const feedbackType = FeedbackInstances.RECOMMENDATION;
+
+    // First clear any feedback instances previously created for this student.
+    clearFeedbackInstancesMethod.call({ studentID, functionName });
+
     let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(studentID);
     const basePath = this._getBasePath(studentID);
     const semesterID = Semesters.getCurrentSemester();
@@ -342,23 +313,14 @@ export class FeedbackFunctionClass {
         if (len > 3) {
           bestChoices = _.drop(bestChoices, len - 3);
         }
-        this.clearFeedbackInstances(studentID, area);
         let description = 'Consider the following opportunities for this semester: ';
         _.map(bestChoices, (opp) => {
           const slug = Slugs.findDoc(opp.slugID);
           description = `${description} \n- [${opp.name}](${basePath}explorer/opportunities/${slug.name}), `;
         });
         description = description.substring(0, description.length - 2);
-        feedbackInstancesDefineMethod.call({
-          feedback,
-          user: studentID,
-          description,
-          area,
-        }, (error) => {
-          if (error) {
-            console.log('Error during FeedbackInstance define: ', error);
-          }
-        });
+        const definitionData = { userID, functionName, description, feedbackType };
+        defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
       }
     }
   }
@@ -368,11 +330,13 @@ export class FeedbackFunctionClass {
    * @param studentID The student's ID.
    */
   generateNextLevelRecommendation(studentID) {
-    // console.log('checkOverloadedSemesters');
-    const feedbackDoc = Feedbacks.findDoc({ name: 'Recommendation for next Level' });
-    const feedback = Slugs.getNameFromID(feedbackDoc.slugID, 'Feedback');
-    const area = `ffn-${feedback}`;
-    this.clearFeedbackInstances(studentID, area);
+    const functionName = 'generateNextLevelRecommendation';
+    const userID = studentID;
+    const feedbackType = FeedbackInstances.RECOMMENDATION;
+
+    // First clear any feedback instances previously created for this student.
+    clearFeedbackInstancesMethod.call({ studentID, functionName });
+
     const student = Users.findDoc(studentID);
     // Need to build the route not use current route since might be the Advisor.
     const basePath = this._getBasePath(studentID);
@@ -404,16 +368,8 @@ export class FeedbackFunctionClass {
         description = '';
     }
     if (description) {
-      feedbackInstancesDefineMethod.call({
-        feedback,
-        user: studentID,
-        description,
-        area,
-      }, (error) => {
-        if (error) {
-          console.log('Error during FeedbackInstance define: ', error);
-        }
-      });
+      const definitionData = { userID, functionName, description, feedbackType };
+      defineMethod.call({ collectionName: 'FeedbackInstanceCollection', definitionData });
     }
   }
 
@@ -459,5 +415,4 @@ export class FeedbackFunctionClass {
  * Singleton instance for all FeedbackFunctions.
  * @type {FeedbackFunctionClass}
  */
-export const
-    FeedbackFunctions = new FeedbackFunctionClass();
+export const FeedbackFunctions = new FeedbackFunctionClass();

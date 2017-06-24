@@ -24,7 +24,9 @@ class FeedbackInstanceCollection extends BaseCollection {
       description: String,
       feedbackType: String,
     }));
-    this.feedbackTypes = ['Recommendation', 'Warning'];
+    this.WARNING = 'Warning';
+    this.RECOMMENDATION = 'Recommendation';
+    this.feedbackTypes = [this.WARNING, this.RECOMMENDATION];
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, userID: 1 });
     }
@@ -75,6 +77,24 @@ class FeedbackInstanceCollection extends BaseCollection {
   removeUser(user) {
     const userID = Users.getID(user);
     this._collection.remove({ userID });
+  }
+
+  /**
+   * Returns a cursor to all the Warnings associated with this user.
+   * @param user The user of interest.
+   */
+  findWarnings(user) {
+    const userID = Users.getID(user);
+    return this._collection.find({ userID, feedbackType: this.WARNING });
+  }
+
+  /**
+   * Returns a cursor to all the Warnings associated with this user.
+   * @param user The user of interest.
+   */
+  findRecommendations(user) {
+    const userID = Users.getID(user);
+    return this._collection.find({ userID, feedbackType: this.RECOMMENDATION });
   }
 
   /**

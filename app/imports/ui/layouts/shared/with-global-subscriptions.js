@@ -5,7 +5,6 @@ import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
-import { Feedbacks } from '../../../api/feedback/FeedbackCollection';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
@@ -39,7 +38,6 @@ Template.With_Global_Subscriptions.onCreated(function onCreated() {
     globalSubs.subscribe(CareerGoals.getPublicationName());
     globalSubs.subscribe(Courses.getPublicationName());
     globalSubs.subscribe(DesiredDegrees.getPublicationName());
-    globalSubs.subscribe(Feedbacks.getPublicationName());
     globalSubs.subscribe(HelpMessages.getPublicationName());
     globalSubs.subscribe(Interests.getPublicationName());
     globalSubs.subscribe(InterestTypes.getPublicationName());
