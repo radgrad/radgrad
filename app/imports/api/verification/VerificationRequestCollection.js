@@ -93,6 +93,16 @@ class VerificationRequestCollection extends BaseCollection {
   }
 
   /**
+   * Removes all VerificationRequest documents referring to user.
+   * @param user The user, either the ID or the username.
+   * @throws { Meteor.Error } If user is not an ID or username.
+   */
+  removeUser(user) {
+    const studentID = Users.getID(user);
+    this._collection.remove({ studentID });
+  }
+
+  /**
    * Returns the Opportunity associated with the VerificationRequest with the given instanceID.
    * @param instanceID The id of the VerificationRequest.
    * @returns {Object} The associated Opportunity.

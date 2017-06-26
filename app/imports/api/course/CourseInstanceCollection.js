@@ -149,6 +149,16 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Removes all CourseInstance documents referring to user.
+   * @param user The user, either the ID or the username.
+   * @throws { Meteor.Error } If user is not an ID or username.
+   */
+  removeUser(user) {
+    const studentID = Users.getID(user);
+    this._collection.remove({ studentID });
+  }
+
+  /**
    * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
    * Student.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.

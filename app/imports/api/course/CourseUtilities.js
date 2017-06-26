@@ -1,27 +1,16 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from './CourseInstanceCollection';
 import { Courses } from './CourseCollection';
-import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
-import { feedbackInstancesDefineMethod,
-  feedbackInstancesRemoveItMethod } from '../feedback/FeedbackInstanceCollection.methods';
-import { Feedbacks } from '../feedback/FeedbackCollection';
 import PreferredChoice from '../degree-plan/PreferredChoice';
-import { Semesters } from '../semester/SemesterCollection';
-import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
+// import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
+// import { clearFeedbackInstancesMethod, feedbackInstancesDefineMethod,
+//   feedbackInstancesRemoveItMethod } from '../feedback/FeedbackInstanceCollection.methods';
+// import { Feedbacks } from '../feedback/FeedbackCollection';
+// import { Semesters } from '../semester/SemesterCollection';
+// import { Slugs } from '../slug/SlugCollection';
 
 /** @module api/course/CourseUtilities */
-
-function clearFeedbackInstances(userID, area) {
-  const instances = FeedbackInstances.find({ userID, area }).fetch();
-  instances.forEach((i) => {
-    feedbackInstancesRemoveItMethod.call({ id: i._id }, (error) => {
-      if (error) {
-        console.log('Error during FeedbackInstance removeIt: ', error);
-      }
-    });
-  });
-}
 
 export function prereqsMet(coursesTakenSlugs, courseID) {
   const course = Courses.findDoc(courseID);
@@ -36,65 +25,65 @@ export function prereqsMet(coursesTakenSlugs, courseID) {
   return ret;
 }
 
-/**
- * Checks all the CourseInstances to ensure that the prerequisites are fulfilled.
- */
-export function checkPrerequisites(studentID, area) {
-  const f = Feedbacks.find({ name: 'Prerequisite missing' }).fetch()[0];
-  const feedback = Slugs.getEntityID(f.slugID, 'Feedback');
-  clearFeedbackInstances(studentID, area);
-  const cis = CourseInstances.find({ studentID }).fetch();
-  cis.forEach((ci) => {
-    const semester = Semesters.findDoc(ci.semesterID);
-    const semesterName = Semesters.toString(ci.semesterID, false);
-    const course = Courses.findDoc(ci.courseID);
-    if (course) {
-      const prereqs = course.prerequisites;
-      prereqs.forEach((p) => {
-        const courseID = Slugs.getEntityID(p, 'Course');
-        const prerequisiteCourse = Courses.find({ _id: courseID }).fetch()[0];
-        const preCiIndex = _.findIndex(cis, function find(obj) {
-          return obj.courseID === courseID;
-        });
-        if (preCiIndex !== -1) {
-          const preCi = cis[preCiIndex];
-          const preCourse = Courses.findDoc(preCi.courseID);
-          const preSemester = Semesters.findDoc(preCi.semesterID);
-          if (preSemester) {
-            if (preSemester.semesterNumber >= semester.semesterNumber) {
-              const semesterName2 = Semesters.toString(preSemester._id, false);
-              const description = `${semesterName}: ${course.number}'s prerequisite ${preCourse.number} is after or` +
-                  ` in ${semesterName2}.`;
-              feedbackInstancesDefineMethod.call({
-                feedback,
-                user: studentID,
-                description,
-                area,
-              }, (error) => {
-                if (error) {
-                  console.log('Error during FeedbackInstance define: ', error);
-                }
-              });
-            }
-          }
-        } else {
-          const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
-              ' not found.';
-          feedbackInstancesDefineMethod.call({
-            feedback,
-            user: studentID,
-            description,
-            area,
-          }, (error) => {
-            if (error) {
-              console.log('Error during FeedbackInstance define: ', error);
-            }
-          });
-        }
-      });
-    }
-  });
-}
+// /**
+//  * Checks all the CourseInstances to ensure that the prerequisites are fulfilled.
+//  */
+// export function checkPrerequisites(studentID, area) {
+//   const f = Feedbacks.find({ name: 'Prerequisite missing' }).fetch()[0];
+//   const feedback = Slugs.getEntityID(f.slugID, 'Feedback');
+//   clearFeedbackInstances(studentID, area);
+//   const cis = CourseInstances.find({ studentID }).fetch();
+//   cis.forEach((ci) => {
+//     const semester = Semesters.findDoc(ci.semesterID);
+//     const semesterName = Semesters.toString(ci.semesterID, false);
+//     const course = Courses.findDoc(ci.courseID);
+//     if (course) {
+//       const prereqs = course.prerequisites;
+//       prereqs.forEach((p) => {
+//         const courseID = Slugs.getEntityID(p, 'Course');
+//         const prerequisiteCourse = Courses.find({ _id: courseID }).fetch()[0];
+//         const preCiIndex = _.findIndex(cis, function find(obj) {
+//           return obj.courseID === courseID;
+//         });
+//         if (preCiIndex !== -1) {
+//           const preCi = cis[preCiIndex];
+//           const preCourse = Courses.findDoc(preCi.courseID);
+//           const preSemester = Semesters.findDoc(preCi.semesterID);
+//           if (preSemester) {
+//             if (preSemester.semesterNumber >= semester.semesterNumber) {
+//               const semesterName2 = Semesters.toString(preSemester._id, false);
+//               const description = `${semesterName}:${course.number}'s prerequisite ${preCourse.number} is after or` +
+//                   ` in ${semesterName2}.`;
+//               feedbackInstancesDefineMethod.call({
+//                 feedback,
+//                 user: studentID,
+//                 description,
+//                 area,
+//               }, (error) => {
+//                 if (error) {
+//                   console.log('Error during FeedbackInstance define: ', error);
+//                 }
+//               });
+//             }
+//           }
+//         } else {
+//           const description = `${semesterName}: Prerequisite ${prerequisiteCourse.number} for ${course.number}` +
+//               ' not found.';
+//           feedbackInstancesDefineMethod.call({
+//             feedback,
+//             user: studentID,
+//             description,
+//             area,
+//           }, (error) => {
+//             if (error) {
+//               console.log('Error during FeedbackInstance define: ', error);
+//             }
+//           });
+//         }
+//       });
+//     }
+//   });
+// }
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);  // eslint-disable-line no-param-reassign

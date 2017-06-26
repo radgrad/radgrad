@@ -46,6 +46,16 @@ class AdvisorLogCollection extends BaseCollection {
   }
 
   /**
+   * Removes all AdvisorLog documents referring to (the student) user.
+   * @param user The student user, either the ID or the username.
+   * @throws { Meteor.Error } If user is not an ID or username.
+   */
+  removeUser(user) {
+    const studentID = Users.getID(user);
+    this._collection.remove({ studentID });
+  }
+
+  /**
    * Returns the Advisor associated with the log instance.
    * @param instanceID the instance ID.
    * @returns {Object}

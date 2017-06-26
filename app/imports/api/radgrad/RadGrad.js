@@ -7,7 +7,6 @@ import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection.js';
 import { CourseInstances } from '../course/CourseInstanceCollection.js';
 import { Feeds } from '../feed/FeedCollection.js';
-import { Feedbacks } from '../feedback/FeedbackCollection.js';
 import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection.js';
 import { HelpMessages } from '../help/HelpMessageCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
@@ -45,7 +44,6 @@ class RadGradClass {
       Courses,
       CourseInstances,
       Feeds,
-      Feedbacks,
       FeedbackInstances,
       HelpMessages,
       DesiredDegrees,
@@ -86,7 +84,6 @@ class RadGradClass {
       OpportunityTypes,
       Opportunities,
       Courses,
-      Feedbacks,
       Teasers,
       CourseInstances,
       OpportunityInstances,
