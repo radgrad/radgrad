@@ -93,6 +93,19 @@ class VerificationRequestCollection extends BaseCollection {
   }
 
   /**
+   * Returns the VerificationRequestID associated with opportunityInstanceID, or null if not found.
+   * @param opportunityInstanceID The opportunityInstanceID
+   * @returns The VerificationRequestID, or null if not found.
+   */
+  findVerificationRequest(opportunityInstanceID) {
+    const result = this._collection.find({ opportunityInstanceID });
+    if (result) {
+      return result.fetch()[0]._id;
+    }
+    return result;
+  }
+
+  /**
    * Removes all VerificationRequest documents referring to user.
    * @param user The user, either the ID or the username.
    * @throws { Meteor.Error } If user is not an ID or username.
@@ -173,7 +186,7 @@ class VerificationRequestCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, 'FACULTY'])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
@@ -190,6 +203,22 @@ class VerificationRequestCollection extends BaseCollection {
   updateStatus(requestID, status, processed) {
     this.assertDefined(requestID);
     this._collection.update({ _id: requestID }, { $set: { status, processed } });
+  }
+
+  /**
+   * Sets the passed VerificationRequest to be verified.
+   * @param verificationRequestID The VerificationRequest
+   * @param verifier The user who did the verification.
+   * @throws { Meteor.Error } If verificationRequestID or verifyingUser are not defined.
+   */
+  setVerified(verificationRequestID, verifyingUser) {
+    this.assertDefined(verificationRequestID);
+    const verifierID = Users.getID(verifyingUser);
+    const verifier = Users.findDoc(verifierID).username;
+    const date = new Date();
+    const status = this.ACCEPTED;
+    const processed = [{ date, status, verifier }];
+    this._collection.update(verificationRequestID, { $set: { status, processed } });
   }
 
   /**
