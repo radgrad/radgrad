@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('CourseCollection Meteor Methods', function test() {
+  describe('CourseCollection Meteor Methods TestBatch1', function test() {
     const collectionName = Courses.getCollectionName();
     const definitionData = {
       name: 'Introduction to the theory and practice of scripting',
