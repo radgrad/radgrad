@@ -267,8 +267,7 @@ class CourseInstanceCollection extends BaseCollection {
 
   /**
    * Depending on the logged in user publish only their CourseInstances. If
-   * the user is in the Role.ADMIN then publish all CourseInstances. If the
-   * system is in mockup mode publish all CourseInstances.
+   * the user is in the Role.ADMIN then publish all CourseInstances.
    */
   publish() {
     if (Meteor.isServer) {

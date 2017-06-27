@@ -110,8 +110,7 @@ class FeedbackInstanceCollection extends BaseCollection {
 
   /**
    * Depending on the logged in user publish only their FeedbackInstances. If
-   * the user is in the Role.ADMIN then publish all FeedbackInstances. If the
-   * system is in mockup mode publish all FeedbackInstances.
+   * the user is in the Role.ADMIN then publish all FeedbackInstances.
    */
   publish() {
     if (Meteor.isServer) {

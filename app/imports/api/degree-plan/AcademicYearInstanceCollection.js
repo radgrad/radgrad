@@ -129,14 +129,13 @@ class AcademicYearInstanceCollection extends BaseCollection {
 
   /**
    * Depending on the logged in user publish only their AcademicYears. If
-   * the user is in the Role.ADMIN then publish all AcademicYears. If the
-   * system is in mockup mode publish all AcademicYears.
+   * the user is an Admin or Advisor then publish all AcademicYears.
    */
   publish() {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this.publicationNames.Public, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });

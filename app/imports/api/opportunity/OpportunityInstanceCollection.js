@@ -191,14 +191,13 @@ class OpportunityInstanceCollection extends BaseCollection {
 
   /**
    * Depending on the logged in user publish only their OpportunityInstances. If
-   * the user is in the Role.ADMIN then publish all OpportunityInstances. If the
-   * system is in mockup mode publish all OpportunityInstances.
+   * the user is in the Role.ADMIN then publish all OpportunityInstances.
    */
   publish() {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this.publicationNames.student, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR,
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR,
           ROLE.FACULTY, ROLE.STUDENT])) {
           return instance._collection.find();
         }
