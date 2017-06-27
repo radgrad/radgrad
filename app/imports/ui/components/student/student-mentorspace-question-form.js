@@ -2,11 +2,9 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { moment } from 'meteor/momentjs:moment';
+import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
-import {
-  mentorQuestionsDefineMethod,
-  mentorQuestionsUpdateMethod,
-} from '../../../api/mentor/MentorQuestionCollection.methods';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 
@@ -60,18 +58,19 @@ Template.Student_MentorSpace_Question_Form.events({
   'submit .mentorspace-question-form': function (event, instance) {
     event.preventDefault();
     const question = event.target.msquestion.value;
+    const collectionName = MentorQuestions.getCollectionName();
     if (Template.instance().setDefaultQuestion.get()) {
       const questionDoc = MentorQuestions.findDoc(Template.instance().setDefaultQuestion.get());
       // There's gotta be a better way of doing this.
-      const data = {};
+      const updateData = {};
       _.mapKeys(questionDoc, (value, key) => {
         if (key !== '_id') {
-          data[key] = value;
+          updateData[key] = value;
         }
       });
-      data.id = questionDoc._id;
-      data.question = question;
-      mentorQuestionsUpdateMethod.call(data, (error) => {
+      // data.id = questionDoc._id;
+      updateData.question = question;
+      updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {
           instance.messageFlags.set(displaySuccessMessage, false);
           instance.messageFlags.set(displayErrorMessages, true);
@@ -83,9 +82,13 @@ Template.Student_MentorSpace_Question_Form.events({
         }
       });
     } else {
-      const mentorQuestion = { title: question, student: getRouteUserName() };
-      mentorQuestionsDefineMethod.call(mentorQuestion, (error) => {
+      console.log('new question');
+      const student = getRouteUserName();
+      const slug = `${student}${moment().format('YYYYMMDDHHmmssSSSSS')}`;
+      const mentorQuestion = { question, slug, student };
+      defineMethod.call({ collectionName, definitionData: mentorQuestion }, (error) => {
         if (error) {
+          console.log('Error in defining MentorQuestion', error);
           instance.messageFlags.set(displaySuccessMessage, false);
           instance.messageFlags.set(displayErrorMessages, true);
           event.target.reset();

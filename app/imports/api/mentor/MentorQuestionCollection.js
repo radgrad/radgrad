@@ -66,7 +66,7 @@ class MentorQuestionCollection extends BaseSlugCollection {
       updateData.moderated = moderated;
     }
     if (_.isBoolean(visible)) {
-      updateData.visble = visible;
+      updateData.visible = visible;
     }
     if (moderatorComments) {
       updateData.moderatorComments = moderatorComments;
@@ -80,9 +80,10 @@ class MentorQuestionCollection extends BaseSlugCollection {
    */
   removeIt(docID) {
     this.assertDefined(docID);
+    // remove the Answers associated with this question
+    MentorAnswers.removeQuestion(docID);
     // OK, clear to delete.
     super.removeIt(docID);
-    MentorAnswers.removeQuestion(docID);
   }
 
   /**
@@ -98,42 +99,6 @@ class MentorQuestionCollection extends BaseSlugCollection {
 
   getQuestions() {
     return this._collection.find({}).fetch().reverse();
-  }
-
-  /**
-   * Updates the MentorQuestion's moderated, visible, and moderatorComments variable.
-   * @param questionID The MentorQuestion ID.
-   * @param moderated The new moderated value.
-   * @param visible The new visible value.
-   * @param moderatorComments The new moderatorComments value.
-   */
-  updateModerated(questionID, moderated, visible, moderatorComments) {
-    this.assertDefined(questionID);
-    this._collection.update({ _id: questionID },
-        { $set: { moderated, visible, moderatorComments } });
-  }
-
-  /**
-   * Updates the MentorQuestion's slug variable, if the slug has not been defined yet.
-   * @param questionID The MentorQuestion ID.
-   * @param slug The new slug value.
-   */
-  updateSlug(questionID, slug) {
-    this.assertDefined(questionID);
-    const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    this._collection.update({ _id: questionID },
-        { $set: { slugID } });
-  }
-
-  /**
-   * Updates the MentorQuestion's question, visible, and moderated variables.
-   * @param questionID The MentorQuestion ID.
-   * @param question The new question value.
-   */
-  updateQuestion(questionID, question) {
-    this.assertDefined(questionID);
-    this._collection.update({ _id: questionID },
-        { $set: { question, moderated: false, visible: false } });
   }
 
   /**

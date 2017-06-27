@@ -9,23 +9,23 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 
 if (Meteor.isClient) {
   describe('MentorQuestionAndAnswerCollection Meteor Methods', function test() {
-    const answerCollectionName = MentorAnswers.getCollectionName();
+    // this.timeout(10000);
     const questionCollectionName = MentorQuestions.getCollectionName();
-    const answerDefinition = {
-
-    };
     const questionDefinition = {
       question: 'question',
       slug: 'test-question',
       student: 'abi',
-      moderated: false,
-      visible: false,
-      moderatorComments: '',
+    };
+    const answerCollectionName = MentorAnswers.getCollectionName();
+    const answerDefinition = {
+      question: 'test-question',
+      mentor: 'brewer',
+      text: 'mentor-answer',
     };
 
     before(function (done) {
       this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user', 'abi.user'], done);
+      defineTestFixturesMethod.call(['minimal', 'admin.user', 'abi.user', 'brewer.user'], done);
     });
 
     after(function (done) {
@@ -57,7 +57,7 @@ if (Meteor.isClient) {
           const moderated = true;
           const visible = false;
           const moderatorComments = 'comments';
-          updateMethod.call({ collectionName: answerCollectionName,
+          updateMethod.call({ collectionName: questionCollectionName,
             updateData: { id, question, student, moderated, visible, moderatorComments } }, done);
         }).catch(done);
       });
@@ -66,21 +66,30 @@ if (Meteor.isClient) {
     it('Answer Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const id = MentorAnswers.findIdBySlug(answerDefinition.slug);
-          const name = 'updated CareerGoal name';
-          const description = 'updated CareerGoal description';
-          const interests = ['algorithms', 'java'];
-          const prerequisites = ['ics_111', 'ics_141'];
+          const questionID = MentorQuestions.findIdBySlug(questionDefinition.slug);
+          const id = MentorAnswers.findDoc({ questionID })._id;
+          const text = 'updated answer text';
           updateMethod.call({ collectionName: answerCollectionName,
-            updateData: { id, name, description, interests, prerequisites } }, done);
+            updateData: { id, text } }, done);
         }).catch(done);
       });
     });
 
-    it('Remove Method', function (done) {
+    it('Question Remove Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ answerCollectionName, instance: answerDefinition.slug }, done);
+          const instance = MentorQuestions.findIdBySlug(questionDefinition.slug);
+          removeItMethod.call({ collectionName: questionCollectionName, instance }, done);
+        }).catch(done);
+      });
+    });
+
+    it.skip('Answer Remove Method', function (done) {
+      withLoggedInUser().then(() => {
+        withRadGradSubscriptions().then(() => {
+          const questionID = MentorQuestions.findIdBySlug(questionDefinition.slug);
+          const instance = MentorAnswers.findDoc({ questionID })._id;
+          removeItMethod.call({ collectionName: answerCollectionName, instance }, done);
         }).catch(done);
       });
     });

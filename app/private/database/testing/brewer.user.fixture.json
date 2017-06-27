@@ -1,0 +1,40 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription" : "Defines mentor Robert Brewer. Requires minimal.fixture.",
+  "collections": [
+    {
+      "name": "UserCollection",
+      "contents": [
+        {
+          "firstName": "Robert",
+          "lastName": "Brewer",
+          "slug": "brewer",
+          "email": "rbrewer@excitedcuriosity.org",
+          "password": "foo",
+          "role": "MENTOR",
+          "uhID": "8289-0001",
+          "picture": "/images/mentors/brewer.jpg",
+          "website": null,
+          "interests": [
+            "algorithms"
+          ],
+          "careerGoals": [
+            "data-scientist"
+          ],
+          "desiredDegree": null,
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": []
+        }
+      ]
+    },
+    {
+      "name": "ValidUserAccountCollection",
+      "contents": [
+        {
+          "username": "brewer"
+        }
+      ]
+    }
+  ]
+}
