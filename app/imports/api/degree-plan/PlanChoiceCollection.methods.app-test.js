@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('PlanChoiceCollection Meteor Methods', function test() {
+  describe('PlanChoiceCollection Meteor Methods  TestBatch1', function test() {
     const collectionName = PlanChoices.getCollectionName();
     const choice = 'ics211,ics215-1';
     const definitionData = {
