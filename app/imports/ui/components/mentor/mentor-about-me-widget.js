@@ -4,13 +4,13 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import * as RouteNames from '/imports/startup/client/router.js';
 import * as FormUtils from '../../components/admin/form-fields/form-field-utilities.js';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection';
-import { mentorProfilesUpdateMethod } from '../../../api/mentor/MentorProfileCollection.methods';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
@@ -194,8 +194,9 @@ Template.Mentor_About_Me_Widget.events({
     const mentorProfile = MentorProfiles.find({ mentorID: getUserIdFromRoute() }).fetch();
     if (instance.context.isValid()) {
       Users.setWebsite(getUserIdFromRoute(), website);
+      const collectionName = MentorProfiles.getCollectionName();
       updatedData.id = mentorProfile[0]._id;
-      mentorProfilesUpdateMethod.call(updatedData, (error) => {
+      updateMethod.call({ collectionName, updateData: updatedData }, (error) => {
         if (error) {
           console.log('Error updating MentorProfile', error);
         }

@@ -18,7 +18,7 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it('#define, #isDefined, #removeIt', function test() {
+    it('#define, #isDefined, #update, #removeIt, #dumpOne, #restoreOne', function test() {
       const mentor = makeSampleUser(ROLE.MENTOR);
       const company = 'Capybara Inc';
       const career = 'Software Ninja';
@@ -27,8 +27,13 @@ if (Meteor.isServer) {
       const motivation = 'Because I can!';
       const instanceID = MentorProfiles.define({ mentor, company, career, location, linkedin, motivation });
       expect(MentorProfiles.isDefined(instanceID)).to.be.true;
+      const dumpObject = MentorProfiles.dumpOne(instanceID);
       MentorProfiles.removeIt(instanceID);
       expect(MentorProfiles.isDefined(instanceID)).to.be.false;
+      MentorProfiles.restoreOne(dumpObject);
+      const id = MentorProfiles.findDoc({ linkedin: 'josephinegarces' })._id;
+      expect(MentorProfiles.isDefined(id)).to.be.true;
+      MentorProfiles.removeIt(id);
     });
   });
 }

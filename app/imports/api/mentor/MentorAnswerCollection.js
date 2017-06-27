@@ -23,8 +23,14 @@ class MentorAnswerCollection extends BaseCollection {
     }));
   }
 
+  /* eslint max-len: 0 */
   /**
-   * Defines the help for a given questionID.
+   * Defines the mentor answer for a given question.
+   * @example
+   * MentorAnswers.define({ question: 'data-science-career-prep',
+   *                        mentor: 'rbrewer',
+   *                        text: 'Understanding the incredible amount of data that humankind is constantly producing is one of the fundamental challenges facing society. The best way to learn is to pick a topic that interests you, find a public source of data in that area, and start actually looking at the data. What patterns can you see? Start asking questions, and figure out how to answer them from the data. Quick plug: Tableau is great for exploring data graphically, and answering questions about data. It's free for students (http://www.tableau.com/academic/students), and Tableau Public (https://public.tableau.com/s/) is a great place to find interesting public data sets and visual analytics based on the data.',
+   *                        });
    * @param question The question (slug or ID).
    * @param mentor The mentor who answered the question (slug or ID).
    * @param text The answer itself.
@@ -33,8 +39,50 @@ class MentorAnswerCollection extends BaseCollection {
    */
   define({ question, mentor, text }) {
     const questionID = MentorQuestions.getID(question);
-    const mentorID = Users.getID(mentor); // TODO: Require that user is in role Mentor?
+    const mentorID = Users.getID(mentor);
     return this._collection.insert({ questionID, mentorID, text });
+  }
+
+  /**
+   * Updates the mentor answer.
+   * @param docID the docID of the mentor answer.
+   * @param text the updated text.
+   */
+  update(docID, { text }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (text) {
+      updateData.text = text;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the mentor answer.
+   * @param docID the ID of the answer.
+   */
+  removeIt(docID) {
+    this.assertDefined(docID);
+    // OK, clear to delete.
+    super.removeIt(docID);
+  }
+
+  /**
+   * Removes all the MentorAnswers to the given MentorQuestion.
+   * @param question the question's ID or slug.
+   */
+  removeQuestion(question) {
+    const questionID = MentorQuestions.getID(question);
+    this._collection.remove({ questionID });
+  }
+
+  /**
+   * Removes all the MentorAnswers associated with the given user.
+   * @param user the user's ID or username.
+   */
+  removeUser(user) {
+    const mentorID = Users.getID(user);
+    this._collection.remove({ mentorID });
   }
 
   /**
@@ -50,10 +98,10 @@ class MentorAnswerCollection extends BaseCollection {
 
   /**
    * Returns the text for the given questionID.
-   * @param question
+   * @param questionID the id of the question.
    */
-  getAnswers(question) {
-    return this._collection.find({ questionID: question });
+  getAnswers(questionID) {
+    return this._collection.find({ questionID });
   }
 
   /**
