@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('HelpMessageCollection Meteor Methods', function test() {
+  describe('HelpMessageCollection Meteor Methods  TestBatch1', function test() {
     const collectionName = HelpMessages.getCollectionName();
     const routeName = 'Admin_Database_Dump_Page';
     const definitionData = {
