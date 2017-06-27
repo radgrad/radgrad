@@ -1,19 +1,16 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { moment } from 'meteor/momentjs:moment';
-import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection';
-import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
-import {
-  verificationRequestsDefineMethod,
-  verificationRequestsUpdateStatusMethod,
-} from '../../../api/verification/VerificationRequestCollection.methods';
+import { processVerificationEventMethod } from '../../../api/verification/VerificationRequestCollection.methods';
 
 // /** @module ui/components/shared/Verification_Event */
+
+Template.Verification_Event.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
+  this.log = new ReactiveVar('');
+});
 
 Template.Verification_Event.helpers({
   events() {
@@ -23,99 +20,59 @@ Template.Verification_Event.helpers({
     const m = moment(event.eventDate);
     return m.format('MM/DD/YY');
   },
+  logValue() {
+    return Template.instance().log.get();
+  },
 });
+
+/**
+ * Appends the passed message to the reactive variable holding the log text.
+ * @param instance The template instance.
+ * @param message The message to be appended to the log.
+ */
+function appendToLog(instance, message) {
+  instance.log.set(`${instance.log.get()}\n${message}`);
+}
+
 
 Template.Verification_Event.events({
   submit: function submit(event) {
     event.preventDefault();
-    const opportunityID = event.target.elements[0].selectedOptions[0].value;
-    const student = event.target.elements[1].value;
-    const opportunity = Opportunities.findDoc(opportunityID);
-    const opportunitySlug = Slugs.findDoc(opportunity.slugID).name;
-    const semester = Semesters.getSemesterDoc(opportunity.eventDate);
-    const semesterSlug = Slugs.findDoc(semester.slugID).name;
+    const instance = Template.instance();
+
+    // Verify that an opportunity was selected.
+    let opportunityID;
+    let opportunity;
     try {
-      const studentID = Users.getID(student);
-      const studentDoc = Users.findDoc(studentID);
-      const opportunityInstances = OpportunityInstances.find({ opportunityID, studentID }).fetch();
-      let opportunityInstance = null;
-      if (opportunityInstances.length === 0) { // student didn't plan on attending in degree plan
-        const collectionName = OpportunityInstances.getCollectionName();
-        const definitionData = { student, semester: semesterSlug, verified: true, opportunity: opportunitySlug };
-        defineMethod.call({ collectionName, definitionData }, (error, result) => {
-          if (error) {
-            console.log('Error defining OpportunityInstance', error);
-          } else {
-            // TODO Can we remove VerificationRequests?
-            verificationRequestsDefineMethod.call({ student: studentDoc.username, opportunityInstance: result },
-                (err, res) => {
-                  if (err) {
-                    console.log('Error defining VerificationRequest', err);
-                  } else {
-                    const requestID = res;
-                    const request = VerificationRequests.findDoc(requestID);
-                    request.status = VerificationRequests.ACCEPTED;
-                    const processRecord = {};
-                    processRecord.date = new Date();
-                    processRecord.status = VerificationRequests.ACCEPTED;
-                    processRecord.verifier = Users.getFullName(Meteor.userId());
-                    const studentFullName = Users.getFullName(studentDoc._id);
-                    processRecord.feedback = `${studentFullName} attended ${opportunity.name}`;
-                    request.processed.push(processRecord);
-                    const status = VerificationRequests.ACCEPTED;
-                    const processed = request.processed;
-                    verificationRequestsUpdateStatusMethod.call({ requestID, status, processed }, (err1) => {
-                      if (err1) {
-                        console.log('Error updating VerificationRequest status', err1);
-                      }
-                    });
-                    const feedData = { feedType: 'verified-opportunity', user: studentDoc.username,
-                      opportunity: opportunitySlug, semester: semesterSlug };
-                    defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
-                  }
-                });
-          }
-        });
-      } else {
-        opportunityInstance = opportunityInstances[0];
-        const updateData = { id: opportunityInstance._id, verified: true };
-        updateMethod.call({ collectionName: 'OpportunityInstanceCollection', updateData });
-        verificationRequestsDefineMethod.call({
-          student: studentDoc.username,
-          opportunityInstance,
-        }, (error, result) => {
-          if (error) {
-            console.log('Error defining VerificationRequest', error);
-          } else {
-            const requestID = result;
-            const request = VerificationRequests.findDoc(requestID);
-            request.status = VerificationRequests.ACCEPTED;
-            const processRecord = {};
-            processRecord.date = new Date();
-            processRecord.status = VerificationRequests.ACCEPTED;
-            processRecord.verifier = Users.getFullName(Meteor.userId());
-            const studentFullName = Users.getFullName(studentDoc._id);
-            processRecord.feedback = `${studentFullName} attended ${opportunity.name}`;
-            request.processed.push(processRecord);
-            const status = VerificationRequests.ACCEPTED;
-            const processed = request.processed;
-            verificationRequestsUpdateStatusMethod.call({ requestID, status, processed }, (err) => {
-              if (err) {
-                console.log('Error updating VerificationRequest status', err);
-              }
-            });
-            const feedData = { feedType: 'verified-opportunity', user: studentDoc.username,
-              opportunity: opportunitySlug, semester: semesterSlug };
-            defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
-          }
-        });
-      }
+      opportunityID = event.target.elements[0].selectedOptions[0].value;
+      opportunity = Opportunities.findDoc(opportunityID);
     } catch (e) {
-      alert(`${student} is not a valid student. ${e}`); // eslint-disable-line no-undef, no-alert
+      appendToLog(instance, 'Error: Please select an opportunity.');
+      return;
     }
+
+    // Only Opportunities with eventDates are available in this widget.
+    const semester = Semesters.getSemester(opportunity.eventDate);
+
+    // Verify that the student username is valid.
+    const student = event.target.elements[1].value;
+    try {
+      Users.getID(student);
+    } catch (e) {
+      appendToLog(instance, `Error: User ${student} not found.`);
+      return;
+    }
+
+    appendToLog(instance, `Verifying ${opportunity.name} for ${student}`);
+    processVerificationEventMethod.call({ student, opportunity, semester }, (error, result) => {
+      if (error) {
+        appendToLog(instance, `Error: problem during processing: ${error}`);
+      } else {
+        appendToLog(instance, `${result}\n`);
+      }
+    });
   },
 });
-
 
 Template.Verification_Event.onRendered(function eventVerificationOnRendered() {
   this.$('.dropdown').dropdown({

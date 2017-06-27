@@ -7,9 +7,8 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection.js';
-import {
-  verificationRequestsUpdateStatusMethod,
-} from '../../../api/verification/VerificationRequestCollection.methods';
+import { verificationRequestsUpdateStatusMethod }
+  from '../../../api/verification/VerificationRequestCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 
@@ -66,14 +65,4 @@ Template.Verification_Requests_Completed.events({
     processed.push(processRecord);
     verificationRequestsUpdateStatusMethod.call({ id, status, processed });
   },
-});
-
-Template.Verification_Requests_Completed.onCreated(function completedVerificationRequestsOnCreated() {
-
-});
-
-Template.Verification_Requests_Completed.onRendered(function completedVerificationRequestsOnRendered() {
-  // this.$('.dropdown').dropdown({
-  //   // action: 'select',
-  // });
 });
