@@ -1,5 +1,6 @@
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import { Slugs } from '../slug/SlugCollection';
 import BaseCollection from '../base/BaseCollection';
@@ -40,16 +41,20 @@ class BaseTypeCollection extends BaseCollection {
   /**
    * Returns the docID associated with instance, or throws an error if it cannot be found.
    * If instance is a docID, then it is returned unchanged. If instance is a slug, its corresponding docID is returned.
+   * If instance is an object with an _id field, then that value is checked to see if it's in the collection.
    * @param { String } instance Either a valid docID or a valid slug string.
    * @returns { String } The docID associated with instance.
    * @throws { Meteor.Error } If instance is not a docID or a slug.
    */
   getID(instance) {
     let id;
+    if (_.isObject(instance) && instance._id) {
+      instance = instance._id; // eslint-disable-line no-param-reassign
+    }
     try {
       id = (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
     } catch (err) {
-      throw new Meteor.Error(`Error in getID(): Failed to convert ${instance} to an ID.`);
+      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`);
     }
     return id;
   }

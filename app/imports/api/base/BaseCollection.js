@@ -88,6 +88,18 @@ class BaseCollection {
   }
 
   /**
+   * Runs findOne on this collection.
+   * @see {@link http://docs.meteor.com/#/full/findOne|Meteor Docs on Mongo Find}
+   * @param { Object } selector A MongoDB selector.
+   * @param { Object } options MongoDB options.
+   * @returns {Mongo.Cursor}
+   */
+  findOne(selector, options) {
+    const theSelector = (typeof selector === 'undefined') ? {} : selector;
+    return this._collection.findOne(theSelector, options);
+  }
+
+  /**
    * Runs a simplified version of update on this collection.
    * @see {@link http://docs.meteor.com/api/collections.html#Mongo-Collection-update}
    * @param { Object } selector A MongoDB selector.

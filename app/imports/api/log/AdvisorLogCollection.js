@@ -79,14 +79,13 @@ class AdvisorLogCollection extends BaseCollection {
 
   /**
    * Depending on the logged in user publish only their AdvisorLogs. If
-   * the user is in the Role.ADMIN or Role.ADVISOR then publish all AdvisorLogs. If the
-   * system is in mockup mode publish all AdvisorLogs.
+   * the user is in the Role.ADMIN or Role.ADVISOR then publish all AdvisorLogs.
    */
   publish() {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });

@@ -16,9 +16,9 @@ import { Users } from '../user/UserCollection';
  * Schema for the processed information of VerificationRequests.
  */
 export const ProcessedSchema = new SimpleSchema({
-  date: { type: Date },
-  status: { type: String },
-  verifier: { type: String },
+  date: Date,
+  status: String,
+  verifier: String,
   feedback: { type: String, optional: true },
 });
 
@@ -35,10 +35,10 @@ class VerificationRequestCollection extends BaseCollection {
    */
   constructor() {
     super('VerificationRequest', new SimpleSchema({
-      studentID: { type: SimpleSchema.RegEx.Id },
-      opportunityInstanceID: { type: SimpleSchema.RegEx.Id },
-      submittedOn: { type: Date },
-      status: { type: String },
+      studentID: SimpleSchema.RegEx.Id,
+      opportunityInstanceID: SimpleSchema.RegEx.Id,
+      submittedOn: Date,
+      status: String,
       processed: [ProcessedSchema],
       ice: { type: Object, optional: true, blackbox: true },
     }));
@@ -90,6 +90,19 @@ class VerificationRequestCollection extends BaseCollection {
    */
   assertValidRoleForMethod(userId) {
     this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT]);
+  }
+
+  /**
+   * Returns the VerificationRequestID associated with opportunityInstanceID, or null if not found.
+   * @param opportunityInstanceID The opportunityInstanceID
+   * @returns The VerificationRequestID, or null if not found.
+   */
+  findVerificationRequest(opportunityInstanceID) {
+    const result = this._collection.find({ opportunityInstanceID });
+    if (result) {
+      return result.fetch()[0]._id;
+    }
+    return result;
   }
 
   /**
@@ -167,14 +180,13 @@ class VerificationRequestCollection extends BaseCollection {
 
   /**
    * Depending on the logged in user publish only their VerificationRequests. If
-   * the user is in the Role.ADMIN, ADVISOR or FACULTY then publish all OpportunityInstances. If the
-   * system is in mockup mode publish all OpportunityInstances.
+   * the user is in the Role.ADMIN, ADVISOR or FACULTY then publish all Verification Requests.
    */
   publish() {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
-        if (!!Meteor.settings.mockup || Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, 'FACULTY'])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
@@ -191,6 +203,22 @@ class VerificationRequestCollection extends BaseCollection {
   updateStatus(requestID, status, processed) {
     this.assertDefined(requestID);
     this._collection.update({ _id: requestID }, { $set: { status, processed } });
+  }
+
+  /**
+   * Sets the passed VerificationRequest to be verified.
+   * @param verificationRequestID The VerificationRequest
+   * @param verifier The user who did the verification.
+   * @throws { Meteor.Error } If verificationRequestID or verifyingUser are not defined.
+   */
+  setVerified(verificationRequestID, verifyingUser) {
+    this.assertDefined(verificationRequestID);
+    const verifierID = Users.getID(verifyingUser);
+    const verifier = Users.findDoc(verifierID).username;
+    const date = new Date();
+    const status = this.ACCEPTED;
+    const processed = [{ date, status, verifier }];
+    this._collection.update(verificationRequestID, { $set: { status, processed } });
   }
 
   /**
