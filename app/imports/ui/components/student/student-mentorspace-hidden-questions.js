@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
-import { mentorQuestionsRemoveItMethod } from '../../../api/mentor/MentorQuestionCollection.methods';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Student_MentorSpace_Hidden_Questions.onCreated(function studentMentorSpaceHiddenQuestionsOnCreated() {
@@ -38,8 +38,9 @@ Template.Student_MentorSpace_Hidden_Questions.helpers({
 Template.Student_MentorSpace_Hidden_Questions.events({
   'click .discard': function (event) {
     event.preventDefault();
-    const id = event.target.value;
-    mentorQuestionsRemoveItMethod.call({ id }, (error) => {
+    const instance = event.target.value;
+    const collectionName = MentorQuestions.getCollectionName();
+    removeItMethod.call({ collectionName, instance }, (error) => {
       if (error) {
         console.log('Error removing MentorQuestion', error);
       }

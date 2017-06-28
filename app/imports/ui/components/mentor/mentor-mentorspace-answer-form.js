@@ -1,10 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
-import {
-  mentorAnswersDefineMenthod,
-  mentorAnswersUpdateMethod,
-} from '../../../api/mentor/MentorAnswerCollection.methods';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 const displaySuccessMessage = 'displaySuccessMessage';
@@ -46,11 +43,12 @@ Template.Mentor_MentorSpace_Answer_Form.events({
     event.preventDefault();
     const answer = event.target.msanswer.value;
     const question = instance.answering.get();
+    const collectionName = MentorAnswers.getCollectionName();
     const newAnswer = { question, mentor: getUserIdFromRoute(), text: answer };
     const existingAnswer = MentorAnswers.findDoc({ questionID: question, mentorID: getUserIdFromRoute() });
     if (answer.length > 0) {
       newAnswer.id = existingAnswer._id;
-      mentorAnswersUpdateMethod.call(newAnswer, (error) => {
+      updateMethod.call({ collectionName, updateData: newAnswer }, (error) => {
         if (error) {
           instance.messageFlags.set(displaySuccessMessage, false);
           instance.messageFlags.set(displayErrorMessages, true);
@@ -62,7 +60,7 @@ Template.Mentor_MentorSpace_Answer_Form.events({
         }
       });
     } else {
-      mentorAnswersDefineMenthod.call(newAnswer, (error) => {
+      defineMethod.call({ collectionName, definitionData: newAnswer }, (error) => {
         if (error) {
           instance.messageFlags.set(displaySuccessMessage, false);
           instance.messageFlags.set(displayErrorMessages, true);

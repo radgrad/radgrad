@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
 import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
@@ -46,8 +45,64 @@ class MentorProfileCollection extends BaseCollection {
     return this._collection.insert({ mentorID, company, career, location, linkedin, motivation });
   }
 
+  /**
+   * Updates the MentorProfile.
+   * @param docID the id of the MentorProfile.
+   * @param company the company (optional).
+   * @param career the career (optional).
+   * @param location the location (optional).
+   * @param linkedin LinkedIn user ID (optional).
+   * @param motivation the motivation (optional).
+   */
+  update(docID, { company, career, location, linkedin, motivation }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (company) {
+      updateData.company = company;
+    }
+    if (career) {
+      updateData.career = career;
+    }
+    if (location) {
+      updateData.location = location;
+    }
+    if (linkedin) {
+      updateData.linkedin = linkedin;
+    }
+    if (motivation) {
+      updateData.motivation = motivation;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Remove the mentor profile.
+   * @param docID the ID of the profile.
+   */
+  removeIt(docID) {
+    this.assertDefined(docID);
+    // OK, clear to delete.
+    super.removeIt(docID);
+  }
+
+  /**
+   * Returns the MentorProfile for the given id.
+   * @param mentorID the id.
+   * @return {Cursor}
+   */
   getMentorProfile(mentorID) {
     return this._collection.find({ mentorID });
+  }
+
+  /**
+   * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
+   * Mentor.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Advisor.
+   */
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.MENTOR]);
   }
 
   /**
@@ -64,71 +119,6 @@ class MentorProfileCollection extends BaseCollection {
       }
     });
     return problems;
-  }
-
-  /**
-   * Updates company.
-   * @param userID The userID.
-   * @param email The user's email as a string.
-   * @throws {Meteor.Error} If userID is not a userID
-   */
-  setCompany(mentorID, company) {
-    Users.assertDefined(mentorID);
-    check(company, String);
-    const mentorProfile = this._collection.find({ mentorID }).fetch();
-    this._collection.update(mentorProfile[0]._id, { $set: { company } });
-  }
-
-  /**
-   * Updates career.
-   * @param userID The userID.
-   * @param email The user's email as a string.
-   * @throws {Meteor.Error} If userID is not a userID
-   */
-  setCareer(mentorID, career) {
-    Users.assertDefined(mentorID);
-    check(career, String);
-    const mentorProfile = this._collection.find({ mentorID }).fetch();
-    this._collection.update(mentorProfile[0]._id, { $set: { career } });
-  }
-
-  /**
-   * Updates location.
-   * @param userID The userID.
-   * @param email The user's email as a string.
-   * @throws {Meteor.Error} If userID is not a userID
-   */
-  setLocation(mentorID, location) {
-    Users.assertDefined(mentorID);
-    check(location, String);
-    const mentorProfile = this._collection.find({ mentorID }).fetch();
-    this._collection.update(mentorProfile[0]._id, { $set: { location } });
-  }
-
-  /**
-   * Updates linkedin
-   * @param userID The userID.
-   * @param email The user's email as a string.
-   * @throws {Meteor.Error} If userID is not a userID
-   */
-  setLinkedIn(mentorID, linkedin) {
-    Users.assertDefined(mentorID);
-    check(linkedin, String);
-    const mentorProfile = this._collection.find({ mentorID }).fetch();
-    this._collection.update(mentorProfile[0]._id, { $set: { linkedin } });
-  }
-
-  /**
-   * Updates email with new email address.
-   * @param userID The userID.
-   * @param email The user's email as a string.
-   * @throws {Meteor.Error} If userID is not a userID
-   */
-  setMotivation(mentorID, motivation) {
-    Users.assertDefined(mentorID);
-    check(motivation, String);
-    const mentorProfile = this._collection.find({ mentorID }).fetch();
-    this._collection.update(mentorProfile[0]._id, { $set: { motivation } });
   }
 
   /**

@@ -9,13 +9,13 @@ import { makeSampleUser } from '../user/SampleUsers';
 
 if (Meteor.isServer) {
   describe('MentorQuestionCollection', function testSuite() {
-    let title;
+    let question;
     let slug;
     let student;
 
     before(function setup() {
       removeAllEntities();
-      title = 'Test question.';
+      question = 'Test question.';
       slug = 'test-mentor-question';
       student = makeSampleUser();
     });
@@ -25,7 +25,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
-      const instanceID = MentorQuestions.define({ title, slug, student });
+      const instanceID = MentorQuestions.define({ question, slug, student });
       expect(MentorQuestions.isDefined(instanceID)).to.be.true;
       MentorQuestions.removeIt(instanceID);
       expect(MentorQuestions.isDefined(instanceID)).to.be.false;

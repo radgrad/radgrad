@@ -3,10 +3,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
-import {
-  mentorQuestionsUpdateModeratedMethod,
-  mentorQuestionsUpdateSlugMethod,
-} from '../../../api/mentor/MentorQuestionCollection.methods';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
@@ -130,13 +126,10 @@ Template.Moderation.events({
       const visible = item.visible;
       if (split[1] === 'review') {
         const updateData = { id: itemID, moderated, visible, moderatorComments };
-        updateMethod.call({ collectionName: 'ReviewCollection', updateData });
+        updateMethod.call({ collectionName: Reviews.getCollectionName(), updateData });
       } else {
-        mentorQuestionsUpdateModeratedMethod.call({ questionID: itemID, moderated, visible, moderatorComments });
-        if (!item.slugID) {
-          const slug = newData.slug;
-          mentorQuestionsUpdateSlugMethod.call({ questionID: itemID, slug });
-        }
+        const updateData = { id: itemID, moderated, visible, moderatorComments };
+        updateMethod.call({ collectionName: MentorQuestions.getCollectionName(), updateData });
       }
     } else {
       FormUtils.indicateError(instance);

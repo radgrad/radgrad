@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('Feedback Functions Meteor Methods', function test() {
+  describe('Feedback Functions Meteor Methods  TestBatch1', function test() {
     // const collectionName = FeedbackInstances.getCollectionName();
 
     before(function (done) {

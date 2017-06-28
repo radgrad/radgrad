@@ -17,8 +17,8 @@ export const verificationRequestsUpdateStatusMethod = new ValidatedMethod({
   name: 'VerificationRequests.updateStatus',
   validate: null,
   run(update) {
-    // Verify that currently logged in user is an admin or advisor, otherwise no update can occur.
-    VerificationRequests._assertRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR]);
+    // Verify that currently logged in user is an admin, advisor, or faculty. otherwise no update can occur.
+    VerificationRequests._assertRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]);
     return VerificationRequests.updateStatus(update.id, update.status, update.processed);
   },
 });
@@ -60,8 +60,8 @@ export const processVerificationEventMethod = new ValidatedMethod({
     // Define a string to hold the result of this process.
     let resultMessage = '';
 
-    // Verify that currently logged in user is an admin or advisor, otherwise no verification can occur.
-    VerificationRequests._assertRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR]);
+    // Verify that currently logged in user is an admin, advisor, or faculty. otherwise no verification can occur.
+    VerificationRequests._assertRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]);
 
     // Make sure there's an opportunity instance for this student.
     let opportunityInstanceID = getOpportunityInstanceID(student, opportunity, semester);
