@@ -1,6 +1,6 @@
 <template name="Student_About_Me_Widget">
   <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>PROFILE</h4></div>
+    <div class="ui dividing header"><h4>ABOUT ME</h4></div>
 
     <div class="ui stackable grid">
 
@@ -24,12 +24,15 @@
           <p><b>Desired Degree</b></p>
         </div>
         <div class="six wide column">
+        <p style="margin-bottom: 0">
           {{#if desiredDegree}}
-            <p>{{desiredDegree}}</p>
+            {{desiredDegree}}
           {{else}}
-            <p>No desired degree specified yet.</p>
+            No desired degree specified yet.
           {{/if}}
-          <a href="{{pathFor degreesRouteName username=routeUserName degree=firstDegree}}">Edit in degree explorer</a>
+        </p>
+          <p><a href="{{pathFor degreesRouteName username=routeUserName degree=firstDegree}}">Edit in degree
+            explorer</a></p>
         </div>
         <div class="two wide column">
           <p><b>Professional Website</b></p>
@@ -43,7 +46,8 @@
           <form class="ui form website">
             <div class="inline field">
               <div class="ui action input">
-                <input id="website" type="text" name="website" placeholder="Enter new website url" value="http://www.">
+                <input id="website" type="text" name="website" placeholder="Enter new website url"
+                       value="http://mywebsite.com">
                 <button class="ui basic green button website" type="submit">Update</button>
               </div>
             </div>
@@ -64,9 +68,8 @@
           {{else}}
             No career goals added yet.
           {{/if}}
-          <br><a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in
-          career
-          explorer</a>
+          <a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in
+          career explorer</a>
         </div>
         <div class="two wide column">
           <p><b>Interests</b></p>
@@ -82,7 +85,7 @@
           {{else}}
             <p>No interests added yet.</p>
           {{/if}}
-          <br><a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Edit in interest
+          <a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Edit in interest
           explorer</a>
         </div>
       </div>

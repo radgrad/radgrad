@@ -34,8 +34,7 @@
           {{else}}
             <p>No interests added yet.</p>
           {{/if}}
-          <br><a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Edit in interest
-          explorer</a>
+          <a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Edit in interest explorer</a>
         </div>
         <div class="two wide column">
           <p><b>Career Goals</b></p>
@@ -49,7 +48,7 @@
           {{else}}
             No career goals added yet.
           {{/if}}
-          <br><a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in career explorer</a>
+          <a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in career goal explorer</a>
         </div>
       </div>
 
@@ -66,8 +65,8 @@
           <form class="ui form website">
             <div class="inline field">
               <div class="ui action input">
-                <input id="website" type="text" name="website" placeholder="Enter new website url" value="http://www.">
-                <button class="ui basic green button website" type="submit">Update</button>
+                <input id="website" type="text" name="website" placeholder="Enter new website url" value="http://mywebsite.com">
+                <button class="ui basic green button website" type="submit">Update Website</button>
               </div>
             </div>
           </form>
