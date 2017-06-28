@@ -20,7 +20,7 @@ function interestedStudentsHelper(item, type) {
       opportunityID: item._id,
     }).fetch();
   }
-  _.map(instances, (c) => {
+  _.forEach(instances, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
     }
@@ -35,14 +35,12 @@ function currentSemester() {
 }
 
 function opportunitySemesters(opp) {
-  const semesters = opp.semesterIDs;
-  const semesterNames = [];
-  _.map(semesters, (sem) => {
-    if (Semesters.findDoc(sem).semesterNumber >= currentSemester().semesterNumber) {
-      semesterNames.push(Semesters.toString(sem));
+  const semesterIDs = opp.semesterIDs;
+  return _.map(semesterIDs, (semID) => {
+    if (Semesters.findDoc(semID).semesterNumber >= currentSemester().semesterNumber) {
+      Semesters.toString(semID);
     }
   });
-  return semesterNames;
 }
 
 Template.Student_Of_Interest_Card.helpers({

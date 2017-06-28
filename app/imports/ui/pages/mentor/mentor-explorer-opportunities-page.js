@@ -16,7 +16,7 @@ function interestedUsers(opportunity) {
   const ci = OpportunityInstances.find({
     opportunityID: opportunity._id,
   }).fetch();
-  _.map(ci, (c) => {
+  _.forEach(ci, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
     }
@@ -39,12 +39,8 @@ function sponsor(opportunity) {
 }
 
 function semesters(opportunity) {
-  const semesterNames = [];
   const semesterIDs = opportunity.semesterIDs;
-  _.map(semesterIDs, (semID) => {
-    semesterNames.push(Semesters.toString(semID));
-  });
-  return semesterNames;
+  return _.map(semesterIDs, (semID) => Semesters.toString(semID));
 }
 
 function teaser(opp) {

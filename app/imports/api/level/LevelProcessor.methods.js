@@ -44,7 +44,7 @@ export const updateAllStudentLevelsMethod = new ValidatedMethod({
   validate: null,
   run() {
     const students = Users.find({ roles: [ROLE.STUDENT] }).fetch();
-    _.map(students, (student) => {
+    _.forEach(students, (student) => {
       updateStudentLevel(student._id);
     });
   },

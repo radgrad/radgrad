@@ -13,7 +13,7 @@ Template.Student_About_Me_Widget.helpers({
     const ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      _.map(user.careerGoalIDs, (id) => {
+      _.forEach(user.careerGoalIDs, (id) => {
         ret.push(CareerGoals.findDoc(id));
       });
     }
@@ -79,7 +79,7 @@ Template.Student_About_Me_Widget.helpers({
     const ret = [];
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      _.map(user.interestIDs, (id) => {
+      _.forEach(user.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
       });
     }

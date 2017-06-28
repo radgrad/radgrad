@@ -20,7 +20,7 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
     }).fetch();
-    _.map(ci, function (c) {
+    _.forEach(ci, function (c) {
       const semester = Semesters.findDoc(c.semesterID);
       if (semester.semesterNumber >= Semesters.getCurrentSemesterDoc().semesterNumber) {
         semesters.push(Semesters.toString(c.semesterID, false));

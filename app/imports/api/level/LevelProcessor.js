@@ -17,7 +17,7 @@ export function calcLevel(studentID) {
   const instances = _.concat(CourseInstances.find({ studentID }).fetch(),
       OpportunityInstances.find({ studentID }).fetch());
   const verified = [];
-  _.map(instances, (i) => {
+  _.forEach(instances, (i) => {
     if (i.verified) { // May need to account for taking the class again.
       verified.push(i);
     }
@@ -59,7 +59,7 @@ export function updateStudentLevel(studentID) {
  */
 export function updateAllStudentLevels() {
   const students = Users.find({ roles: [ROLE.STUDENT] }).fetch();
-  _.map(students, (student) => {
+  _.forEach(students, (student) => {
     updateStudentLevel(student._id);
   });
 }

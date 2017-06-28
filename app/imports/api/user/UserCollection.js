@@ -607,7 +607,7 @@ class UserCollection extends BaseSlugCollection {
     const user = this._collection.findOne({ _id: userID });
     let interestIDs = [];
     interestIDs = _.union(interestIDs, user.interestIDs);
-    _.map(user.careerGoalIDs, (goalID) => {
+    _.forEach(user.careerGoalIDs, (goalID) => {
       const goal = CareerGoals.findDoc(goalID);
       interestIDs = _.union(interestIDs, goal.interestIDs);
     });
@@ -624,7 +624,7 @@ class UserCollection extends BaseSlugCollection {
     const interestIDs = [];
     interestIDs.push(user.interestIDs);
     let careerInterestIDs = [];
-    _.map(user.careerGoalIDs, (goalID) => {
+    _.forEach(user.careerGoalIDs, (goalID) => {
       const goal = CareerGoals.findDoc(goalID);
       careerInterestIDs = _.union(careerInterestIDs, goal.interestIDs);
     });

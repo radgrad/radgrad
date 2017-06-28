@@ -15,15 +15,15 @@ function matchingTeasers() {
     const user = Users.findDoc({ username: getRouteUserName() });
     const userInterests = [];
     let teaserInterests = [];
-    _.map(Users.getInterestIDs(user._id), (id) => {
+    _.forEach(Users.getInterestIDs(user._id), (id) => {
       userInterests.push(Interests.findDoc(id));
     });
-    _.map(allTeasers, (teaser) => {
+    _.forEach(allTeasers, (teaser) => {
       teaserInterests = [];
-      _.map(teaser.interestIDs, (id) => {
+      _.forEach(teaser.interestIDs, (id) => {
         teaserInterests.push(Interests.findDoc(id));
-        _.map(teaserInterests, (teaserInterest) => {
-          _.map(userInterests, (userInterest) => {
+        _.forEach(teaserInterests, (teaserInterest) => {
+          _.forEach(userInterests, (userInterest) => {
             if (_.isEqual(teaserInterest, userInterest)) {
               if (!_.includes(matching, teaser)) {
                 matching.push(teaser);

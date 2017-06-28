@@ -15,7 +15,7 @@ function currentSemester() {
 function opportunitySemesters(opp) {
   const semesters = opp.semesterIDs;
   const semesterNames = [];
-  _.map(semesters, (sem) => {
+  _.forEach(semesters, (sem) => {
     if (Semesters.findDoc(sem).semesterNumber >= currentSemester().semesterNumber) {
       semesterNames.push(Semesters.toString(sem));
     }

@@ -197,7 +197,7 @@ class PublicStatsCollection extends BaseCollection {
   usersMentorsProfessionsList() {
     const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
     let professions = [];
-    _.map(mentors, (m) => {
+    _.forEach(mentors, (m) => {
       const profile = MentorProfiles.findDoc({ mentorID: m._id });
       professions.push(profile.career);
     });
@@ -208,7 +208,7 @@ class PublicStatsCollection extends BaseCollection {
   usersMentorsLocations() {
     const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
     let locations = [];
-    _.map(mentors, (m) => {
+    _.forEach(mentors, (m) => {
       const profile = MentorProfiles.findDoc({ mentorID: m._id });
       locations.push(profile.location);
     });
@@ -224,7 +224,7 @@ class PublicStatsCollection extends BaseCollection {
   courseReviewsCourses() {
     const courseReviews = Reviews.find({ reviewType: 'course' }).fetch();
     let courseNumbers = [];
-    _.map(courseReviews, (review) => {
+    _.forEach(courseReviews, (review) => {
       const course = Courses.findDoc(review.revieweeID);
       courseNumbers.push(course.number);
     });
@@ -237,7 +237,7 @@ class PublicStatsCollection extends BaseCollection {
   generateStats() {
     if (!Meteor.isAppTest) {
       const instance = this;
-      _.map(this.stats, (key) => {
+      _.forEach(this.stats, (key) => {
         instance[key]();
       });
     }

@@ -17,7 +17,7 @@ function interestedUsers(course) {
   const ci = CourseInstances.find({
     courseID: course._id,
   }).fetch();
-  _.map(ci, (c) => {
+  _.forEach(ci, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
     }

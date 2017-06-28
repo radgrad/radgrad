@@ -17,7 +17,7 @@ function interestedUsers(opportunity) {
   const ci = OpportunityInstances.find({
     opportunityID: opportunity._id,
   }).fetch();
-  _.map(ci, (c) => {
+  _.forEach(ci, (c) => {
     if (!_.includes(interested, c.studentID)) {
       interested.push(c.studentID);
     }
@@ -40,12 +40,8 @@ function sponsor(opportunity) {
 }
 
 function semesters(opportunity) {
-  const semesterNames = [];
   const semesterIDs = opportunity.semesterIDs;
-  _.map(semesterIDs, (semID) => {
-    semesterNames.push(Semesters.toString(semID));
-  });
-  return semesterNames;
+  return _.map(semesterIDs, (semID) => Semesters.toString(semID));
 }
 
 function teaser(opp) {
@@ -58,7 +54,7 @@ Template.Student_Explorer_Opportunities_Page.helpers({
     const addedOpportunities = [];
     const allOpportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
     const userID = getUserIdFromRoute();
-    _.map(allOpportunities, (opportunity) => {
+    _.forEach(allOpportunities, (opportunity) => {
       const oi = OpportunityInstances.find({
         studentID: userID,
         opportunityID: opportunity._id,

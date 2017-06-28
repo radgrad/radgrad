@@ -11,7 +11,7 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 function interestedUsers(degree) {
   const interested = [];
   const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
-  _.map(users, (user) => {
+  _.forEach(users, (user) => {
     if (_.includes(user.desiredDegreeID, degree._id)) {
       interested.push(user);
     }

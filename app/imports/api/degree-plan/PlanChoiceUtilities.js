@@ -58,17 +58,14 @@ export function isComplexChoice(planChoice) {
 export function complexChoiceToArray(planChoice) {
   const cleaned = stripCounter(planChoice);
   const split = cleaned.split(',');
-  const ret = [];
-  _.map(split, (slug) => {
+  return _.map(split, (slug) => {
     if (slug.startsWith('(')) {
-      ret.push(slug.substring(1));
+      return slug.substring(1);
     } else if (slug.endsWith(')')) {
-      ret.push(slug.substring(0, slug.length - 1));
-    } else {
-      ret.push(slug);
+      return slug.substring(0, slug.length - 1);
     }
+    return slug;
   });
-  return ret;
 }
 
 /**
@@ -89,7 +86,7 @@ export function buildCourseSlugName(slug) {
 export function buildSimpleName(slug) {
   const splits = slug.split(',');
   let ret = '';
-  _.map(splits, (s) => {
+  _.forEach(splits, (s) => {
     ret = `${ret}${buildCourseSlugName(s)} or `;
   });
   return ret.substring(0, ret.length - 4);
@@ -117,7 +114,7 @@ export function getDepartment(courseSlug) {
 export function getDepartments(planChoice) {
   const choices = planChoice.split(',');
   const ret = [];
-  _.map(choices, (c) => {
+  _.forEach(choices, (c) => {
     const dept = getDepartment(c);
     if (_.indexOf(ret, dept) === -1) {
       ret.push(dept);
@@ -151,7 +148,7 @@ function satisfiesSinglePlanChoice(planChoice, courseSlug) {
 export function satisfiesPlanChoice(planChoice, courseSlug) {
   const singleChoices = planChoice.split(',');
   let ret = false;
-  _.map(singleChoices, (choice) => {
+  _.forEach(singleChoices, (choice) => {
     if (satisfiesSinglePlanChoice(choice, courseSlug)) {
       ret = true;
     }

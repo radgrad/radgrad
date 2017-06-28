@@ -52,7 +52,7 @@ Template.Student_Feed_Widget.helpers({
     } else {
       ret = `${dateDiffInDays(currentTime, feedTime)} days ago`;
     }
-    console.log(feed.description);
+    // console.log(feed.description);
     return ret;
   },
   isType(feed, type) {
@@ -63,7 +63,7 @@ Template.Student_Feed_Widget.helpers({
   },
   students(feed) {
     const students = [];
-    _.map(feed.userIDs, function (userID) {
+    _.forEach(feed.userIDs, function (userID) {
       students.push(Users.findDoc(userID));
     });
     return students;

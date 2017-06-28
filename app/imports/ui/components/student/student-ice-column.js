@@ -76,15 +76,15 @@ function matchingCourses() {
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
   let courseInterests = [];
-  _.map(Users.getInterestIDs(user._id), (id) => {
+  _.forEach(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
   });
-  _.map(allCourses, (course) => {
+  _.forEach(allCourses, (course) => {
     courseInterests = [];
-    _.map(course.interestIDs, (id) => {
+    _.forEach(course.interestIDs, (id) => {
       courseInterests.push(Interests.findDoc(id));
-      _.map(courseInterests, (courseInterest) => {
-        _.map(userInterests, (userInterest) => {
+      _.forEach(courseInterests, (courseInterest) => {
+        _.forEach(userInterests, (userInterest) => {
           if (_.isEqual(courseInterest, userInterest)) {
             if (!_.includes(matching, course)) {
               matching.push(course);
@@ -103,15 +103,15 @@ function matchingOpportunities() {
   const user = Users.findDoc({ username: getRouteUserName() });
   const userInterests = [];
   let opportunityInterests = [];
-  _.map(Users.getInterestIDs(user._id), (id) => {
+  _.forEach(Users.getInterestIDs(user._id), (id) => {
     userInterests.push(Interests.findDoc(id));
   });
-  _.map(allOpportunities, (opp) => {
+  _.forEach(allOpportunities, (opp) => {
     opportunityInterests = [];
-    _.map(opp.interestIDs, (id) => {
+    _.forEach(opp.interestIDs, (id) => {
       opportunityInterests.push(Interests.findDoc(id));
-      _.map(opportunityInterests, (oppInterest) => {
-        _.map(userInterests, (userInterest) => {
+      _.forEach(opportunityInterests, (oppInterest) => {
+        _.forEach(userInterests, (userInterest) => {
           if (_.isEqual(oppInterest, userInterest)) {
             if (!_.includes(matching, opp)) {
               matching.push(opp);
@@ -301,7 +301,7 @@ Template.Student_Ice_Column.helpers({
   semesters(year) {
     const yearSemesters = [];
     const semIDs = year.semesterIDs;
-    _.map(semIDs, (semID) => {
+    _.forEach(semIDs, (semID) => {
       yearSemesters.push(Semesters.findDoc(semID));
     });
     return yearSemesters;
