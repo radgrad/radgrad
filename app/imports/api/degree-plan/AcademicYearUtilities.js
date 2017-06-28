@@ -33,12 +33,12 @@ export function getStudentsCurrentSemesterNumber(studentID) {
 export function getStudentSemesters(studentID) {
   const years = AcademicYearInstances.find({ studentID }, { $sort: { year: 1 } }).fetch();
   let semesters = [];
-  _.map(years, (ay) => {
+  _.forEach(years, (ay) => {
     semesters = _.concat(semesters, ay.semesterIDs);
   });
   const cis = CourseInstances.find({ studentID }).fetch();
   let courseSemesters = [];
-  _.map(cis, (ci) => {
+  _.forEach(cis, (ci) => {
     courseSemesters.push(ci.semesterID);
   });
   courseSemesters = _.uniq(courseSemesters);

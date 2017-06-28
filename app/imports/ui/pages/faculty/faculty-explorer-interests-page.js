@@ -14,7 +14,7 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 function courses(interest) {
   const allCourses = Courses.find().fetch();
   const matching = [];
-  _.map(allCourses, (course) => {
+  _.forEach(allCourses, (course) => {
     if (_.includes(course.interestIDs, interest._id)) {
       matching.push(Slugs.findDoc(course.slugID).name);
     }
@@ -25,7 +25,7 @@ function courses(interest) {
 function opportunities(interest) {
   const allOpportunities = Opportunities.find().fetch();
   const matching = [];
-  _.map(allOpportunities, (opportunity) => {
+  _.forEach(allOpportunities, (opportunity) => {
     if (_.includes(opportunity.interestIDs, interest._id)) {
       matching.push(Slugs.findDoc(opportunity.slugID).name);
     }
@@ -36,7 +36,7 @@ function opportunities(interest) {
 function interestedUsers(interest, role) {
   const interested = [];
   const users = Users.find({ roles: [role] }).fetch();
-  _.map(users, (user) => {
+  _.forEach(users, (user) => {
     if (_.includes(user.interestIDs, interest._id)) {
       interested.push(user);
     }
@@ -51,7 +51,7 @@ function numUsers(interest, role) {
 function careerGoals(interest) {
   const allCareerGoals = CareerGoals.find().fetch();
   const matching = [];
-  _.map(allCareerGoals, (careerGoal) => {
+  _.forEach(allCareerGoals, (careerGoal) => {
     if (_.includes(careerGoal.interestIDs, interest._id)) {
       matching.push(careerGoal);
     }
@@ -64,7 +64,7 @@ Template.Faculty_Explorer_Interests_Page.helpers({
     const user = Users.findDoc({ username: getRouteUserName() });
     const addedCareerInterests = [];
     const allInterests = Users.getInterestIDsByType(user._id);
-    _.map(allInterests[1], (interest) => {
+    _.forEach(allInterests[1], (interest) => {
       addedCareerInterests.push(Interests.findDoc(interest));
     });
     return addedCareerInterests;
@@ -73,7 +73,7 @@ Template.Faculty_Explorer_Interests_Page.helpers({
     const addedInterests = [];
     const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
     const user = Users.findDoc({ username: getRouteUserName() });
-    _.map(allInterests, (interest) => {
+    _.forEach(allInterests, (interest) => {
       if (_.includes(user.interestIDs, interest._id)) {
         addedInterests.push(interest);
       }

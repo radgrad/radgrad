@@ -42,7 +42,7 @@ Template.Student_Explorer_Courses_Widget.helpers({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
     }).fetch();
-    _.map(ci, function (courseInstance) {
+    _.forEach(ci, function (courseInstance) {
       if (Semesters.findDoc(courseInstance.semesterID).semesterNumber >=
           Semesters.getCurrentSemesterDoc().semesterNumber) {
         ret = true;
@@ -87,7 +87,7 @@ Template.Student_Explorer_Courses_Widget.helpers({
       studentID: getUserIdFromRoute(),
       courseID: course._id,
     }).fetch();
-    _.map(ci, function (c) {
+    _.forEach(ci, function (c) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' ||
           c.grade === 'B+' || c.grade === 'B') {
         ret = true;

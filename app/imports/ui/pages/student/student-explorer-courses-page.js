@@ -18,7 +18,7 @@ function passedCourseHelper(courseSlugName) {
     studentID: getUserIdFromRoute(),
     courseID: course[0]._id,
   }).fetch();
-  _.map(ci, (c) => {
+  _.forEach(ci, (c) => {
     if (c.verified === true) {
       ret = 'Completed';
     } else if (ret !== 'Completed') {
@@ -34,7 +34,7 @@ function prerequisites(course) {
   const incomplete = [];
   const notInPlan = [];
   let itemStatus = '';
-  _.map(list, (item) => {
+  _.forEach(list, (item) => {
     itemStatus = passedCourseHelper(item);
     if (itemStatus === 'Not in plan') {
       notInPlan.push({ course: item, status: itemStatus });
@@ -55,7 +55,7 @@ Template.Student_Explorer_Courses_Page.helpers({
     const addedCourses = [];
     const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
     const userID = getUserIdFromRoute();
-    _.map(allCourses, (course) => {
+    _.forEach(allCourses, (course) => {
       const ci = CourseInstances.find({
         studentID: userID,
         courseID: course._id,

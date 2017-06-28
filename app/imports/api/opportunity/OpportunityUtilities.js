@@ -17,7 +17,7 @@ export function getRandomInt(min, max) {
 
 export const clearPlannedOpportunityInstances = (studentID) => {
   const courses = OpportunityInstances.find({ studentID, verified: false }).fetch();
-  _.map(courses, (oi) => {
+  _.forEach(courses, (oi) => {
     const requests = VerificationRequests.find({ studentID, opportunityInstanceID: oi._id }).fetch();
     if (requests.length === 0) {
       OpportunityInstances.removeIt(oi);
@@ -57,7 +57,7 @@ export const getStudentSemesterOpportunityChoices = (semester, semesterNumber, s
   const oppInstances = OpportunityInstances.find({ studentID }).fetch();
   const filtered = _.filter(opportunities, function removeInstances(opp) {
     let taken = true;
-    _.map(oppInstances, (oi) => {
+    _.forEach(oppInstances, (oi) => {
       if (oi.opportunityID === opp._id) {
         taken = false;
       }

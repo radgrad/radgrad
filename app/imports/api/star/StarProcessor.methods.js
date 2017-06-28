@@ -20,14 +20,14 @@ function processStudentStarCsvData(advisor, student, csvData) {
   const definitions = processStarCsvData(student, csvData);
   const studentID = Users.findDoc({ username: student })._id;
   const oldInstances = CourseInstances.find({ studentID, fromSTAR: true }).fetch();
-  _.map(oldInstances, (instance) => {
+  _.forEach(oldInstances, (instance) => {
     CourseInstances.removeIt(instance._id);
   });
   let numInterstingCourses = 0;
   // let numOtherCourses = 0;
   // console.log('create new instances');
   const departments = {};
-  _.map(definitions, (definition) => {
+  _.forEach(definitions, (definition) => {
     const semesterID = Semesters.findIdBySlug(definition.semester);
     // console.log('semesterID', semesterID);
     if (definition.course !== Courses.unInterestingSlug) {

@@ -13,7 +13,7 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 function interestedUsers(careerGoal, role) {
   const interested = [];
   const users = Users.find({ roles: [role] }).fetch();
-  _.map(users, (user) => {
+  _.forEach(users, (user) => {
     if (_.includes(user.careerGoalIDs, careerGoal._id)) {
       interested.push(user);
     }
@@ -30,7 +30,7 @@ Template.Student_Explorer_CareerGoals_Page.helpers({
     const addedCareerGoals = [];
     const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
     const user = Users.findDoc({ username: getRouteUserName() });
-    _.map(allCareerGoals, (careerGoal) => {
+    _.forEach(allCareerGoals, (careerGoal) => {
       if (_.includes(user.careerGoalIDs, careerGoal._id)) {
         addedCareerGoals.push(careerGoal);
       }

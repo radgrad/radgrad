@@ -15,7 +15,7 @@ import { Users } from '../user/UserCollection';
 export function prereqsMet(coursesTakenSlugs, courseID) {
   const course = Courses.findDoc(courseID);
   let ret = true;
-  _.map(course.prerequisites, (prereq) => {
+  _.forEach(course.prerequisites, (prereq) => {
     if (_.indexOf(coursesTakenSlugs, prereq) === -1) {
       ret = false;
       return false;
@@ -33,7 +33,7 @@ function getRandomInt(min, max) {
 
 export function clearPlannedCourseInstances(studentID) {
   const courses = CourseInstances.find({ studentID, verified: false, fromSTAR: false }).fetch();
-  _.map(courses, (ci) => {
+  _.forEach(courses, (ci) => {
     CourseInstances.removeIt(ci);
   });
 }
@@ -125,7 +125,7 @@ export function chooseStudent400LevelCourse(studentID, coursesTakenSlugs) {
 export function chooseBetween(slugs, studentID, coursesTakenSlugs) {
   // console.log('chooseBetween', slugs, coursesTakenSlugs);
   const courses = [];
-  _.map(slugs, (slug) => {
+  _.forEach(slugs, (slug) => {
     const courseID = Courses.getID(slug);
     if (prereqsMet(coursesTakenSlugs, courseID)) {
       courses.push(Courses.findDoc(courseID));

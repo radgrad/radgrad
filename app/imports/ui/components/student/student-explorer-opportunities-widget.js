@@ -23,7 +23,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
-    _.map(oi, function (opportunityInstance) {
+    _.forEach(oi, function (opportunityInstance) {
       if (Semesters.findDoc(opportunityInstance.semesterID).semesterNumber >=
           Semesters.getCurrentSemesterDoc().semesterNumber) {
         ret = true;
@@ -59,7 +59,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
-    _.map(oi, function (opportunityInstance) {
+    _.forEach(oi, function (opportunityInstance) {
       if (!opportunityInstance.verified) {
         ret = true;
       }

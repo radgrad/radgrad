@@ -27,7 +27,7 @@ Template.Student_Feed_Item.helpers({
   },
   students(feed) {
     const students = [];
-    _.map(feed.userIDs, function (userID) {
+    _.forEach(feed.userIDs, function (userID) {
       students.push(Users.findDoc(userID));
     });
     return students;

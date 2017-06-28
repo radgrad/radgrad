@@ -116,11 +116,11 @@ export class FeedbackFunctionClass {
     if (courses.length > 0) {
       let description = 'Your degree plan is missing: \n\n';
       const basePath = this._getBasePath(user);
-      _.map(courses, (slug) => {
+      _.forEach(courses, (slug) => {
         if (!planUtils.isSingleChoice(slug)) {
           const slugs = planUtils.complexChoiceToArray(slug);
           description = `${description}\n\n- `;
-          _.map(slugs, (s) => {
+          _.forEach(slugs, (s) => {
             const id = Slugs.getEntityID(planUtils.stripCounter(s), 'Course');
             const course = Courses.findDoc(id);
             // eslint-disable-next-line max-len
@@ -164,7 +164,7 @@ export class FeedbackFunctionClass {
     const semesters = yearUtils.getStudentSemesters(user);
     let haveOverloaded = false;
     let description = 'Your plan is overloaded. ';
-    _.map(semesters, (semesterID) => {
+    _.forEach(semesters, (semesterID) => {
       const semester = Semesters.findDoc(semesterID);
       if (semester.semesterNumber > currentSemester.semesterNumber) {
         const cis = CourseInstances.find({ studentID, semesterID, note: /ICS/ }).fetch();
@@ -205,7 +205,7 @@ export class FeedbackFunctionClass {
       academicPlan = AcademicPlans.findDoc({ degreeID });
     }
     const coursesNeeded = academicPlan.courseList.slice(0);
-    _.map(courseIDs, (cID) => {
+    _.forEach(courseIDs, (cID) => {
       const course = Courses.findDoc(cID);
       coursesTakenSlugs.push(Slugs.getNameFromID(course.slugID));
     });
@@ -217,7 +217,6 @@ export class FeedbackFunctionClass {
       // }
       const basePath = this._getBasePath(user);
       const slug = missing[0];
-      // _.map(missing, (slug) => {
       if (Array.isArray(slug)) {
         const course = courseUtils.chooseBetween(slug, user, coursesTakenSlugs);
         if (course) {
@@ -264,7 +263,7 @@ export class FeedbackFunctionClass {
       academicPlan = AcademicPlans.findDoc({ degreeID });
     }
     const coursesNeeded = academicPlan.courseList.slice(0);
-    _.map(courseIDs, (cID) => {
+    _.forEach(courseIDs, (cID) => {
       const course = Courses.findDoc(cID);
       coursesTakenSlugs.push(Slugs.getNameFromID(course.slugID));
     });
@@ -277,7 +276,7 @@ export class FeedbackFunctionClass {
           bestChoices = _.drop(bestChoices, len - 5);
         }
         let description = 'Consider taking the following classes to meet the degree requirement: ';
-        _.map(bestChoices, (course) => {
+        _.forEach(bestChoices, (course) => {
           const slug = Slugs.findDoc(course.slugID);
           // eslint-disable-next-line max-len
           description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug.name}), `;
@@ -317,7 +316,7 @@ export class FeedbackFunctionClass {
           bestChoices = _.drop(bestChoices, len - 3);
         }
         let description = 'Consider the following opportunities for this semester: ';
-        _.map(bestChoices, (opp) => {
+        _.forEach(bestChoices, (opp) => {
           const slug = Slugs.findDoc(opp.slugID);
           description = `${description} \n- [${opp.name}](${basePath}explorer/opportunities/${slug.name}), `;
         });
@@ -384,7 +383,7 @@ export class FeedbackFunctionClass {
    */
   _missingCourses(courseIDs, coursesNeeded) {
     const planChoices = coursesNeeded.splice(0);
-    _.map(courseIDs, (id) => {
+    _.forEach(courseIDs, (id) => {
       const course = Courses.findDoc(id);
       const slug = Slugs.getNameFromID(course.slugID);
       const index = planUtils.planIndexOf(planChoices, slug);

@@ -25,7 +25,7 @@ function isSchemaFieldArray(schema, field) {
  */
 export function getSchemaDataFromEvent(schema, event) {
   const eventData = {};
-  _.map(schema._firstLevelSchemaKeys, function (key) {
+  _.forEach(schema._firstLevelSchemaKeys, function (key) {
     if (isSchemaFieldArray(schema, key)) {
       const selectedValues = _.filter(event.target[key].selectedOptions, (option) => option.selected);
       eventData[key] = _.map(selectedValues, (option) => option.value);

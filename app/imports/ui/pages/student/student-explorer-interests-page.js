@@ -17,7 +17,7 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 function coursesHelper(interest) {
   const allCourses = Courses.find().fetch();
   const matching = [];
-  _.map(allCourses, (course) => {
+  _.forEach(allCourses, (course) => {
     if (_.includes(course.interestIDs, interest._id)) {
       matching.push(Slugs.findDoc(course.slugID).name);
     }
@@ -33,7 +33,7 @@ function passedCourseHelper(courseSlugName) {
     studentID: getUserIdFromRoute(),
     courseID: course[0]._id,
   }).fetch();
-  _.map(ci, (c) => {
+  _.forEach(ci, (c) => {
     if (c.verified === true) {
       if (c.grade === 'A+' || c.grade === 'A' || c.grade === 'A-' || c.grade === 'B+' ||
           c.grade === 'B' || c.grade === 'B-') {
@@ -54,7 +54,7 @@ function courses(interest) {
   const incomplete = [];
   const notInPlan = [];
   let itemStatus = '';
-  _.map(list, (item) => {
+  _.forEach(list, (item) => {
     itemStatus = passedCourseHelper(item);
     if (itemStatus === 'Not in plan') {
       notInPlan.push({ course: item, status: itemStatus });
@@ -77,7 +77,7 @@ function verifiedOpportunityHelper(opportunitySlugName) {
     studentID: getUserIdFromRoute(),
     opportunityID: opportunity[0]._id,
   }).fetch();
-  _.map(oi, (o) => {
+  _.forEach(oi, (o) => {
     if (o.verified === true) {
       ret = 'Completed';
     } else {
@@ -90,7 +90,7 @@ function verifiedOpportunityHelper(opportunitySlugName) {
 function opportunitiesHelper(interest) {
   const allOpportunities = Opportunities.find().fetch();
   const matching = [];
-  _.map(allOpportunities, (opportunity) => {
+  _.forEach(allOpportunities, (opportunity) => {
     if (_.includes(opportunity.interestIDs, interest._id)) {
       matching.push(Slugs.findDoc(opportunity.slugID).name);
     }
@@ -104,7 +104,7 @@ function opportunities(interest) {
   const incomplete = [];
   const notInPlan = [];
   let itemStatus = '';
-  _.map(list, (item) => {
+  _.forEach(list, (item) => {
     itemStatus = verifiedOpportunityHelper(item);
     if (itemStatus === 'Not in plan') {
       notInPlan.push({ opportunity: item, status: itemStatus });
@@ -122,7 +122,7 @@ function opportunities(interest) {
 function interestedUsers(interest, role) {
   const interested = [];
   const users = Users.find({ roles: [role] }).fetch();
-  _.map(users, (user) => {
+  _.forEach(users, (user) => {
     if (_.includes(user.interestIDs, interest._id)) {
       interested.push(user);
     }
@@ -137,7 +137,7 @@ function numUsers(interest, role) {
 function careerGoals(interest) {
   const allCareerGoals = CareerGoals.find().fetch();
   const matching = [];
-  _.map(allCareerGoals, (careerGoal) => {
+  _.forEach(allCareerGoals, (careerGoal) => {
     if (_.includes(careerGoal.interestIDs, interest._id)) {
       matching.push(careerGoal);
     }
@@ -148,18 +148,14 @@ function careerGoals(interest) {
 Template.Student_Explorer_Interests_Page.helpers({
   addedCareerInterests() {
     const user = Users.findDoc({ username: getRouteUserName() });
-    const addedCareerInterests = [];
     const allInterests = Users.getInterestIDsByType(user._id);
-    _.map(allInterests[1], (interest) => {
-      addedCareerInterests.push(Interests.findDoc(interest));
-    });
-    return addedCareerInterests;
+    return _.map(allInterests[1], (interest) => Interests.findDoc(interest));
   },
   addedInterests() {
     const addedInterests = [];
     const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
     const user = Users.findDoc({ username: getRouteUserName() });
-    _.map(allInterests, (interest) => {
+    _.forEach(allInterests, (interest) => {
       if (_.includes(user.interestIDs, interest._id)) {
         addedInterests.push(interest);
       }

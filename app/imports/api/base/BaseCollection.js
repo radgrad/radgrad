@@ -143,7 +143,7 @@ class BaseCollection {
   removeAll() {
     const items = this._collection.find().fetch();
     const instance = this;
-    _.map(items, (i) => {
+    _.forEach(items, (i) => {
       instance.removeIt(i._id);
     });
   }

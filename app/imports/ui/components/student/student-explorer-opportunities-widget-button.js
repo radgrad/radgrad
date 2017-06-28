@@ -22,7 +22,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
-    _.map(oi, function (o) {
+    _.forEach(oi, function (o) {
       if (!o.verified) {
         semesters.push(Semesters.toString(o.semesterID, false));
       }
@@ -41,10 +41,10 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
     }).fetch();
-    _.map(oi, function (o) {
+    _.forEach(oi, function (o) {
       takenSemesters.push(o.semesterID);
     });
-    _.map(semesters, function (sem) {
+    _.forEach(semesters, function (sem) {
       if (Semesters.findDoc(sem).semesterNumber >= currentSemester.semesterNumber) {
         if (!_.includes(takenSemesters, sem)) {
           semesterNames.push(Semesters.toString(sem));
