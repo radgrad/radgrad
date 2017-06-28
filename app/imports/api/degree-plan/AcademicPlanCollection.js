@@ -21,12 +21,11 @@ class AcademicPlanCollection extends BaseSlugCollection {
    */
   constructor() {
     super('AcademicPlan', new SimpleSchema({
-      name: { type: String },
-      slugID: { type: SimpleSchema.RegEx.Id },
-      degreeID: { type: SimpleSchema.RegEx.Id },
-      effectiveSemesterID: { type: SimpleSchema.RegEx.Id },
-      coursesPerSemester: { type: Array, minCount: 12, maxCount: 12 },
-      'coursesPerSemester.$': Number,
+      name: String,
+      slugID: SimpleSchema.RegEx.Id,
+      degreeID: SimpleSchema.RegEx.Id,
+      effectiveSemesterID: SimpleSchema.RegEx.Id,
+      coursesPerSemester: { type: Array, minCount: 12, maxCount: 12 }, 'coursesPerSemester.$': Number,
       courseList: [String],
     }));
     if (Meteor.server) {
@@ -141,6 +140,9 @@ class AcademicPlanCollection extends BaseSlugCollection {
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     const problems = [];
     this.find().forEach(doc => {
+      if (!Slugs.isDefined(doc.slugID)) {
+        problems.push(`Bad slugID: ${doc.slugID}`);
+      }
       if (!Semesters.isDefined(doc.effectiveSemesterID)) {
         problems.push(`Bad semesterID: ${doc.effectiveSemesterID}`);
       }

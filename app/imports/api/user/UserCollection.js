@@ -657,6 +657,9 @@ class UserCollection extends BaseSlugCollection {
       if (doc.desiredDegreeID && !DesiredDegrees.isDefined(doc.desiredDegreeID)) {
         problems.push(`Bad desiredDegreeID: ${doc.desiredDegreeID}`);
       }
+      if (doc.academicPlanID && !AcademicPlans.isDefined(doc.academicPlanID)) {
+        problems.push(`Bad academicPlanID: ${doc.academicPlanID}`);
+      }
       _.forEach(doc.careerGoalIDs, careerGoalID => {
         if (!CareerGoals.isDefined(careerGoalID)) {
           problems.push(`Bad careerGoalID: ${careerGoalID}`);
