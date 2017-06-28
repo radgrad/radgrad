@@ -28,7 +28,7 @@ Template.Mentor_MentorSpace_Page.helpers({
     return Users.find({ roles: ['MENTOR'] });
   },
   mentorProfile(mentorID) {
-    return MentorProfiles.getMentorProfile(mentorID).fetch()[0];
+    return MentorProfiles.getMentorProfile(mentorID);
   },
 });
 

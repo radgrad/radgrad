@@ -48,6 +48,7 @@ class PlanChoiceCollection extends BaseCollection {
     }
     this._collection.update(docID, { $set: updateData });
   }
+
   /**
    * Creates a human readable string representation of the choice.
    * @param planChoiceSlug
