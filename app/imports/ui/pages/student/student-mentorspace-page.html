@@ -6,16 +6,16 @@
 
       <div class="eleven wide column">
 
+        {{#each question in questionsList}}
+        {{> Student_MentorSpace_Questions_Accordion title=question.question questionID=question._id}}
+        {{/each}}
+
         <div class="ui center aligned segment">
           <div class="ui dividing header">
             <h4 style="text-align: left;">ASK A NEW QUESTION</h4>
           </div>
           {{> Student_MentorSpace_Question_Form}}
         </div>
-
-        {{#each question in questionsList}}
-        {{> Student_MentorSpace_Questions_Accordion title=question.question questionID=question._id}}
-        {{/each}}
 
       </div>
 
