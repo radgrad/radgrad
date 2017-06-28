@@ -8,6 +8,15 @@ import { ROLE } from '../role/Role';
 
 /** @module api/base/BaseCollectionMethods */
 
+function debugDump() {
+  console.log('Debugging dump');
+  RadGrad.collectionLoadSequence.forEach(collection => {
+    console.log(`Collection: ${collection.getCollectionName()}`);
+    collection.dumpAll();
+    console.log('dump succeeded');
+  })
+}
+
 /**
  * Allows admins to create and return a JSON object to the client representing a snapshot of the RadGrad database.
  */
@@ -23,6 +32,7 @@ export const dumpDatabaseMethod = new ValidatedMethod({
       }
     // Don't do the dump except on server side (disable client-side simulation).
     // Return an object with fields timestamp and collections.
+    debugDump();
     if (Meteor.isServer) {
       const collections = _.sortBy(RadGrad.collectionLoadSequence.map(collection => collection.dumpAll()),
           entry => entry.name);

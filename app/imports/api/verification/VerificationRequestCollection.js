@@ -237,6 +237,12 @@ class VerificationRequestCollection extends BaseCollection {
       if (!Users.isDefined(doc.advisorID)) {
         problems.push(`Bad advisorID: ${doc.advisorID}`);
       }
+      if (!OpportunityInstances.isDefined(doc.opportunityInstanceID)) {
+        problems.push(`Bad opportunityInstanceID: ${doc.opportunityInstanceID}`);
+      }
+      if (!Semesters.isDefined(doc.semesterID)) {
+        problems.push(`Bad semesterID: ${doc.semesterID}`);
+      }
     });
     return problems;
   }
