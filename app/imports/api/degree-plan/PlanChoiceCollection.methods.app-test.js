@@ -34,7 +34,7 @@ if (Meteor.isClient) {
     it('Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const id = PlanChoices.find().fetch()[0]._id;
+          const id = PlanChoices.findOne()._id;
           const newChoice = 'ics314-1';
           updateMethod.call({ collectionName, updateData: { id, choice: newChoice } }, done);
         }).catch(done);
@@ -44,7 +44,7 @@ if (Meteor.isClient) {
     it('Remove Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const instance = PlanChoices.find().fetch()[0]._id;
+          const instance = PlanChoices.findOne()._id;
           removeItMethod.call({ collectionName, instance }, done);
         }).catch(done);
       });

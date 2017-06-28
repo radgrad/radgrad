@@ -91,7 +91,7 @@ class MentorProfileCollection extends BaseCollection {
    * @return {Cursor}
    */
   getMentorProfile(mentorID) {
-    return this._collection.find({ mentorID });
+    return this._collection.findOne({ mentorID });
   }
 
   /**

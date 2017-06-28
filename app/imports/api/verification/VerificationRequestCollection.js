@@ -98,11 +98,12 @@ class VerificationRequestCollection extends BaseCollection {
    * @returns The VerificationRequestID, or null if not found.
    */
   findVerificationRequest(opportunityInstanceID) {
-    const result = this._collection.find({ opportunityInstanceID });
-    if (result) {
-      return result.fetch()[0]._id;
-    }
-    return result;
+    const result = this._collection.findOne({ opportunityInstanceID });
+    // if (result) {
+    //   return result._id;
+    // }
+    // return result;
+    return result && result._id;
   }
 
   /**
