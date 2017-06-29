@@ -24,6 +24,7 @@ function getEventsHelper(iceType, type, earned, semester) {
       const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: user._id,
         verified: earned }).fetch();
       courseInstances.forEach((courseInstance) => {
+        // TODO: isICS is no longer a field in CourseInstances. Fix the following code.
         if (CourseInstances.isICS(courseInstance._id)) {
           allInstances.push(courseInstance);
         }
