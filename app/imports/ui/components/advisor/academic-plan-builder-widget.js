@@ -10,7 +10,8 @@ import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs, slugify } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import { buildSimpleName, getAllElementsWithAttribute } from '../../../api/degree-plan/PlanChoiceUtilities';
+import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
+import { getAllElementsWithAttribute } from '../../../ui/utilities/DomUtilities';
 
 /* global document */
 // /** @module ui/components/advisor/Academic_Plan_Builder_Widget */
