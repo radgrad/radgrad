@@ -331,6 +331,7 @@ class CourseInstanceCollection extends BaseCollection {
     return `[CI ${semester} ${courseName} ${grade}]`;
   }
 
+  // TODO Remove this method and instead call the generic update meteor method in planned-course-grade.js.
   /* eslint-disable class-methods-use-this */
   /**
    * Updates the CourseInstance's grade. This should be used for planning purposes on the client side.

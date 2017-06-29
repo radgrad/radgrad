@@ -138,7 +138,7 @@ export class FeedbackFunctionClass {
               const id = Slugs.getEntityID(planUtils.stripCounter(slug), 'Course');
               const course = Courses.findDoc(id);
               // eslint-disable-next-line max-len
-              description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;
+              description = `${description} \n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${planUtils.stripCounter(slug)}), `;
             }
       });
       description = description.substring(0, description.length - 2);

@@ -76,9 +76,11 @@
         <div class="six wide column">
           {{#if careerGoals}}
             {{#each goal in careerGoals}}
-              {{goalName goal}}
-              <br>
+              <a class="ui tiny label"
+                 href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName goal)}}"><i
+                  class="fitted suitcase icon"></i>{{goalName goal}}</a>
             {{/each}}
+            <br>
           {{else}}
             No career goals added yet.
           {{/if}}
