@@ -1,0 +1,24 @@
+<template name="Academic_Plan_Form_Fields">
+  <div class="fields">
+    <div class="{{#if required}}required{{/if}} field">
+      <label>Year</label>
+      <select class="ui dropdown" name="year">
+        <option value="">Select Year</option>
+        {{#each year in years}}
+          <option value="{{year}}" selected="{{isSelected year selectedYear}}">{{year}}</option>
+        {{/each}}
+      </select>
+      {{> Form_Error_Message errorMessage=errorMessage}}
+    </div>
+    <div class="{{#if required}}required{{/if}} field">
+      <label>Academic Plan</label>
+      <select class="ui dropdown" name="academicPlan">
+        <option value="">Select Name</option>
+        {{#each plan in plans}}
+          <option value="{{plan._id}}" selected="{{isSelected plan.name selectedPlan}}">{{plan.name}}</option>
+        {{/each}}
+      </select>
+      {{> Form_Error_Message errorMessage=errorMessage}}
+    </div>
+  </div>
+</template>

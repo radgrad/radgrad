@@ -7,7 +7,6 @@ import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -27,7 +26,6 @@ const updateSchema = new SimpleSchema({
   email: String,
   uhID: String,
   // remaining are optional.
-  desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
   careerGoals: { type: Array, minCount: 1 }, 'careerGoals.$': String,
@@ -53,9 +51,6 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
   declaredSemesters() {
     return Semesters.find({});
-  },
-  desiredDegrees() {
-    return DesiredDegrees.find({}, { sort: { name: 1 } });
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
