@@ -27,46 +27,15 @@
   {{/each}}
   </div>
   <div class="ui bottom attached tab segment" data-tab="add">
-    <form class="ui form jsNewStudent {{ successClass }} {{ errorClass }}">
-      <div class="two fields">
-        <div class="field">
-          <label>First Name</label>
-          <input id="firstName" type="text" name="firstName" placeholder="First Name">
-          {{#if displayFieldError 'firstName' }}
-            <div class="ui error message">
-              <p>{{fieldErrorMessage 'firstName'}}.</p>
-            </div>
-          {{/if}}
-        </div>
-        <div class="field">
-          <label>Last Name</label>
-          <input type="text" name="lastName" placeholder="Last Name">
-          {{#if displayFieldError 'lastName' }}
-            <div class="ui error message">
-              <p>{{fieldErrorMessage 'lastName'}}.</p>
-            </div>
-          {{/if}}
-        </div>
+    <form class="ui equal width form jsNewStudent {{ successClass }} {{ errorClass }}">
+      <div class="fields">
+        {{> Input_Form_Field label="First" name="firstName" placeholder="John" errorMessage=(fieldError "firstName") required=true}}
+        {{> Input_Form_Field label="Last" name="lastName" placeholder="Doe" errorMessage=(fieldError "lastName") required=true}}
       </div>
-      <div class="two fields">
-        <div class="field">
-          <label>Username</label>
-          <input type="text" name="username" placeholder="Username">
-          {{#if displayFieldError 'userName' }}
-            <div class="ui error message">
-              <p>{{fieldErrorMessage 'userName'}}.</p>
-            </div>
-          {{/if}}
-        </div>
-        <div class="field">
-          <label>UH ID</label>
-          <input type="text" name="uhID" placeholder="1234-5678">
-          {{#if displayFieldError 'uhID' }}
-            <div class="ui error message">
-              <p>{{fieldErrorMessage 'uhID'}} ####-####.</p>
-            </div>
-          {{/if}}
-        </div>
+
+      <div class="fields">
+        {{> Input_Form_Field label="Slug (Username)" name="slug" placeholder="johndoe" errorMessage=(fieldError "slug") required=true}}
+        {{> Input_Form_Field label="Email" name="email" placeholder="jdoe@hawaii.edu" errorMessage=(fieldError "email") required=true}}
       </div>
       <button class="ui basic green button jsNewStudent" type="submit">Submit</button>
       {{#if alreadyDefined }}

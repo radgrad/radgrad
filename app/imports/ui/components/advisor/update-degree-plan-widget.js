@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
@@ -24,16 +25,16 @@ const updateSchema = new SimpleSchema({
   slug: String, // will rename this to username
   role: String,
   email: String,
-  uhID: String,
-  // remaining are optional.
+  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  uhID: { type: String, optional: true },
+  // year: { type: Number, optional: true },
+  academicPlan: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
-  careerGoals: { type: Array, minCount: 1 }, 'careerGoals.$': String,
-  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  careerGoals: [String],
   website: { type: String, optional: true },
   declaredSemester: { type: String, optional: true },
-  academicPlan: { type: String, optional: true },
-});
+}, { tracker: Tracker });
 
 Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
   this.chosenYear = new ReactiveVar('');
@@ -54,6 +55,9 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
+  },
+  studentID() {
+    return Template.currentData().studentID;
   },
   plans() {
     if (Template.currentData().studentID.get()) {
@@ -92,7 +96,7 @@ Template.Update_Degree_Plan_Widget.helpers({
     }
     return '';
   },
-  selectedDeclaredSemesterID() {
+  selectedSemesterID() {
     if (Template.currentData().studentID.get()) {
       const user = Users.findDoc(Template.currentData().studentID.get());
       return user.declaredSemesterID;
@@ -141,12 +145,7 @@ Template.Update_Degree_Plan_Widget.helpers({
     return '';
   },
   semesters() {
-    const currentSemester = Semesters.getCurrentSemesterDoc();
-    return _.filter(Semesters.find({ semesterNumber: { $gte: currentSemester.semesterNumber } },
-        { sort: { semesterNumber: 1 } }).fetch(),
-        function notSummer(s) {
-          return s.term !== Semesters.SUMMER;
-        });
+    return Semesters.find({});
   },
   slug() {
     if (Template.currentData().studentID.get()) {
@@ -161,30 +160,6 @@ Template.Update_Degree_Plan_Widget.helpers({
     }
     return '';
   },
-  years() {
-    if (Template.currentData().studentID.get()) {
-      const studentID = Template.currentData().studentID.get();
-      const student = Users.findDoc({ _id: studentID });
-      let declaredYear;
-      if (student.declaredSemesterID) {
-        declaredYear = Semesters.findDoc(student.declaredSemesterID).year;
-      }
-      let plans = AcademicPlans.find().fetch();
-      plans = _.filter(plans, (p) => {
-        const year = Semesters.findDoc(p.effectiveSemesterID).year;
-        if (declaredYear) {
-          return year >= declaredYear;
-        }
-        return true;
-      });
-      let years = _.map(plans, (p) => Semesters.findDoc(p.effectiveSemesterID).year);
-      years = _.uniq(years);
-      return _.sortBy(years, [function sort(o) {
-        return o;
-      }]);
-    }
-    return [];
-  },
 });
 
 Template.Update_Degree_Plan_Widget.events({
@@ -192,7 +167,7 @@ Template.Update_Degree_Plan_Widget.events({
     event.preventDefault();
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updateData);
+    updateSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       FormUtils.renameKey(updateData, 'slug', 'username');
@@ -222,5 +197,8 @@ Template.Update_Degree_Plan_Widget.events({
     instance.successClass.set('');
     instance.errorClass.set('');
   },
-  // 'click .jsCancel': FormUtils.processCancelButtonClick,
+  'click .jsCancel': function cancel(event, instance) {
+    event.preventDefault();
+    instance.data.studentID.set('');
+  },
 });
