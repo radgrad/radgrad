@@ -11,7 +11,6 @@ import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollec
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
-import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Feeds } from '../feed/FeedCollection';
 import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
 import { Interests } from '../interest/InterestCollection';
@@ -51,7 +50,6 @@ class UserCollection extends BaseSlugCollection {
       uhID: { type: String, optional: true },
       careerGoalIDs: [SimpleSchema.RegEx.Id],
       interestIDs: [SimpleSchema.RegEx.Id],
-      desiredDegreeID: { type: String, optional: true },
       picture: { type: String, optional: true },
       level: { type: Number, optional: true },
       website: { type: String, optional: true },
@@ -76,7 +74,6 @@ class UserCollection extends BaseSlugCollection {
         picture: 1,
         roles: 1,
         username: 1,
-        desiredDegreeID: 1,
         website: 1,
         emails: 1,
         academicPlanID: 1,
@@ -103,23 +100,25 @@ class UserCollection extends BaseSlugCollection {
    *                website: 'http://johnson.github.io/',
    *                interests: ['software-engineering'],
    *                careerGoals: ['application-developer'],
-   *                desiredDegree: 'bs-cs',
    *                level: 1,
    *                hiddenCourses: ['ics312'],
    *                hiddenOpportunities: ['acm-icpc'],
    *                declaredSemester: 'Spring-2016',
+   *                academicPlan: 'bs-cs-2016'
    *               });
    * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
    * slug must be previously undefined. role must be a defined role.
-   * picture, website, interests, careerGoals, hiddenCourseIDs, hiddenOpportunityIDs and desiredDegree are optional.
-   * desiredDegree, if supplied, must be a DesiredDegree slug or docID.
+   * picture, website, interests, careerGoals, hiddenCourseIDs, hiddenOpportunityIDs, declaredSemester
+   * and academicPlan are optional.
+   * declaredSemester
+   * academicPlan, if supplied, must be an AcademicPlan slug or docID.
    * Level defaults to 1.
    * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
    * @returns The newly created docID.
    */
   define({
       firstName, lastName, slug, email, role, password,
-      picture = '/images/default-profile-picture.png', interests, careerGoals, desiredDegree, academicPlan = undefined,
+      picture = '/images/default-profile-picture.png', interests, careerGoals, academicPlan = undefined,
       website, uhID, level = 1, hiddenCourses = [], hiddenOpportunities = [], declaredSemester = undefined,
   }) {
     // Users can only be defined on the server side.
@@ -132,9 +131,6 @@ class UserCollection extends BaseSlugCollection {
       const careerGoalIDs = CareerGoals.getIDs(careerGoals);
       const hiddenCourseIDs = Courses.getIDs(hiddenCourses);
       const hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
-
-      // desiredDegree is optional.
-      const desiredDegreeID = (desiredDegree) ? DesiredDegrees.getID(desiredDegree) : undefined;
       // academicPlan is optional.
       let academicPlanID;
       if (academicPlan) {
@@ -142,7 +138,6 @@ class UserCollection extends BaseSlugCollection {
         const plan = AcademicPlans.findDoc({ slugID: acaSlugID });
         academicPlanID = plan._id;
       }
-      // console.log(academicPlan, academicPlanID);
       // declaredSemester is optional.
       const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;
       // Now define the user.
@@ -160,7 +155,7 @@ class UserCollection extends BaseSlugCollection {
       Meteor.users.update(userID, {
         $set: {
           username: slug, firstName, lastName, slugID, email, picture, website, password,
-          desiredDegreeID, academicPlanID, interestIDs, careerGoalIDs, uhID, level, hiddenCourseIDs,
+          academicPlanID, interestIDs, careerGoalIDs, uhID, level, hiddenCourseIDs,
           hiddenOpportunityIDs, declaredSemesterID,
         },
       });
@@ -182,7 +177,7 @@ class UserCollection extends BaseSlugCollection {
    * hiddenOpportunities, declaredSemester, or academicPlan are not valid.
    */
   update(docID, {
-      firstName, lastName, email, picture, website, password, desiredDegree, interests, careerGoals,
+      firstName, lastName, email, picture, website, password, interests, careerGoals,
       uhID, level, hiddenCourses, hiddenOpportunities, declaredSemester, academicPlan, role,
   }) {
     this.assertDefined(docID);
@@ -204,9 +199,6 @@ class UserCollection extends BaseSlugCollection {
     }
     if (password) {
       updateData.password = password;
-    }
-    if (desiredDegree) {
-      updateData.desiredDegreeID = DesiredDegrees.getID(desiredDegree);
     }
     if (interests) {
       updateData.interestIDs = Interests.getIDs(interests);
@@ -456,19 +448,6 @@ class UserCollection extends BaseSlugCollection {
   }
 
   /**
-   * Updates userID with desiredDegree string.
-   * @param userID The userID.
-   * @param desiredDegree The desired degree, either a slug or a docID.
-   * @throws {Meteor.Error} If userID is not a userID, or if desiredDegree is not defined.
-   */
-  setDesiredDegree(userID, desiredDegree) {
-    this.assertDefined(userID);
-    check(desiredDegree, String);
-    const desiredDegreeID = DesiredDegrees.getID(desiredDegree);
-    this._collection.update(userID, { $set: { desiredDegreeID } });
-  }
-
-  /**
    * Updates userID's level.
    * @param userID The userID.
    * @param level The new level.
@@ -654,9 +633,6 @@ class UserCollection extends BaseSlugCollection {
       if (!Slugs.isDefined(doc.slugID)) {
         problems.push(`Bad slugID: ${doc.slugID}`);
       }
-      if (doc.desiredDegreeID && !DesiredDegrees.isDefined(doc.desiredDegreeID)) {
-        problems.push(`Bad desiredDegreeID: ${doc.desiredDegreeID}`);
-      }
       if (doc.academicPlanID && !AcademicPlans.isDefined(doc.academicPlanID)) {
         problems.push(`Bad academicPlanID: ${doc.academicPlanID}`);
       }
@@ -702,7 +678,6 @@ class UserCollection extends BaseSlugCollection {
     const website = doc.website;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
-    const desiredDegree = doc.desiredDegreeID && DesiredDegrees.findSlugByID(doc.desiredDegreeID);
     const academicPlan = doc.academicPlanID && AcademicPlans.findSlugByID(doc.academicPlanID);
     const level = doc.level;
     const hiddenCourses = _.map(doc.hiddenCourseIDs, hiddenCourseID => Courses.findSlugByID(hiddenCourseID));
@@ -711,7 +686,7 @@ class UserCollection extends BaseSlugCollection {
 
     return {
       firstName, lastName, slug, email, password, role, uhID, picture, website, interests, careerGoals,
-      desiredDegree, academicPlan, level, hiddenCourses, hiddenOpportunities,
+      academicPlan, level, hiddenCourses, hiddenOpportunities,
     };
   }
 
