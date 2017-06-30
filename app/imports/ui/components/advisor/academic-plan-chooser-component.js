@@ -2,11 +2,14 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
+import { Roles } from 'meteor/alanning:roles';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { ROLE } from '../../../api/role/Role';
 
 // /** @module ui/components/advisor/Academic_Plan_Chooser_Component */
 
@@ -83,6 +86,19 @@ Template.Academic_Plan_Chooser_Component.events({
     const name = $(event.target).val();
     const plan = AcademicPlans.findDoc({ effectiveSemesterID, name });
     Template.instance().plan.set(plan);
+    if (Roles.userIsInRole(getUserIdFromRoute(), ROLE.STUDENT)) {
+      const user = Users.findDoc(getUserIdFromRoute());
+      const updateData = {};
+      updateData.id = user._id;
+      updateData.academicPlan = plan._id;
+      const collectionName = Users.getCollectionName();
+      updateMethod.call({ collectionName, updateData }, (error) => {
+        if (error) {
+          console.log('Error updating student\' academic plan', error);
+        }
+      });
+
+    }
   },
 });
 
