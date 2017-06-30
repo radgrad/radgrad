@@ -3,7 +3,6 @@ import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
@@ -23,7 +22,6 @@ const addSchema = new SimpleSchema({
   // Everything else is optional.
   uhID: { type: String, optional: true },
   password: { type: String, optional: true },
-  desiredDegree: { type: String, optional: true },
   picture: { type: String, optional: true },
   level: { type: Number, optional: true },
   careerGoals: { type: Array }, 'careerGoals.$': String,
@@ -41,9 +39,6 @@ Template.Add_User_Widget.helpers({
   },
   careerGoals() {
     return CareerGoals.find({}, { sort: { name: 1 } });
-  },
-  desiredDegrees() {
-    return DesiredDegrees.find({}, { sort: { name: 1 } });
   },
   roles() {
     return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));

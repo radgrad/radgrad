@@ -1,24 +1,40 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { Users } from '../../../api/user/UserCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { validUserAccountsDefineMethod } from '../../../api/user/ValidUserAccountCollection.methods';
+import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 // /** @module ui/components/advisor/Student_Selector_Tabs */
-
-const userDefineSchema = new SimpleSchema({
-  firstName: { type: String },
-  lastName: { type: String },
-  userName: { type: String },
-  uhID: {
-    type: String,
-    regEx: /\d{4}-\d{4}/, // TODO: Do we care whether there is a dash?
-  },
+const formSchema = new SimpleSchema({
+  firstName: String,
+  lastName: String,
+  slug: { type: String, custom: FormUtils.slugFieldValidator },
+  email: String,
 });
+
+const addSchema = new SimpleSchema({
+  firstName: String,
+  lastName: String,
+  role: String,
+  slug: { type: String, custom: FormUtils.slugFieldValidator },
+  email: String,
+  // Everything else is optional.
+  uhID: { type: String, optional: true },
+  interests: { type: Array, optional: true }, 'interests.$': String,
+  password: { type: String, optional: true },
+  picture: { type: String, optional: true },
+  level: { type: Number, optional: true },
+  careerGoals: { type: Array }, 'careerGoals.$': String,
+  website: { type: String, optional: true },
+  declaredSemester: { type: String, optional: true },
+}, { tracker: Tracker });
 
 const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
@@ -32,9 +48,10 @@ Template.Student_Selector_Tabs.onCreated(function studentSelectorTabsOnCreated()
   if (this.data.studentID) {
     this.studentID = this.data.studentID;
   }
-  this.state.set(displaySuccessMessage, false);
-  this.state.set(displayErrorMessages, false);
-  this.context = userDefineSchema.namedContext('Add_Create_Student');
+  FormUtils.setupFormWidget(this, addSchema);
+  // this.state.set(displaySuccessMessage, false);
+  // this.state.set(displayErrorMessages, false);
+  // this.context = addSchema.namedContext('Add_Create_Student');
 });
 
 Template.Student_Selector_Tabs.onRendered(function studentSelectorTabsOnRendered() {
@@ -164,71 +181,97 @@ Template.Student_Selector_Tabs.events({
   },
   'submit .jsNewStudent': function submitNewUser(event, instance) {
     event.preventDefault();
-    const firstName = event.target.firstName.value;
-    const lastName = event.target.lastName.value;
-    const userName = event.target.username.value;
-    let uhID = event.target.uhID.value;
-    if (uhID.length > 0 && uhID.indexOf('-') === -1) {
-      uhID = `${uhID.substring(0, 4)}-${uhID.substring(4, 8)}`;
-    }
-    const newStudentData = { firstName, lastName, userName, uhID };
-    // Clear out any old validation errors.
+    const newData = FormUtils.getSchemaDataFromEvent(formSchema, event);
     instance.context.reset();
-    // Invoke clean so that newStudentData reflects what will be defined
-    userDefineSchema.clean(newStudentData);
-    // Determine validity
-    instance.context.validate(newStudentData);
+    newData.role = ROLE.STUDENT;
+    newData.password = 'foo';  // TODO get rid of this when using CAS
+    newData.uhID = '';
+    newData.level = 1;
+    newData.declaredSemester = Semesters.getSlug(Semesters.getCurrentSemester());
+    newData.interests = [];
+    newData.careerGoals = [];
+    addSchema.clean(newData, { mutate: true });
+    instance.context.validate(newData);
     if (instance.context.isValid()) {
-      const notDefined = Users.find({ username: userName }).count() === 0;
-      if (notDefined) {
-        validUserAccountsDefineMethod.call({ username: userName }, (error) => {
+      validUserAccountsDefineMethod.call({ username: newData.slug }, () => {
+        defineMethod.call({ collectionName: 'UserCollection', definitionData: newData }, (error) => {
           if (error) {
-            console.log('Error during new user creation ValidUserAccounts: ', error);
-            instance.state.set(displaySuccessMessage, false);
-            instance.state.set(displayErrorMessages, true);
-            instance.state.set('errorMessage', error.reason);
-          }
-        });
-        const userDefinition = { firstName, lastName, slug: userName, email: `${userName}@hawaii.edu`,
-          role: ROLE.STUDENT, uhID };
-        defineMethod.call({ collectionName: 'UserCollection', definitionData: userDefinition }, (error) => {
-          if (error) {
-            const regexp = /^[a-zA-Z0-9-_]+$/;
-            if (userName.search(regexp) === -1) {
-              instance.state.set(displaySuccessMessage, false);
-              instance.state.set(displayErrorMessages, true);
-              instance.state.set('alreadyDefined', false);
-              instance.state.set('badUsername', true);
-              instance.state.set('errorMessage', error.reason);
-            } else {
-              instance.state.set(displaySuccessMessage, false);
-              instance.state.set(displayErrorMessages, true);
-              instance.state.set('otherError', true);
-              instance.state.set('errorMessage', error.reason);
-            }
+            FormUtils.indicateError(instance, error);
           } else {
-            const feedData = { feedType: 'new-user', user: userName };
+            const feedData = { feedType: 'new-user', user: newData.slug };
             defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
-            const user = Users.getUserFromUsername(userName);
-            instance.studentID.set(user._id);
-            instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
-            instance.state.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
-            instance.state.set('notDefined', false);
-            instance.state.set(displaySuccessMessage, userName);
-            instance.state.set(displayErrorMessages, false);
-            instance.state.set('addNewUser', false);
+            FormUtils.indicateSuccess(instance, event);
           }
         });
-      } else {
-        instance.state.set(displaySuccessMessage, false);
-        instance.state.set(displayErrorMessages, true);
-        instance.state.set('badUsername', false);
-        instance.state.set('alreadyDefined', true);
-        instance.state.set('username', userName);
-      }
+      });
     } else {
-      instance.state.set(displaySuccessMessage, false);
-      instance.state.set(displayErrorMessages, true);
+      FormUtils.indicateError(instance);
     }
+    // const firstName = event.target.firstName.value;
+    // const lastName = event.target.lastName.value;
+    // const userName = event.target.username.value;
+    // let uhID = event.target.uhID.value;
+    // if (uhID.length > 0 && uhID.indexOf('-') === -1) {
+    //   uhID = `${uhID.substring(0, 4)}-${uhID.substring(4, 8)}`;
+    // }
+    // const newStudentData = { firstName, lastName, userName, uhID };
+    // // Clear out any old validation errors.
+    // instance.context.reset();
+    // // Invoke clean so that newStudentData reflects what will be defined
+    // userDefineSchema.clean(newStudentData);
+    // // Determine validity
+    // instance.context.validate(newStudentData);
+    // if (instance.context.isValid()) {
+    //   const notDefined = Users.find({ username: userName }).count() === 0;
+    //   if (notDefined) {
+    //     validUserAccountsDefineMethod.call({ username: userName }, (error) => {
+    //       if (error) {
+    //         console.log('Error during new user creation ValidUserAccounts: ', error);
+    //         instance.state.set(displaySuccessMessage, false);
+    //         instance.state.set(displayErrorMessages, true);
+    //         instance.state.set('errorMessage', error.reason);
+    //       }
+    //     });
+    //     const userDefinition = { firstName, lastName, slug: userName, email: `${userName}@hawaii.edu`,
+    //       role: ROLE.STUDENT, uhID };
+    //     defineMethod.call({ collectionName: 'UserCollection', definitionData: userDefinition }, (error) => {
+    //       if (error) {
+    //         const regexp = /^[a-zA-Z0-9-_]+$/;
+    //         if (userName.search(regexp) === -1) {
+    //           instance.state.set(displaySuccessMessage, false);
+    //           instance.state.set(displayErrorMessages, true);
+    //           instance.state.set('alreadyDefined', false);
+    //           instance.state.set('badUsername', true);
+    //           instance.state.set('errorMessage', error.reason);
+    //         } else {
+    //           instance.state.set(displaySuccessMessage, false);
+    //           instance.state.set(displayErrorMessages, true);
+    //           instance.state.set('otherError', true);
+    //           instance.state.set('errorMessage', error.reason);
+    //         }
+    //       } else {
+    //         const feedData = { feedType: 'new-user', user: userName };
+    //         defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
+    //         const user = Users.getUserFromUsername(userName);
+    //         instance.studentID.set(user._id);
+    //         instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, userName);
+    //         instance.state.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
+    //         instance.state.set('notDefined', false);
+    //         instance.state.set(displaySuccessMessage, userName);
+    //         instance.state.set(displayErrorMessages, false);
+    //         instance.state.set('addNewUser', false);
+    //       }
+    //     });
+    //   } else {
+    //     instance.state.set(displaySuccessMessage, false);
+    //     instance.state.set(displayErrorMessages, true);
+    //     instance.state.set('badUsername', false);
+    //     instance.state.set('alreadyDefined', true);
+    //     instance.state.set('username', userName);
+    //   }
+    // } else {
+    //   instance.state.set(displaySuccessMessage, false);
+    //   instance.state.set(displayErrorMessages, true);
+    // }
   },
 });

@@ -1,8 +1,9 @@
 <template name="Update_Degree_Plan_Widget">
-  <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>UPDATE STUDENT &amp; DEGREE PLAN</h4></div>
 
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE STUDENT</h4></div>
     <form class="ui equal width form {{successClass}} {{errorClass}}">
+
       <div class="fields">
         {{> Input_Form_Field label="First" name="firstName" value=user.firstName errorMessage=(fieldError "firstName") required=true}}
         {{> Input_Form_Field label="Last" name="lastName" value=user.lastName errorMessage=(fieldError "lastName") required=true}}
@@ -10,39 +11,35 @@
       </div>
 
       <div class="fields">
-        {{> Input_Form_Field label="UH ID" name="uhID" value=user.uhID errorMessage=(fieldError "uhID") disabled=true}}
-        {{> Input_Form_Field label="Email" name="email" value=user.email errorMessage=(fieldError "email") disabled=true}}
-        {{> Input_Form_Field label="Picture" name="picture" value=user.picture errorMessage=(fieldError "picture") }}
+        {{> Role_Form_Field roles=roles selectedRole=selectedRole errorMessage=(fieldError "role") required=true }}
+        {{> Input_Form_Field label="Email" name="email" value=user.email errorMessage=(fieldError "email") required=true}}
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError "interests") required=true }}
       </div>
 
+      <div class="ui dividing header"><h4>Optional fields (all users)</h4></div>
+
       <div class="fields">
+        {{> Input_Form_Field label="Picture" name="picture" value=user.picture errorMessage=(fieldError "picture") }}
         {{> Input_Form_Field label="Website" name="website" value=user.website errorMessage=(fieldError "website") }}
-        {{> Role_Form_Field roles=roles selectedRole=selectedRole errorMessage=(fieldError "role") disabled="true" }}
       </div>
+
       <div class="fields">
         {{> Career_Goals_Form_Field careerGoals=careerGoals selectedCareerGoalIDs=selectedCareerGoalIDs errorMessage=(fieldError "careerGoals")}}
-        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError "interests")}}
+        {{> Semesters_Single_Form_Field selectedSemesterID=selectedSemesterID semesters=semesters errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
       </div>
       <div class="fields">
-        {{> Desired_Degree_Form_Field desiredDegrees=desiredDegrees selectedDesiredDegreeID=selectedDesiredDegreeID errorMessage=(fieldError "desiredDegree")}}
-        {{> Declared_Semester_Form_Field semesters=declaredSemesters selectedSemesterID=selectedDeclaredSemesterID errorMessage=(fieldError "semesters") }}
-        {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") required=true type="Number"}}
+        {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") type="Number"}}
+        {{> Input_Form_Field label="UH ID" name="uhID" value=user.uhID errorMessage=(fieldError "uhID") }}
       </div>
-      <div class="two fields">
-        {{> Year_Form_Field years=years selectedYear=selectedYear}}
-        {{> Academic_Plan_Form_Field plans=plans selectedPlan=selectedPlan}}
-      </div>
+      {{> Academic_Plan_Form_Fields userID=studentID}}
 
-      <button class="ui tiny green basic button" type="submit">UPDATE STUDENT</button>
-      <!--<button class="ui green basic button jsCancel" type="submit">Cancel</button>-->
-      {{> Success_Message_Form_Field message="The Student was successfully updated."}}
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The User was successfully updated.  Press cancel to continue."}}
     </form>
-
-    <br>
     {{#if slug}}
       <p><b>View {{user.firstName}}'s degree plan:</b> <a target="_blank"
                                                           href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a></p>
     {{/if}}
-
   </div>
 </template>

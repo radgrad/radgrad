@@ -27,13 +27,12 @@
       <div class="ui dividing header"><h4>Optional fields (students)</h4></div>
 
       <div class="fields">
-        {{> Desired_Degree_Form_Field desiredDegrees=desiredDegrees errorMessage=(fieldError "desiredDegree")}}
         {{> Career_Goals_Form_Field careerGoals=careerGoals errorMessage=(fieldError "careerGoals")}}
+        {{> Semesters_Single_Form_Field semesters=semesters errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
       </div>
       <div class="fields">
         {{> Input_Form_Field label="Level" name="level" value="1" errorMessage=(fieldError "level") type="Number"}}
         {{> Input_Form_Field label="UH ID" name="uhID" placeholder="1234-5678" errorMessage=(fieldError "uhID") }}
-        {{> Semesters_Single_Form_Field semesters=semesters errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
       </div>
 
       <button class="ui green basic button" type="submit">Add</button>

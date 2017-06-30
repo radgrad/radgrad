@@ -1,3 +1,6 @@
+import './academic-plan-form-fields.html';
+import './academic-plan-form-fields';
+
 import './boolean-form-field.html';
 import './boolean-form-field.js';
 
@@ -6,9 +9,6 @@ import './career-goals-form-field.js';
 
 import './course-form-field.html';
 import './course-form-field.js';
-
-import './desired-degree-form-field.html';
-import './desired-degree-form-field.js';
 
 import './form-error-message.html';
 

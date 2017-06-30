@@ -7149,10 +7149,10 @@
             "information-system-manager",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Abigail",
@@ -7172,7 +7172,6 @@
             "data-scientist",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "academicPlan": "bs-cs-2016",
           "level": 5,
           "hiddenCourses": [],
@@ -7195,10 +7194,10 @@
             "database-administrator",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Alfred",
@@ -7217,10 +7216,10 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 6,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Betty",
@@ -7241,10 +7240,10 @@
             "data-scientist",
             "graduate-school"
           ],
-          "desiredDegree": "bs-cs",
           "level": 4,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Kim",
@@ -7268,7 +7267,6 @@
             "research-scientist",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7307,7 +7305,6 @@
             "teacher",
             "ux-designer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7329,10 +7326,10 @@
             "network-engineer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Charley",
@@ -7350,10 +7347,10 @@
           "careerGoals": [
             "data-scientist"
           ],
-          "desiredDegree": "ba-ics",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016"
         },
         {
           "firstName": "David",
@@ -7376,7 +7373,6 @@
             "research-scientist",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7398,10 +7394,10 @@
             "full-stack-developer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Cam",
@@ -7420,7 +7416,6 @@
           "careerGoals": [
             "devops-engineer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7442,10 +7437,10 @@
             "information-system-manager",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Christie",
@@ -7464,10 +7459,10 @@
             "network-engineer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Martha",
@@ -7490,7 +7485,6 @@
             "research-scientist",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7516,7 +7510,6 @@
             "research-scientist",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7538,10 +7531,10 @@
             "research-scientist",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Dusko",
@@ -7562,7 +7555,6 @@
             "information-security-analyst",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7584,10 +7576,10 @@
           "careerGoals": [
             "full-stack-developer"
           ],
-          "desiredDegree": "ba-ics",
           "level": 1,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016"
         },
         {
           "firstName": "Erik",
@@ -7606,10 +7598,10 @@
             "information-security-analyst",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Edo",
@@ -7631,7 +7623,6 @@
             "network-engineer",
             "research-scientist"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7660,7 +7651,6 @@
             "information-system-manager",
             "software-developer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7686,7 +7676,6 @@
             "information-security-analyst",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7712,7 +7701,6 @@
             "startup-cofounder",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7733,10 +7721,10 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Henri",
@@ -7760,7 +7748,6 @@
             "research-scientist",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7790,7 +7777,6 @@
             "startup-cofounder",
             "ux-designer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7811,10 +7797,10 @@
           "careerGoals": [
             "data-scientist"
           ],
-          "desiredDegree": "ba-ics",
           "level": 1,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016"
         },
         {
           "firstName": "Jameyia",
@@ -7833,10 +7819,10 @@
             "full-stack-developer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 1,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Jan",
@@ -7866,7 +7852,6 @@
             "teacher",
             "ux-designer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7894,7 +7879,6 @@
             "startup-cofounder",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7916,10 +7900,10 @@
             "full-stack-developer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Jack",
@@ -7937,10 +7921,10 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Aaron",
@@ -7968,7 +7952,6 @@
             "software-developer",
             "startup-cofounder"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -7992,7 +7975,6 @@
             "software-developer",
             "ux-designer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8014,10 +7996,10 @@
             "information-system-manager",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Kirk",
@@ -8036,10 +8018,10 @@
             "network-engineer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Kurt",
@@ -8057,10 +8039,10 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Kyungim",
@@ -8085,7 +8067,6 @@
             "research-scientist",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 6,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8107,10 +8088,10 @@
             "information-security-analyst",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "George",
@@ -8144,7 +8125,6 @@
             "teacher",
             "ux-designer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8169,7 +8149,6 @@
             "teacher",
             "vr-ar-engineer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8208,7 +8187,6 @@
             "startup-cofounder",
             "ux-designer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8230,10 +8208,10 @@
             "information-system-manager",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Lipyeow",
@@ -8257,7 +8235,6 @@
             "research-scientist",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8279,10 +8256,10 @@
             "full-stack-developer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Yuka",
@@ -8305,7 +8282,6 @@
             "startup-cofounder",
             "teacher"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8327,10 +8303,10 @@
             "full-stack-developer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 1,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Nodari",
@@ -8349,7 +8325,6 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8371,10 +8346,10 @@
             "full-stack-developer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Peter-Michael",
@@ -8400,7 +8375,6 @@
             "robotics-engineer",
             "software-developer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8419,7 +8393,6 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8441,10 +8414,10 @@
             "full-stack-developer",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Scott",
@@ -8464,7 +8437,6 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8486,10 +8458,10 @@
             "data-scientist",
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 1,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Connor",
@@ -8507,10 +8479,10 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": "bs-cs",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016"
         },
         {
           "firstName": "Suzanne",
@@ -8529,7 +8501,6 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8551,7 +8522,6 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8573,7 +8543,6 @@
           "careerGoals": [
             "software-developer"
           ],
-          "desiredDegree": null,
           "level": 1,
           "hiddenCourses": [],
           "hiddenOpportunities": []
@@ -8595,10 +8564,10 @@
             "research-scientist",
             "software-developer"
           ],
-          "desiredDegree": "ba-ics",
           "level": 2,
           "hiddenCourses": [],
-          "hiddenOpportunities": []
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016"
         }
       ]
     },

@@ -2,10 +2,10 @@ import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
-import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { makeLink } from './datamodel-utilities';
@@ -43,12 +43,12 @@ Template.List_Users_Widget.helpers({
       { label: 'Username (Slug)', value: user.username },
       { label: 'Email', value: user.email },
       { label: 'UH ID', value: user.uhID },
-      { label: 'Degree', value: (user.desiredDegreeID) ? DesiredDegrees.findDoc(user.desiredDegreeID).name : '' },
       { label: 'Picture', value: makeLink(user.picture) },
       { label: 'Level', value: user.level },
       { label: 'Career Goals', value: _.sortBy(CareerGoals.findNames(user.careerGoalIDs)) },
       { label: 'Interests', value: _.sortBy(Interests.findNames(user.interestIDs)) },
       { label: 'Website', value: makeLink(user.website) },
+      { label: 'Degree', value: (user.academicPlanID) ? AcademicPlans.findDoc(user.academicPlanID).name : '' },
       { label: 'Declared Semester', value: (user.declaredSemesterID) ?
           Semesters.toString(user.declaredSemesterID) : '' },
     ];
