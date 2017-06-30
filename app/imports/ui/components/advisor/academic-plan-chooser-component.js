@@ -97,7 +97,6 @@ Template.Academic_Plan_Chooser_Component.events({
           console.log('Error updating student\' academic plan', error);
         }
       });
-
     }
   },
 });
