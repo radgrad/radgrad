@@ -1,7 +1,10 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import * as RouteNames from '../../../startup/client/router.js';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
+import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 
@@ -34,34 +37,53 @@ Template.Student_Explorer_Degrees_Widget.helpers({
   userStatus(degree) {
     let ret = true;
     const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(user.desiredDegreeID, degree._id)) {
-      ret = false;
+    if (user.academicPlanID) {
+      const plan = AcademicPlans.findDoc(user.academicPlanID);
+      if (_.includes(plan.degreeID, degree._id)) {
+        ret = false;
+      }
     }
     return ret;
   },
   userUsername(user) {
     return Users.findDoc(user).username;
   },
+  plans() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    let semesterNumber;
+    if (user.academicPlanID) {
+      semesterNumber = AcademicPlans.findDoc(user.academicPlanID).semesterNumber;
+    }
+    const degree = DesiredDegrees.findDoc({ name: Template.instance().data.name });
+    const plans = AcademicPlans.getPlansForDegree(degree._id, semesterNumber);
+    return plans;
+  },
+  selectedPlan() {
+    const user = Users.findDoc({ username: getRouteUserName() });
+    if (user.academicPlanID) {
+      return AcademicPlans.findDoc(user.academicPlanID).name;
+    }
+    return '';
+  },
 });
 
 Template.Student_Explorer_Degrees_Widget.events({
-  'click .addItem': function clickAddItem(event) {
+  'change [name=academicPlan]': function changePlan(event) {
     event.preventDefault();
     const student = Users.findDoc({ username: getRouteUserName() });
-    const id = event.target.value;
-    try {
-      Users.setDesiredDegree(student._id, id);
-    } catch (e) {
-      // don't do anything. // TODO: do something.
-    }
+    const collectionName = Users.getCollectionName();
+    const updateData = {};
+    updateData.id = student._id;
+    updateData.academicPlan = event.target.value;
+    console.log(collectionName, updateData);
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error in updating academic plan', error);
+      }
+    });
   },
-  'click .deleteItem': function clickRemoveItem(event) {
-    event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
-    try {
-      Users.setDesiredDegree(student._id, '');
-    } catch (e) {
-      // don't do anything.
-    }
-  },
+});
+
+Template.Student_Explorer_Degrees_Widget.onRendered(function studentExplorerDegressWidget() {
+  this.$('.dropdown').dropdown();
 });

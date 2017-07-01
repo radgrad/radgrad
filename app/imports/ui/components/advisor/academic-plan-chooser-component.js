@@ -78,7 +78,7 @@ Template.Academic_Plan_Chooser_Component.events({
     event.preventDefault();
     Template.instance().chosenYear.set($(event.target).val());
   },
-  'change [name=name]': function changeYear(event) {
+  'change [name=name]': function changePlan(event) {
     event.preventDefault();
     const year = Template.instance().chosenYear.get();
     const semesterSlug = `Fall-${year}`;
