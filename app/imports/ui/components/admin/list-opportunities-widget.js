@@ -10,7 +10,6 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
@@ -77,7 +76,6 @@ Template.List_Opportunities_Widget.helpers({
       { label: 'Sponsor', value: Slugs.findDoc(Users.findDoc(opportunity.sponsorID).slugID).name },
       { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
       { label: 'Semesters', value: _.map(opportunity.semesterIDs, id => Semesters.toString(id)) },
-      { label: 'Icon', value: makeLink(opportunity.iconURL) },
       { label: 'Event Date', value: moment(opportunity.eventDate).format('lll') },
       { label: 'ICE', value: `${opportunity.ice.i}, ${opportunity.ice.c}, ${opportunity.ice.e}` },
       { label: 'References', value: `${numReferences(opportunity)}` },

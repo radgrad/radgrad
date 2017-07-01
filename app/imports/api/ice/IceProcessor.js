@@ -50,10 +50,10 @@ export function assertICE(obj) {
  * Returns an ICE object based upon the course slug and the passed grade.
  * Students only earn ICE competency points for 'interesting' courses. Interesting
  * courses are courses that have non other slugs.
- * If ICS course and an A, then return 9 competency points.
- * If ICE course and a B, then return 5 competency points.
+ * If an A, then return 9 competency points.
+ * If a B, then return 5 competency points.
  * Otherwise return zero points.
- * @param course The course slug. If 'other', then it's a non-ICS course.
+ * @param course The course slug. If it's the "uninteresting" slug, then disregard it.
  * @param grade The grade
  * @returns {{i: number, c: number, e: number}} The ICE object.
  */
@@ -61,11 +61,11 @@ export function makeCourseICE(course, grade) {
   const i = 0;
   let c = 0;
   const e = 0;
-  // NonICS courses get no ICE points.
+  // Uninteresting courses get no ICE points.
   if (course === Courses.unInterestingSlug) {
     return { i, c, e };
   }
-  // ICS courses get competency points if you get an A or a B.
+  // Courses get competency points only if you get an A or a B.
   if (grade.includes('B')) {
     c = gradeCompetency.B;
   } else

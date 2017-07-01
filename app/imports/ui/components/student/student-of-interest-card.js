@@ -36,11 +36,8 @@ function currentSemester() {
 
 function opportunitySemesters(opp) {
   const semesterIDs = opp.semesterIDs;
-  return _.map(semesterIDs, (semID) => {
-    if (Semesters.findDoc(semID).semesterNumber >= currentSemester().semesterNumber) {
-      Semesters.toString(semID);
-    }
-  });
+  const upcomingSemesters = _.filter(semesterIDs, semesterID => Semesters.isUpcomingSemester(semesterID));
+  return _.map(upcomingSemesters, semesterID => Semesters.toString(semesterID));
 }
 
 Template.Student_Of_Interest_Card.helpers({
@@ -105,6 +102,7 @@ Template.Student_Of_Interest_Card.helpers({
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
   replaceSemString(array) {
+    console.log('array', array);
     const currentSem = currentSemester();
     const currentYear = currentSem.year;
     let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
