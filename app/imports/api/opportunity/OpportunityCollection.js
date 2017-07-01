@@ -34,15 +34,11 @@ class OpportunityCollection extends BaseSlugCollection {
       sponsorID: { type: SimpleSchema.RegEx.Id },
       interestIDs: [SimpleSchema.RegEx.Id],
       semesterIDs: [SimpleSchema.RegEx.Id],
-      independentStudy: { type: Boolean },
       // Optional data
       eventDate: { type: Date, optional: true },
-      iconURL: { type: SimpleSchema.RegEx.Url, optional: true },
       ice: { type: Object, optional: true, blackbox: true },
     }));
   }
-
-  // TODO Delete independent study field?  iconURL never assigned. Delete? (pj)
 
   /**
    * Defines a new Opportunity.
@@ -55,7 +51,7 @@ class OpportunityCollection extends BaseSlugCollection {
    *                        ice: { i: 10, c: 0, e: 10},
    *                        interests: ['software-engineering'],
    *                        semesters: ['Fall-2016', 'Spring-2016', 'Summer-2106'],
-     *                      independentStudy: true});
+     *                      });
    * @param { Object } description Object with keys name, slug, description, opportunityType, sponsor, interests,
    * Slug must not be previously defined.
    * OpportunityType and sponsor must be defined slugs.
@@ -63,13 +59,11 @@ class OpportunityCollection extends BaseSlugCollection {
    * Semesters must be a (possibly empty) array of semester slugs or IDs.
    * Sponsor must be a User with role 'FACULTY', 'ADVISOR', or 'ADMIN'.
    * ICE must be a valid ICE object.
-   * IndependentStudy is optional and defaults to false.
    * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest, sponsor, opportunityType,
    * or startActive or endActive are not valid.
    * @returns The newly created docID.
    */
-  define({ name, slug, description, opportunityType, sponsor, interests, semesters,
-  independentStudy = false, ice, eventDate = null }) {
+  define({ name, slug, description, opportunityType, sponsor, interests, semesters, ice, eventDate = null }) {
     // Get instances, or throw error
 
     const opportunityTypeID = OpportunityTypes.getID(opportunityType);
@@ -80,19 +74,16 @@ class OpportunityCollection extends BaseSlugCollection {
     // Define the slug
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     const semesterIDs = Semesters.getIDs(semesters);
-    // Guarantee that independentStudy is a boolean.
-    /* eslint no-param-reassign: "off" */
-    independentStudy = !!independentStudy;
     let opportunityID;
     if (eventDate !== null) {
       // Define the new Opportunity and its Slug.
       opportunityID = this._collection.insert({
         name, slugID, description, opportunityTypeID, sponsorID,
-        interestIDs, semesterIDs, independentStudy, ice, eventDate });
+        interestIDs, semesterIDs, ice, eventDate });
     } else {
       opportunityID = this._collection.insert({
         name, slugID, description, opportunityTypeID, sponsorID,
-        interestIDs, semesterIDs, independentStudy, ice });
+        interestIDs, semesterIDs, ice });
     }
     Slugs.updateEntityID(slugID, opportunityID);
 
@@ -110,10 +101,9 @@ class OpportunityCollection extends BaseSlugCollection {
    * @param interests optional.
    * @param semesters optional
    * @param eventDate a Date. (optional)
-   * @param iconURL a URL (optional).
    * @param ice An ICE object (optional).
    */
-  update(instance, { name, description, opportunityType, sponsor, interests, semesters, eventDate, iconURL, ice }) {
+  update(instance, { name, description, opportunityType, sponsor, interests, semesters, eventDate, ice }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (name) {
@@ -141,9 +131,6 @@ class OpportunityCollection extends BaseSlugCollection {
     }
     if (eventDate) {
       updateData.eventDate = eventDate;
-    }
-    if (iconURL) {
-      updateData.iconURL = iconURL;
     }
     if (ice) {
       assertICE(ice);
@@ -262,10 +249,8 @@ class OpportunityCollection extends BaseSlugCollection {
     const ice = doc.ice;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const semesters = _.map(doc.semesterIDs, semesterID => Semesters.findSlugByID(semesterID));
-    const independentStudy = doc.independentStudy;
     const eventDate = doc.eventDate;
-    return { name, slug, description, opportunityType, sponsor, ice, interests, semesters,
-      independentStudy, eventDate };
+    return { name, slug, description, opportunityType, sponsor, ice, interests, semesters, eventDate };
   }
 }
 

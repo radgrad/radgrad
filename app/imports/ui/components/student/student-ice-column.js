@@ -10,7 +10,6 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-
 import { getEarnedICE, getProjectedICE } from '../../../api/ice/IceProcessor';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -23,12 +22,7 @@ function getEventsHelper(iceType, type, earned, semester) {
     if (type === 'course') {
       const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: user._id,
         verified: earned }).fetch();
-      courseInstances.forEach((courseInstance) => {
-        // TODO: isICS is no longer a field in CourseInstances. Fix the following code.
-        if (CourseInstances.isICS(courseInstance._id)) {
-          allInstances.push(courseInstance);
-        }
-      });
+      courseInstances.forEach(courseInstance => allInstances.push(courseInstance));
     } else {
       allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: user._id,
         verified: earned }).fetch();

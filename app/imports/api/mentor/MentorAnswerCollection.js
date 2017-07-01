@@ -40,6 +40,7 @@ class MentorAnswerCollection extends BaseCollection {
   define({ question, mentor, text }) {
     const questionID = MentorQuestions.getID(question);
     const mentorID = Users.getID(mentor);
+    Users.assertInRole(mentorID, ROLE.MENTOR);
     return this._collection.insert({ questionID, mentorID, text });
   }
 

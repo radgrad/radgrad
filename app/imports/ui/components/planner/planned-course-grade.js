@@ -1,10 +1,11 @@
-/* global document */
-
 import { Template } from 'meteor/templating';
 import { moment } from 'meteor/momentjs:moment';
 import { Logger } from 'meteor/jag:pince';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { plannerKeys } from './academic-plan';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
+
+/* global document */
 
 // /** @module ui/components/planner/Planned_Course_Grade */
 
@@ -36,7 +37,7 @@ Template.Planned_Course_Grade.events({
     const div = event.target.parentElement;
     const grade = div.childNodes[2].textContent;
     const id = div.parentElement.id;
-    CourseInstances.clientUpdateGrade(id, grade);
+    updateMethod.call({ collectionName: 'CourseInstanceCollection', updateData: { id, grade } });
     const ci = CourseInstances.findDoc(id);
     const template = Template.instance();
     template.state.set(plannerKeys.detailICE, ci.ice);
