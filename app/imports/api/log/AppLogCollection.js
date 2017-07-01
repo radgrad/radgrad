@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Logger } from 'meteor/ostrio:logger';
 import { LoggerMongo } from 'meteor/ostrio:loggermongo';
 import SimpleSchema from 'simpl-schema';
@@ -61,3 +62,10 @@ const LogMongo = new LoggerMongo(appLog, {
 });
 // Enable LoggerMongo with default settings:
 LogMongo.enable();
+
+if (Meteor.isServer) {
+  LogMongo.collection._ensureIndex({ level: 1 }, { background: true });
+  LogMongo.collection._ensureIndex({ userId: 1 }, { background: true });
+  LogMongo.collection._ensureIndex({ date: 1 }, { background: true });
+  LogMongo.collection._ensureIndex({ timestamp: 1 }, { background: true });
+}

@@ -393,7 +393,7 @@ export const landingPageRouteName = 'Landing_Page';
 FlowRouter.route('/', {
   name: landingPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
+    const message = `${FlowRouter.current().path} ${landingPageRouteName}`;
     appLog.info(message);
     BlazeLayout.render('Landing_Layout');
   },
