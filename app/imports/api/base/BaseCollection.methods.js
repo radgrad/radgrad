@@ -60,6 +60,27 @@ export const dumpAppLogMethod = new ValidatedMethod({
 });
 
 /**
+ * Allows admins to clear the AppLogCollection.
+ */
+export const clearAppLogMethod = new ValidatedMethod({
+  name: 'base.clearAppLog',
+  validate: null,
+  run() {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..');
+    } else
+      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
+        throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.');
+      }
+    // Don't do the dump except on server side (disable client-side simulation).
+    // Return an object with fields timestamp and collections.
+    if (Meteor.isServer) {
+      AppLogs.removeAll();
+    }
+  },
+});
+
+/**
  * Resets all of the RadGrad collections to their empty state. Only available in test mode.
  */
 export const resetDatabaseMethod = new ValidatedMethod({

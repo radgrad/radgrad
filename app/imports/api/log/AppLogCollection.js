@@ -54,9 +54,9 @@ class AppLogCollection extends BaseCollection {
 export const AppLogs = new AppLogCollection();
 
 // Initialize Logger:
-export const log = new Logger();
+export const appLog = new Logger();
 // Initialize LoggerMongo with collection instance:
-const LogMongo = new LoggerMongo(log, {
+const LogMongo = new LoggerMongo(appLog, {
   collection: AppLogs.getCollection(),
 });
 // Enable LoggerMongo with default settings:

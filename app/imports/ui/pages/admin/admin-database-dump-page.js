@@ -3,7 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { dumpDatabaseMethod, dumpAppLogMethod } from '../../../api/base/BaseCollection.methods.js';
+import { dumpDatabaseMethod, dumpAppLogMethod, clearAppLogMethod } from '../../../api/base/BaseCollection.methods.js';
 import { loadFileDateFormat } from '../../../api/test/test-utilities';
 
 Template.Admin_DataBase_Dump_Page.helpers({
@@ -76,6 +76,17 @@ Template.Admin_DataBase_Dump_Page.events({
         zip.file(fileName, JSON.stringify(result, null, 2));
         zip.saveAs(`${dir}.zip`);
       }
+    });
+  },
+  'click .jsClearLog': function clickDumpLog(event, instance) {
+    event.preventDefault();
+    clearAppLogMethod.call(null, (error) => {
+      if (error) {
+        console.log('Error during clearing Log: ', error);
+        instance.results.set(error);
+        instance.successOrError.set('error');
+      }
+      instance.successOrError.set('success');
     });
   },
 });
