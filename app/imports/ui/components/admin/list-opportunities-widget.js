@@ -10,7 +10,6 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
