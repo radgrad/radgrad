@@ -6,43 +6,40 @@ import { Users } from '../user/UserCollection';
 import { ROLE } from '../role/Role';
 
 
-/** @module api/mentor/MentorProfileCollection */
+/** @module api/user/MentorProfileCollection */
 /**
- * Represents a mentor answer.
+ * Represents a Mentor Profile.
  * @extends module:api/base/BaseCollection~BaseCollection
  */
 class MentorProfileCollection extends BaseCollection {
-  /**
-   * Creates the Mentor Answer collection.
-   */
   constructor() {
     super('MentorProfile', new SimpleSchema({
-      mentorID: { type: SimpleSchema.RegEx.Id },
-      company: { type: String },
-      career: { type: String },
-      location: { type: String },
-      linkedin: { type: String },
-      motivation: { type: String },
+      userID: SimpleSchema.RegEx.Id,
+      company: String,
+      career: String,
+      location: String,
+      linkedin: { type: String, optional: true },
+      motivation: String,
     }));
   }
 
   /**
    * Defines the profile associated with a Mentor.
-   * @param mentor The mentor (slug or ID).
-   * @param company The company the mentor is a member of.
-   * @param career The mentor's title.
-   * @param location The mentor's location
-   * @param linkedin The mentor's LinkedIn user ID.
+   * @param user The user account associated with this Mentor (username or userID).
+   * @param company The company the mentor works for.
+   * @param career The mentor's career (or title).
+   * @param location The mentor's location.
+   * @param linkedin The mentor's LinkedIn user ID. (optional)
    * @param motivation The reason why the user mentors.
    * @return { String } The docID of the MentorProfile.
-   * @throws { Meteor.Error } If mentor is not in ROLE.MENTOR.
+   * @throws { Meteor.Error } If user is not in ROLE.MENTOR.
    */
-  define({ mentor, company, career, location, linkedin, motivation }) {
-    const mentorID = Users.getID(mentor);
-    if (!Roles.userIsInRole(mentorID, ROLE.MENTOR)) {
+  define({ user, company, career, location, linkedin, motivation }) {
+    const userID = Users.getID(user);
+    if (!Roles.userIsInRole(userID, ROLE.MENTOR)) {
       throw new Meteor.Error('Attempt to define a profile for a user who is not a mentor');
     }
-    return this._collection.insert({ mentorID, company, career, location, linkedin, motivation });
+    return this._collection.insert({ userID, company, career, location, linkedin, motivation });
   }
 
   /**
@@ -87,11 +84,11 @@ class MentorProfileCollection extends BaseCollection {
 
   /**
    * Returns the MentorProfile for the given id.
-   * @param mentorID the id.
+   * @param userID the id.
    * @return {Cursor}
    */
-  getMentorProfile(mentorID) {
-    return this._collection.findOne({ mentorID });
+  getMentorProfile(userID) {
+    return this._collection.findOne({ userID });
   }
 
   /**
@@ -108,14 +105,14 @@ class MentorProfileCollection extends BaseCollection {
   /**
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.
-   * Checks mentorID.
+   * Checks userID.
    * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
    */
   checkIntegrity() {
     const problems = [];
     this.find().forEach(doc => {
-      if (!Users.isDefined(doc.mentorID)) {
-        problems.push(`Bad mentorID: ${doc.mentorID}`);
+      if (!Users.isDefined(doc.userID)) {
+        problems.push(`Bad userID: ${doc.userID}`);
       }
     });
     return problems;
@@ -128,13 +125,13 @@ class MentorProfileCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const mentor = Users.findSlugByID(doc.mentorID);
+    const user = Users.findSlugByID(doc.userID);
     const company = doc.company;
     const career = doc.career;
     const location = doc.location;
     const linkedin = doc.linkedin;
     const motivation = doc.motivation;
-    return { mentor, company, career, location, linkedin, motivation };
+    return { user, company, career, location, linkedin, motivation };
   }
 }
 

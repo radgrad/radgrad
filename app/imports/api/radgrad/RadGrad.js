@@ -14,7 +14,7 @@ import { Interests } from '../interest/InterestCollection.js';
 import { InterestTypes } from '../interest/InterestTypeCollection.js';
 import { MentorAnswers } from '../mentor/MentorAnswerCollection.js';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection.js';
-import { MentorProfiles } from '../mentor/MentorProfileCollection.js';
+import { MentorProfiles } from '../user/MentorProfileCollection.js';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
 import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection.js';
