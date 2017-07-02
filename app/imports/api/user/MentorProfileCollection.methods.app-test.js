@@ -9,18 +9,22 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 if (Meteor.isClient) {
   describe('MentorProfileCollection Meteor Methods', function test() {
     const collectionName = MentorProfiles.getCollectionName();
-    const definitionData = {
-      mentor: 'brewer',
-      company: 'Capybara Inc',
-      career: 'Software Ninja',
-      location: 'Honolulu, HI',
-      linkedin: 'josephinegarces',
-      motivation: 'Because I can!',
-    };
+    const username = 'rbrewer@tableau.com';
+    const firstName = 'Robert';
+    const lastName = 'Brewer';
+    const picture = 'foo.jpg';
+    const website = 'http://rbrewer.github.io';
+    const interests = [];
+    const careerGoals = [];
+    const company = 'Tableau Inc';
+    const career = 'Software Engineer';
+    const location = 'San Francisco, CA';
+    const linkedin = 'robertsbrewer';
+    const motivation = 'Help future students.';
 
     before(function (done) {
       this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user', 'brewer.user'], done);
+      defineTestFixturesMethod.call(['minimal', 'admin.user' ], done);
     });
 
     after(function (done) {
@@ -30,6 +34,8 @@ if (Meteor.isClient) {
     it('Define Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
+          const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals, company,
+            career, location, linkedin, motivation };
           defineMethod.call({ collectionName, definitionData }, done);
         }).catch(done);
       });
@@ -38,14 +44,8 @@ if (Meteor.isClient) {
     it('Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const id = MentorProfiles.findDoc({ location: definitionData.location })._id;
-          const company = 'Tableau';
-          const career = 'Software Engineer';
-          const location = 'Palo Alto, CA';
-          const linkedin = 'robertsbrewer';
-          const motivation = 'I founded a startup in Hawaii';
-          updateMethod.call({ collectionName,
-            updateData: { id, company, career, location, linkedin, motivation } }, done);
+          const id = MentorProfiles.getID(username);
+          updateMethod.call({ collectionName, updateData: { id, company: 'Google, Inc.' } }, done);
         }).catch(done);
       });
     });
@@ -53,7 +53,7 @@ if (Meteor.isClient) {
     it('Remove Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const instance = MentorProfiles.findDoc({ location: 'Palo Alto, CA' })._id;
+          const instance = MentorProfiles.getID(username);
           removeItMethod.call({ collectionName, instance }, done);
         }).catch(done);
       });

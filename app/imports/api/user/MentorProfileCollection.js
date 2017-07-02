@@ -1,12 +1,12 @@
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseCollection from '../base/BaseCollection';
+import BaseSlugCollection from '../base/BaseSlugCollection';
 import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
-import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
-import { profileCommonSchema, updateCommonFields } from './ProfileCommonSchema';
+import { profileCommonSchema, updateCommonFields, checkIntegrityCommonFields } from './ProfileCommonSchema';
 
 // TODO: Next step: update checkIntegrity, dumpOne, test fixture, then reset and reload and run unit tests to confirm
 // TODO: that MentorProfile is working with the common fields.
@@ -14,9 +14,9 @@ import { profileCommonSchema, updateCommonFields } from './ProfileCommonSchema';
 /** @module api/user/MentorProfileCollection */
 /**
  * Represents a Mentor Profile.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends module:api/base/BaseCollection~BaseSlugCollection
  */
-class MentorProfileCollection extends BaseCollection {
+class MentorProfileCollection extends BaseSlugCollection {
   constructor() {
     super('MentorProfile', new SimpleSchema({
       company: String,
@@ -50,7 +50,8 @@ class MentorProfileCollection extends BaseCollection {
     const role = ROLE.MENTOR;
     const interestIDs = Interests.getIDs(interests);
     const careerGoalIDs = CareerGoals.getIDs(careerGoals);
-    Slugs.define({ name: username, entityName: this.getType() });
+    // Don't define slugs here until they are no longer defined in User collection.
+    // Slugs.define({ name: username, entityName: this.getType() });
     return this._collection.insert({ username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
       company, career, location, linkedin, motivation });
   }
@@ -117,14 +118,15 @@ class MentorProfileCollection extends BaseCollection {
   /**
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.
-   * Checks userID.
+   * Checks the profile common fields and the role..
    * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
    */
   checkIntegrity() {
-    const problems = [];
+    let problems = [];
     this.find().forEach(doc => {
-      if (!Users.isDefined(doc.username)) {
-        problems.push(`Bad username: ${doc.username}`);
+      problems = problems.concat(checkIntegrityCommonFields(doc));
+      if (doc.role !== ROLE.MENTOR) {
+        problems.push(`MentorProfile instance does not have ROLE.MENTOR: ${doc}`);
       }
     });
     return problems;
@@ -138,12 +140,19 @@ class MentorProfileCollection extends BaseCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const username = doc.username;
+    const firstName = doc.firstName;
+    const lastName = doc.lastName;
+    const picture = doc.picture;
+    const website = doc.website;
+    const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
+    const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
     const company = doc.company;
     const career = doc.career;
     const location = doc.location;
     const linkedin = doc.linkedin;
     const motivation = doc.motivation;
-    return { username, company, career, location, linkedin, motivation };
+    return { username, firstName, lastName, picture, website, interests, careerGoals, company, career, location,
+      linkedin, motivation };
   }
 }
 

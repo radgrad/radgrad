@@ -1,6 +1,8 @@
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
+import { Slugs } from '../slug/SlugCollection';
 
 /**
  * Provides the schema specification for the fields common to all profiles.
@@ -47,4 +49,29 @@ export function updateCommonFields(updateData, { firstName, lastName, picture, w
   if (careerGoals) {
     updateData.careerGoalIDs = CareerGoals.getIDs(careerGoals);
   }
+}
+
+/**
+ * Returns an array of strings, each one representing an integrity problem with this document by review
+ * of the common profile fields.
+ * Returns an empty array if no problems were found.
+ * Checks username, interestIDs, and careerGoalIDs
+ * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+ */
+export function checkIntegrityCommonFields(doc) {
+  const problems = [];
+  if (!Slugs.isDefined(doc.username)) {
+    problems.push(`Bad username: ${doc.username}`);
+  }
+  _.forEach(doc.careerGoalIDs, careerGoalID => {
+    if (!CareerGoals.isDefined(careerGoalID)) {
+      problems.push(`Bad careerGoalID: ${careerGoalID}`);
+    }
+  });
+  _.forEach(doc.interestIDs, interestID => {
+    if (!Interests.isDefined(interestID)) {
+      problems.push(`Bad interestID: ${interestID}`);
+    }
+  });
+  return problems;
 }

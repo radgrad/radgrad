@@ -3562,6 +3562,34 @@
       "contents": [
         {
           "username": "brewer",
+          "firstName": "Robert",
+          "lastName": "Brewer",
+          "picture": "/images/mentors/brewer.jpg",
+          "website": null,
+          "interests": [
+            "algorithms",
+            "data-science",
+            "data-visualization",
+            "entrepreneurship",
+            "hci",
+            "research",
+            "software-engineering",
+            "sustainability"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "database-administrator",
+            "devops-engineer",
+            "game-developer",
+            "graduate-school",
+            "information-system-manager",
+            "network-engineer",
+            "research-scientist",
+            "software-developer",
+            "startup-cofounder",
+            "teacher",
+            "ux-designer"
+          ],
           "company": "Tableau",
           "career": "Software Engineer",
           "location": "Palo Alto, CA",
@@ -3570,6 +3598,24 @@
         },
         {
           "username": "geis",
+          "firstName": "Jennifer",
+          "lastName": "Geis",
+          "picture": "/images/mentors/geis.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "civic-engagement",
+            "data-science",
+            "data-visualization",
+            "it-management",
+            "software-engineering",
+            "web-development"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-system-manager",
+            "software-developer"
+          ],
           "company": "UH",
           "career": "IT Specialist",
           "location": "Honolulu, HI",
@@ -3578,6 +3624,25 @@
         },
         {
           "username": "ito",
+          "firstName": "Austen",
+          "lastName": "Ito",
+          "picture": "/images/mentors/ito.png",
+          "website": null,
+          "interests": [
+            "entrepreneurship",
+            "game-design",
+            "mobile",
+            "robotics",
+            "software-engineering",
+            "web-development"
+          ],
+          "careerGoals": [
+            "iot-architect",
+            "robotics-engineer",
+            "software-developer",
+            "startup-cofounder",
+            "ux-designer"
+          ],
           "company": "Bonobos",
           "career": "Software Engineer",
           "location": "New York City, NY",
@@ -3586,6 +3651,26 @@
         },
         {
           "username": "kagawa",
+          "firstName": "Aaron",
+          "lastName": "Kagawa",
+          "picture": "/images/mentors/kagawa.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "civic-engagement",
+            "data-visualization",
+            "entrepreneurship",
+            "it-management",
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "devops-engineer",
+            "graduate-school",
+            "information-system-manager",
+            "software-developer",
+            "startup-cofounder"
+          ],
           "company": "LiveAction",
           "career": "Software Engineer",
           "location": "Honolulu, HI",
@@ -3594,6 +3679,19 @@
         },
         {
           "username": "karjala",
+          "firstName": "Patrick",
+          "lastName": "Karjala",
+          "picture": "/images/mentors/karjala.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "it-management",
+            "web-development"
+          ],
+          "careerGoals": [
+            "software-developer",
+            "ux-designer"
+          ],
           "company": "Slickage Studios",
           "career": "CEO",
           "location": "Honolulu, HI",
@@ -3602,6 +3700,32 @@
         },
         {
           "username": "lee",
+          "firstName": "George",
+          "lastName": "Lee",
+          "picture": "/images/mentors/lee.jpg",
+          "website": null,
+          "interests": [
+            "algorithms",
+            "application-development",
+            "civic-engagement",
+            "databases",
+            "entrepreneurship",
+            "it-management",
+            "software-engineering",
+            "web-development"
+          ],
+          "careerGoals": [
+            "devops-engineer",
+            "full-stack-developer",
+            "game-developer",
+            "graduate-school",
+            "iot-architect",
+            "mobile-app-developer",
+            "software-developer",
+            "startup-cofounder",
+            "teacher",
+            "ux-designer"
+          ],
           "company": "Hobnob Invites",
           "career": "Developer",
           "location": "Honolulu, HI",
@@ -3610,6 +3734,34 @@
         },
         {
           "username": "leuck",
+          "firstName": "Daniel",
+          "lastName": "Leuck",
+          "picture": "/images/mentors/leuck.jpg",
+          "website": null,
+          "interests": [
+            "algorithms",
+            "application-development",
+            "artificial-intelligence",
+            "civic-engagement",
+            "cryptography",
+            "data-science",
+            "entrepreneurship",
+            "it-management",
+            "mobile",
+            "software-engineering",
+            "web-development"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "devops-engineer",
+            "full-stack-developer",
+            "game-developer",
+            "information-system-manager",
+            "mobile-app-developer",
+            "software-developer",
+            "startup-cofounder",
+            "ux-designer"
+          ],
           "company": "Ikayzo",
           "career": "CEO",
           "location": "Honolulu, HI",
@@ -3618,6 +3770,21 @@
         },
         {
           "username": "nagashima",
+          "firstName": "Yuka",
+          "lastName": "Nagashima",
+          "picture": "/images/mentors/nagashima.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "civic-engagement",
+            "entrepreneurship",
+            "it-management"
+          ],
+          "careerGoals": [
+            "software-developer",
+            "startup-cofounder",
+            "teacher"
+          ],
           "company": "Paideia Enterprises",
           "career": "Owner",
           "location": "San Francisco, CA",
