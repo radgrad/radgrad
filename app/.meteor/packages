@@ -66,3 +66,5 @@ practicalmeteor:sinon
 dburles:factory
 aldeed:collection2-core@2.0.0
 dynamic-import
+ostrio:logger
+ostrio:loggermongo
