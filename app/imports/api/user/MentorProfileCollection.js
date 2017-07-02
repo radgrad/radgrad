@@ -148,4 +148,3 @@ class MentorProfileCollection extends BaseCollection {
 }
 
 export const MentorProfiles = new MentorProfileCollection();
-
