@@ -86,7 +86,7 @@ class MentorProfileCollection extends BaseCollection {
     return this._collection.insert({ mentorID, company, career, location, linkedin, motivation });
   }
 
-  getMentorProfile(mentorID) {
+  getProfile(mentorID) {
     return this._collection.find({ mentorID });
   }
 

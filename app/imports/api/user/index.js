@@ -1,3 +1,4 @@
+import './ProfileCommonSchema';
 import './UserCollection';
 import './MentorProfileCollection';
 import './ValidUserAccountCollection';

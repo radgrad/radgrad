@@ -198,7 +198,7 @@ class PublicStatsCollection extends BaseCollection {
     const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
     let professions = [];
     _.forEach(mentors, (m) => {
-      const profile = MentorProfiles.findDoc({ userID: m._id });
+      const profile = MentorProfiles.findDoc({ username: m.username });
       professions.push(profile.career);
     });
     professions = _.union(professions);
@@ -209,7 +209,7 @@ class PublicStatsCollection extends BaseCollection {
     const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
     let locations = [];
     _.forEach(mentors, (m) => {
-      const profile = MentorProfiles.findDoc({ userID: m._id });
+      const profile = MentorProfiles.findDoc({ username: m.username });
       locations.push(profile.location);
     });
     locations = _.union(locations);

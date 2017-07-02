@@ -76,11 +76,14 @@ if (Meteor.isServer) {
       InterestTypes.removeIt('discipline');
     });
 
-    it('#getID', function test() {
+    it('#getID, #getUsername', function test() {
       const userID = Users.define({ firstName, lastName, slug, email, role, password });
       expect(Users.getID(userID)).to.equal(userID);
       expect(Users.getID(slug)).to.equal(userID);
       expect(function foo() { Users.getID('foo'); }).to.throw(Error);
+      expect(Users.getUsername(slug)).to.equal(slug);
+      expect(Users.getUsername(userID)).to.equal(slug);
+      Users.removeIt(userID);
     });
   });
 }

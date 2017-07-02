@@ -14,7 +14,7 @@ Template.Student_MentorSpace_Page.helpers({
   },
 
   mentorProfile(mentorID) {
-    return MentorProfiles.getMentorProfile(mentorID);
+    return MentorProfiles.getProfile(mentorID);
   },
 });
 
