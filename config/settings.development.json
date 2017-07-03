@@ -12,16 +12,5 @@
     },
     "databaseRestoreFileName": "database/mockup/2017-03-10-10-04-42.json"
   },
-  "mockup": false,
-  "appLogging": {
-    "enable": true,
-    // Filters: 'ERROR', 'FATAL', 'WARN', 'DEBUG', 'INFO', 'TRACE', '*'
-    "filter": [
-      "*"
-    ],
-    // Set to `false` to avoid Client to Server logs transfer
-    "client": true,
-    // Allow logging on Server
-    "server": true
-  }
+  "mockup": false
 }
