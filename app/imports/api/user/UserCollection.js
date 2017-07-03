@@ -388,6 +388,16 @@ class UserCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns the username associated with user.
+   * @param user A user, either their username or their userID.
+   * @throws { Meteor.Error } If user is not a valid user.
+   */
+  getUsername(user) {
+    const userID = this.getID(user);
+    return this._collection.findOne(userID).username;
+  }
+
+  /**
    * Updates userID with an array of careerGoalIDs.
    * @param userID The userID.
    * @param careerGoalIDs A list of careerGoalIDs.
