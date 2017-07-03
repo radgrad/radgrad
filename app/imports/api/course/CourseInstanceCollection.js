@@ -107,6 +107,7 @@ class CourseInstanceCollection extends BaseCollection {
   /**
    * Update the course instance. Only a subset of fields can be updated.
    * @param docID The course instance docID (required).
+   * @param semesterID the semesterID for the course instance optional.
    * @param verified boolean optional.
    * @param fromSTAR boolean optional.
    * @param grade optional.
@@ -114,9 +115,12 @@ class CourseInstanceCollection extends BaseCollection {
    * @param note optional.
    * @param ice an object with fields i, c, e (optional)
    */
-  update(docID, { verified, fromSTAR, grade, creditHrs, note, ice }) {
+  update(docID, { semesterID, verified, fromSTAR, grade, creditHrs, note, ice }) {
     this.assertDefined(docID);
     const updateData = {};
+    if (semesterID) {
+      updateData.semesterID = semesterID;
+    }
     if (_.isBoolean(verified)) {
       updateData.verified = verified;
     }
