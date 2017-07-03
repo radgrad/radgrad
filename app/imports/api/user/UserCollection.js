@@ -61,7 +61,7 @@ class UserCollection extends BaseSlugCollection {
     // Use Meteor.users as the collection, not the User collection created by BaseCollection.
     this._collection = Meteor.users;
 
-    // TODO: Enable simpleschema validation.
+    // Enable simpleschema validation.
     // this._collection.attachSchema(this._schema);
 
     this._publicData = {
@@ -142,7 +142,7 @@ class UserCollection extends BaseSlugCollection {
       const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;
       // Now define the user.
       let userID;
-      if (password) {  // TODO: not sure this is the best way to distinguish the two cases.
+      if (password) {  // not sure this is the best way to distinguish the two cases.
         userID = Accounts.createUser({ username: slug, email, password });
       } else {
         const result = { id: slug };
@@ -385,6 +385,16 @@ class UserCollection extends BaseSlugCollection {
   getUserFromUsername(username) {
     check(username, String);
     return this._collection.findOne({ username });
+  }
+
+  /**
+   * Returns the username associated with user.
+   * @param user A user, either their username or their userID.
+   * @throws { Meteor.Error } If user is not a valid user.
+   */
+  getUsername(user) {
+    const userID = this.getID(user);
+    return this._collection.findOne(userID).username;
   }
 
   /**

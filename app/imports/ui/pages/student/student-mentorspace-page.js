@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
-import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection.js';
+import { MentorProfiles } from '../../../api/user/MentorProfileCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Student_MentorSpace_Page.helpers({
@@ -14,7 +14,7 @@ Template.Student_MentorSpace_Page.helpers({
   },
 
   mentorProfile(mentorID) {
-    return MentorProfiles.getMentorProfile(mentorID);
+    return MentorProfiles.getProfile(mentorID);
   },
 });
 

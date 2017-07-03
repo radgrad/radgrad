@@ -78,7 +78,7 @@ class CourseCollection extends BaseSlugCollection {
     // Currently we don't dump the DB is a way that prevents forward referencing of prereqs, so we
     // can't check the validity of prereqs during a define, such as with:
     //   _.each(prerequisites, (prerequisite) => this.getID(prerequisite));
-    // TODO: check that prerequisite strings are valid after all courses are defined.
+    // Instead, we check that prereqs are valid as part of checkIntegrity.
     const courseID =
         this._collection.insert({
           name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites,
@@ -194,6 +194,11 @@ class CourseCollection extends BaseSlugCollection {
       _.forEach(doc.interestIDs, interestID => {
         if (!Interests.isDefined(interestID)) {
           problems.push(`Bad interestID: ${interestID}`);
+        }
+      });
+      _.forEach(doc.prerequisites, prereq => {
+        if (!this.hasSlug(prereq)) {
+          problems.push(`Bad course prerequisite slug: ${prereq}`);
         }
       });
     });

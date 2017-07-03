@@ -68,15 +68,15 @@
     </div>
     <div class="content">
       {{#if matchingPoints 100 (points earnedICE) }}
-        <p>Congratulations! You have earned 100 {{type}} points!</p>
+        <p>Congratulations! You have earned 100 (or more) {{type}} points!</p>
       {{else}}
         {{#if matchingPoints 100 (points projectedICE) }}
-          <p>You already have 100 planned {{type}} points.</p>
+          <p>You already have at least 100 planned {{type}} points.</p>
         {{else}}
           {{#if hasNoInterests}}
             <p>Consider adding interests to see recommendations here.</p>
           {{else}}
-            <p>Consider the following to complete the full 100 {{type}} points.</p>
+            <p>Consider the following to acquire 100 {{type}} points.</p>
             <div class="ui list">
               {{#each event in recommendedEvents (points projectedICE)}}
                 <div class="item">

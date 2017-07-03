@@ -126,6 +126,16 @@ class SemesterCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns true if the passed semester occurs now or in the future.
+   * @param semester The semester (slug or semesterID).
+   * @returns True if semester is in the future.
+   */
+  isUpcomingSemester(semester) {
+    const semesterID = this.getID(semester);
+    return this.findDoc(semesterID).semesterNumber >= this.getCurrentSemester().semesterNumber;
+  }
+
+  /**
    * Returns the semester doc associated with the current semester based upon the current timestamp.
    * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
    */

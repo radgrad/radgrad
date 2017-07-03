@@ -1,26 +1,25 @@
 import { Meteor } from 'meteor/meteor';
 import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
-import { MentorProfiles } from './MentorProfileCollection';
+import { FacultyProfiles } from './FacultyProfileCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('MentorProfileCollection Meteor Methods', function test() {
-    const collectionName = MentorProfiles.getCollectionName();
-    const definitionData = {
-      mentor: 'brewer',
-      company: 'Capybara Inc',
-      career: 'Software Ninja',
-      location: 'Honolulu, HI',
-      linkedin: 'josephinegarces',
-      motivation: 'Because I can!',
-    };
+  describe('FacultyProfileCollection Meteor Methods TestBatch2', function test() {
+    const collectionName = FacultyProfiles.getCollectionName();
+    const username = 'esb@hawaii.edu';
+    const firstName = 'Edo';
+    const lastName = 'Biagioni';
+    const picture = 'esb.jpg';
+    const website = 'http://esb.github.io';
+    const interests = [];
+    const careerGoals = [];
 
     before(function (done) {
       this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user', 'brewer.user'], done);
+      defineTestFixturesMethod.call(['minimal', 'admin.user'], done);
     });
 
     after(function (done) {
@@ -30,6 +29,7 @@ if (Meteor.isClient) {
     it('Define Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
+          const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals };
           defineMethod.call({ collectionName, definitionData }, done);
         }).catch(done);
       });
@@ -38,14 +38,8 @@ if (Meteor.isClient) {
     it('Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const id = MentorProfiles.findDoc({ location: definitionData.location })._id;
-          const company = 'Tableau';
-          const career = 'Software Engineer';
-          const location = 'Palo Alto, CA';
-          const linkedin = 'robertsbrewer';
-          const motivation = 'I founded a startup in Hawaii';
-          updateMethod.call({ collectionName,
-            updateData: { id, company, career, location, linkedin, motivation } }, done);
+          const id = FacultyProfiles.getID(username);
+          updateMethod.call({ collectionName, updateData: { id, picture: 'esb2.jpg' } }, done);
         }).catch(done);
       });
     });
@@ -53,7 +47,7 @@ if (Meteor.isClient) {
     it('Remove Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const instance = MentorProfiles.findDoc({ location: 'Palo Alto, CA' })._id;
+          const instance = FacultyProfiles.getID(username);
           removeItMethod.call({ collectionName, instance }, done);
         }).catch(done);
       });

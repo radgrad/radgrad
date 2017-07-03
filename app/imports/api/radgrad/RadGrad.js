@@ -2,31 +2,34 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
-import { AdvisorLogs } from '../log/AdvisorLogCollection.js';
+import { AdvisorLogs } from '../log/AdvisorLogCollection';
+import { AdvisorProfiles } from '../user/AdvisorProfileCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
-import { Courses } from '../course/CourseCollection.js';
-import { CourseInstances } from '../course/CourseInstanceCollection.js';
-import { Feeds } from '../feed/FeedCollection.js';
-import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection.js';
+import { Courses } from '../course/CourseCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
+import { FacultyProfiles } from '../user/FacultyProfileCollection';
+import { Feeds } from '../feed/FeedCollection';
+import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
 import { HelpMessages } from '../help/HelpMessageCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
-import { Interests } from '../interest/InterestCollection.js';
-import { InterestTypes } from '../interest/InterestTypeCollection.js';
-import { MentorAnswers } from '../mentor/MentorAnswerCollection.js';
-import { MentorQuestions } from '../mentor/MentorQuestionCollection.js';
-import { MentorProfiles } from '../mentor/MentorProfileCollection.js';
-import { Opportunities } from '../opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection.js';
-import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection.js';
+import { Interests } from '../interest/InterestCollection';
+import { InterestTypes } from '../interest/InterestTypeCollection';
+import { MentorAnswers } from '../mentor/MentorAnswerCollection';
+import { MentorQuestions } from '../mentor/MentorQuestionCollection';
+import { MentorProfiles } from '../user/MentorProfileCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
+import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
 import { PlanChoices } from '../degree-plan/PlanChoiceCollection';
 import { PublicStats } from '../public-stats/PublicStatsCollection';
 import { Reviews } from '../review/ReviewCollection';
-import { Semesters } from '../semester/SemesterCollection.js';
-import { Slugs } from '../slug/SlugCollection.js';
+import { Semesters } from '../semester/SemesterCollection';
+import { Slugs } from '../slug/SlugCollection';
+import { StudentProfiles } from '../user/StudentProfileCollection';
 import { Teasers } from '../teaser/TeaserCollection';
 import { Users } from '../user/UserCollection';
 import { ValidUserAccounts } from '../user/ValidUserAccountCollection';
-import { VerificationRequests } from '../verification/VerificationRequestCollection.js';
+import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /** @module api/radgrad/RadGrad */
 
@@ -40,9 +43,11 @@ class RadGradClass {
       AcademicPlans,
       AcademicYearInstances,
       AdvisorLogs,
+      AdvisorProfiles,
       CareerGoals,
       Courses,
       CourseInstances,
+      FacultyProfiles,
       Feeds,
       FeedbackInstances,
       HelpMessages,
@@ -60,6 +65,7 @@ class RadGradClass {
       Reviews,
       Semesters,
       Slugs,
+      StudentProfiles,
       Teasers,
       Users,
       ValidUserAccounts,
@@ -68,8 +74,8 @@ class RadGradClass {
 
     /**
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
-     * Note that some collection class instances are implicitly initialized: Slugs, AcademicYearInstancs, and
-     * PublicStats.
+     * Note that some collection class instances are implicitly initialized and so do not appear in this list.
+     * For example: Slugs, AcademicYearInstances, and PublicStats.
      */
     this.collectionLoadSequence = [
       Semesters,
@@ -92,6 +98,9 @@ class RadGradClass {
       Feeds,
       AdvisorLogs,
       MentorProfiles,
+      AdvisorProfiles,
+      FacultyProfiles,
+      StudentProfiles,
       MentorQuestions,
       MentorAnswers,
       Reviews,

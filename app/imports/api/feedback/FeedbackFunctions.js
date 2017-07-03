@@ -148,7 +148,7 @@ export class FeedbackFunctionClass {
   }
 
   /**
-   * Checks the student's degree plan to ensure that there aren't too many ICS courses in any one semester.
+   * Checks the student's degree plan to ensure that there aren't too many courses in any one semester.
    * @param user the student's ID.
    */
   checkOverloadedSemesters(user) {

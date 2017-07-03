@@ -1,28 +1,26 @@
 import { Meteor } from 'meteor/meteor';
 import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
-import { Opportunities } from './OpportunityCollection';
+import { StudentProfiles } from './StudentProfileCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('OpportunityCollection Meteor Methods TestBatch2', function test() {
-    const collectionName = Opportunities.getCollectionName();
-    const definitionData = {
-      name: 'name',
-      slug: 'opportunity-slug-example',
-      description: 'description',
-      opportunityType: 'club',
-      sponsor: 'radgrad',
-      ice: { i: 5, c: 5, e: 5 },
-      interests: ['algorithms'],
-      semesters: ['Spring-2017'],
-    };
+  describe('StudentProfileCollection Meteor Methods TestBatch2', function test() {
+    const collectionName = StudentProfiles.getCollectionName();
+    const username = 'amytaka';
+    const firstName = 'Amy';
+    const lastName = 'Takayesu';
+    const picture = 'amytaka.jpg';
+    const website = 'http://amytaka.github.io';
+    const interests = [];
+    const careerGoals = [];
+    const level = 6;
 
     before(function (done) {
       this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user', 'opportunities'], done);
+      defineTestFixturesMethod.call(['minimal', 'admin.user'], done);
     });
 
     after(function (done) {
@@ -32,6 +30,7 @@ if (Meteor.isClient) {
     it('Define Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
+          const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals, level };
           defineMethod.call({ collectionName, definitionData }, done);
         }).catch(done);
       });
@@ -40,9 +39,8 @@ if (Meteor.isClient) {
     it('Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const id = Opportunities.findIdBySlug(definitionData.slug);
-          const description = 'updated description';
-          updateMethod.call({ collectionName, updateData: { id, description } }, done);
+          const id = StudentProfiles.getID(username);
+          updateMethod.call({ collectionName, updateData: { id, level: 4 } }, done);
         }).catch(done);
       });
     });
@@ -50,7 +48,8 @@ if (Meteor.isClient) {
     it('Remove Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ collectionName, instance: definitionData.slug }, done);
+          const instance = StudentProfiles.getID(username);
+          removeItMethod.call({ collectionName, instance }, done);
         }).catch(done);
       });
     });

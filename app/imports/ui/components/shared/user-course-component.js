@@ -7,8 +7,8 @@ import { getRouteUserName } from '../shared/route-user-name';
 
 // /** @module ui/components/shared/User_Course_Component */
 
-function getICSCourses(studentID, isPast) {
-  const courseInstances = CourseInstances.find({ studentID, verified: isPast, note: /ICS/ }).fetch();
+function getCourses(studentID, isPast) {
+  const courseInstances = CourseInstances.find({ studentID, verified: isPast }).fetch();
   return _.uniq(courseInstances);
 }
 
@@ -16,7 +16,7 @@ Template.User_Course_Component.helpers({
   count(taken) {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      return getICSCourses(userID, taken).length;
+      return getCourses(userID, taken).length;
     }
     return 0;
   },
@@ -31,7 +31,7 @@ Template.User_Course_Component.helpers({
   coursesPlanned() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      const courses = getICSCourses(userID, false);
+      const courses = getCourses(userID, false);
       const noRepeat = _.map(_.groupBy(courses, function (course) {
         return course.courseID;
       }), function (grouped) {
@@ -44,7 +44,7 @@ Template.User_Course_Component.helpers({
   coursesTaken() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      const courses = getICSCourses(userID, true);
+      const courses = getCourses(userID, true);
       const noRepeat = _.map(_.groupBy(courses, function (course) {
         return course.courseID;
       }), function (grouped) {

@@ -9,7 +9,7 @@ import { Users } from './UserCollection';
 
 /** @module api/user/ValidUserAccountCollection */
 
-// TODO: Is there a way we can avoid the need for this collection? Can't we just check onLogin that the account exists?
+// TODO Eliminate this collection once we have profiles for each type of user. If no profile, no login.
 
 /**
  * Represent a valid user. Users must be approved before they can be created.

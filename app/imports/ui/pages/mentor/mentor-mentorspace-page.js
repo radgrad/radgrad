@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
-import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection.js';
+import { MentorProfiles } from '../../../api/user/MentorProfileCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Mentor_MentorSpace_Page.onCreated(function mentorMentorSpacePageOnCreated() {
@@ -28,7 +28,7 @@ Template.Mentor_MentorSpace_Page.helpers({
     return Users.find({ roles: ['MENTOR'] });
   },
   mentorProfile(mentorID) {
-    return MentorProfiles.getMentorProfile(mentorID);
+    return MentorProfiles.getProfile(mentorID);
   },
 });
 

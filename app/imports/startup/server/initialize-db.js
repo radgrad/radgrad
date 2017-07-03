@@ -6,6 +6,8 @@ import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { RadGrad } from '../../api/radgrad/RadGrad';
 import { loadCollection } from '../../api/test/test-utilities';
 import { removeAllEntities } from '../../api/base/BaseUtilities';
+import { checkIntegrity } from '../../api/integrity/IntegrityChecker';
+
 
 /* global Assets */
 /* eslint no-console: "off" */
@@ -110,6 +112,11 @@ Meteor.startup(() => {
     removeAllEntities();
   } else {
     loadDatabase();
+    console.log('Checking DB integrity.');
+    const integrity = checkIntegrity();
+    if (integrity.count > 0) {
+      console.log(checkIntegrity().message);
+    }
     startupPublicStats();
   }
 });

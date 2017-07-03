@@ -1721,7 +1721,9 @@
           "description": "Second-level programming for computer engineers. Object-oriented programming paradigm, definition and use of classes, fundamentals of object-oriented design in modern object-oriented languages such as C++. Common data structures, simple searching and sorting techniques.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_160"]
+          "prerequisites": [
+            "ee_160"
+          ]
         },
         {
           "name": "Basic Circuit Analysis I",
@@ -1741,7 +1743,9 @@
           "description": "Laplace transforms and their application to circuits, Fourier transforms and their applications to circuits, frequency selective circuits, introduction to and design of active filters, convolution, and state space analysis of circuits.",
           "creditHrs": 4,
           "interests": [],
-          "prerequisites": ["ee_211"]
+          "prerequisites": [
+            "ee_211"
+          ]
         },
         {
           "name": "Introduction to Digital Design",
@@ -1751,7 +1755,9 @@
           "description": "Introduction to the design of digital systems with an emphasis on design methods and the implementation and use of fundamental digital components.",
           "creditHrs": 4,
           "interests": [],
-          "prerequisites": ["ee_160"]
+          "prerequisites": [
+            "ee_160"
+          ]
         },
         {
           "name": "Sophomore Project",
@@ -1771,7 +1777,9 @@
           "description": "Discrete-time and continuous time signals and systems, linear systems, convolution, Fourier series, Fourier transform, sampling.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_213"]
+          "prerequisites": [
+            "ee_213"
+          ]
         },
         {
           "name": "Microelectronic Circuits I",
@@ -1781,7 +1789,9 @@
           "description": "Semiconductor structures, operating principles and characteristics of diodes and amplifying devices. Their application as circuit elements in building basic digital, analog, and integrated circuit subsystems.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_213"]
+          "prerequisites": [
+            "ee_213"
+          ]
         },
         {
           "name": "Physical Electronics",
@@ -1801,7 +1811,9 @@
           "description": "Probability, statistics, random variables, distributions, densities, expectations, limit theorems, and applications to electrical engineering.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_315"]
+          "prerequisites": [
+            "ee_315"
+          ]
         },
         {
           "name": "Digital Systems and Computer Design",
@@ -1811,7 +1823,10 @@
           "description": "Design methodology, processor design, control design, memory organization, system organization.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_160", "ee_260"]
+          "prerequisites": [
+            "ee_160",
+            "ee_260"
+          ]
         },
         {
           "name": "Discrete Math for Engineers",
@@ -1821,7 +1836,10 @@
           "description": "Logic, sets, number theory, properties of functions, properties of relations, methods of proofs, recursion, counting, probability, trees, graphs, analysis of algorithms, finite state autonoma.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_160", "ee_260"]
+          "prerequisites": [
+            "ee_160",
+            "ee_260"
+          ]
         },
         {
           "name": "Computer Data Structures and Algorithms",
@@ -1831,7 +1849,10 @@
           "description": "Introduction to computer programming algorithms with emphasis on advanced data structures, input-output routines, files, and interpreters.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_205", "ics_141"]
+          "prerequisites": [
+            "ee_205",
+            "ics_141"
+          ]
         },
         {
           "name": "Engineering Electromagnetics I",
@@ -1841,7 +1862,9 @@
           "description": "Transient and steady-state waves on transmission lines. Plane wave solutions of Maxwell's equations. Application of Maxwell's equations under static and time-varying conditions.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_213"]
+          "prerequisites": [
+            "ee_213"
+          ]
         },
         {
           "name": "Junior Project",
@@ -1851,7 +1874,9 @@
           "description": "Junior level individual or team project under EE faculty direction and guidance. The project provides design experience and develops practical skills. It may be a continuation of EE 296 or a new project.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_296"]
+          "prerequisites": [
+            "ee_296"
+          ]
         },
         {
           "name": "Object-oriented Software Engineering",
@@ -1861,7 +1886,9 @@
           "description": "Introduction to advanced techniques for designing, implementing, and testing computer software with a particular focus on using object-oriented design, analysis, and programming to produce high-quality computer programs that solve non-trivial problems.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_367"]
+          "prerequisites": [
+            "ee_367"
+          ]
         },
         {
           "name": "Introduction to Operating Systems",
@@ -1871,7 +1898,10 @@
           "description": "Computer system organization; multiprocessor systems, memory hierarchies, assemblers, compilers, operating systems, virtual machine, memory management, processor management; information management.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_361", "ee_367"]
+          "prerequisites": [
+            "ee_361",
+            "ee_367"
+          ]
         },
         {
           "name": "Ethics in Electrical Engineering",
@@ -3561,7 +3591,35 @@
       "name": "MentorProfileCollection",
       "contents": [
         {
-          "mentor": "brewer",
+          "username": "brewer",
+          "firstName": "Robert",
+          "lastName": "Brewer",
+          "picture": "/images/mentors/brewer.jpg",
+          "website": null,
+          "interests": [
+            "algorithms",
+            "data-science",
+            "data-visualization",
+            "entrepreneurship",
+            "hci",
+            "research",
+            "software-engineering",
+            "sustainability"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "database-administrator",
+            "devops-engineer",
+            "game-developer",
+            "graduate-school",
+            "information-system-manager",
+            "network-engineer",
+            "research-scientist",
+            "software-developer",
+            "startup-cofounder",
+            "teacher",
+            "ux-designer"
+          ],
           "company": "Tableau",
           "career": "Software Engineer",
           "location": "Palo Alto, CA",
@@ -3569,7 +3627,25 @@
           "motivation": "I founded a startup in Hawaii and now work in Silicon Valley. I am happy to share my experiences with new grads."
         },
         {
-          "mentor": "geis",
+          "username": "geis",
+          "firstName": "Jennifer",
+          "lastName": "Geis",
+          "picture": "/images/mentors/geis.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "civic-engagement",
+            "data-science",
+            "data-visualization",
+            "it-management",
+            "software-engineering",
+            "web-development"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-system-manager",
+            "software-developer"
+          ],
           "company": "UH",
           "career": "IT Specialist",
           "location": "Honolulu, HI",
@@ -3577,7 +3653,26 @@
           "motivation": "I received both a B.S. and M.S. in Computer Science from UH. I've worked in the private sector and done the start-up thing and now work at UH Information and Technology Services. Being from Hawaii my goal was to orient my career so I could stay here and I've learned some lessons along the way. My experiences could prove useful to you if: (a) you want to talk about getting the most out of your UH ICS experience, or (b) you are interested in one day working for UH, or (c) staying in Hawaii is one of your goals."
         },
         {
-          "mentor": "ito",
+          "username": "ito",
+          "firstName": "Austen",
+          "lastName": "Ito",
+          "picture": "/images/mentors/ito.png",
+          "website": null,
+          "interests": [
+            "entrepreneurship",
+            "game-design",
+            "mobile",
+            "robotics",
+            "software-engineering",
+            "web-development"
+          ],
+          "careerGoals": [
+            "iot-architect",
+            "robotics-engineer",
+            "software-developer",
+            "startup-cofounder",
+            "ux-designer"
+          ],
           "company": "Bonobos",
           "career": "Software Engineer",
           "location": "New York City, NY",
@@ -3585,7 +3680,27 @@
           "motivation": "I graduated from ICS, helped start the first Honolulu Makerspace, have worked for Code Camps, and have held software jobs in DC, NYC, and HI. I can try to help you whether you intend to stay local or move to the mainland."
         },
         {
-          "mentor": "kagawa",
+          "username": "kagawa",
+          "firstName": "Aaron",
+          "lastName": "Kagawa",
+          "picture": "/images/mentors/kagawa.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "civic-engagement",
+            "data-visualization",
+            "entrepreneurship",
+            "it-management",
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "devops-engineer",
+            "graduate-school",
+            "information-system-manager",
+            "software-developer",
+            "startup-cofounder"
+          ],
           "company": "LiveAction",
           "career": "Software Engineer",
           "location": "Honolulu, HI",
@@ -3593,7 +3708,20 @@
           "motivation": "As an ICS undergrad and graduate student, I know how important mentoring can be to your career, and I hope I can help future ICS grads get off to a great start."
         },
         {
-          "mentor": "karjala",
+          "username": "karjala",
+          "firstName": "Patrick",
+          "lastName": "Karjala",
+          "picture": "/images/mentors/karjala.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "it-management",
+            "web-development"
+          ],
+          "careerGoals": [
+            "software-developer",
+            "ux-designer"
+          ],
           "company": "Slickage Studios",
           "career": "CEO",
           "location": "Honolulu, HI",
@@ -3601,7 +3729,33 @@
           "motivation": "I completed my undergraduate CS degree in 2004, and am now enrolled in the UH ICS MS program. I currently work for the Distance Course Design and Consulting group at UH Manoa, doing full stack web application development. I am glad to answer questions regarding any topic of computer science, especially those geared toward collaborative development and networking (both computer and interpersonal)."
         },
         {
-          "mentor": "lee",
+          "username": "lee",
+          "firstName": "George",
+          "lastName": "Lee",
+          "picture": "/images/mentors/lee.jpg",
+          "website": null,
+          "interests": [
+            "algorithms",
+            "application-development",
+            "civic-engagement",
+            "databases",
+            "entrepreneurship",
+            "it-management",
+            "software-engineering",
+            "web-development"
+          ],
+          "careerGoals": [
+            "devops-engineer",
+            "full-stack-developer",
+            "game-developer",
+            "graduate-school",
+            "iot-architect",
+            "mobile-app-developer",
+            "software-developer",
+            "startup-cofounder",
+            "teacher",
+            "ux-designer"
+          ],
           "company": "Hobnob Invites",
           "career": "Developer",
           "location": "Honolulu, HI",
@@ -3609,7 +3763,35 @@
           "motivation": "I founded a startup in Hawaii and now work in Silicon Valley. I am happy to share my experiences with new grads."
         },
         {
-          "mentor": "leuck",
+          "username": "leuck",
+          "firstName": "Daniel",
+          "lastName": "Leuck",
+          "picture": "/images/mentors/leuck.jpg",
+          "website": null,
+          "interests": [
+            "algorithms",
+            "application-development",
+            "artificial-intelligence",
+            "civic-engagement",
+            "cryptography",
+            "data-science",
+            "entrepreneurship",
+            "it-management",
+            "mobile",
+            "software-engineering",
+            "web-development"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "devops-engineer",
+            "full-stack-developer",
+            "game-developer",
+            "information-system-manager",
+            "mobile-app-developer",
+            "software-developer",
+            "startup-cofounder",
+            "ux-designer"
+          ],
           "company": "Ikayzo",
           "career": "CEO",
           "location": "Honolulu, HI",
@@ -3617,7 +3799,22 @@
           "motivation": "The UH ICS Department is an engine for the high tech industry in Hawaii. The better prepared we can make ICS graduates, the more success our industry will have and the more opportunities there will be for all."
         },
         {
-          "mentor": "nagashima",
+          "username": "nagashima",
+          "firstName": "Yuka",
+          "lastName": "Nagashima",
+          "picture": "/images/mentors/nagashima.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "civic-engagement",
+            "entrepreneurship",
+            "it-management"
+          ],
+          "careerGoals": [
+            "software-developer",
+            "startup-cofounder",
+            "teacher"
+          ],
           "company": "Paideia Enterprises",
           "career": "Owner",
           "location": "San Francisco, CA",
@@ -7126,6 +7323,953 @@
             "data-science"
           ],
           "opportunity": "data-analytics-for-solar-energy"
+        }
+      ]
+    },
+    {
+      "name": "FacultyProfileCollection",
+      "contents": [
+        {
+          "username": "sstill",
+          "firstName": "Suzanne",
+          "lastName": "Still",
+          "picture": "/images/people/sstill.jpg",
+          "website": "http://www2.hawaii.edu/~sstill/",
+          "interests": [
+            "machine-learning",
+            "research"
+          ],
+          "careerGoals": [
+            "research-scientist"
+          ]
+        },
+        {
+          "username": "sugihara",
+          "firstName": "Kazuo",
+          "lastName": "Sugihara",
+          "picture": "/images/default-profile-picture.png",
+          "website": null,
+          "interests": [
+            "research",
+            "robotics"
+          ],
+          "careerGoals": [
+            "research-scientist"
+          ]
+        },
+        {
+          "username": "suthers",
+          "firstName": "Daniel",
+          "lastName": "Suthers",
+          "picture": "/images/people/suthers.jpg",
+          "website": "http://www2.hawaii.edu/~suthers/",
+          "interests": [
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "scottpr",
+          "firstName": "Scott",
+          "lastName": "Robertson",
+          "picture": "/images/people/scottrobertson.jpg",
+          "website": "http://www2.hawaii.edu/~scottpr/",
+          "interests": [
+            "civic-engagement",
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "pseidel",
+          "firstName": "Peter-Michael",
+          "lastName": "Seidel",
+          "picture": "/images/people/pseidel.jpg",
+          "website": null,
+          "interests": [
+            "algorithms",
+            "hardware",
+            "research",
+            "security"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-security-analyst",
+            "information-system-manager",
+            "iot-architect",
+            "robotics-engineer",
+            "software-developer"
+          ]
+        },
+        {
+          "username": "nodari",
+          "firstName": "Nodari",
+          "lastName": "Sitchinava",
+          "picture": "/images/people/nodari.jpg",
+          "website": "http://www2.hawaii.edu/~nodari/",
+          "interests": [
+            "algorithms",
+            "research"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "graduate-school"
+          ]
+        },
+        {
+          "username": "lipyeow",
+          "firstName": "Lipyeow",
+          "lastName": "Lim",
+          "picture": "/images/people/lipyeow.jpg",
+          "website": null,
+          "interests": [
+            "data-science",
+            "research",
+            "sustainability"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "database-administrator",
+            "graduate-school",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "leighj",
+          "firstName": "Jason",
+          "lastName": "Leigh",
+          "picture": "/images/people/leighj.jpg",
+          "website": "http://www2.hawaii.edu/~leighj/JASON_LEIGH/Jason_Leigh_Home_Page.html",
+          "interests": [
+            "data-visualization",
+            "research"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "research-scientist",
+            "teacher",
+            "vr-ar-engineer"
+          ]
+        },
+        {
+          "username": "kyungim",
+          "firstName": "Kyungim",
+          "lastName": "Baek",
+          "picture": "/images/people/kyungim.jpg",
+          "website": "http://www2.hawaii.edu/~kyungim/",
+          "interests": [
+            "algorithms",
+            "computer-vision",
+            "data-science",
+            "data-visualization",
+            "teaching"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "graduate-school",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "janst",
+          "firstName": "Jan",
+          "lastName": "Stelovsky",
+          "picture": "/images/people/janst.jpg",
+          "website": "http://www2.hawaii.edu/~janst/",
+          "interests": [
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "devops-engineer",
+            "full-stack-developer",
+            "mobile-app-developer",
+            "research-scientist",
+            "software-developer",
+            "startup-cofounder",
+            "teacher"
+          ]
+        },
+        {
+          "username": "johnson",
+          "firstName": "Philip",
+          "lastName": "Johnson",
+          "picture": "/images/mockup/johnson.jpg",
+          "website": "http://philipmjohnson.org",
+          "interests": [
+            "civic-engagement",
+            "research",
+            "software-engineering",
+            "sustainability"
+          ],
+          "careerGoals": [
+            "devops-engineer",
+            "full-stack-developer",
+            "software-developer",
+            "startup-cofounder",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "henric",
+          "firstName": "Henri",
+          "lastName": "Casanova",
+          "picture": "/images/people/henric.jpg",
+          "website": "http://navet.ics.hawaii.edu/~casanova/",
+          "interests": [
+            "algorithms",
+            "hpc",
+            "parallel-programming",
+            "research",
+            "teaching"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "guylaine",
+          "firstName": "Guylaine",
+          "lastName": "Poisson",
+          "picture": "/images/default-profile-picture.png",
+          "website": "http://navet.ics.hawaii.edu/~poisson/BiL/index.html",
+          "interests": [
+            "bioinformatics",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "esb",
+          "firstName": "Edo",
+          "lastName": "Biagioni",
+          "picture": "/images/people/esb.jpg",
+          "website": "http://www2.hawaii.edu/~esb/",
+          "interests": [
+            "mobile",
+            "networks",
+            "research"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "network-engineer",
+            "research-scientist"
+          ]
+        },
+        {
+          "username": "dusko",
+          "firstName": "Dusko",
+          "lastName": "Pavlovic",
+          "picture": "/images/people/dusko.jpg",
+          "website": "dusko.org",
+          "interests": [
+            "research",
+            "security"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-security-analyst",
+            "teacher"
+          ]
+        },
+        {
+          "username": "depengli",
+          "firstName": "Depeng",
+          "lastName": "Li",
+          "picture": "/images/people/depengli.jpg",
+          "website": "http://www2.hawaii.edu/~depengli/",
+          "interests": [
+            "networks",
+            "research",
+            "security"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-security-analyst",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "crosby",
+          "firstName": "Martha",
+          "lastName": "Crosby",
+          "picture": "/images/people/crosby.jpg",
+          "website": null,
+          "interests": [
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "graduate-school",
+            "information-security-analyst",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "binsted",
+          "firstName": "Kim",
+          "lastName": "Binsted",
+          "picture": "/images/people/binsted.jpg",
+          "website": "http://www2.hawaii.edu/~binsted/",
+          "interests": [
+            "artificial-intelligence",
+            "hci",
+            "psychology",
+            "research",
+            "teaching"
+          ],
+          "careerGoals": [
+            "mobile-app-developer",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "chin",
+          "firstName": "David",
+          "lastName": "Chin",
+          "picture": "/images/people/chin.jpg",
+          "website": "http://www2.hawaii.edu/~chin/",
+          "interests": [
+            "artificial-intelligence",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "game-developer",
+            "graduate-school",
+            "research-scientist",
+            "teacher"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdvisorProfileCollection",
+      "contents": [
+        {
+          "username": "glau",
+          "firstName": "Gerald",
+          "lastName": "Lau",
+          "picture": "/images/mockup/glau.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "it-management",
+            "security",
+            "teaching"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-security-analyst",
+            "teacher"
+          ]
+        },
+        {
+          "username": "cmoore",
+          "firstName": "Cam",
+          "lastName": "Moore",
+          "picture": "/images/mockup/cmoore.jpg",
+          "website": null,
+          "interests": [
+            "research",
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "devops-engineer"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "StudentProfileCollection",
+      "contents": [
+        {
+          "username": "aaronvil",
+          "firstName": "Aaron",
+          "lastName": "Villanueva",
+          "picture": "/images/people/aaronvil.jpg",
+          "website": null,
+          "interests": [
+            "networks"
+          ],
+          "careerGoals": [
+            "information-system-manager",
+            "software-developer"
+          ],
+          "academicPlan": "bs-cs-2016",
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "isAlumni": false
+        },
+        {
+          "firstName": "Abigail",
+          "lastName": "Kealoha",
+          "username": "abi",
+          "picture": "/images/mockup/abi.jpg",
+          "website": "http://abi.github.io",
+          "interests": [
+            "application-development",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "software-developer"
+          ],
+          "academicPlan": "bs-cs-2016",
+          "level": 5,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "isAlumni": false
+        },
+        {
+          "firstName": "Ah Lim",
+          "lastName": "Om",
+          "username": "ahlim",
+          "picture": "/images/people/ahlim.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "database-administrator",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Alfred",
+          "lastName": "Persona",
+          "username": "alfred",
+          "picture": "/images/mockup/alfred.png",
+          "website": null,
+          "interests": [
+            "hardware",
+            "it-management"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 6,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Betty",
+          "lastName": "Keanu",
+          "username": "betty",
+          "picture": "/images/mockup/betty.jpg",
+          "website": "http://keanu.github.io/",
+          "interests": [
+            "data-science",
+            "data-visualization",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "graduate-school"
+          ],
+          "level": 4,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Brian",
+          "lastName": "Mayeshiro",
+          "username": "brianmay",
+          "picture": "/images/people/brianmay.jpg",
+          "website": null,
+          "interests": [
+            "computer-architecture"
+          ],
+          "careerGoals": [
+            "network-engineer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Charley",
+          "lastName": "Sherry",
+          "username": "charley",
+          "picture": "/images/mockup/charley.jpg",
+          "website": null,
+          "interests": [
+            "bioinformatics"
+          ],
+          "careerGoals": [
+            "data-scientist"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Christopher",
+          "lastName": "Nguyen",
+          "username": "christopher-nguyen",
+          "picture": "/images/people/christopher-nguyen.jpg",
+          "website": null,
+          "interests": [
+            "application-development"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Christopher",
+          "lastName": "Jaro",
+          "username": "cpjaro",
+          "picture": "/images/people/cpjaro.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "information-system-manager",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Christie",
+          "lastName": "Reindle",
+          "username": "creindle",
+          "picture": "/images/people/creindle.jpg",
+          "website": null,
+          "interests": [
+            "teaching"
+          ],
+          "careerGoals": [
+            "network-engineer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Daniel",
+          "lastName": "Tan",
+          "username": "dtan808",
+          "picture": "/images/people/dtan808.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Ella",
+          "lastName": "Zwick",
+          "username": "ella",
+          "picture": "/images/mockup/ella.jpg",
+          "website": null,
+          "interests": [
+            "civic-engagement",
+            "web-development"
+          ],
+          "careerGoals": [
+            "full-stack-developer"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Erik",
+          "lastName": "Huang",
+          "username": "erikhuan",
+          "picture": "/images/people/erikhuan.jpg",
+          "website": null,
+          "interests": [
+            "ruby"
+          ],
+          "careerGoals": [
+            "information-security-analyst",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Hailing",
+          "lastName": "Li",
+          "username": "hailing",
+          "picture": "/images/people/hailing.jpg",
+          "website": null,
+          "interests": [
+            "operating-systems"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Jake",
+          "lastName": "Philips",
+          "username": "jakephilips",
+          "picture": "/images/default-profile-picture.png",
+          "website": null,
+          "interests": [
+            "dotNet"
+          ],
+          "careerGoals": [
+            "data-scientist"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Jameyia",
+          "lastName": "Shamia",
+          "username": "jameyia-shamia",
+          "picture": "/images/people/jameyia-shamia.jpg",
+          "website": null,
+          "interests": [
+            "application-development"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Joshua",
+          "lastName": "Wadsack-Myers",
+          "username": "joshuajw",
+          "picture": "/images/people/joshuajw.jpg",
+          "website": null,
+          "interests": [
+            "hpc"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Jack",
+          "lastName": "Rude",
+          "username": "jrude",
+          "picture": "/images/people/jrude.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Kelly",
+          "lastName": "Lee",
+          "username": "kellyl4",
+          "picture": "/images/people/kellyl4.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "information-system-manager",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Kirk",
+          "lastName": "Wilson",
+          "username": "kirk6",
+          "picture": "/images/people/kirk6.jpg",
+          "website": null,
+          "interests": [
+            "prolog"
+          ],
+          "careerGoals": [
+            "network-engineer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Kurt",
+          "lastName": "Nikaitani",
+          "username": "kurtkn",
+          "picture": "/images/people/kurtkn.jpg",
+          "website": null,
+          "interests": [
+            "robotics"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Anh",
+          "lastName": "Lam",
+          "username": "lamanh",
+          "picture": "/images/people/anhlam.jpg",
+          "website": null,
+          "interests": [
+            "security"
+          ],
+          "careerGoals": [
+            "information-security-analyst",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Hongbo",
+          "lastName": "Lin",
+          "username": "linhongb",
+          "picture": "/images/people/linhongb.jpg",
+          "website": null,
+          "interests": [
+            "python"
+          ],
+          "careerGoals": [
+            "information-system-manager",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Mark",
+          "lastName": "Cummins",
+          "username": "markrc",
+          "picture": "/images/people/markrc.jpg",
+          "website": null,
+          "interests": [
+            "lisp"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Nathan",
+          "lastName": "Lam",
+          "username": "nathancy",
+          "picture": "/images/people/nathancy.jpg",
+          "website": null,
+          "interests": [
+            "perl"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Charles",
+          "lastName": "Pak",
+          "username": "pakchar",
+          "picture": "/images/people/pakchar.jpg",
+          "website": null,
+          "interests": [
+            "parallel-programming"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Russell",
+          "lastName": "Omo",
+          "username": "rao642",
+          "picture": "/images/people/rao642.jpg",
+          "website": null,
+          "interests": [
+            "application-development"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Shaziney",
+          "lastName": "Natividad",
+          "username": "shaziney",
+          "picture": "/images/people/shaziney.jpg",
+          "website": null,
+          "interests": [
+            "prolog"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "software-developer"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Connor",
+          "lastName": "Slike",
+          "username": "slike",
+          "picture": "/images/people/slike.jpg",
+          "website": null,
+          "interests": [
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Zachary",
+          "lastName": "Knoebel",
+          "username": "zknoebel",
+          "picture": "/images/people/zknoebel.jpg",
+          "website": null,
+          "interests": [
+            "data-visualization"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016",
+          "isAlumni": false
         }
       ]
     },

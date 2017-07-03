@@ -1,10 +1,11 @@
-/* global document */
-
 import { Template } from 'meteor/templating';
 import { moment } from 'meteor/momentjs:moment';
 import { Logger } from 'meteor/jag:pince';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { plannerKeys } from './academic-plan';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
+
+/* global document */
 
 // /** @module ui/components/planner/Planned_Course_Grade */
 
@@ -34,13 +35,20 @@ Template.Planned_Course_Grade.events({
   'change': function change(event) { // eslint-disable-line
     event.preventDefault();
     const div = event.target.parentElement;
-    const grade = div.childNodes[2].textContent;
-    const id = div.parentElement.id;
-    CourseInstances.clientUpdateGrade(id, grade);
-    const ci = CourseInstances.findDoc(id);
-    const template = Template.instance();
-    template.state.set(plannerKeys.detailICE, ci.ice);
-    template.state.set(plannerKeys.detailCourseInstance, ci);
+    const updateData = {};
+    updateData.grade = div.childNodes[2].textContent;
+    updateData.id = div.parentElement.id;
+    const collectionName = CourseInstances.getCollectionName();
+    const instance = Template.instance();
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (!error) {
+        const ci = CourseInstances.findDoc(updateData.id);
+        instance.state.set(plannerKeys.detailICE, ci.ice);
+        instance.state.set(plannerKeys.detailCourseInstance, ci);
+      } else {
+        console.log('Error updating grade', error);
+      }
+    });
   },
 });
 

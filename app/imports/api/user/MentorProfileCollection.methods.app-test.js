@@ -1,20 +1,26 @@
 import { Meteor } from 'meteor/meteor';
 import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
-import { Interests } from './InterestCollection';
+import { MentorProfiles } from './MentorProfileCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('InterestCollection Meteor Methods TestBatch2', function test() {
-    const collectionName = Interests.getCollectionName();
-    const definitionData = {
-      name: 'name',
-      slug: 'interest-slug-example',
-      interestType: 'cs-disciplines',
-      description: 'description',
-    };
+  describe('MentorProfileCollection Meteor Methods TestBatch2', function test() {
+    const collectionName = MentorProfiles.getCollectionName();
+    const username = 'rbrewer@tableau.com';
+    const firstName = 'Robert';
+    const lastName = 'Brewer';
+    const picture = 'foo.jpg';
+    const website = 'http://rbrewer.github.io';
+    const interests = [];
+    const careerGoals = [];
+    const company = 'Tableau Inc';
+    const career = 'Software Engineer';
+    const location = 'San Francisco, CA';
+    const linkedin = 'robertsbrewer';
+    const motivation = 'Help future students.';
 
     before(function (done) {
       this.timeout(0);
@@ -28,6 +34,8 @@ if (Meteor.isClient) {
     it('Define Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
+          const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals, company,
+            career, location, linkedin, motivation };
           defineMethod.call({ collectionName, definitionData }, done);
         }).catch(done);
       });
@@ -36,10 +44,8 @@ if (Meteor.isClient) {
     it('Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const id = Interests.findIdBySlug(definitionData.slug);
-          const name = 'updated interest name';
-          const description = 'updated description';
-          updateMethod.call({ collectionName, updateData: { id, name, description } }, done);
+          const id = MentorProfiles.getID(username);
+          updateMethod.call({ collectionName, updateData: { id, company: 'Google, Inc.' } }, done);
         }).catch(done);
       });
     });
@@ -47,7 +53,8 @@ if (Meteor.isClient) {
     it('Remove Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ collectionName, instance: definitionData.slug }, done);
+          const instance = MentorProfiles.getID(username);
+          removeItMethod.call({ collectionName, instance }, done);
         }).catch(done);
       });
     });

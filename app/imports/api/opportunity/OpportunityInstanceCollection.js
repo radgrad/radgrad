@@ -80,12 +80,16 @@ class OpportunityInstanceCollection extends BaseCollection {
   /**
    * Update the opportunity instance. Only verified and ICE fields can be updated.
    * @param docID The course instance docID (required).
+   * @param semesterID the semesterID for the course instance optional.
    * @param verified boolean optional.
    * @param ice an object with fields i, c, e (optional)
    */
-  update(docID, { verified, ice }) {
+  update(docID, { semesterID, verified, ice }) {
     this.assertDefined(docID);
     const updateData = {};
+    if (semesterID) {
+      updateData.semesterID = semesterID;
+    }
     if (_.isBoolean(verified)) {
       updateData.verified = verified;
     }

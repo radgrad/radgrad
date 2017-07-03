@@ -107,6 +107,7 @@ class CourseInstanceCollection extends BaseCollection {
   /**
    * Update the course instance. Only a subset of fields can be updated.
    * @param docID The course instance docID (required).
+   * @param semesterID the semesterID for the course instance optional.
    * @param verified boolean optional.
    * @param fromSTAR boolean optional.
    * @param grade optional.
@@ -114,9 +115,13 @@ class CourseInstanceCollection extends BaseCollection {
    * @param note optional.
    * @param ice an object with fields i, c, e (optional)
    */
-  update(docID, { verified, fromSTAR, grade, creditHrs, note, ice }) {
+  update(docID, { semesterID, verified, fromSTAR, grade, creditHrs, note, ice }) {
+    // console.log('CourseInstances.update', semesterID, verified, fromSTAR, grade, creditHrs, note, ice);
     this.assertDefined(docID);
     const updateData = {};
+    if (semesterID) {
+      updateData.semesterID = semesterID;
+    }
     if (_.isBoolean(verified)) {
       updateData.verified = verified;
     }
@@ -125,6 +130,9 @@ class CourseInstanceCollection extends BaseCollection {
     }
     if (grade) {
       updateData.grade = grade;
+      const ci = this.findDoc(docID);
+      const slug = Courses.findSlugByID(ci.courseID);
+      updateData.ice = makeCourseICE(slug, grade);
     }
     if (creditHrs) {
       updateData.creditHrs = creditHrs;
@@ -329,17 +337,6 @@ class CourseInstanceCollection extends BaseCollection {
     const semester = Semesters.toString(courseInstanceDoc.semesterID);
     const grade = courseInstanceDoc.grade;
     return `[CI ${semester} ${courseName} ${grade}]`;
-  }
-
-  // TODO Remove this method and instead call the generic update meteor method in planned-course-grade.js.
-  /* eslint-disable class-methods-use-this */
-  /**
-   * Updates the CourseInstance's grade. This should be used for planning purposes on the client side.
-   * @param courseInstanceID The course instance ID.
-   * @param grade The new grade.
-   */
-  clientUpdateGrade(courseInstanceID, grade) {
-    Meteor.call('CourseInstance.updateGrade', { courseInstanceID, grade });
   }
 
   /**
