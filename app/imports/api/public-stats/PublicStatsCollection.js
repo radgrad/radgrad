@@ -7,7 +7,7 @@ import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Interests } from '../interest/InterestCollection';
-import { MentorProfiles } from '../mentor/MentorProfileCollection';
+import { MentorProfiles } from '../user/MentorProfileCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
 import { Reviews } from '../review/ReviewCollection';
@@ -198,7 +198,7 @@ class PublicStatsCollection extends BaseCollection {
     const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
     let professions = [];
     _.forEach(mentors, (m) => {
-      const profile = MentorProfiles.findDoc({ mentorID: m._id });
+      const profile = MentorProfiles.findDoc({ username: m.username });
       professions.push(profile.career);
     });
     professions = _.union(professions);
@@ -209,7 +209,7 @@ class PublicStatsCollection extends BaseCollection {
     const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
     let locations = [];
     _.forEach(mentors, (m) => {
-      const profile = MentorProfiles.findDoc({ mentorID: m._id });
+      const profile = MentorProfiles.findDoc({ username: m.username });
       locations.push(profile.location);
     });
     locations = _.union(locations);

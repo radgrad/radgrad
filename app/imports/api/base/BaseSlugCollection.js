@@ -18,6 +18,7 @@ class BaseSlugCollection extends BaseCollection {
   /**
    * Returns the docID associated with instance, or throws an error if it cannot be found.
    * If instance is a docID, then it is returned unchanged. If instance is a slug, its corresponding docID is returned.
+   * If instance is the value for the username field in this collection, then return that document's ID.
    * If instance is an object with an _id field, then that value is checked to see if it's in the collection.
    * @param { String } instance Either a valid docID or a valid slug string.
    * @returns { String } The docID associated with instance.
@@ -25,9 +26,16 @@ class BaseSlugCollection extends BaseCollection {
    */
   getID(instance) {
     let id;
+    // If we've been passed a document, check to see if it has an _id field and use that if available.
     if (_.isObject(instance) && instance._id) {
       instance = instance._id; // eslint-disable-line no-param-reassign
     }
+    // If instance is the value of the username field for some document in the collection, then return its ID.
+    const usernameBasedDoc = this._collection.findOne({ username: instance });
+    if (usernameBasedDoc) {
+      return usernameBasedDoc._id;
+    }
+    // Otherwise see if we can find instance as a docID or as a slug.
     try {
       id = (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
     } catch (err) {

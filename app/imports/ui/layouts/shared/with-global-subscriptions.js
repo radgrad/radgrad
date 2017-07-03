@@ -8,7 +8,7 @@ import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
-import { MentorProfiles } from '../../../api/mentor/MentorProfileCollection';
+import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Reviews } from '../../../api/review/ReviewCollection';
