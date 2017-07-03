@@ -119,9 +119,7 @@ class BaseCollection {
    */
   isDefined(name) {
     return (
-    !!this._collection.findOne(name) ||
-    !!this._collection.findOne({ name }) ||
-    !!this._collection.findOne({ _id: name }));
+    !!this._collection.findOne(name) || !!this._collection.findOne({ name }) || !!this._collection.findOne({ _id: name }));
   }
 
   /**
@@ -207,6 +205,8 @@ class BaseCollection {
    * Internal helper function to simplify definition of the assertValidRoleForMethod method.
    * @param userId The userID.
    * @param roles An array of roles.
+   * @throws { Meteor.Error } If userId is not defined or user is not in the specified roles.
+   * @returns True if no error is thrown.
    */
   _assertRole(userId, roles) {  // eslint-disable-line class-methods-use-this
     if (!userId) {
@@ -215,6 +215,7 @@ class BaseCollection {
       if (!Roles.userIsInRole(userId, roles)) {
         throw new Meteor.Error('unauthorized', `You must be one of the following roles: ${roles}`);
       }
+    return true;
   }
 
   /**

@@ -1721,7 +1721,9 @@
           "description": "Second-level programming for computer engineers. Object-oriented programming paradigm, definition and use of classes, fundamentals of object-oriented design in modern object-oriented languages such as C++. Common data structures, simple searching and sorting techniques.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_160"]
+          "prerequisites": [
+            "ee_160"
+          ]
         },
         {
           "name": "Basic Circuit Analysis I",
@@ -1741,7 +1743,9 @@
           "description": "Laplace transforms and their application to circuits, Fourier transforms and their applications to circuits, frequency selective circuits, introduction to and design of active filters, convolution, and state space analysis of circuits.",
           "creditHrs": 4,
           "interests": [],
-          "prerequisites": ["ee_211"]
+          "prerequisites": [
+            "ee_211"
+          ]
         },
         {
           "name": "Introduction to Digital Design",
@@ -1751,7 +1755,9 @@
           "description": "Introduction to the design of digital systems with an emphasis on design methods and the implementation and use of fundamental digital components.",
           "creditHrs": 4,
           "interests": [],
-          "prerequisites": ["ee_160"]
+          "prerequisites": [
+            "ee_160"
+          ]
         },
         {
           "name": "Sophomore Project",
@@ -1771,7 +1777,9 @@
           "description": "Discrete-time and continuous time signals and systems, linear systems, convolution, Fourier series, Fourier transform, sampling.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_213"]
+          "prerequisites": [
+            "ee_213"
+          ]
         },
         {
           "name": "Microelectronic Circuits I",
@@ -1781,7 +1789,9 @@
           "description": "Semiconductor structures, operating principles and characteristics of diodes and amplifying devices. Their application as circuit elements in building basic digital, analog, and integrated circuit subsystems.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_213"]
+          "prerequisites": [
+            "ee_213"
+          ]
         },
         {
           "name": "Physical Electronics",
@@ -1801,7 +1811,9 @@
           "description": "Probability, statistics, random variables, distributions, densities, expectations, limit theorems, and applications to electrical engineering.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_315"]
+          "prerequisites": [
+            "ee_315"
+          ]
         },
         {
           "name": "Digital Systems and Computer Design",
@@ -1811,7 +1823,10 @@
           "description": "Design methodology, processor design, control design, memory organization, system organization.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_160", "ee_260"]
+          "prerequisites": [
+            "ee_160",
+            "ee_260"
+          ]
         },
         {
           "name": "Discrete Math for Engineers",
@@ -1821,7 +1836,10 @@
           "description": "Logic, sets, number theory, properties of functions, properties of relations, methods of proofs, recursion, counting, probability, trees, graphs, analysis of algorithms, finite state autonoma.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_160", "ee_260"]
+          "prerequisites": [
+            "ee_160",
+            "ee_260"
+          ]
         },
         {
           "name": "Computer Data Structures and Algorithms",
@@ -1831,7 +1849,10 @@
           "description": "Introduction to computer programming algorithms with emphasis on advanced data structures, input-output routines, files, and interpreters.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_205", "ics_141"]
+          "prerequisites": [
+            "ee_205",
+            "ics_141"
+          ]
         },
         {
           "name": "Engineering Electromagnetics I",
@@ -1841,7 +1862,9 @@
           "description": "Transient and steady-state waves on transmission lines. Plane wave solutions of Maxwell's equations. Application of Maxwell's equations under static and time-varying conditions.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_213"]
+          "prerequisites": [
+            "ee_213"
+          ]
         },
         {
           "name": "Junior Project",
@@ -1851,7 +1874,9 @@
           "description": "Junior level individual or team project under EE faculty direction and guidance. The project provides design experience and develops practical skills. It may be a continuation of EE 296 or a new project.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_296"]
+          "prerequisites": [
+            "ee_296"
+          ]
         },
         {
           "name": "Object-oriented Software Engineering",
@@ -1861,7 +1886,9 @@
           "description": "Introduction to advanced techniques for designing, implementing, and testing computer software with a particular focus on using object-oriented design, analysis, and programming to produce high-quality computer programs that solve non-trivial problems.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_367"]
+          "prerequisites": [
+            "ee_367"
+          ]
         },
         {
           "name": "Introduction to Operating Systems",
@@ -1871,7 +1898,10 @@
           "description": "Computer system organization; multiprocessor systems, memory hierarchies, assemblers, compilers, operating systems, virtual machine, memory management, processor management; information management.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_361", "ee_367"]
+          "prerequisites": [
+            "ee_361",
+            "ee_367"
+          ]
         },
         {
           "name": "Ethics in Electrical Engineering",
@@ -7668,6 +7698,30 @@
           "careerGoals": [
             "devops-engineer"
           ]
+        }
+      ]
+    },
+    {
+      "name": "StudentProfileCollection",
+      "contents": [
+        {
+          "username": "aaronvil",
+          "firstName": "Aaron",
+          "lastName": "Villanueva",
+          "picture": "/images/people/aaronvil.jpg",
+          "website": null,
+          "interests": [
+            "networks"
+          ],
+          "careerGoals": [
+            "information-system-manager",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
         }
       ]
     },
