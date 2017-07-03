@@ -116,6 +116,7 @@ class CourseInstanceCollection extends BaseCollection {
    * @param ice an object with fields i, c, e (optional)
    */
   update(docID, { semesterID, verified, fromSTAR, grade, creditHrs, note, ice }) {
+    // console.log('CourseInstances.update', semesterID, verified, fromSTAR, grade, creditHrs, note, ice);
     this.assertDefined(docID);
     const updateData = {};
     if (semesterID) {
@@ -129,6 +130,9 @@ class CourseInstanceCollection extends BaseCollection {
     }
     if (grade) {
       updateData.grade = grade;
+      const ci = this.findDoc(docID);
+      const slug = Courses.findSlugByID(ci.courseID);
+      updateData.ice = makeCourseICE(slug, grade);
     }
     if (creditHrs) {
       updateData.creditHrs = creditHrs;
