@@ -3,9 +3,11 @@ import { Meteor } from 'meteor/meteor';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { AdvisorLogs } from '../log/AdvisorLogCollection.js';
+import { AdvisorProfiles } from '../user/AdvisorProfileCollection.js';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection.js';
 import { CourseInstances } from '../course/CourseInstanceCollection.js';
+import { FacultyProfiles } from '../user/FacultyProfileCollection.js';
 import { Feeds } from '../feed/FeedCollection.js';
 import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection.js';
 import { HelpMessages } from '../help/HelpMessageCollection';
@@ -40,9 +42,11 @@ class RadGradClass {
       AcademicPlans,
       AcademicYearInstances,
       AdvisorLogs,
+      AdvisorProfiles,
       CareerGoals,
       Courses,
       CourseInstances,
+      FacultyProfiles,
       Feeds,
       FeedbackInstances,
       HelpMessages,
@@ -68,8 +72,8 @@ class RadGradClass {
 
     /**
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
-     * Note that some collection class instances are implicitly initialized: Slugs, AcademicYearInstancs, and
-     * PublicStats.
+     * Note that some collection class instances are implicitly initialized and so do not appear in this list.
+     * For example: Slugs, AcademicYearInstances, and PublicStats.
      */
     this.collectionLoadSequence = [
       Semesters,
@@ -92,6 +96,8 @@ class RadGradClass {
       Feeds,
       AdvisorLogs,
       MentorProfiles,
+      AdvisorProfiles,
+      FacultyProfiles,
       MentorQuestions,
       MentorAnswers,
       Reviews,

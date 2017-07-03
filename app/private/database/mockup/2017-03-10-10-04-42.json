@@ -7297,6 +7297,381 @@
       ]
     },
     {
+      "name": "FacultyProfileCollection",
+      "contents": [
+        {
+          "username": "sstill",
+          "firstName": "Suzanne",
+          "lastName": "Still",
+          "picture": "/images/people/sstill.jpg",
+          "website": "http://www2.hawaii.edu/~sstill/",
+          "interests": [
+            "machine-learning",
+            "research"
+          ],
+          "careerGoals": [
+            "research-scientist"
+          ]
+        },
+        {
+          "username": "sugihara",
+          "firstName": "Kazuo",
+          "lastName": "Sugihara",
+          "picture": "/images/default-profile-picture.png",
+          "website": null,
+          "interests": [
+            "research",
+            "robotics"
+          ],
+          "careerGoals": [
+            "research-scientist"
+          ]
+        },
+        {
+          "username": "suthers",
+          "firstName": "Daniel",
+          "lastName": "Suthers",
+          "picture": "/images/people/suthers.jpg",
+          "website": "http://www2.hawaii.edu/~suthers/",
+          "interests": [
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "scottpr",
+          "firstName": "Scott",
+          "lastName": "Robertson",
+          "picture": "/images/people/scottrobertson.jpg",
+          "website": "http://www2.hawaii.edu/~scottpr/",
+          "interests": [
+            "civic-engagement",
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "pseidel",
+          "firstName": "Peter-Michael",
+          "lastName": "Seidel",
+          "picture": "/images/people/pseidel.jpg",
+          "website": null,
+          "interests": [
+            "algorithms",
+            "hardware",
+            "research",
+            "security"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-security-analyst",
+            "information-system-manager",
+            "iot-architect",
+            "robotics-engineer",
+            "software-developer"
+          ]
+        },
+        {
+          "username": "nodari",
+          "firstName": "Nodari",
+          "lastName": "Sitchinava",
+          "picture": "/images/people/nodari.jpg",
+          "website": "http://www2.hawaii.edu/~nodari/",
+          "interests": [
+            "algorithms",
+            "research"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "graduate-school"
+          ]
+        },
+        {
+          "username": "lipyeow",
+          "firstName": "Lipyeow",
+          "lastName": "Lim",
+          "picture": "/images/people/lipyeow.jpg",
+          "website": null,
+          "interests": [
+            "data-science",
+            "research",
+            "sustainability"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "database-administrator",
+            "graduate-school",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "leighj",
+          "firstName": "Jason",
+          "lastName": "Leigh",
+          "picture": "/images/people/leighj.jpg",
+          "website": "http://www2.hawaii.edu/~leighj/JASON_LEIGH/Jason_Leigh_Home_Page.html",
+          "interests": [
+            "data-visualization",
+            "research"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "research-scientist",
+            "teacher",
+            "vr-ar-engineer"
+          ]
+        },
+        {
+          "username": "kyungim",
+          "firstName": "Kyungim",
+          "lastName": "Baek",
+          "picture": "/images/people/kyungim.jpg",
+          "website": "http://www2.hawaii.edu/~kyungim/",
+          "interests": [
+            "algorithms",
+            "computer-vision",
+            "data-science",
+            "data-visualization",
+            "teaching"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "graduate-school",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "janst",
+          "firstName": "Jan",
+          "lastName": "Stelovsky",
+          "picture": "/images/people/janst.jpg",
+          "website": "http://www2.hawaii.edu/~janst/",
+          "interests": [
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "devops-engineer",
+            "full-stack-developer",
+            "mobile-app-developer",
+            "research-scientist",
+            "software-developer",
+            "startup-cofounder",
+            "teacher"
+          ]
+        },
+        {
+          "username": "johnson",
+          "firstName": "Philip",
+          "lastName": "Johnson",
+          "picture": "/images/mockup/johnson.jpg",
+          "website": "http://philipmjohnson.org",
+          "interests": [
+            "civic-engagement",
+            "research",
+            "software-engineering",
+            "sustainability"
+          ],
+          "careerGoals": [
+            "devops-engineer",
+            "full-stack-developer",
+            "software-developer",
+            "startup-cofounder",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "henric",
+          "firstName": "Henri",
+          "lastName": "Casanova",
+          "picture": "/images/people/henric.jpg",
+          "website": "http://navet.ics.hawaii.edu/~casanova/",
+          "interests": [
+            "algorithms",
+            "hpc",
+            "parallel-programming",
+            "research",
+            "teaching"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "guylaine",
+          "firstName": "Guylaine",
+          "lastName": "Poisson",
+          "picture": "/images/default-profile-picture.png",
+          "website": "http://navet.ics.hawaii.edu/~poisson/BiL/index.html",
+          "interests": [
+            "bioinformatics",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "esb",
+          "firstName": "Edo",
+          "lastName": "Biagioni",
+          "picture": "/images/people/esb.jpg",
+          "website": "http://www2.hawaii.edu/~esb/",
+          "interests": [
+            "mobile",
+            "networks",
+            "research"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "network-engineer",
+            "research-scientist"
+          ]
+        },
+        {
+          "username": "dusko",
+          "firstName": "Dusko",
+          "lastName": "Pavlovic",
+          "picture": "/images/people/dusko.jpg",
+          "website": "dusko.org",
+          "interests": [
+            "research",
+            "security"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-security-analyst",
+            "teacher"
+          ]
+        },
+        {
+          "username": "depengli",
+          "firstName": "Depeng",
+          "lastName": "Li",
+          "picture": "/images/people/depengli.jpg",
+          "website": "http://www2.hawaii.edu/~depengli/",
+          "interests": [
+            "networks",
+            "research",
+            "security"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-security-analyst",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "crosby",
+          "firstName": "Martha",
+          "lastName": "Crosby",
+          "picture": "/images/people/crosby.jpg",
+          "website": null,
+          "interests": [
+            "hci",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "graduate-school",
+            "information-security-analyst",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "binsted",
+          "firstName": "Kim",
+          "lastName": "Binsted",
+          "picture": "/images/people/binsted.jpg",
+          "website": "http://www2.hawaii.edu/~binsted/",
+          "interests": [
+            "artificial-intelligence",
+            "hci",
+            "psychology",
+            "research",
+            "teaching"
+          ],
+          "careerGoals": [
+            "mobile-app-developer",
+            "research-scientist",
+            "teacher"
+          ]
+        },
+        {
+          "username": "chin",
+          "firstName": "David",
+          "lastName": "Chin",
+          "picture": "/images/people/chin.jpg",
+          "website": "http://www2.hawaii.edu/~chin/",
+          "interests": [
+            "artificial-intelligence",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "game-developer",
+            "graduate-school",
+            "research-scientist",
+            "teacher"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdvisorProfileCollection",
+      "contents": [
+        {
+          "username": "glau",
+          "firstName": "Gerald",
+          "lastName": "Lau",
+          "picture": "/images/mockup/glau.jpg",
+          "website": null,
+          "interests": [
+            "application-development",
+            "it-management",
+            "security",
+            "teaching"
+          ],
+          "careerGoals": [
+            "graduate-school",
+            "information-security-analyst",
+            "teacher"
+          ]
+        },
+        {
+          "username": "cmoore",
+          "firstName": "Cam",
+          "lastName": "Moore",
+          "picture": "/images/mockup/cmoore.jpg",
+          "website": null,
+          "interests": [
+            "research",
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "devops-engineer"
+          ]
+        }
+      ]
+    },
+    {
       "name": "UserCollection",
       "contents": [
         {
