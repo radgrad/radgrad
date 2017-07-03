@@ -9,6 +9,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 const addSchema = new SimpleSchema({
   semester: String,
@@ -71,9 +72,13 @@ Template.Student_Explorer_Add_Review_Widget.events({
       let feedData;
       if (this.reviewType === 'course') {
         feedData = { feedType: 'new-course-review', user: newData.student, course: newData.reviewee };
+        const message = `${getRouteUserName()} added a course review for ${newData.reviewee}.`;
+        appLog.info(message);
       }
       if (this.reviewType === 'opportunity') {
         feedData = { feedType: 'new-opportunity-review', user: newData.student, opportunity: newData.reviewee };
+        const message = `${getRouteUserName()} added an opportunity review for ${newData.reviewee}.`;
+        appLog.info(message);
       }
       defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
     } else {
