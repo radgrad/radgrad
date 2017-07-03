@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('AdvisorProfileCollection Meteor Methods', function test() {
+  describe('AdvisorProfileCollection Meteor Methods TestBatch2', function test() {
     const collectionName = AdvisorProfiles.getCollectionName();
     const username = 'glau@hawaii.edu';
     const firstName = 'Gerald';
