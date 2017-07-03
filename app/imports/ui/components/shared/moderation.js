@@ -140,7 +140,7 @@ Template.Moderation.events({
         const studentName = Users.findDoc(MentorQuestions.getDoc(itemID).studentID).username;
         message = `${message} ${studentName}'s mentor question`;
       }
-      message = `${message} with comments ${moderatorComments}.`;
+      message = `${message} with comments: '${moderatorComments}'.`;
       appLog.info(message);
     } else {
       FormUtils.indicateError(instance);
