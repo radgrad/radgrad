@@ -16,6 +16,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import * as RouteNames from '../../../startup/client/router.js';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 // /** @module ui/components/planner/Inspector */
 
@@ -478,30 +479,33 @@ Template.Inspector.helpers({
 Template.Inspector.events({
   'click .course.item': function clickCourseItem(event) {
     event.preventDefault();
-    const courseArr = Courses.find({ _id: event.target.id }).fetch();
-    if (courseArr.length > 0) {
-      Template.instance().state.set(plannerKeys.detailCourse, courseArr[0]);
-      Template.instance().state.set(plannerKeys.detailCourseInstance, null);
-      Template.instance().state.set(plannerKeys.detailOpportunity, null);
-      Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
-    }
+    const course = Courses.findDoc(event.target.id);
+    Template.instance().state.set(plannerKeys.detailCourse, course);
+    Template.instance().state.set(plannerKeys.detailCourseInstance, null);
+    Template.instance().state.set(plannerKeys.detailOpportunity, null);
+    Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
+    const message = `${getRouteUserName()} inspected ${course.shortName}`;
+    appLog.info(message);
   },
   'click .opportunity.item': function clickOpportunityItem(event) {
     event.preventDefault();
-    const template = Template.instance();
-    const opportunityArr = Opportunities.find({ _id: event.target.id }).fetch();
-    if (opportunityArr.length > 0) {
-      template.state.set(plannerKeys.detailCourse, null);
-      template.state.set(plannerKeys.detailCourseInstance, null);
-      template.state.set(plannerKeys.detailOpportunity, opportunityArr[0]);
-      template.state.set(plannerKeys.detailOpportunityInstance, null);
-    }
+    const opportunity = Opportunities.findDoc(event.target.id);
+    Template.instance().state.set(plannerKeys.detailCourse, null);
+    Template.instance().state.set(plannerKeys.detailCourseInstance, null);
+    Template.instance().state.set(plannerKeys.detailOpportunity, opportunity);
+    Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
+    const message = `${getRouteUserName()} inspected ${opportunity.name}`;
+    appLog.info(message);
   },
   'click button.verifyInstance': function clickButtonVerifyInstance(event) {
     event.preventDefault();
     const id = event.target.id;
+    const opportunity = Opportunities.findDoc(event.target.id);
     const definitionData = { student: getRouteUserName(), opportunityInstance: id };
-    defineMethod.call({ collectionName: 'VerificationRequestCollection', definitionData });
+    const collectionName = VerificationRequests.getCollectionName();
+    defineMethod.call({ collectionName, definitionData });
+    const message = `${getRouteUserName()} requested verification for  ${opportunity.name}`;
+    appLog.info(message);
   },
 });
 

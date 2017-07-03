@@ -2,8 +2,11 @@ import { Template } from 'meteor/templating';
 import { moment } from 'meteor/momentjs:moment';
 import { Logger } from 'meteor/jag:pince';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 import { plannerKeys } from './academic-plan';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { getRouteUserName } from '../shared/route-user-name';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 /* global document */
 
@@ -37,11 +40,17 @@ Template.Planned_Course_Grade.events({
     const div = event.target.parentElement;
     const grade = div.childNodes[2].textContent;
     const id = div.parentElement.id;
-    updateMethod.call({ collectionName: 'CourseInstanceCollection', updateData: { id, grade } });
+    const collectionName = CourseInstances.getCollectionName();
+    updateMethod.call({ collectionName, updateData: { id, grade } });
     const ci = CourseInstances.findDoc(id);
     const template = Template.instance();
     template.state.set(plannerKeys.detailICE, ci.ice);
     template.state.set(plannerKeys.detailCourseInstance, ci);
+    const course = CourseInstances.getCourseDoc(id);
+    const semester = Semesters.toString(ci.semesterID);
+    // eslint-disable-next-line
+    const message = `${getRouteUserName()} updated planned grade for ${ci.note} ${course.shortName} (${semester}) to ${grade}.`;
+    appLog.info(message);
   },
 });
 
