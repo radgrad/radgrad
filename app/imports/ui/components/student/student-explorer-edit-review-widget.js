@@ -5,6 +5,7 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { Courses } from '../../../api/course/CourseCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
+import { Reviews } from '../../../api/review/ReviewCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { updateMethod, removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -64,7 +65,8 @@ Template.Student_Explorer_Edit_Review_Widget.events({
       updateData.moderated = false;
       FormUtils.renameKey(updateData, 'semester', 'semesterID');
       updateData.id = this.review._id;
-      updateMethod.call({ collectionName: 'ReviewCollection', updateData }, (error) => {
+      const collectionName = Reviews.getCollectionName();
+      updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
@@ -86,11 +88,19 @@ Template.Student_Explorer_Edit_Review_Widget.events({
   'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    removeItMethod.call({ collectionName: 'ReviewCollection', instance: id }, (error) => {
+    const review = Reviews.findDoc(id);
+    let reviewee;
+    if (review.reviewType === Reviews.COURSE) {
+      reviewee = Courses.findDoc(review.revieweeID).shortName;
+    } else {
+      reviewee = Opportunities.findDoc(review.revieweeID).name;
+    }
+    const collectionName = Reviews.getCollectionName();
+    removeItMethod.call({ collectionName, instance: id }, (error) => {
       if (error) {
         FormUtils.indicateError(instance, error);
       } else {
-        const message = `${getRouteUserName()} deleted their review of `;
+        const message = `${getRouteUserName()} deleted their review of ${reviewee}`;
         appLog.info(message);
       }
     });
