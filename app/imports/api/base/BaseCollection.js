@@ -119,7 +119,9 @@ class BaseCollection {
    */
   isDefined(name) {
     return (
-    !!this._collection.findOne(name) || !!this._collection.findOne({ name }) || !!this._collection.findOne({ _id: name }));
+    !!this._collection.findOne(name) ||
+    !!this._collection.findOne({ name }) ||
+    !!this._collection.findOne({ _id: name }));
   }
 
   /**

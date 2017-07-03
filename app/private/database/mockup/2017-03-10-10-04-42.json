@@ -7717,10 +7717,558 @@
             "information-system-manager",
             "software-developer"
           ],
+          "academicPlan": "bs-cs-2016",
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "isAlumni": false
+        },
+        {
+          "firstName": "Abigail",
+          "lastName": "Kealoha",
+          "username": "abi",
+          "picture": "/images/mockup/abi.jpg",
+          "website": "http://abi.github.io",
+          "interests": [
+            "application-development",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "software-developer"
+          ],
+          "academicPlan": "bs-cs-2016",
+          "level": 5,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "isAlumni": false
+        },
+        {
+          "firstName": "Ah Lim",
+          "lastName": "Om",
+          "username": "ahlim",
+          "picture": "/images/people/ahlim.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "database-administrator",
+            "software-developer"
+          ],
           "level": 2,
           "hiddenCourses": [],
           "hiddenOpportunities": [],
           "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Alfred",
+          "lastName": "Persona",
+          "username": "alfred",
+          "picture": "/images/mockup/alfred.png",
+          "website": null,
+          "interests": [
+            "hardware",
+            "it-management"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 6,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Betty",
+          "lastName": "Keanu",
+          "username": "betty",
+          "picture": "/images/mockup/betty.jpg",
+          "website": "http://keanu.github.io/",
+          "interests": [
+            "data-science",
+            "data-visualization",
+            "research"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "graduate-school"
+          ],
+          "level": 4,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Brian",
+          "lastName": "Mayeshiro",
+          "username": "brianmay",
+          "picture": "/images/people/brianmay.jpg",
+          "website": null,
+          "interests": [
+            "computer-architecture"
+          ],
+          "careerGoals": [
+            "network-engineer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Charley",
+          "lastName": "Sherry",
+          "username": "charley",
+          "picture": "/images/mockup/charley.jpg",
+          "website": null,
+          "interests": [
+            "bioinformatics"
+          ],
+          "careerGoals": [
+            "data-scientist"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Christopher",
+          "lastName": "Nguyen",
+          "username": "christopher-nguyen",
+          "picture": "/images/people/christopher-nguyen.jpg",
+          "website": null,
+          "interests": [
+            "application-development"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Christopher",
+          "lastName": "Jaro",
+          "username": "cpjaro",
+          "picture": "/images/people/cpjaro.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "information-system-manager",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Christie",
+          "lastName": "Reindle",
+          "username": "creindle",
+          "picture": "/images/people/creindle.jpg",
+          "website": null,
+          "interests": [
+            "teaching"
+          ],
+          "careerGoals": [
+            "network-engineer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Daniel",
+          "lastName": "Tan",
+          "username": "dtan808",
+          "picture": "/images/people/dtan808.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Ella",
+          "lastName": "Zwick",
+          "username": "ella",
+          "picture": "/images/mockup/ella.jpg",
+          "website": null,
+          "interests": [
+            "civic-engagement",
+            "web-development"
+          ],
+          "careerGoals": [
+            "full-stack-developer"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Erik",
+          "lastName": "Huang",
+          "username": "erikhuan",
+          "picture": "/images/people/erikhuan.jpg",
+          "website": null,
+          "interests": [
+            "ruby"
+          ],
+          "careerGoals": [
+            "information-security-analyst",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Hailing",
+          "lastName": "Li",
+          "username": "hailing",
+          "picture": "/images/people/hailing.jpg",
+          "website": null,
+          "interests": [
+            "operating-systems"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Jake",
+          "lastName": "Philips",
+          "username": "jakephilips",
+          "picture": "/images/default-profile-picture.png",
+          "website": null,
+          "interests": [
+            "dotNet"
+          ],
+          "careerGoals": [
+            "data-scientist"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Jameyia",
+          "lastName": "Shamia",
+          "username": "jameyia-shamia",
+          "picture": "/images/people/jameyia-shamia.jpg",
+          "website": null,
+          "interests": [
+            "application-development"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Joshua",
+          "lastName": "Wadsack-Myers",
+          "username": "joshuajw",
+          "picture": "/images/people/joshuajw.jpg",
+          "website": null,
+          "interests": [
+            "hpc"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Jack",
+          "lastName": "Rude",
+          "username": "jrude",
+          "picture": "/images/people/jrude.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Kelly",
+          "lastName": "Lee",
+          "username": "kellyl4",
+          "picture": "/images/people/kellyl4.jpg",
+          "website": null,
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "information-system-manager",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Kirk",
+          "lastName": "Wilson",
+          "username": "kirk6",
+          "picture": "/images/people/kirk6.jpg",
+          "website": null,
+          "interests": [
+            "prolog"
+          ],
+          "careerGoals": [
+            "network-engineer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Kurt",
+          "lastName": "Nikaitani",
+          "username": "kurtkn",
+          "picture": "/images/people/kurtkn.jpg",
+          "website": null,
+          "interests": [
+            "robotics"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Anh",
+          "lastName": "Lam",
+          "username": "lamanh",
+          "picture": "/images/people/anhlam.jpg",
+          "website": null,
+          "interests": [
+            "security"
+          ],
+          "careerGoals": [
+            "information-security-analyst",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Hongbo",
+          "lastName": "Lin",
+          "username": "linhongb",
+          "picture": "/images/people/linhongb.jpg",
+          "website": null,
+          "interests": [
+            "python"
+          ],
+          "careerGoals": [
+            "information-system-manager",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Mark",
+          "lastName": "Cummins",
+          "username": "markrc",
+          "picture": "/images/people/markrc.jpg",
+          "website": null,
+          "interests": [
+            "lisp"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Nathan",
+          "lastName": "Lam",
+          "username": "nathancy",
+          "picture": "/images/people/nathancy.jpg",
+          "website": null,
+          "interests": [
+            "perl"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Charles",
+          "lastName": "Pak",
+          "username": "pakchar",
+          "picture": "/images/people/pakchar.jpg",
+          "website": null,
+          "interests": [
+            "parallel-programming"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Russell",
+          "lastName": "Omo",
+          "username": "rao642",
+          "picture": "/images/people/rao642.jpg",
+          "website": null,
+          "interests": [
+            "application-development"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Shaziney",
+          "lastName": "Natividad",
+          "username": "shaziney",
+          "picture": "/images/people/shaziney.jpg",
+          "website": null,
+          "interests": [
+            "prolog"
+          ],
+          "careerGoals": [
+            "data-scientist",
+            "software-developer"
+          ],
+          "level": 1,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Connor",
+          "lastName": "Slike",
+          "username": "slike",
+          "picture": "/images/people/slike.jpg",
+          "website": null,
+          "interests": [
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "bs-cs-2016",
+          "isAlumni": false
+        },
+        {
+          "firstName": "Zachary",
+          "lastName": "Knoebel",
+          "username": "zknoebel",
+          "picture": "/images/people/zknoebel.jpg",
+          "website": null,
+          "interests": [
+            "data-visualization"
+          ],
+          "careerGoals": [
+            "research-scientist",
+            "software-developer"
+          ],
+          "level": 2,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "academicPlan": "ba-ics-2016",
           "isAlumni": false
         }
       ]
