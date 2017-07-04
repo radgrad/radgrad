@@ -4,6 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
 import { Roles } from 'meteor/alanning:roles';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
+import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
@@ -94,6 +95,8 @@ Template.Academic_Plan_Chooser_Component.events({
       updateAcademicPlanMethod.call(plan._id, (error) => {
         if (error) {
           console.log('Error updating student\' academic plan', error);
+        } else {
+          FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
         }
       });
     }
