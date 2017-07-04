@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { appLog } from '../../api/log/AppLogCollection';
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY',
@@ -27,10 +28,15 @@ Accounts.onLogin(function onLogin() {
     // console.log('processing initial login');
     const username = Meteor.user().username;
     const role = Roles.getRolesForUser(id)[0];
+    appLog.info(`${username} logged in.`);
     FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
   }
 });
 
 Accounts.onLogout(function logout() {
+  const id = Meteor.userId();
+  const username = Meteor.user().username;
+  console.log(`${username} logged out.`);
+  appLog.info(`${username} logged out.`, {}, id);
   FlowRouter.go('/');
 });
