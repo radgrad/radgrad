@@ -1,10 +1,10 @@
 <template name="Academic_Plan_Form_Field">
   <div class="{{#if required}}required{{/if}} field">
-    <label>Academic Plan</label>
+    <label>{{#if label}}{{label}}{{else}}Academic Plan{{/if}}</label>
     <select class="ui dropdown" name="academicPlan">
       <option value="">Select Name</option>
       {{#each plan in plans}}
-        <option value="{{plan._id}}" selected="{{isSelected plan.name selectedPlan}}">{{plan.name}}</option>
+        <option value="{{plan._id}}" selected="{{isSelected plan.name selectedPlan}}">{{plan.name}} ({{plan.year}})</option>
       {{/each}}
     </select>
     {{> Form_Error_Message errorMessage=errorMessage}}

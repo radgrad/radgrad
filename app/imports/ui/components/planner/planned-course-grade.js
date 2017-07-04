@@ -38,19 +38,26 @@ Template.Planned_Course_Grade.events({
   'change': function change(event) { // eslint-disable-line
     event.preventDefault();
     const div = event.target.parentElement;
-    const grade = div.childNodes[2].textContent;
-    const id = div.parentElement.id;
+
+    const updateData = {};
+    updateData.grade = div.childNodes[2].textContent;
+    updateData.id = div.parentElement.id;
     const collectionName = CourseInstances.getCollectionName();
-    updateMethod.call({ collectionName, updateData: { id, grade } });
-    const ci = CourseInstances.findDoc(id);
-    const template = Template.instance();
-    template.state.set(plannerKeys.detailICE, ci.ice);
-    template.state.set(plannerKeys.detailCourseInstance, ci);
-    const course = CourseInstances.getCourseDoc(id);
-    const semester = Semesters.toString(ci.semesterID);
-    // eslint-disable-next-line
-    const message = `${getRouteUserName()} updated planned grade for ${ci.note} ${course.shortName} (${semester}) to ${grade}.`;
-    appLog.info(message);
+    const instance = Template.instance();
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (!error) {
+        const ci = CourseInstances.findDoc(updateData.id);
+        instance.state.set(plannerKeys.detailICE, ci.ice);
+        instance.state.set(plannerKeys.detailCourseInstance, ci);
+        const course = CourseInstances.getCourseDoc(id);
+        const semester = Semesters.toString(ci.semesterID);
+        // eslint-disable-next-line
+        const message = `${getRouteUserName()} updated planned grade for ${ci.note} ${course.shortName} (${semester}) to ${grade}.`;
+        appLog.info(message);
+      } else {
+        console.log('Error updating grade', error);
+      }
+    });
   },
 });
 

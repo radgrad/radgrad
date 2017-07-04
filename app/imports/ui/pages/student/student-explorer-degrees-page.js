@@ -4,6 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { ROLE } from '../../../api/role/Role.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
@@ -12,8 +13,11 @@ function interestedUsers(degree) {
   const interested = [];
   const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
   _.forEach(users, (user) => {
-    if (_.includes(user.desiredDegreeID, degree._id)) {
-      interested.push(user);
+    if (user.academicPlanID) {
+      const plan = AcademicPlans.findDoc(user.academicPlanID);
+      if (_.includes(plan.degreeID, degree._id)) {
+        interested.push(user);
+      }
     }
   });
   return interested;
@@ -26,7 +30,11 @@ function numUsers(degree) {
 Template.Student_Explorer_Degrees_Page.helpers({
   addedDegrees() {
     const user = Users.findDoc({ username: getRouteUserName() });
-    return [DesiredDegrees.findDoc(user.desiredDegreeID)];
+    if (user.academicPlanID) {
+      const plan = AcademicPlans.findDoc(user.academicPlanID);
+      return [DesiredDegrees.findDoc(plan.degreeID)];
+    }
+    return [];
   },
   degree() {
     const degreeSlugName = FlowRouter.getParam('degree');
