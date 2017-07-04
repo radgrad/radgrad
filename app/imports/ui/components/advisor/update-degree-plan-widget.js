@@ -16,6 +16,8 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import { getRouteUserName } from '../shared/route-user-name';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 // /** @module ui/components/advisor/Update_Degree_Plan_Widget */
 
@@ -174,10 +176,14 @@ Template.Update_Degree_Plan_Widget.events({
       updateData.id = Template.currentData().studentID.get();
       updateMethod.call({ collectionName: 'UserCollection', updateData }, (error) => {
         if (error) {
-          // console.log('Error during user update: ', error);
+          console.log('Error during user update: ', error);
         }
         instance.successClass.set('success');
         instance.errorClass.set('');
+        const advisor = getRouteUserName();
+        const student = Users.findDoc(updateData.id);
+        const message = `${advisor} updated student ${student.username}`;
+        appLog.info(message);
       });
     } else {
       FormUtils.indicateError(instance);

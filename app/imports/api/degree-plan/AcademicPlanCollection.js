@@ -188,6 +188,17 @@ class AcademicPlanCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns the plan name and year for the given plan id.
+   * @param planID the id of the academic plan.
+   * @return {string}
+   */
+  toFullString(planID) {
+    const plan = this.findDoc(planID);
+    const semester = Semesters.findDoc(plan.effectiveSemesterID);
+    return `${plan.name} (${semester.year})`;
+  }
+
+  /**
    * Returns an object representing the AcademicPlan docID in a format acceptable to define().
    * @param docID The docID of a HelpMessage.
    * @returns { Object } An object representing the definition of docID.

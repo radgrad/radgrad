@@ -7,6 +7,8 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import { Interests } from '../../../api/interest/InterestCollection';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 Template.Student_Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -99,6 +101,9 @@ Template.Student_Explorer_Interests_Widget.events({
     try {
       studentItems.push(id);
       Users.setInterestIds(student._id, studentItems);
+      const interest = Interests.findDoc(id).name;
+      const message = `${getRouteUserName()} added interest ${interest}`;
+      appLog.info(message);
     } catch (e) {
       // don't do anything.
     }
@@ -107,10 +112,13 @@ Template.Student_Explorer_Interests_Widget.events({
     event.preventDefault();
     const student = Users.findDoc({ username: getRouteUserName() });
     const id = event.target.value;
+    const interest = Interests.findDoc(id).name;
+    const message = `${getRouteUserName()} removed interest ${interest}`;
     let studentItems = student.interestIDs;
     try {
       studentItems = _.without(studentItems, id);
       Users.setInterestIds(student._id, studentItems);
+      appLog.info(message);
     } catch (e) {
       // don't do anything.
     }

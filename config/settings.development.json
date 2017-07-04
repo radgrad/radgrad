@@ -10,7 +10,13 @@
       "popupWidth": 810,
       "popupHeight": 610
     },
-    "databaseRestoreFileName": "database/mockup/2017-03-10-10-04-42.json"
+    "databaseRestoreFileName": "database/mockup/2017-03-10-10-04-42.json",
+    "appLogging": {
+      "enable": true,
+      "filter": ["*"],
+      "client": true,
+      "server": true
+    }
   },
   "mockup": false
 }

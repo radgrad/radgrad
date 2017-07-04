@@ -15,6 +15,8 @@ import { Users } from '../../../api/user/UserCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getRouteUserName } from './route-user-name';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 // /** @module ui/components/shared/Verification_Requests_Pending */
 
@@ -99,6 +101,16 @@ Template.Verification_Requests_Pending.events({
       if (error) {
         console.log('Error updating VerificationRequest status', error);
       }
+      let message = `${getRouteUserName()}`;
+      if (request.status === VerificationRequests.ACCEPTED) {
+        message = `${message} accepted`;
+      } else {
+        message = `${message} rejected`;
+      }
+      message = `${message} ${VerificationRequests.getStudentDoc(request._id).username}'s verification request for`;
+      message = `${message} opportunity ${VerificationRequests.getOpportunityDoc(request._id).name}`;
+      message = `${message} with feedback ${processRecord.feedback}.`;
+      appLog.info(message);
     });
   },
 });

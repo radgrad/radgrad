@@ -33,6 +33,8 @@ class ReviewCollection extends BaseSlugCollection {
       visible: { type: Boolean },
       moderatorComments: { type: String, optional: true },
     }));
+    this.COURSE = 'course';
+    this.OPPORTUNITY = 'opportunity';
   }
 
   /**
@@ -71,13 +73,13 @@ class ReviewCollection extends BaseSlugCollection {
     // Validate reviewType, get revieweeID and assign slug if not provided.
     this.assertValidReviewType(reviewType);
     let revieweeID;
-    if (reviewType === 'course') {
+    if (reviewType === this.COURSE) {
       revieweeID = Courses.getID(reviewee);
       if (!slug) {
         slug = `review-course-${Courses.getSlug(revieweeID)}-${Users.getSlugName(studentID)}`;
       }
     } else
-      if (reviewType === 'opportunity') {
+      if (reviewType === this.OPPORTUNITY) {
         revieweeID = Opportunities.getID(reviewee);
         if (!slug) {
           slug = `review-opportunity-${Opportunities.getSlug(revieweeID)}-${Users.getSlugName(studentID)}`;
@@ -117,7 +119,7 @@ class ReviewCollection extends BaseSlugCollection {
    * @param reviewType The review type.
    */
   assertValidReviewType(reviewType) { // eslint-disable-line class-methods-use-this
-    if (!_.includes(['opportunity', 'course'], reviewType)) {
+    if (!_.includes([this.OPPORTUNITY, this.COURSE], reviewType)) {
       throw new Meteor.Error(`Invalid reviewType: ${reviewType}`);
     }
   }
@@ -230,10 +232,10 @@ class ReviewCollection extends BaseSlugCollection {
     const student = Users.findSlugByID(doc.studentID);
     const reviewType = doc.reviewType;
     let reviewee;
-    if (reviewType === 'course') {
+    if (reviewType === this.COURSE) {
       reviewee = Courses.findSlugByID(doc.revieweeID);
     } else
-      if (reviewType === 'opportunity') {
+      if (reviewType === this.OPPORTUNITY) {
         reviewee = Opportunities.findSlugByID(doc.revieweeID);
       }
     const semester = Semesters.findSlugByID(doc.semesterID);
