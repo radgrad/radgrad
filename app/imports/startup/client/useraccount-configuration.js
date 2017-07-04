@@ -36,7 +36,6 @@ Accounts.onLogin(function onLogin() {
 Accounts.onLogout(function logout() {
   const id = Meteor.userId();
   const username = Meteor.user().username;
-  console.log(`${username} logged out.`);
   appLog.info(`${username} logged out.`, {}, id);
   FlowRouter.go('/');
 });
