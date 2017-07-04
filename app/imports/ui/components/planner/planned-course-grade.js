@@ -49,7 +49,7 @@ Template.Planned_Course_Grade.events({
         const ci = CourseInstances.findDoc(updateData.id);
         instance.state.set(plannerKeys.detailICE, ci.ice);
         instance.state.set(plannerKeys.detailCourseInstance, ci);
-        const course = CourseInstances.getCourseDoc(id);
+        const course = CourseInstances.getCourseDoc(ci._id);
         const semester = Semesters.toString(ci.semesterID);
         // eslint-disable-next-line
         const message = `${getRouteUserName()} updated planned grade for ${ci.note} ${course.shortName} (${semester}) to ${grade}.`;
