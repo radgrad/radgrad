@@ -16,7 +16,7 @@ Template.Mentor_MentorSpace_Page.helpers({
   currentQuestion() {
     const questionID = Template.instance().answering.get();
     const question = MentorQuestions.findDoc(questionID);
-    return question.title;
+    return question.question;
   },
   displayAnswering() {
     return Template.instance().answering.get();

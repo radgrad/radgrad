@@ -11,7 +11,7 @@ Template.Student_MentorSpace_Hidden_Questions.onCreated(function studentMentorSp
 Template.Student_MentorSpace_Hidden_Questions.helpers({
   defaultQuestion() {
     if (Template.instance().setDefaultQuestion.get()) {
-      return MentorQuestions.findDoc(Template.instance().setDefaultQuestion.get()).title;
+      return MentorQuestions.findDoc(Template.instance().setDefaultQuestion.get()).question;
     }
     return '';
   },

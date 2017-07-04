@@ -21,9 +21,11 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
   const self = this;
   self.ready = new ReactiveVar();
   this.autorun(function () {
-    instanceSubs.subscribe(AcademicYearInstances.publicationNames.PerStudentID, getUserIdFromRoute());
+    if (getUserIdFromRoute()) {  // if logged out don't subscribe
+      instanceSubs.subscribe(AcademicYearInstances.publicationNames.PerStudentID, getUserIdFromRoute());
+      instanceSubs.subscribe(CourseInstances.publicationNames.studentID, getUserIdFromRoute());
+    }
     instanceSubs.subscribe(AdvisorLogs.getPublicationName());
-    instanceSubs.subscribe(CourseInstances.publicationNames.studentID, getUserIdFromRoute());
     instanceSubs.subscribe(CourseInstances.publicationNames.publicStudent);
     instanceSubs.subscribe(FeedbackInstances.getPublicationName());
     instanceSubs.subscribe(Feeds.getPublicationName());

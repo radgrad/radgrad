@@ -42,7 +42,7 @@ Template.Explorer_Choose_User_Widget.helpers({
     return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = FlowRouter.current().route.group && FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerUsersPageRouteName;
     } else if (group === 'faculty') {
