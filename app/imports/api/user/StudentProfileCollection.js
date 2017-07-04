@@ -1,4 +1,5 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import BaseSlugCollection from '../base/BaseSlugCollection';
@@ -9,8 +10,10 @@ import { Interests } from '../interest/InterestCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
+import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
-import { profileCommonSchema, updateCommonFields, checkIntegrityCommonFields } from './ProfileCommonSchema';
+import { profileCommonSchema, updateCommonFields, checkIntegrityCommonFields,
+  createMeteorAccount } from './ProfileCommonSchema';
 
 /** @module api/user/StudentProfileCollection */
 /**
@@ -55,8 +58,8 @@ class StudentProfileCollection extends BaseSlugCollection {
     const interestIDs = Interests.getIDs(interests);
     const careerGoalIDs = CareerGoals.getIDs(careerGoals);
 
-    // Don't define slugs here until they are no longer defined in User collection.
-    // Slugs.define({ name: username, entityName: this.getType() });
+    Slugs.define({ name: username, entityName: this.getType() });
+    const userID = createMeteorAccount(username);
 
     // Validate level
     this.assertValidLevel(level);
@@ -66,6 +69,7 @@ class StudentProfileCollection extends BaseSlugCollection {
       throw new Meteor.Error(`Invalid isAlumni: ${isAlumni}`);
     }
     const role = (isAlumni) ? ROLE.ALUMNI : ROLE.STUDENT;
+    Roles.addUsersToRoles(userID, [role]);
     // Get the IDs.
     const academicPlanID = (academicPlan) ? AcademicPlans.getID(academicPlan) : undefined;
     const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;

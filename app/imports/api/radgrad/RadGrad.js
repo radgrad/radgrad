@@ -38,6 +38,7 @@ class RadGradClass {
   constructor() {
     /**
      * A list of all RadGrad API collections in alphabetical order.
+     * This list is used for things like checking integrity.
      */
     this.collections = [
       AcademicPlans,
@@ -67,8 +68,6 @@ class RadGradClass {
       Slugs,
       StudentProfiles,
       Teasers,
-      Users,
-      ValidUserAccounts,
       VerificationRequests,
     ];
 
@@ -85,8 +84,10 @@ class RadGradClass {
       CareerGoals,
       DesiredDegrees,
       AcademicPlans,
-      ValidUserAccounts,
-      Users,
+      MentorProfiles,
+      AdvisorProfiles,
+      FacultyProfiles,
+      StudentProfiles,
       OpportunityTypes,
       Opportunities,
       Courses,
@@ -97,10 +98,6 @@ class RadGradClass {
       VerificationRequests,
       Feeds,
       AdvisorLogs,
-      MentorProfiles,
-      AdvisorProfiles,
-      FacultyProfiles,
-      StudentProfiles,
       MentorQuestions,
       MentorAnswers,
       Reviews,

@@ -5,24 +5,24 @@ import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
 /* eslint-disable no-console */
 
 /* Validate username, sending a specific error message on failure. */
-Accounts.validateNewUser(function validate(user) {
-  if (user) {
-    if (user.services.cas) {
-      const username = user.services.cas.id;
-      if (username && ValidUserAccounts.find({ username }).count() > 0) {
-        return true;
-      }
-      throw new Meteor.Error(403, 'User not in the allowed list');
-    } else if (user.services.password) {
-      const username = user.username;
-      if (username && ValidUserAccounts.find({ username }).count() > 0) {
-        return true;
-      }
-      throw new Meteor.Error(403, 'User not in the allowed list');
-    }
-  }
-  throw new Meteor.Error(403, 'User not in the allowed list');
-});
+// Accounts.validateNewUser(function validate(user) {
+//   if (user) {
+//     if (user.services.cas) {
+//       const username = user.services.cas.id;
+//       if (username && ValidUserAccounts.find({ username }).count() > 0) {
+//         return true;
+//       }
+//       throw new Meteor.Error(403, 'User not in the allowed list');
+//     } else if (user.services.password) {
+//       const username = user.username;
+//       if (username && ValidUserAccounts.find({ username }).count() > 0) {
+//         return true;
+//       }
+//       throw new Meteor.Error(403, 'User not in the allowed list');
+//     }
+//   }
+//   throw new Meteor.Error(403, 'User not in the allowed list');
+// });
 
 
 Meteor.users.allow({
