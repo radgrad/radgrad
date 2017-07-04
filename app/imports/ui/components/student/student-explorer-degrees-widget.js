@@ -7,6 +7,7 @@ import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import { updateAcademicPlanMethod } from '../../../api/user/UserCollection.methods';
 
 Template.Student_Explorer_Degrees_Widget.helpers({
   fullName(user) {
@@ -70,15 +71,9 @@ Template.Student_Explorer_Degrees_Widget.helpers({
 Template.Student_Explorer_Degrees_Widget.events({
   'change [name=academicPlan]': function changePlan(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
-    const collectionName = Users.getCollectionName();
-    const updateData = {};
-    updateData.id = student._id;
-    updateData.academicPlan = event.target.value;
-    console.log(collectionName, updateData);
-    updateMethod.call({ collectionName, updateData }, (error) => {
+    updateAcademicPlanMethod.call(event.target.value, (error) => {
       if (error) {
-        console.log('Error in updating academic plan', error);
+        console.log('Error updating student\'s academic plan', error);
       }
     });
   },

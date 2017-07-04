@@ -3,7 +3,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
 import { Roles } from 'meteor/alanning:roles';
-import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
