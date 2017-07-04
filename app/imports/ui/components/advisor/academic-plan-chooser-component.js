@@ -10,6 +10,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { ROLE } from '../../../api/role/Role';
+import { updateAcademicPlanMethod } from '../../../api/user/UserCollection.methods';
 
 // /** @module ui/components/advisor/Academic_Plan_Chooser_Component */
 
@@ -91,8 +92,7 @@ Template.Academic_Plan_Chooser_Component.events({
       const updateData = {};
       updateData.id = user._id;
       updateData.academicPlan = plan._id;
-      const collectionName = Users.getCollectionName();
-      updateMethod.call({ collectionName, updateData }, (error) => {
+      updateAcademicPlanMethod.call(plan._id, (error) => {
         if (error) {
           console.log('Error updating student\' academic plan', error);
         }
