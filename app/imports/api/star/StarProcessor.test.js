@@ -24,7 +24,7 @@ if (Meteor.isServer) {
     });
 
     it('#processStarCsvData', function test() {
-      defineTestFixtures(['minimal', 'extended.courses.interests', 'abi.user']);
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'abi.student']);
       const csvData = Assets.getText(starDataPath);
       const user = Users.findDoc({ username: 'abi' });
       const courseInstanceDefinitions = processStarCsvData(user.username, csvData);

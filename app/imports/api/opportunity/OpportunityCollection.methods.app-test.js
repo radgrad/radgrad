@@ -22,7 +22,7 @@ if (Meteor.isClient) {
 
     before(function (done) {
       this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user', 'opportunities'], done);
+      defineTestFixturesMethod.call(['minimal',  'opportunities'], done);
     });
 
     after(function (done) {

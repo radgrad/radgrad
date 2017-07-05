@@ -12,7 +12,7 @@ if (Meteor.isServer) {
   describe('AcademicYearUtilities', function testSuite() {
     before(function setup() {
       this.timeout(0);
-      defineTestFixtures(['minimal', 'abi.user', 'extended.courses.interests', 'abi.courseinstances']);
+      defineTestFixtures(['minimal', 'abi.student', 'extended.courses.interests', 'abi.courseinstances']);
     });
 
     after(function teardown() {

@@ -117,7 +117,7 @@ function startupCheckIntegrity() {
 }
 
 function generateAdminCredential() {
-  if (Meteor.settings.admin.development) {
+  if (Meteor.settings.admin.development || Meteor.isTest || Meteor.isAppTest) {
     return 'foo';
   }
   // adapted from: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
@@ -145,11 +145,20 @@ function defineAdminUser() {
   console.log(`Credential: "${credential}"`);
 }
 
+function defineTestAdminUser() {
+  if (Meteor.isTest || Meteor.isAppTest) {
+    const admin = 'radgrad@hawaii.edu';
+    const userID = Accounts.createUser({ username: admin, email: admin, password: 'foo' });
+    Roles.addUsersToRoles(userID, ROLE.ADMIN);
+  }
+}
+
 // Add a startup callback that distinguishes between test and dev/prod mode and does the right thing.
 Meteor.startup(() => {
   if (Meteor.isTest || Meteor.isAppTest) {
     console.log('Test mode. Database initialization disabled and current database cleared.');
     removeAllEntities();
+    defineTestAdminUser();
   } else {
     defineAdminUser();
     loadDatabase();
