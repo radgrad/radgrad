@@ -10,6 +10,8 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { validUserAccountsDefineMethod } from '../../../api/user/ValidUserAccountCollection.methods';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import { getRouteUserName } from '../shared/route-user-name';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 // /** @module ui/components/advisor/Student_Selector_Tabs */
 const formSchema = new SimpleSchema({
@@ -201,6 +203,9 @@ Template.Student_Selector_Tabs.events({
             const feedData = { feedType: 'new-user', user: newData.slug };
             defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
             FormUtils.indicateSuccess(instance, event);
+            const advisor = getRouteUserName();
+            const message = `${advisor} created student ${newData.slug}`;
+            appLog.info(message);
           }
         });
       });

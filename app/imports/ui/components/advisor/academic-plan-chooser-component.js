@@ -3,13 +3,14 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
 import { Roles } from 'meteor/alanning:roles';
-import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
+import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { ROLE } from '../../../api/role/Role';
+import { updateAcademicPlanMethod } from '../../../api/user/UserCollection.methods';
 
 // /** @module ui/components/advisor/Academic_Plan_Chooser_Component */
 
@@ -78,7 +79,7 @@ Template.Academic_Plan_Chooser_Component.events({
     event.preventDefault();
     Template.instance().chosenYear.set($(event.target).val());
   },
-  'change [name=name]': function changeYear(event) {
+  'change [name=name]': function changePlan(event) {
     event.preventDefault();
     const year = Template.instance().chosenYear.get();
     const semesterSlug = `Fall-${year}`;
@@ -91,10 +92,11 @@ Template.Academic_Plan_Chooser_Component.events({
       const updateData = {};
       updateData.id = user._id;
       updateData.academicPlan = plan._id;
-      const collectionName = Users.getCollectionName();
-      updateMethod.call({ collectionName, updateData }, (error) => {
+      updateAcademicPlanMethod.call(plan._id, (error) => {
         if (error) {
           console.log('Error updating student\' academic plan', error);
+        } else {
+          FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
         }
       });
     }

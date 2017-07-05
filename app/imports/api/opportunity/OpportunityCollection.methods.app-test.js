@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('OpportunityCollection Meteor Methods', function test() {
+  describe('OpportunityCollection Meteor Methods TestBatch2', function test() {
     const collectionName = Opportunities.getCollectionName();
     const definitionData = {
       name: 'name',

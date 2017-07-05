@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('VerificationRequestCollection Meteor Methods', function test() {
+  describe('VerificationRequestCollection Meteor Methods TestBatch3', function test() {
     before(function (done) {
       this.timeout(0);
       defineTestFixturesMethod.call(['minimal', 'admin.user', 'abi.user', 'opportunities'], done);

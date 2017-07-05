@@ -3,7 +3,9 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
 import { advisorLogsDefineMethod } from '../../../api/log/AdvisorLogCollection.methods';
 import { sessionKeys } from '../../../startup/client/session-state';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name';
+import { appLog } from '../../../api/log/AppLogCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
 // /** @module ui/components/advisor/Advisor_Log_Entry_Widget */
@@ -38,6 +40,10 @@ Template.Advisor_Log_Entry_Widget.events({
           console.log('Error creating AdvisorLog.', error);
         }
       });
+      const advisorName = getRouteUserName();
+      const studentName = Users.findDoc(student).username;
+      const message = `${advisorName} advised ${studentName} ${text}`;
+      appLog.info(message);
     }
   },
 });

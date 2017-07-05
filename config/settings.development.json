@@ -10,9 +10,13 @@
       "popupWidth": 810,
       "popupHeight": 610
     },
-    "databaseRestoreFileName": "database/mockup/2017-03-10-10-04-42.json"
-  },
-  "quarters": false,
-  "mockup": false,
-  "admin" : { "username": "radgrad@hawaii.edu", "development": true }
+    "databaseRestoreFileName": "database/mockup/2017-03-10-10-04-42.json",
+    "appLogging": {
+      "enable": true,
+      "filter": ["*"],
+      "client": true,
+      "server": true
+    },
+    "admin" : { "username": "radgrad@hawaii.edu", "development": true }
+  }
 }

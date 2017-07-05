@@ -1,10 +1,11 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import * as RouteNames from '/imports/startup/client/router.js';
+import * as RouteNames from '../../../startup/client/router.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
@@ -29,8 +30,9 @@ Template.Student_About_Me_Widget.helpers({
     let ret = '';
     if (getRouteUserName()) {
       const user = Users.findDoc({ username: getRouteUserName() });
-      if (user.desiredDegreeID) {
-        ret = DesiredDegrees.findDoc(user.desiredDegreeID).name;
+      if (user.academicPlanID) {
+        const plan = AcademicPlans.findDoc(user.academicPlanID);
+        ret = DesiredDegrees.findDoc(plan.degreeID).shortName;
       }
     }
     return ret;

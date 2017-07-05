@@ -25,6 +25,8 @@ class AcademicPlanCollection extends BaseSlugCollection {
       slugID: SimpleSchema.RegEx.Id,
       degreeID: SimpleSchema.RegEx.Id,
       effectiveSemesterID: SimpleSchema.RegEx.Id,
+      semesterNumber: Number,
+      year: Number,
       coursesPerSemester: { type: Array, minCount: 12, maxCount: 12 }, 'coursesPerSemester.$': Number,
       courseList: [String],
     }));
@@ -62,8 +64,11 @@ class AcademicPlanCollection extends BaseSlugCollection {
     }
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
+    const semesterDoc = Semesters.findDoc(effectiveSemesterID);
+    const semesterNumber = semesterDoc.semesterNumber;
+    const year = semesterDoc.year;
     const planID = this._collection.insert({
-      slugID, degreeID, name, effectiveSemesterID, coursesPerSemester, courseList,
+      slugID, degreeID, name, effectiveSemesterID, semesterNumber, year, coursesPerSemester, courseList,
     });
     // Connect the Slug to this AcademicPlan.
     Slugs.updateEntityID(slugID, planID);
@@ -151,6 +156,46 @@ class AcademicPlanCollection extends BaseSlugCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Returns the AcademicPlans that are effective on or after semesterNumber for the given DesiredDegree.
+   * @param degree the desired degree either a slug or id.
+   * @param semesterNumber (optional) the semester number. if undefined returns the latest AcademicPlans.
+   * @return {any}
+   */
+  getPlansForDegree(degree, semesterNumber) {
+    const degreeID = DesiredDegrees.getID(degree);
+    if (!semesterNumber) {
+      return this._collection.find({ degreeID, semesterNumber: this.getLatestSemesterNumber() }).fetch();
+    }
+    return this._collection.find({ degreeID, semesterNumber: { $gte: semesterNumber } }).fetch();
+  }
+
+  /**
+   * Returns the largest semester number.
+   * @return {number}
+   */
+  getLatestSemesterNumber() {
+    const plans = this._collection.find().fetch();
+    let max = 0;
+    _.forEach(plans, (p) => {
+      if (max < p.semesterNumber) {
+        max = p.semesterNumber;
+      }
+    });
+    return max;
+  }
+
+  /**
+   * Returns the plan name and year for the given plan id.
+   * @param planID the id of the academic plan.
+   * @return {string}
+   */
+  toFullString(planID) {
+    const plan = this.findDoc(planID);
+    const semester = Semesters.findDoc(plan.effectiveSemesterID);
+    return `${plan.name} (${semester.year})`;
   }
 
   /**

@@ -1,5 +1,10 @@
 import { Template } from 'meteor/templating';
 import { plannerKeys } from './academic-plan';
+import { Courses } from '../../../api/course/CourseCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
+import { Semesters } from '../../../api/semester/SemesterCollection';
+import { getRouteUserName } from '../shared/route-user-name';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 // /** @module ui/components/planner/Past_Semester_List */
 
@@ -26,6 +31,10 @@ Template.Past_Semester_List.events({
       template.state.set(plannerKeys.detailICE, ci.ice);
       template.state.set(plannerKeys.detailOpportunity, null);
       template.state.set(plannerKeys.detailOpportunityInstance, null);
+      const course = Courses.findDoc(ci.courseID);
+      const semester = Semesters.toString(ci.semesterID);
+      const message = `${getRouteUserName()} inspected ${ci.note} ${course.shortName} (${semester}).`;
+      appLog.info(message);
     } else
       if (firstClass === 'opportunityInstance') {
         const oi = template.data.semesterOpportunities[target.id];
@@ -34,6 +43,10 @@ Template.Past_Semester_List.events({
         template.state.set(plannerKeys.detailICE, oi.ice);
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
+        const opportunity = Opportunities.findDoc(oi.opportunityID);
+        const semester = Semesters.toString(oi.semesterID);
+        const message = `${getRouteUserName()} inspected ${opportunity.name} (${semester}).`;
+        appLog.info(message);
       }
   },
 });

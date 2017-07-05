@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
@@ -22,8 +23,11 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
 Template.Explore_User_Widget.helpers({
   desiredDegree() {
     if (Template.instance().userID && Template.instance().userID.get()) {
-      const id = Template.instance().data.userID.get();
-      return DesiredDegrees.findDoc(Users.findDoc(id).desiredDegreeID).shortName;
+      const user = Users.findDoc(Template.instance().data.userID.get());
+      if (user.academicPlanID) {
+        const plan = AcademicPlans.findDoc(user.academicPlanID);
+        return DesiredDegrees.findDoc(plan.degreeID).shortName;
+      }
     }
     return '';
   },

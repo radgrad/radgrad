@@ -7,6 +7,7 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 Template.Student_Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -67,6 +68,9 @@ Template.Student_Explorer_CareerGoals_Widget.events({
     try {
       studentItems.push(id);
       Users.setCareerGoalIds(student._id, studentItems);
+      const goal = CareerGoals.findDoc(id);
+      const message = `${getRouteUserName()} added career goal ${goal.name}`;
+      appLog.info(message);
     } catch (e) {
       // don't do anything.
     }
@@ -79,6 +83,9 @@ Template.Student_Explorer_CareerGoals_Widget.events({
     try {
       studentItems = _.without(studentItems, id);
       Users.setCareerGoalIds(student._id, studentItems);
+      const goal = CareerGoals.findDoc(id);
+      const message = `${getRouteUserName()} removed career goal ${goal.name}`;
+      appLog.info(message);
     } catch (e) {
       // don't do anything.
     }

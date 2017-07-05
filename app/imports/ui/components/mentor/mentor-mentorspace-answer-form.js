@@ -2,7 +2,9 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getRouteUserName } from '../shared/route-user-name';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
@@ -59,6 +61,8 @@ Template.Mentor_MentorSpace_Answer_Form.events({
           event.target.reset();
         }
       });
+      const message = `${getRouteUserName()} updated their answer to ${question} with ${answer}.`;
+      appLog.info(message);
     } else {
       defineMethod.call({ collectionName, definitionData: newAnswer }, (error) => {
         if (error) {
@@ -71,6 +75,8 @@ Template.Mentor_MentorSpace_Answer_Form.events({
           event.target.reset();
         }
       });
+      const message = `${getRouteUserName()} answered ${question} with ${answer}.`;
+      appLog.info(message);
     }
   },
   'click .cancel': function (event) {

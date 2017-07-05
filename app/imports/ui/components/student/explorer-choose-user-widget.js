@@ -3,6 +3,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '/imports/startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
+import { getRouteUserName } from '../shared/route-user-name';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 Template.Explorer_Choose_User_Widget.onCreated(function explorerChooseUserWidgetOnCreated() {
   if (this.data.userID) {
@@ -40,7 +42,7 @@ Template.Explorer_Choose_User_Widget.helpers({
     return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
   },
   usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
+    const group = FlowRouter.current().route.group && FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerUsersPageRouteName;
     } else if (group === 'faculty') {
@@ -56,6 +58,8 @@ Template.Explorer_Choose_User_Widget.events({
     const user = Users.getUserFromUsername(username);
     if (user) {
       instance.userID.set(user._id);
+      const message = `${getRouteUserName()} selected ${Users.getFullName(user._id)} to view.`;
+      appLog.info(message);
     }
   },
 });

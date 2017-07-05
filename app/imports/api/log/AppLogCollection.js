@@ -60,8 +60,14 @@ export const appLog = new Logger();
 const LogMongo = new LoggerMongo(appLog, {
   collection: AppLogs.getCollection(),
 });
-// Enable LoggerMongo with default settings:
-LogMongo.enable();
+// Enable LoggerMongo
+if (!Meteor.settings.public.appLogging) {
+  // console.log('App logging default settings');
+  LogMongo.enable();
+} else {
+  // console.log('App logging with', Meteor.settings.public.appLogging);
+  LogMongo.enable(Meteor.settings.public.appLogging);
+}
 
 if (Meteor.isServer) {
   LogMongo.collection._ensureIndex({ level: 1 }, { background: true });
