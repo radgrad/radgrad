@@ -1,9 +1,9 @@
-import { Accounts } from 'meteor/accounts-base';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Slugs } from '../slug/SlugCollection';
+import { Users } from '../user/UserCollection';
 
 /**
  * Provides the schema specification for the fields common to all profiles.
@@ -17,6 +17,7 @@ export const profileCommonSchema = new SimpleSchema({
   website: { type: String, optional: true },
   interestIDs: [SimpleSchema.RegEx.Id],
   careerGoalIDs: [SimpleSchema.RegEx.Id],
+  userID: SimpleSchema.RegEx.Id,
 });
 
 /* eslint-disable no-param-reassign */
@@ -74,14 +75,8 @@ export function checkIntegrityCommonFields(doc) {
       problems.push(`Bad interestID: ${interestID}`);
     }
   });
+  if (!Users.isDefined(doc.userID)) {
+    problems.push(`Bad userID: ${doc.userID}`);
+  }
   return problems;
-}
-
-/**
- * Creates a Meteor account for the specified username.
- * @param username The username (i.e. email address).
- * @returns The docID of the new user.
- */
-export function createMeteorAccount(username) {
-  return Accounts.createUser({ username, email: username, password: 'foo' });
 }

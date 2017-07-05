@@ -1,248 +1,92 @@
-import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
-import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import BaseSlugCollection from '../base/BaseSlugCollection';
-import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { AdvisorLogs } from '../log/AdvisorLogCollection';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
-import { CareerGoals } from '../career/CareerGoalCollection';
-import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
 import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
-import { Interests } from '../interest/InterestCollection';
 import { MentorAnswers } from '../mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
-import { ROLE, assertRole } from '../role/Role';
 import { Reviews } from '../review/ReviewCollection';
-import { Semesters } from '../semester/SemesterCollection';
-import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
-import { Slugs } from '../slug/SlugCollection';
-import { ValidUserAccounts } from './ValidUserAccountCollection';
+import { AdvisorProfiles } from './AdvisorProfileCollection';
+import { StudentProfiles } from './StudentProfileCollection';
+import { MentorProfiles } from './MentorProfileCollection';
+import { FacultyProfiles } from './FacultyProfileCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /** @module api/user/UserCollection */
 
+/* eslint-disable class-methods-use-this */
+
 /**
- * Represent a user. Users have roles: admin, advisor, alumni, faculty, student, mentor.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * Represents a user, which is someone who has a Meteor account.
+ *
+ * Users are defined when the various Profile collections are initialized, so the User collection is the union
+ * of Students, Faculty, Advisors, and Mentors, plus the single Admin account who also has a Meteor account.
+ *
+ * Note that this collection does not extend any of our Base collections, because it has a very limited API
+ * which should be used by clients to access the various Profile collections.
+ *
+ * It is not saved out or restored when the DB is dumped. It is not listed in RadGrad.collections.
+ *
+ * Clients provide a "user" as a parameter, which is either the username (i.e. email) or userID.
  */
-class UserCollection extends BaseSlugCollection {
+class UserCollection {
 
   /**
-   * Creates the User collection.
+   * Define a new user, which means creating an entry in Meteor.Accounts.
+   * This is called in the various Profile define() methods.
+   * @param username The username to be defined (must be an email address).
+   * @param role The role.
+   * @returns The docID of the newly created user.
+   * @throws { Meteor.Error } If the user exists.
    */
-  constructor() {
-    super('User', new SimpleSchema({
-      // Required field
-      username: { type: String },
-      // Everything else is optional, schema-wise.
-      firstName: { type: String, optional: true },
-      lastName: { type: String, optional: true },
-      slugID: { type: SimpleSchema.RegEx.Id, optional: true },
-      email: { type: String, optional: true },
-      password: { type: String, optional: true },
-      uhID: { type: String, optional: true },
-      careerGoalIDs: [SimpleSchema.RegEx.Id],
-      interestIDs: [SimpleSchema.RegEx.Id],
-      picture: { type: String, optional: true },
-      level: { type: Number, optional: true },
-      website: { type: String, optional: true },
-      hiddenCourseIDs: [SimpleSchema.RegEx.Id],
-      hiddenOpportunityIDs: [SimpleSchema.RegEx.Id],
-      declaredSemesterID: { type: SimpleSchema.RegEx.Id, optional: true },
-      academicPlanID: { type: SimpleSchema.RegEx.Id, optional: true },
-    }));
-    // Use Meteor.users as the collection, not the User collection created by BaseCollection.
-    this._collection = Meteor.users;
-
-    // Enable simpleschema validation.
-    // this._collection.attachSchema(this._schema);
-
-    this._publicData = {
-      fields: {
-        firstName: 1,
-        lastName: 1,
-        slugID: 1,
-        interestIDs: 1,
-        careerGoalIDs: 1,
-        picture: 1,
-        roles: 1,
-        username: 1,
-        website: 1,
-        emails: 1,
-        academicPlanID: 1,
-      },
-    };
-    this._privateData = { fields: { uhID: 1 } };
-    // Define _allData as the union of public and private data.
-    this._allData = { fields: {} };
-    _.defaultsDeep(this._allData, this._publicData, this._privateData);
+  define({ username, role }) {
+    // TODO: not everyone should have the password foo.
+    const userID = Accounts.createUser({ username, email: username, password: 'foo' });
+    Roles.addUsersToRoles(userID, [role]);
+    return userID;
   }
 
   /**
-   * Defines a new User.
-   * @example
-   * Users.define({ firstName: 'Joe',
-   *                lastName: 'Smith',
-   *                slug: 'joesmith',
-   *                email: 'smith@hawaii.edu',
-   *                role: ROLE.STUDENT,
-   *                // following fields are optional.
-   *                password: 'foo',
-   *                uhID: '12345678',
-   *                picture: 'http://johnson.github.io/images/profile.jpg',
-   *                website: 'http://johnson.github.io/',
-   *                interests: ['software-engineering'],
-   *                careerGoals: ['application-developer'],
-   *                level: 1,
-   *                hiddenCourses: ['ics312'],
-   *                hiddenOpportunities: ['acm-icpc'],
-   *                declaredSemester: 'Spring-2016',
-   *                academicPlan: 'bs-cs-2016'
-   *               });
-   * @param { Object } description Object with required keys firstName, lastName, slug, email, role, and password.
-   * slug must be previously undefined. role must be a defined role.
-   * picture, website, interests, careerGoals, hiddenCourseIDs, hiddenOpportunityIDs, declaredSemester
-   * and academicPlan are optional.
-   * declaredSemester
-   * academicPlan, if supplied, must be an AcademicPlan slug or docID.
-   * Level defaults to 1.
-   * @throws {Meteor.Error} If the interest definition includes a defined slug or undefined interestType.
-   * @returns The newly created docID.
+   * Returns true if user is a defined userID or username.
+   * @param user The user.
+   * @returns True if user is defined, false otherwise.
    */
-  define({
-      firstName, lastName, slug, email, role, password,
-      picture = '/images/default-profile-picture.png', interests, careerGoals, academicPlan = undefined,
-      website, uhID, level = 1, hiddenCourses = [], hiddenOpportunities = [], declaredSemester = undefined,
-  }) {
-    // Users can only be defined on the server side.
-    if (Meteor.isServer) {
-      // Make sure role is supplied and is valid.
-      assertRole(role);
-      // Get docIDs for various entities.
-      const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-      const interestIDs = Interests.getIDs(interests);
-      const careerGoalIDs = CareerGoals.getIDs(careerGoals);
-      const hiddenCourseIDs = Courses.getIDs(hiddenCourses);
-      const hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
-      // academicPlan is optional.
-      let academicPlanID;
-      if (academicPlan) {
-        const acaSlugID = Slugs.findDoc({ name: academicPlan })._id;
-        const plan = AcademicPlans.findDoc({ slugID: acaSlugID });
-        academicPlanID = plan._id;
-      }
-      // declaredSemester is optional.
-      const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;
-      // Now define the user.
-      let userID;
-      if (password) {  // not sure this is the best way to distinguish the two cases.
-        userID = Accounts.createUser({ username: slug, email, password });
-      } else {
-        const result = { id: slug };
-        const options = { profile: { name: slug } };
-        const casReturn = Accounts.updateOrCreateUserFromExternalService('cas', result, options);
-        userID = casReturn.userId;
-      }
-
-      // Now that we have a user, update fields.
-      Meteor.users.update(userID, {
-        $set: {
-          username: slug, firstName, lastName, slugID, email, picture, website, password,
-          academicPlanID, interestIDs, careerGoalIDs, uhID, level, hiddenCourseIDs,
-          hiddenOpportunityIDs, declaredSemesterID,
-        },
-      });
-
-      Roles.addUsersToRoles(userID, [role]);
-
-      // Update the Slug with the userID.
-      Slugs.updateEntityID(slugID, userID);
-
-      return userID;
-    }
-    return null;
+  isDefined(user) {
+    return (Meteor.users().find({ _id: user })) || (Meteor.users().find({ username: user }));
   }
 
   /**
-   * Update a User.
-   * @param docID The docID of the user to be updated.
-   * @throws { Meteor.Error } If docID is not defined, or if interests, careerGoals, level, hiddenCourses,
-   * hiddenOpportunities, declaredSemester, or academicPlan are not valid.
+   * Returns the userID associated with user, or throws an error if not defined.
+   * @param user The user (username or userID).
+   * @returns The userID
+   * @throws { Meteor.Error } If user is not a defined username or userID.
    */
-  update(docID, {
-      firstName, lastName, email, picture, website, password, interests, careerGoals,
-      uhID, level, hiddenCourses, hiddenOpportunities, declaredSemester, academicPlan, role,
-  }) {
-    this.assertDefined(docID);
-    const updateData = {};
-    if (firstName) {
-      updateData.firstName = firstName;
+  getID(user) {
+    const userID = (Meteor.users().find({ _id: user })) || (Meteor.users().find({ username: user }));
+    if (!userID) {
+      throw new Meteor.Error(`Error: user ${user} is not defined.`);
     }
-    if (lastName) {
-      updateData.lastName = lastName;
-    }
-    if (email) {
-      updateData.email = email;
-    }
-    if (picture) {
-      updateData.picture = picture;
-    }
-    if (website) {
-      updateData.website = website;
-    }
-    if (password) {
-      updateData.password = password;
-    }
-    if (interests) {
-      updateData.interestIDs = Interests.getIDs(interests);
-    }
-    if (careerGoals) {
-      updateData.careerGoalIDs = CareerGoals.getIDs(careerGoals);
-    }
-    if (uhID) {
-      updateData.uhID = uhID;
-    }
-    if (level) {
-      this.assertValidLevel(level);
-      updateData.level = level;
-    }
-    if (hiddenCourses) {
-      updateData.hiddenCourseIDs = Courses.getIDs(hiddenCourses);
-    }
-    if (hiddenOpportunities) {
-      updateData.hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
-    }
-    if (declaredSemester) {
-      updateData.declaredSemesterID = Semesters.getID(declaredSemester);
-    }
-    if (academicPlan) {
-      updateData.academicPlanID = AcademicPlans.getID(academicPlan);
-    }
-    if (role) {
-      assertRole(role);
-      Roles.setUserRoles(docID, role);
-    }
-    Meteor.users.update(docID, { $set: updateData });
+    return userID;
   }
 
   /**
-   * Returns true if userID is referenced by other "public" entities. Specifically:
+   * Returns true if user is referenced by other "public" entities. Specifically:
    *   * The user is a student and has published a review.
    *   * The user is a mentor and has published an answer.
    *   * The user is a student and has published a question.
    *   * The user is a faculty member as has sponsored an opportunity.
-   * Used to determine if this userID can be deleted.
+   * Used to determine if this user can be deleted.
    * Note this doesn't test for references to CourseInstances, etc. These are "private" and will be deleted
    * implicitly if this user is deleted.
-   * @param user The user ID.
-   * @returns {boolean} True if this user is referenced "publically" elsewhere.
+   * @param user The username or userID.
+   * @returns {boolean} True if this user is referenced "publicly" elsewhere.
+   * @throws { Meteor.Error } If the username is not defined.
    */
   isReferenced(user) {
     const userID = this.getID(user);
@@ -254,452 +98,63 @@ class UserCollection extends BaseSlugCollection {
   }
 
   /**
-   * Removes the user, their slug, and any associated feeds.
+   * Returns the profile document associated with user.
+   * @param user The username or userID.
+   * @returns The profile document.
+   * @throws { Meteor.Error } If the document was not found.
+   */
+  getProfile(user) {
+    const userID = this.getID(user);
+    const profile = StudentProfiles.hasProfile(userID) || FacultyProfiles.hasProfile(userID)
+        || MentorProfiles.hasProfile(userID) || AdvisorProfiles.hasProfile(userID);
+    if (!profile) {
+      throw new Meteor.Error(`No profile found for user ${user}`);
+    }
+    return profile;
+  }
+
+  /**
+   * Removes the user, their profile, and any associated "private" entities (Feeds, CourseInstances, etc.).
    * @param user The username or docID associated with this user.
-   * @throws { Meteor.Error } if the username is not defined, or if the user is referenced by other entities.
+   * @throws { Meteor.Error } if the username is not defined, or if the user is referenced by other "public" entities
+   * (Reviews, Opportunities, etc.)
    */
   removeIt(user) {
-    const docID = this.findDoc(user)._id;
-    if (!this.isReferenced(docID)) {
+    const userID = this.getID(user);
+    if (!this.isReferenced(userID)) {
       // Automatically remove references to user from other collections that are "private" to this user.
       _.forEach([Feeds, CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances, AdvisorLogs,
         VerificationRequests], collection => collection.removeUser(user));
-      // Now remove the user from this collection and from ValidUserAccounts.
-      ValidUserAccounts.removeUser(user);
-      super.removeIt(user);
+      // Now remove user profile. We don't know which collection it's in, so try all of them.
+      if (AdvisorProfiles.hasProfile(user)) {
+        AdvisorProfiles.removeIt(AdvisorProfiles.getProfile(user)._id);
+      }
+      if (StudentProfiles.hasProfile(user)) {
+        StudentProfiles.removeIt(StudentProfiles.getProfile(user)._id);
+      }
+      if (MentorProfiles.hasProfile(user)) {
+        MentorProfiles.removeIt(MentorProfiles.getProfile(user)._id);
+      }
+      if (FacultyProfiles.hasProfile(user)) {
+        FacultyProfiles.removeIt(FacultyProfiles.getProfile(user)._id);
+      }
+      // Now remove the user from Meteor users.
+      Meteor.users().remove(userID);
     } else {
       throw new Meteor.Error(`Attempt to remove ${user} while references to public entities remain.`);
     }
   }
 
   /**
-   * Adds user to the new role and removes user from old role.
-   * @param userID the id of the user.
-   * @param newRole The new role for the user.
-   * @param newRole The old role for the user.
+   * Publish the username field for all users.
    */
-  updateRole(userID, newRole, oldRole) {
-    Roles.removeUsersFromRoles(userID, oldRole);
-    Roles.addUsersToRoles(userID, newRole);
-  }
-
-  /**
-   * Returns the full name for the given userID.
-   * @param userID the id of the user.
-   * @returns {string} The user's full name.
-   * @throws {Meteor.Error} If userID is not a valid ID.
-   */
-  getFullName(userID) {
-    this.assertDefined(userID);
-    const user = this._collection.findOne({ _id: userID });
-    return `${user.firstName} ${user.lastName}`;
-  }
-
-  /**
-   * Returns the user's roles.
-   * @param userID the user's ID.
-   * @returns {number|roles|{$in}|update.$addToSet.roles|{$each}|Array|String|*}
-   */
-  getRoles(userID) {
-    this.assertDefined(userID);
-    const user = this._collection.findOne({ _id: userID });
-    return user.roles;
-  }
-
-  /**
-   * Remove all users with the associated role.
-   * @param role The role.
-   * @throws { Meteor.Error } If the role is not a defined role.
-   */
-  removeAllWithRole(role) {
-    assertRole(role);
-    this.find().forEach(user => {
-      if (Roles.userIsInRole(user._id, [role])) {
-        this.removeIt(user._id);
-      }
-    });
-  }
-
-  /**
-   * Asserts that the passed user has the specified role.
-   * @param userID The user.
-   * @param role The role or an array of roles.
-   * @throws { Meteor.Error } If the user does not have the role, or if user or role is not valid.
-   */
-  assertInRole(userID, role) {
-    this.assertDefined(userID);
-    assertRole(role);
-    if (!Roles.userIsInRole(userID, role)) {
-      throw new Meteor.Error(`${userID} (${this.findDoc(userID).firstName}) is not in role ${role}.`);
-    }
-  }
-
-  /**
-   * Asserts that level is an integer between 1 and 6.
-   * @param level The level.
-   */
-  assertValidLevel(level) {
-    if (!_.isInteger(level) && !_.inRange(level, 1, 7)) {
-      throw new Meteor.Error(`Level ${level} is not between 1 and 6.`);
-    }
-  }
-
-  /**
-   * @returns {String | undefined} The user's email as a string, or undefined if not published.
-   * @param userID The userID.
-   * @throws {Meteor.Error} If userID is not a user ID.
-   */
-  getEmail(userID) {
-    this.assertDefined(userID);
-    const docID = this.findDoc(userID);
-    return (docID.emails) ? docID.emails[0].address : undefined;
-  }
-
-  /**
-   * Updates userID with UH ID.
-   * @param userID The userID.
-   * @param uhID The UH ID number, as a string.
-   * @throws {Meteor.Error} If userID is not a userID, or if uhID is not a string.
-   */
-  setUhId(userID, uhID) {
-    this.assertDefined(userID);
-    check(uhID, String);
-    this._collection.update(userID, { $set: { uhID } });
-  }
-
-  /**
-   * Returns the user doc associated with the given uhID.
-   * @param uhID the user's UH ID.
-   * @returns Object the user doc associated with the given uhID or null if not found.
-   */
-  getUserFromUhId(uhID) {
-    check(uhID, String);
-    return this._collection.findOne({ uhID });
-  }
-
-  /**
-   * Returns the user doc associated with the given username.
-   * @param username the username.
-   * @returns Object the user doc associated with the given username or null if not found.
-   */
-  getUserFromUsername(username) {
-    check(username, String);
-    return this._collection.findOne({ username });
-  }
-
-  /**
-   * Returns the username associated with user.
-   * @param user A user, either their username or their userID.
-   * @throws { Meteor.Error } If user is not a valid user.
-   */
-  getUsername(user) {
-    const userID = this.getID(user);
-    return this._collection.findOne(userID).username;
-  }
-
-  /**
-   * Updates userID with an array of careerGoalIDs.
-   * @param userID The userID.
-   * @param careerGoalIDs A list of careerGoalIDs.
-   * @throws {Meteor.Error} If userID is not a userID, or if careerGoalIDs is not a list of careerGoalID.
-   */
-  setCareerGoalIds(userID, careerGoalIDs) {
-    this.assertDefined(userID);
-    CareerGoals.assertAllDefined(careerGoalIDs);
-    this._collection.update(userID, { $set: { careerGoalIDs } });
-  }
-
-  /**
-   * Updates email with new email address.
-   * @param userID The userID.
-   * @param email The user's email as a string.
-   * @throws {Meteor.Error} If userID is not a userID
-   */
-  setEmail(userID, email) {
-    this.assertDefined(userID);
-    check(email, String);
-    this._collection.update(userID, { $set: { email } });
-  }
-
-  /**
-   * Updates website with new website address.
-   * @param userID The userID.
-   * @param email The user's website as a string.
-   * @throws {Meteor.Error} If userID is not a userID
-   */
-  setWebsite(userID, website) {
-    this.assertDefined(userID);
-    check(website, String);
-    this._collection.update(userID, { $set: { website } });
-  }
-
-  /**
-   * Updates userID with an array of interestIDs.
-   * @param userID The userID.
-   * @param interestIDs A list of interestIDs.
-   * @throws {Meteor.Error} If userID is not a userID, or if interestIDs is not a list of interestID.
-   */
-  setInterestIds(userID, interestIDs) {
-    this.assertDefined(userID);
-    Interests.assertAllDefined(interestIDs);
-    this._collection.update(userID, { $set: { interestIDs } });
-  }
-
-  /**
-   * Updates userID with picture.
-   * @param userID The userID.
-   * @param picture The user's picture as a URL string.
-   * @throws {Meteor.Error} If userID is not a userID, or if picture is not a string.
-   */
-  setPicture(userID, picture) {
-    this.assertDefined(userID);
-    check(picture, String);
-    this._collection.update(userID, { $set: { picture } });
-  }
-
-  /**
-   * Updates userID's level.
-   * @param userID The userID.
-   * @param level The new level.
-   */
-  setLevel(userID, level) {
-    this.assertDefined(userID);
-    check(level, Number);
-    this._collection.update(userID, { $set: { level } });
-  }
-
-  /**
-   * Updates userID with an array of hiddenCourseIDs.
-   * @param userID The userID.
-   * @param hiddenCourseIDs A list of courseIDs.
-   * @throws {Meteor.Error} If userID is not a userID, or if hiddenCourseIDs is not a list of courseIDs.
-   */
-  setHiddenCourseIds(userID, hiddenCourseIDs) {
-    this.assertDefined(userID);
-    Courses.assertAllDefined(hiddenCourseIDs);
-    this._collection.update(userID, { $set: { hiddenCourseIDs } });
-  }
-
-  /**
-   * Updates userID with an array of hiddenOpportunityIDs.
-   * @param userID The userID.
-   * @param hiddenOpportunityIDs A list of opportunityIDs.
-   * @throws {Meteor.Error} If userID is not a userID, or if hiddenOpportunityIDs is not a list of opportunityIDs.
-   */
-  setHiddenOpportunityIds(userID, hiddenOpportunityIDs) {
-    this.assertDefined(userID);
-    Opportunities.assertAllDefined(hiddenOpportunityIDs);
-    this._collection.update(userID, { $set: { hiddenOpportunityIDs } });
-  }
-
-  /**
-   * Updates user with userID's declaredSemesterID.
-   * @param userID The userID.
-   * @param declaredSemesterID The declared semester ID.
-   */
-  setDeclaredSemesterID(userID, declaredSemesterID) {
-    this.assertDefined(userID);
-    Semesters.assertDefined(declaredSemesterID);
-    this._collection.update(userID, { $set: { declaredSemesterID } });
-  }
-
-  /**
-   * Updates the user's academic plan ID.
-   * @param userID The user's ID.
-   * @param academicPlanID The academic plan's ID.
-   */
-  setAcademicPlanID(userID, academicPlanID) {
-    this.assertDefined(userID);
-    AcademicPlans.assertDefined(academicPlanID);
-    this._collection.update(userID, { $set: { academicPlanID } });
-  }
-
-  /**
-   * Returns an ICE object with the total earned course and opportunity ICE values.
-   * @param studentID The userID.
-   * @throws {Meteor.Error} If userID is not a userID.
-   */
-  getEarnedICE(studentID) {
-    this.assertDefined(studentID);
-    const courseDocs = CourseInstances.find({ studentID }).fetch();
-    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
-    return getEarnedICE(courseDocs.concat(oppDocs));
-  }
-
-  /**
-   * Returns an ICE object with the total projected course and opportunity ICE values.
-   * @param studentID The userID.
-   * @throws {Meteor.Error} If userID is not a userID.
-   */
-  getProjectedICE(studentID) {
-    this.assertDefined(studentID);
-    const courseDocs = CourseInstances.find({ studentID }).fetch();
-    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
-    return getProjectedICE(courseDocs.concat(oppDocs));
-  }
-
-  /**
-   * Returns the slug name.
-   * @param studentID The userID.
-   * @throws {Meteor.Error} If userID is not a userID.
-   */
-  getSlugName(studentID) {
-    this.assertDefined(studentID);
-    const user = this._collection.findOne({ _id: studentID });
-    return Slugs.getNameFromID(user.slugID);
-  }
-
-  /* eslint class-methods-use-this: "off" */
-
-  /**
-   * Returns an array of courseIDs that this user has taken (or plans to take) based on their courseInstances.
-   * @param studentID The studentID.
-   */
-  getCourseIDs(studentID) {
-    const courseInstanceDocs = CourseInstances.find({ studentID }).fetch();
-    const courseIDs = courseInstanceDocs.map((doc) => doc.courseID);
-    return _.uniq(courseIDs);
-  }
-
-  /**
-   * Returns true if user has the specified career goal.
-   * @param user The user (docID or slug)
-   * @param careerGoal The Career Goal (docID or slug).
-   * @returns {boolean} True if the user has the associated Career Goal.
-   * @throws { Meteor.Error } If user is not a user or careerGoal is not a Career Goal.
-   */
-  hasCareerGoal(user, careerGoal) {
-    const careerGoalID = CareerGoals.getID(careerGoal);
-    const doc = this.findDoc(user);
-    return _.includes(doc.careerGoalIDs, careerGoalID);
-  }
-
-  /**
-   * Returns true if user has the specified interest.
-   * @param user The user (docID or slug)
-   * @param interest The Interest (docID or slug).
-   * @returns {boolean} True if the user has the associated Interest.
-   * @throws { Meteor.Error } If user is not a user or interest is not a Interest.
-   */
-  hasInterest(user, interest) {
-    const interestID = Interests.getID(interest);
-    const doc = this.findDoc(user);
-    return _.includes(doc.interestIDs, interestID);
-  }
-
-  /**
-   * Returns the user's interests as IDs. It is a union of interestIDs and careerGoal interestIDs.
-   * @param userID
-   * @returns {Array}
-   */
-  getInterestIDs(userID) {
-    const user = this._collection.findOne({ _id: userID });
-    let interestIDs = [];
-    interestIDs = _.union(interestIDs, user.interestIDs);
-    _.forEach(user.careerGoalIDs, (goalID) => {
-      const goal = CareerGoals.findDoc(goalID);
-      interestIDs = _.union(interestIDs, goal.interestIDs);
-    });
-    return interestIDs;
-  }
-
-  /**
-   * Returns the user's interest IDs in an Array with two sub-arrays. The first sub-array is the interest IDs that the
-   * User selected. The second sub-array is the interestIDs from the user's career goals.
-   * @param userID The user's ID.
-   */
-  getInterestIDsByType(userID) {
-    const user = this._collection.findOne({ _id: userID });
-    const interestIDs = [];
-    interestIDs.push(user.interestIDs);
-    let careerInterestIDs = [];
-    _.forEach(user.careerGoalIDs, (goalID) => {
-      const goal = CareerGoals.findDoc(goalID);
-      careerInterestIDs = _.union(careerInterestIDs, goal.interestIDs);
-    });
-    careerInterestIDs = _.difference(careerInterestIDs, user.interestIDs);
-    interestIDs.push(careerInterestIDs);
-    return interestIDs;
-  }
-
   publish() {
     if (Meteor.isServer) {
-      Meteor.publish(this._collectionName, function publish() {
-        const fields = (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) ? this._allData : this._publicData;
-        return Meteor.users.find({}, fields);
+      Meteor.publish('UserCollection', function publish() {
+        return Meteor.users.find({}, { fields: { username: 1 } });
       });
     }
   }
-
-  /**
-   * Returns an array of strings, each one representing an integrity problem with this collection.
-   * Returns an empty array if no problems were found.
-   * Checks slugID, careerGoalIDs, interestIDs, desiredDegreeID
-   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
-   */
-  checkIntegrity() {
-    const problems = [];
-    this.find().forEach(doc => {
-      if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`Bad slugID: ${doc.slugID}`);
-      }
-      if (doc.academicPlanID && !AcademicPlans.isDefined(doc.academicPlanID)) {
-        problems.push(`Bad academicPlanID: ${doc.academicPlanID}`);
-      }
-      _.forEach(doc.careerGoalIDs, careerGoalID => {
-        if (!CareerGoals.isDefined(careerGoalID)) {
-          problems.push(`Bad careerGoalID: ${careerGoalID}`);
-        }
-      });
-      _.forEach(doc.interestIDs, interestID => {
-        if (!Interests.isDefined(interestID)) {
-          problems.push(`Bad interestID: ${interestID}`);
-        }
-      });
-      _.forEach(doc.hiddenCourseIDs, hiddenCourseID => {
-        if (!Courses.isDefined(hiddenCourseID)) {
-          problems.push(`Bad hiddenCourseID: ${hiddenCourseID}`);
-        }
-      });
-      _.forEach(doc.hiddenOpportunityIDs, hiddenOpportunityID => {
-        if (!Opportunities.isDefined(hiddenOpportunityID)) {
-          problems.push(`Bad hiddenOpportunityID: ${hiddenOpportunityID}`);
-        }
-      });
-    });
-    return problems;
-  }
-
-  /**
-   * Returns an object representing the User docID in a format acceptable to define().
-   * @param docID The docID of an User.
-   * @returns { Object } An object representing the definition of docID.
-   */
-  dumpOne(docID) {
-    const doc = this.findDoc(docID);
-    const firstName = doc.firstName;
-    const lastName = doc.lastName;
-    const slug = Slugs.getNameFromID(doc.slugID);
-    const email = doc.email;
-    const password = doc.password;
-    const role = Roles.getRolesForUser(docID)[0];
-    const uhID = doc.uhID;
-    const picture = doc.picture;
-    const website = doc.website;
-    const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
-    const careerGoals = _.map(doc.careerGoalIDs, careerGoalID => CareerGoals.findSlugByID(careerGoalID));
-    const academicPlan = doc.academicPlanID && AcademicPlans.findSlugByID(doc.academicPlanID);
-    const level = doc.level;
-    const hiddenCourses = _.map(doc.hiddenCourseIDs, hiddenCourseID => Courses.findSlugByID(hiddenCourseID));
-    const hiddenOpportunities = _.map(doc.hiddenOpportunityIDs, hiddenOpportunityID =>
-        Opportunities.findSlugByID(hiddenOpportunityID));
-
-    return {
-      firstName, lastName, slug, email, password, role, uhID, picture, website, interests, careerGoals,
-      academicPlan, level, hiddenCourses, hiddenOpportunities,
-    };
-  }
-
 }
 
 /**

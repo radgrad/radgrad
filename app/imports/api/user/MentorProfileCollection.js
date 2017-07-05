@@ -1,5 +1,4 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import BaseSlugCollection from '../base/BaseSlugCollection';
@@ -8,8 +7,7 @@ import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
-import { profileCommonSchema, updateCommonFields, checkIntegrityCommonFields,
-  createMeteorAccount } from './ProfileCommonSchema';
+import { profileCommonSchema, updateCommonFields, checkIntegrityCommonFields } from './ProfileCommonSchema';
 
 /** @module api/user/MentorProfileCollection */
 /**
@@ -51,10 +49,9 @@ class MentorProfileCollection extends BaseSlugCollection {
     const interestIDs = Interests.getIDs(interests);
     const careerGoalIDs = CareerGoals.getIDs(careerGoals);
     Slugs.define({ name: username, entityName: this.getType() });
-    const userID = createMeteorAccount(username);
-    Roles.addUsersToRoles(userID, [role]);
+    const userID = Users.define({ username, role });
     return this._collection.insert({ username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
-      company, career, location, linkedin, motivation });
+      company, career, location, linkedin, motivation, userID });
   }
 
   /**
@@ -93,16 +90,27 @@ class MentorProfileCollection extends BaseSlugCollection {
   /**
    * Returns the profile associated with the specified user.
    * @param user The user (either their username (email) or their userID).
-   * @return The MentorProfile document.
+   * @return The profile document.
    * @throws { Meteor.Error } If user is not a valid user, or profile is not found.
    */
   getProfile(user) {
-    const username = Users.getUsername(user);
-    const doc = this.findOne({ username });
+    const userID = Users.getID(user);
+    const doc = this.findOne({ userID });
     if (!doc) {
-      throw new Meteor.Error(`No Profile found for user ${username}`);
+      throw new Meteor.Error(`No Mentor profile found for user ${user}`);
     }
     return doc;
+  }
+
+  /**
+   * Returns non-null if the user has a profile in this collection.
+   * @param user The user (either their username (email) or their userID).
+   * @return The profile document if the profile exists, or null if not found.
+   * @throws { Meteor.Error } If user is not a valid user.
+   */
+  hasProfile(user) {
+    const userID = Users.getID(user);
+    return this.findOne({ userID });
   }
 
   /**

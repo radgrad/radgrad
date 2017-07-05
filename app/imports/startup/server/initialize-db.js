@@ -1,4 +1,5 @@
 import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
@@ -8,6 +9,7 @@ import { RadGrad } from '../../api/radgrad/RadGrad';
 import { loadCollection } from '../../api/test/test-utilities';
 import { removeAllEntities } from '../../api/base/BaseUtilities';
 import { checkIntegrity } from '../../api/integrity/IntegrityChecker';
+import { ROLE } from '../role/Role';
 
 /* global Assets */
 /* eslint no-console: "off" */
@@ -137,7 +139,8 @@ function defineAdminUser() {
     return;
   }
   const credential = generateAdminCredential();
-  Accounts.createUser({ username: adminUsername, email: adminUsername, password: credential });
+  const userID = Accounts.createUser({ username: adminUsername, email: adminUsername, password: credential });
+  Roles.addUsersToRoles(userID, ROLE.ADMIN);
   console.log(`Defined admin user: ${adminUsername}`);
   console.log(`Credential: "${credential}"`);
 }
