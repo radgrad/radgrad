@@ -58,7 +58,7 @@ class UserCollection {
    * @returns True if user is defined, false otherwise.
    */
   isDefined(user) {
-    return (Meteor.users().find({ _id: user })) || (Meteor.users().find({ username: user }));
+    return (Meteor.users.find({ _id: user })) || (Meteor.users.find({ username: user }));
   }
 
   /**
@@ -68,7 +68,7 @@ class UserCollection {
    * @throws { Meteor.Error } If user is not a defined username or userID.
    */
   getID(user) {
-    const userID = (Meteor.users().find({ _id: user })) || (Meteor.users().find({ username: user }));
+    const userID = (Meteor.users.find({ _id: user })) || (Meteor.users.find({ username: user }));
     if (!userID) {
       throw new Meteor.Error(`Error: user ${user} is not defined.`);
     }
@@ -139,7 +139,7 @@ class UserCollection {
         FacultyProfiles.removeIt(FacultyProfiles.getProfile(user)._id);
       }
       // Now remove the user from Meteor users.
-      Meteor.users().remove(userID);
+      Meteor.users.remove(userID);
     } else {
       throw new Meteor.Error(`Attempt to remove ${user} while references to public entities remain.`);
     }

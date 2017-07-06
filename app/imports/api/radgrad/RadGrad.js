@@ -27,8 +27,6 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 import { Teasers } from '../teaser/TeaserCollection';
-import { Users } from '../user/UserCollection';
-import { ValidUserAccounts } from '../user/ValidUserAccountCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /** @module api/radgrad/RadGrad */

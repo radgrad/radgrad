@@ -1,22 +1,20 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseSlugCollection from '../base/BaseSlugCollection';
+import BaseProfileCollection from './BaseProfileCollection';
 import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
-import { profileCommonSchema, updateCommonFields, checkIntegrityCommonFields } from './ProfileCommonSchema';
 
 /** @module api/user/FacultyProfileCollection */
 /**
  * Represents a Faculty Profile.
- * @extends module:api/base/BaseCollection~BaseSlugCollection
+ * @extends module:api/base/BaseCollection~BaseProfileCollection
  */
-class FacultyProfileCollection extends BaseSlugCollection {
+class FacultyProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('FacultyProfile', new SimpleSchema({}).extend(profileCommonSchema));
+    super('FacultyProfile', new SimpleSchema({}));
   }
 
   /**
@@ -50,39 +48,13 @@ class FacultyProfileCollection extends BaseSlugCollection {
   update(docID, { firstName, lastName, picture, website, interests, careerGoals }) {
     this.assertDefined(docID);
     const updateData = {};
-    updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
+    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
     this._collection.update(docID, { $set: updateData });
   }
 
   /**
-   * Returns the profile associated with the specified user.
-   * @param user The user (either their username (email) or their userID).
-   * @return The profile document.
-   * @throws { Meteor.Error } If user is not a valid user, or profile is not found.
-   */
-  getProfile(user) {
-    const userID = Users.getID(user);
-    const doc = this.findOne({ userID });
-    if (!doc) {
-      throw new Meteor.Error(`No Faculty profile found for user ${user}`);
-    }
-    return doc;
-  }
-
-  /**
-   * Returns non-null if the user has a profile in this collection.
-   * @param user The user (either their username (email) or their userID).
-   * @return The profile document if the profile exists, or null if not found.
-   * @throws { Meteor.Error } If user is not a valid user.
-   */
-  hasProfile(user) {
-    const userID = Users.getID(user);
-    return this.findOne({ userID });
-  }
-
-  /**
    * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Faculty or
-   * Faculty.
+   * Advisor.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
    * @param userId The userId of the logged in user. Can be null or undefined
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or Faculty.
@@ -100,7 +72,7 @@ class FacultyProfileCollection extends BaseSlugCollection {
   checkIntegrity() {
     let problems = [];
     this.find().forEach(doc => {
-      problems = problems.concat(checkIntegrityCommonFields(doc));
+      problems = problems.concat(this._checkIntegrityCommonFields(doc));
       if (doc.role !== ROLE.FACULTY) {
         problems.push(`FacultyProfile instance does not have ROLE.FACULTY: ${doc}`);
       }

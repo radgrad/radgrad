@@ -3,16 +3,12 @@
   "fixtureDescription" : "Defines mentor Robert Brewer. Requires minimal.fixture.",
   "collections": [
     {
-      "name": "UserCollection",
+      "name": "MentorProfileCollection",
       "contents": [
         {
+          "username": "rbrewer@gmail.com",
           "firstName": "Robert",
           "lastName": "Brewer",
-          "slug": "brewer",
-          "email": "rbrewer@excitedcuriosity.org",
-          "password": "foo",
-          "role": "MENTOR",
-          "uhID": "8289-0001",
           "picture": "/images/mentors/brewer.jpg",
           "website": null,
           "interests": [
@@ -21,17 +17,11 @@
           "careerGoals": [
             "data-scientist"
           ],
-          "level": 1,
-          "hiddenCourses": [],
-          "hiddenOpportunities": []
-        }
-      ]
-    },
-    {
-      "name": "ValidUserAccountCollection",
-      "contents": [
-        {
-          "username": "brewer"
+          "company": "Tableau",
+          "career": "Software Engineer",
+          "location": "Palo Alto, CA",
+          "linkedin": "robertsbrewer",
+          "motivation": "I founded a startup in Hawaii and now work in Silicon Valley. I am happy to share my experiences with new grads."
         }
       ]
     }

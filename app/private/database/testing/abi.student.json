@@ -12,12 +12,10 @@
           "picture": "/images/mockup/abi.jpg",
           "website": "http://abi.github.io",
           "interests": [
-            "application-development",
-            "research"
+            "algorithms"
           ],
           "careerGoals": [
-            "data-scientist",
-            "software-developer"
+            "data-scientist"
           ],
           "academicPlan": "bs-cs-2016",
           "level": 5,

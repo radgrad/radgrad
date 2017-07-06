@@ -1,20 +1,18 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseSlugCollection from '../base/BaseSlugCollection';
+import BaseProfileCollection from './BaseProfileCollection';
 import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
-import { profileCommonSchema, updateCommonFields, checkIntegrityCommonFields } from './ProfileCommonSchema';
 
 /** @module api/user/MentorProfileCollection */
 /**
  * Represents a Mentor Profile.
- * @extends module:api/base/BaseCollection~BaseSlugCollection
+ * @extends module:api/base/BaseCollection~BaseProfileCollection
  */
-class MentorProfileCollection extends BaseSlugCollection {
+class MentorProfileCollection extends BaseProfileCollection {
   constructor() {
     super('MentorProfile', new SimpleSchema({
       company: String,
@@ -22,7 +20,7 @@ class MentorProfileCollection extends BaseSlugCollection {
       location: String,
       linkedin: { type: String, optional: true },
       motivation: String,
-    }).extend(profileCommonSchema));
+    }));
   }
 
   /**
@@ -68,7 +66,7 @@ class MentorProfileCollection extends BaseSlugCollection {
     motivation }) {
     this.assertDefined(docID);
     const updateData = {};
-    updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
+    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
     if (company) {
       updateData.company = company;
     }
@@ -85,32 +83,6 @@ class MentorProfileCollection extends BaseSlugCollection {
       updateData.motivation = motivation;
     }
     this._collection.update(docID, { $set: updateData });
-  }
-
-  /**
-   * Returns the profile associated with the specified user.
-   * @param user The user (either their username (email) or their userID).
-   * @return The profile document.
-   * @throws { Meteor.Error } If user is not a valid user, or profile is not found.
-   */
-  getProfile(user) {
-    const userID = Users.getID(user);
-    const doc = this.findOne({ userID });
-    if (!doc) {
-      throw new Meteor.Error(`No Mentor profile found for user ${user}`);
-    }
-    return doc;
-  }
-
-  /**
-   * Returns non-null if the user has a profile in this collection.
-   * @param user The user (either their username (email) or their userID).
-   * @return The profile document if the profile exists, or null if not found.
-   * @throws { Meteor.Error } If user is not a valid user.
-   */
-  hasProfile(user) {
-    const userID = Users.getID(user);
-    return this.findOne({ userID });
   }
 
   /**
@@ -133,7 +105,7 @@ class MentorProfileCollection extends BaseSlugCollection {
   checkIntegrity() {
     let problems = [];
     this.find().forEach(doc => {
-      problems = problems.concat(checkIntegrityCommonFields(doc));
+      problems = problems.concat(this._checkIntegrityCommonFields(doc));
       if (doc.role !== ROLE.MENTOR) {
         problems.push(`MentorProfile instance does not have ROLE.MENTOR: ${doc}`);
       }

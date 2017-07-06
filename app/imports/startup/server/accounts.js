@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
-import { ValidUserAccounts } from '../../api/user/ValidUserAccountCollection';
+// import { Accounts } from 'meteor/accounts-base';
 
 /* eslint-disable no-console */
 
