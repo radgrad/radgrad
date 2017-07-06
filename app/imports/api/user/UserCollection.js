@@ -185,15 +185,57 @@ class UserCollection {
   }
 
   /**
-   * Runs find on the Users collection.
+   * Runs find on all the Profile collections, fetches the associated documents, and returns an array containing all
+   * of the matches.
    * @see {@link http://docs.meteor.com/#/full/find|Meteor Docs on Mongo Find}
    * @param { Object } selector A MongoDB selector.
    * @param { Object } options MongoDB options.
-   * @returns {Mongo.Cursor}
+   * @returns An array of documents matching the selector and options.
    */
-  find(selector, options) {
+  findProfiles(selector, options) {
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
-    return Meteor.users.find(theSelector, options);
+    let profiles = [];
+    profiles = profiles.concat(StudentProfiles.find(theSelector, options).fetch());
+    profiles = profiles.concat(AdvisorProfiles.find(theSelector, options).fetch());
+    profiles = profiles.concat(FacultyProfiles.find(theSelector, options).fetch());
+    profiles = profiles.concat(MentorProfiles.find(theSelector, options).fetch());
+    return profiles;
+  }
+
+  /**
+   * Iterates through all Profile collections, and returns an array of profiles that satisfy filter.
+   * @param filter A function that accepts a profile a document and returns truthy if that document should be included
+   * in the returned array.
+   * @returns {Array} An array of profile documents from across all the Profile collections satisfying filter.
+   */
+  filterProfiles(filter) {
+    const profiles = [];
+    StudentProfiles.find().forEach((profile) => { if (filter(profile)) { profiles.push(profile); } });
+    AdvisorProfiles.find().forEach((profile) => { if (filter(profile)) { profiles.push(profile); } });
+    FacultyProfiles.find().forEach((profile) => { if (filter(profile)) { profiles.push(profile); } });
+    MentorProfiles.find().forEach((profile) => { if (filter(profile)) { profiles.push(profile); } });
+    return profiles;
+  }
+
+  someProfiles(predicate) {
+    let exists = false;
+    StudentProfiles.find().forEach((profile) => { if (predicate(profile)) { exists = true; } });
+    if (exists) {
+      return true;
+    }
+    AdvisorProfiles.find().forEach((profile) => { if (predicate(profile)) { exists = true; } });
+    if (exists) {
+      return true;
+    }
+    FacultyProfiles.find().forEach((profile) => { if (predicate(profile)) { exists = true; } });
+    if (exists) {
+      return true;
+    }
+    MentorProfiles.find().forEach((profile) => { if (predicate(profile)) { exists = true; } });
+    if (exists) {
+      return true;
+    }
+    return false;
   }
 
   /**
