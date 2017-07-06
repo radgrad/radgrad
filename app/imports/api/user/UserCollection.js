@@ -4,9 +4,11 @@ import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AdvisorLogs } from '../log/AdvisorLogCollection';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
+import { CareerGoals } from '../career/CareerGoalCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
 import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
+import { Interests } from '../interest/InterestCollection';
 import { MentorAnswers } from '../mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
@@ -98,15 +100,24 @@ class UserCollection {
   }
 
   /**
+   * Returns the profile document associated with user, or null if not found.
+   * @param user The username or userID.
+   * @returns The profile document or null if not found.
+   */
+  hasProfile(user) {
+    const userID = this.getID(user);
+    return StudentProfiles.hasProfile(userID) || FacultyProfiles.hasProfile(userID)
+        || MentorProfiles.hasProfile(userID) || AdvisorProfiles.hasProfile(userID);
+  }
+
+  /**
    * Returns the profile document associated with user.
    * @param user The username or userID.
    * @returns The profile document.
    * @throws { Meteor.Error } If the document was not found.
    */
   getProfile(user) {
-    const userID = this.getID(user);
-    const profile = StudentProfiles.hasProfile(userID) || FacultyProfiles.hasProfile(userID)
-        || MentorProfiles.hasProfile(userID) || AdvisorProfiles.hasProfile(userID);
+    const profile = this.hasProfile(user);
     if (!profile) {
       throw new Meteor.Error(`No profile found for user ${user}`);
     }
@@ -143,6 +154,46 @@ class UserCollection {
     } else {
       throw new Meteor.Error(`Attempt to remove ${user} while references to public entities remain.`);
     }
+  }
+
+  /**
+   * Returns true if user has the specified career goal.
+   * @param user The user (docID or slug)
+   * @param careerGoal The Career Goal (docID or slug).
+   * @returns {boolean} True if the user has the associated Career Goal.
+   * @throws { Meteor.Error } If user is not a user or careerGoal is not a Career Goal.
+   */
+  hasCareerGoal(user, careerGoal) {
+    const careerGoalID = CareerGoals.getID(careerGoal);
+    // Admin user does not have a profile, so this will return null.
+    const profile = this.hasProfile(user);
+    return profile && _.includes(profile.careerGoalIDs, careerGoalID);
+  }
+
+  /**
+   * Returns true if user has the specified interest.
+   * @param user The user (docID or slug)
+   * @param interest The Interest (docID or slug).
+   * @returns {boolean} True if the user has the associated Interest.
+   * @throws { Meteor.Error } If user is not a user or interest is not a Interest.
+   */
+  hasInterest(user, interest) {
+    const interestID = Interests.getID(interest);
+    // Admin user does not have a profile, so this will return null.
+    const profile = this.hasProfile(user);
+    return profile && _.includes(profile.interestIDs, interestID);
+  }
+
+  /**
+   * Runs find on the Users collection.
+   * @see {@link http://docs.meteor.com/#/full/find|Meteor Docs on Mongo Find}
+   * @param { Object } selector A MongoDB selector.
+   * @param { Object } options MongoDB options.
+   * @returns {Mongo.Cursor}
+   */
+  find(selector, options) {
+    const theSelector = (typeof selector === 'undefined') ? {} : selector;
+    return Meteor.users.find(theSelector, options);
   }
 
   /**

@@ -215,32 +215,6 @@ class StudentProfileCollection extends BaseProfileCollection {
   }
 
   /**
-   * Returns true if user has the specified career goal.
-   * @param user The user (docID or slug)
-   * @param careerGoal The Career Goal (docID or slug).
-   * @returns {boolean} True if the user has the associated Career Goal.
-   * @throws { Meteor.Error } If user is not a user or careerGoal is not a Career Goal.
-   */
-  hasCareerGoal(user, careerGoal) {
-    const careerGoalID = CareerGoals.getID(careerGoal);
-    const profile = this.getProfile(user);
-    return _.includes(profile.careerGoalIDs, careerGoalID);
-  }
-
-  /**
-   * Returns true if user has the specified interest.
-   * @param user The user (docID or slug)
-   * @param interest The Interest (docID or slug).
-   * @returns {boolean} True if the user has the associated Interest.
-   * @throws { Meteor.Error } If user is not a user or interest is not a Interest.
-   */
-  hasInterest(user, interest) {
-    const interestID = Interests.getID(interest);
-    const profile = this.getProfile(user);
-    return _.includes(profile.interestIDs, interestID);
-  }
-
-  /**
    * Returns the user's interests as IDs. It is a union of interestIDs and careerGoal interestIDs.
    * @param userID
    * @returns {Array}
