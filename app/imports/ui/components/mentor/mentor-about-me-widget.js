@@ -43,7 +43,7 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   careerGoals() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return _.map(user.careerGoalIDs, (id) => CareerGoals.findDoc(id));
     }
     return [];
@@ -64,7 +64,7 @@ Template.Mentor_About_Me_Widget.helpers({
   desiredDegree() {
     let ret = '';
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       if (user.desiredDegreeID) {
         ret = DesiredDegrees.findDoc(user.desiredDegreeID).name;
       }
@@ -76,8 +76,8 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   email() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return Users.getEmail(user._id);
+      const user = Users.getProfile(getRouteUserName());
+      return user.username;
     }
     return '';
   },
@@ -116,7 +116,7 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   interests() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return _.map(user.interestIDs, (id) => Interests.findDoc(id));
     }
     return [];
@@ -147,14 +147,14 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   name() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return `${user.firstName} ${user.lastName}`;
     }
     return '';
   },
   picture() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return user.picture;
     }
     return '';
@@ -164,14 +164,14 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   studentPicture() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return user.picture;
     }
     return '';
   },
   website() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return user.website;
     }
     return '';
@@ -193,7 +193,8 @@ Template.Mentor_About_Me_Widget.events({
     instance.context.validate(updatedData);
     const mentorProfile = MentorProfiles.find({ mentorID: getUserIdFromRoute() }).fetch();
     if (instance.context.isValid()) {
-      Users.setWebsite(getUserIdFromRoute(), website);
+      // TODO Convert to method call.
+      MentorProfiles.update(getUserIdFromRoute(), { website });
       const collectionName = MentorProfiles.getCollectionName();
       updatedData.id = mentorProfile[0]._id;
       updateMethod.call({ collectionName, updateData: updatedData }, (error) => {

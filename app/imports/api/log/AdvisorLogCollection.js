@@ -63,7 +63,7 @@ class AdvisorLogCollection extends BaseCollection {
   getAdvisorDoc(instanceID) {
     this.assertDefined(instanceID);
     const instance = this.findDoc(instanceID);
-    return Users.findDoc(instance.advisorID);
+    return Users.getProfile(instance.advisorID);
   }
 
   /**
@@ -74,7 +74,7 @@ class AdvisorLogCollection extends BaseCollection {
   getStudentDoc(instanceID) {
     this.assertDefined(instanceID);
     const instance = this.findDoc(instanceID);
-    return Users.findDoc(instance.studentID);
+    return Users.getProfile(instance.studentID);
   }
 
   /**
@@ -120,8 +120,8 @@ class AdvisorLogCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const student = Users.findSlugByID(doc.studentID);
-    const advisor = Users.findSlugByID(doc.advisorID);
+    const student = Users.getProfile(doc.studentID).username;
+    const advisor = Users.getProfile(doc.advisorID).username;
     const text = doc.text;
     const createdOn = doc.createdOn;
     return { student, advisor, text, createdOn };

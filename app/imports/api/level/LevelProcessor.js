@@ -3,6 +3,7 @@ import { CourseInstances } from '../course/CourseInstanceCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Reviews } from '../review/ReviewCollection';
 import { ROLE } from '../role/Role';
+import { StudentProfiles } from '../user/StudentProfileCollection';
 import { Users } from '../user/UserCollection';
 import { getEarnedICE } from '../ice/IceProcessor';
 
@@ -50,16 +51,12 @@ export function calcLevel(studentID) {
  */
 export function updateStudentLevel(studentID) {
   const level = calcLevel(studentID);
-  // console.log(studentID, level);
-  Users.setLevel(studentID, level);
+  StudentProfiles.setLevel(studentID, level);
 }
 
 /**
  * Updates all the students level.
  */
 export function updateAllStudentLevels() {
-  const students = Users.find({ roles: [ROLE.STUDENT] }).fetch();
-  _.forEach(students, (student) => {
-    updateStudentLevel(student._id);
-  });
+  StudentProfiles.find().forEach(student => updateStudentLevel(student._id));
 }

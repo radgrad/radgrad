@@ -39,7 +39,7 @@ class BaseProfileCollection extends BaseSlugCollection {
     const userID = Users.getID(user);
     const doc = this.findOne({ userID });
     if (!doc) {
-      throw new Meteor.Error(`No Student profile found for user ${user}`);
+      throw new Meteor.Error(`No profile found for user ${user}`);
     }
     return doc;
   }

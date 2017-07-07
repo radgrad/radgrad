@@ -50,7 +50,7 @@ Template.Star_Upload_Widget.events({
     event.preventDefault();
     if (instance.data.studentID.get()) {
       // const studentID = instance.data.studentID.get();
-      const student = Users.findDoc(instance.data.studentID.get());
+      const profile = Users.getProfile(instance.data.studentID.get());
       const advisor = getRouteUserName();
       const fileName = event.target.parentElement.getElementsByTagName('input')[0];
       if (fileName.files && fileName.files[0]) {
@@ -58,17 +58,17 @@ Template.Star_Upload_Widget.events({
         const fr = new FileReader();
         fr.onload = (e) => {
           const csvData = e.target.result;
-          starLoadDataMethod.call({ advisor, student: student.username, csvData }, (error) => {
+          starLoadDataMethod.call({ advisor, student: profile.username, csvData }, (error) => {
             if (error) {
               console.log('Error loading STAR data', error);
             }
           });
-          updateLevelMethod.call({ studentID: student._id }, (error) => {
+          updateLevelMethod.call({ studentID: profile._id }, (error) => {
             if (error) {
               console.log('Error updating student level', error);
             }
           });
-          const message = `${advisor} loaded STAR data for ${student.username}`;
+          const message = `${advisor} loaded STAR data for ${profile.username}`;
           appLog.info(message);
         };
         fr.readAsText(starData);

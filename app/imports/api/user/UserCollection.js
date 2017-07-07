@@ -14,6 +14,7 @@ import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Reviews } from '../review/ReviewCollection';
+import { ROLE } from '../role/Role';
 import { AdvisorProfiles } from './AdvisorProfileCollection';
 import { StudentProfiles } from './StudentProfileCollection';
 import { MentorProfiles } from './MentorProfileCollection';
@@ -44,7 +45,7 @@ class UserCollection {
    * This is called in the various Profile define() methods.
    * @param username The username to be defined (must be an email address).
    * @param role The role.
-   * @returns The docID of the newly created user.
+   * @returns { String } The docID of the newly created user.
    * @throws { Meteor.Error } If the user exists.
    */
   define({ username, role }) {
@@ -55,9 +56,22 @@ class UserCollection {
   }
 
   /**
+   * Asserts that the passed user has the specified role.
+   * @param user The user (username or userID).
+   * @param role The role or an array of roles.
+   * @throws { Meteor.Error } If the user does not have the role, or if user or role is not valid.
+   */
+  assertInRole(user, role) {
+    const userID = this.getID(user);
+    if (!Roles.userIsInRole(userID, role)) {
+      throw new Meteor.Error(`${userID} (${this.getProfile(userID).username}) is not in role ${role}.`);
+    }
+  }
+
+  /**
    * Returns true if user is a defined userID or username.
    * @param user The user.
-   * @returns True if user is defined, false otherwise.
+   * @returns { boolean } True if user is defined, false otherwise.
    */
   isDefined(user) {
     return (Meteor.users.find({ _id: user })) || (Meteor.users.find({ username: user }));
@@ -66,7 +80,7 @@ class UserCollection {
   /**
    * Returns the userID associated with user, or throws an error if not defined.
    * @param user The user (username or userID).
-   * @returns The userID
+   * @returns { String } The userID
    * @throws { Meteor.Error } If user is not a defined username or userID.
    */
   getID(user) {
@@ -75,6 +89,33 @@ class UserCollection {
       throw new Meteor.Error(`Error: user ${user} is not defined.`);
     }
     return userID;
+  }
+
+  /**
+   * Returns the userIDs associated with users, or throws an error if any cannot be found.
+   * @param { String[] } users An array of valid users.
+   * @returns { String[] } The docIDs associated with users.
+   * @throws { Meteor.Error } If any instance is not a user.
+   */
+  getIDs(users) {
+    let ids;
+    try {
+      ids = (users) ? users.map((instance) => this.getID(instance)) : [];
+    } catch (err) {
+      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${users} to an ID.`);
+    }
+    return ids;
+  }
+
+  /**
+   * Returns the full name for the given user.
+   * @param user the user (username or ID).
+   * @returns {string} The user's full name.
+   * @throws {Meteor.Error} If user is not a valid user.
+   */
+  getFullName(user) {
+    const profile = this.getProfile(user);
+    return `${profile.firstName} ${profile.lastName}`;
   }
 
   /**
@@ -102,7 +143,7 @@ class UserCollection {
   /**
    * Returns the profile document associated with user, or null if not found.
    * @param user The username or userID.
-   * @returns The profile document or null if not found.
+   * @returns { Object | Null } The profile document or null if not found.
    */
   hasProfile(user) {
     const userID = this.getID(user);
@@ -113,7 +154,7 @@ class UserCollection {
   /**
    * Returns the profile document associated with user.
    * @param user The username or userID.
-   * @returns The profile document.
+   * @returns { Object } The profile document.
    * @throws { Meteor.Error } If the document was not found.
    */
   getProfile(user) {
@@ -157,40 +198,12 @@ class UserCollection {
   }
 
   /**
-   * Returns true if user has the specified career goal.
-   * @param user The user (docID or slug)
-   * @param careerGoal The Career Goal (docID or slug).
-   * @returns {boolean} True if the user has the associated Career Goal.
-   * @throws { Meteor.Error } If user is not a user or careerGoal is not a Career Goal.
-   */
-  hasCareerGoal(user, careerGoal) {
-    const careerGoalID = CareerGoals.getID(careerGoal);
-    // Admin user does not have a profile, so this will return null.
-    const profile = this.hasProfile(user);
-    return profile && _.includes(profile.careerGoalIDs, careerGoalID);
-  }
-
-  /**
-   * Returns true if user has the specified interest.
-   * @param user The user (docID or slug)
-   * @param interest The Interest (docID or slug).
-   * @returns {boolean} True if the user has the associated Interest.
-   * @throws { Meteor.Error } If user is not a user or interest is not a Interest.
-   */
-  hasInterest(user, interest) {
-    const interestID = Interests.getID(interest);
-    // Admin user does not have a profile, so this will return null.
-    const profile = this.hasProfile(user);
-    return profile && _.includes(profile.interestIDs, interestID);
-  }
-
-  /**
    * Runs find on all the Profile collections, fetches the associated documents, and returns an array containing all
    * of the matches.
    * @see {@link http://docs.meteor.com/#/full/find|Meteor Docs on Mongo Find}
    * @param { Object } selector A MongoDB selector.
    * @param { Object } options MongoDB options.
-   * @returns An array of documents matching the selector and options.
+   * @returns { Array } An array of documents matching the selector and options.
    */
   findProfiles(selector, options) {
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
@@ -200,6 +213,31 @@ class UserCollection {
     profiles = profiles.concat(FacultyProfiles.find(theSelector, options).fetch());
     profiles = profiles.concat(MentorProfiles.find(theSelector, options).fetch());
     return profiles;
+  }
+
+  /**
+   * Runs find on all the Profile collections, fetches the associated documents, and returns an array containing all
+   * of the matches.
+   * @see {@link http://docs.meteor.com/#/full/find|Meteor Docs on Mongo Find}
+   * @param { Object } selector A MongoDB selector.
+   * @param { Object } options MongoDB options.
+   * @returns { Array } An array of documents matching the selector and options.
+   */
+  findProfilesWithRole(role, selector, options) {
+    const theSelector = (typeof selector === 'undefined') ? {} : selector;
+    if (role === ROLE.STUDENT) {
+      return StudentProfiles.find(theSelector, options).fetch();
+    }
+    if (role === ROLE.ADVISOR) {
+      return AdvisorProfiles.find(theSelector, options).fetch();
+    }
+    if (role === ROLE.FACULTY) {
+      return FacultyProfiles.find(theSelector, options).fetch();
+    }
+    if (role === ROLE.MENTOR) {
+      return MentorProfiles.find(theSelector, options).fetch();
+    }
+    throw new Meteor.Error(`Unknown role: ${role}`);
   }
 
   /**
@@ -217,6 +255,12 @@ class UserCollection {
     return profiles;
   }
 
+  /**
+   * Returns true if at least one profile satisfies the passed predicate.
+   * @param predicate A function which can be applied to any document in any profile collection and returns true
+   * or false.
+   * @returns {boolean} True if at least one document satisfies the predicate.
+   */
   someProfiles(predicate) {
     let exists = false;
     StudentProfiles.find().forEach((profile) => { if (predicate(profile)) { exists = true; } });

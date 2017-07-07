@@ -155,28 +155,28 @@ class VerificationRequestCollection extends BaseCollection {
   }
 
   /**
-   * Returns the Sponsor associated with the VerificationRequest with the given instanceID.
+   * Returns the Sponsor (faculty) profile associated with the VerificationRequest with the given instanceID.
    * @param instanceID The id of the VerificationRequest.
-   * @returns {Object} The associated Sponsor.
+   * @returns {Object} The associated Faculty profile.
    * @throws {Meteor.Error} If instanceID is not a valid ID.
    */
   getSponsorDoc(instanceID) {
     this.assertDefined(instanceID);
     const instance = this._collection.findOne({ _id: instanceID });
     const opportunity = OpportunityInstances.getOpportunityDoc(instance.opportunityInstanceID);
-    return Users.findDoc(opportunity.sponsorID);
+    return Users.getProfile(opportunity.sponsorID);
   }
 
   /**
-   * Returns the Student associated with the VerificationRequest with the given instanceID.
+   * Returns the Student profile associated with the VerificationRequest with the given instanceID.
    * @param instanceID The id of the VerificationRequest.
-   * @returns {Object} The associated Student.
+   * @returns {Object} The associated Student profile.
    * @throws {Meteor.Error} If instanceID is not a valid ID.
    */
   getStudentDoc(instanceID) {
     this.assertDefined(instanceID);
     const instance = this._collection.findOne({ _id: instanceID });
-    return Users.findDoc(instance.studentID);
+    return Users.getProfile(instance.studentID);
   }
 
   /**
@@ -215,7 +215,7 @@ class VerificationRequestCollection extends BaseCollection {
   setVerified(verificationRequestID, verifyingUser) {
     this.assertDefined(verificationRequestID);
     const verifierID = Users.getID(verifyingUser);
-    const verifier = Users.findDoc(verifierID).username;
+    const verifier = Users.getProfile(verifierID).username;
     const date = new Date();
     const status = this.ACCEPTED;
     const processed = [{ date, status, verifier }];
@@ -254,7 +254,7 @@ class VerificationRequestCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const student = Users.findSlugByID(doc.studentID);
+    const student = Users.getProfile(doc.studentID).username;
     const opportunityInstance = OpportunityInstances.findDoc(doc.opportunityInstanceID);
     const semester = Semesters.findSlugByID(opportunityInstance.semesterID);
     const opportunity = Opportunities.findSlugByID(opportunityInstance.opportunityID);

@@ -76,20 +76,14 @@ class DesiredDegreeCollection extends BaseSlugCollection {
    * is referenced by any user.
    */
   removeIt(instance) {
-    const docID = this.getID(instance);
+    const desiredDegreeID = this.getID(instance);
     // Check that this is not referenced by any AcademicPlans.
     AcademicPlans.find().map(function (plan) {  // eslint-disable-line array-callback-return
-      if (plan.degreeID === docID) {
+      if (plan.degreeID === desiredDegreeID) {
         throw new Meteor.Error(`DesiredDegree ${instance} is referenced by a academic plan ${plan}.`);
       }
     });
-    Users.find().map(function (user) {  // eslint-disable-line array-callback-return
-      if (user.desiredDegreeID === docID) {
-        throw new Meteor.Error(`DesiredDegree ${instance} is referenced by a user ${user}.`);
-      }
-    });
-    // Now remove the DesiredDegree.
-    super.removeIt(docID);
+    super.removeIt(desiredDegreeID);
   }
 
   /**

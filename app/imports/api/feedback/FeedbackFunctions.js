@@ -8,6 +8,7 @@ import { clearFeedbackInstancesMethod } from './FeedbackInstanceCollection.metho
 import { defineMethod } from '../base/BaseCollection.methods';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
+import { StudentProfiles } from '../user/StudentProfileCollection';
 import * as courseUtils from '../course/CourseUtilities';
 import * as oppUtils from '../opportunity/OpportunityUtilities';
 import * as yearUtils from '../degree-plan/AcademicYearUtilities';
@@ -101,16 +102,10 @@ export class FeedbackFunctionClass {
     // First clear any feedback instances previously created for this student.
     clearFeedbackInstancesMethod.call({ user, functionName });
 
-    const student = Users.findDoc(user);
-    const courseIDs = Users.getCourseIDs(user);
+    const studentProfile = Users.getProfile(user);
+    const courseIDs = StudentProfiles.getCourseIDs(user);
     let courses = [];
-    let academicPlan;
-    if (student.academicPlanID) {
-      academicPlan = AcademicPlans.findDoc(student.academicPlanID);
-    } else {
-      const degreeID = student.desiredDegreeID;
-      academicPlan = AcademicPlans.findDoc({ degreeID });
-    }
+    const academicPlan = studentProfile.academicPlanID;
     courses = academicPlan.courseList.slice(0);
     courses = this._missingCourses(courseIDs, courses);
     if (courses.length > 0) {
@@ -195,15 +190,9 @@ export class FeedbackFunctionClass {
     clearFeedbackInstancesMethod.call({ user, functionName });
 
     const coursesTakenSlugs = [];
-    const student = Users.findDoc(user);
-    const courseIDs = Users.getCourseIDs(user);
-    let academicPlan;
-    if (student.academicPlanID) {
-      academicPlan = AcademicPlans.findDoc(student.academicPlanID);
-    } else {
-      const degreeID = student.desiredDegreeID;
-      academicPlan = AcademicPlans.findDoc({ degreeID });
-    }
+    const studentProfile = Users.getProfile(user);
+    const courseIDs = StudentProfiles.getCourseIDs(user);
+    const academicPlan = studentProfile.academicPlanID;
     const coursesNeeded = academicPlan.courseList.slice(0);
     _.forEach(courseIDs, (cID) => {
       const course = Courses.findDoc(cID);
@@ -253,15 +242,9 @@ export class FeedbackFunctionClass {
     clearFeedbackInstancesMethod.call({ user, functionName });
 
     const coursesTakenSlugs = [];
-    const student = Users.findDoc(user);
-    const courseIDs = Users.getCourseIDs(user);
-    let academicPlan;
-    if (student.academicPlanID) {
-      academicPlan = AcademicPlans.findDoc(student.academicPlanID);
-    } else {
-      const degreeID = student.desiredDegreeID;
-      academicPlan = AcademicPlans.findDoc({ degreeID });
-    }
+    const studentProfile = Users.getProfile(user);
+    const courseIDs = StudentProfiles.getCourseIDs(user);
+    const academicPlan = studentProfile.academicPlanID;
     const coursesNeeded = academicPlan.courseList.slice(0);
     _.forEach(courseIDs, (cID) => {
       const course = Courses.findDoc(cID);
@@ -339,11 +322,11 @@ export class FeedbackFunctionClass {
     // First clear any feedback instances previously created for this student.
     clearFeedbackInstancesMethod.call({ user, functionName });
 
-    const student = Users.findDoc(user);
+    const studentProfile = Users.getProfile(user);
     // Need to build the route not use current route since might be the Advisor.
     const basePath = this._getBasePath(user);
     let description = 'Getting to the next Level: ';
-    switch (student.level) {
+    switch (studentProfile.level) {
       case 0:
         // eslint-disable-next-line max-len
         description = `${description} Take and pass [ICS 111](${basePath}explorer/courses/ics111) and [ICS 141](${basePath}explorer/courses/ics141)`;
@@ -402,8 +385,8 @@ export class FeedbackFunctionClass {
     if (FlowRouter.current()) {
       const currentRoute = FlowRouter.current().path;
       if (currentRoute.startsWith('/advisor')) {
-        const student = Users.findDoc(studentID);
-        basePath = `/student/${student.username}/`;
+        const username = Users.getProfile(studentID).username;
+        basePath = `/student/${username}/`;
       } else {
         const index = getPosition(currentRoute, '/', 3);
         basePath = currentRoute.substring(0, index + 1);

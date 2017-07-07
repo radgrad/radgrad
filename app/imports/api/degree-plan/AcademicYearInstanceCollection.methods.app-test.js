@@ -37,7 +37,7 @@ if (Meteor.isClient) {
     it('Update Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const studentID = Users.getUserFromUsername(student)._id;
+          const studentID = Users.getID(student);
           const id = AcademicYearInstances.findDoc({ year, studentID })._id;
           const springYear = 2018;
           const semesterIDs = [];
@@ -49,7 +49,7 @@ if (Meteor.isClient) {
     it('Remove Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const studentID = Users.getUserFromUsername(student)._id;
+          const studentID = Users.getID(student);
           const instance = AcademicYearInstances.findDoc({ year, studentID })._id;
           removeItMethod.call({ collectionName, instance }, done);
         }).catch(done);

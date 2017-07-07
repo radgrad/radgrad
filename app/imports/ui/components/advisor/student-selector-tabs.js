@@ -83,7 +83,7 @@ Template.Student_Selector_Tabs.helpers({
       regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^
         ${range.substring(2, 3)}|^${range.substring(3, 4)}`);
     }
-    return Users.find({ roles: [role], lastName: regex }, { sort: { lastName: 1 } }).fetch();
+    return Users.findProfilesWithRole(role, { lastName: regex }, { sort: { lastName: 1 } });
   },
   url(user) {
     return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
@@ -106,11 +106,7 @@ Template.Student_Selector_Tabs.helpers({
     return 'Select a student';
   },
   userID() {
-    if (Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID)) {
-      const userID = Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID);
-      const user = Users.findDoc(userID);
-      return user.uhID;
-    }
+    // TODO Get rid of UH ID.
     return '1111-1111';
   },
   studentUsername(user) {
@@ -161,12 +157,12 @@ Template.Student_Selector_Tabs.events({
     event.preventDefault();
     const username = event.target.id;
     instance.state.set('username', username);
-    const user = Users.getUserFromUsername(username);
-    if (user) {
+    const profile = Users.getProfile(username);
+    if (profile) {
       instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, username);
-      instance.state.set(sessionKeys.CURRENT_STUDENT_ID, user._id);
+      instance.state.set(sessionKeys.CURRENT_STUDENT_ID, profile._id);
       instance.state.set('notDefined', false);
-      instance.studentID.set(user._id);
+      instance.studentID.set(profile._id);
     } else {
       instance.state.set(displaySuccessMessage, false);
       instance.state.set(displayErrorMessages, true);

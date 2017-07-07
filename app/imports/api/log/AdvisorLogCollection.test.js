@@ -43,10 +43,10 @@ if (Meteor.isServer) {
     it('#getAdvisorDoc, #getStudentDoc, #checkIntegrity', function test() {
       const docID = AdvisorLogs.define({ advisor, student, text });
       const advisorDoc = AdvisorLogs.getAdvisorDoc(docID);
-      const a = Users.findDoc(advisor);
+      const a = Users.getProfile(advisor);
       expect(advisorDoc.username).to.equal(a.username);
       const studentDoc = AdvisorLogs.getStudentDoc(docID);
-      const s = Users.findDoc(student);
+      const s = Users.getProfile(student);
       expect(studentDoc.username).to.equal(s.username);
       AdvisorLogs.removeIt(docID);
     });

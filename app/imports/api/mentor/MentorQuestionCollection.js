@@ -132,7 +132,7 @@ class MentorQuestionCollection extends BaseSlugCollection {
     if (doc.slugID) {
       slug = Slugs.getNameFromID(doc.slugID);
     }
-    const student = Users.findSlugByID(doc.studentID);
+    const student = Users.getProfile(doc.studentID).username;
     const moderated = doc.moderated;
     const visible = doc.visible;
     const moderatorComments = doc.moderatorComments;

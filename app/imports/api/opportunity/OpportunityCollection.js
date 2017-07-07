@@ -244,7 +244,7 @@ class OpportunityCollection extends BaseSlugCollection {
     const name = doc.name;
     const slug = Slugs.getNameFromID(doc.slugID);
     const opportunityType = OpportunityTypes.findSlugByID(doc.opportunityTypeID);
-    const sponsor = Users.findSlugByID(doc.sponsorID);
+    const sponsor = Users.getProfile(doc.sponsorID).username;
     const description = doc.description;
     const ice = doc.ice;
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));

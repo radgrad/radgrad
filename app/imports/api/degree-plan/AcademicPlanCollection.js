@@ -127,15 +127,13 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If docID is not an AcademicPlan, or if this plan is referenced by a User.
    */
   removeIt(instance) {
-    const docID = this.getID(instance);
+    const academicPlanID = this.getID(instance);
     // Check that no student is using this AcademicPlan.
-    Users.find().map(function (user) { // eslint-disable-line array-callback-return
-      if (user.academicPlanID === docID) {
-        throw new Meteor.Error(`AcademicPlan ${instance} is referenced by a User ${user}.`);
-      }
-    });
-    // Now remove the AcademicPlan.
-    super.removeIt(docID);
+    const isReferenced = Users.someProfiles(profile => profile.academicPlanID === academicPlanID);
+    if (isReferenced) {
+      throw new Meteor.Error(`AcademicPlan ${instance} is referenced.`);
+    }
+    super.removeIt(academicPlanID);
   }
 
   /**

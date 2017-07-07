@@ -6,7 +6,6 @@ import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
-
 /** @module api/career/CareerGoalCollection */
 
 /**
@@ -104,15 +103,14 @@ class CareerGoalCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If docID is not a CareerGoal, or if any User lists this as a Career Goal.
    */
   removeIt(instance) {
-    const docID = this.getID(instance);
+    const careerGoalID = this.getID(instance);
     // Check that this is not referenced by any User.
-    Users.find().map(function (user) {  // eslint-disable-line array-callback-return
-      if (Users.hasCareerGoal(user, docID)) {
-        throw new Meteor.Error(`Career Goal ${instance} is referenced by user ${user.username}.`);
-      }
-    });
+    const isReferenced = Users.someProfiles(profile => _.includes(profile.careerGoalIDs, careerGoalID));
+    if (isReferenced) {
+      throw new Meteor.Error(`Career Goal ${instance} is referenced.`);
+    }
     // OK, clear to delete.
-    super.removeIt(docID);
+    super.removeIt(careerGoalID);
   }
 
   /**

@@ -13,6 +13,7 @@ import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
 import { Reviews } from '../review/ReviewCollection';
 import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
+import { StudentProfiles } from '../user/StudentProfileCollection';
 
 /** @module api/public-stats/PublicStatsCollection */
 
@@ -146,7 +147,7 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   upsertLevelTotal(level, key) {
-    const numUsers = Users.find({ level }).count();
+    const numUsers = StudentProfiles.find({ level }).count();
     this._collection.upsert({ key }, { $set: { value: `${numUsers}` } });
   }
 
@@ -175,43 +176,35 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   usersTotal() {
-    const numUsers = Users.find().count();
+    const numUsers = Users.findProfiles().length;
     this._collection.upsert({ key: this.usersTotalKey }, { $set: { value: `${numUsers}` } });
   }
 
   usersStudentsTotal() {
-    const numUsers = Users.find({ roles: [ROLE.STUDENT] }).count();
+    const numUsers = StudentProfiles.find().count();
     this._collection.upsert({ key: this.usersStudentsTotalKey }, { $set: { value: `${numUsers}` } });
   }
 
   usersFacultyTotal() {
-    const numUsers = Users.find({ roles: [ROLE.FACULTY] }).count();
+    const numUsers = FacultyProfiles.find().count();
     this._collection.upsert({ key: this.usersFacultyTotalKey }, { $set: { value: `${numUsers}` } });
   }
 
   usersMentorsTotal() {
-    const numUsers = Users.find({ roles: [ROLE.MENTOR] }).count();
+    const numUsers = MentorProfiles.find().count();
     this._collection.upsert({ key: this.usersMentorsTotalKey }, { $set: { value: `${numUsers}` } });
   }
 
   usersMentorsProfessionsList() {
-    const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
     let professions = [];
-    _.forEach(mentors, (m) => {
-      const profile = MentorProfiles.findDoc({ username: m.username });
-      professions.push(profile.career);
-    });
+    MentorProfiles.find().forEach(profile => professions.push(profile.career));
     professions = _.union(professions);
     this._collection.upsert({ key: this.usersMentorsProfessionsListKey }, { $set: { value: professions.join(', ') } });
   }
 
   usersMentorsLocations() {
-    const mentors = Users.find({ roles: [ROLE.MENTOR] }).fetch();
     let locations = [];
-    _.forEach(mentors, (m) => {
-      const profile = MentorProfiles.findDoc({ username: m.username });
-      locations.push(profile.location);
-    });
+    MentorProfiles.find().forEach(profile => locations.push(profile.location));
     locations = _.union(locations);
     this._collection.upsert({ key: this.usersMentorsLocationsKey }, { $set: { value: locations.join(', ') } });
   }

@@ -249,6 +249,16 @@ class StudentProfileCollection extends BaseProfileCollection {
     return interestIDs;
   }
 
+  /**
+   * Updates user's level.
+   * @param user The user (username or userID).
+   * @param level The new level.
+   */
+  setLevel(user, level) {
+    const userID = this.getID(user);
+    this._collection.update({ userID }, { $set: { level } });
+  }
+
 
   /**
    * Returns an object representing the StudentProfile docID in a format acceptable to define().

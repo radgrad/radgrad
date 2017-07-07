@@ -50,10 +50,10 @@ Template.Academic_Plan_Chooser_Component.helpers({
   },
   years() {
     const studentID = getUserIdFromRoute();
-    const student = Users.findDoc({ _id: studentID });
+    const profile = Users.getProfile(studentID);
     let declaredYear;
-    if (student.declaredSemesterID) {
-      const decSem = Semesters.findDoc(student.declaredSemesterID);
+    if (profile.declaredSemesterID) {
+      const decSem = Semesters.findDoc(profile.declaredSemesterID);
       declaredYear = decSem.year;
     }
     let plans = AcademicPlans.find().fetch();
@@ -88,9 +88,8 @@ Template.Academic_Plan_Chooser_Component.events({
     const plan = AcademicPlans.findDoc({ effectiveSemesterID, name });
     Template.instance().plan.set(plan);
     if (Roles.userIsInRole(getUserIdFromRoute(), ROLE.STUDENT)) {
-      const user = Users.findDoc(getUserIdFromRoute());
       const updateData = {};
-      updateData.id = user._id;
+      updateData.id = getUserIdFromRoute();
       updateData.academicPlan = plan._id;
       updateAcademicPlanMethod.call(plan._id, (error) => {
         if (error) {
