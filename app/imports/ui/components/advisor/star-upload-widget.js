@@ -63,7 +63,7 @@ Template.Star_Upload_Widget.events({
               console.log('Error loading STAR data', error);
             }
           });
-          updateLevelMethod.call({ studentID: profile._id }, (error) => {
+          updateLevelMethod.call({ studentID: profile.userID }, (error) => {
             if (error) {
               console.log('Error updating student level', error);
             }

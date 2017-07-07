@@ -95,10 +95,10 @@ function matchingCourses() {
 function matchingOpportunities() {
   const allOpportunities = Opportunities.find().fetch();
   const matching = [];
-  const user = Users.getProfile(getRouteUserName());
+  const profile = Users.getProfile(getRouteUserName());
   const userInterests = [];
   let opportunityInterests = [];
-  _.forEach(Users.getInterestIDs(user._id), (id) => {
+  _.forEach(Users.getInterestIDs(profile.userID), (id) => {
     userInterests.push(Interests.findDoc(id));
   });
   _.forEach(allOpportunities, (opp) => {

@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { ROLE } from '../../../api/role/Role.js';
 
 Template.Student_MentorSpace_Page.helpers({
 
@@ -10,7 +11,7 @@ Template.Student_MentorSpace_Page.helpers({
   },
 
   mentorsList() {
-    return Users.find({ roles: ['MENTOR'] });
+    return Users.findProfilesWithRole(ROLE.MENTOR);
   },
 
   mentorProfile(mentorID) {

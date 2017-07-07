@@ -116,8 +116,8 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   interests() {
     if (getRouteUserName()) {
-      const user = Users.getProfile(getRouteUserName());
-      return _.map(user.interestIDs, (id) => Interests.findDoc(id));
+      const profile = Users.getProfile(getRouteUserName());
+      return _.map(profile.interestIDs, (id) => Interests.findDoc(id));
     }
     return [];
   },

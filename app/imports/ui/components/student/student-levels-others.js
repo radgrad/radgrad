@@ -35,11 +35,11 @@ Template.Student_Levels_Others.helpers({
   },
   students(userLevel) {
     const students = [];
-    const users = Users.findProfilesWithRole(ROLE.STUDENT);
-    _.forEach(users, (user) => {
-      if (user.level === userLevel) {
-        if (user._id !== getUserIdFromRoute()) {
-          students.push(user);
+    const profiles = Users.findProfilesWithRole(ROLE.STUDENT);
+    _.forEach(profiles, (profile) => {
+      if (profile.level === userLevel) {
+        if (profile.userID !== getUserIdFromRoute()) {
+          students.push(profile);
         }
       }
     });

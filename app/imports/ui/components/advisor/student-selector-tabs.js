@@ -160,9 +160,9 @@ Template.Student_Selector_Tabs.events({
     const profile = Users.getProfile(username);
     if (profile) {
       instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, username);
-      instance.state.set(sessionKeys.CURRENT_STUDENT_ID, profile._id);
+      instance.state.set(sessionKeys.CURRENT_STUDENT_ID, profile.userID);
       instance.state.set('notDefined', false);
-      instance.studentID.set(profile._id);
+      instance.studentID.set(profile.userID);
     } else {
       instance.state.set(displaySuccessMessage, false);
       instance.state.set(displayErrorMessages, true);
