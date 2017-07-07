@@ -11,9 +11,9 @@ Template.User_Career_Goals_Component.helpers({
   careerGoals() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      const user = Users.findDoc(userID);
-      if (user) {
-        return _.map(user.careerGoalIDs, (id) => CareerGoals.findDoc(id));
+      const profile = Users.getProfile(userID);
+      if (profile) {
+        return _.map(profile.careerGoalIDs, (id) => CareerGoals.findDoc(id));
       }
     }
     return [];
@@ -31,8 +31,8 @@ Template.User_Career_Goals_Component.helpers({
   count() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      const user = Users.findDoc(userID);
-      return (user.careerGoalIDs.length);
+      const profile = Users.getProfile(userID);
+      return (profile.careerGoalIDs.length);
     }
     return 0;
   },

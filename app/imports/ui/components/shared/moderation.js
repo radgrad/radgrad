@@ -132,12 +132,12 @@ Template.Moderation.events({
       if (split[1] === 'review') {
         const updateData = { id: itemID, moderated, visible, moderatorComments };
         updateMethod.call({ collectionName: Reviews.getCollectionName(), updateData });
-        const studentName = Users.findDoc(Reviews.getDoc(itemID).studentID).username;
+        const studentName = Users.getProfile(Reviews.getDoc(itemID).studentID).username;
         message = `${message} ${studentName}'s review`;
       } else {
         const updateData = { id: itemID, moderated, visible, moderatorComments };
         updateMethod.call({ collectionName: MentorQuestions.getCollectionName(), updateData });
-        const studentName = Users.findDoc(MentorQuestions.getDoc(itemID).studentID).username;
+        const studentName = Users.getProfile(MentorQuestions.getDoc(itemID).studentID).username;
         message = `${message} ${studentName}'s mentor question`;
       }
       message = `${message} with comments: '${moderatorComments}'.`;

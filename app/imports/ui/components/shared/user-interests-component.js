@@ -11,17 +11,17 @@ Template.User_Interests_Component.helpers({
   count() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      const user = Users.findDoc(userID);
-      return (user.interestIDs.length);
+      const profile = Users.getProfile(userID);
+      return (profile.interestIDs.length);
     }
     return 0;
   },
   interests() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const userID = Template.instance().userID.get();
-      const user = Users.findDoc(userID);
-      if (user) {
-        return _.map(user.interestIDs, (id) => Interests.findDoc(id));
+      const profile = Users.getProfile(userID);
+      if (profile) {
+        return _.map(profile.interestIDs, (id) => Interests.findDoc(id));
       }
     }
     return [];

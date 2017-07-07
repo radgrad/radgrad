@@ -16,15 +16,15 @@ import { getRouteUserName } from '../shared/route-user-name';
 
 function getEventsHelper(iceType, type, earned, semester) {
   if (getUserIdFromRoute()) {
-    const user = Users.findDoc(getUserIdFromRoute());
+    const profile = Users.findProfile(getUserIdFromRoute());
     let allInstances = [];
     const iceInstances = [];
     if (type === 'course') {
-      const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: user._id,
+      const courseInstances = CourseInstances.find({ semesterID: semester._id, studentID: profile.userID,
         verified: earned }).fetch();
       courseInstances.forEach(courseInstance => allInstances.push(courseInstance));
     } else {
-      allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: user._id,
+      allInstances = OpportunityInstances.find({ semesterID: semester._id, studentID: profile.userID,
         verified: earned }).fetch();
     }
     allInstances.forEach((instance) => {
@@ -68,10 +68,10 @@ const availableCourses = () => {
 function matchingCourses() {
   const allCourses = availableCourses();
   const matching = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
+  const profile = Users.getProfile(getRouteUserName());
   const userInterests = [];
   let courseInterests = [];
-  _.forEach(Users.getInterestIDs(user._id), (id) => {
+  _.forEach(Users.getInterestIDs(profile.userID), (id) => {
     userInterests.push(Interests.findDoc(id));
   });
   _.forEach(allCourses, (course) => {
@@ -95,7 +95,7 @@ function matchingCourses() {
 function matchingOpportunities() {
   const allOpportunities = Opportunities.find().fetch();
   const matching = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
+  const user = Users.getProfile(getRouteUserName());
   const userInterests = [];
   let opportunityInterests = [];
   _.forEach(Users.getInterestIDs(user._id), (id) => {
@@ -142,9 +142,9 @@ Template.Student_Ice_Column.helpers({
   },
   earnedICE() {
     if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
-      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
+      const profile = Users.getProfile(getUserIdFromRoute());
+      const courseInstances = CourseInstances.find({ studentID: profile.userID, verified: true }).fetch();
+      const oppInstances = OpportunityInstances.find({ studentID: profile.userID, verified: true }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
       return getEarnedICE(earnedInstances);
     }
@@ -196,7 +196,7 @@ Template.Student_Ice_Column.helpers({
     return ret;
   },
   hasNoInterests() {
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const user = Users.getProfile(getRouteUserName());
     return user.interestIDs === undefined;
   },
   innovationPoints(ice) {
@@ -223,9 +223,9 @@ Template.Student_Ice_Column.helpers({
   },
   projectedICE() {
     if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();
-      const oppInstances = OpportunityInstances.find({ studentID: user._id }).fetch();
+      const profile = Users.getProfile(getUserIdFromRoute());
+      const courseInstances = CourseInstances.find({ studentID: profile.userID }).fetch();
+      const oppInstances = OpportunityInstances.find({ studentID: profile.userID }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
       const ice = getProjectedICE(earnedInstances);
       return ice;

@@ -283,6 +283,42 @@ class UserCollection {
   }
 
   /**
+   * Returns the user's interests as IDs. It is a union of interestIDs and careerGoal interestIDs.
+   * @param user The username or userID.
+   * @returns {Array} An array of interestIDs.
+   */
+  getInterestIDs(user) {
+    const profile = this.getProfile(user);
+    let interestIDs = profile.interestIDs;
+    _.forEach(profile.careerGoalIDs, (careerGoalID) => {
+      const goal = CareerGoals.findDoc(careerGoalID);
+      interestIDs = _.union(interestIDs, goal.interestIDs);
+    });
+    return interestIDs;
+  }
+
+  /**
+   * Returns the user's interest IDs in an Array with two sub-arrays. The first sub-array is the interest IDs that the
+   * User selected. The second sub-array is the interestIDs from the user's career goals that are not already present
+   * in the first subarray.
+   * @param user The username or userID.
+   * @returns { Array } An array with two subarrays, each containing interestIDs.
+   */
+  getInterestIDsByType(user) {
+    const profile = this.getProfile(user);
+    const interestIDs = [];
+    interestIDs.push(profile.interestIDs);
+    let careerInterestIDs = [];
+    _.forEach(profile.careerGoalIDs, (goalID) => {
+      const goal = CareerGoals.findDoc(goalID);
+      careerInterestIDs = _.union(careerInterestIDs, goal.interestIDs);
+    });
+    careerInterestIDs = _.difference(careerInterestIDs, profile.interestIDs);
+    interestIDs.push(careerInterestIDs);
+    return interestIDs;
+  }
+
+  /**
    * Publish the username field for all users.
    */
   publish() {

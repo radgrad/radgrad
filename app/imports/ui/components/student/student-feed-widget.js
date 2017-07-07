@@ -20,7 +20,7 @@ Template.Student_Feed_Widget.helpers({
     return Slugs.findDoc(Opportunities.findDoc(feed.opportunityID).slugID).name;
   },
   userSlug(feed) {
-    return Users.findDoc(feed.userIDs[0]).username;
+    return Users.getProfile(feed.userIDs[0]).username;
   },
   userRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
@@ -64,7 +64,7 @@ Template.Student_Feed_Widget.helpers({
   students(feed) {
     const students = [];
     _.forEach(feed.userIDs, function (userID) {
-      students.push(Users.findDoc(userID));
+      students.push(Users.getProfile(userID));
     });
     return students;
   },

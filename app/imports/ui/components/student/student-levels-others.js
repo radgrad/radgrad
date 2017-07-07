@@ -14,18 +14,18 @@ Template.Student_Levels_Others.helpers({
   },
   studentLevelName() {
     if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      if (user.level) {
-        return `LEVEL ${user.level}`;
+      const profile = Users.getProfile(getUserIdFromRoute());
+      if (profile.level) {
+        return `LEVEL ${profile.level}`;
       }
     }
     return 'LEVEL 1';
   },
   studentLevelNumber() {
     if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      if (user.level) {
-        return user.level;
+      const profile = Users.getProfile(getUserIdFromRoute());
+      if (profile.level) {
+        return profile.level;
       }
     }
     return 1;
@@ -35,7 +35,7 @@ Template.Student_Levels_Others.helpers({
   },
   students(userLevel) {
     const students = [];
-    const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
+    const users = Users.findProfilesWithRole(ROLE.STUDENT);
     _.forEach(users, (user) => {
       if (user.level === userLevel) {
         if (user._id !== getUserIdFromRoute()) {

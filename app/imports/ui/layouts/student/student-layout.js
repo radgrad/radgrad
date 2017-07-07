@@ -4,8 +4,7 @@ import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
 
 function getStudentDoc() {
-  const username = getRouteUserName();
-  return Users.getUserFromUsername(username);
+  return Users.getProfile(getRouteUserName());
 }
 
 Template.Student_Layout.helpers({
@@ -22,13 +21,13 @@ Template.Student_Layout.helpers({
   },
   earnedICE() {
     if (getRouteUserName()) {
-      return Users.getEarnedICE(getStudentDoc()._id);
+      return Users.getEarnedICE(getStudentDoc().userID);
     }
     return null;
   },
   projectedICE() {
     if (getRouteUserName()) {
-      return Users.getProjectedICE(getStudentDoc()._id);
+      return Users.getProjectedICE(getStudentDoc().userID);
     }
     return null;
   },

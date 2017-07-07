@@ -13,8 +13,8 @@ Template.Student_About_Me_Widget.helpers({
   careerGoals() {
     const ret = [];
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      _.forEach(user.careerGoalIDs, (id) => {
+      const profile = Users.getProfile(getRouteUserName());
+      _.forEach(profile.careerGoalIDs, (id) => {
         ret.push(CareerGoals.findDoc(id));
       });
     }
@@ -29,9 +29,9 @@ Template.Student_About_Me_Widget.helpers({
   desiredDegree() {
     let ret = '';
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      if (user.academicPlanID) {
-        const plan = AcademicPlans.findDoc(user.academicPlanID);
+      const profile = Users.getProfile(getRouteUserName());
+      if (profile.academicPlanID) {
+        const plan = AcademicPlans.findDoc(profile.academicPlanID);
         ret = DesiredDegrees.findDoc(plan.degreeID).shortName;
       }
     }
@@ -39,8 +39,8 @@ Template.Student_About_Me_Widget.helpers({
   },
   email() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return Users.getEmail(user._id);
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.username;
     }
     return '';
   },
@@ -80,8 +80,8 @@ Template.Student_About_Me_Widget.helpers({
   interests() {
     const ret = [];
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      _.forEach(user.interestIDs, (id) => {
+      const profile = Users.getProfile(getRouteUserName());
+      _.forEach(profile.interestIDs, (id) => {
         ret.push(Interests.findDoc(id));
       });
     }
@@ -92,15 +92,14 @@ Template.Student_About_Me_Widget.helpers({
   },
   name() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return `${user.firstName} ${user.lastName}`;
+      return Users.getFullName(getRouteUserName());
     }
     return '';
   },
   picture() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return user.picture;
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.picture;
     }
     return '';
   },
@@ -109,15 +108,15 @@ Template.Student_About_Me_Widget.helpers({
   },
   studentPicture() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return user.picture;
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.picture;
     }
     return '';
   },
   website() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return user.website;
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.website;
     }
     return '';
   },
@@ -126,14 +125,16 @@ Template.Student_About_Me_Widget.helpers({
 Template.Student_About_Me_Widget.events({
   'submit .website': function submitWebsite(event) {
     event.preventDefault();
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const user = Users.getProfile(getRouteUserName());
     const choice = event.target.website.value;
+    // TODO Replace with method.
     Users.setWebsite(user._id, choice);
   },
   'submit .picture': function submitPicture(event) {
     event.preventDefault();
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const user = Users.getProfile(getRouteUserName());
     const choice = event.target.picture.value;
+    // TODO Replace with method.
     Users.setPicture(user._id, choice);
   },
   'click .picture': function clickPicture(event) {

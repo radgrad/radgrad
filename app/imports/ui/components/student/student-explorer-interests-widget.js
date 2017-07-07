@@ -26,7 +26,7 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return RouteNames.mentorExplorerCoursesPageRouteName;
   },
   fullName(user) {
-    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+    return Users.getFullName(user);
   },
   getTableTitle(tableIndex) {
     switch (tableIndex) {
@@ -65,10 +65,7 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return string.toUpperCase();
   },
   userPicture(user) {
-    if (Users.findDoc(user).picture) {
-      return Users.findDoc(user).picture;
-    }
-    return '/images/default-profile-picture.png';
+    return Users.getProfile(user).picture || '/images/default-profile-picture.png';
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
@@ -81,8 +78,8 @@ Template.Student_Explorer_Interests_Widget.helpers({
   },
   userStatus(interest) {
     let ret = false;
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(user.interestIDs, interest._id)) {
+    const profile = Users.getProfile(getRouteUserName());
+    if (_.includes(profile.interestIDs, interest._id)) {
       ret = true;
     }
     return ret;
@@ -95,12 +92,13 @@ Template.Student_Explorer_Interests_Widget.helpers({
 Template.Student_Explorer_Interests_Widget.events({
   'click .addItem': function clickAddItem(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
-    const studentItems = student.interestIDs;
+    const studentItems = profile.interestIDs;
     try {
       studentItems.push(id);
-      Users.setInterestIds(student._id, studentItems);
+      // TODO Change to method.
+      Users.setInterestIds(profile.userID, studentItems);
       const interest = Interests.findDoc(id).name;
       const message = `${getRouteUserName()} added interest ${interest}`;
       appLog.info(message);
@@ -110,14 +108,15 @@ Template.Student_Explorer_Interests_Widget.events({
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     const interest = Interests.findDoc(id).name;
     const message = `${getRouteUserName()} removed interest ${interest}`;
-    let studentItems = student.interestIDs;
+    let studentItems = profile.interestIDs;
     try {
       studentItems = _.without(studentItems, id);
-      Users.setInterestIds(student._id, studentItems);
+      // TODO Change to method.
+      Users.setInterestIds(profile.userID, studentItems);
       appLog.info(message);
     } catch (e) {
       // don't do anything.
