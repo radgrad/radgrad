@@ -186,15 +186,11 @@ Template.Mentor_About_Me_Widget.events({
   submit: function submitDoneEdit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    const website = updatedData.website;
-    delete updatedData.website;
     instance.context.reset();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
     const mentorProfile = MentorProfiles.find({ mentorID: getUserIdFromRoute() }).fetch();
     if (instance.context.isValid()) {
-      // TODO Convert to method call.
-      MentorProfiles.update(getUserIdFromRoute(), { website });
       const collectionName = MentorProfiles.getCollectionName();
       updatedData.id = mentorProfile[0]._id;
       updateMethod.call({ collectionName, updateData: updatedData }, (error) => {
