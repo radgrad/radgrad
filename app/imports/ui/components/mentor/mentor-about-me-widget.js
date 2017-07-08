@@ -36,7 +36,7 @@ Template.Mentor_About_Me_Widget.onCreated(function onCreated() {
 Template.Mentor_About_Me_Widget.helpers({
   career() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.career;
     }
     return '';
@@ -53,7 +53,7 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   company() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.company;
     }
     return '';
@@ -126,21 +126,21 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   linkedin() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.linkedin;
     }
     return '';
   },
   location() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.location;
     }
     return '';
   },
   motivation() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.motivation;
     }
     return '';
@@ -189,10 +189,10 @@ Template.Mentor_About_Me_Widget.events({
     instance.context.reset();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
-    const mentorProfile = MentorProfiles.find({ mentorID: getUserIdFromRoute() }).fetch();
+    const mentorProfile = MentorProfiles.findOne({ userID: getUserIdFromRoute() });
     if (instance.context.isValid()) {
       const collectionName = MentorProfiles.getCollectionName();
-      updatedData.id = mentorProfile[0]._id;
+      updatedData.id = mentorProfile._id;
       updateMethod.call({ collectionName, updateData: updatedData }, (error) => {
         if (error) {
           console.log('Error updating MentorProfile', error);

@@ -89,6 +89,7 @@ class UserCollection {
   getID(user) {
     const userDoc = (Meteor.users.findOne({ _id: user })) || (Meteor.users.findOne({ username: user }));
     if (!userDoc) {
+      console.log('Error: user is not defined: ', user);
       throw new Meteor.Error(`Error: user ${user} is not defined.`);
     }
     return userDoc._id;
@@ -186,6 +187,10 @@ class UserCollection {
    * @throws { Meteor.Error } If the document was not found.
    */
   getProfile(user) {
+    // First, let's check to see if user is actually a profile (or looks like one). If so, just return it.
+    if (_.isObject(user) && user.firstName && user.lastName && user.role) {
+      return user;
+    }
     const profile = this.hasProfile(user);
     if (!profile) {
       console.log(`No profile found for user ${user}`);

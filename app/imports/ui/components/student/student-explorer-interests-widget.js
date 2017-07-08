@@ -85,7 +85,7 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return ret;
   },
   userUsername(user) {
-    return Users.findDoc(user).username;
+    return Users.getProfile(user).username;
   },
 });
 
