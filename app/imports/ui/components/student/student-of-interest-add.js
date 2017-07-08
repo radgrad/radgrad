@@ -7,24 +7,8 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import { opportunitySemesters } from '../../utilities/template-helpers';
 import { appLog } from '../../../api/log/AppLogCollection';
-
-function currentSemester() {
-  const currentSemesterID = Semesters.getCurrentSemester();
-  const currentSem = Semesters.findDoc(currentSemesterID);
-  return currentSem;
-}
-
-function opportunitySemesters(opp) {
-  const semesters = opp.semesterIDs;
-  const semesterNames = [];
-  _.forEach(semesters, (sem) => {
-    if (Semesters.findDoc(sem).semesterNumber >= currentSemester().semesterNumber) {
-      semesterNames.push(Semesters.toString(sem));
-    }
-  });
-  return semesterNames;
-}
 
 Template.Student_Of_Interest_Add.helpers({
   itemName(item) {
@@ -44,7 +28,7 @@ Template.Student_Of_Interest_Add.helpers({
   },
   nextYears(amount) {
     const nextYears = [];
-    const currentSem = currentSemester();
+    const currentSem = Semesters.getCurrentSemesterDoc();
     let currentYear = currentSem.year;
     for (let i = 0; i < amount; i += 1) {
       nextYears.push(currentYear);
@@ -53,7 +37,7 @@ Template.Student_Of_Interest_Add.helpers({
     return nextYears;
   },
   replaceSemString(array) {
-    const currentSem = currentSemester();
+    const currentSem = Semesters.getCurrentSemesterDoc();
     const currentYear = currentSem.year;
     let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
       return semesterYear.split(' ')[1] >= currentYear;

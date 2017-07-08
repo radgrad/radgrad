@@ -6,11 +6,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
-
-function dateDiffInDays(a, b) {
-  const MS_PER_DAY = 1000 * 60 * 60 * 24;
-  return Math.floor((a - b) / MS_PER_DAY);
-}
+import { dateDiffInDays } from '../../utilities/template-helpers';
 
 Template.Student_Feed_Widget.helpers({
   courseSlug(feed) {

@@ -11,7 +11,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs, slugify } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
-import { getAllElementsWithAttribute } from '../../../ui/utilities/DomUtilities';
+import { getAllElementsWithAttribute, removeElement } from '../../../ui/utilities/DomUtilities';
 
 /* global document */
 // /** @module ui/components/advisor/Academic_Plan_Builder_Widget */
@@ -21,14 +21,6 @@ const addSchema = new SimpleSchema({
   name: { type: String },
   year: { type: Number },
 });
-
-function removeElement(id) {
-  const element = document.getElementById(id);
-  if (element) {
-    const parent = element.parentNode;
-    parent.removeChild(element);
-  }
-}
 
 Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCreated() {
   FormUtils.setupFormWidget(this, addSchema);

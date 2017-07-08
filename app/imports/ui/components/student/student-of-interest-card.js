@@ -1,12 +1,17 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import {
+  opportunitySemesters,
+  coursesRouteName,
+  opportunitiesRouteName,
+  usersRouteName,
+} from '../../utilities/template-helpers';
 
 function interestedStudentsHelper(item, type) {
   const interested = [];
@@ -28,22 +33,8 @@ function interestedStudentsHelper(item, type) {
   return interested;
 }
 
-function currentSemester() {
-  const currentSemesterID = Semesters.getCurrentSemester();
-  const currentSem = Semesters.findDoc(currentSemesterID);
-  return currentSem;
-}
-
-function opportunitySemesters(opp) {
-  const semesterIDs = opp.semesterIDs;
-  const upcomingSemesters = _.filter(semesterIDs, semesterID => Semesters.isUpcomingSemester(semesterID));
-  return _.map(upcomingSemesters, semesterID => Semesters.toString(semesterID));
-}
-
 Template.Student_Of_Interest_Card.helpers({
-  coursesRouteName() {
-    return RouteNames.studentExplorerCoursesPageRouteName;
-  },
+  coursesRouteName,
   hidden() {
     let ret = '';
     const student = Users.findDoc({ username: getRouteUserName() });
@@ -87,7 +78,7 @@ Template.Student_Of_Interest_Card.helpers({
   },
   nextYears(amount) {
     const nextYears = [];
-    const currentSem = currentSemester();
+    const currentSem = Semesters.getCurrentSemesterDoc();
     let currentYear = currentSem.year;
     for (let i = 0; i < amount; i += 1) {
       nextYears.push(currentYear);
@@ -98,12 +89,10 @@ Template.Student_Of_Interest_Card.helpers({
   numberStudents(course) {
     return interestedStudentsHelper(course, this.type).length;
   },
-  opportunitiesRouteName() {
-    return RouteNames.studentExplorerOpportunitiesPageRouteName;
-  },
+  opportunitiesRouteName,
   replaceSemString(array) {
     console.log('array', array);
-    const currentSem = currentSemester();
+    const currentSem = Semesters.getCurrentSemesterDoc();
     const currentYear = currentSem.year;
     let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
       return semesterYear.split(' ')[1] >= currentYear;
@@ -125,9 +114,7 @@ Template.Student_Of_Interest_Card.helpers({
   userSlug(studentID) {
     return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
   },
-  usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
-  },
+  usersRouteName,
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
     return semesters;
