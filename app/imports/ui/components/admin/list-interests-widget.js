@@ -15,7 +15,8 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 
 function numReferences(interest) {
   let references = 0;
-  [CareerGoals, Courses, Opportunities, Teasers, Users].forEach(function (entity) {
+  // TODO Add profiles below? Move this into Interests class?
+  [CareerGoals, Courses, Opportunities, Teasers].forEach(function (entity) {
     entity.find().forEach(function (doc) {
       if (_.includes(doc.interestIDs, interest._id)) {
         references += 1;

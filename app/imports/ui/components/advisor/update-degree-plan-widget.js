@@ -142,7 +142,7 @@ Template.Update_Degree_Plan_Widget.helpers({
   selectedRole() {
     if (Template.currentData().studentID.get()) {
       const user = Users.getProfile(Template.currentData().studentID.get());
-      return user.roles[0];
+      return user.role;
     }
     return '';
   },

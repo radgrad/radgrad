@@ -117,7 +117,7 @@ function startupCheckIntegrity() {
 }
 
 function generateAdminCredential() {
-  if (Meteor.settings.admin.development || Meteor.isTest || Meteor.isAppTest) {
+  if (Meteor.settings.public.admin.development || Meteor.isTest || Meteor.isAppTest) {
     return 'foo';
   }
   // adapted from: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
@@ -133,16 +133,17 @@ function generateAdminCredential() {
 }
 
 function defineAdminUser() {
-  const adminUsername = Meteor.settings && Meteor.settings.admin && Meteor.settings.admin.username;
+  const adminUsername = Meteor.settings && Meteor.settings.public.admin && Meteor.settings.public.admin.username;
   if (!adminUsername) {
     console.log('\n\nNO ADMIN USERNAME SPECIFIED IN SETTINGS FILE! SHUTDOWN AND FIX!!\n\n');
     return;
   }
-  const credential = generateAdminCredential();
-  const userID = Accounts.createUser({ username: adminUsername, email: adminUsername, password: credential });
-  Roles.addUsersToRoles(userID, ROLE.ADMIN);
-  console.log(`Defined admin user: ${adminUsername}`);
-  console.log(`Credential: "${credential}"`);
+  if (!Meteor.users.findOne({ username: adminUsername })) {
+    const credential = generateAdminCredential();
+    const userID = Accounts.createUser({ username: adminUsername, email: adminUsername, password: credential });
+    Roles.addUsersToRoles(userID, ROLE.ADMIN);
+    console.log(`${adminUsername}/${credential}`);
+  }
 }
 
 function defineTestAdminUser() {

@@ -50,7 +50,7 @@ Template.Explore_User_Widget.helpers({
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
       const user = Users.getProfile(id);
-      return user.roles[0] === ROLE.MENTOR;
+      return user.role === ROLE.MENTOR;
     }
     return false;
   },
@@ -58,7 +58,7 @@ Template.Explore_User_Widget.helpers({
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
       const user = Users.getProfile(id);
-      return user.roles[0] === ROLE.STUDENT;
+      return user.role === ROLE.STUDENT;
     }
     return false;
   },
@@ -93,7 +93,7 @@ Template.Explore_User_Widget.helpers({
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
       const user = Users.getProfile(id);
-      return user.roles[0];
+      return user.role;
     }
     return '';
   },

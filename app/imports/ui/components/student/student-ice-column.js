@@ -16,7 +16,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 
 function getEventsHelper(iceType, type, earned, semester) {
   if (getUserIdFromRoute()) {
-    const profile = Users.findProfile(getUserIdFromRoute());
+    const profile = Users.getProfile(getUserIdFromRoute());
     let allInstances = [];
     const iceInstances = [];
     if (type === 'course') {

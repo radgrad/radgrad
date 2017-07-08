@@ -77,7 +77,7 @@ Template.Update_User_Widget.helpers({
   },
   selectedRole() {
     const profile = Users.getProfile(Template.currentData().updateID.get());
-    return profile.roles[0];
+    return profile.role;
   },
 });
 

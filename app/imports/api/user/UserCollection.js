@@ -39,6 +39,10 @@ import { VerificationRequests } from '../verification/VerificationRequestCollect
  */
 class UserCollection {
 
+  constructor() {
+    this._collectionName = 'UserCollection';
+  }
+
   /**
    * Define a new user, which means creating an entry in Meteor.Accounts.
    * This is called in the various Profile define() methods.
@@ -146,8 +150,33 @@ class UserCollection {
    */
   hasProfile(user) {
     const userID = this.getID(user);
+    const adminID = this._getAdminID();
+    if (userID === adminID) {
+      return this._getAdminProfile();
+    }
     return StudentProfiles.hasProfile(userID) || FacultyProfiles.hasProfile(userID)
         || MentorProfiles.hasProfile(userID) || AdvisorProfiles.hasProfile(userID);
+  }
+
+  /**
+   * Returns the admin userID.
+   * @private
+   */
+  _getAdminID() {
+    const adminUsername = Meteor.settings.public.admin.username;
+    return Meteor.users.findOne({ username: adminUsername })._id;
+  }
+
+  /**
+   * There is only one admin and there is no collection for them. (This might be a mistake).
+   * Anyway, this function returns an object that serves as their profile.
+   * @returns The admin profile.
+   * @private
+   */
+  _getAdminProfile() {
+    const adminUsername = Meteor.settings.public.admin.username;
+    const adminID = Meteor.users.findOne({ username: adminUsername })._id;
+    return { username: adminUsername, firstName: 'RadGrad', lastName: 'Admin', role: ROLE.ADMIN, userID: adminID };
   }
 
   /**
@@ -159,6 +188,7 @@ class UserCollection {
   getProfile(user) {
     const profile = this.hasProfile(user);
     if (!profile) {
+      console.log(`No profile found for user ${user}`);
       throw new Meteor.Error(`No profile found for user ${user}`);
     }
     return profile;
@@ -240,6 +270,10 @@ class UserCollection {
     if (role === ROLE.STUDENT) {
       return StudentProfiles.find(theSelector, options).fetch();
     }
+    if (role === ROLE.ALUMNI) {
+      theSelector.isAlumni = true;
+      return StudentProfiles.find(theSelector, options).fetch();
+    }
     if (role === ROLE.ADVISOR) {
       return AdvisorProfiles.find(theSelector, options).fetch();
     }
@@ -249,6 +283,10 @@ class UserCollection {
     if (role === ROLE.MENTOR) {
       return MentorProfiles.find(theSelector, options).fetch();
     }
+    if (role === ROLE.ADMIN) {
+      return this._getAdminID();
+    }
+    console.log(`Unknown role: ${role}`);
     throw new Meteor.Error(`Unknown role: ${role}`);
   }
 
@@ -335,10 +373,15 @@ class UserCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      Meteor.publish('UserCollection', function publish() {
-        return Meteor.users.find({}, { fields: { username: 1 } });
-      });
+      Meteor.publish(this._collectionName, () => Meteor.users.find({}, { fields: { username: 1, roles: 1 } }));
     }
+  }
+  /**
+   * Return the publication name.
+   * @returns { String } The publication name, as a string.
+   */
+  getPublicationName() {
+    return this._collectionName;
   }
 }
 
