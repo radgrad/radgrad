@@ -32,7 +32,7 @@ class AdvisorLogCollection extends BaseCollection {
    * @example
    * AdvisorLogs.define({
    *                      advisor: 'glau',
-   *                      student: 'abi',
+   *                      student: 'abi@hawaii.edu',
    *                      text: 'Talked about changing academic plan to B.S. CS from B.A. ICS.',
    *                      });
    * @param advisor The advisor's username.

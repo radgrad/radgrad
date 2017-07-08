@@ -37,7 +37,7 @@ class BaseProfileCollection extends BaseSlugCollection {
    */
   getProfile(user) {
     const userID = Users.getID(user);
-    const doc = this.findOne({ userID });
+    const doc = this._collection.findOne({ userID });
     if (!doc) {
       throw new Meteor.Error(`No profile found for user ${user}`);
     }
@@ -52,7 +52,7 @@ class BaseProfileCollection extends BaseSlugCollection {
    */
   hasProfile(user) {
     const userID = Users.getID(user);
-    return this.findOne({ userID });
+    return this._collection.findOne({ userID });
   }
 
   /**
@@ -61,7 +61,7 @@ class BaseProfileCollection extends BaseSlugCollection {
    * @returns The associated userID.
    */
   getUserID(profileID) {
-    return this.findOne(profileID).userID;
+    return this._collection.findOne(profileID).userID;
   }
 
   /**
@@ -91,7 +91,22 @@ class BaseProfileCollection extends BaseSlugCollection {
   }
 
   /**
+   * Removes this profile, given its profile ID.
+   * Also removes this user from Meteor Accounts.
+   * @param profileID The ID for this profile object.
+   */
+  removeIt(profileID) {
+    const profile = this._collection.findOne({ _id: profileID });
+    const username = profile.username;
+    Meteor.users.remove({ _id: profile.userID });
+    Slugs._collection.remove({ name: username });
+    super.removeIt(profileID);
+  }
+
+  /**
    * Internal method for use by subclasses.
+   * Destructively modifies updateData with the values of the passed fields.
+   * Call this function for side-effect only.
    */
   _updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals }) {
     if (firstName) {

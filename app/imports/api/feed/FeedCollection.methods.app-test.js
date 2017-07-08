@@ -23,7 +23,7 @@ if (Meteor.isClient) {
     it('Define Method (new-user)', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const definitionData = { user: 'abi', feedType: 'new-user' };
+          const definitionData = { user: 'abi@hawaii.edu', feedType: 'new-user' };
           docID = defineMethod.call({ collectionName, definitionData }, done);
         }).catch(done);
       });

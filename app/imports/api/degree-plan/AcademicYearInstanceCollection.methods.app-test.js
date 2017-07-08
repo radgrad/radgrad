@@ -11,7 +11,7 @@ if (Meteor.isClient) {
   describe('AcademicYearInstances Meteor Methods  TestBatch1', function test() {
     const collectionName = AcademicYearInstances.getCollectionName();
     const year = 2017;
-    const student = 'abi';
+    const student = 'abi@hawaii.edu';
     const definitionData = {
       student,
       year,

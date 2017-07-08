@@ -33,6 +33,7 @@ Template.Student_Levels_Others.helpers({
   studentPicture(student) {
     return student.picture;
   },
+
   students(userLevel) {
     const students = [];
     const profiles = Users.findProfilesWithRole(ROLE.STUDENT);

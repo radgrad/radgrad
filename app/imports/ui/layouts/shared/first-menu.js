@@ -37,7 +37,7 @@ Template.First_Menu.helpers({
     return '/images/default-profile-picture.png';
   },
   useCAS() {
-    // TODO Sometimes we should use CAS, right? 
+    // TODO Sometimes we should use CAS, right?
     return false;
   },
 });

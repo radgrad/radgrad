@@ -3,7 +3,6 @@ import SimpleSchema from 'simpl-schema';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { AcademicPlans } from './AcademicPlanCollection';
 import { Slugs } from '../slug/SlugCollection';
-import { Users } from '../user/UserCollection';
 
 /** @module api/degree-plan/DesiredDegreeCollection */
 

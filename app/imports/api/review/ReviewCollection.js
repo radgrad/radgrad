@@ -41,7 +41,7 @@ class ReviewCollection extends BaseSlugCollection {
    * Defines a new Review.
    * @example
    * Review.define({ slug: 'review-course-ics111-abi',
-   *                 student: 'abi',
+   *                 student: 'abi@hawaii.edu',
    *                 reviewType: 'course',
    *                 reviewee: 'ics_111',
    *                 semester: 'Fall-2016',

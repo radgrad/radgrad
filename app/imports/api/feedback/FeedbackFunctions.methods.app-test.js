@@ -22,11 +22,11 @@ if (Meteor.isClient) {
     });
 
     it.skip('checkPrerequisites', function (done) {
-      withLoggedInUser({ username: 'abi' }).then(() => {
+      withLoggedInUser({ username: 'abi@hawaii.edu' }).then(() => {
         withRadGradSubscriptions().then(() => {
           FlowRouter.go('/student/abi/degree-planner');
-          FlowRouter.setParams({ username: 'abi' });
-          FeedbackFunctions.checkPrerequisites('abi');
+          FlowRouter.setParams({ username: 'abi@hawaii.edu' });
+          FeedbackFunctions.checkPrerequisites('abi@hawaii.edu');
         }).catch(done);
       });
     });

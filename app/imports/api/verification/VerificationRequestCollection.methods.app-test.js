@@ -21,7 +21,7 @@ if (Meteor.isClient) {
     it('ProcessVerificationEvent Method', function (done) {
       withLoggedInUser().then(() => {
         withRadGradSubscriptions().then(() => {
-          const student = 'abi';
+          const student = 'abi@hawaii.edu';
           const opportunity = 'acm-icpc';
           const semester = Semesters.getSemester(new Date('2016-11-18T00:00:00.000Z'));
           processVerificationEventMethod.call({ student, opportunity, semester }, function () {

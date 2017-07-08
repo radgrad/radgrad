@@ -10,7 +10,7 @@ if (Meteor.isClient) {
   describe('OpportunityInstanceCollection Meteor Methods TestBatch2', function test() {
     const collectionName = OpportunityInstances.getCollectionName();
     const semester = 'Spring-2017';
-    const student = 'abi';
+    const student = 'abi@hawaii.edu';
     const opportunity = 'acm-manoa';
     const verified = true;
     const definitionData = {

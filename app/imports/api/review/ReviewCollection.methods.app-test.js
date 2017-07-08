@@ -11,7 +11,7 @@ if (Meteor.isClient) {
     const collectionName = Reviews.getCollectionName();
     // Note that we allow the slug to be defined by default.
     const definitionData = {
-      student: 'abi',
+      student: 'abi@hawaii.edu',
       reviewType: 'course',
       reviewee: 'ics_111',
       semester: 'Fall-2016',

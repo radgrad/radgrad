@@ -14,7 +14,7 @@ if (Meteor.isClient) {
     const questionDefinition = {
       question: 'question',
       slug: 'test-question',
-      student: 'abi',
+      student: 'abi@hawaii.edu',
     };
     const answerCollectionName = MentorAnswers.getCollectionName();
     const answerDefinition = {
@@ -53,7 +53,7 @@ if (Meteor.isClient) {
         withRadGradSubscriptions().then(() => {
           const id = MentorQuestions.findIdBySlug(questionDefinition.slug);
           const question = 'updated CareerGoal name';
-          const student = 'abi';
+          const student = 'abi@hawaii.edu';
           const moderated = true;
           const visible = false;
           const moderatorComments = 'comments';

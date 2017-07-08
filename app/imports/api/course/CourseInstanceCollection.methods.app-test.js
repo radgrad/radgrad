@@ -10,7 +10,7 @@ if (Meteor.isClient) {
   describe('CourseInstanceCollection Meteor Methods TestBatch1', function test() {
     const collectionName = CourseInstances.getCollectionName();
     const semester = 'Spring-2017';
-    const student = 'abi';
+    const student = 'abi@hawaii.edu';
     const course = 'ics_111';
     const definitionData = {
       semester,

@@ -20,12 +20,12 @@ if (Meteor.isServer) {
     });
 
     it('#getStudentsCurrentSemesterNumber.', function test() {
-      const abi = Users.getProfile('abi');
-      expect(utilities.getStudentsCurrentSemesterNumber(abi._id)).to.equal(9);
+      const profile = Users.getProfile('abi@hawaii.edu');
+      expect(utilities.getStudentsCurrentSemesterNumber(profile.userID)).to.equal(9);
     });
     it('#getStudentSemesters.', function test() {
-      const abi = Users.getProfile('abi');
-      const semesters = utilities.getStudentSemesters(abi._id);
+      const profile = Users.getProfile('abi@hawaii.edu');
+      const semesters = utilities.getStudentSemesters(profile.userID);
       expect(semesters.length).to.equal(12);
     });
   });

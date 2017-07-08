@@ -8,7 +8,6 @@ import { CareerGoals } from '../career/CareerGoalCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
 import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
-import { Interests } from '../interest/InterestCollection';
 import { MentorAnswers } from '../mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
@@ -84,11 +83,11 @@ class UserCollection {
    * @throws { Meteor.Error } If user is not a defined username or userID.
    */
   getID(user) {
-    const userID = (Meteor.users.find({ _id: user })) || (Meteor.users.find({ username: user }));
-    if (!userID) {
+    const userDoc = (Meteor.users.findOne({ _id: user })) || (Meteor.users.findOne({ username: user }));
+    if (!userDoc) {
       throw new Meteor.Error(`Error: user ${user} is not defined.`);
     }
-    return userID;
+    return userDoc._id;
   }
 
   /**
@@ -195,6 +194,19 @@ class UserCollection {
     } else {
       throw new Meteor.Error(`Attempt to remove ${user} while references to public entities remain.`);
     }
+  }
+
+  /**
+   * Removes all elements of this collection.
+   * This is implemented by mapping through all elements because mini-mongo does not implement the remove operation.
+   * So this approach can be used on both client and server side.
+   * removeAll should only used for testing purposes, so it doesn't need to be efficient.
+   */
+  removeAll() {
+    const users = Meteor.users.find().fetch();
+    _.forEach(users, (i) => {
+      this.removeIt(i._id);
+    });
   }
 
   /**

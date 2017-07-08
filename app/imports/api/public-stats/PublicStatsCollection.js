@@ -8,10 +8,10 @@ import { Courses } from '../course/CourseCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
 import { Interests } from '../interest/InterestCollection';
 import { MentorProfiles } from '../user/MentorProfileCollection';
+import { FacultyProfiles } from '../user/FacultyProfileCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
 import { Reviews } from '../review/ReviewCollection';
-import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 
