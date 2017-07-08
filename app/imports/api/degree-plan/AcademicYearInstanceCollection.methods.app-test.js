@@ -18,12 +18,13 @@ if (Meteor.isClient) {
     };
 
     before(function (done) {
-      this.timeout(0);
       defineTestFixturesMethod.call(['minimal', 'abi.student'], done);
+      done();
     });
 
     after(function (done) {
       resetDatabaseMethod.call(null, done);
+      done();
     });
 
     it('Define Method', function (done) {
@@ -32,6 +33,7 @@ if (Meteor.isClient) {
           defineMethod.call({ collectionName, definitionData }, done);
         }).catch(done);
       });
+      done();
     });
 
     it('Update Method', function (done) {
@@ -44,6 +46,7 @@ if (Meteor.isClient) {
           updateMethod.call({ collectionName, updateData: { id, springYear, semesterIDs } }, done);
         }).catch(done);
       });
+      done();
     });
 
     it('Remove Method', function (done) {
@@ -54,6 +57,7 @@ if (Meteor.isClient) {
           removeItMethod.call({ collectionName, instance }, done);
         }).catch(done);
       });
+      done();
     });
   });
 }

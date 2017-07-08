@@ -12,12 +12,13 @@ if (Meteor.isClient) {
     let docID;
 
     before(function (done) {
-      this.timeout(0);
       defineTestFixturesMethod.call(['minimal', 'abi.student', 'opportunities'], done);
+      done();
     });
 
     after(function (done) {
       resetDatabaseMethod.call(null, done);
+      done();
     });
 
     it('Define Method (new-user)', function (done) {
@@ -27,6 +28,7 @@ if (Meteor.isClient) {
           docID = defineMethod.call({ collectionName, definitionData }, done);
         }).catch(done);
       });
+      done();
     });
 
     it('Update Method', function (done) {
@@ -37,6 +39,7 @@ if (Meteor.isClient) {
           updateMethod.call({ collectionName, updateData: { id, description } }, done);
         }).catch(done);
       });
+      done();
     });
 
     it('Remove Method', function (done) {
@@ -45,6 +48,7 @@ if (Meteor.isClient) {
           removeItMethod.call({ collectionName, instance: docID }, done);
         }).catch(done);
       });
+      done();
     });
   });
 }

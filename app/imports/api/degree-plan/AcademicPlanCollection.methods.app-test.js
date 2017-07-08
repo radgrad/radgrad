@@ -49,12 +49,13 @@ if (Meteor.isClient) {
     };
 
     before(function (done) {
-      this.timeout(0);
       defineTestFixturesMethod.call(['minimal'], done);
+      done();
     });
 
     after(function (done) {
       resetDatabaseMethod.call(null, done);
+      done();
     });
 
     it('Define Method', function (done) {
@@ -63,6 +64,7 @@ if (Meteor.isClient) {
           defineMethod.call({ collectionName, definitionData }, done);
         }).catch(done);
       });
+      done();
     });
 
     it('Update Method', function (done) {
@@ -78,6 +80,7 @@ if (Meteor.isClient) {
             courseList } }, done);
         }).catch(done);
       });
+      done();
     });
 
     it('Remove Method', function (done) {
@@ -86,6 +89,7 @@ if (Meteor.isClient) {
           removeItMethod.call({ collectionName, instance: definitionData.slug }, done);
         }).catch(done);
       });
+      done();
     });
   });
 }

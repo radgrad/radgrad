@@ -160,12 +160,21 @@ class UserCollection {
   }
 
   /**
+   * Returns the admin username from the settings file, or 'radgrad@hawaii.edu' (for testing purposes).
+   * @returns {string} The admin username.
+   * @private
+   */
+  _adminUsername() {
+    return (_.has(Meteor, 'settings.public.admin.username')) ?
+        Meteor.settings.public.admin.username : 'radgrad@hawaii.edu';
+  }
+
+  /**
    * Returns the admin userID.
    * @private
    */
   _getAdminID() {
-    const adminUsername = Meteor.settings.public.admin.username;
-    return Meteor.users.findOne({ username: adminUsername })._id;
+    return Meteor.users.findOne({ username: this._adminUsername() })._id;
   }
 
   /**
@@ -175,7 +184,7 @@ class UserCollection {
    * @private
    */
   _getAdminProfile() {
-    const adminUsername = Meteor.settings.public.admin.username;
+    const adminUsername = this._adminUsername();
     const adminID = Meteor.users.findOne({ username: adminUsername })._id;
     return { username: adminUsername, firstName: 'RadGrad', lastName: 'Admin', role: ROLE.ADMIN, userID: adminID };
   }
@@ -381,6 +390,17 @@ class UserCollection {
       Meteor.publish(this._collectionName, () => Meteor.users.find({}, { fields: { username: 1, roles: 1 } }));
     }
   }
+
+  /**
+   * Default subscription method for entities.
+   * It subscribes to the entire collection.
+   */
+  subscribe() {
+    if (Meteor.isClient) {
+      Meteor.subscribe(this._collectionName);
+    }
+  }
+
   /**
    * Return the publication name.
    * @returns { String } The publication name, as a string.

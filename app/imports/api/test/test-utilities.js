@@ -3,6 +3,7 @@ import { DDP } from 'meteor/ddp-client';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { RadGrad } from '../radgrad/RadGrad';
+import { Users } from '../user/UserCollection';
 
 /* global Assets */
 
@@ -79,6 +80,7 @@ export const defineTestFixturesMethod = new ValidatedMethod({
 export function withRadGradSubscriptions() {
   return new Promise(resolve => {
     _.each(RadGrad.collections, collection => collection.subscribe());
+    Users.subscribe();
     const poll = Meteor.setInterval(() => {
       if (DDP._allSubscriptionsReady()) {
         Meteor.clearInterval(poll);
@@ -92,7 +94,7 @@ export function withRadGradSubscriptions() {
  * Returns a Promise that resolves if one can successfully login with the passed credentials.
  * Credentials default to the standard admin username and password.
  */
-export function withLoggedInUser({ username = 'RadGrad', password = 'foo' } = {}) {
+export function withLoggedInUser({ username = 'radgrad@hawaii.edu', password = 'foo' } = {}) {
   return new Promise((resolve, reject) => {
     Meteor.loginWithPassword(username, password, (error) => {
       if (error) {

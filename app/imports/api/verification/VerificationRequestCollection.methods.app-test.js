@@ -10,12 +10,13 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 if (Meteor.isClient) {
   describe('VerificationRequestCollection Meteor Methods TestBatch3', function test() {
     before(function (done) {
-      this.timeout(0);
       defineTestFixturesMethod.call(['minimal', 'abi.student', 'opportunities'], done);
+      done();
     });
 
     after(function (done) {
       resetDatabaseMethod.call(null, done);
+      done();
     });
 
     it('ProcessVerificationEvent Method', function (done) {
@@ -29,6 +30,7 @@ if (Meteor.isClient) {
           });
         }).catch(done);
       });
+      done();
     });
   });
 }

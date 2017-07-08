@@ -59,7 +59,7 @@ class CourseInstanceCollection extends BaseCollection {
    *                          fromSTAR: false,
    *                          grade: 'B',
    *                          note: '',
-   *                          student: 'joesmith',
+   *                          student: 'joesmith@hawaii.edu',
    *                          creditHrs: 3 });
    * @param { Object } description Object with keys semester, course, verified, fromSTAR, grade,
    * note, student, creditHrs.

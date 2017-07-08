@@ -12,13 +12,14 @@ if (Meteor.isClient) {
     // const collectionName = FeedbackInstances.getCollectionName();
 
     before(function (done) {
-      this.timeout(0);
       defineTestFixturesMethod.call(['minimal', 'abi.student',
         'extended.courses.interests', 'academicplan', 'abi.courseinstances'], done);
+      done();
     });
 
     after(function (done) {
       resetDatabaseMethod.call(null, done);
+      done();
     });
 
     it.skip('checkPrerequisites', function (done) {
@@ -29,6 +30,7 @@ if (Meteor.isClient) {
           FeedbackFunctions.checkPrerequisites('abi@hawaii.edu');
         }).catch(done);
       });
+      done();
     });
   });
 }
