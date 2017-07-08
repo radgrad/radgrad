@@ -9,7 +9,7 @@ import { RadGrad } from '../../api/radgrad/RadGrad';
 import { loadCollection } from '../../api/test/test-utilities';
 import { removeAllEntities } from '../../api/base/BaseUtilities';
 import { checkIntegrity } from '../../api/integrity/IntegrityChecker';
-import { ROLE } from '../role/Role';
+import { ROLE } from '../../api/role/Role';
 
 /* global Assets */
 /* eslint no-console: "off" */
