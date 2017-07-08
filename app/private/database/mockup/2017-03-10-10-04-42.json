@@ -3166,14 +3166,34 @@
           "text": "The Explorer provides detailed information about Career Goals, Courses, Degrees, Interests, Opportunities, and Users.\n\nJust click the pull-down menu to the left to select the type of information you wish to explore."
         },
         {
+          "routeName": "Faculty_Explorer_Page",
+          "title": "Learn about the Explorer",
+          "text": "The Explorer provides detailed information about Career Goals, Courses, Degrees, Interests, Opportunities, and Users.\n\nJust click the pull-down menu to the left to select the type of information you wish to explore."
+        },
+        {
+          "routeName": "Mentor_Explorer_Page",
+          "title": "Learn about the Explorer",
+          "text": "The Explorer provides detailed information about Career Goals, Courses, Degrees, Interests, Opportunities, and Users.\n\nJust click the pull-down menu to the left to select the type of information you wish to explore."
+        },
+        {
           "routeName": "Student_MentorSpace_Page",
           "title": "Learn about Mentor Space",
           "text": "Mentor Space enables you to connect with RadGrad mentors: ICS alumni and other high tech professionals who are volunteering their time to help get the latest information about careers and job opportunities in Hawaii and beyond.\n\nThere are two basic ways to interact with mentors. The best way is to propose a new question using the \"Ask a new question\" form. This question will be reviewed by RadGrad administrators, potentially edited for clarity, and then released for all the mentors to answer. This approach is the best way to interact with mentors because you can get a variety of perspectives from different fields and different geographic areas. \n\nA second way is to email a single mentor directly.  Please do this only if you have a very specific question of the mentor: perhaps you are interested in applying for a job at the mentor's company.  If you contact a mentor directly, please be sure to have your professional portfolio up to date and ready for them to review so that they can learn more about your background in order to provide a high quality answer.  You should also have reviewed the mentor's LinkedIn profile to learn more about them, and of course have reviewed all of the publicly available information about the company. Don't ask simple questions of a mentor that you could have easily found out through Google!"
         },
         {
+          "routeName": "Mentor_MentorSpace_Page",
+          "title": "Learn about Mentor Space",
+          "text": "Mentor Space enables students to connect with RadGrad mentors: ICS alumni and other high tech professionals who are volunteering their time to help get the latest information about careers and job opportunities in Hawaii and beyond.\n\nThere are two basic ways students interact with mentors. The best way is for students to propose a new question using the \"Ask a new question\" form. This question will be reviewed by RadGrad administrators, potentially edited for clarity, and then released for all the mentors to answer. This approach is the best way to interact with mentors because students can get a variety of perspectives from different fields and different geographic areas. \n\nA second way is to email a single mentor directly.  Students should do this only if you have a very specific question of the mentor: perhaps they are interested in applying for a job at your company."
+        },
+        {
           "routeName": "Student_Home_Log_Page",
           "title": "Learn about the Advisor Meeting Log",
           "text": "Each time you meet with an ICS Advisor, they can summarize the results from your meeting as a RadGrad Advisor Log entry.\n\nYou can refer to this log to make sure you are following advisor recommendations. This also enables the advisor to follow up on issues raised in prior meetings."
+        },
+        {
+          "routeName": "Faculty_Verification_Page",
+          "title": "Learn About Verification Requests",
+          "text": "This page has two sections, event and opportunity verification requests.\n\nEvent verification allows you to verify a student for successful completion of a particular opportunity (event). You can verify the student by selecting the event, inputting the student's UH username, and clicking on the \"VERIFY ATTENDANCE\" button.\n\nThe second part of this page lists all pending verification requests for your sponsored opportunities. Verification requests are submitted by students when they would like RadGrad to acknowledge that they have successfully completed a particular opportunity. If you believe that the student has successfully completed this opportunity, you can accept a request by clicking the green \"ACCEPT\" button. If you believe that the student has NOT successfully completed this opportunity, you can decline a request by clicking the red \"DECLINE\" button. You may also provide any feedback for your response. The student will be able to see your response on their RadGrad site."
         },
         {
           "routeName": "Advisor_Verification_Requests_Pending_Page",
@@ -3189,6 +3209,11 @@
           "routeName": "Advisor_Completed_Verifications_Page",
           "title": "Learn About Completed Verifications",
           "text": "This page lists all completed verification requests. Verification requests are submitted by students when they would like RadGrad to acknowledge that they have successfully completed a particular opportunity. These verification requests are either accepted or declined by an advisor. You may reopen a verification request by clicking on the green \"REOPEN\" button. By doing this, the verification request will disappear from the \"COMPLETED VERIFICATIONS\" page, and will reappear on the \"VERIFICATION REQUESTS\" page. Then, you may go through the process of providing feedback and either accepting or declining the verification request again."
+        },
+        {
+          "routeName": "Advisor_Academic_Plan_Page",
+          "title": "Learn About Academic Plan Construction",
+          "text": "This page allows you to manage Academic Plans. It has two tabs, Builder and Viewer.\n\n* The Builder tab allows you to create new Academic Plans. Choose the degree you are building a plan for. Enter the name of the plan and select the year that the plan is effective. The left side of the page has the four years of the plan. The right hand side has the different Course Choices. Below the Course Choices is the link field where you can create or choice. For example if you want the choice ICS 312 or ICS 331 drag the ICS 312 button into the link area. Then drag the ICS 331 button. This will create a 'ICS 312 or ICS 331' button. If you want to save the choice drag it back into the Course Choices area.\n\n To create a plan drag the choice to the year and semester. You can rearange the choice by dragging.  To delete a choice drag it to the trash area. Once the plan is complete press the Save Academic Plan button.\n\n* The Viewer tab allows you to view defined Academic Plans. Choose the year then the plan name."
         },
         {
           "routeName": "Advisor_Moderation_Page",
