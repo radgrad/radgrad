@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { Roles } from 'meteor/alanning:roles';
+import * as RouteNames from '../../../startup/client/router.js';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { ROLE } from '../../../api/role/Role';
 import { Users } from '../../../api/user/UserCollection.js';

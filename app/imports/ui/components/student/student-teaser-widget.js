@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import * as RouteNames from '../../../startup/client/router.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
