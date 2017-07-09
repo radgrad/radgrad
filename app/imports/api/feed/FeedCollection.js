@@ -2,12 +2,12 @@ import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
-import { Courses } from '/imports/api/course/CourseCollection';
-import { Opportunities } from '/imports/api/opportunity/OpportunityCollection';
-import { Semesters } from '/imports/api/semester/SemesterCollection';
-import { Slugs } from '/imports/api/slug/SlugCollection';
-import { Users } from '/imports/api/user/UserCollection';
-import BaseCollection from '/imports/api/base/BaseCollection';
+import { Courses } from '../course/CourseCollection';
+import { Opportunities } from '../opportunity/OpportunityCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { Slugs } from '../slug/SlugCollection';
+import { Users } from '../user/UserCollection';
+import BaseCollection from '../base/BaseCollection';
 
 /** @module api/feed/FeedCollection */
 
