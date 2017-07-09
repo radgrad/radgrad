@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { AcademicYearInstances } from './AcademicYearInstanceCollection';
 import { Users } from '../user/UserCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
@@ -8,56 +8,34 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('AcademicYearInstances Meteor Methods  TestBatch1', function test() {
+  describe('AcademicYearInstances Meteor Methods TestBatch1 foo', function test() {
     const collectionName = AcademicYearInstances.getCollectionName();
     const year = 2017;
     const student = 'abi@hawaii.edu';
-    const definitionData = {
-      student,
-      year,
-    };
+    const definitionData = { student, year };
 
     before(function (done) {
       defineTestFixturesMethod.call(['minimal', 'abi.student'], done);
-      done();
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
-      done();
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
-      done();
+    it('Update Method', async function () {
+      const studentID = Users.getID(student);
+      const id = AcademicYearInstances.findDoc({ year, studentID })._id;
+      const springYear = 2018;
+      const semesterIDs = [];
+      await updateMethod.callPromise({ collectionName, updateData: { id, springYear, semesterIDs } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const studentID = Users.getID(student);
-          const id = AcademicYearInstances.findDoc({ year, studentID })._id;
-          const springYear = 2018;
-          const semesterIDs = [];
-          updateMethod.call({ collectionName, updateData: { id, springYear, semesterIDs } }, done);
-        }).catch(done);
-      });
-      done();
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const studentID = Users.getID(student);
-          const instance = AcademicYearInstances.findDoc({ year, studentID })._id;
-          removeItMethod.call({ collectionName, instance }, done);
-        }).catch(done);
-      });
-      done();
+    it('Remove Method', async function () {
+      const studentID = Users.getID(student);
+      const instance = AcademicYearInstances.findDoc({ year, studentID })._id;
+      await removeItMethod.callPromise({ collectionName, instance });
     });
   });
 }
