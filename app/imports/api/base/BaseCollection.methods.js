@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
@@ -94,6 +95,7 @@ export const resetDatabaseMethod = new ValidatedMethod({
 
 export const defineMethod = new ValidatedMethod({
   name: 'BaseCollection.define',
+  mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, definitionData }) {
     const collection = RadGrad.getCollection(collectionName);
@@ -104,20 +106,28 @@ export const defineMethod = new ValidatedMethod({
 
 export const updateMethod = new ValidatedMethod({
   name: 'BaseCollection.update',
+  mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, updateData }) {
     const collection = RadGrad.getCollection(collectionName);
     collection.assertValidRoleForMethod(this.userId);
-    return collection.update(updateData.id, updateData);
+    collection.update(updateData.id, updateData);
+    return true;
   },
 });
 
 export const removeItMethod = new ValidatedMethod({
   name: 'BaseCollection.removeIt',
+  mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, instance }) {
+    console.log('starting removeIt', collectionName, instance);
     const collection = RadGrad.getCollection(collectionName);
+    console.log('in remove it', collection._collectionName, this.userId);
     collection.assertValidRoleForMethod(this.userId);
-    return collection.removeIt(instance);
+    console.log('in remove it, assertion passed', instance);
+    collection.removeIt(instance);
+    console.log('in remove it, collection remove returned');
+    return true;
   },
 });

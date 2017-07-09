@@ -11,6 +11,7 @@ import { Users } from '../user/UserCollection';
  * Checks the integrity of the database before doing the deletion.
  * To be used only in testing mode.
  * @throws { Meteor.Error } If there is an integrity issue with the DB prior to deletion.
+ * @returns true
  */
 export function removeAllEntities() {
   if (Meteor.isTest || Meteor.isAppTest) {
@@ -21,4 +22,5 @@ export function removeAllEntities() {
   } else {
     throw new Meteor.Error('removeAllEntities not called in testing mode.');
   }
+  return true;
 }

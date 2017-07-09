@@ -241,7 +241,7 @@ class UserCollection {
   }
 
   /**
-   * Removes all elements of this collection.
+   * Removes all users except for the admin user.
    * This is implemented by mapping through all elements because mini-mongo does not implement the remove operation.
    * So this approach can be used on both client and server side.
    * removeAll should only used for testing purposes, so it doesn't need to be efficient.
@@ -249,7 +249,10 @@ class UserCollection {
   removeAll() {
     const users = Meteor.users.find().fetch();
     _.forEach(users, (i) => {
-      this.removeIt(i._id);
+      if (!(this._adminUsername() === i.username)) {
+        console.log(`Removing ${i.username}`);
+        this.removeIt(i._id);
+      }
     });
   }
 
