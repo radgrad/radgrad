@@ -35,28 +35,16 @@ if (Meteor.isClient) {
     });
 
     it('Update Method', async function () {
-      try {
-        await withLoggedInUser();
-        await withRadGradSubscriptions();
-        const id = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
-        const verified = false;
-        const grade = 'A';
-        const creditHrs = 4;
-        await updateMethod.callPromise({ collectionName, updateData: { id, verified, grade, creditHrs } });
-      } catch (e) {
-        console.log('update error', e);
-      }
+      const id = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
+      const verified = false;
+      const grade = 'A';
+      const creditHrs = 4;
+      await updateMethod.callPromise({ collectionName, updateData: { id, verified, grade, creditHrs } });
     });
 
     it('Remove Method', async function () {
-      try {
-        await withLoggedInUser();
-        await withRadGradSubscriptions();
-        const instance = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
-        await removeItMethod.callPromise({ collectionName, instance });
-      } catch (e) {
-        console.log('remove error', e);
-      }
+      const instance = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
+      await removeItMethod.callPromise({ collectionName, instance });
     });
   });
 }

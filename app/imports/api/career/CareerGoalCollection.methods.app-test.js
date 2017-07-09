@@ -31,8 +31,6 @@ if (Meteor.isClient) {
     });
 
     it('Update Method', async function () {
-      await withLoggedInUser();
-      await withRadGradSubscriptions();
       const id = CareerGoals.findIdBySlug(definitionData.slug);
       const name = 'updated CareerGoal name';
       const description = 'updated CareerGoal description';
@@ -41,8 +39,6 @@ if (Meteor.isClient) {
     });
 
     it('Remove Method', async function () {
-      await withLoggedInUser();
-      await withRadGradSubscriptions();
       await removeItMethod.callPromise({ collectionName, instance: definitionData.slug });
     });
   });

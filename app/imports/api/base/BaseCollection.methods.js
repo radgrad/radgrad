@@ -121,13 +121,9 @@ export const removeItMethod = new ValidatedMethod({
   mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, instance }) {
-    console.log('starting removeIt', collectionName, instance);
     const collection = RadGrad.getCollection(collectionName);
-    console.log('in remove it', collection._collectionName, this.userId);
     collection.assertValidRoleForMethod(this.userId);
-    console.log('in remove it, assertion passed', instance);
     collection.removeIt(instance);
-    console.log('in remove it, collection remove returned');
     return true;
   },
 });

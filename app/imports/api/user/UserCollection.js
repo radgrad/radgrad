@@ -250,7 +250,6 @@ class UserCollection {
     const users = Meteor.users.find().fetch();
     _.forEach(users, (i) => {
       if (!(this._adminUsername() === i.username)) {
-        console.log(`Removing ${i.username}`);
         this.removeIt(i._id);
       }
     });

@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { DDP } from 'meteor/ddp-client';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
@@ -102,6 +103,7 @@ export function withLoggedInUser({ username = 'radgrad@hawaii.edu', password = '
   return new Promise((resolve, reject) => {
     Meteor.loginWithPassword(username, password, (error) => {
       if (error) {
+        console.log('Error: withLoggedInUser', error);
         reject();
       } else {
         resolve();
