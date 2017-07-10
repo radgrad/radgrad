@@ -69,3 +69,4 @@ dynamic-import
 ostrio:logger
 ostrio:loggermongo
 didericis:callpromise-mixin
+ddp-rate-limiter

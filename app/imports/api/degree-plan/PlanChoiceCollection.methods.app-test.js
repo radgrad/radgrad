@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { PlanChoices } from './PlanChoiceCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,50 +7,30 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('PlanChoiceCollection Meteor Methods  TestBatch1', function test() {
+  describe('PlanChoiceCollection Meteor Methods TestBatch1 foo', function test() {
     const collectionName = PlanChoices.getCollectionName();
     const choice = 'ics211,ics215-1';
-    const definitionData = {
-      choice,
-    };
+    const definitionData = { choice };
 
     before(function (done) {
       defineTestFixturesMethod.call(['minimal'], done);
-      done();
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
-      done();
+    it('Update Method', async function () {
+      const id = PlanChoices.findOne()._id;
+      const newChoice = 'ics314-1';
+      await updateMethod.callPromise({ collectionName, updateData: { id, choice: newChoice } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = PlanChoices.findOne()._id;
-          const newChoice = 'ics314-1';
-          updateMethod.call({ collectionName, updateData: { id, choice: newChoice } }, done);
-        }).catch(done);
-      });
-      done();
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const instance = PlanChoices.findOne()._id;
-          removeItMethod.call({ collectionName, instance }, done);
-        }).catch(done);
-      });
-      done();
+    it('Remove Method', async function () {
+      const instance = PlanChoices.findOne()._id;
+      await removeItMethod.callPromise({ collectionName, instance });
     });
   });
 }
