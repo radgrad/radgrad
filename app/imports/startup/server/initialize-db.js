@@ -157,7 +157,8 @@ function defineTestAdminUser() {
 // Add a startup callback that distinguishes between test and dev/prod mode and does the right thing.
 Meteor.startup(() => {
   if (Meteor.isTest || Meteor.isAppTest) {
-    console.log('Test mode. Database initialization disabled and current database cleared.');
+    console.log('Test mode. Database initialization disabled, current database cleared, rate limiting disabled.');
+    Accounts.removeDefaultRateLimit();
     removeAllEntities();
     defineTestAdminUser();
   } else {

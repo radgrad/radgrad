@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { resetDatabaseMethod } from '../base/BaseCollection.methods';
 import { FeedbackFunctions } from './FeedbackFunctions';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -8,29 +7,22 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('Feedback Functions Meteor Methods  TestBatch1', function test() {
+  describe('Feedback Functions Meteor Methods TestBatch1 foo', function test() {
     // const collectionName = FeedbackInstances.getCollectionName();
 
     before(function (done) {
+      this.timeout(5000);
       defineTestFixturesMethod.call(['minimal', 'abi.student',
         'extended.courses.interests', 'academicplan', 'abi.courseinstances'], done);
-      done();
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
-      done();
-    });
-
-    it.skip('checkPrerequisites', function (done) {
-      withLoggedInUser({ username: 'abi@hawaii.edu' }).then(() => {
-        withRadGradSubscriptions().then(() => {
-          FlowRouter.go('/student/abi/degree-planner');
-          FlowRouter.setParams({ username: 'abi@hawaii.edu' });
-          FeedbackFunctions.checkPrerequisites('abi@hawaii.edu');
-        }).catch(done);
-      });
-      done();
+    it.skip('checkPrerequisites', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      FlowRouter.go('/student/abi/degree-planner');
+      FlowRouter.setParams({ username: 'abi@hawaii.edu' });
+      // This might need to be converted to a promise in order to work with async/await.
+      FeedbackFunctions.checkPrerequisites('abi@hawaii.edu');
     });
   });
 }

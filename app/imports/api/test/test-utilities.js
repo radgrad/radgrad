@@ -100,11 +100,6 @@ export function withRadGradSubscriptions() {
  * Credentials default to the standard admin username and password.
  */
 export function withLoggedInUser({ username = 'radgrad@hawaii.edu', password = 'foo' } = {}) {
-  // When running test cases, we run into rate limits.
-  if (Meteor.isServer) {
-    console.log('REMOVING DEFAULT RATE LIMIT');
-    Accounts.removeDefaultRateLimit();
-  }
   return new Promise((resolve, reject) => {
     Meteor.loginWithPassword(username, password, (error) => {
       if (error) {
