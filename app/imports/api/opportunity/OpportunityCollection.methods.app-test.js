@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { Opportunities } from './OpportunityCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,14 +7,14 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('OpportunityCollection Meteor Methods TestBatch2', function test() {
+  describe('OpportunityCollection Meteor Methods TestBatch2 foo', function test() {
     const collectionName = Opportunities.getCollectionName();
     const definitionData = {
       name: 'name',
       slug: 'opportunity-slug-example',
       description: 'description',
       opportunityType: 'club',
-      sponsor: 'radgrad',
+      sponsor: 'radgrad@hawaii.edu',
       ice: { i: 5, c: 5, e: 5 },
       interests: ['algorithms'],
       semesters: ['Spring-2017'],
@@ -22,41 +22,22 @@ if (Meteor.isClient) {
 
     before(function (done) {
       defineTestFixturesMethod.call(['minimal', 'opportunities'], done);
-      done();
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
-      done();
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
-      done();
+    it('Update Method', async function () {
+      const id = Opportunities.findIdBySlug(definitionData.slug);
+      const description = 'updated description';
+      await updateMethod.callPromise({ collectionName, updateData: { id, description } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = Opportunities.findIdBySlug(definitionData.slug);
-          const description = 'updated description';
-          updateMethod.call({ collectionName, updateData: { id, description } }, done);
-        }).catch(done);
-      });
-      done();
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ collectionName, instance: definitionData.slug }, done);
-        }).catch(done);
-      });
-      done();
+    it('Remove Method', async function () {
+      await removeItMethod.callPromise({ collectionName, instance: definitionData.slug });
     });
   });
 }

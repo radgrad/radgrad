@@ -1,4 +1,5 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import BaseProfileCollection from './BaseProfileCollection';
 import { Users } from '../user/UserCollection';
@@ -31,13 +32,18 @@ class AdvisorProfileCollection extends BaseProfileCollection {
    */
   define({ username, firstName, lastName, picture = '/images/default-profile-picture.png', website, interests,
            careerGoals }) {
-    const role = ROLE.ADVISOR;
-    const interestIDs = Interests.getIDs(interests);
-    const careerGoalIDs = CareerGoals.getIDs(careerGoals);
-    Slugs.define({ name: username, entityName: this.getType() });
-    const userID = Users.define({ username, role });
-    return this._collection.insert({ username, firstName, lastName, role, picture, website, interestIDs,
-      careerGoalIDs, userID });
+    if (Meteor.isServer) {
+      const role = ROLE.ADVISOR;
+      const interestIDs = Interests.getIDs(interests);
+      const careerGoalIDs = CareerGoals.getIDs(careerGoals);
+      Slugs.define({ name: username, entityName: this.getType() });
+      const userID = Users.define({ username, role });
+      return this._collection.insert({
+        username, firstName, lastName, role, picture, website, interestIDs,
+        careerGoalIDs, userID,
+      });
+    }
+    return undefined;
   }
 
   /**

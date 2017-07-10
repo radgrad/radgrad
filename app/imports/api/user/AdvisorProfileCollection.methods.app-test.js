@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { AdvisorProfiles } from './AdvisorProfileCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('AdvisorProfileCollection Meteor Methods TestBatch2', function test() {
+  describe('AdvisorProfileCollection Meteor Methods TestBatch2 foo', function test() {
     const collectionName = AdvisorProfiles.getCollectionName();
     const username = 'glau@hawaii.edu';
     const firstName = 'Gerald';
@@ -19,42 +19,23 @@ if (Meteor.isClient) {
 
     before(function (done) {
       defineTestFixturesMethod.call(['minimal'], done);
-      done();
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
-      done();
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals };
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals };
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
-      done();
+    it('Update Method', async function () {
+      const id = AdvisorProfiles.getID(username);
+      await updateMethod.callPromise({ collectionName, updateData: { id, picture: 'glau2.jpg' } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = AdvisorProfiles.getID(username);
-          updateMethod.call({ collectionName, updateData: { id, picture: 'glau2.jpg' } }, done);
-        }).catch(done);
-      });
-      done();
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const instance = AdvisorProfiles.getID(username);
-          removeItMethod.call({ collectionName, instance }, done);
-        }).catch(done);
-      });
-      done();
+    it('Remove Method', async function () {
+      const instance = AdvisorProfiles.getID(username);
+      await removeItMethod.callPromise({ collectionName, instance });
     });
   });
 }

@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { Teasers } from './TeaserCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('TeaserCollection Meteor Methods TestBatch2', function test() {
+  describe('TeaserCollection Meteor Methods TestBatch2 foo', function test() {
     const collectionName = Teasers.getCollectionName();
     const definitionData = {
       title: 'name',
@@ -21,41 +21,22 @@ if (Meteor.isClient) {
 
     before(function (done) {
       defineTestFixturesMethod.call(['minimal', 'opportunities'], done);
-      done();
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
-      done();
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
-      done();
+    it('Update Method', async function () {
+      const id = Teasers.findIdBySlug(definitionData.slug);
+      const description = 'updated description';
+      await updateMethod.callPromise({ collectionName, updateData: { id, description } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = Teasers.findIdBySlug(definitionData.slug);
-          const description = 'updated description';
-          updateMethod.call({ collectionName, updateData: { id, description } }, done);
-        }).catch(done);
-      });
-      done();
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ collectionName, instance: definitionData.slug }, done);
-        }).catch(done);
-      });
-      done();
+    it('Remove Method', async function () {
+      await removeItMethod.callPromise({ collectionName, instance: definitionData.slug });
     });
   });
 }

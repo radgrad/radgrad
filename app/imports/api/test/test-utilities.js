@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
 import { DDP } from 'meteor/ddp-client';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';

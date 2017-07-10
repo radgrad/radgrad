@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { Reviews } from './ReviewCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('ReviewCollection Meteor Methods TestBatch2', function test() {
+  describe('ReviewCollection Meteor Methods TestBatch2 foo', function test() {
     const collectionName = Reviews.getCollectionName();
     // Note that we allow the slug to be defined by default.
     const definitionData = {
@@ -21,43 +21,24 @@ if (Meteor.isClient) {
 
     before(function (done) {
       defineTestFixturesMethod.call(['minimal', 'abi.student'], done);
-      done();
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
-      done();
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
-      done();
+    it('Update Method', async function () {
+      const id = Reviews.findIdBySlug('review-course-ics_111-abi@hawaii.edu');
+      const rating = 5;
+      const comments = 'new comments';
+      await updateMethod.callPromise({ collectionName, updateData: { id, rating, comments } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = Reviews.findIdBySlug('review-course-ics_111-abi');
-          const rating = 5;
-          const comments = 'new comments';
-          updateMethod.call({ collectionName, updateData: { id, rating, comments } }, done);
-        }).catch(done);
-      });
-      done();
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = Reviews.findIdBySlug('review-course-ics_111-abi');
-          removeItMethod.call({ collectionName, instance: id }, done);
-        }).catch(done);
-      });
-      done();
+    it('Remove Method', async function () {
+      const id = Reviews.findIdBySlug('review-course-ics_111-abi@hawaii.edu');
+      await removeItMethod.callPromise({ collectionName, instance: id });
     });
   });
 }

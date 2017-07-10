@@ -55,24 +55,28 @@ class StudentProfileCollection extends BaseProfileCollection {
   define({ username, firstName, lastName, picture = '/images/default-profile-picture.png', website, interests,
            careerGoals, level, academicPlan, declaredSemester, hiddenCourses = [], hiddenOpportunities = [],
            isAlumni = false }) {
-    // Validate parameters.
-    const interestIDs = Interests.getIDs(interests);
-    const careerGoalIDs = CareerGoals.getIDs(careerGoals);
-    const academicPlanID = (academicPlan) ? AcademicPlans.getID(academicPlan) : undefined;
-    const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;
-    const hiddenCourseIDs = Courses.getIDs(hiddenCourses);
-    const hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
-    this.assertValidLevel(level);
-    if (!_.isBoolean(isAlumni)) {
-      throw new Meteor.Error(`Invalid isAlumni: ${isAlumni}`);
-    }
+    if (Meteor.isServer) {
+      // Validate parameters.
+      const interestIDs = Interests.getIDs(interests);
+      const careerGoalIDs = CareerGoals.getIDs(careerGoals);
+      const academicPlanID = (academicPlan) ? AcademicPlans.getID(academicPlan) : undefined;
+      const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;
+      const hiddenCourseIDs = Courses.getIDs(hiddenCourses);
+      const hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
+      this.assertValidLevel(level);
+      if (!_.isBoolean(isAlumni)) {
+        throw new Meteor.Error(`Invalid isAlumni: ${isAlumni}`);
+      }
 
-    // Create the slug, which ensures that username is unique.
-    Slugs.define({ name: username, entityName: this.getType() });
-    const role = (isAlumni) ? ROLE.ALUMNI : ROLE.STUDENT;
-    const userID = Users.define({ username, role });
-    return this._collection.insert({ username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
-      level, academicPlanID, declaredSemesterID, hiddenCourseIDs, hiddenOpportunityIDs, isAlumni, userID });
+      // Create the slug, which ensures that username is unique.
+      Slugs.define({ name: username, entityName: this.getType() });
+      const role = (isAlumni) ? ROLE.ALUMNI : ROLE.STUDENT;
+      const userID = Users.define({ username, role });
+      return this._collection.insert({
+        username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
+        level, academicPlanID, declaredSemesterID, hiddenCourseIDs, hiddenOpportunityIDs, isAlumni, userID });
+    }
+    return undefined;
   }
 
   /**

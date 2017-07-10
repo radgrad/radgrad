@@ -1,4 +1,5 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import BaseProfileCollection from './BaseProfileCollection';
 import { Users } from '../user/UserCollection';
@@ -43,13 +44,18 @@ class MentorProfileCollection extends BaseProfileCollection {
    */
   define({ username, firstName, lastName, picture = '/images/default-profile-picture.png', website, interests,
            careerGoals, company, career, location, linkedin, motivation }) {
-    const role = ROLE.MENTOR;
-    const interestIDs = Interests.getIDs(interests);
-    const careerGoalIDs = CareerGoals.getIDs(careerGoals);
-    Slugs.define({ name: username, entityName: this.getType() });
-    const userID = Users.define({ username, role });
-    return this._collection.insert({ username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
-      company, career, location, linkedin, motivation, userID });
+    if (Meteor.isServer) {
+      const role = ROLE.MENTOR;
+      const interestIDs = Interests.getIDs(interests);
+      const careerGoalIDs = CareerGoals.getIDs(careerGoals);
+      Slugs.define({ name: username, entityName: this.getType() });
+      const userID = Users.define({ username, role });
+      return this._collection.insert({
+        username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
+        company, career, location, linkedin, motivation, userID,
+      });
+    }
+    return undefined;
   }
 
   /**

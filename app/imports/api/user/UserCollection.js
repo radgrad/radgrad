@@ -52,10 +52,13 @@ class UserCollection {
    * @throws { Meteor.Error } If the user exists.
    */
   define({ username, role }) {
+    if (Meteor.isServer) {
     // TODO: not everyone should have the password foo.
-    const userID = Accounts.createUser({ username, email: username, password: 'foo' });
-    Roles.addUsersToRoles(userID, [role]);
-    return userID;
+      const userID = Accounts.createUser({ username, email: username, password: 'foo' });
+      Roles.addUsersToRoles(userID, [role]);
+      return userID;
+    }
+    return undefined;
   }
 
   /**
