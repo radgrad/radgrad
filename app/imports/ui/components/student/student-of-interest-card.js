@@ -6,10 +6,9 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '../../../startup/client/router.js';
 import {
   opportunitySemesters,
-  coursesRouteName,
-  opportunitiesRouteName,
   usersRouteName,
 } from '../../utilities/template-helpers';
 
@@ -34,7 +33,9 @@ function interestedStudentsHelper(item, type) {
 }
 
 Template.Student_Of_Interest_Card.helpers({
-  coursesRouteName,
+  coursesRouteName() {
+    return RouteNames.studentExplorerCoursesPageRouteName;
+  },
   hidden() {
     let ret = '';
     const student = Users.findDoc({ username: getRouteUserName() });
@@ -89,7 +90,9 @@ Template.Student_Of_Interest_Card.helpers({
   numberStudents(course) {
     return interestedStudentsHelper(course, this.type).length;
   },
-  opportunitiesRouteName,
+  opportunitiesRouteName() {
+    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+  },
   replaceSemString(array) {
     console.log('array', array);
     const currentSem = Semesters.getCurrentSemesterDoc();
@@ -114,7 +117,9 @@ Template.Student_Of_Interest_Card.helpers({
   userSlug(studentID) {
     return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
   },
-  usersRouteName,
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
     return semesters;
