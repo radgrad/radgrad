@@ -1,17 +1,8 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Users } from '../../../api/user/UserCollection.js';
+import { getExplorerUserID } from '../../utilities/template-helpers';
 
 /** @module ui/pages/mentor/Mentor_Explorer_Users_Page */
-
-/**
- * Returns the explorerUserName portion of the route.
- */
-export function getExplorerUserID() {
-  const username = FlowRouter.getParam('explorerUserName');
-  return Users.getID(username);
-}
 
 Template.Mentor_Explorer_Users_Page.onCreated(function mentorExplorerUsersPageOnCreated() {
   this.userID = new ReactiveVar('');

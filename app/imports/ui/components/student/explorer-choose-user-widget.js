@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import * as RouteNames from '/imports/startup/client/router.js';
+import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { getRouteUserName } from '../shared/route-user-name';

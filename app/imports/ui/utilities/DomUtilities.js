@@ -20,3 +20,16 @@ export function getAllElementsWithAttribute(attribute, value) {
   }
   return matchingElements;
 }
+
+/**
+ * Removes the element with the given id from the document.
+ * @param id the id of the Element.
+ */
+export function removeElement(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    const parent = element.parentNode;
+    parent.removeChild(element);
+  }
+}
+
