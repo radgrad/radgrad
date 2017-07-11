@@ -5,7 +5,6 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { RadGrad } from '../radgrad/RadGrad';
 import { AppLogs } from '../log/AppLogCollection';
-import { removeAllEntities } from './BaseUtilities';
 import { ROLE } from '../role/Role';
 
 /** @module api/base/BaseCollectionMethods */
