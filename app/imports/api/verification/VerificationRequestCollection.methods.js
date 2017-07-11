@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { VerificationRequests } from './VerificationRequestCollection';
 import { Feeds } from '../feed/FeedCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
@@ -56,6 +57,7 @@ function getOpportunityInstanceID(student, opportunity, semester) {
 export const processVerificationEventMethod = new ValidatedMethod({
   name: 'VerificationRequests.processVerificationEvent',
   validate: null,
+  mixins: [CallPromiseMixin],
   run({ student, opportunity, semester }) {
     // Define a string to hold the result of this process.
     let resultMessage = '';

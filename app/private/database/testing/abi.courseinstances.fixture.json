@@ -12,7 +12,7 @@
           "verified": true,
           "creditHrs": 4,
           "grade": "A",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Fall-2014",
@@ -21,7 +21,7 @@
           "verified": true,
           "creditHrs": 3,
           "grade": "B+",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Spring-2015",
@@ -30,7 +30,7 @@
           "verified": true,
           "creditHrs": 4,
           "grade": "A",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Spring-2015",
@@ -39,7 +39,7 @@
           "verified": true,
           "creditHrs": 3,
           "grade": "A-",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Fall-2015",
@@ -48,7 +48,7 @@
           "verified": true,
           "creditHrs": 4,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Fall-2015",
@@ -57,7 +57,7 @@
           "verified": true,
           "creditHrs": 4,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Spring-2016",
@@ -66,7 +66,7 @@
           "verified": true,
           "creditHrs": 3,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Spring-2016",
@@ -75,7 +75,7 @@
           "verified": true,
           "creditHrs": 3,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Fall-2016",
@@ -84,7 +84,7 @@
           "verified": true,
           "creditHrs": 3,
           "grade": "A",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Fall-2016",
@@ -93,7 +93,7 @@
           "verified": true,
           "creditHrs": 3,
           "grade": "A",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
@@ -102,7 +102,7 @@
           "verified": false,
           "creditHrs": 3,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
@@ -111,7 +111,7 @@
           "verified": false,
           "creditHrs": 3,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Fall-2017",
@@ -120,7 +120,7 @@
           "verified": false,
           "creditHrs": 3,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Fall-2017",
@@ -129,7 +129,7 @@
           "verified": false,
           "creditHrs": 3,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Spring-2018",
@@ -138,7 +138,7 @@
           "verified": false,
           "creditHrs": 3,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         },
         {
           "semester": "Spring-2018",
@@ -147,7 +147,7 @@
           "verified": false,
           "creditHrs": 3,
           "grade": "B",
-          "student": "abi"
+          "student": "abi@hawaii.edu"
         }
       ]
     }

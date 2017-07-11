@@ -14,7 +14,7 @@ import { appLog } from '../../../api/log/AppLogCollection';
 Template.Student_Explorer_Degrees_Widget.helpers({
   fullName(user) {
     if (getUserIdFromRoute() !== user._id) {
-      return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+      return Users.getFullName();
     }
     return '';
   },
@@ -27,8 +27,8 @@ Template.Student_Explorer_Degrees_Widget.helpers({
   },
   userPicture(user) {
     if (getUserIdFromRoute() !== user._id) {
-      if (Users.findDoc(user).picture) {
-        return Users.findDoc(user).picture;
+      if (Users.getProfile(user).picture) {
+        return Users.getProfile(user).picture;
       }
     }
     return '/images/default-profile-picture.png';
@@ -45,9 +45,9 @@ Template.Student_Explorer_Degrees_Widget.helpers({
   },
   userStatus(degree) {
     let ret = true;
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (user.academicPlanID) {
-      const plan = AcademicPlans.findDoc(user.academicPlanID);
+    const profile = Users.getProfile(getRouteUserName());
+    if (profile.academicPlanID) {
+      const plan = AcademicPlans.findDoc(profile.academicPlanID);
       if (_.includes(plan.degreeID, degree._id)) {
         ret = false;
       }
@@ -56,24 +56,24 @@ Template.Student_Explorer_Degrees_Widget.helpers({
   },
   userUsername(user) {
     if (getUserIdFromRoute() !== user._id) {
-      return Users.findDoc(user).username;
+      return Users.getProfile(user).username;
     }
     return '';
   },
   plans() {
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     let semesterNumber;
-    if (user.academicPlanID) {
-      semesterNumber = AcademicPlans.findDoc(user.academicPlanID).semesterNumber;
+    if (profile.academicPlanID) {
+      semesterNumber = AcademicPlans.findDoc(profile.academicPlanID).semesterNumber;
     }
     const degree = DesiredDegrees.findDoc({ name: Template.instance().data.name });
     const plans = AcademicPlans.getPlansForDegree(degree._id, semesterNumber);
     return plans;
   },
   selectedPlan() {
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (user.academicPlanID) {
-      return AcademicPlans.findDoc(user.academicPlanID).name;
+    const profile = Users.getProfile(getRouteUserName());
+    if (profile.academicPlanID) {
+      return AcademicPlans.findDoc(profile.academicPlanID).name;
     }
     return '';
   },

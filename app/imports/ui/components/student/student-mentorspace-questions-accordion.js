@@ -33,18 +33,16 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
     return MentorAnswers.getAnswers(questionID);
   },
   mentorName(mentorID) {
-    const firstName = Users.findDoc({ _id: mentorID }).firstName;
-    const lastName = Users.findDoc({ _id: mentorID }).lastName;
-    return `${firstName}  ${lastName}`;
+    return Users.getFullName(mentorID);
   },
   picture(mentorID) {
-    return Users.findDoc({ _id: mentorID }).picture;
+    return Users.getProfile(mentorID).picture;
   },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
   },
   userUsername(mentorID) {
-    return Users.findDoc({ _id: mentorID }).username;
+    return Users.getProfile(mentorID).username;
   },
 });
 

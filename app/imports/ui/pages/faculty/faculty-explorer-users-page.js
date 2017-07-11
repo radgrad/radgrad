@@ -10,7 +10,7 @@ import { Users } from '../../../api/user/UserCollection.js';
  */
 export function getExplorerUserID() {
   const username = FlowRouter.getParam('explorerUserName');
-  return Users.findDoc({ username })._id;
+  return Users.getID(username);
 }
 
 Template.Faculty_Explorer_Users_Page.onCreated(function facultyExplorerUsersPageOnCreated() {

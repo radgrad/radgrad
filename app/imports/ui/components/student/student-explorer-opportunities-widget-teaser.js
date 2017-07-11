@@ -7,7 +7,7 @@ import { Teasers } from '../../../api/teaser/TeaserCollection.js';
 function teaserUrlHelper(opportunitySlug) {
   const opportunityID = Slugs.getEntityID(opportunitySlug, 'Opportunity');
   const oppTeaser = Teasers.find({ opportunityID }).fetch();
-  return oppTeaser[0].url;
+  return oppTeaser && oppTeaser[0] && oppTeaser[0].url;
 }
 
 Template.Student_Explorer_Opportunities_Widget_Teaser.onCreated(function studentExplorerOpportunitiesWidgetTeaser() {

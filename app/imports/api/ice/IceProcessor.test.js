@@ -32,7 +32,7 @@ if (Meteor.isServer) {
 
     it('#getEarnedICE, #getProjectedICE', function test() {
       this.timeout(0);
-      defineTestFixtures(['minimal', 'extended.courses.interests', 'abi.user', 'abi.courseinstances']);
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'abi.student', 'abi.courseinstances']);
       const cis = CourseInstances.find().fetch();
       const earnedICE = ICE.getEarnedICE(cis);
       expect(ICE.isICE(earnedICE)).to.be.true;

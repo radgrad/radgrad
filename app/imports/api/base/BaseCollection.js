@@ -131,11 +131,13 @@ class BaseCollection {
   /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
    * @param { String | Object } name A document or docID in this collection.
+   * @returns true
    */
   removeIt(name) {
     const doc = this.findDoc(name);
     check(doc, Object);
     this._collection.remove(doc._id);
+    return true;
   }
 
   /**
@@ -143,6 +145,7 @@ class BaseCollection {
    * This is implemented by mapping through all elements because mini-mongo does not implement the remove operation.
    * So this approach can be used on both client and server side.
    * removeAll should only used for testing purposes, so it doesn't need to be efficient.
+   * @returns true
    */
   removeAll() {
     const items = this._collection.find().fetch();
@@ -150,6 +153,7 @@ class BaseCollection {
     _.forEach(items, (i) => {
       instance.removeIt(i._id);
     });
+    return true;
   }
 
   /**

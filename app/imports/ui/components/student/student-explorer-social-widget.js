@@ -41,10 +41,7 @@ Template.Student_Explorer_Social_Widget.helpers({
     ];
   },
   userPicture(user) {
-    if (Users.findDoc(user).picture) {
-      return Users.findDoc(user).picture;
-    }
-    return '/images/default-profile-picture.png';
+    return Users.getProfile(user).picture || '/images/default-profile-picture.png';
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
@@ -56,6 +53,6 @@ Template.Student_Explorer_Social_Widget.helpers({
     return RouteNames.mentorExplorerUsersPageRouteName;
   },
   userUsername(user) {
-    return Users.findDoc(user).username;
+    return Users.getProfile(user).username;
   },
 });

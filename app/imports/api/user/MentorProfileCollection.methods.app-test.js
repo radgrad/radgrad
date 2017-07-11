@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { MentorProfiles } from './MentorProfileCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('MentorProfileCollection Meteor Methods TestBatch2', function test() {
+  describe('MentorProfileCollection Meteor Methods TestBatch2 foo', function test() {
     const collectionName = MentorProfiles.getCollectionName();
     const username = 'rbrewer@tableau.com';
     const firstName = 'Robert';
@@ -23,40 +23,27 @@ if (Meteor.isClient) {
     const motivation = 'Help future students.';
 
     before(function (done) {
-      this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user'], done);
+      defineTestFixturesMethod.call(['minimal'], done);
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      const definitionData = {
+        username, firstName, lastName, picture, website, interests, careerGoals, company,
+        career, location, linkedin, motivation,
+      };
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const definitionData = { username, firstName, lastName, picture, website, interests, careerGoals, company,
-            career, location, linkedin, motivation };
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
+    it('Update Method', async function () {
+      const id = MentorProfiles.getID(username);
+      await updateMethod.callPromise({ collectionName, updateData: { id, company: 'Google, Inc.' } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = MentorProfiles.getID(username);
-          updateMethod.call({ collectionName, updateData: { id, company: 'Google, Inc.' } }, done);
-        }).catch(done);
-      });
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const instance = MentorProfiles.getID(username);
-          removeItMethod.call({ collectionName, instance }, done);
-        }).catch(done);
-      });
+    it('Remove Method', async function () {
+      const instance = MentorProfiles.getID(username);
+      await removeItMethod.callPromise({ collectionName, instance });
     });
   });
 }

@@ -23,7 +23,7 @@ Template.Mentor_MentorSpace_Answer_Form.onCreated(function mentorMentorSpaceAnsw
 Template.Mentor_MentorSpace_Answer_Form.helpers({
   existingAnswer() {
     const questionID = Template.instance().answering.get();
-    const answer = MentorAnswers.find({ questionID, mentorID: getUserIdFromRoute() }).fetch();
+    const answer = MentorAnswers.find({ questionID, userID: getUserIdFromRoute() }).fetch();
     if (answer.length > 0) {
       return answer[0].text;
     }
@@ -47,7 +47,7 @@ Template.Mentor_MentorSpace_Answer_Form.events({
     const question = instance.answering.get();
     const collectionName = MentorAnswers.getCollectionName();
     const newAnswer = { question, mentor: getUserIdFromRoute(), text: answer };
-    const existingAnswer = MentorAnswers.findDoc({ questionID: question, mentorID: getUserIdFromRoute() });
+    const existingAnswer = MentorAnswers.findDoc({ questionID: question, userID: getUserIdFromRoute() });
     if (answer.length > 0) {
       newAnswer.id = existingAnswer._id;
       updateMethod.call({ collectionName, updateData: newAnswer }, (error) => {

@@ -7,7 +7,6 @@ import { $ } from 'meteor/jquery';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
@@ -39,7 +38,7 @@ Template.Update_User_Widget.onCreated(function onCreated() {
 
 Template.Update_User_Widget.helpers({
   user() {
-    return Users.findDoc(Template.currentData().updateID.get());
+    return Users.getProfile(Template.currentData().updateID.get());
   },
   userID() {
     return Template.currentData().updateID;
@@ -57,28 +56,28 @@ Template.Update_User_Widget.helpers({
     return Semesters.find({});
   },
   slug() {
-    const user = Users.findDoc(Template.currentData().updateID.get());
-    return Slugs.findDoc(user.slugID).name;
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.username;
   },
   selectedInterestIDs() {
-    const user = Users.findDoc(Template.currentData().updateID.get());
-    return user.interestIDs;
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.interestIDs;
   },
   selectedCareerGoalIDs() {
-    const user = Users.findDoc(Template.currentData().updateID.get());
-    return user.careerGoalIDs;
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.careerGoalIDs;
   },
   selectedDesiredDegreeID() {
-    const user = Users.findDoc(Template.currentData().updateID.get());
-    return user.desiredDegreeID;
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.desiredDegreeID;
   },
   selectedSemesterID() {
-    const user = Users.findDoc(Template.currentData().updateID.get());
-    return user.declaredSemesterID;
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.declaredSemesterID;
   },
   selectedRole() {
-    const user = Users.findDoc(Template.currentData().updateID.get());
-    return user.roles[0];
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.role;
   },
 });
 

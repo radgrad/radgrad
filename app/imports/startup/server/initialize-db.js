@@ -1,3 +1,5 @@
+import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
@@ -7,7 +9,7 @@ import { RadGrad } from '../../api/radgrad/RadGrad';
 import { loadCollection } from '../../api/test/test-utilities';
 import { removeAllEntities } from '../../api/base/BaseUtilities';
 import { checkIntegrity } from '../../api/integrity/IntegrityChecker';
-
+import { ROLE } from '../../api/role/Role';
 
 /* global Assets */
 /* eslint no-console: "off" */
@@ -49,7 +51,6 @@ function getRestoreFileAge(loadFileName) {
   const dateString = terms[terms.length - 2];
   return moment(dateString, loadFileDateFormat).fromNow();
 }
-
 
 /**
  * If the database is empty, this function looks up the name of the load file in the settings file,
@@ -104,19 +105,66 @@ function startupPublicStats() {
   SyncedCron.start();
 }
 
-// Add a startup function that (potentially) loads the database and initiates public statistics collection as
-// long as we're not in testing mode.
+/**
+ * Check the integrity of the newly loaded collections; print out problems if any occur.
+ */
+function startupCheckIntegrity() {
+  console.log('Checking DB integrity.');
+  const integrity = checkIntegrity();
+  if (integrity.count > 0) {
+    console.log(checkIntegrity().message);
+  }
+}
+
+function generateAdminCredential() {
+  if (Meteor.settings.public.admin.development || Meteor.isTest || Meteor.isAppTest) {
+    return 'foo';
+  }
+  // adapted from: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+  let credential = '';
+  const maxPasswordLength = 30;
+  const minPasswordLength = 6;
+  const passwordLength = Math.floor(Math.random() * (maxPasswordLength - (minPasswordLength + 1))) + minPasswordLength;
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < passwordLength; i++) { // eslint-disable-line no-plusplus
+    credential += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return credential;
+}
+
+function defineAdminUser() {
+  const adminUsername = Meteor.settings && Meteor.settings.public.admin && Meteor.settings.public.admin.username;
+  if (!adminUsername) {
+    console.log('\n\nNO ADMIN USERNAME SPECIFIED IN SETTINGS FILE! SHUTDOWN AND FIX!!\n\n');
+    return;
+  }
+  if (!Meteor.users.findOne({ username: adminUsername })) {
+    const credential = generateAdminCredential();
+    const userID = Accounts.createUser({ username: adminUsername, email: adminUsername, password: credential });
+    Roles.addUsersToRoles(userID, ROLE.ADMIN);
+    console.log(`${adminUsername}/${credential}`);
+  }
+}
+
+function defineTestAdminUser() {
+  if (Meteor.isTest || Meteor.isAppTest) {
+    const admin = 'radgrad@hawaii.edu';
+    const userID = Accounts.createUser({ username: admin, email: admin, password: 'foo' });
+    Roles.addUsersToRoles(userID, ROLE.ADMIN);
+  }
+}
+
+// Add a startup callback that distinguishes between test and dev/prod mode and does the right thing.
 Meteor.startup(() => {
   if (Meteor.isTest || Meteor.isAppTest) {
-    console.log('Test mode. Database initialization disabled and current database cleared.');
+    console.log('Test mode. Database initialization disabled, current database cleared, rate limiting disabled.');
+    Accounts.removeDefaultRateLimit();
     removeAllEntities();
+    defineTestAdminUser();
   } else {
+    defineAdminUser();
     loadDatabase();
-    console.log('Checking DB integrity.');
-    const integrity = checkIntegrity();
-    if (integrity.count > 0) {
-      console.log(checkIntegrity().message);
-    }
+    startupCheckIntegrity();
     startupPublicStats();
   }
 });

@@ -12,10 +12,10 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 function interestedUsers(careerGoal, role) {
   const interested = [];
-  const users = Users.find({ roles: [role] }).fetch();
-  _.forEach(users, (user) => {
-    if (_.includes(user.careerGoalIDs, careerGoal._id)) {
-      interested.push(user);
+  const profiles = Users.findProfilesWithRole(role);
+  _.forEach(profiles, (profile) => {
+    if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
+      interested.push(profile);
     }
   });
   return interested;
@@ -29,9 +29,9 @@ Template.Faculty_Explorer_CareerGoals_Page.helpers({
   addedCareerGoals() {
     const addedCareerGoals = [];
     const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     _.forEach(allCareerGoals, (careerGoal) => {
-      if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+      if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
         addedCareerGoals.push(careerGoal);
       }
     });
@@ -50,10 +50,10 @@ Template.Faculty_Explorer_CareerGoals_Page.helpers({
     ];
   },
   nonAddedCareerGoals() {
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
     const nonAddedCareerGoals = _.filter(allCareerGoals, function (careerGoal) {
-      if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+      if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
         return false;
       }
       return true;

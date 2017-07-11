@@ -20,7 +20,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #toString', function test() {
-      const student = Users.findSlugByID(makeSampleUser());
+      const student = Users.getProfile(makeSampleUser()).username;
       const year = 2016;
       let docID = AcademicYearInstances.define({ year, student });
       expect(AcademicYearInstances.isDefined(docID)).to.be.true;
@@ -38,7 +38,7 @@ if (Meteor.isServer) {
     it('#publish', function test(done) {
       const studentID = makeSampleUser();
       const collector = new PublicationCollector({ userID: studentID });
-      const student = Users.findSlugByID(studentID);
+      const student = Users.getProfile(studentID).username;
       const year = 2016;
       AcademicYearInstances.define({ year, student });
       AcademicYearInstances.publish();

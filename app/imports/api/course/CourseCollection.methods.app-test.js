@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { Courses } from './CourseCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('CourseCollection Meteor Methods TestBatch1', function test() {
+  describe('CourseCollection Meteor Methods TestBatch1 foo', function test() {
     const collectionName = Courses.getCollectionName();
     const definitionData = {
       name: 'Introduction to the theory and practice of scripting',
@@ -22,41 +22,29 @@ if (Meteor.isClient) {
     };
 
     before(function (done) {
-      this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user'], done);
+      defineTestFixturesMethod.call(['minimal'], done);
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
+    it('Update Method', async function () {
+      const id = Courses.findIdBySlug(definitionData.slug);
+      const name = 'updated CareerGoal name';
+      const description = 'updated CareerGoal description';
+      const interests = ['algorithms', 'java'];
+      const prerequisites = ['ics_111', 'ics_141'];
+      await updateMethod.callPromise({
+        collectionName,
+        updateData: { id, name, description, interests, prerequisites },
       });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = Courses.findIdBySlug(definitionData.slug);
-          const name = 'updated CareerGoal name';
-          const description = 'updated CareerGoal description';
-          const interests = ['algorithms', 'java'];
-          const prerequisites = ['ics_111', 'ics_141'];
-          updateMethod.call({ collectionName, updateData: { id, name, description, interests, prerequisites } }, done);
-        }).catch(done);
-      });
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ collectionName, instance: definitionData.slug }, done);
-        }).catch(done);
-      });
+    it('Remove Method', async function () {
+      await removeItMethod.callPromise({ collectionName, instance: definitionData.slug });
     });
   });
 }

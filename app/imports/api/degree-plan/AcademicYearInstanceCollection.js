@@ -45,7 +45,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
    * @returns The newly created docID.
    */
   define({ year, student }) {
-    const studentID = Users.getUserFromUsername(student)._id;
+    const studentID = Users.getID(student);
     const doc = this._collection.find({ year, studentID }).fetch();
     if (doc.length > 0) {
       return doc[0]._id;
@@ -157,8 +157,8 @@ class AcademicYearInstanceCollection extends BaseCollection {
   toString(academicYearInstanceID) {
     this.assertDefined(academicYearInstanceID);
     const doc = this.findDoc(academicYearInstanceID);
-    const student = Users.findDoc(doc.studentID);
-    return `[AY ${doc.year}-${doc.year + 1} ${student.username}]`;
+    const username = Users.getProfile(doc.studentID).username;
+    return `[AY ${doc.year}-${doc.year + 1} ${username}]`;
   }
 
   /**
@@ -189,7 +189,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const student = Users.findSlugByID(doc.studentID);
+    const student = Users.getProfile(doc.studentID).username;
     const year = doc.year;
     return { student, year };
   }

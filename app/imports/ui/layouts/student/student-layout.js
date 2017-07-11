@@ -2,10 +2,10 @@ import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
 import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
 function getStudentDoc() {
-  const username = getRouteUserName();
-  return Users.getUserFromUsername(username);
+  return Users.getProfile(getRouteUserName());
 }
 
 Template.Student_Layout.helpers({
@@ -22,13 +22,13 @@ Template.Student_Layout.helpers({
   },
   earnedICE() {
     if (getRouteUserName()) {
-      return Users.getEarnedICE(getStudentDoc()._id);
+      return StudentProfiles.getEarnedICE(getStudentDoc().userID);
     }
     return null;
   },
   projectedICE() {
     if (getRouteUserName()) {
-      return Users.getProjectedICE(getStudentDoc()._id);
+      return StudentProfiles.getProjectedICE(getStudentDoc().userID);
     }
     return null;
   },

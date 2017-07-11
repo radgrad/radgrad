@@ -1,19 +1,19 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseSlugCollection from '../base/BaseSlugCollection';
+import BaseProfileCollection from './BaseProfileCollection';
 import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
+import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
-import { profileCommonSchema, updateCommonFields, checkIntegrityCommonFields } from './ProfileCommonSchema';
 
 /** @module api/user/MentorProfileCollection */
 /**
  * Represents a Mentor Profile.
- * @extends module:api/base/BaseCollection~BaseSlugCollection
+ * @extends module:api/base/BaseCollection~BaseProfileCollection
  */
-class MentorProfileCollection extends BaseSlugCollection {
+class MentorProfileCollection extends BaseProfileCollection {
   constructor() {
     super('MentorProfile', new SimpleSchema({
       company: String,
@@ -21,7 +21,7 @@ class MentorProfileCollection extends BaseSlugCollection {
       location: String,
       linkedin: { type: String, optional: true },
       motivation: String,
-    }).extend(profileCommonSchema));
+    }));
   }
 
   /**
@@ -44,13 +44,18 @@ class MentorProfileCollection extends BaseSlugCollection {
    */
   define({ username, firstName, lastName, picture = '/images/default-profile-picture.png', website, interests,
            careerGoals, company, career, location, linkedin, motivation }) {
-    const role = ROLE.MENTOR;
-    const interestIDs = Interests.getIDs(interests);
-    const careerGoalIDs = CareerGoals.getIDs(careerGoals);
-    // Don't define slugs here until they are no longer defined in User collection.
-    // Slugs.define({ name: username, entityName: this.getType() });
-    return this._collection.insert({ username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
-      company, career, location, linkedin, motivation });
+    if (Meteor.isServer) {
+      const role = ROLE.MENTOR;
+      const interestIDs = Interests.getIDs(interests);
+      const careerGoalIDs = CareerGoals.getIDs(careerGoals);
+      Slugs.define({ name: username, entityName: this.getType() });
+      const userID = Users.define({ username, role });
+      return this._collection.insert({
+        username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
+        company, career, location, linkedin, motivation, userID,
+      });
+    }
+    return undefined;
   }
 
   /**
@@ -67,7 +72,7 @@ class MentorProfileCollection extends BaseSlugCollection {
     motivation }) {
     this.assertDefined(docID);
     const updateData = {};
-    updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
+    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
     if (company) {
       updateData.company = company;
     }
@@ -84,21 +89,6 @@ class MentorProfileCollection extends BaseSlugCollection {
       updateData.motivation = motivation;
     }
     this._collection.update(docID, { $set: updateData });
-  }
-
-  /**
-   * Returns the profile associated with the specified user.
-   * @param user The user (either their username (email) or their userID).
-   * @return The MentorProfile document.
-   * @throws { Meteor.Error } If user is not a valid user, or profile is not found.
-   */
-  getProfile(user) {
-    const username = Users.getUsername(user);
-    const doc = this.findOne({ username });
-    if (!doc) {
-      throw new Meteor.Error(`No Profile found for user ${username}`);
-    }
-    return doc;
   }
 
   /**
@@ -121,7 +111,7 @@ class MentorProfileCollection extends BaseSlugCollection {
   checkIntegrity() {
     let problems = [];
     this.find().forEach(doc => {
-      problems = problems.concat(checkIntegrityCommonFields(doc));
+      problems = problems.concat(this._checkIntegrityCommonFields(doc));
       if (doc.role !== ROLE.MENTOR) {
         problems.push(`MentorProfile instance does not have ROLE.MENTOR: ${doc}`);
       }

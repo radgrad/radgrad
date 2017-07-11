@@ -11,12 +11,12 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 function interestedUsers(degree) {
   const interested = [];
-  const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
-  _.forEach(users, (user) => {
-    if (user.academicPlanID) {
-      const plan = AcademicPlans.findDoc(user.academicPlanID);
+  const profiles = Users.findProfilesWithRole(ROLE.STUDENT);
+  _.forEach(profiles, (profile) => {
+    if (profile.academicPlanID) {
+      const plan = AcademicPlans.findDoc(profile.academicPlanID);
       if (_.includes(plan.degreeID, degree._id)) {
-        interested.push(user);
+        interested.push(profile);
       }
     }
   });
@@ -29,9 +29,9 @@ function numUsers(degree) {
 
 Template.Student_Explorer_Degrees_Page.helpers({
   addedDegrees() {
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (user.academicPlanID) {
-      const plan = AcademicPlans.findDoc(user.academicPlanID);
+    const profile = Users.getProfile(getRouteUserName());
+    if (profile.academicPlanID) {
+      const plan = AcademicPlans.findDoc(profile.academicPlanID);
       return [DesiredDegrees.findDoc(plan.degreeID)];
     }
     return [];
@@ -49,9 +49,10 @@ Template.Student_Explorer_Degrees_Page.helpers({
   },
   nonAddedDegrees() {
     const allDegrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const nonAddedDegrees = _.filter(allDegrees, function (degree) {
-      if (_.includes(user.desiredDegreeID, degree._id)) {
+      // TODO This won't work; no profile.desiredDegreeID.
+      if (_.includes(profile.desiredDegreeID, degree._id)) {
         return false;
       }
       return true;

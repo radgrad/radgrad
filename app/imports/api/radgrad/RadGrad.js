@@ -27,8 +27,6 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 import { Teasers } from '../teaser/TeaserCollection';
-import { Users } from '../user/UserCollection';
-import { ValidUserAccounts } from '../user/ValidUserAccountCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /** @module api/radgrad/RadGrad */
@@ -38,6 +36,7 @@ class RadGradClass {
   constructor() {
     /**
      * A list of all RadGrad API collections in alphabetical order.
+     * This list is used for things like checking integrity.
      */
     this.collections = [
       AcademicPlans,
@@ -67,8 +66,6 @@ class RadGradClass {
       Slugs,
       StudentProfiles,
       Teasers,
-      Users,
-      ValidUserAccounts,
       VerificationRequests,
     ];
 
@@ -85,8 +82,10 @@ class RadGradClass {
       CareerGoals,
       DesiredDegrees,
       AcademicPlans,
-      ValidUserAccounts,
-      Users,
+      MentorProfiles,
+      AdvisorProfiles,
+      FacultyProfiles,
+      StudentProfiles,
       OpportunityTypes,
       Opportunities,
       Courses,
@@ -97,10 +96,6 @@ class RadGradClass {
       VerificationRequests,
       Feeds,
       AdvisorLogs,
-      MentorProfiles,
-      AdvisorProfiles,
-      FacultyProfiles,
-      StudentProfiles,
       MentorQuestions,
       MentorAnswers,
       Reviews,

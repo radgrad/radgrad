@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { CourseInstances } from './CourseInstanceCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,10 +7,10 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('CourseInstanceCollection Meteor Methods TestBatch1', function test() {
+  describe('CourseInstanceCollection Meteor Methods TestBatch1 foo', function test() {
     const collectionName = CourseInstances.getCollectionName();
     const semester = 'Spring-2017';
-    const student = 'abi';
+    const student = 'abi@hawaii.edu';
     const course = 'ics_111';
     const definitionData = {
       semester,
@@ -24,41 +24,27 @@ if (Meteor.isClient) {
     };
 
     before(function (done) {
-      this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user', 'abi.user'], done);
+      this.timeout(5000);
+      defineTestFixturesMethod.call(['minimal', 'abi.student'], done);
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
+    it('Update Method', async function () {
+      const id = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
+      const verified = false;
+      const grade = 'A';
+      const creditHrs = 4;
+      await updateMethod.callPromise({ collectionName, updateData: { id, verified, grade, creditHrs } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
-          const verified = false;
-          const grade = 'A';
-          const creditHrs = 4;
-          updateMethod.call({ collectionName, updateData: { id, verified, grade, creditHrs } }, done);
-        }).catch(done);
-      });
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const instance = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
-          removeItMethod.call({ collectionName, instance }, done);
-        }).catch(done);
-      });
+    it('Remove Method', async function () {
+      const instance = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
+      await removeItMethod.callPromise({ collectionName, instance });
     });
   });
 }
