@@ -15,16 +15,16 @@ Template.Academic_Plan_Form_Fields.helpers({
     return selectedSemesterID === semesterID;
   },
   selectedPlan() {
-    const user = Users.findDoc(Template.currentData().userID.get());
-    if (user.academicPlanID) {
-      return AcademicPlans.findDoc(user.academicPlanID).name;
+    const profile = Users.getProfile(Template.currentData().userID.get());
+    if (profile.academicPlanID) {
+      return AcademicPlans.findDoc(profile.academicPlanID).name;
     }
     return '';
   },
   selectedYear() {
-    const user = Users.findDoc(Template.currentData().userID.get());
-    if (user.academicPlanID) {
-      const plan = AcademicPlans.findDoc(user.academicPlanID);
+    const profile = Users.getProfile(Template.currentData().userID.get());
+    if (profile.academicPlanID) {
+      const plan = AcademicPlans.findDoc(profile.academicPlanID);
       const semester = Semesters.findDoc(plan.effectiveSemesterID);
       return semester.year;
     }
@@ -32,9 +32,9 @@ Template.Academic_Plan_Form_Fields.helpers({
   },
   plans() {
     if (Template.currentData().userID.get()) {
-      const user = Users.findDoc(Template.currentData().userID.get());
-      if (user.academicPlanID) {
-        const plan = AcademicPlans.findDoc(user.academicPlanID);
+      const profile = Users.getProfile(Template.currentData().userID.get());
+      if (profile.academicPlanID) {
+        const plan = AcademicPlans.findDoc(profile.academicPlanID);
         const semester = Semesters.findDoc(plan.effectiveSemesterID);
         let plans = AcademicPlans.find().fetch();
         plans = _.filter(plans, (p) => {
@@ -59,10 +59,10 @@ Template.Academic_Plan_Form_Fields.helpers({
   },
   years() {
     if (Template.currentData().userID.get()) {
-      const student = Users.findDoc(Template.currentData().userID.get());
+      const profile = Users.getProfile(Template.currentData().userID.get());
       let declaredYear;
-      if (student.declaredSemesterID) {
-        declaredYear = Semesters.findDoc(student.declaredSemesterID).year;
+      if (profile.declaredSemesterID) {
+        declaredYear = Semesters.findDoc(profile.declaredSemesterID).year;
       }
       let plans = AcademicPlans.find().fetch();
       plans = _.filter(plans, (p) => {

@@ -41,7 +41,7 @@ class ReviewCollection extends BaseSlugCollection {
    * Defines a new Review.
    * @example
    * Review.define({ slug: 'review-course-ics111-abi',
-   *                 student: 'abi',
+   *                 student: 'abi@hawaii.edu',
    *                 reviewType: 'course',
    *                 reviewee: 'ics_111',
    *                 semester: 'Fall-2016',
@@ -76,13 +76,13 @@ class ReviewCollection extends BaseSlugCollection {
     if (reviewType === this.COURSE) {
       revieweeID = Courses.getID(reviewee);
       if (!slug) {
-        slug = `review-course-${Courses.getSlug(revieweeID)}-${Users.getSlugName(studentID)}`;
+        slug = `review-course-${Courses.getSlug(revieweeID)}-${Users.getProfile(studentID).username}`;
       }
     } else
       if (reviewType === this.OPPORTUNITY) {
         revieweeID = Opportunities.getID(reviewee);
         if (!slug) {
-          slug = `review-opportunity-${Opportunities.getSlug(revieweeID)}-${Users.getSlugName(studentID)}`;
+          slug = `review-opportunity-${Opportunities.getSlug(revieweeID)}-${Users.getProfile(studentID).username}`;
         }
       }
     // Validate semester, get semesterID.
@@ -229,7 +229,7 @@ class ReviewCollection extends BaseSlugCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const slug = Slugs.getNameFromID(doc.slugID);
-    const student = Users.findSlugByID(doc.studentID);
+    const student = Users.getProfile(doc.studentID).username;
     const reviewType = doc.reviewType;
     let reviewee;
     if (reviewType === this.COURSE) {

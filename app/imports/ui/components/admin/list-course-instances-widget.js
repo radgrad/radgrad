@@ -20,17 +20,17 @@ Template.List_Course_Instances_Widget.helpers({
       return Semesters.toString(ci.semesterID, true);
     });
     return _.sortBy(sortBySemester, function (ci) {
-      return Users.findSlugByID(ci.studentID);
+      return Users.getProfile(ci.studentID).username;
     });
   },
   count() {
     return CourseInstances.count();
   },
   name(courseInstance) {
-    const userSlug = Users.findDoc(courseInstance.studentID).username;
+    const username = Users.getProfile(courseInstance.studentID).username;
     const courseNum = Courses.findDoc(courseInstance.courseID).number;
     const semester = Semesters.toString(courseInstance.semesterID, true);
-    return `${userSlug}-${courseNum}-${semester}`;
+    return `${username}-${courseNum}-${semester}`;
   },
   deleteDisabled() {
     return '';

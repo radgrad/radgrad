@@ -1,23 +1,26 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseSlugCollection from '../base/BaseSlugCollection';
+import BaseProfileCollection from './BaseProfileCollection';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Interests } from '../interest/InterestCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
+import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
+import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
-import { profileCommonSchema, updateCommonFields, checkIntegrityCommonFields } from './ProfileCommonSchema';
+import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
 
 /** @module api/user/StudentProfileCollection */
 /**
  * Represents a Student Profile.
- * @extends module:api/base/BaseCollection~BaseSlugCollection
+ * @extends module:api/base/BaseCollection~BaseProfileCollection
  */
-class StudentProfileCollection extends BaseSlugCollection {
+class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
     super('StudentProfile', new SimpleSchema({
       level: { type: SimpleSchema.Integer, min: 1, max: 6 },
@@ -26,7 +29,7 @@ class StudentProfileCollection extends BaseSlugCollection {
       hiddenCourseIDs: [SimpleSchema.RegEx.Id],
       hiddenOpportunityIDs: [SimpleSchema.RegEx.Id],
       isAlumni: Boolean,
-    }).extend(profileCommonSchema));
+    }));
   }
 
   /**
@@ -52,27 +55,28 @@ class StudentProfileCollection extends BaseSlugCollection {
   define({ username, firstName, lastName, picture = '/images/default-profile-picture.png', website, interests,
            careerGoals, level, academicPlan, declaredSemester, hiddenCourses = [], hiddenOpportunities = [],
            isAlumni = false }) {
-    const interestIDs = Interests.getIDs(interests);
-    const careerGoalIDs = CareerGoals.getIDs(careerGoals);
+    if (Meteor.isServer) {
+      // Validate parameters.
+      const interestIDs = Interests.getIDs(interests);
+      const careerGoalIDs = CareerGoals.getIDs(careerGoals);
+      const academicPlanID = (academicPlan) ? AcademicPlans.getID(academicPlan) : undefined;
+      const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;
+      const hiddenCourseIDs = Courses.getIDs(hiddenCourses);
+      const hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
+      this.assertValidLevel(level);
+      if (!_.isBoolean(isAlumni)) {
+        throw new Meteor.Error(`Invalid isAlumni: ${isAlumni}`);
+      }
 
-    // Don't define slugs here until they are no longer defined in User collection.
-    // Slugs.define({ name: username, entityName: this.getType() });
-
-    // Validate level
-    this.assertValidLevel(level);
-
-    // Validate alumni
-    if (!_.isBoolean(isAlumni)) {
-      throw new Meteor.Error(`Invalid isAlumni: ${isAlumni}`);
+      // Create the slug, which ensures that username is unique.
+      Slugs.define({ name: username, entityName: this.getType() });
+      const role = (isAlumni) ? ROLE.ALUMNI : ROLE.STUDENT;
+      const userID = Users.define({ username, role });
+      return this._collection.insert({
+        username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
+        level, academicPlanID, declaredSemesterID, hiddenCourseIDs, hiddenOpportunityIDs, isAlumni, userID });
     }
-    const role = (isAlumni) ? ROLE.ALUMNI : ROLE.STUDENT;
-    // Get the IDs.
-    const academicPlanID = (academicPlan) ? AcademicPlans.getID(academicPlan) : undefined;
-    const declaredSemesterID = (declaredSemester) ? Semesters.getID(declaredSemester) : undefined;
-    const hiddenCourseIDs = Courses.getIDs(hiddenCourses);
-    const hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
-    return this._collection.insert({ username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
-      level, academicPlanID, declaredSemesterID, hiddenCourseIDs, hiddenOpportunityIDs, isAlumni });
+    return undefined;
   }
 
   /**
@@ -90,7 +94,7 @@ class StudentProfileCollection extends BaseSlugCollection {
       hiddenCourses, hiddenOpportunities, isAlumni }) {
     this.assertDefined(docID);
     const updateData = {};
-    updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
+    this._updateCommonFields(updateData, { firstName, lastName, picture, website, interests, careerGoals });
     if (academicPlan) {
       updateData.academicPlanID = AcademicPlans.getID(academicPlan);
     }
@@ -117,21 +121,6 @@ class StudentProfileCollection extends BaseSlugCollection {
       }
     }
     this._collection.update(docID, { $set: updateData });
-  }
-
-  /**
-   * Returns the profile associated with the specified user.
-   * @param user The user (either their username (email) or their userID).
-   * @return The StudentProfile document.
-   * @throws { Meteor.Error } If user is not a valid user, or profile is not found.
-   */
-  getProfile(user) {
-    const username = Users.getUsername(user);
-    const doc = this.findOne({ username });
-    if (!doc) {
-      throw new Meteor.Error(`No Profile found for user ${username}`);
-    }
-    return doc;
   }
 
   /**
@@ -164,7 +153,7 @@ class StudentProfileCollection extends BaseSlugCollection {
   checkIntegrity() {
     let problems = [];
     this.find().forEach(doc => {
-      problems = problems.concat(checkIntegrityCommonFields(doc));
+      problems = problems.concat(this._checkIntegrityCommonFields(doc));
       if ((doc.role !== ROLE.STUDENT) && (doc.role !== ROLE.ALUMNI)) {
         problems.push(`StudentProfile instance does not have ROLE.STUDENT or ROLE.ALUMNI: ${doc.username}`);
       }
@@ -193,6 +182,87 @@ class StudentProfileCollection extends BaseSlugCollection {
     });
     return problems;
   }
+
+  /**
+   * Returns an ICE object with the total earned course and opportunity ICE values.
+   * @param user The student (username or userID).
+   * @throws {Meteor.Error} If userID is not defined.
+   */
+  getEarnedICE(user) { // eslint-disable-line
+    const studentID = Users.getID(user);
+    const courseDocs = CourseInstances.find({ studentID }).fetch();
+    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
+    return getEarnedICE(courseDocs.concat(oppDocs));
+  }
+
+  /**
+   * Returns an ICE object with the total projected course and opportunity ICE values.
+   * @param user The student (username or userID).
+   * @throws {Meteor.Error} If user is not defined.
+   */
+  getProjectedICE(user) { // eslint-disable-line class-methods-use-this
+    const studentID = Users.getID(user);
+    const courseDocs = CourseInstances.find({ studentID }).fetch();
+    const oppDocs = OpportunityInstances.find({ studentID }).fetch();
+    return getProjectedICE(courseDocs.concat(oppDocs));
+  }
+
+  /**
+   * Returns an array of courseIDs that this user has taken (or plans to take) based on their courseInstances.
+   * @param studentID The studentID.
+   */
+  getCourseIDs(user) { // eslint-disable-line class-methods-use-this
+    const studentID = Users.getID(user);
+    const courseInstanceDocs = CourseInstances.find({ studentID }).fetch();
+    const courseIDs = courseInstanceDocs.map((doc) => doc.courseID);
+    return _.uniq(courseIDs);
+  }
+
+  /**
+   * Returns the user's interests as IDs. It is a union of interestIDs and careerGoal interestIDs.
+   * @param userID
+   * @returns {Array}
+   */
+  getInterestIDs(userID) {
+    const user = this._collection.findOne({ _id: userID });
+    let interestIDs = [];
+    interestIDs = _.union(interestIDs, user.interestIDs);
+    _.forEach(user.careerGoalIDs, (goalID) => {
+      const goal = CareerGoals.findDoc(goalID);
+      interestIDs = _.union(interestIDs, goal.interestIDs);
+    });
+    return interestIDs;
+  }
+
+  /**
+   * Returns the user's interest IDs in an Array with two sub-arrays. The first sub-array is the interest IDs that the
+   * User selected. The second sub-array is the interestIDs from the user's career goals.
+   * @param userID The user's ID.
+   */
+  getInterestIDsByType(userID) {
+    const user = this._collection.findOne({ _id: userID });
+    const interestIDs = [];
+    interestIDs.push(user.interestIDs);
+    let careerInterestIDs = [];
+    _.forEach(user.careerGoalIDs, (goalID) => {
+      const goal = CareerGoals.findDoc(goalID);
+      careerInterestIDs = _.union(careerInterestIDs, goal.interestIDs);
+    });
+    careerInterestIDs = _.difference(careerInterestIDs, user.interestIDs);
+    interestIDs.push(careerInterestIDs);
+    return interestIDs;
+  }
+
+  /**
+   * Updates user's level.
+   * @param user The user (username or userID).
+   * @param level The new level.
+   */
+  setLevel(user, level) {
+    const userID = this.getID(user);
+    this._collection.update({ userID }, { $set: { level } });
+  }
+
 
   /**
    * Returns an object representing the StudentProfile docID in a format acceptable to define().

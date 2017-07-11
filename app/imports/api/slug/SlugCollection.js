@@ -49,7 +49,7 @@ class SlugCollection extends BaseCollection {
       throw new Meteor.Error(`Attempt to redefine slug: ${name}`);
     }
     if (!this.isValidSlugName(name)) {
-      throw new Meteor.Error(`Slug is not a-zA-Z0-9 or dash or underscore: ${name}`);
+      throw new Meteor.Error(`Slug is not a-zA-Z0-9 or dash, period, underscore, or @: ${name}`);
     }
     const docID = this._collection.insert({ name, entityName });
     return docID;
@@ -61,7 +61,7 @@ class SlugCollection extends BaseCollection {
    * @returns {boolean} True if it's OK.
    */
   isValidSlugName(slugName) {  // eslint-disable-line
-    const slugRegEx = new RegExp('^[a-zA-Z0-9]+(?:[_-][a-zA-Z0-9]+)*$');
+    const slugRegEx = new RegExp('^[a-zA-Z0-9@.]+(?:[_-][a-zA-Z0-9@.]+)*$');
     return (typeof slugName === 'string') && slugName.length > 0 && slugRegEx.test(slugName);
   }
 

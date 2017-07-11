@@ -11,8 +11,7 @@ import * as RouteNames from '../../../startup/client/router.js';
 
 function matchingInterestsHelper(item) {
   const matchingInterests = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterestIDs = Users.getInterestIDs(user._id);
+  const userInterestIDs = Users.getInterestIDs(getRouteUserName());
   const userInterests = _.map(userInterestIDs, (id) => Interests.findDoc(id));
   const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
   _.forEach(itemInterests, (itemInterest) => {
@@ -27,8 +26,7 @@ function matchingInterestsHelper(item) {
 
 function matchingUserInterestsHelper(item) {
   const matchingInterests = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterestIDs = Users.getInterestIDsByType(user._id);
+  const userInterestIDs = Users.getInterestIDsByType(getRouteUserName());
   const userInterests = _.map(userInterestIDs[0], (id) => Interests.findDoc(id));
   const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
   _.forEach(itemInterests, (itemInterest) => {
@@ -43,8 +41,7 @@ function matchingUserInterestsHelper(item) {
 
 function matchingCareerInterestsHelper(item) {
   const matchingInterests = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
-  const userInterestIDs = Users.getInterestIDsByType(user._id);
+  const userInterestIDs = Users.getInterestIDsByType(getRouteUserName());
   const userInterests = _.map(userInterestIDs[1], (id) => Interests.findDoc(id));
   const itemInterests = _.map(item.interestIDs, (id) => Interests.findDoc(id));
   _.forEach(itemInterests, (itemInterest) => {

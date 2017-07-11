@@ -145,10 +145,10 @@ class FeedCollection extends BaseCollection {
     // Otherwise create and return a new feed instance.
     // First, create an array of users if we weren't passed one initially.
     const users = (_.isArray(user)) ? user : [user];
-    const userIDs = _.map(users, (u) => Users.getUserFromUsername(u)._id);
-    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
+    const userIDs = Users.getIDs(users);
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getProfile(userIDs[0]).username}) 
       has joined RadGrad${(userIDs.length > 1) ? ' along with some others.' : '.'}`;
-    const picture = Users.findDoc(userIDs[0]).picture;
+    const picture = Users.getProfile(userIDs[0]).picture;
     const feedID = this._collection.insert({ userIDs, description, feedType, timestamp, picture });
     return feedID;
   }
@@ -220,11 +220,11 @@ class FeedCollection extends BaseCollection {
     }
     // Otherwise, define a new feed instance.
     const users = (_.isArray(user)) ? user : [user];
-    const userIDs = _.map(users, (u) => Users.getUserFromUsername(u)._id);
+    const userIDs = Users.getIDs(users);
     const semesterID = Semesters.getID(semester);
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
-    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])})
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getProfile(userIDs[0]).username})
         has been verified for [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)})
         (${Semesters.toString(semesterID, false)})${(userIDs.length > 1) ? ' along with some others.' : '.'}`;
     const picture = '/images/radgrad_logo.png';
@@ -247,12 +247,12 @@ class FeedCollection extends BaseCollection {
    */
   _defineNewCourseReview({ user, course, feedType, timestamp = moment().toDate() }) {
     let picture;
-    const userID = Users.getUserFromUsername((_.isArray(user)) ? user[0] : user)._id;
+    const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     const courseID = Courses.getID(course);
     const c = Courses.findDoc(courseID);
-    const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getSlugName(userID)}) 
+    const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getProfile(userID).username}) 
       has added a course review for [${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)})`;
-    picture = Users.findDoc(userID).picture;
+    picture = Users.getProfile(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
@@ -274,13 +274,13 @@ class FeedCollection extends BaseCollection {
    */
   _defineNewOpportunityReview({ user, opportunity, feedType, timestamp = moment().toDate() }) {
     let picture;
-    const userID = Users.getUserFromUsername((_.isArray(user)) ? user[0] : user)._id;
+    const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     const opportunityID = Opportunities.getID(opportunity);
     const o = Opportunities.findDoc(opportunityID);
-    const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getSlugName(userID)})  
+    const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getProfile(userID).username})  
       has added an opportunity review for 
       [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)})`;
-    picture = Users.findDoc(userID).picture;
+    picture = Users.getProfile(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
@@ -326,16 +326,14 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If username is not a username, or if existingFeedID is not a feedID.
    */
   _updateNewUser(username, existingFeedID) {
-    const user = Users.getUserFromUsername(username);
-    const userID = user._id;
-    Users.assertDefined(userID);
+    const userID = Users.getID(username);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
-    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) 
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getProfile(userIDs[0]).username}) 
       and {{> Student_Feed_Modal ${userIDs.length - 1}}} others have joined RadGrad.`;
-    let picture = Users.findDoc(userID).picture;
+    let picture = Users.getProfile(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
@@ -348,16 +346,14 @@ class FeedCollection extends BaseCollection {
    * @throws {Meteor.Error} If username is not a username, or if existingFeedID is not a feedID.
    */
   _updateVerifiedOpportunity(username, existingFeedID) {
-    const user = Users.getUserFromUsername(username);
-    const userID = user._id;
-    Users.assertDefined(userID);
+    const userID = Users.getID(username);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
     const o = Opportunities.findDoc(existingFeed.opportunityID);
-    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getSlugName(userIDs[0])}) and 
-      ${userIDs.length - 1} others have been verified for 
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getProfile(userIDs[0]).username}) 
+      and ${userIDs.length - 1} others have been verified for 
       [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)}) 
       (${Semesters.toString(existingFeed.semesterID, false)})`;
     this._collection.update(existingFeedID, { $set: { userIDs, description } });
@@ -411,7 +407,7 @@ class FeedCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     let user;
     if (doc.userIDs) {
-      user = _.map(doc.userIDs, userID => Users.findSlugByID(userID));
+      user = _.map(doc.userIDs, userID => Users.getProfile(userID).username);
     }
     let opportunity;
     if (doc.opportunityID) {

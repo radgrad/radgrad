@@ -24,7 +24,7 @@ Template.Student_Feed_Item.helpers({
   students(feed) {
     const students = [];
     _.forEach(feed.userIDs, function (userID) {
-      students.push(Users.findDoc(userID));
+      students.push(Users.getProfile(userID));
     });
     return students;
   },

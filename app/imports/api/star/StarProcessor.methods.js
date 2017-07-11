@@ -18,7 +18,7 @@ import { getDepartment } from '../course/CourseUtilities';
  */
 function processStudentStarCsvData(advisor, student, csvData) {
   const definitions = processStarCsvData(student, csvData);
-  const studentID = Users.findDoc({ username: student })._id;
+  const studentID = Users.getID(student);
   const oldInstances = CourseInstances.find({ studentID, fromSTAR: true }).fetch();
   _.forEach(oldInstances, (instance) => {
     CourseInstances.removeIt(instance._id);

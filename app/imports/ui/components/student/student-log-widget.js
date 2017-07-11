@@ -6,13 +6,13 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 
 Template.Student_Log_Widget.helpers({
   advisorImage(log) {
-    return Users.findDoc(log.advisorID).picture;
+    return Users.getProfile(log.advisorID).picture;
   },
   advisorName(log) {
-    return Users.findDoc(log.advisorID).firstName;
+    return Users.getProfile(log.advisorID).firstName;
   },
   advisorUsername(log) {
-    return Users.findDoc(log.advisorID).username;
+    return Users.getProfile(log.advisorID).username;
   },
   displayDate(log) {
     const date = log.createdOn;

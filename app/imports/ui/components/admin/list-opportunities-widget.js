@@ -71,7 +71,7 @@ Template.List_Opportunities_Widget.helpers({
     return [
       { label: 'Description', value: opportunity.description },
       { label: 'Opportunity Type', value: OpportunityTypes.findDoc(opportunity.opportunityTypeID).name },
-      { label: 'Sponsor', value: Slugs.findDoc(Users.findDoc(opportunity.sponsorID).slugID).name },
+      { label: 'Sponsor', value: Users.getProfile(opportunity.sponsorID).username },
       { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
       { label: 'Semesters', value: _.map(opportunity.semesterIDs, id => Semesters.toString(id)) },
       { label: 'Event Date', value: moment(opportunity.eventDate).format('lll') },

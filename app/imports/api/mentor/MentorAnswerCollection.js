@@ -132,7 +132,7 @@ class MentorAnswerCollection extends BaseCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const question = MentorQuestions.findSlugByID(doc.questionID);
-    const mentor = Users.findSlugByID(doc.mentorID);
+    const mentor = Users.getProfile(doc.mentorID).username;
     const text = doc.text;
     return { question, mentor, text };
   }

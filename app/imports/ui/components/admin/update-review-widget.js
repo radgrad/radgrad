@@ -34,7 +34,7 @@ Template.Update_Review_Widget.helpers({
     return Semesters.find({});
   },
   students() {
-    return Users.find({});
+    return Users.findProfiles();
   },
   reviewTypes() {
     return ['course', 'opportunity'];
@@ -48,7 +48,7 @@ Template.Update_Review_Widget.helpers({
   },
   student() {
     const review = Reviews.findDoc(Template.currentData().updateID.get());
-    return Slugs.findDoc(Users.findDoc(review.studentID).slugID).name;
+    return Users.getProfile(review.studentID).username;
   },
   review() {
     return Reviews.findDoc(Template.currentData().updateID.get());

@@ -11,8 +11,8 @@ import * as utilities from './AcademicYearUtilities';
 if (Meteor.isServer) {
   describe('AcademicYearUtilities', function testSuite() {
     before(function setup() {
-      this.timeout(0);
-      defineTestFixtures(['minimal', 'abi.user', 'extended.courses.interests', 'abi.courseinstances']);
+      this.timeout(5000);
+      defineTestFixtures(['minimal', 'abi.student', 'extended.courses.interests', 'abi.courseinstances']);
     });
 
     after(function teardown() {
@@ -20,15 +20,12 @@ if (Meteor.isServer) {
     });
 
     it('#getStudentsCurrentSemesterNumber.', function test() {
-      const abi = Users.findDoc({ username: 'abi' });
-      // PJ says: After cleaning up Semesters.define(), this now equals 12, not 9. Explain?
-      // Cam says: the calculation of semesterNumber was for quarters not semesters.
-      expect(utilities.getStudentsCurrentSemesterNumber(abi._id)).to.equal(9);
-      // expect(utilities.getStudentsCurrentSemesterNumber(abi._id)).to.equal(12);
+      const profile = Users.getProfile('abi@hawaii.edu');
+      expect(utilities.getStudentsCurrentSemesterNumber(profile.userID)).to.equal(9);
     });
     it('#getStudentSemesters.', function test() {
-      const abi = Users.findDoc({ username: 'abi' });
-      const semesters = utilities.getStudentSemesters(abi._id);
+      const profile = Users.getProfile('abi@hawaii.edu');
+      const semesters = utilities.getStudentSemesters(profile.userID);
       expect(semesters.length).to.equal(12);
     });
   });

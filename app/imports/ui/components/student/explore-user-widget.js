@@ -18,9 +18,9 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
 Template.Explore_User_Widget.helpers({
   desiredDegree() {
     if (Template.instance().userID && Template.instance().userID.get()) {
-      const user = Users.findDoc(Template.instance().data.userID.get());
-      if (user.academicPlanID) {
-        const plan = AcademicPlans.findDoc(user.academicPlanID);
+      const profile = Users.getProfile(Template.instance().data.userID.get());
+      if (profile.academicPlanID) {
+        const plan = AcademicPlans.findDoc(profile.academicPlanID);
         return DesiredDegrees.findDoc(plan.degreeID).shortName;
       }
     }
@@ -29,14 +29,14 @@ Template.Explore_User_Widget.helpers({
   email() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
-      return Users.getEmail(id);
+      return Users.getProfile(id).username;
     }
     return '';
   },
   firstName() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
-      const user = Users.findDoc(id);
+      const user = Users.getProfile(id);
       return user.firstName;
     }
     return '';
@@ -44,23 +44,23 @@ Template.Explore_User_Widget.helpers({
   isMentor() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
-      const user = Users.findDoc(id);
-      return user.roles[0] === ROLE.MENTOR;
+      const user = Users.getProfile(id);
+      return user.role === ROLE.MENTOR;
     }
     return false;
   },
   isStudent() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
-      const user = Users.findDoc(id);
-      return user.roles[0] === ROLE.STUDENT;
+      const user = Users.getProfile(id);
+      return user.role === ROLE.STUDENT;
     }
     return false;
   },
   level() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
-      const user = Users.findDoc(id);
+      const user = Users.getProfile(id);
       return user.level;
     }
     return 6;
@@ -68,7 +68,7 @@ Template.Explore_User_Widget.helpers({
   name() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
-      const user = Users.findDoc(id);
+      const user = Users.getProfile(id);
       return `${user.firstName} ${user.lastName}`;
     }
     return '';
@@ -76,7 +76,7 @@ Template.Explore_User_Widget.helpers({
   picture() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
-      const user = Users.findDoc(id);
+      const user = Users.getProfile(id);
       if (user.picture) {
         return user.picture;
       }
@@ -87,8 +87,8 @@ Template.Explore_User_Widget.helpers({
   role() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
-      const user = Users.findDoc(id);
-      return user.roles[0];
+      const user = Users.getProfile(id);
+      return user.role;
     }
     return '';
   },
@@ -98,7 +98,7 @@ Template.Explore_User_Widget.helpers({
   website() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
-      return Users.findDoc(id).website;
+      return Users.getProfile(id).website;
     }
     return '';
   },

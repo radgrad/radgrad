@@ -31,13 +31,13 @@ Template.Student_Explorer_Review_Widget.helpers({
     return Users.getFullName(getUserIdFromRoute());
   },
   currentUserPicture() {
-    return Users.findDoc(getUserIdFromRoute()).picture;
+    return Users.getProfile(getUserIdFromRoute()).picture;
   },
   reviewData(review) {
-    const user = Users.findDoc(review.studentID);
+    const profile = Users.getProfile(review.studentID);
     const userName = Users.getFullName(review.studentID);
-    const userUsername = user.username;
-    const userPicture = user.picture;
+    const userUsername = profile.username;
+    const userPicture = profile.picture;
     const reviewSemester = Semesters.toString(review.semesterID);
     const reviewRating = review.rating;
     const reviewComments = review.comments;
@@ -69,6 +69,6 @@ Template.Student_Explorer_Review_Widget.helpers({
     return RouteNames.mentorExplorerUsersPageRouteName;
   },
   userUsername(user) {
-    return Users.findDoc(user).username;
+    return Users.getProfile(user).username;
   },
 });

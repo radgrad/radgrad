@@ -3,6 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { ROLE } from '../../../api/role/Role';
 
 Template.Mentor_MentorSpace_Page.onCreated(function mentorMentorSpacePageOnCreated() {
   this.answering = new ReactiveVar('');
@@ -25,7 +26,7 @@ Template.Mentor_MentorSpace_Page.helpers({
     return MentorQuestions.find({ visible: true });
   },
   mentorsList() {
-    return Users.find({ roles: ['MENTOR'] });
+    return Users.findProfilesWithRole(ROLE.MENTOR);
   },
   mentorProfile(mentorID) {
     return MentorProfiles.getProfile(mentorID);

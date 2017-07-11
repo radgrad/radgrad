@@ -38,7 +38,7 @@ if (Meteor.isServer) {
     ];
 
     before(function setup() {
-      this.timeout(0);
+      this.timeout(5000);
       removeAllEntities();
     });
 

@@ -17,7 +17,7 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
     return course[0].name;
   },
   fullName(user) {
-    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+    return Users.getFullName(user);
   },
   interestsRouteName() {
     return RouteNames.studentExplorerInterestsPageRouteName;
@@ -31,10 +31,8 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
     return string.toUpperCase();
   },
   userPicture(user) {
-    if (Users.findDoc(user).picture) {
-      return Users.findDoc(user).picture;
-    }
-    return '/images/default-profile-picture.png';
+    const picture = Users.getProfile(user).picture;
+    return picture || '/images/default-profile-picture.png';
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
@@ -47,26 +45,27 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
   },
   userStatus(careerGoal) {
     let ret = false;
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+    const profile = Users.getProfile(getRouteUserName());
+    if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
       ret = true;
     }
     return ret;
   },
   userUsername(user) {
-    return Users.findDoc(user).username;
+    return Users.getProfile(user).username;
   },
 });
 
 Template.Student_Explorer_CareerGoals_Widget.events({
   'click .addItem': function clickAddItem(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
-    const studentItems = student.careerGoalIDs;
+    const studentItems = profile.careerGoalIDs;
     try {
       studentItems.push(id);
-      Users.setCareerGoalIds(student._id, studentItems);
+      // TODO replace with method
+      Users.setCareerGoalIds(profile.userID, studentItems);
       const goal = CareerGoals.findDoc(id);
       const message = `${getRouteUserName()} added career goal ${goal.name}`;
       appLog.info(message);
@@ -76,12 +75,13 @@ Template.Student_Explorer_CareerGoals_Widget.events({
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
-    let studentItems = student.careerGoalIDs;
+    let studentItems = profile.careerGoalIDs;
     try {
       studentItems = _.without(studentItems, id);
-      Users.setCareerGoalIds(student._id, studentItems);
+      // TODO replace with method.
+      Users.setCareerGoalIds(profile.userID, studentItems);
       const goal = CareerGoals.findDoc(id);
       const message = `${getRouteUserName()} removed career goal ${goal.name}`;
       appLog.info(message);

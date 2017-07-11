@@ -25,7 +25,7 @@ if (Meteor.isServer) {
 
     it('#define (new-user), #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
       const feedType = 'new-user';
-      const user = Users.findDoc(makeSampleUser()).username;
+      const user = Users.getProfile(makeSampleUser()).username;
       const timestamp = Date.now();
       let docID = Feeds.define({ feedType, user, timestamp });
       expect(Feeds.isDefined(docID)).to.be.true;
@@ -39,8 +39,8 @@ if (Meteor.isServer) {
 
     it('#define (multiple new-user)', function test() {
       const feedType = 'new-user';
-      const user1 = Users.findDoc(makeSampleUser()).username;
-      const user2 = Users.findDoc(makeSampleUser()).username;
+      const user1 = Users.getProfile(makeSampleUser()).username;
+      const user2 = Users.getProfile(makeSampleUser()).username;
       const docID1 = Feeds.define({ feedType, user: user1 });
       const docID2 = Feeds.define({ feedType, user: user2 });
       expect(Feeds.isDefined(docID1)).to.be.true;
@@ -86,8 +86,8 @@ if (Meteor.isServer) {
       const feedType = 'verified-opportunity';
       const sponsor = makeSampleUser(ROLE.FACULTY);
       const opportunity = Opportunities.getSlug(makeSampleOpportunity(sponsor));
-      const user1 = Users.findDoc(makeSampleUser()).username;
-      const user2 = Users.findDoc(makeSampleUser()).username;
+      const user1 = Users.getProfile(makeSampleUser()).username;
+      const user2 = Users.getProfile(makeSampleUser()).username;
       const semester = 'Spring-2013';
       const docID1 = Feeds.define({ feedType, user: user1, opportunity, semester });
       const docID2 = Feeds.define({ feedType, user: user2, opportunity, semester });
@@ -105,7 +105,7 @@ if (Meteor.isServer) {
 
     it('#define (new-course-review)', function test() {
       const feedType = 'new-course-review';
-      const user = Users.findDoc(makeSampleUser()).username;
+      const user = Users.getProfile(makeSampleUser()).username;
       const course = Courses.getSlug(makeSampleCourse());
       let docID = Feeds.define({ feedType, user, course });
       expect(Feeds.isDefined(docID)).to.be.true;
@@ -119,7 +119,7 @@ if (Meteor.isServer) {
 
     it('#define (new-opportunity-review)', function test() {
       const feedType = 'new-opportunity-review';
-      const user = Users.findDoc(makeSampleUser()).username;
+      const user = Users.getProfile(makeSampleUser()).username;
       const sponsor = makeSampleUser(ROLE.FACULTY);
       const opportunity = Opportunities.getSlug(makeSampleOpportunity(sponsor));
       let docID = Feeds.define({ feedType, user, opportunity });

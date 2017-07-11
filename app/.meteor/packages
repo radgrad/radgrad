@@ -68,3 +68,5 @@ aldeed:collection2-core@2.0.0
 dynamic-import
 ostrio:logger
 ostrio:loggermongo
+didericis:callpromise-mixin
+ddp-rate-limiter

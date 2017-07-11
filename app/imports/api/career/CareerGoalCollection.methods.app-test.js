@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { expect } from 'chai';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { CareerGoals } from './CareerGoalCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('CareerGoalCollection Meteor Methods TestBatch1', function test() {
+  describe('CareerGoalCollection Meteor Methods ', function test() {
     const collectionName = CareerGoals.getCollectionName();
     const definitionData = {
       name: 'name',
@@ -17,41 +18,28 @@ if (Meteor.isClient) {
     };
 
     before(function (done) {
-      this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user', 'abi.user',
+      this.timeout(5000);
+      defineTestFixturesMethod.call(['minimal', 'abi.student',
         'extended.courses.interests', 'academicplan', 'abi.courseinstances'], done);
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      const careerGoalID = await defineMethod.callPromise({ collectionName, definitionData });
+      expect(CareerGoals.isDefined(careerGoalID)).to.be.true;
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
+    it('Update Method', async function () {
+      const id = CareerGoals.findIdBySlug(definitionData.slug);
+      const name = 'updated CareerGoal name';
+      const description = 'updated CareerGoal description';
+      const interests = ['algorithms', 'java'];
+      await updateMethod.callPromise({ collectionName, updateData: { id, name, description, interests } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = CareerGoals.findIdBySlug(definitionData.slug);
-          const name = 'updated CareerGoal name';
-          const description = 'updated CareerGoal description';
-          const interests = ['algorithms', 'java'];
-          updateMethod.call({ collectionName, updateData: { id, name, description, interests } }, done);
-        }).catch(done);
-      });
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          removeItMethod.call({ collectionName, instance: definitionData.slug }, done);
-        }).catch(done);
-      });
+    it('Remove Method', async function () {
+      await removeItMethod.callPromise({ collectionName, instance: definitionData.slug });
     });
   });
 }

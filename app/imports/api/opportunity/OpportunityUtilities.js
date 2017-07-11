@@ -27,7 +27,7 @@ export const clearPlannedOpportunityInstances = (studentID) => {
 
 export const calculateOpportunityCompatibility = (opportunityID, studentID) => {
   const course = Opportunities.findDoc(opportunityID);
-  const studentInterests = Users.getInterestIDs(studentID);
+  const studentInterests = Users.getProfile(studentID).interestIDs;
   const intersection = _.intersection(course.interestIDs, studentInterests);
   return intersection.length;
 };
@@ -69,7 +69,7 @@ export const getStudentSemesterOpportunityChoices = (semester, semesterNumber, s
 
 export const chooseStudentSemesterOpportunity = (semester, semesterNumber, studentID) => {
   const choices = getStudentSemesterOpportunityChoices(semester, semesterNumber, studentID);
-  const interestIDs = Users.getInterestIDs(studentID);
+  const interestIDs = Users.getProfile(studentID).interestIDs;
   const preferred = new PreferredChoice(choices, interestIDs);
   const best = preferred.getBestChoices();
   if (best) {
@@ -86,7 +86,7 @@ export const getStudentCurrentSemesterOpportunityChoices = (studentID) => {
 
 export const getRecommendedCurrentSemesterOpportunityChoices = (studentID) => {
   const choices = getStudentCurrentSemesterOpportunityChoices(studentID);
-  const interestIDs = Users.getInterestIDs(studentID);
+  const interestIDs = Users.getProfile(studentID).interestIDs;
   const preferred = new PreferredChoice(choices, interestIDs);
   const best = preferred.getBestChoices();
   return best;

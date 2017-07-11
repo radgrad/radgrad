@@ -15,10 +15,10 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 
 Template.List_Users_Widget.helpers({
   users() {
-    return Users.find({}, { sort: { lastName: 1 } });
+    return Users.findProfiles({}, { sort: { lastName: 1 } });
   },
   count() {
-    return Users.count();
+    return Users.findProfiles().length;
   },
   deleteDisabled(user) {
     return user && (Users.isReferenced(user.username)) ? 'disabled' : '';

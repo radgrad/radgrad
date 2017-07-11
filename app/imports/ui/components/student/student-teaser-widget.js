@@ -12,10 +12,10 @@ function matchingTeasers() {
   if (getRouteUserName()) {
     const allTeasers = Teasers.find().fetch();
     const matching = [];
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const userInterests = [];
     let teaserInterests = [];
-    _.forEach(Users.getInterestIDs(user._id), (id) => {
+    _.forEach(Users.getInterestIDs(profile.userID), (id) => {
       userInterests.push(Interests.findDoc(id));
     });
     _.forEach(allTeasers, (teaser) => {

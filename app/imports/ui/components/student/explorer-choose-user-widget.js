@@ -39,7 +39,7 @@ Template.Explorer_Choose_User_Widget.helpers({
     return ROLE.STUDENT;
   },
   users(role) {
-    return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
+    return Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group && FlowRouter.current().route.group.name;
@@ -55,10 +55,10 @@ Template.Explorer_Choose_User_Widget.helpers({
 Template.Explorer_Choose_User_Widget.events({
   'click .jsRetrieve': function clickJSRetrieve(event, instance) {
     const username = event.target.id;
-    const user = Users.getUserFromUsername(username);
-    if (user) {
-      instance.userID.set(user._id);
-      const message = `${getRouteUserName()} selected ${Users.getFullName(user._id)} to view.`;
+    const userID = Users.isDefined(username) && Users.getID(username);
+    if (userID) {
+      instance.userID.set(userID);
+      const message = `${getRouteUserName()} selected ${Users.getFullName(userID)} to view.`;
       appLog.info(message);
     }
   },

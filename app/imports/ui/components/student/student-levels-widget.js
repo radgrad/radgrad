@@ -9,18 +9,18 @@ Template.Student_Levels_Widget.helpers({
   },
   studentLevelName() {
     if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      if (user.level) {
-        return `LEVEL ${user.level}`;
+      const profile = Users.getProfile(getUserIdFromRoute());
+      if (profile.level) {
+        return `LEVEL ${profile.level}`;
       }
     }
     return 'LEVEL 1';
   },
   studentLevelNumber() {
     if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      if (user.level) {
-        return user.level;
+      const profile = Users.getProfile(getUserIdFromRoute());
+      if (profile.level) {
+        return profile.level;
       }
     }
     return 1;

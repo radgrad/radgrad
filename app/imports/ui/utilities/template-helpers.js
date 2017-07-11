@@ -6,8 +6,9 @@ import { Users } from '../../api/user/UserCollection.js';
  * Returns the explorerUserName portion of the route.
  */
 export function getExplorerUserID() {
-  const username = FlowRouter.getParam('explorerUserName');
-  return Users.findDoc({ username })._id;
+  const username = FlowRouter.getParam('explorerUserName') &&
+      FlowRouter.getParam('explorerUserName').replace('%2540', '@');
+  return username && Users.getID(username);
 }
 
 /**

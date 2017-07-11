@@ -50,7 +50,7 @@ Template.Student_Of_Interest_Add.helpers({
     return (this.type === 'courses');
   },
   userSlug(studentID) {
-    return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
+    return Users.getProfile(studentID).username;
   },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];

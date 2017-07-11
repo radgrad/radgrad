@@ -59,7 +59,7 @@ class CourseInstanceCollection extends BaseCollection {
    *                          fromSTAR: false,
    *                          grade: 'B',
    *                          note: '',
-   *                          student: 'joesmith',
+   *                          student: 'joesmith@hawaii.edu',
    *                          creditHrs: 3 });
    * @param { Object } description Object with keys semester, course, verified, fromSTAR, grade,
    * note, student, creditHrs.
@@ -76,12 +76,12 @@ class CourseInstanceCollection extends BaseCollection {
     const semesterDoc = Semesters.findDoc(semesterID);
     const courseID = Courses.getID(course);
     const studentID = Users.getID(student);
-    const user = Users.findDoc(studentID);
+    const profile = Users.getProfile(studentID);
     // ensure the AcademicYearInstance is defined.
     if (semesterDoc.term === Semesters.SPRING || semesterDoc.term === Semesters.SUMMER) {
-      AcademicYearInstances.define({ year: semesterDoc.year - 1, student: user.username });
+      AcademicYearInstances.define({ year: semesterDoc.year - 1, student: profile.username });
     } else {
-      AcademicYearInstances.define({ year: semesterDoc.year, student: user.username });
+      AcademicYearInstances.define({ year: semesterDoc.year, student: profile.username });
     }
     const ice = makeCourseICE(course, grade);
     if ((typeof verified) !== 'boolean') {
@@ -213,15 +213,15 @@ class CourseInstanceCollection extends BaseCollection {
   }
 
   /**
-   * Returns the Student associated with the CourseInstance with the given instanceID.
+   * Returns the Student profile associated with the CourseInstance with the given instanceID.
    * @param instanceID The id of the CourseInstance.
-   * @returns {Object} The associated Student.
+   * @returns {Object} The associated Student profile.
    * @throws {Meteor.Error} If instanceID is not a valid ID.
    */
   getStudentDoc(instanceID) {
     this.assertDefined(instanceID);
     const instance = this._collection.findOne({ _id: instanceID });
-    return Users.findDoc(instance.studentID);
+    return Users.getProfile(instance.studentID);
   }
 
   /**
@@ -398,7 +398,7 @@ class CourseInstanceCollection extends BaseCollection {
     const verified = doc.verified;
     const creditHrs = doc.creditHrs;
     const grade = doc.grade;
-    const student = Users.findSlugByID(doc.studentID);
+    const student = Users.getProfile(doc.studentID).username;
     return { semester, course, note, verified, creditHrs, grade, student };
   }
 }

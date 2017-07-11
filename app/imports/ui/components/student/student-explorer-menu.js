@@ -162,8 +162,8 @@ Template.Student_Explorer_Menu.helpers({
   },
   userCareerGoals(careerGoal) {
     let ret = '';
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+    const profile = Users.getProfile(getRouteUserName());
+    if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;
@@ -181,16 +181,17 @@ Template.Student_Explorer_Menu.helpers({
   },
   userDegrees(degree) {
     let ret = '';
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(user.desiredDegreeID, degree._id)) {
+    const profile = Users.getProfile(getRouteUserName());
+    // TODO This won't work, profile does not have desiredDegreeID.
+    if (_.includes(profile.desiredDegreeID, degree._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;
   },
   userInterests(interest) {
     let ret = '';
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(Users.getInterestIDs(user._id), interest._id)) {
+    const profile = Users.getProfile(getRouteUserName());
+    if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;

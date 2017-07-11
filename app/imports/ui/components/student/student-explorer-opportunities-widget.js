@@ -16,7 +16,7 @@ Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplore
 
 Template.Student_Explorer_Opportunities_Widget.helpers({
   fullName(user) {
-    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+    return Users.getFullName(user);
   },
   futureInstance(opportunity) {
     let ret = false;
@@ -66,10 +66,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     return teaser;
   },
   userPicture(user) {
-    if (Users.findDoc(user).picture) {
-      return Users.findDoc(user).picture;
-    }
-    return '/images/default-profile-picture.png';
+    return Users.getProfile(user).picture || '/images/default-profile-picture.png';
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
@@ -92,7 +89,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     return ret;
   },
   userUsername(user) {
-    return Users.findDoc(user).username;
+    return Users.getProfile(user).username;
   },
 });
 

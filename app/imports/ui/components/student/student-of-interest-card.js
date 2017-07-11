@@ -37,13 +37,13 @@ Template.Student_Of_Interest_Card.helpers({
   },
   hidden() {
     let ret = '';
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     if (this.type === 'courses') {
-      if (_.includes(student.hiddenCourseIDs, this.item._id)) {
+      if (_.includes(profile.hiddenCourseIDs, this.item._id)) {
         ret = 'grey';
       }
     } else
-      if (_.includes(student.hiddenOpportunityIDs, this.item._id)) {
+      if (_.includes(profile.hiddenOpportunityIDs, this.item._id)) {
         ret = 'grey';
       }
     return ret;
@@ -107,14 +107,13 @@ Template.Student_Of_Interest_Card.helpers({
     if (studentID === 'elipsis') {
       return '/images/elipsis.png';
     }
-    const student = Users.findDoc(studentID);
-    return student.picture;
+    return Users.getProfile(studentID).picture;
   },
   typeCourse() {
     return (this.type === 'courses');
   },
   userSlug(studentID) {
-    return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
+    return Users.getProfile(studentID).username;
   },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
@@ -128,45 +127,47 @@ Template.Student_Of_Interest_Card.helpers({
 Template.Student_Of_Interest_Card.events({
   'click .hide': function clickItemHide(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = this.item._id;
     if (this.type === 'courses') {
-      const studentItems = student.hiddenCourseIDs;
+      const studentItems = profile.hiddenCourseIDs;
       try {
         studentItems.push(id);
-        Users.setHiddenCourseIds(student._id, studentItems);
+        // TODO Replace with method.
+        Users.setHiddenCourseIds(profile.userID, studentItems);
       } catch (e) {
-        // don't do anything.
+        // TODO eliminate empty catch.
       }
     } else {
-      const studentItems = student.hiddenOpportunityIDs;
+      const studentItems = profile.hiddenOpportunityIDs;
       try {
         studentItems.push(id);
-        Users.setHiddenOpportunityIds(student._id, studentItems);
+        // TODO Replace with method.
+        Users.setHiddenOpportunityIds(profile.userID, studentItems);
       } catch (e) {
-        // don't do anything.
+        // TODO eliminate empty catch.
       }
     }
   },
   'click .unhide': function clickItemHide(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = this.item._id;
     if (this.type === 'courses') {
-      let studentItems = student.hiddenCourseIDs;
+      let studentItems = profile.hiddenCourseIDs;
       try {
         studentItems = _.without(studentItems, id);
-        Users.setHiddenCourseIds(student._id, studentItems);
+        Users.setHiddenCourseIds(profile.userID, studentItems);
       } catch (e) {
-        // don't do anything.
+        // TODO eliminate empty catch
       }
     } else {
-      let studentItems = student.hiddenOpportunityIDs;
+      let studentItems = profile.hiddenOpportunityIDs;
       try {
         studentItems = _.without(studentItems, id);
-        Users.setHiddenOpportunityIds(student._id, studentItems);
+        Users.setHiddenOpportunityIds(profile.userID, studentItems);
       } catch (e) {
-        // don't do anything.
+        // TODO eliminate empty catch.
       }
     }
   },

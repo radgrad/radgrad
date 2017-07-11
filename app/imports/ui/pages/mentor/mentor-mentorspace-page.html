@@ -31,7 +31,7 @@
           </div>
           {{#each mentor in mentorsList}}
 
-          {{> Student_MentorSpace_Mentor_Directory profile=(mentorProfile mentor._id) mentorID=mentor.username firstName=mentor.firstName lastName=mentor.lastName email=mentor.email picture=mentor.picture}}
+          {{> Student_MentorSpace_Mentor_Directory profile=(mentorProfile mentor.userID) mentorID=mentor.username firstName=mentor.firstName lastName=mentor.lastName email=mentor.email picture=mentor.picture}}
 
           {{/each}}
         </div>
