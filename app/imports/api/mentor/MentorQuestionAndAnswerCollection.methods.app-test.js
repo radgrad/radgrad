@@ -8,7 +8,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('MentorQuestionAndAnswerCollection Meteor Methods TestBatch2 foo', function test() {
+  describe('MentorQuestionAndAnswerCollection Meteor Methods ', function test() {
     // this.timeout(10000);
     const questionCollectionName = MentorQuestions.getCollectionName();
     const questionDefinition = {

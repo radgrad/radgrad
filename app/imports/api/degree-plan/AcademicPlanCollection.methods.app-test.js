@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('AcademicPlanCollection Meteor Methods TestBatch1 foo', function test() {
+  describe('AcademicPlanCollection Meteor Methods ', function test() {
     const collectionName = AcademicPlans.getCollectionName();
     const definitionData = {
       slug: 'bs-cs-2016',

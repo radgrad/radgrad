@@ -12,15 +12,6 @@
 //   describe('Add_Career_Goal_Widget', function test() {
 //     this.timeout(0);
 //
-//     beforeEach(function () {
-//       Template.registerHelper('_', key => key);
-//       // resetDatabaseMethod.call(null);
-//     });
-//
-//     afterEach(function () {
-//       Template.deregisterHelper('_');
-//       // resetDatabaseMethod.call(null);
-//     });
 //     it.skip('careerGoalDefineMethod', function (done) {
 //       const interestID = makeSampleInterest();
 //       const interestSlug = Interests.findSlugByID(interestID);

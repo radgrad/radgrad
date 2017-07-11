@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('CourseInstanceCollection Meteor Methods TestBatch1 foo', function test() {
+  describe('CourseInstanceCollection Meteor Methods ', function test() {
     const collectionName = CourseInstances.getCollectionName();
     const semester = 'Spring-2017';
     const student = 'abi@hawaii.edu';

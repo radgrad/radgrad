@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('ReviewCollection Meteor Methods TestBatch2 foo', function test() {
+  describe('ReviewCollection Meteor Methods ', function test() {
     const collectionName = Reviews.getCollectionName();
     // Note that we allow the slug to be defined by default.
     const definitionData = {

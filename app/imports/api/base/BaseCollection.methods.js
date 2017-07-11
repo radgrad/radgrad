@@ -81,17 +81,6 @@ export const clearAppLogMethod = new ValidatedMethod({
   },
 });
 
-/**
- * Resets all of the RadGrad collections to their empty state. Only available in test mode.
- */
-export const resetDatabaseMethod = new ValidatedMethod({
-  name: 'base.resetDatabase',
-  validate: null,
-  run() {
-    removeAllEntities();
-  },
-});
-
 
 export const defineMethod = new ValidatedMethod({
   name: 'BaseCollection.define',

@@ -7,7 +7,6 @@
 // import { Courses } from '../../../api/course/CourseCollection';
 // import { coursesDefineMethod } from '../../../api/course/CourseCollection.methods';
 // import { makeSampleInterest } from '../../../api/interest/SampleInterests';
-// import { resetDatabaseMethod } from '../../../api/base/BaseCollection.methods';
 // import './academic-plan.html';
 // import './academic-plan';
 // import './add-course-button.html';
@@ -19,12 +18,10 @@
 //   describe('Add_Course_Button', function test() {
 //     beforeEach(function () {
 //       Template.registerHelper('_', key => key);
-//       resetDatabaseMethod.call(null);
 //     });
 //
 //     afterEach(function () {
 //       Template.deregisterHelper('_');
-//       resetDatabaseMethod.call(null);
 //     });
 //
 //     it('renders correctly with type add', function () {
