@@ -1,15 +1,10 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
-
-function getExplorerUserID() {
-  const username = FlowRouter.getParam('explorerUserName');
-  return Users.getID(username);
-}
+import { getExplorerUserID } from '../../utilities/template-helpers';
 
 Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
   this.autorun(() => {

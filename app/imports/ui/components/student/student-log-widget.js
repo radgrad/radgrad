@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
+import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';

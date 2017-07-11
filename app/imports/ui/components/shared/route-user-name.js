@@ -12,7 +12,7 @@ export function getRouteUserName() {
   // The following line de-url-encodes the path so that the route username is the appropriate string.
   // I don't know how to disable url-encoding in FlowRouter.
   // Most folks appear to be switching to react router.
-  const routeName = FlowRouter.getParam('username').replace('%2540', '@');
+  const routeName = FlowRouter.getParam('username') && FlowRouter.getParam('username').replace('%2540', '@');
   return routeName;
 }
 

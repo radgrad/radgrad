@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
+import * as RouteNames from '../../../startup/client/router.js';
 
 Template.First_Menu_Ice.helpers({
   pClass(value) {

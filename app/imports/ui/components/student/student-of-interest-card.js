@@ -1,12 +1,15 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '../../../startup/client/router.js';
+import {
+  opportunitySemesters,
+} from '../../utilities/template-helpers';
 
 function interestedStudentsHelper(item, type) {
   const interested = [];
@@ -26,18 +29,6 @@ function interestedStudentsHelper(item, type) {
     }
   });
   return interested;
-}
-
-function currentSemester() {
-  const currentSemesterID = Semesters.getCurrentSemester();
-  const currentSem = Semesters.findDoc(currentSemesterID);
-  return currentSem;
-}
-
-function opportunitySemesters(opp) {
-  const semesterIDs = opp.semesterIDs;
-  const upcomingSemesters = _.filter(semesterIDs, semesterID => Semesters.isUpcomingSemester(semesterID));
-  return _.map(upcomingSemesters, semesterID => Semesters.toString(semesterID));
 }
 
 Template.Student_Of_Interest_Card.helpers({
@@ -87,7 +78,7 @@ Template.Student_Of_Interest_Card.helpers({
   },
   nextYears(amount) {
     const nextYears = [];
-    const currentSem = currentSemester();
+    const currentSem = Semesters.getCurrentSemesterDoc();
     let currentYear = currentSem.year;
     for (let i = 0; i < amount; i += 1) {
       nextYears.push(currentYear);
@@ -102,8 +93,8 @@ Template.Student_Of_Interest_Card.helpers({
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
   replaceSemString(array) {
-    console.log('array', array);
-    const currentSem = currentSemester();
+    // console.log('array', array);
+    const currentSem = Semesters.getCurrentSemesterDoc();
     const currentYear = currentSem.year;
     let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
       return semesterYear.split(' ')[1] >= currentYear;

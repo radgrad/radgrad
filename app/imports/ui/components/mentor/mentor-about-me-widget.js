@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
-import * as RouteNames from '/imports/startup/client/router.js';
+import * as RouteNames from '../../../startup/client/router.js';
 import * as FormUtils from '../../components/admin/form-fields/form-field-utilities.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';

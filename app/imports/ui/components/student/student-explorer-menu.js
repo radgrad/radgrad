@@ -14,6 +14,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { isInRole } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Menu.helpers({
   careerGoalsRouteName() {
@@ -140,10 +141,7 @@ Template.Student_Explorer_Menu.helpers({
     }
     return RouteNames.mentorExplorerInterestsPageRouteName;
   },
-  isInRole(role) {
-    const group = FlowRouter.current().route.group.name;
-    return group === role;
-  },
+  isInRole,
   isType(type, value) {
     return type === value;
   },
