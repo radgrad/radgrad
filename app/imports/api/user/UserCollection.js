@@ -177,7 +177,16 @@ class UserCollection {
    * @private
    */
   _getAdminID() {
-    return Meteor.users.findOne({ username: this._adminUsername() })._id;
+    const username = this._adminUsername();
+    let adminDoc = Meteor.users.findOne({ username });
+    // The admin is user is not created by the startup code during unit testing.
+    // This is kind of a hack to implicitly define the admin user during unit tests.
+    if (!adminDoc && Meteor.isServer && Meteor.isTest) {
+      const userID = Accounts.createUser({ username, email: username, password: 'foo' });
+      Roles.addUsersToRoles(userID, ROLE.ADMIN);
+      adminDoc = Meteor.users.findOne({ username });
+    }
+    return adminDoc._id;
   }
 
   /**
