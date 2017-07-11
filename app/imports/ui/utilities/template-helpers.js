@@ -26,3 +26,12 @@ export function opportunitySemesters(opp) {
   const upcomingSemesters = _.filter(semesterIDs, semesterID => Semesters.isUpcomingSemester(semesterID));
   return _.map(upcomingSemesters, semesterID => Semesters.toString(semesterID));
 }
+
+export function isInRole(role) {
+  const group = FlowRouter.current().route.group.name;
+  return group === role;
+}
+
+export function isLabel(label, value) {
+  return label === value;
+}

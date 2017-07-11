@@ -8,6 +8,7 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { appLog } from '../../../api/log/AppLogCollection';
+import { isLabel } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -25,9 +26,7 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
     const slugID = Interests.findDoc(interestSlugName).slugID;
     return Slugs.getNameFromID(slugID);
   },
-  isLabel(label, value) {
-    return label === value;
-  },
+  isLabel,
   toUpper(string) {
     return string.toUpperCase();
   },

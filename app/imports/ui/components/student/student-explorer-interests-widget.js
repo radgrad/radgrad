@@ -9,6 +9,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { getRouteUserName } from '../shared/route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { appLog } from '../../../api/log/AppLogCollection';
+import { isInRole, isLabel } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -40,13 +41,8 @@ Template.Student_Explorer_Interests_Widget.helpers({
         return 'ERROR: More than one table.';
     }
   },
-  isInRole(role) {
-    const group = FlowRouter.current().route.group.name;
-    return group === role;
-  },
-  isLabel(label, value) {
-    return label === value;
-  },
+  isInRole,
+  isLabel,
   opportunitiesRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {

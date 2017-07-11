@@ -8,6 +8,7 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { isInRole, isLabel } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCoursesWidgetOnCreated() {
   this.autorun(() => {
@@ -71,13 +72,8 @@ Template.Student_Explorer_Courses_Widget.helpers({
         return 'ERROR: More than one table.';
     }
   },
-  isInRole(role) {
-    const group = FlowRouter.current().route.group.name;
-    return group === role;
-  },
-  isLabel(label, value) {
-    return label === value;
-  },
+  isInRole,
+  isLabel,
   length(table) {
     return table.length !== 0;
   },

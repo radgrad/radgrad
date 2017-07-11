@@ -8,6 +8,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { isInRole, isLabel } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.updated = new ReactiveVar(false);
@@ -31,13 +32,8 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     });
     return ret;
   },
-  isInRole(role) {
-    const group = FlowRouter.current().route.group.name;
-    return group === role;
-  },
-  isLabel(label, value) {
-    return label === value;
-  },
+  isInRole,
+  isLabel,
   replaceSemString(array) {
     const semString = array.join(', ');
     return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');

@@ -9,7 +9,6 @@ import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
 import {
   opportunitySemesters,
-  usersRouteName,
 } from '../../utilities/template-helpers';
 
 function interestedStudentsHelper(item, type) {
@@ -94,7 +93,7 @@ Template.Student_Of_Interest_Card.helpers({
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
   replaceSemString(array) {
-    console.log('array', array);
+    // console.log('array', array);
     const currentSem = Semesters.getCurrentSemesterDoc();
     const currentYear = currentSem.year;
     let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
