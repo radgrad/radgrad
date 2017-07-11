@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('FeedCollection Meteor Methods TestBatch1 foo', function test() {
+  describe('FeedCollection Meteor Methods ', function test() {
     const collectionName = Feeds.getCollectionName();
     let docID;
 

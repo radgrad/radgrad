@@ -5,7 +5,6 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { RadGrad } from '../radgrad/RadGrad';
 import { AppLogs } from '../log/AppLogCollection';
-import { removeAllEntities } from './BaseUtilities';
 import { ROLE } from '../role/Role';
 
 /** @module api/base/BaseCollectionMethods */
@@ -78,17 +77,6 @@ export const clearAppLogMethod = new ValidatedMethod({
     if (Meteor.isServer) {
       AppLogs.removeAll();
     }
-  },
-});
-
-/**
- * Resets all of the RadGrad collections to their empty state. Only available in test mode.
- */
-export const resetDatabaseMethod = new ValidatedMethod({
-  name: 'base.resetDatabase',
-  validate: null,
-  run() {
-    removeAllEntities();
   },
 });
 

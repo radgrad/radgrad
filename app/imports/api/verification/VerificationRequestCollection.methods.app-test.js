@@ -7,7 +7,7 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('VerificationRequestCollection Meteor Methods TestBatch3 foo', function test() {
+  describe('VerificationRequestCollection Meteor Methods ', function test() {
     before(function (done) {
       defineTestFixturesMethod.call(['minimal', 'abi.student', 'opportunities'], done);
     });
