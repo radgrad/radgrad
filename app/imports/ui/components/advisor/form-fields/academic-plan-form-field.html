@@ -4,7 +4,7 @@
     <select class="ui dropdown" name="academicPlan">
       <option value="">Select Name</option>
       {{#each plan in plans}}
-        <option value="{{plan._id}}" selected="{{isSelected plan.name selectedPlan}}">{{plan.name}} ({{plan.year}})</option>
+        <option value="{{plan._id}}" selected="{{isSelected plan.name selectedPlan}}">{{plan.name}}</option>
       {{/each}}
     </select>
     {{> Form_Error_Message errorMessage=errorMessage}}

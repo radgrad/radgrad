@@ -92,7 +92,7 @@ Template.Student_Selector_Tabs.helpers({
   name(user, tooltip) {
     const name = `${user.lastName}, ${user.firstName}`;
     if (!tooltip) {
-      return name.length > 16 ? `${name.substring(0, 16)}...` : name;
+      return name.length > 15 ? `${name.substring(0, 15)}...` : name;
     }
     return name;
   },
@@ -112,7 +112,7 @@ Template.Student_Selector_Tabs.helpers({
   },
   studentUsername(user) {
     const name = user.username;
-    return name.length > 16 ? `${name.substring(0, 16)}...` : name;
+    return name.length > 12 ? `${name.substring(0, 12)}...` : name;
   },
   isUserSelected() {
     return Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID);
