@@ -1,11 +1,12 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
+import { ReactiveVar } from 'meteor/reactive-var';
+// import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 // import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
-import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
+// import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -14,7 +15,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { isInRole } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
-  // add your statement here
+  this.planVar = new ReactiveVar();
 });
 
 Template.Student_Explorer_Plans_Widget.helpers({
@@ -67,6 +68,9 @@ Template.Student_Explorer_Plans_Widget.helpers({
     const plans = AcademicPlans.getPlansForDegree(degree._id, semesterNumber);
     return plans;
   },
+  planVar() {
+    return Template.instance().planVar;
+  },
   selectedPlan() {
     const profile = Users.getProfile(getRouteUserName());
     if (profile.academicPlanID) {
@@ -81,7 +85,7 @@ Template.Student_Explorer_Plans_Widget.events({
 });
 
 Template.Student_Explorer_Plans_Widget.onRendered(function studentExplorerPlansWidgetOnRendered() {
-  // add your statement here
+  Template.instance().planVar.set(Template.instance().data.item);
 });
 
 Template.Student_Explorer_Plans_Widget.onDestroyed(function studentExplorerPlansWidgetOnDestroyed() {
