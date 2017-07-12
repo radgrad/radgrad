@@ -8,7 +8,8 @@
         {
           "slug": "bs-cs-2016",
           "degreeSlug": "bs-cs",
-          "name": "B.S. in Computer Sciences",
+          "name": "B.S. in Computer Sciences (2016)",
+          "description": "The BS in CS degree offers a solid foundation in computer science. This degree provides students the opportunity to focus in an area of concentration with in the computer science field.",
           "semester": "Fall-2016",
           "coursesPerSemester": [
             2,
