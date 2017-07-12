@@ -34,6 +34,9 @@ import './student-explorer-edit-review-widget.js';
 import './student-explorer-review-widget.html';
 import './student-explorer-review-widget.js';
 
+import './student-explorer-plans-widget.html';
+import './student-explorer-plans-widget';
+
 import './student-explorer-opportunities-widget.html';
 import './student-explorer-opportunities-widget.js';
 

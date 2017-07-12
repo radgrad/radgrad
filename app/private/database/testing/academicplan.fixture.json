@@ -9,7 +9,8 @@
         {
           "slug": "bs-cs-ss-2016",
           "degreeSlug": "bs-cs",
-          "name": "B.S. in Computer Sciences Security Sciences",
+          "name": "B.S. in Computer Sciences Security Sciences (2016)",
+          "description": "The BS in CS SecSci degree offers a solid foundation in computer science with a focus in cyer security. This degree provides students the opportunity to focus in this area of concentration with in the computer science field.",
           "semester": "Fall-2016",
           "coursesPerSemester": [
             2,
@@ -47,7 +48,8 @@
         {
           "slug": "ba-ics-2016",
           "degreeSlug": "ba-ics",
-          "name": "B.A in Information and Computer Sciences",
+          "name": "B.A. in Information and Computer Sciences (2016)",
+          "description": "The general BA in ICS offers a firm foundation in computer science and allows students to apply computer science to an area of concentration.",
           "semester": "Fall-2016",
           "coursesPerSemester": [
             2,
@@ -81,7 +83,8 @@
         {
           "slug": "ba-ics-ss-2016",
           "degreeSlug": "ba-ics",
-          "name": "B.A. in ICS Security Science Focus",
+          "name": "B.A. in ICS Security Science Focus (2016)",
+          "description": "The BA in ICS with a Security Science focus provides strength in both computer science and the science of computer security to prepare students for work in this exciting new area dealing with cyber security and information assurance.",
           "semester": "Fall-2016",
           "coursesPerSemester": [
             2,
@@ -119,7 +122,8 @@
         {
           "slug": "ba-ics-it-2016",
           "degreeSlug": "ba-ics",
-          "name": "B.A. in ICS IT Focus",
+          "name": "B.A. in ICS IT Focus (2016)",
+          "description": "The BA in ICS with an IT Focus puts less emphasis on programming and more on administration of computer systems and networks, and on information assurance.",
           "semester": "Fall-2016",
           "coursesPerSemester": [
             2,
@@ -160,7 +164,8 @@
         {
           "slug": "bs-cs-2017",
           "degreeSlug": "bs-cs",
-          "name": "B.S. in Computer Sciences",
+          "name": "B.S. in Computer Sciences (2017)",
+          "description": "The BS in CS degree offers a solid foundation in computer science. This degree provides students the opportunity to focus in an area of concentration with in the computer science field.",
           "semester": "Fall-2017",
           "coursesPerSemester": [
             2,
@@ -198,7 +203,8 @@
         {
           "slug": "bs-cs-ss-2017",
           "degreeSlug": "bs-cs",
-          "name": "B.S. in Computer Science Security Science",
+          "name": "B.S. in Computer Science Security Science (2017)",
+          "description": "The BS in CS SecSci degree offers a solid foundation in computer science with a focus in cyer security. This degree provides students the opportunity to focus in this area of concentration with in the computer science field.",
           "semester": "Fall-2017",
           "coursesPerSemester": [
             2,
@@ -236,7 +242,8 @@
         {
           "slug": "ba-ics-2017",
           "degreeSlug": "ba-ics",
-          "name": "B.A. in Information and Computer Sciences",
+          "name": "B.A. in Information and Computer Sciences (2017)",
+          "description": "The general BA in ICS offers a firm foundation in computer science and allows students to apply computer science to an area of concentration.",
           "semester": "Fall-2017",
           "coursesPerSemester": [
             2,
@@ -270,7 +277,8 @@
         {
           "slug": "ba-ics-ss-2017",
           "degreeSlug": "ba-ics",
-          "name": "B.A. in ICS Security Science Focus",
+          "name": "B.A. in ICS Security Science Focus (2017)",
+          "description": "The BA in ICS with a Security Science focus provides strength in both computer science and the science of computer security to prepare students for work in this exciting new area dealing with cyber security and information assurance.",
           "semester": "Fall-2017",
           "coursesPerSemester": [
             2,
@@ -308,7 +316,8 @@
         {
           "slug": "ba-ics-it-2017",
           "degreeSlug": "ba-ics",
-          "name": "B.A. in Computer Sciences IT Focus",
+          "name": "B.A. in Computer Sciences IT Focus (2017)",
+          "description": "The BA in ICS with an IT Focus puts less emphasis on programming and more on administration of computer systems and networks, and on information assurance.",
           "semester": "Fall-2017",
           "coursesPerSemester": [
             2,
@@ -349,7 +358,8 @@
         {
           "slug": "bs-cs-2015",
           "degreeSlug": "bs-cs",
-          "name": "B.S. in Computer Science",
+          "name": "B.S. in Computer Science (2015)",
+          "description": "The BS in CS degree offers a solid foundation in computer science. This degree provides students the opportunity to focus in an area of concentration with in the computer science field.",
           "semester": "Fall-2015",
           "coursesPerSemester": [
             2,
@@ -387,7 +397,8 @@
         {
           "slug": "ba-ics-2015",
           "degreeSlug": "ba-ics",
-          "name": "B.A. in Information and Computer Sciences",
+          "name": "B.A. in Information and Computer Sciences (2015)",
+          "description": "The general BA in ICS offers a firm foundation in computer science and allows students to apply computer science to an area of concentration.",
           "semester": "Fall-2015",
           "coursesPerSemester": [
             2,
@@ -423,7 +434,8 @@
         {
           "slug": "ba-ics-it-2015",
           "degreeSlug": "ba-ics",
-          "name": "B.A. in Computer Sciences IT Focus",
+          "name": "B.A. in Computer Sciences IT Focus (2015)",
+          "description": "The BA in ICS with an IT Focus puts less emphasis on programming and more on administration of computer systems and networks, and on information assurance.",
           "semester": "Fall-2015",
           "coursesPerSemester": [
             2,
@@ -462,7 +474,8 @@
         {
           "slug": "bs-ce-2017",
           "degreeSlug": "bs-ce",
-          "name": "B.S. in Computer Engineering",
+          "name": "B.S. in Computer Engineering (2017)",
+          "description": "The BS in CompE is devoted to computer hardware and software, computer organization and architecture, computer security, software engineering, computer networks and Internet technology, emedded systems, computer-aided design, multi-core and parallel computing, wireless networks, as well as other topics. The program is in the Department of Electrical Engineering.",
           "semester": "Fall-2017",
           "coursesPerSemester": [
             0,
