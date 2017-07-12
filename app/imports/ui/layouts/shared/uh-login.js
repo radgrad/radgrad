@@ -3,9 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-/** @module ui/layouts/shared/Cas_Login */
+/** @module ui/layouts/shared/UH_Login */
 
-Template.Cas_Login.events({
+Template.UH_Login.events({
   /**
    * Handle the click on the logout link.
    * @param event The click event.
@@ -26,7 +26,7 @@ Template.Cas_Login.events({
     event.preventDefault();
     const callback = function loginCallback(error) {
       if (error) {
-        instance.$('div .ui.error.message.hidden').text('You are not in the allowed list. Go see your Advisor.');
+        instance.$('div .ui.error.message.hidden').text('You are not yet registered. Go see your Advisor.');
         instance.$('div .ui.error.message.hidden').removeClass('hidden');
       } else {
         const username = Meteor.user().username;
@@ -41,7 +41,7 @@ Template.Cas_Login.events({
 });
 
 // Here's how to do the required initialization for Semantic UI dropdown menus.
-Template.Cas_Login.onRendered(function enableDropDown() {
+Template.UH_Login.onRendered(function enableDropDown() {
   this.$('.dropdown').dropdown({
     action: 'select',
   });

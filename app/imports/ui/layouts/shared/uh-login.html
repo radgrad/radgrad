@@ -1,4 +1,11 @@
-<template name="Cas_Login">
+<template name="UH_Login">
+  {{#unless currentUser}}
+    <div class="ui small compact green basic button cas-login">UH LOGIN</div>
+    <div class="ui error message hidden"></div>
+  {{/unless}}
+</template>
+
+<template name="Cas_Login_Old">
   <div class="ui simple dropdown item">
     <div class="text">Account</div>
     <i class="dropdown icon"></i>
@@ -11,5 +18,4 @@
     </div>
     <div class="ui error message hidden"></div>
   </div>
-
 </template>

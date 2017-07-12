@@ -1,5 +1,4 @@
-import './cas-login.html';
-import './cas-login.js';
+import './admin-login.html';
 
 import './first-menu.html';
 import './first-menu.js';
@@ -17,6 +16,9 @@ import './if-authorized.js';
 import './layout-body.css';
 import './loading.html';
 
+import './logout.html';
+import './logout.js';
+
 import './page-not-found.html';
 
 import './radgrad-logo-text.html';
@@ -26,6 +28,9 @@ import './second-menu.js';
 
 import './mobile-second-menu.html';
 import './mobile-second-menu.js';
+
+import './uh-login.html';
+import './uh-login.js';
 
 import './with-advisor-subscriptions.html';
 import './with-advisor-subscriptions.js';

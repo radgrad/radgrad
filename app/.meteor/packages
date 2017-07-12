@@ -68,5 +68,9 @@ aldeed:collection2-core@2.0.0
 dynamic-import
 ostrio:logger
 ostrio:loggermongo
+
+# For async/await in full app testing (and in any validated method handling)
 didericis:callpromise-mixin
+
+# Needed so we can disable rate-limiter during full app testing.
 ddp-rate-limiter
