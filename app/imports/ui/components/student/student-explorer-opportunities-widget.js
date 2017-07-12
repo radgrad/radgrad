@@ -1,13 +1,14 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { isInRole, isLabel } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.updated = new ReactiveVar(false);
@@ -15,7 +16,7 @@ Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplore
 
 Template.Student_Explorer_Opportunities_Widget.helpers({
   fullName(user) {
-    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+    return Users.getFullName(user);
   },
   futureInstance(opportunity) {
     let ret = false;
@@ -31,13 +32,8 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     });
     return ret;
   },
-  isInRole(role) {
-    const group = FlowRouter.current().route.group.name;
-    return group === role;
-  },
-  isLabel(label, value) {
-    return label === value;
-  },
+  isInRole,
+  isLabel,
   replaceSemString(array) {
     const semString = array.join(', ');
     return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
@@ -70,10 +66,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     return teaser;
   },
   userPicture(user) {
-    if (Users.findDoc(user).picture) {
-      return Users.findDoc(user).picture;
-    }
-    return '/images/default-profile-picture.png';
+    return Users.getProfile(user).picture || '/images/default-profile-picture.png';
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
@@ -96,7 +89,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     return ret;
   },
   userUsername(user) {
-    return Users.findDoc(user).username;
+    return Users.getProfile(user).username;
   },
 });
 

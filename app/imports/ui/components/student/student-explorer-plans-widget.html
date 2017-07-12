@@ -1,0 +1,49 @@
+<template name="Student_Explorer_Plans_Widget">
+  <div class="ui segments" style="background-color: white;">
+    <div class="ui padded segment container">
+
+      <div class="ui clearing basic segment"
+           style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+        <h4 class="ui left floated header">{{toUpper name}}</h4>
+        {{#if isInRole 'student'}}
+          {{#if userStatus item}}
+            <button value="{{id}}" class="ui basic green mini right floated button addItem">SET AS ACADEMIC PLAN</button>
+          {{/if}}
+        {{/if}}
+      </div>
+
+      <div class="ui divider" style="margin-top: 0;"></div>
+
+      <div class="ui stackable grid">
+        <div class="column">
+          {{#each descriptionPair in descriptionPairs}}
+            {{#if descriptionPair.value }}
+              <p><b>{{descriptionPair.label}}:</b> {{{markdownify descriptionPair.value}}}</p>
+            {{else}}
+              <p><b>{{descriptionPair.label}}:</b> N/A</p>
+            {{/if}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="ui horizontal segment">
+      {{> Academic_Plan_Static_Viewer plan=plan}}
+    </div>
+    <div class="ui horizontal segments" style="background-color: white;">
+      {{#each socialPair in socialPairs}}
+        <div class="ui center aligned segment">
+          <h5>{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h5>
+
+          <div class="ui circular mini bordered images" style="overflow: visible;">
+            {{#each user in socialPair.value}}
+              <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername user)}}"
+                 data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;"
+                                                                                   class="ui image" src={{userPicture
+                    user}}></a>
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>

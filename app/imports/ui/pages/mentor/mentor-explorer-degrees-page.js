@@ -9,10 +9,11 @@ import { Users } from '../../../api/user/UserCollection.js';
 
 function interestedUsers(degree) {
   const interested = [];
-  const users = Users.find({ roles: [ROLE.STUDENT] }).fetch();
-  _.forEach(users, (user) => {
-    if (_.includes(user.desiredDegreeID, degree._id)) {
-      interested.push(user);
+  const profiles = Users.findProfilesWithRole(ROLE.STUDENT);
+  _.forEach(profiles, (profile) => {
+    // TODO This won't work; no profile.desiredDegreeID.
+    if (_.includes(profile.desiredDegreeID, degree._id)) {
+      interested.push(profile);
     }
   });
   return interested;

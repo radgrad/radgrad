@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { ROLE } from '../../api/role/Role';
 import { Users } from './UserCollection';
+import { StudentProfiles } from './StudentProfileCollection';
 /**
  * Allows students to update their academic plans.
  */
@@ -19,9 +20,9 @@ export const updateAcademicPlanMethod = new ValidatedMethod({
       }
     // Don't update except on server side (disable client-side simulation).
     if (Meteor.isServer) {
-      const user = Users.findDoc(this.userId);
-      const docID = user._id;
-      Users.update(docID, { academicPlan });
+      const profile = Users.getProfile(this.userId);
+      const docID = profile._id;
+      StudentProfiles.update(docID, { academicPlan });
       return null;
     }
     return null;

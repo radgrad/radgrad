@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
-import * as RouteNames from '/imports/startup/client/router.js';
+import * as RouteNames from '../../../startup/client/router.js';
 import * as FormUtils from '../../components/admin/form-fields/form-field-utilities.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
@@ -36,14 +36,14 @@ Template.Mentor_About_Me_Widget.onCreated(function onCreated() {
 Template.Mentor_About_Me_Widget.helpers({
   career() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.career;
     }
     return '';
   },
   careerGoals() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return _.map(user.careerGoalIDs, (id) => CareerGoals.findDoc(id));
     }
     return [];
@@ -53,7 +53,7 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   company() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.company;
     }
     return '';
@@ -64,7 +64,7 @@ Template.Mentor_About_Me_Widget.helpers({
   desiredDegree() {
     let ret = '';
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       if (user.desiredDegreeID) {
         ret = DesiredDegrees.findDoc(user.desiredDegreeID).name;
       }
@@ -76,8 +76,8 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   email() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return Users.getEmail(user._id);
+      const user = Users.getProfile(getRouteUserName());
+      return user.username;
     }
     return '';
   },
@@ -116,8 +116,8 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   interests() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return _.map(user.interestIDs, (id) => Interests.findDoc(id));
+      const profile = Users.getProfile(getRouteUserName());
+      return _.map(profile.interestIDs, (id) => Interests.findDoc(id));
     }
     return [];
   },
@@ -126,35 +126,35 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   linkedin() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.linkedin;
     }
     return '';
   },
   location() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.location;
     }
     return '';
   },
   motivation() {
     if (getRouteUserName()) {
-      const profile = MentorProfiles.findDoc({ mentorID: getUserIdFromRoute() });
+      const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.motivation;
     }
     return '';
   },
   name() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return `${user.firstName} ${user.lastName}`;
     }
     return '';
   },
   picture() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return user.picture;
     }
     return '';
@@ -164,14 +164,14 @@ Template.Mentor_About_Me_Widget.helpers({
   },
   studentPicture() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return user.picture;
     }
     return '';
   },
   website() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return user.website;
     }
     return '';
@@ -186,16 +186,13 @@ Template.Mentor_About_Me_Widget.events({
   submit: function submitDoneEdit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    const website = updatedData.website;
-    delete updatedData.website;
     instance.context.reset();
     updateSchema.clean(updatedData);
     instance.context.validate(updatedData);
-    const mentorProfile = MentorProfiles.find({ mentorID: getUserIdFromRoute() }).fetch();
+    const mentorProfile = MentorProfiles.findOne({ userID: getUserIdFromRoute() });
     if (instance.context.isValid()) {
-      Users.setWebsite(getUserIdFromRoute(), website);
       const collectionName = MentorProfiles.getCollectionName();
-      updatedData.id = mentorProfile[0]._id;
+      updatedData.id = mentorProfile._id;
       updateMethod.call({ collectionName, updateData: updatedData }, (error) => {
         if (error) {
           console.log('Error updating MentorProfile', error);

@@ -7,10 +7,10 @@ import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessor.
 
 Template.Retrieve_User_Widget.helpers({
   users(role) {
-    return Users.find({ roles: [role] }, { sort: { lastName: 1 } });
+    return Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
   },
   url(user) {
-    return `/${user.roles[0].toLowerCase()}/${user.username}/home`;
+    return `/${user.role.toLowerCase()}/${user.username}/home`;
   },
   label(user) {
     return `${user.lastName}, ${user.firstName}`;
@@ -24,14 +24,8 @@ Template.Retrieve_User_Widget.helpers({
   advisorRole() {
     return ROLE.ADVISOR;
   },
-  adminRole() {
-    return ROLE.ADMIN;
-  },
   facultyRole() {
     return ROLE.FACULTY;
-  },
-  alumniRole() {
-    return ROLE.ALUMNI;
   },
 });
 

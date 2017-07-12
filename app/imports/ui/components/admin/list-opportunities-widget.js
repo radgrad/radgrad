@@ -12,6 +12,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { isInRole } from '../../utilities/template-helpers';
 
 // /** @module ui/components/admin/List_Opportunities_Widget */
 
@@ -56,10 +57,7 @@ Template.List_Opportunities_Widget.helpers({
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
   },
-  isInRole(role) {
-    const group = FlowRouter.current().route.group.name;
-    return group === role;
-  },
+  isInRole,
   updateDisabled(opportunity) {
     const group = FlowRouter.current().route.group.name;
     if (group === 'faculty') {
@@ -73,7 +71,7 @@ Template.List_Opportunities_Widget.helpers({
     return [
       { label: 'Description', value: opportunity.description },
       { label: 'Opportunity Type', value: OpportunityTypes.findDoc(opportunity.opportunityTypeID).name },
-      { label: 'Sponsor', value: Slugs.findDoc(Users.findDoc(opportunity.sponsorID).slugID).name },
+      { label: 'Sponsor', value: Users.getProfile(opportunity.sponsorID).username },
       { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
       { label: 'Semesters', value: _.map(opportunity.semesterIDs, id => Semesters.toString(id)) },
       { label: 'Event Date', value: moment(opportunity.eventDate).format('lll') },

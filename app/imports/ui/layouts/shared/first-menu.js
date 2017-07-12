@@ -8,8 +8,7 @@ Template.First_Menu.helpers({
   firstName() {
     const username = getRouteUserName();
     if (username) {
-      const user = Users.getUserFromUsername(username);
-      return user.firstName;
+      return Users.getProfile(username).firstName;
     }
     return 'Unknown';
   },
@@ -22,8 +21,7 @@ Template.First_Menu.helpers({
   lastName() {
     const username = getRouteUserName();
     if (username) {
-      const user = Users.getUserFromUsername(username);
-      return user.lastName;
+      return Users.getProfile(username).lastName;
     }
     return 'Unknown';
   },
@@ -33,12 +31,13 @@ Template.First_Menu.helpers({
   pictureSrc() {
     const username = getRouteUserName();
     if (username) {
-      const user = Users.getUserFromUsername(username);
-      return (user.picture) ? user.picture : '/images/default-profile-picture.png';
+      const profile = Users.getProfile(username);
+      return (profile.picture) ? profile.picture : '/images/default-profile-picture.png';
     }
     return '/images/default-profile-picture.png';
   },
   useCAS() {
+    // TODO Sometimes we should use CAS, right?
     return false;
   },
 });

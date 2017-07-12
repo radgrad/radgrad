@@ -67,7 +67,7 @@ Template.Verification_Requests_Completed.events({
     processed.push(processRecord);
     verificationRequestsUpdateStatusMethod.call({ id, status, processed });
     const opportunityName = VerificationRequests.getOpportunityDoc(id).name;
-    const studentName = Users.findDoc(request.studentID).username;
+    const studentName = Users.getProfile(request.studentID).username;
     const message = `${getRouteUserName()} reopened ${opportunityName} verification request for ${studentName}`;
     appLog.info(message);
   },

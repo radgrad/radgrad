@@ -58,12 +58,12 @@ class OpportunityInstanceCollection extends BaseCollection {
     const semesterID = Semesters.getID(semester);
     const semesterDoc = Semesters.findDoc(semesterID);
     const studentID = Users.getID(student);
-    const user = Users.findDoc(studentID);
+    const studentProfile = Users.getProfile(studentID);
     const opportunityID = Opportunities.getID(opportunity);
     if (semesterDoc.term === Semesters.SPRING || semesterDoc.term === Semesters.SUMMER) {
-      AcademicYearInstances.define({ year: semesterDoc.year - 1, student: user.username });
+      AcademicYearInstances.define({ year: semesterDoc.year - 1, student: studentProfile.username });
     } else {
-      AcademicYearInstances.define({ year: semesterDoc.year, student: user.username });
+      AcademicYearInstances.define({ year: semesterDoc.year, student: studentProfile.username });
     }
     if ((typeof verified) !== 'boolean') {
       throw new Meteor.Error(`${verified} is not a boolean.`);
@@ -182,15 +182,15 @@ class OpportunityInstanceCollection extends BaseCollection {
   }
 
   /**
-   * Returns the Student associated with the OpportunityInstance with the given instanceID.
+   * Returns the Student profile associated with the OpportunityInstance with the given instanceID.
    * @param instanceID The id of the OpportunityInstance.
-   * @returns {Object} The associated Student.
+   * @returns {Object} The associated Student profile.
    * @throws {Meteor.Error} If instanceID is not a valid ID.
    */
   getStudentDoc(instanceID) {
     this.assertDefined(instanceID);
     const instance = this._collection.findOne({ _id: instanceID });
-    return Users.findDoc(instance.studentID);
+    return Users.getProfile(instance.studentID);
   }
 
   /**
@@ -299,7 +299,7 @@ class OpportunityInstanceCollection extends BaseCollection {
     const semester = Semesters.findSlugByID(doc.semesterID);
     const opportunity = Opportunities.findSlugByID(doc.opportunityID);
     const verified = doc.verified;
-    const student = Users.findSlugByID(doc.studentID);
+    const student = Users.getProfile(doc.studentID).username;
     return { semester, opportunity, verified, student };
   }
 }

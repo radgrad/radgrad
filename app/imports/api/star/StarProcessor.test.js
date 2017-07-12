@@ -13,7 +13,7 @@ import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('StarProcessor', function testSuite() {
-    this.timeout(0);
+    this.timeout(5000);
     const starDataPath = 'testdata/StarSampleData-1.csv';
     before(function setup() {
       removeAllEntities();
@@ -24,10 +24,10 @@ if (Meteor.isServer) {
     });
 
     it('#processStarCsvData', function test() {
-      defineTestFixtures(['minimal', 'extended.courses.interests', 'abi.user']);
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'abi.student']);
       const csvData = Assets.getText(starDataPath);
-      const user = Users.findDoc({ username: 'abi' });
-      const courseInstanceDefinitions = processStarCsvData(user.username, csvData);
+      const profile = Users.getProfile('abi@hawaii.edu');
+      const courseInstanceDefinitions = processStarCsvData(profile.username, csvData);
       expect(courseInstanceDefinitions.length).to.equal(11);
     });
 
@@ -41,7 +41,7 @@ if (Meteor.isServer) {
         'realdata/star-data-6.csv'];
       realDataFiles.map(function parseDataFile(dataFile) {
         const csvData = Assets.getText(dataFile);
-        const user = Users.findSlugByID(makeSampleUser());
+        const user = Users.getProfile(makeSampleUser()).username;
         const courseInstanceDefinitions = processStarCsvData(user, csvData);
         courseInstanceDefinitions.map((definition) => CourseInstances.define(definition));
         return true;

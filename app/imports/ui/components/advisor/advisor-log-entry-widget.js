@@ -19,7 +19,7 @@ Template.Advisor_Log_Entry_Widget.helpers({
     return null;
   },
   advisorName(log) {
-    return Users.findDoc(log.advisorID).firstName;
+    return Users.getProfile(log.advisorID).firstName;
   },
   displayDate(log) {
     const date = log.createdOn;
@@ -41,7 +41,7 @@ Template.Advisor_Log_Entry_Widget.events({
         }
       });
       const advisorName = getRouteUserName();
-      const studentName = Users.findDoc(student).username;
+      const studentName = Users.getProfile(student).username;
       const message = `${advisorName} advised ${studentName} ${text}`;
       appLog.info(message);
     }

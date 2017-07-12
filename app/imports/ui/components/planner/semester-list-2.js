@@ -46,7 +46,6 @@ Template.Semester_List_2.helpers({
     if (opp) {
       const opportunity = Opportunities.findDoc({ _id: opp.opportunityID });
       if (opportunity) {
-        // window.camDebugging.stop('opportunityName');
         const name = opportunity.name;
         if (name.length > 20) {
           return `${name.substring(0, 16)}...`;

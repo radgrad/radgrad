@@ -63,7 +63,7 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
   plans() {
     if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
+      const user = Users.getProfile(Template.currentData().studentID.get());
       if (user.academicPlanID) {
         const plan = AcademicPlans.findDoc(user.academicPlanID);
         const semester = Semesters.findDoc(plan.effectiveSemesterID);
@@ -93,35 +93,35 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
   selectedCareerGoalIDs() {
     if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
+      const user = Users.getProfile(Template.currentData().studentID.get());
       return user.careerGoalIDs;
     }
     return '';
   },
   selectedSemesterID() {
     if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
+      const user = Users.getProfile(Template.currentData().studentID.get());
       return user.declaredSemesterID;
     }
     return '';
   },
   selectedDesiredDegreeID() {
     if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
+      const user = Users.getProfile(Template.currentData().studentID.get());
       return user.desiredDegreeID;
     }
     return '';
   },
   selectedInterestIDs() {
     if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
+      const user = Users.getProfile(Template.currentData().studentID.get());
       return user.interestIDs;
     }
     return '';
   },
   selectedPlan() {
     if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
+      const user = Users.getProfile(Template.currentData().studentID.get());
       if (user.academicPlanID) {
         return AcademicPlans.findDoc(user.academicPlanID).name;
       }
@@ -130,7 +130,7 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
   selectedYear() {
     if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
+      const user = Users.getProfile(Template.currentData().studentID.get());
       if (user.academicPlanID) {
         const plan = AcademicPlans.findDoc(user.academicPlanID);
         const semester = Semesters.findDoc(plan.effectiveSemesterID);
@@ -141,8 +141,8 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
   selectedRole() {
     if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
-      return user.roles[0];
+      const user = Users.getProfile(Template.currentData().studentID.get());
+      return user.role;
     }
     return '';
   },
@@ -151,14 +151,14 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
   slug() {
     if (Template.currentData().studentID.get()) {
-      const user = Users.findDoc(Template.currentData().studentID.get());
+      const user = Users.getProfile(Template.currentData().studentID.get());
       return Slugs.findDoc(user.slugID).name;
     }
     return '';
   },
   user() {
     if (Template.currentData().studentID.get()) {
-      return Users.findDoc(Template.currentData().studentID.get());
+      return Users.getProfile(Template.currentData().studentID.get());
     }
     return '';
   },
@@ -181,7 +181,7 @@ Template.Update_Degree_Plan_Widget.events({
         instance.successClass.set('success');
         instance.errorClass.set('');
         const advisor = getRouteUserName();
-        const student = Users.findDoc(updateData.id);
+        const student = Users.getProfile(updateData.id);
         const message = `${advisor} updated student ${student.username}`;
         appLog.info(message);
       });

@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import * as RouteNames from '../../../startup/client/router.js';
 
 Template.Student_Home_Menu.helpers({
   studentHomePageRouteName() {

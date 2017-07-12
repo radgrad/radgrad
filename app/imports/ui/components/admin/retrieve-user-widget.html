@@ -2,34 +2,15 @@
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>RETRIEVE USER</h4></div>
     <div class="ui top attached tabular stackable menu">
-      <a class="item" data-tab="admins">Admins</a>
       <a class="item" data-tab="advisors">Advisors</a>
       <a class="item" data-tab="alumni">Alumni</a>
       <a class="item" data-tab="faculty">Faculty</a>
       <a class="item" data-tab="mentors">Mentors</a>
       <a class="active item" data-tab="students">Students</a>
     </div>
-    <div class="ui bottom attached tab segment" data-tab="admins">
-      <div class="ui small horizontal list">
-        {{#each user in users adminRole}}
-          <div class="item">
-            <a class="ui basic grey label" target="_blank" href="{{url user}}">{{label user}}</a>
-          </div>
-        {{/each}}
-      </div>
-    </div>
     <div class="ui bottom attached tab segment" data-tab="advisors">
       <div class="ui small horizontal list">
         {{#each user in users advisorRole}}
-          <div class="item">
-            <a class="ui basic grey label" target="_blank" href="{{url user}}">{{label user}}</a>
-          </div>
-        {{/each}}
-      </div>
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="alumni">
-      <div class="ui small horizontal list">
-        {{#each user in users alumniRole}}
           <div class="item">
             <a class="ui basic grey label" target="_blank" href="{{url user}}">{{label user}}</a>
           </div>

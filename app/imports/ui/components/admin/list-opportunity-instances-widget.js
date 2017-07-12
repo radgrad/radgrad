@@ -16,7 +16,7 @@ Template.List_Opportunity_Instances_Widget.helpers({
       return Semesters.toString(oi.semesterID, true);
     });
     return _.sortBy(sortBySemester, function (oi) {
-      return Users.findSlugByID(oi.studentID);
+      return Users.getProfile(oi.studentID).username;
     });
   },
   count() {
@@ -37,7 +37,7 @@ Template.List_Opportunity_Instances_Widget.helpers({
   },
   name(oi) {
     const oppName = Opportunities.findDoc(oi.opportunityID).name;
-    const username = Users.findDoc(oi.studentID).username;
+    const username = Users.getProfile(oi.studentID).username;
     const semester = Semesters.toString(oi.semesterID, true);
     return `${username}-${oppName}-${semester}`;
   },

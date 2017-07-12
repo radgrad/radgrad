@@ -8,9 +8,9 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 Template.Student_Ice_Widget.helpers({
   earnedICE() {
     if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const courseInstances = CourseInstances.find({ studentID: user._id, verified: true }).fetch();
-      const oppInstances = OpportunityInstances.find({ studentID: user._id, verified: true }).fetch();
+      const profile = Users.getProfile(getUserIdFromRoute());
+      const courseInstances = CourseInstances.find({ studentID: profile.userID, verified: true }).fetch();
+      const oppInstances = OpportunityInstances.find({ studentID: profile.userID, verified: true }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
       return getEarnedICE(earnedInstances);
     }
@@ -24,9 +24,9 @@ Template.Student_Ice_Widget.helpers({
   },
   projectedICE() {
     if (getUserIdFromRoute()) {
-      const user = Users.findDoc(getUserIdFromRoute());
-      const courseInstances = CourseInstances.find({ studentID: user._id }).fetch();
-      const oppInstances = OpportunityInstances.find({ studentID: user._id }).fetch();
+      const profile = Users.getProfile(getUserIdFromRoute());
+      const courseInstances = CourseInstances.find({ studentID: profile.userID }).fetch();
+      const oppInstances = OpportunityInstances.find({ studentID: profile.userID }).fetch();
       const earnedInstances = courseInstances.concat(oppInstances);
       const ice = getProjectedICE(earnedInstances);
       if (ice.i > 100) {

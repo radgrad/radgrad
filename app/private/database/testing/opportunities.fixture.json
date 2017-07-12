@@ -10,7 +10,7 @@
           "slug": "acm-icpc",
           "description": "The ACM International Collegiate Programming Contest (ICPC) is a  programming competition",
           "opportunityType": "event",
-          "sponsor": "radgrad",
+          "sponsor": "radgrad@hawaii.edu",
           "ice": {
             "i": 20,
             "c": 0,
@@ -30,7 +30,7 @@
           "slug": "acm-manoa",
           "description": "The Association for Computing Machinery at Manoa is UH Manoa’s student chapter",
           "opportunityType": "club",
-          "sponsor": "radgrad",
+          "sponsor": "radgrad@hawaii.edu",
           "ice": {
             "i": 5,
             "c": 0,

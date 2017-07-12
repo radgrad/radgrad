@@ -3,6 +3,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import * as RouteNames from '../../../startup/client/router.js';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
@@ -14,8 +15,18 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { isInRole } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Menu.helpers({
+  academicPlansRouteName() {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerPlansPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerDegreesPageRouteName;
+    }
+    return RouteNames.mentorExplorerDegreesPageRouteName;
+  },
   careerGoalsRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
@@ -34,6 +45,8 @@ Template.Student_Explorer_Menu.helpers({
       current = FlowRouter.getParam('careerGoal');
     } else if (type === 'degree') {
       current = FlowRouter.getParam('degree');
+    } else if (type === 'plan') {
+      current = FlowRouter.getParam('plan');
     } else if (type === 'interest') {
       current = FlowRouter.getParam('interest');
     } else if (type === 'opportunity') {
@@ -112,6 +125,13 @@ Template.Student_Explorer_Menu.helpers({
     }
     return ret;
   },
+  firstPlan() {
+    const plan = AcademicPlans.findOne({}, { sort: { name: 1 } });
+    if (plan) {
+      return (Slugs.findDoc(plan.slugID)).name;
+    }
+    return '';
+  },
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
@@ -119,6 +139,8 @@ Template.Student_Explorer_Menu.helpers({
         return 'Career Goals';
       case RouteNames.studentExplorerCoursesPageRouteName:
         return 'Courses';
+      case RouteNames.studentExplorerPlansPageRouteName:
+        return 'Academic Plans';
       case RouteNames.studentExplorerDegreesPageRouteName:
         return 'Degrees';
       case RouteNames.studentExplorerInterestsPageRouteName:
@@ -140,10 +162,7 @@ Template.Student_Explorer_Menu.helpers({
     }
     return RouteNames.mentorExplorerInterestsPageRouteName;
   },
-  isInRole(role) {
-    const group = FlowRouter.current().route.group.name;
-    return group === role;
-  },
+  isInRole,
   isType(type, value) {
     return type === value;
   },
@@ -164,8 +183,8 @@ Template.Student_Explorer_Menu.helpers({
   },
   userCareerGoals(careerGoal) {
     let ret = '';
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+    const profile = Users.getProfile(getRouteUserName());
+    if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;
@@ -183,16 +202,17 @@ Template.Student_Explorer_Menu.helpers({
   },
   userDegrees(degree) {
     let ret = '';
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(user.desiredDegreeID, degree._id)) {
+    const profile = Users.getProfile(getRouteUserName());
+    // TODO This won't work, profile does not have desiredDegreeID.
+    if (_.includes(profile.desiredDegreeID, degree._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;
   },
   userInterests(interest) {
     let ret = '';
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(Users.getInterestIDs(user._id), interest._id)) {
+    const profile = Users.getProfile(getRouteUserName());
+    if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;
@@ -204,6 +224,14 @@ Template.Student_Explorer_Menu.helpers({
       opportunityID: opportunity._id,
     }).fetch();
     if (oi.length > 0) {
+      ret = 'check green circle outline icon';
+    }
+    return ret;
+  },
+  userPlans(plan) {
+    let ret = '';
+    const profile = Users.getProfile(getRouteUserName());
+    if (_.includes(profile.academicPlanID, plan._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;

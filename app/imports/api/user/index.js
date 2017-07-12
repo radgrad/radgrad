@@ -1,8 +1,6 @@
-import './ProfileCommonSchema';
-import './UserCollection';
-import './UserCollection.methods';
-import './MentorProfileCollection';
+import './BaseProfileCollection';
 import './AdvisorProfileCollection';
+import './MentorProfileCollection';
 import './FacultyProfileCollection';
-import './ValidUserAccountCollection';
-import './ValidUserAccountCollection.methods';
+import './StudentProfileCollection';
+import './UserCollection';

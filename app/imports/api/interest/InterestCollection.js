@@ -3,7 +3,6 @@ import Meteor from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import { InterestTypes } from '../interest/InterestTypeCollection';
-import { Users } from '../user/UserCollection';
 import { Courses } from '../course/CourseCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
@@ -105,7 +104,8 @@ class InterestCollection extends BaseSlugCollection {
   removeIt(instance) {
     const docID = this.getID(instance);
     // Check that this interest is not referenced by any User.
-    this.assertUnusedInterest([Users, Courses, CareerGoals, Opportunities, Teasers], docID);
+    // TODO Should the profile collections be included below?
+    this.assertUnusedInterest([Courses, CareerGoals, Opportunities, Teasers], docID);
     // OK, clear to delete.
     super.removeIt(docID);
   }

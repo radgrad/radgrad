@@ -35,10 +35,10 @@ function opportunities(interest) {
 
 function interestedUsers(interest, role) {
   const interested = [];
-  const users = Users.find({ roles: [role] }).fetch();
-  _.forEach(users, (user) => {
-    if (_.includes(user.interestIDs, interest._id)) {
-      interested.push(user);
+  const profiles = Users.findProfilesWithRole(role);
+  _.forEach(profiles, (profile) => {
+    if (_.includes(profile.interestIDs, interest._id)) {
+      interested.push(profile);
     }
   });
   return interested;
@@ -61,9 +61,9 @@ function careerGoals(interest) {
 
 Template.Faculty_Explorer_Interests_Page.helpers({
   addedCareerInterests() {
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const addedCareerInterests = [];
-    const allInterests = Users.getInterestIDsByType(user._id);
+    const allInterests = Users.getInterestIDsByType(profile.userID);
     _.forEach(allInterests[1], (interest) => {
       addedCareerInterests.push(Interests.findDoc(interest));
     });
@@ -72,9 +72,9 @@ Template.Faculty_Explorer_Interests_Page.helpers({
   addedInterests() {
     const addedInterests = [];
     const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     _.forEach(allInterests, (interest) => {
-      if (_.includes(user.interestIDs, interest._id)) {
+      if (_.includes(profile.interestIDs, interest._id)) {
         addedInterests.push(interest);
       }
     });
@@ -96,9 +96,9 @@ Template.Faculty_Explorer_Interests_Page.helpers({
   },
   nonAddedInterests() {
     const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const nonAddedInterests = _.filter(allInterests, function (interest) {
-      if (_.includes(Users.getInterestIDs(user._id), interest._id)) {
+      if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
         return false;
       }
       return true;

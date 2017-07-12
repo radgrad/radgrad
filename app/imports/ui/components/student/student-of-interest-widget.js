@@ -37,10 +37,10 @@ function matchingCourses() {
   if (getRouteUserName()) {
     const allCourses = availableCourses();
     const matching = [];
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const userInterests = [];
     let courseInterests = [];
-    _.forEach(Users.getInterestIDs(user._id), (id) => {
+    _.forEach(Users.getInterestIDs(profile.userID), (id) => {
       userInterests.push(Interests.findDoc(id));
     });
     _.forEach(allCourses, (course) => {
@@ -69,9 +69,9 @@ function hiddenCoursesHelper() {
     const courses = matchingCourses();
     let nonHiddenCourses;
     if (Template.instance().hidden.get()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const profile = Users.getProfile(getRouteUserName());
       nonHiddenCourses = _.filter(courses, (course) => {
-        if (_.includes(user.hiddenCourseIDs, course._id)) {
+        if (_.includes(profile.hiddenCourseIDs, course._id)) {
           return false;
         }
         return true;
@@ -115,10 +115,10 @@ const availableOpps = () => {
 function matchingOpportunities() {
   const allOpportunities = availableOpps();
   const matching = [];
-  const user = Users.findDoc({ username: getRouteUserName() });
+  const profile = Users.getProfile(getRouteUserName());
   const userInterests = [];
   let opportunityInterests = [];
-  _.forEach(Users.getInterestIDs(user._id), (id) => {
+  _.forEach(Users.getInterestIDs(profile.userID), (id) => {
     userInterests.push(Interests.findDoc(id));
   });
   _.forEach(allOpportunities, (opp) => {
@@ -145,9 +145,9 @@ function hiddenOpportunitiesHelper() {
     const opportunities = matchingOpportunities();
     let nonHiddenOpportunities;
     if (Template.instance().hidden.get()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const profile = Users.getProfile(getRouteUserName());
       nonHiddenOpportunities = _.filter(opportunities, (opp) => {
-        if (_.includes(user.hiddenOpportunityIDs, opp._id)) {
+        if (_.includes(profile.hiddenOpportunityIDs, opp._id)) {
           return false;
         }
         return true;
@@ -177,12 +177,12 @@ Template.Student_Of_Interest_Widget.helpers({
   },
   hiddenExists() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const profile = Users.getProfile(getRouteUserName());
       let ret;
       if (this.type === 'courses') {
-        ret = user.hiddenCourseIDs.length !== 0;
+        ret = profile.hiddenCourseIDs.length !== 0;
       } else {
-        ret = user.hiddenOpportunityIDs.length !== 0;
+        ret = profile.hiddenOpportunityIDs.length !== 0;
       }
       return ret;
     }

@@ -571,6 +571,16 @@ studentRoutes.route('/explorer/degrees/:degree', {
   },
 });
 
+export const studentExplorerPlansPageRouteName = 'Student_Explorer_Plans_Page';
+studentRoutes.route('/explorer/plans/:plan', {
+  name: studentExplorerPlansPageRouteName,
+  action() {
+    const message = `${FlowRouter.current().path}`;
+    appLog.info(message);
+    BlazeLayout.render('Student_Layout', { main: studentExplorerPlansPageRouteName });
+  },
+});
+
 export const studentExplorerInterestsPageRouteName = 'Student_Explorer_Interests_Page';
 studentRoutes.route('/explorer/interests/:interest', {
   name: studentExplorerInterestsPageRouteName,

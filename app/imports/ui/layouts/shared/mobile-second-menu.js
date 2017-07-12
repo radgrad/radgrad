@@ -14,24 +14,22 @@ Template.Mobile_Second_Menu.helpers({
   firstName() {
     const username = getRouteUserName();
     if (username) {
-      const user = Users.getUserFromUsername(username);
-      return user.firstName;
+      return Users.getProfile(username).firstName;
     }
     return 'Unknown';
   },
   lastName() {
     const username = getRouteUserName();
     if (username) {
-      const user = Users.getUserFromUsername(username);
-      return user.lastName;
+      return Users.getProfile(username).lastName;
     }
     return 'Unknown';
   },
   pictureSrc() {
     const username = getRouteUserName();
     if (username) {
-      const user = Users.getUserFromUsername(username);
-      return (user.picture) ? user.picture : '/images/default-profile-picture.png';
+      const profile = Users.getProfile(username);
+      return (profile.picture) ? profile.picture : '/images/default-profile-picture.png';
     }
     return '/images/default-profile-picture.png';
   },

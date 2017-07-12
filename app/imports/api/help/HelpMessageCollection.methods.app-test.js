@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { resetDatabaseMethod, defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { HelpMessages } from './HelpMessageCollection';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
@@ -7,50 +7,31 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('HelpMessageCollection Meteor Methods  TestBatch1', function test() {
+  describe('HelpMessageCollection Meteor Methods ', function test() {
     const collectionName = HelpMessages.getCollectionName();
     const routeName = 'Admin_Database_Dump_Page';
-    const definitionData = {
-      routeName,
-      title: 'Admin Database Dump Page',
-      text: 'help!',
-    };
+    const definitionData = { routeName, title: 'Admin Database Dump Page', text: 'help!' };
 
     before(function (done) {
-      this.timeout(0);
-      defineTestFixturesMethod.call(['minimal', 'admin.user'], done);
+      defineTestFixturesMethod.call(['minimal'], done);
     });
 
-    after(function (done) {
-      resetDatabaseMethod.call(null, done);
+    it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
-    it('Define Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          defineMethod.call({ collectionName, definitionData }, done);
-        }).catch(done);
-      });
+    it('Update Method', async function () {
+      const id = HelpMessages.findDocByRouteName(routeName)._id;
+      const title = 'new title';
+      const text = 'new help text';
+      await updateMethod.callPromise({ collectionName, updateData: { id, title, text } });
     });
 
-    it('Update Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const id = HelpMessages.findDocByRouteName(routeName)._id;
-          const title = 'new title';
-          const text = 'new help text';
-          updateMethod.call({ collectionName, updateData: { id, title, text } }, done);
-        }).catch(done);
-      });
-    });
-
-    it('Remove Method', function (done) {
-      withLoggedInUser().then(() => {
-        withRadGradSubscriptions().then(() => {
-          const instance = HelpMessages.findDocByRouteName(routeName)._id;
-          removeItMethod.call({ collectionName, instance }, done);
-        }).catch(done);
-      });
+    it('Remove Method', async function () {
+      const instance = HelpMessages.findDocByRouteName(routeName)._id;
+      await removeItMethod.callPromise({ collectionName, instance });
     });
   });
 }

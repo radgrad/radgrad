@@ -1,13 +1,14 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import * as RouteNames from '/imports/startup/client/router.js';
+import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { appLog } from '../../../api/log/AppLogCollection';
+import { isLabel } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -16,7 +17,7 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
     return course[0].name;
   },
   fullName(user) {
-    return `${Users.findDoc(user).firstName} ${Users.findDoc(user).lastName}`;
+    return Users.getFullName(user);
   },
   interestsRouteName() {
     return RouteNames.studentExplorerInterestsPageRouteName;
@@ -25,17 +26,13 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
     const slugID = Interests.findDoc(interestSlugName).slugID;
     return Slugs.getNameFromID(slugID);
   },
-  isLabel(label, value) {
-    return label === value;
-  },
+  isLabel,
   toUpper(string) {
     return string.toUpperCase();
   },
   userPicture(user) {
-    if (Users.findDoc(user).picture) {
-      return Users.findDoc(user).picture;
-    }
-    return '/images/default-profile-picture.png';
+    const picture = Users.getProfile(user).picture;
+    return picture || '/images/default-profile-picture.png';
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
@@ -48,26 +45,27 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
   },
   userStatus(careerGoal) {
     let ret = false;
-    const user = Users.findDoc({ username: getRouteUserName() });
-    if (_.includes(user.careerGoalIDs, careerGoal._id)) {
+    const profile = Users.getProfile(getRouteUserName());
+    if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
       ret = true;
     }
     return ret;
   },
   userUsername(user) {
-    return Users.findDoc(user).username;
+    return Users.getProfile(user).username;
   },
 });
 
 Template.Student_Explorer_CareerGoals_Widget.events({
   'click .addItem': function clickAddItem(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
-    const studentItems = student.careerGoalIDs;
+    const studentItems = profile.careerGoalIDs;
     try {
       studentItems.push(id);
-      Users.setCareerGoalIds(student._id, studentItems);
+      // TODO replace with method
+      Users.setCareerGoalIds(profile.userID, studentItems);
       const goal = CareerGoals.findDoc(id);
       const message = `${getRouteUserName()} added career goal ${goal.name}`;
       appLog.info(message);
@@ -77,12 +75,13 @@ Template.Student_Explorer_CareerGoals_Widget.events({
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
-    let studentItems = student.careerGoalIDs;
+    let studentItems = profile.careerGoalIDs;
     try {
       studentItems = _.without(studentItems, id);
-      Users.setCareerGoalIds(student._id, studentItems);
+      // TODO replace with method.
+      Users.setCareerGoalIds(profile.userID, studentItems);
       const goal = CareerGoals.findDoc(id);
       const message = `${getRouteUserName()} removed career goal ${goal.name}`;
       appLog.info(message);

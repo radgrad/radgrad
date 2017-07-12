@@ -7,12 +7,14 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 Template.Academic_Plan_Viewer_Component.onCreated(function academicPlanViewerWidgetOnCreated() {
   if (this.data) {
     this.plan = this.data.plan;
+    console.log(this.data, this.plan);
   }
 });
 
 Template.Academic_Plan_Viewer_Component.helpers({
   courses(yearNumber, semesterNumber) {
     const ret = [];
+    console.log(Template.instance().plan.get());
     if (Template.instance().plan.get()) {
       const totalSem = (3 * yearNumber) + semesterNumber;
       // console.log(`courses(${yearNumber}, ${semesterNumber}) ${totalSem}`);
@@ -47,6 +49,7 @@ Template.Academic_Plan_Viewer_Component.helpers({
     return '';
   },
   getPlan() {
+    console.log(Template.instance().plan.get(), Template.instance());
     return Template.instance().plan.get();
   },
   hasSummer(yearNum) {

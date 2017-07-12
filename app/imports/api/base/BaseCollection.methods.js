@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
+import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { RadGrad } from '../radgrad/RadGrad';
 import { AppLogs } from '../log/AppLogCollection';
-import { removeAllEntities } from './BaseUtilities';
 import { ROLE } from '../role/Role';
 
 /** @module api/base/BaseCollectionMethods */
@@ -80,20 +80,10 @@ export const clearAppLogMethod = new ValidatedMethod({
   },
 });
 
-/**
- * Resets all of the RadGrad collections to their empty state. Only available in test mode.
- */
-export const resetDatabaseMethod = new ValidatedMethod({
-  name: 'base.resetDatabase',
-  validate: null,
-  run() {
-    removeAllEntities();
-  },
-});
-
 
 export const defineMethod = new ValidatedMethod({
   name: 'BaseCollection.define',
+  mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, definitionData }) {
     const collection = RadGrad.getCollection(collectionName);
@@ -104,20 +94,24 @@ export const defineMethod = new ValidatedMethod({
 
 export const updateMethod = new ValidatedMethod({
   name: 'BaseCollection.update',
+  mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, updateData }) {
     const collection = RadGrad.getCollection(collectionName);
     collection.assertValidRoleForMethod(this.userId);
-    return collection.update(updateData.id, updateData);
+    collection.update(updateData.id, updateData);
+    return true;
   },
 });
 
 export const removeItMethod = new ValidatedMethod({
   name: 'BaseCollection.removeIt',
+  mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, instance }) {
     const collection = RadGrad.getCollection(collectionName);
     collection.assertValidRoleForMethod(this.userId);
-    return collection.removeIt(instance);
+    collection.removeIt(instance);
+    return true;
   },
 });

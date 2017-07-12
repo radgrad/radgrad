@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
+import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Student_Feed_Modal.helpers({
@@ -9,7 +9,7 @@ Template.Student_Feed_Modal.helpers({
     return Users.getFullName(student._id);
   },
   userSlug(feed) {
-    return Users.findDoc(feed.userIDs[0]).username;
+    return Users.getProfile(feed.userIDs[0]).username;
   },
   userRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
@@ -17,7 +17,7 @@ Template.Student_Feed_Modal.helpers({
   students(feed) {
     const students = [];
     _.forEach(feed.userIDs, function (userID) {
-      students.push(Users.findDoc(userID));
+      students.push(Users.getProfile(userID));
     });
     return students;
   },

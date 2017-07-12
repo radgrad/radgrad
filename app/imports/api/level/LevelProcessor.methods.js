@@ -1,10 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { _ } from 'meteor/erasaur:meteor-lodash';
-import { calcLevel, updateStudentLevel } from './LevelProcessor';
+import { calcLevel, updateStudentLevel, updateAllStudentLevels } from './LevelProcessor';
 import { ROLE } from '../role/Role';
-import { Users } from '../user/UserCollection';
 
 /** @module api/level/LevelProcessorMethods */
 
@@ -43,9 +41,6 @@ export const updateAllStudentLevelsMethod = new ValidatedMethod({
   name: 'LevelProcessor.updateAllStudentLevels',
   validate: null,
   run() {
-    const students = Users.find({ roles: [ROLE.STUDENT] }).fetch();
-    _.forEach(students, (student) => {
-      updateStudentLevel(student._id);
-    });
+    updateAllStudentLevels();
   },
 });

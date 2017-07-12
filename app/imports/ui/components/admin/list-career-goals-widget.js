@@ -11,8 +11,8 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 
 function numReferences(careerGoal) {
   let references = 0;
-  Users.find().forEach(function (userDoc) {
-    if (_.includes(userDoc.careerGoalIDs, careerGoal._id)) {
+  Users.findProfiles().forEach(function (profile) {
+    if (_.includes(profile.careerGoalIDs, careerGoal._id)) {
       references += 1;
     }
   });

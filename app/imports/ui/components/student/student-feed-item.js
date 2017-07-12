@@ -1,11 +1,7 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Users } from '../../../api/user/UserCollection.js';
-
-function dateDiffInDays(a, b) {
-  const MS_PER_DAY = 1000 * 60 * 60 * 24;
-  return Math.floor((a - b) / MS_PER_DAY);
-}
+import { dateDiffInDays } from '../../utilities/template-helpers';
 
 Template.Student_Feed_Item.helpers({
   feedTimestamp(feed) {
@@ -28,7 +24,7 @@ Template.Student_Feed_Item.helpers({
   students(feed) {
     const students = [];
     _.forEach(feed.userIDs, function (userID) {
-      students.push(Users.findDoc(userID));
+      students.push(Users.getProfile(userID));
     });
     return students;
   },

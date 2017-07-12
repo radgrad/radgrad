@@ -1,16 +1,12 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import * as RouteNames from '../../../startup/client/router.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection.js';
-
-function dateDiffInDays(a, b) {
-  const MS_PER_DAY = 1000 * 60 * 60 * 24;
-  return Math.floor((a - b) / MS_PER_DAY);
-}
+import { dateDiffInDays } from '../../utilities/template-helpers';
 
 Template.Student_Feed_Widget.helpers({
   courseSlug(feed) {
@@ -20,7 +16,7 @@ Template.Student_Feed_Widget.helpers({
     return Slugs.findDoc(Opportunities.findDoc(feed.opportunityID).slugID).name;
   },
   userSlug(feed) {
-    return Users.findDoc(feed.userIDs[0]).username;
+    return Users.getProfile(feed.userIDs[0]).username;
   },
   userRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
@@ -64,7 +60,7 @@ Template.Student_Feed_Widget.helpers({
   students(feed) {
     const students = [];
     _.forEach(feed.userIDs, function (userID) {
-      students.push(Users.findDoc(userID));
+      students.push(Users.getProfile(userID));
     });
     return students;
   },

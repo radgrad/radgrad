@@ -1,10 +1,11 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import * as RouteNames from '/imports/startup/client/router.js';
+import * as RouteNames from '../../../startup/client/router.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
@@ -13,7 +14,7 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 Template.Faculty_About_Me_Widget.helpers({
   careerGoals() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return _.map(user.careerGoalIDs, (id) => CareerGoals.findDoc(id));
     }
     return [];
@@ -27,7 +28,7 @@ Template.Faculty_About_Me_Widget.helpers({
   desiredDegree() {
     let ret = '';
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       if (user.desiredDegreeID) {
         ret = DesiredDegrees.findDoc(user.desiredDegreeID).name;
       }
@@ -36,8 +37,8 @@ Template.Faculty_About_Me_Widget.helpers({
   },
   email() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return Users.getEmail(user._id);
+      const user = Users.getProfile(getRouteUserName());
+      return user.username;
     }
     return '';
   },
@@ -76,8 +77,8 @@ Template.Faculty_About_Me_Widget.helpers({
   },
   interests() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
-      return _.map(user.interestIDs, (id) => Interests.findDoc(id));
+      const profile = Users.getProfile(getRouteUserName());
+      return _.map(profile.interestIDs, (id) => Interests.findDoc(id));
     }
     return [];
   },
@@ -86,14 +87,14 @@ Template.Faculty_About_Me_Widget.helpers({
   },
   name() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return `${user.firstName} ${user.lastName}`;
     }
     return '';
   },
   picture() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return user.picture;
     }
     return '';
@@ -103,14 +104,14 @@ Template.Faculty_About_Me_Widget.helpers({
   },
   studentPicture() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return user.picture;
     }
     return '';
   },
   website() {
     if (getRouteUserName()) {
-      const user = Users.findDoc({ username: getRouteUserName() });
+      const user = Users.getProfile(getRouteUserName());
       return user.website;
     }
     return '';
@@ -120,15 +121,17 @@ Template.Faculty_About_Me_Widget.helpers({
 Template.Faculty_About_Me_Widget.events({
   'submit .website': function submitWebsite(event) {
     event.preventDefault();
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const user = Users.getProfile(getRouteUserName());
     const choice = event.target.website.value;
-    Users.setWebsite(user._id, choice);
+    // TODO convert to method call.
+    FacultyProfiles.update(user._id, { website: choice });
   },
   'submit .picture': function submitPicture(event) {
     event.preventDefault();
-    const user = Users.findDoc({ username: getRouteUserName() });
+    const user = Users.getProfile(getRouteUserName());
     const choice = event.target.picture.value;
-    Users.setPicture(user._id, choice);
+    // TODO Convert to method call.
+    FacultyProfiles.update(user._id, { picture: choice });
   },
   'click .picture': function clickPicture(event) {
     event.preventDefault();

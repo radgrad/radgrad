@@ -1,12 +1,15 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
+import * as RouteNames from '../../../startup/client/router.js';
+import {
+  opportunitySemesters,
+} from '../../utilities/template-helpers';
 
 function interestedStudentsHelper(item, type) {
   const interested = [];
@@ -28,31 +31,19 @@ function interestedStudentsHelper(item, type) {
   return interested;
 }
 
-function currentSemester() {
-  const currentSemesterID = Semesters.getCurrentSemester();
-  const currentSem = Semesters.findDoc(currentSemesterID);
-  return currentSem;
-}
-
-function opportunitySemesters(opp) {
-  const semesterIDs = opp.semesterIDs;
-  const upcomingSemesters = _.filter(semesterIDs, semesterID => Semesters.isUpcomingSemester(semesterID));
-  return _.map(upcomingSemesters, semesterID => Semesters.toString(semesterID));
-}
-
 Template.Student_Of_Interest_Card.helpers({
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
   },
   hidden() {
     let ret = '';
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     if (this.type === 'courses') {
-      if (_.includes(student.hiddenCourseIDs, this.item._id)) {
+      if (_.includes(profile.hiddenCourseIDs, this.item._id)) {
         ret = 'grey';
       }
     } else
-      if (_.includes(student.hiddenOpportunityIDs, this.item._id)) {
+      if (_.includes(profile.hiddenOpportunityIDs, this.item._id)) {
         ret = 'grey';
       }
     return ret;
@@ -87,7 +78,7 @@ Template.Student_Of_Interest_Card.helpers({
   },
   nextYears(amount) {
     const nextYears = [];
-    const currentSem = currentSemester();
+    const currentSem = Semesters.getCurrentSemesterDoc();
     let currentYear = currentSem.year;
     for (let i = 0; i < amount; i += 1) {
       nextYears.push(currentYear);
@@ -102,8 +93,8 @@ Template.Student_Of_Interest_Card.helpers({
     return RouteNames.studentExplorerOpportunitiesPageRouteName;
   },
   replaceSemString(array) {
-    console.log('array', array);
-    const currentSem = currentSemester();
+    // console.log('array', array);
+    const currentSem = Semesters.getCurrentSemesterDoc();
     const currentYear = currentSem.year;
     let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
       return semesterYear.split(' ')[1] >= currentYear;
@@ -116,14 +107,13 @@ Template.Student_Of_Interest_Card.helpers({
     if (studentID === 'elipsis') {
       return '/images/elipsis.png';
     }
-    const student = Users.findDoc(studentID);
-    return student.picture;
+    return Users.getProfile(studentID).picture;
   },
   typeCourse() {
     return (this.type === 'courses');
   },
   userSlug(studentID) {
-    return Slugs.findDoc((Users.findDoc(studentID)).slugID).name;
+    return Users.getProfile(studentID).username;
   },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
@@ -137,45 +127,47 @@ Template.Student_Of_Interest_Card.helpers({
 Template.Student_Of_Interest_Card.events({
   'click .hide': function clickItemHide(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = this.item._id;
     if (this.type === 'courses') {
-      const studentItems = student.hiddenCourseIDs;
+      const studentItems = profile.hiddenCourseIDs;
       try {
         studentItems.push(id);
-        Users.setHiddenCourseIds(student._id, studentItems);
+        // TODO Replace with method.
+        Users.setHiddenCourseIds(profile.userID, studentItems);
       } catch (e) {
-        // don't do anything.
+        // TODO eliminate empty catch.
       }
     } else {
-      const studentItems = student.hiddenOpportunityIDs;
+      const studentItems = profile.hiddenOpportunityIDs;
       try {
         studentItems.push(id);
-        Users.setHiddenOpportunityIds(student._id, studentItems);
+        // TODO Replace with method.
+        Users.setHiddenOpportunityIds(profile.userID, studentItems);
       } catch (e) {
-        // don't do anything.
+        // TODO eliminate empty catch.
       }
     }
   },
   'click .unhide': function clickItemHide(event) {
     event.preventDefault();
-    const student = Users.findDoc({ username: getRouteUserName() });
+    const profile = Users.getProfile(getRouteUserName());
     const id = this.item._id;
     if (this.type === 'courses') {
-      let studentItems = student.hiddenCourseIDs;
+      let studentItems = profile.hiddenCourseIDs;
       try {
         studentItems = _.without(studentItems, id);
-        Users.setHiddenCourseIds(student._id, studentItems);
+        Users.setHiddenCourseIds(profile.userID, studentItems);
       } catch (e) {
-        // don't do anything.
+        // TODO eliminate empty catch
       }
     } else {
-      let studentItems = student.hiddenOpportunityIDs;
+      let studentItems = profile.hiddenOpportunityIDs;
       try {
         studentItems = _.without(studentItems, id);
-        Users.setHiddenOpportunityIds(student._id, studentItems);
+        Users.setHiddenOpportunityIds(profile.userID, studentItems);
       } catch (e) {
-        // don't do anything.
+        // TODO eliminate empty catch.
       }
     }
   },

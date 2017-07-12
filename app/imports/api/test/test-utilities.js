@@ -3,6 +3,8 @@ import { DDP } from 'meteor/ddp-client';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { RadGrad } from '../radgrad/RadGrad';
+import { Users } from '../user/UserCollection';
+import { removeAllEntities } from '../base/BaseUtilities';
 
 /* global Assets */
 
@@ -50,16 +52,17 @@ export function defineTestFixtures(fixtureNames) {
   _.each(fixtureNames, fixtureName => defineTestFixture(`${fixtureName}.fixture.json`));
 }
 
-/**
- * A validated method that loads the passed fixture file.
- */
-export const defineTestFixtureMethod = new ValidatedMethod({
-  name: 'test.defineTestFixtureMethod',
-  validate: null,
-  run(fixtureName) {
-    defineTestFixture(fixtureName);
-  },
-});
+// /**
+//  * A validated method that loads the passed fixture file.
+//  */
+// export const defineTestFixtureMethod = new ValidatedMethod({
+//   name: 'test.defineTestFixtureMethod',
+//   validate: null,
+//   run(fixtureName) {
+//     defineTestFixture(fixtureName);
+//     return true;
+//   },
+// });
 
 /**
  * A validated method that loads the passed list of fixture files in the order passed.
@@ -68,7 +71,9 @@ export const defineTestFixturesMethod = new ValidatedMethod({
   name: 'test.defineTestFixturesMethod',
   validate: null,
   run(fixtureNames) {
+    removeAllEntities();
     defineTestFixtures(fixtureNames);
+    return true;
   },
 });
 
@@ -79,6 +84,7 @@ export const defineTestFixturesMethod = new ValidatedMethod({
 export function withRadGradSubscriptions() {
   return new Promise(resolve => {
     _.each(RadGrad.collections, collection => collection.subscribe());
+    Users.subscribe();
     const poll = Meteor.setInterval(() => {
       if (DDP._allSubscriptionsReady()) {
         Meteor.clearInterval(poll);
@@ -92,10 +98,11 @@ export function withRadGradSubscriptions() {
  * Returns a Promise that resolves if one can successfully login with the passed credentials.
  * Credentials default to the standard admin username and password.
  */
-export function withLoggedInUser({ username = 'RadGrad', password = 'foo' } = {}) {
+export function withLoggedInUser({ username = 'radgrad@hawaii.edu', password = 'foo' } = {}) {
   return new Promise((resolve, reject) => {
     Meteor.loginWithPassword(username, password, (error) => {
       if (error) {
+        console.log('Error: withLoggedInUser', error);
         reject();
       } else {
         resolve();

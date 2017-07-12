@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
-import * as RouteNames from '/imports/startup/client/router.js';
 import { Roles } from 'meteor/alanning:roles';
+import * as RouteNames from '../../../startup/client/router.js';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { ROLE } from '../../../api/role/Role';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -33,18 +33,16 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
     return MentorAnswers.getAnswers(questionID);
   },
   mentorName(mentorID) {
-    const firstName = Users.findDoc({ _id: mentorID }).firstName;
-    const lastName = Users.findDoc({ _id: mentorID }).lastName;
-    return `${firstName}  ${lastName}`;
+    return Users.getFullName(mentorID);
   },
   picture(mentorID) {
-    return Users.findDoc({ _id: mentorID }).picture;
+    return Users.getProfile(mentorID).picture;
   },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
   },
   userUsername(mentorID) {
-    return Users.findDoc({ _id: mentorID }).username;
+    return Users.getProfile(mentorID).username;
   },
 });
 
