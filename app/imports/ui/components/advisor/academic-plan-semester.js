@@ -17,14 +17,23 @@ function takenSlugs(courseInstances) {
   });
 }
 
-function checkIfPlanSlugIsSatified(takenCourseSlugs, planCourseSlugs, planSlug) {
+function removeTakenCourses(takenCourseSlugs, planCourseSlugs) {
+  return _.filter(takenCourseSlugs, function (o) {
+    return !_.find(planCourseSlugs, function (p) {
+      return p.indexOf(o) !== -1;
+    });
+  });
+}
+
+function checkIfPlanSlugIsSatisfied(takenCourseSlugs, planCourseSlugs, planSlug) {
   let ret = false;
   const countIndex = planSlug.indexOf('-');
   const planCount = parseInt(planSlug.substring(countIndex + 1), 10);
   const depts = planChoiceUtils.getDepartments(planSlug);
+  const cleanedTaken = removeTakenCourses(takenCourseSlugs, planCourseSlugs);
   if (planCount === 1) {  // Only need one instance of the planSlug in the takenCourseSlugs
     if (planSlug.indexOf('400+') !== -1) {  // 400 or above choice
-      _.forEach(takenCourseSlugs, (s) => {
+      _.forEach(cleanedTaken, (s) => {
         _.forEach(depts, (d) => {
           if (s.startsWith(`${d}_4`)) {
             ret = true;
@@ -63,7 +72,7 @@ function checkIfPlanSlugIsSatified(takenCourseSlugs, planCourseSlugs, planSlug) 
   } else // multiple choices so we need to count the matches.
     if (planSlug.indexOf('400+') !== -1) {
       let c = 0;
-      _.forEach(takenCourseSlugs, (s) => {
+      _.forEach(cleanedTaken, (s) => {
         _.forEach(depts, (d) => {
           if (s.startsWith(`${d}_4`)) {
             c += 1;
@@ -117,7 +126,7 @@ Template.Academic_Plan_Semester.helpers({
     if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
       const courses = CourseInstances.find({ studentID }).fetch();
       const courseSlugs = takenSlugs(courses);
-      return checkIfPlanSlugIsSatified(courseSlugs, planCourses, course);
+      return checkIfPlanSlugIsSatisfied(courseSlugs, planCourses, course);
     }
     return true;
   },

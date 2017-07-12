@@ -7,6 +7,9 @@ import './academic-plan-chooser-component.js';
 import './academic-plan-semester.html';
 import './academic-plan-semester.js';
 
+import './academic-plan-static-viewer.html';
+import './academic-plan-static-viewer';
+
 import './academic-plan-viewer-component.html';
 import './academic-plan-viewer-component.js';
 

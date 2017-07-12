@@ -1,17 +1,16 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-// import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
-// import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
-// import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 // import { updateAcademicPlanMethod } from '../../../api/user/UserCollection.methods';
-// import { appLog } from '../../../api/log/AppLogCollection';
+import { appLog } from '../../../api/log/AppLogCollection';
 import { isInRole } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
@@ -49,7 +48,6 @@ Template.Student_Explorer_Plans_Widget.helpers({
   },
   userStatus(plan) {
     const profile = Users.getProfile(getRouteUserName());
-    console.log(plan, profile);
     return profile.academicPlanID !== plan._id;
   },
   userUsername(user) {
@@ -71,6 +69,9 @@ Template.Student_Explorer_Plans_Widget.helpers({
   planVar() {
     return Template.instance().planVar;
   },
+  plan() {
+    return Template.instance().data.item;
+  },
   selectedPlan() {
     const profile = Users.getProfile(getRouteUserName());
     if (profile.academicPlanID) {
@@ -81,7 +82,21 @@ Template.Student_Explorer_Plans_Widget.helpers({
 });
 
 Template.Student_Explorer_Plans_Widget.events({
-  // add your events here
+  'click .addItem': function selectAcademicPlan(event, instance) {
+    event.preventDefault();
+    const profile = Users.getProfile(getRouteUserName());
+    const updateData = {};
+    const collectionName = StudentProfiles.getCollectionName();
+    updateData.id = profile._id;
+    updateData.academicPlan = instance.data.id;
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        appLog.error(`Error updating ${getRouteUserName()}'s academic plan ${JSON.stringify(error)}`);
+      } else {
+        appLog.info(`Updated ${getRouteUserName()}'s academic plan to ${instance.data.slug}`);
+      }
+    });
+  },
 });
 
 Template.Student_Explorer_Plans_Widget.onRendered(function studentExplorerPlansWidgetOnRendered() {
