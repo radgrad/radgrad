@@ -18,6 +18,9 @@ import './student-explorer-opportunities-page.js';
 
 import './student-explorer-page.html';
 
+import './student-explorer-plans-page.html';
+import './student-explorer-plans-page';
+
 import './student-explorer-users-page.html';
 import './student-explorer-users-page.js';
 

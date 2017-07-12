@@ -229,6 +229,19 @@ class BaseCollection {
   }
 
   /**
+   * Internal helper function to simplify definition of the updateData for updateMethod.
+   * @param userId The userID.
+   * @param roles An array of roles.
+   * @returns true if the user is in the roles, false otherwise.
+   */
+  _hasRole(userId, roles) {  // eslint-disable-line class-methods-use-this
+    if (!userId) {
+      return false;
+    }
+    return Roles.userIsInRole(userId, roles);
+  }
+
+  /**
    * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or Advisor.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
    * @param userId The userId of the logged in user. Can be null or undefined

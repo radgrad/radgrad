@@ -110,7 +110,7 @@ class StudentProfileCollection extends BaseProfileCollection {
 
     // Only Admins and Advisors can update the isAlumni and level fields.
     // Or if no one is logged in when this is executed (i.e. for testing) then it's cool.
-    if (!Meteor.userId() || this._assertRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR])) {
+    if (!Meteor.userId() || this._hasRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR])) {
       if (isAlumni) {
         updateData.isAlumni = isAlumni;
         updateData.role = (isAlumni) ? ROLE.ALUMNI : ROLE.STUDENT;

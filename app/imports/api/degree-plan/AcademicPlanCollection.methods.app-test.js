@@ -10,9 +10,10 @@ if (Meteor.isClient) {
   describe('AcademicPlanCollection Meteor Methods ', function test() {
     const collectionName = AcademicPlans.getCollectionName();
     const definitionData = {
-      slug: 'bs-cs-2016',
+      slug: 'bs-cs-2016-test',
       degreeSlug: 'bs-cs',
       name: 'B.S. in Computer Sciences',
+      description: 'The BS in CS degree offers a solid foundation in computer science.',
       semester: 'Fall-2016',
       coursesPerSemester: [2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0],
       courseList: ['ics_111-1', 'ics_141-1', 'ics_211-1', 'ics_241-1', 'ics_311-1', 'ics_314-1', 'ics_212-1',
@@ -27,7 +28,7 @@ if (Meteor.isClient) {
     it('Define Method', async function () {
       await withLoggedInUser();
       await withRadGradSubscriptions();
-      await defineMethod.call({ collectionName, definitionData });
+      await defineMethod.callPromise({ collectionName, definitionData });
     });
 
     it('Update Method', async function () {

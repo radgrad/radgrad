@@ -3,6 +3,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import * as RouteNames from '../../../startup/client/router.js';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
@@ -17,6 +18,15 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 import { isInRole } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Menu.helpers({
+  academicPlansRouteName() {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerPlansPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerDegreesPageRouteName;
+    }
+    return RouteNames.mentorExplorerDegreesPageRouteName;
+  },
   careerGoalsRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
@@ -35,6 +45,8 @@ Template.Student_Explorer_Menu.helpers({
       current = FlowRouter.getParam('careerGoal');
     } else if (type === 'degree') {
       current = FlowRouter.getParam('degree');
+    } else if (type === 'plan') {
+      current = FlowRouter.getParam('plan');
     } else if (type === 'interest') {
       current = FlowRouter.getParam('interest');
     } else if (type === 'opportunity') {
@@ -113,6 +125,13 @@ Template.Student_Explorer_Menu.helpers({
     }
     return ret;
   },
+  firstPlan() {
+    const plan = AcademicPlans.findOne({}, { sort: { name: 1 } });
+    if (plan) {
+      return (Slugs.findDoc(plan.slugID)).name;
+    }
+    return '';
+  },
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
@@ -120,6 +139,8 @@ Template.Student_Explorer_Menu.helpers({
         return 'Career Goals';
       case RouteNames.studentExplorerCoursesPageRouteName:
         return 'Courses';
+      case RouteNames.studentExplorerPlansPageRouteName:
+        return 'Academic Plans';
       case RouteNames.studentExplorerDegreesPageRouteName:
         return 'Degrees';
       case RouteNames.studentExplorerInterestsPageRouteName:
@@ -203,6 +224,14 @@ Template.Student_Explorer_Menu.helpers({
       opportunityID: opportunity._id,
     }).fetch();
     if (oi.length > 0) {
+      ret = 'check green circle outline icon';
+    }
+    return ret;
+  },
+  userPlans(plan) {
+    let ret = '';
+    const profile = Users.getProfile(getRouteUserName());
+    if (_.includes(profile.academicPlanID, plan._id)) {
       ret = 'check green circle outline icon';
     }
     return ret;
