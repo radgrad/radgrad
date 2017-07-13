@@ -1,6 +1,22 @@
 <template name="Admin_Login">
   {{#unless currentUser}}
-    <div class="ui small compact green basic button cas-login">ADMIN LOGIN</div>
+    <a class="ui small compact green basic button">ADMIN LOGIN</a>
     <div class="ui error message hidden"></div>
   {{/unless}}
+
+  <div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Login
+    </div>
+    <div class="actions">
+      <div class="ui black deny button">
+        Nope
+      </div>
+      <div class="ui positive right labeled icon button">
+        Yep, that's me
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  </div>
 </template>
