@@ -1,4 +1,5 @@
 import './admin-login.html';
+import './admin-login.js';
 
 import './first-menu.html';
 import './first-menu.js';
