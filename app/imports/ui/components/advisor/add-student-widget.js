@@ -8,8 +8,11 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
+import { Users } from '../../../api/user/UserCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import { getRouteUserName } from '../shared/route-user-name';
+import { appLog } from '../../../api/log/AppLogCollection';
 
 // /** @module ui/components/advisor/Add_Student_Widget */
 
@@ -77,6 +80,9 @@ Template.Add_Student_Widget.events({
           const feedData = { feedType: 'new-user', user: newData.username };
           defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
           FormUtils.indicateSuccess(instance, event);
+          const advisor = getRouteUserName();
+          const message = `${advisor} added new student ${newData.username} ${JSON.stringify(newData)}`;
+          appLog.info(message);
         }
       });
     } else {

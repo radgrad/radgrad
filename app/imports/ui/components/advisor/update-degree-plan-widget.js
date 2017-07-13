@@ -1,7 +1,5 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
-import { _ } from 'meteor/erasaur:meteor-lodash';
-import { $ } from 'meteor/jquery';
 import SimpleSchema from 'simpl-schema';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
@@ -68,7 +66,10 @@ Template.Update_Degree_Plan_Widget.helpers({
     if (Template.currentData().studentID.get()) {
       const user = Users.getProfile(Template.currentData().studentID.get());
       if (user.declaredSemesterID) {
-        const semesterNum = Semesters.findDoc(user.declaredSemesterID).semesterNumber;
+        const declaredSemester = Semesters.findDoc(user.declaredSemesterID);
+        const year = declaredSemester.term === Semesters.FALL ? declaredSemester.year : declaredSemester.year - 1;
+        const lastFallID = Semesters.define({ term: Semesters.FALL, year });
+        const semesterNum = Semesters.findDoc(lastFallID).semesterNumber;
         return AcademicPlans.find({ semesterNumber: { $gte: semesterNum } }).fetch();
       }
       return AcademicPlans.find().fetch();
@@ -170,7 +171,7 @@ Template.Update_Degree_Plan_Widget.events({
           instance.successClass.set('success');
           instance.errorClass.set('');
           const advisor = getRouteUserName();
-          const student = Users.getProfile(Template.currentData().studentID.get());
+          const student = Users.getProfile(instance.data.studentID.get());
           const message = `${advisor} updated student ${student.username} ${JSON.stringify(updateData)}`;
           appLog.info(message);
         }
