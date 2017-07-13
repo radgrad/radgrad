@@ -16,6 +16,9 @@ import './academic-plan-viewer-component.js';
 import './academic-plan-viewer-widget.html';
 import './academic-plan-viewer-widget.js';
 
+import './add-student-widget.html';
+import './add-student-widget';
+
 import './advisor-log-entry-widget.html';
 import './advisor-log-entry-widget.js';
 
