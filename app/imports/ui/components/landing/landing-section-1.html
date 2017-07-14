@@ -16,14 +16,10 @@
         {{> RadGrad_Login_Buttons }}
       </div>
 
-      <div class="item">
-        {{> Logout }}
-      </div>
-
-      <div class="item">
-        <div class="ui small compact green basic button">
-          {{#if checkLanding}}
-            {{#if currentUser}}
+      {{#if checkLanding}}
+        {{#if currentUser}}
+          <div class="item">
+            <div class="ui small compact green basic button">
               {{#if isInRole 'FACULTY'}}
                 <a style="color: #6FBE44;"
                    href="{{pathFor facultyHomePageRouteName username=(currentUser.username)}}">Home</a>
@@ -42,13 +38,11 @@
               {{#if isInRole 'MENTOR'}}
                 <a style="color: #6FBE44;" href="{{pathFor mentorHomePageRouteName username=(currentUser.username)}}">Home</a>
               {{/if}}
-            {{else}}
-            Advisor<br>
-              {{> loginButtons align="right"}}
-            {{/if}}
-          {{/if}}
-        </div>
-      </div>
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+
     </div>
   </div>
 

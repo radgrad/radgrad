@@ -38,15 +38,9 @@ Template.RadGrad_Login_Buttons.events({
     $('.ui.modal').modal('show');
   },
 
-  'click .submit-login-button': function clickit (event) {
-    event.preventDefault();
-    console.log('submit-login-button');
-  },
 
-  submit(event) {
-    event.preventDefault();
-    console.log('after submit', event);
-  },
+
+
 });
 
 

@@ -17,9 +17,6 @@ import './if-authorized.js';
 import './layout-body.css';
 import './loading.html';
 
-import './logout.html';
-import './logout.js';
-
 import './page-not-found.html';
 
 import './radgrad-logo-text.html';
