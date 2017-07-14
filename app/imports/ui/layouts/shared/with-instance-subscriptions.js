@@ -11,6 +11,7 @@ import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection';
+import { meteorAccountDataPublicationName} from '../../../startup/server/publications';
 
 /* eslint-disable object-shorthand */
 
@@ -33,6 +34,7 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
     instanceSubs.subscribe(MentorQuestions.getPublicationName());
     instanceSubs.subscribe(OpportunityInstances.publicationNames.student);
     instanceSubs.subscribe(VerificationRequests.getPublicationName());
+    instanceSubs.subscribe(meteorAccountDataPublicationName);
     self.ready.set(instanceSubs.ready());
   });
 });
