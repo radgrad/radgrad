@@ -1,0 +1,24 @@
+<template name="RadGrad_Login_Buttons">
+  {{#unless currentUser}}
+    <div class="ui dropdown item">
+      <a>LOGIN</a>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <div class="item cas-login">... as student</div>
+        <div class="item cas-login">... as faculty</div>
+        <div class="item meteor-login">... as mentor</div>
+        <div class="item cas-login">... as advisor</div>
+        <div class="item meteor-login">... as admin</div>
+      </div>
+    </div>
+
+    <div class="ui standard modal meteor-login-modal">
+      <div class="header">
+        Login as mentor or admin
+      </div>
+      <div class="content">
+        {{> Meteor_Login_Form }}
+      </div>
+    </div>
+  {{/unless}}
+</template>

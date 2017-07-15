@@ -15,7 +15,7 @@ import { VerificationRequests } from '../../../api/verification/VerificationRequ
 /* eslint-disable object-shorthand */
 
 // expireLimit set to 30 minutes because: why not.
-const instanceSubs = new SubsManager({ expireIn: 30 });
+const instanceSubs = new SubsManager({ cacheLimit: 20, expireIn: 30 });
 
 Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscriptionsOnCreated() {
   const self = this;

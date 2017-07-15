@@ -39,3 +39,8 @@
 //     return true;
 //   },
 // });
+
+// Accounts.onCreateUser((options, user) => {
+//   console.log('in on create user', user);
+//   return user;
+// });

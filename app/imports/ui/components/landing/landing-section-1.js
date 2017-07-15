@@ -28,7 +28,4 @@ Template.Landing_Section_1.helpers({
   studentHomePageRouteName() {
     return RouteNames.studentHomePageRouteName;
   },
-  useCAS() {
-    return false;
-  },
 });

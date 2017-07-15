@@ -1,6 +1,6 @@
 <template name="Landing_Section_1">
   <div class="ui container">
-    <div class="ui small top fixed menu landing-menu">
+    <div class="ui small top fixed borderless menu landing-menu">
       <div class="item">
         <img class="ui image" src="/images/radgrad_logo.png" style="width: 45px;">
       </div>
@@ -8,50 +8,52 @@
         <h2>{{> RadGrad_Logo_Text}}</h2>
       </div>
 
-      <div class="right menu">
-        <div class="item">
-          <a href="#landing-section-9">GUIDED TOUR</a>
-        </div>
-
-
-        <div class="item">
-          <div class="ui small compact green basic button">
-            {{#if useCAS}}
-              {{> Cas_Login align="right"}}
-            {{else}}
-              {{#if checkLanding}}
-                {{#if currentUser}}
-                  {{#if isInRole 'FACULTY'}}
-                    <a style="color: #6FBE44;" href="{{pathFor facultyHomePageRouteName username=(currentUser.username)}}">Home</a>
-                  {{/if}}
-                  {{#if isInRole 'STUDENT'}}
-                    <a style="color: #6FBE44;" href="{{pathFor studentHomePageRouteName username=(currentUser.username)}}">Home</a>
-                  {{/if}}
-                  {{#if isInRole 'ADMIN'}}
-                    <a style="color: #6FBE44;" href="{{pathFor adminHomePageRouteName username=(currentUser.username)}}">Home</a>
-                  {{/if}}
-                  {{#if isInRole 'ADVISOR'}}
-                    <a style="color: #6FBE44;" href="{{pathFor advisorStudentConfigurationPageRouteName username=(currentUser.username)}}">Home</a>
-                  {{/if}}
-                  {{#if isInRole 'MENTOR'}}
-                    <a style="color: #6FBE44;" href="{{pathFor mentorHomePageRouteName username=(currentUser.username)}}">Home</a>
-                  {{/if}}
-                {{else}}
-                  {{> loginButtons align="right"}}
-                {{/if}}
-              {{/if}}
-            {{/if}}
-          </div>
-        </div>
+      <div class="right item">
+        <a href="#landing-section-9">GUIDED TOUR</a>
       </div>
+
+      <div class="item">
+        {{> RadGrad_Login_Buttons }}
+      </div>
+
+      {{#if checkLanding}}
+        {{#if currentUser}}
+          <div class="item">
+            <div class="ui small compact green basic button">
+              {{#if isInRole 'FACULTY'}}
+                <a style="color: #6FBE44;"
+                   href="{{pathFor facultyHomePageRouteName username=(currentUser.username)}}">Home</a>
+              {{/if}}
+              {{#if isInRole 'STUDENT'}}
+                <a style="color: #6FBE44;"
+                   href="{{pathFor studentHomePageRouteName username=(currentUser.username)}}">Home</a>
+              {{/if}}
+              {{#if isInRole 'ADMIN'}}
+                <a style="color: #6FBE44;" href="{{pathFor adminHomePageRouteName username=(currentUser.username)}}">Home</a>
+              {{/if}}
+              {{#if isInRole 'ADVISOR'}}
+                <a style="color: #6FBE44;" href="{{pathFor advisorStudentConfigurationPageRouteName
+                                                           username=(currentUser.username)}}">Home</a>
+              {{/if}}
+              {{#if isInRole 'MENTOR'}}
+                <a style="color: #6FBE44;" href="{{pathFor mentorHomePageRouteName username=(currentUser.username)}}">Home</a>
+              {{/if}}
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+
     </div>
   </div>
 
   <div class="inverted-section" id="landing-section-1">
     <div class="ui center aligned container">
-      <h1 class="inverted-main-header mobile hidden">Welcome to <span class="green-text">{{> RadGrad_Logo_Text}}</span></h1>
-      <h2 class="inverted-main-header mobile only mobile-header">Welcome to <span class="green-text">{{> RadGrad_Logo_Text}}</span></h2>
-      <span class="inverted-main-description">Developing awesome computer scientists, <b>one</b> graduate at a time.</span>
+      <h1 class="inverted-main-header mobile hidden">Welcome to <span class="green-text">{{> RadGrad_Logo_Text}}</span>
+      </h1>
+      <h2 class="inverted-main-header mobile only mobile-header">Welcome to <span
+          class="green-text">{{> RadGrad_Logo_Text}}</span></h2>
+      <span
+          class="inverted-main-description">Developing awesome computer scientists, <b>one</b> graduate at a time.</span>
 
       <div class="ui stackable doubling four cards main-header-ice">
 
@@ -173,6 +175,5 @@
       </div>
     </div>
   </div>
-
 
 </template>

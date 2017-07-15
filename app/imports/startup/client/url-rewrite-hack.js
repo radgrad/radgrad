@@ -2,10 +2,10 @@
 
 /**
  * There is a bug in FlowRouter's url encoding that results in '@' characters being replaced by '%2540'.
- * This hack rewrites the URL to replace any occurrences of %2540 with the @.
+ * This hack rewrites the URL to replace all occurrences of %2540 with @.
  */
 function fixPath() {
-  const fixedPathName = window.location.pathname.replace('%2540', '@');
+  const fixedPathName = window.location.pathname.replace(new RegExp('%2540', 'g'), '@');
   window.history.replaceState(null, null, fixedPathName);
 }
 

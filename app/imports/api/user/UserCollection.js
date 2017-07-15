@@ -53,12 +53,43 @@ class UserCollection {
    */
   define({ username, role }) {
     if (Meteor.isServer) {
-    // TODO: not everyone should have the password foo.
-      const userID = Accounts.createUser({ username, email: username, password: 'foo' });
+      if ((role === ROLE.STUDENT) || (role === ROLE.FACULTY) || (role === ROLE.ADVISOR)) {
+        // Define this user with a CAS login.
+        const userWithoutHost = username.split('@')[0];
+        const result = { id: userWithoutHost };
+        const options = { profile: { name: userWithoutHost } };
+        const casReturn = Accounts.updateOrCreateUserFromExternalService('cas', result, options);
+        const userID = casReturn.userId;
+        Meteor.users.update(userID, { $set: { username } });
+        // Meteor.users.find().fetch().map(user => console.log('  ', JSON.stringify(user)));
+        Roles.addUsersToRoles(userID, [role]);
+        return userID;
+      }
+      // Otherwise define this user with a Meteor login and randomly generated password.
+      const password = this._generateRandomPassword();
+      const userID = Accounts.createUser({ username, email: username, password });
       Roles.addUsersToRoles(userID, [role]);
       return userID;
     }
     return undefined;
+  }
+
+  /**
+   * Generate a random password.
+   * Adapted from: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+   * @returns {string} The password.
+   * @private
+   */
+  _generateRandomPassword() {
+    let password = '';
+    const maxLength = 10;
+    const minLength = 6;
+    const passwordLength = Math.floor(Math.random() * (maxLength - (minLength + 1))) + minLength;
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < passwordLength; i++) { // eslint-disable-line no-plusplus
+      password += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return password;
   }
 
   /**
