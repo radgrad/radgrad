@@ -15,13 +15,14 @@ Template.RadGrad_Login_Buttons.events({
     event.preventDefault();
     const callback = function loginCallback(error) {
       if (error) {
+        console.log('Error during CAS Login: ', error);
         instance.$('div .ui.error.message.hidden').text('You are not yet registered. Go see your Advisor.');
         instance.$('div .ui.error.message.hidden').removeClass('hidden');
       } else {
         const username = Meteor.user().username;
         const id = Meteor.userId();
         const role = Roles.getRolesForUser(id)[0];
-        FlowRouter.go(`/${role.toLowerCase()}/${username}`);
+        FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
       }
     };
     Meteor.loginWithCas(callback);
@@ -37,10 +38,6 @@ Template.RadGrad_Login_Buttons.events({
     event.preventDefault();
     $('.ui.modal').modal('show');
   },
-
-
-
-
 });
 
 

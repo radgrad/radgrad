@@ -55,11 +55,12 @@ class UserCollection {
     if (Meteor.isServer) {
       if ((role === ROLE.STUDENT) || (role === ROLE.FACULTY) || (role === ROLE.ADVISOR)) {
         // Define this user with a CAS login.
-        const result = { id: username };
-        const options = { profile: { name: username } };
+        const userWithoutHost = username.split('@')[0];
+        const result = { id: userWithoutHost };
+        const options = { profile: { name: userWithoutHost } };
         const casReturn = Accounts.updateOrCreateUserFromExternalService('cas', result, options);
         const userID = casReturn.userId;
-        Meteor.users.update(userID, { username });
+        Meteor.users.update(userID, { $set: { username } });
         // Meteor.users.find().fetch().map(user => console.log('  ', JSON.stringify(user)));
         Roles.addUsersToRoles(userID, [role]);
         return userID;

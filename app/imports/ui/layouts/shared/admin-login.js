@@ -1,8 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
-import { Roles } from 'meteor/alanning:roles';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
 /** @module ui/layouts/shared/UH_Login */
 
@@ -14,7 +11,6 @@ Template.Admin_Login.events({
    */
   'click .admin': function clickOpenModal(event) {
     event.preventDefault();
-    console.log('in clickOpenModel');
     $('.ui.modal').modal('show');
   },
 });

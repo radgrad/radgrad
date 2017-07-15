@@ -11,12 +11,11 @@ import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection';
-import { meteorAccountDataPublicationName} from '../../../startup/server/publications';
 
 /* eslint-disable object-shorthand */
 
 // expireLimit set to 30 minutes because: why not.
-const instanceSubs = new SubsManager({ expireIn: 30 });
+const instanceSubs = new SubsManager({ cacheLimit: 20, expireIn: 30 });
 
 Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscriptionsOnCreated() {
   const self = this;
@@ -34,7 +33,6 @@ Template.With_Instance_Subscriptions.onCreated(function withInstanceSubscription
     instanceSubs.subscribe(MentorQuestions.getPublicationName());
     instanceSubs.subscribe(OpportunityInstances.publicationNames.student);
     instanceSubs.subscribe(VerificationRequests.getPublicationName());
-    instanceSubs.subscribe(meteorAccountDataPublicationName);
     self.ready.set(instanceSubs.ready());
   });
 });
