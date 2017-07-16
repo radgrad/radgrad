@@ -6,7 +6,6 @@ Template.Meteor_Login_Form.events({
 
   submit(event) {
     event.preventDefault();
-    console.log('after submit', event.target.username.value, event.target.password.value);
     const username = event.target.username.value;
     const password = event.target.password.value;
     Meteor.loginWithPassword(username, password, (error) => {

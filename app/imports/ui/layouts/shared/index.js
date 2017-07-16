@@ -1,6 +1,3 @@
-import './admin-login.html';
-import './admin-login.js';
-
 import './first-menu.html';
 import './first-menu.js';
 
@@ -26,9 +23,6 @@ import './second-menu.js';
 
 import './mobile-second-menu.html';
 import './mobile-second-menu.js';
-
-import './uh-login.html';
-import './uh-login.js';
 
 import './with-advisor-subscriptions.html';
 import './with-advisor-subscriptions.js';

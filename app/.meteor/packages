@@ -74,3 +74,7 @@ didericis:callpromise-mixin
 
 # Needed so we can disable rate-limiter during full app testing.
 ddp-rate-limiter
+
+# Needed for Galaxy Professional application performance monitoring.
+mdg:meteor-apm-agent
+meteorhacks:zones
