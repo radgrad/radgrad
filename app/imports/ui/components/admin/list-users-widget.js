@@ -16,7 +16,7 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 
 Template.List_Users_Widget.helpers({
   users() {
-    return Users.findProfiles({}, { sort: { lastName: 1 } });
+    return _.sortBy(Users.findProfiles({}, { sort: { lastName: 1 } }), function (u) { return u.lastName; });
   },
   count() {
     return Users.findProfiles().length;
@@ -29,7 +29,7 @@ Template.List_Users_Widget.helpers({
   },
 
   fullName(user) {
-    const roles = Roles.getRolesForUser(user);
+    const roles = Roles.getRolesForUser(user.userID);
     return user && `${user.lastName}, ${user.firstName} (${roles})`;
   },
   /**

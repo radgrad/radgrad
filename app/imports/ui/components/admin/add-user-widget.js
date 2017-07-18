@@ -79,7 +79,7 @@ Template.Add_User_Widget.helpers({
     return Template.instance().role.get() === ROLE.MENTOR;
   },
   isStudent() {
-    return Template.instance().role.get() === ROLE.STUDENT;
+    return Template.instance().role.get() === ROLE.STUDENT || Template.instance().role.get() === ROLE.ALUMNI;
   },
   roles() {
     return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
@@ -103,20 +103,23 @@ Template.Add_User_Widget.events({
     if (role === ROLE.MENTOR) {
       schema = addMentorSchema;
     }
-    if (role === ROLE.STUDENT) {
-      schema = addSchema;
+    if (role === ROLE.STUDENT || role === ROLE.ALUMNI) {
+      schema = addStudentSchema;
     }
     const newData = FormUtils.getSchemaDataFromEvent(schema, event);
     instance.context.reset();
     schema.clean(newData, { mutate: true });
     instance.context.validate(newData);
-    console.log(newData);
     if (instance.context.isValid()) {
-      console.log(newData);
       let collectionName;
       switch (newData.role) {
         case ROLE.ADVISOR:
           collectionName = AdvisorProfiles.getCollectionName();
+          break;
+        case ROLE.ALUMNI:
+          collectionName = StudentProfiles.getCollectionName();
+          newData.level = 1;
+          newData.isAlumni = true;
           break;
         case ROLE.FACULTY:
           collectionName = FacultyProfiles.getCollectionName();
@@ -127,6 +130,7 @@ Template.Add_User_Widget.events({
         default:
           collectionName = StudentProfiles.getCollectionName();
           newData.level = 1;
+          newData.isAlumni = false;
       }
       defineMethod.call({ collectionName, definitionData: newData }, (error) => {
         if (error) {
@@ -146,7 +150,7 @@ Template.Add_User_Widget.events({
     const role = $(event.target).val();
     Template.instance().role.set(role);
     Template.instance().context = addSchema.namedContext('widget');
-    if (role === ROLE.STUDENT) {
+    if (role === ROLE.STUDENT || role === ROLE.ALUMNI) {
       Template.instance().context = addStudentSchema.namedContext('widget');
     }
     if (role === ROLE.MENTOR) {
