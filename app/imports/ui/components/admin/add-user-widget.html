@@ -5,15 +5,13 @@
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> Input_Form_Field label="First" name="firstName" placeholder="John" errorMessage=(fieldError "firstName") required=true}}
-        {{> Input_Form_Field label="Last" name="lastName" placeholder="Doe" errorMessage=(fieldError "lastName") required=true}}
-        {{> Input_Form_Field label="Slug (Username)" name="slug" placeholder="johndoe" errorMessage=(fieldError "slug") required=true}}
+        {{> Input_Form_Field label="Username" name="username" placeholder="johndoe@hawaii.edu" errorMessage=(fieldError "username") required=true}}
+        {{> Role_Form_Field roles=roles selectedRole=selectedRole errorMessage=(fieldError "role") required=true }}
       </div>
 
       <div class="fields">
-        {{> Role_Form_Field roles=roles selectedRole="STUDENT" errorMessage=(fieldError "role") required=true }}
-        {{> Input_Form_Field label="Email" name="email" placeholder="jdoe@hawaii.edu" errorMessage=(fieldError "email") required=true}}
-        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests") required=true}}
+        {{> Input_Form_Field label="First" name="firstName" placeholder="John" errorMessage=(fieldError "firstName") required=true}}
+        {{> Input_Form_Field label="Last" name="lastName" placeholder="Doe" errorMessage=(fieldError "lastName") required=true}}
       </div>
 
       <div class="ui dividing header"><h4>Optional fields (all users)</h4></div>
@@ -21,19 +19,18 @@
       <div class="fields">
         {{> Input_Form_Field label="Picture" name="picture" placeholder="http://keanu.github.io/images/keanu.jpg" errorMessage=(fieldError "picture") }}
         {{> Input_Form_Field label="Website" name="website" placeholder="http://keanu.github.io/" errorMessage=(fieldError "website") }}
-        {{> Input_Form_Field label="Password" name="password" value="foo" errorMessage=(fieldError "password") }}
       </div>
-
-      <div class="ui dividing header"><h4>Optional fields (students)</h4></div>
 
       <div class="fields">
         {{> Career_Goals_Form_Field careerGoals=careerGoals errorMessage=(fieldError "careerGoals")}}
-        {{> Semesters_Single_Form_Field semesters=semesters errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
+        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests")}}
       </div>
-      <div class="fields">
-        {{> Input_Form_Field label="Level" name="level" value="1" errorMessage=(fieldError "level") type="Number"}}
-        {{> Input_Form_Field label="UH ID" name="uhID" placeholder="1234-5678" errorMessage=(fieldError "uhID") }}
-      </div>
+      {{#if isStudent}}
+        {{> Add_User_Widget_Student}}
+      {{/if}}
+      {{#if isMentor}}
+        {{> Add_User_Widget_Mentor}}
+      {{/if}}
 
       <button class="ui green basic button" type="submit">Add</button>
 

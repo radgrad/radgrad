@@ -1,0 +1,15 @@
+<template name="Add_User_Widget_Mentor">
+  <div class="ui dividing header"><h4>Optional fields (mentors)</h4></div>
+
+  <div class="fields">
+    {{> Input_Form_Field name="company" label="Company" errorMessage=(fieldError "company")}}
+    {{> Input_Form_Field name="career" label="Title" errorMessage=(fieldError "career")}}
+  </div>
+  <div class="fields">
+    {{> Input_Form_Field name="location" label="Location" errorMessage=(fieldError "location")}}
+    {{> Input_Form_Field name="linkedin" label="LinkedIn" placeholder="cam-moore-9a5213" errorMessage=(fieldError "linkedin")}}
+  </div>
+  <div class="field">
+    {{> TextArea_Form_Field name="motivation" label="Motivation" errorMessage=(fieldError "motivation")}}
+  </div>
+</template>

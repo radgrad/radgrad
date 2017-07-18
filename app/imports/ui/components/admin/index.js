@@ -28,6 +28,12 @@ import './add-teaser-widget.js';
 import './add-user-widget.html';
 import './add-user-widget.js';
 
+import './add-user-widget-mentor.html';
+import './add-user-widget-mentor';
+
+import './add-user-widget-student.html';
+import './add-user-widget-student';
+
 import './admin-database-accordion.html';
 import './admin-database-accordion.js';
 
