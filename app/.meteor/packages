@@ -26,7 +26,6 @@ mdg:validated-method
 alanning:roles
 accounts-password@1.3.6
 accounts-ui@1.1.9
-atoy40:accounts-cas
 
 # Utilities
 momentjs:moment
@@ -74,3 +73,8 @@ didericis:callpromise-mixin
 
 # Needed so we can disable rate-limiter during full app testing.
 ddp-rate-limiter
+
+# Needed for Galaxy Professional application performance monitoring.
+mdg:meteor-apm-agent
+meteorhacks:zones
+atoy40:accounts-cas
