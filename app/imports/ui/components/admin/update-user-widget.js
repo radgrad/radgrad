@@ -15,53 +15,80 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_User_Widget */
 
 const updateSchema = new SimpleSchema({
+  username: String,
+  role: String,
   firstName: String,
   lastName: String,
-  slug: String, // will rename this to username
-  role: String,
-  email: String,
-  interests: { type: Array, minCount: 1 }, 'interests.$': String,
-  uhID: { type: String, optional: true },
-  // year: { type: Number, optional: true },
-  academicPlan: { type: String, optional: true },
+  // Everything else is optional.
   picture: { type: String, optional: true },
-  level: { type: Number, optional: true },
-  careerGoals: [String],
   website: { type: String, optional: true },
+  careerGoals: { type: Array }, 'careerGoals.$': String,
+  interests: { type: Array }, 'interests.$': String,
+}, { tracker: Tracker });
+
+const updateStudentSchema = new SimpleSchema({
+  username: String,
+  role: String,
+  firstName: String,
+  lastName: String,
+  // Everything else is optional.
+  picture: { type: String, optional: true },
+  website: { type: String, optional: true },
+  careerGoals: { type: Array }, 'careerGoals.$': String,
+  interests: { type: Array }, 'interests.$': String,
+  // Optional Student fields
   declaredSemester: { type: String, optional: true },
+  academicPlan: { type: String, optional: true },
+}, { tracker: Tracker });
+
+const updateMentorSchema = new SimpleSchema({
+  username: { type: String, custom: FormUtils.slugFieldValidator },
+  role: String,
+  firstName: String,
+  lastName: String,
+  // Everything else is optional.
+  picture: { type: String, optional: true },
+  website: { type: String, optional: true },
+  careerGoals: { type: Array }, 'careerGoals.$': String,
+  interests: { type: Array }, 'interests.$': String,
+  // Optional Mentor fields
+  company: { type: String, optional: true },
+  career: { type: String, optional: true },
+  location: { type: String, optional: true },
+  linkedin: { type: String, optional: true },
+  motivation: { type: String, optional: true },
 }, { tracker: Tracker });
 
 Template.Update_User_Widget.onCreated(function onCreated() {
   this.chosenYear = new ReactiveVar('');
-  FormUtils.setupFormWidget(this, updateSchema);
+  this.role = new ReactiveVar();
+  const role = Users.getProfile(this.data.updateID.get()).role;
+  this.role.set(role);
+  if (role === ROLE.STUDENT || role === ROLE.ALUMNI) {
+    FormUtils.setupFormWidget(this, updateStudentSchema);
+  } else
+    if (role === ROLE.MENTOR) {
+      FormUtils.setupFormWidget(this, updateMentorSchema);
+    } else {
+      FormUtils.setupFormWidget(this, updateSchema);
+    }
 });
 
 Template.Update_User_Widget.helpers({
-  user() {
-    return Users.getProfile(Template.currentData().updateID.get());
-  },
-  userID() {
-    return Template.currentData().updateID;
+  careerGoals() {
+    return CareerGoals.find({}, { sort: { name: 1 } });
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },
-  careerGoals() {
-    return CareerGoals.find({}, { sort: { name: 1 } });
+  isMentor() {
+    return Template.instance().role.get() === ROLE.MENTOR;
+  },
+  isStudent() {
+    return Template.instance().role.get() === ROLE.STUDENT || Template.instance().role.get() === ROLE.ALUMNI;
   },
   roles() {
     return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
-  },
-  semesters() {
-    return Semesters.find({});
-  },
-  slug() {
-    const profile = Users.getProfile(Template.currentData().updateID.get());
-    return profile.username;
-  },
-  selectedInterestIDs() {
-    const profile = Users.getProfile(Template.currentData().updateID.get());
-    return profile.interestIDs;
   },
   selectedCareerGoalIDs() {
     const profile = Users.getProfile(Template.currentData().updateID.get());
@@ -71,13 +98,30 @@ Template.Update_User_Widget.helpers({
     const profile = Users.getProfile(Template.currentData().updateID.get());
     return profile.desiredDegreeID;
   },
-  selectedSemesterID() {
+  selectedInterestIDs() {
     const profile = Users.getProfile(Template.currentData().updateID.get());
-    return profile.declaredSemesterID;
+    return profile.interestIDs;
   },
   selectedRole() {
     const profile = Users.getProfile(Template.currentData().updateID.get());
     return profile.role;
+  },
+  selectedSemesterID() {
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.declaredSemesterID;
+  },
+  semesters() {
+    return Semesters.find({});
+  },
+  slug() {
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.username;
+  },
+  user() {
+    return Users.getProfile(Template.currentData().updateID.get());
+  },
+  userID() {
+    return Template.currentData().updateID;
   },
 });
 

@@ -110,3 +110,9 @@ import './update-teaser-widget.js';
 
 import './update-user-widget.html';
 import './update-user-widget.js';
+
+import './update-user-widget-mentor.html';
+import './update-user-widget-mentor';
+
+import './update-user-widget-student.html';
+import './update-user-widget-student';

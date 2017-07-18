@@ -1,0 +1,8 @@
+<template name="Update_User_Widget_Student">
+  <div class="ui dividing header"><h4>Optional fields (students)</h4></div>
+
+  <div class="fields">
+    {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=selectedSemester errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
+    {{> Academic_Plan_Form_Field plans=plans selectedPlan=selectedPlan}}
+  </div>
+</template>
