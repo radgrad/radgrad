@@ -26,7 +26,6 @@ mdg:validated-method
 alanning:roles
 accounts-password@1.3.6
 accounts-ui@1.1.9
-atoy40:accounts-cas
 
 # Utilities
 momentjs:moment
@@ -78,3 +77,4 @@ ddp-rate-limiter
 # Needed for Galaxy Professional application performance monitoring.
 mdg:meteor-apm-agent
 meteorhacks:zones
+atoy40:accounts-cas
