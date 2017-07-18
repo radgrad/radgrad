@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
+import { ROLE } from '../../../api/role/Role';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -39,19 +40,29 @@ Template.List_Users_Widget.helpers({
    * the "partial" user document, the existence of a "complete" user document is checked before constructing the array.
    */
   descriptionPairs(user) {
-    return user.careerGoalIDs && [
-      { label: 'Username (Slug)', value: user.username },
-      { label: 'Email', value: user.email },
-      { label: 'UH ID', value: user.uhID },
-      { label: 'Picture', value: makeLink(user.picture) },
-      { label: 'Level', value: user.level },
-      { label: 'Career Goals', value: _.sortBy(CareerGoals.findNames(user.careerGoalIDs)) },
-      { label: 'Interests', value: _.sortBy(Interests.findNames(user.interestIDs)) },
-      { label: 'Website', value: makeLink(user.website) },
-      { label: 'Degree', value: (user.academicPlanID) ? AcademicPlans.findDoc(user.academicPlanID).name : '' },
-      { label: 'Declared Semester', value: (user.declaredSemesterID) ?
-          Semesters.toString(user.declaredSemesterID) : '' },
-    ];
+    const pairs = [];
+    pairs.push({ label: 'Username', value: user.username });
+    pairs.push({ label: 'Name', value: `${user.firstName}  ${user.lastName}` });
+    pairs.push({ label: 'Role', value: user.role });
+    pairs.push({ label: 'Picture', value: makeLink(user.picture) });
+    pairs.push({ label: 'Website', value: makeLink(user.website) });
+    pairs.push({ label: 'Career Goals', value: _.sortBy(CareerGoals.findNames(user.careerGoalIDs)) });
+    pairs.push({ label: 'Interests', value: _.sortBy(Interests.findNames(user.interestIDs)) });
+    if (user.role === ROLE.STUDENT) {
+      pairs.push({ label: 'Level', value: user.level });
+      // eslint-disable-next-line
+      pairs.push({ label: 'Degree', value: (user.academicPlanID) ? AcademicPlans.findDoc(user.academicPlanID).name : '' });
+      // eslint-disable-next-line
+      pairs.push({ label: 'Declared Semester', value: (user.declaredSemesterID) ? Semesters.toString(user.declaredSemesterID) : '' });
+    }
+    if (user.role === ROLE.MENTOR) {
+      pairs.push({ label: 'Company', value: user.company });
+      pairs.push({ label: 'Title', value: user.career });
+      pairs.push({ label: 'Location', value: user.location });
+      pairs.push({ label: 'LinkedIn', value: user.linkedin });
+      pairs.push({ label: 'Motivation', value: user.motivation });
+    }
+    return pairs;
   },
 });
 
