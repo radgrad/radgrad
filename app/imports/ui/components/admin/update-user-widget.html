@@ -6,7 +6,7 @@
 
       <div class="fields">
         {{> Input_Form_Field label="Username" name="username" value=slug errorMessage=(fieldError "username") disabled=true}}
-        {{> Role_Form_Field roles=roles selectedRole=selectedRole errorMessage=(fieldError "role") required=true }}
+        {{> Input_Form_Field label="Role" name="role" value=selectedRole errorMessage=(fieldError "role") disabled=true}}
       </div>
 
       <div class="fields">

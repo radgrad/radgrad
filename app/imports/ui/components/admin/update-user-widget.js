@@ -8,6 +8,10 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { AdvisorProfiles } from '../../../api/user/AdvisorProfileCollection';
+import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
+import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -37,6 +41,7 @@ const updateStudentSchema = new SimpleSchema({
   careerGoals: { type: Array }, 'careerGoals.$': String,
   interests: { type: Array }, 'interests.$': String,
   // Optional Student fields
+  isAlumni: String,
   declaredSemester: { type: String, optional: true },
   academicPlan: { type: String, optional: true },
 }, { tracker: Tracker });
@@ -128,15 +133,41 @@ Template.Update_User_Widget.helpers({
 Template.Update_User_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    let schema = updateSchema;
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    if (profile.role === ROLE.MENTOR) {
+      schema = updateMentorSchema;
+    }
+    if (profile.role === ROLE.ALUMNI || profile.role === ROLE.STUDENT) {
+      schema = updateStudentSchema;
+    }
+    const updateData = FormUtils.getSchemaDataFromEvent(schema, event);
     instance.context.reset();
-    updateSchema.clean(updateData, { mutate: true });
+    schema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updateData, 'slug', 'username');
-      FormUtils.renameKey(updateData, 'academicPlan', 'academicPlanID');
-      updateData.id = instance.data.updateID.get();
-      updateMethod.call({ collectionName: 'UserCollection', updateData }, (error) => {
+      let collectionName;
+      switch (profile.role) {
+        case ROLE.ADVISOR:
+          collectionName = AdvisorProfiles.getCollectionName();
+          break;
+        case ROLE.FACULTY:
+          collectionName = FacultyProfiles.getCollectionName();
+          break;
+        case ROLE.MENTOR:
+          collectionName = MentorProfiles.getCollectionName();
+          break;
+        default:
+          collectionName = StudentProfiles.getCollectionName();
+          updateData.isAlumni = (updateData.isAlumni === 'true');
+          if (updateData.isAlumni) {
+            updateData.role = ROLE.ALUMNI;
+          } else {
+            updateData.role = ROLE.STUDENT;
+          }
+      }
+      updateData.id = profile._id;
+      updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
@@ -146,12 +177,6 @@ Template.Update_User_Widget.events({
     } else {
       FormUtils.indicateError(instance);
     }
-  },
-  'change [name=year]': function changeYear(event, instance) {
-    event.preventDefault();
-    instance.successClass.set('');
-    instance.errorClass.set('');
-    Template.instance().chosenYear.set($(event.target).val());
   },
   'click .jsCancel': FormUtils.processCancelButtonClick,
 });

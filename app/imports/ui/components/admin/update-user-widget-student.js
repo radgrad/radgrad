@@ -8,6 +8,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 
 const addSchema = new SimpleSchema({
   academicPlan: { type: String, optional: true },
+  isAlumni: String,
   declaredSemester: { type: String, optional: true },
 }, { tracker: Tracker });
 
@@ -27,12 +28,17 @@ Template.Update_User_Widget_Student.helpers({
     return AcademicPlans.find({ semesterNumber: { $gte: semesterNum } }).fetch();
   },
   selectedSemester() {
-    console.log('selectedSemester', Template.currentData().user.declaredSemesterID);
     return Template.currentData().user.declaredSemesterID;
   },
   selectedPlan() {
     return Template.currentData().user.academicPlanID
         && AcademicPlans.findDoc(Template.currentData().user.academicPlanID).name;
+  },
+  falseValueAlumni() {
+    return !Template.currentData().user.isAlumni;
+  },
+  trueValueAlumni() {
+    return Template.currentData().user.isAlumni;
   },
 });
 

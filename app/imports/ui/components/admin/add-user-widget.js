@@ -13,6 +13,7 @@ import { AdvisorProfiles } from '../../../api/user/AdvisorProfileCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
+import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_User_Widget */
@@ -40,6 +41,7 @@ const addStudentSchema = new SimpleSchema({
   careerGoals: { type: Array }, 'careerGoals.$': String,
   interests: { type: Array }, 'interests.$': String,
   // Optional Student fields
+  isAlumni: { type: String, optional: true },
   declaredSemester: { type: String, optional: true },
   academicPlan: { type: String, optional: true },
 }, { tracker: Tracker });
@@ -82,7 +84,7 @@ Template.Add_User_Widget.helpers({
     return Template.instance().role.get() === ROLE.STUDENT || Template.instance().role.get() === ROLE.ALUMNI;
   },
   roles() {
-    return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
+    return _.sortBy(_.difference(ROLES, [ROLE.ADMIN, ROLE.ALUMNI]));
   },
   selectedRole() {
     if (Template.instance().role.get()) {
@@ -103,7 +105,7 @@ Template.Add_User_Widget.events({
     if (role === ROLE.MENTOR) {
       schema = addMentorSchema;
     }
-    if (role === ROLE.STUDENT || role === ROLE.ALUMNI) {
+    if (role === ROLE.STUDENT) {
       schema = addStudentSchema;
     }
     const newData = FormUtils.getSchemaDataFromEvent(schema, event);
@@ -116,11 +118,6 @@ Template.Add_User_Widget.events({
         case ROLE.ADVISOR:
           collectionName = AdvisorProfiles.getCollectionName();
           break;
-        case ROLE.ALUMNI:
-          collectionName = StudentProfiles.getCollectionName();
-          newData.level = 1;
-          newData.isAlumni = true;
-          break;
         case ROLE.FACULTY:
           collectionName = FacultyProfiles.getCollectionName();
           break;
@@ -130,7 +127,10 @@ Template.Add_User_Widget.events({
         default:
           collectionName = StudentProfiles.getCollectionName();
           newData.level = 1;
-          newData.isAlumni = false;
+          newData.isAlumni = (newData.isAlumni === 'true');
+          if (newData.isAlumni) {
+            newData.role = ROLE.ALUMNI;
+          }
       }
       defineMethod.call({ collectionName, definitionData: newData }, (error) => {
         if (error) {

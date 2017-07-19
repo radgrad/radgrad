@@ -11,12 +11,18 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
+import { AdvisorProfiles } from '../../../api/user/AdvisorProfileCollection';
+import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
+import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
 /** @module ui/components/admin/List_Users_Widget */
 
 Template.List_Users_Widget.helpers({
   users() {
-    return _.sortBy(Users.findProfiles({}, { sort: { lastName: 1 } }), function (u) { return u.lastName; });
+    return _.sortBy(Users.findProfiles({}, { sort: { lastName: 1 } }), function (u) {
+      return u.lastName;
+    });
   },
   count() {
     return Users.findProfiles().length;
@@ -51,9 +57,15 @@ Template.List_Users_Widget.helpers({
     if (user.role === ROLE.STUDENT) {
       pairs.push({ label: 'Level', value: user.level });
       // eslint-disable-next-line
-      pairs.push({ label: 'Degree', value: (user.academicPlanID) ? AcademicPlans.findDoc(user.academicPlanID).name : '' });
+      pairs.push({
+        label: 'Degree',
+        value: (user.academicPlanID) ? AcademicPlans.findDoc(user.academicPlanID).name : ''
+      });
       // eslint-disable-next-line
-      pairs.push({ label: 'Declared Semester', value: (user.declaredSemesterID) ? Semesters.toString(user.declaredSemesterID) : '' });
+      pairs.push({
+        label: 'Declared Semester',
+        value: (user.declaredSemesterID) ? Semesters.toString(user.declaredSemesterID) : ''
+      });
     }
     if (user.role === ROLE.MENTOR) {
       pairs.push({ label: 'Company', value: user.company });
@@ -71,7 +83,23 @@ Template.List_Users_Widget.events({
   'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    removeItMethod.call({ collectionName: 'UserCollection', instance: id }, (error) => {
+    const profile = Users.getProfile(id);
+    let collectionName;
+    switch (profile.role) {
+      case ROLE.ADVISOR:
+        collectionName = AdvisorProfiles.getCollectionName();
+        break;
+      case ROLE.FACULTY:
+        collectionName = FacultyProfiles.getCollectionName();
+        break;
+      case ROLE.MENTOR:
+        collectionName = MentorProfiles.getCollectionName();
+        break;
+      default:
+        collectionName = StudentProfiles.getCollectionName();
+    }
+    // TODO Removing a user can cause errors in Feeds when we add another user.
+    removeItMethod.call({ collectionName, instance: profile._id }, (error) => {
       if (error) {
         FormUtils.indicateError(instance, error);
       }
