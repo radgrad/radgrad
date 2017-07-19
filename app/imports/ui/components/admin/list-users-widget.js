@@ -28,7 +28,12 @@ Template.List_Users_Widget.helpers({
     return Users.findProfiles().length;
   },
   deleteDisabled(user) {
-    return user && (Users.isReferenced(user.username)) ? 'disabled' : '';
+    // TODO We have a race condition? the user profile is valid, but Users.getID fails.
+    try {
+      return user && (Users.isReferenced(user.username)) ? 'disabled' : '';
+    } catch (e) {
+      return '';
+    }
   },
   slugName(slugID) {
     return slugID && Slugs.findDoc(slugID).name;
@@ -59,12 +64,12 @@ Template.List_Users_Widget.helpers({
       // eslint-disable-next-line
       pairs.push({
         label: 'Degree',
-        value: (user.academicPlanID) ? AcademicPlans.findDoc(user.academicPlanID).name : ''
+        value: (user.academicPlanID) ? AcademicPlans.findDoc(user.academicPlanID).name : '',
       });
       // eslint-disable-next-line
       pairs.push({
         label: 'Declared Semester',
-        value: (user.declaredSemesterID) ? Semesters.toString(user.declaredSemesterID) : ''
+        value: (user.declaredSemesterID) ? Semesters.toString(user.declaredSemesterID) : '',
       });
     }
     if (user.role === ROLE.MENTOR) {
@@ -98,7 +103,6 @@ Template.List_Users_Widget.events({
       default:
         collectionName = StudentProfiles.getCollectionName();
     }
-    // TODO Removing a user can cause errors in Feeds when we add another user.
     removeItMethod.call({ collectionName, instance: profile._id }, (error) => {
       if (error) {
         FormUtils.indicateError(instance, error);

@@ -4,6 +4,7 @@ import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
+import { Feeds } from '../../../api/feed/FeedCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { reviewRatingsObjects } from '../shared/review-ratings';
@@ -67,12 +68,16 @@ Template.Add_Review_Widget.events({
       });
       let feedDefinition;
       if (newData.reviewType === 'course') {
-        feedDefinition = { feedType: 'new-course-review', user: newData.student, course: newData.reviewee };
+        feedDefinition = { feedType: Feeds.NEW_COURSE_REVIEW, user: newData.student, course: newData.reviewee };
       }
       if (newData.reviewType === 'opportunity') {
-        feedDefinition = { feedType: 'new-opportunity-review', user: newData.student, opportunity: newData.reviewee };
+        feedDefinition = {
+          feedType: Feeds.NEW_OPPORTUNITY_REVIEW,
+          user: newData.student,
+          opportunity: newData.reviewee,
+        };
       }
-      defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedDefinition });
+      defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedDefinition });
     } else {
       FormUtils.indicateError(instance);
     }

@@ -3,6 +3,7 @@ import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { Feeds } from '../../../api/feed/FeedCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
@@ -69,14 +70,13 @@ Template.Add_Student_Widget.events({
       const collectionName = StudentProfiles.getCollectionName();
       newData.level = 1;  // new students start at level 1.
       newData.isAlumni = newData.isAlumni === 'true';
-      console.log(collectionName, newData);
       defineMethod.call({ collectionName, definitionData: newData }, (error) => {
         if (error) {
           console.log('Error creating user', error);
           FormUtils.indicateError(instance, error);
         } else {
-          const feedData = { feedType: 'new-user', user: newData.username };
-          defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
+          const feedData = { feedType: Feeds.NEW_USER, user: newData.username };
+          defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData });
           FormUtils.indicateSuccess(instance, event);
           const advisor = getRouteUserName();
           const message = `${advisor} added new student ${newData.username} ${JSON.stringify(newData)}`;

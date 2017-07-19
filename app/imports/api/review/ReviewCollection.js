@@ -3,7 +3,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { ROLE } from '../role/Role';
 import { Slugs } from '../slug/SlugCollection';
-import { Feeds } from '../feed/FeedCollection';
 import { Semesters } from '../semester/SemesterCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { Users } from '../user/UserCollection';
@@ -103,18 +102,6 @@ class ReviewCollection extends BaseSlugCollection {
     });
     Slugs.updateEntityID(slugID, reviewID);
     // Return the id to the newly created Review.
-    // TODO Where do we create the Feeds entries? In the define or in the UI?
-    // Create the Feeds entry for this review.
-    if (reviewType === this.COURSE) {
-      Feeds._defineNewCourseReview({ user: studentID, course: revieweeID, feedType: Feeds.NEW_COURSE_REVIEW });
-    } else
-      if (reviewType === this.OPPORTUNITY) {
-        Feeds._defineNewOpportunityReview({
-          user: studentID,
-          opportunity: revieweeID,
-          feedType: Feeds.NEW_OPPORTUNITY_REVIEW,
-        });
-      }
     return reviewID;
   }
 

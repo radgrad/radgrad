@@ -76,7 +76,7 @@ class FeedCollection extends BaseCollection {
     if (feedDefinition.feedType === this.NEW_USER) {
       return this._defineNewUser(feedDefinition);
     }
-    if (feedDefinition.feedType === this.NEW_USER) {
+    if (feedDefinition.feedType === this.NEW_COURSE) {
       return this._defineNewCourse(feedDefinition);
     }
     if (feedDefinition.feedType === this.NEW_OPPORTUNITY) {
@@ -296,10 +296,10 @@ class FeedCollection extends BaseCollection {
   }
 
   /**
-   * Returns a feedID with the same feedType (and opportunity, if feedType is 'verified-opportunity')
+   * Returns a feedID with the same feedType (and opportunity, if feedType is Feeds.VERIFIED_OPPORTUNITY)
    * if it exists within the past 24 hours.
    * Returns false if no such feedID is found.
-   * Opportunity is required only if feedType is 'verified-opportunity'
+   * Opportunity is required only if feedType is Feeds.VERIFIED_OPPORTUNITY
    * @returns {Object} The feedID if found.
    * @returns {boolean} False if feedID is not found.
    */

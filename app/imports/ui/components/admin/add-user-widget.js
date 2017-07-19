@@ -5,6 +5,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { $ } from 'meteor/jquery';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
+import { Feeds } from '../../../api/feed/FeedCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
@@ -13,7 +14,6 @@ import { AdvisorProfiles } from '../../../api/user/AdvisorProfileCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
-import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Add_User_Widget */
@@ -136,8 +136,9 @@ Template.Add_User_Widget.events({
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
-          const feedData = { feedType: 'new-user', user: newData.username };
-          defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
+          const feedData = { feedType: Feeds.NEW_USER, user: newData.username };
+          const feedCollectionName = Feeds.getCollectionName();
+          defineMethod.call({ collectionName: feedCollectionName, definitionData: feedData });
           FormUtils.indicateSuccess(instance, event);
         }
       });

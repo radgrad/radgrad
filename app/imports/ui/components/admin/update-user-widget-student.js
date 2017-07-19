@@ -4,7 +4,6 @@ import SimpleSchema from 'simpl-schema';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
-import { Users } from '../../../api/user/UserCollection.js';
 
 const addSchema = new SimpleSchema({
   academicPlan: { type: String, optional: true },

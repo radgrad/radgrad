@@ -2,23 +2,16 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { AdvisorLogs } from '../log/AdvisorLogCollection';
-import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
-import { CourseInstances } from '../course/CourseInstanceCollection';
-import { Feeds } from '../feed/FeedCollection';
-import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
 import { MentorAnswers } from '../mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../mentor/MentorQuestionCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
-import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Reviews } from '../review/ReviewCollection';
 import { ROLE } from '../role/Role';
 import { AdvisorProfiles } from './AdvisorProfileCollection';
 import { StudentProfiles } from './StudentProfileCollection';
 import { MentorProfiles } from './MentorProfileCollection';
 import { FacultyProfiles } from './FacultyProfileCollection';
-import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /** @module api/user/UserCollection */
 
@@ -253,31 +246,12 @@ class UserCollection {
   }
 
   /**
-   * Removes the user, their profile, and any associated "private" entities (Feeds, CourseInstances, etc.).
-   * @param user The username or docID associated with this user.
-   * @throws { Meteor.Error } if the username is not defined, or if the user is referenced by other "public" entities
-   * (Reviews, Opportunities, etc.)
+   * DO NOT USE.
+   * @throws { Meteor.Error } Should not be used. Should remove the profile for the user.
    */
   removeIt(user) {
     const userID = this.getID(user);
     if (!this.isReferenced(userID)) {
-      // Automatically remove references to user from other collections that are "private" to this user.
-      _.forEach([Feeds, CourseInstances, OpportunityInstances, AcademicYearInstances, FeedbackInstances, AdvisorLogs,
-        VerificationRequests], collection => collection.removeUser(user));
-      // Now remove user profile. We don't know which collection it's in, so try all of them.
-      if (AdvisorProfiles.hasProfile(user)) {
-        AdvisorProfiles.removeIt(AdvisorProfiles.getProfile(user)._id);
-      }
-      if (StudentProfiles.hasProfile(user)) {
-        StudentProfiles.removeIt(StudentProfiles.getProfile(user)._id);
-      }
-      if (MentorProfiles.hasProfile(user)) {
-        MentorProfiles.removeIt(MentorProfiles.getProfile(user)._id);
-      }
-      if (FacultyProfiles.hasProfile(user)) {
-        FacultyProfiles.removeIt(FacultyProfiles.getProfile(user)._id);
-      }
-      // Now remove the user from Meteor users.
       Meteor.users.remove(userID);
     } else {
       throw new Meteor.Error(`Attempt to remove ${user} while references to public entities remain.`);
@@ -358,10 +332,26 @@ class UserCollection {
    */
   filterProfiles(filter) {
     const profiles = [];
-    StudentProfiles.find().forEach((profile) => { if (filter(profile)) { profiles.push(profile); } });
-    AdvisorProfiles.find().forEach((profile) => { if (filter(profile)) { profiles.push(profile); } });
-    FacultyProfiles.find().forEach((profile) => { if (filter(profile)) { profiles.push(profile); } });
-    MentorProfiles.find().forEach((profile) => { if (filter(profile)) { profiles.push(profile); } });
+    StudentProfiles.find().forEach((profile) => {
+      if (filter(profile)) {
+        profiles.push(profile);
+      }
+    });
+    AdvisorProfiles.find().forEach((profile) => {
+      if (filter(profile)) {
+        profiles.push(profile);
+      }
+    });
+    FacultyProfiles.find().forEach((profile) => {
+      if (filter(profile)) {
+        profiles.push(profile);
+      }
+    });
+    MentorProfiles.find().forEach((profile) => {
+      if (filter(profile)) {
+        profiles.push(profile);
+      }
+    });
     return profiles;
   }
 
@@ -373,19 +363,35 @@ class UserCollection {
    */
   someProfiles(predicate) {
     let exists = false;
-    StudentProfiles.find().forEach((profile) => { if (predicate(profile)) { exists = true; } });
+    StudentProfiles.find().forEach((profile) => {
+      if (predicate(profile)) {
+        exists = true;
+      }
+    });
     if (exists) {
       return true;
     }
-    AdvisorProfiles.find().forEach((profile) => { if (predicate(profile)) { exists = true; } });
+    AdvisorProfiles.find().forEach((profile) => {
+      if (predicate(profile)) {
+        exists = true;
+      }
+    });
     if (exists) {
       return true;
     }
-    FacultyProfiles.find().forEach((profile) => { if (predicate(profile)) { exists = true; } });
+    FacultyProfiles.find().forEach((profile) => {
+      if (predicate(profile)) {
+        exists = true;
+      }
+    });
     if (exists) {
       return true;
     }
-    MentorProfiles.find().forEach((profile) => { if (predicate(profile)) { exists = true; } });
+    MentorProfiles.find().forEach((profile) => {
+      if (predicate(profile)) {
+        exists = true;
+      }
+    });
     if (exists) {
       return true;
     }
