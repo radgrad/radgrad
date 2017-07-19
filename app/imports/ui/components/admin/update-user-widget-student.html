@@ -1,0 +1,9 @@
+<template name="Update_User_Widget_Student">
+  <div class="ui dividing header"><h4>Student/Alumni fields</h4></div>
+
+  <div class="fields">
+    {{> Boolean_Form_Field label='Is Alumni' name='isAlumni' trueValue=trueValueAlumni falseValue=falseValueAlumni errorMessage=(fieldError "isAlumni") required=true}}
+    {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=selectedSemester errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
+    {{> Academic_Plan_Form_Field plans=plans selectedPlan=selectedPlan}}
+  </div>
+</template>

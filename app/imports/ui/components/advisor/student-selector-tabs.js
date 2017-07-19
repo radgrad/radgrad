@@ -6,6 +6,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { Users } from '../../../api/user/UserCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
@@ -197,8 +198,8 @@ Template.Student_Selector_Tabs.events({
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
-          const feedData = { feedType: 'new-user', user: newData.slug };
-          defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
+          const feedData = { feedType: Feeds.NEW_USER, user: newData.slug };
+          defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData });
           FormUtils.indicateSuccess(instance, event);
           const advisor = getRouteUserName();
           const message = `${advisor} created student ${newData.slug}`;

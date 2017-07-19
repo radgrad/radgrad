@@ -91,7 +91,7 @@ export const processVerificationEventMethod = new ValidatedMethod({
 
     // Create a Feed entry for this verification event.
     resultMessage += '  Creating a feed entry.\n';
-    Feeds.define({ feedType: 'verified-opportunity', user: student, opportunity, semester });
+    Feeds.define({ feedType: Feeds.VERIFIED_OPPORTUNITY, user: student, opportunity, semester });
 
     return resultMessage;
   },

@@ -18,7 +18,7 @@ if (Meteor.isClient) {
     it('Define Method (new-user)', async function () {
       await withLoggedInUser();
       await withRadGradSubscriptions();
-      const definitionData = { user: 'abi@hawaii.edu', feedType: 'new-user' };
+      const definitionData = { user: 'abi@hawaii.edu', feedType: Feeds.NEW_USER };
       docID = await defineMethod.callPromise({ collectionName, definitionData });
     });
 

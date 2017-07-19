@@ -64,9 +64,10 @@ class ReviewCollection extends BaseSlugCollection {
    * undefined reviewee, undefined semester, or invalid rating.
    * @returns The newly created docID.
    */
-  define({ slug, student, reviewType, reviewee, semester, rating = 3, comments, moderated = false, visible = true,
-      moderatorComments,
-  }) {
+  define({
+           slug, student, reviewType, reviewee, semester, rating = 3, comments, moderated = false, visible = true,
+           moderatorComments,
+         }) {
     // Validate student, get studentID.
     const studentID = Users.getID(student);
     Users.assertInRole(studentID, [ROLE.STUDENT]);
