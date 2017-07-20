@@ -4,7 +4,7 @@ import { $ } from 'meteor/jquery';
 
 /* global cloudinary */
 
-Template.Image_Upload_Form_Field.events({
+Template.Picture_Form_Field.events({
   'click #image-upload-widget': function click(event) {
     event.preventDefault();
     cloudinary.openUploadWidget(
@@ -27,11 +27,8 @@ Template.Image_Upload_Form_Field.events({
         }
         // Otherwise get the form elements
         // console.log('Cloudinary results: ', result);
-        const fileName = result[0].original_filename;
-        const thumbnail = result[0].thumbnail_url;
         const url = result[0].url;
-        $("input[name='imageFileName']").val(fileName);
-        $("input[name='imageUrl']").val(url);
+        $("input[name='picture']").val(url);
       });
   },
 });

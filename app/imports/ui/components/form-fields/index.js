@@ -1,2 +1,2 @@
-import './image-upload-form-field.html';
-import './image-upload-form-field';
+import './picture-form-field.html';
+import './picture-form-field';
