@@ -1,0 +1,23 @@
+<template name="Image_Upload_Form_Field">
+  {{!
+  Provides a button that pops up the Cloudinary Upload Widget.
+  Note that only one instance of this form control can be in any one form, because of the hardwired name values.
+  If you need to upload multiple images in a single form, you should edit this controller code to provide something
+  like a "prefix" parameter to make the name field values unique.
+  }}
+  <div class="{{#if required}}required{{/if}} field">
+    <label>{{label}}</label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <input type="text"   name="imageFileName" placeholder="Please upload image">
+        <input type="hidden" name="imageUrl" disabled="true">
+      </div>
+      <div class="four wide field">
+        <button class="ui button" id="image-upload-widget">
+          Upload image
+        </button>
+      </div>
+    </div>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

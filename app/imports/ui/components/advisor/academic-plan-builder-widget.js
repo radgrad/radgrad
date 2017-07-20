@@ -11,7 +11,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs, slugify } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
-import { getAllElementsWithAttribute, removeElement } from '../../../ui/utilities/DomUtilities';
+import { getAllElementsWithAttribute, removeElement } from '../../../ui/utilities/dom-utilities';
 
 /* global document */
 // /** @module ui/components/advisor/Academic_Plan_Builder_Widget */
