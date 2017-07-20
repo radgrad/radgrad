@@ -1,4 +1,5 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../../api/semester/SemesterCollection';
 import { Users } from '../../api/user/UserCollection.js';
@@ -37,3 +38,17 @@ export function isInRole(role) {
 export function isLabel(label, value) {
   return label === value;
 }
+
+/*
+ Allow logical conditions in templates. For example:
+
+ {{#if and a b}}
+   a and b are both true-ish
+ {{/if}}
+
+ {{#if or a b}}
+   a or b is true-ish
+ {{/if}}
+ */
+Template.registerHelper('and', (a, b) => a && b);
+Template.registerHelper('or', (a, b) => a || b);

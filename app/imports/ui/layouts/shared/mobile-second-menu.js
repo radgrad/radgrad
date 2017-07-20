@@ -8,9 +8,6 @@ Template.Mobile_Second_Menu.helpers({
   isCurrentPage: function currentPage(routeName) {
     return FlowRouter.getRouteName() === routeName;
   },
-  useCase() {
-    return false;
-  },
   firstName() {
     const username = getRouteUserName();
     if (username) {

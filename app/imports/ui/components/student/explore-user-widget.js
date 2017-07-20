@@ -57,6 +57,14 @@ Template.Explore_User_Widget.helpers({
     }
     return false;
   },
+  isAlumni() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      const user = Users.getProfile(id);
+      return user.role === ROLE.ALUMNI;
+    }
+    return false;
+  },
   level() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();

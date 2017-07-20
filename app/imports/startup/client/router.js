@@ -41,8 +41,7 @@ export const adminHomePageRouteName = 'Admin_Home_Page';
 adminRoutes.route('/home', {
   name: adminHomePageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminHomePageRouteName });
   },
 });
@@ -51,8 +50,7 @@ export const adminDataModelPageRouteName = 'Admin_DataModel_Page';
 adminRoutes.route('/datamodel', {
   name: adminDataModelPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelPageRouteName });
   },
 });
@@ -61,8 +59,7 @@ export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoa
 adminRoutes.route('/datamodel/career-goals', {
   name: adminDataModelCareerGoalsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelCareerGoalsPageRouteName });
   },
 });
@@ -71,8 +68,7 @@ export const adminDataModelCourseInstancesPageRouteName = 'Admin_DataModel_Cours
 adminRoutes.route('/datamodel/course-instances', {
   name: adminDataModelCourseInstancesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelCourseInstancesPageRouteName });
   },
 });
@@ -81,8 +77,7 @@ export const adminDataModelCoursesPageRouteName = 'Admin_DataModel_Courses_Page'
 adminRoutes.route('/datamodel/courses', {
   name: adminDataModelCoursesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelCoursesPageRouteName });
   },
 });
@@ -91,8 +86,7 @@ export const adminDataModelHelpMessagesPageRouteName = 'Admin_DataModel_HelpMess
 adminRoutes.route('/datamodel/help-messages', {
   name: adminDataModelHelpMessagesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelHelpMessagesPageRouteName });
   },
 });
@@ -101,8 +95,7 @@ export const adminDataModelInterestsPageRouteName = 'Admin_DataModel_Interests_P
 adminRoutes.route('/datamodel/interests', {
   name: adminDataModelInterestsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelInterestsPageRouteName });
   },
 });
@@ -111,8 +104,7 @@ export const adminDataModelOpportunitiesPageRouteName = 'Admin_DataModel_Opportu
 adminRoutes.route('/datamodel/opportunities', {
   name: adminDataModelOpportunitiesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelOpportunitiesPageRouteName });
   },
 });
@@ -121,8 +113,7 @@ export const adminDataModelOpportunityInstancesPageRouteName = 'Admin_DataModel_
 adminRoutes.route('/datamodel/opportunity-instances', {
   name: adminDataModelOpportunityInstancesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelOpportunityInstancesPageRouteName });
   },
 });
@@ -131,8 +122,7 @@ export const adminDataModelReviewsPageRouteName = 'Admin_DataModel_Reviews_Page'
 adminRoutes.route('/datamodel/reviews', {
   name: adminDataModelReviewsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelReviewsPageRouteName });
   },
 });
@@ -141,8 +131,7 @@ export const adminDataModelTeasersPageRouteName = 'Admin_DataModel_Teasers_Page'
 adminRoutes.route('/datamodel/teasers', {
   name: adminDataModelTeasersPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelTeasersPageRouteName });
   },
 });
@@ -151,8 +140,7 @@ export const adminDataModelUsersPageRouteName = 'Admin_DataModel_Users_Page';
 adminRoutes.route('/datamodel/users', {
   name: adminDataModelUsersPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataModelUsersPageRouteName });
   },
 });
@@ -161,8 +149,7 @@ export const adminDataBasePageRouteName = 'Admin_DataBase_Page';
 adminRoutes.route('/database', {
   name: adminDataBasePageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataBasePageRouteName });
   },
 });
@@ -171,8 +158,7 @@ export const adminDataBaseIntegrityCheckPageRouteName = 'Admin_DataBase_Integrit
 adminRoutes.route('/database/integrity-check', {
   name: adminDataBaseIntegrityCheckPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataBaseIntegrityCheckPageRouteName });
   },
 });
@@ -181,8 +167,7 @@ export const adminDataBaseDumpPageRouteName = 'Admin_DataBase_Dump_Page';
 adminRoutes.route('/database/dump', {
   name: adminDataBaseDumpPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminDataBaseDumpPageRouteName });
   },
 });
@@ -191,8 +176,7 @@ export const adminModerationPageRouteName = 'Admin_Moderation_Page';
 adminRoutes.route('/moderation', {
   name: adminModerationPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Admin_Layout', { main: adminModerationPageRouteName });
   },
 });
@@ -211,8 +195,7 @@ export const advisorStudentConfigurationPageRouteName = 'Advisor_Student_Configu
 advisorRoutes.route('/home', {
   name: advisorStudentConfigurationPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Advisor_Layout', { main: advisorStudentConfigurationPageRouteName });
   },
 });
@@ -221,8 +204,7 @@ export const advisorVerificationRequestsPendingPageRouteName = 'Advisor_Verifica
 advisorRoutes.route('/verification-requests', {
   name: advisorVerificationRequestsPendingPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Advisor_Layout', { main: advisorVerificationRequestsPendingPageRouteName });
   },
 });
@@ -231,8 +213,7 @@ export const advisorEventVerificationPageRouteName = 'Advisor_Event_Verification
 advisorRoutes.route('/event-verification', {
   name: advisorEventVerificationPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Advisor_Layout', { main: advisorEventVerificationPageRouteName });
   },
 });
@@ -241,8 +222,7 @@ export const advisorCompletedVerificationsPageRouteName = 'Advisor_Completed_Ver
 advisorRoutes.route('/completed-verifications', {
   name: advisorCompletedVerificationsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Advisor_Layout', { main: advisorCompletedVerificationsPageRouteName });
   },
 });
@@ -251,8 +231,7 @@ export const advisorModerationPageRouteName = 'Advisor_Moderation_Page';
 advisorRoutes.route('/moderation', {
   name: advisorModerationPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Advisor_Layout', { main: advisorModerationPageRouteName });
   },
 });
@@ -261,8 +240,7 @@ export const advisorAcademicPlanPageRouteName = 'Advisor_Academic_Plan_Page';
 advisorRoutes.route('/academic-plan', {
   name: advisorAcademicPlanPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Advisor_Layout', { main: advisorAcademicPlanPageRouteName });
   },
 });
@@ -281,8 +259,7 @@ export const facultyHomePageRouteName = 'Faculty_Home_Page';
 facultyRoutes.route('/home', {
   name: facultyHomePageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyHomePageRouteName });
   },
 });
@@ -291,8 +268,7 @@ export const facultyExplorerPageRouteName = 'Faculty_Explorer_Page';
 facultyRoutes.route('/explorer', {
   name: facultyExplorerPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyExplorerPageRouteName });
   },
 });
@@ -301,8 +277,7 @@ export const facultyExplorerCareerGoalsPageRouteName = 'Faculty_Explorer_CareerG
 facultyRoutes.route('/explorer/career-goals/:careerGoal', {
   name: facultyExplorerCareerGoalsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyExplorerCareerGoalsPageRouteName });
   },
 });
@@ -311,8 +286,7 @@ export const facultyExplorerCoursesPageRouteName = 'Faculty_Explorer_Courses_Pag
 facultyRoutes.route('/explorer/courses/:course', {
   name: facultyExplorerCoursesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyExplorerCoursesPageRouteName });
   },
 });
@@ -321,8 +295,7 @@ export const facultyExplorerDegreesPageRouteName = 'Faculty_Explorer_Degrees_Pag
 facultyRoutes.route('/explorer/degrees/:degree', {
   name: facultyExplorerDegreesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyExplorerDegreesPageRouteName });
   },
 });
@@ -331,8 +304,7 @@ export const facultyExplorerInterestsPageRouteName = 'Faculty_Explorer_Interests
 facultyRoutes.route('/explorer/interests/:interest', {
   name: facultyExplorerInterestsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyExplorerInterestsPageRouteName });
   },
 });
@@ -341,8 +313,7 @@ export const facultyExplorerOpportunitiesPageRouteName = 'Faculty_Explorer_Oppor
 facultyRoutes.route('/explorer/opportunities/:opportunity', {
   name: facultyExplorerOpportunitiesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyExplorerOpportunitiesPageRouteName });
   },
 });
@@ -351,8 +322,7 @@ export const facultyExplorerUsersPageRouteName = 'Faculty_Explorer_Users_Page';
 facultyRoutes.route('/explorer/users/:explorerUserName', {
   name: facultyExplorerUsersPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyExplorerUsersPageRouteName });
   },
 });
@@ -361,8 +331,7 @@ export const facultyVerificationPageRouteName = 'Faculty_Verification_Page';
 facultyRoutes.route('/verification', {
   name: facultyVerificationPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyVerificationPageRouteName });
   },
 });
@@ -371,8 +340,7 @@ export const facultyVerificationCompletedPageRouteName = 'Faculty_Verification_C
 facultyRoutes.route('/verification-completed', {
   name: facultyVerificationCompletedPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyVerificationCompletedPageRouteName });
   },
 });
@@ -381,8 +349,7 @@ export const facultyManageOpportunitiesPageRouteName = 'Faculty_Manage_Opportuni
 facultyRoutes.route('/manage-opportunities', {
   name: facultyManageOpportunitiesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Faculty_Layout', { main: facultyManageOpportunitiesPageRouteName });
   },
 });
@@ -393,8 +360,7 @@ export const landingPageRouteName = 'Landing_Page';
 FlowRouter.route('/', {
   name: landingPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path} ${landingPageRouteName}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path} ${landingPageRouteName}`);
     BlazeLayout.render('Landing_Layout');
   },
 });
@@ -405,8 +371,7 @@ export const studentGuidedTourPageRouteName = 'Student_Guided_Tour_Page';
 FlowRouter.route('/guidedtour/student', {
   name: studentGuidedTourPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Guided_Tour_Layout', { main: studentGuidedTourPageRouteName });
   },
   triggersEnter: [function scrollTop() {
@@ -418,8 +383,7 @@ export const advisorGuidedTourPageRouteName = 'Advisor_Guided_Tour_Page';
 FlowRouter.route('/guidedtour/advisor', {
   name: advisorGuidedTourPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Guided_Tour_Layout', { main: advisorGuidedTourPageRouteName });
   },
   triggersEnter: [function scrollTop() {
@@ -441,8 +405,7 @@ export const mentorHomePageRouteName = 'Mentor_Home_Page';
 mentorRoutes.route('/home', {
   name: mentorHomePageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorHomePageRouteName });
   },
 });
@@ -451,8 +414,7 @@ export const mentorExplorerPageRouteName = 'Mentor_Explorer_Page';
 mentorRoutes.route('/explorer', {
   name: mentorExplorerPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorExplorerPageRouteName });
   },
 });
@@ -461,8 +423,7 @@ export const mentorExplorerCareerGoalsPageRouteName = 'Mentor_Explorer_CareerGoa
 mentorRoutes.route('/explorer/career-goals/:careerGoal', {
   name: mentorExplorerCareerGoalsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorExplorerCareerGoalsPageRouteName });
   },
 });
@@ -471,8 +432,7 @@ export const mentorExplorerCoursesPageRouteName = 'Mentor_Explorer_Courses_Page'
 mentorRoutes.route('/explorer/courses/:course', {
   name: mentorExplorerCoursesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorExplorerCoursesPageRouteName });
   },
 });
@@ -481,8 +441,7 @@ export const mentorExplorerDegreesPageRouteName = 'Mentor_Explorer_Degrees_Page'
 mentorRoutes.route('/explorer/degrees/:degree', {
   name: mentorExplorerDegreesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorExplorerDegreesPageRouteName });
   },
 });
@@ -491,8 +450,7 @@ export const mentorExplorerInterestsPageRouteName = 'Mentor_Explorer_Interests_P
 mentorRoutes.route('/explorer/interests/:interest', {
   name: mentorExplorerInterestsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorExplorerInterestsPageRouteName });
   },
 });
@@ -501,8 +459,7 @@ export const mentorExplorerOpportunitiesPageRouteName = 'Mentor_Explorer_Opportu
 mentorRoutes.route('/explorer/opportunities/:opportunity', {
   name: mentorExplorerOpportunitiesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorExplorerOpportunitiesPageRouteName });
   },
 });
@@ -511,8 +468,7 @@ export const mentorExplorerUsersPageRouteName = 'Mentor_Explorer_Users_Page';
 mentorRoutes.route('/explorer/users/:explorerUserName', {
   name: mentorExplorerUsersPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorExplorerUsersPageRouteName });
   },
 });
@@ -521,8 +477,7 @@ export const mentorMentorSpacePageRouteName = 'Mentor_MentorSpace_Page';
 mentorRoutes.route('/mentor-space', {
   name: mentorMentorSpacePageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorMentorSpacePageRouteName });
   },
 });
@@ -545,8 +500,7 @@ export const studentExplorerCareerGoalsPageRouteName = 'Student_Explorer_CareerG
 studentRoutes.route('/explorer/career-goals/:careerGoal', {
   name: studentExplorerCareerGoalsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerCareerGoalsPageRouteName });
   },
 });
@@ -555,8 +509,7 @@ export const studentExplorerCoursesPageRouteName = 'Student_Explorer_Courses_Pag
 studentRoutes.route('/explorer/courses/:course', {
   name: studentExplorerCoursesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerCoursesPageRouteName });
   },
 });
@@ -565,8 +518,7 @@ export const studentExplorerDegreesPageRouteName = 'Student_Explorer_Degrees_Pag
 studentRoutes.route('/explorer/degrees/:degree', {
   name: studentExplorerDegreesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerDegreesPageRouteName });
   },
 });
@@ -575,8 +527,7 @@ export const studentExplorerPlansPageRouteName = 'Student_Explorer_Plans_Page';
 studentRoutes.route('/explorer/plans/:plan', {
   name: studentExplorerPlansPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerPlansPageRouteName });
   },
 });
@@ -585,8 +536,7 @@ export const studentExplorerInterestsPageRouteName = 'Student_Explorer_Interests
 studentRoutes.route('/explorer/interests/:interest', {
   name: studentExplorerInterestsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerInterestsPageRouteName });
   },
 });
@@ -595,8 +545,7 @@ export const studentExplorerOpportunitiesPageRouteName = 'Student_Explorer_Oppor
 studentRoutes.route('/explorer/opportunities/:opportunity', {
   name: studentExplorerOpportunitiesPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerOpportunitiesPageRouteName });
   },
 });
@@ -605,8 +554,7 @@ export const studentExplorerUsersPageRouteName = 'Student_Explorer_Users_Page';
 studentRoutes.route('/explorer/users/:explorerUserName', {
   name: studentExplorerUsersPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerUsersPageRouteName });
   },
 });
@@ -615,8 +563,7 @@ export const studentHomePageRouteName = 'Student_Home_Page';
 studentRoutes.route('/home', {
   name: studentHomePageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomePageRouteName });
   },
 });
@@ -625,8 +572,7 @@ export const studentHomeAboutMePageRouteName = 'Student_Home_AboutMe_Page';
 studentRoutes.route('/home/aboutme', {
   name: studentHomeAboutMePageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomeAboutMePageRouteName });
   },
 });
@@ -635,8 +581,7 @@ export const studentHomeLogPageRouteName = 'Student_Home_Log_Page';
 studentRoutes.route('/home/log', {
   name: studentHomeLogPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomeLogPageRouteName });
   },
 });
@@ -645,8 +590,7 @@ export const studentHomeLevelsPageRouteName = 'Student_Home_Levels_Page';
 studentRoutes.route('/home/levels', {
   name: studentHomeLevelsPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomeLevelsPageRouteName });
   },
 });
@@ -655,8 +599,7 @@ export const studentHomeIcePageRouteName = 'Student_Home_Ice_Page';
 studentRoutes.route('/home/ice', {
   name: studentHomeIcePageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomeIcePageRouteName });
   },
 });
@@ -665,8 +608,7 @@ export const studentDegreePlannerPageRouteName = 'Student_Degree_Planner_Page';
 studentRoutes.route('/degree-planner', {
   name: studentDegreePlannerPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentDegreePlannerPageRouteName });
   },
 });
@@ -675,8 +617,7 @@ export const studentMentorSpacePageRouteName = 'Student_MentorSpace_Page';
 studentRoutes.route('/mentor-space', {
   name: studentMentorSpacePageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentMentorSpacePageRouteName });
   },
 });
@@ -685,8 +626,7 @@ export const studentExplorerPageRouteName = 'Student_Explorer_Page';
 studentRoutes.route('/explorer', {
   name: studentExplorerPageRouteName,
   action() {
-    const message = `${FlowRouter.current().path}`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerPageRouteName });
   },
 });
@@ -694,8 +634,7 @@ studentRoutes.route('/explorer', {
 /*                        MISC ROUTES                       */
 FlowRouter.notFound = {
   action() {
-    const message = `${FlowRouter.current().path} Page Not Found.`;
-    appLog.info(message);
+    appLog.info(`${FlowRouter.current().path} Page not found`);
     BlazeLayout.render('Page_Not_Found');
   },
 };
