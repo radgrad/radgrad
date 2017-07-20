@@ -127,10 +127,10 @@ Template.Faculty_About_Me_Widget.events({
     const collectionName = FacultyProfiles.getCollectionName();
     const updateData = {};
     updateData.id = profile._id;
-    updateData.website = event.target.website.value;
+    updateData.website = event.target.website.value || ' ';
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
-        console.log('Error during Faculty profile website update');
+        console.log('Error during Faculty profile website update', error);
       }
     });
   },
@@ -144,7 +144,7 @@ Template.Faculty_About_Me_Widget.events({
     updateData.picture = event.target.picture.value;
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
-        console.log('Error during Faculty profile picture update');
+        console.log('Error during Faculty profile picture update', error);
       }
     });
   },
