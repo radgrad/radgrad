@@ -13,6 +13,8 @@ import { updateMethod } from '../../../api/base/BaseCollection.methods';
 
  /** @module ui/components/faculty/Faculty_About_Me_Widget */
 
+/* global alert */
+
 Template.Faculty_About_Me_Widget.helpers({
   careerGoals() {
     if (getRouteUserName()) {
@@ -131,6 +133,8 @@ Template.Faculty_About_Me_Widget.events({
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.log('Error during Faculty profile website update', error);
+      } else {
+        alert('Website update successful.');
       }
     });
   },
@@ -145,6 +149,8 @@ Template.Faculty_About_Me_Widget.events({
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.log('Error during Faculty profile picture update', error);
+      } else {
+        alert('Picture update successful.');
       }
     });
   },
