@@ -8,7 +8,6 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
-import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
@@ -21,7 +20,7 @@ import { appLog } from '../../../api/log/AppLogCollection';
 // /** @module ui/components/advisor/Update_Degree_Plan_Widget */
 
 const updateSchema = new SimpleSchema({
-  slug: String, // will rename this to username
+  username: String, // will rename this to username
   firstName: String,
   lastName: String,
   role: String,
@@ -140,7 +139,7 @@ Template.Update_Degree_Plan_Widget.helpers({
   slug() {
     if (Template.currentData().studentID.get()) {
       const user = Users.getProfile(Template.currentData().studentID.get());
-      return Slugs.findDoc(user.slugID).name;
+      return user.username;
     }
     return '';
   },

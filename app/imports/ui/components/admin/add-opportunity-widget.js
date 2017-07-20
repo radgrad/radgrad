@@ -5,6 +5,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Feeds } from '../../../api/feed/FeedCollection';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -67,13 +69,13 @@ Template.Add_Opportunity_Widget.events({
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(newData);
-      defineMethod.call({ collectionName: 'OpportunityCollection', definitionData: newData }, (error) => {
+      defineMethod.call({ collectionName: Opportunities.getCollectionName(), definitionData: newData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
           FormUtils.indicateSuccess(instance, event);
-          const feedData = { feedType: 'new-opportunity', opportunity: newData.slug };
-          defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
+          const feedData = { feedType: Feeds.NEW_OPPORTUNITY, opportunity: newData.slug };
+          defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData });
         }
       });
     } else {

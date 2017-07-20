@@ -56,6 +56,12 @@ class FeedCollection extends BaseCollection {
       courseID: { type: SimpleSchema.RegEx.Id, optional: true },
       semesterID: { type: SimpleSchema.RegEx.Id, optional: true },
     }));
+    this.NEW_USER = 'new-user';
+    this.NEW_COURSE = 'new-course';
+    this.NEW_OPPORTUNITY = 'new-opportunity';
+    this.VERIFIED_OPPORTUNITY = 'verified-opportunity';
+    this.NEW_COURSE_REVIEW = 'new-course-review';
+    this.NEW_OPPORTUNITY_REVIEW = 'new-opportunity-review';
   }
 
   /**
@@ -67,22 +73,22 @@ class FeedCollection extends BaseCollection {
    * define that new feed.
    */
   define(feedDefinition) {
-    if (feedDefinition.feedType === 'new-user') {
+    if (feedDefinition.feedType === this.NEW_USER) {
       return this._defineNewUser(feedDefinition);
     }
-    if (feedDefinition.feedType === 'new-course') {
+    if (feedDefinition.feedType === this.NEW_COURSE) {
       return this._defineNewCourse(feedDefinition);
     }
-    if (feedDefinition.feedType === 'new-opportunity') {
+    if (feedDefinition.feedType === this.NEW_OPPORTUNITY) {
       return this._defineNewOpportunity(feedDefinition);
     }
-    if (feedDefinition.feedType === 'verified-opportunity') {
+    if (feedDefinition.feedType === this.VERIFIED_OPPORTUNITY) {
       return this._defineNewVerifiedOpportunity(feedDefinition);
     }
-    if (feedDefinition.feedType === 'new-course-review') {
+    if (feedDefinition.feedType === this.NEW_COURSE_REVIEW) {
       return this._defineNewCourseReview(feedDefinition);
     }
-    if (feedDefinition.feedType === 'new-opportunity-review') {
+    if (feedDefinition.feedType === this.NEW_OPPORTUNITY_REVIEW) {
       return this._defineNewOpportunityReview(feedDefinition);
     }
     throw new Meteor.Error(`Unknown feed type: ${feedDefinition.feedType}`);
@@ -126,7 +132,7 @@ class FeedCollection extends BaseCollection {
    * If there is a new-user feed within the past day, then this user is added to that Feed instance and its
    * docID is returned.
    * @example
-   * Feed._defineNewUser({ feedType: 'new-user',
+   * Feeds._defineNewUser({ feedType: Feeds.NEW_USER,
    *                      user: 'abigailkealoha',
    *                      timestamp: '12345465465' });
    * @param { Object } description Object with keys user and timestamp.
@@ -136,7 +142,7 @@ class FeedCollection extends BaseCollection {
    */
   _defineNewUser({ user, feedType, timestamp = moment().toDate() }) {
     // First, see if we've already defined any users within the past day.
-    const recentFeedID = this.checkPastDayFeed('new-user');
+    const recentFeedID = this.checkPastDayFeed(this.NEW_USER);
     // If there's a recentFeed, then update it instead with this user's info.
     if (recentFeedID) {
       this._updateNewUser(user, recentFeedID);
@@ -156,7 +162,7 @@ class FeedCollection extends BaseCollection {
   /**
    * Defines a new Feed (new course).
    * @example
-   * Feed._defineNewCourse({ feedType: 'new-course',
+   * Feeds._defineNewCourse({ feedType: Feeds.NEW_COURSE,
    *                        course: 'ics-100'
    *                        timestamp: '12345465465', });
    * @param { Object } description Object with keys course, feedType, and timestamp.
@@ -176,7 +182,7 @@ class FeedCollection extends BaseCollection {
   /**
    * Defines a new Feed (new opportunity).
    * @example
-   * Feed._defineNewOpportunity({ feedType: 'new-opportunity',
+   * Feeds._defineNewOpportunity({ feedType: Feeds.NEW_OPPORTUNITY,
    *                             opportunity: 'att-hackathon'
    *                             timestamp: '12345465465', });
    * @param { Object } description Object with keys opportunity, feedType, and timestamp.
@@ -200,7 +206,7 @@ class FeedCollection extends BaseCollection {
    * If there is a verified-opportunity feed within the past day, then this info is added to it and its docID is
    * returned.
    * @example
-   * Feed._defineNewVerifiedOpportunity({ feedType: 'verified-opportunity',
+   * Feeds._defineNewVerifiedOpportunity({ feedType: Feeds.VERIFIED_OPPORTUNITY,
    *                                      user: 'abigailkealoha',
    *                                      opportunity: 'att-hackathon'
    *                                      semester: 'Spring-2013'
@@ -236,7 +242,7 @@ class FeedCollection extends BaseCollection {
   /**
    * Defines a new Feed (new course review).
    * @example
-   * Feed._defineNewCourseReview({ feedType: 'new-course-review',
+   * Feeds._defineNewCourseReview({ feedType: Feeds.NEW_COURSE_REVIEW,
    *                              user: 'abigailkealoha',
    *                              course: 'ics111'
    *                              timestamp: '12345465465', });
@@ -263,7 +269,7 @@ class FeedCollection extends BaseCollection {
   /**
    * Defines a new Feed (new opportunity review).
    * @example
-   * Feed._defineNewOpportunityReview({ feedType: 'new-opportunity-review',
+   * Feeds._defineNewOpportunityReview({ feedType: Feeds.NEW_OPPORTUNITY_REVIEW,
    *                                   user: 'abigailkealoha',
    *                                   opportunity: 'att-hackathon'
    *                                   timestamp: '12345465465', });
@@ -290,19 +296,20 @@ class FeedCollection extends BaseCollection {
   }
 
   /**
-   * Returns a feedID with the same feedType (and opportunity, if feedType is 'verified-opportunity')
+   * Returns a feedID with the same feedType (and opportunity, if feedType is Feeds.VERIFIED_OPPORTUNITY)
    * if it exists within the past 24 hours.
    * Returns false if no such feedID is found.
-   * Opportunity is required only if feedType is 'verified-opportunity'
+   * Opportunity is required only if feedType is Feeds.VERIFIED_OPPORTUNITY
    * @returns {Object} The feedID if found.
    * @returns {boolean} False if feedID is not found.
    */
   checkPastDayFeed(feedType, opportunity, timestamp = moment().toDate()) {
     let ret = false;
+    const instance = this;
     const existingFeed = _.find(this._collection.find().fetch(), function (feed) {
       if (withinPastDay(feed, timestamp)) {
         if (feed.feedType === feedType) {
-          if (feedType === 'verified-opportunity') {
+          if (feedType === instance.VERIFIED_OPPORTUNITY) {
             const opportunityID = Opportunities.getID(opportunity);
             if (opportunityID === feed.opportunityID) {
               return true;

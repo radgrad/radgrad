@@ -5,15 +5,13 @@
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> Input_Form_Field label="First" name="firstName" value=user.firstName errorMessage=(fieldError "firstName") required=true}}
-        {{> Input_Form_Field label="Last" name="lastName" value=user.lastName errorMessage=(fieldError "lastName") required=true}}
-        {{> Input_Form_Field label="Slug (Username)" name="slug" value=slug errorMessage=(fieldError "slug") disabled=true}}
+        {{> Input_Form_Field label="Username" name="username" value=slug errorMessage=(fieldError "username") disabled=true}}
+        {{> Input_Form_Field label="Role" name="role" value=selectedRole errorMessage=(fieldError "role") disabled=true}}
       </div>
 
       <div class="fields">
-        {{> Role_Form_Field roles=roles selectedRole=selectedRole errorMessage=(fieldError "role") required=true }}
-        {{> Input_Form_Field label="Email" name="email" value=user.email errorMessage=(fieldError "email") required=true}}
-        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError "interests") required=true }}
+        {{> Input_Form_Field label="First" name="firstName" value=user.firstName errorMessage=(fieldError "firstName") required=true}}
+        {{> Input_Form_Field label="Last" name="lastName" value=user.lastName errorMessage=(fieldError "lastName") required=true}}
       </div>
 
       <div class="ui dividing header"><h4>Optional fields (all users)</h4></div>
@@ -23,18 +21,17 @@
         {{> Input_Form_Field label="Website" name="website" value=user.website errorMessage=(fieldError "website") }}
       </div>
 
-      <div class="ui dividing header"><h4>Optional fields (students)</h4></div>
-
       <div class="fields">
         {{> Career_Goals_Form_Field careerGoals=careerGoals selectedCareerGoalIDs=selectedCareerGoalIDs errorMessage=(fieldError "careerGoals")}}
-        {{> Semesters_Single_Form_Field selectedSemesterID=selectedSemesterID semesters=semesters errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError "interests") }}
       </div>
-      <div class="fields">
-        {{> Input_Form_Field label="Level" name="level" value=user.level errorMessage=(fieldError "level") type="Number"}}
-        {{> Input_Form_Field label="UH ID" name="uhID" value=user.uhID errorMessage=(fieldError "uhID") }}
-      </div>
-      {{> Academic_Plan_Form_Fields userID=userID}}
 
+      {{#if isMentor}}
+        {{> Update_User_Widget_Mentor user=user}}
+      {{/if}}
+      {{#if isStudent}}
+        {{> Update_User_Widget_Student user=user}}
+      {{/if}}
       <button class="ui green basic button" type="submit">Update</button>
       <button class="ui green basic button jsCancel" type="submit">Cancel</button>
       {{> Success_Message_Form_Field message="The User was successfully updated.  Press cancel to continue."}}

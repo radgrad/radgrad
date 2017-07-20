@@ -3,11 +3,14 @@ import { Tracker } from 'meteor/tracker';
 import { ReactiveVar } from 'meteor/reactive-var';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { $ } from 'meteor/jquery';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
+import { AdvisorProfiles } from '../../../api/user/AdvisorProfileCollection';
+import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
+import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -15,53 +18,81 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 // /** @module ui/components/admin/Update_User_Widget */
 
 const updateSchema = new SimpleSchema({
+  username: String,
+  role: String,
   firstName: String,
   lastName: String,
-  slug: String, // will rename this to username
-  role: String,
-  email: String,
-  interests: { type: Array, minCount: 1 }, 'interests.$': String,
-  uhID: { type: String, optional: true },
-  // year: { type: Number, optional: true },
-  academicPlan: { type: String, optional: true },
+  // Everything else is optional.
   picture: { type: String, optional: true },
-  level: { type: Number, optional: true },
-  careerGoals: [String],
   website: { type: String, optional: true },
+  careerGoals: { type: Array }, 'careerGoals.$': String,
+  interests: { type: Array }, 'interests.$': String,
+}, { tracker: Tracker });
+
+const updateStudentSchema = new SimpleSchema({
+  username: String,
+  role: String,
+  firstName: String,
+  lastName: String,
+  // Everything else is optional.
+  picture: { type: String, optional: true },
+  website: { type: String, optional: true },
+  careerGoals: { type: Array }, 'careerGoals.$': String,
+  interests: { type: Array }, 'interests.$': String,
+  // Optional Student fields
+  isAlumni: String,
   declaredSemester: { type: String, optional: true },
+  academicPlan: { type: String, optional: true },
+}, { tracker: Tracker });
+
+const updateMentorSchema = new SimpleSchema({
+  username: { type: String, custom: FormUtils.slugFieldValidator },
+  role: String,
+  firstName: String,
+  lastName: String,
+  // Everything else is optional.
+  picture: { type: String, optional: true },
+  website: { type: String, optional: true },
+  careerGoals: { type: Array }, 'careerGoals.$': String,
+  interests: { type: Array }, 'interests.$': String,
+  // Optional Mentor fields
+  company: { type: String, optional: true },
+  career: { type: String, optional: true },
+  location: { type: String, optional: true },
+  linkedin: { type: String, optional: true },
+  motivation: { type: String, optional: true },
 }, { tracker: Tracker });
 
 Template.Update_User_Widget.onCreated(function onCreated() {
   this.chosenYear = new ReactiveVar('');
-  FormUtils.setupFormWidget(this, updateSchema);
+  this.role = new ReactiveVar();
+  const role = Users.getProfile(this.data.updateID.get()).role;
+  this.role.set(role);
+  if (role === ROLE.STUDENT || role === ROLE.ALUMNI) {
+    FormUtils.setupFormWidget(this, updateStudentSchema);
+  } else
+    if (role === ROLE.MENTOR) {
+      FormUtils.setupFormWidget(this, updateMentorSchema);
+    } else {
+      FormUtils.setupFormWidget(this, updateSchema);
+    }
 });
 
 Template.Update_User_Widget.helpers({
-  user() {
-    return Users.getProfile(Template.currentData().updateID.get());
-  },
-  userID() {
-    return Template.currentData().updateID;
+  careerGoals() {
+    return CareerGoals.find({}, { sort: { name: 1 } });
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },
-  careerGoals() {
-    return CareerGoals.find({}, { sort: { name: 1 } });
+  isMentor() {
+    return Template.instance().role.get() === ROLE.MENTOR;
+  },
+  isStudent() {
+    return Template.instance().role.get() === ROLE.STUDENT || Template.instance().role.get() === ROLE.ALUMNI;
   },
   roles() {
     return _.sortBy(_.difference(ROLES, [ROLE.ADMIN]));
-  },
-  semesters() {
-    return Semesters.find({});
-  },
-  slug() {
-    const profile = Users.getProfile(Template.currentData().updateID.get());
-    return profile.username;
-  },
-  selectedInterestIDs() {
-    const profile = Users.getProfile(Template.currentData().updateID.get());
-    return profile.interestIDs;
   },
   selectedCareerGoalIDs() {
     const profile = Users.getProfile(Template.currentData().updateID.get());
@@ -71,28 +102,71 @@ Template.Update_User_Widget.helpers({
     const profile = Users.getProfile(Template.currentData().updateID.get());
     return profile.desiredDegreeID;
   },
-  selectedSemesterID() {
+  selectedInterestIDs() {
     const profile = Users.getProfile(Template.currentData().updateID.get());
-    return profile.declaredSemesterID;
+    return profile.interestIDs;
   },
   selectedRole() {
     const profile = Users.getProfile(Template.currentData().updateID.get());
     return profile.role;
+  },
+  selectedSemesterID() {
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.declaredSemesterID;
+  },
+  semesters() {
+    return Semesters.find({});
+  },
+  slug() {
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    return profile.username;
+  },
+  user() {
+    return Users.getProfile(Template.currentData().updateID.get());
+  },
+  userID() {
+    return Template.currentData().updateID;
   },
 });
 
 Template.Update_User_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
+    let schema = updateSchema;
+    const profile = Users.getProfile(Template.currentData().updateID.get());
+    if (profile.role === ROLE.MENTOR) {
+      schema = updateMentorSchema;
+    }
+    if (profile.role === ROLE.ALUMNI || profile.role === ROLE.STUDENT) {
+      schema = updateStudentSchema;
+    }
+    const updateData = FormUtils.getSchemaDataFromEvent(schema, event);
     instance.context.reset();
-    updateSchema.clean(updateData, { mutate: true });
+    schema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updateData, 'slug', 'username');
-      FormUtils.renameKey(updateData, 'academicPlan', 'academicPlanID');
-      updateData.id = instance.data.updateID.get();
-      updateMethod.call({ collectionName: 'UserCollection', updateData }, (error) => {
+      let collectionName;
+      switch (profile.role) {
+        case ROLE.ADVISOR:
+          collectionName = AdvisorProfiles.getCollectionName();
+          break;
+        case ROLE.FACULTY:
+          collectionName = FacultyProfiles.getCollectionName();
+          break;
+        case ROLE.MENTOR:
+          collectionName = MentorProfiles.getCollectionName();
+          break;
+        default:
+          collectionName = StudentProfiles.getCollectionName();
+          updateData.isAlumni = (updateData.isAlumni === 'true');
+          if (updateData.isAlumni) {
+            updateData.role = ROLE.ALUMNI;
+          } else {
+            updateData.role = ROLE.STUDENT;
+          }
+      }
+      updateData.id = profile._id;
+      updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
@@ -102,12 +176,6 @@ Template.Update_User_Widget.events({
     } else {
       FormUtils.indicateError(instance);
     }
-  },
-  'change [name=year]': function changeYear(event, instance) {
-    event.preventDefault();
-    instance.successClass.set('');
-    instance.errorClass.set('');
-    Template.instance().chosenYear.set($(event.target).val());
   },
   'click .jsCancel': FormUtils.processCancelButtonClick,
 });

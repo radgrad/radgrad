@@ -75,12 +75,12 @@ Template.Verification_Requests_Pending.events({
         opportunityID: VerificationRequests.getOpportunityDoc(request._id)._id,
       }).fetch();
       const opportunityID = VerificationRequests.getOpportunityDoc(request._id)._id;
-      if (Feeds.checkPastDayFeed('verified-opportunity', opportunityID)) {
+      if (Feeds.checkPastDayFeed(Feeds.VERIFIED_OPPORTUNITY, opportunityID)) {
         Feeds._updateVerifiedOpportunity(VerificationRequests.getStudentDoc(request._id).username,
-            Feeds.checkPastDayFeed('verified-opportunity', opportunityID));
+            Feeds.checkPastDayFeed(Feeds.VERIFIED_OPPORTUNITY, opportunityID));
       } else {
         const feedData = {
-          feedType: 'verified-opportunity',
+          feedType: Feeds.VERIFIED_OPPORTUNITY,
           user: VerificationRequests.getStudentDoc(request._id).username,
           opportunity: Slugs.findDoc(VerificationRequests.getOpportunityDoc(request._id).slugID),
           semester: Slugs.findDoc(Semesters.findDoc(opportunities[0].semesterID).slugID),

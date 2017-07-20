@@ -1,6 +1,7 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
+import { Roles } from 'meteor/alanning:roles';
 import BaseProfileCollection from './BaseProfileCollection';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
@@ -107,13 +108,21 @@ class StudentProfileCollection extends BaseProfileCollection {
     if (hiddenOpportunities) {
       updateData.hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
     }
-
     // Only Admins and Advisors can update the isAlumni and level fields.
     // Or if no one is logged in when this is executed (i.e. for testing) then it's cool.
     if (!Meteor.userId() || this._hasRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR])) {
-      if (isAlumni) {
+      const userID = this.findDoc(docID).userID;
+      if (_.isBoolean(isAlumni)) {
         updateData.isAlumni = isAlumni;
-        updateData.role = (isAlumni) ? ROLE.ALUMNI : ROLE.STUDENT;
+        if (isAlumni) {
+          updateData.role = ROLE.ALUMNI;
+          Roles.addUsersToRoles(userID, [ROLE.ALUMNI]);
+          Roles.removeUsersFromRoles(userID, ROLE.STUDENT);
+        } else {
+          updateData.role = ROLE.STUDENT;
+          Roles.addUsersToRoles(userID, [ROLE.STUDENT]);
+          Roles.removeUsersFromRoles(userID, ROLE.ALUMNI);
+        }
       }
       if (level) {
         this.assertValidLevel(level);
