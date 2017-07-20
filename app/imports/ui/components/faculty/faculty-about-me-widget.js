@@ -8,14 +8,18 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { openCloudinaryWidget } from '../form-fields/open-cloudinary-widget';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 
-// /** @module ui/components/faculty/Faculty_About_Me_Widget */
+ /** @module ui/components/faculty/Faculty_About_Me_Widget */
+
+/* global alert */
 
 Template.Faculty_About_Me_Widget.helpers({
   careerGoals() {
     if (getRouteUserName()) {
-      const user = Users.getProfile(getRouteUserName());
-      return _.map(user.careerGoalIDs, (id) => CareerGoals.findDoc(id));
+      const profile = Users.getProfile(getRouteUserName());
+      return _.map(profile.careerGoalIDs, (id) => CareerGoals.findDoc(id));
     }
     return [];
   },
@@ -28,17 +32,17 @@ Template.Faculty_About_Me_Widget.helpers({
   desiredDegree() {
     let ret = '';
     if (getRouteUserName()) {
-      const user = Users.getProfile(getRouteUserName());
-      if (user.desiredDegreeID) {
-        ret = DesiredDegrees.findDoc(user.desiredDegreeID).name;
+      const profile = Users.getProfile(getRouteUserName());
+      if (profile.desiredDegreeID) {
+        ret = DesiredDegrees.findDoc(profile.desiredDegreeID).name;
       }
     }
     return ret;
   },
   email() {
     if (getRouteUserName()) {
-      const user = Users.getProfile(getRouteUserName());
-      return user.username;
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.username;
     }
     return '';
   },
@@ -87,15 +91,15 @@ Template.Faculty_About_Me_Widget.helpers({
   },
   name() {
     if (getRouteUserName()) {
-      const user = Users.getProfile(getRouteUserName());
-      return `${user.firstName} ${user.lastName}`;
+      const profile = Users.getProfile(getRouteUserName());
+      return `${profile.firstName} ${profile.lastName}`;
     }
     return '';
   },
   picture() {
     if (getRouteUserName()) {
-      const user = Users.getProfile(getRouteUserName());
-      return user.picture;
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.picture;
     }
     return '';
   },
@@ -104,15 +108,15 @@ Template.Faculty_About_Me_Widget.helpers({
   },
   studentPicture() {
     if (getRouteUserName()) {
-      const user = Users.getProfile(getRouteUserName());
-      return user.picture;
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.picture;
     }
     return '';
   },
   website() {
     if (getRouteUserName()) {
-      const user = Users.getProfile(getRouteUserName());
-      return user.website;
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.website;
     }
     return '';
   },
@@ -121,19 +125,38 @@ Template.Faculty_About_Me_Widget.helpers({
 Template.Faculty_About_Me_Widget.events({
   'submit .website': function submitWebsite(event) {
     event.preventDefault();
-    const user = Users.getProfile(getRouteUserName());
-    const choice = event.target.website.value;
-    // TODO convert to method call.
-    FacultyProfiles.update(user._id, { website: choice });
+    const profile = Users.getProfile(getRouteUserName());
+    const collectionName = FacultyProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
+    updateData.website = event.target.website.value || ' ';
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error during Faculty profile website update', error);
+      } else {
+        alert('Website update successful.');
+      }
+    });
   },
+
   'submit .picture': function submitPicture(event) {
     event.preventDefault();
-    const user = Users.getProfile(getRouteUserName());
-    const choice = event.target.picture.value;
-    // TODO Convert to method call.
-    FacultyProfiles.update(user._id, { picture: choice });
+    const profile = Users.getProfile(getRouteUserName());
+    const collectionName = FacultyProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
+    updateData.picture = event.target.picture.value;
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error during Faculty profile picture update', error);
+      } else {
+        alert('Picture update successful.');
+      }
+    });
   },
-  'click .picture': function clickPicture(event) {
+
+  'click #image-upload-widget': function clickUpload(event) {
     event.preventDefault();
+    openCloudinaryWidget('picture');
   },
 });

@@ -12,6 +12,7 @@
     },
     "databaseRestoreFileName": "database/mockup/2017-03-10-10-04-42.json",
     "appLogging": { "enable": true, "filter": ["*"], "client": true, "server": true },
-    "admin": { "username": "radgrad@hawaii.edu", "development": true }
+    "admin": { "username": "radgrad@hawaii.edu", "development": true },
+    "cloudinary": {"cloud_name": "radgrad", "upload_preset": "q4fw6nmn"}
   }
 }

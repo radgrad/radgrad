@@ -1,0 +1,14 @@
+<template name="Picture_Form_Field">
+  {{!
+  Provides an input field for entering a URL to a profile picture.
+  Or you can click the "Upload" link to bring up the Cloudinary upload image widget.
+  Note that only one instance of this form control can be in any one form, because of the hardwired name values.
+  }}
+  <div class="{{#if required}}required{{/if}} field">
+    <label>{{#if label}}{{label}}{{else}}Picture URL{{/if}} (<a id="image-upload-widget" href="">Upload</a>)</label>
+    <div class="ui {{#if disabled}}disabled{{/if}} input">
+      <input type="text" name="picture" placeholder="No picture URL specified" value="{{value}}">
+    </div>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>
