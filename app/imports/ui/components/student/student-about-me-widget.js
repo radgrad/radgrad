@@ -8,6 +8,11 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
+import { openCloudinaryWidget } from '../form-fields/open-cloudinary-widget';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
+
+/* global alert */
 
 Template.Student_About_Me_Widget.helpers({
   careerGoals() {
@@ -27,7 +32,7 @@ Template.Student_About_Me_Widget.helpers({
     return RouteNames.studentExplorerDegreesPageRouteName;
   },
   desiredDegree() {
-    let ret = '';
+    let ret = 'Not yet specified.';
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());
       if (profile.academicPlanID) {
@@ -125,19 +130,38 @@ Template.Student_About_Me_Widget.helpers({
 Template.Student_About_Me_Widget.events({
   'submit .website': function submitWebsite(event) {
     event.preventDefault();
-    const user = Users.getProfile(getRouteUserName());
-    const choice = event.target.website.value;
-    // TODO Replace with method.
-    Users.setWebsite(user._id, choice);
+    const profile = Users.getProfile(getRouteUserName());
+    const collectionName = StudentProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
+    updateData.website = event.target.website.value || ' ';
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error during Student profile website update', error);
+      } else {
+        alert('Website update successful.');
+      }
+    });
   },
+
   'submit .picture': function submitPicture(event) {
     event.preventDefault();
-    const user = Users.getProfile(getRouteUserName());
-    const choice = event.target.picture.value;
-    // TODO Replace with method.
-    Users.setPicture(user._id, choice);
+    const profile = Users.getProfile(getRouteUserName());
+    const collectionName = StudentProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
+    updateData.picture = event.target.picture.value;
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error during Student profile picture update', error);
+      } else {
+        alert('Picture update successful.');
+      }
+    });
   },
-  'click .picture': function clickPicture(event) {
+
+  'click #image-upload-widget': function clickUpload(event) {
     event.preventDefault();
+    openCloudinaryWidget('picture');
   },
 });

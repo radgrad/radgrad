@@ -7,9 +7,9 @@
       </div>
       <div class="meta">
         {{role}}<br>
-        {{#if isStudent}}{{desiredDegree}} <br>{{/if}}
+        {{#if or isStudent isAlumni}}{{desiredDegree}} <br>{{/if}}
         {{email}}
-        {{#if isStudent}}
+        {{#if or isStudent isAlumni}}
           <br>
           <img class="ui mini image" src='/images/level-icons/radgrad-level-{{level}}-icon.png'>
         {{/if}}
@@ -24,11 +24,11 @@
       {{#if isMentor}}
         {{> User_Answers_Component userID=userID}}
       {{/if}}
-      {{#if isStudent}}
+      {{#if or isStudent isAlumni}}
         {{> User_Course_Component userID=userID}}
       {{/if}}
     </div>
-    {{#if isStudent}}
+    {{#if or isStudent isAlumni}}
       <div class="content">
         {{> User_Opportunity_Component userID=userID}}
       </div>

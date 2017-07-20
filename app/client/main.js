@@ -1,3 +1,4 @@
+
 import '/imports/api/base';
 import '/imports/api/career';
 import '/imports/api/course';
@@ -58,7 +59,10 @@ import '/imports/ui/pages/mentor';
 import '/imports/ui/pages/student';
 import '/imports/ui/pages/guidedtour';
 
+import '/imports/ui/stylesheets/style.css';
+
+import '/imports/ui/utilities';
+
 import './lib/semantic-ui/semantic.min.css';
 import './lib/semantic-ui/semantic.min.js';
 
-import '/imports/ui/stylesheets/style.css';

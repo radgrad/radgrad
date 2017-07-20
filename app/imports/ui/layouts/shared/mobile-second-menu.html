@@ -8,11 +8,7 @@
         <div class="eleven wide column" style="padding-left: 0;">
           <h4 style="line-height: 18px; text-transform: uppercase; margin-bottom: 4px;">{{firstName}}<br/>{{lastName}}</h4>
           <button class="ui green basic tiny compact button">
-            {{#if useCAS}}
-              {{> Cas_Login}}
-            {{else}}
-              {{> loginButtons align="center"}}
-            {{/if}}
+            {{> loginButtons align="center"}}
           </button>
         </div>
       </div>
