@@ -6,16 +6,16 @@
 
       <div class="row">
         <div class="two wide column">
-          <p><b>Name</b></p>
+          <b>Name</b>
         </div>
         <div class="six wide column">
-          <p>{{name}}</p>
+          {{name}}
         </div>
         <div class="two wide column">
-          <p><b>Email</b></p>
+          <b>Email</b>
         </div>
         <div class="six wide column">
-          <p>{{email}}</p>
+          {{email}}
         </div>
       </div>
 
@@ -56,25 +56,20 @@
 
       <div class="row">
         <div class="two wide column">
-          <p><b>Professional Website</b></p>
+          <p><b>Website URL</b></p>
         </div>
         <div class="six wide column">
-          {{#if website}}
-            <a href={{website}}>{{website}}</a><br><br>
-          {{else}}
-            <p>No website specified yet.</p>
-          {{/if}}
           <form class="ui form website">
-            <div class="inline field">
+            <div class="fluid field">
               <div class="ui action input">
-                <input id="website" type="text" name="website" placeholder="Enter new website url" value="http://mywebsite.com">
-                <button class="ui basic green button website" type="submit">Update Website</button>
+                <input id="website" type="text" name="website" placeholder="Enter new website url" value="{{website}}">
+                <button class="ui basic green button website" type="submit">Update</button>
               </div>
             </div>
           </form>
         </div>
         <div class="two wide column">
-          <p><b>Profile Image</b></p>
+          <p><b>Picture URL</b></p>
         </div>
         <div class="five wide column">
           <img class="ui tiny circular image" src={{studentPicture student}}><br>
