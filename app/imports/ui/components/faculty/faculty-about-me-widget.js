@@ -29,16 +29,6 @@ Template.Faculty_About_Me_Widget.helpers({
   degreesRouteName() {
     return RouteNames.facultyExplorerDegreesPageRouteName;
   },
-  desiredDegree() {
-    let ret = '';
-    if (getRouteUserName()) {
-      const profile = Users.getProfile(getRouteUserName());
-      if (profile.desiredDegreeID) {
-        ret = DesiredDegrees.findDoc(profile.desiredDegreeID).name;
-      }
-    }
-    return ret;
-  },
   email() {
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());

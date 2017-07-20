@@ -6,48 +6,41 @@
 
       <div class="row">
         <div class="two wide column">
-          <p><b>Name</b></p>
+          <b>Name</b>
         </div>
         <div class="six wide column">
-          <p>{{name}}</p>
+          {{name}}
         </div>
         <div class="two wide column">
-          <p><b>Email</b></p>
+          <b>Email</b>
         </div>
-        <div class="five wide column">
-          <p>{{email}}</p>
+        <div class="six wide column">
+          {{email}}
         </div>
       </div>
 
       <div class="row">
         <div class="two wide column">
-          <p><b>Desired Degree</b></p>
+          <p><b>Picture</b> (<a id="image-upload-widget" href="">Upload</a>)</p>
         </div>
         <div class="six wide column">
-        <p style="margin-bottom: 0">
-          {{#if desiredDegree}}
-            {{desiredDegree}}
-          {{else}}
-            No desired degree specified yet.
-          {{/if}}
-        </p>
-          <p><a href="{{pathFor degreesRouteName username=routeUserName degree=firstDegree}}">Edit in degree
-            explorer</a></p>
+          <form class="ui form picture">
+            <div class="fluid field">
+              <div class="ui action input">
+                <input type="text" name="picture" placeholder="Enter picture url" value="{{picture}}">
+                <button class="ui basic green button picture" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
         </div>
         <div class="two wide column">
-          <p><b>Professional Website</b></p>
+          <b>Website</b>
         </div>
-        <div class="five wide column">
-          {{#if website}}
-            <a href={{website}}>{{website}}</a><br><br>
-          {{else}}
-            <p>No website specified yet.</p>
-          {{/if}}
+        <div class="six wide column">
           <form class="ui form website">
-            <div class="inline field">
+            <div class="fluid field">
               <div class="ui action input">
-                <input id="website" type="text" name="website" placeholder="Enter new website url"
-                       value="http://mywebsite.com">
+                <input id="website" type="text" name="website" placeholder="Enter website url" value="{{website}}">
                 <button class="ui basic green button website" type="submit">Update</button>
               </div>
             </div>
@@ -94,23 +87,14 @@
 
       <div class="row">
         <div class="two wide column">
-          <p><b>Profile Image</b></p>
+          <b>Desired Degree</b>
         </div>
         <div class="six wide column">
-          <img class="ui tiny circular image" src={{studentPicture student}}><br>
-          <div class="ui action input">
-            {{#with currentUpload}}
-              Uploading <b>{{file.name}}</b>:
-              <span id="progress">{{progress.get}}%</span>
-            {{else}}
-              <input id="fileInput" type="file"/>
-            {{/with}}
-            <!--<input id="fileInput" type="file"/>-->
-            <button class="ui basic green button picture mobile hidden" type="submit">Upload Image</button>
-          </div>
-          <button class="ui basic green button picture mobile only" type="submit" style="margin-top: 10px;">Upload
-            Image
-          </button>
+          <p style="margin-bottom: 0">
+            {{desiredDegree}}
+          </p>
+          <p><a href="{{pathFor degreesRouteName username=routeUserName degree=firstDegree}}">Edit in degree
+            explorer</a></p>
         </div>
       </div>
     </div>
