@@ -56,36 +56,30 @@
 
       <div class="row">
         <div class="two wide column">
-          <p><b>Website URL</b></p>
+          <b>Website</b>
         </div>
         <div class="six wide column">
           <form class="ui form website">
             <div class="fluid field">
               <div class="ui action input">
-                <input id="website" type="text" name="website" placeholder="Enter new website url" value="{{website}}">
+                <input id="website" type="text" name="website" placeholder="Enter website url" value="{{website}}">
                 <button class="ui basic green button website" type="submit">Update</button>
               </div>
             </div>
           </form>
         </div>
         <div class="two wide column">
-          <p><b>Picture URL</b></p>
+          <p><b>Picture</b> (<a id="image-upload-widget" href="">Upload</a>)</p>
         </div>
-        <div class="five wide column">
-          <img class="ui tiny circular image" src={{studentPicture student}}><br>
-          <div class="ui action input">
-            {{#with currentUpload}}
-              Uploading <b>{{file.name}}</b>:
-              <span id="progress">{{progress.get}}%</span>
-            {{else}}
-              <input id="fileInput" type="file"/>
-            {{/with}}
-            <!--<input id="fileInput" type="file"/>-->
-            <button class="ui basic green button picture mobile hidden" type="submit">Upload Image</button>
-          </div>
-          <button class="ui basic green button picture mobile only" type="submit" style="margin-top: 10px;">Upload
-            Image
-          </button>
+        <div class="six wide column">
+          <form class="ui form picture">
+            <div class="fluid field">
+              <div class="ui action input">
+                <input type="text" name="picture" placeholder="Enter picture url" value="{{picture}}">
+                <button class="ui basic green button picture" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
 
