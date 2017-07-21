@@ -26,6 +26,9 @@ Template.Advisor_Student_Configuration_Page.helpers({
   studentID() {
     return Template.instance().studentID;
   },
+  selectedStudent() {
+    return Template.instance().studentID.get();
+  },
   getDictionary() {
     return Template.instance().state;
   },

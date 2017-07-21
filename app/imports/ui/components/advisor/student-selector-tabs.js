@@ -1,14 +1,10 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { Users } from '../../../api/user/UserCollection.js';
 
 // /** @module ui/components/advisor/Student_Selector_Tabs */
-
-const displaySuccessMessage = 'displaySuccessMessage';
-const displayErrorMessages = 'displayErrorMessages';
 
 Template.Student_Selector_Tabs.onCreated(function studentSelectorTabsOnCreated() {
   if (this.data.dictionary) {
@@ -19,10 +15,6 @@ Template.Student_Selector_Tabs.onCreated(function studentSelectorTabsOnCreated()
   if (this.data.studentID) {
     this.studentID = this.data.studentID;
   }
-  // FormUtils.setupFormWidget(this, addSchema);
-  // this.state.set(displaySuccessMessage, false);
-  // this.state.set(displayErrorMessages, false);
-  // this.context = addSchema.namedContext('Add_Create_Student');
 });
 
 Template.Student_Selector_Tabs.onRendered(function studentSelectorTabsOnRendered() {
@@ -55,9 +47,6 @@ Template.Student_Selector_Tabs.helpers({
       }
     return Users.findProfilesWithRole(role, { lastName: regex }, { sort: { lastName: 1 } });
   },
-  url(user) {
-    return `/${user.role.toLowerCase()}/${user.username}/home`;
-  },
   name(user, tooltip) {
     const name = `${user.lastName}, ${user.firstName}`;
     if (!tooltip) {
@@ -82,12 +71,6 @@ Template.Student_Selector_Tabs.helpers({
   isUserSelected() {
     return Template.instance().state.get(sessionKeys.CURRENT_STUDENT_ID);
   },
-  alreadyDefined() {
-    return Template.instance().state.get('alreadyDefined');
-  },
-  notDefined() {
-    return Template.instance().state.get('notDefined');
-  },
   username() {
     return Template.instance().state.get('username');
   },
@@ -102,12 +85,11 @@ Template.Student_Selector_Tabs.events({
     if (profile) {
       instance.state.set(sessionKeys.CURRENT_STUDENT_USERNAME, username);
       instance.state.set(sessionKeys.CURRENT_STUDENT_ID, profile.userID);
-      instance.state.set('notDefined', false);
       instance.studentID.set(profile.userID);
-    } else {
-      instance.state.set(displaySuccessMessage, false);
-      instance.state.set(displayErrorMessages, true);
-      instance.state.set('notDefined', true);
     }
+  },
+  'click .add-new-student': function clickNewStudent(event, instance) {
+    event.preventDefault();
+    instance.studentID.set('');
   },
 });

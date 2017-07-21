@@ -1,7 +1,7 @@
 <template name="Student_Selector_Tabs">
   <div class="ui top attached tabular stackable menu">
     <a class="active item" data-tab="students">Update Existing</a>
-    <a class="item" data-tab="add">Add New</a>
+    <a class="item add-new-student" data-tab="add">Add New</a>
   </div>
   <div class="ui bottom attached active tab segment" data-tab="students">
     <div class="ui top attached tabular stackable menu">
@@ -15,8 +15,9 @@
           <div class="ui stackable grid">
             {{#each user in (users studentRole group)}}
               <div class="two wide column" style="padding: 2px;" data-tooltip={{name user true}}>
-                <button id="{{user.username}}" class="ui basic grey fluid label jsRetrieve"
-                   href="{{url user}}">{{name user false}}<br>({{studentUsername user}})</button>
+                <button id="{{user.username}}" class="ui basic grey fluid label jsRetrieve">
+                  {{name user false}}<br>({{studentUsername user}})
+                </button>
               </div>
             {{/each}}
           </div>
