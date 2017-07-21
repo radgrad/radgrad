@@ -1,4 +1,4 @@
-<template name="Update_Degree_Plan_Widget">
+<template name="Update_Student_Widget">
 
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>UPDATE STUDENT</h4></div>
@@ -18,7 +18,7 @@
       <div class="ui dividing header"><h4>Optional fields (all users)</h4></div>
 
       <div class="fields">
-        {{> Input_Form_Field label="Picture" name="picture" value=user.picture errorMessage=(fieldError "picture") }}
+        {{> Picture_Form_Field label="Picture" name="picture" value=user.picture errorMessage=(fieldError "picture") }}
         {{> Input_Form_Field label="Website" name="website" value=user.website errorMessage=(fieldError "website") }}
       </div>
 
@@ -36,8 +36,7 @@
       {{> Success_Message_Form_Field message="The User was successfully updated.  Press cancel to continue."}}
     </form>
     {{#if slug}}
-      <p><b>View {{user.firstName}}'s degree plan:</b> <a target="_blank"
-                                                          href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a></p>
+      <p style="padding-top: 10px"><b>View {{user.firstName}}'s degree plan:</b> <a target="_blank" href="/student/{{slug}}/degree-planner">/student/{{slug}}/degree-planner</a></p>
     {{/if}}
   </div>
 </template>

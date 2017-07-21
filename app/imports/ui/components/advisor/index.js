@@ -34,5 +34,5 @@ import './student-selector-tabs.js';
 import './student-selector-widget.html';
 import './student-selector-widget.js';
 
-import './update-degree-plan-widget.html';
-import './update-degree-plan-widget.js';
+import './update-student-widget.html';
+import './update-student-widget.js';

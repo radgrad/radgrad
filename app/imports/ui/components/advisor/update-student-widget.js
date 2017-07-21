@@ -33,7 +33,7 @@ const updateSchema = new SimpleSchema({
   academicPlan: { type: String, optional: true },
 }, { tracker: Tracker });
 
-Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
+Template.Update_Student_Widget.onCreated(function updateDegreePlanWidgetOnCreated() {
   FormUtils.setupFormWidget(this, updateSchema);
   this.autorun(() => {
     this.subscribe(CourseInstances.publicationNames.studentID, this.data.studentID.get());
@@ -42,7 +42,7 @@ Template.Update_Degree_Plan_Widget.onCreated(function updateDegreePlanWidgetOnCr
   });
 });
 
-Template.Update_Degree_Plan_Widget.helpers({
+Template.Update_Student_Widget.helpers({
   calcLevel() {
     if (Template.currentData().studentID.get()) {
       return calcLevel(Template.currentData().studentID.get());
@@ -151,7 +151,7 @@ Template.Update_Degree_Plan_Widget.helpers({
   },
 });
 
-Template.Update_Degree_Plan_Widget.events({
+Template.Update_Student_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);

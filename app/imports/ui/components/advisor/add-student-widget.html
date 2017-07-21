@@ -1,36 +1,36 @@
 <template name="Add_Student_Widget">
-    <div class="ui padded container segment">
-        <div class="ui dividing header"><h4>ADD STUDENT</h4></div>
-        <form class="ui equal width form {{successClass}} {{errorClass}}">
+  <div class="ui padded container">
+    <div class="ui dividing header"><h4>ADD STUDENT</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
 
-            <div class="fields">
-                {{> Input_Form_Field label="Username" name="username" placeholder="johndoe@hawaii.edu" errorMessage=
-                        (fieldError "username") required=true}}
-                {{> Input_Form_Field label="First" name="firstName" placeholder="John" errorMessage=(fieldError "firstName") required=true}}
-                {{> Input_Form_Field label="Last" name="lastName" placeholder="Doe" errorMessage=(fieldError "lastName") required=true}}
-            </div>
+      <div class="fields">
+        {{> Input_Form_Field label="First" name="firstName" placeholder="John" errorMessage=(fieldError "firstName") required=true}}
+        {{> Input_Form_Field label="Last" name="lastName" placeholder="Doe" errorMessage=(fieldError "lastName") required=true}}
+      </div>
 
-            <div class="fields">
-                {{> Boolean_Form_Field name='isAlumni' required=true label='Alumni' falseValue=true}}
-                <!--{{> Role_Form_Field roles=roles selectedRole="STUDENT" errorMessage=(fieldError "role") required=true }}-->
-                {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests") required=true}}
-            </div>
+      <div class="fields">
+        {{> Input_Form_Field label="Username" name="username" placeholder="johndoe@hawaii.edu" errorMessage= (fieldError "username") required=true}}
+        {{> Boolean_Form_Field name='isAlumni' required=true label='Alumni' falseValue=true}}
+      </div>
 
-            <div class="ui dividing header"><h4>Optional fields</h4></div>
+      <div class="ui dividing header"><h4>Optional fields</h4></div>
 
-            <div class="fields">
-                {{> Input_Form_Field label="Picture" name="picture" placeholder="http://keanu.github.io/images/keanu.jpg" errorMessage=(fieldError "picture") }}
-                {{> Input_Form_Field label="Website" name="website" placeholder="http://keanu.github.io/" errorMessage=(fieldError "website") }}
-            </div>
+      <div class="fields">
+        {{> Picture_Form_Field label="Picture" name="picture" placeholder="http://keanu.github.io/images/keanu.jpg" errorMessage=(fieldError "picture") }}
+        {{> Input_Form_Field label="Website" name="website" placeholder="http://keanu.github.io/" errorMessage=(fieldError "website") }}
+      </div>
 
-            <div class="fields">
-                {{> Career_Goals_Form_Field careerGoals=careerGoals errorMessage=(fieldError "careerGoals")}}
-                {{> Semesters_Single_Form_Field selectedSemesterID=selectedSemesterID semesters=semesters errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
-                {{> Academic_Plan_Form_Field plans=plans}}
-            </div>
-            <button class="ui green basic button" type="submit">Add</button>
+      <div class="fields">
+        {{> Career_Goals_Form_Field careerGoals=careerGoals errorMessage=(fieldError "careerGoals")}}
+        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests")}}
+      </div>
+      <div class="fields">
+        {{> Semesters_Single_Form_Field selectedSemesterID=selectedSemesterID semesters=semesters errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
+        {{> Academic_Plan_Form_Field plans=plans}}
+      </div>
+      <button class="ui green basic button" type="submit">Add</button>
 
-            {{> Success_Message_Form_Field message="The User was successfully added."}}
-        </form>
-    </div>
+      {{> Success_Message_Form_Field message="The User was successfully added."}}
+    </form>
+  </div>
 </template>

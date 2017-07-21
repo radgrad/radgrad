@@ -25,6 +25,7 @@ const updateSchema = new SimpleSchema({
   location: { type: String, optional: true },
   linkedin: { type: String, optional: true },
   motivation: { type: String, optional: true },
+  picture: { type: String, optional: true },
 });
 
 Template.Mentor_About_Me_Widget.onCreated(function onCreated() {
@@ -39,7 +40,7 @@ Template.Mentor_About_Me_Widget.helpers({
       const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.career;
     }
-    return '';
+    return 'No career specified.';
   },
   careerGoals() {
     if (getRouteUserName()) {
@@ -56,7 +57,7 @@ Template.Mentor_About_Me_Widget.helpers({
       const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.company;
     }
-    return '';
+    return 'No company specified.';
   },
   degreesRouteName() {
     return RouteNames.mentorExplorerDegreesPageRouteName;
@@ -129,21 +130,21 @@ Template.Mentor_About_Me_Widget.helpers({
       const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.linkedin;
     }
-    return '';
+    return 'No linkedin profile specified';
   },
   location() {
     if (getRouteUserName()) {
       const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.location;
     }
-    return '';
+    return 'No location specified.';
   },
   motivation() {
     if (getRouteUserName()) {
       const profile = MentorProfiles.findDoc({ userID: getUserIdFromRoute() });
       return profile.motivation;
     }
-    return '';
+    return 'No motivation specified.';
   },
   name() {
     if (getRouteUserName()) {
@@ -157,7 +158,7 @@ Template.Mentor_About_Me_Widget.helpers({
       const user = Users.getProfile(getRouteUserName());
       return user.picture;
     }
-    return '';
+    return 'No picture';
   },
   slugName(item) {
     return Slugs.findDoc(item.slugID).name;
@@ -167,7 +168,7 @@ Template.Mentor_About_Me_Widget.helpers({
       const user = Users.getProfile(getRouteUserName());
       return user.picture;
     }
-    return '';
+    return 'No picture';
   },
   website() {
     if (getRouteUserName()) {
@@ -183,6 +184,7 @@ Template.Mentor_About_Me_Widget.events({
     event.preventDefault();
     instance.messageFlags.set(edit, true);
   },
+
   submit: function submitDoneEdit(event, instance) {
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
@@ -204,6 +206,7 @@ Template.Mentor_About_Me_Widget.events({
     }
     instance.messageFlags.set(edit, false);
   },
+
   'click .cancel': function (event, instance) {
     event.preventDefault();
     instance.messageFlags.set(edit, false);

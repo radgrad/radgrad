@@ -2,41 +2,6 @@
   <div class="ui padded container segment">
     <div class="ui dividing header">PROFILE</div>
     <div class="ui stackable grid">
-      {{#if edit}}
-        <div class="row">
-          <div class="two wide column">
-            <p><b>Profile Image</b></p>
-          </div>
-          <div class="fourteen wide column">
-            <img class="ui bottom aligned tiny circular image" src={{studentPicture student}}>
-            {{#if edit}}
-              <span style="margin-left:10px">
-            <div class="ui action input">
-            {{#with currentUpload}}
-              Uploading <b>{{file.name}}</b>:
-              <span id="progress">{{progress.get}}%</span>
-            {{else}}
-              <input id="fileInput" type="file"/>
-            {{/with}}
-              <button class="ui basic green button picture mobile hidden" type="submit">Upload Image</button>
-          </div>
-          <button class="ui basic green button picture mobile only" type="submit" style="margin-top: 10px;">Upload
-            Image
-          </button>
-          </span>
-            {{/if}}
-          </div>
-        </div>
-      {{else}}
-        <div class="row">
-          <div class="two wide column">
-            <p><b>Profile Image</b></p>
-          </div>
-          <div class="fourteen wide column">
-            <img class="ui bottom aligned tiny circular image" src={{studentPicture student}}>
-          </div>
-        </div>
-      {{/if}}
       <div class="row">
         <div class="two wide column">
           <p><b>Name</b></p>
@@ -68,7 +33,7 @@
             <p>No interests added yet.</p>
           {{/if}}
           <a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Edit in interest
-          explorer</a>
+            explorer</a>
         </div>
         <div class="two wide column">
           <p><b>Career Goals</b></p>
@@ -84,23 +49,27 @@
           {{else}}
             No career goals added yet.
           {{/if}}
-          <a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in career explorer</a>
+          <a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in career
+            explorer</a>
         </div>
       </div>
-      </div>
+    </div>
 
     {{#if edit}}
       <form name="mentorProfile" class="ui equal width form {{successClass}} {{errorClass}}">
         <div class="fields">
-          {{> Input_Form_Field label='Website' name='website' value=website }}
+          {{> Input_Form_Field label='Website URL' name='website' value=website }}
           {{> Input_Form_Field label='Company' name='company' value=company }}
         </div>
         <div class="fields">
-          {{> Input_Form_Field label='Job Title' name='career' value=career }}
+          {{> Input_Form_Field label='Title' name='career' value=career }}
           {{> Input_Form_Field label='Location' name='location' value=location }}
         </div>
         <div class="fields">
-          {{> Input_Form_Field label='LinkedIn' name='linkedin' value=linkedin }}
+          {{> Input_Form_Field label='LinkedIn Username' name='linkedin' value=linkedin }}
+          {{> Picture_Form_Field value=picture }}
+        </div>
+        <div class="field">
           {{> TextArea_Form_Field label='Motivation' rows=10 name='motivation' value=motivation }}
         </div>
         <button class="ui button basic green doneEdit" type="submit">Save Profile</button>
@@ -108,76 +77,65 @@
       </form>
 
     {{else}}
-    <div class="ui stackable grid">
-      <div class="row">
-        <div class="two wide column">
-          <p><b>Professional Website</b></p>
-        </div>
-        <div class="six wide column">
+      <div class="ui stackable grid">
+        <div class="row">
+          <div class="two wide column">
+            <p><b>Website URL</b></p>
+          </div>
+          <div class="six wide column">
             {{#if website}}
-              <a href={{website}}>{{website}}</a>
+              <a href="{{website}}">{{website}}</a>
             {{else}}
-              <p>No website specified yet.</p>
+              No website specified.
             {{/if}}
+          </div>
+          <div class="two wide column">
+            <p><b>Company</b></p>
+          </div>
+          <div class="six wide column">
+            <p>{{company}}</p>
+          </div>
         </div>
-        <div class="two wide column">
-          <p><b>Current Company</b></p>
-        </div>
-        <div class="six wide column">
-            {{#if company}}
-              <p>{{company}}</p>
-            {{else}}
-              <p>No company specified yet.</p>
-            {{/if}}
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="two wide column">
-          <p><b>Current Job Title</b></p>
+        <div class="row">
+          <div class="two wide column">
+            <p><b>Title</b></p>
+          </div>
+          <div class="six wide column">
+            <p>{{career}}</p>
+          </div>
+          <div class="two wide column">
+            <p><b>Location</b></p>
+          </div>
+          <div class="six wide column">
+            <p>{{location}}</p>
+          </div>
         </div>
-        <div class="six wide column">
-            {{#if career}}
-              <p>{{career}}</p>
-            {{else}}
-              <p>No current job title specified yet.</p>
-            {{/if}}
-        </div>
-        <div class="two wide column">
-          <p><b>Current Location</b></p>
-        </div>
-        <div class="six wide column">
-            {{#if location}}
-              <p>{{location}}</p>
-            {{else}}
-              <p>No current location specified yet.</p>
-            {{/if}}
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="two wide column">
-          <p><b>LinkedIn</b></p>
+        <div class="row">
+          <div class="two wide column">
+            <p><b>LinkedIn Username</b></p>
+          </div>
+          <div class="six wide column">
+            <p>{{linkedin}}</p>
+          </div>
+          <div class="two wide column">
+            <p><b>Picture URL</b></p>
+          </div>
+          <div class="six wide column">
+            <p>{{picture}}</p>
+          </div>
         </div>
-        <div class="six wide column">
-            {{#if linkedin}}
-              <p>{{linkedin}}</p>
-            {{else}}
-              <p>No LinkedIn specified yet.</p>
-            {{/if}}
-        </div>
-        <div class="two wide column">
-          <p><b>Motivation</b></p>
-        </div>
-        <div class="six wide column">
-            {{#if motivation}}
-              <p>{{motivation}}</p>
-            {{else}}
-              <p>No motivation specified yet.</p>
-            {{/if}}
+
+        <div class="row">
+          <div class="two wide column">
+            <p><b>Motivation</b></p>
+          </div>
+          <div class="fourteen wide column">
+            <p>{{motivation}}</p>
+          </div>
         </div>
       </div>
-    </div>
       <button class="ui button basic green editProfile">Edit Profile</button>
     {{/if}}
   </div>
