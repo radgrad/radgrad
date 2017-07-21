@@ -1,10 +1,12 @@
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
 import { Feeds } from '../../../api/feed/FeedCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
@@ -56,7 +58,10 @@ Template.Add_Opportunity_Widget.helpers({
     return '';
   },
   sponsors() {
-    return Roles.getUsersInRole([ROLE.FACULTY, ROLE.ADMIN, ROLE.ADVISOR]);
+    const usernames = Roles.getUsersInRole([ROLE.FACULTY, ROLE.ADVISOR]).map(user => user.username);
+    // get the profiles, sorted by last name.
+    const profiles = _.sortBy(_.map(usernames, username => Users.getProfile(username)), profile => profile.lastName);
+    return profiles;
   },
 });
 

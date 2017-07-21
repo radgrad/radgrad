@@ -6,6 +6,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { Users } from '../../../api/user/UserCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
@@ -29,9 +30,10 @@ Template.Add_Opportunity_Instance_Widget.helpers({
     return Semesters.find({});
   },
   students() {
-    const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
-    const sorted = _.sortBy(students, 'lastName');
-    return sorted;
+    const usernames = Roles.getUsersInRole([ROLE.STUDENT]).map(user => user.username);
+    // get the profiles, sorted by last name.
+    const profiles = _.sortBy(_.map(usernames, username => Users.getProfile(username)), profile => profile.lastName);
+    return profiles;
   },
   opportunities() {
     return Opportunities.find({}, { sort: { name: 1 } });

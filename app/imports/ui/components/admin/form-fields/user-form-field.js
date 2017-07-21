@@ -1,4 +1,6 @@
 import { Template } from 'meteor/templating';
+import { Users } from '../../../../api/user/UserCollection';
+
 
 Template.User_Form_Field.onRendered(function onRendered() {
   this.$('.dropdown').dropdown();
@@ -9,6 +11,6 @@ Template.User_Form_Field.helpers({
     return user === selectedUser;
   },
   name(user) {
-    return `${user.lastName}, ${user.firstName}`;
+    return Users.getFullName(user.username);
   },
 });

@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Users } from '../../../../api/user/UserCollection';
 
 Template.Sponsor_Form_Field.onRendered(function onRendered() {
   this.$('.dropdown').dropdown();
@@ -9,6 +10,6 @@ Template.Sponsor_Form_Field.helpers({
     return sponsor === selectedSponsor;
   },
   sponsorName(sponsor) {
-    return `${sponsor.firstName} ${sponsor.lastName}`;
+    return Users.getFullName(sponsor.username);
   },
 });
