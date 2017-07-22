@@ -7,24 +7,22 @@
       <div class="fields">
         {{> Input_Form_Field label="Name" name="name" value=opportunity.name errorMessage=(fieldError "name") required=true}}
         {{> Input_Form_Field label="Slug" name="slug" value=slug errorMessage=(fieldError "slug") disabled=true}}
-        {{> Input_Date_Form_Field label="Event Date" name="eventDate" value=opportunity.eventDate errorMessage=(fieldError "eventDate")}}
       </div>
 
       <div class="fields">
         {{> Opportunity_Types_Form_Field opportunityTypes=opportunityTypes selectedOpportunityTypeID=opportunity.opportunityTypeID errorMessage=(fieldError "opportunityTypes")}}
-        {{> Sponsor_Form_Field sponsors=sponsors selectedSponsorID=opportunity.sponsorID errorMessage=(fieldError "sponsor") required=true}}
-        {{> Input_Form_Field label="Icon" name="icon" value=opportunity.icon errorMessage=(fieldError "icon")}}
+        {{> Sponsor_Form_Field sponsors=sponsors selectedSponsorID=opportunity.sponsorID errorMessage=(fieldError "sponsor") required=true disabled=faculty}}
       </div>
+
+      <div class="fields">
+      {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
+      {{> Semesters_Form_Field semesters=semesters selectedSemesterIDs=selectedSemesterIDs errorMessage=(fieldError "semesters") required="true" }}
+    </div>
 
       <div class="fields">
         {{> Input_Form_Field label="Innovation" name="innovation" value=opportunity.ice.i errorMessage=(fieldError "innovation") required=true type="number"}}
         {{> Input_Form_Field label="Competency" name="competency" value=opportunity.ice.c errorMessage=(fieldError "competency") required=true type="number"}}
         {{> Input_Form_Field label="Experience" name="experience" value=opportunity.ice.e errorMessage=(fieldError "experience") required=true type="number"}}
-      </div>
-
-      <div class="fields">
-        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
-        {{> Semesters_Form_Field semesters=semesters selectedSemesterIDs=selectedSemesterIDs errorMessage=(fieldError "semesters") required="true" }}
       </div>
 
       {{> TextArea_Form_Field label="Description" rows=15 name="description" value=opportunity.description errorMessage=(fieldError "description") required=true}}

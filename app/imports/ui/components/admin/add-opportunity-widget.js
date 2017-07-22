@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
@@ -20,16 +21,14 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 const addSchema = new SimpleSchema({
   name: String,
   slug: { type: String, custom: FormUtils.slugFieldValidator },
-  eventDate: { type: Date, optional: true },
   description: String,
   opportunityType: String,
   sponsor: String,
-  innovation: { type: Number, min: 0, max: 100 },
-  competency: { type: Number, min: 0, max: 100 },
-  experience: { type: Number, min: 0, max: 100 },
+  innovation: { type: Number, min: 0, max: 25 },
+  competency: { type: Number, min: 0, max: 25 },
+  experience: { type: Number, min: 0, max: 25 },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   semesters: { type: Array, minCount: 1 }, 'semesters.$': String,
-  icon: { type: String, optional: true },
 }, { tracker: Tracker });
 
 Template.Add_Opportunity_Widget.onCreated(function onCreated() {
@@ -61,7 +60,8 @@ Template.Add_Opportunity_Widget.helpers({
     const usernames = Roles.getUsersInRole([ROLE.FACULTY, ROLE.ADVISOR]).map(user => user.username);
     // get the profiles, sorted by last name.
     const profiles = _.sortBy(_.map(usernames, username => Users.getProfile(username)), profile => profile.lastName);
-    return profiles;
+    const accounts = _.map(profiles, profile => Meteor.users.findOne({ username: profile.username }));
+    return accounts;
   },
 });
 

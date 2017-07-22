@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Teasers } from '../../../api/teaser/TeaserCollection.js';
@@ -59,7 +58,6 @@ Template.Faculty_Explorer_Opportunities_Page.helpers({
     return [
       { label: 'Opportunity Type', value: opportunityType(opportunity) },
       { label: 'Semesters', value: semesters(opportunity) },
-      { label: 'Event Date', value: opportunity.eventDate },
       { label: 'Sponsor', value: sponsor(opportunity) },
       { label: 'Description', value: opportunity.description },
       { label: 'Interests', value: opportunity.interestIDs },

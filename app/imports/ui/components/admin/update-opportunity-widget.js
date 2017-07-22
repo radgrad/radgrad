@@ -1,7 +1,10 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
+import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ROLE } from '../../../api/role/Role.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
@@ -9,22 +12,21 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
 // /** @module ui/components/admin/Update_Opportunity_Widget */
 
 const updateSchema = new SimpleSchema({
   name: String,
-  eventDate: { type: Date, optional: true },
   description: String,
   opportunityType: String,
   sponsor: String,
-  innovation: { type: Number, min: 0, max: 100 },
-  competency: { type: Number, min: 0, max: 100 },
-  experience: { type: Number, min: 0, max: 100 },
+  innovation: { type: Number, min: 0, max: 25 },
+  competency: { type: Number, min: 0, max: 25 },
+  experience: { type: Number, min: 0, max: 25 },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   semesters: { type: Array, minCount: 1 }, 'semesters.$': String,
-  icon: { type: String, optional: true },
 }, { tracker: Tracker });
 
 Template.Update_Opportunity_Widget.onCreated(function onCreated() {
@@ -42,7 +44,11 @@ Template.Update_Opportunity_Widget.helpers({
     return Semesters.find({});
   },
   sponsors() {
-    return Roles.getUsersInRole([ROLE.FACULTY, ROLE.ADMIN, ROLE.ADVISOR]);
+    const usernames = Roles.getUsersInRole([ROLE.FACULTY, ROLE.ADVISOR]).map(user => user.username);
+    // get the profiles, sorted by last name.
+    const profiles = _.sortBy(_.map(usernames, username => Users.getProfile(username)), profile => profile.lastName);
+    const accounts = _.map(profiles, profile => Meteor.users.findOne({ username: profile.username }));
+    return accounts;
   },
   slug() {
     const opportunity = Opportunities.findDoc(Template.currentData().updateID.get());
@@ -58,6 +64,10 @@ Template.Update_Opportunity_Widget.helpers({
   selectedSemesterIDs() {
     const opportunity = Opportunities.findDoc(Template.currentData().updateID.get());
     return opportunity.semesterIDs;
+  },
+  faculty() {
+    const group = FlowRouter.current().route.group.name;
+    return group === 'faculty';
   },
 });
 

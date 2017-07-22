@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { moment } from 'meteor/momentjs:moment';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
@@ -74,7 +73,6 @@ Template.List_Opportunities_Widget.helpers({
       { label: 'Sponsor', value: Users.getProfile(opportunity.sponsorID).username },
       { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
       { label: 'Semesters', value: _.map(opportunity.semesterIDs, id => Semesters.toString(id)) },
-      { label: 'Event Date', value: moment(opportunity.eventDate).format('lll') },
       { label: 'ICE', value: `${opportunity.ice.i}, ${opportunity.ice.c}, ${opportunity.ice.e}` },
       { label: 'References', value: `${numReferences(opportunity)}` },
     ];
