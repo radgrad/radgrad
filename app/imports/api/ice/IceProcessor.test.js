@@ -30,7 +30,7 @@ if (Meteor.isServer) {
       expect(ICE.makeCourseICE(Courses.unInterestingSlug, 'A').c).to.equal(ICE.gradeCompetency.C);
     });
 
-    it('#getEarnedICE, #getProjectedICE', function test() {
+    it('#getEarnedICE, #getProjectedICE', function test(done) {
       this.timeout(5000);
       defineTestFixtures(['minimal', 'extended.courses.interests', 'abi.student', 'abi.courseinstances']);
       const cis = CourseInstances.find().fetch();
@@ -45,6 +45,7 @@ if (Meteor.isServer) {
       expect(projectedICE.c).to.be.equal(116);
       expect(projectedICE.e).to.be.equal(0);
       removeAllEntities();
+      done();
     });
   });
 }
