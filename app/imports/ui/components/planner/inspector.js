@@ -500,7 +500,8 @@ Template.Inspector.events({
   'click button.verifyInstance': function clickButtonVerifyInstance(event) {
     event.preventDefault();
     const id = event.target.id;
-    const opportunity = Opportunities.findDoc(event.target.id);
+    const oi = OpportunityInstances.findDoc(id);
+    const opportunity = Opportunities.findDoc(oi.opportunityID);
     const definitionData = { student: getRouteUserName(), opportunityInstance: id };
     const collectionName = VerificationRequests.getCollectionName();
     defineMethod.call({ collectionName, definitionData });

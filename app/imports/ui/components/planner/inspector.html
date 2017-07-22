@@ -178,7 +178,7 @@
                   <strong>Status: </strong>{{requestStatus}}
                   <p>
                     {{#each processed in requestHistory}}
-                      <span>Processed: {{processedDate processed.date}} by {{processed.verifier}}
+                      <span>Processed: {{processed.date}} by {{processed.verifier}}
                         ({{processed.status}}) <em>{{processed.feedback}}</em></span><br>
                     {{/each}}
                   </p>
