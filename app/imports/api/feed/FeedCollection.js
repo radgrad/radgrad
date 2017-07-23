@@ -306,13 +306,13 @@ class FeedCollection extends BaseCollection {
    *                         user: 'abi@hawaii.edu'
    *                         level: 6,
    *                      });
-   * @param user
-   * @param level
-   * @param feedType
-   * @param timestamp
+   * @param user the username.
+   * @param level the new level.
+   * @param feedType Feeds.NEW_LEVEL.
+   * @param timestamp The time of the Feed.
    * @private
    */
-  _defineNewLevel({ user, level, feedType, timestamp = moment().toDate() }){
+  _defineNewLevel({ user, level, feedType, timestamp = moment().toDate() }) {
     let picture;
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getProfile(userID).username})  
@@ -325,6 +325,7 @@ class FeedCollection extends BaseCollection {
       feedType });
     return feedID;
   }
+
   /**
    * Returns a feedID with the same feedType (and opportunity, if feedType is Feeds.VERIFIED_OPPORTUNITY)
    * if it exists within the past 24 hours.

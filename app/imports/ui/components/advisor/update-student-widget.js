@@ -187,7 +187,6 @@ Template.Update_Student_Widget.events({
           level: updateData.level,
         };
         defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
-
       }
       updateData.id = profile._id;
       const collectionName = StudentProfiles.getCollectionName();
