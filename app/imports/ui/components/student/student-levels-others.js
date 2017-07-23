@@ -7,7 +7,7 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 
 Template.Student_Levels_Others.helpers({
   fullName(student) {
-    return Users.getFullName(student._id);
+    return Users.getFullName(student.userID);
   },
   studentsExist(students) {
     return students.length > 0;
@@ -33,7 +33,6 @@ Template.Student_Levels_Others.helpers({
   studentPicture(student) {
     return student.picture;
   },
-
   students(userLevel) {
     const students = [];
     const profiles = Users.findProfilesWithRole(ROLE.STUDENT);
