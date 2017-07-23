@@ -3,14 +3,14 @@
       <!-- Earned -->
       <div class="active title">
       <i class="dropdown icon"></i>
-      Earned <div class="ui right floated {{#with getTypeColors}}{{color}}{{/with}}">{{points earnedICE}} pts</div>
+      Verified <div class="ui right floated {{#with getTypeColors}}{{color}}{{/with}}">{{points earnedICE}} pts</div>
     </div>
 
     <div class="active content">
       {{#if matchingPoints (points earnedICE) 0}}
-        <p>You have not yet earned any {{type}} points.</p>
+        <p>You have no verified {{type}} points.</p>
       {{else}}
-        <p>You have earned {{points earnedICE}} {{type}} points for the following:</p>
+        <p>You have {{points earnedICE}} verified {{type}} points for the following:</p>
         <div class="ui very relaxed list">
           {{#each year in years}}
             {{#each semester in semesters year}}
@@ -34,13 +34,13 @@
       <!-- Not earned -->
       <div class="title">
       <i class="dropdown icon"></i>
-      Not Yet Earned <div class="ui right floated {{#with getTypeColors}}{{projColor}}{{/with}}">{{remainingICE (points earnedICE) (points projectedICE) }} pts</div>
+      Unverified <div class="ui right floated {{#with getTypeColors}}{{projColor}}{{/with}}">{{remainingICE (points earnedICE) (points projectedICE) }} pts</div>
     </div>
     <div class="content">
       {{#if matchingPoints (points projectedICE) 0}}
-        <p>You have earned all of your planned points.</p>
+        <p>You have verified all of your planned points.</p>
       {{else}}
-        <p>You have a total of {{remainingICE (points earnedICE) (points projectedICE) }} not yet earned {{type}} points.</p>
+        <p>You have a total of {{remainingICE (points earnedICE) (points projectedICE) }} unverified {{type}} points.</p>
         <div class="ui very relaxed list">
           {{#each year in years}}
             {{#each semester in semesters year}}
@@ -68,10 +68,10 @@
     </div>
     <div class="content">
       {{#if matchingPoints 100 (points earnedICE) }}
-        <p>Congratulations! You have earned 100 (or more) {{type}} points!</p>
+        <p>Congratulations! You have 100 (or more) verified {{type}} points!</p>
       {{else}}
         {{#if matchingPoints 100 (points projectedICE) }}
-          <p>You already have at least 100 planned {{type}} points.</p>
+          <p>You already have at least 100 verified or unverified {{type}} points.</p>
         {{else}}
           {{#if hasNoInterests}}
             <p>Consider adding interests to see recommendations here.</p>

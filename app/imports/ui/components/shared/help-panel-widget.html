@@ -1,21 +1,21 @@
 <template name="Help_Panel_Widget">
-  <div class="{{#if noHelpClass}} {{else}}radgrad-help{{/if}} sixteen wide column">
-    <div class="ui info floating message">
-      <!-- <i class="close icon"></i> -->
-      <div class="ui accordion">
-        <div class="radgrad-help-title title header">
-          <i class="dropdown icon"></i>
-          <span>{{helpTitle}}</span>
-          <!-- <i class="large help circle outline icon"></i> -->
-        </div>
-        <div class="content">
-          {{#markdown}}{{helpText}}
+  {{#if helpText}}
+    <div class="{{#if noHelpClass}} {{else}}radgrad-help{{/if}} sixteen wide column">
+      <div class="ui info floating message">
+        <div class="ui accordion">
+          <div class="radgrad-help-title title header">
+            <i class="dropdown icon"></i>
+            <span>{{helpTitle}}</span>
+          </div>
+          <div class="content">
+            {{#markdown}}{{helpText}}
 
 #### Need more help?
 If you have additional questions, please email [radgrad@hawaii.edu](mailto:radgrad@hawaii.edu).
-          {{/markdown}}
+            {{/markdown}}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  {{/if}}
 </template>
