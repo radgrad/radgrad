@@ -62,6 +62,7 @@ class FeedCollection extends BaseCollection {
     this.VERIFIED_OPPORTUNITY = 'verified-opportunity';
     this.NEW_COURSE_REVIEW = 'new-course-review';
     this.NEW_OPPORTUNITY_REVIEW = 'new-opportunity-review';
+    this.NEW_LEVEL = 'new-level';
   }
 
   /**
@@ -90,6 +91,9 @@ class FeedCollection extends BaseCollection {
     }
     if (feedDefinition.feedType === this.NEW_OPPORTUNITY_REVIEW) {
       return this._defineNewOpportunityReview(feedDefinition);
+    }
+    if (feedDefinition.feedType === this.NEW_LEVEL) {
+      return this._defineNewLevel(feedDefinition);
     }
     throw new Meteor.Error(`Unknown feed type: ${feedDefinition.feedType}`);
   }
@@ -133,7 +137,7 @@ class FeedCollection extends BaseCollection {
    * docID is returned.
    * @example
    * Feeds._defineNewUser({ feedType: Feeds.NEW_USER,
-   *                      user: 'abigailkealoha',
+   *                      user: 'abi@hawaii.edu',
    *                      timestamp: '12345465465' });
    * @param { Object } description Object with keys user and timestamp.
    * Note that user can be either a single username string or an array of usernames.
@@ -207,7 +211,7 @@ class FeedCollection extends BaseCollection {
    * returned.
    * @example
    * Feeds._defineNewVerifiedOpportunity({ feedType: Feeds.VERIFIED_OPPORTUNITY,
-   *                                      user: 'abigailkealoha',
+   *                                      user: 'abi@hawaii.edu',
    *                                      opportunity: 'att-hackathon'
    *                                      semester: 'Spring-2013'
    *                                      timestamp: '12345465465', });
@@ -243,7 +247,7 @@ class FeedCollection extends BaseCollection {
    * Defines a new Feed (new course review).
    * @example
    * Feeds._defineNewCourseReview({ feedType: Feeds.NEW_COURSE_REVIEW,
-   *                              user: 'abigailkealoha',
+   *                              user: 'abi@hawaii.edu',
    *                              course: 'ics111'
    *                              timestamp: '12345465465', });
    * @param { Object } description Object with keys user, course, feedType, and timestamp.
@@ -270,7 +274,7 @@ class FeedCollection extends BaseCollection {
    * Defines a new Feed (new opportunity review).
    * @example
    * Feeds._defineNewOpportunityReview({ feedType: Feeds.NEW_OPPORTUNITY_REVIEW,
-   *                                   user: 'abigailkealoha',
+   *                                   user: 'abi@hawaii.edu',
    *                                   opportunity: 'att-hackathon'
    *                                   timestamp: '12345465465', });
    * @param { Object } description Object with keys user, opportunity, feedType, and timestamp.
@@ -291,6 +295,33 @@ class FeedCollection extends BaseCollection {
       picture = '/images/people/default-profile-picture.png';
     }
     const feedID = this._collection.insert({ userIDs: [userID], opportunityID, description, timestamp, picture,
+      feedType });
+    return feedID;
+  }
+
+  /**
+   * Defines a new Feed (new level).
+   * @example
+   * Feeds._defineNewLevel({ feedType: Feeds.NEW_LEVEL,
+   *                         user: 'abi@hawaii.edu'
+   *                         level: 6,
+   *                      });
+   * @param user the username.
+   * @param level the new level.
+   * @param feedType Feeds.NEW_LEVEL.
+   * @param timestamp The time of the Feed.
+   * @private
+   */
+  _defineNewLevel({ user, level, feedType, timestamp = moment().toDate() }) {
+    let picture;
+    const userID = Users.getID((_.isArray(user)) ? user[0] : user);
+    const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getProfile(userID).username})  
+      has achieved level ${level}.`;
+    picture = Users.getProfile(userID).picture;
+    if (!picture) {
+      picture = '/images/people/default-profile-picture.png';
+    }
+    const feedID = this._collection.insert({ userIDs: [userID], description, timestamp, picture,
       feedType });
     return feedID;
   }
