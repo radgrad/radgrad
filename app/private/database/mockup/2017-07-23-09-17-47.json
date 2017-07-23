@@ -8271,6 +8271,188 @@
       "name": "VerificationRequestCollection",
       "contents": [
         {
+          "student": "abi@hawaii.edu",
+          "semester": "Fall-2014",
+          "opportunity": "greyhats",
+          "submittedOn": "2014-11-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2014-11-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "glau@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Spring-2015",
+          "opportunity": "greyhats",
+          "submittedOn": "2015-02-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2015-02-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "glau@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Spring-2015",
+          "opportunity": "hawaii-hacker-hours",
+          "submittedOn": "2015-02-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2015-02-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "johnson@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Fall-2015",
+          "opportunity": "greyhats",
+          "submittedOn": "2015-10-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2015-10-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "glau@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Fall-2015",
+          "opportunity": "hawaii-hacker-hours",
+          "submittedOn": "2015-10-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2015-10-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "johnson@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Spring-2015",
+          "opportunity": "ccdc",
+          "submittedOn": "2015-04-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2015-04-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "johnson@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Spring-2016",
+          "opportunity": "ccdc",
+          "submittedOn": "2016-04-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2016-04-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "johnson@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Spring-2016",
+          "opportunity": "greyhats",
+          "submittedOn": "2016-02-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2016-03-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "glau@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Spring-2016",
+          "opportunity": "hawaii-hacker-hours",
+          "submittedOn": "2016-01-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2016-02-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "johnson@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Fall-2016",
+          "opportunity": "greyhats",
+          "submittedOn": "2016-09-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2016-09-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "glau@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Fall-2016",
+          "opportunity": "hawaii-hacker-hours",
+          "submittedOn": "2016-10-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2016-11-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "johnson@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Fall-2016",
+          "opportunity": "asecolab",
+          "submittedOn": "2016-10-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2016-11-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "johnson@hawaii.edu"
+            }
+          ]
+        },
+        {
+          "student": "abi@hawaii.edu",
+          "semester": "Spring-2017",
+          "opportunity": "asecolab",
+          "submittedOn": "2017-01-18T00:35:00.432Z",
+          "status": "Accepted",
+          "processed": [
+            {
+              "date": "2017-02-19T00:35:00.432Z",
+              "status": "Accepted",
+              "verifier": "johnson@hawaii.edu"
+            }
+          ]
+        },
+        {
           "student": "charley@hawaii.edu",
           "semester": "Spring-2017",
           "opportunity": "acm-manoa",
