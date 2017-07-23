@@ -1,26 +1,29 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
+import { advisorLogsDefineMethod } from '../../../api/log/AdvisorLogCollection.methods';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Feeds } from '../../../api/feed/FeedCollection';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
-import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { calcLevel } from '../../../api/level/LevelProcessor';
 import { getRouteUserName } from '../shared/route-user-name';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { appLog } from '../../../api/log/AppLogCollection';
 
 // /** @module ui/components/advisor/Update_Degree_Plan_Widget */
 
 const updateSchema = new SimpleSchema({
-  username: String, // will rename this to username
+  username: String,
   firstName: String,
   lastName: String,
   role: String,
@@ -49,6 +52,13 @@ Template.Update_Student_Widget.helpers({
     }
     return 0;
   },
+  hasNewLevel() {
+    if (Template.currentData().studentID.get()) {
+      const user = Users.getProfile(Template.currentData().studentID.get());
+      return user.level !== calcLevel(Template.currentData().studentID.get());
+    }
+    return false;
+  },
   careerGoals() {
     return CareerGoals.find({}, { sort: { name: 1 } });
   },
@@ -76,7 +86,7 @@ Template.Update_Student_Widget.helpers({
     return [];
   },
   roles() {
-    return [ROLE.STUDENT, ROLE.ALUMNI];
+    return [ROLE.STUDENT];
   },
   selectedCareerGoalIDs() {
     if (Template.currentData().studentID.get()) {
@@ -160,7 +170,26 @@ Template.Update_Student_Widget.events({
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       FormUtils.renameKey(updateData, 'slug', 'username');
-      updateData.id = Users.getProfile(Template.currentData().studentID.get())._id;
+      const profile = Users.getProfile(Template.currentData().studentID.get());
+      if (updateData.level !== profile.level) {
+        const text = `Congratulations! ${profile.firstName} you're now Level ${updateData.level}.
+         Come by to get your RadGrad sticker.`;
+        const student = Template.currentData().studentID.get();
+        const advisor = getUserIdFromRoute();
+        advisorLogsDefineMethod.call({ advisor, student, text }, (error) => {
+          if (error) {
+            console.log('Error creating AdvisorLog.', error);
+          }
+        });
+        const feedData = {
+          feedType: Feeds.NEW_LEVEL,
+          user: profile.username,
+          level: updateData.level,
+        };
+        defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
+
+      }
+      updateData.id = profile._id;
       const collectionName = StudentProfiles.getCollectionName();
       updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {

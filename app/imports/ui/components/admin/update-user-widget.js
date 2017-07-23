@@ -41,6 +41,7 @@ const updateStudentSchema = new SimpleSchema({
   interests: { type: Array }, 'interests.$': String,
   // Optional Student fields
   isAlumni: String,
+  level: String,
   declaredSemester: { type: String, optional: true },
   academicPlan: { type: String, optional: true },
 }, { tracker: Tracker });
