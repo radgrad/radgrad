@@ -16,6 +16,12 @@ Template.Update_User_Widget_Student.onCreated(function addUserWidgetStudentOnCre
 });
 
 Template.Update_User_Widget_Student.helpers({
+  calcLevel() {
+    if (Template.currentData().user) {
+      return Template.currentData().user.level;
+    }
+    return 0;
+  },
   semesters() {
     return Semesters.find({}, { sort: { semesterNumber: -1 } });
   },

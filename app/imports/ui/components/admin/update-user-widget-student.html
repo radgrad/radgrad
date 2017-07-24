@@ -3,6 +3,9 @@
 
   <div class="fields">
     {{> Boolean_Form_Field label='Is Alumni' name='isAlumni' trueValue=trueValueAlumni falseValue=falseValueAlumni errorMessage=(fieldError "isAlumni") required=true}}
+    {{> Input_Form_Field label="Level" name="level" value=calcLevel errorMessage=(fieldError "level") type="Number"}}
+  </div>
+  <div class="fields">
     {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=selectedSemester errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
     {{> Academic_Plan_Form_Field plans=plans selectedPlan=selectedPlan}}
   </div>
