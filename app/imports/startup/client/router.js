@@ -300,6 +300,15 @@ facultyRoutes.route('/explorer/degrees/:degree', {
   },
 });
 
+export const facultyExplorerPlansPageRouteName = 'Faculty_Explorer_Plans_Page';
+facultyRoutes.route('/explorer/plans/:plan', {
+  name: facultyExplorerPlansPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerPlansPageRouteName });
+  },
+});
+
 export const facultyExplorerInterestsPageRouteName = 'Faculty_Explorer_Interests_Page';
 facultyRoutes.route('/explorer/interests/:interest', {
   name: facultyExplorerInterestsPageRouteName,

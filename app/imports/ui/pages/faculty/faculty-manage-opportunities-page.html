@@ -1,6 +1,11 @@
 <template name="Faculty_Manage_Opportunities_Page">
   <div class="layout-page">
   {{#if Template.subscriptionsReady}}
+    <div class="ui container stackable grid ">
+      <div class="row">
+        {{> Help_Panel_Widget }}
+      </div>
+    </div>
       {{#if displayUpdateWidget}}
         {{> Update_Opportunity_Widget updateID=updateID}}
       {{else}}
