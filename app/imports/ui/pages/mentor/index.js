@@ -10,6 +10,8 @@ import './mentor-explorer-interests-page.html';
 import './mentor-explorer-interests-page';
 import './mentor-explorer-opportunities-page.html';
 import './mentor-explorer-opportunities-page';
+import './mentor-explorer-plans-page.html';
+import './mentor-explorer-plans-page';
 import './mentor-explorer-users-page.html';
 import './mentor-explorer-users-page';
 import './mentor-mentorspace-page.html';

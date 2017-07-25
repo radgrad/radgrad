@@ -446,6 +446,15 @@ mentorRoutes.route('/explorer/courses/:course', {
   },
 });
 
+export const mentorExplorerPlansPageRouteName = 'Mentor_Explorer_Plans_Page';
+mentorRoutes.route('/explorer/plans/:plan', {
+  name: mentorExplorerPlansPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerPlansPageRouteName });
+  },
+});
+
 export const mentorExplorerDegreesPageRouteName = 'Mentor_Explorer_Degrees_Page';
 mentorRoutes.route('/explorer/degrees/:degree', {
   name: mentorExplorerDegreesPageRouteName,
