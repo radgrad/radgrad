@@ -77,6 +77,9 @@ Template.List_Opportunities_Widget.helpers({
       { label: 'References', value: `${numReferences(opportunity)}` },
     ];
   },
+  titleICE(opportunity) {
+    return `ICE: ${opportunity.ice.i}/${opportunity.ice.c}/${opportunity.ice.e}`;
+  },
 });
 
 Template.List_Opportunities_Widget.events({

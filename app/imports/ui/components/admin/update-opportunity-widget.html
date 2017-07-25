@@ -15,14 +15,14 @@
       </div>
 
       <div class="fields">
-      {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
-      {{> Semesters_Form_Field semesters=semesters selectedSemesterIDs=selectedSemesterIDs errorMessage=(fieldError "semesters") required="true" }}
-    </div>
+        {{> Interests_Form_Field interests=interests selectedInterestIDs=selectedInterestIDs errorMessage=(fieldError 'interests') required="true" }}
+        {{> Semesters_Form_Field semesters=semesters selectedSemesterIDs=selectedSemesterIDs errorMessage=(fieldError "semesters") required="true" }}
+      </div>
 
       <div class="fields">
-        {{> Input_Form_Field label="Innovation" name="innovation" value=opportunity.ice.i errorMessage=(fieldError "innovation") required=true type="number"}}
-        {{> Input_Form_Field label="Competency" name="competency" value=opportunity.ice.c errorMessage=(fieldError "competency") required=true type="number"}}
-        {{> Input_Form_Field label="Experience" name="experience" value=opportunity.ice.e errorMessage=(fieldError "experience") required=true type="number"}}
+        {{> ICE_Form_Field label="Innovation" name="innovation" selectedICE=opportunity.ice.i errorMessage=(fieldError "innovation") required=true}}
+        <input type="hidden" name="competency" value="0">
+        {{> ICE_Form_Field label="Experience" name="experience" selectedICE=opportunity.ice.e errorMessage=(fieldError "innovation") required=true}}
       </div>
 
       {{> TextArea_Form_Field label="Description" rows=15 name="description" value=opportunity.description errorMessage=(fieldError "description") required=true}}

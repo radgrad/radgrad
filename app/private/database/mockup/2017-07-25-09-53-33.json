@@ -1,5 +1,5 @@
 {
-  "timestamp": "2017-07-25T01:38:40.276Z",
+  "timestamp": "2017-07-25T19:53:33.857Z",
   "collections": [
     {
       "name": "AcademicPlanCollection",
@@ -3500,7 +3500,14 @@
     },
     {
       "name": "FeedCollection",
-      "contents": []
+      "contents": [
+        {
+          "user": [],
+          "opportunity": "great-one",
+          "feedType": "new-opportunity",
+          "timestamp": "2017-07-25T17:50:31.715Z"
+        }
+      ]
     },
     {
       "name": "FeedbackInstanceCollection",
@@ -3581,8 +3588,8 @@
         },
         {
           "routeName": "Faculty_Verification_Page",
-          "title": "Learn About Verification Requests",
-          "text": "This page has two sections, event and opportunity verification requests.\n\nEvent verification allows you to verify a student for successful completion of a particular opportunity (event). You can verify the student by selecting the event, inputting the student's UH username, and clicking on the \"VERIFY ATTENDANCE\" button.\n\nThe second part of this page lists all pending verification requests for your sponsored opportunities. Verification requests are submitted by students when they would like RadGrad to acknowledge that they have successfully completed a particular opportunity. If you believe that the student has successfully completed this opportunity, you can accept a request by clicking the green \"ACCEPT\" button. If you believe that the student has NOT successfully completed this opportunity, you can decline a request by clicking the red \"DECLINE\" button. You may also provide any feedback for your response. The student will be able to see your response on their RadGrad site."
+          "title": "Learn About Verification",
+          "text": "Student participation in RadGrad opportunities consists of the following procedure:\n\n1. The student selects an opportunity, and adds it to their degree plan for a specific semester. \n2. The student participates (or fails to participate) in the opportunity.\n3. The student requests verification that they participated in that opportunity.\n3. This verification request is accepted or declined by the sponsoring faculty member, advisor, or RadGrad admin.  Only after the verification request is accepted does the student earn the ICE points associated with that opportunity.\n\nThis page has several sections that enable you to manage verifications.\n\n**Event verification**:  This pane allows you to verify a student for successful completion of a particular opportunity (event). You can verify the student by selecting the event, inputing the student's UH username, and clicking on the \"VERIFY ATTENDANCE\" button.\n\n**Pending verification**: The pending verification requests for your sponsored opportunities. Verification requests are submitted by students when they would like RadGrad to acknowledge that they have successfully completed a particular opportunity. If you believe that the student has successfully completed this opportunity, you can accept a request by clicking the green \"ACCEPT\" button. If you believe that the student has NOT successfully completed this opportunity, you can decline a request by clicking the red \"DECLINE\" button. You may also provide any feedback for your response. The student will be able to see your response on their RadGrad site.\n\n**Completed verification**: Lists the verifications you have already accepted or declined. Enables you to reverse your prior decision if necessary."
         },
         {
           "routeName": "Advisor_Verification_Requests_Pending_Page",
@@ -3638,6 +3645,46 @@
           "routeName": "Student_Explorer_Users_Page",
           "title": "Learn about the RadGrad Community",
           "text": "The User explorer enables you to learn about the RadGrad community.\n\nClick on any user to see a brief profile of them, which includes their Level (if they are student), their professional profile (if they have one), their courses and opportunities, and their interests."
+        },
+        {
+          "routeName": "Faculty_Home_Page",
+          "title": "About the faculty profile page",
+          "text": "For RadGrad to effectively \"match\" students with faculty, it is helpful for you to provide useful profile information.\n\n*Name, Email*: These two fields are read-only. Contact a RadGrad admin to change them.\n\n*Interests, Career Goals*: Please edit these to reflect the interests and career goals that you would like to \"match\" with students, and thus open an opportunity to play an advisory role. For most faculty, the career goals \"Graduate School\" and \"Research Scientist\" are appropriate. You might also wish to advise students on other career goals.\n\n*Website:* Please provide a link to your personal home page or research lab site.\n\n*Picture:* A headshot is useful for helping students recognize you.  Note these images are generally shown quite small."
+        },
+        {
+          "routeName": "Faculty_Manage_Opportunities_Page",
+          "title": "How to create and manage opportunities",
+          "text": "In RadGrad, opportunities are activities outside of regular coursework that enable students to earn \"Innovation\" and \"Experience\" points. When students pick an opportunity, they associate it with a specific semester (Fall, Spring, Summer).  \n\nFor faculty, the most important reason to create opportunities is because it provides a mechanism for you to advertise your research projects to students.  Advertising your research projects as opportunities has the following advantages to you:\n\n1. By specifying one or more \"interests\" (i.e. disciplinary areas) associated with your research project, RadGrad can recommend your project to students who have also specified those interest areas.   \n\n2.  Because students gain ICE points for completing opportunities, and because we recommend you award the maximum number of Innovation points for participating in a research project each semester, students who wish to achieve the higher levels in RadGrad will almost certainly need to participate in a faculty research project.\n\n3. Students can pick your research project for multiple semesters and gain opportunity points for each semester.\n\n4. If you want, you can offer the student the ability to enroll in an independent study course with you in addition to this opportunity.  That gives the student the ability to \"double dip\", and gain both Innovation and Competency points for the same work.\n\nTaken together, these advantages increase the odds that you will connect with qualified, motivated students when you specify one or more of your research projects as opportunities.\n\nStudents do not automatically earn points just for adding one of your opportunities to their degree plan. In order to get the points, they must ask you to \"verify\" their participation.  If you do not feel they participated enough to warrant the points at the end of a semester, you do not have to verify their participation.\n\nUnless your project entails regular contact and interaction with industry professionals, your opportunity should not provide any Experience points. \n\nYou can review the existing opportunities listed below to see how points are currently awarded so that you can define your opportunity consistently."
+        },
+        {
+          "routeName": "Faculty_Explorer_CareerGoals_Page",
+          "title": "About career goals",
+          "text": "The list of Career Goals is managed by RadGrad administrators, and is intended to cover the future careers most appropriate for our student population. \n\nAs a faculty member, it is useful for you to select one or more career goals for which you have some direct experience or expertise (such as \"Graduate School\" or \"Research Scientist\"), as that will indicate to students that you can be contacted for advice concerning that career goal.\n\nIf you have suggestions for how to improve the set of Career Goals, please contact a RadGrad administrator."
+        },
+        {
+          "routeName": "Faculty_Explorer_Courses_Page",
+          "title": "About courses",
+          "text": "This page is intended to list all courses available in our degree program.\n\nIf you notice that a course is missing, or its description is no longer accurate, please contact a RadGrad administrator and request an update."
+        },
+        {
+          "routeName": "Faculty_Explorer_Plans_Page",
+          "title": "About academic plans",
+          "text": "RadGrad distinguishes between \"degree programs\" and \"academic plans\":\n\n* A \"degree program\" is a course of study toward a specific degree (and, optionally, specialization). For example, \"B.A. in Computer Science\" or \"B.S. in Computer Sciences/Security Sciences\" are degree programs.\n\n* An \"academic plan\" is the set of departmental course requirements that must be fulfilled in order to complete a degree program.  Departments can change the requirements once a year, and so academic plans have a year associated with them that indicates the year that they became the default requirements for their associated degree program.\n\nOnce students declare our major, they can choose the current academic plan associated with a degree program, or any future update to the academic plan.  For example, say a student wants to get a B.S. in Computer Science, and they declare our major in 2016.  Then, they can choose the B.S. in Computer Science academic plan from 2015 (since that was the one currently in effect when they declared their major).  They can also choose any future updated version of the academic plan, such as the B.S. in Computer Science from 2017.\n\nThis page lists all of the currently defined academic plans.  If you discover that an academic plan is missing or that it does not accurately represent the degree requirements, please contact a RadGrad administrator."
+        },
+        {
+          "routeName": "Faculty_Explorer_Interests_Page",
+          "title": "About interests",
+          "text": "Interests represent disciplinary areas. \n\nAs a faculty member, you will want to choose a set of Interests so that you \"match\" with students interested in the same disciplinary areas. This increases your chances of finding good students to work with, and increases the chances that students will come to you for advice regarding this disciplinary area.\n\nIf you would like to request new interests or edits to any existing interest, please contact a RadGrad administrator."
+        },
+        {
+          "routeName": "Faculty_Explorer_Opportunities_Page",
+          "title": "About opportunities",
+          "text": "In RadGrad, opportunities are activities outside of regular coursework that enable students to earn \"Innovation\" and \"Experience\" points. When students pick an opportunity, they associate it with a specific semester (Fall, Spring, Summer).\n\nFor faculty, opportunities provide a mechanism for you to advertise your research projects to students. Advertising your research projects as opportunities has the following advantages to you:\n\n1. By specifying one or more \"interests\" (i.e. disciplinary areas) associated with your research project, RadGrad can recommend your project to students who have also specified those interest areas.\n\n2. Because students gain ICE points for completing opportunities, and because we recommend you award the maximum number of Innovation points for participating in a research project each semester, students who wish to achieve the higher levels in RadGrad will almost certainly need to participate in a faculty research project.\n\n3. Students can pick your research project for multiple semesters and gain opportunity points for each semester.\n\n4. If you want, you can offer the student the ability to enroll in an independent study course with you in addition to this opportunity. That gives the student the ability to \"double dip\", and gain both Innovation and Competency points for the same work.\n\nTo create new opportunities or to manage opportunities you have created, click on the \"Manage Opportunities\" link in the navbar."
+        },
+        {
+          "routeName": "Faculty_Explorer_Users_Page",
+          "title": "About users",
+          "text": "This page provides a browser for the users currently registered with RadGrad.\n\nRadGrad is not an open system.  In order for someone to login to RadGrad, they must have been explicitly registered by a RadGrad advisor or admin.\n\nIf there is someone who you believe should have a RadGrad account, or if you believe there is a RadGrad user who should no longer have access to the system, please contact a RadGrad administrator."
         }
       ]
     },
@@ -5168,6 +5215,24 @@
             "Spring-2019",
             "Spring-2020",
             "Spring-2021"
+          ]
+        },
+        {
+          "name": "great one",
+          "slug": "great-one",
+          "description": "asdf fff",
+          "opportunityType": "internship",
+          "sponsor": "esb@hawaii.edu",
+          "ice": {
+            "i": 25,
+            "c": 0,
+            "e": 25
+          },
+          "interests": [
+            "algorithms"
+          ],
+          "semesters": [
+            "Fall-2013"
           ]
         },
         {

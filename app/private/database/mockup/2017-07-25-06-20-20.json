@@ -1,5 +1,5 @@
 {
-  "timestamp": "2017-07-25T01:38:40.276Z",
+  "timestamp": "2017-07-25T16:20:20.071Z",
   "collections": [
     {
       "name": "AcademicPlanCollection",
@@ -2714,6 +2714,15 @@
         },
         {
           "semester": "Spring-2018",
+          "course": "ics_466",
+          "note": "ICS 466",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "abi@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2018",
           "course": "ics_432",
           "note": "ICS 432",
           "verified": false,
@@ -3521,8 +3530,8 @@
         },
         {
           "routeName": "Student_Degree_Planner_Page",
-          "title": "Make the Degree Planner work for you!",
-          "text": "The Degree Planner helps you organize your ICS Degree experience on a semester-by-semester basis. You can plan the courses you need to satisfy your chosen degree plan as well as the the extra-curricular opportunities that provide you with real-world experience and chances to innovate outside the classroom. \n\nIn terms of ICE, courses earn you Competency points, while opportunities earn you Innovation and Experience points. All three are critical to becoming a well-rounded graduate who is most attractive to employers and graduate schools!\n\n#### Degree Plan Pane\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-plan.png\">\n\nThe degree plan pane shows you your courses and opportunities on a semester-by-semester basis.\n\nFor past semesters, courses and opportunities are listed in light grey and are read-only.  To modify the contents of your degree plan for previous semesters, please see an ICS advisor. You will generally want to ask them to update your historical data from your STAR data after each semester.\n\nFor current and future semesters, you can freely add and delete courses and opportunities according to your preferences. For future courses, you can even indicate the grade you plan to achieve in the course, which enables RadGrad to estimate your final Competency points. \n\nClicking on a course or opportunity will display details about it in the Courses-or-Opportunities pane.\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Inspector Pane\n\n<img class=\"ui medium left floated image\" src=\"/images/help/inspector-course.png\">\n\nThe Inspector pane provides pull-down menus  that allow you to view details about any course or opportunity in the system.  This includes the ICE points you can earn for that course or opportunity.\n\nThe inspector also allows you to add a course or opportunity to your degree plan by \"dragging\" the associated button naming the course or opportunity to any current or future semester. \n\nClick on any course or opportunity in your degree plan to bring up details about them in the Inspector.\n\n<div class=\"ui hidden clearing divider\"></div>\n\n<img class=\"ui medium left floated image\" src=\"/images/help/inspector-opportunity.png\">\n\nFor opportunities, you can also request verification through the Inspector pane. Clicking the button will send a message to an advisor who will check your verification evidence.  When verified, the associated ICE points will be awarded to you.\n\n<div class=\"ui clearing hidden divider\"></div>\n\n#### Academic Plan\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-academic-plan.png\">\n\nThe Academic Plan pane provides you with the requirements for graduating with any of the degree programs in eight semesters. Since the department evolves the requirements for Academic Plans on occasion, you must select both an academic plan (such as B.S. in Computer Sciences) as well as the year that the specified requirements were enacted (say, 2016).   You are eligible to select any degree plan available during the year you declare yourself as an ICS major, and you can switch to any future degree plan if you prefer. \n\nOnce you have selected an Academic Plan, RadGrad will indicate which requirements you have and have not satisfied in your degree plan: requirements you have satisfied are listed in green, and those you have not are listed in red.\n\nIn the sample Academic Plan image, you can see that the student has satisfied all the requirements except for one 400-level course, since it is presented in red.\n\n<div class=\"ui clearing hidden divider\"></div>\n\n#### Recommendations & Warnings\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-recommendations-warnings.png\">\n\nRadGrad can offer personalized recommendations for courses and opportunities based upon your desired degree, your interests, and your career goals. \n\nIt will also flag problems with your degree plan, such as adding a course without the appropriate prerequisite.\n\n<div class=\"ui hidden clearing divider\"></div>"
+          "title": "Learn about the Degree Planner",
+          "text": "The Degree Planner helps you organize your ICS Degree experience on a semester-by-semester basis: not just the courses you will take, but just as importantly, the extra-curricular opportunities that provide you with real-world experience and chances to innovate outside the classroom. \n\n#### Degree Plan\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-courses-opportunities.png\">\n\nThe degree plan shows you your courses and opportunities on a semester-by-semester basis.\n\nClick the \"Add\" button to add a course or opportunity, and click the <i class=\"red remove icon\"></i> button to delete one.  If you need to add or delete a course or opportunity from a previous semester, see an ICS advisor.\n\nClicking on a course will display details about it in the Courses-or-Opportunities pane.\n\nFor courses in the future, you can estimate the grade you hope to receive when you take the course using the pull-down menu. That enables RadGrad to project the total ICE Competency points you will receive by the end of your degree program if you achieve your estimated grades.\n\nThe bottom of the pane shows, for each academic year, the ICE points you have achieved (the number in the middle of the circle) and the ICE points you are projected to have obtained by the end of that academic year (the percentage of the circle filled in with the color). For more details, see [your ICE Page](../home/ice).\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Courses-or-Opportunities\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-courses-opportunities.png\">\n\nThe Courses-or-Opportunities pane provides details about any course or opportunity in the system. \n\nFor courses or opportunities already in your degree plan, you can display details by clicking on them in the Degree Plan pane.\n\nTo learn about courses or opportunities not in your Degree Plan, click on the \"Courses\" or \"Opportunities\" header to obtain a pop-up hierarchical menu that allows you to select a course or opportunity.\n\n<div class=\"ui clearing hidden divider\"></div>\n\n#### Recommendations\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-recommendations.png\">\n\nRadGrad will offer personalized recommendations for courses and opportunities based upon your desired degree, your interests, and your career goals. \n\nRadGrad will also offer hints on how to get to the next [Level](../home/levels].\n\n<div class=\"ui hidden clearing divider\"></div>\n\n#### Warnings\n\n<img class=\"ui medium left floated image\" src=\"/images/help/degree-planner-warnings.png\">\n\nWhen RadGrad detects a problem with your Degree Plan, it will issue a warning.  Examples of degree plan problems include: overloaded semesters (where you are taking 4 or more ICS classes), inclusion of a course in your plan without satisfying the prerequisite, and the absence of a required course for your desired degree in the degree plan. \n\nDespite our best efforts,  RadGrad might sometimes generate a warning that is not valid, and sometimes your degree plan might have a problem that RadGrad does not detect.  Be sure to consult with your ICS advisor to guarantee that your plan will satisfy all the requirements for your desired degree.\n\n<div class=\"ui clearing hidden divider\"></div>"
         },
         {
           "routeName": "Student_Home_AboutMe_Page",
@@ -3551,8 +3560,8 @@
         },
         {
           "routeName": "Student_Explorer_Page",
-          "title": "So. You want to explore?",
-          "text": "The Explorer provides detailed information about Career Goals, Courses, Academic Plans, Interests, Opportunities, and Users.\n\nJust click the pull-down menu to the left to select the type of information you wish to explore."
+          "title": "Learn about the Explorer",
+          "text": "The Explorer provides detailed information about Career Goals, Courses, Degrees, Interests, Opportunities, and Users.\n\nJust click the pull-down menu to the left to select the type of information you wish to explore."
         },
         {
           "routeName": "Faculty_Explorer_Page",
@@ -3577,7 +3586,7 @@
         {
           "routeName": "Student_Home_Log_Page",
           "title": "Learn about the Advisor Meeting Log",
-          "text": "Each time you meet with an ICS Advisor, they can summarize the results from your meeting as a RadGrad Advisor Log entry.\n\nYou can refer to this log to make sure you are following advisor recommendations. This also enables the advisor to follow up on issues raised in prior meetings."
+          "text": "Each time you meet with an ICS Advisor, they can summarize the results from your meeting as a RadGrad Advisor Log entry.\n\nAdvisor Log Entries are also automatically generated by RadGrad when certain events occur. For example, when you achieve a new level, an Advisor Log Entry is automatically generated to record the time and date when that occurred.\n\nYou can refer to this log to make sure you are following advisor recommendations. This also enables the advisor to follow up on issues raised in prior meetings."
         },
         {
           "routeName": "Faculty_Verification_Page",
@@ -3608,36 +3617,6 @@
           "routeName": "Advisor_Moderation_Page",
           "title": "Learn About Moderation",
           "text": "On RadGrad, students can provide public feedback with course reviews, opportunity reviews, and Mentorspace questions. To maintain a high-integrity learning environment, all of these public feedbacks require moderation. \n\n**Course and Opportunity Reviews:**\nCourse reviews and opportunity reviews will be visible to the public unless they are rejected through moderation. \n\n**Mentorspace Questions:**\nMentorspace questions remain hidden from the public until they are accepted through moderation, to avoid mentors answering questions that will get deleted in the future. All Mentorspace questions are required to have a slug, and you will be required to provide one if it is the first time the question is going through moderation. If the question has already been assigned a slug, you cannot change it. \n\nIf the review or question is acceptable by RadGrad standards, you can accept it by clicking on the green \"ACCEPT\" button. If the review or question is unacceptable in any way by RadGrad standards, you can decline it by clicking on the red \"DECLINE\" button. You may also provide any feedback for your response. The student will be able to see your response on their RadGrad site. A student may decide to either discard their review or question or edit it and resubmit it for further moderation. There is currently no limit to the amount of edits that a student may make."
-        },
-        {
-          "routeName": "Student_Explorer_CareerGoals_Page",
-          "title": "About Career Goals",
-          "text": "For RadGrad and its community to be as helpful to you as possible, you should specify at least a couple of potential career goals.\n\nBy specifying Career Goals, \n\n* The system can show you related courses and opportunities, helping you decide on an appropriate degree plan.\n\n* The system can show you students, faculty, alumni, and mentors with the same career goal, helping you to identify others who are interested in the same professional direction.\n\nOf course, it is likely that your career goals will change as you progress through your degree program.  It is also quite possible that new career goals will emerge during your degree program.  So, don't be afraid to review your career goals each semester and modify them as your professional goals change. \n\nThe set of career goals are curated by the faculty to represent a good selection of the most promising career paths.  Most career goals actually encompass several job titles. For example, the the \"information security analyst\" career goal is intended to cover a wide variety of security-related job titles, including Security Analyst, Security Architect, Security Software Developer, Cryptanalyst, Security Engineer, Security Administrator, Cryptographer, and Security Consultant.\n\nIf there is a career goal you are interested in that is not listed here, please feel free to contact the RadGrad administrator (email below) to suggest that it be added."
-        },
-        {
-          "routeName": "Student_Explorer_Courses_Page",
-          "title": "Why explore the courses?",
-          "text": "The Courses Explorer enables you to make a deep dive into each of the courses associated with the degree program.\n\nIn addition to a brief description of the course, it provides additional useful information:\n\n* The Prerequisites pane shows which prerequisites you've already completed, which ones you have not completed but plan to complete, and which ones are not yet even listed in your degree plan.\n\n* The Course Reviews pane reveals what other RadGrad users have said about this course. Note that Course Reviews are not anonymous: you need to stand behind what you say!"
-        },
-        {
-          "routeName": "Student_Explorer_Plans_Page",
-          "title": "What are Academic Plans, and why do I need one?",
-          "text": "When you meet with your Advisor, you will normally discuss the pros and cons of various \"Degree Programs\", such as a \"B.S. in Computer Science\". \n\nWhat you don't normally discuss, at least at your first meeting, is the fact that there exist multiple versions of every Degree Program.  Every so often, the faculty meet and approve changes to a given Degree Program, dropping some requirements and adding others, in order for the Degree Program to stay modern and useful to students. \n\nThus, the specific requirements for any Degree Program are \"time stamped\": there is a B.S. in Computer Science approved in 2015 with one set of requirements, and another B.S. in Computer Science approved in 2017 with a slightly different set of requirements.\n\nIn RadGrad, we use \"Degree Program\" to refer to the general degree (i.e. B.S. in Computer Science), and \"Academic Plan\" to refer to a Degree Program with a specific set of requirements approved in a given academic year. (i.e. B.S. in Computer Science (2015)).\n\nThe set of Academic Plans available to you depend upon the semester in which you declared yourself in this major.  All of the Academic Plans in effect at that point in time are available to you, as well as any Academic Plans the faculty create during the remainder of your time as a student. \n\nWhen you select an Academic Plan in this explorer, it shows the requirements over the course of eight semesters, and displays in red any requirements that your current Degree Plan does not satisfy."
-        },
-        {
-          "routeName": "Student_Explorer_Interests_Page",
-          "title": "Making sense of interests",
-          "text": "RadGrad provides \"interests\" as a way of specifying the various disciplinary areas of computer science (for example, artificial intelligence or software engineering), as well as disciplinary areas with strong overlap with computer science (for example, entrepreneurship or sustainability).\n\nBy specifying at least a few interests, you make RadGrad more useful:\n\n1. It can show you related courses and opportunities.\n\n2. You can find other students, faculty, alumni, and mentors with similar interests. \n\nOf course, your interests will change over time, so don't be afraid to change them as you learn more about the field.\n\nIf you have an interest that is not available in RadGrad, please email the administrator (see the address below) to request that it be added."
-        },
-        {
-          "routeName": "Student_Explorer_Opportunities_Page",
-          "title": "Why care about opportunities?",
-          "text": "A fundamental assumption of RadGrad is that you want to be a well-rounded graduate who is attractive to employers and/or graduate programs, and that an important way to achieve that is by developing your ability to innovate and to have professional experiences. \n\nRadGrad measures your progress toward \"well-roundedness\" through ICE: Innovation, Competency, and Experience. \n\nAnd the only way to gain Innovation and Experience is by taking advantage of Opportunities. \n\nThis page presents a curated list of Opportunities that the faculty believe will complement existing courses and increase your attractiveness to future employers and graduate programs.\n\nEach Opportunity has a set of interests associated with it. If the opportunity's interests match one or more of your own, they are colored in green, otherwise they are colored in grey.\n\nThe ICE Points associated with an Opportunity are listed as three colored circles at the top right corner of the description. In general, the middle circle (Competency) always has the value zero, since you earn Competency points from taking courses."
-        },
-        {
-          "routeName": "Student_Explorer_Users_Page",
-          "title": "Learn about the RadGrad Community",
-          "text": "The User explorer enables you to learn about the RadGrad community.\n\nClick on any user to see a brief profile of them, which includes their Level (if they are student), their professional profile (if they have one), their courses and opportunities, and their interests."
         }
       ]
     },
@@ -4306,7 +4285,7 @@
         {
           "name": "ACM ICPC",
           "slug": "acm-icpc",
-          "description": "The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of thousands of the finest students and faculty in computing disciplines at almost 2,736 universities from over 102 countries on six continents. \n\nThe contest fosters creativity, teamwork, and innovation in building new software programs, and enables students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious programming contest in the world. \n\nFor more details, see the [home page](https://icpc.baylor.edu/) or the [Wikipedia entry](https://en.wikipedia.org/wiki/ACM_International_Collegiate_Programming_Contest).",
+          "description": "The ACM International Collegiate Programming Contest (ICPC) is a multitier, team-based, programming competition operating under the auspices of ACM and headquartered at Baylor University. The contest involves a global network of universities hosting regional competitions that advance teams to the ACM-ICPC World Finals. Participation has grown to several tens of thousands of the finest students and faculty in computing disciplines at almost 2,736 universities from over 102 countries on six continents. \n\nThe contest fosters creativity, teamwork, and innovation in building new software programs, and enables students to test their ability to perform under pressure. Quite simply, it is the oldest, largest, and most prestigious programming contest in the world. [Learn more here.](https://icpc.baylor.edu/) \n\nWikipedia: https://en.wikipedia.org/wiki/ACM_International_Collegiate_Programming_Contest",
           "opportunityType": "event",
           "sponsor": "johnson@hawaii.edu",
           "ice": {
@@ -7770,9 +7749,14 @@
           "firstName": "Christopher",
           "lastName": "Jaro",
           "picture": "/images/people/cpjaro.jpg",
-          "website": "http://www.techhui.com/profile/ChristopherJaro",
-          "interests": [],
-          "careerGoals": [],
+          "website": "http://cnn2.com",
+          "interests": [
+            "sql"
+          ],
+          "careerGoals": [
+            "information-system-manager",
+            "software-developer"
+          ],
           "level": 2,
           "academicPlan": "bs-cs-2016",
           "hiddenCourses": [],
@@ -8142,8 +8126,12 @@
           "lastName": "Slike",
           "picture": "/images/people/slike.png",
           "website": null,
-          "interests": [],
-          "careerGoals": [],
+          "interests": [
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "software-developer"
+          ],
           "level": 2,
           "academicPlan": "bs-cs-2016",
           "hiddenCourses": [],
@@ -8507,14 +8495,6 @@
               "verifier": "Admin RadGrad"
             }
           ]
-        },
-        {
-          "student": "abi@hawaii.edu",
-          "semester": "Spring-2017",
-          "opportunity": "hawaii-hacker-hours",
-          "submittedOn": "2017-07-24T23:29:24.657Z",
-          "status": "Open",
-          "processed": []
         }
       ]
     }

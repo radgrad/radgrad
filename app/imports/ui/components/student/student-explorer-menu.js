@@ -23,7 +23,7 @@ Template.Student_Explorer_Menu.helpers({
     if (group === 'student') {
       return RouteNames.studentExplorerPlansPageRouteName;
     } else if (group === 'faculty') {
-      return RouteNames.facultyExplorerDegreesPageRouteName;
+      return RouteNames.facultyExplorerPlansPageRouteName;
     }
     return RouteNames.mentorExplorerDegreesPageRouteName;
   },
