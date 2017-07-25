@@ -1,7 +1,8 @@
 <template name="Inspector">
   <div class="ui segment">
-    <div class="ui top attached green buttons">
-      <div class="ui floating dropdown icon button">Courses
+    <div class="ui dividing header"><h4 style="color: rgba(0,0,0,.7); text-transform: uppercase">Inspector</h4></div>
+    <div class="ui top attached buttons">
+      <div class="ui floating dropdown icon button">Courses <i class="dropdown icon"></i>
         <div class="menu">
           <div class="item">
             <i class="dropdown icon"></i>
@@ -69,7 +70,7 @@
         </div>
       </div>
       <div class="or"></div>
-      <div class="ui scrolling dropdown icon button">&nbsp;&nbsp;Opportunities
+      <div class="ui scrolling dropdown icon button">&nbsp;&nbsp;Opportunities <i class="dropdown icon"></i>
         <div class="menu">
           {{#each opportunity in opportunities}}
             <div id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</div>
