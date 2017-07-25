@@ -14,6 +14,9 @@ import './form-error-message.html';
 
 import './form-field-utilities.js';
 
+import './ice-form-field.html';
+import './ice-form-field';
+
 import './input-form-field.html';
 
 import './input-date-form-field.html';
