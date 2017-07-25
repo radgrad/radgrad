@@ -61,7 +61,7 @@
             {{/each}}
             <br>
           {{else}}
-            No career goals added yet.
+            <p style="margin-bottom: 0px">No career goals added yet.</p>
           {{/if}}
           <a href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Edit in
           career explorer</a>
@@ -78,7 +78,7 @@
             {{/each}}
             <br>
           {{else}}
-            <p>No interests added yet.</p>
+            <p style="margin-bottom: 0px">No interests added yet.</p>
           {{/if}}
           <a href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Edit in interest
           explorer</a>
