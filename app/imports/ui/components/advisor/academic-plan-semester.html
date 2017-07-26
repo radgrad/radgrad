@@ -2,8 +2,8 @@
   {{#each course in courses}}
     <tr>
       <td>
-        <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
-             slug="{{course}}">{{choiceLabel course}}</div>
+        <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label" course-slug="{{courseSlug course}}"
+             slug="{{course}}" style="{{#if canDrag course}}margin-bottom: 1rem; cursor: move;{{/if}}" draggable="{{#if canDrag course}}true{{else}}false{{/if}}" ondragstart="dragCourse(event)">{{choiceLabel course}}</div>
       </td>
     </tr>
   {{/each}}

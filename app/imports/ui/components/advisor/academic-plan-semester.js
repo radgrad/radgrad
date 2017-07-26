@@ -130,4 +130,13 @@ Template.Academic_Plan_Semester.helpers({
     }
     return true;
   },
+  courseSlug(course) {
+    if (planChoiceUtils.isSingleChoice(course)) {
+      return planChoiceUtils.stripCounter(course);
+    }
+    return '';
+  },
+  canDrag(course) {
+    return planChoiceUtils.isSingleChoice(course) && !planChoiceUtils.isXXChoice(course);
+  },
 });

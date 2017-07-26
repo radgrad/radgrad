@@ -85,6 +85,7 @@ Template.Semester_List_2.events({
     if (Template.instance().localState.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
       const slug = event.originalEvent.dataTransfer.getData('slug');
+      console.log('course drop', id, slug);
       if (slug) {
         const username = getRouteUserName();
         const semSlug = Slugs.getNameFromID(Template.instance().localState.get('semester').slugID);

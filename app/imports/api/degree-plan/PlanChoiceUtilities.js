@@ -51,6 +51,16 @@ export function isComplexChoice(planChoice) {
 }
 
 /**
+ * Returns true if the planChoice is a 300+ or 400+.
+ * @param planChoice the plan choice.
+ * @return {boolean}
+ */
+export function isXXChoice(planChoice) {
+  const cleaned = stripCounter(planChoice);
+  return cleaned.indexOf('+') !== -1;
+}
+
+/**
  * Converts a complex choice into an array of the slugs that make up the choice.
  * Note: This may not be enough to solve the generate plan problem.
  * @param planChoice a plan choice.
