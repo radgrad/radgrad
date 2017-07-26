@@ -8,3 +8,4 @@ import './student-guided-tour-degree-plan.html';
 import './student-guided-tour-ice.html';
 import './student-guided-tour-levels.html';
 import './student-guided-tour-mentor.html';
+import './student-guided-tour-why-radgrad.html';
