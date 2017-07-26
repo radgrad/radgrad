@@ -300,6 +300,15 @@ facultyRoutes.route('/explorer/degrees/:degree', {
   },
 });
 
+export const facultyExplorerPlansPageRouteName = 'Faculty_Explorer_Plans_Page';
+facultyRoutes.route('/explorer/plans/:plan', {
+  name: facultyExplorerPlansPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerPlansPageRouteName });
+  },
+});
+
 export const facultyExplorerInterestsPageRouteName = 'Faculty_Explorer_Interests_Page';
 facultyRoutes.route('/explorer/interests/:interest', {
   name: facultyExplorerInterestsPageRouteName,
@@ -434,6 +443,15 @@ mentorRoutes.route('/explorer/courses/:course', {
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Mentor_Layout', { main: mentorExplorerCoursesPageRouteName });
+  },
+});
+
+export const mentorExplorerPlansPageRouteName = 'Mentor_Explorer_Plans_Page';
+mentorRoutes.route('/explorer/plans/:plan', {
+  name: mentorExplorerPlansPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerPlansPageRouteName });
   },
 });
 

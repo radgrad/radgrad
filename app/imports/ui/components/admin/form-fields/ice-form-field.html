@@ -1,0 +1,15 @@
+<template name="ICE_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>{{label}}</label>
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="{{name}}">
+      <option value="">Select {{label}} points</option>
+      <option value=0 selected="{{isSelected 0 selectedICE}}">0</option>
+      <option value=5 selected="{{isSelected 5 selectedICE}}">5</option>
+      <option value=10 selected="{{isSelected 10 selectedICE}}">10</option>
+      <option value=15 selected="{{isSelected 15 selectedICE}}">15</option>
+      <option value=20 selected="{{isSelected 20 selectedICE}}">20</option>
+      <option value=25 selected="{{isSelected 25 selectedICE}}">25</option>
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

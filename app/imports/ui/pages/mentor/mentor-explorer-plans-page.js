@@ -24,7 +24,7 @@ function numUsers(plan) {
 }
 
 
-Template.Student_Explorer_Plans_Page.helpers({
+Template.Mentor_Explorer_Plans_Page.helpers({
   addedPlans() {
     const profile = Users.getProfile(getRouteUserName());
     if (profile.academicPlanID) {
