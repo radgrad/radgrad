@@ -25,7 +25,7 @@ Template.Student_Explorer_Menu.helpers({
     } else if (group === 'faculty') {
       return RouteNames.facultyExplorerPlansPageRouteName;
     }
-    return RouteNames.mentorExplorerDegreesPageRouteName;
+    return RouteNames.mentorExplorerPlansPageRouteName;
   },
   careerGoalsRouteName() {
     const group = FlowRouter.current().route.group.name;
