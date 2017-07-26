@@ -98,7 +98,7 @@ Template.Student_Of_Interest_Add.events({
         } else {
           const oi = OpportunityInstances.findDoc(result);
           // eslint-disable-next-line
-          const message = `${getRouteUserName()} added ${oi.getOpportunityDoc(oi._id).name} (${Semesters.toString(oi.semesterID)}) to their Degree Plan.`;
+          const message = `${getRouteUserName()} added ${OpportunityInstances.getOpportunityDoc(oi._id).name} (${Semesters.toString(oi.semesterID)}) to their Degree Plan.`;
           appLog.info(message);
         }
       });

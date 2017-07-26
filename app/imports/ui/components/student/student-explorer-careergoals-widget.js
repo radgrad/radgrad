@@ -9,6 +9,8 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { appLog } from '../../../api/log/AppLogCollection';
 import { isLabel } from '../../utilities/template-helpers';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 
 Template.Student_Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -62,31 +64,39 @@ Template.Student_Explorer_CareerGoals_Widget.events({
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     const studentItems = profile.careerGoalIDs;
-    try {
-      studentItems.push(id);
-      // TODO replace with method
-      Users.setCareerGoalIds(profile.userID, studentItems);
-      const goal = CareerGoals.findDoc(id);
-      const message = `${getRouteUserName()} added career goal ${goal.name}`;
-      appLog.info(message);
-    } catch (e) {
-      // don't do anything.
-    }
+    const collectionName = StudentProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
+    studentItems.push(id);
+    updateData.careerGoals = studentItems;
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error updating career goals', error);
+      } else {
+        const goal = CareerGoals.findDoc(id);
+        const message = `${getRouteUserName()} added career goal ${goal.name}`;
+        appLog.info(message);
+      }
+    });
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     let studentItems = profile.careerGoalIDs;
-    try {
-      studentItems = _.without(studentItems, id);
-      // TODO replace with method.
-      Users.setCareerGoalIds(profile.userID, studentItems);
-      const goal = CareerGoals.findDoc(id);
-      const message = `${getRouteUserName()} removed career goal ${goal.name}`;
-      appLog.info(message);
-    } catch (e) {
-      // don't do anything.
-    }
+    const collectionName = StudentProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
+    studentItems = _.without(studentItems, id);
+    updateData.careerGoals = studentItems;
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error updating career goals', error);
+      } else {
+        const goal = CareerGoals.findDoc(id);
+        const message = `${getRouteUserName()} removed career goal ${goal.name}`;
+        appLog.info(message);
+      }
+    });
   },
 });

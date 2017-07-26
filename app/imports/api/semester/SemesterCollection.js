@@ -132,7 +132,7 @@ class SemesterCollection extends BaseSlugCollection {
    */
   isUpcomingSemester(semester) {
     const semesterID = this.getID(semester);
-    return this.findDoc(semesterID).semesterNumber >= this.getCurrentSemester().semesterNumber;
+    return this.findDoc(semesterID).semesterNumber >= this.getCurrentSemesterDoc().semesterNumber;
   }
 
   /**

@@ -10,6 +10,8 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { appLog } from '../../../api/log/AppLogCollection';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 
 Template.Student_Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -91,16 +93,20 @@ Template.Student_Explorer_Interests_Widget.events({
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     const studentItems = profile.interestIDs;
-    try {
-      studentItems.push(id);
-      // TODO Change to method.
-      Users.setInterestIds(profile.userID, studentItems);
-      const interest = Interests.findDoc(id).name;
-      const message = `${getRouteUserName()} added interest ${interest}`;
-      appLog.info(message);
-    } catch (e) {
-      // don't do anything.
-    }
+    const collectionName = StudentProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
+    studentItems.push(id);
+    updateData.interests = studentItems;
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log(`Error updating ${profile.username}'s interests`, error);
+      } else {
+        const interest = Interests.findDoc(id).name;
+        const message = `${getRouteUserName()} added interest ${interest}`;
+        appLog.info(message);
+      }
+    });
   },
   'click .deleteItem': function clickRemoveItem(event) {
     event.preventDefault();
@@ -109,13 +115,17 @@ Template.Student_Explorer_Interests_Widget.events({
     const interest = Interests.findDoc(id).name;
     const message = `${getRouteUserName()} removed interest ${interest}`;
     let studentItems = profile.interestIDs;
-    try {
-      studentItems = _.without(studentItems, id);
-      // TODO Change to method.
-      Users.setInterestIds(profile.userID, studentItems);
-      appLog.info(message);
-    } catch (e) {
-      // don't do anything.
-    }
+    const collectionName = StudentProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
+    studentItems = _.without(studentItems, id);
+    updateData.interests = studentItems;
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log(`Error updating ${profile.username}'s interests`, error);
+      } else {
+        appLog.info(message);
+      }
+    });
   },
 });
