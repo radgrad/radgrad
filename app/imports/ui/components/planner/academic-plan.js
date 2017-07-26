@@ -149,7 +149,7 @@ Template.Academic_Plan.helpers({
     // We always want to show 4 AYs.
     const instance = Template.instance();
     if (ay.length > 0 && typeof instance.startYearIndex.get() === 'undefined') {
-      const currentSemID = Semesters.getCurrentSemester();
+      const currentSemID = Semesters.getCurrentSemesterID();
       let currentAyIndex = -1;
       let index = 0;
       _.forEach(ay, (aYear) => {

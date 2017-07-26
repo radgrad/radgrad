@@ -51,7 +51,7 @@ Template.Add_Student_Widget.helpers({
     return [ROLE.STUDENT, ROLE.ALUMNI];
   },
   selectedSemesterID() {
-    return Semesters.getCurrentSemester();
+    return Semesters.getCurrentSemesterID();
   },
   semesters() {
     return [Semesters.getCurrentSemesterDoc()];

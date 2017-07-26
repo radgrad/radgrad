@@ -327,7 +327,7 @@ Template.Inspector.helpers({
   opportunities() {
     let ret = [];
     const opportunities = Opportunities.find().fetch();
-    const currentSemesterID = Semesters.getCurrentSemester();
+    const currentSemesterID = Semesters.getCurrentSemesterID();
     ret = _.filter(opportunities, function filter(o) {
       return _.indexOf(o.semesterIDs, currentSemesterID) !== -1;
     });

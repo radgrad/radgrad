@@ -288,7 +288,7 @@ export class FeedbackFunctionClass {
 
     let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(user);
     const basePath = this._getBasePath(user);
-    const semesterID = Semesters.getCurrentSemester();
+    const semesterID = Semesters.getCurrentSemesterID();
     const oppInstances = OpportunityInstances.find({ studentID, semesterID }).fetch();
     if (oppInstances.length === 0) {  // only make suggestions if there are no opportunities planned.
       // console.log(bestChoices);
