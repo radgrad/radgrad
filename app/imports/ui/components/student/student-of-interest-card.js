@@ -4,7 +4,9 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
+import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
 import {
@@ -129,46 +131,44 @@ Template.Student_Of_Interest_Card.events({
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
     const id = this.item._id;
+    const collectionName = StudentProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
     if (this.type === 'courses') {
       const studentItems = profile.hiddenCourseIDs;
-      try {
-        studentItems.push(id);
-        // TODO Replace with method.
-        Users.setHiddenCourseIds(profile.userID, studentItems);
-      } catch (e) {
-        // TODO eliminate empty catch.
-      }
+      studentItems.push(id);
+      updateData.hiddenCourses = studentItems;
     } else {
       const studentItems = profile.hiddenOpportunityIDs;
-      try {
-        studentItems.push(id);
-        // TODO Replace with method.
-        Users.setHiddenOpportunityIds(profile.userID, studentItems);
-      } catch (e) {
-        // TODO eliminate empty catch.
-      }
+      studentItems.push(id);
+      updateData.hiddenOpportunities = studentItems;
     }
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error hiding course/opportunity', error);
+      }
+    });
   },
   'click .unhide': function clickItemHide(event) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
     const id = this.item._id;
+    const collectionName = StudentProfiles.getCollectionName();
+    const updateData = {};
+    updateData.id = profile._id;
     if (this.type === 'courses') {
       let studentItems = profile.hiddenCourseIDs;
-      try {
-        studentItems = _.without(studentItems, id);
-        Users.setHiddenCourseIds(profile.userID, studentItems);
-      } catch (e) {
-        // TODO eliminate empty catch
-      }
+      studentItems = _.without(studentItems, id);
+      updateData.hiddenCourses = studentItems;
     } else {
       let studentItems = profile.hiddenOpportunityIDs;
-      try {
-        studentItems = _.without(studentItems, id);
-        Users.setHiddenOpportunityIds(profile.userID, studentItems);
-      } catch (e) {
-        // TODO eliminate empty catch.
-      }
+      studentItems = _.without(studentItems, id);
+      updateData.hiddenOpportunities = studentItems;
     }
+    updateMethod.call({ collectionName, updateData }, (error) => {
+      if (error) {
+        console.log('Error unhiding course/opportunity', error);
+      }
+    });
   },
 });
