@@ -117,8 +117,20 @@ function checkIfPlanSlugIsSatisfied(takenCourseSlugs, planCourseSlugs, planSlug)
 }
 
 Template.Academic_Plan_Semester.helpers({
+  canDrag(course) {
+    return planChoiceUtils.isSingleChoice(course) && !planChoiceUtils.isXXChoice(course);
+  },
   choiceLabel(course) {
     return PlanChoices.toStringFromSlug(course);
+  },
+  choices(course) {
+    return course && planChoiceUtils.complexChoiceToArray(course);
+  },
+  courseSlug(course) {
+    if (planChoiceUtils.isSingleChoice(course)) {
+      return planChoiceUtils.stripCounter(course);
+    }
+    return '';
   },
   inPlan(course) {
     const planCourses = Template.instance().data.plan.courseList;
@@ -130,13 +142,11 @@ Template.Academic_Plan_Semester.helpers({
     }
     return true;
   },
-  courseSlug(course) {
-    if (planChoiceUtils.isSingleChoice(course)) {
-      return planChoiceUtils.stripCounter(course);
-    }
-    return '';
+  isSingleChoice(course) {
+    return planChoiceUtils.isSingleChoice(course);
   },
-  canDrag(course) {
-    return planChoiceUtils.isSingleChoice(course) && !planChoiceUtils.isXXChoice(course);
-  },
+});
+
+Template.Academic_Plan_Semester.onRendered(function academicPlanSemesterOnRendered() {
+  this.$('.label').popup({});
 });

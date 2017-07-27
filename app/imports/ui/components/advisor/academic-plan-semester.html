@@ -2,8 +2,28 @@
   {{#each course in courses}}
     <tr>
       <td>
-        <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label" course-slug="{{courseSlug course}}"
-             slug="{{course}}" style="{{#if canDrag course}}margin-bottom: 1rem; cursor: move;{{/if}}" draggable="{{#if canDrag course}}true{{else}}false{{/if}}" ondragstart="dragCourse(event)">{{choiceLabel course}}</div>
+        {{#if degreePlanner}}
+          {{#if isSingleChoice course}}
+            <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
+                 course-slug="{{courseSlug course}}"
+                 slug="{{course}}" style="{{#if canDrag course}}margin-bottom: 1rem; cursor: move;{{/if}}"
+                 draggable="{{#if canDrag course}}true{{else}}false{{/if}}"
+                 ondragstart="dragCourse(event)" data-content="{{#if inPlan course}}{{else}}Use inspector to add {{choiceLabel course}}{{/if}}">{{choiceLabel
+                course}}</div>
+          {{else}}
+            <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
+                 slug="{{course}}">
+              {{#each choice in (choices course)}}
+                <div id="{{choice}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
+                     course-slug="{{choice}}"
+                     slug="{{course}}" style="margin-bottom: 1rem; cursor: move;" draggable="true" ondragstart="dragCourse(event)" data-content="{{#if inPlan course}}{{else}}Use inspector to add the course{{/if}}">{{choiceLabel choice}}</div>
+              {{/each}}
+            </div>
+          {{/if}}
+        {{else}}
+          <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
+               slug="{{course}}">{{choiceLabel course}}</div>
+        {{/if}}
       </td>
     </tr>
   {{/each}}

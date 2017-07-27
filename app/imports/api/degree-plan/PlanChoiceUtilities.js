@@ -66,6 +66,7 @@ export function isXXChoice(planChoice) {
  * @param planChoice a plan choice.
  */
 export function complexChoiceToArray(planChoice) {
+  console.log(planChoice);
   const cleaned = stripCounter(planChoice);
   const split = cleaned.split(',');
   return _.map(split, (slug) => {
@@ -154,6 +155,7 @@ function satisfiesSinglePlanChoice(planChoice, courseSlug) {
  * Returns true if the courseSlug satisfies the plan choice.
  * @param planChoice The plan choice.
  * @param courseSlug The course slug.
+ * @return {Boolean}
  */
 export function satisfiesPlanChoice(planChoice, courseSlug) {
   const singleChoices = planChoice.split(',');
@@ -170,7 +172,7 @@ export function satisfiesPlanChoice(planChoice, courseSlug) {
  * Returns the index of the courseSlug in the array of plan choices.
  * @param planChoices an array of plan choices.
  * @param courseSlug the course slug.
- * @return the index of courseSlug in the array.
+ * @return {Number} the index of courseSlug in the array.
  */
 export function planIndexOf(planChoices, courseSlug) {
   for (let i = 0; i < planChoices.length; i += 1) {
