@@ -374,8 +374,6 @@ FlowRouter.route('/', {
   },
 });
 
-
-
 /*                        GUIDED TOUR ROUTE                       */
 
 function scrollTop() {
