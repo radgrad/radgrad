@@ -4,3 +4,4 @@ import './MentorProfileCollection';
 import './FacultyProfileCollection';
 import './StudentProfileCollection';
 import './UserCollection';
+import './UserCollection.methods';
