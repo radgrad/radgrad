@@ -374,7 +374,21 @@ FlowRouter.route('/', {
   },
 });
 
+
+
 /*                        GUIDED TOUR ROUTE                       */
+
+function scrollTop() {
+  this.window.scrollTo(0, 0);
+}
+
+function addGuidedTourBodyClass() {
+  $('body').addClass('guided-tour-background');
+}
+
+function removeGuidedTourBodyClass() {
+  $('body').removeClass('guided-tour-background');
+}
 
 export const studentGuidedTourPageRouteName = 'Student_Guided_Tour_Page';
 FlowRouter.route('/guidedtour/student', {
@@ -383,9 +397,8 @@ FlowRouter.route('/guidedtour/student', {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Guided_Tour_Layout', { main: studentGuidedTourPageRouteName });
   },
-  triggersEnter: [function scrollTop() {
-    this.window.scrollTo(0, 0);
-  }],
+  triggersEnter: [scrollTop, addGuidedTourBodyClass],
+  triggersExit: [removeGuidedTourBodyClass],
 });
 
 export const advisorGuidedTourPageRouteName = 'Advisor_Guided_Tour_Page';
@@ -395,9 +408,30 @@ FlowRouter.route('/guidedtour/advisor', {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Guided_Tour_Layout', { main: advisorGuidedTourPageRouteName });
   },
-  triggersEnter: [function scrollTop() {
-    this.window.scrollTo(0, 0);
-  }],
+  triggersEnter: [scrollTop, addGuidedTourBodyClass],
+  triggersExit: [removeGuidedTourBodyClass],
+});
+
+export const facultyGuidedTourPageRouteName = 'Faculty_Guided_Tour_Page';
+FlowRouter.route('/guidedtour/faculty', {
+  name: facultyGuidedTourPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Guided_Tour_Layout', { main: facultyGuidedTourPageRouteName });
+  },
+  triggersEnter: [scrollTop, addGuidedTourBodyClass],
+  triggersExit: [removeGuidedTourBodyClass],
+});
+
+export const mentorGuidedTourPageRouteName = 'Mentor_Guided_Tour_Page';
+FlowRouter.route('/guidedtour/mentor', {
+  name: mentorGuidedTourPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Guided_Tour_Layout', { main: mentorGuidedTourPageRouteName });
+  },
+  triggersEnter: [scrollTop, addGuidedTourBodyClass],
+  triggersExit: [removeGuidedTourBodyClass],
 });
 
 /*                        MENTOR ROUTES                       */

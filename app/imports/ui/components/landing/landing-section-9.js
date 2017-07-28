@@ -8,4 +8,10 @@ Template.Landing_Section_9.helpers({
   advisorGuidedTourPageRouteName() {
     return RouteNames.advisorGuidedTourPageRouteName;
   },
+  facultyGuidedTourPageRouteName() {
+    return RouteNames.facultyGuidedTourPageRouteName;
+  },
+  mentorGuidedTourPageRouteName() {
+    return RouteNames.mentorGuidedTourPageRouteName;
+  },
 });

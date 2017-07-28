@@ -1,4 +1,3 @@
-
 import '/imports/api/base';
 import '/imports/api/career';
 import '/imports/api/course';
@@ -40,8 +39,10 @@ import '/imports/ui/components/planner';
 import '/imports/ui/components/shared';
 import '/imports/ui/components/student';
 import '/imports/ui/components/guidedtour';
-import '/imports/ui/components/guidedtour/student';
 import '/imports/ui/components/guidedtour/advisor';
+import '/imports/ui/components/guidedtour/faculty';
+import '/imports/ui/components/guidedtour/student';
+import '/imports/ui/components/guidedtour/mentor';
 
 import '/imports/ui/layouts/admin';
 import '/imports/ui/layouts/advisor';

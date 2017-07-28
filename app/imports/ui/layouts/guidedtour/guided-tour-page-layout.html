@@ -1,16 +1,37 @@
 <template name="Guided_Tour_Page_Layout">
 
-  <div>
-    <div class="ui two column stackable grid">
-      <div class="{{leftColumns}} wide column">
-        <img class="ui rounded image" src="{{image}}">
-      </div>
-      <div class="{{rightColumns}} wide column guided-tour-description">
-        {{#markdown}}
-          {{> Template.contentBlock}}
-        {{/markdown}}
+  {{#if stacked}}
+    <div>
+      <div class="ui grid container">
+        <div class="centered row">
+          <div class="eight wide column">
+            <img class="ui rounded large image" src="{{image}}">
+          </div>
+        </div>
+        <div class="centered row">
+          <div class="twelve wide column">
+            <div class="guided-tour-description">
+              {{#markdown}}
+                {{> Template.contentBlock}}
+              {{/markdown}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  {{else}}
+    <div>
+      <div class="ui two column stackable grid">
+        <div class="{{leftColumns}} wide column">
+          <img class="ui rounded image" src="{{image}}">
+        </div>
+        <div class="{{rightColumns}} wide column guided-tour-description">
+          {{#markdown}}
+            {{> Template.contentBlock}}
+          {{/markdown}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
 
 </template>
