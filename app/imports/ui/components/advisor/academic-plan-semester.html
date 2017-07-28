@@ -6,17 +6,17 @@
           {{#if isSingleChoice course}}
             <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
                  course-slug="{{courseSlug course}}"
-                 slug="{{course}}" style="{{#if canDrag course}}margin-bottom: 1rem; cursor: move;{{/if}}"
+                 slug="{{course}}" style="{{#if canDrag course}}margin: 2px; cursor: move;{{/if}}"
                  draggable="{{#if canDrag course}}true{{else}}false{{/if}}"
                  ondragstart="dragCourse(event)" data-content="{{#if inPlan course}}{{else}}Use inspector to add {{choiceLabel course}}{{/if}}">{{choiceLabel
                 course}}</div>
           {{else}}
             <div id="{{course}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
-                 slug="{{course}}">
+                 slug="{{course}}" style="padding: 2px;">
               {{#each choice in (choices course)}}
                 <div id="{{choice}}" class="ui basic {{#if inPlan course}}green {{else}}red {{/if}}label"
                      course-slug="{{choice}}"
-                     slug="{{course}}" style="margin-bottom: 1rem; cursor: move;" draggable="true" ondragstart="dragCourse(event)" data-content="{{#if inPlan course}}{{else}}Use inspector to add the course{{/if}}">{{choiceLabel choice}}</div>
+                     slug="{{course}}" style="margin: 2px; cursor: move;" draggable="true" ondragstart="dragCourse(event)" data-content="{{#if inPlan course}}{{else}}Use inspector to add the course{{/if}}">{{choiceLabel choice}}</div>
               {{/each}}
             </div>
           {{/if}}

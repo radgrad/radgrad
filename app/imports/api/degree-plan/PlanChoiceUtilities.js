@@ -66,7 +66,6 @@ export function isXXChoice(planChoice) {
  * @param planChoice a plan choice.
  */
 export function complexChoiceToArray(planChoice) {
-  console.log(planChoice);
   const cleaned = stripCounter(planChoice);
   const split = cleaned.split(',');
   return _.map(split, (slug) => {
