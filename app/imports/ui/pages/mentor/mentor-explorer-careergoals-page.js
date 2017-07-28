@@ -69,8 +69,8 @@ Template.Mentor_Explorer_CareerGoals_Page.helpers({
         value: interestedUsers(careerGoal, ROLE.STUDENT) },
       { label: 'faculty members', amount: numUsers(careerGoal, ROLE.FACULTY),
         value: interestedUsers(careerGoal, ROLE.FACULTY) },
-      { label: 'alumni', amount: numUsers(careerGoal, ROLE.ALUMNI), value: interestedUsers(careerGoal, ROLE.ALUMNI) },
       { label: 'mentors', amount: numUsers(careerGoal, ROLE.MENTOR), value: interestedUsers(careerGoal, ROLE.MENTOR) },
+      { label: 'alumni', amount: numUsers(careerGoal, ROLE.ALUMNI), value: interestedUsers(careerGoal, ROLE.ALUMNI) },
     ];
   },
 });

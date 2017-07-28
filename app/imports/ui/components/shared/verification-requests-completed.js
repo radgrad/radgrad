@@ -33,7 +33,7 @@ Template.Verification_Requests_Completed.helpers({
   },
   ownerName(verification) {
     const sponsor = VerificationRequests.getSponsorDoc(verification._id);
-    return Users.getFullName(sponsor._id);
+    return Users.getFullName(sponsor.userID);
   },
   processedDate(date) {
     const processed = moment(date);
@@ -45,7 +45,7 @@ Template.Verification_Requests_Completed.helpers({
   },
   studentName(verification) {
     const student = VerificationRequests.getStudentDoc(verification._id);
-    return Users.getFullName(student._id);
+    return Users.getFullName(student.userID);
   },
   whenSubmitted(verification) {
     const submitted = moment(verification.submittedOn);

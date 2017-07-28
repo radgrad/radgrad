@@ -27,7 +27,7 @@ Template.Verification_Requests_Pending.helpers({
   },
   ownerName(request) {
     const sponsor = VerificationRequests.getSponsorDoc(request._id);
-    return Users.getFullName(sponsor._id);
+    return Users.getFullName(sponsor.userID);
   },
   pendingRequests() {
     const group = FlowRouter.current().route.group.name;
@@ -50,7 +50,7 @@ Template.Verification_Requests_Pending.helpers({
   },
   studentName(request) {
     const student = VerificationRequests.getStudentDoc(request._id);
-    return Users.getFullName(student._id);
+    return Users.getFullName(student.userID);
   },
   whenSubmitted(request) {
     const submitted = moment(request.submittedOn);
@@ -64,6 +64,9 @@ Template.Verification_Requests_Pending.events({
     const split = event.target.id.split('-');
     const requestID = split[0];
     const request = VerificationRequests.findDoc(requestID);
+    // TODO This is super busted and super hard to understand. Let's make API better so logic is simpler.
+    // console.log('requestID', requestID);
+    // console.log('request', request);
     const processRecord = {};
     processRecord.date = new Date();
     if (split[1] === 'accept') {
@@ -71,7 +74,7 @@ Template.Verification_Requests_Pending.events({
       processRecord.status = VerificationRequests.ACCEPTED;
       OpportunityInstances.updateVerified(request.opportunityInstanceID, true);
       const opportunities = OpportunityInstances.find({
-        studentID: VerificationRequests.getStudentDoc(request._id)._id,
+        studentID: request.studentID,
         opportunityID: VerificationRequests.getOpportunityDoc(request._id)._id,
       }).fetch();
       const opportunityID = VerificationRequests.getOpportunityDoc(request._id)._id;
