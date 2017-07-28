@@ -11,4 +11,7 @@ Template.Landing_Section_9.helpers({
   facultyGuidedTourPageRouteName() {
     return RouteNames.facultyGuidedTourPageRouteName;
   },
+  mentorGuidedTourPageRouteName() {
+    return RouteNames.mentorGuidedTourPageRouteName;
+  },
 });

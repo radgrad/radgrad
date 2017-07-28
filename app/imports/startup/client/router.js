@@ -423,6 +423,17 @@ FlowRouter.route('/guidedtour/faculty', {
   triggersExit: [removeGuidedTourBodyClass],
 });
 
+export const mentorGuidedTourPageRouteName = 'Mentor_Guided_Tour_Page';
+FlowRouter.route('/guidedtour/mentor', {
+  name: mentorGuidedTourPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Guided_Tour_Layout', { main: mentorGuidedTourPageRouteName });
+  },
+  triggersEnter: [scrollTop, addGuidedTourBodyClass],
+  triggersExit: [removeGuidedTourBodyClass],
+});
+
 /*                        MENTOR ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.

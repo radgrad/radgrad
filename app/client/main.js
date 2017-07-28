@@ -42,6 +42,7 @@ import '/imports/ui/components/guidedtour';
 import '/imports/ui/components/guidedtour/advisor';
 import '/imports/ui/components/guidedtour/faculty';
 import '/imports/ui/components/guidedtour/student';
+import '/imports/ui/components/guidedtour/mentor';
 
 import '/imports/ui/layouts/admin';
 import '/imports/ui/layouts/advisor';
