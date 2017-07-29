@@ -35,8 +35,7 @@ Template.Student_Explorer_Opportunities_Widget_Button.helpers({
     const semesters = opp.semesterIDs;
     const takenSemesters = [];
     const semesterNames = [];
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSemester = Semesters.findDoc(currentSemesterID);
+    const currentSemester = Semesters.getCurrentSemesterDoc();
     const opportunity = this.opportunity;
     const oi = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),

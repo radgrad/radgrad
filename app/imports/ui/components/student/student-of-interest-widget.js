@@ -86,8 +86,7 @@ function hiddenCoursesHelper() {
 
 const availableOpps = () => {
   const opps = Opportunities.find({}).fetch();
-  const currentSemesterID = Semesters.getCurrentSemester();
-  const currentSemester = Semesters.findDoc(currentSemesterID);
+  const currentSemester = Semesters.getCurrentSemesterDoc();
   if (opps.length > 0) {
     const filteredBySem = _.filter(opps, function filter(opp) {
       const oi = OpportunityInstances.find({
