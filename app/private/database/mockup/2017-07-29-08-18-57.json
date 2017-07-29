@@ -1,5 +1,5 @@
 {
-  "timestamp": "2017-07-29T01:29:22.373Z",
+  "timestamp": "2017-07-29T18:18:57.477Z",
   "collections": [
     {
       "name": "AcademicPlanCollection",
@@ -3134,6 +3134,150 @@
           "creditHrs": 3,
           "grade": "B",
           "student": "charley@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics_111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics_141",
+          "note": "ICS 141",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics_211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics_241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2018",
+          "course": "ics_311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2018",
+          "course": "ics_314",
+          "note": "ICS 314",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2019",
+          "course": "ics_212",
+          "note": "ICS 212",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2019",
+          "course": "ics_321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics_312",
+          "note": "ICS 312",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2019",
+          "course": "ics_361",
+          "note": "ICS 361",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics_332",
+          "note": "ICS 332",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2020",
+          "course": "ics_414",
+          "note": "ICS 414",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2020",
+          "course": "ics_443",
+          "note": "ICS 443",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2020",
+          "course": "ics_461",
+          "note": "ICS 461",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2021",
+          "course": "ics_491",
+          "note": "ICS 491",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2021",
+          "course": "ics_499",
+          "note": "ICS 499",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "B",
+          "student": "samplestudent@hawaii.edu"
         }
       ]
     },
@@ -3500,7 +3644,27 @@
     },
     {
       "name": "FeedCollection",
-      "contents": []
+      "contents": [
+        {
+          "user": [],
+          "opportunity": "cybersistahs",
+          "feedType": "new-opportunity",
+          "timestamp": "2017-07-29T17:45:54.532Z"
+        },
+        {
+          "user": [],
+          "opportunity": "google-summer-of-code",
+          "feedType": "new-opportunity",
+          "timestamp": "2017-07-29T17:48:49.583Z"
+        },
+        {
+          "user": [
+            "samplestudent@hawaii.edu"
+          ],
+          "feedType": "new-user",
+          "timestamp": "2017-07-29T17:58:22.534Z"
+        }
+      ]
     },
     {
       "name": "FeedbackInstanceCollection",
@@ -4385,7 +4549,7 @@
           "opportunityType": "event",
           "sponsor": "johnson@hawaii.edu",
           "ice": {
-            "i": 10,
+            "i": 15,
             "c": 0,
             "e": 0
           },
@@ -4634,9 +4798,9 @@
           "opportunityType": "project",
           "sponsor": "binsted@hawaii.edu",
           "ice": {
-            "i": 30,
+            "i": 25,
             "c": 0,
-            "e": 15
+            "e": 0
           },
           "interests": [
             "application-development",
@@ -5013,6 +5177,29 @@
           ]
         },
         {
+          "name": "CyberSistahs",
+          "slug": "cybersistahs",
+          "description": "This group is for women who are trying to break into and/or advance in the world of IT more specifically cybersecurity. I would like us to meet and form study groups for various certs (Security+, CISSP, CEH..etc), attend and eventually host webinars on ethical hacking and programming, attend hack-a-thons and everything in between. \n\n[Learn more here](https://www.meetup.com/meetup-group-yLCdOxMP/?gj=ej1b)\n\n#### Verification Criteria\nTake a selfie at two different meetings on two different days. When it is over, show the pictures to this Opportunity's sponsor, or your advisor as evidence of your attendance.",
+          "opportunityType": "club",
+          "sponsor": "binsted@hawaii.edu",
+          "ice": {
+            "i": 5,
+            "c": 0,
+            "e": 5
+          },
+          "interests": [
+            "cryptography",
+            "security"
+          ],
+          "semesters": [
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019"
+          ]
+        },
+        {
           "name": "DAHI Internship",
           "slug": "dahi-internship",
           "description": "The UH Digital Arts and Humanities Initiative (DAHI) explores the full potential of today’s digital resources and capabilities in the broad realm of the Arts and Humanities. The chief goal of the initiative is to provide open access for state-of-the-art instances of digital media, scholarship and performance. The DAHI community creates an environment of trust, so that faculty, students and community members with ideas can find collaborators and access resources to pursue a range of cross-disciplinary and multimedia projects. \n\n[Learn more here.](http://dahi.manoa.hawaii.edu/)\n\n#### Verification criteria\nAt the conclusion of the internship, request this Opportunity's sponsor to login to RadGrad to verify your participation. You should be able to supply evidence of participation, and contact details for your supervisor at the organization.",
@@ -5228,7 +5415,7 @@
           "opportunityType": "event",
           "sponsor": "johnson@hawaii.edu",
           "ice": {
-            "i": 10,
+            "i": 15,
             "c": 0,
             "e": 0
           },
@@ -5244,6 +5431,41 @@
             "Spring-2019",
             "Spring-2020",
             "Spring-2021"
+          ]
+        },
+        {
+          "name": "Google Summer of Code",
+          "slug": "google-summer-of-code",
+          "description": "Spend your summer break writing code and learning about open source development while earning a stipend! Accepted students work with a mentor and become a part of the open source community. Many become lifetime open source developers!\n\nGoogle Summer of Code is open to university students, age 18 and older in most countries.\n\n[See more here](https://developers.google.com/open-source/gsoc/)\n\n#### Verification criteria\nAt the conclusion of the internship, request that this Opportunity's sponsor login to RadGrad to verify your participation. You should be able to supply evidence of participation, and contact details for your supervisor at the organization.",
+          "opportunityType": "internship",
+          "sponsor": "johnson@hawaii.edu",
+          "ice": {
+            "i": 10,
+            "c": 0,
+            "e": 15
+          },
+          "interests": [
+            "algorithms",
+            "android",
+            "application-development",
+            "artificial-intelligence",
+            "computer-graphics",
+            "data-science",
+            "data-visualization",
+            "machine-learning",
+            "mobile",
+            "research",
+            "security",
+            "software-engineering"
+          ],
+          "semesters": [
+            "Summer-2015",
+            "Summer-2016",
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019",
+            "Summer-2020",
+            "Summer-2021"
           ]
         },
         {
@@ -5465,39 +5687,9 @@
           ]
         },
         {
-          "name": "AI XPRIZE",
-          "slug": "ibm-watson-ai-xprize",
-          "description": "The IBM Watson AI XPRIZE is a $5 million competition, challenging teams globally, to develop and demonstrate how humans can collaborate with powerful AI technologies to tackle the world’s grand challenges. The prize aims to accelerate adoption of AI technologies, and spark creative, innovative and audacious demonstrations of the technology that are truly scalable and solve societal grand challenges. To encourage innovation in any form, the competition is an open challenge in AI. Rather than set a single, universal goal for all teams, this competition will invite teams to each declare their own goal and solution to a grand challenge.\n\nThe IBM Watson AI XPRIZE is a four-year competition with annual milestone competitions in 2017, 2018, and 2019. The top three finalists will compete for the Grand Prize at TED 2020. [Learn more here.](http://developer.ibm.com/event/ibm-watson-ai-xprize/)",
-          "opportunityType": "event",
-          "sponsor": "glau@hawaii.edu",
-          "ice": {
-            "i": 20,
-            "c": 0,
-            "e": 15
-          },
-          "interests": [
-            "artificial-intelligence",
-            "application-development"
-          ],
-          "semesters": [
-            "Summer-2016",
-            "Fall-2016",
-            "Spring-2017",
-            "Summer-2017",
-            "Fall-2017",
-            "Spring-2018",
-            "Summer-2018",
-            "Fall-2018",
-            "Spring-2019",
-            "Summer-2019",
-            "Fall-2019",
-            "Spring-2020"
-          ]
-        },
-        {
           "name": "Apple iOS Dev Meetup",
           "slug": "ios-dev-meetup",
-          "description": "This group was created to provide a regular meetup for iOS developers actively working on projects. The purpose is to work together to support one another in bringing our ideas to life. The goals are also to meet people in the Honolulu, Hawaii area who are doing the same type of work (programming and creating apps for the iPhone, iPad, and Mac) and to have fun.\n\nThis meetup is for:\n\n  * iPhone Developers of all levels. \n\n  * People who are interested in getting their hands dirty in code.\n\n  * People just starting to develop for iOS who do not have much experience.\n\n  * Developers on other platforms (Android, etc) who are interested in learning about iOS development.\n\n  * Developers looking for specific help in adding functionality to their app. [Learn more here.](https://www.meetup.com/Hawaii-iOS-Developer-Meetup/)",
+          "description": "This group was created to provide a regular meetup for iOS developers actively working on projects. The purpose is to work together to support one another in bringing our ideas to life. The goals are also to meet people in the Honolulu, Hawaii area who are doing the same type of work (programming and creating apps for the iPhone, iPad, and Mac) and to have fun.\n\nThis meetup is for:\n\n  * iPhone Developers of all levels. \n\n  * People who are interested in getting their hands dirty in code.\n\n  * People just starting to develop for iOS who do not have much experience.\n\n  * Developers on other platforms (Android, etc) who are interested in learning about iOS development.\n\n  * Developers looking for specific help in adding functionality to their app. \n\n[Learn more here.](https://www.meetup.com/Hawaii-iOS-Developer-Meetup/)\n\n#### Verification Criteria\nTake a selfie at two different meetings on two different days. When it is over, show the pictures to this Opportunity's sponsor, or your advisor as evidence of your attendance.",
           "opportunityType": "club",
           "sponsor": "johnson@hawaii.edu",
           "ice": {
@@ -5790,13 +5982,13 @@
         {
           "name": "Airline Security",
           "slug": "security-enhancement-of-commercial-airliner",
-          "description": "Malicious controllers can possibly manipulate a flight control system e.g. aircraft or drones. from various channels, e.g. autonomic control devices, remote cyber controller, or human operators. Thus, pilots could suicide the aircraft, the auto-pilot might be infected by malware, and air traffic controllers can mishandle the drone. To better mitigate the potential risks, we hope to propose theoretical framework model in physical, human and cyber triad, a more secure air traffic control system, and a more safe task allocation mechanism. Students who are interested in aviation, risk control, and human-machine interface are highly encouraged to apply. [Learn more here.](http://www2.hawaii.edu/~depengli/index.html)",
+          "description": "Malicious controllers can possibly manipulate a flight control system e.g. aircraft or drones. from various channels, e.g. autonomic control devices, remote cyber controller, or human operators. Thus, pilots could suicide the aircraft, the auto-pilot might be infected by malware, and air traffic controllers can mishandle the drone. \n\nTo better mitigate the potential risks, we hope to propose theoretical framework model in physical, human and cyber triad, a more secure air traffic control system, and a more safe task allocation mechanism. Students who are interested in aviation, risk control, and human-machine interface are highly encouraged to apply. \n\n[Learn more here.](http://www2.hawaii.edu/~depengli/index.html)\n\n#### Verification Criteria\nAt the conclusion of the semester, ask this Opportunity's sponsor to verify your participation by logging into RadGrad.",
           "opportunityType": "project",
           "sponsor": "depengli@hawaii.edu",
           "ice": {
-            "i": 30,
+            "i": 25,
             "c": 0,
-            "e": 15
+            "e": 0
           },
           "interests": [
             "application-development",
@@ -5827,11 +6019,11 @@
         {
           "name": "Business Plan Competition",
           "slug": "shidler-bpc",
-          "description": "The annual Shidler Business Plan competition is an intense and unique semester-long learning opportunity for UH students who aspire to pursue a business venture. The competition provides mentorship, training and resources. Winners walk away with a wealth of business savvy and substantial cash prizes. [Learn more here.](http://pace.shidler.hawaii.edu/bpc)",
+          "description": "The annual Shidler Business Plan competition is an intense and unique semester-long learning opportunity for UH students who aspire to pursue a business venture. The competition provides mentorship, training and resources. Winners walk away with a wealth of business savvy and substantial cash prizes. \n\n[Learn more here.](http://pace.shidler.hawaii.edu/bpc)\n\n#### Verification criteria\nAt the conclusion of the competition, request this Opportunity's sponsor to login to RadGrad to verify your participation. Provide your business plan and selfies at two meetings to verify your participation.",
           "opportunityType": "event",
           "sponsor": "johnson@hawaii.edu",
           "ice": {
-            "i": 20,
+            "i": 10,
             "c": 0,
             "e": 15
           },
@@ -6453,6 +6645,102 @@
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
           "student": "cnguyen7@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2018",
+          "opportunity": "acm-manoa",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "acm-manoa",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2017",
+          "opportunity": "acm-manoa",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2018",
+          "opportunity": "acm-manoa",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2020",
+          "opportunity": "generic-project",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2021",
+          "opportunity": "generic-project",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2019",
+          "opportunity": "wetware-wednesday",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2021",
+          "opportunity": "wetware-wednesday",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "wetware-wednesday",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2020",
+          "opportunity": "hnl-tech4good",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2019",
+          "opportunity": "cs-job",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Summer-2019",
+          "opportunity": "cs-job",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2020",
+          "opportunity": "coe-career-day",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Summer-2020",
+          "opportunity": "generic-internship",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2018",
+          "opportunity": "aloha-rb",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2019",
+          "opportunity": "code-for-hawaii",
+          "verified": true,
+          "student": "samplestudent@hawaii.edu"
         }
       ]
     },
@@ -8241,6 +8529,37 @@
           ],
           "level": 2,
           "academicPlan": "ba-ics-2016",
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "isAlumni": false
+        },
+        {
+          "username": "samplestudent@hawaii.edu",
+          "firstName": "Sample",
+          "lastName": "Student",
+          "picture": "http://res.cloudinary.com/radgrad/image/upload/v1501351007/zfrhwhcwfgddftu8z2ei.jpg",
+          "website": "http://amymalia.github.io",
+          "interests": [
+            "algorithms",
+            "application-development",
+            "artificial-intelligence",
+            "civic-engagement",
+            "data-visualization",
+            "entrepreneurship",
+            "game-design",
+            "javascript",
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "full-stack-developer",
+            "research-scientist",
+            "software-developer",
+            "startup-cofounder",
+            "ux-designer"
+          ],
+          "level": 6,
+          "academicPlan": "bs-cs-2016",
+          "declaredSemester": "Spring-2016",
           "hiddenCourses": [],
           "hiddenOpportunities": [],
           "isAlumni": false
