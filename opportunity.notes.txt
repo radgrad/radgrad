@@ -1,0 +1,32 @@
+Opportunity Design notes
+
+ICE Points:
+  * Research projects: 25/0/0
+  * Semester-long internships: 10/0/15
+  * Weekend Hackathons: 15/0/0
+  * Semester-long CS Job: 0/0/15
+  * Meetups and other clubs: 5/0/5
+  * One day events (career fairs, etc.): 0/0/5
+
+
+#### Verification Criteria
+Take several selfies at the event. When it is over, show the pictures to this Opportunity's sponsor, or your advisor as evidence of your attendance.
+
+#### Verification Criteria
+At the conclusion of the semester, ask this Opportunity's sponsor to verify your participation by logging into RadGrad.
+
+#### Verification Criteria
+After the hackathon is over, show this Opportunity's sponsor evidence of your participation. This can include the code you developed and its commit history, and/or your hackathon registration, and/or selfies of you attending the event.
+
+#### Verification criteria
+At the conclusion of the event, request this Opportunity's sponsor to login to RadGrad to verify your participation. You should be able to supply evidence of team participation.
+
+#### Verification criteria
+Take a selfie at this event and submit to this Opportunity's sponsor along with work products as evidence of your participation.
+
+#### Verification criteria
+Take selfies at least two meetings during the semester, then request that this Opportunity's sponsor login to RadGrad to verify your participation.
+
+#### Verification criteria
+At the conclusion of the internship, request that this Opportunity's sponsor login to RadGrad to verify your participation. You should be able to supply evidence of participation, and contact details for your supervisor at the organization.
+
