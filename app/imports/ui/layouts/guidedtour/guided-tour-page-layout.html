@@ -23,7 +23,10 @@
     <div>
       <div class="ui two column stackable grid">
         <div class="{{leftColumns}} wide column">
-          <img class="ui rounded image" src="{{image}}">
+          <a href="{{image}}" target="_blank"><img class="ui rounded image" src="{{image}}"></a>
+          <div class="guided-tour-description">
+            <p style="text-align: center">Click for full-size image</p>
+          </div>
         </div>
         <div class="{{rightColumns}} wide column guided-tour-description">
           {{#markdown}}
