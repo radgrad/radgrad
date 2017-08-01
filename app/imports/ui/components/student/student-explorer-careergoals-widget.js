@@ -64,7 +64,7 @@ Template.Student_Explorer_CareerGoals_Widget.events({
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     const studentItems = profile.careerGoalIDs;
-    const collectionName = StudentProfiles.getCollectionName();
+    const collectionName = StudentProfiles.getCollectionNameForProfile(profile);
     const updateData = {};
     updateData.id = profile._id;
     studentItems.push(id);
@@ -84,7 +84,7 @@ Template.Student_Explorer_CareerGoals_Widget.events({
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     let studentItems = profile.careerGoalIDs;
-    const collectionName = StudentProfiles.getCollectionName();
+    const collectionName = StudentProfiles.getCollectionNameForProfile(profile);
     const updateData = {};
     updateData.id = profile._id;
     studentItems = _.without(studentItems, id);
