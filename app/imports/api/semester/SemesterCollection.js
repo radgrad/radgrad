@@ -110,7 +110,7 @@ class SemesterCollection extends BaseSlugCollection {
    * Returns the semesterID associated with the current semester based upon the current timestamp.
    * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
    */
-  getCurrentSemester() {
+  getCurrentSemesterID() {
     const year = moment().year();
     const day = moment().dayOfYear();
     let term = '';
@@ -140,7 +140,7 @@ class SemesterCollection extends BaseSlugCollection {
    * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
    */
   getCurrentSemesterDoc() {
-    const id = this.getCurrentSemester();
+    const id = this.getCurrentSemesterID();
     return this.findDoc(id);
   }
 

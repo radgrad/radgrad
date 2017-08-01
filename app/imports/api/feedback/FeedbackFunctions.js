@@ -1,5 +1,6 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
 import { FeedbackInstances } from './FeedbackInstanceCollection';
@@ -104,7 +105,7 @@ export class FeedbackFunctionClass {
     const studentProfile = Users.getProfile(user);
     const courseIDs = StudentProfiles.getCourseIDs(user);
     let courses = [];
-    const academicPlan = studentProfile.academicPlanID;
+    const academicPlan = AcademicPlans.findDoc(studentProfile.academicPlanID);
     courses = academicPlan.courseList.slice(0);
     courses = this._missingCourses(courseIDs, courses);
     if (courses.length > 0) {
@@ -288,7 +289,7 @@ export class FeedbackFunctionClass {
 
     let bestChoices = oppUtils.getStudentCurrentSemesterOpportunityChoices(user);
     const basePath = this._getBasePath(user);
-    const semesterID = Semesters.getCurrentSemester();
+    const semesterID = Semesters.getCurrentSemesterID();
     const oppInstances = OpportunityInstances.find({ studentID, semesterID }).fetch();
     if (oppInstances.length === 0) {  // only make suggestions if there are no opportunities planned.
       // console.log(bestChoices);

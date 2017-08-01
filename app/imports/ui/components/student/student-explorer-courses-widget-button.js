@@ -31,8 +31,7 @@ Template.Student_Explorer_Courses_Widget_Button.helpers({
   },
   nextYears(amount) {
     const nextYears = [];
-    const currentSemesterID = Semesters.getCurrentSemester();
-    const currentSem = Semesters.findDoc(currentSemesterID);
+    const currentSem = Semesters.getCurrentSemesterDoc();
     let currentYear = currentSem.year;
     for (let i = 0; i < amount; i += 1) {
       nextYears.push(currentYear);

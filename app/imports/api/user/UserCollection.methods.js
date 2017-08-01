@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { ROLE } from '../../api/role/Role';
 import { Users } from './UserCollection';
@@ -9,6 +10,7 @@ import { StudentProfiles } from './StudentProfileCollection';
  */
 export const updateAcademicPlanMethod = new ValidatedMethod({
   name: 'User.updateAcademicPlan',
+  mixins: [CallPromiseMixin],
   validate: null,
   run(academicPlan) {
     if (!this.userId) {

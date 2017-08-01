@@ -51,6 +51,16 @@ export function isComplexChoice(planChoice) {
 }
 
 /**
+ * Returns true if the planChoice is a 300+ or 400+.
+ * @param planChoice the plan choice.
+ * @return {boolean}
+ */
+export function isXXChoice(planChoice) {
+  const cleaned = stripCounter(planChoice);
+  return cleaned.indexOf('+') !== -1;
+}
+
+/**
  * Converts a complex choice into an array of the slugs that make up the choice.
  * Note: This may not be enough to solve the generate plan problem.
  * @param planChoice a plan choice.
@@ -144,6 +154,7 @@ function satisfiesSinglePlanChoice(planChoice, courseSlug) {
  * Returns true if the courseSlug satisfies the plan choice.
  * @param planChoice The plan choice.
  * @param courseSlug The course slug.
+ * @return {Boolean}
  */
 export function satisfiesPlanChoice(planChoice, courseSlug) {
   const singleChoices = planChoice.split(',');
@@ -160,7 +171,7 @@ export function satisfiesPlanChoice(planChoice, courseSlug) {
  * Returns the index of the courseSlug in the array of plan choices.
  * @param planChoices an array of plan choices.
  * @param courseSlug the course slug.
- * @return the index of courseSlug in the array.
+ * @return {Number} the index of courseSlug in the array.
  */
 export function planIndexOf(planChoices, courseSlug) {
   for (let i = 0; i < planChoices.length; i += 1) {

@@ -1,12 +1,13 @@
 import './student-guided-tour-advisor-log.html';
-import './student-guided-tour-set-up.html';
-import './student-guided-tour-interest.html';
-import './student-guided-tour-courses.html';
-import './student-guided-tour-opportunities.html';
 import './student-guided-tour-career-goal.html';
+import './student-guided-tour-courses.html';
 import './student-guided-tour-degree-plan.html';
 import './student-guided-tour-ice.html';
+import './student-guided-tour-interest.html';
 import './student-guided-tour-levels.html';
 import './student-guided-tour-mentor.html';
+import './student-guided-tour-opportunities.html';
+import './student-guided-tour-sample-student.html';
+import './student-guided-tour-set-up.html';
 import './student-guided-tour-whats-next.html';
 import './student-guided-tour-why-radgrad.html';

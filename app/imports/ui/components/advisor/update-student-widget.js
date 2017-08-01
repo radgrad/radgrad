@@ -24,14 +24,17 @@ import { appLog } from '../../../api/log/AppLogCollection';
 
 const updateSchema = new SimpleSchema({
   username: String,
+  role: String,
   firstName: String,
   lastName: String,
-  role: String,
-  interests: { type: Array, minCount: 1 }, 'interests.$': String,
+  // Everything else is optional.
   picture: { type: String, optional: true },
   website: { type: String, optional: true },
-  careerGoals: [String],
-  level: { type: Number, optional: true },
+  careerGoals: { type: Array }, 'careerGoals.$': String,
+  interests: { type: Array }, 'interests.$': String,
+  // Optional Student fields
+  isAlumni: String,
+  level: Number,
   declaredSemester: { type: String, optional: true },
   academicPlan: { type: String, optional: true },
 }, { tracker: Tracker });
@@ -159,6 +162,18 @@ Template.Update_Student_Widget.helpers({
     }
     return '';
   },
+  falseValueAlumni() {
+    if (Template.currentData().studentID.get()) {
+      return !Users.getProfile(Template.currentData().studentID.get()).isAlumni;
+    }
+    return false;
+  },
+  trueValueAlumni() {
+    if (Template.currentData().studentID.get()) {
+      return Users.getProfile(Template.currentData().studentID.get()).isAlumni;
+    }
+    return true;
+  },
 });
 
 Template.Update_Student_Widget.events({
@@ -168,8 +183,8 @@ Template.Update_Student_Widget.events({
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
+    updateData.isAlumni = (updateData.isAlumni === 'true');
     if (instance.context.isValid()) {
-      FormUtils.renameKey(updateData, 'slug', 'username');
       const profile = Users.getProfile(Template.currentData().studentID.get());
       if (updateData.level !== profile.level) {
         const text = `Congratulations! ${profile.firstName} you're now Level ${updateData.level}.
@@ -189,6 +204,11 @@ Template.Update_Student_Widget.events({
         defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
       }
       updateData.id = profile._id;
+      if (updateData.isAlumni) {
+        updateData.role = ROLE.ALUMNI;
+      } else {
+        updateData.role = ROLE.STUDENT;
+      }
       const collectionName = StudentProfiles.getCollectionName();
       updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {
