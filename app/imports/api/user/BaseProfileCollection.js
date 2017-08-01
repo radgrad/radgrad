@@ -12,11 +12,19 @@ import { Interests } from '../interest/InterestCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from './UserCollection';
+import { ROLE } from '../role/Role.js';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /** @module api/user/BaseProfileCollection */
 
 /* eslint-disable no-param-reassign, class-methods-use-this */
+
+/** Set up the object to be used to map role names to their corresponding collections. */
+const rolesToCollectionNames = { };
+rolesToCollectionNames[ROLE.ADVISOR] = 'AdvisorProfileCollection';
+rolesToCollectionNames[ROLE.FACULTY] = 'FacultyProfileCollection';
+rolesToCollectionNames[ROLE.MENTOR] = 'MentorProfileCollection';
+rolesToCollectionNames[ROLE.STUDENT] = 'StudentProfileCollection';
 
 /**
  * BaseProfileCollection is an abstract superclass of all profile collections.
@@ -34,6 +42,15 @@ class BaseProfileCollection extends BaseSlugCollection {
       careerGoalIDs: [SimpleSchema.RegEx.Id],
       userID: SimpleSchema.RegEx.Id,
     })));
+  }
+
+  /**
+   * Returns the name of the collection associated with the given profile.
+   * @param profile A Profile object.
+   * @returns  { String } The name of a profile collection.
+   */
+  getCollectionNameForProfile(profile) {
+    return rolesToCollectionNames[profile.role];
   }
 
   /**

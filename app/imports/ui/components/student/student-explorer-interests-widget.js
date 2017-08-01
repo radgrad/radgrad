@@ -93,7 +93,7 @@ Template.Student_Explorer_Interests_Widget.events({
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     const studentItems = profile.interestIDs;
-    const collectionName = StudentProfiles.getCollectionName();
+    const collectionName = StudentProfiles.getCollectionNameForProfile(profile);
     const updateData = {};
     updateData.id = profile._id;
     studentItems.push(id);
@@ -115,7 +115,7 @@ Template.Student_Explorer_Interests_Widget.events({
     const interest = Interests.findDoc(id).name;
     const message = `${getRouteUserName()} removed interest ${interest}`;
     let studentItems = profile.interestIDs;
-    const collectionName = StudentProfiles.getCollectionName();
+    const collectionName = StudentProfiles.getCollectionNameForProfile(profile);
     const updateData = {};
     updateData.id = profile._id;
     studentItems = _.without(studentItems, id);
