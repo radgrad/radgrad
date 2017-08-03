@@ -43,6 +43,10 @@ Template.Add_Opportunity_Widget.helpers({
     const group = FlowRouter.current().route.group.name;
     return group === 'faculty';
   },
+  admin() {
+    const group = FlowRouter.current().route.group.name;
+    return group === 'admin';
+  },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },

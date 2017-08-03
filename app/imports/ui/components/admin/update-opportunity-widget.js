@@ -40,6 +40,10 @@ Template.Update_Opportunity_Widget.helpers({
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
   },
+  admin() {
+    const group = FlowRouter.current().route.group.name;
+    return group === 'admin';
+  },
   semesters() {
     return Semesters.find({});
   },

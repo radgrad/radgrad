@@ -21,7 +21,11 @@
 
       <div class="fields">
         {{> ICE_Form_Field label="Innovation" name="innovation" selectedICE=opportunity.ice.i errorMessage=(fieldError "innovation") required=true}}
-        <input type="hidden" name="competency" value="0">
+        {{#if admin}}
+          {{> ICE_Form_Field label="Competency" name="competency" selectedICE=opportunity.ice.c errorMessage=(fieldError "competency") required=true}}
+        {{else}}
+          <input type="hidden" name="competency" value="0">
+        {{/if}}
         {{> ICE_Form_Field label="Experience" name="experience" selectedICE=opportunity.ice.e errorMessage=(fieldError "innovation") required=true}}
       </div>
 
