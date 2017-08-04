@@ -222,7 +222,7 @@ class FeedCollection extends BaseCollection {
    */
   _defineNewVerifiedOpportunity({ user, opportunity, semester, feedType, timestamp = moment().toDate() }) {
     // First, see if we've already defined any verified-opportunities for this opportunity within the past day.
-    const recentFeedID = this.checkPastDayFeed('verified-opportunity', opportunity);
+    const recentFeedID = this.checkPastDayFeed(this.VERIFIED_OPPORTUNITY, opportunity);
     // If there's a recentFeed, then update it instead with this user's info and return.
     if (recentFeedID) {
       this._updateVerifiedOpportunity(user, recentFeedID);

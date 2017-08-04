@@ -9,7 +9,6 @@ import { ROLE } from '../role/Role';
 import { Semesters } from '../semester/SemesterCollection.js';
 import { Users } from '../user/UserCollection';
 
-
 /** @module api/verification/VerificationRequestCollection */
 
 /**
@@ -64,11 +63,12 @@ class VerificationRequestCollection extends BaseCollection {
    * or if verified is not a boolean.
    * @returns The newly created docID.
    */
-  define({ student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [],
-           semester, opportunity }) {
+  define({
+    student, opportunityInstance, submittedOn = moment().toDate(), status = this.OPEN, processed = [],
+    semester, opportunity }) {
     const studentID = Users.getID(student);
     const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance) :
-        OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
+      OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
     if (!oppInstance) {
       throw new Meteor.Error('Could not find the opportunity instance to associate with this verification request');
     }
@@ -99,10 +99,6 @@ class VerificationRequestCollection extends BaseCollection {
    */
   findVerificationRequest(opportunityInstanceID) {
     const result = this._collection.findOne({ opportunityInstanceID });
-    // if (result) {
-    //   return result._id;
-    // }
-    // return result;
     return result && result._id;
   }
 
@@ -118,26 +114,26 @@ class VerificationRequestCollection extends BaseCollection {
 
   /**
    * Returns the Opportunity associated with the VerificationRequest with the given instanceID.
-   * @param instanceID The id of the VerificationRequest.
+   * @param verificationRequestID The id of the VerificationRequest.
    * @returns {Object} The associated Opportunity.
    * @throws {Meteor.Error} If instanceID is not a valid ID.
    */
-  getOpportunityDoc(instanceID) {
-    this.assertDefined(instanceID);
-    const instance = this._collection.findOne({ _id: instanceID });
+  getOpportunityDoc(verificationRequestID) {
+    this.assertDefined(verificationRequestID);
+    const instance = this._collection.findOne({ _id: verificationRequestID });
     const opportunity = OpportunityInstances.getOpportunityDoc(instance.opportunityInstanceID);
     return opportunity;
   }
 
   /**
    * Returns the Opportunity associated with the VerificationRequest with the given instanceID.
-   * @param instanceID The id of the VerificationRequest.
+   * @param verificationRequestID The id of the VerificationRequest.
    * @returns {Object} The associated Opportunity.
    * @throws {Meteor.Error} If instanceID is not a valid ID.
    */
-  getOpportunityInstanceDoc(instanceID) {
-    this.assertDefined(instanceID);
-    const instance = this._collection.findOne({ _id: instanceID });
+  getOpportunityInstanceDoc(verificationRequestID) {
+    this.assertDefined(verificationRequestID);
+    const instance = this._collection.findOne({ _id: verificationRequestID });
     return OpportunityInstances.findDoc(instance.opportunityInstanceID);
   }
 
@@ -214,12 +210,29 @@ class VerificationRequestCollection extends BaseCollection {
    */
   setVerified(verificationRequestID, verifyingUser) {
     this.assertDefined(verificationRequestID);
-    const verifierID = Users.getID(verifyingUser);
-    const verifier = Users.getProfile(verifierID).username;
+    const userID = Users.getID(verifyingUser);
+    const verifier = Users.getProfile(userID).username;
     const date = new Date();
     const status = this.ACCEPTED;
     const processed = [{ date, status, verifier }];
     this._collection.update(verificationRequestID, { $set: { status, processed } });
+  }
+
+  /**
+   * Sets the verification status of the passed VerificationRequest.
+   * @param verificationRequestID The ID of the verification request.
+   * @param verifyingUser The user who is doing the verification.
+   * @param status The status (ACCEPTED, REJECTED, OPEN).
+   * @param feedback An optional feedback string.
+   * @throws { Meteor.Error } If the verification request or user is not defined.
+   */
+  setVerificationStatus(verificationRequestID, verifyingUser, status, feedback) {
+    this.assertDefined(verificationRequestID);
+    const userID = Users.getID(verifyingUser);
+    const verifier = Users.getProfile(userID).username;
+    const date = new Date();
+    const processRecord = { date, status, verifier, feedback };
+    this._collection.update(verificationRequestID, { $set: { status }, $push: { processed: processRecord } });
   }
 
   /**

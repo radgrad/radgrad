@@ -13,17 +13,21 @@ import { ROLE } from '../role/Role';
 
 /**
  * The ValidatedMethod for updating the status of VerificationRequests.
+ * Passed an object with fields:
+ * id: the verificationRequestID
+ * status: boolean
+ * processed: a project object.
  */
 export const verificationRequestsUpdateStatusMethod = new ValidatedMethod({
   name: 'VerificationRequests.updateStatus',
   validate: null,
+  mixins: [CallPromiseMixin],
   run(update) {
     // Verify that currently logged in user is an admin, advisor, or faculty. otherwise no update can occur.
     VerificationRequests._assertRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]);
     return VerificationRequests.updateStatus(update.id, update.status, update.processed);
   },
 });
-
 
 /**
  * Returns the opportunityInstanceID associated with the student and opportunity, or null if not found.
@@ -41,7 +45,7 @@ function getOpportunityInstanceID(student, opportunity, semester) {
 }
 
 /**
- * This Meteor Method processes a request to verify an opportunity for a given user in the Admin Verify Event page.
+ * This Meteor Method processes a request to verify an opportunity for a given user from the VerificationEvent page.
  * The method is passed a student, opportunity, and semester, which should normally be valid.
  * Processing this request involves the following:
  *   * If the student does not have an Opportunity Instance for this opportunity and semester, then one is created
@@ -52,7 +56,7 @@ function getOpportunityInstanceID(student, opportunity, semester) {
  *   * Once the OpportunityInstance and VerificationRequest exist, then they are updated to indicate that they have
  *     been verified if they are not already verified.
  *   * A status string is returned to the caller to indicate the result of processing.
- * Only admins and advisors can perform this action.
+ * Only faculty, advisors, and admins can invoke this method.
  */
 export const processVerificationEventMethod = new ValidatedMethod({
   name: 'VerificationRequests.processVerificationEvent',
@@ -94,5 +98,56 @@ export const processVerificationEventMethod = new ValidatedMethod({
     Feeds.define({ feedType: Feeds.VERIFIED_OPPORTUNITY, user: student, opportunity, semester });
 
     return resultMessage;
+  },
+});
+
+/**
+ * This Meteor Method processes a command from the Pending Verification Request widget.
+ * The method is passed a verificationRequestID, a command (ACCEPTED or REJECTED), and an optional feedback string.
+ * The method returns a string indicating what happened.
+ * Processing this request involves the following:
+ *
+ *   * Make sure user is a faculty, advisor, or admin. Otherwise throw error.
+ *   * If verificationRequestID is not a valid ID, then throw error.
+ *   * If command is not VerificationRequests.ACCEPTED or VerificationRequests.REJECTED, then returns an error string.
+ *   * Creates a process object to record this command.
+ *   * Updates the VerificationRequest with the new process object and the new status.
+ *   * Creates a new Feed instance only if the request was accepted.
+ *
+ * Only faculty, advisors, and admins can invoke this method.
+ */
+export const processPendingVerificationMethod = new ValidatedMethod({
+  name: 'VerificationRequests.processPendingVerification',
+  validate: null,
+  mixins: [CallPromiseMixin],
+  run({ verificationRequestID, command, feedback }) {
+    // Verify that currently logged in user is an admin, advisor, or faculty. otherwise no verification can occur.
+    VerificationRequests._assertRole(Meteor.userId(), [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]);
+
+    // Verify that the ID is valid.
+    const requestDoc = VerificationRequests.findDoc(verificationRequestID);
+
+    // Verify that the command is VerificationRequests.ACCEPTED or REJECTED.
+    if ((command !== VerificationRequests.ACCEPTED) && (command !== VerificationRequests.REJECTED)) {
+      throw new Meteor.Error(`VerificationRequest command is invalid: ${command}`);
+    }
+
+    // Update the opportunityInstance corresponding to this verification request.
+    const verified = (command === VerificationRequests.ACCEPTED);
+    OpportunityInstances.update(requestDoc.opportunityInstanceID, { verified });
+
+    // Update the verification request.
+    VerificationRequests.setVerificationStatus(verificationRequestID, Meteor.userId(), command, feedback);
+
+    // Create a feed entry only if it was verified
+    const student = Users.getProfile(requestDoc.studentID).username;
+    if (verified) {
+      const opportunityInstanceID = requestDoc.opportunityInstanceID;
+      const opportunity = OpportunityInstances.getOpportunityDoc(opportunityInstanceID)._id;
+      const semesterDoc = OpportunityInstances.getSemesterDoc(opportunityInstanceID);
+      const semester = `${semesterDoc.term}-${semesterDoc.year}`;
+      Feeds.define({ feedType: Feeds.VERIFIED_OPPORTUNITY, user: student, opportunity, semester });
+    }
+    return `Verification request for ${student} was processed`;
   },
 });
