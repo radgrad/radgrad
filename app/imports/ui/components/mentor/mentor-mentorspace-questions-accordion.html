@@ -1,4 +1,4 @@
-<template name="Student_MentorSpace_Questions_Accordion">
+<template name="Mentor_MentorSpace_Questions_Accordion">
   <div class="ui segments">
     <div class="ui segment">
       <div class="ui vertical accordion">
@@ -28,5 +28,10 @@
         </div>
       </div>
     </div>
+    {{#if answered questionID}}
+      <div id="{{questionID}}" class="ui bottom attached basic green button answer">Edit your answer</div>
+    {{else}}
+      <div id="{{questionID}}" class="ui bottom attached basic green button answer">Answer this question</div>
+    {{/if}}
   </div>
 </template>
