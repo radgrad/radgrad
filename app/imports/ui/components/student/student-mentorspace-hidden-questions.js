@@ -1,20 +1,9 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-Template.Student_MentorSpace_Hidden_Questions.onCreated(function studentMentorSpaceHiddenQuestionsOnCreated() {
-  this.setDefaultQuestion = new ReactiveVar(null);
-});
-
 Template.Student_MentorSpace_Hidden_Questions.helpers({
-  defaultQuestion() {
-    if (Template.instance().setDefaultQuestion.get()) {
-      return MentorQuestions.findDoc(Template.instance().setDefaultQuestion.get()).question;
-    }
-    return '';
-  },
   moderated(question) {
     let color;
     let icon;
@@ -22,11 +11,12 @@ Template.Student_MentorSpace_Hidden_Questions.helpers({
     if (question.moderated === true) {
       color = 'negative';
       icon = 'yellow warning sign';
-      message = `Your question has been hidden because: ${question.moderatorComments}`;
+      const comments = question.moderatorComments ? `Moderator Comments: ${question.moderatorComments}` : '';
+      message = `Please delete and resubmit your question. ${comments}`;
     } else {
       color = 'warning';
       icon = 'green checkmark';
-      message = 'Your question has not yet been moderated.';
+      message = 'The following question is currently queued for review by a RadGrad moderator.';
     }
     return { color, icon, message };
   },
@@ -46,12 +36,6 @@ Template.Student_MentorSpace_Hidden_Questions.events({
       }
     });
   },
-  'click .edit': function (event) {
-    event.preventDefault();
-    const id = event.target.value;
-    Template.instance().setDefaultQuestion.set(id);
-  },
-
 });
 
 Template.Student_MentorSpace_Hidden_Questions.onRendered(function studentMentorSpaceHiddenQuestionsOnRendered() {

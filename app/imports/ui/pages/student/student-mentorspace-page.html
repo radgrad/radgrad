@@ -13,12 +13,14 @@
           </div>
           {{> Student_MentorSpace_Question_Form}}
         </div>
-        <div class="ui center aligned segment">
-          <div class="ui dividing header">
-            <h4 style="text-align: left;">YOUR SUBMITTED QUESTIONS</h4>
+        {{#if submittedQuestions}}
+          <div class="ui segment">
+            <div class="ui dividing header">
+              <h4 style="text-align: left;">YOUR SUBMITTED QUESTIONS</h4>
+            </div>
+            {{> Student_MentorSpace_Hidden_Questions }}
           </div>
-          {{> Student_MentorSpace_Hidden_Questions }}
-        </div>
+        {{/if}}
       </div>
 
       <div class="five wide column">
