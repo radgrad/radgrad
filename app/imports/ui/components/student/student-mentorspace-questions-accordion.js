@@ -12,10 +12,6 @@ Template.Student_MentorSpace_Questions_Accordion.onCreated(function studentMento
   }
 });
 
-Template.Student_MentorSpace_Questions_Accordion.onRendered(function studentMentorSpaceQuestionsAccordionOnRendered() {
-  this.$('.ui.accordion').accordion({ exclusive: false, active: false });
-});
-
 Template.Student_MentorSpace_Questions_Accordion.helpers({
   answerCount(questionID) {
     return MentorAnswers.getAnswers(questionID).count();
@@ -52,4 +48,8 @@ Template.Student_MentorSpace_Questions_Accordion.events({
     const questionID = event.target.id;
     instance.answering.set(questionID);
   },
+});
+
+Template.Student_MentorSpace_Questions_Accordion.onRendered(function studentMentorSpaceQuestionsAccordionOnRendered() {
+  this.$('.ui.accordion').accordion();
 });

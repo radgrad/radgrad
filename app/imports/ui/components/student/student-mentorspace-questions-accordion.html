@@ -3,23 +3,19 @@
     <div class="ui segment">
       <div class="ui vertical accordion">
 
-        <div class="active title">
+        <div class="title">
           <div class="ui list">
             <div class="item">
               <i class="dropdown icon"></i>
               {{title}}
               <div class="right floated content">
-                {{answerCount (questionID)}} {{#if isOneAnswer questionID}}answer
-              {{else}}
-                answers
-              {{/if}}
+                {{answerCount (questionID)}} {{#if isOneAnswer questionID}}answer{{else}}answers{{/if}}
               </div>
             </div>
           </div>
         </div>
 
-        <div class="active content">
-
+        <div class="content">
           {{#each listAnswers (questionID)}}
             <div class="ui divider"></div>
             <div class="author">

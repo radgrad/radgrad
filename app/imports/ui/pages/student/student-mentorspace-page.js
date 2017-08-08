@@ -5,21 +5,13 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 
 Template.Student_MentorSpace_Page.helpers({
-
   questionsList() {
     return MentorQuestions.find({ visible: true });
   },
-
   mentorsList() {
     return Users.findProfilesWithRole(ROLE.MENTOR);
   },
-
   mentorProfile(mentorID) {
     return MentorProfiles.getProfile(mentorID);
   },
-});
-
-Template.Student_MentorSpace_Page.onRendered(function mentorSpaceOnRendered() {
-  this.$('.ui.accordion').accordion('close', 0, { exclusive: false, collapsible: true, active: false });
-  this.$('.ui.dropdown').dropdown();
 });
