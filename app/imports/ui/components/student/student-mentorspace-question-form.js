@@ -12,7 +12,7 @@ Template.Student_MentorSpace_Question_Form.events({
     const student = getRouteUserName();
     const slug = `${student}${moment().format('YYYYMMDDHHmmssSSSSS')}`;
     const mentorQuestion = { question, slug, student };
-    defineMethod.call({ collectionName, definitionData: mentorQuestion }, (error, result) => {
+    defineMethod.call({ collectionName, definitionData: mentorQuestion }, () => {
       // console.log('define Mentor Question', error, result);
       event.target.reset();
     });
