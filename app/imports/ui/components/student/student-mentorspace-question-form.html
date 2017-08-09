@@ -1,18 +1,8 @@
 <template name="Student_MentorSpace_Question_Form">
-  <form class="ui form mentorspace-question-form {{ successClass }} {{ errorClass }}">
-
+  <form class="ui form mentorspace-question-form">
     <div class="field">
-      <textarea rows="5" name="msquestion" id="msquestion" value="{{defaultQuestion}}"></textarea>
+      <textarea rows="5" name="msQuestion"></textarea>
     </div>
-
     <button class="ui basic green button" type="submit">Submit</button>
-
-    {{#if displaySuccessMessage}}
-      <div class="ui success message">
-        <p>Your question has been submitted to moderation.</p>
-      </div>
-    {{/if}}
-
   </form>
-  {{> Student_MentorSpace_Hidden_Questions }}
 </template>

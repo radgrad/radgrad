@@ -102,8 +102,8 @@ class MentorQuestionCollection extends BaseSlugCollection {
   }
 
   /**
-   * Returns an empty array (no integrity checking done on this collection.)
-   * @returns {Array} An empty array.
+   * Checks to see that slugID and studentID are defined.
+   * @returns {Array} An array of error message(s) if either are not defined.
    */
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     const problems = [];
