@@ -22,7 +22,8 @@
               <img style="margin-bottom: 0;" class="ui left floated mini image" src="{{picture (mentorID)}}">
               <a href="{{pathFor usersRouteName username=routeUserName
                                  explorerUserName=(userUsername mentorID)}}">{{mentorName (mentorID)}}</a> answered:
-              <br> &nbsp;{{text}}
+              <br> &nbsp;
+              {{#markdown}}{{text}}{{/markdown}}
             </div>
           {{/each}}
         </div>

@@ -1,18 +1,25 @@
 <template name="Mentor_MentorSpace_Answer_Form">
-  <form class="ui form mentorspace-answer-form {{ successClass }} {{ errorClass }}">
+  <div class="ui segment">
+    <div class="ui vertical accordion">
 
-    <div class="field">
-      <textarea rows="5" name="msanswer" id="msanswer" value="{{existingAnswer}}"></textarea>
-    </div>
-
-    <button class="ui basic green button" type="submit">Submit Answer</button>
-    <button class="ui green basic button cancel" type="submit">Cancel</button>
-
-    {{#if displaySuccessMessage}}
-      <div class="ui success message">
-        <p>Your answer has been submitted!</p>
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Add or update your answer (markdown supported)
       </div>
-    {{/if}}
 
-  </form>
+      <div class="content">
+        <form class="ui form mentorspace-answer-form">
+
+          <div class="field">
+            <textarea rows="10" name="msanswer" id="msanswer" value="{{existingAnswer}}"></textarea>
+          </div>
+
+          <button class="ui basic green button" type="submit">Submit</button>
+          {{#if existingAnswer}}
+            <button class="ui basic red button delete" type="submit">Delete</button>
+          {{/if}}
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
