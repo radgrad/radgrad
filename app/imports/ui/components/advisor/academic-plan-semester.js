@@ -121,7 +121,7 @@ Template.Academic_Plan_Semester.helpers({
     return planChoiceUtils.isSingleChoice(course) && !planChoiceUtils.isXXChoice(course);
   },
   choiceLabel(course) {
-    return PlanChoices.toStringFromSlug(course);
+    return course && PlanChoices.toStringFromSlug(course);
   },
   choices(course) {
     return course && planChoiceUtils.complexChoiceToArray(course);
