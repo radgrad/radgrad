@@ -192,7 +192,8 @@ export class FeedbackFunctionClass {
     const coursesTakenSlugs = [];
     const studentProfile = Users.getProfile(user);
     const courseIDs = StudentProfiles.getCourseIDs(user);
-    const academicPlan = studentProfile.academicPlanID;
+    const academicPlanID = studentProfile.academicPlanID;
+    const academicPlan = AcademicPlans.findDoc(academicPlanID);
     const coursesNeeded = academicPlan.courseList.slice(0);
     _.forEach(courseIDs, (cID) => {
       const course = Courses.findDoc(cID);
