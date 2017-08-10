@@ -27,11 +27,11 @@ class OpportunityInstanceCollection extends BaseCollection {
       opportunityID: { type: SimpleSchema.RegEx.Id },
       verified: { type: Boolean },
       studentID: { type: SimpleSchema.RegEx.Id },
+      sponsorID: { type: SimpleSchema.RegEx.Id },
       ice: { type: Object, optional: true, blackbox: true },
     }));
     this.publicationNames = {
       student: this._collectionName,
-      publicPublish: `${this._collectionName}.Public`,
       perStudentAndSemester: `${this._collectionName}.PerStudentAndSemester`,
       studentID: `${this._collectionName}.studentID`,
     };
@@ -46,20 +46,29 @@ class OpportunityInstanceCollection extends BaseCollection {
    * OpportunityInstances.define({ semester: 'Fall-2015',
    *                               opportunity: 'hack2015',
    *                               verified: false,
-   *                               student: 'joesmith' });
+   *                               student: 'joesmith',
+    *                              sponsor: 'johnson' });
    * @param { Object } description Semester, opportunity, and student must be slugs or IDs. Verified defaults to false.
+   * Sponsor defaults to the opportunity sponsor.
    * Note that only one opportunity instance can be defined for a given semester, opportunity, and student.
    * @throws {Meteor.Error} If semester, opportunity, or student cannot be resolved, or if verified is not a boolean.
    * @returns The newly created docID.
    */
 
-  define({ semester, opportunity, verified = false, student }) {
+  define({ semester, opportunity, sponsor = undefined, verified = false, student }) {
     // Validate semester, opportunity, verified, and studentID
     const semesterID = Semesters.getID(semester);
     const semesterDoc = Semesters.findDoc(semesterID);
     const studentID = Users.getID(student);
     const studentProfile = Users.getProfile(studentID);
     const opportunityID = Opportunities.getID(opportunity);
+    const op = Opportunities.findDoc(opportunityID);
+    let sponsorID;
+    if (_.isUndefined(sponsor)) {
+      sponsorID = op.sponsorID;
+    } else {
+      sponsorID = Users.getID(sponsor);
+    }
     if (semesterDoc.term === Semesters.SPRING || semesterDoc.term === Semesters.SUMMER) {
       AcademicYearInstances.define({ year: semesterDoc.year - 1, student: studentProfile.username });
     } else {
@@ -73,7 +82,13 @@ class OpportunityInstanceCollection extends BaseCollection {
     }
     const ice = Opportunities.findDoc(opportunityID).ice;
     // Define and return the new OpportunityInstance
-    const opportunityInstanceID = this._collection.insert({ semesterID, opportunityID, verified, studentID, ice });
+    const opportunityInstanceID = this._collection.insert({ semesterID,
+      opportunityID,
+      verified,
+      studentID,
+      sponsorID,
+      ice,
+    });
     return opportunityInstanceID;
   }
 
@@ -201,18 +216,12 @@ class OpportunityInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this.publicationNames.student, function publish() {
-        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR,
-          ROLE.FACULTY, ROLE.STUDENT])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
+        } else if (Roles.userIsInRole(this.userId, [ROLE.STUDENT])) {
+          return instance._collection.find({ studentID: this.userId });
         }
-        return instance._collection.find({ studentID: this.userId });
-      });
-      Meteor.publish(this.publicationNames.publicPublish, function publicPublish(opportunityID) {  // eslint-disable-line
-        // check the opportunityID.
-        new SimpleSchema({
-          opportunityID: { type: String },
-        }).validate({ opportunityID });
-        return instance._collection.find({ opportunityID }, { fields: { studentID: 1, semesterID: 1 } });
+        return instance._collection.find({ sponsorID: this.userId });
       });
       Meteor.publish(this.publicationNames.perStudentAndSemester,
           function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
@@ -285,6 +294,9 @@ class OpportunityInstanceCollection extends BaseCollection {
       if (!Users.isDefined(doc.studentID)) {
         problems.push(`Bad studentID: ${doc.studentID}`);
       }
+      if (!Users.isDefined(doc.sponsorID)) {
+        problems.push(`Bad sponsorID: ${doc.sponsorID}`);
+      }
     });
     return problems;
   }
@@ -300,7 +312,8 @@ class OpportunityInstanceCollection extends BaseCollection {
     const opportunity = Opportunities.findSlugByID(doc.opportunityID);
     const verified = doc.verified;
     const student = Users.getProfile(doc.studentID).username;
-    return { semester, opportunity, verified, student };
+    const sponsor = Users.getProfile(doc.sponsorID).username;
+    return { semester, opportunity, verified, student, sponsor };
   }
 }
 
