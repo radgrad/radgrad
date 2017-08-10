@@ -20,19 +20,19 @@
         {{/if}}
       </div>
     </div>
-    <div class="content">
       {{#if isMentor}}
-        {{> User_Answers_Component userID=userID}}
-      {{/if}}
-      {{#if or isStudent isAlumni}}
-        {{> User_Course_Component userID=userID}}
-      {{/if}}
-    </div>
-    {{#if or isStudent isAlumni}}
       <div class="content">
-        {{> User_Opportunity_Component userID=userID}}
+        {{> User_Answers_Component userID=userID}}
       </div>
-    {{/if}}
+      {{/if}}
+      <!--{{#if or isStudent isAlumni}}-->
+        <!--{{> User_Course_Component userID=userID}}-->
+      <!--{{/if}}-->
+    <!--{{#if or isStudent isAlumni}}-->
+      <!--<div class="content">-->
+        <!--{{> User_Opportunity_Component userID=userID}}-->
+      <!--</div>-->
+    <!--{{/if}}-->
     <div class="extra content">
       {{> User_Career_Goals_Component labelSize='mini' userID=userID}}
       {{> User_Interests_Component labelSize='mini' userID=userID}}

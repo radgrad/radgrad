@@ -17,34 +17,18 @@
 
       <div class="ui divider" style="margin-top: 0;"></div>
 
-      <div class="ui stackable grid">
-        <div class="column">
-          {{#each descriptionPair in descriptionPairs}}
-            {{#if descriptionPair.value }}
-              <p><b>{{descriptionPair.label}}:</b> {{{markdownify descriptionPair.value}}}</p>
-            {{else}}
-              <p><b>{{descriptionPair.label}}:</b> N/A</p>
-            {{/if}}
-          {{/each}}
-        </div>
-      </div>
+      <!--<div class="ui stackable grid">-->
+        <!--<div class="column">-->
+          <!--{{#each descriptionPair in descriptionPairs}}-->
+            <!--{{#if descriptionPair.value }}-->
+              <!--<p><b>{{descriptionPair.label}}:</b> {{{markdownify descriptionPair.value}}}</p>-->
+            <!--{{else}}-->
+              <!--<p><b>{{descriptionPair.label}}:</b> N/A</p>-->
+            <!--{{/if}}-->
+          <!--{{/each}}-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
 
-    <div class="ui horizontal segments" style="background-color: white;">
-      {{#each socialPair in socialPairs}}
-        <div class="ui center aligned segment">
-          <h5>{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h5>
-
-          <div class="ui circular mini bordered images" style="overflow: visible;">
-            {{#each user in socialPair.value}}
-              <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername user)}}"
-                 data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;"
-                                                                                   class="ui image" src={{userPicture
-                    user}}></a>
-            {{/each}}
-          </div>
-        </div>
-      {{/each}}
-    </div>
   </div>
 </template>

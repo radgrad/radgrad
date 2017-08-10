@@ -103,30 +103,11 @@
     </div>
   </div>
 
-  <div class="ui stackable two column grid">
-    <div class="ten wide column">
+  <div class="ui stackable column grid">
+    <div class="sixteen wide column">
       <div class="ui padded segment">
         {{> Student_Explorer_Review_Widget event=item userReview=review completed=completed reviewType='opportunity'}}
       </div>
-    </div>
-
-    <div class="six wide column">
-      {{#each socialPair in socialPairs}}
-        <div class="ui padded center aligned segment">
-          <div class="ui dividing header">
-            <h4>{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
-          </div>
-
-          <div class="ui circular mini bordered images" style="overflow: visible;">
-            {{#each user in socialPair.value}}
-              <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername user)}}"
-                 data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;"
-                                                                                   class="ui image" src={{userPicture
-                    user}}></a>
-            {{/each}}
-          </div>
-        </div>
-      {{/each}}
     </div>
   </div>
 
