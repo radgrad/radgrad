@@ -302,6 +302,7 @@ class UserCollection {
   findProfilesWithRole(role, selector, options) {
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
     if (role === ROLE.STUDENT) {
+      theSelector.isAlumni = false;
       return StudentProfiles.find(theSelector, options).fetch();
     }
     if (role === ROLE.ALUMNI) {
