@@ -38,7 +38,6 @@ class CourseInstanceCollection extends BaseCollection {
       'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W'];
     this.publicationNames = {
       student: this._collectionName,
-      publicPublish: `${this._collectionName}.Public`,
       perStudentAndSemester: `${this._collectionName}.PerStudentAndSemester`,
       publicStudent: `${this._collectionName}.PublicStudent`,
       publicSlugStudent: `${this._collectionName}.PublicSlugStudent`,
@@ -285,14 +284,6 @@ class CourseInstanceCollection extends BaseCollection {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
-      });
-      Meteor.publish(this.publicationNames.publicPublish, function publicPublish(courseID) {  // eslint-disable-line
-        // check the courseID.
-        new SimpleSchema({
-          courseID: { type: String },
-        }).validate({ courseID });
-
-        return instance._collection.find({ courseID }, { fields: { studentID: 1, semesterID: 1, courseID: 1 } });
       });
       Meteor.publish(this.publicationNames.perStudentAndSemester,
           function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line

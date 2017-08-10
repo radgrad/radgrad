@@ -621,6 +621,20 @@
             "information-security-analyst",
             "teacher"
           ]
+        },
+        {
+          "username": "cmoore@hawaii.edu",
+          "firstName": "Cam",
+          "lastName": "Moore",
+          "picture": "/images/mockup/cmoore.jpg",
+          "website": null,
+          "interests": [
+            "research",
+            "software-engineering"
+          ],
+          "careerGoals": [
+            "devops-engineer"
+          ]
         }
       ]
     },
@@ -8552,26 +8566,6 @@
           "level": 6,
           "academicPlan": "bs-cs-2016",
           "declaredSemester": "Spring-2016",
-          "hiddenCourses": [],
-          "hiddenOpportunities": [],
-          "isAlumni": false
-        },
-        {
-          "username": "cmoore@hawaii.edu",
-          "firstName": "Cam",
-          "lastName": "Moore",
-          "picture": "/images/mockup/cmoore.jpg",
-          "website": null,
-          "interests": [
-            "research",
-            "software-engineering"
-          ],
-          "careerGoals": [
-            "devops-engineer"
-          ],
-          "level": 1,
-          "academicPlan": "bs-cs-2017",
-          "declaredSemester": "Fall-2017",
           "hiddenCourses": [],
           "hiddenOpportunities": [],
           "isAlumni": false

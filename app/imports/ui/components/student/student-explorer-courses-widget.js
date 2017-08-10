@@ -10,12 +10,6 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 
-Template.Student_Explorer_Courses_Widget.onCreated(function studentExplorerCoursesWidgetOnCreated() {
-  this.autorun(() => {
-    // this.subscribe(CourseInstances.publicationNames.publicPublish, this.data.item._id);
-  });
-});
-
 Template.Student_Explorer_Courses_Widget.helpers({
   color(table) {
     if (table.length === 0) {
