@@ -69,6 +69,6 @@ Template.Student_Explorer_Review_Widget.helpers({
     return RouteNames.mentorExplorerUsersPageRouteName;
   },
   userUsername(user) {
-    return Users.getProfile(user).username;
+    return user && Users.getProfile(user).username;
   },
 });
