@@ -21,6 +21,7 @@
     "meteor/template-names": "off",
     "prefer-arrow-callback": "off",
     "arrow-parens": "off",
+    "no-plusplus": "off",
     "func-names": "off",
     "linebreak-style": "off",
     "object-property-newline": "off",
