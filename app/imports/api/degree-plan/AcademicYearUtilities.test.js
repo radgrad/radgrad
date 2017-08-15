@@ -21,7 +21,7 @@ if (Meteor.isServer) {
 
     it('#getStudentsCurrentSemesterNumber.', function test() {
       const profile = Users.getProfile('abi@hawaii.edu');
-      expect(utilities.getStudentsCurrentSemesterNumber(profile.userID)).to.equal(9);
+      expect(utilities.getStudentsCurrentSemesterNumber(profile.userID)).to.equal(10);
     });
     it('#getStudentSemesters.', function test() {
       const profile = Users.getProfile('abi@hawaii.edu');

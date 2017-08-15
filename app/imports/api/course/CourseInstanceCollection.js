@@ -389,8 +389,9 @@ class CourseInstanceCollection extends BaseCollection {
     const verified = doc.verified;
     const creditHrs = doc.creditHrs;
     const grade = doc.grade;
+    const fromSTAR = doc.fromSTAR;
     const student = Users.getProfile(doc.studentID).username;
-    return { semester, course, note, verified, creditHrs, grade, student };
+    return { semester, course, note, verified, fromSTAR, creditHrs, grade, student };
   }
 }
 
