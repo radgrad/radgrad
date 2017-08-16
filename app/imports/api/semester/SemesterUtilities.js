@@ -29,13 +29,13 @@ export function defineSemesters() {
 }
 
 /**
- * Returns the next semester given a semester.
- * @param semester the semester.
- * @returns {*}
+ * Returns the next semester document given a semester document.
+ * @param semesterDoc the semester doc.
+ * @returns The next semester doc.
  */
-export function nextSemester(semester) {
-  const currentTerm = semester.term;
-  const currentYear = semester.year;
+export function nextSemester(semesterDoc) {
+  const currentTerm = semesterDoc.term;
+  const currentYear = semesterDoc.year;
   let term;
   let year = currentYear;
   if (currentTerm === Semesters.FALL) {
@@ -51,9 +51,9 @@ export function nextSemester(semester) {
 }
 
 /**
- * Returns the next Fall or Spring semester. Skips over Summer semesters.
- * @param semester the semester
- * @returns {undefined}
+ * Returns the next Fall or Spring semester doc. Skips over Summer semesters.
+ * @param semester the semester doc.
+ * @returns The next semester doc (excluding summer).
  */
 export function nextFallSpringSemester(semester) {
   let next = nextSemester(semester);

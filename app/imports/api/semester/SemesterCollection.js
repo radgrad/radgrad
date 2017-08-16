@@ -78,11 +78,12 @@ class SemesterCollection extends BaseSlugCollection {
     const yearDiff = year - 2010;
     if (term === this.SPRING) {
       semesterNumber = (3 * yearDiff) - 2;
-    } else if (term === this.SUMMER) {
-      semesterNumber = (3 * yearDiff) - 1;
-    } else {
-      semesterNumber = 3 * yearDiff;
-    }
+    } else
+      if (term === this.SUMMER) {
+        semesterNumber = (3 * yearDiff) - 1;
+      } else {
+        semesterNumber = 3 * yearDiff;
+      }
 
     // Determine what the slug looks like.
     const slug = `${term}-${year}`;
@@ -214,6 +215,18 @@ class SemesterCollection extends BaseSlugCollection {
     this.assertSemester(semesterID);
     const semesterDoc = this.findDoc(semesterID);
     return (nospace) ? `${semesterDoc.term}${semesterDoc.year}` : `${semesterDoc.term} ${semesterDoc.year}`;
+  }
+
+  /**
+   * Returns a four character "shortname" for a semester and year: Fa18, Sp19, Su20
+   * @param semesterID The semester
+   * @returns {string} The shortname.
+   */
+  getShortName(semesterID) {
+    this.assertSemester(semesterID);
+    const semesterDoc = this.findDoc(semesterID);
+    const yearString = `${semesterDoc.year}`;
+    return `${semesterDoc.term.substring(0, 2)}${yearString.substring(2, 4)}`;
   }
 
   /**
