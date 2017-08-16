@@ -73,6 +73,11 @@ if (Meteor.isServer) {
       expect(Semesters.getID('Summer-2040')).to.be.truthy;
       expect(function foo() { Semesters.getID('foobar'); }).to.throw(Error);
     });
+
+    it('#getShortName', function test() {
+      const semesterID = Semesters.getID('Summer-2010');
+      expect(Semesters.getShortName(semesterID)).to.equal('Su10');
+    });
   });
 }
 

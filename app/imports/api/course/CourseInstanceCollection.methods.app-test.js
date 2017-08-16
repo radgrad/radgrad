@@ -46,5 +46,6 @@ if (Meteor.isClient) {
       const instance = CourseInstances.findCourseInstanceDoc(semester, course, student)._id;
       await removeItMethod.callPromise({ collectionName, instance });
     });
+
   });
 }

@@ -1,6 +1,10 @@
 import { Meteor } from 'meteor/meteor';
+import { expect } from 'chai';
 import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
+import { getFutureEnrollmentMethod } from './CourseCollection.methods';
 import { Courses } from './CourseCollection';
+import { Semesters } from '../semester/SemesterCollection';
+import { nextSemester } from '../semester/SemesterUtilities';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
@@ -22,7 +26,7 @@ if (Meteor.isClient) {
     };
 
     before(function (done) {
-      defineTestFixturesMethod.call(['minimal'], done);
+      defineTestFixturesMethod.call(['minimal', 'abi'], done);
     });
 
     it('Define Method', async function () {
@@ -41,6 +45,27 @@ if (Meteor.isClient) {
         collectionName,
         updateData: { id, name, description, interests, prerequisites },
       });
+    });
+
+    it('getFutureEnrollment Methods', async function () {
+      const id = Courses.findIdBySlug(definitionData.slug);
+      const enrollmentData = await getFutureEnrollmentMethod.callPromise(id);
+      expect(enrollmentData[0][1]).to.equal(0);
+
+      // Now make a course instance for next semester
+      const semester = Semesters.getSlug(nextSemester(Semesters.getCurrentSemesterDoc())._id);
+      const student = 'abi@hawaii.edu';
+      const course = 'ics_111';
+      const definitionData = {
+        semester,
+        course,
+        student,
+        verified: true,
+        fromSTAR: true,
+        grade: 'B',
+        note: '',
+        creditHrs: 3,
+      };
     });
 
     it('Remove Method', async function () {
