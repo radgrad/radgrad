@@ -25,6 +25,7 @@ class SemesterCollection extends BaseSlugCollection {
     this.SPRING = 'Spring';
     this.SUMMER = 'Summer';
     this.FALL = 'Fall';
+    this.WINTER = 'Winter';
     this.terms = [this.SPRING, this.SUMMER, this.FALL];
     this.fallStart = parseInt(moment('08-15-2015', 'MM-DD-YYYY').format('DDD'), 10);
     this.springStart = parseInt(moment('01-01-2015', 'MM-DD-YYYY').format('DDD'), 10);

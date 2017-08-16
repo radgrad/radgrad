@@ -28,9 +28,9 @@ function processStudentStarCsvData(advisor, student, csvData) {
   // console.log('create new instances');
   const departments = {};
   _.forEach(definitions, (definition) => {
-    const semesterID = Semesters.findIdBySlug(definition.semester);
     // console.log('semesterID', semesterID);
     if (definition.course !== Courses.unInterestingSlug) {
+      const semesterID = Semesters.findIdBySlug(definition.semester);
       const department = getDepartment(definition.course);
       if (!(department in departments)) {
         departments[department] = 1;

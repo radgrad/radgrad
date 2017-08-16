@@ -4,6 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../semester/SemesterCollection';
 import { Courses } from '../course/CourseCollection';
 import { Slugs } from '../slug/SlugCollection';
+import { appLog } from '../log/AppLogCollection';
 
 /* global isNaN */
 
@@ -36,7 +37,12 @@ function findSemesterSlug(starDataObject) {
     case 'Fall':
       term = Semesters.FALL;
       break;
+    case 'Winter':
+      appLog.info(`Got Winter semester term setting it to ${Semesters.FALL}`);
+      term = Semesters.FALL; // TODO Not sure it this is right thing to do.
+      break;
     default:
+      appLog.warning(`Got unknown semester term ${semesterTokens[0]}`);
       throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);
   }
   let year = parseInt(semesterTokens[1], 10);
@@ -73,6 +79,7 @@ function makeCourseInstanceObject(starDataObject) {
     course: findCourseSlug(starDataObject),
     note: `${starDataObject.name} ${starDataObject.number}`,
     verified: true,
+    fromSTAR: true,
     creditHrs: starDataObject.credits,
     grade: starDataObject.grade,
     student: starDataObject.student,
