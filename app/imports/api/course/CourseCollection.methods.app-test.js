@@ -26,7 +26,7 @@ if (Meteor.isClient) {
     };
 
     before(function (done) {
-      defineTestFixturesMethod.call(['minimal', 'abi'], done);
+      defineTestFixturesMethod.call(['minimal', 'abi.student'], done);
     });
 
     it('Define Method', async function () {
@@ -48,15 +48,16 @@ if (Meteor.isClient) {
     });
 
     it('getFutureEnrollment Methods', async function () {
-      const id = Courses.findIdBySlug(definitionData.slug);
-      const enrollmentData = await getFutureEnrollmentMethod.callPromise(id);
+      // First, just call this expecting that there is no future enrollment data.
+      let id = Courses.findIdBySlug(definitionData.slug);
+      let enrollmentData = await getFutureEnrollmentMethod.callPromise(id);
       expect(enrollmentData[0][1]).to.equal(0);
 
       // Now make a course instance for next semester
       const semester = Semesters.getSlug(nextSemester(Semesters.getCurrentSemesterDoc())._id);
       const student = 'abi@hawaii.edu';
       const course = 'ics_111';
-      const definitionData = {
+      const courseInstanceDefinitionData = {
         semester,
         course,
         student,
@@ -66,6 +67,13 @@ if (Meteor.isClient) {
         note: '',
         creditHrs: 3,
       };
+      await defineMethod.callPromise({ collectionName: 'CourseInstanceCollection',
+        definitionData: courseInstanceDefinitionData });
+
+      // We'll now expect next semester to have enrollment of 1.
+      id = Courses.findIdBySlug('ics_111');
+      enrollmentData = await getFutureEnrollmentMethod.callPromise(id);
+      expect(enrollmentData[0][1]).to.equal(1);
     });
 
     it('Remove Method', async function () {
