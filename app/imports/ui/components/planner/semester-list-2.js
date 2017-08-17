@@ -13,6 +13,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import { appLog } from '../../../api/log/AppLogCollection';
+import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 
 // /** @module ui/components/planner/Semester_List */
 
@@ -85,6 +86,7 @@ Template.Semester_List_2.events({
     if (Template.instance().localState.get('semester')) {
       const id = event.originalEvent.dataTransfer.getData('text');
       const slug = event.originalEvent.dataTransfer.getData('slug');
+      const instance = Template.instance();
       if (slug) {
         const username = getRouteUserName();
         const semSlug = Slugs.getNameFromID(Template.instance().localState.get('semester').slugID);
@@ -103,15 +105,27 @@ Template.Semester_List_2.events({
           };
           const semesterID = Template.instance().localState.get('semester')._id;
           if (CourseInstances.find({ courseID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
-            defineMethod.call({ collectionName, definitionData }, (error) => {
+            defineMethod.call({ collectionName, definitionData }, (error, res) => {
               if (!error) {
                 FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                 FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                 FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                const ci = CourseInstances.findDoc(res);
+                instance.state.set(plannerKeys.detailCourse, null);
+                instance.state.set(plannerKeys.detailCourseInstance, ci);
+                instance.state.set(plannerKeys.detailICE, ci.ice);
                 const semesterName = Semesters.toString(semesterID);
                 // eslint-disable-next-line
                 const message = `${username} added ${course.number} ${course.shortName} (${semesterName}) to their Degree Plan.`;
                 appLog.info(message);
+                getFutureEnrollmentMethod.call(courseID, (err, result) => {
+                  if (err) {
+                    console.log('Error in getting future enrollment', error);
+                  } else
+                    if (courseID === result.courseID) {
+                      instance.state.set(plannerKeys.plannedEnrollment, result);
+                    }
+                });
               }
             });
           }
@@ -170,6 +184,14 @@ Template.Semester_List_2.events({
               const message = `${getRouteUserName()} moved ${course.number} ${course.shortName} to ${semesterName} in their Degree Plan.`;
               // console.log(message);
               appLog.info(message);
+              getFutureEnrollmentMethod.call(course._id, (err, result) => {
+                if (err) {
+                  console.log('Error in getting future enrollment', error);
+                } else
+                  if (course._id === result.courseID) {
+                    instance.state.set(plannerKeys.plannedEnrollment, result);
+                  }
+              });
             }
           });
         } else
@@ -222,6 +244,14 @@ Template.Semester_List_2.events({
         const semester = Semesters.toString(ci.semesterID);
         const message = `${getRouteUserName()} inspected ${ci.note} ${course.shortName} (${semester}).`;
         appLog.info(message);
+        getFutureEnrollmentMethod.call(ci.courseID, (error, result) => {
+          if (error) {
+            console.log('Error in getting future enrollment', error);
+          } else
+            if (course._id === result.courseID) {
+              template.state.set(plannerKeys.plannedEnrollment, result);
+            }
+        });
       } else
         if (Courses.isDefined(target.id)) {
           const course = Courses.findDoc(target.id);

@@ -9,6 +9,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { plannerKeys } from './academic-plan';
 import { getRouteUserName } from '../shared/route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
+import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 
 // /** @module ui/components/planner/Add_Course_Button */
 
@@ -41,11 +42,12 @@ Template.Add_Course_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
     const course = this.course;
-    const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
-    Template.instance().state.set(plannerKeys.detailCourse, course);
-    Template.instance().state.set(plannerKeys.detailCourseInstance, null);
-    Template.instance().state.set(plannerKeys.detailOpportunity, null);
-    Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
+    const instance = Template.instance();
+    const ci = instance.state.get(plannerKeys.detailCourseInstance);
+    instance.state.set(plannerKeys.detailCourse, course);
+    instance.state.set(plannerKeys.detailCourseInstance, null);
+    instance.state.set(plannerKeys.detailOpportunity, null);
+    instance.state.set(plannerKeys.detailOpportunityInstance, null);
     const collectionName = CourseInstances.getCollectionName();
     const semester = Semesters.toString(ci.semesterID);
     removeItMethod.call({ collectionName, instance: ci._id }, (error) => {
@@ -53,6 +55,14 @@ Template.Add_Course_Button.events({
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
         FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+        getFutureEnrollmentMethod.call(course._id, (err, result) => {
+          if (err) {
+            console.log('Error in getting future enrollment', err);
+          } else
+            if (course._id === result.courseID) {
+              instance.state.set(plannerKeys.plannedEnrollment, result);
+            }
+        });
       }
     });
     const message = `${getRouteUserName()} removed ${course.name} in ${semester} from their Degree Plan.`;
