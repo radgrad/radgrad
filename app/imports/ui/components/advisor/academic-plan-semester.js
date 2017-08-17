@@ -3,10 +3,12 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+import { Courses } from '../../../api/course/CourseCollection';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as planChoiceUtils from '../../../api/degree-plan/PlanChoiceUtilities';
+import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 
 // /** @module ui/components/advisor/Academic_Plan_Semester */
 
@@ -116,6 +118,11 @@ function checkIfPlanSlugIsSatisfied(takenCourseSlugs, planCourseSlugs, planSlug)
   return ret;
 }
 
+Template.Academic_Plan_Semester.onCreated(function academicPlanSemesterOnCreated() {
+  // console.log(this.data);
+  this.state = this.data.dictionary;
+});
+
 Template.Academic_Plan_Semester.helpers({
   canDrag(course) {
     return planChoiceUtils.isSingleChoice(course) && !planChoiceUtils.isXXChoice(course);
@@ -144,6 +151,30 @@ Template.Academic_Plan_Semester.helpers({
   },
   isSingleChoice(course) {
     return planChoiceUtils.isSingleChoice(course);
+  },
+});
+
+Template.Academic_Plan_Semester.events({
+  click: function click(event) {
+    event.preventDefault();
+    const slug = event.target.getAttribute('course-slug');
+    if (Slugs.isDefined(slug)) {
+      const courseID = Slugs.getEntityID(slug, 'Course');
+      const course = Courses.findDoc(courseID);
+      const instance = Template.instance();
+      instance.state.set('detailCourse', course);
+      instance.state.set('detailCourseInstance', null);
+      instance.state.set('detailOpportunity', null);
+      instance.state.set('detailOpportunityInstance', null);
+      getFutureEnrollmentMethod.call(courseID, (error, result) => {
+        if (error) {
+          console.log('Error in getting future enrollment', error);
+        } else
+          if (course._id === result.courseID) {
+            instance.state.set('plannedEnrollment', result);
+          }
+      });
+    }
   },
 });
 

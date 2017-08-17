@@ -12,12 +12,12 @@
                 {{#each year in years}}
                   <div class=" column academicYear" style="padding: 0 0.6rem;">
                     <div class="ui header">Fall</div>
-                    {{> Academic_Plan_Semester courses=(courses @index 0) plan=getPlan degreePlanner=degreePlanner}}
+                    {{> Academic_Plan_Semester courses=(courses @index 0) plan=getPlan degreePlanner=degreePlanner dictionary=dictionary}}
                     <div class="ui header">Spring</div>
-                    {{> Academic_Plan_Semester courses=(courses @index 1) plan=getPlan degreePlanner=degreePlanner}}
+                    {{> Academic_Plan_Semester courses=(courses @index 1) plan=getPlan degreePlanner=degreePlanner dictionary=dictionary}}
                     {{#if hasSummer @index}}
                       <div class="ui header">Summer</div>
-                      {{> Academic_Plan_Semester courses=(courses @index 2) plan=getPlan degreePlanner=degreePlanner}}
+                      {{> Academic_Plan_Semester courses=(courses @index 2) plan=getPlan degreePlanner=degreePlanner dictionary=dictionary}}
                     {{/if}}
                   </div>
                 {{/each}}
