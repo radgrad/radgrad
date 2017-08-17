@@ -50,8 +50,9 @@ if (Meteor.isClient) {
     it('getFutureEnrollment Methods', async function () {
       // First, just call this expecting that there is no future enrollment data.
       let id = Courses.findIdBySlug(definitionData.slug);
-      let enrollmentData = await getFutureEnrollmentMethod.callPromise(id);
-      expect(enrollmentData[0][1]).to.equal(0);
+      let data = await getFutureEnrollmentMethod.callPromise(id);
+      expect(data.courseID).to.equal(id);
+      expect(data.enrollmentData[0][1]).to.equal(0);
 
       // Now make a course instance for next semester
       const semester = Semesters.getSlug(nextSemester(Semesters.getCurrentSemesterDoc())._id);
@@ -72,8 +73,9 @@ if (Meteor.isClient) {
 
       // We'll now expect next semester to have enrollment of 1.
       id = Courses.findIdBySlug('ics_111');
-      enrollmentData = await getFutureEnrollmentMethod.callPromise(id);
-      expect(enrollmentData[0][1]).to.equal(1);
+      data = await getFutureEnrollmentMethod.callPromise(id);
+      expect(data.courseID).to.equal(id);
+      expect(data.enrollmentData[0][1]).to.equal(1);
     });
 
     it('Remove Method', async function () {

@@ -20,7 +20,16 @@ function getEnrollmentData(courseID, semesterID) {
 
 /**
  * Given a courseID, returns enrollment data for the upcoming 9 semesters.
- * The returned data is an array of arrays, with
+ * The returned data is an object with fields courseID and enrollmentData.
+ * CourseID is the course ID.
+ * EnrollmentData is an array of arrays. Each interior array is a tuple: a string containing the shortname and an
+ * integer indicating the enrollment data.
+ * @example
+ * { courseID: 'xghuyf2132q3',
+ *   enrollmentData: [['Sp19', 0], ['Su19', 1], ['Fa19', 5],
+ *                    ['Sp20', 25], ['Su20', 2], ['Fa20', 0],
+ *                    ['Sp21', 1], ['Su21', 0], ['Fa21', 1]]
+ * }
  */
 export const getFutureEnrollmentMethod = new ValidatedMethod({
   name: 'CourseCollection.getFutureEnrollment',
@@ -38,6 +47,6 @@ export const getFutureEnrollmentMethod = new ValidatedMethod({
     }
     // Map over these semesters and return a new list that includes the enrollment data for this course and semester.
     const enrollmentData = _.map(semesterList, doc => getEnrollmentData(courseID, Semesters.getID(doc)));
-    return enrollmentData;
+    return { courseID, enrollmentData };
   },
 });
