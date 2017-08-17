@@ -8,6 +8,9 @@ import './add-course-button.js';
 import './add-opportunity-button.html';
 import './add-opportunity-button.js';
 
+import './future-enrollment-widget.html';
+import './future-enrollment-widget';
+
 import './inspector.html';
 import './inspector.js';
 

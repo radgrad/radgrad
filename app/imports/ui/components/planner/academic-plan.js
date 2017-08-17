@@ -22,6 +22,7 @@ export const plannerKeys = {
   detailOpportunity: 'detailOpportunity',
   detailOpportunityInstance: 'detailOpportunityInstance',
   detailICE: 'detailICE',
+  plannedEnrollment: 'plannedEnrollment',
 };
 
 Template.Academic_Plan.onCreated(function academicPlanOnCreated() {

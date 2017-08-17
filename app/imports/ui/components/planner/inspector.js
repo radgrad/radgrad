@@ -17,6 +17,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import * as RouteNames from '../../../startup/client/router.js';
 import { appLog } from '../../../api/log/AppLogCollection';
+import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 
 // /** @module ui/components/planner/Inspector */
 
@@ -34,6 +35,20 @@ Template.Inspector.helpers({
         return course.description;
       }
     return null;
+  },
+  courseEnrollmentData() {
+    let courseID;
+    if (Template.instance().state.get(plannerKeys.detailCourse)) {
+      courseID = Template.instance().state.get(plannerKeys.detailCourse)._id;
+    } else
+      if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+        courseID = Template.instance().state.get(plannerKeys.detailCourseInstance).courseID;
+      }
+    if (courseID && Template.instance().state.get(plannerKeys.plannedEnrollment) &&
+        courseID === Template.instance().state.get(plannerKeys.plannedEnrollment).courseID) {
+      return Template.instance().state.get(plannerKeys.plannedEnrollment).enrollmentData;
+    }
+    return [];
   },
   courseName() {
     if (Template.instance().state.get(plannerKeys.detailCourse)) {
@@ -97,9 +112,10 @@ Template.Inspector.helpers({
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
         return -1;
-      } else if (a.number > b.number) {
-        return 1;
-      }
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
       return 0;
     });
   },
@@ -113,9 +129,10 @@ Template.Inspector.helpers({
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
         return -1;
-      } else if (a.number > b.number) {
-        return 1;
-      }
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
       return 0;
     });
   },
@@ -129,9 +146,10 @@ Template.Inspector.helpers({
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
         return -1;
-      } else if (a.number > b.number) {
-        return 1;
-      }
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
       return 0;
     });
   },
@@ -145,9 +163,10 @@ Template.Inspector.helpers({
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
         return -1;
-      } else if (a.number > b.number) {
-        return 1;
-      }
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
       return 0;
     });
   },
@@ -161,9 +180,10 @@ Template.Inspector.helpers({
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
         return -1;
-      } else if (a.number > b.number) {
-        return 1;
-      }
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
       return 0;
     });
   },
@@ -177,9 +197,10 @@ Template.Inspector.helpers({
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
         return -1;
-      } else if (a.number > b.number) {
-        return 1;
-      }
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
       return 0;
     });
   },
@@ -196,9 +217,10 @@ Template.Inspector.helpers({
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
         return -1;
-      } else if (a.number > b.number) {
-        return 1;
-      }
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
       return 0;
     });
   },
@@ -283,7 +305,7 @@ Template.Inspector.helpers({
       } else
         if (Template.instance().state.get(plannerKeys.detailOpportunity)) {
           return _.map(Template.instance().state.get(plannerKeys.detailOpportunity).interestIDs, (iid) =>
-            Interests.findDoc(iid));
+              Interests.findDoc(iid));
         } else
           if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
             const opp = Opportunities.findDoc(Template.instance().state.get(
@@ -294,7 +316,7 @@ Template.Inspector.helpers({
   },
   isInPlan() {
     return (Template.instance().state.get(plannerKeys.detailCourseInstance) ||
-    Template.instance().state.get(plannerKeys.detailOpportunityInstance));
+        Template.instance().state.get(plannerKeys.detailOpportunityInstance));
   },
   isPastInstance() {
     const currentSemester = Semesters.getCurrentSemesterDoc();
@@ -479,8 +501,17 @@ Template.Inspector.events({
     Template.instance().state.set(plannerKeys.detailCourseInstance, null);
     Template.instance().state.set(plannerKeys.detailOpportunity, null);
     Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
+    const instance = Template.instance();
     const message = `${getRouteUserName()} inspected ${course.shortName}`;
     appLog.info(message);
+    getFutureEnrollmentMethod.call(event.target.id, (error, result) => {
+      if (error) {
+        console.log('Error in getting future enrollment', error);
+      } else
+        if (course._id === result.courseID) {
+          instance.state.set(plannerKeys.plannedEnrollment, result);
+        }
+    });
   },
   'click .opportunity.item': function clickOpportunityItem(event) {
     event.preventDefault();
