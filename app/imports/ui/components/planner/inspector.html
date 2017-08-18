@@ -93,7 +93,11 @@
                   {{#if passedCourse}}
                     {{> Add_Course_Button buttonType='taken'}}
                   {{else}}
-                    {{> Add_Course_Button buttonType='add' dictionary=dictionary course=selectedCourse}}
+                    {{#if notFromSTAR}}
+                      {{> Add_Course_Button buttonType='remove' dictionary=dictionary course=selectedCourse}}
+                    {{else}}
+                      {{> Add_Course_Button buttonType='add' dictionary=dictionary course=selectedCourse}}
+                    {{/if}}
                   {{/if}}
                 {{/if}}
               {{else}}
