@@ -346,6 +346,13 @@ Template.Inspector.helpers({
     });
     return ret;
   },
+  notFromSTAR() {
+    if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
+      const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
+      return !ci.fromSTAR;
+    }
+    return false;
+  },
   opportunities() {
     const opportunities = Opportunities.find().fetch();
     return _.sortBy(opportunities, opportunity => opportunity.name);
@@ -416,9 +423,12 @@ Template.Inspector.helpers({
   passedCourse() {
     if (Template.instance().state.get(plannerKeys.detailCourseInstance)) {
       const ci = Template.instance().state.get(plannerKeys.detailCourseInstance);
-      if (ci.grade === 'A+' || ci.grade === 'A' || ci.grade === 'A-' ||
-          ci.grade === 'B+' || ci.grade === 'B') {
-        return true;
+      // console.log(ci);
+      if (ci.fromSTAR && ci.verified) {
+        if (ci.grade === 'A+' || ci.grade === 'A' || ci.grade === 'A-' ||
+            ci.grade === 'B+' || ci.grade === 'B') {
+          return true;
+        }
       }
     }
     return false;

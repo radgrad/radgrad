@@ -37,17 +37,17 @@ Template.Add_Opportunity_Button.events({
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
     const opportunity = this.opportunity;
-    const id = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
+    const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
     const collectionName = OpportunityInstances.getCollectionName();
-    console.log(id);
-    const semester = Semesters.toString(id.semesterID);
-    removeItMethod.call({ collectionName, instance: id }, (error) => {
+    const semester = Semesters.toString(oi.semesterID);
+    const template = Template.instance();
+    removeItMethod.call({ collectionName, instance: oi._id }, (error) => {
       if (!error) {
-        Template.instance().state.set(plannerKeys.detailCourse, null);
-        Template.instance().state.set(plannerKeys.detailCourseInstance, null);
-        Template.instance().state.set(plannerKeys.detailOpportunity, opportunity);
-        Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
-        Template.instance().$('.chooseSemester').popup('hide');
+        template.state.set(plannerKeys.detailCourse, null);
+        template.state.set(plannerKeys.detailCourseInstance, null);
+        template.state.set(plannerKeys.detailOpportunity, opportunity);
+        template.state.set(plannerKeys.detailOpportunityInstance, null);
+        template.$('.chooseSemester').popup('hide');
       }
     });
     const message = `${getRouteUserName()} removed ${opportunity.name} in ${semester} from their Degree Plan.`;

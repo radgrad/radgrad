@@ -10,17 +10,17 @@
               </div>
               <div class="stretched column academicYear" style="padding: 0 0.6rem;">
                 {{#if isPastFall year}}
-                  {{> Past_Semester_List icsCourses=(icsCoursesFall year) semesterOpportunities=(opportunitiesFall year) semesterName='Fall' dictionary=getDictionary year=year.year }}
+                  {{> Past_Semester_List icsCourses=(icsCoursesFall year) semesterOpportunities=(opportunitiesFall year) semesterName='Fall' currentSemester=currentSemester semester=(fallSemester year)  dictionary=getDictionary year=year.year }}
                 {{else}}
                   {{> Semester_List_2 currentSemester=currentSemester semester=(fallSemester year) dictionary=getDictionary isFuture=true isCurrentSemester=(isCurrentSemesterFall year) semesterName='Fall' year=year.year }}
                 {{/if}}
                 {{#if isPastSpring year}}
-                  {{> Past_Semester_List icsCourses=(icsCoursesSpring year) semesterOpportunities=(opportunitiesSpring year) semesterName='Spring' dictionary=getDictionary year=(springYear year) }}
+                  {{> Past_Semester_List icsCourses=(icsCoursesSpring year) semesterOpportunities=(opportunitiesSpring year) semesterName='Spring' currentSemester=currentSemester semester=(springSemester year)  dictionary=getDictionary year=(springYear year) }}
                 {{else}}
                   {{> Semester_List_2  currentSemester=currentSemester semester=(springSemester year) dictionary=getDictionary isFuture=true isCurrentSemester=(isCurrentSemesterSpring year) semesterName='Spring' year=(springYear year)}}
                 {{/if}}
                 {{#if isPastSummer year}}
-                  {{> Past_Semester_List icsCourses=(icsCoursesSummer year) semesterOpportunities=(opportunitiesSummer year) semesterName='Summer' dictionary=getDictionary year=(springYear year)}}
+                  {{> Past_Semester_List icsCourses=(icsCoursesSummer year) semesterOpportunities=(opportunitiesSummer year) semesterName='Summer' currentSemester=currentSemester semester=(summerSemester year) dictionary=getDictionary year=(springYear year)}}
                 {{else}}
                   {{> Semester_List_2 currentSemester=currentSemester semester=(summerSemester year) dictionary=getDictionary isFuture=true isCurrentSemester=(isCurrentSemesterSummer year) semesterName='Summer' year=(springYear year)}}
                 {{/if}}
