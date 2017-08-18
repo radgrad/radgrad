@@ -162,18 +162,27 @@ Template.Academic_Plan_Semester.events({
       const courseID = Slugs.getEntityID(slug, 'Course');
       const course = Courses.findDoc(courseID);
       const instance = Template.instance();
-      instance.state.set('detailCourse', course);
-      instance.state.set('detailCourseInstance', null);
-      instance.state.set('detailOpportunity', null);
-      instance.state.set('detailOpportunityInstance', null);
-      getFutureEnrollmentMethod.call(courseID, (error, result) => {
-        if (error) {
-          console.log('Error in getting future enrollment', error);
-        } else
-          if (course._id === result.courseID) {
-            instance.state.set('plannedEnrollment', result);
-          }
-      });
+      const ci = CourseInstances.find({ courseID, studentID: getUserIdFromRoute() }).fetch();
+      if (ci.length > 0) {
+        instance.state.set('detailCourse', null);
+        instance.state.set('detailCourseInstance', ci[0]);
+        instance.state.set('detailICE', ci[0].ice);
+        instance.state.set('detailOpportunity', null);
+        instance.state.set('detailOpportunityInstance', null);
+      } else {
+        instance.state.set('detailCourse', course);
+        instance.state.set('detailCourseInstance', null);
+        instance.state.set('detailOpportunity', null);
+        instance.state.set('detailOpportunityInstance', null);
+        getFutureEnrollmentMethod.call(courseID, (error, result) => {
+          if (error) {
+            console.log('Error in getting future enrollment', error);
+          } else
+            if (course._id === result.courseID) {
+              instance.state.set('plannedEnrollment', result);
+            }
+        });
+      }
     }
   },
 });
