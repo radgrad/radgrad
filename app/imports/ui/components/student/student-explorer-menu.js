@@ -169,6 +169,10 @@ Template.Student_Explorer_Menu.helpers({
   itemName(item) {
     return item.name;
   },
+  opportunityItemName(item) {
+    const iceString = `(${item.ice.i}/${item.ice.c}/${item.ice.e})`;
+    return `${item.name} ${iceString}`;
+  },
   opportunitiesRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
