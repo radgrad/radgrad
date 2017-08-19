@@ -73,7 +73,7 @@
       <div class="ui scrolling dropdown icon button">&nbsp;&nbsp;Opportunities <i class="dropdown icon"></i>
         <div class="menu">
           {{#each opportunity in opportunities}}
-            <div id="{{opportunity._id}}" class="opportunity item">{{opportunity.name}}</div>
+            <div id="{{opportunity._id}}" class="opportunity item">{{opportunityMenuName opportunity}}</div>
           {{/each}}
         </div>
       </div>

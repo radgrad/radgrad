@@ -392,6 +392,10 @@ Template.Inspector.helpers({
       }
     return null;
   },
+  opportunityMenuName(opportunity) {
+    const iceString = `(${opportunity.ice.i}/${opportunity.ice.c}/${opportunity.ice.e})`;
+    return `${opportunity.name} ${iceString}`;
+  },
   opportunitySemester() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
       const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);

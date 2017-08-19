@@ -202,8 +202,7 @@
         {{#each listItem in menuNonAddedList}}
           <a class="{{classType (slugName listItem) 'careerGoal'}}" data-tab="tab-name"
              href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}"><i
-              style="position: absolute; margin-left: -20px;" class="{{userCareerGoals listItem}}"></i>{{itemName
-              listItem}}</a>
+              style="position: absolute; margin-left: -20px;" class="{{userCareerGoals listItem}}"></i>{{itemName listItem}}</a>
         {{/each}}
       {{else}}
         {{#if isType type 'degrees'}}
@@ -224,8 +223,7 @@
           {{#each listItem in menuNonAddedList}}
             <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name"
                href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}"><i
-                style="position: absolute; margin-left: -20px;" class="{{userDegrees listItem}}"></i>{{itemName
-                listItem}}</a>
+                style="position: absolute; margin-left: -20px;" class="{{userDegrees listItem}}"></i>{{itemName listItem}}</a>
           {{/each}}
         {{else}}
           {{#if isType type 'opportunities'}}
@@ -243,8 +241,7 @@
             {{#each listItem in menuAddedList}}
               <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name"
                  href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}"><i
-                  style="position: absolute; margin-left: -20px;" class="{{userOpportunities listItem}}"></i>{{itemName
-                  listItem}}</a>
+                  style="position: absolute; margin-left: -20px;" class="{{userOpportunities listItem}}"></i>{{opportunityItemName listItem}}</a>
             {{/each}}
             {{#if isInRole 'mentor'}}
               <h4 class="ui dividing header">
@@ -258,8 +255,7 @@
             {{#each listItem in menuNonAddedList}}
               <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name"
                  href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}"><i
-                  style="position: absolute; margin-left: -20px;" class="{{userOpportunities listItem}}"></i>{{itemName
-                  listItem}}</a>
+                  style="position: absolute; margin-left: -20px;" class="{{userOpportunities listItem}}"></i>{{opportunityItemName listItem}}</a>
             {{/each}}
           {{else}}
             {{#if isType type 'interests'}}
