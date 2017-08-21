@@ -1,8 +1,8 @@
 import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { ROLE } from '../role/Role';
 import { moment } from 'meteor/momentjs:moment';
+import { ROLE } from '../role/Role';
 import { Courses } from '../course/CourseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
 import { Semesters } from '../semester/SemesterCollection';
