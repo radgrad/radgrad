@@ -7,32 +7,38 @@
       </div>
       <div class="meta">
         {{role}}<br>
-        {{#if or isStudent isAlumni}}{{desiredDegree}} <br>{{/if}}
-        {{email}}
-        {{#if or isStudent isAlumni}}
-          <br>
+        {{#if or isStudent isAlumni}}{{desiredDegree}} <br>
           <img class="ui mini image" src='/images/level-icons/radgrad-level-{{level}}-icon.png'>
         {{/if}}
         {{#if website}}
           <a class="ui compact basic mini green button" href="{{website}}">
             WEBSITE
-          </a>
+          </a><br>
+        {{/if}}
+        {{#if isAdvisor}}
+          {{email}}
+        {{/if}}
+        {{#if isMentor}}
+          {{email}}
+        {{/if}}
+        {{#if isFaculty}}
+          {{email}}
         {{/if}}
       </div>
     </div>
-      {{#if isMentor}}
+    {{#if isMentor}}
       <div class="content">
         {{> User_Answers_Component userID=userID}}
       </div>
-      {{/if}}
+    {{/if}}
       <!--{{#if or isStudent isAlumni}}-->
-        <!--{{> User_Course_Component userID=userID}}-->
+    <!--{{> User_Course_Component userID=userID}}-->
       <!--{{/if}}-->
-    <!--{{#if or isStudent isAlumni}}-->
-      <!--<div class="content">-->
-        <!--{{> User_Opportunity_Component userID=userID}}-->
-      <!--</div>-->
-    <!--{{/if}}-->
+      <!--{{#if or isStudent isAlumni}}-->
+    <!--<div class="content">-->
+    <!--{{> User_Opportunity_Component userID=userID}}-->
+    <!--</div>-->
+      <!--{{/if}}-->
     <div class="extra content">
       {{> User_Career_Goals_Component labelSize='mini' userID=userID}}
       {{> User_Interests_Component labelSize='mini' userID=userID}}

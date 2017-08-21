@@ -41,6 +41,22 @@ Template.Explore_User_Widget.helpers({
     }
     return '';
   },
+  isFaculty() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      const user = Users.getProfile(id);
+      return user.role === ROLE.FACULTY;
+    }
+    return false;
+  },
+  isAdvisor() {
+    if (Template.instance().userID && Template.instance().userID.get()) {
+      const id = Template.instance().data.userID.get();
+      const user = Users.getProfile(id);
+      return user.role === ROLE.ADVISOR;
+    }
+    return false;
+  },
   isMentor() {
     if (Template.instance().userID && Template.instance().userID.get()) {
       const id = Template.instance().data.userID.get();
