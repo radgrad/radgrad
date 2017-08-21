@@ -1,6 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { ROLE } from '../role/Role';
 import { moment } from 'meteor/momentjs:moment';
 import { Courses } from '../course/CourseCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection';
@@ -406,6 +407,16 @@ class FeedCollection extends BaseCollection {
     const userID = Users.getID(user);
     // There could be some collateral damage here, but whatever.
     this._collection.remove({ userIDs: { $in: [userID] } });
+  }
+
+  /**
+   * Asserts that userId is logged in as an Admin, Faculty, Student, or Advisor.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not in the allowed roles.
+   */
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.STUDENT, ROLE.FACULTY]);
   }
 
   /**
