@@ -42,14 +42,15 @@ function findSemesterSlug(starDataObject) {
       term = Semesters.FALL; // TODO Not sure it this is right thing to do.
       break;
     default:
-      appLog.warning(`Got unknown semester term ${semesterTokens[0]}`);
-      throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);
+      appLog.info(`Got unknown semester term ${semesterTokens[0]}`);
+      return null;
   }
   let year = parseInt(semesterTokens[1], 10);
   if (isNaN(year)) {
     year = parseInt(semesterTokens[2], 10);
     if (isNaN(year)) {
-      throw new Meteor.Error(`Could not parse semester data: ${JSON.stringify(starDataObject)}`);
+      appLog.info(`Got unknown semester year ${semesterTokens[1]} or ${semesterTokens[2]}`);
+      return null;
     }
   }
   return Semesters.findSlugByID(Semesters.define({ term, year }));
@@ -156,7 +157,7 @@ export function processStarCsvData(student, csvData) {
     });
     // Now we take that array of objects and transform them into CourseInstance data objects.
     return _.filter(_.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) {
-      return ci.course !== Courses.unInterestingSlug;
+      return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
     });
   }
   // must be on the client.
