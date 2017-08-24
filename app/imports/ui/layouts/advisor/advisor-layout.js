@@ -1,8 +1,24 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
+import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
+import { Reviews } from '../../../api/review/ReviewCollection';
+import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection';
 
 Template.Advisor_Layout.helpers({
   secondMenuItems() {
+    let numMod = 0;
+    numMod += MentorQuestions.find({ moderated: false }).fetch().length;
+    numMod += Reviews.find({ moderated: false }).fetch().length;
+    let moderationLabel = 'Moderation';
+    if (numMod > 0) {
+      moderationLabel = `${moderationLabel} (${numMod})`;
+    }
+    let numRequests = 0;
+    numRequests += VerificationRequests.find({ status: 'Open' }).fetch().length;
+    let requestsLabel = 'Verification Requests';
+    if (numRequests > 0) {
+      requestsLabel = `${requestsLabel} (${numRequests})`;
+    }
     return [
       {
         label: 'Student Configuration',
@@ -10,7 +26,7 @@ Template.Advisor_Layout.helpers({
         regex: 'home',
       },
       {
-        label: 'Verification Requests',
+        label: requestsLabel,
         route: RouteNames.advisorVerificationRequestsPendingPageRouteName,
         regex: 'verification-requests',
       },
@@ -25,7 +41,7 @@ Template.Advisor_Layout.helpers({
         regex: 'completed-verifications',
       },
       {
-        label: 'Moderation',
+        label: moderationLabel,
         route: RouteNames.advisorModerationPageRouteName,
         regex: 'moderation',
       },
