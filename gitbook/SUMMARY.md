@@ -1,22 +1,38 @@
 # Summary
 
-### Introduction
+## Introduction
 
 * [Why RadGrad?](README.md)
 * [Goals](introduction/goals.md)
+  * [Improve degree planning](introduction/goals.md#planning)
+  * [Provide useful guidance](introduction/goals.md#guidance)
+  * [Improve engagement](introduction/goals.md#engagement)
+  * [Improve retention](introduction/goals.md#retention)
+  * [Improve research participation](introduction/goals.md#research)
+  * [Improve diversity](introduction/goals.md#diversity)
+  * [Improve the degree experience](introduction/goals.md#degree-experience)
+  * [Improve graduate success](introduction/goals.md#graduation)
+  * [Apply to other disciplines](introduction/goals.md#other-disciplines)
 * [About this manual](introduction/about.md)
 
 ### Developer Guide
 
-* [Installation](developerguide/installation.md)
-* [IDE Setup](developerguide/ide.md)
-* [Coding Standards](developerguide/codingstandards.md)
-* [Testing](developerguide/testing.md)
-* [GitBook](developerguide/gitbook.md)
-* [JSDocs](developerguide/jsdoc.md)
-* [Directory Structure](developerguide/directorystructure.md)
-* [Project management](developerguide/project-management.md)
-* [Meteor guidelines](developerguide/meteor-guidelines.md)
+* Getting started
+  * [Installation](developerguide/installation.md)
+  * [IDE Setup](developerguide/ide.md)
+  * [Directory Structure](developerguide/directorystructure.md)
+* Quality assurance
+  * [Coding Standards](developerguide/codingstandards.md)
+  * [Testing](developerguide/testing.md)
+  * [DB fixtures](developerguide/database-fixtures.md)
+  * [Continuous Integration](developerguide/continuous-integration.md)
+  * [Issue management](developerguide/issue-management.md)
+* Documentation 
+  * [GitBook](developerguide/gitbook.md)
+  * [JSDocs](developerguide/jsdoc.md)
+* Delivery
+  * [Scripts](developerguide/scripts.md)
+  * [Deployment](developerguide/deployment.md)
 
 ### Data Model
 
@@ -44,8 +60,8 @@
 
 ### Archive
 
-* [2016 Use Cases](archive/use-cases.md)
-* [Spring 2017 Beta Test](archive/beta-test.md)
+* [Use Cases (Fall 2016)](archive/use-cases.md)
+* [Beta Test (Spring 2017)](archive/beta-test.md)
 
 
 

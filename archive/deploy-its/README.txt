@@ -1,4 +1,6 @@
-To update radgrad.ics.hawaii.edu (Philip's instructions)
+These are notes for deployment of RadGrad on ITS virtual hosts.
+
+They are not currently used. RadGrad is deployed on Galaxy.
 
 $ ssh casanova@radgrad.ics.hawaii.edu
 $ cd RADGRAD/radgrad/deploy

@@ -1,6 +1,6 @@
 # RadGrad Goals
 
-We designed RadGrad to achieve a set of ambitious goals. This section presents those goals and how we plan to assess RadGrad's ability to achieve them.
+The fundamental goal of RadGrad is to *improve the undergraduate degree experience*. The following subgoals provide details on how we hope to achieve that.
 
 ## Improve degree planning {#planning}
 

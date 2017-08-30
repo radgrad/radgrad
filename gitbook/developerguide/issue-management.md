@@ -1,12 +1,12 @@
-# Project management
+# Issue management
 
-We will use the [radgrad/radgrad issues](https://github.com/radgrad/radgrad/issues) along with [radgrad/radgrad projects](https://github.com/radgrad/radgrad/projects) to manage work on the system.
+We use the [radgrad/radgrad issues](https://github.com/radgrad/radgrad/issues) along with [radgrad/radgrad projects](https://github.com/radgrad/radgrad/projects) to manage work on the system.
 
-We will follow these conventions for development:
+We follow these conventions for development:
 
 1. We document each significant task through a GitHub issue. 
 2. We assign each task to a single owner.
-3. We carry out the work on each task in a branch named "issue-N", where N is the issue number.
+3. We carry out the work on each task in a branch named "issue-NNN", where NNN is the issue number.
 4. We group tasks into a sequence of GitHub milestones named "M1", "M2", etc.
 5. We manage work within a milestone by a GitHub project with the same name as its associated Milestone. 
 6. Each GitHub project has three columns: Backlog, In Progress, Done.
