@@ -36,12 +36,12 @@ export function loadCollection(collection, loadJSON, consolep) {
 }
 
 /**
- * Loads data from a test fixture file.
- * @param fixtureName The name of the test fixture data file. (located in private/database/testing).
+ * Loads data from a modular test fixture file.
+ * @param fixtureName The name of the test fixture data file. (located in private/database/modular).
  */
 export function defineTestFixture(fixtureName) {
   if (Meteor.isServer) {
-    const loadFileName = `database/testing/${fixtureName}`;
+    const loadFileName = `database/modular/${fixtureName}`;
     const loadJSON = JSON.parse(Assets.getText(loadFileName));
     console.log(`    Loaded ${loadFileName}: ${loadJSON.fixtureDescription}`);
     _.each(RadGrad.collectionLoadSequence, collection => loadCollection(collection, loadJSON, false));
