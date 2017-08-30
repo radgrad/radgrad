@@ -1,6 +1,6 @@
 # GitBook
 
-The documentation for this system is built using [GitBook](http://gitbook.com).
+This manual is produced using [GitBook](http://gitbook.com).
 
 The top-level [book.json](https://github.com/radgrad/radgrad/blob/master/book.json) file provides global configuration information, and also tells GitBook that the files are all located in the gitbook/ subdirectory.
 
@@ -28,6 +28,6 @@ Starting server ...
 Serving book on http://localhost:4000
 ```
 
-To create the API chapter, run `meteor npm run jsdoc`. This generates JSDocs and places them in the api/jdocs subdirectory. 
+To create the API chapter, run `meteor npm run jsdoc`. This generates JSDocs and places them in the api/jdocs subdirectory. Note that we do not have any mechanism at present to auto-publish updated JSDocs upon each commit. Instead, this command must be run manually in the master branch in order for the JSDocs to be updated.
 
-Currently I've set up a webhook to auto-publish the GitBook at [https://philipmjohnson.gitbooks.io/radgrad-manual/content/](https://philipmjohnson.gitbooks.io/radgrad-manual/content/) upon each commit. I've requested that gitbook create a (free) RadGrad organization for us but am awaiting their reply.
+Currently I've set up a webhook to auto-publish the GitBook at [https://radgrad.gitbooks.io/radgrad-manual/content/](https://radgrad.gitbooks.io/radgrad-manual/content/) upon each commit to the master branch. 

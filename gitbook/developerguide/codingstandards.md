@@ -15,14 +15,12 @@ The [ICS 314 instructions on ESLint in IntelliJ](http://courses.ics.hawaii.edu/i
  
  
 ## Naming conventions
- 
-Meteor methods should be placed in their own file, typically in a directory containing the definition of the Collection that they operate on.  They should be named with the extension `methods.js`.
 
 Directories are all lowercase, hyphens separate words. For example, `degree-program`.
 
 Javascript classes are named in camel-case. For example, `DegreeProgram`.
 
-You do not need to name "internal" functions or variables with an underscore prefix. 
+Meteor methods should be placed in their own file, typically in a directory containing the definition of the Collection that they operate on.  They should be named with the extension `methods.js`.
 
 
 ## JSDoc conventions
@@ -54,7 +52,7 @@ Relative:
 import BaseInstanceCollection from '../base/BaseInstanceCollection';
 ```
 
-You can use either approach. In general, prefer the approach that yields the shortest path.
+Please use relative paths, because IntelliJ can perform completion and refactoring on relative paths but not absolute paths.
 
  
  

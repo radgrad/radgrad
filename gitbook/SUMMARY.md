@@ -3,26 +3,8 @@
 ### Introduction
 
 * [Why RadGrad?](README.md)
-* [Goals](goals.md)
-  * [Improve degree planning](goals.md#planning)
-  * [Provide useful recommendations](goals.md#recommendations)
-  * [Improve student engagement](goals.md#engagement)
-  * [Improve student diversity](goals.md#diversity)
-  * [Improve degree program](goals.md#degree-program)
-  * [Improve graduate success](goals.md#graduate)
-* [Use Cases](use-cases.md)
-  * [First advisor meeting, ICS Newbie](use-cases.md#first-meeting)
-  * [First advisor meeting, ICS Ninja](use-cases.md#first-meeting-ics-background)
-  * [First student login](use-cases.md#first-student-login)
-  * [After ICS 111](use-cases.md#post111-radgrad)
-  * [Juniors and seniors](use-cases.md#advanced-radgrad)
-  * [Opportunity verification](use-cases.md#opportunity-verification)
-  * [Opportunity attendance](use-cases.md#opportunity-attendance)
-  * [Leveling up](use-cases.md#leveling-up)
-  * [New mentor](use-cases.md#new-mentor)
-  * [New mentorspace question](use-cases.md#new-mentorspace-question)
-  * [Mentorspace notifications](use-cases.md#mentorspace-notifications)
-
+* [Goals](introduction/goals.md)
+* [About this manual](introduction/about.md)
 
 ### Developer Guide
 
@@ -35,14 +17,6 @@
 * [Directory Structure](developerguide/directorystructure.md)
 * [Project management](developerguide/project-management.md)
 * [Meteor guidelines](developerguide/meteor-guidelines.md)
-  * [Avoid downloads](developerguide/meteor-guidelines.md#avoid-downloads)
-  * [Update in branch](developerguide/meteor-guidelines.md#update-in-branch)
-  * [meteor npm run start](developerguide/meteor-guidelines.md#meteor-npm-run-start)
-  * [meteor npm run lint](developerguide/meteor-guidelines.md#meteor-npm-run-lint)
-  * [meteor npm run test-watch](developerguide/meteor-guidelines.md#meteor-npm-run-test-watch)
-* Spring 2017 Beta Test
-  * [Design](beta-test.md)
-  * [Results](beta-test-results.md)
 
 ### Data Model
 
@@ -63,22 +37,19 @@
 * [STAR Processor](datamodel/star-processor.md)
 * [Javascript Class Hierarchy](datamodel/class-hierarchy.md)
 * [Future enhancements](datamodel/future-enhancements.md)
-  * [Vignettes](datamodel/future-enhancements.md#vignettes)
-  * [Stoplight](datamodel/future-enhancements.md#stoplight)
-  * [Mentorship](datamodel/future-enhancements.md#mentorship)
-  * [Leaderboard](datamodel/future-enhancements.md#leaderboard)
-  * [Petitions](datamodel/future-enhancements.md#petitions)
-  * [Course Feedback](datamodel/future-enhancements.md#course-feedback)
-  * [Degree Feedback](datamodel/future-enhancements.md#degree-feedback)
-  * [Predictions](datamodel/future-enhancements.md#predictions)
 
 ### API
 
 * [JSDocs](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/)
 
-### User Guide
+### Archive
 
-* [TBD](userguide/README.md)
+* [2016 Use Cases](archive/use-cases.md)
+* [Spring 2017 Beta Test](archive/beta-test.md)
+
+
+
+
 
 
 

@@ -24,7 +24,7 @@ To run the system, invoke this command:
 app$ meteor npm run start
 ```
 
-Go to [http://localhost:3000](http://localhost:3000) to confirm that the system is running:
+This will invoke the "start" script in [package.json](https://github.com/radgrad/radgrad/blob/master/app/package.json), which initializes the database (if empty) with sample data.  Go to [http://localhost:3000](http://localhost:3000) to confirm that the system is running:
 
 
 <img src="images/home-page.png" width="100%">
