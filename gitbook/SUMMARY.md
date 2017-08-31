@@ -38,10 +38,27 @@
 
 ### Data Model
 
-* [Concepts](datamodel/README.md)
-* [Entity-Relationship model]()
-* [Class Hierarchy](datamodel/class-hierarchy.md)
-* [Dump/Restore]()
+* Key Concepts
+  * Collections are Classes
+  * Slugs
+  * Foreign keys
+  * Dump/Restore
+  * Pub/Sub caching
+  * Integrity checking
+  * RadGrad roles
+  * Testing
+* Entity-Relationship model
+* Class Hierarchy
+
+
+### User interface
+
+* Key concepts
+  * Layouts, pages, components
+  * Routing
+  * Form field components
+  * Inter-widget state communication
+  * When a page doesn't display
 
 ### API
 
