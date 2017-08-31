@@ -8,7 +8,7 @@ To generate the documentation locally, invoke:
 app$ meteor npm run jsdoc
 ```
 
-This command places the JSDoc output into the gitbook/api/jsdocs subdirectory.  The table of contents includes a link to the online GitBook's subdirectory where the JSDocs are located.
+This command places the JSDoc output into the [gitbook/api/jsdocs](https://github.com/radgrad/radgrad/tree/master/gitbook/api/jsdocs) subdirectory.  The GitBook [summary.md](https://github.com/radgrad/radgrad/blob/master/gitbook/SUMMARY.md) includes a link to the online GitBook's subdirectory where the JSDocs are located.
 
 In future, we might want to explore the use of jsdoc-to-markdown to create API documentation that is better integrated with GitBook. 
 

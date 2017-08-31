@@ -4,13 +4,15 @@ RadGrad provides "unit" and "integration" tests. Both are designed to be run fro
 
 Unit tests are tests that run only on the server side, and which focus on verifying that the RadGrad data model (i.e. the set of Collection classes) work as intended.
   
-Integration tests run from the client side, and test to ensure that client-server interactions work as intended. Currently, integration tests only check that Meteor method implementations function correctly. We do not yet have UI tests, such as tests that would be implemented using Selenium or some other browser driver. 
+Integration tests are initiated from the client side, and test to ensure that client-server interactions work as intended. Currently, integration tests only check that Meteor method implementations function correctly. We do not yet have UI tests, such as tests that would be implemented using Selenium or some other browser driver. 
 
 We use the [Mocha](https://mochajs.org/) test runner and  [Chai Expect Assertions](http://chaijs.com/guide/styles/#expect). We follow recommendations from the [Meteor Guide Unit Testing Chapter](http://guide.meteor.com/testing.html#unit-testing). 
 
 Each collection class contains its tests in a "sibling" file. For example, unit tests for CourseCollection.js are located in [CourseCollection.test.js](https://github.com/radgrad/radgrad/blob/master/app/imports/api/course/CourseCollection.test.js). Its integration tests that focus on its Meteor Methods are located in [CourseCollection.app-test.js](https://github.com/radgrad/radgrad/blob/master/app/imports/api/course/CourseInstanceCollection.methods.app-test.js). 
 
 The test file names are important: Meteor wants unit tests to be in files with the suffix `test.js`, and integration tests to be in files with the suffix `app-test.js`. 
+
+Many tests require the database to be initialized with test values.  RadGrad provides "database fixture" files for this purpose. See the [DB fixture](./database-fixtures.md) chapter for more details.
 
 ## Unit testing
 
@@ -20,7 +22,7 @@ To invoke the unit tests, use this command:
 app$ meteor npm run test
 ```
 
-This will actually run ESLint over the code base first, then run the unit tests (i.e. those files with a `test.js` suffix). Here's a sample invocation with some lines elided for brevity:
+This will implicitly run ESLint over the code base first, then run the unit tests (i.e. those files with a `test.js` suffix). Here's a sample invocation with some lines elided for brevity:
 
 
 ```
@@ -134,20 +136,6 @@ I20170829-15:22:37.614(-10)? --------------------------------
 ```
 
 As you can see, in contrast to unit tests, no server-only tests were invoked. 
-
-
-## Continuous integration
-
-We use Semaphore CI for [RadGrad Continuous Integration](https://semaphoreci.com/radgrad/radgrad). Each time someone commits to the [master branch of the RadGrad datamodel GitHub repo](https://github.com/radgrad/datamodel), Semaphore will clone this branch, install Meteor, invoke both unit and integration tests, and build the JSDocs. 
-
-Here is an example build and run of the system:
-
-<img src="images/radgrad-semaphore-build-example.png" width="100%">
-
-Current build status: 
-
-[![Build Status](https://semaphoreci.com/api/v1/radgrad/radgrad/branches/master/badge.svg)](https://semaphoreci.com/radgrad/radgrad)
-
 
  
 ## Miscellaneous testing issues.

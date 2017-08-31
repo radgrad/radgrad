@@ -1,4 +1,4 @@
-<img src="https://radgrad.gitbooks.io/radgrad-manual/content/images/radgrad-landing.png" width="100%">
+<img src="images/radgrad-landing.png" width="100%">
 
 # Why RadGrad?
 
