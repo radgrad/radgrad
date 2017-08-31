@@ -1,4 +1,4 @@
-/** @module api/base */
+/** @namespace api/base */
 
 import './BaseCollection';
 import './BaseCollection.methods';

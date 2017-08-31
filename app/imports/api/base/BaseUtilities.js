@@ -4,11 +4,11 @@ import { RadGrad } from '../radgrad/RadGrad';
 import { assertIntegrity } from '../integrity/IntegrityChecker';
 import { Users } from '../user/UserCollection';
 
-
 /**
  * Deletes all documents from all RadGrad collections.
  * Checks the integrity of the database before doing the deletion.
  * To be used only in testing mode.
+ * @memberOf api/base
  * @throws { Meteor.Error } If there is an integrity issue with the DB prior to deletion.
  * @returns true
  */

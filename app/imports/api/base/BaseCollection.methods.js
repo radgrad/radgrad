@@ -7,10 +7,9 @@ import { RadGrad } from '../radgrad/RadGrad';
 import { AppLogs } from '../log/AppLogCollection';
 import { ROLE } from '../role/Role';
 
-/** @module api/base */
-
 /**
  * Allows admins to create and return a JSON object to the client representing a snapshot of the RadGrad database.
+ * @memberOf api/base
  */
 export const dumpDatabaseMethod = new ValidatedMethod({
   name: 'base.dumpDatabase',
@@ -36,6 +35,7 @@ export const dumpDatabaseMethod = new ValidatedMethod({
 
 /**
  * Allows admins to create and return a JSON object to the client representing a snapshot of the AppLogCollection.
+ * @memberOf api/base
  */
 export const dumpAppLogMethod = new ValidatedMethod({
   name: 'base.dumpAppLog',
@@ -61,6 +61,7 @@ export const dumpAppLogMethod = new ValidatedMethod({
 
 /**
  * Allows admins to clear the AppLogCollection.
+ * @memberOf api/base
  */
 export const clearAppLogMethod = new ValidatedMethod({
   name: 'base.clearAppLog',
@@ -80,7 +81,12 @@ export const clearAppLogMethod = new ValidatedMethod({
   },
 });
 
-
+/**
+ * Meteor method used to define new instances of the given collection name.
+ * @param collectionName the name of the collection.
+ * @param definitionDate the object used in the collection.define method.
+ * @memberOf api/base
+ */
 export const defineMethod = new ValidatedMethod({
   name: 'BaseCollection.define',
   mixins: [CallPromiseMixin],

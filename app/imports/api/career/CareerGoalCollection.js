@@ -6,11 +6,10 @@ import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
-/** @module api/career/CareerGoalCollection */
-
 /**
  * CareerGoals represent the professional future(s) that the student wishes to work toward.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @memberOf api/career
+ * @extends api/base.BaseSlugCollection
  */
 class CareerGoalCollection extends BaseSlugCollection {
 
