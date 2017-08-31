@@ -4,7 +4,6 @@ import { RadGrad } from '../radgrad/RadGrad';
 import { assertIntegrity } from '../integrity/IntegrityChecker';
 import { Users } from '../user/UserCollection';
 
-/** @module api/base/BaseUtilities */
 
 /**
  * Deletes all documents from all RadGrad collections.

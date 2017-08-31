@@ -4,14 +4,14 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../slug/SlugCollection';
 import BaseCollection from '../base/BaseCollection';
 
-/** @module api/base/BaseSlugCollection */
+/** @module api/base */
 
 /**
  * BaseSlugCollection is an abstract superclass for use by entities that have a slug.
  * It provides an API where the user can provide either a slug or docID (or document-specifying object).
  * Note it does not define a constructor; subclasses should invoke super(type, schema) to get the
  * BaseCollection constructor.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends module:api/base~BaseCollection
  */
 class BaseSlugCollection extends BaseCollection {
 

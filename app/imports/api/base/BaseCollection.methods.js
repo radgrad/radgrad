@@ -7,7 +7,7 @@ import { RadGrad } from '../radgrad/RadGrad';
 import { AppLogs } from '../log/AppLogCollection';
 import { ROLE } from '../role/Role';
 
-/** @module api/base/BaseCollectionMethods */
+/** @module api/base */
 
 /**
  * Allows admins to create and return a JSON object to the client representing a snapshot of the RadGrad database.

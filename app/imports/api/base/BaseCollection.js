@@ -5,7 +5,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../role/Role';
 
-/** @module api/base/BaseCollection */
+/** @module */
 
 /**
  * BaseCollection is an abstract superclass of all RadGrad data model entities.
