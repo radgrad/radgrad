@@ -10,8 +10,6 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-/** @module ui/components/admin/Add_Course_Instance_Widget */
-
 const addSchema = new SimpleSchema({
   semester: String,
   course: String,

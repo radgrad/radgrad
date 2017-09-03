@@ -5,8 +5,6 @@ import { Template } from 'meteor/templating';
 import { Showdown } from 'meteor/markdown';
 import { Slugs } from '../../../../api/slug/SlugCollection.js';
 
-/** @module ui/components/admin/form-fields/FormFieldUtilities */
-
 /**
  * Given a Simple Schema and a field, return true if that field is of type Array.
  * @param schema The simple schema definition.

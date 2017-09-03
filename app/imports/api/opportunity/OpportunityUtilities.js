@@ -7,15 +7,25 @@ import { Users } from '../user/UserCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 import { getStudentsCurrentSemesterNumber } from '../degree-plan/AcademicYearUtilities';
 
-/** @module api/opportunity/OpportunityUtilities */
-
+/**
+ * Returns a random int between min and max.
+ * @param min the minimum value for the random number.
+ * @param max the maximum value for the random number.
+ * @return {*}
+ * @memberOf api/opportunity
+ */
 export function getRandomInt(min, max) {
   min = Math.ceil(min);  // eslint-disable-line no-param-reassign
   max = Math.floor(max);  // eslint-disable-line no-param-reassign
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-export const clearPlannedOpportunityInstances = (studentID) => {
+/**
+ * Removes the planned Opportunities for the given studentID.
+ * @param studentID
+ * @memberOf api/opportunity
+ */
+export function clearPlannedOpportunityInstances(studentID) {
   const courses = OpportunityInstances.find({ studentID, verified: false }).fetch();
   _.forEach(courses, (oi) => {
     const requests = VerificationRequests.find({ studentID, opportunityInstanceID: oi._id }).fetch();
@@ -23,7 +33,7 @@ export const clearPlannedOpportunityInstances = (studentID) => {
       OpportunityInstances.removeIt(oi);
     }
   });
-};
+}
 
 export const calculateOpportunityCompatibility = (opportunityID, studentID) => {
   const course = Opportunities.findDoc(opportunityID);

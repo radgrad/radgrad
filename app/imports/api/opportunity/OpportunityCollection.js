@@ -13,12 +13,11 @@ import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 import { assertICE } from '../ice/IceProcessor';
 
-/** @module api/opportunity/OpportunityCollection */
-
 /**
  * Represents an Opportunity, such as "LiveWire Internship".
  * To represent an Opportunity taken by a specific student in a specific semester, use OpportunityInstance.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @extends api/base.BaseSlugCollection
+ * @memberOf api/opportunity
  */
 class OpportunityCollection extends BaseSlugCollection {
 
@@ -266,5 +265,7 @@ class OpportunityCollection extends BaseSlugCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @type {api/opportunity.OpportunityCollection}
+ * @memberOf api/opportunity
  */
 export const Opportunities = new OpportunityCollection();

@@ -4,10 +4,9 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { calcLevel, updateStudentLevel, updateAllStudentLevels } from './LevelProcessor';
 import { ROLE } from '../role/Role';
 
-/** @module api/level/LevelProcessorMethods */
-
 /**
  * The LevelProcessor calcLevel ValidatedMethod.
+ * @memberOf api/level
  */
 export const calcLevelMethod = new ValidatedMethod({
   name: 'LevelProcessor.calcLevel',
@@ -22,6 +21,7 @@ export const calcLevelMethod = new ValidatedMethod({
 
 /**
  * The LevelProcessor updateLevel ValidatedMethod.
+ * @memberOf api/level
  */
 export const updateLevelMethod = new ValidatedMethod({
   name: 'LevelProcessor.updateLevel',
@@ -36,6 +36,7 @@ export const updateLevelMethod = new ValidatedMethod({
 
 /**
  * The LevelProcessor update all students' level validated method.
+ * @memberOf api/level
  */
 export const updateAllStudentLevelsMethod = new ValidatedMethod({
   name: 'LevelProcessor.updateAllStudentLevels',

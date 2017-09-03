@@ -8,8 +8,6 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
-// /** @module ui/components/advisor/Advisor_Log_Entry_Widget */
-
 Template.Advisor_Log_Entry_Widget.helpers({
   advisorLogs() {
     if (Template.currentData().studentID.get()) {

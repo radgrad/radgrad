@@ -9,8 +9,6 @@ import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
 import { Users } from '../user/UserCollection';
 import { getDepartment } from '../course/CourseUtilities';
 
-/** @module api/star/StarProcessorMethods */
-
 /**
  * Processes the student's star data creating CourseInstances.
  * @param student the student's username.

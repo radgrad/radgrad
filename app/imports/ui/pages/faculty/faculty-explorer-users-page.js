@@ -2,8 +2,6 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { getExplorerUserID } from '../../utilities/template-helpers';
 
-/** @module ui/pages/facutly/Faculty_Explorer_Users_Page */
-
 Template.Faculty_Explorer_Users_Page.onCreated(function facultyExplorerUsersPageOnCreated() {
   this.userID = new ReactiveVar('');
   this.userID.set(getExplorerUserID());

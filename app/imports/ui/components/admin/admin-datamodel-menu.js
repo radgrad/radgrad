@@ -1,8 +1,6 @@
 import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
 
-// /** @module ui/components/admin/Admin_DataModel_Menu */
-
 Template.Admin_DataModel_Menu.helpers({
   careerGoalsRouteName() {
     return RouteNames.adminDataModelCareerGoalsPageRouteName;

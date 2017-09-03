@@ -4,8 +4,6 @@ import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { Users } from '../../../api/user/UserCollection.js';
 
-// /** @module ui/components/advisor/Student_Selector_Tabs */
-
 Template.Student_Selector_Tabs.onCreated(function studentSelectorTabsOnCreated() {
   if (this.data.dictionary) {
     this.state = this.data.dictionary;

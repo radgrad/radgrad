@@ -15,8 +15,6 @@ import { Users } from './UserCollection';
 import { ROLE } from '../role/Role.js';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
-/** @module api/user/BaseProfileCollection */
-
 /* eslint-disable no-param-reassign, class-methods-use-this */
 
 /** Set up the object to be used to map role names to their corresponding collections. */
@@ -28,6 +26,8 @@ rolesToCollectionNames[ROLE.STUDENT] = 'StudentProfileCollection';
 
 /**
  * BaseProfileCollection is an abstract superclass of all profile collections.
+ * @extends api/base.BaseSlugCollection
+ * @memberOf api/user
  */
 class BaseProfileCollection extends BaseSlugCollection {
   constructor(type, schema) {
@@ -162,5 +162,6 @@ class BaseProfileCollection extends BaseSlugCollection {
 
 /**
  * The BaseProfileCollection used by all Profile classes.
+ * @memberOf api/user
  */
 export default BaseProfileCollection;

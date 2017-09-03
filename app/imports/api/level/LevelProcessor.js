@@ -5,12 +5,11 @@ import { Reviews } from '../review/ReviewCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 import { getEarnedICE } from '../ice/IceProcessor';
 
-/** @module api/level/LevelProcessor */
-
 /**
  * Calculates the given student's Level.
  * @param studentID the studentID.
  * @returns {number}
+ * @memberOf api/level
  */
 export function calcLevel(studentID) {
   const instances = _.concat(CourseInstances.find({ studentID }).fetch(),
@@ -46,6 +45,7 @@ export function calcLevel(studentID) {
 /**
  * Updates the student's level.
  * @param studentID the studentID.
+ * @memberOf api/level
  */
 export function updateStudentLevel(studentID) {
   const level = calcLevel(studentID);
@@ -54,6 +54,7 @@ export function updateStudentLevel(studentID) {
 
 /**
  * Updates all the students level.
+ * @memberOf api/level
  */
 export function updateAllStudentLevels() {
   StudentProfiles.find().forEach(student => updateStudentLevel(student._id));

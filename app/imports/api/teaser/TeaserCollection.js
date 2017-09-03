@@ -5,11 +5,10 @@ import BaseSlugCollection from '../base/BaseSlugCollection';
 import { Interests } from '../interest/InterestCollection';
 import { Opportunities } from '../opportunity/OpportunityCollection.js';
 
-/** @module api/teaser/TeaserCollection */
-
 /**
  * Represents a teaser instance, such as "ACM Webmasters".
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @extends api/base.BaseSlugCollection
+ * @memberOf api/teaser
  */
 class TeaserCollection extends BaseSlugCollection {
 
@@ -186,5 +185,7 @@ class TeaserCollection extends BaseSlugCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @type {api/teaser.TeaserCollection}
+ * @memberOf api/teaser
  */
 export const Teasers = new TeaserCollection();

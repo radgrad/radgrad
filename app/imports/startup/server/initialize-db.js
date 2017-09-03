@@ -14,8 +14,6 @@ import { ROLE } from '../../api/role/Role';
 /* global Assets */
 /* eslint no-console: "off" */
 
-/** @module startup/server/initialize-db */
-
 /**
  * Returns an Array of numbers, one per loadable collection, indicating the number of documents in that collection.
  * @returns { Array } An array of collection document counts.

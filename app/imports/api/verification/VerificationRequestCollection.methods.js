@@ -9,14 +9,13 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
 import { ROLE } from '../role/Role';
 
-/** @module api/verification/VerificationRequestCollectionMethods */
-
 /**
  * The ValidatedMethod for updating the status of VerificationRequests.
  * Passed an object with fields:
  * id: the verificationRequestID
  * status: boolean
  * processed: a project object.
+ * @memberOf api/verification
  */
 export const verificationRequestsUpdateStatusMethod = new ValidatedMethod({
   name: 'VerificationRequests.updateStatus',
@@ -35,6 +34,7 @@ export const verificationRequestsUpdateStatusMethod = new ValidatedMethod({
  * @param opportunity The opportunity.
  * @param semester The semester
  * @returns The opportunityInstanceID, or null if it wasn't found.
+ * @memberOf api/verification
  */
 function getOpportunityInstanceID(student, opportunity, semester) {
   const studentID = Users.getID(student);
@@ -57,6 +57,7 @@ function getOpportunityInstanceID(student, opportunity, semester) {
  *     been verified if they are not already verified.
  *   * A status string is returned to the caller to indicate the result of processing.
  * Only faculty, advisors, and admins can invoke this method.
+ * @memberOf api/verification
  */
 export const processVerificationEventMethod = new ValidatedMethod({
   name: 'VerificationRequests.processVerificationEvent',
@@ -115,6 +116,7 @@ export const processVerificationEventMethod = new ValidatedMethod({
  *   * Creates a new Feed instance only if the request was accepted.
  *
  * Only faculty, advisors, and admins can invoke this method.
+ * @memberOf api/verification
  */
 export const processPendingVerificationMethod = new ValidatedMethod({
   name: 'VerificationRequests.processPendingVerification',

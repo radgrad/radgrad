@@ -2,8 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { FeedbackInstances } from './FeedbackInstanceCollection';
 
-/** @module api/feedback/FeedbackInstanceCollectionMethods */
-
 /**
  * Custom method for removing all the instances associated with a student and feedback function.
  */

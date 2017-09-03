@@ -6,8 +6,6 @@ import { MentorProfiles } from '../user/MentorProfileCollection';
 import { FacultyProfiles } from '../user/FacultyProfileCollection';
 import { ROLE } from '../role/Role';
 
-/** @module api/user/SampleUsers */
-
 function makeSampleStudent() {
   const uniqueString = moment().format('YYYYMMDDHHmmssSSSSS');
   const username = `student-${uniqueString}@hawaii.edu`;
@@ -77,6 +75,7 @@ function makeSampleFaculty() {
  * Creates a User based upon the specified role.
  * If role is not supplied, it defaults to ROLE.STUDENT.
  * @returns { String } The docID of the newly generated User.
+ * @memberOf api/user
  */
 export function makeSampleUser(role = ROLE.STUDENT) {
   if (role === ROLE.STUDENT) {

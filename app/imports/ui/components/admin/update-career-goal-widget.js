@@ -7,8 +7,6 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Update_Career_Goal_Widget */
-
 const updateSchema = new SimpleSchema({
   name: String,
   description: String,

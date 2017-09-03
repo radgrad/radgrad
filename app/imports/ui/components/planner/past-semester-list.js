@@ -15,8 +15,6 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-// /** @module ui/components/planner/Past_Semester_List */
-
 Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
   if (this.data) {
     // use dictionary to indicate what is selected for the Inspector.

@@ -1,8 +1,6 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-/** @module ui/components/shared/RouteUserName */
-
 /**
  * Returns the username portion of the route.
  * Returns the username for all routes except the landing page.

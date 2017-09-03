@@ -10,8 +10,13 @@ import { Users } from '../user/UserCollection';
 // import { Semesters } from '../semester/SemesterCollection';
 // import { Slugs } from '../slug/SlugCollection';
 
-/** @module api/course/CourseUtilities */
-
+/**
+ * Returns true if the coursesTakenSlugs fulfills courseID's prerequisites.
+ * @memberOf api/course
+ * @param coursesTakenSlugs slugs of the courses taken.
+ * @param courseID course ID.
+ * @return {boolean}
+ */
 export function prereqsMet(coursesTakenSlugs, courseID) {
   const course = Courses.findDoc(courseID);
   let ret = true;

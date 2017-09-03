@@ -4,11 +4,10 @@ import { LoggerMongo } from 'meteor/ostrio:loggermongo';
 import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
 
-/** @module api/log/AppLogCollection */
-
 /**
  * Represents a log of user interaction with RadGrad.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/log
  */
 class AppLogCollection extends BaseCollection {
 
@@ -52,6 +51,11 @@ class AppLogCollection extends BaseCollection {
 
 }
 
+/**
+ * Provides the singleton instance of this class to all other entities.
+ * @type {api/log.AppLogCollection}
+ * @memberOf api/log
+ */
 export const AppLogs = new AppLogCollection();
 
 // Initialize Logger:

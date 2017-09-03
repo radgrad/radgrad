@@ -19,8 +19,6 @@ import * as RouteNames from '../../../startup/client/router.js';
 import { appLog } from '../../../api/log/AppLogCollection';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 
-// /** @module ui/components/planner/Inspector */
-
 Template.Inspector.onCreated(function inspectorOnCreated() {
   this.state = this.data.dictionary;
 });

@@ -1,3 +1,4 @@
+/** @namespace api/user */
 import './BaseProfileCollection';
 import './AdvisorProfileCollection';
 import './MentorProfileCollection';

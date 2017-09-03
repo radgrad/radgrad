@@ -6,8 +6,6 @@ import { Users } from '../../../api/user/UserCollection';
 
 /* eslint-disable object-shorthand */
 
-/** @module ui/layouts/shared/If_Authorized */
-
 Template.If_Authorized.onCreated(function ifAuthorizedOnCreated() {
   this.subscribe(Users.getPublicationName());
 });

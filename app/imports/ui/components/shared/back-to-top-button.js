@@ -1,7 +1,5 @@
 import { Template } from 'meteor/templating';
 
-// /** @module ui/components/shared/Back_To_Top_Button */
-
 Template.Back_To_Top_Button.onRendered(function backToTopButtonOnRendered() {
   // add your statement here
   const offset = 250;

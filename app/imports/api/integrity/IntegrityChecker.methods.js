@@ -4,10 +4,9 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { checkIntegrity } from './IntegrityChecker.js';
 import { ROLE } from '../role/Role';
 
-/** @module api/integrity/IntegrityCheckerMethods */
-
 /**
  * The check integrity ValidatedMethod.
+ * @memberOf api/integrity
  */
 export const checkIntegrityMethod = new ValidatedMethod({
   name: 'IntegrityCheck',

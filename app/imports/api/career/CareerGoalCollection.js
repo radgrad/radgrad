@@ -163,5 +163,6 @@ class CareerGoalCollection extends BaseSlugCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/career
  */
 export const CareerGoals = new CareerGoalCollection();

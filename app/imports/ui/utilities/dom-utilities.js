@@ -1,6 +1,4 @@
 /* global document */
-/** @module api/utility/dom-utilities */
-
 // TODO this might need to go to the client test helper since it deals with the DOM.
 
 /**

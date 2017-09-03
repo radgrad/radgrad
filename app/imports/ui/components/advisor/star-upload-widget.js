@@ -12,8 +12,6 @@ import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 
 /* global FileReader */
 
-// /** @module ui/components/advisor/Star_Upload_Widget */
-
 const updateSchema = new SimpleSchema({
   firstName: String,
   lastName: String,

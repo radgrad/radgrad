@@ -14,8 +14,6 @@ import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from './route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-// /** @module ui/components/shared/Verification_Requests_Completed */
-
 Template.Verification_Requests_Completed.helpers({
   completedVerifications() {
     const group = FlowRouter.current().route.group.name;

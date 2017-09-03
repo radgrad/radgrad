@@ -7,11 +7,10 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 
-/** @module api/degree-plan/AcademicPlanCollection */
-
 /**
  * AcademicPlans holds the different academic plans possible in this department.
- * @extends module:api/base/BaseCollection~BaseSlugCollection
+ * @extends api/base.BaseSlugCollection
+ * @memberOf api/degree-plan
  */
 class AcademicPlanCollection extends BaseSlugCollection {
 
@@ -221,5 +220,6 @@ class AcademicPlanCollection extends BaseSlugCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/degree-plan
  */
 export const AcademicPlans = new AcademicPlanCollection();

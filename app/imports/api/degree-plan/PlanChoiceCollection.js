@@ -2,11 +2,10 @@ import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
 import { buildSimpleName } from './PlanChoiceUtilities';
 
-/** @module api/degree-plan/PlanChoiceCollection */
-
 /**
  * Represents a choice in an academic plan.
- * @extends api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/degree-plan
  */
 class PlanChoiceCollection extends BaseCollection {
 
@@ -113,5 +112,6 @@ class PlanChoiceCollection extends BaseCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/degree-plan
  */
 export const PlanChoices = new PlanChoiceCollection();

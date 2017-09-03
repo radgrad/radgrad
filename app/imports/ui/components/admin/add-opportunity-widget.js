@@ -16,8 +16,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-// /** @module ui/components/admin/Add_Opportunity_Widget */
-
 const addSchema = new SimpleSchema({
   name: String,
   slug: { type: String, custom: FormUtils.slugFieldValidator },

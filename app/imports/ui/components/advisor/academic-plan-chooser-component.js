@@ -12,8 +12,6 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { ROLE } from '../../../api/role/Role';
 import { updateAcademicPlanMethod } from '../../../api/user/UserCollection.methods';
 
-// /** @module ui/components/advisor/Academic_Plan_Chooser_Component */
-
 Template.Academic_Plan_Chooser_Component.onCreated(function academicPlanChooserComponentOnCreated() {
   // console.log(this.data);
   this.chosenYear = new ReactiveVar('');

@@ -10,8 +10,6 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/List_Interests_Widget */
-
 function numReferences(interest) {
   let references = 0;
   // TODO Add profiles below? Move this into Interests class?

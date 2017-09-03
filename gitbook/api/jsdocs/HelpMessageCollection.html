@@ -1,0 +1,3865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HelpMessageCollection - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdvisorLogCollection.html">AdvisorLogCollection</a><ul class='methods'><li data-type='method'><a href="AdvisorLogCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="AdvisorLogCollection.html#define">define</a></li><li data-type='method'><a href="AdvisorLogCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="AdvisorLogCollection.html#getAdvisorDoc">getAdvisorDoc</a></li><li data-type='method'><a href="AdvisorLogCollection.html#getStudentDoc">getStudentDoc</a></li><li data-type='method'><a href="AdvisorLogCollection.html#publish">publish</a></li><li data-type='method'><a href="AdvisorLogCollection.html#removeUser">removeUser</a></li></ul></li><li><a href="AdvisorProfileCollection.html">AdvisorProfileCollection</a><ul class='methods'><li data-type='method'><a href="AdvisorProfileCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="AdvisorProfileCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="AdvisorProfileCollection.html#define">define</a></li><li data-type='method'><a href="AdvisorProfileCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="AdvisorProfileCollection.html#update">update</a></li></ul></li><li><a href="api_base.BaseCollection.html">BaseCollection</a><ul class='methods'><li data-type='method'><a href="api_base.BaseCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_base.BaseCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_base.BaseCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_base.BaseCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_base.BaseCollection.html#count">count</a></li><li data-type='method'><a href="api_base.BaseCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_base.BaseCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_base.BaseCollection.html#find">find</a></li><li data-type='method'><a href="api_base.BaseCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_base.BaseCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_base.BaseCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_base.BaseCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_base.BaseCollection.html#getType">getType</a></li><li data-type='method'><a href="api_base.BaseCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_base.BaseCollection.html#publish">publish</a></li><li data-type='method'><a href="api_base.BaseCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_base.BaseCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_base.BaseCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_base.BaseCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_base.BaseCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_base.BaseCollection.html#toString">toString</a></li><li data-type='method'><a href="api_base.BaseCollection.html#update">update</a></li></ul></li><li><a href="api_base.BaseSlugCollection.html">BaseSlugCollection</a><ul class='methods'><li data-type='method'><a href="api_base.BaseSlugCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#count">count</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#find">find</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getID">getID</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getType">getType</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#publish">publish</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#toString">toString</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#update">update</a></li></ul></li><li><a href="api_base.BaseTypeCollection.html">BaseTypeCollection</a><ul class='methods'><li data-type='method'><a href="api_base.BaseTypeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#count">count</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#define">define</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#find">find</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getID">getID</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getNameFromID">getNameFromID</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getType">getType</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#publish">publish</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#toString">toString</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#update">update</a></li></ul></li><li><a href="api_career.CareerGoalCollection.html">CareerGoalCollection</a><ul class='methods'><li data-type='method'><a href="api_career.CareerGoalCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#count">count</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#define">define</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#find">find</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findNames">findNames</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getID">getID</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getSlug">getSlug</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getType">getType</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#hasInterest">hasInterest</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#publish">publish</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#toString">toString</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#update">update</a></li></ul></li><li><a href="api_course.CourseCollection.html">CourseCollection</a><ul class='methods'><li data-type='method'><a href="api_course.CourseCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_course.CourseCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_course.CourseCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_course.CourseCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_course.CourseCollection.html#count">count</a></li><li data-type='method'><a href="api_course.CourseCollection.html#define">define</a></li><li data-type='method'><a href="api_course.CourseCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_course.CourseCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_course.CourseCollection.html#find">find</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getID">getID</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getType">getType</a></li><li data-type='method'><a href="api_course.CourseCollection.html#hasInterest">hasInterest</a></li><li data-type='method'><a href="api_course.CourseCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_course.CourseCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_course.CourseCollection.html#publish">publish</a></li><li data-type='method'><a href="api_course.CourseCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_course.CourseCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_course.CourseCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_course.CourseCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_course.CourseCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_course.CourseCollection.html#toString">toString</a></li><li data-type='method'><a href="api_course.CourseCollection.html#update">update</a></li></ul></li><li><a href="api_course.CourseInstanceCollection.html">CourseInstanceCollection</a><ul class='methods'><li data-type='method'><a href="api_course.CourseInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#count">count</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#define">define</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#find">find</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#findCourseInstanceDoc">findCourseInstanceDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#findCourseName">findCourseName</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getCourseDoc">getCourseDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getCourseSlug">getCourseSlug</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getSemesterDoc">getSemesterDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getStudentDoc">getStudentDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#isCourseInstance">isCourseInstance</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#isInteresting">isInteresting</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#toString">toString</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#update">update</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#updateGrade">updateGrade</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#updateSemester">updateSemester</a></li></ul></li><li><a href="api_degree-plan.AcademicPlanCollection.html">AcademicPlanCollection</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#count">count</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#define">define</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#find">find</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getID">getID</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getLatestSemesterNumber">getLatestSemesterNumber</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getPlansForDegree">getPlansForDegree</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getType">getType</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#publish">publish</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#toFullString">toFullString</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#toString">toString</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#update">update</a></li></ul></li><li><a href="api_degree-plan.AcademicYearInstanceCollection.html">AcademicYearInstanceCollection</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#count">count</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#define">define</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#find">find</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#toString">toString</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#update">update</a></li></ul></li><li><a href="api_degree-plan.DesiredDegreeCollection.html">DesiredDegreeCollection</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#count">count</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#define">define</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#find">find</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getID">getID</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getType">getType</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#publish">publish</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#toString">toString</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#update">update</a></li></ul></li><li><a href="api_degree-plan.PlanChoiceCollection.html">PlanChoiceCollection</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#count">count</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#define">define</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#find">find</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#getType">getType</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#publish">publish</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#toString">toString</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#toStringFromSlug">toStringFromSlug</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#update">update</a></li></ul></li><li><a href="api_degree-plan.PreferredChoice.html">PreferredChoice</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.PreferredChoice.html#getBestChoices">getBestChoices</a></li><li data-type='method'><a href="api_degree-plan.PreferredChoice.html#hasPreferences">hasPreferences</a></li></ul></li><li><a href="api_feed.FeedCollection.html">FeedCollection</a><ul class='methods'><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewCourse">_defineNewCourse</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewCourseReview">_defineNewCourseReview</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewOpportunity">_defineNewOpportunity</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewOpportunityReview">_defineNewOpportunityReview</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewUser">_defineNewUser</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewVerifiedOpportunity">_defineNewVerifiedOpportunity</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_updateNewUser">_updateNewUser</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_updateVerifiedOpportunity">_updateVerifiedOpportunity</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#checkPastDayFeed">checkPastDayFeed</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#count">count</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#define">define</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#find">find</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#getType">getType</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#publish">publish</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#toString">toString</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#update">update</a></li></ul></li><li><a href="api_feedback.FeedbackFunctions.html">FeedbackFunctions</a></li><li><a href="api_feedback.FeedbackInstanceCollection.html">FeedbackInstanceCollection</a><ul class='methods'><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#clear">clear</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#count">count</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#define">define</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#find">find</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#findRecommendations">findRecommendations</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#findWarnings">findWarnings</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#toString">toString</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#update">update</a></li></ul></li><li><a href="AppLogCollection.html">AppLogCollection</a><ul class='methods'><li data-type='method'><a href="AppLogCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="AppLogCollection.html#getCollection">getCollection</a></li></ul></li><li><a href="BaseProfileCollection.html">BaseProfileCollection</a><ul class='methods'><li data-type='method'><a href="BaseProfileCollection.html#_checkIntegrityCommonFields">_checkIntegrityCommonFields</a></li><li data-type='method'><a href="BaseProfileCollection.html#_updateCommonFields">_updateCommonFields</a></li><li data-type='method'><a href="BaseProfileCollection.html#getCollectionNameForProfile">getCollectionNameForProfile</a></li><li data-type='method'><a href="BaseProfileCollection.html#getProfile">getProfile</a></li><li data-type='method'><a href="BaseProfileCollection.html#getUserID">getUserID</a></li><li data-type='method'><a href="BaseProfileCollection.html#hasProfile">hasProfile</a></li><li data-type='method'><a href="BaseProfileCollection.html#removeIt">removeIt</a></li></ul></li><li><a href="FacultyProfileCollection.html">FacultyProfileCollection</a><ul class='methods'><li data-type='method'><a href="FacultyProfileCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="FacultyProfileCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="FacultyProfileCollection.html#define">define</a></li><li data-type='method'><a href="FacultyProfileCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="FacultyProfileCollection.html#update">update</a></li></ul></li><li><a href="HelpMessageCollection.html">HelpMessageCollection</a><ul class='methods'><li data-type='method'><a href="HelpMessageCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="HelpMessageCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="HelpMessageCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="HelpMessageCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="HelpMessageCollection.html#count">count</a></li><li data-type='method'><a href="HelpMessageCollection.html#define">define</a></li><li data-type='method'><a href="HelpMessageCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="HelpMessageCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="HelpMessageCollection.html#find">find</a></li><li data-type='method'><a href="HelpMessageCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="HelpMessageCollection.html#findDocByRouteName">findDocByRouteName</a></li><li data-type='method'><a href="HelpMessageCollection.html#findOne">findOne</a></li><li data-type='method'><a href="HelpMessageCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="HelpMessageCollection.html#getHelpText">getHelpText</a></li><li data-type='method'><a href="HelpMessageCollection.html#getHelpTitle">getHelpTitle</a></li><li data-type='method'><a href="HelpMessageCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="HelpMessageCollection.html#getType">getType</a></li><li data-type='method'><a href="HelpMessageCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="HelpMessageCollection.html#publish">publish</a></li><li data-type='method'><a href="HelpMessageCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="HelpMessageCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="HelpMessageCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="HelpMessageCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="HelpMessageCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="HelpMessageCollection.html#toString">toString</a></li><li data-type='method'><a href="HelpMessageCollection.html#update">update</a></li></ul></li><li><a href="InterestCollection.html">InterestCollection</a><ul class='methods'><li data-type='method'><a href="InterestCollection.html#assertUnusedInterest">assertUnusedInterest</a></li><li data-type='method'><a href="InterestCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="InterestCollection.html#define">define</a></li><li data-type='method'><a href="InterestCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="InterestCollection.html#findNames">findNames</a></li><li data-type='method'><a href="InterestCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="InterestCollection.html#update">update</a></li></ul></li><li><a href="InterestTypeCollection.html">InterestTypeCollection</a><ul class='methods'><li data-type='method'><a href="InterestTypeCollection.html#define">define</a></li></ul></li><li><a href="MentorAnswerCollection.html">MentorAnswerCollection</a><ul class='methods'><li data-type='method'><a href="MentorAnswerCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="MentorAnswerCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="MentorAnswerCollection.html#define">define</a></li><li data-type='method'><a href="MentorAnswerCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="MentorAnswerCollection.html#getAnswers">getAnswers</a></li><li data-type='method'><a href="MentorAnswerCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="MentorAnswerCollection.html#removeQuestion">removeQuestion</a></li><li data-type='method'><a href="MentorAnswerCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="MentorAnswerCollection.html#update">update</a></li></ul></li><li><a href="MentorProfileCollection.html">MentorProfileCollection</a><ul class='methods'><li data-type='method'><a href="MentorProfileCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="MentorProfileCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="MentorProfileCollection.html#define">define</a></li><li data-type='method'><a href="MentorProfileCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="MentorProfileCollection.html#update">update</a></li></ul></li><li><a href="MentorQuestionCollection.html">MentorQuestionCollection</a><ul class='methods'><li data-type='method'><a href="MentorQuestionCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="MentorQuestionCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="MentorQuestionCollection.html#define">define</a></li><li data-type='method'><a href="MentorQuestionCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="MentorQuestionCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="MentorQuestionCollection.html#update">update</a></li></ul></li><li><a href="OpportunityCollection.html">OpportunityCollection</a><ul class='methods'><li data-type='method'><a href="OpportunityCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="OpportunityCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="OpportunityCollection.html#define">define</a></li><li data-type='method'><a href="OpportunityCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="OpportunityCollection.html#getOpportunityTypeDoc">getOpportunityTypeDoc</a></li><li data-type='method'><a href="OpportunityCollection.html#getSlug">getSlug</a></li><li data-type='method'><a href="OpportunityCollection.html#hasInterest">hasInterest</a></li><li data-type='method'><a href="OpportunityCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="OpportunityCollection.html#update">update</a></li></ul></li><li><a href="OpportunityInstanceCollection.html">OpportunityInstanceCollection</a><ul class='methods'><li data-type='method'><a href="OpportunityInstanceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#define">define</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#findOpportunityInstanceDoc">findOpportunityInstanceDoc</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#getOpportunityDoc">getOpportunityDoc</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#getSemesterDoc">getSemesterDoc</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#getStudentDoc">getStudentDoc</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#isOpportunityInstance">isOpportunityInstance</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#toString">toString</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#update">update</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#updateSemester">updateSemester</a></li><li data-type='method'><a href="OpportunityInstanceCollection.html#updateVerified">updateVerified</a></li></ul></li><li><a href="OpportunityTypeCollection.html">OpportunityTypeCollection</a><ul class='methods'><li data-type='method'><a href="OpportunityTypeCollection.html#define">define</a></li></ul></li><li><a href="PublicStatsCollection.html">PublicStatsCollection</a><ul class='methods'><li data-type='method'><a href="PublicStatsCollection.html#checkIntegrity">checkIntegrity</a></li></ul></li><li><a href="ReviewCollection.html">ReviewCollection</a><ul class='methods'><li data-type='method'><a href="ReviewCollection.html#assertValidRating">assertValidRating</a></li><li data-type='method'><a href="ReviewCollection.html#assertValidReviewType">assertValidReviewType</a></li><li data-type='method'><a href="ReviewCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="ReviewCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="ReviewCollection.html#define">define</a></li><li data-type='method'><a href="ReviewCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="ReviewCollection.html#getSlug">getSlug</a></li><li data-type='method'><a href="ReviewCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="ReviewCollection.html#update">update</a></li><li data-type='method'><a href="ReviewCollection.html#updateModerated">updateModerated</a></li></ul></li><li><a href="SemesterCollection.html">SemesterCollection</a><ul class='methods'><li data-type='method'><a href="SemesterCollection.html#assertSemester">assertSemester</a></li><li data-type='method'><a href="SemesterCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="SemesterCollection.html#define">define</a></li><li data-type='method'><a href="SemesterCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="SemesterCollection.html#getCurrentSemesterDoc">getCurrentSemesterDoc</a></li><li data-type='method'><a href="SemesterCollection.html#getCurrentSemesterID">getCurrentSemesterID</a></li><li data-type='method'><a href="SemesterCollection.html#getID">getID</a></li><li data-type='method'><a href="SemesterCollection.html#getSemester">getSemester</a></li><li data-type='method'><a href="SemesterCollection.html#getSemesterDoc">getSemesterDoc</a></li><li data-type='method'><a href="SemesterCollection.html#getShortName">getShortName</a></li><li data-type='method'><a href="SemesterCollection.html#getSlug">getSlug</a></li><li data-type='method'><a href="SemesterCollection.html#isUpcomingSemester">isUpcomingSemester</a></li><li data-type='method'><a href="SemesterCollection.html#toString">toString</a></li></ul></li><li><a href="SlugCollection.html">SlugCollection</a><ul class='methods'><li data-type='method'><a href="SlugCollection.html#assertSlug">assertSlug</a></li><li data-type='method'><a href="SlugCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="SlugCollection.html#define">define</a></li><li data-type='method'><a href="SlugCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="SlugCollection.html#getEntityID">getEntityID</a></li><li data-type='method'><a href="SlugCollection.html#getNameFromID">getNameFromID</a></li><li data-type='method'><a href="SlugCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="SlugCollection.html#isSlugForEntity">isSlugForEntity</a></li><li data-type='method'><a href="SlugCollection.html#isValidSlugName">isValidSlugName</a></li><li data-type='method'><a href="SlugCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="SlugCollection.html#updateEntityID">updateEntityID</a></li></ul></li><li><a href="StudentProfileCollection.html">StudentProfileCollection</a><ul class='methods'><li data-type='method'><a href="StudentProfileCollection.html#assertValidLevel">assertValidLevel</a></li><li data-type='method'><a href="StudentProfileCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="StudentProfileCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="StudentProfileCollection.html#define">define</a></li><li data-type='method'><a href="StudentProfileCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="StudentProfileCollection.html#getCourseIDs">getCourseIDs</a></li><li data-type='method'><a href="StudentProfileCollection.html#getEarnedICE">getEarnedICE</a></li><li data-type='method'><a href="StudentProfileCollection.html#getInterestIDs">getInterestIDs</a></li><li data-type='method'><a href="StudentProfileCollection.html#getInterestIDsByType">getInterestIDsByType</a></li><li data-type='method'><a href="StudentProfileCollection.html#getProjectedICE">getProjectedICE</a></li><li data-type='method'><a href="StudentProfileCollection.html#setLevel">setLevel</a></li><li data-type='method'><a href="StudentProfileCollection.html#update">update</a></li></ul></li><li><a href="TeaserCollection.html">TeaserCollection</a><ul class='methods'><li data-type='method'><a href="TeaserCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="TeaserCollection.html#define">define</a></li><li data-type='method'><a href="TeaserCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="TeaserCollection.html#hasInterest">hasInterest</a></li><li data-type='method'><a href="TeaserCollection.html#hasOpportunity">hasOpportunity</a></li><li data-type='method'><a href="TeaserCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="TeaserCollection.html#update">update</a></li></ul></li><li><a href="UserCollection.html">UserCollection</a><ul class='methods'><li data-type='method'><a href="UserCollection.html#assertInRole">assertInRole</a></li><li data-type='method'><a href="UserCollection.html#define">define</a></li><li data-type='method'><a href="UserCollection.html#filterProfiles">filterProfiles</a></li><li data-type='method'><a href="UserCollection.html#findProfiles">findProfiles</a></li><li data-type='method'><a href="UserCollection.html#findProfilesWithRole">findProfilesWithRole</a></li><li data-type='method'><a href="UserCollection.html#getFullName">getFullName</a></li><li data-type='method'><a href="UserCollection.html#getID">getID</a></li><li data-type='method'><a href="UserCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="UserCollection.html#getInterestIDs">getInterestIDs</a></li><li data-type='method'><a href="UserCollection.html#getInterestIDsByType">getInterestIDsByType</a></li><li data-type='method'><a href="UserCollection.html#getProfile">getProfile</a></li><li data-type='method'><a href="UserCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="UserCollection.html#hasProfile">hasProfile</a></li><li data-type='method'><a href="UserCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="UserCollection.html#isReferenced">isReferenced</a></li><li data-type='method'><a href="UserCollection.html#publish">publish</a></li><li data-type='method'><a href="UserCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="UserCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="UserCollection.html#someProfiles">someProfiles</a></li><li data-type='method'><a href="UserCollection.html#subscribe">subscribe</a></li></ul></li><li><a href="VerificationRequestCollection.html">VerificationRequestCollection</a><ul class='methods'><li data-type='method'><a href="VerificationRequestCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="VerificationRequestCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="VerificationRequestCollection.html#define">define</a></li><li data-type='method'><a href="VerificationRequestCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="VerificationRequestCollection.html#findVerificationRequest">findVerificationRequest</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getOpportunityDoc">getOpportunityDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getOpportunityInstanceDoc">getOpportunityInstanceDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getSemesterDoc">getSemesterDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getSponsorDoc">getSponsorDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getStudentDoc">getStudentDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#publish">publish</a></li><li data-type='method'><a href="VerificationRequestCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="VerificationRequestCollection.html#setVerificationStatus">setVerificationStatus</a></li><li data-type='method'><a href="VerificationRequestCollection.html#setVerified">setVerified</a></li><li data-type='method'><a href="VerificationRequestCollection.html#updateStatus">updateStatus</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="api_base.html">api/base</a><ul class='methods'><li data-type='method'><a href="api_base.html#.exports.removeAllEntities">exports.removeAllEntities</a></li></ul></li><li><a href="api_career.html">api/career</a></li><li><a href="api_course.html">api/course</a><ul class='methods'><li data-type='method'><a href="api_course.html#.exports.makeSampleCourse">exports.makeSampleCourse</a></li><li data-type='method'><a href="api_course.html#.exports.makeSampleCourseInstance">exports.makeSampleCourseInstance</a></li><li data-type='method'><a href="api_course.html#.exports.prereqsMet">exports.prereqsMet</a></li></ul></li><li><a href="api_degree-plan.html">api/degree-plan</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.html#.exports.buildCourseSlugName">exports.buildCourseSlugName</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.buildSimpleName">exports.buildSimpleName</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.complexChoiceToArray">exports.complexChoiceToArray</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.getDepartment">exports.getDepartment</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.getDepartments">exports.getDepartments</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.getStudentsCurrentSemesterNumber">exports.getStudentsCurrentSemesterNumber</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.getStudentSemesters">exports.getStudentSemesters</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.isComplexChoice">exports.isComplexChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.isSimpleChoice">exports.isSimpleChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.isSingleChoice">exports.isSingleChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.isXXChoice">exports.isXXChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.planIndexOf">exports.planIndexOf</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.satisfiesPlanChoice">exports.satisfiesPlanChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.stripCounter">exports.stripCounter</a></li><li data-type='method'><a href="api_degree-plan.html#.satisfiesSinglePlanChoice">satisfiesSinglePlanChoice</a></li></ul></li><li><a href="api_feed.html">api/feed</a></li><li><a href="api_feedback.html">api/feedback</a></li><li><a href="api_help.html">api/help</a></li></ul><h3>Global</h3><ul><li><a href="global.html#%2522click.cas-login%2522">"click .cas-login"</a></li><li><a href="global.html#%2522click.meteor-login%2522">"click .meteor-login"</a></li><li><a href="global.html#addBodyClass">addBodyClass</a></li><li><a href="global.html#advisorLogsDefineMethod">advisorLogsDefineMethod</a></li><li><a href="global.html#AdvisorLogsRemoveItMethod">AdvisorLogsRemoveItMethod</a></li><li><a href="global.html#advisorLogsUpdateMethod">advisorLogsUpdateMethod</a></li><li><a href="global.html#appendToLog">appendToLog</a></li><li><a href="global.html#assertICE">assertICE</a></li><li><a href="global.html#assertIntegrity">assertIntegrity</a></li><li><a href="global.html#assertRole">assertRole</a></li><li><a href="global.html#authInProcess">authInProcess</a></li><li><a href="global.html#calcLevel">calcLevel</a></li><li><a href="global.html#calcLevelMethod">calcLevelMethod</a></li><li><a href="global.html#checkIntegrity">checkIntegrity</a></li><li><a href="global.html#checkIntegrityMethod">checkIntegrityMethod</a></li><li><a href="global.html#chooseBetween">chooseBetween</a></li><li><a href="global.html#clearFeedbackInstancesMethod">clearFeedbackInstancesMethod</a></li><li><a href="global.html#convertICE">convertICE</a></li><li><a href="global.html#dateDiffInDays">dateDiffInDays</a></li><li><a href="global.html#defineSemesters">defineSemesters</a></li><li><a href="global.html#defineTestFixture">defineTestFixture</a></li><li><a href="global.html#defineTestFixturesMethod">defineTestFixturesMethod</a></li><li><a href="global.html#descriptionPairs">descriptionPairs</a></li><li><a href="global.html#documentCounts">documentCounts</a></li><li><a href="global.html#filterParsedData">filterParsedData</a></li><li><a href="global.html#findCourseSlug">findCourseSlug</a></li><li><a href="global.html#findSemesterSlug">findSemesterSlug</a></li><li><a href="global.html#fixPath">fixPath</a></li><li><a href="global.html#getAllElementsWithAttribute">getAllElementsWithAttribute</a></li><li><a href="global.html#getDefinitions">getDefinitions</a></li><li><a href="global.html#getDepartment">getDepartment</a></li><li><a href="global.html#getEarnedICE">getEarnedICE</a></li><li><a href="global.html#getEnrollmentData">getEnrollmentData</a></li><li><a href="global.html#getExplorerUserID">getExplorerUserID</a></li><li><a href="global.html#getOpportunityInstanceID">getOpportunityInstanceID</a></li><li><a href="global.html#getProjectedICE">getProjectedICE</a></li><li><a href="global.html#getRestoreFileAge">getRestoreFileAge</a></li><li><a href="global.html#getRouteUserName">getRouteUserName</a></li><li><a href="global.html#getSchemaDataFromEvent">getSchemaDataFromEvent</a></li><li><a href="global.html#getUserIdFromRoute">getUserIdFromRoute</a></li><li><a href="global.html#gradeCompetency">gradeCompetency</a></li><li><a href="global.html#indicateError">indicateError</a></li><li><a href="global.html#indicateSuccess">indicateSuccess</a></li><li><a href="global.html#Interests">Interests</a></li><li><a href="global.html#InterestTypes">InterestTypes</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#isICE">isICE</a></li><li><a href="global.html#isInRole">isInRole</a></li><li><a href="global.html#isInterestArrayValidator">isInterestArrayValidator</a></li><li><a href="global.html#isInterestSlugValidator">isInterestSlugValidator</a></li><li><a href="global.html#isLabel">isLabel</a></li><li><a href="global.html#isRole">isRole</a></li><li><a href="global.html#isSchemaFieldArray">isSchemaFieldArray</a></li><li><a href="global.html#loadCollection">loadCollection</a></li><li><a href="global.html#loadDatabase">loadDatabase</a></li><li><a href="global.html#loadFileDateFormat">loadFileDateFormat</a></li><li><a href="global.html#makeCourseICE">makeCourseICE</a></li><li><a href="global.html#makeCourseInstanceObject">makeCourseInstanceObject</a></li><li><a href="global.html#makeLink">makeLink</a></li><li><a href="global.html#makeSampleInterest">makeSampleInterest</a></li><li><a href="global.html#makeSampleInterestType">makeSampleInterestType</a></li><li><a href="global.html#makeSampleOpportunity">makeSampleOpportunity</a></li><li><a href="global.html#makeSampleOpportunityInstance">makeSampleOpportunityInstance</a></li><li><a href="global.html#makeSampleOpportunityType">makeSampleOpportunityType</a></li><li><a href="global.html#makeSampleUser">makeSampleUser</a></li><li><a href="global.html#newSlugValidator">newSlugValidator</a></li><li><a href="global.html#nextFallSpringSemester">nextFallSpringSemester</a></li><li><a href="global.html#nextSemester">nextSemester</a></li><li><a href="global.html#openCloudinaryWidget">openCloudinaryWidget</a></li><li><a href="global.html#Opportunities">Opportunities</a></li><li><a href="global.html#OpportunityInstances">OpportunityInstances</a></li><li><a href="global.html#opportunitySemesters">opportunitySemesters</a></li><li><a href="global.html#OpportunityTypes">OpportunityTypes</a></li><li><a href="global.html#ProcessedSchema">ProcessedSchema</a></li><li><a href="global.html#processPendingVerificationMethod">processPendingVerificationMethod</a></li><li><a href="global.html#processStarCsvData">processStarCsvData</a></li><li><a href="global.html#processStudentStarCsvData">processStudentStarCsvData</a></li><li><a href="global.html#processVerificationEventMethod">processVerificationEventMethod</a></li><li><a href="global.html#PublicStats">PublicStats</a></li><li><a href="global.html#removeElement">removeElement</a></li><li><a href="global.html#renameKey">renameKey</a></li><li><a href="global.html#Reviews">Reviews</a></li><li><a href="global.html#ROLE">ROLE</a></li><li><a href="global.html#rolesToCollectionNames">rolesToCollectionNames</a></li><li><a href="global.html#Semesters">Semesters</a></li><li><a href="global.html#setupFormWidget">setupFormWidget</a></li><li><a href="global.html#slugFieldValidator">slugFieldValidator</a></li><li><a href="global.html#Slugs">Slugs</a></li><li><a href="global.html#starLoadDataMethod">starLoadDataMethod</a></li><li><a href="global.html#startupCheckIntegrity">startupCheckIntegrity</a></li><li><a href="global.html#startupPublicStats">startupPublicStats</a></li><li><a href="global.html#Teasers">Teasers</a></li><li><a href="global.html#totalDocuments">totalDocuments</a></li><li><a href="global.html#updateAcademicPlanMethod">updateAcademicPlanMethod</a></li><li><a href="global.html#updateAllStudentLevels">updateAllStudentLevels</a></li><li><a href="global.html#updateAllStudentLevelsMethod">updateAllStudentLevelsMethod</a></li><li><a href="global.html#updateLevelMethod">updateLevelMethod</a></li><li><a href="global.html#updateStudentLevel">updateStudentLevel</a></li><li><a href="global.html#Users">Users</a></li><li><a href="global.html#VerificationRequests">VerificationRequests</a></li><li><a href="global.html#verificationRequestsUpdateStatusMethod">verificationRequestsUpdateStatusMethod</a></li><li><a href="global.html#withinPastDay">withinPastDay</a></li><li><a href="global.html#withLoggedInUser">withLoggedInUser</a></li><li><a href="global.html#withRadGradSubscriptions">withRadGradSubscriptions</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">HelpMessageCollection</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        HelpMessageCollection
+        </h2>
+        
+            <div class="class-description"><p>Represents a Help message for a RadGrad page.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="HelpMessageCollection"><span class="type-signature"></span>new HelpMessageCollection<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_help_HelpMessageCollection.js.html">api/help/HelpMessageCollection.js</a>, <a href="api_help_HelpMessageCollection.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Creates the HelpMessage collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="api_base.BaseCollection.html">api/base.BaseCollection</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="assertAllDefined"><span class="type-signature"></span>assertAllDefined<span class="signature">(names)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line207">line 207</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#assertAllDefined">api/base.BaseCollection#assertAllDefined</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Verifies that the list of passed instances are all members of this collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>names</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Should be a list of docs and/or docIDs.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If instances is not an array, or if any instance is not in this collection.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="assertDefined"><span class="type-signature"></span>assertDefined<span class="signature">(name)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line196">line 196</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#assertDefined">api/base.BaseCollection#assertDefined</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Verifies that the passed object is one of this collection's instances.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">List</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Should be a defined ID or doc in this collection.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If not defined.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="assertValidRoleForMethod"><span class="type-signature"></span>assertValidRoleForMethod<span class="signature">(userId)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line252">line 252</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#assertValidRoleForMethod">api/base.BaseCollection#assertValidRoleForMethod</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or Advisor.<br>This is used in the define, update, and removeIt Meteor methods associated with each class.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The userId of the logged in user. Can be null or undefined</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If there is no logged in user, or the user is not an Admin or Advisor.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="checkIntegrity"><span class="type-signature"></span>checkIntegrity<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_help_HelpMessageCollection.js.html">api/help/HelpMessageCollection.js</a>, <a href="api_help_HelpMessageCollection.js.html#line87">line 87</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#checkIntegrity">api/base.BaseCollection#checkIntegrity</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns an empty array (no integrity checking done on this collection.)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An empty array.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="count"><span class="type-signature"></span>count<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Number.html">Number</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#count">api/base.BaseCollection#count</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the number of documents in this collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The number of elements in this collection.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Number.html">Number</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="define"><span class="type-signature"></span>define<span class="signature">(routeName, title, text)</span><span class="type-signature"> &rarr; {any}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_help_HelpMessageCollection.js.html">api/help/HelpMessageCollection.js</a>, <a href="api_help_HelpMessageCollection.js.html#line28">line 28</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Defines the help for a given routeName.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>routeName</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the route name.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the title of the help.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the help text.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>the ID of the help.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="dumpAll"><span class="type-signature"></span>dumpAll<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line271">line 271</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#dumpAll">api/base.BaseCollection#dumpAll</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns an object with two fields: name and contents.<br>Name is the name of this collection.<br>Contents is an array of objects suitable for passing to the restore() method.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An object representing the contents of this collection.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="dumpOne"><span class="type-signature"></span>dumpOne<span class="signature">(docID)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_help_HelpMessageCollection.js.html">api/help/HelpMessageCollection.js</a>, <a href="api_help_HelpMessageCollection.js.html#line105">line 105</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#dumpOne">api/base.BaseCollection#dumpOne</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns an object representing the HelpMessage docID in a format acceptable to define().</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>docID</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The docID of a HelpMessage.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An object representing the definition of docID.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="find"><span class="type-signature"></span>find<span class="signature">(selector, options)</span><span class="type-signature"> &rarr; {Mongo.Cursor}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line89">line 89</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#find">api/base.BaseCollection#find</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="http://docs.meteor.com/#/full/find">Meteor Docs on Mongo Find</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Runs find on this collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>selector</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A MongoDB selector.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>MongoDB options.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Mongo.Cursor</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="findDoc"><span class="type-signature"></span>findDoc<span class="signature">(name)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#findDoc">api/base.BaseCollection#findDoc</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A stricter form of findOne, in that it throws an exception if the entity isn't found in the collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Either the docID, or an object selector, or the 'name' field value.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If the document cannot be found.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The document associated with name.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="findDocByRouteName"><span class="type-signature"></span>findDocByRouteName<span class="signature">(routeName)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_help_HelpMessageCollection.js.html">api/help/HelpMessageCollection.js</a>, <a href="api_help_HelpMessageCollection.js.html#line96">line 96</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the HelpMessage doc associated with RouteName.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>routeName</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The routeName</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The doc, or null if not found.</p>
+</div>
+
+
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="findOne"><span class="type-signature"></span>findOne<span class="signature">(selector, options)</span><span class="type-signature"> &rarr; {Mongo.Cursor}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line101">line 101</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#findOne">api/base.BaseCollection#findOne</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="http://docs.meteor.com/#/full/findOne">Meteor Docs on Mongo Find</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Runs findOne on this collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>selector</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A MongoDB selector.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>MongoDB options.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Mongo.Cursor</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getCollectionName"><span class="type-signature"></span>getCollectionName<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line179">line 179</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#getCollectionName">api/base.BaseCollection#getCollectionName</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the collection name.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The collection name as a string.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getHelpText"><span class="type-signature"></span>getHelpText<span class="signature">(routeName)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_help_HelpMessageCollection.js.html">api/help/HelpMessageCollection.js</a>, <a href="api_help_HelpMessageCollection.js.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the text for the given routeName.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>routeName</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The route name.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getHelpTitle"><span class="type-signature"></span>getHelpTitle<span class="signature">(routeName)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_help_HelpMessageCollection.js.html">api/help/HelpMessageCollection.js</a>, <a href="api_help_HelpMessageCollection.js.html#line78">line 78</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the title for the given routeName.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>routeName</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The route name.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getPublicationName"><span class="type-signature"></span>getPublicationName<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line171">line 171</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#getPublicationName">api/base.BaseCollection#getPublicationName</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Return the publication name.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The publication name, as a string.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getType"><span class="type-signature"></span>getType<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line163">line 163</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#getType">api/base.BaseCollection#getType</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Return the type of this collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The type, as a string.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isDefined"><span class="type-signature"></span>isDefined<span class="signature">(name)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line124">line 124</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#isDefined">api/base.BaseCollection#isDefined</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns true if the passed entity is in this collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The docID, or an object specifying a documennt.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>True if name exists in this collection.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="publish"><span class="type-signature"></span>publish<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line44">line 44</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#publish">api/base.BaseCollection#publish</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Default publication method for entities.<br>It publishes the entire collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeAll"><span class="type-signature"></span>removeAll<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line150">line 150</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#removeAll">api/base.BaseCollection#removeAll</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Removes all elements of this collection.<br>This is implemented by mapping through all elements because mini-mongo does not implement the remove operation.<br>So this approach can be used on both client and server side.<br>removeAll should only used for testing purposes, so it doesn't need to be efficient.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>true</p>
+</div>
+
+
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeIt"><span class="type-signature"></span>removeIt<span class="signature">(docID)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_help_HelpMessageCollection.js.html">api/help/HelpMessageCollection.js</a>, <a href="api_help_HelpMessageCollection.js.html#line60">line 60</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#removeIt">api/base.BaseCollection#removeIt</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Remove the Help Message..</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>docID</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The docID of the entity to be removed.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If docID is not a Help Message.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="restoreAll"><span class="type-signature"></span>restoreAll<span class="signature">(dumpObjects)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line307">line 307</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#restoreAll">api/base.BaseCollection#restoreAll</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Defines all the entities in the passed array of objects.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dumpObjects</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The array of objects representing the definition of a document in this collection.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="restoreOne"><span class="type-signature"></span>restoreOne<span class="signature">(dumpObject)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line296">line 296</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#restoreOne">api/base.BaseCollection#restoreOne</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Defines the entity represented by dumpObject.<br>Defaults to calling the define() method if it exists.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dumpObject</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An object representing one document in this collection.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The docID of the newly created document.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="subscribe"><span class="type-signature"></span>subscribe<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line54">line 54</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#subscribe">api/base.BaseCollection#subscribe</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Default subscription method for entities.<br>It subscribes to the entire collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="toString"><span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_base_BaseCollection.js.html">api/base/BaseCollection.js</a>, <a href="api_base_BaseCollection.js.html#line187">line 187</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#toString">api/base.BaseCollection#toString</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns a string representing all of the documents in this collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(docID, routeName, title, text)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_help_HelpMessageCollection.js.html">api/help/HelpMessageCollection.js</a>, <a href="api_help_HelpMessageCollection.js.html#line40">line 40</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="api_base.BaseCollection.html#update">api/base.BaseCollection#update</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Update a Help Message</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>docID</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The docID to be updated.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>routeName</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The new routeName (optional).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The new title (optional)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>New help text. (optional).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If docID is not defined.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Aug 31 2017 12:22:59 GMT-1000 (HST) using the docdash theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

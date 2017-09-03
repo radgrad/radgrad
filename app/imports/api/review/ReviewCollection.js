@@ -9,11 +9,10 @@ import { Users } from '../user/UserCollection';
 import { Courses } from '../course/CourseCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
-/** @module api/review/ReviewCollection */
-
 /**
  * Represents a course or opportunity review by a student.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @extends api/base.BaseSlugCollection
+ * @memberOf api/review
  */
 class ReviewCollection extends BaseSlugCollection {
 
@@ -252,5 +251,7 @@ class ReviewCollection extends BaseSlugCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @type {api/review.ReviewCollection}
+ * @memberOf api/review
  */
 export const Reviews = new ReviewCollection();

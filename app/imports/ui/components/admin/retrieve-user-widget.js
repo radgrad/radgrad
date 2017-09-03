@@ -3,8 +3,6 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessor.methods';
 
-// /** @module ui/components/admin/Retrieve_User_Widget */
-
 Template.Retrieve_User_Widget.helpers({
   users(role) {
     return Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });

@@ -8,8 +8,6 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { makeLink } from './datamodel-utilities';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/List_Teasers_Widget */
-
 function numReferences() {
   // currently nothing refers to a Teaser, but maybe in future something will.
   return 0;

@@ -16,7 +16,6 @@ import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Add_User_Widget */
 
 const addSchema = new SimpleSchema({
   username: { type: String, custom: FormUtils.slugFieldValidator },

@@ -4,10 +4,9 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { AdvisorLogs } from './AdvisorLogCollection';
 import { ROLE } from '../role/Role';
 
-/** @module api/log/AdvisorLogCollectionMethods */
-
 /**
  * The validated method for defining AdvisorLogs.
+ * @memberOf api/log
  */
 export const advisorLogsDefineMethod = new ValidatedMethod({
   name: 'AdvisorLogs.define',
@@ -25,6 +24,7 @@ export const advisorLogsDefineMethod = new ValidatedMethod({
 
 /**
  * The ValidatedMethod for updating AdvisorLogs.
+ * @memberOf api/log
  */
 export const advisorLogsUpdateMethod = new ValidatedMethod({
   name: 'AdvisorLogs.update',
@@ -42,6 +42,7 @@ export const advisorLogsUpdateMethod = new ValidatedMethod({
 
 /**
  * The validated method for removing AdvisorLogs.
+ * @memberOf api/log
  */
 export const AdvisorLogsRemoveItMethod = new ValidatedMethod({
   name: 'AdvisorLogs.removeIt',

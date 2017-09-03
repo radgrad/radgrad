@@ -15,8 +15,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Update_Opportunity_Widget */
-
 const updateSchema = new SimpleSchema({
   name: String,
   description: String,

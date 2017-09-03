@@ -7,8 +7,6 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/List_Career_Goal_Widget */
-
 function numReferences(careerGoal) {
   let references = 0;
   Users.findProfiles().forEach(function (profile) {

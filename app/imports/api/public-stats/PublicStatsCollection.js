@@ -15,8 +15,6 @@ import { Reviews } from '../review/ReviewCollection';
 import { Users } from '../user/UserCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 
-/** @module api/public-stats/PublicStatsCollection */
-
 /**
  * PublicStats holds statistics about RadGrad that can be accessed without logging in.
  * These are referenced in the landing page and the guided tour.
@@ -28,7 +26,8 @@ import { StudentProfiles } from '../user/StudentProfileCollection';
  * See startup/server/initialize-db.js for the code that starts a cron job that updates this collection when the
  * system starts up and once a day thereafter.
  *
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/public-stats
  */
 class PublicStatsCollection extends BaseCollection {
   /**
@@ -247,6 +246,8 @@ class PublicStatsCollection extends BaseCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @type {api/public-stats.PublicStatsCollection}
+ * @memberOf api/public-stats
  */
 export const PublicStats = new PublicStatsCollection();
 

@@ -10,8 +10,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Update_Opportunity_Instance_Widget */
-
 const updateSchema = new SimpleSchema({
   semester: String,
   opportunity: String,

@@ -12,8 +12,6 @@ import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-// /** @module ui/components/shared/Verification_Requests_Pending */
-
 Template.Verification_Requests_Pending.helpers({
   opportunityName(request) {
     const opportunity = VerificationRequests.getOpportunityDoc(request._id);

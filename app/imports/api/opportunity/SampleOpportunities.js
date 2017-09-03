@@ -6,11 +6,10 @@ import { Semesters } from '../semester/SemesterCollection';
 import { makeSampleInterest } from '../interest/SampleInterests';
 
 
-/** @module api/opportunity/SampleOpportunities */
-
 /**
  * Creates an OpportunityType with a unique slug and returns its docID.
  * @returns { String } The docID of the newly generated OpportunityType.
+ * @memberOf api/opportunity
  */
 export function makeSampleOpportunityType() {
   const name = 'Sample Opportunity Type';
@@ -24,6 +23,7 @@ export function makeSampleOpportunityType() {
  * @param sponsor The slug for the user (with Role.FACULTY) to be the sponsor for this opportunity.
  * Also creates a new OpportunityType.
  * @returns { String } The docID for the newly generated Opportunity.
+ * @memberOf api/opportunity
  */
 export function makeSampleOpportunity(sponsor) {
   const name = 'Sample Opportunity';
@@ -42,6 +42,7 @@ export function makeSampleOpportunity(sponsor) {
  * @param student The slug for the user (with ROLE.STUDENT) who is taking advantage of this opportunity.
  * @param sponsor The slug for the user (with ROLE.FACULTY) who is sponsoring the opportunity.
  * Implicitly creates an Opportunity and an OpportunityType.
+ * @memberOf api/opportunity
  */
 export function makeSampleOpportunityInstance(student, sponsor) {
   const semester = Semesters.define({ term: Semesters.SPRING, year: 2015 });

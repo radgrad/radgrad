@@ -5,8 +5,6 @@ import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Update_Help_Message_Widget */
-
 const updateSchema = new SimpleSchema({
   routeName: String,
   title: String,

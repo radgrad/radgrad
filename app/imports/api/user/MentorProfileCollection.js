@@ -8,10 +8,10 @@ import { CareerGoals } from '../career/CareerGoalCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
 
-/** @module api/user/MentorProfileCollection */
 /**
  * Represents a Mentor Profile.
- * @extends module:api/base/BaseCollection~BaseProfileCollection
+ * @extends api/user.BaseProfileCollection
+ * @memberOf api/user
  */
 class MentorProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -143,4 +143,9 @@ class MentorProfileCollection extends BaseProfileCollection {
   }
 }
 
+/**
+ * Provides the singleton instance.
+ * @type {api/user.MentorProfileCollection}
+ * @memberOf api/user
+ */
 export const MentorProfiles = new MentorProfileCollection();

@@ -13,7 +13,6 @@ import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { getRouteUserName } from './route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-/** @module ui/components/shared/Moderation */
 
 const noSlugSchema = new SimpleSchema({
   moderatorComments: { type: String, optional: true },

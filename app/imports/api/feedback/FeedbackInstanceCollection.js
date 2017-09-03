@@ -6,11 +6,10 @@ import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
 
-/** @module api/feedback/FeedbackInstanceCollection */
-
 /**
  * Each FeedbackInstance represents one recommendation or warning for a user.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/feedback
  */
 class FeedbackInstanceCollection extends BaseCollection {
 
@@ -158,5 +157,6 @@ class FeedbackInstanceCollection extends BaseCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/feedback
  */
 export const FeedbackInstances = new FeedbackInstanceCollection();

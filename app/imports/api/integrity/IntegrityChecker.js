@@ -3,11 +3,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { RadGrad } from '../radgrad/RadGrad';
 
-/** @module api/integrity/IntegrityChecker */
-
 /**
  * Checks the integrity of all the collection classes in RadGrad.
  * @returns {{count: number, message: string}}
+ * @memberOf api/integrity
  */
 export function checkIntegrity() {
   let message = `Integrity check results (${moment().format('MMM Do YYYY, H:mm:ss a')})`;
@@ -31,6 +30,7 @@ export function checkIntegrity() {
  * Checks the integrity of the database, and throws an Error if there are any integrity problems.
  * @returns Null if nothing is wrong.
  * @throws { Meteor.Error } If there is an integrity problem.
+ * @memberOf api/integrity
  */
 export function assertIntegrity() {
   const { count, message } = checkIntegrity();

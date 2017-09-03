@@ -14,8 +14,6 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-// /** @module ui/components/planner/Academic_Plan */
-
 export const plannerKeys = {
   detailCourse: 'detailCourse',
   detailCourseInstance: 'detailCourseInstance',

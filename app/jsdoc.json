@@ -33,7 +33,7 @@
     }
   },
   "docdash": {
-    "static": true,
+    "static": false,
     "sort": true
   }
 }

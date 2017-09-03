@@ -7,8 +7,6 @@ import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Add_Course_Widget */
-
 const addSchema = new SimpleSchema({
   name: String,
   slug: { type: String, custom: FormUtils.slugFieldValidator },
