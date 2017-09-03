@@ -34,7 +34,9 @@ Internal functions might also have a JSDoc if they are sufficiently complicated.
 
 All complex functions should have an associated unit test. 
 
-Complex tests may need a custom fixture to be loaded in order to set up the DB state correctly.
+Complex tests may need a DB fixture to be loaded in order to set up the DB state correctly.
+
+Methods should have integration tests to ensure that client-server communication works properly.
 
 ## Import paths
 

@@ -20,7 +20,7 @@
 * Getting started
   * [Installation](developerguide/installation.md)
   * [IDE Setup](developerguide/ide.md)
-  * [Directory Structure](developerguide/directorystructure.md)
+  * [Source code organization](developerguide/source-code-organization.md)
 * Quality assurance
   * [Coding Standards](developerguide/codingstandards.md)
   * [Testing](developerguide/testing.md)
@@ -33,26 +33,32 @@
 * Delivery
   * [Scripts](developerguide/scripts.md)
   * [Deployment](developerguide/deployment.md)
+  * [CAS Authentication](developerguide/cas.md)
+  * [Cloudinary Image Service](developerguide/cloudinary.md)
 
 ### Data Model
 
-* [Introduction](datamodel/README.md)
-* [User](datamodel/user.md)
-* [Interest](datamodel/interest.md)
-* [Opportunity](datamodel/opportunity.md)
-* [Desired Degree](datamodel/desired-degree.md)
-* [Career Goal](datamodel/career-goal.md)
-* [Degree Plan](datamodel/degreeplan.md)
-* [Course](datamodel/course.md)
-* [Work](datamodel/work.md)
-* [Recommendations & Warnings](datamodel/recommendation.md)
-* [Slug](datamodel/slug.md)
-* [ICE (Innovation, Competency, Experience)](datamodel/ice.md)
-* [Samples](datamodel/samples.md)
-* [Definitions](datamodel/definitions.md)
-* [STAR Processor](datamodel/star-processor.md)
-* [Javascript Class Hierarchy](datamodel/class-hierarchy.md)
-* [Future enhancements](datamodel/future-enhancements.md)
+* Key Concepts
+  * Collections are Classes
+  * Slugs
+  * Foreign keys
+  * Dump/Restore
+  * Pub/Sub caching
+  * Integrity checking
+  * RadGrad roles
+  * Testing
+* Entity-Relationship model
+* Class Hierarchy
+
+
+### User interface
+
+* Key concepts
+  * Layouts, pages, components
+  * Routing
+  * Form field components
+  * Inter-widget state communication
+  * When a page doesn't display
 
 ### API
 

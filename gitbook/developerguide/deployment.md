@@ -12,3 +12,5 @@ The ICS deployment is hosted at [Galaxy](https://www.meteor.com/hosting), a Mete
   * Galaxy provides SSL (https) automatically. SSL configuration can be complex and time-consuming.
   
 The MongoDB instance for the ICS Deployment is hosted at [MLab](https://mlab.com/).
+
+To deploy radgrad.ics.hawaii.edu, you must have permission to deploy to the radgrad organization at Galaxy. You must also have access to the settings.production.json file used for this deployment. See Philip if you require deployment capability.
