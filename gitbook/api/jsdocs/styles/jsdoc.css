@@ -181,7 +181,7 @@ nav ul a:active {
   font-family: 'Montserrat', sans-serif;
   line-height: 18px;
   padding: 0;
-  display: block;
+  /* display: block; */
   font-size: 12px;
 }
 
