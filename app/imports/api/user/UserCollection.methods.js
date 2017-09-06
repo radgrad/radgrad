@@ -7,6 +7,7 @@ import { Users } from './UserCollection';
 import { StudentProfiles } from './StudentProfileCollection';
 /**
  * Allows students to update their academic plans.
+ * @memberOf api/user
  */
 export const updateAcademicPlanMethod = new ValidatedMethod({
   name: 'User.updateAcademicPlan',

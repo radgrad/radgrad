@@ -29,6 +29,7 @@ Template.Verification_Event.helpers({
  * Appends the passed message to the reactive variable holding the log text.
  * @param instance The template instance.
  * @param message The message to be appended to the log.
+ * @memberOf ui/components/shared
  */
 function appendToLog(instance, message) {
   instance.log.set(`${instance.log.get()}\n${message}`);

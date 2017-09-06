@@ -1,3 +1,4 @@
+/** @namespace startup/client */
 import './blazer';
 import './logging';
 import './router.js';

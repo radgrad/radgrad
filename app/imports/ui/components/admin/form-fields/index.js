@@ -1,3 +1,4 @@
+/** @namespace ui/components/admin/form-fields */
 import './academic-plan-form-fields.html';
 import './academic-plan-form-fields';
 

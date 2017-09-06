@@ -1,3 +1,4 @@
+/** @namespace ui/layouts/shared */
 import './first-menu.html';
 import './first-menu.js';
 

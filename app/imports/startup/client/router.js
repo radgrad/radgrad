@@ -4,7 +4,7 @@ import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { appLog } from '../../api/log/AppLogCollection';
 
-/**
+/*
  * Design notes:
  * Only one group per role. (Used to extract role from path.)
  * Every group must have a home page called 'home'.  (Used for redirect from landing.)

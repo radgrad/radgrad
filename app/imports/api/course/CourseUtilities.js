@@ -16,6 +16,7 @@ import { Users } from '../user/UserCollection';
  * @param coursesTakenSlugs slugs of the courses taken.
  * @param courseID course ID.
  * @return {boolean}
+ * @memberOf api/course
  */
 export function prereqsMet(coursesTakenSlugs, courseID) {
   const course = Courses.findDoc(courseID);
@@ -126,6 +127,7 @@ export function chooseStudent400LevelCourse(studentID, coursesTakenSlugs) {
  * @param studentID the student's ID.
  * @param coursesTakenSlugs an array of the course slugs the student has taken.
  * @returns {*}
+ * @memberOf api/course
  */
 export function chooseBetween(slugs, studentID, coursesTakenSlugs) {
   // console.log('chooseBetween', slugs, coursesTakenSlugs);
@@ -150,6 +152,7 @@ export function chooseBetween(slugs, studentID, coursesTakenSlugs) {
  * Returns the department from the given course slug.
  * @param courseSlug the course slug.
  * @returns {string}
+ * @memberOf api/course
  */
 export function getDepartment(courseSlug) {
   return courseSlug.split('_')[0].toUpperCase();

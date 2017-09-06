@@ -47,6 +47,7 @@ Template.List_Users_Widget.helpers({
    * will be called twice, once with a "partial" user document followed by a call with the complete user document.
    * To prevent descriptionPairs from calling methods like CareerGoals.findNames with the undefined value due to
    * the "partial" user document, the existence of a "complete" user document is checked before constructing the array.
+   * @memberOf ui/components/admin
    */
   descriptionPairs(user) {
     const pairs = [];

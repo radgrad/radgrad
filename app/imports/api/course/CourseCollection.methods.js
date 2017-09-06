@@ -11,6 +11,7 @@ import { nextSemester } from '../semester/SemesterUtilities';
  * current planned enrollment for the course in that semester.
  * @param courseID The ID of the course.
  * @param semesterID The ID of the semester.
+ * @memberOf api/course
  */
 function getEnrollmentData(courseID, semesterID) {
   const semesterShortName = Semesters.getShortName(semesterID);

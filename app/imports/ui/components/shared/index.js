@@ -1,3 +1,4 @@
+/** @namespace ui/components/shared */
 import './advisor-log-viewer.html';
 import './advisor-log-viewer.js';
 

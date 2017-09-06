@@ -10,6 +10,7 @@ import { Slugs } from '../../../../api/slug/SlugCollection.js';
  * @param schema The simple schema definition.
  * @param field The field of interest.
  * @returns {boolean} True if the field is of type array.
+ * @memberOf ui/components/admin/form-fields
  */
 function isSchemaFieldArray(schema, field) {
   return schema.schema(field).type.definitions[0].type.name === 'Array';
@@ -20,6 +21,7 @@ function isSchemaFieldArray(schema, field) {
  * @param schema The simple schema.
  * @param event The event holding the form data.
  * @returns {Object} An object whose keys are the schema keys and whose values are the corresponding form values.
+ * @memberOf ui/components/admin/form-fields
  */
 export function getSchemaDataFromEvent(schema, event) {
   const eventData = {};
@@ -38,6 +40,7 @@ export function getSchemaDataFromEvent(schema, event) {
  * Custom validator for the slug field.
  * @returns True if the slug value is not previously defined, otherwise errorType 'duplicateSlug'.
  * @throws Error if there are no Slugs in the SlugCollection.
+ * @memberOf ui/components/admin/form-fields
  */
 export function slugFieldValidator() {
   if (Slugs.count() === 0) {
@@ -53,6 +56,7 @@ export function slugFieldValidator() {
  * @param obj The object containing oldKey
  * @param oldKey The oldKey (a string).
  * @param newKey The newKey (a string).
+ * @memberOf ui/components/admin/form-fields
  */
 export function renameKey(obj, oldKey, newKey) {
   obj[newKey] = obj[oldKey];
@@ -62,6 +66,7 @@ export function renameKey(obj, oldKey, newKey) {
 /**
  * Convert ICE values from three fields to a single 'ice' field with an object value.
  * @param obj The data object holding ICE values as three separate fields.
+ * @memberOf ui/components/admin/form-fields
  */
 export function convertICE(obj) {
   obj.ice = { i: obj.innovation, c: obj.competency, e: obj.experience };
@@ -74,6 +79,7 @@ export function convertICE(obj) {
  * Add successClass, errorClass, and context to the template.
  * @param instance The template instance.
  * @param schema The schema associated with the form in this instance.
+ * @memberOf ui/components/admin/form-fields
  */
 export function setupFormWidget(instance, schema) {
   instance.successClass = new ReactiveVar('');
@@ -87,6 +93,7 @@ export function setupFormWidget(instance, schema) {
  * After a form submission has completed successfully, update template state to indicate success.
  * @param instance The template instance.
  * @param event The event holding the form data.
+ * @memberOf ui/components/admin/form-fields
  */
 export function indicateSuccess(instance, event) {
   instance.successClass.set('success');
@@ -98,6 +105,7 @@ export function indicateSuccess(instance, event) {
 /**
  * If a form submission was not validated, update template state to indicate error.
  * @param instance The template instance.
+ * @memberOf ui/components/admin/form-fields
  */
 export function indicateError(instance, error) {
   if (instance.errorClass) {

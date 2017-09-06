@@ -13,6 +13,7 @@ import { getDepartment } from '../course/CourseUtilities';
  * Processes the student's star data creating CourseInstances.
  * @param student the student's username.
  * @param csvData the student's STAR data.
+ * @memberOf api/star
  */
 function processStudentStarCsvData(advisor, student, csvData) {
   const definitions = processStarCsvData(student, csvData);
@@ -77,6 +78,7 @@ function processStudentStarCsvData(advisor, student, csvData) {
 
 /**
  * ValidatedMethod for loading student STAR data.
+ * @memberOf api/star
  */
 export const starLoadDataMethod = new ValidatedMethod({
   name: 'StarProcessor.loadStarCsvData',

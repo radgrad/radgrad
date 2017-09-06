@@ -1,3 +1,4 @@
+/** @namespace ui/components/landing */
 import './landing-green-background.css';
 import './landing-grey-background.css';
 

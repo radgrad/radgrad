@@ -17,6 +17,7 @@ import { ROLE } from '../../api/role/Role';
 /**
  * Returns an Array of numbers, one per loadable collection, indicating the number of documents in that collection.
  * @returns { Array } An array of collection document counts.
+ * @memberOf startup/server
  */
 function documentCounts() {
   return _.map(RadGrad.collectionLoadSequence, collection => collection.count());
@@ -25,6 +26,7 @@ function documentCounts() {
 /**
  * Returns the total number of documents in the loadable collections.
  * @returns { Number } The total number of RadGrad documents in the loadable collections.
+ * @memberOf startup/server
  */
 function totalDocuments() {
   return _.reduce(documentCounts(), function reducer(sum, count) {
@@ -36,6 +38,7 @@ function totalDocuments() {
  * The load/fixture file date format.
  * Used when dumping and restoring the RadGrad database.
  * @type {string}
+ * @memberOf startup/server
  */
 const loadFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
 
@@ -43,6 +46,7 @@ const loadFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
  * Returns a string indicating how long ago the load file was created. Parses the file name string.
  * @param loadFileName The file name.
  * @returns { String } A string indicating how long ago the file was created.
+ * @memberOf startup/server
  */
 function getRestoreFileAge(loadFileName) {
   const terms = _.words(loadFileName, /[^/. ]+/g);
@@ -56,6 +60,7 @@ function getRestoreFileAge(loadFileName) {
  * Console messages are generated when the contents of the load file does not include collections that
  * this function assumes are present. Conversely, if the load file contains collections not processed with
  * this file, a string is also printed out.
+ * @memberOf startup/server
  */
 function loadDatabase() {
   const loadFileName = Meteor.settings.public.databaseRestoreFileName;
@@ -88,6 +93,7 @@ function loadDatabase() {
 /**
  * Runs the PublicStats generator to collect stats on the database, then sets up a cron job to update the stats
  * once a day.
+ * @memberOf startup/server
  */
 function startupPublicStats() {
   PublicStats.generateStats();
@@ -105,6 +111,7 @@ function startupPublicStats() {
 
 /**
  * Check the integrity of the newly loaded collections; print out problems if any occur.
+ * @memberOf startup/server
  */
 function startupCheckIntegrity() {
   console.log('Checking DB integrity.');

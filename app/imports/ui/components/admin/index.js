@@ -1,3 +1,4 @@
+/** @namespace ui/components/admin */
 import './add-career-goal-widget.html';
 import './add-career-goal-widget.js';
 
