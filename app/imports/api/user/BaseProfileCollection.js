@@ -17,7 +17,8 @@ import { VerificationRequests } from '../verification/VerificationRequestCollect
 
 /* eslint-disable no-param-reassign, class-methods-use-this */
 
-/** Set up the object to be used to map role names to their corresponding collections. */
+/** Set up the object to be used to map role names to their corresponding collections.
+ * @memberOf api/user */
 const rolesToCollectionNames = { };
 rolesToCollectionNames[ROLE.ADVISOR] = 'AdvisorProfileCollection';
 rolesToCollectionNames[ROLE.FACULTY] = 'FacultyProfileCollection';

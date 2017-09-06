@@ -33,8 +33,8 @@ Template.Moderation.onCreated(function ModerationOnCreated() {
  * @param schema The simple schema.
  * @param event The event holding the form data.
  * @returns {Object} An object whose keys are the schema keys and whose values are the corresponding form values.
+ * @memberOf ui/components/shared
  */
-
 function getSchemaDataFromEvent(schema, event) {
   const eventData = {};
   _.forEach(schema._firstLevelSchemaKeys, function (key) {

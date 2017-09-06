@@ -1,3 +1,4 @@
+/** @namespace startup/server */
 import './accounts.js';
 import './initialize-db.js';
 import './logging.js';

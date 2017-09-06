@@ -13,6 +13,7 @@ Template.If_Authorized.onCreated(function ifAuthorizedOnCreated() {
 Template.If_Authorized.helpers({
   /**
    * @returns {*} True if Meteor is in the process of logging in.
+   * @memberOf ui/layouts/shared
    */
   authInProcess: function authInProcess() {
     return Meteor.loggingIn();
@@ -27,6 +28,7 @@ Template.If_Authorized.helpers({
    * If current user is a mentor, they can see only their own page (mentor/<username>).
    * If current user is an alumni, they can see only their own page (alumni/<username>).
    * @returns {boolean} True if there is a logged in user and they are authorized to visit the page.
+   * @memberOf ui/layouts/shared
    */
   isAuthorized: function isAuthorized() {
     // console.log('running isAuthorized');

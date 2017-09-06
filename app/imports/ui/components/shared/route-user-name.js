@@ -4,6 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 /**
  * Returns the username portion of the route.
  * Returns the username for all routes except the landing page.
+ * @memberOf ui/components/shared
  */
 export function getRouteUserName() {
   // FlowRouter does url-encoding on paths, but has a bug so that '@' gets replaced with '%2540'.
@@ -16,5 +17,6 @@ export function getRouteUserName() {
 
 /**
  * Provide getRouteUserName as a global helper called routeUserName.
+ * @memberOf ui/components/shared
  */
 Template.registerHelper('routeUserName', () => getRouteUserName());

@@ -4,6 +4,7 @@ import { FeedbackInstances } from './FeedbackInstanceCollection';
 
 /**
  * Custom method for removing all the instances associated with a student and feedback function.
+ * @memberOf api/feedback
  */
 export const clearFeedbackInstancesMethod = new ValidatedMethod({
   name: 'FeedbackInstances.clear',

@@ -10,6 +10,7 @@ Template.RadGrad_Login_Buttons.events({
    * Handle the .cas-login click event.
    * @param event The click event.
    * @returns {boolean} False.
+   * @memberOf ui/components/landing
    */
   'click .cas-login': function casLogin(event, instance) {
     event.preventDefault();
@@ -33,6 +34,7 @@ Template.RadGrad_Login_Buttons.events({
    * Handle the .meteor-login click event,
    * @param event The click event.
    * @returns {boolean} False.
+   * @memberOf ui/components/landing
    */
   'click .meteor-login': function clickOpenModal(event) {
     event.preventDefault();

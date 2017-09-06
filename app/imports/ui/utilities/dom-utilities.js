@@ -6,6 +6,7 @@
  * @param attribute The div attribute
  * @param value the value.
  * @returns {Array}
+ * @memberOf ui/utilities
  */
 export function getAllElementsWithAttribute(attribute, value) {
   const matchingElements = [];
@@ -22,6 +23,7 @@ export function getAllElementsWithAttribute(attribute, value) {
 /**
  * Removes the element with the given id from the document.
  * @param id the id of the Element.
+ * @memberOf ui/utilities
  */
 export function removeElement(id) {
   const element = document.getElementById(id);

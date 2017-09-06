@@ -7,6 +7,7 @@ import { $ } from 'meteor/jquery';
  * Opens the Cloudinary Upload widget and sets the value of the input field with name equal to nameAttribute to the
  * resulting URL of the uploaded picture.
  * @param nameAttribute The value of the associated input field's name attribute.
+ * @memberOf ui/components/form-fields
  */
 export function openCloudinaryWidget(nameAttribute) {
   cloudinary.openUploadWidget(
