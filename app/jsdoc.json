@@ -18,7 +18,8 @@
     "template": "node_modules/radgrad-jsdoc-template",
     "destination": "../gitbook/api/jsdocs",
     "recurse": true,
-    "verbose": true
+    "verbose": true,
+    "readme": "README.txt"
   },
   "markdown": {
     "parser": "gfm",
