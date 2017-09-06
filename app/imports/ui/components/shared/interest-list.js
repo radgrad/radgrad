@@ -7,8 +7,6 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
 
-// /** @module ui/components/shared/Interest_List */
-
 function matchingInterestsHelper(item) {
   const matchingInterests = [];
   const userInterestIDs = Users.getInterestIDs(getRouteUserName());

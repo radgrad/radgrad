@@ -5,13 +5,13 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../role/Role';
 
-/** @module api/base/BaseCollection */
 
 /**
  * BaseCollection is an abstract superclass of all RadGrad data model entities.
  * It is the direct superclass for SlugCollection and SemesterCollection.
  * Other collection classes are derived from BaseSlugCollection or BaseTypeCollection, which are abstract
  * classes that inherit from this one.
+ * @memberOf api/base
  */
 class BaseCollection {
 
@@ -217,6 +217,7 @@ class BaseCollection {
    * @param roles An array of roles.
    * @throws { Meteor.Error } If userId is not defined or user is not in the specified roles.
    * @returns True if no error is thrown.
+   * @ignore
    */
   _assertRole(userId, roles) {  // eslint-disable-line class-methods-use-this
     if (!userId) {
@@ -233,6 +234,7 @@ class BaseCollection {
    * @param userId The userID.
    * @param roles An array of roles.
    * @returns true if the user is in the roles, false otherwise.
+   * @ignore
    */
   _hasRole(userId, roles) {  // eslint-disable-line class-methods-use-this
     if (!userId) {

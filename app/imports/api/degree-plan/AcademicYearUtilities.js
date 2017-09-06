@@ -3,12 +3,11 @@ import { AcademicYearInstances } from './AcademicYearInstanceCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Semesters } from '../semester/SemesterCollection';
 
-/** @module api/degree-plan/AcademicYearUtilities */
-
 /**
  * Returns the student's current semester number (i.e. which semester are they currently in.)
  * @param studentID the studentID.
  * @returns {number}
+ * @memberOf api/degree-plan
  */
 export function getStudentsCurrentSemesterNumber(studentID) {
   const cis = CourseInstances.find({ studentID }).fetch();
@@ -29,6 +28,7 @@ export function getStudentsCurrentSemesterNumber(studentID) {
  * Returns an array of the semesterIDs that the student has taken or is planning to take courses or opportunities
  * in.
  * @param studentID the studentID.
+ * @memberOf api/degree-plan
  */
 export function getStudentSemesters(studentID) {
   const years = AcademicYearInstances.find({ studentID }, { $sort: { year: 1 } }).fetch();

@@ -4,11 +4,10 @@ import { moment } from 'meteor/momentjs:moment';
 import { Slugs } from '../slug/SlugCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
-/** @module api/semester/SemesterCollection */
-
 /**
  * Represents a specific semester, such as "Spring, 2016", "Fall, 2017", or "Summer, 2015".
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @extends api/base.BaseSlugCollection
+ * @memberOf api/semester
  */
 class SemesterCollection extends BaseSlugCollection {
 
@@ -248,5 +247,7 @@ class SemesterCollection extends BaseSlugCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @type {api/semester.SemesterCollection}
+ * @memberOf api/semester
  */
 export const Semesters = new SemesterCollection();

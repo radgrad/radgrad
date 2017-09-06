@@ -7,11 +7,10 @@ import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 
 
-/** @module api/log/AdvisorLogCollection */
-
 /**
  * Represents a log of an Advisor talking to a Student.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/log
  */
 class AdvisorLogCollection extends BaseCollection {
 
@@ -128,5 +127,10 @@ class AdvisorLogCollection extends BaseCollection {
   }
 }
 
+/**
+ * Provides the singleton instance of this class to all other entities.
+ * @type {api/log.AdvisorLogCollection}
+ * @memberOf api/log
+ */
 export const AdvisorLogs = new AdvisorLogCollection();
 

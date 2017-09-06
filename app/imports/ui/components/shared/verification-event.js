@@ -8,8 +8,6 @@ import { processVerificationEventMethod } from '../../../api/verification/Verifi
 import { getRouteUserName } from './route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-// /** @module ui/components/shared/Verification_Event */
-
 Template.Verification_Event.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.log = new ReactiveVar('');
 });

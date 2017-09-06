@@ -3,10 +3,14 @@ import { check } from 'meteor/check';
 import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
 
-/** @module api/slug/SlugCollection */
-
 /* eslint no-useless-escape: 0 */
 
+/**
+ * Slugifies the give text.
+ * @param text
+ * @return {string}
+ * @memberOf api/slug
+ */
 export default function slugify(text) {
   return text.toString().toLowerCase()
       .replace(/\s+/g, '-')           // Replace spaces with -
@@ -18,7 +22,8 @@ export default function slugify(text) {
 
 /**
  * Slugs are unique strings that can be used to identify entities and can be used in URLs.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/slug
  */
 class SlugCollection extends BaseCollection {
 
@@ -172,5 +177,7 @@ class SlugCollection extends BaseCollection {
 
 /**
  * Provides the singleton instance of a SlugCollection to all other entities.
+ * @type {api/slug.SlugCollection}
+ * @memberOf api/slug
  */
 export const Slugs = new SlugCollection();

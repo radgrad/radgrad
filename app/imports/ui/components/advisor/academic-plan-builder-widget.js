@@ -14,8 +14,6 @@ import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getAllElementsWithAttribute, removeElement } from '../../../ui/utilities/dom-utilities';
 
 /* global document */
-// /** @module ui/components/advisor/Academic_Plan_Builder_Widget */
-
 const addSchema = new SimpleSchema({
   desiredDegree: { type: String },
   name: { type: String },

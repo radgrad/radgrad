@@ -7,12 +7,11 @@ import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
 
-/** @module api/degree-plan/AcademicYearInstanceCollection */
-
 /**
  * Each AcademicYearInstance represents a sequence of three semesters for a given student.
  * It is used to control the display of semesters for a given student in the Degree Planner.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/degree-plan
  */
 class AcademicYearInstanceCollection extends BaseCollection {
   /**
@@ -197,6 +196,7 @@ class AcademicYearInstanceCollection extends BaseCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/degree-plan
  */
 export const AcademicYearInstances = new AcademicYearInstanceCollection();
 // We are not going to persist AcademicYearInstances

@@ -5,11 +5,10 @@ import { ROLE } from '../role/Role';
 import { Users } from '../user/UserCollection';
 
 
-/** @module api/mentor/MentorAnswerCollection */
-
 /**
  * Represents a mentor answer.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/mentor
  */
 class MentorAnswerCollection extends BaseCollection {
   /**
@@ -138,4 +137,9 @@ class MentorAnswerCollection extends BaseCollection {
   }
 }
 
+/**
+ * Provides the singleton instance of this class to all other entities.
+ * @type {api/mentor.MentorAnswerCollection}
+ * @memberOf api/mentor
+ */
 export const MentorAnswers = new MentorAnswerCollection();

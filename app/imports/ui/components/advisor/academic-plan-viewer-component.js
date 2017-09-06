@@ -2,8 +2,6 @@ import { Template } from 'meteor/templating';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 
-// /** @module ui/components/advisor/Academic_Plan_Viewer_Component */
-
 Template.Academic_Plan_Viewer_Component.onCreated(function academicPlanViewerWidgetOnCreated() {
   if (this.data) {
     this.plan = this.data.plan;

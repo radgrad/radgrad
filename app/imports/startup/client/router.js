@@ -4,8 +4,6 @@ import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { appLog } from '../../api/log/AppLogCollection';
 
-/** @module startup/client/Router */
-
 /**
  * Design notes:
  * Only one group per role. (Used to extract role from path.)

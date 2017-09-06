@@ -1,7 +1,5 @@
 import { Template } from 'meteor/templating';
 
-// /** @module ui/components/admin/Admin_DataBase_Accordion */
-
 Template.Admin_DataBase_Accordion.onRendered(function listCareerGoalsWidgetOnRendered() {
   this.$('.ui.accordion').accordion();
 });

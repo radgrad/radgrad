@@ -1,9 +1,8 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** @module api/degree-plan/PreferredChoice */
-
 /**
  * Class that can calculate the preferred choice given an array of interests.
+ * @memberOf api/degree-plan
  */
 class PreferredChoice {
 

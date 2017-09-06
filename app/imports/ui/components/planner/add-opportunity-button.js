@@ -7,8 +7,6 @@ import { plannerKeys } from './academic-plan';
 import { getRouteUserName } from '../shared/route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-// /** @module ui/components/planner/Add_Opportunity_Button */
-
 Template.Add_Opportunity_Button.onCreated(function addOpportunityButtonOnCreated() {
   this.state = this.data.dictionary;
 });

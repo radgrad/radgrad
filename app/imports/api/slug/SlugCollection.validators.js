@@ -5,6 +5,7 @@ import { Slugs } from './SlugCollection.js';
  * Custom validator for fields that must contain a previously undefined slug name.
  * @returns Undefined if the slug value is not previously defined, otherwise errorType 'duplicateSlug'.
  * @throws Error if there are no Slugs in the SlugCollection.
+ * @memberOf api/slug
  */
 export function newSlugValidator() {
   if (Slugs.count() === 0) {

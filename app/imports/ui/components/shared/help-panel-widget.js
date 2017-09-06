@@ -2,8 +2,6 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 
-// /** @module ui/components/shared/Help_Panel_Widget */
-
 Template.Help_Panel_Widget.helpers({
   helpText() {
     const routeName = FlowRouter.getRouteName();

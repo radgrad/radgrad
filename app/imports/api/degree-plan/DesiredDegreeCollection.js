@@ -4,11 +4,10 @@ import BaseSlugCollection from '../base/BaseSlugCollection';
 import { AcademicPlans } from './AcademicPlanCollection';
 import { Slugs } from '../slug/SlugCollection';
 
-/** @module api/degree-plan/DesiredDegreeCollection */
-
 /**
  * DesiredDegrees specifies the set of degrees possible in this department.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @extends api/base.BaseSlugCollection
+ * @memberOf api/degree-plan
  */
 class DesiredDegreeCollection extends BaseSlugCollection {
 
@@ -118,5 +117,6 @@ class DesiredDegreeCollection extends BaseSlugCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/degree-plan
  */
 export const DesiredDegrees = new DesiredDegreeCollection();

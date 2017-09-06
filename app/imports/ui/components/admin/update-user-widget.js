@@ -15,8 +15,6 @@ import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Update_User_Widget */
-
 const updateSchema = new SimpleSchema({
   username: String,
   role: String,

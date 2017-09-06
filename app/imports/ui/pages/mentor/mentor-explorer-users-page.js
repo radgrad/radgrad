@@ -2,8 +2,6 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { getExplorerUserID } from '../../utilities/template-helpers';
 
-/** @module ui/pages/mentor/Mentor_Explorer_Users_Page */
-
 Template.Mentor_Explorer_Users_Page.onCreated(function mentorExplorerUsersPageOnCreated() {
   this.userID = new ReactiveVar('');
   this.userID.set(getExplorerUserID());

@@ -16,8 +16,6 @@ import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
-/** @module ui/components/admin/List_Users_Widget */
-
 Template.List_Users_Widget.helpers({
   users() {
     return _.sortBy(Users.findProfiles({}, { sort: { lastName: 1 } }), function (u) {

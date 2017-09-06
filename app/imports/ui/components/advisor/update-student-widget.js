@@ -20,8 +20,6 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-// /** @module ui/components/advisor/Update_Degree_Plan_Widget */
-
 const updateSchema = new SimpleSchema({
   username: String,
   role: String,

@@ -6,8 +6,6 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 
-// /** @module ui/components/shared/User_Opportunity_Component */
-
 Template.User_Opportunity_Component.onCreated(function userOpportunityComponentOnCreated() {
   if (this.data.userID) {
     this.userID = this.data.userID;

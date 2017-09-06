@@ -10,8 +10,6 @@ import { appLog } from '../../../api/log/AppLogCollection';
 
 /* global document */
 
-// /** @module ui/components/planner/Planned_Course_Grade */
-
 Template.Planned_Course_Grade.onCreated(function plannedCourseGradeOnCreated() {
   if (this.data) {
     this.state = this.data.dictionary;

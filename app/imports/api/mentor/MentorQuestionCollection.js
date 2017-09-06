@@ -6,11 +6,10 @@ import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
-/** @module api/mentor/MentorQuestionCollection */
-
 /**
  * Represents a mentor answer.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @extends api/base.BaseSlugCollection
+ * @memberOf api/mentor
  */
 class MentorQuestionCollection extends BaseSlugCollection {
   /**
@@ -140,5 +139,10 @@ class MentorQuestionCollection extends BaseSlugCollection {
   }
 }
 
+/**
+ * Provides the singleton instance of this class to all other entities.
+ * @type {api/mentor.MentorQuestionCollection}
+ * @memberOf api/mentor
+ */
 export const MentorQuestions = new MentorQuestionCollection();
 

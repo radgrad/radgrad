@@ -8,14 +8,13 @@ import { appLog } from '../log/AppLogCollection';
 
 /* global isNaN */
 
-/** @module api/star/StarProcessor */
-
 /**
  * Given the semester string from STAR (for example, 'Fall 2015 ext'), parses it, defines the corresponding semester,
  * and returns the Semester slug.
  * @param semester The STAR semester string.
  * @returns {String} The RadGrad semester slug.
  * @throws Meteor.Error If parsing fails.
+ * @memberOf api/star
  */
 function findSemesterSlug(starDataObject) {
   const semester = starDataObject.semester;
@@ -60,6 +59,7 @@ function findSemesterSlug(starDataObject) {
  * Returns the course slug, which is either an ICS course or 'other.
  * @param starDataObject The data object.
  * @returns { String } The slug.
+ * @memberOf api/star
  */
 function findCourseSlug(starDataObject) {
   let slug = `${starDataObject.name.toLowerCase()}_${starDataObject.number}`;
@@ -73,6 +73,7 @@ function findCourseSlug(starDataObject) {
  * Creates a courseInstance data object from the passed arguments.
  * @param starDataObject STAR data.
  * @returns { Object } An object suitable for passing to CourseInstances.define.
+ * @memberOf api/star
  */
 function makeCourseInstanceObject(starDataObject) {
   return {
@@ -91,6 +92,7 @@ function makeCourseInstanceObject(starDataObject) {
  * Returns an array of arrays, each containing data that can be made into CourseInstances.
  * @param parsedData The parsedData object returned from Papa.parse.
  * @returns { Array } A new array with extraneous elements deleted.
+ * @memberOf api/star
  */
 function filterParsedData(parsedData) {
   // First, get the actual data from the Papa results.
@@ -109,6 +111,7 @@ function filterParsedData(parsedData) {
  * @param { String } student The slug of the student corresponding to this STAR data.
  * @param { String } csvData A string containing the contents of a CSV file downloaded from STAR.
  * @returns { Array } A list of objects with fields: semester, course, note, verified, grade, and creditHrs.
+ * @memberOf api/star
  */
 export function processStarCsvData(student, csvData) {
   if (Papa) {

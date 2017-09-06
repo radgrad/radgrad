@@ -10,13 +10,12 @@ import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
 
-/** @module api/feed/FeedCollection */
-
 /**
  * Returns the number of whole days between date a and b.
  * @param a The first date.
  * @param b The second date.
  * @returns {number} The number of days between a and b.
+ * @memberOf api/feed
  */
 function dateDiffInDays(a, b) {
   const ams = Date.parse(a);
@@ -30,6 +29,7 @@ function dateDiffInDays(a, b) {
  * @param feed The feed.
  * @param timestamp A timestamp.
  * @returns {boolean} True if feed's timestamp is within a day of timestamp.
+ * @memberOf api/feed
  */
 function withinPastDay(feed, timestamp) {
   const feedTime = feed.timestamp;
@@ -40,7 +40,8 @@ function withinPastDay(feed, timestamp) {
 
 /**
  * Represents a feed instance.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/feed
  */
 class FeedCollection extends BaseCollection {
   /**
@@ -478,5 +479,6 @@ class FeedCollection extends BaseCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/feed
  */
 export const Feeds = new FeedCollection();

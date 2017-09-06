@@ -10,11 +10,10 @@ import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
 
 
-/** @module api/opportunity/OpportunityInstanceCollection */
-
 /**
  * OpportunityInstances indicate that a student wants to take advantage of an Opportunity in a specific semester.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/opportunity
  */
 class OpportunityInstanceCollection extends BaseCollection {
 
@@ -319,5 +318,7 @@ class OpportunityInstanceCollection extends BaseCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @type {api/opportunity.OpportunityInstanceCollection}
+ * @memberOf api/opportunity
  */
 export const OpportunityInstances = new OpportunityInstanceCollection();

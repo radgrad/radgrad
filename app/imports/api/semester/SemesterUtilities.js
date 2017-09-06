@@ -1,9 +1,8 @@
 import { Semesters } from './SemesterCollection';
 
-/** @module api/semester/SemesterUtilities */
-
 /**
  * Defines default semesters from 2014 till 2020.
+ * @memberOf api/semester
  */
 export function defineSemesters() {
   if (Semesters.find().count() === 0) {
@@ -32,6 +31,7 @@ export function defineSemesters() {
  * Returns the next semester document given a semester document.
  * @param semesterDoc the semester doc.
  * @returns The next semester doc.
+ * @memberOf api/semester
  */
 export function nextSemester(semesterDoc) {
   const currentTerm = semesterDoc.term;
@@ -54,6 +54,7 @@ export function nextSemester(semesterDoc) {
  * Returns the next Fall or Spring semester doc. Skips over Summer semesters.
  * @param semester the semester doc.
  * @returns The next semester doc (excluding summer).
+ * @memberOf api/semester
  */
 export function nextFallSpringSemester(semester) {
   let next = nextSemester(semester);

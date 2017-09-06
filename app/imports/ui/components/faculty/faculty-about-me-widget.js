@@ -11,8 +11,6 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { openCloudinaryWidget } from '../form-fields/open-cloudinary-widget';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 
- /** @module ui/components/faculty/Faculty_About_Me_Widget */
-
 /* global alert */
 
 Template.Faculty_About_Me_Widget.helpers({

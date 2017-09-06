@@ -13,8 +13,6 @@ import { StudentProfiles } from './StudentProfileCollection';
 import { MentorProfiles } from './MentorProfileCollection';
 import { FacultyProfiles } from './FacultyProfileCollection';
 
-/** @module api/user/UserCollection */
-
 /* eslint-disable class-methods-use-this */
 
 /**
@@ -29,6 +27,7 @@ import { FacultyProfiles } from './FacultyProfileCollection';
  * It is not saved out or restored when the DB is dumped. It is not listed in RadGrad.collections.
  *
  * Clients provide a "user" as a parameter, which is either the username (i.e. email) or userID.
+ * @memberOf api/user
  */
 class UserCollection {
 
@@ -465,5 +464,7 @@ class UserCollection {
 
 /**
  * Provides the singleton instance of this class to other entities.
+ * @type {api/user.UserCollection}
+ * @memberOf api/user
  */
 export const Users = new UserCollection();

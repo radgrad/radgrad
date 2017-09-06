@@ -1,0 +1,3204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>UserCollection - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdvisorProfileCollection.html">AdvisorProfileCollection</a><ul class='methods'><li data-type='method'><a href="AdvisorProfileCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="AdvisorProfileCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="AdvisorProfileCollection.html#define">define</a></li><li data-type='method'><a href="AdvisorProfileCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="AdvisorProfileCollection.html#update">update</a></li></ul></li><li><a href="api_base.BaseCollection.html">BaseCollection</a><ul class='methods'><li data-type='method'><a href="api_base.BaseCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_base.BaseCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_base.BaseCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_base.BaseCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_base.BaseCollection.html#count">count</a></li><li data-type='method'><a href="api_base.BaseCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_base.BaseCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_base.BaseCollection.html#find">find</a></li><li data-type='method'><a href="api_base.BaseCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_base.BaseCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_base.BaseCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_base.BaseCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_base.BaseCollection.html#getType">getType</a></li><li data-type='method'><a href="api_base.BaseCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_base.BaseCollection.html#publish">publish</a></li><li data-type='method'><a href="api_base.BaseCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_base.BaseCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_base.BaseCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_base.BaseCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_base.BaseCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_base.BaseCollection.html#toString">toString</a></li><li data-type='method'><a href="api_base.BaseCollection.html#update">update</a></li></ul></li><li><a href="api_base.BaseSlugCollection.html">BaseSlugCollection</a><ul class='methods'><li data-type='method'><a href="api_base.BaseSlugCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#count">count</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#find">find</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getID">getID</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#getType">getType</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#publish">publish</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#toString">toString</a></li><li data-type='method'><a href="api_base.BaseSlugCollection.html#update">update</a></li></ul></li><li><a href="api_base.BaseTypeCollection.html">BaseTypeCollection</a><ul class='methods'><li data-type='method'><a href="api_base.BaseTypeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#count">count</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#define">define</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#find">find</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getID">getID</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getNameFromID">getNameFromID</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#getType">getType</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#publish">publish</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#toString">toString</a></li><li data-type='method'><a href="api_base.BaseTypeCollection.html#update">update</a></li></ul></li><li><a href="api_career.CareerGoalCollection.html">CareerGoalCollection</a><ul class='methods'><li data-type='method'><a href="api_career.CareerGoalCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#count">count</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#define">define</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#find">find</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findNames">findNames</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getID">getID</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getSlug">getSlug</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#getType">getType</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#hasInterest">hasInterest</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#publish">publish</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#toString">toString</a></li><li data-type='method'><a href="api_career.CareerGoalCollection.html#update">update</a></li></ul></li><li><a href="api_course.CourseCollection.html">CourseCollection</a><ul class='methods'><li data-type='method'><a href="api_course.CourseCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_course.CourseCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_course.CourseCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_course.CourseCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_course.CourseCollection.html#count">count</a></li><li data-type='method'><a href="api_course.CourseCollection.html#define">define</a></li><li data-type='method'><a href="api_course.CourseCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_course.CourseCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_course.CourseCollection.html#find">find</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_course.CourseCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getID">getID</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_course.CourseCollection.html#getType">getType</a></li><li data-type='method'><a href="api_course.CourseCollection.html#hasInterest">hasInterest</a></li><li data-type='method'><a href="api_course.CourseCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_course.CourseCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_course.CourseCollection.html#publish">publish</a></li><li data-type='method'><a href="api_course.CourseCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_course.CourseCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_course.CourseCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_course.CourseCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_course.CourseCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_course.CourseCollection.html#toString">toString</a></li><li data-type='method'><a href="api_course.CourseCollection.html#update">update</a></li></ul></li><li><a href="api_course.CourseInstanceCollection.html">CourseInstanceCollection</a><ul class='methods'><li data-type='method'><a href="api_course.CourseInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#count">count</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#define">define</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#find">find</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#findCourseInstanceDoc">findCourseInstanceDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#findCourseName">findCourseName</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getCourseDoc">getCourseDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getCourseSlug">getCourseSlug</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getSemesterDoc">getSemesterDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getStudentDoc">getStudentDoc</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#isCourseInstance">isCourseInstance</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#isInteresting">isInteresting</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#toString">toString</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#update">update</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#updateGrade">updateGrade</a></li><li data-type='method'><a href="api_course.CourseInstanceCollection.html#updateSemester">updateSemester</a></li></ul></li><li><a href="api_degree-plan.AcademicPlanCollection.html">AcademicPlanCollection</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#count">count</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#define">define</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#find">find</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getID">getID</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getLatestSemesterNumber">getLatestSemesterNumber</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getPlansForDegree">getPlansForDegree</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#getType">getType</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#publish">publish</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#toFullString">toFullString</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#toString">toString</a></li><li data-type='method'><a href="api_degree-plan.AcademicPlanCollection.html#update">update</a></li></ul></li><li><a href="api_degree-plan.AcademicYearInstanceCollection.html">AcademicYearInstanceCollection</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#count">count</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#define">define</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#find">find</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#toString">toString</a></li><li data-type='method'><a href="api_degree-plan.AcademicYearInstanceCollection.html#update">update</a></li></ul></li><li><a href="api_degree-plan.DesiredDegreeCollection.html">DesiredDegreeCollection</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#count">count</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#define">define</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#find">find</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getID">getID</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#getType">getType</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#publish">publish</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#toString">toString</a></li><li data-type='method'><a href="api_degree-plan.DesiredDegreeCollection.html#update">update</a></li></ul></li><li><a href="api_degree-plan.PlanChoiceCollection.html">PlanChoiceCollection</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#count">count</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#define">define</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#find">find</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#getType">getType</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#publish">publish</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#toString">toString</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#toStringFromSlug">toStringFromSlug</a></li><li data-type='method'><a href="api_degree-plan.PlanChoiceCollection.html#update">update</a></li></ul></li><li><a href="api_degree-plan.PreferredChoice.html">PreferredChoice</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.PreferredChoice.html#getBestChoices">getBestChoices</a></li><li data-type='method'><a href="api_degree-plan.PreferredChoice.html#hasPreferences">hasPreferences</a></li></ul></li><li><a href="api_feed.FeedCollection.html">FeedCollection</a><ul class='methods'><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewCourse">_defineNewCourse</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewCourseReview">_defineNewCourseReview</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewOpportunity">_defineNewOpportunity</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewOpportunityReview">_defineNewOpportunityReview</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewUser">_defineNewUser</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_defineNewVerifiedOpportunity">_defineNewVerifiedOpportunity</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_updateNewUser">_updateNewUser</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#_updateVerifiedOpportunity">_updateVerifiedOpportunity</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#checkPastDayFeed">checkPastDayFeed</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#count">count</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#define">define</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#find">find</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#getType">getType</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#publish">publish</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#toString">toString</a></li><li data-type='method'><a href="api_feed.FeedCollection.html#update">update</a></li></ul></li><li><a href="api_feedback.FeedbackFunctions.html">FeedbackFunctions</a></li><li><a href="api_feedback.FeedbackInstanceCollection.html">FeedbackInstanceCollection</a><ul class='methods'><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#clear">clear</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#count">count</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#define">define</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#find">find</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#findRecommendations">findRecommendations</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#findWarnings">findWarnings</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#toString">toString</a></li><li data-type='method'><a href="api_feedback.FeedbackInstanceCollection.html#update">update</a></li></ul></li><li><a href="api_help.HelpMessageCollection.html">HelpMessageCollection</a><ul class='methods'><li data-type='method'><a href="api_help.HelpMessageCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#count">count</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#define">define</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#find">find</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#findDocByRouteName">findDocByRouteName</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#getHelpText">getHelpText</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#getHelpTitle">getHelpTitle</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#getType">getType</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#publish">publish</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#toString">toString</a></li><li data-type='method'><a href="api_help.HelpMessageCollection.html#update">update</a></li></ul></li><li><a href="api_interest.InterestCollection.html">InterestCollection</a><ul class='methods'><li data-type='method'><a href="api_interest.InterestCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#assertUnusedInterest">assertUnusedInterest</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#count">count</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#define">define</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#find">find</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#findNames">findNames</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#getID">getID</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#getType">getType</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#publish">publish</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#toString">toString</a></li><li data-type='method'><a href="api_interest.InterestCollection.html#update">update</a></li></ul></li><li><a href="api_interest.InterestTypeCollection.html">InterestTypeCollection</a><ul class='methods'><li data-type='method'><a href="api_interest.InterestTypeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#count">count</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#define">define</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#find">find</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#getID">getID</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#getNameFromID">getNameFromID</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#getType">getType</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#publish">publish</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#toString">toString</a></li><li data-type='method'><a href="api_interest.InterestTypeCollection.html#update">update</a></li></ul></li><li><a href="api_log.AdvisorLogCollection.html">AdvisorLogCollection</a><ul class='methods'><li data-type='method'><a href="api_log.AdvisorLogCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#count">count</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#define">define</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#find">find</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#getAdvisorDoc">getAdvisorDoc</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#getStudentDoc">getStudentDoc</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#getType">getType</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#publish">publish</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#toString">toString</a></li><li data-type='method'><a href="api_log.AdvisorLogCollection.html#update">update</a></li></ul></li><li><a href="api_log.AppLogCollection.html">AppLogCollection</a><ul class='methods'><li data-type='method'><a href="api_log.AppLogCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#count">count</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#find">find</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#getCollection">getCollection</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#getType">getType</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#publish">publish</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#toString">toString</a></li><li data-type='method'><a href="api_log.AppLogCollection.html#update">update</a></li></ul></li><li><a href="api_mentor.MentorAnswerCollection.html">MentorAnswerCollection</a><ul class='methods'><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#count">count</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#define">define</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#find">find</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#getAnswers">getAnswers</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#getType">getType</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#publish">publish</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#removeQuestion">removeQuestion</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#toString">toString</a></li><li data-type='method'><a href="api_mentor.MentorAnswerCollection.html#update">update</a></li></ul></li><li><a href="api_mentor.MentorQuestionCollection.html">MentorQuestionCollection</a><ul class='methods'><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#count">count</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#define">define</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#find">find</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#getID">getID</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#getType">getType</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#publish">publish</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#toString">toString</a></li><li data-type='method'><a href="api_mentor.MentorQuestionCollection.html#update">update</a></li></ul></li><li><a href="api_opportunity.OpportunityCollection.html">OpportunityCollection</a><ul class='methods'><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#count">count</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#define">define</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#find">find</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#getID">getID</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#getOpportunityTypeDoc">getOpportunityTypeDoc</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#getSlug">getSlug</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#getType">getType</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#hasInterest">hasInterest</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#publish">publish</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#toString">toString</a></li><li data-type='method'><a href="api_opportunity.OpportunityCollection.html#update">update</a></li></ul></li><li><a href="api_opportunity.OpportunityInstanceCollection.html">OpportunityInstanceCollection</a><ul class='methods'><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#count">count</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#define">define</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#find">find</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#findOpportunityInstanceDoc">findOpportunityInstanceDoc</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#getOpportunityDoc">getOpportunityDoc</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#getSemesterDoc">getSemesterDoc</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#getStudentDoc">getStudentDoc</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#getType">getType</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#isOpportunityInstance">isOpportunityInstance</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#publish">publish</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#toString">toString</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#update">update</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#updateSemester">updateSemester</a></li><li data-type='method'><a href="api_opportunity.OpportunityInstanceCollection.html#updateVerified">updateVerified</a></li></ul></li><li><a href="api_opportunity.OpportunityTypeCollection.html">OpportunityTypeCollection</a><ul class='methods'><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#count">count</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#define">define</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#find">find</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#getID">getID</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#getNameFromID">getNameFromID</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#getType">getType</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#publish">publish</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#toString">toString</a></li><li data-type='method'><a href="api_opportunity.OpportunityTypeCollection.html#update">update</a></li></ul></li><li><a href="api_public-stats.PublicStatsCollection.html">PublicStatsCollection</a><ul class='methods'><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#count">count</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#find">find</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#getType">getType</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#publish">publish</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#toString">toString</a></li><li data-type='method'><a href="api_public-stats.PublicStatsCollection.html#update">update</a></li></ul></li><li><a href="api_radgrad.RadGradClass.html">RadGradClass</a><ul class='methods'><li data-type='method'><a href="api_radgrad.RadGradClass.html#getCollection">getCollection</a></li></ul></li><li><a href="api_review.ReviewCollection.html">ReviewCollection</a><ul class='methods'><li data-type='method'><a href="api_review.ReviewCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#assertValidRating">assertValidRating</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#assertValidReviewType">assertValidReviewType</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#count">count</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#define">define</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#find">find</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#getID">getID</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#getSlug">getSlug</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#getType">getType</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#publish">publish</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#toString">toString</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#update">update</a></li><li data-type='method'><a href="api_review.ReviewCollection.html#updateModerated">updateModerated</a></li></ul></li><li><a href="api_semester.SemesterCollection.html">SemesterCollection</a><ul class='methods'><li data-type='method'><a href="api_semester.SemesterCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#assertSemester">assertSemester</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#count">count</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#define">define</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#find">find</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#findDocBySlug">findDocBySlug</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#findIdBySlug">findIdBySlug</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#findIdsBySlugs">findIdsBySlugs</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#findSlugByID">findSlugByID</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getCurrentSemesterDoc">getCurrentSemesterDoc</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getCurrentSemesterID">getCurrentSemesterID</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getID">getID</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getSemester">getSemester</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getSemesterDoc">getSemesterDoc</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getShortName">getShortName</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getSlug">getSlug</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#getType">getType</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#isUpcomingSemester">isUpcomingSemester</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#publish">publish</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#toString">toString</a></li><li data-type='method'><a href="api_semester.SemesterCollection.html#update">update</a></li></ul></li><li><a href="api_slug.SlugCollection.html">SlugCollection</a><ul class='methods'><li data-type='method'><a href="api_slug.SlugCollection.html#assertAllDefined">assertAllDefined</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#assertDefined">assertDefined</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#assertSlug">assertSlug</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#count">count</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#define">define</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#dumpAll">dumpAll</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#find">find</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#findDoc">findDoc</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#findOne">findOne</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#getCollectionName">getCollectionName</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#getEntityID">getEntityID</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#getNameFromID">getNameFromID</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#getType">getType</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#hasSlug">hasSlug</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#isSlugForEntity">isSlugForEntity</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#isValidSlugName">isValidSlugName</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#publish">publish</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#restoreAll">restoreAll</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#restoreOne">restoreOne</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#subscribe">subscribe</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#toString">toString</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#update">update</a></li><li data-type='method'><a href="api_slug.SlugCollection.html#updateEntityID">updateEntityID</a></li></ul></li><li><a href="BaseProfileCollection.html">BaseProfileCollection</a><ul class='methods'><li data-type='method'><a href="BaseProfileCollection.html#_checkIntegrityCommonFields">_checkIntegrityCommonFields</a></li><li data-type='method'><a href="BaseProfileCollection.html#_updateCommonFields">_updateCommonFields</a></li><li data-type='method'><a href="BaseProfileCollection.html#getCollectionNameForProfile">getCollectionNameForProfile</a></li><li data-type='method'><a href="BaseProfileCollection.html#getProfile">getProfile</a></li><li data-type='method'><a href="BaseProfileCollection.html#getUserID">getUserID</a></li><li data-type='method'><a href="BaseProfileCollection.html#hasProfile">hasProfile</a></li><li data-type='method'><a href="BaseProfileCollection.html#removeIt">removeIt</a></li></ul></li><li><a href="FacultyProfileCollection.html">FacultyProfileCollection</a><ul class='methods'><li data-type='method'><a href="FacultyProfileCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="FacultyProfileCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="FacultyProfileCollection.html#define">define</a></li><li data-type='method'><a href="FacultyProfileCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="FacultyProfileCollection.html#update">update</a></li></ul></li><li><a href="MentorProfileCollection.html">MentorProfileCollection</a><ul class='methods'><li data-type='method'><a href="MentorProfileCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="MentorProfileCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="MentorProfileCollection.html#define">define</a></li><li data-type='method'><a href="MentorProfileCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="MentorProfileCollection.html#update">update</a></li></ul></li><li><a href="StudentProfileCollection.html">StudentProfileCollection</a><ul class='methods'><li data-type='method'><a href="StudentProfileCollection.html#assertValidLevel">assertValidLevel</a></li><li data-type='method'><a href="StudentProfileCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="StudentProfileCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="StudentProfileCollection.html#define">define</a></li><li data-type='method'><a href="StudentProfileCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="StudentProfileCollection.html#getCourseIDs">getCourseIDs</a></li><li data-type='method'><a href="StudentProfileCollection.html#getEarnedICE">getEarnedICE</a></li><li data-type='method'><a href="StudentProfileCollection.html#getInterestIDs">getInterestIDs</a></li><li data-type='method'><a href="StudentProfileCollection.html#getInterestIDsByType">getInterestIDsByType</a></li><li data-type='method'><a href="StudentProfileCollection.html#getProjectedICE">getProjectedICE</a></li><li data-type='method'><a href="StudentProfileCollection.html#setLevel">setLevel</a></li><li data-type='method'><a href="StudentProfileCollection.html#update">update</a></li></ul></li><li><a href="TeaserCollection.html">TeaserCollection</a><ul class='methods'><li data-type='method'><a href="TeaserCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="TeaserCollection.html#define">define</a></li><li data-type='method'><a href="TeaserCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="TeaserCollection.html#hasInterest">hasInterest</a></li><li data-type='method'><a href="TeaserCollection.html#hasOpportunity">hasOpportunity</a></li><li data-type='method'><a href="TeaserCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="TeaserCollection.html#update">update</a></li></ul></li><li><a href="UserCollection.html">UserCollection</a><ul class='methods'><li data-type='method'><a href="UserCollection.html#assertInRole">assertInRole</a></li><li data-type='method'><a href="UserCollection.html#define">define</a></li><li data-type='method'><a href="UserCollection.html#filterProfiles">filterProfiles</a></li><li data-type='method'><a href="UserCollection.html#findProfiles">findProfiles</a></li><li data-type='method'><a href="UserCollection.html#findProfilesWithRole">findProfilesWithRole</a></li><li data-type='method'><a href="UserCollection.html#getFullName">getFullName</a></li><li data-type='method'><a href="UserCollection.html#getID">getID</a></li><li data-type='method'><a href="UserCollection.html#getIDs">getIDs</a></li><li data-type='method'><a href="UserCollection.html#getInterestIDs">getInterestIDs</a></li><li data-type='method'><a href="UserCollection.html#getInterestIDsByType">getInterestIDsByType</a></li><li data-type='method'><a href="UserCollection.html#getProfile">getProfile</a></li><li data-type='method'><a href="UserCollection.html#getPublicationName">getPublicationName</a></li><li data-type='method'><a href="UserCollection.html#hasProfile">hasProfile</a></li><li data-type='method'><a href="UserCollection.html#isDefined">isDefined</a></li><li data-type='method'><a href="UserCollection.html#isReferenced">isReferenced</a></li><li data-type='method'><a href="UserCollection.html#publish">publish</a></li><li data-type='method'><a href="UserCollection.html#removeAll">removeAll</a></li><li data-type='method'><a href="UserCollection.html#removeIt">removeIt</a></li><li data-type='method'><a href="UserCollection.html#someProfiles">someProfiles</a></li><li data-type='method'><a href="UserCollection.html#subscribe">subscribe</a></li></ul></li><li><a href="VerificationRequestCollection.html">VerificationRequestCollection</a><ul class='methods'><li data-type='method'><a href="VerificationRequestCollection.html#assertValidRoleForMethod">assertValidRoleForMethod</a></li><li data-type='method'><a href="VerificationRequestCollection.html#checkIntegrity">checkIntegrity</a></li><li data-type='method'><a href="VerificationRequestCollection.html#define">define</a></li><li data-type='method'><a href="VerificationRequestCollection.html#dumpOne">dumpOne</a></li><li data-type='method'><a href="VerificationRequestCollection.html#findVerificationRequest">findVerificationRequest</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getOpportunityDoc">getOpportunityDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getOpportunityInstanceDoc">getOpportunityInstanceDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getSemesterDoc">getSemesterDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getSponsorDoc">getSponsorDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#getStudentDoc">getStudentDoc</a></li><li data-type='method'><a href="VerificationRequestCollection.html#publish">publish</a></li><li data-type='method'><a href="VerificationRequestCollection.html#removeUser">removeUser</a></li><li data-type='method'><a href="VerificationRequestCollection.html#setVerificationStatus">setVerificationStatus</a></li><li data-type='method'><a href="VerificationRequestCollection.html#setVerified">setVerified</a></li><li data-type='method'><a href="VerificationRequestCollection.html#updateStatus">updateStatus</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="api_base.html">api/base</a><ul class='methods'><li data-type='method'><a href="api_base.html#.exports.removeAllEntities">exports.removeAllEntities</a></li></ul></li><li><a href="api_career.html">api/career</a></li><li><a href="api_course.html">api/course</a><ul class='methods'><li data-type='method'><a href="api_course.html#.exports.makeSampleCourse">exports.makeSampleCourse</a></li><li data-type='method'><a href="api_course.html#.exports.makeSampleCourseInstance">exports.makeSampleCourseInstance</a></li><li data-type='method'><a href="api_course.html#.exports.prereqsMet">exports.prereqsMet</a></li></ul></li><li><a href="api_degree-plan.html">api/degree-plan</a><ul class='methods'><li data-type='method'><a href="api_degree-plan.html#.exports.buildCourseSlugName">exports.buildCourseSlugName</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.buildSimpleName">exports.buildSimpleName</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.complexChoiceToArray">exports.complexChoiceToArray</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.getDepartment">exports.getDepartment</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.getDepartments">exports.getDepartments</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.getStudentsCurrentSemesterNumber">exports.getStudentsCurrentSemesterNumber</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.getStudentSemesters">exports.getStudentSemesters</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.isComplexChoice">exports.isComplexChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.isSimpleChoice">exports.isSimpleChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.isSingleChoice">exports.isSingleChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.isXXChoice">exports.isXXChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.planIndexOf">exports.planIndexOf</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.satisfiesPlanChoice">exports.satisfiesPlanChoice</a></li><li data-type='method'><a href="api_degree-plan.html#.exports.stripCounter">exports.stripCounter</a></li><li data-type='method'><a href="api_degree-plan.html#.satisfiesSinglePlanChoice">satisfiesSinglePlanChoice</a></li></ul></li><li><a href="api_feed.html">api/feed</a><ul class='methods'><li data-type='method'><a href="api_feed.html#.dateDiffInDays">dateDiffInDays</a></li><li data-type='method'><a href="api_feed.html#.withinPastDay">withinPastDay</a></li></ul></li><li><a href="api_feedback.html">api/feedback</a></li><li><a href="api_help.html">api/help</a></li><li><a href="api_ice.html">api/ice</a><ul class='methods'><li data-type='method'><a href="api_ice.html#.exports.assertICE">exports.assertICE</a></li><li data-type='method'><a href="api_ice.html#.exports.getEarnedICE">exports.getEarnedICE</a></li><li data-type='method'><a href="api_ice.html#.exports.getProjectedICE">exports.getProjectedICE</a></li><li data-type='method'><a href="api_ice.html#.exports.isICE">exports.isICE</a></li><li data-type='method'><a href="api_ice.html#.exports.makeCourseICE">exports.makeCourseICE</a></li></ul></li><li><a href="api_integrity.html">api/integrity</a><ul class='methods'><li data-type='method'><a href="api_integrity.html#.exports.assertIntegrity">exports.assertIntegrity</a></li><li data-type='method'><a href="api_integrity.html#.exports.checkIntegrity">exports.checkIntegrity</a></li></ul></li><li><a href="api_interest.html">api/interest</a><ul class='methods'><li data-type='method'><a href="api_interest.html#.exports.isInterestArrayValidator">exports.isInterestArrayValidator</a></li><li data-type='method'><a href="api_interest.html#.exports.isInterestSlugValidator">exports.isInterestSlugValidator</a></li><li data-type='method'><a href="api_interest.html#.exports.makeSampleInterest">exports.makeSampleInterest</a></li><li data-type='method'><a href="api_interest.html#.exports.makeSampleInterestType">exports.makeSampleInterestType</a></li></ul></li><li><a href="api_level.html">api/level</a><ul class='methods'><li data-type='method'><a href="api_level.html#.exports.calcLevel">exports.calcLevel</a></li><li data-type='method'><a href="api_level.html#.exports.updateAllStudentLevels">exports.updateAllStudentLevels</a></li><li data-type='method'><a href="api_level.html#.exports.updateStudentLevel">exports.updateStudentLevel</a></li></ul></li><li><a href="api_log.html">api/log</a></li><li><a href="api_mentor.html">api/mentor</a></li><li><a href="api_opportunity.html">api/opportunity</a><ul class='methods'><li data-type='method'><a href="api_opportunity.html#.exports.clearPlannedOpportunityInstances">exports.clearPlannedOpportunityInstances</a></li><li data-type='method'><a href="api_opportunity.html#.exports.getRandomInt">exports.getRandomInt</a></li><li data-type='method'><a href="api_opportunity.html#.exports.makeSampleOpportunity">exports.makeSampleOpportunity</a></li><li data-type='method'><a href="api_opportunity.html#.exports.makeSampleOpportunityInstance">exports.makeSampleOpportunityInstance</a></li><li data-type='method'><a href="api_opportunity.html#.exports.makeSampleOpportunityType">exports.makeSampleOpportunityType</a></li></ul></li><li><a href="api_public-stats.html">api/public-stats</a></li><li><a href="api_radgrad.html">api/radgrad</a></li><li><a href="api_review.html">api/review</a></li><li><a href="api_role.html">api/role</a><ul class='methods'><li data-type='method'><a href="api_role.html#.exports.assertRole">exports.assertRole</a></li><li data-type='method'><a href="api_role.html#.exports.isRole">exports.isRole</a></li></ul></li><li><a href="api_semester.html">api/semester</a><ul class='methods'><li data-type='method'><a href="api_semester.html#.exports.defineSemesters">exports.defineSemesters</a></li><li data-type='method'><a href="api_semester.html#.exports.nextFallSpringSemester">exports.nextFallSpringSemester</a></li><li data-type='method'><a href="api_semester.html#.exports.nextSemester">exports.nextSemester</a></li></ul></li><li><a href="api_slug.html">api/slug</a><ul class='methods'><li data-type='method'><a href="api_slug.html#.exports.newSlugValidator">exports.newSlugValidator</a></li><li data-type='method'><a href="api_slug.html#.module.exports">module.exports</a></li></ul></li><li><a href="api_star.html">api/star</a><ul class='methods'><li data-type='method'><a href="api_star.html#.exports.processStarCsvData">exports.processStarCsvData</a></li><li data-type='method'><a href="api_star.html#.filterParsedData">filterParsedData</a></li><li data-type='method'><a href="api_star.html#.findCourseSlug">findCourseSlug</a></li><li data-type='method'><a href="api_star.html#.findSemesterSlug">findSemesterSlug</a></li><li data-type='method'><a href="api_star.html#.makeCourseInstanceObject">makeCourseInstanceObject</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#%2522click.cas-login%2522">"click .cas-login"</a></li><li><a href="global.html#%2522click.meteor-login%2522">"click .meteor-login"</a></li><li><a href="global.html#addBodyClass">addBodyClass</a></li><li><a href="global.html#appendToLog">appendToLog</a></li><li><a href="global.html#authInProcess">authInProcess</a></li><li><a href="global.html#chooseBetween">chooseBetween</a></li><li><a href="global.html#clearFeedbackInstancesMethod">clearFeedbackInstancesMethod</a></li><li><a href="global.html#convertICE">convertICE</a></li><li><a href="global.html#dateDiffInDays">dateDiffInDays</a></li><li><a href="global.html#defineTestFixture">defineTestFixture</a></li><li><a href="global.html#defineTestFixturesMethod">defineTestFixturesMethod</a></li><li><a href="global.html#descriptionPairs">descriptionPairs</a></li><li><a href="global.html#documentCounts">documentCounts</a></li><li><a href="global.html#fixPath">fixPath</a></li><li><a href="global.html#getAllElementsWithAttribute">getAllElementsWithAttribute</a></li><li><a href="global.html#getDefinitions">getDefinitions</a></li><li><a href="global.html#getDepartment">getDepartment</a></li><li><a href="global.html#getEnrollmentData">getEnrollmentData</a></li><li><a href="global.html#getExplorerUserID">getExplorerUserID</a></li><li><a href="global.html#getOpportunityInstanceID">getOpportunityInstanceID</a></li><li><a href="global.html#getRestoreFileAge">getRestoreFileAge</a></li><li><a href="global.html#getRouteUserName">getRouteUserName</a></li><li><a href="global.html#getSchemaDataFromEvent">getSchemaDataFromEvent</a></li><li><a href="global.html#getUserIdFromRoute">getUserIdFromRoute</a></li><li><a href="global.html#indicateError">indicateError</a></li><li><a href="global.html#indicateSuccess">indicateSuccess</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#isInRole">isInRole</a></li><li><a href="global.html#isLabel">isLabel</a></li><li><a href="global.html#isSchemaFieldArray">isSchemaFieldArray</a></li><li><a href="global.html#loadCollection">loadCollection</a></li><li><a href="global.html#loadDatabase">loadDatabase</a></li><li><a href="global.html#loadFileDateFormat">loadFileDateFormat</a></li><li><a href="global.html#makeLink">makeLink</a></li><li><a href="global.html#makeSampleUser">makeSampleUser</a></li><li><a href="global.html#openCloudinaryWidget">openCloudinaryWidget</a></li><li><a href="global.html#opportunitySemesters">opportunitySemesters</a></li><li><a href="global.html#ProcessedSchema">ProcessedSchema</a></li><li><a href="global.html#processPendingVerificationMethod">processPendingVerificationMethod</a></li><li><a href="global.html#processStudentStarCsvData">processStudentStarCsvData</a></li><li><a href="global.html#processVerificationEventMethod">processVerificationEventMethod</a></li><li><a href="global.html#removeElement">removeElement</a></li><li><a href="global.html#renameKey">renameKey</a></li><li><a href="global.html#rolesToCollectionNames">rolesToCollectionNames</a></li><li><a href="global.html#setupFormWidget">setupFormWidget</a></li><li><a href="global.html#slugFieldValidator">slugFieldValidator</a></li><li><a href="global.html#starLoadDataMethod">starLoadDataMethod</a></li><li><a href="global.html#startupCheckIntegrity">startupCheckIntegrity</a></li><li><a href="global.html#startupPublicStats">startupPublicStats</a></li><li><a href="global.html#Teasers">Teasers</a></li><li><a href="global.html#totalDocuments">totalDocuments</a></li><li><a href="global.html#updateAcademicPlanMethod">updateAcademicPlanMethod</a></li><li><a href="global.html#Users">Users</a></li><li><a href="global.html#VerificationRequests">VerificationRequests</a></li><li><a href="global.html#verificationRequestsUpdateStatusMethod">verificationRequestsUpdateStatusMethod</a></li><li><a href="global.html#withLoggedInUser">withLoggedInUser</a></li><li><a href="global.html#withRadGradSubscriptions">withRadGradSubscriptions</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">UserCollection</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        UserCollection
+        </h2>
+        
+            <div class="class-description"><p>Represents a user, which is someone who has a Meteor account.</p>
+<p>Users are defined when the various Profile collections are initialized, so the User collection is the union<br>of Students, Faculty, Advisors, and Mentors, plus the single Admin account who also has a Meteor account.</p>
+<p>Note that this collection does not extend any of our Base collections, because it has a very limited API<br>which should be used by clients to access the various Profile collections.</p>
+<p>It is not saved out or restored when the DB is dumped. It is not listed in RadGrad.collections.</p>
+<p>Clients provide a &quot;user&quot; as a parameter, which is either the username (i.e. email) or userID.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="UserCollection"><span class="type-signature"></span>new UserCollection<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="assertInRole"><span class="type-signature"></span>assertInRole<span class="signature">(user, role)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line93">line 93</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Asserts that the passed user has the specified role.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The user (username or userID).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>role</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The role or an array of roles.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If the user does not have the role, or if user or role is not valid.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="define"><span class="type-signature"></span>define<span class="signature">(username, role)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Define a new user, which means creating an entry in Meteor.Accounts.<br>This is called in the various Profile define() methods.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The username to be defined (must be an email address).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>role</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The role.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If the user exists.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The docID of the newly created user.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="filterProfiles"><span class="type-signature"></span>filterProfiles<span class="signature">(filter)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line332">line 332</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Iterates through all Profile collections, and returns an array of profiles that satisfy filter.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>filter</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A function that accepts a profile a document and returns truthy if that document should be included<br>in the returned array.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An array of profile documents from across all the Profile collections satisfying filter.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="findProfiles"><span class="type-signature"></span>findProfiles<span class="signature">(selector, options)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line282">line 282</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="http://docs.meteor.com/#/full/find">Meteor Docs on Mongo Find</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Runs find on all the Profile collections, fetches the associated documents, and returns an array containing all<br>of the matches.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>selector</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A MongoDB selector.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>MongoDB options.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An array of documents matching the selector and options.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="findProfilesWithRole"><span class="type-signature"></span>findProfilesWithRole<span class="signature">(selector, options)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line300">line 300</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="http://docs.meteor.com/#/full/find">Meteor Docs on Mongo Find</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Runs find on all the Profile collections, fetches the associated documents, and returns an array containing all<br>of the matches.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>selector</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A MongoDB selector.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>MongoDB options.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An array of documents matching the selector and options.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getFullName"><span class="type-signature"></span>getFullName<span class="signature">(user)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line146">line 146</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the full name for the given user.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the user (username or ID).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If user is not a valid user.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The user's full name.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getID"><span class="type-signature"></span>getID<span class="signature">(user)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line115">line 115</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the userID associated with user, or throws an error if not defined.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The user (username or userID).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If user is not a defined username or userID.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The userID</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getIDs"><span class="type-signature"></span>getIDs<span class="signature">(users)</span><span class="type-signature"> &rarr; {Array.&lt;String>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line130">line 130</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the userIDs associated with users, or throws an error if any cannot be found.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>users</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;String></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An array of valid users.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If any instance is not a user.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The docIDs associated with users.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;String></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getInterestIDs"><span class="type-signature"></span>getInterestIDs<span class="signature">(user)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line405">line 405</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the user's interests as IDs. It is a union of interestIDs and careerGoal interestIDs.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The username or userID.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An array of interestIDs.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getInterestIDsByType"><span class="type-signature"></span>getInterestIDsByType<span class="signature">(user)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line422">line 422</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the user's interest IDs in an Array with two sub-arrays. The first sub-array is the interest IDs that the<br>User selected. The second sub-array is the interestIDs from the user's career goals that are not already present<br>in the first subarray.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The username or userID.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An array with two subarrays, each containing interestIDs.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getProfile"><span class="type-signature"></span>getProfile<span class="signature">(user)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line233">line 233</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the profile document associated with user.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The username or userID.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If the document was not found.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The profile document.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getPublicationName"><span class="type-signature"></span>getPublicationName<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line459">line 459</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Return the publication name.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The publication name, as a string.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="hasProfile"><span class="type-signature"></span>hasProfile<span class="signature">(user)</span><span class="type-signature"> &rarr; {Object|Null}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line178">line 178</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the profile document associated with user, or null if not found.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The username or userID.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The profile document or null if not found.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isDefined"><span class="type-signature"></span>isDefined<span class="signature">(user)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line105">line 105</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns true if user is a defined userID or username.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The user.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>True if user is defined, false otherwise.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isReferenced"><span class="type-signature"></span>isReferenced<span class="signature">(user)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line164">line 164</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns true if user is referenced by other &quot;public&quot; entities. Specifically:</p>
+<ul>
+<li>The user is a student and has published a review.</li>
+<li>The user is a mentor and has published an answer.</li>
+<li>The user is a student and has published a question.</li>
+<li>The user is a faculty member as has sponsored an opportunity.<br>Used to determine if this user can be deleted.<br>Note this doesn't test for references to CourseInstances, etc. These are &quot;private&quot; and will be deleted<br>implicitly if this user is deleted.</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The username or userID.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If the username is not defined.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>True if this user is referenced &quot;publicly&quot; elsewhere.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="publish"><span class="type-signature"></span>publish<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line439">line 439</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Publish the username field for all users.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeAll"><span class="type-signature"></span>removeAll<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line265">line 265</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Removes all users except for the admin user.<br>This is implemented by mapping through all elements because mini-mongo does not implement the remove operation.<br>So this approach can be used on both client and server side.<br>removeAll should only used for testing purposes, so it doesn't need to be efficient.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeIt"><span class="type-signature"></span>removeIt<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line250">line 250</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>DO NOT USE.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>Should not be used. Should remove the profile for the user.</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Meteor.Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="someProfiles"><span class="type-signature"></span>someProfiles<span class="signature">(predicate)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line363">line 363</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns true if at least one profile satisfies the passed predicate.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>predicate</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A function which can be applied to any document in any profile collection and returns true<br>or false.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>True if at least one document satisfies the predicate.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="subscribe"><span class="type-signature"></span>subscribe<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_user_UserCollection.js.html">api/user/UserCollection.js</a>, <a href="api_user_UserCollection.js.html#line449">line 449</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Default subscription method for entities.<br>It subscribes to the entire collection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Aug 31 2017 13:01:48 GMT-1000 (HST) using the docdash theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

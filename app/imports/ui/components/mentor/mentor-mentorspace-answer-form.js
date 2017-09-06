@@ -5,8 +5,6 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-// /** @module ui/components/mentor/Mentor_MentorSpace_Answer_Form */
-
 Template.Mentor_MentorSpace_Answer_Form.helpers({
   existingAnswer() {
     const questionID = this.questionID;

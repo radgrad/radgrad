@@ -8,12 +8,11 @@ import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
 
-/** @module api/course/CourseCollection */
-
 /**
  * Represents a specific course, such as "ICS 311".
  * To represent a specific course for a specific semester, use CourseInstance.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @memberOf api/course
+ * @extends api/base.BaseSlugCollection
  */
 class CourseCollection extends BaseSlugCollection {
 
@@ -228,5 +227,6 @@ class CourseCollection extends BaseSlugCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/course
  */
 export const Courses = new CourseCollection();

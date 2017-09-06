@@ -1,11 +1,10 @@
 import BaseTypeCollection from '../base/BaseTypeCollection';
 
 
-/** @module api/opportunity/OpportunityTypeCollection */
-
 /**
  * OpportunityTypes help organize Opportunities into logically related groupings such as "Internships", "Clubs", etc.
- * @extends module:api/base/BaseTypeCollection~BaseTypeCollection
+ * @extends api/base.BaseTypeCollection
+ * @memberOf api/opportunity
  */
 class OpportunityTypeCollection extends BaseTypeCollection {
 
@@ -32,6 +31,8 @@ class OpportunityTypeCollection extends BaseTypeCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @type {api/opportunity.OpportunityTypeCollection}
+ * @memberOf api/opportunity
  */
 export const OpportunityTypes = new OpportunityTypeCollection();
 

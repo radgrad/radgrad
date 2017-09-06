@@ -1,12 +1,11 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
-/** @module api/degree-plan/PlanChoiceUtilities */
-
 /**
  * Strips of the counter for the plan choice. The counter is used in academic plans to keep track of how many
  * choices there are (e.g. five ics400+ in the B.S. degree).
  * @param planChoice the plan choice.
  * @returns {*}
+ * @memberOf api/degree-plan
  */
 export function stripCounter(planChoice) {
   const index = planChoice.indexOf('-');
@@ -20,6 +19,7 @@ export function stripCounter(planChoice) {
  * Returns true if the planChoice is a single choice.
  * @param planChoice the plan choice.
  * @returns {boolean}
+ * @memberOf api/degree-plan
  */
 export function isSingleChoice(planChoice) {
   const cleaned = stripCounter(planChoice);
@@ -30,6 +30,7 @@ export function isSingleChoice(planChoice) {
  * Returns true if the plan choice is a simple choice, just individual slugs separated by commas.
  * @param planChoice the plan choice.
  * @returns {boolean}
+ * @memberOf api/degree-plan
  */
 export function isSimpleChoice(planChoice) {
   const cleaned = stripCounter(planChoice);
@@ -42,6 +43,7 @@ export function isSimpleChoice(planChoice) {
  * Returns true if the plan choice includes a sub-choice (e.g. '(ics313,ics331),ics355-1' )
  * @param planChoice the plan choice.
  * @returns {boolean}
+ * @memberOf api/degree-plan
  */
 export function isComplexChoice(planChoice) {
   const cleaned = stripCounter(planChoice);
@@ -54,6 +56,7 @@ export function isComplexChoice(planChoice) {
  * Returns true if the planChoice is a 300+ or 400+.
  * @param planChoice the plan choice.
  * @return {boolean}
+ * @memberOf api/degree-plan
  */
 export function isXXChoice(planChoice) {
   const cleaned = stripCounter(planChoice);
@@ -64,6 +67,7 @@ export function isXXChoice(planChoice) {
  * Converts a complex choice into an array of the slugs that make up the choice.
  * Note: This may not be enough to solve the generate plan problem.
  * @param planChoice a plan choice.
+ * @memberOf api/degree-plan
  */
 export function complexChoiceToArray(planChoice) {
   const cleaned = stripCounter(planChoice);
@@ -82,6 +86,7 @@ export function complexChoiceToArray(planChoice) {
  * Creates the course name from the slug. Course names have department in all caps.
  * @param slug the course slug.
  * @returns {string}
+ * @memberOf api/degree-plan
  */
 export function buildCourseSlugName(slug) {
   const splits = slug.split('_');
@@ -92,6 +97,7 @@ export function buildCourseSlugName(slug) {
  * Builds the Name for a simple planChoice. Will have commas replaced by ' or '.
  * @param slug the simple plan choice.
  * @returns {string}
+ * @memberOf api/degree-plan
  */
 export function buildSimpleName(slug) {
   const splits = slug.split(',');
@@ -106,6 +112,7 @@ export function buildSimpleName(slug) {
  * Returns the department from a course slug.
  * @param courseSlug
  * @returns {*}
+ * @memberOf api/degree-plan
  */
 export function getDepartment(courseSlug) {
   let slug = courseSlug;
@@ -120,6 +127,7 @@ export function getDepartment(courseSlug) {
  * Returns an array of the departments in the plan choice.
  * @param planChoice The plan choice.
  * @returns {Array}
+ * @memberOf api/degree-plan
  */
 export function getDepartments(planChoice) {
   const choices = planChoice.split(',');
@@ -138,6 +146,7 @@ export function getDepartments(planChoice) {
  * @param planChoice a plan choice.
  * @param courseSlug a course's slug.
  * @returns {*}
+ * @memberOf api/degree-plan
  */
 function satisfiesSinglePlanChoice(planChoice, courseSlug) {
   const dept = getDepartment(planChoice);
@@ -155,6 +164,7 @@ function satisfiesSinglePlanChoice(planChoice, courseSlug) {
  * @param planChoice The plan choice.
  * @param courseSlug The course slug.
  * @return {Boolean}
+ * @memberOf api/degree-plan
  */
 export function satisfiesPlanChoice(planChoice, courseSlug) {
   const singleChoices = planChoice.split(',');
@@ -172,6 +182,7 @@ export function satisfiesPlanChoice(planChoice, courseSlug) {
  * @param planChoices an array of plan choices.
  * @param courseSlug the course slug.
  * @return {Number} the index of courseSlug in the array.
+ * @memberOf api/degree-plan
  */
 export function planIndexOf(planChoices, courseSlug) {
   for (let i = 0; i < planChoices.length; i += 1) {

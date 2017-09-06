@@ -1,8 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Courses } from '../../api/course/CourseCollection';
 
-/** @module api/ics/IceProcessor */
-
 /**
  * Polyfill definition of isInteger in case it's not defined.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger}
@@ -18,6 +16,7 @@ Number.isInteger = Number.isInteger ||
 /**
  * The competency points earned for each grade A, B, or C.
  * @type {{A: number, B: number, C: number}}
+ * @memberOf api/ice
  */
 export const gradeCompetency = {
   A: 10,
@@ -30,6 +29,7 @@ export const gradeCompetency = {
  * Note this does not test to see if additional fields are present.
  * @param obj The object, which must be an object with fields i, c, and e.
  * @returns {boolean} True if all fields are present and are numbers.
+ * @memberOf api/ice
  */
 export function isICE(obj) {
   return (((typeof obj) === 'object') && Number.isInteger(obj.i) && Number.isInteger(obj.c) && Number.isInteger(obj.e));
@@ -39,6 +39,7 @@ export function isICE(obj) {
  * Throws error if obj is not an ICE object.
  * @param obj The object to be tested for ICEness.
  * @throws { Meteor.Error } If obj is not ICE.
+ * @memberOf api/ice
  */
 export function assertICE(obj) {
   if ((obj === null) || (typeof obj !== 'object') || !(isICE(obj))) {
@@ -56,6 +57,7 @@ export function assertICE(obj) {
  * @param course The course slug. If it's the "uninteresting" slug, then disregard it.
  * @param grade The grade
  * @returns {{i: number, c: number, e: number}} The ICE object.
+ * @memberOf api/ice
  */
 export function makeCourseICE(course, grade) {
   const i = 0;
@@ -80,6 +82,7 @@ export function makeCourseICE(course, grade) {
  * ICE values are counted only if verified is true.
  * @param docs An array of CourseInstance or OpportunityInstance documents.
  * @returns {{i: number, c: number, e: number}} The ICE object.
+ * @memberOf api/ice
  */
 export function getEarnedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
@@ -102,6 +105,7 @@ export function getEarnedICE(docs) {
  * ICE values are counted whether or not they are verified.
  * @param docs An array of CourseInstance or OpportunityInstance documents.
  * @returns {{i: number, c: number, e: number}} The ICE object.
+ * @memberOf api/ice
  */
 export function getProjectedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };

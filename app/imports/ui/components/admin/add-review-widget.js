@@ -10,7 +10,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Add_Review_Widget */
 
 // TODO Slug should be auto-generated, student and reviewee should be dropdowns, Schema should have validators
 // for Student, reviewType, reviewee.

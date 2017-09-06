@@ -13,8 +13,6 @@ import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
 
-// /** @module ui/components/advisor/Add_Student_Widget */
-
 const addSchema = new SimpleSchema({
   firstName: String,
   lastName: String,

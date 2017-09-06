@@ -15,8 +15,6 @@ import { plannerKeys } from './academic-plan';
 import { appLog } from '../../../api/log/AppLogCollection';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 
-// /** @module ui/components/planner/Semester_List */
-
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
   if (this.data) {
     this.state = this.data.dictionary;

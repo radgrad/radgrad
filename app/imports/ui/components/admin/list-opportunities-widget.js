@@ -13,8 +13,6 @@ import * as FormUtils from './form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { isInRole } from '../../utilities/template-helpers';
 
-// /** @module ui/components/admin/List_Opportunities_Widget */
-
 function numReferences(opportunity) {
   let references = 0;
   [OpportunityInstances].forEach(function (entity) {

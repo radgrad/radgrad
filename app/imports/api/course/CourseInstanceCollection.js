@@ -12,11 +12,10 @@ import BaseCollection from '../base/BaseCollection';
 import { makeCourseICE } from '../ice/IceProcessor';
 
 
-/** @module api/course/CourseInstanceCollection */
-
 /**
  * Represents the taking of a course by a specific student in a specific semester.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @memberOf api/course
+ * @extends api/base.BaseCollection
  */
 class CourseInstanceCollection extends BaseCollection {
   /**
@@ -397,5 +396,6 @@ class CourseInstanceCollection extends BaseCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/course
  */
 export const CourseInstances = new CourseInstanceCollection();

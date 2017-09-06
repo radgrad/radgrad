@@ -29,8 +29,9 @@ import { StudentProfiles } from '../user/StudentProfileCollection';
 import { Teasers } from '../teaser/TeaserCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
-/** @module api/radgrad/RadGrad */
-
+/**
+ * @memberOf api/radgrad
+ */
 class RadGradClass {
 
   constructor() {
@@ -126,4 +127,9 @@ class RadGradClass {
   }
 }
 
+/**
+ * Provides the singleton instance of this class.
+ * @type {api/radgrad.RadGradClass}
+ * @memberOf api/radgrad
+ */
 export const RadGrad = new RadGradClass();

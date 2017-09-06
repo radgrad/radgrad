@@ -1,11 +1,10 @@
 import BaseTypeCollection from '../base/BaseTypeCollection';
 
 
-/** @module api/interest/InterestTypeCollection */
-
 /**
  * InterestTypes help organize Interests into logically related groupings such as "CS-Disciplines", "Locations", etc.
- * @extends module:api/base/BaseTypeCollection~BaseTypeCollection
+ * @extends api/base.BaseTypeCollection
+ * @memberOf api/interest
  */
 class InterestTypeCollection extends BaseTypeCollection {
 
@@ -33,6 +32,8 @@ class InterestTypeCollection extends BaseTypeCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @type {api/interest.InterestTypeCollection}
+ * @memberOf api/interest
  */
 export const InterestTypes = new InterestTypeCollection();
 

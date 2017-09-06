@@ -10,12 +10,11 @@ import { Teasers } from '../teaser/TeaserCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
 
-/** @module api/interest/InterestCollection */
-
 /**
  * Represents a specific interest, such as "Software Engineering".
  * Note that all Interests must have an associated InterestType.
- * @extends module:api/base/BaseSlugCollection~BaseSlugCollection
+ * @extends api/base.BaseSlugCollection
+ * @memberOf api/interest
  */
 class InterestCollection extends BaseSlugCollection {
 
@@ -164,5 +163,7 @@ class InterestCollection extends BaseSlugCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @type {api/interest.InterestCollection}
+ * @memberOf api/interest
  */
 export const Interests = new InterestCollection();

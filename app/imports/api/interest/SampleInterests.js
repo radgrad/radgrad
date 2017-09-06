@@ -3,11 +3,10 @@ import { InterestTypes } from '../interest/InterestTypeCollection';
 import { Interests } from '../interest/InterestCollection';
 
 
-/** @module api/interest/SampleInterests */
-
 /**
  * Creates an InterestType with a unique slug and returns its docID.
  * @returns { String } The docID of the newly generated InterestType.
+ * @memberOf api/interest
  */
 export function makeSampleInterestType() {
   const name = 'Sample Interest Type';
@@ -20,6 +19,7 @@ export function makeSampleInterestType() {
  * Creates an Interest with a unique slug and returns its docID.
  * Also creates a new InterestType.
  * @returns { String } The docID for the newly generated Interest.
+ * @memberOf api/interest
  */
 export function makeSampleInterest() {
   const interestType = makeSampleInterestType();

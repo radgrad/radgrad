@@ -16,10 +16,10 @@ import { Slugs } from '../slug/SlugCollection';
 import { ROLE } from '../role/Role';
 import { getProjectedICE, getEarnedICE } from '../ice/IceProcessor';
 
-/** @module api/user/StudentProfileCollection */
 /**
  * Represents a Student Profile.
- * @extends module:api/base/BaseCollection~BaseProfileCollection
+ * @extends api/user.BaseProfileCollection
+ * @memberOf api/user
  */
 class StudentProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -299,4 +299,9 @@ class StudentProfileCollection extends BaseProfileCollection {
   }
 }
 
+/**
+ * Provides the singleton instance this collection to all other entities.
+ * @type {api/user.StudentProfileCollection}
+ * @memberOf api/user
+ */
 export const StudentProfiles = new StudentProfileCollection();

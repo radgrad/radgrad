@@ -11,8 +11,6 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { appLog } from '../../../api/log/AppLogCollection';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 
-// /** @module ui/components/planner/Add_Course_Button */
-
 Template.Add_Course_Button.onCreated(function addCourseButtonOnCreated() {
   this.state = this.data.dictionary;
 });

@@ -5,8 +5,6 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 
-// /** @module ui/components/shared/User_Course_Component */
-
 function getCourses(studentID, isPast) {
   const courseInstances = CourseInstances.find({ studentID, verified: isPast }).fetch();
   return _.uniq(courseInstances);

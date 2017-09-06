@@ -11,8 +11,6 @@ import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Add_Opportunity_Instance_Widget */
-
 const addSchema = new SimpleSchema({
   semester: String,
   opportunity: String,

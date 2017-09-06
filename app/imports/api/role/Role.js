@@ -2,13 +2,12 @@ import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 
-/** @module api/role/Role */
-
 /** Defines the legal strings used to represent roles in the system. */
 
 /**
  * ROLE Provides ROLE.FACULTY, ROLE.STUDENT, ROLE.ADMIN, ROLE.ALUMNI.
  * @type { Object }
+ * @memberOf api/role
  */
 export const ROLE = {
   FACULTY: 'FACULTY',
@@ -19,12 +18,18 @@ export const ROLE = {
   MENTOR: 'MENTOR',
 };
 
+/**
+ * The valid Roles in RadGrad.
+ * @type {Array}
+ * @memberOf api/role
+ */
 export const ROLES = _.values(ROLE);
 
 /**
  * Predicate for determining if a string is a defined ROLE.
  * @param { String } role The role.
  * @returns {boolean} True if role is a defined ROLE.
+ * @memberOf api/role
  */
 export function isRole(role) {
   return (typeof role) === 'string' && _.includes(_.values(ROLE), role);
@@ -34,6 +39,7 @@ export function isRole(role) {
  * Ensures that role(s) are valid roles.
  * @param role The role or an array of roles.
  * @throws { Meteor.Error } If any of role(s) are not valid.
+ * @memberOf api/role
  */
 export function assertRole(role) {
   const roleArray = (Array.isArray(role)) ? role : [role];

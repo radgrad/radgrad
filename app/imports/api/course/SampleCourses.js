@@ -5,11 +5,10 @@ import { CourseInstances } from '../course/CourseInstanceCollection';
 import { makeSampleInterest } from '../interest/SampleInterests';
 
 
-/** @module api/course/SampleCourses */
-
 /**
  * The name of the sample course.
  * @type {string}
+ * @memberOf api/course
  */
 export const sampleCourseName = 'Sample Course';
 
@@ -17,6 +16,7 @@ export const sampleCourseName = 'Sample Course';
  * Creates a Course with a unique slug and returns its docID.
  * @param args An optional object containing arguments to the courses.define function.
  * @returns { String } The docID of the newly generated Course.
+ * @memberOf api/course
  */
 export function makeSampleCourse(args) {
   const name = sampleCourseName;
@@ -36,6 +36,7 @@ export function makeSampleCourse(args) {
  * @param student The student slug associated with this course.
  * @param args Optional object providing arguments to the CourseInstance definition.
  * @returns { String } The docID for the newly generated Interest.
+ * @memberOf api/course
  */
 export function makeSampleCourseInstance(student, args) {
   const semester = Semesters.define({ term: Semesters.FALL, year: 2013 });

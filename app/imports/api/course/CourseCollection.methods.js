@@ -24,6 +24,7 @@ function getEnrollmentData(courseID, semesterID) {
  * CourseID is the course ID.
  * EnrollmentData is an array of arrays. Each interior array is a tuple: a string containing the shortname and an
  * integer indicating the enrollment data.
+ * @memberOf api/course
  * @example
  * { courseID: 'xghuyf2132q3',
  *   enrollmentData: [['Sp19', 0], ['Su19', 1], ['Fa19', 5],

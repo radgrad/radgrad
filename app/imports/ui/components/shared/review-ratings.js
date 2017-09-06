@@ -2,8 +2,6 @@
  Specify review ratings and descriptions for all reviewer widgets.
  */
 
-// /** @module ui/components/shared/ReviewRatingsObjects */
-
 export const reviewRatingsObjects = [
   { score: 1, description: 'One of the worst' },
   { score: 2, description: 'Below average' },

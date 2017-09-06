@@ -9,10 +9,9 @@ import { ROLE } from '../role/Role';
 import { Semesters } from '../semester/SemesterCollection.js';
 import { Users } from '../user/UserCollection';
 
-/** @module api/verification/VerificationRequestCollection */
-
 /**
  * Schema for the processed information of VerificationRequests.
+ * @memberOf api/verification
  */
 export const ProcessedSchema = new SimpleSchema({
   date: Date,
@@ -25,7 +24,8 @@ export const ProcessedSchema = new SimpleSchema({
  * Represents a Verification Request, such as "LiveWire Internship".
  * A student has completed an opportunity (such as an internship or project) and wants to obtain ICE Points by
  * having it verified.
- * @extends module:BaseInstance~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/verification
  */
 class VerificationRequestCollection extends BaseCollection {
 
@@ -280,5 +280,7 @@ class VerificationRequestCollection extends BaseCollection {
 
 /**
  * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/verification
+ * @type {api/verification.VerificationRequestCollection}
  */
 export const VerificationRequests = new VerificationRequestCollection();

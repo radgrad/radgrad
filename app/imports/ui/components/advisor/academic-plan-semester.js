@@ -10,8 +10,6 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import * as planChoiceUtils from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 
-// /** @module ui/components/advisor/Academic_Plan_Semester */
-
 function takenSlugs(courseInstances) {
   return _.map(courseInstances, (ci) => {
     const doc = CourseInstances.getCourseDoc(ci._id);

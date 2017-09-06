@@ -16,8 +16,6 @@ import * as planUtils from '../degree-plan/PlanChoiceUtilities';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 
-/** @module api/feedback/FeedbackFunctions */
-
 /* eslint-disable class-methods-use-this */
 
 /**
@@ -33,7 +31,7 @@ import { Users } from '../user/UserCollection';
  *   :
  * FeedbackFunctions.recommendedCoursesThisSemesterByInterest(studentID);
  * @class FeedbackFunctions
- *
+ * @memberOf api/feedback
  */
 export class FeedbackFunctionClass {
 
@@ -400,5 +398,6 @@ export class FeedbackFunctionClass {
 /**
  * Singleton instance for all FeedbackFunctions.
  * @type {FeedbackFunctionClass}
+ * @memberOf api/feedback
  */
 export const FeedbackFunctions = new FeedbackFunctionClass();

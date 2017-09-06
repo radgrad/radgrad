@@ -11,8 +11,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { reviewRatingsObjects } from '../shared/review-ratings.js';
 import * as FormUtils from './form-fields/form-field-utilities.js';
 
-// /** @module ui/components/admin/Update_Review_Widget */
-
 const updateSchema = new SimpleSchema({
   // student: String,
   // reviewType: String,

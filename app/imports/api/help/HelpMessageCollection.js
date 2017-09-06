@@ -2,11 +2,10 @@ import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
 
 
-/** @module api/help/HelpMessageCollection */
-
 /**
  * Represents a Help message for a RadGrad page.
- * @extends module:api/base/BaseCollection~BaseCollection
+ * @extends api/base.BaseCollection
+ * @memberOf api/help
  */
 class HelpMessageCollection extends BaseCollection {
   /**
@@ -113,4 +112,9 @@ class HelpMessageCollection extends BaseCollection {
   }
 }
 
+/**
+ * Provides the singleton instance of this class to all other entities.
+ * @memberOf api/help
+ * @type {api/help.HelpMessageCollection}
+ */
 export const HelpMessages = new HelpMessageCollection();

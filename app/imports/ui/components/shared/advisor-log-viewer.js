@@ -2,8 +2,6 @@ import { Template } from 'meteor/templating';
 import { moment } from 'meteor/momentjs:moment';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
 
-// /** @module ui/components/shared/Advisor_Log_Viewer */
-
 Template.Advisor_Log_Viewer.helpers({
   logs() {
     return AdvisorLogs.find();
