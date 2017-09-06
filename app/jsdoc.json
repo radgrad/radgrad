@@ -15,7 +15,7 @@
   "plugins": ["plugins/markdown"],
   "opts": {
     "encoding": "utf8",
-    "template": "node_modules/docdash",
+    "template": "node_modules/radgrad-jsdoc-template",
     "destination": "../gitbook/api/jsdocs",
     "recurse": true,
     "verbose": true
