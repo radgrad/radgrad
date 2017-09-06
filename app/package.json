@@ -34,6 +34,6 @@
     "eslint-plugin-react": "^7.0.1",
     "jsdoc": "^3.4.0",
     "nightmare": "^2.10.0",
-    "radgrad-jsdoc-template": "^1.0.10"
+    "radgrad-jsdoc-template": "^1.0.11"
   }
 }
