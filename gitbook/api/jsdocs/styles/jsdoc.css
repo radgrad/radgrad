@@ -168,7 +168,7 @@ nav h3 {
 }
 
 nav ul {
-  font-family: 'Lucida Grande', 'Lucida Sans Unicode', arial, sans-serif;
+  /* font-family: 'Lucida Grande', 'Lucida Sans Unicode', arial, sans-serif; */
   font-size: 100%;
   line-height: 17px;
   padding: 0;
@@ -178,7 +178,7 @@ nav ul {
 
 nav ul a,
 nav ul a:active {
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
   line-height: 18px;
   padding: 0;
   /* display: block; */
