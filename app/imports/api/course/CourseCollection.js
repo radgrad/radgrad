@@ -8,7 +8,6 @@ import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
 
 
-
 /**
  * Represents a specific course, such as "ICS 311".
  * To represent a specific course for a specific semester, use CourseInstance.

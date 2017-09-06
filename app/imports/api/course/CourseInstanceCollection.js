@@ -12,7 +12,6 @@ import BaseCollection from '../base/BaseCollection';
 import { makeCourseICE } from '../ice/IceProcessor';
 
 
-
 /**
  * Represents the taking of a course by a specific student in a specific semester.
  * @memberOf api/course
