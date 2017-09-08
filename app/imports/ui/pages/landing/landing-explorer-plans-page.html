@@ -1,0 +1,5 @@
+<template name="Landing_Explorer_Plans_Page">
+  {{#Student_Explorer_Layout addedList=addedPlans nonAddedList=nonAddedPlans type='plans'}}
+    {{> Student_Explorer_Plans_Widget name=plan.name slug=(slugName plan.slugID) descriptionPairs=(descriptionPairs plan) socialPairs=(socialPairs plan) id=plan._id updateID=updateID item=plan}}
+  {{/Student_Explorer_Layout}}
+</template>

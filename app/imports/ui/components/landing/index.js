@@ -1,4 +1,14 @@
 /** @namespace ui/components/landing */
+
+import './landing-explorer-careergoals-widget.html';
+import './landing-explorer-careergoals-widget';
+
+import './landing-explorer-interests-widget.html';
+import './landing-explorer-interests-widget';
+
+import './landing-explorer-menu.html';
+import './landing-explorer-menu';
+
 import './landing-green-background.css';
 import './landing-grey-background.css';
 
@@ -22,3 +32,6 @@ import './meteor-login-form.js';
 
 import './radgrad-login-buttons.html';
 import './radgrad-login-buttons.js';
+
+import './landing-menubar.html';
+import './landing-menubar';
