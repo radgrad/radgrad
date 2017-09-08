@@ -1,6 +1,9 @@
 import './landing-explorer-careergoals-page.html';
 import './landing-explorer-careergoals-page';
 
+import './landing-explorer-courses-page.html';
+import './landing-explorer-courses-page';
+
 import './landing-explorer-interests-page.html';
 import './landing-explorer-interests-page';
 

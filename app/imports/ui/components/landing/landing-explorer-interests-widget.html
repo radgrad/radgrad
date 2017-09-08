@@ -6,16 +6,6 @@
         <h4 class="ui left floated header">
           {{toUpper name}}
         </h4>
-        {{#if userStatus item}}
-          <button value="{{id}}" class="ui green basic right floated mini button deleteItem"
-                  style="margin-bottom: 1rem;">REMOVE FROM INTERESTS
-          </button>
-        {{else}}
-          <button value="{{id}}" class="ui green basic right floated mini button addItem" style="margin-bottom: 1rem;">
-            ADD TO INTERESTS
-          </button>
-        {{/if}}
-
       </div>
       <div class="ui divider" style="margin-top: 0;"></div>
 
@@ -38,128 +28,53 @@
   </div>
 
   <div class="ui stackable two column grid">
-    <div class="ten wide column">
+    <div class="sixteen wide column">
       <div class="ui segment">
         <div class="ui dividing header">
           <h4>RELATED COURSES</h4>
         </div>
-{{#if isInRole 'student'}}
-    <div class="ui three column stackable internally celled grid">
-          <div class="row">
-            {{#each descriptionPair in descriptionPairs}}
-              {{#if isLabel descriptionPair.label 'Related Courses'}}
-                {{#each table in descriptionPair.value}}
-                  <div class="column" style="text-align: center;">
-                    {{{getTableTitle @index}}}
-                    {{#if table}}
-                    {{#each prerequisite in table}}
-                      <a class="{{isActiveRoute coursesRouteName}} item"
-                           href="{{pathFor coursesRouteName username=routeUserName
-                                           course = prerequisite.course}}">{{courseNameFromSlug
-                        prerequisite.course}}</a> <br>
-                    {{/each}}
-                      {{else}}
-                      <i>None</i>
-                    {{/if}}
-                  </div>
+        {{#each descriptionPair in descriptionPairs}}
+          {{#if isLabel descriptionPair.label 'Related Courses'}}
+            {{#if descriptionPair.value}}
+              <div class="ui horizontal bulleted list">
+                {{#each prerequisite in descriptionPair.value}}
+                  <a class="item">
+                    <a class="{{isActiveRoute coursesRouteName}} item"
+                       href="{{pathFor coursesRouteName course = prerequisite}}">{{courseNameFromSlug
+                        prerequisite}}</a> <br>
+                  </a>
                 {{/each}}
-              {{/if}}
-            {{/each}}
-          </div>
-        </div>
-  {{else}}
-    {{#each descriptionPair in descriptionPairs}}
-      {{#if isLabel descriptionPair.label 'Related Courses'}}
-        {{#if descriptionPair.value}}
-        <div class="ui horizontal bulleted list">
-          {{#each prerequisite in descriptionPair.value}}
-            <a class="item">
-              <a class="{{isActiveRoute coursesRouteName}} item"
-                 href="{{pathFor coursesRouteName username=routeUserName
-                 course = prerequisite}}">{{courseNameFromSlug
-              prerequisite}}</a> <br>
-              </a>
+              </div>
+            {{else}}
+              <i>None</i>
+            {{/if}}
+          {{/if}}
         {{/each}}
-        </div>
-        {{else}}
-          <i>None</i>
-      {{/if}}
-      {{/if}}
-    {{/each}}
-{{/if}}
       </div>
 
       <div class="ui segment">
         <div class="ui dividing header">
           <h4>RELATED OPPORTUNITIES</h4>
         </div>
-  {{#if isInRole 'student'}}
-      <div class="ui three column stackable internally celled grid">
-          <div class="row">
-            {{#each descriptionPair in descriptionPairs}}
-              {{#if isLabel descriptionPair.label 'Related Opportunities'}}
-                  {{#each table in descriptionPair.value}}
-                      <div class="column" style="text-align: center;">
-                    {{{getTableTitle @index}}}
-                      {{#if table}}
-                        {{#each relatedOpportunity in table}}
-                      <a class="{{isActiveRoute opportunitiesRouteName}} item"
-                           href="{{pathFor opportunitiesRouteName username=routeUserName
-                                           opportunity = relatedOpportunity.opportunity}}">{{opportunityNameFromSlug
-                        relatedOpportunity.opportunity}}</a> <br>
-                    {{/each}}
-                      {{else}}
-                        <i>None</i>
-                      {{/if}}
-                  </div>
+        {{#each descriptionPair in descriptionPairs}}
+          {{#if isLabel descriptionPair.label 'Related Opportunities'}}
+            {{#if descriptionPair.value}}
+              <div class="ui horizontal bulleted list">
+                {{#each relatedOpportunity in descriptionPair.value}}
+                  <a class="item">
+                    <a class="{{isActiveRoute opportunitiesRouteName}} item"
+                       href="{{pathFor opportunitiesRouteName username=routeUserName
+                                       opportunity = relatedOpportunity}}">{{opportunityNameFromSlug
+                        relatedOpportunity}}</a> <br>
+                  </a>
                 {{/each}}
-              {{/if}}
-            {{/each}}
-          </div>
-        </div>
-    {{else}}
-
-
-    {{#each descriptionPair in descriptionPairs}}
-      {{#if isLabel descriptionPair.label 'Related Opportunities'}}
-        {{#if descriptionPair.value}}
-            <div class="ui horizontal bulleted list">
-            {{#each relatedOpportunity in descriptionPair.value}}
-            <a class="item">
-              <a class="{{isActiveRoute opportunitiesRouteName}} item"
-                 href="{{pathFor opportunitiesRouteName username=routeUserName
-                 opportunity = relatedOpportunity}}">{{opportunityNameFromSlug
-              relatedOpportunity}}</a> <br>
-              </a>
-            {{/each}}
-      </div>
-          {{else}}
-          <i>None</i>
+              </div>
+            {{else}}
+              <i>None</i>
+            {{/if}}
           {{/if}}
-      {{/if}}
-    {{/each}}
-  {{/if}}
+        {{/each}}
       </div>
-    </div>
-
-    <div class="six wide column">
-      {{#each socialPair in socialPairs}}
-        <div class="ui padded center aligned segment">
-          <div class="ui dividing header">
-            <h4>{{toUpper socialPair.label}} {{> Widget_Header_Number inputValue = socialPair.amount}}</h4>
-          </div>
-
-          <div class="ui circular mini bordered images" style="overflow: visible;">
-            {{#each user in socialPair.value}}
-              <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userUsername user)}}"
-                 data-position="bottom left" data-tooltip="{{fullName user}}"><img style="height:30px; width: auto;"
-                                                                                   class="ui image" src={{userPicture
-                    user}}></a>
-            {{/each}}
-          </div>
-
-        </div>
-      {{/each}}
     </div>
   </div>
 

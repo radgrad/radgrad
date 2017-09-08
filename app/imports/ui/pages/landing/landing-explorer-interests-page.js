@@ -61,24 +61,10 @@ function careerGoals(interest) {
 
 Template.Landing_Explorer_Interests_Page.helpers({
   addedCareerInterests() {
-    const profile = Users.getProfile(getRouteUserName());
-    const addedCareerInterests = [];
-    const allInterests = Users.getInterestIDsByType(profile.userID);
-    _.forEach(allInterests[1], (interest) => {
-      addedCareerInterests.push(Interests.findDoc(interest));
-    });
-    return addedCareerInterests;
+    return [];
   },
   addedInterests() {
-    const addedInterests = [];
-    const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    const profile = Users.getProfile(getRouteUserName());
-    _.forEach(allInterests, (interest) => {
-      if (_.includes(profile.interestIDs, interest._id)) {
-        addedInterests.push(interest);
-      }
-    });
-    return addedInterests;
+    return Interests.find({}, { sort: { name: 1 } }).fetch();
   },
   descriptionPairs(interest) {
     return [
@@ -95,15 +81,7 @@ Template.Landing_Explorer_Interests_Page.helpers({
     return interest[0];
   },
   nonAddedInterests() {
-    const allInterests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    const profile = Users.getProfile(getRouteUserName());
-    const nonAddedInterests = _.filter(allInterests, function (interest) {
-      if (_.includes(Users.getInterestIDs(profile.userID), interest._id)) {
-        return false;
-      }
-      return true;
-    });
-    return nonAddedInterests;
+    return [];
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;

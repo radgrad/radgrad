@@ -3,6 +3,9 @@
 import './landing-explorer-careergoals-widget.html';
 import './landing-explorer-careergoals-widget';
 
+import './landing-explorer-courses-widget.html';
+import './landing-explorer-courses-widget';
+
 import './landing-explorer-interests-widget.html';
 import './landing-explorer-interests-widget';
 
