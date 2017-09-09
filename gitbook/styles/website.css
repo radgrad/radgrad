@@ -1,0 +1,17 @@
+/* Compress the left side navbar */
+.book-summary ul.summary li a, .book-summary ul.summary li span {
+  padding: 5px 15px;
+}
+
+.book .book-summary .exc-trigger {
+  top: 6px;
+}
+
+/* Reduce the vertical space in headers and paragraphs. */
+.markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section h5, .markdown-section h6 {
+  margin-bottom: .40em;
+}
+
+.markdown-section {
+  line-height: 1.5;
+}

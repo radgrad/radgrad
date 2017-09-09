@@ -39,8 +39,8 @@
 ### Data Model
 
 * Key Concepts
-  * Collections are Classes
-  * Slugs
+  * [What is the "data model"?](datamodel/keyconcepts.md#whatis)
+  * [Slugs](datamodel/keyconcepts.md#slugs)
   * Foreign keys
   * Dump/Restore
   * Pub/Sub caching
