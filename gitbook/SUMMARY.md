@@ -42,10 +42,10 @@
 * [Class Hierarchy](datamodel/class-hierarchy.md)
 * Entity-Relationship Model
 * [Slugs](datamodel/slugs.md)
+* Roles
 * Dump/Restore
 * Pub/Sub Caching
 * Integrity Checking
-* Roles
 * Testing
 
 ### User interface
