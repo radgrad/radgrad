@@ -38,27 +38,23 @@
 
 ### Data Model
 
-* Key Concepts
-  * [What is the "data model"?](datamodel/keyconcepts.md#whatis)
-  * [Slugs](datamodel/keyconcepts.md#slugs)
-  * Foreign keys
-  * Dump/Restore
-  * Pub/Sub caching
-  * Integrity checking
-  * RadGrad roles
-  * Testing
-* Entity-Relationship model
-* Class Hierarchy
-
+* [Overview](datamodel/overview.md)
+* [Class Hierarchy](datamodel/class-hierarchy.md)
+* Entity-Relationship Model
+* [Slugs](datamodel/slugs.md)
+* Dump/Restore
+* Pub/Sub Caching
+* Integrity Checking
+* Roles
+* Testing
 
 ### User interface
 
-* Key concepts
-  * Layouts, pages, components
-  * Routing
-  * Form field components
-  * Inter-widget state communication
-  * When a page doesn't display
+* Layouts, pages, components
+* Routing
+* Form field components
+* Inter-widget state communication
+* When a page doesn't display
 
 ### API
 

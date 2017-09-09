@@ -24,3 +24,16 @@
 .book .book-summary .exc-trigger:before {
   content: "\f0da";
 }
+
+/* Darken the section headers in the navbar. */
+.book-summary ul.summary li.header {
+  color: #364149;
+  background-color: lightgrey;
+  padding-top: 10px;
+}
+
+/* Reduce size of code font */
+
+.book .book-body .page-wrapper .page-inner section.normal pre, .book .book-body .page-wrapper .page-inner section.normal code {
+  font-size: .8em;
+}
