@@ -15,3 +15,12 @@
 .markdown-section {
   line-height: 1.5;
 }
+
+/* Replace chevrons by carets. */
+.book .book-summary .expanded > a .exc-trigger:before, .book .book-summary .expanded > span .exc-trigger:before {
+  content: "\f0d7";
+}
+
+.book .book-summary .exc-trigger:before {
+  content: "\f0da";
+}
