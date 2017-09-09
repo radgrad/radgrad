@@ -19,7 +19,7 @@
     "destination": "../gitbook/api/jsdocs",
     "recurse": true,
     "verbose": true,
-    "readme": "README.txt"
+    "readme": "jsdoc-readme.md"
   },
   "markdown": {
     "parser": "gfm",
