@@ -25,21 +25,17 @@ Here is how each of the three measures is computed.
 
 #### Measuring Competency
 
-The Competency metric is measured by awarding the student 9 points for each A (or A+ or A-) received in a CS course and 5 points for each B (or B+ or B-). No points are awarded for grades below B-.
-
-The B.S. in CS requires 16 computer science courses.  If a student gets all A's and B's in their ICS courses, then they can cross the 100 point threshold by getting 5 A's and 11 B's (corresponding to a 3.3 GPA in ICS courses). 
-
-Students should normally take 3 ICS courses per semester when enrolled full-time.  If they get all A's, they earn 27 competency points. If they get all B's, they earn 15 competency points. 
+The Competency metric is measured by awarding the student 10 points for each A (or A+ or A-) received in a CS course and 6 points for each B (or B+ or B-). No points are awarded for grades below B-.
 
 #### Measuring Innovation
 
-The Innovation metric is based upon Opportunities that have a research (or some other innovative) component.  Opportunities lasting only a single day or weekend (such as a Hackathon or Programming Contest) are worth 10 points.  Opportunities lasting a semester (such as participation in a research project) can be worth up to 25 points. Full time summer research positions can be worth up to 50 points. 
+The Innovation metric is based upon Opportunities that have a research (or some other innovative) component.  Opportunities lasting only a single day or weekend (such as a Hackathon or Programming Contest) are typically worth 10 points.  Opportunities lasting a semester (such as participation in a research project) can be worth up to 25 points.  
 
 To obtain 100 Innovation points, the student must average 25 innovation points over four semesters. 
 
 #### Measuring Experience 
 
-The Experience metric is based upon Opportunities that have a professional development component.  Like Innovation, single day or weekend opportunities are worth 10 points, and part-time semester opportunities are worth 25 points. Full-time summer opportunities such as internships can be worth up to 50 points. 
+The Experience metric is based upon Opportunities that have a professional development component.  Like Innovation, single day or weekend opportunities are worth 10 points, and part-time semester opportunities are worth 25 points. 
 
 Similar to Innovation, one can accumulate 100 points over four semesters by obtaining at least 25 points in each semester.
 
@@ -49,19 +45,4 @@ The ICE metric is explicitly designed to support double dipping by combining an 
 
 Similarly, one could combine an ICS 499 with an internship to obtain both Competency and Experience points in a single semester. 
 
-### Percentile Ranking in ICE
-
-The "100 points equals 100%" measure is designed to provide a non-competitive approach to understanding ICE; in other words, it is possible for 100% of the ICS students to obtain 100% for each of the three ICE components.
- 
-That said, it is often illuminating to see where you stand against other students, and so it is possible to compute your percentile standing.  To do this, one must first determine a "peer group", because it would be unfair to compare the ICE values for a student just starting the program to a student who is about to graduate. 
-
-In ICE, the peer group is determined by the number of semesters since your first computer science course (including summer semesters). 
-
-### ICE stops at 100
-
-Although it is possible for students to accumulate more than 100 points in a category, the maximum displayed value of ICE is 100.  This is because the goal of the measure is to help as many students as possible cross the "finish line" of 100 points for each category.  It is not clear that striving for, say, 200 Experience points is really a good goal.
-
-## Implementation
-
-See [IceProcessor](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/module-IceProcessor.html).
  

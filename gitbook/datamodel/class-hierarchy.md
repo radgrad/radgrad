@@ -1,9 +1,19 @@
 # Class Hierarchy
 
-The implementation of the above entities involves a great deal of common functionality.  For example, all of these entities require a means to look up the document based upon the docID, and to determine whether or not a given docID represents an entity of a given type. 
+Recall that every MongoDB collection is encapsulated by a Javascript class with the same name. 
 
-To encapsulate this shared functionality, RadGrad implements a class hierarchy which starts with a set of three "Base" classes: BaseCollection, BaseTypeCollection, and BaseInstanceCollection. All of the RadGrad entities are direct subclasses of one of these three Base classes depending upon what kind of shared functionality they need to inherit from a superclass. The following diagram illustrates how all of the RadGrad entity classes inherit from one of the three Base classes:
+As we implemented this encapsulation, we observed that there was common functionality that could be abstracted out into a set of four superclasses:
 
-<img src="images/Hierarchy.png" width="100%">
+  * *BaseCollection*.  All classes (with the single exception of the UserCollection class) inherit either directly or indirectly from BaseCollection. This class provides the methods and fields used to manage a MongoDB collection that are common across RadGrad.
+  
+  * *BaseTypeCollection*.  This class extends BaseCollection with methods to support MongoDB collections that specify "types" in RadGrad.  Currently, there are two such types: InterestTypes and OpportunityTypes.
+  
+  * *BaseSlugCollection*.  This class extends BaseCollection with methods to support the MongoDB collections whose documents must include a "slug". For more details, see the section on [slugs](slugs.md).
+  
+  * *BaseProfileCollection*.  This class extends BaseSlugCollection with the methods common to the implementation of the collections to support RadGrad roles: AdvisorProfileCollection, FacultyProfileCollection, MentorProfileCollection, and StudentProfileCollection.
 
-In general, the BaseCollection superclass contains fields and methods useful to every RadGrad entity. The BaseTypeCollection superclass inherits from BaseCollection, and factors out the structure common to the "Type" entities. The BaseInstanceCollection superclass inherits from BaseCollection, adds methods useful to the remaining entities as well as not imposing a predefined field structure.
+Here is the resulting class hierarchy:
+
+<img src="images/class-hierarchy.png" width="100%">
+
+There is one exceptional class: UserCollection, which does not inherit from any of the Base classes.  This is because the UserCollection class encapsulates a "special" MongoDB collection managed by the Meteor.Accounts package. The behavior of this collection is sufficiently different from regular user-defined collections that we did not feel it was appropriate to make it a subclass of any other class. 

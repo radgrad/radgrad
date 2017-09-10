@@ -2,7 +2,7 @@
 
 Welcome to JSDocs for RadGrad. This documentation is organized according to four constructs:
 
-*  *Namespace.* Namespaces are defined in RadGrad so that they are equivalent to directory paths. So, the namespace "api/base" comprises the code in the radgrad/imports/api/base directory.
+*  *Namespace.* Namespaces are defined in RadGrad so that they are equivalent to directory paths. So, the namespace "api/base" comprises the code in the radgrad/app/imports/api/base directory.
 
 * *Class*. Classes refer to Javascript classes. In RadGrad, classes are primarily used as an organizing mechanism to control access to the MongoDB collections. 
 

@@ -29,6 +29,8 @@ All exported functions should have a JSDoc, and the associated file should have 
  
 Internal functions might also have a JSDoc if they are sufficiently complicated.
 
+All JSDocs need to supply an `@memberOf` so that they are associated with a namespace. The namespace corresponds to the directory path within the /imports directory (for example, "api/base").
+
 
 ## Testing conventions
 
@@ -36,7 +38,9 @@ All complex functions should have an associated unit test.
 
 Complex tests may need a DB fixture to be loaded in order to set up the DB state correctly.
 
-Methods should have integration tests to ensure that client-server communication works properly.
+Methods should have integration tests to ensure that client-server communication works properly. 
+
+See the [Testing section](./testing.html) for more details.
 
 ## Import paths
 
