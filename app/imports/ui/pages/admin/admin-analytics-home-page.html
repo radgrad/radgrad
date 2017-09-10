@@ -1,11 +1,11 @@
 <template name="Admin_Analytics_Home_Page">
 
   {{#if Template.subscriptionsReady}}
-    {{#Admin_DataModel_Layout}}
+    {{#Admin_Analytics_Layout}}
       <div class="ui floating message">
-        Click on a data model element in the menu to the left to display those items.
+        Analytics Home page.
       </div>
-    {{/Admin_DataModel_Layout}}
+    {{/Admin_Analytics_Layout}}
   {{else}}
     {{> Loading message="Waiting for subscriptions."}}
   {{/if}}
