@@ -217,7 +217,7 @@ Template.Update_Student_Widget.events({
           instance.errorClass.set('');
           const advisor = getRouteUserName();
           const student = Users.getProfile(instance.data.studentID.get());
-          const message = `${advisor} updated student ${student.username} ${JSON.stringify(updateData)}`;
+          const message = `${advisor} updated student ${student.username} ${JSON.stringify(updateData, ' ')}`;
           appLog.info(message);
         }
       });
