@@ -9,13 +9,9 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Users } from '../../../api/user/UserCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import { isInRole } from '../../utilities/template-helpers';
 
 Template.Landing_Explorer_Menu.helpers({
   academicPlansRouteName() {
@@ -132,7 +128,6 @@ Template.Landing_Explorer_Menu.helpers({
   interestsRouteName() {
     return RouteNames.landingExplorerInterestsPageRouteName;
   },
-  isInRole,
   isType(type, value) {
     return type === value;
   },

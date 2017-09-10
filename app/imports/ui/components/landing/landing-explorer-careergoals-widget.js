@@ -29,15 +29,6 @@ Template.Landing_Explorer_CareerGoals_Widget.helpers({
     const picture = Users.getProfile(user).picture;
     return picture || '/images/default-profile-picture.png';
   },
-  usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
-    if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
-    } else if (group === 'faculty') {
-      return RouteNames.facultyExplorerUsersPageRouteName;
-    }
-    return RouteNames.mentorExplorerUsersPageRouteName;
-  },
   userStatus(careerGoal) {  // eslint-disable-line
     return false;
   },

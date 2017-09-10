@@ -4,7 +4,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { isInRole, isLabel } from '../../utilities/template-helpers';
+import { isLabel } from '../../utilities/template-helpers';
 
 Template.Landing_Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -30,7 +30,6 @@ Template.Landing_Explorer_Interests_Widget.helpers({
         return 'ERROR: More than one table.';
     }
   },
-  isInRole,
   isLabel,
   opportunitiesRouteName() {
     return RouteNames.landingExplorerOpportunitiesPageRouteName;

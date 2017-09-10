@@ -6,7 +6,7 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { isInRole, isLabel } from '../../utilities/template-helpers';
+import { isLabel } from '../../utilities/template-helpers';
 
 Template.Landing_Explorer_Courses_Widget.helpers({
   color(table) {
@@ -16,7 +16,6 @@ Template.Landing_Explorer_Courses_Widget.helpers({
     return '';
   },
   courseNameFromSlug(courseSlugName) {
-    console.log(courseSlugName);
     const slug = Slugs.findDoc({ name: courseSlugName });
     const course = Courses.findDoc({ slugID: slug._id });
     return course.shortName;
@@ -59,7 +58,6 @@ Template.Landing_Explorer_Courses_Widget.helpers({
         return 'ERROR: More than one table.';
     }
   },
-  isInRole,
   isLabel,
   length(table) {
     return table.length !== 0;

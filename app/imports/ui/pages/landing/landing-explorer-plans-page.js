@@ -26,10 +26,6 @@ function numUsers(plan) {
 
 Template.Landing_Explorer_Plans_Page.helpers({
   addedPlans() {
-    const profile = Users.getProfile(getRouteUserName());
-    if (profile.academicPlanID) {
-      return [AcademicPlans.findDoc(profile.academicPlanID)];
-    }
     return [];
   },
   descriptionPairs(plan) {
@@ -40,15 +36,7 @@ Template.Landing_Explorer_Plans_Page.helpers({
     ];
   },
   nonAddedPlans() {
-    const allPlans = AcademicPlans.find({}, { sort: { semesterNumber: 1, name: 1 } }).fetch();
-    const profile = Users.getProfile(getRouteUserName());
-    const nonAddedPlans = _.filter(allPlans, function (plan) {
-      if (_.includes(profile.academicPlanID, plan._id)) {
-        return false;
-      }
-      return true;
-    });
-    return nonAddedPlans;
+    return AcademicPlans.find({}, { sort: { semesterNumber: 1, name: 1 } }).fetch();
   },
   plan() {
     const planSlugName = FlowRouter.getParam('plan');

@@ -130,7 +130,6 @@
 
   <div class="ui vertical text menu mobile hidden">
     {{#if isType type 'courses'}}
-      {{#if isInRole 'student'}}
         <h4 class="ui dividing header">
           COURSES
         </h4>
@@ -140,8 +139,6 @@
               style="position: absolute; margin-left: -20px;" class="{{userCourses listItem}}"></i>{{courseName
               listItem}}</a>
         {{/each}}
-      {{else}}
-      {{/if}}
 
       {{#each listItem in menuNonAddedList}}
         <a class="{{classType (slugName listItem) 'course'}}" data-tab="tab-name"
@@ -167,7 +164,6 @@
         {{/each}}
       {{else}}
         {{#if isType type 'degrees'}}
-          {{#if isInRole 'student'}}
             <h4 class="ui dividing header">
               DESIRED DEGREES
             </h4>
@@ -177,7 +173,6 @@
                   style="position: absolute; margin-left: -20px;" class="{{userDegrees listItem}}"></i>{{itemName
                   listItem}}</a>
             {{/each}}
-          {{/if}}
           {{#each listItem in menuNonAddedList}}
             <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name"
                href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}"><i
@@ -185,11 +180,9 @@
           {{/each}}
         {{else}}
           {{#if isType type 'opportunities'}}
-            {{#if isInRole 'student'}}
               <h4 class="ui dividing header">
                 OPPORTUNITIES
               </h4>
-            {{/if}}
             {{#each listItem in menuAddedList}}
               <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name"
                  href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}"><i
