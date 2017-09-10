@@ -9,7 +9,6 @@ import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
-import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 function courses(interest) {
   const allCourses = Courses.find().fetch();

@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { Slugs } from '../../../api/slug/SlugCollection.js';

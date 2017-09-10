@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import * as RouteNames from '../../../startup/client/router.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
@@ -144,7 +143,7 @@ Template.Landing_Explorer_Menu.helpers({
   slugName(item) {
     return Slugs.findDoc(item.slugID).name;
   },
-  userCareerGoals(careerGoal) {
+  userCareerGoals(careerGoal) { // eslint-disable-line
     return '';
   },
   userCourses(course) {
@@ -158,20 +157,17 @@ Template.Landing_Explorer_Menu.helpers({
     }
     return ret;
   },
-  userDegrees(degree) {
+  userDegrees(degree) { // eslint-disable-line
     return '';
   },
-  userInterests(interest) {
-    let ret = '';
-    return ret;
+  userInterests(interest) { // eslint-disable-line
+    return '';
   },
-  userOpportunities(opportunity) {
-    let ret = '';
-    return ret;
+  userOpportunities(opportunity) { // eslint-disable-line
+    return '';
   },
-  userPlans(plan) {
-    let ret = '';
-    return ret;
+  userPlans(plan) { // eslint-disable-line
+    return '';
   },
   usersRouteName() {
     return RouteNames.landingExplorerUsersPageRouteName;
