@@ -238,7 +238,7 @@ class VerificationRequestCollection extends BaseCollection {
   /**
    * Returns an array of strings, each one representing an integrity problem with this collection.
    * Returns an empty array if no problems were found.
-   * Checks studentID, advisorID.
+   * Checks studentID, opportunityInstanceID, semesterID.
    * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
    */
   checkIntegrity() {
@@ -246,9 +246,6 @@ class VerificationRequestCollection extends BaseCollection {
     this.find().forEach(doc => {
       if (!Users.isDefined(doc.studentID)) {
         problems.push(`Bad studentID: ${doc.studentID}`);
-      }
-      if (!Users.isDefined(doc.advisorID)) {
-        problems.push(`Bad advisorID: ${doc.advisorID}`);
       }
       if (!OpportunityInstances.isDefined(doc.opportunityInstanceID)) {
         problems.push(`Bad opportunityInstanceID: ${doc.opportunityInstanceID}`);

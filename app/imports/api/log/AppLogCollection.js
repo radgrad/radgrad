@@ -1,8 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Logger } from 'meteor/ostrio:logger';
+import { Roles } from 'meteor/alanning:roles';
 import { LoggerMongo } from 'meteor/ostrio:loggermongo';
 import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
+import { ROLE } from '../role/Role';
+
 
 /**
  * Represents a log of user interaction with RadGrad.
@@ -34,6 +37,19 @@ class AppLogCollection extends BaseCollection {
   }
 
   /**
+   * Only publish the log data if the user is the ADMIN.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      // Meteor.publish(this._collectionName, () => this._collection.find());
+      const instance = this;
+      Meteor.publish(this._collectionName, function publish() {
+        return (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) ? instance._collection.find() : [];
+      });
+    }
+  }
+
+  /**
    * Returns an object representing the AppLog docID.
    * @param docID The docID of a AppLog.
    * @returns { Object } An object representing the definition of docID.
@@ -47,6 +63,16 @@ class AppLogCollection extends BaseCollection {
     const message = doc.message;
     const additional = doc.additional;
     return { userId, date, timestamp, level, message, additional };
+  }
+
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * No problems checked for at present.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    const problems = [];
+    return problems;
   }
 
 }

@@ -2,9 +2,7 @@
 
   {{#if Template.subscriptionsReady}}
     {{#Admin_Analytics_Layout}}
-      <div class="ui floating message">
-        Analytics Home page.
-      </div>
+      {{> Event_Log_Widget }}
     {{/Admin_Analytics_Layout}}
   {{else}}
     {{> Loading message="Waiting for subscriptions."}}
