@@ -35,6 +35,9 @@ import './add-user-widget-mentor';
 import './add-user-widget-student.html';
 import './add-user-widget-student';
 
+import './admin-analytics-menu.html';
+import './admin-analytics-menu';
+
 import './admin-database-accordion.html';
 import './admin-database-accordion.js';
 

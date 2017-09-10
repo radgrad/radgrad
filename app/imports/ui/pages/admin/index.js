@@ -1,3 +1,5 @@
+import './admin-analytics-home-page.html';
+
 import './admin-database-dump-page.html';
 import './admin-database-dump-page.js';
 

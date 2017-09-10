@@ -179,6 +179,17 @@ adminRoutes.route('/moderation', {
   },
 });
 
+
+export const adminAnalyticsHomePageRouteName = 'Admin_Analytics_Home_Page';
+adminRoutes.route('/analytics', {
+  name: adminAnalyticsHomePageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsHomePageRouteName });
+  },
+});
+
+
 /*                        ADVISOR ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.
