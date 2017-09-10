@@ -52,6 +52,9 @@ import './admin-datamodel-menu.js';
 
 import './datamodel-utilities.js';
 
+import './event-log-widget.html';
+import './event-log-widget.js';
+
 import './list-career-goals-widget.html';
 import './list-career-goals-widget.js';
 
