@@ -1,0 +1,18 @@
+<template name="Landing_Explorer_Layout">
+  {{#With_Global_Subscriptions}}
+    {{> Landing_Menubar}}
+    <div class="layout-page">
+      <div class="ui container stackable grid ">
+        <div class="row">
+          {{> Help_Panel_Widget }}
+        </div>
+        <div class="three wide column">
+          {{> Landing_Explorer_Menu menuAddedList=addedList menuNonAddedList=nonAddedList menuCareerList=careerList type=type }}
+        </div>
+        <div class="thirteen wide column">
+          {{> Template.contentBlock}}
+        </div>
+      </div>
+    </div>
+  {{/With_Global_Subscriptions}}
+</template>

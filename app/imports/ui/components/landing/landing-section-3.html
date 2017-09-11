@@ -10,11 +10,9 @@
         <div class="column">
           <h1 class="inverted-header">Specify your degree, career goals, and interests</h1>
           <p class="inverted-description">
-            {{#markdown}}
-Getting started with RadGrad is easy. Just meet with your advisor, and they will set up your account and answer your questions.
+<p>Getting started with RadGrad is easy. Just meet with your advisor, and they will set up your account and answer your questions.</p>
 
-To start, you'll select one of the **{{publicStats 'desiredDegreesTotal'}}** degree programs, one out of **{{publicStats 'careerGoalsTotal'}}** career directions, and a few of the **{{publicStats 'interestsTotal'}}** interest areas. Don't worry, you can change them later!
-            {{/markdown}}
+          <p>To start, you'll select one of the <strong>{{publicStats 'desiredDegreesTotal'}}</strong> <a href="{{pathFor degreesRouteName degree=firstDegree}}">degree programs</a>, one out of <strong>{{publicStats 'careerGoalsTotal'}}</strong> <a href="{{pathFor careerGoalsRouteName careerGoal=firstCareerGoal}}">career directions</a>, and a few of the <strong>{{publicStats 'interestsTotal'}}</strong> <a href="{{pathFor interestsRouteName interest=firstInterest}}">interest areas</a>. Don't worry, you can change them later!</p>
           </p>
         </div>
       </div>
