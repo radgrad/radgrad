@@ -35,7 +35,8 @@ Template.Landing_Explorer_Plans_Page.helpers({
     ];
   },
   nonAddedPlans() {
-    return AcademicPlans.find({}, { sort: { semesterNumber: 1, name: 1 } }).fetch();
+    const semesterNumber = AcademicPlans.getLatestSemesterNumber();
+    return AcademicPlans.find({ semesterNumber }, { sort: { name: 1 } }).fetch();
   },
   plan() {
     const planSlugName = FlowRouter.getParam('plan');
