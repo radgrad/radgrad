@@ -55,7 +55,7 @@ class AppLogCollection extends BaseCollection {
    * @param docID The docID of a AppLog.
    * @returns { Object } An object representing the definition of docID.
    */
-  dumpOne(docID) {
+  dumpOne(docID) {  // eslint-disable-line
     // const doc = this.findDoc(docID);
     // const userId = doc.userId;
     // const date = doc.date;
