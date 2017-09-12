@@ -1,0 +1,5 @@
+<template name="Landing_Explorer_Opportunities_Page">
+  {{#Landing_Explorer_Layout addedList = addedOpportunities nonAddedList = nonAddedOpportunities type = 'opportunities'}}
+    {{> Landing_Explorer_Opportunities_Widget name=opportunity.name slug=(slugName opportunity.slugID) descriptionPairs=(descriptionPairs opportunity) socialPairs=(socialPairs opportunity) id=opportunity._id updateID=updateID item=opportunity completed=completed reviewed=reviewed}}
+  {{/Landing_Explorer_Layout}}
+</template>

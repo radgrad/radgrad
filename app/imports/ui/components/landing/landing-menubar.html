@@ -1,0 +1,48 @@
+<template name="Landing_Menubar">
+  <div class="ui container">
+    <div class="ui small top fixed borderless menu landing-menu">
+      <div class="item">
+        <img class="ui image" src="/images/radgrad_logo.png" style="width: 45px;">
+      </div>
+      <div class="mobile hidden item">
+        <h2>{{> RadGrad_Logo_Text}}</h2>
+      </div>
+
+      <div class="right item">
+        <a href="#landing-section-9">GUIDED TOURS</a>
+      </div>
+
+      <div class="item">
+        {{> RadGrad_Login_Buttons }}
+      </div>
+
+      {{#if checkLanding}}
+        {{#if currentUser}}
+          <div class="item">
+            <div class="ui small compact green basic button">
+              {{#if isInRole 'FACULTY'}}
+                <a style="color: #6FBE44;"
+                   href="{{pathFor facultyHomePageRouteName username=(currentUser.username)}}">Home</a>
+              {{/if}}
+              {{#if isInRole 'STUDENT'}}
+                <a style="color: #6FBE44;"
+                   href="{{pathFor studentHomePageRouteName username=(currentUser.username)}}">Home</a>
+              {{/if}}
+              {{#if isInRole 'ADMIN'}}
+                <a style="color: #6FBE44;" href="{{pathFor adminHomePageRouteName username=(currentUser.username)}}">Home</a>
+              {{/if}}
+              {{#if isInRole 'ADVISOR'}}
+                <a style="color: #6FBE44;" href="{{pathFor advisorStudentConfigurationPageRouteName
+                                                           username=(currentUser.username)}}">Home</a>
+              {{/if}}
+              {{#if isInRole 'MENTOR'}}
+                <a style="color: #6FBE44;" href="{{pathFor mentorHomePageRouteName username=(currentUser.username)}}">Home</a>
+              {{/if}}
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+
+    </div>
+  </div>
+</template>

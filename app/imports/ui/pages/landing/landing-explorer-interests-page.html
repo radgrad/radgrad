@@ -1,0 +1,5 @@
+<template name="Landing_Explorer_Interests_Page">
+  {{#Landing_Explorer_Layout addedList = addedInterests nonAddedList = nonAddedInterests careerList = addedCareerInterests type = 'interests'}}
+    {{> Landing_Explorer_Interests_Widget name=interest.name slug=(slugName interest.slugID) descriptionPairs=(descriptionPairs interest) socialPairs=(socialPairs interest) id=interest._id updateID=updateID item=interest}}
+  {{/Landing_Explorer_Layout}}
+</template>

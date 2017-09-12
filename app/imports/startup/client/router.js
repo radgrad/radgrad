@@ -383,6 +383,70 @@ FlowRouter.route('/', {
   },
 });
 
+export const landingExplorerPageRouteName = 'Landing_Explorer_Page';
+FlowRouter.route('/explorer', {
+  name: landingExplorerPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerPageRouteName });
+  },
+});
+
+export const landingExplorerCareerGoalsPageRouteName = 'Landing_Explorer_CareerGoals_Page';
+FlowRouter.route('/explorer/career-goals/:careerGoal', {
+  name: landingExplorerCareerGoalsPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerCareerGoalsPageRouteName });
+  },
+});
+
+export const landingExplorerCoursesPageRouteName = 'Landing_Explorer_Courses_Page';
+FlowRouter.route('/explorer/courses/:course', {
+  name: landingExplorerCoursesPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerCoursesPageRouteName });
+  },
+});
+
+export const landingExplorerDegreesPageRouteName = 'Landing_Explorer_Degrees_Page';
+FlowRouter.route('/explorer/degrees/:degree', {
+  name: landingExplorerDegreesPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerDegreesPageRouteName });
+  },
+});
+
+export const landingExplorerPlansPageRouteName = 'Landing_Explorer_Plans_Page';
+FlowRouter.route('/explorer/plans/:plan', {
+  name: landingExplorerPlansPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerPlansPageRouteName });
+  },
+});
+
+export const landingExplorerInterestsPageRouteName = 'Landing_Explorer_Interests_Page';
+FlowRouter.route('/explorer/interests/:interest', {
+  name: landingExplorerInterestsPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerInterestsPageRouteName });
+  },
+});
+
+export const landingExplorerOpportunitiesPageRouteName = 'Landing_Explorer_Opportunities_Page';
+FlowRouter.route('/explorer/opportunities/:opportunity', {
+  name: landingExplorerOpportunitiesPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingExplorerOpportunitiesPageRouteName });
+  },
+});
+
+
 /*                        GUIDED TOUR ROUTE                       */
 
 function scrollTop() {

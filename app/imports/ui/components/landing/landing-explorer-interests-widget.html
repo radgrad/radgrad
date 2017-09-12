@@ -1,0 +1,83 @@
+<template name="Landing_Explorer_Interests_Widget">
+  <div class="ui segments" style="background-color: white;">
+    <div class="ui padded segment container">
+      <div class="ui clearing basic segment"
+           style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+        <h4 class="ui left floated header">
+          {{toUpper name}}
+        </h4>
+      </div>
+      <div class="ui divider" style="margin-top: 0;"></div>
+
+      <div class="ui stackable grid">
+        <div class="column">
+          {{#each descriptionPair in descriptionPairs}}
+
+            {{#if isLabel descriptionPair.label 'Description'}}
+              <b>{{descriptionPair.label}}:</b>
+              {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}} <br> <br>
+              {{else}}
+                N/A <br> <br>
+              {{/if}}
+            {{/if}}
+
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui stackable two column grid">
+    <div class="sixteen wide column">
+      <div class="ui segment">
+        <div class="ui dividing header">
+          <h4>RELATED COURSES</h4>
+        </div>
+        {{#each descriptionPair in descriptionPairs}}
+          {{#if isLabel descriptionPair.label 'Related Courses'}}
+            {{#if descriptionPair.value}}
+              <div class="ui horizontal bulleted list">
+                {{#each prerequisite in descriptionPair.value}}
+                  <a class="item">
+                    <a class="{{isActiveRoute coursesRouteName}} item"
+                       href="{{pathFor coursesRouteName course = prerequisite}}">{{courseNameFromSlug
+                        prerequisite}}</a> <br>
+                  </a>
+                {{/each}}
+              </div>
+            {{else}}
+              <i>None</i>
+            {{/if}}
+          {{/if}}
+        {{/each}}
+      </div>
+
+      <div class="ui segment">
+        <div class="ui dividing header">
+          <h4>RELATED OPPORTUNITIES</h4>
+        </div>
+        {{#each descriptionPair in descriptionPairs}}
+          {{#if isLabel descriptionPair.label 'Related Opportunities'}}
+            {{#if descriptionPair.value}}
+              <div class="ui horizontal bulleted list">
+                {{#each relatedOpportunity in descriptionPair.value}}
+                  <a class="item">
+                    <a class="{{isActiveRoute opportunitiesRouteName}} item"
+                       href="{{pathFor opportunitiesRouteName username=routeUserName
+                                       opportunity = relatedOpportunity}}">{{opportunityNameFromSlug
+                        relatedOpportunity}}</a> <br>
+                  </a>
+                {{/each}}
+              </div>
+            {{else}}
+              <i>None</i>
+            {{/if}}
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+  {{> Back_To_Top_Button}}
+
+</template>
