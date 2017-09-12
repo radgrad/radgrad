@@ -75,7 +75,10 @@ class RadGradClass {
     /**
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
      * Note that some collection class instances are implicitly initialized and so do not appear in this list.
+     * This is the list used to specify the collections for both dump and restore.
      * For example: Slugs, AcademicYearInstances, and PublicStats.
+     * Some collections are not yet part of dump/restore.
+     * For example: AppLogs.
      */
     this.collectionLoadSequence = [
       Semesters,
