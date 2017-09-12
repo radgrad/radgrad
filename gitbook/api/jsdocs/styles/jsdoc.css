@@ -131,7 +131,7 @@ header {
 section {
   display: block;
   background-color: #fff;
-  padding: 0 0 0 30px;
+  padding: 5px 20px;
 }
 
 .variation {
@@ -153,6 +153,7 @@ nav {
   overflow: auto;
   position: fixed;
   height: 100%;
+  padding: 5px 20px;
 }
 
 nav h3 {
