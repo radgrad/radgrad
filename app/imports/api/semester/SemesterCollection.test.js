@@ -76,7 +76,7 @@ if (Meteor.isServer) {
 
     it('#getShortName', function test() {
       const semesterID = Semesters.getID('Summer-2010');
-      expect(Semesters.getShortName(semesterID)).to.equal('Su10');
+      expect(Semesters.getShortName(semesterID)).to.equal('Sum 10');
     });
   });
 }
