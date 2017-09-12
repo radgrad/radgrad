@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-
 import * as RouteNames from '../../../startup/client/router.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Courses } from '../../../api/course/CourseCollection.js';

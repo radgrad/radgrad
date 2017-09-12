@@ -270,6 +270,8 @@ class BaseCollection {
    */
   dumpAll() {
     const dumpObject = { name: this._collectionName, contents: this.find().map(docID => this.dumpOne(docID)) };
+    // If a collection (such as AppLogs) doesn't want to be dumped, it can just return null from dumpOne.
+    dumpObject.contents = _.without(dumpObject.contents, null);
     // sort the contents array by slug (if present)
     if (dumpObject.contents[0] && dumpObject.contents[0].slug) {
       dumpObject.contents = _.sortBy(dumpObject.contents, obj => obj.slug);
