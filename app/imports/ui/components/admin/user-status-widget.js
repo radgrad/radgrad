@@ -10,7 +10,7 @@ Template.User_Status_Widget.helpers({
     return Meteor.users.find({ 'status.online': true });
   },
   isIdle(user) {
-    console.log(user.status);
+    console.log(JSON.stringify(user.status, ' '));
     return user.status.idle;
   },
 });
