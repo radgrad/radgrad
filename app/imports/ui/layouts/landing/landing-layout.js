@@ -10,12 +10,12 @@ import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection
 
 Template.Landing_Layout.onCreated(function landingBodyOnCreated() {
   this.subscribe(PublicStats.getPublicationName());
-  this.subscribe(CareerGoals.getPublicationName());
-  this.subscribe(Courses.getPublicationName());
-  this.subscribe(DesiredDegrees.getPublicationName());
-  this.subscribe(Interests.getPublicationName());
-  this.subscribe(Opportunities.getPublicationName());
-  this.subscribe(AcademicPlans.getPublicationName());
-  this.subscribe(Slugs.getPublicationName());
+  // this.subscribe(CareerGoals.getPublicationName());
+  // this.subscribe(Courses.getPublicationName());
+  // this.subscribe(DesiredDegrees.getPublicationName());
+  // this.subscribe(Interests.getPublicationName());
+  // this.subscribe(Opportunities.getPublicationName());
+  // this.subscribe(AcademicPlans.getPublicationName());
+  // this.subscribe(Slugs.getPublicationName());
 });
 
