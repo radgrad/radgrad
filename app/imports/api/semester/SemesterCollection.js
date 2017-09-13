@@ -224,8 +224,9 @@ class SemesterCollection extends BaseSlugCollection {
   getShortName(semesterID) {
     this.assertSemester(semesterID);
     const semesterDoc = this.findDoc(semesterID);
-    const yearString = `${semesterDoc.year}`;
-    return `${semesterDoc.term.substring(0, 2)}${yearString.substring(2, 4)}`;
+    const yearString = `${semesterDoc.year}`.substring(2, 4);
+    const termString = (semesterDoc.term === 'Fall') ? 'Fall' : semesterDoc.term.substring(0, 3);
+    return `${termString} ${yearString}`;
   }
 
   /**
