@@ -1,0 +1,7 @@
+<template name="User_Status_Widget">
+  {{#each user in usersOnline}}
+    <span class="label {{#if isIdle user}}red{{/if}}">
+    {{user.username}} {{user.status}}
+    </span>
+  {{/each}}
+</template>
