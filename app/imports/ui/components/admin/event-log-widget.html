@@ -3,31 +3,33 @@
   {{#if Template.subscriptionsReady}}
     <div class="ui padded container segment">
       <div class="ui dividing header"><h4>EVENT LOG (Last 24 hours)</h4></div>
-      <table class="ui celled padded table">
-        <thead>
-        <tr>
-          <th>User</th>
-          <th>Date</th>
-          <th>Timestamp</th>
-          <th>Level</th>
-          <th>Message</th>
-          <th>Additional</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each log in logs}}
+      <div style="height:300px; overflow-x: scroll;">
+        <table class="ui celled padded table">
+          <thead>
           <tr>
-            <td>{{user log.userId}}</td>
-            <td>{{log.date}}</td>
-            <td>{{timestamp log.timestamp}}</td>
-            <td>{{log.level}}</td>
-            <td>{{log.message}}</td>
-            <td>{{additional log.additional}}</td>
+            <th>User</th>
+            <th>Date</th>
+            <th>Timestamp</th>
+            <th>Level</th>
+            <th>Message</th>
+            <th>Additional</th>
           </tr>
+          </thead>
+          <tbody>
+          {{#each log in logs}}
+            <tr>
+              <td>{{user log.userId}}</td>
+              <td>{{log.date}}</td>
+              <td>{{timestamp log.timestamp}}</td>
+              <td>{{log.level}}</td>
+              <td>{{log.message}}</td>
+              <td>{{additional log.additional}}</td>
+            </tr>
 
-        {{/each}}
-        </tbody>
-      </table>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
     </div>
   {{/if}}
 

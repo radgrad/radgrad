@@ -51,18 +51,20 @@ class AppLogCollection extends BaseCollection {
 
   /**
    * Returns an object representing the AppLog docID.
+   * Currently returns null to disable dump/restore of these logs.
    * @param docID The docID of a AppLog.
    * @returns { Object } An object representing the definition of docID.
    */
-  dumpOne(docID) {
-    const doc = this.findDoc(docID);
-    const userId = doc.userId;
-    const date = doc.date;
-    const timestamp = doc.timestamp;
-    const level = doc.level;
-    const message = doc.message;
-    const additional = doc.additional;
-    return { userId, date, timestamp, level, message, additional };
+  dumpOne(docID) {  // eslint-disable-line
+    // const doc = this.findDoc(docID);
+    // const userId = doc.userId;
+    // const date = doc.date;
+    // const timestamp = doc.timestamp;
+    // const level = doc.level;
+    // const message = doc.message;
+    // const additional = doc.additional;
+    // return { userId, date, timestamp, level, message, additional };
+    return null;
   }
 
   /**

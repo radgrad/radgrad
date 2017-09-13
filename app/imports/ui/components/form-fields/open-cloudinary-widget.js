@@ -20,8 +20,8 @@ export function openCloudinaryWidget(nameAttribute) {
       max_file_size: '500000',
       max_image_width: '500',
       max_image_height: '500',
-      min_image_width: '300',
-      min_image_height: '300',
+      min_image_width: '200',
+      min_image_height: '200',
     },
     (error, result) => {
       if (error) {
