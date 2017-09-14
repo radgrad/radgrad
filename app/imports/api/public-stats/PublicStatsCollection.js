@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseCollection from '../base/BaseCollection';
+import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
@@ -13,6 +14,7 @@ import { Opportunities } from '../opportunity/OpportunityCollection';
 import { OpportunityTypes } from '../opportunity/OpportunityTypeCollection';
 import { Reviews } from '../review/ReviewCollection';
 import { Users } from '../user/UserCollection';
+import { Slugs } from '../slug/SlugCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 
 /**
@@ -87,6 +89,16 @@ class PublicStatsCollection extends BaseCollection {
     this.stats.push(this.levelFiveTotalKey);
     this.levelSixTotalKey = 'levelSixTotal';
     this.stats.push(this.levelSixTotalKey);
+    this.firstAcademicPlanKey = 'firstAcademicPlan';
+    this.stats.push(this.firstAcademicPlanKey);
+    this.firstCareerGoalKey = 'firstCareerGoal';
+    this.stats.push(this.firstCareerGoalKey);
+    this.firstInterestKey = 'firstInterest';
+    this.stats.push(this.firstInterestKey);
+    this.firstOpportunityKey = 'firstOpportunity';
+    this.stats.push(this.firstOpportunityKey);
+    this.firstDegreeKey = 'firstDegree';
+    this.stats.push(this.firstDegreeKey);
   }
 
   careerGoalsTotal() {
@@ -223,6 +235,48 @@ class PublicStatsCollection extends BaseCollection {
     courseNumbers = _.union(courseNumbers);
     if (courseNumbers) {
       this._collection.upsert({ key: this.courseReviewsCoursesKey }, { $set: { value: courseNumbers.join(', ') } });
+    }
+  }
+
+  firstAcademicPlan() {
+    let planName = '';
+    const semesterNumber = AcademicPlans.getLatestSemesterNumber();
+    const plan = AcademicPlans.findOne({ semesterNumber });
+    if (plan) {
+      planName = (Slugs.findDoc(plan.slugID)).name;
+    }
+    this._collection.upsert({ key: this.firstAcademicPlanKey }, { $set: { value: planName } });
+  }
+
+  firstCareerGoal() {
+    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
+    if (careerGoals.length > 0) {
+      const name = Slugs.findDoc(careerGoals[0].slugID).name;
+      this._collection.upsert({ key: this.firstCareerGoalKey }, { $set: { value: name } });
+    }
+  }
+
+  firstInterest() {
+    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
+    if (interests.length > 0) {
+      const name = Slugs.findDoc(interests[0].slugID).name;
+      this._collection.upsert({ key: this.firstInterestKey }, { $set: { value: name } });
+    }
+  }
+
+  firstOpportunity() {
+    const interests = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    if (interests.length > 0) {
+      const name = Slugs.findDoc(interests[0].slugID).name;
+      this._collection.upsert({ key: this.firstOpportunityKey }, { $set: { value: name } });
+    }
+  }
+
+  firstDegree() {
+    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    if (degrees.length > 0) {
+      const name = Slugs.findDoc(degrees[0].slugID).name;
+      this._collection.upsert({ key: this.firstDegreeKey }, { $set: { value: name } });
     }
   }
 
