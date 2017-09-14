@@ -440,7 +440,11 @@ class UserCollection {
    */
   publish() {
     if (Meteor.isServer) {
-      Meteor.publish(this._collectionName, () => Meteor.users.find({}, { fields: { username: 1, roles: 1 } }));
+      Meteor.publish(this._collectionName, () => Meteor.users.find({}, { fields: {
+        username: 1,
+        roles: 1,
+        status: 1,
+      } }));
     }
   }
 

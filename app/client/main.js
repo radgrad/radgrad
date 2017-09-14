@@ -1,3 +1,5 @@
+import { Tracker } from 'meteor/tracker';
+import { UserStatus } from 'meteor/mizzao:user-status';
 import '/imports/api/base';
 import '/imports/api/career';
 import '/imports/api/course';
@@ -68,3 +70,14 @@ import '/imports/ui/utilities';
 import './lib/semantic-ui/semantic.min.css';
 import './lib/semantic-ui/semantic.min.js';
 
+Tracker.autorun(function (c) {
+  try {
+    UserStatus.startMonitor({
+      threshold: 60000,
+    });
+    return c.stop();
+  } catch (error) {
+    // its ok?
+  }
+  return null;
+});

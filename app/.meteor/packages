@@ -78,3 +78,4 @@ ddp-rate-limiter@1.0.7
 mdg:meteor-apm-agent
 meteorhacks:zones
 atoy40:accounts-cas
+mizzao:user-status
