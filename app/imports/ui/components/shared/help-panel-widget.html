@@ -3,11 +3,11 @@
     <div class="{{#if noHelpClass}} {{else}}radgrad-help{{/if}} sixteen wide column">
       <div class="ui info floating message">
         <div class="ui accordion">
-          <div class="radgrad-help-title title header">
+          <div class="radgrad-help-title {{#if open}}active{{/if}} title header">
             <i class="dropdown icon"></i>
             <span>{{helpTitle}}</span>
           </div>
-          <div class="content">
+          <div class="{{#if open}}active{{/if}} content">
             {{#markdown}}{{helpText}}
 
 #### Need more help?
