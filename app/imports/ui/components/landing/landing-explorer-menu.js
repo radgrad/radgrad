@@ -96,7 +96,8 @@ Template.Landing_Explorer_Menu.helpers({
     return ret;
   },
   firstPlan() {
-    const plan = AcademicPlans.findOne({}, { sort: { name: 1 } });
+    const semesterNumber = AcademicPlans.getLatestSemesterNumber();
+    const plan = AcademicPlans.findOne({ semesterNumber });
     if (plan) {
       return (Slugs.findDoc(plan.slugID)).name;
     }

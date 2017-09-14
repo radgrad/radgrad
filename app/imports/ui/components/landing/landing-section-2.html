@@ -24,7 +24,7 @@
               {{publicStats 'careerGoalsTotal'}}
             </div>
             <div class="label">
-              <a href="{{pathFor careerGoalsRouteName careerGoal=firstCareerGoal}}">Career Goals</a>
+              <a href="{{pathFor careerGoalsRouteName careerGoal=(publicStats 'firstCareerGoal')}}">Career Goals</a>
             </div>
           </div>
           <div class="green statistic">
@@ -32,7 +32,7 @@
               {{publicStats 'interestsTotal'}}
             </div>
             <div class="label">
-              <a href="{{pathFor interestsRouteName interest=firstInterest}}">Interests</a>
+              <a href="{{pathFor interestsRouteName interest=(publicStats 'firstInterest')}}">Interests</a>
             </div>
           </div>
           <div class="green statistic">
@@ -40,7 +40,7 @@
               {{publicStats 'opportunitiesTotal'}}
             </div>
             <div class="label">
-              <a href="{{pathFor opportunitiesRouteName opportunity=firstOpportunity}}">Opportunities</a>
+              <a href="{{pathFor opportunitiesRouteName opportunity=(publicStats 'firstOpportunity')}}">Opportunities</a>
             </div>
           </div>
           <div class="green statistic">
