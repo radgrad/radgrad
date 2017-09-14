@@ -1,7 +1,13 @@
 <template name="User_Status_Widget">
-  {{#each user in usersOnline}}
-    <span class="label {{#if isIdle user}}red{{/if}}">
-    {{user.username}} {{user.status}}
-    </span>
-  {{/each}}
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>LOGGED IN USERS</h4></div>
+
+    <div class="ui padded stackable grid">
+    {{#each user in usersOnline}}
+      <div class="two wide column" style="padding: 2px;">
+        <div class="ui basic {{#if isIdle user}}grey{{else}}green{{/if}} fluid label">{{label user}}</div>
+      </div>
+    {{/each}}
+    </div>
+  </div>
 </template>
