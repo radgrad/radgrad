@@ -224,7 +224,8 @@ class StudentProfileCollection extends BaseProfileCollection {
     const studentID = Users.getID(user);
     const courseInstanceDocs = CourseInstances.find({ studentID }).fetch();
     const courseIDs = courseInstanceDocs.map((doc) => doc.courseID);
-    return _.uniq(courseIDs);
+    return courseIDs; // allow for multiple 491 or 499 classes.
+    // return _.uniq(courseIDs);
   }
 
   /**
