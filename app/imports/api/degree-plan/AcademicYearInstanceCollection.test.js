@@ -20,7 +20,8 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne, #toString', function test() {
-      const student = Users.getProfile(makeSampleUser()).username;
+      const studentID = makeSampleUser();
+      const student = Users.getProfile(studentID).username;
       const year = 2016;
       let docID = AcademicYearInstances.define({ year, student });
       expect(AcademicYearInstances.isDefined(docID)).to.be.true;
@@ -32,6 +33,16 @@ if (Meteor.isServer) {
       expect(AcademicYearInstances.toString(docID)).to.equal(`[AY 2016-2017 ${student}]`);
       const errors = AcademicYearInstances.checkIntegrity();
       expect(errors.length).to.equal(0);
+      // Create a gap in the future to see if it gets filled in.
+      const futureYear = AcademicYearInstances.define({ year: 2019, student });
+      expect(AcademicYearInstances.isDefined(futureYear)).to.be.true;
+      let years = AcademicYearInstances.find({ studentID }).fetch();
+      expect(years.length).to.equal(4);
+      // Create a gap in the past to see if it gets filled in.
+      const pastYear = AcademicYearInstances.define({ year: 2014, student });
+      expect(AcademicYearInstances.isDefined(pastYear)).to.be.true;
+      years = AcademicYearInstances.find({ studentID }).fetch();
+      expect(years.length).to.equal(6);
       AcademicYearInstances.removeIt(docID);
     });
 
