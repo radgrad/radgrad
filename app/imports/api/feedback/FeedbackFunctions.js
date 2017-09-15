@@ -175,7 +175,7 @@ export class FeedbackFunctionClass {
   }
 
   /**
-   * Creates recommended courses based upon the student's interests. Only generates feedback if the student's plann
+   * Creates recommended courses based upon the student's interests. Only generates feedback if the student's plan
    * is missing courses.
    * @param user the student's ID.
    */
@@ -204,7 +204,10 @@ export class FeedbackFunctionClass {
       //   description = 'Consider taking the following classes to meet the degree requirement: ';
       // }
       const basePath = this._getBasePath(user);
-      const slug = missing[0];
+      let slug = missing[0];
+      if (planUtils.isComplexChoice(slug) || planUtils.isSimpleChoice(slug)) {
+        slug = planUtils.complexChoiceToArray(slug);
+      }
       if (Array.isArray(slug)) {
         const course = courseUtils.chooseBetween(slug, user, coursesTakenSlugs);
         if (course) {
@@ -222,7 +225,7 @@ export class FeedbackFunctionClass {
           }
         } else
           if (slug.startsWith('ics')) {
-            const courseID = Slugs.getEntityID(slug, 'Course');
+            const courseID = Slugs.getEntityID(planUtils.stripCounter(slug), 'Course');
             const course = Courses.findDoc(courseID);
             // eslint-disable-next-line max-len
             description = `${description} \n\n- [${course.number} ${course.shortName}](${basePath}explorer/courses/${slug}), `;

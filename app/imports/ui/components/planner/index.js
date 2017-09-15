@@ -14,6 +14,9 @@ import './future-enrollment-widget';
 import './inspector.html';
 import './inspector.js';
 
+import './inspector-plan-tabs.html';
+import './inspector-plan-tabs';
+
 import './past-semester-list.html';
 import './past-semester-list.js';
 

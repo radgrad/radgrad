@@ -1,0 +1,14 @@
+<template name="Inspector_Plan_Tabs">
+  <div class="ui padded container segment">
+    <div class="ui top attached tabular stackable menu">
+      <a class="active item" data-tab="plan">ACADEMIC PLAN</a>
+      <a class="item" data-tab="inspector">INSPECTOR</a>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="plan">
+      {{> Academic_Plan_Viewer_Widget degreePlanner=true dictionary=getDictionary}}
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="inspector">
+      {{> Inspector dictionary=getDictionary}}
+    </div>
+  </div>
+</template>
