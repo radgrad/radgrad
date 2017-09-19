@@ -22,7 +22,7 @@
 
       <div class="fields">
         {{> Career_Goals_Form_Field careerGoals=careerGoals errorMessage=(fieldError "careerGoals")}}
-        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests")}}
+        {{> Interests_Form_Field interests=interests errorMessage=(fieldError "interests") required=true}}
       </div>
       <div class="fields">
         {{> Semesters_Single_Form_Field selectedSemesterID=selectedSemesterID semesters=semesters errorMessage=(fieldError "semesters") name="declaredSemester" label="Declared Semester"}}
