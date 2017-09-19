@@ -55,7 +55,7 @@ Template.Explorer_Choose_User_Widget.helpers({
 Template.Explorer_Choose_User_Widget.events({
   'click .jsRetrieve': function clickJSRetrieve(event, instance) {
     const username = event.target.id;
-    const userID = username && Users.isDefined(username) && Users.getID(username);
+    const userID = username && Users.getID(username);
     if (userID) {
       instance.userID.set(userID);
       const message = `${getRouteUserName()} selected ${Users.getFullName(userID)} to view.`;
