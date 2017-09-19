@@ -6,7 +6,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Student_Feed_Modal.helpers({
   fullName(student) {
-    return Users.getFullName(student._id);
+    return Users.getFullName(student.username);
   },
   userSlug(feed) {
     return Users.getProfile(feed.userIDs[0]).username;

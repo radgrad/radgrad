@@ -372,7 +372,7 @@ class FeedCollection extends BaseCollection {
     const userIDs = existingFeed.userIDs;
     userIDs.push(userID);
     const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getProfile(userIDs[0]).username}) 
-      and {{> Student_Feed_Modal ${userIDs.length - 1}}} others have joined RadGrad.`;
+      and ${userIDs.length - 1} others have joined RadGrad.`;
     let picture = Users.getProfile(userID).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
