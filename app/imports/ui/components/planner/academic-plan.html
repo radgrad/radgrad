@@ -62,7 +62,9 @@
     }
 
     function drag(ev) {
+      console.log('drag');
       ev.dataTransfer.setData("text", ev.target.id);
+      console.log('start drag', ev.target.id);
     }
   </script>
 </template>
