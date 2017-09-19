@@ -50,22 +50,26 @@ class AcademicYearInstanceCollection extends BaseCollection {
     if (prevYears.length > 0) {
       const lastYear = prevYears[prevYears.length - 1].year;
       for (let y = lastYear + 1; y < year; y++) {
-        const semesterIDs = [];
-        semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${y}`));
-        semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${y + 1}`));
-        semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${y + 1}`));
-        this._collection.insert({ year: y, springYear: y + 1, studentID, semesterIDs });
+        if (this._collection.find({ year: y, studentID }).fetch().length === 0) {
+          const semesterIDs = [];
+          semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${y}`));
+          semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${y + 1}`));
+          semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${y + 1}`));
+          this._collection.insert({ year: y, springYear: y + 1, studentID, semesterIDs });
+        }
       }
     }
     const nextYears = this._collection.find({ year: { $gt: year }, studentID }, { $sort: { year: 1 } }).fetch();
     if (nextYears.length > 0) {
       const nextYear = nextYears[0].year;
       for (let y = year + 1; y < nextYear; y++) {
-        const semesterIDs = [];
-        semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${y}`));
-        semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${y + 1}`));
-        semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${y + 1}`));
-        this._collection.insert({ year: y, springYear: y + 1, studentID, semesterIDs });
+        if (this._collection.find({ year: y, studentID }).fetch().length === 0) {
+          const semesterIDs = [];
+          semesterIDs.push(Semesters.getID(`${Semesters.FALL}-${y}`));
+          semesterIDs.push(Semesters.getID(`${Semesters.SPRING}-${y + 1}`));
+          semesterIDs.push(Semesters.getID(`${Semesters.SUMMER}-${y + 1}`));
+          this._collection.insert({ year: y, springYear: y + 1, studentID, semesterIDs });
+        }
       }
     }
     const doc = this._collection.find({ year, studentID }).fetch();
