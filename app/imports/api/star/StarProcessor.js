@@ -127,6 +127,8 @@ export function processStarCsvData(student, csvData) {
     const creditsIndex = _.findIndex(headers, (str) => str === 'Credits');
     const gradeIndex = _.findIndex(headers, (str) => str === 'Grade');
     const transferGradeIndex = _.findIndex(headers, (str) => str === 'Transfer Grade');
+    // const transferCourseNameIndex = _.findIndex(headers, (str) => str === 'Transfer Course Name');
+    const transferCourseNumberIndex = _.findIndex(headers, (str) => str === 'Transfer Course Number');
     // const transferCourseDesc = _.findIndex(headers, (str) => str === 'Transfer Course Description');
     if (_.every([semesterIndex, nameIndex, numberIndex, creditsIndex, gradeIndex], (num) => num === -1)) {
       throw new Meteor.Error(`Required CSV header field was not found in ${headers}`);
@@ -148,16 +150,21 @@ export function processStarCsvData(student, csvData) {
           grade = 'B';
         }
       }
+      let number = data[numberIndex];
+      if (isNaN(number)) {
+        number = data[transferCourseNumberIndex];
+      }
       const obj = {
         semester: data[semesterIndex],
         name,
-        number: data[numberIndex],
+        number,
         credits: data[creditsIndex],
         grade,
         student,
       };
       return obj;
     });
+    // console.log(dataObjects);
     // Now we take that array of objects and transform them into CourseInstance data objects.
     return _.filter(_.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) {
       return ci.course !== Courses.unInterestingSlug && ci.semester !== null;

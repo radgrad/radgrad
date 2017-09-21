@@ -16,7 +16,9 @@ import { getDepartment } from '../course/CourseUtilities';
  * @memberOf api/star
  */
 function processStudentStarCsvData(advisor, student, csvData) {
+  // console.log('processStudentStarCsvData', student, csvData);
   const definitions = processStarCsvData(student, csvData);
+  // console.log(definitions);
   const studentID = Users.getID(student);
   const oldInstances = CourseInstances.find({ studentID, fromSTAR: true }).fetch();
   _.forEach(oldInstances, (instance) => {
