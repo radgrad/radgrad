@@ -105,7 +105,7 @@ Template.Inspector.helpers({
     const instances = CourseInstances.find({ note: /1\d\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
     });
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
@@ -122,7 +122,7 @@ Template.Inspector.helpers({
     const instances = CourseInstances.find({ note: /2\d\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
     });
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
@@ -139,7 +139,7 @@ Template.Inspector.helpers({
     const instances = CourseInstances.find({ note: /3[01234]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
     });
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
@@ -156,7 +156,7 @@ Template.Inspector.helpers({
     const instances = CourseInstances.find({ note: /3[56789]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
     });
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
@@ -169,11 +169,11 @@ Template.Inspector.helpers({
     });
   },
   courses410() {
-    const courses = Courses.find({ number: /4[0123]/ }).fetch();
-    const instances = CourseInstances.find({ note: /4[0123]/ }).fetch();
+    const courses = Courses.find({ number: /4[0123]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[0123]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
     });
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
@@ -186,11 +186,11 @@ Template.Inspector.helpers({
     });
   },
   courses440() {
-    const courses = Courses.find({ number: /4[456]/ }).fetch();
-    const instances = CourseInstances.find({ note: /4[456]/ }).fetch();
+    const courses = Courses.find({ number: /4[456]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[456]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
     });
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {
@@ -203,14 +203,62 @@ Template.Inspector.helpers({
     });
   },
   courses470() {
-    const courses = Courses.find({ number: /4[789]/ }).fetch();
-    const instances = CourseInstances.find({ note: /4[789]/ }).fetch();
-    let courseTakenIDs = _.filter(instances, function filter(ci) {
-      return ci.note.indexOf('499') === -1;
-    });
-    courseTakenIDs = _.map(courseTakenIDs, (ci) => ci.courseID);
+    const courses = Courses.find({ number: /4[789]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[789]\d/ }).fetch();
+    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
+    });
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
+      return 0;
+    });
+  },
+  courses610() {
+    const courses = Courses.find({ number: /6[0123]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /6[0123]\d/ }).fetch();
+    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
+    const ret = _.filter(courses, function filter(c) {
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
+    });
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
+      return 0;
+    });
+  },
+  courses640() {
+    const courses = Courses.find({ number: /6[456]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /6[456]\d/ }).fetch();
+    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
+    const ret = _.filter(courses, function filter(c) {
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
+    });
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
+      return 0;
+    });
+  },
+  courses670() {
+    const courses = Courses.find({ number: /6[789]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /6[789]\d/ }).fetch();
+    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
+    const ret = _.filter(courses, function filter(c) {
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
     });
     return ret.sort(function compare(a, b) {
       if (a.number < b.number) {

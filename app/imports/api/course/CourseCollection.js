@@ -31,6 +31,7 @@ class CourseCollection extends BaseSlugCollection {
       // Optional data
       syllabus: { type: String, optional: true },
       prerequisites: [String],
+      repeatable: { type: Boolean, optional: true },
     }));
     this.unInterestingSlug = 'other';
   }
@@ -46,9 +47,10 @@ class CourseCollection extends BaseSlugCollection {
    *                  creditHrs: 4,
    *                  interests: ['perl', 'javascript', 'ruby'],
    *                  syllabus: 'http://courses.ics.hawaii.edu/syllabuses/ICS215.html',
-   *                  prerequisites: ['ics211'] });
+   *                  prerequisites: ['ics211'],
+    *                 repeatable: true});
    * @param { Object } description Object with keys name, shortName, slug, number, description, creditHrs,
-   *                   interests, syllabus, and prerequisites.
+   *                   interests, syllabus, prerequisites and repeatability.
    * Name is the official course name.
    * ShortName is an optional abbreviation. Defaults to name.
    * Slug must not be previously defined.
@@ -56,12 +58,13 @@ class CourseCollection extends BaseSlugCollection {
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
    * Syllabus is optional. If supplied, should be a URL.
    * Prerequisites is optional. If supplied, must be an array of previously defined Course slugs or courseIDs.
+   * Repeatable is optional, defaults to false.
    * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest or invalid creditHrs.
    * @returns The newly created docID.
    */
   define({
       name, shortName = name, slug, number, description, creditHrs = 3,
-      interests = [], syllabus, prerequisites = [],
+      interests = [], syllabus, prerequisites = [], repeatable = false,
   }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
@@ -80,7 +83,7 @@ class CourseCollection extends BaseSlugCollection {
     // Instead, we check that prereqs are valid as part of checkIntegrity.
     const courseID =
         this._collection.insert({
-          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites,
+          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites, repeatable,
         });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
