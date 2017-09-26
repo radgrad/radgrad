@@ -168,9 +168,9 @@ Template.Inspector.helpers({
       return 0;
     });
   },
-  courses410() {
-    const courses = Courses.find({ number: /4[0123]\d/ }).fetch();
-    const instances = CourseInstances.find({ note: /4[0123]\d/ }).fetch();
+  courses400_420() {
+    const courses = Courses.find({ number: /4[012]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[012]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
       return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
@@ -185,9 +185,9 @@ Template.Inspector.helpers({
       return 0;
     });
   },
-  courses440() {
-    const courses = Courses.find({ number: /4[456]\d/ }).fetch();
-    const instances = CourseInstances.find({ note: /4[456]\d/ }).fetch();
+  courses430_450() {
+    const courses = Courses.find({ number: /4[345]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[345]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
       return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
@@ -202,9 +202,26 @@ Template.Inspector.helpers({
       return 0;
     });
   },
-  courses470() {
-    const courses = Courses.find({ number: /4[789]\d/ }).fetch();
-    const instances = CourseInstances.find({ note: /4[789]\d/ }).fetch();
+  courses460_470() {
+    const courses = Courses.find({ number: /4[67]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[67]\d/ }).fetch();
+    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
+    const ret = _.filter(courses, function filter(c) {
+      return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;
+    });
+    return ret.sort(function compare(a, b) {
+      if (a.number < b.number) {
+        return -1;
+      } else
+        if (a.number > b.number) {
+          return 1;
+        }
+      return 0;
+    });
+  },
+  courses480() {
+    const courses = Courses.find({ number: /4[89]\d/ }).fetch();
+    const instances = CourseInstances.find({ note: /4[89]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
       return _.indexOf(courseTakenIDs, c._id) === -1 || c.repeatable;

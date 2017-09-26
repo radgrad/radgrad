@@ -2175,6 +2175,16 @@
           "prerequisites": []
         },
         {
+          "name": "Computer Architecture",
+          "shortName": "Computer Architecture",
+          "slug": "ee_461",
+          "number": "EE 461",
+          "description": "Structure of stored program machines, data flow machines, pipelining, fault-tolerant computing, instruction set design, effects of compilation on architecture, RISC vs. CISC architecture, uses of parallelism.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": []
+        },
+        {
           "name": "Computer Architecture I",
           "shortName": "Computer Architecture",
           "slug": "ics_660",
