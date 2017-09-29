@@ -17,6 +17,7 @@
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "bcrypt": "^0.8.7",
+    "filog": "^0.1.15",
     "meteor-node-stubs": "^0.2.5",
     "node-balanced": "0.0.14",
     "npm": "^5.0.4",
