@@ -104,8 +104,11 @@ class UserCollection {
    * @returns { boolean } True if user is defined, false otherwise.
    */
   isDefined(user) {
-    const cursor = (Meteor.users.find({ _id: user })) || (Meteor.users.find({ username: user }));
-    return cursor && cursor.fetch().length > 0;
+    const userDoc = (Meteor.users.findOne({ _id: user })) || (Meteor.users.findOne({ username: user }));
+    if (!userDoc) {
+      return false;
+    }
+    return true;
   }
 
   /**

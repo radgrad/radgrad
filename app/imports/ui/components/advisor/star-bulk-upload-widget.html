@@ -1,0 +1,21 @@
+<template name="Star_Bulk_Upload_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>BULK UPLOAD STAR DATA</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+      <div class="field">
+        <!-- CSV -->
+        <label>BULK STAR CSV</label>
+        <div class="ui action input">
+          {{#with currentUpload}}
+            Uploading <b>{{file.name}}</b>:
+            <span id="progress">{{progress.get}}%</span>
+          {{else}}
+            <input id="fileInput" type="file"/>
+          {{/with}}
+        </div>
+      </div>
+      <button style="margin-bottom: 14px;" class="ui tiny basic green button jsStarData" type="submit">LOAD BULK STAR DATA
+      </button>
+    </form>
+  </div>
+</template>

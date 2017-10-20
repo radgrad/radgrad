@@ -2,6 +2,7 @@
   <div class="ui top attached tabular stackable menu">
     <a class="active item" data-tab="students">Update Existing</a>
     <a class="item add-new-student" data-tab="add">Add New</a>
+    <a class="item bulk-star-upload" data-tab="bulk">Bulk STAR Upload</a>
   </div>
   <div class="ui bottom attached active tab segment" data-tab="students">
     <div class="ui top attached tabular stackable menu">
@@ -29,5 +30,8 @@
   </div>
   <div class="ui bottom attached tab segment" data-tab="add">
     {{> Add_Student_Widget}}
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="bulk">
+    {{> Star_Bulk_Upload_Widget}}
   </div>
 </template>
