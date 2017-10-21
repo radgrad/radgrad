@@ -8,6 +8,8 @@ import { Semesters } from '../semester/SemesterCollection';
 import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
 import { Users } from '../user/UserCollection';
 import { getDepartment } from '../course/CourseUtilities';
+import { StudentProfiles } from '../user/StudentProfileCollection';
+import { updateStudentLevel } from '../level/LevelProcessor';
 
 function processStudentStarDefinitions(advisor, student, definitions) {
   console.log(`processStudentStarDefinitions(${advisor}, ${student}, ${definitions})`);
@@ -111,8 +113,23 @@ function processBulkStarData(advisor, csvData) {
     _.forEach(students, (student) => {
       if (Users.isDefined(student)) {
         processStudentStarDefinitions(advisor, student, definitions[student].courses);
+        const studentID = Users.getID(student);
+        updateStudentLevel(studentID);
       } else {
         console.log(`${student} is not defined need to create them.`);
+        try {
+          const definitionData = {};
+          definitionData.username = student;
+          definitionData.firstName = definitions[student].firstName;
+          definitionData.lastName = definitions[student].lastName;
+          definitionData.level = 1;
+          StudentProfiles.define(definitionData);
+          processStudentStarDefinitions(advisor, student, definitions[student].courses);
+          const studentID = Users.getID(student);
+          updateStudentLevel(studentID);
+        } catch (e) {
+          console.log(`Error defining student ${student}`, e);
+        }
       }
     });
   }

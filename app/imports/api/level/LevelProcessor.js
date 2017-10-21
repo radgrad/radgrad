@@ -49,6 +49,7 @@ export function calcLevel(studentID) {
  */
 export function updateStudentLevel(studentID) {
   const level = calcLevel(studentID);
+  console.log(`updateStudentLevel(${studentID}), ${level}`);
   StudentProfiles.setLevel(studentID, level);
 }
 
