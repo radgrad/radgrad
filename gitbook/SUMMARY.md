@@ -47,6 +47,7 @@
 * Roles
 * Dump/Restore
 * Pub/Sub Caching
+* [User Management](datamodel/user-management.md)
 * Integrity Checking
 * Testing
 
