@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { starBulkLoadDataMethod } from '../../../api/star/StarProcessor.methods';
 import { getRouteUserName } from '../shared/route-user-name';
-import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessor.methods';
+// import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessor.methods';
 
 /* global FileReader */
 
