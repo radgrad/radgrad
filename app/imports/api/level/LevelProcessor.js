@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
@@ -23,19 +24,29 @@ export function calcLevel(studentID) {
   const ice = getEarnedICE(verified);
   const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true }).count();
   let level = 1;
-  if (ice.i >= 100 && ice.c >= 100 && ice.e >= 100 && numReviews >= 6) {
+  if (ice.i >= Meteor.settings.public.level.six.i &&
+      ice.c >= Meteor.settings.public.level.six.c &&
+      ice.e >= Meteor.settings.public.level.six.e &&
+      numReviews >= Meteor.settings.public.level.six.reviews) {
     level = 6;
   } else
-    if (ice.i >= 80 && ice.c >= 80 && ice.e >= 80 && numReviews >= 1) {
+    if (ice.i >= Meteor.settings.public.level.five.i &&
+        ice.c >= Meteor.settings.public.level.five.c &&
+        ice.e >= Meteor.settings.public.level.five.e &&
+        numReviews >= Meteor.settings.public.level.five.reviews) {
       level = 5;
     } else
-      if (ice.i >= 30 && ice.c >= 36 && ice.e >= 30) {
+      if (ice.i >= Meteor.settings.public.level.four.i &&
+          ice.c >= Meteor.settings.public.level.four.c &&
+          ice.e >= Meteor.settings.public.level.four.e) {
         level = 4;
       } else
-        if ((ice.i >= 1 || ice.e >= 1) && ice.c >= 24) {
+        if ((ice.i >= Meteor.settings.public.level.three.i ||
+                ice.e >= Meteor.settings.public.level.three.e) &&
+            ice.c >= Meteor.settings.public.level.three.c) {
           level = 3;
         } else
-          if (ice.c >= 12) {
+          if (ice.c >= Meteor.settings.public.level.two.c) {
             level = 2;
           }
   // console.log(studentID, ice, numReviews, level);
@@ -49,6 +60,7 @@ export function calcLevel(studentID) {
  */
 export function updateStudentLevel(studentID) {
   const level = calcLevel(studentID);
+  // console.log(`updateStudentLevel(${studentID}) ${level}`);
   StudentProfiles.setLevel(studentID, level);
 }
 
