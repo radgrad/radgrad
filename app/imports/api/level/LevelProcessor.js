@@ -49,7 +49,7 @@ export function calcLevel(studentID) {
  */
 export function updateStudentLevel(studentID) {
   const level = calcLevel(studentID);
-  console.log(`updateStudentLevel(${studentID}), ${level}`);
+  // console.log(`updateStudentLevel(${studentID}), ${level}`);
   StudentProfiles.setLevel(studentID, level);
 }
 
@@ -58,5 +58,5 @@ export function updateStudentLevel(studentID) {
  * @memberOf api/level
  */
 export function updateAllStudentLevels() {
-  StudentProfiles.find().forEach(student => updateStudentLevel(student._id));
+  StudentProfiles.find().forEach(student => updateStudentLevel(student.userID));
 }
