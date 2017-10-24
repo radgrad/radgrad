@@ -14,8 +14,15 @@
           {{/with}}
         </div>
       </div>
-      <button style="margin-bottom: 14px;" class="ui tiny basic green button jsStarData" type="submit">LOAD BULK STAR DATA
+      <button style="margin-bottom: 14px;" class="ui tiny basic green button jsStarData" type="submit">LOAD BULK STAR
+        DATA
       </button>
     </form>
+    {{#if uploadResult}}
+      <div class="ui message">
+        <div class="header">Upload Result</div>
+        <p>{{uploadResult}}</p>
+      </div>
+    {{/if}}
   </div>
 </template>
