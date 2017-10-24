@@ -269,8 +269,8 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param level The new level.
    */
   setLevel(user, level) {
-    const userID = this.getID(user);
-    this._collection.update({ userID }, { $set: { level } });
+    const id = this.getID(user);
+    this._collection.update({ _id: id }, { $set: { level } });
   }
 
 

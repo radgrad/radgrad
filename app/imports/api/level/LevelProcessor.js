@@ -1,10 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../course/CourseInstanceCollection';
+import { Feeds } from '../feed/FeedCollection';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Reviews } from '../review/ReviewCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
+import { Users } from '../user/UserCollection';
 import { getEarnedICE } from '../ice/IceProcessor';
+import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
+import { defineMethod } from '../base/BaseCollection.methods';
 
 /**
  * Calculates the given student's Level.
@@ -55,12 +59,30 @@ export function calcLevel(studentID) {
 
 /**
  * Updates the student's level.
+ * @param advisor the advisors ID.
  * @param studentID the studentID.
  * @memberOf api/level
  */
-export function updateStudentLevel(studentID) {
+export function updateStudentLevel(advisor, studentID) {
   const level = calcLevel(studentID);
-  // console.log(`updateStudentLevel(${studentID}) ${level}`);
+  const profile = Users.getProfile(studentID);
+  if (profile.level !== level) {
+    const text = `Congratulations! ${profile.firstName} you're now Level ${level}.
+         Come by to get your RadGrad sticker.`;
+    const student = studentID;
+    advisorLogsDefineMethod.call({ advisor, student, text }, (error) => {
+      if (error) {
+        console.log('Error creating AdvisorLog.', error);
+      }
+    });
+    const feedData = {
+      feedType: Feeds.NEW_LEVEL,
+      user: profile.username,
+      level,
+    };
+    defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
+  }
+  // console.log(`updateStudentLevel(${studentID}), ${level}`);
   StudentProfiles.setLevel(studentID, level);
 }
 
@@ -69,5 +91,5 @@ export function updateStudentLevel(studentID) {
  * @memberOf api/level
  */
 export function updateAllStudentLevels() {
-  StudentProfiles.find().forEach(student => updateStudentLevel(student._id));
+  StudentProfiles.find().forEach(student => updateStudentLevel(student.userID));
 }

@@ -1,23 +1,20 @@
 import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { processStarCsvData } from './StarProcessor';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Courses } from '../course/CourseCollection';
+import { Feeds } from '../feed/FeedCollection';
 import { Semesters } from '../semester/SemesterCollection';
-import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
+import { StudentProfiles } from '../user/StudentProfileCollection';
 import { Users } from '../user/UserCollection';
+import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
+import { defineMethod } from '../base/BaseCollection.methods';
 import { getDepartment } from '../course/CourseUtilities';
+import { processStarCsvData, processBulkStarCsvData } from './StarProcessor';
+import { updateStudentLevel } from '../level/LevelProcessor';
 
-/**
- * Processes the student's star data creating CourseInstances.
- * @param student the student's username.
- * @param csvData the student's STAR data.
- * @memberOf api/star
- */
-function processStudentStarCsvData(advisor, student, csvData) {
-  // console.log('processStudentStarCsvData', student, csvData);
-  const definitions = processStarCsvData(student, csvData);
+function processStudentStarDefinitions(advisor, student, definitions) {
+  // console.log(`processStudentStarDefinitions(${advisor}, ${student}, ${definitions})`);
   // console.log(definitions);
   const studentID = Users.getID(student);
   const oldInstances = CourseInstances.find({ studentID, fromSTAR: true }).fetch();
@@ -77,6 +74,17 @@ function processStudentStarCsvData(advisor, student, csvData) {
     }
   });
 }
+/**
+ * Processes the student's star data creating CourseInstances.
+ * @param student the student's username.
+ * @param csvData the student's STAR data.
+ * @memberOf api/star
+ */
+function processStudentStarCsvData(advisor, student, csvData) {
+  // console.log('processStudentStarCsvData', student, csvData);
+  const definitions = processStarCsvData(student, csvData);
+  processStudentStarDefinitions(advisor, student, definitions);
+}
 
 /**
  * ValidatedMethod for loading student STAR data.
@@ -90,5 +98,62 @@ export const starLoadDataMethod = new ValidatedMethod({
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
     }
     processStudentStarCsvData(data.advisor, data.student, data.csvData);
+  },
+});
+
+/**
+ * Processes the student's star data creating CourseInstances.
+ * @param student the student's username.
+ * @param csvData the student's STAR data.
+ * @memberOf api/star
+ */
+function processBulkStarData(advisor, csvData) {
+  const definitions = processBulkStarCsvData(csvData);
+  let updateNum = 0;
+  let newStudents = 0;
+  // console.log(definitions);
+  if (definitions) {
+    const students = Object.keys(definitions);
+    _.forEach(students, (student) => {
+      if (Users.isDefined(student)) {
+        updateNum += 1;
+        processStudentStarDefinitions(advisor, student, definitions[student].courses);
+        const studentID = Users.getID(student);
+        updateStudentLevel(advisor, studentID);
+      } else {
+        console.log(`${student} is not defined need to create them.`);
+        try {
+          const definitionData = {};
+          definitionData.username = student;
+          definitionData.firstName = definitions[student].firstName;
+          definitionData.lastName = definitions[student].lastName;
+          definitionData.level = 1;
+          StudentProfiles.define(definitionData);
+          const feedData = { feedType: Feeds.NEW_USER, user: definitionData.username };
+          defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData });
+          processStudentStarDefinitions(advisor, student, definitions[student].courses);
+          const studentID = Users.getID(student);
+          updateStudentLevel(advisor, studentID);
+          newStudents += 1;
+        } catch (e) {
+          console.log(`Error defining student ${student}`, e);
+        }
+      }
+    });
+  } return `Updated ${updateNum} student(s), Created ${newStudents} new student(s)`;
+}
+
+/**
+ * ValidatedMethod for loading bulk STAR data.
+ * @memberOf api/star
+ */
+export const starBulkLoadDataMethod = new ValidatedMethod({
+  name: 'StarProcess.bulkLoadStarCsvData',
+  validate: null,
+  run(data) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
+    }
+    return processBulkStarData(data.advisor, data.csvData);
   },
 });
