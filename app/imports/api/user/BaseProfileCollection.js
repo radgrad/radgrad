@@ -55,7 +55,7 @@ class BaseProfileCollection extends BaseSlugCollection {
   }
 
   /**
-   * Returns the docID associated with instance, or throws an error if it cannot be found.
+   * Returns the Profile's docID associated with instance, or throws an error if it cannot be found.
    * If instance is a docID, then it is returned unchanged. If instance is a slug, its corresponding docID is returned.
    * If instance is the value for the username field in this collection, then return that document's ID.
    * If instance is the userID for the profile, then return the Profile's ID.
