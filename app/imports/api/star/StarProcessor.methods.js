@@ -157,3 +157,4 @@ export const starBulkLoadDataMethod = new ValidatedMethod({
     return processBulkStarData(data.advisor, data.csvData);
   },
 });
+

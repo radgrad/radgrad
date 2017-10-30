@@ -17,10 +17,13 @@
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "bcrypt": "^0.8.7",
+    "chromedriver": "^2.33.2",
     "meteor-node-stubs": "^0.2.5",
     "node-balanced": "0.0.14",
     "npm": "^5.0.4",
-    "simpl-schema": "^0.3.0"
+    "selenium-webdriver": "^3.6.0",
+    "simpl-schema": "^0.3.0",
+    "webdriverio": "^4.8.0"
   },
   "devDependencies": {
     "chai": "*",
