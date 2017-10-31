@@ -16,16 +16,16 @@ class BaseSlugCollection extends BaseCollection {
 
   /**
    * Returns the docID associated with instance, or throws an error if it cannot be found.
-   * If instance is a docID, then it is returned unchanged. If instance is a slug, its corresponding docID is returned.
-   * If instance is the value for the username field in this collection, then return that document's ID.
    * If instance is an object with an _id field, then that value is checked to see if it's in the collection.
+   * If instance is the value for the username field in this collection, then return that document's ID.
+   * If instance is a docID, then it is returned unchanged. If instance is a slug, its corresponding docID is returned.
    * @param { String } instance Either a valid docID or a valid slug string.
    * @returns { String } The docID associated with instance.
    * @throws { Meteor.Error } If instance is not a docID or a slug.
    */
   getID(instance) {
     let id;
-    // If we've been passed a document, check to see if it has an _id field and use that if available.
+    // If we've been passed a document, check to see if it has an _id field and make instance the value of _id.
     if (_.isObject(instance) && instance._id) {
       instance = instance._id; // eslint-disable-line no-param-reassign
     }
