@@ -44,6 +44,8 @@ hidden('password : ', function (password) {
 });
 // rl.close();
 
+console.log(process.argv);
+
 const myArgs = process.argv.slice(2);
 
 if (myArgs.length < 3) {
