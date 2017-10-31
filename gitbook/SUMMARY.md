@@ -42,7 +42,7 @@
 
 * [Overview](datamodel/overview.md)
 * [Class Hierarchy](datamodel/class-hierarchy.md)
-* Entity-Relationship Model
+* [Entity-Relationship Model](datamodel/entity-relationship-model.md)
 * [Slugs](datamodel/slugs.md)
 * Roles
 * Dump/Restore
