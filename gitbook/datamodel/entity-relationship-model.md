@@ -16,6 +16,20 @@ Opportunity represents the opportunity "in the abstract", specifying its descrip
 
 OpportunityInstance represents an "instantiation" of the Opportunity in a specific semester for a specific student. It also duplicates the ICE points and the sponsorID from the Opportunity. This enables an instance to depart from its parent Opportunity with respect to these values, and also speeds lookup.
 
+## Course
+
+RadGrad represents courses through two entities: Course and CourseInstance.
+
+<img src="images/Course.png" width="100%"> 
+ 
+Course represents semester and student-independent information about a course. 
+
+CourseInstance represents the occurrence of a specific student taking a course for a specific semester, either in the past, present, or future. If the CourseInstance is in the past, then typically it was created as a result of uploading STAR data, in which case both the fromSTAR and verified booleans are set to true. A verified CourseInstance means that the student will earn ICE points. 
+
+CourseInstances in the present semester or future semester are typically created as a result of the student manipulating their degree plan. These CourseInstances have their fromSTAR and verified booleans set to false.  
+
+
+
 
 
 
