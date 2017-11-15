@@ -246,3 +246,102 @@ export function processBulkStarCsvData(csvData) {
   }
   return null;
 }
+
+/**
+ * Processes STAR JSON data and returns an array of objects containing CourseInstance fields.
+ * @param { String } student The slug of the student corresponding to this STAR data.
+ * @param { String } jsonData JSON object for a student.
+ * @returns { Array } A list of objects with fields: semester, course, note, verified, grade, and creditHrs.
+ * @memberOf api/star
+ */
+export function processStarJsonData(student, jsonData) {
+  if (student !== jsonData.email) {
+    throw new Meteor.Error(`JSON data is not for ${student}`);
+  }
+  const courses = jsonData.courses;
+  const dataObjects = _.map(courses, (course) => {
+    const name = course.name;
+    let grade = course.grade;
+    if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
+      grade = course.transferGrade;
+    } else
+      if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
+        // got number assuming it is AP exam score need to determine the type of the exam.
+        if (course.transferGrade > 2) {
+          grade = 'B';
+        }
+      }
+    let number = course.number;
+    if (isNaN(number)) {
+      number = course.transferNumber;
+    }
+    const obj = {
+      semester: course.semester,
+      name,
+      number,
+      credits: course.credits,
+      grade,
+      student,
+    };
+    return obj;
+  });
+
+  // console.log(dataObjects);
+  // Now we take that array of objects and transform them into CourseInstance data objects.
+  return _.filter(_.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) {
+    return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
+  });
+}
+
+/**
+ * Processes STAR JSON data and returns an array of objects containing CourseInstance fields.
+ * @param { String } jsonData JSON array with objects for students.
+ * @returns { Array } A list of objects with fields: semester, course, note, verified, grade, and creditHrs.
+ * @memberOf api/star
+ */
+export function processBulkStarJsonData(jsonData) {
+  const bulkData = {};
+  _.forEach(jsonData, (data) => {
+    const student = data.email;
+    const courses = data.courses;
+    _.forEach(courses, (course) => {
+      const name = course.name;
+      let grade = course.grade;
+      if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
+        grade = course.transferGrade;
+      } else
+        if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
+          // got number assuming it is AP exam score need to determine the type of the exam.
+          if (course.transferGrade > 2) {
+            grade = 'B';
+          }
+        }
+      let number = course.number;
+      if (isNaN(number)) {
+        number = course.transferNumber;
+      }
+      const obj = {
+        semester: course.semester,
+        name,
+        number,
+        credits: course.credits,
+        grade,
+        student,
+      };
+      if (!bulkData[student]) {
+        bulkData[student] = {};
+        bulkData[student].courses = [];
+        bulkData[student].firstName = data.name.first;
+        bulkData[student].lastName = data.name.last;
+      }
+      bulkData[student].courses.push(obj);
+    });
+    // Now we take that array of objects and transform them into CourseInstance data objects.
+    _.forEach(Object.keys(bulkData), (key) => {
+      bulkData[key].courses = _.filter(_.map(bulkData[key].courses, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) { // eslint-disable-line
+        return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
+      });
+    });
+  });
+  return bulkData;
+}
