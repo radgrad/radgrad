@@ -59,7 +59,7 @@ Template.Student_Explorer_Edit_Review_Widget.events({
     event.preventDefault();
     const updateData = FormUtils.getSchemaDataFromEvent(editSchema, event);
     instance.context.reset();
-    editSchema.clean(updateData);
+    editSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.moderated = false;
