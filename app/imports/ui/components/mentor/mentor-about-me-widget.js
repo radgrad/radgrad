@@ -187,7 +187,7 @@ Template.Mentor_About_Me_Widget.events({
     event.preventDefault();
     const updatedData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
-    updateSchema.clean(updatedData);
+    updateSchema.clean(updatedData, {mutate: true});
     instance.context.validate(updatedData);
     const mentorProfile = MentorProfiles.findOne({ userID: getUserIdFromRoute() });
     if (instance.context.isValid()) {
