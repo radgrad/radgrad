@@ -98,15 +98,15 @@ Template.Moderation.events({
     if (split[1] === 'review') {
       newData = getSchemaDataFromEvent(noSlugSchema, event);
       instance.context.reset();
-      noSlugSchema.clean(newData, {mutate: true});
+      noSlugSchema.clean(newData, { mutate: true });
     } else if (split[3]) {
       newData = getSchemaDataFromEvent(withSlugSchema, event);
       instance.context.reset();
-      withSlugSchema.clean(newData, {mutate: true});
+      withSlugSchema.clean(newData, { mutate: true });
     } else {
       newData = getSchemaDataFromEvent(noSlugSchema, event);
       instance.context.reset();
-      noSlugSchema.clean(newData, {mutate: true});
+      noSlugSchema.clean(newData, { mutate: true });
     }
     instance.context.validate(newData);
     if (instance.context.isValid()) {
