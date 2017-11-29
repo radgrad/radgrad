@@ -44,7 +44,7 @@ Template.Student_Explorer_Add_Review_Widget.helpers({
     }
     _.forEach(instances, (instance) => {
       const semester = Semesters.findDoc(instance.semesterID);
-      if (semester.semesterNumber < Semesters.getCurrentSemesterDoc().semesterNumber) {
+      if (semester.semesterNumber <= Semesters.getCurrentSemesterDoc().semesterNumber) {
         semesters.push(Semesters.findDoc(instance.semesterID));
       }
     });
