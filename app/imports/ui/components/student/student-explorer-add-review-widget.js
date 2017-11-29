@@ -57,7 +57,7 @@ Template.Student_Explorer_Add_Review_Widget.events({
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.reset();
-    addSchema.clean(newData);
+    addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       newData.student = getRouteUserName();
@@ -73,15 +73,12 @@ Template.Student_Explorer_Add_Review_Widget.events({
       let feedData;
       if (this.reviewType === 'course') {
         feedData = { feedType: Feeds.NEW_COURSE_REVIEW, user: newData.student, course: newData.reviewee };
-        const message = `${getRouteUserName()} added a course review for ${newData.reviewee}.`;
-        appLog.info(message);
       }
       if (this.reviewType === 'opportunity') {
         feedData = { feedType: Feeds.NEW_OPPORTUNITY_REVIEW, user: newData.student, opportunity: newData.reviewee };
-        const message = `${getRouteUserName()} added an opportunity review for ${newData.reviewee}.`;
-        appLog.info(message);
       }
       defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData });
+      appLog.info(`${getRouteUserName()} added a review for ${newData.reviewee}.`);
     } else {
       FormUtils.indicateError(instance);
     }
