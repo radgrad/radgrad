@@ -91,7 +91,6 @@ Template.Moderation.helpers({
 Template.Moderation.events({
   'click button': function clickButton(event, instance) {
     event.preventDefault();
-
     const split = event.target.id.split('-');
     const itemID = split[0];
     let newData;
