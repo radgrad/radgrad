@@ -44,6 +44,21 @@ Opportunity represents the opportunity "in the abstract", specifying its descrip
 
 OpportunityInstance represents an "instantiation" of the Opportunity in a specific semester for a specific student. It also duplicates the ICE points and the sponsorID from the Opportunity. This enables an instance to depart from its parent Opportunity with respect to these values, and also speeds lookup.
 
+## Interests {#interests}
+
+The primary "connective tissue" in RadGrad is Interests. These are topical areas in the discipline. For computer science, example Interests might be "blockchain", "bioinformatics", "Java", and so forth. Interests are grouped together through the InterestType entity. Example InterestTypes might be "Club", "Research Project", etc. 
+
+<img src="images/Interest.png" width="100%"> 
+
+This diagram indicates that:
+ 
+  * All Users (represented by their profiles) have at least one Interest associated with them.
+  * All Courses, Opportunities, Career Goals, and Teasers have at least one Interest associated with them.
+  * Each Interest is associated wiht one and only one InterestType.
+
+This representation enables RadGrad to associate entities based on Interests: the system can find Users with similar Interests, recommend Courses to Users based upon matching Interests, and so forth. 
+
+
 ## Academic Plans {#academic-plans}
 
 To understand RadGrad's Academic Plans, it's important to understand how degree programs work.  In general, departments establish degree programs such as "B.S. in Computer Science", "B.A. in Information and Computer Science", or "B.S. in Computer Science with a Security Science Specialization".  Each degree program has a set of requirements associated with it, such as the courses that must be taken, and/or the grades that must be achieved, and/or the total number of credit hours.  
@@ -55,6 +70,54 @@ RadGrad's Academic Plans provide a way to represent the evolving nature of degre
 <img src="images/AcademicPlans.png" width="100%">
 
 A "DesiredDegree" is an entity representing a degree plan such as "B.S. in Computer Science".  A set of "PlanChoices" represent the requirements for that desired degree.  The Semester indicates the time at which an Academic Plan comes into being.  The Slug just assigns the AcademicPlan a unique string identifier, such as "BS-Computer-Science-2017".
+
+## Slugs {#slugs}
+
+"Slug" is a term commonly used in web application development to denote a unique string that can be used as part of a URL to identify a domain entity.  To facilitate their use in URLs, slugs are generally lower case, and consist only of letters, numbers, and hyphens or underscores. For example, in RadGrad, the slug for the "Software Engineering" Interest might be "software-engineering".
+
+In RadGrad, both slugs and the 14 character MongoDB document IDs uniquely identify documents.  However, if you reset and reinitialize a RadGrad database, the document ID will be different, but its slug will stay the same.
+
+Slugs are used heavily in RadGrad when initializing the database from a fixture file in order to represent relationships between different entities without reference to their docID.  For example, here is an example invocation of the CareerGoals define method:
+
+```
+CareerGoals.define({ name: 'Database Administrator',
+                     slug: 'database-administrator',
+                     description: 'Wrangler of SQL.',
+                     interests: ['application-development', 'software-engineering', 'databases'],
+                     moreInformation: 'http://www.bls.gov/ooh/database-administrators.htm' });
+```
+
+First, you can see that the slug "database-administrator" has been passed into the define method, so that this document can be referred to in future definitions by that string.
+
+Second, the interests field contains an array of three slugs: "application-development", "software-engineering", "databases". Internally, the MongoDB document for this Database Administrator Career Goal will contain the 14 character document IDs for these interests, but we don't need to worry about that in the fixture file: we can just refer to the slugs. 
+
+RadGrad does not support forward referencing of Slugs. For example, when the above CareerGoal definition executes, if a Slug is referenced (such as "application-development") that is not defined, then an error is thrown. Thus, the order in which RadGrad data is loaded is important and there can be no circular dependencies among entity definitions.
+
+Slugs form a unique namespace across all entities: you cannot use the same string to denote an Interest Slug and a CareerGoal slug, for example.
+
+Here is an ERD that illustrates which entities use Slugs:
+
+<img src="images/Slug.png" width="100%">
+
+## Other entities {#others}
+
+There are a variety of other entities that are more peripheral in the data model or have a sufficiently simple structure to not warrant their own section.  Here are the remaining entities:
+
+  * CareerGoal. Career goals enable RadGrad to identify appropriate combinations of curricular and extracurricular activities to prepare a student for their professional life after graduation. 
+  
+  * Feed.  Feeds are a representation for recent events within RadGrad. It enables the user interface to display to all users the activities in the system: when courses and opportunities are defined, when new users join, when a user achieves a higher level, and so forth. 
+  
+  * Help.  Help entities provide the text associated with the help dialog on each page.
+  
+  * MentorQuestion, MentorAnswer.  These entities manage the questions and answers on the MentorSpace page.
+  
+  * PublicStats.  Provides the publically available data shown on the landing page. 
+  
+  * Review.  The review entities manage reviews of courses and opportunities.
+  
+  * Teaser.  The teaser entities manage the YouTube videos shown in the system.
+  
+  * VerificationRequest.  Manages the verification requests and responses in the system for opportunities. 
 
 
 

@@ -35,8 +35,6 @@
   * [Deployment](developerguide/deployment.md)
   * [CAS Authentication](developerguide/cas.md)
   * [Cloudinary Image Service](developerguide/cloudinary.md)
-* RadGrad Registration
-  * [Meeting outline](developerguide/radgrad-registration.md)
 
 ### Data Model
 
@@ -46,13 +44,15 @@
   * [Users and Profiles](datamodel/entity-relationship-model.md#users)
   * [Courses](datamodel/entity-relationship-model.md#courses)
   * [Opportunities](datamodel/entity-relationship-model.md#opportunities)
+  * [Interests](datamodel/entity-relationship-model.md#interests)
   * [Academic Plans](datamodel/entity-relationship-model.md#academic-plans)
-* [Slugs](datamodel/slugs.md)
+  * [Slugs](datamodel/entity-relationship-model.md#slugs)
+  * [Other entities](datamodel/entity-relationship-model.md#others)
 * [User Management](datamodel/user-management.md)
+* [ICE](datamodel/ice.md)
 * Dump/Restore
 * Pub/Sub Caching
 * Integrity Checking
-* Testing
 
 ### User interface
 
@@ -70,6 +70,8 @@
 
 * [Use Cases (Fall 2016)](archive/use-cases.md)
 * [Beta Test (Spring 2017)](archive/beta-test.md)
+* [RadGrad registration](developerguide/radgrad-registration.md)
+
 
 
 

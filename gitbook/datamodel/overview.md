@@ -13,6 +13,7 @@ const interestType = InterestTypes.findSlugByID(doc.interestTypeID);
 ```
 
 The variable `InterestTypes` is imported into this client module, and it refers to the singleton instance of the InterestTypeCollection class. (Because these singleton instances have no mutable state, there are no concurrency issues associated with them.) The method `findSlugByID` from this class is called with a string that (hopefully) holds the value of a document ID in the InterestTypeCollection.
+
 This method ends up accessing both the MongoDB InterestTypeCollection and SlugCollection collections in order to return the slug string associated with this InterestType. The point is that client code does not manipulate MongoDB collections directly; instead, they always invoke a method bound to the singleton instance of the corresponding Javascript class.
 
 The implementation of the data model is contained in the imports/api directory.  In some ways, it would have been more descriptive to name this directory "datamodel" rather than "api". We named it "api" in order to conform to [Meteor best practices for application structure](https://guide.meteor.com/structure.html#example-app-structure).
