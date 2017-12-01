@@ -43,11 +43,14 @@
 * [Overview](datamodel/overview.md)
 * [Class Hierarchy](datamodel/class-hierarchy.md)
 * [Entity-Relationship Model](datamodel/entity-relationship-model.md)
+  * [Users and Profiles](datamodel/entity-relationship-model.md#users)
+  * [Courses](datamodel/entity-relationship-model.md#courses)
+  * [Opportunities](datamodel/entity-relationship-model.md#opportunities)
+  * [Academic Plans](datamodel/entity-relationship-model.md#academic-plans)
 * [Slugs](datamodel/slugs.md)
-* Roles
+* [User Management](datamodel/user-management.md)
 * Dump/Restore
 * Pub/Sub Caching
-* [User Management](datamodel/user-management.md)
 * Integrity Checking
 * Testing
 
