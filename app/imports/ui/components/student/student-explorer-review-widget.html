@@ -55,7 +55,9 @@
                 <div class="twelve wide column">
                   {{> Student_Explorer_Review_Stars_Widget rating = rating}}
                   <br>
-                  <div style="padding-top: 5px">{{comments}}</div>
+                  <div style="padding-top: 5px">
+                    {{#markdown}}{{comments}}{{/markdown}}
+                  </div>
                 </div>
               </div>
             </div>
