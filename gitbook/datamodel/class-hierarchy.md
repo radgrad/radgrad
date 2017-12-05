@@ -14,6 +14,6 @@ As we implemented this encapsulation, we observed that there was common function
 
 Here is the resulting class hierarchy:
 
-<img src="images/class-hierarchy.png" width="100%">
+<img src="images/ClassHierarchy.png" width="100%">
 
 There is one exceptional class: UserCollection, which does not inherit from any of the Base classes.  This is because the UserCollection class encapsulates a "special" MongoDB collection managed by the Meteor.Accounts package. The behavior of this collection is sufficiently different from regular user-defined collections that we did not feel it was appropriate to make it a subclass of any other class. 
