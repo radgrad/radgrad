@@ -10,7 +10,12 @@ import { Users } from '../user/UserCollection';
 import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
 import { defineMethod } from '../base/BaseCollection.methods';
 import { getDepartment } from '../course/CourseUtilities';
-import { processStarCsvData, processBulkStarCsvData } from './StarProcessor';
+import {
+  processStarCsvData,
+  processStarJsonData,
+  processBulkStarCsvData,
+  processBulkStarJsonData,
+} from './StarProcessor';
 import { updateStudentLevel } from '../level/LevelProcessor';
 
 function processStudentStarDefinitions(advisor, student, definitions) {
@@ -74,8 +79,10 @@ function processStudentStarDefinitions(advisor, student, definitions) {
     }
   });
 }
+
 /**
  * Processes the student's star data creating CourseInstances.
+ * @param advisor the advisor's username.
  * @param student the student's username.
  * @param csvData the student's STAR data.
  * @memberOf api/star
@@ -84,6 +91,18 @@ function processStudentStarCsvData(advisor, student, csvData) {
   // console.log('processStudentStarCsvData', student, csvData);
   const definitions = processStarCsvData(student, csvData);
   processStudentStarDefinitions(advisor, student, definitions);
+}
+
+/**
+ * Processes the student's star json data creating CourseInstances.
+ * @param advisor the advisor's username.
+ * @param student the student's username.
+ * @param jsonData the student's STAR data as JSON object.
+ * @memberOf api/star
+ */
+function processStudentStarJsonData(advisor, student, jsonData) {
+  const defintions = processStarJsonData(student, jsonData);
+  processStudentStarDefinitions(advisor, student, defintions);
 }
 
 /**
@@ -102,13 +121,21 @@ export const starLoadDataMethod = new ValidatedMethod({
 });
 
 /**
- * Processes the student's star data creating CourseInstances.
- * @param student the student's username.
- * @param csvData the student's STAR data.
+ * ValidatedMethod for loading student STAR JSON data.
  * @memberOf api/star
  */
-function processBulkStarData(advisor, csvData) {
-  const definitions = processBulkStarCsvData(csvData);
+export const starLoadJsonDataMethod = new ValidatedMethod({
+  name: 'StarProcessor.loadStarJsonData',
+  validate: null,
+  run(data) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
+    }
+    processStudentStarJsonData(data.advisor, data.student, data.jsonData);
+  },
+});
+
+function processBulkStarDefinitions(advisor, definitions) {
   let updateNum = 0;
   let newStudents = 0;
   // console.log(definitions);
@@ -140,7 +167,30 @@ function processBulkStarData(advisor, csvData) {
         }
       }
     });
-  } return `Updated ${updateNum} student(s), Created ${newStudents} new student(s)`;
+  }
+  return `Updated ${updateNum} student(s), Created ${newStudents} new student(s)`;
+}
+
+/**
+ * Processes the bulk star data creating CourseInstances.
+ * @param advisor the advisor's username.
+ * @param csvData the student's STAR data.
+ * @memberOf api/star
+ */
+function processBulkStarData(advisor, csvData) {
+  const definitions = processBulkStarCsvData(csvData);
+  return processBulkStarDefinitions(advisor, definitions);
+}
+
+/**
+ * Processes the bulk star data creating CourseInstances.
+ * @param advisor the advisor's username.
+ * @param jsonData the student's STAR JSON data.
+ * @memberOf api/star
+ */
+function processBulkStarDataJson(advisor, jsonData) {
+  const definitions = processBulkStarJsonData(jsonData);
+  return processBulkStarDefinitions(advisor, definitions);
 }
 
 /**
@@ -155,6 +205,17 @@ export const starBulkLoadDataMethod = new ValidatedMethod({
       throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
     }
     return processBulkStarData(data.advisor, data.csvData);
+  },
+});
+
+export const starBulkLoadJsonDataMethod = new ValidatedMethod({
+  name: 'StarProcess.bulkLoadStarJsonData',
+  validate: null,
+  run(data) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in to define Star data.');
+    }
+    return processBulkStarDataJson(data.advisor, data.jsonData);
   },
 });
 

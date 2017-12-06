@@ -302,6 +302,7 @@ export function processStarJsonData(student, jsonData) {
 export function processBulkStarJsonData(jsonData) {
   const bulkData = {};
   _.forEach(jsonData, (data) => {
+    // console.log(data);
     const student = data.email;
     const courses = data.courses;
     _.forEach(courses, (course) => {
@@ -336,12 +337,14 @@ export function processBulkStarJsonData(jsonData) {
       }
       bulkData[student].courses.push(obj);
     });
-    // Now we take that array of objects and transform them into CourseInstance data objects.
-    _.forEach(Object.keys(bulkData), (key) => {
-      bulkData[key].courses = _.filter(_.map(bulkData[key].courses, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) { // eslint-disable-line
-        return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
-      });
+  });
+  // console.log(Object.keys(bulkData));
+  // Now we take that array of objects and transform them into CourseInstance data objects.
+  _.forEach(Object.keys(bulkData), (key) => {
+    bulkData[key].courses = _.filter(_.map(bulkData[key].courses, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) { // eslint-disable-line
+      return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
     });
   });
+  console.log(bulkData);
   return bulkData;
 }
