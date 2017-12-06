@@ -345,6 +345,6 @@ export function processBulkStarJsonData(jsonData) {
       return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
     });
   });
-  console.log(bulkData);
+  // console.log(bulkData);
   return bulkData;
 }
