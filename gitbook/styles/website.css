@@ -35,5 +35,5 @@
 /* Reduce size of code font */
 
 .book .book-body .page-wrapper .page-inner section.normal pre, .book .book-body .page-wrapper .page-inner section.normal code {
-  font-size: .8em;
+  font-size: .9em;
 }
