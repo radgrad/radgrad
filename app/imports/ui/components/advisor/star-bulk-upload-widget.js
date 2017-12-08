@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { starBulkLoadDataMethod } from '../../../api/star/StarProcessor.methods';
+import { starBulkLoadJsonDataMethod } from '../../../api/star/StarProcessor.methods';
 import { getRouteUserName } from '../shared/route-user-name';
 // import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessor.methods';
 
@@ -31,9 +31,9 @@ Template.Star_Bulk_Upload_Widget.events({
       const starData = fileName.files[0];
       const fr = new FileReader();
       fr.onload = (e) => {
-        const csvData = e.target.result;
-        // console.log(advisor, csvData);
-        starBulkLoadDataMethod.call({ advisor, csvData }, (error, result) => {
+        const jsonData = JSON.parse(e.target.result);
+        // console.log(advisor, jsonData);
+        starBulkLoadJsonDataMethod.call({ advisor, jsonData }, (error, result) => {
           if (error) {
             console.log('Error loading bulk STAR data', error);
           }
