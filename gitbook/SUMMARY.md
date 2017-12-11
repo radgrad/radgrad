@@ -51,7 +51,7 @@
   * [Other entities](datamodel/entity-relationship-model.md#others)
 * [User Management](datamodel/user-management.md)
 * [ICE](datamodel/ice.md)
-* Dump/Restore
+* [Dump/Restore](datamodel/dump-restore.md)
 * Pub/Sub Caching
 * Integrity Checking
 
