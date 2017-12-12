@@ -20,6 +20,7 @@ import { updateStudentLevel } from '../level/LevelProcessor';
 
 function processStudentStarDefinitions(advisor, student, definitions) {
   // console.log(`processStudentStarDefinitions(${advisor}, ${student}, ${definitions})`);
+  console.log(`Processing ${student}'s STAR data`);
   // console.log(definitions);
   const studentID = Users.getID(student);
   // console.log(student, studentID);
@@ -75,6 +76,7 @@ function processStudentStarDefinitions(advisor, student, definitions) {
   } else {
     text = `${text} course from STAR.`;
   }
+  console.log(`${student} had ${numInterstingCourses} course(s)`);
   advisorLogsDefineMethod.call({ advisor, student, text }, (error) => {
     if (error) {
       console.log('Error creating AdvisorLog', error);
