@@ -1,8 +1,8 @@
-# Dump-Restore
+# Database Dump-Restore
 
-RadGrad implements a custom mechanism for dumping (outputting the contents of the MongoDB database in a file in JSON format) and restoring (loading the contents of a file in the appropriate format).  We call this capability dump-restore.
+RadGrad implements a custom mechanism for database dumping (i.e. outputting the contents of the MongoDB database in a file in JSON format) and restoring a dumped database (i.e. loading the contents of the dump file).  We call this capability database dump-restore.
 
-MongoDB provides [MongoDB Tools](https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/) to dump the contents of a database in a manner that allows reloading. We chose to develop our own custom method because we wanted a way to define database fixture files in a human-readable form, and because we were worried about database integrity problems with MongoDB and wanted a way to easily edit database fixture files to repair integrity violations by hand if they happened to occur. 
+We are aware that MongoDB provides a built-in facility through [MongoDB Tools](https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/) to dump the contents of a MongoDB database in a manner that allows reloading. We chose to develop our own custom method because we wanted a way to define database fixture files in a human-readable form, and because we were worried about database integrity problems with MongoDB as our schemas evolved and so we wanted a way to easily edit database fixture files to repair integrity violations by hand if they happened to occur. 
 
 ### Dump
 
