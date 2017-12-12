@@ -22,6 +22,7 @@ function processStudentStarDefinitions(advisor, student, definitions) {
   // console.log(`processStudentStarDefinitions(${advisor}, ${student}, ${definitions})`);
   // console.log(definitions);
   const studentID = Users.getID(student);
+  // console.log(student, studentID);
   const oldInstances = CourseInstances.find({ studentID, fromSTAR: true }).fetch();
   _.forEach(oldInstances, (instance) => {
     CourseInstances.removeIt(instance._id);
@@ -32,6 +33,7 @@ function processStudentStarDefinitions(advisor, student, definitions) {
   const departments = {};
   _.forEach(definitions, (definition) => {
     // console.log('semesterID', semesterID);
+    // console.log(definition);
     if (definition.course !== Courses.unInterestingSlug) {
       const semesterID = Semesters.findIdBySlug(definition.semester);
       const department = getDepartment(definition.course);
@@ -43,7 +45,7 @@ function processStudentStarDefinitions(advisor, student, definitions) {
       numInterstingCourses += 1;
       const courseID = Courses.findIdBySlug(definition.course);
       // console.log('courseID', courseID);
-      const planning = CourseInstances.find({ semesterID, courseID, verified: false }).fetch();
+      const planning = CourseInstances.find({ studentID, semesterID, courseID, verified: false }).fetch();
       // console.log('planning', planning);
       if (planning.length > 0) {
         CourseInstances.removeIt(planning[0]._id);
@@ -56,8 +58,8 @@ function processStudentStarDefinitions(advisor, student, definitions) {
       definition.grade = 'B';  // eslint-disable-line
       definition.verified = false; // eslint-disable-line
     }
-    // console.log('CourseInstances.define', definition);
     if (definition.course !== Courses.unInterestingSlug) {
+      // console.log('CourseInstances.define', definition);
       CourseInstances.define(definition);
     }
   });
@@ -189,7 +191,9 @@ function processBulkStarData(advisor, csvData) {
  * @memberOf api/star
  */
 function processBulkStarDataJson(advisor, jsonData) {
+  // console.log(`processBulkStarDataJson(${advisor}`, jsonData);
   const definitions = processBulkStarJsonData(jsonData);
+  // console.log(definitions);
   return processBulkStarDefinitions(advisor, definitions);
 }
 
