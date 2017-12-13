@@ -25,6 +25,18 @@ Template.Retrieve_User_Widget.helpers({
   facultyRole() {
     return ROLE.FACULTY;
   },
+  studentCount() {
+    return Users.findProfilesWithRole(ROLE.STUDENT, {}, { sort: { lastName: 1 } }).length;
+  },
+  mentorCount() {
+    return Users.findProfilesWithRole(ROLE.MENTOR, {}, { sort: { lastName: 1 } }).length;
+  },
+  facultyCount() {
+    return Users.findProfilesWithRole(ROLE.FACULTY, {}, { sort: { lastName: 1 } }).length;
+  },
+  advisorCount() {
+    return Users.findProfilesWithRole(ROLE.ADVISOR, {}, { sort: { lastName: 1 } }).length;
+  },
 });
 
 Template.Retrieve_User_Widget.events({
