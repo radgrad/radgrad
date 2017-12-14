@@ -188,7 +188,7 @@
       {{else}}
       {{/if}}
 
-      {{#each listItem in menuNonAddedList}}
+      {{#each listItem in menuFilteredNonAddedList}}
         <a class="{{classType (slugName listItem) 'course'}}" data-tab="tab-name"
            href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}"><i
             style="position: absolute; margin-left: -20px;" class="{{userCourses listItem}}"></i>{{courseName listItem}}

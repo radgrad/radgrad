@@ -27,9 +27,12 @@ Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated()
 Template.Student_Explorer_Menu.helpers({
   menuFilteredNonAddedList() {
     let retVal = Template.instance().data.menuNonAddedList;
-    console.log(retVal[0].ice);
     if (Template.instance().byInterests.get()) {
-      retVal = _.filter(retVal, function (item) { return item; });
+      const profile = Users.getProfile(getRouteUserName());
+      retVal = _.filter(retVal, function (item) {
+        const matches = _.intersection(profile.interestIDs, item.interestIDs);
+        return matches.length > 0;
+      });
     }
     if (Template.instance().byHighI.get()) {
       retVal = _.filter(retVal, function (item) { return item.ice.i >= 10; });
@@ -37,7 +40,6 @@ Template.Student_Explorer_Menu.helpers({
     if (Template.instance().byHighE.get()) {
       retVal = _.filter(retVal, function (item) { return item.ice.e >= 10; });
     }
-    console.log(retVal);
     return retVal;
   },
   isHighE() {
