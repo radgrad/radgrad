@@ -211,13 +211,13 @@
         <div class="ui segment">
           <h4 class="ui dividing header">Filter By</h4>
           <div class="field">
-            <div class="ui radio checkbox dividing {{#if trueValue}}checked{{/if}}">
-              <input type="radio" name="match" checked={{trueValue}} value="true" class="hidden" tabindex="0">
-              <label>My Interests</label>
+            <div class="ui radio checkbox dividing {{#if isInterests}}checked{{/if}}">
+              <input type="radio" name="match" checked={{isInterests}} value="true" class="hidden" tabindex="0">
+              <label class="jsByInterests">My Interests</label>
             </div>
           </div>
         </div>
-        {{#each listItem in menuNonAddedList}}
+        {{#each listItem in menuFilteredNonAddedList}}
           <a class="{{classType (slugName listItem) 'careerGoal'}}" data-tab="tab-name"
              href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}"><i
               style="position: absolute; margin-left: -20px;" class="{{userCareerGoals listItem}}"></i>{{itemName
