@@ -63,7 +63,7 @@ lmieulet:meteor-coverage@1.1.4
 localstorage@1.2.0
 logging@1.1.19
 markdown@1.0.12
-mdg:meteor-apm-agent@3.1.0
+mdg:meteor-apm-agent@3.1.1
 mdg:validated-method@1.1.0
 meteor@1.8.1
 meteor-base@1.2.0
