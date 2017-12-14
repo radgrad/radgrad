@@ -179,9 +179,9 @@
         <div class="ui segment">
           <h4 class="ui dividing header">Filter By</h4>
           <div class="field">
-            <div class="ui radio checkbox dividing {{#if trueValue}}checked{{/if}}">
-              <input type="radio" name="match" checked={{trueValue}} value="true" class="hidden" tabindex="0">
-              <label>My Interests</label>
+            <div class="ui radio checkbox dividing {{#if isInterests}}checked{{/if}}">
+              <input type="radio" name="interests" checked={{isInterests}} value="true" class="hidden" tabindex="0">
+              <label class="jsByInterests">My Interests</label>
             </div>
           </div>
         </div>
@@ -275,22 +275,22 @@
               <div class="ui segment">
                 <h4 class="ui dividing header">Filter By</h4>
                 <div class="field">
-                  <div class="ui radio checkbox {{#if trueValue}}checked{{/if}}">
-                    <input type="checkbox" name="match" checked={{trueValue}} value="true" class="hidden" tabindex="0">
-                    <label>High Experience</label>
+                  <div class="ui radio checkbox {{#if isHighE}}checked{{/if}}">
+                    <input type="checkbox" name="highE" checked={{isHighE}} value="true" class="hidden" tabindex="0">
+                    <label class="jsByHighE">High Experience</label>
                   </div>
-                  <div class="ui radio checkbox {{#if trueValue}}checked{{/if}}">
-                    <input type="radio" name="match" checked={{trueValue}} value="true" class="hidden" tabindex="0">
-                    <label>High Innovation</label>
+                  <div class="ui radio checkbox {{#if isHighI}}checked{{/if}}">
+                    <input type="radio" name="highI" checked={{isHighI}} value="true" class="hidden" tabindex="0">
+                    <label class="jsByHighI">High Innovation</label>
                   </div>
-                  <div class="ui radio checkbox {{#if trueValue}}checked{{/if}}">
-                    <input type="radio" name="match" checked={{trueValue}} value="true" class="hidden" tabindex="0">
-                    <label>My Interests</label>
+                  <div class="ui radio checkbox {{#if isInterests}}checked{{/if}}">
+                    <input type="radio" name="interests" checked={{isInterests}} value="true" class="hidden" tabindex="0">
+                    <label class="jsByInterests">My Interests</label>
                   </div>
                 </div>
               </div>
             {{/if}}
-            {{#each listItem in menuNonAddedList}}
+            {{#each listItem in menuFilteredNonAddedList}}
               <a class="{{classType (slugName listItem) 'opportunity'}}" data-tab="tab-name"
                  href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(slugName listItem)}}"><i
                   style="position: absolute; margin-left: -20px;"
