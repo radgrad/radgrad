@@ -88,3 +88,16 @@ First, the developer specifies a field called "databaseRestoreFileName" in the J
 "databaseRestoreFileName": "database/snapshot/2017-08-02-14-12-04.json",
 ``` 
 
+The value of this field is a path within the `private` directory of the RadGrad application. Here's [2017-08-14-12-04.json](https://github.com/radgrad/radgrad/blob/master/app/private/database/snapshot/2017-08-02-14-12-04.json).
+
+If and only if the database is empty when the system comes up, then the contents of this file will be used to initialize the database.    See the loadDatabase() function in [initialize-db.js](https://github.com/radgrad/radgrad/blob/master/app/imports/startup/server/initialize-db.js) to see the process.
+
+To ensure that the database being loaded is consistent with the system's data model, the loading process requires that two constraints are met:
+
+  1. The set of collections expected in the RadGrad application are all present in the database json file.
+  2. There are no collections present in the database json file that are not expected by the application. 
+  
+In other words, the database json file contains exactly the set of collections required by RadGrad.
+
+There are other ways the loading process can fail.  As noted elsewhere, entities in the data model can link to each other. For example, a StudentProfile instance can contain a list of docIDs of the Interests associated with the student.  There can be no forward referencing in RadGrad, so any Interest associated with a StudentProfile must be defined prior to defining the profile instance. 
+
