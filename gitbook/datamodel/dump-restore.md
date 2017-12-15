@@ -75,3 +75,16 @@ It's not necessary to understand the implementation of this define() method at t
 This relationship between `dumpOne()` and `define()` is the central idea behind RadGrad's dump mechanism. There is more code to implement the mechanics of dumping:  iterating through each docID in each collection,writing out the results as a json file, determining where to write the file, and so forth. But if you understand and can adhere to this relationship between `dumpOne` and `define()`, then you can create new classes and manage other ones successfully. 
 
 Note that whenever a change is made the parameters to a `define()` method, you must make sure to update the `dumpOne()` method as well!  
+
+### Restore
+
+"Restore" refers to the process of initializing the MongoDB database from scratch with the contents of a file created through the "Dump" mechanism. 
+
+The  process of database restoration involves the following sequence:
+
+First, the developer specifies a field called "databaseRestoreFileName" in the JSON settings file passed to Meteor. For example:
+
+```js
+"databaseRestoreFileName": "database/snapshot/2017-08-02-14-12-04.json",
+``` 
+
