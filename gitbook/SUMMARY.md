@@ -52,7 +52,7 @@
 * [User Management](datamodel/user-management.md)
 * [ICE](datamodel/ice.md)
 * [Database Dump/Restore](datamodel/dump-restore.md)
-* Pub/Sub Caching
+* [Pub-Sub Caching](datamodel/pub-sub.md)
 * Integrity Checking
 
 ### User interface
