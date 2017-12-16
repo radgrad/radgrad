@@ -179,6 +179,12 @@
         <div class="ui segment">
           <h4 class="ui dividing header">Filter By</h4>
           <div class="field">
+            <div class="ui radio checkbox dividing {{#if is400}}checked{{/if}}">
+              <input type="radio" name="400+" checked={{is400}} value="true" class="hidden" tabindex="0">
+              <label class="jsBy400">400+ courses</label>
+            </div>
+          </div>
+          <div class="field">
             <div class="ui radio checkbox dividing {{#if isInterests}}checked{{/if}}">
               <input type="radio" name="interests" checked={{isInterests}} value="true" class="hidden" tabindex="0">
               <label class="jsByInterests">My Interests</label>

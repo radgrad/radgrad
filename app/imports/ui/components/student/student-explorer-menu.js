@@ -22,6 +22,7 @@ Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated()
   this.byInterests = new ReactiveVar(false);
   this.byHighI = new ReactiveVar(false);
   this.byHighE = new ReactiveVar(false);
+  this.by400 = new ReactiveVar(false);
 });
 
 Template.Student_Explorer_Menu.helpers({
@@ -40,6 +41,12 @@ Template.Student_Explorer_Menu.helpers({
     if (Template.instance().byHighE.get()) {
       retVal = _.filter(retVal, function (item) { return item.ice.e >= 10; });
     }
+    if (Template.instance().by400.get()) {
+      retVal = _.filter(retVal, function (item) {
+        const regex = new RegExp('4[0-9][0-9]');
+        return regex.test(item.number);
+      });
+    }
     return retVal;
   },
   isHighE() {
@@ -50,6 +57,9 @@ Template.Student_Explorer_Menu.helpers({
   },
   isInterests() {
     return Template.instance().byInterests.get();
+  },
+  is400() {
+    return Template.instance().by400.get();
   },
   academicPlansRouteName() {
     const group = FlowRouter.current().route.group.name;
@@ -311,6 +321,11 @@ Template.Student_Explorer_Menu.events({
     event.preventDefault();
     // console.log(event.target, 'filter by my interests');
     instance.byHighI.set(!instance.byHighI.get());
+  },
+  'click .jsBy400': function clickedHighI(event, instance) {
+    event.preventDefault();
+    // console.log(event.target, 'filter by my interests');
+    instance.by400.set(!instance.by400.get());
   },
 });
 
