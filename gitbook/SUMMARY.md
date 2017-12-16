@@ -53,7 +53,7 @@
 * [ICE](datamodel/ice.md)
 * [Database Dump/Restore](datamodel/dump-restore.md)
 * [Pub-Sub Caching](datamodel/pub-sub.md)
-* Integrity Checking
+* [Integrity Checking](datamodel/integrity-checking.md)
 
 ### User interface
 
