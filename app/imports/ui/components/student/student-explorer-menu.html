@@ -163,6 +163,9 @@
 
   <div class="ui vertical text menu mobile hidden">
     {{#if isType type 'courses'}}
+      {{#if isInRole 'faculty'}}
+        <a href="mailto:{{adminEmail}}?subject=New%20Course%20Suggestion">Suggest a new Course</a>
+      {{/if}}
       {{#if isInRole 'student'}}
         <h4 class="ui dividing header">
           COURSES IN MY PLAN
@@ -202,6 +205,7 @@
       {{/each}}
     {{else}}
       {{#if isType type 'careerGoals'}}
+        <a href="mailto:{{adminEmail}}?subject=New%20Career%20Goal%20Suggestion">Suggest a new Career Goal</a>
         <h4 class="ui dividing header">
           MY CAREER GOALS
         </h4>
@@ -253,6 +257,7 @@
           {{/each}}
         {{else}}
           {{#if isType type 'opportunities'}}
+            <a href="mailto:{{adminEmail}}?subject=New%20Opportunity%20Suggestion">Suggest a new Opportunity</a>
             {{#if isInRole 'student'}}
               <h4 class="ui dividing header">
                 OPPORTUNITIES IN MY PLAN
@@ -304,6 +309,7 @@
             {{/each}}
           {{else}}
             {{#if isType type 'interests'}}
+              <a href="mailto:{{adminEmail}}?subject=New%20Interest%20Suggestion">Suggest a new Interest</a>
               <h4 class="ui dividing header">
                 MY INTERESTS
               </h4>

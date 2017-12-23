@@ -26,6 +26,11 @@ Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated()
 });
 
 Template.Student_Explorer_Menu.helpers({
+  adminEmail() {
+    const admin = Users._adminUsername();
+    // console.log(admin);
+    return admin;
+  },
   menuFilteredNonAddedList() {
     let retVal = Template.instance().data.menuNonAddedList;
     if (Template.instance().byInterests.get()) {
