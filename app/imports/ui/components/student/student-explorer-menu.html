@@ -163,9 +163,6 @@
 
   <div class="ui vertical text menu mobile hidden">
     {{#if isType type 'courses'}}
-      {{#if isInRole 'faculty'}}
-        <a href="mailto:{{adminEmail}}?subject=New%20Course%20Suggestion">Suggest a new Course</a>
-      {{/if}}
       {{#if isInRole 'student'}}
         <h4 class="ui dividing header">
           COURSES IN MY PLAN
