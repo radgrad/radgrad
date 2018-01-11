@@ -69,8 +69,8 @@ if (Meteor.isServer) {
     });
 
     it('#getID', function test() {
-      expect(Semesters.getID('Summer-2010')).to.be.truthy;
-      expect(Semesters.getID('Summer-2040')).to.be.truthy;
+      expect(Semesters.getID('Summer-2010')).to.be.a('string');
+      expect(Semesters.getID('Summer-2040')).to.be.a('string');
       expect(function foo() { Semesters.getID('foobar'); }).to.throw(Error);
     });
 
