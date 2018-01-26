@@ -372,6 +372,15 @@ facultyRoutes.route('/manage-opportunities', {
   },
 });
 
+export const facultyCourseScoreboardPageRouteName = 'Course_Scoreboard_Page';
+facultyRoutes.route('/course-scoreboard', {
+  name: facultyCourseScoreboardPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Faculty_Layout', { main: facultyCourseScoreboardPageRouteName });
+  },
+});
+
 /*                        LANDING ROUTE                       */
 
 export const landingPageRouteName = 'Landing_Page';

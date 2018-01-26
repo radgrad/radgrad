@@ -23,9 +23,12 @@ Template.Faculty_Layout.helpers({
       { label: 'Explorer',
         route: RouteNames.facultyExplorerPageRouteName,
         regex: 'explorer' },
+      { label: 'Course Scoreboard',
+        route: RouteNames.facultyCourseScoreboardPageRouteName,
+        regex: 'course-scoreboard' },
     ];
   },
   secondMenuLength() {
-    return 'four';
+    return 'five';
   },
 });

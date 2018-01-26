@@ -1,3 +1,5 @@
+import './course-scoreboard-page.html';
+import './course-scoreboard-page';
 import './faculty-home-page.html';
 import './faculty-explorer-page.html';
 import './faculty-explorer-careergoals-page.html';
