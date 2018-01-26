@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
-import { Semesters } from '../semester/SemesterCollection';
+import { Semesters } from './SemesterCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
