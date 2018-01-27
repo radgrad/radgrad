@@ -1,0 +1,8 @@
+<template name="Course_Count_Widget">
+  <div class="ui padded segment">
+    <div class="ui dividing header"><h4>{{semesterName}}</h4></div>
+      {{#each count in courseInstances4xx}}
+        {{label count}}
+      {{/each}}
+  </div>
+</template>

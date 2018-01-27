@@ -279,7 +279,7 @@ class CourseInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this.publicationNames.student, function publish() {
-        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
@@ -310,6 +310,10 @@ class CourseInstanceCollection extends BaseCollection {
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
+        // console.log(Roles.userIsInRole(studentID, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]));
+        if (Roles.userIsInRole(studentID, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
+          return instance._collection.find();
+        }
         return instance._collection.find({ studentID });
       });
     }
