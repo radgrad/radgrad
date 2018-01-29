@@ -1,8 +1,5 @@
 <template name="Advisor_Event_Verification_Page">
-  <div class="layout-page">
-    <div class="ui container">
-      {{> Help_Panel_Widget}}
-      {{> Verification_Event }}
-    </div>
-  </div>
+  {{#Advisor_Verification_Layout}}
+    {{> Verification_Event }}
+  {{/Advisor_Verification_Layout}}
 </template>
