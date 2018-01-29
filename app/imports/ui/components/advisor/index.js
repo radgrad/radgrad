@@ -22,6 +22,9 @@ import './add-student-widget';
 import './advisor-log-entry-widget.html';
 import './advisor-log-entry-widget.js';
 
+import './advisor-verification-menu.html';
+import './advisor-verification-menu';
+
 import './plan-starting-semester-form-field.html';
 import './plan-starting-semester-form-field.js';
 
