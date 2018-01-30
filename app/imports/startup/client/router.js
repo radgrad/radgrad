@@ -189,6 +189,15 @@ adminRoutes.route('/analytics', {
   },
 });
 
+export const adminCourseScoreboardPageRouteName = 'Admin_Course_Scoreboard_Page';
+adminRoutes.route('/course-scoreboard', {
+  name: adminCourseScoreboardPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Admin_Layout', { main: adminCourseScoreboardPageRouteName });
+  },
+});
+
 
 /*                        ADVISOR ROUTES                       */
 
@@ -253,6 +262,16 @@ advisorRoutes.route('/academic-plan', {
     BlazeLayout.render('Advisor_Layout', { main: advisorAcademicPlanPageRouteName });
   },
 });
+
+export const advisorCourseScoreboardPageRouteName = 'Advisor_Course_Scoreboard_Page';
+advisorRoutes.route('/course-scoreboard', {
+  name: advisorCourseScoreboardPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Advisor_Layout', { main: advisorCourseScoreboardPageRouteName });
+  },
+});
+
 
 /*                        FACULTY ROUTES                       */
 

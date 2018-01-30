@@ -1,0 +1,14 @@
+<template name="Admin_Course_Scoreboard_Page">
+  <div class="layout-page">
+    <div class="ui container stackable grid ">
+      <div class="row">
+        {{> Help_Panel_Widget }}
+      </div>
+      {{#each semester in upComingSemesters}}
+        <div class="five wide column">
+          {{> Course_Count_Widget semester}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>
