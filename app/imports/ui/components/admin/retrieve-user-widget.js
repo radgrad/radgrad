@@ -42,7 +42,12 @@ Template.Retrieve_User_Widget.helpers({
 Template.Retrieve_User_Widget.events({
   'click .ui.button': function clickUpdateLevels(event) {
     event.preventDefault();
-    updateAllStudentLevelsMethod.call();
+    updateAllStudentLevelsMethod.call((error, result) => {
+      if (error) {
+        console.log('There was an error updating the student levels', error);
+      }
+      console.log(result);
+    });
   },
 });
 

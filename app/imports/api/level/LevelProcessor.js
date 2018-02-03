@@ -2,13 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
+import { getEarnedICE } from '../ice/IceProcessor';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Reviews } from '../review/ReviewCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
-import { Users } from '../user/UserCollection';
-import { getEarnedICE } from '../ice/IceProcessor';
 import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
 import { defineMethod } from '../base/BaseCollection.methods';
+import { calcLevel } from './calcLevel';
 
 /**
  * Calculates the given student's Level.
@@ -16,7 +16,7 @@ import { defineMethod } from '../base/BaseCollection.methods';
  * @returns {number}
  * @memberOf api/level
  */
-export function calcLevel(studentID) {
+export function defaultCalcLevel(studentID) {
   const instances = _.concat(CourseInstances.find({ studentID }).fetch(),
       OpportunityInstances.find({ studentID }).fetch());
   const verified = [];
@@ -28,29 +28,34 @@ export function calcLevel(studentID) {
   const ice = getEarnedICE(verified);
   const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true }).count();
   let level = 1;
-  if (ice.i >= Meteor.settings.public.level.six.i &&
-      ice.c >= Meteor.settings.public.level.six.c &&
-      ice.e >= Meteor.settings.public.level.six.e &&
-      numReviews >= Meteor.settings.public.level.six.reviews) {
+  if (ice.i >= 100 &&
+      ice.c >= 100 &&
+      ice.e >= 100 &&
+      numReviews >= 6) {
     level = 6;
   } else
-    if (ice.i >= Meteor.settings.public.level.five.i &&
-        ice.c >= Meteor.settings.public.level.five.c &&
-        ice.e >= Meteor.settings.public.level.five.e &&
-        numReviews >= Meteor.settings.public.level.five.reviews) {
+    if (ice.i >= 80 &&
+        ice.c >= 80 &&
+        ice.e >= 80 &&
+        numReviews >= 1) {
       level = 5;
     } else
-      if (ice.i >= Meteor.settings.public.level.four.i &&
-          ice.c >= Meteor.settings.public.level.four.c &&
-          ice.e >= Meteor.settings.public.level.four.e) {
+      if (ice.i >= 30 &&
+          ice.c >= 36 &&
+          ice.e >= 30 &&
+          numReviews >= 0) {
         level = 4;
       } else
-        if ((ice.i >= Meteor.settings.public.level.three.i ||
-                ice.e >= Meteor.settings.public.level.three.e) &&
-            ice.c >= Meteor.settings.public.level.three.c) {
+        if ((ice.i >= 1 ||
+                ice.e >= 1) &&
+            ice.c >= 24 &&
+            numReviews >= 0) {
           level = 3;
         } else
-          if (ice.c >= Meteor.settings.public.level.two.c) {
+          if (ice.i >= 0 &&
+              ice.c >= 12 &&
+              ice.e >= 0 &&
+              numReviews >= 0) {
             level = 2;
           }
   // console.log(studentID, ice, numReviews, level);
@@ -64,8 +69,13 @@ export function calcLevel(studentID) {
  * @memberOf api/level
  */
 export function updateStudentLevel(advisor, studentID) {
-  const level = calcLevel(studentID);
-  const profile = Users.getProfile(studentID);
+  let level;
+  if (Meteor.settings.public.level.use_hidden) {
+    level = calcLevel(studentID);
+  } else {
+    level = defaultCalcLevel(studentID);
+  }
+  const profile = StudentProfiles.getProfile(studentID);
   if (profile.level !== level) {
     const text = `Congratulations! ${profile.firstName} you're now Level ${level}.
          Come by to get your RadGrad sticker.`;
@@ -88,8 +98,12 @@ export function updateStudentLevel(advisor, studentID) {
 
 /**
  * Updates all the students level.
+ * @param advisor the advisors ID.
  * @memberOf api/level
  */
-export function updateAllStudentLevels() {
-  StudentProfiles.find().forEach(student => updateStudentLevel(student.userID));
+export function updateAllStudentLevels(advisor) {
+  StudentProfiles.find().forEach((student) => {
+    updateStudentLevel(advisor, student.userID);
+  });
+  return StudentProfiles.find().count();
 }

@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { calcLevel, updateStudentLevel, updateAllStudentLevels } from './LevelProcessor';
+import { updateStudentLevel, updateAllStudentLevels } from './LevelProcessor';
+import { calcLevel } from './calcLevel';
 import { ROLE } from '../role/Role';
 
 /**
@@ -42,6 +43,10 @@ export const updateAllStudentLevelsMethod = new ValidatedMethod({
   name: 'LevelProcessor.updateAllStudentLevels',
   validate: null,
   run() {
-    updateAllStudentLevels();
+    if (!this.userId && Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+      throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.');
+    }
+    const count = updateAllStudentLevels(this.userId);
+    return `Updated ${count} students' levels.`;
   },
 });
