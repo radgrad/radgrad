@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { StudentProfiles } from '../user/StudentProfileCollection';
-import { calcLevel } from './LevelProcessor';
+import { calcLevel, defaultCalcLevel } from './LevelProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { ROLE } from '../role/Role';
 
@@ -31,7 +31,12 @@ if (Meteor.isServer) {
         role: ROLE.STUDENT,
         password: 'foo',
       });
-      const level = calcLevel(studentID);
+      let level;
+      if (Meteor.settings.public.level.use_hidden) {
+        level = calcLevel(studentID);
+      } else {
+        level = defaultCalcLevel(studentID);
+      }
       expect(level).to.equal(1);
     });
   });

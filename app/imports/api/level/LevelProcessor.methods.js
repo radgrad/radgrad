@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { updateStudentLevel, updateAllStudentLevels } from './LevelProcessor';
+import { updateStudentLevel, updateAllStudentLevels, defaultCalcLevel } from './LevelProcessor';
 import { calcLevel } from './calcLevel';
 import { ROLE } from '../role/Role';
 
@@ -16,7 +16,11 @@ export const calcLevelMethod = new ValidatedMethod({
     if (!this.userId && Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
       throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.');
     }
-    calcLevel(studentID);
+    if (Meteor.settings.public.level.use_hidden) {
+      calcLevel(studentID);
+    } else {
+      defaultCalcLevel(studentID);
+    }
   },
 });
 

@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
@@ -15,7 +16,8 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import { calcLevel } from '../../../api/level/LevelProcessor';
+import { defaultCalcLevel } from '../../../api/level/LevelProcessor';
+import { calcLevel } from '../../../api/level/calcLevel';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { appLog } from '../../../api/log/AppLogCollection';
@@ -49,7 +51,10 @@ Template.Update_Student_Widget.onCreated(function updateDegreePlanWidgetOnCreate
 Template.Update_Student_Widget.helpers({
   calcLevel() {
     if (Template.currentData().studentID.get()) {
-      return calcLevel(Template.currentData().studentID.get());
+      if (Meteor.settings.public.level.use_hidden) {
+        return calcLevel(Template.currentData().studentID.get());
+      }
+      return defaultCalcLevel(Template.currentData().studentID.get());
     }
     return 0;
   },
