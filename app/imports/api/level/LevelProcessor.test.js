@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { StudentProfiles } from '../user/StudentProfileCollection';
-import { calcLevel, defaultCalcLevel } from './LevelProcessor';
+import { defaultCalcLevel } from './LevelProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
-import { ROLE } from '../role/Role';
+import { RadGrad } from '../radgrad/RadGrad';
 
 /* eslint prefer-arrow-callback: 'off', no-unused-expressions: 'off' */
 /* eslint-env mocha */
@@ -22,18 +22,16 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it.skip('Level 1 Student', function test() {
+    it('Level 1 Student', function test() {
       studentID = StudentProfiles.define({
+        username: 'levelone@hawaii.edu',
         firstName: 'Level',
         lastName: 'One',
-        slug: 'levelone',
-        email: 'levelone@hawaii.edu',
-        role: ROLE.STUDENT,
-        password: 'foo',
+        level: 6,
       });
       let level;
-      if (Meteor.settings.public.level.use_hidden) {
-        level = calcLevel(studentID);
+      if (RadGrad.calcLevel) {
+        level = RadGrad.calcLevel(studentID);
       } else {
         level = defaultCalcLevel(studentID);
       }

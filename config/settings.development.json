@@ -15,7 +15,6 @@
     "admin": { "username": "radgrad@hawaii.edu", "development": true },
     "cloudinary": {"cloud_name": "radgrad", "upload_preset": "CHANGEME"},
     "level": {
-      "use_hidden" : false,
       "six": {"i": 100, "c": 100, "e": 100, "reviews": 6},
       "five": {"i": 80, "c": 80, "e": 80, "reviews": 1},
       "four": {"i": 30, "c": 36, "e": 30, "reviews": 0},

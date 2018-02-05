@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
@@ -8,7 +7,7 @@ import { Reviews } from '../review/ReviewCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
 import { defineMethod } from '../base/BaseCollection.methods';
-import { calcLevel } from './calcLevel';
+import { RadGrad } from '../radgrad/RadGrad';
 
 /**
  * Calculates the given student's Level.
@@ -70,8 +69,8 @@ export function defaultCalcLevel(studentID) {
  */
 export function updateStudentLevel(advisor, studentID) {
   let level;
-  if (Meteor.settings.public.level.use_hidden) {
-    level = calcLevel(studentID);
+  if (RadGrad.calcLevel) {
+    level = RadGrad.calcLevel(studentID);
   } else {
     level = defaultCalcLevel(studentID);
   }

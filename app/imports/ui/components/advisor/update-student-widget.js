@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
@@ -17,10 +16,10 @@ import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.met
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { defaultCalcLevel } from '../../../api/level/LevelProcessor';
-import { calcLevel } from '../../../api/level/calcLevel';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { appLog } from '../../../api/log/AppLogCollection';
+import { RadGrad } from '../../../api/radgrad/RadGrad';
 
 const updateSchema = new SimpleSchema({
   username: String,
@@ -51,8 +50,8 @@ Template.Update_Student_Widget.onCreated(function updateDegreePlanWidgetOnCreate
 Template.Update_Student_Widget.helpers({
   calcLevel() {
     if (Template.currentData().studentID.get()) {
-      if (Meteor.settings.public.level.use_hidden) {
-        return calcLevel(Template.currentData().studentID.get());
+      if (RadGrad.calcLevel) {
+        return RadGrad.calcLevel(Template.currentData().studentID.get());
       }
       return defaultCalcLevel(Template.currentData().studentID.get());
     }
@@ -61,7 +60,10 @@ Template.Update_Student_Widget.helpers({
   hasNewLevel() {
     if (Template.currentData().studentID.get()) {
       const user = Users.getProfile(Template.currentData().studentID.get());
-      return user.level !== calcLevel(Template.currentData().studentID.get());
+      if (RadGrad.calcLevel) {
+        return user.level !== RadGrad.calcLevel(Template.currentData().studentID.get());
+      }
+      return user.level !== defaultCalcLevel(Template.currentData().studentID.get());
     }
     return false;
   },
