@@ -36,6 +36,7 @@
   * [CAS Authentication](developerguide/cas.md)
   * [Cloudinary Image Service](developerguide/cloudinary.md)
   * [Bulk STAR Data Upload](developerguide/star-bulk-download.md)
+  * [Level Calculation](developerguide/level-calculation.md)
 
 ### Data Model
 

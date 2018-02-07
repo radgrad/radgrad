@@ -17,10 +17,9 @@ export const calcLevelMethod = new ValidatedMethod({
       throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.');
     }
     if (RadGrad.calcLevel) {
-      RadGrad.calcLevel(studentID);
-    } else {
-      defaultCalcLevel(studentID);
+      return RadGrad.calcLevel(studentID);
     }
+    return defaultCalcLevel(studentID);
   },
 });
 
