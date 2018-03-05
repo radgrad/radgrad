@@ -28,6 +28,7 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 import { Teasers } from '../teaser/TeaserCollection';
+import { UserInteractions } from '../log/UserInteractionCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /**
@@ -69,6 +70,7 @@ class RadGradClass {
       Slugs,
       StudentProfiles,
       Teasers,
+      UserInteractions,
       VerificationRequests,
     ];
 
@@ -102,6 +104,7 @@ class RadGradClass {
       VerificationRequests,
       Feeds,
       AdvisorLogs,
+      UserInteractions,
       MentorQuestions,
       MentorAnswers,
       Reviews,
