@@ -18,6 +18,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
+import { UserInteractions } from '../../../api/log/UserInteractionCollection';
 import { Users } from '../../../api/user/UserCollection';
 
 /* eslint-disable object-shorthand */
@@ -55,6 +56,7 @@ Template.With_Global_Subscriptions.onCreated(function onCreated() {
     globalSubs.subscribe(Slugs.getPublicationName());
     globalSubs.subscribe(Teasers.getPublicationName());
     globalSubs.subscribe(Users.getPublicationName());
+    globalSubs.subscribe(UserInteractions.getPublicationName());
     self.ready.set(globalSubs.ready());
   });
 });
