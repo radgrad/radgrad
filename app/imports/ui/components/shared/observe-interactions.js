@@ -17,7 +17,6 @@ Template.Observe_Interactions.helpers({
           const type = Object.keys(field).toString();
           let typeData = Object.values(field).toString();
           if (typeData === '') typeData = 'n/a';
-          console.log(userID, type, typeData);
           setTimeout(function () {
             userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
               if (error) {
