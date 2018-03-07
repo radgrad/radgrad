@@ -21,6 +21,7 @@
   "dependencies": {
     "fs": "0.0.1-security",
     "inquirer": "^4.0.2",
+    "lodash": "^4.17.5",
     "request": "^2.83.0"
   }
 }

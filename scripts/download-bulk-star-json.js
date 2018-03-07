@@ -1,6 +1,7 @@
 const request = require('request');
 const fs = require('fs');
 const inquirer = require('inquirer');
+const _ = require('lodash');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -25,6 +26,42 @@ function testRadgradCourses(username, password) {
       return res(httpRes);
     });
   });
+}
+
+function filterAlumni(contents) {
+  const re = /ics|ee/i;
+  const alumniEmail = [];
+  const data = JSON.parse(contents);
+  // console.log(data);
+  _.forEach(data, (student) => {
+    let alumni = true;
+    // console.log(student.courses);
+    _.forEach(student.courses, (c) => {
+      if (c.name.match(re)) {
+        alumni = false;
+      }
+    });
+    if (alumni) {
+      alumniEmail.push(student.email);
+    }
+    console.log(`${student.email} is alumni = ${alumni}.`);
+  });
+  const filtered = _.filter(data, function (d) {
+    let student = false;
+    // console.log(student.courses);
+    _.forEach(d.courses, (c) => {
+      if (c.name.match(re)) {
+        student = true;
+      }
+    });
+    return student;
+  });
+  fs.writeFile('alumni.txt', alumniEmail.join('\n'), 'utf8', (err) => {
+    if (err) {
+      console.log(`Error writing alumni.txt ${err.message}`);
+    }
+  });
+  return JSON.stringify(filtered, null, ' ');
 }
 
 async function downloadStarData() {
@@ -66,7 +103,7 @@ async function downloadStarData() {
 
   const r = await inquirer.prompt(questions);
   testRadgradCourses(r.username, r.password)
-      .then(res => fs.writeFileSync(r.filename, res.body))
+      .then(res => fs.writeFileSync(r.filename, filterAlumni(res.body)))
       .catch(err => console.log(err));
 }
 
