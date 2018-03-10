@@ -1,7 +1,4 @@
-emails.txt
-
+emails*.txt
 star*.json
-
 node_modules
-
-alumni.txt
+alumni*.txt
