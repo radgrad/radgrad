@@ -3,6 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { appLog } from '../../api/log/AppLogCollection';
+import { userInteractionDefineMethod } from '../../api/log/UserInteractionCollection.methods';
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY',
@@ -28,6 +29,16 @@ Accounts.onLogin(function onLogin() {
     // console.log('processing initial login');
     const username = Meteor.user().username;
     const role = Roles.getRolesForUser(id)[0];
+    if (role === 'STUDENT') {
+      const userID = id;
+      const type = 'login';
+      const typeData = 'N/A';
+      userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
+        if (error) {
+          console.log('Error creating UserInteraction.', error);
+        }
+      });
+    }
     appLog.info(`${username} logged in.`);
     FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
   }
