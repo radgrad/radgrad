@@ -1,8 +1,12 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { Roles } from 'meteor/alanning:roles';
+import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { appLog } from '../../api/log/AppLogCollection';
+import { userInteractionDefineMethod } from '../../api/log/UserInteractionCollection.methods';
+import { ROLE } from '../../api/role/Role';
 
 /*
  * Design notes:
@@ -20,6 +24,22 @@ function addBodyClass() {
 function removeBodyClass() {
   $('body').removeClass('radgrad-background-color');
   $('body').removeClass('layout-body');
+}
+
+// This creates a UserInteraction document referencing the page visited by user
+// Currently only used for student routes
+function trackPath() {
+  if (Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
+    const userID = Meteor.userId();
+    const type = 'pageView';
+    const path = FlowRouter.current().path;
+    const typeData = path.substr(path.indexOf('/', 9) + 1);
+    userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
+      if (error) {
+        console.log('Error creating UserInteraction.', error);
+      }
+    });
+  }
 }
 
 /*                        APP LOGGING                        */
@@ -650,6 +670,7 @@ const studentRoutes = FlowRouter.group({
 export const studentExplorerCareerGoalsPageRouteName = 'Student_Explorer_CareerGoals_Page';
 studentRoutes.route('/explorer/career-goals/:careerGoal', {
   name: studentExplorerCareerGoalsPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerCareerGoalsPageRouteName });
@@ -659,6 +680,7 @@ studentRoutes.route('/explorer/career-goals/:careerGoal', {
 export const studentExplorerCoursesPageRouteName = 'Student_Explorer_Courses_Page';
 studentRoutes.route('/explorer/courses/:course', {
   name: studentExplorerCoursesPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerCoursesPageRouteName });
@@ -668,6 +690,7 @@ studentRoutes.route('/explorer/courses/:course', {
 export const studentExplorerDegreesPageRouteName = 'Student_Explorer_Degrees_Page';
 studentRoutes.route('/explorer/degrees/:degree', {
   name: studentExplorerDegreesPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerDegreesPageRouteName });
@@ -677,6 +700,7 @@ studentRoutes.route('/explorer/degrees/:degree', {
 export const studentExplorerPlansPageRouteName = 'Student_Explorer_Plans_Page';
 studentRoutes.route('/explorer/plans/:plan', {
   name: studentExplorerPlansPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerPlansPageRouteName });
@@ -686,6 +710,7 @@ studentRoutes.route('/explorer/plans/:plan', {
 export const studentExplorerInterestsPageRouteName = 'Student_Explorer_Interests_Page';
 studentRoutes.route('/explorer/interests/:interest', {
   name: studentExplorerInterestsPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerInterestsPageRouteName });
@@ -695,6 +720,7 @@ studentRoutes.route('/explorer/interests/:interest', {
 export const studentExplorerOpportunitiesPageRouteName = 'Student_Explorer_Opportunities_Page';
 studentRoutes.route('/explorer/opportunities/:opportunity', {
   name: studentExplorerOpportunitiesPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerOpportunitiesPageRouteName });
@@ -704,6 +730,7 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
 export const studentExplorerUsersPageRouteName = 'Student_Explorer_Users_Page';
 studentRoutes.route('/explorer/users/:explorerUserName', {
   name: studentExplorerUsersPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerUsersPageRouteName });
@@ -713,6 +740,7 @@ studentRoutes.route('/explorer/users/:explorerUserName', {
 export const studentHomePageRouteName = 'Student_Home_Page';
 studentRoutes.route('/home', {
   name: studentHomePageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomePageRouteName });
@@ -722,6 +750,7 @@ studentRoutes.route('/home', {
 export const studentHomeAboutMePageRouteName = 'Student_Home_AboutMe_Page';
 studentRoutes.route('/home/aboutme', {
   name: studentHomeAboutMePageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomeAboutMePageRouteName });
@@ -731,6 +760,7 @@ studentRoutes.route('/home/aboutme', {
 export const studentHomeLogPageRouteName = 'Student_Home_Log_Page';
 studentRoutes.route('/home/log', {
   name: studentHomeLogPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomeLogPageRouteName });
@@ -740,6 +770,7 @@ studentRoutes.route('/home/log', {
 export const studentHomeLevelsPageRouteName = 'Student_Home_Levels_Page';
 studentRoutes.route('/home/levels', {
   name: studentHomeLevelsPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomeLevelsPageRouteName });
@@ -749,6 +780,7 @@ studentRoutes.route('/home/levels', {
 export const studentHomeIcePageRouteName = 'Student_Home_Ice_Page';
 studentRoutes.route('/home/ice', {
   name: studentHomeIcePageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentHomeIcePageRouteName });
@@ -758,6 +790,7 @@ studentRoutes.route('/home/ice', {
 export const studentDegreePlannerPageRouteName = 'Student_Degree_Planner_Page';
 studentRoutes.route('/degree-planner', {
   name: studentDegreePlannerPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentDegreePlannerPageRouteName });
@@ -767,6 +800,7 @@ studentRoutes.route('/degree-planner', {
 export const studentMentorSpacePageRouteName = 'Student_MentorSpace_Page';
 studentRoutes.route('/mentor-space', {
   name: studentMentorSpacePageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentMentorSpacePageRouteName });
@@ -776,6 +810,7 @@ studentRoutes.route('/mentor-space', {
 export const studentExplorerPageRouteName = 'Student_Explorer_Page';
 studentRoutes.route('/explorer', {
   name: studentExplorerPageRouteName,
+  triggersEnter: [trackPath],
   action() {
     appLog.info(`${FlowRouter.current().path}`);
     BlazeLayout.render('Student_Layout', { main: studentExplorerPageRouteName });

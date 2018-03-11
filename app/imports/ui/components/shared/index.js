@@ -20,6 +20,9 @@ import './interest-list.js';
 import './moderation.html';
 import './moderation.js';
 
+import './observe-interactions.html';
+import './observe-interactions';
+
 import './review-ratings.js';
 
 import './route-user-name.js';
