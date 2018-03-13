@@ -8,6 +8,13 @@ import { ROLE } from '../role/Role';
  * Represents a log of user interactions with RadGrad.
  * An interaction may be a profile update or a page visit, such as a student updating their
  * career goals, or visiting the degree planner.
+ *
+ * userID is the Meteor.userId of the user who performed the action.
+ * type is one of the following:
+ *   pageView: the user is now visiting a page.  (typeData: path to page)
+ *   login: the user has just logged in. (typeData: "N/A").
+ *   interestIDs, careerGoalIDs, academicPlanIDs, declaredSemesterID, picture, website: user modifies fields.
+ *   (typeData: shows the new set of IDs after the modification).
  * @extends api/base.BaseCollection
  * @memberOf api/log
  */
