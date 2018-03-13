@@ -43,8 +43,10 @@ class AppLogCollection extends BaseCollection {
     if (Meteor.isServer) {
       // Meteor.publish(this._collectionName, () => this._collection.find());
       const instance = this;
+      const windowMilliSeconds = 1000 * 60 * 60 * 24; // One day.
       Meteor.publish(this._collectionName, function publish() {
-        return (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) ? instance._collection.find() : [];
+        return (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) ?
+          instance._collection.find({ date: { $gt: new Date(Date.now() - windowMilliSeconds) } }, { sort: { timestamp: -1 } }) : []; // eslint-disable-line
       });
     }
   }

@@ -8,8 +8,7 @@ Template.Event_Log_Widget.onCreated(function onCreated() {
 
 Template.Event_Log_Widget.helpers({
   logs() {
-    const windowMilliSeconds = 1000 * 60 * 60 * 24; // One day.
-    return AppLogs.find({ date: { $gt: new Date(Date.now() - windowMilliSeconds) } }, { sort: { timestamp: -1 } });
+    return AppLogs.find();
   },
   user(userID) {
     return (Users.isDefined(userID)) ? Users.getFullName(userID) : '?';
