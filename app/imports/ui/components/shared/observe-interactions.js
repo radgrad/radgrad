@@ -7,7 +7,6 @@ let cursorHandle;
 
 Template.Observe_Interactions.helpers({
   startObserve() {
-    console.log('startObserve started!');
     if (Meteor.userId()) {
       const studentDocumentsCursor = StudentProfiles.find({ userID: `${Meteor.userId()}` });
       cursorHandle = studentDocumentsCursor.observeChanges({
@@ -32,5 +31,4 @@ Template.Observe_Interactions.helpers({
 
 Template.Observe_Interactions.onDestroyed(function () {
   cursorHandle.stop();
-  console.log('stopped observeChanges');
 });
