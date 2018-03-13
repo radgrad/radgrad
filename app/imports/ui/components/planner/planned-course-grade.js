@@ -50,7 +50,7 @@ Template.Planned_Course_Grade.events({
         const course = CourseInstances.getCourseDoc(ci._id);
         const semester = Semesters.toString(ci.semesterID);
         // eslint-disable-next-line
-        const message = `${getRouteUserName()} updated planned grade for ${ci.note} ${course.shortName} (${semester}) to ${grade}.`;
+        const message = `${getRouteUserName()} updated planned grade for ${ci.note} ${course.shortName} (${semester}) to ${updateData.grade}.`;
         appLog.info(message);
       } else {
         console.log('Error updating grade', error);
