@@ -124,5 +124,8 @@ import './update-user-widget-mentor';
 import './update-user-widget-student.html';
 import './update-user-widget-student';
 
+import './user-interactions-widget.html';
+import './user-interactions-widget';
+
 import './user-status-widget.html';
 import './user-status-widget';

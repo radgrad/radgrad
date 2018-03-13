@@ -209,6 +209,15 @@ adminRoutes.route('/analytics', {
   },
 });
 
+export const adminAnalyticsUserInteractionsPageRouteName = 'Admin_Analytics_User_Interactions_Page';
+adminRoutes.route('/analytics/user-interactions', {
+  name: adminAnalyticsUserInteractionsPageRouteName,
+  action() {
+    appLog.info(`${FlowRouter.current().path}`);
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsUserInteractionsPageRouteName });
+  },
+});
+
 export const adminCourseScoreboardPageRouteName = 'Admin_Course_Scoreboard_Page';
 adminRoutes.route('/course-scoreboard', {
   name: adminCourseScoreboardPageRouteName,

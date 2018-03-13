@@ -5,4 +5,7 @@ Template.Admin_Analytics_Menu.helpers({
   analyticsHomeRouteName() {
     return RouteNames.adminAnalyticsHomePageRouteName;
   },
+  userInteractionsRouteName() {
+    return RouteNames.adminAnalyticsUserInteractionsPageRouteName;
+  },
 });
