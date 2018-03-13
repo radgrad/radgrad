@@ -1,0 +1,40 @@
+<template name="User_Interactions_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>USERS</h4></div>
+    <div class="ui stackable grid">
+      {{#each user in users studentRole}}
+        <div class="four wide column" style="padding: 2px;">
+          <button class="ui tiny grey basic fluid button" style="text-align: left;" value={{user.userID}}>
+            {{label user}}
+          </button>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>USER INTERACTIONS</h4></div>
+    <div class="ui stackable grid">
+      <div style="height: 300px; overflow-x: scroll; width: 100%;">
+        <table class="ui celled padded table">
+          <thead>
+            <tr>
+              <th>Interaction</th>
+              <th>Interaction Type</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+          {{#each interaction in interactions}}
+            <tr>
+              <td>{{interaction.type}}</td>
+              <td>{{interaction.typeData}}</td>
+              <td>{{interaction.timestamp}}</td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</template>
