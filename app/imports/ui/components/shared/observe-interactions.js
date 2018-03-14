@@ -1,13 +1,15 @@
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { Template } from 'meteor/templating';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { userInteractionDefineMethod } from '../../../api/log/UserInteractionCollection.methods';
+import { ROLE } from '../../../api/role/Role';
 
 let cursorHandle;
 
 Template.Observe_Interactions.helpers({
   startObserve() {
-    if (Meteor.userId()) {
+    if (Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
       const studentDocumentsCursor = StudentProfiles.find({ userID: `${Meteor.userId()}` });
       cursorHandle = studentDocumentsCursor.observeChanges({
         // This assumes that only one field is modified at a time by the student.

@@ -19,8 +19,8 @@
         <table class="ui celled padded table">
           <thead>
             <tr>
-              <th>Interaction</th>
-              <th>Interaction Type</th>
+              <th>Type</th>
+              <th>Type Data</th>
               <th>Timestamp</th>
             </tr>
           </thead>
@@ -29,7 +29,7 @@
             <tr>
               <td>{{interaction.type}}</td>
               <td>{{interaction.typeData}}</td>
-              <td>{{interaction.timestamp}}</td>
+              <td>{{formatDate interaction.timestamp}}</td>
             </tr>
           {{/each}}
           </tbody>

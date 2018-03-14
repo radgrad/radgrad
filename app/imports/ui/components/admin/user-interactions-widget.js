@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { moment } from 'meteor/momentjs:moment';
 import { Users } from '../../../api/user/UserCollection.js';
 import { UserInteractions } from '../../../api/log/UserInteractionCollection';
 import { ROLE } from '../../../api/role/Role.js';
@@ -20,7 +21,10 @@ Template.User_Interactions_Widget.helpers({
   },
   interactions() {
     const userID = Template.instance().selectedUserID.get();
-    return UserInteractions.find({ userID: userID });
+    return UserInteractions.find({ userID: userID }, { sort: { timestamp: -1 } });
+  },
+  formatDate(date) {
+    return moment(date).format('MM/DD/YY HH:mm');
   },
 });
 
