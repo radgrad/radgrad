@@ -27,7 +27,7 @@ class UserInteractionCollection extends BaseCollection {
     super('UserInteraction', new SimpleSchema({
       userID: { type: String },
       type: { type: String },
-      typeData: { type: String },
+      typeData: [String],
       timestamp: { type: Date },
     }));
   }
