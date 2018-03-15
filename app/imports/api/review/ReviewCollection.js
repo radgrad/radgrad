@@ -134,7 +134,7 @@ class ReviewCollection extends BaseSlugCollection {
     if (semester) {
       updateData.semesterID = Semesters.getID(semester);
     }
-    if (rating) {
+    if (_.isNumber(rating)) {
       this.assertValidRating(rating);
       updateData.rating = rating;
     }
