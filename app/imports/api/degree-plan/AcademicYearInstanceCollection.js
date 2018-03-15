@@ -96,10 +96,10 @@ class AcademicYearInstanceCollection extends BaseCollection {
   update(docID, { year, springYear, studentID, semesterIDs }) {
     this.assertDefined(docID);
     const updateData = {};
-    if (year) {
+    if (_.isNumber(year)) {
       updateData.year = year;
     }
-    if (springYear) {
+    if (_.isNumber(springYear)) {
       updateData.springYear = springYear;
     }
     if (studentID) {
