@@ -31,7 +31,7 @@ Template.Semester_List_2.helpers({
     if (Template.instance().data.semester) {
       return CourseInstances.find({
         studentID: getUserIdFromRoute(),
-        note: /ICS/,
+        note: /ICS|EE|CEE|ME|OE|BE/,
         semesterID: Template.instance().data.semester._id,
       }, { sort: { note: 1 } }).fetch();
     }
