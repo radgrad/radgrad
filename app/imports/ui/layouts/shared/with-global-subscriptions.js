@@ -13,6 +13,7 @@ import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
+import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { Reviews } from '../../../api/review/ReviewCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
@@ -31,7 +32,7 @@ import { Users } from '../../../api/user/UserCollection';
 
 // cacheLimit default is 10, so increased to handle all our subscriptions.
 // expireLimit set to 30 minutes because: why not.
-const globalSubs = new SubsManager({ cacheLimit: 20, expireIn: 30 });
+const globalSubs = new SubsManager({ cacheLimit: 21, expireIn: 30 });
 
 Template.With_Global_Subscriptions.onCreated(function onCreated() {
   const self = this;
@@ -49,6 +50,7 @@ Template.With_Global_Subscriptions.onCreated(function onCreated() {
     globalSubs.subscribe(MentorProfiles.getPublicationName());
     globalSubs.subscribe(Opportunities.getPublicationName());
     globalSubs.subscribe(OpportunityTypes.getPublicationName());
+    globalSubs.subscribe(PlanChoices.getPublicationName());
     globalSubs.subscribe(Reviews.getPublicationName());
     globalSubs.subscribe(Semesters.getPublicationName());
     globalSubs.subscribe(StudentProfiles.getPublicationName());

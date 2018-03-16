@@ -1,0 +1,15 @@
+<template name="Add_Plan_Choice_Widget">
+    <div class="ui padded container segment">
+        <div class="ui dividing header"><h4>ADD PLAN CHOICE</h4></div>
+        <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+            <div class="fields">
+                {{> Input_Form_Field label="Choice" name="choice" placeholder="ics_100" errorMessage=(fieldError "choice") required=true}}
+            </div>
+
+            <button class="ui green basic button" type="submit">Add</button>
+
+            {{> Success_Message_Form_Field message="The Plan Choice was successfully added."}}
+        </form>
+    </div>
+</template>

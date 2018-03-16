@@ -20,6 +20,9 @@ import './add-opportunity-instance-widget.js';
 import './add-opportunity-widget.html';
 import './add-opportunity-widget.js';
 
+import './add-plan-choice-widget.html';
+import './add-plan-choice-widget';
+
 import './add-review-widget.html';
 import './add-review-widget.js';
 
@@ -76,6 +79,9 @@ import './list-opportunity-instances-widget.js';
 import './list-opportunities-widget.html';
 import './list-opportunities-widget.js';
 
+import './list-plan-choice-widget.html';
+import './list-plan-choice-widget';
+
 import './list-reviews-widget.html';
 import './list-reviews-widget.js';
 
@@ -111,6 +117,9 @@ import './update-opportunity-instance-widget.js';
 
 import './update-opportunity-widget.html';
 import './update-opportunity-widget.js';
+
+import './update-plan-choice-widget.html';
+import './update-plan-choice-widget';
 
 import './update-teaser-widget.html';
 import './update-teaser-widget.js';

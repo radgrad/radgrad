@@ -48,7 +48,7 @@ Template.Student_Selector_Tabs.helpers({
   name(user, tooltip) {
     const name = `${user.lastName}, ${user.firstName}`;
     if (!tooltip) {
-      return name.length > 15 ? `${name.substring(0, 15)}...` : name;
+      return name.length > 13 ? `${name.substring(0, 13)}...` : name;
     }
     return name;
   },
@@ -72,6 +72,10 @@ Template.Student_Selector_Tabs.helpers({
   username() {
     return Template.instance().state.get('username');
   },
+  level(user) {
+    return user.level;
+  },
+
 });
 
 Template.Student_Selector_Tabs.events({
