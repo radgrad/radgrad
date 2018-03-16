@@ -60,7 +60,7 @@ Template.Add_Student_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
-    console.log(newData);
+    // console.log(newData);
     instance.context.reset();
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
