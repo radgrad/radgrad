@@ -35,6 +35,9 @@ import './admin-datamodel-opportunity-instances-page.js';
 
 import './admin-datamodel-page.html';
 
+import './admin-datamodel-plan-choice-page.html';
+import './admin-datamodel-plan-choice-page';
+
 import './admin-datamodel-reviews-page.html';
 import './admin-datamodel-reviews-page.js';
 

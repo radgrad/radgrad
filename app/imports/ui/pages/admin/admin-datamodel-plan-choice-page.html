@@ -1,0 +1,14 @@
+<template name="Admin_DataModel_Plan_Choice_Page">
+    {{#if Template.subscriptionsReady}}
+        {{#Admin_DataModel_Layout}}
+            {{#if displayUpdateWidget}}
+                {{> Update_Plan_Choice_Widget updateID=updateID}}
+            {{else}}
+                {{> Add_Plan_Choice_Widget }}
+            {{/if}}
+            {{> List_Plan_Choice_Widget updateID=updateID}}
+        {{/Admin_DataModel_Layout}}
+    {{else}}
+        {{> Loading message="Waiting for subscriptions."}}
+    {{/if}}
+</template>
