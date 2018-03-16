@@ -1,26 +1,50 @@
-// import { Meteor } from 'meteor/meteor';
-// import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
+import { Users } from '/imports/api/user/UserCollection';
 
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-param-reassign */
 
-/* Validate username, sending a specific error message on failure. */
-// Accounts.validateNewUser(function validate(user) {
+const errorMessage = 'User not registered with RadGrad.';
+
+/* Make sure that the person attempting to login has a profile. Otherwise they are not logged in. */
+Accounts.validateNewUser(function validate(user) {
+  if (user) {
+    if (user.services.cas) {
+      const username = user.services.cas.id;
+      if (username && Users.hasProfile(username)) {
+        return true;
+      }
+      throw new Meteor.Error(403, errorMessage);
+    } else if (user.services.password) {
+      const username = user.username;
+      if (username && Users.hasProfile(username)) {
+        return true;
+      }
+      throw new Meteor.Error(403, errorMessage);
+    }
+  }
+  throw new Meteor.Error(403, errorMessage);
+});
+
+// // THIS CODE DOES NOT WORK, SO IT IS COMMENTED OUT.
+// // IT IS AN ATTEMPT TO ALLOW MIXED CASE LOGINS THROUGH CAS
+// /* Make sure that the username is all lower case. */
+// Accounts.onCreateUser((options, user) => {
 //   if (user) {
-//     if (user.services.cas) {
-//       const username = user.services.cas.id;
-//       if (username && ValidUserAccounts.find({ username }).count() > 0) {
-//         return true;
-//       }
-//       throw new Meteor.Error(403, 'User not in the allowed list');
-//     } else if (user.services.password) {
-//       const username = user.username;
-//       if (username && ValidUserAccounts.find({ username }).count() > 0) {
-//         return true;
-//       }
-//       throw new Meteor.Error(403, 'User not in the allowed list');
+//     if (user.services && user.services.cas) {
+//       user.services.cas.id = user.services.cas.id.toLowerCase();
+//     }
+//     if (user.username) {
+//       user.username = user.username.toLowerCase();
 //     }
 //   }
-//   throw new Meteor.Error(403, 'User not in the allowed list');
+//   if (options.profile) {
+//     user.profile = options.profile;
+//     if (user.profile.name) {
+//       user.profile.name = user.profile.name.toLowerCase();
+//     }
+//   }
+//   return user;
 // });
 
 
