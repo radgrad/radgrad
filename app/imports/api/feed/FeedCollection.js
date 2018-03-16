@@ -475,6 +475,15 @@ class FeedCollection extends BaseCollection {
     const timestamp = doc.timestamp;
     return { user, opportunity, course, semester, feedType, timestamp };
   }
+
+  /**
+   * Publish a maximum of the last 25 feeds to users
+   */
+  publish() {
+    if (Meteor.isServer) {
+      Meteor.publish(this._collectionName, () => this._collection.find({}, { sort: { timestamp: -1 }, limit: 25 }));
+    }
+  }
 }
 
 /**
