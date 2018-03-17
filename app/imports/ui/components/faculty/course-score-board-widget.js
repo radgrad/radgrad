@@ -98,6 +98,10 @@ Template.Course_Score_Board_Widget.helpers({
 });
 
 Template.Course_Score_Board_Widget.events({
+  click: function (event, instance) {
+    event.preventDefault();
+    console.log(event.target, instance);
+  },
   'click .jsByICS': function clickedInterests(event, instance) {
     event.preventDefault();
     // console.log(event.target, 'filter by ICS');
@@ -110,22 +114,22 @@ Template.Course_Score_Board_Widget.events({
   },
   'click .jsBy1xx': function clickedHighE(event, instance) {
     event.preventDefault();
-    console.log(event.target, 'filter by 1xx');
+    // console.log(event.target, 'filter by 1xx');
     instance.by1xx.set(!instance.by1xx.get());
   },
   'click .jsBy2xx': function clickedHighE(event, instance) {
     event.preventDefault();
-    console.log(event.target, 'filter by 2xx');
+    // console.log(event.target, 'filter by 2xx');
     instance.by2xx.set(!instance.by2xx.get());
   },
   'click .jsBy3xx': function clickedHighI(event, instance) {
     event.preventDefault();
-    console.log(event.target, 'filter by 3xx');
+    // console.log(event.target, 'filter by 3xx');
     instance.by3xx.set(!instance.by3xx.get());
   },
   'click .jsBy4xx': function clickedHighI(event, instance) {
     event.preventDefault();
-    console.log(event.target, 'filter by 4xx');
+    // console.log(event.target, 'filter by 4xx');
     instance.by4xx.set(!instance.by4xx.get());
   },
 });
