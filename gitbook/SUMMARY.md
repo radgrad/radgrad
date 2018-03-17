@@ -56,6 +56,10 @@
 * [Pub-Sub Caching](datamodel/pub-sub.md)
 * [Integrity Checking](datamodel/integrity-checking.md)
 
+### Onboard Analytics
+
+* [Overview](analytics/overview.md)
+
 ### User interface
 
 * Layouts, pages, components
