@@ -1,0 +1,51 @@
+<template name="Course_Score_Board_Widget">
+    <div class="ui segment">
+        <h4 class="ui dividing header">Filter By</h4>
+        <div class="field">
+            <div class="ui radio checkbox {{#if isICS}}checked{{/if}}">
+                <input type="checkbox" name="ics" checked={{isICS}} value="true" class="hidden" tabindex="0">
+                <label class="jsByICS">ICS </label>
+            </div>
+            <div class="ui radio checkbox {{#if isEE}}checked{{/if}}">
+                <input type="radio" name="ee" checked={{isEE}} value="true" class="hidden" tabindex="0">
+                <label class="jsByEE">EE </label>
+            </div>
+            <div class="ui radio checkbox {{#if is1xx}}checked{{/if}}">
+                <input type="radio" name="1xx" checked={{is1xx}} value="true" class="hidden" tabindex="0">
+                <label class="jsBy1xx">1xx</label>
+            </div>
+            <div class="ui radio checkbox {{#if is2xx}}checked{{/if}}">
+                <input type="radio" name="2xx" checked={{is2xx}} value="true" class="hidden" tabindex="0">
+                <label class="jsBy2xx">2xx</label>
+            </div>
+            <div class="ui radio checkbox {{#if is3xx}}checked{{/if}}">
+                <input type="radio" name="3xx" checked={{is3xx}} value="true" class="hidden" tabindex="0">
+                <label class="jsBy3xx">3xx</label>
+            </div>
+            <div class="ui radio checkbox {{#if is4xx}}checked{{/if}}">
+                <input type="radio" name="4xx" checked={{is4xx}} value="true" class="hidden" tabindex="0">
+                <label class="jsBy4xx">4xx</label>
+            </div>
+        </div>
+    </div>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Course</th>
+            {{#each semester in upcomingSemesters}}
+                <th>{{semesterName semester}}</th>
+            {{/each}}
+        </tr>
+        </thead>
+        <tbody>
+        {{#each course in courses}}
+            <tr>
+                <td>{{courseName course}}</td>
+                {{#each semester in upcomingSemesters}}
+                    <td>{{courseCount course semester}}</td>
+                {{/each}}
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>

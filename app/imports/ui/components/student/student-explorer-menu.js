@@ -19,9 +19,9 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 import { isInRole } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated() {
-  this.byInterests = new ReactiveVar(false);
-  this.byHighI = new ReactiveVar(false);
-  this.byHighE = new ReactiveVar(false);
+  this.byICS = new ReactiveVar(false);
+  this.byEE = new ReactiveVar(false);
+  this.by1xx = new ReactiveVar(false);
   this.by400 = new ReactiveVar(false);
 });
 
@@ -33,17 +33,17 @@ Template.Student_Explorer_Menu.helpers({
   },
   menuFilteredNonAddedList() {
     let retVal = Template.instance().data.menuNonAddedList;
-    if (Template.instance().byInterests.get()) {
+    if (Template.instance().byICS.get()) {
       const profile = Users.getProfile(getRouteUserName());
       retVal = _.filter(retVal, function (item) {
         const matches = _.intersection(profile.interestIDs, item.interestIDs);
         return matches.length > 0;
       });
     }
-    if (Template.instance().byHighI.get()) {
+    if (Template.instance().byEE.get()) {
       retVal = _.filter(retVal, function (item) { return item.ice.i >= 10; });
     }
-    if (Template.instance().byHighE.get()) {
+    if (Template.instance().by1xx.get()) {
       retVal = _.filter(retVal, function (item) { return item.ice.e >= 10; });
     }
     if (Template.instance().by400.get()) {
@@ -55,13 +55,13 @@ Template.Student_Explorer_Menu.helpers({
     return retVal;
   },
   isHighE() {
-    return Template.instance().byHighE.get();
+    return Template.instance().by1xx.get();
   },
   isHighI() {
-    return Template.instance().byHighI.get();
+    return Template.instance().byEE.get();
   },
   isInterests() {
-    return Template.instance().byInterests.get();
+    return Template.instance().byICS.get();
   },
   is400() {
     return Template.instance().by400.get();
@@ -315,17 +315,17 @@ Template.Student_Explorer_Menu.events({
   'click .jsByInterests': function clickedInterests(event, instance) {
     event.preventDefault();
     // console.log(event.target, 'filter by my interests');
-    instance.byInterests.set(!instance.byInterests.get());
+    instance.byICS.set(!instance.byICS.get());
   },
   'click .jsByHighE': function clickedHighE(event, instance) {
     event.preventDefault();
     // console.log(event.target, 'filter by my interests');
-    instance.byHighE.set(!instance.byHighE.get());
+    instance.by1xx.set(!instance.by1xx.get());
   },
   'click .jsByHighI': function clickedHighI(event, instance) {
     event.preventDefault();
     // console.log(event.target, 'filter by my interests');
-    instance.byHighI.set(!instance.byHighI.get());
+    instance.byEE.set(!instance.byEE.get());
   },
   'click .jsBy400': function clickedHighI(event, instance) {
     event.preventDefault();
