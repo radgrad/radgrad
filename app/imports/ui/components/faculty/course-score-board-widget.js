@@ -24,10 +24,47 @@ Template.Course_Score_Board_Widget.helpers({
     return course.number;
   },
   courses() {
-    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
-    _.filter(courses, function (c) {
-      return c.shortName !== 'other';
+    let courses = Courses.find({}, { sort: { number: 1 } }).fetch();
+    courses = _.filter(courses, function (c) {
+      return c.number !== 'other';
     });
+    if (Template.instance().byICS.get()) {
+      courses = _.filter(courses, function (c) {
+        const regex = new RegExp('ICS');
+        return regex.test(c.number);
+      });
+    }
+    if (Template.instance().byEE.get()) {
+      courses = _.filter(courses, function (c) {
+        const regex = new RegExp('EE|CEE|ME|OE|BE');
+        return regex.test(c.number);
+      });
+    }
+    if (Template.instance().by1xx.get()) {
+      courses = _.filter(courses, function (c) {
+        const regex = new RegExp('1[0-9][0-9]');
+        return regex.test(c.number);
+      });
+    }
+    if (Template.instance().by2xx.get()) {
+      courses = _.filter(courses, function (c) {
+        const regex = new RegExp('2[0-9][0-9]');
+        return regex.test(c.number);
+      });
+    }
+    if (Template.instance().by3xx.get()) {
+      courses = _.filter(courses, function (c) {
+        const regex = new RegExp('3[0-9][0-9]');
+        return regex.test(c.number);
+      });
+    }
+    if (Template.instance().by4xx.get()) {
+      courses = _.filter(courses, function (c) {
+        const regex = new RegExp('4[0-9][0-9]');
+        return regex.test(c.number);
+      });
+    }
+
     return courses;
   },
   isHighE() {
