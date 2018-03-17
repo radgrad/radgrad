@@ -60,14 +60,6 @@
 
 * [Overview](analytics/overview.md)
 
-### User interface
-
-* Layouts, pages, components
-* Routing
-* Form field components
-* Inter-widget state communication
-* When a page doesn't display
-
 ### API
 
 * [JSDocs](https://philipmjohnson.gitbooks.io/radgrad-manual/content/api/jsdocs/)
