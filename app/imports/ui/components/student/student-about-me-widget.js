@@ -150,7 +150,7 @@ Template.Student_About_Me_Widget.events({
     const collectionName = StudentProfiles.getCollectionName();
     const updateData = {};
     updateData.id = profile._id;
-    updateData.picture = event.target.picture.value;
+    updateData.picture = event.target.picture.value || '/images/default-profile-picture.png';
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.log('Error during Student profile picture update', error);
