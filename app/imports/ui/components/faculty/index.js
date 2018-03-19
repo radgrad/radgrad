@@ -1,5 +1,9 @@
 import './course-count-widget.html';
 import './course-count-widget';
+import './course-score-board-modal.html';
+import './course-score-board-modal';
+import './course-score-board-widget.html';
+import './course-score-board-widget';
 import './completed-verification-accordion.html';
 import './completed-verification-accordion.js';
 import './faculty-about-me-widget.html';
