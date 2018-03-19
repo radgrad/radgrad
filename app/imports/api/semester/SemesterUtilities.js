@@ -71,5 +71,6 @@ export function nextFallSpringSemester(semester) {
  */
 export function upComingSemesters() {
   const currentSemester = Semesters.getCurrentSemesterDoc();
-  return _.sortBy(Semesters.find({ semesterNumber: { $gt: currentSemester.semesterNumber } }).fetch(), (sem) => sem.semesterNumber); // eslint-disable-line
+  const nine = currentSemester.semesterNumber + 10;
+  return _.sortBy(Semesters.find({ semesterNumber: { $gt: currentSemester.semesterNumber, $lt: nine } }).fetch(), (sem) => sem.semesterNumber); // eslint-disable-line
 }
