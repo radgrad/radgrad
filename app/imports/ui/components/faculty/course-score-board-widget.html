@@ -43,7 +43,13 @@
             <tr>
                 <td>{{courseName course}}</td>
                 {{#each semester in upcomingSemesters}}
-                    <td>{{courseCount course semester}}</td>
+                    <td>
+                        {{#if (hasCount course semester)}}
+                            {{> Course_Score_Board_Modal course=course semester=semester}}
+                        {{else}}
+                            {{courseCount course semester}}
+                        {{/if}}
+                    </td>
                 {{/each}}
             </tr>
         {{/each}}

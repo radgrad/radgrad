@@ -67,6 +67,9 @@ Template.Course_Score_Board_Widget.helpers({
 
     return courses;
   },
+  hasCount(course, semester) {
+    return CourseInstances.find({ courseID: course._id, semesterID: semester._id }).count() > 0;
+  },
   isHighE() {
     return Template.instance().by1xx.get();
   },
@@ -98,10 +101,10 @@ Template.Course_Score_Board_Widget.helpers({
 });
 
 Template.Course_Score_Board_Widget.events({
-  click: function (event, instance) {
-    event.preventDefault();
-    console.log(event.target, instance);
-  },
+  // click: function (event, instance) {
+  //   event.preventDefault();
+  //   console.log(event.target, instance);
+  // },
   'click .jsByICS': function clickedInterests(event, instance) {
     event.preventDefault();
     // console.log(event.target, 'filter by ICS');
