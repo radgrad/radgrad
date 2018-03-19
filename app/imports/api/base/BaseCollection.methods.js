@@ -4,7 +4,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { RadGrad } from '../radgrad/RadGrad';
-import { AppLogs } from '../log/AppLogCollection';
 import { ROLE } from '../role/Role';
 
 /**
@@ -30,54 +29,6 @@ export const dumpDatabaseMethod = new ValidatedMethod({
       return { timestamp, collections };
     }
     return null;
-  },
-});
-
-/**
- * Allows admins to create and return a JSON object to the client representing a snapshot of the AppLogCollection.
- * @memberOf api/base
- */
-export const dumpAppLogMethod = new ValidatedMethod({
-  name: 'base.dumpAppLog',
-  validate: null,
-  run() {
-    if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..');
-    } else
-      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.');
-      }
-    // Don't do the dump except on server side (disable client-side simulation).
-    // Return an object with fields timestamp and collections.
-    if (Meteor.isServer) {
-      const applicationLog = [];
-      applicationLog.push(AppLogs.dumpAll());
-      const timestamp = new Date();
-      return { timestamp, applicationLog };
-    }
-    return null;
-  },
-});
-
-/**
- * Allows admins to clear the AppLogCollection.
- * @memberOf api/base
- */
-export const clearAppLogMethod = new ValidatedMethod({
-  name: 'base.clearAppLog',
-  validate: null,
-  run() {
-    if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..');
-    } else
-      if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.');
-      }
-    // Don't do the dump except on server side (disable client-side simulation).
-    // Return an object with fields timestamp and collections.
-    if (Meteor.isServer) {
-      AppLogs.removeAll();
-    }
   },
 });
 
