@@ -1,12 +1,9 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { $ } from 'meteor/jquery';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '../../../startup/client/router';
-
-Template.Course_Score_Board_Modal.onCreated(function courseScoreBoardModalOnCreated() {
-  console.log(this.data);
-});
 
 Template.Course_Score_Board_Modal.helpers({
   courseCount() {
@@ -17,6 +14,7 @@ Template.Course_Score_Board_Modal.helpers({
     return count;
   },
   students() {
+    // console.log('students');
     const course = Template.instance().data.course;
     const semester = Template.instance().data.semester;
     // console.log(course, semester);
@@ -41,7 +39,7 @@ Template.Course_Score_Board_Modal.helpers({
 Template.Course_Score_Board_Modal.events({
   'click .modal': function clickOpenModal(event, instance) {
     event.preventDefault();
-    $(`#${instance.data.course._id}.ui.small.modal`).modal('show');
+    $(`#${instance.data.course._id}${instance.data.semester._id}.ui.small.modal`).modal('show');
   },
 });
 

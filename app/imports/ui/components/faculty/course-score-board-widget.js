@@ -7,12 +7,13 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 
 Template.Course_Score_Board_Widget.onCreated(function courseScoreBoardWidgetOnCreated() {
-  this.byICS = new ReactiveVar(false);
-  this.byEE = new ReactiveVar(false);
-  this.by1xx = new ReactiveVar(false);
-  this.by2xx = new ReactiveVar(false);
-  this.by3xx = new ReactiveVar(false);
-  this.by4xx = new ReactiveVar(false);
+  this.byICS = new ReactiveVar(true);
+  this.byEE = new ReactiveVar(true);
+  this.by1xx = new ReactiveVar(true);
+  this.by2xx = new ReactiveVar(true);
+  this.by3xx = new ReactiveVar(true);
+  this.by4xx = new ReactiveVar(true);
+  this.semesters = upComingSemesters();
 });
 
 Template.Course_Score_Board_Widget.helpers({
@@ -24,54 +25,59 @@ Template.Course_Score_Board_Widget.helpers({
     return course.number;
   },
   courses() {
+    // console.log('courses');
     let courses = Courses.find({}, { sort: { number: 1 } }).fetch();
     courses = _.filter(courses, function (c) {
-      return c.number !== 'other';
+      let retVal = false;
+      if (Template.instance().byICS.get()) {
+        if (c.number.startsWith('ICS')) {
+          retVal = true;
+        }
+      }
+      if (Template.instance().byEE.get()) {
+        if (c.number.startsWith('EE') ||
+          c.number.startsWith('CEE') ||
+          c.number.startsWith('ME') ||
+          c.number.startsWith('OE') ||
+          c.number.startsWith('BE')) {
+          retVal = true;
+        }
+      }
+      return retVal;
     });
-    if (Template.instance().byICS.get()) {
-      courses = _.filter(courses, function (c) {
-        const regex = new RegExp('ICS');
-        return regex.test(c.number);
-      });
-    }
-    if (Template.instance().byEE.get()) {
-      courses = _.filter(courses, function (c) {
-        const regex = new RegExp('EE|CEE|ME|OE|BE');
-        return regex.test(c.number);
-      });
-    }
-    if (Template.instance().by1xx.get()) {
-      courses = _.filter(courses, function (c) {
+    courses = _.filter(courses, function (c) {
+      let retVal = false;
+      if (Template.instance().by1xx.get()) {
         const regex = new RegExp('1[0-9][0-9]');
-        return regex.test(c.number);
-      });
-    }
-    if (Template.instance().by2xx.get()) {
-      courses = _.filter(courses, function (c) {
+        if (regex.test(c.number)) {
+          retVal = true;
+        }
+      }
+      if (Template.instance().by2xx.get()) {
         const regex = new RegExp('2[0-9][0-9]');
-        return regex.test(c.number);
-      });
-    }
-    if (Template.instance().by3xx.get()) {
-      courses = _.filter(courses, function (c) {
+        if (regex.test(c.number)) {
+          retVal = true;
+        }
+      }
+      if (Template.instance().by3xx.get()) {
         const regex = new RegExp('3[0-9][0-9]');
-        return regex.test(c.number);
-      });
-    }
-    if (Template.instance().by4xx.get()) {
-      courses = _.filter(courses, function (c) {
+        if (regex.test(c.number)) {
+          retVal = true;
+        }
+      }
+      if (Template.instance().by4xx.get()) {
         const regex = new RegExp('4[0-9][0-9]');
-        return regex.test(c.number);
-      });
-    }
-
+        if (regex.test(c.number)) {
+          retVal = true;
+        }
+      }
+      return retVal;
+    });
+    // console.log('done courses');
     return courses;
   },
   hasCount(course, semester) {
     return CourseInstances.find({ courseID: course._id, semesterID: semester._id }).count() > 0;
-  },
-  isHighE() {
-    return Template.instance().by1xx.get();
   },
   isEE() {
     return Template.instance().byEE.get();
@@ -92,11 +98,12 @@ Template.Course_Score_Board_Widget.helpers({
     return Template.instance().by4xx.get();
   },
   semesterName(semester) {
+    // console.log('semesterName');
     return Semesters.getShortName(semester);
   },
   upcomingSemesters() {
-    const semesters = upComingSemesters();
-    return semesters;
+    // console.log('upcomingSemesters');
+    return Template.instance().semesters;
   },
 });
 
@@ -112,7 +119,7 @@ Template.Course_Score_Board_Widget.events({
   },
   'click .jsByEE': function clickedHighI(event, instance) {
     event.preventDefault();
-    // console.log(event.target, 'filter by EE');
+    // console.log(event.target, 'filter by EE', instance);
     instance.byEE.set(!instance.byEE.get());
   },
   'click .jsBy1xx': function clickedHighE(event, instance) {
