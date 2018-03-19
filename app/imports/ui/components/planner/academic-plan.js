@@ -12,7 +12,6 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 export const plannerKeys = {
   detailCourse: 'detailCourse',
@@ -199,25 +198,17 @@ Template.Academic_Plan.events({
       const ay = ays[ays.length - 1];
       year = ay.year + 1;
     }
-    const message = `${student} added an AcademicYear ${year}`;
-    appLog.info(message);
     defineMethod.call({ collectionName: AcademicYearInstances.getCollectionName(), definitionData: { year, student } });
   },
   'click #nextYear': function clickNextYear(event) {
     event.preventDefault();
     const year = Template.instance().startYearIndex.get();
     Template.instance().startYearIndex.set(year + 1);
-    const student = getRouteUserName();
-    const message = `${student} viewed next AcademicYear`;
-    appLog.info(message);
   },
   'click #prevYear': function clickPrevYear(event) {
     event.preventDefault();
     const year = Template.instance().startYearIndex.get();
     Template.instance().startYearIndex.set(year - 1);
-    const student = getRouteUserName();
-    const message = `${student} viewed previous AcademicYear`;
-    appLog.info(message);
   },
 });
 

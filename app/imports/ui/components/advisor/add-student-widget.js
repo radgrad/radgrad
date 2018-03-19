@@ -11,7 +11,6 @@ import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 const addSchema = new SimpleSchema({
   firstName: String,
@@ -76,9 +75,6 @@ Template.Add_Student_Widget.events({
           const feedData = { feedType: Feeds.NEW_USER, user: newData.username };
           defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData });
           FormUtils.indicateSuccess(instance, event);
-          const advisor = getRouteUserName();
-          const message = `${advisor} added new student ${newData.username} ${JSON.stringify(newData)}`;
-          appLog.info(message);
         }
       });
     } else {

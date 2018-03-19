@@ -3,7 +3,6 @@ import { defineMethod, updateMethod, removeItMethod } from '../../../api/base/Ba
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 Template.Mentor_MentorSpace_Answer_Form.helpers({
   existingAnswer() {
@@ -27,14 +26,10 @@ Template.Mentor_MentorSpace_Answer_Form.events({
       updateMethod.call({ collectionName, updateData: newAnswer }, (error) => {
         if (error) console.log('error in MentorAnswers.update', error);
       });
-      const message = `${getRouteUserName()} updated their answer to ${question} with ${answer}.`;
-      appLog.info(message);
     } else {
       defineMethod.call({ collectionName, definitionData: newAnswer }, (error) => {
         if (error) console.log('error in MentorAnswers.define', error);
       });
-      const message = `${getRouteUserName()} answered ${question} with ${answer}.`;
-      appLog.info(message);
     }
   },
   'click .delete': function (event) {

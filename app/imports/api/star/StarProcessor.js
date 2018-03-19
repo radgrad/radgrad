@@ -4,7 +4,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../semester/SemesterCollection';
 import { Courses } from '../course/CourseCollection';
 import { Slugs } from '../slug/SlugCollection';
-import { appLog } from '../log/AppLogCollection';
 
 /* global isNaN */
 
@@ -37,18 +36,15 @@ function findSemesterSlug(starDataObject) {
       term = Semesters.FALL;
       break;
     case 'Winter':
-      appLog.info(`Got Winter semester term setting it to ${Semesters.FALL}`);
       term = Semesters.FALL; // TODO Not sure it this is right thing to do.
       break;
     default:
-      appLog.info(`Got unknown semester term ${semesterTokens[0]}`);
       return null;
   }
   let year = parseInt(semesterTokens[1], 10);
   if (isNaN(year)) {
     year = parseInt(semesterTokens[2], 10);
     if (isNaN(year)) {
-      appLog.info(`Got unknown semester year ${semesterTokens[1]} or ${semesterTokens[2]}`);
       return null;
     }
   }

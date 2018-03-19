@@ -4,7 +4,6 @@ import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { AdvisorLogs } from '../log/AdvisorLogCollection';
 import { AdvisorProfiles } from '../user/AdvisorProfileCollection';
-import { AppLogs } from '../log/AppLogCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
@@ -46,7 +45,6 @@ class RadGradClass {
       AcademicYearInstances,
       AdvisorLogs,
       AdvisorProfiles,
-      AppLogs,
       CareerGoals,
       Courses,
       CourseInstances,

@@ -5,7 +5,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { plannerKeys } from './academic-plan';
 import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 Template.Add_Opportunity_Button.onCreated(function addOpportunityButtonOnCreated() {
   this.state = this.data.dictionary;
@@ -37,7 +36,6 @@ Template.Add_Opportunity_Button.events({
     const opportunity = this.opportunity;
     const oi = Template.instance().state.get(plannerKeys.detailOpportunityInstance);
     const collectionName = OpportunityInstances.getCollectionName();
-    const semester = Semesters.toString(oi.semesterID);
     const template = Template.instance();
     removeItMethod.call({ collectionName, instance: oi._id }, (error) => {
       if (!error) {
@@ -48,8 +46,6 @@ Template.Add_Opportunity_Button.events({
         template.$('.chooseSemester').popup('hide');
       }
     });
-    const message = `${getRouteUserName()} removed ${opportunity.name} in ${semester} from their Degree Plan.`;
-    appLog.info(message);
   },
 });
 
