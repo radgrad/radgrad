@@ -289,7 +289,7 @@
             2,
             0,
             2,
-            2,
+            1,
             0
           ],
           "courseList": [
@@ -8790,6 +8790,10 @@
           "opportunity": "data-analytics-for-solar-energy"
         }
       ]
+    },
+    {
+      "name": "UserInteractionCollection",
+      "contents": []
     },
     {
       "name": "VerificationRequestCollection",
