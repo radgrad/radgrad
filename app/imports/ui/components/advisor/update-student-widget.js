@@ -16,9 +16,7 @@ import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.met
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { defaultCalcLevel } from '../../../api/level/LevelProcessor';
-import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { RadGrad } from '../../../api/radgrad/RadGrad';
 
 const updateSchema = new SimpleSchema({
@@ -217,15 +215,10 @@ Template.Update_Student_Widget.events({
       const collectionName = StudentProfiles.getCollectionName();
       updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {
-          appLog.error(`Error during user update: ${JSON.stringify(error)}`);
           console.log('Error during user update: ', error);
         } else {
           instance.successClass.set('success');
           instance.errorClass.set('');
-          const advisor = getRouteUserName();
-          const student = Users.getProfile(instance.data.studentID.get());
-          const message = `${advisor} updated student ${student.username} ${JSON.stringify(updateData, ' ')}`;
-          appLog.info(message);
         }
       });
     } else {

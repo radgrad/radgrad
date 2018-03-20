@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { appLog } from '../../api/log/AppLogCollection';
 import { userInteractionDefineMethod } from '../../api/log/UserInteractionCollection.methods';
 
 Accounts.ui.config({
@@ -39,14 +38,10 @@ Accounts.onLogin(function onLogin() {
         }
       });
     }
-    appLog.info(`${username} logged in.`);
     FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
   }
 });
 
 Accounts.onLogout(function logout() {
-  const id = Meteor.userId();
-  const username = Meteor.user() && Meteor.user().username;
-  appLog.info(`${username} logged out.`, {}, id);
   FlowRouter.go('/');
 });

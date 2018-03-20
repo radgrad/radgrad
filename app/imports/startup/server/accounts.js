@@ -1,35 +1,58 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { Users } from '/imports/api/user/UserCollection';
 
 /* eslint-disable no-console, no-param-reassign */
 
-const errorMessage = 'User not registered with RadGrad.';
-
-/* Make sure that the person attempting to login has a profile. Otherwise they are not logged in. */
 Accounts.validateNewUser(function validate(user) {
   // Don't do this check when running tests.
   if (Meteor.isTest || Meteor.isAppTest || Meteor.settings.public.admin.development) {
     return true;
   }
-  // Otherwise ensure that there exists a profile for a user before creating a document for them in Meteor.users.
-  if (user) {
-    if (user.services.cas) {
-      const username = user.services.cas.id;
-      if (username && Users.hasProfile(username)) {
-        return true;
-      }
-      throw new Meteor.Error(403, errorMessage);
-    } else if (user.services.password) {
-      const username = user.username;
-      if (username && Users.hasProfile(username)) {
-        return true;
-      }
-      throw new Meteor.Error(403, errorMessage);
-    }
+  // Figure out the username.
+  const username = (user && user.services.cas) ? user.services.cas.id : user.services.password && user.username;
+  // Make sure it is lowercase.
+  if (username && (username.toLowerCase() !== username)) {
+    throw Meteor.Error(403, `The username for ${user} could not be determined or was not lowercase.`);
   }
-  throw new Meteor.Error(403, errorMessage);
+  return true;
 });
+
+// const errorMessage = 'User not registered with RadGrad.';
+
+/* Make sure that the person attempting to login has a profile. Otherwise they are not logged in. */
+// This doesn't work.  A profile is not defined until a user is created, so you can't in general check
+// for a profile.
+// Accounts.validateNewUser(function validate(user) {
+//   // Don't do this check when running tests.
+//   if (Meteor.isTest || Meteor.isAppTest) {
+//     return true;
+//   }
+//   // Figure out the username.
+//   const username = (user && user.services.cas) ? user.services.cas.id : user.services.password && user.username;
+//   if (!username) {
+//     Meteor.Error(403, `Could not determine username: ${user}`);
+//   }
+//   // Admin accounts are automatically valid.
+//   if (username === Meteor.settings.public.admin.username) {
+//     return true;
+//   }
+//
+//   // Otherwise ensure that there exists a profile for a user before creating a document for them in Meteor.users.
+//   if (user) {
+//     if (user.services.cas) {
+//       if (username && Users.hasProfile(username)) {
+//         return true;
+//       }
+//       throw new Meteor.Error(403, errorMessage);
+//     } else if (user.services.password) {
+//       if (username && Users.hasProfile(username)) {
+//         return true;
+//       }
+//       throw new Meteor.Error(403, errorMessage);
+//     }
+//   }
+//   throw new Meteor.Error(403, errorMessage);
+// });
 
 // // THIS CODE DOES NOT WORK, SO IT IS COMMENTED OUT.
 // // IT IS AN ATTEMPT TO ALLOW MIXED CASE LOGINS THROUGH CAS

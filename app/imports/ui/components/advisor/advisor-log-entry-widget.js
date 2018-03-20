@@ -4,8 +4,6 @@ import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
 import { advisorLogsDefineMethod } from '../../../api/log/AdvisorLogCollection.methods';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Advisor_Log_Entry_Widget.helpers({
@@ -38,10 +36,6 @@ Template.Advisor_Log_Entry_Widget.events({
           console.log('Error creating AdvisorLog.', error);
         }
       });
-      const advisorName = getRouteUserName();
-      const studentName = Users.getProfile(student).username;
-      const message = `${advisorName} advised ${studentName} ${text}`;
-      appLog.info(message);
     }
   },
 });

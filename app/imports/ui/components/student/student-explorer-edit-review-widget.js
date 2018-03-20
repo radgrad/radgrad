@@ -2,8 +2,6 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { Courses } from '../../../api/course/CourseCollection';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -11,8 +9,6 @@ import { updateMethod, removeItMethod } from '../../../api/base/BaseCollection.m
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 const editSchema = new SimpleSchema({
   semester: String,
@@ -70,14 +66,6 @@ Template.Student_Explorer_Edit_Review_Widget.events({
         if (error) {
           FormUtils.indicateError(instance, error);
         } else {
-          let reviewee;
-          if (this.review.reviewType === 'course') {
-            reviewee = Courses.findDoc(this.review.revieweeID).shortName;
-          } else {
-            reviewee = Opportunities.findDoc(this.review.revieweeID).name;
-          }
-          const message = `${getRouteUserName()} edited their review of ${reviewee}`;
-          appLog.info(message);
           FormUtils.indicateSuccess(instance, event);
         }
       });
@@ -88,20 +76,10 @@ Template.Student_Explorer_Edit_Review_Widget.events({
   'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    const review = Reviews.findDoc(id);
-    let reviewee;
-    if (review.reviewType === Reviews.COURSE) {
-      reviewee = Courses.findDoc(review.revieweeID).shortName;
-    } else {
-      reviewee = Opportunities.findDoc(review.revieweeID).name;
-    }
     const collectionName = Reviews.getCollectionName();
     removeItMethod.call({ collectionName, instance: id }, (error) => {
       if (error) {
         FormUtils.indicateError(instance, error);
-      } else {
-        const message = `${getRouteUserName()} deleted their review of ${reviewee}`;
-        appLog.info(message);
       }
     });
   },

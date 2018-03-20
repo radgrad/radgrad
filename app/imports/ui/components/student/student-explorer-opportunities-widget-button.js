@@ -6,7 +6,6 @@ import { defineMethod, removeItMethod } from '../../../api/base/BaseCollection.m
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 
 Template.Student_Explorer_Opportunities_Widget_Button.helpers({
@@ -71,9 +70,6 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
       student: username,
     };
     defineMethod.call({ collectionName: 'OpportunityInstanceCollection', definitionData });
-    const semesterName = Semesters.toString(Semesters.findIdBySlug(semSlug));
-    const message = `${getRouteUserName()} added ${opportunity.name} (${semesterName}) to their Degree Plan.`;
-    appLog.info(message);
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
@@ -82,8 +78,6 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
     const semSplit = semester.split(' ');
     const semSlug = `${semSplit[0]}-${semSplit[1]}`;
     const semID = Semesters.getID(semSlug);
-    const semesterName = Semesters.toString(Semesters.findIdBySlug(semSlug));
-    const message = `${getRouteUserName()} removed ${opportunity.name} (${semesterName}) from their Degree Plan.`;
     const oi = OpportunityInstances.find({
       studentID: getUserIdFromRoute(),
       opportunityID: opportunity._id,
@@ -93,7 +87,6 @@ Template.Student_Explorer_Opportunities_Widget_Button.events({
       console.log('Too many opportunity instances found for a single semester.');
     }
     removeItMethod.call({ collectionName: 'OpportunityInstanceCollection', instance: oi[0]._id });
-    appLog.info(message);
   },
 });
 

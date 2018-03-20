@@ -7,7 +7,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { isLabel } from '../../utilities/template-helpers';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
@@ -72,10 +71,6 @@ Template.Student_Explorer_CareerGoals_Widget.events({
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.log('Error updating career goals', error);
-      } else {
-        const goal = CareerGoals.findDoc(id);
-        const message = `${getRouteUserName()} added career goal ${goal.name}`;
-        appLog.info(message);
       }
     });
   },
@@ -92,10 +87,6 @@ Template.Student_Explorer_CareerGoals_Widget.events({
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.log('Error updating career goals', error);
-      } else {
-        const goal = CareerGoals.findDoc(id);
-        const message = `${getRouteUserName()} removed career goal ${goal.name}`;
-        appLog.info(message);
       }
     });
   },

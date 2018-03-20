@@ -10,7 +10,6 @@ import { processPendingVerificationMethod } from '../../../api/verification/Veri
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { updateLevelMethod } from '../../../api/level/LevelProcessor.methods';
 
 Template.Verification_Requests_Pending.helpers({
@@ -60,7 +59,6 @@ Template.Verification_Requests_Pending.events({
     const feedback = $(`#${verificationRequestID}-feedback`).val();
     processPendingVerificationMethod.call({ verificationRequestID, command, feedback }, (error, result) => {
       if (result) {
-        appLog.info(result);
         const student = VerificationRequests.getStudentDoc(verificationRequestID);
         // console.log('updating level', student);
         updateLevelMethod.call({ studentID: student.userID }, (err) => {

@@ -177,6 +177,7 @@ class UserCollection {
 
   /**
    * Returns the profile document associated with user, or null if not found.
+   * Assumes that the user is defined. If not, throws an error.
    * @param user The username or userID.
    * @returns { Object | Null } The profile document or null if not found.
    */
