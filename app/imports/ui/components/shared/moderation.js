@@ -10,8 +10,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import { getRouteUserName } from './route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 
 const noSlugSchema = new SimpleSchema({
@@ -110,7 +108,6 @@ Template.Moderation.events({
     }
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      let message = `${getRouteUserName()}`;
       if (split[1] === 'review') {
         item = Reviews.findDoc(itemID);
       } else {
@@ -119,11 +116,9 @@ Template.Moderation.events({
       if (split[2] === 'accept') {
         item.moderated = true;
         item.visible = true;
-        message = `${message} accepted`;
       } else {
         item.moderated = true;
         item.visible = false;
-        message = `${message} rejected`;
       }
       const moderatorComments = newData.moderatorComments;
       const moderated = item.moderated;
@@ -131,16 +126,10 @@ Template.Moderation.events({
       if (split[1] === 'review') {
         const updateData = { id: itemID, moderated, visible, moderatorComments };
         updateMethod.call({ collectionName: Reviews.getCollectionName(), updateData });
-        const studentName = Users.getProfile(Reviews.getDoc(itemID).studentID).username;
-        message = `${message} ${studentName}'s review`;
       } else {
         const updateData = { id: itemID, moderated, visible, moderatorComments };
         updateMethod.call({ collectionName: MentorQuestions.getCollectionName(), updateData });
-        const studentName = Users.getProfile(MentorQuestions.getDoc(itemID).studentID).username;
-        message = `${message} ${studentName}'s mentor question`;
       }
-      message = `${message} with comments: '${moderatorComments}'.`;
-      appLog.info(message);
     } else {
       FormUtils.indicateError(instance);
     }

@@ -9,8 +9,6 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
-// import { updateAcademicPlanMethod } from '../../../api/user/UserCollection.methods';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { isInRole } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
@@ -91,9 +89,7 @@ Template.Student_Explorer_Plans_Widget.events({
     updateData.academicPlan = instance.data.id;
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
-        appLog.error(`Error updating ${getRouteUserName()}'s academic plan ${JSON.stringify(error)}`);
-      } else {
-        appLog.info(`Updated ${getRouteUserName()}'s academic plan to ${instance.data.slug}`);
+        console.log(`Error updating ${getRouteUserName()}'s academic plan ${JSON.stringify(error)}`);
       }
     });
   },

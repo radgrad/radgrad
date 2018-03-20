@@ -9,7 +9,6 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { updateAcademicPlanMethod } from '../../../api/user/UserCollection.methods';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { isInRole } from '../../utilities/template-helpers';
 
 Template.Student_Explorer_Degrees_Widget.helpers({
@@ -85,9 +84,6 @@ Template.Student_Explorer_Degrees_Widget.events({
         console.log('Error updating student\'s academic plan', error);
       } else {
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-        // eslint-disable-next-line
-        const message = `${getRouteUserName()} updated their academic plan to ${AcademicPlans.toFullString(event.target.value)}`;
-        appLog.info(message);
       }
     });
   },
