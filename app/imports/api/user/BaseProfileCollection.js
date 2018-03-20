@@ -46,6 +46,14 @@ class BaseProfileCollection extends BaseSlugCollection {
   }
 
   /**
+   * The subclass methods need a way to create a profile with a valid, though fake, userId.
+   * @returns {string}
+   */
+  getFakeUserId() {
+    return 'ABCDEFGHJKLMNPQRS';
+  }
+
+  /**
    * Returns the name of the collection associated with the given profile.
    * @param profile A Profile object.
    * @returns  { String } The name of a profile collection.
@@ -102,6 +110,15 @@ class BaseProfileCollection extends BaseSlugCollection {
       throw new Meteor.Error(`No profile found for user ${user}`);
     }
     return doc;
+  }
+
+  /**
+   * Returns the profile document associated with username, or null if none was found.
+   * @param username A username, such as 'johnson@hawaii.edu'.
+   * @returns The profile document, or null.
+   */
+  findByUsername(username) {
+    return this._collection.findOne({ username });
   }
 
   /**

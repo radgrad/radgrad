@@ -192,6 +192,17 @@ class UserCollection {
   }
 
   /**
+   * Returns the profile associated with the passed username, or null if not found.
+   * Does not check to see if the user is defined, which makes this method useful for Accounts.validateNewUser.
+   * @param username A username.
+   * @returns The profile document, or null if not found.
+   */
+  findProfileFromUsername(username) {
+    return StudentProfiles.findByUsername(username) || FacultyProfiles.findByUsername(username)
+        || MentorProfiles.findByUsername(username) || AdvisorProfiles.findByUsername(username);
+  }
+
+  /**
    * Returns the admin username from the settings file, or 'radgrad@hawaii.edu' (for testing purposes).
    * @returns {string} The admin username.
    * @private

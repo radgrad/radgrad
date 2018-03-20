@@ -72,10 +72,13 @@ class StudentProfileCollection extends BaseProfileCollection {
       // Create the slug, which ensures that username is unique.
       Slugs.define({ name: username, entityName: this.getType() });
       const role = (isAlumni) ? ROLE.ALUMNI : ROLE.STUDENT;
-      const userID = Users.define({ username, role });
-      return this._collection.insert({
+      const profileID = this._collection.insert({
         username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
-        level, academicPlanID, declaredSemesterID, hiddenCourseIDs, hiddenOpportunityIDs, isAlumni, userID });
+        level, academicPlanID, declaredSemesterID, hiddenCourseIDs, hiddenOpportunityIDs, isAlumni,
+        userID: this.getFakeUserId() });
+      const userID = Users.define({ username, role });
+      this._collection.update(profileID, { $set: { userID } });
+      return profileID;
     }
     return undefined;
   }

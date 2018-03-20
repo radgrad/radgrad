@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import { Users } from '/imports/api/user/UserCollection';
 
 /* eslint-disable no-console, no-param-reassign */
 
@@ -8,12 +9,28 @@ Accounts.validateNewUser(function validate(user) {
   if (Meteor.isTest || Meteor.isAppTest) {
     return true;
   }
-  // Figure out the username.
-  const username = (user && user.services.cas) ? user.services.cas.id : user.services.password && user.username;
-  // Make sure it is lowercase.
+
+  // Figure out the username. Note that we hardwire the @hawaii.edu if it's CAS!
+  // @TODO Make hawaii.edu a configuration parameter if RadGrad goes to other universities.
+  const username = (user && user.services.cas) ?
+      `${user.services.cas.id}@hawaii.edu` : user.services.password && user.username;
+
+  // Allow definition of the admin user, who doesn't have a profile.
+  if (username === Meteor.settings.public.admin.username) {
+    return true;
+  }
+
+  // Make sure all usernames are always lowercase.
   if (username && (username.toLowerCase() !== username)) {
     throw Meteor.Error(403, `The username for ${user} could not be determined or was not lowercase.`);
   }
+
+  // Make sure all usernames have an associated profile.
+  if (!Users.findProfileFromUsername(username)) {
+    throw Meteor.Error(403, `Username ${username} is not registered in the system.`);
+  }
+
+  // Otherwise it's OK.
   return true;
 });
 
@@ -74,7 +91,6 @@ Accounts.validateNewUser(function validate(user) {
 //   }
 //   return user;
 // });
-
 
 // Meteor.users.allow({
 //   insert: function insert(userId, doc) {  // eslint-disable-line no-unused-vars

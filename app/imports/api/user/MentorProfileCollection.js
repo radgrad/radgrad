@@ -49,11 +49,12 @@ class MentorProfileCollection extends BaseProfileCollection {
       const interestIDs = Interests.getIDs(interests);
       const careerGoalIDs = CareerGoals.getIDs(careerGoals);
       Slugs.define({ name: username, entityName: this.getType() });
+      const profileID = this._collection.insert({
+        username, firstName, lastName, role, picture, website, interestIDs, company, career, location, linkedin,
+        motivation, careerGoalIDs, userID: this.getFakeUserId() });
       const userID = Users.define({ username, role });
-      return this._collection.insert({
-        username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
-        company, career, location, linkedin, motivation, userID,
-      });
+      this._collection.update(profileID, { $set: { userID } });
+      return profileID;
     }
     return undefined;
   }

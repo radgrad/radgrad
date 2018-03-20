@@ -37,10 +37,12 @@ class FacultyProfileCollection extends BaseProfileCollection {
       const interestIDs = Interests.getIDs(interests);
       const careerGoalIDs = CareerGoals.getIDs(careerGoals);
       Slugs.define({ name: username, entityName: this.getType() });
-      const userID = Users.define({ username, role });
-      return this._collection.insert({
+      const profileID = this._collection.insert({
         username, firstName, lastName, role, picture, website, interestIDs,
-        careerGoalIDs, userID });
+        careerGoalIDs, userID: this.getFakeUserId() });
+      const userID = Users.define({ username, role });
+      this._collection.update(profileID, { $set: { userID } });
+      return profileID;
     }
     return undefined;
   }
