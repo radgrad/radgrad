@@ -78,7 +78,6 @@ class RadGradClass {
      * This is the list used to specify the collections for both dump and restore.
      * For example: Slugs, AcademicYearInstances, and PublicStats.
      * Some collections are not yet part of dump/restore.
-     * For example: AppLogs.
      */
     this.collectionLoadSequence = [
       Semesters,

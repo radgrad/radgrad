@@ -7,7 +7,6 @@ import { defineMethod, removeItMethod } from '../../../api/base/BaseCollection.m
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 
 Template.Student_Explorer_Courses_Widget_Button.helpers({
@@ -68,9 +67,6 @@ Template.Student_Explorer_Courses_Widget_Button.events({
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
         FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-        // eslint-disable-next-line
-        const message = `${getRouteUserName()} added ${course.number} ${course.shortName} (${semSlug}) to their Degree Plan.`;
-        appLog.info(message);
       }
     });
   },
@@ -95,9 +91,6 @@ Template.Student_Explorer_Courses_Widget_Button.events({
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
         FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-        // eslint-disable-next-line
-        const message = `${getRouteUserName()} removed ${course.number} ${course.shortName} (${semSlug}) from their Degree Plan.`;
-        appLog.info(message);
       }
     });
   },

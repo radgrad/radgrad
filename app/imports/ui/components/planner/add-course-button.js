@@ -1,13 +1,11 @@
 import { Template } from 'meteor/templating';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
-import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { plannerKeys } from './academic-plan';
-import { getRouteUserName } from '../shared/route-user-name';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 
 Template.Add_Course_Button.onCreated(function addCourseButtonOnCreated() {

@@ -11,8 +11,6 @@ import { verificationRequestsUpdateStatusMethod }
   from '../../../api/verification/VerificationRequestCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import { getRouteUserName } from './route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 Template.Verification_Requests_Completed.helpers({
   completedVerifications() {
@@ -64,9 +62,5 @@ Template.Verification_Requests_Completed.events({
     const processed = request.processed;
     processed.push(processRecord);
     verificationRequestsUpdateStatusMethod.call({ id, status, processed });
-    const opportunityName = VerificationRequests.getOpportunityDoc(id).name;
-    const studentName = Users.getProfile(request.studentID).username;
-    const message = `${getRouteUserName()} reopened ${opportunityName} verification request for ${studentName}`;
-    appLog.info(message);
   },
 });

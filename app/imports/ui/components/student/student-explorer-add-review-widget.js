@@ -10,7 +10,6 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { reviewRatingsObjects } from '../shared/review-ratings';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 const addSchema = new SimpleSchema({
   semester: String,
@@ -78,7 +77,6 @@ Template.Student_Explorer_Add_Review_Widget.events({
         feedData = { feedType: Feeds.NEW_OPPORTUNITY_REVIEW, user: newData.student, opportunity: newData.reviewee };
       }
       defineMethod.call({ collectionName: Feeds.getCollectionName(), definitionData: feedData });
-      appLog.info(`${getRouteUserName()} added a review for ${newData.reviewee}.`);
     } else {
       FormUtils.indicateError(instance);
     }

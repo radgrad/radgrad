@@ -6,9 +6,7 @@ import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.met
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -180,10 +178,6 @@ Template.Past_Semester_List.events({
         template.state.set(plannerKeys.detailICE, oi.ice);
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
-        const opportunity = Opportunities.findDoc(oi.opportunityID);
-        const semester = Semesters.toString(oi.semesterID);
-        const message = `${getRouteUserName()} inspected ${opportunity.name} (${semester}).`;
-        appLog.info(message);
       }
   },
 });

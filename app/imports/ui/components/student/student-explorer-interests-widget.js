@@ -7,8 +7,6 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
-import { Interests } from '../../../api/interest/InterestCollection';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
@@ -101,10 +99,6 @@ Template.Student_Explorer_Interests_Widget.events({
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.log(`Error updating ${profile.username}'s interests`, error);
-      } else {
-        const interest = Interests.findDoc(id).name;
-        const message = `${getRouteUserName()} added interest ${interest}`;
-        appLog.info(message);
       }
     });
   },
@@ -112,8 +106,6 @@ Template.Student_Explorer_Interests_Widget.events({
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
-    const interest = Interests.findDoc(id).name;
-    const message = `${getRouteUserName()} removed interest ${interest}`;
     let studentItems = profile.interestIDs;
     const collectionName = StudentProfiles.getCollectionNameForProfile(profile);
     const updateData = {};
@@ -123,8 +115,6 @@ Template.Student_Explorer_Interests_Widget.events({
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.log(`Error updating ${profile.username}'s interests`, error);
-      } else {
-        appLog.info(message);
       }
     });
   },

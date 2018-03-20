@@ -2,7 +2,6 @@ import { Template } from 'meteor/templating';
 import { defineMethod, updateMethod, removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { getRouteUserName } from '../shared/route-user-name';
 
 Template.Mentor_MentorSpace_Answer_Form.helpers({
   existingAnswer() {

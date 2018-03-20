@@ -43,7 +43,5 @@ Accounts.onLogin(function onLogin() {
 });
 
 Accounts.onLogout(function logout() {
-  const id = Meteor.userId();
-  const username = Meteor.user() && Meteor.user().username;
   FlowRouter.go('/');
 });

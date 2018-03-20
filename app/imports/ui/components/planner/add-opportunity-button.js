@@ -1,10 +1,8 @@
 import { Template } from 'meteor/templating';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { plannerKeys } from './academic-plan';
-import { getRouteUserName } from '../shared/route-user-name';
 
 Template.Add_Opportunity_Button.onCreated(function addOpportunityButtonOnCreated() {
   this.state = this.data.dictionary;

@@ -5,8 +5,6 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { processVerificationEventMethod } from '../../../api/verification/VerificationRequestCollection.methods';
-import { getRouteUserName } from './route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 Template.Verification_Event.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.log = new ReactiveVar('');
@@ -70,8 +68,6 @@ Template.Verification_Event.events({
         appendToLog(instance, `Error: problem during processing: ${error}`);
       } else {
         appendToLog(instance, `${result}\n`);
-        const message = `${getRouteUserName()} verified ${opportunity.name} for ${student}`;
-        appLog.info(message);
       }
     });
   },

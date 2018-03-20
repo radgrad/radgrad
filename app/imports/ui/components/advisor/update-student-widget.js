@@ -16,7 +16,6 @@ import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.met
 import { ROLE } from '../../../api/role/Role.js';
 import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
 import { defaultCalcLevel } from '../../../api/level/LevelProcessor';
-import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { RadGrad } from '../../../api/radgrad/RadGrad';
 
