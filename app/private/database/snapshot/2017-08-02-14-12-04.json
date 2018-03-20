@@ -8792,6 +8792,10 @@
       ]
     },
     {
+      "name": "UserInteractionCollection",
+      "contents": []
+    },
+    {
       "name": "VerificationRequestCollection",
       "contents": [
         {
