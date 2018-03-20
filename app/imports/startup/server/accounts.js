@@ -9,7 +9,7 @@ const errorMessage = 'User not registered with RadGrad.';
 /* Make sure that the person attempting to login has a profile. Otherwise they are not logged in. */
 Accounts.validateNewUser(function validate(user) {
   // Don't do this check when running tests.
-  if (Meteor.settings.public.admin.development || Meteor.isTest || Meteor.isAppTest) {
+  if (Meteor.isTest || Meteor.isAppTest || Meteor.settings.public.admin.development) {
     return true;
   }
   // Otherwise ensure that there exists a profile for a user before creating a document for them in Meteor.users.
