@@ -143,12 +143,3 @@ Template.Course_Score_Board_Widget.events({
     instance.by4xx.set(!instance.by4xx.get());
   },
 });
-
-Template.Course_Score_Board_Widget.onRendered(function courseScoreBoardWidgetOnRendered() {
-  // add your statement here
-});
-
-Template.Course_Score_Board_Widget.onDestroyed(function courseScoreBoardWidgetOnDestroyed() {
-  // add your statement here
-});
-
