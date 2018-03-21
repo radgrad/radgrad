@@ -36,6 +36,23 @@ if (Meteor.isServer) {
       'ics_400+-4',
       'ics_400+-5',
     ];
+    const badCourseList = [
+      'ics_111-1',
+      'ics_141-1',
+      'ics_211-1',
+      'ics_241-1',
+      'ics_311-1',
+      'ics_314-1',
+      'ics_212-1',
+      'ics_321-1',
+      'ics_312,ics_331-1',
+      'ics_313,ics_361-1',
+      'ics_332-1',
+      'ics_400+-1',
+      'ics_400+-2',
+      'ics_400+-3',
+      'ics_400+-4',
+    ];
 
     before(function setup() {
       this.timeout(5000);
@@ -70,9 +87,17 @@ if (Meteor.isServer) {
       });
       expect(AcademicPlans.isDefined(redefinedID)).to.be.true;
       expect(anotherID).to.be.equal(redefinedID);
-      const errors = AcademicPlans.checkIntegrity();
+      let errors = AcademicPlans.checkIntegrity();
       expect(errors.length).to.equal(0);
       AcademicPlans.removeIt(anotherID);
+      const badID = AcademicPlans.define({
+        slug, degreeSlug, name: description, description, semester: notDefinedSemester, coursesPerSemester,
+        courseList: badCourseList,
+      });
+      expect(AcademicPlans.isDefined(badID)).to.be.true;
+      errors = AcademicPlans.checkIntegrity();
+      expect(errors.length).to.equal(1);
+      AcademicPlans.removeIt(badID);
     });
   });
 }

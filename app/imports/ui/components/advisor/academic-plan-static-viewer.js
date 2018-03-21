@@ -1,9 +1,5 @@
 import { Template } from 'meteor/templating';
 
-Template.Academic_Plan_Static_Viewer.onCreated(function academicPlanStaticViewerOnCreated() {
-  // add your statement here
-});
-
 Template.Academic_Plan_Static_Viewer.helpers({
   courses(yearNumber, semesterNumber) {
     const ret = [];
