@@ -15,7 +15,7 @@ Template.Course_Scoreboard_Filter_Widget.helpers({
     return Template.instance().state.get('by1xx');
   },
   is2xx() {
-    return Template.instance().stte.get('by2xx');
+    return Template.instance().state.get('by2xx');
   },
   is3xx() {
     return Template.instance().state.get('by3xx');

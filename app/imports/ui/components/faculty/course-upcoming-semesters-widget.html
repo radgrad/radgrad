@@ -1,0 +1,8 @@
+<template name="Course_Upcoming_Semesters_Widget">
+    <tr>
+        <td>{{courseName}}</td>
+        {{#each semester in semesters}}
+            {{> Course_Upcoming_Semester_Widget course=course semester=semester}}
+        {{/each}}
+    </tr>
+</template>
