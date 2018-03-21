@@ -6,9 +6,6 @@
            style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
         <h4 class="ui left floated header">{{toUpper name}}</h4>
         {{#if isInRole 'student'}}
-        <!--{{#if userStatus item}}-->
-          <!--<button value="{{id}}" class="ui basic green mini right floated button  addItem">SET AS DEGREE GOAL</button>-->
-            <!--{{/if}}-->
           <div class="ui right floated">
             {{> Academic_Plan_Form_Field plans=plans selectedPlan=selectedPlan label='Set Academic Plan'}}
           </div>
@@ -16,18 +13,6 @@
       </div>
 
       <div class="ui divider" style="margin-top: 0;"></div>
-
-      <!--<div class="ui stackable grid">-->
-        <!--<div class="column">-->
-          <!--{{#each descriptionPair in descriptionPairs}}-->
-            <!--{{#if descriptionPair.value }}-->
-              <!--<p><b>{{descriptionPair.label}}:</b> {{{markdownify descriptionPair.value}}}</p>-->
-            <!--{{else}}-->
-              <!--<p><b>{{descriptionPair.label}}:</b> N/A</p>-->
-            <!--{{/if}}-->
-          <!--{{/each}}-->
-        <!--</div>-->
-      <!--</div>-->
     </div>
 
   </div>

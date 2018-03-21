@@ -153,6 +153,13 @@ class AcademicPlanCollection extends BaseSlugCollection {
       if (!DesiredDegrees.isDefined(doc.degreeID)) {
         problems.push(`Bad desiredDegreeID: ${doc.degreeID}`);
       }
+      let numCourses = 0;
+      _.forEach(doc.coursesPerSemester, (n) => {
+        numCourses += n;
+      });
+      if (doc.courseList.length !== numCourses) {
+        problems.push(`Mismatch between courseList.length ${doc.courseList.length} and sum of coursesPerSemester ${numCourses}`); // eslint-disable-line
+      }
     });
     return problems;
   }
