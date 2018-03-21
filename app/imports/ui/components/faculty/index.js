@@ -1,5 +1,7 @@
 import './course-count-widget.html';
 import './course-count-widget';
+import './course-scoreboard-filter-widget.html';
+import './course-scoreboard-filter-widget';
 import './course-score-board-modal.html';
 import './course-score-board-modal';
 import './course-score-board-widget.html';
