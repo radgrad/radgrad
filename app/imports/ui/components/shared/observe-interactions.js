@@ -44,16 +44,18 @@ Template.Observe_Interactions.helpers({
                 case 'website':
                   return value;
                 default:
-                  return 'ERROR: No such UserInteraction type found!';
+                  return null;
               }
             }(type));
-            setTimeout(function () {
-              userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
-                if (error) {
-                  console.log('Error creating UserInteraction.', error);
-                }
-              });
-            }, 0);
+            if (typeData !== null) {
+              setTimeout(function () {
+                userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
+                  if (error) {
+                    console.log('Error creating UserInteraction.', error);
+                  }
+                });
+              }, 0);
+            }
           });
         },
       });
