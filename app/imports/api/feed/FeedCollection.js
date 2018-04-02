@@ -315,6 +315,14 @@ class FeedCollection extends BaseCollection {
    * @private
    */
   _defineNewLevel({ user, level, feedType, timestamp = moment().toDate() }) {
+    // First, see if we've already defined any users within the past day.
+    const recentFeedID = this.checkPastDayLevelFeed(level, timestamp);
+    // If there's a recentFeed, then update it instead with this user's info.
+    if (recentFeedID) {
+      this._updateNewLevel(user, recentFeedID, level);
+      return recentFeedID;
+    }
+
     let picture;
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getProfile(userID).username})  
@@ -360,6 +368,26 @@ class FeedCollection extends BaseCollection {
     return ret;
   }
 
+  checkPastDayLevelFeed(level, timestamp = moment().toDate()) {
+    let ret = false;
+    const instance = this;
+    const existingFeed = _.find(this._collection.find().fetch(), function (feed) {
+      if (withinPastDay(feed, timestamp)) {
+        if (feed.feedType === instance.NEW_LEVEL) {
+          // check the level
+          if (feed.description.includes(`${level}.`)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+    if (existingFeed) {
+      ret = existingFeed._id;
+    }
+    return ret;
+  }
+
   /**
    * Updates the existingFeedID with the new userID information
    * @param userID the new userID, existingFeedID the existing feed of the same type within the past 24 hours
@@ -373,7 +401,22 @@ class FeedCollection extends BaseCollection {
     userIDs.push(userID);
     const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getProfile(userIDs[0]).username}) 
       and ${userIDs.length - 1} others have joined RadGrad.`;
-    let picture = Users.getProfile(userID).picture;
+    let picture = Users.getProfile(userIDs[0]).picture;
+    if (!picture) {
+      picture = '/images/people/default-profile-picture.png';
+    }
+    this._collection.update(existingFeedID, { $set: { userIDs, description, picture } });
+  }
+
+  _updateNewLevel(username, existingFeedID, level) {
+    const userID = Users.getID(username);
+    this.assertDefined(existingFeedID);
+    const existingFeed = this.findDoc(existingFeedID);
+    const userIDs = existingFeed.userIDs;
+    userIDs.push(userID);
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getProfile(userIDs[0]).username}) 
+      and ${userIDs.length - 1} others have achieved level ${level}.`;
+    let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture) {
       picture = '/images/people/default-profile-picture.png';
     }
