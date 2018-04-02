@@ -42,12 +42,3 @@ Template.Course_Score_Board_Modal.events({
     $(`#${instance.data.course._id}${instance.data.semester._id}.ui.small.modal`).modal('show');
   },
 });
-
-Template.Course_Score_Board_Modal.onRendered(function courseScoreBoardModalOnRendered() {
-  // add your statement here
-});
-
-Template.Course_Score_Board_Modal.onDestroyed(function courseScoreBoardModalOnDestroyed() {
-  // add your statement here
-});
-

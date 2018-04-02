@@ -1,36 +1,6 @@
 <template name="Course_Score_Board_Widget">
     <h2 class="ui dividing header">COURSE SCOREBOARD</h2>
-    <div class="ui segment">
-        <h4 class="ui dividing header">Filter By</h4>
-        <div class="field">
-            <div class="ui radio checkbox {{#if isICS}}checked{{/if}}">
-                <input class="jsByICS" type="radio" name="ics" checked={{isICS}}>
-                <label>ICS&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            </div>
-            <div class="ui radio checkbox {{#if isEE}}checked{{/if}}">
-                <input class="jsByEE" type="radio" name="ee" checked={{isEE}}>
-                <label>EE&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            </div>
-        </div>
-        <div class="field">
-            <div class="ui radio checkbox {{#if is1xx}}checked{{/if}}">
-                <input class="jsBy1xx" type="radio" name="1xx" checked={{is1xx}}>
-                <label>1xx&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            </div>
-            <div class="ui radio checkbox {{#if is2xx}}checked{{/if}}">
-                <input class="jsBy2xx" type="radio" name="2xx" checked={{is2xx}}>
-                <label>2xx&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            </div>
-            <div class="ui radio checkbox {{#if is3xx}}checked{{/if}}">
-                <input class="jsBy3xx" type="radio" name="3xx" checked={{is3xx}}>
-                <label>3xx&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            </div>
-            <div class="ui radio checkbox {{#if is4xx}}checked{{/if}}">
-                <input class="jsBy4xx" type="radio" name="4xx" checked={{is4xx}}>
-                <label>4xx&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            </div>
-        </div>
-    </div>
+    {{> Course_Scoreboard_Filter_Widget dictionary=getDictionary}}
     <table class="ui celled table">
         <thead>
         <tr>
@@ -42,18 +12,7 @@
         </thead>
         <tbody>
         {{#each course in courses}}
-            <tr>
-                <td>{{courseName course}}</td>
-                {{#each semester in upcomingSemesters}}
-                    <td>
-                        {{#if (hasCount course semester)}}
-                            {{> Course_Score_Board_Modal course=course semester=semester}}
-                        {{else}}
-                            {{courseCount course semester}}
-                        {{/if}}
-                    </td>
-                {{/each}}
-            </tr>
+            {{> Course_Upcoming_Semesters_Widget course=course semesters=upcomingSemesters}}
         {{/each}}
         </tbody>
     </table>

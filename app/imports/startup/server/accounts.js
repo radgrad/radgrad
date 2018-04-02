@@ -6,7 +6,7 @@ import { Users } from '/imports/api/user/UserCollection';
 
 Accounts.validateNewUser(function validate(user) {
   // Don't do this check when running tests.
-  if (Meteor.isTest || Meteor.isAppTest) {
+  if (Meteor.isTest || Meteor.isAppTest || Meteor.settings.public.admin.development) {
     return true;
   }
 

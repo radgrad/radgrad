@@ -1,0 +1,9 @@
+<template name="Course_Upcoming_Semester_Widget">
+    <td>
+        {{#if hasCount}}
+            {{> Course_Score_Board_Modal course=course semester=semester}}
+        {{else}}
+            {{courseCount}}
+        {{/if}}
+    </td>
+</template>
