@@ -3,6 +3,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Explorer_Choose_User_Widget.onCreated(function explorerChooseUserWidgetOnCreated() {
   if (this.data.userID) {
@@ -31,7 +32,7 @@ Template.Explorer_Choose_User_Widget.helpers({
     if (user.picture) {
       return user.picture;
     }
-    return '/images/default-profile-picture.png';
+    return defaultProfilePicture;
   },
   studentRole() {
     return ROLE.STUDENT;

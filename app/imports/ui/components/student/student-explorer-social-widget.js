@@ -4,6 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Explorer_Social_Widget.onCreated(function studentExplorerSocialWidgetOnCreated() {
   this.currentItem = () => FlowRouter.getParam('course');
@@ -41,7 +42,7 @@ Template.Student_Explorer_Social_Widget.helpers({
     ];
   },
   userPicture(user) {
-    return Users.getProfile(user).picture || '/images/default-profile-picture.png';
+    return Users.getProfile(user).picture || defaultProfilePicture;
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;

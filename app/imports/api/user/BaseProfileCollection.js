@@ -17,6 +17,8 @@ import { VerificationRequests } from '../verification/VerificationRequestCollect
 
 /* eslint-disable no-param-reassign, class-methods-use-this */
 
+export const defaultProfilePicture = '/images/default-profile-picture.png';
+
 /** Set up the object to be used to map role names to their corresponding collections.
  * @memberOf api/user */
 const rolesToCollectionNames = {};
@@ -143,7 +145,7 @@ class BaseProfileCollection extends BaseSlugCollection {
     if (!doc) {
       return false;
     }
-    return _.isNil(doc.picture) || doc.picture === '/images/people/default-profile-picture.png';
+    return _.isNil(doc.picture) || doc.picture === defaultProfilePicture;
   }
 
   /**

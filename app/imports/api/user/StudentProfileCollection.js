@@ -2,7 +2,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
-import BaseProfileCollection from './BaseProfileCollection';
+import BaseProfileCollection, { defaultProfilePicture } from './BaseProfileCollection';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
@@ -53,7 +53,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * academicPlan, declaredSemester, hiddenCourses, or hiddenOpportunities are invalid.
    * @return { String } The docID of the StudentProfile.
    */
-  define({ username, firstName, lastName, picture = '/images/default-profile-picture.png', website, interests,
+  define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
            careerGoals, level, academicPlan, declaredSemester, hiddenCourses = [], hiddenOpportunities = [],
            isAlumni = false }) {
     if (Meteor.isServer) {

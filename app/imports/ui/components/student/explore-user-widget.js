@@ -5,6 +5,7 @@ import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
 import { getExplorerUserID } from '../../utilities/template-helpers';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
   this.autorun(() => {
@@ -104,7 +105,7 @@ Template.Explore_User_Widget.helpers({
       if (user.picture) {
         return user.picture;
       }
-      return '/images/default-profile-picture.png';
+      return defaultProfilePicture;
     }
     return '';
   },

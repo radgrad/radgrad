@@ -5,6 +5,7 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { isLabel } from '../../utilities/template-helpers';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Landing_Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -43,7 +44,7 @@ Template.Landing_Explorer_Interests_Widget.helpers({
     return string.toUpperCase();
   },
   userPicture(user) {
-    return Users.getProfile(user).picture || '/images/default-profile-picture.png';
+    return Users.getProfile(user).picture || defaultProfilePicture;
   },
   usersRouteName() {
     return RouteNames.landingExplorerUsersPageRouteName;

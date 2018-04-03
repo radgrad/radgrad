@@ -10,6 +10,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { isInRole } from '../../utilities/template-helpers';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
   this.planVar = new ReactiveVar();
@@ -32,7 +33,7 @@ Template.Student_Explorer_Plans_Widget.helpers({
         return Users.getProfile(user).picture;
       }
     }
-    return '/images/default-profile-picture.png';
+    return defaultProfilePicture;
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;

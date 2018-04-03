@@ -10,6 +10,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { updateAcademicPlanMethod } from '../../../api/user/UserCollection.methods';
 import { isInRole } from '../../utilities/template-helpers';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Explorer_Degrees_Widget.helpers({
   fullName(user) {
@@ -28,7 +29,7 @@ Template.Student_Explorer_Degrees_Widget.helpers({
         return Users.getProfile(user).picture;
       }
     }
-    return '/images/default-profile-picture.png';
+    return defaultProfilePicture;
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;

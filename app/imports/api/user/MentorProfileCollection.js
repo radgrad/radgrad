@@ -1,7 +1,7 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseProfileCollection from './BaseProfileCollection';
+import BaseProfileCollection, { defaultProfilePicture } from './BaseProfileCollection';
 import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
@@ -42,7 +42,7 @@ class MentorProfileCollection extends BaseProfileCollection {
    * @throws { Meteor.Error } If username has been previously defined, or if any interests or careerGoals are invalid.
    * @return { String } The docID of the MentorProfile.
    */
-  define({ username, firstName, lastName, picture = '/images/default-profile-picture.png', website, interests,
+  define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
            careerGoals, company, career, location, linkedin, motivation }) {
     if (Meteor.isServer) {
       const role = ROLE.MENTOR;

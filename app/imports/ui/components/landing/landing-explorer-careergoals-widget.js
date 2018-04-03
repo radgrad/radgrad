@@ -5,6 +5,7 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { isLabel } from '../../utilities/template-helpers';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Landing_Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -25,7 +26,7 @@ Template.Landing_Explorer_CareerGoals_Widget.helpers({
   },
   userPicture(user) {
     const picture = Users.getProfile(user).picture;
-    return picture || '/images/default-profile-picture.png';
+    return picture || defaultProfilePicture;
   },
   userStatus(careerGoal) {  // eslint-disable-line
     return false;

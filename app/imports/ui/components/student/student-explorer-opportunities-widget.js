@@ -9,6 +9,7 @@ import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.updated = new ReactiveVar(false);
@@ -66,7 +67,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
     return teaser;
   },
   userPicture(user) {
-    return Users.getProfile(user).picture || '/images/default-profile-picture.png';
+    return Users.getProfile(user).picture || defaultProfilePicture;
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;

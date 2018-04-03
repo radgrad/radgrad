@@ -9,6 +9,7 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
+import { defaultProfilePicture } from '../user/BaseProfileCollection';
 
 /**
  * Returns the number of whole days between date a and b.
@@ -266,7 +267,7 @@ class FeedCollection extends BaseCollection {
       has added a course review for [${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)})`;
     picture = Users.getProfile(userID).picture;
     if (!picture) {
-      picture = '/images/people/default-profile-picture.png';
+      picture = defaultProfilePicture;
     }
     const feedID = this._collection.insert({ userIDs: [userID], courseID, description, timestamp, picture, feedType });
     return feedID;
@@ -294,7 +295,7 @@ class FeedCollection extends BaseCollection {
       [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)})`;
     picture = Users.getProfile(userID).picture;
     if (!picture) {
-      picture = '/images/people/default-profile-picture.png';
+      picture = defaultProfilePicture;
     }
     const feedID = this._collection.insert({ userIDs: [userID], opportunityID, description, timestamp, picture,
       feedType });
@@ -329,7 +330,7 @@ class FeedCollection extends BaseCollection {
       has achieved level ${level}.`;
     picture = Users.getProfile(userID).picture;
     if (!picture) {
-      picture = '/images/people/default-profile-picture.png';
+      picture = defaultProfilePicture;
     }
     const feedID = this._collection.insert({ userIDs: [userID], description, timestamp, picture,
       feedType });
@@ -403,7 +404,7 @@ class FeedCollection extends BaseCollection {
       and ${userIDs.length - 1} others have joined RadGrad.`;
     let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture) {
-      picture = '/images/people/default-profile-picture.png';
+      picture = defaultProfilePicture;
     }
     this._collection.update(existingFeedID, { $set: { userIDs, description, picture } });
   }
@@ -418,7 +419,7 @@ class FeedCollection extends BaseCollection {
       and ${userIDs.length - 1} others have achieved level ${level}.`;
     let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture) {
-      picture = '/images/people/default-profile-picture.png';
+      picture = defaultProfilePicture;
     }
     this._collection.update(existingFeedID, { $set: { userIDs, description, picture } });
   }
