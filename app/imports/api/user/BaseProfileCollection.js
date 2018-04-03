@@ -19,7 +19,7 @@ import { VerificationRequests } from '../verification/VerificationRequestCollect
 
 /** Set up the object to be used to map role names to their corresponding collections.
  * @memberOf api/user */
-const rolesToCollectionNames = { };
+const rolesToCollectionNames = {};
 rolesToCollectionNames[ROLE.ADVISOR] = 'AdvisorProfileCollection';
 rolesToCollectionNames[ROLE.FACULTY] = 'FacultyProfileCollection';
 rolesToCollectionNames[ROLE.MENTOR] = 'MentorProfileCollection';
@@ -130,6 +130,20 @@ class BaseProfileCollection extends BaseSlugCollection {
   hasProfile(user) {
     const userID = Users.getID(user);
     return this._collection.findOne({ userID });
+  }
+
+  /**
+   * Returns true if the user has set their picture.
+   * @param user The user (either their username (email) or their userID).
+   * @return {boolean}
+   */
+  hasSetPicture(user) {
+    const userID = Users.getID(user);
+    const doc = this._collection.findOne({ userID });
+    if (!doc) {
+      return false;
+    }
+    return _.isNil(doc.picture) || doc.picture === '/images/people/default-profile-picture.png';
   }
 
   /**
