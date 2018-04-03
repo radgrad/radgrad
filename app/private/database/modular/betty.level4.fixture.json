@@ -1,0 +1,23 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription": "Betty's course instances for level 4. Requires betty.student, extended.courses.interests, opportunities, betty.level2, betty.level3.",
+  "collections": [
+    {
+      "name": "OpportunityInstanceCollection",
+      "contents": [
+        {
+          "semester": "Summer-2014",
+          "opportunity": "google-summer-of-code",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "dahi-internship",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        }
+      ]
+    }
+  ]
+}

@@ -16,8 +16,10 @@ import { RadGrad } from '../radgrad/RadGrad';
  * @memberOf api/level
  */
 export function defaultCalcLevel(studentID) {
-  const instances = _.concat(CourseInstances.find({ studentID }).fetch(),
-      OpportunityInstances.find({ studentID }).fetch());
+  const instances = _.concat(CourseInstances.find({ studentID })
+      .fetch(),
+    OpportunityInstances.find({ studentID })
+      .fetch());
   const verified = [];
   _.forEach(instances, (i) => {
     if (i.verified) { // May need to account for taking the class again.
@@ -25,38 +27,39 @@ export function defaultCalcLevel(studentID) {
     }
   });
   const ice = getEarnedICE(verified);
-  const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true }).count();
+  const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true })
+    .count();
+  const hasPicture = StudentProfiles.hasSetPicture(studentID);
   let level = 1;
   if (ice.i >= 100 &&
-      ice.c >= 100 &&
-      ice.e >= 100 &&
-      numReviews >= 6) {
+    ice.c >= 100 &&
+    ice.e >= 100 &&
+    numReviews >= 6 &&
+    hasPicture) {
     level = 6;
-  } else
-    if (ice.i >= 80 &&
-        ice.c >= 80 &&
-        ice.e >= 80 &&
-        numReviews >= 1) {
-      level = 5;
-    } else
-      if (ice.i >= 30 &&
-          ice.c >= 36 &&
-          ice.e >= 30 &&
-          numReviews >= 0) {
-        level = 4;
-      } else
-        if ((ice.i >= 1 ||
-                ice.e >= 1) &&
-            ice.c >= 24 &&
-            numReviews >= 0) {
-          level = 3;
-        } else
-          if (ice.i >= 0 &&
-              ice.c >= 12 &&
-              ice.e >= 0 &&
-              numReviews >= 0) {
-            level = 2;
-          }
+  } else if (ice.i >= 80 &&
+    ice.c >= 80 &&
+    ice.e >= 80 &&
+    numReviews >= 1 &&
+    hasPicture) {
+    level = 5;
+  } else if (ice.i >= 30 &&
+    ice.c >= 36 &&
+    ice.e >= 30 &&
+    numReviews >= 0 &&
+    hasPicture) {
+    level = 4;
+  } else if ((ice.i >= 1 ||
+      ice.e >= 1) &&
+    ice.c >= 24 &&
+    numReviews >= 0) {
+    level = 3;
+  } else if (ice.i >= 0 &&
+    ice.c >= 12 &&
+    ice.e >= 0 &&
+    numReviews >= 0) {
+    level = 2;
+  }
   // console.log(studentID, ice, numReviews, level);
   return level;
 }
@@ -101,8 +104,10 @@ export function updateStudentLevel(advisor, studentID) {
  * @memberOf api/level
  */
 export function updateAllStudentLevels(advisor) {
-  StudentProfiles.find().forEach((student) => {
-    updateStudentLevel(advisor, student.userID);
-  });
-  return StudentProfiles.find().count();
+  StudentProfiles.find()
+    .forEach((student) => {
+      updateStudentLevel(advisor, student.userID);
+    });
+  return StudentProfiles.find()
+    .count();
 }
