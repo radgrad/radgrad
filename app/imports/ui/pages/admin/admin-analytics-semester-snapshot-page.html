@@ -1,0 +1,11 @@
+<template name="Admin_Analytics_Semester_Snapshot_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_Analytics_Layout}}
+      {{> Semester_Snapshot_Widget }}
+    {{/Admin_Analytics_Layout}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+
+</template>

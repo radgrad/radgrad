@@ -10,5 +10,5 @@ Template.Admin_Analytics_Menu.helpers({
   },
   semesterSnapshotRouteName() {
     return RouteNames.adminAnalyticsSemesterSnapshotPageRouteName;
-  }
+  },
 });
