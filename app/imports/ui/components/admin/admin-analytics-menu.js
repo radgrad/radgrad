@@ -8,4 +8,7 @@ Template.Admin_Analytics_Menu.helpers({
   userInteractionsRouteName() {
     return RouteNames.adminAnalyticsUserInteractionsPageRouteName;
   },
+  semesterSnapshotRouteName() {
+    return RouteNames.adminAnalyticsSemesterSnapshotPageRouteName;
+  }
 });

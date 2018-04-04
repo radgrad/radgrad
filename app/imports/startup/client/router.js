@@ -215,6 +215,13 @@ adminRoutes.route('/course-scoreboard', {
   },
 });
 
+export const adminAnalyticsSemesterSnapshotPageRouteName = 'Admin_Analytics_Semester_Snapshot_Page';
+adminRoutes.route('/analytics/semester-snapshot', {
+  name: adminAnalyticsSemesterSnapshotPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsSemesterSnapshotPageRouteName });
+  },
+});
 
 /*                        ADVISOR ROUTES                       */
 

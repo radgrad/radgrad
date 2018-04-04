@@ -91,6 +91,9 @@ import './list-users-widget.js';
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
 
+import './semester-snapshot-widget.html';
+import './semester-snapshot-widget.js';
+
 import './update-career-goal-widget.html';
 import './update-career-goal-widget.js';
 
