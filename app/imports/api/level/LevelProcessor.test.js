@@ -49,7 +49,7 @@ if (Meteor.isServer) {
       expect(defaultCalcLevel(bettyProfile.userID)).to.equal(1);
       defineTestFixtures(['betty.level2']); // ice [0, 16, 0]
       expect(defaultCalcLevel(bettyProfile.userID)).to.equal(2);
-      defineTestFixtures(['opportunities', 'betty.level3']); // [5, 26, 5]
+      defineTestFixtures(['opportunities', 'extended.opportunities', 'betty.level3']); // [5, 26, 5]
       expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3);
       defineTestFixtures(['betty.level4']); // [30, 36, 35]
       expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3); // since she doesn't have a picture
