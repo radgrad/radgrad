@@ -142,10 +142,11 @@ class BaseProfileCollection extends BaseSlugCollection {
   hasSetPicture(user) {
     const userID = Users.getID(user);
     const doc = this._collection.findOne({ userID });
+    // console.log(doc);
     if (!doc) {
       return false;
     }
-    return _.isNil(doc.picture) || doc.picture === defaultProfilePicture;
+    return !(_.isNil(doc.picture) || doc.picture === defaultProfilePicture);
   }
 
   /**

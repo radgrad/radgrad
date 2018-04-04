@@ -44,13 +44,19 @@ if (Meteor.isServer) {
       const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(bettyProfile).to.exist;
       const level = defaultCalcLevel(bettyProfile.userID);
-      expect(level).to.equal(1);
-      defineTestFixtures(['betty.level2']);
+      expect(level).to.equal(1); // no ice points
+      defineTestFixtures(['betty.level1']); // one A [0, 10, 0]
+      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(1);
+      defineTestFixtures(['betty.level2']); // ice [0, 16, 0]
       expect(defaultCalcLevel(bettyProfile.userID)).to.equal(2);
-      defineTestFixtures(['opportunities', 'betty.level3']);
+      defineTestFixtures(['opportunities', 'betty.level3']); // [5, 26, 5]
       expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3);
-      defineTestFixtures(['betty.level4']);
+      defineTestFixtures(['betty.level4']); // [30, 36, 35]
       expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3); // since she doesn't have a picture
+      // const updateData = {};
+      // updateData.picture = '/images/mockup/betty.jpg';
+      // StudentProfiles.update(bettyProfile._id, updateData);
+      // expect(defaultCalcLevel(bettyProfile.userID)).to.equal(4); // since she set her picture
       done();
     });
   });
