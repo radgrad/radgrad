@@ -52,7 +52,7 @@ if (Meteor.isServer) {
       defineTestFixtures(['opportunities', 'extended.opportunities', 'betty.level3']); // [5, 26, 5]
       expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3);
       defineTestFixtures(['betty.level4']); // [30, 36, 35]
-      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3); // since she doesn't have a picture
+      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3); // since she doesn't have a picture nor plan to 100
       // const updateData = {};
       // updateData.picture = '/images/mockup/betty.jpg';
       // StudentProfiles.update(bettyProfile._id, updateData);

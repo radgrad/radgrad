@@ -101,6 +101,31 @@
             "Spring-2021",
             "Summer-2021"
           ]
+        },
+        {
+          "name": "Business Plan Competition",
+          "slug": "shidler-bpc",
+          "description": "The annual Shidler Business Plan competition is an intense and unique semester-long learning opportunity for UH students who aspire to pursue a business venture. The competition provides mentorship, training and resources. Winners walk away with a wealth of business savvy and substantial cash prizes. \n\n[Learn more here.](http://pace.shidler.hawaii.edu/bpc)\n\n#### Verification criteria\nAt the conclusion of the competition, request this Opportunity's sponsor to login to RadGrad to verify your participation. Provide your business plan and selfies at two meetings to verify your participation.",
+          "opportunityType": "event",
+          "sponsor": "radgrad@hawaii.edu",
+          "ice": {
+            "i": 10,
+            "c": 0,
+            "e": 15
+          },
+          "interests": [
+            "entrepreneurship"
+          ],
+          "semesters": [
+            "Spring-2013",
+            "Spring-2014",
+            "Spring-2015",
+            "Spring-2016",
+            "Spring-2017",
+            "Spring-2018",
+            "Spring-2019",
+            "Spring-2020"
+          ]
         }
       ]
     }

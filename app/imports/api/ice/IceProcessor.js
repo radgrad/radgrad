@@ -86,7 +86,7 @@ export function makeCourseICE(course, grade) {
  */
 export function getEarnedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
-  docs.map((instance) => {
+  docs.forEach((instance) => {
     if (!(isICE(instance.ice))) {
       throw new Meteor.Error(`getEarnedICE passed ${instance} without a valid .ice field.`);
     }
@@ -109,7 +109,7 @@ export function getEarnedICE(docs) {
  */
 export function getProjectedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
-  docs.map((instance) => {
+  docs.forEach((instance) => {
     if (!(isICE(instance.ice))) {
       throw new Meteor.Error(`getProjectedICE passed ${instance} without a valid .ice field.`);
     }
