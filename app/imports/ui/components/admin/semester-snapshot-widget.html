@@ -1,3 +1,16 @@
 <template name="Semester_Snapshot_Widget">
-
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>Semester Snapshot</h4></div>
+    <form class="ui form">
+      <select class="ui dropdown" name="dropdown">
+        {{#each semester in semesters}}
+          <option value="{{semester._id}}">{{semester.term}} {{semester.year}}</option>
+        {{/each}}
+      </select>
+      <button class="ui green basic button" type="submit">Create Snapshot</button>
+    </form>
+  </div>
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>Snapshot</h4></div>
+  </div>
 </template>

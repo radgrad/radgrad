@@ -1,6 +1,6 @@
+import { moment } from 'meteor/momentjs:moment';
 import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
-import { Semesters} from './SemesterCollection';
 
 class SemesterSnapshotCollection extends BaseCollection {
 
@@ -10,33 +10,60 @@ class SemesterSnapshotCollection extends BaseCollection {
   constructor() {
     super('SemesterSnapshot', new SimpleSchema({
       semesterID: { type: String },
-      year1: [String],
-      year2: [String],
-      year3: [String],
-      year4: [String],
-      year5: [String],
+      timestamp: { type: Date },
+      yearOne: [String],
+      yearTwo: [String],
+      yearThree: [String],
+      yearFour: [String],
+      yearFive: [String],
       radGradActive: [String],
       radGradInactive: [String],
       copActive: [String],
       copInactive: [String],
     }));
   }
-
-  define({ term, year }) {
-    const semester = Semesters.findOne({ term: term, year: year });
-    console.log(semester);
-    const semesterID = Semesters.getID(semester);
-    const year1 = ['test'];
-    const year2 = ['test'];
-    const year3 = ['test'];
-    const year4 = ['test'];
-    const year5 = ['test'];
-    const radGradActive = ['test'];
-    const radGradInactive = ['test'];
-    const copActive = ['test'];
-    const copInactive = ['test'];
-    this._collection.insert({ semesterID, year1, year2, year3, year4, year5,
+  define({ semesterID, timestamp = moment().toDate(), year1, year2, year3, year4, year5, radGradActive,
+           radGradInactive, copActive, copInactive }) {
+    this._collection.insert({ semesterID, timestamp, year1, year2, year3, year4, year5,
       radGradActive, radGradInactive, copActive, copInactive });
+  }
+  /**
+   * Remove the SemesterSnapshot instance.
+   * @param docID The docID of the SemesterSnapshot.
+   */
+  removeIt(docID) {
+    this.assertDefined(docID);
+    super.removeIt(docID);
+  }
+  /**
+   * Returns an array of strings, each one representing an integrity problem with this collection.
+   * Returns an empty array if no problems were found.
+   * @returns {Array} A (possibly empty) array of strings indicating integrity issues.
+   */
+  checkIntegrity() { // eslint-disable-line class-methods-use-this
+    const problems = [];
+    return problems;
+  }
+  /**
+   * Returns an object representing the SemesterSnapshot docID in a format acceptable to define().
+   * @param docID The docID of a SemesterSnapshot.
+   * @returns { Object } An object representing the definition of docID.
+   */
+  dumpOne(docID) {
+    const doc = this.findDoc(docID);
+    const semesterID = doc.semesterID;
+    const timestamp = doc.timestamp;
+    const yearOne = doc.yearOne;
+    const yearTwo = doc.yearTwo;
+    const yearThree = doc.yearThree;
+    const yearFour = doc.yearFour;
+    const yearFive = doc.yearFive;
+    const radGradActive = doc.radGradActive;
+    const radGradInactive = doc.radGradInactive;
+    const copActive = doc.copActive;
+    const copInactive = doc.copInactive;
+    return { semesterID, timestamp, yearOne, yearTwo, yearThree, yearFour, yearFive,
+      radGradActive, radGradInactive, copActive, copInactive };
   }
 }
 

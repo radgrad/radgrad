@@ -36,6 +36,7 @@ class OpportunityCollection extends BaseSlugCollection {
       // Optional data
       eventDate: { type: Date, optional: true },
       ice: { type: Object, optional: true, blackbox: true },
+      copActive: { type: Boolean },
     }));
   }
 
