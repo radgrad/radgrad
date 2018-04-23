@@ -13,6 +13,9 @@ Users.publish();
 
 // User Status
 Meteor.publish('userStatus', function () {
+  if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
+    return this.ready();
+  }
   if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
     return Meteor.users.find({ 'status.online': true });
   }

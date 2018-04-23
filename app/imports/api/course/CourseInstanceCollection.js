@@ -279,6 +279,9 @@ class CourseInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this.publicationNames.student, function publish() {
+        if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
+          return this.ready();
+        }
         if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
           return instance._collection.find();
         }
