@@ -10,6 +10,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
@@ -61,7 +62,7 @@ Template.Student_Explorer_Interests_Widget.helpers({
     return string.toUpperCase();
   },
   userPicture(user) {
-    return Users.getProfile(user).picture || '/images/default-profile-picture.png';
+    return Users.getProfile(user).picture || defaultProfilePicture;
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;

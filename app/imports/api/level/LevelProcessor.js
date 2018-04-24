@@ -1,7 +1,7 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
-import { getEarnedICE } from '../ice/IceProcessor';
+import { getEarnedICE, getProjectedICE } from '../ice/IceProcessor';
 import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollection';
 import { Reviews } from '../review/ReviewCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
@@ -16,47 +16,55 @@ import { RadGrad } from '../radgrad/RadGrad';
  * @memberOf api/level
  */
 export function defaultCalcLevel(studentID) {
-  const instances = _.concat(CourseInstances.find({ studentID }).fetch(),
-      OpportunityInstances.find({ studentID }).fetch());
-  const verified = [];
-  _.forEach(instances, (i) => {
-    if (i.verified) { // May need to account for taking the class again.
-      verified.push(i);
-    }
-  });
-  const ice = getEarnedICE(verified);
-  const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true }).count();
+  const instances = _.concat(CourseInstances.find({ studentID })
+      .fetch(),
+    OpportunityInstances.find({ studentID })
+      .fetch());
+  const earnedICE = getEarnedICE(instances);
+  const plannedICE = getProjectedICE(instances);
+  const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true })
+    .count();
+  const hasPicture = StudentProfiles.hasSetPicture(studentID);
+  // console.log(ice, numReviews, hasPicture);
   let level = 1;
-  if (ice.i >= 100 &&
-      ice.c >= 100 &&
-      ice.e >= 100 &&
-      numReviews >= 6) {
+  if (earnedICE.i >= 100 &&
+    earnedICE.c >= 100 &&
+    earnedICE.e >= 100 &&
+    numReviews >= 6 &&
+    plannedICE.i >= 100 &&
+    plannedICE.c >= 100 &&
+    plannedICE.e >= 100 &&
+    hasPicture) {
     level = 6;
-  } else
-    if (ice.i >= 80 &&
-        ice.c >= 80 &&
-        ice.e >= 80 &&
-        numReviews >= 1) {
-      level = 5;
-    } else
-      if (ice.i >= 30 &&
-          ice.c >= 36 &&
-          ice.e >= 30 &&
-          numReviews >= 0) {
-        level = 4;
-      } else
-        if ((ice.i >= 1 ||
-                ice.e >= 1) &&
-            ice.c >= 24 &&
-            numReviews >= 0) {
-          level = 3;
-        } else
-          if (ice.i >= 0 &&
-              ice.c >= 12 &&
-              ice.e >= 0 &&
-              numReviews >= 0) {
-            level = 2;
-          }
+  } else if (earnedICE.i >= 80 &&
+    earnedICE.c >= 80 &&
+    earnedICE.e >= 80 &&
+    numReviews >= 1 &&
+    plannedICE.i >= 100 &&
+    plannedICE.c >= 100 &&
+    plannedICE.e >= 100 &&
+    hasPicture) {
+    level = 5;
+  } else if (earnedICE.i >= 30 &&
+    earnedICE.c >= 36 &&
+    earnedICE.e >= 30 &&
+    numReviews >= 0 &&
+    plannedICE.i >= 100 &&
+    plannedICE.c >= 100 &&
+    plannedICE.e >= 100 &&
+    hasPicture) {
+    level = 4;
+  } else if ((earnedICE.i >= 1 ||
+      earnedICE.e >= 1) &&
+    earnedICE.c >= 24 &&
+    numReviews >= 0) {
+    level = 3;
+  } else if (earnedICE.i >= 0 &&
+    earnedICE.c >= 12 &&
+    earnedICE.e >= 0 &&
+    numReviews >= 0) {
+    level = 2;
+  }
   // console.log(studentID, ice, numReviews, level);
   return level;
 }
@@ -101,8 +109,10 @@ export function updateStudentLevel(advisor, studentID) {
  * @memberOf api/level
  */
 export function updateAllStudentLevels(advisor) {
-  StudentProfiles.find().forEach((student) => {
-    updateStudentLevel(advisor, student.userID);
-  });
-  return StudentProfiles.find().count();
+  StudentProfiles.find()
+    .forEach((student) => {
+      updateStudentLevel(advisor, student.userID);
+    });
+  return StudentProfiles.find()
+    .count();
 }

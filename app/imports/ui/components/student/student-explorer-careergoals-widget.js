@@ -10,6 +10,7 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { isLabel } from '../../utilities/template-helpers';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
@@ -33,7 +34,7 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
   },
   userPicture(user) {
     const picture = Users.getProfile(user).picture;
-    return picture || '/images/default-profile-picture.png';
+    return picture || defaultProfilePicture;
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;

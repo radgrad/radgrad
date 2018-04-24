@@ -66,7 +66,7 @@ import '/imports/ui/pages/guidedtour';
 
 import '/imports/ui/utilities';
 
-import './lib/semantic-ui/semantic.min.css';
+// import './lib/semantic-ui/semantic.min.css';
 import './lib/semantic-ui/semantic.min.js';
 import '../imports/ui/stylesheets/style.css';
 

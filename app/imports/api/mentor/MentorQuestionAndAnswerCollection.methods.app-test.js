@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { expect } from 'chai';
 import { defineMethod, removeItMethod, updateMethod } from '../base/BaseCollection.methods';
 import { MentorAnswers } from './MentorAnswerCollection';
 import { MentorQuestions } from './MentorQuestionCollection';
@@ -31,11 +32,19 @@ if (Meteor.isClient) {
     it('Define Method (Question)', async function () {
       await withLoggedInUser();
       await withRadGradSubscriptions();
-      await defineMethod.callPromise({ collectionName: questionCollectionName, definitionData: questionDefinition });
+      const questionID = await defineMethod.callPromise({
+        collectionName: questionCollectionName,
+        definitionData: questionDefinition,
+      });
+      expect(MentorQuestions.isDefined(questionID)).to.be.true;
     });
 
     it('Define Method (Answer)', async function () {
-      await defineMethod.callPromise({ collectionName: answerCollectionName, definitionData: answerDefinition });
+      const answerID = await defineMethod.callPromise({
+        collectionName: answerCollectionName,
+        definitionData: answerDefinition,
+      });
+      expect(MentorAnswers.isDefined(answerID)).to.be.true;
     });
 
     it('Question Update Method', async function () {
@@ -49,6 +58,8 @@ if (Meteor.isClient) {
         collectionName: questionCollectionName,
         updateData: { id, question, student, moderated, visible, moderatorComments },
       });
+      const doc = MentorQuestions.findDoc(id);
+      expect(doc.question).to.equal(question);
     });
 
     it('Answer Update Method', async function () {
@@ -56,17 +67,17 @@ if (Meteor.isClient) {
       const id = MentorAnswers.findDoc({ questionID })._id;
       const text = 'updated answer text';
       await updateMethod.callPromise({ collectionName: answerCollectionName, updateData: { id, text } });
+      const doc = MentorAnswers.findDoc(id);
+      expect(doc.text).to.equal(text);
     });
 
-    it.skip('Question Remove Method', async function () {
-      const instance = MentorQuestions.findIdBySlug(questionDefinition.slug);
-      await removeItMethod.callPromise({ collectionName: questionCollectionName, instance });
-    });
-
-    it.skip('Answer Remove Method', async function () {
+    it('Question & Answer Remove Methods', async function () {
       const questionID = MentorQuestions.findIdBySlug(questionDefinition.slug);
-      const instance = MentorAnswers.findDoc({ questionID })._id;
-      await removeItMethod.callPromise({ collectionName: answerCollectionName, instance });
+      const answerID = MentorAnswers.findDoc({ questionID })._id;
+      await removeItMethod.callPromise({ collectionName: answerCollectionName, answerID });
+      expect(MentorAnswers.isDefined(answerID)).to.be.false;
+      await removeItMethod.callPromise({ collectionName: questionCollectionName, questionID });
+      expect(MentorQuestions.isDefined(questionID)).to.be.false;
     });
   });
 }

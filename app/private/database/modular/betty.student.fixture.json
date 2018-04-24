@@ -1,16 +1,14 @@
 {
   "timestamp": "2017-03-10T20:04:41.798Z",
-  "fixtureDescription" : "Defines student Abi Kealoha. Requires minimal.fixture.",
+  "fixtureDescription": "Defines student Betty Keanu. Requires minimal.fixture.",
   "collections": [
     {
       "name": "StudentProfileCollection",
       "contents": [
         {
-          "firstName": "Abigail",
-          "lastName": "Kealoha",
-          "username": "abi@hawaii.edu",
-          "picture": "/images/mockup/abi.jpg",
-          "website": "http://abi.github.io",
+          "firstName": "Betty",
+          "lastName": "Keanu",
+          "username": "betty@hawaii.edu",
           "interests": [
             "algorithms"
           ],

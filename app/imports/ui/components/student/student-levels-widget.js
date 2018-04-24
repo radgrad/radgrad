@@ -37,7 +37,7 @@ Template.Student_Levels_Widget.helpers({
       case 2:
         return 'With any luck, you\'ll achieve Level 3 after you complete your second semester of ICS coursework, as long as your grades are good. As before, meet with your Advisor to update RadGrad with your current STAR data, and if the system shows you\'ve gotten to Level 3, you\'ll get your Green laptop sticker.';
       case 3:
-        return 'ICS has a "core curriculum", and Level 4 students have not only finished it, but they have also thought beyond mere competency. Once your current STAR data is in RadGrad, and you\'ve achieved some verified opportunities, you might just find yourself at Level 4! Meet with your advisor to pick up your sticker, and bask in the glory it will bring to you!';
+        return 'ICS has a "core curriculum", and Level 4 students have not only finished it, but they have also thought beyond mere competency. Once your current STAR data is in RadGrad, and you\'ve achieved some verified opportunities, you might just find yourself at Level 4! But you will not get to Level 4 with the default profile photo, so be sure to upload a head shot using the About Me page. Meet with your advisor to pick up your sticker, and bask in the glory it will bring to you!';
       case 4:
         return 'Level 5 students are far along in their degree program, and they\'ve made significant progress toward 100 verified points in each of the three ICE categories. You will probably be at least a Junior before Level 5 becomes a realistic option for you. Keep your STAR data current in RadGrad, make sure your opportunities are verified, and good luck! Some students might graduate before reaching Level 5, so try to be one of the few that make it all the way to here!';
       case 5:

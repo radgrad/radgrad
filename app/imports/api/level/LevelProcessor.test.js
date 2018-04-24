@@ -4,6 +4,7 @@ import { StudentProfiles } from '../user/StudentProfileCollection';
 import { defaultCalcLevel } from './LevelProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { RadGrad } from '../radgrad/RadGrad';
+import { defineTestFixtures } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: 'off', no-unused-expressions: 'off' */
 /* eslint-env mocha */
@@ -12,8 +13,6 @@ import { RadGrad } from '../radgrad/RadGrad';
 
 if (Meteor.isServer) {
   describe('LevelProcessor Tests', function testSuite() {
-    let studentID;
-
     before(function setup() {
       removeAllEntities();
     });
@@ -23,19 +22,42 @@ if (Meteor.isServer) {
     });
 
     it('Level 1 Student', function test() {
-      studentID = StudentProfiles.define({
+      const profileID = StudentProfiles.define({
         username: 'levelone@hawaii.edu',
         firstName: 'Level',
         lastName: 'One',
         level: 6,
       });
+      const profile = StudentProfiles.findDoc(profileID);
       let level;
       if (RadGrad.calcLevel) {
-        level = RadGrad.calcLevel(studentID);
+        level = RadGrad.calcLevel(profile.userID);
       } else {
-        level = defaultCalcLevel(studentID);
+        level = defaultCalcLevel(profile.userID);
       }
       expect(level).to.equal(1);
+    });
+
+    it('Betty Levels Student', function test(done) {
+      this.timeout(5000);
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student']);
+      const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      expect(bettyProfile).to.exist;
+      const level = defaultCalcLevel(bettyProfile.userID);
+      expect(level).to.equal(1); // no ice points
+      defineTestFixtures(['betty.level1']); // one A [0, 10, 0]
+      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(1);
+      defineTestFixtures(['betty.level2']); // ice [0, 16, 0]
+      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(2);
+      defineTestFixtures(['opportunities', 'extended.opportunities', 'betty.level3']); // [5, 26, 5]
+      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3);
+      defineTestFixtures(['betty.level4']); // [30, 36, 35]
+      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3); // since she doesn't have a picture nor plan to 100
+      // const updateData = {};
+      // updateData.picture = '/images/mockup/betty.jpg';
+      // StudentProfiles.update(bettyProfile._id, updateData);
+      // expect(defaultCalcLevel(bettyProfile.userID)).to.equal(4); // since she set her picture
+      done();
     });
   });
 }
