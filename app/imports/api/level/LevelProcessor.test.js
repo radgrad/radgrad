@@ -35,28 +35,43 @@ if (Meteor.isServer) {
       } else {
         level = defaultCalcLevel(profile.userID);
       }
-      expect(level).to.equal(1);
+      expect(level)
+        .to
+        .equal(1);
     });
 
     it('Betty Levels Student', function test(done) {
       this.timeout(5000);
       defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student']);
-      const bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      let bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(bettyProfile).to.exist;
       const level = defaultCalcLevel(bettyProfile.userID);
-      expect(level).to.equal(1); // no ice points
+      expect(level)
+        .to
+        .equal(1); // no ice points
       defineTestFixtures(['betty.level1']); // one A [0, 10, 0]
-      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(1);
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(1);
       defineTestFixtures(['betty.level2']); // ice [0, 16, 0]
-      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(2);
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(2);
       defineTestFixtures(['opportunities', 'extended.opportunities', 'betty.level3']); // [5, 26, 5]
-      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3);
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(3);
       defineTestFixtures(['betty.level4']); // [30, 36, 35]
-      expect(defaultCalcLevel(bettyProfile.userID)).to.equal(3); // since she doesn't have a picture nor plan to 100
-      // const updateData = {};
-      // updateData.picture = '/images/mockup/betty.jpg';
-      // StudentProfiles.update(bettyProfile._id, updateData);
-      // expect(defaultCalcLevel(bettyProfile.userID)).to.equal(4); // since she set her picture
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(3); // since she doesn't have a picture
+      removeAllEntities();
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
+        'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level4']);
+      bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(3); // since she doesn't have a plan to 100
       done();
     });
   });
