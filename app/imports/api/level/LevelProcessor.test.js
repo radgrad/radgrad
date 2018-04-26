@@ -71,7 +71,7 @@ if (Meteor.isServer) {
       bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
-        .equal(3); // since she doesn't have a plan to 100
+        .equal(4); // since she doesn't have a plan to 100
       done();
     });
   });

@@ -1,6 +1,6 @@
 {
   "timestamp": "2017-03-10T20:04:41.798Z",
-  "fixtureDescription": "Betty's course instances for level 3. Requires betty.student, extended.courses.interests, opportunities, betty.level1, betty.level2.",
+  "fixtureDescription": "Betty's course instances for level 3. Requires betty.student, extended.courses.interests, opportunities, betty.level1, betty.level2. [5,26,5] Spring-2015",
   "collections": [
     {
       "name": "CourseInstanceCollection",

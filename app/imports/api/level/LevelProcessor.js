@@ -25,7 +25,7 @@ export function defaultCalcLevel(studentID) {
   const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true })
     .count();
   const hasPicture = StudentProfiles.hasSetPicture(studentID);
-  // console.log(ice, numReviews, hasPicture);
+  console.log('defaultCalcLevel', earnedICE, plannedICE, numReviews, hasPicture);
   let level = 1;
   if (earnedICE.i >= 100 &&
     earnedICE.c >= 100 &&
