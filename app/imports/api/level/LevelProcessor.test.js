@@ -41,7 +41,7 @@ if (Meteor.isServer) {
     });
 
     it('Betty Levels Student', function test(done) {
-      this.timeout(5000);
+      this.timeout(10000);
       defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student']);
       let bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(bettyProfile).to.exist;
@@ -71,7 +71,21 @@ if (Meteor.isServer) {
       bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(defaultCalcLevel(bettyProfile.userID))
         .to
-        .equal(4); // since she doesn't have a plan to 100
+        .equal(4);
+      removeAllEntities();
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
+        'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level5']);
+      bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(5);
+      removeAllEntities();
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
+        'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level6']);
+      bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(6);
       done();
     });
   });
