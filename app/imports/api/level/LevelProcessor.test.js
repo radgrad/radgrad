@@ -41,7 +41,8 @@ if (Meteor.isServer) {
     });
 
     it('Betty Levels Student', function test(done) {
-      this.timeout(10000);
+      this.timeout(0); // turn off time outs?
+      setTimeout(done, 20000);
       defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student']);
       let bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
       expect(bettyProfile).to.exist;
