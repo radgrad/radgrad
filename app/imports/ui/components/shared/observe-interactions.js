@@ -7,7 +7,7 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
-import { userInteractionDefineMethod } from '../../../api/log/UserInteractionCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytics/UserInteractionCollection.methods';
 import { ROLE } from '../../../api/role/Role';
 
 let cursorHandle;
