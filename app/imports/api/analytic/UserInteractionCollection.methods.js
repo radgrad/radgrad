@@ -4,7 +4,7 @@ import { UserInteractions } from './UserInteractionCollection';
 
 /**
  * The validated method for defining UserInteractions.
- * @memberOf api/log
+ * @memberOf api/analytic
  */
 export const userInteractionDefineMethod = new ValidatedMethod({
   name: 'UserInteraction.define',
@@ -18,7 +18,7 @@ export const userInteractionDefineMethod = new ValidatedMethod({
 
 /**
  * The validated method for removing UserInteractions.
- * @memberOf api/log
+ * @memberOf api/analytic
  */
 export const userInteractionRemoveUserMethod = new ValidatedMethod({
   name: 'UserInteraction.removeUser',

@@ -1,4 +1,4 @@
-import '/imports/api/analytics';
+import '/imports/api/analytic';
 import '/imports/api/base';
 import '/imports/api/career';
 import '/imports/api/course';

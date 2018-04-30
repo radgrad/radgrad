@@ -16,7 +16,7 @@ import { ROLE } from '../role/Role';
  *   interestIDs, careerGoalIDs, academicPlanIDs, declaredSemesterID, picture, website: user modifies fields.
  *   (typeData: shows the new set of IDs after the modification).
  * @extends api/base.BaseCollection
- * @memberOf api/log
+ * @memberOf api/analytic
  */
 class UserInteractionCollection extends BaseCollection {
 
@@ -96,6 +96,6 @@ class UserInteractionCollection extends BaseCollection {
 /**
  * Provides the singleton instance of this class to all other entities.
  * @type {api/log.UserInteractionCollection}
- * @memberOf api/log
+ * @memberOf api/analytic
  */
 export const UserInteractions = new UserInteractionCollection();

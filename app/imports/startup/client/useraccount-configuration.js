@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { userInteractionDefineMethod } from '../../api/analytics/UserInteractionCollection.methods';
+import { userInteractionDefineMethod } from '../../api/analytic/UserInteractionCollection.methods';
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY',

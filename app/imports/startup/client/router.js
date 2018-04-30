@@ -4,7 +4,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { userInteractionDefineMethod } from '../../api/analytics/UserInteractionCollection.methods';
+import { userInteractionDefineMethod } from '../../api/analytic/UserInteractionCollection.methods';
 import { ROLE } from '../../api/role/Role';
 
 /*

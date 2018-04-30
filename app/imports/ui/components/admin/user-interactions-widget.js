@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { moment } from 'meteor/momentjs:moment';
 import { Users } from '../../../api/user/UserCollection.js';
-import { UserInteractions } from '../../../api/analytics/UserInteractionCollection';
+import { UserInteractions } from '../../../api/analytic/UserInteractionCollection';
 import { ROLE } from '../../../api/role/Role.js';
 
 Template.User_Interactions_Widget.onCreated(function userInteractionWidgetOnCreated() {
