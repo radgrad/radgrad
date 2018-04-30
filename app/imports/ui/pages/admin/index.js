@@ -1,5 +1,6 @@
 import './admin-analytics-home-page.html';
 import './admin-analytics-user-interactions-page.html';
+import './admin-analytics-activity-monitor-page.html';
 
 import './admin-course-scoreboard-page.html';
 import './admin-course-scoreboard-page';

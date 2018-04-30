@@ -7,7 +7,7 @@ import { Users } from '../user/UserCollection';
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('UserInteraction Meteor Methods ', function test() {
+  describe('UserInteractionCollection Meteor Methods ', function test() {
     const student = 'abi@hawaii.edu';
 
     before(function (done) {
@@ -15,13 +15,14 @@ if (Meteor.isClient) {
     });
 
     it('Define Method', async function () {
+      await withLoggedInUser();
+      await withRadGradSubscriptions();
+      const userID = Users.getID(student);
       const definitionData = {
-        userID: Users.getID(student),
+        userID: userID,
         type: 'interaction-type',
         typeData: 'interaction-data',
       };
-      await withLoggedInUser();
-      await withRadGradSubscriptions();
       await userInteractionDefineMethod.callPromise(definitionData);
     });
 

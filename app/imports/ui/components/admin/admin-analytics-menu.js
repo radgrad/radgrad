@@ -8,4 +8,7 @@ Template.Admin_Analytics_Menu.helpers({
   userInteractionsRouteName() {
     return RouteNames.adminAnalyticsUserInteractionsPageRouteName;
   },
+  activityMonitorRouteName() {
+    return RouteNames.adminAnalyticsActivityMonitorPageRouteName;
+  },
 });

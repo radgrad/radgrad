@@ -1,4 +1,7 @@
 /** @namespace ui/components/admin */
+import './activity-monitor-widget.html';
+import './activity-monitor-widget';
+
 import './add-career-goal-widget.html';
 import './add-career-goal-widget.js';
 
