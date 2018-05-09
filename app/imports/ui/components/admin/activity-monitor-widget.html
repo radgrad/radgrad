@@ -1,3 +1,39 @@
 <template name="Activity_Monitor_Widget">
-  
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>Select Date Range</h4></div>
+    <form class="ui form">
+      <div class="two fields">
+        <div class="four wide required field">
+          <label>Start date</label>
+          <div class="ui calendar" id="rangeStart">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input name="startDate" type="text" placeholder="Start">
+            </div>
+          </div>
+        </div>
+        <div class="four wide required field">
+          <label>End date</label>
+          <div class="ui calendar" id="rangeEnd">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input name="endDate" type="text" placeholder="End">
+            </div>
+          </div>
+        </div>
+        <div class="four wide required field">
+          <label>Roles to include</label>
+          {{#each role in roles}}
+            <div class="field">
+              <div class="ui checkbox">
+                <input type="checkbox" id={{role.name}}>
+                <label>{{role.role}}</label>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      <button class="ui green basic button" type="submit">Submit</button>
+    </form>
+  </div>
 </template>
