@@ -11,6 +11,14 @@ Template.User_Interactions_Widget.onCreated(function userInteractionWidgetOnCrea
 });
 
 Template.User_Interactions_Widget.helpers({
+  name() {
+    const userID = Template.instance().selectedUserID.get();
+    if (userID === '') {
+      return 'NO USER SELECTED';
+    }
+    const name = Users.getFullName(userID);
+    return name.toUpperCase();
+  },
   users(role) {
     return Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
   },

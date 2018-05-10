@@ -36,4 +36,7 @@
       <button class="ui green basic button" type="submit">Submit</button>
     </form>
   </div>
+  {{#if analyze}}
+    {{> Activity_Monitor_Results activityResults=activityResults userCount=userCount}}
+  {{/if}}
 </template>
