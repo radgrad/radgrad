@@ -1,7 +1,4 @@
 /** @namespace ui/components/admin */
-import './activity-monitor-results.html';
-import './activity-monitor-results';
-
 import './activity-monitor-widget.html';
 import './activity-monitor-widget';
 
