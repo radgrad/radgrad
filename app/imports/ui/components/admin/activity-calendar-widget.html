@@ -1,0 +1,29 @@
+<template name="Activity_Calendar_Widget">
+  <div class="ui three column grid">
+    <div class="center aligned column">
+      <div class="ui tiny basic green button prev">Prev</div>
+    </div>
+    <div class="center aligned column">
+      <div class="ui centered header"><h3>{{month}}</h3></div>
+    </div>
+    <div class="center aligned column">
+      <div class="ui tiny basic green button next">Next</div>
+    </div>
+  </div>
+  <div class="ui celled seven column grid">
+    <div class="row">
+      {{#each day in daysOfWeek}}
+        <div class="center aligned column"><strong>{{day}}</strong></div>
+      {{/each}}
+    </div>
+      {{#each week in monthArray}}
+        <div class="row">
+          {{#each day in week}}
+            <div class="center aligned column">
+              {{day}}
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+  </div>
+</template>
