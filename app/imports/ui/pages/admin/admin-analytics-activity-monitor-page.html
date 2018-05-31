@@ -2,7 +2,7 @@
 
   {{#if Template.subscriptionsReady}}
     {{#Admin_Analytics_Layout}}
-      {{> Activity_Monitor_Widget }}
+      {{> Activity_Calendar_Widget userList=userList}}
     {{/Admin_Analytics_Layout}}
   {{else}}
     {{> Loading message="Waiting for subscriptions."}}

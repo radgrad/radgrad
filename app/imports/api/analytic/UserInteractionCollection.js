@@ -15,6 +15,7 @@ import { ROLE } from '../role/Role';
  *   login: the user has just logged in. (typeData: "N/A").
  *   interestIDs, careerGoalIDs, academicPlanIDs, declaredSemesterID, picture, website: user modifies fields.
  *   (typeData: shows the new set of IDs after the modification).
+ *   addCourse, addOpportunity, removeCourse, removeOpportunity: user added/removed an instance
  * @extends api/base.BaseCollection
  * @memberOf api/analytic
  */

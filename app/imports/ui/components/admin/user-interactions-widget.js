@@ -6,7 +6,6 @@ import { UserInteractions } from '../../../api/analytic/UserInteractionCollectio
 import { ROLE } from '../../../api/role/Role.js';
 
 Template.User_Interactions_Widget.onCreated(function userInteractionWidgetOnCreated() {
-  this.subscribe(UserInteractions.getPublicationName());
   this.selectedUserID = new ReactiveVar('');
 });
 

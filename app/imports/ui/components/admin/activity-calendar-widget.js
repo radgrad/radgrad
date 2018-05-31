@@ -20,12 +20,17 @@ Template.Activity_Calendar_Widget.helpers({
   // Return an array that represents the current month
   monthArray() {
     const currentDate = Template.instance().currentDate.get();
+    // moment().day() returns the day number (0-6)
     const firstDayOffset = moment(currentDate, dateFormat).startOf('month').day();
+    const lastDayOffset = 6 - moment(currentDate, dateFormat).endOf('month').day();
     const daysInMonth = moment(currentDate, dateFormat).daysInMonth();
-    // Create month array with nested weeks
+    // Create month array with nested weeks.  Utilizes the offsets to create evenly padded weeks.
     let monthArray = _.range(1, daysInMonth + 1);
     _.times(firstDayOffset, function () {
-      monthArray.unshift(false);
+      monthArray.unshift('');
+    });
+    _.times(lastDayOffset, function () {
+      monthArray.push('');
     });
     monthArray = _.chunk(monthArray, 7);
     return monthArray;

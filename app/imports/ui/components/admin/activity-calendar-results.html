@@ -1,0 +1,23 @@
+<template name="Activity_Calendar_Results">
+  {{#if dayOfMonth day}}
+    <div class="right aligned column" style="padding: 5px;">
+      <h5 class="ui grey header">{{day}}</h5>
+    </div>
+    <div class="column" style="padding: 7px;">
+      <a href="#" style="font-weight: normal;">
+      <table class="ui striped green table">
+        <tbody>
+          {{#each stat in interactionResults month day userList}}
+            <tr class="center aligned">
+                <td style="padding: 3px;">{{stat.role}}</td>
+                <td style="padding: 3px;">{{stat.userCount}}</td>
+                <td style="padding: 3px;">{{stat.interactionCount}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      </a>
+    </div>
+    {{> Activity_Calendar_Modal month=month day=day activeUsers=activeUsers}}
+  {{/if}}
+</template>

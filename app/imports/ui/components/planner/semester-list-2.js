@@ -12,6 +12,16 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
+
+// Define an interaction when a course or opportunity is added
+function defineUserInteraction(userID, type, typeData) {
+  userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
+    if (error) {
+      console.log('Error creating UserInteraction', error);
+    }
+  });
+}
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
   if (this.data) {
@@ -103,6 +113,7 @@ Template.Semester_List_2.events({
           if (CourseInstances.find({ courseID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
             defineMethod.call({ collectionName, definitionData }, (error, res) => {
               if (!error) {
+                defineUserInteraction(getUserIdFromRoute(), 'addCourse', slug);
                 FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                 FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                 FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
@@ -136,6 +147,7 @@ Template.Semester_List_2.events({
             if (OpportunityInstances.find({ opportunityID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
               defineMethod.call({ collectionName, definitionData }, (error) => {
                 if (!error) {
+                  defineUserInteraction(getUserIdFromRoute(), 'addOpportunity', slug);
                   FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                   FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                   FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());

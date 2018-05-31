@@ -1,9 +1,12 @@
 /** @namespace ui/components/admin */
+import './activity-calendar-modal.html';
+import './activity-calendar-modal';
+
+import './activity-calendar-results.html';
+import './activity-calendar-results';
+
 import './activity-calendar-widget.html';
 import './activity-calendar-widget';
-
-import './activity-monitor-widget.html';
-import './activity-monitor-widget';
 
 import './add-career-goal-widget.html';
 import './add-career-goal-widget.js';
