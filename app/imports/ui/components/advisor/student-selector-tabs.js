@@ -75,7 +75,19 @@ Template.Student_Selector_Tabs.helpers({
   level(user) {
     return user.level;
   },
-
+  groupTitle(role, range) {
+    const rangeLength = range.length;
+    let regex;
+    if (rangeLength === 3) {
+      regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}`);
+    } else
+    if (rangeLength === 4) {
+      // eslint-disable-next-line
+      regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}|^${range.substring(3, 4)}`);
+    }
+    const count = Users.findProfilesWithRole(role, { lastName: regex }, { sort: { lastName: 1 } }).length;
+    return `${range} (${count})`;
+  },
 });
 
 Template.Student_Selector_Tabs.events({

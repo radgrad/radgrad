@@ -7,7 +7,7 @@
   <div class="ui bottom attached active tab segment" data-tab="students">
     <div class="ui top attached tabular stackable menu">
       {{#each group in alphabeticalGroups}}
-      <a class="item" data-tab={{group}}>{{group}}</a>
+      <a class="item" data-tab={{group}}>{{groupTitle studentRole group}}</a>
       {{/each}}
     </div>
   {{#each group in alphabeticalGroups}}
