@@ -22,9 +22,10 @@
     "babel-runtime": "^6.26.0",
     "bcrypt": "^0.8.7",
     "chromedriver": "^2.38.3",
-    "meteor-node-stubs": "^0.2.11",
+    "lodash": "^4.17.5",
+    "meteor-node-stubs": "^0.4.1",
     "node-balanced": "0.0.14",
-    "npm": "^5.10.0",
+    "npm": "^6.1.0",
     "selenium-webdriver": "^3.6.0",
     "simpl-schema": "^0.3.2",
     "webdriverio": "^4.12.0"
@@ -42,7 +43,7 @@
     "eslint-plugin-meteor": "^4.2.2",
     "eslint-plugin-react": "^7.9.1",
     "jsdoc": "^3.4.0",
-    "nightmare": "^2.10.0",
+    "nightmare": "^3.0.1",
     "radgrad-jsdoc-template": "^1.1.3"
   },
   "postcss": {
