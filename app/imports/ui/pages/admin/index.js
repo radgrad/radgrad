@@ -27,6 +27,9 @@ import './admin-datamodel-helpmessages-page.js';
 import './admin-datamodel-interests-page.html';
 import './admin-datamodel-interests-page.js';
 
+import './admin-datamodel-mentor-answer-page.html';
+import './admin-datamodel-mentor-answer-page';
+
 import './admin-datamodel-opportunities-page.html';
 import './admin-datamodel-opportunities-page.js';
 

@@ -110,6 +110,14 @@ adminRoutes.route('/datamodel/interests', {
   },
 });
 
+export const adminDataModelMentorAnswerPageRouteName = 'Admin_DataModel_Mentor_Answers_Page';
+adminRoutes.route('/datamodel/mentor-answers', {
+  name: adminDataModelMentorAnswerPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelMentorAnswerPageRouteName });
+  },
+});
+
 export const adminDataModelOpportunitiesPageRouteName = 'Admin_DataModel_Opportunities_Page';
 adminRoutes.route('/datamodel/opportunities', {
   name: adminDataModelOpportunitiesPageRouteName,

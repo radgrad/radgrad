@@ -1,0 +1,8 @@
+<template name="List_Mentor_Answers_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>INTERESTS ({{ count }})</h4></div>
+    {{#each mentorAnswer in mentorAnswers}}
+      {{> Admin_DataModel_Accordion name=mentorAnswer.name slug=(slugName mentorAnswer.slugID) descriptionPairs=(descriptionPairs mentorAnswer) id=mentorAnswer._id updateID=updateID deleteDisabled=(deleteDisabled mentorAnswer)}}
+    {{/each}}
+  </div>
+</template>
