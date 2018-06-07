@@ -63,7 +63,6 @@ Template.Update_Mentor_Question_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
-    console.log(updateData);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
     instance.context.validate(updateData);
@@ -72,12 +71,9 @@ Template.Update_Mentor_Question_Widget.events({
       updateData.moderated = (updateData.moderated === 'true');
       updateData.visible = (updateData.visible === 'true');
       updateData.id = instance.data.updateID.get();
-      console.log(_.hasIn(updateData, 'moderatorComments'));
       if (!_.has(updateData, 'moderatorComments')) {
-        console.log('nulling');
         updateData.moderatorComments = ' ';
       }
-      console.log(updateData);
       updateMethod.call({ collectionName: 'MentorQuestionCollection', updateData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
