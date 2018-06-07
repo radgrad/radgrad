@@ -11,4 +11,7 @@ Template.Admin_Analytics_Menu.helpers({
   activityMonitorRouteName() {
     return RouteNames.adminAnalyticsActivityMonitorPageRouteName;
   },
+  studentsRouteName() {
+    return RouteNames.adminAnalyticsStudentsPageRouteName;
+  },
 });

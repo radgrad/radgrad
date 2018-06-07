@@ -49,6 +49,3 @@ Template.Activity_Calendar_Widget.events({
     instance.currentDate.set(nextMonth);
   },
 });
-
-Template.Activity_Calendar_Widget.onRendered(function activityCalendarWidgetOnRendered() {
-});

@@ -207,6 +207,14 @@ adminRoutes.route('/analytics/activity-monitor', {
   },
 });
 
+export const adminAnalyticsStudentsPageRouteName = 'Admin_Analytics_Students_Page';
+adminRoutes.route('/analytics/students', {
+  name: adminAnalyticsStudentsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsStudentsPageRouteName });
+  },
+});
+
 export const adminAnalyticsUserInteractionsPageRouteName = 'Admin_Analytics_User_Interactions_Page';
 adminRoutes.route('/analytics/user-interactions', {
   name: adminAnalyticsUserInteractionsPageRouteName,

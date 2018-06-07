@@ -1,5 +1,8 @@
 import './admin-analytics-home-page.html';
 
+import './admin-analytics-students-page.html';
+import './admin-analytics-students-page';
+
 import './admin-analytics-user-interactions-page.html';
 import './admin-analytics-user-interactions-page';
 
