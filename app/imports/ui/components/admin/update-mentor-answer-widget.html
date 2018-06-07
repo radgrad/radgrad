@@ -6,6 +6,7 @@
 
       <div class="fields">
         {{> User_Form_Field users=mentors selectedUserID=mentorAnswer.mentorID errorMessage=(fieldError "mentor")  disabled=true}}
+        {{> Mentor_Question_Form_Field questions=questions selectedQuestionID=mentorAnswer.questionID errorMessage=(fieldError "question") required=true disabled=true}}
       </div>
 
       {{> TextArea_Form_Field label="Text" name="text" rows=20 value=mentorAnswer.text errorMessage=(fieldError "text") required=true}}
