@@ -29,6 +29,9 @@ import './interest-types-form-field.js';
 import './interests-form-field.html';
 import './interests-form-field.js';
 
+import './mentor-question-form-field.html';
+import './mentor-question-form-field';
+
 import './opportunity-form-field.html';
 import './opportunity-form-field.js';
 

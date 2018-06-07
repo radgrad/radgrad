@@ -1,0 +1,12 @@
+<template name="Mentor_Question_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Question</label>
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="question">
+      <option value="">Select Question</option>
+      {{#each q in questions}}
+      <option value="{{q._id}}" selected="{{isSelected q._id selectedQuestionID}}">{{q.question}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

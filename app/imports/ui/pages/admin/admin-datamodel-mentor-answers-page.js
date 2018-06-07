@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-Template.Admin_DataModel_Mentor_Answer_Page.helpers({
+Template.Admin_DataModel_Mentor_Answers_Page.helpers({
   updateID() {
     return Template.instance().updateID;
   },
@@ -10,6 +10,6 @@ Template.Admin_DataModel_Mentor_Answer_Page.helpers({
   },
 });
 
-Template.Admin_DataModel_Mentor_Answer_Page.onCreated(function adminDatamodelMentorAnswerPageOnCreated() {
+Template.Admin_DataModel_Mentor_Answers_Page.onCreated(function adminDatamodelMentorAnswerPageOnCreated() {
   this.updateID = new ReactiveVar('');
 });

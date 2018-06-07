@@ -1,0 +1,19 @@
+<template name="Add_Mentor_Answer_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD MENTOR ANSWER</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> User_Form_Field users=mentors errorMessage=(fieldError "mentor") required=true}}
+        {{> Mentor_Question_Form_Field questions=questions errorMessage=(fieldError "question") required=true}}
+      </div>
+      {{> TextArea_Form_Field label="Text" name="text" rows=20 value=helpMessage.text errorMessage=(fieldError "text") required=true}}
+
+      <button class="ui green basic button" type="submit">Add</button>
+      {{> Success_Message_Form_Field message="The Mentor Answer was successfully added."}}
+      {{> Form_Error_Message errorMessage="The Mentor Answer could not be added."}}
+    </form>
+  </div>
+
+</template>

@@ -86,6 +86,30 @@ class MentorAnswerCollection extends BaseCollection {
   }
 
   /**
+   * Returns the MentorAnswer document associated with question and mentor.
+   * @param question The question (slug or ID)
+   * @param mentor The mentor (slug or ID)
+   * @return { Object } Returns the document or null if not found.
+   * @throws { Meteor.Error } If question or mentor does not exist.
+   */
+  findMentorAnswerDoc(question, mentor) {
+    const questionID = MentorQuestions.getID(question);
+    const mentorID = Users.getID(mentor);
+    return this._collection.findOne({ questionID, mentorID });
+  }
+
+  /**
+   * Returns true if there exists a MentorAnswer for the question and mentor.
+   * @param question The question (slug or ID)
+   * @param mentor The mentor (slug or ID)
+   * @return { Object } True if the MentorAnswer exists.
+   * @throws { Meteor.Error } If question or mentor does not exist.
+   */
+  isMentorAnswer(question, mentor) {
+    return !!this.findMentorAnswerDoc(question, mentor);
+  }
+
+  /**
    * Implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin, Advisor or
    * Mentor.
    * This is used in the define, update, and removeIt Meteor methods associated with each class.
