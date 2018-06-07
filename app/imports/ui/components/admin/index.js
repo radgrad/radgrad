@@ -17,6 +17,9 @@ import './add-interest-widget.js';
 import './add-mentor-answer-widget.html';
 import './add-mentor-answer-widget';
 
+import './add-mentor-question-widget.html';
+import './add-mentor-question-widget';
+
 import './add-opportunity-instance-widget.html';
 import './add-opportunity-instance-widget.js';
 
@@ -76,6 +79,9 @@ import './list-interests-widget.js';
 import './list-mentor-answers-widget.html';
 import './list-mentor-answers-widget';
 
+import './list-mentor-questions-widget.html';
+import './list-mentor-questions-widget';
+
 import './list-opportunity-instances-widget.html';
 import './list-opportunity-instances-widget.js';
 
@@ -117,6 +123,9 @@ import './update-interest-widget.js';
 
 import './update-mentor-answer-widget.html';
 import './update-mentor-answer-widget';
+
+import './update-mentor-question-widget.html';
+import './update-mentor-question-widget';
 
 import './update-opportunity-instance-widget.html';
 import './update-opportunity-instance-widget.js';

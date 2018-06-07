@@ -30,6 +30,9 @@ import './admin-datamodel-interests-page.js';
 import './admin-datamodel-mentor-answers-page.html';
 import './admin-datamodel-mentor-answers-page';
 
+import './admin-datamodel-mentor-questions-page.html';
+import './admin-datamodel-mentor-questions-page';
+
 import './admin-datamodel-opportunities-page.html';
 import './admin-datamodel-opportunities-page.js';
 

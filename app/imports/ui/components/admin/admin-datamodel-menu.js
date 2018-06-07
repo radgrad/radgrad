@@ -20,6 +20,9 @@ Template.Admin_DataModel_Menu.helpers({
   mentorAnswerRouteName() {
     return RouteNames.adminDataModelMentorAnswersPageRouteName;
   },
+  mentorQuestionRouteName() {
+    return RouteNames.adminDataModelMentorQuestionsPageRouteName;
+  },
   opportunitiesRouteName() {
     return RouteNames.adminDataModelOpportunitiesPageRouteName;
   },
