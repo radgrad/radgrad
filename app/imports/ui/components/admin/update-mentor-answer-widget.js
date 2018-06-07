@@ -45,7 +45,6 @@ Template.Update_Mentor_Answer_Widget.events({
     if (instance.context.isValid()) {
       FormUtils.renameKey(updateData, 'user', 'mentor');
       updateData.id = instance.data.updateID.get();
-      console.log(updateData);
       updateMethod.call({ collectionName: 'MentorAnswerCollection', updateData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);

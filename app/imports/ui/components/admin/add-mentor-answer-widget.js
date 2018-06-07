@@ -38,11 +38,9 @@ Template.Add_Mentor_Answer_Widget.events({
     instance.context.reset();
     addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
-    console.log(newData);
     if (instance.context.isValid() &&
       !MentorAnswers.isMentorAnswer(newData.question, newData.user)) {
       FormUtils.renameKey(newData, 'user', 'mentor');
-      console.log(newData);
       defineMethod.call({ collectionName: 'MentorQuestionCollection', definitionData: newData }, (error) => {
         if (error) {
           FormUtils.indicateError(instance, error);
