@@ -14,16 +14,8 @@ Template.Admin_DataBase_Dump_Page.helpers({
     const data = Template.instance().results.get();
     return (data) ? '' : 'hidden';
   },
-  haveResults() {
-    console.log(!_.isNil(Template.instance().results.get()));
-    return !_.isNil(Template.instance().results.get());
-  },
   results() {
     return Template.instance().results.get() || '';
-  },
-  students() {
-    console.log('students', Template.instance().students.get());
-    return Template.instance().students.get() || '';
   },
   successOrError() {
     return Template.instance().successOrError.get();
@@ -40,7 +32,6 @@ Template.Admin_DataBase_Dump_Page.helpers({
 
 Template.Admin_DataBase_Dump_Page.onCreated(function onCreated() {
   this.results = new ReactiveVar();
-  this.students = new ReactiveVar();
   this.successOrError = new ReactiveVar();
   this.timestamp = new ReactiveVar();
 });
@@ -89,6 +80,6 @@ Template.Admin_DataBase_Dump_Page.events({
         zip.file(fileName, result.students.join('\n'));
         zip.saveAs(`${dir}.zip`);
       }
-    })
-  }
+    });
+  },
 });
