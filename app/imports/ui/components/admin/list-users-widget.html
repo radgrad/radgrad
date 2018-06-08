@@ -6,6 +6,7 @@
       <a class="item" data-tab="faculty">Faculty ({{facultyCount}})</a>
       <a class="item" data-tab="mentors">Mentors ({{mentorCount}})</a>
       <a class="active item" data-tab="students">Students ({{studentCount}})</a>
+      <a class="item" data-tab="alumni">Alumni ({{alumniCount}})</a>
     </div>
     <div class="ui bottom attached tab segment" data-tab="advisors">
       <div class="ui stackable grid">
@@ -31,6 +32,13 @@
     <div class="ui bottom attached active tab segment" data-tab="students">
       <div class="ui stackable grid">
         {{#each user in users studentRole}}
+          {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user)}}
+        {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="alumni">
+      <div class="ui stackable grid">
+        {{#each user in users alumniRole}}
           {{> Admin_DataModel_Accordion name=(fullName user) slug=(slugName user.slugID) descriptionPairs=(descriptionPairs user) id=user.userID updateID=updateID deleteDisabled=(deleteDisabled user)}}
         {{/each}}
       </div>
