@@ -78,6 +78,9 @@ Template.List_Users_Widget.helpers({
     }
     return pairs;
   },
+  alumniRole() {
+    return ROLE.ALUMNI;
+  },
   studentRole() {
     return ROLE.STUDENT;
   },
@@ -89,6 +92,9 @@ Template.List_Users_Widget.helpers({
   },
   facultyRole() {
     return ROLE.FACULTY;
+  },
+  alumniCount() {
+    return Users.findProfilesWithRole(ROLE.ALUMNI, {}, { sort: { lastName: 1 } }).length;
   },
   studentCount() {
     return Users.findProfilesWithRole(ROLE.STUDENT, {}, { sort: { lastName: 1 } }).length;
