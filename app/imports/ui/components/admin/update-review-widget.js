@@ -9,7 +9,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { reviewRatingsObjects } from '../shared/review-ratings.js';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   // student: String,
@@ -29,7 +29,7 @@ Template.Update_Review_Widget.onCreated(function onCreated() {
 
 Template.Update_Review_Widget.helpers({
   semesters() {
-    return Semesters.find({});
+    return Semesters.find({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     return Users.findProfiles();

@@ -9,7 +9,7 @@ import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
   firstName: String,

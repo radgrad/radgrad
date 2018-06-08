@@ -2,9 +2,9 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { AcademicPlans } from '../../../../api/degree-plan/AcademicPlanCollection';
-import { Semesters } from '../../../../api/semester/SemesterCollection.js';
-import { Users } from '../../../../api/user/UserCollection.js';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
 
 Template.Academic_Plan_Form_Fields.onCreated(function academicPlanFormFieldsOnCreated() {
   this.chosenYear = new ReactiveVar('');

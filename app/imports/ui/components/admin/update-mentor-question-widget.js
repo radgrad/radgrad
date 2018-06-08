@@ -5,7 +5,7 @@ import { Roles } from 'meteor/alanning:roles';
 import SimpleSchema from 'simpl-schema';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 

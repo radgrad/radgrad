@@ -3,7 +3,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
 import { Showdown } from 'meteor/markdown';
-import { Slugs } from '../../../../api/slug/SlugCollection.js';
+import { Slugs } from '../../../api/slug/SlugCollection.js';
 
 /**
  * Given a Simple Schema and a field, return true if that field is of type Array.

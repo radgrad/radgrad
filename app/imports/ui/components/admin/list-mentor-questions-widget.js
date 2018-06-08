@@ -4,7 +4,7 @@ import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
 Template.List_Mentor_Questions_Widget.helpers({

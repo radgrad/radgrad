@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Courses } from '../../../../api/course/CourseCollection';
+import { Courses } from '../../../api/course/CourseCollection';
 
 Template.Prerequisites_Form_Field.onRendered(function onRendered() {
   this.$('.dropdown').dropdown();

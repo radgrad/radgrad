@@ -8,7 +8,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { updateMethod, removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { reviewRatingsObjects } from '../shared/review-ratings';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const editSchema = new SimpleSchema({
   semester: String,

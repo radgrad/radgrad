@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Users } from '../../../../api/user/UserCollection';
+import { Users } from '../../../api/user/UserCollection';
 
 Template.Sponsor_Form_Field.onRendered(function onRendered() {
   this.$('.dropdown').dropdown();

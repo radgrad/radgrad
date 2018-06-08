@@ -6,7 +6,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../../api/role/Role';
 import { MentorAnswers } from '../../../api/mentor/MentorAnswerCollection';
 import { MentorQuestions } from '../../../api/mentor/MentorQuestionCollection';
-import * as FormUtils from './form-fields/form-field-utilities';
+import * as FormUtils from '../form-fields/form-field-utilities';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 
 const addSchema = new SimpleSchema({

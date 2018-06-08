@@ -5,7 +5,7 @@ import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
 import { moment } from 'meteor/momentjs:moment';
 import { ROLE } from '../../../api/role/Role';
-import * as FormUtils from './form-fields/form-field-utilities';
+import * as FormUtils from '../form-fields/form-field-utilities';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 
 const addSchema = new SimpleSchema({

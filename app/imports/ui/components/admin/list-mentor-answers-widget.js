@@ -6,7 +6,7 @@ import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 Template.List_Mentor_Answers_Widget.helpers({
   title(answer) {

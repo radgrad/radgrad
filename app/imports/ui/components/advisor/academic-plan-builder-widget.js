@@ -9,7 +9,7 @@ import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import slugify, { Slugs } from '../../../api/slug/SlugCollection';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getAllElementsWithAttribute, removeElement } from '../../../ui/utilities/dom-utilities';
 
