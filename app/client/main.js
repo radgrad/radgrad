@@ -31,7 +31,6 @@ import '/imports/startup/both';
 
 import '/imports/ui/components/admin';
 import '/imports/ui/components/advisor';
-import '/imports/ui/components/advisor/form-fields';
 import '/imports/ui/components/faculty';
 import '/imports/ui/components/form-fields';
 import '/imports/ui/components/landing';

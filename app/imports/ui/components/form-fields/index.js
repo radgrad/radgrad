@@ -1,5 +1,8 @@
 /** @namespace ui/components/form-fields */
 
+import './academic-plan-form-field.html';
+import './academic-plan-form-field';
+
 import './academic-plan-form-fields.html';
 import './academic-plan-form-fields';
 
@@ -11,6 +14,12 @@ import './career-goals-form-field';
 
 import './course-form-field.html';
 import './course-form-field';
+
+import './declared-semester-form-field.html';
+import './declared-semester-form-field';
+
+import './degree-form-field.html';
+import './degree-form-field';
 
 import './form-error-message.html';
 
@@ -32,6 +41,9 @@ import './interests-form-field';
 
 import './mentor-question-form-field.html';
 import './mentor-question-form-field';
+
+import './name-form-field.html';
+import './name-form-field';
 
 import './open-cloudinary-widget';
 
@@ -75,3 +87,5 @@ import './textarea-form-field.html';
 import './user-form-field.html';
 import './user-form-field';
 
+import './year-form-field.html';
+import './year-form-field';
