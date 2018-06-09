@@ -2,6 +2,9 @@ import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
 
 Template.Admin_DataModel_Menu.helpers({
+  academicPlansRouteName() {
+    return RouteNames.adminDataModelAcademicPlansPageRouteName;
+  },
   careerGoalsRouteName() {
     return RouteNames.adminDataModelCareerGoalsPageRouteName;
   },

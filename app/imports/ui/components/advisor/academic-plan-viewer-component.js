@@ -3,6 +3,7 @@ import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection
 import { Semesters } from '../../../api/semester/SemesterCollection';
 
 Template.Academic_Plan_Viewer_Component.onCreated(function academicPlanViewerWidgetOnCreated() {
+  console.log(this.data.plan.get());
   if (this.data) {
     this.plan = this.data.plan;
   }

@@ -1,0 +1,9 @@
+<template name="List_Academic_Plans_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ACADEMIC PLANS ({{ count }})</h4></div>
+
+    {{#each academicPlan in academicPlans}}
+      {{> Admin_Datamodel_Academicplan_Accordion academicPlan=academicPlan degreePlanner=false name=academicPlan.name slug=(slugName academicPlan.slugID) descriptionPairs=(descriptionPairs academicPlan) id=academicPlan._id updateID=updateID deleteDisabled=(deleteDisabled academicPlan)}}
+    {{/each}}
+  </div>
+</template>

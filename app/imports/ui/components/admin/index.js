@@ -53,6 +53,9 @@ import './admin-database-accordion.js';
 import './admin-database-menu.html';
 import './admin-database-menu.js';
 
+import './admin-datamodel-academicplan-accordion.html';
+import './admin-datamodel-academicplan-accordion';
+
 import './admin-datamodel-accordion.html';
 import './admin-datamodel-accordion.js';
 
@@ -60,6 +63,9 @@ import './admin-datamodel-menu.html';
 import './admin-datamodel-menu.js';
 
 import './datamodel-utilities.js';
+
+import './list-academic-plans-widget.html';
+import './list-academic-plans-widget';
 
 import './list-career-goals-widget.html';
 import './list-career-goals-widget.js';

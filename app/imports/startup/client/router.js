@@ -70,6 +70,14 @@ adminRoutes.route('/datamodel', {
   },
 });
 
+export const adminDataModelAcademicPlansPageRouteName = 'Admin_DataModel_AcademicPlans_Page';
+adminRoutes.route('/datamodel/academic-plans', {
+  name: adminDataModelAcademicPlansPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelAcademicPlansPageRouteName });
+  },
+});
+
 export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoals_Page';
 adminRoutes.route('/datamodel/career-goals', {
   name: adminDataModelCareerGoalsPageRouteName,
