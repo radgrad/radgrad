@@ -102,6 +102,14 @@ adminRoutes.route('/datamodel/courses', {
   },
 });
 
+export const adminDataModelDesiredDegreesPageRouteName = 'Admin_DataModel_DesiredDegrees_Page';
+adminRoutes.route('/datamodel/desired-degrees', {
+  name: adminDataModelDesiredDegreesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelDesiredDegreesPageRouteName });
+  },
+});
+
 export const adminDataModelHelpMessagesPageRouteName = 'Admin_DataModel_HelpMessages_Page';
 adminRoutes.route('/datamodel/help-messages', {
   name: adminDataModelHelpMessagesPageRouteName,

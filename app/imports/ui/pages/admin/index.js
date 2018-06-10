@@ -24,6 +24,9 @@ import './admin-datamodel-course-instances-page.js';
 import './admin-datamodel-courses-page.html';
 import './admin-datamodel-courses-page.js';
 
+import './admin-datamodel-desireddegrees-page.html';
+import './admin-datamodel-desireddegrees-page';
+
 import './admin-datamodel-helpmessages-page.html';
 import './admin-datamodel-helpmessages-page.js';
 

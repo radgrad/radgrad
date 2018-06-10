@@ -14,6 +14,9 @@ Template.Admin_DataModel_Menu.helpers({
   coursesRouteName() {
     return RouteNames.adminDataModelCoursesPageRouteName;
   },
+  desiredDegreesRouteName() {
+    return RouteNames.adminDataModelDesiredDegreesPageRouteName;
+  },
   helpMessagesRouteName() {
     return RouteNames.adminDataModelHelpMessagesPageRouteName;
   },
