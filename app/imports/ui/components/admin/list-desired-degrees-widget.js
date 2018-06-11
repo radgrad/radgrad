@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';

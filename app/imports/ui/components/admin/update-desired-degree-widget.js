@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import SimpleSchema from 'simpl-schema';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Slugs } from '../../../api/slug/SlugCollection.js';

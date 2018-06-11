@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
-import { Feeds } from '../../../api/feed/FeedCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
