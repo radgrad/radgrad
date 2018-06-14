@@ -5,7 +5,7 @@
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> Input_Form_Field label="Timestamp" name="timestamp" value=timestamp placeholder="" errorMessage=(fieldError "timestamp") disabled=true}}
+        {{> Input_Date_Form_Field label="Timestamp" name="timestamp" value=feed.timestamp errorMessage=(fieldError "timestamp") disabled=true}}
         {{> FeedType_Form_Field feedTypes=feedTypes label="FeedType" selectedFeedType=feed.feedType name="feedType" placeholder="new-course" errorMessage=(fieldError "feedType") disabled=true}}
       </div>
 
@@ -13,7 +13,7 @@
 
 
       <div class="fields">
-        {{> Input_Form_Field label="Picture" name="picture" value=feed.picture errorMessage=(fieldError "picture") }}
+        {{> Picture_Form_Field label="Picture" name="picture" value=feed.picture errorMessage=(fieldError "picture") }}
         {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=feed.semesterID errorMessage=(fieldError "semesters")}}
       </div>
 

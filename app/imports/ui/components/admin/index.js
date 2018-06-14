@@ -11,6 +11,9 @@ import './add-course-widget.js';
 import './add-desired-degree-widget.html';
 import './add-desired-degree-widget';
 
+import './add-feed-widget.html';
+import './add-feed-widget';
+
 import './add-help-message-widget.html';
 import './add-help-message-widget.js';
 

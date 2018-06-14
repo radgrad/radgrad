@@ -1,0 +1,31 @@
+<template name="Add_Feed_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ADD FEED</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> Input_Date_Form_Field label="Timestamp" name="timestamp" errorMessage=(fieldError "timestamp") required=false }}
+        {{> FeedType_Form_Field feedTypes=feedTypes label="FeedType" name="feedType" placeholder="new-course" errorMessage=(fieldError "feedType") required=true}}
+      </div>
+
+      {{> TextArea_Form_Field label="Description" rows=5 name="description" placeholder="Add description of the feed here." value=feed.description errorMessage=(fieldError "description")}}
+
+      <div class="fields">
+        {{> Picture_Form_Field label="Picture" name="picture" placeholder="http://johndoe.github.io/images/johndoe.jpg" errorMessage=(fieldError "picture") }}
+        {{> Semesters_Single_Form_Field semesters=semesters errorMessage=(fieldError "semesters")}}
+      </div>
+
+      <div class="fields">
+        {{> Opportunity_Form_Field opportunities=opportunities errorMessage=(fieldError "opportunity")}}
+        {{> Course_Form_Field courses=courses errorMessage=(fieldError "course")}}
+      </div>
+
+
+      <button class="ui green basic button" type="submit">Add</button>
+
+      {{> Success_Message_Form_Field message="The Feed was successfully added."}}
+    </form>
+  </div>
+
+</template>

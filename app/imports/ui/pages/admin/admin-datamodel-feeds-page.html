@@ -4,8 +4,8 @@
     {{#Admin_DataModel_Layout}}
       {{#if displayUpdateWidget}}
         {{> Update_Feed_Widget updateID=updateID}}
-      <!--{{else}}-->
-        <!--{{> Add_Feed_Widget }}-->
+      {{else}}
+        {{> Add_Feed_Widget }}
       {{/if}}
       {{> List_Feeds_Widget updateID=updateID}}
     {{/Admin_DataModel_Layout}}
