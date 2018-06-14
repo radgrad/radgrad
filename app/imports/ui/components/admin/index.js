@@ -130,8 +130,8 @@ import './update-course-widget.js';
 import './update-desired-degree-widget.html';
 import './update-desired-degree-widget';
 
-import './update-review-widget.html';
-import './update-review-widget.js';
+import './update-feed-widget.html';
+import './update-feed-widget';
 
 import './update-help-message-widget.html';
 import './update-help-message-widget.js';
@@ -153,6 +153,9 @@ import './update-opportunity-widget.js';
 
 import './update-plan-choice-widget.html';
 import './update-plan-choice-widget';
+
+import './update-review-widget.html';
+import './update-review-widget.js';
 
 import './update-teaser-widget.html';
 import './update-teaser-widget.js';

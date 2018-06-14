@@ -12,5 +12,4 @@ Template.Admin_DataModel_Feeds_Page.helpers({
 
 Template.Admin_DataModel_Feeds_Page.onCreated(function onCreated() {
   this.updateID = new ReactiveVar('');
-  console.log('Feeds Page');
 });

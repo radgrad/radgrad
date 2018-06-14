@@ -48,6 +48,10 @@ Template.List_Feeds_Widget.helpers({
       const course = Courses.findDoc(feed.courseID);
       courseName = `${course.number}: ${course.shortName}`;
     }
+    let semesterName = '';
+    if (feed.semesterID) {
+      semesterName = Semesters.toString(feed.semesterID);
+    }
     return [
       { label: 'Feed Type', value: feed.feedType },
       { label: 'Description', value: feed.description },
@@ -57,7 +61,7 @@ Template.List_Feeds_Widget.helpers({
       { label: 'Users', value: users.toString() },
       { label: 'Opportunity', value: opportunityName },
       { label: 'Course', value: courseName },
-      { label: 'Semester', value: Semesters.toString(feed.semesterID) },
+      { label: 'Semester', value: semesterName },
     ];
   },
 });
