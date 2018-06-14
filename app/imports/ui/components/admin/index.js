@@ -82,6 +82,9 @@ import './list-courses-widget.js';
 import './list-desired-degrees-widget.html';
 import './list-desired-degrees-widget';
 
+import './list-feeds-widget.html';
+import './list-feeds-widget';
+
 import './list-help-messages-widget.html';
 import './list-help-messages-widget.js';
 

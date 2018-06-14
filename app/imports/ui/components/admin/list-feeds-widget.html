@@ -1,0 +1,8 @@
+<template name="List_Feeds_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>FEEDS ({{ count }})</h4></div>
+    {{#each feed in feeds}}
+      {{> Admin_DataModel_Accordion name =(name feed) descriptionPairs=(descriptionPairs feed) id=feed._id updateID=updateID deleteDisabled=(deleteDisabled feed)}}
+    {{/each}}
+  </div>
+</template>

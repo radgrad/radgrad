@@ -17,6 +17,10 @@ Template.Admin_DataModel_Menu.helpers({
   desiredDegreesRouteName() {
     return RouteNames.adminDataModelDesiredDegreesPageRouteName;
   },
+  feedsRouteName() {
+    console.log(RouteNames.adminDataModelFeedsPageRouteName);
+    return RouteNames.adminDataModelFeedsPageRouteName;
+  },
   helpMessagesRouteName() {
     return RouteNames.adminDataModelHelpMessagesPageRouteName;
   },

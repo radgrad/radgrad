@@ -110,6 +110,14 @@ adminRoutes.route('/datamodel/desired-degrees', {
   },
 });
 
+export const adminDataModelFeedsPageRouteName = 'Admin_DataModel_Feeds_Page';
+adminRoutes.route('/datamodel/feeds', {
+  name: adminDataModelFeedsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelFeedsPageRouteName });
+  },
+});
+
 export const adminDataModelHelpMessagesPageRouteName = 'Admin_DataModel_HelpMessages_Page';
 adminRoutes.route('/datamodel/help-messages', {
   name: adminDataModelHelpMessagesPageRouteName,
