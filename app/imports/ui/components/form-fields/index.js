@@ -21,6 +21,9 @@ import './declared-semester-form-field';
 import './degree-form-field.html';
 import './degree-form-field';
 
+import './feedbackType-form-field.html';
+import './feedbackType-form-field';
+
 import './feedType-form-field.html';
 import './feedType-form-field';
 

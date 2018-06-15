@@ -1,0 +1,12 @@
+<template name="FeedbackType_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Feedback Type</label>
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="feedbackType">
+      <option value="">Select Feedback Type</option>
+      {{#each feedbackType in feedbackTypes}}
+        <option value="{{feedbackType}}" selected="{{isSelected feedbackType selectedFeedbackType}}">{{feedbackType}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

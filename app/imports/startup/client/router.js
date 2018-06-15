@@ -118,6 +118,14 @@ adminRoutes.route('/datamodel/feeds', {
   },
 });
 
+export const adminDataModelFeedbackInstancesPageRouteName = 'Admin_DataModel_Feedback_Instances_Page';
+adminRoutes.route('/datamodel/feedback-instances', {
+  name: adminDataModelFeedbackInstancesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelFeedbackInstancesPageRouteName });
+  },
+});
+
 export const adminDataModelHelpMessagesPageRouteName = 'Admin_DataModel_HelpMessages_Page';
 adminRoutes.route('/datamodel/help-messages', {
   name: adminDataModelHelpMessagesPageRouteName,

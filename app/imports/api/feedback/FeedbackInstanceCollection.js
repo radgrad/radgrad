@@ -59,6 +59,54 @@ class FeedbackInstanceCollection extends BaseCollection {
   }
 
   /**
+   * Update the course instance. Only a subset of fields can be updated.
+   * @param docID
+   * @param user
+   * @param description
+   * @param feedbackType
+   * @param functionName
+   */
+  update(docID, { user, description, feedbackType, functionName }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (user) {
+      updateData.userID = user;
+    }
+    if (description) {
+      updateData.description = description;
+    }
+    if (feedbackType) {
+      updateData.feedbackType = feedbackType;
+    }
+    if (functionName) {
+      updateData.functionName = functionName;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
+  /**
+   * Returns the FeedbackInstance associated with the given user, functionName, and feedbackType.
+   * @param user The user (slug or ID)
+   * @param functionName The feedback function name.
+   * @param feedbackType The feedback type.
+   * @returns {any}
+   */
+  findFeedbackInstance(user, functionName, feedbackType) {
+    const userID = Users.getID(user);
+    return this._collection.findOne({ userID, functionName, feedbackType });
+  }
+
+  /**
+   * Returns true if there exists a FeedbackInstance for the given user, functionName and feedbackType.
+   * @param user the user (slug or ID)
+   * @param functionName the feedback function name
+   * @param feedbackType the feedback type.
+   * @returns {boolean}
+   */
+  isFeedbackInstance(user, functionName, feedbackType) {
+    return !!this.findFeedbackInstance(user, functionName, feedbackType);
+  }
+  /**
    * Removes all FeedbackInstances associated with user and functionName.
    * @param user The user (typically a student).
    * @param functionName The FeedbackFunction name.

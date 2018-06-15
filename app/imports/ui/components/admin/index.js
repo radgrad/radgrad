@@ -14,6 +14,9 @@ import './add-desired-degree-widget';
 import './add-feed-widget.html';
 import './add-feed-widget';
 
+import './add-feedback-instance-widget.html';
+import './add-feedback-instance-widget';
+
 import './add-help-message-widget.html';
 import './add-help-message-widget.js';
 
@@ -85,6 +88,9 @@ import './list-courses-widget.js';
 import './list-desired-degrees-widget.html';
 import './list-desired-degrees-widget';
 
+import './list-feedback-instances-widget.html';
+import './list-feedback-instances-widget';
+
 import './list-feeds-widget.html';
 import './list-feeds-widget';
 
@@ -135,6 +141,9 @@ import './update-desired-degree-widget';
 
 import './update-feed-widget.html';
 import './update-feed-widget';
+
+import './update-feedback-instance-widget.html';
+import './update-feedback-instance-widget';
 
 import './update-help-message-widget.html';
 import './update-help-message-widget.js';
