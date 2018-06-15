@@ -2,17 +2,20 @@ import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
 import { moment } from 'meteor/momentjs:moment';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
 import { Feeds } from '../../../api/feed/FeedCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
+import { ROLE } from '../../../api/role/Role';
 
 const updateSchema = new SimpleSchema({
   description: { type: String, optional: true },
   picture: { type: String, optional: true },
-  // users: { type: Array }, 'users.$': String,
+  users: { type: Array }, 'users.$': String,
   opportunity: { type: String, optional: true },
   course: { type: String, optional: true },
   semester: { type: String, optional: true },
@@ -49,6 +52,11 @@ Template.Update_Feed_Widget.helpers({
   },
   courses() {
     return Courses.find({}, { sort: { number: 1 } });
+  },
+  users() {
+    const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
+    const sorted = _.sortBy(students, 'lastName');
+    return sorted;
   },
 });
 

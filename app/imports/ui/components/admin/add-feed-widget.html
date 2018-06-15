@@ -12,6 +12,7 @@
       {{> TextArea_Form_Field label="Description" rows=5 name="description" placeholder="Add description of the feed here." value=feed.description errorMessage=(fieldError "description")}}
 
       <div class="fields">
+        {{> Users_Form_Field label="Users" users=students errorMessage=(fieldError "users") }}
         {{> Picture_Form_Field label="Picture" name="picture" placeholder="http://johndoe.github.io/images/johndoe.jpg" errorMessage=(fieldError "picture") }}
         {{> Semesters_Single_Form_Field semesters=semesters errorMessage=(fieldError "semesters")}}
       </div>
@@ -19,6 +20,7 @@
       <div class="fields">
         {{> Opportunity_Form_Field opportunities=opportunities errorMessage=(fieldError "opportunity")}}
         {{> Course_Form_Field courses=courses errorMessage=(fieldError "course")}}
+        {{> Input_Form_Field label="Level" name="level" errorMessage=(fieldError "level") type="Number"}}
       </div>
 
 

@@ -17,10 +17,11 @@ const addSchema = new SimpleSchema({
   timestamp: { type: Date, optional: true },
   description: { type: String, optional: true },
   picture: { type: String, optional: true },
-  // users: { type: Array }, 'users.$': String,
+  users: { type: Array }, 'users.$': String,
   opportunity: { type: String, optional: true },
   course: { type: String, optional: true },
   semester: { type: String, optional: true },
+  level: { type: SimpleSchema.Integer, optional: true },
 }, { tracker: Tracker });
 
 Template.Add_Feed_Widget.onCreated(function onCreated() {
@@ -61,15 +62,29 @@ Template.Add_Feed_Widget.events({
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.reset();
     addSchema.clean(newData, { mutate: true });
+    // console.log(newData);
     instance.context.validate(newData);
     if (instance.context.isValid()) {
-      defineMethod.call({ collectionName: 'FeedCollection', definitionData: newData }, (error) => {
-        if (error) {
-          FormUtils.indicateError(instance, error);
-        } else {
-          FormUtils.indicateSuccess(instance, event);
-        }
-      });
+      if (newData.users) {
+        _.forEach(newData.users, (user) => {
+          newData.user = user;
+          defineMethod.call({ collectionName: 'FeedCollection', definitionData: newData }, (error) => {
+            if (error) {
+              FormUtils.indicateError(instance, error);
+            } else {
+              FormUtils.indicateSuccess(instance, event);
+            }
+          });
+        });
+      } else {
+        defineMethod.call({ collectionName: 'FeedCollection', definitionData: newData }, (error) => {
+          if (error) {
+            FormUtils.indicateError(instance, error);
+          } else {
+            FormUtils.indicateSuccess(instance, event);
+          }
+        });
+      }
     } else {
       FormUtils.indicateError(instance);
     }

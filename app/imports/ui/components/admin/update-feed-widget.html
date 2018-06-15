@@ -13,6 +13,7 @@
 
 
       <div class="fields">
+        {{> Users_Form_Field label="Users" users=users errorMessage=(fieldError "users") }}
         {{> Picture_Form_Field label="Picture" name="picture" value=feed.picture errorMessage=(fieldError "picture") }}
         {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=feed.semesterID errorMessage=(fieldError "semesters")}}
       </div>

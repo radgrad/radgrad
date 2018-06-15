@@ -93,5 +93,8 @@ import './textarea-form-field.html';
 import './user-form-field.html';
 import './user-form-field';
 
+import './users-form-field.html';
+import './users-form-field';
+
 import './year-form-field.html';
 import './year-form-field';
