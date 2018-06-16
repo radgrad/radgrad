@@ -27,6 +27,12 @@ import './admin-datamodel-courses-page.js';
 import './admin-datamodel-desireddegrees-page.html';
 import './admin-datamodel-desireddegrees-page';
 
+import './admin-datamodel-feedback-instances-page.html';
+import './admin-datamodel-feedback-instances-page';
+
+import './admin-datamodel-feeds-page.html';
+import './admin-datamodel-feeds-page';
+
 import './admin-datamodel-helpmessages-page.html';
 import './admin-datamodel-helpmessages-page.js';
 

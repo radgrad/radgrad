@@ -21,6 +21,12 @@ import './declared-semester-form-field';
 import './degree-form-field.html';
 import './degree-form-field';
 
+import './feedbackType-form-field.html';
+import './feedbackType-form-field';
+
+import './feedType-form-field.html';
+import './feedType-form-field';
+
 import './form-error-message.html';
 
 import './form-field-utilities';
@@ -86,6 +92,9 @@ import './textarea-form-field.html';
 
 import './user-form-field.html';
 import './user-form-field';
+
+import './users-form-field.html';
+import './users-form-field';
 
 import './year-form-field.html';
 import './year-form-field';

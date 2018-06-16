@@ -11,6 +11,12 @@ import './add-course-widget.js';
 import './add-desired-degree-widget.html';
 import './add-desired-degree-widget';
 
+import './add-feed-widget.html';
+import './add-feed-widget';
+
+import './add-feedback-instance-widget.html';
+import './add-feedback-instance-widget';
+
 import './add-help-message-widget.html';
 import './add-help-message-widget.js';
 
@@ -82,6 +88,12 @@ import './list-courses-widget.js';
 import './list-desired-degrees-widget.html';
 import './list-desired-degrees-widget';
 
+import './list-feedback-instances-widget.html';
+import './list-feedback-instances-widget';
+
+import './list-feeds-widget.html';
+import './list-feeds-widget';
+
 import './list-help-messages-widget.html';
 import './list-help-messages-widget.js';
 
@@ -127,8 +139,11 @@ import './update-course-widget.js';
 import './update-desired-degree-widget.html';
 import './update-desired-degree-widget';
 
-import './update-review-widget.html';
-import './update-review-widget.js';
+import './update-feed-widget.html';
+import './update-feed-widget';
+
+import './update-feedback-instance-widget.html';
+import './update-feedback-instance-widget';
 
 import './update-help-message-widget.html';
 import './update-help-message-widget.js';
@@ -150,6 +165,9 @@ import './update-opportunity-widget.js';
 
 import './update-plan-choice-widget.html';
 import './update-plan-choice-widget';
+
+import './update-review-widget.html';
+import './update-review-widget.js';
 
 import './update-teaser-widget.html';
 import './update-teaser-widget.js';

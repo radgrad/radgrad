@@ -110,6 +110,22 @@ adminRoutes.route('/datamodel/desired-degrees', {
   },
 });
 
+export const adminDataModelFeedsPageRouteName = 'Admin_DataModel_Feeds_Page';
+adminRoutes.route('/datamodel/feeds', {
+  name: adminDataModelFeedsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelFeedsPageRouteName });
+  },
+});
+
+export const adminDataModelFeedbackInstancesPageRouteName = 'Admin_DataModel_Feedback_Instances_Page';
+adminRoutes.route('/datamodel/feedback-instances', {
+  name: adminDataModelFeedbackInstancesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelFeedbackInstancesPageRouteName });
+  },
+});
+
 export const adminDataModelHelpMessagesPageRouteName = 'Admin_DataModel_HelpMessages_Page';
 adminRoutes.route('/datamodel/help-messages', {
   name: adminDataModelHelpMessagesPageRouteName,
