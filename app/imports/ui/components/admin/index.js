@@ -100,6 +100,9 @@ import './list-users-widget.js';
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
 
+import './students-summary-widget.html';
+import './students-summary-widget.js';
+
 import './update-career-goal-widget.html';
 import './update-career-goal-widget.js';
 
