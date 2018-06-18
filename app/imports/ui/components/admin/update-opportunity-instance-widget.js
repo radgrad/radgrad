@@ -8,7 +8,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   semester: String,
@@ -26,7 +26,7 @@ Template.Update_Opportunity_Instance_Widget.onCreated(function onCreated() {
 
 Template.Update_Opportunity_Instance_Widget.helpers({
   semesters() {
-    return Semesters.find({});
+    return Semesters.find({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();

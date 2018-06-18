@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_Mentor_Questions_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      {{#if displayUpdateWidget}}
+        {{> Update_Mentor_Question_Widget updateID=updateID}}
+      {{else}}
+        {{> Add_Mentor_Question_Widget }}
+      {{/if}}
+      {{> List_Mentor_Questions_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+
+</template>

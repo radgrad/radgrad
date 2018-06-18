@@ -1,39 +1,44 @@
 <template name="Student_MentorSpace_Page">
-  <div class="layout-page">
-    <div class="ui grid container stackable">
-      {{> Help_Panel_Widget noHelpClass=true}}
+    <div class="layout-page">
+        <div class="ui grid container stackable">
+            {{> Help_Panel_Widget noHelpClass=true}}
 
-      <div class="eleven wide column">
-        {{#each question in questionsList}}
-          {{> Student_MentorSpace_Questions_Accordion title=question.question questionID=question._id}}
-        {{/each}}
-        <div class="ui center aligned segment">
-          <div class="ui dividing header">
-            <h4 style="text-align: left;">ASK A NEW QUESTION</h4>
-          </div>
-          {{> Student_MentorSpace_Question_Form}}
-        </div>
-        {{#if submittedQuestions}}
-          <div class="ui segment">
-            <div class="ui dividing header">
-              <h4 style="text-align: left;">YOUR SUBMITTED QUESTIONS</h4>
+            <div class="eleven wide column">
+                <div class="ui padded container segment">
+                    <div class="ui dividing header"><h4>QUESTIONS</h4></div>
+                    {{#each question in questionsList}}
+                    {{> Student_MentorSpace_Questions_Accordion title=question.question questionID=question._id}}
+                    {{/each}}
+                </div>
+                <div class="ui center aligned segment">
+                    <div class="ui dividing header">
+                        <h4 style="text-align: left;">ASK A NEW QUESTION</h4>
+                    </div>
+                    {{> Student_MentorSpace_Question_Form}}
+                </div>
+                {{#if submittedQuestions}}
+                <div class="ui segment">
+                    <div class="ui dividing header">
+                        <h4 style="text-align: left;">YOUR SUBMITTED QUESTIONS</h4>
+                    </div>
+                    {{> Student_MentorSpace_Hidden_Questions }}
+                </div>
+                {{/if}}
             </div>
-            {{> Student_MentorSpace_Hidden_Questions }}
-          </div>
-        {{/if}}
-      </div>
 
-      <div class="five wide column">
-        <div class="ui segment">
-          <div class="ui dividing header">
-            <h4>MENTOR DIRECTORY</h4>
-          </div>
-          {{#each mentor in mentorsList}}
-            {{> Student_MentorSpace_Mentor_Directory profile=(mentorProfile mentor.userID) mentorID=mentor.username firstName=mentor.firstName lastName=mentor.lastName email=mentor.username picture=mentor.picture}}
-          {{/each}}
+            <div class="five wide column">
+                <div class="ui segment">
+                    <div class="ui dividing header">
+                        <h4>MENTOR DIRECTORY</h4>
+                    </div>
+                    {{#each mentor in mentorsList}}
+                    {{> Student_MentorSpace_Mentor_Directory profile=(mentorProfile mentor.userID)
+                    mentorID=mentor.username firstName=mentor.firstName lastName=mentor.lastName email=mentor.username
+                    picture=mentor.picture}}
+                    {{/each}}
+                </div>
+            </div>
         </div>
-      </div>
+        {{> Back_To_Top_Button}}
     </div>
-    {{> Back_To_Top_Button}}
-  </div>
 </template>

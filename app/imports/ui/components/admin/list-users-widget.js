@@ -10,17 +10,15 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { makeLink } from './datamodel-utilities';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { AdvisorProfiles } from '../../../api/user/AdvisorProfileCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
 Template.List_Users_Widget.helpers({
-  users() {
-    return _.sortBy(Users.findProfiles({}, { sort: { lastName: 1 } }), function (u) {
-      return u.lastName;
-    });
+  users(role) {
+    return Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
   },
   count() {
     return Users.findProfiles().length;
@@ -80,6 +78,36 @@ Template.List_Users_Widget.helpers({
     }
     return pairs;
   },
+  alumniRole() {
+    return ROLE.ALUMNI;
+  },
+  studentRole() {
+    return ROLE.STUDENT;
+  },
+  mentorRole() {
+    return ROLE.MENTOR;
+  },
+  advisorRole() {
+    return ROLE.ADVISOR;
+  },
+  facultyRole() {
+    return ROLE.FACULTY;
+  },
+  alumniCount() {
+    return Users.findProfilesWithRole(ROLE.ALUMNI, {}, { sort: { lastName: 1 } }).length;
+  },
+  studentCount() {
+    return Users.findProfilesWithRole(ROLE.STUDENT, {}, { sort: { lastName: 1 } }).length;
+  },
+  mentorCount() {
+    return Users.findProfilesWithRole(ROLE.MENTOR, {}, { sort: { lastName: 1 } }).length;
+  },
+  facultyCount() {
+    return Users.findProfilesWithRole(ROLE.FACULTY, {}, { sort: { lastName: 1 } }).length;
+  },
+  advisorCount() {
+    return Users.findProfilesWithRole(ROLE.ADVISOR, {}, { sort: { lastName: 1 } }).length;
+  },
 });
 
 Template.List_Users_Widget.events({
@@ -108,4 +136,8 @@ Template.List_Users_Widget.events({
       }
     });
   },
+});
+
+Template.List_Users_Widget.onRendered(function adminListUsersOnRendered() {
+  this.$('.menu .item').tab();
 });

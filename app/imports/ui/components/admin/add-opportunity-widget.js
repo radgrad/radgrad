@@ -13,7 +13,7 @@ import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection.js';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 const addSchema = new SimpleSchema({
@@ -49,7 +49,7 @@ Template.Add_Opportunity_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   semesters() {
-    return Semesters.find({});
+    return Semesters.find({}, { sort: { semesterNumber: 1 } });
   },
   sponsor() {
     const group = FlowRouter.current().route.group.name;

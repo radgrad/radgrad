@@ -20,6 +20,9 @@ import './admin-database-integrity-check-page.js';
 
 import './admin-database-page.html';
 
+import './admin-datamodel-academicplans-page.html';
+import './admin-datamodel-academicplans-page';
+
 import './admin-datamodel-careergoals-page.html';
 import './admin-datamodel-careergoals-page.js';
 
@@ -29,11 +32,26 @@ import './admin-datamodel-course-instances-page.js';
 import './admin-datamodel-courses-page.html';
 import './admin-datamodel-courses-page.js';
 
+import './admin-datamodel-desireddegrees-page.html';
+import './admin-datamodel-desireddegrees-page';
+
+import './admin-datamodel-feedback-instances-page.html';
+import './admin-datamodel-feedback-instances-page';
+
+import './admin-datamodel-feeds-page.html';
+import './admin-datamodel-feeds-page';
+
 import './admin-datamodel-helpmessages-page.html';
 import './admin-datamodel-helpmessages-page.js';
 
 import './admin-datamodel-interests-page.html';
 import './admin-datamodel-interests-page.js';
+
+import './admin-datamodel-mentor-answers-page.html';
+import './admin-datamodel-mentor-answers-page';
+
+import './admin-datamodel-mentor-questions-page.html';
+import './admin-datamodel-mentor-questions-page';
 
 import './admin-datamodel-opportunities-page.html';
 import './admin-datamodel-opportunities-page.js';

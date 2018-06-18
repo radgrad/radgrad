@@ -2,6 +2,9 @@ import { Template } from 'meteor/templating';
 import * as RouteNames from '../../../startup/client/router.js';
 
 Template.Admin_DataModel_Menu.helpers({
+  academicPlansRouteName() {
+    return RouteNames.adminDataModelAcademicPlansPageRouteName;
+  },
   careerGoalsRouteName() {
     return RouteNames.adminDataModelCareerGoalsPageRouteName;
   },
@@ -11,11 +14,26 @@ Template.Admin_DataModel_Menu.helpers({
   coursesRouteName() {
     return RouteNames.adminDataModelCoursesPageRouteName;
   },
+  desiredDegreesRouteName() {
+    return RouteNames.adminDataModelDesiredDegreesPageRouteName;
+  },
+  feedbackInstancesRouteName() {
+    return RouteNames.adminDataModelFeedbackInstancesPageRouteName;
+  },
+  feedsRouteName() {
+    return RouteNames.adminDataModelFeedsPageRouteName;
+  },
   helpMessagesRouteName() {
     return RouteNames.adminDataModelHelpMessagesPageRouteName;
   },
   interestsRouteName() {
     return RouteNames.adminDataModelInterestsPageRouteName;
+  },
+  mentorAnswerRouteName() {
+    return RouteNames.adminDataModelMentorAnswersPageRouteName;
+  },
+  mentorQuestionRouteName() {
+    return RouteNames.adminDataModelMentorQuestionsPageRouteName;
   },
   opportunitiesRouteName() {
     return RouteNames.adminDataModelOpportunitiesPageRouteName;

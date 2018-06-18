@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
-import * as FormUtils from './form-fields/form-field-utilities';
+import * as FormUtils from '../form-fields/form-field-utilities';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 

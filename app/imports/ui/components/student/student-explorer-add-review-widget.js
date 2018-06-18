@@ -9,7 +9,7 @@ import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { reviewRatingsObjects } from '../shared/review-ratings';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
   semester: String,

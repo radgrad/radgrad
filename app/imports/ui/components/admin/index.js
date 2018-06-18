@@ -17,11 +17,26 @@ import './add-course-instance-widget.js';
 import './add-course-widget.html';
 import './add-course-widget.js';
 
+import './add-desired-degree-widget.html';
+import './add-desired-degree-widget';
+
+import './add-feed-widget.html';
+import './add-feed-widget';
+
+import './add-feedback-instance-widget.html';
+import './add-feedback-instance-widget';
+
 import './add-help-message-widget.html';
 import './add-help-message-widget.js';
 
 import './add-interest-widget.html';
 import './add-interest-widget.js';
+
+import './add-mentor-answer-widget.html';
+import './add-mentor-answer-widget';
+
+import './add-mentor-question-widget.html';
+import './add-mentor-question-widget';
 
 import './add-opportunity-instance-widget.html';
 import './add-opportunity-instance-widget.js';
@@ -56,6 +71,9 @@ import './admin-database-accordion.js';
 import './admin-database-menu.html';
 import './admin-database-menu.js';
 
+import './admin-datamodel-academicplan-accordion.html';
+import './admin-datamodel-academicplan-accordion';
+
 import './admin-datamodel-accordion.html';
 import './admin-datamodel-accordion.js';
 
@@ -63,6 +81,9 @@ import './admin-datamodel-menu.html';
 import './admin-datamodel-menu.js';
 
 import './datamodel-utilities.js';
+
+import './list-academic-plans-widget.html';
+import './list-academic-plans-widget';
 
 import './list-career-goals-widget.html';
 import './list-career-goals-widget.js';
@@ -73,11 +94,26 @@ import './list-course-instances-widget.js';
 import './list-courses-widget.html';
 import './list-courses-widget.js';
 
+import './list-desired-degrees-widget.html';
+import './list-desired-degrees-widget';
+
+import './list-feedback-instances-widget.html';
+import './list-feedback-instances-widget';
+
+import './list-feeds-widget.html';
+import './list-feeds-widget';
+
 import './list-help-messages-widget.html';
 import './list-help-messages-widget.js';
 
 import './list-interests-widget.html';
 import './list-interests-widget.js';
+
+import './list-mentor-answers-widget.html';
+import './list-mentor-answers-widget';
+
+import './list-mentor-questions-widget.html';
+import './list-mentor-questions-widget';
 
 import './list-opportunity-instances-widget.html';
 import './list-opportunity-instances-widget.js';
@@ -112,14 +148,26 @@ import './update-course-instance-widget.js';
 import './update-course-widget.html';
 import './update-course-widget.js';
 
-import './update-review-widget.html';
-import './update-review-widget.js';
+import './update-desired-degree-widget.html';
+import './update-desired-degree-widget';
+
+import './update-feed-widget.html';
+import './update-feed-widget';
+
+import './update-feedback-instance-widget.html';
+import './update-feedback-instance-widget';
 
 import './update-help-message-widget.html';
 import './update-help-message-widget.js';
 
 import './update-interest-widget.html';
 import './update-interest-widget.js';
+
+import './update-mentor-answer-widget.html';
+import './update-mentor-answer-widget';
+
+import './update-mentor-question-widget.html';
+import './update-mentor-question-widget';
 
 import './update-opportunity-instance-widget.html';
 import './update-opportunity-instance-widget.js';
@@ -129,6 +177,9 @@ import './update-opportunity-widget.js';
 
 import './update-plan-choice-widget.html';
 import './update-plan-choice-widget';
+
+import './update-review-widget.html';
+import './update-review-widget.js';
 
 import './update-teaser-widget.html';
 import './update-teaser-widget.js';

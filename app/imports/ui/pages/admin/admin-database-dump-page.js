@@ -4,6 +4,7 @@ import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { dumpDatabaseMethod } from '../../../api/base/BaseCollection.methods.js';
+import { generateStudentEmailsMethod } from '../../../api/user/UserCollection.methods';
 
 Template.Admin_DataBase_Dump_Page.helpers({
   errorMessage() {
@@ -54,6 +55,29 @@ Template.Admin_DataBase_Dump_Page.events({
         const dir = 'radgrad-db';
         const fileName = `${dir}/${moment(result.timestamp).format(databaseFileDateFormat)}.json`;
         zip.file(fileName, JSON.stringify(result, null, 2));
+        zip.saveAs(`${dir}.zip`);
+      }
+    });
+  },
+  'click .jsStudentEmails': function clickStudentEmails(event, instance) {
+    event.preventDefault();
+    generateStudentEmailsMethod.call(null, (error, result) => {
+      if (error) {
+        console.log('Error during Generating Student Emails: ', error);
+        instance.results.set(error);
+        instance.successOrError.set('error');
+      } else {
+        const data = {};
+        data.name = 'Students';
+        data.contents = result.students;
+        instance.results.set([data]);
+        instance.timestamp.set(new Date());
+        instance.successOrError.set('success');
+        const zip = new ZipZap();
+        const now = moment().format(databaseFileDateFormat);
+        const dir = `radgrad-students${now}`;
+        const fileName = `${dir}/Students.txt`;
+        zip.file(fileName, result.students.join('\n'));
         zip.saveAs(`${dir}.zip`);
       }
     });

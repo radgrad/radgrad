@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import * as FormUtils from './form-fields/form-field-utilities';
+import * as FormUtils from '../form-fields/form-field-utilities';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 

@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
-import * as FormUtils from './form-fields/form-field-utilities';
+import * as FormUtils from '../form-fields/form-field-utilities';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 
 const addSchema = new SimpleSchema({

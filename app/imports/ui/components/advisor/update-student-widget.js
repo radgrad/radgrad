@@ -14,7 +14,7 @@ import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { defaultCalcLevel } from '../../../api/level/LevelProcessor';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { RadGrad } from '../../../api/radgrad/RadGrad';
@@ -69,7 +69,7 @@ Template.Update_Student_Widget.helpers({
     return CareerGoals.find({}, { sort: { name: 1 } });
   },
   declaredSemesters() {
-    return Semesters.find({});
+    return Semesters.find({}, { sort: { semesterNumber: 1 } });
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
