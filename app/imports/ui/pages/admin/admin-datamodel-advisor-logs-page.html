@@ -1,13 +1,13 @@
-<template name="Admin_DataModel_Academic_Year_Instances_Page">
+<template name="Admin_DataModel_Advisor_Logs_Page">
 
   {{#if Template.subscriptionsReady}}
     {{#Admin_DataModel_Layout}}
     <!--{{#if displayUpdateWidget}}-->
-      <!--{{> Update_Academic_Year_Instance_Widget updateID=updateID}}-->
+      <!--{{> Update_Advisor_Log_Widget updateID=updateID}}-->
     <!--{{else}}-->
-      <!--{{> Add_Academic_Year_Instance_Widget }}-->
+      <!--{{> Add_Advisor_Log_Widget }}-->
     <!--{{/if}}-->
-    {{> List_Academic_Year_Instances_Widget updateID=updateID}}
+    {{> List_Advisor_Logs_Widget updateID=updateID}}
     {{/Admin_DataModel_Layout}}
   {{else}}
     {{> Loading message="Waiting for subscriptions."}}

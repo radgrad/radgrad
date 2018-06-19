@@ -1,0 +1,16 @@
+<template name="Admin_DataModel_Interest_Types_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_DataModel_Layout}}
+      <!--{{#if displayUpdateWidget}}-->
+        <!--{{> Update_Interest_Type_Widget updateID=updateID}}-->
+      <!--{{else}}-->
+        <!--{{> Add_Interest_Type_Widget }}-->
+      <!--{{/if}}-->
+      {{> List_Interest_Types_Widget updateID=updateID}}
+    {{/Admin_DataModel_Layout}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+
+</template>

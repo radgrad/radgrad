@@ -18,6 +18,9 @@ import './admin-datamodel-academicplans-page';
 import './admin-datamodel-academic-year-instances-page.html';
 import './admin-datamodel-academic-year-instances-page';
 
+import './admin-datamodel-advisor-logs-page.html';
+import './admin-datamodel-advisor-logs-page';
+
 import './admin-datamodel-careergoals-page.html';
 import './admin-datamodel-careergoals-page.js';
 
@@ -38,6 +41,9 @@ import './admin-datamodel-feeds-page';
 
 import './admin-datamodel-helpmessages-page.html';
 import './admin-datamodel-helpmessages-page.js';
+
+import './admin-datamodel-interest-types-page.html';
+import './admin-datamodel-interest-types-page';
 
 import './admin-datamodel-interests-page.html';
 import './admin-datamodel-interests-page.js';
@@ -62,11 +68,20 @@ import './admin-datamodel-plan-choice-page';
 import './admin-datamodel-reviews-page.html';
 import './admin-datamodel-reviews-page.js';
 
+import './admin-datamodel-semesters-page.html';
+import './admin-datamodel-semesters-page';
+
+import './admin-datamodel-slugs-page.html';
+import './admin-datamodel-slugs-page';
+
 import './admin-datamodel-teasers-page.html';
 import './admin-datamodel-teasers-page.js';
 
 import './admin-datamodel-users-page.html';
 import './admin-datamodel-users-page.js';
+
+import './admin-datamodel-verification-requests-page.html';
+import './admin-datamodel-verification-requests-page';
 
 import './admin-home-page.html';
 

@@ -3,11 +3,11 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 /* eslint-disable max-len */
 
-Template.Admin_DataModel_Academic_Year_Instances_Page.onCreated(function adminDataModelAcademicYearInstancesPageOnCreated() {
+Template.Admin_DataModel_Advisor_Logs_Page.onCreated(function adminDataModelAdvisorLogsPageOnCreated() {
   this.updateID = new ReactiveVar('');
 });
 
-Template.Admin_DataModel_Academic_Year_Instances_Page.helpers({
+Template.Admin_DataModel_Advisor_Logs_Page.helpers({
   updateID() {
     return Template.instance().updateID;
   },
