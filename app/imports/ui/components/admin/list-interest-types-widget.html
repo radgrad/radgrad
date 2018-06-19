@@ -1,0 +1,8 @@
+<template name="List_Interest_Types_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>INTEREST TYPES ({{ count }})</h4></div>
+    {{#each interestType in interestTypes}}
+      {{> Admin_DataModel_Accordion name=interestType.name slug=(slugName interestType.slugID) descriptionPairs=(descriptionPairs interestType) id=interestType._id updateID=updateID deleteDisabled=(deleteDisabled interestType)}}
+    {{/each}}
+  </div>
+</template>

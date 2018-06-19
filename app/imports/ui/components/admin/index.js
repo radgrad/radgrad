@@ -106,6 +106,9 @@ import './list-help-messages-widget.js';
 import './list-interests-widget.html';
 import './list-interests-widget.js';
 
+import './list-interest-types-widget.html';
+import './list-interest-types-widget';
+
 import './list-mentor-answers-widget.html';
 import './list-mentor-answers-widget';
 
