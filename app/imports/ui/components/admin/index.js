@@ -79,6 +79,9 @@ import './list-academic-plans-widget';
 import './list-academic-year-instances-widget.html';
 import './list-academic-year-instances-widget';
 
+import './list-advisor-logs-widget.html';
+import './list-advisor-logs-widget';
+
 import './list-career-goals-widget.html';
 import './list-career-goals-widget.js';
 
