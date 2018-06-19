@@ -10,9 +10,6 @@ Template.List_Slugs_Widget.helpers({
   count() {
     return Slugs.count();
   },
-  deleteDisabled() {
-    return 'disabled';
-  },
   name(slug) {
     return `${slug.name}: ${slug.entityName}`;
   },
