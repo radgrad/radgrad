@@ -139,6 +139,9 @@ import './list-teasers-widget.js';
 import './list-users-widget.html';
 import './list-users-widget.js';
 
+import './list-verification-requests-widget.html';
+import './list-verification-requests-widget';
+
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
 

@@ -3,7 +3,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
-import { Users } from '../../../api/user/UserCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
