@@ -5,6 +5,12 @@ Template.Admin_DataModel_Menu.helpers({
   academicPlansRouteName() {
     return RouteNames.adminDataModelAcademicPlansPageRouteName;
   },
+  academicYearInstancesRouteName() {
+    return RouteNames.adminDataModelAcademicYearInstancesPageRouteName;
+  },
+  advisorLogsRouteName() {
+    return RouteNames.adminDataModelAdvisorLogsPageRouteName;
+  },
   careerGoalsRouteName() {
     return RouteNames.adminDataModelCareerGoalsPageRouteName;
   },
@@ -29,6 +35,9 @@ Template.Admin_DataModel_Menu.helpers({
   interestsRouteName() {
     return RouteNames.adminDataModelInterestsPageRouteName;
   },
+  interestTypesRouteName() {
+    return RouteNames.adminDataModelAdvisorLogsPageRouteName;
+  },
   mentorAnswerRouteName() {
     return RouteNames.adminDataModelMentorAnswersPageRouteName;
   },
@@ -47,10 +56,19 @@ Template.Admin_DataModel_Menu.helpers({
   reviewsRouteName() {
     return RouteNames.adminDataModelReviewsPageRouteName;
   },
+  semestersRouteName() {
+    return RouteNames.adminDataModelSemestersPageRouteName;
+  },
+  slugsRouteName() {
+    return RouteNames.adminDataModelSlugsPageRouteName;
+  },
   teasersRouteName() {
     return RouteNames.adminDataModelTeasersPageRouteName;
   },
   usersRouteName() {
     return RouteNames.adminDataModelUsersPageRouteName;
+  },
+  verificationRequestRouteName() {
+    return RouteNames.adminDataModelVerificationRequestsPageRouteName;
   },
 });

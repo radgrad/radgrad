@@ -15,6 +15,9 @@ import './admin-database-page.html';
 import './admin-datamodel-academicplans-page.html';
 import './admin-datamodel-academicplans-page';
 
+import './admin-datamodel-academic-year-instances-page.html';
+import './admin-datamodel-academic-year-instances-page';
+
 import './admin-datamodel-careergoals-page.html';
 import './admin-datamodel-careergoals-page.js';
 
