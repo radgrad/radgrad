@@ -130,6 +130,9 @@ import './list-reviews-widget.js';
 import './list-semesters-widget.html';
 import './list-semesters-widget';
 
+import './list-slugs-widget.html';
+import './list-slugs-widget';
+
 import './list-teasers-widget.html';
 import './list-teasers-widget.js';
 
