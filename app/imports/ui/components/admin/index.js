@@ -127,6 +127,9 @@ import './list-plan-choice-widget';
 import './list-reviews-widget.html';
 import './list-reviews-widget.js';
 
+import './list-semesters-widget.html';
+import './list-semesters-widget';
+
 import './list-teasers-widget.html';
 import './list-teasers-widget.js';
 
