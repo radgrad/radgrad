@@ -1,0 +1,9 @@
+<template name="List_Academic_Year_Instances_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>ACADEMIC YEAR INSTANCES ({{ count }})</h4></div>
+
+    {{#each academicYearInstance in academicYearInstances}}
+      {{> Admin_Datamodel_Academicplan_Accordion academicYearInstance=academicYearInstance name=(name academicYearInstance)  descriptionPairs=(descriptionPairs academicYearInstance) id=academicYearInstance._id updateID=updateID deleteDisabled=(deleteDisabled academicYearInstance)}}
+    {{/each}}
+  </div>
+</template>

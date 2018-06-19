@@ -76,6 +76,9 @@ import './datamodel-utilities.js';
 import './list-academic-plans-widget.html';
 import './list-academic-plans-widget';
 
+import './list-academic-year-instances-widget.html';
+import './list-academic-year-instances-widget';
+
 import './list-career-goals-widget.html';
 import './list-career-goals-widget.js';
 
