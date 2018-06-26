@@ -4,7 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Users } from '../../../api/user/UserCollection';
 import { UserInteractions } from '../../../api/analytic/UserInteractionCollection';
 
-Template.Activity_Calendar_Modal.onCreated(function activityCalendarModalOnCreated(){
+Template.Activity_Calendar_Modal.onCreated(function activityCalendarModalOnCreated() {
   this.userInteractions = new ReactiveVar({});
   this.date = new ReactiveVar();
 });

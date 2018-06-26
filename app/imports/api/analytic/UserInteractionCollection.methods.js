@@ -10,9 +10,9 @@ export const userInteractionDefineMethod = new ValidatedMethod({
   name: 'UserInteraction.define',
   validate: null,
   mixins: [CallPromiseMixin],
-  run(definitionData) {
+  run(interactionData) {
     UserInteractions.assertValidRoleForMethod(this.userId);
-    return UserInteractions.define(definitionData);
+    return UserInteractions.define(interactionData);
   },
 });
 

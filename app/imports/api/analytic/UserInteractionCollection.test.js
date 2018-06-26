@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
+import { Users } from '../user/UserCollection';
 import { UserInteractions } from './UserInteractionCollection';
 import { makeSampleUser } from '../user/SampleUsers';
 import { removeAllEntities } from '../base/BaseUtilities';
@@ -9,13 +10,14 @@ import { removeAllEntities } from '../base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('UserInteractionCollection', function testSuite() {
-    let userID;
+    let username;
     let type;
     let typeData;
 
     before(function setup() {
       removeAllEntities();
-      userID = makeSampleUser();
+      const userID = makeSampleUser();
+      username = Users.getProfile(userID).username;
       type = 'interestIDs';
       typeData = '0123456789';
     });
@@ -25,7 +27,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt, #dumpOne, #restoreOne', function test() {
-      let docID = UserInteractions.define({ userID, type, typeData });
+      let docID = UserInteractions.define({ username, type, typeData });
       expect(UserInteractions.isDefined(docID)).to.be.true;
       const dumpObject = UserInteractions.dumpOne(docID);
       UserInteractions.removeIt(docID);
@@ -37,11 +39,11 @@ if (Meteor.isServer) {
       UserInteractions.removeIt(docID);
     });
     it('#removeUser', function test() {
-      const docID = UserInteractions.define({ userID, type, typeData });
+      const docID = UserInteractions.define({ username, type, typeData });
       expect(UserInteractions.isDefined(docID)).to.be.true;
-      const secDocID = UserInteractions.define({ userID, type, typeData });
+      const secDocID = UserInteractions.define({ username, type, typeData });
       expect(UserInteractions.isDefined(secDocID)).to.be.true;
-      UserInteractions.removeUser(userID);
+      UserInteractions.removeUser(username);
       expect(UserInteractions.isDefined(docID)).to.be.false;
       expect(UserInteractions.isDefined(secDocID)).to.be.false;
     });

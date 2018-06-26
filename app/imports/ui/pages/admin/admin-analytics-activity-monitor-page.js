@@ -21,7 +21,7 @@ Template.Admin_Analytics_Activity_Monitor_Page.onCreated(function onCreated() {
 });
 
 Template.Admin_Analytics_Activity_Monitor_Page.helpers({
-  userList(){
+  userList() {
     return Template.instance().userList.get();
   },
 });

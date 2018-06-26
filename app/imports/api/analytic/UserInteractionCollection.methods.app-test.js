@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { userInteractionDefineMethod, userInteractionRemoveUserMethod } from './UserInteractionCollection.methods';
 import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } from '../test/test-utilities';
-import { Users } from '../user/UserCollection';
 
 /* eslint prefer-arrow-callback: "off", no-unused-expressions: "off" */
 /* eslint-env mocha */
@@ -17,9 +16,8 @@ if (Meteor.isClient) {
     it('Define Method', async function () {
       await withLoggedInUser();
       await withRadGradSubscriptions();
-      const userID = Users.getID(student);
       const definitionData = {
-        userID: userID,
+        username: student,
         type: 'interaction-type',
         typeData: 'interaction-data',
       };

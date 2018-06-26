@@ -1,15 +1,8 @@
-import { moment } from 'meteor/momentjs:moment';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 Template.Students_Summary_Widget.onCreated(function studentsSummaryWidgetOnRendered() {
   this.userList = new ReactiveVar();
-});
-
-Template.Students_Summary_Widget.events({
-  submit(event, instance) {
-
-  },
 });
 
 Template.Students_Summary_Widget.onRendered(function studentsSummaryWidgetOnRendered() {

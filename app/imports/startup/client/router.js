@@ -29,11 +29,12 @@ function removeBodyClass() {
 // Currently only used for student routes
 function trackPath() {
   if (Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
-    const userID = Meteor.userId();
-    const type = 'pageView';
     const path = FlowRouter.current().path;
+    const username = Meteor.user().username;
+    const type = 'pageView';
     const typeData = path.substr(path.indexOf('/', 9) + 1);
-    userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
+    const interactionData = { username, type, typeData };
+    userInteractionDefineMethod.call(interactionData, (error) => {
       if (error) {
         console.log('Error creating UserInteraction.', error);
       }

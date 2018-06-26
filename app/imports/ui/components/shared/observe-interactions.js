@@ -9,6 +9,7 @@ import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 import { ROLE } from '../../../api/role/Role';
+import { getRouteUserName } from '../shared/route-user-name';
 
 let cursorHandle;
 
@@ -27,7 +28,7 @@ Template.Observe_Interactions.helpers({
       cursorHandle = studentDocumentsCursor.observeChanges({
         changed: function (id, field) {
           _.each(field, function (value, key) {
-            const userID = Meteor.userId();
+            const username = getRouteUserName;
             const type = key;
             const typeData = (function (interactionType) {
               switch (interactionType) {
@@ -47,9 +48,10 @@ Template.Observe_Interactions.helpers({
                   return null;
               }
             }(type));
+            const interactionData = { username, type, typeData };
             if (typeData !== null) {
               setTimeout(function () {
-                userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
+                userInteractionDefineMethod.call(interactionData, (error) => {
                   if (error) {
                     console.log('Error creating UserInteraction.', error);
                   }

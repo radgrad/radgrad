@@ -28,16 +28,16 @@ Accounts.onLogin(function onLogin() {
     // console.log('processing initial login');
     const username = Meteor.user().username;
     const role = Roles.getRolesForUser(id)[0];
-    if (role === 'STUDENT') {
-      const userID = id;
-      const type = 'login';
-      const typeData = 'N/A';
-      userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
-        if (error) {
-          console.log('Error creating UserInteraction.', error);
-        }
-      });
-    }
+    const interactionData = {
+      username,
+      type: 'login',
+      typeData: 'N/A',
+    };
+    userInteractionDefineMethod.call(interactionData, (error) => {
+      if (error) {
+        console.log('Error creating UserInteraction.', error);
+      }
+    });
     FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
   }
 });

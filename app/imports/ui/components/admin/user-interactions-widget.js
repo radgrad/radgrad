@@ -6,16 +6,16 @@ import { UserInteractions } from '../../../api/analytic/UserInteractionCollectio
 import { ROLE } from '../../../api/role/Role.js';
 
 Template.User_Interactions_Widget.onCreated(function userInteractionWidgetOnCreated() {
-  this.selectedUserID = new ReactiveVar('');
+  this.selectedUsername = new ReactiveVar('');
 });
 
 Template.User_Interactions_Widget.helpers({
   name() {
-    const userID = Template.instance().selectedUserID.get();
-    if (userID === '') {
+    const user = Template.instance().selectedUsername.get();
+    if (user === '') {
       return 'NO USER SELECTED';
     }
-    const name = Users.getFullName(userID);
+    const name = Users.getFullName(user);
     return name.toUpperCase();
   },
   users(role) {
@@ -28,8 +28,8 @@ Template.User_Interactions_Widget.helpers({
     return ROLE.STUDENT;
   },
   interactions() {
-    const userID = Template.instance().selectedUserID.get();
-    return UserInteractions.find({ userID: userID }, { sort: { timestamp: -1 } });
+    const username = Template.instance().selectedUsername.get();
+    return UserInteractions.find({ username: username }, { sort: { timestamp: -1 } });
   },
   formatDate(date) {
     return moment(date).format('MM/DD/YY HH:mm');
@@ -39,6 +39,6 @@ Template.User_Interactions_Widget.helpers({
 Template.User_Interactions_Widget.events({
   'click .ui.button': function retrieveUserInteraction(event, instance) {
     event.preventDefault();
-    instance.selectedUserID.set(event.target.value);
+    instance.selectedUsername.set(event.target.value);
   },
 });

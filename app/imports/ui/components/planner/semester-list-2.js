@@ -14,15 +14,6 @@ import { plannerKeys } from './academic-plan';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
-// Define an interaction when a course or opportunity is added
-function defineUserInteraction(userID, type, typeData) {
-  userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
-    if (error) {
-      console.log('Error creating UserInteraction', error);
-    }
-  });
-}
-
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
   if (this.data) {
     this.state = this.data.dictionary;
@@ -113,7 +104,6 @@ Template.Semester_List_2.events({
           if (CourseInstances.find({ courseID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
             defineMethod.call({ collectionName, definitionData }, (error, res) => {
               if (!error) {
-                defineUserInteraction(getUserIdFromRoute(), 'addCourse', slug);
                 FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                 FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                 FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
@@ -128,6 +118,16 @@ Template.Semester_List_2.events({
                     if (courseID === result.courseID) {
                       instance.state.set(plannerKeys.plannedEnrollment, result);
                     }
+                });
+                const interactionData = {
+                  username,
+                  type: 'addCourse',
+                  typeData: slug,
+                };
+                userInteractionDefineMethod.call(interactionData, (err) => {
+                  if (err) {
+                    console.log('Error creating UserInteraction', err);
+                  }
                 });
               }
             });
@@ -147,10 +147,19 @@ Template.Semester_List_2.events({
             if (OpportunityInstances.find({ opportunityID, studentID: getUserIdFromRoute(), semesterID }).count() === 0) {
               defineMethod.call({ collectionName, definitionData }, (error) => {
                 if (!error) {
-                  defineUserInteraction(getUserIdFromRoute(), 'addOpportunity', slug);
                   FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                   FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                   FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                  const interactionData = {
+                    username,
+                    type: 'addOpportunity',
+                    typeData: slug,
+                  };
+                  userInteractionDefineMethod.call(interactionData, (err) => {
+                    if (err) {
+                      console.log('Error creating UserInteraction', err);
+                    }
+                  });
                 }
               });
             }

@@ -46,7 +46,7 @@ Template.Activity_Calendar_Results.helpers({
 Template.Activity_Calendar_Results.events({
   'click .ui.table': function openModal(event, instance) {
     event.preventDefault();
-    const day = `#${instance.day.get()}`
+    const day = `#${instance.day.get()}`;
     $(day).modal('show');
   },
 });
