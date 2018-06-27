@@ -1,4 +1,5 @@
 import { moment } from 'meteor/momentjs:moment';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { UserInteractions } from '../../../api/analytic/UserInteractionCollection';
