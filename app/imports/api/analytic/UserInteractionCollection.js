@@ -85,7 +85,7 @@ class UserInteractionCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const username = doc.username;
+    const username = doc.userID ? Users.getProfile(docID.userID).username : doc.username;
     const timestamp = doc.timestamp;
     const type = doc.type;
     const typeData = doc.typeData;
