@@ -1,7 +1,7 @@
 import { moment } from 'meteor/momentjs:moment';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { _ } from 'underscore';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 const dateFormat = 'MMMM YYYY';
 
