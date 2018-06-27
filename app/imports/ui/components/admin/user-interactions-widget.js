@@ -2,15 +2,22 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { moment } from 'meteor/momentjs:moment';
 import { Users } from '../../../api/user/UserCollection.js';
-import { UserInteractions } from '../../../api/log/UserInteractionCollection';
+import { UserInteractions } from '../../../api/analytic/UserInteractionCollection';
 import { ROLE } from '../../../api/role/Role.js';
 
 Template.User_Interactions_Widget.onCreated(function userInteractionWidgetOnCreated() {
-  this.subscribe(UserInteractions.getPublicationName());
-  this.selectedUserID = new ReactiveVar('');
+  this.selectedUsername = new ReactiveVar('');
 });
 
 Template.User_Interactions_Widget.helpers({
+  name() {
+    const user = Template.instance().selectedUsername.get();
+    if (user === '') {
+      return 'NO USER SELECTED';
+    }
+    const name = Users.getFullName(user);
+    return name.toUpperCase();
+  },
   users(role) {
     return Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
   },
@@ -21,8 +28,8 @@ Template.User_Interactions_Widget.helpers({
     return ROLE.STUDENT;
   },
   interactions() {
-    const userID = Template.instance().selectedUserID.get();
-    return UserInteractions.find({ userID: userID }, { sort: { timestamp: -1 } });
+    const username = Template.instance().selectedUsername.get();
+    return UserInteractions.find({ username: username }, { sort: { timestamp: -1 } });
   },
   formatDate(date) {
     return moment(date).format('MM/DD/YY HH:mm');
@@ -32,6 +39,6 @@ Template.User_Interactions_Widget.helpers({
 Template.User_Interactions_Widget.events({
   'click .ui.button': function retrieveUserInteraction(event, instance) {
     event.preventDefault();
-    instance.selectedUserID.set(event.target.value);
+    instance.selectedUsername.set(event.target.value);
   },
 });

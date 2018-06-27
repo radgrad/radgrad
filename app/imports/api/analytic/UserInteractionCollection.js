@@ -9,14 +9,15 @@ import { ROLE } from '../role/Role';
  * An interaction may be a profile update or a page visit, such as a student updating their
  * career goals, or visiting the degree planner.
  *
- * userID is the Meteor.userId of the user who performed the action.
+ * username is the username of the user that performed the interaction.
  * type is one of the following:
  *   pageView: the user is now visiting a page.  (typeData: path to page)
  *   login: the user has just logged in. (typeData: "N/A").
  *   interestIDs, careerGoalIDs, academicPlanIDs, declaredSemesterID, picture, website: user modifies fields.
  *   (typeData: shows the new set of IDs after the modification).
+ *   addCourse, addOpportunity, removeCourse, removeOpportunity: user added/removed an instance
  * @extends api/base.BaseCollection
- * @memberOf api/log
+ * @memberOf api/analytic
  */
 class UserInteractionCollection extends BaseCollection {
 
@@ -25,7 +26,7 @@ class UserInteractionCollection extends BaseCollection {
    */
   constructor() {
     super('UserInteraction', new SimpleSchema({
-      userID: { type: String },
+      username: { type: String },
       type: { type: String },
       typeData: [String],
       timestamp: { type: Date },
@@ -36,31 +37,30 @@ class UserInteractionCollection extends BaseCollection {
    * Defines a user interaction record. An interaction object consists of a key-value pair: the key
    * representing the interaction type and the value representing any data associated with the interaction,
    * such as the ID for a newly added interest, or the name of a page that was visited.
-   * @param userID The userID.
+   * @param username The username.
    * @param interaction The interaction type and any data associated with the interaction.
    * @param timestamp The time of interaction.
    */
-  define({ userID, type, typeData, timestamp = moment().toDate() }) {
-    this._collection.insert({ userID, type, typeData, timestamp });
+  define({ username, type, typeData, timestamp = moment().toDate() }) {
+    this._collection.insert({ username, type, typeData, timestamp });
   }
 
   /**
    * Removes all interaction documents from referenced user.
-   * @param userID The user, either the ID or the username.
+   * @param username The username of user to be removed.
    * @throws { Meteor.Error } If user is not an ID or username.
    */
-  removeUser(user) {
-    const userID = Users.getID(user);
-    this._collection.remove({ userID });
+  removeUser(username) {
+    this._collection.remove({ username });
   }
 
   /**
    * Asserts that the userID belongs to a valid role when running the define and removeUser method
    * within this class.
-   * @param userID The userID of the logged in user.
+   * @param username The username of the logged in user.
    */
-  assertValidRoleForMethod(userID) {
-    this._assertRole(userID, [ROLE.ADMIN, ROLE.STUDENT]);
+  assertValidRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.STUDENT, ROLE.MENTOR, ROLE.FACULTY]);
   }
 
   /**
@@ -71,8 +71,8 @@ class UserInteractionCollection extends BaseCollection {
   checkIntegrity() { // eslint-disable-line class-methods-use-this
     const problems = [];
     this.find().forEach(doc => {
-      if (!Users.isDefined(doc.userID)) {
-        problems.push(`Bad userID: ${doc.userID}`);
+      if (!Users.isDefined(doc.username)) {
+        problems.push(`Bad user: ${doc.username}`);
       }
     });
     return problems;
@@ -85,17 +85,17 @@ class UserInteractionCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const userID = doc.userID;
+    const username = doc.userID ? Users.getProfile(docID.userID).username : doc.username;
     const timestamp = doc.timestamp;
     const type = doc.type;
     const typeData = doc.typeData;
-    return { userID, type, typeData, timestamp };
+    return { username, type, typeData, timestamp };
   }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  * @type {api/log.UserInteractionCollection}
- * @memberOf api/log
+ * @memberOf api/analytic
  */
 export const UserInteractions = new UserInteractionCollection();

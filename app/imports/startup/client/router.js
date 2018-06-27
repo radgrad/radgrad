@@ -4,7 +4,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { userInteractionDefineMethod } from '../../api/log/UserInteractionCollection.methods';
+import { userInteractionDefineMethod } from '../../api/analytic/UserInteractionCollection.methods';
 import { ROLE } from '../../api/role/Role';
 
 /*
@@ -29,11 +29,12 @@ function removeBodyClass() {
 // Currently only used for student routes
 function trackPath() {
   if (Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
-    const userID = Meteor.userId();
-    const type = 'pageView';
     const path = FlowRouter.current().path;
+    const username = Meteor.user().username;
+    const type = 'pageView';
     const typeData = path.substr(path.indexOf('/', 9) + 1);
-    userInteractionDefineMethod.call({ userID, type, typeData }, (error) => {
+    const interactionData = { username, type, typeData };
+    userInteractionDefineMethod.call(interactionData, (error) => {
       if (error) {
         console.log('Error creating UserInteraction.', error);
       }
@@ -245,6 +246,22 @@ adminRoutes.route('/analytics', {
   name: adminAnalyticsHomePageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: adminAnalyticsHomePageRouteName });
+  },
+});
+
+export const adminAnalyticsActivityMonitorPageRouteName = 'Admin_Analytics_Activity_Monitor_Page';
+adminRoutes.route('/analytics/activity-monitor', {
+  name: adminAnalyticsActivityMonitorPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsActivityMonitorPageRouteName });
+  },
+});
+
+export const adminAnalyticsStudentsPageRouteName = 'Admin_Analytics_Students_Page';
+adminRoutes.route('/analytics/students/summary', {
+  name: adminAnalyticsStudentsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsStudentsPageRouteName });
   },
 });
 

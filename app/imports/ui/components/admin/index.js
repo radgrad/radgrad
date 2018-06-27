@@ -1,4 +1,13 @@
 /** @namespace ui/components/admin */
+import './activity-calendar-modal.html';
+import './activity-calendar-modal';
+
+import './activity-calendar-results.html';
+import './activity-calendar-results';
+
+import './activity-calendar-widget.html';
+import './activity-calendar-widget';
+
 import './add-career-goal-widget.html';
 import './add-career-goal-widget.js';
 
@@ -126,6 +135,9 @@ import './list-users-widget.js';
 
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
+
+import './students-summary-widget.html';
+import './students-summary-widget.js';
 
 import './update-career-goal-widget.html';
 import './update-career-goal-widget.js';

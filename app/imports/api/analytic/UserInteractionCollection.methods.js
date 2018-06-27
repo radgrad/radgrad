@@ -4,21 +4,21 @@ import { UserInteractions } from './UserInteractionCollection';
 
 /**
  * The validated method for defining UserInteractions.
- * @memberOf api/log
+ * @memberOf api/analytic
  */
 export const userInteractionDefineMethod = new ValidatedMethod({
   name: 'UserInteraction.define',
   validate: null,
   mixins: [CallPromiseMixin],
-  run(definitionData) {
+  run(interactionData) {
     UserInteractions.assertValidRoleForMethod(this.userId);
-    return UserInteractions.define(definitionData);
+    return UserInteractions.define(interactionData);
   },
 });
 
 /**
  * The validated method for removing UserInteractions.
- * @memberOf api/log
+ * @memberOf api/analytic
  */
 export const userInteractionRemoveUserMethod = new ValidatedMethod({
   name: 'UserInteraction.removeUser',
