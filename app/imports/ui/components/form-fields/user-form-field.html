@@ -1,8 +1,8 @@
 <template name="User_Form_Field">
   <div class="{{#if required}}required{{/if}} field">
-    <label>User</label>
-    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="user">
-      <option value="">Select User</option>
+    <label>{{label}}</label>
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="{{fieldName}}">
+      <option value="">Select {{label}}</option>
       {{#each user in users}}
         <option value="{{user._id}}" selected="{{isSelected user._id selectedUserID}}">{{name user}}</option>
       {{/each}}

@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { Users } from '../../../api/user/UserCollection';
 import { AdvisorLogs } from '../../../api/log/AdvisorLogCollection';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
+import * as FormUtils from '../form-fields/form-field-utilities';
 
 Template.List_Advisor_Logs_Widget.helpers({
   advisorLogs() {
@@ -18,5 +20,18 @@ Template.List_Advisor_Logs_Widget.helpers({
       { label: 'Student', value: `${Users.getFullName(advisorLog.studentID)}` },
       { label: 'Text', value: advisorLog.text },
     ];
+  },
+});
+
+Template.List_Advisor_Logs_Widget.events({
+  'click .jsUpdate': FormUtils.processUpdateButtonClick,
+  'click .jsDelete': function (event, instance) {
+    event.preventDefault();
+    const id = event.target.value;
+    removeItMethod.call({ collectionName: AdvisorLogs.getCollectionName(), instance: id }, (error) => {
+      if (error) {
+        FormUtils.indicateError(instance, error);
+      }
+    });
   },
 });

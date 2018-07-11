@@ -1,4 +1,8 @@
 /** @namespace ui/components/admin */
+
+import './add-advisor-log-widget.html';
+import './add-advisor-log-widget';
+
 import './add-career-goal-widget.html';
 import './add-career-goal-widget.js';
 
@@ -144,6 +148,9 @@ import './list-verification-requests-widget';
 
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
+
+import './update-advisor-log-widget.html';
+import './update-advisor-log-widget';
 
 import './update-career-goal-widget.html';
 import './update-career-goal-widget.js';

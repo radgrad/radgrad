@@ -2,11 +2,11 @@
 
   {{#if Template.subscriptionsReady}}
     {{#Admin_DataModel_Layout}}
-    <!--{{#if displayUpdateWidget}}-->
-      <!--{{> Update_Advisor_Log_Widget updateID=updateID}}-->
-    <!--{{else}}-->
-      <!--{{> Add_Advisor_Log_Widget }}-->
-    <!--{{/if}}-->
+    {{#if displayUpdateWidget}}
+      {{> Update_Advisor_Log_Widget updateID=updateID}}
+    {{else}}
+      {{> Add_Advisor_Log_Widget }}
+    {{/if}}
     {{> List_Advisor_Logs_Widget updateID=updateID}}
     {{/Admin_DataModel_Layout}}
   {{else}}

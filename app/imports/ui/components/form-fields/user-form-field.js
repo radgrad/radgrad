@@ -13,4 +13,11 @@ Template.User_Form_Field.helpers({
   name(user) {
     return Users.getFullName(user.username);
   },
+  label() {
+    return Template.instance().data.label ? Template.instance().data.label : 'User';
+  },
+  fieldName() {
+    const val = Template.instance().data.label ? Template.instance().data.label : 'User';
+    return val.toLocaleLowerCase();
+  },
 });
