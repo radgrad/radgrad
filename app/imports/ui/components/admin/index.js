@@ -24,6 +24,9 @@ import './add-feedback-instance-widget';
 import './add-help-message-widget.html';
 import './add-help-message-widget.js';
 
+import './add-interest-type-widget.html';
+import './add-interest-type-widget';
+
 import './add-interest-widget.html';
 import './add-interest-widget.js';
 
@@ -172,6 +175,9 @@ import './update-feedback-instance-widget';
 
 import './update-help-message-widget.html';
 import './update-help-message-widget.js';
+
+import './update-interest-type-widget.html';
+import './update-interest-type-widget';
 
 import './update-interest-widget.html';
 import './update-interest-widget.js';

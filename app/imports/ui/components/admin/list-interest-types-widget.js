@@ -44,7 +44,7 @@ Template.List_Interest_Types_Widget.events({
   'click .jsDelete': function (event, instance) {
     event.preventDefault();
     const id = event.target.value;
-    removeItMethod.call({ collectionName: 'InterestCollection', instance: id }, (error) => {
+    removeItMethod.call({ collectionName: InterestTypes.getCollectionName(), instance: id }, (error) => {
       if (error) {
         FormUtils.indicateError(instance, error);
       }
