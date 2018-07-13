@@ -23,6 +23,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { VerificationRequests } from '../../../api/verification/VerificationRequestCollection';
+import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 
 Template.Admin_DataModel_Menu.helpers({
   academicPlanCount() {
@@ -120,6 +121,12 @@ Template.Admin_DataModel_Menu.helpers({
   },
   opportunityInstancesRouteName() {
     return RouteNames.adminDataModelOpportunityInstancesPageRouteName;
+  },
+  opportunityTypesRouteName() {
+    return RouteNames.adminDataModelOpportunityTypesPageRouteName;
+  },
+  opportunityTypeCount() {
+    return OpportunityTypes.count();
   },
   planChoiceCount() {
     return PlanChoices.count();

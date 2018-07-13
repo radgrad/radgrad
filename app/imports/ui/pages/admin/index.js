@@ -60,6 +60,9 @@ import './admin-datamodel-opportunities-page.js';
 import './admin-datamodel-opportunity-instances-page.html';
 import './admin-datamodel-opportunity-instances-page.js';
 
+import './admin-datamodel-opportunity-types-page.html';
+import './admin-datamodel-opportunity-types-page';
+
 import './admin-datamodel-page.html';
 
 import './admin-datamodel-plan-choice-page.html';

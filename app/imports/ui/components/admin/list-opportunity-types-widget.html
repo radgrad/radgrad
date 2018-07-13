@@ -1,0 +1,8 @@
+<template name="List_Opportunity_Types_Widget">
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>OPPORTUNITY TYPES ({{ count }})</h4></div>
+    {{#each opportunityType in opportunityTypes}}
+      {{> Admin_DataModel_Accordion name=opportunityType.name slug=(slugName opportunityType.slugID) descriptionPairs=(descriptionPairs opportunityType) id=opportunityType._id updateID=updateID deleteDisabled=(deleteDisabled opportunityType)}}
+    {{/each}}
+  </div>
+</template>
