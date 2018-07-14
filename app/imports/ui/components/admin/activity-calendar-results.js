@@ -2,7 +2,7 @@ import { moment } from 'meteor/momentjs:moment';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { UserInteractions } from '../../../api/analytic/UserInteractionCollection';
+import { userInteractionFindMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Activity_Calendar_Results.onCreated(function activityCalendarResultsOnCreated() {
   this.activeUsers = new ReactiveVar();
@@ -21,12 +21,25 @@ Template.Activity_Calendar_Results.helpers({
     const endOfDay = new Date(moment(selectedDay, 'DD MMMM YYYY').endOf('day'));
     _.each(userList, function (users, role) {
       const roleResults = {};
-      const interactions = UserInteractions.find({
+      /* const interactions = UserInteractions.find({
         userID: { $in: users },
         timestamp: { $gte: startOfDay, $lte: endOfDay },
-      }).fetch();
+      }).fetch(); */
+      const selector = {
+        username: { $in: users },
+        timestamp: { $gte: startOfDay, $lte: endOfDay },
+      };
+      let interactions;
+      userInteractionFindMethod.call({ selector }, (error, result) => {
+        if (error) {
+          console.log('Error finding user interactions.', error);
+        } else {
+          interactions = result;
+        }
+      });
+      console.log(interactions);
       roleResults.role = role;
-      roleResults.users = _.uniq(_.pluck(interactions, 'userID'));
+      roleResults.users = _.uniq(_.map(interactions, 'username'));
       roleResults.userCount = roleResults.users.length;
       roleResults.interactionCount = interactions.length;
       results.push(roleResults);

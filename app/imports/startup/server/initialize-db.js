@@ -6,6 +6,7 @@ import { moment } from 'meteor/momentjs:moment';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { RadGrad } from '../../api/radgrad/RadGrad';
+import { UserInteractions } from '../../api/analytic/UserInteractionCollection';
 import { loadCollection } from '../../api/test/test-utilities';
 import { removeAllEntities } from '../../api/base/BaseUtilities';
 import { checkIntegrity } from '../../api/integrity/IntegrityChecker';
@@ -159,6 +160,19 @@ function defineTestAdminUser() {
   }
 }
 
+function fixUserInteractions() {
+  if (Meteor.settings.public.fixUserInteractions) {
+    console.log('Fixing UserInteraction collection.');
+    _.each(UserInteractions.find().fetch(), function (interaction) {
+      if (interaction.userID) {
+        const username = Meteor.users.findOne({ _id: interaction.userID }).username;
+        console.log('Fixing interaction for user: ', username);
+        UserInteractions.update(interaction._id, { $set: { username } });
+      }
+    });
+  }
+}
+
 // Add a startup callback that distinguishes between test and dev/prod mode and does the right thing.
 Meteor.startup(() => {
   if (Meteor.isTest || Meteor.isAppTest) {
@@ -171,5 +185,6 @@ Meteor.startup(() => {
     loadDatabase();
     startupCheckIntegrity();
     startupPublicStats();
+    fixUserInteractions();
   }
 });
