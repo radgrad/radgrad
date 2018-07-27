@@ -44,6 +44,8 @@ Template.Observe_Interactions.helpers({
                   return value;
                 case 'website':
                   return value;
+                case 'level':
+                  return `Leveled up to: ${value}`;
                 default:
                   return null;
               }

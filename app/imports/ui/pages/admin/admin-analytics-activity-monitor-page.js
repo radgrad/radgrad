@@ -2,7 +2,6 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { ROLE } from '../../../api/role/Role.js';
-import { UserInteractions } from '../../../api/analytic/UserInteractionCollection';
 import { Users } from '../../../api/user/UserCollection';
 
 const roles = [ROLE.STUDENT, ROLE.FACULTY, ROLE.MENTOR];

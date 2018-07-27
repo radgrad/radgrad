@@ -20,10 +20,12 @@
       </div>
       {{#each week in monthArray}}
         <div class="row">
+          {{test week}}
           {{#each day in week}}
             <div class="column">
               <div class="ui one column grid">
-                {{>Activity_Calendar_Results month=month day=day userList=userList}}
+                {{test day}}
+                {{day}}
               </div>
             </div>
           {{/each}}

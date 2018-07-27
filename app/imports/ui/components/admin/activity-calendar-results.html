@@ -7,11 +7,11 @@
       <a href="#" style="font-weight: normal;">
       <table class="ui unstackable striped green table">
         <tbody>
-          {{#each resultSet in interactionResults month day userList}}
+          {{#each result in roles}}
             <tr class="center aligned">
-                <td style="padding: 3px;">{{shorten resultSet.role}}</td>
-                <td style="padding: 3px;">{{resultSet.userCount}}</td>
-                <td style="padding: 3px;">{{resultSet.interactionCount}}</td>
+                <td style="padding: 3px;">{{shorten result.role}}</td>
+                <td style="padding: 3px;">{{result.userCount}}</td>
+                <td style="padding: 3px;">{{result.interactionCount}}</td>
             </tr>
           {{/each}}
         </tbody>
