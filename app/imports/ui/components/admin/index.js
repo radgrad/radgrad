@@ -1,9 +1,5 @@
 /** @namespace ui/components/admin */
-<<<<<<< HEAD
 
-import './add-advisor-log-widget.html';
-import './add-advisor-log-widget';
-=======
 import './activity-calendar-modal.html';
 import './activity-calendar-modal';
 
@@ -12,7 +8,9 @@ import './activity-calendar-results';
 
 import './activity-calendar-widget.html';
 import './activity-calendar-widget';
->>>>>>> master
+
+import './add-advisor-log-widget.html';
+import './add-advisor-log-widget';
 
 import './add-career-goal-widget.html';
 import './add-career-goal-widget.js';
