@@ -5,7 +5,7 @@
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> User_Form_Field users=mentors selectedUserID=mentorAnswer.mentorID errorMessage=(fieldError "mentor")  disabled=true}}
+        {{> User_Form_Field label="Mentor" users=mentors selectedUserID=mentorAnswer.mentorID errorMessage=(fieldError "mentor")  disabled=true}}
         {{> Mentor_Question_Form_Field questions=questions selectedQuestionID=mentorAnswer.questionID errorMessage=(fieldError "question") required=true disabled=true}}
       </div>
 
