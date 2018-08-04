@@ -1,7 +1,18 @@
 /** @namespace ui/components/admin */
+<<<<<<< HEAD
 
 import './add-advisor-log-widget.html';
 import './add-advisor-log-widget';
+=======
+import './activity-calendar-modal.html';
+import './activity-calendar-modal';
+
+import './activity-calendar-results.html';
+import './activity-calendar-results';
+
+import './activity-calendar-widget.html';
+import './activity-calendar-widget';
+>>>>>>> master
 
 import './add-career-goal-widget.html';
 import './add-career-goal-widget.js';
@@ -157,6 +168,9 @@ import './list-verification-requests-widget';
 
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
+
+import './students-summary-widget.html';
+import './students-summary-widget.js';
 
 import './update-advisor-log-widget.html';
 import './update-advisor-log-widget';

@@ -1,10 +1,10 @@
 <template name="User_Interactions_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>USERS</h4></div>
-    <div class="ui stackable grid">
+    <div class="ui stackable grid" style="height: 150px; overflow: scroll;">
       {{#each user in users studentRole}}
-        <div class="four wide column" style="padding: 2px;">
-          <button class="ui tiny grey basic fluid button" style="text-align: left;" value={{user.userID}}>
+        <div class="three wide column" style="padding: 2px;">
+          <button class="ui tiny grey basic fluid button" style="text-align: left;" value={{user.username}}>
             {{label user}}
           </button>
         </div>
@@ -13,16 +13,18 @@
   </div>
 
   <div class="ui padded container segment">
-    <div class="ui dividing header"><h4>USER INTERACTIONS</h4></div>
+    <div class="ui dividing header">
+      <h4>USER INTERACTIONS: <span style="color: #6FBE44;">{{name}}</span></h4>
+    </div>
     <div class="ui stackable grid">
       <div style="height: 300px; overflow-x: scroll; width: 100%;">
         <table class="ui celled padded table">
           <thead>
-            <tr>
-              <th>Type</th>
-              <th>Type Data</th>
-              <th>Timestamp</th>
-            </tr>
+          <tr>
+            <th>Type</th>
+            <th>Type Data</th>
+            <th>Timestamp</th>
+          </tr>
           </thead>
           <tbody>
           {{#each interaction in interactions}}

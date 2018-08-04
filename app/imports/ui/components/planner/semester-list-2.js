@@ -12,6 +12,7 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
   if (this.data) {
@@ -118,6 +119,16 @@ Template.Semester_List_2.events({
                       instance.state.set(plannerKeys.plannedEnrollment, result);
                     }
                 });
+                const interactionData = {
+                  username,
+                  type: 'addCourse',
+                  typeData: slug,
+                };
+                userInteractionDefineMethod.call(interactionData, (err) => {
+                  if (err) {
+                    console.log('Error creating UserInteraction', err);
+                  }
+                });
               }
             });
           }
@@ -139,6 +150,16 @@ Template.Semester_List_2.events({
                   FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                   FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                   FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+                  const interactionData = {
+                    username,
+                    type: 'addOpportunity',
+                    typeData: slug,
+                  };
+                  userInteractionDefineMethod.call(interactionData, (err) => {
+                    if (err) {
+                      console.log('Error creating UserInteraction', err);
+                    }
+                  });
                 }
               });
             }

@@ -1,0 +1,11 @@
+<template name="Admin_Analytics_Activity_Monitor_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_Analytics_Layout}}
+      {{> Activity_Calendar_Widget userList=userList}}
+    {{/Admin_Analytics_Layout}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+
+</template>

@@ -409,8 +409,8 @@ class FeedCollection extends BaseCollection {
     this._collection.update(existingFeedID, { $set: { userIDs, description, picture } });
   }
 
-  _updateNewLevel(username, existingFeedID, level) {
-    const userID = Users.getID(username);
+  _updateNewLevel(user, existingFeedID, level) {
+    const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     this.assertDefined(existingFeedID);
     const existingFeed = this.findDoc(existingFeedID);
     const userIDs = existingFeed.userIDs;
