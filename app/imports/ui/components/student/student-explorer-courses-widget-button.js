@@ -7,7 +7,7 @@ import { defineMethod, removeItMethod } from '../../../api/base/BaseCollection.m
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Student_Explorer_Courses_Widget_Button.helpers({
   equals(a, b) {
@@ -69,6 +69,12 @@ Template.Student_Explorer_Courses_Widget_Button.events({
         FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
       }
     });
+    const interactionData = { username, type: 'addCourse', typeData: courseSlug.name };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.log('Error creating UserInteraction', err);
+      }
+    });
   },
   'click .removeFromPlan': function clickItemRemoveFromPlan(event) {
     event.preventDefault();
@@ -91,6 +97,13 @@ Template.Student_Explorer_Courses_Widget_Button.events({
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
         FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
+      }
+    });
+    const interactionData = { username: getRouteUserName(), type: 'removeCourse',
+      typeData: Slugs.getNameFromID(course.slugID) };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.log('Error creating UserInteraction', err);
       }
     });
   },

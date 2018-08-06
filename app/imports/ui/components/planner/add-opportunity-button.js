@@ -3,6 +3,8 @@ import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { plannerKeys } from './academic-plan';
+import { getRouteUserName } from '../shared/route-user-name';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Add_Opportunity_Button.onCreated(function addOpportunityButtonOnCreated() {
   this.state = this.data.dictionary;
@@ -42,6 +44,13 @@ Template.Add_Opportunity_Button.events({
         template.state.set(plannerKeys.detailOpportunity, opportunity);
         template.state.set(plannerKeys.detailOpportunityInstance, null);
         template.$('.chooseSemester').popup('hide');
+      }
+    });
+    const interactionData = { username: getRouteUserName(), type: 'removeOpportunity',
+      typeData: Slugs.getNameFromID(opportunity.slugID) };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.log('Error creating UserInteraction', err);
       }
     });
   },
