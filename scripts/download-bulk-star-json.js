@@ -6,8 +6,8 @@ const moment = require('moment');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-function getStarArrivalTime() {
-  const emailData = fs.readFileSync('./emails.txt');
+function getStarArrivalTime(emails) {
+  const emailData = fs.readFileSync(`./${emails}`);
   const numEmails = emailData.toString().split('\n').length;
   const arrivalTime = moment().add(numEmails * 10, 's');
   // eslint-disable-next-line
@@ -19,12 +19,12 @@ function getStarArrivalTime() {
  * Pass email list as part of the url encoded form to the STAR-RadGrad api
  * Return the response which should be a JSON object
  */
-function getCourseData(username, password) {
+function getCourseData(username, password, emails) {
   const params = {
     form: {
       uid: username,
       password: password,
-      emails: fs.readFileSync('./emails.txt'),
+      emails: fs.readFileSync(`./${emails}`),
     },
   };
 
@@ -98,6 +98,12 @@ async function downloadStarData() {
       validate: value => (value.length ? true : 'Please enter your password'),
     },
     {
+      name: 'emailfilename',
+      type: 'input',
+      message: 'Enter the email file name:',
+      validate: value => (value.length ? true : 'Please enter the email list file name'),
+    },
+    {
       name: 'filename',
       type: 'input',
       message: 'Enter the file name where the data will be saved:',
@@ -106,8 +112,8 @@ async function downloadStarData() {
   ];
 
   const userParams = await inquirer.prompt(questions);
-  console.log(getStarArrivalTime());
-  getCourseData(userParams.username, userParams.password)
+  console.log(getStarArrivalTime(userParams.emailfilename));
+  getCourseData(userParams.username, userParams.password, userParams.emailfilename)
       .then(res => fs.writeFileSync(userParams.filename, filterAlumni(res.body)))
       .catch(err => console.log(err));
 }
