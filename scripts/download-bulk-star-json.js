@@ -79,7 +79,8 @@ function filterAlumni(contents) {
 }
 
 /**
- * Main function. Ask for the admin's username, password, and file to put the json data into.
+ * Main function. Ask for the admin's username, password, the name of the email list file
+ * and file to put the json data into.
  * Then call getCourseData to get the data from STAR.
  * @returns {Promise<void>}
  */
@@ -100,7 +101,7 @@ async function downloadStarData() {
     {
       name: 'emailfilename',
       type: 'input',
-      message: 'Enter the email file name:',
+      message: 'Enter the emails list file name:',
       validate: value => (value.length ? true : 'Please enter the email list file name'),
     },
     {
