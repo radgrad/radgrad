@@ -45,7 +45,7 @@ Template.Observe_Interactions.helpers({
                 case 'website':
                   return value;
                 case 'level':
-                  return `Leveled changed to ${value}`;
+                  return `Leveled updated to ${value}`;
                 default:
                   return null;
               }
