@@ -34,7 +34,7 @@ class CourseInstanceCollection extends BaseCollection {
       ice: { type: Object, optional: true, blackbox: true },
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
-      'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W'];
+      'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W', 'TBD', 'OTHER'];
     this.publicationNames = {
       student: this._collectionName,
       perStudentAndSemester: `${this._collectionName}.PerStudentAndSemester`,

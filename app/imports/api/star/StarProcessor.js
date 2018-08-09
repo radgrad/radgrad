@@ -4,6 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../semester/SemesterCollection';
 import { Courses } from '../course/CourseCollection';
 import { Slugs } from '../slug/SlugCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
 
 /* global isNaN */
 
@@ -137,16 +138,20 @@ export function processStarCsvData(student, csvData) {
     const dataObjects = _.map(filteredData, (data) => {
       const name = data[nameIndex];
       let grade = data[gradeIndex];
+      console.log(`grade ${grade}`);
       if (grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
         grade = data[transferGradeIndex];
-      } else
-        if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
-          // got number assuming it is AP exam score need to determine the type of the exam.
-          // const exam = data[transferCourseDesc];
-          if (data[transferGradeIndex] > 2) {
-            grade = 'B';
-          }
+      } else if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
+        // got number assuming it is AP exam score need to determine the type of the exam.
+        // const exam = data[transferCourseDesc];
+        if (data[transferGradeIndex] > 2) {
+          grade = 'B';
         }
+      } else if (grade === 'unknown' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
+        grade = data[transferGradeIndex];
+      } else if (grade.includes('L')) {
+        grade = 'C';
+      }
       let number = data[numberIndex];
       if (isNaN(number)) {
         number = data[transferCourseNumberIndex];
@@ -201,16 +206,20 @@ export function processBulkStarCsvData(csvData) {
     _.forEach(filteredData, (data) => {
       const name = data[nameIndex];
       let grade = data[gradeIndex];
+      console.log(`grade ${grade}`);
       if (grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
         grade = data[transferGradeIndex];
-      } else
-        if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
-          // got number assuming it is AP exam score need to determine the type of the exam.
-          // const exam = data[transferCourseDesc];
-          if (data[transferGradeIndex] > 2) {
-            grade = 'B';
-          }
+      } else if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
+        // got number assuming it is AP exam score need to determine the type of the exam.
+        // const exam = data[transferCourseDesc];
+        if (data[transferGradeIndex] > 2) {
+          grade = 'B';
         }
+      } else if (grade === 'unknown' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
+        grade = data[transferGradeIndex];
+      } else if (grade.includes('L')) {
+        grade = 'C';
+      }
       let number = data[numberIndex];
       if (isNaN(number)) {
         number = data[transferCourseNumberIndex];
@@ -260,13 +269,12 @@ export function processStarJsonData(student, jsonData) {
     let grade = course.grade;
     if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
       grade = course.transferGrade;
-    } else
-      if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
-        // got number assuming it is AP exam score need to determine the type of the exam.
-        if (course.transferGrade > 2) {
-          grade = 'B';
-        }
+    } else if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
+      // got number assuming it is AP exam score need to determine the type of the exam.
+      if (course.transferGrade > 2) {
+        grade = 'B';
       }
+    }
     let number = course.number;
     if (isNaN(number)) {
       number = course.transferNumber;
@@ -304,15 +312,19 @@ export function processBulkStarJsonData(jsonData) {
     _.forEach(courses, (course) => {
       const name = course.name;
       let grade = course.grade;
-      if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
-        grade = course.transferGrade;
-      } else
-        if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
-          // got number assuming it is AP exam score need to determine the type of the exam.
-          if (course.transferGrade > 2) {
-            grade = 'B';
+      if (_.includes(CourseInstances.validGrades, grade)) {
+        if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
+          grade = course.transferGrade;
+        } else
+          if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
+            // got number assuming it is AP exam score need to determine the type of the exam.
+            if (course.transferGrade > 2) {
+              grade = 'B';
+            }
           }
-        }
+      } else {
+        grade = 'OTHER';
+      }
       let number = course.number;
       if (isNaN(number)) {
         number = course.transferNumber;

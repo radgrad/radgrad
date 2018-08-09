@@ -26,7 +26,12 @@ if (Meteor.isServer) {
 
     it('#makeCourseICE', function test() {
       expect(ICE.makeCourseICE('ICS111', 'A').c).to.equal(ICE.gradeCompetency.A);
+      expect(ICE.makeCourseICE('ICS112', 'A+').c).to.equal(ICE.gradeCompetency.A);
+      expect(ICE.makeCourseICE('ICS113', 'A-').c).to.equal(ICE.gradeCompetency.A);
+      expect(ICE.makeCourseICE('ICS113', 'A*').c).to.equal(ICE.gradeCompetency.C);
+      expect(ICE.makeCourseICE('ICS111', 'B+').c).to.equal(ICE.gradeCompetency.B);
       expect(ICE.makeCourseICE('ICS111', 'B').c).to.equal(ICE.gradeCompetency.B);
+      expect(ICE.makeCourseICE('ICS111', 'B-').c).to.equal(ICE.gradeCompetency.B);
       expect(ICE.makeCourseICE(Courses.unInterestingSlug, 'A').c).to.equal(ICE.gradeCompetency.C);
     });
 
