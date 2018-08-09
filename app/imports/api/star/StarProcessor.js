@@ -267,13 +267,17 @@ export function processStarJsonData(student, jsonData) {
   const dataObjects = _.map(courses, (course) => {
     const name = course.name;
     let grade = course.grade;
-    if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
-      grade = course.transferGrade;
-    } else if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
-      // got number assuming it is AP exam score need to determine the type of the exam.
-      if (course.transferGrade > 2) {
-        grade = 'B';
+    if (_.includes(CourseInstances.validGrades, grade)) {
+      if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
+        grade = course.transferGrade;
+      } else if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
+        // got number assuming it is AP exam score need to determine the type of the exam.
+        if (course.transferGrade > 2) {
+          grade = 'B';
+        }
       }
+    } else {
+      grade = 'OTHER';
     }
     let number = course.number;
     if (isNaN(number)) {
@@ -290,7 +294,7 @@ export function processStarJsonData(student, jsonData) {
     return obj;
   });
 
-  // console.log(dataObjects);
+  // console.log('single', dataObjects);
   // Now we take that array of objects and transform them into CourseInstance data objects.
   return _.filter(_.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) {
     return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
@@ -308,51 +312,13 @@ export function processBulkStarJsonData(jsonData) {
   _.forEach(jsonData, (data) => {
     // console.log(data);
     const student = data.email;
-    const courses = data.courses;
-    _.forEach(courses, (course) => {
-      const name = course.name;
-      let grade = course.grade;
-      if (_.includes(CourseInstances.validGrades, grade)) {
-        if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
-          grade = course.transferGrade;
-        } else
-          if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
-            // got number assuming it is AP exam score need to determine the type of the exam.
-            if (course.transferGrade > 2) {
-              grade = 'B';
-            }
-          }
-      } else {
-        grade = 'OTHER';
-      }
-      let number = course.number;
-      if (isNaN(number)) {
-        number = course.transferNumber;
-      }
-      const obj = {
-        semester: course.semester,
-        name,
-        number,
-        credits: course.credits,
-        grade,
-        student,
-      };
-      if (!bulkData[student]) {
-        bulkData[student] = {};
-        bulkData[student].courses = [];
-        bulkData[student].firstName = data.name.first;
-        bulkData[student].lastName = data.name.last;
-      }
-      bulkData[student].courses.push(obj);
-    });
+    if (!bulkData[student]) {
+      bulkData[student] = {};
+      bulkData[student].courses = processStarJsonData(student, data);
+      bulkData[student].firstName = data.name.first;
+      bulkData[student].lastName = data.name.last;
+    }
   });
-  // console.log(Object.keys(bulkData));
-  // Now we take that array of objects and transform them into CourseInstance data objects.
-  _.forEach(Object.keys(bulkData), (key) => {
-    bulkData[key].courses = _.filter(_.map(bulkData[key].courses, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) { // eslint-disable-line
-      return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
-    });
-  });
-  // console.log(bulkData);
+  // console.log('bulk', bulkData);
   return bulkData;
 }
