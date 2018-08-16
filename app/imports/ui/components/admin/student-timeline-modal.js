@@ -45,7 +45,7 @@ Template.Student_Timeline_Modal.helpers({
           });
           _.each(explorerPages, function (pages, pageName) {
             if (!_.isEmpty(pages)) {
-              behaviors.Exploration.push(`Entries viewed in explorer/${pageName} : 
+              behaviors.Exploration.push(`Entries viewed in ${pageName}: 
               ${_.uniq(pages).join(', ')}`);
             }
           });
