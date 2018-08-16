@@ -2,7 +2,6 @@ import { moment } from 'meteor/momentjs:moment';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { $ } from 'meteor/jquery';
 import { userInteractionFindMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 

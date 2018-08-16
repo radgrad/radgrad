@@ -1,5 +1,9 @@
 <template name="Students_Summary_Widget">
-  {{>Student_Timeline_Modal user=user dateRange=dateRange}}
+  <div class="ui modal" id="timeline">
+    {{#if selectedUser}}
+      {{>Student_Timeline_Modal user=user dateRange=dateRange}}
+    {{/if}}
+  </div>
   <div class="ui padded container segment">
     <h4 class="ui dividing header">Select date range:</h4>
     <form class="ui form">

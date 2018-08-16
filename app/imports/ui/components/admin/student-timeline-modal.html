@@ -1,23 +1,28 @@
 <template name="Student_Timeline_Modal">
-  <div class="ui modal" id="timeline">
-    <div class="ui padded container segment">
-      <h4 class="ui dividing center aligned header">{{name user}}'s Timeline ({{dateRange}})</h4>
-      <div class="ui padded stackable centered grid">
-        {{#each session in sessions user}}
-          <div class="ui green left aligned segment" style="width: 80%;">
-            <h4 class="ui dividing grey header">
-              Day: <div style="display: inline; color: #6FBE44">{{sessionDay session}}</div>,
-              Time: <div style="display: inline; color: #6FBE44">{{sessionTime session}}</div>,
-              Duration: <div style="display: inline; color: #6FBE44">{{sessionDuration session}} minutes</div>
-            </h4>
-            <ul>
-            {{#each interaction in session}}
-              <li>{{interaction.timestamp}}</li>
+  <div class="ui padded container segment">
+    <h4 class="ui dividing center aligned header">{{name user}}'s Timeline ({{dateRange}})</h4>
+    <div class="ui padded stackable centered grid" style="height: 550px; overflow: scroll;">
+      {{#each session in sessions user}}
+        <div class="ui green left aligned segment" style="width: 80%;">
+          <h4 class="ui dividing grey header">
+            Day: <div style="display: inline; color: #6FBE44">{{sessionDay session}}</div>,
+            Time: <div style="display: inline; color: #6FBE44">{{sessionTime session}}</div>,
+            Duration: <div style="display: inline; color: #6FBE44">{{sessionDuration session}} minutes</div>
+          </h4>
+          <div class="ui segments">
+            {{#each behavior in behaviors session}}
+              <div class="ui segment">
+                <h5 class="ui header">{{behavior.type}}</h5>
+                <ol class="ui list">
+                  {{#each stat in behavior.stats}}
+                    <li value="-" style="color: #006E51;">{{stat}}</li>
+                  {{/each}}
+                </ol>
+              </div>
             {{/each}}
-            </ul>
           </div>
-        {{/each}}
-      </div>
+        </div>
+      {{/each}}
     </div>
   </div>
 </template>
