@@ -1,4 +1,5 @@
 /** @namespace ui/components/admin */
+
 import './activity-calendar-modal.html';
 import './activity-calendar-modal.js';
 
@@ -7,6 +8,9 @@ import './activity-calendar-results.js';
 
 import './activity-calendar-widget.html';
 import './activity-calendar-widget.js';
+
+import './add-advisor-log-widget.html';
+import './add-advisor-log-widget';
 
 import './add-career-goal-widget.html';
 import './add-career-goal-widget.js';
@@ -29,6 +33,9 @@ import './add-feedback-instance-widget';
 import './add-help-message-widget.html';
 import './add-help-message-widget.js';
 
+import './add-interest-type-widget.html';
+import './add-interest-type-widget';
+
 import './add-interest-widget.html';
 import './add-interest-widget.js';
 
@@ -40,6 +47,9 @@ import './add-mentor-question-widget';
 
 import './add-opportunity-instance-widget.html';
 import './add-opportunity-instance-widget.js';
+
+import './add-opportunity-type-widget.html';
+import './add-opportunity-type-widget';
 
 import './add-opportunity-widget.html';
 import './add-opportunity-widget.js';
@@ -85,6 +95,12 @@ import './datamodel-utilities.js';
 import './list-academic-plans-widget.html';
 import './list-academic-plans-widget';
 
+import './list-academic-year-instances-widget.html';
+import './list-academic-year-instances-widget';
+
+import './list-advisor-logs-widget.html';
+import './list-advisor-logs-widget';
+
 import './list-career-goals-widget.html';
 import './list-career-goals-widget.js';
 
@@ -109,6 +125,9 @@ import './list-help-messages-widget.js';
 import './list-interests-widget.html';
 import './list-interests-widget.js';
 
+import './list-interest-types-widget.html';
+import './list-interest-types-widget';
+
 import './list-mentor-answers-widget.html';
 import './list-mentor-answers-widget';
 
@@ -117,6 +136,9 @@ import './list-mentor-questions-widget';
 
 import './list-opportunity-instances-widget.html';
 import './list-opportunity-instances-widget.js';
+
+import './list-opportunity-types-widget.html';
+import './list-opportunity-types-widget';
 
 import './list-opportunities-widget.html';
 import './list-opportunities-widget.js';
@@ -127,11 +149,20 @@ import './list-plan-choice-widget';
 import './list-reviews-widget.html';
 import './list-reviews-widget.js';
 
+import './list-semesters-widget.html';
+import './list-semesters-widget';
+
+import './list-slugs-widget.html';
+import './list-slugs-widget';
+
 import './list-teasers-widget.html';
 import './list-teasers-widget.js';
 
 import './list-users-widget.html';
 import './list-users-widget.js';
+
+import './list-verification-requests-widget.html';
+import './list-verification-requests-widget';
 
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
@@ -141,6 +172,9 @@ import './student-timeline-modal.js';
 
 import './students-summary-widget.html';
 import './students-summary-widget.js';
+
+import './update-advisor-log-widget.html';
+import './update-advisor-log-widget';
 
 import './update-career-goal-widget.html';
 import './update-career-goal-widget.js';
@@ -163,6 +197,9 @@ import './update-feedback-instance-widget';
 import './update-help-message-widget.html';
 import './update-help-message-widget.js';
 
+import './update-interest-type-widget.html';
+import './update-interest-type-widget';
+
 import './update-interest-widget.html';
 import './update-interest-widget.js';
 
@@ -174,6 +211,9 @@ import './update-mentor-question-widget';
 
 import './update-opportunity-instance-widget.html';
 import './update-opportunity-instance-widget.js';
+
+import './update-opportunity-type-widget.html';
+import './update-opportunity-type-widget';
 
 import './update-opportunity-widget.html';
 import './update-opportunity-widget.js';

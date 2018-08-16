@@ -44,6 +44,15 @@ class AdvisorLogCollection extends BaseCollection {
     this._collection.insert({ advisorID, studentID, text, createdOn });
   }
 
+  update(docID, { text }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (text) {
+      updateData.text = text;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
   /**
    * Removes all AdvisorLog documents referring to (the student) user.
    * @param user The student user, either the ID or the username.

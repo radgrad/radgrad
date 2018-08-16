@@ -30,7 +30,7 @@ Template.List_Academic_Plans_Widget.helpers({
     return [
       { label: 'Name', value: `${academicPlan.name}` },
       { label: 'Description', value: academicPlan.description },
-      { label: 'References', value: `Users: ${numReferences(academicPlan)}` }];
+      { label: 'References', value: `Students: ${numReferences(academicPlan)}` }];
   },
 });
 

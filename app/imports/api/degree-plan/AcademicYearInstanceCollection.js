@@ -173,6 +173,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
+          return instance._collection.find();
+        }
         return instance._collection.find({ studentID });
       });
     }

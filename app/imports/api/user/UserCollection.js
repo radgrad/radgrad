@@ -202,6 +202,10 @@ class UserCollection {
         || MentorProfiles.findByUsername(username) || AdvisorProfiles.findByUsername(username);
   }
 
+  count() {
+    return StudentProfiles.count() + FacultyProfiles.count() + MentorProfiles.count() + AdvisorProfiles.count();
+  }
+
   /**
    * Returns the admin username from the settings file, or 'radgrad@hawaii.edu' (for testing purposes).
    * @returns {string} The admin username.

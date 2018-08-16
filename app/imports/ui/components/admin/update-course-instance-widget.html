@@ -7,7 +7,7 @@
       <div class="fields">
         {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=selectedSemesterID errorMessage=(fieldError "semesters")  disabled=true}}
         {{> Course_Form_Field courses=courses selectedCourseID=course errorMessage=(fieldError "course")  disabled=true}}
-        {{> User_Form_Field users=students selectedUserID=courseInstance.studentID errorMessage=(fieldError "student")  disabled=true}}
+        {{> User_Form_Field label="Student" users=students selectedUserID=courseInstance.studentID errorMessage=(fieldError "student")  disabled=true}}
       </div>
       <div class="fields">
         {{> Boolean_Form_Field label="Verified" trueValue=trueValueVerified falseValue=falseValueVerified name="verified" errorMessage=(fieldError "verified")}}

@@ -55,7 +55,7 @@ function processStudentStarDefinitions(advisor, student, definitions) {
       // numOtherCourses += 1;
     }
     definition.fromSTAR = true; // eslint-disable-line
-    if (definition.grade === '***') {
+    if (definition.grade === '***' || definition.grade === 'TBD') {
       definition.grade = 'B';  // eslint-disable-line
       definition.verified = false; // eslint-disable-line
     }

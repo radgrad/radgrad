@@ -1,0 +1,19 @@
+<template name="Update_Advisor_Log_Widget">
+
+  <div class="ui padded container segment">
+    <div class="ui dividing header"><h4>UPDATE ADVISOR LOG</h4></div>
+    <form class="ui equal width form {{successClass}} {{errorClass}}">
+
+      <div class="fields">
+        {{> User_Form_Field label="Advisor" users=advisors selectedUserID=advisorLog.advisorID errorMessage=(fieldError "advisor") required=true disabled=true}}
+        {{> User_Form_Field label="Student" users=students selectedUserID=advisorLog.studentID errorMessage=(fieldError "student") required=true disabled=true}}
+      </div>
+      {{> TextArea_Form_Field label="Text" rows=5 name="text" value=advisorLog.text errorMessage=(fieldError "text") required=true}}
+
+      <button class="ui green basic button" type="submit">Update</button>
+      <button class="ui green basic button jsCancel" type="submit">Cancel</button>
+      {{> Success_Message_Form_Field message="The Advisor Log was successfully updated.  Press cancel to continue."}}
+    </form>
+  </div>
+
+</template>

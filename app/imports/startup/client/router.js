@@ -79,6 +79,22 @@ adminRoutes.route('/datamodel/academic-plans', {
   },
 });
 
+export const adminDataModelAcademicYearInstancesPageRouteName = 'Admin_DataModel_Academic_Year_Instances_Page';
+adminRoutes.route('/datamodel/academic-year-instances', {
+  name: adminDataModelAcademicYearInstancesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelAcademicYearInstancesPageRouteName });
+  },
+});
+
+export const adminDataModelAdvisorLogsPageRouteName = 'Admin_DataModel_Advisor_Logs_Page';
+adminRoutes.route('/datamodel/advisor-logs', {
+  name: adminDataModelAdvisorLogsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelAdvisorLogsPageRouteName });
+  },
+});
+
 export const adminDataModelCareerGoalsPageRouteName = 'Admin_DataModel_CareerGoals_Page';
 adminRoutes.route('/datamodel/career-goals', {
   name: adminDataModelCareerGoalsPageRouteName,
@@ -143,6 +159,14 @@ adminRoutes.route('/datamodel/interests', {
   },
 });
 
+export const adminDataModelInterestTypesPageRouteName = 'Admin_DataModel_Interest_Types_Page';
+adminRoutes.route('/datamodel/interest-types', {
+  name: adminDataModelInterestTypesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelInterestTypesPageRouteName });
+  },
+});
+
 export const adminDataModelMentorAnswersPageRouteName = 'Admin_DataModel_Mentor_Answers_Page';
 adminRoutes.route('/datamodel/mentor-answers', {
   name: adminDataModelMentorAnswersPageRouteName,
@@ -176,6 +200,14 @@ adminRoutes.route('/datamodel/opportunity-instances', {
   },
 });
 
+export const adminDataModelOpportunityTypesPageRouteName = 'Admin_DataModel_Opportunity_Types_Page';
+adminRoutes.route('/datamodel/opportunity-types', {
+  name: adminDataModelOpportunityTypesPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelOpportunityTypesPageRouteName });
+  },
+});
+
 export const adminDataModelPlanChoicePageRouteName = 'Admin_DataModel_Plan_Choice_Page';
 adminRoutes.route('/datamodel/plan-choices', {
   name: adminDataModelPlanChoicePageRouteName,
@@ -192,6 +224,22 @@ adminRoutes.route('/datamodel/reviews', {
   },
 });
 
+export const adminDataModelSemestersPageRouteName = 'Admin_DataModel_Semesters_Page';
+adminRoutes.route('/datamodel/semesters', {
+  name: adminDataModelSemestersPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelSemestersPageRouteName });
+  },
+});
+
+export const adminDataModelSlugsPageRouteName = 'Admin_DataModel_Slugs_Page';
+adminRoutes.route('/datamodel/slugs', {
+  name: adminDataModelSlugsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelSlugsPageRouteName });
+  },
+});
+
 export const adminDataModelTeasersPageRouteName = 'Admin_DataModel_Teasers_Page';
 adminRoutes.route('/datamodel/teasers', {
   name: adminDataModelTeasersPageRouteName,
@@ -205,6 +253,14 @@ adminRoutes.route('/datamodel/users', {
   name: adminDataModelUsersPageRouteName,
   action() {
     BlazeLayout.render('Admin_Layout', { main: adminDataModelUsersPageRouteName });
+  },
+});
+
+export const adminDataModelVerificationRequestsPageRouteName = 'Admin_DataModel_Verification_Requests_Page';
+adminRoutes.route('/datamodel/verification-requests', {
+  name: adminDataModelVerificationRequestsPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminDataModelVerificationRequestsPageRouteName });
   },
 });
 

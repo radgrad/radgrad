@@ -5,7 +5,7 @@
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> User_Form_Field users=students errorMessage=(fieldError "user") required=true}}
+        {{> User_Form_Field label="Student" users=students errorMessage=(fieldError "user") required=true}}
       </div>
       {{> TextArea_Form_Field label="Question" name="question" rows=5 errorMessage=(fieldError "question") required=true}}
       <div class="fields">

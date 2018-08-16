@@ -5,7 +5,7 @@
     <form class="ui equal width form {{successClass}} {{errorClass}}">
 
       <div class="fields">
-        {{> User_Form_Field users=students errorMessage=(fieldError "student") required=true }}
+        {{> User_Form_Field label="Student" users=students errorMessage=(fieldError "student") required=true }}
         {{> FeedbackType_Form_Field label="FeedbackType" feedbackTypes=feedbackTypes errorMessage=(fieldError "feedbackType") required=true }}
         {{> Input_Form_Field label="Feedback Function" name="functionName" placeholder="feedback function name" errorMessage=(fieldError "functionName") required=true }}
       </div>
