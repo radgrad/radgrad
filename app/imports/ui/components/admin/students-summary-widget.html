@@ -1,6 +1,11 @@
 <template name="Students_Summary_Widget">
+  <div class="ui modal" id="timeline">
+    {{#if selectedUser}}
+      {{>Student_Timeline_Modal user=user dateRange=dateRange}}
+    {{/if}}
+  </div>
   <div class="ui padded container segment">
-    <h4 class="ui dividing header">Summary</h4>
+    <h4 class="ui dividing header">Select date range:</h4>
     <form class="ui form">
       <div class="two fields">
         <div class="four wide required field">
@@ -24,5 +29,39 @@
       </div>
       <button class="ui green basic button" type="submit">Submit</button>
     </form>
+  </div>
+
+  <div class="ui padded container segment">
+    <h4 class="ui dividing header">Summary Statistics: {{dateRange}}</h4>
+    <div class="ui fluid styled accordion">
+      {{#each behavior in behaviors}}
+        <div class="title">
+          <div class="ui grid">
+            <div class="one wide column"><i class="dropdown icon"></i></div>
+            <div class="four wide column">Behavior:
+              <div style="display: inline; color: #6FBE44;">{{behavior.type}}</div>
+            </div>
+            <div class="three wide column">Users:
+              <div style="display: inline; color: #6FBE44;">{{behavior.count}}</div>
+              <div style="display: inline; color: #6FBE44; padding-left: 5px;">({{percent behavior.count}}%)</div>
+            </div>
+            <div class="eight wide column">Description:
+              <div style="display: inline; color: #6FBE44;">{{behavior.description}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="ui padded stackable grid">
+            {{#each username in behavior.users}}
+              <div class="three wide column" style="padding: 2px;">
+                <button class="ui tiny grey basic fluid button" style="text-align: left;" value={{username}}>
+                  {{username}}
+                </button>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
   </div>
 </template>

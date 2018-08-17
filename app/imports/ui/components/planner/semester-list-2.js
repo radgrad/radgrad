@@ -119,11 +119,7 @@ Template.Semester_List_2.events({
                       instance.state.set(plannerKeys.plannedEnrollment, result);
                     }
                 });
-                const interactionData = {
-                  username,
-                  type: 'addCourse',
-                  typeData: slug,
-                };
+                const interactionData = { username, type: 'addCourse', typeData: slug };
                 userInteractionDefineMethod.call(interactionData, (err) => {
                   if (err) {
                     console.log('Error creating UserInteraction', err);
@@ -150,11 +146,7 @@ Template.Semester_List_2.events({
                   FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                   FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                   FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-                  const interactionData = {
-                    username,
-                    type: 'addOpportunity',
-                    typeData: slug,
-                  };
+                  const interactionData = { username, type: 'addOpportunity', typeData: slug };
                   userInteractionDefineMethod.call(interactionData, (err) => {
                     if (err) {
                       console.log('Error creating UserInteraction', err);

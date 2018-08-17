@@ -17,6 +17,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import * as RouteNames from '../../../startup/client/router.js';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Inspector.onCreated(function inspectorOnCreated() {
   this.state = this.data.dictionary;
@@ -536,6 +537,13 @@ Template.Inspector.events({
     const definitionData = { student: getRouteUserName(), opportunityInstance: id };
     const collectionName = VerificationRequests.getCollectionName();
     defineMethod.call({ collectionName, definitionData });
+    const typeData = Slugs.getNameFromID(OpportunityInstances.getOpportunityDoc(id).slugID);
+    const interactionData = { username: getRouteUserName(), type: 'verifyRequest', typeData };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.log('Error creating UserInteraction', err);
+      }
+    });
   },
 });
 

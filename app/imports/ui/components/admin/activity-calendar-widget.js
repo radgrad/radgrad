@@ -10,6 +10,9 @@ Template.Activity_Calendar_Widget.onCreated(function activityCalendarWidgetOnCre
 });
 
 Template.Activity_Calendar_Widget.helpers({
+  test(variable) {
+    console.log(variable);
+  },
   month() {
     const month = moment(Template.instance().currentDate.get(), dateFormat).format(dateFormat);
     return month;

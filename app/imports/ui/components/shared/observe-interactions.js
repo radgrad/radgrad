@@ -28,7 +28,7 @@ Template.Observe_Interactions.helpers({
       cursorHandle = studentDocumentsCursor.observeChanges({
         changed: function (id, field) {
           _.each(field, function (value, key) {
-            const username = getRouteUserName;
+            const username = getRouteUserName();
             const type = key;
             const typeData = (function (interactionType) {
               switch (interactionType) {
@@ -44,6 +44,8 @@ Template.Observe_Interactions.helpers({
                   return value;
                 case 'website':
                   return value;
+                case 'level':
+                  return `Leveled updated to ${value}`;
                 default:
                   return null;
               }

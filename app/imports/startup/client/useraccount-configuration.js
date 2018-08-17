@@ -31,7 +31,7 @@ Accounts.onLogin(function onLogin() {
     const interactionData = {
       username,
       type: 'login',
-      typeData: 'N/A',
+      typeData: 'login',
     };
     userInteractionDefineMethod.call(interactionData, (error) => {
       if (error) {

@@ -36,7 +36,6 @@ Template.Activity_Calendar_Modal.helpers({
       user.interactions = interactions;
       results.push(user);
     });
-    console.log(results);
     return results;
   },
 });

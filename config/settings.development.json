@@ -10,6 +10,7 @@
       "popupWidth": 810,
       "popupHeight": 610
     },
+    "fixUserInteractions": false,
     "databaseRestoreFileName": "database/snapshot/2017-08-02-14-12-04.json",
     "appLogging": { "enable": true, "filter": ["*"], "client": true, "server": true },
     "admin": { "username": "radgrad@hawaii.edu", "development": true },

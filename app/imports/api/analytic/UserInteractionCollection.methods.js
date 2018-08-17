@@ -29,3 +29,18 @@ export const userInteractionRemoveUserMethod = new ValidatedMethod({
     return UserInteractions.removeUser(instances);
   },
 });
+
+/**
+ * The validated method for finding UserInteractions.
+ * @memberOf api/analytic
+ */
+export const userInteractionFindMethod = new ValidatedMethod({
+  name: 'UserInteraction.find',
+  validate: null,
+  mixins: [CallPromiseMixin],
+  run({ selector, options }) {
+    UserInteractions.assertValidRoleForMethod(this.userId);
+    const results = UserInteractions.find(selector, options);
+    return results.fetch();
+  },
+});

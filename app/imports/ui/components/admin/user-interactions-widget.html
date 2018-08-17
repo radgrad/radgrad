@@ -1,7 +1,7 @@
 <template name="User_Interactions_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>USERS</h4></div>
-    <div class="ui stackable grid" style="height: 150px; overflow: scroll;">
+    <div class="ui stackable grid" style="height: 200px; overflow: scroll;">
       {{#each user in users studentRole}}
         <div class="three wide column" style="padding: 2px;">
           <button class="ui tiny grey basic fluid button" style="text-align: left;" value={{user.username}}>
@@ -17,7 +17,7 @@
       <h4>USER INTERACTIONS: <span style="color: #6FBE44;">{{name}}</span></h4>
     </div>
     <div class="ui stackable grid">
-      <div style="height: 300px; overflow-x: scroll; width: 100%;">
+      <div style="height: 350px; overflow-x: scroll; width: 100%;">
         <table class="ui celled padded table">
           <thead>
           <tr>
