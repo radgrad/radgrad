@@ -14,4 +14,7 @@ Template.Admin_Analytics_Menu.helpers({
   studentsRouteName() {
     return RouteNames.adminAnalyticsStudentsPageRouteName;
   },
+  overheadAnalysisRouteName() {
+    return RouteNames.adminAnalyticsOverheadAnalysisPageRouteName;
+  },
 });

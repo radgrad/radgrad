@@ -129,7 +129,6 @@ Template.Students_Summary_Widget.events({
 });
 
 Template.Students_Summary_Widget.onRendered(function studentsSummaryWidgetOnRendered() {
-  const instance = Template.instance();
   this.$('#rangeStart').calendar({
     type: 'date',
     endCalendar: this.$('#rangeEnd'),
@@ -167,9 +166,4 @@ Template.Students_Summary_Widget.onRendered(function studentsSummaryWidgetOnRend
     },
   });
   this.$('.ui.accordion').accordion();
-  this.$('#timeline').modal({
-    onHidden: function () {
-      instance.selectedUser.set({});
-    },
-  });
 });

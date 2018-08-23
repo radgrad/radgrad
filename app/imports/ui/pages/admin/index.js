@@ -1,5 +1,7 @@
 import './admin-analytics-home-page.html';
 
+import './admin-analytics-overhead-analytics-page.html';
+
 import './admin-analytics-students-page.html';
 import './admin-analytics-students-page';
 
