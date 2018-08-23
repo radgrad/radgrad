@@ -167,6 +167,9 @@ import './list-verification-requests-widget';
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
 
+import './overhead-analysis-widget.html';
+import './overhead-analysis-widget';
+
 import './student-timeline-modal.html';
 import './student-timeline-modal.js';
 

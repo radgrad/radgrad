@@ -313,6 +313,14 @@ adminRoutes.route('/analytics/activity-monitor', {
   },
 });
 
+export const adminAnalyticsOverheadAnalysisPageRouteName = 'Admin_Analytics_Overhead_Analytics_Page';
+adminRoutes.route('/analytics/overhead-analysis', {
+  name: adminAnalyticsOverheadAnalysisPageRouteName,
+  action() {
+    BlazeLayout.render('Admin_Layout', { main: adminAnalyticsOverheadAnalysisPageRouteName });
+  },
+});
+
 export const adminAnalyticsStudentsPageRouteName = 'Admin_Analytics_Students_Page';
 adminRoutes.route('/analytics/students/summary', {
   name: adminAnalyticsStudentsPageRouteName,

@@ -3,6 +3,9 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { moment } from 'meteor/momentjs:moment';
 import { Users } from '../../../api/user/UserCollection';
 
+// This defines the time between sessions
+const gap = 10;
+
 Template.Student_Timeline_Modal.helpers({
   behaviors(session) {
     const actions = { login: [], careerGoalIDs: [], interestIDs: [], academicPlanID: [], pageView: [],
@@ -100,7 +103,7 @@ Template.Student_Timeline_Modal.helpers({
         const prevTimestamp = moment(new Date(interactions[index - 1].timestamp));
         const timestamp = moment(new Date(interaction.timestamp));
         const difference = moment.duration(timestamp.diff(prevTimestamp)).asMinutes();
-        if (difference >= 10) {
+        if (difference >= gap) {
           sessions.push(_.slice(interactions, slicedIndex, index));
           slicedIndex = index;
         }

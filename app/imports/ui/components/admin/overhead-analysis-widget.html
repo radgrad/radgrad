@@ -1,0 +1,98 @@
+<template name="Overhead_Analysis_Widget">
+  <div class="ui modal" id="user-overhead">
+    {{#with selectedUser}}
+      <div class="ui padded container segment">
+        <div class="ui dividing header">
+          <h4>USER INTERACTIONS: <span style="color: #6FBE44;">{{user}}</span></h4>
+        </div>
+        <div class="ui stackable grid">
+          <div style="height: 350px; overflow-x: scroll; width: 100%;">
+            <table class="ui celled padded table">
+              <thead>
+              <tr>
+                <th>Type</th>
+                <th>Type Data</th>
+                <th>Timestamp</th>
+              </tr>
+              </thead>
+              <tbody>
+              {{#each interaction in interactions}}
+                <tr>
+                  <td>{{interaction.type}}</td>
+                  <td>{{interaction.typeData}}</td>
+                  <td>{{formatDate interaction.timestamp}}</td>
+                </tr>
+              {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {{/with}}
+  </div>
+  <div class="ui padded container segment">
+    <h4 class="ui dividing header">Select date range:</h4>
+    <form class="ui form">
+      <div class="two fields">
+        <div class="four wide required field">
+          <label>Start date</label>
+          <div class="ui calendar" id="rangeStart">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input name="startDate" type="text" placeholder="Start">
+            </div>
+          </div>
+        </div>
+        <div class="four wide required field">
+          <label>End date</label>
+          <div class="ui calendar" id="rangeEnd">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input name="endDate" type="text" placeholder="End">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="ui green basic button" type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="ui padded container segment">
+    <h4 class="ui dividing header">Overhead Statistics: {{dateRange}}</h4>
+    <div class="ui container">
+      <table class="ui fixed celled striped table" style="width: 99%;">
+        <thead>
+        <tr>
+          <th colspan="7">User Session Overhead
+          </th>
+        </tr>
+        <tr>
+          <th colspan="2">Username</th>
+          <th># Sessions</th>
+          <th># Docs</th>
+          <th>Docs/Min</th>
+          <th>Total Time</th>
+          <th>Show Docs</th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="ui container" style="max-height: 400px; overflow: scroll;">
+      <table class="ui fixed celled striped table">
+        <tbody>
+        {{#each user in overheadData}}
+          <tr>
+            <td colspan="2">{{user.username}}</td>
+            <td>{{user.numSessions}}</td>
+            <td>{{user.numDocs}}</td>
+            <td>{{user.docsPerMin}}</td>
+            <td>{{user.totalTime}} min</td>
+            <td>
+              <button class="ui tiny green basic fluid button" value="{{user.username}}">SHOW</button>
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>

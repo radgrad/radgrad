@@ -6,6 +6,9 @@ import { moment } from 'meteor/momentjs:moment';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { PublicStats } from '../../api/public-stats/PublicStatsCollection';
 import { RadGrad } from '../../api/radgrad/RadGrad';
+import { Interests } from '../../api/interest/InterestCollection';
+import { CareerGoals } from '../../api/career/CareerGoalCollection';
+import { AcademicPlans } from '../../api/degree-plan/AcademicPlanCollection';
 import { UserInteractions } from '../../api/analytic/UserInteractionCollection';
 import { loadCollection } from '../../api/test/test-utilities';
 import { removeAllEntities } from '../../api/base/BaseUtilities';
@@ -164,10 +167,37 @@ function fixUserInteractions() {
   if (Meteor.settings.public.fixUserInteractions) {
     console.log('Fixing UserInteraction collection.');
     _.each(UserInteractions.find().fetch(), function (interaction) {
-      if (interaction.userID) {
+      /* if (interaction.userID) {
         const username = Meteor.users.findOne({ _id: interaction.userID }).username;
         console.log('Fixing interaction for user: ', username);
         UserInteractions.update(interaction._id, { $set: { username } });
+      } */
+      if (!Array.isArray(interaction.typeData)) {
+        const oldTypeData = interaction.typeData.split(',');
+        const typeData = [];
+        const type = interaction.type;
+        if (type === 'interestIDs' && oldTypeData[0] !== 'n/a') {
+          _.each(oldTypeData, function (entry) {
+            typeData.push(Interests.findSlugByID(entry));
+          });
+        } else if (type === 'careerGoalIDs' && oldTypeData[0] !== 'n/a') {
+          _.each(oldTypeData, function (entry) {
+            typeData.push(CareerGoals.findSlugByID(entry));
+          });
+        } else if (type === 'academicPlanID' && oldTypeData[0] !== 'n/a') {
+          _.each(oldTypeData, function (entry) {
+            typeData.push(AcademicPlans.findSlugByID(entry));
+          });
+        } else {
+          _.each(oldTypeData, function (entry) {
+            typeData.push(entry);
+          });
+        }
+        console.log('Fixing interaction for: ', interaction.username);
+        UserInteractions.update(interaction._id, { $set: { typeData } });
+      } else if (interaction.typeData[0] === 'ERROR: No such UserInteraction type found!') {
+        const typeData = ['Leveled up!'];
+        UserInteractions.update(interaction._id, { $set: { typeData } });
       }
     });
   }
