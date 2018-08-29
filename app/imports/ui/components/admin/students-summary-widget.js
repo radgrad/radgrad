@@ -129,9 +129,9 @@ Template.Students_Summary_Widget.events({
 });
 
 Template.Students_Summary_Widget.onRendered(function studentsSummaryWidgetOnRendered() {
-  this.$('#rangeStart').calendar({
+  this.$('#range-start').calendar({
     type: 'date',
-    endCalendar: this.$('#rangeEnd'),
+    endCalendar: this.$('#range-end'),
     formatter: {
       date: function (date) {
         if (!date) return '';
@@ -144,9 +144,9 @@ Template.Students_Summary_Widget.onRendered(function studentsSummaryWidgetOnRend
       },
     },
   });
-  this.$('#rangeEnd').calendar({
+  this.$('#range-end').calendar({
     type: 'date',
-    startCalendar: this.$('#rangeStart'),
+    startCalendar: this.$('#range-start'),
     formatter: {
       date: function (date) {
         if (!date) return '';
