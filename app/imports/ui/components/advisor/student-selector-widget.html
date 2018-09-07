@@ -2,5 +2,11 @@
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>SELECT STUDENT</h4></div>
     {{> Student_Selector_Tabs dictionary=dictionary studentID=studentID}}
+    <div class="ui form">
+      <div class="inline fields">
+        {{> Input_Form_Field label='Student'}}
+        <button class="ui basic green button jsFindStudent" type="submit">Find</button>
+      </div>
+    </div>
   </div>
 </template>
