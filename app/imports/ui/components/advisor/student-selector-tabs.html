@@ -5,6 +5,7 @@
     <a class="item bulk-star-upload" data-tab="bulk">Bulk STAR Upload</a>
   </div>
   <div class="ui bottom attached active tab segment" data-tab="students">
+    {{> Filter_Student_Widget firstNameRegex=firstNameRegex lastNameRegex=lastNameRegex userNameRegex=userNameRegex }}
     <div class="ui top attached tabular stackable menu">
       {{#each group in alphabeticalGroups}}
       <a class="item" data-tab={{group}}>{{group}} ({{usersCount 'STUDENT' group}})</a>
