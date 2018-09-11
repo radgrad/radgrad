@@ -7,7 +7,9 @@ Template.Filter_Student_Widget.onCreated(function filterStudentWidgetOnCreated()
 });
 
 Template.Filter_Student_Widget.helpers({
-  // add your helpers here
+  label() {
+    return Template.instance().data.label;
+  },
 });
 
 Template.Filter_Student_Widget.events({
@@ -37,12 +39,3 @@ Template.Filter_Student_Widget.events({
     }
   },
 });
-
-Template.Filter_Student_Widget.onRendered(function filterStudentWidgetOnRendered() {
-  // add your statement here
-});
-
-Template.Filter_Student_Widget.onDestroyed(function filterStudentWidgetOnDestroyed() {
-  // add your statement here
-});
-
