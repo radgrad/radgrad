@@ -30,7 +30,7 @@ function removeBodyClass() {
 function trackPath() {
   if (Roles.userIsInRole(Meteor.userId(), [ROLE.STUDENT])) {
     const path = FlowRouter.current().path;
-    const username = Meteor.user().username;
+    const username = Meteor.user('username').username;
     const type = 'pageView';
     const typeData = path.substr(path.indexOf('/', 9) + 1);
     const interactionData = { username, type, typeData };

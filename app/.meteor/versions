@@ -61,6 +61,7 @@ livedata@1.0.18
 lmieulet:meteor-coverage@1.1.4
 localstorage@1.2.0
 logging@1.1.20
+maazalik:highcharts@0.4.0
 markdown@1.0.12
 mdg:meteor-apm-agent@3.1.1
 mdg:validated-method@1.1.0
@@ -85,6 +86,7 @@ mongo@1.4.7
 mongo-dev-server@1.1.0
 mongo-id@1.0.7
 mongo-livedata@1.0.12
+msavin:usercache@1.0.0
 npm-bcrypt@0.9.3
 npm-mongo@2.2.34
 observe-sequence@1.0.16

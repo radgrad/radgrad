@@ -20,7 +20,7 @@ Template.RadGrad_Login_Buttons.events({
         instance.$('div .ui.error.message.hidden').text('You are not yet registered. Go see your Advisor.');
         instance.$('div .ui.error.message.hidden').removeClass('hidden');
       } else {
-        const username = Meteor.user().username;
+        const username = Meteor.user('username').username;
         const id = Meteor.userId();
         const role = Roles.getRolesForUser(id)[0];
         FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
