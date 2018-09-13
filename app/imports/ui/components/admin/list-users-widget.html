@@ -1,6 +1,7 @@
 <template name="List_Users_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>USERS ({{ count }})</h4></div>
+    {{> Filter_Student_Widget label='USERS' firstNameRegex=firstNameRegex lastNameRegex=lastNameRegex userNameRegex=userNameRegex }}
     <div class="ui top attached tabular stackable menu">
       <a class="item" data-tab="advisors">Advisors ({{advisorCount}})</a>
       <a class="item" data-tab="faculty">Faculty ({{facultyCount}})</a>
