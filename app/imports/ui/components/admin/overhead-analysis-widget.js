@@ -64,9 +64,6 @@ Template.Overhead_Analysis_Widget.helpers({
       return `${minRange}-${maxRange}`;
     });
     const data = _.map(overheadBuckets, (value) => value);
-    console.log(overheadBuckets);
-    console.log(buckets);
-    console.log(data);
     return {
       chart: { type: 'column' },
       title: { text: null },
@@ -101,6 +98,9 @@ Template.Overhead_Analysis_Widget.helpers({
         },
       },
       series: [{ data: data }],
+      credits: {
+        enabled: false,
+      },
     };
   },
 });
@@ -125,7 +125,6 @@ Template.Overhead_Analysis_Widget.events({
         });
         const overheadBuckets = createBucket(docsPerMinGroups);
         instance.overheadBuckets.set(overheadBuckets);
-        console.log(docsPerMinGroups);
         const userInteractions = _.groupBy(result, 'username');
         instance.userInteractions.set(userInteractions);
         const overheadData = [];
