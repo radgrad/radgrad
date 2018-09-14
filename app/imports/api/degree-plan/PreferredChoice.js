@@ -36,6 +36,18 @@ class PreferredChoice {
   }
 
   /**
+   * Returns an array with the best matches first.
+   * @returns {Array}
+   */
+  getOrderedChoices() {
+    let choices = [];
+    for (let i = this.max; i >= 0; i--) {
+      choices = choices.concat(this._rankedChoices[i]);
+    }
+    // console.log(choices);
+    return choices;
+  }
+  /**
    * Returns true if there are any preferences.
    * @return {boolean} true if max !== 0.
    */

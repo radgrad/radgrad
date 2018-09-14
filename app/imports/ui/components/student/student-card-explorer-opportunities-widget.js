@@ -1,114 +1,228 @@
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Users } from '../../../api/user/UserCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Courses } from '../../../api/course/CourseCollection.js';
+import { Interests } from '../../../api/interest/InterestCollection.js';
+import { Semesters } from '../../../api/semester/SemesterCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
+import { getRouteUserName } from '../shared/route-user-name';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
+import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { Semesters } from '../../../api/semester/SemesterCollection';
-import { isInRole, isLabel } from '../../utilities/template-helpers';
-import { Reviews } from '../../../api/review/ReviewCollection';
-import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
-import * as RouteNames from '../../../startup/client/router';
+import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 
 Template.Student_Card_Explorer_Opportunities_Widget.onCreated(function studentCardExplorerOppWidgetOnCreated() {
-  this.updated = new ReactiveVar(false);
+  this.hidden = new ReactiveVar(true);
 });
 
-Template.Student_Card_Explorer_Opportunities_Widget.helpers({
-  fullName(user) {
-    return Users.getFullName(user);
-  },
-  futureInstance(opportunity) {
-    let ret = false;
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-    }).fetch();
-    _.forEach(oi, function (opportunityInstance) {
-      if (Semesters.findDoc(opportunityInstance.semesterID).semesterNumber >=
-        Semesters.getCurrentSemesterDoc().semesterNumber) {
-        ret = true;
+const availableCourses = () => {
+  const courses = Courses.find({}).fetch();
+  if (courses.length > 0) {
+    const filtered = _.filter(courses, function filter(course) {
+      if (course.number === 'ICS 499') {
+        return true;
       }
+      const ci = CourseInstances.find({
+        studentID: getUserIdFromRoute(),
+        courseID: course._id,
+      }).fetch();
+      return ci.length === 0;
     });
+    return filtered;
+  }
+  return [];
+};
+
+function matchingCourses() {
+  if (getRouteUserName()) {
+    const allCourses = availableCourses();
+    const matching = [];
+    const profile = Users.getProfile(getRouteUserName());
+    const userInterests = [];
+    let courseInterests = [];
+    _.forEach(Users.getInterestIDs(profile.userID), (id) => {
+      userInterests.push(Interests.findDoc(id));
+    });
+    _.forEach(allCourses, (course) => {
+      courseInterests = [];
+      _.forEach(course.interestIDs, (id) => {
+        courseInterests.push(Interests.findDoc(id));
+        _.forEach(courseInterests, (courseInterest) => {
+          _.forEach(userInterests, (userInterest) => {
+            if (_.isEqual(courseInterest, userInterest)) {
+              if (!_.includes(matching, course)) {
+                matching.push(course);
+              }
+            }
+          });
+        });
+      });
+    });
+    // Only display up to the first six matches.
+    return matching;
+  }
+  return [];
+}
+
+function hiddenCoursesHelper() {
+  if (getRouteUserName()) {
+    const courses = matchingCourses();
+    let nonHiddenCourses;
+    if (Template.instance().hidden.get()) {
+      const profile = Users.getProfile(getRouteUserName());
+      nonHiddenCourses = _.filter(courses, (course) => {
+        if (_.includes(profile.hiddenCourseIDs, course._id)) {
+          return false;
+        }
+        return true;
+      });
+    } else {
+      nonHiddenCourses = courses;
+    }
+    return nonHiddenCourses;
+  }
+  return [];
+}
+
+const availableOpps = () => {
+  const opps = Opportunities.find({}).fetch();
+  const currentSemester = Semesters.getCurrentSemesterDoc();
+  if (opps.length > 0) {
+    const filteredBySem = _.filter(opps, function filter(opp) {
+      const oi = OpportunityInstances.find({
+        studentID: getUserIdFromRoute(),
+        opportunityID: opp._id,
+      }).fetch();
+      return oi.length === 0;
+    });
+    const filteredByInstance = _.filter(filteredBySem, function filter(opp) {
+      let inFuture = false;
+      _.forEach(opp.semesterIDs, (semID) => {
+        const sem = Semesters.findDoc(semID);
+        if (sem.semesterNumber >= currentSemester.semesterNumber) {
+          inFuture = true;
+        }
+      });
+      return inFuture;
+    });
+    return filteredByInstance;
+  }
+  return [];
+};
+
+// TODO Can we move this code into some sort of helperFunction file? I've seen this a lot.
+function matchingOpportunities() {
+  const allOpportunities = availableOpps();
+  const matching = [];
+  const profile = Users.getProfile(getRouteUserName());
+  const userInterests = [];
+  let opportunityInterests = [];
+  _.forEach(Users.getInterestIDs(profile.userID), (id) => {
+    userInterests.push(Interests.findDoc(id));
+  });
+  _.forEach(allOpportunities, (opp) => {
+    opportunityInterests = [];
+    _.forEach(opp.interestIDs, (id) => {
+      opportunityInterests.push(Interests.findDoc(id));
+      _.forEach(opportunityInterests, (oppInterest) => {
+        _.forEach(userInterests, (userInterest) => {
+          if (_.isEqual(oppInterest, userInterest)) {
+            if (!_.includes(matching, opp)) {
+              matching.push(opp);
+            }
+          }
+        });
+      });
+    });
+  });
+  const interestIDs = Users.getInterestIDs(profile.userID);
+  const preferred = new PreferredChoice(allOpportunities, interestIDs);
+  // console.log(preferred.getOrderedChoices());
+  return preferred.getOrderedChoices();
+}
+
+function hiddenOpportunitiesHelper() {
+  if (getRouteUserName()) {
+    const opportunities = matchingOpportunities();
+    let nonHiddenOpportunities;
+    if (Template.instance().hidden.get()) {
+      const profile = Users.getProfile(getRouteUserName());
+      nonHiddenOpportunities = _.filter(opportunities, (opp) => {
+        if (_.includes(profile.hiddenOpportunityIDs, opp._id)) {
+          return false;
+        }
+        return true;
+      });
+    } else {
+      nonHiddenOpportunities = opportunities;
+    }
+    return nonHiddenOpportunities;
+  }
+  return [];
+}
+
+Template.Student_Card_Explorer_Opportunities_Widget.helpers({
+  courses() {
+    const courses = matchingCourses();
+    let visibleCourses;
+    if (Template.instance().hidden.get()) {
+      visibleCourses = hiddenCoursesHelper();
+    } else {
+      visibleCourses = courses;
+    }
+    return visibleCourses;
+  },
+  hidden() {
+    return Template.instance().hidden.get();
+  },
+  hiddenExists() {
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      let ret;
+      if (this.type === 'courses') {
+        ret = profile.hiddenCourseIDs.length !== 0;
+      } else {
+        ret = profile.hiddenOpportunityIDs.length !== 0;
+      }
+      return ret;
+    }
+    return false;
+  },
+  itemCount() {
+    let ret;
+    if (this.type === 'courses') {
+      ret = hiddenCoursesHelper().length;
+    } else {
+      ret = hiddenOpportunitiesHelper().length;
+    }
     return ret;
   },
-  isInRole,
-  isLabel,
-  replaceSemString(array) {
-    const semString = array.join(', ');
-    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+  opportunities() {
+    const opportunities = matchingOpportunities();
+    let visibleOpportunities;
+    if (Template.instance().hidden.get()) {
+      visibleOpportunities = hiddenOpportunitiesHelper();
+    } else {
+      visibleOpportunities = opportunities;
+    }
+    return visibleOpportunities;
   },
-  review() {
-    let review = '';
-    review = Reviews.find({
-      studentID: getUserIdFromRoute(),
-      revieweeID: this.item._id,
-    }).fetch();
-    return review[0];
+  typeCourse() {
+    return this.type === 'courses';
   },
   toUpper(string) {
     return string.toUpperCase();
   },
-  unverified(opportunity) {
-    let ret = false;
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-    }).fetch();
-    _.forEach(oi, function (opportunityInstance) {
-      if (!opportunityInstance.verified) {
-        ret = true;
-      }
-    });
-    return ret;
-  },
-  updatedTeaser(teaser) {
-    return teaser;
-  },
-  userPicture(user) {
-    return Users.getProfile(user).picture || defaultProfilePicture;
-  },
-  usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
-    if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
-    } else if (group === 'faculty') {
-      return RouteNames.facultyExplorerUsersPageRouteName;
-    }
-    return RouteNames.mentorExplorerUsersPageRouteName;
-  },
-  userStatus(opportunity) {
-    let ret = false;
-    const oi = OpportunityInstances.find({
-      studentID: getUserIdFromRoute(),
-      opportunityID: opportunity._id,
-    }).fetch();
-    if (oi.length > 0) {
-      ret = true;
-    }
-    return ret;
-  },
-  userUsername(user) {
-    return Users.getProfile(user).username;
-  },
 });
 
 Template.Student_Card_Explorer_Opportunities_Widget.events({
-  // add your events here
+  'click .showHidden': function clickShowHidden(event) {
+    event.preventDefault();
+    Template.instance().hidden.set(false);
+  },
+  'click .hideHidden': function clickHideHidden(event) {
+    event.preventDefault();
+    Template.instance().hidden.set(true);
+  },
 });
-
-Template.Student_Card_Explorer_Opportunities_Widget.onRendered(function studentCardExplorerOppWidgetOnRendered() {
-  setTimeout(function () {
-    this.$('.ui.embed').embed();
-  }, 300);
-  const template = this;
-  template.$('.chooseSemester')
-    .popup({
-      on: 'click',
-    });
-});
-
-Template.Student_Card_Explorer_Opportunities_Widget.onDestroyed(function studentCardExplorerOppWidgetOnDestroyed() {
-  // add your statement here
-});
-

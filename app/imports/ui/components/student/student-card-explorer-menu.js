@@ -234,7 +234,7 @@ Template.Student_Card_Explorer_Menu.helpers({
   opportunitiesRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      return RouteNames.studentExplorerOpportunitiesPageRouteName;
+      return RouteNames.studentCardExplorerOpportunitiesPageRouteName;
     } else
     if (group === 'faculty') {
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
