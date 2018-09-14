@@ -11,6 +11,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
   if (this.data) {
@@ -64,6 +65,12 @@ Template.Past_Semester_List.events({
                       instance.state.set(plannerKeys.plannedEnrollment, result);
                     }
                 });
+                const interactionData = { username, type: 'addCourse', typeData: slug };
+                userInteractionDefineMethod.call(interactionData, (err) => {
+                  if (err) {
+                    console.log('Error creating UserInteraction', err);
+                  }
+                });
               }
             });
           }
@@ -91,6 +98,12 @@ Template.Past_Semester_List.events({
                   instance.state.set(plannerKeys.detailICE, null);
                   instance.state.set(plannerKeys.detailOpportunityInstance, oi);
                   instance.state.set(plannerKeys.detailOpportunity, null);
+                  const interactionData = { username, type: 'addOpportunity', typeData: slug };
+                  userInteractionDefineMethod.call(interactionData, (err) => {
+                    if (err) {
+                      console.log('Error creating UserInteraction', err);
+                    }
+                  });
                 }
               });
             }

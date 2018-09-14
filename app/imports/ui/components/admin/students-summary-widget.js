@@ -44,6 +44,9 @@ Template.Students_Summary_Widget.helpers({
   selectedUser() {
     return !_.isEmpty(Template.instance().selectedUser.get());
   },
+  timelineChart() {
+    const users = Template.instance().interactions.get();
+  },
   user() {
     return Template.instance().selectedUser.get();
   },
@@ -52,8 +55,8 @@ Template.Students_Summary_Widget.helpers({
 Template.Students_Summary_Widget.events({
   submit(event, instance) {
     event.preventDefault();
-    const startDate = new Date(event.target.startDate.value);
-    const endDate = new Date(event.target.endDate.value);
+    const startDate = moment(event.target.startDate.value, 'MMMM D, YYYY').toDate();
+    const endDate = moment(event.target.endDate.value, 'MMMM D, YYYY').endOf('day').toDate();
     instance.startDate.set(startDate);
     instance.endDate.set(endDate);
     const selector = { timestamp: { $gte: startDate, $lte: endDate } };
@@ -126,38 +129,20 @@ Template.Students_Summary_Widget.events({
     instance.selectedUser.set(selectedUser);
     $('#timeline').modal('show');
   },
+  'click .chart.item': function reflow(event) {
+    event.preventDefault();
+    // $('#timeline-chart').highcharts().reflow();
+  },
 });
 
 Template.Students_Summary_Widget.onRendered(function studentsSummaryWidgetOnRendered() {
   this.$('#range-start').calendar({
     type: 'date',
     endCalendar: this.$('#range-end'),
-    formatter: {
-      date: function (date) {
-        if (!date) return '';
-        const day = date.getDate();
-        const formatDay = day < 10 ? `0${day}` : day;
-        const month = date.getMonth() + 1;
-        const formatMonth = month < 10 ? `0${month}` : month;
-        const year = date.getFullYear();
-        return `${year}-${formatMonth}-${formatDay}T00:00:00`;
-      },
-    },
   });
   this.$('#range-end').calendar({
     type: 'date',
     startCalendar: this.$('#range-start'),
-    formatter: {
-      date: function (date) {
-        if (!date) return '';
-        const day = date.getDate();
-        const formatDay = day < 10 ? `0${day}` : day;
-        const month = date.getMonth() + 1;
-        const formatMonth = month < 10 ? `0${month}` : month;
-        const year = date.getFullYear();
-        return `${year}-${formatMonth}-${formatDay}T23:59:59`;
-      },
-    },
   });
   this.$('.ui.form').form({
     fields: {
@@ -166,4 +151,5 @@ Template.Students_Summary_Widget.onRendered(function studentsSummaryWidgetOnRend
     },
   });
   this.$('.ui.accordion').accordion();
+  this.$('.pointing.menu .item').tab();
 });
