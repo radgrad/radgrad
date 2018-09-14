@@ -758,12 +758,30 @@ studentRoutes.route('/explorer/career-goals/:careerGoal', {
   },
 });
 
+export const studentCardExplorerCareerGoalsPageRouteName = 'Student_Card_Explorer_CareerGoals_Page';
+studentRoutes.route('/card/explorer/career-goals/:careerGoal', {
+  name: studentCardExplorerCareerGoalsPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerCareerGoalsPageRouteName });
+  },
+});
+
 export const studentExplorerCoursesPageRouteName = 'Student_Explorer_Courses_Page';
 studentRoutes.route('/explorer/courses/:course', {
   name: studentExplorerCoursesPageRouteName,
   triggersEnter: [trackPath],
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerCoursesPageRouteName });
+  },
+});
+
+export const studentCardExplorerCoursesPageRouteName = 'Student_Card_Explorer_Courses_Page';
+studentRoutes.route('/card/explorer/courses/:course', {
+  name: studentCardExplorerCoursesPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerCoursesPageRouteName });
   },
 });
 

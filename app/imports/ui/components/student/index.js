@@ -7,6 +7,12 @@ import './explorer-choose-user-widget.js';
 import './student-home-menu.html';
 import './student-home-menu.js';
 
+import './student-card-explorer-careergoals-widget.html';
+import './student-card-explorer-careergoals-widget';
+
+import './student-card-explorer-courses-widget.html';
+import './student-card-explorer-courses-widget';
+
 import './student-card-explorer-menu.html';
 import './student-card-explorer-menu';
 
@@ -107,6 +113,15 @@ import './student-of-interest-card.js';
 
 import './student-of-interest-widget.html';
 import './student-of-interest-widget.js';
+
+import './student-profile-add.html';
+import './student-profile-add';
+
+import './student-profile-card.html';
+import './student-profile-card';
+
+import './student-semester-card.html';
+import './student-semester-card';
 
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';

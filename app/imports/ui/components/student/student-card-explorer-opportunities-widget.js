@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -43,28 +42,7 @@ const availableOpps = () => {
 // TODO Can we move this code into some sort of helperFunction file? I've seen this a lot.
 function matchingOpportunities() {
   const allOpportunities = availableOpps();
-  const matching = [];
   const profile = Users.getProfile(getRouteUserName());
-  const userInterests = [];
-  let opportunityInterests = [];
-  _.forEach(Users.getInterestIDs(profile.userID), (id) => {
-    userInterests.push(Interests.findDoc(id));
-  });
-  _.forEach(allOpportunities, (opp) => {
-    opportunityInterests = [];
-    _.forEach(opp.interestIDs, (id) => {
-      opportunityInterests.push(Interests.findDoc(id));
-      _.forEach(opportunityInterests, (oppInterest) => {
-        _.forEach(userInterests, (userInterest) => {
-          if (_.isEqual(oppInterest, userInterest)) {
-            if (!_.includes(matching, opp)) {
-              matching.push(opp);
-            }
-          }
-        });
-      });
-    });
-  });
   const interestIDs = Users.getInterestIDs(profile.userID);
   const preferred = new PreferredChoice(allOpportunities, interestIDs);
   return preferred.getOrderedChoices();

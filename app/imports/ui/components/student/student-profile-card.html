@@ -1,4 +1,4 @@
-<template name="Student_Of_Interest_Card">
+<template name="Student_Profile_Card">
   <div class="ui card radgrad-interest-card">
     <div class="content">
       <div class="header">{{itemName item}}</div>
@@ -28,7 +28,7 @@
         <a class="ui button" href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=(itemSlug item)}}"><i class="chevron circle right icon"></i><br>View More</a>
       {{/if}}
       {{#if canAdd}}
-        {{> Student_Of_Interest_Add item = item type = type}}
+        {{> Student_Profile_Add item = item type = type}}
       {{/if}}
 
       {{#if hidden}}

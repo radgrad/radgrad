@@ -7,13 +7,13 @@
       <a class="{{isActiveRoute careerGoalsRouteName}} item"
          href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Career Goals</a>
       <a class="{{isActiveRoute coursesRouteName}} item"
-         href="{{pathFor coursesRouteName username=routeUserName course=firstCourse}}">Courses</a>
+         href="{{pathFor coursesCardRouteName username=routeUserName course=firstCourse}}">Courses</a>
       <a class="{{isActiveRoute academicPlansRouteName}} item"
          href="{{pathFor academicPlansRouteName username=routeUserName plan=firstPlan}}">Academic Plans</a>
       <a class="{{isActiveRoute interestsRouteName}} item"
          href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Interests</a>
       <a class="{{isActiveRoute opportunitiesRouteName}} item"
-         href="{{pathFor opportunitiesRouteName username=routeUserName opportunity=firstOpportunity}}">Opportunities</a>
+         href="{{pathFor opportunitiesCardRouteName username=routeUserName opportunity=firstOpportunity}}">Opportunities</a>
       <a class="{{isActiveRoute usersRouteName}} item"
          href="{{pathFor usersRouteName username=routeUserName explorerUserName=routeUserName}}">Users</a>
     </div>
@@ -174,25 +174,6 @@
               style="position: absolute; margin-left: -20px;" class="{{userCourses listItem}}"></i>{{courseName
               listItem}}</a>
         {{/each}}
-        <h4 class="ui dividing header">
-          ALL OTHER COURSES
-        </h4>
-        <div class="ui segment">
-          <h4 class="ui dividing header">Filter By</h4>
-          <div class="field">
-            <div class="ui radio checkbox dividing {{#if is400}}checked{{/if}}">
-              <input type="radio" name="400+" checked={{is400}} value="true" class="hidden" tabindex="0">
-              <label class="jsBy400">400+ courses</label>
-            </div>
-          </div>
-          <div class="field">
-            <div class="ui radio checkbox dividing {{#if isInterests}}checked{{/if}}">
-              <input type="radio" name="interests" checked={{isInterests}} value="true" class="hidden" tabindex="0">
-              <label class="jsByInterests">My Interests</label>
-            </div>
-          </div>
-        </div>
-      {{else}}
       {{/if}}
 
       {{#each listItem in menuFilteredNonAddedList}}

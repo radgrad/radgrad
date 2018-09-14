@@ -1,14 +1,23 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { Courses } from '../../../api/course/CourseCollection.js';
+import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
-import { Courses } from '../../../api/course/CourseCollection';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { Interests } from '../../../api/interest/InterestCollection';
-import { Users } from '../../../api/user/UserCollection';
+import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
+import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 
+Template.Student_Card_Explorer_Courses_Widget.onCreated(function studentCardExplorerCoursesWidgetOnCreated() {
+  this.hidden = new ReactiveVar(true);
+});
 
 const availableCourses = () => {
+  if (getRouteUserName()) {
+    const profile = Users.getProfile(getRouteUserName());
+    console.log(profile);
+  }
+
   const courses = Courses.find({}).fetch();
   if (courses.length > 0) {
     const filtered = _.filter(courses, function filter(course) {
@@ -29,30 +38,10 @@ const availableCourses = () => {
 function matchingCourses() {
   if (getRouteUserName()) {
     const allCourses = availableCourses();
-    const matching = [];
     const profile = Users.getProfile(getRouteUserName());
-    const userInterests = [];
-    let courseInterests = [];
-    _.forEach(Users.getInterestIDs(profile.userID), (id) => {
-      userInterests.push(Interests.findDoc(id));
-    });
-    _.forEach(allCourses, (course) => {
-      courseInterests = [];
-      _.forEach(course.interestIDs, (id) => {
-        courseInterests.push(Interests.findDoc(id));
-        _.forEach(courseInterests, (courseInterest) => {
-          _.forEach(userInterests, (userInterest) => {
-            if (_.isEqual(courseInterest, userInterest)) {
-              if (!_.includes(matching, course)) {
-                matching.push(course);
-              }
-            }
-          });
-        });
-      });
-    });
-    // Only display up to the first six matches.
-    return matching;
+    const interestIDs = Users.getInterestIDs(profile.userID);
+    const preferred = new PreferredChoice(allCourses, interestIDs);
+    return preferred.getOrderedChoices();
   }
   return [];
 }
@@ -77,8 +66,7 @@ function hiddenCoursesHelper() {
   return [];
 }
 
-
-Template.Student_Card_Explorer_Courses.helpers({
+Template.Student_Card_Explorer_Courses_Widget.helpers({
   courses() {
     const courses = matchingCourses();
     let visibleCourses;
@@ -102,17 +90,19 @@ Template.Student_Card_Explorer_Courses.helpers({
   itemCount() {
     return hiddenCoursesHelper().length;
   },
+  typeCourse() {
+    return true;
+  },
+
 });
 
-Template.Student_Card_Explorer_Courses.events({
-  // add your events here
+Template.Student_Card_Explorer_Courses_Widget.events({
+  'click .showHidden': function clickShowHidden(event) {
+    event.preventDefault();
+    Template.instance().hidden.set(false);
+  },
+  'click .hideHidden': function clickHideHidden(event) {
+    event.preventDefault();
+    Template.instance().hidden.set(true);
+  },
 });
-
-Template.Student_Card_Explorer_Courses.onRendered(function studentCardExplorerCoursesOnRendered() {
-  // add your statement here
-});
-
-Template.Student_Card_Explorer_Courses.onDestroyed(function studentCardExplorerCoursesOnDestroyed() {
-  // add your statement here
-});
-
