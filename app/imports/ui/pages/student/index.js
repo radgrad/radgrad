@@ -1,3 +1,6 @@
+import './student-card-explorer-opportunities-page.html';
+import './student-card-explorer-opportunities-page';
+
 import './student-degree-planner-page.html';
 import './student-degree-planner-page.js';
 

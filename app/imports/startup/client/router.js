@@ -42,9 +42,6 @@ function trackPath() {
   }
 }
 
-/*                        APP LOGGING                        */
-
-
 /*                        ADMIN ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.
@@ -805,6 +802,16 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
     BlazeLayout.render('Student_Layout', { main: studentExplorerOpportunitiesPageRouteName });
   },
 });
+
+export const studentCardExplorerOpportunitiesPageRouteName = 'Student_Card_Explorer_Opportunities_Page';
+studentRoutes.route('/card/explorer/opportunities/:opportunity', {
+  name: studentCardExplorerOpportunitiesPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerOpportunitiesPageRouteName });
+  },
+});
+
 
 export const studentExplorerUsersPageRouteName = 'Student_Explorer_Users_Page';
 studentRoutes.route('/explorer/users/:explorerUserName', {
