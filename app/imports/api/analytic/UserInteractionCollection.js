@@ -57,10 +57,10 @@ class UserInteractionCollection extends BaseCollection {
   /**
    * Asserts that the userID belongs to a valid role when running the define and removeUser method
    * within this class.
-   * @param username The username of the logged in user.
+   * @param userId The userId of the logged in user.
    */
   assertValidRoleForMethod(userId) {
-    this._assertRole(userId, [ROLE.ADMIN, ROLE.STUDENT, ROLE.MENTOR, ROLE.FACULTY]);
+    this._assertRole(userId, [ROLE.ADMIN, ROLE.STUDENT, ROLE.ADVISOR, ROLE.MENTOR, ROLE.FACULTY]);
   }
 
   /**
