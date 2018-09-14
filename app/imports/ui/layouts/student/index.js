@@ -1,4 +1,4 @@
-import './student-explorer-card-layout.html';
+import './student-card-explorer-layout.html';
 
 import './student-explorer-layout.html';
 

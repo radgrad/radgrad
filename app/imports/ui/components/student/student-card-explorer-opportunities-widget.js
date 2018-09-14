@@ -1,12 +1,10 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { Courses } from '../../../api/course/CourseCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
@@ -15,75 +13,6 @@ import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 Template.Student_Card_Explorer_Opportunities_Widget.onCreated(function studentCardExplorerOppWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
 });
-
-const availableCourses = () => {
-  const courses = Courses.find({}).fetch();
-  if (courses.length > 0) {
-    const filtered = _.filter(courses, function filter(course) {
-      if (course.number === 'ICS 499') {
-        return true;
-      }
-      const ci = CourseInstances.find({
-        studentID: getUserIdFromRoute(),
-        courseID: course._id,
-      }).fetch();
-      return ci.length === 0;
-    });
-    return filtered;
-  }
-  return [];
-};
-
-function matchingCourses() {
-  if (getRouteUserName()) {
-    const allCourses = availableCourses();
-    const matching = [];
-    const profile = Users.getProfile(getRouteUserName());
-    const userInterests = [];
-    let courseInterests = [];
-    _.forEach(Users.getInterestIDs(profile.userID), (id) => {
-      userInterests.push(Interests.findDoc(id));
-    });
-    _.forEach(allCourses, (course) => {
-      courseInterests = [];
-      _.forEach(course.interestIDs, (id) => {
-        courseInterests.push(Interests.findDoc(id));
-        _.forEach(courseInterests, (courseInterest) => {
-          _.forEach(userInterests, (userInterest) => {
-            if (_.isEqual(courseInterest, userInterest)) {
-              if (!_.includes(matching, course)) {
-                matching.push(course);
-              }
-            }
-          });
-        });
-      });
-    });
-    // Only display up to the first six matches.
-    return matching;
-  }
-  return [];
-}
-
-function hiddenCoursesHelper() {
-  if (getRouteUserName()) {
-    const courses = matchingCourses();
-    let nonHiddenCourses;
-    if (Template.instance().hidden.get()) {
-      const profile = Users.getProfile(getRouteUserName());
-      nonHiddenCourses = _.filter(courses, (course) => {
-        if (_.includes(profile.hiddenCourseIDs, course._id)) {
-          return false;
-        }
-        return true;
-      });
-    } else {
-      nonHiddenCourses = courses;
-    }
-    return nonHiddenCourses;
-  }
-  return [];
-}
 
 const availableOpps = () => {
   const opps = Opportunities.find({}).fetch();
@@ -138,7 +67,6 @@ function matchingOpportunities() {
   });
   const interestIDs = Users.getInterestIDs(profile.userID);
   const preferred = new PreferredChoice(allOpportunities, interestIDs);
-  // console.log(preferred.getOrderedChoices());
   return preferred.getOrderedChoices();
 }
 
@@ -163,40 +91,25 @@ function hiddenOpportunitiesHelper() {
 }
 
 Template.Student_Card_Explorer_Opportunities_Widget.helpers({
-  courses() {
-    const courses = matchingCourses();
-    let visibleCourses;
-    if (Template.instance().hidden.get()) {
-      visibleCourses = hiddenCoursesHelper();
-    } else {
-      visibleCourses = courses;
-    }
-    return visibleCourses;
-  },
   hidden() {
     return Template.instance().hidden.get();
   },
   hiddenExists() {
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());
-      let ret;
-      if (this.type === 'courses') {
-        ret = profile.hiddenCourseIDs.length !== 0;
-      } else {
-        ret = profile.hiddenOpportunityIDs.length !== 0;
-      }
-      return ret;
+      return profile.hiddenOpportunityIDs.length !== 0;
     }
     return false;
   },
-  itemCount() {
-    let ret;
-    if (this.type === 'courses') {
-      ret = hiddenCoursesHelper().length;
-    } else {
-      ret = hiddenOpportunitiesHelper().length;
+  noInterests() {
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      return profile.interestIDs.length === 0;
     }
-    return ret;
+    return true;
+  },
+  itemCount() {
+    return hiddenOpportunitiesHelper().length;
   },
   opportunities() {
     const opportunities = matchingOpportunities();

@@ -45,7 +45,7 @@ Template.Students_Summary_Widget.helpers({
     return !_.isEmpty(Template.instance().selectedUser.get());
   },
   timelineChart() {
-    const users = Template.instance().interactions.get();
+    // const users = Template.instance().interactions.get();
   },
   user() {
     return Template.instance().selectedUser.get();

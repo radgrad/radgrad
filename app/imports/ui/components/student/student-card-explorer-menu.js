@@ -202,7 +202,7 @@ Template.Student_Card_Explorer_Menu.helpers({
         return 'Degrees';
       case RouteNames.studentExplorerInterestsPageRouteName:
         return 'Interests';
-      case RouteNames.studentExplorerOpportunitiesPageRouteName:
+      case RouteNames.studentCardExplorerOpportunitiesPageRouteName:
         return 'Opportunities';
       case RouteNames.studentExplorerUsersPageRouteName:
         return 'Users';
