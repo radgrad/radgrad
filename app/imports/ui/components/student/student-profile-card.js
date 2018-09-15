@@ -1,9 +1,11 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
+import { Users } from '../../../api/user/UserCollection';
+import * as RouteNames from '../../../startup/client/router';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 
 Template.Student_Profile_Card.onCreated(function studentProfileCardOnCreated() {
   this.hidden = new ReactiveVar(true);
@@ -12,24 +14,24 @@ Template.Student_Profile_Card.onCreated(function studentProfileCardOnCreated() {
 function interestedStudentsHelper(item, type) {
   const interested = [];
   let instances;
-  if (type === 'courses') {
-    instances = CourseInstances.find({
-      courseID: item._id,
-    }).fetch();
-  } else {
-    instances = OpportunityInstances.find({
-      opportunityID: item._id,
-    }).fetch();
+  if (type === 'careergoals') {
+    instances = StudentProfiles.find({}).fetch();
+    instances = _.filter(instances, (profile) => _.includes(profile.careerGoalIDs, item._id));
   }
-  _.forEach(instances, (c) => {
-    if (!_.includes(interested, c.studentID)) {
-      interested.push(c.studentID);
+  // console.log(instances);
+  _.forEach(instances, (p) => {
+    if (!_.includes(interested, p.userID)) {
+      interested.push(p.userID);
     }
   });
+  // console.log(interested);
   return interested;
 }
 
 Template.Student_Profile_Card.helpers({
+  careerGoalsRouteName() {
+    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+  },
   hidden() {
     return Template.instance().hidden.get();
   },
@@ -54,6 +56,32 @@ Template.Student_Profile_Card.helpers({
   },
   numberStudents(course) {
     return interestedStudentsHelper(course, this.type).length;
+  },
+  replaceSemString(array) {
+    // console.log('array', array);
+    const currentSem = Semesters.getCurrentSemesterDoc();
+    const currentYear = currentSem.year;
+    let fourRecentSem = _.filter(array, function isRecent(semesterYear) {
+      return semesterYear.split(' ')[1] >= currentYear;
+    });
+    fourRecentSem = array.slice(0, 4);
+    const semString = fourRecentSem.join(' - ');
+    return semString.replace(/Summer/g, 'Sum').replace(/Spring/g, 'Spr');
+  },
+  studentPicture(studentID) {
+    if (studentID === 'elipsis') {
+      return '/images/elipsis.png';
+    }
+    return Users.getProfile(studentID).picture;
+  },
+  typeCareerGoals() {
+    return (this.type === 'careergoals');
+  },
+  usersRouteName() {
+    return RouteNames.studentExplorerUsersPageRouteName;
+  },
+  userSlug(studentID) {
+    return Users.getProfile(studentID).username;
   },
 });
 

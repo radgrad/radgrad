@@ -4,16 +4,16 @@
     <i class="dropdown icon"></i>
     <div>{{getRouteName}}</div>
     <div class="menu">
-      <a class="{{isActiveRoute careerGoalsRouteName}} item"
-         href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=firstCareerGoal}}">Career Goals</a>
-      <a class="{{isActiveRoute coursesRouteName}} item"
-         href="{{pathFor coursesCardRouteName username=routeUserName course=firstCourse}}">Courses</a>
+      <a class="{{isActiveRoute careerGoalsCardRouteName}} item"
+         href="{{pathFor careerGoalsCardRouteName username=routeUserName}}">Career Goals</a>
+      <a class="{{isActiveRoute coursesCardRouteName}} item"
+         href="{{pathFor coursesCardRouteName username=routeUserName}}">Courses</a>
       <a class="{{isActiveRoute academicPlansRouteName}} item"
          href="{{pathFor academicPlansRouteName username=routeUserName plan=firstPlan}}">Academic Plans</a>
       <a class="{{isActiveRoute interestsRouteName}} item"
          href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Interests</a>
-      <a class="{{isActiveRoute opportunitiesRouteName}} item"
-         href="{{pathFor opportunitiesCardRouteName username=routeUserName opportunity=firstOpportunity}}">Opportunities</a>
+      <a class="{{isActiveRoute opportunitiesCardRouteName}} item"
+         href="{{pathFor opportunitiesCardRouteName username=routeUserName}}">Opportunities</a>
       <a class="{{isActiveRoute usersRouteName}} item"
          href="{{pathFor usersRouteName username=routeUserName explorerUserName=routeUserName}}">Users</a>
     </div>
@@ -194,18 +194,6 @@
               style="position: absolute; margin-left: -20px;" class="{{userCareerGoals listItem}}"></i>{{itemName
               listItem}}</a>
         {{/each}}
-        <h4 class="ui dividing header">
-          ALL OTHER CAREER GOALS
-        </h4>
-        <div class="ui segment">
-          <h4 class="ui dividing header">Filter By</h4>
-          <div class="field">
-            <div class="ui radio checkbox dividing {{#if isInterests}}checked{{/if}}">
-              <input type="radio" name="match" checked={{isInterests}} value="true" class="hidden" tabindex="0">
-              <label class="jsByInterests">My Interests</label>
-            </div>
-          </div>
-        </div>
         {{#each listItem in menuFilteredNonAddedList}}
           <a class="{{classType (slugName listItem) 'careerGoal'}}" data-tab="tab-name"
              href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(slugName listItem)}}"><i

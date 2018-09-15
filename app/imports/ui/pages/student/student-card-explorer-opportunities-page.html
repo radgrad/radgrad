@@ -1,5 +1,5 @@
 <template name="Student_Card_Explorer_Opportunities_Page">
-  {{#Student_Card_Explorer_Layout addedList = addedOpportunities nonAddedList = nonAddedOpportunities type = 'opportunities'}}
-    {{> Student_Card_Explorer_Opportunities_Widget name=opportunity.name slug=(slugName opportunity.slugID) descriptionPairs=(descriptionPairs opportunity) socialPairs=(socialPairs opportunity) id=opportunity._id updateID=updateID item=opportunity completed=completed reviewed=(reviewed opportunity) type='opportunities'}}
+  {{#Student_Card_Explorer_Layout addedList=addedOpportunities nonAddedList=nonAddedOpportunities type='opportunities'}}
+    {{> Student_Card_Explorer_Opportunities_Widget}}
   {{/Student_Card_Explorer_Layout}}
 </template>

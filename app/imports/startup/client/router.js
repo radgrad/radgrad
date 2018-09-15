@@ -759,7 +759,7 @@ studentRoutes.route('/explorer/career-goals/:careerGoal', {
 });
 
 export const studentCardExplorerCareerGoalsPageRouteName = 'Student_Card_Explorer_CareerGoals_Page';
-studentRoutes.route('/card/explorer/career-goals/:careerGoal', {
+studentRoutes.route('/card/explorer/career-goals/', {
   name: studentCardExplorerCareerGoalsPageRouteName,
   triggersEnter: [trackPath],
   action() {
@@ -777,7 +777,7 @@ studentRoutes.route('/explorer/courses/:course', {
 });
 
 export const studentCardExplorerCoursesPageRouteName = 'Student_Card_Explorer_Courses_Page';
-studentRoutes.route('/card/explorer/courses/:course', {
+studentRoutes.route('/card/explorer/courses/', {
   name: studentCardExplorerCoursesPageRouteName,
   triggersEnter: [trackPath],
   action() {
@@ -822,7 +822,7 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
 });
 
 export const studentCardExplorerOpportunitiesPageRouteName = 'Student_Card_Explorer_Opportunities_Page';
-studentRoutes.route('/card/explorer/opportunities/:opportunity', {
+studentRoutes.route('/card/explorer/opportunities/', {
   name: studentCardExplorerOpportunitiesPageRouteName,
   triggersEnter: [trackPath],
   action() {

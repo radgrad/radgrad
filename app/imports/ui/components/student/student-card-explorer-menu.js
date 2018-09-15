@@ -41,10 +41,14 @@ Template.Student_Card_Explorer_Menu.helpers({
       });
     }
     if (Template.instance().byEE.get()) {
-      retVal = _.filter(retVal, function (item) { return item.ice.i >= 10; });
+      retVal = _.filter(retVal, function (item) {
+        return item.ice.i >= 10;
+      });
     }
     if (Template.instance().by1xx.get()) {
-      retVal = _.filter(retVal, function (item) { return item.ice.e >= 10; });
+      retVal = _.filter(retVal, function (item) {
+        return item.ice.e >= 10;
+      });
     }
     if (Template.instance().by400.get()) {
       retVal = _.filter(retVal, function (item) {
@@ -70,18 +74,25 @@ Template.Student_Card_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerPlansPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerPlansPageRouteName;
     }
     return RouteNames.mentorExplorerPlansPageRouteName;
+  },
+  careerGoalsCardRouteName() {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerCareerGoalsPageRouteName;
+    }
+    return RouteNames.mentorExplorerCareerGoalsPageRouteName;
   },
   careerGoalsRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerCareerGoalsPageRouteName;
     }
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
@@ -91,20 +102,15 @@ Template.Student_Card_Explorer_Menu.helpers({
     let current;
     if (type === 'course') {
       current = FlowRouter.getParam('course');
-    } else
-    if (type === 'careerGoal') {
+    } else if (type === 'careerGoal') {
       current = FlowRouter.getParam('careerGoal');
-    } else
-    if (type === 'degree') {
+    } else if (type === 'degree') {
       current = FlowRouter.getParam('degree');
-    } else
-    if (type === 'plan') {
+    } else if (type === 'plan') {
       current = FlowRouter.getParam('plan');
-    } else
-    if (type === 'interest') {
+    } else if (type === 'interest') {
       current = FlowRouter.getParam('interest');
-    } else
-    if (type === 'opportunity') {
+    } else if (type === 'opportunity') {
       current = FlowRouter.getParam('opportunity');
     }
     if (item === current) {
@@ -119,8 +125,7 @@ Template.Student_Card_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentCardExplorerCoursesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
@@ -129,8 +134,7 @@ Template.Student_Card_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
@@ -139,8 +143,7 @@ Template.Student_Card_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerDegreesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerDegreesPageRouteName;
     }
     return RouteNames.mentorExplorerDegreesPageRouteName;
@@ -151,22 +154,6 @@ Template.Student_Card_Explorer_Menu.helpers({
       return false;
     }
     return true;
-  },
-  firstCareerGoal() {
-    let ret;
-    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
-    if (careerGoals.length > 0) {
-      ret = Slugs.findDoc(careerGoals[0].slugID).name;
-    }
-    return ret;
-  },
-  firstCourse() {
-    let ret;
-    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
-    if (courses.length > 0) {
-      ret = Slugs.findDoc(courses[0].slugID).name;
-    }
-    return ret;
   },
   firstDegree() {
     let ret;
@@ -184,14 +171,6 @@ Template.Student_Card_Explorer_Menu.helpers({
     }
     return ret;
   },
-  firstOpportunity() {
-    let ret;
-    const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    if (opportunities.length > 0) {
-      ret = Slugs.findDoc(opportunities[0].slugID).name;
-    }
-    return ret;
-  },
   firstPlan() {
     const plan = AcademicPlans.findOne({}, { sort: { name: 1 } });
     if (plan) {
@@ -202,7 +181,7 @@ Template.Student_Card_Explorer_Menu.helpers({
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
-      case RouteNames.studentExplorerCareerGoalsPageRouteName:
+      case RouteNames.studentCardExplorerCareerGoalsPageRouteName:
         return 'Career Goals';
       case RouteNames.studentCardExplorerCoursesPageRouteName:
         return 'Courses';
@@ -224,8 +203,7 @@ Template.Student_Card_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }
     return RouteNames.mentorExplorerInterestsPageRouteName;
@@ -245,8 +223,7 @@ Template.Student_Card_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentCardExplorerOpportunitiesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
@@ -255,8 +232,7 @@ Template.Student_Card_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
@@ -323,8 +299,7 @@ Template.Student_Card_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerUsersPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerUsersPageRouteName;
     }
     return RouteNames.mentorExplorerUsersPageRouteName;

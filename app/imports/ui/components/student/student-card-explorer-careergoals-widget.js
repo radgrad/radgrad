@@ -15,7 +15,7 @@ function availableCareerGoals() {
   if (getRouteUserName()) {
     const profile = Users.getProfile(getRouteUserName());
     const careerGoalIDs = profile.careerGoalIDs;
-    return _.filter(careers, c => _.indexOf(careerGoalIDs, c._id) !== -1);
+    return _.filter(careers, c => !_.includes(careerGoalIDs, c._id));
   }
   return careers;
 }
@@ -37,6 +37,9 @@ Template.Student_Card_Explorer_CareerGoals_Widget.helpers({
   },
   hidden() {
     return Template.instance().hidden.get();
+  },
+  itemCount() {
+    return matchingCareerGoals().length;
   },
 
 });

@@ -42,7 +42,9 @@ class PreferredChoice {
   getOrderedChoices() {
     let choices = [];
     for (let i = this.max; i >= 0; i--) {
-      choices = choices.concat(this._rankedChoices[i]);
+      if (this._rankedChoices[i]) {
+        choices = choices.concat(this._rankedChoices[i]);
+      }
     }
     // console.log(choices);
     return choices;

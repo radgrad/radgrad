@@ -13,11 +13,6 @@ Template.Student_Card_Explorer_Courses_Widget.onCreated(function studentCardExpl
 });
 
 const availableCourses = () => {
-  if (getRouteUserName()) {
-    const profile = Users.getProfile(getRouteUserName());
-    console.log(profile);
-  }
-
   const courses = Courses.find({}).fetch();
   if (courses.length > 0) {
     const filtered = _.filter(courses, function filter(course) {
