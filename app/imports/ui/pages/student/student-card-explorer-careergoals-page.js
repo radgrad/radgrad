@@ -26,7 +26,7 @@ function numUsers(careerGoal, role) {
 }
 
 
-Template.Student_Card_Explorer_Careergoals_Page.helpers({
+Template.Student_Card_Explorer_CareerGoals_Page.helpers({
   addedCareerGoals() {
     const addedCareerGoals = [];
     const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();

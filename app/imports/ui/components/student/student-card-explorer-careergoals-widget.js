@@ -6,7 +6,7 @@ import { Users } from '../../../api/user/UserCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 
-Template.Student_Card_Explorer_Careergoals_Widget.onCreated(function studentCardExplorerCareergoalsWidgetOnCreated() {
+Template.Student_Card_Explorer_CareerGoals_Widget.onCreated(function studentCardExplorerCareergoalsWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
 });
 
@@ -31,7 +31,7 @@ function matchingCareerGoals() {
   return allCareers;
 }
 
-Template.Student_Card_Explorer_Careergoals_Widget.helpers({
+Template.Student_Card_Explorer_CareerGoals_Widget.helpers({
   careers() {
     return matchingCareerGoals();
   },
@@ -41,7 +41,7 @@ Template.Student_Card_Explorer_Careergoals_Widget.helpers({
 
 });
 
-Template.Student_Card_Explorer_Careergoals_Widget.events({
+Template.Student_Card_Explorer_CareerGoals_Widget.events({
   'click .showHidden': function clickShowHidden(event) {
     event.preventDefault();
     Template.instance().hidden.set(false);

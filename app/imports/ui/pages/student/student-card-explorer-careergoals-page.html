@@ -1,6 +1,6 @@
-<template name="Student_Card_Explorer_Careergoals_Page">
+<template name="Student_Card_Explorer_CareerGoals_Page">
   {{#Student_Card_Explorer_Layout addedList = addedCareerGoals nonAddedList = nonAddedCareerGoals type = 'careerGoals'}}
-    {{> Student_Card_Explorer_Careergoals_Widget name=careerGoal.name slug=(slugName careerGoal.slugID) descriptionPairs=(descriptionPairs careerGoal) socialPairs=(socialPairs careerGoal) id=careerGoal._id updateID=updateID item=careerGoal}}
+    {{> Student_Card_Explorer_CareerGoals_Widget name=careerGoal.name slug=(slugName careerGoal.slugID) descriptionPairs=(descriptionPairs careerGoal) socialPairs=(socialPairs careerGoal) id=careerGoal._id updateID=updateID item=careerGoal}}
   {{/Student_Card_Explorer_Layout}}
 
 </template>
