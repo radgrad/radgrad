@@ -5,13 +5,10 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import * as RouteNames from '../../../startup/client/router.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
-import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';

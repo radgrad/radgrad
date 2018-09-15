@@ -227,6 +227,7 @@ class BaseProfileCollection extends BaseSlugCollection {
     if (careerGoals) {
       updateData.careerGoalIDs = CareerGoals.getIDs(careerGoals);
     }
+    // console.log('_updateCommonFields', updateData);
   }
 }
 
