@@ -803,6 +803,15 @@ studentRoutes.route('/explorer/plans/:plan', {
   },
 });
 
+export const studentCardExplorerPlansPageRouteName = 'Student_Card_Explorer_Plans_Page';
+studentRoutes.route('/card/explorer/plans/', {
+  name: studentCardExplorerPlansPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerPlansPageRouteName });
+  },
+});
+
 export const studentExplorerInterestsPageRouteName = 'Student_Explorer_Interests_Page';
 studentRoutes.route('/explorer/interests/:interest', {
   name: studentExplorerInterestsPageRouteName,

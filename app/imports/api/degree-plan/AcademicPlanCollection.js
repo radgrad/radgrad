@@ -179,6 +179,15 @@ class AcademicPlanCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns an array of the latest AcademicPlans.
+   * @return {array}
+   */
+  getLatestPlans() {
+    const semesterNumber = this.getLatestSemesterNumber();
+    return this._collection.find({ semesterNumber }).fetch();
+  }
+
+  /**
    * Returns the largest semester number.
    * @return {number}
    */

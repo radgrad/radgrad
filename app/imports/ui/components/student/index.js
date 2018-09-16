@@ -22,6 +22,9 @@ import './student-card-explorer-interests-widget';
 import './student-card-explorer-opportunities-widget.html';
 import './student-card-explorer-opportunities-widget';
 
+import './student-card-explorer-plans-widget.html';
+import './student-card-explorer-plans-widget';
+
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
 
@@ -119,6 +122,9 @@ import './student-of-interest-widget.js';
 
 import './student-profile-add.html';
 import './student-profile-add';
+
+import './student-plan-card.html';
+import './student-plan-card';
 
 import './student-profile-card.html';
 import './student-profile-card';

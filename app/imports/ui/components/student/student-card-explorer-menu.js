@@ -7,7 +7,6 @@ import * as RouteNames from '../../../startup/client/router.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -66,6 +65,15 @@ Template.Student_Card_Explorer_Menu.helpers({
   },
   is400() {
     return Template.instance().by400.get();
+  },
+  academicCardPlansRouteName() {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentCardExplorerPlansPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerPlansPageRouteName;
+    }
+    return RouteNames.mentorExplorerPlansPageRouteName;
   },
   academicPlansRouteName() {
     const group = FlowRouter.current().route.group.name;
@@ -174,11 +182,11 @@ Template.Student_Card_Explorer_Menu.helpers({
         return 'Career Goals';
       case RouteNames.studentCardExplorerCoursesPageRouteName:
         return 'Courses';
-      case RouteNames.studentExplorerPlansPageRouteName:
+      case RouteNames.studentCardExplorerPlansPageRouteName:
         return 'Academic Plans';
       case RouteNames.studentExplorerDegreesPageRouteName:
         return 'Degrees';
-      case RouteNames.studentExplorerInterestsPageRouteName:
+      case RouteNames.studentCardExplorerInterestsPageRouteName:
         return 'Interests';
       case RouteNames.studentCardExplorerOpportunitiesPageRouteName:
         return 'Opportunities';

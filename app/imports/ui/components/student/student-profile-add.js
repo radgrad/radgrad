@@ -18,6 +18,8 @@ Template.Student_Profile_Add.events({
       } else if (instance.data.type === 'interests') {
         updateData.interests = profile.interestIDs;
         updateData.interests.push(instance.data.item._id);
+      } else if (instance.data.type === 'plans') {
+        updateData.academicPlan = instance.data.item._id;
       }
       updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {

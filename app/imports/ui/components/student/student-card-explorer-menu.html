@@ -8,8 +8,8 @@
          href="{{pathFor careerGoalsCardRouteName username=routeUserName}}">Career Goals</a>
       <a class="{{isActiveRoute coursesCardRouteName}} item"
          href="{{pathFor coursesCardRouteName username=routeUserName}}">Courses</a>
-      <a class="{{isActiveRoute academicPlansRouteName}} item"
-         href="{{pathFor academicPlansRouteName username=routeUserName plan=firstPlan}}">Academic Plans</a>
+      <a class="{{isActiveRoute academicCardPlansRouteName}} item"
+         href="{{pathFor academicCardPlansRouteName username=routeUserName}}">Academic Plans</a>
       <a class="{{isActiveRoute interestsCardRouteName}} item"
          href="{{pathFor interestsCardRouteName username=routeUserName}}">Interests</a>
       <a class="{{isActiveRoute opportunitiesCardRouteName}} item"
@@ -275,14 +275,6 @@
                   MY ACADEMIC PLAN
                 </div>
                 {{#each listItem in menuAddedList}}
-                  <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
-                     href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
-                      class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>
-                {{/each}}
-                <div class="ui dividing header">
-                  ALL OTHER PLANS
-                </div>
-                {{#each listItem in menuNonAddedList}}
                   <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
                      href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
                       class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>

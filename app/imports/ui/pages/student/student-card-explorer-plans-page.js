@@ -25,7 +25,7 @@ Template.Student_Card_Explorer_Plans_Page.helpers({
     const plans = AcademicPlans.find({}).fetch();
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());
-      return _.filter()
+      return _.filter(plans, p => profile.academicPlanID === p._id);
     }
     return plans;
   },
