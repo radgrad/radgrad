@@ -1,7 +1,15 @@
 import { Template } from 'meteor/templating';
-import { Users } from '../../../api/user/UserCollection.js';
+import { ReactiveVar } from 'meteor/reactive-var';
+
 import { ROLE } from '../../../api/role/Role.js';
+import { Users } from '../../../api/user/UserCollection.js';
 import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessor.methods';
+
+Template.Retrieve_User_Widget.onCreated(function retrieveUserOnCreated() {
+  this.firstNameRegex = new ReactiveVar();
+  this.lastNameRegex = new ReactiveVar();
+  this.userNameRegex = new ReactiveVar();
+});
 
 Template.Retrieve_User_Widget.helpers({
   users(role) {

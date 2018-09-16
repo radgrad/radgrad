@@ -858,6 +858,15 @@ studentRoutes.route('/explorer/users/:explorerUserName', {
   },
 });
 
+export const studentCardExplorerUsersPageRouteName = 'Student_Card_Explorer_Users_Page';
+studentRoutes.route('/card/explorer/users/', {
+  name: studentCardExplorerUsersPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerUsersPageRouteName });
+  },
+});
+
 export const studentHomePageRouteName = 'Student_Home_Page';
 studentRoutes.route('/home', {
   name: studentHomePageRouteName,

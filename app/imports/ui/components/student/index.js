@@ -25,6 +25,9 @@ import './student-card-explorer-opportunities-widget';
 import './student-card-explorer-plans-widget.html';
 import './student-card-explorer-plans-widget';
 
+import './student-card-explorer-users-widget.html';
+import './student-card-explorer-users-widget';
+
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
 
@@ -137,3 +140,6 @@ import './student-teaser-widget.js';
 
 import './student-teaser-widget-video.html';
 import './student-teaser-widget-video.js';
+
+import './student-user-card.html';
+import './student-user-card';

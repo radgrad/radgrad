@@ -13,6 +13,9 @@ import './student-card-explorer-opportunities-page';
 import './student-card-explorer-plans-page.html';
 import './student-card-explorer-plans-page';
 
+import './student-card-explorer-users-page.html';
+import './student-card-explorer-users-page';
+
 import './student-degree-planner-page.html';
 import './student-degree-planner-page.js';
 

@@ -1,6 +1,9 @@
 <template name="Retrieve_User_Widget">
   <div class="ui padded container segment">
     <div class="ui dividing header"><h4>RETRIEVE USER</h4></div>
+    <div class="ui segment">
+      {{> Filter_Student_Widget label='USERS' firstNameRegex=firstNameRegex lastNameRegex=lastNameRegex userNameRegex=userNameRegex }}
+    </div>
     <div class="ui top attached tabular stackable menu">
       <a class="item" data-tab="advisors">Advisors ({{advisorCount}})</a>
       <a class="item" data-tab="faculty">Faculty ({{facultyCount}})</a>
