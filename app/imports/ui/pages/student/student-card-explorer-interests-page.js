@@ -10,15 +10,20 @@ Template.Student_Card_Explorer_Interests_Page.helpers({
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());
       const interests = Interests.find({}).fetch();
-      return _.filter(interests, int => !_.includes(profile.interestIDs, int._id));
+      return _.filter(interests, int => _.includes(profile.interestIDs, int._id));
     }
     return [];
+  },
+  addedCareerInterests() {
+    const profile = Users.getProfile(getRouteUserName());
+    const allInterests = Users.getInterestIDsByType(profile.userID);
+    return _.map(allInterests[1], (interest) => Interests.findDoc(interest));
   },
   nonAddedInterests() {
     const interests = Interests.find({}).fetch();
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());
-      return _.filter(interests, int => _.includes(profile.interestIDs, int._id));
+      return _.filter(interests, int => !_.includes(profile.interestIDs, int._id));
     }
     return interests;
   },

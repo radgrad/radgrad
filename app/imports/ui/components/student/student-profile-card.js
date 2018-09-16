@@ -13,10 +13,11 @@ Template.Student_Profile_Card.onCreated(function studentProfileCardOnCreated() {
 
 function interestedStudentsHelper(item, type) {
   const interested = [];
-  let instances;
+  let instances = StudentProfiles.find({}).fetch();
   if (type === 'careergoals') {
-    instances = StudentProfiles.find({}).fetch();
     instances = _.filter(instances, (profile) => _.includes(profile.careerGoalIDs, item._id));
+  } else if (type === 'interests') {
+    instances = _.filter(instances, (profile) => _.includes(profile.interestIDs, item._id));
   }
   // console.log(instances);
   _.forEach(instances, (p) => {
@@ -35,6 +36,12 @@ Template.Student_Profile_Card.helpers({
   hidden() {
     return Template.instance().hidden.get();
   },
+  interestRouteName() {
+    return RouteNames.studentExplorerInterestsPageRouteName;
+  },
+  interestedStudents(course) {
+    return interestedStudentsHelper(course, this.type);
+  },
   itemName(item) {
     return item.name;
   },
@@ -47,9 +54,6 @@ Template.Student_Profile_Card.helpers({
       }
     }
     return description;
-  },
-  interestedStudents(course) {
-    return interestedStudentsHelper(course, this.type);
   },
   itemSlug(item) {
     return Slugs.findDoc(item.slugID).name;
@@ -76,6 +80,9 @@ Template.Student_Profile_Card.helpers({
   },
   typeCareerGoals() {
     return (this.type === 'careergoals');
+  },
+  typeInterests() {
+    return (this.type === 'interests');
   },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;

@@ -10,8 +10,8 @@
          href="{{pathFor coursesCardRouteName username=routeUserName}}">Courses</a>
       <a class="{{isActiveRoute academicPlansRouteName}} item"
          href="{{pathFor academicPlansRouteName username=routeUserName plan=firstPlan}}">Academic Plans</a>
-      <a class="{{isActiveRoute interestsRouteName}} item"
-         href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Interests</a>
+      <a class="{{isActiveRoute interestsCardRouteName}} item"
+         href="{{pathFor interestsCardRouteName username=routeUserName}}">Interests</a>
       <a class="{{isActiveRoute opportunitiesCardRouteName}} item"
          href="{{pathFor opportunitiesCardRouteName username=routeUserName}}">Opportunities</a>
       <a class="{{isActiveRoute usersRouteName}} item"
@@ -264,15 +264,6 @@
                 CAREER GOAL INTERESTS
               </h4>
               {{#each listItem in menuCareerList}}
-                <a class="{{classType (slugName listItem) 'interest'}}" data-tab="tab-name"
-                   href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}"><i
-                    style="position: absolute; margin-left: -20px;" class="{{userInterests listItem}}"></i>{{itemName
-                    listItem}}</a>
-              {{/each}}
-              <h4 class="ui dividing header">
-                ALL OTHER INTERESTS
-              </h4>
-              {{#each listItem in menuNonAddedList}}
                 <a class="{{classType (slugName listItem) 'interest'}}" data-tab="tab-name"
                    href="{{pathFor interestsRouteName username=routeUserName interest=(slugName listItem)}}"><i
                     style="position: absolute; margin-left: -20px;" class="{{userInterests listItem}}"></i>{{itemName

@@ -160,14 +160,6 @@ Template.Student_Card_Explorer_Menu.helpers({
     }
     return ret;
   },
-  firstInterest() {
-    let ret;
-    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    if (interests.length > 0) {
-      ret = Slugs.findDoc(interests[0].slugID).name;
-    }
-    return ret;
-  },
   firstPlan() {
     const plan = AcademicPlans.findOne({}, { sort: { name: 1 } });
     if (plan) {
@@ -200,6 +192,15 @@ Template.Student_Card_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerInterestsPageRouteName;
+    }
+    return RouteNames.mentorExplorerInterestsPageRouteName;
+  },
+  interestsCardRouteName() {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentCardExplorerInterestsPageRouteName;
     } else if (group === 'faculty') {
       return RouteNames.facultyExplorerInterestsPageRouteName;
     }

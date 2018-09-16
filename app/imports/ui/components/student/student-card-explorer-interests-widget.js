@@ -5,11 +5,12 @@ import { Users } from '../../../api/user/UserCollection';
 import { Interests } from '../../../api/interest/InterestCollection';
 
 function availableInterests() {
-  const interests = Interests.find({}).fetch();
+  let interests = Interests.find({}).fetch();
   if (getRouteUserName()) {
     const profile = Users.getProfile(getRouteUserName());
-    const interestIDs = profile.interestIDs;
-    return _.filter(interests, i => !_.includes(interestIDs, i._id));
+    const allInterests = Users.getInterestIDsByType(profile.userID);
+    interests = _.filter(interests, i => !_.includes(allInterests[0], i._id));
+    interests = _.filter(interests, i => !_.includes(allInterests[1], i._id));
   }
   return interests;
 }
