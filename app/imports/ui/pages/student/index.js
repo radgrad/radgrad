@@ -4,6 +4,9 @@ import './student-card-explorer-careergoals-page';
 import './student-card-explorer-courses-page.html';
 import './student-card-explorer-courses-page';
 
+import './student-card-explorer-interests-page.html';
+import './student-card-explorer-interests-page';
+
 import './student-card-explorer-opportunities-page.html';
 import './student-card-explorer-opportunities-page';
 

@@ -1,14 +1,9 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { getRouteUserName } from '../shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
-
-Template.Student_Card_Explorer_CareerGoals_Widget.onCreated(function studentCardExplorerCareergoalsWidgetOnCreated() {
-  this.hidden = new ReactiveVar(true);
-});
 
 function availableCareerGoals() {
   const careers = CareerGoals.find({}).fetch();
@@ -40,17 +35,5 @@ Template.Student_Card_Explorer_CareerGoals_Widget.helpers({
   },
   itemCount() {
     return matchingCareerGoals().length;
-  },
-
-});
-
-Template.Student_Card_Explorer_CareerGoals_Widget.events({
-  'click .showHidden': function clickShowHidden(event) {
-    event.preventDefault();
-    Template.instance().hidden.set(false);
-  },
-  'click .hideHidden': function clickHideHidden(event) {
-    event.preventDefault();
-    Template.instance().hidden.set(true);
   },
 });

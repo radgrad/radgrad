@@ -812,6 +812,15 @@ studentRoutes.route('/explorer/interests/:interest', {
   },
 });
 
+export const studentCardExplorerInterestsPageRouteName = 'Student_Card_Explorer_Interests_Page';
+studentRoutes.route('/card/explorer/interests/', {
+  name: studentCardExplorerInterestsPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerInterestsPageRouteName });
+  },
+});
+
 export const studentExplorerOpportunitiesPageRouteName = 'Student_Explorer_Opportunities_Page';
 studentRoutes.route('/explorer/opportunities/:opportunity', {
   name: studentExplorerOpportunitiesPageRouteName,

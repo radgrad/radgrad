@@ -16,6 +16,9 @@ import './student-card-explorer-courses-widget';
 import './student-card-explorer-menu.html';
 import './student-card-explorer-menu';
 
+import './student-card-explorer-interests-widget.html';
+import './student-card-explorer-interests-widget';
+
 import './student-card-explorer-opportunities-widget.html';
 import './student-card-explorer-opportunities-widget';
 
