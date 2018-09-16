@@ -168,13 +168,6 @@ Template.Student_Card_Explorer_Menu.helpers({
     }
     return ret;
   },
-  firstPlan() {
-    const plan = AcademicPlans.findOne({}, { sort: { name: 1 } });
-    if (plan) {
-      return (Slugs.findDoc(plan.slugID)).name;
-    }
-    return '';
-  },
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
@@ -190,7 +183,7 @@ Template.Student_Card_Explorer_Menu.helpers({
         return 'Interests';
       case RouteNames.studentCardExplorerOpportunitiesPageRouteName:
         return 'Opportunities';
-      case RouteNames.studentExplorerUsersPageRouteName:
+      case RouteNames.studentCardExplorerUsersPageRouteName:
         return 'Users';
       default:
         return 'Select Explorer';
@@ -304,7 +297,7 @@ Template.Student_Card_Explorer_Menu.helpers({
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
+      return RouteNames.studentCardExplorerUsersPageRouteName;
     } else if (group === 'faculty') {
       return RouteNames.facultyExplorerUsersPageRouteName;
     }
