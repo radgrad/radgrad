@@ -759,7 +759,7 @@ studentRoutes.route('/explorer/career-goals/:careerGoal', {
 });
 
 export const studentCardExplorerCareerGoalsPageRouteName = 'Student_Card_Explorer_CareerGoals_Page';
-studentRoutes.route('/card/explorer/career-goals/', {
+studentRoutes.route('/explorer/career-goals/', {
   name: studentCardExplorerCareerGoalsPageRouteName,
   triggersEnter: [trackPath],
   action() {
@@ -777,7 +777,7 @@ studentRoutes.route('/explorer/courses/:course', {
 });
 
 export const studentCardExplorerCoursesPageRouteName = 'Student_Card_Explorer_Courses_Page';
-studentRoutes.route('/card/explorer/courses/', {
+studentRoutes.route('/explorer/courses/', {
   name: studentCardExplorerCoursesPageRouteName,
   triggersEnter: [trackPath],
   action() {
@@ -804,7 +804,7 @@ studentRoutes.route('/explorer/plans/:plan', {
 });
 
 export const studentCardExplorerPlansPageRouteName = 'Student_Card_Explorer_Plans_Page';
-studentRoutes.route('/card/explorer/plans/', {
+studentRoutes.route('/explorer/plans/', {
   name: studentCardExplorerPlansPageRouteName,
   triggersEnter: [trackPath],
   action() {
@@ -822,7 +822,7 @@ studentRoutes.route('/explorer/interests/:interest', {
 });
 
 export const studentCardExplorerInterestsPageRouteName = 'Student_Card_Explorer_Interests_Page';
-studentRoutes.route('/card/explorer/interests/', {
+studentRoutes.route('/explorer/interests/', {
   name: studentCardExplorerInterestsPageRouteName,
   triggersEnter: [trackPath],
   action() {
@@ -840,7 +840,7 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
 });
 
 export const studentCardExplorerOpportunitiesPageRouteName = 'Student_Card_Explorer_Opportunities_Page';
-studentRoutes.route('/card/explorer/opportunities/', {
+studentRoutes.route('/explorer/opportunities/', {
   name: studentCardExplorerOpportunitiesPageRouteName,
   triggersEnter: [trackPath],
   action() {
@@ -859,7 +859,7 @@ studentRoutes.route('/explorer/users/:explorerUserName', {
 });
 
 export const studentCardExplorerUsersPageRouteName = 'Student_Card_Explorer_Users_Page';
-studentRoutes.route('/card/explorer/users/', {
+studentRoutes.route('/explorer/users/', {
   name: studentCardExplorerUsersPageRouteName,
   triggersEnter: [trackPath],
   action() {
