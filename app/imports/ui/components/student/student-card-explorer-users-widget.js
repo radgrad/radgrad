@@ -1,5 +1,7 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { ROLE } from '../../../api/role/Role';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { Users } from '../../../api/user/UserCollection';
