@@ -11,9 +11,21 @@
           <img class="ui mini image" src='/images/level-icons/radgrad-level-{{level}}-icon.png'>
         {{/if}}
         {{#if website}}
-          <a class="ui compact basic mini green button" href="{{website}}">
-            WEBSITE
-          </a><br>
+          {{#if isAdvisor}}
+            <a class="ui compact basic mini green button" href="{{website}}">
+              WEBSITE
+            </a><br>
+          {{/if}}
+          {{#if isMentor}}
+            <a class="ui compact basic mini green button" href="{{website}}">
+              WEBSITE
+            </a><br>
+          {{/if}}
+          {{#if isFaculty}}
+            <a class="ui compact basic mini green button" href="{{website}}">
+              WEBSITE
+            </a><br>
+          {{/if}}
         {{/if}}
         {{#if isAdvisor}}
           {{email}}

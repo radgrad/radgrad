@@ -111,6 +111,12 @@ Template.Student_Semester_Card.helpers({
     }
     return Users.getProfile(studentID).picture;
   },
+  studentFullName(studentID) {
+    if (studentID === 'elispsis') {
+      return '';
+    }
+    return Users.getFullName(studentID);
+  },
   typeCourse() {
     return (this.type === 'courses');
   },
@@ -171,4 +177,8 @@ Template.Student_Semester_Card.events({
       }
     });
   },
+});
+
+Template.Student_Semester_Card.onRendered(function semesterCardOnRendered() {
+  this.$('.ui .image').popup();
 });

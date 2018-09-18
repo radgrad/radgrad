@@ -111,6 +111,12 @@ Template.Student_Of_Interest_Card.helpers({
     }
     return Users.getProfile(studentID).picture;
   },
+  studentFullName(studentID) {
+    if (studentID === 'elispsis') {
+      return '';
+    }
+    return Users.getFullName(studentID);
+  },
   typeCourse() {
     return (this.type === 'courses');
   },
@@ -171,4 +177,9 @@ Template.Student_Of_Interest_Card.events({
       }
     });
   },
+});
+
+Template.Student_Of_Interest_Card.onRendered(function interestCardOnRendered() {
+  this.$('.ui .img')
+    .popup();
 });

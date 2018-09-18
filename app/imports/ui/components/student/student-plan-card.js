@@ -67,6 +67,12 @@ Template.Student_Plan_Card.helpers({
     }
     return Users.getProfile(studentID).picture;
   },
+  studentFullName(studentID) {
+    if (studentID === 'elispsis') {
+      return '';
+    }
+    return Users.getFullName(studentID);
+  },
   usersRouteName() {
     return RouteNames.studentExplorerUsersPageRouteName;
   },
@@ -80,7 +86,7 @@ Template.Student_Plan_Card.events({
 });
 
 Template.Student_Plan_Card.onRendered(function studentPlanCardOnRendered() {
-  // add your statement here
+  this.$('.ui .image').popup();
 });
 
 Template.Student_Plan_Card.onDestroyed(function studentPlanCardOnDestroyed() {

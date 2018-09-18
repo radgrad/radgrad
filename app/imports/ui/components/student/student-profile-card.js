@@ -78,6 +78,12 @@ Template.Student_Profile_Card.helpers({
     }
     return Users.getProfile(studentID).picture;
   },
+  studentFullName(studentID) {
+    if (studentID === 'elispsis') {
+      return '';
+    }
+    return Users.getFullName(studentID);
+  },
   typeCareerGoals() {
     return (this.type === 'careergoals');
   },
@@ -97,7 +103,7 @@ Template.Student_Profile_Card.events({
 });
 
 Template.Student_Profile_Card.onRendered(function studentProfileCardOnRendered() {
-  // add your statement here
+  this.$('.ui .image').popup();
 });
 
 Template.Student_Profile_Card.onDestroyed(function studentProfileCardOnDestroyed() {

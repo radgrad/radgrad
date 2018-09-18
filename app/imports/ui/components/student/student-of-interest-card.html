@@ -16,7 +16,7 @@
       <span>STUDENTS PARTICIPATING {{> Widget_Header_Number inputValue = (numberStudents item)}}</span>
       <div class="ui circular mini bordered images">
         {{#each student in interestedStudents item}}
-          <a href="{{pathFor usersRouteName username=routeUserName explorerUserName=(userSlug student)}}"><img class="ui image" src={{studentPicture student}}></a>
+          <img class="ui image" data-title="{{studentFullName student}}" src={{studentPicture student}}>
         {{/each}}
       </div>
     </div>

@@ -4,6 +4,8 @@ import { ROLE } from '../../../api/role/Role';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '../../../startup/client/router';
+import { getRouteUserName } from '../shared/route-user-name';
+import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 
 Template.Student_Card_Explorer_Users_Widget.onCreated(function studentcardexploreruserswidgetOnCreated() {
   // add your statement here
@@ -36,8 +38,15 @@ Template.Student_Card_Explorer_Users_Widget.helpers({
     return ROLE.STUDENT;
   },
   users(role) {
-    // console.log(role, Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } }));
-    return Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
+    const users = Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
+    if (getRouteUserName()) {
+      const profile = Users.getProfile(getRouteUserName());
+      const filtered = _.filter(users, (u) => u.username !== profile.username);
+      const interestIDs = Users.getInterestIDs(profile.userID);
+      const preferred = new PreferredChoice(filtered, interestIDs);
+      return preferred.getOrderedChoices();
+    }
+    return users;
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group && FlowRouter.current().route.group.name;

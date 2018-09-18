@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { getExplorerUserID } from '../../utilities/template-helpers';
+// import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+// import { getExplorerUserID } from '../../utilities/template-helpers';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { ROLE } from '../../../api/role/Role';
@@ -11,7 +11,7 @@ Template.Student_User_Card.onCreated(function studentusercardOnCreated() {
     if (this.data.user) {
       this.user = this.data.user;
     }
-    this.subscribe(CourseInstances.publicationNames.studentID, getExplorerUserID());
+    // this.subscribe(CourseInstances.publicationNames.studentID, getExplorerUserID());
   });
 });
 

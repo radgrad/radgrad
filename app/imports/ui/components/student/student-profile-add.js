@@ -4,6 +4,12 @@ import { Users } from '../../../api/user/UserCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 
+Template.Student_Profile_Add.helpers({
+  isPlan(type) {
+    return (type === 'plans');
+  },
+});
+
 Template.Student_Profile_Add.events({
   'click .jsAddToProfile': function clickAddToProfile(event, instance) {
     event.preventDefault();
