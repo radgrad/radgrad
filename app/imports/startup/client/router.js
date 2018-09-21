@@ -542,6 +542,14 @@ FlowRouter.route('/explorer', {
   },
 });
 
+export const landingCardExplorerCareerGoalsPageRouteName = 'Landing_Card_Explorer_CareerGoals_Page';
+FlowRouter.route('/explorer/career-goals/', {
+  name: landingCardExplorerCareerGoalsPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerCareerGoalsPageRouteName });
+  },
+});
+
 export const landingExplorerCareerGoalsPageRouteName = 'Landing_Explorer_CareerGoals_Page';
 FlowRouter.route('/explorer/career-goals/:careerGoal', {
   name: landingExplorerCareerGoalsPageRouteName,

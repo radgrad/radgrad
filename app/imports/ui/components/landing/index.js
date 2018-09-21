@@ -1,5 +1,8 @@
 /** @namespace ui/components/landing */
 
+import './landing-card-explorer-careergoals-widget.html';
+import './landing-card-explorer-careergoals-widget';
+
 import './landing-explorer-careergoals-widget.html';
 import './landing-explorer-careergoals-widget';
 

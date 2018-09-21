@@ -1,3 +1,6 @@
+import './landing-card-explorer-careergoals-page.html';
+import './landing-card-explorer-careergoals-page';
+
 import './landing-explorer-careergoals-page.html';
 import './landing-explorer-careergoals-page';
 
