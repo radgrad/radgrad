@@ -1,3 +1,21 @@
+import './student-card-explorer-careergoals-page.html';
+import './student-card-explorer-careergoals-page';
+
+import './student-card-explorer-courses-page.html';
+import './student-card-explorer-courses-page';
+
+import './student-card-explorer-interests-page.html';
+import './student-card-explorer-interests-page';
+
+import './student-card-explorer-opportunities-page.html';
+import './student-card-explorer-opportunities-page';
+
+import './student-card-explorer-plans-page.html';
+import './student-card-explorer-plans-page';
+
+import './student-card-explorer-users-page.html';
+import './student-card-explorer-users-page';
+
 import './student-degree-planner-page.html';
 import './student-degree-planner-page.js';
 

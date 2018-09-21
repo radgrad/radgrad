@@ -4,28 +4,23 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import * as RouteNames from '../../../startup/client/router.js';
-import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
-import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { isInRole } from '../../utilities/template-helpers';
 
-Template.Student_Explorer_Menu.onCreated(function studentExplorerMenuOnCreated() {
+Template.Student_Card_Explorer_Menu.onCreated(function studentCardExplorerMenuOnCreated() {
   this.byICS = new ReactiveVar(false);
   this.byEE = new ReactiveVar(false);
   this.by1xx = new ReactiveVar(false);
   this.by400 = new ReactiveVar(false);
 });
 
-Template.Student_Explorer_Menu.helpers({
+Template.Student_Card_Explorer_Menu.helpers({
   adminEmail() {
     const admin = Users._adminUsername();
     // console.log(admin);
@@ -41,10 +36,14 @@ Template.Student_Explorer_Menu.helpers({
       });
     }
     if (Template.instance().byEE.get()) {
-      retVal = _.filter(retVal, function (item) { return item.ice.i >= 10; });
+      retVal = _.filter(retVal, function (item) {
+        return item.ice.i >= 10;
+      });
     }
     if (Template.instance().by1xx.get()) {
-      retVal = _.filter(retVal, function (item) { return item.ice.e >= 10; });
+      retVal = _.filter(retVal, function (item) {
+        return item.ice.e >= 10;
+      });
     }
     if (Template.instance().by400.get()) {
       retVal = _.filter(retVal, function (item) {
@@ -66,12 +65,11 @@ Template.Student_Explorer_Menu.helpers({
   is400() {
     return Template.instance().by400.get();
   },
-  academicPlansCardRouteName() {
+  academicCardPlansRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentCardExplorerPlansPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerPlansPageRouteName;
     }
     return RouteNames.mentorExplorerPlansPageRouteName;
@@ -80,18 +78,16 @@ Template.Student_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerPlansPageRouteName;
-    } else
-      if (group === 'faculty') {
-        return RouteNames.facultyExplorerPlansPageRouteName;
-      }
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerPlansPageRouteName;
+    }
     return RouteNames.mentorExplorerPlansPageRouteName;
   },
   careerGoalsCardRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerCareerGoalsPageRouteName;
     }
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
@@ -100,10 +96,9 @@ Template.Student_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerCareerGoalsPageRouteName;
-    } else
-      if (group === 'faculty') {
-        return RouteNames.facultyExplorerCareerGoalsPageRouteName;
-      }
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerCareerGoalsPageRouteName;
+    }
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
   },
   classType(item, type) {
@@ -111,22 +106,17 @@ Template.Student_Explorer_Menu.helpers({
     let current;
     if (type === 'course') {
       current = FlowRouter.getParam('course');
-    } else
-      if (type === 'careerGoal') {
-        current = FlowRouter.getParam('careerGoal');
-      } else
-        if (type === 'degree') {
-          current = FlowRouter.getParam('degree');
-        } else
-          if (type === 'plan') {
-            current = FlowRouter.getParam('plan');
-          } else
-            if (type === 'interest') {
-              current = FlowRouter.getParam('interest');
-            } else
-              if (type === 'opportunity') {
-                current = FlowRouter.getParam('opportunity');
-              }
+    } else if (type === 'careerGoal') {
+      current = FlowRouter.getParam('careerGoal');
+    } else if (type === 'degree') {
+      current = FlowRouter.getParam('degree');
+    } else if (type === 'plan') {
+      current = FlowRouter.getParam('plan');
+    } else if (type === 'interest') {
+      current = FlowRouter.getParam('interest');
+    } else if (type === 'opportunity') {
+      current = FlowRouter.getParam('opportunity');
+    }
     if (item === current) {
       ret = 'active item';
     }
@@ -139,8 +129,7 @@ Template.Student_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentCardExplorerCoursesPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerCoursesPageRouteName;
     }
     return RouteNames.mentorExplorerCoursesPageRouteName;
@@ -149,20 +138,18 @@ Template.Student_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerCoursesPageRouteName;
-    } else
-      if (group === 'faculty') {
-        return RouteNames.facultyExplorerCoursesPageRouteName;
-      }
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerCoursesPageRouteName;
+    }
     return RouteNames.mentorExplorerCoursesPageRouteName;
   },
   degreesRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerDegreesPageRouteName;
-    } else
-      if (group === 'faculty') {
-        return RouteNames.facultyExplorerDegreesPageRouteName;
-      }
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerDegreesPageRouteName;
+    }
     return RouteNames.mentorExplorerDegreesPageRouteName;
   },
   equals(a, b) {
@@ -172,22 +159,6 @@ Template.Student_Explorer_Menu.helpers({
     }
     return true;
   },
-  firstCareerGoal() {
-    let ret;
-    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
-    if (careerGoals.length > 0) {
-      ret = Slugs.findDoc(careerGoals[0].slugID).name;
-    }
-    return ret;
-  },
-  firstCourse() {
-    let ret;
-    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
-    if (courses.length > 0) {
-      ret = Slugs.findDoc(courses[0].slugID).name;
-    }
-    return ret;
-  },
   firstDegree() {
     let ret;
     const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
@@ -196,68 +167,43 @@ Template.Student_Explorer_Menu.helpers({
     }
     return ret;
   },
-  firstInterest() {
-    let ret;
-    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    if (interests.length > 0) {
-      ret = Slugs.findDoc(interests[0].slugID).name;
-    }
-    return ret;
-  },
-  firstOpportunity() {
-    let ret;
-    const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    if (opportunities.length > 0) {
-      ret = Slugs.findDoc(opportunities[0].slugID).name;
-    }
-    return ret;
-  },
-  firstPlan() {
-    const plan = AcademicPlans.findOne({}, { sort: { name: 1 } });
-    if (plan) {
-      return (Slugs.findDoc(plan.slugID)).name;
-    }
-    return '';
-  },
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
-      case RouteNames.studentExplorerCareerGoalsPageRouteName:
+      case RouteNames.studentCardExplorerCareerGoalsPageRouteName:
         return 'Career Goals';
-      case RouteNames.studentExplorerCoursesPageRouteName:
+      case RouteNames.studentCardExplorerCoursesPageRouteName:
         return 'Courses';
-      case RouteNames.studentExplorerPlansPageRouteName:
+      case RouteNames.studentCardExplorerPlansPageRouteName:
         return 'Academic Plans';
       case RouteNames.studentExplorerDegreesPageRouteName:
         return 'Degrees';
-      case RouteNames.studentExplorerInterestsPageRouteName:
+      case RouteNames.studentCardExplorerInterestsPageRouteName:
         return 'Interests';
-      case RouteNames.studentExplorerOpportunitiesPageRouteName:
+      case RouteNames.studentCardExplorerOpportunitiesPageRouteName:
         return 'Opportunities';
-      case RouteNames.studentExplorerUsersPageRouteName:
+      case RouteNames.studentCardExplorerUsersPageRouteName:
         return 'Users';
       default:
         return 'Select Explorer';
     }
   },
-  interestsCardRouteName() {
-    const group = FlowRouter.current().route.group.name;
-    if (group === 'student') {
-      return RouteNames.studentCardExplorerInterestsPageRouteName;
-    } else
-    if (group === 'faculty') {
-      return RouteNames.facultyExplorerInterestsPageRouteName;
-    }
-    return RouteNames.mentorExplorerInterestsPageRouteName;
-  },
   interestsRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerInterestsPageRouteName;
-    } else
-      if (group === 'faculty') {
-        return RouteNames.facultyExplorerInterestsPageRouteName;
-      }
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerInterestsPageRouteName;
+    }
+    return RouteNames.mentorExplorerInterestsPageRouteName;
+  },
+  interestsCardRouteName() {
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentCardExplorerInterestsPageRouteName;
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerInterestsPageRouteName;
+    }
     return RouteNames.mentorExplorerInterestsPageRouteName;
   },
   isInRole,
@@ -274,9 +220,8 @@ Template.Student_Explorer_Menu.helpers({
   opportunitiesCardRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else
-    if (group === 'faculty') {
+      return RouteNames.studentCardExplorerOpportunitiesPageRouteName;
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerOpportunitiesPageRouteName;
     }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
@@ -285,10 +230,9 @@ Template.Student_Explorer_Menu.helpers({
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentExplorerOpportunitiesPageRouteName;
-    } else
-      if (group === 'faculty') {
-        return RouteNames.facultyExplorerOpportunitiesPageRouteName;
-      }
+    } else if (group === 'faculty') {
+      return RouteNames.facultyExplorerOpportunitiesPageRouteName;
+    }
     return RouteNames.mentorExplorerOpportunitiesPageRouteName;
   },
   slugName(item) {
@@ -349,29 +293,18 @@ Template.Student_Explorer_Menu.helpers({
     }
     return ret;
   },
-  usersCardRouteName() {
+  usersRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
       return RouteNames.studentCardExplorerUsersPageRouteName;
-    } else
-    if (group === 'faculty') {
+    } else if (group === 'faculty') {
       return RouteNames.facultyExplorerUsersPageRouteName;
     }
     return RouteNames.mentorExplorerUsersPageRouteName;
   },
-  usersRouteName() {
-    const group = FlowRouter.current().route.group.name;
-    if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
-    } else
-      if (group === 'faculty') {
-        return RouteNames.facultyExplorerUsersPageRouteName;
-      }
-    return RouteNames.mentorExplorerUsersPageRouteName;
-  },
 });
 
-Template.Student_Explorer_Menu.events({
+Template.Student_Card_Explorer_Menu.events({
   'click .jsByInterests': function clickedInterests(event, instance) {
     event.preventDefault();
     // console.log(event.target, 'filter by my interests');
@@ -394,8 +327,8 @@ Template.Student_Explorer_Menu.events({
   },
 });
 
-Template.Student_Explorer_Menu.onRendered(function studentExplorerMenuOnRendered() {
+Template.Student_Card_Explorer_Menu.onRendered(function studentCardExplorerMenuOnRendered() {
   const template = this;
   template.$('.ui.dropdown')
-      .dropdown();
+    .dropdown();
 });

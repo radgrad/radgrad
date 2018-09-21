@@ -7,6 +7,27 @@ import './explorer-choose-user-widget.js';
 import './student-home-menu.html';
 import './student-home-menu.js';
 
+import './student-card-explorer-careergoals-widget.html';
+import './student-card-explorer-careergoals-widget';
+
+import './student-card-explorer-courses-widget.html';
+import './student-card-explorer-courses-widget';
+
+import './student-card-explorer-menu.html';
+import './student-card-explorer-menu';
+
+import './student-card-explorer-interests-widget.html';
+import './student-card-explorer-interests-widget';
+
+import './student-card-explorer-opportunities-widget.html';
+import './student-card-explorer-opportunities-widget';
+
+import './student-card-explorer-plans-widget.html';
+import './student-card-explorer-plans-widget';
+
+import './student-card-explorer-users-widget.html';
+import './student-card-explorer-users-widget';
+
 import './student-explorer-courses-widget.html';
 import './student-explorer-courses-widget.js';
 
@@ -102,8 +123,23 @@ import './student-of-interest-card.js';
 import './student-of-interest-widget.html';
 import './student-of-interest-widget.js';
 
+import './student-profile-add.html';
+import './student-profile-add';
+
+import './student-plan-card.html';
+import './student-plan-card';
+
+import './student-profile-card.html';
+import './student-profile-card';
+
+import './student-semester-card.html';
+import './student-semester-card';
+
 import './student-teaser-widget.html';
 import './student-teaser-widget.js';
 
 import './student-teaser-widget-video.html';
 import './student-teaser-widget-video.js';
+
+import './student-user-card.html';
+import './student-user-card';

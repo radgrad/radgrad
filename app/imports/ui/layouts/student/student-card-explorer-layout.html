@@ -1,4 +1,4 @@
-<template name="Student_Explorer_Layout">
+<template name="Student_Card_Explorer_Layout">
 
   <div class="layout-page">
     <div class="ui container stackable grid ">
@@ -6,7 +6,7 @@
         {{> Help_Panel_Widget }}
       </div>
       <div class="three wide column">
-        {{> Student_Explorer_Menu menuAddedList=addedList menuNonAddedList=nonAddedList menuCareerList=careerList type=type }}
+        {{> Student_Card_Explorer_Menu menuAddedList=addedList menuCareerList=careerList type=type }}
       </div>
       <div class="thirteen wide column">
         {{> Template.contentBlock}}

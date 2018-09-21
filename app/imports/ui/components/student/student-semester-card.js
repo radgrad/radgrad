@@ -33,7 +33,7 @@ function interestedStudentsHelper(item, type) {
   return interested;
 }
 
-Template.Student_Of_Interest_Card.helpers({
+Template.Student_Semester_Card.helpers({
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
   },
@@ -45,9 +45,9 @@ Template.Student_Of_Interest_Card.helpers({
         ret = 'grey';
       }
     } else
-      if (_.includes(profile.hiddenOpportunityIDs, this.item._id)) {
-        ret = 'grey';
-      }
+    if (_.includes(profile.hiddenOpportunityIDs, this.item._id)) {
+      ret = 'grey';
+    }
     return ret;
   },
   interestedStudents(course) {
@@ -132,7 +132,7 @@ Template.Student_Of_Interest_Card.helpers({
   },
 });
 
-Template.Student_Of_Interest_Card.events({
+Template.Student_Semester_Card.events({
   'click .hide': function clickItemHide(event) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
@@ -179,7 +179,6 @@ Template.Student_Of_Interest_Card.events({
   },
 });
 
-Template.Student_Of_Interest_Card.onRendered(function interestCardOnRendered() {
-  this.$('.ui .img')
-    .popup();
+Template.Student_Semester_Card.onRendered(function semesterCardOnRendered() {
+  this.$('.ui .image').popup();
 });

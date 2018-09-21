@@ -42,9 +42,6 @@ function trackPath() {
   }
 }
 
-/*                        APP LOGGING                        */
-
-
 /*                        ADMIN ROUTES                       */
 
 // Please don't make subgroups of this group. I use the group name to help with authorization.
@@ -761,12 +758,30 @@ studentRoutes.route('/explorer/career-goals/:careerGoal', {
   },
 });
 
+export const studentCardExplorerCareerGoalsPageRouteName = 'Student_Card_Explorer_CareerGoals_Page';
+studentRoutes.route('/explorer/career-goals/', {
+  name: studentCardExplorerCareerGoalsPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerCareerGoalsPageRouteName });
+  },
+});
+
 export const studentExplorerCoursesPageRouteName = 'Student_Explorer_Courses_Page';
 studentRoutes.route('/explorer/courses/:course', {
   name: studentExplorerCoursesPageRouteName,
   triggersEnter: [trackPath],
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerCoursesPageRouteName });
+  },
+});
+
+export const studentCardExplorerCoursesPageRouteName = 'Student_Card_Explorer_Courses_Page';
+studentRoutes.route('/explorer/courses/', {
+  name: studentCardExplorerCoursesPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerCoursesPageRouteName });
   },
 });
 
@@ -788,12 +803,30 @@ studentRoutes.route('/explorer/plans/:plan', {
   },
 });
 
+export const studentCardExplorerPlansPageRouteName = 'Student_Card_Explorer_Plans_Page';
+studentRoutes.route('/explorer/plans/', {
+  name: studentCardExplorerPlansPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerPlansPageRouteName });
+  },
+});
+
 export const studentExplorerInterestsPageRouteName = 'Student_Explorer_Interests_Page';
 studentRoutes.route('/explorer/interests/:interest', {
   name: studentExplorerInterestsPageRouteName,
   triggersEnter: [trackPath],
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerInterestsPageRouteName });
+  },
+});
+
+export const studentCardExplorerInterestsPageRouteName = 'Student_Card_Explorer_Interests_Page';
+studentRoutes.route('/explorer/interests/', {
+  name: studentCardExplorerInterestsPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerInterestsPageRouteName });
   },
 });
 
@@ -806,12 +839,31 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
   },
 });
 
+export const studentCardExplorerOpportunitiesPageRouteName = 'Student_Card_Explorer_Opportunities_Page';
+studentRoutes.route('/explorer/opportunities/', {
+  name: studentCardExplorerOpportunitiesPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerOpportunitiesPageRouteName });
+  },
+});
+
+
 export const studentExplorerUsersPageRouteName = 'Student_Explorer_Users_Page';
 studentRoutes.route('/explorer/users/:explorerUserName', {
   name: studentExplorerUsersPageRouteName,
   triggersEnter: [trackPath],
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerUsersPageRouteName });
+  },
+});
+
+export const studentCardExplorerUsersPageRouteName = 'Student_Card_Explorer_Users_Page';
+studentRoutes.route('/explorer/users/', {
+  name: studentCardExplorerUsersPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerUsersPageRouteName });
   },
 });
 

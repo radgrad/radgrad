@@ -1,4 +1,4 @@
-<template name="Explore_User_Widget">
+<template name="Student_User_Card">
   <div class="ui fluid card">
     <div class="content">
       <img class="right floated tiny ui image" src="{{picture}}" style="width: 90px; margin-bottom: 0;">
@@ -43,17 +43,8 @@
         {{> User_Answers_Component userID=userID}}
       </div>
     {{/if}}
-      <!--{{#if or isStudent isAlumni}}-->
-    <!--{{> User_Course_Component userID=userID}}-->
-      <!--{{/if}}-->
-      <!--{{#if or isStudent isAlumni}}-->
-    <!--<div class="content">-->
-    <!--{{> User_Opportunity_Component userID=userID}}-->
-    <!--</div>-->
-      <!--{{/if}}-->
     <div class="extra content">
-      {{> User_Career_Goals_Component labelSize='mini' userID=userID}}
-      {{> User_Interests_Component labelSize='mini' userID=userID}}
+      {{> Interest_List item=user size='mini'}}
     </div>
   </div>
 </template>

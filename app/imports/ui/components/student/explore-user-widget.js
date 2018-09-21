@@ -1,10 +1,10 @@
 import { Template } from 'meteor/templating';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
+// import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
-import { getExplorerUserID } from '../../utilities/template-helpers';
+// import { getExplorerUserID } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
@@ -12,7 +12,7 @@ Template.Explore_User_Widget.onCreated(function exploreUserWidgetOnCreated() {
     if (this.data.userID) {
       this.userID = this.data.userID;
     }
-    this.subscribe(CourseInstances.publicationNames.studentID, getExplorerUserID());
+    // this.subscribe(CourseInstances.publicationNames.studentID, getExplorerUserID());
   });
 });
 
