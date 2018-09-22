@@ -606,6 +606,14 @@ FlowRouter.route('/explorer/plans/:plan', {
   },
 });
 
+export const landingCardExplorerInterestsPageRouteName = 'Landing_Card_Explorer_Interests_Page';
+FlowRouter.route('/explorer/interests/', {
+  name: landingCardExplorerInterestsPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerInterestsPageRouteName });
+  },
+});
+
 export const landingExplorerInterestsPageRouteName = 'Landing_Explorer_Interests_Page';
 FlowRouter.route('/explorer/interests/:interest', {
   name: landingExplorerInterestsPageRouteName,

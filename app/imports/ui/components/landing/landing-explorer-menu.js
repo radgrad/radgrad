@@ -64,38 +64,6 @@ Template.Landing_Explorer_Menu.helpers({
     }
     return true;
   },
-  firstCareerGoal() {
-    let ret;
-    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
-    if (careerGoals.length > 0) {
-      ret = Slugs.findDoc(careerGoals[0].slugID).name;
-    }
-    return ret;
-  },
-  firstCourse() {
-    let ret;
-    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
-    if (courses.length > 0) {
-      ret = Slugs.findDoc(courses[0].slugID).name;
-    }
-    return ret;
-  },
-  firstDegree() {
-    let ret;
-    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
-    if (degrees.length > 0) {
-      ret = Slugs.findDoc(degrees[0].slugID).name;
-    }
-    return ret;
-  },
-  firstInterest() {
-    let ret;
-    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    if (interests.length > 0) {
-      ret = Slugs.findDoc(interests[0].slugID).name;
-    }
-    return ret;
-  },
   firstOpportunity() {
     let ret;
     const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
@@ -103,14 +71,6 @@ Template.Landing_Explorer_Menu.helpers({
       ret = Slugs.findDoc(opportunities[0].slugID).name;
     }
     return ret;
-  },
-  firstPlan() {
-    const semesterNumber = AcademicPlans.getLatestSemesterNumber();
-    const plan = AcademicPlans.findOne({ semesterNumber });
-    if (plan) {
-      return (Slugs.findDoc(plan.slugID)).name;
-    }
-    return '';
   },
   getRoute() {
     return FlowRouter.getRouteName();
@@ -124,9 +84,9 @@ Template.Landing_Explorer_Menu.helpers({
         return 'Courses';
       case RouteNames.landingCardExplorerPlansPageRouteName:
         return 'Academic Plans';
-      case RouteNames.landingExplorerDegreesPageRouteName:
+      case RouteNames.landingCardExplorerDegreesPageRouteName:
         return 'Degrees';
-      case RouteNames.landingExplorerInterestsPageRouteName:
+      case RouteNames.landingCardExplorerInterestsPageRouteName:
         return 'Interests';
       case RouteNames.landingExplorerOpportunitiesPageRouteName:
         return 'Opportunities';
@@ -135,6 +95,9 @@ Template.Landing_Explorer_Menu.helpers({
       default:
         return 'Select Explorer';
     }
+  },
+  interestsCardRouteName() {
+    return RouteNames.landingCardExplorerInterestsPageRouteName;
   },
   interestsRouteName() {
     return RouteNames.landingExplorerInterestsPageRouteName;
