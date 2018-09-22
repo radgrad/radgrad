@@ -622,6 +622,14 @@ FlowRouter.route('/explorer/interests/:interest', {
   },
 });
 
+export const landingCardExplorerOpportunitiesPageRouteName = 'Landing_Card_Explorer_Opportunities_Page';
+FlowRouter.route('/explorer/opportunities/', {
+  name: landingCardExplorerOpportunitiesPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerOpportunitiesPageRouteName });
+  },
+});
+
 export const landingExplorerOpportunitiesPageRouteName = 'Landing_Explorer_Opportunities_Page';
 FlowRouter.route('/explorer/opportunities/:opportunity', {
   name: landingExplorerOpportunitiesPageRouteName,

@@ -10,6 +10,9 @@ import './landing-card-explorer-degrees-page';
 import './landing-card-explorer-interests-page.html';
 import './landing-card-explorer-interests-page';
 
+import './landing-card-explorer-opportunities-page.html';
+import './landing-card-explorer-opportunities-page';
+
 import './landing-card-explorer-plans-page.html';
 import './landing-card-explorer-plans-page';
 

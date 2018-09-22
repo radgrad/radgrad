@@ -1,15 +1,8 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
-import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
-import { Courses } from '../../../api/course/CourseCollection.js';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Landing_Explorer_Menu.helpers({
   academicPlansCardRouteName() {
@@ -54,6 +47,9 @@ Template.Landing_Explorer_Menu.helpers({
   coursesRouteName() {
     return RouteNames.landingExplorerCoursesPageRouteName;
   },
+  degreesCardRouteName() {
+    return RouteNames.landingCardExplorerDegreesPageRouteName;
+  },
   degreesRouteName() {
     return RouteNames.landingExplorerDegreesPageRouteName;
   },
@@ -63,14 +59,6 @@ Template.Landing_Explorer_Menu.helpers({
       return false;
     }
     return true;
-  },
-  firstOpportunity() {
-    let ret;
-    const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    if (opportunities.length > 0) {
-      ret = Slugs.findDoc(opportunities[0].slugID).name;
-    }
-    return ret;
   },
   getRoute() {
     return FlowRouter.getRouteName();
@@ -88,10 +76,8 @@ Template.Landing_Explorer_Menu.helpers({
         return 'Degrees';
       case RouteNames.landingCardExplorerInterestsPageRouteName:
         return 'Interests';
-      case RouteNames.landingExplorerOpportunitiesPageRouteName:
+      case RouteNames.landingCardExplorerOpportunitiesPageRouteName:
         return 'Opportunities';
-      case RouteNames.landingExplorerUsersPageRouteName:
-        return 'Users';
       default:
         return 'Select Explorer';
     }
@@ -116,40 +102,24 @@ Template.Landing_Explorer_Menu.helpers({
     const iceString = `(${item.ice.i}/${item.ice.c}/${item.ice.e})`;
     return `${item.name} ${iceString}`;
   },
+  opportunitiesCardRouteName() {
+    return RouteNames.landingCardExplorerOpportunitiesPageRouteName;
+  },
   opportunitiesRouteName() {
     return RouteNames.landingExplorerOpportunitiesPageRouteName;
   },
+  showBackButton() {
+    const page = [];
+    page.push(FlowRouter.getParam('careerGoal'));
+    page.push(FlowRouter.getParam('course'));
+    page.push(FlowRouter.getParam('degree'));
+    page.push(FlowRouter.getParam('interest'));
+    page.push(FlowRouter.getParam('opportunity'));
+    page.push(FlowRouter.getParam('plan'));
+    return _.some(page);
+  },
   slugName(item) {
     return Slugs.findDoc(item.slugID).name;
-  },
-  userCareerGoals(careerGoal) { // eslint-disable-line
-    return '';
-  },
-  userCourses(course) {
-    let ret = '';
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    if (ci.length > 0) {
-      ret = 'check green circle outline icon';
-    }
-    return ret;
-  },
-  userDegrees(degree) { // eslint-disable-line
-    return '';
-  },
-  userInterests(interest) { // eslint-disable-line
-    return '';
-  },
-  userOpportunities(opportunity) { // eslint-disable-line
-    return '';
-  },
-  userPlans(plan) { // eslint-disable-line
-    return '';
-  },
-  usersRouteName() {
-    return RouteNames.landingExplorerUsersPageRouteName;
   },
 });
 

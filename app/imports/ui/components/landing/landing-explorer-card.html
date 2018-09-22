@@ -26,8 +26,14 @@
           {{else}}
             {{#if typeInterests}}
               <a class="ui button"
-                 href="{{pathFor interestRouteName username=routeUserName interest=(itemSlug item)}}"><i
+                 href="{{pathFor interestRouteName interest=(itemSlug item)}}"><i
                   class="chevron circle right icon"></i><br>View More</a>
+            {{else}}
+              {{#if typeOpportunities}}
+                <a class="ui button"
+                   href="{{pathFor opportunityRouteName opportunity=(itemSlug item)}}"><i
+                    class="chevron circle right icon"></i><br>View More</a>
+              {{/if}}
             {{/if}}
           {{/if}}
         {{/if}}

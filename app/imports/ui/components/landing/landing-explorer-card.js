@@ -35,6 +35,9 @@ Template.Landing_Explorer_Card.helpers({
   itemSlug(item) {
     return Slugs.findDoc(item.slugID).name;
   },
+  opportunityRouteName() {
+    return RouteNames.landingExplorerOpportunitiesPageRouteName;
+  },
   typeCareerGoals() {
     return (this.type === 'careergoals');
   },
@@ -46,5 +49,8 @@ Template.Landing_Explorer_Card.helpers({
   },
   typeInterests() {
     return (this.type === 'interests');
+  },
+  typeOpportunities() {
+    return (this.type === 'opportunities');
   },
 });

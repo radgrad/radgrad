@@ -6,8 +6,14 @@ import './landing-card-explorer-careergoals-widget';
 import './landing-card-explorer-courses-widget.html';
 import './landing-card-explorer-courses-widget';
 
+import './landing-card-explorer-degrees-widget.html';
+import './landing-card-explorer-degrees-widget';
+
 import './landing-card-explorer-interests-widget.html';
 import './landing-card-explorer-interests-widget';
+
+import './landing-card-explorer-opportunities-widget.html';
+import './landing-card-explorer-opportunities-widget';
 
 import './landing-card-explorer-plans-widget.html';
 import './landing-card-explorer-plans-widget';
