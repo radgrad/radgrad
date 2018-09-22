@@ -4,6 +4,9 @@ import './landing-card-explorer-careergoals-page';
 import './landing-card-explorer-courses-page.html';
 import './landing-card-explorer-courses-page';
 
+import './landing-card-explorer-degrees-page.html';
+import './landing-card-explorer-degrees-page';
+
 import './landing-explorer-careergoals-page.html';
 import './landing-explorer-careergoals-page';
 

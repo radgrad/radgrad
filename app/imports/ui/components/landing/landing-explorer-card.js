@@ -13,6 +13,9 @@ Template.Landing_Explorer_Card.helpers({
   coursesRouteName() {
     return RouteNames.landingExplorerCoursesPageRouteName;
   },
+  degreesRouteName() {
+    return RouteNames.landingExplorerDegreesPageRouteName;
+  },
   interestRouteName() {
     return RouteNames.landingExplorerInterestsPageRouteName;
   },
@@ -38,20 +41,10 @@ Template.Landing_Explorer_Card.helpers({
   typeCourses() {
     return (this.type === 'courses');
   },
+  typeDegrees() {
+    return (this.type === 'degrees');
+  },
   typeInterests() {
     return (this.type === 'interests');
   },
 });
-
-Template.Landing_Explorer_Card.events({
-  // add your events here
-});
-
-Template.Landing_Explorer_Card.onRendered(function landingExplorerCardOnRendered() {
-  // add your statement here
-});
-
-Template.Landing_Explorer_Card.onDestroyed(function landingExplorerCardOnDestroyed() {
-  // add your statement here
-});
-

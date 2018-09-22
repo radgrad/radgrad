@@ -16,7 +16,7 @@ Template.Landing_Section_2.helpers({
     return RouteNames.landingCardExplorerCoursesPageRouteName;
   },
   degreesRouteName() {
-    return RouteNames.landingExplorerDegreesPageRouteName;
+    return RouteNames.landingCardExplorerDegreesPageRouteName;
   },
   firstCourse() {
     let ret = 'ics_361';
