@@ -1,11 +1,13 @@
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+
+import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '../../../startup/client/router';
-import { Semesters } from '../../../api/semester/SemesterCollection';
 
 Template.Student_Profile_Card.onCreated(function studentProfileCardOnCreated() {
   this.hidden = new ReactiveVar(true);
@@ -31,13 +33,27 @@ function interestedStudentsHelper(item, type) {
 
 Template.Student_Profile_Card.helpers({
   careerGoalsRouteName() {
-    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerCareerGoalsPageRouteName;
+    } else
+    if (group === 'faculty') {
+      return RouteNames.facultyExplorerCareerGoalsPageRouteName;
+    }
+    return RouteNames.mentorExplorerCareerGoalsPageRouteName;
   },
   hidden() {
     return Template.instance().hidden.get();
   },
   interestRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerInterestsPageRouteName;
+    } else
+    if (group === 'faculty') {
+      return RouteNames.facultyExplorerInterestsPageRouteName;
+    }
+    return RouteNames.mentorExplorerInterestsPageRouteName;
   },
   interestedStudents(course) {
     return interestedStudentsHelper(course, this.type);
@@ -91,22 +107,20 @@ Template.Student_Profile_Card.helpers({
     return (this.type === 'interests');
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerUsersPageRouteName;
+    } else
+    if (group === 'faculty') {
+      return RouteNames.facultyExplorerUsersPageRouteName;
+    }
+    return RouteNames.mentorExplorerUsersPageRouteName;
   },
   userSlug(studentID) {
     return Users.getProfile(studentID).username;
   },
 });
 
-Template.Student_Profile_Card.events({
-  // add your events here
-});
-
 Template.Student_Profile_Card.onRendered(function studentProfileCardOnRendered() {
   this.$('.ui .image').popup();
 });
-
-Template.Student_Profile_Card.onDestroyed(function studentProfileCardOnDestroyed() {
-  // add your statement here
-});
-

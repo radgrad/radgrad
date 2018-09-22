@@ -436,6 +436,14 @@ facultyRoutes.route('/explorer', {
   },
 });
 
+export const facultyCardExplorerCareerGoalsPageRouteName = 'Faculty_Card_Explorer_CareerGoals_Page';
+facultyRoutes.route('/explorer/career-goals/', {
+  name: facultyCardExplorerCareerGoalsPageRouteName,
+  action() {
+    BlazeLayout.render('Faculty_Layout', { main: facultyCardExplorerCareerGoalsPageRouteName });
+  },
+});
+
 export const facultyExplorerCareerGoalsPageRouteName = 'Faculty_Explorer_CareerGoals_Page';
 facultyRoutes.route('/explorer/career-goals/:careerGoal', {
   name: facultyExplorerCareerGoalsPageRouteName,

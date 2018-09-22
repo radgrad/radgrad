@@ -1,4 +1,7 @@
 import './course-scoreboard-page.html';
+import './faculty-card-explorer-careergoals-page.html';
+import './faculty-card-explorer-careergoals-page';
+
 import './faculty-home-page.html';
 import './faculty-explorer-page.html';
 import './faculty-explorer-careergoals-page.html';

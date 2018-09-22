@@ -221,10 +221,15 @@ Template.Student_Explorer_Menu.helpers({
   },
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
+    console.log(routeName);
     switch (routeName) {
       case RouteNames.studentExplorerCareerGoalsPageRouteName:
+      case RouteNames.facultyExplorerCareerGoalsPageRouteName:
+      case RouteNames.mentorExplorerCareerGoalsPageRouteName:
         return 'Career Goals';
       case RouteNames.studentExplorerCoursesPageRouteName:
+      case RouteNames.facultyExplorerCoursesPageRouteName:
+      case RouteNames.mentorExplorerCoursesPageRouteName:
         return 'Courses';
       case RouteNames.studentExplorerPlansPageRouteName:
         return 'Academic Plans';
@@ -355,7 +360,7 @@ Template.Student_Explorer_Menu.helpers({
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else
     if (group === 'faculty') {
-      return RouteNames.facultyExplorerUsersPageRouteName;
+      return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
     return RouteNames.mentorExplorerUsersPageRouteName;
   },
