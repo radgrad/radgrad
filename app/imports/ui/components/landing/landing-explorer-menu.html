@@ -7,8 +7,8 @@
          href="{{pathFor academicPlansCardRouteName}}">Academic Plans</a>
       <a class="{{isActiveRoute careerGoalsCardRouteName}} item"
          href="{{pathFor careerGoalsCardRouteName}}">Career Goals</a>
-      <a class="{{isActiveRoute coursesRouteName}} item"
-         href="{{pathFor coursesRouteName course=firstCourse}}">Courses</a>
+      <a class="{{isActiveRoute coursesCardRouteName}} item"
+         href="{{pathFor coursesCardRouteName}}">Courses</a>
       <a class="{{isActiveRoute interestsRouteName}} item"
          href="{{pathFor interestsRouteName username=routeUserName interest=firstInterest}}">Interests</a>
       <a class="{{isActiveRoute opportunitiesRouteName}} item"
@@ -24,17 +24,29 @@
         {{#if isType type 'courses'}}
           {{#each listItem in menuAddedList}}
             <a class="{{classType (slugName listItem) 'course'}}" data-tab="tab-name"
-               href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}"><i
+               href="{{pathFor coursesRouteName course=(slugName listItem)}}"><i
                 class="{{userCourses listItem}}"></i>{{courseName listItem}}</a>
           {{/each}}
           <div class="divider"></div>
           {{#each listItem in menuNonAddedList}}
             <a class="{{classType (slugName listItem) 'course'}}" data-tab="tab-name"
-               href="{{pathFor coursesRouteName username=routeUserName course=(slugName listItem)}}"><i
+               href="{{pathFor coursesRouteName course=(slugName listItem)}}"><i
                 class="{{userCourses listItem}}"></i>{{courseName listItem}}</a>
           {{/each}}
         {{else}}
           {{#if isType type 'careerGoals'}}
+            {{#each listItem in menuAddedList}}
+              {{#each listItem in menuAddedList}}
+                <a class="{{classType (slugName listItem) 'careergoal'}}" data-tab="tab-name"
+                   href="{{pathFor careerGoalsRouteName  careerGoal=(slugName listItem)}}"><i
+                    class="{{userCareerGoals listItem}}"></i>{{itemName listItem}}</a>
+              {{/each}}
+              {{#each listItem in menuNonAddedList}}
+                <a class="{{classType (slugName listItem) 'careergoal'}}" data-tab="tab-name"
+                   href="{{pathFor careerGoalsRouteName careerGoal=(slugName listItem)}}"><i
+                    class="{{userCareerGoals listItem}}"></i>{{itemName listItem}}</a>
+              {{/each}}
+            {{/each}}
           {{else}}
             {{#if isType type 'degrees'}}
               <div class="header">
@@ -119,8 +131,9 @@
     {{else}}
       {{#if isType type 'careerGoals'}}
         {{#if isCardPage getRoute}}
-          <!--<a class="ui button" href="{{pathFor careerGoalsCardRouteName}}"><i class="chevron circle left icon"></i><br>Back-->
-            <!--to Career Goals</a>-->
+          <!--<a class="ui button" href="{{pathFor
+              careerGoalsCardRouteName}}"><i class="chevron circle left icon"></i><br>Back-->
+          <!--to Career Goals</a>-->
         {{/if}}
       {{else}}
         {{#if isType type 'degrees'}}

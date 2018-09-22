@@ -48,8 +48,11 @@ Template.Landing_Explorer_Menu.helpers({
   courseName(course) {
     return course.shortName;
   },
-  coursesRouteName() {
+  coursesCardRouteName() {
     return RouteNames.landingCardExplorerCoursesPageRouteName;
+  },
+  coursesRouteName() {
+    return RouteNames.landingExplorerCoursesPageRouteName;
   },
   degreesRouteName() {
     return RouteNames.landingExplorerDegreesPageRouteName;
