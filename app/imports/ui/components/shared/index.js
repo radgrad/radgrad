@@ -6,6 +6,12 @@ import './back-to-top-button.html';
 import './back-to-top-button.js';
 import './back-to-top-button.css';
 
+import './card-explorer-menu.html';
+import './card-explorer-menu';
+
+import './explorer-menu.html';
+import './explorer-menu';
+
 import './get-user-id-from-route';
 
 import './help-panel-widget.html';

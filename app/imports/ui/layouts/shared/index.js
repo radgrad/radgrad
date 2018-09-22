@@ -1,4 +1,8 @@
 /** @namespace ui/layouts/shared */
+import './card-explorer-layout.html';
+
+import './explorer-layout.html';
+
 import './first-menu.html';
 import './first-menu.js';
 
