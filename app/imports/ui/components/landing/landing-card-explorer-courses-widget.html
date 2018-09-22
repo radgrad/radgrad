@@ -1,13 +1,13 @@
-<template name="Landing_Card_Explorer_CareerGoals_Widget">
+<template name="Landing_Card_Explorer_Courses_Widget">
   <div class="ui padded segment">
     <div class="ui dividing header">
       <h4><span
-          style="text-transform: uppercase;">CAREER GOALS</span> {{> Widget_Header_Number inputValue=itemCount}}</h4>
+          style="text-transform: uppercase;">COURSES</span> {{> Widget_Header_Number inputValue=itemCount}}</h4>
     </div>
     <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
          class="ui stackable two cards">
-      {{#each career in careers}}
-        {{> Landing_Explorer_Card item=career type='careergoals'}}
+      {{#each course in courses}}
+        {{> Landing_Explorer_Card item=course type='courses'}}
       {{/each}}
     </div>
   </div>

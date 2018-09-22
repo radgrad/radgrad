@@ -3,6 +3,12 @@
 import './landing-card-explorer-careergoals-widget.html';
 import './landing-card-explorer-careergoals-widget';
 
+import './landing-card-explorer-courses-widget.html';
+import './landing-card-explorer-courses-widget';
+
+import './landing-explorer-card.html';
+import './landing-explorer-card';
+
 import './landing-explorer-careergoals-widget.html';
 import './landing-explorer-careergoals-widget';
 

@@ -15,6 +15,9 @@ Template.Landing_Explorer_Menu.helpers({
   academicPlansRouteName() {
     return RouteNames.landingExplorerPlansPageRouteName;
   },
+  careerGoalsCardRouteName() {
+    return RouteNames.landingCardExplorerCareerGoalsPageRouteName;
+  },
   careerGoalsRouteName() {
     return RouteNames.landingExplorerCareerGoalsPageRouteName;
   },
@@ -43,7 +46,7 @@ Template.Landing_Explorer_Menu.helpers({
     return course.shortName;
   },
   coursesRouteName() {
-    return RouteNames.landingExplorerCoursesPageRouteName;
+    return RouteNames.landingCardExplorerCoursesPageRouteName;
   },
   degreesRouteName() {
     return RouteNames.landingExplorerDegreesPageRouteName;
@@ -103,6 +106,9 @@ Template.Landing_Explorer_Menu.helpers({
     }
     return '';
   },
+  getRoute() {
+    return FlowRouter.getRouteName();
+  },
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
@@ -126,6 +132,10 @@ Template.Landing_Explorer_Menu.helpers({
   },
   interestsRouteName() {
     return RouteNames.landingExplorerInterestsPageRouteName;
+  },
+  isCardPage(type) {
+    const routeName = FlowRouter.getRouteName();
+    return type === routeName;
   },
   isType(type, value) {
     return type === value;
