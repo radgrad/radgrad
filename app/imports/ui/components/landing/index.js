@@ -6,6 +6,9 @@ import './landing-card-explorer-careergoals-widget';
 import './landing-card-explorer-courses-widget.html';
 import './landing-card-explorer-courses-widget';
 
+import './landing-card-explorer-plans-widget.html';
+import './landing-card-explorer-plans-widget';
+
 import './landing-explorer-card.html';
 import './landing-explorer-card';
 
@@ -26,6 +29,9 @@ import './landing-explorer-menu';
 
 import './landing-explorer-opportunities-widget.html';
 import './landing-explorer-opportunities-widget';
+
+import './landing-explorer-plan-card.html';
+import './landing-explorer-plan-card';
 
 import './landing-explorer-plans-widget.html';
 import './landing-explorer-plans-widget';

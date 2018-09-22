@@ -1,0 +1,14 @@
+<template name="Landing_Explorer_Plan_Card">
+  <div class="ui card radgrad-interest-card">
+    <div class="content">
+      <div class="ui dividing header">{{itemName item}}</div>
+      <p>{{itemShortDescription item}}...</p>
+      {{> Academic_Plan_Static_Viewer plan=item}}
+    </div>
+    <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
+      <a class="ui button"
+         href="{{pathFor academicPlansRouteName plan=(itemSlug item)}}"><i
+          class="chevron circle right icon"></i><br>View More</a>
+    </div>
+  </div>
+</template>

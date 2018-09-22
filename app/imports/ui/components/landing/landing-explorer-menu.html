@@ -3,8 +3,8 @@
     <i class="dropdown icon"></i>
     <div>{{getRouteName}}</div>
     <div class="menu">
-      <a class="{{isActiveRoute academicPlansRouteName}} item"
-         href="{{pathFor academicPlansRouteName username=routeUserName plan=firstPlan}}">Academic Plans</a>
+      <a class="{{isActiveRoute academicPlansCardRouteName}} item"
+         href="{{pathFor academicPlansCardRouteName}}">Academic Plans</a>
       <a class="{{isActiveRoute careerGoalsCardRouteName}} item"
          href="{{pathFor careerGoalsCardRouteName}}">Career Goals</a>
       <a class="{{isActiveRoute coursesRouteName}} item"
@@ -124,21 +124,6 @@
         {{/if}}
       {{else}}
         {{#if isType type 'degrees'}}
-          <h4 class="ui dividing header">
-            DESIRED DEGREES
-          </h4>
-          {{#each listItem in menuAddedList}}
-            <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name"
-               href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}"><i
-                style="position: absolute; margin-left: -20px;" class="{{userDegrees listItem}}"></i>{{itemName
-                listItem}}</a>
-          {{/each}}
-          {{#each listItem in menuNonAddedList}}
-            <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name"
-               href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}"><i
-                style="position: absolute; margin-left: -20px;" class="{{userDegrees listItem}}"></i>{{itemName
-                listItem}}</a>
-          {{/each}}
         {{else}}
           {{#if isType type 'opportunities'}}
             <h4 class="ui dividing header">
@@ -181,21 +166,7 @@
               {{/each}}
             {{else}}
               {{#if isType type 'plans'}}
-                <div class="ui dividing header">
-                  ACADEMIC PLANS
-                </div>
-                {{#each listItem in menuAddedList}}
-                  <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
-                     href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
-                      class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>
-                {{/each}}
-                {{#each listItem in menuNonAddedList}}
-                  <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
-                     href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
-                      class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>
-                {{/each}}
               {{/if}}
-
             {{/if}}
           {{/if}}
         {{/if}}

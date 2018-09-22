@@ -590,6 +590,14 @@ FlowRouter.route('/explorer/degrees/:degree', {
   },
 });
 
+export const landingCardExplorerPlansPageRouteName = 'Landing_Card_Explorer_Plans_Page';
+FlowRouter.route('/explorer/plans/', {
+  name: landingCardExplorerPlansPageRouteName,
+  action() {
+    BlazeLayout.render('Landing_Dynamic_Layout', { main: landingCardExplorerPlansPageRouteName });
+  },
+});
+
 export const landingExplorerPlansPageRouteName = 'Landing_Explorer_Plans_Page';
 FlowRouter.route('/explorer/plans/:plan', {
   name: landingExplorerPlansPageRouteName,

@@ -12,6 +12,9 @@ import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Landing_Explorer_Menu.helpers({
+  academicPlansCardRouteName() {
+    return RouteNames.landingCardExplorerPlansPageRouteName;
+  },
   academicPlansRouteName() {
     return RouteNames.landingExplorerPlansPageRouteName;
   },
@@ -112,19 +115,19 @@ Template.Landing_Explorer_Menu.helpers({
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
-      case RouteNames.studentExplorerCareerGoalsPageRouteName:
+      case RouteNames.landingCardExplorerCareerGoalsPageRouteName:
         return 'Career Goals';
-      case RouteNames.studentExplorerCoursesPageRouteName:
+      case RouteNames.landingCardExplorerCoursesPageRouteName:
         return 'Courses';
-      case RouteNames.studentExplorerPlansPageRouteName:
+      case RouteNames.landingCardExplorerPlansPageRouteName:
         return 'Academic Plans';
-      case RouteNames.studentExplorerDegreesPageRouteName:
+      case RouteNames.landingExplorerDegreesPageRouteName:
         return 'Degrees';
-      case RouteNames.studentExplorerInterestsPageRouteName:
+      case RouteNames.landingExplorerInterestsPageRouteName:
         return 'Interests';
-      case RouteNames.studentExplorerOpportunitiesPageRouteName:
+      case RouteNames.landingExplorerOpportunitiesPageRouteName:
         return 'Opportunities';
-      case RouteNames.studentExplorerUsersPageRouteName:
+      case RouteNames.landingExplorerUsersPageRouteName:
         return 'Users';
       default:
         return 'Select Explorer';
