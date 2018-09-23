@@ -59,6 +59,7 @@ import '/imports/ui/pages/advisor';
 import '/imports/ui/pages/faculty';
 import '/imports/ui/pages/landing';
 import '/imports/ui/pages/mentor';
+import '/imports/ui/pages/shared';
 import '/imports/ui/pages/student';
 import '/imports/ui/pages/guidedtour';
 

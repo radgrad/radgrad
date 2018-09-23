@@ -6,6 +6,9 @@ import './back-to-top-button.html';
 import './back-to-top-button.js';
 import './back-to-top-button.css';
 
+import './card-explorer-careergoals-widget.html';
+import './card-explorer-careergoals-widget';
+
 import './card-explorer-menu.html';
 import './card-explorer-menu';
 
@@ -28,6 +31,12 @@ import './moderation.js';
 
 import './observe-interactions.html';
 import './observe-interactions';
+
+import './profile-add.html';
+import './profile-add';
+
+import './profile-card.html';
+import './profile-card';
 
 import './review-ratings.js';
 

@@ -440,7 +440,7 @@ export const facultyCardExplorerCareerGoalsPageRouteName = 'Faculty_Card_Explore
 facultyRoutes.route('/explorer/career-goals/', {
   name: facultyCardExplorerCareerGoalsPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyCardExplorerCareerGoalsPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_CareerGoals_Page' });
   },
 });
 
@@ -771,7 +771,7 @@ export const mentorCardExplorerCareerGoalsPageRouteName = 'Mentor_Card_Explorer_
 mentorRoutes.route('/explorer/career-goals/', {
   name: mentorCardExplorerCareerGoalsPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorCardExplorerCareerGoalsPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_CareerGoals_Page' });
   },
 });
 
@@ -893,21 +893,21 @@ const studentRoutes = FlowRouter.group({
   triggersExit: [removeBodyClass],
 });
 
+export const studentCardExplorerCareerGoalsPageRouteName = 'Student_Card_Explorer_CareerGoals_Page';
+studentRoutes.route('/explorer/career-goals/', {
+  name: studentCardExplorerCareerGoalsPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_CareerGoals_Page' });
+  },
+});
+
 export const studentExplorerCareerGoalsPageRouteName = 'Student_Explorer_CareerGoals_Page';
 studentRoutes.route('/explorer/career-goals/:careerGoal', {
   name: studentExplorerCareerGoalsPageRouteName,
   triggersEnter: [trackPath],
   action() {
     BlazeLayout.render('Student_Layout', { main: studentExplorerCareerGoalsPageRouteName });
-  },
-});
-
-export const studentCardExplorerCareerGoalsPageRouteName = 'Student_Card_Explorer_CareerGoals_Page';
-studentRoutes.route('/explorer/career-goals/', {
-  name: studentCardExplorerCareerGoalsPageRouteName,
-  triggersEnter: [trackPath],
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentCardExplorerCareerGoalsPageRouteName });
   },
 });
 

@@ -3,18 +3,15 @@
     <i class="dropdown icon"></i>
     <div>{{getRouteName}}</div>
     <div class="menu">
-      <a class="{{isActiveRoute careerGoalsRouteName}} item"
-         href="{{pathFor careerGoalsCardRouteName username=routeUserName}}">Career Goals</a>
-      <a class="{{isActiveRoute coursesRouteName}} item"
-         href="{{pathFor coursesCardRouteName username=routeUserName}}">Courses</a>
-      <a class="{{isActiveRoute academicPlansRouteName}} item"
-         href="{{pathFor academicPlansCardRouteName username=routeUserName}}">Academic Plans</a>
-      <a class="{{isActiveRoute interestsRouteName}} item"
-         href="{{pathFor interestsCardRouteName username=routeUserName}}">Interests</a>
-      <a class="{{isActiveRoute opportunitiesRouteName}} item"
-         href="{{pathFor opportunitiesCardRouteName username=routeUserName}}">Opportunities</a>
-      <a class="{{isActiveRoute usersRouteName}} item"
-         href="{{pathFor usersCardRouteName username=routeUserName}}">Users</a>
+      <a class="{{isActiveRoute careerGoalsRouteName}} item" href="{{pathFor careerGoalsCardRouteName}}">Career
+        Goals</a>
+      <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesCardRouteName}}">Courses</a>
+      <a class="{{isActiveRoute degreesRouteName}} item" href="{{pathFor degreesCardRouteName}}">Degrees</a>
+      <a class="{{isActiveRoute academicPlansRouteName}} item" href="{{pathFor academicPlansCardRouteName}}">Academic
+        Plans</a>
+      <a class="{{isActiveRoute interestsRouteName}} item" href="{{pathFor interestsCardRouteName}}">Interests</a>
+      <a class="{{isActiveRoute opportunitiesRouteName}} item" href="{{pathFor opportunitiesCardRouteName}}">Opportunities</a>
+      <a class="{{isActiveRoute usersRouteName}} item" href="{{pathFor usersCardRouteName}}">Users</a>
     </div>
   </div>
 
@@ -110,7 +107,8 @@
   <div class="ui vertical text menu mobile hidden">
     {{#if isType type 'courses'}}
       {{#if isInRole 'student'}}
-        <a class="ui button" href="{{pathFor coursesCardRouteName username=routeUserName}}"><i class="chevron circle left icon"></i><br>Back to Courses</a>
+        <a class="ui button" href="{{pathFor coursesCardRouteName username=routeUserName}}"><i
+            class="chevron circle left icon"></i><br>Back to Courses</a>
         <h4 class="ui dividing header">
           COURSES IN MY PLAN
         </h4>
@@ -124,7 +122,8 @@
     {{else}}
       {{#if isType type 'careerGoals'}}
         <p><a href="mailto:{{adminEmail}}?subject=New%20Career%20Goal%20Suggestion">Suggest a new Career Goal</a></p>
-        <a class="ui button" href="{{pathFor careerGoalsCardRouteName username=routeUserName}}"><i class="chevron circle left icon"></i><br>Back to Career Goals</a>
+        <a class="ui button" href="{{pathFor careerGoalsCardRouteName username=routeUserName}}"><i
+            class="chevron circle left icon"></i><br>Back to Career Goals</a>
         <h4 class="ui dividing header">
           MY CAREER GOALS
         </h4>
@@ -151,13 +150,15 @@
           {{#if isType type 'opportunities'}}
             <p><a href="mailto:{{adminEmail}}?subject=New%20Opportunity%20Suggestion">Suggest a new Opportunity</a></p>
             {{#if isInRole 'student'}}
-              <a class="ui button" href="{{pathFor opportunitiesCardRouteName username=routeUserName}}"><i class="chevron circle left icon"></i><br>Back to Opportunities</a>
+              <a class="ui button" href="{{pathFor opportunitiesCardRouteName username=routeUserName}}"><i
+                  class="chevron circle left icon"></i><br>Back to Opportunities</a>
               <h4 class="ui dividing header">
                 OPPORTUNITIES IN MY PLAN
               </h4>
             {{else}}
               {{#if isInRole 'faculty'}}
-                <a class="ui button" href="{{pathFor opportunitiesCardRouteName username=routeUserName}}"><i class="chevron circle left icon"></i><br>Back to Opportunities</a>
+                <a class="ui button" href="{{pathFor opportunitiesCardRouteName username=routeUserName}}"><i
+                    class="chevron circle left icon"></i><br>Back to Opportunities</a>
                 <h4 class="ui dividing header">
                   SPONSORED OPPORTUNITIES
                 </h4>
@@ -172,7 +173,8 @@
           {{else}}
             {{#if isType type 'interests'}}
               <p><a href="mailto:{{adminEmail}}?subject=New%20Interest%20Suggestion">Suggest a new Interest</a></p>
-              <a class="ui button" href="{{pathFor interestsCardRouteName username=routeUserName}}"><i class="chevron circle left icon"></i><br>Back to Interests</a>
+              <a class="ui button" href="{{pathFor interestsCardRouteName username=routeUserName}}"><i
+                  class="chevron circle left icon"></i><br>Back to Interests</a>
               <h4 class="ui dividing header">
                 MY INTERESTS
               </h4>
@@ -193,7 +195,8 @@
               {{/each}}
             {{else}}
               {{#if isType type 'plans'}}
-                <a class="ui button" href="{{pathFor academicPlansCardRouteName username=routeUserName}}"><i class="chevron circle left icon"></i><br>Back to Academic Plans</a>
+                <a class="ui button" href="{{pathFor academicPlansCardRouteName username=routeUserName}}"><i
+                    class="chevron circle left icon"></i><br>Back to Academic Plans</a>
                 <div class="ui dividing header">
                   MY ACADEMIC PLAN
                 </div>

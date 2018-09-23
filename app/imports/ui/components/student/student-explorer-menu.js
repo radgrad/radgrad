@@ -369,7 +369,7 @@ Template.Student_Explorer_Menu.helpers({
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else
       if (group === 'faculty') {
-        return RouteNames.facultCardyExplorerUsersPageRouteName;
+        return RouteNames.facultyCardExplorerUsersPageRouteName;
       }
     return RouteNames.mentorCardExplorerUsersPageRouteName;
   },
