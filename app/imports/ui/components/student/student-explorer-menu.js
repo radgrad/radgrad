@@ -221,7 +221,6 @@ Template.Student_Explorer_Menu.helpers({
   },
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
-    console.log(routeName);
     switch (routeName) {
       case RouteNames.studentExplorerCareerGoalsPageRouteName:
       case RouteNames.facultyExplorerCareerGoalsPageRouteName:
