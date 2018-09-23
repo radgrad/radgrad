@@ -5,14 +5,14 @@ import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { isLabel } from '../../utilities/template-helpers';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
-Template.Student_Explorer_CareerGoals_Widget.helpers({
+Template.Explorer_CareerGoals_Widget.helpers({
   careerGoalName(careerGoalSlugName) {
     const slug = Slugs.find({ name: careerGoalSlugName }).fetch();
     const course = CareerGoals.find({ slugID: slug[0]._id }).fetch();
@@ -58,7 +58,7 @@ Template.Student_Explorer_CareerGoals_Widget.helpers({
   },
 });
 
-Template.Student_Explorer_CareerGoals_Widget.events({
+Template.Explorer_CareerGoals_Widget.events({
   'click .addItem': function clickAddItem(event) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());

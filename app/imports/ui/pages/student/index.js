@@ -1,8 +1,4 @@
-import './student-card-explorer-careergoals-page.html';
-import './student-card-explorer-careergoals-page';
-
-import './student-card-explorer-courses-page.html';
-import './student-card-explorer-courses-page';
+/** @namespace ui/pages/student */
 
 import './student-card-explorer-interests-page.html';
 import './student-card-explorer-interests-page';
@@ -18,12 +14,6 @@ import './student-card-explorer-users-page';
 
 import './student-degree-planner-page.html';
 import './student-degree-planner-page.js';
-
-import './student-explorer-careergoals-page.html';
-import './student-explorer-careergoals-page.js';
-
-import './student-explorer-courses-page.html';
-import './student-explorer-courses-page.js';
 
 import './student-explorer-degrees-page.html';
 import './student-explorer-degrees-page.js';

@@ -5,7 +5,7 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
-Template.Student_Card_Explorer_Courses_Page.helpers({
+Template.Card_Explorer_Courses_Page.helpers({
   addedCourses() {
     const addedCourses = [];
     const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();

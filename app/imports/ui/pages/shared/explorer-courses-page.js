@@ -50,7 +50,7 @@ function prerequisites(course) {
   return [complete, incomplete, notInPlan];
 }
 
-Template.Student_Explorer_Courses_Page.helpers({
+Template.Explorer_Courses_Page.helpers({
   addedCourses() {
     const addedCourses = [];
     const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();

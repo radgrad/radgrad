@@ -1,4 +1,4 @@
-<template name="Student_Card_Explorer_Courses_Widget">
+<template name="Card_Explorer_Courses_Widget">
   <div class="ui padded segment">
     <div class="ui dividing header">
       <h4><span
@@ -20,7 +20,7 @@
     <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
          class="ui stackable two cards">
       {{#each course in courses}}
-        {{> Student_Semester_Card item=course type='courses' canAdd=true}}
+        {{> Semester_Card item=course type='courses' canAdd=true}}
       {{/each}}
     </div>
   </div>

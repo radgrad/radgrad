@@ -25,7 +25,7 @@ function numUsers(careerGoal, role) {
   return interestedUsers(careerGoal, role).length;
 }
 
-Template.Student_Explorer_CareerGoals_Page.helpers({
+Template.Explorer_CareerGoals_Page.helpers({
   addedCareerGoals() {
     const addedCareerGoals = [];
     const allCareerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();

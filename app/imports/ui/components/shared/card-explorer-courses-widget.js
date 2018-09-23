@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
@@ -8,7 +9,7 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 
-Template.Student_Card_Explorer_Courses_Widget.onCreated(function studentCardExplorerCoursesWidgetOnCreated() {
+Template.Card_Explorer_Courses_Widget.onCreated(function cardExplorerCoursesWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
 });
 
@@ -61,7 +62,7 @@ function hiddenCoursesHelper() {
   return [];
 }
 
-Template.Student_Card_Explorer_Courses_Widget.helpers({
+Template.Card_Explorer_Courses_Widget.helpers({
   courses() {
     const courses = matchingCourses();
     let visibleCourses;
@@ -78,7 +79,9 @@ Template.Student_Card_Explorer_Courses_Widget.helpers({
   hiddenExists() {
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());
-      return profile.hiddenCourseIDs.length !== 0;
+      if (profile.hiddenCourseIDs) {
+        return profile.hiddenCourseIDs.length !== 0;
+      }
     }
     return false;
   },
@@ -88,10 +91,9 @@ Template.Student_Card_Explorer_Courses_Widget.helpers({
   typeCourse() {
     return true;
   },
-
 });
 
-Template.Student_Card_Explorer_Courses_Widget.events({
+Template.Card_Explorer_Courses_Widget.events({
   'click .showHidden': function clickShowHidden(event) {
     event.preventDefault();
     Template.instance().hidden.set(false);

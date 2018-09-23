@@ -7,10 +7,10 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getUserIdFromRoute } from './get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 
-Template.Student_Explorer_Courses_Widget.helpers({
+Template.Explorer_Courses_Widget.helpers({
   color(table) {
     if (table.length === 0) {
       return 'whitesmoke';

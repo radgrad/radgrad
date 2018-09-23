@@ -9,8 +9,17 @@ import './back-to-top-button.css';
 import './card-explorer-careergoals-widget.html';
 import './card-explorer-careergoals-widget';
 
+import './card-explorer-courses-widget.html';
+import './card-explorer-courses-widget';
+
 import './card-explorer-menu.html';
 import './card-explorer-menu';
+
+import './explorer-careergoals-widget.html';
+import './explorer-careergoals-widget.js';
+
+import './explorer-courses-widget.html';
+import './explorer-courses-widget.js';
 
 import './explorer-menu.html';
 import './explorer-menu';
@@ -41,6 +50,12 @@ import './profile-card';
 import './review-ratings.js';
 
 import './route-user-name.js';
+
+import './semester-add.html';
+import './semester-add';
+
+import './semester-card.html';
+import './semester-card';
 
 import '../advisor/student-selector-widget.html';
 import '../advisor/student-selector-widget.js';

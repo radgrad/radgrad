@@ -82,6 +82,9 @@ Template.Explorer_Menu.helpers({
     }
     return ret;
   },
+  courseName(course) {
+    return course.shortName;
+  },
   coursesCardRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {

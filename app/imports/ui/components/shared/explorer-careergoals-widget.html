@@ -1,5 +1,5 @@
-<template name="Student_Explorer_CareerGoals_Widget">
-    
+<template name="Explorer_CareerGoals_Widget">
+
     <div class="ui segments" style="background-color: white;">
       <div class="ui padded segment container">
 
@@ -19,7 +19,7 @@
             {{#each descriptionPair in descriptionPairs}}
 
               {{#if isLabel descriptionPair.label 'Description'}}
-                <b>{{descriptionPair.label}}:</b> 
+                <b>{{descriptionPair.label}}:</b>
                 {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}}
                   {{else}}
                     N/A <br>
