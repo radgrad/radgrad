@@ -32,7 +32,7 @@ Template.Course_Score_Board_Modal.helpers({
     return Users.getProfile(feed.userIDs[0]).username;
   },
   userRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
 });
 

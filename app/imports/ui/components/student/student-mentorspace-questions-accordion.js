@@ -24,7 +24,7 @@ Template.Student_MentorSpace_Questions_Accordion.helpers({
     return Users.getProfile(mentorID).picture;
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
   userUsername(mentorID) {
     return Users.getProfile(mentorID).username;

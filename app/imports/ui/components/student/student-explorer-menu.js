@@ -238,7 +238,7 @@ Template.Student_Explorer_Menu.helpers({
         return 'Interests';
       case RouteNames.studentExplorerOpportunitiesPageRouteName:
         return 'Opportunities';
-      case RouteNames.studentExplorerUsersPageRouteName:
+      case RouteNames.studentCardExplorerUsersPageRouteName:
         return 'Users';
       default:
         return 'Select Explorer';
@@ -366,12 +366,12 @@ Template.Student_Explorer_Menu.helpers({
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
+      return RouteNames.studentCardExplorerUsersPageRouteName;
     } else
       if (group === 'faculty') {
-        return RouteNames.facultyExplorerUsersPageRouteName;
+        return RouteNames.facultCardyExplorerUsersPageRouteName;
       }
-    return RouteNames.mentorExplorerUsersPageRouteName;
+    return RouteNames.mentorCardExplorerUsersPageRouteName;
   },
 });
 

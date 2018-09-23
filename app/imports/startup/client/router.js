@@ -871,14 +871,6 @@ mentorRoutes.route('/explorer/users/', {
   },
 });
 
-export const mentorExplorerUsersPageRouteName = 'Mentor_Explorer_Users_Page';
-mentorRoutes.route('/explorer/users/:explorerUserName', {
-  name: mentorExplorerUsersPageRouteName,
-  action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerUsersPageRouteName });
-  },
-});
-
 export const mentorMentorSpacePageRouteName = 'Mentor_MentorSpace_Page';
 mentorRoutes.route('/mentor-space', {
   name: mentorMentorSpacePageRouteName,
@@ -955,24 +947,6 @@ studentRoutes.route('/explorer/degrees/:degree', {
   },
 });
 
-export const studentCardExplorerPlansPageRouteName = 'Student_Card_Explorer_Plans_Page';
-studentRoutes.route('/explorer/plans/', {
-  name: studentCardExplorerPlansPageRouteName,
-  triggersEnter: [trackPath],
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentCardExplorerPlansPageRouteName });
-  },
-});
-
-export const studentExplorerPlansPageRouteName = 'Student_Explorer_Plans_Page';
-studentRoutes.route('/explorer/plans/:plan', {
-  name: studentExplorerPlansPageRouteName,
-  triggersEnter: [trackPath],
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerPlansPageRouteName });
-  },
-});
-
 export const studentCardExplorerInterestsPageRouteName = 'Student_Card_Explorer_Interests_Page';
 studentRoutes.route('/explorer/interests/', {
   name: studentCardExplorerInterestsPageRouteName,
@@ -1009,21 +983,30 @@ studentRoutes.route('/explorer/opportunities/:opportunity', {
   },
 });
 
+export const studentCardExplorerPlansPageRouteName = 'Student_Card_Explorer_Plans_Page';
+studentRoutes.route('/explorer/plans/', {
+  name: studentCardExplorerPlansPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentCardExplorerPlansPageRouteName });
+  },
+});
+
+export const studentExplorerPlansPageRouteName = 'Student_Explorer_Plans_Page';
+studentRoutes.route('/explorer/plans/:plan', {
+  name: studentExplorerPlansPageRouteName,
+  triggersEnter: [trackPath],
+  action() {
+    BlazeLayout.render('Student_Layout', { main: studentExplorerPlansPageRouteName });
+  },
+});
+
 export const studentCardExplorerUsersPageRouteName = 'Student_Card_Explorer_Users_Page';
 studentRoutes.route('/explorer/users/', {
   name: studentCardExplorerUsersPageRouteName,
   triggersEnter: [trackPath],
   action() {
     BlazeLayout.render('Student_Layout', { main: studentCardExplorerUsersPageRouteName });
-  },
-});
-
-export const studentExplorerUsersPageRouteName = 'Student_Explorer_Users_Page';
-studentRoutes.route('/explorer/users/:explorerUserName', {
-  name: studentExplorerUsersPageRouteName,
-  triggersEnter: [trackPath],
-  action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerUsersPageRouteName });
   },
 });
 
