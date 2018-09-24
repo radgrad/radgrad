@@ -11,27 +11,27 @@
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
       {{#if typeCareerGoals}}
         <a class="ui button"
-           href="{{pathFor careerGoalsRouteName careerGoal=(itemSlug item)}}"><i
+           href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(itemSlug item)}}"><i
             class="chevron circle right icon"></i><br>View More</a>
       {{else}}
         {{#if typeCourses}}
           <a class="ui button"
-             href="{{pathFor coursesRouteName course=(itemSlug item)}}"><i
+             href="{{pathFor coursesRouteName username=routeUserName course=(itemSlug item)}}"><i
               class="chevron circle right icon"></i><br>View More</a>
         {{else}}
           {{#if typeDegrees}}
             <a class="ui button"
-               href="{{pathFor degreesRouteName degree=(itemSlug item)}}"><i
+               href="{{pathFor degreesRouteName username=routeUserName degree=(itemSlug item)}}"><i
                 class="chevron circle right icon"></i><br>View More</a>
           {{else}}
             {{#if typeInterests}}
               <a class="ui button"
-                 href="{{pathFor interestRouteName interest=(itemSlug item)}}"><i
+                 href="{{pathFor interestRouteName username=routeUserName interest=(itemSlug item)}}"><i
                   class="chevron circle right icon"></i><br>View More</a>
             {{else}}
               {{#if typeOpportunities}}
                 <a class="ui button"
-                   href="{{pathFor opportunityRouteName opportunity=(itemSlug item)}}"><i
+                   href="{{pathFor opportunityRouteName username=routeUserName opportunity=(itemSlug item)}}"><i
                     class="chevron circle right icon"></i><br>View More</a>
               {{/if}}
             {{/if}}

@@ -139,6 +139,8 @@
         {{/each}}
       {{else}}
         {{#if isType type 'degrees'}}
+          <a class="ui button" href="{{pathFor degreesCardRouteName username=routeUserName}}"><i
+              class="chevron circle left icon"></i><br>Back to Degrees</a>
         {{else}}
           {{#if isType type 'opportunities'}}
             <p><a href="mailto:{{adminEmail}}?subject=New%20Opportunity%20Suggestion">Suggest a new Opportunity</a></p>

@@ -23,3 +23,5 @@ import './explorer-degrees-page';
 
 import './explorer-interests-page.html';
 import './explorer-interests-page.js';
+
+import './explorer-page.html';

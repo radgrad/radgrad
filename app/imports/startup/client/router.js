@@ -432,7 +432,7 @@ export const facultyExplorerPageRouteName = 'Faculty_Explorer_Page';
 facultyRoutes.route('/explorer', {
   name: facultyExplorerPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_Page' });
   },
 });
 
@@ -763,7 +763,7 @@ export const mentorExplorerPageRouteName = 'Mentor_Explorer_Page';
 mentorRoutes.route('/explorer', {
   name: mentorExplorerPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_Page' });
   },
 });
 
@@ -1078,7 +1078,7 @@ studentRoutes.route('/explorer', {
   name: studentExplorerPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_Page' });
   },
 });
 
