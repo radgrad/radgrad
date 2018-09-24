@@ -4,8 +4,6 @@ import './faculty-home-page.html';
 import './faculty-explorer-page.html';
 import './faculty-explorer-degrees-page.html';
 import './faculty-explorer-degrees-page';
-import './faculty-explorer-interests-page.html';
-import './faculty-explorer-interests-page';
 import './faculty-explorer-opportunities-page.html';
 import './faculty-explorer-opportunities-page';
 import './faculty-explorer-plans-page.html';

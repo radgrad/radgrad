@@ -10,9 +10,6 @@ import './student-home-menu.js';
 import './student-card-explorer-menu.html';
 import './student-card-explorer-menu';
 
-import './student-card-explorer-interests-widget.html';
-import './student-card-explorer-interests-widget';
-
 import './student-card-explorer-opportunities-widget.html';
 import './student-card-explorer-opportunities-widget';
 
@@ -27,9 +24,6 @@ import './student-explorer-courses-widget-button.js';
 
 import './student-explorer-degrees-widget.html';
 import './student-explorer-degrees-widget.js';
-
-import './student-explorer-interests-widget.html';
-import './student-explorer-interests-widget.js';
 
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';

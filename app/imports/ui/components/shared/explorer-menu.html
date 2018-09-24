@@ -3,14 +3,14 @@
     <i class="dropdown icon"></i>
     <div>{{getRouteName}}</div>
     <div class="menu">
+      <a class="{{isActiveRoute academicPlansRouteName}} item"
+         href="{{pathFor academicPlansCardRouteName username=routeUserName}}">Academic
+        Plans</a>
       <a class="{{isActiveRoute careerGoalsRouteName}} item"
          href="{{pathFor careerGoalsCardRouteName username=routeUserName}}">Career
         Goals</a>
       <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesCardRouteName username=routeUserName}}">Courses</a>
-      <a class="{{isActiveRoute degreesRouteName}} item" href="{{pathFor degreesCardRouteName username=routeUserName}}">Degrees</a>
-      <a class="{{isActiveRoute academicPlansRouteName}} item"
-         href="{{pathFor academicPlansCardRouteName username=routeUserName}}">Academic
-        Plans</a>
+      <a class="{{isActiveRoute degreesCardRouteName}} item" href="{{pathFor degreesCardRouteName username=routeUserName}}">Degrees</a>
       <a class="{{isActiveRoute interestsRouteName}} item"
          href="{{pathFor interestsCardRouteName username=routeUserName}}">Interests</a>
       <a class="{{isActiveRoute opportunitiesRouteName}} item"
@@ -139,17 +139,6 @@
         {{/each}}
       {{else}}
         {{#if isType type 'degrees'}}
-          {{#if isInRole 'student'}}
-            <h4 class="ui dividing header">
-              MY DESIRED DEGREE
-            </h4>
-            {{#each listItem in menuAddedList}}
-              <a class="{{classType (slugName listItem) 'degree'}}" data-tab="tab-name"
-                 href="{{pathFor degreesRouteName username=routeUserName degree=(slugName listItem)}}"><i
-                  style="position: absolute; margin-left: -20px;" class="{{userDegrees listItem}}"></i>{{itemName
-                  listItem}}</a>
-            {{/each}}
-          {{/if}}
         {{else}}
           {{#if isType type 'opportunities'}}
             <p><a href="mailto:{{adminEmail}}?subject=New%20Opportunity%20Suggestion">Suggest a new Opportunity</a></p>

@@ -5,7 +5,7 @@ import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Interests } from '../../../api/interest/InterestCollection';
 import { Users } from '../../../api/user/UserCollection';
 
-Template.Student_Card_Explorer_Interests_Page.helpers({
+Template.Card_Explorer_Interests_Page.helpers({
   addedInterests() {
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());

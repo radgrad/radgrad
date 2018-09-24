@@ -472,7 +472,7 @@ export const facultyCardExplorerDegreesPageRouteName = 'Faculty_Card_Explorer_De
 facultyRoutes.route('/explorer/degrees/', {
   name: facultyCardExplorerDegreesPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyCardExplorerDegreesPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_Degrees_Page' });
   },
 });
 
@@ -480,7 +480,7 @@ export const facultyExplorerDegreesPageRouteName = 'Faculty_Explorer_Degrees_Pag
 facultyRoutes.route('/explorer/degrees/:degree', {
   name: facultyExplorerDegreesPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerDegreesPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_Degrees_Page' });
   },
 });
 
@@ -488,7 +488,7 @@ export const facultyCardExplorerInterestsPageRouteName = 'Faculty_Card_Explorer_
 facultyRoutes.route('/explorer/interests/', {
   name: facultyCardExplorerInterestsPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyCardExplorerInterestsPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_Interests_Page' });
   },
 });
 
@@ -496,7 +496,7 @@ export const facultyExplorerInterestsPageRouteName = 'Faculty_Explorer_Interests
 facultyRoutes.route('/explorer/interests/:interest', {
   name: facultyExplorerInterestsPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyExplorerInterestsPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Explorer_Interests_Page' });
   },
 });
 
@@ -803,7 +803,7 @@ export const mentorCardExplorerDegreesPageRouteName = 'Mentor_Card_Explorer_Degr
 mentorRoutes.route('/explorer/degrees/', {
   name: mentorCardExplorerDegreesPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorCardExplorerDegreesPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_Degrees_Page' });
   },
 });
 
@@ -811,7 +811,7 @@ export const mentorExplorerDegreesPageRouteName = 'Mentor_Explorer_Degrees_Page'
 mentorRoutes.route('/explorer/degrees/:degree', {
   name: mentorExplorerDegreesPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerDegreesPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_Degrees_Page' });
   },
 });
 
@@ -819,7 +819,7 @@ export const mentorCardExplorerInterestsPageRouteName = 'Mentor_Card_Explorer_In
 mentorRoutes.route('/explorer/interests/', {
   name: mentorCardExplorerInterestsPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorCardExplorerInterestsPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_Interests_Page' });
   },
 });
 
@@ -827,7 +827,7 @@ export const mentorExplorerInterestsPageRouteName = 'Mentor_Explorer_Interests_P
 mentorRoutes.route('/explorer/interests/:interest', {
   name: mentorExplorerInterestsPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorExplorerInterestsPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Explorer_Interests_Page' });
   },
 });
 
@@ -934,7 +934,7 @@ studentRoutes.route('/explorer/degrees/', {
   name: studentCardExplorerDegreesPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: 'Explorer_Courses_Page' });
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_Degrees_Page' });
   },
 });
 
@@ -943,7 +943,7 @@ studentRoutes.route('/explorer/degrees/:degree', {
   name: studentExplorerDegreesPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerDegreesPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_Degrees_Page' });
   },
 });
 
@@ -952,7 +952,7 @@ studentRoutes.route('/explorer/interests/', {
   name: studentCardExplorerInterestsPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentCardExplorerInterestsPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_Interests_Page' });
   },
 });
 
@@ -961,7 +961,7 @@ studentRoutes.route('/explorer/interests/:interest', {
   name: studentExplorerInterestsPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentExplorerInterestsPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Explorer_Interests_Page' });
   },
 });
 

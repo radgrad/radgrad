@@ -12,14 +12,29 @@ import './card-explorer-careergoals-widget';
 import './card-explorer-courses-widget.html';
 import './card-explorer-courses-widget';
 
+import './card-explorer-degrees-widget.html';
+import './card-explorer-degrees-widget';
+
+import './card-explorer-interests-widget.html';
+import './card-explorer-interests-widget';
+
 import './card-explorer-menu.html';
 import './card-explorer-menu';
+
+import './explorer-card.html';
+import './explorer-card';
 
 import './explorer-careergoals-widget.html';
 import './explorer-careergoals-widget.js';
 
 import './explorer-courses-widget.html';
 import './explorer-courses-widget.js';
+
+import './explorer-degrees-widget.html';
+import './explorer-degrees-widget';
+
+import './explorer-interests-widget.html';
+import './explorer-interests-widget.js';
 
 import './explorer-menu.html';
 import './explorer-menu';

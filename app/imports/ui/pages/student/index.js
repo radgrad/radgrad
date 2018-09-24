@@ -1,8 +1,5 @@
 /** @namespace ui/pages/student */
 
-import './student-card-explorer-interests-page.html';
-import './student-card-explorer-interests-page';
-
 import './student-card-explorer-opportunities-page.html';
 import './student-card-explorer-opportunities-page';
 
@@ -17,9 +14,6 @@ import './student-degree-planner-page.js';
 
 import './student-explorer-degrees-page.html';
 import './student-explorer-degrees-page.js';
-
-import './student-explorer-interests-page.html';
-import './student-explorer-interests-page.js';
 
 import './student-explorer-opportunities-page.html';
 import './student-explorer-opportunities-page.js';

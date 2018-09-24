@@ -8,6 +8,7 @@ import { Slugs } from '../../../api/slug/SlugCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '../../../startup/client/router';
+import { isInRole } from '../../utilities/template-helpers';
 
 Template.Profile_Card.onCreated(function profileCardOnCreated() {
   this.hidden = new ReactiveVar(true);
@@ -59,6 +60,7 @@ Template.Profile_Card.helpers({
   interestedStudents(course) {
     return interestedStudentsHelper(course, this.type);
   },
+  isInRole,
   itemName(item) {
     return item.name;
   },

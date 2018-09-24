@@ -2,10 +2,6 @@ import { Template } from 'meteor/templating';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as RouteNames from '../../../startup/client/router';
 
-Template.Landing_Explorer_Card.onCreated(function landingExplorerCardOnCreated() {
-  // add your statement here
-});
-
 Template.Landing_Explorer_Card.helpers({
   careerGoalsRouteName() {
     return RouteNames.landingExplorerCareerGoalsPageRouteName;

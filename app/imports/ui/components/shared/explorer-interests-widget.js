@@ -6,13 +6,15 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
+import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 
-Template.Student_Explorer_Interests_Widget.helpers({
+Template.Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
     const slug = Slugs.find({ name: courseSlugName }).fetch();
     const course = Courses.find({ slugID: slug[0]._id }).fetch();
@@ -86,13 +88,21 @@ Template.Student_Explorer_Interests_Widget.helpers({
   },
 });
 
-Template.Student_Explorer_Interests_Widget.events({
+Template.Explorer_Interests_Widget.events({
   'click .addItem': function clickAddItem(event) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     const studentItems = profile.interestIDs;
-    const collectionName = StudentProfiles.getCollectionNameForProfile(profile);
+    const group = FlowRouter.current().route.group.name;
+    let collectionName = '';
+    if (group === 'student') {
+      collectionName = StudentProfiles.getCollectionName();
+    } else if (group === 'faculty') {
+      collectionName = FacultyProfiles.getCollectionName();
+    } else {
+      collectionName = MentorProfiles.getCollectionName();
+    }
     const updateData = {};
     updateData.id = profile._id;
     studentItems.push(id);
@@ -108,7 +118,15 @@ Template.Student_Explorer_Interests_Widget.events({
     const profile = Users.getProfile(getRouteUserName());
     const id = event.target.value;
     let studentItems = profile.interestIDs;
-    const collectionName = StudentProfiles.getCollectionNameForProfile(profile);
+    const group = FlowRouter.current().route.group.name;
+    let collectionName = '';
+    if (group === 'student') {
+      collectionName = StudentProfiles.getCollectionName();
+    } else if (group === 'faculty') {
+      collectionName = FacultyProfiles.getCollectionName();
+    } else {
+      collectionName = MentorProfiles.getCollectionName();
+    }
     const updateData = {};
     updateData.id = profile._id;
     studentItems = _.without(studentItems, id);

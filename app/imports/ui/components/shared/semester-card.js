@@ -12,6 +12,7 @@ import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { getRouteUserName } from '../shared/route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
 import {
+  isInRole,
   opportunitySemesters,
 } from '../../utilities/template-helpers';
 
@@ -61,6 +62,10 @@ Template.Semester_Card.helpers({
   },
   interestedStudents(course) {
     return interestedStudentsHelper(course, this.type);
+  },
+  isInRole,
+  isType(type, value) {
+    return type === value;
   },
   isStudent() {
     const group = FlowRouter.current().route.group.name;
