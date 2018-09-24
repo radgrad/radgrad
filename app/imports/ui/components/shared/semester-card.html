@@ -14,13 +14,6 @@
     </div>
     <div class="content">
       <span>STUDENTS PARTICIPATING {{> Widget_Header_Number inputValue = (numberStudents item)}}</span>
-      {{#if isInRole 'student'}}
-        <div class="ui circular mini bordered images">
-          {{#each student in interestedStudents item}}
-            <img class="ui image" data-content="{{studentFullName student}}" src={{studentPicture student}}>
-          {{/each}}
-        </div>
-      {{/if}}
     </div>
 
     <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">

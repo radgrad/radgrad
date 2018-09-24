@@ -504,7 +504,7 @@ export const facultyCardExplorerOpportunitiesPageRouteName = 'Faculty_Card_Explo
 facultyRoutes.route('/explorer/opportunities/', {
   name: facultyCardExplorerOpportunitiesPageRouteName,
   action() {
-    BlazeLayout.render('Faculty_Layout', { main: facultyCardExplorerOpportunitiesPageRouteName });
+    BlazeLayout.render('Faculty_Layout', { main: 'Card_Explorer_Opportunities_Page' });
   },
 });
 
@@ -835,7 +835,7 @@ export const mentorCardExplorerOpportunitiesPageRouteName = 'Mentor_Card_Explore
 mentorRoutes.route('/explorer/opportunities/', {
   name: mentorCardExplorerOpportunitiesPageRouteName,
   action() {
-    BlazeLayout.render('Mentor_Layout', { main: mentorCardExplorerOpportunitiesPageRouteName });
+    BlazeLayout.render('Mentor_Layout', { main: 'Card_Explorer_Opportunities_Page' });
   },
 });
 
@@ -970,7 +970,7 @@ studentRoutes.route('/explorer/opportunities/', {
   name: studentCardExplorerOpportunitiesPageRouteName,
   triggersEnter: [trackPath],
   action() {
-    BlazeLayout.render('Student_Layout', { main: studentCardExplorerOpportunitiesPageRouteName });
+    BlazeLayout.render('Student_Layout', { main: 'Card_Explorer_Opportunities_Page' });
   },
 });
 

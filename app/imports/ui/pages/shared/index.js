@@ -12,6 +12,9 @@ import './card-explorer-degrees-page';
 import './card-explorer-interests-page.html';
 import './card-explorer-interests-page';
 
+import './card-explorer-opportunities-page.html';
+import './card-explorer-opportunities-page';
+
 import './explorer-careergoals-page.html';
 import './explorer-careergoals-page.js';
 

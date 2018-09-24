@@ -3,13 +3,13 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getUserIdFromRoute } from './get-user-id-from-route';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 
-Template.Student_Card_Explorer_Opportunities_Widget.onCreated(function studentCardExplorerOppWidgetOnCreated() {
+Template.Card_Explorer_Opportunities_Widget.onCreated(function studentCardExplorerOppWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
 });
 
@@ -68,14 +68,16 @@ function hiddenOpportunitiesHelper() {
   return [];
 }
 
-Template.Student_Card_Explorer_Opportunities_Widget.helpers({
+Template.Card_Explorer_Opportunities_Widget.helpers({
   hidden() {
     return Template.instance().hidden.get();
   },
   hiddenExists() {
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());
-      return profile.hiddenOpportunityIDs.length !== 0;
+      if (profile.hiddenOpportunityIDs) {
+        return profile.hiddenOpportunityIDs.length !== 0;
+      }
     }
     return false;
   },
@@ -107,7 +109,7 @@ Template.Student_Card_Explorer_Opportunities_Widget.helpers({
   },
 });
 
-Template.Student_Card_Explorer_Opportunities_Widget.events({
+Template.Card_Explorer_Opportunities_Widget.events({
   'click .showHidden': function clickShowHidden(event) {
     event.preventDefault();
     Template.instance().hidden.set(false);

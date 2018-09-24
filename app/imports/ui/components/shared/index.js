@@ -18,6 +18,9 @@ import './card-explorer-degrees-widget';
 import './card-explorer-interests-widget.html';
 import './card-explorer-interests-widget';
 
+import './card-explorer-opportunities-widget.html';
+import './card-explorer-opportunities-widget';
+
 import './card-explorer-menu.html';
 import './card-explorer-menu';
 
@@ -55,6 +58,9 @@ import './moderation.js';
 
 import './observe-interactions.html';
 import './observe-interactions';
+
+import './plan-card.html';
+import './plan-card';
 
 import './profile-add.html';
 import './profile-add';
