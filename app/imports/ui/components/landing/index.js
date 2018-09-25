@@ -39,6 +39,9 @@ import './landing-explorer-menu';
 import './landing-explorer-opportunities-widget.html';
 import './landing-explorer-opportunities-widget';
 
+import './landing-explorer-opportunities-widget-teaser.html';
+import './landing-explorer-opportunities-widget-teaser';
+
 import './landing-explorer-plan-card.html';
 import './landing-explorer-plan-card';
 
@@ -47,6 +50,9 @@ import './landing-explorer-plans-widget';
 
 import './landing-green-background.css';
 import './landing-grey-background.css';
+
+import './landing-interest-list.html';
+import './landing-interest-list';
 
 import './landing-section-1.css';
 import './landing-section-1.html';
