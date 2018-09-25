@@ -17,7 +17,6 @@ import {
 } from '../../utilities/template-helpers';
 
 function interestedStudentsHelper(item, type) {
-  const interested = [];
   let instances;
   if (type === 'courses') {
     instances = CourseInstances.find({
@@ -28,12 +27,7 @@ function interestedStudentsHelper(item, type) {
       opportunityID: item._id,
     }).fetch();
   }
-  _.forEach(instances, (c) => {
-    if (!_.includes(interested, c.studentID)) {
-      interested.push(c.studentID);
-    }
-  });
-  return interested;
+  return _.uniqBy(instances, i => i.studentID);
 }
 
 Template.Semester_Card.helpers({
