@@ -5,8 +5,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import * as RouteNames from '../../../startup/client/router';
 import { Slugs } from '../../../api/slug/SlugCollection';
-import { Semesters } from '../../../api/semester/SemesterCollection';
-import { Users } from '../../../api/user/UserCollection';
 
 function interestedStudentsHelper(item, type) {
   const interested = [];
@@ -56,16 +54,3 @@ Template.Plan_Card.helpers({
     return RouteNames.mentorExplorerPlansPageRouteName;
   },
 });
-
-Template.Plan_Card.events({
-  // add your events here
-});
-
-Template.Plan_Card.onRendered(function planCardOnRendered() {
-  // add your statement here
-});
-
-Template.Plan_Card.onDestroyed(function planCardOnDestroyed() {
-  // add your statement here
-});
-

@@ -18,11 +18,14 @@ import './card-explorer-degrees-widget';
 import './card-explorer-interests-widget.html';
 import './card-explorer-interests-widget';
 
+import './card-explorer-menu.html';
+import './card-explorer-menu';
+
 import './card-explorer-opportunities-widget.html';
 import './card-explorer-opportunities-widget';
 
-import './card-explorer-menu.html';
-import './card-explorer-menu';
+import './card-explorer-plans-widget.html';
+import './card-explorer-plans-widget';
 
 import './explorer-card.html';
 import './explorer-card';

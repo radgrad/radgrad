@@ -261,14 +261,16 @@
               {{/each}}
             {{else}}
               {{#if isType type 'plans'}}
-                <div class="ui dividing header">
-                  MY ACADEMIC PLAN
-                </div>
-                {{#each listItem in menuAddedList}}
-                  <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
-                     href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
-                      class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>
-                {{/each}}
+                {{#if isInRole 'student'}}
+                  <div class="ui dividing header">
+                    MY ACADEMIC PLAN
+                  </div>
+                  {{#each listItem in menuAddedList}}
+                    <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
+                       href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
+                        class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>
+                  {{/each}}
+                {{/if}}
               {{/if}}
             {{/if}}
           {{/if}}

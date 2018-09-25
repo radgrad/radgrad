@@ -10,9 +10,6 @@ import './student-home-menu.js';
 import './student-card-explorer-menu.html';
 import './student-card-explorer-menu';
 
-import './student-card-explorer-plans-widget.html';
-import './student-card-explorer-plans-widget';
-
 import './student-card-explorer-users-widget.html';
 import './student-card-explorer-users-widget';
 
