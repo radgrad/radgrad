@@ -18,6 +18,7 @@ Template.Explorer_Courses_Widget.helpers({
     return '';
   },
   courseNameFromSlug(courseSlugName) {
+    // console.log(courseSlugName);
     const slug = Slugs.find({ name: courseSlugName }).fetch();
     const course = Courses.find({ slugID: slug[0]._id }).fetch();
     return course[0].shortName;

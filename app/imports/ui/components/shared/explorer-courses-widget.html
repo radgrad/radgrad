@@ -6,19 +6,19 @@
            style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
         <h4 class="ui left floated header">{{toUpper shortName}} ({{name}})</h4>
         {{#if isInRole 'student'}}
-        {{#if userStatus item}}
-          {{#if futureInstance item}}
-            {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
-          {{else}}
-            {{#if passedCourse item}}
-              {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
+          {{#if userStatus item}}
+            {{#if futureInstance item}}
+              {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
             {{else}}
-              {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+              {{#if passedCourse item}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
+              {{else}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+              {{/if}}
             {{/if}}
+          {{else}}
+            {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
           {{/if}}
-        {{else}}
-          {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
-        {{/if}}
         {{/if}}
       </div>
       <div class="ui divider" style="margin-top: 0;"></div>
@@ -87,12 +87,12 @@
           {{#each descriptionPair in descriptionPairs}}
 
             {{#if isLabel descriptionPair.label 'Prerequisites'}}
-                {{#if descriptionPair.value}}
-                    <h4 class="ui horizontal divider header">
+              {{#if descriptionPair.value}}
+                <h4 class="ui horizontal divider header">
                   {{descriptionPair.label}}
                 </h4>
-                  {{#if isInRole 'student'}}
-                    <div class="ui three column stackable padded celled grid">
+                {{#if isInRole 'student'}}
+                  <div class="ui three column stackable padded celled grid">
                     <div class="row">
                       {{#each table in descriptionPair.value}}
                         <div class="column" style="text-align: center; background-color: {{color table}}">
@@ -101,7 +101,8 @@
                             {{#each prerequisite in table}}
                               <a class="{{isActiveRoute coursesRouteName}} item"
                                  href="{{pathFor coursesRouteName username=routeUserName
-                                 course = prerequisite.course}}">{{courseNameFromSlug prerequisite.course}}</a>
+                                                 course = prerequisite.course}}">{{courseNameFromSlug
+                                  prerequisite.course}}</a>
                               <br>
                             {{/each}}
                           {{else}}
@@ -114,16 +115,18 @@
                     </div>
                   </div>
                 {{else}}
-                      <div class="ui horizontal bulleted list">
-                        {{#each prerequisite in descriptionPair.value}}
-                          <a class="item">
-                            <a class="{{isActiveRoute coursesRouteName}} item"
-                               href="{{pathFor coursesRouteName username=routeUserName
-                               course = prerequisite}}">{{courseNameFromSlug prerequisite}}</a>                                                    </a>
-                        {{/each}}
-                      </div>
+                  <div class="ui horizontal bulleted list">
+                    {{#each prerequisiteList in descriptionPair.value}}
+                      {{#each prereq in prerequisiteList}}
+                        <a class="item">
+                          <a class="{{isActiveRoute coursesRouteName}} item"
+                             href="{{pathFor coursesRouteName username=routeUserName
+                                             course=prereq.course}}">{{courseNameFromSlug prereq.course}}</a> </a>
+                      {{/each}}
+                    {{/each}}
+                  </div>
                 {{/if}}
-                {{/if}}
+              {{/if}}
             {{/if}}
           {{/each}}
         </div>

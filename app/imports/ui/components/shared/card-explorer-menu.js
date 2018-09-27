@@ -299,7 +299,7 @@ Template.Card_Explorer_Menu.helpers({
 });
 
 Template.Card_Explorer_Menu.onRendered(function cardExplorerMenuOnRendered() {
-  console.log('Card_Explorer_Menu');
+  // console.log('Card_Explorer_Menu');
   const template = this;
   template.$('.ui.dropdown')
     .dropdown();

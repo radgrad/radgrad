@@ -299,7 +299,7 @@ Template.Explorer_Menu.helpers({
 });
 
 Template.Explorer_Menu.onRendered(function explorerMenuOnRendered() {
-  console.log('Explorer_Menu');
+  // console.log('Explorer_Menu');
   const template = this;
   template.$('.ui.dropdown')
     .dropdown();
