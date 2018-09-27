@@ -14,11 +14,15 @@ import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 
+Template.Explorer_Interests_Widget.onCreated(function explorerInterestsWidgetOnCreated() {
+  // console.log(this.data);
+});
+
 Template.Explorer_Interests_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
-    const slug = Slugs.find({ name: courseSlugName }).fetch();
-    const course = Courses.find({ slugID: slug[0]._id }).fetch();
-    return course[0].shortName;
+    const slug = Slugs.findOne({ name: courseSlugName });
+    const course = Courses.findOne({ slugID: slug._id });
+    return course.shortName;
   },
   coursesRouteName() {
     const group = FlowRouter.current().route.group.name;

@@ -49,7 +49,7 @@ function teaser(opp) {
   return oppTeaser[0];
 }
 
-Template.Student_Explorer_Opportunities_Page.helpers({
+Template.Explorer_Opportunities_Page.helpers({
   addedOpportunities() {
     const addedOpportunities = [];
     const allOpportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
@@ -134,4 +134,3 @@ Template.Student_Explorer_Opportunities_Page.helpers({
     ];
   },
 });
-

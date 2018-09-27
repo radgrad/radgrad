@@ -6,17 +6,17 @@ import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getUserIdFromRoute } from './get-user-id-from-route';
+import { getRouteUserName } from './route-user-name';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { isInRole } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
-Template.Student_Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
+Template.Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
   this.planVar = new ReactiveVar();
 });
 
-Template.Student_Explorer_Plans_Widget.helpers({
+Template.Explorer_Plans_Widget.helpers({
   fullName(user) {
     if (getUserIdFromRoute() !== user._id) {
       return Users.getFullName(user.username);
@@ -80,7 +80,7 @@ Template.Student_Explorer_Plans_Widget.helpers({
   },
 });
 
-Template.Student_Explorer_Plans_Widget.events({
+Template.Explorer_Plans_Widget.events({
   'click .addItem': function selectAcademicPlan(event, instance) {
     event.preventDefault();
     const profile = Users.getProfile(getRouteUserName());
@@ -96,11 +96,6 @@ Template.Student_Explorer_Plans_Widget.events({
   },
 });
 
-Template.Student_Explorer_Plans_Widget.onRendered(function studentExplorerPlansWidgetOnRendered() {
+Template.Explorer_Plans_Widget.onRendered(function studentExplorerPlansWidgetOnRendered() {
   Template.instance().planVar.set(Template.instance().data.item);
 });
-
-Template.Student_Explorer_Plans_Widget.onDestroyed(function studentExplorerPlansWidgetOnDestroyed() {
-  // add your statement here
-});
-

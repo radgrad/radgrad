@@ -1,21 +1,9 @@
 /** @namespace ui/pages/student */
 
-import './student-card-explorer-users-page.html';
-import './student-card-explorer-users-page';
-
 import './student-degree-planner-page.html';
 import './student-degree-planner-page.js';
 
-import './student-explorer-opportunities-page.html';
-import './student-explorer-opportunities-page.js';
-
 import './student-explorer-page.html';
-
-import './student-explorer-plans-page.html';
-import './student-explorer-plans-page';
-
-import './student-explorer-users-page.html';
-import './student-explorer-users-page.js';
 
 import './student-home-aboutme-page.html';
 

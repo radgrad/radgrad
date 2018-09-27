@@ -6,14 +6,14 @@ import { ROLE } from '../../../api/role/Role';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 import { Users } from '../../../api/user/UserCollection';
 import * as RouteNames from '../../../startup/client/router';
-import { getRouteUserName } from '../shared/route-user-name';
+import { getRouteUserName } from './route-user-name';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
 
-Template.Student_Card_Explorer_Users_Widget.onCreated(function studentcardexploreruserswidgetOnCreated() {
+Template.Card_Explorer_Users_Widget.onCreated(function studentcardexploreruserswidgetOnCreated() {
   // add your statement here
 });
 
-Template.Student_Card_Explorer_Users_Widget.helpers({
+Template.Card_Explorer_Users_Widget.helpers({
   advisorRole() {
     return ROLE.ADVISOR;
   },
@@ -61,16 +61,16 @@ Template.Student_Card_Explorer_Users_Widget.helpers({
   },
 });
 
-Template.Student_Card_Explorer_Users_Widget.events({
+Template.Card_Explorer_Users_Widget.events({
   // add your events here
 });
 
-Template.Student_Card_Explorer_Users_Widget.onRendered(function studentcardexploreruserswidgetOnRendered() {
+Template.Card_Explorer_Users_Widget.onRendered(function studentcardexploreruserswidgetOnRendered() {
   this.$('.menu .item').tab();
   this.$('.ui.dropdown').dropdown();
 });
 
-Template.Student_Card_Explorer_Users_Widget.onDestroyed(function studentcardexploreruserswidgetOnDestroyed() {
+Template.Card_Explorer_Users_Widget.onDestroyed(function studentcardexploreruserswidgetOnDestroyed() {
   // add your statement here
 });
 

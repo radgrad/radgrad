@@ -1,7 +1,11 @@
 <template name="Semester_Card">
   <div class="ui card radgrad-interest-card">
     <div class="content">
-      <div class="header">{{itemName item}}</div>
+      <div class="header">{{itemName item}}
+        {{#if typeOpportunity}}
+          {{> ICE_header ice=item.ice}}
+        {{/if}}
+      </div>
       <div class="meta">
         {{#if itemSemesters}}
           {{replaceSemString itemSemesters}}

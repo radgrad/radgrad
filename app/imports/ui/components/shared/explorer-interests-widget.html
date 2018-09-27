@@ -72,13 +72,15 @@
             {{#if isLabel descriptionPair.label 'Related Courses'}}
               {{#if descriptionPair.value}}
                 <div class="ui horizontal bulleted list">
-                  {{#each prerequisite in descriptionPair.value}}
-                    <a class="item">
-                      <a class="{{isActiveRoute coursesRouteName}} item"
-                         href="{{pathFor coursesRouteName username=routeUserName
-                                         course = prerequisite}}">{{courseNameFromSlug
-                          prerequisite}}</a> <br>
-                    </a>
+                  {{#each group in descriptionPair.value}}
+                    {{#each course in group}}
+                      <a class="item">
+                        <a class="{{isActiveRoute coursesRouteName}} item"
+                           href="{{pathFor coursesRouteName username=routeUserName
+                                           course=course.course}}">{{courseNameFromSlug
+                            course.course}}</a> <br>
+                      </a>
+                    {{/each}}
                   {{/each}}
                 </div>
               {{else}}
@@ -124,13 +126,15 @@
             {{#if isLabel descriptionPair.label 'Related Opportunities'}}
               {{#if descriptionPair.value}}
                 <div class="ui horizontal bulleted list">
-                  {{#each relatedOpportunity in descriptionPair.value}}
-                    <a class="item">
-                      <a class="{{isActiveRoute opportunitiesRouteName}} item"
-                         href="{{pathFor opportunitiesRouteName username=routeUserName
-                                         opportunity = relatedOpportunity}}">{{opportunityNameFromSlug
-                          relatedOpportunity}}</a> <br>
-                    </a>
+                  {{#each oppArray in descriptionPair.value}}
+                    {{#each opp in oppArray}}
+                      <a class="item">
+                        <a class="{{isActiveRoute opportunitiesRouteName}} item"
+                           href="{{pathFor opportunitiesRouteName username=routeUserName
+                                           opportunity=opp.opportunity}}">{{opportunityNameFromSlug
+                            opp.opportunity}}</a> <br>
+                      </a>
+                    {{/each}}
                   {{/each}}
                 </div>
               {{else}}

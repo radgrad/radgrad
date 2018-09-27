@@ -104,7 +104,14 @@ Template.Semester_Card.helpers({
     return interestedStudentsHelper(course, this.type).length;
   },
   opportunitiesRouteName() {
-    return RouteNames.studentExplorerOpportunitiesPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentExplorerOpportunitiesPageRouteName;
+    } else
+    if (group === 'faculty') {
+      return RouteNames.facultyExplorerOpportunitiesPageRouteName;
+    }
+    return RouteNames.mentorExplorerOpportunitiesPageRouteName;
   },
   replaceSemString(array) {
     // console.log('array', array);
@@ -132,11 +139,21 @@ Template.Semester_Card.helpers({
   typeCourse() {
     return (this.type === 'courses');
   },
+  typeOpportunity() {
+    return (this.type === 'opportunities');
+  },
   userSlug(studentID) {
     return Users.getProfile(studentID).username;
   },
   usersRouteName() {
-    return RouteNames.studentCardExplorerUsersPageRouteName;
+    const group = FlowRouter.current().route.group.name;
+    if (group === 'student') {
+      return RouteNames.studentCardExplorerUsersPageRouteName;
+    } else
+    if (group === 'faculty') {
+      return RouteNames.facultyCardExplorerUsersPageRouteName;
+    }
+    return RouteNames.mentorCardExplorerUsersPageRouteName;
   },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];

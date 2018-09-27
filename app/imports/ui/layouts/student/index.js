@@ -1,4 +1,4 @@
-import './student-card-explorer-layout.html';
+/** @namespace ui/layouts/student */
 
 import './student-explorer-layout.html';
 

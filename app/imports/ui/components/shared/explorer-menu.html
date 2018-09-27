@@ -10,7 +10,8 @@
          href="{{pathFor careerGoalsCardRouteName username=routeUserName}}">Career
         Goals</a>
       <a class="{{isActiveRoute coursesRouteName}} item" href="{{pathFor coursesCardRouteName username=routeUserName}}">Courses</a>
-      <a class="{{isActiveRoute degreesCardRouteName}} item" href="{{pathFor degreesCardRouteName username=routeUserName}}">Degrees</a>
+      <a class="{{isActiveRoute degreesCardRouteName}} item"
+         href="{{pathFor degreesCardRouteName username=routeUserName}}">Degrees</a>
       <a class="{{isActiveRoute interestsRouteName}} item"
          href="{{pathFor interestsCardRouteName username=routeUserName}}">Interests</a>
       <a class="{{isActiveRoute opportunitiesRouteName}} item"
@@ -192,14 +193,16 @@
               {{#if isType type 'plans'}}
                 <a class="ui button" href="{{pathFor academicPlansCardRouteName username=routeUserName}}"><i
                     class="chevron circle left icon"></i><br>Back to Academic Plans</a>
-                <div class="ui dividing header">
-                  MY ACADEMIC PLAN
-                </div>
-                {{#each listItem in menuAddedList}}
-                  <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
-                     href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
-                      class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>
-                {{/each}}
+                {{#if isInRole 'student'}}
+                  <div class="ui dividing header">
+                    MY ACADEMIC PLAN
+                  </div>
+                  {{#each listItem in menuAddedList}}
+                    <a class="{{classType (slugName listItem) 'plan'}}" data-tab="tab-name"
+                       href="{{pathFor academicPlansRouteName username=routeUserName plan=(slugName listItem)}}"><i
+                        class="{{userPlans listItem}}"></i>{{itemName listItem}}</a>
+                  {{/each}}
+                {{/if}}
               {{/if}}
             {{/if}}
           {{/if}}

@@ -27,6 +27,9 @@ import './card-explorer-opportunities-widget';
 import './card-explorer-plans-widget.html';
 import './card-explorer-plans-widget';
 
+import './card-explorer-users-widget.html';
+import './card-explorer-users-widget';
+
 import './explorer-card.html';
 import './explorer-card';
 
@@ -44,6 +47,12 @@ import './explorer-interests-widget.js';
 
 import './explorer-menu.html';
 import './explorer-menu';
+
+import './explorer-opportunities-widget.html';
+import './explorer-opportunities-widget.js';
+
+import './explorer-plans-widget.html';
+import './explorer-plans-widget';
 
 import './get-user-id-from-route';
 

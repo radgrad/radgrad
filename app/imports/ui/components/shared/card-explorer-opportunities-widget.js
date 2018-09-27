@@ -45,7 +45,7 @@ const availableOpps = () => {
   } else if (group === 'faculty') {
     return _.filter(opps, o => o.sponsorID !== getUserIdFromRoute());
   }
-  return [];
+  return opps;
 };
 
 // TODO Can we move this code into some sort of helperFunction file? I've seen this a lot.

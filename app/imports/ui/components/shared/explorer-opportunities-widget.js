@@ -7,15 +7,15 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
+import { getUserIdFromRoute } from './get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
-Template.Student_Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
+Template.Explorer_Opportunities_Widget.onCreated(function studentExplorerOpportunitiesWidgetOnCreated() {
   this.updated = new ReactiveVar(false);
 });
 
-Template.Student_Explorer_Opportunities_Widget.helpers({
+Template.Explorer_Opportunities_Widget.helpers({
   fullName(user) {
     return Users.getFullName(user);
   },
@@ -94,7 +94,7 @@ Template.Student_Explorer_Opportunities_Widget.helpers({
   },
 });
 
-Template.Student_Explorer_Opportunities_Widget.onRendered(function enableVideo() {
+Template.Explorer_Opportunities_Widget.onRendered(function enableVideo() {
   setTimeout(function () {
     this.$('.ui.embed').embed();
   }, 300);
