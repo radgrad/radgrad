@@ -3,8 +3,6 @@
 import './student-degree-planner-page.html';
 import './student-degree-planner-page.js';
 
-import './student-explorer-page.html';
-
 import './student-home-aboutme-page.html';
 
 import './student-home-ice-page.html';

@@ -1,13 +1,4 @@
 import './mentor-home-page.html';
-import './mentor-explorer-page.html';
-import './mentor-explorer-degrees-page.html';
-import './mentor-explorer-degrees-page';
-import './mentor-explorer-opportunities-page.html';
-import './mentor-explorer-opportunities-page';
-import './mentor-explorer-plans-page.html';
-import './mentor-explorer-plans-page';
-import './mentor-explorer-users-page.html';
-import './mentor-explorer-users-page';
 import './mentor-mentorspace-page.html';
 import './mentor-mentorspace-page.js';
 import './mentor-mentorspace-page.css';
