@@ -4,7 +4,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Semesters } from '../semester/SemesterCollection';
 import { Courses } from '../course/CourseCollection';
 import { Slugs } from '../slug/SlugCollection';
-import { appLog } from '../log/AppLogCollection';
+import { CourseInstances } from '../course/CourseInstanceCollection';
 
 /* global isNaN */
 
@@ -37,18 +37,15 @@ function findSemesterSlug(starDataObject) {
       term = Semesters.FALL;
       break;
     case 'Winter':
-      appLog.info(`Got Winter semester term setting it to ${Semesters.FALL}`);
       term = Semesters.FALL; // TODO Not sure it this is right thing to do.
       break;
     default:
-      appLog.info(`Got unknown semester term ${semesterTokens[0]}`);
       return null;
   }
   let year = parseInt(semesterTokens[1], 10);
   if (isNaN(year)) {
     year = parseInt(semesterTokens[2], 10);
     if (isNaN(year)) {
-      appLog.info(`Got unknown semester year ${semesterTokens[1]} or ${semesterTokens[2]}`);
       return null;
     }
   }
@@ -141,6 +138,7 @@ export function processStarCsvData(student, csvData) {
     const dataObjects = _.map(filteredData, (data) => {
       const name = data[nameIndex];
       let grade = data[gradeIndex];
+      console.log(`grade ${grade}`);
       if (grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
         grade = data[transferGradeIndex];
       } else if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
@@ -149,6 +147,10 @@ export function processStarCsvData(student, csvData) {
         if (data[transferGradeIndex] > 2) {
           grade = 'B';
         }
+      } else if (grade === 'unknown' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
+        grade = data[transferGradeIndex];
+      } else if (grade.includes('L')) {
+        grade = 'C';
       }
       let number = data[numberIndex];
       if (isNaN(number)) {
@@ -172,4 +174,151 @@ export function processStarCsvData(student, csvData) {
   }
   // must be on the client.
   return null;
+}
+
+export function processBulkStarCsvData(csvData) {
+  if (Papa) {
+    const parsedData = Papa.parse(csvData);
+    if (parsedData.errors.length !== 0) {
+      throw new Meteor.Error(`Error found when parsing STAR data for ${parsedData.errors}`);
+    }
+    const headers = parsedData.data[0];
+    // console.log('parsed data', parsedData);
+    const semesterIndex = _.findIndex(headers, (str) => str === 'Semester');
+    const nameIndex = _.findIndex(headers, (str) => str === 'Course Name');
+    const numberIndex = _.findIndex(headers, (str) => str === 'Course Number');
+    const creditsIndex = _.findIndex(headers, (str) => str === 'Credits');
+    const gradeIndex = _.findIndex(headers, (str) => str === 'Grade');
+    const transferGradeIndex = _.findIndex(headers, (str) => str === 'Transfer Grade');
+    // const transferCourseNameIndex = _.findIndex(headers, (str) => str === 'Transfer Course Name');
+    const transferCourseNumberIndex = _.findIndex(headers, (str) => str === 'Transfer Course Number');
+    // const transferCourseDesc = _.findIndex(headers, (str) => str === 'Transfer Course Description');
+    const emailIndex = _.findIndex(headers, (str) => str === 'Email');
+    const firstNameIndex = _.findIndex(headers, (str) => str === 'First Name');
+    const lastNameIndex = _.findIndex(headers, (str) => str === 'Last Name');
+    if (_.every([semesterIndex, nameIndex, numberIndex, creditsIndex, gradeIndex, emailIndex, firstNameIndex, lastNameIndex], (num) => num === -1)) { // eslint-disable-line
+      throw new Meteor.Error(`Required CSV header field was not found in ${headers}`);
+    }
+    const filteredData = filterParsedData(parsedData);
+    // Create array of objects containing raw data to facilitate error message during processing.
+    const bulkData = {};
+    // const dataObjects = _.map(filteredData, (data) => {
+    _.forEach(filteredData, (data) => {
+      const name = data[nameIndex];
+      let grade = data[gradeIndex];
+      console.log(`grade ${grade}`);
+      if (grade === 'CR' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
+        grade = data[transferGradeIndex];
+      } else if (grade === 'CR' && data[transferGradeIndex] && !isNaN(data[transferGradeIndex])) {
+        // got number assuming it is AP exam score need to determine the type of the exam.
+        // const exam = data[transferCourseDesc];
+        if (data[transferGradeIndex] > 2) {
+          grade = 'B';
+        }
+      } else if (grade === 'unknown' && data[transferGradeIndex] && isNaN(data[transferGradeIndex])) {
+        grade = data[transferGradeIndex];
+      } else if (grade.includes('L')) {
+        grade = 'C';
+      }
+      let number = data[numberIndex];
+      if (isNaN(number)) {
+        number = data[transferCourseNumberIndex];
+      }
+      const student = data[emailIndex];
+      const obj = {
+        semester: data[semesterIndex],
+        name,
+        number,
+        credits: data[creditsIndex],
+        grade,
+        student,
+      };
+      if (!bulkData[student]) {
+        bulkData[student] = {};
+        bulkData[student].courses = [];
+        bulkData[student].firstName = data[firstNameIndex];
+        bulkData[student].lastName = data[lastNameIndex];
+      }
+      bulkData[student].courses.push(obj);
+    });
+    // Now we take that array of objects and transform them into CourseInstance data objects.
+    _.forEach(Object.keys(bulkData), (key) => {
+      bulkData[key].courses = _.filter(_.map(bulkData[key].courses, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) { // eslint-disable-line
+        return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
+      });
+    });
+    return bulkData;
+  }
+  return null;
+}
+
+/**
+ * Processes STAR JSON data and returns an array of objects containing CourseInstance fields.
+ * @param { String } student The slug of the student corresponding to this STAR data.
+ * @param { String } jsonData JSON object for a student.
+ * @returns { Array } A list of objects with fields: semester, course, note, verified, grade, and creditHrs.
+ * @memberOf api/star
+ */
+export function processStarJsonData(student, jsonData) {
+  if (student !== jsonData.email) {
+    throw new Meteor.Error(`JSON data is not for ${student}`);
+  }
+  const courses = jsonData.courses;
+  const dataObjects = _.map(courses, (course) => {
+    const name = course.name;
+    let grade = course.grade;
+    if (_.includes(CourseInstances.validGrades, grade)) {
+      if (grade === 'CR' && course.transferGrade && isNaN(course.transferGrade)) {
+        grade = course.transferGrade;
+      } else if (grade === 'CR' && course.transferGrade && !isNaN(course.transferGrade)) {
+        // got number assuming it is AP exam score need to determine the type of the exam.
+        if (course.transferGrade > 2) {
+          grade = 'B';
+        }
+      }
+    } else {
+      grade = 'OTHER';
+    }
+    let number = course.number;
+    if (isNaN(number)) {
+      number = course.transferNumber;
+    }
+    const obj = {
+      semester: course.semester,
+      name,
+      number,
+      credits: course.credits,
+      grade,
+      student,
+    };
+    return obj;
+  });
+
+  // console.log('single', dataObjects);
+  // Now we take that array of objects and transform them into CourseInstance data objects.
+  return _.filter(_.map(dataObjects, (dataObject) => makeCourseInstanceObject(dataObject)), function removeOther(ci) {
+    return ci.course !== Courses.unInterestingSlug && ci.semester !== null;
+  });
+}
+
+/**
+ * Processes STAR JSON data and returns an array of objects containing CourseInstance fields.
+ * @param { String } jsonData JSON array with objects for students.
+ * @returns { Array } A list of objects with fields: semester, course, note, verified, grade, and creditHrs.
+ * @memberOf api/star
+ */
+export function processBulkStarJsonData(jsonData) {
+  const bulkData = {};
+  _.forEach(jsonData, (data) => {
+    // console.log(data);
+    const student = data.email;
+    if (!bulkData[student]) {
+      bulkData[student] = {};
+      bulkData[student].courses = processStarJsonData(student, data);
+      bulkData[student].firstName = data.name.first;
+      bulkData[student].lastName = data.name.last;
+    }
+  });
+  // console.log('bulk', bulkData);
+  return bulkData;
 }

@@ -4,15 +4,14 @@ import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollection';
 import { AdvisorLogs } from '../log/AdvisorLogCollection';
 import { AdvisorProfiles } from '../user/AdvisorProfileCollection';
-import { AppLogs } from '../log/AppLogCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
-import { FacultyProfiles } from '../user/FacultyProfileCollection';
-import { Feeds } from '../feed/FeedCollection';
-import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
-import { HelpMessages } from '../help/HelpMessageCollection';
 import { DesiredDegrees } from '../degree-plan/DesiredDegreeCollection';
+import { FacultyProfiles } from '../user/FacultyProfileCollection';
+import { FeedbackInstances } from '../feedback/FeedbackInstanceCollection';
+import { Feeds } from '../feed/FeedCollection';
+import { HelpMessages } from '../help/HelpMessageCollection';
 import { Interests } from '../interest/InterestCollection';
 import { InterestTypes } from '../interest/InterestTypeCollection';
 import { MentorAnswers } from '../mentor/MentorAnswerCollection';
@@ -28,6 +27,7 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 import { Teasers } from '../teaser/TeaserCollection';
+import { UserInteractions } from '../analytic/UserInteractionCollection';
 import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 /**
@@ -45,7 +45,6 @@ class RadGradClass {
       AcademicYearInstances,
       AdvisorLogs,
       AdvisorProfiles,
-      AppLogs,
       CareerGoals,
       Courses,
       CourseInstances,
@@ -69,6 +68,7 @@ class RadGradClass {
       Slugs,
       StudentProfiles,
       Teasers,
+      UserInteractions,
       VerificationRequests,
     ];
 
@@ -78,7 +78,6 @@ class RadGradClass {
      * This is the list used to specify the collections for both dump and restore.
      * For example: Slugs, AcademicYearInstances, and PublicStats.
      * Some collections are not yet part of dump/restore.
-     * For example: AppLogs.
      */
     this.collectionLoadSequence = [
       Semesters,
@@ -102,6 +101,7 @@ class RadGradClass {
       VerificationRequests,
       Feeds,
       AdvisorLogs,
+      UserInteractions,
       MentorQuestions,
       MentorAnswers,
       Reviews,

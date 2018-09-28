@@ -8,7 +8,7 @@ import { InterestTypes } from '../../../api/interest/InterestTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Teasers } from '../../../api/teaser/TeaserCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 function numReferences(interest) {
   let references = 0;

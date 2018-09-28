@@ -11,6 +11,7 @@ import { getRouteUserName } from '../../components/shared/route-user-name.js';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { openCloudinaryWidget } from '../form-fields/open-cloudinary-widget';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 /* global alert */
 
@@ -150,7 +151,7 @@ Template.Student_About_Me_Widget.events({
     const collectionName = StudentProfiles.getCollectionName();
     const updateData = {};
     updateData.id = profile._id;
-    updateData.picture = event.target.picture.value;
+    updateData.picture = event.target.picture.value || defaultProfilePicture;
     updateMethod.call({ collectionName, updateData }, (error) => {
       if (error) {
         console.log('Error during Student profile picture update', error);

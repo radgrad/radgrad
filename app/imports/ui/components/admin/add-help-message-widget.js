@@ -4,7 +4,7 @@ import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { routeNames } from '../../../startup/client/router.js';
 
 const addSchema = new SimpleSchema({

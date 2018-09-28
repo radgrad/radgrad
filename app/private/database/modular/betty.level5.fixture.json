@@ -1,0 +1,215 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription": "Betty's course instances for level 4. Requires betty.student, extended.courses.interests, opportunities, betty.level1, betty.level2, betty.level3. [30,36,35] Spring-2015",
+  "collections": [
+    {
+      "name": "CourseInstanceCollection",
+      "contents": [
+        {
+          "semester": "Spring-2015",
+          "course": "ics_241",
+          "note": "ICS 241",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A-",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics_311",
+          "note": "ICS 311",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2015",
+          "course": "ics_314",
+          "note": "ICS 314",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics_212",
+          "note": "ICS 212",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2016",
+          "course": "ics_321",
+          "note": "ICS 321",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics_313",
+          "note": "ICS 313",
+          "verified": true,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2016",
+          "course": "ics_331",
+          "note": "ICS 331",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics_332",
+          "note": "ICS 332",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2017",
+          "course": "ics_422",
+          "note": "ICS 422",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics_414",
+          "note": "ICS 414",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2017",
+          "course": "ics_471",
+          "note": "ICS 471",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics_475",
+          "note": "ICS 475",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2018",
+          "course": "ics_484",
+          "note": "ICS 484",
+          "verified": false,
+          "creditHrs": 3,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        }
+      ]
+    },
+    {
+      "name": "OpportunityInstanceCollection",
+      "contents": [
+        {
+          "semester": "Summer-2014",
+          "opportunity": "google-summer-of-code",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2014",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2014",
+          "opportunity": "dahi-internship",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2015",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Summer-2015",
+          "opportunity": "sarp-internship",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "generic-project",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Fall-2015",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2016",
+          "opportunity": "shidler-bpc",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Spring-2016",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Summer-2016",
+          "opportunity": "generic-project",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        },
+        {
+          "semester": "Summer-2016",
+          "opportunity": "sarp-internship",
+          "verified": false,
+          "student": "betty@hawaii.edu"
+        }
+      ]
+    },
+    {
+      "name": "ReviewCollection",
+      "contents": [
+        {
+          "slug": "review-course-ics111-aaronvil",
+          "student": "betty@hawaii.edu",
+          "reviewType": "course",
+          "reviewee": "ics_111",
+          "semester": "Fall-2014",
+          "rating": 4,
+          "comments": "The course was very fun in learning how to do the projects we did in ICS 111. The projects weren't hard for beginner programmers and were interesting to get them to have more fun with programming. The only downside was that the class didn't fully prepare you for ICS 211 where the fun little projects became assignments focused on the next stage of programming. There isn't much new students can do in terms of preparing for ICS 211 from ICS 111 since it is based on what you learn, but the things that you do learn may prove useful.",
+          "moderated": true,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

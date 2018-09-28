@@ -1,0 +1,5 @@
+<template name="Explorer_CareerGoals_Page">
+  {{#Explorer_Layout addedList = addedCareerGoals nonAddedList = nonAddedCareerGoals type = 'careerGoals'}}
+    {{> Explorer_CareerGoals_Widget name=careerGoal.name slug=(slugName careerGoal.slugID) descriptionPairs=(descriptionPairs careerGoal) socialPairs=(socialPairs careerGoal) id=careerGoal._id updateID=updateID item=careerGoal}}
+  {{/Explorer_Layout}}
+</template>

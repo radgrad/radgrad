@@ -3,6 +3,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { $ } from 'meteor/jquery';
 import { getRouteUserName } from '../../components/shared/route-user-name';
 import { Users } from '../../../api/user/UserCollection';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Mobile_Second_Menu.helpers({
   isCurrentPage: function currentPage(routeName) {
@@ -26,9 +27,9 @@ Template.Mobile_Second_Menu.helpers({
     const username = getRouteUserName();
     if (username) {
       const profile = Users.getProfile(username);
-      return (profile.picture) ? profile.picture : '/images/default-profile-picture.png';
+      return (profile.picture) ? profile.picture : defaultProfilePicture;
     }
-    return '/images/default-profile-picture.png';
+    return defaultProfilePicture;
   },
 });
 

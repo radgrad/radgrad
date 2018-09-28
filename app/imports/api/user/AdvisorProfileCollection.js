@@ -1,7 +1,7 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseProfileCollection from './BaseProfileCollection';
+import BaseProfileCollection, { defaultProfilePicture } from './BaseProfileCollection';
 import { Users } from '../user/UserCollection';
 import { Interests } from '../interest/InterestCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
@@ -30,18 +30,19 @@ class AdvisorProfileCollection extends BaseProfileCollection {
    * @throws { Meteor.Error } If username has been previously defined, or if any interests or careerGoals are invalid.
    * @return { String } The docID of the AdvisorProfile.
    */
-  define({ username, firstName, lastName, picture = '/images/default-profile-picture.png', website, interests,
+  define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
            careerGoals }) {
     if (Meteor.isServer) {
       const role = ROLE.ADVISOR;
       const interestIDs = Interests.getIDs(interests);
       const careerGoalIDs = CareerGoals.getIDs(careerGoals);
       Slugs.define({ name: username, entityName: this.getType() });
-      const userID = Users.define({ username, role });
-      return this._collection.insert({
+      const profileID = this._collection.insert({
         username, firstName, lastName, role, picture, website, interestIDs,
-        careerGoalIDs, userID,
-      });
+        careerGoalIDs, userID: this.getFakeUserId() });
+      const userID = Users.define({ username, role });
+      this._collection.update(profileID, { $set: { userID } });
+      return profileID;
     }
     return undefined;
   }

@@ -1,0 +1,27 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription": "Defines student Betty Keanu. Requires minimal.fixture.",
+  "collections": [
+    {
+      "name": "StudentProfileCollection",
+      "contents": [
+        {
+          "firstName": "Betty",
+          "lastName": "Keanu",
+          "username": "betty@hawaii.edu",
+          "interests": [
+            "algorithms"
+          ],
+          "careerGoals": [
+            "data-scientist"
+          ],
+          "academicPlan": "bs-cs-2016",
+          "level": 5,
+          "hiddenCourses": [],
+          "hiddenOpportunities": [],
+          "isAlumni": false
+        }
+      ]
+    }
+  ]
+}

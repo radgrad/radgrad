@@ -10,9 +10,17 @@
       "popupWidth": 810,
       "popupHeight": 610
     },
+    "fixUserInteractions": false,
     "databaseRestoreFileName": "database/snapshot/2017-08-02-14-12-04.json",
     "appLogging": { "enable": true, "filter": ["*"], "client": true, "server": true },
     "admin": { "username": "radgrad@hawaii.edu", "development": true },
-    "cloudinary": {"cloud_name": "radgrad", "upload_preset": "CHANGEME"}
+    "cloudinary": {"cloud_name": "radgrad", "upload_preset": "CHANGEME"},
+    "level": {
+      "six": {"i": 100, "c": 100, "e": 100, "reviews": 6},
+      "five": {"i": 80, "c": 80, "e": 80, "reviews": 1},
+      "four": {"i": 30, "c": 36, "e": 30, "reviews": 0},
+      "three": {"i": 1, "c": 24, "e": 1, "reviews": 0},
+      "two": {"i": 0, "c": 12, "e": 0, "reviews": 0}
+    }
   }
 }

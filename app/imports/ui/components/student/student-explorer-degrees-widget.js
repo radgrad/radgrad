@@ -9,8 +9,8 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { updateAcademicPlanMethod } from '../../../api/user/UserCollection.methods';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { isInRole } from '../../utilities/template-helpers';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Student_Explorer_Degrees_Widget.helpers({
   fullName(user) {
@@ -29,17 +29,17 @@ Template.Student_Explorer_Degrees_Widget.helpers({
         return Users.getProfile(user).picture;
       }
     }
-    return '/images/default-profile-picture.png';
+    return defaultProfilePicture;
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
+      return RouteNames.studentCardExplorerUsersPageRouteName;
     } else
       if (group === 'faculty') {
-        return RouteNames.facultyExplorerUsersPageRouteName;
+        return RouteNames.facultyCardExplorerUsersPageRouteName;
       }
-    return RouteNames.mentorExplorerUsersPageRouteName;
+    return RouteNames.mentorCardExplorerUsersPageRouteName;
   },
   userStatus(degree) {
     let ret = true;
@@ -85,9 +85,6 @@ Template.Student_Explorer_Degrees_Widget.events({
         console.log('Error updating student\'s academic plan', error);
       } else {
         FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
-        // eslint-disable-next-line
-        const message = `${getRouteUserName()} updated their academic plan to ${AcademicPlans.toFullString(event.target.value)}`;
-        appLog.info(message);
       }
     });
   },

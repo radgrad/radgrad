@@ -3,6 +3,9 @@ import './advisor-academic-plan-page.js';
 
 import './advisor-completed-verifications-page.html';
 
+import './advisor-course-scoreboard-page.html';
+import './advisor-course-scoreboard-page';
+
 import './advisor-event-verification-page.html';
 
 import './advisor-moderation-page.html';

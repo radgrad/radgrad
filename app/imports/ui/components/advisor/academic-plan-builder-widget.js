@@ -8,8 +8,8 @@ import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
-import { Slugs, slugify } from '../../../api/slug/SlugCollection';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import slugify, { Slugs } from '../../../api/slug/SlugCollection';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getAllElementsWithAttribute, removeElement } from '../../../ui/utilities/dom-utilities';
 
@@ -175,7 +175,7 @@ Template.Academic_Plan_Builder_Widget.events({
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);
     instance.context.reset();
-    addSchema.clean(newData);
+    addSchema.clean(newData, { mutate: true });
     instance.context.validate(newData);
     if (instance.context.isValid()) {
       const definitionData = {};
@@ -202,6 +202,7 @@ Template.Academic_Plan_Builder_Widget.events({
       definitionData.slug = slug;
       definitionData.degreeSlug = degreeSlug;
       definitionData.name = name;
+      definitionData.description = name;
       definitionData.semester = semester;
       definitionData.coursesPerSemester = coursesPerSemester;
       definitionData.courseList = courseList;

@@ -3,7 +3,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
 import { _ } from 'meteor/erasaur:meteor-lodash';
-import { dumpDatabaseMethod, dumpAppLogMethod, clearAppLogMethod } from '../../../api/base/BaseCollection.methods.js';
+import { dumpDatabaseMethod } from '../../../api/base/BaseCollection.methods.js';
+import { generateStudentEmailsMethod } from '../../../api/user/UserCollection.methods';
 
 Template.Admin_DataBase_Dump_Page.helpers({
   errorMessage() {
@@ -58,34 +59,27 @@ Template.Admin_DataBase_Dump_Page.events({
       }
     });
   },
-  'click .jsDumpLog': function clickDumpLog(event, instance) {
+  'click .jsStudentEmails': function clickStudentEmails(event, instance) {
     event.preventDefault();
-    dumpAppLogMethod.call(null, (error, result) => {
+    generateStudentEmailsMethod.call(null, (error, result) => {
       if (error) {
-        console.log('Error during Log Dump: ', error);
+        console.log('Error during Generating Student Emails: ', error);
         instance.results.set(error);
         instance.successOrError.set('error');
       } else {
-        instance.results.set(result.applicationLog);
-        instance.timestamp.set(result.timestamp);
+        const data = {};
+        data.name = 'Students';
+        data.contents = result.students;
+        instance.results.set([data]);
+        instance.timestamp.set(new Date());
         instance.successOrError.set('success');
         const zip = new ZipZap();
-        const dir = 'radgrad-log';
-        const fileName = `${dir}/${moment(result.timestamp).format(databaseFileDateFormat)}.json`;
-        zip.file(fileName, JSON.stringify(result, null, 2));
+        const now = moment().format(databaseFileDateFormat);
+        const dir = `radgrad-students${now}`;
+        const fileName = `${dir}/Students.txt`;
+        zip.file(fileName, result.students.join('\n'));
         zip.saveAs(`${dir}.zip`);
       }
-    });
-  },
-  'click .jsClearLog': function clickDumpLog(event, instance) {
-    event.preventDefault();
-    clearAppLogMethod.call(null, (error) => {
-      if (error) {
-        console.log('Error during clearing Log: ', error);
-        instance.results.set(error);
-        instance.successOrError.set('error');
-      }
-      instance.successOrError.set('success');
     });
   },
 });

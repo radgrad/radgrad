@@ -17,9 +17,11 @@ import { VerificationRequests } from '../verification/VerificationRequestCollect
 
 /* eslint-disable no-param-reassign, class-methods-use-this */
 
+export const defaultProfilePicture = '/images/default-profile-picture.png';
+
 /** Set up the object to be used to map role names to their corresponding collections.
  * @memberOf api/user */
-const rolesToCollectionNames = { };
+const rolesToCollectionNames = {};
 rolesToCollectionNames[ROLE.ADVISOR] = 'AdvisorProfileCollection';
 rolesToCollectionNames[ROLE.FACULTY] = 'FacultyProfileCollection';
 rolesToCollectionNames[ROLE.MENTOR] = 'MentorProfileCollection';
@@ -46,12 +48,55 @@ class BaseProfileCollection extends BaseSlugCollection {
   }
 
   /**
+   * The subclass methods need a way to create a profile with a valid, though fake, userId.
+   * @returns {string}
+   */
+  getFakeUserId() {
+    return 'ABCDEFGHJKLMNPQRS';
+  }
+
+  /**
    * Returns the name of the collection associated with the given profile.
    * @param profile A Profile object.
    * @returns  { String } The name of a profile collection.
    */
   getCollectionNameForProfile(profile) {
     return rolesToCollectionNames[profile.role];
+  }
+
+  /**
+   * Returns the Profile's docID associated with instance, or throws an error if it cannot be found.
+   * If instance is a docID, then it is returned unchanged. If instance is a slug, its corresponding docID is returned.
+   * If instance is the value for the username field in this collection, then return that document's ID.
+   * If instance is the userID for the profile, then return the Profile's ID.
+   * If instance is an object with an _id field, then that value is checked to see if it's in the collection.
+   * @param { String } instance Either a valid docID, valid userID or a valid slug string.
+   * @returns { String } The docID associated with instance.
+   * @throws { Meteor.Error } If instance is not a docID or a slug.
+   */
+  getID(instance) {
+    let id;
+    // If we've been passed a document, check to see if it has an _id field and use that if available.
+    if (_.isObject(instance) && instance._id) {
+      instance = instance._id; // eslint-disable-line no-param-reassign
+    }
+    // If instance is the value of the username field for some document in the collection, then return its ID.
+    const usernameBasedDoc = this._collection.findOne({ username: instance });
+    if (usernameBasedDoc) {
+      return usernameBasedDoc._id;
+    }
+    // If instance is the value of the userID field for some document in the collection, then return its ID.
+    const userIDBasedDoc = this._collection.findOne({ userID: instance });
+    if (userIDBasedDoc) {
+      return userIDBasedDoc._id;
+    }
+    // Otherwise see if we can find instance as a docID or as a slug.
+    try {
+      id = (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
+    } catch (err) {
+      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`);
+    }
+    return id;
   }
 
   /**
@@ -70,6 +115,15 @@ class BaseProfileCollection extends BaseSlugCollection {
   }
 
   /**
+   * Returns the profile document associated with username, or null if none was found.
+   * @param username A username, such as 'johnson@hawaii.edu'.
+   * @returns The profile document, or null.
+   */
+  findByUsername(username) {
+    return this._collection.findOne({ username });
+  }
+
+  /**
    * Returns non-null if the user has a profile in this collection.
    * @param user The user (either their username (email) or their userID).
    * @return The profile document if the profile exists, or null if not found.
@@ -78,6 +132,21 @@ class BaseProfileCollection extends BaseSlugCollection {
   hasProfile(user) {
     const userID = Users.getID(user);
     return this._collection.findOne({ userID });
+  }
+
+  /**
+   * Returns true if the user has set their picture.
+   * @param user The user (either their username (email) or their userID).
+   * @return {boolean}
+   */
+  hasSetPicture(user) {
+    const userID = Users.getID(user);
+    const doc = this._collection.findOne({ userID });
+    // console.log(doc);
+    if (!doc) {
+      return false;
+    }
+    return !(_.isNil(doc.picture) || doc.picture === defaultProfilePicture);
   }
 
   /**
@@ -158,6 +227,7 @@ class BaseProfileCollection extends BaseSlugCollection {
     if (careerGoals) {
       updateData.careerGoalIDs = CareerGoals.getIDs(careerGoals);
     }
+    // console.log('_updateCommonFields', updateData);
   }
 }
 

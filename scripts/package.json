@@ -1,0 +1,28 @@
+{
+  "name": "download-bulk-star",
+  "version": "1.0.0",
+  "description": "Bulk download for STAR data.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cam Moore",
+  "license": "ISC",
+  "devDependencies": {
+    "docdash": "^0.3.0",
+    "es6-enum": "^1.0.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-meteor": "^4.1.6",
+    "eslint-plugin-react": "^7.0.1",
+    "jsdoc": "^3.4.0"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^4.0.2",
+    "lodash": "^4.17.5",
+    "moment": "^2.21.0",
+    "request": "^2.83.0"
+  }
+}

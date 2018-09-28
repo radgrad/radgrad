@@ -7,7 +7,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Users } from '../../../api/user/UserCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 function numReferences() {
   // currently nothing refers to a Teaser, but maybe in future something will.

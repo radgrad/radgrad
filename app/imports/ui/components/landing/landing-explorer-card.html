@@ -1,0 +1,43 @@
+<template name="Landing_Explorer_Card">
+  <div class="ui card radgrad-interest-card">
+    <div class="content">
+      <div class="header">{{itemName item}}</div>
+      <div class="meta">
+      </div>
+    </div>
+    <div class="content">
+      <p>{{itemShortDescription item}}...</p>
+    </div>
+    <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
+      {{#if typeCareerGoals}}
+        <a class="ui button"
+           href="{{pathFor careerGoalsRouteName careerGoal=(itemSlug item)}}"><i
+            class="chevron circle right icon"></i><br>View More</a>
+      {{else}}
+        {{#if typeCourses}}
+          <a class="ui button"
+             href="{{pathFor coursesRouteName course=(itemSlug item)}}"><i
+              class="chevron circle right icon"></i><br>View More</a>
+        {{else}}
+          {{#if typeDegrees}}
+            <a class="ui button"
+               href="{{pathFor degreesRouteName degree=(itemSlug item)}}"><i
+                class="chevron circle right icon"></i><br>View More</a>
+          {{else}}
+            {{#if typeInterests}}
+              <a class="ui button"
+                 href="{{pathFor interestRouteName interest=(itemSlug item)}}"><i
+                  class="chevron circle right icon"></i><br>View More</a>
+            {{else}}
+              {{#if typeOpportunities}}
+                <a class="ui button"
+                   href="{{pathFor opportunityRouteName opportunity=(itemSlug item)}}"><i
+                    class="chevron circle right icon"></i><br>View More</a>
+              {{/if}}
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</template>

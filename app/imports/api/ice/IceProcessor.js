@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../api/course/CourseCollection';
 
 /**
@@ -68,10 +69,10 @@ export function makeCourseICE(course, grade) {
     return { i, c, e };
   }
   // Courses get competency points only if you get an A or a B.
-  if (grade.includes('B')) {
+  if (_.includes(['B+', 'B', 'B-'], grade)) {
     c = gradeCompetency.B;
   } else
-    if (grade.includes('A')) {
+    if (_.includes(['A+', 'A', 'A-'], grade)) {
       c = gradeCompetency.A;
     }
   return { i, c, e };
@@ -86,7 +87,7 @@ export function makeCourseICE(course, grade) {
  */
 export function getEarnedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
-  docs.map((instance) => {
+  docs.forEach((instance) => {
     if (!(isICE(instance.ice))) {
       throw new Meteor.Error(`getEarnedICE passed ${instance} without a valid .ice field.`);
     }
@@ -109,7 +110,7 @@ export function getEarnedICE(docs) {
  */
 export function getProjectedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
-  docs.map((instance) => {
+  docs.forEach((instance) => {
     if (!(isICE(instance.ice))) {
       throw new Meteor.Error(`getProjectedICE passed ${instance} without a valid .ice field.`);
     }

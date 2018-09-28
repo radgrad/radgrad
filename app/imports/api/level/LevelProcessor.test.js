@@ -1,9 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { StudentProfiles } from '../user/StudentProfileCollection';
-import { calcLevel } from './LevelProcessor';
+import { defaultCalcLevel } from './LevelProcessor';
 import { removeAllEntities } from '../base/BaseUtilities';
-import { ROLE } from '../role/Role';
+import { RadGrad } from '../radgrad/RadGrad';
+import { defineTestFixtures } from '../test/test-utilities';
 
 /* eslint prefer-arrow-callback: 'off', no-unused-expressions: 'off' */
 /* eslint-env mocha */
@@ -12,8 +13,6 @@ import { ROLE } from '../role/Role';
 
 if (Meteor.isServer) {
   describe('LevelProcessor Tests', function testSuite() {
-    let studentID;
-
     before(function setup() {
       removeAllEntities();
     });
@@ -22,17 +21,73 @@ if (Meteor.isServer) {
       removeAllEntities();
     });
 
-    it.skip('Level 1 Student', function test() {
-      studentID = StudentProfiles.define({
+    it('Level 1 Student', function test() {
+      const profileID = StudentProfiles.define({
+        username: 'levelone@hawaii.edu',
         firstName: 'Level',
         lastName: 'One',
-        slug: 'levelone',
-        email: 'levelone@hawaii.edu',
-        role: ROLE.STUDENT,
-        password: 'foo',
+        level: 6,
       });
-      const level = calcLevel(studentID);
-      expect(level).to.equal(1);
+      const profile = StudentProfiles.findDoc(profileID);
+      let level;
+      if (RadGrad.calcLevel) {
+        level = RadGrad.calcLevel(profile.userID);
+      } else {
+        level = defaultCalcLevel(profile.userID);
+      }
+      expect(level)
+        .to
+        .equal(1);
+    });
+
+    it('Betty Levels Student', function test(done) {
+      this.timeout(0); // turn off time outs?
+      setTimeout(done, 20000);
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student']);
+      let bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      expect(bettyProfile).to.exist;
+      const level = defaultCalcLevel(bettyProfile.userID);
+      expect(level)
+        .to
+        .equal(1); // no ice points
+      defineTestFixtures(['betty.level1']); // one A [0, 10, 0]
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(1);
+      defineTestFixtures(['betty.level2']); // ice [0, 16, 0]
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(2);
+      defineTestFixtures(['opportunities', 'extended.opportunities', 'betty.level3']); // [5, 26, 5]
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(3);
+      defineTestFixtures(['betty.level4']); // [30, 36, 35]
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(3); // since she doesn't have a picture
+      removeAllEntities();
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
+        'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level4']);
+      bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(4);
+      removeAllEntities();
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
+        'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level5']);
+      bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(5);
+      removeAllEntities();
+      defineTestFixtures(['minimal', 'extended.courses.interests', 'betty.student.picture', 'betty.level1',
+        'betty.level2', 'opportunities', 'extended.opportunities', 'betty.level3', 'betty.level6']);
+      bettyProfile = StudentProfiles.findDoc({ username: 'betty@hawaii.edu' });
+      expect(defaultCalcLevel(bettyProfile.userID))
+        .to
+        .equal(6);
+      done();
     });
   });
 }

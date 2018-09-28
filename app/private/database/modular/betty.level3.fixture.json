@@ -1,0 +1,31 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription": "Betty's course instances for level 3. Requires betty.student, extended.courses.interests, opportunities, betty.level1, betty.level2. [5,26,5] Spring-2015",
+  "collections": [
+    {
+      "name": "CourseInstanceCollection",
+      "contents": [
+        {
+          "semester": "Spring-2015",
+          "course": "ics_211",
+          "note": "ICS 211",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        }
+      ]
+    },
+    {
+      "name": "OpportunityInstanceCollection",
+      "contents": [
+        {
+          "semester": "Fall-2014",
+          "opportunity": "greyhats",
+          "verified": true,
+          "student": "betty@hawaii.edu"
+        }
+      ]
+    }
+  ]
+}

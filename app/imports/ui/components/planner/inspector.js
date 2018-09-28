@@ -16,8 +16,8 @@ import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
 import * as RouteNames from '../../../startup/client/router.js';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Inspector.onCreated(function inspectorOnCreated() {
   this.state = this.data.dictionary;
@@ -514,8 +514,6 @@ Template.Inspector.events({
     Template.instance().state.set(plannerKeys.detailOpportunity, null);
     Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
     const instance = Template.instance();
-    const message = `${getRouteUserName()} inspected ${course.shortName}`;
-    appLog.info(message);
     getFutureEnrollmentMethod.call(event.target.id, (error, result) => {
       if (error) {
         console.log('Error in getting future enrollment', error);
@@ -532,19 +530,20 @@ Template.Inspector.events({
     Template.instance().state.set(plannerKeys.detailCourseInstance, null);
     Template.instance().state.set(plannerKeys.detailOpportunity, opportunity);
     Template.instance().state.set(plannerKeys.detailOpportunityInstance, null);
-    const message = `${getRouteUserName()} inspected ${opportunity.name}`;
-    appLog.info(message);
   },
   'click button.verifyInstance': function clickButtonVerifyInstance(event) {
     event.preventDefault();
     const id = event.target.id;
-    const oi = OpportunityInstances.findDoc(id);
-    const opportunity = Opportunities.findDoc(oi.opportunityID);
     const definitionData = { student: getRouteUserName(), opportunityInstance: id };
     const collectionName = VerificationRequests.getCollectionName();
     defineMethod.call({ collectionName, definitionData });
-    const message = `${getRouteUserName()} requested verification for  ${opportunity.name}`;
-    appLog.info(message);
+    const typeData = Slugs.getNameFromID(OpportunityInstances.getOpportunityDoc(id).slugID);
+    const interactionData = { username: getRouteUserName(), type: 'verifyRequest', typeData };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.log('Error creating UserInteraction', err);
+      }
+    });
   },
 });
 

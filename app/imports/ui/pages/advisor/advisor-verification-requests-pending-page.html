@@ -1,8 +1,5 @@
 <template name="Advisor_Verification_Requests_Pending_Page">
-  <div class="layout-page">
-    <div class="ui container">
-      {{> Help_Panel_Widget}}
-      {{> Verification_Requests_Pending }}
-    </div>
-  </div>
+  {{#Advisor_Verification_Layout}}
+    {{> Verification_Requests_Pending }}
+  {{/Advisor_Verification_Layout}}
 </template>

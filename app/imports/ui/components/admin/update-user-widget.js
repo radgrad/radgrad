@@ -13,7 +13,7 @@ import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE, ROLES } from '../../../api/role/Role.js';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   username: String,
@@ -114,7 +114,7 @@ Template.Update_User_Widget.helpers({
     return profile.declaredSemesterID;
   },
   semesters() {
-    return Semesters.find({});
+    return Semesters.find({}, { sort: { semesterNumber: 1 } });
   },
   slug() {
     const profile = Users.getProfile(Template.currentData().updateID.get());

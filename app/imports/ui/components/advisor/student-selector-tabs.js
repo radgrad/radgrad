@@ -1,5 +1,6 @@
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { ROLE } from '../../../api/role/Role';
 import { sessionKeys } from '../../../startup/client/session-state';
 import { Users } from '../../../api/user/UserCollection.js';
@@ -13,6 +14,9 @@ Template.Student_Selector_Tabs.onCreated(function studentSelectorTabsOnCreated()
   if (this.data.studentID) {
     this.studentID = this.data.studentID;
   }
+  this.firstNameRegex = this.data.firstNameRegex;
+  this.lastNameRegex = this.data.lastNameRegex;
+  this.userNameRegex = this.data.userNameRegex;
 });
 
 Template.Student_Selector_Tabs.onRendered(function studentSelectorTabsOnRendered() {
@@ -40,15 +44,42 @@ Template.Student_Selector_Tabs.helpers({
       regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}`);
     } else
       if (rangeLength === 4) {
-        regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^
-        ${range.substring(2, 3)}|^${range.substring(3, 4)}`);
+        // eslint-disable-next-line
+        regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}|^${range.substring(3, 4)}`);
       }
-    return Users.findProfilesWithRole(role, { lastName: regex }, { sort: { lastName: 1 } });
+
+    const profiles = Users.findProfilesWithRole(role, { lastName: regex }, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance().firstNameRegex.get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance().lastNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance().userNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered;
+  },
+  usersCount(role, range) {
+    const rangeLength = range.length;
+    let regex;
+    if (rangeLength === 3) {
+      regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}`);
+    } else
+    if (rangeLength === 4) {
+      // eslint-disable-next-line
+      regex = new RegExp(`^${range.substring(0, 1)}|^${range.substring(1, 2)}|^${range.substring(2, 3)}|^${range.substring(3, 4)}`);
+    }
+    const profiles = Users.findProfilesWithRole(role, { lastName: regex }, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance().firstNameRegex.get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance().lastNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance().userNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
   },
   name(user, tooltip) {
     const name = `${user.lastName}, ${user.firstName}`;
     if (!tooltip) {
-      return name.length > 15 ? `${name.substring(0, 15)}...` : name;
+      return name.length > 13 ? `${name.substring(0, 13)}...` : name;
     }
     return name;
   },
@@ -71,6 +102,18 @@ Template.Student_Selector_Tabs.helpers({
   },
   username() {
     return Template.instance().state.get('username');
+  },
+  level(user) {
+    return user.level;
+  },
+  firstNameRegex() {
+    return Template.instance().firstNameRegex;
+  },
+  lastNameRegex() {
+    return Template.instance().lastNameRegex;
+  },
+  userNameRegex() {
+    return Template.instance().userNameRegex;
   },
 });
 

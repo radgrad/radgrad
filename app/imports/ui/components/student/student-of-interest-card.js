@@ -111,6 +111,12 @@ Template.Student_Of_Interest_Card.helpers({
     }
     return Users.getProfile(studentID).picture;
   },
+  studentFullName(studentID) {
+    if (studentID === 'elispsis') {
+      return '';
+    }
+    return Users.getFullName(studentID);
+  },
   typeCourse() {
     return (this.type === 'courses');
   },
@@ -118,7 +124,7 @@ Template.Student_Of_Interest_Card.helpers({
     return Users.getProfile(studentID).username;
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
@@ -171,4 +177,9 @@ Template.Student_Of_Interest_Card.events({
       }
     });
   },
+});
+
+Template.Student_Of_Interest_Card.onRendered(function interestCardOnRendered() {
+  this.$('.ui .img')
+    .popup();
 });

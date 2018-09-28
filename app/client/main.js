@@ -1,5 +1,6 @@
 import { Tracker } from 'meteor/tracker';
 import { UserStatus } from 'meteor/mizzao:user-status';
+import '/imports/api/analytic';
 import '/imports/api/base';
 import '/imports/api/career';
 import '/imports/api/course';
@@ -30,9 +31,7 @@ import '/imports/startup/client';
 import '/imports/startup/both';
 
 import '/imports/ui/components/admin';
-import '/imports/ui/components/admin/form-fields';
 import '/imports/ui/components/advisor';
-import '/imports/ui/components/advisor/form-fields';
 import '/imports/ui/components/faculty';
 import '/imports/ui/components/form-fields';
 import '/imports/ui/components/landing';
@@ -60,15 +59,16 @@ import '/imports/ui/pages/advisor';
 import '/imports/ui/pages/faculty';
 import '/imports/ui/pages/landing';
 import '/imports/ui/pages/mentor';
+import '/imports/ui/pages/shared';
 import '/imports/ui/pages/student';
 import '/imports/ui/pages/guidedtour';
 
-import '/imports/ui/stylesheets/style.css';
 
 import '/imports/ui/utilities';
 
-import './lib/semantic-ui/semantic.min.css';
+// import './lib/semantic-ui/semantic.min.css';
 import './lib/semantic-ui/semantic.min.js';
+import '../imports/ui/stylesheets/style.css';
 
 Tracker.autorun(function (c) {
   try {

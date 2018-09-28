@@ -96,10 +96,10 @@ class AcademicYearInstanceCollection extends BaseCollection {
   update(docID, { year, springYear, studentID, semesterIDs }) {
     this.assertDefined(docID);
     const updateData = {};
-    if (year) {
+    if (_.isNumber(year)) {
       updateData.year = year;
     }
-    if (springYear) {
+    if (_.isNumber(springYear)) {
       updateData.springYear = springYear;
     }
     if (studentID) {
@@ -161,6 +161,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this.publicationNames.Public, function publish() {
+        if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
+          return this.ready();
+        }
         if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }
@@ -170,6 +173,9 @@ class AcademicYearInstanceCollection extends BaseCollection {
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
+          return instance._collection.find();
+        }
         return instance._collection.find({ studentID });
       });
     }

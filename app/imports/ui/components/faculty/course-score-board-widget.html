@@ -1,0 +1,19 @@
+<template name="Course_Score_Board_Widget">
+    <h2 class="ui dividing header">COURSE SCOREBOARD</h2>
+    {{> Course_Scoreboard_Filter_Widget dictionary=getDictionary}}
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Course</th>
+            {{#each semester in upcomingSemesters}}
+                <th>{{semesterName semester}}</th>
+            {{/each}}
+        </tr>
+        </thead>
+        <tbody>
+        {{#each course in courses}}
+            {{> Course_Upcoming_Semesters_Widget course=course semesters=upcomingSemesters}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>

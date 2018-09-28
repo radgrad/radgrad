@@ -1,0 +1,118 @@
+CSV heading:
+
+Campus,	Semester Key,	Semester,	Level,	Course Name,	Course Number,	Course Description,	Credits,	Grade,	WI,	E,	O,	H,	Foun.,	Div.,	NI,	UD,	SF,	Area,	Area2,	Area3,	Area4,	Area5,	Attempted Credits,	GPR Credits,	Earned Credits,	Quality Points,	Repeats,	College,	Instructor,	Banner Comments,	Academic Pathway Comments,	Transfer Institution,	Transfer Course Name,	Transfer Course Number,	 Transfer Course Description,	Transfer Credits,	Transfer Grade,	Transfer Accept
+
+
+JSON object:
+{
+        "attributes": [
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " "
+        ],
+        "attributeChecks": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "areas": [
+          "COMMUNICATIONS( 2014-AS)",
+          null,
+          null,
+          null,
+          null
+        ],
+        "key": 7077,
+        "semesterKey": "200910",
+        "semester": "Fall 2008",
+        "description": "Composition I",
+        "name": "ENG",
+        "number": "100",
+        "credits": "3",
+        "grade": "C",
+        "level": "UG",
+        "crn": " ",
+        "gradeMode": " ",
+        "repeats": " ",
+        "com": "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ",
+        "banCom": "X",
+        "transferInstitution": "U of Hawaii Leeward Comm Col",
+        "transferName": "ENG",
+        "transferNumber": "100",
+        "accept": "Y",
+        "transferDescription": "Composition I",
+        "transferCredits": "3",
+        "transferGrade": "C",
+        "transfer": true,
+        "attemptedCredits": 0.0,
+        "instructor": "unknown",
+        "earnedCredits": 0.0,
+        "gprCredits": 0.0,
+        "qualityPoints": 0.0,
+        "college": "Academic Support"
+      },
+
+
+CSV -> JSON
+===========
+Campus, -> None
+Semester Key,	-> "semesterKey"
+Semester,	-> "semester"
+Level,	-> "level"
+Course Name, -> "name"
+Course Number, -> "number"
+Course Description,	-> "description"
+Credits, -> "credits"
+Grade, -> "grade"
+WI, -> "attributes": []
+E,
+O,
+H,
+Foun.,
+Div.,
+NI,
+UD,
+SF,
+Area,	-> "areas": []
+Area2,
+Area3,
+Area4,
+Area5,
+Attempted Credits, -> "attemptedCredits"
+GPR Credits, -> "gprCredits"
+Earned Credits,	-> "earnedCredits"
+Quality Points,	->"qualityPoints"
+Repeats, -> "repeats"
+College, -> "college"
+Instructor,	-> "instructor"
+Banner Comments, -> "banCom"
+Academic Pathway Comments, -> "com"
+Transfer Institution,	-> "transferInstitution"
+Transfer Course Name,	-> "transferName"
+Transfer Course Number,	-> "transferNumber"
+Transfer Course Description, -> "transferDescription"
+Transfer Credits,	-> "transferCredits"
+Transfer Grade,	-> "transferGrade"
+Transfer Accept -> "accept"

@@ -3,6 +3,7 @@ import { $ } from 'meteor/jquery';
 import { getRouteUserName } from '../../components/shared/route-user-name';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.First_Menu.helpers({
   firstName() {
@@ -32,9 +33,9 @@ Template.First_Menu.helpers({
     const username = getRouteUserName();
     if (username) {
       const profile = Users.getProfile(username);
-      return (profile.picture) ? profile.picture : '/images/default-profile-picture.png';
+      return (profile.picture) ? profile.picture : defaultProfilePicture;
     }
-    return '/images/default-profile-picture.png';
+    return defaultProfilePicture;
   },
 });
 

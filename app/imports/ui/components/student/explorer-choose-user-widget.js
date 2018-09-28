@@ -3,8 +3,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import * as RouteNames from '../../../startup/client/router.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
-import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
+import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
 
 Template.Explorer_Choose_User_Widget.onCreated(function explorerChooseUserWidgetOnCreated() {
   if (this.data.userID) {
@@ -33,7 +32,7 @@ Template.Explorer_Choose_User_Widget.helpers({
     if (user.picture) {
       return user.picture;
     }
-    return '/images/default-profile-picture.png';
+    return defaultProfilePicture;
   },
   studentRole() {
     return ROLE.STUDENT;
@@ -44,11 +43,11 @@ Template.Explorer_Choose_User_Widget.helpers({
   usersRouteName() {
     const group = FlowRouter.current().route.group && FlowRouter.current().route.group.name;
     if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
+      return RouteNames.studentCardExplorerUsersPageRouteName;
     } else if (group === 'faculty') {
-      return RouteNames.facultyExplorerUsersPageRouteName;
+      return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
-    return RouteNames.mentorExplorerUsersPageRouteName;
+    return RouteNames.mentorCardExplorerUsersPageRouteName;
   },
 });
 
@@ -58,8 +57,6 @@ Template.Explorer_Choose_User_Widget.events({
     const userID = username && Users.getID(username);
     if (userID) {
       instance.userID.set(userID);
-      const message = `${getRouteUserName()} selected ${Users.getFullName(userID)} to view.`;
-      appLog.info(message);
     }
   },
 });

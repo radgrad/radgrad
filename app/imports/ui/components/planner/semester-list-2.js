@@ -7,13 +7,12 @@ import { Courses } from '../../../api/course/CourseCollection.js';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
-import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getRouteUserName } from '../shared/route-user-name';
 import { plannerKeys } from './academic-plan';
-import { appLog } from '../../../api/log/AppLogCollection';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Semester_List_2.onCreated(function semesterListOnCreate() {
   if (this.data) {
@@ -31,7 +30,7 @@ Template.Semester_List_2.helpers({
     if (Template.instance().data.semester) {
       return CourseInstances.find({
         studentID: getUserIdFromRoute(),
-        note: /ICS/,
+        note: /ICS|EE|CEE|ME|OE|BE/,
         semesterID: Template.instance().data.semester._id,
       }, { sort: { note: 1 } }).fetch();
     }
@@ -112,10 +111,6 @@ Template.Semester_List_2.events({
                 instance.state.set(plannerKeys.detailCourse, null);
                 instance.state.set(plannerKeys.detailCourseInstance, ci);
                 instance.state.set(plannerKeys.detailICE, ci.ice);
-                const semesterName = Semesters.toString(semesterID);
-                // eslint-disable-next-line
-                const message = `${username} added ${course.number} ${course.shortName} (${semesterName}) to their Degree Plan.`;
-                appLog.info(message);
                 getFutureEnrollmentMethod.call(courseID, (err, result) => {
                   if (err) {
                     console.log('Error in getting future enrollment', error);
@@ -123,6 +118,12 @@ Template.Semester_List_2.events({
                     if (courseID === result.courseID) {
                       instance.state.set(plannerKeys.plannedEnrollment, result);
                     }
+                });
+                const interactionData = { username, type: 'addCourse', typeData: slug };
+                userInteractionDefineMethod.call(interactionData, (err) => {
+                  if (err) {
+                    console.log('Error creating UserInteraction', err);
+                  }
                 });
               }
             });
@@ -145,11 +146,12 @@ Template.Semester_List_2.events({
                   FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                   FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                   FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-                  const semesterName = Semesters.toString(semesterID);
-                  const opportunity = Opportunities.findDoc(opportunityID);
-                  // eslint-disable-next-line
-                  const message = `${username} added ${opportunity.name} (${semesterName}) to their Degree Plan.`;
-                  appLog.info(message);
+                  const interactionData = { username, type: 'addOpportunity', typeData: slug };
+                  userInteractionDefineMethod.call(interactionData, (err) => {
+                    if (err) {
+                      console.log('Error creating UserInteraction', err);
+                    }
+                  });
                 }
               });
             }
@@ -175,13 +177,8 @@ Template.Semester_List_2.events({
               FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
               FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
               // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
-              const semesterName = Semesters.toString(semesterID);
               const ci = CourseInstances.findDoc(id);
               const course = Courses.findDoc(ci.courseID);
-              // eslint-disable-next-line
-              const message = `${getRouteUserName()} moved ${course.number} ${course.shortName} to ${semesterName} in their Degree Plan.`;
-              // console.log(message);
-              appLog.info(message);
               getFutureEnrollmentMethod.call(course._id, (err, result) => {
                 if (err) {
                   console.log('Error in getting future enrollment', error);
@@ -212,12 +209,6 @@ Template.Semester_List_2.events({
                 FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
                 FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
                 // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
-                const semesterName = Semesters.toString(semesterID);
-                const oi = OpportunityInstances.findDoc(id);
-                const opportunity = Opportunities.findDoc(oi.opportunityID);
-                // eslint-disable-next-line
-                const message = `${getRouteUserName()} moved ${opportunity.name} to ${semesterName} in their Degree Plan.`;
-                appLog.info(message);
               }
             });
           }
@@ -239,9 +230,6 @@ Template.Semester_List_2.events({
         template.state.set(plannerKeys.detailCourseInstance, ci);
         template.state.set(plannerKeys.detailICE, ci.ice);
         const course = Courses.findDoc(ci.courseID);
-        const semester = Semesters.toString(ci.semesterID);
-        const message = `${getRouteUserName()} inspected ${ci.note} ${course.shortName} (${semester}).`;
-        appLog.info(message);
         getFutureEnrollmentMethod.call(ci.courseID, (error, result) => {
           if (error) {
             console.log('Error in getting future enrollment', error);
@@ -267,10 +255,6 @@ Template.Semester_List_2.events({
           template.state.set(plannerKeys.detailOpportunity, null);
           template.state.set(plannerKeys.detailOpportunityInstance, oi);
           template.state.set(plannerKeys.detailICE, oi.ice);
-          const opportunity = Opportunities.findDoc(oi.opportunityID);
-          const semester = Semesters.toString(oi.semesterID);
-          const message = `${getRouteUserName()} inspected ${opportunity.name} (${semester}).`;
-          appLog.info(message);
         } else
           if (Opportunities.isDefined(target.id)) {
             const opportunity = Opportunities.findDoc(target.id);

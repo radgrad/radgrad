@@ -69,7 +69,7 @@ class ReviewCollection extends BaseSlugCollection {
          }) {
     // Validate student, get studentID.
     const studentID = Users.getID(student);
-    Users.assertInRole(studentID, [ROLE.STUDENT]);
+    Users.assertInRole(studentID, [ROLE.STUDENT, ROLE.ALUMNI]);
     // Validate reviewType, get revieweeID and assign slug if not provided.
     this.assertValidReviewType(reviewType);
     let revieweeID;
@@ -134,7 +134,7 @@ class ReviewCollection extends BaseSlugCollection {
     if (semester) {
       updateData.semesterID = Semesters.getID(semester);
     }
-    if (rating) {
+    if (_.isNumber(rating)) {
       this.assertValidRating(rating);
       updateData.rating = rating;
     }

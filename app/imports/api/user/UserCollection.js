@@ -104,8 +104,11 @@ class UserCollection {
    * @returns { boolean } True if user is defined, false otherwise.
    */
   isDefined(user) {
-    const cursor = (Meteor.users.find({ _id: user })) || (Meteor.users.find({ username: user }));
-    return cursor && cursor.fetch().length > 0;
+    const userDoc = (Meteor.users.findOne({ _id: user })) || (Meteor.users.findOne({ username: user }));
+    if (!userDoc) {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -174,6 +177,7 @@ class UserCollection {
 
   /**
    * Returns the profile document associated with user, or null if not found.
+   * Assumes that the user is defined. If not, throws an error.
    * @param user The username or userID.
    * @returns { Object | Null } The profile document or null if not found.
    */
@@ -185,6 +189,21 @@ class UserCollection {
     }
     return StudentProfiles.hasProfile(userID) || FacultyProfiles.hasProfile(userID)
         || MentorProfiles.hasProfile(userID) || AdvisorProfiles.hasProfile(userID);
+  }
+
+  /**
+   * Returns the profile associated with the passed username, or null if not found.
+   * Does not check to see if the user is defined, which makes this method useful for Accounts.validateNewUser.
+   * @param username A username.
+   * @returns The profile document, or null if not found.
+   */
+  findProfileFromUsername(username) {
+    return StudentProfiles.findByUsername(username) || FacultyProfiles.findByUsername(username)
+        || MentorProfiles.findByUsername(username) || AdvisorProfiles.findByUsername(username);
+  }
+
+  count() {
+    return StudentProfiles.count() + FacultyProfiles.count() + MentorProfiles.count() + AdvisorProfiles.count();
   }
 
   /**

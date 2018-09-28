@@ -6,9 +6,10 @@ import { Roles } from 'meteor/alanning:roles';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection';
+import { Users } from '../../../api/user/UserCollection';
 import { ROLE } from '../../../api/role/Role.js';
 import { Semesters } from '../../../api/semester/SemesterCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
   semester: String,
@@ -26,11 +27,11 @@ Template.Add_Course_Instance_Widget.onCreated(function onCreated() {
 
 Template.Add_Course_Instance_Widget.helpers({
   semesters() {
-    return Semesters.find({});
+    return Semesters.find({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
-    const sorted = _.sortBy(students, 'lastName');
+    const sorted = _.sortBy(students, student => Users.getFullName(student.username));
     return sorted;
   },
   courses() {

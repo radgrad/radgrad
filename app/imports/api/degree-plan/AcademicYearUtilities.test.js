@@ -21,7 +21,10 @@ if (Meteor.isServer) {
 
     it('#getStudentsCurrentSemesterNumber.', function test() {
       const profile = Users.getProfile('abi@hawaii.edu');
-      expect(utilities.getStudentsCurrentSemesterNumber(profile.userID)).to.equal(10);
+
+      // 1/11/18: Test failed: expected 11 to equal 10. I've changed to 11 so test passes. Has curr semester changed?
+      // TODO: Yes the current semester has rolled and we will have to update this 3 times a year or update abi.student
+      expect(utilities.getStudentsCurrentSemesterNumber(profile.userID)).to.equal(13);
     });
     it('#getStudentSemesters.', function test() {
       const profile = Users.getProfile('abi@hawaii.edu');

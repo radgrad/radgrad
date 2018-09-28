@@ -1,5 +1,26 @@
 /** @namespace ui/components/landing */
 
+import './landing-card-explorer-careergoals-widget.html';
+import './landing-card-explorer-careergoals-widget';
+
+import './landing-card-explorer-courses-widget.html';
+import './landing-card-explorer-courses-widget';
+
+import './landing-card-explorer-degrees-widget.html';
+import './landing-card-explorer-degrees-widget';
+
+import './landing-card-explorer-interests-widget.html';
+import './landing-card-explorer-interests-widget';
+
+import './landing-card-explorer-opportunities-widget.html';
+import './landing-card-explorer-opportunities-widget';
+
+import './landing-card-explorer-plans-widget.html';
+import './landing-card-explorer-plans-widget';
+
+import './landing-explorer-card.html';
+import './landing-explorer-card';
+
 import './landing-explorer-careergoals-widget.html';
 import './landing-explorer-careergoals-widget';
 
@@ -18,11 +39,20 @@ import './landing-explorer-menu';
 import './landing-explorer-opportunities-widget.html';
 import './landing-explorer-opportunities-widget';
 
+import './landing-explorer-opportunities-widget-teaser.html';
+import './landing-explorer-opportunities-widget-teaser';
+
+import './landing-explorer-plan-card.html';
+import './landing-explorer-plan-card';
+
 import './landing-explorer-plans-widget.html';
 import './landing-explorer-plans-widget';
 
 import './landing-green-background.css';
 import './landing-grey-background.css';
+
+import './landing-interest-list.html';
+import './landing-interest-list';
 
 import './landing-section-1.css';
 import './landing-section-1.html';

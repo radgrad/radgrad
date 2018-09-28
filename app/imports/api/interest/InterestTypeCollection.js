@@ -1,3 +1,4 @@
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import BaseTypeCollection from '../base/BaseTypeCollection';
 
 
@@ -26,6 +27,25 @@ class InterestTypeCollection extends BaseTypeCollection {
    */
   define({ name, slug, description }) {
     return super.define({ name, slug, description });
+  }
+
+  /**
+   * Update an InterestType.
+   * @param docID the docID to be updated.
+   * @param name the new name (optional).
+   * @param description the new description (optional).
+   * @throws { Meteor.Error } If docID is not defined.
+   */
+  update(docID, { name, description }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (!_.isNil(name)) {
+      updateData.name = name;
+    }
+    if (!_.isNil(description)) {
+      updateData.description = description;
+    }
+    this._collection.update(docID, { $set: updateData });
   }
 
 }

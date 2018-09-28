@@ -5,7 +5,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 Template.List_Opportunity_Instances_Widget.helpers({
   opportunityInstances() {

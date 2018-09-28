@@ -1,0 +1,12 @@
+<template name="User_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>{{label}}</label>
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="{{fieldName}}">
+      <option value="">Select {{label}}</option>
+      {{#each user in users}}
+        <option value="{{user._id}}" selected="{{isSelected user._id selectedUserID}}">{{name user}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

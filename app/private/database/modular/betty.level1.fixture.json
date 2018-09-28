@@ -1,0 +1,20 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription": "Betty's course instances for level 1. Requires betty.student and extended.courses.interests. [0,10,0]",
+  "collections": [
+    {
+      "name": "CourseInstanceCollection",
+      "contents": [
+        {
+          "semester": "Fall-2014",
+          "course": "ics_111",
+          "note": "ICS 111",
+          "verified": true,
+          "creditHrs": 4,
+          "grade": "A",
+          "student": "betty@hawaii.edu"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+<template name="Semester_Add">
+  {{#if typeCourse}}
+    <div class="ui button">
+      <div class = "chooseYear"><i class="plus icon"></i><br>Add to Plan</div>
+      <div class="ui fluid popup transition hidden">
+        <div class="ui secondary vertical mini menu">
+          {{#each year in nextYears 4}}
+            <a class="item chooseSemester">{{year}}</a>
+            <div class="ui fluid popup transition hidden">
+              <div class="ui secondary vertical mini menu">
+                {{#each semester in yearSemesters year}}
+                  <a class="item addToPlan">{{semester}}</a>
+                {{/each}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="ui button">
+      <div class="chooseSemester"><i class="plus icon"></i><br>Add to Plan</div>
+      <div class="ui fluid popup transition hidden">
+        <div class="ui secondary vertical mini menu">
+          {{#each semester in itemSemesters item}}
+            <a class="item addToPlan" data-position="right center">{{semester}}</a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

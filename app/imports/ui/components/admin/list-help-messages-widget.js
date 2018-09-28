@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import { HelpMessages } from '../../../api/help/HelpMessageCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 Template.List_Help_Messages_Widget.helpers({
   helpMessages() {

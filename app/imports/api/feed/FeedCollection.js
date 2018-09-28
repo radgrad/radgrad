@@ -9,6 +9,7 @@ import { Semesters } from '../semester/SemesterCollection';
 import { Slugs } from '../slug/SlugCollection';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
+import { defaultProfilePicture } from '../user/BaseProfileCollection';
 
 /**
  * Returns the number of whole days between date a and b.
@@ -266,7 +267,7 @@ class FeedCollection extends BaseCollection {
       has added a course review for [${c.name}](./explorer/courses/${Slugs.getNameFromID(c.slugID)})`;
     picture = Users.getProfile(userID).picture;
     if (!picture) {
-      picture = '/images/people/default-profile-picture.png';
+      picture = defaultProfilePicture;
     }
     const feedID = this._collection.insert({ userIDs: [userID], courseID, description, timestamp, picture, feedType });
     return feedID;
@@ -294,7 +295,7 @@ class FeedCollection extends BaseCollection {
       [${o.name}](./explorer/opportunities/${Slugs.getNameFromID(o.slugID)})`;
     picture = Users.getProfile(userID).picture;
     if (!picture) {
-      picture = '/images/people/default-profile-picture.png';
+      picture = defaultProfilePicture;
     }
     const feedID = this._collection.insert({ userIDs: [userID], opportunityID, description, timestamp, picture,
       feedType });
@@ -315,13 +316,21 @@ class FeedCollection extends BaseCollection {
    * @private
    */
   _defineNewLevel({ user, level, feedType, timestamp = moment().toDate() }) {
+    // First, see if we've already defined any users within the past day.
+    const recentFeedID = this.checkPastDayLevelFeed(level, timestamp);
+    // If there's a recentFeed, then update it instead with this user's info.
+    if (recentFeedID) {
+      this._updateNewLevel(user, recentFeedID, level);
+      return recentFeedID;
+    }
+
     let picture;
     const userID = Users.getID((_.isArray(user)) ? user[0] : user);
     const description = `[${Users.getFullName(userID)}](./explorer/users/${Users.getProfile(userID).username})  
       has achieved level ${level}.`;
     picture = Users.getProfile(userID).picture;
     if (!picture) {
-      picture = '/images/people/default-profile-picture.png';
+      picture = defaultProfilePicture;
     }
     const feedID = this._collection.insert({ userIDs: [userID], description, timestamp, picture,
       feedType });
@@ -360,6 +369,26 @@ class FeedCollection extends BaseCollection {
     return ret;
   }
 
+  checkPastDayLevelFeed(level, timestamp = moment().toDate()) {
+    let ret = false;
+    const instance = this;
+    const existingFeed = _.find(this._collection.find().fetch(), function (feed) {
+      if (withinPastDay(feed, timestamp)) {
+        if (feed.feedType === instance.NEW_LEVEL) {
+          // check the level
+          if (feed.description.includes(`${level}.`)) {
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+    if (existingFeed) {
+      ret = existingFeed._id;
+    }
+    return ret;
+  }
+
   /**
    * Updates the existingFeedID with the new userID information
    * @param userID the new userID, existingFeedID the existing feed of the same type within the past 24 hours
@@ -373,9 +402,24 @@ class FeedCollection extends BaseCollection {
     userIDs.push(userID);
     const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getProfile(userIDs[0]).username}) 
       and ${userIDs.length - 1} others have joined RadGrad.`;
-    let picture = Users.getProfile(userID).picture;
+    let picture = Users.getProfile(userIDs[0]).picture;
     if (!picture) {
-      picture = '/images/people/default-profile-picture.png';
+      picture = defaultProfilePicture;
+    }
+    this._collection.update(existingFeedID, { $set: { userIDs, description, picture } });
+  }
+
+  _updateNewLevel(user, existingFeedID, level) {
+    const userID = Users.getID((_.isArray(user)) ? user[0] : user);
+    this.assertDefined(existingFeedID);
+    const existingFeed = this.findDoc(existingFeedID);
+    const userIDs = existingFeed.userIDs;
+    userIDs.push(userID);
+    const description = `[${Users.getFullName(userIDs[0])}](./explorer/users/${Users.getProfile(userIDs[0]).username}) 
+      and ${userIDs.length - 1} others have achieved level ${level}.`;
+    let picture = Users.getProfile(userIDs[0]).picture;
+    if (!picture) {
+      picture = defaultProfilePicture;
     }
     this._collection.update(existingFeedID, { $set: { userIDs, description, picture } });
   }
@@ -474,6 +518,15 @@ class FeedCollection extends BaseCollection {
     const feedType = doc.feedType;
     const timestamp = doc.timestamp;
     return { user, opportunity, course, semester, feedType, timestamp };
+  }
+
+  /**
+   * Publish a maximum of the last 25 feeds to users
+   */
+  publish() {
+    if (Meteor.isServer) {
+      Meteor.publish(this._collectionName, () => this._collection.find({}, { sort: { timestamp: -1 }, limit: 25 }));
+    }
   }
 }
 

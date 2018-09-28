@@ -9,7 +9,7 @@ import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstan
 import { Users } from '../../../api/user/UserCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const addSchema = new SimpleSchema({
   semester: String,
@@ -25,13 +25,12 @@ Template.Add_Opportunity_Instance_Widget.onCreated(function onCreated() {
 
 Template.Add_Opportunity_Instance_Widget.helpers({
   semesters() {
-    return Semesters.find({});
+    return Semesters.find({}, { sort: { semesterNumber: 1 } });
   },
   students() {
-    const usernames = Roles.getUsersInRole([ROLE.STUDENT]).map(user => user.username);
-    // get the profiles, sorted by last name.
-    const profiles = _.sortBy(_.map(usernames, username => Users.getProfile(username)), profile => profile.lastName);
-    return profiles;
+    const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
+    const sorted = _.sortBy(students, student => Users.getFullName(student.username));
+    return sorted;
   },
   opportunities() {
     return Opportunities.find({}, { sort: { name: 1 } });

@@ -1,0 +1,76 @@
+<template name="Students_Summary_Widget">
+  <div class="ui padded container segment">
+    <h4 class="ui dividing header">SELECT DATE RANGE:</h4>
+    <form class="ui form">
+      <div class="two fields">
+        <div class="four wide required field">
+          <label>Start date</label>
+          <div class="ui calendar" id="range-start">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input name="startDate" type="text" placeholder="Start">
+            </div>
+          </div>
+        </div>
+        <div class="four wide required field">
+          <label>End date</label>
+          <div class="ui calendar" id="range-end">
+            <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input name="endDate" type="text" placeholder="End">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="ui green basic button" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="ui padded container segment">
+    <h4 class="ui dividing header">SUMMARY STATISTICS: {{dateRange}}</h4>
+    <div class="ui pointing secondary menu">
+      <a class="active item" data-tab="summary">Student Summary</a>
+      <a class="chart item" data-tab="chart">Timeline Chart</a>
+    </div>
+    <div class="ui bottom attached active tab" data-tab="summary">
+      <div class="ui fluid styled accordion">
+        {{#each behavior in behaviors}}
+          <div class="title">
+            <div class="ui grid">
+              <div class="one wide column"><i class="dropdown icon"></i></div>
+              <div class="four wide column">Behavior:
+                <div style="display: inline; color: #6FBE44;">{{behavior.type}}</div>
+              </div>
+              <div class="three wide column">Users:
+                <div style="display: inline; color: #6FBE44;">{{behavior.count}}</div>
+                <div style="display: inline; color: #6FBE44; padding-left: 5px;">({{percent behavior.count}}%)</div>
+              </div>
+              <div class="eight wide column">Description:
+                <div style="display: inline; color: #6FBE44;">{{behavior.description}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="ui padded stackable grid">
+              {{#each username in behavior.users}}
+                <div class="three wide column" style="padding: 2px;">
+                  <button class="ui tiny grey basic fluid button" style="text-align: left;" value={{username}}>
+                    {{username}}
+                  </button>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached tab" data-tab="chart">
+      {{> highchartsHelper chartId="timeline-chart" chartWidth="100%" chartObject=timelineChart}}
+    </div>
+  </div>
+  <div class="ui modal" id="timeline">
+    {{#if selectedUser}}
+      {{>Student_Timeline_Modal user=user dateRange=dateRange}}
+    {{/if}}
+  </div>
+</template>

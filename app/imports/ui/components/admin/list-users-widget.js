@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
@@ -10,20 +11,34 @@ import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { makeLink } from './datamodel-utilities';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { AdvisorProfiles } from '../../../api/user/AdvisorProfileCollection';
 import { FacultyProfiles } from '../../../api/user/FacultyProfileCollection';
 import { MentorProfiles } from '../../../api/user/MentorProfileCollection';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
 Template.List_Users_Widget.helpers({
-  users() {
-    return _.sortBy(Users.findProfiles({}, { sort: { lastName: 1 } }), function (u) {
-      return u.lastName;
-    });
+  users(role) {
+    let regex;
+    const profiles = Users.findProfilesWithRole(role, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance().firstNameRegex.get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance().lastNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance().userNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered;
   },
   count() {
-    return Users.findProfiles().length;
+    let regex;
+    const profiles = Users.findProfiles();
+    regex = RegExp(Template.instance().firstNameRegex.get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance().lastNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance().userNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
   },
   deleteDisabled(user) {
     // TODO We have a race condition? the user profile is valid, but Users.getID fails.
@@ -80,6 +95,85 @@ Template.List_Users_Widget.helpers({
     }
     return pairs;
   },
+  alumniRole() {
+    return ROLE.ALUMNI;
+  },
+  studentRole() {
+    return ROLE.STUDENT;
+  },
+  mentorRole() {
+    return ROLE.MENTOR;
+  },
+  advisorRole() {
+    return ROLE.ADVISOR;
+  },
+  facultyRole() {
+    return ROLE.FACULTY;
+  },
+  alumniCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.ALUMNI, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance().firstNameRegex.get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance().lastNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance().userNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  studentCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.STUDENT, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance().firstNameRegex.get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance().lastNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance().userNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  mentorCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.MENTOR, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance().firstNameRegex.get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance().lastNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance().userNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  facultyCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.FACULTY, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance().firstNameRegex.get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance().lastNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance().userNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  advisorCount() {
+    let regex;
+    const profiles = Users.findProfilesWithRole(ROLE.ADVISOR, {}, { sort: { lastName: 1 } });
+    regex = RegExp(Template.instance().firstNameRegex.get());
+    let filtered = _.filter(profiles, p => regex.test(p.firstName));
+    regex = RegExp(Template.instance().lastNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.lastName));
+    regex = RegExp(Template.instance().userNameRegex.get());
+    filtered = _.filter(filtered, p => regex.test(p.username));
+    return filtered.length;
+  },
+  firstNameRegex() {
+    return Template.instance().firstNameRegex;
+  },
+  lastNameRegex() {
+    return Template.instance().lastNameRegex;
+  },
+  userNameRegex() {
+    return Template.instance().userNameRegex;
+  },
 });
 
 Template.List_Users_Widget.events({
@@ -108,4 +202,14 @@ Template.List_Users_Widget.events({
       }
     });
   },
+});
+
+Template.List_Users_Widget.onCreated(function adminListUsersOnCreated() {
+  this.firstNameRegex = new ReactiveVar();
+  this.lastNameRegex = new ReactiveVar();
+  this.userNameRegex = new ReactiveVar();
+});
+
+Template.List_Users_Widget.onRendered(function adminListUsersOnRendered() {
+  this.$('.menu .item').tab();
 });

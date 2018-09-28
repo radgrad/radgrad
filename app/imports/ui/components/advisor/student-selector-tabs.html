@@ -2,11 +2,13 @@
   <div class="ui top attached tabular stackable menu">
     <a class="active item" data-tab="students">Update Existing</a>
     <a class="item add-new-student" data-tab="add">Add New</a>
+    <a class="item bulk-star-upload" data-tab="bulk">Bulk STAR Upload</a>
   </div>
   <div class="ui bottom attached active tab segment" data-tab="students">
+    {{> Filter_Student_Widget label='STUDENTS' firstNameRegex=firstNameRegex lastNameRegex=lastNameRegex userNameRegex=userNameRegex }}
     <div class="ui top attached tabular stackable menu">
       {{#each group in alphabeticalGroups}}
-      <a class="item" data-tab={{group}}>{{group}}</a>
+      <a class="item" data-tab={{group}}>{{group}} ({{usersCount 'STUDENT' group}})</a>
       {{/each}}
     </div>
   {{#each group in alphabeticalGroups}}
@@ -15,8 +17,9 @@
           <div class="ui stackable grid">
             {{#each user in (users studentRole group)}}
               <div class="two wide column" style="padding: 2px;" data-tooltip={{name user true}}>
-                <button id="{{user.username}}" class="ui basic grey fluid label jsRetrieve">
-                  {{name user false}}<br>({{studentUsername user}})
+                <button id="{{user.username}}" style="padding: 3px;" class="ui basic grey fluid label jsRetrieve">
+                    <img class="ui avatar image" src='/images/level-icons/radgrad-level-{{level user}}-icon.png'>
+                    {{name user false}}<br>({{studentUsername user}})
                 </button>
               </div>
             {{/each}}
@@ -29,5 +32,8 @@
   </div>
   <div class="ui bottom attached tab segment" data-tab="add">
     {{> Add_Student_Widget}}
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="bulk">
+    {{> Star_Bulk_Upload_Widget}}
   </div>
 </template>

@@ -1,0 +1,12 @@
+<template name="FeedType_Form_Field">
+  <div class="{{#if required}}required{{/if}} field">
+    <label>Feed Type</label>
+    <select class="ui {{#if disabled}}disabled{{/if}} dropdown" name="feedType">
+      <option value="">Select Feed Type</option>
+      {{#each feedType in feedTypes}}
+        <option value="{{feedType}}" selected="{{isSelected feedType selectedFeedType}}">{{feedType}}</option>
+      {{/each}}
+    </select>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>

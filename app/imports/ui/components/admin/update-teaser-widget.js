@@ -6,7 +6,7 @@ import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 const updateSchema = new SimpleSchema({
   title: String,

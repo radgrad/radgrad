@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { appLog } from '../../api/log/AppLogCollection';
+import { userInteractionDefineMethod } from '../../api/analytic/UserInteractionCollection.methods';
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY',
@@ -26,16 +26,24 @@ Accounts.onLogin(function onLogin() {
 
   if (initialLogin) {
     // console.log('processing initial login');
-    const username = Meteor.user().username;
+    const username = Meteor.user('username').username;
     const role = Roles.getRolesForUser(id)[0];
-    appLog.info(`${username} logged in.`);
+    if (role !== 'ADMIN') {
+      const interactionData = {
+        username,
+        type: 'login',
+        typeData: 'login',
+      };
+      userInteractionDefineMethod.call(interactionData, (error) => {
+        if (error) {
+          console.log('Error creating UserInteraction.', error);
+        }
+      });
+    }
     FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
   }
 });
 
 Accounts.onLogout(function logout() {
-  const id = Meteor.userId();
-  const username = Meteor.user() && Meteor.user().username;
-  appLog.info(`${username} logged out.`, {}, id);
   FlowRouter.go('/');
 });

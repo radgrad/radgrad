@@ -3,7 +3,7 @@ import * as RouteNames from '../../../startup/client/router.js';
 
 Template.Student_MentorSpace_Mentor_Directory.helpers({
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
 });
 

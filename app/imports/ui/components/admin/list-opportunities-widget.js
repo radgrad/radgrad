@@ -5,24 +5,25 @@ import { Interests } from '../../../api/interest/InterestCollection';
 import { OpportunityTypes } from '../../../api/opportunity/OpportunityTypeCollection';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
-import * as FormUtils from './form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 import { isInRole } from '../../utilities/template-helpers';
 
-function numReferences(opportunity) {
-  let references = 0;
-  [OpportunityInstances].forEach(function (entity) {
-    entity.find().forEach(function (doc) {
-      if (doc.opportunityID === opportunity._id) {
-        references += 1;
-      }
-    });
-  });
-  return references;
+function numReferences() {
+  // This code made the opportunities page on radgrad.ics.hawaii.edu unresponsive.
+  // It is deleted until we decide we need a fast implementation.
+  // let references = 0;
+  // [OpportunityInstances].forEach(function (entity) {
+  //   entity.find().forEach(function (doc) {
+  //     if (doc.opportunityID === opportunity._id) {
+  //       references += 1;
+  //     }
+  //   });
+  // });
+  return 0;
 }
 
 Template.List_Opportunities_Widget.helpers({
@@ -72,7 +73,6 @@ Template.List_Opportunities_Widget.helpers({
       { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
       { label: 'Semesters', value: _.map(opportunity.semesterIDs, id => Semesters.toString(id)) },
       { label: 'ICE', value: `${opportunity.ice.i}, ${opportunity.ice.c}, ${opportunity.ice.e}` },
-      { label: 'References', value: `${numReferences(opportunity)}` },
     ];
   },
   titleICE(opportunity) {

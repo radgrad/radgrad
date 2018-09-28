@@ -1,0 +1,198 @@
+{
+  "timestamp": "2017-03-10T20:04:41.798Z",
+  "fixtureDescription": "Extended opportunities. Requires admin.user.",
+  "collections": [
+    {
+      "name": "OpportunityCollection",
+      "contents": [
+        {
+          "name": "Google Summer of Code",
+          "slug": "google-summer-of-code",
+          "description": "Spend your summer break writing code and learning about open source development while earning a stipend! Accepted students work with a mentor and become a part of the open source community. Many become lifetime open source developers!\n\nGoogle Summer of Code is open to university students, age 18 and older in most countries.\n\n[See more here](https://developers.google.com/open-source/gsoc/)\n\n#### Verification criteria\nAt the conclusion of the internship, request that this Opportunity's sponsor login to RadGrad to verify your participation. You should be able to supply evidence of participation, and contact details for your supervisor at the organization.",
+          "opportunityType": "internship",
+          "sponsor": "radgrad@hawaii.edu",
+          "ice": {
+            "i": 10,
+            "c": 0,
+            "e": 15
+          },
+          "interests": [
+            "algorithms",
+            "android",
+            "application-development",
+            "artificial-intelligence",
+            "computer-graphics",
+            "data-science",
+            "data-visualization",
+            "machine-learning",
+            "mobile",
+            "research",
+            "security",
+            "software-engineering"
+          ],
+          "semesters": [
+            "Summer-2015",
+            "Summer-2016",
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019",
+            "Summer-2020",
+            "Summer-2021"
+          ]
+        },
+        {
+          "name": "DAHI Internship",
+          "slug": "dahi-internship",
+          "description": "The UH Digital Arts and Humanities Initiative (DAHI) explores the full potential of today’s digital resources and capabilities in the broad realm of the Arts and Humanities. The chief goal of the initiative is to provide open access for state-of-the-art instances of digital media, scholarship and performance. The DAHI community creates an environment of trust, so that faculty, students and community members with ideas can find collaborators and access resources to pursue a range of cross-disciplinary and multimedia projects. \n\n[Learn more here.](http://dahi.manoa.hawaii.edu/)\n\n#### Verification criteria\nAt the conclusion of the internship, request this Opportunity's sponsor to login to RadGrad to verify your participation. You should be able to supply evidence of participation, and contact details for your supervisor at the organization.",
+          "opportunityType": "internship",
+          "sponsor": "radgrad@hawaii.edu",
+          "ice": {
+            "i": 10,
+            "c": 0,
+            "e": 10
+          },
+          "interests": [
+            "civic-engagement",
+            "hci",
+            "teaching"
+          ],
+          "semesters": [
+            "Spring-2017",
+            "Summer-2017"
+          ]
+        },
+        {
+          "name": "Greyhats",
+          "slug": "greyhats",
+          "description": "The ICS Grey Hats is a student-led, extracurricular organization focused on real-world training for cyber defense. Membership gives students an outstanding opportunity to learn and apply critical skills, and to share with others interested in modern security issues.\n\nThe Grey Hats is a Registered Independent Organization at the University of Hawai’i – Manoa, and fosters education in the fields of Information Assurance, Network Management, Cyber Security, and Security Ethics. Hosted by the Department of Information and Computer Sciences, the group provides students a venue for networking with industry and government, performing community outreach, and for practical application of security skills in a supportive environment. \n\n[Learn more here.](https://github.com/uhmgreyhats)\n\n#### Verification criteria\nTake selfies at least two meetings during the semester, then contact this Opportunity's sponsor to login to RadGrad to verify your participation.",
+          "opportunityType": "club",
+          "sponsor": "radgrad@hawaii.edu",
+          "ice": {
+            "i": 5,
+            "c": 0,
+            "e": 5
+          },
+          "interests": [
+            "security"
+          ],
+          "semesters": [
+            "Fall-2013",
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
+          ]
+        },
+        {
+          "name": "Research Project",
+          "slug": "generic-project",
+          "description": "If you want to plan to participate in a research project in some future semester, but are not sure yet what project you want to work on, then you can add this Opportunity as a \"placeholder\" in your degree plan until you know more precisely what you want to do. \n\n[Learn more here.](http://www.ics.hawaii.edu/research/research-areas/)\n\n#### Verification criteria\nAt the conclusion of the project, request that this Opportunity's sponsor login to RadGrad to verify your participation. You should be able to supply evidence of participation, and contact details for your supervisor at the organization.",
+          "opportunityType": "project",
+          "sponsor": "radgrad@hawaii.edu",
+          "ice": {
+            "i": 25,
+            "c": 0,
+            "e": 0
+          },
+          "interests": [
+            "research"
+          ],
+          "semesters": [
+            "Spring-2014",
+            "Summer-2014",
+            "Fall-2014",
+            "Spring-2015",
+            "Summer-2015",
+            "Fall-2015",
+            "Spring-2016",
+            "Summer-2016",
+            "Fall-2016",
+            "Spring-2017",
+            "Summer-2017",
+            "Fall-2017",
+            "Spring-2018",
+            "Summer-2018",
+            "Fall-2018",
+            "Spring-2019",
+            "Summer-2019",
+            "Fall-2019",
+            "Spring-2020",
+            "Fall-2020",
+            "Summer-2020",
+            "Spring-2021",
+            "Summer-2021"
+          ]
+        },
+        {
+          "name": "SARP Internship",
+          "slug": "sarp-internship",
+          "description": "The Student Airborne Research Program (SARP) is an eight-week summer program for rising senior undergraduate students to acquire hands-on research experience in all aspects of a scientific campaign using one or more NASA Airborne Science Program flying science laboratories (aircraft used for SARP include the DC-8, P-3B, Sherpa and ER-2). \n\nThe NASA Airborne Science Program mantains a fleet of aircraft used for studying Earth system processes, calibration/validation of space-borne observations, and prototyping instruments for possible satellite missions. SARP participants will assist in the operation of instruments onboard an aircraft to sample atmospheric chemicals, and/or to image land and water surfaces in multiple spectral bands.\n\nResearch areas include atmospheric chemistry, air quality, forest ecology, and ocean biology. Along with airborne data collection, students will participate in taking measurements at field sites. The program culminates with formal presentations of research results and conclusions. \n\n[Learn more here.](https://earthscience.arc.nasa.gov/nsrc/sarp)\n\n#### Verification criteria\nAt the conclusion of the internship, request that this Opportunity's sponsor login to RadGrad to verify your participation. You should be able to supply evidence of participation, and contact details for your supervisor at the organization.",
+          "opportunityType": "internship",
+          "sponsor": "radgrad@hawaii.edu",
+          "ice": {
+            "i": 0,
+            "c": 0,
+            "e": 20
+          },
+          "interests": [
+            "data-visualization"
+          ],
+          "semesters": [
+            "Summer-2014",
+            "Summer-2015",
+            "Summer-2016",
+            "Summer-2017",
+            "Summer-2018",
+            "Summer-2019",
+            "Summer-2020",
+            "Summer-2012"
+          ]
+        },
+        {
+          "name": "Business Plan Competition",
+          "slug": "shidler-bpc",
+          "description": "The annual Shidler Business Plan competition is an intense and unique semester-long learning opportunity for UH students who aspire to pursue a business venture. The competition provides mentorship, training and resources. Winners walk away with a wealth of business savvy and substantial cash prizes. \n\n[Learn more here.](http://pace.shidler.hawaii.edu/bpc)\n\n#### Verification criteria\nAt the conclusion of the competition, request this Opportunity's sponsor to login to RadGrad to verify your participation. Provide your business plan and selfies at two meetings to verify your participation.",
+          "opportunityType": "event",
+          "sponsor": "radgrad@hawaii.edu",
+          "ice": {
+            "i": 10,
+            "c": 0,
+            "e": 15
+          },
+          "interests": [
+            "entrepreneurship"
+          ],
+          "semesters": [
+            "Spring-2013",
+            "Spring-2014",
+            "Spring-2015",
+            "Spring-2016",
+            "Spring-2017",
+            "Spring-2018",
+            "Spring-2019",
+            "Spring-2020"
+          ]
+        }
+      ]
+    }
+  ]
+}

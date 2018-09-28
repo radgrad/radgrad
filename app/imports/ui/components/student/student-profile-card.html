@@ -1,0 +1,40 @@
+<template name="Student_Profile_Card">
+  <div class="ui card radgrad-interest-card">
+    <div class="content">
+      <div class="header">{{itemName item}}</div>
+      <div class="meta">
+      </div>
+    </div>
+    <div class="content">
+      <p>{{itemShortDescription item}}...</p>
+      {{> Interest_List item=item size='mini'}}
+    </div>
+    <div class="content">
+      <span>STUDENTS PARTICIPATING {{> Widget_Header_Number inputValue = (numberStudents item)}}</span>
+      <div class="ui circular mini bordered images">
+        {{#each student in interestedStudents item}}
+          <img class="ui image" data-content="{{studentFullName student}}" src={{studentPicture student}}>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="radgrad-home-buttons ui center aligned three bottom attached {{hidden}} buttons">
+      {{#if typeCareerGoals}}
+        <a class="ui button"
+           href="{{pathFor careerGoalsRouteName username=routeUserName careerGoal=(itemSlug item)}}"><i
+            class="chevron circle right icon"></i><br>View More</a>
+      {{else}}
+        {{#if typeInterests}}
+          <a class="ui button"
+             href="{{pathFor interestRouteName username=routeUserName interest=(itemSlug item)}}"><i
+              class="chevron circle right icon"></i><br>View More</a>
+        {{/if}}
+      {{/if}}
+      {{#if canAdd}}
+        {{> Student_Profile_Add item = item type = type}}
+      {{/if}}
+
+
+    </div>
+  </div>
+</template>

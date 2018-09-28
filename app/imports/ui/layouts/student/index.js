@@ -1,3 +1,6 @@
+/** @namespace ui/layouts/student */
+
+import './student-explorer-layout.html';
+
 import './student-layout.html';
 import './student-layout.js';
-import './student-explorer-layout.html';

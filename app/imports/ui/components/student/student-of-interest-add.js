@@ -1,14 +1,11 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
-import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { getRouteUserName } from '../shared/route-user-name';
 import { opportunitySemesters } from '../../utilities/template-helpers';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 Template.Student_Of_Interest_Add.helpers({
   itemName(item) {
@@ -75,14 +72,9 @@ Template.Student_Of_Interest_Add.events({
         grade: 'B',
         student: username,
       };
-      defineMethod.call({ collectionName: 'CourseInstanceCollection', definitionData }, (error, result) => {
+      defineMethod.call({ collectionName: 'CourseInstanceCollection', definitionData }, (error) => {
         if (error) {
           console.log('Error defining CourseInstance', error);
-        } else {
-          const ci = CourseInstances.findDoc(result);
-          // eslint-disable-next-line
-          const message = `${getRouteUserName()} added ${ci.note} ${ci.getCourseDoc(ci._id).shortName} (${Semesters.toString(ci.semesterID)}) to their Degree Plan.`;
-          appLog.info(message);
         }
       });
     } else {
@@ -92,14 +84,9 @@ Template.Student_Of_Interest_Add.events({
         verified: false,
         student: username,
       };
-      defineMethod.call({ collectionName: 'OpportunityInstanceCollection', definitionData }, (error, result) => {
+      defineMethod.call({ collectionName: 'OpportunityInstanceCollection', definitionData }, (error) => {
         if (error) {
           console.log('Error defining CourseInstance', error);
-        } else {
-          const oi = OpportunityInstances.findDoc(result);
-          // eslint-disable-next-line
-          const message = `${getRouteUserName()} added ${OpportunityInstances.getOpportunityDoc(oi._id).name} (${Semesters.toString(oi.semesterID)}) to their Degree Plan.`;
-          appLog.info(message);
         }
       });
     }

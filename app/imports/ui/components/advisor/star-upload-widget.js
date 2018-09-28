@@ -7,8 +7,7 @@ import { updateLevelMethod } from '../../../api/level/LevelProcessor.methods';
 import { starLoadDataMethod } from '../../../api/star/StarProcessor.methods';
 import { Users } from '../../../api/user/UserCollection';
 import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
 
 /* global FileReader */
 
@@ -66,8 +65,6 @@ Template.Star_Upload_Widget.events({
               console.log('Error updating student level', error);
             }
           });
-          const message = `${advisor} loaded STAR data for ${profile.username}`;
-          appLog.info(message);
         };
         fr.readAsText(starData);
       }

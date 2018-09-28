@@ -1,0 +1,22 @@
+<template name="Admin_Datamodel_Academicplan_Accordion">
+
+  <div class="ui styled fluid accordion">
+    <div class="title">
+      <i class="dropdown icon"></i>
+      {{name}}
+      {{#if slug}}({{slug}}){{/if}}
+      {{#if additionalTitleInfo}}({{additionalTitleInfo}}){{/if}}
+    </div>
+    <div class="content">
+      {{#each descriptionPair in descriptionPairs}}
+        <p><b>{{descriptionPair.label}}:</b> {{{markdownify descriptionPair.value}}}</p>
+      {{/each}}
+      {{> Academic_Plan_Viewer_Component plan=getPlan }}
+      <p>
+        <!--<button value="{{id}}" class="ui green basic mini button {{updateDisabled}} jsUpdate">Update</button>-->
+        <button value="{{id}}" class="ui green basic mini button {{deleteDisabled}} jsDelete">Delete</button>
+      </p>
+    </div>
+  </div>
+
+</template>

@@ -1,0 +1,17 @@
+<template name="Landing_Card_Explorer_Interests_Widget">
+  <div class="ui padded segment">
+    <div class="ui dividing header">
+      <h4><span
+          style="text-transform: uppercase;">INTERESTS</span> {{> Widget_Header_Number inputValue=itemCount}}</h4>
+    </div>
+    <div style="max-height: 750px; overflow-x:hidden; overflow-y:scroll; margin-top: 10px;"
+         class="ui stackable two cards">
+      {{#each interest in interests}}
+        {{> Landing_Explorer_Card item=interest type='interests'}}
+      {{/each}}
+    </div>
+  </div>
+
+  {{> Back_To_Top_Button}}
+
+</template>

@@ -44,6 +44,15 @@ class AdvisorLogCollection extends BaseCollection {
     this._collection.insert({ advisorID, studentID, text, createdOn });
   }
 
+  update(docID, { text }) {
+    this.assertDefined(docID);
+    const updateData = {};
+    if (text) {
+      updateData.text = text;
+    }
+    this._collection.update(docID, { $set: updateData });
+  }
+
   /**
    * Removes all AdvisorLog documents referring to (the student) user.
    * @param user The student user, either the ID or the username.
@@ -84,6 +93,9 @@ class AdvisorLogCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this._collectionName, function publish() {
+        if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
+          return this.ready();
+        }
         if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
           return instance._collection.find();
         }

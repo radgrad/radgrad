@@ -8,6 +8,7 @@
           {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength username=routeUserName}}
           {{> Template.dynamic template=main}}
         </div>
+        {{> Observe_Interactions}}
       {{/With_Instance_Subscriptions}}
     {{/With_Global_Subscriptions}}
   {{/If_Authorized}}

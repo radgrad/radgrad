@@ -63,3 +63,14 @@ export function nextFallSpringSemester(semester) {
   }
   return next;
 }
+
+/**
+ * Returns an array of the upcoming semesters.
+ * @return {array} of the upcoming semesters.
+ * @memberOf api/semester
+ */
+export function upComingSemesters() {
+  const currentSemester = Semesters.getCurrentSemesterDoc();
+  const nine = currentSemester.semesterNumber + 10;
+  return _.sortBy(Semesters.find({ semesterNumber: { $gt: currentSemester.semesterNumber, $lt: nine } }).fetch(), (sem) => sem.semesterNumber); // eslint-disable-line
+}

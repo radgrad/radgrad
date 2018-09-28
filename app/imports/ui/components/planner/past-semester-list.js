@@ -6,14 +6,12 @@ import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.met
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection';
-import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
-import { appLog } from '../../../api/log/AppLogCollection';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
   if (this.data) {
@@ -59,10 +57,6 @@ Template.Past_Semester_List.events({
                 instance.state.set(plannerKeys.detailCourse, null);
                 instance.state.set(plannerKeys.detailCourseInstance, ci);
                 instance.state.set(plannerKeys.detailICE, ci.ice);
-                const semesterName = Semesters.toString(semesterID);
-                // eslint-disable-next-line
-                const message = `${username} added ${course.number} ${course.shortName} (${semesterName}) to their Degree Plan.`;
-                appLog.info(message);
                 getFutureEnrollmentMethod.call(courseID, (err, result) => {
                   if (err) {
                     console.log('Error in getting future enrollment', error);
@@ -70,6 +64,12 @@ Template.Past_Semester_List.events({
                     if (courseID === result.courseID) {
                       instance.state.set(plannerKeys.plannedEnrollment, result);
                     }
+                });
+                const interactionData = { username, type: 'addCourse', typeData: slug };
+                userInteractionDefineMethod.call(interactionData, (err) => {
+                  if (err) {
+                    console.log('Error creating UserInteraction', err);
+                  }
                 });
               }
             });
@@ -92,17 +92,18 @@ Template.Past_Semester_List.events({
                   FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
                   FeedbackFunctions.checkCompletePlan(getUserIdFromRoute());
                   FeedbackFunctions.generateRecommendedCourse(getUserIdFromRoute());
-                  const semesterName = Semesters.toString(semesterID);
-                  const opportunity = Opportunities.findDoc(opportunityID);
-                  // eslint-disable-next-line
-                  const message = `${username} added ${opportunity.name} (${semesterName}) to their Degree Plan.`;
-                  appLog.info(message);
                   const oi = OpportunityInstances.findDoc(res);
                   instance.state.set(plannerKeys.detailCourse, null);
                   instance.state.set(plannerKeys.detailCourseInstance, null);
                   instance.state.set(plannerKeys.detailICE, null);
                   instance.state.set(plannerKeys.detailOpportunityInstance, oi);
                   instance.state.set(plannerKeys.detailOpportunity, null);
+                  const interactionData = { username, type: 'addOpportunity', typeData: slug };
+                  userInteractionDefineMethod.call(interactionData, (err) => {
+                    if (err) {
+                      console.log('Error creating UserInteraction', err);
+                    }
+                  });
                 }
               });
             }
@@ -128,13 +129,9 @@ Template.Past_Semester_List.events({
               FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
               FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
               // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
-              const semesterName = Semesters.toString(semesterID);
               const ci = CourseInstances.findDoc(id);
               const course = Courses.findDoc(ci.courseID);
-              // eslint-disable-next-line
-              const message = `${getRouteUserName()} moved ${course.number} ${course.shortName} to ${semesterName} in their Degree Plan.`;
               // console.log(message);
-              appLog.info(message);
               getFutureEnrollmentMethod.call(course._id, (err, result) => {
                 if (err) {
                   console.log('Error in getting future enrollment', error);
@@ -165,12 +162,6 @@ Template.Past_Semester_List.events({
                 FeedbackFunctions.checkOverloadedSemesters(getUserIdFromRoute());
                 FeedbackFunctions.generateNextLevelRecommendation(getUserIdFromRoute());
                 // FeedbackFunctions.generateRecommendedCurrentSemesterOpportunities(getUserIdFromRoute());
-                const semesterName = Semesters.toString(semesterID);
-                const oi = OpportunityInstances.findDoc(id);
-                const opportunity = Opportunities.findDoc(oi.opportunityID);
-                // eslint-disable-next-line
-                const message = `${getRouteUserName()} moved ${opportunity.name} to ${semesterName} in their Degree Plan.`;
-                appLog.info(message);
               }
             });
           }
@@ -192,10 +183,6 @@ Template.Past_Semester_List.events({
       template.state.set(plannerKeys.detailICE, ci.ice);
       template.state.set(plannerKeys.detailOpportunity, null);
       template.state.set(plannerKeys.detailOpportunityInstance, null);
-      const course = Courses.findDoc(ci.courseID);
-      const semester = Semesters.toString(ci.semesterID);
-      const message = `${getRouteUserName()} inspected ${ci.note} ${course.shortName} (${semester}).`;
-      appLog.info(message);
     } else
       if (firstClass === 'opportunityInstance') {
         const oi = template.data.semesterOpportunities[target.id];
@@ -204,10 +191,6 @@ Template.Past_Semester_List.events({
         template.state.set(plannerKeys.detailICE, oi.ice);
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
-        const opportunity = Opportunities.findDoc(oi.opportunityID);
-        const semester = Semesters.toString(oi.semesterID);
-        const message = `${getRouteUserName()} inspected ${opportunity.name} (${semester}).`;
-        appLog.info(message);
       }
   },
 });

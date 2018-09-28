@@ -153,6 +153,13 @@ class AcademicPlanCollection extends BaseSlugCollection {
       if (!DesiredDegrees.isDefined(doc.degreeID)) {
         problems.push(`Bad desiredDegreeID: ${doc.degreeID}`);
       }
+      let numCourses = 0;
+      _.forEach(doc.coursesPerSemester, (n) => {
+        numCourses += n;
+      });
+      if (doc.courseList.length !== numCourses) {
+        problems.push(`Mismatch between courseList.length ${doc.courseList.length} and sum of coursesPerSemester ${numCourses}`); // eslint-disable-line
+      }
     });
     return problems;
   }
@@ -169,6 +176,15 @@ class AcademicPlanCollection extends BaseSlugCollection {
       return this._collection.find({ degreeID, semesterNumber: this.getLatestSemesterNumber() }).fetch();
     }
     return this._collection.find({ degreeID, semesterNumber: { $gte: semesterNumber } }).fetch();
+  }
+
+  /**
+   * Returns an array of the latest AcademicPlans.
+   * @return {array}
+   */
+  getLatestPlans() {
+    const semesterNumber = this.getLatestSemesterNumber();
+    return this._collection.find({ semesterNumber }).fetch();
   }
 
   /**

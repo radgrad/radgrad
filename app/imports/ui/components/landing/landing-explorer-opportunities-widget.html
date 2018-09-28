@@ -64,15 +64,11 @@
                 <p>N/A</p>
               {{/if}}
             {{/if}}
-
-            {{#if isLabel descriptionPair.label 'Interests'}}
-              <div style="margin-top: 5px">
-                {{> Interest_List item=item size='mini'}}
-              </div>
-            {{/if}}
           {{/each}}
         </div>
       </div>
+      <div class="ui dividing header">Opportunity Interests</div>
+      {{> Landing_Interest_List item=item size='small'}}
 
     </div>
   </div>

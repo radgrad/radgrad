@@ -28,17 +28,7 @@ Template.Advisor_Layout.helpers({
       {
         label: requestsLabel,
         route: RouteNames.advisorVerificationRequestsPendingPageRouteName,
-        regex: 'verification-requests',
-      },
-      {
-        label: 'Event Verification',
-        route: RouteNames.advisorEventVerificationPageRouteName,
-        regex: 'event-verification',
-      },
-      {
-        label: 'Completed Verifications',
-        route: RouteNames.advisorCompletedVerificationsPageRouteName,
-        regex: 'completed-verifications',
+        regex: 'verification-requests|event-verification|completed-verifications',
       },
       {
         label: moderationLabel,
@@ -50,9 +40,12 @@ Template.Advisor_Layout.helpers({
         route: RouteNames.advisorAcademicPlanPageRouteName,
         regex: 'academic-plan',
       },
+      { label: 'Course Scoreboard',
+        route: RouteNames.advisorCourseScoreboardPageRouteName,
+        regex: 'course-scoreboard' },
     ];
   },
   secondMenuLength() {
-    return 'six';
+    return 'five';
   },
 });

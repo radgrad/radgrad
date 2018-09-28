@@ -34,7 +34,7 @@ class CourseInstanceCollection extends BaseCollection {
       ice: { type: Object, optional: true, blackbox: true },
     }));
     this.validGrades = ['', 'A', 'A+', 'A-',
-      'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W'];
+      'B', 'B+', 'B-', 'C', 'C+', 'C-', 'D', 'D+', 'D-', 'F', 'CR', 'NC', '***', 'W', 'TBD', 'OTHER'];
     this.publicationNames = {
       student: this._collectionName,
       perStudentAndSemester: `${this._collectionName}.PerStudentAndSemester`,
@@ -279,7 +279,10 @@ class CourseInstanceCollection extends BaseCollection {
     if (Meteor.isServer) {
       const instance = this;
       Meteor.publish(this.publicationNames.student, function publish() {
-        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
+        if (!this.userId) {  // https://github.com/meteor/meteor/issues/9619
+          return this.ready();
+        }
+        if (Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
           return instance._collection.find();
         }
         return instance._collection.find({ studentID: this.userId });
@@ -310,6 +313,10 @@ class CourseInstanceCollection extends BaseCollection {
         new SimpleSchema({
           studentID: { type: String },
         }).validate({ studentID });
+        // console.log(Roles.userIsInRole(studentID, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY]));
+        if (Roles.userIsInRole(studentID, [ROLE.ADMIN, ROLE.ADVISOR, ROLE.FACULTY])) {
+          return instance._collection.find();
+        }
         return instance._collection.find({ studentID });
       });
     }

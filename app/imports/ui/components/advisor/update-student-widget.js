@@ -14,11 +14,10 @@ import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { Users } from '../../../api/user/UserCollection.js';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { ROLE } from '../../../api/role/Role.js';
-import * as FormUtils from '../admin/form-fields/form-field-utilities.js';
-import { calcLevel } from '../../../api/level/LevelProcessor';
-import { getRouteUserName } from '../shared/route-user-name';
+import * as FormUtils from '../form-fields/form-field-utilities.js';
+import { defaultCalcLevel } from '../../../api/level/LevelProcessor';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { appLog } from '../../../api/log/AppLogCollection';
+import { RadGrad } from '../../../api/radgrad/RadGrad';
 
 const updateSchema = new SimpleSchema({
   username: String,
@@ -49,14 +48,20 @@ Template.Update_Student_Widget.onCreated(function updateDegreePlanWidgetOnCreate
 Template.Update_Student_Widget.helpers({
   calcLevel() {
     if (Template.currentData().studentID.get()) {
-      return calcLevel(Template.currentData().studentID.get());
+      if (RadGrad.calcLevel) {
+        return RadGrad.calcLevel(Template.currentData().studentID.get());
+      }
+      return defaultCalcLevel(Template.currentData().studentID.get());
     }
     return 0;
   },
   hasNewLevel() {
     if (Template.currentData().studentID.get()) {
       const user = Users.getProfile(Template.currentData().studentID.get());
-      return user.level !== calcLevel(Template.currentData().studentID.get());
+      if (RadGrad.calcLevel) {
+        return user.level !== RadGrad.calcLevel(Template.currentData().studentID.get());
+      }
+      return user.level !== defaultCalcLevel(Template.currentData().studentID.get());
     }
     return false;
   },
@@ -64,7 +69,7 @@ Template.Update_Student_Widget.helpers({
     return CareerGoals.find({}, { sort: { name: 1 } });
   },
   declaredSemesters() {
-    return Semesters.find({});
+    return Semesters.find({}, { sort: { semesterNumber: 1 } });
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
@@ -210,15 +215,10 @@ Template.Update_Student_Widget.events({
       const collectionName = StudentProfiles.getCollectionName();
       updateMethod.call({ collectionName, updateData }, (error) => {
         if (error) {
-          appLog.error(`Error during user update: ${JSON.stringify(error)}`);
           console.log('Error during user update: ', error);
         } else {
           instance.successClass.set('success');
           instance.errorClass.set('');
-          const advisor = getRouteUserName();
-          const student = Users.getProfile(instance.data.studentID.get());
-          const message = `${advisor} updated student ${student.username} ${JSON.stringify(updateData, ' ')}`;
-          appLog.info(message);
         }
       });
     } else {

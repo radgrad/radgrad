@@ -1,19 +1,18 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
-import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
-import { Courses } from '../../../api/course/CourseCollection.js';
-import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
-import { CareerGoals } from '../../../api/career/CareerGoalCollection.js';
-import { Interests } from '../../../api/interest/InterestCollection.js';
-import { Opportunities } from '../../../api/opportunity/OpportunityCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
-import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
 
 Template.Landing_Explorer_Menu.helpers({
+  academicPlansCardRouteName() {
+    return RouteNames.landingCardExplorerPlansPageRouteName;
+  },
   academicPlansRouteName() {
     return RouteNames.landingExplorerPlansPageRouteName;
+  },
+  careerGoalsCardRouteName() {
+    return RouteNames.landingCardExplorerCareerGoalsPageRouteName;
   },
   careerGoalsRouteName() {
     return RouteNames.landingExplorerCareerGoalsPageRouteName;
@@ -42,8 +41,14 @@ Template.Landing_Explorer_Menu.helpers({
   courseName(course) {
     return course.shortName;
   },
+  coursesCardRouteName() {
+    return RouteNames.landingCardExplorerCoursesPageRouteName;
+  },
   coursesRouteName() {
     return RouteNames.landingExplorerCoursesPageRouteName;
+  },
+  degreesCardRouteName() {
+    return RouteNames.landingCardExplorerDegreesPageRouteName;
   },
   degreesRouteName() {
     return RouteNames.landingExplorerDegreesPageRouteName;
@@ -55,77 +60,37 @@ Template.Landing_Explorer_Menu.helpers({
     }
     return true;
   },
-  firstCareerGoal() {
-    let ret;
-    const careerGoals = CareerGoals.find({}, { sort: { name: 1 } }).fetch();
-    if (careerGoals.length > 0) {
-      ret = Slugs.findDoc(careerGoals[0].slugID).name;
-    }
-    return ret;
-  },
-  firstCourse() {
-    let ret;
-    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
-    if (courses.length > 0) {
-      ret = Slugs.findDoc(courses[0].slugID).name;
-    }
-    return ret;
-  },
-  firstDegree() {
-    let ret;
-    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
-    if (degrees.length > 0) {
-      ret = Slugs.findDoc(degrees[0].slugID).name;
-    }
-    return ret;
-  },
-  firstInterest() {
-    let ret;
-    const interests = Interests.find({}, { sort: { name: 1 } }).fetch();
-    if (interests.length > 0) {
-      ret = Slugs.findDoc(interests[0].slugID).name;
-    }
-    return ret;
-  },
-  firstOpportunity() {
-    let ret;
-    const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    if (opportunities.length > 0) {
-      ret = Slugs.findDoc(opportunities[0].slugID).name;
-    }
-    return ret;
-  },
-  firstPlan() {
-    const semesterNumber = AcademicPlans.getLatestSemesterNumber();
-    const plan = AcademicPlans.findOne({ semesterNumber });
-    if (plan) {
-      return (Slugs.findDoc(plan.slugID)).name;
-    }
-    return '';
+  getRoute() {
+    return FlowRouter.getRouteName();
   },
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
-      case RouteNames.studentExplorerCareerGoalsPageRouteName:
+      case RouteNames.landingCardExplorerCareerGoalsPageRouteName:
         return 'Career Goals';
-      case RouteNames.studentExplorerCoursesPageRouteName:
+      case RouteNames.landingCardExplorerCoursesPageRouteName:
         return 'Courses';
-      case RouteNames.studentExplorerPlansPageRouteName:
+      case RouteNames.landingCardExplorerPlansPageRouteName:
         return 'Academic Plans';
-      case RouteNames.studentExplorerDegreesPageRouteName:
+      case RouteNames.landingCardExplorerDegreesPageRouteName:
         return 'Degrees';
-      case RouteNames.studentExplorerInterestsPageRouteName:
+      case RouteNames.landingCardExplorerInterestsPageRouteName:
         return 'Interests';
-      case RouteNames.studentExplorerOpportunitiesPageRouteName:
+      case RouteNames.landingCardExplorerOpportunitiesPageRouteName:
         return 'Opportunities';
-      case RouteNames.studentExplorerUsersPageRouteName:
-        return 'Users';
       default:
         return 'Select Explorer';
     }
   },
+  interestsCardRouteName() {
+    return RouteNames.landingCardExplorerInterestsPageRouteName;
+  },
   interestsRouteName() {
     return RouteNames.landingExplorerInterestsPageRouteName;
+  },
+  isCardPage(type) {
+    const routeName = FlowRouter.getRouteName();
+    return type === routeName;
   },
   isType(type, value) {
     return type === value;
@@ -137,40 +102,24 @@ Template.Landing_Explorer_Menu.helpers({
     const iceString = `(${item.ice.i}/${item.ice.c}/${item.ice.e})`;
     return `${item.name} ${iceString}`;
   },
+  opportunitiesCardRouteName() {
+    return RouteNames.landingCardExplorerOpportunitiesPageRouteName;
+  },
   opportunitiesRouteName() {
     return RouteNames.landingExplorerOpportunitiesPageRouteName;
   },
+  showBackButton() {
+    const page = [];
+    page.push(FlowRouter.getParam('careerGoal'));
+    page.push(FlowRouter.getParam('course'));
+    page.push(FlowRouter.getParam('degree'));
+    page.push(FlowRouter.getParam('interest'));
+    page.push(FlowRouter.getParam('opportunity'));
+    page.push(FlowRouter.getParam('plan'));
+    return _.some(page);
+  },
   slugName(item) {
     return Slugs.findDoc(item.slugID).name;
-  },
-  userCareerGoals(careerGoal) { // eslint-disable-line
-    return '';
-  },
-  userCourses(course) {
-    let ret = '';
-    const ci = CourseInstances.find({
-      studentID: getUserIdFromRoute(),
-      courseID: course._id,
-    }).fetch();
-    if (ci.length > 0) {
-      ret = 'check green circle outline icon';
-    }
-    return ret;
-  },
-  userDegrees(degree) { // eslint-disable-line
-    return '';
-  },
-  userInterests(interest) { // eslint-disable-line
-    return '';
-  },
-  userOpportunities(opportunity) { // eslint-disable-line
-    return '';
-  },
-  userPlans(plan) { // eslint-disable-line
-    return '';
-  },
-  usersRouteName() {
-    return RouteNames.landingExplorerUsersPageRouteName;
   },
 });
 

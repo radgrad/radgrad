@@ -2,7 +2,7 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
-import BaseProfileCollection from './BaseProfileCollection';
+import BaseProfileCollection, { defaultProfilePicture } from './BaseProfileCollection';
 import { AcademicPlans } from '../degree-plan/AcademicPlanCollection';
 import { CareerGoals } from '../career/CareerGoalCollection';
 import { Courses } from '../course/CourseCollection';
@@ -53,7 +53,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    * academicPlan, declaredSemester, hiddenCourses, or hiddenOpportunities are invalid.
    * @return { String } The docID of the StudentProfile.
    */
-  define({ username, firstName, lastName, picture = '/images/default-profile-picture.png', website, interests,
+  define({ username, firstName, lastName, picture = defaultProfilePicture, website, interests,
            careerGoals, level, academicPlan, declaredSemester, hiddenCourses = [], hiddenOpportunities = [],
            isAlumni = false }) {
     if (Meteor.isServer) {
@@ -72,10 +72,13 @@ class StudentProfileCollection extends BaseProfileCollection {
       // Create the slug, which ensures that username is unique.
       Slugs.define({ name: username, entityName: this.getType() });
       const role = (isAlumni) ? ROLE.ALUMNI : ROLE.STUDENT;
-      const userID = Users.define({ username, role });
-      return this._collection.insert({
+      const profileID = this._collection.insert({
         username, firstName, lastName, role, picture, website, interestIDs, careerGoalIDs,
-        level, academicPlanID, declaredSemesterID, hiddenCourseIDs, hiddenOpportunityIDs, isAlumni, userID });
+        level, academicPlanID, declaredSemesterID, hiddenCourseIDs, hiddenOpportunityIDs, isAlumni,
+        userID: this.getFakeUserId() });
+      const userID = Users.define({ username, role });
+      this._collection.update(profileID, { $set: { userID } });
+      return profileID;
     }
     return undefined;
   }
@@ -269,8 +272,8 @@ class StudentProfileCollection extends BaseProfileCollection {
    * @param level The new level.
    */
   setLevel(user, level) {
-    const userID = this.getID(user);
-    this._collection.update({ userID }, { $set: { level } });
+    const id = this.getID(user);
+    this._collection.update({ _id: id }, { $set: { level } });
   }
 
 

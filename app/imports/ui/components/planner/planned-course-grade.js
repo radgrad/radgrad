@@ -6,7 +6,6 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { plannerKeys } from './academic-plan';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
 
 /* global document */
 
@@ -49,9 +48,6 @@ Template.Planned_Course_Grade.events({
         instance.state.set(plannerKeys.detailCourseInstance, ci);
         const course = CourseInstances.getCourseDoc(ci._id);
         const semester = Semesters.toString(ci.semesterID);
-        // eslint-disable-next-line
-        const message = `${getRouteUserName()} updated planned grade for ${ci.note} ${course.shortName} (${semester}) to ${grade}.`;
-        appLog.info(message);
       } else {
         console.log('Error updating grade', error);
       }

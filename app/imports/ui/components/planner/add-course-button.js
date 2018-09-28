@@ -1,15 +1,14 @@
 import { Template } from 'meteor/templating';
 import { FeedbackFunctions } from '../../../api/feedback/FeedbackFunctions';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
-import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
 import { buildSimpleName } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
-import { plannerKeys } from './academic-plan';
 import { getRouteUserName } from '../shared/route-user-name';
-import { appLog } from '../../../api/log/AppLogCollection';
+import { plannerKeys } from './academic-plan';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
+import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 
 Template.Add_Course_Button.onCreated(function addCourseButtonOnCreated() {
   this.state = this.data.dictionary;
@@ -47,7 +46,6 @@ Template.Add_Course_Button.events({
     instance.state.set(plannerKeys.detailOpportunity, null);
     instance.state.set(plannerKeys.detailOpportunityInstance, null);
     const collectionName = CourseInstances.getCollectionName();
-    const semester = Semesters.toString(ci.semesterID);
     removeItMethod.call({ collectionName, instance: ci._id }, (error) => {
       if (!error) {
         FeedbackFunctions.checkPrerequisites(getUserIdFromRoute());
@@ -63,7 +61,12 @@ Template.Add_Course_Button.events({
         });
       }
     });
-    const message = `${getRouteUserName()} removed ${course.name} in ${semester} from their Degree Plan.`;
-    appLog.info(message);
+    const interactionData = { username: getRouteUserName(), type: 'removeCourse',
+      typeData: Slugs.getNameFromID(course.slugID) };
+    userInteractionDefineMethod.call(interactionData, (err) => {
+      if (err) {
+        console.log('Error creating UserInteraction', err);
+      }
+    });
   },
 });

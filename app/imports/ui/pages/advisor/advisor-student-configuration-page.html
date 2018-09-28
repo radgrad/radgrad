@@ -7,15 +7,12 @@
 
       {{#if selectedStudent}}
         <div class="ten wide stretched column">
-          {{#if displayWidget}}
-            {{> Update_Student_Widget studentID=studentID}}
-          {{else}}
-            {{> Update_Student_Widget studentID=studentID}}
-          {{/if}}
+          {{> Update_Student_Widget studentID=studentID}}
         </div>
         <div class="six wide stretched column">
           {{> Advisor_Log_Entry_Widget dictionary=getDictionary studentID=studentID}}
           {{> Star_Upload_Widget studentID=studentID}}
+          <!--{{> Star_Bulk_Upload_Widget}}-->
         </div>
       {{/if}}
 

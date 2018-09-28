@@ -10,13 +10,13 @@ Template.Landing_Section_2.helpers({
     return RouteNames.landingExplorerPlansPageRouteName;
   },
   careerGoalsRouteName() {
-    return RouteNames.landingExplorerCareerGoalsPageRouteName;
+    return RouteNames.landingCardExplorerCareerGoalsPageRouteName;
   },
   coursesRouteName() {
-    return RouteNames.landingExplorerCoursesPageRouteName;
+    return RouteNames.landingCardExplorerCoursesPageRouteName;
   },
   degreesRouteName() {
-    return RouteNames.landingExplorerDegreesPageRouteName;
+    return RouteNames.landingCardExplorerDegreesPageRouteName;
   },
   firstCourse() {
     let ret = 'ics_361';

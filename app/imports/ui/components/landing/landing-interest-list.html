@@ -1,0 +1,7 @@
+<template name="Landing_Interest_List">
+  <div class="ui {{size}} labels">
+    {{#each interest in itemInterests item}}
+      <a class="ui {{size}} grey label" href="{{pathFor interestsRouteName interest=(interestSlug interest)}}">{{interestName interest}}</a>
+    {{/each}}
+  </div>
+</template>
