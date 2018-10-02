@@ -25,7 +25,7 @@ export const userInteractionRemoveUserMethod = new ValidatedMethod({
   validate: null,
   mixins: [CallPromiseMixin],
   run(instances) {
-    UserInteractions.assertValidRoleForMethod(this.userId);
+    UserInteractions.assertAdminRoleForMethod(this.userId);
     return UserInteractions.removeUser(instances);
   },
 });
@@ -39,7 +39,7 @@ export const userInteractionFindMethod = new ValidatedMethod({
   validate: null,
   mixins: [CallPromiseMixin],
   run({ selector, options }) {
-    UserInteractions.assertValidRoleForMethod(this.userId);
+    UserInteractions.assertAdminRoleForMethod(this.userId);
     const results = UserInteractions.find(selector, options);
     return results.fetch();
   },

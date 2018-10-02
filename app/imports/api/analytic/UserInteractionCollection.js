@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { moment } from 'meteor/momentjs:moment';
 import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
@@ -34,11 +35,10 @@ class UserInteractionCollection extends BaseCollection {
   }
 
   /**
-   * Defines a user interaction record. An interaction object consists of a key-value pair: the key
-   * representing the interaction type and the value representing any data associated with the interaction,
-   * such as the ID for a newly added interest, or the name of a page that was visited.
+   * Defines a user interaction record.
    * @param username The username.
-   * @param interaction The interaction type and any data associated with the interaction.
+   * @param type The interaction type.
+   * @param typeData Any data associated with the interaction type.
    * @param timestamp The time of interaction.
    */
   define({ username, type, typeData, timestamp = moment().toDate() }) {
@@ -55,7 +55,16 @@ class UserInteractionCollection extends BaseCollection {
   }
 
   /**
-   * Asserts that the userID belongs to a valid role when running the define and removeUser method
+   * Asserts that the userID belongs to an admin role when running the find and removeUser method
+   * within this class.
+   * @param userId The userId of the logged in user.
+   */
+  assertAdminRoleForMethod(userId) {
+    this._assertRole(userId, [ROLE.ADMIN]);
+  }
+
+  /**
+   * Asserts that the userID belongs to a valid role when running the define method
    * within this class.
    * @param userId The userId of the logged in user.
    */
@@ -85,11 +94,22 @@ class UserInteractionCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const username = doc.userID ? Users.getProfile(docID.userID).username : doc.username;
+    const username = doc.username;
     const timestamp = doc.timestamp;
     const type = doc.type;
     const typeData = doc.typeData;
     return { username, type, typeData, timestamp };
+  }
+
+  /**
+   * Publish an empty cursor to UserInteractions. Since method calls are used to find interactions,
+   * we do not need to publish any records, but would still like this to be on the list of collections
+   * for integrity check, etc.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      Meteor.publish(this._collectionName, () => this._collection.find({}, { limit: 0 }));
+    }
   }
 }
 

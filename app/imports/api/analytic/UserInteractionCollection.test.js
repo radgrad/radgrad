@@ -41,11 +41,21 @@ if (Meteor.isServer) {
     it('#removeUser', function test() {
       const docID = UserInteractions.define({ username, type, typeData });
       expect(UserInteractions.isDefined(docID)).to.be.true;
-      const secDocID = UserInteractions.define({ username, type, typeData });
-      expect(UserInteractions.isDefined(secDocID)).to.be.true;
+      const docID2 = UserInteractions.define({ username, type, typeData });
+      expect(UserInteractions.isDefined(docID2)).to.be.true;
       UserInteractions.removeUser(username);
       expect(UserInteractions.isDefined(docID)).to.be.false;
-      expect(UserInteractions.isDefined(secDocID)).to.be.false;
+      expect(UserInteractions.isDefined(docID2)).to.be.false;
+    });
+    it('#find, #findDoc', function test() {
+      const docID = UserInteractions.define({ username, type, typeData });
+      const docID2 = UserInteractions.define({ username, type, typeData });
+      expect(UserInteractions.find().fetch()).to.have.lengthOf(2);
+      expect(function foo() { UserInteractions.findDoc(docID); }).to.not.throw(Error);
+      expect(function foo() { UserInteractions.findDoc(docID2); }).to.not.throw(Error);
+      expect(function foo() { UserInteractions.findDoc('foo'); }).to.throw(Error);
+      UserInteractions.removeIt(docID);
+      UserInteractions.removeIt(docID2);
     });
   });
 }

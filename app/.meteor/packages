@@ -34,6 +34,7 @@ erasaur:meteor-lodash
 shell-server@0.3.1
 sacha:spin
 random@1.1.0
+maazalik:highcharts
 
 # Routing
 kadira:flow-router
@@ -79,5 +80,4 @@ mdg:meteor-apm-agent
 meteorhacks:zones
 atoy40:accounts-cas
 mizzao:user-status
-maazalik:highcharts
 msavin:usercache

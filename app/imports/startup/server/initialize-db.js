@@ -163,6 +163,11 @@ function defineTestAdminUser() {
   }
 }
 
+/**
+ * Fixes issues with user interactions, particularly older documents that are not consistent with the
+ * new schema.
+ * @memberOf startup/server
+ */
 function fixUserInteractions() {
   if (Meteor.settings.public.fixUserInteractions) {
     console.log('Fixing UserInteraction collection.');
