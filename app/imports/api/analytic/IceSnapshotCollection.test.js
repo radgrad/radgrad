@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
+import { moment } from 'meteor/momentjs:moment';
 import { Users } from '../user/UserCollection';
 import { IceSnapshot } from './IceSnapshotCollection';
 import { makeSampleUser } from '../user/SampleUsers';
@@ -31,7 +32,7 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
-      const docID = IceSnapshot.define({ username, level, i, c, e });
+      const docID = IceSnapshot.define({ username, level, i, c, e, updated: moment().toDate() });
       expect(IceSnapshot.isDefined(docID)).to.be.true;
       IceSnapshot.removeIt(docID);
       expect(IceSnapshot.isDefined(docID)).to.be.false;

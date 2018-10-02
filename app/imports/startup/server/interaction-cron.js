@@ -27,7 +27,7 @@ SyncedCron.add({
   name: 'Create/update Ice Snapshot for each student',
   schedule: function (parser) {
     // parser is a later.parse object
-    return parser.text('every 2 min');
+    return parser.text('every 24 hours');
   },
   job: function () {
     _.each(StudentProfiles.find().fetch(), function (doc) {
@@ -41,7 +41,7 @@ SyncedCron.add({
           console.log('Updating snapshot for user: ', username);
           IceSnapshot.update({ username }, { $set: { level, updated: moment().toDate() } });
           if (level > iceSnap.level) {
-            UserInteractions.define({ username, type: 'level', typeData: level.toString() });
+            UserInteractions.define({ username, type: 'level', typeData: [level] });
           }
         }
         const ice = StudentProfiles.getProjectedICE(doc.username);
