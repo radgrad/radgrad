@@ -6,7 +6,6 @@ import { OpportunityInstances } from '../opportunity/OpportunityInstanceCollecti
 import { Reviews } from '../review/ReviewCollection';
 import { StudentProfiles } from '../user/StudentProfileCollection';
 import { advisorLogsDefineMethod } from '../log/AdvisorLogCollection.methods';
-import { userInteractionDefineMethod } from '../analytic/UserInteractionCollection.methods';
 import { defineMethod } from '../base/BaseCollection.methods';
 import { RadGrad } from '../radgrad/RadGrad';
 
@@ -99,15 +98,6 @@ export function updateStudentLevel(advisor, studentID) {
       level,
     };
     defineMethod.call({ collectionName: 'FeedCollection', definitionData: feedData });
-    const username = StudentProfiles.getProfile(studentID).username;
-    const type = 'level';
-    const typeData = `${level}`;
-    const interactionData = { username, type, typeData };
-    userInteractionDefineMethod.call(interactionData, (error) => {
-      if (error) {
-        console.log('Error creating UserInteraction.', error);
-      }
-    });
   }
   // console.log(`updateStudentLevel(${studentID}), ${level}`);
   StudentProfiles.setLevel(studentID, level);

@@ -8,6 +8,11 @@ import { defineTestFixturesMethod, withRadGradSubscriptions, withLoggedInUser } 
 if (Meteor.isClient) {
   describe('UserInteractionCollection Meteor Methods ', function test() {
     const student = 'abi@hawaii.edu';
+    const definitionData = {
+      username: student,
+      type: 'interaction-type',
+      typeData: 'interaction-data',
+    };
 
     before(function (done) {
       defineTestFixturesMethod.call(['minimal', 'abi.student'], done);
@@ -16,11 +21,6 @@ if (Meteor.isClient) {
     it('Define Method', async function () {
       await withLoggedInUser();
       await withRadGradSubscriptions();
-      const definitionData = {
-        username: student,
-        type: 'interaction-type',
-        typeData: 'interaction-data',
-      };
       await userInteractionDefineMethod.callPromise(definitionData);
     });
 
