@@ -22,6 +22,6 @@ Template.Student_Log_Widget.helpers({
     return AdvisorLogs.find({ studentID: getUserIdFromRoute() }, { sort: { createdOn: -1 } }).fetch();
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
 });

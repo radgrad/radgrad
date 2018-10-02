@@ -43,11 +43,11 @@ Template.Explorer_Choose_User_Widget.helpers({
   usersRouteName() {
     const group = FlowRouter.current().route.group && FlowRouter.current().route.group.name;
     if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
+      return RouteNames.studentCardExplorerUsersPageRouteName;
     } else if (group === 'faculty') {
-      return RouteNames.facultyExplorerUsersPageRouteName;
+      return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
-    return RouteNames.mentorExplorerUsersPageRouteName;
+    return RouteNames.mentorCardExplorerUsersPageRouteName;
   },
 });
 

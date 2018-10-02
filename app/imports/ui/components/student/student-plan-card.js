@@ -74,7 +74,7 @@ Template.Student_Plan_Card.helpers({
     return Users.getFullName(studentID);
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
   userSlug(studentID) {
     return Users.getProfile(studentID).username;

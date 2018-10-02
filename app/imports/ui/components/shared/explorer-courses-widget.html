@@ -1,0 +1,147 @@
+<template name="Explorer_Courses_Widget">
+  <div class="ui segments" style="background-color: white;">
+    <div class="ui padded segment container">
+
+      <div class="ui clearing basic segment"
+           style="margin: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+        <h4 class="ui left floated header">{{toUpper shortName}} ({{name}})</h4>
+        {{#if isInRole 'student'}}
+          {{#if userStatus item}}
+            {{#if futureInstance item}}
+              {{> Student_Explorer_Courses_Widget_Button buttonType='remove' course=item}}
+            {{else}}
+              {{#if passedCourse item}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='taken'}}
+              {{else}}
+                {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+              {{/if}}
+            {{/if}}
+          {{else}}
+            {{> Student_Explorer_Courses_Widget_Button buttonType='add' course=item}}
+          {{/if}}
+        {{/if}}
+      </div>
+      <div class="ui divider" style="margin-top: 0;"></div>
+
+      <div class="ui stackable two column grid">
+        <div class="six wide column">
+          {{#each descriptionPair in descriptionPairs}}
+
+            {{#if isLabel descriptionPair.label 'Course Number'}}
+              <b>{{descriptionPair.label}}:</b>
+              {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+              {{else}}
+                N/A <br>
+              {{/if}}
+            {{/if}}
+
+            {{#if isLabel descriptionPair.label 'Credit Hours'}}
+              <b>{{descriptionPair.label}}:</b>
+              {{#if descriptionPair.value}} {{descriptionPair.value}} <br>
+              {{else}}
+                N/A <br>
+              {{/if}}
+            {{/if}}
+
+          {{/each}}
+        </div>
+
+        <div class="ten wide column">
+          {{#each descriptionPair in descriptionPairs}}
+
+            {{#if isLabel descriptionPair.label 'Syllabus'}}
+              <b>{{descriptionPair.label}}:</b>
+              {{#if descriptionPair.value}} <span style="word-wrap: break-word;">{{{descriptionPair.value}}}</span> <br>
+              {{else}}
+                N/A <br>
+              {{/if}}
+            {{/if}}
+
+          {{/each}}
+        </div>
+      </div>
+
+      <div style="margin-top: 0" class="ui stackable grid">
+        <div class="column">
+          {{#each descriptionPair in descriptionPairs}}
+
+            {{#if isLabel descriptionPair.label 'Description'}}
+              <b>{{descriptionPair.label}}:</b>
+              {{#if descriptionPair.value}} {{{markdownify descriptionPair.value}}} <br>
+              {{else}}
+                N/A <br>
+              {{/if}}
+            {{/if}}
+
+            {{#if isLabel descriptionPair.label 'Interests'}}
+              <div style="margin-top: 5px">
+                {{> Interest_List item=item size='mini'}}
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      </div>
+
+      <div style="margin-top: 0" class="ui stackable grid">
+        <div class="column">
+          {{#each descriptionPair in descriptionPairs}}
+
+            {{#if isLabel descriptionPair.label 'Prerequisites'}}
+              {{#if descriptionPair.value}}
+                <h4 class="ui horizontal divider header">
+                  {{descriptionPair.label}}
+                </h4>
+                {{#if isInRole 'student'}}
+                  <div class="ui three column stackable padded celled grid">
+                    <div class="row">
+                      {{#each table in descriptionPair.value}}
+                        <div class="column" style="text-align: center; background-color: {{color table}}">
+                          {{{getTableTitle @index table}}}
+                          {{#if length table}}
+                            {{#each prerequisite in table}}
+                              <a class="{{isActiveRoute coursesRouteName}} item"
+                                 href="{{pathFor coursesRouteName username=routeUserName
+                                                 course = prerequisite.course}}">{{courseNameFromSlug
+                                  prerequisite.course}}</a>
+                              <br>
+                            {{/each}}
+                          {{else}}
+                            <a class="item" style="color: grey">
+                              None
+                            </a>
+                          {{/if}}
+                        </div>
+                      {{/each}}
+                    </div>
+                  </div>
+                {{else}}
+                  <div class="ui horizontal bulleted list">
+                    {{#each prerequisiteList in descriptionPair.value}}
+                      {{#each prereq in prerequisiteList}}
+                        <a class="item">
+                          <a class="{{isActiveRoute coursesRouteName}} item"
+                             href="{{pathFor coursesRouteName username=routeUserName
+                                             course=prereq.course}}">{{courseNameFromSlug prereq.course}}</a> </a>
+                      {{/each}}
+                    {{/each}}
+                  </div>
+                {{/if}}
+              {{/if}}
+            {{/if}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui stackable column grid">
+    <div class="sixteen wide column">
+      <div class="ui padded segment">
+        {{> Student_Explorer_Review_Widget event=item userReview=review completed=completed reviewType = 'course'}}
+      </div>
+    </div>
+  </div>
+
+  {{> Back_To_Top_Button}}
+
+</template>

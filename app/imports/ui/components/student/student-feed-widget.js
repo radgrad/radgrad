@@ -19,7 +19,7 @@ Template.Student_Feed_Widget.helpers({
     return Users.getProfile(feed.userIDs[0]).username;
   },
   userRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
   courseRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;

@@ -5,7 +5,6 @@ import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import * as RouteNames from '../../../startup/client/router.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
-import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 import { Users } from '../../../api/user/UserCollection.js';
 import { OpportunityInstances } from '../../../api/opportunity/OpportunityInstanceCollection.js';
 import { Slugs } from '../../../api/slug/SlugCollection.js';
@@ -88,7 +87,7 @@ Template.Student_Card_Explorer_Menu.helpers({
     if (group === 'student') {
       return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
     } else if (group === 'faculty') {
-      return RouteNames.facultyExplorerCareerGoalsPageRouteName;
+      return RouteNames.facultyCardExplorerCareerGoalsPageRouteName;
     }
     return RouteNames.mentorExplorerCareerGoalsPageRouteName;
   },
@@ -159,18 +158,11 @@ Template.Student_Card_Explorer_Menu.helpers({
     }
     return true;
   },
-  firstDegree() {
-    let ret;
-    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
-    if (degrees.length > 0) {
-      ret = Slugs.findDoc(degrees[0].slugID).name;
-    }
-    return ret;
-  },
   getRouteName() {
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
       case RouteNames.studentCardExplorerCareerGoalsPageRouteName:
+      case RouteNames.facultyCardExplorerCareerGoalsPageRouteName:
         return 'Career Goals';
       case RouteNames.studentCardExplorerCoursesPageRouteName:
         return 'Courses';

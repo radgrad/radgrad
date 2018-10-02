@@ -7,41 +7,14 @@ import './explorer-choose-user-widget.js';
 import './student-home-menu.html';
 import './student-home-menu.js';
 
-import './student-card-explorer-careergoals-widget.html';
-import './student-card-explorer-careergoals-widget';
-
-import './student-card-explorer-courses-widget.html';
-import './student-card-explorer-courses-widget';
-
 import './student-card-explorer-menu.html';
 import './student-card-explorer-menu';
-
-import './student-card-explorer-interests-widget.html';
-import './student-card-explorer-interests-widget';
-
-import './student-card-explorer-opportunities-widget.html';
-import './student-card-explorer-opportunities-widget';
-
-import './student-card-explorer-plans-widget.html';
-import './student-card-explorer-plans-widget';
-
-import './student-card-explorer-users-widget.html';
-import './student-card-explorer-users-widget';
-
-import './student-explorer-courses-widget.html';
-import './student-explorer-courses-widget.js';
 
 import './student-explorer-courses-widget-button.html';
 import './student-explorer-courses-widget-button.js';
 
-import './student-explorer-careergoals-widget.html';
-import './student-explorer-careergoals-widget.js';
-
 import './student-explorer-degrees-widget.html';
 import './student-explorer-degrees-widget.js';
-
-import './student-explorer-interests-widget.html';
-import './student-explorer-interests-widget.js';
 
 import './student-explorer-menu.html';
 import './student-explorer-menu.js';
@@ -54,12 +27,6 @@ import './student-explorer-edit-review-widget.js';
 
 import './student-explorer-review-widget.html';
 import './student-explorer-review-widget.js';
-
-import './student-explorer-plans-widget.html';
-import './student-explorer-plans-widget';
-
-import './student-explorer-opportunities-widget.html';
-import './student-explorer-opportunities-widget.js';
 
 import './student-explorer-opportunities-widget-button.html';
 import './student-explorer-opportunities-widget-button.js';

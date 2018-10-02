@@ -1,0 +1,15 @@
+<template name="Card_Explorer_Layout">
+  <div class="layout-page">
+    <div class="ui container stackable grid ">
+      <div class="row">
+        {{> Help_Panel_Widget }}
+      </div>
+      <div class="three wide column">
+        {{> Card_Explorer_Menu menuAddedList=addedList menuCareerList=careerList type=type }}
+      </div>
+      <div class="thirteen wide column">
+        {{> Template.contentBlock}}
+      </div>
+    </div>
+  </div>
+</template>

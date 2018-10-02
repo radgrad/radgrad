@@ -3,12 +3,12 @@
     <i class="dropdown icon"></i>
     <div>{{getRouteName}}</div>
     <div class="menu">
+      <a class="{{isActiveRoute academicPlansRouteName}} item"
+         href="{{pathFor academicPlansCardRouteName username=routeUserName}}">Academic Plans</a>
       <a class="{{isActiveRoute careerGoalsRouteName}} item"
          href="{{pathFor careerGoalsCardRouteName username=routeUserName}}">Career Goals</a>
       <a class="{{isActiveRoute coursesRouteName}} item"
          href="{{pathFor coursesCardRouteName username=routeUserName}}">Courses</a>
-      <a class="{{isActiveRoute academicPlansRouteName}} item"
-         href="{{pathFor academicPlansCardRouteName username=routeUserName}}">Academic Plans</a>
       <a class="{{isActiveRoute interestsRouteName}} item"
          href="{{pathFor interestsCardRouteName username=routeUserName}}">Interests</a>
       <a class="{{isActiveRoute opportunitiesRouteName}} item"

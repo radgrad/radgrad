@@ -223,8 +223,12 @@ Template.Student_Explorer_Menu.helpers({
     const routeName = FlowRouter.getRouteName();
     switch (routeName) {
       case RouteNames.studentExplorerCareerGoalsPageRouteName:
+      case RouteNames.facultyExplorerCareerGoalsPageRouteName:
+      case RouteNames.mentorExplorerCareerGoalsPageRouteName:
         return 'Career Goals';
       case RouteNames.studentExplorerCoursesPageRouteName:
+      case RouteNames.facultyExplorerCoursesPageRouteName:
+      case RouteNames.mentorExplorerCoursesPageRouteName:
         return 'Courses';
       case RouteNames.studentExplorerPlansPageRouteName:
         return 'Academic Plans';
@@ -234,7 +238,7 @@ Template.Student_Explorer_Menu.helpers({
         return 'Interests';
       case RouteNames.studentExplorerOpportunitiesPageRouteName:
         return 'Opportunities';
-      case RouteNames.studentExplorerUsersPageRouteName:
+      case RouteNames.studentCardExplorerUsersPageRouteName:
         return 'Users';
       default:
         return 'Select Explorer';
@@ -355,19 +359,19 @@ Template.Student_Explorer_Menu.helpers({
       return RouteNames.studentCardExplorerUsersPageRouteName;
     } else
     if (group === 'faculty') {
-      return RouteNames.facultyExplorerUsersPageRouteName;
+      return RouteNames.facultyCardExplorerUsersPageRouteName;
     }
     return RouteNames.mentorExplorerUsersPageRouteName;
   },
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
+      return RouteNames.studentCardExplorerUsersPageRouteName;
     } else
       if (group === 'faculty') {
-        return RouteNames.facultyExplorerUsersPageRouteName;
+        return RouteNames.facultyCardExplorerUsersPageRouteName;
       }
-    return RouteNames.mentorExplorerUsersPageRouteName;
+    return RouteNames.mentorCardExplorerUsersPageRouteName;
   },
 });
 

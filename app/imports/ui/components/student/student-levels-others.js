@@ -46,7 +46,7 @@ Template.Student_Levels_Others.helpers({
     return students;
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
   userUsername(student) {
     return student.username;

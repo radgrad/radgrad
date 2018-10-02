@@ -34,12 +34,12 @@ Template.Student_Explorer_Degrees_Widget.helpers({
   usersRouteName() {
     const group = FlowRouter.current().route.group.name;
     if (group === 'student') {
-      return RouteNames.studentExplorerUsersPageRouteName;
+      return RouteNames.studentCardExplorerUsersPageRouteName;
     } else
       if (group === 'faculty') {
-        return RouteNames.facultyExplorerUsersPageRouteName;
+        return RouteNames.facultyCardExplorerUsersPageRouteName;
       }
-    return RouteNames.mentorExplorerUsersPageRouteName;
+    return RouteNames.mentorCardExplorerUsersPageRouteName;
   },
   userStatus(degree) {
     let ret = true;

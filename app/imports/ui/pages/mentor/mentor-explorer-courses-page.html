@@ -1,5 +1,0 @@
-<template name="Mentor_Explorer_Courses_Page">
-  {{#Student_Explorer_Layout addedList = addedCourses nonAddedList = nonAddedCourses type = 'courses'}}
-    {{> Student_Explorer_Courses_Widget name=course.name shortName=course.shortName slug=(slugName course.slugID) descriptionPairs=(descriptionPairs course) id=course._id updateID=updateID item=course completed=completed reviewed=reviewed}}
-  {{/Student_Explorer_Layout}}
-</template>

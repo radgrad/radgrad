@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { Slugs } from '../../../api/slug/SlugCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';

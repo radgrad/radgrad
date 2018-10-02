@@ -124,7 +124,7 @@ Template.Student_Of_Interest_Card.helpers({
     return Users.getProfile(studentID).username;
   },
   usersRouteName() {
-    return RouteNames.studentExplorerUsersPageRouteName;
+    return RouteNames.studentCardExplorerUsersPageRouteName;
   },
   yearSemesters(year) {
     const semesters = [`Spring ${year}`, `Summer ${year}`, `Fall ${year}`];
