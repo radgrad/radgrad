@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="width=device-width"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>HTML email test</title>
+  <style>
+    p,
+    li {
+      color: #4F4F4F;
+    }
+
+    p {
+      margin: 7px 0px;
+    }
+
+    ul {
+      margin-top: 0px;
+    }
+
+    .body-table {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      background-color: #D8D8D8;
+    }
+
+    .block-header {
+      text-align: center;
+      margin: 5px;
+      color: black;
+    }
+
+    .rec-header {
+      text-decoration: underline;
+      color: #4F4F4F;
+      margin-bottom: 10px;
+      margin-top: 5px;
+    }
+
+    .main-table {
+      background-color: white;
+    }
+
+    .main-table .block-td {
+      background-color: #F7F7F7;
+      border-color: #6FBE44;
+      border-style: solid;
+      border-width: 1px;
+      padding: 8px 23px;
+    }
+
+    .main-table .logo-td {
+      background-color: white;
+      border: none;
+      padding: 4px 3px;
+      text-align: right;
+    }
+
+    .logo {
+      width: 175px;
+    }
+
+  </style>
+</head>
+
+<body itemscope itemtype="http://schema.org/EmailMessage">
+<table border="0" cellpadding="20" cellspacing="0" height="100%" width="100%" class="body-table">
+  <tr>
+    <td align="center">
+      <table cellspacing="20" width="600" class="main-table">
+        <tr>
+          <td class="logo-td">
+            <img class="logo" src="https://i.postimg.cc/XJXgPGr5/radgrad.png">
+          </td>
+        </tr>
+        <tr>
+          <td class="block-td">
+            <h4 class="block-header">
+              Message From The Admins
+            </h4>
+            <p>Aloha {{firstName}}!</p>
+            <p>Welcome to the September edition of the RadGrad newsletter! We have implemented several bugfixes and
+              performance optimizations this month that we hope will improve your user experience. Note
+              that the Agathon and HACC Opportunities are coming up this month. As always, contact us at
+              radgrad@hawaii.edu if you have any questions about RadGrad.</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="block-td">
+            <h4 class="block-header">
+              What To Do Right Now
+            </h4>
+            <h4 class="rec-header">
+              {{{firstRec.header}}}
+            </h4>
+            {{{firstRec.info}}}
+            <h4 class="rec-header">
+              {{{secondRec.header}}}
+            </h4>
+            {{{secondRec.info}}}
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+
+</html>

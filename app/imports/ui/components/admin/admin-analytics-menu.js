@@ -17,4 +17,7 @@ Template.Admin_Analytics_Menu.helpers({
   overheadAnalysisRouteName() {
     return RouteNames.adminAnalyticsOverheadAnalysisPageRouteName;
   },
+  newsletterRouteName() {
+    return RouteNames.adminAnalyticsNewsletterPageRouteName;
+  },
 });

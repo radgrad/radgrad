@@ -1,0 +1,11 @@
+<template name="Admin_Analytics_Newsletter_Page">
+
+  {{#if Template.subscriptionsReady}}
+    {{#Admin_Analytics_Layout}}
+      {{> Generate_Newsletter_Widget}}
+    {{/Admin_Analytics_Layout}}
+  {{else}}
+    {{> Loading message="Waiting for subscriptions."}}
+  {{/if}}
+
+</template>
