@@ -18,7 +18,7 @@
     "deploy": "DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy radgrad.meteorapp.com --settings ../config/settings.production.json"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.46",
+    "@babel/runtime": "^7.1.2",
     "babel-runtime": "^6.26.0",
     "bcrypt": "^0.8.7",
     "chromedriver": "^2.38.2",
