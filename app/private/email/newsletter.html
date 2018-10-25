@@ -10,94 +10,141 @@
       color: #4F4F4F;
     }
 
-    p {
-      margin: 7px 0px;
-    }
-
-    ul {
-      margin-top: 0px;
-    }
-
     .body-table {
       font-family: Arial, Helvetica, sans-serif;
       font-size: 15px;
-      background-color: #D8D8D8;
     }
 
-    .block-header {
-      text-align: center;
-      margin: 5px;
-      color: black;
+    .logo {
+      margin-top: 8px;
+      width: 150px;
+    }
+
+    .logo-stack-td {
+      background-color: #C0E5D9;
+      height: 70px;
+    }
+
+    .header-stack-td {
+      background-color: #63BA9F;
+      font-size: 20px;
+      padding-left: 12px;
+    }
+
+    .header-stack-td p {
+      color: white;
+      margin: 0px;
     }
 
     .rec-header {
       text-decoration: underline;
       color: #4F4F4F;
       margin-bottom: 10px;
-      margin-top: 5px;
     }
 
     .main-table {
-      background-color: white;
+      max-width: 960px;
     }
 
     .main-table .block-td {
-      background-color: #F7F7F7;
-      border-color: #6FBE44;
-      border-style: solid;
-      border-width: 1px;
-      padding: 8px 23px;
+      background-color: #F9F9F9;
+      padding: 20px 50px;
     }
 
-    .main-table .logo-td {
-      background-color: white;
-      border: none;
-      padding: 4px 3px;
-      text-align: right;
+    .main-table .block-td-alt {
+      background-color: #E2E2E2;
+      padding: 20px 50px;
     }
 
-    .logo {
-      width: 175px;
+    /* Media query for mobile*/
+
+    @media only screen and (max-width: 600px) {
+      .logo-stack-td,
+      .header-stack-td {
+        padding: 10px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        height: 100%;
+      }
     }
 
   </style>
 </head>
-
 <body itemscope itemtype="http://schema.org/EmailMessage">
-<table border="0" cellpadding="20" cellspacing="0" height="100%" width="100%" class="body-table">
+<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" class="body-table">
   <tr>
     <td align="center">
-      <table cellspacing="20" width="600" class="main-table">
+      <table cellspacing="0" cellpadding="0" width="100%" class="main-table">
         <tr>
-          <td class="logo-td">
-            <img class="logo" src="https://i.postimg.cc/XJXgPGr5/radgrad.png">
+          <td>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td width="175" align="center" class="logo-stack-td"><img class="logo"
+                                                                          src="https://i.postimg.cc/c4j2Dqjm/radgrad-email-logo.png"/>
+                </td>
+                <td align="left" class="header-stack-td">
+                  <p>MESSAGE FROM THE ADMINS</p>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
         <tr>
-          <td class="block-td">
-            <h4 class="block-header">
-              Message From The Admins
-            </h4>
+          <td class="block-td" style="padding-bottom: 20px;">
             <p>Aloha {{firstName}}!</p>
             <p>Welcome to the September edition of the RadGrad newsletter! We have implemented several bugfixes and
-              performance optimizations this month that we hope will improve your user experience. Note
-              that the Agathon and HACC Opportunities are coming up this month. As always, contact us at
-              radgrad@hawaii.edu if you have any questions about RadGrad.</p>
+              performance optimizations this month that we hope will improve your user experience. Note that the Agathon
+              and HACC Opportunities are
+              coming up this month. As always, contact us at radgrad@hawaii.edu if you have any questions about RadGrad.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td width="175" align="center" class="logo-stack-td"><img class="logo"
+                                                                          src="https://i.postimg.cc/c4j2Dqjm/radgrad-email-logo.png"/>
+                </td>
+                <td align="left" class="header-stack-td">
+                  <p>WHAT TO DO RIGHT NOW</p>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
         <tr>
           <td class="block-td">
-            <h4 class="block-header">
-              What To Do Right Now
-            </h4>
             <h4 class="rec-header">
               {{{firstRec.header}}}
             </h4>
             {{{firstRec.info}}}
+          </td>
+        </tr>
+        <tr>
+          <td class="block-td-alt">
             <h4 class="rec-header">
               {{{secondRec.header}}}
             </h4>
             {{{secondRec.info}}}
+          </td>
+        </tr>
+        <tr>
+          <td class="block-td">
+            <h4 class="rec-header">
+              {{{thirdRec.header}}}
+            </h4>
+            {{{thirdRec.info}}}
+          </td>
+        </tr>
+        <tr>
+          <td class="block-td-alt">
+            <h4 class="rec-header">
+              {{{fourthRec.header}}}
+            </h4>
+            {{{fourthRec.info}}}
           </td>
         </tr>
       </table>

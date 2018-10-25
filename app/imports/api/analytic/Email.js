@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { SSR } from 'meteor/meteorhacks:ssr';
 import { Email } from 'meteor/email';
+import { ZipZap } from 'meteor/udondan:zipzap';
 
 /* global Assets */
 
@@ -12,14 +13,19 @@ import { Email } from 'meteor/email';
  * @param emailData Custom data to be rendered in the email template. SSR is used to compile and
  * render the final content.
  */
-export function sendEmail({ to, from, subject, templateData }) {
+export function sendEmail({ to, cc, from, subject, templateData }) {
   if (Meteor.isServer) {
     SSR.compileTemplate('htmlEmail', Assets.getText('email/newsletter.html'));
-    Email.send({
+    const html = SSR.render('htmlEmail', templateData);
+    const zip = new ZipZap();
+    const filename = 'newsletter.html';
+    zip.file(filename, html);
+    zip.saveAs('/home/weng/Documents/newsletter.zip');
+    /* Email.send({
       to,
       from,
       subject,
-      html: SSR.render('htmlEmail', templateData),
-    });
+      html,
+    }); */
   }
 }
