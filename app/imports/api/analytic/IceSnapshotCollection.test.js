@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { moment } from 'meteor/momentjs:moment';
 import { Users } from '../user/UserCollection';
-import { IceSnapshot } from './IceSnapshotCollection';
+import { IceSnapshots } from './IceSnapshotCollection';
 import { makeSampleUser } from '../user/SampleUsers';
 import { removeAllEntities } from '../base/BaseUtilities';
 
@@ -32,10 +32,10 @@ if (Meteor.isServer) {
     });
 
     it('#define, #isDefined, #removeIt', function test() {
-      const docID = IceSnapshot.define({ username, level, i, c, e, updated: moment().toDate() });
-      expect(IceSnapshot.isDefined(docID)).to.be.true;
-      IceSnapshot.removeIt(docID);
-      expect(IceSnapshot.isDefined(docID)).to.be.false;
+      const docID = IceSnapshots.define({ username, level, i, c, e, updated: moment().toDate() });
+      expect(IceSnapshots.isDefined(docID)).to.be.true;
+      IceSnapshots.removeIt(docID);
+      expect(IceSnapshots.isDefined(docID)).to.be.false;
     });
   });
 }

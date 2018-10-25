@@ -27,10 +27,10 @@ Template.Student_About_Me_Widget.helpers({
     return ret;
   },
   careerGoalsRouteName() {
-    return RouteNames.studentExplorerCareerGoalsPageRouteName;
+    return RouteNames.studentCardExplorerCareerGoalsPageRouteName;
   },
   degreesRouteName() {
-    return RouteNames.studentExplorerDegreesPageRouteName;
+    return RouteNames.studentCardExplorerPlansPageRouteName;
   },
   desiredDegree() {
     let ret = 'Not yet specified.';
@@ -38,7 +38,7 @@ Template.Student_About_Me_Widget.helpers({
       const profile = Users.getProfile(getRouteUserName());
       if (profile.academicPlanID) {
         const plan = AcademicPlans.findDoc(profile.academicPlanID);
-        ret = DesiredDegrees.findDoc(plan.degreeID).shortName;
+        ret = plan.name;
       }
     }
     return ret;
@@ -94,7 +94,7 @@ Template.Student_About_Me_Widget.helpers({
     return ret;
   },
   interestsRouteName() {
-    return RouteNames.studentExplorerInterestsPageRouteName;
+    return RouteNames.studentCardExplorerInterestsPageRouteName;
   },
   name() {
     if (getRouteUserName()) {

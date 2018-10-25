@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import BaseCollection from '../base/BaseCollection';
 import { Users } from '../user/UserCollection';
@@ -69,6 +70,16 @@ class IceSnapshotCollection extends BaseCollection {
     const e = doc.e;
     return { username, level, i, c, e, updated };
   }
+
+  /**
+   * Publish an empty cursor to IceSnapshotCollection. We do not need to publish any records,
+   * but would still like this to be on the list of collections for integrity check, etc.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      Meteor.publish(this._collectionName, () => this._collection.find({}, { limit: 0 }));
+    }
+  }
 }
 
-export const IceSnapshot = new IceSnapshotCollection();
+export const IceSnapshots = new IceSnapshotCollection();
