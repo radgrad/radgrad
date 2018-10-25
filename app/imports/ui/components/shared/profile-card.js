@@ -125,5 +125,5 @@ Template.Profile_Card.helpers({
 });
 
 Template.Profile_Card.onRendered(function profileCardOnRendered() {
-  this.$('.ui .image').popup();
+  this.$('.ui .button').popup();
 });
