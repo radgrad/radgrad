@@ -1,7 +1,7 @@
 import { _ } from 'meteor/erasaur:meteor-lodash';
 import { SyncedCron } from 'meteor/percolate:synced-cron';
 import { moment } from 'meteor/momentjs:moment';
-import { IceSnapshot } from '../../api/analytic/IceSnapshotCollection';
+import { IceSnapshots } from '../../api/analytic/IceSnapshotCollection';
 import { StudentProfiles } from '../../api/user/StudentProfileCollection';
 import { UserInteractions } from '../../api/analytic/UserInteractionCollection';
 
@@ -15,7 +15,7 @@ function createSnapshot(doc) {
   snapshotData.e = ice.e;
   snapshotData.updated = moment().toDate();
   console.log('Creating snapshot for: ', doc.username);
-  IceSnapshot.define(snapshotData);
+  IceSnapshots.define(snapshotData);
 }
 
 /**
@@ -27,11 +27,11 @@ SyncedCron.add({
   name: 'Create/update Ice Snapshot for each student',
   schedule: function (parser) {
     // parser is a later.parse object
-    return parser.text('every 24 hours');
+    return parser.text('every 12 hours');
   },
   job: function () {
     _.each(StudentProfiles.find().fetch(), function (doc) {
-      const iceSnap = IceSnapshot.findOne({ username: doc.username });
+      const iceSnap = IceSnapshots.findOne({ username: doc.username });
       const username = doc.username;
       const level = doc.level;
       if (iceSnap === undefined) {
@@ -39,7 +39,7 @@ SyncedCron.add({
       } else {
         if (level !== iceSnap.level) {
           console.log('Updating snapshot for user: ', username);
-          IceSnapshot.update({ username }, { $set: { level, updated: moment().toDate() } });
+          IceSnapshots.update({ username }, { $set: { level, updated: moment().toDate() } });
           if (level > iceSnap.level) {
             UserInteractions.define({ username, type: 'level', typeData: [level] });
           }
@@ -47,9 +47,9 @@ SyncedCron.add({
         const ice = StudentProfiles.getProjectedICE(doc.username);
         if ((iceSnap.i !== ice.i) || (iceSnap.c !== ice.c) || (iceSnap.e !== ice.e)) {
           console.log('Updating snapshot for user: ', username);
-          IceSnapshot.update({ username }, { $set: { i: ice.i, c: ice.c, e: ice.e, updated: moment().toDate() } });
-          if ((iceSnap.i < 100) || (iceSnap.co < 100) || (iceSnap.e < 100)) {
-            if ((ice.i > 100) && (ice.c > 100) && (ice.e > 100)) {
+          IceSnapshots.update({ username }, { $set: { i: ice.i, c: ice.c, e: ice.e, updated: moment().toDate() } });
+          if ((iceSnap.i < 100) || (iceSnap.c < 100) || (iceSnap.e < 100)) {
+            if ((ice.i >= 100) && (ice.c >= 100) && (ice.e >= 100)) {
               UserInteractions.define({ username, type: 'completePlan', typeData: [ice.i, ice.c, ice.e] });
             }
           }
