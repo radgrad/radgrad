@@ -47,3 +47,15 @@ Template.Profile_Add.events({
     }
   },
 });
+
+Template.Profile_Add.onRendered(function studentOfInterestAddOnRendered() {
+  const template = this;
+  template.$('.chooseSemester')
+    .popup({
+      on: 'click',
+    });
+  template.$('.chooseYear')
+    .popup({
+      on: 'click',
+    });
+});
