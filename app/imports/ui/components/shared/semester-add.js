@@ -93,3 +93,15 @@ Template.Semester_Add.events({
     }
   },
 });
+
+Template.Semester_Add.onRendered(function semesterAddOnRendered() {
+  const template = this;
+  template.$('.chooseSemester')
+    .popup({
+      on: 'click',
+    });
+  template.$('.chooseYear')
+    .popup({
+      on: 'click',
+    });
+});

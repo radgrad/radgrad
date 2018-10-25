@@ -85,7 +85,7 @@ Template.Semester_Card.helpers({
         description = `${description.substring(0, 199)}`;
       }
     }
-    return description;
+    return `${description}...`;
   },
   itemSlug(item) {
     return Slugs.findDoc(item.slugID).name;
