@@ -23,6 +23,7 @@ Template.Course_Score_Board_Widget.helpers({
   courses() {
     // console.log('courses');
     let courses = Courses.find({}, { sort: { number: 1 } }).fetch();
+    courses = _.filter(courses, (c) => !c.retired);
     courses = _.filter(courses, function (c) {
       let retVal = false;
       if (Template.instance().dictionary.get('byICS')) {

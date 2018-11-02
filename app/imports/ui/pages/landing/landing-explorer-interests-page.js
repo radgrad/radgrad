@@ -11,7 +11,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 
 function courses(interest) {
-  const allCourses = Courses.find().fetch();
+  const allCourses = _.filter(Courses.find().fetch(), (c) => !c.retired);
   const matching = [];
   _.forEach(allCourses, (course) => {
     if (_.includes(course.interestIDs, interest._id)) {

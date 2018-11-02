@@ -8,7 +8,7 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 Template.Card_Explorer_Courses_Page.helpers({
   addedCourses() {
     const addedCourses = [];
-    const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
     const userID = getUserIdFromRoute();
     _.forEach(allCourses, (course) => {
       const ci = CourseInstances.find({
@@ -24,7 +24,7 @@ Template.Card_Explorer_Courses_Page.helpers({
     return addedCourses;
   },
   nonAddedCourses() {
-    const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
     const userID = getUserIdFromRoute();
     const nonAddedCourses = _.filter(allCourses, function (course) {
       const ci = CourseInstances.find({

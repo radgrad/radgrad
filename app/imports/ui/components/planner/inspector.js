@@ -101,7 +101,7 @@ Template.Inspector.helpers({
     return RouteNames.studentExplorerCoursesPageRouteName;
   },
   courses100() {
-    const courses = Courses.find({ number: /1\d\d/ }).fetch();
+    const courses = _.filter(Courses.find({ number: /1\d\d/ }).fetch(), (c) => !c.retired);
     const instances = CourseInstances.find({ note: /1\d\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -118,7 +118,7 @@ Template.Inspector.helpers({
     });
   },
   courses200() {
-    const courses = Courses.find({ number: /2\d\d/ }).fetch();
+    const courses = _.filter(Courses.find({ number: /2\d\d/ }).fetch(), (c) => !c.retired);
     const instances = CourseInstances.find({ note: /2\d\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -135,7 +135,7 @@ Template.Inspector.helpers({
     });
   },
   courses300() {
-    const courses = Courses.find({ number: /3[01234]\d/ }).fetch();
+    const courses = _.filter(Courses.find({ number: /3[01234]\d/ }).fetch(), (c) => !c.retired);
     const instances = CourseInstances.find({ note: /3[01234]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -152,7 +152,7 @@ Template.Inspector.helpers({
     });
   },
   courses350() {
-    const courses = Courses.find({ number: /3[56789]\d/ }).fetch();
+    const courses = _.filter(Courses.find({ number: /3[56789]\d/ }).fetch(), (c) => !c.retired);
     const instances = CourseInstances.find({ note: /3[56789]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -169,7 +169,7 @@ Template.Inspector.helpers({
     });
   },
   courses410() {
-    const courses = Courses.find({ number: /4[0123]/ }).fetch();
+    const courses = _.filter(Courses.find({ number: /4[0123]/ }).fetch(), (c) => !c.retired);
     const instances = CourseInstances.find({ note: /4[0123]/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -186,7 +186,7 @@ Template.Inspector.helpers({
     });
   },
   courses440() {
-    const courses = Courses.find({ number: /4[456]/ }).fetch();
+    const courses = _.filter(Courses.find({ number: /4[456]/ }).fetch(), (c) => !c.retired);
     const instances = CourseInstances.find({ note: /4[456]/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -203,7 +203,7 @@ Template.Inspector.helpers({
     });
   },
   courses470() {
-    const courses = Courses.find({ number: /4[789]/ }).fetch();
+    const courses = _.filter(Courses.find({ number: /4[789]/ }).fetch(), (c) => !c.retired);
     const instances = CourseInstances.find({ note: /4[789]/ }).fetch();
     let courseTakenIDs = _.filter(instances, function filter(ci) {
       return ci.note.indexOf('499') === -1;

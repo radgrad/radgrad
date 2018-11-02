@@ -107,7 +107,7 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   coursesTotal() {
-    const count = Courses.find().count();
+    const count = _.filter(Courses.find().fetch(), (c) => !c.retired).length;
     this._collection.upsert({ key: this.coursesTotalKey }, { $set: { value: `${count}` } });
   }
 
@@ -235,7 +235,7 @@ class PublicStatsCollection extends BaseCollection {
     let courseNumbers = [];
     _.forEach(courseReviews, (review) => {
       const course = Courses.findDoc(review.revieweeID);
-      courseNumbers.push(course.number);
+      courseNumbers.push(course.number); // CAM: should we filter retired courses?
     });
     courseNumbers = _.union(courseNumbers);
     if (courseNumbers) {

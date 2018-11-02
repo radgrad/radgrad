@@ -51,7 +51,8 @@ Template.Update_Feed_Widget.helpers({
     return Opportunities.find({}, { sort: { name: 1 } });
   },
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
+    return _.filter(courses, (c) => !c.retired);
   },
   users() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();

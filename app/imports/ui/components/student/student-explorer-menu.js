@@ -182,7 +182,7 @@ Template.Student_Explorer_Menu.helpers({
   },
   firstCourse() {
     let ret;
-    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    const courses = _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
     if (courses.length > 0) {
       ret = Slugs.findDoc(courses[0].slugID).name;
     }

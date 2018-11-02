@@ -16,7 +16,7 @@ Template.Student_Of_Interest_Widget.onCreated(function studentOfInterestWidgetOn
 });
 
 const availableCourses = () => {
-  const courses = Courses.find({}).fetch();
+  const courses = _.filter(Courses.find({}).fetch(), (c) => !c.retired);
   if (courses.length > 0) {
     const filtered = _.filter(courses, function filter(course) {
       if (course.number === 'ICS 499') {
