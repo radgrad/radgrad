@@ -17,6 +17,7 @@ const updateSchema = new SimpleSchema({
   description: String,
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   prerequisites: { type: Array }, 'prerequisites.$': String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Course_Widget.onCreated(function onCreated() {
@@ -48,6 +49,18 @@ Template.Update_Course_Widget.helpers({
   prerequisites() {
     return Courses.find({}, { sort: { number: 1 } });
   },
+  falseValueRetired() {
+    const course = Courses.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !course.retired;
+  },
+  trueValueRetired() {
+    const course = Courses.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return course.retired;
+  },
 });
 
 Template.Update_Course_Widget.events({
@@ -56,6 +69,11 @@ Template.Update_Course_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    if (updateData.retired === 'true') {
+      updateData.retired = true;
+    } else {
+      updateData.retired = false;
+    }
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();
@@ -67,6 +85,7 @@ Template.Update_Course_Widget.events({
         }
       });
     } else {
+      console.log(`Error ${instance.context._validationErrors}`);
       FormUtils.indicateError(instance);
     }
   },

@@ -36,6 +36,7 @@ Template.List_Courses_Widget.helpers({
       { label: 'Syllabus', value: makeLink(course.syllabus) },
       { label: 'Prerequisites', value: course.prerequisites },
       { label: 'References', value: `Course Instances: ${numReferences(course)}` },
+      { label: 'Retired', value: course.retired ? 'True' : 'False' },
     ];
   },
 });

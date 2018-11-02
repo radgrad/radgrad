@@ -73,6 +73,7 @@ Template.List_Opportunities_Widget.helpers({
       { label: 'Interests', value: _.sortBy(Interests.findNames(opportunity.interestIDs)) },
       { label: 'Semesters', value: _.map(opportunity.semesterIDs, id => Semesters.toString(id)) },
       { label: 'ICE', value: `${opportunity.ice.i}, ${opportunity.ice.c}, ${opportunity.ice.e}` },
+      { label: 'Retired', value: opportunity.retired ? 'true' : 'false' },
     ];
   },
   titleICE(opportunity) {
