@@ -46,10 +46,10 @@ function processStudentStarDefinitions(advisor, student, definitions) {
       numInterstingCourses += 1;
       const courseID = Courses.findIdBySlug(definition.course);
       // console.log('courseID', courseID);
-      const planning = CourseInstances.find({ studentID, semesterID, courseID, verified: false }).fetch();
+      const planning = CourseInstances.findDoc({ studentID, semesterID, courseID, verified: false });
       // console.log('planning', planning);
-      if (planning.length > 0) {
-        CourseInstances.removeIt(planning[0]._id);
+      if (planning) {
+        CourseInstances.removeIt(planning._id);
       }
     } else {
       // numOtherCourses += 1;
