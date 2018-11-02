@@ -9,7 +9,8 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 Template.Card_Explorer_Opportunities_Page.helpers({
   addedOpportunities() {
     const addedOpportunities = [];
-    const allOpportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const allOpportunities = _.filter(opps, (o) => !o.retired);
     const userID = getUserIdFromRoute();
     const group = FlowRouter.current().route.group.name;
     if (group === 'faculty') {
@@ -29,7 +30,8 @@ Template.Card_Explorer_Opportunities_Page.helpers({
     return addedOpportunities;
   },
   nonAddedOpportunities() {
-    const allOpportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const allOpportunities = _.filter(opps, (o) => !o.retired);
     const userID = getUserIdFromRoute();
     const group = FlowRouter.current().route.group.name;
     if (group === 'faculty') {

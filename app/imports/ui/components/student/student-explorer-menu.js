@@ -207,8 +207,9 @@ Template.Student_Explorer_Menu.helpers({
   firstOpportunity() {
     let ret;
     const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    if (opportunities.length > 0) {
-      ret = Slugs.findDoc(opportunities[0].slugID).name;
+    const notRetired = _.filter(opportunities, (o) => !o.retired);
+    if (notRetired.length > 0) {
+      ret = Slugs.findDoc(notRetired[0].slugID).name;
     }
     return ret;
   },

@@ -71,11 +71,11 @@ function courses(interest) {
 
 function verifiedOpportunityHelper(opportunitySlugName) {
   let ret = 'Not in plan';
-  const slug = Slugs.find({ name: opportunitySlugName }).fetch();
-  const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
+  const slug = Slugs.findDoc({ name: opportunitySlugName });
+  const opportunity = Opportunities.findDoc({ slugID: slug._id });
   const oi = OpportunityInstances.find({
     studentID: getUserIdFromRoute(),
-    opportunityID: opportunity[0]._id,
+    opportunityID: opportunity._id,
   }).fetch();
   _.forEach(oi, (o) => {
     if (o.verified === true) {
@@ -88,7 +88,8 @@ function verifiedOpportunityHelper(opportunitySlugName) {
 }
 
 function opportunitiesHelper(interest) {
-  const allOpportunities = Opportunities.find().fetch();
+  const opps = Opportunities.find().fetch();
+  const allOpportunities = _.filter(opps, (o) => !o.retired);
   const matching = [];
   _.forEach(allOpportunities, (opportunity) => {
     if (_.includes(opportunity.interestIDs, interest._id)) {

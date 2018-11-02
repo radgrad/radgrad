@@ -22,7 +22,8 @@ function courses(interest) {
 }
 
 function opportunities(interest) {
-  const allOpportunities = Opportunities.find().fetch();
+  const opps = Opportunities.find().fetch();
+  const allOpportunities = _.filter(opps, (o) => !o.retired);
   const matching = [];
   _.forEach(allOpportunities, (opportunity) => {
     if (_.includes(opportunity.interestIDs, interest._id)) {

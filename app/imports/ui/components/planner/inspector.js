@@ -353,7 +353,8 @@ Template.Inspector.helpers({
   },
   opportunities() {
     const opportunities = Opportunities.find().fetch();
-    return _.sortBy(opportunities, opportunity => opportunity.name);
+    const notRetired = _.filter(opportunities, (o) => !o.retired);
+    return _.sortBy(notRetired, opportunity => opportunity.name);
   },
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;

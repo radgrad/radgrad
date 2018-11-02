@@ -18,11 +18,12 @@ Template.Card_Explorer_Opportunities_Widget.onCreated(function studentCardExplor
 const availableOpps = () => {
   const opps = Opportunities.find({})
     .fetch();
+  const notRetired = _.filter(opps, (o) => !o.retired);
   const currentSemester = Semesters.getCurrentSemesterDoc();
   const group = FlowRouter.current().route.group.name;
   if (group === 'student') {
-    if (opps.length > 0) {
-      const filteredBySem = _.filter(opps, function filter(opp) {
+    if (notRetired.length > 0) {
+      const filteredBySem = _.filter(notRetired, function filter(opp) {
         const oi = OpportunityInstances.find({
           studentID: getUserIdFromRoute(),
           opportunityID: opp._id,
@@ -43,7 +44,7 @@ const availableOpps = () => {
       return filteredByInstance;
     }
   } else if (group === 'faculty') {
-    return _.filter(opps, o => o.sponsorID !== getUserIdFromRoute());
+    return _.filter(notRetired, o => o.sponsorID !== getUserIdFromRoute());
   }
   return opps;
 };

@@ -93,7 +93,8 @@ function matchingCourses() {
 }
 
 function matchingOpportunities() {
-  const allOpportunities = Opportunities.find().fetch();
+  const opps = Opportunities.find().fetch();
+  const allOpportunities = _.filter(opps, (o) => !o.retired);
   const matching = [];
   const profile = Users.getProfile(getRouteUserName());
   const userInterests = [];

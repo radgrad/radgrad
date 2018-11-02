@@ -25,7 +25,8 @@ function teaser(opp) {
 
 Template.Landing_Explorer_Opportunities_Page.helpers({
   addedOpportunities() {
-    return Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    return _.filter(opps, (o) => !o.retired);
   },
   completed() {
     return false;

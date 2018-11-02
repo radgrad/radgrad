@@ -140,20 +140,25 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   opportunitiesTotal() {
-    const numOpps = Opportunities.find().count();
+    const opps = Opportunities.find().fetch();
+    const notRetired = _.filter(opps, (o) => !o.retired);
+    const numOpps = notRetired.length;
     this._collection.upsert({ key: this.opportunitiesTotalKey }, { $set: { value: `${numOpps}` } });
   }
 
   opportunitiesProjectsTotal() {
     const projectType = OpportunityTypes.findDoc({ name: 'Project' });
-    const numProjects = Opportunities.find({ opportunityTypeID: projectType._id }).count();
+    const opps = Opportunities.find({ opportunityTypeID: projectType._id }).fetch();
+    const notRetired = _.filter(opps, (o) => !o.retired);
+    const numProjects = notRetired.length;
     this._collection.upsert({ key: this.opportunitiesProjectsTotalKey }, { $set: { value: `${numProjects}` } });
   }
 
   opportunitiesProjectsList() {
     const projectType = OpportunityTypes.findDoc({ name: 'Project' });
-    const projects = Opportunities.find({ opportunityTypeID: projectType._id }).fetch();
-    const names = _.map(projects, 'name');
+    const opps = Opportunities.find({ opportunityTypeID: projectType._id }).fetch();
+    const notRetired = _.filter(opps, (o) => !o.retired);
+    const names = _.map(notRetired, 'name');
     this._collection.upsert({ key: this.opportunitiesProjectsListKey }, { $set: { value: names.join(', ') } });
   }
 
@@ -265,9 +270,10 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   firstOpportunity() {
-    const interests = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    if (interests.length > 0) {
-      const name = Slugs.findDoc(interests[0].slugID).name;
+    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    const notRetired = _.filter(opps, (o) => !o.retired);
+    if (notRetired.length > 0) {
+      const name = Slugs.findDoc(notRetired[0].slugID).name;
       this._collection.upsert({ key: this.firstOpportunityKey }, { $set: { value: name } });
     }
   }

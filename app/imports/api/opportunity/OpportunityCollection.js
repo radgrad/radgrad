@@ -267,7 +267,8 @@ class OpportunityCollection extends BaseSlugCollection {
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const semesters = _.map(doc.semesterIDs, semesterID => Semesters.findSlugByID(semesterID));
     const eventDate = doc.eventDate;
-    return { name, slug, description, opportunityType, sponsor, ice, interests, semesters, eventDate };
+    const retired = doc.retired;
+    return { name, slug, description, opportunityType, sponsor, ice, interests, semesters, eventDate, retired };
   }
 }
 

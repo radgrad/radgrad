@@ -228,8 +228,9 @@ class CourseCollection extends BaseSlugCollection {
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const syllabus = doc.syllabus;
     const prerequisites = doc.prerequisites;
+    const retired = doc.retired;
     return { name, shortName, slug, number, description, creditHrs, interests, syllabus,
-      prerequisites };
+      prerequisites, retired };
   }
 }
 
