@@ -133,7 +133,7 @@ function iceRecHelper(student, value, component) {
 
 function iceRecommendation(student) {
   const ice = StudentProfiles.getProjectedICE(student.username);
-  if (ice.i < 100 && ice.c < 100 && ice.e < 100) {
+  if (ice.i >= 100 && ice.c >= 100 && ice.e >= 100) {
     return false;
   }
   const html = {};
@@ -157,7 +157,7 @@ function iceRecommendation(student) {
 }
 
 function levelRecommendation(student) {
-  if (student.level > 4) {
+  if (student.level > 5) {
     return false;
   }
   const html = {};
@@ -203,65 +203,11 @@ function verifyOppRecommendation(student) {
   return html;
 }
 
-/*
-function completePlanRecommendation(student) {
-  const studentPlanID = student.academicPlanID;
-  const planCourseList = _.map(AcademicPlans.findOne({ _id: studentPlanID }).courseList, function (choice) {
-    let slug = choice;
-    if (_.includes(choice, '-')) {
-      slug = choice.substring(0, choice.indexOf('-'));
-      return slug;
-    }
-    return slug;
-  });
-  console.log(planCourseList);
-  const groupedCourseList = _.map(_.groupBy(planCourseList), function (array, key) {
-    const matches = key.match(/(?:\()[^]*?(?:\))/g);
-    const parensChoices = [];
-    let nonParensChoices = key;
-    _.each(matches, function (match) {
-      parensChoices.push(match);
-      nonParensChoices = nonParensChoices.replace(match, '');
-    });
-    nonParensChoices = _.filter(nonParensChoices.split(','), course => !(course === ''));
-    const choiceList = {};
-    choiceList.count = [array.length];
-    choiceList.courses = parensChoices.concat(nonParensChoices);
-    console.log(choiceList);
-    return choiceList;
-  });
-  console.log(groupedCourseList);
-  const studentCourseList = _.map(CourseInstances.find({ studentID: student.userID }).fetch(), function (instance) {
-    return Courses.getSlug(instance.courseID);
-  });
-  console.log(studentCourseList);
-  const remainingCourses = [];
-  _.each(groupedCourseList, function (choices) {
-    const remainingChoices = choices;
-    _.each(studentCourseList, function (studentCourse) {
-      const satisfiedReq = _.find(choices.courses, function (courses) {
-        return _.includes(courses, studentCourse);
-      });
-      if (satisfiedReq) {
-        _.pull(remainingChoices.courses, satisfiedReq);
-        remainingChoices.count -= 1;
-        if (remainingChoices.count === 0) {
-          return false;
-        }
-      }
-      return true;
-    });
-    if (remainingChoices.count !== 0) {
-      remainingCourses.push(remainingChoices);
-    }
-  });
-  console.log(remainingCourses);
-} */
-
+// This is messy code, but is more accurate than the current implementation in the planner.
 function completePlanRecommendation(student) {
   const studentPlan = student.academicPlanID;
   // the course list for the student's academic plan
-  let courseList = _.map(AcademicPlans.findOne({ _id: studentPlan }).courseList, function (course) {
+  let reqList = _.map(AcademicPlans.findOne({ _id: studentPlan }).courseList, function (course) {
     let courseSlug;
     // remove dashes at end of each course element
     if (_.includes(course, '-')) {
@@ -271,7 +217,7 @@ function completePlanRecommendation(student) {
     return course;
   });
   // divide choices within an array
-  courseList = _.map(courseList, function (choices) {
+  reqList = _.map(reqList, function (choices) {
     const parensChoices = choices.match(/(?:\()[^]*?(?:\))/g);
     let nonParensChoices = choices;
     _.each(parensChoices, function (choice) {
@@ -283,9 +229,8 @@ function completePlanRecommendation(student) {
     }
     return nonParensChoices;
   });
-  console.log('course list: ', courseList);
   // partition courseList into two arrays: one with 00+ electives and the other without
-  const courseListPartition = _.partition(courseList, function (choices) {
+  const reqListPartition = _.partition(reqList, function (choices) {
     let hasElec = false;
     _.each(choices, function (choice) {
       if (_.includes(choice, '00+')) {
@@ -294,35 +239,49 @@ function completePlanRecommendation(student) {
     });
     return !hasElec;
   });
-  console.log('req courses: ', courseListPartition);
   const studentCourseList = _.map(CourseInstances.find({ studentID: student.userID }).fetch(), function (instance) {
     return Courses.getSlug(instance.courseID);
   });
-  console.log('student courses: ', studentCourseList);
-  const groupedCourseList = [];
-  _.each(courseListPartition, function (partition) {
-    groupedCourseList.push(_.groupBy(partition));
-  });
-  const remainingCourses = _.map(groupedCourseList[0], function (choices) {
-    const list = {};
-    list.count = choices.length;
-    list.choices = choices[0];
-    return list;
-  });
-  const remainingElectives = _.map(groupedCourseList[1], function (choices) {
-    const list = {};
-    list.count = choices.length;
-  });
-  _.each(courseListPartition[0], function (choices) {
-    _.each(choices, function (choice) {
-      _.each(studentCourseList, function (studentCourse) {
-        if (_.includes(choice, studentCourse)) {
-
-        }
-      });
+  const remainingStudentCourses = [];
+  _.each(studentCourseList, function (course) {
+    const duplicateChoiceIndices = [];
+    _.each(reqListPartition[0], function (choices, index) {
+      if (_.some(choices, choice => _.includes(choice, course))) {
+        duplicateChoiceIndices.push(index);
+      }
     });
+    if (duplicateChoiceIndices.length > 1) {
+      _.each(duplicateChoiceIndices, function (index) {
+        _.remove(reqListPartition[0][index], function (choice) {
+          return _.includes(choice, course);
+        });
+      });
+      _.pullAt(reqListPartition[0], duplicateChoiceIndices[0]);
+    } else if (duplicateChoiceIndices.length === 1) {
+      _.pullAt(reqListPartition[0], duplicateChoiceIndices[0]);
+    } else {
+      remainingStudentCourses.push(course);
+    }
   });
-
+  _.each(remainingStudentCourses, function (course) {
+    const electified = course.replace(/\d(?=\d?$)/g, '0');
+    let choiceIndex;
+    _.each(reqListPartition[1], function (choices, index) {
+      if (_.some(choices, choice => _.includes(choice, electified))) {
+        choiceIndex = index;
+        return false;
+      }
+      return true;
+    });
+    if (choiceIndex >= 0) {
+      _.pullAt(reqListPartition[1], choiceIndex);
+    }
+  });
+  const remainingReqs = _.flatten(reqListPartition);
+  console.log(remainingReqs);
+  if (remainingReqs.length === 0) {
+    return false;
+  }
   const html = {};
   html.header = 'COMPLETE YOUR ACADEMIC PLAN';
   const planDoc = AcademicPlans.findOne({ _id: student.academicPlanID });
@@ -338,17 +297,13 @@ function completePlanRecommendation(student) {
       ' to complete your academic plan, or click on your plan above to find out more information.' +
       ' Provided below is a list of required coursework that you are currently missing.' +
       ' Make sure to double-check the requirements with your advisor!</p>';
-  if (remainingCoursework.length > 0) {
-    html.info += '<p style="text-decoration: underline;">Missing Courses: </p>';
+  if (remainingReqs.length > 0) {
+    html.info += '<p style="text-decoration: underline;">Missing Requirements: </p>';
     html.info += '<ul>';
-    _.each(groupedCourses, function (course, key) {
-      if (_.includes(key, ',') || course.length > 1) {
-        const courseSelection = (key.toUpperCase()).replace(/,/g, ' or ').replace(/_/g, ' ');
-        html.info += `<li style="color: red;"><strong>${course.length} from ${courseSelection}</strong></li>`;
-      } else {
-        const courseName = (key.replace('_', ' ')).toUpperCase();
-        html.info += `<li style="color: red;"><strong>${courseName}</strong></li>`;
-      }
+    _.each(remainingReqs, function (req) {
+      const requirement = (req.toString().toUpperCase()).replace(/,/g, ' or ').replace(/_/g, ' ');
+      console.log(requirement);
+      html.info += `<li style="color: red;">${requirement}</li>`;
     });
     html.info += '</ul>';
   }
@@ -451,6 +406,17 @@ function visitMentorRecommendation(student) {
 const recList = [iceRecommendation, verifyOppRecommendation, levelRecommendation, completePlanRecommendation,
   reviewCourseRecommendation, reviewOppRecommendation, visitMentorRecommendation];
 
+function getRecList(student) {
+  const suggestedRecs = [];
+  _.each(recList, function (func) {
+    const html = func(student);
+    if (html) {
+      suggestedRecs.push(html);
+    }
+  });
+  return suggestedRecs;
+}
+
 Template.Generate_Newsletter_Widget.events({
   'click .ui.test.button': function sendEmail(event) {
     event.preventDefault();
@@ -459,6 +425,7 @@ Template.Generate_Newsletter_Widget.events({
     _.each(emailListArray, function (email) {
       const student = StudentProfiles.findByUsername(email);
       if (student) {
+        const suggestedRecs = getRecList(student);
         const emailData = {};
         emailData.to = 'weng@hawaii.edu';
         emailData.cc = ['cmoore@hawaii.edu', 'johnson@hawaii.edu'];
@@ -466,10 +433,9 @@ Template.Generate_Newsletter_Widget.events({
         emailData.subject = `Newsletter View For ${student.firstName} ${student.lastName}`;
         emailData.templateData = {
           firstName: `${student.firstName}`,
-          firstRec: iceRecommendation(student),
-          secondRec: verifyOppRecommendation(student),
-          thirdRec: levelRecommendation(student),
-          fourthRec: completePlanRecommendation(student),
+          firstRec: suggestedRecs[0],
+          secondRec: suggestedRecs[1],
+          thirdRec: suggestedRecs[2],
         };
         sendEmailMethod.call(emailData, (error) => {
           if (error) {
