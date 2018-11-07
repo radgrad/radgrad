@@ -35,6 +35,8 @@ shell-server@0.4.0
 sacha:spin
 random@1.1.0
 maazalik:highcharts
+email
+meteorhacks:ssr
 
 # Routing
 kadira:flow-router

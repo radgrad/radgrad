@@ -1,6 +1,7 @@
 <template name="Admin_Analytics_Menu">
   <div  class="ui left vertical text menu">
     <a class="{{isActiveRoute analyticsHomeRouteName}} item" href="{{pathFor analyticsHomeRouteName username=routeUserName}}">Logged In Users</a>
+    <a class="{{isActiveRoute newsletterRouteName}} item" href="{{pathFor newsletterRouteName username=routeUserName}}">Newsletter</a>
     <a class="{{isActiveRoute overheadAnalysisRouteName}} item" href="{{pathFor overheadAnalysisRouteName username=routeUserName}}">Overhead Analysis</a>
     <a class="{{isActiveRoute studentsRouteName}} item" href="{{pathFor studentsRouteName username=routeUserName}}">Student Summary</a>
     <a class="{{isActiveRoute userInteractionsRouteName}} item" href="{{pathFor userInteractionsRouteName username=routeUserName}}">User Interactions</a>

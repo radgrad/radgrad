@@ -164,6 +164,9 @@ import './list-users-widget.js';
 import './list-verification-requests-widget.html';
 import './list-verification-requests-widget';
 
+import './generate-newsletter-widget.html';
+import './generate-newsletter-widget';
+
 import './retrieve-user-widget.html';
 import './retrieve-user-widget.js';
 
