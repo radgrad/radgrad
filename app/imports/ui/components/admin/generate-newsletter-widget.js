@@ -523,8 +523,9 @@ Template.Generate_Newsletter_Widget.events({
     const lastIndex = studentsByLevel.length - 1;
     const bccList = $('#bcc-list').val();
     const bccListArray = _.map(bccList.split(','), email => email.trim());
-    _.each(studentsByLevel, function (email, index) {
+    _.each(studentsByLevel, function (username, index) {
       setTimeout(function () {
+        const email = username;
         instance.levelEmailStatus.set(`Level ${level}: Sending newsletter for ${email}...`);
         const student = StudentProfiles.findByUsername(email);
         if (student) {
