@@ -22,5 +22,8 @@
       "three": {"i": 1, "c": 24, "e": 1, "reviews": 0},
       "two": {"i": 0, "c": 12, "e": 0, "reviews": 0}
     }
+  },
+  "env": {
+    "MAIL_URL": "Insert MAIL_URL variable here"
   }
 }
