@@ -49,10 +49,12 @@ Template.Add_Feed_Widget.helpers({
     ];
   },
   opportunities() {
-    return Opportunities.find({}, { sort: { name: 1 } });
+    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    return _.filter(opps, (o) => !o.retired);
   },
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
+    return _.filter(courses, (c) => !c.retired);
   },
 });
 

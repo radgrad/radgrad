@@ -45,7 +45,8 @@ export const calculateOpportunityCompatibility = (opportunityID, studentID) => {
 export const semesterOpportunities = (semester, semesterNumber) => {
   const id = semester._id;
   const opps = Opportunities.find().fetch();
-  const semesterOpps = _.filter(opps, function filter(opportunity) {
+  const notRetired = _.filter(opps, (o) => !o.retired);
+  const semesterOpps = _.filter(notRetired, function filter(opportunity) {
     return _.indexOf(opportunity.semesterIDs, id) !== -1;
   });
   if (semesterNumber < 3) { // AY 1.

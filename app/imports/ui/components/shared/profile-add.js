@@ -48,7 +48,7 @@ Template.Profile_Add.events({
   },
 });
 
-Template.Profile_Add.onRendered(function studentOfInterestAddOnRendered() {
+Template.Profile_Add.onRendered(function profileAddOnRendered() {
   const template = this;
   template.$('.chooseSemester')
     .popup({

@@ -61,8 +61,8 @@ Template.Explorer_Interests_Widget.helpers({
   },
   opportunityNameFromSlug(opportunitySlugName) {
     const slug = Slugs.find({ name: opportunitySlugName }).fetch();
-    const opportunity = Opportunities.find({ slugID: slug[0]._id }).fetch();
-    return opportunity[0].name;
+    const opportunity = Opportunities.findDoc({ slugID: slug[0]._id });
+    return opportunity.name;
   },
   toUpper(string) {
     return string.toUpperCase();

@@ -31,6 +31,7 @@ class CourseCollection extends BaseSlugCollection {
       // Optional data
       syllabus: { type: String, optional: true },
       prerequisites: [String],
+      retired: { type: Boolean, optional: true },
     }));
     this.unInterestingSlug = 'other';
   }
@@ -56,12 +57,13 @@ class CourseCollection extends BaseSlugCollection {
    * Interests is a (possibly empty) array of defined interest slugs or interestIDs.
    * Syllabus is optional. If supplied, should be a URL.
    * Prerequisites is optional. If supplied, must be an array of previously defined Course slugs or courseIDs.
+   * retired is optional defaults to false.
    * @throws {Meteor.Error} If the definition includes a defined slug or undefined interest or invalid creditHrs.
    * @returns The newly created docID.
    */
   define({
       name, shortName = name, slug, number, description, creditHrs = 3,
-      interests = [], syllabus, prerequisites = [],
+      interests = [], syllabus, prerequisites = [], retired = false,
   }) {
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
@@ -80,7 +82,7 @@ class CourseCollection extends BaseSlugCollection {
     // Instead, we check that prereqs are valid as part of checkIntegrity.
     const courseID =
         this._collection.insert({
-          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites,
+          name, shortName, slugID, number, description, creditHrs, interestIDs, syllabus, prerequisites, retired,
         });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, courseID);
@@ -98,8 +100,9 @@ class CourseCollection extends BaseSlugCollection {
    * @param interests An array of interestIDs or slugs (optional)
    * @param syllabus optional
    * @param prerequisites An array of course slugs. (optional)
+   * @param retired boolean (optional)
    */
-  update(instance, { name, shortName, number, description, creditHrs, interests, prerequisites, syllabus }) {
+  update(instance, { name, shortName, number, description, creditHrs, interests, prerequisites, syllabus, retired }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (name) {
@@ -134,6 +137,11 @@ class CourseCollection extends BaseSlugCollection {
         }
       });
       updateData.prerequisites = prerequisites;
+    }
+    if (retired) {
+      updateData.retired = retired;
+    } else {
+      updateData.retired = false;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -220,8 +228,9 @@ class CourseCollection extends BaseSlugCollection {
     const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
     const syllabus = doc.syllabus;
     const prerequisites = doc.prerequisites;
+    const retired = doc.retired;
     return { name, shortName, slug, number, description, creditHrs, interests, syllabus,
-      prerequisites };
+      prerequisites, retired };
   }
 }
 

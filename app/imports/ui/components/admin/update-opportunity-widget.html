@@ -30,6 +30,9 @@
       </div>
 
       {{> TextArea_Form_Field label="Description" rows=15 name="description" value=opportunity.description errorMessage=(fieldError "description") required=true}}
+      <div class="field">
+        {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
+      </div>
 
       <button class="ui green basic button" type="submit">Update</button>
       <button class="ui green basic button jsCancel" type="submit">Cancel</button>

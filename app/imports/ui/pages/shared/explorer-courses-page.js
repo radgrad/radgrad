@@ -13,7 +13,7 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 function passedCourseHelper(courseSlugName) {
   let ret = 'Not in plan';
   const slug = Slugs.find({ name: courseSlugName }).fetch();
-  const course = Courses.find({ slugID: slug[0]._id }).fetch();
+  const course = _.filter(Courses.find({ slugID: slug[0]._id }).fetch(), (c) => !c.retired);
   const ci = CourseInstances.find({
     studentID: getUserIdFromRoute(),
     courseID: course[0]._id,
@@ -53,7 +53,7 @@ function prerequisites(course) {
 Template.Explorer_Courses_Page.helpers({
   addedCourses() {
     const addedCourses = [];
-    const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
     const userID = getUserIdFromRoute();
     _.forEach(allCourses, (course) => {
       const ci = CourseInstances.find({
@@ -80,8 +80,8 @@ Template.Explorer_Courses_Page.helpers({
   course() {
     const courseSlugName = FlowRouter.getParam('course');
     const slug = Slugs.find({ name: courseSlugName }).fetch();
-    const course = Courses.find({ slugID: slug[0]._id }).fetch();
-    return course[0];
+    const course = Courses.findDoc({ slugID: slug[0]._id });
+    return course;
   },
   descriptionPairs(course) {
     return [
@@ -94,7 +94,7 @@ Template.Explorer_Courses_Page.helpers({
     ];
   },
   nonAddedCourses() {
-    const allCourses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
     const userID = getUserIdFromRoute();
     const nonAddedCourses = _.filter(allCourses, function (course) {
       const ci = CourseInstances.find({

@@ -62,7 +62,8 @@ Template.Update_Course_Instance_Widget.helpers({
     return !course.fromSTAR;
   },
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
+    return _.filter(courses, (c) => !c.retired);
   },
   course() {
     const course = CourseInstances.findDoc(Template.currentData().updateID.get());

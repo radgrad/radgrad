@@ -25,6 +25,7 @@ const updateSchema = new SimpleSchema({
   experience: { type: Number, min: 0, max: 25 },
   interests: { type: Array, minCount: 1 }, 'interests.$': String,
   semesters: { type: Array, minCount: 1 }, 'semesters.$': String,
+  retired: { type: Boolean },
 }, { tracker: Tracker });
 
 Template.Update_Opportunity_Widget.onCreated(function onCreated() {
@@ -71,6 +72,14 @@ Template.Update_Opportunity_Widget.helpers({
     const group = FlowRouter.current().route.group.name;
     return group === 'faculty';
   },
+  falseValueRetired() {
+    const opportunity = Opportunities.findDoc(Template.currentData().updateID.get());
+    return !opportunity.retired;
+  },
+  trueValueRetired() {
+    const opportunity = Opportunities.findDoc(Template.currentData().updateID.get());
+    return opportunity.retired;
+  },
 });
 
 Template.Update_Opportunity_Widget.events({
@@ -79,6 +88,11 @@ Template.Update_Opportunity_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    if (updateData.retired === 'true') {
+      updateData.retired = true;
+    } else {
+      updateData.retired = false;
+    }
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       FormUtils.convertICE(updateData);
@@ -91,6 +105,7 @@ Template.Update_Opportunity_Widget.events({
         }
       });
     } else {
+      console.log('Error');
       FormUtils.indicateError(instance);
     }
   },

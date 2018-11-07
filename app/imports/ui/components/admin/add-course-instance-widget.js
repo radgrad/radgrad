@@ -35,7 +35,8 @@ Template.Add_Course_Instance_Widget.helpers({
     return sorted;
   },
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
+    return _.filter(courses, (c) => !c.retired);
   },
 });
 

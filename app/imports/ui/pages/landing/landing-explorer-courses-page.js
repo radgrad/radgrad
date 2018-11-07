@@ -13,7 +13,7 @@ function prerequisites(course) {
 
 Template.Landing_Explorer_Courses_Page.helpers({
   addedCourses() {
-    return Courses.find({}, { sort: { shortName: 1 } }).fetch();
+    return _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
   },
   completed() {
     return false;
@@ -21,8 +21,8 @@ Template.Landing_Explorer_Courses_Page.helpers({
   course() {
     const courseSlugName = FlowRouter.getParam('course');
     const slug = Slugs.find({ name: courseSlugName }).fetch();
-    const course = Courses.find({ slugID: slug[0]._id }).fetch();
-    return course[0];
+    const course = Courses.findDoc({ slugID: slug[0]._id });
+    return course;
   },
   descriptionPairs(course) {
     return [

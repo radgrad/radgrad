@@ -300,9 +300,9 @@ class CourseInstanceCollection extends BaseCollection {
       });
       Meteor.publish(this.publicationNames.publicSlugStudent, function publicSlugPublish(courseSlug) {  // eslint-disable-line
         // check the courseID.
-        const slug = Slugs.find({ name: courseSlug }).fetch();
-        const course = Courses.find({ slugID: slug[0]._id }).fetch();
-        const courseID = course[0]._id;
+        const slug = Slugs.findDoc({ name: courseSlug });
+        const course = Courses.findDoc({ slugID: slug._id });
+        const courseID = course._id;
         new SimpleSchema({
           courseID: { type: String },
         }).validate({ courseID });

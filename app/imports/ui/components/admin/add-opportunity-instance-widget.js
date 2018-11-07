@@ -33,7 +33,8 @@ Template.Add_Opportunity_Instance_Widget.helpers({
     return sorted;
   },
   opportunities() {
-    return Opportunities.find({}, { sort: { name: 1 } });
+    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    return _.filter(opps, (o) => !o.retired);
   },
 });
 

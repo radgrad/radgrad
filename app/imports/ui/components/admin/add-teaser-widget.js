@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
+
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 import { Interests } from '../../../api/interest/InterestCollection.js';
 import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
@@ -26,8 +28,8 @@ Template.Add_Teaser_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   opportunities() {
-    const opportunities = Opportunities.find().fetch();
-    return opportunities;
+    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
+    return _.filter(opps, (o) => !o.retired);
   },
 });
 

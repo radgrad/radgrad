@@ -20,8 +20,8 @@ Template.Explorer_Courses_Widget.helpers({
   courseNameFromSlug(courseSlugName) {
     // console.log(courseSlugName);
     const slug = Slugs.find({ name: courseSlugName }).fetch();
-    const course = Courses.find({ slugID: slug[0]._id }).fetch();
-    return course[0].shortName;
+    const course = Courses.findDoc({ slugID: slug[0]._id });
+    return course.shortName;
   },
   coursesRouteName() {
     const group = FlowRouter.current().route.group.name;

@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Courses } from '../../../api/course/CourseCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
@@ -29,7 +30,8 @@ Template.Add_Course_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   courses() {
-    return Courses.find({}, { sort: { number: 1 } });
+    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
+    return _.filter(courses, (c) => !c.retired);
   },
 });
 
