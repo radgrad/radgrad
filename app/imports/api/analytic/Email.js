@@ -1,31 +1,28 @@
 import { Meteor } from 'meteor/meteor';
 import { SSR } from 'meteor/meteorhacks:ssr';
 import { Email } from 'meteor/email';
-import { ZipZap } from 'meteor/udondan:zipzap';
 
 /* global Assets */
 
 /**
  * Email sender to distribute RadGrad newsletter. Utilizes SSR to compile and render HTML/CSS code within the email.
  * @param to The recipient.
+ * @param cc The cc recipients.
  * @param from The sender.
  * @param subject The email subject line.
- * @param emailData Custom data to be rendered in the email template. SSR is used to compile and
+ * @param templateData Custom data to be rendered in the email template. SSR is used to compile and
  * render the final content.
  */
-export function sendEmail({ to, cc, from, subject, templateData }) {
+export function sendEmail({ to, bcc, from, subject, templateData, filename }) {
   if (Meteor.isServer) {
-    SSR.compileTemplate('htmlEmail', Assets.getText('email/newsletter.html'));
+    SSR.compileTemplate('htmlEmail', Assets.getText(`email/${filename}`));
     const html = SSR.render('htmlEmail', templateData);
-    const zip = new ZipZap();
-    const filename = 'newsletter.html';
-    zip.file(filename, html);
-    zip.saveAs('/home/weng/Documents/newsletter.zip');
-    /* Email.send({
+    Email.send({
       to,
+      bcc,
       from,
       subject,
       html,
-    }); */
+    });
   }
 }

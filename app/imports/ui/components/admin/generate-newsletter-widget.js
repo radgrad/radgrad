@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Courses } from '../../../api/course/CourseCollection';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -85,7 +86,8 @@ function iceRecHelper(student, value, component) {
   const studentInterests = Users.getInterestIDs(student.userID);
   if (component === 'c') {
     if (studentInterests.length === 0) {
-      html += ' <em>Add some interests so we can provide course recommendations!</em>';
+      html += ' <em><a href="https://radgrad.ics.hawaii.edu">' +
+          ' Add some interests so we can provide course recommendations!</a></em>';
       return html;
     }
     const relevantCourses = _.filter(Courses.find().fetch(), function (course) {
@@ -97,13 +99,19 @@ function iceRecHelper(student, value, component) {
     const currentCourses = _.map(CourseInstances.find({ studentID: student.userID }).fetch(), 'courseID');
     const recommendedCourses = _.filter(relevantCourses, course => !_.includes(currentCourses, course._id));
     const recCourse = recommendedCourses[0];
+    if (recommendedCourses.length === 0) {
+      html += '<em><a href="https://radgrad.ics.hawaii.edu">' +
+          ' Add more interests so we can provide course recommendations!</a></em>';
+      return html;
+    }
     html += ' Check out this recommended course: ';
     html += '<a style="color: #6FBE44; font-weight: bold;"' +
         ` href="https://radgrad.ics.hawaii.edu/student/${student.username}` +
         `/explorer/courses/${Courses.getSlug(recCourse._id)}">${recCourse.shortName}</a>`;
   } else {
     if (studentInterests.length === 0) {
-      html += ' <em>Add some Interests to your profile so we can provide opportunity recommendations!</em>';
+      html += ' <em><a href="https://radgrad.ics.hawaii.edu">' +
+          ' Add some Interests to your profile so we can provide opportunity recommendations!</a></em>';
       return html;
     }
     const opps = _.filter(Opportunities.find().fetch(), function (opp) {
@@ -134,7 +142,7 @@ function iceRecHelper(student, value, component) {
 function iceRecommendation(student) {
   const ice = StudentProfiles.getProjectedICE(student.username);
   if (ice.i >= 100 && ice.c >= 100 && ice.e >= 100) {
-    return false;
+    return '';
   }
   const html = {};
   html.header = 'FINISH YOUR DEGREE PLAN';
@@ -158,7 +166,7 @@ function iceRecommendation(student) {
 
 function levelRecommendation(student) {
   if (student.level > 5) {
-    return false;
+    return '';
   }
   const html = {};
   html.header = 'LEVEL UP AND UPGRADE YOUR RADGRAD STICKER';
@@ -177,7 +185,7 @@ function levelRecommendation(student) {
 function verifyOppRecommendation(student) {
   const unverifiedOpps = OpportunityInstances.find({ studentID: student.userID, verified: false }).fetch();
   if (unverifiedOpps.length === 0) {
-    return false;
+    return '';
   }
   const html = {};
   html.header = 'VERIFY YOUR OPPORTUNITIES';
@@ -206,6 +214,9 @@ function verifyOppRecommendation(student) {
 // This is messy code, but is more accurate than the current implementation in the planner.
 function completePlanRecommendation(student) {
   const studentPlan = student.academicPlanID;
+  if (!studentPlan) {
+    return '';
+  }
   // the course list for the student's academic plan
   let reqList = _.map(AcademicPlans.findOne({ _id: studentPlan }).courseList, function (course) {
     let courseSlug;
@@ -257,11 +268,12 @@ function completePlanRecommendation(student) {
         });
       });
       _.pullAt(reqListPartition[0], duplicateChoiceIndices[0]);
-    } else if (duplicateChoiceIndices.length === 1) {
-      _.pullAt(reqListPartition[0], duplicateChoiceIndices[0]);
-    } else {
-      remainingStudentCourses.push(course);
-    }
+    } else
+      if (duplicateChoiceIndices.length === 1) {
+        _.pullAt(reqListPartition[0], duplicateChoiceIndices[0]);
+      } else {
+        remainingStudentCourses.push(course);
+      }
   });
   _.each(remainingStudentCourses, function (course) {
     const electified = course.replace(/\d(?=\d?$)/g, '0');
@@ -278,9 +290,8 @@ function completePlanRecommendation(student) {
     }
   });
   const remainingReqs = _.flatten(reqListPartition);
-  console.log(remainingReqs);
   if (remainingReqs.length === 0) {
-    return false;
+    return '';
   }
   const html = {};
   html.header = 'COMPLETE YOUR ACADEMIC PLAN';
@@ -302,7 +313,6 @@ function completePlanRecommendation(student) {
     html.info += '<ul>';
     _.each(remainingReqs, function (req) {
       const requirement = (req.toString().toUpperCase()).replace(/,/g, ' or ').replace(/_/g, ' ');
-      console.log(requirement);
       html.info += `<li style="color: red;">${requirement}</li>`;
     });
     html.info += '</ul>';
@@ -319,7 +329,7 @@ function reviewCourseRecommendation(student) {
     return !(Reviews.findOne({ studentID: student.userID, revieweeID: courseID }));
   });
   if (nonReviewedCourses.length === 0) {
-    return false;
+    return '';
   }
   let suggestedReviewCourses = [];
   const remainingCourses = [];
@@ -360,7 +370,7 @@ function reviewOppRecommendation(student) {
     return !(Reviews.findOne({ studentID: student.userID, revieweeID: oppID }));
   });
   if (nonReviewedOpps.length === 0) {
-    return false;
+    return '';
   }
   let suggestedReviewOpps = [];
   const remainingOpps = [];
@@ -406,6 +416,14 @@ function visitMentorRecommendation(student) {
 const recList = [iceRecommendation, verifyOppRecommendation, levelRecommendation, completePlanRecommendation,
   reviewCourseRecommendation, reviewOppRecommendation, visitMentorRecommendation];
 
+/*
+ * Each recommendation function returns html. If '' is returned, then that recommendation will not be
+ * included in the recommendation list. There is currently no catch for when there are fewer than three
+ * recommendations, which is the amount listed in the newsletter. If there are fewer than three (which is
+ * extremely rare, and only for very accomplished RadGraduates), then only those recommendations will be listed,
+ * with blank table rows in the newsletter. There is at least one guaranteed recommendation, which is the
+ * mentor space recommendation.
+ */
 function getRecList(student) {
   const suggestedRecs = [];
   _.each(recList, function (func) {
@@ -417,26 +435,64 @@ function getRecList(student) {
   return suggestedRecs;
 }
 
+Template.Generate_Newsletter_Widget.onCreated(function generateNewsletterWidgetOnCreated() {
+  this.testEmailStatus = new ReactiveVar('');
+  this.levelEmailStatus = new ReactiveVar('');
+  this.adminMessage = new ReactiveVar('');
+});
+
+Template.Generate_Newsletter_Widget.helpers({
+  testEmailStatus() {
+    return Template.instance().testEmailStatus.get();
+  },
+  levelEmailStatus() {
+    return Template.instance().levelEmailStatus.get();
+  },
+  adminMessage() {
+    return Template.instance().adminMessage.get();
+  },
+});
+
 Template.Generate_Newsletter_Widget.events({
-  'click .ui.test.button': function sendEmail(event) {
+  'submit .preview': function previewMarkdown(event, instance) {
     event.preventDefault();
-    const emailList = $('#email-list').val();
+    const message = event.target.message.value;
+    instance.adminMessage.set(message);
+  },
+  'submit .test': function sendTestEmail(event, instance) {
+    event.preventDefault();
+    const emailList = event.target.text.value;
     const emailListArray = _.map(emailList.split(','), email => email.trim());
+    if (emailListArray.length === 1 && emailListArray[0] === '') {
+      instance.testEmailStatus.set('Please input at least one email');
+      return;
+    }
+    const bccList = $('#bcc-list').val();
+    const bccListArray = _.map(bccList.split(','), email => email.trim());
+    const adminMessage = $('.markdown').html();
+    if (!(adminMessage.match(/[a-z]/i))) {
+      instance.testEmailStatus.set('Please input an admin message');
+      return;
+    }
+    instance.testEmailStatus.set('Sending emails...');
     _.each(emailListArray, function (email) {
       const student = StudentProfiles.findByUsername(email);
       if (student) {
         const suggestedRecs = getRecList(student);
+        const admin = 'radgrad@hawaii.edu';
         const emailData = {};
-        emailData.to = 'weng@hawaii.edu';
-        emailData.cc = ['cmoore@hawaii.edu', 'johnson@hawaii.edu'];
-        emailData.from = 'deedubs.testing@gmail.com';
+        emailData.to = admin;
+        emailData.bcc = bccListArray;
+        emailData.from = 'radgrad@hawaii.edu';
         emailData.subject = `Newsletter View For ${student.firstName} ${student.lastName}`;
         emailData.templateData = {
-          firstName: `${student.firstName}`,
+          adminMessage,
+          firstName: student.firstName,
           firstRec: suggestedRecs[0],
           secondRec: suggestedRecs[1],
           thirdRec: suggestedRecs[2],
         };
+        emailData.filename = 'newsletter.html';
         sendEmailMethod.call(emailData, (error) => {
           if (error) {
             console.log('Error sending email.', error);
@@ -444,5 +500,64 @@ Template.Generate_Newsletter_Widget.events({
         });
       }
     });
+    instance.testEmailStatus.set('All emails sent!');
   },
+  'submit .level': function sendToAdmin(event, instance) {
+    event.preventDefault();
+    const adminMessage = $('.markdown').html();
+    if (!(adminMessage.match(/[a-z]/i))) {
+      instance.levelEmailStatus.set('Please input an admin message');
+      return;
+    }
+    if (!event.target['confirm-checkbox'].checked) {
+      instance.levelEmailStatus.set('Please check the send confirmation box');
+      return;
+    }
+    const level = parseInt(event.target['level-dropdown'].value, 10);
+    if (!level) {
+      instance.levelEmailStatus.set('Please select a level');
+      return;
+    }
+    $('.ui.dropdown').dropdown('clear');
+    const studentsByLevel = _.map(StudentProfiles.find({ level, isAlumni: false }).fetch(), 'username');
+    const lastIndex = studentsByLevel.length - 1;
+    const bccList = $('#bcc-list').val();
+    const bccListArray = _.map(bccList.split(','), email => email.trim());
+    _.each(studentsByLevel, function (email, index) {
+      setTimeout(function () {
+        instance.levelEmailStatus.set(`Level ${level}: Sending newsletter for ${email}...`);
+        const student = StudentProfiles.findByUsername(email);
+        if (student) {
+          const suggestedRecs = getRecList(student);
+          const emailData = {};
+          console.log(`Sending email to ${email}`);
+          emailData.to = email;
+          emailData.bcc = bccListArray;
+          emailData.from = 'radgrad@hawaii.edu';
+          emailData.subject = 'Review and update your RadGrad degree plan';
+          emailData.templateData = {
+            adminMessage,
+            firstName: `${student.firstName}`,
+            firstRec: suggestedRecs[0],
+            secondRec: suggestedRecs[1],
+            thirdRec: suggestedRecs[2],
+          };
+          emailData.filename = 'newsletter.html';
+          sendEmailMethod.call(emailData, (error) => {
+            if (error) {
+              console.log('Error sending email.', error);
+            }
+          });
+        }
+        if (index === lastIndex) {
+          instance.levelEmailStatus.set(`Level ${level}: All emails sent!`);
+        }
+      }, index * 5000);
+    });
+  },
+});
+
+Template.Generate_Newsletter_Widget.onRendered(function generateNewsletterWidgetOnRendered() {
+  this.$('.ui.dropdown').dropdown();
+  this.$('.ui.checkbox').checkbox();
 });
