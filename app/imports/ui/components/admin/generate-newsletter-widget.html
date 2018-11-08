@@ -58,12 +58,12 @@
                 <i class="dropdown icon"></i>
                 <div class="default text">Level</div>
                 <div class="menu">
-                  <div class="item" data-value="1">1</div>
-                  <div class="item" data-value="2">2</div>
-                  <div class="item" data-value="3">3</div>
-                  <div class="item" data-value="4">4</div>
-                  <div class="item" data-value="5">5</div>
-                  <div class="item" data-value="6">6</div>
+                  <div class="item" data-value="1"><strong>Level 1</strong> ({{levelCount 1}} students)</div>
+                  <div class="item" data-value="2"><strong>Level 2</strong> ({{levelCount 2}} students)</div>
+                  <div class="item" data-value="3"><strong>Level 3</strong> ({{levelCount 3}} students)</div>
+                  <div class="item" data-value="4"><strong>Level 4</strong> ({{levelCount 4}} students)</div>
+                  <div class="item" data-value="5"><strong>Level 5</strong> ({{levelCount 5}} students)</div>
+                  <div class="item" data-value="6"><strong>Level 6</strong> ({{levelCount 6}} students)</div>
                 </div>
               </div>
             </div>
@@ -75,6 +75,21 @@
             </div>
             <button class="ui basic green button" type="submit">Send To Students</button>
             <div><span style="color: crimson;">{{levelEmailStatus}}</span></div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <form class="ui form all">
+            <div class="field">
+              <label>Generate and send newsletters to ALL students</label>
+              <div class="ui checkbox">
+                <input name="confirm-checkbox" type="checkbox" tabindex="0" class="hidden">
+                <label>Check to confirm send</label>
+              </div>
+            </div>
+            <button class="ui basic green button" type="submit">Send To All Students</button>
+            <div><span style="color: crimson;">{{sendAllEmailStatus}}</span></div>
           </form>
         </div>
       </div>

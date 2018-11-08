@@ -438,6 +438,7 @@ function getRecList(student) {
 Template.Generate_Newsletter_Widget.onCreated(function generateNewsletterWidgetOnCreated() {
   this.testEmailStatus = new ReactiveVar('');
   this.levelEmailStatus = new ReactiveVar('');
+  this.sendAllEmailStatus = new ReactiveVar('');
   this.adminMessage = new ReactiveVar('');
 });
 
@@ -448,8 +449,14 @@ Template.Generate_Newsletter_Widget.helpers({
   levelEmailStatus() {
     return Template.instance().levelEmailStatus.get();
   },
+  sendAllEmailStatus() {
+    return Template.instance().sendAllEmailStatus.get();
+  },
   adminMessage() {
     return Template.instance().adminMessage.get();
+  },
+  levelCount(level) {
+    return StudentProfiles.find({ level, isAlumni: false }).count();
   },
 });
 
@@ -519,15 +526,15 @@ Template.Generate_Newsletter_Widget.events({
       return;
     }
     $('.ui.dropdown').dropdown('clear');
-    const studentsByLevel = _.map(StudentProfiles.find({ level, isAlumni: false }).fetch(), 'username');
+    const studentsByLevel = StudentProfiles.find({ level, isAlumni: false }).fetch();
     const lastIndex = studentsByLevel.length - 1;
     const bccList = $('#bcc-list').val();
     const bccListArray = _.map(bccList.split(','), email => email.trim());
-    _.each(studentsByLevel, function (username, index) {
+    _.each(studentsByLevel, function (profile, index) {
       setTimeout(function () {
-        const email = username;
+        const student = profile;
+        const email = student.username;
         instance.levelEmailStatus.set(`Level ${level}: Sending newsletter for ${email}...`);
-        const student = StudentProfiles.findByUsername(email);
         if (student) {
           const suggestedRecs = getRecList(student);
           const emailData = {};
@@ -552,6 +559,55 @@ Template.Generate_Newsletter_Widget.events({
         }
         if (index === lastIndex) {
           instance.levelEmailStatus.set(`Level ${level}: All emails sent!`);
+        }
+      }, index * 5000);
+    });
+  },
+  'submit .all': function sendToAllStudents(event, instance) {
+    event.preventDefault();
+    const adminMessage = $('.markdown').html();
+    if (!(adminMessage.match(/[a-z]/i))) {
+      instance.sendAllEmailStatus.set('Please input an admin message');
+      return;
+    }
+    if (!event.target['confirm-checkbox'].checked) {
+      instance.sendAllEmailStatus.set('Please check the send confirmation box');
+      return;
+    }
+    $('.ui.dropdown').dropdown('clear');
+    const students = StudentProfiles.find({ isAlumni: false }).fetch();
+    const lastIndex = students.length - 1;
+    const bccList = $('#bcc-list').val();
+    const bccListArray = _.map(bccList.split(','), email => email.trim());
+    _.each(students, function (profile, index) {
+      setTimeout(function () {
+        const student = profile;
+        const email = student.username;
+        instance.sendAllEmailStatus.set(`Sending newsletter for ${email}...`);
+        if (student) {
+          const suggestedRecs = getRecList(student);
+          const emailData = {};
+          console.log(`Sending email to ${email}`);
+          emailData.to = email;
+          emailData.bcc = bccListArray;
+          emailData.from = 'radgrad@hawaii.edu';
+          emailData.subject = 'Review and update your RadGrad degree plan';
+          emailData.templateData = {
+            adminMessage,
+            firstName: `${student.firstName}`,
+            firstRec: suggestedRecs[0],
+            secondRec: suggestedRecs[1],
+            thirdRec: suggestedRecs[2],
+          };
+          emailData.filename = 'newsletter.html';
+          sendEmailMethod.call(emailData, (error) => {
+            if (error) {
+              console.log('Error sending email.', error);
+            }
+          });
+        }
+        if (index === lastIndex) {
+          instance.sendAllEmailStatus.set('All emails sent!');
         }
       }, index * 5000);
     });
