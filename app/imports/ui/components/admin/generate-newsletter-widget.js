@@ -98,12 +98,12 @@ function iceRecHelper(student, value, component) {
     });
     const currentCourses = _.map(CourseInstances.find({ studentID: student.userID }).fetch(), 'courseID');
     const recommendedCourses = _.filter(relevantCourses, course => !_.includes(currentCourses, course._id));
-    const recCourse = recommendedCourses[0];
     if (recommendedCourses.length === 0) {
       html += '<em><a href="https://radgrad.ics.hawaii.edu">' +
           ' Add more interests so we can provide course recommendations!</a></em>';
       return html;
     }
+    const recCourse = recommendedCourses[0];
     html += ' Check out this recommended course: ';
     html += '<a style="color: #6FBE44; font-weight: bold;"' +
         ` href="https://radgrad.ics.hawaii.edu/student/${student.username}` +
@@ -123,6 +123,10 @@ function iceRecHelper(student, value, component) {
       }
       return false;
     });
+    if (relevantOpps.length === 0) {
+      return ' <em><a href="https://radgrad.ics.hawaii.edu">' +
+          ' Add more Interests to your profile so we can provide opportunity recommendations!</a></em>';
+    }
     const currentOpps = _.map(OpportunityInstances.find({ studentID: student.userID }).fetch(), 'opportunityID');
     const recommendedOpps = _.filter(relevantOpps, opp => !_.includes(currentOpps, opp._id));
     let recOpp;
@@ -184,7 +188,15 @@ function levelRecommendation(student) {
 
 function verifyOppRecommendation(student) {
   const unverifiedOpps = OpportunityInstances.find({ studentID: student.userID, verified: false }).fetch();
-  if (unverifiedOpps.length === 0) {
+  const currentUnverifiedOpps = _.filter(unverifiedOpps, function (unverifiedOpp) {
+    const semesterID = unverifiedOpp.semesterID;
+    const semesterNumber = Semesters.findOne({ _id: semesterID }).semesterNumber;
+    if (semesterNumber <= Semesters.getCurrentSemesterDoc().semesterNumber) {
+      return true;
+    }
+    return false;
+  });
+  if (currentUnverifiedOpps.length === 0) {
     return '';
   }
   const html = {};
@@ -195,17 +207,14 @@ function verifyOppRecommendation(student) {
       ' There may be additional requirements in addition to requesting the verification. Here is a list of' +
       ' past or current opportunities that you have not yet verified:</p>';
   html.info += '<ul>';
-  _.each(unverifiedOpps, function (unverifiedOpp) {
+  _.each(currentUnverifiedOpps, function (unverifiedOpp) {
     const semesterID = unverifiedOpp.semesterID;
-    const semesterNumber = Semesters.findOne({ _id: semesterID }).semesterNumber;
     const semesterName = Semesters.toString(semesterID, false);
-    if (semesterNumber <= Semesters.getCurrentSemesterDoc().semesterNumber) {
-      const opp = Opportunities.findOne({ _id: unverifiedOpp.opportunityID });
-      const oppSlug = Opportunities.getSlug(opp._id);
-      html.info += '<li><a style="color: #6FBE44; font-weight: bold"' +
-          ` href="https://radgrad.ics.hawaii.edu/student/${student.username}` +
-          `/explorer/opportunities/${oppSlug}">${opp.name} (${semesterName})</a></li>`;
-    }
+    const opp = Opportunities.findOne({ _id: unverifiedOpp.opportunityID });
+    const oppSlug = Opportunities.getSlug(opp._id);
+    html.info += '<li><a style="color: #6FBE44; font-weight: bold"' +
+        ` href="https://radgrad.ics.hawaii.edu/student/${student.username}` +
+        `/explorer/opportunities/${oppSlug}">${opp.name} (${semesterName})</a></li>`;
   });
   html.info += '</ul>';
   return html;
