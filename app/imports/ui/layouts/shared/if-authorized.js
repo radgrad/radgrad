@@ -83,4 +83,8 @@ Template.If_Authorized.helpers({
     // console.log('isAuthorized', 'default deny');
     return false;
   },
+  notLoggedIn() {
+    console.log(`notLoggedIn helper ${!Meteor.user(true)}`)
+    return !Meteor.user(true);
+  },
 });
