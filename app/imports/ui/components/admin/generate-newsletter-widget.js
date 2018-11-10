@@ -491,13 +491,18 @@ Template.Generate_Newsletter_Widget.events({
       return;
     }
     instance.testEmailStatus.set('Sending emails...');
+    const sendToStudents = event.target['student-checkbox'].checked;
     _.each(emailListArray, function (email) {
       const student = StudentProfiles.findByUsername(email);
       if (student) {
         const suggestedRecs = getRecList(student);
-        const admin = 'radgrad@hawaii.edu';
+        const sendList = [];
+        sendList.push('radgrad@hawaii.edu');
+        if (sendToStudents) {
+          sendList.push('weng@hawaii.edu');
+        }
         const emailData = {};
-        emailData.to = admin;
+        emailData.to = sendList;
         emailData.bcc = bccListArray;
         emailData.from = 'radgrad@hawaii.edu';
         emailData.subject = `Newsletter View For ${student.firstName} ${student.lastName}`;

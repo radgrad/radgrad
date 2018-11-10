@@ -40,8 +40,14 @@
         <div class="column">
           <form class="ui form test">
             <div class="field">
-              <label>Generate student newsletters and send only to admin</label>
+              <label>Generate student newsletters and send to admin</label>
               <input name="text" type="text" placeholder="Input student emails separated by commas">
+            </div>
+            <div class="field">
+              <div class="ui checkbox">
+                <input name="student-checkbox" type="checkbox" tabindex="0" class="hidden">
+                <label>Send to students too</label>
+              </div>
             </div>
             <button class="ui basic green button" type="submit">Send To Admin</button>
             <div><span style="color: crimson;">{{testEmailStatus}}</span></div>
