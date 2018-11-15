@@ -51,7 +51,8 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return _.map(choices, (c) => c.choice);
   },
   desiredDegrees() {
-    return DesiredDegrees.find({}, { sort: { name: 1 } });
+    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    return _.filter(degrees, (d) => !d.retired);
   },
   displayFieldError(fieldName) {
     const errorKeys = Template.instance().context.validationErrors();

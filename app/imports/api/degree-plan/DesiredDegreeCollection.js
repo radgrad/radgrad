@@ -20,6 +20,7 @@ class DesiredDegreeCollection extends BaseSlugCollection {
       shortName: { type: String },
       slugID: { type: SimpleSchema.RegEx.Id },
       description: { type: String },
+      retired: { type: Boolean, optional: true },
     }));
   }
 
@@ -36,10 +37,10 @@ class DesiredDegreeCollection extends BaseSlugCollection {
    * @throws { Meteor.Error } If the slug already exists.
    * @returns The newly created docID.
    */
-  define({ name, shortName = name, slug, description }) {
+  define({ name, shortName = name, slug, description, retired = false }) {
     // Get SlugID, throw error if found.
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
-    const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description });
+    const desiredDegreeID = this._collection.insert({ name, shortName, slugID, description, retired });
     // Connect the Slug to this Interest
     Slugs.updateEntityID(slugID, desiredDegreeID);
     return desiredDegreeID;
@@ -52,7 +53,7 @@ class DesiredDegreeCollection extends BaseSlugCollection {
    * @param shortName the short name of this degree.
    * @param description the description of this degree.
    */
-  update(instance, { name, shortName, description }) {
+  update(instance, { name, shortName, description, retired }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (name) {
@@ -63,6 +64,11 @@ class DesiredDegreeCollection extends BaseSlugCollection {
     }
     if (description) {
       updateData.description = description;
+    }
+    if (retired) {
+      updateData.retired = true;
+    } else {
+      updateData.retired = false;
     }
     this._collection.update(docID, { $set: updateData });
   }

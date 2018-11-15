@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { CareerGoals } from '../../../api/career/CareerGoalCollection';
 import { Feeds } from '../../../api/feed/FeedCollection';
@@ -41,7 +42,7 @@ Template.Add_Student_Widget.helpers({
     const year = currentSemester.term === Semesters.FALL ? currentSemester.year : currentSemester.year - 1;
     const lastFallID = Semesters.define({ term: Semesters.FALL, year });
     const semesterNum = Semesters.findDoc(lastFallID).semesterNumber;
-    return AcademicPlans.find({ semesterNumber: { $gte: semesterNum } }).fetch();
+    return _.filter(AcademicPlans.find({ semesterNumber: { $gte: semesterNum } }).fetch(), (ap) => !ap.retired);
   },
   roles() {
     return [ROLE.STUDENT, ROLE.ALUMNI];

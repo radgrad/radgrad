@@ -30,7 +30,7 @@ Template.Landing_Section_2.helpers({
   },
   firstDegree() {
     let ret = 'ba-ics';
-    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    const degrees = _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired);
     if (degrees.length > 0) {
       ret = Slugs.findDoc(degrees[0].slugID).name;
     }

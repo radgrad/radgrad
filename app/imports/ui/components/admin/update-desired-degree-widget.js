@@ -10,6 +10,7 @@ const updateSchema = new SimpleSchema({
   name: String,
   shortName: { type: String, optional: true },
   description: String,
+  retired: Boolean,
 }, { tracker: Tracker });
 
 Template.Update_Desired_Degree_Widget.onCreated(function onCreated() {
@@ -18,11 +19,27 @@ Template.Update_Desired_Degree_Widget.onCreated(function onCreated() {
 
 Template.Update_Desired_Degree_Widget.helpers({
   desiredDegree() {
-    return DesiredDegrees.findDoc(Template.currentData().updateID.get());
+    return DesiredDegrees.findDoc(Template.currentData()
+      .updateID
+      .get());
   },
   slug() {
-    const course = DesiredDegrees.findDoc(Template.currentData().updateID.get());
-    return Slugs.findDoc(course.slugID).name;
+    const degree = DesiredDegrees.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return Slugs.findDoc(degree.slugID).name;
+  },
+  falseValueRetired() {
+    const degree = DesiredDegrees.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return !degree.retired;
+  },
+  trueValueRetired() {
+    const degree = DesiredDegrees.findDoc(Template.currentData()
+      .updateID
+      .get());
+    return degree.retired;
   },
 });
 
@@ -32,6 +49,7 @@ Template.Update_Desired_Degree_Widget.events({
     const updateData = FormUtils.getSchemaDataFromEvent(updateSchema, event);
     instance.context.reset();
     updateSchema.clean(updateData, { mutate: true });
+    updateData.retired = updateData.retired === 'true';
     instance.context.validate(updateData);
     if (instance.context.isValid()) {
       updateData.id = instance.data.updateID.get();
