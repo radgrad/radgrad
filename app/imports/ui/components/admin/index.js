@@ -9,6 +9,9 @@ import './activity-calendar-results.js';
 import './activity-calendar-widget.html';
 import './activity-calendar-widget.js';
 
+import './add-academic-plan-widget.html';
+import './add-academic-plan-widget';
+
 import './add-advisor-log-widget.html';
 import './add-advisor-log-widget';
 
