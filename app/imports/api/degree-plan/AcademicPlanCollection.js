@@ -241,7 +241,8 @@ class AcademicPlanCollection extends BaseSlugCollection {
     const semester = Slugs.findDoc(semesterDoc.slugID).name;
     const coursesPerSemester = doc.coursesPerSemester;
     const courseList = doc.courseList;
-    return { slug, degreeSlug, name, description, semester, coursesPerSemester, courseList };
+    const retired = doc.retired;
+    return { slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired };
   }
 
 }
