@@ -26,7 +26,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
       effectiveSemesterID: SimpleSchema.RegEx.Id,
       semesterNumber: Number,
       year: Number,
-      coursesPerSemester: { type: Array, minCount: 12, maxCount: 12 }, 'coursesPerSemester.$': Number,
+      coursesPerSemester: { type: Array, minCount: 12, maxCount: 15 }, 'coursesPerSemester.$': Number,
       courseList: [String],
       retired: { type: Boolean, optional: true },
     }));
@@ -55,6 +55,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param semester the slug for the semester.
    * @param coursesPerSemester an array of the number of courses to take in each semester.
    * @param courseList an array of PlanChoices. The choices for each course.
+   * @param retired optional, defaults to false, allows for retiring an academic plan.
    * @returns {*}
    */
   define({ slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired = false }) {
@@ -86,6 +87,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param semester the first semester this plan is effective.
    * @param coursesPerSemester an array of the number of courses per semester.
    * @param courseList an array of PlanChoices, the choices for each course.
+   * @param retired a boolean true if the academic plan is retired.
    */
   update(instance, { degreeSlug, name, semester, coursesPerSemester, courseList, retired }) {
     const docID = this.getID(instance);
