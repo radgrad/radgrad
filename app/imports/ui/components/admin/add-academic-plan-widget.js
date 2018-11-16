@@ -53,7 +53,7 @@ Template.Add_Academic_Plan_Widget.events({
     const coursesPerSemester = _.map(numberStrings, (s) => parseInt(s, 10));
     newData.coursesPerSemester = coursesPerSemester;
     newData.courseList = newData.courseList.split(', ');
-    console.log(newData);
+    // console.log(newData);
     if (instance.context.isValid()) {
       defineMethod.call({ collectionName: AcademicPlans.getCollectionName(), definitionData: newData }, (error) => {
         if (error) {
