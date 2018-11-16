@@ -99,7 +99,10 @@ class AcademicPlanCollection extends BaseSlugCollection {
       updateData.name = name;
     }
     if (semester) {
-      updateData.effectiveSemesterID = Semesters.getID(semester);
+      const sem = Semesters.findDoc(Semesters.getID(semester));
+      updateData.effectiveSemesterID = sem._id;
+      updateData.year = sem.year;
+      updateData.semesterNumber = sem.semesterNumber;
     }
     if (coursesPerSemester) {
       if (!Array.isArray(coursesPerSemester)) {
@@ -201,7 +204,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @return {number}
    */
   getLatestSemesterNumber() {
-    const plans = this._collection.find().fetch();
+    const plans = _.filter(this._collection.find().fetch(), (p) => !p.retired);
     let max = 0;
     _.forEach(plans, (p) => {
       if (max < p.semesterNumber) {

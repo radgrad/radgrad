@@ -7,6 +7,7 @@
       <div class="fields">
         {{> Input_Form_Field label='Name' name='name' value=academicPlan.name errorMessage=(fieldError 'name') required=true}}
         {{> Input_Form_Field label='Slug' name='slug' value=slug errorMessage=(fieldError 'slug') disabled=true}}
+        {{> Semesters_Single_Form_Field semesters=semesters selectedSemesterID=selectedSemesterID errorMessage=(fieldError "semesters")}}
       </div>
 
       <div class="required field">
@@ -14,6 +15,9 @@
         <textarea rows="5" name="description" value="{{academicPlan.description}}"></textarea>
         {{> Form_Error_Message errorMessage=(fieldError 'description')}}
       </div>
+      {{> TextArea_Form_Field label="Number of Courses per Semester" rows=5 name="coursesPerSemester" value=(coursesPerSemester academicPlan) errorMessage=(fieldError "coursesPerSemester") required=true}}
+      {{> TextArea_Form_Field label="Course List" rows=5 name="courseList" value=(courseList academicPlan) errorMessage=(fieldError "courseList") required=true}}
+
       <div class="field">
         {{> Boolean_Form_Field label='Retired' name='retired' trueValue=trueValueRetired falseValue=falseValueRetired errorMessage=(fieldError "retired")}}
       </div>
