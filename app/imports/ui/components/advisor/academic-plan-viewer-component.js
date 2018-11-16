@@ -72,6 +72,12 @@ Template.Academic_Plan_Viewer_Component.helpers({
     return '';
   },
   years() {
+    if (Template.instance().plan.get()) {
+      const plan = Template.instance().plan.get();
+      if (plan.coursesPerSemester.length === 15) {
+        return ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
+      }
+    }
     return ['Year 1', 'Year 2', 'Year 3', 'Year 4'];
   },
 });
