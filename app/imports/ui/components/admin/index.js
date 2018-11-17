@@ -179,6 +179,9 @@ import './student-timeline-modal.js';
 import './students-summary-widget.html';
 import './students-summary-widget.js';
 
+import './update-academic-plan-widget.html';
+import './update-academic-plan-widget';
+
 import './update-advisor-log-widget.html';
 import './update-advisor-log-widget';
 

@@ -28,6 +28,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
       year: Number,
       coursesPerSemester: { type: Array, minCount: 12, maxCount: 12 }, 'coursesPerSemester.$': Number,
       courseList: [String],
+      retired: { type: Boolean, optional: true },
     }));
     if (Meteor.server) {
       this._collection._ensureIndex({ _id: 1, degreeID: 1, effectiveSemesterID: 1 });
@@ -56,7 +57,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param courseList an array of PlanChoices. The choices for each course.
    * @returns {*}
    */
-  define({ slug, degreeSlug, name, description, semester, coursesPerSemester, courseList }) {
+  define({ slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired = false }) {
     const degreeID = Slugs.getEntityID(degreeSlug, 'DesiredDegree');
     const effectiveSemesterID = Semesters.getID(semester);
     const doc = this._collection.findOne({ degreeID, name, effectiveSemesterID });
@@ -69,7 +70,8 @@ class AcademicPlanCollection extends BaseSlugCollection {
     const semesterNumber = semesterDoc.semesterNumber;
     const year = semesterDoc.year;
     const planID = this._collection.insert({
-      slugID, degreeID, name, description, effectiveSemesterID, semesterNumber, year, coursesPerSemester, courseList,
+      slugID, degreeID, name, description, effectiveSemesterID, semesterNumber, year, coursesPerSemester,
+      courseList, retired,
     });
     // Connect the Slug to this AcademicPlan.
     Slugs.updateEntityID(slugID, planID);
@@ -85,7 +87,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param coursesPerSemester an array of the number of courses per semester.
    * @param courseList an array of PlanChoices, the choices for each course.
    */
-  update(instance, { degreeSlug, name, semester, coursesPerSemester, courseList }) {
+  update(instance, { degreeSlug, name, semester, coursesPerSemester, courseList, retired }) {
     const docID = this.getID(instance);
     const updateData = {};
     if (degreeSlug) {
@@ -118,6 +120,11 @@ class AcademicPlanCollection extends BaseSlugCollection {
         }
       });
       updateData.courseList = courseList;
+    }
+    if (retired) {
+      updateData.retired = retired;
+    } else {
+      updateData.retired = false;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -184,7 +191,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    */
   getLatestPlans() {
     const semesterNumber = this.getLatestSemesterNumber();
-    return this._collection.find({ semesterNumber }).fetch();
+    return _.filter(this._collection.find({ semesterNumber }).fetch(), (ap) => !ap.retired);
   }
 
   /**

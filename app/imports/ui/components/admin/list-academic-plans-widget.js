@@ -2,6 +2,8 @@ import { Template } from 'meteor/templating';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Users } from '../../../api/user/UserCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
+import * as FormUtils from '../form-fields/form-field-utilities';
+import { removeItMethod } from '../../../api/base/BaseCollection.methods';
 
 function numReferences(academicPlan) {
   let references = 0;
@@ -15,13 +17,16 @@ function numReferences(academicPlan) {
 
 Template.List_Academic_Plans_Widget.helpers({
   academicPlans() {
-    return AcademicPlans.find({}, { sort: { year: 1, name: 1 } });
+    return AcademicPlans.find({}, { sort: { year: 1, name: 1 } }).fetch();
   },
   count() {
-    return AcademicPlans.count();
+    return AcademicPlans.find({}, { sort: { year: 1, name: 1 } }).fetch().length;
   },
   deleteDisabled(academicPlan) {
     return (numReferences(academicPlan) > 0) ? 'disabled' : '';
+  },
+  updateDisabled() {
+    return false;
   },
   slugName(slugID) {
     return Slugs.findDoc(slugID).name;
@@ -30,12 +35,22 @@ Template.List_Academic_Plans_Widget.helpers({
     return [
       { label: 'Name', value: `${academicPlan.name}` },
       { label: 'Description', value: academicPlan.description },
-      { label: 'References', value: `Students: ${numReferences(academicPlan)}` }];
+      { label: 'References', value: `Students: ${numReferences(academicPlan)}` },
+      { label: 'Retired', value: academicPlan.retired ? 'True' : 'False' }];
   },
 });
 
 Template.List_Academic_Plans_Widget.events({
-  // add your events here
+  'click .jsUpdate': FormUtils.processUpdateButtonClick,
+  'click .jsDelete': function (event, instance) {
+    event.preventDefault();
+    const id = event.target.value;
+    removeItMethod.call({ collectionName: 'AcademicPlanCollection', instance: id }, (error) => {
+      if (error) {
+        FormUtils.indicateError(instance, error);
+      }
+    });
+  },
 });
 
 Template.List_Academic_Plans_Widget.onRendered(function listacademicplanswidgetOnRendered() {

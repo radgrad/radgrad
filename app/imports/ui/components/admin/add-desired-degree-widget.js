@@ -12,14 +12,14 @@ const addSchema = new SimpleSchema({
   description: String,
 }, { tracker: Tracker });
 
-Template.Add_Course_Widget.onCreated(function onCreated() {
+Template.Add_Desired_Degree_Widget.onCreated(function onCreated() {
   FormUtils.setupFormWidget(this, addSchema);
 });
 
-Template.Add_Course_Widget.helpers({
+Template.Add_Desired_Degree_Widget.helpers({
 });
 
-Template.Add_Course_Widget.events({
+Template.Add_Desired_Degree_Widget.events({
   submit(event, instance) {
     event.preventDefault();
     const newData = FormUtils.getSchemaDataFromEvent(addSchema, event);

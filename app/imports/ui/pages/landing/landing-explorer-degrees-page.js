@@ -1,12 +1,13 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Slugs } from '../../../api/slug/SlugCollection.js';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection.js';
 
 Template.Landing_Explorer_Degrees_Page.helpers({
   addedDegrees() {
-    return DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    return _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired);
   },
   degree() {
     const degreeSlugName = FlowRouter.getParam('degree');

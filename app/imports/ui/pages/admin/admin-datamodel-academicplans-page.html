@@ -2,11 +2,11 @@
 
   {{#if Template.subscriptionsReady}}
     {{#Admin_DataModel_Layout}}
-      <!--{{#if displayUpdateWidget}}-->
-        <!--{{> Update_Academic_Plan_Widget updateID=updateID}}-->
+      {{#if displayUpdateWidget}}
+        {{> Update_Academic_Plan_Widget updateID=updateID}}
       <!--{{else}}-->
         <!--{{> Add_Academic_Plan_Widget }}-->
-      <!--{{/if}}-->
+      {{/if}}
       {{> List_Academic_Plans_Widget updateID=updateID}}
     {{/Admin_DataModel_Layout}}
   {{else}}

@@ -40,7 +40,8 @@ Template.Explorer_Plans_Page.helpers({
     ];
   },
   nonAddedPlans() {
-    const allPlans = AcademicPlans.find({}, { sort: { semesterNumber: 1, name: 1 } }).fetch();
+    const allPlans = _.filter(AcademicPlans.find({}, { sort: { semesterNumber: 1, name: 1 } }).fetch(),
+      (ap) => !ap.retired);
     const profile = Users.getProfile(getRouteUserName());
     const nonAddedPlans = _.filter(allPlans, function (plan) {
       if (_.includes(profile.academicPlanID, plan._id)) {

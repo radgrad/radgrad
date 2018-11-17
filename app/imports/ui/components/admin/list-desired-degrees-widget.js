@@ -31,6 +31,7 @@ Template.List_Desired_Degrees_Widget.helpers({
       { label: 'Short Name', value: desiredDegree.shortName },
       { label: 'Description', value: desiredDegree.description },
       { label: 'References', value: `Academic Plans: ${numReferences(desiredDegree)}` },
+      { label: 'Retired', value: desiredDegree.retired ? 'True' : 'False' },
     ];
   },
 });

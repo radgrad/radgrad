@@ -39,7 +39,7 @@ Template.Explorer_Degrees_Page.helpers({
   degree() {
     const degreeSlugName = FlowRouter.getParam('degree');
     const slug = Slugs.find({ name: degreeSlugName }).fetch();
-    const degree = DesiredDegrees.find({ slugID: slug[0]._id }).fetch();
+    const degree = _.filter(DesiredDegrees.find({ slugID: slug[0]._id }).fetch(), (d) => !d.retired);
     return degree[0];
   },
   descriptionPairs(degree) {
@@ -48,7 +48,7 @@ Template.Explorer_Degrees_Page.helpers({
     ];
   },
   nonAddedDegrees() {
-    const allDegrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    const allDegrees = _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired);
     const profile = Users.getProfile(getRouteUserName());
     const nonAddedDegrees = _.filter(allDegrees, function (degree) {
       // TODO This won't work; no profile.desiredDegreeID.

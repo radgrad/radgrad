@@ -190,7 +190,7 @@ Template.Student_Explorer_Menu.helpers({
   },
   firstDegree() {
     let ret;
-    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
+    const degrees = _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired);
     if (degrees.length > 0) {
       ret = Slugs.findDoc(degrees[0].slugID).name;
     }

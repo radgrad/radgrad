@@ -8,20 +8,19 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 
 function availableAcademicPlans() {
-  let plans = AcademicPlans.find({}, { sort: { year: 1, name: 1 } })
-    .fetch();
+  let plans = _.filter(AcademicPlans.find({}, { sort: { year: 1, name: 1 } }).fetch(), (ap) => !ap.retired);
   if (getRouteUserName()) {
     const profile = Users.getProfile(getRouteUserName());
     if (!profile.declaredSemesterID) {
       plans = AcademicPlans.getLatestPlans();
     } else {
       const declaredSemester = Semesters.findDoc(profile.declaredSemesterID);
-      plans = AcademicPlans.find({ semesterNumber: { $gte: declaredSemester.semesterNumber } }, {
+      plans = _.filter(AcademicPlans.find({ semesterNumber: { $gte: declaredSemester.semesterNumber } }, {
         sort: {
           year: 1,
           name: 1,
         },
-      }).fetch();
+      }).fetch(), (ap) => !ap.retired);
     }
     if (profile.academicPlanID) {
       return _.filter(plans, p => profile.academicPlanID !== p._id);

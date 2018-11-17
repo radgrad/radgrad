@@ -22,8 +22,11 @@ export function defaultCalcLevel(studentID) {
       .fetch());
   const earnedICE = getEarnedICE(instances);
   const plannedICE = getProjectedICE(instances);
-  const numReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true })
+  const numCourseReviews = Reviews.find({ studentID, reviewType: 'course', moderated: true, visible: true })
     .count();
+  const numOppReviews = Reviews.find({ studentID, reviewType: 'opportunity', moderated: true, visible: true })
+    .count();
+  const numReviews = numCourseReviews + numOppReviews;
   const hasPicture = StudentProfiles.hasSetPicture(studentID);
   // console.log('defaultCalcLevel', earnedICE, plannedICE, numReviews, hasPicture);
   let level = 1;

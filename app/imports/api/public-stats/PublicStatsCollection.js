@@ -118,12 +118,12 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   desiredDegreesTotal() {
-    const count = DesiredDegrees.find().count();
+    const count = _.filter(DesiredDegrees.find().fetch(), (d) => !d.retired).length;
     this._collection.upsert({ key: this.desiredDegreesTotalKey }, { $set: { value: `${count}` } });
   }
 
   desiredDegreesList() {
-    const degrees = DesiredDegrees.find().fetch();
+    const degrees = _.filter(DesiredDegrees.find().fetch(), (d) => !d.retired);
     const names = _.map(degrees, 'name');
     this._collection.upsert({ key: this.desiredDegreesListKey }, { $set: { value: names.join(', ') } });
   }
