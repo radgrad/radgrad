@@ -18,6 +18,25 @@ import { plannerKeys } from './academic-plan';
 import * as RouteNames from '../../../startup/client/router.js';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
+import { satisfiesPlanChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
+import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
+
+function courseStructureForMenu() {
+  let courses = _.filter(Courses.find({}, { sort: { number: 1 } }).fetch(), (c) => !c.retired);
+  courses = _.filter(courses, (c) => c.number !== 'other');
+  const courseStructure = [];
+  while (courses.length > 0) {
+    const subarray = [];
+    for (let i = 0; i < 10; i++) {
+      if (courses.length > 0) {
+        subarray.push(courses.shift());
+      }
+    }
+    courseStructure.push(subarray);
+  }
+  // console.log(courseStructure);
+  return courseStructure;
+}
 
 Template.Inspector.onCreated(function inspectorOnCreated() {
   this.state = this.data.dictionary;
@@ -99,6 +118,12 @@ Template.Inspector.helpers({
   },
   coursesRouteName() {
     return RouteNames.studentExplorerCoursesPageRouteName;
+  },
+  courseStructure() {
+    return courseStructureForMenu();
+  },
+  coursesLabel(courses) {
+    return `${courses[0].number} - ${courses[courses.length - 1].number}`;
   },
   courses100() {
     const courses = _.filter(Courses.find({ number: /1\d\d/ }).fetch(), (c) => !c.retired);
@@ -332,13 +357,17 @@ Template.Inspector.helpers({
       }
     return false;
   },
+  prereqName(prereq) {
+    return PlanChoices.toStringFromSlug(prereq);
+  },
   missingPrerequisite(prereqSlug) {
-    const prereqID = Courses.findIdBySlug(prereqSlug);
     const studentID = getUserIdFromRoute();
     const courseInstances = CourseInstances.find({ studentID }).fetch();
     let ret = true;
     _.forEach(courseInstances, (ci) => {
-      if (prereqID === ci.courseID) {
+      const courseSlug = CourseInstances.getCourseSlug(ci._id);
+      // console.log(prereqSlug, courseSlug, satisfiesPlanChoice(prereqSlug, courseSlug))
+      if (satisfiesPlanChoice(prereqSlug, courseSlug)) {
         ret = false;
       }
     });

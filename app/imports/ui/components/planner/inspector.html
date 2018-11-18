@@ -4,69 +4,17 @@
     <div class="ui top attached buttons">
       <div class="ui floating dropdown icon button">Courses <i class="dropdown icon"></i>
         <div class="menu">
-          <div class="item">
-            <i class="dropdown icon"></i>
-            <span class="text">1xx</span>
-            <div class="menu">
-              {{#each course in courses100}}
-                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-              {{/each}}
+          {{#each courses in courseStructure}}
+            <div class="item">
+              <i class="dropdown icon"></i>
+              <span class="text">{{coursesLabel courses}}</span>
+              <div class="menu">
+                {{#each course in courses}}
+                  <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
+                {{/each}}
+              </div>
             </div>
-          </div>
-          <div class="item">
-            <i class="dropdown icon"></i>
-            <span class="text">2xx</span>
-            <div class="menu">
-              {{#each course in courses200}}
-                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-              {{/each}}
-            </div>
-          </div>
-          <div class="item">
-            <i class="dropdown icon"></i>
-            <span class="text">31x - 34x</span>
-            <div class="menu">
-              {{#each course in courses300}}
-                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-              {{/each}}
-            </div>
-          </div>
-          <div class="item">
-            <i class="dropdown icon"></i>
-            <span class="text">35x - 39x</span>
-            <div class="menu">
-              {{#each course in courses350}}
-                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-              {{/each}}
-            </div>
-          </div>
-          <div class="item">
-            <i class="dropdown icon"></i>
-            <span class="text">41x - 43x</span>
-            <div class="menu" style="overflow: auto; height: 300px">
-              {{#each course in courses410}}
-                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-              {{/each}}
-            </div>
-          </div>
-          <div class="item">
-            <i class="dropdown icon"></i>
-            <span class="text">44x - 46x</span>
-            <div class="menu" style="overflow: auto; height: 300px">
-              {{#each course in courses440}}
-                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-              {{/each}}
-            </div>
-          </div>
-          <div class="item">
-            <i class="dropdown icon"></i>
-            <span class="text">47x - 499</span>
-            <div class="menu" style="overflow: auto; height: 300px">
-              {{#each course in courses470}}
-                <div id="{{course._id}}" class="course item">{{course.number}} {{course.shortName}}</div>
-              {{/each}}
-            </div>
-          </div>
+          {{/each}}
         </div>
       </div>
       <div class="or"></div>
@@ -115,7 +63,7 @@
                   {{#each prerequisite in prerequisites}}
                     <div class="ui item">
                       <a href="{{pathFor coursesRouteName username=routeUserName course = prerequisite}}"
-                         style="text-transform: uppercase;">{{prerequisite}}
+                         style="text-transform: uppercase;">{{prereqName prerequisite}}
                         {{#if missingPrerequisite prerequisite}}
                           <i class="red warning icon"></i>
                         {{else}}
