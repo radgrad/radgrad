@@ -6,6 +6,7 @@ import { Interests } from '../interest/InterestCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
+import { isSingleChoice } from '../degree-plan/PlanChoiceUtilities';
 
 
 /**
@@ -204,8 +205,17 @@ class CourseCollection extends BaseSlugCollection {
         }
       });
       _.forEach(doc.prerequisites, prereq => {
-        if (!this.hasSlug(prereq)) {
-          problems.push(`Bad course prerequisite slug: ${prereq}`);
+        if (isSingleChoice(prereq)) {
+          if (!this.hasSlug(prereq)) {
+            problems.push(`Bad course prerequisite slug: ${prereq}`);
+          }
+        } else {
+          const slugs = prereq.split(',');
+          _.forEach(slugs, (slug) => {
+            if (!this.hasSlug(slug)) {
+              problems.push(`Bad course prerequisite slug: ${slug}`);
+            }
+          });
         }
       });
     });

@@ -193,7 +193,7 @@
           "description": "Models of computation, high-performance processors, pipelined machines, RISC processors, VLIW, superscalar and fine-grain parallel machines. Data-flow architectures. Hardware/software tradeoffs.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": ["ee_461"]
+          "prerequisites": []
         },
         {
           "name": "Advanced Artificial Intelligence",
