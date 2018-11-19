@@ -66,6 +66,9 @@ Template.Semester_Card.helpers({
     return (group === 'student');
   },
   itemName(item) {
+    if (this.type === 'courses') {
+      return `${item.name} (${item.number})`;
+    }
     return item.name;
   },
   itemSemesters() {

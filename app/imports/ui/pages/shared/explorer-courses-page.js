@@ -9,15 +9,20 @@ import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js
 import { makeLink } from '../../components/admin/datamodel-utilities';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { isSingleChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
+
 
 function passedCourseHelper(courseSlugName) {
   let ret = 'Not in plan';
-  const slug = Slugs.find({ name: courseSlugName }).fetch();
-  const course = _.filter(Courses.find({ slugID: slug[0]._id }).fetch(), (c) => !c.retired);
+  const slug = Slugs.find({ name: courseSlugName })
+    .fetch();
+  const course = _.filter(Courses.find({ slugID: slug[0]._id })
+    .fetch(), (c) => !c.retired);
   const ci = CourseInstances.find({
     studentID: getUserIdFromRoute(),
     courseID: course[0]._id,
-  }).fetch();
+  })
+    .fetch();
   _.forEach(ci, (c) => {
     if (c.verified === true) {
       ret = 'Completed';
@@ -28,6 +33,25 @@ function passedCourseHelper(courseSlugName) {
   return ret;
 }
 
+function prerequisiteStatus(prerequisite) {
+  // console.log(prerequisite);
+  if (isSingleChoice(prerequisite)) {
+    return passedCourseHelper(prerequisite);
+  }
+  const slugs = prerequisite.split(',');
+  let ret = 'Not in plan';
+  slugs.forEach((slug) => {
+    const result = passedCourseHelper(slug);
+    if (result === 'Completed') {
+      ret = result;
+    } else if (result === 'In plan, but not yet complete') {
+      ret = result;
+    }
+  });
+  return ret;
+}
+
+
 function prerequisites(course) {
   const list = course.prerequisites;
   const complete = [];
@@ -35,7 +59,7 @@ function prerequisites(course) {
   const notInPlan = [];
   let itemStatus = '';
   _.forEach(list, (item) => {
-    itemStatus = passedCourseHelper(item);
+    itemStatus = prerequisiteStatus(item);
     if (itemStatus === 'Not in plan') {
       notInPlan.push({ course: item, status: itemStatus });
     } else if (itemStatus === 'Completed') {
@@ -53,13 +77,15 @@ function prerequisites(course) {
 Template.Explorer_Courses_Page.helpers({
   addedCourses() {
     const addedCourses = [];
-    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
+    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } })
+      .fetch(), (c) => !c.retired);
     const userID = getUserIdFromRoute();
     _.forEach(allCourses, (course) => {
       const ci = CourseInstances.find({
         studentID: userID,
         courseID: course._id,
-      }).fetch();
+      })
+        .fetch();
       if (ci.length > 0) {
         if (course.shortName !== 'Non-CS Course') {
           addedCourses.push(course);
@@ -79,7 +105,8 @@ Template.Explorer_Courses_Page.helpers({
   },
   course() {
     const courseSlugName = FlowRouter.getParam('course');
-    const slug = Slugs.find({ name: courseSlugName }).fetch();
+    const slug = Slugs.find({ name: courseSlugName })
+      .fetch();
     const course = Courses.findDoc({ slugID: slug[0]._id });
     return course;
   },
@@ -94,13 +121,15 @@ Template.Explorer_Courses_Page.helpers({
     ];
   },
   nonAddedCourses() {
-    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
+    const allCourses = _.filter(Courses.find({}, { sort: { shortName: 1 } })
+      .fetch(), (c) => !c.retired);
     const userID = getUserIdFromRoute();
     const nonAddedCourses = _.filter(allCourses, function (course) {
       const ci = CourseInstances.find({
         studentID: userID,
         courseID: course._id,
-      }).fetch();
+      })
+        .fetch();
       if (ci.length > 0) {
         return false;
       }
@@ -116,7 +145,8 @@ Template.Explorer_Courses_Page.helpers({
     const review = Reviews.find({
       studentID: getUserIdFromRoute(),
       revieweeID: course._id,
-    }).fetch();
+    })
+      .fetch();
     if (review.length > 0) {
       ret = true;
     }
@@ -126,4 +156,3 @@ Template.Explorer_Courses_Page.helpers({
     return Slugs.findDoc(slugID).name;
   },
 });
-
