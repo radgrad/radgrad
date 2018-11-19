@@ -104,10 +104,10 @@ function iceRecHelper(student, value, component) {
       return html;
     }
     const recCourse = recommendedCourses[0];
-    html += ' Check out this recommended course: ';
+    html += ' Check out';
     html += '<a style="color: #6FBE44; font-weight: bold;"' +
         ` href="https://radgrad.ics.hawaii.edu/student/${student.username}` +
-        `/explorer/courses/${Courses.getSlug(recCourse._id)}">${recCourse.shortName}</a>`;
+        `/explorer/courses/${Courses.getSlug(recCourse._id)}"> ${recCourse.shortName}</a>`;
   } else {
     if (studentInterests.length === 0) {
       html += ' <em><a href="https://radgrad.ics.hawaii.edu">' +
@@ -135,10 +135,10 @@ function iceRecHelper(student, value, component) {
     } else {
       recOpp = recommendedOpps[0];
     }
-    html += ' Check out this recommended opportunity: ';
+    html += ' Check out';
     html += '<a style="color: #6FBE44; font-weight: bold;"' +
         ` href="https://radgrad.ics.hawaii.edu/student/${student.username}` +
-        `/explorer/opportunities/${Opportunities.getSlug(recOpp._id)}">${recOpp.name}</a>`;
+        `/explorer/opportunities/${Opportunities.getSlug(recOpp._id)}"> ${recOpp.name}</a>`;
   }
   return html;
 }
@@ -149,19 +149,19 @@ function iceRecommendation(student) {
     return '';
   }
   const html = {};
-  html.header = 'FINISH YOUR DEGREE PLAN';
+  html.header = 'Finish Your Degree Plan';
   html.info = '<p>To achieve a complete degree plan, obtain 100 points in each ICE component!</p>';
   _.each(ice, function (value, component) {
     let iceLevel = '';
     if (value < 30) {
-      iceLevel = '<span style="color: red;"><strong>LOW</strong></span>';
+      iceLevel = '<span style="color: red;"><strong>NEEDS WORK</strong></span>';
     } else
       if (value < 60) {
-        iceLevel = '<span style="color: orange;"><strong>MEDIUM</strong></span>';
+        iceLevel = '<span style="color: orange;"><strong>NEEDS WORK</strong></span>';
       } else {
-        iceLevel = '<span style="color: green;"><strong>HIGH</strong></span>';
+        iceLevel = '<span style="color: green;"><strong>GOOD</strong></span>';
       }
-    html.info += `<p><span style="color: ${iceMap[component].color}">${iceMap[component].name} (${value})</span>
+    html.info += `<p><span style="color: ${iceMap[component].color}">${iceMap[component].name} (${value} points)</span>
       : ${iceLevel}</p>`;
     html.info += `<ul><li>${iceRecHelper(student, value, component)}</li></ul>`;
   });
@@ -173,7 +173,7 @@ function levelRecommendation(student) {
     return '';
   }
   const html = {};
-  html.header = 'LEVEL UP AND UPGRADE YOUR RADGRAD STICKER';
+  html.header = 'Level Up and Upgrade Your RadGrad Sticker';
   html.info = '<img src=' +
       `"https://radgrad.ics.hawaii.edu/images/level-icons/radgrad-level-${student.level}-icon.png"` +
       ' width="100" height="100" style="float: left; margin: 0 10px;">';
@@ -200,7 +200,7 @@ function verifyOppRecommendation(student) {
     return '';
   }
   const html = {};
-  html.header = 'VERIFY YOUR OPPORTUNITIES';
+  html.header = 'Verify Your Opportunities';
   html.info = '<p>You have unverified opportunities. To verify them, visit your RadGrad Degree Planner and' +
       ' click on the <em>Inspector</em> tab to the right. Select the opportunity you want to verify in your planner' +
       ' and it should be displayed in the Inspector, along with an option at the bottom to request verification.' +
@@ -303,7 +303,7 @@ function completePlanRecommendation(student) {
     return '';
   }
   const html = {};
-  html.header = 'COMPLETE YOUR ACADEMIC PLAN';
+  html.header = 'Complete Your Academic Plan';
   const planDoc = AcademicPlans.findOne({ _id: student.academicPlanID });
   const planName = planDoc.name;
   const slugName = Slugs.getNameFromID(planDoc.slugID);
@@ -351,7 +351,7 @@ function reviewCourseRecommendation(student) {
   });
   suggestedReviewCourses = suggestedReviewCourses.concat(remainingCourses);
   const html = {};
-  html.header = 'REVIEW COURSES YOU HAVE COMPLETED';
+  html.header = 'Review Courses You Have Completed';
   html.info = '<p>Contribute to the ICS community by providing reviews for courses you have completed.' +
       ' Here are some suggested courses to review:</p>';
   html.info += '<ul>';
@@ -393,7 +393,7 @@ function reviewOppRecommendation(student) {
   suggestedReviewOpps = suggestedReviewOpps.concat(remainingOpps);
   suggestedReviewOpps = _.uniq(suggestedReviewOpps);
   const html = {};
-  html.header = 'REVIEW OPPORTUNITIES YOU HAVE COMPLETED';
+  html.header = 'Review Opportunities You Have Completed';
   html.info = '<p>Contribute to the ICS community by providing reviews for opportunities you have completed.' +
       ' Here are some suggested opportunities to review:</p>';
   html.info += '<ul>';
@@ -414,7 +414,7 @@ function reviewOppRecommendation(student) {
 
 function visitMentorRecommendation(student) {
   const html = {};
-  html.header = 'VISIT THE MENTOR SPACE';
+  html.header = 'Visit The Mentor Space';
   html.info = '<p>Connect with RadGrad mentors to learn more about future opportunities and careers, or if you simply' +
       ' have questions regarding your current degree track. Visit the <a style="color: #6FBE44; font-weight: bold"' +
       ` href="https://radgrad.ics.hawaii.edu/student/${student.username}/mentor-space">Mentor Space</a>` +
@@ -499,7 +499,7 @@ Template.Generate_Newsletter_Widget.events({
         const sendList = [];
         sendList.push('radgrad@hawaii.edu');
         if (sendToStudents) {
-          sendList.push('weng@hawaii.edu');
+          sendList.push(email);
         }
         const emailData = {};
         emailData.to = sendList;
@@ -513,7 +513,7 @@ Template.Generate_Newsletter_Widget.events({
           secondRec: suggestedRecs[1],
           thirdRec: suggestedRecs[2],
         };
-        emailData.filename = 'newsletter.html';
+        emailData.filename = 'newsletter2.html';
         sendEmailMethod.call(emailData, (error) => {
           if (error) {
             console.log('Error sending email.', error);
@@ -528,6 +528,11 @@ Template.Generate_Newsletter_Widget.events({
     const adminMessage = $('.markdown').html();
     if (!(adminMessage.match(/[a-z]/i))) {
       instance.levelEmailStatus.set('Please input an admin message');
+      return;
+    }
+    const subject = $('#subject-field').val();
+    if (!subject) {
+      instance.levelEmailStatus.set('Please input a subject line');
       return;
     }
     if (!event.target['confirm-checkbox'].checked) {
@@ -556,7 +561,7 @@ Template.Generate_Newsletter_Widget.events({
           emailData.to = email;
           emailData.bcc = bccListArray;
           emailData.from = 'radgrad@hawaii.edu';
-          emailData.subject = 'Review and update your RadGrad degree plan';
+          emailData.subject = subject;
           emailData.templateData = {
             adminMessage,
             firstName: `${student.firstName}`,
@@ -564,7 +569,7 @@ Template.Generate_Newsletter_Widget.events({
             secondRec: suggestedRecs[1],
             thirdRec: suggestedRecs[2],
           };
-          emailData.filename = 'newsletter.html';
+          emailData.filename = 'newsletter2.html';
           sendEmailMethod.call(emailData, (error) => {
             if (error) {
               console.log('Error sending email.', error);
@@ -582,6 +587,11 @@ Template.Generate_Newsletter_Widget.events({
     const adminMessage = $('.markdown').html();
     if (!(adminMessage.match(/[a-z]/i))) {
       instance.sendAllEmailStatus.set('Please input an admin message');
+      return;
+    }
+    const subject = $('#subject-field').val();
+    if (!subject) {
+      instance.sendAllEmailStatus.set('Please input a subject line');
       return;
     }
     if (!event.target['confirm-checkbox'].checked) {
@@ -605,7 +615,7 @@ Template.Generate_Newsletter_Widget.events({
           emailData.to = email;
           emailData.bcc = bccListArray;
           emailData.from = 'radgrad@hawaii.edu';
-          emailData.subject = 'Review and update your RadGrad degree plan';
+          emailData.subject = subject;
           emailData.templateData = {
             adminMessage,
             firstName: `${student.firstName}`,
@@ -613,7 +623,7 @@ Template.Generate_Newsletter_Widget.events({
             secondRec: suggestedRecs[1],
             thirdRec: suggestedRecs[2],
           };
-          emailData.filename = 'newsletter.html';
+          emailData.filename = 'newsletter2.html';
           sendEmailMethod.call(emailData, (error) => {
             if (error) {
               console.log('Error sending email.', error);
