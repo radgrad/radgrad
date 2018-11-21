@@ -68,7 +68,7 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return Template.instance().successClass.get() ? 'success' : '';
   },
   years() {
-    return ['Year 1', 'Year 2', 'Year 3', 'Year 4'];
+    return ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
   },
   selectedDesiredDegreeID() {
     return '';

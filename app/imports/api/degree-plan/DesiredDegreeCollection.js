@@ -117,7 +117,8 @@ class DesiredDegreeCollection extends BaseSlugCollection {
     const shortName = doc.shortName;
     const slug = Slugs.getNameFromID(doc.slugID);
     const description = doc.description;
-    return { name, shortName, slug, description };
+    const retired = doc.retired;
+    return { name, shortName, slug, description, retired };
   }
 }
 

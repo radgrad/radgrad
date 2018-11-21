@@ -1,5 +1,5 @@
 {
-  "timestamp": "2017-08-03T00:12:04.411Z",
+  "timestamp": "2018-11-19T23:44:35.561Z",
   "collections": [
     {
       "name": "AcademicPlanCollection",
@@ -39,7 +39,8 @@
             "ics_400+-2",
             "ics_400+-3",
             "ics_400+-4"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "ba-ics-2016",
@@ -74,7 +75,8 @@
             "ics_400+-1",
             "ics_313,ics_361-1",
             "ics_332-1"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "ba-ics-2017",
@@ -109,7 +111,8 @@
             "ics_332-1",
             "(ics_312,ics_331),(ics_313,ics_361),(ics_351,ics_451),ics_355-2",
             "ics_400+-1"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "ba-ics-it-2015",
@@ -149,7 +152,8 @@
             "ics_300+-2",
             "ics_300+-3",
             "ics_300+-4"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "ba-ics-it-2016",
@@ -191,7 +195,8 @@
             "ics_300+-2",
             "ics_332-1",
             "ics_464-1"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "ba-ics-it-2017",
@@ -231,7 +236,8 @@
             "ics_415-1",
             "ics_426-1",
             "ics_464-1"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "ba-ics-ss-2016",
@@ -270,7 +276,8 @@
             "ics_415,ics_423-1",
             "ics_321,ics_332,ics_351-2",
             "ics_425,ics_426,ics_491,ics_495-1"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "ba-ics-ss-2017",
@@ -309,7 +316,8 @@
             "ics_423,ics_425,ics_426,ics_455,ics_495,ee_406-2",
             "ics_423,ics_425,ics_426,ics_455,ics_495,ee_406-3",
             "ics_423,ics_425,ics_426,ics_455,ics_495,ee_406-4"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "bs-ce-2017",
@@ -394,7 +402,8 @@
             "ics_400+-3",
             "ics_400+-4",
             "ics_400+-5"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "bs-cs-2016",
@@ -433,7 +442,8 @@
             "ics_400+-3",
             "ics_400+-4",
             "ics_400+-5"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "bs-cs-2017",
@@ -472,7 +482,8 @@
             "ics_400+-3",
             "ics_400+-4",
             "ics_400+-5"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "bs-cs-ss-2016",
@@ -511,7 +522,8 @@
             "ics_423-1",
             "ics_425,ics_426-1",
             "ics_491,ics_495-1"
-          ]
+          ],
+          "retired": false
         },
         {
           "slug": "bs-cs-ss-2017",
@@ -551,7 +563,159 @@
             "ics_423,ics_425,ics_426,ics_455,ics_495,ee_406-2",
             "ics_423,ics_425,ics_426,ics_455,ics_495,ee_406-3",
             "ics_423,ics_425,ics_426,ics_455,ics_495,ee_406-4"
-          ]
+          ],
+          "retired": false
+        },
+        {
+          "slug": "bs-ms-cs",
+          "degreeSlug": "bs-cs",
+          "name": "B.S./M.S. in Computer Science (2017)",
+          "description": "Bachelor of Science (BS) in Computer Science/Master of Science (MS) in Computer Science.",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            1,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            3,
+            2,
+            0,
+            4,
+            4,
+            0
+          ],
+          "courseList": [
+            "ics_111-1",
+            "ics_141-1",
+            "ics_211-1",
+            "ics_212-1",
+            "ics_241-1",
+            "ics_311-1",
+            "ics_314-1",
+            "ics_321-1",
+            "(ics_312,ics_331),(ics_313,ics_361),(ics_351,ics_451)-1",
+            "ics_332-1",
+            "(ics_312,ics_331),(ics_313,ics_361),(ics_351,ics_451)-2",
+            "ics_400+-1",
+            "ics_621-1",
+            "ics_400+-2",
+            "ics_414-1",
+            "ics_635-1",
+            "ics_600+-1",
+            "ics_600+-2",
+            "ics_600+-3",
+            "ics_699,ics_700-1",
+            "ics_600+4",
+            "ics_600+-5",
+            "ics_699,ics_700-2",
+            "ics_690-1"
+          ],
+          "retired": false
+        },
+        {
+          "slug": "bs-ms-ds",
+          "degreeSlug": "bs-cs",
+          "name": "B.S./M.S. in Computer Science Data Science (2017)",
+          "description": "Bachelor of Science (BS) in Computer Science Data Science Track/Master of Science (MS) in Computer Science",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            1,
+            1,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            4,
+            4,
+            0
+          ],
+          "courseList": [
+            "ics_111-1",
+            "ics_211-1",
+            "ics_212-1",
+            "ics_235-1",
+            "ics_311-1",
+            "ics_314-1",
+            "ics_321-1",
+            "ics_435-1",
+            "ics_434-1",
+            "ics_484-1",
+            "ics_438-1",
+            "ics_400+-1",
+            "ics_400+-2",
+            "ics_635-1",
+            "ics_600+-1",
+            "ics_600+-2",
+            "ics_600+-3",
+            "ics_699,ics_700-1",
+            "ics_600+-4",
+            "ics_600+-5",
+            "ics_699,ics_700-2",
+            "ics_690-1"
+          ],
+          "retired": false
+        },
+        {
+          "slug": "bs-ms-ss",
+          "degreeSlug": "bs-cs",
+          "name": "B.S./M.S. in Computer Science Security Science (2017)",
+          "description": "Bachelor of Science (BS) in Computer Science Security Science Track/Master of Science (MS) in Computer Science",
+          "semester": "Fall-2017",
+          "coursesPerSemester": [
+            1,
+            3,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            4,
+            4,
+            0
+          ],
+          "courseList": [
+            "ics_111-1",
+            "ics_141-1",
+            "ics_211-1",
+            "ics_222-1",
+            "ics_212-1",
+            "ics_241-1",
+            "ics_311-1",
+            "ics_314-1",
+            "ics_321-1",
+            "ics_355-1",
+            "ics_312,ics_331,ics_332-1",
+            "ics_351,ics_451",
+            "ics_423-1",
+            "ics_425,ics_426,ics_455,ics_495-1",
+            "ics_425,ics_426,ics_455,ics_495-2",
+            "ics_425,ics_426,ics_455,ics_495-3",
+            "ics_600+-1",
+            "ics_600+-2",
+            "ics_600+-3",
+            "ics_699,ics_700-1",
+            "ics_600+-4",
+            "ics_600+-5",
+            "ics_699,ics_700-2",
+            "ics_690-1"
+          ],
+          "retired": false
         }
       ]
     },
@@ -1102,7 +1266,8 @@
           "description": "Fundamental information technology concepts and computing terminology, productivity software for problem solving, computer technology trends and impact on individuals and society. Emphasizes the utilization of operating systems and the production of professional documents, spreadsheets, etc.",
           "creditHrs": 4,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": false
         },
         {
           "name": "Introduction to Computer Programming",
@@ -1114,7 +1279,8 @@
           "interests": [
             "python"
           ],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": false
         },
         {
           "name": "Introduction to Computer Science I",
@@ -1127,7 +1293,8 @@
             "java"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS111.html",
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": false
         },
         {
           "name": "Discrete Mathematics for Computer Science I",
@@ -1140,7 +1307,8 @@
             "algorithms"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS141.html",
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": false
         },
         {
           "name": "Introduction to Computer Science II",
@@ -1157,7 +1325,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS211.html",
           "prerequisites": [
             "ics_111"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Program Structure",
@@ -1174,7 +1343,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS212.html",
           "prerequisites": [
             "ics_211"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Introduction to Scripting",
@@ -1192,7 +1362,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS215.html",
           "prerequisites": [
             "ics_211"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Basic Concepts of Computer Science",
@@ -1207,7 +1378,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS222.html",
           "prerequisites": [
             "ics_141"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Discrete Mathematics for Computer Science II",
@@ -1222,7 +1394,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS241.html",
           "prerequisites": [
             "ics_141"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Algorithms",
@@ -1239,7 +1412,8 @@
           "prerequisites": [
             "ics_241",
             "ics_211"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Machine-Level and Systems Programming",
@@ -1257,7 +1431,8 @@
           "prerequisites": [
             "ics_212",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Programming Language Theory",
@@ -1275,7 +1450,8 @@
             "ics_212",
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Software Engineering I",
@@ -1294,7 +1470,8 @@
           "prerequisites": [
             "ics_211",
             "ics_241"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Data Storage and Retrieval",
@@ -1312,7 +1489,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Logic Design and Microprocessors",
@@ -1331,7 +1509,8 @@
             "ics_212",
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Operating Systems",
@@ -1349,7 +1528,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Network Design and Management",
@@ -1368,7 +1548,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Security and Trust I: Resource Protections",
@@ -1385,7 +1566,8 @@
             "ics_222",
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Introduction to Artificial Intelligence Programming",
@@ -1404,7 +1586,8 @@
             "ics_212",
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Computing Ethics for Lab Assistants",
@@ -1420,7 +1603,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS390.html",
           "prerequisites": [
             "ics_101"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Software Engineering II",
@@ -1438,7 +1622,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Introduction to Programming for the Web",
@@ -1455,7 +1640,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "The Science, Psychology and Philosophy of Systems Design",
@@ -1472,7 +1658,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Database Systems",
@@ -1487,7 +1674,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS421.html",
           "prerequisites": [
             "ics_321"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Data Processing",
@@ -1502,7 +1690,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS422.html",
           "prerequisites": [
             "ics_321"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Data Security and Cryptography I",
@@ -1518,7 +1707,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS423.html",
           "prerequisites": [
             "ics_355"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Application Frameworks",
@@ -1534,7 +1724,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Computer Security and Ethics",
@@ -1551,7 +1742,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS425.html",
           "prerequisites": [
             "ics_355"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Computer System Security",
@@ -1567,7 +1759,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS426.html",
           "prerequisites": [
             "ics_355"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Computer Architecture",
@@ -1583,7 +1776,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS431.html",
           "prerequisites": [
             "ics_331"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Concurrent and High-Performance Programming",
@@ -1604,7 +1798,8 @@
             "ics_311",
             "ics_314",
             "ics_212"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Machine Learning Fundamentals",
@@ -1621,7 +1816,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Theory of Computation",
@@ -1638,7 +1834,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Analytical Models and Methods",
@@ -1654,7 +1851,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Parallel Algorithms",
@@ -1674,7 +1872,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Data Networks",
@@ -1692,7 +1891,8 @@
             "ics_311",
             "ics_314",
             "ics_212"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Software Design for Robotics",
@@ -1711,7 +1911,8 @@
           "prerequisites": [
             "ics_312",
             "ics_313"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Security and Trust II: Information Assurance",
@@ -1727,7 +1928,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS455.html",
           "prerequisites": [
             "ics_355"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Artificial Intelligence",
@@ -1746,7 +1948,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Artificial Intelligence for Games",
@@ -1767,7 +1970,8 @@
             "ics_311",
             "ics_314",
             "ics_212"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Human Computer Interaction I",
@@ -1784,7 +1988,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Introduction to Hypermedia",
@@ -1801,7 +2006,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Design for Mobile Devices",
@@ -1819,7 +2025,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Cognitive Science",
@@ -1838,7 +2045,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Probability, Statistics, and Queuing",
@@ -1856,7 +2064,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Introduction to Bioinformatics Sequences and Genomes Analysis",
@@ -1875,7 +2084,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Bioinformatics Algorithms and Tool Development",
@@ -1893,7 +2103,8 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS476.html",
           "prerequisites": [
             "ics_475"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Introduction to Computer Graphics",
@@ -1909,7 +2120,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Computer Vision",
@@ -1927,7 +2139,8 @@
             "ics_311",
             "ics_314",
             "ics_212"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Data Visualization",
@@ -1945,7 +2158,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Video Game Design and Development",
@@ -1964,7 +2178,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Special Topics",
@@ -1977,7 +2192,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Special Topics in Security",
@@ -1992,7 +2208,8 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Computer Project",
@@ -2005,7 +2222,488 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ]
+          ],
+          "retired": false
+        },
+        {
+          "name": "Master’s Plan B/C Studies",
+          "shortName": "Plan B/C",
+          "slug": "ics_500",
+          "number": "ICS 500",
+          "description": "Enrollment for degree completion.",
+          "creditHrs": 1,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Intelligent Autonomous Agents",
+          "shortName": "Intelligent Autonomous Agents",
+          "slug": "ics_606",
+          "number": "ICS 606",
+          "description": "Theory, methods and practical applications of autonomous agent systems, including common applications of both software and hardware (robotic) agents. In-depth practical experience with autonomous agents through programming assignments and projects.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_313"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Compiler Theory and Construction",
+          "shortName": "Compilers",
+          "slug": "ics_611",
+          "number": "ICS 611",
+          "description": "Design and implementation of compilers, syntactic and semantic descriptions of programming languages, algorithms for syntactic analysis and object code generation",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_312"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Theory of Operating Systems",
+          "shortName": "Operating Systems",
+          "slug": "ics_612",
+          "number": "ICS 612",
+          "description": "Advanced study in operating systems theory and design with emphasis on case studies and distributed systems.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Advanced Software Engineering",
+          "shortName": "Advanced Software Engineering",
+          "slug": "ics_613",
+          "number": "ICS 613",
+          "description": "Fundamental software engineering procedures, including planning, estimation, design, testing, process definition and improvement, and software quality assurance. Measurement techniques are used to support empirically-driven software process improvement throughout the course.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_414"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Medical Informatics I",
+          "shortName": "Medical Informatics I",
+          "slug": "ics_614",
+          "number": "ICS 614",
+          "description": "Introduction to the field of medical informatics, which is found at the intersection of clinical science, public health, information science, computer technology and communications technology. Concentration on current issues.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Information Architecture and Web Design",
+          "shortName": "Information Architecture and Web Design",
+          "slug": "ics_616",
+          "number": "ICS 616",
+          "description": "User-centered design of websites; survey Information Architecture (IA) systems (organization, navigation, labeling, searching); gain experience in methodologies for creating IA, tools for IA, web standards and usability tests. ICS and LIS majors only. A-F only.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Analysis of Algorithms",
+          "shortName": "Analysis of Algorithms",
+          "slug": "ics_621",
+          "number": "ICS 621",
+          "description": "Analysis and design of algorithms: modeling, comparison, measures, applications.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_311"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Network Science",
+          "shortName": "Network Science",
+          "slug": "ics_622",
+          "number": "ICS 622",
+          "description": "Modeling human-made and natural systems as networks to understand their structure and dynamics. Computational and statistical methods and research results they enabled. Use of network analysis software. Applications to topics of interest to students.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Advanced Cryptography",
+          "shortName": "Advanced Cryptography",
+          "slug": "ics_623",
+          "number": "ICS 623",
+          "description": "Taxonomy of security properties: methods for defining and proving security. Randomness, pseudorandomness, and indistinguishability. Functional encryption and obfuscation. Zero knowledge.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_423",
+            "ics_455"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Advanced Data Management",
+          "shortName": "Advanced Data Management",
+          "slug": "ics_624",
+          "number": "ICS 624",
+          "description": "Exploration of information retrieval and object-relational tools and methods for the management of distributed multimedia database systems.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_321,ics_421"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Principles of High Performance Computing",
+          "shortName": "Principles of High Performance Computing",
+          "slug": "ics_632",
+          "number": "ICS 632",
+          "description": "Principles of high performance computing for single-processor and parallel architectures. Detailed coverage of parallel architectures and exposure to shared-memory, distributed-memory, and hybrid parallelism. Hands-on experience with message-passing and multi-threaded programming. A-F only.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Machine Learning",
+          "shortName": "Machine Learning",
+          "slug": "ics_635",
+          "number": "ICS 635",
+          "description": "Introduction to key theoretical concepts of machine learning. Practical experience with decision free methods, artificial neural networks. Bayesian belief networks and contemporary statistical methods including regression, clustering and classification.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Information Theory in Machine Learning",
+          "shortName": "Information Theory in Machine Learning",
+          "slug": "ics_636",
+          "number": "ICS 636",
+          "description": "Basics of information processing and learning in the brain; neural networks; learning algorithms based on information maximization; applications in molecular biology and bioinformatics. A-F only.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Advanced Theory of Computation",
+          "shortName": "Advanced Theory of Computation",
+          "slug": "ics_641",
+          "number": "ICS 641",
+          "description": "Advanced topics in formal languages, automata, computability, computational complexity.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_441"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Advanced Parallel Algorithms",
+          "shortName": "Advanced Parallel Algorithms",
+          "slug": "ics_643",
+          "number": "ICS 643",
+          "description": "Design and analysis of parallel algorithms, with emphasis on advanced techniques and latest advances in parallel algorithms.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_311"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Computer Networks",
+          "shortName": "Computer Networks",
+          "slug": "ics_651",
+          "number": "ICS 651",
+          "description": "Elementary principles of modern computer networking. Detailed coverage of overall architecture and the physical, data link, and network layers, with emphasis on the network layer.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_451"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Security and Trust III: Cyber Security and Commerce",
+          "shortName": "Security and Trust III",
+          "slug": "ics_655",
+          "number": "ICS 655",
+          "description": "Tools and methods for security managers. Tools and methods to secure and monetize services and applications. Network as a computer and as a market. Problems of cyber war, cyber crime, cyber bullying.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Computer Architecture I",
+          "shortName": "Computer Architecture I",
+          "slug": "ics_660",
+          "number": "ICS 660",
+          "description": "Models of computation, high-performance processors, pipelined machines, RISC processors, VLIW, superscalar and fine-grain parallel machines. Data-flow architectures. Hardware/software tradeoffs.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Advanced Artificial Intelligence",
+          "shortName": "Advanced Artificial Intelligence",
+          "slug": "ics_661",
+          "number": "ICS 661",
+          "description": "Current issues in artificial intelligence, including expert systems, knowledge representation, logic programming, learning, natural language processing.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_461"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Pattern Recognition",
+          "shortName": "Pattern Recognition",
+          "slug": "ics_663",
+          "number": "ICS 663",
+          "description": "Nature of the problem in pattern recognition and clustering; explanation of various algorithms.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Human-Computer Interaction II",
+          "shortName": "Human-Computer Interaction II",
+          "slug": "ics_664",
+          "number": "ICS 664",
+          "description": "Studies of human performance in designing and using information systems. Emphasizes concepts and methodologies from human factors, psychology, and software engineering relating to human performance.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_464"
+          ],
+          "retired": false
+        },
+        {
+          "name": "User Interfaces and Hypermedia",
+          "shortName": "User Interfaces and Hypermedia",
+          "slug": "ics_665",
+          "number": "ICS 665",
+          "description": "Advanced concepts in construction of interfaces between computers and their users. Hypermedia information structures, guidelines, problems, and tradeoffs. Discussion of selected readings, implementation of prototypes.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_465"
+          ],
+          "retired": false
+        },
+        {
+          "name": "HCI Design Methods",
+          "shortName": "HCI Design Methods",
+          "slug": "ics_667",
+          "number": "ICS 667",
+          "description": "Advanced analytical and empirical methods for the design and evaluation of usable, useful, and robust human-computer interfaces. Students will apply selected methodologies to a major system design project.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_464,ics_465"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Social Informatics",
+          "shortName": "Social Informatics",
+          "slug": "ics_668",
+          "number": "ICS 668",
+          "description": "An advanced introduction to the design of human-computer systems and other technological artifacts for supporting human collaboration in learning, work and social contexts, and to theoretical perspectives and empirical studies of collaboration that inform such design. A-F only.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_464,ics_465,ics_664,ics_665"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Social Computing",
+          "shortName": "Social Computing",
+          "slug": "ics_669",
+          "number": "ICS 669",
+          "description": "Participative analysis of online communities and user-generated content collections. Theoretical and practical aspects of online interaction, identity, trust, and virtual social capital. A-F only.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Evolutionary Computation I: Survey of Methods",
+          "shortName": "Evolutionary Computation I",
+          "slug": "ics_674",
+          "number": "ICS 674",
+          "description": "Evolutionary computation surveys in the field to prepare students for research. Topics include diverse engineering applications, theory, and concepts including search spaces, representation, objective functions, variation operators, selection, and population based search.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_211",
+            "ics_241"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Bioinformatics: Sequences Analysis",
+          "shortName": "Bioinformatics: Sequences Analysis",
+          "slug": "ics_675",
+          "number": "ICS 675",
+          "description": "To expose students to bioinformatics at the biological sequences analysis level (DNA, RNA, proteins). Several bioinformatics methods and algorithms are introduced. Students are required to present one paper and to participate in a small group project. A-F only.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_475"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Bioinformatics: Microarrays",
+          "shortName": "Bioinformatics: Microarrays",
+          "slug": "ics_676",
+          "number": "ICS 676",
+          "description": "Introduction to the basic principles of biology relevant for microarray gene expression data and to Bioconductor. Collaborative open-source project to develop a modular general framework for the analysis of cDNA arrays and gene chips. A-F only. (Once a year)",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_311"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Computer Graphics",
+          "shortName": "Computer Graphics",
+          "slug": "ics_681",
+          "number": "ICS 681",
+          "description": "Selected advanced topics in computer graphics. Substantial project required.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_481"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Numerical Computation",
+          "shortName": "Numerical Computation",
+          "slug": "ics_682",
+          "number": "ICS 682",
+          "description": "Selected topics in numerical analysis, mathematical software, and scientific computation; examples include sparse matrix methods, finite element methods, mathematical programming.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Advanced Computer Vision",
+          "shortName": "Advanced Computer Vision",
+          "slug": "ics_683",
+          "number": "ICS 683",
+          "description": "Fundamental problems and core concepts and techniques in computer vision, covering both theoretical and practical issues in the field. A-F only. (Once a year)",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [
+            "ics_483"
+          ],
+          "retired": false
+        },
+        {
+          "name": "Virtual and Augmented Reality",
+          "shortName": "Virtual and Augmented Reality",
+          "slug": "ics_685",
+          "number": "ICS 685",
+          "description": "Students will learn the science, engineering, art, and applications of virtual reality and augmented reality, with an emphasis on the construction of working virtual environments. Graduate students only. (Fall only)",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Digital Video Information",
+          "shortName": "Digital Video Information",
+          "slug": "ics_686",
+          "number": "ICS 686",
+          "description": "Principles and techniques of technical and context analysis of digital video information. Video capture and editing tools, compression and analysis algorithms, visual culture, narrative structure, juxtaposition of multimedia elements and their effects on information transmission. Pre: graduate standing or consent. (Alt. years)",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Seminar in ICS",
+          "shortName": "Seminar in ICS",
+          "slug": "ics_690",
+          "number": "ICS 690",
+          "description": "Series of talks on advanced research topics. Repeatable unlimited times.CR/NC only.",
+          "creditHrs": 1,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Topics in Computer Science",
+          "shortName": "Topics in Computer Science",
+          "slug": "ics_691",
+          "number": "ICS 691",
+          "description": "Reflects special interests of faculty in various areas of computer science. (B) area 1; (C) area 2; (D) area 3; (E) area 4; (G) general. Repeatable unlimited times in different topics and different areas. Pre: consent.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Advanced Special Topics in Security",
+          "shortName": "Advanced Special Topics in Security",
+          "slug": "ics_695",
+          "number": "ICS 695",
+          "description": "Current topics and upcoming issues relevant to the field of information assurance and cyber security. Repeatable unlimited times. (Alt. years: spring)",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Directed Reading/Research",
+          "shortName": "Directed Reading/Research",
+          "slug": "ics_699",
+          "number": "ICS 699",
+          "description": "Repeatable unlimited times. Pre: graduate standing and consent.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Thesis Research",
+          "shortName": "Thesis Research",
+          "slug": "ics_700",
+          "number": "ICS 700",
+          "description": "Research for master’s thesis. Repeatable unlimited times.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
+        },
+        {
+          "name": "Dissertation Research",
+          "shortName": "Dissertation Research",
+          "slug": "ics_800",
+          "number": "ICS 800",
+          "description": "Research for doctoral dissertation. Repeatable eight times. Pre: candidacy for PhD in computer science.",
+          "creditHrs": 3,
+          "interests": [],
+          "prerequisites": [],
+          "retired": false
         },
         {
           "name": "Thermodynamics",
@@ -2026,7 +2724,8 @@
           "description": "The course used to represent all non-CS courses.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": []
+          "prerequisites": [],
+          "retired": false
         }
       ]
     },
@@ -2798,6 +3497,7 @@
           "course": "ics_414",
           "note": "ICS 414",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "abi@hawaii.edu"
@@ -2807,6 +3507,7 @@
           "course": "ics_415",
           "note": "ICS 415",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "abi@hawaii.edu"
@@ -2816,6 +3517,7 @@
           "course": "ics_432",
           "note": "ICS 432",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "abi@hawaii.edu"
@@ -3105,6 +3807,7 @@
           "course": "ics_414",
           "note": "ICS 414",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
@@ -3114,6 +3817,7 @@
           "course": "ics_471",
           "note": "ICS 471",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
@@ -3123,6 +3827,7 @@
           "course": "ics_475",
           "note": "ICS 475",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
@@ -3132,6 +3837,7 @@
           "course": "ics_484",
           "note": "ICS 484",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "betty@hawaii.edu"
@@ -3181,6 +3887,7 @@
           "course": "ics_311",
           "note": "ICS 311",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 4,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3190,6 +3897,7 @@
           "course": "ics_314",
           "note": "ICS 314",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 4,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3199,6 +3907,7 @@
           "course": "ics_212",
           "note": "ICS 212",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3208,6 +3917,7 @@
           "course": "ics_321",
           "note": "ICS 321",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3217,6 +3927,7 @@
           "course": "ics_313",
           "note": "ICS 313",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3226,6 +3937,7 @@
           "course": "ics_331",
           "note": "ICS 331",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3235,6 +3947,7 @@
           "course": "ics_332",
           "note": "ICS 332",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3244,6 +3957,7 @@
           "course": "ics_422",
           "note": "ICS 422",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "charley@hawaii.edu"
@@ -3253,6 +3967,7 @@
           "course": "ics_451",
           "note": "ICS 451",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "charley@hawaii.edu"
@@ -3262,6 +3977,7 @@
           "course": "ics_452",
           "note": "ICS 452",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "charley@hawaii.edu"
@@ -3271,6 +3987,7 @@
           "course": "ics_111",
           "note": "ICS 111",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 4,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -3280,6 +3997,7 @@
           "course": "ics_141",
           "note": "ICS 141",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -3289,6 +4007,7 @@
           "course": "ics_211",
           "note": "ICS 211",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 4,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -3298,6 +4017,7 @@
           "course": "ics_241",
           "note": "ICS 241",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -3307,6 +4027,7 @@
           "course": "ics_311",
           "note": "ICS 311",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 4,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -3316,6 +4037,7 @@
           "course": "ics_314",
           "note": "ICS 314",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -3325,6 +4047,7 @@
           "course": "ics_212",
           "note": "ICS 212",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -3334,6 +4057,7 @@
           "course": "ics_321",
           "note": "ICS 321",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -3343,6 +4067,7 @@
           "course": "ics_312",
           "note": "ICS 312",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -3352,6 +4077,7 @@
           "course": "ics_361",
           "note": "ICS 361",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -3361,6 +4087,7 @@
           "course": "ics_332",
           "note": "ICS 332",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -3370,6 +4097,7 @@
           "course": "ics_414",
           "note": "ICS 414",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -3379,6 +4107,7 @@
           "course": "ics_443",
           "note": "ICS 443",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -3388,6 +4117,7 @@
           "course": "ics_461",
           "note": "ICS 461",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -3397,6 +4127,7 @@
           "course": "ics_491",
           "note": "ICS 491",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "A",
           "student": "samplestudent@hawaii.edu"
@@ -3406,6 +4137,7 @@
           "course": "ics_499",
           "note": "ICS 499",
           "verified": false,
+          "fromSTAR": false,
           "creditHrs": 3,
           "grade": "B",
           "student": "samplestudent@hawaii.edu"
@@ -3419,7 +4151,8 @@
           "name": "B.A. in Information and Computer Sciences",
           "shortName": "B.A. ICS",
           "slug": "ba-ics",
-          "description": "The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline. You might find the BA degree of interest if you are also interested in biology, entrepreneurship, game design, graphic arts, financial engineering, foreign languages, or other disciplines.\n\nIn general, the BA requires you to complete the ICS core curriculum, plus three ICS 400-level courses, plus four upper division courses in a related area of concentration.\n\nFor more details, see the [ICS BA Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/ba-ics/)."
+          "description": "The Bachelor of Arts (BA) degree allows you to combine computer science with another discipline. You might find the BA degree of interest if you are also interested in biology, entrepreneurship, game design, graphic arts, financial engineering, foreign languages, or other disciplines.\n\nIn general, the BA requires you to complete the ICS core curriculum, plus three ICS 400-level courses, plus four upper division courses in a related area of concentration.\n\nFor more details, see the [ICS BA Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/ba-ics/).",
+          "retired": false
         },
         {
           "name": "B.S. in Computer Engineering",
@@ -3432,7 +4165,8 @@
           "name": "B.S. in Computer Science",
           "shortName": "B.S. CS",
           "slug": "bs-cs",
-          "description": "The Bachelor of Science in Computer Science provides you with an in-depth foundation in software technology, science, and math. You may find this degree of interest if you want to pursue software development as a career path or go to graduate school in computer science. \n\nIn general, the BS requires you to complete the ICS core curriculum, plus (312 or 331), plus (313 or 361), 321, 332, plus five ICS 400-level courses.\n\nFor more details, see the [ICS BS Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ics/)."
+          "description": "The Bachelor of Science in Computer Science provides you with an in-depth foundation in software technology, science, and math. You may find this degree of interest if you want to pursue software development as a career path or go to graduate school in computer science. \n\nIn general, the BS requires you to complete the ICS core curriculum, plus (312 or 331), plus (313 or 361), 321, 332, plus five ICS 400-level courses.\n\nFor more details, see the [ICS BS Degree Page](http://www.ics.hawaii.edu/academics/undergraduate-degree-programs/bs-ics/).",
+          "retired": false
         }
       ]
     },
@@ -4700,7 +5434,8 @@
             "Spring-2018",
             "Spring-2019",
             "Spring-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "ACM Manoa",
@@ -4742,7 +5477,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "ACM Manoa (Hardware)",
@@ -4782,7 +5518,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "ACM Manoa (VR)",
@@ -4818,7 +5555,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "ACM Manoa (Web Development)",
@@ -4856,7 +5594,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "AllNet",
@@ -4894,7 +5633,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Aloha.rb",
@@ -4925,7 +5665,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "HI-SEAS",
@@ -4961,7 +5702,8 @@
             "Spring-2020",
             "Fall-2020",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "ASECOLab",
@@ -4990,7 +5732,8 @@
             "Fall-2019",
             "Spring-2020",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "AT&T Hackathon",
@@ -5018,7 +5761,8 @@
             "Spring-2020",
             "Spring-2021"
           ],
-          "eventDate": "2016-11-18T00:00:00.000Z"
+          "eventDate": "2016-11-18T00:00:00.000Z",
+          "retired": false
         },
         {
           "name": "Booz Allen Ideas Festival",
@@ -5042,7 +5786,8 @@
             "Spring-2018",
             "Spring-2019",
             "Spring-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Booz Allen Internship",
@@ -5066,7 +5811,8 @@
             "Summer-2018",
             "Summer-2019",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "CCDC",
@@ -5092,7 +5838,8 @@
             "Spring-2020",
             "Spring-2012",
             "Spring-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Code for Hawaii",
@@ -5121,7 +5868,8 @@
             "Fall-2019",
             "Spring-2020",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "CoE Career Day",
@@ -5150,7 +5898,8 @@
             "Fall-2019",
             "Spring-2020",
             "Fall-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Customer Analytics",
@@ -5178,7 +5927,8 @@
             "Fall-2019",
             "Spring-2020",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Graphic Design",
@@ -5202,7 +5952,8 @@
             "Summer-2017",
             "Summer-2018",
             "Summer-2019"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Introduction to Big Data",
@@ -5224,7 +5975,8 @@
             "Summer-2018",
             "Summer-2019",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "R Programming",
@@ -5248,7 +6000,8 @@
             "Spring-2018",
             "Summer-2018",
             "Fall-2018"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "CS-related job",
@@ -5287,7 +6040,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Cyber Security for Automated Processes",
@@ -5310,7 +6064,8 @@
             "Spring-2018",
             "Summer-2018",
             "Fall-2018"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "CyberSistahs",
@@ -5333,7 +6088,8 @@
             "Summer-2018",
             "Fall-2018",
             "Spring-2019"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "DAHI Internship",
@@ -5354,7 +6110,8 @@
           "semesters": [
             "Spring-2017",
             "Summer-2017"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Solar Energy Analytics",
@@ -5398,7 +6155,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Gen Cyber Internship",
@@ -5422,7 +6180,8 @@
             "Summer-2019",
             "Summer-2020",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Internship",
@@ -5462,7 +6221,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Research Project",
@@ -5502,7 +6262,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Workshop or Conference",
@@ -5542,7 +6303,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Global Game Jam",
@@ -5567,7 +6329,8 @@
             "Spring-2019",
             "Spring-2020",
             "Spring-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Google Summer of Code",
@@ -5602,7 +6365,8 @@
             "Summer-2019",
             "Summer-2020",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Greyhats",
@@ -5643,7 +6407,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "HACC",
@@ -5664,7 +6429,8 @@
             "Fall-2017",
             "Fall-2018",
             "Fall-2019"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Hawaii Hacker Hours",
@@ -5687,7 +6453,8 @@
             "Spring-2018",
             "Summer-2018",
             "Fall-2018"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Hawaii Open Data",
@@ -5716,7 +6483,8 @@
             "Spring-2019",
             "Summer-2019",
             "Fall-2019"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Hawaii Virtual Reality",
@@ -5739,7 +6507,8 @@
             "Spring-2018",
             "Summer-2018",
             "Fall-2018"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "HI Capacity",
@@ -5773,7 +6542,8 @@
             "Fall-2019",
             "Spring-2020",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "HNL Tech4Good",
@@ -5797,7 +6567,8 @@
             "Spring-2018",
             "Summer-2018",
             "Fall-2018"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Hon New Tech",
@@ -5820,7 +6591,8 @@
             "Spring-2018",
             "Summer-2018",
             "Fall-2018"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Apple iOS Dev Meetup",
@@ -5849,7 +6621,8 @@
             "Spring-2020",
             "Fall-2020",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "ITMA",
@@ -5877,7 +6650,8 @@
             "Spring-2019",
             "Summer-2019",
             "Fall-2019"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Kaggle",
@@ -5936,7 +6710,8 @@
             "Spring-2010",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Lava Lab",
@@ -5976,7 +6751,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Open Power Quality",
@@ -6013,7 +6789,8 @@
             "Fall-2019",
             "Spring-2020",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Purple Mai'a",
@@ -6036,7 +6813,8 @@
             "Summer-2018",
             "Summer-2019",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Purple Prize",
@@ -6057,7 +6835,8 @@
           "semesters": [
             "Fall-2017",
             "Fall-2018"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "PyHawaii",
@@ -6088,7 +6867,8 @@
             "Fall-2019",
             "Spring-2020",
             "Fall-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "SARP Internship",
@@ -6113,7 +6893,8 @@
             "Summer-2019",
             "Summer-2020",
             "Summer-2012"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Airline Security",
@@ -6150,7 +6931,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Business Plan Competition",
@@ -6175,7 +6957,8 @@
             "Spring-2018",
             "Spring-2019",
             "Spring-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Teaching or Tutoring",
@@ -6215,7 +6998,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Learn Linux",
@@ -6239,7 +7023,8 @@
             "Summer-2018",
             "Summer-2019",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Learn Unity",
@@ -6264,7 +7049,8 @@
             "Summer-2018",
             "Summer-2019",
             "Summer-2020"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Career Fair",
@@ -6288,7 +7074,8 @@
             "Fall-2019",
             "Fall-2020"
           ],
-          "eventDate": "2016-10-11T00:00:00.000Z"
+          "eventDate": "2016-10-11T00:00:00.000Z",
+          "retired": false
         },
         {
           "name": "UROP Funding",
@@ -6321,7 +7108,8 @@
             "Spring-2012",
             "Spring-2011",
             "Spring-2021"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Virtual Art",
@@ -6348,7 +7136,8 @@
             "Spring-2019",
             "Summer-2019",
             "Fall-2019"
-          ]
+          ],
+          "retired": false
         },
         {
           "name": "Wetware Wednesday",
@@ -6385,7 +7174,8 @@
             "Summer-2020",
             "Spring-2021",
             "Summer-2021"
-          ]
+          ],
+          "retired": false
         }
       ]
     },
@@ -6396,493 +7186,575 @@
           "semester": "Fall-2014",
           "opportunity": "greyhats",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2015",
           "opportunity": "greyhats",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2015",
           "opportunity": "hawaii-hacker-hours",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2015",
           "opportunity": "greyhats",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Fall-2015",
           "opportunity": "hawaii-hacker-hours",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2015",
           "opportunity": "ccdc",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2016",
           "opportunity": "ccdc",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2016",
           "opportunity": "greyhats",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2016",
           "opportunity": "hawaii-hacker-hours",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2016",
           "opportunity": "greyhats",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Fall-2016",
           "opportunity": "hawaii-hacker-hours",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2016",
           "opportunity": "asecolab",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "greyhats",
           "verified": false,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "asecolab",
           "verified": false,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "hawaii-hacker-hours",
           "verified": false,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "ccdc",
           "verified": false,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Fall-2017",
           "opportunity": "asecolab",
           "verified": false,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2017",
           "opportunity": "greyhats",
           "verified": false,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2018",
           "opportunity": "asecolab",
           "verified": false,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2018",
           "opportunity": "greyhats",
           "verified": false,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Summer-2015",
           "opportunity": "coursera-graphic-design",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2016",
           "opportunity": "gen-cyber-internship",
           "verified": true,
-          "student": "abi@hawaii.edu"
+          "student": "abi@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Summer-2015",
           "opportunity": "coursera-introduction-to-big-data",
           "verified": true,
-          "student": "betty@hawaii.edu"
+          "student": "betty@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2015",
           "opportunity": "lava-lab",
           "verified": true,
-          "student": "betty@hawaii.edu"
+          "student": "betty@hawaii.edu",
+          "sponsor": "leighj@hawaii.edu"
         },
         {
           "semester": "Summer-2016",
           "opportunity": "coursera-r-programming",
           "verified": true,
-          "student": "betty@hawaii.edu"
+          "student": "betty@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2016",
           "opportunity": "lava-lab",
           "verified": true,
-          "student": "betty@hawaii.edu"
+          "student": "betty@hawaii.edu",
+          "sponsor": "leighj@hawaii.edu"
         },
         {
           "semester": "Spring-2016",
           "opportunity": "lava-lab",
           "verified": true,
-          "student": "betty@hawaii.edu"
+          "student": "betty@hawaii.edu",
+          "sponsor": "leighj@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "wetware-wednesday",
           "verified": false,
-          "student": "betty@hawaii.edu"
+          "student": "betty@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "betty@hawaii.edu"
+          "student": "betty@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2017",
           "opportunity": "sarp-internship",
           "verified": false,
-          "student": "betty@hawaii.edu"
+          "student": "betty@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Fall-2013",
           "opportunity": "acm-manoa-hardware",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2013",
           "opportunity": "hawaii-virtual-reality",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2014",
           "opportunity": "acm-manoa-hardware",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2014",
           "opportunity": "hawaii-virtual-reality",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2014",
           "opportunity": "udacity-learn-unity",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2014",
           "opportunity": "acm-manoa-hardware",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2014",
           "opportunity": "hawaii-virtual-reality",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2015",
           "opportunity": "acm-manoa-hardware",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2015",
           "opportunity": "hawaii-virtual-reality",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2015",
           "opportunity": "virtual-art-meetup",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2016",
           "opportunity": "coursera-graphic-design",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2015",
           "opportunity": "att-iot-hackathon",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2016",
           "opportunity": "shidler-bpc",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2016",
           "opportunity": "acm-manoa-vr",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Fall-2016",
           "opportunity": "hacc",
           "verified": true,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "uh-career-fair",
           "verified": false,
-          "student": "alfred@hawaii.edu"
+          "student": "alfred@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2017",
           "opportunity": "acm-manoa",
           "verified": true,
-          "student": "charley@hawaii.edu"
+          "student": "charley@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2017",
           "opportunity": "hawaii-open-data",
           "verified": false,
-          "student": "charley@hawaii.edu"
+          "student": "charley@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2017",
           "opportunity": "code-for-hawaii",
           "verified": false,
-          "student": "charley@hawaii.edu"
+          "student": "charley@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2018",
           "opportunity": "itma",
           "verified": false,
-          "student": "charley@hawaii.edu"
+          "student": "charley@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2018",
           "opportunity": "open-power-quality",
           "verified": false,
-          "student": "charley@hawaii.edu"
+          "student": "charley@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2018",
           "opportunity": "att-iot-hackathon",
           "verified": false,
-          "student": "charley@hawaii.edu"
+          "student": "charley@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2019",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "charley@hawaii.edu"
+          "student": "charley@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2019",
           "opportunity": "booz-allen-internship",
           "verified": false,
-          "student": "charley@hawaii.edu"
+          "student": "charley@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2019",
           "opportunity": "acm-manoa-vr",
           "verified": false,
-          "student": "charley@hawaii.edu"
+          "student": "charley@hawaii.edu",
+          "sponsor": "glau@hawaii.edu"
         },
         {
           "semester": "Spring-2019",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "shaziney@hawaii.edu"
+          "student": "shaziney@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2019",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "rao642@hawaii.edu"
+          "student": "rao642@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2019",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "dtan808@hawaii.edu"
+          "student": "dtan808@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2020",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "cpjaro@hawaii.edu"
+          "student": "cpjaro@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2020",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "brianmay@hawaii.edu"
+          "student": "brianmay@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2020",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "jrude@hawaii.edu"
+          "student": "jrude@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2020",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "joshuajw@hawaii.edu"
+          "student": "joshuajw@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2019",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "nathancy@hawaii.edu"
+          "student": "nathancy@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2020",
           "opportunity": "booz-allen-ideas-festival",
           "verified": false,
-          "student": "cnguyen7@hawaii.edu"
+          "student": "cnguyen7@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2018",
           "opportunity": "acm-manoa",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2019",
           "opportunity": "acm-manoa",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2017",
           "opportunity": "acm-manoa",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2018",
           "opportunity": "acm-manoa",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2020",
           "opportunity": "generic-project",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2021",
           "opportunity": "generic-project",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2019",
           "opportunity": "wetware-wednesday",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2021",
           "opportunity": "wetware-wednesday",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2020",
           "opportunity": "wetware-wednesday",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2020",
           "opportunity": "hnl-tech4good",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2019",
           "opportunity": "cs-job",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2019",
           "opportunity": "cs-job",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2020",
           "opportunity": "coe-career-day",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2020",
           "opportunity": "generic-internship",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Fall-2018",
           "opportunity": "aloha-rb",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Spring-2019",
           "opportunity": "code-for-hawaii",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         },
         {
           "semester": "Summer-2019",
           "opportunity": "udacity-learn-unity",
           "verified": false,
-          "student": "samplestudent@hawaii.edu"
+          "student": "samplestudent@hawaii.edu",
+          "sponsor": "johnson@hawaii.edu"
         }
       ]
     },
@@ -8863,7 +9735,16 @@
     },
     {
       "name": "UserInteractionCollection",
-      "contents": []
+      "contents": [
+        {
+          "username": "radgrad@hawaii.edu",
+          "type": "login",
+          "typeData": [
+            "login"
+          ],
+          "timestamp": "2018-11-19T23:13:58.414Z"
+        }
+      ]
     },
     {
       "name": "VerificationRequestCollection",

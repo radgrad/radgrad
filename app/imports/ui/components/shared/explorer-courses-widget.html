@@ -99,11 +99,27 @@
                           {{{getTableTitle @index table}}}
                           {{#if length table}}
                             {{#each prerequisite in table}}
-                              <a class="{{isActiveRoute coursesRouteName}} item"
-                                 href="{{pathFor coursesRouteName username=routeUserName
-                                                 course = prerequisite.course}}">{{courseNameFromSlug
-                                  prerequisite.course}}</a>
-                              <br>
+                              {{#if isSingleChoice prerequisite}}
+                                <a class="{{isActiveRoute coursesRouteName}} item"
+                                   href="{{pathFor coursesRouteName username=routeUserName
+                                                   course = prerequisite.course}}">{{courseNameFromSlug
+                                    prerequisite.course}}</a>
+                                <br>
+                              {{else}}
+                                {{#each choice in (choices prerequisite)}}
+                                  {{#if isFirst @index}}
+                                    <a class="{{isActiveRoute coursesRouteName}} item"
+                                       href="{{pathFor coursesRouteName username=routeUserName
+                                                       course = choice}}">{{courseNameFromSlug
+                                        choice}}</a>
+                                  {{else}}
+                                    or <a class="{{isActiveRoute coursesRouteName}} item"
+                                       href="{{pathFor coursesRouteName username=routeUserName
+                                                       course = choice}}">{{courseNameFromSlug
+                                        choice}}</a>
+                                  {{/if}}
+                                {{/each}}
+                              {{/if}}
                             {{/each}}
                           {{else}}
                             <a class="item" style="color: grey">

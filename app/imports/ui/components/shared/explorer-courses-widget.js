@@ -9,8 +9,13 @@ import { Semesters } from '../../../api/semester/SemesterCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getUserIdFromRoute } from './get-user-id-from-route';
 import { isInRole, isLabel } from '../../utilities/template-helpers';
+import { isSingleChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
 
 Template.Explorer_Courses_Widget.helpers({
+  choices(prerequisite) {
+    // console.log(prerequisite);
+    return prerequisite.course.split(',');
+  },
   color(table) {
     if (table.length === 0) {
       return 'whitesmoke';
@@ -71,6 +76,13 @@ Template.Explorer_Courses_Widget.helpers({
   isLabel,
   length(table) {
     return table.length !== 0;
+  },
+  isSingleChoice(prerequisite) {
+    // console.log(prerequisite);
+    return isSingleChoice(prerequisite.course);
+  },
+  isFirst(index) {
+    return index === 0;
   },
   passedCourse(course) {
     let ret = false;

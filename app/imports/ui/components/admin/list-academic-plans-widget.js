@@ -4,6 +4,7 @@ import { Users } from '../../../api/user/UserCollection';
 import { Slugs } from '../../../api/slug/SlugCollection';
 import * as FormUtils from '../form-fields/form-field-utilities';
 import { removeItMethod } from '../../../api/base/BaseCollection.methods';
+import { Semesters } from '../../../api/semester/SemesterCollection';
 
 function numReferences(academicPlan) {
   let references = 0;
@@ -35,6 +36,7 @@ Template.List_Academic_Plans_Widget.helpers({
     return [
       { label: 'Name', value: `${academicPlan.name}` },
       { label: 'Description', value: academicPlan.description },
+      { label: 'Semester', value: Semesters.toString(academicPlan.effectiveSemesterID) },
       { label: 'References', value: `Students: ${numReferences(academicPlan)}` },
       { label: 'Retired', value: academicPlan.retired ? 'True' : 'False' }];
   },

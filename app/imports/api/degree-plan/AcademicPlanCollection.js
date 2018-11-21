@@ -26,7 +26,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
       effectiveSemesterID: SimpleSchema.RegEx.Id,
       semesterNumber: Number,
       year: Number,
-      coursesPerSemester: { type: Array, minCount: 12, maxCount: 12 }, 'coursesPerSemester.$': Number,
+      coursesPerSemester: { type: Array, minCount: 12, maxCount: 15 }, 'coursesPerSemester.$': Number,
       courseList: [String],
       retired: { type: Boolean, optional: true },
     }));
@@ -55,6 +55,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param semester the slug for the semester.
    * @param coursesPerSemester an array of the number of courses to take in each semester.
    * @param courseList an array of PlanChoices. The choices for each course.
+   * @param retired optional, defaults to false, allows for retiring an academic plan.
    * @returns {*}
    */
   define({ slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired = false }) {
@@ -86,6 +87,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @param semester the first semester this plan is effective.
    * @param coursesPerSemester an array of the number of courses per semester.
    * @param courseList an array of PlanChoices, the choices for each course.
+   * @param retired a boolean true if the academic plan is retired.
    */
   update(instance, { degreeSlug, name, semester, coursesPerSemester, courseList, retired }) {
     const docID = this.getID(instance);
@@ -97,7 +99,10 @@ class AcademicPlanCollection extends BaseSlugCollection {
       updateData.name = name;
     }
     if (semester) {
-      updateData.effectiveSemesterID = Semesters.getID(semester);
+      const sem = Semesters.findDoc(Semesters.getID(semester));
+      updateData.effectiveSemesterID = sem._id;
+      updateData.year = sem.year;
+      updateData.semesterNumber = sem.semesterNumber;
     }
     if (coursesPerSemester) {
       if (!Array.isArray(coursesPerSemester)) {
@@ -199,7 +204,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @return {number}
    */
   getLatestSemesterNumber() {
-    const plans = this._collection.find().fetch();
+    const plans = _.filter(this._collection.find().fetch(), (p) => !p.retired);
     let max = 0;
     _.forEach(plans, (p) => {
       if (max < p.semesterNumber) {
@@ -236,7 +241,8 @@ class AcademicPlanCollection extends BaseSlugCollection {
     const semester = Slugs.findDoc(semesterDoc.slugID).name;
     const coursesPerSemester = doc.coursesPerSemester;
     const courseList = doc.courseList;
-    return { slug, degreeSlug, name, description, semester, coursesPerSemester, courseList };
+    const retired = doc.retired;
+    return { slug, degreeSlug, name, description, semester, coursesPerSemester, courseList, retired };
   }
 
 }

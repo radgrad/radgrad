@@ -15,7 +15,7 @@ import { removeAllEntities } from '../base/BaseUtilities';
  * @param collection The collection of interest.
  * @memberOf api/test
  */
-function getDefinitions(loadJSON, collection) {
+export function getDefinitions(loadJSON, collection) {
   const definitionObj = _.find(loadJSON.collections, obj => obj.name === collection);
   return definitionObj ? definitionObj.contents : [];
 }

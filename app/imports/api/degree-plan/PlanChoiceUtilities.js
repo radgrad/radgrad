@@ -100,6 +100,7 @@ export function buildCourseSlugName(slug) {
  * @memberOf api/degree-plan
  */
 export function buildSimpleName(slug) {
+  // console.log(`buildSimpleName(${slug})`);
   const splits = slug.split(',');
   let ret = '';
   _.forEach(splits, (s) => {

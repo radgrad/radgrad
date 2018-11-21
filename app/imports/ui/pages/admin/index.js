@@ -74,6 +74,7 @@ import './admin-datamodel-opportunity-types-page.html';
 import './admin-datamodel-opportunity-types-page';
 
 import './admin-datamodel-page.html';
+import './admin-datamodel-page';
 
 import './admin-datamodel-plan-choice-page.html';
 import './admin-datamodel-plan-choice-page';

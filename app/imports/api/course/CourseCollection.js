@@ -6,6 +6,7 @@ import { Interests } from '../interest/InterestCollection';
 import { CourseInstances } from '../course/CourseInstanceCollection';
 import { Feeds } from '../feed/FeedCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
+import { isSingleChoice } from '../degree-plan/PlanChoiceUtilities';
 
 
 /**
@@ -65,6 +66,12 @@ class CourseCollection extends BaseSlugCollection {
       name, shortName = name, slug, number, description, creditHrs = 3,
       interests = [], syllabus, prerequisites = [], retired = false,
   }) {
+    try {
+      // Check to see if is defined already.
+      return Slugs.getEntityID(slug, this.getType());
+    } catch (e) {
+      // try to create the Course
+    }
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
@@ -204,8 +211,17 @@ class CourseCollection extends BaseSlugCollection {
         }
       });
       _.forEach(doc.prerequisites, prereq => {
-        if (!this.hasSlug(prereq)) {
-          problems.push(`Bad course prerequisite slug: ${prereq}`);
+        if (isSingleChoice(prereq)) {
+          if (!this.hasSlug(prereq)) {
+            problems.push(`Bad course prerequisite slug: ${prereq}`);
+          }
+        } else {
+          const slugs = prereq.split(',');
+          _.forEach(slugs, (slug) => {
+            if (!this.hasSlug(slug)) {
+              problems.push(`Bad course prerequisite slug: ${slug}`);
+            }
+          });
         }
       });
     });
