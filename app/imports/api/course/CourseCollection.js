@@ -66,6 +66,12 @@ class CourseCollection extends BaseSlugCollection {
       name, shortName = name, slug, number, description, creditHrs = 3,
       interests = [], syllabus, prerequisites = [], retired = false,
   }) {
+    try {
+      // Check to see if is defined already.
+      return Slugs.getEntityID(slug, this.getType());
+    } catch (e) {
+      // try to create the Course
+    }
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.getIDs(interests);
     // Get SlugID, throw error if found.
