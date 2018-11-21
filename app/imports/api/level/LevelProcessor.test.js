@@ -9,8 +9,6 @@ import { defineTestFixtures } from '../test/test-utilities';
 /* eslint prefer-arrow-callback: 'off', no-unused-expressions: 'off' */
 /* eslint-env mocha */
 
-// TODO: Waiting for test data based upon the Personae.
-
 if (Meteor.isServer) {
   describe('LevelProcessor Tests', function testSuite() {
     before(function setup() {
