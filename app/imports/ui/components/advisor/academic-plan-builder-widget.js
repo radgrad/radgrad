@@ -30,7 +30,7 @@ Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCre
 
 Template.Academic_Plan_Builder_Widget.helpers({
   academicYears() {
-    const semesters = Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch();
+    const semesters = _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
     const years = _.uniqBy(semesters, (s) => s.year);
     return _.map(years, (y) => y.year);
   },

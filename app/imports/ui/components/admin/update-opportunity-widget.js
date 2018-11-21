@@ -44,7 +44,7 @@ Template.Update_Opportunity_Widget.helpers({
     return group === 'admin';
   },
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   sponsors() {
     const usernames = Roles.getUsersInRole([ROLE.FACULTY, ROLE.ADVISOR]).map(user => user.username);

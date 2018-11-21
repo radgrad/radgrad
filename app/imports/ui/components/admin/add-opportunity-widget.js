@@ -49,7 +49,7 @@ Template.Add_Opportunity_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   sponsor() {
     const group = FlowRouter.current().route.group.name;

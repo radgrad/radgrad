@@ -41,6 +41,7 @@ Template.List_Semesters_Widget.helpers({
       { label: 'Semester', value: Semesters.toString(semester._id, false) },
       { label: 'Semester Number', value: `${semester.semesterNumber}` },
       { label: 'References', value: `${numReferences(semester)}` },
+      { label: 'Retired', value: semester.retired ? 'True' : 'False' },
     ];
   },
 });

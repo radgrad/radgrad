@@ -49,7 +49,7 @@ Template.Update_Academic_Plan_Widget.helpers({
       .get());
   },
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   selectedSemesterID() {
     const plan = AcademicPlans.findDoc(Template.currentData().updateID.get());

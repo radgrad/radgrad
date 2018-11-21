@@ -17,7 +17,7 @@ Template.Add_User_Widget_Student.onCreated(function addUserWidgetStudentOnCreate
 
 Template.Add_User_Widget_Student.helpers({
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: -1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: -1 } }).fetch(), s => !s.retired);
   },
   plans() {
     const currentSemester = Semesters.getCurrentSemesterDoc();

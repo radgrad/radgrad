@@ -35,7 +35,7 @@ Template.Add_Feed_Widget.helpers({
     return sorted;
   },
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   feedTypes() {
     return [

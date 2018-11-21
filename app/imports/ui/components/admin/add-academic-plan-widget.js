@@ -31,7 +31,7 @@ Template.Add_Academic_Plan_Widget.helpers({
     return '';
   },
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   selectedSemesterID() {
     return '';

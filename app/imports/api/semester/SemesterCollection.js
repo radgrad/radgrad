@@ -3,6 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import { moment } from 'meteor/momentjs:moment';
 import { Slugs } from '../slug/SlugCollection';
 import BaseSlugCollection from '../base/BaseSlugCollection';
+import { Interests } from '../interest/InterestCollection';
 
 /**
  * Represents a specific semester, such as "Spring, 2016", "Fall, 2017", or "Summer, 2015".
@@ -20,15 +21,19 @@ class SemesterCollection extends BaseSlugCollection {
       year: { type: Number },
       semesterNumber: { type: Number },
       slugID: { type: SimpleSchema.RegEx.Id },
+      retired: { type: Boolean, optional: true },
     }));
     this.SPRING = 'Spring';
     this.SUMMER = 'Summer';
     this.FALL = 'Fall';
     this.WINTER = 'Winter';
     this.terms = [this.SPRING, this.SUMMER, this.FALL];
-    this.fallStart = parseInt(moment('08-15-2015', 'MM-DD-YYYY').format('DDD'), 10);
-    this.springStart = parseInt(moment('01-01-2015', 'MM-DD-YYYY').format('DDD'), 10);
-    this.summerStart = parseInt(moment('05-15-2015', 'MM-DD-YYYY').format('DDD'), 10);
+    this.fallStart = parseInt(moment('08-15-2015', 'MM-DD-YYYY')
+      .format('DDD'), 10);
+    this.springStart = parseInt(moment('01-01-2015', 'MM-DD-YYYY')
+      .format('DDD'), 10);
+    this.summerStart = parseInt(moment('05-15-2015', 'MM-DD-YYYY')
+      .format('DDD'), 10);
   }
 
   /**
@@ -77,12 +82,11 @@ class SemesterCollection extends BaseSlugCollection {
     const yearDiff = year - 2010;
     if (term === this.SPRING) {
       semesterNumber = (3 * yearDiff) - 2;
-    } else
-      if (term === this.SUMMER) {
-        semesterNumber = (3 * yearDiff) - 1;
-      } else {
-        semesterNumber = 3 * yearDiff;
-      }
+    } else if (term === this.SUMMER) {
+      semesterNumber = (3 * yearDiff) - 1;
+    } else {
+      semesterNumber = 3 * yearDiff;
+    }
 
     // Determine what the slug looks like.
     const slug = `${term}-${year}`;
@@ -94,6 +98,22 @@ class SemesterCollection extends BaseSlugCollection {
     const semesterID = this._collection.insert({ term, year, semesterNumber, slugID });
     Slugs.updateEntityID(slugID, semesterID);
     return semesterID;
+  }
+
+  /**
+   * Update a Semester's retired flag.
+   * @param docID The docID (or slug) associated with this course.
+   * @param retired boolean (optional)
+   */
+  update(instance, { retired }) {
+    const docID = this.getID(instance);
+    const updateData = {};
+    if (retired) {
+      updateData.retired = retired;
+    } else {
+      updateData.retired = false;
+    }
+    this._collection.update(docID, { $set: updateData });
   }
 
   /**
@@ -112,17 +132,18 @@ class SemesterCollection extends BaseSlugCollection {
    * See Semesters.FALL_START_DATE, SPRING_START_DATE, and SUMMER_START_DATE.
    */
   getCurrentSemesterID() {
-    const year = moment().year();
-    const day = moment().dayOfYear();
+    const year = moment()
+      .year();
+    const day = moment()
+      .dayOfYear();
     let term = '';
     if (day >= this.fallStart) {
       term = this.FALL;
-    } else
-      if (day >= this.summerStart) {
-        term = this.SUMMER;
-      } else {
-        term = this.SPRING;
-      }
+    } else if (day >= this.summerStart) {
+      term = this.SUMMER;
+    } else {
+      term = this.SPRING;
+    }
     return this.define({ term, year });
   }
 
@@ -157,12 +178,11 @@ class SemesterCollection extends BaseSlugCollection {
     let term = '';
     if (day >= this.fallStart) {
       term = this.FALL;
-    } else
-      if (day >= this.summerStart) {
-        term = this.SUMMER;
-      } else {
-        term = this.SPRING;
-      }
+    } else if (day >= this.summerStart) {
+      term = this.SUMMER;
+    } else {
+      term = this.SPRING;
+    }
     return this.define({ term, year });
   }
 
@@ -237,11 +257,12 @@ class SemesterCollection extends BaseSlugCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`Bad slugID: ${doc.slugID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Slugs.isDefined(doc.slugID)) {
+          problems.push(`Bad slugID: ${doc.slugID}`);
+        }
+      });
     return problems;
   }
 }

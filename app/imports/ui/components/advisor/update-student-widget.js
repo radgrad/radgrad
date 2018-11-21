@@ -70,7 +70,7 @@ Template.Update_Student_Widget.helpers({
     return CareerGoals.find({}, { sort: { name: 1 } });
   },
   declaredSemesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
@@ -151,7 +151,7 @@ Template.Update_Student_Widget.helpers({
     return '';
   },
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch();
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   slug() {
     if (Template.currentData().studentID.get()) {

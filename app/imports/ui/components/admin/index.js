@@ -236,6 +236,9 @@ import './update-plan-choice-widget';
 import './update-review-widget.html';
 import './update-review-widget.js';
 
+import './update-semester-widget.html';
+import './update-semester-widget';
+
 import './update-teaser-widget.html';
 import './update-teaser-widget.js';
 

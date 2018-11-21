@@ -114,7 +114,7 @@ Template.Update_User_Widget.helpers({
     return profile.declaredSemesterID;
   },
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   slug() {
     const profile = Users.getProfile(Template.currentData().updateID.get());

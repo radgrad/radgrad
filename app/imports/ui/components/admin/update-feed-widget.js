@@ -27,7 +27,7 @@ Template.Update_Feed_Widget.onCreated(function onCreated() {
 
 Template.Update_Feed_Widget.helpers({
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   feedTypes() {
     return [

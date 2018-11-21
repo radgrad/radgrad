@@ -30,7 +30,7 @@ Template.Update_Course_Instance_Widget.onCreated(function onCreated() {
 
 Template.Update_Course_Instance_Widget.helpers({
   semesters() {
-    return Semesters.find({}, { sort: { semesterNumber: 1 } });
+    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
   },
   students() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
