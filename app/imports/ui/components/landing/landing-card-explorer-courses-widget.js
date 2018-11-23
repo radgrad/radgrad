@@ -3,9 +3,9 @@ import { Courses } from '../../../api/course/CourseCollection';
 
 Template.Landing_Card_Explorer_Courses_Widget.helpers({
   courses() {
-    Courses.findNonRetired({}, { sort: { shortName: 1 } });
+    return Courses.findNonRetired({}, { sort: { number: 1 } });
   },
   itemCount() {
-    return Courses.findNonRetired({}, { sort: { shortName: 1 } }).length;
+    return Courses.findNonRetired({}, { sort: { number: 1 } }).length;
   },
 });

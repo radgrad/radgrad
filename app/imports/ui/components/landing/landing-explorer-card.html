@@ -1,7 +1,11 @@
 <template name="Landing_Explorer_Card">
   <div class="ui card radgrad-interest-card">
     <div class="content">
-      <div class="header">{{itemName item}}</div>
+      {{#if typeCourses}}
+        <div class="header">{{itemName item}} ({{item.number}})</div>
+      {{else}}
+        <div class="header">{{itemName item}}</div>
+      {{/if}}
       <div class="meta">
       </div>
     </div>

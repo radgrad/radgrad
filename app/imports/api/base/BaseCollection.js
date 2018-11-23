@@ -42,7 +42,7 @@ class BaseCollection {
    * @returns { Number } The number of non-retired elements in this collection.
    */
   countNonRetired() {
-    return _.filter(this._collection.find().fetch(), doc => !doc.retired);
+    return _.filter(this._collection.find().fetch(), doc => !doc.retired).length;
   }
 
   /**
