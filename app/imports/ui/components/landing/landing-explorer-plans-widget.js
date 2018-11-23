@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 
 Template.Landing_Explorer_Plans_Widget.onCreated(function studentExplorerPlansWidgetOnCreated() {
@@ -12,7 +11,7 @@ Template.Landing_Explorer_Plans_Widget.helpers({
     return string.toUpperCase();
   },
   plans() {
-    return _.filter(AcademicPlans.find({ }, { sort: { name: 1 } }).fetch(), (ap) => !ap.retired);
+    return AcademicPlans.findNonRetired({ }, { sort: { name: 1 } });
   },
   planVar() {
     return Template.instance().planVar;

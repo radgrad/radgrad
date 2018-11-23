@@ -14,7 +14,7 @@ Template.Card_Explorer_Courses_Widget.onCreated(function cardExplorerCoursesWidg
 });
 
 const availableCourses = () => {
-  const courses = _.filter(Courses.find({}).fetch(), (c) => !c.retired);
+  const courses = Courses.findNonRetired({});
   if (courses.length > 0) {
     const filtered = _.filter(courses, function filter(course) {
       if (course.number === 'ICS 499') {

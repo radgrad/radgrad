@@ -16,9 +16,7 @@ Template.Card_Explorer_Opportunities_Widget.onCreated(function studentCardExplor
 });
 
 const availableOpps = () => {
-  const opps = Opportunities.find({})
-    .fetch();
-  const notRetired = _.filter(opps, (o) => !o.retired);
+  const notRetired = Opportunities.findNonRetired({});
   const currentSemester = Semesters.getCurrentSemesterDoc();
   const group = FlowRouter.current().route.group.name;
   if (group === 'student') {
@@ -46,7 +44,7 @@ const availableOpps = () => {
   } else if (group === 'faculty') {
     return _.filter(notRetired, o => o.sponsorID !== getUserIdFromRoute());
   }
-  return opps;
+  return notRetired;
 };
 
 // TODO Can we move this code into some sort of helperFunction file? I've seen this a lot.

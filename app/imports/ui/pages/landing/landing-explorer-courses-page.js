@@ -13,7 +13,7 @@ function prerequisites(course) {
 
 Template.Landing_Explorer_Courses_Page.helpers({
   addedCourses() {
-    return _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
+    return Courses.findNonRetired({}, { sort: { shortName: 1 } });
   },
   completed() {
     return false;

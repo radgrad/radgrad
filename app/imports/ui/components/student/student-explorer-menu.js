@@ -182,7 +182,7 @@ Template.Student_Explorer_Menu.helpers({
   },
   firstCourse() {
     let ret;
-    const courses = _.filter(Courses.find({}, { sort: { shortName: 1 } }).fetch(), (c) => !c.retired);
+    const courses = Courses.findNonRetired({}, { sort: { shortName: 1 } });
     if (courses.length > 0) {
       ret = Slugs.findDoc(courses[0].slugID).name;
     }
@@ -190,7 +190,7 @@ Template.Student_Explorer_Menu.helpers({
   },
   firstDegree() {
     let ret;
-    const degrees = _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired);
+    const degrees = DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
     if (degrees.length > 0) {
       ret = Slugs.findDoc(degrees[0].slugID).name;
     }
@@ -206,8 +206,7 @@ Template.Student_Explorer_Menu.helpers({
   },
   firstOpportunity() {
     let ret;
-    const opportunities = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    const notRetired = _.filter(opportunities, (o) => !o.retired);
+    const notRetired = Opportunities.findNonRetired({}, { sort: { name: 1 } });
     if (notRetired.length > 0) {
       ret = Slugs.findDoc(notRetired[0].slugID).name;
     }

@@ -15,7 +15,7 @@ import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-rou
 import { getRouteUserName } from '../../components/shared/route-user-name.js';
 
 function coursesHelper(interest) {
-  const allCourses = _.filter(Courses.find().fetch(), (c) => !c.retired);
+  const allCourses = Courses.findNonRetired();
   const matching = [];
   _.forEach(allCourses, (course) => {
     if (_.includes(course.interestIDs, interest._id)) {
@@ -28,7 +28,7 @@ function coursesHelper(interest) {
 function passedCourseHelper(courseSlugName) {
   let ret = 'Not in plan';
   const slug = Slugs.find({ name: courseSlugName }).fetch();
-  const course = _.filter(Courses.find({ slugID: slug[0]._id }).fetch(), (c) => !c.retired);
+  const course = Courses.findNonRetired({ slugID: slug[0]._id });
   const ci = CourseInstances.find({
     studentID: getUserIdFromRoute(),
     courseID: course[0]._id,
@@ -88,8 +88,7 @@ function verifiedOpportunityHelper(opportunitySlugName) {
 }
 
 function opportunitiesHelper(interest) {
-  const opps = Opportunities.find().fetch();
-  const allOpportunities = _.filter(opps, (o) => !o.retired);
+  const allOpportunities = Opportunities.findNonRetired();
   const matching = [];
   _.forEach(allOpportunities, (opportunity) => {
     if (_.includes(opportunity.interestIDs, interest._id)) {

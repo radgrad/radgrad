@@ -25,7 +25,7 @@ Template.Add_Opportunity_Instance_Widget.onCreated(function onCreated() {
 
 Template.Add_Opportunity_Instance_Widget.helpers({
   semesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
@@ -33,8 +33,7 @@ Template.Add_Opportunity_Instance_Widget.helpers({
     return sorted;
   },
   opportunities() {
-    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    return _.filter(opps, (o) => !o.retired);
+    return Opportunities.findNonRetired({}, { sort: { name: 1 } });
   },
 });
 

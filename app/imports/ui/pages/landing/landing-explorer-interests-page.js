@@ -11,7 +11,7 @@ import { Users } from '../../../api/user/UserCollection.js';
 import { ROLE } from '../../../api/role/Role.js';
 
 function courses(interest) {
-  const allCourses = _.filter(Courses.find().fetch(), (c) => !c.retired);
+  const allCourses = Courses.findNonRetired();
   const matching = [];
   _.forEach(allCourses, (course) => {
     if (_.includes(course.interestIDs, interest._id)) {
@@ -22,8 +22,7 @@ function courses(interest) {
 }
 
 function opportunities(interest) {
-  const opps = Opportunities.find().fetch();
-  const allOpportunities = _.filter(opps, (o) => !o.retired);
+  const allOpportunities = Opportunities.findNonRetired();
   const matching = [];
   _.forEach(allOpportunities, (opportunity) => {
     if (_.includes(opportunity.interestIDs, interest._id)) {

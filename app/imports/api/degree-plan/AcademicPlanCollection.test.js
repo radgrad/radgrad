@@ -102,6 +102,9 @@ if (Meteor.isServer) {
       expect(AcademicPlans.isDefined(docID)).to.be.true;
       expect(AcademicPlans.findIdBySlug(slug)).to.be.a('string');
       const dumpObject = AcademicPlans.dumpOne(docID);
+      expect(AcademicPlans.findNonRetired().length).to.equal(1);
+      AcademicPlans.update(docID, { retired: true });
+      expect(AcademicPlans.findNonRetired().length).to.equal(0);
       AcademicPlans.removeIt(docID);
       expect(AcademicPlans.isDefined(docID)).to.be.false;
       const planID = AcademicPlans.restoreOne(dumpObject);

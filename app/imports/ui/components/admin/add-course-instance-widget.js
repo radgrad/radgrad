@@ -27,7 +27,7 @@ Template.Add_Course_Instance_Widget.onCreated(function onCreated() {
 
 Template.Add_Course_Instance_Widget.helpers({
   semesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();
@@ -35,8 +35,7 @@ Template.Add_Course_Instance_Widget.helpers({
     return sorted;
   },
   courses() {
-    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
-    return _.filter(courses, (c) => !c.retired);
+    return Courses.findNonRetired({}, { sort: { number: 1 } });
   },
 });
 

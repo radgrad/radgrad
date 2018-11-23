@@ -36,6 +36,9 @@ if (Meteor.isServer) {
       });
       expect(Opportunities.isDefined(docID)).to.be.true;
       const dumpObject = Opportunities.dumpOne(docID);
+      expect(Opportunities.findNonRetired().length).to.equal(1);
+      Opportunities.update(docID, { retired: true });
+      expect(Opportunities.findNonRetired().length).to.equal(0);
       Opportunities.removeIt(docID);
       expect(Opportunities.isDefined(slug)).to.be.false;
       docID = Opportunities.restoreOne(dumpObject);

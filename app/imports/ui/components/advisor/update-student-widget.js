@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { advisorLogsDefineMethod } from '../../../api/log/AdvisorLogCollection.methods';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { AcademicYearInstances } from '../../../api/degree-plan/AcademicYearInstanceCollection';
@@ -70,7 +69,7 @@ Template.Update_Student_Widget.helpers({
     return CareerGoals.find({}, { sort: { name: 1 } });
   },
   declaredSemesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   interests() {
     return Interests.find({}, { sort: { name: 1 } });
@@ -86,9 +85,9 @@ Template.Update_Student_Widget.helpers({
         const year = declaredSemester.term === Semesters.FALL ? declaredSemester.year : declaredSemester.year - 1;
         const lastFallID = Semesters.define({ term: Semesters.FALL, year });
         const semesterNum = Semesters.findDoc(lastFallID).semesterNumber;
-        return _.filter(AcademicPlans.find({ semesterNumber: { $gte: semesterNum } }).fetch(), (ap) => !ap.retired);
+        return AcademicPlans.findNonRetired({ semesterNumber: { $gte: semesterNum } });
       }
-      return _.filter(AcademicPlans.find().fetch(), (ap) => !ap.retired);
+      return AcademicPlans.findNonRetired();
     }
     return [];
   },
@@ -151,7 +150,7 @@ Template.Update_Student_Widget.helpers({
     return '';
   },
   semesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   slug() {
     if (Template.currentData().studentID.get()) {

@@ -26,7 +26,7 @@ Template.Update_Opportunity_Instance_Widget.onCreated(function onCreated() {
 
 Template.Update_Opportunity_Instance_Widget.helpers({
   semesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();

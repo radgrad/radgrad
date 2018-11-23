@@ -107,7 +107,7 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   coursesTotal() {
-    const count = _.filter(Courses.find().fetch(), (c) => !c.retired).length;
+    const count = Courses.findNonRetired().length;
     this._collection.upsert({ key: this.coursesTotalKey }, { $set: { value: `${count}` } });
   }
 
@@ -118,12 +118,12 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   desiredDegreesTotal() {
-    const count = _.filter(DesiredDegrees.find().fetch(), (d) => !d.retired).length;
+    const count = DesiredDegrees.findNonRetired().length;
     this._collection.upsert({ key: this.desiredDegreesTotalKey }, { $set: { value: `${count}` } });
   }
 
   desiredDegreesList() {
-    const degrees = _.filter(DesiredDegrees.find().fetch(), (d) => !d.retired);
+    const degrees = DesiredDegrees.findNonRetired();
     const names = _.map(degrees, 'name');
     this._collection.upsert({ key: this.desiredDegreesListKey }, { $set: { value: names.join(', ') } });
   }
@@ -140,24 +140,21 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   opportunitiesTotal() {
-    const opps = Opportunities.find().fetch();
-    const notRetired = _.filter(opps, (o) => !o.retired);
+    const notRetired = Opportunities.findNonRetired();
     const numOpps = notRetired.length;
     this._collection.upsert({ key: this.opportunitiesTotalKey }, { $set: { value: `${numOpps}` } });
   }
 
   opportunitiesProjectsTotal() {
     const projectType = OpportunityTypes.findDoc({ name: 'Project' });
-    const opps = Opportunities.find({ opportunityTypeID: projectType._id }).fetch();
-    const notRetired = _.filter(opps, (o) => !o.retired);
-    const numProjects = notRetired.length;
+    const opps = Opportunities.findNonRetired({ opportunityTypeID: projectType._id });
+    const numProjects = opps.length;
     this._collection.upsert({ key: this.opportunitiesProjectsTotalKey }, { $set: { value: `${numProjects}` } });
   }
 
   opportunitiesProjectsList() {
     const projectType = OpportunityTypes.findDoc({ name: 'Project' });
-    const opps = Opportunities.find({ opportunityTypeID: projectType._id }).fetch();
-    const notRetired = _.filter(opps, (o) => !o.retired);
+    const notRetired = Opportunities.findNonRetired({ opportunityTypeID: projectType._id });
     const names = _.map(notRetired, 'name');
     this._collection.upsert({ key: this.opportunitiesProjectsListKey }, { $set: { value: names.join(', ') } });
   }
@@ -270,10 +267,9 @@ class PublicStatsCollection extends BaseCollection {
   }
 
   firstOpportunity() {
-    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    const notRetired = _.filter(opps, (o) => !o.retired);
-    if (notRetired.length > 0) {
-      const name = Slugs.findDoc(notRetired[0].slugID).name;
+    const opps = Opportunities.findNonRetired({}, { sort: { name: 1 } });
+    if (opps.length > 0) {
+      const name = Slugs.findDoc(opps[0].slugID).name;
       this._collection.upsert({ key: this.firstOpportunityKey }, { $set: { value: name } });
     }
   }

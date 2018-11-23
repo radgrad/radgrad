@@ -30,7 +30,7 @@ Template.Academic_Plan_Builder_Widget.onCreated(function academicPlanWidgetOnCre
 
 Template.Academic_Plan_Builder_Widget.helpers({
   academicYears() {
-    const semesters = _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
+    const semesters = Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
     const years = _.uniqBy(semesters, (s) => s.year);
     return _.map(years, (y) => y.year);
   },
@@ -51,8 +51,7 @@ Template.Academic_Plan_Builder_Widget.helpers({
     return _.map(choices, (c) => c.choice);
   },
   desiredDegrees() {
-    const degrees = DesiredDegrees.find({}, { sort: { name: 1 } }).fetch();
-    return _.filter(degrees, (d) => !d.retired);
+    return DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
   },
   displayFieldError(fieldName) {
     const errorKeys = Template.instance().context.validationErrors();

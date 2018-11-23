@@ -36,7 +36,7 @@ Template.Academic_Plan_Form_Fields.helpers({
       if (profile.academicPlanID) {
         const plan = AcademicPlans.findDoc(profile.academicPlanID);
         const semester = Semesters.findDoc(plan.effectiveSemesterID);
-        let plans = _.filter(AcademicPlans.find().fetch(), (ap) => !ap.retired);
+        let plans = AcademicPlans.findNonRetired();
         plans = _.filter(plans, (p) => {
           const year = Semesters.findDoc(p.effectiveSemesterID).year;
           return semester.year === year;
@@ -46,7 +46,7 @@ Template.Academic_Plan_Form_Fields.helpers({
         }]);
       }
       const chosen = parseInt(Template.instance().chosenYear.get(), 10);
-      let plans = _.filter(AcademicPlans.find().fetch(), (ap) => !ap.retired);
+      let plans = AcademicPlans.findNonRetired();
       plans = _.filter(plans, (p) => {
         const year = Semesters.findDoc(p.effectiveSemesterID).year;
         return chosen === year;
@@ -64,7 +64,7 @@ Template.Academic_Plan_Form_Fields.helpers({
       if (profile.declaredSemesterID) {
         declaredYear = Semesters.findDoc(profile.declaredSemesterID).year;
       }
-      let plans = _.filter(AcademicPlans.find().fetch(), (ap) => !ap.retired);
+      let plans = AcademicPlans.findNonRetired();
       plans = _.filter(plans, (p) => {
         const year = Semesters.findDoc(p.effectiveSemesterID).year;
         if (declaredYear) {

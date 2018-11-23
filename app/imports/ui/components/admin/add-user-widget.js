@@ -92,7 +92,7 @@ Template.Add_User_Widget.helpers({
     return ROLE.STUDENT;
   },
   semesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: -1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: -1 } });
   },
 });
 

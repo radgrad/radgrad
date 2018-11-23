@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Semesters } from '../../../api/semester/SemesterCollection';
 import * as FormUtils from '../form-fields/form-field-utilities.js';
@@ -24,14 +23,14 @@ Template.Update_User_Widget_Student.helpers({
     return 0;
   },
   semesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: -1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: -1 } });
   },
   plans() {
     const currentSemester = Semesters.getCurrentSemesterDoc();
     const year = currentSemester.term === Semesters.FALL ? currentSemester.year : currentSemester.year - 1;
     const lastFallID = Semesters.define({ term: Semesters.FALL, year });
     const semesterNum = Semesters.findDoc(lastFallID).semesterNumber;
-    return _.filter(AcademicPlans.find({ semesterNumber: { $gte: semesterNum } }).fetch(), (ap) => !ap.retired);
+    return AcademicPlans.findNonRetired({ semesterNumber: { $gte: semesterNum } });
   },
   selectedSemester() {
     return Template.currentData().user.declaredSemesterID;

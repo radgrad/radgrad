@@ -25,6 +25,9 @@ if (Meteor.isServer) {
       const docID = DesiredDegrees.define({ name, shortName, slug, description });
       expect(DesiredDegrees.isDefined(slug)).to.be.true;
       const dumpObject = DesiredDegrees.dumpOne(docID);
+      expect(DesiredDegrees.findNonRetired().length).to.equal(1);
+      DesiredDegrees.update(docID, { retired: true });
+      expect(DesiredDegrees.findNonRetired().length).to.equal(0);
       DesiredDegrees.removeIt(slug);
       expect(DesiredDegrees.isDefined(slug)).to.be.false;
       DesiredDegrees.restoreOne(dumpObject);

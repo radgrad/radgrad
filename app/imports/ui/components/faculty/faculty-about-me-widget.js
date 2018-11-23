@@ -44,7 +44,7 @@ Template.Faculty_About_Me_Widget.helpers({
   },
   firstDegree() {
     let ret;
-    const degrees = _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired);
+    const degrees = DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
     if (degrees.length > 0) {
       ret = Slugs.findDoc(degrees[0].slugID).name;
     }

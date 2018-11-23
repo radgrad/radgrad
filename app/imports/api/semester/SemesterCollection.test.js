@@ -20,6 +20,9 @@ if (Meteor.isServer) {
       let docID = Semesters.define({ term: Semesters.FALL, year: 2010 });
       expect(Semesters.isDefined(docID)).to.be.true;
       const dumpObject = Semesters.dumpOne(docID);
+      expect(Semesters.findNonRetired().length).to.equal(1);
+      Semesters.update(docID, { retired: true });
+      expect(Semesters.findNonRetired().length).to.equal(0);
       Semesters.removeIt(docID);
       expect(Semesters.isDefined(docID)).to.be.false;
       docID = Semesters.restoreOne(dumpObject);

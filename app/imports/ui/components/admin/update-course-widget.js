@@ -36,8 +36,7 @@ Template.Update_Course_Widget.helpers({
     return Interests.find({}, { sort: { name: 1 } });
   },
   courses() {
-    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
-    return _.filter(courses, (c) => !c.retired);
+    return Courses.findNonRetired({}, { sort: { number: 1 } });
   },
   selectedInterestIDs() {
     const course = Courses.findDoc(Template.currentData().updateID.get());
@@ -48,8 +47,7 @@ Template.Update_Course_Widget.helpers({
     return _.map(course.prerequisites, prerequisite => Courses.findIdBySlug(prerequisite));
   },
   prerequisites() {
-    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
-    return _.filter(courses, (c) => !c.retired);
+    return Courses.findNonRetired({}, { sort: { number: 1 } });
   },
   falseValueRetired() {
     const course = Courses.findDoc(Template.currentData()

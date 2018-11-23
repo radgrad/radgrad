@@ -52,8 +52,7 @@ function teaser(opp) {
 Template.Explorer_Opportunities_Page.helpers({
   addedOpportunities() {
     const addedOpportunities = [];
-    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    const allOpportunities = _.filter(opps, (o) => !o.retired);
+    const allOpportunities = Opportunities.findNonRetired({}, { sort: { name: 1 } });
     const userID = getUserIdFromRoute();
     _.forEach(allOpportunities, (opportunity) => {
       const oi = OpportunityInstances.find({
@@ -94,8 +93,7 @@ Template.Explorer_Opportunities_Page.helpers({
     ];
   },
   nonAddedOpportunities() {
-    const opps = Opportunities.find({}, { sort: { name: 1 } }).fetch();
-    const allOpportunities = _.filter(opps, (o) => !o.retired);
+    const allOpportunities = Opportunities.findNonRetired({}, { sort: { name: 1 } });
     const userID = getUserIdFromRoute();
     const nonAddedOpportunities = _.filter(allOpportunities, function (opportunity) {
       const oi = OpportunityInstances.find({

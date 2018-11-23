@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import * as RouteNames from '../../../startup/client/router.js';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { Courses } from '../../../api/course/CourseCollection';
@@ -21,8 +20,7 @@ Template.Landing_Section_2.helpers({
   },
   firstCourse() {
     let ret = 'ics_361';
-    const courses = Courses.find({}, { sort: { shortName: 1 } }).fetch();
-    const notRetired = _.filter(courses, (c) => !c.retired);
+    const notRetired = Courses.findNonRetired({}, { sort: { shortName: 1 } });
     if (notRetired.length > 0) {
       ret = Slugs.findDoc(notRetired[0].slugID).name;
     }
@@ -30,7 +28,7 @@ Template.Landing_Section_2.helpers({
   },
   firstDegree() {
     let ret = 'ba-ics';
-    const degrees = _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired);
+    const degrees = DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
     if (degrees.length > 0) {
       ret = Slugs.findDoc(degrees[0].slugID).name;
     }

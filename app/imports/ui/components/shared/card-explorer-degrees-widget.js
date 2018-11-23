@@ -1,12 +1,11 @@
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { DesiredDegrees } from '../../../api/degree-plan/DesiredDegreeCollection';
 
 Template.Card_Explorer_Degrees_Widget.helpers({
   degrees() {
-    return _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired);
+    return DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
   },
   itemCount() {
-    return _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired).length;
+    return DesiredDegrees.findNonRetired({}, { sort: { name: 1 } }).length;
   },
 });

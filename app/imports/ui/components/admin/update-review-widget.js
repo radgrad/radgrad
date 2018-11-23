@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import SimpleSchema from 'simpl-schema';
-import { _ } from 'meteor/erasaur:meteor-lodash';
 import { Reviews } from '../../../api/review/ReviewCollection.js';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Semesters } from '../../../api/semester/SemesterCollection.js';
@@ -30,7 +29,7 @@ Template.Update_Review_Widget.onCreated(function onCreated() {
 
 Template.Update_Review_Widget.helpers({
   semesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   students() {
     return Users.findProfiles();

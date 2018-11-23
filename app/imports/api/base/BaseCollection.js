@@ -38,6 +38,14 @@ class BaseCollection {
   }
 
   /**
+   * Returns the number of non-retired documents in this collection.
+   * @returns { Number } The number of non-retired elements in this collection.
+   */
+  countNonRetired() {
+    return _.filter(this._collection.find().fetch(), doc => !doc.retired);
+  }
+
+  /**
    * Default publication method for entities.
    * It publishes the entire collection.
    */
@@ -89,6 +97,18 @@ class BaseCollection {
   find(selector, options) {
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
     return this._collection.find(theSelector, options);
+  }
+
+  /**
+   * Runs find on this collection and returns the non-retired documents.
+   * @see {@link http://docs.meteor.com/#/full/find|Meteor Docs on Mongo Find}
+   * @param selector { Object } A MongoDB selector.
+   * @param options { Object } MongoDB options.
+   * @returns { Array } non-retired documents.
+   */
+  findNonRetired(selector, options) {
+    const theSelector = (typeof selector === 'undefined') ? {} : selector;
+    return _.filter(this._collection.find(theSelector, options).fetch(), doc => !doc.retired);
   }
 
   /**

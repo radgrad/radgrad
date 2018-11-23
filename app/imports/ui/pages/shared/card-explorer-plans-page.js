@@ -18,7 +18,7 @@ Template.Card_Explorer_Plans_Page.helpers({
     return plan;
   },
   nonAddedPlans() {
-    const plans = _.filter(AcademicPlans.find({}).fetch(), (ap) => !ap.retired);
+    const plans = AcademicPlans.findNonRetired({}).fetch();
     if (getRouteUserName()) {
       const profile = Users.getProfile(getRouteUserName());
       return _.filter(plans, p => profile.academicPlanID === p._id);

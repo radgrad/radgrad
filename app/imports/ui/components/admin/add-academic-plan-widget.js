@@ -25,13 +25,13 @@ Template.Add_Academic_Plan_Widget.onCreated(function addacademicplanwidgetOnCrea
 
 Template.Add_Academic_Plan_Widget.helpers({
   desiredDegrees() {
-    return _.filter(DesiredDegrees.find({}, { sort: { name: 1 } }).fetch(), (d) => !d.retired);
+    return DesiredDegrees.findNonRetired({}, { sort: { name: 1 } });
   },
   selectedDesiredDegreeID() {
     return '';
   },
   semesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   selectedSemesterID() {
     return '';

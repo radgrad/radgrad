@@ -8,7 +8,7 @@ import { Semesters } from '../../../api/semester/SemesterCollection';
 import { Users } from '../../../api/user/UserCollection';
 
 function availableAcademicPlans() {
-  let plans = _.filter(AcademicPlans.find({}, { sort: { year: 1, name: 1 } }).fetch(), (ap) => !ap.retired);
+  let plans = AcademicPlans.findNonRetired({}, { sort: { year: 1, name: 1 } });
   if (getRouteUserName()) {
     const profile = Users.getProfile(getRouteUserName());
     if (!profile.declaredSemesterID) {

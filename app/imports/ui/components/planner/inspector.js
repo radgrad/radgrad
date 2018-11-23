@@ -22,7 +22,7 @@ import { satisfiesPlanChoice } from '../../../api/degree-plan/PlanChoiceUtilitie
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
 
 function courseStructureForMenu() {
-  let courses = _.filter(Courses.find({}, { sort: { number: 1 } }).fetch(), (c) => !c.retired);
+  let courses = Courses.findNonRetired({}, { sort: { number: 1 } });
   courses = _.filter(courses, (c) => c.number !== 'other');
   const courseStructure = [];
   while (courses.length > 0) {
@@ -126,7 +126,7 @@ Template.Inspector.helpers({
     return `${courses[0].number} - ${courses[courses.length - 1].number}`;
   },
   courses100() {
-    const courses = _.filter(Courses.find({ number: /1\d\d/ }).fetch(), (c) => !c.retired);
+    const courses = Courses.findNonRetired({ number: /1\d\d/ });
     const instances = CourseInstances.find({ note: /1\d\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -143,7 +143,7 @@ Template.Inspector.helpers({
     });
   },
   courses200() {
-    const courses = _.filter(Courses.find({ number: /2\d\d/ }).fetch(), (c) => !c.retired);
+    const courses = Courses.findNonRetired({ number: /2\d\d/ });
     const instances = CourseInstances.find({ note: /2\d\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -160,7 +160,7 @@ Template.Inspector.helpers({
     });
   },
   courses300() {
-    const courses = _.filter(Courses.find({ number: /3[01234]\d/ }).fetch(), (c) => !c.retired);
+    const courses = Courses.findNonRetired({ number: /3[01234]\d/ }).fetch();
     const instances = CourseInstances.find({ note: /3[01234]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -177,7 +177,7 @@ Template.Inspector.helpers({
     });
   },
   courses350() {
-    const courses = _.filter(Courses.find({ number: /3[56789]\d/ }).fetch(), (c) => !c.retired);
+    const courses = Courses.findNonRetired({ number: /3[56789]\d/ });
     const instances = CourseInstances.find({ note: /3[56789]\d/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -194,7 +194,7 @@ Template.Inspector.helpers({
     });
   },
   courses410() {
-    const courses = _.filter(Courses.find({ number: /4[0123]/ }).fetch(), (c) => !c.retired);
+    const courses = Courses.find({ number: /4[0123]/ });
     const instances = CourseInstances.find({ note: /4[0123]/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -211,7 +211,7 @@ Template.Inspector.helpers({
     });
   },
   courses440() {
-    const courses = _.filter(Courses.find({ number: /4[456]/ }).fetch(), (c) => !c.retired);
+    const courses = Courses.find({ number: /4[456]/ });
     const instances = CourseInstances.find({ note: /4[456]/ }).fetch();
     const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
     const ret = _.filter(courses, function filter(c) {
@@ -228,7 +228,7 @@ Template.Inspector.helpers({
     });
   },
   courses470() {
-    const courses = _.filter(Courses.find({ number: /4[789]/ }).fetch(), (c) => !c.retired);
+    const courses = Courses.findNonRetired({ number: /4[789]/ });
     const instances = CourseInstances.find({ note: /4[789]/ }).fetch();
     let courseTakenIDs = _.filter(instances, function filter(ci) {
       return ci.note.indexOf('499') === -1;
@@ -381,9 +381,7 @@ Template.Inspector.helpers({
     return false;
   },
   opportunities() {
-    const opportunities = Opportunities.find().fetch();
-    const notRetired = _.filter(opportunities, (o) => !o.retired);
-    return _.sortBy(notRetired, opportunity => opportunity.name);
+    return Opportunities.findNonRetired({}, { sort: { name: 1 } });
   },
   opportunitiesRouteName() {
     return RouteNames.studentExplorerOpportunitiesPageRouteName;

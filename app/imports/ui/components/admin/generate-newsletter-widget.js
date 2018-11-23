@@ -90,7 +90,7 @@ function iceRecHelper(student, value, component) {
           ' Add some interests so we can provide course recommendations!</a></em>';
       return html;
     }
-    const relevantCourses = _.filter(Courses.find().fetch(), function (course) {
+    const relevantCourses = _.filter(Courses.findNonRetired(), function (course) {
       if (_.some(course.interestIDs, interest => _.includes(studentInterests, interest))) {
         return true;
       }
@@ -114,7 +114,7 @@ function iceRecHelper(student, value, component) {
           ' Add some Interests to your profile so we can provide opportunity recommendations!</a></em>';
       return html;
     }
-    const opps = _.filter(Opportunities.find().fetch(), function (opp) {
+    const opps = _.filter(Opportunities.findNonRetired(), function (opp) {
       return opp.ice[component] > 0;
     });
     const relevantOpps = _.filter(opps, function (opp) {

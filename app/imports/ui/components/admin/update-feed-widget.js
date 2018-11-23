@@ -27,7 +27,7 @@ Template.Update_Feed_Widget.onCreated(function onCreated() {
 
 Template.Update_Feed_Widget.helpers({
   semesters() {
-    return _.filter(Semesters.find({}, { sort: { semesterNumber: 1 } }).fetch(), s => !s.retired);
+    return Semesters.findNonRetired({}, { sort: { semesterNumber: 1 } });
   },
   feedTypes() {
     return [
@@ -51,8 +51,7 @@ Template.Update_Feed_Widget.helpers({
     return Opportunities.find({}, { sort: { name: 1 } });
   },
   courses() {
-    const courses = Courses.find({}, { sort: { number: 1 } }).fetch();
-    return _.filter(courses, (c) => !c.retired);
+    return Courses.findNonRetired({}, { sort: { number: 1 } });
   },
   users() {
     const students = Roles.getUsersInRole([ROLE.STUDENT]).fetch();

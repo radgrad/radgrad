@@ -196,7 +196,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    */
   getLatestPlans() {
     const semesterNumber = this.getLatestSemesterNumber();
-    return _.filter(this._collection.find({ semesterNumber }).fetch(), (ap) => !ap.retired);
+    return this.findNonRetired({ semesterNumber });
   }
 
   /**
@@ -204,7 +204,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
    * @return {number}
    */
   getLatestSemesterNumber() {
-    const plans = _.filter(this._collection.find().fetch(), (p) => !p.retired);
+    const plans = this.findNonRetired();
     let max = 0;
     _.forEach(plans, (p) => {
       if (max < p.semesterNumber) {
