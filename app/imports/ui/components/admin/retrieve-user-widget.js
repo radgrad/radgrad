@@ -9,6 +9,7 @@ Template.Retrieve_User_Widget.onCreated(function retrieveUserOnCreated() {
   this.firstNameRegex = new ReactiveVar();
   this.lastNameRegex = new ReactiveVar();
   this.userNameRegex = new ReactiveVar();
+  this.updateResult = new ReactiveVar();
 });
 
 Template.Retrieve_User_Widget.helpers({
@@ -45,16 +46,20 @@ Template.Retrieve_User_Widget.helpers({
   advisorCount() {
     return Users.findProfilesWithRole(ROLE.ADVISOR, {}, { sort: { lastName: 1 } }).length;
   },
+  updateResult() {
+    return Template.instance().updateResult.get();
+  },
 });
 
 Template.Retrieve_User_Widget.events({
-  'click .ui.button': function clickUpdateLevels(event) {
+  'click .ui.button': function clickUpdateLevels(event, instance) {
     event.preventDefault();
     updateAllStudentLevelsMethod.call((error, result) => {
       if (error) {
         console.log('There was an error updating the student levels', error);
       }
       console.log(result);
+      instance.updateResult.set(result);
     });
   },
 });

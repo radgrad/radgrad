@@ -12,6 +12,8 @@ import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 import { openCloudinaryWidget } from '../form-fields/open-cloudinary-widget';
 import { updateMethod } from '../../../api/base/BaseCollection.methods';
 import { defaultProfilePicture } from '../../../api/user/BaseProfileCollection';
+import { RadGrad } from '../../../api/radgrad/RadGrad';
+import { defaultCalcLevel } from '../../../api/level/LevelProcessor';
 
 /* global alert */
 
@@ -156,7 +158,16 @@ Template.Student_About_Me_Widget.events({
       if (error) {
         console.log('Error during Student profile picture update', error);
       } else {
-        alert('Picture update successful.');
+//        alert('Picture update successful.');
+        let level;
+        if (RadGrad.calcLevel) {
+          level = RadGrad.calcLevel(profile.userID);
+        } else {
+          level = defaultCalcLevel(profile.userID);
+        }
+        updateData.level = level;
+        // console.log(`submit picture ${level}`);
+        updateMethod.call({ collectionName, updateData });
       }
     });
   },
