@@ -1,13 +1,17 @@
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
 
 import { Courses } from '../../../api/course/CourseCollection.js';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getUserIdFromRoute } from '../../components/shared/get-user-id-from-route';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
+import { ROLE } from '../../../api/role/Role';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
 Template.Card_Explorer_Courses_Page.helpers({
   addedCourses() {
-    const addedCourses = [];
+    let addedCourses = [];
     const allCourses = Courses.findNonRetired({}, { sort: { shortName: 1 } });
     const userID = getUserIdFromRoute();
     _.forEach(allCourses, (course) => {
@@ -21,6 +25,14 @@ Template.Card_Explorer_Courses_Page.helpers({
         }
       }
     });
+    if (Roles.userIsInRole(userID, [ROLE.STUDENT])) {
+      const profile = StudentProfiles.findDoc({ userID });
+      const plan = AcademicPlans.findDoc(profile.academicPlanID);
+      if (plan.coursesPerSemester.length < 15) { // not bachelors and masters
+        const regex = /[1234]\d\d/g;
+        addedCourses = _.filter(addedCourses, (c) => c.number.match(regex));
+      }
+    }
     return addedCourses;
   },
   nonAddedCourses() {

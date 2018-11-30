@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Roles } from 'meteor/alanning:roles';
 import { _ } from 'meteor/erasaur:meteor-lodash';
 
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -8,6 +9,9 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import PreferredChoice from '../../../api/degree-plan/PreferredChoice';
+import { ROLE } from '../../../api/role/Role';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 
 Template.Card_Explorer_Courses_Widget.onCreated(function cardExplorerCoursesWidgetOnCreated() {
   this.hidden = new ReactiveVar(true);
@@ -16,16 +20,26 @@ Template.Card_Explorer_Courses_Widget.onCreated(function cardExplorerCoursesWidg
 const availableCourses = () => {
   const courses = Courses.findNonRetired({});
   if (courses.length > 0) {
-    const filtered = _.filter(courses, function filter(course) {
+    const studentID = getUserIdFromRoute();
+    let filtered = _.filter(courses, function filter(course) {
       if (course.number === 'ICS 499') {
         return true;
       }
       const ci = CourseInstances.find({
-        studentID: getUserIdFromRoute(),
+        studentID,
         courseID: course._id,
       }).fetch();
       return ci.length === 0;
     });
+    if (Roles.userIsInRole(studentID, [ROLE.STUDENT])) {
+      const profile = StudentProfiles.findDoc({ userID: studentID });
+      const plan = AcademicPlans.findDoc(profile.academicPlanID);
+      if (plan.coursesPerSemester.length < 15) { // not bachelors and masters
+        const regex = /[1234]\d\d/g;
+        filtered = _.filter(filtered, (c) => c.number.match(regex));
+      }
+    }
+
     return filtered;
   }
   return [];
