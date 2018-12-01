@@ -21,7 +21,6 @@ import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 import { satisfiesPlanChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
-import { Users } from '../../../api/user/UserCollection';
 import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
 import { ROLE } from '../../../api/role/Role';
 import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
