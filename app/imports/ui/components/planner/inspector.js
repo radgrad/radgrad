@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { Roles } from 'meteor/alanning:roles';
 import { moment } from 'meteor/momentjs:moment';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -20,10 +21,34 @@ import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
 import { satisfiesPlanChoice } from '../../../api/degree-plan/PlanChoiceUtilities';
 import { PlanChoices } from '../../../api/degree-plan/PlanChoiceCollection';
+import { Users } from '../../../api/user/UserCollection';
+import { AcademicPlans } from '../../../api/degree-plan/AcademicPlanCollection';
+import { ROLE } from '../../../api/role/Role';
+import { StudentProfiles } from '../../../api/user/StudentProfileCollection';
 
 function courseStructureForMenu() {
   let courses = Courses.findNonRetired({}, { sort: { number: 1 } });
   courses = _.filter(courses, (c) => c.number !== 'other');
+  const userID = getUserIdFromRoute();
+  if (Roles.userIsInRole(userID, [ROLE.STUDENT])) {
+    const profile = StudentProfiles.findDoc({ userID });
+    const plan = AcademicPlans.findDoc(profile.academicPlanID);
+    if (plan.coursesPerSemester.length < 15) { // not bachelors and masters
+      const regex = /[1234]\d\d/g;
+      courses = _.filter(courses, (c) => c.number.match(regex));
+    }
+  }
+  // console.log(courses.length);
+  courses = _.filter(courses, function filter(course) {
+    if (course.number === 'ICS 499') {
+      return true;
+    }
+    const ci = CourseInstances.find({
+      studentID: userID,
+      courseID: course._id,
+    }).fetch();
+    return ci.length === 0;
+  });
   const courseStructure = [];
   while (courses.length > 0) {
     const subarray = [];
@@ -124,128 +149,6 @@ Template.Inspector.helpers({
   },
   coursesLabel(courses) {
     return `${courses[0].number} - ${courses[courses.length - 1].number}`;
-  },
-  courses100() {
-    const courses = Courses.findNonRetired({ number: /1\d\d/ });
-    const instances = CourseInstances.find({ note: /1\d\d/ }).fetch();
-    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
-    const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
-    });
-    return ret.sort(function compare(a, b) {
-      if (a.number < b.number) {
-        return -1;
-      } else
-        if (a.number > b.number) {
-          return 1;
-        }
-      return 0;
-    });
-  },
-  courses200() {
-    const courses = Courses.findNonRetired({ number: /2\d\d/ });
-    const instances = CourseInstances.find({ note: /2\d\d/ }).fetch();
-    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
-    const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
-    });
-    return ret.sort(function compare(a, b) {
-      if (a.number < b.number) {
-        return -1;
-      } else
-        if (a.number > b.number) {
-          return 1;
-        }
-      return 0;
-    });
-  },
-  courses300() {
-    const courses = Courses.findNonRetired({ number: /3[01234]\d/ }).fetch();
-    const instances = CourseInstances.find({ note: /3[01234]\d/ }).fetch();
-    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
-    const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
-    });
-    return ret.sort(function compare(a, b) {
-      if (a.number < b.number) {
-        return -1;
-      } else
-        if (a.number > b.number) {
-          return 1;
-        }
-      return 0;
-    });
-  },
-  courses350() {
-    const courses = Courses.findNonRetired({ number: /3[56789]\d/ });
-    const instances = CourseInstances.find({ note: /3[56789]\d/ }).fetch();
-    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
-    const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
-    });
-    return ret.sort(function compare(a, b) {
-      if (a.number < b.number) {
-        return -1;
-      } else
-        if (a.number > b.number) {
-          return 1;
-        }
-      return 0;
-    });
-  },
-  courses410() {
-    const courses = Courses.find({ number: /4[0123]/ });
-    const instances = CourseInstances.find({ note: /4[0123]/ }).fetch();
-    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
-    const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
-    });
-    return ret.sort(function compare(a, b) {
-      if (a.number < b.number) {
-        return -1;
-      } else
-        if (a.number > b.number) {
-          return 1;
-        }
-      return 0;
-    });
-  },
-  courses440() {
-    const courses = Courses.find({ number: /4[456]/ });
-    const instances = CourseInstances.find({ note: /4[456]/ }).fetch();
-    const courseTakenIDs = _.map(instances, (ci) => ci.courseID);
-    const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
-    });
-    return ret.sort(function compare(a, b) {
-      if (a.number < b.number) {
-        return -1;
-      } else
-        if (a.number > b.number) {
-          return 1;
-        }
-      return 0;
-    });
-  },
-  courses470() {
-    const courses = Courses.findNonRetired({ number: /4[789]/ });
-    const instances = CourseInstances.find({ note: /4[789]/ }).fetch();
-    let courseTakenIDs = _.filter(instances, function filter(ci) {
-      return ci.note.indexOf('499') === -1;
-    });
-    courseTakenIDs = _.map(courseTakenIDs, (ci) => ci.courseID);
-    const ret = _.filter(courses, function filter(c) {
-      return _.indexOf(courseTakenIDs, c._id) === -1;
-    });
-    return ret.sort(function compare(a, b) {
-      if (a.number < b.number) {
-        return -1;
-      } else
-        if (a.number > b.number) {
-          return 1;
-        }
-      return 0;
-    });
   },
   dictionary() {
     return Template.instance().state;
@@ -419,8 +322,11 @@ Template.Inspector.helpers({
     return null;
   },
   opportunityMenuName(opportunity) {
-    const iceString = `(${opportunity.ice.i}/${opportunity.ice.c}/${opportunity.ice.e})`;
-    return `${opportunity.name} ${iceString}`;
+    if (opportunity.name.length > 10) {
+      // console.log(`long name ${opportunity.name}`);
+      return `${opportunity.name.substring(0, 7)}...`;
+    }
+    return `${opportunity.name}`;
   },
   opportunitySemester() {
     if (Template.instance().state.get(plannerKeys.detailOpportunityInstance)) {
@@ -580,5 +486,9 @@ Template.Inspector.onRendered(function inspectorOnRendered() {
   const template = this;
   Tracker.afterFlush(() => {
     template.$('.ui.dropdown').dropdown({ transition: 'drop' });
+    template.$('.opportunity.item')
+      .popup({
+      })
+    ;
   });
 });

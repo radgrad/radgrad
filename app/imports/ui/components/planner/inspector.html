@@ -21,7 +21,7 @@
       <div class="ui scrolling dropdown icon button">&nbsp;&nbsp;Opportunities <i class="dropdown icon"></i>
         <div class="menu">
           {{#each opportunity in opportunities}}
-            <div id="{{opportunity._id}}" class="opportunity item">{{opportunityMenuName opportunity}}</div>
+            <div id="{{opportunity._id}}" class="opportunity item" data-content="{{opportunity.name}}">{{opportunityMenuName opportunity}} {{> ICE_header ice=opportunity.ice }}</div>
           {{/each}}
         </div>
       </div>
