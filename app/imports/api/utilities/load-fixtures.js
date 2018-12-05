@@ -155,7 +155,8 @@ export function loadCollectionNewDataOnly(collection, loadJSON, consolep) {
         const oppInstance = definition.opportunityInstance ? OpportunityInstances.findDoc(definition.opportunityInstance) : // eslint-disable-line
           OpportunityInstances.findOpportunityInstanceDoc(definition.semester, definition.opportunity, definition.student); // eslint-disable-line
         if (!oppInstance) {
-          throw new Meteor.Error('Could not find the opportunity instance to associate with this verification request');
+          throw new Meteor.Error('Could not find the opportunity instance to associate with this verification request',
+            '', Error().stack);
         }
         const opportunityInstanceID = oppInstance._id;
         if (VerificationRequests.find({ studentID, opportunityInstanceID }).count() === 0) {

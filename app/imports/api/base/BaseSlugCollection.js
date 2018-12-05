@@ -38,7 +38,8 @@ class BaseSlugCollection extends BaseCollection {
     try {
       id = (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
     } catch (err) {
-      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`);
+      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`,
+        '', Error().stack);
     }
     return id;
   }
@@ -56,7 +57,7 @@ class BaseSlugCollection extends BaseCollection {
     try {
       ids = (instances) ? instances.map((instance) => this.getID(instance)) : [];
     } catch (err) {
-      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${instances} to an ID.`);
+      throw new Meteor.Error(`Error in getIDs(): Failed to convert one of ${instances} to an ID.`, '', Error().stack);
     }
     return ids;
   }

@@ -156,13 +156,14 @@ class OpportunityCollection extends BaseSlugCollection {
     // Check that this opportunity is not referenced by any Opportunity Instance.
     OpportunityInstances.find().map(function (opportunityInstance) {  // eslint-disable-line array-callback-return
       if (opportunityInstance.opportunityID === docID) {
-        throw new Meteor.Error(`Opportunity ${instance} referenced by a opportunity instance ${opportunityInstance}.`);
+        throw new Meteor.Error(`Opportunity ${instance} referenced by a opportunity instance ${opportunityInstance}.`,
+          '', Error().stack);
       }
     });
     // Check that this opportunity is not referenced by any Teaser.
     Teasers.find().map(function (teaser) {  // eslint-disable-line array-callback-return
       if (Teasers.hasOpportunity(teaser, docID)) {
-        throw new Meteor.Error(`Opportunity ${instance} referenced by a teaser ${teaser}.`);
+        throw new Meteor.Error(`Opportunity ${instance} referenced by a teaser ${teaser}.`, '', Error().stack);
       }
     });
     // OK to delete. First remove any Feeds that reference this opportunity.

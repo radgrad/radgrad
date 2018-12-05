@@ -106,7 +106,7 @@ class CareerGoalCollection extends BaseSlugCollection {
     // Check that this is not referenced by any User.
     const isReferenced = Users.someProfiles(profile => _.includes(profile.careerGoalIDs, careerGoalID));
     if (isReferenced) {
-      throw new Meteor.Error(`Career Goal ${instance} is referenced.`);
+      throw new Meteor.Error(`Career Goal ${instance} is referenced.`, '', Error().stack);
     }
     // OK, clear to delete.
     super.removeIt(careerGoalID);

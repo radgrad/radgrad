@@ -83,14 +83,14 @@ class CourseInstanceCollection extends BaseCollection {
     }
     const ice = makeCourseICE(course, grade);
     if ((typeof verified) !== 'boolean') {
-      throw new Meteor.Error(`${verified} is not a boolean.`);
+      throw new Meteor.Error(`${verified} is not a boolean.`, '', Error().stack);
     }
     if (!_.includes(this.validGrades, grade)) {
       if (grade.startsWith('I')) {
         grade = grade.substring(1);
       }
       if (!_.includes(this.validGrades, grade)) {
-        throw new Meteor.Error(`${grade} is not a valid grade.`);
+        throw new Meteor.Error(`${grade} is not a valid grade.`, '', Error().stack);
       }
     }
     /* eslint no-param-reassign: "off" */

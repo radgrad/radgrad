@@ -74,7 +74,7 @@ class OpportunityInstanceCollection extends BaseCollection {
       AcademicYearInstances.define({ year: semesterDoc.year, student: studentProfile.username });
     }
     if ((typeof verified) !== 'boolean') {
-      throw new Meteor.Error(`${verified} is not a boolean.`);
+      throw new Meteor.Error(`${verified} is not a boolean.`, '', Error().stack);
     }
     if (this.isOpportunityInstance(semester, opportunity, student)) {
       return this.findOpportunityInstanceDoc(semester, opportunity, student)._id;

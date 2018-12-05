@@ -78,10 +78,10 @@ class CourseCollection extends BaseSlugCollection {
     const slugID = Slugs.define({ name: slug, entityName: this.getType() });
     // Make sure creditHrs is a number between 1 and 15.
     if (!(typeof creditHrs) === 'number' || (creditHrs < 1) || (creditHrs > 15)) {
-      throw new Meteor.Error(`CreditHrs ${creditHrs} is not a number between 1 and 15.`);
+      throw new Meteor.Error(`CreditHrs ${creditHrs} is not a number between 1 and 15.`, '', Error().stack);
     }
     if (!Array.isArray(prerequisites)) {
-      throw new Meteor.Error(`Prerequisites ${prerequisites} is not an array.`);
+      throw new Meteor.Error(`Prerequisites ${prerequisites} is not an array.`, '', Error().stack);
     }
     // Currently we don't dump the DB is a way that prevents forward referencing of prereqs, so we
     // can't check the validity of prereqs during a define, such as with:
@@ -136,11 +136,11 @@ class CourseCollection extends BaseSlugCollection {
     }
     if (prerequisites) {
       if (!Array.isArray(prerequisites)) {
-        throw new Meteor.Error(`Prerequisites ${prerequisites} is not an Array.`);
+        throw new Meteor.Error(`Prerequisites ${prerequisites} is not an Array.`, '', Error().stack);
       }
       _.forEach(prerequisites, prereq => {
         if (!this.hasSlug(prereq)) {
-          throw new Meteor.Error(`Prerequisite ${prereq} is not a slug for a course.`);
+          throw new Meteor.Error(`Prerequisite ${prereq} is not a slug for a course.`, '', Error().stack);
         }
       });
       updateData.prerequisites = prerequisites;
@@ -163,7 +163,8 @@ class CourseCollection extends BaseSlugCollection {
     // Check that this is not referenced by any Course Instance.
     CourseInstances.find().map(function (courseInstance) {  // eslint-disable-line array-callback-return
       if (courseInstance.courseID === docID) {
-        throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`);
+        throw new Meteor.Error(`Course ${instance} is referenced by a course instance ${courseInstance}.`,
+          '', Error().stack);
       }
     });
     // OK to delete. First remove any Feeds that reference this course.

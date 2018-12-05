@@ -94,7 +94,8 @@ class BaseProfileCollection extends BaseSlugCollection {
     try {
       id = (this._collection.findOne({ _id: instance })) ? instance : this.findIdBySlug(instance);
     } catch (err) {
-      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`);
+      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`,
+        '', Error().stack);
     }
     return id;
   }
@@ -109,7 +110,7 @@ class BaseProfileCollection extends BaseSlugCollection {
     const userID = Users.getID(user);
     const doc = this._collection.findOne({ userID });
     if (!doc) {
-      throw new Meteor.Error(`No profile found for user ${user}`);
+      throw new Meteor.Error(`No profile found for user ${user}`, '', Error().stack);
     }
     return doc;
   }

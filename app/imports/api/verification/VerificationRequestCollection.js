@@ -70,7 +70,8 @@ class VerificationRequestCollection extends BaseCollection {
     const oppInstance = opportunityInstance ? OpportunityInstances.findDoc(opportunityInstance) :
       OpportunityInstances.findOpportunityInstanceDoc(semester, opportunity, student);
     if (!oppInstance) {
-      throw new Meteor.Error('Could not find the opportunity instance to associate with this verification request');
+      throw new Meteor.Error('Could not find the opportunity instance to associate with this verification request',
+        '', Error().stack);
     }
     const opportunityInstanceID = oppInstance._id;
     const ice = Opportunities.findDoc(oppInstance.opportunityID).ice;

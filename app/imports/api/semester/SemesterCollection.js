@@ -61,10 +61,10 @@ class SemesterCollection extends BaseSlugCollection {
   define({ term, year }) {
     // Check that term and year are valid.
     if (this.terms.indexOf(term) < 0) {
-      throw new Meteor.Error('Invalid term: ', term);
+      throw new Meteor.Error('Invalid term: ', term, Error().stack);
     }
     if ((year < 1990) || (year > 2050)) {
-      throw new Meteor.Error('Invalid year: ', year);
+      throw new Meteor.Error('Invalid year: ', year, Error().stack);
     }
 
     // Return immediately if semester is already defined.
@@ -91,7 +91,7 @@ class SemesterCollection extends BaseSlugCollection {
     const slug = `${term}-${year}`;
 
     if (Slugs.isDefined(slug)) {
-      throw new Meteor.Error(`Slug is already defined for undefined semester: ${slug}`);
+      throw new Meteor.Error(`Slug is already defined for undefined semester: ${slug}`, '', Error().stack);
     }
     const slugID = Slugs.define({ name: slug, entityName: 'Semester' });
     const semesterID = this._collection.insert({ term, year, semesterNumber, slugID });
@@ -122,7 +122,7 @@ class SemesterCollection extends BaseSlugCollection {
    */
   assertSemester(semester) {
     if (!this.isDefined(semester)) {
-      throw new Meteor.Error(`${semester} is not a valid Semester.`);
+      throw new Meteor.Error(`${semester} is not a valid Semester.`, '', Error().stack);
     }
   }
 

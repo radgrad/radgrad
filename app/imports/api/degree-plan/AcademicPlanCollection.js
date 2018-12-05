@@ -106,22 +106,22 @@ class AcademicPlanCollection extends BaseSlugCollection {
     }
     if (coursesPerSemester) {
       if (!Array.isArray(coursesPerSemester)) {
-        throw new Meteor.Error(`CoursesPerSemester ${coursesPerSemester} is not an Array.`);
+        throw new Meteor.Error(`CoursesPerSemester ${coursesPerSemester} is not an Array.`, '', Error().stack);
       }
       _.forEach(coursesPerSemester, (cps) => {
         if (!_.isNumber(cps)) {
-          throw new Meteor.Error(`CoursePerSemester ${cps} is not a Number.`);
+          throw new Meteor.Error(`CoursePerSemester ${cps} is not a Number.`, '', Error().stack);
         }
       });
       updateData.coursesPerSemester = coursesPerSemester;
     }
     if (courseList) {
       if (!Array.isArray(courseList)) {
-        throw new Meteor.Error(`CourseList ${courseList} is not an Array.`);
+        throw new Meteor.Error(`CourseList ${courseList} is not an Array.`, '', Error().stack);
       }
       _.forEach(courseList, (pc) => {
         if (!_.isString(pc)) {
-          throw new Meteor.Error(`CourseList ${pc} is not a PlanChoice.`);
+          throw new Meteor.Error(`CourseList ${pc} is not a PlanChoice.`, '', Error().stack);
         }
       });
       updateData.courseList = courseList;
@@ -144,7 +144,7 @@ class AcademicPlanCollection extends BaseSlugCollection {
     // Check that no student is using this AcademicPlan.
     const isReferenced = Users.someProfiles(profile => profile.academicPlanID === academicPlanID);
     if (isReferenced) {
-      throw new Meteor.Error(`AcademicPlan ${instance} is referenced.`);
+      throw new Meteor.Error(`AcademicPlan ${instance} is referenced.`, '', Error().stack);
     }
     super.removeIt(academicPlanID);
   }

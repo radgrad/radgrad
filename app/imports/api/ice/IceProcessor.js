@@ -44,7 +44,7 @@ export function isICE(obj) {
  */
 export function assertICE(obj) {
   if ((obj === null) || (typeof obj !== 'object') || !(isICE(obj))) {
-    throw new Meteor.Error(`${obj} was not an ICE object.`);
+    throw new Meteor.Error(`${obj} was not an ICE object.`, '', Error().stack);
   }
 }
 
@@ -89,7 +89,7 @@ export function getEarnedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
   docs.forEach((instance) => {
     if (!(isICE(instance.ice))) {
-      throw new Meteor.Error(`getEarnedICE passed ${instance} without a valid .ice field.`);
+      throw new Meteor.Error(`getEarnedICE passed ${instance} without a valid .ice field.`, '', Error().stack);
     }
     if (instance.verified === true) {
       total.i += instance.ice.i;
@@ -112,7 +112,7 @@ export function getProjectedICE(docs) {
   const total = { i: 0, c: 0, e: 0 };
   docs.forEach((instance) => {
     if (!(isICE(instance.ice))) {
-      throw new Meteor.Error(`getProjectedICE passed ${instance} without a valid .ice field.`);
+      throw new Meteor.Error(`getProjectedICE passed ${instance} without a valid .ice field.`, '', Error().stack);
     }
     total.i += instance.ice.i;
     total.c += instance.ice.c;

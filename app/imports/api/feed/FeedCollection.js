@@ -98,7 +98,7 @@ class FeedCollection extends BaseCollection {
     if (feedDefinition.feedType === this.NEW_LEVEL) {
       return this._defineNewLevel(feedDefinition);
     }
-    throw new Meteor.Error(`Unknown feed type: ${feedDefinition.feedType}`);
+    throw new Meteor.Error(`Unknown feed type: ${feedDefinition.feedType}`, '', Error().stack);
   }
 
   /**

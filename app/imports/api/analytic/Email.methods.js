@@ -13,9 +13,9 @@ export const sendEmailMethod = new ValidatedMethod({
   validate: null,
   run(emailData) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to send emails.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to send emails.', '', Error().stack);
     } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
-      throw new Meteor.Error('unauthorized', 'You must be an Admin to send emails.');
+      throw new Meteor.Error('unauthorized', 'You must be an Admin to send emails.', '', Error().stack);
     }
     sendEmail(emailData);
   },

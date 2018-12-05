@@ -89,7 +89,8 @@ class InterestCollection extends BaseSlugCollection {
     _.forEach(collectionList, function (collection) {
       collection.find().map(function (doc) {  // eslint-disable-line array-callback-return
         if (collection.hasInterest(doc, docID)) {
-          throw new Meteor.Error(`Interest ${docID.name} is referenced by collection ${collection._collectionName}.`);
+          throw new Meteor.Error(`Interest ${docID.name} is referenced by collection ${collection._collectionName}.`,
+            '', Error().stack);
         }
       });
     });

@@ -82,11 +82,13 @@ class DesiredDegreeCollection extends BaseSlugCollection {
   removeIt(instance) {
     const desiredDegreeID = this.getID(instance);
     // Check that this is not referenced by any AcademicPlans.
-    AcademicPlans.find().map(function (plan) {  // eslint-disable-line array-callback-return
-      if (plan.degreeID === desiredDegreeID) {
-        throw new Meteor.Error(`DesiredDegree ${instance} is referenced by a academic plan ${plan}.`);
-      }
-    });
+    AcademicPlans.find()
+      .map(function (plan) {  // eslint-disable-line array-callback-return
+        if (plan.degreeID === desiredDegreeID) {
+          throw new Meteor.Error(`DesiredDegree ${instance} is referenced by a academic plan ${plan}.`,
+            '', Error().stack);
+        }
+      });
     super.removeIt(desiredDegreeID);
   }
 
@@ -98,11 +100,12 @@ class DesiredDegreeCollection extends BaseSlugCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Slugs.isDefined(doc.slugID)) {
-        problems.push(`Bad slugID: ${doc.slugID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Slugs.isDefined(doc.slugID)) {
+          problems.push(`Bad slugID: ${doc.slugID}`);
+        }
+      });
     return problems;
   }
 

@@ -14,7 +14,8 @@ export const calcLevelMethod = new ValidatedMethod({
   validate: null,
   run({ studentID }) {
     if (!this.userId && Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.',
+        Error().stack);
     }
     if (RadGrad.calcLevel) {
       return RadGrad.calcLevel(studentID);
@@ -32,7 +33,8 @@ export const updateLevelMethod = new ValidatedMethod({
   validate: null,
   run({ studentID }) {
     if (!this.userId && Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.',
+        Error().stack);
     }
     updateStudentLevel(this.userId, studentID);
   },
@@ -47,7 +49,8 @@ export const updateAllStudentLevelsMethod = new ValidatedMethod({
   validate: null,
   run() {
     if (!this.userId && Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in as ADMIN or ADVISOR to calculate Levels.',
+        Error().stack);
     }
     const count = updateAllStudentLevels(this.userId);
     return `Updated ${count} students' levels.`;

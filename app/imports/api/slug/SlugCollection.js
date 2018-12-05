@@ -51,10 +51,10 @@ class SlugCollection extends BaseCollection {
     check(name, String);
     check(entityName, String);
     if (super.isDefined(name)) {
-      throw new Meteor.Error(`Attempt to redefine slug: ${name}`);
+      throw new Meteor.Error(`Attempt to redefine slug: ${name}`, '', Error().stack);
     }
     if (!this.isValidSlugName(name)) {
-      throw new Meteor.Error(`Slug is not a-zA-Z0-9 or dash, period, underscore, or @: ${name}`);
+      throw new Meteor.Error(`Slug is not a-zA-Z0-9 or dash, period, underscore, or @: ${name}`, '', Error().stack);
     }
     const docID = this._collection.insert({ name, entityName });
     return docID;
@@ -88,11 +88,11 @@ class SlugCollection extends BaseCollection {
    */
   getEntityID(slugName, entityName) {
     if (!this.isDefined(slugName)) {
-      throw new Meteor.Error(`Undefined slug ${slugName}.`);
+      throw new Meteor.Error(`Undefined slug ${slugName}.`, '', Error().stack);
     }
     const doc = this.findDoc(slugName);
     if (doc.entityName !== entityName) {
-      throw new Meteor.Error(`Slug ${slugName} is not associated with the entity ${entityName}.`);
+      throw new Meteor.Error(`Slug ${slugName} is not associated with the entity ${entityName}.`, '', Error().stack);
     }
     return doc.entityID;
   }
@@ -150,7 +150,7 @@ class SlugCollection extends BaseCollection {
    */
   assertSlug(slugName) {
     if (!this._collection.findOne({ name: slugName })) {
-      throw new Meteor.Error(`Undefined slug ${slugName}.`);
+      throw new Meteor.Error(`Undefined slug ${slugName}.`, '', Error().stack);
     }
   }
 

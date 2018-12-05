@@ -110,7 +110,7 @@ class ReviewCollection extends BaseSlugCollection {
    */
   assertValidRating(rating) { // eslint-disable-line class-methods-use-this
     if (!_.isInteger(rating) || !_.inRange(rating, 1, 6)) {
-      throw new Meteor.Error(`Invalid rating: ${rating}`);
+      throw new Meteor.Error(`Invalid rating: ${rating}`, '', Error().stack);
     }
   }
 
@@ -120,7 +120,7 @@ class ReviewCollection extends BaseSlugCollection {
    */
   assertValidReviewType(reviewType) { // eslint-disable-line class-methods-use-this
     if (!_.includes([this.OPPORTUNITY, this.COURSE], reviewType)) {
-      throw new Meteor.Error(`Invalid reviewType: ${reviewType}`);
+      throw new Meteor.Error(`Invalid reviewType: ${reviewType}`, '', Error().stack);
     }
   }
 

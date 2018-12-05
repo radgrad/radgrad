@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { moment } from 'meteor/momentjs:moment';
 import { ZipZap } from 'meteor/udondan:zipzap';
-import { starBulkLoadJsonDataMethod } from '../../../api/star/StarProcessor.methods';
+import { starBulkLoadJsonDataMethod, testBulkLoadErrorMethod } from '../../../api/star/StarProcessor.methods';
 import { getRouteUserName } from '../shared/route-user-name';
 import { generateStudentEmailsMethod } from '../../../api/user/UserCollection.methods';
 // import { updateAllStudentLevelsMethod } from '../../../api/level/LevelProcessor.methods';
@@ -77,6 +77,13 @@ Template.Star_Bulk_Upload_Widget.events({
         zip.file(fileName, emails);
         zip.saveAs(`${dir}.zip`);
       }
+    });
+  },
+  'click .jsTestError': function clickTestError(event) {
+    event.preventDefault();
+    testBulkLoadErrorMethod.call('some random data', (error, result) => {
+      console.log(error, result);
+      console.log(`${error.message}\n${error.details}`);
     });
   },
 });

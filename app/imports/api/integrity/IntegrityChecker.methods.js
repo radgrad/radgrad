@@ -13,9 +13,9 @@ export const checkIntegrityMethod = new ValidatedMethod({
   validate: null,
   run() {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to check integrity.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to check integrity.', '', Error().stack);
     } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN, ROLE.ADVISOR])) {
-      throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to check integrity.');
+      throw new Meteor.Error('unauthorized', 'You must be an admin or advisor to check integrity.', '', Error().stack);
     }
     return checkIntegrity();
   },

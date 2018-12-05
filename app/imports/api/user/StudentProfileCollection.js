@@ -66,7 +66,7 @@ class StudentProfileCollection extends BaseProfileCollection {
       const hiddenOpportunityIDs = Opportunities.getIDs(hiddenOpportunities);
       this.assertValidLevel(level);
       if (!_.isBoolean(isAlumni)) {
-        throw new Meteor.Error(`Invalid isAlumni: ${isAlumni}`);
+        throw new Meteor.Error(`Invalid isAlumni: ${isAlumni}`, '', Error().stack);
       }
 
       // Create the slug, which ensures that username is unique.
@@ -141,7 +141,7 @@ class StudentProfileCollection extends BaseProfileCollection {
    */
   assertValidLevel(level) {  // eslint-disable-line class-methods-use-this
     if (!_.isInteger(level) && !_.inRange(level, 1, 7)) {
-      throw new Meteor.Error(`Level ${level} is not between 1 and 6.`);
+      throw new Meteor.Error(`Level ${level} is not between 1 and 6.`, '', Error().stack);
     }
   }
 

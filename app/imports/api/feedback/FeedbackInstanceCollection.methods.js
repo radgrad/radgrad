@@ -11,7 +11,7 @@ export const clearFeedbackInstancesMethod = new ValidatedMethod({
   validate: null,
   run({ user, functionName }) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to clear FeedbackInstances.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to clear FeedbackInstances.', '', Error().stack);
     }
     return FeedbackInstances.clear(user, functionName);
   },

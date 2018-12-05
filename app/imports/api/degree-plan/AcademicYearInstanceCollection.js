@@ -104,17 +104,17 @@ class AcademicYearInstanceCollection extends BaseCollection {
     }
     if (studentID) {
       if (!Users.isDefined(studentID)) {
-        throw new Meteor.Error(`StudentID ${studentID} is not a defined user.`);
+        throw new Meteor.Error(`StudentID ${studentID} is not a defined user.`, '', Error().stack);
       }
       updateData.studentID = studentID;
     }
     if (semesterIDs) {
       if (!Array.isArray(semesterIDs)) {
-        throw new Meteor.Error(`SemesterIDs ${semesterIDs} is not an Array.`);
+        throw new Meteor.Error(`SemesterIDs ${semesterIDs} is not an Array.`, '', Error().stack);
       }
       _.forEach(semesterIDs, sem => {
         if (!Semesters.isDefined(sem)) {
-          throw new Meteor.Error(`SemesterID ${sem} is not a SemesterID.`);
+          throw new Meteor.Error(`SemesterID ${sem} is not a SemesterID.`, '', Error().stack);
         }
       });
       updateData.semesterIDs = semesterIDs;

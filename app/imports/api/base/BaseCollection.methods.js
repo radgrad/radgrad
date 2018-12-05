@@ -16,10 +16,10 @@ export const dumpDatabaseMethod = new ValidatedMethod({
   validate: null,
   run() {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to dump the database..', '', Error().stack);
     } else
       if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
-        throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.');
+        throw new Meteor.Error('unauthorized', 'You must be an admin to dump the database.', '', Error().stack);
       }
     // Don't do the dump except on server side (disable client-side simulation).
     // Return an object with fields timestamp and collections.
@@ -38,10 +38,10 @@ export const loadFixtureMethod = new ValidatedMethod({
   validate: null,
   run(fixtureData) {
     if (!this.userId) {
-      throw new Meteor.Error('unauthorized', 'You must be logged in to load a fixture.');
+      throw new Meteor.Error('unauthorized', 'You must be logged in to load a fixture.', '', Error().stack);
     } else
     if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
-      throw new Meteor.Error('unauthorized', 'You must be an admin to load a fixture.');
+      throw new Meteor.Error('unauthorized', 'You must be an admin to load a fixture.', '', Error().stack);
     }
     if (Meteor.isServer) {
       let ret = '';

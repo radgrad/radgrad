@@ -35,7 +35,7 @@ export function checkIntegrity() {
 export function assertIntegrity() {
   const { count, message } = checkIntegrity();
   if (count > 0) {
-    throw new Meteor.Error(message);
+    throw new Meteor.Error(message, '', Error().stack);
   }
   return null;
 }

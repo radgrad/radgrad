@@ -51,7 +51,8 @@ class FeedbackInstanceCollection extends BaseCollection {
     // Validate Feedback and user.
     const userID = Users.getID(user);
     if (!_.includes(this.feedbackTypes, feedbackType)) {
-      throw new Meteor.Error(`FeedbackInstances.define passed illegal feedbackType: ${feedbackType}`);
+      throw new Meteor.Error(`FeedbackInstances.define passed illegal feedbackType: ${feedbackType}`,
+        '', Error().stack);
     }
     // Define and return the new FeedbackInstance
     const feedbackInstanceID = this._collection.insert({ userID, functionName, description, feedbackType });
@@ -106,6 +107,7 @@ class FeedbackInstanceCollection extends BaseCollection {
   isFeedbackInstance(user, functionName, feedbackType) {
     return !!this.findFeedbackInstance(user, functionName, feedbackType);
   }
+
   /**
    * Removes all FeedbackInstances associated with user and functionName.
    * @param user The user (typically a student).
@@ -182,11 +184,12 @@ class FeedbackInstanceCollection extends BaseCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Users.isDefined(doc.userID)) {
-        problems.push(`Bad userID: ${doc.userID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Users.isDefined(doc.userID)) {
+          problems.push(`Bad userID: ${doc.userID}`);
+        }
+      });
     return problems;
   }
 

@@ -131,7 +131,7 @@ export const processPendingVerificationMethod = new ValidatedMethod({
 
     // Verify that the command is VerificationRequests.ACCEPTED or REJECTED.
     if ((command !== VerificationRequests.ACCEPTED) && (command !== VerificationRequests.REJECTED)) {
-      throw new Meteor.Error(`VerificationRequest command is invalid: ${command}`);
+      throw new Meteor.Error(`VerificationRequest command is invalid: ${command}`, '', Error().stack);
     }
 
     // Update the opportunityInstance corresponding to this verification request.

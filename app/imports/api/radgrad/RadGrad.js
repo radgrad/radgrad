@@ -129,7 +129,8 @@ class RadGradClass {
   getCollection(collectionName) {
     const collection = this.collectionAssociation[collectionName];
     if (!collection) {
-      throw new Meteor.Error(`Called RadGrad.getCollection with unknown collection name: ${collectionName}`);
+      throw new Meteor.Error(`Called RadGrad.getCollection with unknown collection name: ${collectionName}`,
+        '', Error().stack);
     }
     return collection;
   }
