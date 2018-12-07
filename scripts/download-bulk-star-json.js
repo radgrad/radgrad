@@ -6,6 +6,27 @@ const moment = require('moment');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
+const emailsPerFile = 50;
+
+function splitEmails(emails, key) {
+  const emailData = fs.readFileSync(`./${emails}`);
+  const emailArr = emailData.toString().split('\n')
+  const numEmails = emailArr.length;
+  let count = 1;
+  let start = 0;
+  let end = emailsPerFile;
+  const retVal = {};
+  retVal.keys = [];
+  while (end < numEmails + emailsPerFile) {
+    retVal.keys.push(`${key}-${count}`);
+    fs.writeFileSync(`emails${key}-${count}.txt`, emailArr.slice(start, end).join('\n'));
+    count++;
+    start += emailsPerFile;
+    end += emailsPerFile;
+  }
+  return retVal;
+}
+
 function getStarArrivalTime(emails) {
   const emailData = fs.readFileSync(`./${emails}`);
   const numEmails = emailData.toString().split('\n').length;
@@ -15,7 +36,7 @@ function getStarArrivalTime(emails) {
 }
 
 /**
- * Read emails.txt which is a newline delimited list of UH email addresses
+ * Read emails file which is a newline delimited list of UH email addresses
  * Pass email list as part of the url encoded form to the STAR-RadGrad api
  * Return the response which should be a JSON object
  */
@@ -42,7 +63,7 @@ function getCourseData(username, password, emails) {
  * This is heuristically determined by checking to see if there are no ICS or EE courses in their course data.
  * If an alumni is detected, then put them into the alumni.txt file and remove their data from the json file.
  */
-function filterAlumni(contents) {
+function filterAlumni(contents, key) {
   const re = /ics|ee/i;
   const alumniEmail = [];
   const data = JSON.parse(contents);
@@ -70,9 +91,9 @@ function filterAlumni(contents) {
     });
     return student;
   });
-  fs.writeFile('alumni.txt', alumniEmail.join('\n'), 'utf8', (err) => {
+  fs.writeFile(`alumni${key}.txt`, alumniEmail.join('\n'), 'utf8', (err) => {
     if (err) {
-      console.log(`Error writing alumni.txt ${err.message}`);
+      console.log(`Error writing alumni${key}.txt ${err.message}`);
     }
   });
   return JSON.stringify(filtered, null, ' ');
@@ -99,27 +120,47 @@ async function downloadStarData() {
       validate: value => (value.length ? true : 'Please enter your password'),
     },
     {
-      name: 'emailfilename',
+      name: 'key',
       type: 'input',
-      message: 'Enter the emails list file name:',
+      message: 'Enter the emails list key: (e.g. emails{key}.txt',
       validate: value => (value.length ? true : 'Please enter the email list file name'),
-    },
-    {
-      name: 'filename',
-      type: 'input',
-      message: 'Enter the file name where the data will be saved:',
-      validate: value => (value.length ? true : 'Please enter the file name.'),
     },
   ];
 
   const userParams = await inquirer.prompt(questions);
-  console.log(getStarArrivalTime(userParams.emailfilename));
-  getCourseData(userParams.username, userParams.password, userParams.emailfilename)
-      .then(res => fs.writeFileSync(userParams.filename, filterAlumni(res.body)))
+  const emailFileName = `emails${userParams.key}.txt`;
+  const starFilenName = `star${userParams.key}.json`;
+  console.log(getStarArrivalTime(emailFileName));
+  getCourseData(userParams.username, userParams.password, emailFileName)
+      .then(res => fs.writeFileSync(starFilenName, filterAlumni(res.body, userParams.key)))
       .catch(err => console.log(err));
 }
 
 /**
  * emails.txt must have student email addresses, one per line. Then run node download-bulk-star-json.js
  */
-downloadStarData();
+// downloadStarData();
+
+/**
+ * Main function. Ask for the admin's username, password, the name of the email list file
+ * and file to put the json data into.
+ * Then call getCourseData to get the data from STAR.
+ * @returns {Promise<void>}
+ */
+async function testSplit() {
+  const questions = [
+    {
+      name: 'key',
+      type: 'input',
+      message: 'Enter the emails list key: (e.g. emails{key}.txt',
+      validate: value => (value.length ? true : 'Please enter the email list file name'),
+    },
+  ];
+
+  const userParams = await inquirer.prompt(questions);
+  const emailFileName = `emails${userParams.key}.txt`;
+  const ret = splitEmails(emailFileName, userParams.key);
+  console.log(ret);
+}
+
+testSplit();
