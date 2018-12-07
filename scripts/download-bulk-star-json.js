@@ -6,9 +6,7 @@ const moment = require('moment');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const emailsPerFile = 50;
-
-function splitEmails(emails, key) {
+function splitEmails(emails, key, emailsPerFile) {
   const emailData = fs.readFileSync(`./${emails}`);
   const emailArr = emailData.toString().split('\n')
   const numEmails = emailArr.length;
@@ -24,7 +22,7 @@ function splitEmails(emails, key) {
     start += emailsPerFile;
     end += emailsPerFile;
   }
-  return retVal;
+  return retVal.keys;
 }
 
 function getStarArrivalTime(emails) {
@@ -64,6 +62,7 @@ function getCourseData(username, password, emails) {
  * If an alumni is detected, then put them into the alumni.txt file and remove their data from the json file.
  */
 function filterAlumni(contents, key) {
+  console.log(contents);
   const re = /ics|ee/i;
   const alumniEmail = [];
   const data = JSON.parse(contents);
@@ -125,42 +124,38 @@ async function downloadStarData() {
       message: 'Enter the emails list key: (e.g. emails{key}.txt',
       validate: value => (value.length ? true : 'Please enter the email list file name'),
     },
-  ];
-
-  const userParams = await inquirer.prompt(questions);
-  const emailFileName = `emails${userParams.key}.txt`;
-  const starFilenName = `star${userParams.key}.json`;
-  console.log(getStarArrivalTime(emailFileName));
-  getCourseData(userParams.username, userParams.password, emailFileName)
-      .then(res => fs.writeFileSync(starFilenName, filterAlumni(res.body, userParams.key)))
-      .catch(err => console.log(err));
-}
-
-/**
- * emails.txt must have student email addresses, one per line. Then run node download-bulk-star-json.js
- */
-// downloadStarData();
-
-/**
- * Main function. Ask for the admin's username, password, the name of the email list file
- * and file to put the json data into.
- * Then call getCourseData to get the data from STAR.
- * @returns {Promise<void>}
- */
-async function testSplit() {
-  const questions = [
     {
-      name: 'key',
+      name: 'emailsPerFile',
       type: 'input',
-      message: 'Enter the emails list key: (e.g. emails{key}.txt',
-      validate: value => (value.length ? true : 'Please enter the email list file name'),
+      message: 'Enter the number of emails per file: ',
+      validate: value => {
+        const num = parseInt(value, 10);
+        return (num > 0 ? true : 'Please enter a positive number');
+      },
     },
   ];
 
   const userParams = await inquirer.prompt(questions);
   const emailFileName = `emails${userParams.key}.txt`;
-  const ret = splitEmails(emailFileName, userParams.key);
-  console.log(ret);
+  const numEmailsPerFile = parseInt(userParams.emailsPerFile, 10);
+  const key = userParams.key;
+  const keys = splitEmails(emailFileName, key, numEmailsPerFile);
+  _.forEach(keys, (k) => {
+    const eFileName = `emails${k}.txt`;
+    const sFileName = `star${k}.json`;
+    console.log(getStarArrivalTime(eFileName));
+    getCourseData(userParams.username, userParams.password, eFileName)
+        .then(res => fs.writeFileSync(sFileName, filterAlumni(res.body, k)))
+        .catch(err => console.log(err));
+  });
+  // const starFilenName = `star${userParams.key}.json`;
+  // console.log(getStarArrivalTime(emailFileName));
+  // getCourseData(userParams.username, userParams.password, emailFileName)
+  //     .then(res => fs.writeFileSync(starFilenName, filterAlumni(res.body, userParams.key)))
+  //     .catch(err => console.log(err));
 }
 
-testSplit();
+/**
+ * emails.txt must have student email addresses, one per line. Then run node download-bulk-star-json.js
+ */
+downloadStarData();
