@@ -10,11 +10,10 @@ import { Users } from '../../../api/user/UserCollection';
 let studentPopulation;
 
 Template.Students_Summary_Widget.onCreated(function studentsSummaryWidgetOnRendered() {
-  this.interactions = new ReactiveVar({});
-  this.selectedUser = new ReactiveVar({});
-  this.behaviors = new ReactiveVar([]);
-  this.startDate = new ReactiveVar('');
-  this.endDate = new ReactiveVar('');
+  this.interactionsByUser = new ReactiveVar();
+  this.selectedUser = new ReactiveVar();
+  this.behaviors = new ReactiveVar();
+  this.dateRange = new ReactiveVar();
   studentPopulation = StudentProfiles.find().count();
   /* There is a possible bug with Semantic where the timeline modal is duplicated in the DOM
     upon navigating back to the student summary page from any other page. A suggested fix (temporary)
@@ -27,16 +26,13 @@ Template.Students_Summary_Widget.helpers({
     return Template.instance().behaviors.get();
   },
   dateRange() {
-    const data = Template.instance();
-    if (data.startDate.get() === '') {
+    const dateRange = Template.instance().dateRange.get();
+    if (_.isEmpty(dateRange)) {
       return '';
     }
-    const startDate = moment(data.startDate.get()).format('MM-DD-YYYY');
-    const endDate = moment(data.endDate.get()).format('MM-DD-YYYY');
+    const startDate = moment(dateRange.startDate).format('MM-DD-YYYY');
+    const endDate = moment(dateRange.endDate).format('MM-DD-YYYY');
     return `${startDate} to ${endDate}`;
-  },
-  firstIndex(index) {
-    return index === 0;
   },
   percent(count) {
     return ((count / studentPopulation) * 100).toFixed(0);
@@ -44,7 +40,126 @@ Template.Students_Summary_Widget.helpers({
   selectedUser() {
     return !_.isEmpty(Template.instance().selectedUser.get());
   },
+  renderedSummary() {
+    return !_.isEmpty(Template.instance().dateRange.get());
+  },
   timelineChart() {
+    const interactionsByUser = Template.instance().interactionsByUser.get();
+    if (interactionsByUser) {
+      const dateRange = Template.instance().dateRange.get();
+      const startDate = moment(dateRange.startDate, 'MMMM D, YYYY');
+      const endDate = moment(dateRange.endDate, 'MMMM D, YYYY');
+      const numDays = endDate.diff(startDate, 'days') + 1;
+      const behaviorsByDate = {};
+      _.times(numDays, function (index) {
+        const date = moment(startDate).add(index, 'days');
+        behaviorsByDate[moment(date).format('MMM D, YYYY')] = [];
+      });
+      const behaviorList = ['Log In', 'Change Outlook', 'Exploration', 'Planning', 'Verification',
+        'Reviewing', 'Mentorship', 'Level Up', 'Complete Plan', 'Profile'];
+      _.each(behaviorsByDate, function (array, date, obj) {
+        _.each(interactionsByUser, function (interactions) {
+          const interactionsWithinDate = _.filter(interactions, function (interaction) {
+            const interactionDate = moment(interaction.timestamp).format('MMM D, YYYY');
+            return interactionDate === date;
+          });
+          if (_.some(interactionsWithinDate, { type: 'login' })) {
+            obj[date].push(behaviorList[0]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'careerGoalIDs' || i.type === 'interestIDs' ||
+              i.type === 'academicPlanID')) {
+            obj[date].push(behaviorList[1]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'pageView' && i.typeData[0].includes('explorer/'))) {
+            obj[date].push(behaviorList[2]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'addCourse' || i.type === 'removeCourse' ||
+              i.type === 'addOpportunity' || i.type === 'removeOpportunity')) {
+            obj[date].push(behaviorList[3]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'verifyRequest')) {
+            obj[date].push(behaviorList[4]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'addReview')) {
+            obj[date].push(behaviorList[5]);
+          }
+          if (_.some(interactionsWithinDate, (i) => (i.type === 'pageView' &&
+              i.typeData[0].includes('mentor-space')) || i.type === 'askQuestion')) {
+            obj[date].push(behaviorList[6]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'level')) {
+            obj[date].push(behaviorList[7]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'completePlan')) {
+            obj[date].push(behaviorList[8]);
+          }
+          if (_.some(interactionsWithinDate, (i) => i.type === 'picture' || i.type === 'website')) {
+            obj[date].push(behaviorList[9]);
+          }
+        });
+      });
+      const categories = _.map(behaviorsByDate, function (behaviors, date) {
+        const shortDate = date.substring(0, date.length - 6);
+        return shortDate;
+      });
+      const series = _.map(behaviorList, function (behavior) {
+        return { name: behavior, data: [] };
+      });
+      _.each(behaviorsByDate, function (behaviors) {
+        const groupedBehaviors = _.groupBy(behaviors);
+        _.each(behaviorList, function (behavior) {
+          const behaviorCount = groupedBehaviors[behavior];
+          const behaviorSeries = _.find(series, { name: behavior });
+          if (behaviorCount) {
+            behaviorSeries.data.push((behaviorCount.length / studentPopulation) * 100);
+          } else {
+            behaviorSeries.data.push(0);
+          }
+        });
+      });
+      return {
+        title: { text: null },
+        legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+        },
+        xAxis: {
+          categories,
+        },
+        yAxis: {
+          title: {
+            text: 'Percent Number Of Students',
+          },
+        },
+        plotOptions: {
+          series: {
+            label: {
+              connectorAllowed: false,
+            },
+          },
+        },
+        series,
+        responsive: {
+          rules: [{
+            condition: {
+              maxWidth: 500,
+            },
+            chartOptions: {
+              legend: {
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom',
+              },
+            },
+          }],
+        },
+        credits: {
+          enabled: false,
+        },
+      };
+    }
+    return { title: { text: null } };
   },
   user() {
     return Template.instance().selectedUser.get();
@@ -56,8 +171,7 @@ Template.Students_Summary_Widget.events({
     event.preventDefault();
     const startDate = moment(event.target.startDate.value, 'MMMM D, YYYY').toDate();
     const endDate = moment(event.target.endDate.value, 'MMMM D, YYYY').endOf('day').toDate();
-    instance.startDate.set(startDate);
-    instance.endDate.set(endDate);
+    const dateRange = { startDate, endDate };
     const selector = { timestamp: { $gte: startDate, $lte: endDate } };
     const options = { sort: { username: 1, timestamp: 1 } };
     userInteractionFindMethod.call({ selector, options }, (error, result) => {
@@ -111,26 +225,31 @@ Template.Students_Summary_Widget.events({
             behaviors[7].count++;
             behaviors[7].users.push(user);
           }
+          if (_.some(interactions, (i) => i.type === 'completePlan')) {
+            behaviors[8].count++;
+            behaviors[8].users.push(user);
+          }
           if (_.some(interactions, (i) => i.type === 'picture' || i.type === 'website')) {
             behaviors[9].count++;
             behaviors[9].users.push(user);
           }
         });
-        instance.interactions.set(users);
+        instance.interactionsByUser.set(users);
         instance.behaviors.set(behaviors);
+        instance.dateRange.set(dateRange);
       }
     });
   },
   'click .ui.tiny.button': function openModal(event, instance) {
     event.preventDefault();
     const username = event.target.value;
-    const selectedUser = { username, interactions: instance.interactions.get()[username] };
+    const selectedUser = { username, interactions: instance.interactionsByUser.get()[username] };
     instance.selectedUser.set(selectedUser);
     $('#timeline').modal('show');
   },
   'click .chart.item': function reflow(event) {
     event.preventDefault();
-    // $('#timeline-chart').highcharts().reflow();
+    $('#timeline-chart').highcharts().reflow();
   },
 });
 
