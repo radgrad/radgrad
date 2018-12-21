@@ -579,7 +579,7 @@ Template.Generate_Newsletter_Widget.events({
         if (index === lastIndex) {
           instance.levelEmailStatus.set(`Level ${level}: All emails sent!`);
         }
-      }, index * 5000);
+      }, index * 1000);
     });
   },
   'submit .all': function sendToAllStudents(event, instance) {
@@ -633,7 +633,7 @@ Template.Generate_Newsletter_Widget.events({
         if (index === lastIndex) {
           instance.sendAllEmailStatus.set('All emails sent!');
         }
-      }, index * 5000);
+      }, index * 1000);
     });
   },
 });
