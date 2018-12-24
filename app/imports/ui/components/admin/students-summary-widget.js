@@ -128,6 +128,7 @@ Template.Students_Summary_Widget.helpers({
           categories,
         },
         yAxis: {
+          min: 0,
           title: {
             text: 'Percent Number Of Students',
           },
