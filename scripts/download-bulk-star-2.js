@@ -63,3 +63,82 @@ function getStarData(username, password, emailData) {
   });
 }
 
+function courseIsInteresting(courseName) {
+  return courseName.match(/ics/i);
+}
+
+function getFilterInterestingCourses(starDataFilename) {
+  const contents = fs.readFileSync(`./${starDataFilename}`);
+  const alumniEmail = [];
+  const data = JSON.parse(contents);
+  // console.log(data);
+  _.forEach(data, (student) => {
+    let alumni = true;
+    // console.log(student.courses);
+    _.forEach(student.courses, (c) => {
+      if (courseIsInteresting(c.name)) {
+        alumni = false;
+      }
+    });
+    if (alumni) {
+      alumniEmail.push(student.email);
+    }
+    console.log(`${student.email} is alumni = ${alumni}.`);
+  });
+  const filtered = _.filter(data, function (d) {
+    let student = false;
+    // console.log(d.courses);
+    _.forEach(d.courses, (c) => {
+      if (courseIsInteresting(c.name)) {
+        student = true;
+      }
+    });
+    return student;
+  });
+  return filtered;
+}
+
+async function getUsernamePasswordEtc() {
+  const questions = [
+    {
+      name: 'username',
+      type: 'input',
+      message: 'Enter your UH username:',
+      validate: value => (value.length ? true : 'Please enter your UH username'),
+    },
+    {
+      name: 'password',
+      type: 'password',
+      message: 'Enter your password:',
+      validate: value => (value.length ? true : 'Please enter your password'),
+    },
+    {
+      name: 'key',
+      type: 'input',
+      message: 'Enter the emails list key: (e.g. emails{key}.txt',
+      validate: value => (value.length ? true : 'Please enter the email list file name'),
+    },
+    {
+      name: 'emailsPerFile',
+      type: 'input',
+      message: 'Enter the number of emails per file: ',
+      validate: value => {
+        const num = parseInt(value, 10);
+        return (num > 0 ? true : 'Please enter a positive number');
+      },
+    },
+  ];
+
+  const userParams = await inquirer.prompt(questions);
+  const emailFileName = `emails${userParams.key}.txt`;
+  const numEmailsPerFile = parseInt(userParams.emailsPerFile, 10);
+  const key = userParams.key;
+  const keys = splitEmails(emailFileName, key, numEmailsPerFile);
+  return keys;
+}
+
+// getUsernamePasswordEtc();
+const filtered = getFilterInterestingCourses('./starGrad.json');
+const studentEmails = _.map(filtered, (f) => f.email);
+console.log(studentEmails);
+// console.log('%o', getFilterInterestingCourses('./star1.json'));

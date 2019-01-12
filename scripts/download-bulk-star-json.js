@@ -56,13 +56,17 @@ function getCourseData(username, password, emails) {
   });
 }
 
+function courseIsInteresting(courseName) {
+  return courseName.match(/ics/i);
+}
+
 /**
  * Determine if a student's data represents an alumni.
  * This is heuristically determined by checking to see if there are no ICS or EE courses in their course data.
  * If an alumni is detected, then put them into the alumni.txt file and remove their data from the json file.
  */
 function filterAlumni(contents, key) {
-  console.log(contents);
+  // console.log(contents);
   const re = /ics|ee/i;
   const alumniEmail = [];
   const data = JSON.parse(contents);
