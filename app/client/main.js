@@ -32,6 +32,7 @@ import '/imports/startup/both';
 
 import '/imports/ui/components/admin';
 import '/imports/ui/components/advisor';
+import '/imports/ui/components/alumni';
 import '/imports/ui/components/faculty';
 import '/imports/ui/components/form-fields';
 import '/imports/ui/components/landing';
@@ -47,6 +48,7 @@ import '/imports/ui/components/guidedtour/mentor';
 
 import '/imports/ui/layouts/admin';
 import '/imports/ui/layouts/advisor';
+import '/imports/ui/layouts/alumni';
 import '/imports/ui/layouts/faculty';
 import '/imports/ui/layouts/landing';
 import '/imports/ui/layouts/mentor';
@@ -56,6 +58,7 @@ import '/imports/ui/layouts/guidedtour';
 
 import '/imports/ui/pages/admin';
 import '/imports/ui/pages/advisor';
+import '/imports/ui/pages/alumni';
 import '/imports/ui/pages/faculty';
 import '/imports/ui/pages/landing';
 import '/imports/ui/pages/mentor';

@@ -417,6 +417,22 @@ advisorRoutes.route('/course-scoreboard', {
   },
 });
 
+/*                        ALUMNI ROUTES                        */
+
+const alumniRoutes = FlowRouter.group({
+  prefix: '/alumni/:username',
+  name: 'alumni',
+  triggersEnter: [addBodyClass],
+  triggersExit: [removeBodyClass],
+});
+
+export const alumniHomePageRouteName = 'Alumni_Home_Page';
+alumniRoutes.route('/home', {
+  name: alumniHomePageRouteName,
+  action() {
+    BlazeLayout.render('Alumni_Layout', { main: alumniHomePageRouteName });
+  },
+});
 
 /*                        FACULTY ROUTES                       */
 

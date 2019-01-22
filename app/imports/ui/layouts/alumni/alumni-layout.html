@@ -1,0 +1,14 @@
+<template name="Alumni_Layout">
+  {{#If_Authorized}}
+    {{#With_Global_Subscriptions}}
+      {{#With_Instance_Subscriptions}}
+        {{> Mobile_Second_Menu menuItems=secondMenuItems username=routeUserName}}
+        <div class="pusher">
+          {{> First_Menu role="Alumni"}}
+          {{> Second_Menu menuItems=secondMenuItems menuLength=secondMenuLength username=routeUserName}}
+          {{> Template.dynamic template=main}}
+        </div>
+      {{/With_Instance_Subscriptions}}
+    {{/With_Global_Subscriptions}}
+  {{/If_Authorized}}
+</template>

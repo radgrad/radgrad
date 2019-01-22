@@ -1,0 +1,39 @@
+<template name="Alumni_Ice_Widget">
+  <div class="ui padded segment">
+    <div class="ui dividing header"><h4>YOUR ICE POINTS</h4></div>
+    <div class="ui equal width grid stackable internally celled">
+      <!-- Innovation -->
+      <div class="column" style="padding-left: 0;">
+        <div class="ui basic segment">
+          {{> First_Menu_Ice earned=earnedICE.i planned=0 iceType="innov" type='ice-page'}}
+          <h3 class="ui centered header ice-innovation-color">
+            INNOVATION
+          </h3>
+          {{> Alumni_Ice_Column type = 'Innovation' }}
+        </div>
+      </div>
+
+      <!-- Competency -->
+      <div class="column">
+        <div class="ui basic segment">
+          {{> First_Menu_Ice earned=earnedICE.c planned=0 iceType="comp" type='ice-page'}}
+          <h3 class="ui centered header ice-competency-color">
+            COMPETENCY
+          </h3>
+          {{> Alumni_Ice_Column type = 'Competency' }}
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div class="column" style="padding-right: 0;">
+        <div class="ui basic segment">
+          {{> First_Menu_Ice earned=earnedICE.e planned=0 iceType="exp" type='ice-page'}}
+          <h3 class="ui centered header ice-experience-color">
+            EXPERIENCE
+          </h3>
+          {{> Alumni_Ice_Column type = 'Experience' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
