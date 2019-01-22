@@ -61,6 +61,9 @@ Template.Alumni_Ice_Column.helpers({
     }
     return null;
   },
+  eventIce(event) {
+    return event.ice;
+  },
   getEvents(type, earned, semester) {
     return getEventsHelper(this.type, type, earned, semester);
   },

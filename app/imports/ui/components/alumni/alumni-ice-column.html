@@ -1,12 +1,12 @@
 <template name="Alumni_Ice_Column">
   <div class="ui styled fluid accordion">
     <!-- Earned -->
-    <div class="active title">
+    <div class="title">
       <i class="dropdown icon"></i>
       Verified <div class="ui right floated {{#with getTypeColors}}{{color}}{{/with}}">{{points earnedICE}} pts</div>
     </div>
 
-    <div class="active content">
+    <div class="content">
       {{#if matchingPoints (points earnedICE) 0}}
         <p>You have no verified {{type}} points.</p>
       {{else}}
