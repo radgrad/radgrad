@@ -9,6 +9,9 @@ Template.Landing_Section_1.helpers({
   advisorStudentConfigurationPageRouteName() {
     return RouteNames.advisorStudentConfigurationPageRouteName;
   },
+  alumniHomePageRouteName() {
+    return RouteNames.alumniHomePageRouteName;
+  },
   checkLanding() {
     const routeName = FlowRouter.current().route.name;
     if (routeName === 'Landing_Page') {

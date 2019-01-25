@@ -38,6 +38,9 @@
               {{#if isInRole 'MENTOR'}}
                 <a style="color: #6FBE44;" href="{{pathFor mentorHomePageRouteName username=(currentUser.username)}}">Home</a>
               {{/if}}
+              {{#if isInRole 'ALUMNI'}}
+                <a style="color: #6FBE44;" href="{{pathFor alumniHomePageRouteName username=(currentUser.username)}}">Home</a>
+              {{/if}}
             </div>
           </div>
         {{/if}}

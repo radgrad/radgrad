@@ -8,3 +8,5 @@ import './alumni-ice-column';
 
 import './alumni-ice-widget.html';
 import './alumni-ice-widget';
+
+import './alumni-message-widget.html';

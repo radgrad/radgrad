@@ -38,6 +38,7 @@ Accounts.onLogin(function onLogin() {
         console.log('Error creating UserInteraction.', error);
       }
     });
+    // console.log(`/${role.toLowerCase()}/${username}/home`);
     FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
   }
 });

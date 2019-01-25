@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { $ } from 'meteor/jquery';
+import { Users } from '../../../api/user/UserCollection';
 
 Template.RadGrad_Login_Buttons.events({
 
@@ -22,7 +23,14 @@ Template.RadGrad_Login_Buttons.events({
       } else {
         const username = Meteor.user('username').username;
         const id = Meteor.userId();
-        const role = Roles.getRolesForUser(id)[0];
+        let role = Roles.getRolesForUser(id)[0];
+        const studentp = role.toLowerCase() === 'student';
+        if (studentp) {
+          const profile = Users.findProfileFromUsername(username);
+          if (profile.isAlumni) {
+            role = 'Alumni';
+          }
+        }
         FlowRouter.go(`/${role.toLowerCase()}/${username}/home`);
       }
     };
