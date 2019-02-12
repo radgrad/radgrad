@@ -8,6 +8,7 @@ import { AcademicYearInstances } from '../degree-plan/AcademicYearInstanceCollec
 import { Semesters } from '../semester/SemesterCollection';
 import { Users } from '../user/UserCollection';
 import BaseCollection from '../base/BaseCollection';
+import { VerificationRequests } from '../verification/VerificationRequestCollection';
 
 
 /**
@@ -46,7 +47,7 @@ class OpportunityInstanceCollection extends BaseCollection {
    *                               opportunity: 'hack2015',
    *                               verified: false,
    *                               student: 'joesmith',
-    *                              sponsor: 'johnson' });
+   *                              sponsor: 'johnson' });
    * @param { Object } description Semester, opportunity, and student must be slugs or IDs. Verified defaults to false.
    * Sponsor defaults to the opportunity sponsor.
    * Note that only one opportunity instance can be defined for a given semester, opportunity, and student.
@@ -81,7 +82,8 @@ class OpportunityInstanceCollection extends BaseCollection {
     }
     const ice = Opportunities.findDoc(opportunityID).ice;
     // Define and return the new OpportunityInstance
-    const opportunityInstanceID = this._collection.insert({ semesterID,
+    const opportunityInstanceID = this._collection.insert({
+      semesterID,
       opportunityID,
       verified,
       studentID,
@@ -119,7 +121,12 @@ class OpportunityInstanceCollection extends BaseCollection {
    */
   removeIt(docID) {
     this.assertDefined(docID);
-    // OK, clear to delete.
+    // find any VerificationRequests associated with docID and remove them.
+    const requests = VerificationRequests.find({ opportunityInstanceID: docID })
+      .fetch();
+    _.forEach(requests, (vr) => {
+      VerificationRequests.removeIt(vr._id);
+    });
     super.removeIt(docID);
   }
 
@@ -226,13 +233,13 @@ class OpportunityInstanceCollection extends BaseCollection {
         return instance._collection.find({ sponsorID: this.userId });
       });
       Meteor.publish(this.publicationNames.perStudentAndSemester,
-          function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
-            new SimpleSchema({
-              studentID: { type: String },
-              semesterID: { type: String },
-            }).validate({ studentID, semesterID });
-            return instance._collection.find({ studentID, semesterID });
-          });
+        function perStudentAndSemester(studentID, semesterID) {  // eslint-disable-line
+          new SimpleSchema({
+            studentID: { type: String },
+            semesterID: { type: String },
+          }).validate({ studentID, semesterID });
+          return instance._collection.find({ studentID, semesterID });
+        });
       Meteor.publish(this.publicationNames.studentID, function filterStudentID(studentID) { // eslint-disable-line
         new SimpleSchema({
           studentID: { type: String },
@@ -286,20 +293,21 @@ class OpportunityInstanceCollection extends BaseCollection {
    */
   checkIntegrity() {
     const problems = [];
-    this.find().forEach(doc => {
-      if (!Semesters.isDefined(doc.semesterID)) {
-        problems.push(`Bad semesterID: ${doc.semesterID}`);
-      }
-      if (!Opportunities.isDefined(doc.opportunityID)) {
-        problems.push(`Bad opportunityID: ${doc.opportunityID}`);
-      }
-      if (!Users.isDefined(doc.studentID)) {
-        problems.push(`Bad studentID: ${doc.studentID}`);
-      }
-      if (!Users.isDefined(doc.sponsorID)) {
-        problems.push(`Bad sponsorID: ${doc.sponsorID}`);
-      }
-    });
+    this.find()
+      .forEach(doc => {
+        if (!Semesters.isDefined(doc.semesterID)) {
+          problems.push(`Bad semesterID: ${doc.semesterID}`);
+        }
+        if (!Opportunities.isDefined(doc.opportunityID)) {
+          problems.push(`Bad opportunityID: ${doc.opportunityID}`);
+        }
+        if (!Users.isDefined(doc.studentID)) {
+          problems.push(`Bad studentID: ${doc.studentID}`);
+        }
+        if (!Users.isDefined(doc.sponsorID)) {
+          problems.push(`Bad sponsorID: ${doc.sponsorID}`);
+        }
+      });
     return problems;
   }
 
