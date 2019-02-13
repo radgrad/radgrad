@@ -10,22 +10,10 @@ Template.Inspector_Plan_Tabs.helpers({
     return Template.instance().state;
   },
   showInspector() {
-    const selectedInstance = Template.instance()
-      .state
-      .get(plannerKeys.detailCourseInstance) || Template.instance()
-      .state
-      .get(plannerKeys.detailOpportunityInstance);
-    console.log(`showInspector(${!!selectedInstance})`);
-    return !!selectedInstance;
+    return Template.instance().state.get(plannerKeys.selectedInspectorTab);
   },
   showPlan() {
-    const selectedInstance = Template.instance()
-      .state
-      .get(plannerKeys.detailCourseInstance) || Template.instance()
-      .state
-      .get(plannerKeys.detailOpportunityInstance);
-    console.log(`showPlan(${!selectedInstance})`);
-    return !selectedInstance;
+    return Template.instance().state.get(plannerKeys.selectedPlanTab);
   },
 });
 
@@ -35,7 +23,7 @@ Template.Inspector_Plan_Tabs.events({
     const template = Template.instance();
     template.state.set(plannerKeys.selectedPlanTab, tabName === plannerKeys.selectedPlanTab);
     template.state.set(plannerKeys.selectedInspectorTab, tabName === plannerKeys.selectedInspectorTab);
-    console.log(tabName, template.state.get(plannerKeys.selectedPlanTab),
+    console.log(template.state.get(plannerKeys.selectedPlanTab),
       template.state.get(plannerKeys.selectedInspectorTab));
   },
 });
