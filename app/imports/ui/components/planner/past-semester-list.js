@@ -57,6 +57,8 @@ Template.Past_Semester_List.events({
                 instance.state.set(plannerKeys.detailCourse, null);
                 instance.state.set(plannerKeys.detailCourseInstance, ci);
                 instance.state.set(plannerKeys.detailICE, ci.ice);
+                instance.state.set(plannerKeys.selectedInspectorTab, true);
+                instance.state.set(plannerKeys.selectedPlanTab, false);
                 getFutureEnrollmentMethod.call(courseID, (err, result) => {
                   if (err) {
                     console.log('Error in getting future enrollment', error);
@@ -98,6 +100,8 @@ Template.Past_Semester_List.events({
                   instance.state.set(plannerKeys.detailICE, null);
                   instance.state.set(plannerKeys.detailOpportunityInstance, oi);
                   instance.state.set(plannerKeys.detailOpportunity, null);
+                  instance.state.set(plannerKeys.selectedInspectorTab, true);
+                  instance.state.set(plannerKeys.selectedPlanTab, false);
                   const interactionData = { username, type: 'addOpportunity', typeData: slug };
                   userInteractionDefineMethod.call(interactionData, (err) => {
                     if (err) {
@@ -183,6 +187,8 @@ Template.Past_Semester_List.events({
       template.state.set(plannerKeys.detailICE, ci.ice);
       template.state.set(plannerKeys.detailOpportunity, null);
       template.state.set(plannerKeys.detailOpportunityInstance, null);
+      template.state.set(plannerKeys.selectedInspectorTab, true);
+      template.state.set(plannerKeys.selectedPlanTab, false);
     } else
       if (firstClass === 'opportunityInstance') {
         const oi = template.data.semesterOpportunities[target.id];
@@ -191,6 +197,8 @@ Template.Past_Semester_List.events({
         template.state.set(plannerKeys.detailICE, oi.ice);
         template.state.set(plannerKeys.detailCourse, null);
         template.state.set(plannerKeys.detailCourseInstance, null);
+        template.state.set(plannerKeys.selectedInspectorTab, true);
+        template.state.set(plannerKeys.selectedPlanTab, false);
       }
   },
 });

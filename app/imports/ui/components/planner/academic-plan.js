@@ -20,6 +20,8 @@ export const plannerKeys = {
   detailOpportunityInstance: 'detailOpportunityInstance',
   detailICE: 'detailICE',
   plannedEnrollment: 'plannedEnrollment',
+  selectedPlanTab: 'plan',
+  selectedInspectorTab: 'inspector',
 };
 
 Template.Academic_Plan.onCreated(function academicPlanOnCreated() {

@@ -30,7 +30,14 @@ Template.Inspector_Plan_Tabs.helpers({
 });
 
 Template.Inspector_Plan_Tabs.events({
-  // add your events here
+  'click .jsInspectorTab': function clickInspectorTab(event) {
+    const tabName = event.target.dataset.tab;
+    const template = Template.instance();
+    template.state.set(plannerKeys.selectedPlanTab, tabName === plannerKeys.selectedPlanTab);
+    template.state.set(plannerKeys.selectedInspectorTab, tabName === plannerKeys.selectedInspectorTab);
+    console.log(tabName, template.state.get(plannerKeys.selectedPlanTab),
+      template.state.get(plannerKeys.selectedInspectorTab));
+  },
 });
 
 Template.Inspector_Plan_Tabs.onRendered(function inspectorPlanTabsOnRendered() {
