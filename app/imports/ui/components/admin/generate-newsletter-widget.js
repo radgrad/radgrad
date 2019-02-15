@@ -504,7 +504,7 @@ Template.Generate_Newsletter_Widget.events({
         const emailData = {};
         emailData.to = sendList;
         emailData.bcc = bccListArray;
-        emailData.from = 'radgrad@hawaii.edu';
+        emailData.from = 'noreply@radgrad.org';
         emailData.subject = `Newsletter View For ${student.firstName} ${student.lastName}`;
         emailData.templateData = {
           adminMessage,
@@ -560,7 +560,7 @@ Template.Generate_Newsletter_Widget.events({
           console.log(`Sending email to ${email}`);
           emailData.to = email;
           emailData.bcc = bccListArray;
-          emailData.from = 'radgrad@hawaii.edu';
+          emailData.from = 'noreply@radgrad.org';
           emailData.subject = subject;
           emailData.templateData = {
             adminMessage,
@@ -614,7 +614,7 @@ Template.Generate_Newsletter_Widget.events({
           console.log(`Sending email to ${email}`);
           emailData.to = email;
           emailData.bcc = bccListArray;
-          emailData.from = 'radgrad@hawaii.edu';
+          emailData.from = 'noreply@radgrad.org';
           emailData.subject = subject;
           emailData.templateData = {
             adminMessage,

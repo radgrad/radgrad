@@ -12,6 +12,9 @@ export const sendEmailMethod = new ValidatedMethod({
   name: 'Email.sendEmail',
   validate: null,
   run(emailData) {
+    // Let other method calls from the same client start running,
+    // without waiting for the email sending to complete.
+    this.unblock();
     if (!this.userId) {
       throw new Meteor.Error('unauthorized', 'You must be logged in to send emails.', '', Error().stack);
     } else if (!Roles.userIsInRole(this.userId, [ROLE.ADMIN])) {
