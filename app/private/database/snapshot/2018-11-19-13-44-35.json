@@ -1002,7 +1002,9 @@
           "number": "CEE 270",
           "description": "Forces, resultants, and equilibrium; analysis of trusses, frames, and machines; centroids, moments of inertia; friction.",
           "creditHrs": 3,
-          "interests": [],
+          "interests": [
+            "algorithms"
+          ],
           "prerequisites": [],
           "retired": true
         },
@@ -1013,7 +1015,9 @@
           "number": "EE 160",
           "description": "Introductory course on computer programming and modern computing environments in C with an emphasis on algorithm and program design, implementation, and debugging. Includes a hands-on laboratory to develop and practice programming skills.",
           "creditHrs": 4,
-          "interests": [],
+          "interests": [
+            "algorithms"
+          ],
           "prerequisites": [],
           "retired": true
         },
@@ -1024,10 +1028,10 @@
           "number": "EE 205",
           "description": "Second-level programming for computer engineers. Object-oriented programming paradigm, definition and use of classes, fundamentals of object-oriented design in modern object-oriented languages such as C++. Common data structures, simple searching and sorting techniques.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_160"
+          "interests": [
+            "algorithms"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1037,7 +1041,9 @@
           "number": "EE 211",
           "description": "Linear passive circuits, time domain analysis, transient and steady-state responses, phasors, impedance and admittance; power and energy, frequency responses, resonance.",
           "creditHrs": 4,
-          "interests": [],
+          "interests": [
+            "algorithms"
+          ],
           "prerequisites": [],
           "retired": true
         },
@@ -1047,11 +1053,11 @@
           "slug": "ee_213",
           "number": "EE 213",
           "description": "Laplace transforms and their application to circuits, Fourier transforms and their applications to circuits, frequency selective circuits, introduction to and design of active filters, convolution, and state space analysis of circuits.",
-          "creditHrs": 4,
-          "interests": [],
-          "prerequisites": [
-            "ee_211"
+          "creditHrs": 3,
+          "interests": [
+            "algorithms"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1061,10 +1067,10 @@
           "number": "EE 260",
           "description": "Introduction to the design of digital systems with an emphasis on design methods and the implementation and use of fundamental digital components.",
           "creditHrs": 4,
-          "interests": [],
-          "prerequisites": [
-            "ee_160"
+          "interests": [
+            "algorithms"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1074,7 +1080,9 @@
           "number": "EE 296",
           "description": "Sophomore level individual or team project under EE faculty direction and guidance. The project provides design experience and develops practical skills.",
           "creditHrs": 3,
-          "interests": [],
+          "interests": [
+            "algorithms"
+          ],
           "prerequisites": [],
           "retired": true
         },
@@ -1085,10 +1093,10 @@
           "number": "EE 315",
           "description": "Discrete-time and continuous time signals and systems, linear systems, convolution, Fourier series, Fourier transform, sampling.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_213"
+          "interests": [
+            "algorithms"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1098,10 +1106,10 @@
           "number": "EE 323",
           "description": "Semiconductor structures, operating principles and characteristics of diodes and amplifying devices. Their application as circuit elements in building basic digital, analog, and integrated circuit subsystems.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_213"
+          "interests": [
+            "algorithms"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1111,7 +1119,9 @@
           "number": "EE 324",
           "description": "Review of quantum mechanics fundamentals, H-atom, and chemical bonding. Introduction to band structure models and materials. Semiconductor doping, charge carrier statistics and charge transport, including ambipolar transport. Metal-semiconductor and PN junctions.",
           "creditHrs": 3,
-          "interests": [],
+          "interests": [
+            "algorithms"
+          ],
           "prerequisites": [],
           "retired": true
         },
@@ -1122,10 +1132,10 @@
           "number": "EE 342",
           "description": "Probability, statistics, random variables, distributions, densities, expectations, limit theorems, and applications to electrical engineering.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_315"
+          "interests": [
+            "dotNet"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1135,11 +1145,10 @@
           "number": "EE 361",
           "description": "Design methodology, processor design, control design, memory organization, system organization.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_160",
-            "ee_260"
+          "interests": [
+            "dotNet"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1149,11 +1158,10 @@
           "number": "EE 362",
           "description": "Logic, sets, number theory, properties of functions, properties of relations, methods of proofs, recursion, counting, probability, trees, graphs, analysis of algorithms, finite state autonoma.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_160",
-            "ee_260"
+          "interests": [
+            "dotNet"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1163,9 +1171,10 @@
           "number": "EE 367",
           "description": "Introduction to computer programming algorithms with emphasis on advanced data structures, input-output routines, files, and interpreters.",
           "creditHrs": 3,
-          "interests": [],
+          "interests": [
+            "dotNet"
+          ],
           "prerequisites": [
-            "ee_205",
             "ics_141"
           ],
           "retired": true
@@ -1177,10 +1186,10 @@
           "number": "EE 371",
           "description": "Transient and steady-state waves on transmission lines. Plane wave solutions of Maxwell's equations. Application of Maxwell's equations under static and time-varying conditions.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_213"
+          "interests": [
+            "dotNet"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1190,10 +1199,10 @@
           "number": "EE 396",
           "description": "Junior level individual or team project under EE faculty direction and guidance. The project provides design experience and develops practical skills. It may be a continuation of EE 296 or a new project.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_296"
+          "interests": [
+            "dotNet"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1203,10 +1212,10 @@
           "number": "EE 406",
           "description": "Review basic network mechanisms, introduce basic cryptography concepts, and study algorithms and protocols used in computer and network security. Discuss practical security mechanisms.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_367"
+          "interests": [
+            "dotNet"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1216,10 +1225,10 @@
           "number": "EE 467",
           "description": "Introduction to advanced techniques for designing, implementing, and testing computer software with a particular focus on using object-oriented design, analysis, and programming to produce high-quality computer programs that solve non-trivial problems.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_367"
+          "interests": [
+            "dotNet"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1229,11 +1238,10 @@
           "number": "EE 468",
           "description": "Computer system organization; multiprocessor systems, memory hierarchies, assemblers, compilers, operating systems, virtual machine, memory management, processor management; information management.",
           "creditHrs": 3,
-          "interests": [],
-          "prerequisites": [
-            "ee_361",
-            "ee_367"
+          "interests": [
+            "dotNet"
           ],
+          "prerequisites": [],
           "retired": true
         },
         {
@@ -1243,7 +1251,9 @@
           "number": "EE 495",
           "description": "Equip electrical engineers with the necessary background for ethical reasoning, as it pertains to technology, society, workplace issues, and the environment.",
           "creditHrs": 1,
-          "interests": [],
+          "interests": [
+            "computer-ethics"
+          ],
           "prerequisites": [],
           "retired": true
         },
@@ -1254,7 +1264,9 @@
           "number": "EE 496",
           "description": "Significant project integrating the design content of previous courses and incorporating engineering standards and realistic constraints. Written report must document all aspects of the design process: reliability, safety, economics, ethics.",
           "creditHrs": 1,
-          "interests": [],
+          "interests": [
+            "dotNet"
+          ],
           "prerequisites": [],
           "retired": true
         },
@@ -1266,6 +1278,20 @@
           "description": "Fundamental information technology concepts and computing terminology, productivity software for problem solving, computer technology trends and impact on individuals and society. Emphasizes the utilization of operating systems and the production of professional documents, spreadsheets, etc.",
           "creditHrs": 4,
           "interests": [],
+          "prerequisites": []
+        },
+        {
+          "name": "Introduction to Data Science",
+          "shortName": "Introduction to Data Science",
+          "slug": "ics_102",
+          "number": "ICS 102",
+          "description": "Overview of the field of data science. Introduction to subjects such as data format, processing, visualization, and storage. Special emphasis on historical and wider context, and simple practical examples.",
+          "creditHrs": 3,
+          "interests": [
+            "data-science",
+            "data-visualization",
+            "databases"
+          ],
           "prerequisites": [],
           "retired": false
         },
@@ -1279,8 +1305,7 @@
           "interests": [
             "python"
           ],
-          "prerequisites": [],
-          "retired": false
+          "prerequisites": []
         },
         {
           "name": "Introduction to Computer Science I",
@@ -1293,8 +1318,7 @@
             "java"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS111.html",
-          "prerequisites": [],
-          "retired": false
+          "prerequisites": []
         },
         {
           "name": "Discrete Mathematics for Computer Science I",
@@ -1307,6 +1331,21 @@
             "algorithms"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS141.html",
+          "prerequisites": []
+        },
+        {
+          "name": "Information Systems in Society",
+          "shortName": "Information Systems in Society",
+          "slug": "ics_210",
+          "number": "ICS 210",
+          "description": "Lecture/discussion critically explores sociopolitical dimensions of Information and Communication Technology (ICT), and the information professions.",
+          "creditHrs": 3,
+          "interests": [
+            "civic-engagement",
+            "computer-ethics",
+            "psychology",
+            "social-computing"
+          ],
           "prerequisites": [],
           "retired": false
         },
@@ -1325,8 +1364,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS211.html",
           "prerequisites": [
             "ics_111"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Program Structure",
@@ -1336,15 +1374,13 @@
           "description": "Program organization paradigms, programming environments, implementation of a module from specifications, the C and C++ programming languages.",
           "creditHrs": 3,
           "interests": [
-            "c",
-            "cplusplus",
-            "application-development"
+            "application-development",
+            "c"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS212.html",
           "prerequisites": [
             "ics_211"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Introduction to Scripting",
@@ -1362,8 +1398,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS215.html",
           "prerequisites": [
             "ics_211"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Basic Concepts of Computer Science",
@@ -1378,7 +1413,19 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS222.html",
           "prerequisites": [
             "ics_141"
+          ]
+        },
+        {
+          "name": "Machine Learning Methods",
+          "shortName": "Machine Learning Methods",
+          "slug": "ics_235",
+          "number": "ICS 235",
+          "description": "Introduction to contemporary mathematical methods for empirical inference, data modeling, and machine learning.",
+          "creditHrs": 3,
+          "interests": [
+            "machine-learning"
           ],
+          "prerequisites": [],
           "retired": false
         },
         {
@@ -1394,7 +1441,22 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS241.html",
           "prerequisites": [
             "ics_141"
+          ]
+        },
+        {
+          "name": "Computer Science Careers: An Exploration of the Specialties of Computer Science",
+          "shortName": "Computer Science Careers",
+          "slug": "ics_290",
+          "number": "ICS 290",
+          "description": "Exploration of the specialties of computer science. Meets every two weeks for 2.5 hours to explore specific areas in computer science.",
+          "creditHrs": 1,
+          "interests": [
+            "entrepreneurship",
+            "research",
+            "software-engineering",
+            "teaching"
           ],
+          "prerequisites": [],
           "retired": false
         },
         {
@@ -1412,8 +1474,7 @@
           "prerequisites": [
             "ics_241",
             "ics_211"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Machine-Level and Systems Programming",
@@ -1431,8 +1492,7 @@
           "prerequisites": [
             "ics_212",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Programming Language Theory",
@@ -1450,8 +1510,7 @@
             "ics_212",
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Software Engineering I",
@@ -1470,8 +1529,7 @@
           "prerequisites": [
             "ics_211",
             "ics_241"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Data Storage and Retrieval",
@@ -1489,8 +1547,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Logic Design and Microprocessors",
@@ -1509,8 +1566,7 @@
             "ics_212",
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Operating Systems",
@@ -1528,8 +1584,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Network Design and Management",
@@ -1548,8 +1603,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Security and Trust I: Resource Protections",
@@ -1566,8 +1620,7 @@
             "ics_222",
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Introduction to Artificial Intelligence Programming",
@@ -1586,8 +1639,7 @@
             "ics_212",
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Computing Ethics for Lab Assistants",
@@ -1603,8 +1655,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS390.html",
           "prerequisites": [
             "ics_101"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Software Engineering II",
@@ -1622,8 +1673,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Introduction to Programming for the Web",
@@ -1640,8 +1690,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "The Science, Psychology and Philosophy of Systems Design",
@@ -1658,8 +1707,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Database Systems",
@@ -1674,8 +1722,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS421.html",
           "prerequisites": [
             "ics_321"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Data Processing",
@@ -1690,8 +1737,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS422.html",
           "prerequisites": [
             "ics_321"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Data Security and Cryptography I",
@@ -1707,8 +1753,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS423.html",
           "prerequisites": [
             "ics_355"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Application Frameworks",
@@ -1724,8 +1769,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Computer Security and Ethics",
@@ -1742,8 +1786,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS425.html",
           "prerequisites": [
             "ics_355"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Computer System Security",
@@ -1757,6 +1800,23 @@
             "it-management"
           ],
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS426.html",
+          "prerequisites": [
+            "ics_355"
+          ]
+        },
+        {
+          "name": "Digital Forensics",
+          "shortName": "Digital Forensics",
+          "slug": "ics_428",
+          "number": "ICS 428",
+          "description": "Provides students with the knowledge of underlying principles and skills to identify, preserve, and extract electronic evidence for further analysis.",
+          "creditHrs": 3,
+          "interests": [
+            "computer-ethics",
+            "it-management",
+            "networks",
+            "security"
+          ],
           "prerequisites": [
             "ics_355"
           ],
@@ -1776,8 +1836,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS431.html",
           "prerequisites": [
             "ics_331"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Concurrent and High-Performance Programming",
@@ -1798,8 +1857,7 @@
             "ics_311",
             "ics_314",
             "ics_212"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Machine Learning Fundamentals",
@@ -1816,8 +1874,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Theory of Computation",
@@ -1834,8 +1891,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Analytical Models and Methods",
@@ -1851,8 +1907,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Parallel Algorithms",
@@ -1872,8 +1927,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Data Networks",
@@ -1891,8 +1945,7 @@
             "ics_311",
             "ics_314",
             "ics_212"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Software Design for Robotics",
@@ -1911,8 +1964,7 @@
           "prerequisites": [
             "ics_312",
             "ics_313"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Security and Trust II: Information Assurance",
@@ -1928,8 +1980,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS455.html",
           "prerequisites": [
             "ics_355"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Artificial Intelligence",
@@ -1948,8 +1999,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Artificial Intelligence for Games",
@@ -1970,8 +2020,7 @@
             "ics_311",
             "ics_314",
             "ics_212"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Human Computer Interaction I",
@@ -1988,8 +2037,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Introduction to Hypermedia",
@@ -2006,8 +2054,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Design for Mobile Devices",
@@ -2025,8 +2072,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Cognitive Science",
@@ -2045,8 +2091,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Probability, Statistics, and Queuing",
@@ -2064,8 +2109,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Introduction to Bioinformatics Sequences and Genomes Analysis",
@@ -2084,8 +2128,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Bioinformatics Algorithms and Tool Development",
@@ -2103,8 +2146,7 @@
           "syllabus": "http://courses.ics.hawaii.edu/syllabuses/ICS476.html",
           "prerequisites": [
             "ics_475"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Introduction to Computer Graphics",
@@ -2120,8 +2162,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Computer Vision",
@@ -2139,8 +2180,7 @@
             "ics_311",
             "ics_314",
             "ics_212"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Data Visualization",
@@ -2158,8 +2198,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Video Game Design and Development",
@@ -2178,8 +2217,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Special Topics",
@@ -2192,8 +2230,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Special Topics in Security",
@@ -2208,8 +2245,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Computer Project",
@@ -2222,8 +2258,7 @@
           "prerequisites": [
             "ics_311",
             "ics_314"
-          ],
-          "retired": false
+          ]
         },
         {
           "name": "Master’s Plan B/C Studies",
@@ -2712,7 +2747,9 @@
           "number": "ME 311",
           "description": "Basic laws, closed and open systems. Work, heat, concept of entropy. Properties of pure simple substances. Ideal gases. Introduction to power and refrigeration cycles.",
           "creditHrs": 4,
-          "interests": [],
+          "interests": [
+            "algorithms"
+          ],
           "prerequisites": [],
           "retired": true
         },
@@ -2724,8 +2761,7 @@
           "description": "The course used to represent all non-CS courses.",
           "creditHrs": 3,
           "interests": [],
-          "prerequisites": [],
-          "retired": false
+          "prerequisites": []
         }
       ]
     },
