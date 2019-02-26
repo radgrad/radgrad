@@ -9,6 +9,7 @@
       <a class="item" data-tab="faculty">Faculty ({{facultyCount}})</a>
       <a class="item" data-tab="mentors">Mentors ({{mentorCount}})</a>
       <a class="active item" data-tab="students">Students ({{studentCount}})</a>
+      <a class="item" data-tab="alumni">Alumni ({{alumniCount}})</a>
     </div>
     <div class="ui bottom attached tab segment" data-tab="advisors">
       <div class="ui stackable grid">
@@ -50,6 +51,15 @@
       {{#if updateResult}}
         <div class="ui message">{{updateResult}}</div>
       {{/if}}
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="alumni">
+      <div class="ui stackable grid">
+        {{#each user in users alumniRole}}
+          <div class="two wide column" style="padding: 2px;">
+            <a class="ui basic grey fluid label" target="_blank" href="{{url user}}">{{label user}}</a>
+          </div>
+        {{/each}}
+      </div>
     </div>
   </div>
 </template>
