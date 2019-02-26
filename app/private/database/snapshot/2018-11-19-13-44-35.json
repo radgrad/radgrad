@@ -4802,6 +4802,18 @@
           "interestType": "technologies"
         },
         {
+          "name": "Angular",
+          "slug": "angular",
+          "description": "[AngularJS](https://angular.io/) is a JavaScript-based open-source front-end web application framework mainly maintained by Google and by a community of individuals and corporations to address many of the challenges encountered in developing single-page applications. Angular combines declarative templates, dependency injection, end to end tooling, and integrated best practices to solve development challenges.\n\nHere is a [short video introduction to Angular](https://www.youtube.com/watch?v=WAZTZUgeLhQ).",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Apache Spark",
+          "slug": "apache-spark",
+          "description": "[Apache Spark](https://spark.apache.org/) is a fast, in-memory data processing engine with elegant and expressive development APIs to allow data workers to efficiently execute streaming, machine learning or SQL workloads that require fast iterative access to datasets.  Originally developed at the University of California, Berkeley's AMPLab, the Spark codebase was later donated to the Apache Software Foundation, which has maintained it since. \n\nSpark runs on Hadoop, Mesos, Kubernetes, standalone, or in the cloud. It can access diverse data sources including HDFS, Cassandra, HBase, and S3. You can run Spark using its standalone cluster mode, on EC2, on Hadoop YARN, on Apache Mesos, or on Kubernetes.\n\nHere is a [short introduction video](https://www.youtube.com/watch?v=TgiBvKcGL24) about Apache Spark.",
+          "interestType": "technologies"
+        },
+        {
           "name": "Application Development",
           "slug": "application-development",
           "description": "Application development is the use of tools, technologies, procedures, and domain knowledge to create and maintain useful software and/or hardware systems.",
@@ -4820,6 +4832,18 @@
           "interestType": "technologies"
         },
         {
+          "name": "Amazon Web Services",
+          "slug": "aws",
+          "description": "[Amazon Web Services (AWS)](https://aws.amazon.com/) is a secure cloud services platform, offering compute power, database storage, content delivery and other functionality to help businesses scale and grow.\n\nAWS is the biggest public cloud vendor — by a very wide margin. Synergy Research says that in 2017, AWS generated more revenue than the next five largest cloud vendors combined.\n\nHere is a [three minute video introduction to AWS](https://www.youtube.com/watch?v=mZ5H8sn_2ZI).",
+          "interestType": "technologies"
+        },
+        {
+          "name": "Azure",
+          "slug": "azure",
+          "description": "[Microsoft Azure](https://azure.microsoft.com/en-us/) is a cloud computing service that works similarly to Amazon Web Services (AWS) and the Google Cloud Platform. Azure allows you to host a variety of services in the cloud, including: web servers, email servers, databases, file storage servers, virtual machines, and user directories. See the [Azure Directory](https://azure.microsoft.com/en-us/services/) for a complete list of services. \n\nFrom a revenue and market share standpoint, Microsoft's cloud computing service made some huge gains in 2017, and it is particularly popular with enterprises that run Windows and other Microsoft software. According to third quarter 2017 data from [Synergy Research Group](https://www.srgresearch.com/articles/cloud-market-keeps-growing-over-40-amazon-still-increases-share), Microsoft is now the second biggest cloud vendor in the infrastructure as a service (IaaS), platform as a service (PaaS) and hosted private cloud market. Azure also had the fastest growth in the third quarter of any of the leading cloud vendors. According to Microsoft, 90% of Fortune 500 companies run some workloads on Microsoft's cloud.",
+          "interestType": "technologies"
+        },
+        {
           "name": "Bioinformatics",
           "slug": "bioinformatics",
           "description": "Bioinformatics is an interdisciplinary field combining computer science, statistics, mathematics, and engineering that develops methods and software tools for understanding biological data. Common uses of bioinformatics include the identification of candidate genes and nucleotides (SNPs). Often, such identification is made with the aim of better understanding the genetic basis of disease, unique adaptations, desirable properties (esp. in agricultural species), or differences between populations. [Learn more here.](https://en.wikipedia.org/wiki/Bioinformatics)",
@@ -4830,6 +4854,12 @@
           "slug": "biology",
           "description": "A natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, and taxonomy. [Learn more here.](https://en.wikipedia.org/wiki/Biology)",
           "interestType": "non-cs-disciplines"
+        },
+        {
+          "name": "Blockchain",
+          "slug": "blockchain",
+          "description": "A blockchain is a continuously growing list of records, called blocks, which are linked and secured using cryptography. Each block typically contains a hash pointer as a link to a previous block, a timestamp and transaction data. By design, blockchains are inherently resistant to modification of the data. \n\nA blockchain can serve as \"an open, distributed ledger that can record transactions between two parties efficiently and in a verifiable and permanent way.\" For use as a distributed ledger, a blockchain is typically managed by a peer-to-peer network collectively adhering to a protocol for validating new blocks. Once recorded, the data in any given block cannot be altered retroactively without the alteration of all subsequent blocks, which needs a collusion of the network majority.\n\nThe original, and currently most famous application of blockchain technology is to support the implementation of the virtual currency BitCoin.\n\nFor more information on blockchain, start with the [Wikipedia entry on blockchain](https://en.wikipedia.org/wiki/Blockchain).\n\nA great introduction is [Blockchains: how they work and how they'll change the world](https://spectrum.ieee.org/computing/networks/blockchains-how-they-work-and-why-theyll-change-the-world)",
+          "interestType": "technologies"
         },
         {
           "name": "C and C++",
@@ -4848,6 +4878,12 @@
           "slug": "civic-engagement",
           "description": "Civic engagement means working to make a difference in the civic life of our communities and developing the combination of knowledge, skills, values and motivation to make that difference. It means promoting the quality of life in a community, through both political and non-political processes. [Learn more here.](https://en.wikipedia.org/wiki/Civic_engagement)",
           "interestType": "non-cs-disciplines"
+        },
+        {
+          "name": "Cloud Computing",
+          "slug": "cloud-computing",
+          "description": "Cloud computing is the on-demand delivery of compute power, database storage, applications, and other IT resources through a cloud services platform via the internet with pay-as-you-go pricing.\n\nThe three biggest cloud computing vendors are [Amazon Web Services](https://aws.amazon.com/), [Google Cloud Platform](https://cloud.google.com/), and [Microsoft Azure](https://azure.microsoft.com/en-us/).\n\nCloud computing has three main types that are commonly referred to as Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS).\n\nHere is a [three minute introduction to Cloud Computing](https://www.youtube.com/watch?v=jOhbTAU4OPI) by Amazon Web Services.",
+          "interestType": "technologies"
         },
         {
           "name": "Cognitive Science",
@@ -4878,12 +4914,6 @@
           "slug": "computer-vision",
           "description": "Computer vision is a field that includes methods for acquiring, processing, analyzing, and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information that can be used to take action. A common theme is to duplicate the abilities of human vision by electronically perceiving and understanding an image. Subdomains of computer vision include scene reconstruction, event detection, video tracking, object recognition, object pose estimation, learning, indexing, motion estimation, and image restoration. [Learn more here.](https://en.wikipedia.org/wiki/Computer_vision)",
           "interestType": "cs-disciplines"
-        },
-        {
-          "name": "C++",
-          "slug": "cplusplus",
-          "description": "C++ is a general-purpose programming language. It has imperative, object-oriented and generic programming features, while also providing facilities for low-level memory manipulation. It was designed with a bias toward system programming and embedded, resource-constrained and large systems, with performance, efficiency and flexibility of use as its design highlights. Many other programming languages have been influenced by C++, including C#, Java, and newer versions of C (after 1998). [Learn more here.](https://en.wikipedia.org/wiki/C_(programming_language))",
-          "interestType": "technologies"
         },
         {
           "name": "Cryptography",
@@ -4952,6 +4982,12 @@
           "interestType": "cs-disciplines"
         },
         {
+          "name": "Internet of Things",
+          "slug": "internet-of-things",
+          "description": "According to Limor Fried: The Internet of Things is all about connections—connecting your electronics design, product, or project to the wider world. We start with the idea that you have a \"Thing\" that you want to connect to the \"Internet of.” How do you do that? Usually you start with something you’d like to improve. Say you love fish and have a home or school aquarium. Since you’ve got some really fancy fish, they need the water temperature to stay between 20 and 30 degrees Centigrade. You could always check the water temperature, but it would be better if you had a microcontroller to help you out! You could start with a simple temperature manager, but even better would be one that could email or text you to let you know if something went amiss and maybe the heater broke. That’s what the Internet of Things is all about: Making stuff smart!\"\n\nLimor \"Ladyada\" Fried is the founder and CEO of Adafruit Industries, an open-source hardware company. A founding member of the NYC Industrial Business Advisory Council, she was named a White House Champion of Change in 2016.  See the [rest of her article on Internet of Things](https://news.codecademy.com/internet-of-things/).",
+          "interestType": "technologies"
+        },
+        {
           "name": "iOS",
           "slug": "ios",
           "description": "iOS is a mobile operating system developed by Apple Inc. exclusively for its hardware. It is the OS for the iPhone, iPad, and iPod. As of January 2017, Apple's AppStore contains more than 2.2 million iOS applications. [Learn more here.](http://www.apple.com/ios/",
@@ -5000,6 +5036,12 @@
           "interestType": "cs-disciplines"
         },
         {
+          "name": "Natural Language Processing",
+          "slug": "natural-language-processing",
+          "description": "Natural language processing (NLP) is a field of computer science, artificial intelligence and computational linguistics concerned with the interactions between computers and human (natural) languages, and, in particular, concerned with programming computers to fruitfully process large natural language corpora. Challenges in natural language processing frequently involve natural language understanding, natural language generation (frequently from formal, machine-readable logical forms), connecting language and machine perception, dialog systems, or some combination thereof.\n\nFor more information, see the [Natural Language Processing Wikipedia Page](https://en.wikipedia.org/wiki/Natural_language_processing).",
+          "interestType": "cs-disciplines"
+        },
+        {
           "name": "Networks",
           "slug": "networks",
           "description": "A computer network or data network is a telecommunications network which allows computers to exchange data. In computer networks, networked computing devices exchange data with each other using a data link. The connections between nodes are established using either cable media or wireless media. The best-known computer network is the Internet. [Learn more here.](https://en.wikipedia.org/wiki/Computer_network)",
@@ -5042,9 +5084,21 @@
           "interestType": "technologies"
         },
         {
+          "name": "Quantum Computing",
+          "slug": "quantum-computing",
+          "description": "Quantum computing is computing using quantum-mechanical phenomena, such as superposition and entanglement.  A quantum computer is a device that performs quantum computing. They are different from binary digital electronic computers based on transistors. Whereas common digital computing requires that the data be encoded into binary digits (bits), each of which is always in one of two definite states (0 or 1), quantum computation uses quantum bits, which can be in superpositions of states. \n\nLarge-scale quantum computers would theoretically be able to solve certain problems much more quickly than any classical computers that use even the best currently known algorithms, like integer factorization using Shor's algorithm (which is a quantum algorithm) and the simulation of quantum many-body systems. There exist quantum algorithms, such as Simon's algorithm, that run faster than any possible probabilistic classical algorithm.\n\nFor more information on Quantum Computing, you can start with the [Wikipedia Entry](https://en.wikipedia.org/wiki/Quantum_computing). There's also an article from Wired, [What are quantum computers and how do they work?](http://www.wired.co.uk/article/quantum-computing-explained). MIT's Technology Review has an article [Serious quantum computers are finally here. What are we going to do with them?](http://www.wired.co.uk/article/quantum-computing-explained).  Finally, there's a 7 minute YouTube video, [Quantum Computers Explained](https://www.youtube.com/watch?v=JhHMJCUmq28), with over 7M views (so it must be good!)",
+          "interestType": "cs-disciplines"
+        },
+        {
           "name": "R",
           "slug": "r",
-          "description": "R is a programming language and software environment that is widely used among statisticians and data miners for developing statistical software and data analysis. R and its libraries implement a wide variety of statistical and graphical techniques, including linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, and others. [Learn more here.](https://en.wikipedia.org/wiki/R_(programming_language))",
+          "description": "[R](https://www.r-project.org/) is a programming language and software environment that is widely used among statisticians and data miners for developing statistical software and data analysis. R and its libraries implement a wide variety of statistical and graphical techniques, including linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, and others. \n\nThe R environment includes:\n\n* an effective data handling and storage facility,\n* a suite of operators for calculations on arrays, in particular matrices,\n* a large, coherent, integrated collection of intermediate tools for data analysis,\n* graphical facilities for data analysis and display either on-screen or on hardcopy, and\n* a well-developed, simple and effective programming language which includes conditionals, loops, user-defined recursive functions and input and output facilities.\n\nIn the 2017 version of the Tiobe Index of Programming Languages, R was eighth on the list. That's a significant rise since December 2016, when R was 17th on the index.",
+          "interestType": "technologies"
+        },
+        {
+          "name": "React",
+          "slug": "react",
+          "description": "Created by Facebook, [React](https://reactjs.org/) is an open source JavaScript library for creating interactive user interfaces. It is often used along with [React Native](http://facebook.github.io/react-native/) to create cross-platform mobile apps that run natively on both iOS and Android devices. Recently, it's become tremendously popular with mobile developers. According to GitHub, it was the seventh most frequently forked open source project in 2017, and React Native was the project with the second most contributors.\n\nIn an [Indeed study from December 2017](http://www.hiringlab.org/2017/12/06/important-skills-in-tech-job-searches/), React was by far and away the fastest-growing job skill from both a job seeker and an employer point of view. Employer searches for the term increased by 229% in 2017, while job seeker searches skyrocketed 313%.",
           "interestType": "technologies"
         },
         {
@@ -5069,6 +5123,12 @@
           "name": "Security",
           "slug": "security",
           "description": "Computer security, also known as cybersecurity or IT security, is the protection of information systems from theft or damage to the hardware, the software, and to the information on them, as well as from disruption or misdirection of the services they provide. It includes controlling physical access to the hardware, as well as protecting against harm that may come via network access, data and code injection, and due to malpractice by operators, whether intentional, accidental, or due to them being tricked into deviating from secure procedures. [Learn more here.](https://en.wikipedia.org/wiki/Computer_security)",
+          "interestType": "cs-disciplines"
+        },
+        {
+          "name": "Social Computing",
+          "slug": "social-computing",
+          "description": "Social computing is an area of computer science that is concerned with the intersection of social behavior and computational systems. It is based on creating or recreating social conventions and social contexts through the use of software and technology. Thus, blogs, email, instant messaging, social network services, wikis, social bookmarking and other instances of what is often called social software illustrate ideas from social computing.\n\nFor more details, see:\n\n  * [Wikipedia entry on social computing](https://en.wikipedia.org/wiki/Social_computing)\n  * [Social Computing 101: The Basics](https://www.interaction-design.org/literature/article/social-computing-101-the-basics)\n  * [MIT Media Lab Social Computing Group](https://www.media.mit.edu/groups/social-computing/overview/)",
           "interestType": "cs-disciplines"
         },
         {
