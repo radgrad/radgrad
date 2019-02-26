@@ -3,7 +3,7 @@
     <div class="ui dividing header"><h4>DESIRED DEGREES ({{ count }})</h4></div>
 
     {{#each desiredDegree in desiredDegrees}}
-      {{> Admin_DataModel_Accordion name=(desiredDegreeTitle desiredDegree) slug=(slugName desiredDegree.slugID) descriptionPairs=(descriptionPairs desiredDegree) id=desiredDegree._id updateID=updateID deleteDisabled=(deleteDisabled desiredDegree)}}
+      {{> Admin_DataModel_Accordion name=(desiredDegreeTitle desiredDegree) slug=(slugName desiredDegree.slugID) descriptionPairs=(descriptionPairs desiredDegree) id=desiredDegree._id updateID=updateID deleteDisabled=(deleteDisabled desiredDegree) retired=(retired desiredDegree)}}
     {{/each}}
   </div>
 </template>

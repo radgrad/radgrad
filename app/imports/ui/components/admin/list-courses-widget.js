@@ -28,6 +28,9 @@ Template.List_Courses_Widget.helpers({
   deleteDisabled(course) {
     return (numReferences(course) > 0) ? 'disabled' : '';
   },
+  retired(course) {
+    return course.retired;
+  },
   descriptionPairs(course) {
     return [
       { label: 'Description', value: course.description },

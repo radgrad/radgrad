@@ -44,6 +44,9 @@ Template.List_Semesters_Widget.helpers({
       { label: 'Retired', value: semester.retired ? 'True' : 'False' },
     ];
   },
+  retired(semester) {
+    return semester.retired;
+  },
 });
 
 Template.List_Semesters_Widget.events({

@@ -76,6 +76,9 @@ Template.List_Opportunities_Widget.helpers({
       { label: 'Retired', value: opportunity.retired ? 'true' : 'false' },
     ];
   },
+  retired(opportunity) {
+    return opportunity.retired;
+  },
   titleICE(opportunity) {
     return `ICE: ${opportunity.ice.i}/${opportunity.ice.c}/${opportunity.ice.e}`;
   },
