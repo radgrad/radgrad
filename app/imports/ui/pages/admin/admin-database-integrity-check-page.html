@@ -4,7 +4,7 @@
     {{#Admin_DataBase_Layout}}
       <form style="padding-top: 10px" class="ui form">
         <div class="ui action input">
-          <button class="ui green basic button jsIntegrityCheck" type="submit">Check Integrity</button>
+          <button class="ui green basic {{#if working}}loading{{/if}} button jsIntegrityCheck" type="submit">Check Integrity</button>
         </div>
       </form>
 

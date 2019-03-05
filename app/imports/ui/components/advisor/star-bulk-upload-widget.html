@@ -14,11 +14,11 @@
           {{/with}}
         </div>
       </div>
-      <button style="margin-bottom: 14px;" class="ui tiny basic green button jsStarData" type="submit">LOAD BULK
+      <button style="margin-bottom: 14px;" class="ui tiny basic {{#if starWorking}}loading{{/if}} green button jsStarData" type="submit">LOAD BULK
         STAR
         DATA
       </button>
-      <button class="ui tiny basic green button jsStudentEmails" type="submit">GET STUDENT EMAILS</button>
+      <button class="ui tiny basic {{#if emailWorking}}loading{{/if}} green button jsStudentEmails" type="submit">GET STUDENT EMAILS</button>
     </form>
     {{#if uploadResult}}
       <div class="ui message">

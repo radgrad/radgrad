@@ -20,7 +20,7 @@
               {{/with}}
             </div>
           </div>
-          <button style="margin-bottom: 14px;" class="ui tiny basic green button jsFixture" type="submit">LOAD FIXTURE</button>
+          <button style="margin-bottom: 14px;" class="ui tiny basic {{#if working}}loading{{/if}} green button jsFixture" type="submit">LOAD FIXTURE</button>
         </form>
         {{#if uploadResult}}
           <div class="ui message">

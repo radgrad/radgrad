@@ -4,7 +4,7 @@
     {{#Admin_DataBase_Layout}}
       <form style="padding-top: 10px" class="ui form">
         <div class="ui action input">
-          <button class="ui green basic button jsDumpDB" type="submit">Dump Database</button>
+          <button class="ui green basic {{#if dumpWorking}}loading{{/if}} button jsDumpDB" type="submit">Dump Database</button>
         </div>
         <div class="ui action input">
           <button class="ui green basic button jsDumpLog" type="submit">Dump RadGrad Log</button>
@@ -13,7 +13,7 @@
           <button class="ui green basic button jsClearLog" type="submit">Clear RadGrad Log</button>
         </div>
         <div class="ui action input">
-          <button class="ui green basic button jsStudentEmails" type="submit">Get Student Emails</button>
+          <button class="ui green basic {{#if emailWorking}}loading{{/if}} button jsStudentEmails" type="submit">Get Student Emails</button>
         </div>
       </form>
 

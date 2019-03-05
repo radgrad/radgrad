@@ -9,6 +9,7 @@ Template.Admin_DataModel_Page.onCreated(function adminDatamodelPageOnCreated() {
   this.successClass = new ReactiveVar('');
   this.errorClass = new ReactiveVar('');
   this.result = new ReactiveVar('');
+  this.working = new ReactiveVar(false);
 });
 
 Template.Admin_DataModel_Page.helpers({
@@ -22,11 +23,15 @@ Template.Admin_DataModel_Page.helpers({
       .result
       .get();
   },
+  working() {
+    return Template.instance().working.get();
+  },
 });
 
 Template.Admin_DataModel_Page.events({
   'click .jsFixture': function clickJsStarData(event, instance) {
     event.preventDefault();
+    instance.working.set(true);
     const fileName = event.target.parentElement.getElementsByTagName('input')[0];
     if (fileName.files && fileName.files[0]) {
       const starData = fileName.files[0];
@@ -38,6 +43,7 @@ Template.Admin_DataModel_Page.events({
             console.log('Error loading fixture', error);
           }
           instance.result.set(result);
+          instance.working.set(false);
         });
       };
       fr.readAsText(starData);
