@@ -16,8 +16,7 @@ function passedCourseHelper(courseSlugName) {
   let ret = 'Not in plan';
   const slug = Slugs.find({ name: courseSlugName })
     .fetch();
-  const course = _.filter(Courses.find({ slugID: slug[0]._id })
-    .fetch(), (c) => !c.retired);
+  const course = Courses.find({ slugID: slug[0]._id }).fetch();
   const ci = CourseInstances.find({
     studentID: getUserIdFromRoute(),
     courseID: course[0]._id,
