@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { $ } from 'meteor/jquery';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -24,6 +25,11 @@ Template.Semester_List_2.onCreated(function semesterListOnCreate() {
 Template.Semester_List_2.helpers({
   dictionary() {
     return Template.instance().state;
+  },
+  courseName(courseInstance) {
+    const course = Courses.findDoc(courseInstance.courseID);
+    console.log('courseName %o, %o', courseInstance, course);
+    return course.name;
   },
   icsCourses() {
     const ret = [];
@@ -275,4 +281,5 @@ Template.Semester_List_2.onRendered(function semesterListOnRendered() {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);
   }
+  $('strong.tooltip').popup();
 });

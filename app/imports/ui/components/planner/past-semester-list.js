@@ -20,6 +20,13 @@ Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
   }
   this.localState = new ReactiveDict();
 });
+Template.Past_Semester_List.helpers({
+  courseName(courseInstance) {
+    const course = Courses.findDoc(courseInstance.courseID);
+    // console.log('courseName %o, %o', courseInstance, course);
+    return course.name;
+  },
+});
 
 Template.Past_Semester_List.events({
   'drop .bodyDrop': function dropBodyDrop(event) {
