@@ -28,7 +28,6 @@ Template.Semester_List_2.helpers({
   },
   courseName(courseInstance) {
     const course = Courses.findDoc(courseInstance.courseID);
-    console.log('courseName %o, %o', courseInstance, course);
     return course.name;
   },
   icsCourses() {
@@ -44,6 +43,18 @@ Template.Semester_List_2.helpers({
   },
   localState() {
     return Template.instance().localState;
+  },
+  opportunityI(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.i;
+  },
+  opportunityC(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.c;
+  },
+  opportunityE(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.e;
   },
   opportunityName(opportunityID) {
     const opp = OpportunityInstances.findDoc({ _id: opportunityID });
@@ -281,5 +292,5 @@ Template.Semester_List_2.onRendered(function semesterListOnRendered() {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);
   }
-  $('strong.tooltip').popup();
+  $('strong').popup();
 });
