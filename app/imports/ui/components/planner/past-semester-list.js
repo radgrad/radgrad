@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { $ } from 'meteor/jquery';
 import { plannerKeys } from './academic-plan';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection';
@@ -12,6 +13,7 @@ import { getRouteUserName } from '../shared/route-user-name';
 import { getUserIdFromRoute } from '../shared/get-user-id-from-route';
 import { getFutureEnrollmentMethod } from '../../../api/course/CourseCollection.methods';
 import { userInteractionDefineMethod } from '../../../api/analytic/UserInteractionCollection.methods';
+import { Opportunities } from '../../../api/opportunity/OpportunityCollection';
 
 Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
   if (this.data) {
@@ -19,6 +21,25 @@ Template.Past_Semester_List.onCreated(function pastSemesterListOnCreated() {
     this.state = this.data.dictionary;
   }
   this.localState = new ReactiveDict();
+});
+Template.Past_Semester_List.helpers({
+  courseName(courseInstance) {
+    const course = Courses.findDoc(courseInstance.courseID);
+    // console.log('courseName %o, %o', courseInstance, course);
+    return course.name;
+  },
+  opportunityI(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.i;
+  },
+  opportunityC(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.c;
+  },
+  opportunityE(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.e;
+  },
 });
 
 Template.Past_Semester_List.events({
@@ -208,4 +229,5 @@ Template.Past_Semester_List.onRendered(function pastSememsterListOnRendered() {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);
   }
+  $('strong').popup();
 });

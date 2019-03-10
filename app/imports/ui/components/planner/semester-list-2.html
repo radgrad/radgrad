@@ -12,7 +12,7 @@
           {{#each course in icsCourses}}
             <tr id="{{course._id}}" class="courseInstance clickEnabled" draggable="true" ondragstart="drag(event)"
                 data-position="top center" style="cursor: move;">
-              <td style="border-top: none;"><strong>{{course.note}}</strong></td>
+              <td style="border-top: none;"><strong class="tooltip" data-position="right center" data-tooltip={{courseName course}}>{{course.note}}</strong></td>
               <td style="border-top: none;">
                 {{> Planned_Course_Grade course=course dictionary=dictionary}}
               </td>
@@ -23,7 +23,7 @@
                 ondragstart="drag(event)" data-position="top center"
                 style="cursor: move;">
               <td style="border-top: none; cursor: pointer;" colspan="2">
-                <strong>{{opportunityName opportunity._id}}</strong>
+                <strong class="tooltip" data-position="right center" data-html="<div class='ui tiny circular labels radgrad-ice-header'>{{#if opportunity.verified}}<i class=' green large check circle outline icon'></i>{{else}}<i class='red large question circle outline icon'></i>{{/if}}<div class='ui label' style='margin: 0;'>{{opportunityI opportunity}}</div><div class='ui label' style='margin: 0'>{{opportunityC opportunity}}</div><div class='ui label' style='margin: 0 5px 0 0;'>{{opportunityE opportunity}}</div></div>">{{opportunityName opportunity._id}}</strong>
               </td>
             </tr>
           {{/each}}
@@ -41,8 +41,8 @@
           <tbody>
           {{#each course in icsCourses}}
             <tr id="{{course._id}}" class="courseInstance clickEnabled" draggable="true" ondragstart="drag(event)"
-                data-position="top center" style="cursor: move;">
-              <td style="border-top: none;"><strong>{{course.note}}</strong></td>
+                data-position="top center" data-tooltip={{course.name}} style="cursor: move;">
+              <td style="border-top: none;"><strong class="tooltip" data-position="right center" data-tooltip={{courseName course}}>{{course.note}}</strong></td>
               <td style="border-top: none;">
                 {{> Planned_Course_Grade course=course dictionary=dictionary}}
               </td>
@@ -53,7 +53,7 @@
                 ondragstart="drag(event)" data-position="top center"
                 style="{{#unless isFuture}}color: rgba(0,0,0,.55);{{/unless}} cursor: move;">
               <td style="border-top: none;" colspan="2">
-                <strong>{{opportunityName opportunity._id}}</strong>
+                <strong class="tooltip" data-position="right center" data-html="<div class='ui tiny circular labels radgrad-ice-header'>{{#if opportunity.verified}}<i class=' green large check circle outline icon'></i>{{else}}<i class='red large question circle outline icon'></i>{{/if}}<div class='ui label' style='margin: 0;'>{{opportunityI opportunity}}</div><div class='ui label' style='margin: 0'>{{opportunityC opportunity}}</div><div class='ui label' style='margin: 0 5px 0 0;'>{{opportunityE opportunity}}</div></div>">{{opportunityName opportunity._id}}</strong>
               </td>
             </tr>
           {{/each}}

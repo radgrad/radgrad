@@ -34,6 +34,9 @@ Template.Retrieve_User_Widget.helpers({
   facultyRole() {
     return ROLE.FACULTY;
   },
+  alumniRole() {
+    return ROLE.ALUMNI;
+  },
   studentCount() {
     return Users.findProfilesWithRole(ROLE.STUDENT, {}, { sort: { lastName: 1 } }).length;
   },
@@ -45,6 +48,9 @@ Template.Retrieve_User_Widget.helpers({
   },
   advisorCount() {
     return Users.findProfilesWithRole(ROLE.ADVISOR, {}, { sort: { lastName: 1 } }).length;
+  },
+  alumniCount() {
+    return Users.findProfilesWithRole(ROLE.ALUMNI, {}, { sort: { lastName: 1 } }).length;
   },
   updateResult() {
     return Template.instance().updateResult.get();

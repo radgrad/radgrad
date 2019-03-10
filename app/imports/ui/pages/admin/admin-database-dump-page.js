@@ -7,6 +7,12 @@ import { dumpDatabaseMethod } from '../../../api/base/BaseCollection.methods.js'
 import { generateStudentEmailsMethod } from '../../../api/user/UserCollection.methods';
 
 Template.Admin_DataBase_Dump_Page.helpers({
+  dumpWorking() {
+    return Template.instance().dumpWorking.get();
+  },
+  emailWorking() {
+    return Template.instance().emailWorking.get();
+  },
   errorMessage() {
     return Template.instance().successOrError.get() === 'error' ? Template.instance().results.get() : '';
   },
@@ -34,6 +40,8 @@ Template.Admin_DataBase_Dump_Page.onCreated(function onCreated() {
   this.results = new ReactiveVar();
   this.successOrError = new ReactiveVar();
   this.timestamp = new ReactiveVar();
+  this.dumpWorking = new ReactiveVar(false);
+  this.emailWorking = new ReactiveVar(false);
 });
 
 // Must match the format in the server-side startup/server/fixtures.js
@@ -42,6 +50,7 @@ export const databaseFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
 Template.Admin_DataBase_Dump_Page.events({
   'click .jsDumpDB': function clickEvent(event, instance) {
     event.preventDefault();
+    instance.dumpWorking.set(true);
     dumpDatabaseMethod.call(null, (error, result) => {
       if (error) {
         console.log('Error during Database Dump: ', error);
@@ -57,10 +66,12 @@ Template.Admin_DataBase_Dump_Page.events({
         zip.file(fileName, JSON.stringify(result, null, 2));
         zip.saveAs(`${dir}.zip`);
       }
+      instance.dumpWorking.set(false);
     });
   },
   'click .jsStudentEmails': function clickStudentEmails(event, instance) {
     event.preventDefault();
+    instance.emailWorking.set(true);
     generateStudentEmailsMethod.call(null, (error, result) => {
       if (error) {
         console.log('Error during Generating Student Emails: ', error);
@@ -80,6 +91,7 @@ Template.Admin_DataBase_Dump_Page.events({
         zip.file(fileName, result.students.join('\n'));
         zip.saveAs(`${dir}.zip`);
       }
+      instance.emailWorking.set(false);
     });
   },
 });

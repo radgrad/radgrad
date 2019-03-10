@@ -3,7 +3,7 @@
     <div class="ui dividing header"><h4>ACADEMIC PLANS ({{ count }})</h4></div>
 
     {{#each academicPlan in academicPlans}}
-      {{> Admin_Datamodel_Academicplan_Accordion academicPlan=academicPlan degreePlanner=false name=academicPlan.name slug=(slugName academicPlan.slugID) descriptionPairs=(descriptionPairs academicPlan) id=academicPlan._id updateID=updateID deleteDisabled=(deleteDisabled academicPlan)}}
+      {{> Admin_Datamodel_Academicplan_Accordion academicPlan=academicPlan degreePlanner=false name=academicPlan.name slug=(slugName academicPlan.slugID) descriptionPairs=(descriptionPairs academicPlan) id=academicPlan._id updateID=updateID deleteDisabled=(deleteDisabled academicPlan) retired=(retired academicPlan)}}
     {{/each}}
   </div>
 </template>

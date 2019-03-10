@@ -40,6 +40,10 @@ Template.List_Academic_Plans_Widget.helpers({
       { label: 'References', value: `Students: ${numReferences(academicPlan)}` },
       { label: 'Retired', value: academicPlan.retired ? 'True' : 'False' }];
   },
+  retired(academicPlan) {
+    // console.log(`retired ${academicPlan.retired}`);
+    return academicPlan.retired;
+  },
 });
 
 Template.List_Academic_Plans_Widget.events({

@@ -17,11 +17,19 @@ Template.Star_Bulk_Upload_Widget.onCreated(function starBulkUploadWidgetOnCreate
   this.successClass = new ReactiveVar('');
   this.errorClass = new ReactiveVar('');
   this.result = new ReactiveVar('');
+  this.starWorking = new ReactiveVar(false);
+  this.emailWorking = new ReactiveVar(false);
 });
 
 Template.Star_Bulk_Upload_Widget.helpers({
   currentUpload() {
     return Template.instance().currentUpload.get();
+  },
+  emailWorking() {
+    return Template.instance().emailWorking.get();
+  },
+  starWorking() {
+    return Template.instance().starWorking.get();
   },
   uploadResult() {
     return Template.instance().result.get();
@@ -33,6 +41,7 @@ const databaseFileDateFormat = 'YYYY-MM-DD-HH-mm-ss';
 Template.Star_Bulk_Upload_Widget.events({
   'click .jsStarData': function clickJsStarData(event, instance) {
     event.preventDefault();
+    instance.starWorking.set(true);
     const advisor = getRouteUserName();
     const fileName = event.target.parentElement.getElementsByTagName('input')[0];
     if (fileName.files && fileName.files[0]) {
@@ -46,6 +55,7 @@ Template.Star_Bulk_Upload_Widget.events({
             console.log('Error loading bulk STAR data', error);
           }
           instance.result.set(result);
+          instance.starWorking.set(false);
         });
         // updateAllStudentLevelsMethod.call((error) => {
         //   if (error) {
@@ -58,6 +68,7 @@ Template.Star_Bulk_Upload_Widget.events({
   },
   'click .jsStudentEmails': function clickStudentEmails(event, instance) {
     event.preventDefault();
+    instance.emailWorking.set(true);
     generateStudentEmailsMethod.call(null, (error, result) => {
       if (error) {
         console.log('Error during Generating Student Emails: ', error);
@@ -77,6 +88,7 @@ Template.Star_Bulk_Upload_Widget.events({
         zip.file(fileName, emails);
         zip.saveAs(`${dir}.zip`);
       }
+      instance.emailWorking.set(false);
     });
   },
   'click .jsTestError': function clickTestError(event) {

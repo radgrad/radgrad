@@ -34,6 +34,9 @@ Template.List_Desired_Degrees_Widget.helpers({
       { label: 'Retired', value: desiredDegree.retired ? 'True' : 'False' },
     ];
   },
+  retired(desiredDegree) {
+    return desiredDegree.retired;
+  },
 });
 
 Template.List_Desired_Degrees_Widget.events({

@@ -2,6 +2,9 @@
 
   <div class="ui styled fluid accordion">
     <div class="title">
+      {{#if retired}}
+        <i class="eye slash icon"></i>
+      {{/if}}
       <i class="dropdown icon"></i>
       {{name}}
       {{#if slug}}({{slug}}){{/if}}

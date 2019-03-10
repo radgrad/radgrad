@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { _ } from 'meteor/erasaur:meteor-lodash';
+import { $ } from 'meteor/jquery';
 import { CourseInstances } from '../../../api/course/CourseInstanceCollection.js';
 import { defineMethod, updateMethod } from '../../../api/base/BaseCollection.methods';
 import { Courses } from '../../../api/course/CourseCollection.js';
@@ -25,6 +26,10 @@ Template.Semester_List_2.helpers({
   dictionary() {
     return Template.instance().state;
   },
+  courseName(courseInstance) {
+    const course = Courses.findDoc(courseInstance.courseID);
+    return course.name;
+  },
   icsCourses() {
     const ret = [];
     if (Template.instance().data.semester) {
@@ -38,6 +43,18 @@ Template.Semester_List_2.helpers({
   },
   localState() {
     return Template.instance().localState;
+  },
+  opportunityI(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.i;
+  },
+  opportunityC(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.c;
+  },
+  opportunityE(opportunityInstance) {
+    const opp = Opportunities.findDoc(opportunityInstance.opportunityID);
+    return opp.ice.e;
   },
   opportunityName(opportunityID) {
     const opp = OpportunityInstances.findDoc({ _id: opportunityID });
@@ -275,4 +292,5 @@ Template.Semester_List_2.onRendered(function semesterListOnRendered() {
     this.localState.set('semester', this.data.semester);
     this.localState.set('currentSemester', this.data.currentSemester);
   }
+  $('strong').popup();
 });
